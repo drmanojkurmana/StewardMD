@@ -277,3 +277,19 @@ NEET-SS modules: neuro, head and neck, chest, physics, emergency, paediatrics, k
 - Route: `overlay/radmax2..radmaxNN/` accepted. `prep/bank/overlay-counts.json` regenerated with radmax2.
 - Items labelled Very Hard carry `vh: true`. Possibly-wrong-key items (53) stay out and went to the owner's flag list.
 - R2: 25 v9 files and 14 radmax2 files uploaded and SHA-256 verified.
+
+## 13. Review-book release (radiology review book, used with the author's signed permission, 2026-10-09)
+Source: a scanned two-volume US board review book (1,143 pages); the author's signed permission is stored privately
+(not in git). Tools: `tools/prep-ctc-figs.py` (figure crops from the embedded page images), `tools/prep-ctc.mjs`
+(chapter to module map, units per bank, lesson book profile, ship tree), `tools/prep-radmax.mjs` (MCQ pipeline) and
+`tools/prep-radbook.mjs` (lessons, via `useBook`). Private data and the ship tree: `~/prep-data/radnotes/ctc`
+(backup `gs://...-prep-batch/private/ctc/`).
+- Figures: 1,438 crops, 334 usable radiological images after the model figure check; identifiers blurred or the
+  figure dropped. Most of the book's pictures are drawings or carry burned-in answer labels, so image items are few.
+- MCQs: runs c1 (1,489 text units, 3,415 asks) and i1 (321 figures); 2,960 passed the pipeline, 1,942 kept after
+  the Haiku fact check, two Haiku image votes and the duplicate check against live v9, radnotes and radmax2.
+  1,205 `srd-*` items join ss-radiology as bank **v10** (v9 unchanged plus the new ones, 2,477); 737 `rad-*` items join
+  Radiology as overlay set **radmax3** (radmax2 plus the new ones, 999). 107 possibly-wrong-key items held out.
+- Lessons: 334 lessons (`ctcbook-*`, set "ctcbook"), 1,806 steps, 265 figure steps, quiz items from v10/radmax3.
+- No srd module takes gynaecology or obstetrics, and the book has no physics chapter (srd-physics gets nothing).
+- Spend: about $6.3 Vertex (Batch, gemini-3.1-flash-lite). Credit line in terms.html section 31.
