@@ -18,10 +18,11 @@ test("Jev receives only discovery metadata, never patient values", async () => {
     apiKey: "test",
     fetchFn: async (_url, opts) => {
       body = JSON.parse(opts.body);
-      return new Response(JSON.stringify({ data: { route: "proceed_fast" } }), { status: 200, headers: { "content-type": "application/json" } });
+      return new Response(JSON.stringify({ answers: { route: { choice: "proceed_fast", confidence: 0.9 } } }), { status: 200, headers: { "content-type": "application/json" } });
     }
   });
-  assert.equal(out.route, "proceed_fast");
+  // routeDiscovery returns Jev's body; runner.mjs reads answers.route.choice / .confidence from it
+  assert.equal(out.answers.route.choice, "proceed_fast");
   const serialized = JSON.stringify(body);
   assert.equal(serialized.includes("patient"), false);
   assert.equal(serialized.includes("mrn"), false);

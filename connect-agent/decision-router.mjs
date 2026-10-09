@@ -51,7 +51,7 @@ export async function routeDiscovery({ spec, fetchFn = globalThis.fetch, apiKey 
     statusClasses: [...new Set(events.map((e) => Math.floor(Number(e.status || 0) / 100)))],
     hasNonJson: events.some((e) => !/json/i.test(String(e.contentType || ""))),
     hasWrite: events.some((e) => !["GET", "HEAD"].includes(String(e.method || "").toUpperCase())),
-    hasAmbiguousPaths: events.some((e) => !/^\\/[^?]*$/.test(String(e.path || ""))),
+    hasAmbiguousPaths: events.some((e) => !/^\/[^?]*$/.test(String(e.path || ""))),
   };
   const questions = {
     route: {
