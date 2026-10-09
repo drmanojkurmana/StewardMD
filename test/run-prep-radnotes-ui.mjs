@@ -1,7 +1,8 @@
 /* PrepNucleus radnotes (the owner's radiology notes) in the REAL app (headless Chrome over CDP), on a synthetic fixture
  * (test/fixtures/prep-radnotes/api: no text or figure from the notes).
  * What must hold: a module lists every lesson whose index entry names it (3, then Show all); a lesson opens by its key
- * and keeps progress under it; its figure resolves to img/radnotes/ under the bank API; the module pool is the bank file
+ * and keeps progress under it; its figures resolve to img/radnotes/ or v1/lessons/media/ under the bank API and all load
+ * when the lesson opens; the module pool is the bank file
  * plus overlay/radnotes/<subject>/<module>.json, once per id, keys untouched; the lesson's quick questions draw overlay
  * items, and the overlay image MCQ shows its figure; on native the figure URL carries https://stewardmd.in.
  *
@@ -89,12 +90,16 @@ try {
   await click(`#smdPrep [data-l="${KEY}"]`);
   ok(await until(`return (document.querySelector("#smdPrep .pn-t p")||{}).textContent === "Step 1 of 4";`, 8000), "the radnotes lesson opens in the reader");
   ok(reqs.some((u) => u.includes(FIX + "api/v1/lessons/" + KEY + ".json")), "the lesson file loads by its key");
+  { const t0 = Date.now(); while (Date.now() - t0 < 5000 && !reqs.some((u) => u.includes(FIX + "api/v1/lessons/media/rb-fx-p001-2.webp"))) await sleep(120); }
+  ok(reqs.some((u) => u.includes(FIX + "api/v1/lessons/media/rb-fx-p001-2.webp")), "opening the lesson fetches every figure at once, step 4's included (offline after one open)");
   await click("#smdPrep [data-act=l-next]");
   ok(await until(`var i=document.querySelector("#smdPrep .pn-vfig img"); return !!i && i.complete && i.naturalWidth > 0;`, 8000), "step 2's figure loads");
   ok(await ev(`return document.querySelector("#smdPrep .pn-vfig img").getAttribute("src");`) === FIX + "api/img/radnotes/rn-fx-p001-1.webp", "the figure resolves to img/radnotes/ under the bank API");
   await shot("figure");
   ok(await store(`!!s.ls["${KEY}"] && s.ls["${KEY}"].i === 1 && !s.ls["${MID}"]`) === true, "progress is kept under the lesson key, not the module");
-  for (let k = 0; k < 3; k++) await click("#smdPrep [data-act=l-next]");
+  await click("#smdPrep [data-act=l-next]"); await click("#smdPrep [data-act=l-next]");
+  ok(await until(`var i=document.querySelector("#smdPrep .pn-vfig img"); return !!i && i.complete && i.naturalWidth > 0 && i.getAttribute("src") === ${JSON.stringify(FIX + "api/v1/lessons/media/rb-fx-p001-2.webp")};`, 8000), "step 4's figure resolves to v1/lessons/media/ under the bank API and loads");
+  await click("#smdPrep [data-act=l-next]");
   ok(await until(`return !!document.querySelector("#smdPrep [data-act=l-quiz]");`, 4000), "the lesson finishes with its quick questions");
 
   // ---- the module pool: bank + overlay, deduped by id, keys untouched

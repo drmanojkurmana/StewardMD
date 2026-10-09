@@ -776,7 +776,7 @@ global version (`prep.js` `bvOf`). 29 questions in R2 `prep-bank/v6/ss-radiology
   chest, breast, IR, nuclear and physics hold 2 to 10 items each (targets 40 to 80). Content gap, not a cache bug.
 - Test: `test/run-prep-subject-ui.mjs` (390, 820, 1180; alignment within 1 px, Learn, exam once), `test/prep-subject.test.mjs`.
 
-## Strict per-question clock, review filters, saved practice sets (2026-10-09, branch `fix/prep-q-timer`, prep35)
+## Strict per-question clock, review filters, saved practice sets (2026-10-09, branch `fix/prep-q-timer`, prep36)
 - Owner bug: with 30 s a question, going to the next question and back restarted the clock at 30 s. Now (prep.js
   `qcNew`/`qcShow`/`qcPause`/`qcLeft`/`qcTick`/`qcNext`, `r.qc` on the run) each question has one budget, spent only while
   it is on screen (the question grid, a screen pushed over the runner and an answered practice question stop it), never
@@ -794,3 +794,23 @@ global version (`prep.js` `bvOf`). 29 questions in R2 `prep-bank/v6/ss-radiology
 - Tests: `test/prep-qclock.test.mjs`, `test/prep-review.test.mjs`, `test/run-prep-setup-ui.mjs` (fake Date.now clock:
   no reset on revisit, grid pause, lock + auto-advance, locked revisit, background catch-up; review filters, saved set
   reopen, re-practise, expiry purge).
+## Radiology lessons from the owner's four PDFs, set "radbook" (2026-10-09, branch `feat/prep-radlessons`, prep35)
+- Owner: "Learn lessons don't have X-rays; make the whole notebook into chapter-wise lessons with images." Built by
+  `tools/prep-radbook.mjs` (+ `tools/prep-radbook-blur.py`, `test/prep-radbook.test.mjs`). Private data and every
+  output live in `~/prep-data/radnotes/book` (backup `gs://<prep-batch bucket>/private/radlessons/`); no PDF text in git.
+- Spine: the long-case book (RDN11, printed, data tables and figures); the two notes books and the anatomy true/false
+  book are merged into the same system order (`CHAPTERS`). NEET-SS passes over the notes chapters cover the srd-*
+  modules the long-case excerpt does not reach (brain, head and neck, chest, kidney, breast).
+- Pipeline: F1 figure check (Gemini, image attached: kind, clear, what it shows, identifiers, third-party marks) ->
+  O1 outline per chapter window (topics as page ranges + module + figure ids) -> L1-L4 (gen with figures, code gates,
+  blind self-check, one redo, re-check) -> Q1 quiz pick (up to 3 live item ids of the lesson's module; radmax items
+  excluded since the set moved to radmax2) -> two Haiku votes per figure use (doubt drops the figure, not the step) ->
+  identifier blur (hand boxes, checked by eye before/after) -> assemble -> upload.
+- R2: lessons `v1/lessons/radbook-<order><seq>-<slug>.json` (the key order keeps chapter order inside a module),
+  figures `v1/lessons/media/rb-<figid>.webp` (existing STUDY_RE route, no route change), index `v1/lessons/index.json`
+  rebuilt from the live copy: the 50 `set: "radnotes"` entries are superseded (their files stay in R2), radbook
+  entries carry `module` and `set: "radbook"`.
+- Client: `prep-lessons.js` `warm()` fetches every figure of a lesson when it opens (lessons opened once keep their
+  X-rays offline through the one-year immutable cache); `lessonImages()` pure helper.
+- Not covered (no source pages): rad-radiation-protection, rad-interventional, rad-nm-scans, rad-nm-principles and the
+  radiotherapy modules (teletherapy, brachytherapy, toxicity, clinical-rt); srd-physics keeps its own lesson.

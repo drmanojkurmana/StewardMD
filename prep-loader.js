@@ -13,7 +13,7 @@
    first open) is optional too: without it every screen shows its final state through prep.css. */
 (function (G) {
   "use strict";
-  var V = "prep35";
+  var V = "prep36";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css"];
   var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-motion.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-rad.js", "prep-setup.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
