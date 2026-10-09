@@ -147,7 +147,7 @@ function newDeckJob(uid, text) {
   const m = DK.newManifest({ id, title: PC.defaultTitle(doc, ""), exam: "neet-pg", profileV: 1, pv: PC.PV, model: PC.MODEL, source: { type: "paste", name: "", pages: null, sha } });
   return PC.newJob({ m, sents: doc.sents, sections: doc.sections, facts: [], items: [], saved: false, target: 10, profile: PC.PROFILE, ctx: { doc: sha.slice(0, 12), name: m.title, exam: "neet-pg", pv: PC.PV, model: PC.MODEL } });
 }
-const moreJob = (store, id) => PC.newJob({ m: store.s.decks[id], sents: store.s.src[id].sents, sections: store.s.src[id].sections, facts: Object.values(store.s.facts), items: Object.values(store.s.items), saved: true, target: 10, profile: PC.PROFILE, ctx: { doc: "abcdefabcdef", name: "Notes", exam: "neet-pg", pv: PC.PV, model: PC.MODEL } });
+const moreJob = (store, id, target) => PC.newJob({ m: store.s.decks[id], sents: store.s.src[id].sents, sections: store.s.src[id].sections, facts: Object.values(store.s.facts), items: Object.values(store.s.items), saved: true, target: target || 10, profile: PC.PROFILE, ctx: { doc: "abcdefabcdef", name: "Notes", exam: "neet-pg", pv: PC.PV, model: PC.MODEL } });
 const recCount = (env, email) => Number(env.MAIK_KV.m.get("aiu:mod:em:" + email + ":prep:" + istDay(Date.now()))) || 0;
 
 /* ---------------- tests ---------------- */
@@ -159,25 +159,25 @@ test("a full deck from pasted notes: facts, mcq, solve, review and one batched r
   job = newDeckJob("u-a");
   res = await PC.runRound(job, { send: A.send, store, today: TODAY, onCaps: (c) => caps.push(c) });
   assert.equal(res.ok, true, JSON.stringify(res));
-  assert.deepEqual(A.log.map((x) => x.op), ["facts", "facts", "facts", "mcq", "mcq", "solve", "solve", "review", "review", "mcq", "solve", "review"]);
+  assert.deepEqual(A.log.map((x) => x.op), ["facts", "facts", "mcq", "mcq", "solve", "solve", "review", "review", "mcq", "solve", "review"], "facts until the round has its 10, then two batches of 5");
   assert.ok(A.log.every((x) => x.status === 200 && !x.replay), "every op accepted first time: " + A.log.map((x) => x.status + (x.json.reason ? ":" + x.json.reason : "")).join(","));
   assert.deepEqual(vertex.map((v) => v.op), A.log.map((x) => x.op), "exactly one model call per op");
   // The three failures: a code gate (9b), the blind solve, a review gate; each fact regenerated once, in one call.
   const mcq1 = A.log.filter((x) => x.op === "mcq").slice(0, 2);
   assert.ok(mcq1.some((x) => x.json.rejected.some((r) => r.gate === "g9b")), "the server rejected the 99 percent key at gate 9b");
-  const regen = A.log[9];
+  const regen = A.log[8];
   assert.equal(regen.body.facts.length, 3);
   assert.ok(Array.isArray(regen.body.avoid) && regen.body.avoid.length === 3);
-  const regenPrompt = vertex[9].user;
+  const regenPrompt = vertex[8].user;
   for (const why of ["a number in the key is not in the source", "a blind check picked a different answer", "a distractor is also right"]) assert.ok(regenPrompt.includes("was rejected: " + why), why);
-  assert.equal(res.accepted, 14);
+  assert.equal(res.accepted, 10, "a round makes at most its 10");
   assert.equal(job.m.stats.regenerated, 3);
   assert.equal(job.m.stats.rejected, 2, "solve and review rejections (the code-gate drop never became an item)");
 });
 
 test("only gate-passing items are saved, in the 6.4 format the runner reads", () => {
   const items = Object.values(store.s.items);
-  assert.equal(items.length, 14);
+  assert.equal(items.length, 10);
   const keys = ["_m", "_s", "a", "cog", "d", "deckId", "et", "ex", "exp", "fid", "gen", "id", "kp", "mv", "o", "prov", "pv", "q", "r", "rv", "src", "t"];
   for (const it of items) {
     assert.deepEqual(Object.keys(it).sort(), keys, it.id);
@@ -194,8 +194,8 @@ test("only gate-passing items are saved, in the 6.4 format the runner reads", ()
     const hit = items.filter((it) => it.q.includes(w));
     assert.equal(hit.length, 1, w); assert.match(hit[0].q, /^Rewritten/, w + ": only the regenerated question is saved");
   }
-  assert.equal(DK.questionCount(store.s.decks[job.deckId]), 14);
-  assert.equal(Object.keys(store.s.cards).length, 18, "one card per fact");
+  assert.equal(DK.questionCount(store.s.decks[job.deckId]), 10);
+  assert.equal(Object.keys(store.s.cards).length, 12, "one card per fact");
 });
 
 test("the key and the reasons never reach the solve prompt", () => {
@@ -217,12 +217,13 @@ test("the key and the reasons never reach the solve prompt", () => {
 test("deck counters come back on every response and the cap line shows them; cost is metered", () => {
   assert.ok(A.log.every((x) => x.json.usage && x.json.usage.dayDecks === 1 && x.json.usage.monthDecks === 1));
   assert.deepEqual(caps.at(-1), { month: 1, day: 1, at: TODAY });
-  assert.equal(PC.capLine(job.caps, TODAY), "1 of 10 decks this month, 1 of 3 today");
-  assert.equal(job.m.cost.inTok, 12 * 900);
-  assert.equal(job.m.cost.outTok, 12 * 300);
+  assert.equal(PC.capLine(job.caps, TODAY), "1 of 30 decks this month, 1 of 5 today");
+  assert.equal(job.m.cost.inTok, 11 * 900);
+  assert.equal(job.m.cost.outTok, 11 * 300);
   assert.ok(job.m.cost.inr > 0);
-  assert.match(PC.costLine(job.m.cost), /^Cost so far: Rs \d+\.\d\d \(14400 tokens\)$/);
-  assert.equal(recCount(env, "a@example.com"), 12, "one usage record per call");
+  assert.match(PC.costLine(job.m.cost), /^Cost so far: Rs \d+\.\d\d \(13200 tokens\)$/);
+  assert.equal(recCount(env, "a@example.com"), 11, "one usage record per call");
+  assert.ok(job.m.cost.mt > 0 && job.m.cost.mt === Math.round(job.m.cost.mt), "MaiK Tokens add up from every call");
 });
 
 test("an idempotent replay is free: same idem, no model call, no record, no extra deck", async () => {
@@ -252,26 +253,27 @@ test("a lost response: the run pauses offline, and the resend with the same idem
   assert.equal(resent.replay, true, "the resent mcq is a replay");
   assert.equal(resent.body.idem, P.log.filter((x) => x.op === "mcq")[0].body.idem);
   assert.equal(vertex.length - modelCalls, P.log.length - P.log.indexOf(resent) - 1, "no model call for the replay");
-  assert.equal(r2.accepted, 14);
+  assert.equal(r2.accepted, 10);
 });
 
-test("10 more: only unused facts, no facts call, no new deck counted", async () => {
+test("10 more: unused facts first, then the next chunk; no new deck counted", async () => {
   const before = A.log.length;
   const more = moreJob(store, job.deckId);
   const usedBefore = new Set(Object.values(store.s.facts).filter((f) => f.used).map((f) => f.id));
   const r = await PC.runRound(more, { send: A.send, store, today: TODAY });
   const calls = A.log.slice(before);
   assert.equal(r.ok, true, JSON.stringify(r));
-  assert.deepEqual(calls.map((x) => x.op), ["mcq", "solve", "review"]);
-  assert.ok(calls[0].body.facts.every((f) => !usedBefore.has(f.fid)));
-  assert.equal(calls[0].body.facts.length, 4);
-  assert.equal(r.accepted, 4); assert.equal(r.more, false);
+  assert.deepEqual(calls.map((x) => x.op), ["facts", "mcq", "mcq", "solve", "solve", "review", "review"]);
+  const sent = calls.filter((x) => x.op === "mcq").flatMap((x) => x.body.facts);
+  assert.ok(sent.every((f) => !usedBefore.has(f.fid)), "no used fact is sent again");
+  assert.equal(sent.length, 8, "the 2 facts left and the last chunk's 6");
+  assert.equal(r.accepted, 8); assert.equal(r.more, false);
   assert.equal(Object.keys(store.s.items).length, 18);
   assert.equal(calls.at(-1).json.usage.monthDecks, 1, "10 more is not a new deck");
 });
 
 test("429 month-decks: the monthly-limit message, the cap line shows the month full, nothing saved", async () => {
-  env.MAIK_KV.m.set("prep:decks:fb:u-b:" + MONTH, "10");
+  env.MAIK_KV.m.set("prep:decks:fb:u-b:" + MONTH, "30");
   const B = phone(env, "tok-b"), st = memStore(), seen = [];
   const j = newDeckJob("u-b");
   const before = vertex.length;
@@ -279,8 +281,8 @@ test("429 month-decks: the monthly-limit message, the cap line shows the month f
   assert.equal(B.log.length, 1); assert.equal(B.log[0].status, 429);
   assert.deepEqual([B.log[0].json.error, B.log[0].json.reason], ["quota", "month-decks"]);
   assert.equal(r.ok, false); assert.equal(r.code, "month-decks"); assert.equal(r.retry, false);
-  assert.equal(r.message, "You have made 10 decks this month, the monthly limit. Your decks still work for practice.");
-  assert.match(PC.capLine(j.caps, TODAY), /^10 of 10 decks this month/);
+  assert.equal(r.message, "You have made 30 decks this month, the monthly limit. Your decks still work for practice.");
+  assert.match(PC.capLine(j.caps, TODAY), /^30 of 30 decks this month/);
   assert.equal(vertex.length, before, "no model call");
   assert.equal(Object.keys(st.s.decks).length + Object.keys(st.s.items).length + Object.keys(st.s.src).length, 0);
 });
@@ -292,7 +294,7 @@ test("400 deck-not-started: a deck the server never saw a facts call for cannot 
   const pre = await PC.runRound(j, { send: phone(envFor(), "tok-a").send, store: fresh, today: TODAY });
   assert.equal(pre.ok, true);
   const C = phone(env, "tok-c");
-  const more = moreJob(fresh, j.deckId);
+  const more = moreJob(fresh, j.deckId, 2);   // 2 wanted, 2 unused facts: the first call is mcq, not facts
   const before = vertex.length;
   const r = await PC.runRound(more, { send: C.send, store: fresh, today: TODAY });
   assert.equal(C.log.length, 1);

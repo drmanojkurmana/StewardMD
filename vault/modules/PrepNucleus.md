@@ -775,3 +775,58 @@ global version (`prep.js` `bvOf`). 29 questions in R2 `prep-bank/v6/ss-radiology
 - **ss-radiology v8 counts are real:** radmax items went mostly to cardiac, abdomen, MSK and anatomy; neuro, head and neck,
   chest, breast, IR, nuclear and physics hold 2 to 10 items each (targets 40 to 80). Content gap, not a cache bug.
 - Test: `test/run-prep-subject-ui.mjs` (390, 820, 1180; alignment within 1 px, Learn, exam once), `test/prep-subject.test.mjs`.
+
+## Create deck overhaul: 50 a deck, page picker, decks that last (2026-10-09, branch `feat/prep-create-v2`, prep35)
+Owner request 2026-10-09 (with his answers). Layer C contract otherwise as [[plans/PrepNucleus-LayerC]].
+- **Caps:** 5 new decks a day, 30 a month (server `prepCaps`: `PREP_DECKS_PER_DAY` 5, `PREP_DECKS_PER_MONTH` 30; client
+  `DAY_CAP`/`MONTH_CAP`, every message and the settings line). Month 30 is the lead's default, the owner may change it
+  (env vars, no code change). Calls a day `AI_MODULES.prep.daily` 95 -> 300 (= `MAIK_DEVICE_DAILY_CAP`). Per-deck token
+  cap 200k -> 600k (`PREP_DECK_TOKEN_CAP`). New server guard: 60 accepted questions a deck (`PREP_DECK_Q_CAP`, review
+  passes plus image questions, KV deck record `q`) -> 429 `deck-full` on mcq/imcq.
+- **50 a deck, 10 at a time:** `roundTarget(count)` = min(10, 50 - count). A round now asks for as many facts as it
+  still wants (10, not 14), split into batches of at most 7 under the same ceiling `ceil(target x 1.4 / 7)`; failed facts
+  get their one regeneration. So a round makes at most its 10 and a deck never passes 50. With images waiting, up to 5 of
+  the 10 are image questions (`IMG_PER_ROUND`); the other chosen images wait in `prep-imgs` with `pend: 1` and
+  `m.imgPend` for the next round.
+- **Deck screen (a module):** Your decks rows open `renderDeck`: questions "N of 50", answered, accuracy (`store.mod
+  ["deck-<id>"]`), due; rows Questions (setup sheet, timer, review, Ask MaiK through the shared runner), Timed test,
+  Flashcards; "Make 10 more" with "N of 50" and the MaiK Token estimate; Continue when a round was cut off; Delete.
+- **Create steps:** Source (paste or PDF) -> Pages (PDF only) -> Settings (exam NEET-PG / INI-CET / NEET-SS / USMLE,
+  FMGE decks use the NEET-PG profile; difficulty Exam mix / Easy / Moderate / Hard sent as `mix.dl`; name; own-material
+  check; MaiK Token line; caps line) -> scrub check -> progress. Progress shows the real count "N of 10 questions ready"
+  and a live stage list (no percentage).
+- **Page picker:** after a PDF opens. A PDF of 60 pages or fewer starts with every page picked, a longer one with none
+  (never a silent "first 60"). Virtual grid (`gridWindow`: only rows in view plus 2 either side; ResizeObserver relays
+  out on rotation or the app's text zoom), thumbnails rendered one at a time on demand (`renderThumb`, at most 240 kept),
+  tap to pick, "Select a range" (first tap, last tap), typed ranges ("120-160, 175"), Clear, "N of 60 selected", and a
+  refusal in words for anything past 60 (`selToggle`/`selRange`/`selFromSpec` refuse the whole change). Cell labels
+  read "Page 3 of 500" (emoji-icons strips a bare "Page 3").
+- **MaiK Tokens:** `usage.mt` (inrToMt of the call) and `wallet { balanceMt, costCapOn }` on every prep-generate reply,
+  like Ask MaiK; module stays `prep` in `gateAndCount` (feature `prep:<op>`), so with `AI_COST_CAP_ON` a spent allowance
+  is 429 `ai-cost-cap` (was mislabelled daily-calls). Owner: the cap stays OFF until 2026-11-01, so MT is recorded and
+  shown, never blocking. The estimate before "Make 10" is the deck's own average per round (`m.cost.mt / m.rounds`),
+  else 4,500 MT; the result says what the round used.
+- **Resumable:** the running round lives in the manifest (`m.run`, saved after every step); a round cut off (offline,
+  timeout, app closed) shows Continue and resumes at the op that failed (same idem, so a lost answer is a free replay).
+  Coming back to the foreground resumes offline/timeout stops by itself.
+- **Why decks were erased (root cause) and the fix:** `prep-decks.js` header. (1) A failed IndexedDB open (iOS WebKit
+  drops its storage process in the background; the next open can fail once) switched the file to an in-memory store
+  for the session, silently: the list came up empty and decks made then were lost on close. Now a failed open retries
+  once, a dropped connection (onclose, InvalidStateError) reopens, memory is used only where IndexedDB does not exist
+  (`durable()` false, said on screen). (2) Storage was best effort: `navigator.storage.persist()` is asked now. (3) A
+  reinstall or new phone starts empty and nothing was kept elsewhere: every deck is mirrored to the app's files on native
+  (`@capacitor/filesystem`, already in package.json, Directory DATA, `prep-decks/<id>.json`, whole deck with images and
+  source) and backed up encrypted to the account (`/api/prep/decks`, D1 `prep_decks` + `prep_deck_keys`, migration
+  `prep-arena-worker/migrations/0004_prep_decks.sql`; AES-GCM under HKDF(uid, per-user salt, "prepnucleus-decks-v1");
+  payload = manifest, questions, cards and unused facts with only their cited sentences; no file, no images, no other
+  page text; title scrubbed; 512 KB a deck, 120 decks). `restore()` on Your decks brings back missing decks: files first,
+  then the account; deleted ids are remembered (`smd_prep_deck_del`) and deleted on the server too. A restored deck has
+  no source on the phone (`noSrc`): its unused facts send `quote` instead of `sents`; image questions without their
+  picture are left out of practice. Not causes (checked): OTA (capacitor-updater keeps the origin), sign-out (no wipe
+  listener for prep).
+- **Tests:** `test/prep-create-rounds.test.mjs` (caps agree, 10 at a time to 50, images per round, resume, MT, page
+  cap, virtual grid), `test/prep-decks.test.mjs` (route on node:sqlite, payload, storage in a vm window with
+  `test/fake-idb.mjs`: retry, reopen, mirror, backup, new-phone restore, evicted-store restore, delete),
+  `test/prep-generate.test.mjs` (5/30, 300 calls, deck-full, MT, ai-cost-cap), headless `test/run-prep-create-ui.mjs`
+  (steps, 500-page picker, cap, 10 at a time to 50, deck screen, restore after IndexedDB is cleared; SHOTS at 390, 820,
+  1180 dark and light; deletes its Chrome profile).

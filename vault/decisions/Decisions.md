@@ -11666,3 +11666,12 @@ which the sign-off gate does not cover, so it has no manifest entry.
   certificate reading above 0.7 confidence. Doubtful passes email the owner a one-click Revoke, which frees the
   number. Clearly read student/intern IDs are accepted at once as reviewed trainees. Risk accepted by the owner:
   a convincing fake certificate can verify until revoked; the email is the control. [[StewardMD ID]]
+
+## 2026-10-09 PrepNucleus decks: 5 a day, 30 a month, 50 a deck, backed up to the account
+Owner request (with answers): 5 new decks a day; monthly cap raised from 10 (lead's default 30, owner may change via
+`PREP_DECKS_PER_MONTH`); at most 50 MCQs a deck, made 10 at a time ("Make 10 more", "N of 50"); a page picker for big PDFs
+(60 pages at most, never a silent first 60); deck creation metered in MaiK Tokens like Ask MaiK (AI_COST_CAP_ON stays OFF
+until 2026-11-01); decks must not be lost: persistent storage, a native file copy, and an encrypted account backup of
+questions, cards and manifest (not the source file or images) that restores on a new phone after sign-in. Root cause of
+the lost decks: a silent in-memory fallback in prep-decks.js after a failed IndexedDB open, plus best-effort storage and no
+copy outside the WebView. [[modules/PrepNucleus]]

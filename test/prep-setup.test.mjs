@@ -217,8 +217,8 @@ test("deck image step: image and nearby text sent; image saved only with a quest
   const sents = [{ n: 1, p: 1, h: "Chest", s: "sec-0", tx: "Figure 1 is a chest X-ray of tension pneumothorax." }, { n: 2, p: 1, h: "Chest", s: "sec-0", tx: "Needle decompression comes first." }, { n: 3, p: 2, h: "Chest", s: "sec-0", tx: "Unrelated." }];
   const m = { id: "gen_aaaaaaaaaaaa", title: "Chest", exam: "neet-pg", profileV: 1, pv: "p1", source: { name: "c.pdf", sha: "f".repeat(64) }, stats: { facts: 0, generated: 0, accepted: 0, rejected: 0, regenerated: 0, cards: 0 }, cost: { inTok: 0, outTok: 0, thinkTok: 0, inr: 0 }, topics: [], prog: { done: [0] } };
   const data = "data:image/webp;base64," + Buffer.alloc(600, 3).toString("base64");
-  const job = PC.newJob({ m, sents, sections: [{ id: "sec-0", title: "Chest" }], facts: [], items: [], saved: true, target: 0, ctx: { doc: "ffffffffffff", name: "c.pdf", exam: "neet-pg" }, imgs: [{ p: 1, k: "1:img_a", w: 300, h: 300, data }, { p: 1, k: "1:img_b", w: 300, h: 300, data }] });
-  job.round.target = 0;
+  const job = PC.newJob({ m, sents, sections: [{ id: "sec-0", title: "Chest" }], facts: [], items: [], saved: true, target: 2, ctx: { doc: "ffffffffffff", name: "c.pdf", exam: "neet-pg" }, imgs: [{ p: 1, k: "1:img_a", w: 300, h: 300, data }, { p: 1, k: "1:img_b", w: 300, h: 300, data }] });
+  assert.equal(job.round.textTarget, 0, "two images waiting: the round asks for no text questions");
   const sent = [];
   let n = 0;
   const send = async (body) => { sent.push(body); n++; return n === 1 ? { items: [{ id: "q_x", q: "The X-ray shown: diagnosis?", o: ["Tension pneumothorax", "Effusion", "Collapse", "Consolidation"], a: 0, r: ["a", "b", "c", "d"], fid: "f_1", d: 2, src: { sn: [1], p: [1] } }], skipped: null, usage: { inTok: 1, outTok: 1 } } : { items: [], skipped: "unsupported" }; };

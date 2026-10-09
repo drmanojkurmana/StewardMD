@@ -170,7 +170,9 @@ test("facts: Vertex only, pinned model, labels, responseSchema, thinkingBudget 0
   assert.equal(r.json.dropped, 2);
   assert.equal(f[1].fid, "f_" + C.sha12(deckOf("f1") + "2"));
   assert.equal(f[1].quote, SENTS[1].tx); assert.deepEqual(f[1].p, [4]); assert.equal(f[1].h, "AML");
-  assert.deepEqual(r.json.usage, { inTok: 900, outTok: 300, thinkTok: 20, inr: r.json.usage.inr, deckTok: 1220, deckCapTok: 200000, dayDecks: 1, monthDecks: 1 });
+  assert.deepEqual(r.json.usage, { inTok: 900, outTok: 300, thinkTok: 20, inr: r.json.usage.inr, mt: Math.round(r.json.usage.inr * 2000), deckTok: 1220, deckCapTok: 600000, dayDecks: 1, monthDecks: 1, deckQ: 0 });
+  assert.ok(r.json.usage.mt > 0, "MaiK Tokens for the call, the Ask MaiK unit");
+  assert.deepEqual(r.json.wallet, { balanceMt: 0, costCapOn: false }, "the wallet comes back; the cost cap is off (owner: until 2026-11-01)");
   assert.ok(r.json.usage.inr > 0);
 });
 
@@ -292,9 +294,9 @@ test("idempotent replay: same idem and body returns the stored response, no seco
   assert.equal(calls.length, 2);
 });
 
-test("deck caps: 3 new decks a day, 10 a month; a deck counts once; old decks keep working", async () => {
+test("deck caps: 5 new decks a day, 30 a month (owner 2026-10-09); a deck counts once; old decks keep working", async () => {
   const env = envFor(); reply = () => FACTS_REPLY;
-  for (const s of ["d1", "d2", "d3"]) await startDeck(env, s, "tok-b");
+  for (const s of ["d1", "d2", "d3", "d6", "d7"]) await startDeck(env, s, "tok-b");
   calls = [];
   const r4 = await post(env, factsBody(deckOf("d4")), { token: "tok-b" });
   assert.equal(r4.status, 429); assert.equal(r4.json.error, "quota"); assert.equal(r4.json.reason, "daily-decks");
@@ -302,10 +304,12 @@ test("deck caps: 3 new decks a day, 10 a month; a deck counts once; old decks ke
   assert.equal(calls.length, 0);
   const again = await post(env, factsBody(deckOf("d2")), { token: "tok-b" });
   assert.equal(again.status, 200, "a counted deck is never counted twice");
-  assert.equal(again.json.usage.dayDecks, 3); assert.equal(again.json.usage.monthDecks, 3);
-  assert.equal(env.MAIK_KV.m.get("prep:decks:fb:u-b:" + DAY), "3");
-  // month cap
-  env.MAIK_KV.m.set("prep:decks:fb:u-c:" + MONTH, "10");
+  assert.equal(again.json.usage.dayDecks, 5); assert.equal(again.json.usage.monthDecks, 5);
+  assert.equal(env.MAIK_KV.m.get("prep:decks:fb:u-b:" + DAY), "5");
+  // month cap: 29 is still open, 30 is full
+  env.MAIK_KV.m.set("prep:decks:fb:u-c:" + MONTH, "29");
+  assert.equal((await post(env, factsBody(deckOf("c0")), { token: "tok-c" })).status, 200);
+  assert.equal(env.MAIK_KV.m.get("prep:decks:fb:u-c:" + MONTH), "30");
   const m = await post(env, factsBody(deckOf("c1")), { token: "tok-c" });
   assert.equal(m.status, 429); assert.equal(m.json.reason, "month-decks");
   // a failed first facts call does not count the deck
@@ -325,15 +329,15 @@ test("token cap: a call that would cross the per-deck cap is refused before Gemi
   assert.equal(calls.length, 0);
 });
 
-test("daily calls cap (95, AI_MODULES.prep): at the cap the call is refused with daily-calls", async () => {
+test("daily calls cap (300, AI_MODULES.prep): at the cap the call is refused with daily-calls", async () => {
   const env = envFor(); calls = []; reply = () => FACTS_REPLY;
-  env.MAIK_KV.m.set("aiu:mod:em:f@example.com:prep:" + DAY, "95");
+  env.MAIK_KV.m.set("aiu:mod:em:f@example.com:prep:" + DAY, "300");
   const r = await post(env, factsBody(deckOf("dc")), { token: "tok-f" });
-  assert.equal(r.status, 429); assert.equal(r.json.reason, "daily-calls"); assert.equal(r.json.limit, 95);
+  assert.equal(r.status, 429); assert.equal(r.json.reason, "daily-calls"); assert.equal(r.json.limit, 300);
   assert.equal(calls.length, 0);
-  env.MAIK_KV.m.set("aiu:mod:em:f@example.com:prep:" + DAY, "94");
+  env.MAIK_KV.m.set("aiu:mod:em:f@example.com:prep:" + DAY, "299");
   assert.equal((await post(env, factsBody(deckOf("dc")), { token: "tok-f" })).status, 200);
-  assert.equal(recCount(env, "f@example.com"), 95);
+  assert.equal(recCount(env, "f@example.com"), 300);
 });
 
 test("rate limit and circuit breaker come from checkQuota type prep; MaiK's monthly allowance does not apply", async () => {
@@ -417,4 +421,47 @@ test("mcq avoid: one { fi, why } (6.0) or a batched array, each reason reaching 
     const r = await post(env, Object.assign({ idem: idem(), avoid: bad }, base), { token: "tok-k" });
     assert.equal(r.status, 400, JSON.stringify(bad)); assert.deepEqual([r.json.error, r.json.reason], ["bad-input", "avoid"]);
   }
+});
+
+/* ---- owner 2026-10-09: 50 questions a deck, MaiK Tokens metered like Ask MaiK ---- */
+test("deck question guard: review passes and image questions count per deck; at 60 a new mcq or imcq is 429 deck-full before Gemini", async () => {
+  const env = envFor(); reply = () => FACTS_REPLY;
+  await startDeck(env, "q1", "tok-g");
+  const ok = { g4: true, g6: true, g7: true, g8: true, g9: true, g10: true, g11: true };
+  const items = [{ id: "q_aaaaaaaaaaaa", q: "Which translocation defines APL?", o: ["t(8;21)", "t(15;17)", "t(9;22)", "inv(16)"], a: 1 }, { id: "q_bbbbbbbbbbbb", q: "ATRA induction dose?", o: ["15 mg/m2", "90 mg/m2", "45 mg/m2", "4.5 mg/m2"], a: 2 }];
+  reply = () => JSON.stringify({ g: [Object.assign({ i: 0, old: false, why: "" }, ok), Object.assign({ i: 1, old: false, why: "no" }, ok, { g7: false })] });
+  const rv = await post(env, { op: "review", deckId: deckOf("q1"), idem: idem(), exam: "neet-pg", q: items }, { token: "tok-g" });
+  assert.equal(rv.status, 200, JSON.stringify(rv.json));
+  assert.equal(rv.json.usage.deckQ, 1, "one passed review counts");
+  const key = "prep:tok:fb:u-g:" + deckOf("q1");
+  const rec = JSON.parse(env.MAIK_KV.m.get(key)); rec.q = 60; env.MAIK_KV.m.set(key, JSON.stringify(rec));
+  calls = [];
+  const facts = [{ fid: "f_" + "1".repeat(12), ft: "APL is defined by t(15;17).", sn: [1], quote: "APL is defined by t(15;17).", p: [4], h: "AML" }];
+  const m = await post(env, { op: "mcq", deckId: deckOf("q1"), idem: idem(), exam: "neet-pg", facts }, { token: "tok-g" });
+  assert.equal(m.status, 429); assert.deepEqual([m.json.error, m.json.reason], ["quota", "deck-full"]); assert.equal(m.json.deckCapQ, 60);
+  assert.equal(calls.length, 0, "no model call");
+  const s = await post(env, { op: "solve", deckId: deckOf("q1"), idem: idem(), exam: "neet-pg", q: items.slice(0, 1) }, { token: "tok-g" });
+  assert.notEqual(s.json.reason, "deck-full", "checks of questions already written still run");
+});
+
+test("MaiK Tokens: every response carries usage.mt (inrToMt of the call's cost); with AI_COST_CAP_ON the spent allowance is 429 ai-cost-cap, not daily-calls", async () => {
+  const env = envFor({ AI_COST_CAP_ON: "1", AI_DAILY_COST_CAP_INR: "0.0001" }); reply = () => FACTS_REPLY; calls = [];
+  const first = await post(env, factsBody(deckOf("mt1")), { token: "tok-h" });
+  assert.equal(first.status, 200, JSON.stringify(first.json));
+  assert.ok(first.json.usage.mt > 0 && first.json.usage.mt === Math.round(first.json.usage.inr * 2000));
+  assert.equal(first.json.wallet.costCapOn, true);
+  const n = calls.length;
+  const r = await post(env, factsBody(deckOf("mt1")), { token: "tok-h" });
+  assert.equal(r.status, 429); assert.deepEqual([r.json.error, r.json.reason], ["quota", "ai-cost-cap"]);
+  assert.ok(r.json.retryAfter > 0); assert.ok(r.json.usedMt > 0);
+  assert.equal(calls.length, n, "model not called");
+});
+
+test("cost cap OFF (production until 2026-11-01): MaiK Tokens are recorded and shown, nothing is blocked by them", async () => {
+  const env = envFor({ AI_DAILY_COST_CAP_INR: "0.0001" }); reply = () => FACTS_REPLY;
+  for (let i = 0; i < 3; i++) {
+    const r = await post(env, factsBody(deckOf("mt2")), { token: "tok-i" });
+    assert.equal(r.status, 200, JSON.stringify(r.json)); assert.ok(r.json.usage.mt > 0); assert.equal(r.json.wallet.costCapOn, false);
+  }
+  assert.equal(recCount(env, "i@example.com"), 3, "each call recorded");
 });
