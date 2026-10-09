@@ -776,7 +776,46 @@ global version (`prep.js` `bvOf`). 29 questions in R2 `prep-bank/v6/ss-radiology
   chest, breast, IR, nuclear and physics hold 2 to 10 items each (targets 40 to 80). Content gap, not a cache bug.
 - Test: `test/run-prep-subject-ui.mjs` (390, 820, 1180; alignment within 1 px, Learn, exam once), `test/prep-subject.test.mjs`.
 
-## Create deck overhaul: 50 a deck, page picker, decks that last (2026-10-09, branch `feat/prep-create-v2`, prep35)
+## Strict per-question clock, review filters, saved practice sets (2026-10-09, branch `fix/prep-q-timer`, prep36)
+- Owner bug: with 30 s a question, going to the next question and back restarted the clock at 30 s. Now (prep.js
+  `qcNew`/`qcShow`/`qcPause`/`qcLeft`/`qcTick`/`qcNext`, `r.qc` on the run) each question has one budget, spent only while
+  it is on screen (the question grid, a screen pushed over the runner and an answered practice question stop it), never
+  reset. Counting is by timestamps, so background time counts on return (`visibilitychange` runs a tick at once). At 0 the
+  question locks for the rest of the set (practice and timed test alike): options disabled, "Time up" note, grid cell
+  dashed + "time up" label, a practice question is recorded unanswered (-1, like a timed test at the end), and the set
+  moves to the next open question (else the first open earlier one, else it finishes). Whole-set timers unchanged.
+- Result review: filters All / Wrong / Correct / Skipped (or Time up) / Bookmarked with counts, Wrong by default when any
+  (`reviewSplit`, `reviewDefault`); "Practise the missed (n)" and "Practise all again (n)".
+- Saved practice sets: every set started from the practice setup sheet (module, subject, custom, mistakes, bookmarks) or
+  the old custom module screen is saved on finish in `s.ps` (synced map in prep-sync MAPS) as ids + answers only
+  (`psPack`; PYQ and own-deck items are left out because they cannot be reloaded by module), at most 20 sets / 200
+  items, expiring 7 days after creation (`psPurge` on load). Home lists "Your practice sets" (`psopen`): reopens on the
+  result (`psUnpack` from the module files); "Practise all again" updates the same set and keeps its expiry.
+- Tests: `test/prep-qclock.test.mjs`, `test/prep-review.test.mjs`, `test/run-prep-setup-ui.mjs` (fake Date.now clock:
+  no reset on revisit, grid pause, lock + auto-advance, locked revisit, background catch-up; review filters, saved set
+  reopen, re-practise, expiry purge).
+## Radiology lessons from the owner's four PDFs, set "radbook" (2026-10-09, branch `feat/prep-radlessons`, prep35)
+- Owner: "Learn lessons don't have X-rays; make the whole notebook into chapter-wise lessons with images." Built by
+  `tools/prep-radbook.mjs` (+ `tools/prep-radbook-blur.py`, `test/prep-radbook.test.mjs`). Private data and every
+  output live in `~/prep-data/radnotes/book` (backup `gs://<prep-batch bucket>/private/radlessons/`); no PDF text in git.
+- Spine: the long-case book (RDN11, printed, data tables and figures); the two notes books and the anatomy true/false
+  book are merged into the same system order (`CHAPTERS`). NEET-SS passes over the notes chapters cover the srd-*
+  modules the long-case excerpt does not reach (brain, head and neck, chest, kidney, breast).
+- Pipeline: F1 figure check (Gemini, image attached: kind, clear, what it shows, identifiers, third-party marks) ->
+  O1 outline per chapter window (topics as page ranges + module + figure ids) -> L1-L4 (gen with figures, code gates,
+  blind self-check, one redo, re-check) -> Q1 quiz pick (up to 3 live item ids of the lesson's module; radmax items
+  excluded since the set moved to radmax2) -> two Haiku votes per figure use (doubt drops the figure, not the step) ->
+  identifier blur (hand boxes, checked by eye before/after) -> assemble -> upload.
+- R2: lessons `v1/lessons/radbook-<order><seq>-<slug>.json` (the key order keeps chapter order inside a module),
+  figures `v1/lessons/media/rb-<figid>.webp` (existing STUDY_RE route, no route change), index `v1/lessons/index.json`
+  rebuilt from the live copy: the 50 `set: "radnotes"` entries are superseded (their files stay in R2), radbook
+  entries carry `module` and `set: "radbook"`.
+- Client: `prep-lessons.js` `warm()` fetches every figure of a lesson when it opens (lessons opened once keep their
+  X-rays offline through the one-year immutable cache); `lessonImages()` pure helper.
+- Not covered (no source pages): rad-radiation-protection, rad-interventional, rad-nm-scans, rad-nm-principles and the
+  radiotherapy modules (teletherapy, brachytherapy, toxicity, clinical-rt); srd-physics keeps its own lesson.
+
+## Create deck overhaul: 50 a deck, page picker, decks that last (2026-10-09, branch `feat/prep-create-v2`, prep37)
 Owner request 2026-10-09 (with his answers). Layer C contract otherwise as [[plans/PrepNucleus-LayerC]].
 - **Caps:** 5 new decks a day, 30 a month (server `prepCaps`: `PREP_DECKS_PER_DAY` 5, `PREP_DECKS_PER_MONTH` 30; client
   `DAY_CAP`/`MONTH_CAP`, every message and the settings line). Month 30 is the lead's default, the owner may change it

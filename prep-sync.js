@@ -40,7 +40,8 @@
 
   /* ================= pure ================= */
   // ask (Ask MaiK choice), cel (celebrated milestones), ml (MaiK line rotation): owner 2026-10-09, plain registers.
-  var SCALARS = ["exam", "goal", "last", "pl", "pt", "lsp", "ra", "ask", "cel", "ml"], MAPS = ["bm", "mt", "rep", "ls"];
+  // ps (saved practice sets, prep.js psPack): ids and answers only, at most 20 sets, each gone 7 days after it was made.
+  var SCALARS = ["exam", "goal", "last", "pl", "pt", "lsp", "ra", "ask", "cel", "ml"], MAPS = ["bm", "mt", "rep", "ls", "ps"];
   var KEEP_DAYS = 30, TOMB_MS = 120 * 864e5, MH_MAX = 20, INFO = "prepnucleus-sync-v1";
   var _core = null;
   function core() { return _core || (_core = (G && G.SPECIALTY_CORE) || require("./specialty-core.js")); }

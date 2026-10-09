@@ -1366,3 +1366,25 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-lsn-spd { min-width: 46px; padding: 0 8px; }
   .pn-root .pn-lsn-next { padding: 0 12px; }
 }
+
+/* Per-question clock, time up (2026-10-09): the question is locked for the rest of the set. The kept answer stays
+   marked; the other options fade; the grid shows the cell dashed (shape, not colour alone) and the label says so. */
+.pn-root .pn-opt:disabled { cursor: default; }
+.pn-root .pn-opt:disabled:active { transform: none; }
+.pn-root .pn-opt:disabled:not(.sel) { opacity: .5; box-shadow: none; }
+.pn-root .pn-timeup { display: flex; align-items: flex-start; gap: 10px; margin: 12px 0 0; padding: 11px 14px; border-radius: var(--pn-r-md); background: color-mix(in srgb, var(--pn-amber) 14%, var(--pn-card)); color: var(--pn-text); font-size: 15px; line-height: 1.45; }
+.pn-root .pn-timeup svg { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 1px; color: var(--pn-warn); }
+.pn-root .pn-timeup b { display: block; color: var(--pn-warn); }
+.pn-root .pn-qn.out { border-style: dashed; border-color: var(--pn-warn); }
+.pn-root .pn-qn.out:not(.ans) { color: var(--pn-mut); background: transparent; }
+.pn-root .pn-qkey i.out { background: transparent; box-shadow: none; border: 1.5px dashed var(--pn-warn); }
+
+/* Result review filters and saved practice sets (2026-10-09). */
+.pn-root .pn-body .pn-rvf { padding: 2px 2px 12px; margin: 0 -2px; max-width: none; width: auto; }
+.pn-root .pn-rvf .pn-rvn { margin-left: 4px; font-variant-numeric: tabular-nums; opacity: .78; }
+.pn-root .pn-rvf .pn-chip:disabled { opacity: .45; box-shadow: none; cursor: default; }
+.pn-root .pn-again { flex-wrap: wrap; }
+.pn-root .pn-again .pn-btn { flex: 1 1 calc(50% - 4px); min-height: 48px; }
+.pn-root .pn-again .pn-btn.pri { flex-basis: 100%; }
+.pn-root .pn-missed .pn-rv-ok small { color: var(--pn-ok); }
+.pn-root .pn-missed .pn-rv-no small { color: var(--pn-bad); }

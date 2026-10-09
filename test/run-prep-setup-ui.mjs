@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{["smd_prep_v1","smd_prep_setup","smd_prep_c_caps"].forEach(function(k){localStorage.removeItem(k);});}catch(e){} indexedDB.deleteDatabase("prep-gen"); indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!window.PREP_SETUP && !!document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');`, 20000), "prep-setup.js loads with PrepNucleus; the subject lists its modules");
-  ok(await ev(`return PREP_LOADER.V === "prep35" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
+  ok(await ev(`return PREP_LOADER.V === "prep37" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-subject][data-s=anatomy]');`, 5000), "the subject screen has Practise Anatomy");
 
   // ---- module: Practice opens the sheet
@@ -186,10 +186,44 @@ try {
   ok(await until(`return /^0:(2\\d|30)$/.test(document.getElementById("pnClock").textContent);`, 3000), "the clock counts this question down from 0:30");
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-yq-fig img");`) === true, "the image shows with the stem");
   await shots("runner-image");
-  // auto-advance: make the question's clock run out
-  await ev(`PREP._st.run.qt0 = Date.now() - 31000; return 1;`);
-  ok(await until(`return PREP._st.run.i === 1;`, 3000), "per question in a timed test: the time runs out and the test moves on");
+  // ---- per-question clock (owner bug 2026-10-09): a fake clock moves Date.now; the runner counts from timestamps
+  await ev(`if (!window.__rn) { window.__rn = Date.now; window.__off = 0; Date.now = function () { return window.__rn() + window.__off; }; } return 1;`);
+  const adv = (ms) => ev(`window.__off += ${ms}; return 1;`);
+  const left = (i) => ev(`var r = PREP._st.run; return Math.ceil(PREP._pure.qcLeft(r.qc, ${i}, Date.now()) / 1000);`);
+  await adv(10000);
+  ok(await until(`return /^0:(1[6-9]|20)$/.test(document.getElementById("pnClock").textContent);`, 3000), "10 s on question 1: the clock shows about 0:20: " + await text("#pnClock"));
+  await click("#smdPrep [data-act=next]");
+  ok(await until(`return PREP._st.run.i === 1;`, 2000) && /^0:(2[7-9]|30)$/.test(await text("#pnClock")), "question 2 starts on its own 0:30: " + await text("#pnClock"));
+  await adv(5000);
+  await click("#smdPrep [data-act=prev]");
+  const back0 = await left(0), q1 = await left(1);
+  ok(await until(`return PREP._st.run.i === 0;`, 2000) && back0 >= 15 && back0 <= 20 && q1 >= 22 && q1 <= 25, "back on question 1 the clock resumes where it was, not at 0:30 (q1 " + back0 + " s, q2 " + q1 + " s)");
+  ok(/^0:(1[5-9]|20)$/.test(await text("#pnClock")), "and the figure says so: " + await text("#pnClock"));
+  await click("#smdPrep [data-act=qgrid]");
+  await until(`return !!document.querySelector("#smdPrep .pn-qgrid");`, 2000);
+  await adv(60000);
+  ok(await ev(`return PREP._st.run.qc.on;`) === -1 && Math.abs(await left(0) - back0) <= 2, "the question grid stops the clock: a minute there costs nothing");
+  await click('#smdPrep [data-act=goq][data-i="0"]');
+  await until(`return !!document.querySelector("#smdPrep .pn-q") && PREP._st.run.i === 0;`, 2000);
+  await adv(25000);
+  ok(await until(`return PREP._st.run.i === 1 && PREP._st.run.qc.out[0];`, 3000), "per question in a timed test: the time runs out, the question locks and the test moves on");
   ok(await ev(`return PREP._st.run.ans[0];`) === -1, "the timed-out question stays unanswered");
+  await click("#smdPrep [data-act=prev]");
+  ok(await until(`return PREP._st.run.i === 0 && !!document.querySelector("#smdPrep .pn-timeup");`, 2000), "going back shows it locked: Time up");
+  ok(/Time up/.test(await text("#smdPrep .pn-timeup")) && await ev(`return [].every.call(document.querySelectorAll("#smdPrep .pn-opt"), function (b) { return b.disabled; });`) === true, "every option is disabled");
+  ok(await text("#pnClock") === "0:00" && await ev(`return document.querySelector("#smdPrep .pn-clockw").classList.contains("over");`) === true, "its clock reads 0:00");
+  await ev(`PREP._st.run.items[0] && document.querySelector('#smdPrep .pn-opt[data-k="1"]').click(); return 1;`);
+  ok(await ev(`return PREP._st.run.ans[0];`) === -1, "a tap on a locked option answers nothing");
+  await shots("runner-timeup");
+  await click("#smdPrep [data-act=qgrid]");
+  ok(await until(`var b = document.querySelector('#smdPrep [data-act=goq][data-i="0"]'); return !!b && b.classList.contains("out") && /time up/.test(b.getAttribute("aria-label"));`, 2000), "the grid marks it: time up");
+  await shots("grid-timeup");
+  await click('#smdPrep [data-act=goq][data-i="1"]');
+  await until(`return PREP._st.run.i === 1 && !!document.querySelector("#smdPrep .pn-q");`, 2000);
+  // the app goes to the background for 40 s and comes back: the visibility event charges the gap at once
+  await adv(40000);
+  await ev(`document.dispatchEvent(new Event("visibilitychange")); return 1;`);
+  ok(await until(`return PREP._st.run.i === 2 && PREP._st.run.qc.out[1];`, 2000), "back from the background: question 2's time is gone, it locks and the test moves on");
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-last]');`, 5000), "back on the module: Start with last settings is offered");
   ok(/8|10 questions/.test(await text('#smdPrep [data-act=su-last]')) && /image-based/.test(await text('#smdPrep [data-act=su-last]')) && /30 s a question/.test(await text('#smdPrep [data-act=su-last]')), "it says what it will start: " + await text('#smdPrep [data-act=su-last]'));
@@ -212,16 +246,17 @@ try {
   await click('#pnSetup [data-act=su-type][data-v=all]');
   await click("#suGo");
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 5000) && await ev(`return PREP._st.run.mode === "study" && PREP._st.run.qsec === 30 && !!document.querySelector("#smdPrep .pn-acts #pnClock");`) === true, "practice keeps the ring beside the bookmark");
-  await ev(`PREP._st.run.qt0 = Date.now() - 40000; return 1;`); await sleep(1300);
-  ok(await ev(`return PREP._st.run.i === 0 && document.querySelector("#smdPrep .pn-clockw").classList.contains("over");`) === true, "practice never moves on by itself; the ring turns");
   await shots("runner-practice-ring");
-  // answer two (one wrong) and bookmark one, for bookmarks and mistakes
-  await ev(`var it=PREP._st.run.items[0]; document.querySelector('#smdPrep .pn-opt[data-k="'+((it.a+1)%4)+'"]').click(); return 1;`);
+  await ev(`window.__off += 40000; return 1;`);
+  ok(await until(`return PREP._st.run.i === 1 && PREP._st.run.qc.out[0] && PREP._st.run.ans[0] === -1;`, 3000), "practice is strict too: the time runs out, the question locks unanswered and the set moves on");
+  // answer one wrong and bookmark it (the timed-out one counts as not answered), for bookmarks and mistakes
+  await ev(`var it=PREP._st.run.items[PREP._st.run.i]; document.querySelector('#smdPrep .pn-opt[data-k="'+((it.a+1)%4)+'"]').click(); return 1;`);
+  ok(await ev(`return PREP._st.run.qc.on;`) === -1, "an answered practice question stops its clock");
   await click("#smdPrep [data-act=bookmark]");
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 3000);
   await click('#smdPrep [data-act=start][data-k=study]'); await until(sheetOpen, 5000);
-  ok(await count("seen", "wrong") === 1 && await count("seen", "bm") === 1 && await count("seen", "new") === 39, "repeat counts follow the store: 1 incorrect, 1 bookmarked, 39 new");
+  ok(await count("seen", "wrong") === 2 && await count("seen", "bm") === 1 && await count("seen", "new") === 38, "repeat counts follow the store: 2 incorrect (one timed out), 1 bookmarked, 38 new: " + [await count("seen", "wrong"), await count("seen", "bm"), await count("seen", "new")]);
   await ev(`PREP.back(); return 1;`);
 
   // ---- subject, bookmarks, mistakes, custom: each opens the sheet
@@ -241,7 +276,7 @@ try {
   await click('#smdPrep [data-act=mistakes]');
   await until(`return !!document.querySelector('#smdPrep [data-act=mpractice]');`, 5000);
   await click('#smdPrep [data-act=mpractice]');
-  ok(await until(sheetOpen, 5000) && await ev(`return !document.querySelector('#pnSetup [data-act=su-seen]');`) === true && /1\s*question matches/.test(await text("#suStatus")), "My mistakes opens the sheet without the repeat row");
+  ok(await until(sheetOpen, 5000) && await ev(`return !document.querySelector('#pnSetup [data-act=su-seen]');`) === true && /2\s*questions? match/.test(await text("#suStatus")), "My mistakes opens the sheet without the repeat row (the wrong one and the timed-out one): " + await text("#suStatus"));
   await ev(`PREP.back(); PREP.back(); return 1;`);
   await until(`return !!document.querySelector('#smdPrep [data-act=custom]');`, 5000);
   await click('#smdPrep [data-act=custom]');
@@ -250,7 +285,53 @@ try {
   await click('#smdPrep [data-act=cmsub][data-v=anatomy]');
   await click('#smdPrep [data-act=cmstart]');
   ok(await until(sheetOpen, 10000) && /Custom module/.test(await text("#pnSetup .su-head")), "custom module opens the sheet");
-  await ev(`PREP.back(); PREP.back(); return 1;`);
+
+  // ---- result review filters and saved practice sets (owner 2026-10-09)
+  await click('#pnSetup [data-act=su-mode][data-v=study]');
+  await click('#pnSetup [data-act=su-type][data-v=all]');
+  await click('#pnSetup [data-act=su-seen][data-v=all]').catch(() => {});
+  await click('#pnSetup [data-act=su-timer][data-v=off]');
+  await click('#pnSetup [data-act=su-n][data-v="10"]');
+  await click("#suGo");
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-q") && PREP._st.run && PREP._st.run.items.length === 10 && PREP._st.run.save === "custom";`, 8000), "a 10-question custom practice set starts and is marked to be saved");
+  // right on even questions, wrong on odd ones
+  await ev(`for (var n = 0; n < 10; n++) { var r = PREP._st.run, it = r.items[r.i]; document.querySelector('#smdPrep .pn-opt[data-k="' + (r.i % 2 ? (it.a + 1) % 4 : it.a) + '"]').click(); document.querySelector("#smdPrep [data-act=next]").click(); } return 1;`);
+  ok(await until(`return PREP._st.run.done && !!document.querySelector("#smdPrep [data-act=rfilter]");`, 3000), "the result shows the review filters");
+  const chips = JSON.parse(await ev(`return JSON.stringify([].map.call(document.querySelectorAll("#smdPrep [data-act=rfilter]"), function (b) { return [b.getAttribute("data-v"), b.textContent.trim(), b.getAttribute("aria-pressed"), b.disabled]; }));`));
+  ok(chips.map((c) => c[0]).join() === "all,wrong,right,skip,bm" && /All\s*10/.test(chips[0][1]) && /Wrong\s*5/.test(chips[1][1]) && /Correct\s*5/.test(chips[2][1]) && /Skipped\s*0/.test(chips[3][1]) && chips[3][3] === true, "filters with counts: " + JSON.stringify(chips));
+  ok(chips[1][2] === "true" && await ev(`return document.querySelectorAll("#smdPrep .pn-missed [data-act=reviewq]").length;`) === 5, "Wrong is the default and lists the 5 wrong");
+  await click('#smdPrep [data-act=rfilter][data-v=right]');
+  ok(await ev(`return document.querySelectorAll("#smdPrep .pn-missed [data-act=reviewq]").length === 5 && document.querySelector('#smdPrep [data-act=rfilter][data-v=right]').getAttribute("aria-pressed") === "true";`) === true, "Correct lists the 5 right ones");
+  await click('#smdPrep [data-act=rfilter][data-v=all]');
+  ok(await ev(`return document.querySelectorAll("#smdPrep .pn-missed [data-act=reviewq]").length;`) === 10, "All lists every question");
+  ok(await ev(`return !!document.querySelector("#smdPrep [data-act=retrymissed]") && /all again \\(10\\)/.test(document.querySelector("#smdPrep [data-act=retryall]").textContent);`) === true, "practise again: the missed or all 10");
+  await shots("result-review");
+  const ps = JSON.parse(await ev(`var s = PREP._st.store, ids = Object.keys(s.ps); return JSON.stringify({ n: ids.length, e: s.ps[ids[0]], id: PREP._st.run.psId, ids: ids });`));
+  ok(ps.n === 1 && ps.e.n === 10 && ps.e.ok === 5 && ps.id === ps.ids[0] && Math.round((ps.e.x - ps.e.c) / 864e5) === 7, "the set is saved for 7 days: " + JSON.stringify({ n: ps.n, ok: ps.e && ps.e.ok }));
+  ok(!/Which root|Fixture explanation/.test(JSON.stringify(ps.e)), "saved as ids and answers, no question text");
+  ok(/Expires in 7 days/.test(await text("#smdPrep .pn-body")), "the result says it is saved and when it expires");
+  await click("#smdPrep [data-act=donerun]");
+  await ev(`PREP.back(); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrep #pnSets [data-act=psopen]");`, 5000), "home lists Your practice sets");
+  ok(/Custom module/.test(await text("#pnSets")) && /10 questions · 5 right · Expires in 7 days/.test(await text("#pnSets")), "the row: " + await text("#pnSets"));
+  await shots("home-sets");
+  await click("#smdPrep #pnSets [data-act=psopen]");
+  ok(await until(`return PREP._st.run && PREP._st.run.done && PREP._st.run.saved && !!document.querySelector("#smdPrep [data-act=rfilter]");`, 8000), "the saved set reopens on its result");
+  ok(/Wrong\s*5/.test(await text('#smdPrep [data-act=rfilter][data-v=wrong]')) && await ev(`return document.querySelectorAll("#smdPrep .pn-missed [data-act=reviewq]").length;`) === 5, "with the same answers: 5 wrong");
+  await click('#smdPrep .pn-missed [data-act=reviewq]');
+  ok(await until(`return /Review/.test(document.querySelector("#smdPrep .pn-bar, #smdPrep header") ? document.querySelector("#smdPrep .pn-bar, #smdPrep header").textContent : document.body.textContent);`, 3000), "a question opens for review");
+  await ev(`PREP.back(); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep [data-act=retryall]");`, 3000);
+  await click("#smdPrep [data-act=retryall]");
+  ok(await until(`var r = PREP._st.run; return !!r && !r.done && r.items.length === 10 && r.psId === ${JSON.stringify(ps.id)} && r.ans.every(function (a) { return a < 0; });`, 3000), "practise all again: the same 10, fresh answers, tied to the saved set");
+  await ev(`for (var n = 0; n < 10; n++) { var r = PREP._st.run, it = r.items[r.i]; document.querySelector('#smdPrep .pn-opt[data-k="' + it.a + '"]').click(); document.querySelector("#smdPrep [data-act=next]").click(); } return 1;`);
+  ok(await until(`var s = PREP._st.store; return PREP._st.run.done && Object.keys(s.ps).length === 1 && s.ps[${JSON.stringify(ps.id)}].ok === 10 && s.ps[${JSON.stringify(ps.id)}].c === ${ps.e.c};`, 3000), "the saved set takes the new answers and keeps its expiry");
+  await click("#smdPrep [data-act=donerun]");
+  // expiry: 7 days on, the set is purged on load and gone from home
+  await ev(`var s = PREP._st.store, id = Object.keys(s.ps)[0]; s.ps[id].x = Date.now() - 1; localStorage.setItem("smd_prep_v1", JSON.stringify(s)); return 1;`);
+  await ev(`PREP.close(); PREP._st.store = null; return 1;`);
+  await ev(`PREP.open(); return 1;`);
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=custom]');`, 5000) && await ev(`return !document.querySelector("#smdPrep #pnSets") && Object.keys(PREP._st.store.ps).length === 0;`) === true, "an expired set is purged on load and leaves home");
 
   // ---- Layer C: a PDF with two pictures
   await ev(`PREP_C.cfg.gap = 0; window.SMD_AUTH = { currentUser: { uid: "u-test", getIdToken: function () { return Promise.resolve("test-token"); } } }; return 1;`);
