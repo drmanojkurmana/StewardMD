@@ -20,6 +20,12 @@
 .pn-root .pk-back { transform: perspective(1400px) rotateY(180deg); }
 .pn-root .pk-flip.on .pk-front { transform: perspective(1400px) rotateY(-180deg); }
 .pn-root .pk-flip.on .pk-back { transform: perspective(1400px) rotateY(0deg); }
+/* The face turned away also goes transparent at the half-way point (edge on), because some WebKit builds paint a
+   rotated face through backface-visibility (seen mirrored over the front). Opacity, not visibility: the back takes focus
+   the moment the card turns. */
+.pn-root .pk-flip .pk-face { transition: transform var(--pn-d-enter) var(--pn-ease), opacity 0s linear calc(var(--pn-d-enter) / 2); }
+.pn-root .pk-flip .pk-back, .pn-root .pk-flip.on .pk-front { opacity: 0; }
+.pn-root .pk-flip.on .pk-back { opacity: 1; }
 .pn-root .pk-card.kb .pk-face, .pn-root .pk-card.kb .pk-gap-t, .pn-root .pk-card.kb .pk-box { transition: none; }
 .pn-root .pk-face:focus, .pn-root .pk-bk-w:focus { outline: none; }
 
@@ -90,7 +96,7 @@ body.dark .pn-root .pk-occ img { filter: brightness(.94); }
 
 @media (prefers-reduced-motion: reduce) {
   /* No turning, no sliding: the faces cross-fade and a graded card is simply replaced. */
-  .pn-root .pk-face { transform: none !important; transition: opacity var(--pn-d-press) ease; }
+  .pn-root .pk-face, .pn-root .pk-flip .pk-face { transform: none !important; transition: opacity var(--pn-d-press) ease; }
   .pn-root .pk-flip .pk-back, .pn-root .pk-flip.on .pk-front { opacity: 0; }
   .pn-root .pk-flip.on .pk-back { opacity: 1; }
   .pn-root .pk-card, .pn-root .pk-g { transition: none; }

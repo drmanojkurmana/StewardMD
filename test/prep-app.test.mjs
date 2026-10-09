@@ -114,7 +114,9 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
   assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
   assert.match(read("prep.js"), /medicine: \["medcov3"\], "ss-pulmonology": \["medcov3"\]/);
-  assert.match(read("prep.js"), /radiology: \["radnotes", "radmax3"\]/, "radiology reads radnotes and the radmax3 release");
+  assert.match(read("prep.js"), /radiology: \["radnotes2", "radmax4"\]/, "radiology reads the radnotes2 and radmax4 releases");
+  assert.deepEqual(P.oldOverlays("radnotes2"), ["radnotes"], "radnotes2 replaces cached radnotes copies");
+  assert.deepEqual(P.oldOverlays("radmax4"), ["radmax", "radmax2", "radmax3"], "radmax4 replaces cached radmax to radmax3 copies");
   assert.deepEqual(P.oldOverlays("radmax3"), ["radmax", "radmax2"], "radmax3 replaces cached radmax and radmax2 copies");
   assert.deepEqual(P.oldOverlays("radmax"), []);
   assert.deepEqual(P.oldOverlays("radmax2"), ["radmax"], "radmax2 replaces cached radmax copies");
