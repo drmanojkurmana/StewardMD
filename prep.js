@@ -418,7 +418,7 @@
     s.cel = { day: day, keys: keys.slice(-200) };
     return s.cel;
   }
-  var PURE = { buildSearch: buildSearch, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
+  var PURE = { buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
@@ -528,12 +528,12 @@
       }, function (e) { if (hit) return (st.mem[p] = hit.items); throw e; });
     });
   }
-  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes and licensed review books, sets "radnotes" and "radmax3"; new
+  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes and licensed review books, sets "radnotes2" and "radmax4"; new
      Medicine questions for topics the bank covered thinly, set "medcov"), at overlay/<set>/<subject>/<module>.json
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
-     goes to a new folder (medcov3 and radmax3 now; the earlier folders' copies are removed) and the folder named here moves with it.
+     goes to a new folder (medcov3, radnotes2 and radmax4 now; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes", "radmax3"], medicine: ["medcov3"], "ss-pulmonology": ["medcov3"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes2", "radmax4"], medicine: ["medcov3"], "ss-pulmonology": ["medcov3"] };
   // Earlier releases of a set (medcov3 -> medcov, medcov2), whose cached copies a new release replaces.
   function oldOverlays(set) { var m = /^(.*?[a-z])(\d+)$/.exec(set), out = []; if (!m || +m[2] < 2) return out; out.push(m[1]); for (var k = 2; k < +m[2]; k++) out.push(m[1] + k); return out; }
   function loadOverlay(sid, mid, miss) {
@@ -581,12 +581,22 @@
   function hidden() { var h = load().hid; return (h && h.ids) || {}; }
 
   // Subject search index (search.json, built with the bank): fetched on the first search, cached like module files.
+  // The subject index may name the file (search: "search-<hash>.json", a rebuilt index under a new immutable name, e.g. with
+  // the overlay sets' items), so a phone that cached the older search.json fetches the new one; no name: search.json.
+  function searchFile(ix) { var n = ix && ix.search; return typeof n === "string" && /^search-[0-9a-f]{8}\.json$/.test(n) ? n : "search.json"; }
   function loadSearch(sid) {
-    var p = bvOf(sid) + "/" + sid + "/search.json";
+    return loadIndex(sid).then(function (ix) { return loadSearchAt(sid, bvOf(sid) + "/" + sid + "/" + searchFile(ix)); });
+  }
+  function loadSearchAt(sid, p) {
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
     return cacheGet(p).then(function (hit) {
       if (hit && hit.sx) return (st.mem[p] = hit.sx);
-      return getJSON(API + p).then(function (sx) { st.mem[p] = sx; cachePut(p, { sx: sx, ts: Date.now() }); return sx; }, function (e) {
+      return getJSON(API + p).then(function (sx) {
+        st.mem[p] = sx; cachePut(p, { sx: sx, ts: Date.now() });
+        // a named index replaces the subject's plain search.json, whose cached copy is dropped
+        if (!/\/search\.json$/.test(p)) cacheDel(p.replace(/[^/]+$/, "search.json"));
+        return sx;
+      }, function (e) {
         // No search.json for this bank (ss-radiology v6 to v10 shipped without one): build the same index here from the
         // subject's module files (cached like any opened module). Kept for the session only, so a published file wins later.
         if (!e || e.status !== 404) throw e;

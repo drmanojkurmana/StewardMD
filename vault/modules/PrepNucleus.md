@@ -1022,3 +1022,38 @@ best way of learning."
   once (KB v2 #1414 grew breast_cancer.json past the 1,400-word cut). Node 22 (CI): server mocks in
   prep-nudges.test.mjs moved above the first test (a mock.module made while a test runs is undone with it); the sprint
   assertion only applies in IST. run-prep-ask-ui waits for the sheet's open animation before measuring.
+
+## Release-readiness round 2 (2026-10-10, branch `fix/prep-ready2`, prep46)
+- **Image items no longer give the answer away.** All 137 live image items (ss-radiology bank, overlay sets radnotes and
+  radmax3) were read with their images (OCR plus a visual pass). 47 stems were rewritten so they keep the clinical
+  context but no longer name or describe the answer finding (answer keys, options and explanations untouched; reviewed
+  stems kept privately in `~/prep-data/rad/ready2/stem-edits.json`, not in git). Two radnotes figures had the answer
+  burned in ("Acute SDH", "Target sign"): cleaned copies `img/radnotes/rn-n2-p090-3-nl.webp`, `rn-n2-p057-2-nl.webp`.
+  Image file names carried the diagnosis (`rad-moyamoya-pmc...webp`): ss-radiology **bank v11** = v10 with stems
+  edited and every image and scroll stack copied to neutral names (`v11/ss-radiology/img/i-<sha1 12>.webp`,
+  `stack/s-<sha1 8>/`). Radiology overlays move to **radnotes2** and **radmax4** (bare image names written out in full,
+  because the app resolves a bare name against `img/<set folder>/`). Tool: `tools/prep-item-edits.mjs`.
+- **Search covers overlay items.** Subject `search.json` files were built from the bank only, so radnotes, radmax and
+  medcov questions never matched. Rebuilt with overlay items (Radiology 3,963 -> 5,218 entries, Medicine +381,
+  ss-pulmonology +5) and published as `v5/<subject>/search-<sha256 8>.json`; the bundled subject `index.json` names it
+  (`search`), `prep.js searchFile` reads it (no name: `search.json`), the route accepts the name, and the old cached
+  copy is dropped. ss-radiology v11 ships its own `search.json`; no app path reads a v10/v11 manifest (a v11
+  manifest is on R2 anyway).
+- **Run-together words.** `tools/prep-spacing.mjs` (spaces only, both halves must be known words; brands, eponyms,
+  prefixes, ratios and units left alone; run-in statement lists "colourc) Gas" get their label space back). Applied to
+  bank v5 `exp`, `q` and `o`: 26,548 items in 887 module files (24,255 explanations, 2,372 stems, 88 option sets),
+  republished in place; `manifest.json` bytes changed for every touched subject so phones refetch cached modules.
+- **Flip cards.** WebKit painted the turned-away face mirrored through `backface-visibility`; faces now also go
+  transparent at the half-way point (opacity, so the back can take focus at once). Not yet seen on a real iPhone.
+- **Harness note.** The round-1 "app.js:19 TypeError" is the helper removing `#accountGate` before DOMContentLoaded,
+  not an app bug (the journey harness, which waits for load, sees no error).
+- **Lesson figures cut at the source.** Crack the Core (620 live figures) and radbook (581) lesson media checked for ink
+  or text touching the crop edge. 163 re-cropped from the private PDFs with a margin and shipped under new names
+  (`rb-ctc-<id>-m1.webp`, 4 at `-m2`, 10 radbook `-m1`), e.g. `rb-ctc-p0127-1-m1.webp` now reads "Pars Nervosa" and
+  "Jugular Spine". 133 changed lessons moved to a new revision path (`r` 3 or 4 in `v1/lessons/index.json`, files at
+  `v<r>/lessons/<key>.json`; a lesson file is cached for good under its path), spot-the-sign boxes remapped into the
+  new crops. Left: 142 drawings whose strokes run into the next drawing, 20 where the label sits under the scan's OCR
+  text, 9 still partly cut, notes 1 not checked (its PDF is not on this Mac). In 6 interactions the full printed label
+  the student must find is now visible (ctcbook-100001 s3, -150101 s1, -450501 s4, -600650 s0, radbook-141315 s2): owner
+  to decide. `tools/prep-ctc-figs.py grow_box` adds the margin on future runs; `tools/prep-radlx.mjs indexWith` keeps a
+  later revision. The radnotes and radmax cutters were not changed.

@@ -126,6 +126,10 @@ body.dark .pn-root .pn-ix-stage img, body.dark .pn-root .pn-cmp-cell img { filte
 .pn-root .pn-flip { display: block; min-height: 132px; padding: 0; border: 0; background: none; perspective: 1000px; text-align: left; color: var(--pn-text); }
 .pn-root .pn-flip-in { position: relative; display: grid; height: 100%; min-height: 132px; transform-style: preserve-3d; transition: transform 460ms var(--pn-ease); }
 .pn-root .pn-flip.on .pn-flip-in { transform: rotateY(180deg); }
+/* The face turned away goes transparent at the half-way point too (some WebKit builds paint it through backface-visibility). */
+.pn-root .pn-flip-f, .pn-root .pn-flip-b { transition: opacity 0s linear 230ms; }
+.pn-root .pn-flip-b, .pn-root .pn-flip.on .pn-flip-f { opacity: 0; }
+.pn-root .pn-flip.on .pn-flip-b { opacity: 1; }
 .pn-root .pn-flip:active .pn-flip-in { scale: .98; }
 .pn-root .pn-flip-f, .pn-root .pn-flip-b { grid-area: 1 / 1; display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: var(--pn-r-lg); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 .pn-root .pn-flip-f { justify-content: space-between; background: var(--pn-hero); color: var(--pn-hero-ink); box-shadow: var(--pn-sh-hero); }
