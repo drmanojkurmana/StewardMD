@@ -110,7 +110,7 @@ try {
 
   const act = async (js, re, label) => { await ev(`window.__sent = []; ${js}; return 1;`); await sleep(500); const s = await sent(); ok(s.some((x) => re.test(x)), label + " " + JSON.stringify(s.filter((x) => x.indexOf("POST") === 0))); };
   await act(`document.querySelector('#ucDetail [data-uv="approve"]').click()`, /POST \/api\/verifications\/approve \{"uid":"u-pend","regNo":"100286"\}/, "Approve calls the verification approve with the number read");
-  await act(`document.querySelector('#ucDetail [data-ua="disable"]').click()`, /POST \/api\/ai\/admin\/user-action \{"email":"sravani\.ysn@gmail\.com","action":"disable"\}/, "Deactivate sign-in");
+  await act(`document.querySelector('#ucDetail [data-ua="disable"]').click()`, /POST \/api\/ai\/admin\/user-action \{"uid":"u-pend","email":"sravani\.ysn@gmail\.com","action":"disable"\}/, "Deactivate sign-in");
   await act(`document.getElementById("ucTier").value="ultimate"; document.getElementById("ucDur").value="forever"; document.getElementById("ucGive").click()`, /POST \/api\/entitlements\/admin\/set-plan \{"uid":"u-pend","tier":"ultimate","forever":true\}/, "Give plan: Ultimate with no end date");
   await act(`var s=document.querySelector('#ucDetail [data-ff="scribe_dictation"]'); s.value="off"; s.dispatchEvent(new Event("change"))`, /set-flag \{"uid":"u-pend","feature":"scribe_dictation","enabled":false\}/, "Turn a feature off for this account");
   await act(`var i=document.querySelector('#ucDetail [data-ul="maik"]'); i.value="20"; i.dispatchEvent(new Event("change"))`, /user-limit \{"email":"sravani\.ysn@gmail\.com","module":"maik","limit":20\}/, "Set this account's MaiK daily limit");
