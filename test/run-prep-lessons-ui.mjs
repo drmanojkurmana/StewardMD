@@ -170,23 +170,22 @@ try {
   ok(await until(`var i=document.querySelector("#smdPrep .pn-vimg img"); return !!i && i.complete && i.naturalWidth>0;`, 5000), "step 5 shows the diagram image (loaded)");
   await shot("step5-image");
   await click("#smdPrep [data-act=l-zoom]");
-  ok(await until(`return !!document.querySelector("#smdPrep .pn-zoom img");`, 2000), "tap enlarges the image");
-  ok(await ev(`return document.activeElement && document.activeElement.getAttribute("data-act")==="l-unzoom";`) === true, "focus moves to Close");
-  await click("#smdPrep .pn-zoom-b");
-  ok(await ev(`var b=document.querySelector("#smdPrep .pn-zoom-b"); return b.classList.contains("big") && b.getAttribute("aria-pressed")==="true";`) === true, "tapping the enlarged image zooms further (a button, so keys work too)");
-  ok(await ev(`return /scale\\(2\\.2/.test(document.querySelector("#smdPrep .pn-zoom-b img").style.transform);`) === true, "the tap zooms the picture 2.2x (transform)");
-  // a two-finger pinch out takes the picture past 3x
-  await ev(`var sc=document.querySelector("#smdPrep .pn-zoom-sc"), r=sc.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, o={bubbles:true,pointerType:"touch"};
-    sc.dispatchEvent(new PointerEvent("pointerdown",Object.assign({pointerId:11,clientX:cx-40,clientY:cy},o)));
-    sc.dispatchEvent(new PointerEvent("pointerdown",Object.assign({pointerId:12,clientX:cx+40,clientY:cy},o)));
-    sc.dispatchEvent(new PointerEvent("pointermove",Object.assign({pointerId:11,clientX:cx-70,clientY:cy},o)));
-    sc.dispatchEvent(new PointerEvent("pointermove",Object.assign({pointerId:12,clientX:cx+70,clientY:cy},o)));
-    sc.dispatchEvent(new PointerEvent("pointerup",Object.assign({pointerId:11,clientX:cx-70,clientY:cy},o)));
-    sc.dispatchEvent(new PointerEvent("pointerup",Object.assign({pointerId:12,clientX:cx+70,clientY:cy},o))); return 1;`);
-  ok(await ev(`var m=/scale\\(([\\d.]+)\\)/.exec(document.querySelector("#smdPrep .pn-zoom-b img").style.transform); return !!m && +m[1] > 3 && +m[1] <= 4;`) === true, "pinch zooms further, up to 4x");
+  // The lesson's enlarged image opens in the shared viewer (prep-viewer.js; gestures in test/run-prep-feel-ui.mjs).
+  ok(await until(`var i=document.querySelector(".pv .pv-img"), f=document.querySelector("#smdPrep .pn-vimg img"); return !!(i && f && i.src === f.src);`, 2000), "tap enlarges the image in the shared viewer");
+  ok(await ev(`return document.activeElement && document.activeElement.classList.contains("pv-x");`) === true, "focus moves to Close");
+  await sleep(300);
+  // a two-finger pinch out (60 px to 180 px apart) takes the picture to about 3x
+  await ev(`var sc=document.querySelector(".pv-stage"), r=sc.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, o={bubbles:true,pointerType:"touch"};
+    sc.dispatchEvent(new PointerEvent("pointerdown",Object.assign({pointerId:11,clientX:cx-30,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointerdown",Object.assign({pointerId:12,clientX:cx+30,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointermove",Object.assign({pointerId:11,clientX:cx-90,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointermove",Object.assign({pointerId:12,clientX:cx+90,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointerup",Object.assign({pointerId:11,clientX:cx-90,clientY:cy},o)));
+    sc.dispatchEvent(new PointerEvent("pointerup",Object.assign({pointerId:12,clientX:cx+90,clientY:cy},o))); return 1;`);
+  ok(await ev(`var s=PREP_VIEWER._state(); return !!s && s.s > 2.5 && s.s <= 5;`) === true, "pinch zooms (1x to 5x)");
   await shot("step5-zoom");
   await ev(`PREP.back(); return 1;`);
-  ok(await ev(`return !document.querySelector("#smdPrep .pn-zoom") && /Step 5 of 8/.test(document.querySelector("#smdPrep .pn-t p").textContent);`) === true, "back() closes the enlarged image first and stays on the step");
+  ok(await until(`return !document.querySelector(".pv") && !document.querySelector("#smdPrep .pn-zoom");`, 2000) && /Step 5 of 8/.test(await ev(`return document.querySelector("#smdPrep .pn-t p").textContent;`)), "back() closes the enlarged image first and stays on the step");
 
   // ---- leaving stops the voice; progress resumes
   await click("#smdPrep [data-act=l-play]");
