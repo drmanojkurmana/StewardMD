@@ -1,12 +1,13 @@
 /* MaiK AI mark: the icon on every "Ask MaiK" button, chip and entry point. window.SMD_MAIK_MARK. ES5.
    The artwork lives in ONE file, /assets/maik-ai-mark.svg (mkai-full with the teal "AI", mkai-mark without it for
-   small sizes, mkai-tile on the dark teal app-icon tile, mkai-tile-mark the tile without "AI"). This helper injects that file once as a
+   small sizes, mkai-tile on the dark teal app-icon tile). This helper injects that file once as a
    hidden inline sprite and hands out <svg><use href="#mkai-..."/></svg> markup, so replacing the SVG file replaces the
    icon everywhere. It is NOT used for the MaiK logo inside the main MaiK assistant, nor for the MaiKnowledge footer
    logo; those stay as they are (owner, 2026-10-09). vault/modules/MaiK.md, "MaiK AI mark".
 
-   html(variant, opts) -> markup. variant: "auto" (default: "mark" under 28 px, else "full"), "full", "mark", "tile"
-   (under 40 px it becomes "tile-mark", the tile without "AI", which is unreadable that small).
+   html(variant, opts) -> markup. variant: "auto" (default: "mark" under 28 px, else "full"), "full", "mark", "tile".
+   Owner review (2026-10-10): the plain mark is approved only at small sizes, so "full", "mark" and "auto" above
+   48 px render the tile; "tile-mark" (its symbol was removed) is kept as an alias of "tile".
    opts: { size: px (default 20), cls: extra class names, color: CSS colour for the mark (default currentColor),
    title: accessible name (default none: decorative) }.
    The M and the star use currentColor, the "AI" uses --mkai-accent (default #2fb3a6), the tile has fixed colours.
@@ -14,17 +15,19 @@
    The "MaiK" wordmark (owner, 2026-10-10): in every "Ask MaiK" label the word MaiK is drawn in the lettering of the
    owner's MaiK AI artwork (symbol mkai-word); "Ask" and the rest stay in the app's font.
    label(text) -> text with each standalone "MaiK" (not "MaiKnowledge") as word(); text must already be HTML-safe.
+   A plain space before it becomes &nbsp;, so "Ask MaiK" never breaks across lines.
    The result is one inline span, so a flex button still sees one label. word() -> the wordmark: an svg sized in em
-   (cap height 0.71 em, baseline on the text baseline) plus the real text "MaiK", visually hidden once the sprite is
+   (cap height 0.73 em, baseline on the text baseline) plus the real text "MaiK", visually hidden once the sprite is
    in, so screen readers, find and copy still get "Ask MaiK". Until the sprite loads (or if it never does) the text
    shows and the svg is hidden: never an empty gap. */
 (function (G) {
   "use strict";
-  var URL = "/assets/maik-ai-mark.svg?v=mkai4", SPRITE_ID = "mkaiSprite", VARIANTS = { full: 1, mark: 1, tile: 1, "tile-mark": 1 };
+  var URL = "/assets/maik-ai-mark.svg?v=mkai6", SPRITE_ID = "mkaiSprite", VARIANTS = { full: 1, mark: 1, tile: 1 }, PLAIN_MAX = 48;
   function variantFor(v, size) {
-    if (v === "tile" && (size || 20) < 40) return "tile-mark";
+    size = size || 20;
+    if (v === "tile" || v === "tile-mark" || size > PLAIN_MAX) return "tile";
     if (VARIANTS[v]) return v;
-    return (size || 20) < 28 ? "mark" : "full";
+    return size < 28 ? "mark" : "full";
   }
   function escAttr(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function html(variant, opts) {
@@ -38,7 +41,7 @@
     return '<span class="mkai-w"><svg class="mkai-word" aria-hidden="true" focusable="false"><use href="#mkai-word"></use></svg><span class="mkai-wt">MaiK</span></span>';
   }
   function label(text) {
-    return '<span class="mkai-l">' + String(text == null ? "" : text).replace(/(^|[^A-Za-z0-9])MaiK(?![A-Za-z0-9])/g, function (m, pre) { return pre + word(); }) + "</span>";
+    return '<span class="mkai-l">' + String(text == null ? "" : text).replace(/(^|[^A-Za-z0-9])MaiK(?![A-Za-z0-9])/g, function (m, pre) { return (pre === " " ? "&nbsp;" : pre) + word(); }) + "</span>";
   }
   var PURE = { html: html, variantFor: variantFor, word: word, label: label, URL: URL };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
@@ -87,10 +90,11 @@
     s.textContent = ".mkai{display:inline-block;flex:0 0 auto;vertical-align:middle;overflow:visible;stroke:none!important}" +
       ":root{--mkai-accent:#1f9e92}body.dark,body.v3-dark{--mkai-accent:#4fd6c6}" +
       // The wordmark: sized in em with !important, because icon rules elsewhere size every svg inside a button.
-      // 0.75 em tall (the symbol's viewBox is fitted to the word, i dot to baseline) puts its cap height near the app
-      // font's; the round letters' overshoot sits just under the baseline, hence the small negative vertical-align.
+      // mkai-word's viewBox runs from the i dot (top) to just under the baseline: the M is 97% of its height and the
+      // bottom 1.5% is the round letters' overshoot. 0.75 em tall gives a 0.73 em capital, the app font's cap height,
+      // and the small negative vertical-align puts the M on the text baseline. Width from the viewBox (2602 / 783).
       ".mkai-w{white-space:nowrap}" +
-      "svg.mkai-word{display:none;width:calc(.75em * var(--mkai-wr,3.4))!important;height:.75em!important;min-width:0!important;margin:0!important;padding:0!important;vertical-align:-.016em!important;overflow:visible;stroke:none!important;flex:none}" +
+      "svg.mkai-word{display:none;width:calc(.75em * var(--mkai-wr,3.323))!important;height:.75em!important;min-width:0!important;margin:0!important;padding:0!important;vertical-align:-.012em!important;overflow:visible;stroke:none!important;flex:none}" +
       "html.mkai-wok svg.mkai-word{display:inline-block}" +
       "html.mkai-wok .mkai-wt{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}";
     (D.head || D.documentElement).appendChild(s);

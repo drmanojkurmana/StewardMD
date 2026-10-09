@@ -180,9 +180,16 @@ test("maik-ai-mark: variants, the size rule, decorative by default, escaped opti
   assert.equal(M.variantFor("auto", 20), "mark");
   assert.equal(M.variantFor("auto", 27), "mark");
   assert.equal(M.variantFor("auto", 28), "full");
-  assert.equal(M.variantFor(undefined, 64), "full");
-  assert.equal(M.variantFor("tile", 34), "tile-mark");
-  assert.equal(M.variantFor("tile", 40), "tile");
+  assert.equal(M.variantFor("auto", 48), "full");
+  // owner review 2026-10-10: no plain mark above 48 px (the tile instead); tile-mark is an alias of the tile
+  assert.equal(M.variantFor(undefined, 64), "tile");
+  assert.equal(M.variantFor("full", 49), "tile");
+  assert.equal(M.variantFor("mark", 140), "tile");
+  assert.equal(M.variantFor("tile", 34), "tile");
+  assert.equal(M.variantFor("tile-mark", 34), "tile");
+  assert.equal(M.variantFor("tile-mark", 140), "tile");
+  assert.equal(M.variantFor("tile", 140), "tile");
+  assert.match(M.html("full", { size: 140 }), /class="mkai mkai-tile"[^>]*><use href="#mkai-tile">/);
   assert.equal(M.variantFor("full", 16), "full", "an explicit variant is kept");
   const h = M.html("mark", { size: 18, cls: "x" });
   assert.match(h, /^<svg class="mkai mkai-mark x" viewBox="0 0 100 100" width="18" height="18" aria-hidden="true" focusable="false"><use href="#mkai-mark"><\/use><\/svg>$/);
@@ -193,12 +200,13 @@ test("maik-ai-mark: variants, the size rule, decorative by default, escaped opti
 
 test("assets/maik-ai-mark.svg: the symbols, inline fills, nothing external or raster", () => {
   const svg = readFileSync(join(ROOT, "assets/maik-ai-mark.svg"), "utf8");
-  for (const id of ["mkai-m", "mkai-full", "mkai-mark", "mkai-tile", "mkai-tile-mark", "mkai-tile-bg-s"]) assert.match(svg, new RegExp('<symbol id="' + id + '" viewBox="0 0 100 100"'), id);
-  assert.match(svg, /<symbol id="mkai-word" viewBox="0 0 [\d.]+ [\d.]+"/, "the MaiK wordmark symbol, its viewBox fitted to the word");
+  for (const id of ["mkai-m", "mkai-full", "mkai-mark", "mkai-tile", "mkai-tile-bg-s"]) assert.match(svg, new RegExp('<symbol id="' + id + '" viewBox="0 0 100 100"'), id);
+  assert.match(svg, /<symbol id="mkai-word" viewBox="-?[\d.]+ -?[\d.]+ [\d.]+ [\d.]+"/, "the MaiK wordmark symbol, its viewBox fitted to the word");
+  assert.doesNotMatch(svg, /id="mkai-tile-mark"/, "the tile-mark symbol was removed (owner review 2026-10-10)");
   assert.doesNotMatch(svg, /<script|<image|<foreignObject|href="(?!#)/i);
   assert.doesNotMatch(svg, /\sfill="/, "fills are inline styles so page icon CSS cannot repaint the mark");
-  assert.match(svg, /var\(--mkai-accent/);
-  assert.ok(svg.length < 14000, "small: " + svg.length);
+  assert.doesNotMatch(svg, /<use href="#mkai-ai"/, "owner removed the small AI from the mark (2026-10-10)");
+  assert.ok(svg.length < 40000, "small (traced owner artwork): " + svg.length);
   const js = readFileSync(join(ROOT, "maik-ai-mark.js"), "utf8");
   assert.match(js, /\/assets\/maik-ai-mark\.svg\?v=/);
   assert.doesNotMatch(js, /=>|`|\blet\s|\bconst\s|^\s*class\s/m, "ES5");
@@ -210,13 +218,13 @@ test("assets/maik-ai-mark.svg: the symbols, inline fills, nothing external or ra
 test("maik-ai-mark: the MaiK wordmark in Ask MaiK labels; text stays for screen readers; MaiKnowledge untouched", () => {
   const w = M.word();
   assert.equal(w, '<span class="mkai-w"><svg class="mkai-word" aria-hidden="true" focusable="false"><use href="#mkai-word"></use></svg><span class="mkai-wt">MaiK</span></span>');
-  assert.equal(M.label("Ask MaiK"), '<span class="mkai-l">Ask ' + w + "</span>");
-  assert.equal(M.label("Why is B wrong? Ask MaiK"), '<span class="mkai-l">Why is B wrong? Ask ' + w + "</span>");
+  assert.equal(M.label("Ask MaiK"), '<span class="mkai-l">Ask&nbsp;' + w + "</span>");
+  assert.equal(M.label("Why is B wrong? Ask MaiK"), '<span class="mkai-l">Why is B wrong? Ask&nbsp;' + w + "</span>");
   assert.equal(M.label("MaiK से पूछें"), '<span class="mkai-l">' + w + " से पूछें</span>", "the Hindi label too");
   assert.equal(M.label("Open MaiKnowledge"), '<span class="mkai-l">Open MaiKnowledge</span>', "only the standalone word");
-  assert.equal(M.label('Ask MaiK about &quot;x&quot;'), '<span class="mkai-l">Ask ' + w + ' about &quot;x&quot;</span>', "escaped text stays escaped");
+  assert.equal(M.label('Ask MaiK about &quot;x&quot;'), '<span class="mkai-l">Ask&nbsp;' + w + ' about &quot;x&quot;</span>', "escaped text stays escaped");
   // the text without tags reads "Ask MaiK ..." for screen readers, find and copy
-  assert.equal(M.label("Ask MaiK about this card").replace(/<[^>]+>/g, ""), "Ask MaiK about this card");
+  assert.equal(M.label("Ask MaiK about this card").replace(/<[^>]+>/g, ""), "Ask&nbsp;MaiK about this card", "Ask and MaiK kept together");
   const js = readFileSync(join(ROOT, "maik-ai-mark.js"), "utf8");
   assert.match(js, /html\.mkai-wok svg\.mkai-word\{display:inline-block\}/, "the wordmark shows only once the sprite holds mkai-word");
   assert.match(js, /svg\.mkai-word\{display:none;width:calc\(\.75em \* var\(--mkai-wr,[\d.]+\)\)!important;height:\.75em!important/, "em-sized, so it follows the label's font size; width from the symbol's viewBox");

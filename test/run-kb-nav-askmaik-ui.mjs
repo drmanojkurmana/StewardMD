@@ -67,7 +67,7 @@ try {
   ok(await waitFor(`document.querySelector("#dxMgmt.dx-reader.on .dx-mgmt-name")`), "tapping a page opens its Knowledge reader");
   ok(!(await ev(`return !!document.getElementById("maikSheet") && document.getElementById("maikSheet").classList.contains("on")`)), "MaiK closed in front of the reader");
   const ask = await ev(`var a=document.querySelector("#dxMgmt .dx-reader-askmaik"); if(!a) return null; var r=a.getBoundingClientRect(); return { h: parseFloat(getComputedStyle(a).minHeight), w: Math.round(r.width), label: a.getAttribute("aria-label"), text: a.innerText.trim(), name: document.querySelector("#dxMgmt .dx-mgmt-name").innerText.trim() };`);
-  ok(ask && ask.text === "Ask MaiK" && ask.h >= 44 && ask.w >= 44, `reader shows "Ask MaiK" (${ask && ask.w}x${ask && ask.h})`);
+  ok(ask && ask.text.replace(/\s+/g, " ") === "Ask MaiK" && ask.h >= 44 && ask.w >= 44, `reader shows "Ask MaiK" (${ask && ask.w}x${ask && ask.h})`);
   ok(ask && /^Ask MaiK about /.test(ask.label || ""), "with an aria label naming the disease");
   await shot("2-reader-askmaik");
 
