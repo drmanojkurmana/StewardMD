@@ -66,7 +66,8 @@ const BOOT = `
       var p = new URL(u, location.origin).searchParams, f = p.get("filter"), q = (p.get("q") || "").toLowerCase();
       var list = USERS.filter(function (x) { return (f === "all" || !f || (f === "pending" && x.status === "pending")) && (!q || (x.email + x.name + x.phone).toLowerCase().indexOf(q) >= 0); });
       body = { ok: true, days: +p.get("days"), counts: { total: 2, today: 1, week: 2 }, users: list };
-    } else if (u.indexOf("/api/ai/admin/user-detail") === 0) body = DETAIL;
+    } else if (u.indexOf("/api/ai/admin/user-detail") === 0) body = window.__detailErr ? Object.assign({}, DETAIL, { profile: {}, errors: { profile: "fs_get 403" } }) : DETAIL;
+    else if (u.indexOf("/api/entitlements/admin/set-budget") === 0 && window.__failBudget) return Promise.resolve(new Response(JSON.stringify({ ok: false, error: "fs_commit", status: 403, detail: "PERMISSION_DENIED: Missing or insufficient permissions." }), { status: 500, headers: { "Content-Type": "application/json" } }));
     return Promise.resolve(new Response(JSON.stringify(body), { status: 200, headers: { "Content-Type": "application/json" } }));
   };
   window.confirm = function () { return true; };
@@ -114,6 +115,14 @@ try {
   await act(`var s=document.querySelector('#ucDetail [data-ff="scribe_dictation"]'); s.value="off"; s.dispatchEvent(new Event("change"))`, /set-flag \{"uid":"u-pend","feature":"scribe_dictation","enabled":false\}/, "Turn a feature off for this account");
   await act(`var i=document.querySelector('#ucDetail [data-ul="maik"]'); i.value="20"; i.dispatchEvent(new Event("change"))`, /user-limit \{"email":"sravani\.ysn@gmail\.com","module":"maik","limit":20\}/, "Set this account's MaiK daily limit");
   await act(`document.getElementById("ucBudget").value="80000"; document.getElementById("ucBudgetSave").click()`, /set-budget \{"uid":"u-pend","tokens":80000\}/, "Set this account's monthly AI budget");
+  // A failed change says WHY (owner, 2026-10-09: the pane showed only "Failed: 500").
+  await ev(`window.__failBudget = true; document.getElementById("ucBudget").value="5000"; document.getElementById("ucBudgetSave").click(); return 1;`); await sleep(500);
+  const fm = await ev(`return document.getElementById("ucActMsg").textContent`);
+  ok(/fs_commit/.test(fm) && /403/.test(fm) && /PERMISSION_DENIED/.test(fm), "a failed change shows the server's reason: " + fm);
+  // A part that could not be read is named, never shown as "not filled in".
+  await ev(`window.__detailErr = true; document.querySelector("#ucList .uc-row").click(); return 1;`); await sleep(600);
+  const dt = await ev(`return document.getElementById("ucDetail").innerText`);
+  ok(/Could not read: profile \(fs_get 403\)/.test(dt) && !/Profile not filled in yet/.test(dt), "an unreadable profile is reported, not shown as empty");
   ok(!/—/.test(await ev(`return document.getElementById("pane-userctl").innerText`)), "no em dash on the pane");
   await ev(`document.querySelector("#ucDetail .uc-sec:nth-of-type(3)").scrollIntoView(); return 1;`); await sleep(200);
   await call("Page.captureScreenshot", { format: "png" }).then(async (r) => { const { writeFile } = await import("node:fs/promises"); await writeFile((process.env.OUT || "/tmp") + "/userctl.png", Buffer.from(r.result.data, "base64")); });

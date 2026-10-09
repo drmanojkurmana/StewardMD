@@ -1388,7 +1388,7 @@
     }).catch(function(){ box.innerHTML='<div class="msg err">Failed to load the account.</div>'; });
   }
   function ucRender(d){
-    var a=d.account||{}, p=d.profile||{}, v=d.verification, pl=d.plan||{}, cl=d.claims||{};
+    var a=d.account||{}, p=d.profile||{}, v=d.verification, pl=d.plan||{}, cl=d.claims||{}, er=d.errors||{};
     var tel=String(a.phone||p.phone||"").replace(/[^0-9+]/g,"");
     var kv=function(rows){ return '<dl class="uc-kv">'+rows.filter(function(r){return r[1]!==""&&r[1]!=null;}).map(function(r){return '<dt>'+esc(r[0])+'</dt><dd>'+(r[2]?r[1]:esc(r[1]))+'</dd>';}).join("")+'</dl>'; };
     var h='<div class="uc-h"><div><h3>'+esc(a.name||p.name||a.email||a.uid)+'</h3><div class="hint" style="margin-top:4px">'+ucTags(a)+'</div></div><button class="ghost x" id="ucClose">Close</button></div>';
@@ -1430,7 +1430,9 @@
       '<tr><td><b>Total</b></td><td class="n"><b>'+tot.req+'</b></td><td class="n"><b>'+tot.tokens.toLocaleString()+'</b></td><td class="n"><b>Rs '+tot.cost.toFixed(2)+'</b></td></tr></tbody></table>'+
       '<div class="hint" style="margin-top:6px">Most used: '+esc(Object.keys(mods).sort(function(x,y){return mods[y]-mods[x];}).slice(0,4).map(function(k){return k+" ("+mods[k]+")";}).join(", "))+'</div>':'')+'</div>';
     // 7. Profile
-    h+='<div class="uc-sec"><b>Profile</b>'+(Object.keys(p).length?kv([["Name",p.name],["Mobile",p.phone],["Hospital",p.hospital],["Degree",p.degree],["Speciality",p.speciality],["City",[p.city,p.state].filter(Boolean).join(", ")],["Role",p.role],["Reg. number",p.regNo]]):'<div class="hint">Profile not filled in yet.</div>')+'</div>';
+    h+='<div class="uc-sec"><b>Profile</b>'+(er.profile?'<div class="hint">Could not read the profile ('+esc(er.profile)+').</div>':Object.keys(p).length?kv([["Name",p.name],["Mobile",p.phone],["Hospital",p.hospital],["Degree",p.degree],["Speciality",p.speciality],["City",[p.city,p.state].filter(Boolean).join(", ")],["Role",p.role],["Reg. number",p.regNo]]):'<div class="hint">Profile not filled in yet.</div>')+'</div>';
+    var ek=Object.keys(er);
+    if(ek.length) h='<div class="msg err" style="margin-bottom:10px">Could not read: '+esc(ek.map(function(k){return k+" ("+er[k]+")";}).join(", "))+'. What is shown for those parts may be incomplete.</div>'+h;
     h+='<div class="msg" id="ucActMsg"></div>';
     var box=$("ucDetail"); box.innerHTML=h;
     // wiring
@@ -1456,7 +1458,7 @@
     say("ucActMsg","","Saving…");
     return api(path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(x){
       var ok=x.s===200&&x.d&&x.d.ok!==false;
-      if(!ok){ say("ucActMsg","err",forbid(x,true)); return; }
+      if(!ok){ var dd=x.d||{}; say("ucActMsg","err",x.s===403?"Not an owner.":"Failed: "+(dd.error||("HTTP "+x.s))+(dd.status?" ("+dd.status+")":"")+(dd.detail?": "+String(dd.detail).slice(0,180):"")); return; }
       say("ucActMsg","ok",okText);
       if(!quiet&&ucCur){ ucOpen(ucCur); ucLoad(); }
     }).catch(function(){ say("ucActMsg","err","Failed."); });
