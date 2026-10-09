@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{["smd_prep_v1","smd_prep_setup","smd_prep_c_caps"].forEach(function(k){localStorage.removeItem(k);});}catch(e){} indexedDB.deleteDatabase("prep-gen"); indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!window.PREP_SETUP && !!document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');`, 20000), "prep-setup.js loads with PrepNucleus; the subject lists its modules");
-  ok(await ev(`return PREP_LOADER.V === "prep46" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
+  ok(await ev(`return PREP_LOADER.V === "prep47" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-subject][data-s=anatomy]');`, 5000), "the subject screen has Practise Anatomy");
 
   // ---- module: Practice opens the sheet

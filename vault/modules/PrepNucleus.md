@@ -1057,3 +1057,32 @@ best way of learning."
   the student must find is now visible (ctcbook-100001 s3, -150101 s1, -450501 s4, -600650 s0, radbook-141315 s2): owner
   to decide. `tools/prep-ctc-figs.py grow_box` adds the margin on future runs; `tools/prep-radlx.mjs indexWith` keeps a
   later revision. The radnotes and radmax cutters were not changed.
+
+## Quiet redesign (2026-10-10, branch `feat/prep-quiet-ui`, prep47)
+- Owner (iPhone screenshot, circled the glowing logo banner): "I don't want this glowing green, use dark green", plus the
+  full anti-AI-slop brief. Supersedes the look of Premium UI rounds 1 to 7 above (their behaviour notes still hold).
+- Tokens (prep.css `.pn-root` / `body.dark .pn-root`): dark bg `#071318`, card `#0D1D23`, s1 (elevated) `#12262D`,
+  s2 `#1B333B`, edge `#233840`, text `#F0F5F5`, mut `#9AAEB4`, accent `--pn-pri` `#42CDB5` (data, links, focus, meters
+  only); light bg `#F3F6F6`, card `#FFF`, s1 `#EDF2F2`, edge `#D8E1E3`, text `#0B1A1F`, mut `#4B5F66`, accent `#0E7C6B`.
+  One filled colour in both themes: `--pn-fill` `#0F5C52` (deep green, text `--pn-on-fill`), used by `.pn-btn.pri`, the
+  plan's Up next row, chosen chips, a selected option's letter. `--pn-pri-grad` is kept as an alias (solid), `--pn-glow`,
+  `--pn-aura`, `--pn-sh-hero` are `none`, `--pn-hero*` alias the card palette. Radii 4/8/10/12/16. `color-scheme` set.
+- Removed: painted sky (`.pn-sky`), brand banner (home), aurora, meteors/sparkles (`.pn-fx`), rotating light borders,
+  glass/backdrop blur, tile tilt and spotlight, gradient icon squircles (icons are neutral `--pn-s1` tiles), art on finish
+  cards, lobby, subject/module heads, hero bands (`hband` is a plain figure card), empty states, Pro, limit, plan and
+  readiness sheets, accuracy hero, battle VS (bolt flash hidden). Confetti and balloons are retired: `PREP_MOTION.confetti`
+  and `.balloons` are no-ops, `data-cele` stays as a marker and the milestone chip says it in words.
+- Header: `bar("PrepNucleus")` shows the mark at 24 px beside the name: `logo-icon-96.webp` (dark green) on light,
+  `logo-mark-dark-96.webp` (new, flat `#3DB8A4` recolour of the white mark) on dark (`.pn-lg-l` / `.pn-lg-d`).
+- Home order: readiness card (`heroHtml`: score/100 and days to the exam as figures, one accent bar, one line; no ring,
+  no chips), Today's plan with the first open task as the filled `.pl-upnext` row ("Up next"), Practise (Solve next, then
+  one grouped list; two columns inside the card from 700 px), Subjects (rows with a 3 px progress line; row cards from
+  700 px), Your progress (`PREP_PLAN.progressHtml`: streak, today, level + XP bar), the You group (My stats, Friends,
+  Accuracy, Settings), Compete, Pro. Section eyebrows (`.pn-eb`) are hidden except the date over Today's plan.
+- Scroll restore: home draws Solve next and the subject rows complete in the first paint when every index is cached
+  (`known` in `renderHome`), so a back to home lands where it was left (run-prep-feel-ui).
+- Motion left: screen slides, sheet spring, an 8 px rise of the feedback card with the haptic, meters filling once, the
+  readiness bar fill. No lift or shake on options, no counting numbers, no home stagger.
+- Tests changed on purpose: prep-app (no banner, the dark mark exists), run-prep-arena-ui (section order),
+  run-prep-ask-ui (no balloon layer), run-prep-ipad (list columns), run-prep-plan-ui ("Exam in 10 days").
+- Not changed: the "Share my progress" PNG (`drawCard` in prep-arena.js) still paints hero-dark and streak art.
