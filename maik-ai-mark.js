@@ -9,10 +9,18 @@
    (under 40 px it becomes "tile-mark", the tile without "AI", which is unreadable that small).
    opts: { size: px (default 20), cls: extra class names, color: CSS colour for the mark (default currentColor),
    title: accessible name (default none: decorative) }.
-   The M and the star use currentColor, the "AI" uses --mkai-accent (default #2fb3a6), the tile has fixed colours. */
+   The M and the star use currentColor, the "AI" uses --mkai-accent (default #2fb3a6), the tile has fixed colours.
+
+   The "MaiK" wordmark (owner, 2026-10-10): in every "Ask MaiK" label the word MaiK is drawn in the lettering of the
+   owner's MaiK AI artwork (symbol mkai-word); "Ask" and the rest stay in the app's font.
+   label(text) -> text with each standalone "MaiK" (not "MaiKnowledge") as word(); text must already be HTML-safe.
+   The result is one inline span, so a flex button still sees one label. word() -> the wordmark: an svg sized in em
+   (cap height 0.71 em, baseline on the text baseline) plus the real text "MaiK", visually hidden once the sprite is
+   in, so screen readers, find and copy still get "Ask MaiK". Until the sprite loads (or if it never does) the text
+   shows and the svg is hidden: never an empty gap. */
 (function (G) {
   "use strict";
-  var URL = "/assets/maik-ai-mark.svg?v=mkai2", SPRITE_ID = "mkaiSprite", VARIANTS = { full: 1, mark: 1, tile: 1, "tile-mark": 1 };
+  var URL = "/assets/maik-ai-mark.svg?v=mkai3", SPRITE_ID = "mkaiSprite", VARIANTS = { full: 1, mark: 1, tile: 1, "tile-mark": 1 };
   function variantFor(v, size) {
     if (v === "tile" && (size || 20) < 40) return "tile-mark";
     if (VARIANTS[v]) return v;
@@ -26,18 +34,24 @@
       (opts.color ? ' style="color:' + escAttr(opts.color) + '"' : "") +
       (title ? ' role="img" aria-label="' + title + '"' : ' aria-hidden="true"') + ' focusable="false"><use href="#mkai-' + v + '"></use></svg>';
   }
-  var PURE = { html: html, variantFor: variantFor, URL: URL };
+  function word() {
+    return '<span class="mkai-w"><svg class="mkai-word" viewBox="0 0 358 106" aria-hidden="true" focusable="false"><use href="#mkai-word"></use></svg><span class="mkai-wt">MaiK</span></span>';
+  }
+  function label(text) {
+    return '<span class="mkai-l">' + String(text == null ? "" : text).replace(/(^|[^A-Za-z0-9])MaiK(?![A-Za-z0-9])/g, function (m, pre) { return pre + word(); }) + "</span>";
+  }
+  var PURE = { html: html, variantFor: variantFor, word: word, label: label, URL: URL };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   var D = G.document, loading = null;
   /* ensure() -> Promise<bool>: the sprite is in the document. Kept off-screen at zero size, never display:none
      (a display:none sprite drops its gradients in Chrome). A failed fetch leaves the icons empty, never broken. */
   function ensure() {
-    if (D.getElementById(SPRITE_ID)) return Promise.resolve(true);
+    if (D.getElementById(SPRITE_ID)) { ready(); return Promise.resolve(true); }
     if (loading) return loading;
     if (!G.fetch) return Promise.resolve(false);
     loading = G.fetch(URL).then(function (r) { return r.ok ? r.text() : ""; }).then(function (txt) {
-      if (D.getElementById(SPRITE_ID)) return true;
+      if (D.getElementById(SPRITE_ID)) { ready(); return true; }
       var m = /<svg[\s\S]*<\/svg>/.exec(txt || "");
       if (!m) { loading = null; return false; }
       var box = D.createElement("div");
@@ -52,21 +66,31 @@
       svg.setAttribute("width", "0"); svg.setAttribute("height", "0");
       svg.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;pointer-events:none";
       (D.body || D.documentElement).insertBefore(svg, (D.body || D.documentElement).firstChild);
+      ready();
       return true;
     }).then(null, function () { loading = null; return false; });
     return loading;
   }
+  // The sprite is in: the wordmark shows and its text becomes visually hidden (see word()).
+  function ready() { var r = D.documentElement; if (r && r.classList) r.classList.add("mkai-ok"); }
   // CSS that every variant needs (sizing and the accent token); one small rule set, injected once.
   function css() {
     if (D.getElementById("mkaiCss")) return;
     var s = D.createElement("style"); s.id = "mkaiCss";
     // stroke none: icon rules elsewhere (home badges, search rows) stroke every svg; the mark is filled shapes only.
     s.textContent = ".mkai{display:inline-block;flex:0 0 auto;vertical-align:middle;overflow:visible;stroke:none!important}" +
-      ":root{--mkai-accent:#1f9e92}body.dark,body.v3-dark{--mkai-accent:#4fd6c6}";
+      ":root{--mkai-accent:#1f9e92}body.dark,body.v3-dark{--mkai-accent:#4fd6c6}" +
+      // The wordmark: sized in em with !important, because icon rules elsewhere size every svg inside a button.
+      // 0.75 em tall with the viewBox's 106 units gives a 0.71 em cap height, about the app font's; the bottom 2.3
+      // units are the round letters' overshoot below the baseline, hence the small negative vertical-align.
+      ".mkai-w{white-space:nowrap}" +
+      "svg.mkai-word{display:none;width:2.533em!important;height:.75em!important;min-width:0!important;margin:0!important;padding:0!important;vertical-align:-.016em!important;overflow:visible;stroke:none!important;flex:none}" +
+      "html.mkai-ok svg.mkai-word{display:inline-block}" +
+      "html.mkai-ok .mkai-wt{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}";
     (D.head || D.documentElement).appendChild(s);
   }
   function start() { css(); ensure(); }
   if (D.readyState === "loading") D.addEventListener("DOMContentLoaded", start); else start();
 
-  G.SMD_MAIK_MARK = { html: html, ensure: ensure, variantFor: variantFor, URL: URL };
+  G.SMD_MAIK_MARK = { html: html, word: word, label: label, ensure: ensure, variantFor: variantFor, URL: URL };
 })(typeof window !== "undefined" ? window : this);

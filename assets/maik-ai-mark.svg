@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <!-- MaiK AI mark: the ONE file for the "Ask MaiK" icon across the app (owner artwork placeholder, 2026-10-09).
-       Traced from the owner's IMG_2673 / IMG_2672 (white geometric M of two chevron brackets, a four-point star, a
+       Traced automatically (potrace) from the owner's IMG_2673 / IMG_2672 (white geometric M of two chevron brackets, a four-point star, a
        small teal "AI" lower right; the lower-right bracket is lighter so it reads M + K). To swap in the final artwork, replace the shapes inside the three symbols and
        keep the ids and the 0 0 100 100 viewBox; nothing else in the app needs to change (maik-ai-mark.js injects
        this file as an inline sprite; vault/modules/MaiK.md, "MaiK AI mark").
        Symbols: mkai-full (M, star, teal AI; 28 px and up), mkai-mark (no AI; small sizes), mkai-tile (app-icon tile,
-       40 px and up), mkai-tile-mark (the tile without AI, under 40 px); mkai-m and mkai-tile-bg-s are shared parts.
+       40 px and up), mkai-tile-mark (the tile without AI, under 40 px), mkai-word (the "MaiK" wordmark, 358 x 106); mkai-m and mkai-tile-bg-s are shared parts.
        Colours: the M and the star are currentColor; "AI" is var(--mkai-accent, #2fb3a6); the tile is a fixed
        dark teal gradient with a white mark, readable on light and dark screens. Fills are inline styles so no page
        CSS (icon rules like "svg * { fill: none }") can repaint the mark. -->
@@ -14,8 +14,8 @@
       <stop offset="0" stop-color="#fff" stop-opacity=".78"/>
       <stop offset="1" stop-color="#fff" stop-opacity=".22"/>
     </linearGradient>
-    <mask id="mkai-k-fade" maskUnits="userSpaceOnUse" x="90" y="52" width="12" height="50">
-      <rect x="90" y="52" width="12" height="50" style="fill:url(#mkai-k-grad);stroke:none"/>
+    <mask id="mkai-k-fade" maskContentUnits="objectBoundingBox">
+      <rect x=".82" y="0" width=".18" height="1" style="fill:url(#mkai-k-grad);stroke:none"/>
     </mask>
     <linearGradient id="mkai-tile-bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0f4a4a"/>
@@ -29,16 +29,18 @@
   </defs>
   <!-- the M (two chevron brackets) and the star; shared by every variant -->
   <symbol id="mkai-m" viewBox="0 0 100 100">
-    <path style="fill:inherit;stroke:none" d="M0 0L36 36L30.5 39.5L7.8 16.8V46H0ZM100 0L64 36L69.5 39.5L92.2 16.8V46H100ZM0 100L36 64L30.5 60.5L7.8 83.2V54H0Z"/>
-    <!-- lower right is lighter so the mark reads M + K (owner artwork): a faint diagonal leg and a fading upright -->
-    <path style="fill:inherit;fill-opacity:.22;stroke:none" d="M100 100L64 64L69.5 60.5L92.2 83.2V100Z"/>
-    <path style="fill:inherit;stroke:none" mask="url(#mkai-k-fade)" d="M92.2 54H100V100H92.2Z"/>
-    <path style="fill:inherit;stroke:none" d="M50 12.5C51.6 36 56 46.6 85 50C56 53.4 51.6 64 50 87.5C48.4 64 44 53.4 15 50C44 46.6 48.4 36 50 12.5Z"/>
+    <g transform="matrix(0.0093023 0 0 -0.0093023 -17.8605 117.9070)">
+      <path style="fill:inherit;stroke:none" d="M1927 12603 c-8 -15 -2 -4861 6 -4870 10 -10 690 -17 764 -8 l53 6 2 1550 3 1549 450 -442 c248 -242 752 -741 1120 -1107 369 -367 722 -717 785 -778 l115 -112 50 31 c28 18 160 95 295 174 134 78 246 147 248 154 5 15 -109 129 -3313 3301 -513 508 -571 563 -578 552z M12644 12597 c-7 -7 -205 -203 -440 -437 -236 -233 -685 -679 -999 -990 -313 -311 -990 -981 -1502 -1489 -513 -508 -933 -927 -933 -931 0 -3 35 -26 78 -50 149 -84 436 -252 471 -276 20 -13 42 -24 51 -24 15 0 392 368 1253 1225 799 796 1214 1205 1220 1205 4 0 8 -699 9 -1552 l3 -1553 300 -2 c165 0 350 1 410 4 l110 6 -3 1196 c-1 658 -2 1755 -2 2439 0 683 -3 1242 -7 1242 -5 -1 -13 -6 -19 -13z M2130 6871 l-205 -6 0 -2438 c0 -1838 3 -2437 12 -2435 25 6 3871 3828 3881 3857 2 5 -28 26 -65 47 -37 20 -135 78 -218 127 -234 140 -305 178 -321 175 -7 -2 -245 -233 -526 -513 -282 -281 -670 -665 -863 -855 -192 -190 -510 -503 -705 -696 -195 -192 -359 -353 -365 -356 -7 -4 -10 514 -10 1545 l0 1552 -205 1 c-113 0 -297 -2 -410 -5z"/>
+      <path style="fill:inherit;stroke:none" d="M7286 11268 c-3 -13 -10 -66 -16 -118 -97 -824 -307 -1719 -524 -2235 -320 -757 -827 -1088 -2143 -1399 -257 -61 -647 -141 -915 -188 -71 -12 -128 -25 -128 -28 0 -4 37 -12 83 -19 289 -44 968 -189 1232 -262 229 -64 468 -143 655 -216 656 -258 959 -540 1214 -1128 177 -411 328 -971 442 -1650 54 -323 63 -376 85 -545 12 -96 25 -178 29 -183 3 -4 12 37 19 90 89 709 220 1353 381 1873 117 378 273 708 437 922 351 460 1124 778 2543 1047 146 28 289 53 318 57 78 10 55 19 -123 48 -321 53 -777 151 -1145 247 -1349 351 -1760 744 -2105 2014 -117 433 -218 952 -296 1533 -21 153 -32 191 -43 140z"/>
+      <!-- lower right is lighter so the mark reads M + K: a faint leg and an upright that fades downward -->
+      <path style="fill:inherit;fill-opacity:.2;stroke:none" d="M12048 6873 l-198 -3 -2 -1548 -3 -1547 -370 365 c-203 201 -512 505 -685 675 -173 171 -557 551 -852 845 -296 294 -545 536 -553 538 -8 2 -70 -29 -137 -69 -68 -39 -136 -80 -153 -89 -43 -24 -276 -160 -303 -177 -22 -13 17 -53 1315 -1346 1374 -1368 2307 -2295 2471 -2452 l92 -89 0 2452 0 2452 -212 -2 c-117 -2 -302 -4 -410 -5z"/>
+      <path style="fill:inherit;stroke:none" mask="url(#mkai-k-fade)" d="M12048 6873 l-198 -3 -2 -1548 -3 -1547 -370 365 c-203 201 -512 505 -685 675 -173 171 -557 551 -852 845 -296 294 -545 536 -553 538 -8 2 -70 -29 -137 -69 -68 -39 -136 -80 -153 -89 -43 -24 -276 -160 -303 -177 -22 -13 17 -53 1315 -1346 1374 -1368 2307 -2295 2471 -2452 l92 -89 0 2452 0 2452 -212 -2 c-117 -2 -302 -4 -410 -5z"/>
+    </g>
   </symbol>
   <!-- full mark: M, star and the teal AI (28 px and up) -->
   <symbol id="mkai-full" viewBox="0 0 100 100">
     <use href="#mkai-m" style="fill:currentColor;stroke:none"/>
-    <path style="fill:var(--mkai-accent,#2fb3a6);stroke:none;fill-rule:evenodd" d="M58.5 96.6L63.9 80.6H67.1L72.5 96.6H69.1L68 93.4H63L61.9 96.6ZM63.9 90.6H67.1L65.5 85.9ZM75.4 80.6H78.6V96.6H75.4Z"/>
+    <path transform="translate(62.5 79.5) scale(.72) translate(-58.5 -80.6)" style="fill:var(--mkai-accent,#2fb3a6);stroke:none;fill-rule:evenodd" d="M58.5 96.6L63.9 80.6H67.1L72.5 96.6H69.1L68 93.4H63L61.9 96.6ZM63.9 90.6H67.1L65.5 85.9ZM75.4 80.6H78.6V96.6H75.4Z"/>
   </symbol>
   <!-- mark only, for small sizes (16 to 27 px): no AI -->
   <symbol id="mkai-mark" viewBox="0 0 100 100">
@@ -55,7 +57,7 @@
     <use href="#mkai-tile-bg-s"/>
     <g transform="translate(20 20) scale(.6)">
       <use href="#mkai-m" style="fill:#fff;stroke:none"/>
-      <path style="fill:#5fe0cf;stroke:none;fill-rule:evenodd" d="M58.5 96.6L63.9 80.6H67.1L72.5 96.6H69.1L68 93.4H63L61.9 96.6ZM63.9 90.6H67.1L65.5 85.9ZM75.4 80.6H78.6V96.6H75.4Z"/>
+      <path transform="translate(62.5 79.5) scale(.72) translate(-58.5 -80.6)" style="fill:#5fe0cf;stroke:none;fill-rule:evenodd" d="M58.5 96.6L63.9 80.6H67.1L72.5 96.6H69.1L68 93.4H63L61.9 96.6ZM63.9 90.6H67.1L65.5 85.9ZM75.4 80.6H78.6V96.6H75.4Z"/>
     </g>
   </symbol>
   <!-- the same tile without AI, for avatars under 40 px; the mark sits a little larger -->
@@ -64,6 +66,12 @@
     <g transform="translate(17 17) scale(.66)">
       <use href="#mkai-m" style="fill:#fff;stroke:none"/>
     </g>
+  </symbol>
+  <!-- the "MaiK" wordmark: the lettering of the owner's MaiK AI artwork (curved two-arch M, single-storey a, dotted i,
+       geometric K), traced from it (2026-10-10). Cap height 100, baseline at y 103.3, the i dot reaches y 0. Used inline
+       in "Ask MaiK" labels by SMD_MAIK_MARK.label(); currentColor. -->
+  <symbol id="mkai-word" viewBox="0 0 358 106">
+    <path style="fill:currentColor;stroke:none;fill-rule:evenodd" d="M183.8 105C190.7 103.8 197.2 99.7 201 94.2C202.2 92.5 202.6 92.3 202.8 93.3C202.9 93.6 203.3 95.3 203.7 96.9C204.5 100.6 205.2 102.8 205.6 103.3L205.9 103.7L207.9 103.7C209 103.7 212.4 103.7 215.4 103.7L220.8 103.7L221.2 103.4L221.5 103.1L221.2 100.4C220.2 92.7 220.2 92 220.1 59.8L220 32.6L219.7 32.4C219.3 32.1 206.1 32.3 205.6 32.6C205.2 32.8 204.9 33.8 203.8 38.2C202.8 42.6 202.7 42.7 201.6 41C198.5 36.6 191.6 32.4 185.1 31.1C165.4 27.2 147.7 39.8 144 60.5L143.6 62.6L143.6 67.8L143.6 73.1L144 75.2C144.9 80.2 146.6 85 148.8 88.6C154.8 98.5 164.3 104.3 176 105.4C177.6 105.5 181.8 105.3 183.8 105ZM17.8 103.4L18.2 103.1L18.2 66C18.3 27.4 18.3 27.5 19 25.1C21.1 18.2 28.2 17.1 31.2 23.1C32.7 26 34.3 33.6 37.9 53.8C38.1 55.2 38.6 57.4 38.8 58.8C39.1 60.2 39.8 64 40.3 67.1C41.9 75.8 42.2 76.8 44 80.3C52.8 97.4 76.8 97.5 85.9 80.7C87.7 77.4 88.4 74.8 89.7 67.5C90.2 65.2 90.8 61.6 91.2 59.3C91.7 57.1 92.2 54.2 92.4 52.9C92.7 51.6 93.2 49 93.5 47.2C93.9 45.3 94.6 41.3 95.2 38.2C97.4 26 98.3 23.3 100.3 21.2C103.5 17.9 108.8 18.9 110.7 23.1C112 26.1 112 25.2 112 66.5L112 103.2L112.4 103.4C113.2 104 130 103.7 130.3 103.1C130.6 102.8 130.5 28.9 130.3 26.4C129.1 11.4 120.2 2.9 105.4 2.9C95.7 2.9 87.7 7.2 83.1 15C80.7 19 80.1 21.8 75.8 47.2C72.6 65.6 71.5 71 70.6 72.9C68.5 77.2 62.1 77.4 60 73.2C59.2 71.6 58.1 66.8 56 55.2C55.4 52.2 54.5 47.4 54 44.5C53.5 41.6 52.6 37.1 52.2 34.4C51.7 31.8 51.1 28.3 50.8 26.8C48 10.8 39.8 3 25.6 2.9C11.4 2.9 2 11.1 0.2 25C-0.1 27.8 -0.1 103.1 0.2 103.5C0.3 103.6 2.5 103.7 8.9 103.7L17.5 103.7L17.8 103.4ZM255.6 103.4L255.8 103.1L255.8 67.9C255.7 44.1 255.6 32.5 255.5 32.4C255.2 32.1 238.5 32.1 238.1 32.4L237.7 32.7L237.7 67.9C237.8 97.5 237.8 103.2 238 103.4L238.2 103.7L246.8 103.7C254.4 103.7 255.3 103.6 255.6 103.4ZM291.3 103.4C291.5 103 291.7 92 291.7 76.4L291.7 62.2L291.9 61.9L292.2 61.6L299.1 61.7L305.9 61.8L307.3 62.1C312.5 63.5 315.5 66.3 320.4 74.7C323.6 80 325.3 82.9 326.2 84.4C326.7 85.3 328.4 88.4 330 91.2C331.6 94 333.8 97.8 334.9 99.7C336 101.6 337 103.3 337.2 103.4C337.5 103.6 338.9 103.7 347.5 103.7L357.5 103.7L357.6 103.4C357.7 103.1 357.1 101.9 355.4 99.2C354.9 98.3 353.8 96.5 353.1 95.2C350.5 90.7 347.3 85.2 343.6 79.1C342.6 77.3 341.1 74.8 340.3 73.4C333.9 62.1 331.1 58.7 325.2 54.6C323.7 53.7 323.8 53.5 325.4 52.4C328.5 50.3 331.6 47.2 334.5 43.3C336.1 41.2 337.5 38.8 343.1 28.4C343.7 27.3 344.6 25.7 345.1 24.9C345.6 24.1 346.4 22.6 346.9 21.6C347.5 20.6 348.4 18.9 349 17.8C349.6 16.6 350.4 15.2 350.7 14.6C351.9 12 354.8 6.7 355.2 6C355.5 5.6 355.7 5.2 355.6 5L355.6 4.8L345.8 4.7L336.1 4.7L335.7 5C335.2 5.5 334.3 7 333.2 9.3C332.7 10.3 331.6 12.3 330.8 13.9C330 15.4 329.3 16.7 329.3 16.7C329.3 16.9 323.2 28.4 322.2 30C315.7 41.2 311.5 44.6 303.6 45.3C300.4 45.6 292.2 45.5 291.9 45.2C291.7 45 291.7 42.9 291.7 25L291.7 5L291.4 4.8C291 4.5 273.7 4.6 273.3 4.9C273 5.3 272.9 103 273.3 103.4L273.6 103.7L282.4 103.6C289.4 103.6 291.2 103.5 291.3 103.4ZM178.5 89.8C168.4 88 161.7 79.2 161.7 67.8C161.7 53.9 172.2 44.1 185 46.2C195.6 48 202.3 56.4 202.4 67.9C202.4 81.7 191.2 92 178.5 89.8ZM247.9 22.3C262.1 20.6 260.7 1 246.5 1C232.4 1 231 20.5 245 22.3C246.5 22.5 246.5 22.5 247.9 22.3Z"/>
   </symbol>
   <use href="#mkai-full" color="#fff"/>
 </svg>

@@ -988,7 +988,7 @@
     }
     html += "</div>";
     if (flag("smd_clinix_tutor")) {
-      html += '<button type="button" class="cx-ask-maik" data-act="cx-ask">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : ic("neurology")) + "Ask MaiK about this step</button>";
+      html += '<button type="button" class="cx-ask-maik" data-act="cx-ask">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : ic("neurology")) + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK about this step") : "Ask MaiK about this step") + "</button>";
     }
     return html;
   }
@@ -1826,7 +1826,7 @@
       }
       html += "</div>";
       if (!a.revealed && !a.examinerVerdict && flag("smd_clinix_tutor") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.vivaAvailable()) {
-        html += '<button type="button" class="cx-askmaik-sm" data-act="cx-viva-ask-maik">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ic("forum")) + "Ask MaiK to review this answer</button>";
+        html += '<button type="button" class="cx-askmaik-sm" data-act="cx-viva-ask-maik">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ic("forum")) + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK to review this answer") : "Ask MaiK to review this answer") + "</button>";
       }
       html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-viva-next">Next question</button></div>';
     }
