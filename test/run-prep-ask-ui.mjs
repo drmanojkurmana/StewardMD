@@ -149,7 +149,7 @@ try {
   await click('#smdPrep [data-act=start][data-k=study]'); await until(`return !!document.querySelector("#smdPrep .pn-q");`, 8000);
   await ev(`var r=PREP._st.run, it=r.items[r.i]; document.querySelector('#smdPrep .pn-opt[data-k="'+((it.a+1)%4)+'"]').click(); return 1;`);
   const btn = await ev(`var b=document.querySelector("#smdPrep .pn-fb [data-act=ask]"); return b ? b.textContent + "|" + Math.round(b.getBoundingClientRect().height) : "";`);
-  ok(/^Why is [A-D] wrong\? Ask MaiK\|\d+$/.test(btn) && +btn.split("|")[1] >= 44, "a wrong answer offers Ask MaiK on the web, 44 px or more: " + btn);
+  ok(/^Why is [A-D] wrong\? Ask\sMaiK\|\d+$/.test(btn) && +btn.split("|")[1] >= 44, "a wrong answer offers Ask MaiK on the web, 44 px or more: " + btn);
   await click("#smdPrep [data-act=ask]");
   ok(await until(`return !!document.querySelector("#pnAsk .pa-opts") && !!PREP_ASK._s().vd;`, 5000), "the Ask MaiK sheet opens with the two choices");
   const web = JSON.parse(await ev(`var w=document.getElementById("pnAsk"); return JSON.stringify({ note: (w.querySelector(".pa-note")||{}).textContent, local: w.querySelector('[data-v=local]').getAttribute("aria-disabled"), online: w.querySelector('[data-v=online]').getAttribute("aria-checked"), dont: w.querySelector("#paDont").checked, ai: /\\bAI\\b/.test(w.textContent), dash: /\\u2014/.test(w.textContent) });`));
@@ -224,7 +224,7 @@ try {
   await click('#smdPrep [data-act=start][data-k=study]'); await until(`return !!document.querySelector("#smdPrep .pn-q");`, 8000);
   await ev(`var r=PREP._st.run, it=r.items[r.i]; document.querySelector('#smdPrep .pn-opt[data-k="'+it.a+'"]').click(); return 1;`);
   const rightBtn = await ev(`return (document.querySelector("#smdPrep .pn-fb [data-act=ask]")||{}).textContent;`);
-  ok(/^Ask MaiK why [A-D] is right$/.test(rightBtn || ""), "a right answer offers Ask MaiK too: " + rightBtn);
+  ok(/^Ask\sMaiK why [A-D] is right$/.test(rightBtn || ""), "a right answer offers Ask MaiK too: " + rightBtn);
   await click("#smdPrep [data-act=ask]");
   ok(await until(`var n=document.querySelector("#pnAsk .pa-note"); return !!n && n.textContent === "MaiK on this phone needs an iPhone 15 Pro or newer, or an iPad with an M1 chip or newer. You can ask MaiK online instead.";`, 5000), "not capable: the owner's sentence at once");
   ok(await ev(`var w=document.getElementById("pnAsk"); return w.querySelector('[data-v=local]').getAttribute("aria-disabled")==="true" && w.querySelector('[data-v=online]').getAttribute("aria-checked")==="true";`) === true, "not capable: On this phone unavailable, Online selected");

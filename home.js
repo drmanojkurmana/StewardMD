@@ -2436,7 +2436,7 @@
       '<span class="rnav-badge">' + icon + '</span>' +
       (t.beta ? '<span class="rnav-tile-beta">BETA</span>' : '') +
       (locked ? '<span class="rnav-tile-lock" aria-hidden="true" style="position:absolute;top:6px;right:6px;display:inline-flex">' + ric("lock") + '</span>' : '') +
-      '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
+      '<span class="rnav-tile-tt">' + (t.act === "askai" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label(t.tt) : t.tt) + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
     var html = "", TOOLS = orderedHomeTools();

@@ -8154,20 +8154,20 @@
       '<p class="icu-doc-sub">Ask about this patient. MaiK answers from this patient’s <b>de-identified</b> context' + (d ? " and the deep clinical review" : "") + ", grounded in StewardMD’s knowledge base. Advisory only — you decide.</p>" +
       turns + err + starters +
       '<textarea id="icuAskQ" rows="3" placeholder="e.g. 5x3 cm saccular aneurysm — is this an indication for surgery?" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%"></textarea>' +
-      '<button class="icu-btn" data-icu-act="asksend"' + (_askBusy ? " disabled" : "") + ' style="margin-top:8px">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ico("spark", "✦")) + " Ask MaiK</button>" +
+      '<button class="icu-btn" data-icu-act="asksend"' + (_askBusy ? " disabled" : "") + ' style="margin-top:8px">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ico("spark", "✦")) + " " + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + "</button>" +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Close</button>';
     try { var sh = modalEl.querySelector("#icuAskSheet"); if (sh) sh.scrollTop = sh.scrollHeight; } catch (e) {}
   }
   function openAskMaik() {
     ensureModal();
-    modalEl.innerHTML = '<div class="icu-sheet" id="icuAskSheet" role="dialog" aria-label="Ask MaiK about this patient"><h3>' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ico("spark", "✦")) + " Ask MaiK about this patient</h3><div id=\"icuAskBody\"></div></div>";
+    modalEl.innerHTML = '<div class="icu-sheet" id="icuAskSheet" role="dialog" aria-label="Ask MaiK about this patient"><h3>' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ico("spark", "✦")) + " " + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK about this patient") : "Ask MaiK about this patient") + "</h3><div id=\"icuAskBody\"></div></div>";
     modalEl.classList.add("on");
     askRender();
     setTimeout(function () { try { var q = modalEl.querySelector("#icuAskQ"); if (q) q.focus(); } catch (e) {} }, 60);
   }
   function askMaikBtn(style) {
     if (!icuAskMaikOn()) return "";
-    return '<button class="icu-btn ghost" data-icu-act="askmaik"' + (style ? ' style="' + style + '"' : "") + ">" + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ico("spark", "✦")) + " Ask MaiK about this patient</button>";
+    return '<button class="icu-btn ghost" data-icu-act="askmaik"' + (style ? ' style="' + style + '"' : "") + ">" + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : ico("spark", "✦")) + " " + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK about this patient") : "Ask MaiK about this patient") + "</button>";
   }
 
   /* ---- External trusted-evidence fallback (Phase 4) — opt-in, de-identified TOPIC only ---- */

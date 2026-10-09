@@ -83,7 +83,7 @@ try {
   };
   ok(await boot(), "PrepNucleus opens with prep-ask.js and the MaiK AI mark helper");
   await ev(`try{localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_ask_v1");}catch(e){} PREP_ASK._resetThreads(); var s=PREP._host.store(); s.ask={m:"online",q:1}; PREP._host.save(); return 1;`);
-  ok(await until(`var s=document.getElementById("mkaiSprite"); return !!s && !!s.querySelector("#mkai-full") && !!s.querySelector("#mkai-tile-mark") && s.getBoundingClientRect().width === 0;`, 8000), "the MaiK AI mark sprite is in the page once, from assets/maik-ai-mark.svg, at zero size");
+  ok(await until(`var s=document.getElementById("mkaiSprite"); return !!s && !!s.querySelector("#mkai-full") && !!s.querySelector("#mkai-tile") && !s.querySelector("#mkai-tile-mark") && !!s.querySelector("#mkai-word") && s.getBoundingClientRect().width === 0;`, 8000), "the MaiK AI mark sprite is in the page once, from assets/maik-ai-mark.svg, at zero size");
 
   const startQ = async (wrong) => {
     await ev(`PREP._st.run=null; PREP._st.stack.length=1; PREP._host.home(); return 1;`);
@@ -101,15 +101,18 @@ try {
   // ---- the Ask MaiK button carries the mark
   ok(await startQ(true), "a wrong answer offers Ask MaiK");
   const btn = JSON.parse(await ev(`var b=document.querySelector("#smdPrep .pn-fb [data-act=ask]"), av=b.querySelector(".pt-av"), sv=av&&av.querySelector("svg.mkai"), u=sv&&sv.querySelector("use"); return JSON.stringify({ mk: !!av && av.classList.contains("mk"), use: u && u.getAttribute("href"), w: sv ? Math.round(parseFloat(getComputedStyle(sv).width)) : 0, bg: av ? getComputedStyle(av).backgroundImage : "", text: b.textContent });`));
-  ok(btn.mk && btn.use === "#mkai-tile-mark" && btn.w === 32 && btn.bg === "none" && /Ask MaiK$/.test(btn.text), "the Ask MaiK button shows the MaiK AI mark tile (32 px, no old picture): " + JSON.stringify(btn));
+  ok(btn.mk && btn.use === "#mkai-tile" && btn.w === 32 && btn.bg === "none" && /Ask\sMaiK$/.test(btn.text), "the Ask MaiK button shows the MaiK AI mark tile (32 px, no old picture): " + JSON.stringify(btn));
   await shot("chat-button-p390");
+  // MaiK in the label is the wordmark lettering (maik-ai-mark.js label()): drawn, sized to the text, the text kept for readers
+  const wm = JSON.parse(await ev(`var b=document.querySelector("#smdPrep .pn-fb [data-act=ask]"), w=b.querySelector("svg.mkai-word"), t=b.querySelector(".mkai-wt"), r=w&&w.getBoundingClientRect(), fs=parseFloat(getComputedStyle(w.parentNode).fontSize), tr=t&&t.getBoundingClientRect(); return JSON.stringify({ use: w&&w.querySelector("use").getAttribute("href"), w: r&&Math.round(r.width), h: r&&Math.round(r.height*10)/10, fs: fs, hid: !!tr && tr.width <= 1, ok: document.documentElement.classList.contains("mkai-wok") });`));
+  ok(wm.use === "#mkai-word" && wm.ok && wm.hid && Math.abs(wm.h - wm.fs * .75) < 1 && wm.w > wm.h * 3, "the button's MaiK is the wordmark, 0.75 em tall, its text visually hidden: " + JSON.stringify(wm));
 
   // ---- first answer, then the follow-up box
   answer = (b) => ({ status: 200, body: { text: b.kind === "chat" ? "The stored explanation says the key is right for this reason." : "The answer is the key, as the stored explanation says.", usage: { mt: 40 + (b.turn || 1) }, wallet: { balanceMt: 1900 - (b.turn || 1), costCapOn: true } } });
   await click("#smdPrep [data-act=ask]");
   ok(await until(`return !!document.querySelector("#pnAsk .pa-last") && !!document.getElementById("paIn");`, 6000), "online first answer, then the follow-up box");
   const head = JSON.parse(await ev(`var w=document.getElementById("pnAsk"); return JSON.stringify({ top: (w.querySelector(".pa-top .pt-av.mk use")||{getAttribute:function(){return ""}}).getAttribute("href"), av: w.querySelectorAll(".pt-msg.ai .pt-av.mk svg").length, left: (w.querySelector("#paLeft")||{}).textContent, ph: w.querySelector("#paIn").getAttribute("placeholder"), fs: getComputedStyle(w.querySelector("#paIn")).fontSize, send: Math.round(parseFloat(getComputedStyle(w.querySelector(".pa-send")).height)) });`));
-  ok(head.top === "#mkai-tile-mark" && head.av === 1, "the sheet header and MaiK's avatar carry the mark: " + JSON.stringify(head));
+  ok(head.top === "#mkai-tile" && head.av === 1, "the sheet header and MaiK's avatar carry the mark: " + JSON.stringify(head));
   ok(head.left === "9 questions left in this chat" && head.ph === "Ask a follow-up doubt…" && head.fs === "16px" && head.send >= 44, "the box: 9 left, its placeholder, 16 px text (no iOS zoom), a 44 px send button: " + JSON.stringify(head));
   ok(reqs.length === 1 && reqs[0].body.kind === "mcq", "the first ask is the usual mcq request");
 

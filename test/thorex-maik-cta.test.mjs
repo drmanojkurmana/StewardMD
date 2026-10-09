@@ -13,7 +13,7 @@ const CSS = readFileSync(join(ROOT, "thorex-screens.css"), "utf8");
 const OPD = readFileSync(join(ROOT, "opd-emr.css"), "utf8");
 
 test("the CXR button is now an Ask MaiK call-to-action", () => {
-  assert.match(JS, /<b>Ask MaiK<\/b>/, "button reads Ask MaiK");
+  assert.match(JS, /<b>' \+ \(typeof window !== "undefined" && window\.SMD_MAIK_MARK \? window\.SMD_MAIK_MARK\.label\("Ask MaiK"\) : "Ask MaiK"\) \+ '<\/b>/, "button reads Ask MaiK (MaiK in the wordmark lettering, maik-ai-mark.js label())");
   assert.ok(!/Get best-fit diagnoses/.test(JS), "old label gone");
 });
 
