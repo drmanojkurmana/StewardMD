@@ -113,6 +113,9 @@ if [ -d data/neo ]; then mkdir -p "$WWW/data/neo"; cp data/neo/*.json "$WWW/data
 # Adult normal values (adult-ref.js fetches /data/ref/adult-ref-values.json).
 if [ -d data/ref ]; then mkdir -p "$WWW/data/ref"; cp data/ref/*.json "$WWW/data/ref/"; fi
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
+# FDA-label monographs for drugs with no bundled record (scripts/build-fda-monographs.py): one small JSON per
+# drug, fetched by offline-clinical.js when that drug is opened. Not in the bundle, so startup stays small.
+if [ -d data/fda-labels ]; then mkdir -p "$WWW/fda-labels"; cp data/fda-labels/*.json "$WWW/fda-labels/"; fi
 # India access on Clinical Bulletins cards (bulletins.js): NLEM 2022 (scripts/india/build_nlem.py) and, when the
 # owner has run scripts/india/fetch-janaushadhi.mjs, the Jan Aushadhi price list. Read offline from the bundle.
 if ls data/india/*.json >/dev/null 2>&1; then mkdir -p "$WWW/data/india"; cp data/india/*.json "$WWW/data/india/"; fi

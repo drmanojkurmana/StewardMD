@@ -28,7 +28,7 @@
   var URL_SUP = "/clinical-supplement.json.gz?v=" + SUP_VER;
   // Name/class/tags only, so search costs 329 KB instead of the 6 MB bundle. Loaded on the first
   // search, not at boot. Built by scripts/build-clinical-index.mjs.
-  var IDX_VER = "idx6";
+  var IDX_VER = "idx7";
   var URL_IDX = "/clinical-index.js?v=" + IDX_VER;
   var FLAG = "stewardmd_offline_clinical";        // "0" disables
   var _data = null;      // { v, struct:{comp:{gold|fields}}, mono:{comp:{…}} }
@@ -179,6 +179,29 @@
   function splitCombo(name) { return String(name).split(/\s*\+\s*|\s*\/\s*/).map(function (s) { return s.trim(); }).filter(Boolean); }
 
   /* -------- response builders — identical shapes to the worker handlers -------- */
+  /* FDA-label monographs (data/fda-labels/<slug>.json, built by scripts/build-fda-monographs.py). Not in
+   * the bundle: each is tens of KB, so one is fetched when its drug is opened, never at startup.
+   * slugFor() must match the Python slug() in that script exactly. */
+  var LABEL_VER = "lbl1";
+  function slugFor(name) {
+    var safe = String(name || "").replace(/[^A-Za-z0-9 ._-]/g, "").trim();
+    return safe.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
+  var _labelCache = {};
+  function labelFor(name) {
+    if (!name) return Promise.resolve(null);
+    return ensureIndex().then(function (I) {
+      var row = I && I.get ? I.get(name) : null;
+      var key = row ? row.n : name;
+      var slug = slugFor(key);
+      if (!slug) return null;
+      if (_labelCache[slug] !== undefined) return _labelCache[slug];
+      return fetch("/fda-labels/" + slug + ".json?v=" + LABEL_VER)
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (rec) { _labelCache[slug] = rec && rec.generic ? rec : null; return _labelCache[slug]; })
+        .catch(function () { return null; });
+    }).catch(function () { return null; });
+  }
   function structResp(name) {
     return ensureData().then(function () {
       if (isCombo(name)) {
@@ -189,7 +212,10 @@
         }
       }
       var d = lookStruct(name);
-      return d ? { composition: name, found: true, data: d } : { composition: name, found: false };
+      if (d) return { composition: name, found: true, data: d };
+      return labelFor(name).then(function (rec) {
+        return rec ? { composition: name, found: true, data: { gold: JSON.stringify(rec) } } : { composition: name, found: false };
+      });
     });
   }
   function monoResp(name) {
