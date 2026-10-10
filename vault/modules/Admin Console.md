@@ -36,3 +36,9 @@ AI control has "Pro: MaiK tokens per day" (app-wide; blank = default 20,000; sho
 model). User control's AI limits section has "MaiK tokens per day (Pro)" for one account: a number, Unlimited, or Use
 app-wide, with today's use. Endpoints `admin/pro-tokens`, `admin/user-tokens`; details in [[modules/MaiK]].
 Test: `test/run-userctl-admin-ui.mjs`, `test/maik-pro-daily-tokens.test.mjs`.
+
+## Gotcha: one Google token per scope (2026-10-10)
+`functions/_fbadmin.js serviceAccountToken` cached a single token for every scope, so after the User control
+account lookup minted an `identitytoolkit` token, the Firestore profile read and the budget write reused it and got
+403 "insufficient authentication scopes" (shown as `fs_get 403` / `fs_commit (403)`). It now caches per scope.
+Test: `test/fbadmin-token-scope.test.mjs`.
