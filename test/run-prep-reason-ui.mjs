@@ -76,7 +76,8 @@ async function checkItem(d, tag, it, full) {
       return JSON.stringify({ rx: f.querySelectorAll(".pn-ro,.pn-rx,.pn-rlr,.pn-rn,.pn-rqr,.pn-rlo,.pn-rref").length,
         why: f.querySelectorAll(".pn-why li").length, pearl: (f.querySelector(".pn-kp b")||{}).textContent||"",
         html: f.outerHTML });`));
-    ok(s.rx === 0 && s.why === it.o.length - 1 && s.pearl === "Remember", tag + ": old item: legacy list + Remember box, no reasoning node");
+    const exOld = it.id === "fx-reason-old1" ? { why: 0, pearl: "" } : { why: it.o.length - 1, pearl: "Remember" };
+    ok(s.rx === 0 && s.why === exOld.why && s.pearl === exOld.pearl, tag + ": old item: legacy rendering, no reasoning node");
     // byte-identical feedback whether the item takes the reasoning path or not (a bookmark repaint keeps the
     // reveal still, so both paints match; stubbing has() to false takes the same branch as a missing module)
     await d.click(`#smdPrep [data-act="bookmark"]`);
@@ -86,6 +87,7 @@ async function checkItem(d, tag, it, full) {
     const h2 = await d.ev(`return document.querySelector("#smdPrep .pn-fb").outerHTML;`);
     await d.ev(`PREP_REASON.has = window.__rxHas; return 1;`);
     ok(h1 === h2, tag + ": feedback byte-identical off the reasoning path");
+    if (full) await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`, false);
     d.stash = d.stash || {};
     d.stash[it.id] = h1;
     await d.ev(`PREP.back(); return 1;`);
@@ -154,7 +156,7 @@ async function runCombo(d) {
 
   for (const it of ITEMS) {
     const t2 = `${tag} ${it.id}`;
-    const r = await checkItem(d, t2, it, full && it.id === "fx-reason-1");
+    const r = await checkItem(d, t2, it, it.id === "fx-reason-1" || it.id === "fx-reason-old2");
     if (!r || r.old) continue;
     // a closed row opens on tap
     await d.ev(`var s=document.querySelector("#smdPrep details.pn-ro:not([open]) summary"); if(s) s.click(); return 1;`);
