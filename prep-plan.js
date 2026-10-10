@@ -258,11 +258,15 @@
   // The readiness card (2026-10-10 quiet pass): the score and the days to the exam as two figures, one bar for the score,
   // one line. Streak, today's answers and the level moved to "Your progress" lower on home (progressHtml). One button:
   // the whole card opens "How this is computed".
+  // Tests 2 (smd_prep_tests2, owner 2026-10-10): "readiness" reads like a chance of passing; with the flag on it is named
+  // what it is, a progress score of coverage, retention and accuracy.
+  function t2() { return !!(G.PREP_TESTS && G.PREP_TESTS.on && G.PREP_TESTS.on()); }
+  function rdWord(cap) { return t2() ? (cap ? "Progress score" : "progress score") : (cap ? "Readiness" : "readiness"); }
   function heroHtml(rd) {
     var dl = examDays(), name = examLabel();
     var when = dl == null ? "" : dl === 0 ? "Exam day" : plural(dl, "day", "days") + " to the exam";
     var line = rd.empty ? "Your first answers start it moving" : "How this is computed";
-    var label = "Readiness " + rd.score + " of 100 for " + name + (when ? ", " + when : "") + ". " + line;
+    var label = rdWord(true) + " " + rd.score + " of 100 for " + name + (when ? ", " + when : "") + ". " + line;
     // Tide pass (prep50): the readiness ring sits on the live background (prep-tide.js) with the nucleus, an amber dot
     // riding the arc's end; the figure counts up with the ring the first time (prep-motion.js). Same data as before.
     var sc = Math.max(0, Math.min(100, rd.score));
@@ -271,7 +275,7 @@
       (sc > 0 ? '<circle class="rv" cx="60" cy="60" r="50" pathLength="100" stroke-dasharray="' + sc + ' 100"/>' : "") +
       '<g class="pl-nuc" style="transform:rotate(' + (sc * 3.6).toFixed(1) + 'deg)"><circle cx="110" cy="60" r="6.5"/></g></svg>' +
       '<span class="pl-num">' + rd.score + "<small>/100</small></span></span>" +
-      '<span class="pl-hs" aria-hidden="true"><span class="pl-k">' + esc(name).replace(/-/g, "\u2011") + ' readiness</span>' +
+      '<span class="pl-hs" aria-hidden="true"><span class="pl-k">' + esc(name).replace(/-/g, "\u2011") + " " + rdWord() + '</span>' +
       '<span class="pl-hd">' + (dl == null ? '<span class="pl-dn pl-dn-none">Exam date not set</span>' : dl === 0 ? '<span class="pl-dn">Exam day</span>' : '<span class="pl-k">Exam in</span> <span class="pl-dn">' + H.fmt(dl) + "<small>" + (dl === 1 ? "day" : "days") + "</small></span>") + "</span>" +
       '<span class="pl-hl"><small>' + esc(line) + "</small>" + H.ico("chev") + "</span></span></button>";
   }
@@ -442,9 +446,9 @@
         (a ? '<button type="button" class="pn-btn sm" data-act="p-mod" data-s="' + esc(r.id) + '" data-m="' + esc(a.m) + '">' + esc(lab) + ic("chev") + "</button>" : '<button type="button" class="pn-btn sm" data-act="p-sub" data-s="' + esc(r.id) + '">Open subject' + ic("chev") + "</button>") + "</li>";
     }).join("");
     var html = '<span class="pn-grab" aria-hidden="true"></span>' +
-      '<div class="pl-rhead"><h2 id="pnWhyT"><span class="pl-rk">' + esc(name) + ' readiness<span class="pl-sr">: </span></span><b class="pl-rnum">' + rd.score + "</b></h2>" +
+      '<div class="pl-rhead"><h2 id="pnWhyT"><span class="pl-rk">' + esc(name) + " " + rdWord() + '<span class="pl-sr">: </span></span><b class="pl-rnum">' + rd.score + "</b></h2>" +
       '<div class="pl-meters" aria-hidden="true">' + meter("cov", "Coverage", rd.cov) + '<i class="pl-x">\u00d7</i>' + meter("ret", "Retention", rd.ret) + '<i class="pl-x">\u00d7</i>' + meter("acc", "Accuracy", rd.acc) + "</div></div>" +
-      '<p class="pn-mut pl-rwhy">' + (rd.empty ? "Nothing answered yet, so all three parts are at zero. Each question you answer moves them." : "Three parts, each from 0 to 100%, combined as a geometric mean: a low part pulls the score down more than a high one lifts it.") + "</p>" +
+      '<p class="pn-mut pl-rwhy">' + (rd.empty ? "Nothing answered yet, so all three parts are at zero. Each question you answer moves them." : "Three parts, each from 0 to 100%, combined as a geometric mean: a low part pulls the score down more than a high one lifts it.") + (t2() ? " It measures your preparation in this app; it is not a chance of passing or a predicted exam score." : "") + "</p>" +
       '<ul class="pl-fs">' +
       factor("cov", "Coverage", rd.cov, rd.attempted + " of " + H.fmt(rd.modules) + " modules attempted" + (bp ? ", weighted by the " + esc(name) + " blueprint" : ", each subject weighted by its module count")) +
       factor("ret", "Retention", rd.ret, rd.cards ? "Chance you recall the " + H.fmt(rd.cards) + " questions you have seen, today (spaced-review model)" : "No questions seen yet") +

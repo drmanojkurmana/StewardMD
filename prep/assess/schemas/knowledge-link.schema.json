@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prep/knowledge-link/v1",
+  "title": "Concept / knowledge link record",
+  "description": "Connects an item to the existing knowledge base (KB diseases, drug index, protocols, lessons, cards) by their EXISTING ids. Sidecar, versioned, with provenance for each link.",
+  "type": "object",
+  "required": ["item_id", "concept_id", "links", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "item_id": {"type": "string"},
+    "concept_id": {"type": "string", "description": "stable slug, e.g. 'card.acute-coronary-syndrome.stemi-reperfusion'"},
+    "subject": {"type": "string"}, "topic": {"type": "string"}, "subtopic": {"type": ["string", "null"]},
+    "learning_objective": {"type": ["string", "null"]},
+    "revision_summary": {"type": ["string", "null"], "description": "<= 60 words, generated once in the content pipeline"},
+    "links": {"type": "object", "properties": {
+      "kb_ids": {"type": "array", "items": {"type": "string"}}, "drug_ids": {"type": "array", "items": {"type": "string"}},
+      "protocol_ids": {"type": "array", "items": {"type": "string"}}, "lesson_ids": {"type": "array", "items": {"type": "string"}},
+      "card_ids": {"type": "array", "items": {"type": "string"}}, "related_item_ids": {"type": "array", "items": {"type": "string"}},
+      "visual_ids": {"type": "array", "items": {"type": "string"}}}},
+    "next_action": {"type": ["object", "null"], "properties": {"kind": {"enum": ["read_concept", "open_lesson", "practise_related", "review_cards", "schedule_revision"]}, "target_id": {"type": "string"}}},
+    "references": {"type": "array", "items": {"type": "object", "required": ["type", "title"], "properties": {
+      "type": {"enum": ["textbook", "guideline", "kb_article", "journal", "official_doc"]}, "title": {"type": "string"},
+      "edition": {"type": ["string", "null"]}, "chapter": {"type": ["string", "null"]}, "page_or_section": {"type": ["string", "null"]},
+      "url": {"type": ["string", "null"]}, "year": {"type": ["integer", "null"]},
+      "verified": {"type": "boolean", "description": "edition/chapter/page set only when true"}, "verified_by": {"type": ["string", "null"]}, "verified_on": {"type": ["string", "null"]}}}},
+    "provenance": {"type": "object", "required": ["method", "at", "version"], "properties": {
+      "method": {"enum": ["exact_key", "embedding_match", "llm_mapped", "human"]}, "score": {"type": ["number", "null"]},
+      "model": {"type": ["string", "null"]}, "at": {"type": "string"}, "version": {"type": "string"}}},
+    "conflicts": {"type": "array", "items": {"type": "string"}, "description": "flags for conflicting or outdated recommendations between linked sources"}
+  }
+}
