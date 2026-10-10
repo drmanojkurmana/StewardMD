@@ -1,0 +1,55 @@
+{
+  "id": "steroids", "kind": "drill", "level": "mbbs", "review": "ai_drafted", "timeLimitSec": 600,
+  "title": { "en": "Antenatal steroids and magnesium drill: the gestation window", "hi": "Antenatal steroid और magnesium ड्रिल: गर्भकाल की सीमा" },
+  "scenario": {
+    "en": "Three women with preterm problems, one after another. Woman 1 is 31 weeks with suspected preterm labour and has had no steroid course. Woman 2 is 31 weeks and had a full steroid course 9 days ago, and is now at very high risk of giving birth in the next 48 hours. Woman 3 is 27 weeks in established preterm labour with birth planned within 24 hours. Work through each decision. Teaching scenario, not real patients.",
+    "hi": "preterm की समस्या वाली तीन महिलाएँ, एक के बाद एक। पहली महिला 31 सप्ताह की है, preterm labour का शक है और steroid course नहीं मिला। दूसरी महिला 31 सप्ताह की है, 9 दिन पहले पूरा steroid course मिला था, और अब अगले 48 घंटे में जन्म का बहुत अधिक जोखिम है। तीसरी महिला 27 सप्ताह की है, established preterm labour है और 24 घंटे में जन्म की योजना है। हर फ़ैसला करें। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    { "label": "NICE NG25 Preterm labour and birth, recommendations 1.9.2, 1.9.4, 1.9.5 and 1.10.2", "url": "https://www.nice.org.uk/guidance/ng25/chapter/recommendations" }
+  ],
+  "stages": [
+    { "id": "steroid", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Woman 1: 31 weeks, suspected preterm labour, no steroid course yet. What do you do?", "hi": "पहली महिला: 31 सप्ताह, preterm labour का शक, अभी तक steroid course नहीं। आप क्या करेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "repeat",
+          "text": { "en": "Offer maternal corticosteroids.", "hi": "maternal corticosteroids देने की पेशकश करें।" },
+          "feedback": { "en": "NICE 1.9.2: offer maternal corticosteroids to women between 24+0 and 33+6 weeks of pregnancy who are in suspected, diagnosed or established preterm labour.", "hi": "NICE 1.9.2: 24+0 से 33+6 सप्ताह के बीच, suspected, diagnosed या established preterm labour वाली महिलाओं को maternal corticosteroids देने की पेशकश करें।" } },
+        { "id": "b", "correct": false, "next": "repeat",
+          "text": { "en": "Wait until 37 weeks, then decide.", "hi": "37 सप्ताह तक इंतज़ार करें, फिर फ़ैसला लें।" },
+          "feedback": { "en": "31 weeks is inside the 24+0 to 33+6 week window in NICE 1.9.2, so steroids are offered now, not at 37 weeks.", "hi": "31 सप्ताह NICE 1.9.2 की 24+0 से 33+6 सप्ताह की सीमा में है, इसलिए steroids अभी दिए जाते हैं, 37 सप्ताह पर नहीं।" } },
+        { "id": "c", "correct": false, "next": "repeat",
+          "text": { "en": "Give magnesium sulphate for the baby's brain instead of steroids.", "hi": "steroids की जगह बच्चे के दिमाग़ के लिए magnesium sulphate दें।" },
+          "feedback": { "en": "Magnesium for neuroprotection is a separate recommendation (NICE 1.10.2) for 24+0 to 29+6 weeks. At 31 weeks the steroid offer under 1.9.2 applies.", "hi": "दिमाग़ की सुरक्षा के लिए magnesium एक अलग सिफ़ारिश है (NICE 1.10.2), 24+0 से 29+6 सप्ताह के लिए। 31 सप्ताह पर 1.9.2 के तहत steroid की पेशकश लागू होती है।" } }
+      ]
+    },
+    { "id": "repeat", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Woman 2: 31 weeks, a full steroid course 9 days ago, and very high risk of giving birth in the next 48 hours. What do you do?", "hi": "दूसरी महिला: 31 सप्ताह, 9 दिन पहले पूरा steroid course, और अगले 48 घंटे में जन्म का बहुत अधिक जोखिम। आप क्या करेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "magnesium",
+          "text": { "en": "Consider a single repeat course of corticosteroids.", "hi": "steroids का एक repeat course देने पर विचार करें।" },
+          "feedback": { "en": "NICE 1.9.4: consider a single repeat course for women less than 34+0 weeks who have already had a course more than 7 days ago and are at very high risk of giving birth in the next 48 hours.", "hi": "NICE 1.9.4: 34+0 सप्ताह से पहले की महिला, जिसे 7 दिन से अधिक पहले कोर्स मिला हो और जिसे अगले 48 घंटे में जन्म का बहुत अधिक जोखिम हो, उसे एक repeat course पर विचार करें।" } },
+        { "id": "b", "correct": false, "next": "magnesium",
+          "text": { "en": "Give the repeat course now, without checking when the first course was given.", "hi": "पहला कोर्स कब दिया गया था, यह देखे बिना अभी repeat कोर्स दें।" },
+          "feedback": { "en": "NICE 1.9.4 needs the earlier course to be more than 7 days ago. The timing must be checked before a repeat course.", "hi": "NICE 1.9.4 के लिए ज़रूरी है कि पिछला कोर्स 7 दिन से अधिक पहले का हो। repeat कोर्स से पहले समय की जाँच ज़रूरी है।" } },
+        { "id": "c", "correct": false, "next": "magnesium",
+          "text": { "en": "Give a third course now.", "hi": "अभी तीसरा कोर्स दें।" },
+          "feedback": { "en": "NICE 1.9.5: do not give more than 2 courses of maternal corticosteroids for preterm birth.", "hi": "NICE 1.9.5: preterm birth के लिए maternal corticosteroids के 2 से अधिक कोर्स न दें।" } }
+      ]
+    },
+    { "id": "magnesium", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Woman 3: 27 weeks, established preterm labour, birth planned within 24 hours. What do you offer for the baby's brain?", "hi": "तीसरी महिला: 27 सप्ताह, established preterm labour, 24 घंटे में जन्म की योजना। बच्चे के दिमाग़ के लिए क्या देंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "end",
+          "text": { "en": "Offer intravenous magnesium sulfate for neuroprotection.", "hi": "neuroprotection के लिए intravenous magnesium sulfate देने की पेशकश करें।" },
+          "feedback": { "en": "NICE 1.10.2: offer intravenous magnesium sulfate for neuroprotection of the baby to women between 24+0 and 29+6 weeks who are in established preterm labour, or having a planned preterm birth within 24 hours.", "hi": "NICE 1.10.2: 24+0 से 29+6 सप्ताह के बीच, established preterm labour वाली या 24 घंटे में planned preterm birth वाली महिला को बच्चे की सुरक्षा के लिए intravenous magnesium sulfate देने की पेशकश करें।" } },
+        { "id": "b", "correct": false, "next": "end",
+          "text": { "en": "Do not offer it, because the baby is too preterm for it.", "hi": "न दें, क्योंकि बच्चा इसके लिए बहुत preterm है।" },
+          "feedback": { "en": "NICE 1.10.2 offers it between 24+0 and 29+6 weeks. At 27 weeks it is offered.", "hi": "NICE 1.10.2 इसे 24+0 से 29+6 सप्ताह के बीच देने को कहता है। 27 सप्ताह पर इसकी पेशकश होती है।" } },
+        { "id": "c", "correct": false, "next": "end",
+          "text": { "en": "Offer it only after 34 weeks.", "hi": "सिर्फ़ 34 सप्ताह के बाद दें।" },
+          "feedback": { "en": "The neuroprotection window in NICE 1.10.2 is 24+0 to 29+6 weeks, not after 34 weeks.", "hi": "NICE 1.10.2 में दिमाग़ की सुरक्षा की सीमा 24+0 से 29+6 सप्ताह है, 34 सप्ताह के बाद नहीं।" } }
+      ]
+    }
+  ]
+}

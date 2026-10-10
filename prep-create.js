@@ -43,7 +43,7 @@
      phone resends it with the same idem. Residual risk: if the first request is still in flight on the server when
      the phone's resend arrives (a network stall longer than 45 s, or a server queue), both can reach the model and be
      charged; the server answers the resend from the replay record only once the first one has finished. */
-  var MONTH_CAP = 30, DAY_CAP = 5, DECK_MAX = 50, IMG_PER_ROUND = 5;
+  var MONTH_CAP = 30, DAY_CAP = 5, DECK_MAX = 50, IMG_PER_ROUND = 5, QGEN_MAX = 30;
   /* MaiK Tokens a round of 10 is expected to use before a deck has history: about 30k tokens in and 10k out on
      gemini-3.1-flash-lite (Rs 0.024 / 0.144 per 1k) = Rs 2.2, at 2,000 MT a rupee (_credits.js MT_PER_INR). */
   var MT_ROUND_DEFAULT = 4500;
@@ -170,7 +170,8 @@
   function deckStats(m, store, today) {
     var n = DK.questionCount(m), pg = deckProgress(store, m.id, today), md = (store && store.mod && store.mod["deck-" + m.id]) || null;
     var t = md ? +md.t || 0 : 0, ok = md ? +md.ok || 0 : 0;
-    return { n: n, max: DECK_MAX, answered: Math.min(pg.answered, n), due: pg.due, cardsDue: pg.cardsDue, acc: t ? Math.round(ok * 100 / t) : null, attempts: t, full: n >= DECK_MAX };
+    var max = m && m.qgen ? QGEN_MAX : DECK_MAX;   // a MaiK module (prep-qgen.js) holds up to 30
+    return { n: n, max: max, answered: Math.min(pg.answered, n), due: pg.due, cardsDue: pg.cardsDue, acc: t ? Math.round(ok * 100 / t) : null, attempts: t, full: n >= max };
   }
   function costLine(cost) {
     if (!cost || !(cost.inTok || cost.outTok)) return "";
@@ -755,12 +756,15 @@
       if (!m) { v.innerHTML = '<p class="pn-err" role="alert">This deck is not on this phone any more.</p>'; return; }
       var st = deckStats(m, host.store(), host.today()), id = esc(m.id), busy = job && !jobResult && job.deckId === m.id, paused = !busy && runOk(m.run);
       var unused = (a[1] || []).filter(function (f) { return !f.used; }).length, srcLeft = !!a[2] && (m.prog && m.prog.done ? m.prog.done.length : 0) < SR.chunkSentences(a[2].sents || []).length;
-      var canMore = !st.full && (unused > 0 || srcLeft || paused);
+      var canMore = !st.full && (unused > 0 || srcLeft || paused), mk = !!m.qgen;
       var tb = host.root().querySelector(".pn-bar .pn-t");
       if (tb) tb.innerHTML = "<h1>" + esc(m.title) + "</h1><p>" + esc(examLabel(m.exam)) + (m.diff && m.diff !== "mix" ? " · " + esc(diffLabel(m.diff)) : "") + "</p>";
       var frac = st.n ? Math.min(1, st.answered / st.n) : 0;
       var more;
-      if (st.full) more = '<p class="pc-morel"><b>All ' + st.max + ' questions made.</b> Make a new deck from the next chapter for more.</p>';
+      if (mk) more = st.full ? '<p class="pc-morel"><b>All ' + st.max + ' questions made.</b> Create another module for more.</p>' :
+        G.PREP_QGEN && G.PREP_QGEN.canCreate() ? '<button type="button" class="pn-btn pri" data-act="g-more" data-d="' + id + '">' + host.ico("plus") + " Make " + Math.min(10, st.max - st.n) + " more questions</button>" +
+          '<p class="pn-mut pn-small">' + st.n + " of " + st.max + " in this module.</p>" : '<p class="pc-morel">' + st.n + " of " + st.max + " questions. More can be added when MaiK modules are available.</p>";
+      else if (st.full) more = '<p class="pc-morel"><b>All ' + st.max + ' questions made.</b> Make a new deck from the next chapter for more.</p>';
       else if (busy) more = '<button type="button" class="pn-btn pri" data-act="c-prog">' + host.ico("bolt") + " Show progress</button>";
       else if (paused) more = '<button type="button" class="pn-btn pri" data-act="c-cont" data-d="' + id + '">' + host.ico("play") + " Continue making questions</button>" +
         '<p class="pn-mut pn-small">' + m.run.accepted + " of " + m.run.target + " were ready when it paused. It picks up where it stopped.</p>";
@@ -770,6 +774,7 @@
       v.innerHTML = '<section class="pn-panel pc-dhero" aria-label="Progress">' +
         '<p class="pc-dfig"><b class="pn-big">' + host.fmt(st.n) + '</b><span class="pn-mut">of ' + st.max + " questions</span></p>" +
         '<span class="pn-prog pc-bar" aria-hidden="true"><i style="transform:scaleX(' + frac.toFixed(3) + ')"></i></span>' +
+        (mk ? '<p class="pn-small qg-dline">' + (m.qgen.g ? "Created with MaiK from your notes" : "Created with MaiK from general knowledge, not from the PrepNucleus library. Check before you rely on it.") + "</p>" : "") +
         '<p class="pn-small pc-dstat">' + (st.answered ? host.fmt(st.answered) + " answered" + (st.acc != null ? " · " + st.acc + "% correct" : "") + (st.due ? " · " + host.fmt(st.due) + " due today" : "") : "Not started yet") + "</p></section>" +
         '<h2 class="pn-sec">Practise</h2><div class="pn-group">' +
         (st.n ? host.row("c-prac", host.ico("play"), "Questions", host.fmt(st.n) + (st.n === 1 ? " question" : " questions") + ", with explanations and Ask MaiK", ' data-d="' + id + '"') +
@@ -1208,7 +1213,8 @@
   /* ---------- practise, cards, delete ---------- */
   function practise(host, deckId, mode) {
     Promise.all([DK.getDeck(deckId), DK.items(deckId), DK.imgs ? DK.imgs(deckId).then(null, function () { return []; }) : []]).then(function (a) {
-      var m = a[0], items = (a[1] || []).filter(function (it) { return it && it.o && it.o.length === 4; });
+      // A MaiK module question the student reported (prep-qgen.js) stays out of practice.
+      var m = a[0], items = (a[1] || []).filter(function (it) { return it && it.o && it.o.length === 4 && !(it.qg && it.qg.rep); });
       attachImages(items, a[2]);
       // An image question restored from the account has no picture on this phone: it is left out.
       items = items.filter(function (it) { return !it.imgId || it.img; });

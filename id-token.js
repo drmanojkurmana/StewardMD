@@ -37,6 +37,26 @@
     try { if (window.SMD_DEVICE && SMD_DEVICE.getId) SMD_DEVICE.getId().then(function (id) { if (id) _dev = id; }, function () {}); } catch (e) {}
   }
   window.SMD_IDTOKEN = function () { return (_tok && Date.now() < _tokExp) ? _tok : null; };
+  /* Fetch a fresh token NOW, bounded (owner, 2026-10-10: an owner saw "MaiK usage limit reached").
+   * aiHeaders() only ever reads the cache, so a signed-in doctor whose cached token had lapsed (phone
+   * asleep past the 25-min refresh, cold start before the idle prime) was sent as a GUEST and met the
+   * guest limits. reasoning.js calls this only AFTER a quota refusal of a call sent without a token,
+   * then retries once. Resolves the token, or null when signed out / on timeout (a hung getIdToken
+   * costs at most `ms`, never the native signed-in hang). */
+  window.SMD_IDTOKEN_REFRESH = function (ms) {
+    var u = fbUser();
+    if (!u || !u.getIdToken) return Promise.resolve(null);
+    return new Promise(function (resolve) {
+      var done = false, t = setTimeout(function () { if (!done) { done = true; resolve(null); } }, ms || 4000);
+      try {
+        u.getIdToken(true).then(function (tk) {
+          if (done) return; done = true; clearTimeout(t);
+          if (tk) applyToken(tk, Date.now() + 55 * 60 * 1000);
+          resolve(tk || null);
+        }, function () { if (!done) { done = true; clearTimeout(t); resolve(null); } });
+      } catch (e) { if (!done) { done = true; clearTimeout(t); resolve(null); } }
+    });
+  };
   window.SMD_DEVICEID = function () { return _dev; };
   // Prime on sign-in changes + once at boot; refresh the token before it expires.
   try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.onChange) SMD_ACCOUNT.onChange(function () { idle(refreshToken); }); } catch (e) {}

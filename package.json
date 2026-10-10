@@ -9,6 +9,7 @@
     "eval:maik": "node --max-old-space-size=4096 scripts/maik-eval.mjs",
     "eval:maik:answers": "node scripts/maik-answer-eval.mjs",
     "build:www": "bash scripts/build-www.sh",
+    "audit:prep-deid": "node tools/prep-deid-audit.mjs",
     "sync": "npm run build:www && npx cap sync",
     "ios": "npm run sync && npx cap open ios",
     "android": "npm run sync && npx cap open android"
@@ -21,16 +22,16 @@
     "@capacitor-firebase/app-check": "^8.3.0",
     "@capacitor-firebase/authentication": "^8.3.0",
     "@capacitor-mlkit/text-recognition": "^8.2.1",
-    "@capacitor/android": "^8.4.1",
+    "@capacitor/android": "~8.4.3",
     "@capacitor/app": "^8.1.0",
     "@capacitor/barcode-scanner": "^3.1.1",
     "@capacitor/camera": "^8.2.0",
-    "@capacitor/cli": "^8.4.1",
-    "@capacitor/core": "^8.4.1",
+    "@capacitor/cli": "~8.4.3",
+    "@capacitor/core": "~8.4.3",
     "@capacitor/device": "^8.0.3",
     "@capacitor/filesystem": "^8.1.2",
     "@capacitor/haptics": "^8.0.2",
-    "@capacitor/ios": "^8.4.1",
+    "@capacitor/ios": "~8.4.3",
     "@capacitor/local-notifications": "^8.0.1",
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/push-notifications": "^8.1.1",
@@ -62,6 +63,6 @@
   },
   "overrides": {
     "@xmldom/xmldom": "0.9.12",
-    "brace-expansion": "5.0.9"
+    "brace-expansion": "5.0.12"
   }
 }

@@ -1034,13 +1034,15 @@
     function routeDeepLink(u) {
       var s = String(u || ""); if (s.indexOf("stewardmd://") !== 0) return;
       var route = s.replace("stewardmd://", "").replace(/[/?#].*$/, "").toLowerCase();
+      // stewardmd://prep/Q-8K3-M7T-X26: a shared PrepNucleus question or lesson ID (prep-ids.js checks it).
+      var idm = /^stewardmd:\/\/prep\/([A-Za-z0-9-]{10,24})(?:[/?#]|$)/.exec(s), ropts = idm ? { id: idm[1] } : undefined;
       var tries = 0;
       (function go() {
         if (route === "codeblue") {
           var P2 = plugins(); var cbp = P2 && P2.WatchBridge;
           if (cbp && cbp.openCodeBlue) { try { cbp.openCodeBlue().catch(function () {}); } catch (e) {} return; }
         }
-        if (window.SMD_openRoute) { try { window.SMD_openRoute(route); } catch (e) {} return; }
+        if (window.SMD_openRoute) { try { window.SMD_openRoute(route, ropts); } catch (e) {} return; }
         if (tries++ < 40) setTimeout(go, 250);
       })();
     }

@@ -1,0 +1,200 @@
+{
+ "schema": "prep/assessment-profile/v2",
+ "id": "ini-ss",
+ "version": "2026.1.0",
+ "status": "official",
+ "name": "INI-SS",
+ "session": "INI-SS January 2026 (Stage I CBT, 22 Nov 2025)",
+ "tab": "neet-ss",
+ "verified_on": "2026-10-10",
+ "sources": {
+  "AIIMS-INISS-JAN2026-A": {
+   "url": "AIIMS Examination Section, INI-SS January 2026 session Prospectus Part A (owner-supplied PDF, ~/prep-data/assessment/src/owner-pdfs/a.pdf; aiimsexams.ac.in)",
+   "title": "INI-SS Prospectus Part A for DM/M.Ch. courses, January 2026 session, Examination Section AIIMS New Delhi",
+   "doc_date": null,
+   "sha256": "f0bb860e75245f44a984610be8e641f7d5cce51a04aa4fa0f7f21fad019d9873"
+  }
+ },
+ "format": {
+  "questions": 80,
+  "duration_min": 90,
+  "options": 4,
+  "item_types": [
+   "sba"
+  ],
+  "sections": [
+   {
+    "id": "1",
+    "label": "Stage I",
+    "questions": 80,
+    "minutes": 90
+   }
+  ]
+ },
+ "navigation": {
+  "locked_sections": false,
+  "revisit_within_section": true,
+  "return_to_closed_section": true,
+  "early_section_submit": true,
+  "auto_advance_on_timeout": true,
+  "mark_for_review": true,
+  "break_between_parts": false
+ },
+ "scoring": {
+  "correct": 1,
+  "incorrect": -0.3333333333333333,
+  "unanswered": 0,
+  "pass": {
+   "marks": 40,
+   "of": 80,
+   "label": "Qualifying mark (Stage I)"
+  }
+ },
+ "pace_sec": 68,
+ "blueprint": {
+  "kind": "none",
+  "subjects": {},
+  "unmapped": {},
+  "note": "Questions from the general/basic component of the qualifying degree and the sub-specialty of the course applied for; no split given. Stage II (departmental assessment, 20 marks, AIIMS and PGIMER seats only) is not simulated."
+ },
+ "item_styles": [],
+ "previous_formats": [],
+ "legacy_mock": null,
+ "legacy": null,
+ "style": null,
+ "provenance": [
+  {
+   "field": "/format/questions",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/duration_min",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "90 minutes"
+  },
+  {
+   "field": "/format/options",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "four options assumed: Part A does not state the option count"
+  },
+  {
+   "field": "/format/item_types",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "Objective type of questions of Single Correct Choice"
+  },
+  {
+   "field": "/format/sections",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "one Stage I paper; Part A describes no time-bound sections or parts"
+  },
+  {
+   "field": "/navigation/locked_sections",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "follows from the single paper: no sections to lock"
+  },
+  {
+   "field": "/navigation/return_to_closed_section",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "follows from the single paper"
+  },
+  {
+   "field": "/navigation/early_section_submit",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "not stated; a single paper, so submitting early only ends the test"
+  },
+  {
+   "field": "/navigation/auto_advance_on_timeout",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "not stated; the paper ends at 90 minutes"
+  },
+  {
+   "field": "/navigation/mark_for_review",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "Unanswered/Marked for Review: 0"
+  },
+  {
+   "field": "/navigation/break_between_parts",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "no break is described"
+  },
+  {
+   "field": "/scoring/correct",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/scoring/incorrect",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "minus one-third"
+  },
+  {
+   "field": "/scoring/unanswered",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/scoring/pass",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "qualifying criteria in Stage I: 50 percent"
+  },
+  {
+   "field": "/pace_sec",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "derived: 90 min x 60 / 80 questions"
+  },
+  {
+   "field": "/blueprint/kind",
+   "official": true,
+   "src": "AIIMS-INISS-JAN2026-A",
+   "section": "5.1, p13",
+   "verified_on": "2026-10-10",
+   "note": "no subject distribution given"
+  }
+ ]
+}

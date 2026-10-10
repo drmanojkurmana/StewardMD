@@ -1,0 +1,47 @@
+/* PrepNucleus MaiK modules and the owner's Author screen (prep-qgen.js). Reuses prep.css and prep-create.css tokens and
+   components (.pc-in, .pc-seg, .pc-bar, .pc-stages, .pn-chip, .pn-btn); only what those do not cover is here. */
+.pn-root .qg-create, .pn-root .qg-author { display: flex; flex-direction: column; gap: 10px; }
+.pn-root .qg-create .pc-lbl, .pn-root .qg-author .pc-lbl { margin-top: 8px; }
+.pn-root .qg-src-note { margin: 2px 0 4px; text-wrap: pretty; }
+.pn-root .qg-foot { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.pn-root .qg-foot .pn-btn.pri { width: 100%; }
+.pn-root .qg-safe { padding-top: 12px; border-top: 1px solid var(--pn-line); text-wrap: pretty; }
+.pn-root .qg-prov, .pn-root .qg-dline { margin: 10px 0 0; color: var(--pn-mut); text-wrap: pretty; }
+.pn-root .qg-res .pn-big { font-variant-numeric: tabular-nums; }
+.pn-root select.pc-in { appearance: none; -webkit-appearance: none; padding-right: 36px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--pn-mut) 50%), linear-gradient(135deg, var(--pn-mut) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+.pn-root select.pc-in:disabled { opacity: .55; }
+
+/* Author: batch job, staged command */
+.pn-root .qg-job p, .pn-root .qg-stage p { margin: 0 0 6px; }
+.pn-root .qg-cmd { display: block; padding: 12px; margin: 4px 0 10px; border-radius: var(--pn-r-sm); background: var(--pn-s1); color: var(--pn-text);
+  font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+
+/* Review list */
+.pn-root .qg-revtop { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.pn-root .qg-revtop .pn-btn { flex: 1 1 220px; }
+.pn-root .qg-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.pn-root .qg-item { transition: opacity var(--pn-d-quick, 160ms) var(--pn-ease, ease-out); }
+.pn-root .qg-item.is-drop { opacity: .5; }
+.pn-root .qg-item.is-ok { box-shadow: inset 0 0 0 1.5px var(--pn-ok); }
+.pn-root .qg-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; font-size: 13px; }
+.pn-root .qg-n { min-width: 24px; height: 24px; display: inline-grid; place-items: center; border-radius: var(--pn-r-pill); background: var(--pn-s1); font-weight: 700; font-variant-numeric: tabular-nums; }
+.pn-root .qg-flag, .pn-root .qg-pass, .pn-root .qg-u { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; }
+.pn-root .qg-flag { color: var(--pn-bad); }
+.pn-root .qg-pass { color: var(--pn-ok); }
+.pn-root .qg-u { color: var(--pn-warn); }
+.pn-root .qg-flag svg, .pn-root .qg-pass svg { width: 15px; height: 15px; }
+.pn-root .qg-q { margin: 0 0 8px; font-size: 16px; line-height: 1.45; }
+.pn-root .qg-opts { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.pn-root .qg-opts li { display: flex; gap: 8px; align-items: baseline; padding: 6px 8px; border-radius: var(--pn-r-sm); font-size: 14.5px; line-height: 1.4; }
+.pn-root .qg-opts li.key { background: var(--pn-ok-bg); }
+.pn-root .qg-opts .pn-l { flex: 0 0 auto; font-weight: 700; }
+.pn-root .qg-pick { color: var(--pn-bad); font-weight: 600; }
+.pn-root .qg-exp { margin: 0 0 6px; line-height: 1.5; }
+.pn-root .qg-note { margin: 0 0 8px; color: var(--pn-warn); }
+.pn-root .qg-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.pn-root .qg-acts .pn-chip { min-height: 44px; }
+@media (prefers-reduced-motion: reduce) { .pn-root .qg-item { transition: none; } }
+.pn-root .qg-limit p { margin: 0; text-wrap: pretty; }
+.pn-root .qg-limh { font-weight: 700; font-size: 17px; margin-bottom: 6px !important; }

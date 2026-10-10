@@ -355,7 +355,7 @@
   function rowHTML(it, idx, catIcon) {
     return '<button id="us-row-' + idx + '" class="us-row" role="option" type="button" data-cat="' + esc(it.cat) + '" data-id="' + esc(it.id) + '" data-idx="' + idx + '" aria-selected="' + (idx === ST.sel) + '">' +
       '<span class="us-row-ico">' + (it.cat === "ask" && G.SMD_MAIK_MARK ? G.SMD_MAIK_MARK.html("mark", { size: 20, cls: "us-ico" }) : ico(catIcon)) + '</span>' +
-      '<span class="us-row-txt"><span class="us-row-t">' + esc(it.title) + '</span>' + (it.sub ? '<span class="us-row-s">' + esc(it.sub) + '</span>' : "") + '</span>' +
+      '<span class="us-row-txt"><span class="us-row-t">' + (it.cat === "ask" && G.SMD_MAIK_MARK ? G.SMD_MAIK_MARK.label(esc(it.title)) : esc(it.title)) + '</span>' + (it.sub ? '<span class="us-row-s">' + esc(it.sub) + '</span>' : "") + '</span>' +
       ico("chev", "us-ico us-row-chev") + '</button>';
   }
   function skeletonHTML() { return '<div class="us-skel" aria-hidden="true"><i></i><i></i><i></i></div>'; }

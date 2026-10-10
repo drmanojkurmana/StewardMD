@@ -161,6 +161,21 @@ try {
   ok(/Couldn.t reach your account/i.test(await toasts()), "a real failure to reach the account says so plainly " + await toasts());
   ok(await ev(`return !!document.querySelector('#pfSetupRoot [data-k="name"]') && document.querySelector('#pfSetupRoot [data-k="name"]').value === "Dr Manoj";`) === true, "the sheet stays open with everything typed still there");
 
+  // ── 4. The Firebase SDK never arrives, but the doctor is signed in: the server writes the profile ──
+  //     (owner, 2026-10-10, iPhone: "Couldn't reach your account" with full signal)
+  await ev(`window.__toasts=[]; window.__saved=null; window.SMD_DB=null; window.__loadWorks=false; window.__srv=[];
+    window.SMD_AUTH={ currentUser:{ uid:"u-doc-1", getIdToken:function(){ return Promise.resolve("tok-1"); } } };
+    var rf=window.fetch; window.fetch=function(u,o){ if(String(u).indexOf("/api/auth/save-profile")>=0){ window.__srv.push({u:String(u),h:o&&o.headers,b:o&&o.body}); return Promise.resolve(new Response('{"ok":true}',{status:200})); } return rf.apply(this,arguments); };
+    SMD_PROFILE_SETUP.close(); SMD_PROFILE_SETUP.open(); return 1;`); await sleep(500);
+  await fillRequired();
+  await ev(`document.getElementById("pfsSave").click(); return 1;`); await sleep(1500);
+  const srv = JSON.parse(await ev(`return JSON.stringify(window.__srv);`) || "[]");
+  ok(srv.length === 1 && srv[0].h.Authorization === "Bearer tok-1", "no SDK: Save posts to /api/auth/save-profile with the sign-in token " + JSON.stringify(srv.map((x) => x.u)));
+  const sb = srv[0] ? JSON.parse(srv[0].b) : {};
+  ok(sb.name === "Dr Manoj" && sb.phone === "8897298117" && sb.hospital === "King George Hospital" && sb.degree === "MD" && sb.role === "doctor", "with the form's fields " + JSON.stringify(sb));
+  ok(/Profile saved/.test(await toasts()) && !/Couldn.t/.test(await toasts()), "and says Profile saved, not a network error " + await toasts());
+  ok(await root() === false, "and the sheet closes");
+
   console.log(fails ? `\n${fails} FAILED` : "\nall passed");
 } finally {
   try { ws && ws.close(); } catch {}

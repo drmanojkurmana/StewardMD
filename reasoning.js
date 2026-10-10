@@ -4512,7 +4512,37 @@
     // Patient handout: kb-v2-loader.js fills this slot only when kb/dist/handouts holds one for this disease.
     glance += '<div class="kbh-slot" data-kbh-id="' + esc(id) + '"></div>';
     var jump = chips ? '<nav class="kbr-jump" aria-label="Jump to section"><div class="kbr-jump-in">' + chips + '</div></nav>' : "";
+    if (body) body += kbRelatedHTML(id);   // no chip: it sits at the very end, after References
     return { glance: glance, body: body, jump: jump };
+  }
+  // "Related topics" (3 to 6): crossLinks, diseases that list each other in their differentials, then the same
+  // system and class. Picked by kb-search.js related(); empty when it is not loaded.
+  function kbRelatedHTML(id) {
+    try {
+      var KS = window.SMD_KBSEARCH, H = window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId;
+      if (!KS || !H || !H[id]) return "";
+      var idx = kbBuildIndex(), ids = idx && idx.byId ? KS.related(idx, H, id, 6) : [];
+      if (!ids.length) return "";
+      return '<section class="dx-reader-sec kbr-sec kbr-sec--related" id="kbr-related" tabindex="-1"><h3>Related topics</h3><ul class="kbr-related">' +
+        ids.map(function (rid) {
+          var e = idx.byId[rid];
+          return '<li><button type="button" class="kbr-rel" data-kbrel="' + esc(rid) + '"><span>' + esc(e.name) + (e.sys ? '<small>' + esc(e.sys) + '</small>' : '') + '</span><i aria-hidden="true"></i></button></li>';
+        }).join("") + '</ul></section>';
+    } catch (e) { return ""; }
+  }
+  // One delegated listener per reader element; Back from a related page returns to the page it came from.
+  function H0() { return window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId; }
+  function kbWireRelated(el, id, opts) {
+    el.__kbRel = { id: id, opts: opts };
+    if (el.__kbRelWired) return;
+    el.__kbRelWired = true;
+    el.addEventListener("click", function (ev) {
+      var b = ev.target && ev.target.closest ? ev.target.closest("[data-kbrel]") : null, s = el.__kbRel;
+      if (!b || !s || !window.DX || !DX.openRef) return;
+      var from = s.opts || {};
+      var cur = H0() && H0()[s.id] ? H0()[s.id].name : "";
+      DX.openRef(b.getAttribute("data-kbrel"), { standalone: true, from: from.from, backLabel: "‹ " + (cur.length > 24 ? cur.slice(0, 23) + "…" : cur || "Back"), onBack: function () { DX.openRef(s.id, from); } });
+    });
   }
   // Section chips: scroll the reader body (never the pinned panel) and mark the section in view.
   function kbWireJump(el) {
@@ -4622,6 +4652,7 @@
     var backLabel = "‹ Back to differential";
     if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
     else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
+    if (opts && opts.backLabel) backLabel = opts.backLabel;
     var rd = kbReaderBodyHTML(id, H, { name: name, reason: reason, syn: syn, causes: synCauses, mgmt: rdMgmt, confirm: rdConfirm, keyIx: rdKeyIx });
 
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
@@ -4637,6 +4668,7 @@
       '</div>';
     kbDedupeReader(el);
     try { kbWireJump(el); } catch (e) {}   // the chips are a convenience; never let them block the page
+    try { kbWireRelated(el, id, opts); } catch (e) {}
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
@@ -4648,7 +4680,7 @@
     if (typeof window.SMD_askMaikTopic === "function") {
       var askMk = document.createElement("button"); askMk.type = "button"; askMk.className = "dx-reader-favourite dx-reader-askmaik";
       askMk.setAttribute("aria-label", "Ask MaiK about " + name);
-      askMk.innerHTML = (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>') + '<span>Ask MaiK</span>';
+      askMk.innerHTML = (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>') + '<span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span>';
       askMk.addEventListener("click", function () { try { window.SMD_askMaikTopic(id, name); } catch (e) {} });
       heroActs.appendChild(askMk);
     }
@@ -5440,6 +5472,14 @@
     if (_kbIdx && _kbIdx.length) return _kbIdx;   // never cache an empty index (KB script may still be loading)
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId) || {};
     var arr = [];
+    // kb-search.js (aliases, abbreviations, spelling variants, typo tolerance, ranking): build once, then
+    // normalise the long clinical text in idle slices. The loop below is the fallback if it did not load.
+    var KS = window.SMD_KBSEARCH;
+    if (KS) {
+      arr = KS.buildIndex(H, { branch: kbBranch });
+      if (arr.length) { _kbIdx = arr; KS.warm(arr); }
+      return arr;
+    }
     for (var id in H) {
       var d = H[id];
       var know = [].concat(d.clinicalPearls || [], d.pathophysiology || [], d.additionalDifferentials || [],
@@ -5454,6 +5494,7 @@
   }
   function kbSearch(q, limit) {
     q = (q || "").toLowerCase().trim(); if (q.length < 2) return [];
+    if (window.SMD_KBSEARCH) return window.SMD_KBSEARCH.search(kbBuildIndex(), q, { limit: limit || 40 }).map(function (x) { return x.d; });
     var out = kbBuildIndex().filter(function (d) { return d.text.indexOf(q) >= 0; });
     out.sort(function (a, b) {
       var an = a.name.toLowerCase().indexOf(q) >= 0 ? 0 : 1, bn = b.name.toLowerCase().indexOf(q) >= 0 ? 0 : 1;
@@ -5775,21 +5816,28 @@
     var grid = document.getElementById("kblibGrid"); if (!grid) return;
     var q = _libState.q.toLowerCase().trim();
     var searching = q.length >= 2;
-    var variants = searching ? kbQueryVariants(q) : null;
+    var KS = window.SMD_KBSEARCH, ksOn = !!(KS && searching);
+    var variants = searching && !ksOn ? kbQueryVariants(q) : null;
     var all = kbBuildIndex();
     var scored = [];
-    all.forEach(function (d) {
-      if (_libState.cls !== "all" && d.cls !== _libState.cls) return;
-      if (_libState.src === "ref" && !d.ref) return;
-      if (_libState.src === "dx" && d.ref) return;
-      if (_libState.branch !== "all" && d.branch !== _libState.branch) return;
+    var keep = function (d) {
+      if (_libState.cls !== "all" && d.cls !== _libState.cls) return false;
+      if (_libState.src === "ref" && !d.ref) return false;
+      if (_libState.src === "dx" && d.ref) return false;
+      if (_libState.branch !== "all" && d.branch !== _libState.branch) return false;
+      return true;
+    };
+    // kb-search.js ranks exact name, alias, prefix, name word, then body; it returns best first.
+    if (ksOn) scored = KS.search(all, q, { filter: keep });
+    else all.forEach(function (d) {
+      if (!keep(d)) return;
       var s = 0;
       if (searching) { s = kbRelevance(d, variants); if (s < 0) return; }
       scored.push({ d: d, s: s });
     });
     // Relevance-rank when searching (title matches first, clinical-detail matches last),
     // tie-broken alphabetically; with no query keep the alphabetical index order.
-    if (searching) scored.sort(function (a, b) { return b.s - a.s || (a.d.name < b.d.name ? -1 : a.d.name > b.d.name ? 1 : 0); });
+    if (searching && !ksOn) scored.sort(function (a, b) { return b.s - a.s || (a.d.name < b.d.name ? -1 : a.d.name > b.d.name ? 1 : 0); });
     var res = scored.map(function (x) { return x.d; });
     var shown = Math.min(_libState.limit, res.length);
     var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = 'Showing ' + shown + ' of ' + res.length.toLocaleString() + ' entries';
@@ -6524,15 +6572,25 @@
       var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
-      function attempt(retried) {
-        return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
+      /* A refusal of a call that went out WITHOUT the sign-in token is retried once with a fresh one
+       * (id-token.js SMD_IDTOKEN_REFRESH): a lapsed cached token made an owner or Pro doctor a guest. */
+      function withAuth(sentAuth, authRetried, res, again) {
+        if (sentAuth || authRetried || typeof window.SMD_IDTOKEN_REFRESH !== "function") return res;
+        return window.SMD_IDTOKEN_REFRESH(4000).then(function (tk) { return tk ? again() : res; }, function () { return res; });
+      }
+      function attempt(retried, authRetried) {
+        var sentAuth = false;
+        return aiHeaders().then(function (h) { sentAuth = !!(h && h.Authorization); return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
           if (r.status === 402) {
-            return r.json().catch(function () { return {}; }).then(function (j) { return { error: "quota", needsPro: true, message: (j && j.message) || "" }; });
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              return withAuth(sentAuth, authRetried, { error: "quota", needsPro: true, reason: (j && j.reason) || "", message: (j && j.message) || "" }, function () { return attempt(retried, true); });
+            });
           }
           if (r.status === 429) {
             return r.json().catch(function () { return {}; }).then(function (j) {
-              if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true); });
-              return { error: "quota", reason: (j && j.reason) || "rate" };
+              if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true, authRetried); });
+              var q = { error: "quota", reason: (j && j.reason) || "rate", message: (j && j.message) || "" };
+              return q.reason === "rate" ? q : withAuth(sentAuth, authRetried, q, function () { return attempt(retried, true); });
             });
           }
           /* EMPTY / UNPARSABLE REPLY (owner screenshot, 2026-10-04, Android): "Reason: Failed to execute
@@ -6545,7 +6603,7 @@
             var j = null;
             try { j = t ? JSON.parse(t) : null; } catch (e) { j = null; }
             if (j && typeof j === "object") { if (!j.sources) j.sources = pkg.sources; return j; }
-            if (!retried) return new Promise(function (res) { setTimeout(res, 800); }).then(function () { return attempt(true); });
+            if (!retried) return new Promise(function (res) { setTimeout(res, 800); }).then(function () { return attempt(true, authRetried); });
             return { error: "server-empty", status: r.status || 0 };
           });
         });
@@ -6705,7 +6763,7 @@
         var NX_FIRST = 12000, NX_STALL = 14000, NX_TOTAL = 30000;   // server: connect 10s, idle 12s
         return aiHeaders().then(function (h) {
           return new Promise(function (resolve) {
-            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, fin = false, nt = null;
+            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, sawCut = false, fin = false, nt = null;
             function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } resolve(v); }
             // One deterministic ending: abort this request, then take the proven whole-answer fetch.
             // No second request is ever in flight at the same time.
@@ -6722,7 +6780,7 @@
                 if (ev && ev.delta) { acc += ev.delta; armx(NX_STALL); try { if (onDelta) onDelta(acc); } catch (e) {} }
                 // stalled:true means the SERVER hit its idle/total deadline and closed early, so the
                 // text is INCOMPLETE even though a done event arrived. Never surface it as an answer.
-                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; }
+                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; if (ev.cutShort) sawCut = true; }
               }
             }
             function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
@@ -6734,7 +6792,7 @@
               drain();
               // Only a CLEANLY completed stream may surface as the answer — a truncated clinical
               // answer must never look like a whole one. Anything else falls back to the proven fetch.
-              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources }); return; }
+              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut || undefined }); return; }
               nsBad(true); settle(fallback());
             };
             xhr.onerror = function () { nsBad(true); settle(fallback()); };
@@ -6783,7 +6841,7 @@
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }
-        var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "";
+        var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "", sawCut2 = false;
         function pump() {
           return reader.read().then(function (res) {
             if (res.done) return;
@@ -6794,7 +6852,7 @@
               if (!data) return;
               var ev; try { ev = JSON.parse(data); } catch (e) { return; }
               if (ev && ev.delta) { acc += ev.delta; arm(STALL_MS); try { if (onDelta) onDelta(acc); } catch (e) {} }
-              if (ev && ev.done) { gotDone = true; }
+              if (ev && ev.done) { gotDone = true; if (ev.cutShort) sawCut2 = true; }
             });
             return pump();
           });
@@ -6804,12 +6862,12 @@
         // transient streamed tokens are then replaced by the full answer). Web keeps its lenient behavior.
         return pump().then(function () {
           done();
-          if (acc && (gotDone || !isNative)) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources }; }
+          if (acc && (gotDone || !isNative)) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut2 || undefined }; }
           if (isNative) nsBad(true);
           return fallback();
         }).catch(function () {
           done();
-          if (acc && gotDone) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources }; }
+          if (acc && gotDone) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut2 || undefined }; }
           if (isNative) nsBad(true);
           return fallback();
         });

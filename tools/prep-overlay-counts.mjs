@@ -15,11 +15,18 @@ const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? proces
 const API = arg("--api", "https://stewardmd.in/api/prep/bank/").replace(/\/?$/, "/");
 const OUT = arg("--out", join(ROOT, "prep/bank/overlay-counts.json"));
 
-/* overlaysOf(src) -> { subject: [set, ...] } from prep.js's OVERLAYS default. */
-export function overlaysOf(src) {
+/* overlaysOf(src, extra) -> { subject: [set, ...] } from prep.js's OVERLAYS default plus any extra sets. */
+export function overlaysOf(src, extra) {
   const m = /var OVERLAYS = G\.SMD_PREP_OVERLAYS \|\| (\{[^\n]*?\});/.exec(src);
   if (!m) throw new Error("OVERLAYS not found in prep.js");
-  return JSON.parse(m[1].replace(/([{,]\s*)([a-z][a-z0-9-]*)\s*:/gi, '$1"$2":'));
+  const ov = JSON.parse(m[1].replace(/([{,]\s*)([a-z][a-z0-9-]*)\s*:/gi, '$1"$2":'));
+  if (extra && typeof extra === "object") {
+    for (const [sid, list] of Object.entries(extra)) {
+      const cur = ov[sid] || (ov[sid] = []);
+      for (const s of list) if (!cur.includes(s)) cur.push(s);
+    }
+  }
+  return ov;
 }
 /* usableCount(file) -> items with an id and no flags, each id once. */
 export function usableCount(file) {
@@ -33,7 +40,12 @@ async function main() {
   const ver = (/VER = G\.SMD_PREP_BANK_VER \|\| "(v\d+)"/.exec(src) || [])[1];
   const tax = JSON.parse(fs.readFileSync(join(ROOT, "prep/taxonomy.json"), "utf8"));
   const bv = {}; for (const b of tax.branches) for (const s of b.subjects) bv[s.id] = s.bv || ver;
-  const ov = overlaysOf(src), sets = {};
+  let extraSets = null;
+  const pubIdx = join(process.env.HOME || "", "prep-data/qgen/publish/maik/index.json");
+  if (fs.existsSync(pubIdx)) {
+    try { extraSets = JSON.parse(fs.readFileSync(pubIdx, "utf8")).sets; } catch (e) {}
+  }
+  const ov = overlaysOf(src, extraSets), sets = {};
   for (const [sid, list] of Object.entries(ov)) {
     const ix = JSON.parse(fs.readFileSync(join(ROOT, "prep/bank", bv[sid], sid, "index.json"), "utf8"));
     for (const set of list) {
