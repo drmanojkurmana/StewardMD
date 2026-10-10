@@ -81,6 +81,19 @@
     return k;
   }
 
+  // Teaching only for the questions the learner missed; a right answer needs no note.
+  function missedKeys(c, missed) {
+    var t = truthFor(c), k = [];
+    missed.forEach(function (id) {
+      if (id === "uc" && t.uc === "tachysystole") k.push("uc.tachysystole");
+      if (id === "baseline" && t.baseline !== "normal") k.push("baseline." + t.baseline);
+      if (id === "variability" && t.variability !== "normal") k.push("variability." + t.variability);
+      if ((id === "decels" || id === "decelType") && t.decels !== "none") k.push("decels." + t.decels);
+      if (id === "figo" || id === "action") k.push("trace_vs_outcome");
+    });
+    return k.filter(function (x, i) { return k.indexOf(x) === i; });
+  }
+
   /* ---------- words (Review Desk shows the checklist labels from here) ---------- */
   var L10N = {
     en: { contractions: "Contractions", baseline: "Baseline heart rate", variability: "Variability", decels: "Decelerations", decelType: "Deceleration type",
@@ -130,7 +143,7 @@
   };
 
   var API = { QUESTIONS: QUESTIONS, checklistFor: checklistFor, truthFor: truthFor, suggestedReview: suggestedReview, reviewComplete: reviewComplete,
-    gradeChecklist: gradeChecklist, rationaleKeys: rationaleKeys, L10N: L10N };
+    gradeChecklist: gradeChecklist, rationaleKeys: rationaleKeys, missedKeys: missedKeys, L10N: L10N };
   if (node) { module.exports = API; return; }
   G.TOKOS_CTG = API;
 
@@ -333,7 +346,8 @@
     }).join("");
     var maxD = 0; (f.decels || []).forEach(function (d) { if (d.durationSec > maxD) maxD = d.durationSec; });
     var winM = f.window && f.window.minutes, R = cs.rationaleData;
-    var why = rationaleKeys(c).map(function (k) { var r = R && R[k]; return r ? "<li>" + esc(r[lang] || r.en) + "</li>" : ""; }).join("");
+    var missed = res.ids.filter(function (id) { return !res.perQ[id]; });
+    var why = missedKeys(c, missed).map(function (k) { var r = R && R[k]; return r ? "<li>" + esc(r[lang] || r.en) + "</li>" : ""; }).join("");
     var apgar = o.apgar1 == null && o.apgar5 == null ? w.notRecorded : num(o.apgar1) + " / " + num(o.apgar5);
     var les = !res.perQ.figo && host._learn ? host._learn.lessonFor("ctg", t.figo) : null;
     // Review Focus: the two .tok-block sections stay separate: what the trace showed, then what was recorded at birth.
