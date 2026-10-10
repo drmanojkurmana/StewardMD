@@ -314,5 +314,6 @@
   function back() { return zoomClose(); }
   function leave() { P.zoom = null; P.mf = {}; }
 
-  G.PREP_PYQ = { homeRow: homeRow, warm: warm, mount: mount, chips: chips, figure: figure, prov: prov, act: act, back: back, leave: leave, _pure: PURE, _st: P };
+  // items(host): every previous-year item (a shared ID resolves one, prep-ids.js).
+  G.PREP_PYQ = { items: loadItems, homeRow: homeRow, warm: warm, mount: mount, chips: chips, figure: figure, prov: prov, act: act, back: back, leave: leave, _pure: PURE, _st: P };
 })(typeof window !== "undefined" ? window : this);

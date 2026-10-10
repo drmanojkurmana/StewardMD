@@ -869,6 +869,7 @@
   function back() {
     if (!st.open) return false;
     if (G.PREP_VIEWER && G.PREP_VIEWER.close()) return true;   // an enlarged image (prep-viewer.js) closes first
+    if (G.PREP_IDS && G.PREP_IDS.back()) return true;   // the share sheet (prep-ids.js) closes first
     if (G.PREP_ASK && G.PREP_ASK.back()) return true;   // the Ask MaiK sheet (prep-ask.js) closes first
     if (G.PrepPro && G.PrepPro.back && G.PrepPro.back()) return true;   // PrepNucleus Pro: the limit sheet closes first
     if (G.PREP_SETUP && G.PREP_SETUP.back()) return true;   // the practice setup sheet (prep-setup.js)
@@ -890,7 +891,9 @@
   }
 
   function open(opts) {
-    if (st.open) return true;
+    // A shared ID (deep link stewardmd://prep/<ID>) while PrepNucleus is already open: open it over the current screen.
+    // Still loading (the taxonomy): kept for the first screen, which opens it.
+    if (st.open) { if (opts && opts.id && G.PREP_IDS) { if (st.tax && st.stack.length) G.PREP_IDS.open(String(opts.id), HOST); else st.pendId = String(opts.id); } return true; }
     load();
     st.prevFocus = D.activeElement; st.prevOverflow = D.body.style.overflow;
     root = D.createElement("div"); root.id = "smdPrep"; root.className = "pn-root";
@@ -914,8 +917,11 @@
     // Reminder, widget, Live Activity and sync on open (prep-native.js).
     if (G.PREP_NATIVE) G.PREP_NATIVE.opened(HOST);
     root.innerHTML = '<div class="pn-load" role="status">Loading PrepNucleus…</div>';
+    st.pendId = opts && opts.id ? String(opts.id) : null;
     loadTax().then(function () {
-      if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); }
+      var pid = st.pendId; st.pendId = null;
+      if (pid && G.PREP_IDS) { push(renderHome); G.PREP_IDS.open(pid, HOST); }
+      else if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); }
       else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
       else if (opts && opts.mode === "plan") { st.stack = [renderHome]; renderHome(); startPlan(); }
       else if (opts && opts.query) openQuery(opts);
@@ -950,6 +956,7 @@
     try { if (G.PREP_FLASH) G.PREP_FLASH.leave(); } catch (e) {}
     try { if (G.PREP_SETUP) G.PREP_SETUP.leave(); } catch (e) {}
     try { if (G.PREP_ASK) G.PREP_ASK.leave(); } catch (e) {}
+    try { if (G.PREP_IDS) G.PREP_IDS.leave(); } catch (e) {}
     try { if (G.PREP_MOTION) G.PREP_MOTION.detach(); } catch (e) {}
     try { if (G.PREP_TIDE) G.PREP_TIDE.detach(); } catch (e) {}
     try { if (G.PREP_NAV) G.PREP_NAV.detach(); } catch (e) {}
@@ -1100,7 +1107,8 @@
       '<h2 class="pn-sec">Your course</h2><div class="pn-group">' +
       (plan ? row("p-settings", ico("gear"), "Exam and plan", "Exam: " + esc(exLabel) + " · daily goal and reminder") : "") +
       (G.PrepPro ? row("pro-open", ico("star"), "PrepNucleus Pro", "Your plan and what it includes") : "") +
-      row("downloads", ico("dl"), "Offline downloads", "Subjects kept on this phone") + "</div>" +
+      row("downloads", ico("dl"), "Offline downloads", "Subjects kept on this phone") +
+      (G.PREP_IDS ? row("id-screen", ico("search"), "Open a shared ID", "A question or lesson a friend sent you") : "") + "</div>" +
       '<h2 class="pn-sec">You</h2><div class="pn-group">' +
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days, share your progress") : "") +
       row("bookmarks", ico("bm"), "Bookmarks", fmt(Object.keys(s.bm).length) + " saved") +
@@ -1346,7 +1354,9 @@
     }).join("");
     // Your own deck's questions stay on this phone: no bookmark (bookmarks reload from the bank) and no report.
     // Study: bookmark and, once answered, report, as labelled icon buttons in the bar.
-    var acts = (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
+    // Share IDs (prep-ids.js): share in the bar, the ID itself under the question (tap copies). Not your own deck's items.
+    var IDS = !own && G.PREP_IDS ? G.PREP_IDS : null, qid = IDS ? IDS.ofItem(it) : null;
+    var acts = (qid ? IDS.shareBtn(qid) : "") + (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
       (shown && !own ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
     var clk = r.limit || r.qsec ? clockHtml(r) : "";
     var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
@@ -1377,7 +1387,7 @@
           var on = (s.mt[it.id] || [])[2] === t[0];
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
         }).join("") + "</div></div>" : "") +
-        provHtml(it) + "</section>";
+        provHtml(it) + (qid ? IDS.chip(qid) : "") + "</section>";
     }
     // Time up: the question stays locked for the rest of the set, answered or not.
     var lockNote = locked ? '<p class="pn-timeup" role="status">' + ico("lock") + "<span><b>Time up</b>" + (chosen >= 0 ? "Your answer " + L[chosen] + " is kept and can no longer be changed." : "This question can no longer be answered.") + "</span></p>" : "";
@@ -1391,7 +1401,7 @@
     var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : "";
     st.swipeIn = 0;
     paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + qprogHtml(r) +
-      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + (qid && !fb ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
     if (revealFb) revealFeedback();
     bindRunSwipe();
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
@@ -1730,15 +1740,16 @@
     var r = st.run, it = r.items[i];
     st.stack.push(function () {
       var L = ["A", "B", "C", "D"];
+      var rid = G.PREP_IDS && it._s !== "deck" ? G.PREP_IDS.ofItem(it) : null;
       var tu = r.qc && r.qc.out[i] ? '<p class="pn-timeup">' + ico("lock") + "<span><b>Time ran out</b>" + (r.ans[i] >= 0 ? "Your answer was kept." : "Not answered.") + "</span></p>" : "";
-      paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
+      paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
         return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
       }).join("") + '</ol><section class="pn-fb">' + (function () {
         var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
         return whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_ASK ? askBtn("ask-rv", r.ans[i] >= 0 && r.ans[i] !== it.a ? "Why is " + L[r.ans[i]] + " wrong? Ask MaiK" : "Ask MaiK why " + L[it.a] + " is right", ' data-i="' + i + '"') : "");
-      })() + provHtml(it) + "</section></div>");
+      })() + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div>");
       if (G.PREP_RAD) G.PREP_RAD.mount(root);
     });
     rerender();
@@ -1870,13 +1881,16 @@
   function renderSearch() {
     var sb = subjectById(srch.sid);
     paint(bar("Search", tx(sb.name), "back") + '<div class="pn-body"><label class="pn-sl" for="pnSearch"><span class="pn-mut pn-small">Words from the question or its options</span>' +
-      '<span class="pn-srch">' + ico("search") + '<input id="pnSearch" class="pn-in" type="search" autocomplete="off" enterkeyhint="search" value="' + esc(srch.q) + '"></span></label><div id="pnHits" aria-live="polite">' +
+      '<span class="pn-srch">' + ico("search") + '<input id="pnSearch" class="pn-in" type="search" autocomplete="off" enterkeyhint="search" value="' + esc(srch.q) + '"></span></label>' + (G.PREP_IDS ? G.PREP_IDS.searchExtra() : "") + '<div id="pnHits" aria-live="polite">' +
       (srch.q ? "" : '<p class="pn-empty pn-art-sc pn-hint">Search every question in ' + tx(sb.name) + ' by a word from its stem or options.</p>') + "</div></div>", "#pnSearch");
     if (srch.q) runSearch();
   }
   function runSearch() {
     var box = root && root.querySelector("#pnHits"), q = srch.q, sid = srch.sid, BANK = G.SPECIALTY && G.SPECIALTY.BANK;
     if (!box) return;
+    // A shared ID (prep-ids.js) typed or pasted here opens that question or lesson, from any subject.
+    var idh = G.PREP_IDS ? G.PREP_IDS.searchHtml(q) : null;
+    if (idh) { box.innerHTML = idh; return; }
     if (q.trim().length < 3) { box.innerHTML = q.trim() ? '<p class="pn-mut pn-small">Type at least 3 letters.</p>' : '<p class="pn-empty pn-art-sc pn-hint">Search every question by a word from its stem or options.</p>'; return; }
     if (!BANK) { box.innerHTML = '<p class="pn-err">Search did not load. Close and open PrepNucleus again.</p>'; return; }
     box.innerHTML = '<p class="pn-load" role="status">Searching…</p>';
@@ -2167,6 +2181,8 @@
     // PrepNucleus Pro (prep-pro.js): a lesson or card batch checks the free tier before it starts; "pro-" acts are its own.
     if (G.PrepPro && (a === "l-open" || a === "k-open" || a === "k-due")) { var pf = a === "l-open" ? "lessons" : "cards", pm = b.getAttribute("data-m"); if (!G.PrepPro.can(pf, pm ? { module: pm } : null)) return G.PrepPro.openLimit(pf); if (pf === "lessons") G.PrepPro.use(pf, { module: pm }); }
     if (a.indexOf("pro-") === 0) return G.PrepPro && G.PrepPro.act(a, b, HOST);
+    // Share IDs (prep-ids.js) own every data-act starting "id-".
+    if (a.indexOf("id-") === 0 && G.PREP_IDS) return G.PREP_IDS.act(a, b, HOST);
     // Friends, groups and the accuracy page (prep-social.js).
     if (a === "soc-open") return G.PrepSocial && G.PrepSocial.open && G.PrepSocial.open(HOST);
     if (a === "soc-acc") return G.PrepSocial && G.PrepSocial.openAccuracy && G.PrepSocial.openAccuracy(HOST);
@@ -2222,7 +2238,7 @@
     subjectsOf: subjectsOf, loadIndex: loadIndex, ix: function () { return st.ix; }, startMock: startMock, pure: PURE,
     // Celebrations and MaiK lines (lessons): celeFor(m0, holder), celeAttrs, celeChip, maikLine({ subject }, holder), snap().
     snap: snapNow, celeFor: celeFor, celeAttrs: celeAttrs, celeChip: celeChip, maikLine: maikLine,
-    stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, shuffle: shuffle, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut };
+    stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, shuffle: shuffle, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut, cacheKeys: cacheKeys };
 
   var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST };
   G.PREP = API_OBJ;
