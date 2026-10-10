@@ -154,6 +154,8 @@ done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"
 # Schema v2 disease tables and flowcharts: 64 on-demand buckets (kb/tools/build-kb-v2.mjs), read by kb-v2-loader.js.
 [ -d kb/dist/v2 ] && mkdir -p "$WWW/kb/dist/v2" && cp kb/dist/v2/*.json "$WWW/kb/dist/v2/"
+# Patient handouts: 64 on-demand buckets (kb/tools/build-handouts.mjs), plain JSON.
+[ -d kb/dist/handouts ] && mkdir -p "$WWW/kb/dist/handouts" && cp kb/dist/handouts/*.json "$WWW/kb/dist/handouts/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
 # Oncology protocol templates (static, plain JSON - same trust tier as kb/treatments, NOT the
 # encrypted Pro KB). Fetched directly by the client, no kb-loader.js change (Phase 3).

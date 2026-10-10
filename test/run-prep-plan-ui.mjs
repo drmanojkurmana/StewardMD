@@ -63,7 +63,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_QGEN=false; window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_arena");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
@@ -108,7 +108,7 @@ try {
   // ---- home: readiness line and Today's plan
   ok(await until(`return /^0\\/100/.test(document.querySelector("#smdPrep .pl-num").textContent);`, 3000), "readiness is 0 before any answer");
   ok(/first answers start it moving/.test(await text("#smdPrep .pl-hero")), "a friendly empty line, not a failing score");
-  ok(/10 days to the exam/.test(await text("#smdPrep .pl-top")), "the countdown shows the days to the exam");
+  ok(/Exam in\s*10\s*days/.test(await text("#smdPrep .pl-top")), "the countdown shows the days to the exam (quiet card: Exam in 10 days)");
   ok(await until(`return !!document.querySelector("#smdPrep .pl-list");`, 5000), "Today's plan is drawn");
   const kinds = async () => ev(`return Array.from(document.querySelectorAll("#smdPrep .pl-list .pl-item")).map(function(b){return b.getAttribute("data-k");}).join(",");`);
   ok(await kinds() === "new,mock", "10 days out, 120 min, nothing due: new questions then a mini mock, no new lesson: " + await kinds());
@@ -161,6 +161,8 @@ try {
   await until(`return !!document.querySelector("#pnPlanSheet .pl-w");`, 3000);
   await click("#pnPlanSheet .pl-w .pn-btn");
   ok(await until(`return !document.getElementById("pnPlanSheet") && !!document.querySelector("#smdPrep #pnModPanel");`, 5000), "the action opens that module");
+  // prep60: the module asks how to practise (mode sheet); back closes it, then leaves the module.
+  if (await until(`return !!document.getElementById("pnSetup");`, 3000)) await ev(`PREP.back(); return 1;`);
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.querySelector("#smdPrep .pl-hero");`, 3000);
 

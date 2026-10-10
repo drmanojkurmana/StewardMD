@@ -6,6 +6,7 @@
  * object with an R2-style get(), so node tests pass a Map.
  */
 import { sha256Hex, mulberry32, seedFrom } from "./_prep-core.js";
+import ASSESS from "../prep-assess.js";
 
 export const EXAMS = ["neet-pg", "neet-ss", "usmle"];
 const NEET_SS_SUBJECTS = ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology", "ss-infectious-diseases", "ss-critical-care", "ss-biostatistics"];
@@ -14,9 +15,10 @@ const PG_ONLY = ["forensic-medicine", "community-medicine", "ophthalmology", "en
 // Subjects per exam, from prep/taxonomy.json (`ex` tags). Keep in step with the taxonomy.
 export const SUBJECTS = { "neet-pg": USMLE_SUBJECTS.concat(PG_ONLY), "usmle": USMLE_SUBJECTS, "neet-ss": NEET_SS_SUBJECTS };
 
-// Marking schemes: the MOCKS numbers in prep.js. An event uses its exam's first pattern (INI-CET is a pattern of the
-// neet-pg exam tab; its scheme is here for parity and tests).
-export const SCHEMES = { "neet-pg": { plus: 4, minus: 1 }, "ini-cet": { plus: 1, minus: 1 / 3 }, "neet-ss": { plus: 4, minus: 1 }, "usmle": { plus: 1, minus: 0 } };
+// Marking schemes, read from the versioned exam profiles (prep/assess/profiles via prep-assess.js schemes()), the same
+// source as prep.js MOCKS: { "neet-pg": +4/-1, "ini-cet": +1/-1/3, "neet-ss": +4/-1, "usmle": +1/0 }. An event uses its
+// exam's first pattern (INI-CET is a pattern of the neet-pg exam tab; its scheme is here for parity and tests).
+export const SCHEMES = ASSESS.schemes();
 
 /* ---------- identity ---------- */
 export function uidHash(uid) { return sha256Hex(String(uid)).slice(0, 24); }

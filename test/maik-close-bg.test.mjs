@@ -73,7 +73,7 @@ test("background chooser: a sidebar row next to MaiK buddy, a radiogroup, and ev
 });
 
 test("the Display sheet edits the theme on screen (it used to edit only light)", () => {
-  const f = H.slice(H.indexOf("  function openDisplay() {"), H.indexOf("  function refreshD() {"));
+  const f = H.slice(H.indexOf("  function openDisplay("), H.indexOf("  function refreshD() {"));
   assert.match(f, /function atmoKey\(\) \{/);
   assert.doesNotMatch(f, /setConfig\(\{\s*light:|\{ light: \{\} \}|getConfig\(\)\.light/);
   assert.match(f, /SMD_MAIK_ATMOSPHERE\.choose\(atmoKey\(\), btn\.getAttribute\("data-pre-id"\)\)/);

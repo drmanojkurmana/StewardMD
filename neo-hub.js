@@ -42,6 +42,7 @@
   function dataOrNull(name) { return data(name).then(null, function () { return null; }); }
   function badge(doc) {
     var rv = (doc && doc.review) || {};
+    if (rv.status === "verified") return '<span class="nh-ok">Verified</span>';
     if (rv.status && rv.status !== "ai_drafted" && rv.by) return '<span class="nh-ok">Reviewed by ' + esc(rv.by) + (rv.date ? ", " + esc(rv.date) : "") + "</span>";
     return '<span class="nh-draft" title="AI-drafted from the cited sources; not yet approved by a neonatologist">Draft</span>';
   }

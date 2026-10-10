@@ -14,7 +14,8 @@
  * only in R2 (never in the public repo). Only whitelisted paths are served; files are versioned (v1, v2, ...)
  * and never change once uploaded, so they are cached as immutable.
  */
-const PATH_RE = /^v\d{1,3}\/(?:manifest\.json|[a-z0-9-]{2,60}\/(?:index|search)\.json|[a-z0-9-]{2,60}\/mcq\/[a-z0-9-]{2,80}\.json)$/;
+// search-<8 hex>.json: a rebuilt subject search index under a new immutable name (the subject index.json names it).
+const PATH_RE = /^v\d{1,3}\/(?:manifest\.json|[a-z0-9-]{2,60}\/(?:index|search|search-[0-9a-f]{8})\.json|[a-z0-9-]{2,60}\/mcq\/[a-z0-9-]{2,80}\.json)$/;
 // PYQ (tools/prep-pyq.mjs): v<n>/pyq/index.json (names the current items file, so short cache), items-<8 hex>.json and
 // img/<name>.webp (both immutable: the items name carries a content hash, image names never change meaning).
 const PYQ_RE = /^v\d{1,3}\/pyq\/(?:index\.json|items-[0-9a-f]{8}\.json|img\/[a-z0-9-]{2,80}\.webp)$/;
@@ -28,20 +29,35 @@ const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.js
 const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
 // Images a bank item carries (img + imgPlace, set by the bank build): v<n>/img/<name>.webp, immutable.
 const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
-// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"; tools/prep-radmax.mjs and tools/prep-ctc.mjs, sets "radmax", "radmax2", "radmax3"): figures
+// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"; tools/prep-radmax.mjs and tools/prep-ctc.mjs, sets "radmax" to "radmax7"): figures
 // img/radnotes/rn-<id>.webp or img/radmax/rm-<id>.webp and MCQ overlays overlay/<set>/<subject>/<module>.json (all
-// immutable: a new run writes new names or a new set folder, radmax2, radmax3, ..., as medcov).
-const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|overlay\/(?:radnotes|radmax(?:[2-9]|[1-9]\d)?)\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
+// immutable: a new run writes new names or a new set folder, radnotes2, radnotes3, radmax2 ... radmax7, as medcov).
+const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|overlay\/(?:radnotes|radmax)(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
 // Medicine coverage MCQs (tools/prep-medcov.mjs, set "medcov"): overlay/medcov/<subject>/<module>.json, immutable.
-// A new release goes to a new folder (medcov2, medcov3, ...) so phones that cached the old file fetch the new one.
+// A new release goes to a new folder (medcov2, medcov3, medcov4, ...) so phones that cached the old file fetch the new one.
 const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+// Owner-reviewed MaiK questions (Author screen + tools/prep-qgen.mjs publish, set "maik<n>"): overlay/maik<n>/<subject>/<module>.json,
+// immutable. The staging copies under prep-qgen/ are outside the prep-bank/ prefix and never served.
+const MAIK_RE = /^overlay\/maik[1-9]\d{0,2}\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+// MaiK overlay manifest: overlay/maik/index.json (short cache) points to immutable overlay/maik/manifest-[0-9a-f]{8,16}.json
+const MAIK_MANIFEST_RE = /^overlay\/maik\/(?:index\.json|manifest-[0-9a-f]{8,16}\.json)$/;
+// Share IDs (tools/prep-ids.mjs, prep-ids.js): v<n>/ids/index.json names the current shards (short cache); a shard
+// <two ID characters>-<6 hex content hash>.json is immutable (a changed shard gets a new name).
+const IDS_RE = /^v\d{1,3}\/ids\/(?:index|[0-9a-z]{2}-[0-9a-f]{6})\.json$/;
+// Knowledge links (tools/prep-links.mjs, prep-reason.js): v<n>/links/index.json names the current module and
+// concept shards (short cache); m/<module>-<8 hex>.json and c/<subject>-<8 hex>.json are immutable (a changed
+// shard gets a new name). No question text is published.
+const LINKS_RE = /^v\d{1,3}\/links\/(?:index\.json|m\/[a-z0-9-]{2,80}-[0-9a-f]{8}\.json|c\/[a-z0-9-]{2,60}-[0-9a-f]{8}\.json)$/;
+// Item-quality sidecar (Tests 2 reader, prep-tests.js; schema prep/assess/schemas/item-quality.schema.json): quality/index.json
+// names the current per-subject files (short cache), quality/v<n>/<subject>.json is immutable. Absent = every visible item stays eligible.
+const QUALITY_RE = /^quality\/(?:index\.json|v\d{1,3}\/[a-z0-9-]{2,60}\.json)$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || RAD_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || MAIK_RE.test(p) || MAIK_MANIFEST_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) || LINKS_RE.test(p) || QUALITY_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {
@@ -49,17 +65,26 @@ export async function onRequestGet({ env, params }) {
   if (!p) return notFound();
   const bucket = env && env.PREP_BANK_R2;
   if (!bucket || !bucket.get) return new Response(JSON.stringify({ error: "bank-not-configured" }), { status: 503, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
+  // A failed R2 read is a 503 (retry later), never a 404: the client treats a 404 as "this file does not exist" and,
+  // for overlays, remembers that for the session (prep.js), so a passing R2 error used to hide content.
   let obj = null;
-  try { obj = await bucket.get(PREFIX + p); } catch (e) { obj = null; }
+  try { obj = await bucket.get(PREFIX + p); } catch (e) { return new Response(JSON.stringify({ error: "bank-unavailable" }), { status: 503, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Retry-After": "5" } }); }
   if (!obj) return notFound();
   const headers = new Headers({
     "Content-Type": /\.webp$/.test(p) ? "image/webp" : /\.svg$/.test(p) ? "image/svg+xml" : "application/json; charset=utf-8",
-    // manifest.json and the pyq/lessons/cards index.json name the current files, so they may change; everything else is immutable
-    "Cache-Control": /(?:manifest|(?:pyq|lessons|cards)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
+    // manifest.json and the pyq/lessons/cards/ids/links/quality index.json name the current files, so they may change; everything else is immutable
+    "Cache-Control": /(?:manifest|(?:pyq|lessons|cards|ids|links|quality|maik)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
     "X-Content-Type-Options": "nosniff",
   });
   // an SVG opened on its own runs no script and loads nothing
   if (/\.svg$/.test(p)) headers.set("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; img-src data:");
   if (obj.httpEtag) headers.set("ETag", obj.httpEtag);
   return new Response(obj.body, { status: 200, headers });
+}
+
+// HEAD answers like GET without a body (without it, HEAD fell through to the app's index.html with a 200).
+export async function onRequestHead(ctx) {
+  const r = await onRequestGet(ctx);
+  if (r.body && r.body.cancel) { try { await r.body.cancel(); } catch (e) {} }
+  return new Response(null, { status: r.status, headers: r.headers });
 }

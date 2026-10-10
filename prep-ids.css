@@ -1,0 +1,72 @@
+/* PrepNucleus share IDs (prep-ids.js): the share sheet, the ID chip, the Go to ID screen and the shared-ID states.
+   Everything reads the prep.css tokens, so both themes follow the owner's palette (Midnight, Navy, Prussian, Amber). */
+
+/* The ID itself: large figures, a little tracking so each character stands apart, selectable as one piece. */
+.pn-root .pi-code { margin: 4px 0 0; padding: 18px 12px; border-radius: var(--pn-r-lg); background: var(--pn-s1); text-align: center; }
+.pn-root .pi-code > span { display: inline-block; font-family: var(--pn-num); font-size: 34px; font-weight: 700; line-height: 1.1; letter-spacing: .05em; font-variant-numeric: tabular-nums; color: var(--pn-text);
+  -webkit-user-select: all; user-select: all; overflow-wrap: anywhere; }
+.pn-root .pi-code .pi-h { font-style: normal; font-weight: 400; color: var(--pn-mut); margin: 0 -.06em; }
+.pn-root .pi-code.sm { padding: 10px 12px; background: transparent; }
+.pn-root .pi-code.sm > span { font-size: 22px; color: var(--pn-mut); }
+@media (max-width: 340px) { .pn-root .pi-code > span { font-size: 28px; } }
+
+/* Share sheet: the shared .pn-sheet (spring up, drag down to close, scrim); the tab bar hides under it (prep-nav.js). */
+.pn-root .pi-sheet h2 { text-align: center; }
+.pn-root .pi-sheet .pi-how { text-align: center; font-size: 15px; margin: 0 4px; }
+.pn-root .pi-sheet .pn-btn svg { flex: 0 0 auto; }
+.pn-root .pi-copy .pi-cl { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.pn-root .pi-copy.pi-done .pi-cl { animation: pi-in var(--pn-d-quick) cubic-bezier(.23, 1, .32, 1); }
+@keyframes pi-in { from { opacity: 0; transform: translateY(3px); } }
+
+/* The share button in a bar keeps the bar's round icon style; the glyph sits optically centred (the arrow is tall). */
+.pn-root .pi-sb svg { transform: translateY(-1px); }
+
+/* The ID under a question or lesson: small, quiet, one tap copies it. 44 px tall for the finger. */
+.pn-root .pi-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: 14px 0 4px; padding: 0 12px; border: 0; border-radius: var(--pn-r-pill); background: transparent;
+  color: var(--pn-mut); font: inherit; font-size: 13.5px; -webkit-user-select: none; user-select: none; touch-action: manipulation;
+  transition: background-color var(--pn-d-press) ease, transform var(--pn-d-press) var(--pn-ease); }
+.pn-root .pi-chip:active { transform: scale(.97); background: var(--pn-s1); }
+@media (hover: hover) and (pointer: fine) { .pn-root .pi-chip:hover { background: var(--pn-s1); } }
+.pn-root .pi-chip:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root .pi-chip-k { font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.pn-root .pi-chip-v { font-family: var(--pn-num); font-weight: 600; letter-spacing: .04em; font-variant-numeric: tabular-nums; color: var(--pn-text); }
+.pn-root .pi-chip.pi-done .pi-chip-v { color: var(--pn-pri-ink); }
+body.dark .pn-root .pi-chip.pi-done .pi-chip-v { color: var(--pn-pri); }
+.pn-root .pn-run .pi-chip { display: flex; width: max-content; margin-left: auto; margin-right: auto; }
+.pn-root .pn-lsn .pi-chip { display: flex; width: max-content; margin: 18px auto 0; }
+
+/* Go to ID */
+.pn-root .pi-form { display: flex; flex-direction: column; gap: 10px; }
+.pn-root .pi-lab { font-size: 15px; font-weight: 600; }
+.pn-root .pi-row { display: flex; gap: 8px; }
+.pn-root .pi-in { flex: 1 1 auto; min-width: 0; font-family: var(--pn-num); font-size: 20px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+.pn-root .pi-in::placeholder { text-transform: none; letter-spacing: .03em; font-weight: 500; color: var(--pn-mut); opacity: 1; }
+.pn-root .pi-in[aria-invalid="true"] { box-shadow: 0 0 0 2px var(--pn-bad); }
+.pn-root .pi-paste { flex: 0 0 auto; min-height: 50px; padding: 0 18px; }
+.pn-root .pi-help { margin: 0; }
+.pn-root .pi-err { margin: 0; padding: 10px 14px; border-radius: var(--pn-r-md); background: var(--pn-bad-bg); color: var(--pn-bad); font-size: 15px; line-height: 1.45; }
+.pn-root .pi-hintg { margin-top: 2px; }
+.pn-root .pi-open { margin-top: 6px; }
+.pn-root .pi-spaste { margin: 2px 0 0; padding: 0 2px; font-size: 15px; }
+
+/* A shared ID being found, or the reason it cannot open. */
+.pn-root .pi-body { display: flex; flex-direction: column; }
+.pn-root .pi-res { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 8vh auto 0; max-width: 420px; text-align: center; }
+.pn-root .pi-res .pi-step { margin: 0; color: var(--pn-mut); font-size: 15px; }
+.pn-root .pi-meter { position: relative; width: 160px; height: 4px; border-radius: 2px; background: var(--pn-s2); overflow: hidden; }
+.pn-root .pi-meter i { position: absolute; inset: 0; border-radius: 2px; background: var(--pn-pri); transform-origin: left; transform: scaleX(.35); transition: transform 420ms cubic-bezier(.23, 1, .32, 1); }
+.pn-root .pi-meter i.s2 { transform: scaleX(.8); }
+.pn-root .pi-msg .pi-ic { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: var(--pn-s1); color: var(--pn-mut); }
+.pn-root .pi-msg h2 { margin: 6px 0 0; font-size: 21px; font-weight: 700; letter-spacing: -.018em; text-wrap: balance; }
+.pn-root .pi-msg h2:focus { outline: none; }
+.pn-root .pi-msg .pi-mid { margin: 0; color: var(--pn-mut); line-height: 1.5; text-wrap: pretty; }
+.pn-root .pi-acts { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 10px; }
+.pn-root .pi-acts .pn-btn { width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pi-chip, .pn-root .pi-meter i { transition: none; }
+  .pn-root .pi-chip:active { transform: none; }
+  .pn-root .pi-copy.pi-done .pi-cl { animation: none; }
+}
+/* iPad: the form keeps a readable column. */
+.pn-root .pi-go > * { width: 100%; max-width: 560px; margin-left: auto; margin-right: auto; }

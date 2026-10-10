@@ -639,6 +639,8 @@
 
     function loop() {
       if (!running || destroyed) return;
+      // Bubble replaced (answer, Stop, cleared orphan): the canvas is gone, so stop drawing it.
+      if (canvas.isConnected === false) { running = false; rafId = 0; return; }
       var t = (performance.now() / 1000) * speed;
       renderAt(t);
       rafId = requestAnimationFrame(loop);

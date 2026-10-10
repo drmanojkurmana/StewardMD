@@ -38,7 +38,7 @@
       { name: "Google Firebase Authentication", role: "sign-in / account identity (Google, Apple, and email sign-in)" },
       { name: "Google Cloud Firestore", role: "storage of your account, consent records and your own saved cases (India, Mumbai)" },
       { name: "Cloudflare Pages, Workers & KV", role: "app hosting, backend API routes, per-user case storage, and security" },
-      { name: "Google Vertex AI / Gemini", role: "AI features you request: MaiK explanations, structuring text read from a photo, and reading a submitted registration credential to confirm eligibility" },
+      { name: "Google Cloud Vertex AI", role: "AI features you request: MaiK explanations, structuring text read from a photo, and reading a submitted registration credential to confirm eligibility" },
       { name: "Groq", role: "large-language-model processing for certain AI features you request" },
       { name: "Google Cloud Run (Mumbai)", role: "hosted image-analysis models for the optional imaging modules (ECG / chest X-ray / skin), only when you enable and use them" },
       { name: "Additional AI model providers (future)", role: "we may in future use other reputable model providers, chosen on quality, reliability and price (for example Microsoft Azure OpenAI); the current list is available at privacy@stewardmd.in" }

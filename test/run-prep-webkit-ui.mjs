@@ -137,7 +137,7 @@ try {
     return { seen: on("seen"), type: on("type"), go: !document.querySelector("#suGo").disabled, status: document.querySelector("#suStatus").textContent, empty: document.querySelector("#suStatus").classList.contains("empty"),
       zeros: zeros.length, zerosOff: zeros.filter((b) => b.disabled || b.getAttribute("aria-disabled") === "true").length, zeroOn: zeros.filter((b) => b.getAttribute("aria-checked") === "true").length };
   });
-  ok(def.seen !== "wrong" && def.go && !def.empty && /questions? match/.test(def.status), "a remembered empty choice (Incorrect before, 0) falls back: New or repeat = " + def.seen + ", Start enabled, status \"" + def.status.trim() + "\"");
+  ok(def.seen !== "wrong" && def.go && !def.empty && /^\s*\d+\s*questions?/.test(def.status), "a remembered empty choice (Incorrect before, 0) falls back: New or repeat = " + def.seen + ", Start enabled, status \"" + def.status.trim() + "\"");
   ok(def.zeros > 0 && def.zerosOff === def.zeros && def.zeroOn === 0, "every option with 0 questions is disabled and none is chosen (" + def.zerosOff + " of " + def.zeros + ")");
   const zeroTap = await ev(() => { const b = [].slice.call(document.querySelectorAll("#pnSetup .su-chip")).find((x) => x.disabled || x.getAttribute("aria-disabled") === "true"); if (!b) return "none"; const st = document.querySelector("#suStatus").textContent; b.click(); return document.querySelector("#suStatus").textContent === st && b.getAttribute("aria-checked") !== "true"; });
   ok(zeroTap === true, "tapping an empty option does nothing");
@@ -158,9 +158,10 @@ try {
   // ---------- scroll to the Timer with the wheel (native scroll), then tap chips ----------
   const behind0 = await ev(() => ({ body: document.querySelector("#smdPrep > .pn-body").scrollTop, doc: document.scrollingElement.scrollTop }));
   // Mobile WebKit in Playwright has no wheel and no touch drag: the sheet is scrolled in steps, as a finger would leave it.
-  // Steps of 60 px until the Mode heading reaches the top of the scroller (the owner's place in the recording).
+  // Steps of 60 px until the Difficulty row reaches the top of the scroller (prep60: the mode cards and the timer box
+  // are at the top of the sheet now, the filters below them).
   for (let i = 0; i < 30; i++) {
-    const more = await ev(() => { const b = document.querySelector("#pnSetup .su-body"), m = document.querySelector("#pnSetup .su-g-mode"); const d = m.getBoundingClientRect().top - b.getBoundingClientRect().top - 8; if (d <= 1) return false; b.scrollBy(0, Math.min(60, d)); return b.scrollTop + b.clientHeight < b.scrollHeight - 1; });
+    const more = await ev(() => { const b = document.querySelector("#pnSetup .su-body"), m = document.querySelector("#pnSetup .su-g-d"); const d = m.getBoundingClientRect().top - b.getBoundingClientRect().top - 8; if (d <= 1) return false; b.scrollBy(0, Math.min(60, d)); return b.scrollTop + b.clientHeight < b.scrollHeight - 1; });
     if (!more) break; await sleep(30);
   }
   await sleep(300);
@@ -170,11 +171,11 @@ try {
   await frame("scrolled-to-timer");
   const taps = [
     ['#pnSetup [data-act="su-timer"][data-v="set"]', "Timer: Whole set"],
-    ['#pnSetup [data-act="su-timer"][data-v="q"]', "Timer: Per question"],
-    ['#pnSetup [data-act="su-qs"][data-v="45"]', "45 s preset"],
+    ['#pnSetup [data-act="su-timer"][data-v="q"]', "Timer: Each question"],
+    ['#pnSetup [data-act="su-qdec"]', "seconds stepper -"],
     ['#pnSetup [data-act="su-qinc"]', "seconds stepper +"],
-    ['#pnSetup [data-act="su-mode"][data-v="exam"]', "Mode: Timed test"],
-    ['#pnSetup [data-act="su-mode"][data-v="study"]', "Mode: Practice"],
+    ['#pnSetup [data-act="su-mode"][data-v="exam"]', "Mode: Test Mode"],
+    ['#pnSetup [data-act="su-mode"][data-v="study"]', "Mode: Learning Mode"],
     ['#pnSetup [data-act="su-n"][data-v="10"]', "Number: 10"],
     ['#pnSetup [data-act="su-d"][data-v="2"]', "Difficulty: Moderate"],
     ['#pnSetup [data-act="su-timer"][data-v="set"]', "Timer: Whole set again"]

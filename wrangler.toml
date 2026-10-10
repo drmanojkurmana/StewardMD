@@ -91,6 +91,9 @@ bucket_name = "stewardmd-offline"
 # DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
 [vars]
+# PrepNucleus MaiK modules (functions/_prep-qgen.js) set NO vars here on purpose: production is at Cloudflare's limit
+# of 128 text bindings (vars + secrets; 133 failed the 640190c deploy). The secret ANTHROPIC_API_KEY switches it on;
+# code defaults: 3 modules a day, 30 questions a module, $5 a day for all students, Author = drmanojkurmana@gmail.com.
 # OPS-26/F26: OFF by default. functions/api/ai/[[path]].js documents in detail why this must default
 # off (a 2026-08-20 commit silently flipped this fallback to "1", re-enabling an SSE-hang regression;
 # restored to OFF), and docs/MAIK_ARCHITECTURE_AUDIT.md states streaming is effectively off. Cloudflare
@@ -202,6 +205,9 @@ PGLOG_VERIFY_BASE = "https://stewardmd.in"
 compatibility_date = "2026-06-28"
 
 [env.production.vars]
+# PrepNucleus MaiK modules (functions/_prep-qgen.js) set NO vars here on purpose: production is at Cloudflare's limit
+# of 128 text bindings (vars + secrets; 133 failed the 640190c deploy). The secret ANTHROPIC_API_KEY switches it on;
+# code defaults: 3 modules a day, 30 questions a module, $5 a day for all students, Author = drmanojkurmana@gmail.com.
 AI_PROVIDER = "vertex"      # Vertex main (VERTEX_API_KEY), Gemini key = fallback (owner, 2026-09-24). NOT "azure" (slow, MaiK-only). Named envs don't inherit top-level [vars], so it must be set here too.
 MAIK_AI_TIMEOUT_MS = "22000"   # hard per-request ceiling so MaiK fails fast instead of buffering ~100s through a provider chain
 FOLLOWCARE_RETENTION_DAYS = "7"

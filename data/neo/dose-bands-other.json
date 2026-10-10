@@ -253,8 +253,16 @@
    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=95aa8437-10bc-4205-939f-d21d8fa52a00",
    "licence": "Public domain (US Government work)",
    "accessed": "2026-09-30"
-  }
- },
+  },
+   "owner-register-2026-10-10": {
+    "title": "Owner-compiled consolidated paediatric and neonatal dose register, 10 Oct 2026 (research compilation, no source column)",
+    "publisher": "Owner-supplied (Dr Manoj Kurmana); sources stated by the owner as standard textbooks, WHO guidelines and UpToDate. Specific citations not yet recorded.",
+    "url": null,
+    "document": true,
+    "licence": "Owner-supplied; not a published source",
+    "accessed": "2026-10-10"
+   }
+  },
  "comment": "ageScope: 'neonatal' = label gives neonatal or preterm dosing; 'pediatric-incl-neonates' = label pediatric dosing that the label states includes neonates or starts at birth, not neonatal-specific. Terms like preterm or term are kept as labels where the source gives no numeric cut-off.",
  "drugs": [
   {
@@ -1587,7 +1595,7 @@
        "every_h": 6,
        "infuse": "dilute to 10-50 mg/mL; not faster than 100 mg/minute",
        "src": "fdab-calcium-gluconate",
-       "quote": "Neonate (≤ 1 month) 100 - 200 mg/kg 100 - 200 mg/kg every 6 hours Initiate at 17-33 mg/kg/hour"
+       "quote": "Neonate (≤ 1 month) | 100 – 200 mg/kg | 100 - 200 mg/kg every 6 hours | Initiate at 17-33 mg/kg/hour"
       },
       {
        "label": "Continuous infusion start, neonate (1 month or younger)",
@@ -1601,7 +1609,7 @@
        },
        "infuse": "dilute to 5.8-10 mg/mL; adjust to serum calcium",
        "src": "fdab-calcium-gluconate",
-       "quote": "Neonate (≤ 1 month) 100 - 200 mg/kg 100 - 200 mg/kg every 6 hours Initiate at 17-33 mg/kg/hour"
+       "quote": "Neonate (≤ 1 month) | 100 – 200 mg/kg | 100 - 200 mg/kg every 6 hours | Initiate at 17-33 mg/kg/hour"
       }
      ]
     }
@@ -2169,6 +2177,430 @@
      "quote": "Hypertrophic cardiomyopathy was reported after administration of hydrocortisone to prematurely born infants"
     }
    ]
+  },
+  {
+   "id": "amoxicillin",
+   "name": "Amoxicillin",
+   "aliases": [
+    "Amoxycillin"
+   ],
+   "class": "aminopenicillin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Selected infections (neonates)",
+     "route": "PO",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Neonates",
+       "every_h": 12,
+       "dose": {
+        "lo": 30,
+        "hi": 30,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "Neonates: 30 mg/kg/day PO divided q12h for selected infections."
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "anidulafungin",
+   "name": "Anidulafungin",
+   "aliases": [],
+   "class": "echinocandin antifungal",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Neonates (very limited data)",
+     "route": "IV",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Once daily",
+       "freq": "once daily",
+       "dose": {
+        "lo": 1.5,
+        "hi": 1.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "either 1.5 mg/kg/day IV once daily"
+      },
+      {
+       "label": "Loading dose, then 1.5 mg/kg/dose IV once daily",
+       "freq": "once (loading dose)",
+       "dose": {
+        "lo": 3,
+        "hi": 3,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "3 mg/kg IV loading dose then 1.5 mg/kg/dose IV once daily"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "buprenorphine",
+   "name": "Buprenorphine",
+   "aliases": [],
+   "class": "opioid partial agonist",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Neonatal opioid withdrawal syndrome",
+     "route": "SL",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Initial dose",
+       "every_h": 8,
+       "dose": {
+        "lo": 4.4,
+        "hi": 13.2,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "Neonatal opioid withdrawal syndrome: neonates 4.4 to 13.2 mcg/kg/dose sublingually every 8 hours initially"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "calcium-chloride",
+   "name": "Calcium chloride",
+   "aliases": [],
+   "class": "calcium salt",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Cardiac arrest with hypocalcemia, hyperkalemia or hypermagnesemia",
+     "route": "IV or IO",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Dose; may repeat if needed",
+       "freq": "may repeat if needed",
+       "dose": {
+        "lo": 20,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "Neonates and infants/children for cardiac arrest associated with hypocalcemia, hyperkalemia, or hypermagnesemia: 20 mg/kg/dose IV or intraosseous; may repeat if needed"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "dalteparin",
+   "name": "Dalteparin",
+   "aliases": [],
+   "class": "low molecular weight heparin",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Anticoagulation, neonates 35 weeks gestation and older",
+     "route": "SC",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Initial dose",
+       "freq": "twice daily",
+       "when": {
+        "ga_wk": {
+         "min": 35
+        }
+       },
+       "dose": {
+        "lo": 150,
+        "hi": 150,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "Neonates 35 weeks gestation and older and infants/children 1 to 23 months: 150 units/kg/dose subcutaneously twice daily initially"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "dextrose",
+   "name": "Dextrose",
+   "aliases": [],
+   "class": "carbohydrate",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Congenital hyperinsulinemia (bolus)",
+     "route": "IV",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Bolus; infusion rate not loaded",
+       "freq": "single bolus",
+       "dose": {
+        "lo": 200,
+        "hi": 200,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "For congenital hyperinsulinemia in neonates: 200 mg/kg/dose IV bolus using a 10% solution"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "diazepam",
+   "name": "Diazepam",
+   "aliases": [],
+   "class": "benzodiazepine",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Neonatal tetanus (limited evidence)",
+     "route": "IV",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "PRN dose",
+       "freq": "every 1 to 4 h PRN",
+       "dose": {
+        "lo": 0.1,
+        "hi": 0.3,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "Neonatal tetanus (limited evidence): 0.1–0.3 mg/kg IV every 1–4 h PRN"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "enalapril",
+   "name": "Enalapril",
+   "aliases": [],
+   "class": "ACE inhibitor",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Neonatal hypertension",
+     "route": "PO",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Initial dose",
+       "every_h": 24,
+       "dose": {
+        "lo": 0.04,
+        "hi": 0.1,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "Neonatal hypertension: 0.04–0.1 mg/kg/day PO every 24 h initially"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "epoetin-alfa",
+   "name": "Epoetin alfa",
+   "aliases": [
+    "Recombinant human erythropoietin alfa"
+   ],
+   "class": "erythropoiesis-stimulating agent",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Anemia of prematurity, prophylaxis",
+     "route": "SC or IV",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "3 times weekly for 2 to 6 weeks",
+       "freq": "3 times weekly for 2 to 6 weeks",
+       "dose": {
+        "lo": 100,
+        "hi": 400,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "Premature neonates for anemia of prematurity prophylaxis: 100 to 400 units/kg/dose subcutaneously or intravenously 3 times weekly for 2 to 6 weeks"
+      },
+      {
+       "label": "Once daily for 10 days",
+       "freq": "once daily for 10 days",
+       "dose": {
+        "lo": 200,
+        "hi": 200,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "200 units/kg/dose subcutaneously/intravenously once daily for 10 days"
+      },
+      {
+       "label": "5 times weekly for 6 weeks",
+       "freq": "5 times weekly for 6 weeks",
+       "dose": {
+        "lo": 100,
+        "hi": 100,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "100 units/kg/dose subcutaneously 5 times weekly for 6 weeks"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "hepatitis-b-immunoglobulin",
+   "name": "Human hepatitis B immunoglobulin (HBIG)",
+   "aliases": [
+    "HBIG"
+   ],
+   "class": "immunoglobulin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Perinatal prophylaxis, neonates born to HBsAg-positive mothers",
+     "route": "IM",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Once, preferably within 12 hours of birth",
+       "freq": "once",
+       "dose": {
+        "lo": 0.5,
+        "hi": 0.5,
+        "unit": "mL",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "For perinatal prophylaxis, neonates born to HBsAg-positive mothers and neonates less than 2 kg born to mothers with unknown HBsAg status should receive HBIG 0.5 mL IM once, preferably within 12 hours of birth, at a different site from the hepatitis B vaccine."
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
+  },
+  {
+   "id": "theophylline",
+   "name": "Theophylline",
+   "aliases": [],
+   "class": "methylxanthine",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Term neonates",
+     "route": "PO",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Initial dose",
+       "every_h": 8,
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "owner-register-2026-10-10",
+       "quote": "Term neonates: 10 mg/kg/day PO divided every 8 h initially"
+      }
+     ]
+    }
+   ],
+   "review": {
+    "status": "verified",
+    "by": "Dr Manoj Kurmana",
+    "date": "2026-10-10"
+   }
   }
  ]
 }

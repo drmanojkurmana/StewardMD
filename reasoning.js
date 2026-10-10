@@ -4676,7 +4676,7 @@
     if (typeof window.SMD_askMaikTopic === "function") {
       var askMk = document.createElement("button"); askMk.type = "button"; askMk.className = "dx-reader-favourite dx-reader-askmaik";
       askMk.setAttribute("aria-label", "Ask MaiK about " + name);
-      askMk.innerHTML = (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>') + '<span>Ask MaiK</span>';
+      askMk.innerHTML = (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>') + '<span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span>';
       askMk.addEventListener("click", function () { try { window.SMD_askMaikTopic(id, name); } catch (e) {} });
       heroActs.appendChild(askMk);
     }
@@ -6556,15 +6556,25 @@
       var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
-      function attempt(retried) {
-        return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
+      /* A refusal of a call that went out WITHOUT the sign-in token is retried once with a fresh one
+       * (id-token.js SMD_IDTOKEN_REFRESH): a lapsed cached token made an owner or Pro doctor a guest. */
+      function withAuth(sentAuth, authRetried, res, again) {
+        if (sentAuth || authRetried || typeof window.SMD_IDTOKEN_REFRESH !== "function") return res;
+        return window.SMD_IDTOKEN_REFRESH(4000).then(function (tk) { return tk ? again() : res; }, function () { return res; });
+      }
+      function attempt(retried, authRetried) {
+        var sentAuth = false;
+        return aiHeaders().then(function (h) { sentAuth = !!(h && h.Authorization); return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
           if (r.status === 402) {
-            return r.json().catch(function () { return {}; }).then(function (j) { return { error: "quota", needsPro: true, message: (j && j.message) || "" }; });
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              return withAuth(sentAuth, authRetried, { error: "quota", needsPro: true, reason: (j && j.reason) || "", message: (j && j.message) || "" }, function () { return attempt(retried, true); });
+            });
           }
           if (r.status === 429) {
             return r.json().catch(function () { return {}; }).then(function (j) {
-              if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true); });
-              return { error: "quota", reason: (j && j.reason) || "rate" };
+              if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true, authRetried); });
+              var q = { error: "quota", reason: (j && j.reason) || "rate", message: (j && j.message) || "" };
+              return q.reason === "rate" ? q : withAuth(sentAuth, authRetried, q, function () { return attempt(retried, true); });
             });
           }
           /* EMPTY / UNPARSABLE REPLY (owner screenshot, 2026-10-04, Android): "Reason: Failed to execute
@@ -6577,7 +6587,7 @@
             var j = null;
             try { j = t ? JSON.parse(t) : null; } catch (e) { j = null; }
             if (j && typeof j === "object") { if (!j.sources) j.sources = pkg.sources; return j; }
-            if (!retried) return new Promise(function (res) { setTimeout(res, 800); }).then(function () { return attempt(true); });
+            if (!retried) return new Promise(function (res) { setTimeout(res, 800); }).then(function () { return attempt(true, authRetried); });
             return { error: "server-empty", status: r.status || 0 };
           });
         });
@@ -6737,7 +6747,7 @@
         var NX_FIRST = 12000, NX_STALL = 14000, NX_TOTAL = 30000;   // server: connect 10s, idle 12s
         return aiHeaders().then(function (h) {
           return new Promise(function (resolve) {
-            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, fin = false, nt = null;
+            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, sawCut = false, fin = false, nt = null;
             function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } resolve(v); }
             // One deterministic ending: abort this request, then take the proven whole-answer fetch.
             // No second request is ever in flight at the same time.
@@ -6754,7 +6764,7 @@
                 if (ev && ev.delta) { acc += ev.delta; armx(NX_STALL); try { if (onDelta) onDelta(acc); } catch (e) {} }
                 // stalled:true means the SERVER hit its idle/total deadline and closed early, so the
                 // text is INCOMPLETE even though a done event arrived. Never surface it as an answer.
-                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; }
+                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; if (ev.cutShort) sawCut = true; }
               }
             }
             function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
@@ -6766,7 +6776,7 @@
               drain();
               // Only a CLEANLY completed stream may surface as the answer — a truncated clinical
               // answer must never look like a whole one. Anything else falls back to the proven fetch.
-              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources }); return; }
+              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut || undefined }); return; }
               nsBad(true); settle(fallback());
             };
             xhr.onerror = function () { nsBad(true); settle(fallback()); };
@@ -6815,7 +6825,7 @@
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }
-        var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "";
+        var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "", sawCut2 = false;
         function pump() {
           return reader.read().then(function (res) {
             if (res.done) return;
@@ -6826,7 +6836,7 @@
               if (!data) return;
               var ev; try { ev = JSON.parse(data); } catch (e) { return; }
               if (ev && ev.delta) { acc += ev.delta; arm(STALL_MS); try { if (onDelta) onDelta(acc); } catch (e) {} }
-              if (ev && ev.done) { gotDone = true; }
+              if (ev && ev.done) { gotDone = true; if (ev.cutShort) sawCut2 = true; }
             });
             return pump();
           });
@@ -6836,12 +6846,12 @@
         // transient streamed tokens are then replaced by the full answer). Web keeps its lenient behavior.
         return pump().then(function () {
           done();
-          if (acc && (gotDone || !isNative)) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources }; }
+          if (acc && (gotDone || !isNative)) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut2 || undefined }; }
           if (isNative) nsBad(true);
           return fallback();
         }).catch(function () {
           done();
-          if (acc && gotDone) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources }; }
+          if (acc && gotDone) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut2 || undefined }; }
           if (isNative) nsBad(true);
           return fallback();
         });

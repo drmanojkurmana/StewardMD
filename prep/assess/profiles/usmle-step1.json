@@ -1,0 +1,316 @@
+{
+ "schema": "prep/assessment-profile/v2",
+ "id": "usmle-step1",
+ "version": "2026.5.0",
+ "status": "provisional",
+ "name": "USMLE Step 1",
+ "session": "USMLE Step 1 from 2026-05-14",
+ "tab": "usmle",
+ "verified_on": "2026-10-10",
+ "sources": {
+  "USMLE-STEP1": {
+   "url": "https://www.usmle.org/step-exams/step-1",
+   "title": "USMLE Step 1 (usmle.org)",
+   "doc_date": null
+  }
+ },
+ "format": {
+  "questions": 280,
+  "duration_min": 420,
+  "options": "4+",
+  "item_types": [
+   "sba"
+  ],
+  "block_max_items": 20,
+  "sections": [
+   {
+    "id": "1",
+    "label": "Block 1",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "2",
+    "label": "Block 2",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "3",
+    "label": "Block 3",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "4",
+    "label": "Block 4",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "5",
+    "label": "Block 5",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "6",
+    "label": "Block 6",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "7",
+    "label": "Block 7",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "8",
+    "label": "Block 8",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "9",
+    "label": "Block 9",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "10",
+    "label": "Block 10",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "11",
+    "label": "Block 11",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "12",
+    "label": "Block 12",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "13",
+    "label": "Block 13",
+    "questions": 20,
+    "minutes": 30
+   },
+   {
+    "id": "14",
+    "label": "Block 14",
+    "questions": 20,
+    "minutes": 30
+   }
+  ]
+ },
+ "navigation": {
+  "locked_sections": true,
+  "revisit_within_section": true,
+  "return_to_closed_section": false,
+  "early_section_submit": true,
+  "auto_advance_on_timeout": true,
+  "mark_for_review": true,
+  "break_between_parts": true
+ },
+ "scoring": {
+  "correct": 1,
+  "incorrect": 0,
+  "unanswered": 0,
+  "pass": null
+ },
+ "pace_sec": 90,
+ "blueprint": {
+  "kind": "none",
+  "subjects": {},
+  "unmapped": {},
+  "note": "Content outline weights are not modelled yet. USMLE-tagged vignettes are preferred when a module has 5 or more."
+ },
+ "item_styles": [],
+ "previous_formats": [
+  {
+   "id": "usmle-step1-pre-2026-05",
+   "label": "Before 14 May 2026",
+   "questions": 280,
+   "duration_min": 420,
+   "block_max_items": 40,
+   "block_minutes": 60,
+   "src": "USMLE-STEP1",
+   "official": true
+  }
+ ],
+ "legacy_mock": {
+  "id": "usmle-block",
+  "label": "USMLE block",
+  "n": 40,
+  "min": 60,
+  "plus": 1,
+  "minus": 0
+ },
+ "legacy": {
+  "tab": "usmle",
+  "order": 0,
+  "scheme": "usmle",
+  "note": "The pre-May-2026 block the app used before smd_prep_tests2. Shown only with the flag off."
+ },
+ "style": {
+  "core_id": "usmle",
+  "status": "provisional",
+  "basis": "asserted generation mix, not learned from calibration",
+  "text": "clinical vignette, mechanism, diagnosis, next best step; 2 to 5 sentence stem with age, sex, setting and findings",
+  "stem": "vignette",
+  "cog": {
+   "recall": 0.15,
+   "application": 0.4,
+   "reasoning": 0.45
+  },
+  "d": {
+   "1": 0.2,
+   "2": 0.5,
+   "3": 0.3
+  }
+ },
+ "provenance": [
+  {
+   "field": "/format/questions",
+   "official": true,
+   "src": "USMLE-STEP1",
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "fourteen blocks, each not exceeding 20 questions"
+  },
+  {
+   "field": "/format/duration_min",
+   "official": true,
+   "src": "USMLE-STEP1",
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "fourteen 30-minute blocks in one 8-hour session"
+  },
+  {
+   "field": "/format/options",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "option count not stated on the fetched page"
+  },
+  {
+   "field": "/format/item_types",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "single best answer assumed"
+  },
+  {
+   "field": "/format/block_max_items",
+   "official": true,
+   "src": "USMLE-STEP1",
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "does not exceed 20"
+  },
+  {
+   "field": "/format/sections",
+   "official": true,
+   "src": "USMLE-STEP1",
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "fourteen 30-minute blocks on or after 2026-05-14"
+  },
+  {
+   "field": "/navigation/locked_sections",
+   "official": true,
+   "src": "USMLE-STEP1",
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "each block is timed on its own"
+  },
+  {
+   "field": "/navigation/return_to_closed_section",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "not stated on the fetched page"
+  },
+  {
+   "field": "/navigation/early_section_submit",
+   "official": true,
+   "src": "USMLE-STEP1",
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "finishing a block early adds the time to break time"
+  },
+  {
+   "field": "/navigation/auto_advance_on_timeout",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "not stated on the fetched page"
+  },
+  {
+   "field": "/navigation/mark_for_review",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "not stated on the fetched page"
+  },
+  {
+   "field": "/navigation/break_between_parts",
+   "official": true,
+   "src": "USMLE-STEP1",
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "minimum 55 minutes of break time"
+  },
+  {
+   "field": "/scoring/correct",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "number right assumed"
+  },
+  {
+   "field": "/scoring/incorrect",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "no penalty for guessing assumed; not stated on the fetched page"
+  },
+  {
+   "field": "/scoring/unanswered",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "assumed"
+  },
+  {
+   "field": "/pace_sec",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "derived: 30 min x 60 / 20 items"
+  },
+  {
+   "field": "/blueprint/kind",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "content outline not modelled"
+  }
+ ]
+}

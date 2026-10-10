@@ -39,7 +39,9 @@ test("the ladder: no verified mobile gets nothing, a verified mobile gets Free, 
   assert.equal(none, 0, "an account without a verified mobile gets no AI budget at all");
   assert.ok(free > none, "verifying the mobile is worth something");
   assert.ok(pro > free, "Pro is worth more than Free");
-  assert.ok(promax > pro, "physician tier is the top of the ladder");
+  // One Pro allowance (owner, 2026-10-10: 300,000 MaiK Tokens a month for Pro). The physician tier used to be 3x.
+  assert.equal(promax, pro, "Pro is one allowance now; a single account can still be raised in User control");
+  assert.equal(pro, 300000, "300,000 MaiK Tokens a month");
 });
 
 test("every step of the ladder is tunable from env without a deploy", () => {
@@ -53,7 +55,7 @@ test("verifying is what moves you off zero", () => {
   const before = roleAllowance(ENV, false, null, false);
   const after = roleAllowance(ENV, true, null, true);   // verified -> Pro for the free week
   assert.equal(before, 0);
-  assert.ok(after >= 1000000, `the free week must be a real allowance, got ${after}`);
+  assert.ok(after >= 300000, `the free week must be a real allowance, got ${after}`);
 });
 
 test("a per-account override beats the tier, and a monthly grant adds to it", () => {

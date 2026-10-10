@@ -32,6 +32,7 @@
  * dis: [{ ot, wr, et }] x3, kp, fi, dl, cog }] }; solve { s: [{ i, ot }] }; review { g: [{ i, g4, g6..g11,
  * old, why }] }. "rq" below means one sanitized mcq question in that raw shape.
  */
+import ASSESS from "../prep-assess.js";
 
 export const PREP_PV = "p1";
 // imcq: one question about one image cut from the student's PDF, keyed to the page text near it (prep-create.js).
@@ -53,14 +54,10 @@ export const PREP_LIMITS = {
 // imcq at 0.4: one question per image, grounded in the page text; a lower temperature keeps it on that text.
 export const PREP_TEMPS = { facts: 1.0, mcq: 1.0, solve: 0.2, review: 0.2, imcq: 0.4 };
 
-// Exam profiles (LayerC 6.9; PrepNucleus.md 6.4). Only style, cog and d are needed here; the exam
-// simulator numbers live in the client profile files.
-export const EXAM_PROFILES = {
-  "neet-pg": { id: "neet-pg", name: "NEET-PG", style: "high-yield facts, clinical application, common traps, rapid recall", stem: "short vignette or direct", cog: { recall: 0.4, application: 0.4, reasoning: 0.2 }, d: { 1: 0.3, 2: 0.5, 3: 0.2 } },
-  "ini-cet": { id: "ini-cet", name: "INI-CET", style: "conceptual depth, clinical application, recent guideline points, image-free one-liners and short vignettes", stem: "short vignette or direct", cog: { recall: 0.3, application: 0.45, reasoning: 0.25 }, d: { 1: 0.2, 2: 0.5, 3: 0.3 } },
-  "neet-ss": { id: "neet-ss", name: "NEET-SS", style: "superspecialty depth, management decisions, recent trials and guidelines, clinical vignettes", stem: "clinical vignette", cog: { recall: 0.25, application: 0.45, reasoning: 0.3 }, d: { 1: 0.15, 2: 0.5, 3: 0.35 } },
-  "usmle": { id: "usmle", name: "USMLE", style: "clinical vignette, mechanism, diagnosis, next best step; 2 to 5 sentence stem with age, sex, setting and findings", stem: "vignette", cog: { recall: 0.15, application: 0.4, reasoning: 0.45 }, d: { 1: 0.2, 2: 0.5, 3: 0.3 } },
-};
+// Exam profiles (LayerC 6.9; PrepNucleus.md 6.4). Only style, cog and d are needed here, read from the versioned exam
+// profiles (prep/assess/profiles/*.json "style", via prep-assess.js coreProfiles()), the one source the app and the
+// Arena also read. Keys: neet-pg, ini-cet, neet-ss, usmle.
+export const EXAM_PROFILES = ASSESS.coreProfiles();
 /* getProfile(exam) -> the EXAM_PROFILES entry, or null for an unknown exam id. */
 export function getProfile(exam) {
   return Object.prototype.hasOwnProperty.call(EXAM_PROFILES, String(exam || "")) ? EXAM_PROFILES[exam] : null;

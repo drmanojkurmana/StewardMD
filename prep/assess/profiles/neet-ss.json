@@ -1,0 +1,220 @@
+{
+ "schema": "prep/assessment-profile/v2",
+ "id": "neet-ss",
+ "version": "2025.1.0",
+ "status": "official",
+ "name": "NEET-SS",
+ "session": "NEET-SS 2025 (2026 bulletin not yet published)",
+ "tab": "neet-ss",
+ "verified_on": "2026-10-10",
+ "sources": {
+  "NBEMS-NEETSS-2025": {
+   "url": "https://nbe.edu.in/IB/NEET-SS%202025%20information%20bulletin.pdf",
+   "title": "Information Bulletin NEET-SS 2025",
+   "doc_date": "2025-11-05",
+   "sha256": "f09b6a60dea2f628b27504a033b43c1c96fa2a179d917acff4bd6682c57e8732"
+  }
+ },
+ "format": {
+  "questions": 150,
+  "duration_min": 150,
+  "options": 4,
+  "item_types": [
+   "sba"
+  ],
+  "sections": [
+   {
+    "id": "A",
+    "label": "Section A",
+    "questions": 50,
+    "minutes": 50
+   },
+   {
+    "id": "B",
+    "label": "Section B",
+    "questions": 50,
+    "minutes": 50
+   },
+   {
+    "id": "C",
+    "label": "Section C",
+    "questions": 50,
+    "minutes": 50
+   }
+  ]
+ },
+ "navigation": {
+  "locked_sections": true,
+  "revisit_within_section": true,
+  "return_to_closed_section": false,
+  "early_section_submit": false,
+  "auto_advance_on_timeout": true,
+  "mark_for_review": true,
+  "break_between_parts": false
+ },
+ "scoring": {
+  "correct": 4,
+  "incorrect": -1,
+  "unanswered": 0,
+  "pass": null
+ },
+ "pace_sec": 60,
+ "blueprint": {
+  "kind": "none",
+  "subjects": {},
+  "unmapped": {},
+  "note": "One paper per specialty group; the app's bank covers the Medical group (and radiology). No subject split is published."
+ },
+ "item_styles": [],
+ "previous_formats": [],
+ "legacy_mock": {
+  "id": "neet-ss",
+  "label": "NEET-SS pattern",
+  "n": 150,
+  "min": 150,
+  "plus": 4,
+  "minus": 1
+ },
+ "legacy": {
+  "tab": "neet-ss",
+  "order": 0,
+  "scheme": "neet-ss",
+  "note": "The pattern the app used before smd_prep_tests2 (one overall timer). Shown only with the flag off."
+ },
+ "style": {
+  "core_id": "neet-ss",
+  "status": "provisional",
+  "basis": "asserted generation mix, not learned from calibration",
+  "text": "superspecialty depth, management decisions, recent trials and guidelines, clinical vignettes",
+  "stem": "clinical vignette",
+  "cog": {
+   "recall": 0.25,
+   "application": 0.45,
+   "reasoning": 0.3
+  },
+  "d": {
+   "1": 0.15,
+   "2": 0.5,
+   "3": 0.35
+  }
+ },
+ "provenance": [
+  {
+   "field": "/format/questions",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4.6",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/duration_min",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4.6",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/options",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4.6",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/item_types",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4.6",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/sections",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.3",
+   "verified_on": "2026-10-10",
+   "note": "sections A, B and C, 50 questions and 50 minutes each"
+  },
+  {
+   "field": "/navigation/locked_sections",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.3",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/return_to_closed_section",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.3",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/early_section_submit",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.3",
+   "verified_on": "2026-10-10",
+   "note": "restricted to proceed to the next section till completion of the allotted time"
+  },
+  {
+   "field": "/navigation/auto_advance_on_timeout",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.3",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/mark_for_review",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/break_between_parts",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "no break is described"
+  },
+  {
+   "field": "/scoring/correct",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4.8",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/scoring/incorrect",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4.8",
+   "verified_on": "2026-10-10",
+   "note": "25% negative marking"
+  },
+  {
+   "field": "/scoring/unanswered",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4.8",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/pace_sec",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "derived: 150 min x 60 / 150 questions"
+  },
+  {
+   "field": "/blueprint/kind",
+   "official": true,
+   "src": "NBEMS-NEETSS-2025",
+   "section": "4.4.3-4.4.5",
+   "verified_on": "2026-10-10"
+  }
+ ]
+}

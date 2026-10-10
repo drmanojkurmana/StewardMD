@@ -1,0 +1,176 @@
+{
+  "id": "fgr",
+  "kind": "drill",
+  "level": "resident",
+  "review": "ai_drafted",
+  "timeLimitSec": 600,
+  "title": {
+    "en": "Fetal growth restriction: when to deliver, by Doppler finding and gestation",
+    "hi": "fetal growth restriction (भ्रूण की वृद्धि रुकना): Doppler और हफ़्तों के हिसाब से प्रसव कब कराएँ"
+  },
+  "scenario": {
+    "en": "Three pregnant women are under surveillance for fetal growth restriction (FGR, the baby is not growing as it should). Each has a different finding. Choose the delivery plan for each. Teaching scenario, not real patients.",
+    "hi": "तीन गर्भवती महिलाएँ fetal growth restriction (FGR, बच्चे की वृद्धि अपेक्षा से कम) के लिए निगरानी में हैं। हर एक में अलग निष्कर्ष है। हर एक के लिए प्रसव की योजना चुनें। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    {
+      "label": "Melamed N, Baschat A, Yinon Y, et al. FIGO initiative on fetal growth: best practice advice for screening, diagnosis, and management of fetal growth restriction. Int J Gynaecol Obstet 2021;152 Suppl 1:3-57, Table 1 (timing and mode of delivery) and section 8.4.1 (antenatal corticosteroids), PMC8252743",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8252743/"
+    }
+  ],
+  "stages": [
+    {
+      "id": "uncomplicated",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 1 is 37 weeks pregnant. The estimated fetal weight is below the 3rd centile. Umbilical artery Doppler, middle cerebral artery Doppler, and amniotic fluid are all normal. When and how do you plan delivery?",
+        "hi": "पहली महिला 37 हफ़्ते की गर्भवती है। बच्चे का अनुमानित वज़न 3rd centile से नीचे है। Umbilical artery Doppler, middle cerebral artery Doppler, और amniotic fluid तीनों सामान्य हैं। प्रसव कब और किस तरह कराने की योजना बनाएँगे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "redv",
+          "text": {
+            "en": "Induction of labour, planned between 36 and 38 weeks.",
+            "hi": "labour को induction (दवा या तरीके से शुरू करना) से, 36 से 38 हफ़्ते के बीच।"
+          },
+          "feedback": {
+            "en": "FIGO Table 1: uncomplicated FGR at less than the 3rd percentile, with normal fluid and Doppler studies, is delivered at 36 to 38 weeks, with mode of delivery induction.",
+            "hi": "FIGO Table 1: normal fluid और Doppler वाले uncomplicated FGR (3rd percentile से नीचे) में प्रसव 36 से 38 हफ़्ते पर, induction से।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "redv",
+          "text": {
+            "en": "Caesarean section straight away, whatever the Doppler.",
+            "hi": "Doppler चाहे जो हो, तुरंत caesarean section।"
+          },
+          "feedback": {
+            "en": "FIGO Table 1 gives induction as the mode of delivery for this group. Caesarean section is listed for the abnormal Doppler groups, not for normal Doppler.",
+            "hi": "FIGO Table 1 में इस समूह के लिए प्रसव का तरीका induction है। Caesarean section असामान्य Doppler वाले समूहों के लिए लिखा है, सामान्य Doppler के लिए नहीं।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "redv",
+          "text": {
+            "en": "Wait and expect delivery at 41 weeks.",
+            "hi": "इंतज़ार करें और 41 हफ़्ते पर प्रसव की उम्मीद रखें।"
+          },
+          "feedback": {
+            "en": "FIGO Table 1 gives 36 to 38 weeks as the delivery window for uncomplicated FGR at less than the 3rd percentile. Waiting until 41 weeks is outside that window.",
+            "hi": "FIGO Table 1 में 3rd percentile से नीचे के uncomplicated FGR के लिए प्रसव की खिड़की 36 से 38 हफ़्ते है। 41 हफ़्ते तक इंतज़ार उस खिड़की से बाहर है।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "redv",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 2 is 31 weeks pregnant with FGR. The umbilical artery Doppler shows reversed end-diastolic flow (REDV). Her CTG is normal today. What is the plan?",
+        "hi": "दूसरी महिला 31 हफ़्ते की गर्भवती है और उसे FGR है। Umbilical artery Doppler में reversed end-diastolic flow (REDV) दिखता है। आज उसका CTG सामान्य है। योजना क्या है?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "steroid",
+          "text": {
+            "en": "Admit her, give antenatal steroids, and plan caesarean section in the 30 to 32 week window.",
+            "hi": "उसे भर्ती करें, antenatal steroids दें, और 30 से 32 हफ़्ते की खिड़की में caesarean section की योजना बनाएँ।"
+          },
+          "feedback": {
+            "en": "FIGO Table 1: for REDV the window is 30 to 32 weeks, the mode of delivery is caesarean section, steroids are given for fetal lung maturation, and monitoring is inpatient.",
+            "hi": "FIGO Table 1: REDV के लिए खिड़की 30 से 32 हफ़्ते है, प्रसव का तरीका caesarean section है, फेफड़ों की परिपक्वता के लिए steroids दिए जाते हैं, और निगरानी inpatient होती है।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "steroid",
+          "text": {
+            "en": "Continue outpatient visits and deliver at 34 weeks by induction.",
+            "hi": "outpatient visits जारी रखें और 34 हफ़्ते पर induction से प्रसव कराएँ।"
+          },
+          "feedback": {
+            "en": "FIGO Table 1 puts REDV in the 30 to 32 week window with inpatient monitoring. The 34 to 37 week window, with induction or caesarean, is for mild abnormalities.",
+            "hi": "FIGO Table 1 में REDV 30 से 32 हफ़्ते की खिड़की और inpatient निगरानी में है। 34 से 37 हफ़्ते की खिड़की, जिसमें induction या caesarean है, हल्के संकेतों के लिए है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "steroid",
+          "text": {
+            "en": "Induce labour now, vaginally, without steroids.",
+            "hi": "अभी बिना steroids के, योनि मार्ग से labour induce करें।"
+          },
+          "feedback": {
+            "en": "FIGO Table 1 gives steroids for fetal lung maturation and caesarean section as the mode of delivery for REDV, so this plan does not match the table.",
+            "hi": "FIGO Table 1 में REDV के लिए fetal lung maturation के लिए steroids और प्रसव का तरीका caesarean section है, इसलिए यह योजना तालिका से मेल नहीं खाती।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "steroid",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 3 is 30 weeks pregnant with FGR and received antenatal steroids yesterday. This morning the umbilical artery end-diastolic flow has returned, and the Doppler looks better. What do you do?",
+        "hi": "तीसरी महिला 30 हफ़्ते की गर्भवती है, FGR है, और कल उसे antenatal steroids दिए गए थे। आज सुबह umbilical artery में end-diastolic flow वापस दिख रहा है, और Doppler बेहतर लग रहा है। आप क्या करेंगे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "end",
+          "text": {
+            "en": "Keep the same surveillance and delivery plan, because the change is transient.",
+            "hi": "वही निगरानी और प्रसव की योजना रखें, क्योंकि यह बदलाव अस्थायी है।"
+          },
+          "feedback": {
+            "en": "FIGO section 8.4.1: the Doppler improvement after corticosteroids is transient, thought to reflect vasodilation of the fetoplacental arterial tree and increased cardiac output. It should not be interpreted as an improvement in fetal status and should not affect the management plan.",
+            "hi": "FIGO section 8.4.1: corticosteroids के बाद Doppler में सुधार अस्थायी है, जो fetoplacental arteries के फैलने और cardiac output बढ़ने से माना जाता है। इसे भ्रूण की स्थिति में सुधार नहीं मानना चाहिए और इससे योजना नहीं बदलनी चाहिए।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "The placenta has recovered, so stop the monitoring.",
+            "hi": "placenta ठीक हो गई है, इसलिए निगरानी बंद करें।"
+          },
+          "feedback": {
+            "en": "FIGO section 8.4.1 says the Doppler change should not be interpreted as an improvement in fetal status. Stopping monitoring on that basis is not supported.",
+            "hi": "FIGO section 8.4.1 के अनुसार Doppler में इस बदलाव को भ्रूण की स्थिति का सुधार नहीं मानना चाहिए। इसी आधार पर निगरानी बंद करना समर्थित नहीं है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Change the plan at once, because the fetus has improved.",
+            "hi": "तुरंत योजना बदल दें, क्योंकि भ्रूण में सुधार हो गया है।"
+          },
+          "feedback": {
+            "en": "FIGO section 8.4.1 says the transient change should not affect the management plan, so there is no basis in that advice for changing the plan because of it.",
+            "hi": "FIGO section 8.4.1 के अनुसार यह अस्थायी बदलाव प्रबंधन योजना को प्रभावित नहीं करना चाहिए, इसलिए उस सलाह में इसी आधार पर योजना बदलने का कोई आधार नहीं है।"
+          }
+        }
+      ]
+    }
+  ]
+}

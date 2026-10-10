@@ -139,10 +139,14 @@
   function hiddenOf(host) { try { var h = host.store().hid; return (h && h.ids) || {}; } catch (e) { return {}; } }
   function fmtMin(m) { var h = Math.floor(m / 60), r = m % 60; return (h ? h + " h" : "") + (h && r ? " " : "") + (r ? r + " min" : ""); }
   function fmtMark(x) { return Math.abs(x - 1 / 3) < 1e-9 ? "1/3" : String(x); }
+  /* Owner 2026-10-10 (Tests 2, smd_prep_tests2 on): the AIPGMEE 2012-2016 sets hold 1,446 to 2,094 items each, more than
+     any real paper, so they are topic sets only: no timed paper simulation, practice and per-subject sets stay. */
+  function topicOnly(p) { return !!(p && p.exam === "aipgmee" && G.PREP_TESTS && G.PREP_TESTS.on && G.PREP_TESTS.on()); }
   function renderPaper(host, pid) {
     var esc = host.esc, p = null;
     (P.ix ? P.ix.papers : []).forEach(function (x) { if (x.id === pid) p = x; });
     if (!p || !P.items) return;
+    var tOnly = topicOnly(p);
     var list = paperItems(P.items, pid), hid = hiddenOf(host), ok = list.filter(function (it) { return usable(it, hid); });
     // a compilation bigger than the real paper is timed as one real-size paper drawn at random from it
     var held = list.length - ok.length, mock = mockFor(host, "neet-pg"), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
@@ -156,8 +160,8 @@
         '<span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '<span class="pn-yq-bar" aria-hidden="true"><i data-p="' + (subj[sid] / top).toFixed(3) + '" style="transform:scaleX(' + (subj[sid] / top).toFixed(3) + ')"></i></span></span><span class="pn-st">' + subj[sid] + "</span>" + (su ? "</button>" : "") + "</li>";
     }).join("");
     host.paint(host.bar(esc(paperTitle(p)), "Recall paper", "back") + '<div class="pn-body"><section class="pn-panel pn-modp pn-yqp" style="--h:262">' +
-      '<p class="pn-big">' + host.fmt(ok.length) + ' questions</p><p class="pn-mut">' + (held ? held + " held back (unclear key or missing image) · " : "") + "memory-based recall</p>" +
-      '<button type="button" class="pn-btn pri" data-act="y-start" data-v="' + esc(pid) + '" data-k="exam"' + (ok.length ? "" : " disabled") + ">" + host.ico("clock") + " Timed test: " + (tn < ok.length ? tn + " random questions, " : "") + fmtMin(Math.round(sc.limit / 60)) + ", +" + mock.plus + " / −" + fmtMark(mock.minus) + "</button>" +
+      '<p class="pn-big">' + host.fmt(ok.length) + ' questions</p><p class="pn-mut">' + (held ? held + " held back (unclear key or missing image) · " : "") + "memory-based recall" + (tOnly ? " · a topic set, not a single paper" : "") + "</p>" +
+      (tOnly ? "" : '<button type="button" class="pn-btn pri" data-act="y-start" data-v="' + esc(pid) + '" data-k="exam"' + (ok.length ? "" : " disabled") + ">" + host.ico("clock") + " Timed test: " + (tn < ok.length ? tn + " random questions, " : "") + fmtMin(Math.round(sc.limit / 60)) + ", +" + mock.plus + " / −" + fmtMark(mock.minus) + "</button>") +
       '<button type="button" class="pn-btn" data-act="y-start" data-v="' + esc(pid) + '" data-k="study"' + (ok.length ? "" : " disabled") + ">" + host.ico("play") + " Practice in paper order</button>" +
       (G.PREP_SETUP && G.PREP_SETUP.enabled() ? '<button type="button" class="pn-btn" data-act="y-setup" data-v="' + esc(pid) + '"' + (ok.length ? "" : " disabled") + ">" + host.ico("next") + " Choose questions</button>" : "") +
       '<p class="pn-mut pn-small">The timed test uses the ' + esc(mock.label) + " (" + mock.n + " questions in " + fmtMin(mock.min) + "), scaled to this paper. Practice shows each answer with its explanation.</p></section>" +
@@ -167,6 +171,7 @@
     var p = null; P.ix.papers.forEach(function (x) { if (x.id === pid) p = x; });
     var hid = hiddenOf(host), ok = paperItems(P.items, pid).filter(function (it) { return usable(it, hid); });
     if (!p || !ok.length) return host.toast("This paper has no questions to show yet.");
+    if (kind === "exam" && topicOnly(p)) kind = "study";
     var title = paperTitle(p) + " (recall)";
     if (kind === "exam") {
       var mock = mockFor(host, "neet-pg"), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
@@ -314,5 +319,6 @@
   function back() { return zoomClose(); }
   function leave() { P.zoom = null; P.mf = {}; }
 
-  G.PREP_PYQ = { homeRow: homeRow, warm: warm, mount: mount, chips: chips, figure: figure, prov: prov, act: act, back: back, leave: leave, _pure: PURE, _st: P };
+  // items(host): every previous-year item (a shared ID resolves one, prep-ids.js).
+  G.PREP_PYQ = { items: loadItems, homeRow: homeRow, warm: warm, mount: mount, chips: chips, figure: figure, prov: prov, act: act, back: back, leave: leave, _pure: PURE, _st: P };
 })(typeof window !== "undefined" ? window : this);
