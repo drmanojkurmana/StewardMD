@@ -11,7 +11,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
-import { readFileSync, mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
+import { readFileSync, readdirSync, mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -385,7 +385,7 @@ test("review desk: Tokós 2.0 items per content type, verify-first units at the 
   const by = (re) => more.filter((i) => re.test(i.id)).length;
   assert.equal(by(/^unit-/), x.learn.units.length);
   assert.equal(by(/^bank-/), x.bank.topics.length);
-  assert.equal(by(/^drill-/), 6); assert.equal(by(/^sim-labour$/), 1); assert.equal(by(/^tool-/), 13); assert.equal(by(/^explorer-/), 6); assert.equal(by(/^clinic-/), 2);
+  assert.equal(by(/^drill-/), readdirSync(join(ROOT, "tokos/drill")).filter((f) => f.endsWith(".json")).length); assert.equal(by(/^sim-labour$/), 1); assert.equal(by(/^tool-/), 13); assert.equal(by(/^explorer-/), 6); assert.equal(by(/^clinic-/), 2);
   assert.ok(more.every((i) => i.status === "ai_drafted"), "nothing approved yet");
   const deck = JSON.parse(readFileSync(join(ROOT, "tokos/decks/ctg.json"), "utf8")), rat = JSON.parse(readFileSync(join(ROOT, "tokos/rationale.json"), "utf8"));
   const all = REV._tokosItems(deck, rat, x), verify = more.filter((i) => i.verify).map((i) => i.id);
