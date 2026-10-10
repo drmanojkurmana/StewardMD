@@ -271,7 +271,8 @@
   if (typeof document !== "undefined") {
     document.addEventListener("click", function (e) {
       var w = e.target && e.target.closest ? e.target.closest(".kbfc-wrap") : null;
-      if (w) openZoom(w);
+      // a drug name in the chart opens its Drug Index entry (drug-link.js), not the zoom
+      if (w && !e.target.closest(".smd-drug")) openZoom(w);
     });
     document.addEventListener("keydown", function (e) {
       if ((e.key === "Enter" || e.key === " ") && e.target && e.target.classList && e.target.classList.contains("kbfc-wrap")) { e.preventDefault(); openZoom(e.target); }
