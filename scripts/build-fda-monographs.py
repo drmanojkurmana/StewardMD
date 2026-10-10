@@ -151,7 +151,8 @@ def ingredient_match(title, name):
         return False
     core = re.sub(r"\b" + SALT_WORDS + r"\b", " ", ing)
     core = re.sub(r"\s+", " ", core).strip()
-    return core == re.sub(r"\s+", " ", name.lower()).strip()
+    want = re.sub(r"\b" + SALT_WORDS + r"\b", " ", name.lower())
+    return core == re.sub(r"\s+", " ", want).strip()
 
 def pick_setid(name):
     """First DailyMed SPL whose ACTIVE INGREDIENT is this molecule (see ingredient_match)."""
