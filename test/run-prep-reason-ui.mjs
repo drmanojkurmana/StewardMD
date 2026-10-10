@@ -87,7 +87,7 @@ async function checkItem(d, tag, it, full) {
     const h2 = await d.ev(`return document.querySelector("#smdPrep .pn-fb").outerHTML;`);
     await d.ev(`PREP_REASON.has = window.__rxHas; return 1;`);
     ok(h1 === h2, tag + ": feedback byte-identical off the reasoning path");
-    if (full) await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`, false);
+    if (full) { await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`); await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`, true); }
     d.stash = d.stash || {};
     d.stash[it.id] = h1;
     await d.ev(`PREP.back(); return 1;`);
@@ -117,7 +117,7 @@ async function checkItem(d, tag, it, full) {
   ok(s2.rel.length === ex.relN, tag + ": " + s2.rel.length + " related questions");
   const ov = await d.ev(`var b=document.querySelector("#smdPrep .pn-body"); return b.scrollWidth<=b.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1;`);
   ok(ov === true, tag + ": nothing scrolls sideways");
-  if (full) await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`, false);
+  if (full) { await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`); await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`, true); }
   return s2;
 }
 
@@ -140,6 +140,12 @@ async function runCombo(d) {
   await d.ev(d.theme === "dark" ? `document.body.classList.add("dark"); return 1;` : `document.body.classList.remove("dark"); return 1;`);
   await d.ev(`PREP.open(); return 1;`);
   ok(await d.waitFor(`return !!(PREP._host && document.querySelector("#smdPrep .pn-body"));`, 20000), tag + ": PrepNucleus opens");
+  // TEMP fetch probe for the webkit failures; remove before merging
+  console.log("  PROBE " + tag + ": " + await d.ev(`(function(){
+    return Promise.all(["/test/fixtures/prep-reason/api/v1/links/index.json", "/prep.js"].map(function(u){
+      return fetch(u, { cache: "no-cache" }).then(function(r){ return r.text().then(function(t){ return u + " -> " + r.status + " " + t.length + "B"; }); }, function(e){ return u + " -> ERR " + (e && e.message); });
+    })).then(function(x){ return x.join(" || "); });
+  })();`));
   // the guard contract: a KB row shows exactly when the reader has that article
   const guard = JSON.parse(await d.ev(`return JSON.stringify({ kb: !!(window.SMD_REASON&&SMD_REASON.hasDiseaseRef&&SMD_REASON.hasDiseaseRef("fibromuscular_dysplasia")),
     kb2: !!window.KB_ENRICHMENT });`));
@@ -179,8 +185,8 @@ async function runCombo(d) {
   // related question opens alone, unanswered
   await d.click(`#smdPrep [data-act="r-rel"]`);
   ok(await d.waitFor(`return !!document.querySelector("#smdPrep .pn-opt") && !document.querySelector("#smdPrep .pn-fb");`, 8000), tag + ": a related question opens alone, unanswered");
-  const relQ = await d.ev(`return document.querySelector("#smdPrep .pn-q").textContent.slice(0,40);`);
-  ok(/carotid/i.test(relQ), tag + ": it is the linked question (" + relQ + ")");
+  const relQ = await d.ev(`return document.querySelector("#smdPrep .pn-q").textContent.slice(0,140);`);
+  ok(/carotid/i.test(relQ), tag + ": it is the linked question (" + relQ.slice(0, 60) + ")");
   await d.ev(`PREP.back(); return 1;`);
 
   if (full) {
@@ -260,6 +266,7 @@ async function runCombo(d) {
     ok(hn === (d.stash && d.stash[old2.id]), tag + ": old feedback identical with the module file missing");
   } else ok(false, tag + ": old feedback renders with the module file missing");
   ok(d.errors().length === 0, tag + ": no uncaught PrepNucleus error" + (d.errors().length ? ": " + d.errors().join(" | ").slice(0, 300) : ""));
+  if (d.diag && d.diag().length) console.log("  DIAG " + tag + ":\n  " + d.diag().slice(0, 12).join("\n  "));
 }
 
 /* ---------- playwright-core drivers (Chrome + WebKit, served from disk, no server) ---------- */
@@ -293,19 +300,26 @@ async function pwDriver(name, browser, size, theme) {
   const page = await ctx.newPage();
   await page.route("https://prep.test/**", serveFile);
   const errors = [];
+  const diag = []; // TEMP diagnostics for the webkit fetch failures; remove before merging
   page.on("pageerror", (e) => { if (/prep|PREP/i.test(String((e && e.stack) || e))) errors.push(String((e && e.message) || e)); });
+  page.on("requestfailed", (r) => diag.push("REQFAIL " + r.url().slice(0, 140) + " :: " + (r.failure() || {}).errorText));
+  page.on("response", (r) => { if (r.status() >= 400) diag.push("HTTP" + r.status() + " " + r.url().slice(0, 140)); });
   const wrap = (e) => `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`;
   const d = {
-    name, size, theme, errors: () => errors,
+    name, size, theme, errors: () => errors, diag: () => diag,
     ev: (e) => page.evaluate(wrap(e)),
     waitFor: async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { try { if (await page.evaluate(wrap(e)) === true) return true; } catch {} await sleep(150); } return false; },
     click: async (sel) => page.click("#smdPrep " + sel.replace(/^#smdPrep /, "")).then(() => true, () => false),
-    shot: async (name) => {
+    shot: async (name, bottom) => {
       if (!SHOTS) return;
       await sleep(120);
       try { await page.evaluate(FINISH_ANIMS); } catch {}
-      try { await page.evaluate(`var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop += f.getBoundingClientRect().top - b.getBoundingClientRect().top - 12;`); } catch {}
-      await page.screenshot({ path: join(SHOTS, name + ".png") });
+      try {
+        await page.evaluate(bottom
+          ? `var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop = b.scrollHeight;`
+          : `var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop += f.getBoundingClientRect().top - b.getBoundingClientRect().top - 12;`);
+      } catch {}
+      await page.screenshot({ path: join(SHOTS, name + (bottom ? "-below" : "") + ".png") });
     },
     setup: async () => {
       await page.goto("https://prep.test/?prep=1", { waitUntil: "domcontentloaded" });
