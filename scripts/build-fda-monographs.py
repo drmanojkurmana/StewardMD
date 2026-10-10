@@ -23,6 +23,7 @@ TRUNC = 30000  # per-section character cap; longer sections are cut and flagged
 
 # LOINC section codes -> record key
 CODES = {
+    "openfda:purpose": "Purpose", "openfda:active": "Active ingredient", "openfda:other": "Other label text",
     "34066-1": "Boxed warning", "34067-9": "Indications and usage", "34068-7": "Dosage and administration",
     "43678-2": "Dosage forms and strengths", "34070-3": "Contraindications", "43685-7": "Warnings and precautions",
     "34071-1": "Warnings", "34084-4": "Adverse reactions", "34073-7": "Drug interactions",
@@ -108,6 +109,71 @@ def parse_label(xml_text):
             sections[code] = body
     return sections
 
+# openFDA field name -> the same keys the DailyMed path produces (OTC-only fields get their own keys)
+OPENFDA_FIELDS = {
+    "boxed_warning": "34066-1", "indications_and_usage": "34067-9", "dosage_and_administration": "34068-7",
+    "dosage_forms_and_strengths": "43678-2", "contraindications": "34070-3", "warnings_and_cautions": "43685-7",
+    "warnings": "34071-1", "adverse_reactions": "34084-4", "drug_interactions": "34073-7", "pregnancy": "42228-7",
+    "nursing_mothers": "34080-2", "pediatric_use": "34081-0", "geriatric_use": "34082-8", "overdosage": "34088-5",
+    "description": "34089-3", "clinical_pharmacology": "34090-1", "mechanism_of_action": "43679-0",
+    "clinical_studies": "34092-7", "how_supplied": "34069-5", "storage_and_handling": "44425-7",
+    "information_for_patients": "34076-0", "purpose": "openfda:purpose", "active_ingredient": "openfda:active",
+    "spl_unclassified_section": "openfda:other",
+}
+
+def core_name(s):
+    x = re.sub(r"\s*\([^)]*\)", " ", str(s).lower())
+    x = re.sub(r"[^a-z0-9]+", " ", x)
+    for _ in range(3):
+        x = re.sub(r"\b" + SALT_WORDS + r"\b", " ", x)
+    return re.sub(r"\s+", " ", x).strip()
+
+def openfda_get(search, limit=20):
+    key = os.environ.get("FDA_API_KEY", "")
+    params = {"search": search, "limit": str(limit)}
+    if key:
+        params["api_key"] = key
+    url = "https://api.fda.gov/drug/label.json?" + urllib.parse.urlencode(params)
+    try:
+        return json.loads(http_get(url)).get("results", [])
+    except Exception:
+        return []
+
+def pick_openfda(name):
+    """First openFDA label whose generic or substance name is THIS molecule (salt removed on both sides)."""
+    want = core_name(name)
+    if not want:
+        return None
+    for field in ("openfda.generic_name", "openfda.substance_name"):
+        for r in openfda_get(f'{field}:"{name}"'):
+            of = r.get("openfda", {})
+            names = of.get("generic_name", []) + of.get("substance_name", [])
+            if not any(core_name(n) == want for n in names):
+                continue
+            if not (r.get("indications_and_usage") or r.get("dosage_and_administration") or r.get("purpose")):
+                continue
+            return r
+    return None
+
+def record_from_openfda(name, r):
+    sections = {}
+    for field, code in OPENFDA_FIELDS.items():
+        v = r.get(field)
+        if not v:
+            continue
+        text = clean("\n".join(str(x) for x in v) if isinstance(v, list) else str(v))
+        if text:
+            sections[code] = text
+    of = r.get("openfda", {})
+    set_id = (r.get("set_id") or of.get("spl_set_id", [""])[0]) or ""
+    eff = str(r.get("effective_time", ""))
+    published = f"{eff[0:4]}-{eff[4:6]}-{eff[6:8]}" if len(eff) == 8 else ""
+    title = (of.get("brand_name") or of.get("generic_name") or [name])[0]
+    rec = build_record(name, set_id, title, published, sections)
+    rec["source"] = "openFDA"
+    rec["refs"] = [[f"FDA-approved label: {title} (openFDA, {published})", f"https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid={set_id}" if set_id else "https://open.fda.gov/apis/drug/label/"]]
+    return rec
+
 def build_record(name, setid, title, published, sections):
     rec = {"generic": name, "src": "fda-label", "setid": setid, "labelTitle": title, "labelDate": published,
            "cls": "", "pharm": "", "tags": [], "quick": [], "indications": [], "label": {}, "refs": []}
@@ -131,7 +197,8 @@ def build_record(name, setid, title, published, sections):
     rec["footer"] = "Verbatim from the FDA-approved label on DailyMed. Verify against the current label before prescribing."
     return rec
 
-SALT_WORDS = r"(anhydrous|anhyd|sodium|potassium|calcium|magnesium|hydrochloride|hcl|dihydrochloride|hydrobromide|sulfate|sulphate|acetate|citrate|tartrate|maleate|besylate|mesylate|phosphate|succinate|fumarate|bisulfate|bitartrate|disodium|dihydrate|monohydrate|trihydrate|hydrate|propionate|tromethamine|tosylate|diphosphate|hemihydrate|mesilate|besilate|bromide|chloride|nitrate|lactate|gluconate|pivoxil)"
+SALT_WORDS = r"(anhydrous|anhyd|dipropionate|diacetate|dimesylate|mesylate|sodium|potassium|calcium|magnesium|hydrochloride|hcl|dihydrochloride|hydrobromide|sulfate|sulphate|acetate|citrate|tartrate|maleate|besylate|mesylate|phosphate|succinate|fumarate|bisulfate|bitartrate|disodium|dihydrate|monohydrate|trihydrate|hydrate|propionate|tromethamine|tosylate|diphosphate|hemihydrate|mesilate|besilate|bromide|chloride|nitrate|lactate|gluconate|pivoxil)"
+DOSAGE_FORM = r"(tablets?|capsules?|ointment|cream|gel|lotion|solution|suspension|injection|powder|liquid|film|kit|granules?|caplets?|patch|spray|drops?|syrup|aerosol|inhaler|suppository|foam|emulsion|for solution|for suspension|extended release|delayed release|film coated|oral|topical|ophthalmic|injectable)"
 NONPHARMA_LABELERS = r"complementary health|homeopath|hylands|boiron|heel inc|guna\b|nature'?s |herbal|dr\.? reckeweg|pekana|vetone|mwi|veterin|animal|canine|feline|equine|bovine|porcine|avian"
 VET_TITLE = r"canine|feline|equine|bovine|porcine|veterin|\bdogs?\b|\bcats?\b|\bhorse"
 
@@ -145,14 +212,22 @@ def ingredient_match(title, name):
         return False
     m = re.search(r"\(([^)]*)\)", head)
     if not m:
-        return False
+        # No ingredient parentheses ("ALCLOMETASONE DIPROPIONATE OINTMENT"): the title head must be the
+        # molecule plus its salt and a dosage form, nothing else.
+        words = re.sub(r"\s+", " ", head.lower()).strip()
+        core = re.sub(r"\b" + SALT_WORDS + r"\b", " ", words)
+        core = re.sub(r"\b" + DOSAGE_FORM + r"\b", " ", core)
+        core = re.sub(r"\s+", " ", core).strip()
+        want = re.sub(r"\s+", " ", re.sub(r"\b" + SALT_WORDS + r"\b", " ", name.lower())).strip()
+        return core == want
     ing = re.sub(r"\s+", " ", m.group(1).lower()).strip()
     if re.search(r"\band\b|\s-\s|/|,|\+", ing):
         return False
     core = re.sub(r"\b" + SALT_WORDS + r"\b", " ", ing)
     core = re.sub(r"\s+", " ", core).strip()
-    want = re.sub(r"\b" + SALT_WORDS + r"\b", " ", name.lower())
-    return core == re.sub(r"\s+", " ", want).strip()
+    want = re.sub(r"\s+", " ", re.sub(r"\b" + SALT_WORDS + r"\b", " ", name.lower())).strip()
+    # Biologic names carry a USAN suffix that varies by labeler: "ANIFROLUMAB-FNIA" is anifrolumab.
+    return core == want or re.fullmatch(re.escape(want) + r"-[a-z]{2,6}", core) is not None
 
 def pick_setid(name):
     """First DailyMed SPL whose ACTIVE INGREDIENT is this molecule (see ingredient_match)."""
@@ -167,19 +242,48 @@ def pick_setid(name):
 def label_is_about(sections, name):
     """Second check on the label itself: the molecule is named in its indications, dosage or description."""
     word = re.compile(r"\b" + re.escape(name.split()[0].lower()) + r"\b")
-    for code in ("34067-9", "34068-7", "34089-3"):
+    for code in ("34067-9", "34068-7", "34089-3", "42229-5"):
         if code in sections and word.search(sections[code].lower()):
             return True
     return False
 
+SYNONYMS = {"frusemide": "furosemide", "lignocaine": "lidocaine", "noradrenaline": "norepinephrine",
+            "oestradiol": "estradiol", "adrenaline": "epinephrine", "paracetamol": "acetaminophen"}
+
+def dailymed_record(name):
+    """A record from the DailyMed SPL for this molecule, or None if no usable label."""
+    setid, title, published = pick_setid(name)
+    if not setid:
+        return None
+    cpath = os.path.join(CACHE, setid + ".xml")
+    if os.path.exists(cpath):
+        xml_text = open(cpath, encoding="utf-8").read()
+    else:
+        xml_text = http_get(f"https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/{setid}.xml")
+        open(cpath, "w", encoding="utf-8").write(xml_text)
+    sections = parse_label(xml_text)
+    if "34067-9" not in sections and "34068-7" not in sections:
+        return None
+    if not label_is_about(sections, name):
+        return None
+    return build_record(name, setid, title.split(" [")[0], published, sections)
+
+def openfda_record(name):
+    for q in [name] + ([SYNONYMS[name]] if name in SYNONYMS else []):
+        of = pick_openfda(q)
+        if of:
+            return record_from_openfda(name, of)
+    return None
+
 def main():
+    global CACHE
     args = sys.argv[1:]
     names = json.load(open(args[0]))
     limit = int(args[args.index("--limit") + 1]) if "--limit" in args else len(names)
-    cache = args[args.index("--cache") + 1] if "--cache" in args else os.path.join(ROOT, ".fda-label-cache")
+    CACHE = args[args.index("--cache") + 1] if "--cache" in args else os.path.join(ROOT, ".fda-label-cache")
     outdir = args[args.index("--out") + 1] if "--out" in args else DEFAULT_OUT
+    os.makedirs(CACHE, exist_ok=True)
     os.makedirs(outdir, exist_ok=True)
-    os.makedirs(cache, exist_ok=True)
     report = {"built": [], "exists": [], "no_label": [], "failed": []}
     for name in names[:limit]:
         safe = re.sub(r"[^A-Za-z0-9 ._-]", "", name).strip()
@@ -187,29 +291,24 @@ def main():
         if os.path.exists(out):
             report["exists"].append(name); continue
         try:
-            setid, title, published = pick_setid(name)
-            if not setid:
+            rec, via = None, ""
+            try:
+                rec = dailymed_record(safe); via = "DailyMed"
+            except Exception:
+                rec = None
+            if rec is None:
+                rec = openfda_record(safe); via = "openFDA"
+            if rec is None:
                 report["no_label"].append(name); continue
-            cpath = os.path.join(cache, setid + ".xml")
-            if os.path.exists(cpath):
-                xml_text = open(cpath, encoding="utf-8").read()
-            else:
-                xml_text = http_get(f"https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/{setid}.xml")
-                open(cpath, "w", encoding="utf-8").write(xml_text)
-            sections = parse_label(xml_text)
-            if "34067-9" not in sections and "34068-7" not in sections:
-                report["no_label"].append(name); continue
-            if not label_is_about(sections, name):
-                report["no_label"].append(name); continue
-            rec = build_record(safe, setid, title.split(" [")[0], published, sections)
+            rec["generic"] = safe
             with open(out, "w", encoding="utf-8") as f:
                 json.dump(rec, f, ensure_ascii=False, indent=2); f.write("\n")
-            report["built"].append(name)
+            report["built"].append(f"{name} [{via}]")
         except Exception as e:
             report["failed"].append([name, str(e)[:160]])
         time.sleep(0.2)
     print(json.dumps({k: len(v) for k, v in report.items()}))
-    json.dump(report, open(os.path.join(cache, "report.json"), "w"), indent=1)
+    json.dump(report, open(os.path.join(CACHE, "report.json"), "w"), indent=1)
 
 if __name__ == "__main__":
     main()
