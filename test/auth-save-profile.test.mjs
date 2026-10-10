@@ -75,3 +75,36 @@ test("a failed write is an error, never a silent success", async () => {
   failWrite = false;
   assert.equal(r.status, 502); assert.equal(r.body.ok, false);
 });
+
+/* ── patch mode: ONE field edited from the Profile page (owner, 2026-10-10: "Couldn't save, check your connection" saving the college) ── */
+test("patch: one field is written, nothing else, and the form is not marked complete by it", async () => {
+  commits = [];
+  const r = await call("good-token", { patch: true, hospital: "Kurnool Medical College" });
+  assert.equal(r.status, 200);
+  assert.deepEqual(fieldsOf(commits[0][0]), ["hospital", "updatedAt"], "only what was sent, plus the time");
+  assert.ok(!fieldsOf(commits[0][0]).includes("profileComplete"));
+  assert.deepEqual(commits[0][0].updateMask.fieldPaths.sort(), ["hospital", "updatedAt"]);
+});
+test("patch: a changed registration number is stored as unverified and awaiting its certificate", async () => {
+  commits = [];
+  await call("good-token", { patch: true, regNo: " APMC 12345 ", verified: true, regNoPendingCert: false });
+  const w = commits[0][0], f = w.update.fields;
+  assert.deepEqual(fieldsOf(w), ["regNo", "regNoPendingCert", "updatedAt", "verified"]);
+  assert.equal(f.regNo.stringValue, "APMC 12345"); assert.equal(f.verified.booleanValue, false); assert.equal(f.regNoPendingCert.booleanValue, true);
+});
+test("patch: invalid or empty edits are refused; server-owned fields still cannot be written", async () => {
+  commits = [];
+  assert.equal((await call("good-token", { patch: true })).status, 400, "nothing to save");
+  assert.equal((await call("good-token", { patch: true, hospital: "  " })).status, 400);
+  assert.equal((await call("good-token", { patch: true, phone: "12" })).status, 400);
+  assert.equal((await call("good-token", { patch: true, name: "" })).status, 400);
+  assert.deepEqual(commits, []);
+  await call("good-token", { patch: true, city: "Kurnool", smdId: "SMD-FAKE", phoneVerifiedAt: 1, isAdmin: true });
+  assert.deepEqual(fieldsOf(commits[0][0]), ["city", "updatedAt"]);
+});
+test("patch: still needs a valid sign-in and cannot pick whose profile", async () => {
+  commits = [];
+  assert.equal((await call(null, { patch: true, city: "x" })).status, 401);
+  await call("good-token", { patch: true, city: "Kurnool", uid: "uid-B" });
+  assert.match(commits[0][0].update.name, /users\/uid-A\//);
+});

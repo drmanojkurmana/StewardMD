@@ -34,8 +34,10 @@ export function roleAllowance(env, isPro, role, phoneVerified) {
   switch (budgetTier(isPro, role, phoneVerified)) {
     case "none": return 0;
     case "free": return num(env && env.BUDGET_FREE_TOKENS, 5000);
-    case "promax": return num(env && env.BUDGET_PROMAX_TOKENS, 3000000);
-    default: return num(env && env.BUDGET_PRO_TOKENS, 1000000);
+    // One Pro allowance (owner, 2026-10-10: "300000 MK per month for pro users"). The old defaults were 1M (Pro) and
+    // 3M (physician). A single account can still be raised or lowered in User control (record.aiCapTokens).
+    case "promax": return num(env && env.BUDGET_PROMAX_TOKENS, 300000);
+    default: return num(env && env.BUDGET_PRO_TOKENS, 300000);
   }
 }
 export function currentMonthGrant(record, month) {
@@ -53,7 +55,8 @@ export function premiumModelAllowed(env, record, key, role) {
 }
 
 const CACHE_TTL = 60 * 60 * 26;   // ~26h; also self-heals on month change via the stored month
-function cacheKey(uid) { return "maik:budget:" + uid; }
+// v2 (2026-10-10): the Pro allowance changed from 1M/3M to 300,000, so caps cached under the old key must not be served.
+function cacheKey(uid) { return "maik:budget:v2:" + uid; }
 
 /* Drop the cached cap for a uid. Call whenever the TIER changes under a user (verification,
  * approval, a grant), or they keep the old allowance for up to CACHE_TTL. */

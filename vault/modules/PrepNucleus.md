@@ -1261,6 +1261,30 @@ Ask MaiK, and it doesn't answer like a chatbot ... MaiK offline can have unlimit
   visualViewport, one scroll region, chip collapsed, history in requests, 10 online then the card, server 429, new chat,
   25 messages on this phone, no model = said plainly) and `test/run-prep-ask-ui.mjs`.
 
+## Ask MaiK with the keyboard up (2026-10-10, branch `fix/prep-ask-keyboard`, prep57)
+Owner (iPhone recording, OTA v268): tapping the composer collapsed the sheet to its header row right above the
+keyboard; conversation and box hidden under the keyboard, the page showing through the top half.
+- **Root cause.** `onVV` put the wrap at `visualViewport.offsetTop - rootRect.top`. In the app's WKWebView the keyboard
+  pans the visual viewport down by the keyboard height K AND the overlay's client rect moves with the pan
+  (`rootRect.top = -K`), so the pan counted twice: wrap top = 2K, i.e. a keyboard height too low, clipped by the overlay.
+  Geometry from the recording (393x851 CSS px): K about 389, sheet top at 398 = K + 8, exactly the 2K model. Second bug:
+  `visualViewport` numbers are screen px while the wrap lives inside `html { zoom }` (SMD_ZOOM), so at zoom 0.95 the
+  wrap was 5% off (header under the top edge, page showing under the composer).
+- **Fix (prep-ask.js `kbPlace` / `onVV` / `kbSettle`).** Work in the overlay's own CSS px: visualViewport values divided
+  by the html zoom; the wrap top is the overlay's own client offset when client rects move with the pan, else
+  `offsetTop`; a top that would push the wrap's bottom past the overlay is pulled up so the bottom meets it (the
+  visible area can never extend below the fixed overlay). Re-measured on visualViewport resize/scroll, window resize,
+  orientationchange and every frame for 0.9 s after the box gains or loses focus (WebKit's last event can come before
+  its pan settles); the overlay's own scrollTop is reset; the chat follows the newest message for 1.2 s after focus.
+  CSS: with the keyboard up the sheet starts below `safe-area-inset-top` (the visible area starts at the very top of
+  the screen), `pa-kbs` drops the place switch under 300 px (landscape phone), and the centred 700 px+ panel uses
+  8 px wrap padding instead of 32 px.
+- **Tests.** `test/run-prep-ask-kb-ui.mjs`: emulated pan-webkit (rects move with the pan, the owner's case), pan-layout
+  (spec rects), resize (web view shrinks) at 390x844, 375x667, 430x932, zoom 0.95 and 1.0, two focus/blur rounds each,
+  a mode switch while typing, a landscape phone. Old code: 86 FAIL (screens in the job folder reproduce the owner's
+  frame); new: all pass. No iOS Simulator runtime on the Mac (list-devices showed none), so NOT verified in real WebKit;
+  the owner's iPhone is the check: tap the box, the whole chat should sit above the keyboard.
+
 ## Floating glass tab bar (2026-10-10, branch `feat/prep-glassbar`, prep55)
 - Owner: "a floating liquid glass menu bar at the footer, more user friendly, accessible in the home screen". Explicit
   exception to the no-glass rule for this bar only. Marrow's pill bar was a structure reference only.

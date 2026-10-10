@@ -118,8 +118,21 @@ async function handle(context) {
     var SAVE_FIELDS = ["role", "name", "phone", "state", "city", "hospital", "degree", "speciality"];
     var patch = {};
     SAVE_FIELDS.forEach(function (k) { if (typeof body[k] === "string") patch[k] = body[k].trim().slice(0, 200); });
-    if (!patch.name || !patch.hospital || String(patch.phone || "").replace(/\D/g, "").length < 7) return json({ ok: false, error: "incomplete" }, 400);
-    patch.profileComplete = true; patch.updatedAt = Date.now();
+    if (body.patch === true) {
+      /* ONE field edited from the Profile page (owner, 2026-10-10: "Couldn't save, check your connection" when saving
+       * the college from the profile). The same SDK problem as the first-run form, so the edit goes through here.
+       * Whatever is sent must be valid; nothing is required. A changed registration number is stored as unverified
+       * and awaiting its certificate, exactly as the Profile page has always written it. */
+      if (typeof body.regNo === "string" && body.regNo.trim()) { patch.regNo = body.regNo.trim().slice(0, 40); patch.verified = false; patch.regNoPendingCert = true; }
+      if (!Object.keys(patch).length) return json({ ok: false, error: "empty" }, 400);
+      if ("name" in patch && !patch.name) return json({ ok: false, error: "incomplete" }, 400);
+      if ("hospital" in patch && !patch.hospital) return json({ ok: false, error: "incomplete" }, 400);
+      if ("phone" in patch && String(patch.phone).replace(/\D/g, "").length < 7) return json({ ok: false, error: "incomplete" }, 400);
+      patch.updatedAt = Date.now();
+    } else {
+      if (!patch.name || !patch.hospital || String(patch.phone || "").replace(/\D/g, "").length < 7) return json({ ok: false, error: "incomplete" }, 400);
+      patch.profileComplete = true; patch.updatedAt = Date.now();
+    }
     try {
       await fsCommit(env, [wUpdate(env, "users/" + who.uid + "/profile/self", patch)]);
       return json({ ok: true });

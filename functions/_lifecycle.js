@@ -310,7 +310,7 @@ export async function purgeUserData(env, uid) {
     try { await cs.delete("icu:doctor:" + uid); out.doctor = true; } catch (e) {}   // verification record
   }
   const mk = lcKv(env);
-  if (mk) { try { await mk.delete("maik:budget:" + uid); out.budget = true; } catch (e) {} }
+  if (mk) { try { await mk.delete("maik:budget:v2:" + uid); await mk.delete("maik:budget:" + uid); out.budget = true; } catch (e) {} }
 
   // Firestore: the private profile, and the directory pointer that makes them findable by ID.
   try {
