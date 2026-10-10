@@ -108,3 +108,11 @@ test("decelerations key: exactly 3 min is not prolonged (FIGO: more than 3 min);
   assert.equal(withDecel(300), "prolonged");
   assert.equal(withDecel(301), "over5");
 });
+
+test("missedKeys teaches only the features behind the questions the learner got wrong", () => {
+  assert.deepEqual(D.missedKeys(baseCase, []), []);
+  assert.deepEqual(D.missedKeys(baseCase, ["baseline"]), ["baseline.tachycardia"]);
+  assert.ok(!D.missedKeys(baseCase, ["baseline"]).includes("decels.prolonged"));
+  assert.deepEqual(D.missedKeys(baseCase, ["decels", "decelType"]), ["decels.prolonged"]);
+  assert.deepEqual(D.missedKeys(baseCase, ["figo"]), ["trace_vs_outcome"]);
+});
