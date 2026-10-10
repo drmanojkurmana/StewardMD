@@ -116,7 +116,7 @@ test("assemble: official FMGE quotas, radiotherapy shortfall shrinks the test an
   const r = A.assemble(FM, "grand", { seed: "s1" }, mkBank(fullFmge()));
   assert.equal(r.ok, true); assert.equal(r.requested, 300); assert.equal(r.count, 295); assert.equal(r.reduced, true);
   for (const [s, n] of Object.entries(FM.blueprint.subjects)) assert.equal(r.actual[s], n, s);
-  assert.ok(r.deviations.some((d) => /radiotherapy: 5 planned/.test(d)));
+  assert.ok(r.deviations.some((d) => /Radiotherapy: 5 planned/.test(d)));
   assert.ok(/^Reduced to 295 of 300/.test(r.deviations[0]));
   assert.equal(r.sections.reduce((a, s) => a + s.n, 0), 295);
   assert.deepEqual(r.sections.map((s) => s.from), [0, 50, 99, 148, 197, 246]);
@@ -140,6 +140,9 @@ test("assemble: eligibility, duplicates, sidecar, exclusions", () => {
   for (const bad of [0, 4, 5, 7, 8]) assert.ok(!ids.includes(it[bad].id), "excluded " + bad);
   assert.ok(ids.includes(it[6].id), "approved stays");
   assert.ok(r.deviations.some((d) => /duplicate/.test(d)));
+  // decision 5: three-way agreement without a rubric blocker is eligible before approval; a rubric fail is not
+  assert.equal(A.eligible(it[9], { quality: A.readQuality([{ item_id: it[9].id, status: "automated_checks_passed", key: { value: 0, confidence: "agreed_independent" }, rubric: { "OBJ-02": "pass", "STM-05": "flag" } }]) }), "");
+  assert.equal(A.eligible(it[9], { quality: A.readQuality([{ item_id: it[9].id, status: "automated_checks_passed", rubric: { "OPT-03": "fail" } }]) }), "rubric-blocker");
   // a record whose content hash no longer matches is ignored (default eligibility)
   const q2 = A.readQuality([{ item_id: it[4].id, status: "rejected", content_hash: "old" }]);
   assert.equal(A.eligible(it[4], { quality: q2, hashOf: () => "new" }), "");
@@ -266,4 +269,23 @@ test("flag smd_prep_tests2 is off by default", () => {
   ls.smd_prep_tests2 = "1"; assert.equal(G.PREP_TESTS.on(), true);
   G.location.search = "?tests2=0"; assert.equal(G.PREP_TESTS.on(), false);
   ls.smd_prep_tests2 = "0"; G.location.search = "?tests2=1"; assert.equal(G.PREP_TESTS.on(), true);
+});
+
+test("opt-in statistics endpoint: de-identified rows only, stub without a binding, aggregate upsert with one", async () => {
+  const S = await import("../functions/api/prep/stats.js");
+  assert.equal(S.clean({ v: 1, exam: "neet-pg", items: [] }).rows.length, 0);
+  assert.equal(S.clean({ v: 2, exam: "neet-pg", items: [] }), null);
+  assert.equal(S.clean({ v: 1, exam: "nope", items: [] }), null);
+  const c = S.clean({ v: 1, exam: "fmge", uid: "me", items: [["a-1", 1, 30, 2], ["a-1", 0, 3, 1], ["b 2", 1, 3, 1], ["c-3", null, 5, -1], ["d-4", null, 5, 2], ["e-5", 0, 99999, 1]] });
+  assert.deepEqual(c, { exam: "fmge", rows: [["a-1", 1, 30, 2], ["c-3", null, 5, -1]] });
+  const req = (b) => ({ request: { json: async () => b }, env: {} });
+  const r1 = await S.onRequestPost(req({ v: 1, exam: "fmge", items: [["a-1", 1, 30, 2]] }));
+  assert.equal(r1.status, 202); assert.deepEqual(await r1.json(), { accepted: 1, stored: false });
+  const calls = [];
+  const db = { prepare: (sql) => ({ bind: (...a) => { calls.push([sql, a]); return a; } }), batch: async (l) => l };
+  const r2 = await S.onRequestPost({ request: { json: async () => ({ v: 1, exam: "fmge", items: [["a-1", 1, 30, 2]] }) }, env: { PREP_STATS_DB: db } });
+  assert.deepEqual(await r2.json(), { accepted: 1, stored: true });
+  assert.match(calls[0][0], /ON CONFLICT\(item_id\) DO UPDATE SET n = n \+ 1/);
+  assert.deepEqual(calls[0][1].slice(0, 9), ["a-1", "fmge", 1, 0, 30, 0, 0, 1, 0]);
+  assert.equal((await S.onRequestPost(req("x"))).status, 400);
 });

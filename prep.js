@@ -1377,7 +1377,7 @@
     var brk = nx && x.part && nx.part && nx.part !== x.part;
     paint(bar(esc(r.title), x.label + " submitted", "back") + '<div class="pn-body pn-secsum">' + secStripHtml(r) +
       '<section class="pn-panel pn-secp"><p class="pn-t2eb">' + esc(why) + '</p><h2 class="pn-h">' + esc(x.label) + " is locked</h2>" +
-      '<dl class="pn-secn"><div><dt>Answered</dt><dd>' + na + '</dd></div><div><dt>Not answered</dt><dd>' + (x.n - na) + "</dd></div><div><dt>Marked</dt><dd>" + nm + "</dd></div></dl>" +
+      '<dl class="pn-secn"><div><dt>Answered</dt><dd>' + na + '</dd></div><div><dt>Unanswered</dt><dd>' + (x.n - na) + "</dd></div><div><dt>Marked</dt><dd>" + nm + "</dd></div></dl>" +
       '<p class="pn-mut pn-small">' + ico("lock") + " You cannot return to " + esc(x.label) + ". Its answers are saved and marked at the end.</p></section>" +
       (nx ? '<section class="pn-panel"><h2 class="pn-sec">' + (brk ? "Break before Part " + nx.part : "Next") + '</h2><p class="pn-mut">' + esc(nx.label) + ": " + nx.n + " questions, " + fmtTime(nx.sec) + ". " + (brk ? "The exam has a scheduled break between the parts. " : "In the exam the next section opens by itself. ") + "Its clock starts when you tap Start.</p>" +
         '<button type="button" class="pn-btn pri" data-act="secstart" data-v="' + (e.k + 1) + '">' + ico("play") + " Start " + esc(nx.label) + "</button></section>" : "") + "</div>", ".pn-btn.pri");
@@ -1560,6 +1560,8 @@
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
     if (r.sc && r.phase === "between") return renderSecSummary(r);
+    // Back from the grid stops the timer (back() always does); a timed run shown again restarts it.
+    if (!st.timer && (r.limit || r.qsec || r.sc)) startTimer();
     if (r.qi !== r.i) { msStop(r); r.qi = r.i; r.qt0 = Date.now(); }
     if (r.ms && r.qiAt == null) r.qiAt = Date.now();
     if (r.t2) persistRun(r);

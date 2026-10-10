@@ -138,7 +138,8 @@
   /* eligible(it, ctx) -> "" when the item may enter a test, else the reason. ctx: { hidden: {id:1}, exclude: {id:1},
      quality: { id: record } (item-quality sidecar; optional), hashOf(it) (optional, to check a record's content_hash) }.
      Default (no sidecar record): eligible = the item the app already shows (no flag, not withdrawn). A record blocks only
-     when its status is requires_review, rejected or retired, its key is disputed, or it is not eligible_for the type. */
+     when its status is requires_review, rejected or retired, its key is disputed, a rubric rule failed, or it is not
+     eligible_for the type. "approved" is never required (draft and automated_checks_passed stay eligible). */
   function eligible(it, ctx, type) {
     ctx = ctx || {};
     if (!it || it.id == null || !it.o || !(it.o.length >= 2) || typeof it.a !== "number") return "malformed";
@@ -149,6 +150,9 @@
     if (q && !(q.content_hash && ctx.hashOf && ctx.hashOf(it) !== q.content_hash)) {
       if (BLOCKED[q.status]) return "status:" + q.status;
       if (q.key && q.key.confidence === "disputed") return "key-disputed";
+      // Owner 2026-10-10 (decision 5): an item with the independent key check passed and no rubric blocker may enter tests
+      // before it is "approved" (that status stays the owner's own decision); a rubric "fail" is a blocker.
+      if (q.rubric) for (var rk in q.rubric) if (q.rubric[rk] === "fail") return "rubric-blocker";
       if (type && q.eligible_for && q.eligible_for.length && q.eligible_for.indexOf(type) < 0) return "not-for-" + type;
     }
     return "";
@@ -246,7 +250,7 @@
       var bs = p.blueprint.subjects, un = p.blueprint.unmapped || {}, all = {}, k;
       for (k in bs) all[k] = bs[k]; for (k in un) all["~" + k] = un[k];
       planned = apportion(want, all);
-      for (k in planned) if (k.charAt(0) === "~" && planned[k]) dev.push(k.slice(1) + ": " + planned[k] + " planned by the official blueprint; the bank has no " + k.slice(1) + " questions, so the test is " + planned[k] + " shorter.");
+      for (k in planned) if (k.charAt(0) === "~" && planned[k]) dev.push(cap1(k.slice(1)) + ": " + planned[k] + " planned by the official blueprint; the bank has no " + k.slice(1) + " questions, so the test is " + planned[k] + " shorter.");
     } else if (spread === "diagnostic") {
       planned = diagnosticPlan(want, avail, opts.history || {}, R);
     } else {
@@ -298,6 +302,7 @@
     return { ok: !refused, refused: refused, items: out, count: count, requested: want, reduced: reduced, blueprint: bp, seed: seed, planned: pl, actual: actual, styles: styles, deviations: dev, dropped: drop, sections: sections,
       duration_sec: bp.sections ? sum(sections.map(function (s) { return s.sec; })) : (type === "daily10" ? bp.duration_sec : count * bp.pace) };
   }
+  function cap1(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   function styleName(s) { return s === "statement_combination" ? "Statement-combination (multiple correct) questions" : s; }
   function sum(o) { var t = 0; (Array.isArray(o) ? o : Object.keys(o).map(function (k) { return o[k]; })).forEach(function (x) { t += x || 0; }); return t; }
   // round-robin across modules so one module does not dominate a subject's share

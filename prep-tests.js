@@ -108,7 +108,7 @@
       : f.questions + " questions, " + mins(f.duration_min * 60);
     var pass = p.scoring.pass ? " Pass mark " + p.scoring.pass.marks + " of " + p.scoring.pass.of + "." : "";
     var bG = A.blueprint(p, "grand"), bM = A.blueprint(p, "mini"), bP = A.blueprint(p, "part");
-    function btn(type, b, label, pri) { var l = lastOf(p.id, type); return '<button type="button" class="pn-btn' + (pri ? " pri" : "") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="' + type + '" data-need="' + b.min_viable + '">' + H.ico("clock") + " " + esc(label) + (l ? '<small class="pn-t2last">Last ' + esc(fmtMarks(l.raw)) + " of " + l.max + " · " + dm(l.ts) + "</small>" : "") + "</button>"; }
+    function btn(type, b, label, pri) { var l = lastOf(p.id, type); return '<button type="button" class="pn-btn pn-t2btn' + (pri ? " pri" : "") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="' + type + '" data-need="' + b.min_viable + '"><span class="pn-t2bl">' + H.ico("clock") + "<span>" + esc(label) + "</span></span>" + (l ? '<small class="pn-t2last">Last ' + esc(fmtMarks(l.raw)) + " of " + l.max + " · " + dm(l.ts) + "</small>" : "") + "</button>"; }
     var btns = "";
     if (p.id === "usmle-step1") btns = btn("mini", bM, "One block: " + bM.count + " questions, " + mins(bM.duration_sec), true) + btn("grand", bG, "Full exam: " + bG.count + " questions, " + mins(bG.duration_sec));
     else {
@@ -138,7 +138,8 @@
       (pt.due || pt.left ? H.row("t2-plan", H.ico("play"), "Today's set", (pt.due ? H.fmt(pt.due) + " reviews due, then new" : "Up to 20 new questions") + ", marked as you go") : "") +
       (wk || mt ? H.row("t2-weak", H.ico("flag"), "Weak areas", (wk ? wk + (wk === 1 ? " weak module" : " weak modules") : "") + (wk && mt ? " and " : "") + (mt ? H.fmt(mt) + " mistakes" : "")) : "") +
       (mt ? H.row("t2-mistakes", H.ico("x"), "My mistakes", H.fmt(mt) + " to fix") : "") +
-      H.row("t2-custom", H.ico("plus"), "Custom test", "Your own mix of subjects and count");
+      H.row("t2-custom", H.ico("plus"), "Custom test", "Your own mix of subjects and count") +
+      (statsChoice() != null ? H.row("t2-statsw", H.ico("flag"), "Anonymous statistics", statsChoice() === "1" ? "On: tap to stop sharing" : "Off: tap to share anonymously") : "");
     return '<h2 class="pn-h">Practice tests</h2><div class="pn-group pn-t2p">' + rows + "</div>";
   }
   function testsHtml(h) {
@@ -164,7 +165,7 @@
       subs.forEach(function (sb) { var x = ix[sb.id]; if (x) x.topics.forEach(function (t) { if (t.group !== "mixed") total += H.pure.countFor(t, ex); }); });
       P.cov[ex] = total;
       Array.prototype.forEach.call(root.querySelectorAll("[data-act=t2-pre][data-need]"), function (b) {
-        if (total < Number(b.getAttribute("data-need"))) { b.disabled = true; b.setAttribute("aria-disabled", "true"); var sm = D.createElement("small"); sm.className = "pn-t2last"; sm.textContent = "Not enough questions in the bank yet"; b.appendChild(sm); }
+        if (total < Number(b.getAttribute("data-need"))) { b.disabled = true; b.setAttribute("aria-disabled", "true"); var sm = D.createElement("small"); sm.className = "pn-t2last"; b.classList.add("pn-t2btn"); sm.textContent = "Not enough questions in the bank yet"; b.appendChild(sm); }
       });
     });
   }
@@ -234,7 +235,7 @@
   function prepare(pid, type, sid, mid) {
     var p = A.profile(pid); if (!p) return;
     var daily = type === "daily10", seed = daily ? A.dailyKey(p.id, Date.now()) : String(Date.now()) + Math.random(), R = A.rng(seed + ":files");
-    var opts = { seed: seed, hidden: H.hidden(), recent: seenMap() };
+    var opts = { seed: seed, hidden: H.hidden(), recent: daily ? null : seenMap() };   // daily: the same 10 all day, seen or not
     if (sid) opts.subjects = [sid];
     if (mid) { opts.modules = [mid]; opts.module = mid; }
     if (type === "diagnostic") opts.history = histBySubject();
@@ -287,6 +288,22 @@
     H.run(a.items, "exam", x.title, { t2: t2, sections: t2.sections, limit: t2.sections ? 0 : a.duration_sec, scheme: A.scheme(p) });
   }
 
+  /* ---------- opt-in, de-identified item statistics (owner decision 10) ----------
+     Asked once, on a Tests 2 result. Yes: each later marked test sends [item id, right/wrong/blank, seconds, option] to
+     /api/prep/stats with no sign-in, user, device or attempt id (functions/api/prep/stats.js). No: nothing is sent. */
+  var STATS = "smd_prep_stats";
+  function statsChoice() { try { return G.localStorage.getItem(STATS); } catch (e) { return "0"; } }
+  function sendStats(rec) {
+    if (statsChoice() !== "1" || !rec || !G.fetch) return;
+    var rows = rec.items.map(function (x) { return [x.item_id, x.chosen == null ? null : x.correct ? 1 : 0, Math.min(3600, Math.round((x.ms || 0) / 1000)), x.chosen == null ? -1 : x.chosen]; });
+    try { G.fetch((G.SMD_PREP_STATS_API || "/api/prep/stats"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ v: 1, exam: rec.exam, type: rec.test_type, items: rows }), keepalive: rows.length <= 60, credentials: "omit" }).then(null, function () {}); } catch (e) {}
+  }
+  function statsAsk() {
+    if (statsChoice() != null) return "";
+    return '<section class="pn-panel pn-t2ask" aria-labelledby="pnT2AskH"><h2 class="pn-sec" id="pnT2AskH">Help improve the questions?</h2><p class="pn-mut pn-small">Share anonymous answer statistics from your tests: the question number, right or wrong, the time taken and the option chosen. Nothing that identifies you is sent. They are used only to flag questions for review, never to change or remove them by themselves. You can change this in the Tests tab.</p>' +
+      '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="t2-stats" data-v="0">No thanks</button><button type="button" class="pn-btn pri" data-act="t2-stats" data-v="1">Share</button></div></section>';
+  }
+
   /* ---------- finish and results ---------- */
   function subjectName(s) { var sb = H.subjectById(s); return sb ? (sb.name.en || s) : s === "pyq" ? "Not sorted into a subject yet" : s; }
   function topicName(s, m) { var t = H.topicOf(s, m); return t ? (t.title.en || m) : m; }
@@ -305,6 +322,7 @@
     if (t.idem) { var dc = A.dailyComplete(s.t2d, t.idem, { ts: now, attempt_id: rec.attempt_id, raw: rec.score.raw, max: rec.score.max, correct: rec.score.correct, n: items.length }); r.t2.dailyFresh = dc.fresh; A.dailyPrune(s.t2d, now, 60); }
     H.save();
     H.cachePut(REC_KEY + rec.attempt_id, rec);
+    sendStats(rec);
     clearSess();
   }
   function pct(x) { return x == null ? "-" : Math.round(x * 100) + "%"; }
@@ -333,7 +351,7 @@
     var how = '<details class="pn-t2how"><summary>How this test was built</summary><p class="pn-mut pn-small">Profile ' + esc(rec.exam) + " v" + esc(rec.profile_version) + " (" + esc(p.status) + "). " + esc(srcLine(p)) + "</p>" +
       (rec.distribution.deviations.length ? '<ul class="pn-t2dl">' + rec.distribution.deviations.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul>" : '<p class="pn-mut pn-small">Built as planned.</p>') +
       '<ul class="pn-t2dist">' + Object.keys(rec.distribution.actual).map(function (k) { return "<li><span>" + esc(subjectName(k)) + "</span><span>" + rec.distribution.actual[k] + (rec.distribution.planned[k] != null && rec.distribution.planned[k] !== rec.distribution.actual[k] ? " of " + rec.distribution.planned[k] + " planned" : "") + "</span></li>"; }).join("") + "</ul></details>";
-    return head + secs + subs + diff + next + tr + how;
+    return head + secs + subs + diff + next + tr + how + statsAsk();
   }
 
   /* ---------- acts ---------- */
@@ -342,11 +360,13 @@
     var pid = b.getAttribute("data-p"), k = b.getAttribute("data-k");
     if (a === "t2-pre") return prepare(pid, k, b.getAttribute("data-s"), b.getAttribute("data-m"));
     if (a === "t2-go") return go();
+    if (a === "t2-stats") { try { G.localStorage.setItem(STATS, b.getAttribute("data-v") === "1" ? "1" : "0"); } catch (e) {} var r0 = H.run_ && H.run_(); if (b.getAttribute("data-v") === "1" && r0 && r0.t2 && r0.t2.rec) sendStats(r0.t2.rec); var box = b.closest(".pn-t2ask"); if (box) box.innerHTML = '<p class="pn-mut pn-small" role="status">' + (b.getAttribute("data-v") === "1" ? "Thank you. Anonymous statistics are on." : "Nothing will be sent.") + "</p>"; return; }
     if (a === "t2-pick") return pickSubject(A.profile(pid), k);
     if (a === "t2-pickm") return pickModule(A.profile(pid), b.getAttribute("data-s"));
     if (a === "t2-resume") return resume();
     if (a === "t2-discard") { if (G.confirm && !G.confirm("Discard the saved test? Its answers are not marked.")) return; return Promise.resolve(clearSess()).then(function () { H.rerender(); }); }
     if (a === "t2-legacy") return H.startMock(b.getAttribute("data-v"), "full");
+    if (a === "t2-statsw") { try { G.localStorage.setItem(STATS, statsChoice() === "1" ? "0" : "1"); } catch (e) {} return H.rerender(); }
     if (a === "t2-plan") return H.startPlan();
     if (a === "t2-weak") return H.startWeak();
     if (a === "t2-mistakes") return H.openMistakes();
