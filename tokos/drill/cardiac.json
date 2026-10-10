@@ -1,0 +1,176 @@
+{
+  "id": "cardiac",
+  "kind": "drill",
+  "level": "resident",
+  "review": "ai_drafted",
+  "timeLimitSec": 600,
+  "title": {
+    "en": "Heart disease in labour: plan a vaginal birth, caesarean for a reason, oxytocin by slow infusion",
+    "hi": "दिल की बीमारी और प्रसव: योनि मार्ग से प्रसव की योजना, caesarean सिर्फ़ ठोस वजह से, और oxytocin धीरे दें"
+  },
+  "scenario": {
+    "en": "Three women with heart disease are near delivery. Each has a different situation. Choose the next step for each. Teaching scenario, not real patients.",
+    "hi": "दिल की बीमारी वाली तीन महिलाएँ प्रसव के करीब हैं। हर एक की स्थिति अलग है। हर एक के लिए अगला कदम चुनें। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    {
+      "label": "The pearls for optimal intrapartum care in women with cardiac disease (review, PMC12198545). It quotes ESC guidance on birth planning, warfarin in labour and uterotonics. The ESC 2025 guideline itself was not reachable, so its wording is taken from this review",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12198545/"
+    }
+  ],
+  "stages": [
+    {
+      "id": "plan",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 1 has heart disease. She has no obstetric reason and no cardiac reason for a caesarean. Her team asks how the birth should be planned. What do you plan?",
+        "hi": "पहली महिला को दिल की बीमारी है। उसे caesarean का कोई obstetric कारण या दिल से जुड़ा कारण नहीं है। टीम पूछती है कि प्रसव की योजना कैसे बनाएँ। आप क्या योजना बनाएँगे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "warfarin",
+          "text": {
+            "en": "A planned vaginal birth, with effective neuraxial pain relief (epidural or spinal).",
+            "hi": "योजना के अनुसार योनि मार्ग से प्रसव, और असरदार neuraxial दर्द राहत (epidural या spinal)।"
+          },
+          "feedback": {
+            "en": "The review: vaginal birth with effective neuraxial analgesia is recommended in women with heart disease, as it is associated with lower maternal morbidity.",
+            "hi": "review के अनुसार दिल की बीमारी वाली महिलाओं में असरदार neuraxial analgesia के साथ योनि मार्ग से प्रसव सुझाया जाता है, क्योंकि इससे maternal morbidity कम होती है।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "warfarin",
+          "text": {
+            "en": "An elective caesarean, because she has heart disease.",
+            "hi": "elective caesarean, क्योंकि उसे दिल की बीमारी है।"
+          },
+          "feedback": {
+            "en": "The review found no specific maternal benefit from an elective caesarean without a firm cardiac or obstetric indication, compared with a planned vaginal birth.",
+            "hi": "review में पाया गया कि बिना पक्के cardiac या obstetric संकेत के elective caesarean से planned योनि प्रसव की तुलना में मां को कोई खास फ़ायदा नहीं दिखा।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "warfarin",
+          "text": {
+            "en": "An elective caesarean at her request, without discussing the risks and benefits.",
+            "hi": "उसके कहने पर elective caesarean, जोखिम और फ़ायदों पर बात किए बिना।"
+          },
+          "feedback": {
+            "en": "The review says the plan should respect maternal preferences after discussion of the risks and benefits of caesarean and vaginal birth. The discussion comes first.",
+            "hi": "review के अनुसार योजना मां की पसंद का सम्मान करे, लेकिन caesarean और योनि प्रसव के जोखिम और फ़ायदों पर बात के बाद। बात पहले होनी चाहिए।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "warfarin",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 2 has a mechanical heart valve and takes warfarin. Her last warfarin dose was yesterday. She is now in labour. What is the plan for the birth?",
+        "hi": "दूसरी महिला के दिल में mechanical valve है और वह warfarin लेती है। उसकी आखिरी warfarin खुराक कल ली गई थी। अब उसे labour हो रहा है। प्रसव की योजना क्या है?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "oxytocin",
+          "text": {
+            "en": "Caesarean birth, because she is in labour on warfarin.",
+            "hi": "caesarean प्रसव, क्योंकि वह warfarin पर रहते हुए labour में है।"
+          },
+          "feedback": {
+            "en": "The review's table: caesarean birth if the woman is in labour on warfarin. The lesson sets the window as warfarin taken within 2 weeks, which yesterday's dose meets.",
+            "hi": "review की तालिका: warfarin पर labour में हो तो caesarean प्रसव। lesson के अनुसार warfarin की खिड़की 2 हफ़्ते है, और कल की खुराक उसमें आती है।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "oxytocin",
+          "text": {
+            "en": "A vaginal birth, because the valve is mechanical and labour is established.",
+            "hi": "योनि प्रसव, क्योंकि valve mechanical है और labour शुरू हो चुका है।"
+          },
+          "feedback": {
+            "en": "The review's plan for a woman in labour on warfarin is caesarean birth, so a vaginal birth is not the plan here.",
+            "hi": "review के अनुसार warfarin पर labour में महिला के लिए योजना caesarean प्रसव है, इसलिए यहाँ योनि प्रसव योजना नहीं है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "oxytocin",
+          "text": {
+            "en": "Speed up labour with oxytocin, aiming for a vaginal birth.",
+            "hi": "oxytocin से labour तेज़ करें, योनि प्रसव के लक्ष्य से।"
+          },
+          "feedback": {
+            "en": "The review's plan for a woman in labour on warfarin is caesarean birth, so aiming for a vaginal birth with oxytocin does not match the review.",
+            "hi": "review की योजना warfarin पर labour में महिला के लिए caesarean प्रसव है, इसलिए oxytocin से योनि प्रसव का लक्ष्य review से मेल नहीं खाता।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "oxytocin",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 3 has delivered vaginally. Her heart condition makes a large blood loss risky. The third stage has started. Which uterotonic do you give first, and how?",
+        "hi": "तीसरी महिला की योनि मार्ग से डिलीवरी हो चुकी है। उसके दिल की स्थिति में ज़्यादा खून बहना खतरनाक है। third stage शुरू हो गया है। सबसे पहले कौन-सी uterotonic (गर्भाशय सिकोड़ने वाली दवा) दें, और कैसे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "end",
+          "text": {
+            "en": "Oxytocin, as a slow infusion.",
+            "hi": "Oxytocin, धीमी infusion (ड्रिप) के रूप में।"
+          },
+          "feedback": {
+            "en": "The review: oxytocin remains the first line uterotonic, given by slow infusion, because a bolus can cause significant hypotension from a decline in systemic vascular resistance.",
+            "hi": "review के अनुसार oxytocin पहली पंक्ति की uterotonic है, धीमी infusion से दी जाती है, क्योंकि bolus से systemic vascular resistance घटने से गंभीर hypotension (बहुत कम blood pressure) हो सकता है।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Oxytocin as a rapid intravenous bolus.",
+            "hi": "Oxytocin का तेज़ intravenous bolus (एक साथ इंजेक्शन)।"
+          },
+          "feedback": {
+            "en": "The review says oxytocin must be given by slow infusion, because a bolus can cause significant hypotension. A rapid bolus is not the way to give it here.",
+            "hi": "review के अनुसार oxytocin धीमी infusion से देना है, क्योंकि bolus से गंभीर hypotension हो सकता है। यहाँ तेज़ bolus सही तरीका नहीं है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Ergometrine, for a faster effect.",
+            "hi": "Ergometrine, तेज़ असर के लिए।"
+          },
+          "feedback": {
+            "en": "The review says ergot alkaloids such as ergometrine are usually avoided in hypertensive disorders, aortopathy, significant tachyarrhythmias and severely stenotic valve disease, because they cause coronary vasospasm.",
+            "hi": "review के अनुसार ergometrine जैसे ergot alkaloids hypertension, aortopathy, गंभीर tachyarrhythmia और गंभीर stenotic valve रोग में आमतौर पर नहीं दिए जाते, क्योंकि ये coronary vasospasm (दिल की धमनी का सिकुड़ना) कर सकते हैं।"
+          }
+        }
+      ]
+    }
+  ]
+}
