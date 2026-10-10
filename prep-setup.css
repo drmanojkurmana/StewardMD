@@ -33,11 +33,10 @@
   background: var(--pn-s1); color: var(--pn-text); font-size: 14px; font-weight: 650; letter-spacing: -.005em;
   transition: background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease, transform var(--pn-d-press) var(--pn-ease), box-shadow var(--pn-d-quick) ease; }
 .pn-root .su-chip:active { transform: scale(.96); }
-.pn-root .su-chip.on { background: var(--pn-fill); color: var(--pn-on-fill); }
+.pn-root .su-chip.on { background: var(--pn-sel-bg); color: var(--pn-sel-ink); box-shadow: inset 0 0 0 1px var(--pn-sel-edge); }
 .pn-root .su-n { min-width: 22px; padding: 1px 7px; border-radius: var(--pn-r-pill); background: color-mix(in srgb, var(--pn-text) 8%, transparent);
   font-family: var(--pn-num); font-size: 12.5px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; color: var(--pn-mut); }
-.pn-root .su-chip.on .su-n { background: rgba(255, 255, 255, .22); color: inherit; }
-body.dark .pn-root .su-chip.on .su-n { background: rgba(255, 255, 255, .14); }
+.pn-root .su-chip.on .su-n { background: rgba(255, 255, 255, .16); color: inherit; }
 .pn-root .su-chip.zero:not(.on) { color: var(--pn-mut); }
 .pn-root .su-chip.zero:not(.on) .su-n { opacity: .7; }
 /* an option with no questions cannot be chosen: flat, faded, no press */
@@ -89,9 +88,9 @@ body.dark .pn-root .su-chip.on .su-n { background: rgba(255, 255, 255, .14); }
 .pn-root .pc-thumb img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .pn-root .pc-thumb:not(.on) { opacity: .55; }
 .pn-root .pc-thumb.on { border-color: var(--pn-pri); }
-.pn-root .pc-tp { position: absolute; left: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; font-variant-numeric: tabular-nums; border-radius: var(--pn-r-pill); background: rgba(6, 16, 22, .72); color: #fff; font-size: 12px; font-weight: 650; }
+.pn-root .pc-tp { position: absolute; left: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; font-variant-numeric: tabular-nums; border-radius: var(--pn-r-pill); background: rgba(16, 16, 32, .72); color: #fff; font-size: 12px; font-weight: 650; }
 .pn-root .pc-tick { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;
-  background: rgba(6, 16, 22, .5); color: transparent; box-shadow: inset 0 0 0 2px #fff; }
+  background: rgba(16, 16, 32, .5); color: transparent; box-shadow: inset 0 0 0 2px #fff; }
 .pn-root .pc-thumb.on .pc-tick { background: var(--pn-pri); color: var(--pn-on-pri); box-shadow: none; }
 .pn-root .pc-tick svg { width: 15px; height: 15px; }
 

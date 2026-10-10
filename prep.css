@@ -1,33 +1,55 @@
 /* PrepNucleus (prep.js, prep-arena.js): the exam question bank overlay. Every rule is scoped under .pn-root and reads
-   --pn-* tokens; body.dark switches the palette. Text tokens are at least 4.5:1 on --pn-bg and --pn-card.
-   Quiet system (2026-10-10, owner brief "premium, no AI slop, dark green not glowing green"):
-   - Surfaces are solid. Dark: background #071318, surface #0D1D23, elevated #12262D, border #233840. Light mirrors them.
-     No gradients, glows, blur, painted art or atmospheric backdrops. Elevation is a surface step plus a 1 px border.
-   - Two greens with separate jobs. --pn-fill (#0F5C52, a deep green) is the only filled control: the primary button,
-     the next task, a selected option's letter. --pn-pri (#42CDB5 on dark, #0E7C6B on light) is the accent for data and
-     interaction: meters, the readiness bar, links, focus rings, the current step. Neither glows.
-   - Type does the hierarchy: system sans, tabular figures for every number, 600-700 weights, tight tracking on figures,
-     12 px labels in the secondary ink. Section heads are 17 px, figures 32-44 px.
-   - Radius: 4 meters, 8 controls, 10 rows and inputs, 12 cards, 16 sheets. Spacing 4/8/12/16/24.
-   - Motion: press feedback 120-160 ms and screen slides only; no celebrations, no loops, nothing off under reduced motion
-     that carries meaning. */
+   --pn-* tokens; body.dark switches the palette. Text tokens are at least 4.5:1 on --pn-bg, --pn-card and --pn-hero.
+   Apple system (2026-10-10, owner palette: Pastel Amber #EFC07B, Prussian Blue #0F3460, Dark Navy #16213E, Midnight
+   Blue #1A1A2E; "lively, premium, classic Apple, no slop"):
+   - Three layers. Primitives (--pn-c-*) are the owner's four colours and the steps derived from them. Semantic tokens
+     (--pn-bg, --pn-card, --pn-text, --pn-pri, --pn-fill, --pn-hero ...) say what a colour is for and are the only ones
+     components read. Component tokens (--pn-sheet, --pl-cell, --sk) stay local to their rule.
+   - Dark: the page is Midnight, cards are Dark Navy, controls inside a card step up to a lighter navy. Light: a warm
+     off-white page, white cards with a soft navy-tinted shadow, Prussian ink.
+   - Amber is the one bright colour and has two jobs: the filled primary action (a capsule with Midnight ink, 10:1) and
+     key figures on dark. On light it never carries text (1.7:1); links, meters and focus there are Prussian.
+   - Prussian is the "moment" surface in both themes: readiness, a finished set, a finished lesson, the level card.
+   - Depth is a surface step plus a hairline and, on light, a two-layer shadow. No glow, no blur, no gradients.
+   - Type: the system font (SF on Apple), tight negative tracking on large sizes, tabular figures for every number.
+     Section heads 21 px, screen figures 34-48 px, body 16-17 px, labels 13 px.
+   - Shape: capsules for buttons and chips, 16 cards, 12 controls and options, 9 icon tiles, 28 sheets, 4 meters.
+   - Motion: springs written as CSS linear() curves (critically damped for movement, a 4% overshoot for a press
+     release, a pop for the answer badge). Every press answers on touch-down. Reduced motion keeps fades only. */
 .pn-root {
-  --pn-bg: #f3f6f6; --pn-card: #fff; --pn-s1: #edf2f2; --pn-s2: #dbe4e5; --pn-line: #e4eaeb; --pn-seg: #fff;
-  --pn-edge: #d8e1e3; --pn-elev: none;
-  --pn-text: #0b1a1f; --pn-mut: #4b5f66; --pn-pri: #0e7c6b; --pn-on-pri: #fff; --pn-pri-soft: #e2f0ed; --pn-pri-ink: #0b6155;
-  --pn-fill: #0f5c52; --pn-fill-press: #0c4d45; --pn-on-fill: #fff;
-  --pn-pri-grad: #0f5c52; --pn-glow: none;
-  --pn-ok: #17784a; --pn-ok-bg: #e5f3ea; --pn-bad: #b12a37; --pn-bad-bg: #fbeaec; --pn-warn: #8a5a0b; --pn-star: #8a5a0b; --pn-amber: #8a5a0b;
-  --pn-ok-line: #9fcfb3; --pn-bad-line: #e6aab1; --pn-scrim: rgba(7, 19, 24, .42);
-  --pn-shadow: none;
+  /* primitives */
+  --pn-c-amber: #efc07b; --pn-c-amber-hi: #f6d7a6; --pn-c-amber-lo: #e2a957;
+  --pn-c-prussian: #0f3460; --pn-c-prussian-hi: #13396a; --pn-c-navy: #16213e; --pn-c-midnight: #1a1a2e;
+  --pn-c-navy-2: #1f2b4d; --pn-c-navy-3: #29375e; --pn-c-navy-4: #34446f;
+  --pn-c-paper: #f3f2ee; --pn-c-paper-2: #ebe9e3; --pn-c-paper-3: #dedcd4; --pn-c-ink: #13203d; --pn-c-ink-2: #556079;
+  /* semantic: light */
+  --pn-bg: var(--pn-c-paper); --pn-card: #fff; --pn-s1: var(--pn-c-paper-2); --pn-s2: var(--pn-c-paper-3); --pn-line: #e9e7e1; --pn-seg: #fff;
+  --pn-edge: #e3e1da; --pn-elev: 0 1px 2px rgba(19, 32, 61, .05), 0 6px 18px -10px rgba(19, 32, 61, .14);
+  --pn-text: var(--pn-c-ink); --pn-mut: var(--pn-c-ink-2); --pn-mut2: #6f7890;
+  --pn-pri: var(--pn-c-prussian); --pn-on-pri: #fff; --pn-pri-soft: #e4eaf3; --pn-pri-ink: var(--pn-c-prussian);
+  --pn-acc: var(--pn-c-amber); --pn-on-acc: var(--pn-c-midnight);
+  --pn-fill: var(--pn-c-amber); --pn-fill-press: var(--pn-c-amber-lo); --pn-on-fill: var(--pn-c-midnight);
+  --pn-pri-grad: var(--pn-fill); --pn-glow: none;
+  --pn-ok: #1c7a4a; --pn-ok-bg: #e6f3eb; --pn-bad: #b42318; --pn-bad-bg: #fbeceb; --pn-warn: #a3510b; --pn-star: #a3510b; --pn-amber: var(--pn-c-amber);
+  --pn-ok-line: #a6d4b8; --pn-bad-line: #eab0ab; --pn-scrim: rgba(19, 32, 61, .36);
+  --pn-shadow: 0 1px 2px rgba(19, 32, 61, .10), 0 2px 8px -2px rgba(19, 32, 61, .10);
+  --pn-sh-sheet: 0 -1px 0 rgba(19, 32, 61, .04), 0 -18px 48px -24px rgba(19, 32, 61, .28);
   --pn-aura: none;
-  /* The old hero surface is an ordinary card now: these keep every rule that still reads them on the card palette. */
-  --pn-hero: var(--pn-card); --pn-hero-ink: var(--pn-text); --pn-hero-mut: var(--pn-mut); --pn-hero-chip: var(--pn-s1); --pn-ring: var(--pn-pri); --pn-ring-track: var(--pn-s2);
+  /* the moment surface: Prussian in both themes */
+  --pn-hero: var(--pn-c-prussian); --pn-hero-ink: #f5f3ee; --pn-hero-mut: #b9c4da; --pn-hero-chip: rgba(255, 255, 255, .12); --pn-hero-acc: var(--pn-c-amber);
+  --pn-hero-line: rgba(255, 255, 255, .14);
+  --pn-ring: var(--pn-pri); --pn-ring-track: var(--pn-s2);
   --pn-num: var(--sans, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif);
+  --pn-disp: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
   --pn-ease: cubic-bezier(.23, 1, .32, 1); --pn-drawer: cubic-bezier(.32, .72, 0, 1);
-  --pn-r-xs: 4px; --pn-r-sm: 8px; --pn-r-md: 10px; --pn-r-lg: 12px; --pn-r-xl: 16px; --pn-r-pill: 999px;
-  --pn-d-press: 140ms; --pn-d-quick: 180ms; --pn-d-base: 240ms; --pn-d-enter: 260ms; --pn-d-draw: 600ms;
-  --pn-sh-hero: none;
+  /* springs (Apple response/damping, sampled): snap 0.32/0.72 for a press release, soft 0.4/1 for movement, pop 0.36/0.6 */
+  --pn-spring-snap: linear(0, .0873, .2749, .4843, .6718, .8187, .922, .9868, 1.0219, 1.0363, 1.038, 1.0328, 1.0251, 1.0172, 1.0105, 1.0054, 1);
+  --pn-spring-soft: linear(0, .0575, .1804, .3209, .4553, .5731, .6712, .7502, .8123, .8602, .8967, .9241, .9445, .9597, .9708, .9789, .9848, .9891, .9922, .9945, .996, .9972, 1);
+  --pn-spring-pop: linear(0, .0766, .2527, .4635, .6653, .8333, .9573, 1.0376, 1.0803, 1.0945, 1.0897, 1.0741, 1.0544, 1.0349, 1.0183, 1.0058, .9975, .9929, .9911, .9913, .9927, .9945, .9964, 1);
+  --pn-d-snap: 380ms; --pn-d-soft: 540ms; --pn-d-pop: 560ms;
+  --pn-r-xs: 4px; --pn-r-sm: 9px; --pn-r-md: 12px; --pn-r-lg: 16px; --pn-r-xl: 28px; --pn-r-pill: 999px;
+  --pn-d-press: 120ms; --pn-d-quick: 180ms; --pn-d-base: 240ms; --pn-d-enter: 280ms; --pn-d-draw: 700ms;
+  --pn-sh-hero: 0 1px 2px rgba(15, 52, 96, .18), 0 14px 32px -18px rgba(15, 52, 96, .55);
   position: fixed; inset: 0; z-index: 885; display: flex; flex-direction: column; overflow: hidden;
   background: var(--pn-bg); color: var(--pn-text);
   font-family: var(--sans, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif);
@@ -36,13 +58,18 @@
 }
 body.dark .pn-root {
   color-scheme: dark;
-  --pn-bg: #071318; --pn-card: #0d1d23; --pn-s1: #12262d; --pn-s2: #1b333b; --pn-line: #1a2f36; --pn-seg: #1b333b;
-  --pn-edge: #233840; --pn-elev: none;
-  --pn-text: #f0f5f5; --pn-mut: #9aaeb4; --pn-pri: #42cdb5; --pn-on-pri: #062420; --pn-pri-soft: #10302d; --pn-pri-ink: #7fdccb;
-  --pn-fill: #0f5c52; --pn-fill-press: #0c4d45; --pn-on-fill: #f0f5f5;
-  --pn-ok: #5fca91; --pn-ok-bg: #0f2a1f; --pn-bad: #f08a95; --pn-bad-bg: #2e161b; --pn-ok-line: #285f43; --pn-bad-line: #6a2f37;
-  --pn-warn: #e2b45c; --pn-star: #e2b45c; --pn-amber: #e2b45c;
-  --pn-scrim: rgba(2, 8, 10, .66); --pn-shadow: none;
+  /* semantic: dark */
+  --pn-bg: var(--pn-c-midnight); --pn-card: var(--pn-c-navy); --pn-s1: var(--pn-c-navy-2); --pn-s2: var(--pn-c-navy-3); --pn-line: #232e4c; --pn-seg: var(--pn-c-navy-4);
+  --pn-edge: #252f4f; --pn-elev: inset 0 1px 0 rgba(255, 255, 255, .035);
+  --pn-text: #f5f3ee; --pn-mut: #a9b1c7; --pn-mut2: #8c95ae;
+  --pn-pri: var(--pn-c-amber); --pn-on-pri: var(--pn-c-midnight); --pn-pri-soft: var(--pn-c-prussian-hi); --pn-pri-ink: #f3cb8e;
+  --pn-fill: var(--pn-c-amber); --pn-fill-press: var(--pn-c-amber-lo); --pn-on-fill: var(--pn-c-midnight);
+  --pn-ok: #7dd3a0; --pn-ok-bg: #16332e; --pn-bad: #ff8f8f; --pn-bad-bg: #3a2133; --pn-ok-line: #2f6152; --pn-bad-line: #6e3448;
+  --pn-warn: #f7a85c; --pn-star: var(--pn-c-amber); --pn-amber: var(--pn-c-amber);
+  --pn-scrim: rgba(8, 8, 20, .62); --pn-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  --pn-sh-sheet: 0 -1px 0 rgba(255, 255, 255, .05);
+  --pn-hero: var(--pn-c-prussian); --pn-hero-mut: #b9c4da;
+  --pn-sh-hero: inset 0 1px 0 rgba(255, 255, 255, .06);
 }
 .pn-root * { box-sizing: border-box; }
 .pn-root ::selection { background: var(--pn-pri-soft); color: var(--pn-text); }
@@ -242,7 +269,7 @@ body.dark .pn-root .pn-link { color: var(--pn-pri); }
 /* ---- Arena: consent sheet (also every other sheet) ---- */
 .pn-root .pn-sheet-wrap { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; justify-content: flex-end; }
 .pn-root .pn-scrim { position: absolute; inset: 0; background: var(--pn-scrim); animation: pn-fade var(--pn-d-quick) ease-out; }
-.pn-root .pn-sheet { position: relative; display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 720px; margin: 0 auto; padding: 8px 20px calc(20px + env(safe-area-inset-bottom, 0px)); border-radius: var(--pn-r-xl) var(--pn-r-xl) 0 0; background: var(--pn-card); border-top: 1px solid var(--pn-edge); box-shadow: 0 -12px 32px rgba(7, 19, 24, .14); animation: pn-up var(--pn-d-enter) var(--pn-drawer); }
+.pn-root .pn-sheet { position: relative; display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 720px; margin: 0 auto; padding: 8px 20px calc(20px + env(safe-area-inset-bottom, 0px)); border-radius: var(--pn-r-xl) var(--pn-r-xl) 0 0; background: var(--pn-card); border-top: 1px solid var(--pn-edge); box-shadow: var(--pn-sh-sheet); animation: pn-up var(--pn-d-enter) var(--pn-drawer); }
 body.dark .pn-root .pn-sheet { box-shadow: none; }
 .pn-root .pn-sheet:focus { outline: none; }
 .pn-root .pn-grab { align-self: center; width: 38px; height: 5px; border-radius: var(--pn-r-xs); background: var(--pn-s2); margin-bottom: 6px; }
@@ -411,15 +438,15 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
 .pn-root .pn-lsn-xp b { display: block; font-family: var(--pn-num); font-weight: 700; line-height: 1.02; color: var(--pn-text); font-variant-numeric: tabular-nums; animation: pn-xp var(--pn-d-draw) var(--pn-ease); }
 .pn-root .pn-lsn-fin .pn-navrow { margin-top: 2px; }
 /* zoom */
-.pn-root .pn-zoom { position: absolute; inset: 0; z-index: 6; display: flex; flex-direction: column; background: #060c10; color: #e8f0f4; animation: pn-fade var(--pn-d-press) ease-out; }
+.pn-root .pn-zoom { position: absolute; inset: 0; z-index: 6; display: flex; flex-direction: column; background: #0e0e1c; color: #f5f3ee; animation: pn-fade var(--pn-d-press) ease-out; }
 .pn-root .pn-zoom-top { display: flex; align-items: center; gap: 12px; padding: calc(8px + env(safe-area-inset-top, 0px)) 12px 8px 16px; }
-.pn-root .pn-zoom-top p { flex: 1 1 auto; min-width: 0; font-size: 13px; line-height: 1.4; color: #b8c7d0; }
+.pn-root .pn-zoom-top p { flex: 1 1 auto; min-width: 0; font-size: 13px; line-height: 1.4; color: #c3c8d8; }
 .pn-root .pn-zoom-top .pn-ib { background: rgba(255, 255, 255, .12); border-color: transparent; box-shadow: none; color: #fff; }
 .pn-root .pn-zoom-sc { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; padding: 8px; overscroll-behavior: contain; }
 .pn-root .pn-zoom-b { display: block; flex: 0 0 auto; width: 100%; margin: auto; padding: 0; border: 0; border-radius: var(--pn-r-sm); background: #fff; cursor: zoom-in; }
 .pn-root .pn-zoom-b.big { cursor: zoom-out; }
 .pn-root .pn-zoom-b img { display: block; width: 100%; height: auto; border-radius: var(--pn-r-sm); }
-.pn-root .pn-zoom-h { padding: 6px 16px calc(14px + env(safe-area-inset-bottom, 0px)); font-size: 12px; text-align: center; color: #9fb0ba; }
+.pn-root .pn-zoom-h { padding: 6px 16px calc(14px + env(safe-area-inset-bottom, 0px)); font-size: 12px; text-align: center; color: #a9b1c7; }
 @keyframes pn-step-f { from { opacity: 0; transform: translateX(16px); } }
 @keyframes pn-step-r { from { opacity: 0; transform: translateX(-16px); } }
 @keyframes pn-xp { from { opacity: 0; transform: translateY(8px) scale(.94); } }
@@ -918,14 +945,14 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-stack-lbl span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pn-root .pn-stack-cnt { flex: 0 0 auto; font-family: var(--pn-num); font-variant-numeric: tabular-nums; }
 .pn-root .pn-stack-cnt b { font-weight: 650; color: var(--pn-text); }
-.pn-root .pn-stack-st { position: relative; width: 100%; max-width: 560px; max-height: 62vh; aspect-ratio: 1 / var(--ar, 1); margin: 0 auto; overflow: hidden; border-radius: var(--pn-r-md); background: #05090c; touch-action: none; cursor: ns-resize; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; outline: none; }
+.pn-root .pn-stack-st { position: relative; width: 100%; max-width: 560px; max-height: 62vh; aspect-ratio: 1 / var(--ar, 1); margin: 0 auto; overflow: hidden; border-radius: var(--pn-r-md); background: #0b0b16; touch-action: none; cursor: ns-resize; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; outline: none; }
 .pn-root .pn-stack-st:focus-visible { box-shadow: 0 0 0 3px var(--pn-pri); }
 .pn-root .pn-stack-z { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
 .pn-root .pn-stack-im { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
-.pn-root .pn-stack-ct { position: absolute; right: 8px; bottom: 8px; padding: 3px 8px; border-radius: var(--pn-r-pill); background: rgba(0, 0, 0, .58); color: #dfe9ee; font-family: var(--pn-num); font-size: 12px; font-variant-numeric: tabular-nums; pointer-events: none; }
+.pn-root .pn-stack-ct { position: absolute; right: 8px; bottom: 8px; padding: 3px 8px; border-radius: var(--pn-r-pill); background: rgba(0, 0, 0, .58); color: #e6e4f0; font-family: var(--pn-num); font-size: 12px; font-variant-numeric: tabular-nums; pointer-events: none; }
 .pn-root .pn-stack-ct b { font-weight: 650; color: #fff; }
 .pn-root .pn-stack-ld { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255, 255, 255, .08); transition: opacity var(--pn-d-base) ease; pointer-events: none; }
-.pn-root .pn-stack-ld i { display: block; height: 100%; background: #42cdb5; transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--pn-d-quick) linear; }
+.pn-root .pn-stack-ld i { display: block; height: 100%; background: var(--pn-c-amber); transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--pn-d-quick) linear; }
 .pn-root .pn-stack-ld.done { opacity: 0; }
 .pn-root .pn-stack-ctl { display: flex; align-items: center; gap: 8px; }
 .pn-root .pn-stack-b { width: 44px; height: 44px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: var(--pn-s1); color: var(--pn-text); transition: transform var(--pn-d-press) var(--pn-ease), background-color var(--pn-d-press) ease; }
@@ -938,7 +965,7 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-stack-wb.on { background: var(--pn-seg); color: var(--pn-text); box-shadow: var(--pn-shadow); }
 .pn-root .pn-stack-h { margin: 0; padding: 0 2px; font-size: 12.5px; line-height: 1.4; color: var(--pn-mut); }
 /* enlarged: the same stage, full screen on the zoom shell */
-.pn-root .pn-stack-ov { --pn-text: #e8f0f4; --pn-mut: #9fb0ba; --pn-s1: rgba(255, 255, 255, .1); --pn-seg: rgba(255, 255, 255, .2); --pn-pri-soft: rgba(66, 205, 181, .18); --pn-pri-ink: #7fdccb; }
+.pn-root .pn-stack-ov { --pn-text: #f5f3ee; --pn-mut: #a9b1c7; --pn-s1: rgba(255, 255, 255, .1); --pn-seg: rgba(255, 255, 255, .2); --pn-pri: var(--pn-c-amber); --pn-pri-soft: rgba(239, 192, 123, .18); --pn-pri-ink: #f3cb8e; }
 .pn-root .pn-stack-ov .pn-zoom-top p { display: flex; justify-content: space-between; gap: 10px; }
 .pn-root .pn-stack-ovb { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 0 8px; }
 .pn-root .pn-stack-ovb .pn-stack-st { max-width: 100%; max-height: 100%; width: auto; height: 100%; border-radius: var(--pn-r-sm); cursor: ns-resize; }
@@ -1051,7 +1078,7 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 @media (min-width: 700px) {
   .pn-root .pn-sheet-wrap { justify-content: center; align-items: center; padding: 32px 24px; }
   .pn-root .pn-sheet { max-width: 560px; max-height: 100%; overflow-y: auto; border-radius: var(--pn-r-xl); padding-bottom: 20px;
-    border: 1px solid var(--pn-edge); box-shadow: 0 24px 60px -28px rgba(7, 19, 24, .35); animation: pn-pop var(--pn-d-enter) var(--pn-ease); }
+    border: 1px solid var(--pn-edge); box-shadow: 0 30px 70px -30px rgba(19, 32, 61, .45); animation: pn-pop var(--pn-d-enter) var(--pn-ease); }
   body.dark .pn-root .pn-sheet { box-shadow: none; }
 }
 @keyframes pn-pop { from { opacity: 0; transform: scale(.96); } }
@@ -1118,11 +1145,11 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
    Always dark (a light-box reads images best on near black, in both themes). It owns every touch on it (touch-action:
    none; the script keeps the page behind still). Controls are 44 px, inside the safe areas; the bottom bar holds zoom
    out, the zoom level (tap to fit) and zoom in, for anyone who cannot pinch. */
-.pv { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column; color: #eef4f6; touch-action: none; overscroll-behavior: contain;
+.pv { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column; color: #f5f3ee; touch-action: none; overscroll-behavior: contain;
   -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
   font-family: var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); }
 .pv:focus { outline: none; }
-.pv-scrim { position: absolute; inset: 0; background: #05090c; }
+.pv-scrim { position: absolute; inset: 0; background: #0e0e1c; }
 .pv-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; touch-action: none; cursor: zoom-in;
   padding: calc(64px + env(safe-area-inset-top, 0px)) calc(8px + env(safe-area-inset-right, 0px)) calc(88px + env(safe-area-inset-bottom, 0px)) calc(8px + env(safe-area-inset-left, 0px)); }
 .pv.pv-zoomed .pv-stage { cursor: grab; }
@@ -1130,18 +1157,18 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   transform-origin: 50% 50%; will-change: transform; -webkit-user-drag: none; pointer-events: none; }
 .pv-top, .pv-bot { position: absolute; left: 0; right: 0; z-index: 1; display: flex; align-items: center; gap: 12px; pointer-events: none; transition: opacity 180ms ease-out; }
 .pv-top { top: 0; padding: calc(8px + env(safe-area-inset-top, 0px)) calc(12px + env(safe-area-inset-right, 0px)) 8px calc(16px + env(safe-area-inset-left, 0px));
-  background: linear-gradient(180deg, rgba(5, 9, 12, .85), rgba(5, 9, 12, 0)); }
-.pv-bot { bottom: 0; flex-direction: column; gap: 6px; padding: 8px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(0deg, rgba(5, 9, 12, .85), rgba(5, 9, 12, 0)); }
-.pv-cap { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 13px; line-height: 1.4; color: #c3d1d8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  background: linear-gradient(180deg, rgba(14, 14, 28, .85), rgba(14, 14, 28, 0)); }
+.pv-bot { bottom: 0; flex-direction: column; gap: 6px; padding: 8px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(0deg, rgba(14, 14, 28, .85), rgba(14, 14, 28, 0)); }
+.pv-cap { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 13px; line-height: 1.4; color: #c3c8d8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .pv-b { pointer-events: auto; flex: 0 0 auto; min-width: 44px; height: 44px; padding: 0 10px; border: 0; border-radius: 22px; background: rgba(255, 255, 255, .14); color: #fff;
   display: inline-flex; align-items: center; justify-content: center; font: inherit; font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; cursor: pointer;
   touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), background-color 120ms ease; }
 .pv-b:active { transform: scale(.92); background: rgba(255, 255, 255, .24); }
-.pv-b:focus-visible { outline: 2px solid #42cdb5; outline-offset: 2px; }
+.pv-b:focus-visible { outline: 2px solid #efc07b; outline-offset: 2px; }
 .pv-x { width: 44px; padding: 0; }
 .pv-zb { display: inline-flex; gap: 8px; pointer-events: auto; }
 .pv-pct { min-width: 72px; }
-.pv-hint { margin: 0; font-size: 12px; color: #9fb0ba; text-align: center; }
+.pv-hint { margin: 0; font-size: 12px; color: #a9b1c7; text-align: center; }
 .pv.pv-zoomed .pv-hint { opacity: 0; }
 @media (hover: hover) and (pointer: fine) { .pv-b:hover { background: rgba(255, 255, 255, .22); } }
 @media (prefers-reduced-motion: reduce) { .pv-b, .pv-top, .pv-bot { transition: none; } }
@@ -1177,3 +1204,224 @@ html.pn-open, html.pn-open body { overflow: hidden; overscroll-behavior: none; }
 .pn-root ::-webkit-scrollbar, .pv ::-webkit-scrollbar { display: none; width: 0; height: 0; }
 .pn-root .pn-scrim { touch-action: none; overscroll-behavior: none; }
 .pn-root .su-sheet > .su-head, .pn-root .su-sheet > .su-act { touch-action: none; }
+
+/* ==== Apple pass (2026-10-10, owner palette) ====
+   Component layer over the rules above: one place that says how a card, a control, a sheet and a press look and move.
+   Light cards lose their border for a soft two-layer shadow; dark cards keep a hairline. Buttons and chips are capsules.
+   Every pressable answers on touch-down (scale, 90 ms) and settles on a spring when released. */
+.pn-root {
+  --pn-card-edge: transparent; --pn-tile-bg: #e6ecf5; --pn-tile-ink: var(--pn-c-prussian);
+  --pn-sel-bg: var(--pn-c-prussian); --pn-sel-ink: #fff; --pn-sel-edge: transparent;
+  --pn-info: #3a64b0; --pn-r-hero: 20px;
+}
+body.dark .pn-root {
+  --pn-card-edge: var(--pn-edge); --pn-tile-bg: var(--pn-c-navy-3); --pn-tile-ink: #cdd5ea;
+  --pn-sel-bg: var(--pn-c-prussian-hi); --pn-sel-ink: #f3cb8e; --pn-sel-edge: rgba(239, 192, 123, .38);
+  --pn-info: #8fb4f0;
+}
+
+/* Type: system display face for large sizes, negative tracking that grows with size. */
+.pn-root .pn-t h1 { font-size: 17px; font-weight: 600; letter-spacing: -.022em; }
+.pn-root .pn-h { font-family: var(--pn-disp); font-size: 21px; font-weight: 700; letter-spacing: -.024em; line-height: 1.2; padding-top: 22px; }
+.pn-root .pn-body > .pn-h:first-child { padding-top: 6px; }
+.pn-root .pn-sec { font-size: 17px; font-weight: 650; letter-spacing: -.016em; }
+.pn-root .pn-big, .pn-root .pn-hbn, .pn-root .pl-num, .pn-root .pl-dn, .pn-root .pl-rnum, .pn-root .pn-lvb-n b, .pn-root .pn-vs-s { font-family: var(--pn-disp); }
+.pn-root .pn-rb b, .pn-root .pn-tb b, .pn-root .pn-mb b { font-size: 16px; font-weight: 600; letter-spacing: -.016em; }
+.pn-root .pn-rb small, .pn-root .pn-tb small, .pn-root .pn-mb small { font-size: 13.5px; letter-spacing: -.004em; }
+
+/* Bar: round buttons on a solid surface, no outline. */
+.pn-root .pn-ib { border: 0; background: var(--pn-card); box-shadow: var(--pn-shadow); color: var(--pn-text);
+  transition: transform var(--pn-d-snap) var(--pn-spring-snap), background-color var(--pn-d-press) ease; }
+body.dark .pn-root .pn-ib { background: var(--pn-s1); box-shadow: var(--pn-elev); }
+.pn-root .pn-ib.on { color: var(--pn-pri); }
+body.dark .pn-root .pn-ib.on { color: var(--pn-c-amber); }
+
+/* Cards: one surface treatment for every container that holds rows or a figure. */
+.pn-root :is(.pn-group, .pn-subs, .pn-plan, .pn-panel, .pn-next, .pn-mod, .pl-wait, .pl-prog, .pn-acc, .pn-board, .pn-vs, .pn-vsi, .pn-round, .pn-subhead, .pn-hband, .pt-ctx, .pn-vis, .pn-stack, .pn-yq-subs, .pl-sw, .pn-fb, .pc-deck, .ps-item) {
+  border-color: var(--pn-card-edge); box-shadow: var(--pn-elev); }
+.pn-root :is(.pn-group, .pn-subs, .pn-plan, .pn-panel, .pn-next, .pn-mod, .pl-prog, .pn-acc, .pn-board, .pn-subhead, .pn-hband, .pn-fb) { border-radius: var(--pn-r-lg); }
+.pn-root .pn-panel { padding: 18px; }
+.pn-root .pn-row + .pn-row::before, .pn-root .pn-tile + .pn-tile::before { left: 64px; background: var(--pn-line); }
+.pn-root .pn-row, .pn-root .pn-tile { min-height: 62px; padding: 11px 16px; }
+.pn-root button.pn-row:active, .pn-root .pn-tile:active, .pn-root .pn-next:active { background: var(--pn-s1); transition-duration: 0s; }
+.pn-root .pn-row > svg:last-child, .pn-root .pn-tile > svg:last-child, .pn-root .pn-next > svg:last-child, .pn-root .pn-mod > svg:last-child { width: 14px; height: 14px; stroke-width: 2.4; color: var(--pn-mut2); opacity: 1; }
+
+/* Icon tiles: a squircle in the brand tint, the glyph in the brand ink. */
+.pn-root .pn-ri, .pn-root .pn-ic, .pn-root .pl-sic { background: var(--pn-tile-bg); color: var(--pn-tile-ink); }
+.pn-root .pn-ri, .pn-root .pn-tile .pn-ic, .pn-root .pn-ic.sm { width: 34px; height: 34px; border-radius: var(--pn-r-sm); }
+.pn-root .pn-ri svg, .pn-root .pn-tile .pn-ic svg { width: 18px; height: 18px; stroke-width: 2; }
+.pn-root .pn-next .pn-ri { background: var(--pn-fill); color: var(--pn-on-fill); }
+
+/* Capsule buttons. Primary: amber with Midnight ink. Secondary: the quiet fill. */
+.pn-root .pn-btn { min-height: 50px; padding: 0 22px; border-radius: var(--pn-r-pill); border: 0; background: var(--pn-s1); color: var(--pn-text); font-size: 16px; font-weight: 600; letter-spacing: -.014em;
+  transition: transform var(--pn-d-snap) var(--pn-spring-snap), background-color var(--pn-d-press) ease, opacity var(--pn-d-press) ease; }
+.pn-root .pn-panel .pn-btn:not(.pri), .pn-root .pn-sheet .pn-btn:not(.pri) { background: var(--pn-s1); }
+.pn-root .pn-body > .pn-btn:not(.pri), .pn-root .pn-navrow .pn-btn:not(.pri) { background: var(--pn-card); box-shadow: var(--pn-elev); }
+body.dark .pn-root .pn-body > .pn-btn:not(.pri), body.dark .pn-root .pn-navrow .pn-btn:not(.pri) { background: var(--pn-s1); box-shadow: none; }
+.pn-root .pn-btn.pri { background: var(--pn-fill); color: var(--pn-on-fill); font-weight: 650; box-shadow: 0 1px 2px rgba(19, 32, 61, .12), 0 6px 16px -8px rgba(160, 106, 30, .45); }
+body.dark .pn-root .pn-btn.pri { box-shadow: none; }
+.pn-root .pn-btn.pri:active { background: var(--pn-fill-press); }
+.pn-root .pn-btn.sm { min-height: 40px; padding: 0 16px; border-radius: var(--pn-r-pill); font-size: 15px; }
+.pn-root .pn-btn[disabled] { opacity: .42; }
+.pn-root .pn-btn.on { background: var(--pn-sel-bg); color: var(--pn-sel-ink); }
+.pn-root .pn-link { color: var(--pn-pri-ink); font-weight: 600; }
+body.dark .pn-root .pn-link { color: var(--pn-c-amber); }
+
+@media (hover: hover) and (pointer: fine) {
+  .pn-root .pn-btn:not(.pri):not([disabled]):hover, .pn-root .pn-chip:not(.on):not([disabled]):hover { background: var(--pn-s2); }
+  .pn-root .pn-btn.pri:not([disabled]):hover { background: var(--pn-fill-press); }
+  .pn-root .pn-tab:not(.on):hover { color: var(--pn-text); }
+}
+
+/* Chips and segmented control. */
+.pn-root .pn-chip { border: 0; background: var(--pn-s1); color: var(--pn-text); font-weight: 600; letter-spacing: -.01em;
+  transition: transform var(--pn-d-snap) var(--pn-spring-snap), background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease, box-shadow var(--pn-d-quick) ease; }
+.pn-root .pn-filters .pn-chip, .pn-root .pn-body > .pn-wrap .pn-chip, .pn-root .pn-rvf .pn-chip { background: var(--pn-card); box-shadow: var(--pn-elev); }
+body.dark .pn-root .pn-filters .pn-chip, body.dark .pn-root .pn-body > .pn-wrap .pn-chip, body.dark .pn-root .pn-rvf .pn-chip { background: var(--pn-s1); box-shadow: none; }
+.pn-root .pn-chip.on, .pn-root .pn-filters .pn-chip.on, .pn-root .pn-body > .pn-wrap .pn-chip.on, .pn-root .pn-rvf .pn-chip.on { background: var(--pn-sel-bg); color: var(--pn-sel-ink); box-shadow: inset 0 0 0 1px var(--pn-sel-edge); }
+.pn-root .pn-cm .pn-chip:not(.on) { background: var(--pn-s1); }
+.pn-root .pn-tabs { padding: 3px; border: 0; border-radius: 12px; background: color-mix(in srgb, var(--pn-c-ink) 7%, transparent); }
+body.dark .pn-root .pn-tabs { background: var(--pn-s1); }
+.pn-root .pn-tab { border-radius: 9px; color: var(--pn-mut); font-weight: 600; transition: background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease, box-shadow var(--pn-d-quick) ease; }
+.pn-root .pn-tab.on { background: var(--pn-seg); color: var(--pn-text); box-shadow: var(--pn-shadow); }
+
+/* Fields: a filled well, the focus ring in the accent. */
+.pn-root .pn-in { border: 0; border-radius: var(--pn-r-md); background: var(--pn-card); box-shadow: var(--pn-elev); }
+body.dark .pn-root .pn-in { background: var(--pn-s1); box-shadow: none; }
+.pn-root .pn-sheet .pn-in { background: var(--pn-s1); box-shadow: none; }
+.pn-root .pn-in:focus { box-shadow: 0 0 0 2px var(--pn-pri); }
+
+/* Meters and progress: capsules. */
+.pn-root :is(.pn-prog, .pn-meter, .pn-lvbar, .pl-sbar, .pl-lvbar, .pn-yq-bar, .pn-dlbar, .pn-mm-bar) { height: 5px; border-radius: 3px; }
+.pn-root :is(.pn-prog, .pn-meter, .pn-lvbar, .pl-sbar, .pl-lvbar, .pn-yq-bar, .pn-dlbar) i { border-radius: 3px; }
+.pn-root .pn-tb .pn-prog { height: 4px; }
+
+/* Presses: down in 90 ms, back on a spring. */
+.pn-root :is(.pn-next, .pn-mod, .pn-tile, .pl-hero, .pn-opt, .pl-opt, .pl-sw, .pn-subhead, .pn-hband) { transition: transform var(--pn-d-snap) var(--pn-spring-snap), background-color var(--pn-d-press) ease, box-shadow var(--pn-d-quick) ease, border-color var(--pn-d-quick) ease, opacity var(--pn-d-quick) ease; }
+.pn-root :is(.pn-btn, .pn-chip, .pn-ib, .pn-stack-b):active:not([disabled]) { transform: scale(.95); transition-duration: 90ms; transition-timing-function: ease-out; }
+.pn-root :is(.pn-next, .pn-mod:not(.static), .pl-hero, .pl-opt, .pl-sw:not([disabled])):active { transform: scale(.98); transition-duration: 90ms; transition-timing-function: ease-out; }
+.pn-root .pn-opt:not([aria-disabled="true"]):not(:disabled):active { transform: scale(.98); transition-duration: 90ms; transition-timing-function: ease-out; }
+
+/* ---- Home ---- */
+/* Your progress: three figures. */
+.pn-root .pl-pc b { font-family: var(--pn-disp); font-size: 24px; letter-spacing: -.03em; }
+.pn-root .pl-prog .pl-pc + .pl-pc { border-left-color: var(--pn-line); }
+
+/* Solve next: a card whose lead tile is the amber start disc. */
+.pn-root .pn-next { min-height: 70px; padding: 12px 16px; }
+.pn-root .pn-next .pn-ri { width: 34px; height: 34px; border-radius: 50%; }
+.pn-root .pn-next .pn-rb b { font-size: 16.5px; }
+.pn-root .pn-next .pn-rb small { font-size: 13px; color: var(--pn-pri-ink); }
+body.dark .pn-root .pn-next .pn-rb small { color: var(--pn-c-amber); }
+
+/* ---- Lists of modules: numbered path ---- */
+.pn-root .pn-mods { gap: 10px; }
+.pn-root .pn-mod { min-height: 66px; padding: 12px 16px; }
+.pn-root .pn-num { width: 32px; height: 32px; background: var(--pn-tile-bg); color: var(--pn-tile-ink); font-size: 14px; }
+.pn-root .pn-mod:has(.pn-st.done) .pn-num { background: var(--pn-fill); color: var(--pn-on-fill); }
+.pn-root .pn-mod:has(.pn-st:not(.done)) .pn-num { background: transparent; box-shadow: inset 0 0 0 2px var(--pn-pri); color: var(--pn-pri-ink); }
+body.dark .pn-root .pn-mod:has(.pn-st:not(.done)) .pn-num { color: var(--pn-c-amber); }
+.pn-root .pn-st { padding: 4px 10px; font-size: 12.5px; }
+
+/* ---- Subject and module heads, figure cards ---- */
+.pn-root .pn-subhead, .pn-root .pn-hband { padding: 18px; }
+.pn-root .pn-subhead .pn-tb b { font-family: var(--pn-disp); font-size: 24px; letter-spacing: -.03em; }
+.pn-root .pn-subhead .pn-ic { width: 44px; height: 44px; border-radius: 12px; }
+.pn-root .pn-subbar { height: 8px; border-radius: 4px; }
+.pn-root .pn-modp .pn-big { font-size: 40px; letter-spacing: -.04em; }
+.pn-root .pn-hbn { font-size: 40px; letter-spacing: -.04em; }
+.pn-root .pn-mring .rv, .pn-root .pn-ring .rv { stroke: var(--pn-pri); }
+
+/* ---- Moment cards: a finished set, lesson or deck, the level card. Prussian, amber figure and ring. ---- */
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lvb) { --pn-ring: var(--pn-hero-acc); --pn-ring-track: var(--pn-hero-line); --pn-text: var(--pn-hero-ink); --pn-mut: var(--pn-hero-mut);
+  --pn-s1: var(--pn-hero-chip); --pn-s2: var(--pn-hero-line); --pn-pri: var(--pn-hero-acc); --pn-line: var(--pn-hero-line);
+  border: 0; border-radius: var(--pn-r-hero); background: var(--pn-hero); color: var(--pn-hero-ink); box-shadow: var(--pn-sh-hero); }
+.pn-root .pn-score .pn-big { font-size: 34px; letter-spacing: -.035em; }
+.pn-root .pn-score .pn-ring .rv, .pn-root .pn-lvb .pn-lvbar i { stroke: var(--pn-hero-acc); }
+.pn-root .pn-lvb .pn-lvbar i { background: var(--pn-hero-acc); }
+.pn-root .pn-lvb .pn-btn.pri { background: var(--pn-hero-chip); color: var(--pn-hero-ink); box-shadow: none; }
+.pn-root .pn-lvb .pn-lvb-n { background: var(--pn-hero-chip); }
+.pn-root .pn-lvb-n b { color: var(--pn-hero-acc); }
+.pn-root .pn-lsn-xp b { color: var(--pn-hero-acc); }
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end) .pn-btn:not(.pri) { background: var(--pn-hero-chip); color: var(--pn-hero-ink); }
+
+/* ---- Runner ---- */
+.pn-root .pn-q { font-size: 20px; line-height: 1.5; font-weight: 600; letter-spacing: -.02em; }
+@media (min-width: 600px) { .pn-root .pn-q { font-size: 22px; } }
+.pn-root .pn-opts { gap: 10px; }
+.pn-root .pn-opt { min-height: 60px; padding: 13px 16px; border: 0; border-radius: 14px; background: var(--pn-card); box-shadow: var(--pn-elev), inset 0 0 0 1px var(--pn-card-edge); font-size: 16.5px; letter-spacing: -.012em; }
+.pn-root .pn-l { width: 32px; height: 32px; border-radius: 50%; background: var(--pn-s1); color: var(--pn-mut); font-size: 14.5px;
+  transition: background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease, transform var(--pn-d-pop) var(--pn-spring-pop); }
+.pn-root .pn-opt.sel { background: var(--pn-card); box-shadow: var(--pn-elev), inset 0 0 0 2px var(--pn-pri); }
+.pn-root .pn-opt.sel .pn-l { background: var(--pn-fill); color: var(--pn-on-fill); transform: scale(1.06); }
+.pn-root .pn-opt.right { background: color-mix(in srgb, var(--pn-ok) 9%, var(--pn-card)); box-shadow: inset 0 0 0 2px var(--pn-ok); }
+.pn-root .pn-opt.wrong { background: color-mix(in srgb, var(--pn-bad) 8%, var(--pn-card)); box-shadow: inset 0 0 0 2px var(--pn-bad); }
+.pn-root .pn-opt.right .pn-l { background: var(--pn-ok); color: var(--pn-card); }
+.pn-root .pn-opt.wrong .pn-l { background: var(--pn-bad); color: var(--pn-card); }
+body.dark .pn-root .pn-opt.right .pn-l, body.dark .pn-root .pn-opt.wrong .pn-l { color: var(--pn-c-midnight); }
+@media (hover: hover) and (pointer: fine) { .pn-root .pn-opt:not(.sel):not(.right):not(.wrong):not([aria-disabled="true"]):hover { box-shadow: var(--pn-elev), inset 0 0 0 1.5px color-mix(in srgb, var(--pn-pri) 45%, transparent); } }
+.pn-root .pn-qseg { gap: 4px; }
+.pn-root .pn-qseg i { height: 5px; border-radius: 3px; transition: background-color var(--pn-d-quick) ease, transform var(--pn-d-snap) var(--pn-spring-snap); }
+.pn-root .pn-qseg i.cur { transform: scaleY(1.4); }
+/* The feedback: the verdict badge lands on a spring; no stripe. */
+.pn-root .pn-fb::before { content: none; }
+.pn-root .pn-fb { padding: 18px 18px 16px; }
+.pn-root .pn-vb { width: 32px; height: 32px; }
+.pn-root .pn-vb svg { width: 18px; height: 18px; }
+.pn-root .pn-fb.pn-new .pn-vb { animation: pn-badge var(--pn-d-pop) var(--pn-spring-pop) both; }
+@keyframes pn-badge { from { transform: scale(.4); opacity: 0; } 30% { opacity: 1; } }
+.pn-root .pn-verdict b { font-family: var(--pn-disp); font-size: 20px; letter-spacing: -.025em; }
+.pn-root .pn-ans { border: 0; border-radius: var(--pn-r-md); background: var(--pn-ok-bg); }
+.pn-root .pn-ans .pn-l, .pn-root .pn-why .pn-l { border-radius: 50%; }
+.pn-root .pn-fb h3 { font-size: 13px; letter-spacing: .02em; text-transform: none; font-weight: 650; }
+.pn-root .pn-kp { padding: 12px 16px 13px; border-left: 0; border-radius: var(--pn-r-md); background: var(--pn-pri-soft); }
+body.dark .pn-root .pn-kp > b, body.dark .pn-root .pn-xh { color: var(--pn-c-amber); }
+.pn-root .pn-xnotes ul > li::before, .pn-root .pn-exp ul > li::before { background: var(--pn-acc); }
+.pn-root .pn-qn { border-radius: 12px; }
+.pn-root .pn-clockw.over .pn-clock { color: var(--pn-warn); }
+
+/* ---- Sheets: a 28 px top, a grabber, a spring rise ---- */
+.pn-root .pn-sheet { padding: 8px 20px calc(20px + env(safe-area-inset-bottom, 0px)); border: 0; border-radius: var(--pn-r-xl) var(--pn-r-xl) 0 0; box-shadow: var(--pn-sh-sheet);
+  animation: pn-up var(--pn-d-soft) var(--pn-spring-soft); }
+.pn-root .pn-grab { width: 36px; height: 5px; border-radius: 3px; background: color-mix(in srgb, var(--pn-mut) 45%, transparent); margin: 2px 0 8px; }
+.pn-root .pn-sheet h2 { font-family: var(--pn-disp); font-size: 22px; letter-spacing: -.026em; }
+.pn-root .pn-scrim { animation: pn-fade var(--pn-d-base) ease-out; }
+@media (min-width: 700px) {
+  .pn-root .pn-sheet { border-radius: 24px; border: 0; animation: pn-pop var(--pn-d-snap) var(--pn-spring-snap); }
+  body.dark .pn-root .pn-sheet { box-shadow: inset 0 0 0 1px var(--pn-edge); }
+}
+
+/* ---- Lists, stats, boards ---- */
+/* Row actions in a list (Accept, Play, Challenge) are tinted, not filled: amber stays for the one primary action. */
+.pn-root .ps-item .pn-btn.sm.pri { background: var(--pn-pri-soft); color: var(--pn-pri-ink); box-shadow: none; }
+body.dark .pn-root .ps-item .pn-btn.sm.pri { color: var(--pn-c-amber); }
+.pn-root .pn-again .pn-btn { padding: 0 12px; font-size: 15px; line-height: 1.25; text-wrap: balance; }
+.pn-root .pn-rec b { font-family: var(--pn-disp); font-size: 24px; letter-spacing: -.03em; }
+.pn-root .pn-lb.me { background: var(--pn-pri-soft); }
+.pn-root .pn-days i { border-radius: 3px; }
+.pn-root .pn-heat-g i, .pn-root .pn-heat-l i { border-radius: 3px; }
+
+/* ---- Lessons ---- */
+.pn-root .pn-lsn-tx b { text-decoration-color: color-mix(in srgb, var(--pn-acc) 85%, transparent); text-decoration-thickness: 3px; }
+.pn-root .pn-lsn-bar { background: var(--pn-bg); border-top-color: var(--pn-line); }
+.pn-root .pn-lsn-play { background: var(--pn-s1); color: var(--pn-text); }
+.pn-root .pn-lsn-play.on { background: var(--pn-sel-bg); color: var(--pn-sel-ink); }
+.pn-root .pn-lsn-auto { border: 0; background: var(--pn-s1); }
+.pn-root .pn-lsn-auto.on { background: var(--pn-sel-bg); color: var(--pn-sel-ink); }
+.pn-root .pn-lsn-prog i.cur { background: var(--pn-pri); }
+.pn-root .pn-vis { border-radius: var(--pn-r-lg); }
+.pn-root .pn-cmp-c li::before { background: var(--pn-acc); }
+
+/* ---- Chat (Ask MaiK, the teacher): your words on Prussian, MaiK's on the card ---- */
+.pn-root .pt-msg.me .pt-bub { background: var(--pn-hero); color: var(--pn-hero-ink); border-radius: 20px 20px 6px 20px; font-weight: 500; }
+.pn-root .pt-msg.ai .pt-bub { border-radius: 20px 20px 20px 6px; box-shadow: var(--pn-elev); border-color: var(--pn-card-edge); }
+.pn-root .pt-who { color: var(--pn-pri-ink); }
+body.dark .pn-root .pt-who { color: var(--pn-c-amber); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pn-fb.pn-new .pn-vb { animation: pn-fade var(--pn-d-press) ease-out; }
+  .pn-root .pn-sheet { animation: pn-fade var(--pn-d-quick) ease-out; }
+  .pn-root :is(.pn-next, .pn-mod, .pn-tile, .pl-hero, .pn-opt, .pl-opt, .pl-sw, .pn-btn, .pn-chip, .pn-ib, .pn-l, .pl-tick, .pn-qseg i) { transition-property: background-color, color, box-shadow, opacity; }
+  .pn-root :is(.pn-btn, .pn-chip, .pn-ib, .pn-next, .pn-mod, .pl-hero, .pn-opt, .pl-opt, .pl-sw):active { transform: none; }
+  .pn-root .pn-opt.sel .pn-l { transform: none; }
+}

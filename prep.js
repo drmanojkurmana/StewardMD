@@ -700,7 +700,7 @@
   function bar(title, sub, left, right) {
     var isPN = title === "PrepNucleus";
     var tHtml = isPN
-      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo pn-lg-l" src="/prep/art/logo-icon-96.webp" alt="" width="24" height="24" decoding="async"><img class="pn-bar-logo pn-lg-d" src="/prep/art/logo-mark-dark-96.webp" alt="" width="24" height="24" decoding="async"><span>' + title + "</span></h1>"
+      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo pn-lg-l" src="/prep/art/logo-mark-prussian-96.webp" alt="" width="24" height="24" decoding="async"><img class="pn-bar-logo pn-lg-d" src="/prep/art/logo-mark-amber-96.webp" alt="" width="24" height="24" decoding="async"><span>' + title + "</span></h1>"
       : "<h1>" + title + "</h1>";
     return '<header class="pn-bar' + (isPN ? " pn-bar-brand" : "") + '"><button type="button" class="pn-ib" data-act="' + (left || "back") + '" aria-label="' + (left === "close" ? "Close PrepNucleus" : "Back") + '">' + ico(left === "close" ? "close" : "back") + "</button>" +
       '<div class="pn-t">' + tHtml + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || '<span class="pn-ib-sp"></span>') + "</header>";
