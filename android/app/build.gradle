@@ -19,7 +19,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         // Play rejects a duplicate or lower code, so every upload needs this raised. 13 -> 14 for the
         // build carrying the prescription QR verifier + native scanner (and the minSdk 24 -> 26 move).
-        versionCode 14
+        // 14 -> 15 for the Capacitor 8.4.3 security build (GHSA-rvm3-566m-v7fv).
+        versionCode 15
         versionName "7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

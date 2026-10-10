@@ -1099,6 +1099,20 @@ best way of learning."
 - `tools/prep-medcov.mjs` OUT_SET is medcov4, but its `assemble` does not rebuild the key-fix items: never re-upload medcov4
   from an assemble run; a later medcov release starts from the live medcov4 files.
 
+## Owner answer-key fixes, round 2 (2026-10-10, branch `fix/prep-keyfix-r2`, prep51)
+- The owner answered the 33 items held in round 1 ("33 verified answers", his own evidence-checked PDF). Mapped by item
+  number and checked against each stem: no mismatches. 9 applied (key, option or stem per his verdict), 9 rebuilt from his
+  repair notes (match items with overlapping rows turned into unique matches or single best answer), 1 dropped (104,
+  duplicate of 62 by his note), 14 still held (10 image items, which his PDF keeps provisional until he sees the restored
+  figure, and 4 rebuilds that need content he did not give). Per-item changelog, edits, held review PDF with the restored
+  figures: `~/prep-data/keyfix/round2/` and `gs://...-prep-batch/private/keyfix/round2/` (item text stays out of git).
+- Shipped under new paths: ss-radiology **bank v14** = live v13 (another agent's drop of rss-o-tgdc, published to R2 as
+  v13) + 11 items, live item rm-58a3df33975a patched; overlay **radmax6** = radmax5 + 6; radiology `search-<hash>.json`
+  rebuilt; overlay counts rerun. Build scripts: `~/prep-data/keyfix/round2/scripts/` (dl, build, patch-repo, upload,
+  verify), built from the live R2 copies.
+- The bundled v5 radiology index is the source of truth for its `search` name (round 1 did not upload
+  `v5/radiology/index.json` to R2); build from the repo copy, not the R2 one.
+
 ## Apple redesign on the owner's palette (2026-10-10, branch `feat/prep-apple-ui`, prep49)
 - Owner after the quiet redesign: "Didn't like the UI. I want it lively, premium, without UI slop, classic Apple-like."
   Palette he supplied: Pastel Amber `#EFC07B`, Prussian Blue `#0F3460`, Dark Navy `#16213E`, Midnight Blue `#1A1A2E`.

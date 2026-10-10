@@ -16,7 +16,7 @@ UNITS.forEach((u) => json(R + "/media/credits-" + u + ".json").items.forEach((i)
 const lessons = [];
 units.forEach((u) => u.lessons.forEach((id) => lessons.push(json(R + "/lessons/" + id + ".json"))));
 const MCQ = ["ob-antenatal", "ob-labour", "ob-medical", "ob-haemorrhage", "ob-hypertension", "ob-fetal", "ob-puerperium", "ob-early", "ob-operative"];
-const SIM = ["labour", "pph", "eclampsia", "shoulder", "breech", "twins", "collapse"];
+const SIM = ["labour", "pph", "eclampsia", "shoulder", "breech", "twins", "collapse", "cardiac", "cerclage", "consent", "fgr"];
 const CLINIC = ["ctg", "fetal-planes", "hc-biometry"];
 const TOOL = ["edd", "bishop", "mgso4", "antid", "dipsi", "apgar", "efw", "weightgain", "vbac", "ganzoni", "rmi", "meows", "mec"];
 const files = () => {
