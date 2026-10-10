@@ -521,3 +521,23 @@ Admin control (same day): app-wide value in AI control ("Pro: MaiK tokens per da
 `POST /api/ai/admin/user-tokens`; `userDetail().proTokens` shows today's use). Per account beats app-wide beats
 `MAIK_PRO_DAILY_TOKENS`. For a signed-in Pro account the allowance also replaces the generic 200k/day
 `MAIK_DAILY_TOKEN_LIMIT`, so Unlimited is unlimited per day (the monthly budget still applies).
+
+## AI Usage screen shows the Pro daily allowance (2026-10-10)
+Owner gave an account 60k in User control and the app's AI Usage sheet still showed only the wallet ("MaiK Tokens left
+0", from purchased credits) and per-module limits. `GET /api/ai/usage` now returns `proTokens` (`proDailyTokensView` in
+`functions/_usage.js`: this account's number > app-wide > default, -1/owner = unlimited, `null` for guests and non-Pro) and
+`home.js renderAiUsage` draws "Daily MaiK tokens: 56k of 60k left today" with a bar. The wallet is a separate balance of
+bought MaiK Tokens (cost based) and is unchanged. Tests: `test/maik-pro-daily-tokens.test.mjs`, `test/run-aiusage-ui.mjs`
+(11 older checks in it already fail on main, unrelated).
+
+## Cut-short answers and a Know more that repeats (2026-10-10)
+Owner screenshots: MaiK Cloud answered "differential diagnosis for organophosphate poisoning" and the text stopped at
+"| Diagnosis/Option | Distinguishing Features"; Know more then restated the opening and stopped at the same place.
+Root cause NOT confirmed (no live access): candidates are the model's finishReason (MAX_TOKENS, a SAFETY / RECITATION
+filter) or a STOP that ends mid-table. The handler never looked at finishReason. Now (`functions/_maik_finish.js`, wired in
+the explain non-stream path): any non-STOP finish, or a text that ends mid-table (`looksCutOff`), is retried ONCE
+(temperature 0.7; double the budget for MAX_TOKENS) and the better attempt kept (`betterAttempt`); if it is still cut the
+response carries `cutShort: true` (also on the SSE done event) and the sheet adds "This answer was cut short. Tap
+Regenerate". A tier-2 answer has its restated opening paragraphs removed (`dropRepeatedLead`, server and `maikDropRepeatedLead`
+in home.js), and the tier-2 prompt says to start with new content. The server logs `[MaiK cut] finishReason=...` (no
+content) so Cloudflare logs now show which it is. Tests: `test/maik-finish.test.mjs`, `test/run-maik-knowmore-ui.mjs`.

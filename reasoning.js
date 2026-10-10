@@ -6699,7 +6699,7 @@
         var NX_FIRST = 12000, NX_STALL = 14000, NX_TOTAL = 30000;   // server: connect 10s, idle 12s
         return aiHeaders().then(function (h) {
           return new Promise(function (resolve) {
-            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, fin = false, nt = null;
+            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, sawCut = false, fin = false, nt = null;
             function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } resolve(v); }
             // One deterministic ending: abort this request, then take the proven whole-answer fetch.
             // No second request is ever in flight at the same time.
@@ -6716,7 +6716,7 @@
                 if (ev && ev.delta) { acc += ev.delta; armx(NX_STALL); try { if (onDelta) onDelta(acc); } catch (e) {} }
                 // stalled:true means the SERVER hit its idle/total deadline and closed early, so the
                 // text is INCOMPLETE even though a done event arrived. Never surface it as an answer.
-                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; }
+                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; if (ev.cutShort) sawCut = true; }
               }
             }
             function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
@@ -6728,7 +6728,7 @@
               drain();
               // Only a CLEANLY completed stream may surface as the answer — a truncated clinical
               // answer must never look like a whole one. Anything else falls back to the proven fetch.
-              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources }); return; }
+              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut || undefined }); return; }
               nsBad(true); settle(fallback());
             };
             xhr.onerror = function () { nsBad(true); settle(fallback()); };
@@ -6777,7 +6777,7 @@
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }
-        var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "";
+        var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "", sawCut2 = false;
         function pump() {
           return reader.read().then(function (res) {
             if (res.done) return;
@@ -6788,7 +6788,7 @@
               if (!data) return;
               var ev; try { ev = JSON.parse(data); } catch (e) { return; }
               if (ev && ev.delta) { acc += ev.delta; arm(STALL_MS); try { if (onDelta) onDelta(acc); } catch (e) {} }
-              if (ev && ev.done) { gotDone = true; }
+              if (ev && ev.done) { gotDone = true; if (ev.cutShort) sawCut2 = true; }
             });
             return pump();
           });
@@ -6798,12 +6798,12 @@
         // transient streamed tokens are then replaced by the full answer). Web keeps its lenient behavior.
         return pump().then(function () {
           done();
-          if (acc && (gotDone || !isNative)) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources }; }
+          if (acc && (gotDone || !isNative)) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut2 || undefined }; }
           if (isNative) nsBad(true);
           return fallback();
         }).catch(function () {
           done();
-          if (acc && gotDone) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources }; }
+          if (acc && gotDone) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources, cutShort: sawCut2 || undefined }; }
           if (isNative) nsBad(true);
           return fallback();
         });

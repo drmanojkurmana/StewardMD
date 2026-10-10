@@ -152,6 +152,28 @@ export async function addDailyCostInr(env, day, inr) {
 // per-user caps later, set env MAIK_ENFORCE_CAPS="1" (no code change).
 function aiUnlimited(env) { try { return String(env && env.MAIK_ENFORCE_CAPS) !== "1"; } catch (e) { return true; } }
 
+/* What a signed-in Pro account sees on its AI Usage screen: the daily MaiK token allowance in force and
+ * today's use. SAME precedence as checkQuota: this account's own number (User control) > app-wide value
+ * (AI control) > env/default; -1 = unlimited; an owner is unlimited. null for a guest or a non-Pro
+ * account, which have no such allowance. deps lets tests inject the reads. */
+export async function proDailyTokensView(env, request, who, store, deps) {
+  deps = deps || {};
+  try {
+    const owner = await (deps.ownerOK || ownerOK)(request, env).catch(function () { return false; });
+    const pr = await (deps.proFromRequest || proFromRequest)(env, request).catch(function () { return null; });
+    if (!owner && !(pr && pr.pro && pr.uid)) return null;
+    let cap = usageConfig(env).proDailyTokens;
+    if (!owner && store) {
+      const g = await (deps.getProDailyTokens || getProDailyTokens)(store); if (g != null) cap = g;
+      const em = who && (who.accountEmail || who.email);
+      if (em) { const u = await (deps.getUserProTokens || getUserProTokens)(store, em); if (u != null) cap = u; }
+    }
+    let used = 0;
+    if (store && who && who.id) { const r = await readJson(store, "maik:u:" + who.id + ":" + dayKey(new Date())); used = (r && r.tokens) || 0; }
+    return { limit: owner ? -1 : cap, used: used, unlimited: owner || cap === -1, owner: !!owner };
+  } catch (e) { return null; }
+}
+
 /* Pre-call gate. type ∈ general|case|intent|ocr|pdf|prep. Returns {ok} or {ok:false, reason, message}.
    Enforces: rate limit, per-user daily requests (by class), daily/monthly tokens, OCR/PDF
    quotas, and the global daily-cost circuit breaker. Fail-open when no KV. */

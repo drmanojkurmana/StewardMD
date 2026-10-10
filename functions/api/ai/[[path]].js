@@ -121,7 +121,7 @@ function withCors(request, resp) {
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. A future provider drops into PROVIDERS.
  * =================================================================== */
-import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
+import { checkQuota, proDailyTokensView, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, MODEL_HARD_DEFAULT, ACCURATE_MODEL, MODEL_RETIRES, envModel, overrideModel, allowedModels, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, getProDailyTokens, setProDailyTokens, proDailyTokensDefault, getUserProTokens, setUserProTokens, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { listRecentSignups, userDetail } from "../../_admin_users.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR, tokenPackList } from "../../_credits.js";
@@ -142,6 +142,7 @@ import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMe
 import { logEvent as logSupportEvent, eventsSince as supportEventsSince, headSeq as supportHeadSeq, waitEvents as supportWaitEvents, recentMsgs as supportRecentMsgs, mergeMsgs as supportMergeMsgs, mergeIndex as supportMergeIndex } from "../../_support_live.js";
 import { sendNativeToAll } from "../../_nativepush.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg, cacheEligibleCtx, kbFingerprint } from "../../_maik_cache.js";
+import { finishAnalysis, betterAttempt, dropRepeatedLead, looksCutOff } from "../../_maik_finish.js";   // why an answer stopped; a Know more that restates the lead (2026-10-10)
 import { scrubMetaTalk, metaTalkStream } from "../../_maik_metatalk.js";   // no "the passage you sent" talk (2026-09-26)
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
 import { tinyfishSearch } from "../../_search.js";
@@ -273,7 +274,7 @@ function usageTokens(meta, inChars, outText) {
 // Deliver an already-computed answer over the SSE channel as one {delta}+{done} event. Lets the
 // client's stream consumer render a whole-answer (non-stream) result — the reliable path — with no
 // empty stream and no hang.
-function streamTextAsSSE(text, diag) {
+function streamTextAsSSE(text, diag, extra) {
   const enc = new TextEncoder();
   const rs = new ReadableStream({
     start(controller) {
@@ -282,7 +283,7 @@ function streamTextAsSSE(text, diag) {
       // diag block further down is unreachable for a stream (the SSE returns first), so the two
       // fields that say WHY live streaming did not happen - liveStream and streamErr - were
       // invisible on exactly the requests they describe.
-      try { controller.enqueue(enc.encode("data: " + JSON.stringify(diag ? { done: true, _diag: diag } : { done: true }) + "\n\n")); } catch (e) {}
+      try { controller.enqueue(enc.encode("data: " + JSON.stringify(Object.assign(diag ? { done: true, _diag: diag } : { done: true }, extra || {})) + "\n\n")); } catch (e) {}
       controller.close();
     }
   });
@@ -1589,6 +1590,7 @@ export async function onRequest(context) {
     try { await warmBillingCfg(store); } catch (e) {}
     out.packs = tokenPackList(env);
     out.costCapOn = costCapOn(env);
+    out.proTokens = await proDailyTokensView(env, request, who, store);   // the Pro daily allowance, or null
     try {
       out.balanceMt = inrToMt(await getCredits(store, key));
       out.dailyFreeMt = inrToMt(await dailyCostCap(env, store, meterEmail(who), null));
@@ -1978,7 +1980,7 @@ export async function onRequest(context) {
           // fast); tier 2 = the depth, fetched only if the clinician taps "Know more". Inert unless the
           // client sends body.tier, so the default single-call behaviour is byte-identical.
           if (body && body.tier === 1) sysA = sysA.replace(TWO_TIER_RULE, "") + "\n\nOUTPUT MODE — BOTTOM LINE ONLY: give ONLY tier 1 (the direct answer PLUS all safety-critical information — red flags, contraindications, time-critical 'refer/admit/treat now' actions, key drug cautions). Do NOT write @@MORE@@ and do NOT write any tier-2 detail; a separate follow-up will request the depth.";
-          else if (body && body.tier === 2) sysA = sysA + "\n\nOUTPUT MODE — DETAIL ONLY: the clinician already has your concise bottom line" + (body.priorLead ? (" (\"" + String(body.priorLead).slice(0, 400).replace(/"/g, "'") + "\")") : "") + ". Now give ONLY the tier-2 depth for THIS question (overrides the TWO-TIER instruction above): rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note, and nuance, each only where it bears on the question. Expand on the question; do not switch to a generic topic outline. Do NOT repeat the bottom line and do NOT write @@MORE@@.";
+          else if (body && body.tier === 2) sysA = sysA + "\n\nOUTPUT MODE — DETAIL ONLY: the clinician already has your concise bottom line" + (body.priorLead ? (" (\"" + String(body.priorLead).slice(0, 400).replace(/"/g, "'") + "\")") : "") + ". Now give ONLY the tier-2 depth for THIS question (overrides the TWO-TIER instruction above): rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note, and nuance, each only where it bears on the question. Expand on the question; do not switch to a generic topic outline. Do NOT repeat the bottom line, do NOT restate the question, and start directly with new content. Do NOT write @@MORE@@.";
         } catch (e) {}
         // Cite-or-abstain safety directive (toggle in AI Control Center / MAIK_ABSTAIN). Never fabricate.
         try {
@@ -2044,6 +2046,28 @@ export async function onRequest(context) {
         // STOP well under the 2560-token cap). isTutor takes precedence over complex-based tiering.
         try { text = await gen([{ text: grounded }], nsCap, { system: nsSys, temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? envModel(env.CLINIX_TUTOR_MODEL, CHEAP_MODEL) : undefined }); }
         catch (e) { _later(recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" })); throw e; }
+        /* WHY THE MODEL STOPPED (owner, 2026-10-10: an answer ended mid table header, twice). Anything but STOP
+         * is a cut answer that used to be served as if whole. One more attempt, on a different sample (which
+         * avoids RECITATION and a filter that tripped once) and, for MAX_TOKENS, with double the budget; the
+         * better of the two is kept. Still cut after that: the client is told (cutShort) and says so. */
+        let _finish = (_gm && _gm.finishReason) || "";
+        {
+          const _fa0 = finishAnalysis(_finish);
+          const _fa = (!_fa0.cut && looksCutOff(text)) ? { cut: true, retry: true, kind: "shape" } : _fa0;   // said STOP, ends mid-table
+          if (_fa.cut && _fa.retry) {
+            const _first = { text: text, finish: _finish };
+            try {
+              _mark.cutRetry = _finish;
+              const t2 = await gen([{ text: grounded }], _fa.moreTokens ? Math.min(nsCap * 2, 8192) : nsCap, { system: nsSys, temperature: Math.max(hasDx ? 0.25 : 0.45, 0.7), maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? envModel(env.CLINIX_TUTOR_MODEL, CHEAP_MODEL) : undefined });
+              const best = betterAttempt(_first, { text: t2, finish: (_gm && _gm.finishReason) || "" });
+              text = best.text; _finish = best.finish;
+            } catch (e) { text = _first.text; _finish = _first.finish; }
+            try { console.log("[MaiK cut] finishReason=" + _first.finish + " retried=1 final=" + _finish + " chars=" + (text || "").length); } catch (_) {}   // no content, no PHI
+          }
+        }
+        const _cutShort = finishAnalysis(_finish).cut || looksCutOff(text);
+        // Know more must not restate the bottom line the clinician has just read.
+        if (_tier === 2 && body && body.priorLead) text = dropRepeatedLead(text, String(body.priorLead).slice(0, 4000));
         text = scrubMetaTalk(text);   // never "the passage you sent is irrelevant" (2026-09-26); before the cache write
         _later(recordUsage(gate, { ...tokens(nsSys.length + grounded.length, text), status: text ? "success" : "failed", noCount: _tier === 2 }));
         if (text) _countQuestion();
@@ -2060,7 +2084,7 @@ export async function onRequest(context) {
             thoughtsTok: ((_gm && _gm.usage) || {}).thoughtsTokenCount || 0,
             candTok: ((_gm && _gm.usage) || {}).candidatesTokenCount || 0,
             chars: (text || "").length
-          } : null));
+          } : null, _cutShort ? { cutShort: true } : null));
         }
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
@@ -2070,9 +2094,9 @@ export async function onRequest(context) {
           const _diag = { ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,
             cap: nsCap, chars: (text || "").length, model: (_gm && _gm.model) || modelId(env), finishReason: (_gm && _gm.finishReason) || "",
             promptTok: u.promptTokenCount || 0, thoughtsTok: u.thoughtsTokenCount || 0, candTok: u.candidatesTokenCount || 0, totalTok: u.totalTokenCount || 0 };
-          return json({ text: text, mode: "grounded", citations: cites, _diag: _diag });
+          return json({ text: text, mode: "grounded", citations: cites, cutShort: _cutShort || undefined, _diag: _diag });
         }
-        return json({ text: text, mode: "grounded", citations: cites });
+        return json({ text: text, mode: "grounded", citations: cites, cutShort: _cutShort || undefined });
       }
       // Legacy fallback: plain engine summary string (backward compatible).
       const summary = String(body.summary || "").slice(0, MAX_IN_CHARS);
