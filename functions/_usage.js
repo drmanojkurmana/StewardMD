@@ -30,6 +30,9 @@ export function usageConfig(env) {
     generalDaily: n("MAIK_GENERAL_DAILY_LIMIT", 60),
     caseDaily: n("MAIK_CASE_DAILY_LIMIT", 30),
     dailyTokens: n("MAIK_DAILY_TOKEN_LIMIT", 200000),
+    // Pro MaiK allowance per day (owner, 2026-10-10: "give every user who is pro 20K MaiK tokens per day",
+    // about Rs 10/day at most). Owners are exempt; MAIK_ENFORCE_CAPS "0" lifts it with the other caps.
+    proDailyTokens: n("MAIK_PRO_DAILY_TOKENS", 20000),
     monthlyTokens: n("MAIK_MONTHLY_TOKEN_LIMIT", 3000000),
     freeMonthlyTokens: n("MAIK_FREE_MONTHLY_TOKEN_LIMIT", 30000),   // non-Pro: ~one full case / month
     maxInputTokens: n("MAIK_MAX_INPUT_TOKENS", 4000),
@@ -194,8 +197,8 @@ export async function checkQuota(env, request, type, opts) {
   // allowance needs a verified MOBILE NUMBER; registration verification alone no longer grants it).
   // callerVerified is "a reviewed account" (verified doctor OR an approved student/intern), so an
   // approved trainee is never told to verify a registration they already had reviewed.
-  let isProCaller = true, callerUid = null, callerVerified = false, callerPhoneVerified = false;
-  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = isReviewedAccount(pr.claims); callerPhoneVerified = !!(pr.claims && pr.claims.phoneVerified === true); } } catch (e) {}
+  let isProCaller = true, callerUid = null, callerVerified = false, callerPhoneVerified = false, proSignedIn = false;
+  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; proSignedIn = !!(pr.pro && pr.uid); callerUid = pr.uid || null; callerVerified = isReviewedAccount(pr.claims); callerPhoneVerified = !!(pr.claims && pr.claims.phoneVerified === true); } } catch (e) {}
   const now = _now0, day = _day0, month = _month0;
   const QUOTA_MSG = "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.";
   const PHONE_MSG = "Verify your mobile number to unlock your free monthly MaiK allowance. It takes a minute and costs nothing.";
@@ -236,6 +239,10 @@ export async function checkQuota(env, request, type, opts) {
   // allowances do not govern it; prep has its own deck, call and token caps (PrepNucleus-LayerC 6.8).
   const _prep = type === "prep";
   if (!exempt && !_prep && u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
+  // The Pro daily MaiK allowance. Owners (exempt) never meet it; the router pre-parse is not a question.
+  if (!exempt && proSignedIn && !_prep && type !== "router" && u.tokens >= cfg.proDailyTokens) {
+    return { ok: false, reason: "pro-daily-tokens", message: "You've used today's " + Number(cfg.proDailyTokens).toLocaleString("en-IN") + " MaiK tokens. They reset at midnight. Clinical reasoning, calculators, and reference tools remain available.", id };
+  }
   let monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
   let budgetApplied = false;
   if (aiBudgetOn(env) && callerUid && !_prep) {
