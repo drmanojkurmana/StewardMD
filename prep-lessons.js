@@ -635,12 +635,14 @@
     var body = step ? '<article class="pn-lsn-step' + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
         '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + (step.qc ? qcHtml(step.qc, p) : "") + "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
-    return host.bar(escH(les.title), (step ? "Step " : "Page ") + (L.i + 1) + " of " + n, "back", autoBtn) +
+    // Share IDs (prep-ids.js): share in the bar, the lesson's ID at the foot of the page (tap copies).
+    var IDS = G.PREP_IDS, lid = IDS ? IDS.ofLesson(L.key) : null, shareB = lid ? IDS.shareBtn(lid, "Share this lesson") : "";
+    return host.bar(escH(les.title), (step ? "Step " : "Page ") + (L.i + 1) + " of " + n, "back", autoBtn && shareB ? '<span class="pn-acts">' + autoBtn + shareB + "</span>" : autoBtn || shareB) +
       '<div class="pn-lsn-prog" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="' + n + '" aria-valuenow="' + (L.i + 1) + '">' +
       pg.map(function (x, k) { var ix = typeof x !== "number" || interactive(les.steps[x]); return "<i" + (k <= L.i || ix ? ' class="' + (k <= L.i ? "on" : "") + (k === L.i ? " cur" : "") + (ix ? " ix" : "") + '"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pn-lsn" id="pnLsn">' + body +
       (L.i === 0 && canSpeak() ? '<p class="pn-note">Narration uses this device\'s own voice.</p>' : "") +
-      "</div>" + barHtml();
+      (lid ? IDS.chip(lid) : "") + "</div>" + barHtml();
   }
   function finishHtml() {
     var les = L.les, s = store(), total = 0;
@@ -833,7 +835,8 @@
     host.push(view);
   }
   /* open(sid, mid, h, key): key defaults to the module's own lesson. */
-  function open(sid, mid, h, key) {
+  // fromStart: a shared lesson ID opens at the first step, whatever this phone's saved place.
+  function open(sid, mid, h, key, fromStart) {
     host = h;
     key = key || mid;
     L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = null; L.playing = false; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 };
@@ -844,7 +847,7 @@
     lessonFile(key).then(function (les) {
       if (host.stackTop() !== loading) return;   // left while loading
       var s = store(), p = s.ls[key];
-      L.les = les; L.i = p && !p.done && p.i < pages(les).length ? p.i : 0; L.dir = 0;
+      L.les = les; L.i = !fromStart && p && !p.done && p.i < pages(les).length ? p.i : 0; L.dir = 0;
       save(); warm(les);
       var stk = host.stack(); stk[stk.length - 1] = view;
       draw();
