@@ -88,7 +88,8 @@ export function validateDoc(doc, name, errs) {
   const S = doc.sources || {};
   if (!Object.keys(S).length) E("no sources");
   for (const [id, s] of Object.entries(S)) {
-    for (const k of ["title", "url", "licence", "accessed"]) if (!s[k]) E(`source ${id} missing ${k}`);
+    /* document: true = owner-supplied document with no URL (url must then be null) */
+    for (const k of ["title", "url", "licence", "accessed"]) if (!s[k] && !(k === "url" && s.document === true && s.url === null)) E(`source ${id} missing ${k}`);
     const f = join(DIR, "sources", (s.snapshot || id + ".txt").replace(/^sources\//, ""));
     if (!snapExists(f)) E(`source ${id} snapshot missing (${basename(f)})`);
   }

@@ -181,7 +181,7 @@
   function blockHtml(drug, d, opts) {
     var A = hub().api, esc = A.esc, r = compute(drug, d), doc = drug._doc, h = "";
     opts = opts || {};
-    if (!opts.noHeader) h += '<div class="nh-row"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="font:700 18px var(--nh-f,inherit)">' + esc(drug.name) + "</b>" + A.badge(doc) + "</div>" + (drug["class"] ? '<div class="nh-work">' + esc(drug["class"]) + "</div>" : "") + "</div>";
+    if (!opts.noHeader) h += '<div class="nh-row"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="font:700 18px var(--nh-f,inherit)">' + esc(drug.name) + "</b>" + A.badge(drug.review ? drug : doc) + "</div>" + (drug["class"] ? '<div class="nh-work">' + esc(drug["class"]) + "</div>" : "") + "</div>";
     if (drug.highAlert) h += A.secondCheckHtml(drug.name);
     if (r.none) return h + '<div class="nh-note bad">' + esc(NO_DOSE) + "</div>";
     if (!d.weightG) h += A.note("Add today's weight (in grams) to the baby details to see the dose in mg.");
