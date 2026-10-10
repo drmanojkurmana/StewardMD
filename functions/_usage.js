@@ -17,7 +17,7 @@
 import { proFromRequest, proMessageFor, isReviewedAccount } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
-import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
+import { addAiSpend, getProDailyTokens, getUserProTokens } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
 import { bump, readDay, mergeCounters, MAIK_GROUPS, istDay } from "./_counters.js";
 import { verifiedClaimsFor, cfAccessEmail, verifiedEmailOf } from "./_fbauth.js";
 
@@ -180,11 +180,13 @@ export async function checkQuota(env, request, type, opts) {
   const _gP = _tap("glob", readJson(store, "maik:global:" + _day0));
   const _boP = _tap("bud", _safe(function () { return store.get("ai:budget:daily"); }, null));
   const _d1P = _tap("d1", readDailyCostInr(env, _day0)).catch(function () { return null; });
+  const _ptP = _tap("ptok", _safe(function () { return getProDailyTokens(store); }, null));
   const who = await _whoP; const id = who.id;
   // per-user reads need the id, so they start now rather than after the global reads have finished
   const _lastP = _tap("rl", readJson(store, "maik:rl:" + id));
   const _uP = _tap("u", readJson(store, "maik:u:" + id + ":" + _day0));
   const _mP = _tap("m", readJson(store, "maik:m:" + id + ":" + _month0));
+  const _utP = _tap("utok", _safe(function () { return (who.accountEmail || who.email) ? getUserProTokens(store, who.accountEmail || who.email) : null; }, null));
   // Admin/owner exemption (owner Google login OR X-Admin-Token = UPDATES_ADMIN_TOKEN|VERIFY_ADMIN_TOKEN):
   // skip the per-USER throttles (rate limit, daily/monthly token caps, per-category request counts) so
   // internal benchmarking/eval isn't blocked by the tiny per-user beta caps. Cost is STILL metered and
@@ -238,10 +240,17 @@ export async function checkQuota(env, request, type, opts) {
   // type "prep" (PrepNucleus decks) gets the breaker and the rate limit only: MaiK's per-user token
   // allowances do not govern it; prep has its own deck, call and token caps (PrepNucleus-LayerC 6.8).
   const _prep = type === "prep";
-  if (!exempt && !_prep && u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
   // The Pro daily MaiK allowance. Owners (exempt) never meet it; the router pre-parse is not a question.
-  if (!exempt && proSignedIn && !_prep && type !== "router" && u.tokens >= cfg.proDailyTokens) {
-    return { ok: false, reason: "pro-daily-tokens", message: "You've used today's " + Number(cfg.proDailyTokens).toLocaleString("en-IN") + " MaiK tokens. They reset at midnight. Clinical reasoning, calculators, and reference tools remain available.", id };
+  // Per account (User control) beats the app-wide value (AI Control Center, KV) beats env; -1 = unlimited.
+  let proCap = cfg.proDailyTokens;
+  { const gv = await _ptP; if (gv != null) proCap = gv; }
+  { const uv = await _utP; if (uv != null) proCap = uv; }
+  // For a signed-in Pro account the allowance the owner set IS the daily token limit: the generic
+  // per-user ceiling (MAIK_DAILY_TOKEN_LIMIT) must not quietly undercut "Unlimited" or a raised number.
+  const _dayCap = proSignedIn ? (proCap === -1 ? Infinity : Math.max(cfg.dailyTokens, proCap)) : cfg.dailyTokens;
+  if (!exempt && !_prep && u.tokens >= _dayCap) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
+  if (!exempt && proSignedIn && !_prep && type !== "router" && proCap !== -1 && u.tokens >= proCap) {
+    return { ok: false, reason: "pro-daily-tokens", message: "You've used today's " + Number(proCap).toLocaleString("en-IN") + " MaiK tokens. They reset at midnight. Clinical reasoning, calculators, and reference tools remain available.", id };
   }
   let monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
   let budgetApplied = false;
