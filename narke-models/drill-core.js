@@ -89,8 +89,9 @@
     if (data.review !== "ai_drafted" && data.review !== "reviewed") errs.push("review must be ai_drafted or reviewed");
     textErr(data.title, "title", errs); textErr(data.scenario, "scenario", errs);
     if (!data.sources || !data.sources.length) errs.push("sources");
-    // A source is a web document ({label, url}) or one of the app's own protocol files ({label, path}).
-    (data.sources || []).forEach(function (s, i) { if (!s.label || !(/^https:\/\//.test(s.url || "") || /^kb\//.test(s.path || ""))) errs.push("sources[" + i + "]"); });
+    // A source is a web document ({label, url}), one of the app's own protocol files ({label, path}),
+    // or a named printed/uploaded document ({label, document: true}) that has no url.
+    (data.sources || []).forEach(function (s, i) { var ok = s.document === true || /^https:\/\//.test(s.url || "") || /^kb\//.test(s.path || ""); if (!s.label || !ok) errs.push("sources[" + i + "]"); });
     if (!data.stages || !data.stages.length) return errs.concat("stages");
     var m = {}, n = 0;
     data.stages.forEach(function (s) { if (m[s.id]) errs.push("duplicate stage " + s.id); m[s.id] = s; });

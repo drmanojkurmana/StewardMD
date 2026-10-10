@@ -23,7 +23,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG1.3 | ob12-stillbirth |  |  |
 | OG1.4 | ob10-robson |  |  |
 | OG1.5 | ob2-national-programmes |  |  |
-| OG2.1 | gy6-floor |  |  |
+| OG2.1 | gy6-floor | drill:mullerian |  |
 | OG3.1 | ob1-implantation-hcg, gy2-axis, gy2-cycle | explorer:cycle |  |
 | OG4.1 | ob1-placenta-cord-liquor |  |  |
 | OG5.1 | ob7-preexisting |  |  |
@@ -102,16 +102,16 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG25.1 | gy2-amenorrhoea | explorer:cycle |  |
 | OG26.1 | gy6-fistula |  |  |
 | OG26.2 | gy6-fistula |  |  |
-| OG27.1 | gy4-syndromic, gy4-cervicitis, gy4-ulcers |  |  |
+| OG27.1 | gy4-syndromic, gy4-cervicitis, gy4-ulcers | drill:pid |  |
 | OG27.2 | gy4-genital-tb |  |  |
 | OG27.3 | gy4-pid |  |  |
 | OG28.1 | gy7-when-to-look, gy7-semen, gy7-ovulation, gy7-tubes-uterus, gy7-treatment-ladder |  |  |
 | OG28.2 | gy7-tubes-uterus |  |  |
 | OG28.3 | gy7-ovulation, gy7-treatment-ladder | drill:ovulation |  |
 | OG28.4 | gy7-treatment-ladder | drill:ovulation |  |
-| OG29.1 | gy5-fibroid, gy5-fibroid-treat |  |  |
-| OG30.1 | gy3-what, gy3-why, gy3-diagnose, gy3-hirsutism, gy3-risks, gy3-manage |  |  |
-| OG30.2 | gy3-hirsutism |  |  |
+| OG29.1 | gy5-fibroid, gy5-fibroid-treat | drill:fibroid |  |
+| OG30.1 | gy3-what, gy3-why, gy3-diagnose, gy3-hirsutism, gy3-risks, gy3-manage | drill:pcos |  |
+| OG30.2 | gy3-hirsutism | drill:pcos |  |
 | OG31.1 | gy6-floor, gy6-pop-types, gy6-popq, gy6-pop-manage | explorer:popq |  |
 | OG32.1 | gy9-what-is, gy9-symptoms, gy9-hrt-who, gy9-hrt-regimens, gy9-bone | drill:hrt |  |
 | OG32.2 | gy12-pmb | drill:pmb |  |

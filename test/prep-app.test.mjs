@@ -113,8 +113,11 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.deepEqual(P.oldOverlays("medcov2"), ["medcov"]);
   assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
   assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
-  assert.match(read("prep.js"), /medicine: \["medcov3"\], "ss-pulmonology": \["medcov3"\]/);
-  assert.match(read("prep.js"), /radiology: \["radnotes", "radmax3"\]/, "radiology reads radnotes and the radmax3 release");
+  assert.match(read("prep.js"), /medicine: \["medcov4"\], "ss-pulmonology": \["medcov4"\]/);
+  assert.match(read("prep.js"), /radiology: \["radnotes2", "radmax5"\]/, "radiology reads the radnotes2 and radmax5 releases");
+  assert.deepEqual(P.oldOverlays("radmax5"), ["radmax", "radmax2", "radmax3", "radmax4"], "radmax5 replaces cached radmax to radmax4 copies");
+  assert.deepEqual(P.oldOverlays("radnotes2"), ["radnotes"], "radnotes2 replaces cached radnotes copies");
+  assert.deepEqual(P.oldOverlays("radmax4"), ["radmax", "radmax2", "radmax3"], "radmax4 replaces cached radmax to radmax3 copies");
   assert.deepEqual(P.oldOverlays("radmax3"), ["radmax", "radmax2"], "radmax3 replaces cached radmax and radmax2 copies");
   assert.deepEqual(P.oldOverlays("radmax"), []);
   assert.deepEqual(P.oldOverlays("radmax2"), ["radmax"], "radmax2 replaces cached radmax copies");
@@ -330,10 +333,16 @@ test("PrepNucleus 4K logo icon and banner assets ship and are wired", () => {
 
   const prepJs = read("prep.js");
   assert.match(prepJs, /pn-bar-logo/, "prep.js must render the logo icon in the header");
-  assert.match(prepJs, /pn-brand-banner/, "prep.js must render the brand banner in renderHome");
+  // Apple pass (2026-10-10, owner palette): no oversized banner on home; the brand is the mark beside the name in the
+  // bar, flat amber (#EFC07B) on dark and flat Prussian blue (#0F3460) on light.
+  assert.doesNotMatch(prepJs, /pn-brand-banner/, "home no longer renders the brand banner");
+  assert.match(prepJs, /logo-mark-amber-96\.webp/, "the dark theme bar uses the flat amber mark");
+  assert.match(prepJs, /logo-mark-prussian-96\.webp/, "the light theme bar uses the flat Prussian mark");
+  assert.ok(fs.existsSync(path.join(ROOT, "prep/art/logo-mark-amber-96.webp")), "logo-mark-amber-96.webp must exist");
+  assert.ok(fs.existsSync(path.join(ROOT, "prep/art/logo-mark-prussian-96.webp")), "logo-mark-prussian-96.webp must exist");
 
   const prepCss = read("prep.css");
-  assert.match(prepCss, /\.pn-brand-banner/, "prep.css must style pn-brand-banner");
+  assert.doesNotMatch(prepCss, /pn-sky|hero-dark\.webp|banner-dark\.webp/, "prep.css draws no painted sky or banner");
   assert.match(prepCss, /\.pn-bar-logo/, "prep.css must style pn-bar-logo");
 
   const homeJs = read("home.js");

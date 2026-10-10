@@ -749,11 +749,47 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   box-shadow: var(--rds-el-cta); box-sizing: border-box;
 }
 #homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
+/* Ask Maik tab carries the MaiK mark (M + star; maik-ai-mark.png) instead of a glyph. */
+#homeV2.rnav .rnav-tab-maik .rnav-maik-mark img { width: 26px; height: auto; display: block; pointer-events: none; }
 /* Dark: the Ask Maik FAB is a 3D sphere matching the Clinical Tools badges. */
 html body.dark #homeV2.rnav .rnav-tab-maik .rds-icon,
 html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
   background: radial-gradient(circle at 34% 26%, var(--sphere-hi, #2f9184) 0%, var(--sphere-mid, #12564a) 52%, var(--sphere-base, #06231e) 100%);
   box-shadow: inset 0 2px 5px rgba(255,255,255,.28), inset 0 -5px 10px rgba(0,0,0,.42), 0 6px 16px -4px var(--sphere-glow, rgba(8,40,35,.6));
+}
+/* Ask Maik orb (owner, 2026-10-10: "3D and glow shine like an AI button"). Both themes: a lit
+   teal sphere (top-left highlight, shaded base), a soft breathing halo, a glint sweeping across,
+   and the star mark glowing. Reduced motion keeps the look and drops the animation.
+   Owner, same day: "only shine is fine, decrease glow by 80%": halo, ring and mark glow at 20%. */
+html body #homeV2.rnav .rnav-tab-maik .rds-icon.rnav-maik-mark {
+  position: relative; overflow: hidden; isolation: isolate;
+  background:
+    radial-gradient(circle at 32% 24%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 34%),
+    radial-gradient(circle at 50% 115%, rgba(94,234,212,.55) 0%, rgba(94,234,212,0) 55%),
+    radial-gradient(circle at 38% 30%, #2bb3a1 0%, #12786b 46%, #08463e 100%);
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38),
+    0 0 0 1px rgba(94,234,212,.07), 0 4px 10px -2px rgba(6,60,52,.55),
+    0 0 14px 2px rgba(45,212,191,.09);
+  animation: smdMaikOrbGlow 2.8s ease-in-out infinite;
+}
+html body #homeV2.rnav .rnav-tab-maik .rds-icon.rnav-maik-mark::after {
+  content: ""; position: absolute; inset: -40%; z-index: 2; pointer-events: none;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%);
+  transform: translateX(-120%); animation: smdMaikOrbGlint 4.2s ease-in-out infinite;
+}
+html body #homeV2.rnav .rnav-tab-maik .rnav-maik-mark img {
+  position: relative; z-index: 1;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,.17)) drop-shadow(0 0 7px rgba(153,246,228,.14));
+}
+@keyframes smdMaikOrbGlow {
+  0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38), 0 0 0 1px rgba(94,234,212,.07), 0 4px 10px -2px rgba(6,60,52,.55), 0 0 10px 1px rgba(45,212,191,.07); }
+  50%      { box-shadow: inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38), 0 0 0 1px rgba(94,234,212,.11), 0 4px 10px -2px rgba(6,60,52,.55), 0 0 20px 5px rgba(45,212,191,.12); }
+}
+@keyframes smdMaikOrbGlint { 0%, 55% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) {
+  html body #homeV2.rnav .rnav-tab-maik .rds-icon.rnav-maik-mark,
+  html body #homeV2.rnav .rnav-tab-maik .rds-icon.rnav-maik-mark::after { animation: none; }
 }
 
 /* Home tiles v4: top-align icons + reserve a 2-line label area so tiles with 1-line

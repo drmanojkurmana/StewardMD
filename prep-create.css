@@ -44,8 +44,7 @@ body.dark .pn-root { --pc-warn-bg: #33270f; --pc-warn-line: #6b5420; }
 }
 
 /* ==== 2026-10-09 create overhaul: steps, page picker, deck as a module, progress stages ==== */
-.pn-root { --pc-sel: var(--pn-pri); --pc-sheet: rgba(238, 243, 244, .86); }
-body.dark .pn-root { --pc-sheet: rgba(5, 14, 18, .86); }
+.pn-root { --pc-sel: var(--pn-pri); --pc-sheet: var(--pn-bg); }
 .pn-root .pc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* steps: Source, Pages, Settings */
@@ -71,9 +70,9 @@ body.dark .pn-root { --pc-sheet: rgba(5, 14, 18, .86); }
 
 /* page picker */
 .pn-root .pc-pgbody { padding-bottom: 0; }
-.pn-root .pc-pgtop { position: sticky; top: -4px; z-index: 2; display: flex; flex-direction: column; gap: 8px; margin: 0 auto; padding: 8px 0 10px; background: var(--pc-sheet); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); }
+.pn-root .pc-pgtop { position: sticky; top: -4px; z-index: 2; display: flex; flex-direction: column; gap: 8px; margin: 0 auto; padding: 8px 0 10px; background: var(--pc-sheet); }
 .pn-root .pc-pgn { font-size: 15px; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
-.pn-root .pc-pgn b { font-family: var(--pn-num); font-size: 22px; font-weight: 800; color: var(--pn-text); margin-right: 2px; }
+.pn-root .pc-pgn b { font-family: var(--pn-num); font-size: 22px; font-weight: 700; color: var(--pn-text); margin-right: 2px; }
 .pn-root .pc-pgform { display: flex; gap: 8px; }
 .pn-root .pc-pgform .pc-in { flex: 1 1 auto; min-width: 0; min-height: 44px; padding: 8px 12px; }
 .pn-root .pc-pgform .pn-btn { min-height: 44px; }
@@ -153,4 +152,3 @@ body.dark .pn-root .pc-pimg { background: #e9eef0; }
   .pn-root .pc-pulse, .pn-root .pc-skel, .pn-root .pc-pimg img { animation: none; }
   .pn-root .pc-pimg, .pn-root .pc-drop, .pn-root .pc-drow { transition: none; }
 }
-@media (prefers-reduced-transparency: reduce) { .pn-root .pc-pgtop { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--pn-bg); } }
