@@ -68,3 +68,5 @@ body.dark .pn-root .pi-chip.pi-done .pi-chip-v { color: var(--pn-pri); }
   .pn-root .pi-chip:active { transform: none; }
   .pn-root .pi-copy.pi-done .pi-cl { animation: none; }
 }
+/* iPad: the form keeps a readable column. */
+.pn-root .pi-go > * { width: 100%; max-width: 560px; margin-left: auto; margin-right: auto; }
