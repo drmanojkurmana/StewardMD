@@ -86,6 +86,9 @@ try {
   if (SHOTS) fs.mkdirSync(SHOTS, { recursive: true });
   await ev(() => { const s = document.createElement("style"); s.textContent = "*{transition:none!important;animation-duration:0s!important}"; document.head.appendChild(s); });
   await ev(() => PREP.open({ query: "brachial plexus", n: 3 }));
+  // Since prep60 a deep link opens the module and the mode sheet (set to 3 questions): Start learning.
+  await until(() => !!document.querySelector("#pnSetup #suGo:not([disabled])") || !!(PREP._st && PREP._st.run), 20000);
+  await ev(() => { const g = document.querySelector("#pnSetup #suGo:not([disabled])"); if (g) g.click(); });
   ok(await until(() => !!(window.PREP && PREP._st && PREP._st.run) || !!document.querySelector("#smdPrep .pn-opt"), 20000), "a run starts");
   if (!(await ev(() => !!document.querySelector("#smdPrep .pn-opt")))) {
     await ev(() => { PREP.close(); PREP.open(); }); await until(() => !!document.querySelector("#smdPrep [data-act=custom]"), 20000);

@@ -95,6 +95,8 @@ async function shots(name) {
   await size("phone"); await ev(`document.body.classList.remove("dark"); return 1;`);
 }
 const sheetOpen = `return !!document.querySelector("#pnSetup .su-sheet") && !document.querySelector("#pnSetup .pn-load");`;
+const more = async () => { if (await ev(`var b=document.querySelector("#pnSetup [data-act=su-more]"); return !!b && b.getAttribute("aria-expanded")==="false";`) === true) await click("#pnSetup [data-act=su-more]"); };
+const timerOff = async () => { if (await ev(`var b=document.querySelector("#pnSetup .su-sw"); return !!b && b.getAttribute("aria-checked")==="true";`) === true) await click("#pnSetup .su-sw"); };
 const count = (row, v) => ev(`var b=document.querySelector('#pnSetup [data-act="su-${row}"][data-v="${v}"] .su-n'); return b ? +b.textContent.replace(/\\D/g,"") : -1;`);
 
 try {
@@ -130,91 +132,96 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{["smd_prep_v1","smd_prep_setup","smd_prep_c_caps"].forEach(function(k){localStorage.removeItem(k);});}catch(e){} indexedDB.deleteDatabase("prep-gen"); indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!window.PREP_SETUP && !!document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');`, 20000), "prep-setup.js loads with PrepNucleus; the subject lists its modules");
-  ok(await ev(`return PREP_LOADER.V === "prep59" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
+  ok(await ev(`return PREP_LOADER.V === "prep60" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-subject][data-s=anatomy]');`, 5000), "the subject screen has Practise Anatomy");
 
-  // ---- module: Practice opens the sheet
+  // ---- module: opening it asks how to practise (mode sheet, 2026-10-10); Practise opens it again
   await click('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');
-  ok(await until(`return !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 8000), "module screen");
+  ok(await until(sheetOpen, 8000), "opening the module shows the mode sheet at once");
+  await click("#pnSetup .su-x");
+  ok(await until(`return !document.getElementById("pnSetup") && !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 8000), "closed: the module screen");
   ok(await ev(`return !document.querySelector('#smdPrep [data-act=su-last]');`) === true, "no Last settings button before a choice was made");
   await click('#smdPrep [data-act=start][data-k=study]');
-  ok(await until(sheetOpen, 8000), "Practice opens the setup sheet");
+  ok(await until(sheetOpen, 8000), "Practise opens the setup sheet");
   ok(await ev(`return !document.querySelector("#smdPrep .pn-q");`) === true, "the runner has not started");
-  ok(/40\s*questions match/.test(await text("#suStatus")), "the pool is counted: " + await text("#suStatus"));
+  ok(/20\s*questions/.test(await text("#suStatus")), "the set is counted: " + await text("#suStatus"));
+  await more();
   ok(await count("type", "img") === 8 && await count("type", "case") === 16 && await count("type", "line") === 16 && await count("type", "all") === 40, "type counts: 8 image, 16 scenario, 16 one-liner");
   ok(await count("seen", "new") === 40 && await count("seen", "bm") === 0 && await count("seen", "due") === 0, "repeat counts on a fresh store");
   ok(await count("d", "1") + await count("d", "2") + await count("d", "3") + await count("d", "4") === 40 && await count("d", "4") === 3, "difficulty counts add up; the 3 vh items count as Very hard");
   ok(await text('#pnSetup [data-act=su-d][data-v="4"] span') === "Very hard", "a Very hard choice");
   await click('#pnSetup [data-act=su-d][data-v="4"]');
-  ok(/3\s*questions match/.test(await text("#suStatus")), "Very hard: 3 match: " + await text("#suStatus"));
+  ok(/^3\s*questions/.test(await text("#suStatus")), "Very hard: 3: " + await text("#suStatus"));
   await click('#pnSetup [data-act=su-d][data-v=mix]');
-  ok(await ev(`return document.querySelector('#pnSetup [data-act=su-mode][data-v=study]').getAttribute("aria-checked");`) === "true", "Practice mode preselected from the button");
+  ok(await ev(`return document.querySelector('#pnSetup [data-act=su-mode][data-v=study]').getAttribute("aria-checked");`) === "true", "Learning Mode preselected");
+  ok(await ev(`return document.querySelector('#pnSetup .su-sw').getAttribute("aria-checked") === "true" && document.querySelector('#pnSetup .su-qsrow .su-sv').textContent === "60 s";`) === true, "timer on by default, 60 s a question");
   ok(await small("#pnSetup") === "", "every sheet button is at least 44 px tall " + await small("#pnSetup"));
   ok(!DASH.test(await screenText()), "no em or en dash");
   await shots("sheet");
 
   // live counts
   await click('#pnSetup [data-act=su-type][data-v=img]');
-  ok(/8\s*questions match/.test(await text("#suStatus")) && await count("d", "3") === await ev(`return [0,5,10,15,20,25,30,35].filter(function(i){return i%3===2;}).length;`), "Image-based: 8 match; difficulty counts follow the type");
+  ok(/^8\s*questions/.test(await text("#suStatus")) && await count("d", "3") === await ev(`return [0,5,10,15,20,25,30,35].filter(function(i){return i%3===2;}).length;`), "Image-based: 8; difficulty counts follow the type");
   await click('#pnSetup [data-act=su-d][data-v="3"]');
   const hardImg = await ev(`return [0,5,10,15,20,25,30,35].filter(function(i){return i%3===2;}).length;`);
-  ok(new RegExp(hardImg + "\\s*questions? match").test(await text("#suStatus")), "Image-based and Hard: " + await text("#suStatus"));
-  // Native pass 2 (owner 2026-10-09): an option that would leave no question cannot be chosen.
+  ok(new RegExp("^" + hardImg + "\\s*questions?").test(await text("#suStatus")), "Image-based and Hard: " + await text("#suStatus"));
   ok(await ev(`var b=document.querySelector('#pnSetup [data-act=su-seen][data-v=bm]'); return b.disabled && b.getAttribute("aria-checked")==="false";`) === true, "an option with 0 questions (Bookmarked) is disabled");
   await click('#pnSetup [data-act=su-seen][data-v=bm]');
-  ok(new RegExp(hardImg + "\\s*questions? match").test(await text("#suStatus")) && await ev(`return document.getElementById("suGo").disabled;`) === false, "tapping it changes nothing; Start stays on: " + await text("#suStatus"));
+  ok(new RegExp("^" + hardImg + "\\s*questions?").test(await text("#suStatus")) && await ev(`return document.getElementById("suGo").disabled;`) === false, "tapping it changes nothing; Start stays on: " + await text("#suStatus"));
   await shots("sheet-empty");
   await click('#pnSetup [data-act=su-seen][data-v=new]');
   await click('#pnSetup [data-act=su-d][data-v=mix]');
   await click('#pnSetup [data-act=su-n][data-v="10"]');
-  ok(/Start 8 questions/.test(await text("#suGo")) && /Only 8 questions match/.test(await screenText()), "count capped by the pool, said in words");
-  // stepper
+  ok(/^8 questions/.test(await text("#suStatus")) && /Only 8 questions match/.test(await screenText()), "count capped by the pool, said in words");
   await click('#pnSetup [data-act=su-dec]');
   ok(await text("#suN") === "5", "stepper: 10 down to 5");
   await click('#pnSetup [data-act=su-inc]');
   ok(await text("#suN") === "8" || await text("#suN") === "10", "stepper up stays within the pool: " + await text("#suN"));
   await click('#pnSetup [data-act=su-n][data-v="10"]');
-  // timed test, 30 s a question
+  // Test Mode, 30 s a question (the earlier strict-timer step: 60 -> 45 -> 30)
   await click('#pnSetup [data-act=su-mode][data-v=exam]');
-  ok(await ev(`return !document.querySelector('#pnSetup [data-act=su-timer][data-v=off]') && document.querySelector('#pnSetup [data-act=su-timer][data-v=set]').getAttribute("aria-checked")==="true";`) === true, "a timed test has no Off; Whole set at exam pace by default");
-  await click('#pnSetup [data-act=su-timer][data-v=q]');
-  await click('#pnSetup [data-act=su-qs][data-v="30"]');
+  ok(await ev(`return document.querySelector('#pnSetup [data-act=su-timer][data-v=q]').getAttribute("aria-checked")==="true" && /Start test/.test(document.getElementById("suGo").textContent);`) === true, "Test Mode keeps the timer per question; Start test");
+  await click('#pnSetup [data-act=su-qdec]'); await click('#pnSetup [data-act=su-qdec]');
   await ev(`document.querySelector("#pnSetup .su-body").scrollTop = 99999; return 1;`);
   await shots("sheet-timer");
   await click("#suGo");
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q") && !document.getElementById("pnSetup");`, 5000), "Start closes the sheet and starts the set");
   const run = JSON.parse(await ev(`var r=PREP._st.run; return JSON.stringify({n:r.items.length, mode:r.mode, qsec:r.qsec, limit:r.limit, img:r.items.every(function(x){return x.img && x.imgPlace==="stem";})});`));
-  ok(run.n === 8 && run.mode === "exam" && run.qsec === 30 && run.limit === 0 && run.img, "the set: 8 image questions, timed, 30 s a question: " + JSON.stringify(run));
-  ok(await until(`return /^0:(2\\d|30)$/.test(document.getElementById("pnClock").textContent);`, 3000), "the clock counts this question down from 0:30");
+  ok(run.n === 8 && run.mode === "exam" && run.qsec === 30 && run.limit === 0 && run.img, "the set: 8 image questions, Test Mode, 30 s a question: " + JSON.stringify(run));
+  ok(await until(`return document.getElementById("pnClock").textContent === "0:30";`, 3000), "the clock shows 0:30");
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-yq-fig img");`) === true, "the image shows with the stem");
   await shots("runner-image");
-  // ---- per-question clock (owner bug 2026-10-09): a fake clock moves Date.now; the runner counts from timestamps
-  await ev(`if (!window.__rn) { window.__rn = Date.now; window.__off = 0; Date.now = function () { return window.__rn() + window.__off; }; } return 1;`);
-  const adv = (ms) => ev(`window.__off += ${ms}; return 1;`);
-  const left = (i) => ev(`var r = PREP._st.run; return Math.ceil(PREP._pure.qcLeft(r.qc, ${i}, Date.now()) / 1000);`);
+  // ---- per-question clock: a test clock (SMD_PREP_NOW) moves in 2 s steps
+  await ev(`window.__off = 1000; window.SMD_PREP_NOW = function () { return window.__off; }; return 1;`);
+  await ev(`PREP._st.run.qc.on = -1; document.querySelector("#smdPrep [data-act=qgrid]").click(); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep .pn-qgrid");`, 2000);
+  await click('#smdPrep [data-act=goq][data-i="0"]');
+  await until(`return !!document.querySelector("#smdPrep .pn-q") && PREP._st.run.qc.on === 0;`, 2000);
+  const adv = async (ms) => { for (let d = 0; d < ms; d += 2000) { await ev(`window.__off += ${Math.min(2000, ms - d)}; return 1;`); await sleep(330); } };
+  const left = (i) => ev(`var r = PREP._st.run; return Math.ceil(PREP._pure.qcLeft(r.qc, ${i}, window.__off) / 1000);`);
+  const q0 = await left(0);
   await adv(10000);
-  ok(await until(`return /^0:(1[6-9]|20)$/.test(document.getElementById("pnClock").textContent);`, 3000), "10 s on question 1: the clock shows about 0:20: " + await text("#pnClock"));
+  ok(await left(0) === q0 - 10 && await text("#pnClock") === "0:" + String(q0 - 10).padStart(2, "0"), "10 s on question 1: 10 s fewer, said in the bar: " + await text("#pnClock"));
   await click("#smdPrep [data-act=next]");
-  ok(await until(`return PREP._st.run.i === 1;`, 2000) && /^0:(2[7-9]|30)$/.test(await text("#pnClock")), "question 2 starts on its own 0:30: " + await text("#pnClock"));
-  await adv(5000);
+  ok(await until(`return PREP._st.run.i === 1;`, 2000) && await text("#pnClock") === "0:30", "question 2 starts on its own 0:30: " + await text("#pnClock"));
+  await adv(6000);
   await click("#smdPrep [data-act=prev]");
   const back0 = await left(0), q1 = await left(1);
-  ok(await until(`return PREP._st.run.i === 0;`, 2000) && back0 >= 15 && back0 <= 20 && q1 >= 22 && q1 <= 25, "back on question 1 the clock resumes where it was, not at 0:30 (q1 " + back0 + " s, q2 " + q1 + " s)");
-  ok(/^0:(1[5-9]|20)$/.test(await text("#pnClock")), "and the figure says so: " + await text("#pnClock"));
+  ok(await until(`return PREP._st.run.i === 0;`, 2000) && back0 === q0 - 10 && q1 === 24, "back on question 1 the clock resumes where it was, not at 0:30 (q1 " + back0 + " s, q2 " + q1 + " s)");
   await click("#smdPrep [data-act=qgrid]");
   await until(`return !!document.querySelector("#smdPrep .pn-qgrid");`, 2000);
-  await adv(60000);
-  ok(await ev(`return PREP._st.run.qc.on;`) === -1 && Math.abs(await left(0) - back0) <= 2, "the question grid stops the clock: a minute there costs nothing");
+  await adv(30000);
+  ok(await ev(`return PREP._st.run.qc.on;`) === -1 && await left(0) === back0, "the question grid stops the clock: 30 s there cost nothing");
   await click('#smdPrep [data-act=goq][data-i="0"]');
   await until(`return !!document.querySelector("#smdPrep .pn-q") && PREP._st.run.i === 0;`, 2000);
-  await adv(25000);
-  ok(await until(`return PREP._st.run.i === 1 && PREP._st.run.qc.out[0];`, 3000), "per question in a timed test: the time runs out, the question locks and the test moves on");
+  await adv(back0 * 1000 + 2000);
+  ok(await until(`return PREP._st.run.i === 1 && PREP._st.run.qc.out[0];`, 3000), "Test Mode: the time runs out, the question locks and the test moves on");
   ok(await ev(`return PREP._st.run.ans[0];`) === -1, "the timed-out question stays unanswered");
   await click("#smdPrep [data-act=prev]");
   ok(await until(`return PREP._st.run.i === 0 && !!document.querySelector("#smdPrep .pn-timeup");`, 2000), "going back shows it locked: Time up");
   ok(/Time up/.test(await text("#smdPrep .pn-timeup")) && await ev(`return [].every.call(document.querySelectorAll("#smdPrep .pn-opt"), function (b) { return b.disabled; });`) === true, "every option is disabled");
-  ok(await text("#pnClock") === "0:00" && await ev(`return document.querySelector("#smdPrep .pn-clockw").classList.contains("over");`) === true, "its clock reads 0:00");
-  await ev(`PREP._st.run.items[0] && document.querySelector('#smdPrep .pn-opt[data-k="1"]').click(); return 1;`);
+  ok(await text("#pnClock") === "0:00" && await ev(`return document.querySelector("#smdPrep .pn-qck").getAttribute("data-lvl") === "out" && document.querySelector("#pnTl").getAttribute("data-lvl") === "out";`) === true, "its clock reads 0:00, the line is out");
+  await ev(`document.querySelector('#smdPrep .pn-opt[data-k="1"]').click(); return 1;`);
   ok(await ev(`return PREP._st.run.ans[0];`) === -1, "a tap on a locked option answers nothing");
   await shots("runner-timeup");
   await click("#smdPrep [data-act=qgrid]");
@@ -222,42 +229,50 @@ try {
   await shots("grid-timeup");
   await click('#smdPrep [data-act=goq][data-i="1"]');
   await until(`return PREP._st.run.i === 1 && !!document.querySelector("#smdPrep .pn-q");`, 2000);
-  // the app goes to the background for 40 s and comes back: the visibility event charges the gap at once
+  // away (a frozen page, the phone locked): the clock stops, nothing is charged; back: it goes on
+  const before1 = await left(1);
+  await ev(`document.dispatchEvent(new Event("freeze")); return 1;`);
   await adv(40000);
-  await ev(`document.dispatchEvent(new Event("visibilitychange")); return 1;`);
-  ok(await until(`return PREP._st.run.i === 2 && PREP._st.run.qc.out[1];`, 2000), "back from the background: question 2's time is gone, it locks and the test moves on");
+  ok(await left(1) === before1 && await ev(`return PREP._st.run.i === 1 && !PREP._st.run.qc.out[1];`) === true, "40 s away cost nothing (owner 2026-10-10: the timer pauses in the background)");
+  await ev(`document.dispatchEvent(new Event("resume")); return 1;`);
+  await adv(4000);
+  ok(await left(1) === before1 - 4, "back: it runs again");
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-last]');`, 5000), "back on the module: Start with last settings is offered");
-  ok(/8|10 questions/.test(await text('#smdPrep [data-act=su-last]')) && /image-based/.test(await text('#smdPrep [data-act=su-last]')) && /30 s a question/.test(await text('#smdPrep [data-act=su-last]')), "it says what it will start: " + await text('#smdPrep [data-act=su-last]'));
+  ok(/8|10 questions/.test(await text('#smdPrep [data-act=su-last]')) && /image-based/.test(await text('#smdPrep [data-act=su-last]')) && /test mode, 30 s a question/.test(await text('#smdPrep [data-act=su-last]')), "it says what it will start: " + await text('#smdPrep [data-act=su-last]'));
   await shots("module-last");
   // remembered: the sheet opens on the same choice
   await click('#smdPrep [data-act=start][data-k=study]');
   ok(await until(sheetOpen, 5000), "sheet again");
-  ok(await ev(`return ["su-type=img","su-seen=new","su-n=10","su-timer=q","su-qs=30"].every(function(k){var p=k.split("="); var b=document.querySelector('#pnSetup [data-act="'+p[0]+'"][data-v="'+p[1]+'"]'); return b && b.getAttribute("aria-checked")==="true";});`) === true, "the last choice for this module is remembered");
-  ok(await ev(`return document.querySelector('#pnSetup [data-act=su-mode][data-v=study]').getAttribute("aria-checked");`) === "true", "the button pressed (Practice) sets the mode");
+  ok(await ev(`return ["su-type=img","su-seen=new","su-n=10","su-timer=q","su-mode=exam"].every(function(k){var p=k.split("="); var b=document.querySelector('#pnSetup [data-act="'+p[0]+'"][data-v="'+p[1]+'"]'); return b && b.getAttribute("aria-checked")==="true";}) && document.querySelector('#pnSetup .su-qsrow .su-sv').textContent === "30 s";`) === true, "the last choice is remembered (filters for the module, mode and timer for the device)");
   // back closes the sheet first
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !document.getElementById("pnSetup") && !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 3000), "back closes the sheet and stays on the module");
   // one tap
   await click('#smdPrep [data-act=su-last]');
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q") && PREP._st.run.items.length === 8 && !document.getElementById("pnSetup");`, 5000), "Start with last settings: one tap, no sheet");
-  // practice: per-question ring, no auto-advance
+  // Learning Mode: at 0 the answer shows and it waits for Next
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 3000);
   await click('#smdPrep [data-act=start][data-k=study]'); await until(sheetOpen, 5000);
+  await click('#pnSetup [data-act=su-mode][data-v=study]');
+  await more();
   await click('#pnSetup [data-act=su-type][data-v=all]');
   await click("#suGo");
-  ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 5000) && await ev(`return PREP._st.run.mode === "study" && PREP._st.run.qsec === 30 && !!document.querySelector("#smdPrep .pn-acts #pnClock");`) === true, "practice keeps the ring beside the bookmark");
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 5000) && await ev(`return PREP._st.run.mode === "study" && PREP._st.run.qsec === 30 && !!document.querySelector("#smdPrep .pn-qprog #pnClock") && !!document.getElementById("pnTl");`) === true, "Learning Mode: the figure beside the bookmark and the line under the header");
   await shots("runner-practice-ring");
-  await ev(`window.__off += 40000; return 1;`);
-  ok(await until(`return PREP._st.run.i === 1 && PREP._st.run.qc.out[0] && PREP._st.run.ans[0] === -1;`, 3000), "practice is strict too: the time runs out, the question locks unanswered and the set moves on");
+  await adv(32000);
+  ok(await until(`return PREP._st.run.i === 0 && PREP._st.run.qc.out[0] && PREP._st.run.ans[0] === -1 && !!document.querySelector("#smdPrep .pn-verdict.pn-vtu");`, 3000), "Learning Mode: the time runs out, Time up with the answer, it waits on the question");
+  await click("#smdPrep [data-act=next]");
+  await until(`return PREP._st.run.i === 1;`, 2000);
   // answer one wrong and bookmark it (the timed-out one counts as not answered), for bookmarks and mistakes
   await ev(`var it=PREP._st.run.items[PREP._st.run.i]; document.querySelector('#smdPrep .pn-opt[data-k="'+((it.a+1)%4)+'"]').click(); return 1;`);
-  ok(await ev(`return PREP._st.run.qc.on;`) === -1, "an answered practice question stops its clock");
+  ok(await ev(`return PREP._st.run.qc.on;`) === -1, "an answered question stops its clock");
   await click("#smdPrep [data-act=bookmark]");
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 3000);
   await click('#smdPrep [data-act=start][data-k=study]'); await until(sheetOpen, 5000);
+  await more();
   ok(await count("seen", "wrong") === 2 && await count("seen", "bm") === 1 && await count("seen", "new") === 38, "repeat counts follow the store: 2 incorrect (one timed out), 1 bookmarked, 38 new: " + [await count("seen", "wrong"), await count("seen", "bm"), await count("seen", "new")]);
   await ev(`PREP.back(); return 1;`);
 
@@ -266,19 +281,21 @@ try {
   await until(`return !!document.querySelector('#smdPrep [data-act=su-subject]');`, 5000);
   await click('#smdPrep [data-act=su-subject]');
   ok(await until(sheetOpen, 10000) && /Anatomy/.test(await text("#pnSetup .su-head")), "the subject opens the sheet over its modules");
+  await more();
   ok(await count("type", "all") >= 40, "the subject pool spans its modules: " + await count("type", "all"));
   await ev(`PREP.back(); PREP.back(); return 1;`);
   await until(`return !!document.querySelector('#smdPrep [data-act=bookmarks]');`, 5000);
   await click('#smdPrep [data-act=bookmarks]');
   await until(`return !!document.querySelector('#smdPrep [data-act=practicebm]');`, 5000);
   await click('#smdPrep [data-act=practicebm]');
-  ok(await until(sheetOpen, 5000) && /1\s*question matches/.test(await text("#suStatus")), "bookmarks open the sheet: " + await text("#suStatus"));
+  ok(await until(sheetOpen, 5000) && /^1\s*question\b/.test(await text("#suStatus")), "bookmarks open the sheet: " + await text("#suStatus"));
   await ev(`PREP.back(); PREP.back(); return 1;`);
   await until(`return !!document.querySelector('#smdPrep [data-act=mistakes]');`, 5000);
   await click('#smdPrep [data-act=mistakes]');
   await until(`return !!document.querySelector('#smdPrep [data-act=mpractice]');`, 5000);
   await click('#smdPrep [data-act=mpractice]');
-  ok(await until(sheetOpen, 5000) && await ev(`return !document.querySelector('#pnSetup [data-act=su-seen]');`) === true && /2\s*questions? match/.test(await text("#suStatus")), "My mistakes opens the sheet without the repeat row (the wrong one and the timed-out one): " + await text("#suStatus"));
+  await more();
+  ok(await until(sheetOpen, 5000) && await ev(`return !document.querySelector('#pnSetup [data-act=su-seen]');`) === true && /^2\s*questions?/.test(await text("#suStatus")), "My mistakes opens the sheet without the repeat row (the wrong one and the timed-out one): " + await text("#suStatus"));
   await ev(`PREP.back(); PREP.back(); return 1;`);
   await until(`return !!document.querySelector('#smdPrep [data-act=custom]');`, 5000);
   await click('#smdPrep [data-act=custom]');
@@ -290,9 +307,10 @@ try {
 
   // ---- result review filters and saved practice sets (owner 2026-10-09)
   await click('#pnSetup [data-act=su-mode][data-v=study]');
+  await more();
   await click('#pnSetup [data-act=su-type][data-v=all]');
   await click('#pnSetup [data-act=su-seen][data-v=all]').catch(() => {});
-  await click('#pnSetup [data-act=su-timer][data-v=off]');
+  await timerOff();
   await click('#pnSetup [data-act=su-n][data-v="10"]');
   await click("#suGo");
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q") && PREP._st.run && PREP._st.run.items.length === 10 && PREP._st.run.save === "custom";`, 8000), "a 10-question custom practice set starts and is marked to be saved");
@@ -375,10 +393,10 @@ try {
   await click('#pcDecks [data-act=c-open]');
   await until(`return !!document.querySelector('#pcDeckView [data-act=c-prac]');`, 5000);
   await click('#pcDeckView [data-act=c-prac]');
-  ok(await until(sheetOpen, 5000) && await count("type", "img") === 2, "practising the deck opens the sheet; 2 image-based questions");
+  ok(await until(sheetOpen, 5000) && (await more(), await count("type", "img")) === 2, "practising the deck opens the sheet; 2 image-based questions");
   await click('#pnSetup [data-act=su-type][data-v=img]');
   await click('#pnSetup [data-act=su-mode][data-v=study]');
-  await click('#pnSetup [data-act=su-timer][data-v=off]');
+  await timerOff();
   await click("#suGo");
   ok(await until(`var i=document.querySelector("#smdPrep .pn-yq-fig img"); return !!i && /^data:image\\//.test(i.getAttribute("src")) && i.naturalWidth > 0;`, 5000), "the deck's image question shows its image with the stem");
   ok(/(X-ray|smear) shown/.test(await text("#smdPrep .pn-q")), "the stem refers to the image");

@@ -161,6 +161,8 @@ try {
   await until(`return !!document.querySelector("#pnPlanSheet .pl-w");`, 3000);
   await click("#pnPlanSheet .pl-w .pn-btn");
   ok(await until(`return !document.getElementById("pnPlanSheet") && !!document.querySelector("#smdPrep #pnModPanel");`, 5000), "the action opens that module");
+  // prep60: the module asks how to practise (mode sheet); back closes it, then leaves the module.
+  if (await until(`return !!document.getElementById("pnSetup");`, 3000)) await ev(`PREP.back(); return 1;`);
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.querySelector("#smdPrep .pl-hero");`, 3000);
 

@@ -1607,3 +1607,32 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
   .pn-root .pn-seg-th { transition: none; }
   .pn-root :is(.pn-qd-b, .pn-subs > .pn-tile) { transition: none; }
 }
+
+/* ---- Timer box (2026-10-10, prep59): the per-question line, its figure, the time-up verdict, the Tests tab ----
+   The line spans the whole width under the runner's header. Its fill is scaled from the left (transform only) by a Web
+   Animation; data-lvl sets the colour: green over half the time, amber to 20%, red under 20% (danger token, at least 3:1
+   on the page in both themes; the figure beside it uses the same tokens as text, 4.5:1). Colour is never the only cue:
+   the seconds show in the bar and the live region speaks at 20%, 10 s and 0. */
+.pn-root > .pn-tl { position: relative; z-index: 1; flex: 0 0 auto; width: 100%; height: 4px; margin: -2px 0 8px; background: color-mix(in srgb, var(--pn-text) 10%, transparent); overflow: hidden; }
+.pn-root .pn-tl-f { display: block; width: 100%; height: 100%; transform-origin: 0 50%; background: var(--pn-ok); border-radius: 0 2px 2px 0; will-change: transform;
+  transition: background-color var(--pn-d-base) ease; }
+.pn-root .pn-tl[data-lvl="mid"] .pn-tl-f { background: var(--pn-warn); }
+.pn-root .pn-tl[data-lvl="low"] .pn-tl-f, .pn-root .pn-tl[data-lvl="out"] .pn-tl-f { background: var(--pn-bad); }
+.pn-root .pn-qck { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px; min-width: 56px; justify-content: flex-end; padding: 0;
+  color: var(--pn-text); font-family: var(--pn-num); font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -.005em; transition: color var(--pn-d-base) ease; }
+.pn-root .pn-qck svg { color: var(--pn-mut); transition: color var(--pn-d-base) ease; }
+.pn-root .pn-qck[data-lvl="low"], .pn-root .pn-qck[data-lvl="out"], .pn-root .pn-qck[data-lvl="low"] svg, .pn-root .pn-qck[data-lvl="out"] svg { color: var(--pn-bad); }
+.pn-root .pn-qck[data-lvl="mid"] svg { color: var(--pn-warn); }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-tl-f, .pn-root .pn-qck, .pn-root .pn-qck svg { transition: none; } }
+/* Learning Mode, time ran out: the verdict is amber, not the red of a wrong answer */
+.pn-root .pn-fb .pn-verdict.pn-vtu { color: var(--pn-warn); }
+.pn-root .pn-fb .pn-verdict.pn-vtu .pn-vb { background: var(--pn-warn); }
+/* Result: time a question took, on the score card */
+.pn-root .pn-tstat { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin-top: 2px; font-size: 13.5px; color: var(--pn-mut); }
+.pn-root .pn-tstat b { font-family: var(--pn-num); font-variant-numeric: tabular-nums; font-weight: 700; color: var(--pn-text); }
+.pn-root .pn-score .pn-tstat { color: var(--pn-hero-mut, var(--pn-mut)); }
+.pn-root .pn-score .pn-tstat b { color: var(--pn-hero-ink, var(--pn-text)); }
+/* Tests tab: the Tests | QBank control sits under the bar like a subject's filters */
+.pn-root .pn-ttseg { padding-top: 4px; }
+.pn-root .pn-qbank .pn-group { margin-bottom: 4px; }
+.pn-root .pn-qbs { margin: -4px 2px 10px; font-variant-numeric: tabular-nums; }

@@ -171,12 +171,15 @@ test("remembered per scope; sel normalised; timer to runner options; one-line su
   assert.ok(S.hasLast(m, "module", "ana-x") && !S.hasLast(m, "deck", "d1"));
   const big = {}; for (let i = 0; i < 60; i++) Object.assign(big, S.remember(big, "k" + i, "", {}));
   assert.ok(Object.keys(S.remember(big, "z", "", {})).length <= 40, "40 entries at most");
-  assert.deepEqual(S.normSel({ type: "bogus", n: 900, mode: "x", timer: "q", qs: 3 }), { type: "all", seen: "mix", d: "mix", n: 20, mode: "study", timer: "q", qs: 60, mins: 0 });
-  assert.deepEqual(S.runOpts({ mode: "exam" }, 25), { limit: 1500 }, "a timed test without a timer runs at exam pace, 1 min a question");
+  assert.deepEqual(S.normSel({ type: "bogus", n: 900, mode: "x", timer: "q", qs: 3 }), { type: "all", seen: "mix", d: "mix", n: 20, mode: "study", timer: "q", qs: 60, mins: 0, v: 2 });
+  assert.deepEqual(S.runOpts({ mode: "exam", timer: "off" }, 25), { untimed: true }, "Test Mode with the timer off has no clock");
+  assert.deepEqual(S.runOpts({ mode: "exam" }, 25), { qsec: 60 }, "the timer is on by default: 60 s a question");
   assert.deepEqual(S.runOpts({ mode: "exam", timer: "set", mins: 12 }, 25), { limit: 720 });
+  assert.deepEqual(S.runOpts({ mode: "exam", timer: "set" }, 25), { limit: 1500 }, "whole set at exam pace, 1 min a question");
   assert.deepEqual(S.runOpts({ mode: "study", timer: "q", qs: 30 }, 25), { qsec: 30 });
-  assert.deepEqual(S.runOpts({ mode: "study" }, 25), {});
-  assert.equal(S.summary({ n: 30, seen: "new", d: "3", mode: "exam", timer: "q", qs: 45 }), "30 questions · new · hard · timed test, 45 s a question");
+  assert.deepEqual(S.runOpts({ mode: "study", timer: "off" }, 25), {});
+  assert.equal(S.summary({ n: 30, seen: "new", d: "3", mode: "exam", timer: "q", qs: 45 }), "30 questions · new · hard · test mode, 45 s a question");
+  assert.equal(S.summary({ n: 10, mode: "study", timer: "off" }), "10 questions · learning mode, no timer");
 });
 
 /* ---------- PDF images ---------- */

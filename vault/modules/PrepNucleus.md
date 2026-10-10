@@ -1432,3 +1432,61 @@ Owner: "Give every MCQ and lesson a unique ID, shareable, so friends can search 
 - **Residual risk (owner):** clinical photographs in PYQs show faces (no identifier text; a face itself was out of
   scope); 171 detections were held for a human rather than painted (mostly misreads); some scale bars, calipers and
   Doppler/depth scales remain as teaching content.
+
+## Tests tab, mode sheet and timer line (2026-10-10, branch `feat/prep-testtab`, prep60)
+Owner: "Test menu should contain both Tests and QBank modules (all subjects) and each module when open should ask
+Learning Mode ... and Test Mode ... and give Timer Option box (auto timer runs for every question; a long line moving
+and turning red when less than 20% time per question left). Default 60 seconds. Can be increased to 100."
+- **Tests tab** (`renderMocks`, still `HOST.screens.mocks`, so the glass bar's Tests tab, per-tab scroll and back are
+  unchanged): bar "Tests", a `.pn-seg` segmented control Tests | QBank (data-act `tt`, remembered in localStorage
+  `smd_prep_tt`, `#pnTests`). Tests = the mock panels and the PYQ row (NEET-PG), as before. QBank = Custom module,
+  Bookmarks, My mistakes rows and every subject of the exam as the Home tiles (`tile()`, same ring), with "N subjects ·
+  M MCQs". Home keeps its own grid. Home's Mock exam row (`mocks`) always opens the Tests section.
+- **Mode sheet** = the practice setup sheet (prep-setup.js), redrawn: "How do you want to practise?", two radio cards
+  Learning Mode (`study`) / Test Mode (`exam`), the timer box, the count, then type/repeat/difficulty behind one "Filter
+  questions" row (`su-more`, open when a filter is not the default), X close, one amber Start ("Start learning" / "Start
+  test") in the opaque footer. No parallel runner: Start calls the same `runQuestions` (study = practice engine with
+  feedback, exam = the timed-test engine with grid, flags, Submit, Result).
+- **Where it opens.** Opening a module (`module` / `solvenext` acts, from the QBank, Home subjects, Solve next, a deep
+  link `PREP.open({ query, n, mode })`) goes through `openModule`: the module screen is pushed and the
+  sheet opens over it (only with `setupOn()` and when the module has questions). Closing leaves the module screen
+  (lessons, cards, PYQs). Module panel with the sheet: Practise (opens it), Review N due (opens it set to Due for review),
+  Start with last settings. Subject, custom module, bookmarks, mistakes, PYQ paper subjects, a module's PYQs and Layer C
+  decks already used the sheet and get the same mode cards and timer box.
+- **Kept as their own flows (no mode sheet):** mock exams (their own whole-test timer and marking), the PYQ paper's
+  full Timed test and "Practice in paper order", Today's plan, Weak areas, lesson quick questions, Question of the day,
+  a search hit and a shared ID (one question: Learning Mode, no timer). `SMD_PREP_SETUP = false` (older suites) keeps the
+  old module panel (Practice N / Timed test) and no auto sheet.
+- **Timer box.** Switch on by default (`timer` "q"); Each question | Whole set; seconds stepper over `QSECS` [30, 45,
+  60, 70, 80, 90, 100], default 60, max 100. 30 and 45 stay because the strict-timer sheet (prep36) offered them (owner
+  rule: keep consistent). Off in Test Mode = untimed (`runOpts` -> `{ untimed: true }`). Choices are device-only, like
+  the rest of the setup sheet (localStorage `smd_prep_setup`, not synced); mode and timer come from the `"*"` entry
+  (the last choice anywhere, so the last mode is preselected), filters and count per scope. **Migration** (`migrate`,
+  saved entries without `v: 2`): per-question and whole-set choices kept (seconds snapped to the stepper, 120 -> 100);
+  a timed-test Off (it ran as whole set at exam pace) -> Whole set; a practice Off (the old default) -> on, 60 s.
+- **Clock** (prep.js `qcNew/qcStep/qcShow/qcPause/qcLeft/qcTick/qcLevel/qcAfter/qcStats`): one budget per question,
+  spent only while it is on screen, never reset (prep36 rule kept); `used[]` per question. Monotonic: `pnow()` =
+  `performance.now()` (`SMD_PREP_NOW` for tests). Visible time only: `syncClock` stops it when the runner is not on
+  top, the question is answered (Learning) or locked, the document is hidden or frozen (`visibilitychange`, `freeze`/
+  `resume`, `pagehide`/`pageshow`), or a `.pn-sheet-wrap` is a child of `#smdPrep` (Ask MaiK, share, Pro limit; a
+  MutationObserver on the root's children re-syncs). Backstop: a gap over `QC_GAP` 3 s between readings is not charged
+  (page frozen without an event). Ticks every 250 ms. This reverses prep36's "background time counts on return" on the
+  owner's new rule (no loss of time).
+- **At 0.** Test Mode: locked, unanswered, `qcAfter` = the next question after it with time left; none -> `finish()`
+  (the last question running out marks the test; no wrap to earlier skipped ones). Learning Mode: locked, recorded -1
+  (goes to My mistakes), the feedback shows with an amber "Time up / Not answered in time" verdict, the right answer,
+  the explanation and Ask MaiK; no auto-advance, Next waits.
+- **Line** (`tlHtml`/`tlSync`): `#pnTl` under the bar, full width, 4 px, `role=progressbar` (`aria-valuemax` = seconds,
+  `aria-valuenow`/`valuetext` = whole seconds left); fill scaled by one Web Animation (linear, compositor) from the
+  remaining fraction to 0, restarted on pause/resume/new question/drift over 150 ms. `data-lvl`: ok (> 50%, `--pn-ok`),
+  mid (to 20%, `--pn-warn`), low (strictly under 20%, `--pn-bad`), out. The figure `.pn-qck` in the bar (m:ss) takes the
+  same colour; `#pnTlLive` (polite) says "N seconds left" on entering red, "10 seconds left", "Time up". Reduced motion:
+  no animation, the fill steps with the whole seconds. The whole-set ring (`.pn-clockw`) is unchanged.
+- **Result:** `.pn-tstat` on the score card: average seconds a question (over the questions shown), timed-out count,
+  seconds allowed. Test Mode hides the Share button and the ID chip until the result (review keeps them).
+- **Tests:** `test/prep-qclock.test.mjs` (rewritten: fake clock, no reset, pause/resume, frozen gap, no drift, levels at
+  exactly 20%, Test Mode hand-over, stats), `test/prep-timerbox.test.mjs` (defaults, 30..100 steps, red seconds,
+  untimed test, migration, device-wide mode/timer), `test/prep-setup.test.mjs` (runOpts/summary), headless
+  `test/run-prep-testtab-ui.mjs` (Playwright Chrome + WebKit; SHOTS=<dir>), `test/run-prep-setup-ui.mjs` (rewritten for
+  the sheet and the new clock). Strings are English only (PrepNucleus has no locale files).
+- Not verified: a real iPhone/Android (screen lock pause, WKWebView Web Animations under load).
