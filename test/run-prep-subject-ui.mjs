@@ -7,7 +7,7 @@
  *     the column, from 700 px the last button in the row ends on the right edge.
  *  2. Learn shows only where the subject has lessons (Radiology NEET-SS: 2; Anatomy: none), opens a list grouped by module
  *     in module order, and a row opens the lesson reader; the module screen of a module with a lesson shows "Learn".
- *  3. Module counts are the v15 index counts (Radiology NEET-SS: 2621 in the hero, srd-cardiac-vascular 221).
+ *  3. Module counts are the v16 index counts (Radiology NEET-SS: 2621 in the hero, srd-cardiac-vascular 221).
  *  4. The exam is asked once: a fresh store opens onboarding with no Skip on the exam step; after it, home has no exam
  *     switcher, Settings shows the exam; a reopen goes straight home; Settings lists six exams (INI-SS among them) and a
  *     change there is kept.
@@ -134,8 +134,8 @@ try {
     await click(`#smdPrep [data-act=subject][data-s="ss-radiology"]`);
     ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 24 && !!document.querySelector("#smdPrep [data-act=l-subject]");`, 10000), "Radiology lists 24 modules and a Learn button" + at);
     await sleep(350);
-    ok(/2,?621 MCQs/.test(await ev(`return document.querySelector("#smdPrep .pn-subhead").textContent;`)), "the hero counts 2621 MCQs (bank v15)" + at);
-    ok(/221 MCQs/.test(await ev(`return document.querySelector('#smdPrep .pn-mod[data-m="srd-cardiac-vascular"]').textContent;`)), "srd-cardiac-vascular shows its v15 count (221)" + at);
+    ok(/2,?621 MCQs/.test(await ev(`return document.querySelector("#smdPrep .pn-subhead").textContent;`)), "the hero counts 2621 MCQs (bank v16)" + at);
+    ok(/221 MCQs/.test(await ev(`return document.querySelector('#smdPrep .pn-mod[data-m="srd-cardiac-vascular"]').textContent;`)), "srd-cardiac-vascular shows its v16 count (221)" + at);
     const al = await geo(ALIGN);
     ok(al === "", "Practise and Learn sit in the hero and module column" + (al ? ": " + al : "") + at);
     ok(/^\s*Learn\s*2 lessons\s*$/.test((await ev(`return document.querySelector("#smdPrep [data-act=l-subject]").textContent;`)).replace(/·/g, "")), "Learn counts 2 lessons" + at);
