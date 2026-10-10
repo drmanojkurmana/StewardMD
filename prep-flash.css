@@ -122,14 +122,14 @@ body.dark .pn-root .pk-peek { background: var(--pn-card); }
 .pn-root .pk-tint { position: absolute; inset: 0; z-index: 2; border-radius: var(--pn-r-lg); pointer-events: none; opacity: 0; }
 .pn-root .pk-tint.l { background: color-mix(in srgb, var(--pn-bad) 12%, transparent); box-shadow: inset 0 0 0 1.5px var(--pn-bad); }
 .pn-root .pk-tint.r { background: color-mix(in srgb, var(--pn-pri) 12%, transparent); box-shadow: inset 0 0 0 1.5px var(--pn-pri); }
-.pn-root .pk-tint.u { background: color-mix(in srgb, #5b82d6 12%, transparent); box-shadow: inset 0 0 0 1.5px #5b82d6; }
+.pn-root .pk-tint.u { background: color-mix(in srgb, var(--pn-info) 12%, transparent); box-shadow: inset 0 0 0 1.5px var(--pn-info); }
 .pn-root .pk-stamp { z-index: 3; top: -15px; padding: 5px 12px; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
 .pn-root .pk-stamp.l { transform: rotate(4deg); }
 .pn-root .pk-stamp.r { transform: rotate(-4deg); }
-.pn-root .pk-stamp.u { left: 50%; right: auto; transform: translateX(-50%); color: #4d7cf0; }
-body.dark .pn-root .pk-stamp.u { color: #8fb0ff; }
-.pn-root .pk-easy b { color: #3d6fe6; }
-body.dark .pn-root .pk-easy b { color: #8fb0ff; }
+.pn-root .pk-stamp.u { left: 50%; right: auto; transform: translateX(-50%); color: var(--pn-info); }
+
+.pn-root .pk-easy b { color: var(--pn-info); }
+
 .pn-root .pk-ring { position: relative; flex: 0 0 auto; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; }
 .pn-root .pk-ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
 .pn-root .pk-ring circle { fill: none; stroke-width: 3.5; }
