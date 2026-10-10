@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prep/item-quality/v1",
+  "title": "Item quality / eligibility sidecar record",
+  "description": "One record per existing bank item id, stored beside the bank (sidecar), never inside the verified production bank. Existing items start at status 'draft' (legacy) and are only FLAGGED; no retire/re-key without a recorded owner decision.",
+  "type": "object",
+  "required": ["item_id", "bank", "bank_version", "status", "history"],
+  "additionalProperties": false,
+  "properties": {
+    "item_id": {"type": "string", "description": "existing bank id / Share ID, unchanged"},
+    "bank": {"type": "string", "description": "e.g. v5 module, ss-radiology, overlay:medcov3, pyq:neetpg-2024"},
+    "bank_version": {"type": "string"},
+    "content_hash": {"type": "string", "description": "sha256 of normalised stem+options+key at time of check; a mismatch invalidates the record"},
+    "status": {"enum": ["draft", "automated_checks_passed", "requires_review", "approved", "rejected", "retired"]},
+    "eligible_for": {"type": "array", "items": {"type": "string"}, "description": "test types this item may enter"},
+    "learning_objective": {"type": ["string", "null"]},
+    "cognitive_level": {"enum": ["recall", "understanding", "application", "analysis", null]},
+    "item_format": {"enum": ["next_best_step", "diagnosis", "investigation_interpretation", "mechanism", "recall", "image", "other", null]},
+    "stem_type": {"enum": ["clinical_vignette", "investigation_based", "image_based", "direct_recall", null]},
+    "difficulty": {"type": "object", "properties": {"estimate": {"type": ["integer", "null"], "minimum": 1, "maximum": 4}, "method": {"type": "string"}, "empirical_p": {"type": ["number", "null"]}, "n": {"type": "integer"}}},
+    "key": {"type": "object", "required": ["value", "confidence"], "properties": {
+      "value": {"type": "integer"}, "confidence": {"enum": ["verified_human", "agreed_independent", "single_source", "disputed", "unknown"]},
+      "checks": {"type": "array", "items": {"type": "object", "properties": {"by": {"type": "string"}, "model": {"type": "string"}, "answer": {"type": ["integer", "null"]}, "agree": {"type": "boolean"}, "at": {"type": "string"}}}}}},
+    "rubric": {"type": "object", "description": "rule id -> pass|fail|flag|na, from nbems-item-rubric.json", "additionalProperties": {"enum": ["pass", "fail", "flag", "na"]}},
+    "explanation_score": {"type": "object", "description": "EXP-01..07 scores 0-2", "additionalProperties": {"type": "integer"}},
+    "duplicates": {"type": "array", "items": {"type": "object", "properties": {"item_id": {"type": "string"}, "kind": {"enum": ["exact", "near", "conceptual"]}, "score": {"type": "number"}}}},
+    "flags": {"type": "array", "items": {"type": "string"}},
+    "history": {"type": "array", "items": {"type": "object", "required": ["at", "by", "action"], "properties": {
+      "at": {"type": "string", "format": "date-time"}, "by": {"type": "string", "description": "tool name+version or human reviewer id"},
+      "action": {"enum": ["created", "checked", "flagged", "status_change", "key_change_proposed", "key_change_approved", "explanation_upgraded", "retired"]},
+      "from": {}, "to": {}, "reason": {"type": "string"}, "evidence": {"type": "string"}}}}
+  }
+}

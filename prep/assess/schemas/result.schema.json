@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prep/result/v1",
+  "title": "Test attempt result",
+  "description": "Stored locally (IndexedDB/store) and optionally synced. Records the blueprint's actual distribution and deviations. No national rank, percentile, readiness probability or predicted outcome fields; cohort fields only when cohort.n and method are present.",
+  "type": "object",
+  "required": ["attempt_id", "exam", "profile_version", "test_type", "started_at", "items", "score"],
+  "additionalProperties": false,
+  "properties": {
+    "attempt_id": {"type": "string"}, "idempotency_key": {"type": "string", "description": "daily10: exam+IST date, prevents duplicate completion on retry"},
+    "exam": {"type": "string"}, "profile_version": {"type": "string"}, "blueprint_id": {"type": "string"}, "blueprint_version": {"type": "string"},
+    "test_type": {"type": "string"}, "started_at": {"type": "string"}, "finished_at": {"type": ["string", "null"]},
+    "state": {"enum": ["in_progress", "submitted", "auto_submitted_timeout", "abandoned"]},
+    "items": {"type": "array", "items": {"type": "object", "required": ["item_id", "chosen"], "properties": {
+      "item_id": {"type": "string"}, "content_hash": {"type": "string"}, "chosen": {"type": ["integer", "null"]}, "correct": {"type": ["boolean", "null"]},
+      "ms": {"type": "integer"}, "marked": {"type": "boolean"}, "changed": {"type": "integer"}, "section": {"type": ["string", "null"]}}}},
+    "score": {"type": "object", "required": ["raw", "correct", "incorrect", "unanswered"], "properties": {
+      "raw": {"type": "number"}, "max": {"type": "number"}, "correct": {"type": "integer"}, "incorrect": {"type": "integer"}, "unanswered": {"type": "integer"},
+      "accuracy": {"type": "number"}, "avg_ms": {"type": "number"}, "scheme": {"type": "object", "description": "copy of profile.scoring used"}}},
+    "by_subject": {"type": "array", "items": {"type": "object"}}, "by_topic": {"type": "array", "items": {"type": "object"}}, "by_difficulty": {"type": "array", "items": {"type": "object"}},
+    "distribution": {"type": "object", "properties": {"planned": {"type": "object"}, "actual": {"type": "object"}, "deviations": {"type": "array", "items": {"type": "string"}}}},
+    "next_actions": {"type": "array", "items": {"type": "object", "properties": {"kind": {"type": "string"}, "target_id": {"type": "string"}, "why": {"type": "string"}}}},
+    "cohort": {"type": ["object", "null"], "properties": {"n": {"type": "integer"}, "method": {"type": "string"}, "percentile": {"type": ["number", "null"]}, "shown": {"type": "boolean"}, "min_n_rule": {"type": "string"}}}
+  }
+}

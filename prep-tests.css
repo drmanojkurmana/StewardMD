@@ -1,0 +1,56 @@
+/* PrepNucleus Tests 2 (prep-tests.js, flag smd_prep_tests2) and the locked-section runner parts in prep.js.
+   Same tokens as prep.css (Midnight / Navy / Prussian / Amber, no glow); light and dark come from the tokens. */
+.pn-root .pn-t2eb { font-size: 12.5px; font-weight: 650; letter-spacing: .02em; color: var(--pn-mut); text-transform: none; }
+.pn-root .pn-t2 { display: flex; flex-direction: column; gap: 12px; }
+.pn-root .pn-t2 > .pn-h { padding-top: 10px; }
+.pn-root .pn-t2h { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pn-root .pn-t2b { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; padding: 3px 9px; border-radius: var(--pn-r-pill); font-size: 12px; font-weight: 650; background: var(--pn-pri-soft); color: var(--pn-pri-ink); white-space: nowrap; }
+.pn-root .pn-t2b svg { width: 14px; height: 14px; }
+.pn-root .pn-t2b.prov { background: color-mix(in srgb, var(--pn-warn) 14%, transparent); color: var(--pn-warn); }
+.pn-root .pn-t2b.ok { background: var(--pn-ok-bg); color: var(--pn-ok); }
+.pn-root .pn-t2c .pn-btn, .pn-root .pn-t2d .pn-btn, .pn-root .pn-t2res .pn-btn { width: 100%; flex-wrap: wrap; row-gap: 0; }
+.pn-root .pn-t2last { flex: 1 0 100%; margin-top: -2px; padding-bottom: 6px; font-size: 12px; font-weight: 500; color: inherit; opacity: .72; }
+.pn-root .pn-btn:has(.pn-t2last) { padding-top: 6px; }
+.pn-root .pn-t2prev { align-self: flex-start; min-height: 44px; font-size: 14px; }
+.pn-root .pn-t2src { line-height: 1.45; }
+.pn-root .pn-t2res { border-color: var(--pn-c-amber); }
+.pn-root .pn-t2res .pn-h { padding-top: 2px; }
+.pn-root .pn-t2res .pn-navrow { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px; }
+.pn-root .pn-t2p .pn-ic.sm, .pn-root .pn-row .pn-ic.sm { width: 32px; height: 32px; }
+/* facts: a two-column definition grid, figures tabular */
+.pn-root .pn-t2f { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; margin: 0; }
+.pn-root .pn-t2f div { min-width: 0; }
+.pn-root .pn-t2f dt { font-size: 12.5px; color: var(--pn-mut); }
+.pn-root .pn-t2f dd { margin: 2px 0 0; font-weight: 650; font-size: 15px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.pn-root .pn-t2k { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-top: 4px; }
+.pn-root .pn-t2pre { display: flex; flex-direction: column; gap: 12px; }
+.pn-root .pn-t2secs { display: flex; flex-direction: column; border-top: 1px solid var(--pn-line); }
+.pn-root .pn-t2secs li { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--pn-line); font-size: 14px; font-variant-numeric: tabular-nums; }
+.pn-root .pn-t2secs li span { color: var(--pn-mut); }
+.pn-root .pn-t2dev.warn { border-color: color-mix(in srgb, var(--pn-warn) 45%, var(--pn-edge)); background: color-mix(in srgb, var(--pn-warn) 7%, var(--pn-card)); }
+.pn-root .pn-t2dev .pn-sec { padding-top: 0; }
+.pn-root .pn-t2dl { display: flex; flex-direction: column; gap: 6px; list-style: disc; padding-left: 18px; font-size: 14px; line-height: 1.45; }
+.pn-root .pn-t2pre .pn-small svg, .pn-root .pn-secp .pn-small svg, .pn-root .pn-t2r .pn-small svg { width: 14px; height: 14px; vertical-align: -2px; }
+.pn-root .pn-t2how { padding: 12px 14px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); margin-top: 12px; }
+.pn-root .pn-t2how summary { min-height: 28px; font-weight: 650; cursor: pointer; }
+.pn-root .pn-t2how[open] summary { margin-bottom: 8px; }
+.pn-root .pn-t2dist { display: flex; flex-direction: column; margin-top: 8px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.pn-root .pn-t2dist li { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-bottom: 1px solid var(--pn-line); }
+.pn-root .pn-t2r .pn-big { font-size: 40px; }
+/* locked sections: the strip under the timer line (done ones locked, the open one lit) */
+.pn-root .pn-secs { display: flex; gap: 6px; padding: 0 16px 8px; overflow-x: auto; scrollbar-width: none; flex: 0 0 auto; }
+.pn-root .pn-body > .pn-secs { padding: 4px 0 0; }
+.pn-root .pn-secs::-webkit-scrollbar { display: none; }
+.pn-root .pn-secs li { display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-width: 34px; height: 26px; padding: 0 8px; border-radius: var(--pn-r-pill); font-size: 12.5px; font-weight: 650; color: var(--pn-mut); background: var(--pn-s1); font-variant-numeric: tabular-nums; }
+.pn-root .pn-secs li.cur { background: var(--pn-pri); color: var(--pn-on-pri); }
+.pn-root .pn-secs li.done { background: transparent; box-shadow: inset 0 0 0 1px var(--pn-edge); }
+.pn-root .pn-secs li svg { width: 12px; height: 12px; }
+.pn-root .pn-secsum { display: flex; flex-direction: column; gap: 12px; }
+.pn-root .pn-secp .pn-h { padding-top: 0; }
+.pn-root .pn-secn { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 2px 0 0; }
+.pn-root .pn-secn div { padding: 10px 12px; border-radius: var(--pn-r-md); background: var(--pn-s1); }
+.pn-root .pn-secn dt { font-size: 12.5px; color: var(--pn-mut); }
+.pn-root .pn-secn dd { margin: 2px 0 0; font-family: var(--pn-num); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pn-root .pn-tls .pn-tl-f { transition: transform 1s linear; }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-tls .pn-tl-f { transition: none; } }
+@media (min-width: 700px) { .pn-root .pn-t2c .pn-btn { width: auto; } .pn-root .pn-t2k { grid-template-columns: repeat(6, minmax(0, 1fr)); } }

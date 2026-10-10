@@ -39,13 +39,16 @@ const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-
 // Share IDs (tools/prep-ids.mjs, prep-ids.js): v<n>/ids/index.json names the current shards (short cache); a shard
 // <two ID characters>-<6 hex content hash>.json is immutable (a changed shard gets a new name).
 const IDS_RE = /^v\d{1,3}\/ids\/(?:index|[0-9a-z]{2}-[0-9a-f]{6})\.json$/;
+// Item-quality sidecar (Tests 2 reader, prep-tests.js; schema prep/assess/schemas/item-quality.schema.json): quality/index.json
+// names the current per-subject files (short cache), quality/v<n>/<subject>.json is immutable. Absent = every visible item stays eligible.
+const QUALITY_RE = /^quality\/(?:index\.json|v\d{1,3}\/[a-z0-9-]{2,60}\.json)$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) || QUALITY_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {
@@ -61,7 +64,7 @@ export async function onRequestGet({ env, params }) {
   const headers = new Headers({
     "Content-Type": /\.webp$/.test(p) ? "image/webp" : /\.svg$/.test(p) ? "image/svg+xml" : "application/json; charset=utf-8",
     // manifest.json and the pyq/lessons/cards/ids index.json name the current files, so they may change; everything else is immutable
-    "Cache-Control": /(?:manifest|(?:pyq|lessons|cards|ids)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
+    "Cache-Control": /(?:manifest|(?:pyq|lessons|cards|ids|quality)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
     "X-Content-Type-Options": "nosniff",
   });
   // an SVG opened on its own runs no script and loads nothing
