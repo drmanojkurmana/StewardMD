@@ -380,3 +380,24 @@ test("bank stamps: a module cached before an in-place republish is fetched again
   const sh = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "scripts/build-www.sh"), "utf8");
   assert.match(sh, /manifest\.json" "\$WWW\/prep\/bank/, "the native bundle ships the manifest");
 });
+
+test("tide pass: question of the day is stable for a day, the self comparison counts only modules below", () => {
+  assert.equal(P.dayHash(20371, 7), P.dayHash(20371, 7), "same day, same pick");
+  assert.notEqual(P.dayHash(20371, 7), P.dayHash(20372, 7), "the next day moves on");
+  assert.ok(P.dayHash(20371, 7) >= 0 && Number.isInteger(P.dayHash(20371, 7)));
+  assert.equal(P.selfShare([40, 50, 60, 70, 80], 65), 60);
+  assert.equal(P.selfShare([40, 50, 60, 70, 80], 40), 0, "ties are not counted as below");
+  assert.equal(P.selfShare([], 50), 0);
+});
+
+test("tide pass: prep-tide.js loads after prep-motion.js, optional, and prep.js attaches, syncs and detaches it", () => {
+  const L = read("prep-loader.js"), J = read("prep.js"), T = read("prep-tide.js");
+  assert.match(L, /"prep-motion\.js", "prep-tide\.js"/);
+  assert.match(L, /"prep-tide\.js": 1/);
+  assert.match(J, /PREP_TIDE\.attach\(root\)/); assert.match(J, /PREP_TIDE\.sync\(root\)/); assert.match(J, /PREP_TIDE\.detach\(\)/);
+  assert.match(T, /prefers-reduced-motion/, "reduced motion draws one still frame");
+  assert.match(T, /visibilitychange/, "pauses when the page is hidden");
+  assert.match(T, /FRAME_MS = 1000 \/ 30/, "capped at 30 frames a second");
+  assert.match(T, /IDLE_MS = 10000/, "settles 10 s after the last interaction");
+  assert.doesNotMatch(T, /https?:\/\//, "no network: offline");
+});

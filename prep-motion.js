@@ -5,7 +5,7 @@
    - finish screens (set, test, battle, lesson, cards): the card fades in, its ring draws, a success haptic;
    - sheets rise on a spring; meters fill once on the first paint after a push; screens slide on a shared axis.
    Quiet pass (2026-10-10, owner: premium, no childish gamification): no confetti, balloons, sparkles, sky parallax,
-   tile tilt or spotlight, no counting numbers, no lift or shake on options. confetti() and balloons() stay in the API
+   tile tilt or spotlight, no lift or shake on options. Tide pass (prep50): the readiness figure counts up with its ring. confetti() and balloons() stay in the API
    as no-ops so callers keep working; a milestone is said in words on the card.
    Springs come from Motion (motion.dev, MIT, vendored at /vendor/motion/motion.js). The app may already hold an older
    Motion One build on window.Motion (OncoTree), so a modern build is evaluated privately and window.Motion is left alone.
@@ -65,11 +65,15 @@
       if (n.__pnMo) return;
       var c = n.classList;
       if (c.contains("pl-hero")) {
-        // The readiness bar fills once per open and score.
+        // Tide pass (prep50): the readiness ring draws once per open and score, the figure counts up with it (React
+        // Bits CountUp, ported: WAAPI on the stroke, the number read off the same clock) and the nucleus rides the arc.
         n.__pnMo = 1;
-        var key = "hero:" + (n.getAttribute("aria-label") || ""), bar = n.querySelector(".pl-sbar i");
-        var m = bar && /scaleX\(([\d.]+)\)/.exec(bar.getAttribute("style") || "");
-        if (!seen[key] && m && +m[1] > 0) anim(bar, { transform: ["scaleX(0)", "scaleX(" + m[1] + ")"] }, { duration: 0.6, ease: EASE, delay: 0.1 });
+        var key = "hero:" + (n.getAttribute("aria-label") || ""), ring = n.querySelector(".pl-ring"), nuc = n.querySelector(".pl-nuc");
+        if (ring && ring.querySelector(".rv") && !seen[key]) {
+          var to = (nuc && /rotate\(([\d.]+)deg\)/.exec(nuc.getAttribute("style") || "")) || null;
+          drawRing(ring, n.querySelector(".pl-num"), key);
+          if (to && nuc.animate) { try { nuc.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(" + to[1] + "deg)" }], { duration: 900, easing: "cubic-bezier(.23, 1, .32, 1)" }); } catch (e) {} }
+        }
         seen[key] = 1;
         return;
       }

@@ -263,12 +263,17 @@
     var when = dl == null ? "" : dl === 0 ? "Exam day" : plural(dl, "day", "days") + " to the exam";
     var line = rd.empty ? "Your first answers start it moving" : "How this is computed";
     var label = "Readiness " + rd.score + " of 100 for " + name + (when ? ", " + when : "") + ". " + line;
-    var days = dl == null ? '<span class="pl-dn pl-dn-none">Not set</span>' : dl === 0 ? '<span class="pl-dn">Today</span>' : '<span class="pl-dn">' + H.fmt(dl) + "<small>" + (dl === 1 ? "day" : "days") + "</small></span>";
-    return '<button type="button" class="pl-hero" data-act="p-why" aria-label="' + esc(label) + '">' +
-      '<span class="pl-hs" aria-hidden="true"><span class="pl-k">' + esc(name).replace(/-/g, "\u2011") + ' readiness</span><span class="pl-num">' + rd.score + "<small>/100</small></span></span>" +
-      '<span class="pl-hd" aria-hidden="true"><span class="pl-k">Exam in</span>' + days + "</span>" +
-      '<span class="pl-sbar" aria-hidden="true"><i style="transform:scaleX(' + (Math.max(0, Math.min(100, rd.score)) / 100).toFixed(3) + ')"></i></span>' +
-      '<span class="pl-hl" aria-hidden="true"><small>' + esc(line) + "</small>" + H.ico("chev") + "</span></button>";
+    // Tide pass (prep50): the readiness ring sits on the live background (prep-tide.js) with the nucleus, an amber dot
+    // riding the arc's end; the figure counts up with the ring the first time (prep-motion.js). Same data as before.
+    var sc = Math.max(0, Math.min(100, rd.score));
+    return '<button type="button" class="pl-hero pl-orb" data-act="p-why" aria-label="' + esc(label) + '">' +
+      '<span class="pl-ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle class="rt" cx="60" cy="60" r="50" pathLength="100"/>' +
+      (sc > 0 ? '<circle class="rv" cx="60" cy="60" r="50" pathLength="100" stroke-dasharray="' + sc + ' 100"/>' : "") +
+      '<g class="pl-nuc" style="transform:rotate(' + (sc * 3.6).toFixed(1) + 'deg)"><circle cx="110" cy="60" r="6.5"/></g></svg>' +
+      '<span class="pl-num">' + rd.score + "<small>/100</small></span></span>" +
+      '<span class="pl-hs" aria-hidden="true"><span class="pl-k">' + esc(name).replace(/-/g, "\u2011") + ' readiness</span>' +
+      '<span class="pl-hd">' + (dl == null ? '<span class="pl-dn pl-dn-none">Exam date not set</span>' : dl === 0 ? '<span class="pl-dn">Exam day</span>' : '<span class="pl-k">Exam in</span> <span class="pl-dn">' + H.fmt(dl) + "<small>" + (dl === 1 ? "day" : "days") + "</small></span>") + "</span>" +
+      '<span class="pl-hl"><small>' + esc(line) + "</small>" + H.ico("chev") + "</span></span></button>";
   }
   // Your progress: the secondary figures, from real data only (CORE.streak, today's answers, xpOf/levelOf).
   function progressHtml(h) {

@@ -1164,3 +1164,36 @@ best way of learning."
   `v1/lessons/media/<name>-h1.webp`; the five lessons moved to `r` 4 (`v4/lessons/<key>.json`, only that step's `src`
   changed); radbook-110050 still shows the labelled lung drawing as a plain figure (not an interaction). Staging and
   scripts: `$CLAUDE_JOB_DIR/tmp/owner1010/` (job c927630f).
+
+## Tide pass (2026-10-10, branch `feat/prep-marrow-ui`, prep52)
+- Owner: "use React Bits, best background, best buttons, best UI; Marrow screenshots for reference", then "don't copy
+  Marrow, get inspired: the menu, the structure, what we should have; make ours better, unique, a live background".
+  Marrow was used as a feature checklist only; the look stays the owner's palette.
+- **Tide** (`prep-tide.js`, `window.PREP_TIDE`, loaded after prep-motion.js, optional): React Bits **Grainient** ported
+  to one WebGL 1 triangle (no ogl, no React). Layer `#smdPrepTide.pn-root.pn-tidehost` sits under `#smdPrep` (z 884) and
+  paints the page colour; `#smdPrep` gets `.pn-tided` (transparent). The field fills the top region only (home
+  bar + 300 px, lists bar + 190, reading screens bar + 36), fades through a mask, moves up at 0.6x the body scroll,
+  stops once off screen. Half CSS-pixel resolution, DPR ignored, at most 30 fps (timer then rAF), paused when hidden,
+  settles 10 s after the last touch/scroll/key, one still frame under reduced motion, CSS gradient without WebGL.
+  Colours: dark Midnight/Prussian `#1a4074`/ember `#5e4a33`; light paper/`#cbdaef`/`#f8dfb6` (chosen so ink and
+  muted text keep 4.5:1 on every pixel). Grain is a 96 px noise tile made once (CSS).
+- Bar over the Tide: glass round buttons; solid frosted bar with a hairline once the body scrolls (`.pn-scr`).
+- Home: readiness **orb** (`heroHtml`, `.pl-orb`): ring + amber nucleus at the arc end, figure counts up with the ring
+  (prep-motion drawRing). Home bar right button is now **Menu** (`renderMenu`: exam and plan, Pro, downloads, stats,
+  bookmarks, mistakes, friends, accuracy); Downloads moved into it.
+- **Question of the day** (`#pnQotd`): `dayHash(day)` picks a module of the exam's subjects that is already on the phone
+  (IDB or memory, never a download), then a usable text-only item. Answer opens the runner in study mode already
+  answered (recorded normally); `smd_prep_qotd` keeps the day's answer (device only).
+- Subjects are tiles (2 a row; 1 under 360 CSS px, 3 from 700, 4 from 1000): icon disc ringed by modules completed.
+- Subject filters are a segmented control with a sliding thumb (`.pn-seg`, `--i/--n`, `.pn-seg-th`).
+- Module list: a timeline (rail between numbered nodes, amber after a completed module; off in the 2-column iPad list).
+- Results: split bar (right/wrong/not answered) and "This set among your modules" (smoothed curve of the student's own
+  module accuracies, 5+ answers each, at least 5 modules; `selfShare`). No peer data exists, so none is shown.
+- Review list rows carry a status number disc. Primary buttons get one specular sheen per press; Solve next, QOTD,
+  tiles and Up next light from the press point (SpotlightCard).
+- Not done on purpose: floating bottom tab bar (PrepNucleus has no tabs; a fake one would duplicate rows), per-option
+  % of other students on review (no such data).
+- Perf (Chrome trace, 390x844 DPR 3, 4x CPU throttle): ~22 draws/s, 0.7 ms per draw on the main thread (~1.6%),
+  GPU process +2.5 points over Tide off.
+- Tests changed on purpose: run-prep-ipad (subject tiles per row), run-prep-setup-ui (token prep52); new prep-app tests
+  (dayHash, selfShare, Tide wiring).

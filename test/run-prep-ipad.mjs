@@ -2,8 +2,8 @@
  * What must hold at each size (plan PrepNucleus-iPad-Confetti-MaikLines.md section 1.4):
  *  1. no horizontal overflow (document, root and body scrollWidth against clientWidth; both are window px here);
  *  2. reading screens keep the 720 px column (screen px = 720 x zoom); tabs and filters share the column's left edge;
- *  3. home: the Practise list is one column, two inside its card from 700 CSS px; subjects are rows, a grid of row
- *     cards at least 300 px wide from 700 CSS px; the module list goes 2 a row from a 900 px window;
+ *  3. home: the Practise list is one column, two inside its card from 700 CSS px; subjects are tiles (prep50): 1 a row
+ *     under 360 CSS px, 2 on a phone, 3 from 700, 4 from 1000 CSS px, each at least 150 px wide; the module list goes 2 a row from a 900 px window;
  *  4. from 820 px every sheet (setup, plan, Arena consent) is a centred panel no wider than 600 px, inside the window,
  *     its last button visible without scrolling the page;
  *  5. landscape lesson: the figure sits beside the text and ends above the bar; the bar's controls sit in the 720 column;
@@ -149,7 +149,9 @@ try {
     const wide = await ev(`return matchMedia("(min-width: 700px)").matches;`);
     const subs = await ev(COLS("#smdPrep #pnGrid")), grp = await ev(COLS("#smdPrep .pn-home > .pn-next + .pn-group"));
     const tileW = await ev(`return Math.round(document.querySelector("#smdPrep #pnGrid > .pn-tile").getBoundingClientRect().width / (parseFloat(document.documentElement.style.zoom)||1));`);
-    ok(grp === (wide ? 2 : 1) && subs >= 1 && (subs === 1 || tileW >= 300), `3. home: Practise ${wide ? 2 : 1} a row (${grp}), subject rows ${subs} a row at ${tileW} px` + at);
+    // Tide pass (prep50): subjects are tiles, 1 a row under 360 CSS px, 2 on a phone, 3 from 700, 4 from 1000; never under 150 px.
+    const cssW = await ev(`return Math.round(innerWidth / (parseFloat(document.documentElement.style.zoom)||1));`), wantSubs = cssW < 360 ? 1 : cssW < 700 ? 2 : cssW < 1000 ? 3 : 4;
+    ok(grp === (wide ? 2 : 1) && subs === wantSubs && tileW >= 150, `3. home: Practise ${wide ? 2 : 1} a row (${grp}), subject tiles ${subs} a row (want ${wantSubs}) at ${tileW} px` + at);
     ok(await geo(SMALL) === "", "6. home: 44 px targets " + (await geo(SMALL)) + at);
     await shot(tag, "home");
     if (SHOTS) { await ev(`var h=document.querySelector("#smdPrep .pn-home"), p=h.querySelectorAll(".pn-h"); for (var i=0;i<p.length;i++) if (/Practise/.test(p[i].textContent)) { h.scrollTop += p[i].getBoundingClientRect().top - h.getBoundingClientRect().top - 8; } return 1;`); await shot(tag, "home-tiles"); await ev(`document.querySelector("#smdPrep .pn-home").scrollTop = 0; return 1;`); }
