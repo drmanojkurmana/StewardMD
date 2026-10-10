@@ -35,6 +35,9 @@ body.dark .pn-root {
 .pn-root.pn-navon > .pn-body { padding-bottom: calc(var(--pnv-h) + var(--pnv-b) + 28px); scroll-padding-bottom: calc(var(--pnv-h) + var(--pnv-b) + 16px); }
 .pn-root.pn-navon > .pn-bar-brand > .pn-ib[data-act="menu"] { visibility: hidden; }
 
+/* The hidden bar sits below the screen (translated): with overflow hidden that is scrollable overflow, and focusing a
+   field in a sheet scrolled the whole overlay up by the bar's height (Ask MaiK test). clip never scrolls. */
+#smdPrep.pn-root { overflow: clip; }
 .pn-root .pnv {
   position: absolute; z-index: 4; left: 0; right: 0; bottom: var(--pnv-b);
   width: min(420px, calc(100% - 32px)); height: var(--pnv-h); margin: 0 auto; padding: 5px;

@@ -1192,7 +1192,7 @@ best way of learning."
 - Review list rows carry a status number disc. Primary buttons get one specular sheen per press; Solve next, QOTD,
   tiles and Up next light from the press point (SpotlightCard).
 - Not done on purpose: floating bottom tab bar (PrepNucleus has no tabs; a fake one would duplicate rows; superseded by the
-  owner's glass tab bar, prep54, below), per-option
+  owner's glass tab bar, prep55, below), per-option
   % of other students on review (no such data).
 - Perf (Chrome trace, 390x844 DPR 3, 4x CPU throttle): ~22 draws/s, 0.7 ms per draw on the main thread (~1.6%),
   GPU process +2.5 points over Tide off.
@@ -1202,7 +1202,50 @@ best way of learning."
 ## Footer fix 2026-10-10 (prep53)
 Feedback screen "Next question" was a sticky row with `bottom:10px` inside the body's 36px bottom padding and only a gradient behind it, so explanation text scrolled through a ~48px band under the button. Now the run body drops its bottom padding (`.pn-run:has(> .pn-qw > .pn-fb + .pn-navrow)`), the row is sticky `bottom:0` with safe-area padding, and its `::before` is an opaque `--pn-bg` plate with a hairline top border (no gradient). Test: `test/run-prep-footer-ui.mjs` (WebKit, 390/430/820/1180, light+dark). Other floating actions (plan sheet `.pn-sheet-act`, create `.pc-pgfoot`, setup `.su-act`, flash `.pk-bar`, lesson bar) already reach the bottom edge with a fade above; unchanged.
 
-## Floating glass tab bar (2026-10-10, branch `feat/prep-glassbar`, prep54)
+## Ask MaiK chat rework: fits the screen, answers like a chatbot, online 10 / phone unlimited (2026-10-10, branch `prep-ask-chat`, prep54)
+Owner (iPhone recording): "chat screen is hard, make it fit the screen, keep it sliding type only, pulled up on pressing
+Ask MaiK, and it doesn't answer like a chatbot ... MaiK offline can have unlimited questions. Online it's 10 max."
+- **Why it echoed.** Every follow-up went out with CHAT_SYSTEM "answer using ONLY the facts in the GROUNDING ... if not
+  covered reply exactly ...", and `teachChat` hid any reply naming a number or drug outside the stored text (the stored
+  explanation was shown instead). The model's safe move was to restate the stored explanation whatever was asked.
+  Now CHAT_SYSTEM (client `prep-teacher.js` = server `_prep-teach.js`, word for word) is a tutor that replies to the
+  student's LAST message in its own words, matched to the request (simple / like I'm 5 = everyday words + one analogy,
+  why an option, a mnemonic, a topic), never pastes the stored text, reads past typos, 3 to 6 sentences under about 100
+  words, plain text. Facts: the grounding is the source of truth (never contradicted); textbook knowledge may explain
+  the idea, no new doses, figures, cut-offs or guideline claims. `intentHint(last)` (same code both sides) adds one line
+  on HOW to answer to the TASK. The check still runs; a reply naming figures or drugs not in the stored text is shown
+  with one honest line "Not in this question's notes: X. Check before you rely on it." (`beyond`), not swapped.
+  `chatClean`: markdown marks out, "* " bullets to "- " (drawn as a list), dashes to commas. Phone model temperature 0.3
+  for chat (0 for the first answer). Server `CHAT_LIMITS.maxOut` 400. Live check on gemini-3.1-flash-lite (Vertex,
+  owner's two prompts + mnemonic + off-topic): conversational, analogy-led, never the stored text.
+- **Sheet.** Near-full bottom sheet (height 100% minus max(safe-top + 10px, 8%)), slides up (pn-up), drag down / grabber /
+  X closes. Header (mark 30, Ask MaiK, close); one bar: place switch + one status line ("7 of 10 left" online,
+  "Unlimited" on this phone); ONE scroll region: the question as a collapsed one-line chip ("Question 2 · You chose C ·
+  Answer C", tap shows stem + options, key marked), then the conversation (follows the newest message; a tall answer
+  shows from its top); composer pinned: three quick replies ("Explain simply", "Why not X?", "Give a mnemonic"; steps and
+  cards: "Give an example") and the box (16 px, 44 px send). Answers draw word by word (0.45 to 1.4 s, aria-busy, none
+  under reduced motion) after the typing dots. The per-answer note is only the tokens line (online) and the honest
+  line; the old "Answered online ... Checked ..." note and the footer counter are gone. Keyboard: `onVV` sizes the wrap
+  to `visualViewport` (iOS lays the keyboard over the page), `pa-kb` hides the grabber and quick replies, the box keeps
+  focus across a reply (composer nodes keyed so the DOM patch keeps the textarea). 700 px and up: centred panel
+  min(760px, 100%); iPad landscape side panel unchanged.
+- **Limits.** Online 10 student messages a chat: thread record `on` (count), `cid` (chat id), `nc` (new chat, opens
+  empty, no automatic ask); a retry or re-ask in the same place does not count again. Server: every kind may carry
+  `thread` (chat id) and `turn`; KV `prep:teach:th:<uid>:<thread>` counts ANSWERED asks (7 days), the 11th is 429
+  `chat-limit` before any gate or model call (failed calls and idempotent replays do not count; counts only, no text).
+  At 10: a card with Start a new chat and Continue on this phone (unlimited) (disabled with the reason when the phone
+  cannot), plus Continue in MaiK Assistant. On this phone: no counter, no cap. MaiK Token rules (`gateAndCount`
+  prep_tutor), the per-device daily cap in the router and the rate limit are unchanged. A new chat is a new id, so the
+  per-chat cap is per chat by design; MaiK Tokens stay the real budget.
+- **Hard local.** On this phone never switches to Online by itself any more (the old `ask()` and verdict callback did):
+  a phone or pack that cannot answer says so with "Ask online instead".
+- Tests: `test/prep-ask-chat.test.mjs` (limits, prompt parity, owner prompts with a mocked model, honest line),
+  `test/prep-teach-server.test.mjs` (chat-limit per chat id and user, failed/replay not counted, owner prompts through
+  the real route), headless `test/run-prep-ask-chat-ui.mjs` (390x844 and 375x667 fit, keyboard via a stubbed
+  visualViewport, one scroll region, chip collapsed, history in requests, 10 online then the card, server 429, new chat,
+  25 messages on this phone, no model = said plainly) and `test/run-prep-ask-ui.mjs`.
+
+## Floating glass tab bar (2026-10-10, branch `feat/prep-glassbar`, prep55)
 - Owner: "a floating liquid glass menu bar at the footer, more user friendly, accessible in the home screen". Explicit
   exception to the no-glass rule for this bar only. Marrow's pill bar was a structure reference only.
 - Files: `prep-nav.js` (`window.PREP_NAV`: `attach(root, host)` in `open()`, `sync(root)` at the end of every `paint()`,
@@ -1234,11 +1277,13 @@ Feedback screen "Next question" was a sticky row with `bottom:10px` inside the b
 - Motion: pill = transform on the soft spring (retargets mid-flight), drop stretches 1.14/.88 while travelling, icon
   sinks .86 on press; reduced motion = no travel, no stretch, no press scale. Reduced transparency / more contrast =
   solid card bar with a hairline. Haptic: `data-tgl` -> haptics.js selection tick (native only).
+- `#smdPrep` is `overflow: clip` (prep-nav.css): the hidden bar is translated below the screen, and with `hidden` that
+  overflow was scrollable, so focusing a field in a sheet scrolled the whole overlay up by ~88 px (caught by run-prep-ask-chat-ui).
 - Body padding while shown: bar 64 + float `max(12px, safe-bottom - 8px)` + 28 px; scroll-padding for focus.
 - Perf (Google Chrome, 390x844 DPR 3, 4x CPU throttle, 4 s of per-frame scrolling): 60 fps in all three; renderer main
   1,118 ms (bar off) / 1,130 (frost) / 1,151 (lens), GPU main 393 / 408 / 418 ms, Paint 186 / 179 / 182 ms (the
   bar never repaints the scroll content), worst frame 17 / 20 / 19 ms.
 - Tests: `test/prep-nav.test.mjs` (pure rules, contrast from the CSS, lens UA gate, wiring), headless
   `test/run-prep-nav-ui.mjs` (Chromium via `CHROME=` and WebKit; SHOTS=<dir>, REAL=1 for real content via a read-only
-  /api/prep/bank proxy). Token-only change: run-prep-setup-ui (prep54).
+  /api/prep/bank proxy). Token-only change: run-prep-setup-ui (prep55).
 - Not verified: a real iPhone (WKWebView blur, safe-area float, keyboard) and a real Android WebView (lens).

@@ -94,6 +94,7 @@ test("CSS: one backdrop-filter layer, url() only under .pnv-lens, fallbacks for 
   assert.match(css, /\.pn-root\.pn-navon > \.pn-body \{ padding-bottom: calc\(var\(--pnv-h\) \+ var\(--pnv-b\) \+ 28px\)/);
   assert.match(css, /--pnv-b: max\(12px, calc\(env\(safe-area-inset-bottom, 0px\) - 8px\)\)/);
   assert.match(css, /width: min\(420px, calc\(100% - 32px\)\)/);
+  assert.match(css, /#smdPrep\.pn-root \{ overflow: clip; \}/);
 });
 
 test("wiring: loader lists prep-nav (optional), prep.js attaches, syncs after every paint, detaches, exposes the tab roots", () => {

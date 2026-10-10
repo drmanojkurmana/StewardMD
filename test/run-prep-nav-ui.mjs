@@ -199,6 +199,8 @@ async function assertions(engine) {
     const sheetUp = await until(page, () => !!document.querySelector("#smdPrep > .pn-sheet-wrap"), 8000);
     s = await navState(page);
     ok(sheetUp && s.off && s.inert && s.hid === "true", E + "the practice setup sheet hides the bar (inert, aria-hidden)");
+    const rs = await page.evaluate(() => { const r = document.getElementById("smdPrep"); r.scrollTop = 200; return { y: r.scrollTop, o: getComputedStyle(r).overflowY }; });
+    ok(rs.y === 0 && rs.o === "clip", E + "the hidden bar below the screen never makes the overlay scrollable (overflow " + rs.o + ", scrollTop " + rs.y + ")");
     if (sheetUp) { await until(page, () => { const g = document.querySelector("#suGo"); return !!g && !g.disabled; }, 8000); await page.evaluate(() => { const g = document.querySelector("#suGo"); if (g) g.click(); }); }
     else await page.evaluate(() => PREP._host.run(PREP._host.pool([]), "study", "x"));
     const inRun = await until(page, () => !!document.querySelector("#smdPrep .pn-run, #smdPrep .pn-qw") && !document.querySelector("#smdPrep > .pn-sheet-wrap"), 10000);

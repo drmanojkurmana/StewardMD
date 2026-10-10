@@ -2146,8 +2146,8 @@
     if (a === "mpractice") return setupOn() ? setupMistakes() : practiceMistakes();
     if (a === "mtag") { var rt = st.run, itm = rt && rt.items[rt.i]; if (itm && s.mt[itm.id]) { s.mt[itm.id][2] = s.mt[itm.id][2] === v ? null : v; save(); } return renderRun(); }
     if (a === "mocks") return push(renderMocks);
-    if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], side: true, topic: rt4.title }, HOST); return; }
-    if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], side: true, topic: rt5.title }, HOST); return; }
+    if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], n: rt4.i + 1, side: true, topic: rt4.title }, HOST); return; }
+    if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], n: i5 + 1, side: true, topic: rt5.title }, HOST); return; }
     if (a.indexOf("ak-") === 0 && G.PREP_ASK) return G.PREP_ASK.act(a, b, HOST);
     if (a === "teach") { var rt3 = st.run, it3 = rt3 && rt3.items[rt3.i]; if (it3 && G.PREP_TEACHER) G.PREP_TEACHER.explain(it3, rt3.ans[rt3.i], HOST); return; }
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));
