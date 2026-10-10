@@ -89,7 +89,7 @@ async function checkItem(d, tag, it, full) {
     const h2 = await d.ev(`return document.querySelector("#smdPrep .pn-fb").outerHTML;`);
     await d.ev(`PREP_REASON.has = window.__rxHas; return 1;`);
     ok(h1 === h2, tag + ": feedback byte-identical off the reasoning path");
-    if (full) { await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`); await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`, true); }
+    if (full) { const n = `reason-${d.name}-${d.size}-${d.theme}-${it.id}`; await d.shot(n, 0); await d.shot(n, 1); await d.shot(n, 2); }
     d.stash = d.stash || {};
     d.stash[it.id] = h1;
     await d.ev(`PREP.back(); return 1;`);
@@ -119,7 +119,7 @@ async function checkItem(d, tag, it, full) {
   ok(s2.rel.length === ex.relN, tag + ": " + s2.rel.length + " related questions");
   const ov = await d.ev(`var b=document.querySelector("#smdPrep .pn-body"); return b.scrollWidth<=b.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1;`);
   ok(ov === true, tag + ": nothing scrolls sideways");
-  if (full) { await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`); await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`, true); }
+  if (full) { const n = `reason-${d.name}-${d.size}-${d.theme}-${it.id}`; await d.shot(n, 0); await d.shot(n, 1); await d.shot(n, 2); }
   return s2;
 }
 
@@ -306,16 +306,18 @@ async function pwDriver(name, browser, size, theme) {
     ev: (e) => page.evaluate(wrap(e)),
     waitFor: async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { try { if (await page.evaluate(wrap(e)) === true) return true; } catch {} await sleep(150); } return false; },
     click: async (sel) => page.click("#smdPrep " + sel.replace(/^#smdPrep /, "")).then(() => true, () => false),
-    shot: async (name, bottom) => {
+    shot: async (name, pos) => {
       if (!SHOTS) return;
       await sleep(120);
       try { await page.evaluate(FINISH_ANIMS); } catch {}
       try {
-        await page.evaluate(bottom
-          ? `var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop = b.scrollHeight;`
+        await page.evaluate(pos === 2
+          ? `var b=document.querySelector("#smdPrep .pn-body"); if(b) b.scrollTop = b.scrollHeight;`
+          : pos === 1
+          ? `var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop += f.getBoundingClientRect().top - b.getBoundingClientRect().top + f.getBoundingClientRect().height / 2 - b.clientHeight / 2;`
           : `var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop += f.getBoundingClientRect().top - b.getBoundingClientRect().top - 12;`);
       } catch {}
-      await page.screenshot({ path: join(SHOTS, name + (bottom ? "-below" : "") + ".png") });
+      await page.screenshot({ path: join(SHOTS, name + (pos === 2 ? "-below" : pos === 1 ? "-mid" : "") + ".png") });
     },
     setup: async () => {
       await page.goto("https://prep.test/?prep=1", { waitUntil: "domcontentloaded" });
