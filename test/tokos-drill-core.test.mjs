@@ -10,9 +10,10 @@ import { render, drillIds } from "../tools/tokos-build-drills.mjs";
 const require = createRequire(import.meta.url);
 const core = require("../tokos-models/drill-core.js");
 const read = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
-const IDS = ["breech", "collapse", "eclampsia", "fibroid", "hrt", "mullerian", "ovulation", "pcos", "pid", "pmb", "pph", "shoulder", "steroids", "twins"];
+const IDS = ["breech", "collapse", "eclampsia", "ectopic", "endo", "fibroid", "hrt", "hysfluid", "mullerian", "ovulation", "pcos", "pid", "pmb", "pph", "pul", "shoulder", "steroids", "twins"];
 const LEVEL = { pph: "mbbs", eclampsia: "mbbs", shoulder: "mbbs", breech: "resident", twins: "resident", collapse: "resident",
-  mullerian: "mbbs", pcos: "mbbs", pid: "mbbs", fibroid: "mbbs", ovulation: "mbbs", hrt: "mbbs", pmb: "mbbs", steroids: "mbbs" };
+  hrt: "mbbs", ovulation: "mbbs", pmb: "mbbs", steroids: "mbbs", ectopic: "mbbs", endo: "resident", hysfluid: "resident", pul: "resident",
+  mullerian: "mbbs", pcos: "mbbs", pid: "mbbs", fibroid: "mbbs" };
 
 test("all drills exist and nothing else is in tokos/drill", () => assert.deepEqual(drillIds(), IDS));
 
