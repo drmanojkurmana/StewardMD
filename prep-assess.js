@@ -108,7 +108,9 @@
     });
     NEED_PROV.forEach(function (k) { need(!!prov[k], "no provenance for " + k); });
     // A profile is official only when every scoring and format rule above is official.
-    if (p.status === "official") NEED_PROV.forEach(function (k) { if (prov[k] && !prov[k].official && k !== "/scoring/correct") e.push("official profile with inferred " + k); });
+    // (A single-paper exam has no section rules to verify: its /navigation section rules may be inferred.)
+    var single = Array.isArray(f.sections) && f.sections.length === 1;
+    if (p.status === "official") NEED_PROV.forEach(function (k) { if (prov[k] && !prov[k].official && k !== "/scoring/correct" && !(single && k.indexOf("/navigation/") === 0)) e.push("official profile with inferred " + k); });
     need(!/[–—]/.test(JSON.stringify(p)), "no en or em dash");
     return e;
   }

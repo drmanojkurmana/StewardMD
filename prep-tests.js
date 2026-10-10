@@ -106,7 +106,7 @@
       : parts ? f.questions + " questions in " + parts + " parts of " + (f.questions / parts) + ", each in " + (secs.length / parts) + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min"
       : secs.length > 1 ? f.questions + " questions in " + secs.length + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min"
       : f.questions + " questions, " + mins(f.duration_min * 60);
-    var pass = p.scoring.pass ? " Pass mark " + p.scoring.pass.marks + " of " + p.scoring.pass.of + "." : "";
+    var pass = p.scoring.pass ? " " + (p.scoring.pass.label || "Pass mark") + " " + p.scoring.pass.marks + " of " + p.scoring.pass.of + "." : "";
     var bG = A.blueprint(p, "grand"), bM = A.blueprint(p, "mini"), bP = A.blueprint(p, "part");
     function btn(type, b, label, pri) { var l = lastOf(p.id, type); return '<button type="button" class="pn-btn pn-t2btn' + (pri ? " pri" : "") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="' + type + '" data-need="' + b.min_viable + '"><span class="pn-t2bl">' + H.ico("clock") + "<span>" + esc(label) + "</span></span>" + (l ? '<small class="pn-t2last">Last ' + esc(fmtMarks(l.raw)) + " of " + l.max + " · " + dm(l.ts) + "</small>" : "") + "</button>"; }
     var btns = "";
@@ -333,7 +333,7 @@
       (t.type === "daily10" ? '<p class="pn-t2eb">' + (t.dailyFresh ? "Daily 10 done for today" : "Practice: today's Daily 10 was already counted") + "</p>" : "") +
       '<p class="pn-big">' + fmtMarks(sc.raw) + " / " + sc.max + '</p><p class="pn-mut">' + esc(p.name) + " marking: " + esc(marking(p)) + "</p>" +
       '<dl class="pn-t2f pn-t2k"><div><dt>Right</dt><dd>' + sc.correct + "</dd></div><div><dt>Wrong</dt><dd>" + sc.incorrect + "</dd></div><div><dt>Not answered</dt><dd>" + sc.unanswered + "</dd></div><div><dt>Accuracy</dt><dd>" + pct(sc.accuracy) + "</dd></div><div><dt>Time</dt><dd>" + mmss(r.secs) + "</dd></div><div><dt>Average</dt><dd>" + avg + "</dd></div></dl>" +
-      (p.scoring.pass ? '<p class="pn-mut pn-small">Pass mark in the exam: ' + p.scoring.pass.marks + " of " + p.scoring.pass.of + " (" + Math.round(p.scoring.pass.marks * 100 / p.scoring.pass.of) + "%). This test: " + (sc.max ? Math.round(Math.max(0, sc.raw) * 100 / sc.max) : 0) + "% of its marks.</p>" : "") +
+      (p.scoring.pass ? '<p class="pn-mut pn-small">' + esc(p.scoring.pass.label || "Pass mark") + ' in the exam: ' + p.scoring.pass.marks + " of " + p.scoring.pass.of + " (" + Math.round(p.scoring.pass.marks * 100 / p.scoring.pass.of) + "%). This test: " + (sc.max ? Math.round(Math.max(0, sc.raw) * 100 / sc.max) : 0) + "% of its marks.</p>" : "") +
       (rec.state === "auto_submitted_timeout" ? '<p class="pn-mut pn-small">' + H.ico("clock") + " Time ran out: answers given by then were marked.</p>" : "") + "</section>";
     var secs = rec.by_section.length > 1 ? '<h2 class="pn-sec">By section</h2><ul class="pn-mods pn-t2sec">' + rec.by_section.map(function (b) {
       return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + esc(b.label) + "</b><small>" + b.correct + " right · " + b.incorrect + " wrong · " + b.unanswered + " not answered" + (b.used_ms ? " · " + mmss(b.used_ms / 1000) + " of " + mmss(b.allowed_ms / 1000) : "") + '</small></span><span class="pn-st">' + fmtMarks(b.raw) + "</span></div></li>";

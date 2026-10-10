@@ -65,8 +65,13 @@ test("official numbers as checked in the stored bulletins (2026-10-10)", () => {
   const us = A.profile("usmle-step1");
   assert.equal(us.status, "provisional", "guessing penalty and block return rule not verified");
   assert.equal(us.format.block_max_items, 20); assert.equal(us.format.sections[0].minutes, 30); assert.equal(us.format.sections.length, 14);
+  // INI-SS January 2026 Prospectus Part A (owner-supplied, 5.1 p13): Stage I 80 single-correct MCQs, 90 min, +1/-1/3, 50% to qualify
   const is = A.profile("ini-ss");
-  assert.equal(is.status, "provisional"); assert.ok(is.provenance.every((r) => r.official === false), "INI-SS: nothing claimed official");
+  assert.equal(is.status, "official"); assert.deepEqual([is.format.questions, is.format.duration_min, is.format.sections.length, is.scoring.correct], [80, 90, 1, 1]);
+  assert.ok(Math.abs(is.scoring.incorrect + 1 / 3) < 1e-12); assert.deepEqual([is.scoring.pass.marks, is.scoring.pass.of], [40, 80]);
+  assert.equal(A.provOf(is, "/format/options").official, false, "option count not stated: inferred");
+  // INI-CET re-verified against the January 2027 Part A (p15): unchanged format and marking
+  assert.equal(ini.version, "2027.1.0"); assert.ok(ini.sources["AIIMS-INICET-JAN2027-A"]); assert.equal(A.provOf(ini, "/format/sections").src, "AIIMS-INICET-JAN2027-A");
 });
 
 test("client and server read the same profiles: MOCKS, SCHEMES, EXAM_PROFILES unchanged", async () => {
