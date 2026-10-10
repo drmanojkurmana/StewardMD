@@ -43,7 +43,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG9.1 | ob11-miscarriage-types, ob11-miscarriage-manage |  |  |
 | OG9.2 | ob11-rpl |  |  |
 | OG9.3 | ob10-mtp, ob11-miscarriage-manage |  |  |
-| OG9.4 | ob11-ectopic-dx, ob11-ectopic-manage |  |  |
+| OG9.4 | ob11-ectopic-dx, ob11-ectopic-manage | drill:ectopic, drill:pul |  |
 | OG9.5 | ob11-molar |  |  |
 | OG9.6 | ob11-hyperemesis |  |  |
 | OG10.1 | ob6-aph-approach, ob6-placenta-previa, ob6-abruption |  |  |
@@ -125,7 +125,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG34.3 | ob11-gtn |  |  |
 | OG34.4 | gy2-sampling |  |  |
 | OG34.5 | gy5-fibroid-treat, gy11-surgery |  |  |
-| OG34.6 | gy5-endometriosis, gy5-endo-care, gy5-adenomyosis |  |  |
+| OG34.6 | gy5-endometriosis, gy5-endo-care, gy5-adenomyosis | drill:endo |  |
 | OG35.1 | ob2-case-record-plan |  | yes |
 | OG35.2 | ob2-case-record-plan |  |  |
 | OG35.3 | ob2-danger-signs, ob6-referral-note | tool:meows, drill:collapse |  |
@@ -157,6 +157,6 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG37.6 | ob9-breech, ob10-instrumental | drill:breech |  |
 | OG37.7 | ob10-mtp, ob11-miscarriage-manage |  |  |
 | OG38.1 | gy11-surgery |  |  |
-| OG38.2 | gy2-hysteroscopy |  |  |
+| OG38.2 | gy2-hysteroscopy | drill:hysfluid |  |
 | OG38.3 | gy8-lap-sterilisation |  |  |
 | OG38.4 | ob10-ethics |  |  |
