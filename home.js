@@ -10123,12 +10123,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function applyD() {
     try {
       var _sc = Math.min(2, Math.max(.8, +ds.fontScale || 1)); ds.fontScale = _sc;   // BUG-07: bound scale to a reachable max
-      document.documentElement.style.zoom = _sc;
-      // BUG-07: keep the Display sheet + its Reset OUT of the app zoom (counter-zoom) so the
-      // controls needed to recover are always reachable, even at max scale.
-      var _inv = 1 / _sc;
-      var _sh = document.getElementById("hvSheet"); if (_sh) _sh.style.zoom = _inv;
-      var _scr = document.getElementById("hvScrim"); if (_scr) _scr.style.zoom = _inv;
+      zoomNowD();
     } catch (e) {}
     document.body.classList.remove("smd-dens-compact", "smd-dens-comfortable", "smd-dens-large");
     if (ds.density !== "default") document.body.classList.add("smd-dens-" + ds.density);
@@ -10140,6 +10135,38 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var f = FONTS.filter(function (x) { return x.id === ds.font; })[0]; if (f && f.web) ensureFont(f.web);
     saveD();
   }
+  /* PrepNucleus renders at full size (owner 2026-10-10: "1.0 in PrepNucleus only"). Auto fit shrinks small phones to
+     0.95 (0.9 under 340 px), so a 44 px target drew at ~42. While PrepNucleus is open (html.pn-open, set and cleared by
+     prep.js open()/close(); its sheets, the Ask MaiK sheet and the image viewer only open inside it) the shrink comes
+     off: auto fit -> max(1, scale) (an iPad's 1.08/1.15 is kept); a size the user chose (Settings slider or preset, or
+     the OS text size) -> scale / 0.95, so only the default shrink is removed. Still ONE zoom, on html, so every
+     getBoundingClientRect / clientX conversion that reads documentElement.style.zoom stays right. */
+  var PN_SHRINK = .95;
+  function prepZoomD(scale, autoFit) {
+    var s = Math.min(2, Math.max(.8, +scale || 1));
+    return autoFit ? Math.max(1, s) : Math.min(2, Math.round(s / PN_SHRINK * 1e4) / 1e4);
+  }
+  function zoomOfD() {
+    var s = Math.min(2, Math.max(.8, +ds.fontScale || 1));
+    return document.documentElement.classList.contains("pn-open") ? prepZoomD(s, ds.autoFit) : s;
+  }
+  function zoomNowD() {
+    var z = zoomOfD(), de = document.documentElement;
+    if (String(de.style.zoom) !== String(z)) de.style.zoom = z;
+    // BUG-07: keep the Display sheet + its Reset OUT of the app zoom (counter-zoom) so the
+    // controls needed to recover are always reachable, even at max scale.
+    var _inv = 1 / z;
+    var _sh = document.getElementById("hvSheet"); if (_sh) _sh.style.zoom = _inv;
+    var _scr = document.getElementById("hvScrim"); if (_scr) _scr.style.zoom = _inv;
+  }
+  window.SMD_ZOOM = { prep: prepZoomD, now: zoomOfD, apply: zoomNowD };
+  try {
+    var _pnWas = document.documentElement.classList.contains("pn-open");
+    new MutationObserver(function () {
+      var on = document.documentElement.classList.contains("pn-open");
+      if (on !== _pnWas) { _pnWas = on; zoomNowD(); }
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  } catch (e) {}
   function autoFitD() {
     var w = window.innerWidth, h = window.innerHeight, dpr = window.devicePixelRatio || 1, fs, d;
     if (w < 340) { fs = .9; d = "compact"; } else if (w < 400) { fs = .95; d = "compact"; } else if (w < 600) { fs = 1.0; d = "default"; } else if (w < 900) { fs = 1.08; d = "comfortable"; } else { fs = 1.15; d = "comfortable"; }
@@ -10238,7 +10265,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         atmosphere.querySelector("h4").textContent = "Assistant background";
       }
     }
-    try { var _z = 1 / (Math.min(2, Math.max(.8, +ds.fontScale || 1))); s.style.zoom = _z; var _sc0 = document.getElementById("hvScrim"); if (_sc0) _sc0.style.zoom = _z; } catch (e) {}
+    try { var _z = 1 / zoomOfD(); s.style.zoom = _z; var _sc0 = document.getElementById("hvScrim"); if (_sc0) _sc0.style.zoom = _z; } catch (e) {}
     s.querySelector("#hvFs").addEventListener("input", function () { ds.autoFit = false; ds.userSet = true; ds.fontScale = (+this.value) / 100; applyD(); refreshD(); });
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.addEventListener("click", function () { ds.autoFit = false; ds.density = b.getAttribute("data-d"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvPre button").forEach(function (b) { b.addEventListener("click", function () { var p = DPRE[b.getAttribute("data-p")]; ds.autoFit = false; ds.userSet = true; ds.fontScale = p.fontScale; ds.density = p.density; applyD(); refreshD(); }); });

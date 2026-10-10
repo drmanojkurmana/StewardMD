@@ -14,7 +14,7 @@
    full-screen image viewer (pinch, pan, double tap, swipe down); optional so an older build falls back to the in-screen zoom. */
 (function (G) {
   "use strict";
-  var V = "prep49";
+  var V = "prep50";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css"];
   var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-viewer.js", "prep-motion.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-rad.js", "prep-setup.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
