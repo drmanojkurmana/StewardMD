@@ -175,6 +175,22 @@ try {
   await ev(`try { localStorage.removeItem("smd_profile_cache:test-uid"); } catch (e) {} window.__srvReg = ""; window.__myProfileCalls = 1; return 1;`);
   await ev(`SMD_openProfile(); return 1;`); await sleep(3000);
   ok((await ev(PRO_ROWS)).indexOf("regno=APMC-77881") >= 0, "a profile without a reg number shows the verified / ID-card number");
+
+  // ── 3d. owner, 2026-10-10: saving the college from the Profile page said "Couldn't save, check your connection"
+  // on a phone with full signal. There is no Firestore SDK in the iPhone app, so the edit goes to the server.
+  await ev(`
+    window.__saveCalls = []; window.__toastsP = [];
+    var f0 = window.fetch;
+    window.fetch = function(u, o){ if (String(u).indexOf('/api/auth/save-profile') >= 0) { window.__saveCalls.push({ b: o && o.body, a: o && o.headers && o.headers.Authorization }); return Promise.resolve(new Response('{"ok":true}', { status: 200 })); } return f0.apply(this, arguments); };
+    new MutationObserver(function(){ var e = document.querySelector('.hv-toast'); if (e && e.textContent) window.__toastsP.push(e.textContent); }).observe(document.body, { childList: true, subtree: true, characterData: true });
+    return 1;`);
+  await ev(`var b = document.querySelector('#pfPro [data-edit="city"]'); if (b) b.click(); return 1;`); await sleep(300);
+  await ev(`var i = document.querySelector('#pfPro .hv-pf-in'); i.value = "Kurnool"; document.querySelector('#pfPro [data-save]').click(); return 1;`); await sleep(1200);
+  const sc = JSON.parse(await ev(`return JSON.stringify(window.__saveCalls);`) || "[]");
+  ok(sc.length === 1 && sc[0].a === "Bearer tok" && JSON.parse(sc[0].b).patch === true && JSON.parse(sc[0].b).city === "Kurnool", "with no SDK, a Profile edit is saved by the server with the sign-in token: " + JSON.stringify(sc));
+  const tp = await ev(`return JSON.stringify(window.__toastsP);`);
+  ok(/City updated/.test(tp) && !/Couldn/.test(tp), "and says it was updated, not that the connection failed " + tp);
+  ok((await ev(PRO_ROWS)).indexOf("city=Kurnool") >= 0, "and the row shows the new value");
   await ev(`window.fetch = window.__realFetch; return 1;`);
 
   // ── 4. the first-run form ──

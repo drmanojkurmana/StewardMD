@@ -4141,7 +4141,22 @@
       setRow("phone", d.phone);
       if (profileHubOn()) acctPaintPhone(card.closest(".hv-pf") || card, d);
 
-      function save(obj) { var pr = prefNow(); return pr ? pr.set(obj, { merge: true }) : Promise.reject({ code: "no-db" }); }
+      /* Save one edit. The Firebase SDK does not work inside the iPhone app (owner, 2026-10-10: "Couldn't save, check
+       * your connection" saving the college on a phone with full signal), and an SDK write on a half-open connection
+       * neither resolves nor rejects. So: the SDK write gets 6 seconds, and if it is missing, rejects or is still
+       * pending, the server writes the same document (POST /api/auth/save-profile, patch mode, the signed-in uid only). */
+      function save(obj) {
+        var pr = prefNow();
+        var sdk = pr ? Promise.race([pr.set(obj, { merge: true }), new Promise(function (_, rej) { setTimeout(function () { rej({ code: "sdk-timeout" }); }, 6000); })]) : Promise.reject({ code: "no-db" });
+        return sdk.catch(function () {
+          var cu = null; try { cu = window.SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
+          if (!cu || typeof cu.getIdToken !== "function") return Promise.reject({ code: "no-user" });
+          return cu.getIdToken().then(function (tok) {
+            var body = { patch: true }; Object.keys(obj).forEach(function (k) { if (["verified", "regNoPendingCert"].indexOf(k) < 0) body[k] = obj[k]; });
+            return fetch((window.SMD_API_BASE || "") + "/api/auth/save-profile", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify(body) });
+          }).then(function (r) { if (!r || !r.ok) throw { code: "server-" + (r && r.status) }; });
+        });
+      }
 
       // Edit in place: the value becomes an input with Save / Cancel. No window.prompt.
       function inlineEdit(key, label, cur, onSave) {
