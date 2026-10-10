@@ -462,24 +462,68 @@
 
   /* ---------- the on-screen keyboard ----------
      iOS (WKWebView, no Keyboard plugin) keeps the layout viewport and lays the keyboard over it; only the visual
-     viewport shrinks (and may pan). While Ask MaiK is open its wrap follows the visual viewport, so the sheet, the
-     composer and the newest message sit above the keyboard. Android resizes the page itself; the same code is a no-op
-     there. A pinch zoom is left alone. */
+     viewport shrinks, and WebKit pans it down to reveal the focused box. While Ask MaiK is open its wrap covers exactly
+     the visible part of the screen, so the header, the conversation and the composer sit above the keyboard. Android
+     (and a resized web view) shrinks the page itself; then the wrap simply fills the overlay as usual. A pinch zoom is
+     left alone.
+     Owner's iPhone (2026-10-10 recording): the sheet showed only its header, right above the keyboard. The old code put
+     the wrap at visualViewport.offsetTop - rootRect.top; in the app's WKWebView the overlay's client rect moves with
+     the pan (rootRect.top = -offsetTop), so the pan was counted twice and the wrap sat a keyboard height too low,
+     clipped by the overlay. The place is now worked out in the overlay's own CSS px, from either measure, and checked:
+     - visualViewport numbers are screen CSS px; the overlay lives inside html { zoom } (SMD_ZOOM), so they are divided
+       by that zoom;
+     - the wrap's top is where the visible area starts inside the overlay: the overlay's own client offset when the
+       client rects move with the pan, else visualViewport.offsetTop;
+     - the visible area can never reach below the overlay (it is fixed to the layout viewport), so a top that would put
+       the wrap's bottom past it is pulled up until the wrap's bottom meets the overlay's bottom.
+     It is re-measured on every visual viewport event, window resize and orientation change, and for 0.9 s after the box
+     gains or loses focus (WebKit's events can stop before its pan does). */
+  function zoomOf() {
+    var de = D.documentElement, z = parseFloat(de.style.zoom);
+    if (!(z > 0)) try { z = parseFloat(G.getComputedStyle(de).zoom); } catch (e) { z = 1; }
+    return z > 0.3 && z < 4 ? z : 1;
+  }
+  function kbPlace(vv, r) {
+    var z = zoomOf(), rr = r.getBoundingClientRect(), rh = r.clientHeight || (rr.height / z) || 0;
+    var kr = rh ? (rr.height / rh) || z : z;                       // client px per overlay px (rects may or may not carry the zoom)
+    var h = vv.height / z, top = rr.top < -1 ? -rr.top / kr : (vv.offsetTop || 0) / z;
+    if (top + h > rh + 1) top = Math.max(0, rh - h);
+    return { top: Math.max(0, top), h: Math.min(h, rh || h), full: rh, gap: rh - h };
+  }
   function onVV() {
     var w = el(), vv = G.visualViewport, r = root(); if (!w || !vv || !r) return;
-    var b = body(), end = atEnd(b), rr = r.getBoundingClientRect(), full = rr.height || G.innerHeight || 0, gap = full - vv.height;
-    if ((vv.scale && Math.abs(vv.scale - 1) > 0.01) || (gap < 1 && vv.offsetTop < 1)) {
-      w.style.top = ""; w.style.height = ""; w.style.bottom = ""; w.classList.remove("pa-kb");
+    if (r.scrollTop) r.scrollTop = 0;                                // the overlay itself never scrolls (a reveal must not move it)
+    var b = body(), end = atEnd(b) || (S && S.kbFollow > Date.now()), p = kbPlace(vv, r);
+    if ((vv.scale && Math.abs(vv.scale - 1) > 0.01) || (p.gap < 1 && p.top < 1)) {
+      if (w.style.height) { w.style.top = ""; w.style.height = ""; w.style.bottom = ""; }
+      w.classList.remove("pa-kb"); w.classList.remove("pa-kbs");
     } else {
-      w.style.top = Math.round(vv.offsetTop - rr.top) + "px"; w.style.height = Math.round(vv.height) + "px"; w.style.bottom = "auto";
-      w.classList.toggle("pa-kb", gap > 120);
+      w.style.top = (Math.round(p.top * 10) / 10) + "px"; w.style.height = (Math.round(p.h * 10) / 10) + "px"; w.style.bottom = "auto";
+      w.classList.toggle("pa-kb", p.gap > 120);
+      w.classList.toggle("pa-kbs", p.gap > 120 && p.h < 300);       // a landscape phone: the place switch gives its row to the chat
     }
     if (b && end) follow(b, sheet());
   }
+  // Re-measure each frame for a while: WebKit animates the keyboard and its pan, and its last event can come early.
+  var kbRaf = 0, kbUntil = 0;
+  function kbSettle(ms) {
+    kbUntil = Math.max(kbUntil, Date.now() + (ms || 900));
+    if (kbRaf) return;
+    var raf = G.requestAnimationFrame || function (f) { return G.setTimeout(f, 16); };
+    (function tick() { kbRaf = 0; if (!S) return; onVV(); if (Date.now() < kbUntil) kbRaf = raf(tick) || 1; })();
+  }
+  function onKbFocus(e) {
+    if (!S || !e.target || e.target.id !== "paIn") return;
+    if (e.type === "focusin") S.kbFollow = Date.now() + 1200;      // typing: the newest message comes into view with the keyboard
+    kbSettle(900);
+  }
+  function onWinResize() { kbSettle(500); }
   function vvOn(on) {
-    var vv = G.visualViewport; if (!vv || !vv.addEventListener) return;
-    if (on) { vv.addEventListener("resize", onVV); vv.addEventListener("scroll", onVV); onVV(); }
-    else { vv.removeEventListener("resize", onVV); vv.removeEventListener("scroll", onVV); }
+    var vv = G.visualViewport, m = on ? "addEventListener" : "removeEventListener";
+    G[m]("resize", onWinResize); G[m]("orientationchange", onWinResize);
+    if (!vv || !vv.addEventListener) return;
+    vv[m]("resize", onVV); vv[m]("scroll", onVV);
+    if (on) onVV();
   }
 
   /* open(ctx, host). ctx: { kind: "mcq", item, chosen, n?, topic? } | { kind: "step", step, title } | { kind: "card", fr, bk, title }. */
@@ -496,6 +540,7 @@
     host.root().appendChild(w);
     w.addEventListener("input", onInput);
     w.addEventListener("keydown", onComposeKey);
+    w.addEventListener("focusin", onKbFocus); w.addEventListener("focusout", onKbFocus);
     w.addEventListener("toggle", function (e) { if (S && e.target && e.target.classList && e.target.classList.contains("pa-cx")) S.cxOpen = e.target.open; }, true);
     var mine = S;
     // A remembered choice that still works skips the question; else the sheet asks where, as before. Either way a thread

@@ -15,7 +15,10 @@
    while the keyboard is up (prep-ask.js onVV), so the composer and the newest message stay above it. */
 .pn-root .pa-sheet { max-height: min(88dvh, 820px); overflow-y: auto; }
 .pn-root .pa-sheet.pa-chat { height: calc(100% - max(env(safe-area-inset-top, 0px) + 10px, 8%)); max-height: none; overflow: hidden; gap: 0; padding: 6px 16px calc(10px + env(safe-area-inset-bottom, 0px)); }
-.pn-root .pa-wrap.pa-kb > .pa-sheet.pa-chat { height: calc(100% - 8px); padding-bottom: 8px; border-radius: 20px 20px 0 0; }
+/* keyboard up: the wrap is the visible area above the keyboard (prep-ask.js onVV); its top is the top of the screen, so
+   the sheet starts below the status bar / Dynamic Island, and its bottom (the composer) meets the keyboard. */
+.pn-root .pa-wrap.pa-kb > .pa-sheet.pa-chat { height: calc(100% - max(env(safe-area-inset-top, 0px) + 4px, 8px)); min-height: min(100%, 220px); padding-bottom: 8px; border-radius: 20px 20px 0 0; }
+.pn-root .pa-wrap.pa-kbs > .pa-sheet.pa-chat > .pa-bar { display: none; }
 /* keyboard up: the room goes to the conversation (no grabber, no quick replies while typing) */
 .pn-root .pa-wrap.pa-kb > .pa-sheet.pa-chat > .pn-grab, .pn-root .pa-wrap.pa-kb .pa-qr { display: none; }
 .pn-root .pa-wrap.pa-kb > .pa-sheet.pa-chat { padding-top: 8px; }
@@ -152,6 +155,9 @@ body.dark .pn-root .pa-sb.on { background: var(--pn-seg); }
   .pn-root .pa-sheet.pa-chat { height: min(760px, 100%); padding: 12px 20px 16px; }
   .pn-root .pa-sheet.pa-chat > .pa-body, .pn-root .pa-sheet.pa-chat > .pa-bar, .pn-root .pa-sheet.pa-chat > .pa-cmp, .pn-root .pa-sheet.pa-chat > .pa-cap, .pn-root .pa-sheet.pa-chat .pa-qr { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
   .pn-root .pa-sheet.pa-chat > .pn-grab { display: none; }
+  /* keyboard up: the panel uses the short visible area, below the status bar and flush above the keyboard */
+  .pn-root .pa-wrap.pa-kb { padding-top: max(env(safe-area-inset-top, 0px), 8px); padding-bottom: 8px; }
+  .pn-root .pa-wrap.pa-kb > .pa-sheet.pa-chat { height: min(760px, 100%); min-height: 0; border-radius: var(--pn-r-xl); padding-bottom: 12px; }
 }
 
 /* iPad landscape runner: a side panel on the right, the question stays in view */
