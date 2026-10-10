@@ -1,0 +1,179 @@
+{
+ "v": 1,
+ "note": "SYNTHETIC reasoning-explanation fixtures (made-up questions; the repo is public). Six items carry the new x fields (clues, ddx, mechanism, lo, rev, next, links, refs); two old items (exp-only, old x) pin the unchanged UI.",
+ "items": [
+  {
+   "id": "fx-reason-1",
+   "q": "Synthetic: a 32 year old woman has resistant hypertension. Angiography shows a beaded mid right renal artery with a normal ostium. The most likely cause is",
+   "o": ["Atherosclerotic stenosis", "Fibromuscular dysplasia", "Polyarteritis nodosa", "Renal artery embolism"],
+   "a": 1,
+   "exp": "",
+   "t": "ana-gametogenesis",
+   "d": 2,
+   "prov": "LIC",
+   "x": {
+    "lo": "Read a renal angiogram by site and age: mid-artery beads in a young woman point away from atheroma.",
+    "clues": "- **Young woman** with resistant hypertension\n- **Beaded** mid renal artery, ostium normal\n- No systemic features of vasculitis",
+    "ddx": "| Feature | Fibromuscular dysplasia | Atheroma |\n| --- | --- | --- |\n| Site | Mid artery | Ostium |\n| Age | Young | Older |\n| Wall | Beaded rings | Eccentric plaque |",
+    "mechanism": "Short fibrous rings alternate with small dilatations in the media, so contrast pools between the rings and the artery looks beaded.",
+    "key": "Fibromuscular dysplasia gives the beaded look because short stenoses alternate with small dilatations in the mid artery.",
+    "others": {
+     "A": "Atheroma narrows the origin of the artery in older people with vascular risk factors.",
+     "C": "Polyarteritis nodosa gives small aneurysms and a systemic illness, not smooth mid-artery beads.",
+     "D": "An embolism cuts flow off suddenly, usually with flank pain and a normal downstream wall."
+    },
+    "pearl": "Mid artery beads in a young woman: think fibromuscular dysplasia.",
+    "rev": "Young + mid-artery beads + normal ostium = fibromuscular dysplasia; older + ostial disease = atheroma.",
+    "next": "review",
+    "links": { "kb": ["fibromuscular_dysplasia"] },
+    "refs": ["StewardMD Knowledge Library: Fibromuscular dysplasia", "StewardMD lesson: Renovascular hypertension"]
+   }
+  },
+  {
+   "id": "fx-reason-2",
+   "q": "Synthetic: a 28 year old woman at 26 weeks of gestation has fasting glucose 98 mg/dL twice. The drug that is NOT used for her glycaemic control is",
+   "o": ["Insulin", "Metformin", "Glyburide", "Empagliflozin"],
+   "a": 3,
+   "exp": "",
+   "t": "ana-placenta",
+   "d": 2,
+   "prov": "LIC",
+   "x": {
+    "clues": "- **Pregnancy** at 26 weeks: organogenesis done, fetal growth phase\n- Fasting glucose above the pregnancy target\n- The question asks what is **NOT** used",
+    "mechanism": "SGLT2 blockers alter fetal renal development in animal studies and have no safety data in human pregnancy, so they are withheld while insulin, metformin and glyburide have pregnancy experience.",
+    "key": "Empagliflozin is withheld in pregnancy for lack of safety data, while insulin, metformin and glyburide are used.",
+    "others": {
+     "A": "Insulin is the standard: it does not cross the placenta in meaningful amounts.",
+     "B": "Metformin crosses the placenta but has wide pregnancy experience and is used.",
+     "C": "Glyburide has pregnancy experience and is used where insulin is not possible."
+    },
+    "pearl": "Newer glucose-lowering classes stay out of pregnancy: no data means do not use.",
+    "rev": "In pregnancy use insulin first, metformin or glyburide when needed; SGLT2 blockers and GLP-1 agents stay out.",
+    "next": "revise",
+    "links": { "drug": ["metformin"], "lesson": ["ana-placenta"] }
+   }
+  },
+  {
+   "id": "fx-reason-3",
+   "q": "Synthetic: a man cannot extend his wrist after sleeping with his arm over a chair back. Sensation over the first dorsal web space is intact. The site of injury is",
+   "o": ["Axillary nerve in the quadrangular space", "Radial nerve in the spiral groove", "Posterior interosseous nerve at the arcade of Frohse", "Median nerve at the carpal tunnel"],
+   "a": 2,
+   "exp": "",
+   "t": "ana-brachial-plexus",
+   "d": 3,
+   "prov": "LIC",
+   "x": {
+    "ddx": "- **Spiral groove**: wrist drop WITH weak brachioradialis and numb first web space\n- **Posterior interosseous**: wrist drop with intact sensation and intact brachioradialis\n- **Axillary**: deltoid weak, wrist fine\n- **Median**: grip and thumb opposition weak, wrist extension fine",
+    "key": "A pure motor wrist drop with intact sensation places the lesion distal to the sensory branch, at the posterior interosseous nerve.",
+    "others": {
+     "A": "The axillary nerve supplies the deltoid; a wrist drop rules it out.",
+     "B": "The spiral groove lesion numbs the first web space and weakens brachioradialis; both are intact here.",
+     "D": "The median nerve does not extend the wrist."
+    },
+    "pearl": "Wrist drop with intact feeling: the posterior interosseous branch.",
+    "next": "practise"
+   }
+  },
+  {
+   "id": "fx-reason-4",
+   "q": "Synthetic: a trekker is found confused with a core temperature of 29 C and a slow irregular pulse. The next step is",
+   "o": ["Rapid rewarming in a hot bath", "Gentle handling, active rewarming and transfer to an ECPR centre", "Immediate full-dose adrenaline", "Unrestricted DC shocks until sinus rhythm"],
+   "a": 1,
+   "exp": "",
+   "t": "scd-hfref",
+   "d": 2,
+   "prov": "LIC",
+   "x": {
+    "clues": "- **Core 29 C**: severe hypothermia, confused with an irritable myocardium\n- Rough handling can trigger ventricular fibrillation\n- Below 30 C drugs and shocks work poorly",
+    "key": "Handle gently, rewarm actively and transfer to an ECPR centre; below 30 C limit shocks to 3 and withhold adrenaline.",
+    "others": {
+     "A": "Rapid surface rewarming risks afterdrop and collapse; rewarming is active but controlled.",
+     "C": "Adrenaline is withheld below 30 C because it accumulates and turns toxic on rewarming.",
+     "D": "Shocks are limited to 3 below 30 C; the cold heart rarely converts."
+    },
+    "pearl": "Below 30 C: 3 shocks maximum, no adrenaline, gentle hands.",
+    "lo": "Apply the severe-hypothermia rule: gentle handling, limited shocks, no adrenaline below 30 C.",
+    "rev": "Severe hypothermia: handle gently, rewarm actively, ECPR centre; below 30 C, 3 shocks and no adrenaline.",
+    "links": { "protocol": ["accidental-hypothermia"] }
+   }
+  },
+  {
+   "id": "fx-reason-5",
+   "q": "Synthetic: a pregnant traveller returns from a Zika outbreak area with a maculopapular rash and conjunctivitis. The fetal risk that guides counselling is",
+   "o": ["Macrosomia", "Microcephaly", "Polycythaemia", "Nephrocalcinosis"],
+   "a": 1,
+   "exp": "",
+   "t": "ana-gametogenesis",
+   "d": 1,
+   "prov": "LIC",
+   "x": {
+    "lo": "Link a maternal viral syndrome to its teratogenic pattern: rash plus red eyes after travel means Zika until proven otherwise.",
+    "clues": "- **Pregnancy** plus recent travel to an outbreak area\n- **Rash with conjunctivitis**: the Zika pair\n- Counselling turns on the fetal brain risk",
+    "ddx": "- **Zika**: rash, conjunctivitis, fetal microcephaly\n- **Rubella**: rash with nodes, cataract and deafness\n- **CMV**: often silent in the mother, hearing loss in the child",
+    "mechanism": "Zika virus crosses the placenta and infects fetal neural progenitor cells, destroying developing brain tissue.",
+    "key": "Zika in pregnancy threatens the fetal brain, so microcephaly is the counselling point.",
+    "others": {
+     "A": "Macrosomia follows maternal diabetes, not Zika.",
+     "C": "Polycythaemia follows chronic fetal hypoxia, not this rash illness.",
+     "D": "Nephrocalcinosis is a calcium disorder, unrelated to Zika."
+    },
+    "pearl": "Rash plus red eyes in pregnancy after travel: think Zika, counsel microcephaly.",
+    "rev": "Zika in pregnancy: rash plus conjunctivitis in the mother, microcephaly in the fetus.",
+    "next": "kb",
+    "links": { "kb_ids": ["zika_virus"] },
+    "refs": ["StewardMD Knowledge Library: Zika virus"]
+   }
+  },
+  {
+   "id": "fx-reason-6",
+   "q": "Synthetic: contrast CT shows a ring-enhancing lesion with smooth thin walls and surrounding oedema in a patient with fever. The most likely diagnosis is",
+   "o": ["Glioblastoma", "Brain abscess", "Subacute infarct", "Tuberculoma"],
+   "a": 1,
+   "exp": "",
+   "t": "ana-placenta",
+   "d": 3,
+   "prov": "LIC",
+   "x": {
+    "mechanism": "A bacterial nidus liquefies centrally while a vascular capsule forms around it; contrast leaks from the capsule vessels, giving a smooth thin enhancing ring.",
+    "key": "Fever with a smooth thin-walled ring and oedema is a brain abscess until proven otherwise.",
+    "others": {
+     "A": "Glioblastoma gives a thick irregular shaggy ring, usually without fever.",
+     "C": "A subacute infarct follows a vascular territory and does not form a smooth ring.",
+     "D": "A tuberculoma ring is usually thicker with a solid centre and a longer course."
+    },
+    "pearl": "Fever plus a smooth thin ring: brain abscess.",
+    "links": { "kb": ["BRAIN_ABSCESS"], "card": ["ana-placenta"] }
+   }
+  },
+  {
+   "id": "fx-reason-old1",
+   "q": "Synthetic: the first polar body is released",
+   "o": ["Before ovulation", "At fertilisation", "After implantation", "At puberty"],
+   "a": 0,
+   "exp": "The first meiotic division completes just before ovulation, releasing the first polar body.",
+   "t": "ana-gametogenesis",
+   "d": 1,
+   "prov": "LIC"
+  },
+  {
+   "id": "fx-reason-old2",
+   "q": "Synthetic: surfactant is produced by",
+   "o": ["Type I pneumocytes", "Type II pneumocytes", "Clara cells", "Goblet cells"],
+   "a": 1,
+   "exp": "",
+   "t": "ana-placenta",
+   "d": 1,
+   "prov": "LIC",
+   "x": {
+    "key": "Type II pneumocytes make surfactant, which lowers alveolar surface tension.",
+    "notes": "## Surfactant\n- Made by **type II** pneumocytes\n- Deficiency causes neonatal respiratory distress",
+    "others": {
+     "A": "Type I cells are the thin gas-exchange lining.",
+     "C": "Clara cells guard the bronchioles.",
+     "D": "Goblet cells make mucus."
+    },
+    "pearl": "Type II makes surfactant."
+   }
+  }
+ ]
+}

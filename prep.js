@@ -1504,16 +1504,20 @@
       // Round 7: verdict, then the answer on its own line, then why it is right and, when the item carries a reason
       // per option (r: PYQ and deck items), why each other option is wrong, the student's pick first.
       var xo = explainOf(it), rs = xo.r, why = it.exp || (rs && rs[it.a]) || "";
+      // Reasoning explanations (prep-reason.js): items with the new x fields get the reasoning layout; every other
+      // item renders exactly as before (and without prep-reason.js RX is null, so nothing changes at all).
+      var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
       var others = rs ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && rs[k] && String(rs[k]).trim(); }) : [];
       others.sort(function (x, y) { return (y === chosen) - (x === chosen) || x - y; });
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
       fb += '<p class="pn-verdict' + (tup ? " pn-vtu" : "") + '"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : tup ? "clock" : "x") + "</span><span><b>" + (ok ? "Correct" : tup ? "Time up" : "Incorrect") + "</b>" + (ok ? "" : "<small>" + (tup ? "Not answered in time" : "You chose " + L[chosen]) + "</small>") + "</span></p>" +
         '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + esc(it.o[it.a]) + "</span></p>" +
+        (RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
           return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
-        pearlHtml(it, xo) +
+        pearlHtml(it, xo)) +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
         // Ask MaiK (prep-ask.js): on every answer, right or wrong, on this phone or online. Without prep-ask.js the
         // older offline-only button, shown only when MaiK runs on this phone.
@@ -1538,6 +1542,7 @@
     st.swipeIn = 0;
     paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + tlHtml(r) + qprogHtml(r) +
       '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+    if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (revealFb) revealFeedback();
     tlSync(r);
     bindRunSwipe();
@@ -1891,10 +1896,14 @@
         return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
       }).join("") + '</ol><section class="pn-fb">' + (function () {
         var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
-        return whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+        var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
+        var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
+          whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
-        }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_ASK ? askBtn("ask-rv", r.ans[i] >= 0 && r.ans[i] !== it.a ? "Why is " + L[r.ans[i]] + " wrong? Ask MaiK" : "Ask MaiK why " + L[it.a] + " is right", ' data-i="' + i + '"') : "");
+        }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+        return ex + (G.PREP_ASK ? askBtn("ask-rv", r.ans[i] >= 0 && r.ans[i] !== it.a ? "Why is " + L[r.ans[i]] + " wrong? Ask MaiK" : "Ask MaiK why " + L[it.a] + " is right", ' data-i="' + i + '"') : "");
       })() + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div>");
+      if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
       if (G.PREP_RAD) G.PREP_RAD.mount(root);
     });
     rerender();
@@ -2391,6 +2400,8 @@
     if (a.indexOf("p-") === 0 && G.PREP_PLAN) return G.PREP_PLAN.act(a, b, HOST);
     // Module flashcards (prep-flash.js) own every data-act starting "k-".
     if (a.indexOf("k-") === 0 && G.PREP_FLASH) return G.PREP_FLASH.act(a, b, HOST);
+    // Reasoning explanations and knowledge links (prep-reason.js) own every data-act starting "r-".
+    if (a.indexOf("r-") === 0 && G.PREP_REASON) return G.PREP_REASON.act(a, b, HOST);
   }
   function openGrid() {
     var r = st.run;
