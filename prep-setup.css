@@ -110,3 +110,89 @@ body.dark .pn-root .su-sb { background: var(--pn-s2); }
 .pn-root .su-tstack { display: grid; }
 .pn-root .su-tp { grid-area: 1 / 1; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .pn-root .su-tp:not(.on) { visibility: hidden; }
+
+/* ---- Mode sheet (2026-10-10, prep59): "How do you want to practise?" ----
+   Top down: two mode cards (radio), the timer box (switch, clock kind, seconds), the count, the filters behind one row,
+   then the opaque footer with the one amber Start. Everything is a 44 px target or larger; the cards are the whole
+   target. Selected card: the selection tokens (Prussian/white on light, Prussian-hi/amber ink on dark). */
+.pn-root .su-head { align-items: flex-start; }
+.pn-root .su-ht { flex: 1 1 auto; min-width: 0; }
+.pn-root .su-head h2 { font-size: 21px; font-weight: 700; letter-spacing: -.02em; text-wrap: balance; }
+.pn-root .su-x { flex: 0 0 auto; margin: -6px -8px 0 0; }
+.pn-root .su-x svg { width: 20px; height: 20px; }
+.pn-root .su-sheet > .su-body { gap: 16px; }
+
+.pn-root .su-modes { display: grid; gap: 10px; }
+.pn-root .su-mc { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; min-height: 76px; padding: 14px 16px; border: 0; border-radius: var(--pn-r-lg); text-align: left;
+  background: var(--pn-s1); color: var(--pn-text); box-shadow: inset 0 0 0 1px transparent;
+  -webkit-user-select: none; user-select: none; touch-action: manipulation;
+  transition: background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease, transform var(--pn-d-press) var(--pn-ease), box-shadow var(--pn-d-quick) ease; }
+.pn-root .su-mc:active { transform: scale(.98); }
+.pn-root .su-mc.on { background: var(--pn-sel-bg); color: var(--pn-sel-ink); box-shadow: inset 0 0 0 1px var(--pn-sel-edge); }
+.pn-root .su-mci { flex: 0 0 auto; width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; background: var(--pn-tile-bg); color: var(--pn-tile-ink);
+  transition: background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease; }
+.pn-root .su-mci svg { width: 22px; height: 22px; }
+.pn-root .su-mc.on .su-mci { background: rgba(255, 255, 255, .14); color: inherit; }
+.pn-root .su-mct { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.pn-root .su-mct b { font-size: 16.5px; font-weight: 700; letter-spacing: -.01em; }
+.pn-root .su-mct small { font-size: 13.5px; line-height: 1.35; font-weight: 500; color: var(--pn-mut); text-wrap: pretty; }
+.pn-root .su-mc.on .su-mct small { color: color-mix(in srgb, var(--pn-sel-ink) 82%, transparent); }
+/* the radio mark: a ring, filled amber with a Midnight dot when chosen */
+.pn-root .su-mck { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 2px color-mix(in srgb, currentColor 35%, transparent);
+  transition: box-shadow var(--pn-d-quick) ease, background-color var(--pn-d-quick) ease; }
+.pn-root .su-mc.on .su-mck { background: var(--pn-c-amber); box-shadow: inset 0 0 0 6px var(--pn-c-amber), inset 0 0 0 11px var(--pn-c-midnight); }
+
+/* timer box */
+.pn-root .su-tbox { display: flex; flex-direction: column; gap: 12px; padding: 12px 14px 14px 16px; border-radius: var(--pn-r-lg); background: var(--pn-s1); }
+.pn-root .su-trow { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.pn-root .su-tic { flex: 0 0 auto; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background: var(--pn-tile-bg); color: var(--pn-tile-ink); }
+.pn-root .su-tt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pn-root .su-tt b { font-size: 16px; font-weight: 700; }
+.pn-root .su-tt small { font-size: 13.5px; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+/* the switch: a 52 x 44 button (the finger's size), the 52 x 32 track drawn by ::before, the knob by i */
+.pn-root .su-sw { position: relative; flex: 0 0 auto; width: 52px; height: 44px; padding: 0; border: 0; background: transparent; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.pn-root .su-sw::before { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 32px; border-radius: var(--pn-r-pill); background: color-mix(in srgb, var(--pn-text) 22%, transparent); transition: background-color var(--pn-d-quick) ease; }
+.pn-root .su-sw i { position: absolute; top: 8px; left: 2px; width: 28px; height: 28px; border-radius: var(--pn-r-pill); background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .18), 0 3px 8px -2px rgba(0, 0, 0, .22);
+  transition: transform var(--pn-d-snap) var(--pn-spring-snap), width var(--pn-d-press) var(--pn-ease); }
+.pn-root .su-sw[aria-checked="true"]::before { background: var(--pn-pri); }
+.pn-root .su-sw[aria-checked="true"] i { transform: translateX(20px); }
+.pn-root .su-sw:active i { width: 32px; }
+.pn-root .su-sw[aria-checked="true"]:active i { transform: translateX(16px); }
+.pn-root .su-sw:focus-visible { outline: none; }
+.pn-root .su-sw:focus-visible::before { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root .su-tbox .su-chips .su-chip { flex: 1 1 0; justify-content: center; }
+body.dark .pn-root .su-tbox .su-chip:not(.on) { background: var(--pn-s2); }
+.pn-root .su-qsrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pn-root .su-ql { font-size: 15px; font-weight: 600; }
+.pn-root .su-tbox .su-step { background: var(--pn-card); }
+body.dark .pn-root .su-tbox .su-step { background: var(--pn-s2); }
+.pn-root .su-tnote { margin-top: -2px; text-wrap: pretty; }
+.pn-root .su-pace { align-self: flex-start; min-height: 44px; }
+
+/* count, then the filters behind one row */
+.pn-root .su-qs { display: flex; flex-direction: column; gap: 14px; }
+.pn-root .su-qs > .su-count { padding: 18px 0; text-align: left; }
+.pn-root .su-more { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 8px 4px 8px 0; border: 0; border-top: 1px solid var(--pn-line); background: transparent; color: var(--pn-text); text-align: left; touch-action: manipulation; }
+.pn-root .su-mt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pn-root .su-mt b { font-size: 15.5px; font-weight: 650; }
+.pn-root .su-mt small { font-size: 13px; color: var(--pn-mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-root .su-mchev { flex: 0 0 auto; color: var(--pn-mut); transition: transform var(--pn-d-quick) var(--pn-ease); }
+.pn-root .su-more[aria-expanded="true"] .su-mchev { transform: rotate(180deg); }
+.pn-root .su-filt { display: flex; flex-direction: column; gap: 18px; }
+.pn-root .su-filt[hidden] { display: none; }
+
+/* footer: the live line, then one Start */
+.pn-root .su-act { gap: 8px; }
+.pn-root .su-go { width: 100%; min-height: 52px; font-size: 17px; }
+.pn-root .su-status { text-align: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .su-mc, .pn-root .su-mci, .pn-root .su-mck, .pn-root .su-sw::before, .pn-root .su-sw i, .pn-root .su-mchev { transition: none; }
+  .pn-root .su-mc:active { transform: none; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .pn-root .su-mc:not(.on):hover { background: var(--pn-s2); }
+  .pn-root .su-more:hover .su-mt b { text-decoration: underline; text-underline-offset: 3px; }
+}
+.pn-root .su-mc:focus-visible, .pn-root .su-more:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+@media (min-width: 560px) { .pn-root .su-modes { grid-template-columns: 1fr 1fr; } .pn-root .su-mc { align-items: flex-start; } .pn-root .su-mck { margin-top: 2px; } }

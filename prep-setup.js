@@ -95,38 +95,64 @@
   var SEENS = [["new", "New"], ["wrong", "Incorrect before"], ["bm", "Bookmarked"], ["due", "Due for review"], ["all", "All"], ["mix", "Mix"]];
   var DIFFS = [["1", "Easy"], ["2", "Moderate"], ["3", "Hard"], ["4", "Very hard"], ["mix", "Mix"]];
   var COUNTS = [10, 20, 30, 50], N_MAX = 200;
-  var TIMERS = [["off", "Off"], ["q", "Per question"], ["set", "Whole set"]], QSECS = [30, 45, 60, 90];
-  var DEFAULTS = { type: "all", seen: "mix", d: "mix", n: 20, mode: "study", timer: "off", qs: 60, mins: 0 };
+  /* Timer (owner 2026-10-10): on by default, a clock for every question, 60 s each; the student may go up to 100 s.
+     The earlier strict-timer sheet offered 30 and 45 s, so those stay on the stepper (nobody's saved choice is lost);
+     anything else saved before snaps to the nearest step. "Whole set" (one clock for the set) stays as the second kind. */
+  var TIMERS = [["off", "Off"], ["q", "Each question"], ["set", "Whole set"]], QSECS = [30, 45, 60, 70, 80, 90, 100], QS_DEF = 60, QS_MAX = 100, LOW = 0.2;
+  var DEFAULTS = { type: "all", seen: "mix", d: "mix", n: 20, mode: "study", timer: "q", qs: QS_DEF, mins: 0 };
   function pickOf(list, v, d) { for (var i = 0; i < list.length; i++) if (String(list[i][0]) === String(v)) return String(v); return d; }
-  // A saved or partial choice -> a whole valid one.
+  // The nearest stepper value (ties go up); not a number or outside 10 to 600 s: the default.
+  function snapQs(x) {
+    x = Math.round(+x);
+    if (!(x >= 10 && x <= 600)) return QS_DEF;
+    var best = QSECS[0];
+    QSECS.forEach(function (v) { if (Math.abs(v - x) < Math.abs(best - x) || (Math.abs(v - x) === Math.abs(best - x) && v > best)) best = v; });
+    return best;
+  }
+  function stepQs(qs, dir) { var i = QSECS.indexOf(snapQs(qs)); return QSECS[Math.max(0, Math.min(QSECS.length - 1, i + (dir > 0 ? 1 : -1)))]; }
+  // A saved or partial choice -> a whole valid one (version 2: the timer box).
   function normSel(sel) {
     sel = sel || {};
     var n = Math.round(+sel.n);
-    var qs = Math.round(+sel.qs), mins = Math.round(+sel.mins);
+    var mins = Math.round(+sel.mins);
     return { type: pickOf(TYPES, sel.type, DEFAULTS.type), seen: pickOf(SEENS, sel.seen, DEFAULTS.seen), d: pickOf(DIFFS, sel.d, DEFAULTS.d),
       n: n >= 1 && n <= N_MAX ? n : DEFAULTS.n, mode: sel.mode === "exam" ? "exam" : "study", timer: pickOf(TIMERS, sel.timer, DEFAULTS.timer),
-      qs: qs >= 10 && qs <= 600 ? qs : DEFAULTS.qs, mins: mins >= 1 && mins <= 600 ? mins : 0 };
+      qs: sel.qs == null ? QS_DEF : snapQs(sel.qs), mins: mins >= 1 && mins <= 600 ? mins : 0, v: 2 };
   }
-  // A timed test always runs a clock: Off there means the whole set at exam pace.
-  function timerOf(sel) { return sel.mode === "exam" && sel.timer === "off" ? "set" : sel.timer; }
+  /* migrate(saved) -> a version 2 choice. Version 1 (the strict-timer sheet, 2026-10-09) had Off by default and no Off for
+     a timed test (Off there meant the whole set at exam pace). A per-question or whole-set choice is kept as it was (seconds
+     snapped to the stepper); a practice Off, the old default nobody chose against an on-by-default timer, becomes the new
+     default (on, 60 s); a timed-test Off stays what it ran as, the whole set at exam pace. */
+  function migrate(raw) {
+    if (!raw || typeof raw !== "object") return raw;
+    if (raw.v === 2) return raw;
+    var o = {}, k; for (k in raw) o[k] = raw[k];
+    if (o.timer !== "q" && o.timer !== "set") { if (o.mode === "exam") o.timer = "set"; else { o.timer = "q"; o.qs = QS_DEF; } }
+    o.v = 2;
+    return o;
+  }
+  // Off means no clock: a test with the timer off is untimed.
+  function timerOf(sel) { return sel.timer; }
   /* runOpts(sel, n) -> the runner's clock options (prep.js runQuestions): { qsec } per question, { limit } seconds for
-     the whole set (mins, or 1 minute a question at exam pace), {} none. */
+     the whole set (mins, or 1 minute a question at exam pace), { untimed } a test with no clock, {} none. */
   function runOpts(sel, n) {
     sel = normSel(sel);
     var t = timerOf(sel);
     if (t === "q") return { qsec: sel.qs };
     if (t === "set") return { limit: (sel.mins || Math.max(1, n)) * 60 };
-    return {};
+    return sel.mode === "exam" ? { untimed: true } : {};
   }
-  // "20 questions · new · hard · timed test, 60 s a question": the last settings in one line.
+  // The seconds left at which a question's line turns red: under 20% of its time (60 s: the last 12 s).
+  function lowAt(qs) { return Math.ceil(qs * LOW); }
+  // "20 questions · new · hard · test mode, 60 s a question": the last settings in one line.
   function summary(sel) {
     sel = normSel(sel);
     var parts = [sel.n + (sel.n === 1 ? " question" : " questions")], t = timerOf(sel);
     if (sel.type !== "all") parts.push(sel.type === "mix" ? "mixed types" : LABEL.type[sel.type]);
     if (sel.seen !== "all" && sel.seen !== "mix") parts.push(LABEL.seen[sel.seen]);
     if (sel.d !== "mix") parts.push(LABEL.d[sel.d]);
-    var m = sel.mode === "exam" ? "timed test" : "practice";
-    if (t === "q") m += ", " + sel.qs + " s a question"; else if (t === "set") m += ", " + (sel.mins ? sel.mins + " min" : "1 min a question");
+    var m = sel.mode === "exam" ? "test mode" : "learning mode";
+    if (t === "q") m += ", " + sel.qs + " s a question"; else if (t === "set") m += ", " + (sel.mins ? sel.mins + " min" : "1 min a question"); else m += ", no timer";
     parts.push(m);
     return parts.join(" \u00b7 ");
   }
@@ -235,22 +261,32 @@
     });
     return { sel: out, moved: moved };
   }
-  // Remembered choices: { "<kind>:<id>": sel, "<kind>": sel }, newest 40 kept.
+  /* Remembered choices: { "<kind>:<id>": sel, "<kind>": sel, "*": the last choice anywhere }, newest 40 kept. The mode
+     and the timer (on or off, kind, seconds) are the student's own, so they come from "*" on every scope; the question
+     filters and the count are per scope. */
+  var GLOBAL = ["mode", "timer", "qs"];
   function remember(map, kind, id, sel) {
     map = map && typeof map === "object" ? map : {};
     var s = normSel(sel), out = {}, keys;
     s.t = Date.now();
     map[kind] = s; if (id) map[kind + ":" + id] = s;
+    map["*"] = s;
     keys = Object.keys(map).sort(function (a, b) { return ((map[b] && map[b].t) || 0) - ((map[a] && map[a].t) || 0); }).slice(0, 40);
     keys.forEach(function (k) { out[k] = map[k]; });
     return out;
   }
-  function recall(map, kind, id) { map = map || {}; return normSel((id && map[kind + ":" + id]) || map[kind] || null); }
+  function recall(map, kind, id) {
+    map = map || {};
+    var own = migrate((id && map[kind + ":" + id]) || map[kind] || null), all = migrate(map["*"] || null), o = {}, k;
+    for (k in own || {}) o[k] = own[k];
+    if (all) GLOBAL.forEach(function (g) { if (all[g] != null) o[g] = all[g]; });
+    return normSel(o);
+  }
   function hasLast(map, kind, id) { map = map || {}; return !!((id && map[kind + ":" + id]) || map[kind]); }
 
   var PURE = { CASE_MIN: CASE_MIN, LONG_WORDS: LONG_WORDS, MID_WORDS: MID_WORDS, stemScore: stemScore, stemKind: stemKind, kindOf: kindOf, hasImg: hasImg, typeOf: typeOf, dOf: dOf,
     wrongBefore: wrongBefore, seenOf: seenOf, seenMatch: seenMatch, normSel: normSel, keep: keep, counts: counts, allocate: allocate, draw: draw, relaxHint: relaxHint, fit: fit,
-    remember: remember, recall: recall, hasLast: hasLast, timerOf: timerOf, runOpts: runOpts, summary: summary, TIMERS: TIMERS, QSECS: QSECS, TYPES: TYPES, SEENS: SEENS, DIFFS: DIFFS, COUNTS: COUNTS, N_MAX: N_MAX, DEFAULTS: DEFAULTS };
+    remember: remember, recall: recall, hasLast: hasLast, migrate: migrate, snapQs: snapQs, stepQs: stepQs, lowAt: lowAt, timerOf: timerOf, runOpts: runOpts, summary: summary, TIMERS: TIMERS, QSECS: QSECS, QS_DEF: QS_DEF, QS_MAX: QS_MAX, LOW: LOW, TYPES: TYPES, SEENS: SEENS, DIFFS: DIFFS, COUNTS: COUNTS, N_MAX: N_MAX, DEFAULTS: DEFAULTS };
   if (isNode) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -278,7 +314,9 @@
     var map = readMap(), sel = recall(map, scope.kind, scope.id);
     if (scope.mode) sel.mode = scope.mode;
     if (scope.rows && scope.rows.seen === false) sel.seen = "all";
-    S = { scope: scope, sel: sel, lists: null, host: host, prev: G.document.activeElement, loading: true, err: "" };
+    if (scope.seen) sel.seen = scope.seen;
+    if (scope.n) sel.n = Math.max(1, Math.min(N_MAX, Math.round(scope.n)));
+    S = { scope: scope, sel: sel, lists: null, host: host, prev: G.document.activeElement, loading: true, err: "", more: filtered(sel, scope.rows || {}) };
     var s = host.store();
     S.ctx = { cards: s.cards || {}, today: host.today(), mt: s.mt || {}, bm: s.bm || {} };
     var el = G.document.createElement("div");
@@ -294,6 +332,7 @@
       var f = fit(S.lists, S.sel, S.ctx, scope.rows);
       f.sel.mode = S.sel.mode;
       S.sel = f.sel;
+      if (filtered(S.sel, scope.rows || {})) S.more = true;
       S.loading = false; draw_(true);
     }, function () {
       if (S !== mine) return;
@@ -321,53 +360,89 @@
     var b = function (act, dis, lab, d) { return '<button type="button" class="su-sb" data-act="' + act + '" aria-label="' + lab + '"' + (dis ? " disabled" : "") + '><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="' + d + '"/></svg></button>'; };
     return '<div class="su-step" role="group" aria-label="' + label + '">' + b(dec, cur <= lo, less || "Less", "M6 12h12") + '<output class="su-sv" aria-live="off">' + val + "</output>" + b(inc, cur >= hi, more || "More", "M6 12h12M12 6v12") + "</div>";
   }
-  /* The three timer panels (Off, Per question, Whole set) share one grid cell and only the chosen one shows, so the group
-     is always as tall as its tallest panel: switching the timer never changes the sheet's height, and nothing below or
-     at the bottom of the scroller moves (native pass 2; at the end of the sheet a shorter panel made the scroller clamp
-     and the chip slid away under the finger). Hidden panels are inert: out of the tab order and the accessibility tree. */
+  /* The two ways to practise (owner 2026-10-10). Large radio cards: the whole card is the target (one thumb), the icon,
+     the name and one line on what happens. */
+  var MODES = [
+    ["study", "Learning Mode", "Answer, then see the full explanation before the next question.", "learn"],
+    ["exam", "Test Mode", "Answer every question. Skip or flag as you go. Results at the end.", "test"]
+  ];
+  IC.learn = '<path d="M4 6.5C6.6 5 9.4 5 12 6.8 14.6 5 17.4 5 20 6.5V19c-2.6-1.4-5.4-1.4-8 .4-2.6-1.8-5.4-1.8-8-.4z"/><path d="M12 6.8v12.6"/>';
+  IC.test = '<rect x="5" y="3.5" width="14" height="17.5" rx="2.2"/><path d="M9 3.5V5h6V3.5M8.5 10.5l1.6 1.6 3-3M8.5 16h7"/>';
+  IC.x = '<path d="M6 6l12 12M18 6L6 18"/>';
+  IC.chev = '<path d="M7 10l5 5 5-5"/>';
+  function modesHtml(sel) {
+    return '<div class="su-modes" role="radiogroup" aria-label="How do you want to practise?">' + MODES.map(function (m) {
+      var on = sel.mode === m[0];
+      return '<button type="button" class="su-mc' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '" data-act="su-mode" data-v="' + m[0] + '">' +
+        '<span class="su-mci" aria-hidden="true">' + svg(m[3]) + '</span><span class="su-mct"><b>' + m[1] + "</b><small>" + m[2] + '</small></span><span class="su-mck" aria-hidden="true"></span></button>';
+    }).join("") + "</div>";
+  }
+  /* The timer box: a switch (on by default), then for a clock per question the seconds (60 by default, up to 100) with a
+     small picture of the line it will draw, red over its last 20%. "Whole set" keeps the earlier one-clock-for-the-set
+     choice. What happens at 0 depends on the mode, so the note says it. */
   function timerHtml(sel, n) {
-    var t = timerOf(sel), opts = sel.mode === "exam" ? TIMERS.slice(1) : TIMERS;
-    var m = sel.mins || Math.max(1, n);
-    var panel = function (k, body, sub) {
-      return '<div class="su-tp' + (t === k ? " on" : "") + '" data-key="tp-' + k + '"' + (t === k ? "" : ' inert aria-hidden="true"') + ">" + body + '<p class="pn-mut pn-small su-modesub">' + sub + "</p></div>";
-    };
-    return seg("su-timer", "Timer", opts, t, null) + '<div class="su-tstack">' +
-      panel("off", "", "No clock. Take your time.") +
-      panel("q", '<div class="su-nrow">' + seg("su-qs", "Seconds a question", QSECS.map(function (x) { return [x, x + " s"]; }), QSECS.indexOf(sel.qs) >= 0 ? sel.qs : -1, null) + stepper("su-qdec", "su-qinc", sel.qs + " s", "Custom seconds", 10, 600, sel.qs, "5 seconds less", "5 seconds more") + "</div>",
-        "Each question has its own time, counted only while it is on screen and never reset. When it runs out the question locks and the set moves on.") +
-      panel("set", '<div class="su-nrow">' + seg("su-mins", "Time for the set", [["0", "Exam pace"]], sel.mins ? -1 : "0", null) + stepper("su-mdec", "su-minc", m + " min", "Custom minutes", 1, 600, m, "Fewer minutes", "More minutes") + "</div>",
-        (sel.mins ? m + " minutes" : "Exam pace: 1 minute a question, " + m + " min") + " for the whole set." + (sel.mode === "exam" ? "" : " Practice ends when the time is up.")) +
-      "</div>";
+    var t = timerOf(sel), on = t !== "off", m = sel.mins || Math.max(1, n || sel.n);
+    var sub = !on ? "Off. Take your time." : t === "q" ? sel.qs + " seconds for each question" : (sel.mins ? sel.mins + " minutes" : "1 minute a question, " + m + " min") + " for the whole set";
+    var html = '<section class="su-tbox' + (on ? " on" : "") + '" aria-labelledby="suTL"><div class="su-trow"><span class="su-tic" aria-hidden="true">' + svg("timer") + '</span>' +
+      '<span class="su-tt"><b id="suTL">Timer</b><small id="suTS">' + sub + "</small></span>" +
+      '<button type="button" class="su-sw" role="switch" aria-checked="' + on + '" aria-labelledby="suTL" aria-describedby="suTS" data-act="su-ton"><i aria-hidden="true"></i></button></div>';
+    if (on) {
+      html += seg("su-timer", "Clock", TIMERS.slice(1), t, null);
+      if (t === "q") {
+        var low = lowAt(sel.qs);
+        html += '<div class="su-qsrow"><span class="su-ql" id="suQL">Seconds per question</span>' + stepper("su-qdec", "su-qinc", sel.qs + " s", "Seconds per question", QSECS[0], QSECS[QSECS.length - 1], sel.qs, "Fewer seconds", "More seconds") + "</div>" +
+          '<p class="pn-mut pn-small su-tnote">The line under the header drains for each question and turns red in the last ' + low + " s. " +
+          (sel.mode === "exam" ? "At 0 the question is left unanswered and the test moves on; after the last one you see your result." : "At 0 the answer and its explanation show, and you go on when ready.") + "</p>";
+      } else {
+        html += '<div class="su-qsrow"><span class="su-ql">' + (sel.mins ? "Minutes for the set" : "Exam pace") + '</span>' + stepper("su-mdec", "su-minc", m + " min", "Minutes for the set", 1, 600, m, "Fewer minutes", "More minutes") + "</div>" +
+          (sel.mins ? '<button type="button" class="pn-link su-pace" data-act="su-mins" data-v="0">Back to exam pace</button>' : "") +
+          '<p class="pn-mut pn-small su-tnote">One clock for the whole set.' + (sel.mode === "exam" ? " The test is marked when it runs out." : " Practice ends when the time is up.") + "</p>";
+      }
+    }
+    return html + "</section>";
   }
   function grp(k, title, body) { return '<section class="su-grp su-g-' + k + '"><h3 class="su-h"><span class="pl-sic" aria-hidden="true">' + svg(k) + "</span>" + title + "</h3>" + body + "</section>"; }
+  // The filters a student changes now and then sit behind one row that says what they are set to.
+  function filtSummary(sel, rows) {
+    var p = [];
+    if (rows.type !== false) p.push(sel.type === "all" ? "All types" : sel.type === "mix" ? "Mixed types" : cap(LABEL.type[sel.type]));
+    if (rows.seen !== false) p.push(sel.seen === "all" ? "New and seen" : sel.seen === "mix" ? "New and repeat mix" : cap(LABEL.seen[sel.seen]));
+    p.push(sel.d === "mix" ? "Any difficulty" : cap(LABEL.d[sel.d]));
+    return p.join(" · ");
+  }
+  function cap(x) { x = String(x || ""); return x.charAt(0).toUpperCase() + x.slice(1); }
+  function filtered(sel, rows) { return (rows.type !== false && sel.type !== "all") || (rows.seen !== false && sel.seen !== "mix") || sel.d !== "mix"; }
   function draw_(arrived) {
     if (!S) return;
     var r = S.host.root(), sh = r && r.querySelector("#pnSetup .pn-sheet");
     if (!sh) return;
-    var esc = S.host.esc, sc = S.scope, sel = S.sel, rows = sc.rows || {}, body, c = null, total = 0, hint = null;
-    if (S.loading) body = '<p class="pn-load" role="status">Counting the questions…</p>';
-    else if (S.err) body = '<p class="pn-err" role="alert">' + esc(S.err) + "</p>";
+    var esc = S.host.esc, sc = S.scope, sel = S.sel, rows = sc.rows || {}, qs, c = null, total = 0, hint = null;
+    if (S.loading) qs = '<p class="pn-load su-count" role="status">Counting the questions…</p>';
+    else if (S.err) qs = '<p class="pn-err" role="alert">' + esc(S.err) + "</p>";
     else {
       c = counts(S.lists, sel, S.ctx); total = c.total;
       if (!total) hint = relaxHint(S.lists, sel, S.ctx);
-      var n = Math.min(sel.n, total), cap = Math.min(N_MAX, Math.max(1, total));
-      body = (rows.type === false ? "" : grp("type", "Question type", seg("su-type", "Question type", TYPES, sel.type, c.type))) +
-        (rows.seen === false ? "" : grp("seen", "New or repeat", seg("su-seen", "New or repeat", SEENS, sel.seen, c.seen))) +
-        grp("d", "Difficulty", seg("su-d", "Difficulty", DIFFS, sel.d, c.d)) +
-        grp("n", "Number of questions", '<div class="su-nrow">' + seg("su-n", "Number of questions", COUNTS.map(function (x) { return [x, String(x)]; }), COUNTS.indexOf(sel.n) >= 0 ? sel.n : -1, null) +
+      var n = Math.min(sel.n, total), cap_ = Math.min(N_MAX, Math.max(1, total));
+      qs = grp("n", "Number of questions", '<div class="su-nrow">' + seg("su-n", "Number of questions", COUNTS.map(function (x) { return [x, String(x)]; }), COUNTS.indexOf(sel.n) >= 0 ? sel.n : -1, null) +
           '<div class="su-step" role="group" aria-label="Custom count"><button type="button" class="su-sb" data-act="su-dec" aria-label="Fewer questions"' + (sel.n <= 1 ? " disabled" : "") + '><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 12h12"/></svg></button>' +
-          '<output class="su-sv" id="suN" aria-live="off">' + sel.n + '</output><button type="button" class="su-sb" data-act="su-inc" aria-label="More questions"' + (sel.n >= cap ? " disabled" : "") + '><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 12h12M12 6v12"/></svg></button></div></div>' +
+          '<output class="su-sv" id="suN" aria-live="off">' + sel.n + '</output><button type="button" class="su-sb" data-act="su-inc" aria-label="More questions"' + (sel.n >= cap_ ? " disabled" : "") + '><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 12h12M12 6v12"/></svg></button></div></div>' +
           (total && sel.n > total ? '<p class="pn-mut pn-small su-capn">Only ' + fmt(total) + (total === 1 ? " question matches" : " questions match") + ", so the set has " + fmt(total) + ".</p>" : "")) +
-        grp("mode", "Mode", seg("su-mode", "Mode", [["study", "Practice"], ["exam", "Timed test"]], sel.mode, null) + '<p class="pn-mut pn-small su-modesub">' + (sel.mode === "exam" ? "Marked at the end, with a question grid." : "Each answer is marked at once, with its explanation.") + "</p>") +
-        grp("timer", "Timer", timerHtml(sel, n));
+        '<button type="button" class="su-more" data-act="su-more" aria-expanded="' + !!S.more + '" aria-controls="suFilt"><span class="su-mt"><b>Filter questions</b><small>' + esc(filtSummary(sel, rows)) + '</small></span><span class="su-mchev" aria-hidden="true">' + svg("chev") + "</span></button>" +
+        '<div class="su-filt" id="suFilt"' + (S.more ? "" : " hidden") + ">" + (S.more ?
+          (rows.type === false ? "" : grp("type", "Question type", seg("su-type", "Question type", TYPES, sel.type, c.type))) +
+          (rows.seen === false ? "" : grp("seen", "New or repeat", seg("su-seen", "New or repeat", SEENS, sel.seen, c.seen))) +
+          grp("d", "Difficulty", seg("su-d", "Difficulty", DIFFS, sel.d, c.d)) : "") + "</div>";
       S.n = n;
     }
-    var status = S.loading || S.err ? "" : total ? '<b>' + fmt(total) + "</b> " + (total === 1 ? "question matches" : "questions match") : (hint ? esc(hint.msg) : "");
+    var body = modesHtml(sel) + timerHtml(sel, S.n || sel.n) + '<div class="su-qs">' + qs + "</div>";
+    var t = timerOf(sel);
+    var status = S.loading || S.err ? "" : total ? "<b>" + fmt(S.n) + "</b> " + (S.n === 1 ? "question" : "questions") + (t === "q" ? " · " + sel.qs + " s each" : t === "set" ? " · " + (sel.mins || Math.max(1, S.n)) + " min in all" : " · no timer") : (hint ? esc(hint.msg) : "");
     var go = !S.loading && !S.err && total > 0;
-    var html = '<span class="pn-grab" aria-hidden="true"></span><div class="su-head"><span class="pn-ic xs su-hic" style="--h:' + (sc.hue == null ? 172 : sc.hue) + '" aria-hidden="true">' + svg("head") + '</span><div><h2 id="suT">Set up practice</h2><p class="pn-mut pn-small">' + esc(sc.title || "") + (sc.sub ? " · " + esc(sc.sub) : "") + "</p></div></div>" +
+    var html = '<span class="pn-grab" aria-hidden="true"></span><div class="su-head"><div class="su-ht"><h2 id="suT">How do you want to practise?</h2><p class="pn-mut pn-small">' + esc(sc.title || "") + (sc.sub ? " · " + esc(sc.sub) : "") + "</p></div>" +
+      '<button type="button" class="pn-ib su-x" data-act="su-close" aria-label="Close">' + svg("x") + "</button></div>" +
       '<div class="su-body">' + body + "</div>" +
       '<div class="pn-sheet-act su-act"><p class="su-status' + (total || S.loading || S.err ? "" : " empty") + '" id="suStatus" role="status" aria-atomic="true">' + status + "</p>" +
-      '<div class="su-btns"><button type="button" class="pn-btn" data-act="su-close">Cancel</button><button type="button" class="pn-btn pri" data-act="su-go" id="suGo"' + (go ? "" : " disabled") + ">" + (go ? "Start " + S.n + (S.n === 1 ? " question" : " questions") : "Start") + "</button></div></div>";
+      '<button type="button" class="pn-btn pri su-go" data-act="su-go" id="suGo"' + (go ? "" : " disabled") + ">" + (sel.mode === "exam" ? "Start test" : "Start learning") + "</button></div>";
     /* Native pass 2: the sheet is patched, never rebuilt (owner recording 2026-10-09: every chip tap rebuilt it, so its
        scroller was a new node at scrollTop 0 and the sheet jumped to the top). Same nodes, same scroll, the pressed chip
        keeps its press state; only the counts, the chosen chip, the timer's own controls and the status change. */
@@ -423,10 +498,12 @@
     else if (a === "su-seen") sel.seen = v;
     else if (a === "su-d") sel.d = v;
     else if (a === "su-mode") sel.mode = v;
+    else if (a === "su-ton") { if (sel.timer === "off") sel.timer = S.tk || "q"; else { S.tk = sel.timer; sel.timer = "off"; } draw_(); return refocus(a); }
+    else if (a === "su-more") { S.more = !S.more; draw_(); return refocus(a); }
     else if (a === "su-timer") sel.timer = v;
-    else if (a === "su-qs") sel.qs = +v;
+    else if (a === "su-qs") sel.qs = snapQs(v);
     else if (a === "su-mins") sel.mins = 0;
-    else if (a === "su-qdec" || a === "su-qinc") { sel.qs = Math.max(10, Math.min(600, sel.qs + (a === "su-qinc" ? 5 : -5))); draw_(); return refocus(a); }
+    else if (a === "su-qdec" || a === "su-qinc") { sel.qs = stepQs(sel.qs, a === "su-qinc" ? 1 : -1); draw_(); return refocus(a); }
     else if (a === "su-mdec" || a === "su-minc") {
       var cur = sel.mins || Math.max(1, S.n || sel.n), st5 = cur >= 30 ? 5 : 1;
       sel.mins = Math.max(1, Math.min(600, cur + (a === "su-minc" ? st5 : -st5))); draw_(); return refocus(a);
@@ -445,11 +522,11 @@
   function onKey(e) {
     if (!S) return;
     var t = e.target, k = e.key;
-    if (!t || !t.classList || !t.classList.contains("su-chip")) return;
+    if (!t || !t.classList || !(t.classList.contains("su-chip") || t.classList.contains("su-mc"))) return;
     var step = k === "ArrowRight" || k === "ArrowDown" ? 1 : k === "ArrowLeft" || k === "ArrowUp" ? -1 : 0;
     if (!step) return;
     e.preventDefault();
-    var bs = Array.prototype.slice.call(t.parentNode.querySelectorAll(".su-chip:not([disabled])")), i = (bs.indexOf(t) + step + bs.length) % bs.length;
+    var bs = Array.prototype.slice.call(t.parentNode.querySelectorAll(".su-chip:not([disabled]), .su-mc")), i = (bs.indexOf(t) + step + bs.length) % bs.length;
     if (bs[i]) act(bs[i].getAttribute("data-act"), bs[i]);
   }
   function back() { return S ? close() || true : false; }

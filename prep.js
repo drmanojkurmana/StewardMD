@@ -197,36 +197,70 @@
     return best;
   }
   function fmtTime(sec) { sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec / 60), s = sec % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
-  /* A clock per question (owner 2026-10-09, strict): each question has one budget of sec seconds, spent only while that
-     question is on screen and never given back. rem[i] is what is left in ms; on is the question whose clock runs (-1
-     none) since the timestamp at. Counting is by timestamps, so time spent with the app in the background still counts
-     on return. When a budget reaches 0 the question is locked for good (out[i]). All times in ms from Date.now(). */
+  /* A clock per question (owner 2026-10-09 strict, 2026-10-10 timer box). Each question has one budget of sec seconds,
+     spent only while that question is on screen and the app is in front with no sheet over it, never given back: a
+     revisit carries on where it stopped. rem[i] is what is left and used[i] what was spent, in ms; on is the question
+     whose clock runs (-1 none) since the timestamp at. Times come from a monotonic clock (performance.now in the app).
+     Visible time only: the app pauses the clock when it goes to the background or a sheet opens, and as a backstop a
+     gap of more than QC_GAP between two readings (the page was frozen, the phone locked before any event arrived) is
+     not charged. A clock that steps backwards adds nothing. When a budget reaches 0 the question is locked for good
+     (out[i]). */
+  var QC_GAP = 3000;
   function qcNew(n, sec) {
-    var c = { sec: sec, rem: [], out: [], on: -1, at: 0 };
-    for (var i = 0; i < n; i++) { c.rem.push(sec * 1000); c.out.push(false); }
+    var c = { sec: sec, rem: [], out: [], used: [], on: -1, at: 0 };
+    for (var i = 0; i < n; i++) { c.rem.push(sec * 1000); c.out.push(false); c.used.push(0); }
     return c;
+  }
+  // Charge the running question up to now.
+  function qcStep(c, now) {
+    if (!c || c.on < 0) return;
+    var d = now - c.at, i = c.on;
+    c.at = now;
+    if (!(d > 0) || d > QC_GAP) return;
+    var take = Math.min(d, c.rem[i]);
+    c.rem[i] -= take; if (c.used) c.used[i] = (c.used[i] || 0) + take;
+    if (c.rem[i] <= 0) { c.rem[i] = 0; c.out[i] = true; }
   }
   // Stop the running clock and keep what is left (a budget used up here locks the question).
   function qcPause(c, now) {
     if (!c || c.on < 0) return;
-    var i = c.on;
-    c.rem[i] = Math.max(0, c.rem[i] - Math.max(0, now - c.at));
-    if (c.rem[i] <= 0) c.out[i] = true;
+    qcStep(c, now);
     c.on = -1;
   }
   // Question i is on screen from now: its clock runs, unless it is locked.
   function qcShow(c, i, now) {
     if (!c) return;
-    if (c.on === i) return;
+    if (c.on === i) return qcStep(c, now);
     qcPause(c, now);
     if (!c.out[i] && c.rem[i] > 0) { c.on = i; c.at = now; }
   }
-  function qcLeft(c, i, now) { return c ? Math.max(0, c.rem[i] - (c.on === i ? Math.max(0, now - c.at) : 0)) : 0; }
+  function qcLeft(c, i, now) {
+    if (!c) return 0;
+    var d = c.on === i ? now - c.at : 0;
+    if (!(d > 0) || d > QC_GAP) d = 0;
+    return Math.max(0, c.rem[i] - d);
+  }
   // qcTick(c, now) -> the index locked by this tick (its time ran out), or -1.
   function qcTick(c, now) {
-    if (!c || c.on < 0 || qcLeft(c, c.on, now) > 0) return -1;
-    var i = c.on; qcPause(c, now); c.rem[i] = 0; c.out[i] = true;
+    if (!c || c.on < 0) return -1;
+    var i = c.on;
+    qcStep(c, now);
+    if (!c.out[i]) return -1;
+    c.on = -1;
     return i;
+  }
+  /* qcLevel(left, total) -> the line's state: "ok" over half the time left, "mid" down to 20%, "low" under 20% (owner:
+     red when less than 20% remains; at 60 s that is the last 12 s), "out" at 0. */
+  function qcLevel(left, total) { return !(left > 0) ? "out" : left < total * 0.2 ? "low" : left <= total * 0.5 ? "mid" : "ok"; }
+  /* qcAfter(c, from) -> where Test Mode goes when a question's time runs out: the next question after it that still has
+     time, or -1 when there is none (the test is marked). Learning Mode never moves by itself. */
+  function qcAfter(c, from) { for (var i = from + 1; c && i < c.out.length; i++) if (!c.out[i]) return i; return -1; }
+  /* qcStats(c) -> { avg, n, out }: seconds spent per question that was on screen (rounded), how many, how many timed out. */
+  function qcStats(c) {
+    var t = 0, n = 0, o = 0;
+    if (!c || !c.used) return null;
+    c.used.forEach(function (u, i) { if (u > 0) { t += u; n++; } if (c.out[i]) o++; });
+    return { avg: n ? Math.round(t / n / 1000) : 0, n: n, out: o };
   }
   /* qcNext(c, from, open) -> where a timed-out question hands over: the next question after from that is still open
      (open(i): not locked and, in practice, not answered), else the first open one before it, else -1 (the set is done). */
@@ -419,7 +453,7 @@
     return s.cel;
   }
   var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
-    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
+    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh };
@@ -905,6 +939,8 @@
     try { if (G.PREP_NAV) G.PREP_NAV.attach(root, HOST); } catch (e) {}
     root.addEventListener("click", onClick);
     bindSheetDrag();
+    // A sheet over the runner (Ask MaiK, share, the Pro limit) stops the per-question clock; closing it starts it again.
+    try { new G.MutationObserver(function () { var r = st.run; if (r && r.qc && r.qc.used && !r.done) { syncClock(r); tlSync(r); } }).observe(root, { childList: true }); } catch (e) {}
     root.addEventListener("input", function (e) {
       if (!e.target || e.target.id !== "pnSearch") return;
       srch.q = e.target.value;
@@ -941,9 +977,12 @@
     st.stack = [renderHome];
     if (!hit) { push(renderHome); return toast("No module matches \u201c" + String(opts.query).slice(0, 60) + "\u201d. Pick one from the list."); }
     loadIndex(hit.subject).then(function () {
+      var n = Math.max(1, Math.min(50, Number(opts.n) || SESSION)), md = opts.mode === "exam" ? "exam" : "study";
       push(function () { renderSubject(hit.subject); });
+      // With the mode sheet the deep link opens the module and the sheet, set to the asked count and mode.
+      if (setupOn()) return openModule(hit.subject, hit.module, { n: n, mode: md });
       push(function () { renderModule(hit.subject, hit.module); });
-      startModule(hit.subject, hit.module, opts.mode === "exam" ? "exam" : "study", Math.max(1, Math.min(50, Number(opts.n) || SESSION)));
+      startModule(hit.subject, hit.module, md, n);
     });
   }
   function close() {
@@ -1188,14 +1227,28 @@
     var apct = n ? Math.min(100, Math.round(Math.min(p.answered, n) * 100 / n)) : 0;
     paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><div id="pnCardSlot"></div><div id="pnPyqSlot"></div><section class="pn-panel pn-modp" id="pnModPanel" style="--h:' + subjHue(sid) + '">' +
       '<div class="pn-modh"><div class="pn-modt"><span class="pn-ic sm pn-modi" aria-hidden="true">' + subjIco(sid) + '</span><p class="pn-big">' + fmt(n) + ' MCQs</p><p class="pn-mut">' + fmt(Math.min(p.answered, n)) + " answered" + (sr != null ? " · mastery " + sr + "/5" : "") + (p.due ? " · " + fmt(p.due) + " due for review" : "") + "</p></div>" + mring(apct, apct + "%") + "</div>" +
-      (p.due ? '<button type="button" class="pn-btn pri" data-act="start" data-k="due">' + ico("play") + " Review " + fmt(p.due) + " due</button>" : "") +
-      '<button type="button" class="pn-btn' + (p.due ? "" : " pri") + '" data-act="start" data-k="study">' + ico("play") + (setupOn() ? " Practice" : " Practice " + Math.min(SESSION, n) + " questions") + "</button>" + lastBtn("module", mid) +
-      '<button type="button" class="pn-btn" data-act="start" data-k="exam">' + ico("clock") + (setupOn() ? " Timed test" : " Timed test: " + Math.min(SESSION, n) + " questions, " + Math.round(Math.min(SESSION, n) * ex.sec / 60) + " min") + "</button>" +
-      '<p class="pn-mut pn-small">Practice marks each answer at once with its explanation. A timed test marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>');
+      (setupOn() ?
+        // Timer box (owner 2026-10-10): one Practise button opens the mode sheet (Learning or Test Mode, the timer, the
+        // filters); "Review N due" opens it set to the questions due.
+        '<button type="button" class="pn-btn pri" data-act="start" data-k="study">' + ico("play") + " Practise</button>" +
+        (p.due ? '<button type="button" class="pn-btn" data-act="start" data-k="due">' + ico("clock") + " Review " + fmt(p.due) + " due</button>" : "") + lastBtn("module", mid) +
+        '<p class="pn-mut pn-small">Learning Mode explains each answer before the next question. Test Mode marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>'
+      : (p.due ? '<button type="button" class="pn-btn pri" data-act="start" data-k="due">' + ico("play") + " Review " + fmt(p.due) + " due</button>" : "") +
+      '<button type="button" class="pn-btn' + (p.due ? "" : " pri") + '" data-act="start" data-k="study">' + ico("play") + " Practice " + Math.min(SESSION, n) + " questions</button>" +
+      '<button type="button" class="pn-btn" data-act="start" data-k="exam">' + ico("clock") + " Timed test: " + Math.min(SESSION, n) + " questions, " + Math.round(Math.min(SESSION, n) * ex.sec / 60) + " min</button>" +
+      '<p class="pn-mut pn-small">Practice marks each answer at once with its explanation. A timed test marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>'));
     st.cur = { s: sid, m: mid };
     if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
     if (G.PREP_PYQ) G.PREP_PYQ.mount(root.querySelector("#pnPyqSlot"), sid, mid, HOST);
     if (G.PREP_FLASH) G.PREP_FLASH.mount(root.querySelector("#pnCardSlot"), sid, mid, HOST);
+  }
+  /* Opening a module (from Home, a subject in the Tests tab's QBank, Solve next, a deep link) shows the module and asks
+     how to practise at once: the mode sheet over it (owner 2026-10-10: "each module when open should ask"). Closing the
+     sheet leaves the module screen (lessons, cards, PYQs). A module with no questions opens without it. opts: { n, mode }. */
+  function openModule(sid, mid, opts) {
+    push(function () { renderModule(sid, mid); });
+    var t = topicOf(sid, mid);
+    if (setupOn() && t && countFor(t, load().exam) > 0 && st.cur && st.cur.m === mid) setupModule(sid, mid, null, opts);
   }
   function startModule(sid, mid, kind, n) {
     var s = load(), size = n || SESSION;
@@ -1241,10 +1294,14 @@
     nav(1); renderRun();
     if (st.run.limit || st.run.qsec) startTimer();
   }
+  // A clock per question ticks 4 times a second (the line's colour and the figure change on time; the line itself drains
+  // on the compositor); a whole-set clock once a second.
   function startTimer() {
     stopTimer();
-    st.timer = G.setInterval(runTick, 1000);
+    st.timer = G.setInterval(runTick, st.run && st.run.qc ? 250 : 1000);
   }
+  // The per-question clock reads a monotonic clock (SMD_PREP_NOW: a test clock).
+  function pnow() { try { if (G.SMD_PREP_NOW) return G.SMD_PREP_NOW(); return G.performance && G.performance.now ? G.performance.now() : Date.now(); } catch (e) { return Date.now(); } }
   function runTick() {
       var r = st.run; if (!r || r.done) return stopTimer();
       if (r.qc) return qtick(r);
@@ -1254,31 +1311,100 @@
   }
   // Is a question open to answer? Not after its time ran out, and in practice not once answered.
   function qOpen(r, i) { return !(r.qc && r.qc.out[i]) && !(r.mode === "study" && r.ans[i] >= 0); }
-  // The per-question clock runs only for the question on screen (the runner on top of the stack, the question still
-  // open); the question grid, any screen pushed over the runner and an answered practice question stop it.
+  /* The per-question clock runs only for the question on screen: the runner on top of the stack, the question still open,
+     the app in front and no sheet over the runner (Ask MaiK, share, the Pro limit: timer box rule, owner 2026-10-10). The
+     question grid, a screen pushed over the runner, an answered Learning Mode question, the background and a locked
+     screen all stop it, and nothing is lost: it resumes where it stopped. */
+  function sheetUp() { return !!(root && root.querySelector(":scope > .pn-sheet-wrap")); }
+  function docHidden() { try { return D.visibilityState === "hidden" || st.frozen; } catch (e) { return false; } }
   function syncClock(r) {
-    if (!r || !r.qc) return;
-    var now = Date.now();
-    if (!r.done && st.stack[st.stack.length - 1] === renderRun && qOpen(r, r.i)) qcShow(r.qc, r.i, now); else qcPause(r.qc, now);
+    if (!r || !r.qc || !r.qc.used) return;
+    var now = pnow();
+    if (!r.done && st.stack[st.stack.length - 1] === renderRun && qOpen(r, r.i) && !docHidden() && !sheetUp()) qcShow(r.qc, r.i, now); else qcPause(r.qc, now);
   }
-  function qclockText(r, i) { return fmtTime(Math.ceil(qcLeft(r.qc, i, Date.now()) / 1000)); }
-  /* A clock per question: the figure counts this question's own budget down. When it runs out the question locks (a
-     practice question is recorded as not answered, as a timed test does at the end) and the set goes on to the next
-     open question, or finishes when none is left. Called each second and when the app comes back to the front. */
+  function qclockText(r, i) { return fmtTime(Math.ceil(qcLeft(r.qc, i, pnow()) / 1000)); }
+  /* A clock per question: the figure and the line count this question's own budget down. At 0 the question locks.
+     Test Mode records it unanswered at the end (as any blank) and moves to the next question that still has time; after
+     the last one the test is marked. Learning Mode records it as not answered, shows the right answer and the
+     explanation, and waits for Next (never moves by itself). Called 4 times a second and when the app comes back. */
   function qtick(r) {
-    var x = qcTick(r.qc, Date.now()), el = root && root.querySelector("#pnClock");
+    var x = qcTick(r.qc, pnow()), el = root && root.querySelector("#pnClock");
     syncClock(r);
-    if (el && r.qc.on === r.i) el.textContent = qclockText(r, r.i);
+    if (el && st.stack[st.stack.length - 1] === renderRun) el.textContent = qclockText(r, r.i);
+    tlSync(r);
     if (x < 0) return;
-    if (r.mode === "study" && !r.custom) record(r.items[x], -1);
-    var nx = qcNext(r.qc, x, function (i) { return qOpen(r, i); });
-    if (st.stack[st.stack.length - 1] !== renderRun || r.i !== x) { if (nx < 0) finish(); return; }
-    toast("Time up on question " + (x + 1) + ".");
+    if (r.mode === "study") {
+      if (!r.custom) record(r.items[x], -1);
+      if (st.stack[st.stack.length - 1] === renderRun && r.i === x) { r.fresh = x; renderRun(); }
+      return;
+    }
+    if (st.stack[st.stack.length - 1] !== renderRun || r.i !== x) return;
+    var nx = qcAfter(r.qc, x);
     if (nx < 0) return finish();
-    r.i = nx; st.swipeIn = nx > x ? 1 : -1; renderRun();
+    toast("Time up on question " + (x + 1) + ". Moved to question " + (nx + 1) + ".");
+    r.i = nx; st.swipeIn = 1; renderRun();
   }
-  // Back from the background: the interval may have slept, so catch the clocks up at once (timestamps, not ticks).
-  if (G.document && G.document.addEventListener) G.document.addEventListener("visibilitychange", function () { if (G.document.visibilityState === "visible" && st.run && !st.run.done && st.timer) runTick(); });
+  /* The timer line (owner 2026-10-10): a thin line across the full width under the header, full at the start of the
+     question's time and empty at 0, linear. It drains on the compositor (one Web Animation from the remaining fraction to
+     0 over the remaining time), restarted from the clock at every pause, resume, new question or drift over 150 ms, so it
+     never runs ahead of the clock. Over half left it is green, then amber, and red under 20%; the figure in the bar says
+     the seconds, and a polite live region says "12 seconds left" once at 20% and at 10 s, and "Time up" at 0. Reduced
+     motion: no drain animation, the line steps once a second with the figure. */
+  function tlHtml(r) {
+    if (!r.qc || !r.qc.used) return "";
+    var c = r.qc, tot = c.sec * 1000, left = qcLeft(c, r.i, pnow()), lv = qcLevel(left, tot), s = Math.ceil(left / 1000);
+    return '<div class="pn-tl" id="pnTl" data-lvl="' + lv + '" role="progressbar" aria-label="Time left for this question" aria-valuemin="0" aria-valuemax="' + c.sec + '" aria-valuenow="' + s + '" aria-valuetext="' + s + (s === 1 ? " second" : " seconds") + ' left"><i class="pn-tl-f" style="transform:scaleX(' + (tot ? left / tot : 0).toFixed(4) + ')"></i></div>' +
+      '<span class="pn-sr" id="pnTlLive" aria-live="polite" aria-atomic="true"></span>';
+  }
+  function tlSync(r) {
+    var el = root && root.querySelector("#pnTl");
+    if (!el || !r || !r.qc || !r.qc.used) return;
+    var c = r.qc, i = r.i, tot = c.sec * 1000, now = pnow(), left = qcLeft(c, i, now), lv = qcLevel(left, tot), s = Math.ceil(left / 1000), run = c.on === i;
+    var ck = root.querySelector(".pn-qck");
+    if (el.getAttribute("data-lvl") !== lv) el.setAttribute("data-lvl", lv);
+    if (ck && ck.getAttribute("data-lvl") !== lv) ck.setAttribute("data-lvl", lv);
+    if (el.getAttribute("aria-valuenow") !== String(s)) { el.setAttribute("aria-valuenow", s); el.setAttribute("aria-valuetext", s + (s === 1 ? " second" : " seconds") + " left"); }
+    // Spoken once per question: entering the red, 10 s, time up.
+    var said = r.tlSaid || (r.tlSaid = {}), k = "", msg = "";
+    if (lv === "out") { k = i + ":0"; msg = "Time up"; }
+    else if (run && left <= 10000 && left > 0 && tot > 10000) { k = i + ":10"; msg = "10 seconds left"; }
+    else if (run && lv === "low") { k = i + ":low"; msg = s + " seconds left"; }
+    if (k && !said[k]) { said[k] = 1; var lr = root.querySelector("#pnTlLive"); if (lr) lr.textContent = msg; }
+    var f = el.firstChild; if (!f) return;
+    var frac = tot ? left / tot : 0;
+    if (reducedMo() || !f.animate) {
+      if (f.__a) { try { f.__a.cancel(); } catch (e) {} f.__a = null; }
+      f.style.transform = "scaleX(" + (tot ? Math.min(1, s * 1000 / tot) : 0).toFixed(4) + ")";
+      return;
+    }
+    if (!run) {
+      if (f.__a) { try { f.__a.cancel(); } catch (e) {} f.__a = null; }
+      f.style.transform = "scaleX(" + frac.toFixed(4) + ")";
+      return;
+    }
+    // Running: keep one animation going; restart it from the clock when the question changed, it was paused, or it drifted.
+    var exp = f.__a ? f.__l0 - (now - f.__t0) : 0;
+    if (f.__a && f.__q === i && Math.abs(exp - left) <= 150) return;
+    if (f.__a) { try { f.__a.cancel(); } catch (e) {} }
+    f.style.transform = "scaleX(" + frac.toFixed(4) + ")";
+    f.__q = i; f.__t0 = now; f.__l0 = left;
+    try { f.__a = f.animate([{ transform: "scaleX(" + frac.toFixed(4) + ")" }, { transform: "scaleX(0)" }], { duration: Math.max(1, left), easing: "linear", fill: "forwards" }); } catch (e) { f.__a = null; }
+  }
+  // Away and back: the background, a locked screen, a frozen page stop the per-question clock; coming back starts it again
+  // where it stopped (no time lost, none charged). A whole-set clock catches up from timestamps as before.
+  function onAway(away) {
+    var r = st.run;
+    st.frozen = !!away;
+    if (!r || r.done || !st.timer) return;
+    if (r.qc && r.qc.used) { syncClock(r); tlSync(r); if (!st.frozen) qtick(r); return; }
+    if (!st.frozen) runTick();
+  }
+  if (G.document && G.document.addEventListener) {
+    G.document.addEventListener("visibilitychange", function () { onAway(G.document.visibilityState === "hidden"); });
+    G.document.addEventListener("freeze", function () { onAway(true); });
+    G.document.addEventListener("resume", function () { onAway(false); });
+    if (G.addEventListener) { G.addEventListener("pagehide", function () { onAway(true); }); G.addEventListener("pageshow", function () { onAway(G.document.visibilityState === "hidden"); }); }
+  }
   function stopTimer() { if (st.timer) { G.clearInterval(st.timer); st.timer = 0; } }
   // Owner rule (2026-10-07): no authorship or source line on questions; content credits live in the Terms and Privacy pages.
   // A previous-year question still names its paper (exam, year, memory-based recall), which is the paper type, not the origin.
@@ -1297,6 +1423,7 @@
     if (n <= 30) segs = r.items.map(function (it, i) {
       var c = i === r.i ? "cur" : "";
       if (r.ans[i] >= 0) c += r.mode === "study" ? (r.ans[i] === it.a ? " ok" : " no") : " ans";
+      else if (r.mode === "study" && r.qc && r.qc.out[i]) c += " no";
       if (r.mark[i]) c += " mark";
       return "<i" + (c ? ' class="' + c.trim() + '"' : "") + "></i>";
     }).join("");
@@ -1308,8 +1435,10 @@
   // Per question: the ring empties over this question's own budget from where it stands, and holds still while the
   // clock is stopped (answered in practice, or locked).
   function clockHtml(r) {
+    // Per question: the figure only (the line under the header is the picture of it).
+    if (r.qc && r.qc.used) { var lft = qcLeft(r.qc, r.i, pnow()); return '<span class="pn-qck" data-lvl="' + qcLevel(lft, r.qc.sec * 1000) + '">' + svg(ICON.clock, false, 16) + '<span class="pn-clock" id="pnClock" aria-hidden="true">' + fmtTime(Math.ceil(lft / 1000)) + "</span></span>"; }
     var per, spent, run = true, txt;
-    if (r.qc) { per = r.qsec; spent = per - qcLeft(r.qc, r.i, Date.now()) / 1000; run = r.qc.on === r.i; txt = qclockText(r, r.i); }
+    if (r.qc) { per = r.qsec; spent = per - qcLeft(r.qc, r.i, pnow()) / 1000; run = r.qc.on === r.i; txt = qclockText(r, r.i); }
     else { per = r.limit / r.items.length; spent = (Date.now() - (r.qt0 || r.t0)) / 1000; txt = fmtTime(r.limit - (Date.now() - r.t0) / 1000); }
     var over = r.qc ? r.qc.out[r.i] : spent > per;
     return '<span class="pn-clockw' + (over ? " over" : "") + '"><svg class="pn-pace" viewBox="0 0 40 40" aria-hidden="true"><circle class="rt" cx="20" cy="20" r="17" pathLength="100"/>' +
@@ -1339,7 +1468,8 @@
     if (r.qi !== r.i) { r.qi = r.i; r.qt0 = Date.now(); }
     syncClock(r);
     var locked = !!(r.qc && r.qc.out[r.i]);
-    var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && chosen >= 0, s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
+    // Learning Mode: an answer, or the time running out, shows the answer and the explanation.
+    var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && (chosen >= 0 || locked), s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
     // PYQ items (prep-pyq.js) are not in a bank module file, so a bookmark could not reload them: no ribbon.
     var pyq = G.PREP_PYQ ? { tags: G.PREP_PYQ.chips(it, HOST), fig: G.PREP_PYQ.figure(it, HOST) } : { tags: "", fig: "" };
     // Radiology image series (prep-rad.js): the scroll stack sits under the image slot.
@@ -1362,7 +1492,7 @@
     var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
     var fb = "", revealFb = false;
     if (shown) {
-      var ok = chosen === it.a, fresh = r.fresh === r.i;
+      var ok = chosen === it.a, fresh = r.fresh === r.i, tup = chosen < 0;
       revealFb = fresh;
       r.fresh = -1;   // the reveal plays once, on the paint right after the answer (a bookmark or tag repaint keeps still)
       // Round 7: verdict, then the answer on its own line, then why it is right and, when the item carries a reason
@@ -1371,7 +1501,7 @@
       var others = rs ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && rs[k] && String(rs[k]).trim(); }) : [];
       others.sort(function (x, y) { return (y === chosen) - (x === chosen) || x - y; });
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
-      fb += '<p class="pn-verdict"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : "x") + "</span><span><b>" + (ok ? "Correct" : "Incorrect") + "</b>" + (ok ? "" : "<small>You chose " + L[chosen] + "</small>") + "</span></p>" +
+      fb += '<p class="pn-verdict' + (tup ? " pn-vtu" : "") + '"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : tup ? "clock" : "x") + "</span><span><b>" + (ok ? "Correct" : tup ? "Time up" : "Incorrect") + "</b>" + (ok ? "" : "<small>" + (tup ? "Not answered in time" : "You chose " + L[chosen]) + "</small>") + "</span></p>" +
         '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + esc(it.o[it.a]) + "</span></p>" +
         whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
@@ -1381,8 +1511,8 @@
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
         // Ask MaiK (prep-ask.js): on every answer, right or wrong, on this phone or online. Without prep-ask.js the
         // older offline-only button, shown only when MaiK runs on this phone.
-        (G.PREP_ASK ? askBtn("ask", ok ? "Ask MaiK why " + L[it.a] + " is right" : "Why is " + L[chosen] + " wrong? Ask MaiK") :
-          !ok && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
+        (G.PREP_ASK ? askBtn("ask", ok || tup ? "Ask MaiK why " + L[it.a] + " is right" : "Why is " + L[chosen] + " wrong? Ask MaiK") :
+          !ok && !tup && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
         (!ok && !own ? '<div class="pn-mtag" role="group" aria-label="Why did you miss it?"><span class="pn-mut pn-small">Why did you miss it?</span><div class="pn-wrap">' + MISTAKE_TAGS.map(function (t) {
           var on = (s.mt[it.id] || [])[2] === t[0];
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
@@ -1390,7 +1520,7 @@
         provHtml(it) + (qid ? IDS.chip(qid) : "") + "</section>";
     }
     // Time up: the question stays locked for the rest of the set, answered or not.
-    var lockNote = locked ? '<p class="pn-timeup" role="status">' + ico("lock") + "<span><b>Time up</b>" + (chosen >= 0 ? "Your answer " + L[chosen] + " is kept and can no longer be changed." : "This question can no longer be answered.") + "</span></p>" : "";
+    var lockNote = locked && !shown ? '<p class="pn-timeup" role="status">' + ico("lock") + "<span><b>Time up</b>" + (chosen >= 0 ? "Your answer " + L[chosen] + " is kept and can no longer be changed." : "This question can no longer be answered.") + "</span></p>" : "";
     var nav = r.mode === "exam" ?
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="prev"' + (r.i ? "" : " disabled") + ">Previous</button>" +
       '<button type="button" class="pn-btn' + (r.mark[r.i] ? " on" : "") + '" data-act="markq" aria-label="Mark for review" aria-pressed="' + !!r.mark[r.i] + '">' + ico("flag", !!r.mark[r.i]) + " Mark</button>" +
@@ -1400,9 +1530,10 @@
     // A swipe arrives from the side it was thrown toward (shared axis); taps and keys change the question in place.
     var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : "";
     st.swipeIn = 0;
-    paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + qprogHtml(r) +
-      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + (qid && !fb ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+    paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + tlHtml(r) + qprogHtml(r) +
+      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
     if (revealFb) revealFeedback();
+    tlSync(r);
     bindRunSwipe();
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
   }
@@ -1593,13 +1724,19 @@
     while (st.stack.length && st.stack[st.stack.length - 1] !== renderRun) st.stack.pop();
     r.done = true; r.secs = Math.round((Date.now() - r.t0) / 1000);
     if (r.custom) return r.custom.submit(r);
-    if (r.qc) qcPause(r.qc, Date.now());
+    if (r.qc) qcPause(r.qc, pnow());
     if (r.mode === "exam") r.items.forEach(function (it, i) { if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
     if (r.save || r.psId) psSave(r);
     if (r.scheme) { var sc = scoreMock(r.items, r.ans, r.scheme), s = load(); s.mh = (s.mh || []).concat([{ ts: Date.now(), label: r.title, marks: sc.marks, max: sc.max, n: r.items.length }]).slice(-20); save(); }
     if (!st.kb) nav(1);   // the result arrives like a pushed screen (a key finish stays still)
     renderResult();
     if (G.PREP_NATIVE) G.PREP_NATIVE.finished();
+  }
+  // Timer box (2026-10-10): the time a question took on average and how many ran out, when the set had a clock per question.
+  function tstatHtml(r) {
+    var x = r.qc && !r.saved ? qcStats(r.qc) : null;
+    if (!x || !x.n) return "";
+    return '<p class="pn-tstat"><span><b>' + x.avg + " s</b> average a question</span><span><b>" + x.out + "</b> timed out</span><span><b>" + r.qsec + " s</b> allowed</span></p>";
   }
   // Round 7: the set at a glance under the score, one mark a question in order (up to 30): right, missed, not answered.
   function recapHtml(r) {
@@ -1698,7 +1835,7 @@
     var line = !r.scheme && answered >= 5 ? maikLine({ subject: setSubject(r.items, subjectById) }, r) : "";
     paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (r.scheme ? mockAnalysis(r, cele) : '<section class="pn-panel pn-score"' + celeAttrs(cele) + ">" + celeChip(cele) +
       '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + '</svg>' +
-      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" && !r.saved ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + recapHtml(r) + "</section>" + splitHtml(r) + selfCurveHtml(pct, r)) + line +
+      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" && !r.saved ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + tstatHtml(r) + recapHtml(r) + "</section>" + splitHtml(r) + selfCurveHtml(pct, r)) + line +
       reviewHtml(r) +
       '<div class="pn-navrow pn-again">' + (missed.length ? '<button type="button" class="pn-btn" data-act="retrymissed">' + (missed.length === r.items.length ? "Practise again" : "Practise the missed (" + missed.length + ")") + "</button>" : "") +
       (missed.length < r.items.length ? '<button type="button" class="pn-btn" data-act="retryall">Practise all again (' + r.items.length + ")</button>" : "") +
@@ -1837,17 +1974,52 @@
   }
 
   /* ---------- Phase 5: mock exams ---------- */
+  /* The Tests tab (owner 2026-10-10: "Test menu should contain both Tests and QBank modules (all subjects)"): one screen,
+     a segmented control on top. Tests = the mock exams with the previous year papers row (NEET-PG). QBank = every subject
+     of the exam as the same tiles as Home (progress ring, modules done, MCQs), with Custom module, Bookmarks and My
+     mistakes; a subject opens its modules and a module asks how to practise. The last section is remembered on this
+     device (smd_prep_tt); Mock exam on Home always opens Tests. */
+  var TT_KEY = "smd_prep_tt";
+  function ttGet() { if (st.tt) return st.tt; try { var v = G.localStorage.getItem(TT_KEY); return (st.tt = v === "qbank" ? "qbank" : "tests"); } catch (e) { return (st.tt = "tests"); } }
+  function ttSet(v) { st.tt = v === "qbank" ? "qbank" : "tests"; try { G.localStorage.setItem(TT_KEY, st.tt); } catch (e) {} }
   function renderMocks() {
-    var s = load(), list = MOCKS[s.exam] || MOCKS["neet-pg"];
-    // The Tests tab (prep-nav.js) opens here: the previous year papers row (NEET-PG) sits on top.
-    var pyq = G.PREP_PYQ && s.exam === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(HOST) + "</div>" : "";
-    paint(bar("Mock exam", examOf(s.exam).label, "back") + '<div class="pn-body pn-mocks"><div class="pn-banner pn-art-mock" aria-hidden="true"></div>' + pyq + list.map(function (m) {
-      var mini = Math.min(50, m.n), part = m.parts ? m.n / m.parts : 0;
-      return '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(m.label) + '</p><p class="pn-mut">' + m.n + " questions" + (part ? " in " + m.parts + " parts of " + part + ", " + fmtMin(m.min / m.parts) + " each" : ", " + fmtMin(m.min)) + ". Right +" + fmtMark(m.plus) + (m.minus ? ", wrong minus " + fmtMark(m.minus) : ", no negative marking") + ", unanswered 0." + (m.pass ? " Pass mark " + m.pass + " of " + m.n * m.plus + "." : "") + "</p>" +
-        (part ? '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="part">' + ico("clock") + " One part: " + part + " questions, " + fmtMin(m.min / m.parts) + "</button>"
-          : '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="full">' + ico("clock") + " Full mock: " + m.n + " questions</button>") +
-        (mini < m.n ? '<button type="button" class="pn-btn" data-act="mock" data-v="' + m.id + '" data-k="mini">' + ico("clock") + " Mini mock: " + mini + " questions, " + fmtMin(Math.round(m.min * mini / m.n)) + "</button>" : "") + "</section>";
-    }).join("") + '<p class="pn-mut pn-small">Questions are drawn across every subject of the exam in proportion to the bank. Patterns follow the published bulletins; check the current one before your exam.</p></div>');
+    var s = load(), sec = ttGet(), q = sec === "qbank", subs = subjectsOf(s.exam);
+    var SEC = [["tests", "Tests"], ["qbank", "QBank"]];
+    var segHtml = '<div class="pn-filters pn-seg pn-ttseg" role="group" aria-label="Show" style="--n:2;--i:' + (q ? 1 : 0) + '"><span class="pn-seg-th" aria-hidden="true"></span>' + SEC.map(function (x) {
+      return '<button type="button" class="pn-chip' + (sec === x[0] ? " on" : "") + '" aria-pressed="' + (sec === x[0]) + '" data-act="tt" data-v="' + x[0] + '">' + x[1] + "</button>";
+    }).join("") + "</div>";
+    var body;
+    if (!q) {
+      var list = MOCKS[s.exam] || MOCKS["neet-pg"];
+      // The previous year papers row (NEET-PG) sits on top.
+      var pyq = G.PREP_PYQ && s.exam === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(HOST) + "</div>" : "";
+      body = '<div class="pn-banner pn-art-mock" aria-hidden="true"></div>' + pyq + list.map(function (m) {
+        var mini = Math.min(50, m.n), part = m.parts ? m.n / m.parts : 0;
+        return '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(m.label) + '</p><p class="pn-mut">' + m.n + " questions" + (part ? " in " + m.parts + " parts of " + part + ", " + fmtMin(m.min / m.parts) + " each" : ", " + fmtMin(m.min)) + ". Right +" + fmtMark(m.plus) + (m.minus ? ", wrong minus " + fmtMark(m.minus) : ", no negative marking") + ", unanswered 0." + (m.pass ? " Pass mark " + m.pass + " of " + m.n * m.plus + "." : "") + "</p>" +
+          (part ? '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="part">' + ico("clock") + " One part: " + part + " questions, " + fmtMin(m.min / m.parts) + "</button>"
+            : '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="full">' + ico("clock") + " Full mock: " + m.n + " questions</button>") +
+          (mini < m.n ? '<button type="button" class="pn-btn" data-act="mock" data-v="' + m.id + '" data-k="mini">' + ico("clock") + " Mini mock: " + mini + " questions, " + fmtMin(Math.round(m.min * mini / m.n)) + "</button>" : "") + "</section>";
+      }).join("") + '<p class="pn-mut pn-small">Questions are drawn across every subject of the exam in proportion to the bank. Patterns follow the published bulletins; check the current one before your exam.</p>';
+    } else {
+      var known = subs.every(function (sb) { return !!st.ix[sb.id]; });
+      body = '<div class="pn-group">' + row("custom", ico("plus"), "Custom module", "Your own mix of subjects and count") +
+        row("bookmarks", ico("bm"), "Bookmarks", fmt(Object.keys(s.bm).length) + " saved") +
+        row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") + "</div>" +
+        '<h2 class="pn-h">Subjects</h2><p class="pn-mut pn-small pn-qbs" id="pnQbS">' + qbSummary(subs, known) + '</p><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>";
+    }
+    paint(bar("Tests", examOf(s.exam).label, "back") + segHtml + '<div class="pn-body pn-mocks' + (q ? " pn-qbank" : "") + '" id="pnTests">' + body + "</div>");
+    if (q) Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
+      if (!st.open || st.stack[st.stack.length - 1] !== renderMocks || ttGet() !== "qbank") return;
+      var grid = root.querySelector("#pnGrid"), sm = root.querySelector("#pnQbS");
+      if (grid) patchHtml(grid, subs.map(function (sb) { return tile(sb, st.ix[sb.id]); }).join(""));
+      if (sm) sm.textContent = qbSummary(subs, true);
+    });
+  }
+  // "19 subjects · 147,310 MCQs" once the subject indexes are read.
+  function qbSummary(subs, known) {
+    if (!known) return subs.length + (subs.length === 1 ? " subject" : " subjects");
+    var q = 0, e = load().exam; subs.forEach(function (sb) { (st.ix[sb.id].topics || []).forEach(function (t) { if (t.group !== "mixed") q += countFor(t, e); }); });
+    return subs.length + (subs.length === 1 ? " subject" : " subjects") + " · " + fmt(q) + " MCQs";
   }
   function fmtMin(m) { var h = Math.floor(m / 60), r = m % 60; return (h ? h + " h" : "") + (h && r ? " " : "") + (r ? r + " min" : ""); }
   function fmtMark(x) { return Math.abs(x - 1 / 3) < 1e-9 ? "1/3" : String(x); }
@@ -2040,9 +2212,10 @@
   function setupOn() { return !!(G.PREP_SETUP && G.PREP_SETUP.enabled()); }
   // The runner options of a set the student made: saved for 7 days when it finishes.
   function saveOpt(ro, kind) { var o = {}, k; for (k in ro || {}) o[k] = ro[k]; o.save = kind; return o; }
-  function scopeModule(sid, mid, kind) {
+  function scopeModule(sid, mid, kind, o) {
     var s = load(), t = topicOf(sid, mid), title = t ? tx(t.title) : "Practice";
-    return { kind: "module", id: mid, title: title, sub: tx((subjectById(sid) || {}).name), hue: subjHue(sid), mode: kind === "exam" ? "exam" : kind === "study" ? "study" : null,
+    o = o || {};
+    return { kind: "module", id: mid, title: title, sub: tx((subjectById(sid) || {}).name), hue: subjHue(sid), mode: o.mode || (kind === "exam" ? "exam" : kind === "study" ? "study" : null), seen: kind === "due" ? "due" : null, n: o.n || 0,
       load: function () { return loadModule(sid, mid).then(function (items) { return [poolFor(items, s.exam, hidden())]; }); },
       start: function (list, mode, ro) { runQuestions(list, mode, title, saveOpt(ro, "module")); } };
   }
@@ -2102,7 +2275,7 @@
     if (kind === "custom") return scopeCustom();
     return null;
   }
-  function setupModule(sid, mid, kind) { return G.PREP_SETUP.open(scopeModule(sid, mid, kind), HOST); }
+  function setupModule(sid, mid, kind, o) { return G.PREP_SETUP.open(scopeModule(sid, mid, kind, o), HOST); }
   function setupSubject(sid) { return G.PREP_SETUP.open(scopeSubject(sid), HOST); }
   function setupCustom() { if (Object.keys(cm.subs).length) return G.PREP_SETUP.open(scopeCustom(), HOST); }
   function setupMistakes() { return G.PREP_SETUP.open(scopeMistakes(), HOST); }
@@ -2131,8 +2304,8 @@
     if (a === "filter") { st.filter = v; nav(0); return rerender(); }
     if (a === "search") { srch.sid = b.getAttribute("data-s"); srch.q = ""; return loadIndex(srch.sid).then(function () { push(renderSearch); }); }
     if (a === "hit") return openHit(b.getAttribute("data-m"), b.getAttribute("data-i"));
-    if (a === "module" || a === "solvenext") { var s1 = b.getAttribute("data-s"), m1 = b.getAttribute("data-m"); return loadIndex(s1).then(function () { push(function () { renderModule(s1, m1); }); }); }
-    if (a === "start") { var c = st.cur; if (setupOn() && b.getAttribute("data-k") !== "due") return setupModule(c.s, c.m, b.getAttribute("data-k")); return startModule(c.s, c.m, b.getAttribute("data-k")); }
+    if (a === "module" || a === "solvenext") { var s1 = b.getAttribute("data-s"), m1 = b.getAttribute("data-m"); return loadIndex(s1).then(function () { openModule(s1, m1); }); }
+    if (a === "start") { var c = st.cur, k0 = b.getAttribute("data-k"); if (setupOn()) return setupModule(c.s, c.m, k0 === "due" ? "due" : null); return startModule(c.s, c.m, k0); }
     if (a === "answer") { if (Date.now() - (st.dragAt || 0) < 350) return; return answer(Number(b.getAttribute("data-k"))); }
     // Round 7: a tapped Next or Previous slides the question in like a swipe; a key press (click detail 0) stays still.
     if (a === "next") { var r = st.run; if (!r) return; if (r.i < r.items.length - 1) { r.i++; if (e.detail) st.swipeIn = 1; return renderRun(); } return finish(); }
@@ -2159,7 +2332,8 @@
     if (a === "mfilter") { mf.tag = v; nav(0); return rerender(); }
     if (a === "mpractice") return setupOn() ? setupMistakes() : practiceMistakes();
     if (a === "mtag") { var rt = st.run, itm = rt && rt.items[rt.i]; if (itm && s.mt[itm.id]) { s.mt[itm.id][2] = s.mt[itm.id][2] === v ? null : v; save(); } return renderRun(); }
-    if (a === "mocks") return push(renderMocks);
+    if (a === "mocks") { ttSet("tests"); return push(renderMocks); }
+    if (a === "tt") { ttSet(v); nav(0); return rerender(); }
     if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], n: rt4.i + 1, side: true, topic: rt4.title }, HOST); return; }
     if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], n: i5 + 1, side: true, topic: rt5.title }, HOST); return; }
     if (a.indexOf("ak-") === 0 && G.PREP_ASK) return G.PREP_ASK.act(a, b, HOST);
