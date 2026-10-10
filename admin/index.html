@@ -596,6 +596,13 @@
           <div class="msg" id="aicBudgetMsg"></div>
         </div>
         <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Pro: MaiK tokens per day</b></div>
+          <div class="hint" style="margin:4px 0 8px">Every Pro account's daily MaiK allowance. Owner accounts are never limited. A single account can be changed in User control. Blank = default.</div>
+          <div class="row"><div><input id="aicProTok" type="number" min="1000" step="1000" inputmode="numeric" placeholder="20000"></div><div style="align-self:flex-end"><button class="primary" id="aicProTokSave">Save</button></div></div>
+          <div class="hint" id="aicProTokCost" style="margin-top:6px"></div>
+          <div class="msg" id="aicProTokMsg"></div>
+        </div>
+        <div class="card">
           <div style="display:flex;align-items:center"><b style="flex:1">Per-module daily limits</b><button class="ghost" id="aicLimReload" style="padding:7px 11px">Reload</button></div>
           <div class="hint" style="margin:4px 0 8px">Per-doctor daily request caps by module. Blank = module default.</div>
           <div id="aicLimits"></div><div class="msg" id="aicLimMsg"></div>
@@ -1421,7 +1428,14 @@
     h+='<div class="uc-sec"><b>AI limits for this account</b><div class="hint" style="margin-bottom:8px">Daily questions per module. Blank uses the app default; 0 means unlimited. These apply to this account even when app-wide limits are off.</div><div class="uc-grid">'+
       (d.limits||[]).map(function(m){ return '<label class="uc-lim"><span>'+esc(m.label||m.id)+'<br><small class="hint">default '+(m.defaultLimit===0?"unlimited":m.defaultLimit)+'</small></span><input type="number" min="0" step="1" inputmode="numeric" data-ul="'+esc(m.id)+'" value="'+(m.limit==null?"":m.limit)+'" placeholder="default"></label>'; }).join("")+'</div>'+
       '<div class="uc-acts" style="margin-top:10px;align-items:center"><label for="ucBudget" style="margin:0">Monthly AI token budget</label><input id="ucBudget" type="number" min="0" step="1000" style="width:150px" value="'+(pl.aiCapTokens!=null?pl.aiCapTokens:"")+'" placeholder="plan default"><button class="ghost" id="ucBudgetSave">Save budget</button>'+
-      '<span class="hint">This month: '+((d.month&&d.month.tokens)||0).toLocaleString()+' tokens, Rs '+(((d.month&&d.month.costInr)||0)).toFixed(2)+(mu&&mu.cap?' · cap '+mu.cap.toLocaleString():' · no monthly cap set')+'</span>'+'</div></div>';
+      '<span class="hint">This month: '+((d.month&&d.month.tokens)||0).toLocaleString()+' tokens, Rs '+(((d.month&&d.month.costInr)||0)).toFixed(2)+(mu&&mu.cap?' · cap '+mu.cap.toLocaleString():' · no monthly cap set')+'</span>'+'</div>'+
+      // Pro daily MaiK tokens for this account (owner, 2026-10-10)
+      (function(){ var pt=d.proTokens||{}, eff=pt.effective, unl=eff===-1, own=pt.user!=null;
+        return '<div class="uc-acts" style="margin-top:10px;align-items:center"><label for="ucProTok" style="margin:0">MaiK tokens per day (Pro)</label>'+
+          '<input id="ucProTok" type="number" min="0" step="1000" inputmode="numeric" style="width:150px" value="'+(own&&pt.user!==-1?pt.user:"")+'" placeholder="'+(pt.appWide||20000)+'">'+
+          '<button class="ghost" id="ucProTokSave">Save</button><button class="ghost" id="ucProTokUnl">Unlimited</button>'+(own?'<button class="ghost" id="ucProTokDef">Use app-wide</button>':'')+
+          '<span class="hint">Today: '+((pt.usedToday||0).toLocaleString())+' of '+(unl?"unlimited":(eff||0).toLocaleString())+(own?(unl?" (set for this account)":" (set for this account; app-wide "+(pt.appWide||0).toLocaleString()+")"):" (app-wide)")+'</span></div>';
+      })()+'</div>';
     // 6. Usage
     var us=d.usage||[], tot={req:0,tokens:0,cost:0}, mods={};
     us.forEach(function(u){ tot.req+=u.req; tot.tokens+=u.tokens; tot.cost+=u.costInr; Object.keys(u.byModule||{}).forEach(function(k){ var n=u.byModule[k]; mods[k]=(mods[k]||0)+(typeof n==="number"?n:(n&&n.req)||0); }); });
@@ -1451,6 +1465,10 @@
       ucSend(val==="default"?"/api/entitlements/admin/clear-flag":"/api/entitlements/admin/set-flag", val==="default"?{uid:a.uid,feature:k}:{uid:a.uid,feature:k,enabled:val==="on"}, "Feature updated.", true); }; });
     Array.prototype.forEach.call(box.querySelectorAll("[data-ul]"),function(inp){ inp.onchange=function(){ if(!a.email){ say("ucActMsg","err","This account has no email, so a per-account limit cannot be set."); return; }
       ucSend(AI+"/user-limit",{email:a.email,module:inp.getAttribute("data-ul"),limit:inp.value===""?null:+inp.value},"Limit saved.",true); }; });
+    var ptSend=function(v,msg){ if(!a.email){ say("ucActMsg","err","This account has no email, so a per-account allowance cannot be set."); return; } ucSend(AI+"/user-tokens",{email:a.email,tokens:v},msg); };
+    $("ucProTokSave").onclick=function(){ var v3=$("ucProTok").value; if(v3===""){ say("ucActMsg","err","Enter a number of tokens, or use Unlimited."); return; } ptSend(+v3,"Daily MaiK tokens saved."); };
+    $("ucProTokUnl").onclick=function(){ ptSend("unlimited","Unlimited MaiK tokens for this account."); };
+    var ptd=$("ucProTokDef"); if(ptd) ptd.onclick=function(){ ptSend(null,"Back to the app-wide allowance."); };
     $("ucBudgetSave").onclick=function(){ var v2=$("ucBudget").value; if(v2===""){ say("ucActMsg","err","Enter a number of tokens."); return; } ucSend("/api/entitlements/admin/set-budget",{uid:a.uid,tokens:+v2},"Budget saved."); };
   }
   // One change, then show the account as the server now has it.
@@ -1486,9 +1504,30 @@
       $("aicModelSave").onclick=function(){ say("aicModelMsg","","Saving…"); api(AI+"/model",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:$("aicModelSel").value})}).then(function(r){ if(r.s===200)say("aicModelMsg","ok","✅ "+(r.d.model||"default")); else say("aicModelMsg","err","Failed"); }); };
     });
     api(AI+"/budget").then(function(x){ if(x.s===200){ var b=x.d.budget, v=(b&&typeof b==="object")?(b.inr!=null?b.inr:""):(b!=null?b:""); try{$("aicBudget").value=(v||v===0)?v:"";}catch(e){} } });
+    aicProTokLoad();
     aicMkLoad();
     aicLimLoad();
   }
+  /* Pro daily MaiK tokens (owner, 2026-10-10). The cost line uses the live model's published rates from
+   * /model: typical = 70% input / 30% output, most = every token billed as output. */
+  var aicPT={def:20000,eff:20000,rate:null,model:""};
+  function aicProTokCost(){
+    var n=+($("aicProTok").value||aicPT.def), r=aicPT.rate;
+    $("aicProTokCost").textContent=r?("Now "+aicPT.eff.toLocaleString("en-IN")+" a day. At "+n.toLocaleString("en-IN")+" tokens on "+aicPT.model+": about Rs "+(n/1000*(0.7*r.in+0.3*r.out)).toFixed(1)+" a day typical, at most Rs "+(n/1000*r.out).toFixed(1)+" per Pro account."):("Now "+aicPT.eff.toLocaleString("en-IN")+" a day.");
+  }
+  function aicProTokLoad(){
+    Promise.all([api(AI+"/pro-tokens"),api(AI+"/model")]).then(function(rs){
+      var x=rs[0], m=rs[1];
+      if(x.s===200){ aicPT.def=x.d.default||20000; aicPT.eff=x.d.effective||aicPT.def; $("aicProTok").value=x.d.tokens!=null?x.d.tokens:""; $("aicProTok").placeholder=String(aicPT.def); }
+      if(m.s===200&&m.d.rates){ aicPT.model=m.d.effective||""; aicPT.rate=m.d.rates[aicPT.model]||null; }
+      aicProTokCost();
+    });
+  }
+  $("aicProTok").addEventListener("input",aicProTokCost);
+  $("aicProTokSave").onclick=function(){ say("aicProTokMsg","","Saving…");
+    api(AI+"/pro-tokens",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({tokens:$("aicProTok").value})}).then(function(r){
+      if(r.s===200){ say("aicProTokMsg","ok","Saved. Applies to the next question."); aicPT.eff=r.d.effective; aicProTokCost(); }
+      else say("aicProTokMsg","err",r.d&&r.d.error==="bad-tokens"?"Enter 1,000 to 10,000,000, or leave blank for the default.":"Failed: "+(r.d&&r.d.error||r.s)); }); };
   function aicLimLoad(){
     api(AI+"/limits").then(function(x){ if(x.s!==200){ $("aicLimits").innerHTML='<div class="hint">Unavailable.</div>'; return; }
       var mods=x.d.modules||[];

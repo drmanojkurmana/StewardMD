@@ -515,3 +515,9 @@ Pro: 20,000 MaiK tokens a day (`MAIK_PRO_DAILY_TOKENS`), owners exempt, reason `
 call sent without the sign-in token is retried once with `SMD_IDTOKEN_REFRESH` (id-token.js). The notice shows the
 server's message plus "Limit: <reason>". See Decisions 2026-10-10. Tests: `test/maik-pro-daily-tokens.test.mjs`,
 `test/run-maik-quota-ui.mjs`.
+Admin control (same day): app-wide value in AI control ("Pro: MaiK tokens per day", KV `ai:pro-daily-tokens`,
+`GET/POST /api/ai/admin/pro-tokens`, with a cost line from the live model's rates); per account in User control
+("MaiK tokens per day (Pro)": number, Unlimited, Use app-wide; KV `ai:utok:<email>`, -1 = unlimited,
+`POST /api/ai/admin/user-tokens`; `userDetail().proTokens` shows today's use). Per account beats app-wide beats
+`MAIK_PRO_DAILY_TOKENS`. For a signed-in Pro account the allowance also replaces the generic 200k/day
+`MAIK_DAILY_TOKEN_LIMIT`, so Unlimited is unlimited per day (the monthly budget still applies).

@@ -19,7 +19,8 @@
  */
 import { serviceAccountToken } from "./_fbadmin.js";
 import { fsGet as realFsGet } from "./_fbfirestore.js";
-import { getUserLimit, doctorUsageSummary, aiModuleList, moduleDailyLimit } from "./_ai_usage.js";
+import { getUserLimit, doctorUsageSummary, aiModuleList, moduleDailyLimit, getProDailyTokens, getUserProTokens, proDailyTokensDefault } from "./_ai_usage.js";
+import { istDay } from "./_counters.js";
 import { adminLookup } from "./_entitlements.js";
 
 const FB_PROJECT_DEFAULT = "stewardmd-498ec";
@@ -178,8 +179,17 @@ export async function userDetail(env, uid, deps) {
       month.tokens += u.tokens || 0; month.req += u.req || 0; month.costInr = Math.round((month.costInr + (u.estCostInr || 0)) * 100) / 100;
     }
   }
+  // Pro daily MaiK tokens: this account's override (-1 = unlimited), the app-wide value, and today's use
+  // from the same per-user counter checkQuota reads (maik:u:fb:<uid>:<IST day>).
+  const proTokens = { user: null, appWide: proDailyTokensDefault(env), usedToday: 0 };
+  if (store) {
+    try { const g = await (deps.getProDailyTokens || getProDailyTokens)(store); if (g != null) proTokens.appWide = g; } catch (e) {}
+    try { if (email) proTokens.user = await (deps.getUserProTokens || getUserProTokens)(store, email); } catch (e) {}
+    try { const ut = await store.get("maik:u:fb:" + uid + ":" + istDay(now), "json"); proTokens.usedToday = (ut && ut.tokens) || 0; } catch (e) {}
+  }
+  proTokens.effective = proTokens.user != null ? proTokens.user : proTokens.appWide;
   return {
-    ok: true, account: row, claims: c, lifecycle: lc ? { firstSeen: lc.firstSeen || null, verifiedAt: lc.verifiedAt || null, phoneVerifiedAt: lc.phoneVerifiedAt || null, unsubscribedAt: lc.unsubscribedAt || null } : null,
+    ok: true, account: row, claims: c, proTokens, lifecycle: lc ? { firstSeen: lc.firstSeen || null, verifiedAt: lc.verifiedAt || null, phoneVerifiedAt: lc.phoneVerifiedAt || null, unsubscribedAt: lc.unsubscribedAt || null } : null,
     profile, verification,
     plan: ent && ent.ok ? { tier: ent.tier || "free", tierExp: ent.tierExp, role: ent.role, smdId: ent.smdId, aiCapTokens: ent.aiCapTokens, monthUsage: ent.usage || null } : null,
     // per-account feature switches (POST /api/entitlements/admin/set-flag | clear-flag)

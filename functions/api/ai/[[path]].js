@@ -122,7 +122,7 @@ function withCors(request, resp) {
  * Developer API. A future provider drops into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, MODEL_HARD_DEFAULT, ACCURATE_MODEL, MODEL_RETIRES, envModel, overrideModel, allowedModels, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, MODEL_HARD_DEFAULT, ACCURATE_MODEL, MODEL_RETIRES, envModel, overrideModel, allowedModels, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, getProDailyTokens, setProDailyTokens, proDailyTokensDefault, getUserProTokens, setUserProTokens, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { listRecentSignups, userDetail } from "../../_admin_users.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR, tokenPackList } from "../../_credits.js";
 import { warmBillingCfg } from "../../_billingcfg.js";
@@ -1289,7 +1289,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/support-shot" || seg === "admin/support-live" || seg === "admin/support-seen" || seg === "admin/support-typing" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/pro-tokens" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/support-shot" || seg === "admin/support-live" || seg === "admin/support-seen" || seg === "admin/support-typing" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -1441,6 +1441,17 @@ export async function onRequest(context) {
       return json({ ok: true, budget: await getBudget(store) });
     }
 
+    // Pro daily MaiK tokens, app-wide (owner, 2026-10-10). Blank clears back to the default.
+    if (seg === "admin/pro-tokens") {
+      if (request.method === "POST") {
+        let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+        if (!(await setProDailyTokens(store, b.tokens))) return json({ ok: false, error: "bad-tokens", min: 1000, max: 10000000 }, 400);
+        await auditRecord(store, "pro-tokens", "daily=" + (b.tokens == null || b.tokens === "" ? "default" : b.tokens), actorId, Date.now());
+      }
+      const set = await getProDailyTokens(store), dflt = proDailyTokensDefault(env);
+      return json({ ok: true, tokens: set, default: dflt, effective: set != null ? set : dflt });
+    }
+
     if (seg === "admin/limits") {
       if (request.method === "POST") {
         let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
@@ -1483,6 +1494,20 @@ export async function onRequest(context) {
     let actorId = "admin"; try { actorId = (await identify(request, env)).id; } catch (e) {}
     try { await auditRecord(store, "user-limit", email + ":" + module + "=" + (limit == null ? "default" : limit), actorId, Date.now()); } catch (e) {}
     return json({ ok: true, email: email, limits: map || {} });
+  }
+
+  // One account's Pro daily MaiK tokens (owner, 2026-10-10): a number, "unlimited", or blank for the app-wide value.
+  if (seg === "admin/user-tokens" && request.method === "POST") {
+    const url = new URL(request.url);
+    if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
+    let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+    const email = String(b.email || "").toLowerCase();
+    if (!email) return json({ ok: false, error: "no-email" }, 400);
+    const store = usageKv(env);
+    if (!(await setUserProTokens(store, email, b.tokens))) return json({ ok: false, error: "bad-tokens" }, 400);
+    let actorId = "admin"; try { actorId = (await identify(request, env)).id; } catch (e) {}
+    try { await auditRecord(store, "user-tokens", email + "=" + (b.tokens == null || b.tokens === "" ? "default" : b.tokens), actorId, Date.now()); } catch (e) {}
+    return json({ ok: true, email: email, tokens: await getUserProTokens(store, email) });
   }
 
   // User control (owner, 2026-10-08): newest sign-ups, and everything about one account. Read only;

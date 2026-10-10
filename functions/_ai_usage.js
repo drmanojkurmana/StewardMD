@@ -457,6 +457,37 @@ export async function setBudget(store, inr) {
     await store.put("ai:budget:daily", String(Math.floor(n))); return true;
   } catch (e) { return false; }
 }
+/* Pro daily MaiK token allowance (owner, 2026-10-10). App-wide value: KV ai:pro-daily-tokens, set in the
+ * admin AI Control Center (blank = env MAIK_PRO_DAILY_TOKENS, else 20,000). Per account: KV
+ * ai:utok:<email>, set in User control; -1 = unlimited for that account. Read by _usage.js checkQuota. */
+export const PRO_TOKENS_DEFAULT = 20000;
+export function proDailyTokensDefault(env) { const v = Number(env && env.MAIK_PRO_DAILY_TOKENS); return Number.isFinite(v) && v > 0 ? Math.floor(v) : PRO_TOKENS_DEFAULT; }
+export async function getProDailyTokens(store) {
+  try { const v = store ? Number(await store.get("ai:pro-daily-tokens")) : NaN; return Number.isFinite(v) && v > 0 ? Math.floor(v) : null; } catch (e) { return null; }
+}
+export async function setProDailyTokens(store, tokens) {
+  if (!store) return false;
+  try {
+    if (tokens == null || tokens === "") { await store.delete("ai:pro-daily-tokens"); return true; }   // clear: back to the default
+    const n = Number(tokens); if (!Number.isFinite(n) || n < 1000 || n > 10000000) return false;
+    await store.put("ai:pro-daily-tokens", String(Math.floor(n))); return true;
+  } catch (e) { return false; }
+}
+export async function getUserProTokens(store, email) {
+  if (!store || !email) return null;
+  try { const raw = await store.get("ai:utok:" + String(email).toLowerCase()); if (raw == null || raw === "") return null; const v = Number(raw); return Number.isFinite(v) && (v === -1 || v >= 0) ? Math.floor(v) : null; } catch (e) { return null; }
+}
+/* tokens: null/"" = back to the app-wide value; "unlimited" or -1 = no daily limit; else 0..10,000,000. */
+export async function setUserProTokens(store, email, tokens) {
+  if (!store || !email) return false;
+  const key = "ai:utok:" + String(email).toLowerCase();
+  try {
+    if (tokens == null || tokens === "") { await store.delete(key); return true; }
+    const n = (tokens === "unlimited") ? -1 : Number(tokens);
+    if (!Number.isFinite(n) || (n !== -1 && (n < 0 || n > 10000000))) return false;
+    await store.put(key, String(Math.floor(n)), { expirationTtl: 60 * 60 * 24 * 400 }); return true;
+  } catch (e) { return false; }
+}
 // Abuse-watchlist threshold — requests/doctor/day to flag. KV override > env AI_ABUSE_REQ_THRESHOLD > 100.
 export const ABUSE_DEFAULT = 100;
 export async function getAbuseThreshold(store, env) {

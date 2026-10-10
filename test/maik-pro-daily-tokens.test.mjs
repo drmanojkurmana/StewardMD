@@ -68,3 +68,42 @@ test("MAIK_PRO_DAILY_TOKENS overrides the allowance", async () => {
 test("MAIK_ENFORCE_CAPS=0 lifts it with the other per-user caps", async () => {
   assert.equal((await gate("pd-g", PRO, 25000, { MAIK_ENFORCE_CAPS: "0" })).ok, true);
 });
+
+/* ── Admin control (owner, 2026-10-10: "give that increase option in admin section and user specific control too") ── */
+import { setProDailyTokens, getProDailyTokens, setUserProTokens, getUserProTokens } from "../functions/_ai_usage.js";
+async function gateWith(uid, usedToday, seed) {
+  const kv = fakeKv();
+  if (usedToday) await kv.put("maik:u:fb:" + uid + ":" + istDay(Date.now()), JSON.stringify({ general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: usedToday }));
+  await seed(kv);
+  const env = { MAIK_KV: kv, MAIK_ENFORCE_CAPS: "1", OWNER_EMAILS: "owner1@example.com" };
+  const req = new Request("https://stewardmd.in/api/ai/explain", { method: "POST", headers: { Authorization: "Bearer " + (await token(uid, PRO)) } });
+  const real = globalThis.fetch;
+  globalThis.fetch = async (u) => String(u).indexOf("securetoken@system") >= 0 ? new Response(JSON.stringify({ keys: [jwk] }), { headers: { "Cache-Control": "max-age=3600" } }) : new Response("{}");
+  try { return await checkQuota(env, req, "general"); } finally { globalThis.fetch = real; }
+}
+
+test("app-wide value set in admin raises every Pro account's allowance", async () => {
+  assert.equal((await gateWith("pa-1", 50000, (kv) => setProDailyTokens(kv, 60000))).ok, true);
+  const g = await gateWith("pa-2", 60000, (kv) => setProDailyTokens(kv, 60000));
+  assert.equal(g.reason, "pro-daily-tokens"); assert.match(g.message, /60,000 MaiK tokens/);
+});
+
+test("one account's own number beats the app-wide value, both ways", async () => {
+  assert.equal((await gateWith("pa-3", 50000, async (kv) => { await setProDailyTokens(kv, 20000); await setUserProTokens(kv, "pa-3@example.com", 100000); })).ok, true, "raised for this account");
+  assert.equal((await gateWith("pa-4", 6000, async (kv) => { await setProDailyTokens(kv, 60000); await setUserProTokens(kv, "pa-4@example.com", 5000); })).reason, "pro-daily-tokens", "lowered for this account");
+});
+
+test("unlimited for one account; clearing it returns to the app-wide value", async () => {
+  assert.equal((await gateWith("pa-5", 900000, (kv) => setUserProTokens(kv, "pa-5@example.com", "unlimited"))).ok, true);
+  assert.equal((await gateWith("pa-6", 30000, async (kv) => { await setUserProTokens(kv, "pa-6@example.com", "unlimited"); await setUserProTokens(kv, "pa-6@example.com", null); })).reason, "pro-daily-tokens");
+});
+
+test("stored values are validated", async () => {
+  const kv = fakeKv();
+  assert.equal(await setProDailyTokens(kv, 500), false, "below 1,000 refused");
+  assert.equal(await setProDailyTokens(kv, "abc"), false);
+  assert.equal(await setProDailyTokens(kv, 45000), true); assert.equal(await getProDailyTokens(kv), 45000);
+  assert.equal(await setProDailyTokens(kv, ""), true); assert.equal(await getProDailyTokens(kv), null, "blank clears");
+  assert.equal(await setUserProTokens(kv, "X@Y.in", -5), false);
+  assert.equal(await setUserProTokens(kv, "X@Y.in", "unlimited"), true); assert.equal(await getUserProTokens(kv, "x@y.in"), -1, "email is case-insensitive");
+});
