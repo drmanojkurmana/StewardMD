@@ -10,9 +10,11 @@
  * set to the result and opens row 0.
  *
  * USAGE: CHROME=<path> node test/run-prep-reason-ui.mjs
- *   SHOTS=<dir>   screenshots reason-<browser>-<size>-<theme>-<item>.png
+ *   SHOTS=<dir>   screenshots reason-<browser>-<size>-<theme>-<item>.png (+ -below for the lower half)
  *   BROWSERS=chrome,webkit (default both; either needs playwright-core, else SKIP)
  *   SIZES=phone,ipad (390x844, 820x1180; default both); THEMES=light,dark (default both)
+ * The service worker is neutered: route-served origins are not localhost, so the app would take the web
+ * PWA path and the worker would swallow runtime fetches; localhost harnesses never register it either.
  */
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
@@ -34,7 +36,7 @@ const SHOTS = process.env.SHOTS || "";
 
 let fails = 0;
 const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
-const INIT = `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(RFIX)}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;`;
+const INIT = `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(RFIX)}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try { if (navigator.serviceWorker && navigator.serviceWorker.register) navigator.serviceWorker.register = function () { return Promise.reject(new Error("disabled in UI tests")); }; } catch (e) {}`;
 const CLEAN = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
 const STAMP = (it) => ({ ...it, _s: it.t.indexOf("scd-") === 0 ? "ss-cardiology" : "anatomy", _m: it.t });
 const FINISH_ANIMS = `document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`;
@@ -140,12 +142,6 @@ async function runCombo(d) {
   await d.ev(d.theme === "dark" ? `document.body.classList.add("dark"); return 1;` : `document.body.classList.remove("dark"); return 1;`);
   await d.ev(`PREP.open(); return 1;`);
   ok(await d.waitFor(`return !!(PREP._host && document.querySelector("#smdPrep .pn-body"));`, 20000), tag + ": PrepNucleus opens");
-  // TEMP fetch probe for the webkit failures; remove before merging
-  console.log("  PROBE " + tag + ": " + await d.ev(`(function(){
-    return Promise.all(["/test/fixtures/prep-reason/api/v1/links/index.json", "/prep.js"].map(function(u){
-      return fetch(u, { cache: "no-cache" }).then(function(r){ return r.text().then(function(t){ return u + " -> " + r.status + " " + t.length + "B"; }); }, function(e){ return u + " -> ERR " + (e && e.message); });
-    })).then(function(x){ return x.join(" || "); });
-  })();`));
   // the guard contract: a KB row shows exactly when the reader has that article
   const guard = JSON.parse(await d.ev(`return JSON.stringify({ kb: !!(window.SMD_REASON&&SMD_REASON.hasDiseaseRef&&SMD_REASON.hasDiseaseRef("fibromuscular_dysplasia")),
     kb2: !!window.KB_ENRICHMENT });`));
@@ -300,7 +296,7 @@ async function pwDriver(name, browser, size, theme) {
   const page = await ctx.newPage();
   await page.route("https://prep.test/**", serveFile);
   const errors = [];
-  const diag = []; // TEMP diagnostics for the webkit fetch failures; remove before merging
+  const diag = []; // failed/400+ requests, printed per combo to explain missing-data failures
   page.on("pageerror", (e) => { if (/prep|PREP/i.test(String((e && e.stack) || e))) errors.push(String((e && e.message) || e)); });
   page.on("requestfailed", (r) => diag.push("REQFAIL " + r.url().slice(0, 140) + " :: " + (r.failure() || {}).errorText));
   page.on("response", (r) => { if (r.status() >= 400) diag.push("HTTP" + r.status() + " " + r.url().slice(0, 140)); });
