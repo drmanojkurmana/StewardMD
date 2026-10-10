@@ -4,11 +4,13 @@
  * USAGE: node test/run-tokos-app-ui.mjs   (BASE=http://localhost:8996/ to use a running server)
  */
 import { spawn } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
+// One Review Desk item per drill file, so the drill count is read from disk rather than fixed.
+const drillCount = readdirSync(join(HERE, "..", "tokos/drill")).filter((f) => f.endsWith(".json")).length;
 // BASE (a running server) or PORT (the server this harness starts) and CHROME_PORT override the defaults, so parallel sessions do not collide.
 const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8996) + "/").replace(/\/?$/, "/");
 const PORT = +(process.env.CHROME_PORT || 9398), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-app-chrome-" + PORT;
@@ -69,7 +71,7 @@ try {
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=ctg]');`, 20000), "hub shows the CTG clinic");
   // Tokós 2.0 wiring: every model in tokos/models.json is listed with its own screen (13 tools, 6 drills + the labour room
   // + the OSCE link, 6 explorers) and the three clinics are registered.
-  ok(await until(`var T=TOKOS; return T._tools.length === 13 && T._sims.length === 8 && T._explore.length === 6;`, 20000), "all 13 calculators, 6 drills + labour + OSCE and 6 explorers are listed: " + await ev(`var T=TOKOS; return [T._tools.length, T._sims.map(function(x){return x.id;}).join(","), T._explore.map(function(x){return x.id;}).join(",")].join(" | ");`));
+  ok(await until(`var T=TOKOS; return T._tools.length === 13 && T._sims.length === ${drillCount + 2} && T._explore.length === 6;`, 20000), "all 13 calculators, 6 drills + labour + OSCE and 6 explorers are listed: " + await ev(`var T=TOKOS; return [T._tools.length, T._sims.map(function(x){return x.id;}).join(","), T._explore.map(function(x){return x.id;}).join(",")].join(" | ");`));
   ok(await ev(`return !TOKOS._sims.some(function(x){return x.pending;});`) === true, "the labour room has its own screen (no placeholder)");
   ok(await ev(`return TOKOS._clinics.map(function(x){return x.id;}).join(",");`) === "ctg,fetal-planes,hc-biometry", "clinics: CTG, fetal planes, HC biometry");
   ok(await ev(`return !!document.querySelector('#smdTokos [data-act=sim][data-s=osce]');`) === true, "Test hub lists the OSCE link");
@@ -87,7 +89,7 @@ try {
   await ev(`document.querySelector('#smdReview [data-rv-act="kind:tokos"]').click(); return 1;`);
   // 16 CTG cases + 3 text blocks, plus Tokós 2.0: 40 units, 17 bank topics, 6 drills, the labour room, 13 calculators,
   // 6 explorers, 2 ultrasound clinics; the units holding claims to verify come first
-  ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === 104;`, 20000), "Review Desk Tokós tab lists every Tokós content item: " + await ev(`return document.querySelectorAll('#smdReview .rv-row').length;`));
+  ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === ${98 + drillCount};`, 20000), "Review Desk Tokós tab lists every Tokós content item: " + await ev(`return document.querySelectorAll('#smdReview .rv-row').length;`));
   // The units holding claims to verify come first, in unit order, then everything else. Which units those are follows
   // the content (the realistic-image lessons carry a verify note too), so the expected list is read from the index.
   const tIx = JSON.parse(readFileSync(join(HERE, "..", "tokos/learn/index.json"), "utf8"));
