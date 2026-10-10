@@ -418,7 +418,7 @@
     s.cel = { day: day, keys: keys.slice(-200) };
     return s.cel;
   }
-  var PURE = { buildSearch: buildSearch, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
+  var PURE = { buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
@@ -528,13 +528,13 @@
       }, function (e) { if (hit) return (st.mem[p] = hit.items); throw e; });
     });
   }
-  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes and licensed review books, sets "radnotes" and "radmax3"; new
+  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes and licensed review books, sets "radnotes2" and "radmax5"; new
      Medicine questions for topics the bank covered thinly, set "medcov"), at overlay/<set>/<subject>/<module>.json
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
-     goes to a new folder (medcov3 and radmax3 now; the earlier folders' copies are removed) and the folder named here moves with it.
+     goes to a new folder (medcov4, radnotes2 and radmax5 now; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes", "radmax3"], medicine: ["medcov3"], "ss-pulmonology": ["medcov3"] };
-  // Earlier releases of a set (medcov3 -> medcov, medcov2), whose cached copies a new release replaces.
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes2", "radmax5"], medicine: ["medcov4"], "ss-pulmonology": ["medcov4"] };
+  // Earlier releases of a set (medcov4 -> medcov, medcov2, medcov3), whose cached copies a new release replaces.
   function oldOverlays(set) { var m = /^(.*?[a-z])(\d+)$/.exec(set), out = []; if (!m || +m[2] < 2) return out; out.push(m[1]); for (var k = 2; k < +m[2]; k++) out.push(m[1] + k); return out; }
   function loadOverlay(sid, mid, miss) {
     var sets = OVERLAYS[sid] || [];
@@ -581,12 +581,22 @@
   function hidden() { var h = load().hid; return (h && h.ids) || {}; }
 
   // Subject search index (search.json, built with the bank): fetched on the first search, cached like module files.
+  // The subject index may name the file (search: "search-<hash>.json", a rebuilt index under a new immutable name, e.g. with
+  // the overlay sets' items), so a phone that cached the older search.json fetches the new one; no name: search.json.
+  function searchFile(ix) { var n = ix && ix.search; return typeof n === "string" && /^search-[0-9a-f]{8}\.json$/.test(n) ? n : "search.json"; }
   function loadSearch(sid) {
-    var p = bvOf(sid) + "/" + sid + "/search.json";
+    return loadIndex(sid).then(function (ix) { return loadSearchAt(sid, bvOf(sid) + "/" + sid + "/" + searchFile(ix)); });
+  }
+  function loadSearchAt(sid, p) {
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
     return cacheGet(p).then(function (hit) {
       if (hit && hit.sx) return (st.mem[p] = hit.sx);
-      return getJSON(API + p).then(function (sx) { st.mem[p] = sx; cachePut(p, { sx: sx, ts: Date.now() }); return sx; }, function (e) {
+      return getJSON(API + p).then(function (sx) {
+        st.mem[p] = sx; cachePut(p, { sx: sx, ts: Date.now() });
+        // a named index replaces the subject's plain search.json, whose cached copy is dropped
+        if (!/\/search\.json$/.test(p)) cacheDel(p.replace(/[^/]+$/, "search.json"));
+        return sx;
+      }, function (e) {
         // No search.json for this bank (ss-radiology v6 to v10 shipped without one): build the same index here from the
         // subject's module files (cached like any opened module). Kept for the session only, so a published file wins later.
         if (!e || e.status !== 404) throw e;
@@ -682,15 +692,15 @@
     pct = Math.max(0, Math.min(100, Math.round(pct || 0)));
     return '<span class="pn-mring" aria-hidden="true"><svg viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="18" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="22" cy="22" r="18" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + "</svg><b>" + label + "</b></span>";
   }
-  // Round 5: a list screen's hero band. Painted art (prep/art/<art>.webp) fading into the deep hero surface, one large
-  // figure and its label laid over it, an optional line under them. Decorative art; the text is the content.
+  // A list screen's figure card (2026-10-10: plain card, no painted art): one large figure and its label, an optional
+  // line under them. The art key stays as a class for older styles.
   function hband(art, fig, label, sub) {
     return '<section class="pn-hband pn-hb-' + art + '"><p class="pn-hbt"><b class="pn-hbn">' + fig + '</b> <span class="pn-hbl">' + label + "</span></p>" + (sub ? '<p class="pn-hbs">' + sub + "</p>" : "") + "</section>";
   }
   function bar(title, sub, left, right) {
     var isPN = title === "PrepNucleus";
     var tHtml = isPN
-      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo" src="/prep/art/logo-icon-96.webp" alt="" width="22" height="22" decoding="async"><span>' + title + "</span></h1>"
+      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo pn-lg-l" src="/prep/art/logo-mark-prussian-96.webp" alt="" width="24" height="24" decoding="async"><img class="pn-bar-logo pn-lg-d" src="/prep/art/logo-mark-amber-96.webp" alt="" width="24" height="24" decoding="async"><span>' + title + "</span></h1>"
       : "<h1>" + title + "</h1>";
     return '<header class="pn-bar' + (isPN ? " pn-bar-brand" : "") + '"><button type="button" class="pn-ib" data-act="' + (left || "back") + '" aria-label="' + (left === "close" ? "Close PrepNucleus" : "Back") + '">' + ico(left === "close" ? "close" : "back") + "</button>" +
       '<div class="pn-t">' + tHtml + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || '<span class="pn-ib-sp"></span>') + "</header>";
@@ -962,14 +972,21 @@
       return '<button type="button" role="tab" class="pn-tab' + (e.id === ex.id ? " on" : "") + '" aria-selected="' + (e.id === ex.id) + '" data-act="exam" data-v="' + e.id + '">' + esc(e.label) + "</button>";
     }).join("") + "</div>";
     var nb = Object.keys(s.bm).length;
-    paint('<div class="pn-sky" aria-hidden="true"></div>' + bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
+    // Back on home with every index already read: the subject rows and Solve next draw complete in the first paint, so
+    // nothing above the kept scroll position grows after it is restored (no anchoring jump).
+    var known = subs.every(function (sb) { return !!st.ix[sb.id]; }), nx0 = known ? solveNext(subs, st.ix, s, today(), s.exam) : null;
+    var you = (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
+      (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") +
+      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : "");
+    /* Quiet home (2026-10-10, owner brief): the brand is the mark and the name in the bar (no banner, no painted sky).
+       Top down: readiness and days to the exam, today's next task and the rest of the plan, practice, subjects, then
+       the secondary figures (streak, today, level) and Compete. */
+    paint(bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
-      '<div class="pn-banner pn-brand-banner" role="img" aria-label="PrepNucleus"></div>' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
       (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
-      (arena ? '<p class="pn-eb" aria-hidden="true">Live, with other students</p><h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
-      '<p class="pn-eb" aria-hidden="true">On your own time</p><h2 class="pn-h">Practise</h2>' +
-      '<button type="button" class="pn-next" data-act="solvenext" id="pnNext" hidden><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT"></b></span>' + ico("chev") + "</button>" +
+      '<h2 class="pn-h">Practise</h2>' +
+      '<button type="button" class="pn-next" data-act="solvenext" id="pnNext"' + (nx0 ? ' data-s="' + esc(nx0.subject) + '" data-m="' + esc(nx0.module) + '"' : " hidden") + '><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT">' + (nx0 ? esc(nextLabel(nx0)) : "") + "</b></span>" + ico("chev") + "</button>" +
       '<div class="pn-group">' +
       row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
       row("custom", ico("plus"), "Custom module", "Your own mix and count") +
@@ -981,11 +998,13 @@
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
-      (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
-      (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") +
-      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : "") + "</div>" +
+      "</div>" +
       psHomeHtml(s) +
-      '<p class="pn-eb" aria-hidden="true">' + subs.length + (subs.length === 1 ? " subject" : " subjects") + '</p><h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
+      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
+      // Secondary: streak, today and level (prep-plan.js), then the student's own pages and settings.
+      (G.PREP_PLAN && G.PREP_PLAN.progressHtml ? G.PREP_PLAN.progressHtml(HOST) : '<h2 class="pn-h">You</h2>') +
+      (you ? '<div class="pn-group pn-you">' + you + "</div>" : "") +
+      (arena ? '<h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
       (G.PrepPro ? G.PrepPro.homeHtml(HOST) : "") +
       '<p class="pn-note">Practice and progress stay on this device.</p></div>');
     if (arena) G.PREP_ARENA.homeMounted(HOST);
@@ -996,9 +1015,10 @@
       if (grid) grid.innerHTML = subs.map(function (sb) { return tile(sb, st.ix[sb.id]); }).join("");
       var nx = solveNext(subs, st.ix, s, today(), s.exam), el = root.querySelector("#pnNext");
       if (G.PREP_PLAN) G.PREP_PLAN.homeMounted(HOST);
-      if (nx && el) { el.hidden = false; el.setAttribute("data-s", nx.subject); el.setAttribute("data-m", nx.module); root.querySelector("#pnNextT").textContent = (nx.title && nx.title.en) + (nx.why === "due" ? " · " + nx.n + " due" : ""); }
+      if (nx && el) { el.hidden = false; el.setAttribute("data-s", nx.subject); el.setAttribute("data-m", nx.module); root.querySelector("#pnNextT").textContent = nextLabel(nx); }
     });
   }
+  function nextLabel(nx) { return (nx.title && nx.title.en) + (nx.why === "due" ? " · " + nx.n + " due" : ""); }
   function tile(sb, ix) {
     var s = load(), prog = progressByModule(s, today()), mods = ix ? ix.topics.filter(function (t) { return t.group !== "mixed"; }) : [], done = 0, total = mods.length, q = 0;
     mods.forEach(function (t) { var n = countFor(t, s.exam); q += n; if (n && statusOf((prog[t.id] || {}).answered, n) === "done") done++; });

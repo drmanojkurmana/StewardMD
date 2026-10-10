@@ -14,7 +14,8 @@
  * only in R2 (never in the public repo). Only whitelisted paths are served; files are versioned (v1, v2, ...)
  * and never change once uploaded, so they are cached as immutable.
  */
-const PATH_RE = /^v\d{1,3}\/(?:manifest\.json|[a-z0-9-]{2,60}\/(?:index|search)\.json|[a-z0-9-]{2,60}\/mcq\/[a-z0-9-]{2,80}\.json)$/;
+// search-<8 hex>.json: a rebuilt subject search index under a new immutable name (the subject index.json names it).
+const PATH_RE = /^v\d{1,3}\/(?:manifest\.json|[a-z0-9-]{2,60}\/(?:index|search|search-[0-9a-f]{8})\.json|[a-z0-9-]{2,60}\/mcq\/[a-z0-9-]{2,80}\.json)$/;
 // PYQ (tools/prep-pyq.mjs): v<n>/pyq/index.json (names the current items file, so short cache), items-<8 hex>.json and
 // img/<name>.webp (both immutable: the items name carries a content hash, image names never change meaning).
 const PYQ_RE = /^v\d{1,3}\/pyq\/(?:index\.json|items-[0-9a-f]{8}\.json|img\/[a-z0-9-]{2,80}\.webp)$/;
@@ -28,12 +29,12 @@ const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.js
 const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
 // Images a bank item carries (img + imgPlace, set by the bank build): v<n>/img/<name>.webp, immutable.
 const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
-// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"; tools/prep-radmax.mjs and tools/prep-ctc.mjs, sets "radmax", "radmax2", "radmax3"): figures
+// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"; tools/prep-radmax.mjs and tools/prep-ctc.mjs, sets "radmax" to "radmax5"): figures
 // img/radnotes/rn-<id>.webp or img/radmax/rm-<id>.webp and MCQ overlays overlay/<set>/<subject>/<module>.json (all
-// immutable: a new run writes new names or a new set folder, radmax2, radmax3, ..., as medcov).
-const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|overlay\/(?:radnotes|radmax(?:[2-9]|[1-9]\d)?)\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
+// immutable: a new run writes new names or a new set folder, radnotes2, radmax2 ... radmax5, as medcov).
+const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|overlay\/(?:radnotes|radmax)(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
 // Medicine coverage MCQs (tools/prep-medcov.mjs, set "medcov"): overlay/medcov/<subject>/<module>.json, immutable.
-// A new release goes to a new folder (medcov2, medcov3, ...) so phones that cached the old file fetch the new one.
+// A new release goes to a new folder (medcov2, medcov3, medcov4, ...) so phones that cached the old file fetch the new one.
 const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 const PREFIX = "prep-bank/";
 

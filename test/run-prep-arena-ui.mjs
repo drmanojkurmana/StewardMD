@@ -159,7 +159,7 @@ try {
   ok(await openPrep(), "PrepNucleus opens with the fixture bank");
   ok(await ev(`return PREP_ARENA.enabled();`) === false, "smd_prep_arena=0 turns the Arena off");
   ok(await ev(`return !document.getElementById("pnCompete") && !Array.from(document.querySelectorAll("#smdPrep .pn-h")).some(function(h){return /Compete/.test(h.textContent);});`) === true, "arena off: no Compete section");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Practise|Subjects", "home sections: Today's plan, Practise, Subjects");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Practise|Subjects|Your progress", "home sections (quiet home, 2026-10-10): Today's plan, Practise, Subjects, Your progress");
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic svg") && !/[A-Z]{3}/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic").textContent);`) === true, "subject cards carry an SVG icon, not a text monogram");
   await shot("home-off");
   // some local practice so My stats has something to show
@@ -193,7 +193,7 @@ try {
   ok(await until(`var c=document.getElementById("pnCompete"); return !!c && /Live now, ends in 1\\d:\\d\\d/.test(c.textContent) && /Starts in 2 d/.test(c.textContent);`, 8000), "Compete: live daily sprint with its countdown, weekly test coming: " + await ev(`return (document.getElementById("pnCompete")||{}).textContent;`));
   const cd1 = await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`); await sleep(1300);
   ok(await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`) !== cd1, "the countdown ticks");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Compete|Practise|Subjects", "home sections: Today's plan, Compete, Practise, Subjects");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Practise|Subjects|Your progress|Compete", "home sections (quiet home, 2026-10-10): Today's plan, Practise, Subjects, Your progress, then Compete");
   await shot("home");
 
   // ---- consent

@@ -3,7 +3,7 @@
  * What must hold: a module lists every lesson whose index entry names it (3, then Show all); a lesson opens by its key
  * and keeps progress under it; its figures resolve to img/radnotes/ or v1/lessons/media/ under the bank API and all load
  * when the lesson opens; the module pool is the bank file
- * plus overlay/radnotes/<subject>/<module>.json, once per id, keys untouched; the lesson's quick questions draw overlay
+ * plus overlay/radnotes2/<subject>/<module>.json (the radnotes release folder; its figures stay in img/radnotes/), once per id, keys untouched; the lesson's quick questions draw overlay
  * items, and the overlay image MCQ shows its figure; on native the figure URL carries https://stewardmd.in.
  *
  * USAGE: node test/run-prep-radnotes-ui.mjs   (CHROME=<path>; SHOTS=<dir> saves screenshots, PN_LIGHT=1 in light)
@@ -106,8 +106,8 @@ try {
   const pool = JSON.parse(await evA(`PREP._host.loadModule("radiology", "${MID}").then(function (it) { return JSON.stringify(it.map(function (x) { return [x.id, x.a, x._ov || "", x._m, x.set || ""]; })); })`));
   ok(pool.map((p) => p[0]).join(",") === "fx-rgi-1,fx-rgi-2,rn-fx-dup,rn-fx-0001,rn-fx-0002", "the module's pool is the bank file plus its overlay items, once each: " + pool.map((p) => p[0]).join(","));
   ok(pool.find((p) => p[0] === "rn-fx-dup")[1] === 2 && pool.find((p) => p[0] === "rn-fx-0002")[1] === 0, "answer keys unchanged (a clash keeps the bank copy)");
-  ok(pool.filter((p) => p[2] === "radnotes" && p[3] === MID).length === 2, "overlay items are tagged with their set and module");
-  ok(reqs.some((u) => u.includes(FIX + "api/overlay/radnotes/radiology/" + MID + ".json")), "the overlay loads from overlay/radnotes/radiology/<module>.json");
+  ok(pool.filter((p) => p[2] === "radnotes2" && p[3] === MID).length === 2, "overlay items are tagged with their set (the radnotes2 release) and module");
+  ok(reqs.some((u) => u.includes(FIX + "api/overlay/radnotes2/radiology/" + MID + ".json")), "the overlay loads from overlay/radnotes2/radiology/<module>.json");
 
   // ---- the lesson's quiz draws overlay items; the image MCQ shows its figure
   await click("#smdPrep [data-act=l-quiz]");

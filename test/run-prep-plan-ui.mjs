@@ -108,7 +108,7 @@ try {
   // ---- home: readiness line and Today's plan
   ok(await until(`return /^0\\/100/.test(document.querySelector("#smdPrep .pl-num").textContent);`, 3000), "readiness is 0 before any answer");
   ok(/first answers start it moving/.test(await text("#smdPrep .pl-hero")), "a friendly empty line, not a failing score");
-  ok(/10 days to the exam/.test(await text("#smdPrep .pl-top")), "the countdown shows the days to the exam");
+  ok(/Exam in\s*10\s*days/.test(await text("#smdPrep .pl-top")), "the countdown shows the days to the exam (quiet card: Exam in 10 days)");
   ok(await until(`return !!document.querySelector("#smdPrep .pl-list");`, 5000), "Today's plan is drawn");
   const kinds = async () => ev(`return Array.from(document.querySelectorAll("#smdPrep .pl-list .pl-item")).map(function(b){return b.getAttribute("data-k");}).join(",");`);
   ok(await kinds() === "new,mock", "10 days out, 120 min, nothing due: new questions then a mini mock, no new lesson: " + await kinds());
