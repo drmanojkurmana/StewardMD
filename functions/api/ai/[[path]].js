@@ -121,7 +121,7 @@ function withCors(request, resp) {
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. A future provider drops into PROVIDERS.
  * =================================================================== */
-import { checkQuota, proDailyTokensView, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
+import { checkQuota, proDailyTokensView, allowanceView, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, MODEL_HARD_DEFAULT, ACCURATE_MODEL, MODEL_RETIRES, envModel, overrideModel, allowedModels, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, getProDailyTokens, setProDailyTokens, proDailyTokensDefault, getUserProTokens, setUserProTokens, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { listRecentSignups, userDetail } from "../../_admin_users.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR, tokenPackList } from "../../_credits.js";
@@ -1590,7 +1590,8 @@ export async function onRequest(context) {
     try { await warmBillingCfg(store); } catch (e) {}
     out.packs = tokenPackList(env);
     out.costCapOn = costCapOn(env);
-    out.proTokens = await proDailyTokensView(env, request, who, store);   // the Pro daily allowance, or null
+    out.proTokens = await proDailyTokensView(env, request, who, store);   // the Pro daily allowance, or null (older app builds)
+    out.allowance = await allowanceView(env, request, who, store);   // MaiK Tokens: today left, this week, this month (the screen)
     try {
       out.balanceMt = inrToMt(await getCredits(store, key));
       out.dailyFreeMt = inrToMt(await dailyCostCap(env, store, meterEmail(who), null));

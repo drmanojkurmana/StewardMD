@@ -534,13 +534,14 @@
        * either path is one profile. profileComplete is what email-auth's own prompt checks. */
       var rk = roleKey(draft.role);
       try { if (rk && window.SMD_ROLE) SMD_ROLE.set(rk); } catch (e) {}
+      Promise.race([
       ref.set({
         role: rk,
         name: draft.name || "", phone: draft.phone || "",
         state: draft.state || "", city: draft.city || "",
         hospital: draft.hospital || "", degree: draft.degree || "", speciality: draft.speciality || "",
         profileComplete: true, updatedAt: Date.now()
-      }, { merge: true })
+      }, { merge: true }), new Promise(function (_, rej) { setTimeout(function () { rej({ code: "sdk-timeout" }); }, 8000); })])
         .then(finishSaved)
         .catch(function () {
           // The SDK write failed or hung: the server writes the same document.
