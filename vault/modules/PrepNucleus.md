@@ -1327,7 +1327,7 @@ keyboard; conversation and box hidden under the keyboard, the page showing throu
   `test/run-prep-nav-ui.mjs` (Chromium via `CHROME=` and WebKit; SHOTS=<dir>, REAL=1 for real content via a read-only
   /api/prep/bank proxy). Token-only change: run-prep-setup-ui (prep55).
 - Not verified: a real iPhone (WKWebView blur, safe-area float, keyboard) and a real Android WebView (lens).
-## Share IDs (2026-10-10, branch `feat/prep-ids`, prep57)
+## Share IDs (2026-10-10, branch `feat/prep-ids`, prep58)
 Owner: "Give every MCQ and lesson a unique ID, shareable, so friends can search the ID and get into the topic or MCQ."
 - **Format.** `Q-8K3-M7T-X26` (MCQ) and `L-MES-9NF-WN7` (lesson): type letter, 8 Crockford base32 characters (0-9, A-Z
   without I, L, O, U), 1 check character, grouped in threes. The 8 characters are the first 40 bits of
