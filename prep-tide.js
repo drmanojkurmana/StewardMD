@@ -5,6 +5,7 @@
    Where it lives: a layer under the overlay (#smdPrepTide, z-index just below #smdPrep), as tall as the screen's top
    region (home: the readiness hero; lists: the bar and the first card; reading screens: the bar only), fading into the
    page through a mask. It moves up with the screen's scroll at 0.6x and stops drawing once it has left the view.
+   Motion: it drifts while the screen is in use and settles 10 s after the last touch, scroll or key.
    Battery: drawn at half the CSS pixel size (DPR ignored: a soft field needs no more), at most 30 frames a second, only
    while PrepNucleus is open, the page is visible and the layer is on screen. Grain is a 96 px noise tile made once in
    CSS, not per frame. Reduced motion: one still frame. No WebGL: a still CSS gradient in the same colours.
@@ -39,7 +40,8 @@
     dark: { c1: [0x1a, 0x40, 0x74], c2: [0x5e, 0x4a, 0x33], c3: [0x16, 0x1a, 0x30], b: 0.04 },
     light: { c1: [0xcb, 0xda, 0xef], c2: [0xf8, 0xdf, 0xb6], c3: [0xe2, 0xe9, 0xf4], b: 0.02 }
   };
-  var CANVAS_H = 420, SCALE = 0.5, FRAME_MS = 1000 / 30, SPEED = 0.16;
+  var CANVAS_H = 420, SCALE = 0.5, FRAME_MS = 1000 / 30, SPEED = 0.16, IDLE_MS = 10000;
+  var lastAct = 0;
   var host = null, tw = null, cv = null, gl = null, prog = null, U = {}, raf = 0, last = 0, t0 = 0, tAcc = 0, w = 0, root = null, mo = null, mode = "", reg = 0, offY = 0, bodyEl = null;
   var still = false, ok = false, vis = true;
 
@@ -87,7 +89,10 @@
     gl.uniform2f(U.R, cv.width, cv.height); gl.uniform1f(U.T, t); colors();
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
-  function running() { return ok && !still && vis && root && !D.hidden && offY < reg + 40; }
+  // It moves while the student is using the screen and settles 10 s after the last touch, scroll or key (battery, and
+  // no endless motion beside reading); the next interaction wakes it.
+  function running() { return ok && !still && vis && root && !D.hidden && offY < reg + 40 && Date.now() - lastAct < IDLE_MS; }
+  function wake() { lastAct = Date.now(); start(); }
   // One frame, then sleep until the next is due (a timer, not a wake-up every vsync), then the next vsync draws it.
   var tmr = 0;
   function loop(now) {
@@ -99,7 +104,7 @@
   }
   function start() { if (!raf && !tmr && running()) { last = 0; raf = G.requestAnimationFrame(loop); } }
   function stop() { if (raf) { G.cancelAnimationFrame(raf); raf = 0; } if (tmr) { G.clearTimeout(tmr); tmr = 0; } }
-  function onVis() { if (D.hidden) stop(); else start(); }
+  function onVis() { if (D.hidden) stop(); else wake(); }
   function onTheme() { if (ok) { draw(tAcc); } paintFallback(); }
   function paintFallback() { if (host) host.classList.toggle("pn-tide-dk", dark()); }
 
@@ -121,6 +126,7 @@
     offY = Math.max(0, y || 0) * 0.6;
     if (tw) tw.style.transform = offY ? "translate3d(0," + (-Math.min(offY, reg + 40)) + "px,0)" : "";
     if (root) root.classList.toggle("pn-scr", (y || 0) > 6);
+    lastAct = Date.now();
     if (running()) start(); else stop();
   }
 
@@ -129,6 +135,7 @@
   var SPOT = ".pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext";
   function spotAt(el, e) { var b = el.getBoundingClientRect(), z = el.offsetWidth ? b.width / el.offsetWidth : 1; el.style.setProperty("--mx", ((e.clientX - b.left) / (z || 1)).toFixed(0) + "px"); el.style.setProperty("--my", ((e.clientY - b.top) / (z || 1)).toFixed(0) + "px"); }
   function onDown(e) {
+    wake();
     var t = e.target && e.target.closest ? e.target : null; if (!t) return;
     var p = t.closest(".pn-btn.pri");
     if (p && !p.disabled && !reduced()) { p.classList.remove("pn-shine"); void p.offsetWidth; p.classList.add("pn-shine"); }
@@ -157,10 +164,11 @@
     r.addEventListener("pointerdown", onDown, { passive: true });
     r.addEventListener("pointermove", onMove, { passive: true });
     r.addEventListener("animationend", onEnd);
+    r.addEventListener("keydown", wake);
     G.addEventListener("resize", onResize);
     try { mo = new MutationObserver(onTheme); mo.observe(D.body, { attributes: true, attributeFilter: ["class"] }); } catch (e) { mo = null; }
     try { G.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", onMotionPref); } catch (e) {}
-    vis = true; start();
+    vis = true; wake();
   }
   function onMotionPref() { still = reduced(); if (still) stop(); else start(); }
   function onResize() { w = 0; size(); if (ok) draw(tAcc); }
@@ -182,7 +190,7 @@
     G.removeEventListener("resize", onResize);
     try { G.matchMedia("(prefers-reduced-motion: reduce)").removeEventListener("change", onMotionPref); } catch (e) {}
     if (mo) { mo.disconnect(); mo = null; }
-    if (root) { root.removeEventListener("scroll", onScroll, true); root.removeEventListener("pointerdown", onDown); root.removeEventListener("pointermove", onMove); root.removeEventListener("animationend", onEnd); root.classList.remove("pn-tided", "pn-scr"); }
+    if (root) { root.removeEventListener("scroll", onScroll, true); root.removeEventListener("pointerdown", onDown); root.removeEventListener("pointermove", onMove); root.removeEventListener("animationend", onEnd); root.removeEventListener("keydown", wake); root.classList.remove("pn-tided", "pn-scr"); }
     try { var x = gl && gl.getExtension("WEBGL_lose_context"); if (x) x.loseContext(); } catch (e) {}
     if (host && host.parentNode) host.parentNode.removeChild(host);
     host = tw = cv = gl = prog = root = bodyEl = null; ok = false; mode = ""; reg = 0; offY = 0;

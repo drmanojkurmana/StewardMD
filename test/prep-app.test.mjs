@@ -397,5 +397,6 @@ test("tide pass: prep-tide.js loads after prep-motion.js, optional, and prep.js 
   assert.match(T, /prefers-reduced-motion/, "reduced motion draws one still frame");
   assert.match(T, /visibilitychange/, "pauses when the page is hidden");
   assert.match(T, /FRAME_MS = 1000 \/ 30/, "capped at 30 frames a second");
+  assert.match(T, /IDLE_MS = 10000/, "settles 10 s after the last interaction");
   assert.doesNotMatch(T, /https?:\/\//, "no network: offline");
 });
