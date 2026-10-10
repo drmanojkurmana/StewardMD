@@ -53,7 +53,7 @@ async function main(argv = process.argv.slice(2)) {
   const only = arg("--only", null);
   const jobs = Math.max(1, Math.min(16, Number(arg("--jobs", 6)) || 6));
   const as = arg("--as", null);
-  if (as && !/^v\d{1,3}\/[a-z0-9-]+$/.test(as)) throw new Error("--as must look like v2/pyq");
+  if (as && !/^(?:v\d{1,3}|overlay)\/[a-z0-9-]+$/.test(as)) throw new Error("--as must look like v2/pyq or overlay/maik1");
   let files = listFiles(dir, as);
   if (only) files = files.filter((f) => f.key.includes(`/${only}/`));
   const mb = files.reduce((a, f) => a + f.bytes, 0) / 1e6;

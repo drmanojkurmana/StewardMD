@@ -19,6 +19,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import crypto from "node:crypto";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -74,6 +75,8 @@ export function toOverlay(items, o) {
     const id = "mk-" + String(it.id || "").replace(/^q_/, "");
     const out = { id, q: it.q, o: it.o, a: it.a, exp: it.exp || "", r: it.r || [], kp: it.kp || "", t: o.module, d: it.d || 2, cog: it.cog || "recall", prov: "SMD", gen: "AI", set: o.set };
     if (it.tg && it.tg.length) out.tg = it.tg;
+    if (it.x) out.x = it.x;
+    if (it.quality) out.quality = it.quality;
     return out;
   }) };
 }
@@ -194,10 +197,98 @@ async function publish() {
     items = j.items.map((it) => Object.assign(it, { qg: Object.assign({}, it.qg, { approved: 1 }) })); subject = subject || j.subject; module = module || j.module;
   } else {
     const f = arg("--items"); if (!f) { say("publish needs --stage <id> or --items <file>"); process.exit(2); }
-    const j = JSON.parse(fs.readFileSync(f, "utf8")); items = j.items || j; subject = subject || j.subject; module = module || j.module;
+    const raw = fs.readFileSync(f, "utf8").trim();
+    if (raw.startsWith("[") || (raw.startsWith("{") && !raw.includes("\n{"))) {
+      const j = JSON.parse(raw); items = j.items || (Array.isArray(j) ? j : [j]); subject = subject || j.subject; module = module || j.module;
+    } else {
+      items = raw.split("\n").filter(Boolean).map(JSON.parse);
+    }
   }
   const set = arg("--set", "maik1");
-  if (!/^maik[1-9]\d{0,2}$/.test(set) || !/^[a-z0-9-]{2,60}$/.test(subject || "") || !/^[a-z0-9-]{2,80}$/.test(module || "")) { say("Need --subject, --module (bank ids) and --set maik<n>."); process.exit(2); }
+  if (!/^maik[1-9]\d{0,2}$/.test(set)) { say("Need valid --set maik<n>."); process.exit(2); }
+
+  if (!module) {
+    // Multi-module publish: items carry sid/subject and t/module
+    const groups = {};
+    for (const it of items) {
+      const s = it.sid || it.subject || subject;
+      const m = it.t || it.module;
+      if (!s || !m) continue;
+      const k = s + "/" + m;
+      (groups[k] = groups[k] || []).push(it);
+    }
+    const groupKeys = Object.keys(groups).sort();
+    if (!groupKeys.length) { say("No items with subject and module found."); process.exit(2); }
+
+    let totalWritten = 0;
+    const manifestModules = {}, manifestCounts = {};
+    for (const k of groupKeys) {
+      const [s, m] = k.split("/");
+      const list = groups[k];
+      const ov = toOverlay(list, { subject: s, module: m, set });
+      const out = path.join(WORK, "publish", set, s);
+      fs.mkdirSync(out, { recursive: true });
+      const file = path.join(out, m + ".json");
+      if (fs.existsSync(file)) { say("Exists: " + file + ". Overlay files are immutable once uploaded."); process.exit(1); }
+      fs.writeFileSync(file, JSON.stringify(ov));
+      totalWritten += ov.items.length;
+      ((manifestModules[s] ||= []).push(m));
+      (((manifestCounts[set] ||= {})[s] ||= {})[m] = ov.items.length);
+    }
+    say("Wrote " + totalWritten + " items across " + groupKeys.length + " modules to " + path.join(WORK, "publish", set));
+
+    // Update maik manifest
+    const manDir = path.join(WORK, "publish", "maik");
+    fs.mkdirSync(manDir, { recursive: true });
+    const idxPath = path.join(manDir, "index.json");
+    let existingIndex = fs.existsSync(idxPath) ? JSON.parse(fs.readFileSync(idxPath, "utf8")) : null;
+    let allSets = (existingIndex && existingIndex.sets) || {};
+    let allCounts = {};
+    if (existingIndex && existingIndex.manifest) {
+      const oldManPath = path.join(manDir, existingIndex.manifest);
+      if (fs.existsSync(oldManPath)) {
+        try {
+          const oldMan = JSON.parse(fs.readFileSync(oldManPath, "utf8"));
+          if (oldMan.counts) allCounts = oldMan.counts;
+        } catch (e) {}
+      }
+    }
+    for (const s of Object.keys(manifestModules)) {
+      const cur = allSets[s] || (allSets[s] = []);
+      if (!cur.includes(set)) cur.push(set);
+    }
+    allCounts[set] = manifestCounts[set] || {};
+
+    const manifestObj = {
+      v: 1,
+      gen: new Date().toISOString().slice(0, 10),
+      sets: allSets,
+      counts: allCounts
+    };
+    const canonJson = JSON.stringify(manifestObj);
+    const hash = crypto.createHash("sha256").update(canonJson).digest("hex").slice(0, 8);
+    const manifestFileName = "manifest-" + hash + ".json";
+    fs.writeFileSync(path.join(manDir, manifestFileName), canonJson);
+    fs.writeFileSync(idxPath, JSON.stringify({ v: 1, manifest: manifestFileName, sets: allSets }, null, 1));
+    say("Updated maik manifest: " + path.join(manDir, manifestFileName) + " and index.json");
+
+    say("Next (in order):");
+    say("  1. Upload overlay: node tools/prep-upload-bank.mjs --dir " + path.join(WORK, "publish", set) + " --as overlay/" + set + " --yes --no-ids");
+    say("  2. Upload manifest: node tools/prep-upload-bank.mjs --dir " + path.join(WORK, "publish", "maik") + " --as overlay/maik --yes --no-ids");
+    say("  3. node tools/prep-overlay-counts.mjs");
+    say("  4. node tools/prep-ids.mjs publish --yes && node tools/prep-ids.mjs verify");
+
+    if (has("--upload")) {
+      let r = spawnSync(process.execPath, [path.join(ROOT, "tools/prep-upload-bank.mjs"), "--dir", path.join(WORK, "publish", set), "--as", "overlay/" + set, "--yes", "--no-ids"], { stdio: "inherit" });
+      if (r.status !== 0) process.exit(r.status || 1);
+      r = spawnSync(process.execPath, [path.join(ROOT, "tools/prep-upload-bank.mjs"), "--dir", path.join(WORK, "publish", "maik"), "--as", "overlay/maik", "--yes", "--no-ids"], { stdio: "inherit" });
+      if (r.status !== 0) process.exit(r.status || 1);
+      say("Uploads completed.");
+    }
+    return;
+  }
+
+  if (!/^[a-z0-9-]{2,60}$/.test(subject || "") || !/^[a-z0-9-]{2,80}$/.test(module || "")) { say("Need --subject, --module (bank ids) and --set maik<n>."); process.exit(2); }
   const ov = toOverlay(items, { subject, module, set });
   const out = path.join(WORK, "publish", set, subject);
   fs.mkdirSync(out, { recursive: true });
@@ -210,7 +301,7 @@ async function publish() {
   say("  2. Upload: node tools/prep-upload-bank.mjs --dir " + path.join(WORK, "publish", set) + " --as overlay/" + set + " --yes   (also rebuilds the share ID index)");
   say("  3. node tools/prep-overlay-counts.mjs, rebuild the subject's search file, then verify: node tools/prep-ids.mjs verify");
   if (has("--upload")) {
-    const r = spawnSync("node", [path.join(ROOT, "tools/prep-upload-bank.mjs"), "--dir", path.join(WORK, "publish", set), "--as", "overlay/" + set, "--yes"], { stdio: "inherit" });
+    const r = spawnSync(process.execPath, [path.join(ROOT, "tools/prep-upload-bank.mjs"), "--dir", path.join(WORK, "publish", set), "--as", "overlay/" + set, "--yes"], { stdio: "inherit" });
     process.exit(r.status || 0);
   }
 }

@@ -494,9 +494,17 @@
   // (tools/prep-overlay-counts.mjs), so the counts on screen match what practice draws. No counts file: bank counts only.
   function loadIndex(sid) {
     if (st.ix[sid]) return Promise.resolve(st.ix[sid]);
-    return Promise.all([getJSON(STATIC + "bank/" + bvOf(sid) + "/" + sid + "/index.json"), (OVERLAYS[sid] || []).length ? loadOvc() : {}]).then(function (r) {
-      var ix = r[0];
-      (ix.topics || []).forEach(function (t) { var n = ovFor(r[1], OVERLAYS[sid], sid, t.id); if (n) t.ov = n; });
+    return Promise.all([
+      getJSON(STATIC + "bank/" + bvOf(sid) + "/" + sid + "/index.json"),
+      loadMaikManifest().then(null, function () { return {}; }),
+      loadOvc()
+    ]).then(function (r) {
+      var ix = r[0], ovc = r[2] || {};
+      var sets = overlaysOfSid(sid);
+      if (st_maikCounts) {
+        for (var sKey in st_maikCounts) { ovc[sKey] = st_maikCounts[sKey]; }
+      }
+      (ix.topics || []).forEach(function (t) { var n = ovFor(ovc, sets, sid, t.id); if (n) t.ov = n; });
       return (st.ix[sid] = ix);
     }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
   }
@@ -565,25 +573,69 @@
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
      goes to a new folder (medcov4, radnotes3 and radmax7 now, de-identified figures 2026-10-10; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7"], medicine: ["medcov4"], "ss-pulmonology": ["medcov4"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7"], medicine: ["medcov4", "maik1"], pathology: ["maik1"], pharmacology: ["maik1"], "ss-pulmonology": ["medcov4"] };
+  /* MaiK overlays: generic discovery of published waves (maik1, maik2, ...) so later waves need NO app code changes.
+     Pointer: overlay/maik/index.json (Cache-Control: max-age=300) -> manifest: "manifest-<hash>.json" (immutable, cached in IndexedDB).
+     Fallback: local OVERLAYS static map (works offline or before manifest is loaded). */
+  var st_maik = null, st_maikCounts = null;
+  function loadMaikManifest() {
+    if (st.maikP) return st.maikP;
+    var idxPath = "overlay/maik/index.json";
+    st.maikP = getJSON(API + idxPath).then(function (ptr) {
+      if (!ptr) return {};
+      if (ptr.manifest) {
+        var manPath = "overlay/maik/" + ptr.manifest;
+        return cacheGet(manPath).then(function (hit) {
+          if (hit && hit.sets) { st_maikCounts = hit.counts || null; return hit.sets; }
+          return getJSON(API + manPath).then(function (m) {
+            if (m && m.sets) {
+              st_maikCounts = m.counts || null;
+              cachePut(manPath, { sets: m.sets, counts: m.counts, ts: Date.now() });
+            }
+            return (m && m.sets) || ptr.sets || {};
+          }, function () { return ptr.sets || {}; });
+        });
+      }
+      return ptr.sets || {};
+    }, function () {
+      return cacheGet(idxPath).then(function (hit) {
+        if (hit && hit.counts) st_maikCounts = hit.counts;
+        return (hit && hit.sets) || {};
+      });
+    }).then(function (sets) {
+      st_maik = sets || {};
+      cachePut(idxPath, { sets: st_maik, counts: st_maikCounts, ts: Date.now() });
+      return st_maik;
+    });
+    return st.maikP;
+  }
+  function overlaysOfSid(sid) {
+    var base = (OVERLAYS[sid] || []).slice();
+    if (st_maik && st_maik[sid]) {
+      st_maik[sid].forEach(function (s) { if (base.indexOf(s) < 0) base.push(s); });
+    }
+    return base;
+  }
   // Earlier releases of a set (medcov4 -> medcov, medcov2, medcov3), whose cached copies a new release replaces.
   function oldOverlays(set) { var m = /^(.*?[a-z])(\d+)$/.exec(set), out = []; if (!m || +m[2] < 2) return out; out.push(m[1]); for (var k = 2; k < +m[2]; k++) out.push(m[1] + k); return out; }
   function loadOverlay(sid, mid, miss) {
-    var sets = OVERLAYS[sid] || [];
-    return Promise.all(sets.map(function (set) {
-      var p = "overlay/" + set + "/" + sid + "/" + mid + ".json";
-      if (st.mem[p]) return st.mem[p];
-      return cacheGet(p).then(function (hit) {
-        if (hit && hit.items) return (st.mem[p] = hit.items);
-        return getJSON(API + p).then(function (f) {
-          var items = (f && f.items) || [];
-          st.mem[p] = items;
-          cachePut(p, { items: items, ts: Date.now() });
-          oldOverlays(set).forEach(function (o) { cacheDel("overlay/" + o + "/" + sid + "/" + mid + ".json"); });
-          return items;
-        }, function (e) { if (e && e.status === 404) return (st.mem[p] = []); if (miss) miss.n++; return []; });
-      }).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
-    })).then(function (r) { return [].concat.apply([], r); });
+    return loadMaikManifest().then(null, function () { return {}; }).then(function () {
+      var sets = overlaysOfSid(sid);
+      return Promise.all(sets.map(function (set) {
+        var p = "overlay/" + set + "/" + sid + "/" + mid + ".json";
+        if (st.mem[p]) return st.mem[p];
+        return cacheGet(p).then(function (hit) {
+          if (hit && hit.items) return (st.mem[p] = hit.items);
+          return getJSON(API + p).then(function (f) {
+            var items = (f && f.items) || [];
+            st.mem[p] = items;
+            cachePut(p, { items: items, ts: Date.now() });
+            oldOverlays(set).forEach(function (o) { cacheDel("overlay/" + o + "/" + sid + "/" + mid + ".json"); });
+            return items;
+          }, function (e) { if (e && e.status === 404) return (st.mem[p] = []); if (miss) miss.n++; return []; });
+        }).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
+      })).then(function (r) { return [].concat.apply([], r); });
+    });
   }
   // A module's questions: the bank file plus its overlay items (mergeOverlay). A bank failure with overlay items still
   // gives the overlay items; with none, the failure stands.
@@ -2594,7 +2646,7 @@
     startPlan: startPlan, startWeak: startWeak, openCustom: function () { push(renderCustom); }, openMistakes: function () { mf.tag = "all"; push(renderMistakes); }, setTt: ttSet,
     planToday: function () { return planToday(load(), today()); }, staticBase: STATIC, pnow: function () { return pnow(); },
     // MaiK modules (prep-qgen.js): the bank and overlay files of a module, for the owner's duplicate check on the server.
-    modulePath: modulePath, overlaysOf: function (sid) { return (OVERLAYS[sid] || []).slice(); } };
+    modulePath: modulePath, overlaysOf: function (sid) { return overlaysOfSid(sid); } };
 
   var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST };
   G.PREP = API_OBJ;

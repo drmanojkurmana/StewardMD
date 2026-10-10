@@ -39,6 +39,8 @@ const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-
 // Owner-reviewed MaiK questions (Author screen + tools/prep-qgen.mjs publish, set "maik<n>"): overlay/maik<n>/<subject>/<module>.json,
 // immutable. The staging copies under prep-qgen/ are outside the prep-bank/ prefix and never served.
 const MAIK_RE = /^overlay\/maik[1-9]\d{0,2}\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+// MaiK overlay manifest: overlay/maik/index.json (short cache) points to immutable overlay/maik/manifest-[0-9a-f]{8,16}.json
+const MAIK_MANIFEST_RE = /^overlay\/maik\/(?:index\.json|manifest-[0-9a-f]{8,16}\.json)$/;
 // Share IDs (tools/prep-ids.mjs, prep-ids.js): v<n>/ids/index.json names the current shards (short cache); a shard
 // <two ID characters>-<6 hex content hash>.json is immutable (a changed shard gets a new name).
 const IDS_RE = /^v\d{1,3}\/ids\/(?:index|[0-9a-z]{2}-[0-9a-f]{6})\.json$/;
@@ -55,7 +57,7 @@ function notFound() { return new Response(JSON.stringify({ error: "not-found" })
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || MAIK_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) || LINKS_RE.test(p) || QUALITY_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || MAIK_RE.test(p) || MAIK_MANIFEST_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) || LINKS_RE.test(p) || QUALITY_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {
@@ -71,7 +73,7 @@ export async function onRequestGet({ env, params }) {
   const headers = new Headers({
     "Content-Type": /\.webp$/.test(p) ? "image/webp" : /\.svg$/.test(p) ? "image/svg+xml" : "application/json; charset=utf-8",
     // manifest.json and the pyq/lessons/cards/ids/links/quality index.json name the current files, so they may change; everything else is immutable
-    "Cache-Control": /(?:manifest|(?:pyq|lessons|cards|ids|links|quality)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
+    "Cache-Control": /(?:manifest|(?:pyq|lessons|cards|ids|links|quality|maik)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
     "X-Content-Type-Options": "nosniff",
   });
   // an SVG opened on its own runs no script and loads nothing
