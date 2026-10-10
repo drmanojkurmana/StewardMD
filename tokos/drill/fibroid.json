@@ -1,0 +1,52 @@
+{
+  "id": "fibroid", "kind": "drill", "level": "mbbs", "review": "ai_drafted", "timeLimitSec": 420,
+  "title": { "en": "Fibroid drill: bleeding and where the fibroid sits", "hi": "Fibroid ड्रिल: रक्तस्राव और fibroid की जगह" },
+  "scenario": {
+    "en": "A 41-year-old woman has had heavy periods for a year. Her scan shows a fibroid (leiomyoma). A specialist review is being arranged. Work through the first treatment, the referral and the choice when a fibroid bulges into the cavity. Teaching scenario, not a real patient.",
+    "hi": "41 वर्षीय महिला को एक साल से भारी माहवारी हो रही है। स्कैन में fibroid (leiomyoma) दिखा है। Specialist की जाँच की व्यवस्था हो रही है। पहला इलाज, रेफ़रल और cavity में उभरे fibroid का चुनाव करें। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    { "label": "NICE NG88: Heavy menstrual bleeding: assessment and management", "url": "https://www.nice.org.uk/guidance/ng88/chapter/Recommendations" }
+  ],
+  "stages": [
+    { "id": "bridge", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Heavy periods. The scan shows a 4 cm fibroid and a specialist review is being arranged. What do you offer in the meantime?", "hi": "भारी माहवारी। स्कैन में 4 cm का fibroid है और specialist की जाँच की व्यवस्था हो रही है। तब तक आप क्या देंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "refer",
+          "text": { "en": "Tranexamic acid and/or an NSAID while the investigations and definitive treatment are organised.", "hi": "Tranexamic acid और/या NSAID, जब तक जाँच और पक्का इलाज तय हो रहा हो।" },
+          "feedback": { "en": "NICE 1.5.9: if pharmacological treatment is needed while investigations and definitive treatment are being organised, offer tranexamic acid and/or NSAIDs.", "hi": "NICE 1.5.9: जाँच और पक्के इलाज की तैयारी के दौरान दवा ज़रूरी हो तो tranexamic acid और/या NSAIDs दें।" } },
+        { "id": "b", "correct": false, "next": "refer",
+          "text": { "en": "Nothing until the specialist has seen her, however heavy the bleeding.", "hi": "Specialist के देखने तक कुछ नहीं, चाहे रक्तस्राव कितना भी ज़्यादा हो।" },
+          "feedback": { "en": "Heavy bleeding needs treatment while she waits. Offer tranexamic acid and/or an NSAID.", "hi": "भारी रक्तस्राव में इंतज़ार के दौरान भी इलाज चाहिए। Tranexamic acid और/या NSAID दें।" } },
+        { "id": "c", "correct": false, "next": "refer",
+          "text": { "en": "A GnRH analogue for a long course.", "hi": "GnRH analogue का लंबा कोर्स।" },
+          "feedback": { "en": "GnRH analogues are used for a short time, because bone loss limits their use. They are not the first step here.", "hi": "GnRH analogues छोटी अवधि के लिए उपयोग होते हैं, क्योंकि bone loss इनके लंबे उपयोग को सीमित करता है। यहाँ यह पहला कदम नहीं है।" } }
+      ] },
+    { "id": "refer", "src": 0, "timeSec": 60,
+      "prompt": { "en": "The fibroid is 4 cm across. What does NICE advise?", "hi": "Fibroid 4 cm का है। NICE क्या सलाह देता है?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "cavity",
+          "text": { "en": "Refer to specialist care for further investigation and to discuss the treatment options.", "hi": "आगे की जाँच और इलाज के विकल्पों पर चर्चा के लिए specialist care में रेफ़र करें।" },
+          "feedback": { "en": "NICE 1.5.8: consider referring women to specialist care for fibroids of 3 cm or more, for further investigation and treatment options.", "hi": "NICE 1.5.8: 3 cm या उससे बड़े fibroid वाली महिलाओं को आगे की जाँच और इलाज के विकल्पों के लिए specialist care में रेफ़र करने पर विचार करें।" } },
+        { "id": "b", "correct": false, "next": "cavity",
+          "text": { "en": "Watch only, since fibroids are benign.", "hi": "सिर्फ़ देखते रहें, क्योंकि fibroid सौम्य (benign) होते हैं।" },
+          "feedback": { "en": "Fibroids are benign, but this one causes heavy bleeding. The symptoms need a plan.", "hi": "Fibroid सौम्य (benign) होते हैं, पर यह भारी रक्तस्राव कर रहा है। लक्षणों के लिए योजना चाहिए।" } },
+        { "id": "c", "correct": false, "next": "cavity",
+          "text": { "en": "Hysterectomy at once, without a discussion.", "hi": "बिना चर्चा के तुरंत hysterectomy।" },
+          "feedback": { "en": "The choice of surgery is a shared decision. NICE asks you to inform women about the increased risk of serious complications with hysterectomy when fibroids are present.", "hi": "सर्जरी का चुनाव साझा फ़ैसला है। NICE कहता है कि fibroid हों तो hysterectomy की गंभीर जटिलताओं का बढ़ा हुआ जोखिम महिला को बताएँ।" } }
+      ] },
+    { "id": "cavity", "src": 0, "timeSec": 60,
+      "prompt": { "en": "The specialist finds the fibroid bulges into the uterine cavity (submucosal). What does NICE advise you to consider?", "hi": "Specialist को पता चलता है कि fibroid गर्भाशय की cavity में उभरा है (submucosal)। NICE किस पर विचार करने की सलाह देता है?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Hysteroscopic removal of the fibroid.", "hi": "Hysteroscopy से fibroid हटाना (hysteroscopic removal)।" },
+          "feedback": { "en": "NICE 1.5.7: for women with submucosal fibroids, consider hysteroscopic removal.", "hi": "NICE 1.5.7: submucosal fibroid वाली महिलाओं में hysteroscopic removal पर विचार करें।" } },
+        { "id": "b", "correct": false, "next": "end",
+          "text": { "en": "An LNG-IUS as the first treatment.", "hi": "पहले इलाज के रूप में LNG-IUS।" },
+          "feedback": { "en": "NICE 1.5.2 gives the LNG-IUS first for fibroids under 3 cm that are not distorting the uterine cavity. This fibroid bulges into the cavity.", "hi": "NICE 1.5.2 में LNG-IUS पहला इलाज है, उन fibroids में जो 3 cm से छोटे हों और गर्भाशय की cavity को न बिगाड़ें। यह fibroid cavity में उभरा है।" } },
+        { "id": "c", "correct": false, "next": "end",
+          "text": { "en": "Repeat the scan in a year.", "hi": "एक साल बाद स्कैन दोहराएँ।" },
+          "feedback": { "en": "A repeat scan alone does not treat the bleeding or the change in the cavity.", "hi": "सिर्फ़ दोबारा स्कैन करने से रक्तस्राव या cavity में बदलाव का इलाज नहीं होता।" } }
+      ] }
+  ]
+}
