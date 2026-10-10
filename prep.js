@@ -892,7 +892,8 @@
 
   function open(opts) {
     // A shared ID (deep link stewardmd://prep/<ID>) while PrepNucleus is already open: open it over the current screen.
-    if (st.open) { if (opts && opts.id && G.PREP_IDS) G.PREP_IDS.open(String(opts.id), HOST); return true; }
+    // Still loading (the taxonomy): kept for the first screen, which opens it.
+    if (st.open) { if (opts && opts.id && G.PREP_IDS) { if (st.tax && st.stack.length) G.PREP_IDS.open(String(opts.id), HOST); else st.pendId = String(opts.id); } return true; }
     load();
     st.prevFocus = D.activeElement; st.prevOverflow = D.body.style.overflow;
     root = D.createElement("div"); root.id = "smdPrep"; root.className = "pn-root";
@@ -916,13 +917,14 @@
     // Reminder, widget, Live Activity and sync on open (prep-native.js).
     if (G.PREP_NATIVE) G.PREP_NATIVE.opened(HOST);
     root.innerHTML = '<div class="pn-load" role="status">Loading PrepNucleus…</div>';
+    st.pendId = opts && opts.id ? String(opts.id) : null;
     loadTax().then(function () {
-      if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); }
+      var pid = st.pendId; st.pendId = null;
+      if (pid && G.PREP_IDS) { push(renderHome); G.PREP_IDS.open(pid, HOST); }
+      else if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); }
       else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
       else if (opts && opts.mode === "plan") { st.stack = [renderHome]; renderHome(); startPlan(); }
       else if (opts && opts.query) openQuery(opts);
-      // A shared question or lesson ID (prep-ids.js): home underneath, then the ID.
-      else if (opts && opts.id && G.PREP_IDS) { push(renderHome); G.PREP_IDS.open(String(opts.id), HOST); }
       // A friends or boards nudge (server push, prep-nudges.js): home, then that tab.
       else if (opts && opts.social && G.PrepSocial) { push(renderHome); G.PrepSocial.open(String(opts.social)); }
       // First plain open: onboarding (prep-plan.js), skippable. SMD_PREP_ONBOARD = false (UI tests) skips it.
