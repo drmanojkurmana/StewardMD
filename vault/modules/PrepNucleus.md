@@ -1086,3 +1086,15 @@ best way of learning."
 - Tests changed on purpose: prep-app (no banner, the dark mark exists), run-prep-arena-ui (section order),
   run-prep-ask-ui (no balloon layer), run-prep-ipad (list columns), run-prep-plan-ui ("Exam in 10 days").
 - Not changed: the "Share my progress" PNG (`drawCard` in prep-arena.js) still paints hero-dark and streak art.
+
+## Owner answer-key fixes (2026-10-10, branch `fix/prep-keyfix`, prep48)
+- The owner returned a corrected key for the 244 held/questioned items (radmax 57, depth 53, 3 live, medicine 46, Crack the
+  Core 85). His PDF's item labels were scrambled; entries were mapped by position and each mapping checked against the stem
+  (no mismatches). 211 applied, 33 held (image-dependent items, verdicts conditional on "verify before reuse", and keys that
+  contradict standard teaching). Per-item changelog, held list and edits: `~/prep-data/keyfix/` and
+  `gs://...-prep-batch/private/keyfix/2026-10-10/` (item text stays out of git).
+- Shipped under new paths: ss-radiology **bank v12** (v11 + 121 fixed items, 2 live items patched), overlay **radmax5**
+  (radmax4 + 42) and **medcov4** (medcov3 + 46); radiology and medicine `search-<hash>.json` rebuilt, overlay counts rerun.
+  Staging scripts: `$CLAUDE_JOB_DIR/tmp/keyfix/scripts/` (build, patch-repo, upload, verify), built from the live R2 copies.
+- `tools/prep-medcov.mjs` OUT_SET is medcov4, but its `assemble` does not rebuild the key-fix items: never re-upload medcov4
+  from an assemble run; a later medcov release starts from the live medcov4 files.
