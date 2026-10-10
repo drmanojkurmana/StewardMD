@@ -9,6 +9,8 @@ import crypto from "node:crypto";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { buildSearch } from "./tokos-build-mcq-search.mjs";
+import { getR2Config, putR2Object } from "./prep-r2-s3.mjs";
+const hasR2S3 = !!getR2Config();
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const API = "https://stewardmd.in/api/prep/bank/";
@@ -109,13 +111,17 @@ async function rebuildSubject(sid, doUpload = false) {
     console.log(`  Uploading ${key} to R2...`);
     for (let t = 1; ; t++) {
       try {
-        await runWrangler([
-          "wrangler", "r2", "object", "put", `${BUCKET}/${key}`,
-          "--file", stageFile,
-          "--content-type", "application/json",
-          "--cache-control", "public, max-age=31536000, immutable",
-          "--remote"
-        ]);
+        if (hasR2S3) {
+          await putR2Object(key, stageFile, "application/json", "public, max-age=31536000, immutable");
+        } else {
+          await runWrangler([
+            "wrangler", "r2", "object", "put", `${BUCKET}/${key}`,
+            "--file", stageFile,
+            "--content-type", "application/json",
+            "--cache-control", "public, max-age=31536000, immutable",
+            "--remote"
+          ]);
+        }
         break;
       } catch (e) {
         if (t >= 4) throw e;
@@ -157,13 +163,17 @@ async function main() {
 
   if (doUpload) {
     console.log("Uploading updated manifest.json to R2...");
-    await runWrangler([
-      "wrangler", "r2", "object", "put", `${BUCKET}/prep-bank/v5/manifest.json`,
-      "--file", manPath,
-      "--content-type", "application/json",
-      "--cache-control", "public, max-age=300",
-      "--remote"
-    ]);
+    if (hasR2S3) {
+      await putR2Object("prep-bank/v5/manifest.json", manPath, "application/json", "public, max-age=300");
+    } else {
+      await runWrangler([
+        "wrangler", "r2", "object", "put", `${BUCKET}/prep-bank/v5/manifest.json`,
+        "--file", manPath,
+        "--content-type", "application/json",
+        "--cache-control", "public, max-age=300",
+        "--remote"
+      ]);
+    }
     console.log("Manifest uploaded.");
   }
 }

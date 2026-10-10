@@ -28,14 +28,27 @@ export function listFiles(dir, as) {
   return out.map((p) => ({ src: p, key: `${PREFIX}/${rel(p)}`, bytes: fs.statSync(p).size, last: path.relative(dir, p) === lastName }))
     .sort((a, b) => (a.last - b.last) || (a.key < b.key ? -1 : 1));
 }
+import { getR2Config, putR2Object } from "./prep-r2-s3.mjs";
+const hasR2S3 = !!getR2Config();
+
 export function putArgs(f) {
   const cache = f.last ? "public, max-age=300" : "public, max-age=31536000, immutable";
   return ["wrangler", "r2", "object", "put", `${BUCKET}/${f.key}`, "--file", f.src, "--content-type", /\.webp$/.test(f.key) ? "image/webp" : "application/json", "--cache-control", cache, "--remote"];
 }
 // R2 answers the odd transient 500 / auth-refresh error; retry each file a few times before giving up.
-async function run(args, tries = 4) {
+async function run(f, tries = 4) {
   for (let t = 1; ; t++) {
-    try { return await run1(args); } catch (e) { if (t >= tries) throw e; await new Promise((r) => setTimeout(r, 2000 * t)); }
+    try {
+      if (hasR2S3) {
+        const cache = f.last ? "public, max-age=300" : "public, max-age=31536000, immutable";
+        const ct = /\.webp$/.test(f.key) ? "image/webp" : "application/json";
+        return await putR2Object(f.key, f.src, ct, cache);
+      }
+      return await run1(putArgs(f));
+    } catch (e) {
+      if (t >= tries) throw e;
+      await new Promise((r) => setTimeout(r, 2000 * t));
+    }
   }
 }
 function run1(args) {
@@ -62,9 +75,9 @@ async function main(argv = process.argv.slice(2)) {
   const body = files.filter((f) => !f.last), tail = files.filter((f) => f.last);
   const skip = Number(arg("--skip", 0)) || 0;  // resume an interrupted upload: skip the first n non-manifest files
   let done = skip, i = skip;
-  const worker = async () => { while (i < body.length) { const f = body[i++]; await run(putArgs(f)); if (++done % 50 === 0) console.log(`  ${done}/${files.length}`); } };
+  const worker = async () => { while (i < body.length) { const f = body[i++]; await run(f); if (++done % 50 === 0) console.log(`  ${done}/${files.length}`); } };
   await Promise.all(Array.from({ length: jobs }, worker));
-  for (const f of tail) { await run(putArgs(f)); done++; }
+  for (const f of tail) { await run(f); done++; }
   console.log(`uploaded ${done} files`);
   // Share IDs: every MCQ and lesson has an ID derived from its item id (prep-ids.js), but the global index that resolves
   // IDs on phones without the content (v1/ids/) must list the new items. Rebuilt here after any bank, overlay, PYQ or
