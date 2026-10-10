@@ -434,7 +434,7 @@
       }
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (SR && !isIOS()) return "Fast · browser STT";
-      return "AI · server (Gemini)";
+      return "AI · server";
     }
     function updateDiag() { if (diagEl) diagEl.textContent = diagText(); }
     updateDiag();

@@ -63,6 +63,8 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
   packs, 697 with StatPearls, 7 modules uncovered; fill dry run over the 891 covered modules $28.57 (not run).
   Test: `test/prep-packs.test.mjs`.
 - Taxonomy source: `prep/taxonomy/*.json` (one per subject; `validateSubject` in the builder).
+- Share IDs: `prep-ids.js` + `prep-ids.css` (optional), `tools/prep-ids.mjs` (fetch, build, verify, publish the
+  `v1/ids/` index). See "Share IDs".
 
 ## Arena server (2026-10-06, merged into `feat/prepnucleus`, not deployed)
 Plan: [[plans/PrepNucleus-Arena]] (deviations listed there). Flags `smd_prep` + `smd_prep_arena` stay OFF.
@@ -1008,3 +1010,425 @@ best way of learning."
   `prep:teach-chat`, counter `prep.teach.chat`.
 - Tests: `test/prep-ask-chat.test.mjs`, `test/prep-teach-server.test.mjs` (chat part), `test/run-prep-ask-chat-ui.mjs`.
 - Icon: see vault/modules/MaiK.md "MaiK AI mark".
+
+## Release-readiness QA (2026-10-10, branch `fix/prep-ready`, prep44)
+- **Ask MaiK reads structured explanations.** Items with bank v5 `x` (key, notes, others, pearl) and an empty `exp` were
+  grounded on the stem alone and the fallback said "No explanation is stored" under a question that showed one (live
+  sur-wound-healing: 40 of 245 items). `prep-teacher.js` `expOf` / `kpOf` / `reasons` now read `x` exactly as the
+  question screen does (markdown made plain); old `*` bullets become lines and stray asterisks go.
+- **Search in ss-radiology.** Bank v6 to v10 shipped no `search.json`, so search showed "needs a connection". On a 404
+  `prep.js loadSearch` builds the same index from the subject's module files (`buildSearch`, flagged items out).
+- **Bank route.** A failed R2 read is a 503 `bank-unavailable` (no-store), never a 404 (a 404 overlay is remembered as
+  empty for the session); HEAD is answered like GET (it fell through to index.html with a 200).
+- **Tests.** Lesson KB gate: `kbGrounding` puts a named doc's first (summary) sentence first and keeps repeated sentences
+  once (KB v2 #1414 grew breast_cancer.json past the 1,400-word cut). Node 22 (CI): server mocks in
+  prep-nudges.test.mjs moved above the first test (a mock.module made while a test runs is undone with it); the sprint
+  assertion only applies in IST. run-prep-ask-ui waits for the sheet's open animation before measuring.
+
+## Release-readiness round 2 (2026-10-10, branch `fix/prep-ready2`, prep46)
+- **Image items no longer give the answer away.** All 137 live image items (ss-radiology bank, overlay sets radnotes and
+  radmax3) were read with their images (OCR plus a visual pass). 47 stems were rewritten so they keep the clinical
+  context but no longer name or describe the answer finding (answer keys, options and explanations untouched; reviewed
+  stems kept privately in `~/prep-data/rad/ready2/stem-edits.json`, not in git). Two radnotes figures had the answer
+  burned in ("Acute SDH", "Target sign"): cleaned copies `img/radnotes/rn-n2-p090-3-nl.webp`, `rn-n2-p057-2-nl.webp`.
+  Image file names carried the diagnosis (`rad-moyamoya-pmc...webp`): ss-radiology **bank v11** = v10 with stems
+  edited and every image and scroll stack copied to neutral names (`v11/ss-radiology/img/i-<sha1 12>.webp`,
+  `stack/s-<sha1 8>/`). Radiology overlays move to **radnotes2** and **radmax4** (bare image names written out in full,
+  because the app resolves a bare name against `img/<set folder>/`). Tool: `tools/prep-item-edits.mjs`.
+- **Search covers overlay items.** Subject `search.json` files were built from the bank only, so radnotes, radmax and
+  medcov questions never matched. Rebuilt with overlay items (Radiology 3,963 -> 5,218 entries, Medicine +381,
+  ss-pulmonology +5) and published as `v5/<subject>/search-<sha256 8>.json`; the bundled subject `index.json` names it
+  (`search`), `prep.js searchFile` reads it (no name: `search.json`), the route accepts the name, and the old cached
+  copy is dropped. ss-radiology v11 ships its own `search.json`; no app path reads a v10/v11 manifest (a v11
+  manifest is on R2 anyway).
+- **Run-together words.** `tools/prep-spacing.mjs` (spaces only, both halves must be known words; brands, eponyms,
+  prefixes, ratios and units left alone; run-in statement lists "colourc) Gas" get their label space back). Applied to
+  bank v5 `exp`, `q` and `o`: 26,548 items in 887 module files (24,255 explanations, 2,372 stems, 88 option sets),
+  republished in place; `manifest.json` bytes changed for every touched subject so phones refetch cached modules.
+- **Flip cards.** WebKit painted the turned-away face mirrored through `backface-visibility`; faces now also go
+  transparent at the half-way point (opacity, so the back can take focus at once). Not yet seen on a real iPhone.
+- **Harness note.** The round-1 "app.js:19 TypeError" is the helper removing `#accountGate` before DOMContentLoaded,
+  not an app bug (the journey harness, which waits for load, sees no error).
+- **Lesson figures cut at the source.** Crack the Core (620 live figures) and radbook (581) lesson media checked for ink
+  or text touching the crop edge. 163 re-cropped from the private PDFs with a margin and shipped under new names
+  (`rb-ctc-<id>-m1.webp`, 4 at `-m2`, 10 radbook `-m1`), e.g. `rb-ctc-p0127-1-m1.webp` now reads "Pars Nervosa" and
+  "Jugular Spine". 133 changed lessons moved to a new revision path (`r` 3 or 4 in `v1/lessons/index.json`, files at
+  `v<r>/lessons/<key>.json`; a lesson file is cached for good under its path), spot-the-sign boxes remapped into the
+  new crops. Left: 142 drawings whose strokes run into the next drawing, 20 where the label sits under the scan's OCR
+  text, 9 still partly cut, notes 1 not checked (its PDF is not on this Mac). In 6 interactions the full printed label
+  the student must find is now visible (ctcbook-100001 s3, -150101 s1, -450501 s4, -600650 s0, radbook-141315 s2): owner
+  to decide. `tools/prep-ctc-figs.py grow_box` adds the margin on future runs; `tools/prep-radlx.mjs indexWith` keeps a
+  later revision. The radnotes and radmax cutters were not changed.
+
+## Quiet redesign (2026-10-10, branch `feat/prep-quiet-ui`, prep47)
+- Owner (iPhone screenshot, circled the glowing logo banner): "I don't want this glowing green, use dark green", plus the
+  full anti-AI-slop brief. Supersedes the look of Premium UI rounds 1 to 7 above (their behaviour notes still hold).
+- Tokens (prep.css `.pn-root` / `body.dark .pn-root`): dark bg `#071318`, card `#0D1D23`, s1 (elevated) `#12262D`,
+  s2 `#1B333B`, edge `#233840`, text `#F0F5F5`, mut `#9AAEB4`, accent `--pn-pri` `#42CDB5` (data, links, focus, meters
+  only); light bg `#F3F6F6`, card `#FFF`, s1 `#EDF2F2`, edge `#D8E1E3`, text `#0B1A1F`, mut `#4B5F66`, accent `#0E7C6B`.
+  One filled colour in both themes: `--pn-fill` `#0F5C52` (deep green, text `--pn-on-fill`), used by `.pn-btn.pri`, the
+  plan's Up next row, chosen chips, a selected option's letter. `--pn-pri-grad` is kept as an alias (solid), `--pn-glow`,
+  `--pn-aura`, `--pn-sh-hero` are `none`, `--pn-hero*` alias the card palette. Radii 4/8/10/12/16. `color-scheme` set.
+- Removed: painted sky (`.pn-sky`), brand banner (home), aurora, meteors/sparkles (`.pn-fx`), rotating light borders,
+  glass/backdrop blur, tile tilt and spotlight, gradient icon squircles (icons are neutral `--pn-s1` tiles), art on finish
+  cards, lobby, subject/module heads, hero bands (`hband` is a plain figure card), empty states, Pro, limit, plan and
+  readiness sheets, accuracy hero, battle VS (bolt flash hidden). Confetti and balloons are retired: `PREP_MOTION.confetti`
+  and `.balloons` are no-ops, `data-cele` stays as a marker and the milestone chip says it in words.
+- Header: `bar("PrepNucleus")` shows the mark at 24 px beside the name: `logo-icon-96.webp` (dark green) on light,
+  `logo-mark-dark-96.webp` (new, flat `#3DB8A4` recolour of the white mark) on dark (`.pn-lg-l` / `.pn-lg-d`).
+- Home order: readiness card (`heroHtml`: score/100 and days to the exam as figures, one accent bar, one line; no ring,
+  no chips), Today's plan with the first open task as the filled `.pl-upnext` row ("Up next"), Practise (Solve next, then
+  one grouped list; two columns inside the card from 700 px), Subjects (rows with a 3 px progress line; row cards from
+  700 px), Your progress (`PREP_PLAN.progressHtml`: streak, today, level + XP bar), the You group (My stats, Friends,
+  Accuracy, Settings), Compete, Pro. Section eyebrows (`.pn-eb`) are hidden except the date over Today's plan.
+- Scroll restore: home draws Solve next and the subject rows complete in the first paint when every index is cached
+  (`known` in `renderHome`), so a back to home lands where it was left (run-prep-feel-ui).
+- Motion left: screen slides, sheet spring, an 8 px rise of the feedback card with the haptic, meters filling once, the
+  readiness bar fill. No lift or shake on options, no counting numbers, no home stagger.
+- Tests changed on purpose: prep-app (no banner, the dark mark exists), run-prep-arena-ui (section order),
+  run-prep-ask-ui (no balloon layer), run-prep-ipad (list columns), run-prep-plan-ui ("Exam in 10 days").
+- Not changed: the "Share my progress" PNG (`drawCard` in prep-arena.js) still paints hero-dark and streak art.
+
+## Owner answer-key fixes (2026-10-10, branch `fix/prep-keyfix`, prep48)
+- The owner returned a corrected key for the 244 held/questioned items (radmax 57, depth 53, 3 live, medicine 46, Crack the
+  Core 85). His PDF's item labels were scrambled; entries were mapped by position and each mapping checked against the stem
+  (no mismatches). 211 applied, 33 held (image-dependent items, verdicts conditional on "verify before reuse", and keys that
+  contradict standard teaching). Per-item changelog, held list and edits: `~/prep-data/keyfix/` and
+  `gs://...-prep-batch/private/keyfix/2026-10-10/` (item text stays out of git).
+- Shipped under new paths: ss-radiology **bank v12** (v11 + 121 fixed items, 2 live items patched), overlay **radmax5**
+  (radmax4 + 42) and **medcov4** (medcov3 + 46); radiology and medicine `search-<hash>.json` rebuilt, overlay counts rerun.
+  Staging scripts: `$CLAUDE_JOB_DIR/tmp/keyfix/scripts/` (build, patch-repo, upload, verify), built from the live R2 copies.
+- `tools/prep-medcov.mjs` OUT_SET is medcov4, but its `assemble` does not rebuild the key-fix items: never re-upload medcov4
+  from an assemble run; a later medcov release starts from the live medcov4 files.
+
+## Owner answer-key fixes, round 2 (2026-10-10, branch `fix/prep-keyfix-r2`, prep51)
+- The owner answered the 33 items held in round 1 ("33 verified answers", his own evidence-checked PDF). Mapped by item
+  number and checked against each stem: no mismatches. 9 applied (key, option or stem per his verdict), 9 rebuilt from his
+  repair notes (match items with overlapping rows turned into unique matches or single best answer), 1 dropped (104,
+  duplicate of 62 by his note), 14 still held (10 image items, which his PDF keeps provisional until he sees the restored
+  figure, and 4 rebuilds that need content he did not give). Per-item changelog, edits, held review PDF with the restored
+  figures: `~/prep-data/keyfix/round2/` and `gs://...-prep-batch/private/keyfix/round2/` (item text stays out of git).
+- Shipped under new paths: ss-radiology **bank v14** = live v13 (another agent's drop of rss-o-tgdc, published to R2 as
+  v13) + 11 items, live item rm-58a3df33975a patched; overlay **radmax6** = radmax5 + 6; radiology `search-<hash>.json`
+  rebuilt; overlay counts rerun. Build scripts: `~/prep-data/keyfix/round2/scripts/` (dl, build, patch-repo, upload,
+  verify), built from the live R2 copies.
+- The bundled v5 radiology index is the source of truth for its `search` name (round 1 did not upload
+  `v5/radiology/index.json` to R2); build from the repo copy, not the R2 one.
+
+## Owner answer-key fixes, round 3 (2026-10-10, branch `feat/prep-keyfix3`, prep56)
+- The owner answered the 14 items still held after round 2 ("14 round-2 verified key rewrites"). Mapped by item number
+  and checked against each stem: no mismatches. 11 applied or rebuilt (key, stem/option rewrite or new matching column
+  from his repair notes), item 164 split into two questions (new id for part 2), 2 still held: 242 (his foreign-body
+  reading conflicts with the figure, which is the four labelled lateral-neck diagnoses with highlight overlays; the app
+  also has no option E) and 243 (his key needs NET morphology visible on the figure; not confirmed). Haiku sanity pass on
+  every shipped item. Changelog, edits, cleaned figures: `~/prep-data/keyfix/round3/` and
+  `gs://...-prep-batch/private/keyfix/round3/` (item text stays out of git).
+- Shipped: ss-radiology **bank v15** = live v14 + 13 items (no overlay change; all items are srd- modules). Eight real
+  or drawn figures ship de-identified under neutral names `v15/ss-radiology/img/i-<sha12>.webp`: re-rendered from the
+  source page at 4x, margins and caption strips trimmed, an R side marker cropped, OCR plus 2x visual check, RGB
+  re-encode with no metadata. Build scripts: `~/prep-data/keyfix/round3/scripts/` (dl, edits.py, gate, render, clean,
+  build, upload, verify). The de-identification agent builds its ss-radiology release from live v15 as v16 (prep57+).
+
+## Apple redesign on the owner's palette (2026-10-10, branch `feat/prep-apple-ui`, prep49)
+- Owner after the quiet redesign: "Didn't like the UI. I want it lively, premium, without UI slop, classic Apple-like."
+  Palette he supplied: Pastel Amber `#EFC07B`, Prussian Blue `#0F3460`, Dark Navy `#16213E`, Midnight Blue `#1A1A2E`.
+  (His swatch image renders the amber tile pale green; the hex he wrote, `#EFC07B`, is what ships.) Supersedes the look
+  of the quiet redesign; its structure (home order, scroll restore, no celebrations, no banner) still holds.
+- Tokens (prep.css top): three layers. Primitives `--pn-c-*` (the four colours plus derived navy steps `#1F2B4D`,
+  `#29375E`, `#34446F`, Prussian-hi `#13396A`, amber-lo `#E2A957`, light paper `#F3F2EE` / `#EBE9E3` / `#DEDCD4`, ink
+  `#13203D` / `#556079`). Semantic tokens keep their old names so every prep-*.css file follows: dark bg Midnight, card
+  Dark Navy, s1 `#1F2B4D`, text `#F5F3EE`, mut `#A9B1C7`, `--pn-pri` amber; light bg `#F3F2EE`, white cards with a
+  two-layer navy-tinted shadow (`--pn-elev`) and no border (`--pn-card-edge` transparent), text `#13203D`, `--pn-pri`
+  Prussian. `--pn-fill` (primary action) is amber with Midnight ink (10:1) in both themes; amber never carries text on
+  light (1.7:1). New: `--pn-hero*` (Prussian moment surface, both themes), `--pn-sel-*` (selected chip: Prussian/white on
+  light, Prussian-hi/amber-ink on dark), `--pn-tile-*` (icon squircles), `--pn-info` (third data series), `--pn-disp`,
+  springs `--pn-spring-snap|soft|pop` (CSS `linear()` sampled from Apple response/damping 0.32/0.72, 0.4/1, 0.36/0.6).
+- Component layer: "Apple pass" section at the end of prep.css. Capsule buttons (50 px), capsule chips, iOS segmented
+  control (thumb + shadow), 16 px cards, 14 px options with a 2 px ring for chosen/right/wrong, 28 px sheet tops with a
+  grabber, 9 px icon squircles. Presses: scale .95/.98 in 90 ms, release on the snap spring. The answer badge and a done
+  plan tick land on the pop spring. Reduced motion: transforms dropped, fades kept.
+- Moment cards on Prussian with the amber figure/ring: readiness (`.pl-hero`, prep-plan.css), set finished (`.pn-score`),
+  lesson finish, cards finish (`.pk-end`), level card (`.pn-lvb`); they redefine the text/ring tokens locally.
+- Up next is a card row led by an amber start disc (CSS play glyph on `.pl-tick::after`), not a filled row.
+- Bar mark: flat amber `prep/art/logo-mark-amber-96.webp` on dark, flat Prussian `logo-mark-prussian-96.webp` on light
+  (alpha of the old flat mark). MaiK mark/wordmark untouched.
+- Share image (`drawCard`, prep-arena.js): Midnight page, amber mark, level on a Prussian card, amber streak words and
+  calendar steps, no painted art (hero-dark/streak webp no longer loaded).
+- Tests changed on purpose: prep-app (the amber and Prussian marks), run-prep-setup-ui (token prep49).
+
+## Owner decisions 2026-10-10 (branch `fix/prep-owner-1010`, prep50)
+- **Accent** stays Pastel Amber `#EFC07B` (no change).
+- **Full size inside PrepNucleus.** The app's auto fit zooms html to 0.95 on a 340-400 px phone (0.9 under 340), so a
+  44 px target drew at ~42 px. Owner: "1.0 in PrepNucleus only". `home.js` `zoomNowD()` sets the one html zoom from
+  `zoomOfD()`: outside PrepNucleus the app scale as before; while `html.pn-open` is set (prep.js `open()` / `close()`; a
+  MutationObserver on html's class re-applies) it is `prepZoomD(scale, autoFit)`: auto fit -> `max(1, scale)` (an iPad's
+  1.08 / 1.15 is kept), a size the user chose (Settings slider or preset, or the OS text size seed, i.e. autoFit off) ->
+  `scale / 0.95`, clamped to 2, so only the default shrink is removed (user 1.1 -> 1.1579 in PrepNucleus). Still one zoom
+  on html, so every `documentElement.style.zoom` reader (bug-report, atlas, the ghost and iPad geometry) stays right;
+  the Display sheet's counter-zoom uses the same value. `window.SMD_ZOOM = { prep, now, apply }`. No prep CSS changed.
+  Tests: `test/prep-scale.test.mjs` (pure rule), `test/run-prep-scale.mjs` (Playwright Chromium + WebKit at 390x844,
+  820x1180, 1180x820: zoom outside/inside/after close, every `.pn-ib/.pn-btn/.pn-chip/.pn-tab/.pn-opt/.pn-row` >= 44
+  screen px on home, subject, setup sheet and a question; user size 1.1). Before the change 390 failed at 41.8 px.
+- **Dropped item.** `rss-o-tgdc` (srd-hn-neck) is out of the live bank: ss-radiology **bank v13** = live v12 minus that
+  item (24 module files copied, index, search and manifest rebuilt with `bankIndex` / `buildSearch`; the builder was
+  checked to reproduce the live v12 index and search first). No lesson quiz, PYQ paper, card deck or overlay set named it
+  (all 1,768 live lessons, PYQ v2/v5 indexes and the overlays were checked). Images stay at their v11 paths.
+- **Hidden target labels.** The six "find the label" targets that the margin re-crop had made readable (ctcbook-100001
+  s3 Lunate and Capitate, -150101 s1 Jugular Spine, -450501 s4 the "Arrows on the Displaced Fat" caption line, -600650
+  s0 Transverse Mesocolon Defect, radbook-141315 s2 Horizontal fissure) are painted over with the figure's own
+  background (white label box kept empty on the CT); arrows and every other label stay. New media
+  `v1/lessons/media/<name>-h1.webp`; the five lessons moved to `r` 4 (`v4/lessons/<key>.json`, only that step's `src`
+  changed); radbook-110050 still shows the labelled lung drawing as a plain figure (not an interaction). Staging and
+  scripts: `$CLAUDE_JOB_DIR/tmp/owner1010/` (job c927630f).
+
+## Tide pass (2026-10-10, branch `feat/prep-marrow-ui`, prep52)
+- Owner: "use React Bits, best background, best buttons, best UI; Marrow screenshots for reference", then "don't copy
+  Marrow, get inspired: the menu, the structure, what we should have; make ours better, unique, a live background".
+  Marrow was used as a feature checklist only; the look stays the owner's palette.
+- **Tide** (`prep-tide.js`, `window.PREP_TIDE`, loaded after prep-motion.js, optional): React Bits **Grainient** ported
+  to one WebGL 1 triangle (no ogl, no React). Layer `#smdPrepTide.pn-root.pn-tidehost` sits under `#smdPrep` (z 884) and
+  paints the page colour; `#smdPrep` gets `.pn-tided` (transparent). The field fills the top region only (home
+  bar + 300 px, lists bar + 190, reading screens bar + 36), fades through a mask, moves up at 0.6x the body scroll,
+  stops once off screen. Half CSS-pixel resolution, DPR ignored, at most 30 fps (timer then rAF), paused when hidden,
+  settles 10 s after the last touch/scroll/key, one still frame under reduced motion, CSS gradient without WebGL.
+  Colours: dark Midnight/Prussian `#1a4074`/ember `#5e4a33`; light paper/`#cbdaef`/`#f8dfb6` (chosen so ink and
+  muted text keep 4.5:1 on every pixel). Grain is a 96 px noise tile made once (CSS).
+- Bar over the Tide: glass round buttons; solid frosted bar with a hairline once the body scrolls (`.pn-scr`).
+- Home: readiness **orb** (`heroHtml`, `.pl-orb`): ring + amber nucleus at the arc end, figure counts up with the ring
+  (prep-motion drawRing). Home bar right button is now **Menu** (`renderMenu`: exam and plan, Pro, downloads, stats,
+  bookmarks, mistakes, friends, accuracy); Downloads moved into it.
+- **Question of the day** (`#pnQotd`): `dayHash(day)` picks a module of the exam's subjects that is already on the phone
+  (IDB or memory, never a download), then a usable text-only item. Answer opens the runner in study mode already
+  answered (recorded normally); `smd_prep_qotd` keeps the day's answer (device only).
+- Subjects are tiles (2 a row; 1 under 360 CSS px, 3 from 700, 4 from 1000): icon disc ringed by modules completed.
+- Subject filters are a segmented control with a sliding thumb (`.pn-seg`, `--i/--n`, `.pn-seg-th`).
+- Module list: a timeline (rail between numbered nodes, amber after a completed module; off in the 2-column iPad list).
+- Results: split bar (right/wrong/not answered) and "This set among your modules" (smoothed curve of the student's own
+  module accuracies, 5+ answers each, at least 5 modules; `selfShare`). No peer data exists, so none is shown.
+- Review list rows carry a status number disc. Primary buttons get one specular sheen per press; Solve next, QOTD,
+  tiles and Up next light from the press point (SpotlightCard).
+- Not done on purpose: floating bottom tab bar (PrepNucleus has no tabs; a fake one would duplicate rows; superseded by the
+  owner's glass tab bar, prep55, below), per-option
+  % of other students on review (no such data).
+- Perf (Chrome trace, 390x844 DPR 3, 4x CPU throttle): ~22 draws/s, 0.7 ms per draw on the main thread (~1.6%),
+  GPU process +2.5 points over Tide off.
+- Tests changed on purpose: run-prep-ipad (subject tiles per row), run-prep-setup-ui (token prep52); new prep-app tests
+  (dayHash, selfShare, Tide wiring).
+
+## Footer fix 2026-10-10 (prep53)
+Feedback screen "Next question" was a sticky row with `bottom:10px` inside the body's 36px bottom padding and only a gradient behind it, so explanation text scrolled through a ~48px band under the button. Now the run body drops its bottom padding (`.pn-run:has(> .pn-qw > .pn-fb + .pn-navrow)`), the row is sticky `bottom:0` with safe-area padding, and its `::before` is an opaque `--pn-bg` plate with a hairline top border (no gradient). Test: `test/run-prep-footer-ui.mjs` (WebKit, 390/430/820/1180, light+dark). Other floating actions (plan sheet `.pn-sheet-act`, create `.pc-pgfoot`, setup `.su-act`, flash `.pk-bar`, lesson bar) already reach the bottom edge with a fade above; unchanged.
+
+## Ask MaiK chat rework: fits the screen, answers like a chatbot, online 10 / phone unlimited (2026-10-10, branch `prep-ask-chat`, prep54)
+Owner (iPhone recording): "chat screen is hard, make it fit the screen, keep it sliding type only, pulled up on pressing
+Ask MaiK, and it doesn't answer like a chatbot ... MaiK offline can have unlimited questions. Online it's 10 max."
+- **Why it echoed.** Every follow-up went out with CHAT_SYSTEM "answer using ONLY the facts in the GROUNDING ... if not
+  covered reply exactly ...", and `teachChat` hid any reply naming a number or drug outside the stored text (the stored
+  explanation was shown instead). The model's safe move was to restate the stored explanation whatever was asked.
+  Now CHAT_SYSTEM (client `prep-teacher.js` = server `_prep-teach.js`, word for word) is a tutor that replies to the
+  student's LAST message in its own words, matched to the request (simple / like I'm 5 = everyday words + one analogy,
+  why an option, a mnemonic, a topic), never pastes the stored text, reads past typos, 3 to 6 sentences under about 100
+  words, plain text. Facts: the grounding is the source of truth (never contradicted); textbook knowledge may explain
+  the idea, no new doses, figures, cut-offs or guideline claims. `intentHint(last)` (same code both sides) adds one line
+  on HOW to answer to the TASK. The check still runs; a reply naming figures or drugs not in the stored text is shown
+  with one honest line "Not in this question's notes: X. Check before you rely on it." (`beyond`), not swapped.
+  `chatClean`: markdown marks out, "* " bullets to "- " (drawn as a list), dashes to commas. Phone model temperature 0.3
+  for chat (0 for the first answer). Server `CHAT_LIMITS.maxOut` 400. Live check on gemini-3.1-flash-lite (Vertex,
+  owner's two prompts + mnemonic + off-topic): conversational, analogy-led, never the stored text.
+- **Sheet.** Near-full bottom sheet (height 100% minus max(safe-top + 10px, 8%)), slides up (pn-up), drag down / grabber /
+  X closes. Header (mark 30, Ask MaiK, close); one bar: place switch + one status line ("7 of 10 left" online,
+  "Unlimited" on this phone); ONE scroll region: the question as a collapsed one-line chip ("Question 2 · You chose C ·
+  Answer C", tap shows stem + options, key marked), then the conversation (follows the newest message; a tall answer
+  shows from its top); composer pinned: three quick replies ("Explain simply", "Why not X?", "Give a mnemonic"; steps and
+  cards: "Give an example") and the box (16 px, 44 px send). Answers draw word by word (0.45 to 1.4 s, aria-busy, none
+  under reduced motion) after the typing dots. The per-answer note is only the tokens line (online) and the honest
+  line; the old "Answered online ... Checked ..." note and the footer counter are gone. Keyboard: `onVV` sizes the wrap
+  to `visualViewport` (iOS lays the keyboard over the page), `pa-kb` hides the grabber and quick replies, the box keeps
+  focus across a reply (composer nodes keyed so the DOM patch keeps the textarea). 700 px and up: centred panel
+  min(760px, 100%); iPad landscape side panel unchanged.
+- **Limits.** Online 10 student messages a chat: thread record `on` (count), `cid` (chat id), `nc` (new chat, opens
+  empty, no automatic ask); a retry or re-ask in the same place does not count again. Server: every kind may carry
+  `thread` (chat id) and `turn`; KV `prep:teach:th:<uid>:<thread>` counts ANSWERED asks (7 days), the 11th is 429
+  `chat-limit` before any gate or model call (failed calls and idempotent replays do not count; counts only, no text).
+  At 10: a card with Start a new chat and Continue on this phone (unlimited) (disabled with the reason when the phone
+  cannot), plus Continue in MaiK Assistant. On this phone: no counter, no cap. MaiK Token rules (`gateAndCount`
+  prep_tutor), the per-device daily cap in the router and the rate limit are unchanged. A new chat is a new id, so the
+  per-chat cap is per chat by design; MaiK Tokens stay the real budget.
+- **Hard local.** On this phone never switches to Online by itself any more (the old `ask()` and verdict callback did):
+  a phone or pack that cannot answer says so with "Ask online instead".
+- Tests: `test/prep-ask-chat.test.mjs` (limits, prompt parity, owner prompts with a mocked model, honest line),
+  `test/prep-teach-server.test.mjs` (chat-limit per chat id and user, failed/replay not counted, owner prompts through
+  the real route), headless `test/run-prep-ask-chat-ui.mjs` (390x844 and 375x667 fit, keyboard via a stubbed
+  visualViewport, one scroll region, chip collapsed, history in requests, 10 online then the card, server 429, new chat,
+  25 messages on this phone, no model = said plainly) and `test/run-prep-ask-ui.mjs`.
+
+## Ask MaiK with the keyboard up (2026-10-10, branch `fix/prep-ask-keyboard`, prep57)
+Owner (iPhone recording, OTA v268): tapping the composer collapsed the sheet to its header row right above the
+keyboard; conversation and box hidden under the keyboard, the page showing through the top half.
+- **Root cause.** `onVV` put the wrap at `visualViewport.offsetTop - rootRect.top`. In the app's WKWebView the keyboard
+  pans the visual viewport down by the keyboard height K AND the overlay's client rect moves with the pan
+  (`rootRect.top = -K`), so the pan counted twice: wrap top = 2K, i.e. a keyboard height too low, clipped by the overlay.
+  Geometry from the recording (393x851 CSS px): K about 389, sheet top at 398 = K + 8, exactly the 2K model. Second bug:
+  `visualViewport` numbers are screen px while the wrap lives inside `html { zoom }` (SMD_ZOOM), so at zoom 0.95 the
+  wrap was 5% off (header under the top edge, page showing under the composer).
+- **Fix (prep-ask.js `kbPlace` / `onVV` / `kbSettle`).** Work in the overlay's own CSS px: visualViewport values divided
+  by the html zoom; the wrap top is the overlay's own client offset when client rects move with the pan, else
+  `offsetTop`; a top that would push the wrap's bottom past the overlay is pulled up so the bottom meets it (the
+  visible area can never extend below the fixed overlay). Re-measured on visualViewport resize/scroll, window resize,
+  orientationchange and every frame for 0.9 s after the box gains or loses focus (WebKit's last event can come before
+  its pan settles); the overlay's own scrollTop is reset; the chat follows the newest message for 1.2 s after focus.
+  CSS: with the keyboard up the sheet starts below `safe-area-inset-top` (the visible area starts at the very top of
+  the screen), `pa-kbs` drops the place switch under 300 px (landscape phone), and the centred 700 px+ panel uses
+  8 px wrap padding instead of 32 px.
+- **Tests.** `test/run-prep-ask-kb-ui.mjs`: emulated pan-webkit (rects move with the pan, the owner's case), pan-layout
+  (spec rects), resize (web view shrinks) at 390x844, 375x667, 430x932, zoom 0.95 and 1.0, two focus/blur rounds each,
+  a mode switch while typing, a landscape phone. Old code: 86 FAIL (screens in the job folder reproduce the owner's
+  frame); new: all pass. No iOS Simulator runtime on the Mac (list-devices showed none), so NOT verified in real WebKit;
+  the owner's iPhone is the check: tap the box, the whole chat should sit above the keyboard.
+
+## Floating glass tab bar (2026-10-10, branch `feat/prep-glassbar`, prep55)
+- Owner: "a floating liquid glass menu bar at the footer, more user friendly, accessible in the home screen". Explicit
+  exception to the no-glass rule for this bar only. Marrow's pill bar was a structure reference only.
+- Files: `prep-nav.js` (`window.PREP_NAV`: `attach(root, host)` in `open()`, `sync(root)` at the end of every `paint()`,
+  `detach()` in `close()`, `act()` for `n-*` data-acts, `_pure` for tests) and `prep-nav.css`; both optional in
+  prep-loader.js (a 404 changes nothing). prep.js: `HOST.screens = { mocks, menu }`, body markers `pn-mocks`, `pn-mtl`,
+  `pn-bml`, `pn-dll`; renderMocks shows the PYQ row on top for NEET-PG.
+- Tabs (all real features): Home (renderHome), Learn (new hub in prep-nav.js: every subject of the exam with lessons,
+  counts and "finished", plus up to 3 lessons in progress; rows use the existing `l-subject` / `l-open` actions; left out
+  when prep-lessons.js is missing), Tests (renderMocks), You (renderMenu). The home bar's Menu button is hidden
+  (`visibility`) while the bar shows.
+- Navigation: a tab sets the stack to `[home]` or `[home, root]` (Android back from a tab goes home), cross-fade (nav 0).
+  Current tab = nearest tab root down the stack. Tapping the current tab pops to its root (back slide); at the root it
+  scrolls to the top. Each tab root keeps its scroll (`tabY`). Focus returns to the pressed tab after a keyboard switch.
+- Shows only on browse screens (`SCREENS`: home, Learn, menu, mocks, subject, module (`#pnModPanel`), a subject's
+  lessons, PYQ papers, mistakes, bookmarks, downloads). Hidden (slides down, `inert`, `aria-hidden`) everywhere else and
+  while a sheet / zoom / viewer / dialog is a child of `#smdPrep` (MutationObserver on its children only) or an input in
+  PrepNucleus has focus (keyboard). So it never shares the bottom with the runner's "Next question" footer.
+- The bar is a `<nav aria-label="PrepNucleus">` inside the `#smdPrep` dialog (outside it VoiceOver would not reach it). A
+  full paint (`root.innerHTML`) detaches it; `sync` re-appends the same node; a patch skips it (`__pnKeep`).
+- Glass: one element, one backdrop-filter. WebKit/iOS and Firefox: `blur(16px) saturate brightness` over a tint
+  (light white .72, dark navy .82). Chromium (Android WebView): `blur(4px) url(#pnvLens) saturate brightness`, the lens
+  an SVG feDisplacementMap whose map (R/G ramps, neutral capsule inside, 13 px rim) is rebuilt by ResizeObserver only.
+  Gotchas found: a CSS blur placed AFTER url() is dropped by Chrome (content showed sharp), and percentage feImage/filter
+  sizes resolve against the wrong box in a backdrop filter (whole backdrop shifted and mirrored), so sizes are user-space
+  px. Playwright's chromium-headless-shell renders backdrop filters wrongly and Playwright WebKit on macOS paints none:
+  judge glass only in Google Chrome (`CHROME=`); WebKit screenshots show the tint alone (worst case, still legible).
+- Ink: light `#2a3654`, current Prussian on an amber pill (.5); dark `#e4e7ef`, current amber on a Prussian pill (.9).
+  `PURE.worst` checks >= 4.5:1 over white, black, Midnight, Navy, Prussian, amber, paper and ink (test reads the CSS).
+- Motion: pill = transform on the soft spring (retargets mid-flight), drop stretches 1.14/.88 while travelling, icon
+  sinks .86 on press; reduced motion = no travel, no stretch, no press scale. Reduced transparency / more contrast =
+  solid card bar with a hairline. Haptic: `data-tgl` -> haptics.js selection tick (native only).
+- `#smdPrep` is `overflow: clip` (prep-nav.css): the hidden bar is translated below the screen, and with `hidden` that
+  overflow was scrollable, so focusing a field in a sheet scrolled the whole overlay up by ~88 px (caught by run-prep-ask-chat-ui).
+- Body padding while shown: bar 64 + float `max(12px, safe-bottom - 8px)` + 28 px; scroll-padding for focus.
+- Perf (Google Chrome, 390x844 DPR 3, 4x CPU throttle, 4 s of per-frame scrolling): 60 fps in all three; renderer main
+  1,118 ms (bar off) / 1,130 (frost) / 1,151 (lens), GPU main 393 / 408 / 418 ms, Paint 186 / 179 / 182 ms (the
+  bar never repaints the scroll content), worst frame 17 / 20 / 19 ms.
+- Tests: `test/prep-nav.test.mjs` (pure rules, contrast from the CSS, lens UA gate, wiring), headless
+  `test/run-prep-nav-ui.mjs` (Chromium via `CHROME=` and WebKit; SHOTS=<dir>, REAL=1 for real content via a read-only
+  /api/prep/bank proxy). Token-only change: run-prep-setup-ui (prep55).
+- Not verified: a real iPhone (WKWebView blur, safe-area float, keyboard) and a real Android WebView (lens).
+## Share IDs (2026-10-10, branch `feat/prep-ids`, prep58)
+Owner: "Give every MCQ and lesson a unique ID, shareable, so friends can search the ID and get into the topic or MCQ."
+- **Format.** `Q-8K3-M7T-X26` (MCQ) and `L-MES-9NF-WN7` (lesson): type letter, 8 Crockford base32 characters (0-9, A-Z
+  without I, L, O, U), 1 check character, grouped in threes. The 8 characters are the first 40 bits of
+  SHA-256(`prepnucleus:q:<item id>` / `prepnucleus:l:<lesson key>`), so an ID follows from the item's immutable id: no
+  migration, the same ID on every phone and in every bank version, nothing about the content in it. Check = Luhn mod 32
+  over the type value (Q 1, L 2) and the body: every single wrong character is caught, and about 99.8% of swapped
+  neighbours (measured; the misses are swaps of 0 and Z). Typing: case, spaces, hyphens, dots ignored; O reads 0; I and
+  L (after the type letter) read 1; U and anything else outside the alphabet is "a character IDs never use".
+- **Why 8 + 1 and not the owner's 7 + 1 example.** 191,271 MCQs + 1,769 lessons today. At 35 bits about 0.5 collisions
+  were expected now and several at 500k; at 40 bits about 0.02 now (0 found). Collision rule anyway: the key that held
+  the short ID in the published index keeps it, every later key (both new: the larger key) takes the long form, 10
+  characters + check (`Q-8K3-M7T-X2C-4Z`), listed in the pointer's `xt` (kept for good); the app reads `xt` (cached in
+  localStorage `smd_prep_ids_xt`). Live proof 2026-10-10: 193,040 IDs, 0 collisions, 0 long, 0 repeated item ids.
+- **Index on R2** (`prep-bank/v1/ids/`, route `IDS_RE` in `functions/api/prep/bank/[[path]].js`): `index.json`
+  (max-age 300) `{ v, gen, q, l, n, x, xt, s }` where `s` is the 1,024 shard hashes run together (6 hex each);
+  shards `<two body characters, lower case>-<6 hex of content SHA-256>.json` `{ v, k, e: { "<ID>": loc } }` are
+  immutable. loc: `m:<subject>/<module>` (bank or overlay question; the app loads that module and hashes its items),
+  `p` (previous-year item), `l:<lesson key>`, `x` (withdrawn: kept for good). Sizes: pointer 6.2 KB (3.6 KB gzip),
+  shard 7 to 11 KB (about 3.4 KB gzip). Cloudflare compresses JSON on the way out.
+- **Resolution** (`prep-ids.js`, `window.PREP_IDS`, optional in the loader, data-acts `id-*`): index pointer (network,
+  IndexedDB copy offline) and the one shard (IndexedDB first); offline without them, the lesson index and every module,
+  overlay and PYQ file in IndexedDB are hashed. A question opens alone in practice, unanswered (`HOST.run`, so the Pro
+  gate and its limit sheet apply); a lesson opens at step 1 (`PREP_LESSONS.open(..., fromStart)`) after the same
+  `PrepPro.can("lessons")` check as the lesson row. States: "Finding this question" with a two-step meter, "Connect to
+  open this question" (Try again), "This question is no longer available" (tombstone, flagged or hidden item, lesson
+  gone), "No question has this ID" (Enter another ID). Back from an opened question returns to where the student was
+  (the finding screen leaves the stack).
+- **Where.** Share button (bar, 44 px) on the practice runner before and after the answer, the review screen and every
+  lesson step; the ID itself under the question / at the foot of the lesson page (tap copies, says Copied). Not in a
+  timed test (the bar there is the clock) and not on your own deck's items. Search: a subject search for a valid ID
+  (or a pasted share message) shows "Open <ID>"; a hyphenated or digit-bearing token that fails the check says it looks
+  wrong; "Q fever" stays a word search. Menu > "Open a shared ID": field (16 px+, capitals, no spellcheck), Paste
+  (reads the clipboard only on that tap) which offers "Open <ID>", inline errors tied to the field.
+- **Sharing.** Sheet (`.pn-sheet-wrap`, so drag-to-close, scrim and the tab bar hiding all come from prep.js and
+  prep-nav.js): the ID at 34 px, "Copy ID" (the ID only), "Share" (Capacitor Share in the app, navigator.share on the
+  web, else copy). Text: `Try this PrepNucleus question: Q-8K3-M7T-X26 (search this ID in PrepNucleus)`. No link and no
+  user data, answers or progress.
+- **Deep links: what works now and what needs a store build.** Web code (OTA): `native-bridge.js` routes
+  `stewardmd://prep/<ID>` to `SMD_openRoute("prep", { id })` -> `PREP.open({ id })` (also when PrepNucleus is open). The
+  `stewardmd` scheme is registered on iOS only (Info.plist); Android registers only verified https App Links for
+  stewardmd.in. No link ships in the share text because nothing a friend taps would work everywhere: the web root does
+  not serve PrepNucleus, and the AASA (`functions/_middleware.js`) lists only `/` and `/i/*`. Plan for a real share
+  link: (1) a Pages route `/p/<ID>` that renders a small page (the ID, "Open in StewardMD", store badges) so the link
+  is never dead; (2) add `/p/*` to the AASA `paths` (server deploy; Apple's CDN picks it up, no store build since the
+  app already has `applinks:stewardmd.in`); (3) Android already opens every verified `https://stewardmd.in/*` path in
+  the app; (4) route `https://stewardmd.in/p/<ID>` in `routeDeepLink` like the scheme; (5) for Android custom-scheme
+  parity add a `stewardmd` intent-filter (store build). Only (5) needs a store build; test (2)-(4) on real phones first.
+- **Publishing (one command, after every bank, overlay, PYQ or lesson release):** `node tools/prep-ids.mjs publish
+  --yes` (fetch the LIVE files into `~/prep-data/ids/cache` (ids and flags only, no text), build with tombstones from
+  the published index, upload the changed shards + index.json via `prep-upload-bank.mjs --as v1/ids`, then verify).
+  `prep-upload-bank.mjs` now runs it after any other upload with `--yes` (`--no-ids` skips). `node tools/prep-ids.mjs
+  verify` exits 1 when a live MCQ or lesson is missing from, or misplaced in, the published index. Concurrent releases
+  (ss-radiology v16, lesson redraws) change no ID; re-run publish after they land.
+- **Not in scope.** Lesson quick-check items and flashcards/cards decks get no ID (cards are drawn from lessons and
+  modules; a deck share would need its own type letter). Your own Layer C decks stay private.
+- **Tests.** `test/prep-ids.test.mjs` (SHA-256 vs node:crypto, pinned vector, check-character detection, typing,
+  share text, locations, forced collisions with a 2-character ID, 200k synthetic keys, shards + route, tombstones,
+  wiring; plus every live MCQ and lesson when the fetch cache is on the machine or `PREP_IDS_CACHE` names one), headless
+  `test/run-prep-ids-ui.mjs` (Chromium + WebKit: Share and ID on runner, feedback, review and lesson; sheet, Copy,
+  Share text, Escape and focus; search by a lower-case, unhyphenated, O-for-0 ID; Go to ID typo / unknown / withdrawn /
+  flagged / lesson at step 1 / PYQ; Paste of a whole message; offline from IndexedDB and "Connect"; free-tier limit
+  sheet for a locked question and lesson; `PREP.open({ id })`; SHOTS=<dir>). Token-only change: run-prep-setup-ui.
+- **Not verified:** a real iPhone or Android phone (Capacitor Share sheet, clipboard read prompt, the scheme link).
+
+## Real-scan de-identification (2026-10-10, branch `feat/prep-deid`, prep59)
+- Owner rule 2026-10-10: no real clinical image (X-ray, CT, MRI, US, nuclear, angio, photo, histology, endoscopy, ECG)
+  may keep a name, ID, age/sex text, date, hospital, scanner or software brand, viewer overlay, publisher credit or
+  watermark, book figure number or panel letter, or a right/left lead marker or orientation letter. Drawings are the
+  redraw agent's (`-ai1` media). Teaching arrows, numbered pointers and structure labels stay; on question images text
+  naming the answer goes too.
+- **Tool:** `tools/prep-deid.py` (stages `ocr` Apple Vision fast + tesseract, `detect` Gemini strict-JSON boxes,
+  `plan` policy, `clean` crop or OpenCV inpaint, `verify`, `selftest`), private work dir `~/prep-data/rad/deid`
+  (originals, plan, manual overrides `manual.json`, verify, contact sheets). Policy notes (learned on this run):
+  gemini-3.1-flash-lite classifies well but its boxes are loose; boxes for images that need cleaning come from
+  gemini-3.5-flash (`detect-boxes.jsonl` wins). Single letters deep inside a picture, boxes over 3% of the image, and
+  orientation letters on non-radiology images are held for a human, never painted (they were often a vessel or a
+  nucleus). ECG lead names and device readings are kept. Lead markers, logos, dates and panel letters are painted as a
+  whole box (strokes alone left ghosts). The pair-compare "verify" on flash-lite reports labels that are no longer
+  there; the final check (`verify_final.py` in the job scripts) re-detects on the cleaned file, re-runs the policy,
+  OCRs for identifier patterns, and asks only "is the clinical content unchanged".
+- **Audit:** `tools/prep-deid-audit.mjs` (`npm run audit:prep-deid`) lists every image the live app reaches (lessons
+  index + files, each subject's bank version, the overlay sets in prep.js, the PYQ items file, cards) and exits 1 when
+  one is missing from `tools/prep-deid/manifest.json` (clean / cleaned / drawing; `-ai<n>` lesson media pass as
+  generated drawings). New real images must go through the tool and the manifest before they ship.
+- **Run 2026-10-10:** 1,912 images + 3 TCIA scroll stacks enumerated; 1,323 real scans, 589 drawings/charts skipped;
+  347 scans had something to remove (panel letters 170, side markers 120, viewer overlays 97, orientation letters 48,
+  brands 8+, IDs 7, dates 5, credits/watermarks 6+); cleaned 344 (inpaint 266, crop 54, both 24), 5 excluded
+  (two PYQ smears with a watermark across the cells: items pyq-neet-pg-2022-r1-99 and -2023-r1-182 left the papers;
+  three lesson figures with dense overlay tables or Doppler scales: figure dropped from the step). 63 hand decisions in
+  `manual.json`. Every real scan of lesson media and the radnotes/radmax sets moved to a neutral name
+  (`v1/lessons/media/m-<sha12>.webp`, `img/radnotes/rn-<sha12>`, `img/radmax/rm-<sha12>`; 661 renamed only, bytes
+  unchanged), because book pages, PMC ids and diagnoses in names are identifiers too.
+- **Shipped:** ss-radiology **bank v16** = live v15 with image paths swapped (items and counts unchanged); overlays
+  **radnotes3** / **radmax7** (images swapped; three radnotes stems that named removed panel letters say left/right);
+  PYQ `v5/pyq/items-c280dc3e.json` (41 items with cleaned images, 2 removed); 445 lessons at a new revision
+  (`r` = live r + 1; captions and alt text that named removed panel letters now say "left", "top right" etc.; spot boxes
+  and label marks remapped for cropped figures). Lessons index re-downloaded and merged at upload. Old files stay in R2
+  (immutable caches, old revisions) but nothing live references them.
+- **Laterality:** 205 image uses lost a side or orientation marker (45 question items, 160 lesson steps). The 12
+  question items and 94 lesson steps that mention a side already state it in text; none needed a rewrite and no side
+  was invented. List: `~/prep-data/rad/deid/laterality-report.json`.
+- **Residual risk (owner):** clinical photographs in PYQs show faces (no identifier text; a face itself was out of
+  scope); 171 detections were held for a human rather than painted (mostly misreads); some scale bars, calipers and
+  Doppler/depth scales remain as teaching content.

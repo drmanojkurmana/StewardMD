@@ -77,6 +77,25 @@
   }
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
   function uid() { try { return (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid) || null; } catch (e) { return null; } }
+  /* Save through the server (POST /api/auth/save-profile) with the signed-in user's token. Resolves true
+   * on success. Bounded at 15 s: CapacitorHttp ignores AbortController. */
+  function saveViaServer(d) {
+    return new Promise(function (resolve) {
+      var done = false, t = setTimeout(function () { if (!done) { done = true; resolve(false); } }, 15000);
+      function end(v) { if (!done) { done = true; clearTimeout(t); resolve(v); } }
+      try {
+        var u = window.SMD_AUTH && SMD_AUTH.currentUser;
+        if (!u || typeof u.getIdToken !== "function") { end(false); return; }
+        u.getIdToken().then(function (tok) {
+          var rk = roleKey(d.role);
+          return fetch((window.SMD_API_BASE || "") + "/api/auth/save-profile", {
+            method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok },
+            body: JSON.stringify({ role: rk, name: d.name, phone: d.phone, state: d.state, city: d.city, hospital: d.hospital, degree: d.degree, speciality: d.speciality })
+          });
+        }).then(function (r) { end(!!(r && r.ok)); }).catch(function () { end(false); });
+      } catch (e) { end(false); }
+    });
+  }
   function db() { try { return window.SMD_DB || null; } catch (e) { return null; } }
   function docRef() { var u = uid(), d = db(); return (u && d) ? d.collection("users").doc(u).collection("profile").doc("self") : null; }
 
@@ -480,6 +499,13 @@
       try { sessionStorage.setItem(SNOOZE_KEY, "1"); } catch (e) {}
       close();
     });
+    function finishSaved() {
+      try { var rk0 = roleKey(draft.role); if (rk0 && window.SMD_ROLE) SMD_ROLE.set(rk0); } catch (e) {}
+      close(); toast("Profile saved");
+      // phone-verify.js waits for this to ask for the code, so the two sheets never stack.
+      try { document.dispatchEvent(new CustomEvent("smd:profile-saved", { detail: { phone: draft.phone } })); } catch (e) {}
+      announce(draft);
+    }
     el.querySelector("#pfsSave").addEventListener("click", function () {
       // Read the live inputs first: a typed phone may not have fired input on some keyboards.
       el.querySelectorAll("[data-k]").forEach(function (i) { draft[i.getAttribute("data-k")] = String(i.value || "").trim(); });
@@ -490,32 +516,40 @@
       var btn = el.querySelector("#pfsSave"); btn.disabled = true; btn.textContent = "Saving…";
       ensureRef(function (ref, why) {
       if (!ref) {
+        /* No Firestore SDK (it does not run in the iOS WebView: owner, 2026-10-10, "Couldn't reach your
+         * account" on a phone with full signal). Signed in is enough: the server writes the same document. */
+        if (why !== "auth") {
+          saveViaServer(draft).then(function (ok) {
+            if (ok) { finishSaved(); return; }
+            btn.disabled = false; btn.textContent = "Save";
+            toast("Couldn't reach your account. Check your connection and try again.");
+          });
+          return;
+        }
         btn.disabled = false; btn.textContent = "Save";
-        /* Say what is actually wrong. "You are offline" on a phone with full signal sends the
-         * doctor to look at their connection instead of at the thing that needs fixing. The
-         * form stays open either way, so nothing typed is lost. */
-        toast(why === "auth" ? "Sign in to save your profile."
-                             : "Couldn't reach your account. Check your connection and try again.");
+        toast("Sign in to save your profile.");
         return;
       }
       /* The SAME doc email-auth.js used to write, with the same keys, so a profile created by
        * either path is one profile. profileComplete is what email-auth's own prompt checks. */
       var rk = roleKey(draft.role);
       try { if (rk && window.SMD_ROLE) SMD_ROLE.set(rk); } catch (e) {}
+      Promise.race([
       ref.set({
         role: rk,
         name: draft.name || "", phone: draft.phone || "",
         state: draft.state || "", city: draft.city || "",
         hospital: draft.hospital || "", degree: draft.degree || "", speciality: draft.speciality || "",
         profileComplete: true, updatedAt: Date.now()
-      }, { merge: true })
-        .then(function () {
-          close(); toast("Profile saved");
-          // phone-verify.js waits for this to ask for the code, so the two sheets never stack.
-          try { document.dispatchEvent(new CustomEvent("smd:profile-saved", { detail: { phone: draft.phone } })); } catch (e) {}
-          announce(draft);
-        })
-        .catch(function () { btn.disabled = false; btn.textContent = "Save"; toast("Couldn't save. Check your connection."); });
+      }, { merge: true }), new Promise(function (_, rej) { setTimeout(function () { rej({ code: "sdk-timeout" }); }, 8000); })])
+        .then(finishSaved)
+        .catch(function () {
+          // The SDK write failed or hung: the server writes the same document.
+          saveViaServer(draft).then(function (ok) {
+            if (ok) { finishSaved(); return; }
+            btn.disabled = false; btn.textContent = "Save"; toast("Couldn't save. Check your connection.");
+          });
+        });
       });
     });
     return el;

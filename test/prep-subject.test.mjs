@@ -35,7 +35,7 @@ test("ovFor sums a module's items over the subject's sets", () => {
 test("the committed overlay counts cover every set prep.js asks for, on modules of that subject", () => {
   const src = fs.readFileSync(new URL("prep.js", ROOT), "utf8");
   const ov = overlaysOf(src);
-  assert.deepEqual(ov.radiology, ["radnotes", "radmax3"]);
+  assert.deepEqual(ov.radiology, ["radnotes3", "radmax7"]);
   const oc = JSON.parse(fs.readFileSync(new URL("prep/bank/overlay-counts.json", ROOT), "utf8"));
   assert.equal(oc.v, 1);
   const ver = /VER = G\.SMD_PREP_BANK_VER \|\| "(v\d+)"/.exec(src)[1];
@@ -59,4 +59,18 @@ test("subjectLessons: modules with lessons, in module order, own lesson first", 
   assert.deepEqual(out[1].list.map((x) => x[0]), ["m2", "x-1"]);
   assert.deepEqual(L.subjectLessons({ modules: {} }, [{ id: "m1" }]), []);
   assert.deepEqual(L.subjectLessons(null, null), []);
+});
+
+/* ss-radiology (bank v6 to v10) has no search.json; the app builds the same index from the module files on a 404. */
+test("buildSearch: the index built in the app finds items like search.json, flagged items left out", () => {
+  const BANK = require("../specialty-bank.js");
+  {
+    const sx = P.buildSearch([
+      { id: "srd-a", items: [{ id: "a1", q: "Berry aneurysm of the anterior communicating artery is seen on", o: ["CT angiography", "MRI", "X-ray", "USG"], a: 0 }, { id: "a2", q: "Flagged aneurysm item", o: ["a", "b", "c", "d"], a: 1, flags: ["key"] }] },
+      { id: "srd-b", items: [{ id: "b1", q: "Moyamoya disease shows a puff of smoke on angiography", o: ["ICA", "MCA", "ACA", "PCA"], a: 0 }] },
+    ], BANK);
+    assert.deepEqual(sx.ids, ["a1", "b1"]);
+    assert.deepEqual(BANK.searchIndex(sx, "aneurysm", 10).map((h) => h.id + ":" + h.t), ["a1:srd-a"]);
+    assert.deepEqual(BANK.searchIndex(sx, "angiography", 10).map((h) => h.t), ["srd-a", "srd-b"]);
+  }
 });

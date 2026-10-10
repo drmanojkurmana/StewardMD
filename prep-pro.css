@@ -6,7 +6,7 @@
 .pn-root a.pp-cancel { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
 .pn-root a.pp-cancel:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; border-radius: var(--pn-r-xs); }
 .pn-root .pp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; }
-.pn-root .pp-price b { font-family: var(--pn-num); font-size: 40px; font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.pn-root .pp-price b { font-family: var(--pn-num); font-size: 40px; font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .pn-root .pp-price span { color: var(--pn-mut); font-size: 15px; }
 .pn-root .pp-strike { color: var(--pn-mut); font-size: 15px; text-decoration-thickness: 1.5px; }
 .pn-root .pp-save { align-self: flex-start; padding: 2px 10px; border-radius: var(--pn-r-pill); background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-size: 13px; font-weight: 650; }
@@ -35,31 +35,25 @@
 .pn-root .pp-cmp td:last-child { white-space: nowrap; }
 .pn-root .pp-cmp td { font-variant-numeric: tabular-nums; }
 .pn-root .pp-nw { white-space: nowrap; }
-/* Round 4: the plan card opens on the lantern summit (prep/art/pro.webp), faded into the card; the price sits below it. */
-.pn-root .pp-plan { overflow: hidden; padding-top: 0; }
-.pn-root .pp-plan::before { content: ""; display: block; margin: 0 -18px 4px; aspect-ratio: 16 / 7; background: url(/prep/art/pro.webp) 50% 45% / cover no-repeat;
-  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 55%, transparent 100%); }
-.pn-root .pp-plan .pp-price b { font-size: 44px; }
-.pn-root .pp-cmp td:last-child { font-weight: 750; }
+/* The plan card leads with the price; no art. */
+.pn-root .pp-plan { overflow: hidden; }
+.pn-root .pp-plan .pp-price b { font-size: 40px; font-weight: 700; letter-spacing: -.03em; }
+.pn-root .pp-cmp td:last-child { font-weight: 650; }
 
-/* Round 5: the limit sheet. Art and the headline side by side, how much was used as a meter, three icon rows. */
-.pn-root .pp-sheet { --pp-cell: #f1f6f7; gap: 14px; }
-body.dark .pn-root .pp-sheet { --pp-cell: #152a31; }
+/* The limit sheet: the headline, how much was used as a meter, three icon rows. */
+.pn-root .pp-sheet { --pp-cell: var(--pn-s1); gap: 14px; }
 .pn-root .pp-lhead { display: flex; align-items: center; gap: 16px; }
 .pn-root .pp-lhead h2 { flex: 1 1 auto; min-width: 0; }
-.pn-root .pp-lart { flex: 0 0 auto; width: 84px; height: 84px; border-radius: 26px; background: url(/prep/art/limit.webp) 50% 55% / cover no-repeat, #0a2f30; box-shadow: inset 0 0 0 1px rgba(255, 196, 92, .22), 0 14px 28px -16px rgba(163, 95, 5, .7); }
+.pn-root .pp-lart { display: none; }
 .pn-root .pp-usedw { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: var(--pn-r-lg); background: var(--pp-cell); }
-.pn-root .pp-used b { font-family: var(--pn-num); font-size: 17px; font-weight: 800; }
-.pn-root .pp-ubar { height: 8px; border-radius: var(--pn-r-xs); }
-.pn-root .pp-ubar i { width: 100%; border-radius: var(--pn-r-xs); background: linear-gradient(90deg, #f0a43a, #ffc76a); transform-origin: 0 50%; animation: pp-fill var(--pn-d-draw) var(--pn-ease) 120ms both; }
+.pn-root .pp-used b { font-family: var(--pn-num); font-size: 17px; font-weight: 700; }
+.pn-root .pp-ubar { height: 4px; border-radius: 2px; }
+.pn-root .pp-ubar i { width: 100%; border-radius: 2px; background: var(--pn-warn); transform-origin: 0 50%; animation: pp-fill var(--pn-d-draw) var(--pn-ease) 120ms both; }
 @keyframes pp-fill { from { transform: scaleX(0); } }
 .pn-root .pp-list { gap: 0; padding: 4px 16px; border-radius: var(--pn-r-lg); background: var(--pp-cell); }
 .pn-root .pp-list li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; }
 .pn-root .pp-list li + li { border-top: 1px solid var(--pn-line); }
-body.dark .pn-root .pp-list li + li { border-top-color: rgba(190, 235, 240, .08); }
-.pn-root .pp-li { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(160deg, hsl(212 62% 54%), hsl(212 66% 38%)); }
-.pn-root .pp-li:not(.pro):first-child { background: linear-gradient(160deg, hsl(172 62% 46%), hsl(172 66% 32%)); }
-.pn-root .pp-list li:nth-child(2) .pp-li { background: linear-gradient(160deg, hsl(250 50% 58%), hsl(250 52% 42%)); }
-.pn-root .pp-li.pro { background: linear-gradient(160deg, #f0a43a, #b86b07); }
-.pn-root .pp-li svg { width: 17px; height: 17px; }
+.pn-root .pp-li { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; color: var(--pn-mut); background: var(--pn-card); box-shadow: inset 0 0 0 1px var(--pn-edge); }
+.pn-root .pp-li.pro { color: var(--pn-pri-ink); background: var(--pn-pri-soft); box-shadow: none; }
+.pn-root .pp-li svg { width: 16px; height: 16px; }
 @media (prefers-reduced-motion: reduce) { .pn-root .pp-ubar i { animation: none; } }

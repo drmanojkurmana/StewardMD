@@ -1,0 +1,176 @@
+{
+  "id": "cerclage",
+  "kind": "drill",
+  "level": "resident",
+  "review": "ai_drafted",
+  "timeLimitSec": 600,
+  "title": {
+    "en": "Cervical cerclage and progesterone: choose by history, cervix length and gestation",
+    "hi": "cervical cerclage (गर्भाशय ग्रीवा पर टाँका) और progesterone: इतिहास, cervix की लंबाई और हफ़्ते देखकर चुनें"
+  },
+  "scenario": {
+    "en": "Three women are seen in the antenatal clinic for the risk of preterm birth (birth before term). Each has a different history and scan. Choose the next step for each. Teaching scenario, not real patients.",
+    "hi": "तीन महिलाएँ समय से पहले प्रसव (preterm birth) के खतरे के लिए antenatal clinic आती हैं। हर एक का इतिहास और scan अलग है। हर एक के लिए अगला कदम चुनें। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    {
+      "label": "National Institute for Health and Care Excellence. Preterm labour and birth (NG25), published 20 November 2015, last updated 10 June 2022, recommendations 1.2 (prophylactic progesterone and cerclage) and 1.6 (emergency cerclage)",
+      "url": "https://www.nice.org.uk/guidance/ng25/chapter/recommendations"
+    }
+  ],
+  "stages": [
+    {
+      "id": "prevention",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 1 had a spontaneous preterm birth at 30 weeks in her last pregnancy. Her transvaginal scan at 20 weeks shows a cervical length of 20 mm. Which option do you offer her?",
+        "hi": "पहली महिला की पिछली गर्भावस्था में 30 हफ़्ते पर स्वतः समय से पहले प्रसव हुआ था। उसके 20 हफ़्ते के transvaginal scan में cervix की लंबाई 20 mm है। उसे कौन-सा विकल्प देंगे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "duration",
+          "text": {
+            "en": "A choice of vaginal progesterone or prophylactic cervical cerclage, after discussing the risks and benefits of both.",
+            "hi": "vaginal progesterone या रोकथाम के लिए cervical cerclage, दोनों के जोखिम और फ़ायदों पर बात करने के बाद विकल्प।"
+          },
+          "feedback": {
+            "en": "NICE 1.2: offer a choice of prophylactic vaginal progesterone or prophylactic cervical cerclage to women with both a history of spontaneous preterm birth (up to 34+0 weeks) and a cervical length of 25 mm or less on a scan at 16+0 to 24+0 weeks. Discuss the risks and benefits of both.",
+            "hi": "NICE 1.2: जिन महिलाओं को स्वतः preterm birth (34+0 हफ़्ते तक) का इतिहास और 16+0 से 24+0 हफ़्ते के scan में 25 mm या उससे कम cervix हो, उन्हें रोकथाम के लिए vaginal progesterone या cerclage का विकल्प दें, और दोनों के जोखिम और फ़ायदे बताएँ।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "duration",
+          "text": {
+            "en": "Repeat the scan at 34 weeks and give no treatment until then.",
+            "hi": "34 हफ़्ते पर scan दोहराएँ और तब तक कोई इलाज न दें।"
+          },
+          "feedback": {
+            "en": "NICE 1.2 covers this woman: she has the history, and her cervical length is 25 mm or less at 16+0 to 24+0 weeks. The recommendation is to offer a prophylaxis choice now, not to wait until 34 weeks.",
+            "hi": "NICE 1.2 इस महिला पर लागू होता है: उसका इतिहास है, और 16+0 से 24+0 हफ़्ते में cervix 25 mm या उससे कम है। सिफ़ारिश अभी रोकथाम का विकल्प देने की है, 34 हफ़्ते तक इंतज़ार की नहीं।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "duration",
+          "text": {
+            "en": "Cerclage only, with progesterone ruled out.",
+            "hi": "सिर्फ़ cerclage, progesterone को बाहर रखकर।"
+          },
+          "feedback": {
+            "en": "NICE 1.2 gives a choice between vaginal progesterone and cerclage. It does not restrict the woman to cerclage alone.",
+            "hi": "NICE 1.2 vaginal progesterone और cerclage के बीच विकल्प देता है। यह महिला को सिर्फ़ cerclage तक सीमित नहीं करता।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "duration",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 2 starts vaginal progesterone at 18 weeks because of a short cervix. Until when should she continue it?",
+        "hi": "दूसरी महिला cervix छोटी होने के कारण 18 हफ़्ते पर vaginal progesterone शुरू करती है। उसे कब तक जारी रखना चाहिए?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "emergency",
+          "text": {
+            "en": "Until at least 34 weeks of pregnancy.",
+            "hi": "कम से कम 34 हफ़्ते तक।"
+          },
+          "feedback": {
+            "en": "NICE 1.2: when using vaginal progesterone, start treatment between 16+0 and 24+0 weeks of pregnancy and continue until at least 34 weeks.",
+            "hi": "NICE 1.2: vaginal progesterone 16+0 से 24+0 हफ़्ते के बीच शुरू करें और कम से कम 34 हफ़्ते तक जारी रखें।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "emergency",
+          "text": {
+            "en": "For 4 weeks only.",
+            "hi": "सिर्फ़ 4 हफ़्ते।"
+          },
+          "feedback": {
+            "en": "NICE 1.2 says to continue until at least 34 weeks, so a 4 week course does not match the recommendation.",
+            "hi": "NICE 1.2 के अनुसार कम से कम 34 हफ़्ते तक जारी रखना है, इसलिए 4 हफ़्ते का कोर्स सिफ़ारिश से मेल नहीं खाता।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "emergency",
+          "text": {
+            "en": "Until 28 weeks, then review.",
+            "hi": "28 हफ़्ते तक, फिर समीक्षा करें।"
+          },
+          "feedback": {
+            "en": "NICE 1.2 says to continue until at least 34 weeks, so stopping at 28 weeks does not match the recommendation.",
+            "hi": "NICE 1.2 के अनुसार कम से कम 34 हफ़्ते तक जारी रखना है, इसलिए 28 हफ़्ते पर रोकना सिफ़ारिश से मेल नहीं खाता।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "emergency",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 3 is 23 weeks pregnant. Her cervix is dilated and the membranes are exposed but not ruptured. She has no bleeding, no uterine contractions and no signs of infection. What do you consider?",
+        "hi": "तीसरी महिला 23 हफ़्ते की गर्भवती है। उसकी cervix फैली हुई है और membranes बाहर आ गई हैं लेकिन फटी नहीं हैं। उसे खून बहना, uterine contractions या infection के लक्षण नहीं हैं। आप क्या विचार करेंगे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "end",
+          "text": {
+            "en": "Consider emergency cervical cerclage, after discussion with a consultant obstetrician and a consultant paediatrician.",
+            "hi": "emergency cervical cerclage, consultant obstetrician और consultant paediatrician से चर्चा के बाद।"
+          },
+          "feedback": {
+            "en": "NICE 1.6.2: consider emergency cervical cerclage for women between 16+0 and 27+6 weeks with a dilated cervix and exposed, unruptured membranes, and discuss with a consultant obstetrician and consultant paediatrician. NICE 1.6.1 excludes signs of infection, active vaginal bleeding and uterine contractions, and she has none of these.",
+            "hi": "NICE 1.6.2: 16+0 से 27+6 हफ़्ते के बीच फैली cervix और बाहर आई पर न फटी membranes में emergency cerclage पर विचार करें, और consultant obstetrician तथा consultant paediatrician से चर्चा करें। NICE 1.6.1 infection, सक्रिय योनि रक्तस्राव और uterine contractions में रोक लगाता है, और इस महिला में ये नहीं हैं।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Emergency cerclage, even though she is having uterine contractions.",
+            "hi": "emergency cerclage, भले ही उसे uterine contractions हो रहे हों।"
+          },
+          "feedback": {
+            "en": "NICE 1.6.1: do not offer emergency cervical cerclage to women with signs of infection, active vaginal bleeding, or uterine contractions.",
+            "hi": "NICE 1.6.1: infection के लक्षण, सक्रिय योनि रक्तस्राव, या uterine contractions वाली महिलाओं को emergency cervical cerclage न दें।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Emergency cerclage at 30 weeks, when the cervix is more dilated.",
+            "hi": "30 हफ़्ते पर emergency cerclage, जब cervix और फैल जाए।"
+          },
+          "feedback": {
+            "en": "NICE 1.6.2 covers emergency cerclage between 16+0 and 27+6 weeks, so 30 weeks is outside that window.",
+            "hi": "NICE 1.6.2 emergency cerclage 16+0 से 27+6 हफ़्ते के बीच के लिए है, इसलिए 30 हफ़्ते इस खिड़की से बाहर है।"
+          }
+        }
+      ]
+    }
+  ]
+}

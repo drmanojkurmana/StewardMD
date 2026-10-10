@@ -5,9 +5,9 @@ import { readFileSync } from "node:fs";
 test("app boot loads only tokos-loader.js; the loader lists the engine and Tokós files at one version token", () => {
   const html = readFileSync("index.html", "utf8");
   const eng = /(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?|tokos[-.\w]*)\.(js|css)\?v=\w+/g;
-  assert.deepEqual(html.match(eng), ["tokos-loader.js?v=tok9"], "boot requests no engine or Tokós file but the loader");
+  assert.deepEqual(html.match(eng), ["tokos-loader.js?v=tok10"], "boot requests no engine or Tokós file but the loader");
   const L = readFileSync("tokos-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "tok9", "the loader injects at the same token as its own tag");
+  assert.equal(v, "tok10", "the loader injects at the same token as its own tag");
   for (const f of ["specialty.css", "tokos.css", "specialty-core.js", "specialty-shell.js", "tokos.js", "tokos-calipers.js", "tokos-ctg.js", "tokos-clinic-us.js", "tokos-clinic-us.css", "tokos-sim-labour.js", "tokos-sim-labour.css", "tokos-explore-ui.js", "tokos-explore-ui.css"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"tokos.js"') < L.indexOf('"tokos-ctg.js"') && L.indexOf('"specialty-notes.js"') < L.indexOf('"tokos.js"'), "engine, then the host, then its clinic");
 });

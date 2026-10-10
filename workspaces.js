@@ -450,7 +450,7 @@
       poc += '<button class="sw-pocbtn abx" data-poc="abx">' + wsIco("pills") + ' Antibiotic choice</button>';
       poc += '<button class="sw-pocbtn" data-poc="ix">' + wsIco("warn") + ' Interactions</button>';
     }
-    poc += '<button class="sw-pocbtn" data-poc="maik">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : wsIco("spark")) + ' Ask MaiK</button>';
+    poc += '<button class="sw-pocbtn" data-poc="maik">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 18 }) : wsIco("spark")) + ' ' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</button>';
     poc += '<button class="sw-pocbtn" data-poc="learn">' + wsIco("book") + ' Learn more</button>';
     poc += '</div><div class="sw-pocnote">Antibiotic choice + dose per local antibiogram / ICMR &amp; the individual patient — these tools help you decide.</div></div>';
     h += poc;

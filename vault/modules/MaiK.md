@@ -474,5 +474,88 @@ raster JPGs (IMG_2666/2670/2672/2673/2675/2676; they have a fake checkerboard ba
   (Tokós, Narkē), Workspaces point-of-care, Knowledge reader (reasoning.js), Ward pharmacy verdict.
 - NOT used (owner): the MaiK logo inside the main MaiK assistant (home.js maikShellHTML, maik-logo*.png) and the
   footer MaiKnowledge logo (`.v4-maik-logo`). `test/prep-ask-chat.test.mjs` guards both.
+- **Owner review 2026-10-10:** the plain mark is approved only at small sizes; `html()` renders `mkai-tile` for any
+  plain mark ("full", "mark", "auto") above 48 px. `mkai-tile-mark` was removed from the SVG; "tile-mark" is an alias of
+  "tile". So the Ask sheet headers (44, 36 px) and chat avatars (28 to 34 px) all show `mkai-tile`.
+- **"MaiK" wordmark in Ask MaiK labels (owner, 2026-10-10):** every visible "Ask MaiK" label above draws the word MaiK in
+  the owner's lettering (symbol `mkai-word`); "Ask" and the rest stay in the app font. `SMD_MAIK_MARK.label(htmlSafeText)`
+  wraps the text in one `span.mkai-l` (so a flex button still sees one label), replaces each standalone "MaiK" (not
+  MaiKnowledge, Hindi labels too) with `word()`, and joins "Ask" to it with `&nbsp;`. `word()` = an em-sized svg
+  (`<use href="#mkai-word">`, 0.75 em tall, width from the symbol's own viewBox via `--mkai-wr`, baseline aligned) plus
+  the text "MaiK", visually hidden only once the sprite holds `mkai-word` (`html.mkai-wok`); until then, or offline
+  without the file, the plain text shows: never an empty gap. Screen readers, find and copy read "Ask MaiK".
+  Not applied to the main assistant (its bottom-nav "Ask Maik", composer, logo) or the footer logo.
 - `window.SMD_askMaikHandoff({ topic, prefill })` (home.js): opens MaiK with a topic chip and the text typed in; used by
   PrepNucleus Ask MaiK's hand-off after 10 messages.
+
+## Bottom-nav Ask Maik tab: the MaiK star mark as a glowing orb (2026-10-09/10)
+The centre `rnav-tab-maik` button in `home.js` shows `maik-ai-mark.png` (the M + four-point star from the
+owner's "MaiK AI" logo, white, no text and no "AI" badge, 192x186) instead of the `auto_awesome` glyph. The
+`.rds-icon.rnav-maik-mark` rules in `redesign-system.css` make it a lit 3D teal sphere with a breathing halo
+(`smdMaikOrbGlow`), a glint sweep (`smdMaikOrbGlint`) and a glowing mark, in both themes; reduced motion
+drops the animation. Test: `test/run-maik-tab-ui.mjs` (screenshots in /tmp/stewardmd-maiktab).
+The older v3 tab bars (`v3-tab`, `svg("ai")`) were left as they were.
+
+## Stop ends every orb; orphaned orbs are cleared (2026-10-10)
+Owner screenshot: two "Searching StewardMD knowledge" orbs spinning for minutes and Stop doing nothing.
+`_maikStop` is ONE slot (the latest turn; `maikSetSendMode(false)` nulls it), and a bubble restored from a
+saved thread after its turn died (reload, OTA, crash) has no turn behind it. Now `_maikLiveGens` maps each
+clinical turn's `data-mg` id to `{stop, done}`; `maikStopNow` stops all of them and then
+`maikSweepOrphans(true)` replaces any leftover `.maik-buffer` with "Stopped."; `maikRestoreThread` calls
+`maikSweepOrphans(false)`, which clears only orbs with no live turn ("This answer was interrupted").
+`thinking-orbs.js` stops its rAF loop once the canvas is detached. Test: `test/run-maik-stop-ui.mjs`.
+
+## Headless test gotcha: AI consent (2026-10-10)
+A fresh browser profile has no AI consent, so `privacy.js guardAI()` holds every `SMD_AI.explain*` call
+waiting on the consent tick (no request is ever made). Seed `smd_consent_guest` with `consentAcceptedAt` +
+`clinicalAuthorityConfirmedAt`, and set `window.AI_PROXY='/api/ai'` on localhost.
+
+## Pro daily allowance + lapsed-token retry (2026-10-10)
+Pro: 20,000 MaiK tokens a day (`MAIK_PRO_DAILY_TOKENS`), owners exempt, reason `pro-daily-tokens`. A quota refusal of a
+call sent without the sign-in token is retried once with `SMD_IDTOKEN_REFRESH` (id-token.js). The notice shows the
+server's message plus "Limit: <reason>". See Decisions 2026-10-10. Tests: `test/maik-pro-daily-tokens.test.mjs`,
+`test/run-maik-quota-ui.mjs`.
+Admin control (same day): app-wide value in AI control ("Pro: MaiK tokens per day", KV `ai:pro-daily-tokens`,
+`GET/POST /api/ai/admin/pro-tokens`, with a cost line from the live model's rates); per account in User control
+("MaiK tokens per day (Pro)": number, Unlimited, Use app-wide; KV `ai:utok:<email>`, -1 = unlimited,
+`POST /api/ai/admin/user-tokens`; `userDetail().proTokens` shows today's use). Per account beats app-wide beats
+`MAIK_PRO_DAILY_TOKENS`. For a signed-in Pro account the allowance also replaces the generic 200k/day
+`MAIK_DAILY_TOKEN_LIMIT`, so Unlimited is unlimited per day (the monthly budget still applies).
+
+## AI Usage screen shows the Pro daily allowance (2026-10-10)
+Owner gave an account 60k in User control and the app's AI Usage sheet still showed only the wallet ("MaiK Tokens left
+0", from purchased credits) and per-module limits. `GET /api/ai/usage` now returns `proTokens` (`proDailyTokensView` in
+`functions/_usage.js`: this account's number > app-wide > default, -1/owner = unlimited, `null` for guests and non-Pro) and
+`home.js renderAiUsage` draws "Daily MaiK tokens: 56k of 60k left today" with a bar. The wallet is a separate balance of
+bought MaiK Tokens (cost based) and is unchanged. Tests: `test/maik-pro-daily-tokens.test.mjs`, `test/run-aiusage-ui.mjs`
+(11 older checks in it already fail on main, unrelated).
+
+## Cut-short answers and a Know more that repeats (2026-10-10)
+Owner screenshots: MaiK Cloud answered "differential diagnosis for organophosphate poisoning" and the text stopped at
+"| Diagnosis/Option | Distinguishing Features"; Know more then restated the opening and stopped at the same place.
+Root cause NOT confirmed (no live access): candidates are the model's finishReason (MAX_TOKENS, a SAFETY / RECITATION
+filter) or a STOP that ends mid-table. The handler never looked at finishReason. Now (`functions/_maik_finish.js`, wired in
+the explain non-stream path): any non-STOP finish, or a text that ends mid-table (`looksCutOff`), is retried ONCE
+(temperature 0.7; double the budget for MAX_TOKENS) and the better attempt kept (`betterAttempt`); if it is still cut the
+response carries `cutShort: true` (also on the SSE done event) and the sheet adds "This answer was cut short. Tap
+Regenerate". A tier-2 answer has its restated opening paragraphs removed (`dropRepeatedLead`, server and `maikDropRepeatedLead`
+in home.js), and the tier-2 prompt says to start with new content. The server logs `[MaiK cut] finishReason=...` (no
+content) so Cloudflare logs now show which it is. Tests: `test/maik-finish.test.mjs`, `test/run-maik-knowmore-ui.mjs`.
+
+## One unit: MaiK Tokens (2026-10-10, AI Usage redesign)
+Owner: "It's so confusing. Keep single MaiK Tokens, show weekly and per day tokens left. 300000 per month for Pro and 20K
+per day, reset every night ... no mention of Gemini anywhere."
+- **Unit:** MaiK Token = the counter the server enforces (`maik:u:<id>:<IST day>` and `maik:m:<id>:<month>` tokens). The cost-based
+  wallet "MT" (2,000 per rupee, rate card, per-1,000 prices) is gone from the screen; it was inert anyway (`AI_COST_CAP_ON` off).
+- **Allowances:** Pro = 20,000 a day (`MAIK_PRO_DAILY_TOKENS`, AI control, per account) and 300,000 a month
+  (`_aibudget.js roleAllowance`: Pro and physician both 300,000; env `BUDGET_PRO_TOKENS` / `BUDGET_PROMAX_TOKENS`; per account
+  `aiCapTokens` in User control). The cap cache key is now `maik:budget:v2:<uid>` so accounts cached at 1M/3M re-read. Owners unlimited.
+  Reaching the month limit says "used this month's 300,000 MaiK Tokens, renew on the 1st".
+- **Screen:** `GET /api/ai/usage` returns `allowance` from `allowanceView` (`functions/_usage.js`): plan, day {limit,used},
+  week {used, last 7 IST days}, month {limit,used}, reset times. `home.js renderAiUsage`: big "MaiK Tokens left today" with
+  "of 20,000, resets every night at midnight", then used today / used this week / left this month, then used today by feature
+  (request counts). A free account leads with its month and gets "Upgrade to Pro". Older servers still send `proTokens`.
+- **No model names in the app:** removed from the usage rate card (gone), `voice.js` diagnostics, `fundx.js` setting text, the in-app
+  privacy blurb (`index.html`), `privacy.html`, `terms.html`, `privacy-config.js` (now "Google Cloud Vertex AI": the processor stays
+  disclosed, as the privacy policy requires). Internal names (provider ids, `model` metadata inside prep JSON) are not shown.
+- Tests: `test/run-aiusage-ui.mjs` (rewritten), `test/maik-pro-daily-tokens.test.mjs`, `test/ai-budget-tiers.test.mjs`.

@@ -1,0 +1,176 @@
+{
+  "id": "consent",
+  "kind": "drill",
+  "level": "resident",
+  "review": "ai_drafted",
+  "timeLimitSec": 600,
+  "title": {
+    "en": "Gynaecology consent: one procedure, one consent, from the woman herself",
+    "hi": "gynaecology में consent: एक procedure, एक सहमति, और वह महिला की अपनी हो"
+  },
+  "scenario": {
+    "en": "Three adult women come to the gynaecology unit. Each can decide for herself. Each has a different surgical situation. Choose the right step at each point. Teaching scenario, not real patients.",
+    "hi": "तीन वयस्क महिलाएँ gynaecology unit में आती हैं। हर एक खुद फ़ैसला ले सकती है। हर एक की surgery की स्थिति अलग है। हर बिंदु पर सही कदम चुनें। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    {
+      "label": "Samira Kohli v Dr Prabha Manchanda and Another, (2008) 2 SCC 1, Supreme Court of India, judgment of 16 January 2008: paragraph 14 (definition of informed consent), paragraph 19 (holding on diagnostic consent and emergencies), facts at paragraph 3",
+      "url": "https://indiankanoon.org/doc/438423/"
+    }
+  ],
+  "stages": [
+    {
+      "id": "limit",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 1 consented only to a diagnostic laparoscopy (a keyhole look inside the abdomen). Fibroids are found. She is awake, there is no danger to her life or health right now, and removing the uterus would prevent trouble later. What do you do?",
+        "hi": "पहली महिला ने सिर्फ़ diagnostic laparoscopy (पेट के अंदर keyhole से जाँच) की सहमति दी। अंदर fibroids मिलते हैं। वह होश में है, अभी उसकी जान या सेहत को खतरा नहीं है, और गर्भाशय निकालने से आगे की परेशानी रुक सकती है। आप क्या करेंगे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "emergency",
+          "text": {
+            "en": "Stop, close, and counsel her for a fresh consent before any hysterectomy (removal of the uterus).",
+            "hi": "रुकें, बंद करें, और hysterectomy (गर्भाशय निकालना) से पहले उसकी नई सहमति के लिए बात करें।"
+          },
+          "feedback": {
+            "en": "Paragraph 19: consent for a diagnostic procedure cannot authorise therapeutic surgery, except in life threatening or emergent situations. Removing an organ is not covered by consent for another procedure, even if it is beneficial, where there is no imminent danger to life or health.",
+            "hi": "पैरा 19: diagnostic procedure की सहमति therapeutic surgery की अनुमति नहीं देती, सिर्फ़ जान के खतरे या आपात स्थिति में अपवाद है। बिना तत्काल खतरे के, किसी अंग को निकालना दूसरी procedure की सहमति में नहीं आता, भले ही वह फ़ायदेमंद हो।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "emergency",
+          "text": {
+            "en": "Remove the uterus now, because it helps her and may prevent future danger.",
+            "hi": "अभी गर्भाशय निकाल दें, क्योंकि इससे उसे फ़ायदा होगा और आगे का खतरा रुक सकता है।"
+          },
+          "feedback": {
+            "en": "Paragraph 19 says a consent for one operation is not consent to remove an extra organ, even if the removal is beneficial or may prevent future danger, where there is no imminent danger to life or health.",
+            "hi": "पैरा 19 के अनुसार एक operation की सहमति किसी अतिरिक्त अंग को निकालने की सहमति नहीं है, भले ही वह फ़ायदेमंद हो या आगे का खतरा रोके, जब जान या सेहत को तत्काल खतरा न हो।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "emergency",
+          "text": {
+            "en": "Get a signature from her husband or relative, then remove the uterus.",
+            "hi": "उसके पति या किसी रिश्तेदार से हस्ताक्षर लें, फिर गर्भाशय निकाल दें।"
+          },
+          "feedback": {
+            "en": "She is awake and able to decide, so the decision is hers. A relative's signature does not extend the consent she gave for a diagnostic laparoscopy.",
+            "hi": "वह होश में है और खुद फ़ैसला ले सकती है, इसलिए फ़ैसला उसी का है। रिश्तेदार का हस्ताक्षर उस सहमति को नहीं बढ़ाता जो उसने diagnostic laparoscopy के लिए दी थी।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "emergency",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 2 consented to a laparoscopy. During the operation she is still unconscious. There is heavy bleeding from a torn organ, and her life is at risk right now. What is the right step?",
+        "hi": "दूसरी महिला ने laparoscopy की सहमति दी थी। operation के दौरान वह अभी भी बेहोश है। एक फटे अंग से भारी खून बह रहा है, और उसकी जान अभी खतरे में है। सही कदम क्या है?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "information",
+          "text": {
+            "en": "Do the surgery needed to stop the bleeding and save her life, and record why.",
+            "hi": "खून रोकने और उसकी जान बचाने के लिए ज़रूरी surgery करें, और कारण दर्ज करें।"
+          },
+          "feedback": {
+            "en": "Paragraph 19 makes an exception for life threatening or emergent situations. Here the danger to life is immediate, so the surgery needed to save her is covered.",
+            "hi": "पैरा 19 जान के खतरे या आपात स्थिति के लिए अपवाद देता है। यहाँ जान का खतरा तत्काल है, इसलिए उसे बचाने के लिए ज़रूरी surgery इस अपवाद में आती है।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "information",
+          "text": {
+            "en": "Stop and wait until she wakes up, even while she is bleeding.",
+            "hi": "रुककर उसके होश में आने तक इंतज़ार करें, भले ही खून बह रहा हो।"
+          },
+          "feedback": {
+            "en": "Paragraph 19 exempts life threatening or emergent situations from the consent limit. Waiting while her life is at risk is not what the judgment allows.",
+            "hi": "पैरा 19 जान के खतरे वाली स्थिति को सहमति की सीमा से बाहर रखता है। जान खतरे में हो तो इंतज़ार करना वह नहीं है जिसकी judgment अनुमति देती है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "information",
+          "text": {
+            "en": "Stop, and let her relative decide whether the surgery goes ahead.",
+            "hi": "रुककर उसके रिश्तेदार को तय करने दें कि surgery हो या नहीं।"
+          },
+          "feedback": {
+            "en": "The exception in paragraph 19 is for life threatening or emergent situations. A relative's decision does not replace the surgery needed in that emergency.",
+            "hi": "पैरा 19 का अपवाद जान के खतरे या आपात स्थिति के लिए है। जान के खतरे वाली उस स्थिति में रिश्तेदार का फ़ैसला ज़रूरी surgery की जगह नहीं लेता।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "information",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 3 has a planned hysterectomy for large fibroids. Before she signs, which information must she receive for valid informed consent?",
+        "hi": "तीसरी महिला की बड़े fibroids के लिए planned hysterectomy है। हस्ताक्षर से पहले valid informed consent के लिए उसे कौन-सी जानकारी मिलनी चाहिए?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "end",
+          "text": {
+            "en": "The nature and purpose of the operation, the expected outcome, the risks, the alternatives, and the effect of no treatment.",
+            "hi": "operation का स्वभाव और उद्देश्य, अपेक्षित नतीजा, जोखिम, विकल्प, और इलाज न कराने का असर।"
+          },
+          "feedback": {
+            "en": "Paragraph 14 quotes the definition of informed consent from Taber's Cyclopedic Medical Dictionary: consent given after receipt of the nature and purpose of the procedure, the expected outcome, the risks, the alternatives, and the effect of no treatment.",
+            "hi": "पैरा 14 में Taber's Cyclopedic Medical Dictionary की informed consent की परिभाषा दी गई है: procedure का स्वभाव और उद्देश्य, अपेक्षित नतीजा, जोखिम, विकल्प, और इलाज न कराने का असर जानने के बाद दी गई सहमति।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Only that the form is signed, because the signed form is the contract.",
+            "hi": "सिर्फ़ इतना कि फ़ॉर्म पर हस्ताक्षर हो जाएँ, क्योंकि हस्ताक्षर वाला फ़ॉर्म ही अनुबंध है।"
+          },
+          "feedback": {
+            "en": "A signature alone is not informed consent. The definition quoted in paragraph 14 requires that the woman receives the information first. The case turned partly on signatures taken before the woman understood what they covered.",
+            "hi": "सिर्फ़ हस्ताक्षर informed consent नहीं है। पैरा 14 की परिभाषा के अनुसार पहले महिला को जानकारी मिलनी चाहिए। इस मामले में हस्ताक्षर ऐसे समय लिए गए थे जब महिला समझ नहीं पाई थी कि वे किस बात के हैं।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "The surgeon's name and the hospital fee.",
+            "hi": "सर्जन का नाम और अस्पताल की फ़ीस।"
+          },
+          "feedback": {
+            "en": "The definition in paragraph 14 lists the nature and purpose, the expected outcome, the risks, the alternatives, and the effect of no treatment. The surgeon's name and the fee are not on that list.",
+            "hi": "पैरा 14 की परिभाषा में procedure का स्वभाव और उद्देश्य, अपेक्षित नतीजा, जोखिम, विकल्प, और इलाज न कराने का असर शामिल हैं। सर्जन का नाम और फ़ीस उस सूची में नहीं हैं।"
+          }
+        }
+      ]
+    }
+  ]
+}

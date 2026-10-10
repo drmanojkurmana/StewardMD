@@ -39,16 +39,28 @@ function thread(n) {   // n exchanges, student then MaiK
 }
 
 /* ---------- turn count and the 10-message hand-off ---------- */
-test("userCount and canAsk: the first ask counts, 10 is the last", () => {
+test("limits (owner 2026-10-10): online 10 a chat, on this phone unlimited", () => {
   assert.equal(T.CHAT_LIM.turns, 10);
   assert.equal(T.userCount([]), 0);
   assert.equal(T.userCount(thread(3)), 3);
-  assert.equal(T.canAsk(thread(9)), true);
-  const t10 = thread(9).concat([u("tenth")]);
-  assert.equal(T.userCount(t10), 10);
-  assert.equal(T.canAsk(t10), false, "the 10th message is the last one");
-  assert.equal(T.canAsk(thread(10)), false);
+  const on = (t) => Object.assign(u(t), { m: "online" }), ph = (t) => Object.assign(u(t), { m: "local" });
+  const t9 = []; for (let i = 0; i < 9; i++) { t9.push(on("q" + i)); t9.push(m("a")); }
+  assert.equal(T.onlineCount(t9), 9); assert.equal(T.canAsk(t9), true);
+  const t10 = t9.concat([on("tenth")]);
+  assert.equal(T.onlineCount(t10), 10); assert.equal(T.canAsk(t10), false, "the 10th online message is the last one");
+  const phone = []; for (let i = 0; i < 25; i++) { phone.push(ph("p" + i)); phone.push(m("a")); }
+  assert.equal(T.onlineCount(phone), 0); assert.equal(T.canAsk(phone), true, "25 messages on this phone count nothing");
   assert.equal(T.userCount([u("a"), m("x", false), u("b")]), 2, "a failed answer is not a student message");
+  // prep-ask.js keeps the count per chat; its pure helpers
+  assert.equal(A.ONLINE_MAX, 10);
+  assert.deepEqual([A.onlineLeft({ on: 3 }), A.atCap({ on: 9 }, "online"), A.atCap({ on: 10 }, "online"), A.atCap({ on: 10 }, "local"), A.atCap({ on: 400 }, "local")], [7, false, true, false, false]);
+  assert.deepEqual(A.onlineNote(429, { reason: "chat-limit" }).error, "chat-limit");
+  const pr = A.pruneThreads({ k: { ts: Date.now(), turns: t10, on: 10, cid: "abc123", nc: 1 }, old: { ts: Date.now(), turns: t9 } }, Date.now());
+  assert.deepEqual([pr.k.on, pr.k.cid, pr.k.nc, pr.old.on, pr.old.cid], [10, "abc123", 1, 9, undefined], "the count and chat id are kept; an old record counts its online turns");
+  assert.match(A.newCid(), /^[a-z0-9]{4,16}$/);
+  assert.deepEqual(A.quickReplies({ kind: "mcq", item: { a: 0, o: ["w", "x", "y", "z"] }, chosen: 2 }), ["Explain simply", "Why not C?", "Give a mnemonic"]);
+  assert.deepEqual(A.quickReplies({ kind: "mcq", item: { a: 0, o: ["w", "x", "y", "z"] }, chosen: 0 })[1], "Why not B?");
+  assert.deepEqual(A.quickReplies({ kind: "step" }), ["Explain simply", "Give an example", "Give a mnemonic"]);
 });
 
 /* ---------- context trimming ---------- */
@@ -96,21 +108,56 @@ test("chat prompt and system prompt are the server's, word for word", () => {
   assert.equal(T.CHAT_SYSTEM, SRV.CHAT_SYSTEM);
   const c = T.chatContext(thread(5).concat([u("And B?")]));
   assert.equal(T.chatPrompt(GROUND, c), SRV.chatUser(GROUND, c.summary, c.messages));
-  assert.match(T.chatPrompt(GROUND, c), /\n\nCHAT:\nStudent: .*\nMaiK: .*\nStudent: And B\?\n\nTASK: Answer the student's last message using only the grounding\.$/s);
+  assert.match(T.chatPrompt(GROUND, c), /\n\nCHAT:\nStudent: .*\nMaiK: .*\nStudent: And B\?\n\nTASK: Reply to the student's last message in your own words\.$/s);
+  // the owner's two messages: the prompt carries them with how to answer (typos read through)
+  for (const [msg, hint] of [["Tell me about firsy order kinetics in simple way", /everyday words.*analogy.*Teach the idea briefly/], ["Why is it correct and explain me topic like im dumb", /everyday words.*analogy.*why the correct answer is right/], ["Why not B?", /option B is wrong/], ["Give a mnemonic", /memory hook/]]) {
+    const cc = T.chatContext(thread(1).concat([u(msg)]));
+    const pr = T.chatPrompt(GROUND, cc);
+    assert.equal(pr, SRV.chatUser(GROUND, cc.summary, cc.messages), msg);
+    assert.ok(pr.indexOf("Student: " + msg + "\n\nTASK: Reply to the student's last message in your own words. ") > 0, msg);
+    assert.match(pr.slice(pr.indexOf("TASK:")), hint, msg);
+    assert.equal(T.intentHint(msg), SRV.intentHint(msg));
+  }
+  // the system prompt: a tutor that answers the message, never a recital of the stored text
+  assert.match(T.CHAT_SYSTEM, /Reply to what the student's LAST message actually asks, in your own words/);
+  assert.match(T.CHAT_SYSTEM, /Never paste or closely repeat the stored explanation/);
+  assert.match(T.CHAT_SYSTEM, /Read past typos/);
+  assert.doesNotMatch(T.CHAT_SYSTEM, /reply exactly: The stored explanation does not cover this/, "no forced fallback line");
+  assert.equal(/[\u2014\u2013]/.test(T.CHAT_SYSTEM), false, "no em or en dash");
   assert.equal(T.chatPrompt(GROUND, { messages: [u("x")], summary: "" }).indexOf("EARLIER"), -1, "no summary block when there is no summary");
 });
 
 /* ---------- the follow-up answer and its check ---------- */
-test("teachChat: a grounded answer passes; a number or drug not in the grounding fails, even when the chat names it", async () => {
+test("teachChat: a grounded answer passes; a number or drug not in the grounding is shown with an honest line naming it", async () => {
   const turns = [u("Why is B wrong?"), m("Phenytoin is the answer."), u("Is valproate at 900 mg the same?")];
   let seen = null;
   const ok = await T.teachChat(GROUND, turns, { lexicon: LEX, generate: (p, s, cx) => { seen = { p, s, cx }; return { text: "Phenytoin causes gingival hyperplasia in about 50% of patients." }; } });
   assert.equal(ok.ok, true, JSON.stringify(ok));
   assert.equal(seen.s, T.CHAT_SYSTEM);
   assert.equal(seen.cx.messages[seen.cx.messages.length - 1].t, "Is valproate at 900 mg the same?");
+  assert.deepEqual(ok.beyond, []);
   const bad = await T.teachChat(GROUND, turns, { lexicon: LEX, generate: () => "Valproate at 900 mg also causes it." });
-  assert.equal(bad.ok, false); assert.equal(bad.reason, "check");
-  assert.ok(bad.check.numbers.includes("900"), JSON.stringify(bad.check));
+  assert.equal(bad.ok, true, "shown, not swapped for the stored text");
+  assert.ok(bad.check.numbers.includes("900") && bad.beyond.includes("900"), JSON.stringify(bad));
+  // markdown and dashes are cleaned for the screen
+  const md = await T.teachChat(GROUND, turns, { generate: () => "**Think** of it \u2014 like this:\n* one\n* two" });
+  assert.equal(md.text, "Think of it, like this:\n- one\n- two");
+});
+
+/* The owner's recording (2026-10-10): both messages got the stored explanation back. With a model that answers the
+   prompt it is given, the reply follows the student's message; the old echo is gone from the prompt contract. */
+test("owner prompts: replies answer the message, not the stored explanation (mocked model)", async () => {
+  const STORED = T.expOf(ITEM);
+  const model = (prompt) => {
+    const last = /\nStudent: ([^\n]*)\n\nTASK/.exec(prompt)[1];
+    if (/simple|dumb/i.test(last)) return { text: "Picture a tap filling a sink: the more water, the faster it drains. " + (/kinetic/i.test(last) ? "That is first order kinetics: the body clears a fixed share, not a fixed amount." : "That is why Phenytoin is the answer here.") };
+    return { text: STORED };
+  };
+  const turns = [u("Why is B wrong?"), m("Phenytoin is the drug the explanation names.")];
+  const a1 = await T.teachChat(GROUND, turns.concat([u("Tell me about firsy order kinetics in simple way")]), { lexicon: LEX, generate: model });
+  const a2 = await T.teachChat(GROUND, turns.concat([u("Tell me about firsy order kinetics in simple way"), m(a1.text), u("Why is it correct and explain me topic like im dumb")]), { lexicon: LEX, generate: model });
+  assert.ok(a1.ok && a2.ok);
+  assert.notEqual(a1.text, STORED); assert.notEqual(a2.text, STORED); assert.notEqual(a1.text, a2.text);
 });
 
 test("teachChat: not covered, an error with a note, empty, a throw, no generator, no grounding", async () => {
@@ -180,9 +227,16 @@ test("maik-ai-mark: variants, the size rule, decorative by default, escaped opti
   assert.equal(M.variantFor("auto", 20), "mark");
   assert.equal(M.variantFor("auto", 27), "mark");
   assert.equal(M.variantFor("auto", 28), "full");
-  assert.equal(M.variantFor(undefined, 64), "full");
-  assert.equal(M.variantFor("tile", 34), "tile-mark");
-  assert.equal(M.variantFor("tile", 40), "tile");
+  assert.equal(M.variantFor("auto", 48), "full");
+  // owner review 2026-10-10: no plain mark above 48 px (the tile instead); tile-mark is an alias of the tile
+  assert.equal(M.variantFor(undefined, 64), "tile");
+  assert.equal(M.variantFor("full", 49), "tile");
+  assert.equal(M.variantFor("mark", 140), "tile");
+  assert.equal(M.variantFor("tile", 34), "tile");
+  assert.equal(M.variantFor("tile-mark", 34), "tile");
+  assert.equal(M.variantFor("tile-mark", 140), "tile");
+  assert.equal(M.variantFor("tile", 140), "tile");
+  assert.match(M.html("full", { size: 140 }), /class="mkai mkai-tile"[^>]*><use href="#mkai-tile">/);
   assert.equal(M.variantFor("full", 16), "full", "an explicit variant is kept");
   const h = M.html("mark", { size: 18, cls: "x" });
   assert.match(h, /^<svg class="mkai mkai-mark x" viewBox="0 0 100 100" width="18" height="18" aria-hidden="true" focusable="false"><use href="#mkai-mark"><\/use><\/svg>$/);
@@ -193,11 +247,13 @@ test("maik-ai-mark: variants, the size rule, decorative by default, escaped opti
 
 test("assets/maik-ai-mark.svg: the symbols, inline fills, nothing external or raster", () => {
   const svg = readFileSync(join(ROOT, "assets/maik-ai-mark.svg"), "utf8");
-  for (const id of ["mkai-m", "mkai-full", "mkai-mark", "mkai-tile", "mkai-tile-mark", "mkai-tile-bg-s"]) assert.match(svg, new RegExp('<symbol id="' + id + '" viewBox="0 0 100 100"'), id);
+  for (const id of ["mkai-m", "mkai-full", "mkai-mark", "mkai-tile", "mkai-tile-bg-s"]) assert.match(svg, new RegExp('<symbol id="' + id + '" viewBox="0 0 100 100"'), id);
+  assert.match(svg, /<symbol id="mkai-word" viewBox="-?[\d.]+ -?[\d.]+ [\d.]+ [\d.]+"/, "the MaiK wordmark symbol, its viewBox fitted to the word");
+  assert.doesNotMatch(svg, /id="mkai-tile-mark"/, "the tile-mark symbol was removed (owner review 2026-10-10)");
   assert.doesNotMatch(svg, /<script|<image|<foreignObject|href="(?!#)/i);
   assert.doesNotMatch(svg, /\sfill="/, "fills are inline styles so page icon CSS cannot repaint the mark");
-  assert.match(svg, /var\(--mkai-accent/);
-  assert.ok(svg.length < 8000, "small: " + svg.length);
+  assert.doesNotMatch(svg, /<use href="#mkai-ai"/, "owner removed the small AI from the mark (2026-10-10)");
+  assert.ok(svg.length < 40000, "small (traced owner artwork): " + svg.length);
   const js = readFileSync(join(ROOT, "maik-ai-mark.js"), "utf8");
   assert.match(js, /\/assets\/maik-ai-mark\.svg\?v=/);
   assert.doesNotMatch(js, /=>|`|\blet\s|\bconst\s|^\s*class\s/m, "ES5");
@@ -206,16 +262,56 @@ test("assets/maik-ai-mark.svg: the symbols, inline fills, nothing external or ra
   assert.match(readFileSync(join(ROOT, "scripts/build-www.sh"), "utf8"), /cp assets\/maik-ai-mark\.svg/, "shipped in the native bundle");
 });
 
+test("maik-ai-mark: the MaiK wordmark in Ask MaiK labels; text stays for screen readers; MaiKnowledge untouched", () => {
+  const w = M.word();
+  assert.equal(w, '<span class="mkai-w"><svg class="mkai-word" aria-hidden="true" focusable="false"><use href="#mkai-word"></use></svg><span class="mkai-wt">MaiK</span></span>');
+  assert.equal(M.label("Ask MaiK"), '<span class="mkai-l">Ask&nbsp;' + w + "</span>");
+  assert.equal(M.label("Why is B wrong? Ask MaiK"), '<span class="mkai-l">Why is B wrong? Ask&nbsp;' + w + "</span>");
+  assert.equal(M.label("MaiK से पूछें"), '<span class="mkai-l">' + w + " से पूछें</span>", "the Hindi label too");
+  assert.equal(M.label("Open MaiKnowledge"), '<span class="mkai-l">Open MaiKnowledge</span>', "only the standalone word");
+  assert.equal(M.label('Ask MaiK about &quot;x&quot;'), '<span class="mkai-l">Ask&nbsp;' + w + ' about &quot;x&quot;</span>', "escaped text stays escaped");
+  // the text without tags reads "Ask MaiK ..." for screen readers, find and copy
+  assert.equal(M.label("Ask MaiK about this card").replace(/<[^>]+>/g, ""), "Ask&nbsp;MaiK about this card", "Ask and MaiK kept together");
+  const js = readFileSync(join(ROOT, "maik-ai-mark.js"), "utf8");
+  assert.match(js, /html\.mkai-wok svg\.mkai-word\{display:inline-block\}/, "the wordmark shows only once the sprite holds mkai-word");
+  assert.match(js, /svg\.mkai-word\{display:none;width:calc\(\.75em \* var\(--mkai-wr,[\d.]+\)\)!important;height:\.75em!important/, "em-sized, so it follows the label's font size; width from the symbol's viewBox");
+});
+
+test("every Ask MaiK label draws MaiK as the wordmark", () => {
+  const src = (f) => readFileSync(join(ROOT, f), "utf8");
+  // [file, the text that must sit inside a SMD_MAIK_MARK.label(...) call (or the local helper that calls it)]
+  const LABELS = [
+    ["prep.js", "G.SMD_MAIK_MARK.label(label)"], ["prep-flash.js", 'G.SMD_MAIK_MARK.label("Ask MaiK about this card")'],
+    ["prep-ask.js", 'M.label("Ask MaiK")'], ["surgx-screens.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
+    ["clinix-screens.js", 'window.SMD_MAIK_MARK.label("Ask MaiK about this step")'], ["clinix-screens.js", 'window.SMD_MAIK_MARK.label("Ask MaiK to review this answer")'],
+    ["opd-emr.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'], ["thorex-screens.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
+    ["icu.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'], ["icu.js", 'label("Ask MaiK about this patient") : "Ask MaiK about this patient") + "</h3>'],
+    ["icu.js", 'label("Ask MaiK about this patient") : "Ask MaiK about this patient") + "</button>"'], ["ophthalmos.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
+    ["specialty-shell.js", 'window.SMD_MAIK_MARK.label(s("askMaik"))'], ["workspaces.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
+    ["reasoning.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'], ["ward.js", 'window.SMD_MAIK_MARK.label(wTH("ward.ask-maik-to-explain-this-verdict"'],
+    ["search.js", 'G.SMD_MAIK_MARK.label(esc(it.title))'], ["home.js", 't.act === "askai" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label(t.tt)'],
+  ];
+  for (const [f, needle] of LABELS) assert.ok(src(f).indexOf(needle) >= 0, f + ": " + needle);
+  const ask = src("prep-ask.js");
+  assert.ok(ask.indexOf("avatar(44) + '<div><h2 id=\"paT\">' + askLbl() + '</h2>") > 0 && ask.indexOf("avatar(30) + '<h2 id=\"paT\">' + askLbl() + '</h2>'") > 0, "both sheet headers");
+  // no visible "Ask MaiK" label is left as plain text next to the mark (the aria-labels and fallbacks keep plain text)
+  for (const f of ["surgx-screens.js", "ophthalmos.js", "workspaces.js"]) assert.doesNotMatch(src(f), /\) \+ ["'] Ask MaiK<\/button>/, f);
+  const home = src("home.js");
+  const shell = home.slice(home.indexOf("function maikShellHTML"), home.indexOf("function maikShellHTML") + 6000);
+  assert.ok(shell.length > 1000 && !/mkai|SMD_MAIK_MARK/.test(shell), "the MaiK assistant's own shell and logo are unchanged");
+  assert.equal((home.match(/SMD_MAIK_MARK/g) || []).length, 2, "home.js uses the wordmark only on the Ask MaiK tile title");
+});
+
 test("every Ask MaiK entry point across the app carries the mark; the MaiK assistant and the footer keep their logos", () => {
   const src = (f) => readFileSync(join(ROOT, f), "utf8");
   // [file, the label right after the icon]: the icon markup just before the label must come from SMD_MAIK_MARK.
   const ENTRIES = [
     ["prep.js", "function askBtn("], ["prep-flash.js", "Ask MaiK about this card"], ["prep-lessons.js", 'aria-label="Ask MaiK about this step">'],
     ["prep-ask.js", "function mark(size)"], ["prep-teacher.js", "function avatar()"],
-    ["surgx-screens.js", '" Ask MaiK</button>"'], ["clinix-screens.js", '"Ask MaiK about this step</button>"'], ["clinix-screens.js", '"Ask MaiK to review this answer</button>"'],
-    ["opd-emr.js", '<span class="oe-maik-ico">'], ["thorex-screens.js", '<span class="tx-maik-ico">'], ["icu.js", '" Ask MaiK</button>"'],
-    ["icu.js", '" Ask MaiK about this patient</h3>'], ["icu.js", '" Ask MaiK about this patient</button>"'], ["ophthalmos.js", '" Ask MaiK</button>"'],
-    ["specialty-shell.js", 's("askMaik")'], ["workspaces.js", "' Ask MaiK</button>'"], ["reasoning.js", "'<span>Ask MaiK</span>'"],
+    ["surgx-screens.js", 'data-sgx="ask"'], ["clinix-screens.js", 'label("Ask MaiK about this step")'], ["clinix-screens.js", 'label("Ask MaiK to review this answer")'],
+    ["opd-emr.js", '<span class="oe-maik-ico">'], ["thorex-screens.js", '<span class="tx-maik-ico">'], ["icu.js", 'data-icu-act="asksend"'],
+    ["icu.js", '"Ask MaiK about this patient") + "</h3>'], ["icu.js", 'data-icu-act="askmaik"'], ["ophthalmos.js", 'class="oph-btn sec oph-maik"'],
+    ["specialty-shell.js", 's("askMaik")'], ["workspaces.js", 'data-poc="maik"'], ["reasoning.js", 'label("Ask MaiK")'],
     ["ward.js", '"Ask MaiK to explain this verdict"'], ["search.js", '<span class="us-row-ico">'],
   ];
   for (const [f, label] of ENTRIES) {
@@ -225,7 +321,7 @@ test("every Ask MaiK entry point across the app carries the mark; the MaiK assis
     assert.match(win, /SMD_MAIK_MARK/, f + " near " + label);
   }
   const ask = src("prep-ask.js");
-  assert.ok(ask.indexOf("avatar(44) + '<div><h2 id=\"paT\">Ask MaiK</h2>") > 0 && ask.indexOf("avatar(36) + '<h2 id=\"paT\">Ask MaiK</h2>") > 0, "the sheet's two headers use the mark");
+  assert.ok(ask.indexOf("avatar(44) + '<div><h2 id=\"paT\">'") > 0 && ask.indexOf("avatar(30) + '<h2 id=\"paT\">'") > 0, "the sheet's two headers use the mark");
   const home = src("home.js");
   assert.match(home, /act: "askai", ic: "auto_awesome", anim: "maikai"/, "the Home Ask MaiK tile");
   assert.match(home, /maikai: '<svg class="mkai mkai-mark"[^']*<use href="#mkai-mark"><\/use><\/svg>'/);

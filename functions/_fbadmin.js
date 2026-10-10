@@ -9,15 +9,21 @@ const b64ToBytes    = (s) => Uint8Array.from(atob(String(s).replace(/-/g, "+").r
 const bytesToB64Url = (u8) => btoa(String.fromCharCode(...u8)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 const strToB64Url   = (s) => bytesToB64Url(new TextEncoder().encode(s));
 
-let _saTok = { token: null, exp: 0 };
+/* One cached token PER SCOPE (owner screenshot, 2026-10-10: User control "fs_get 403" and "Failed: fs_commit
+ * (403) Request had insufficient authentication scopes"). The cache used to be a single slot, so whichever
+ * scope was minted first in an isolate (identitytoolkit, e.g. the account lookup) was handed back to the
+ * next caller asking for `datastore`, and every Firestore read and write after it was refused. */
+const _saToks = new Map();
 export async function serviceAccountToken(env, scope) {
   const now = Math.floor(Date.now() / 1000);
-  if (_saTok.token && now < _saTok.exp - 60) return _saTok.token;
+  scope = scope || "https://www.googleapis.com/auth/identitytoolkit";
+  const hit = _saToks.get(scope);
+  if (hit && hit.token && now < hit.exp - 60) return hit.token;
   const sa = JSON.parse(env.FIREBASE_SERVICE_ACCOUNT);
   const header = { alg: "RS256", typ: "JWT" };
   const claims = {
     iss: sa.client_email,
-    scope: scope || "https://www.googleapis.com/auth/identitytoolkit",
+    scope: scope,
     aud: sa.token_uri || "https://oauth2.googleapis.com/token",
     iat: now, exp: now + 3600,
   };
@@ -33,7 +39,7 @@ export async function serviceAccountToken(env, scope) {
   });
   const data = await res.json();
   if (!data.access_token) throw new Error("sa_token_failed");
-  _saTok = { token: data.access_token, exp: now + (data.expires_in || 3600) };
+  _saToks.set(scope, { token: data.access_token, exp: now + (data.expires_in || 3600) });
   return data.access_token;
 }
 

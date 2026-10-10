@@ -48,6 +48,7 @@ const DETAIL = { ok: true, account: USERS[1], claims: { provUntil: NOW + 5 * DAY
   plan: { tier: "free", tierExp: null, role: "physician", smdId: "SMD-MAVWWX", aiCapTokens: null, monthUsage: { used: 1200, cap: 50000 } },
   features: [{ key: "scribe_dictation", label: "MaiK Scribe clinical dictation", allowed: true, explicit: null }],
   limits: [{ id: "maik", label: "MaiK", defaultLimit: 50, limit: null }, { id: "research", label: "Evidence review", defaultLimit: 2, limit: null }],
+  proTokens: { user: null, appWide: 20000, usedToday: 12000, effective: 20000 },
   usage: [{ day: "2026-10-08", req: 4, tokens: 5200, costInr: 0.42, byModule: { maik: 4 } }, { day: "2026-10-07", req: 1, tokens: 900, costInr: 0.05, byModule: { maik: 1 } }] };
 
 const BOOT = `
@@ -67,6 +68,8 @@ const BOOT = `
       var list = USERS.filter(function (x) { return (f === "all" || !f || (f === "pending" && x.status === "pending")) && (!q || (x.email + x.name + x.phone).toLowerCase().indexOf(q) >= 0); });
       body = { ok: true, days: +p.get("days"), counts: { total: 2, today: 1, week: 2 }, users: list };
     } else if (u.indexOf("/api/ai/admin/user-detail") === 0) body = window.__detailErr ? Object.assign({}, DETAIL, { profile: {}, errors: { profile: "fs_get 403" } }) : DETAIL;
+    else if (u.indexOf("/api/ai/admin/pro-tokens") === 0) { var pb = opts.body ? JSON.parse(opts.body) : null; if (pb) window.__pt = pb.tokens === "" ? null : +pb.tokens; body = { ok: true, tokens: window.__pt == null ? null : window.__pt, default: 20000, effective: window.__pt == null ? 20000 : window.__pt }; }
+    else if (u.indexOf("/api/ai/admin/model") === 0) body = { model: null, effective: "gemini-3.1-flash-lite", allowed: ["gemini-3.1-flash-lite"], rates: { "gemini-3.1-flash-lite": { in: 0.024, out: 0.144 } } };
     else if (u.indexOf("/api/entitlements/admin/set-budget") === 0 && window.__failBudget) return Promise.resolve(new Response(JSON.stringify({ ok: false, error: "fs_commit", status: 403, detail: "PERMISSION_DENIED: Missing or insufficient permissions." }), { status: 500, headers: { "Content-Type": "application/json" } }));
     return Promise.resolve(new Response(JSON.stringify(body), { status: 200, headers: { "Content-Type": "application/json" } }));
   };
@@ -115,6 +118,11 @@ try {
   await act(`var s=document.querySelector('#ucDetail [data-ff="scribe_dictation"]'); s.value="off"; s.dispatchEvent(new Event("change"))`, /set-flag \{"uid":"u-pend","feature":"scribe_dictation","enabled":false\}/, "Turn a feature off for this account");
   await act(`var i=document.querySelector('#ucDetail [data-ul="maik"]'); i.value="20"; i.dispatchEvent(new Event("change"))`, /user-limit \{"email":"sravani\.ysn@gmail\.com","module":"maik","limit":20\}/, "Set this account's MaiK daily limit");
   await act(`document.getElementById("ucBudget").value="80000"; document.getElementById("ucBudgetSave").click()`, /set-budget \{"uid":"u-pend","tokens":80000\}/, "Set this account's monthly AI budget");
+  // Pro daily MaiK tokens for this account (owner, 2026-10-10)
+  ok(/MaiK tokens per day \(Pro\)/.test(await ev(`return document.getElementById("ucDetail").innerText`)), "the account shows its Pro daily MaiK tokens control");
+  ok(/Today: 12,000 of 20,000 \(app-wide\)/.test(await ev(`return document.getElementById("ucDetail").innerText`)), "with today's use against the app-wide allowance");
+  await act(`document.getElementById("ucProTok").value="60000"; document.getElementById("ucProTokSave").click()`, /POST \/api\/ai\/admin\/user-tokens \{"email":"sravani\.ysn@gmail\.com","tokens":60000\}/, "Raise this account's daily MaiK tokens");
+  await act(`document.getElementById("ucProTokUnl").click()`, /user-tokens \{"email":"sravani\.ysn@gmail\.com","tokens":"unlimited"\}/, "Unlimited for this account");
   // A failed change says WHY (owner, 2026-10-09: the pane showed only "Failed: 500").
   await ev(`window.__failBudget = true; document.getElementById("ucBudget").value="5000"; document.getElementById("ucBudgetSave").click(); return 1;`); await sleep(500);
   const fm = await ev(`return document.getElementById("ucActMsg").textContent`);
@@ -124,6 +132,14 @@ try {
   const dt = await ev(`return document.getElementById("ucDetail").innerText`);
   ok(/Could not read: profile \(fs_get 403\)/.test(dt) && !/Profile not filled in yet/.test(dt), "an unreadable profile is reported, not shown as empty");
   ok(!/—/.test(await ev(`return document.getElementById("pane-userctl").innerText`)), "no em dash on the pane");
+  // AI control: the app-wide Pro allowance, with what it costs on the live model
+  await ev(`document.querySelector('[data-p="aictl"]').click(); return 1;`); await sleep(700);
+  ok(/Now 20,000 a day/.test(await ev(`return document.getElementById("aicProTokCost").textContent`)), "AI control shows the Pro daily MaiK tokens now in force");
+  await ev(`var i=document.getElementById("aicProTok"); i.value="60000"; i.dispatchEvent(new Event("input")); return 1;`);
+  const cost = await ev(`return document.getElementById("aicProTokCost").textContent`);
+  ok(/60,000 tokens on gemini-3\.1-flash-lite: about Rs 3\.6 a day typical, at most Rs 8\.6/.test(cost), "and what a new number would cost: " + cost);
+  await act(`document.getElementById("aicProTokSave").click()`, /POST \/api\/ai\/admin\/pro-tokens \{"tokens":"60000"\}/, "Save the app-wide Pro allowance");
+  ok(/Saved/.test(await ev(`return document.getElementById("aicProTokMsg").textContent`)) && /Now 60,000 a day/.test(await ev(`return document.getElementById("aicProTokCost").textContent`)), "saved and now in force");
   await ev(`document.querySelector("#ucDetail .uc-sec:nth-of-type(3)").scrollIntoView(); return 1;`); await sleep(200);
   await call("Page.captureScreenshot", { format: "png" }).then(async (r) => { const { writeFile } = await import("node:fs/promises"); await writeFile((process.env.OUT || "/tmp") + "/userctl.png", Buffer.from(r.result.data, "base64")); });
 } catch (e) { console.log("❌ harness: " + e.message); fails++; }

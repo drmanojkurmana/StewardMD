@@ -17,7 +17,7 @@
 import { proFromRequest, proMessageFor, isReviewedAccount } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
-import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
+import { addAiSpend, getProDailyTokens, getUserProTokens } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
 import { bump, readDay, mergeCounters, MAIK_GROUPS, istDay } from "./_counters.js";
 import { verifiedClaimsFor, cfAccessEmail, verifiedEmailOf } from "./_fbauth.js";
 
@@ -30,6 +30,9 @@ export function usageConfig(env) {
     generalDaily: n("MAIK_GENERAL_DAILY_LIMIT", 60),
     caseDaily: n("MAIK_CASE_DAILY_LIMIT", 30),
     dailyTokens: n("MAIK_DAILY_TOKEN_LIMIT", 200000),
+    // Pro MaiK allowance per day (owner, 2026-10-10: "give every user who is pro 20K MaiK tokens per day",
+    // about Rs 10/day at most). Owners are exempt; MAIK_ENFORCE_CAPS "0" lifts it with the other caps.
+    proDailyTokens: n("MAIK_PRO_DAILY_TOKENS", 20000),
     monthlyTokens: n("MAIK_MONTHLY_TOKEN_LIMIT", 3000000),
     freeMonthlyTokens: n("MAIK_FREE_MONTHLY_TOKEN_LIMIT", 30000),   // non-Pro: ~one full case / month
     maxInputTokens: n("MAIK_MAX_INPUT_TOKENS", 4000),
@@ -149,6 +152,67 @@ export async function addDailyCostInr(env, day, inr) {
 // per-user caps later, set env MAIK_ENFORCE_CAPS="1" (no code change).
 function aiUnlimited(env) { try { return String(env && env.MAIK_ENFORCE_CAPS) !== "1"; } catch (e) { return true; } }
 
+/* What a signed-in Pro account sees on its AI Usage screen: the daily MaiK token allowance in force and
+ * today's use. SAME precedence as checkQuota: this account's own number (User control) > app-wide value
+ * (AI control) > env/default; -1 = unlimited; an owner is unlimited. null for a guest or a non-Pro
+ * account, which have no such allowance. deps lets tests inject the reads. */
+export async function proDailyTokensView(env, request, who, store, deps) {
+  deps = deps || {};
+  try {
+    const owner = await (deps.ownerOK || ownerOK)(request, env).catch(function () { return false; });
+    const pr = await (deps.proFromRequest || proFromRequest)(env, request).catch(function () { return null; });
+    if (!owner && !(pr && pr.pro && pr.uid)) return null;
+    let cap = usageConfig(env).proDailyTokens;
+    if (!owner && store) {
+      const g = await (deps.getProDailyTokens || getProDailyTokens)(store); if (g != null) cap = g;
+      const em = who && (who.accountEmail || who.email);
+      if (em) { const u = await (deps.getUserProTokens || getUserProTokens)(store, em); if (u != null) cap = u; }
+    }
+    let used = 0;
+    if (store && who && who.id) { const r = await readJson(store, "maik:u:" + who.id + ":" + dayKey(new Date())); used = (r && r.tokens) || 0; }
+    return { limit: owner ? -1 : cap, used: used, unlimited: owner || cap === -1, owner: !!owner };
+  } catch (e) { return null; }
+}
+
+/* The numbers the AI Usage screen shows, in ONE unit (MaiK Tokens = the same counter checkQuota enforces).
+ * Owner, 2026-10-10: "keep single MaiK Tokens, show weekly and per day tokens left, 300000 per month for Pro and
+ * 20K per day, reset every night". limit: -1 = unlimited, null = no such limit for this account.
+ * day = this IST day (resets at midnight), week = the last 7 IST days (used only), month = this calendar month. */
+const IST_MS = 19800000, DAY_MS = 86400000;
+export async function allowanceView(env, request, who, store, deps) {
+  deps = deps || {};
+  const now = deps.now || Date.now();
+  try {
+    const owner = await (deps.ownerOK || ownerOK)(request, env).catch(function () { return false; });
+    const pr = await (deps.proFromRequest || proFromRequest)(env, request).catch(function () { return null; });
+    const signedIn = !!(pr && pr.uid), isPro = !!(pr && pr.pro && pr.uid);
+    const cfg = usageConfig(env), id = who && who.id;
+    if (!id || !store) return null;
+    const month = new Date(now).toISOString().slice(0, 7);
+    const days = []; for (let i = 0; i < 7; i++) days.push(istDay(now - i * DAY_MS));
+    const [dayRecs, mrec] = await Promise.all([
+      Promise.all(days.map(function (d) { return readJson(store, "maik:u:" + id + ":" + d); })),
+      readJson(store, "maik:m:" + id + ":" + month),
+    ]);
+    const used = (dayRecs[0] && dayRecs[0].tokens) || 0;
+    const week = dayRecs.reduce(function (a, r) { return a + ((r && r.tokens) || 0); }, 0);
+    const mUsed = (mrec && mrec.tokens) || 0;
+    let dayLimit = null, monthLimit = null;
+    if (owner) { dayLimit = -1; monthLimit = -1; }
+    else if (signedIn) {
+      if (isPro) { const pv = await proDailyTokensView(env, request, who, store, deps); if (pv) dayLimit = pv.limit; }
+      let cap = null;
+      try { cap = await (deps.monthlyCapFor || monthlyCapFor)(env, pr.uid, isPro, !!(pr.claims && pr.claims.phoneVerified === true), month, { kv: store }); } catch (e) {}
+      monthLimit = cap != null ? cap : (isPro ? cfg.monthlyTokens : cfg.freeMonthlyTokens);
+    }
+    const nextMidnightIst = Math.floor((now + IST_MS) / DAY_MS) * DAY_MS + DAY_MS - IST_MS;
+    const d = new Date(now), nextMonth = Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1);
+    return { plan: owner ? "owner" : (isPro ? "pro" : (signedIn ? "free" : "guest")), signedIn: signedIn,
+      day: { limit: dayLimit, used: used }, week: { used: week }, month: { limit: monthLimit, used: mUsed },
+      resetsDayAt: nextMidnightIst, resetsMonthAt: nextMonth };
+  } catch (e) { return null; }
+}
+
 /* Pre-call gate. type ∈ general|case|intent|ocr|pdf|prep. Returns {ok} or {ok:false, reason, message}.
    Enforces: rate limit, per-user daily requests (by class), daily/monthly tokens, OCR/PDF
    quotas, and the global daily-cost circuit breaker. Fail-open when no KV. */
@@ -177,11 +241,13 @@ export async function checkQuota(env, request, type, opts) {
   const _gP = _tap("glob", readJson(store, "maik:global:" + _day0));
   const _boP = _tap("bud", _safe(function () { return store.get("ai:budget:daily"); }, null));
   const _d1P = _tap("d1", readDailyCostInr(env, _day0)).catch(function () { return null; });
+  const _ptP = _tap("ptok", _safe(function () { return getProDailyTokens(store); }, null));
   const who = await _whoP; const id = who.id;
   // per-user reads need the id, so they start now rather than after the global reads have finished
   const _lastP = _tap("rl", readJson(store, "maik:rl:" + id));
   const _uP = _tap("u", readJson(store, "maik:u:" + id + ":" + _day0));
   const _mP = _tap("m", readJson(store, "maik:m:" + id + ":" + _month0));
+  const _utP = _tap("utok", _safe(function () { return (who.accountEmail || who.email) ? getUserProTokens(store, who.accountEmail || who.email) : null; }, null));
   // Admin/owner exemption (owner Google login OR X-Admin-Token = UPDATES_ADMIN_TOKEN|VERIFY_ADMIN_TOKEN):
   // skip the per-USER throttles (rate limit, daily/monthly token caps, per-category request counts) so
   // internal benchmarking/eval isn't blocked by the tiny per-user beta caps. Cost is STILL metered and
@@ -194,8 +260,8 @@ export async function checkQuota(env, request, type, opts) {
   // allowance needs a verified MOBILE NUMBER; registration verification alone no longer grants it).
   // callerVerified is "a reviewed account" (verified doctor OR an approved student/intern), so an
   // approved trainee is never told to verify a registration they already had reviewed.
-  let isProCaller = true, callerUid = null, callerVerified = false, callerPhoneVerified = false;
-  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = isReviewedAccount(pr.claims); callerPhoneVerified = !!(pr.claims && pr.claims.phoneVerified === true); } } catch (e) {}
+  let isProCaller = true, callerUid = null, callerVerified = false, callerPhoneVerified = false, proSignedIn = false;
+  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; proSignedIn = !!(pr.pro && pr.uid); callerUid = pr.uid || null; callerVerified = isReviewedAccount(pr.claims); callerPhoneVerified = !!(pr.claims && pr.claims.phoneVerified === true); } } catch (e) {}
   const now = _now0, day = _day0, month = _month0;
   const QUOTA_MSG = "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.";
   const PHONE_MSG = "Verify your mobile number to unlock your free monthly MaiK allowance. It takes a minute and costs nothing.";
@@ -235,7 +301,18 @@ export async function checkQuota(env, request, type, opts) {
   // type "prep" (PrepNucleus decks) gets the breaker and the rate limit only: MaiK's per-user token
   // allowances do not govern it; prep has its own deck, call and token caps (PrepNucleus-LayerC 6.8).
   const _prep = type === "prep";
-  if (!exempt && !_prep && u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
+  // The Pro daily MaiK allowance. Owners (exempt) never meet it; the router pre-parse is not a question.
+  // Per account (User control) beats the app-wide value (AI Control Center, KV) beats env; -1 = unlimited.
+  let proCap = cfg.proDailyTokens;
+  { const gv = await _ptP; if (gv != null) proCap = gv; }
+  { const uv = await _utP; if (uv != null) proCap = uv; }
+  // For a signed-in Pro account the allowance the owner set IS the daily token limit: the generic
+  // per-user ceiling (MAIK_DAILY_TOKEN_LIMIT) must not quietly undercut "Unlimited" or a raised number.
+  const _dayCap = proSignedIn ? (proCap === -1 ? Infinity : Math.max(cfg.dailyTokens, proCap)) : cfg.dailyTokens;
+  if (!exempt && !_prep && u.tokens >= _dayCap) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
+  if (!exempt && proSignedIn && !_prep && type !== "router" && proCap !== -1 && u.tokens >= proCap) {
+    return { ok: false, reason: "pro-daily-tokens", message: "You've used today's " + Number(proCap).toLocaleString("en-IN") + " MaiK tokens. They reset at midnight. Clinical reasoning, calculators, and reference tools remain available.", id };
+  }
   let monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
   let budgetApplied = false;
   if (aiBudgetOn(env) && callerUid && !_prep) {
@@ -256,7 +333,7 @@ export async function checkQuota(env, request, type, opts) {
       const _r = callerVerified ? "verified-week-expired" : "unverified";
       return { ok: false, reason: _r, needsPro: true, verified: !!callerVerified, message: proMessageFor(_r), id };
     }
-    return { ok: false, reason: budgetApplied ? "over-budget" : "monthly-tokens", message: QUOTA_MSG, id };
+    return { ok: false, reason: budgetApplied ? "over-budget" : "monthly-tokens", message: "You've used this month's " + Number(monthlyCap).toLocaleString("en-IN") + " MaiK Tokens. They renew on the 1st. Clinical reasoning, calculators, and reference tools remain available.", id };
   }
   if (!exempt) {
     if (type === "general" || type === "intent") { const lim = who.guest ? cfg.guestDaily : cfg.generalDaily; if (u.general >= lim) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }

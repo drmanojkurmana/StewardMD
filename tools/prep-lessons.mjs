@@ -106,8 +106,12 @@ export function kbGrounding(docs, mod, o = {}) {
     if (words >= maxWords) break;
     // Sentences by scope-word hits (most first); a doc whose name matches the module keeps its other sentences after
     // those, the rest only the sentences that hit. Printed back in document order.
-    const named = isNamed(d);
-    const scored = d.text.map((t, i) => ({ t, i, h: normText(t).split(" ").filter((x) => tokSet.has(x)).length, n: t.split(/\s+/).length }))
+    // A named doc's first sentence is its summary (definition, who gets it, how common): it goes first. Repeated
+    // sentences (KB v2 restates the summary inside its pathway) are kept once, so they do not spend the budget twice.
+    // Before both, a grown KB doc pushed its own summary out of the 1,400-word cut (sample lesson, 2026-10-09).
+    const named = isNamed(d), seen = new Set();
+    const scored = d.text.map((t, i) => ({ t, i, k: normText(t).slice(0, 100), h: normText(t).split(" ").filter((x) => tokSet.has(x)).length, n: t.split(/\s+/).length }))
+      .filter((x) => !seen.has(x.k) && seen.add(x.k)).map((x) => (named && x.i === 0 ? { ...x, h: Infinity } : x))
       .filter((x) => x.h || named).sort((a, b) => b.h - a.h || a.i - b.i);
     let w = 0; const keep = [];
     for (const x of scored) { if (w + x.n > perDoc || words + w + x.n > maxWords) continue; keep.push(x); w += x.n; }
