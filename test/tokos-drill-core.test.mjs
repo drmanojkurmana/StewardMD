@@ -10,11 +10,10 @@ import { render, drillIds } from "../tools/tokos-build-drills.mjs";
 const require = createRequire(import.meta.url);
 const core = require("../tokos-models/drill-core.js");
 const read = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
-const IDS = ["breech", "cardiac", "cerclage", "collapse", "consent", "eclampsia", "ectopic", "endo", "fgr", "hrt", "hysfluid", "ovulation", "pmb", "pph", "pul", "shoulder", "steroids", "twins"];
-const LEVEL = { pph: "mbbs", eclampsia: "mbbs", shoulder: "mbbs", breech: "resident", twins: "resident", collapse: "resident",
-  hrt: "mbbs", ovulation: "mbbs", pmb: "mbbs", steroids: "mbbs", ectopic: "mbbs", endo: "resident", hysfluid: "resident", pul: "resident", cardiac: "resident", cerclage: "resident", consent: "resident", fgr: "resident" };
+const IDS = ["breech","cardiac","cerclage","collapse","consent","eclampsia","ectopic","endo","fgr","fibroid","hrt","hysfluid","mullerian","ovulation","pcos","pid","pmb","pph","pul","shoulder","steroids","twins"];
+const LEVEL = { breech: "resident", cardiac: "resident", cerclage: "resident", collapse: "resident", consent: "resident", eclampsia: "mbbs", ectopic: "mbbs", endo: "resident", fgr: "resident", fibroid: "mbbs", hrt: "mbbs", hysfluid: "resident", mullerian: "mbbs", ovulation: "mbbs", pcos: "mbbs", pid: "mbbs", pmb: "mbbs", pph: "mbbs", pul: "resident", shoulder: "mbbs", steroids: "mbbs", twins: "resident" };
 
-test("all eighteen drills exist and nothing else is in tokos/drill", () => assert.deepEqual(drillIds(), IDS));
+test("all drills exist and nothing else is in tokos/drill", () => assert.deepEqual(drillIds(), IDS));
 
 for (const id of IDS) {
   const data = JSON.parse(read(`tokos/drill/${id}.json`));

@@ -1022,3 +1022,106 @@ best way of learning."
   once (KB v2 #1414 grew breast_cancer.json past the 1,400-word cut). Node 22 (CI): server mocks in
   prep-nudges.test.mjs moved above the first test (a mock.module made while a test runs is undone with it); the sprint
   assertion only applies in IST. run-prep-ask-ui waits for the sheet's open animation before measuring.
+
+## Release-readiness round 2 (2026-10-10, branch `fix/prep-ready2`, prep46)
+- **Image items no longer give the answer away.** All 137 live image items (ss-radiology bank, overlay sets radnotes and
+  radmax3) were read with their images (OCR plus a visual pass). 47 stems were rewritten so they keep the clinical
+  context but no longer name or describe the answer finding (answer keys, options and explanations untouched; reviewed
+  stems kept privately in `~/prep-data/rad/ready2/stem-edits.json`, not in git). Two radnotes figures had the answer
+  burned in ("Acute SDH", "Target sign"): cleaned copies `img/radnotes/rn-n2-p090-3-nl.webp`, `rn-n2-p057-2-nl.webp`.
+  Image file names carried the diagnosis (`rad-moyamoya-pmc...webp`): ss-radiology **bank v11** = v10 with stems
+  edited and every image and scroll stack copied to neutral names (`v11/ss-radiology/img/i-<sha1 12>.webp`,
+  `stack/s-<sha1 8>/`). Radiology overlays move to **radnotes2** and **radmax4** (bare image names written out in full,
+  because the app resolves a bare name against `img/<set folder>/`). Tool: `tools/prep-item-edits.mjs`.
+- **Search covers overlay items.** Subject `search.json` files were built from the bank only, so radnotes, radmax and
+  medcov questions never matched. Rebuilt with overlay items (Radiology 3,963 -> 5,218 entries, Medicine +381,
+  ss-pulmonology +5) and published as `v5/<subject>/search-<sha256 8>.json`; the bundled subject `index.json` names it
+  (`search`), `prep.js searchFile` reads it (no name: `search.json`), the route accepts the name, and the old cached
+  copy is dropped. ss-radiology v11 ships its own `search.json`; no app path reads a v10/v11 manifest (a v11
+  manifest is on R2 anyway).
+- **Run-together words.** `tools/prep-spacing.mjs` (spaces only, both halves must be known words; brands, eponyms,
+  prefixes, ratios and units left alone; run-in statement lists "colourc) Gas" get their label space back). Applied to
+  bank v5 `exp`, `q` and `o`: 26,548 items in 887 module files (24,255 explanations, 2,372 stems, 88 option sets),
+  republished in place; `manifest.json` bytes changed for every touched subject so phones refetch cached modules.
+- **Flip cards.** WebKit painted the turned-away face mirrored through `backface-visibility`; faces now also go
+  transparent at the half-way point (opacity, so the back can take focus at once). Not yet seen on a real iPhone.
+- **Harness note.** The round-1 "app.js:19 TypeError" is the helper removing `#accountGate` before DOMContentLoaded,
+  not an app bug (the journey harness, which waits for load, sees no error).
+- **Lesson figures cut at the source.** Crack the Core (620 live figures) and radbook (581) lesson media checked for ink
+  or text touching the crop edge. 163 re-cropped from the private PDFs with a margin and shipped under new names
+  (`rb-ctc-<id>-m1.webp`, 4 at `-m2`, 10 radbook `-m1`), e.g. `rb-ctc-p0127-1-m1.webp` now reads "Pars Nervosa" and
+  "Jugular Spine". 133 changed lessons moved to a new revision path (`r` 3 or 4 in `v1/lessons/index.json`, files at
+  `v<r>/lessons/<key>.json`; a lesson file is cached for good under its path), spot-the-sign boxes remapped into the
+  new crops. Left: 142 drawings whose strokes run into the next drawing, 20 where the label sits under the scan's OCR
+  text, 9 still partly cut, notes 1 not checked (its PDF is not on this Mac). In 6 interactions the full printed label
+  the student must find is now visible (ctcbook-100001 s3, -150101 s1, -450501 s4, -600650 s0, radbook-141315 s2): owner
+  to decide. `tools/prep-ctc-figs.py grow_box` adds the margin on future runs; `tools/prep-radlx.mjs indexWith` keeps a
+  later revision. The radnotes and radmax cutters were not changed.
+
+## Quiet redesign (2026-10-10, branch `feat/prep-quiet-ui`, prep47)
+- Owner (iPhone screenshot, circled the glowing logo banner): "I don't want this glowing green, use dark green", plus the
+  full anti-AI-slop brief. Supersedes the look of Premium UI rounds 1 to 7 above (their behaviour notes still hold).
+- Tokens (prep.css `.pn-root` / `body.dark .pn-root`): dark bg `#071318`, card `#0D1D23`, s1 (elevated) `#12262D`,
+  s2 `#1B333B`, edge `#233840`, text `#F0F5F5`, mut `#9AAEB4`, accent `--pn-pri` `#42CDB5` (data, links, focus, meters
+  only); light bg `#F3F6F6`, card `#FFF`, s1 `#EDF2F2`, edge `#D8E1E3`, text `#0B1A1F`, mut `#4B5F66`, accent `#0E7C6B`.
+  One filled colour in both themes: `--pn-fill` `#0F5C52` (deep green, text `--pn-on-fill`), used by `.pn-btn.pri`, the
+  plan's Up next row, chosen chips, a selected option's letter. `--pn-pri-grad` is kept as an alias (solid), `--pn-glow`,
+  `--pn-aura`, `--pn-sh-hero` are `none`, `--pn-hero*` alias the card palette. Radii 4/8/10/12/16. `color-scheme` set.
+- Removed: painted sky (`.pn-sky`), brand banner (home), aurora, meteors/sparkles (`.pn-fx`), rotating light borders,
+  glass/backdrop blur, tile tilt and spotlight, gradient icon squircles (icons are neutral `--pn-s1` tiles), art on finish
+  cards, lobby, subject/module heads, hero bands (`hband` is a plain figure card), empty states, Pro, limit, plan and
+  readiness sheets, accuracy hero, battle VS (bolt flash hidden). Confetti and balloons are retired: `PREP_MOTION.confetti`
+  and `.balloons` are no-ops, `data-cele` stays as a marker and the milestone chip says it in words.
+- Header: `bar("PrepNucleus")` shows the mark at 24 px beside the name: `logo-icon-96.webp` (dark green) on light,
+  `logo-mark-dark-96.webp` (new, flat `#3DB8A4` recolour of the white mark) on dark (`.pn-lg-l` / `.pn-lg-d`).
+- Home order: readiness card (`heroHtml`: score/100 and days to the exam as figures, one accent bar, one line; no ring,
+  no chips), Today's plan with the first open task as the filled `.pl-upnext` row ("Up next"), Practise (Solve next, then
+  one grouped list; two columns inside the card from 700 px), Subjects (rows with a 3 px progress line; row cards from
+  700 px), Your progress (`PREP_PLAN.progressHtml`: streak, today, level + XP bar), the You group (My stats, Friends,
+  Accuracy, Settings), Compete, Pro. Section eyebrows (`.pn-eb`) are hidden except the date over Today's plan.
+- Scroll restore: home draws Solve next and the subject rows complete in the first paint when every index is cached
+  (`known` in `renderHome`), so a back to home lands where it was left (run-prep-feel-ui).
+- Motion left: screen slides, sheet spring, an 8 px rise of the feedback card with the haptic, meters filling once, the
+  readiness bar fill. No lift or shake on options, no counting numbers, no home stagger.
+- Tests changed on purpose: prep-app (no banner, the dark mark exists), run-prep-arena-ui (section order),
+  run-prep-ask-ui (no balloon layer), run-prep-ipad (list columns), run-prep-plan-ui ("Exam in 10 days").
+- Not changed: the "Share my progress" PNG (`drawCard` in prep-arena.js) still paints hero-dark and streak art.
+
+## Owner answer-key fixes (2026-10-10, branch `fix/prep-keyfix`, prep48)
+- The owner returned a corrected key for the 244 held/questioned items (radmax 57, depth 53, 3 live, medicine 46, Crack the
+  Core 85). His PDF's item labels were scrambled; entries were mapped by position and each mapping checked against the stem
+  (no mismatches). 211 applied, 33 held (image-dependent items, verdicts conditional on "verify before reuse", and keys that
+  contradict standard teaching). Per-item changelog, held list and edits: `~/prep-data/keyfix/` and
+  `gs://...-prep-batch/private/keyfix/2026-10-10/` (item text stays out of git).
+- Shipped under new paths: ss-radiology **bank v12** (v11 + 121 fixed items, 2 live items patched), overlay **radmax5**
+  (radmax4 + 42) and **medcov4** (medcov3 + 46); radiology and medicine `search-<hash>.json` rebuilt, overlay counts rerun.
+  Staging scripts: `$CLAUDE_JOB_DIR/tmp/keyfix/scripts/` (build, patch-repo, upload, verify), built from the live R2 copies.
+- `tools/prep-medcov.mjs` OUT_SET is medcov4, but its `assemble` does not rebuild the key-fix items: never re-upload medcov4
+  from an assemble run; a later medcov release starts from the live medcov4 files.
+
+## Apple redesign on the owner's palette (2026-10-10, branch `feat/prep-apple-ui`, prep49)
+- Owner after the quiet redesign: "Didn't like the UI. I want it lively, premium, without UI slop, classic Apple-like."
+  Palette he supplied: Pastel Amber `#EFC07B`, Prussian Blue `#0F3460`, Dark Navy `#16213E`, Midnight Blue `#1A1A2E`.
+  (His swatch image renders the amber tile pale green; the hex he wrote, `#EFC07B`, is what ships.) Supersedes the look
+  of the quiet redesign; its structure (home order, scroll restore, no celebrations, no banner) still holds.
+- Tokens (prep.css top): three layers. Primitives `--pn-c-*` (the four colours plus derived navy steps `#1F2B4D`,
+  `#29375E`, `#34446F`, Prussian-hi `#13396A`, amber-lo `#E2A957`, light paper `#F3F2EE` / `#EBE9E3` / `#DEDCD4`, ink
+  `#13203D` / `#556079`). Semantic tokens keep their old names so every prep-*.css file follows: dark bg Midnight, card
+  Dark Navy, s1 `#1F2B4D`, text `#F5F3EE`, mut `#A9B1C7`, `--pn-pri` amber; light bg `#F3F2EE`, white cards with a
+  two-layer navy-tinted shadow (`--pn-elev`) and no border (`--pn-card-edge` transparent), text `#13203D`, `--pn-pri`
+  Prussian. `--pn-fill` (primary action) is amber with Midnight ink (10:1) in both themes; amber never carries text on
+  light (1.7:1). New: `--pn-hero*` (Prussian moment surface, both themes), `--pn-sel-*` (selected chip: Prussian/white on
+  light, Prussian-hi/amber-ink on dark), `--pn-tile-*` (icon squircles), `--pn-info` (third data series), `--pn-disp`,
+  springs `--pn-spring-snap|soft|pop` (CSS `linear()` sampled from Apple response/damping 0.32/0.72, 0.4/1, 0.36/0.6).
+- Component layer: "Apple pass" section at the end of prep.css. Capsule buttons (50 px), capsule chips, iOS segmented
+  control (thumb + shadow), 16 px cards, 14 px options with a 2 px ring for chosen/right/wrong, 28 px sheet tops with a
+  grabber, 9 px icon squircles. Presses: scale .95/.98 in 90 ms, release on the snap spring. The answer badge and a done
+  plan tick land on the pop spring. Reduced motion: transforms dropped, fades kept.
+- Moment cards on Prussian with the amber figure/ring: readiness (`.pl-hero`, prep-plan.css), set finished (`.pn-score`),
+  lesson finish, cards finish (`.pk-end`), level card (`.pn-lvb`); they redefine the text/ring tokens locally.
+- Up next is a card row led by an amber start disc (CSS play glyph on `.pl-tick::after`), not a filled row.
+- Bar mark: flat amber `prep/art/logo-mark-amber-96.webp` on dark, flat Prussian `logo-mark-prussian-96.webp` on light
+  (alpha of the old flat mark). MaiK mark/wordmark untouched.
+- Share image (`drawCard`, prep-arena.js): Midnight page, amber mark, level on a Prussian card, amber streak words and
+  calendar steps, no painted art (hero-dark/streak webp no longer loaded).
+- Tests changed on purpose: prep-app (the amber and Prussian marks), run-prep-setup-ui (token prep49).

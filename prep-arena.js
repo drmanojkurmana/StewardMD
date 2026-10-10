@@ -563,40 +563,43 @@
      student's own counts from this phone; no name, email or ID. */
   function img(src) { return new Promise(function (res) { var i = new G.Image(); i.onload = function () { res(i); }; i.onerror = function () { res(null); }; i.src = src; }); }
   function rr(x, cx, y, w, h, r) { x.beginPath(); x.moveTo(cx + r, y); x.arcTo(cx + w, y, cx + w, y + h, r); x.arcTo(cx + w, y + h, cx, y + h, r); x.arcTo(cx, y + h, cx, y, r); x.arcTo(cx, y, cx + w, y, r); x.closePath(); }
+  // The share image (1080 x 1350) in the app's own system (2026-10-10, owner palette): a Midnight page, the amber mark
+  // and name, the level on a Prussian card with an amber bar, the streak as the large figure, the 12-week calendar in
+  // amber steps and three counts. Solid surfaces only: no painted art, no glow.
   function drawCard(s, td) {
     var W = 1080, HT = 1350, cv = G.document.createElement("canvas"); cv.width = W; cv.height = HT;
-    var x = cv.getContext("2d"), F = '-apple-system, "SF Pro Rounded", "Segoe UI", Roboto, sans-serif';
+    var x = cv.getContext("2d"), F = '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif';
     var cur = streakNow(s, td), tot = totals(s), lv = levelNow(s), cells = heatWeeks(s.days, td, 12), M = 84;
-    return Promise.all([img("/prep/art/hero-dark.webp"), img("/prep/art/streak.webp")]).then(function (im) {
-      var g = x.createLinearGradient(0, 0, W * 0.4, HT); g.addColorStop(0, "#0f4f4b"); g.addColorStop(0.55, "#0a2f30"); g.addColorStop(1, "#061a1e");
-      x.fillStyle = g; x.fillRect(0, 0, W, HT);
-      if (im[0]) x.drawImage(im[0], 0, 0, W, W * im[0].height / im[0].width);
-      var fade = x.createLinearGradient(0, 260, 0, 860); fade.addColorStop(0, "rgba(6,26,30,0)"); fade.addColorStop(1, "rgba(6,26,30,1)");
-      x.fillStyle = fade; x.fillRect(0, 260, W, 600); x.fillStyle = "#061a1e"; x.fillRect(0, 859, W, HT - 859);
-      x.fillStyle = "#9ff5e8"; x.font = "700 32px " + F; x.fillText("PREPNUCLEUS", M, 116);
-      if (im[1]) { x.save(); x.beginPath(); x.arc(W - 196, 352, 112, 0, Math.PI * 2); x.clip(); x.drawImage(im[1], W - 308, 240, 224, 224); x.restore();
-        x.beginPath(); x.arc(W - 196, 352, 112, 0, Math.PI * 2); x.strokeStyle = "rgba(255,195,92,.55)"; x.lineWidth = 4; x.stroke(); }
+    var INK = "#f5f3ee", MUT = "#a9b1c7", AMB = "#efc07b";
+    return img("/prep/art/logo-mark-amber-96.webp").then(function (mark) {
+      x.fillStyle = "#1a1a2e"; x.fillRect(0, 0, W, HT);
+      if (mark) x.drawImage(mark, M, 72, 60, 60);
+      x.fillStyle = INK; x.font = "650 38px " + F; x.fillText("PrepNucleus", M + (mark ? 80 : 0), 116);
+      // the level card
+      rr(x, M - 24, 176, W - 2 * M + 48, 300, 48); x.fillStyle = "#0f3460"; x.fill();
       if (lv) {
-        x.fillStyle = "#ffffff"; x.font = "800 96px " + F; x.fillText("Level " + lv.n, M, 470);
-        x.fillStyle = "#63f0db"; x.font = "700 46px " + F; x.fillText(lv.rank, M, 536);
-        rr(x, M, 576, W - 2 * M, 16, 8); x.fillStyle = "rgba(255,255,255,.14)"; x.fill();
-        rr(x, M, 576, Math.max(16, (W - 2 * M) * Math.max(0, Math.min(1, lv.p))), 16, 8); x.fillStyle = "#63f0db"; x.fill();
-      }
-      x.fillStyle = "#ffffff"; x.font = "800 150px " + F; x.fillText(String(cur), M, 776);
+        x.fillStyle = INK; x.font = "700 92px " + F; x.fillText("Level " + lv.n, M + 24, 300);
+        x.fillStyle = AMB; x.font = "600 44px " + F; x.fillText(lv.rank, M + 24, 366);
+        rr(x, M + 24, 410, W - 2 * M - 48, 16, 8); x.fillStyle = "rgba(255,255,255,.14)"; x.fill();
+        rr(x, M + 24, 410, Math.max(16, (W - 2 * M - 48) * Math.max(0, Math.min(1, lv.p))), 16, 8); x.fillStyle = AMB; x.fill();
+      } else { x.fillStyle = INK; x.font = "700 80px " + F; x.fillText("Getting started", M + 24, 350); }
+      // the streak
+      x.fillStyle = INK; x.font = "700 168px " + F; x.fillText(String(cur), M, 700);
       var sw = x.measureText(String(cur)).width;
-      x.fillStyle = "#ffc35c"; x.font = "700 44px " + F; x.fillText("day streak", M + sw + 24, 764);
-      var cw = 62, ch = 34, gx = M + (W - 2 * M - 12 * cw - 11 * 12) / 2, gy = 832;
+      x.fillStyle = AMB; x.font = "600 46px " + F; x.fillText("day streak", M + sw + 26, 688);
+      // twelve weeks, one cell a day
+      var cw = 62, ch = 34, gx = M + (W - 2 * M - 12 * cw - 11 * 12) / 2, gy = 770;
       cells.forEach(function (c, i) {
         if (c.n < 0) return;
-        rr(x, gx + Math.floor(i / 7) * (cw + 12), gy + (i % 7) * (ch + 8), cw, ch, 8);
-        x.fillStyle = ["rgba(255,255,255,.08)", "rgba(99,240,219,.3)", "rgba(99,240,219,.52)", "rgba(99,240,219,.76)", "#63f0db"][heatLevel(c.n)]; x.fill();
+        rr(x, gx + Math.floor(i / 7) * (cw + 12), gy + (i % 7) * (ch + 8), cw, ch, 9);
+        x.fillStyle = ["rgba(255,255,255,.07)", "rgba(239,192,123,.32)", "rgba(239,192,123,.56)", "rgba(239,192,123,.8)", AMB][heatLevel(c.n)]; x.fill();
       });
       [[H.fmt(tot.t), "answered"], [tot.pct + "%", "right"], [lv ? H.fmt(lv.xp) : "0", "XP"]].forEach(function (st, i) {
         var cx = M + i * ((W - 2 * M) / 3);
-        x.fillStyle = "#ffffff"; x.font = "800 64px " + F; x.fillText(st[0], cx, 1214);
-        x.fillStyle = "#b5dbd5"; x.font = "600 32px " + F; x.fillText(st[1], cx, 1258);
+        x.fillStyle = INK; x.font = "700 66px " + F; x.fillText(st[0], cx, 1196);
+        x.fillStyle = MUT; x.font = "600 32px " + F; x.fillText(st[1], cx, 1242);
       });
-      x.fillStyle = "rgba(181,219,213,.7)"; x.font = "600 28px " + F; x.fillText("StewardMD", M, 1312);
+      x.fillStyle = "#8c95ae"; x.font = "600 28px " + F; x.fillText("StewardMD", M, 1306);
       return cv;
     });
   }

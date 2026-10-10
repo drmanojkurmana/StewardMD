@@ -195,7 +195,8 @@ try {
   await shot("8-keys");
   await click("#smdPrep [data-act=l-next]");
   ok(await until(`return !!document.querySelector("#smdPrep .pn-lsn-fin");`, 3000), "Finish shows the finish screen");
-  ok(/\+60/.test(await ev(`return document.querySelector("#smdPrep .pn-lsn-xp").textContent;`)) && /2 of 3 answers right/.test(await ev(`return document.querySelector("#smdPrep .pn-lsn-fin").textContent;`)), "the finish: 5 steps x 10 XP + 2 right x 5 = +60, and the score line");
+  // the XP figure counts up on arrival, so wait for it to land
+  ok(await until(`return /\\+60/.test(document.querySelector("#smdPrep .pn-lsn-xp").textContent) && /2 of 3 answers right/.test(document.querySelector("#smdPrep .pn-lsn-fin").textContent);`, 3000), "the finish: 5 steps x 10 XP + 2 right x 5 = +60, and the score line");
   ok(await store(`s.ls["${KEY}"].done > 0 && s.ls["${KEY}"].xp === 60 && s.ls["${KEY}"].n === 7`) === true, "progress and XP kept under the lesson key");
   await shot("9-finish");
 

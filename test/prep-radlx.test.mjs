@@ -153,6 +153,11 @@ test("generator: indexWith marks revised lessons r 2", () => {
   assert.deepEqual(ix.modules.a, { title: "A", steps: 5, minutes: 7, set: "radbook", r: 2 });
   assert.deepEqual(ix.modules.b, live.modules.b); assert.equal(ix.modules.zz, undefined);
 });
+test("generator: indexWith never moves a lesson back from a later revision", () => {
+  const live = { v: 1, modules: { c: { title: "C", steps: 6, minutes: 5, set: "ctcbook", r: 3 } } };
+  const ix = X.indexWith(live, [{ id: "c", steps: [1, 2], minutes: 2 }]);
+  assert.deepEqual(ix.modules.c, live.modules.c);
+});
 test("generator: parseList reads the detection reply", () => {
   assert.deepEqual(X.parseList('```json\n[{"box_2d":[1,2,3,4],"label":"x"}]\n```'), [{ box_2d: [1, 2, 3, 4], label: "x" }]);
   assert.deepEqual(X.parseList('{"items":[{"label":"y"}]}'), [{ label: "y" }]);
