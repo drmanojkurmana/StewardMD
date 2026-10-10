@@ -1,0 +1,114 @@
+/* PrepNucleus floating tab bar (prep-nav.js). Its own file so the screens' CSS and the bar never edit the same lines.
+   One translucent capsule over the content, floating above the home indicator: a single backdrop-filter layer (blur,
+   saturate, brightness) over a theme tint, a 1 px specular rim, a static top sheen; Chromium adds the SVG lens
+   (.pnv-lens). The owner's palette: light = white glass on the warm paper with Prussian ink, dark = navy glass on
+   Midnight with light ink, the current tab in Prussian (light) / Pastel Amber (dark) on a glass pill.
+   Ink and tint were picked with PURE.worst (prep-nav.js): every label is at least 4.5:1 with the glass over white,
+   black, Midnight, Prussian, amber and paper. Owner exception 2026-10-10: this bar is Liquid Glass on purpose. */
+.pn-root {
+  --pnv-h: 64px;
+  --pnv-b: max(12px, calc(env(safe-area-inset-bottom, 0px) - 8px));
+  --pnv-tint: rgba(255, 255, 255, .72);
+  --pnv-ink: #2a3654; --pnv-on: var(--pn-c-prussian);
+  --pnv-pill: rgba(239, 192, 123, .5);
+  --pnv-rim: rgba(255, 255, 255, .7); --pnv-rim-lo: rgba(19, 32, 61, .08);
+  --pnv-sheen: rgba(255, 255, 255, .5);
+  --pnv-shadow: 0 1px 2px rgba(19, 32, 61, .08), 0 12px 30px -14px rgba(15, 52, 96, .42);
+  --pnv-pill-rim: rgba(255, 255, 255, .75);
+  --pnv-blur: blur(16px) saturate(180%) brightness(1.06);
+  --pnv-lensf: blur(4px) url(#pnvLens) saturate(170%) brightness(1.05);
+}
+body.dark .pn-root {
+  --pnv-tint: rgba(22, 33, 62, .82);
+  --pnv-ink: #e4e7ef; --pnv-on: var(--pn-c-amber);
+  --pnv-pill: rgba(15, 52, 96, .9);
+  --pnv-rim: rgba(255, 255, 255, .16); --pnv-rim-lo: rgba(0, 0, 0, .25);
+  --pnv-sheen: rgba(255, 255, 255, .1);
+  --pnv-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 14px 32px -12px rgba(0, 0, 0, .6);
+  --pnv-pill-rim: rgba(255, 255, 255, .14);
+  --pnv-blur: blur(16px) saturate(160%) brightness(1.1);
+  --pnv-lensf: blur(4px) url(#pnvLens) saturate(150%) brightness(1.1);
+}
+
+/* While the bar shows, the scrolling body ends above it, and the home bar's Menu button steps aside (You is that
+   screen). visibility keeps the bar's layout symmetric (the close button on the left). */
+.pn-root.pn-navon > .pn-body { padding-bottom: calc(var(--pnv-h) + var(--pnv-b) + 28px); scroll-padding-bottom: calc(var(--pnv-h) + var(--pnv-b) + 16px); }
+.pn-root.pn-navon > .pn-bar-brand > .pn-ib[data-act="menu"] { visibility: hidden; }
+
+.pn-root .pnv {
+  position: absolute; z-index: 4; left: 0; right: 0; bottom: var(--pnv-b);
+  width: min(420px, calc(100% - 32px)); height: var(--pnv-h); margin: 0 auto; padding: 5px;
+  border-radius: 999px; isolation: isolate; overflow: hidden;
+  background: var(--pnv-tint);
+  -webkit-backdrop-filter: var(--pnv-blur); backdrop-filter: var(--pnv-blur);
+  box-shadow: inset 0 1px 0 var(--pnv-rim), inset 0 0 0 1px var(--pnv-rim-lo), var(--pnv-shadow);
+  transform: translate3d(0, 0, 0);
+  transition: transform var(--pn-d-snap) var(--pn-spring-soft), visibility 0s linear 0s;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; touch-action: manipulation;
+}
+/* Chromium: a light frost, then the lens bends the backdrop under the rim (blur first: a blur after the url() step is
+   dropped by Chrome, and a heavy frost would leave nothing for the lens to bend). WebKit never gets the url() value. */
+.pn-root .pnv.pnv-lens { backdrop-filter: var(--pnv-lensf); }
+.pn-root .pnv.pnv-off {
+  transform: translate3d(0, calc(100% + var(--pnv-b) + 24px), 0);
+  visibility: hidden; pointer-events: none;
+  transition: transform 260ms var(--pn-ease), visibility 0s linear 260ms;
+}
+.pn-root .pnv-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* The light falls from above: a soft sheen on the top half of the glass, painted once (no animation). */
+.pn-root .pnv-sheen { position: absolute; inset: 0 0 50% 0; z-index: 0; border-radius: 999px 999px 0 0; pointer-events: none;
+  background: linear-gradient(180deg, var(--pnv-sheen), transparent); opacity: .7; }
+
+/* The pill: one tab wide, moved by transform only, on the soft spring (a retarget starts from where it is). */
+.pn-root .pnv-pill { position: absolute; z-index: 1; top: 5px; bottom: 5px; left: 5px; width: calc((100% - 10px) / var(--n, 4)); pointer-events: none;
+  transition: transform var(--pn-d-soft) var(--pn-spring-snap); will-change: transform; }
+.pn-root .pnv-drop { position: absolute; inset: 0; border-radius: 999px; background: var(--pnv-pill);
+  box-shadow: inset 0 1px 0 var(--pnv-pill-rim), inset 0 0 0 .5px var(--pnv-rim-lo), 0 2px 8px -4px rgba(15, 52, 96, .35);
+  transition: transform var(--pn-d-snap) var(--pn-spring-snap); }
+/* While it travels the drop stretches along the path and settles back on the spring. */
+.pn-root .pnv-drop.pnv-mv { transform: scale(1.14, .88); transition: transform 120ms var(--pn-ease); }
+
+.pn-root .pnv-tabs { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); height: 100%; }
+.pn-root .pnv-tab { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-width: 44px; min-height: 44px; height: 100%; padding: 0 2px; border: 0; border-radius: 999px; background: none;
+  color: var(--pnv-ink); -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.pn-root .pnv-ic { display: inline-flex; transition: transform var(--pn-d-snap) var(--pn-spring-snap); }
+.pn-root .pnv-ic svg { display: block; }
+.pn-root .pnv-ic .f { fill: currentColor; fill-opacity: 0; transition: fill-opacity var(--pn-d-quick) ease; }
+.pn-root .pnv-l { max-width: 100%; overflow: hidden; text-overflow: ellipsis; font-size: 12px; line-height: 14px; font-weight: 560; letter-spacing: .005em; white-space: nowrap; }
+.pn-root .pnv-tab.on { color: var(--pnv-on); }
+.pn-root .pnv-tab.on .pnv-l { font-weight: 700; }
+.pn-root .pnv-tab.on .pnv-ic { transform: scale(1.06); }
+.pn-root .pnv-tab.on .pnv-ic .f { fill-opacity: .2; }
+/* Press: the icon sinks on touch-down and comes back on the snap spring. */
+.pn-root .pnv-tab:active .pnv-ic { transform: scale(.86); transition-duration: var(--pn-d-press); transition-timing-function: var(--pn-ease); }
+.pn-root .pnv-tab:focus-visible { outline: 2px solid var(--pnv-on); outline-offset: -3px; }
+@media (hover: hover) and (pointer: fine) {
+  .pn-root .pnv-tab:not(.on):hover { color: var(--pn-text); }
+}
+
+/* Reduced motion: the bar and the pill change place without travelling; no stretch, no press scale. */
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pnv, .pn-root .pnv.pnv-off { transition: visibility 0s; }
+  .pn-root .pnv.pnv-off { transform: translate3d(0, calc(100% + var(--pnv-b) + 24px), 0); }
+  .pn-root .pnv-pill, .pn-root .pnv-drop, .pn-root .pnv-ic { transition: none; }
+  .pn-root .pnv-drop.pnv-mv, .pn-root .pnv-tab:active .pnv-ic, .pn-root .pnv-tab.on .pnv-ic { transform: none; }
+}
+/* Reduced transparency or more contrast: a solid bar in the card colour with a hairline, no blur, no sheen, no lens. */
+@media (prefers-reduced-transparency: reduce) {
+  .pn-root .pnv, .pn-root .pnv.pnv-lens { background: var(--pn-card); -webkit-backdrop-filter: none; backdrop-filter: none;
+    box-shadow: inset 0 0 0 1px var(--pn-edge), var(--pnv-shadow); }
+  .pn-root .pnv-sheen { display: none; }
+  .pn-root .pnv-drop { background: var(--pn-pri-soft); box-shadow: none; }
+  .pn-root .pnv-tab.on { color: var(--pn-pri-ink); }
+}
+@media (prefers-contrast: more) {
+  .pn-root .pnv, .pn-root .pnv.pnv-lens { background: var(--pn-card); -webkit-backdrop-filter: none; backdrop-filter: none;
+    box-shadow: inset 0 0 0 1.5px var(--pn-text), var(--pnv-shadow); }
+  .pn-root .pnv-sheen { display: none; }
+  .pn-root .pnv-drop { background: var(--pn-pri-soft); box-shadow: inset 0 0 0 1px var(--pn-text); }
+  .pn-root .pnv-tab { color: var(--pn-text); }
+  .pn-root .pnv-tab.on { color: var(--pn-pri-ink); }
+}
+/* Learn (prep-nav.js): the subject rows carry the subject's icon like the module timeline. */
+.pn-root .pn-learn .pn-ri svg { width: 20px; height: 20px; }

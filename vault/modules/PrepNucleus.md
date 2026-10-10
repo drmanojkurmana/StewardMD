@@ -1191,7 +1191,8 @@ best way of learning."
   module accuracies, 5+ answers each, at least 5 modules; `selfShare`). No peer data exists, so none is shown.
 - Review list rows carry a status number disc. Primary buttons get one specular sheen per press; Solve next, QOTD,
   tiles and Up next light from the press point (SpotlightCard).
-- Not done on purpose: floating bottom tab bar (PrepNucleus has no tabs; a fake one would duplicate rows), per-option
+- Not done on purpose: floating bottom tab bar (PrepNucleus has no tabs; a fake one would duplicate rows; superseded by the
+  owner's glass tab bar, prep54, below), per-option
   % of other students on review (no such data).
 - Perf (Chrome trace, 390x844 DPR 3, 4x CPU throttle): ~22 draws/s, 0.7 ms per draw on the main thread (~1.6%),
   GPU process +2.5 points over Tide off.
@@ -1200,3 +1201,44 @@ best way of learning."
 
 ## Footer fix 2026-10-10 (prep53)
 Feedback screen "Next question" was a sticky row with `bottom:10px` inside the body's 36px bottom padding and only a gradient behind it, so explanation text scrolled through a ~48px band under the button. Now the run body drops its bottom padding (`.pn-run:has(> .pn-qw > .pn-fb + .pn-navrow)`), the row is sticky `bottom:0` with safe-area padding, and its `::before` is an opaque `--pn-bg` plate with a hairline top border (no gradient). Test: `test/run-prep-footer-ui.mjs` (WebKit, 390/430/820/1180, light+dark). Other floating actions (plan sheet `.pn-sheet-act`, create `.pc-pgfoot`, setup `.su-act`, flash `.pk-bar`, lesson bar) already reach the bottom edge with a fade above; unchanged.
+
+## Floating glass tab bar (2026-10-10, branch `feat/prep-glassbar`, prep54)
+- Owner: "a floating liquid glass menu bar at the footer, more user friendly, accessible in the home screen". Explicit
+  exception to the no-glass rule for this bar only. Marrow's pill bar was a structure reference only.
+- Files: `prep-nav.js` (`window.PREP_NAV`: `attach(root, host)` in `open()`, `sync(root)` at the end of every `paint()`,
+  `detach()` in `close()`, `act()` for `n-*` data-acts, `_pure` for tests) and `prep-nav.css`; both optional in
+  prep-loader.js (a 404 changes nothing). prep.js: `HOST.screens = { mocks, menu }`, body markers `pn-mocks`, `pn-mtl`,
+  `pn-bml`, `pn-dll`; renderMocks shows the PYQ row on top for NEET-PG.
+- Tabs (all real features): Home (renderHome), Learn (new hub in prep-nav.js: every subject of the exam with lessons,
+  counts and "finished", plus up to 3 lessons in progress; rows use the existing `l-subject` / `l-open` actions; left out
+  when prep-lessons.js is missing), Tests (renderMocks), You (renderMenu). The home bar's Menu button is hidden
+  (`visibility`) while the bar shows.
+- Navigation: a tab sets the stack to `[home]` or `[home, root]` (Android back from a tab goes home), cross-fade (nav 0).
+  Current tab = nearest tab root down the stack. Tapping the current tab pops to its root (back slide); at the root it
+  scrolls to the top. Each tab root keeps its scroll (`tabY`). Focus returns to the pressed tab after a keyboard switch.
+- Shows only on browse screens (`SCREENS`: home, Learn, menu, mocks, subject, module (`#pnModPanel`), a subject's
+  lessons, PYQ papers, mistakes, bookmarks, downloads). Hidden (slides down, `inert`, `aria-hidden`) everywhere else and
+  while a sheet / zoom / viewer / dialog is a child of `#smdPrep` (MutationObserver on its children only) or an input in
+  PrepNucleus has focus (keyboard). So it never shares the bottom with the runner's "Next question" footer.
+- The bar is a `<nav aria-label="PrepNucleus">` inside the `#smdPrep` dialog (outside it VoiceOver would not reach it). A
+  full paint (`root.innerHTML`) detaches it; `sync` re-appends the same node; a patch skips it (`__pnKeep`).
+- Glass: one element, one backdrop-filter. WebKit/iOS and Firefox: `blur(16px) saturate brightness` over a tint
+  (light white .72, dark navy .82). Chromium (Android WebView): `blur(4px) url(#pnvLens) saturate brightness`, the lens
+  an SVG feDisplacementMap whose map (R/G ramps, neutral capsule inside, 13 px rim) is rebuilt by ResizeObserver only.
+  Gotchas found: a CSS blur placed AFTER url() is dropped by Chrome (content showed sharp), and percentage feImage/filter
+  sizes resolve against the wrong box in a backdrop filter (whole backdrop shifted and mirrored), so sizes are user-space
+  px. Playwright's chromium-headless-shell renders backdrop filters wrongly and Playwright WebKit on macOS paints none:
+  judge glass only in Google Chrome (`CHROME=`); WebKit screenshots show the tint alone (worst case, still legible).
+- Ink: light `#2a3654`, current Prussian on an amber pill (.5); dark `#e4e7ef`, current amber on a Prussian pill (.9).
+  `PURE.worst` checks >= 4.5:1 over white, black, Midnight, Navy, Prussian, amber, paper and ink (test reads the CSS).
+- Motion: pill = transform on the soft spring (retargets mid-flight), drop stretches 1.14/.88 while travelling, icon
+  sinks .86 on press; reduced motion = no travel, no stretch, no press scale. Reduced transparency / more contrast =
+  solid card bar with a hairline. Haptic: `data-tgl` -> haptics.js selection tick (native only).
+- Body padding while shown: bar 64 + float `max(12px, safe-bottom - 8px)` + 28 px; scroll-padding for focus.
+- Perf (Google Chrome, 390x844 DPR 3, 4x CPU throttle, 4 s of per-frame scrolling): 60 fps in all three; renderer main
+  1,118 ms (bar off) / 1,130 (frost) / 1,151 (lens), GPU main 393 / 408 / 418 ms, Paint 186 / 179 / 182 ms (the
+  bar never repaints the scroll content), worst frame 17 / 20 / 19 ms.
+- Tests: `test/prep-nav.test.mjs` (pure rules, contrast from the CSS, lens UA gate, wiring), headless
+  `test/run-prep-nav-ui.mjs` (Chromium via `CHROME=` and WebKit; SHOTS=<dir>, REAL=1 for real content via a read-only
+  /api/prep/bank proxy). Token-only change: run-prep-setup-ui (prep54).
+- Not verified: a real iPhone (WKWebView blur, safe-area float, keyboard) and a real Android WebView (lens).
