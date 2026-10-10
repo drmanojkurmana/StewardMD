@@ -1198,7 +1198,10 @@ best way of learning."
 - Tests changed on purpose: run-prep-ipad (subject tiles per row), run-prep-setup-ui (token prep52); new prep-app tests
   (dayHash, selfShare, Tide wiring).
 
-## Ask MaiK chat rework: fits the screen, answers like a chatbot, online 10 / phone unlimited (2026-10-10, branch `prep-ask-chat`, prep53)
+## Footer fix 2026-10-10 (prep53)
+Feedback screen "Next question" was a sticky row with `bottom:10px` inside the body's 36px bottom padding and only a gradient behind it, so explanation text scrolled through a ~48px band under the button. Now the run body drops its bottom padding (`.pn-run:has(> .pn-qw > .pn-fb + .pn-navrow)`), the row is sticky `bottom:0` with safe-area padding, and its `::before` is an opaque `--pn-bg` plate with a hairline top border (no gradient). Test: `test/run-prep-footer-ui.mjs` (WebKit, 390/430/820/1180, light+dark). Other floating actions (plan sheet `.pn-sheet-act`, create `.pc-pgfoot`, setup `.su-act`, flash `.pk-bar`, lesson bar) already reach the bottom edge with a fade above; unchanged.
+
+## Ask MaiK chat rework: fits the screen, answers like a chatbot, online 10 / phone unlimited (2026-10-10, branch `prep-ask-chat`, prep54)
 Owner (iPhone recording): "chat screen is hard, make it fit the screen, keep it sliding type only, pulled up on pressing
 Ask MaiK, and it doesn't answer like a chatbot ... MaiK offline can have unlimited questions. Online it's 10 max."
 - **Why it echoed.** Every follow-up went out with CHAT_SYSTEM "answer using ONLY the facts in the GROUNDING ... if not
