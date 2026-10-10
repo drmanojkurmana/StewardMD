@@ -1429,7 +1429,7 @@
     }).join("");
     else segs = '<i class="fill" style="transform:scaleX(' + (done / n).toFixed(3) + ')"></i>';
     return '<div class="pn-qprog' + (n > 30 ? " long" : "") + '"><div class="pn-qseg" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="' + n + '" aria-valuenow="' + done + '">' + segs + "</div>" +
-      (sk >= 3 ? '<span class="pn-streak" data-n="' + sk + '">' + ico("bolt", true) + sk + " in a row</span>" : "") + "</div>";
+      (sk >= 3 ? '<span class="pn-streak" data-n="' + sk + '">' + ico("bolt", true) + sk + " in a row</span>" : "") + (r.qc && r.qc.used ? clockHtml(r) : "") + "</div>";
   }
   // Timed mode: the clock sits in a pace ring that empties over this question's share of the time (limit / questions).
   // Per question: the ring empties over this question's own budget from where it stands, and holds still while the
@@ -1488,7 +1488,8 @@
     var IDS = !own && G.PREP_IDS ? G.PREP_IDS : null, qid = IDS ? IDS.ofItem(it) : null;
     var acts = (qid ? IDS.shareBtn(qid) : "") + (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
       (shown && !own ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
-    var clk = r.limit || r.qsec ? clockHtml(r) : "";
+    // A clock per question shows its figure in the progress row, at the end of the line (the bar keeps the title room).
+    var clk = r.limit || r.qsec ? (r.qc && r.qc.used ? "" : clockHtml(r)) : "";
     var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
     var fb = "", revealFb = false;
     if (shown) {

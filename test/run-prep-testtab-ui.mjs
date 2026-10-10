@@ -121,7 +121,6 @@ async function assertions(engine) {
     t = await page.evaluate(() => ({ tiles: [].map.call(document.querySelectorAll("#pnTests #pnGrid .pn-tile"), (b) => b.getAttribute("data-s")), want: PREP._host.subjectsOf(PREP._st.store.exam).map((s) => s.id), rows: ["custom", "bookmarks", "mistakes"].every((a) => !!document.querySelector('#pnTests [data-act="' + a + '"]')), ring: !!document.querySelector("#pnTests .pn-tile .pn-disc"), sum: document.getElementById("pnQbS").textContent, tt: localStorage.getItem("smd_prep_tt") }));
     ok(t.tiles.join() === t.want.join() && t.tiles.length === homeTiles, E + "QBank lists every subject of the exam, as many as Home: " + t.tiles.join());
     ok(t.rows && t.ring && /MCQs/.test(t.sum) && t.tt === "qbank", E + "Custom module, Bookmarks, My mistakes; the same ringed tiles; a summary; remembered: " + t.sum);
-    if (SHOTS) await page.screenshot({ path: join(SHOTS, engine + "-qbank-probe.png") });
     await tab(page, "home"); await until(page, () => !!document.querySelector("#pnHome"));
     await tab(page, "tests");
     ok(await until(page, () => !!document.querySelector("#pnTests.pn-qbank")), E + "back on the Tests tab: QBank is still chosen");
@@ -174,7 +173,7 @@ async function assertions(engine) {
     await tap(page, "#pnModPanel [data-act=start][data-k=study]"); await sheetReady(page);
     for (let k = 0; k < 6; k++) await tap(page, "#pnSetup [data-act=su-qinc]");
     sh = await page.evaluate(() => ({ qs: document.querySelector("#pnSetup .su-qsrow .su-sv").textContent, dis: document.querySelector("#pnSetup [data-act=su-qinc]").disabled, note: document.querySelector("#pnSetup .su-tnote").textContent, st: document.getElementById("suStatus").textContent }));
-    ok(sh.qs === "100 s" && sh.dis && /last 20 s/.test(sh.note) && /100 s each/.test(sh.st), E + "seconds go up to 100 and stop; red in the last 20 s: " + JSON.stringify(sh));
+    ok(sh.qs === "100 s" && sh.dis && /last 20\ss/.test(sh.note) && /100\ss each/.test(sh.st), E + "seconds go up to 100 and stop; red in the last 20 s: " + JSON.stringify(sh));
     await tap(page, '#pnSetup .su-mc[data-v="exam"]');
     ok(await page.evaluate(() => /Start test/.test(document.getElementById("suGo").textContent) && /test moves on/.test(document.querySelector("#pnSetup .su-tnote").textContent)), E + "Test Mode: Start test; the note says what happens at 0");
     await tap(page, "#pnSetup .su-sw");
@@ -186,7 +185,7 @@ async function assertions(engine) {
     for (let k = 0; k < 4; k++) await tap(page, "#pnSetup [data-act=su-qdec]");
     ok(await page.evaluate(() => document.querySelector("#pnSetup .su-qsrow .su-sv").textContent) === "60 s", E + "back to 60 s");
     await tap(page, '#pnSetup [data-act=su-n][data-v="10"]');
-    if (SHOTS) await shotsAll(engine, "sheet", async (p) => { await p.evaluate(() => PREP.open({ query: "brachial plexus" })); await sheetReady(p); });
+    if (SHOTS) await shotsAll(engine, "sheet", async (p) => { await p.evaluate(() => { PREP.close(); PREP.open({ query: "brachial plexus" }); }); await sheetReady(p); });
 
     // ---- 4. Learning Mode
     await tap(page, "#suGo");
@@ -298,7 +297,7 @@ async function shotsAll(engine, name, prep) {
   }
 }
 async function startSet(p, mode, qs) {
-  await p.evaluate(() => PREP.open({ query: "brachial plexus" })); await sheetReady(p);
+  await p.evaluate(() => { PREP.close(); PREP.open({ query: "brachial plexus" }); }); await sheetReady(p);
   if (mode === "exam") await tap(p, '#pnSetup .su-mc[data-v="exam"]');
   await tap(p, "#suGo"); await until(p, () => !!document.querySelector("#smdPrep .pn-q"));
 }

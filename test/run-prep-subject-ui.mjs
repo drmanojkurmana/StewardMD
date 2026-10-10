@@ -160,7 +160,8 @@ try {
     await click(`#smdPrep .pn-mod[data-m="srd-abd-liver"]`);
     ok(await until(`var h=document.querySelector("#smdPrep #pnLsnSlot .pn-lsn-h"); return !!h && /Learn/.test(h.textContent) && !!document.querySelector("#smdPrep #pnLsnSlot [data-act=l-open]");`, 6000), "the module screen shows Learn with its lesson" + at);
     await shot(tag, "module");
-    await ev(`PREP.back(); return 1;`); await sleep(200);
+    // prep60: a module opens with the mode sheet over it; back closes the sheet, then the module.
+    for (let k = 0; k < 3 && !(await ev(`return !!document.querySelector('#smdPrep .pn-mod[data-m="srd-neuro-vascular"]');`)); k++) { await ev(`PREP.back(); return 1;`); await sleep(250); }
     await click(`#smdPrep .pn-mod[data-m="srd-neuro-vascular"]`);
     await until(`return !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 6000); await sleep(400);
     ok(await ev(`return !document.querySelector("#smdPrep #pnLsnSlot .pn-lsn-h");`) === true, "a module with no lesson shows no Learn" + at);

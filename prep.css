@@ -1618,8 +1618,8 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
   transition: background-color var(--pn-d-base) ease; }
 .pn-root .pn-tl[data-lvl="mid"] .pn-tl-f { background: var(--pn-warn); }
 .pn-root .pn-tl[data-lvl="low"] .pn-tl-f, .pn-root .pn-tl[data-lvl="out"] .pn-tl-f { background: var(--pn-bad); }
-.pn-root .pn-qck { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 5px; min-width: 64px; min-height: 44px; justify-content: center; padding: 0 6px;
-  color: var(--pn-text); font-family: var(--pn-num); font-size: 16px; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -.005em; transition: color var(--pn-d-base) ease; }
+.pn-root .pn-qck { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px; min-width: 56px; justify-content: flex-end; padding: 0;
+  color: var(--pn-text); font-family: var(--pn-num); font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -.005em; transition: color var(--pn-d-base) ease; }
 .pn-root .pn-qck svg { color: var(--pn-mut); transition: color var(--pn-d-base) ease; }
 .pn-root .pn-qck[data-lvl="low"], .pn-root .pn-qck[data-lvl="out"], .pn-root .pn-qck[data-lvl="low"] svg, .pn-root .pn-qck[data-lvl="out"] svg { color: var(--pn-bad); }
 .pn-root .pn-qck[data-lvl="mid"] svg { color: var(--pn-warn); }

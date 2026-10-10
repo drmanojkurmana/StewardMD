@@ -193,7 +193,10 @@ async function assertions(engine) {
     ok(s.cur === "home" && !s.off, E + "the subject keeps the bar with Home current");
     await until(page, () => !!document.querySelector("#pnSub [data-act=module][data-m=ana-brachial-plexus]"), 8000);
     await page.evaluate(() => document.querySelector("#pnSub [data-act=module][data-m=ana-brachial-plexus]").click());
-    ok(await until(page, () => !!document.querySelector("#pnModPanel"), 8000) && !(await navState(page)).off, E + "the module screen keeps the bar");
+    // prep60: opening a module asks how to practise (the mode sheet over the module hides the bar); closed, the bar is back.
+    ok(await until(page, () => !!document.querySelector("#pnModPanel") && !!document.querySelector("#smdPrep > .pn-sheet-wrap#pnSetup"), 8000) && (await navState(page)).off, E + "opening a module shows the mode sheet, the bar steps aside");
+    await page.evaluate(() => PREP.back());
+    ok(await until(page, () => !document.getElementById("pnSetup") && !!document.querySelector("#pnModPanel") && !document.querySelector("#smdPrep > nav.pnv.pnv-off"), 8000), E + "the module screen keeps the bar");
     // ---- hidden in the setup sheet and the runner
     await page.evaluate(() => document.querySelector("#smdPrep [data-act=start][data-k=study]").click());
     const sheetUp = await until(page, () => !!document.querySelector("#smdPrep > .pn-sheet-wrap"), 8000);

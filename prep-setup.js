@@ -8,12 +8,16 @@
      How many        10 / 20 / 30 / 50, or a custom count (stepper), never more than the pool
      New or repeat   New / Incorrect before / Bookmarked / Due for review / All / Mix
      Difficulty      Easy / Moderate / Hard / Very hard / Mix (item.d 1, 2, 3, 4; Mix keeps the pool's own spread)
-     Mode            Practice (marked at once) / Timed test
-     Timer           Off / Per question (30, 45, 60, 90 s or custom) / Whole set (exam pace, 1 min a question, or custom
-                     minutes). Per question: a timed test moves on when the time is up (the question stays unanswered);
-                     practice only shows the ring. A timed test always has a clock (Off is not offered there).
+     Mode            Learning Mode (each answer explained before the next) / Test Mode (marked at the end); two cards
+     Timer           A switch, on by default; Each question (60 s by default, 30, 45, 60 to 100 s) or Whole set (exam
+                     pace, 1 min a question, or minutes). At 0 a Test Mode question is left unanswered and the test moves
+                     on (after the last one it is marked); a Learning Mode question shows its answer and waits for Next.
+                     Off: no clock (a Test Mode set is then untimed).
+   The sheet (2026-10-10, "How do you want to practise?"): mode cards, the timer box, the count, then the type, repeat
+   and difficulty rows behind one "Filter questions" row (open when any of them is not the default), and one Start.
    Every option shows how many questions it leaves, live. The last choice is remembered per scope (localStorage
-   smd_prep_setup, "<kind>:<id>" then "<kind>"). An empty pool says which filter to relax.
+   smd_prep_setup, "<kind>:<id>" then "<kind>"); the mode and the timer come from "*", the last choice anywhere on this
+   device. Saved version 1 choices migrate on read (migrate()). An empty pool says which filter to relax.
 
    Image-based: the item has an image placed with the stem (img + imgPlace "stem"); a previous-year item with an image
    counts too. Clinical scenario or one-liner: stemKind() below, cached on the item as _k.
@@ -382,22 +386,23 @@
      choice. What happens at 0 depends on the mode, so the note says it. */
   function timerHtml(sel, n) {
     var t = timerOf(sel), on = t !== "off", m = sel.mins || Math.max(1, n || sel.n);
-    var sub = !on ? "Off. Take your time." : t === "q" ? sel.qs + " seconds for each question" : (sel.mins ? sel.mins + " minutes" : "1 minute a question, " + m + " min") + " for the whole set";
+    // One short line in every state, so a switch never changes the height above the controls.
+    var sub = !on ? "Off. Take your time." : t === "q" ? sel.qs + "\u00a0s for each question" : m + "\u00a0min for the whole set";
     var html = '<section class="su-tbox' + (on ? " on" : "") + '" aria-labelledby="suTL"><div class="su-trow"><span class="su-tic" aria-hidden="true">' + svg("timer") + '</span>' +
       '<span class="su-tt"><b id="suTL">Timer</b><small id="suTS">' + sub + "</small></span>" +
       '<button type="button" class="su-sw" role="switch" aria-checked="' + on + '" aria-labelledby="suTL" aria-describedby="suTS" data-act="su-ton"><i aria-hidden="true"></i></button></div>';
     if (on) {
-      html += seg("su-timer", "Clock", TIMERS.slice(1), t, null);
-      if (t === "q") {
-        var low = lowAt(sel.qs);
-        html += '<div class="su-qsrow"><span class="su-ql" id="suQL">Seconds per question</span>' + stepper("su-qdec", "su-qinc", sel.qs + " s", "Seconds per question", QSECS[0], QSECS[QSECS.length - 1], sel.qs, "Fewer seconds", "More seconds") + "</div>" +
-          '<p class="pn-mut pn-small su-tnote">The line under the header drains for each question and turns red in the last ' + low + " s. " +
-          (sel.mode === "exam" ? "At 0 the question is left unanswered and the test moves on; after the last one you see your result." : "At 0 the answer and its explanation show, and you go on when ready.") + "</p>";
-      } else {
-        html += '<div class="su-qsrow"><span class="su-ql">' + (sel.mins ? "Minutes for the set" : "Exam pace") + '</span>' + stepper("su-mdec", "su-minc", m + " min", "Minutes for the set", 1, 600, m, "Fewer minutes", "More minutes") + "</div>" +
+      /* The two kinds share one grid cell and only the chosen one shows, so the box keeps the taller panel's height:
+         switching Each question / Whole set never changes the sheet's height, and nothing below moves or clamps the
+         scroller (native pass 2 rule). The hidden panel is inert. */
+      var low = lowAt(sel.qs), panel = function (k, body) { return '<div class="su-tp' + (t === k ? " on" : "") + '" data-key="tp-' + k + '"' + (t === k ? "" : ' inert aria-hidden="true"') + ">" + body + "</div>"; };
+      html += seg("su-timer", "Clock", TIMERS.slice(1), t, null) + '<div class="su-tstack">' +
+        panel("q", '<div class="su-qsrow"><span class="su-ql" id="suQL">Seconds per question</span>' + stepper("su-qdec", "su-qinc", sel.qs + " s", "Seconds per question", QSECS[0], QSECS[QSECS.length - 1], sel.qs, "Fewer seconds", "More seconds") + "</div>" +
+          '<p class="pn-mut pn-small su-tnote">The line under the header drains for each question and turns red in the last ' + low + "\u00a0s. " +
+          (sel.mode === "exam" ? "At 0 the question is left unanswered and the test moves on; after the last one you see your result." : "At 0 the answer and its explanation show, and you go on when ready.") + "</p>") +
+        panel("set", '<div class="su-qsrow"><span class="su-ql">' + (sel.mins ? "Minutes for the set" : "Exam pace") + '</span>' + stepper("su-mdec", "su-minc", m + "\u00a0min", "Minutes for the set", 1, 600, m, "Fewer minutes", "More minutes") + "</div>" +
           (sel.mins ? '<button type="button" class="pn-link su-pace" data-act="su-mins" data-v="0">Back to exam pace</button>' : "") +
-          '<p class="pn-mut pn-small su-tnote">One clock for the whole set.' + (sel.mode === "exam" ? " The test is marked when it runs out." : " Practice ends when the time is up.") + "</p>";
-      }
+          '<p class="pn-mut pn-small su-tnote">One clock for the whole set.' + (sel.mode === "exam" ? " The test is marked when it runs out." : " Practice ends when the time is up.") + "</p>") + "</div>";
     }
     return html + "</section>";
   }
@@ -436,7 +441,7 @@
     }
     var body = modesHtml(sel) + timerHtml(sel, S.n || sel.n) + '<div class="su-qs">' + qs + "</div>";
     var t = timerOf(sel);
-    var status = S.loading || S.err ? "" : total ? "<b>" + fmt(S.n) + "</b> " + (S.n === 1 ? "question" : "questions") + (t === "q" ? " · " + sel.qs + " s each" : t === "set" ? " · " + (sel.mins || Math.max(1, S.n)) + " min in all" : " · no timer") : (hint ? esc(hint.msg) : "");
+    var status = S.loading || S.err ? "" : total ? "<b>" + fmt(S.n) + "</b> " + (S.n === 1 ? "question" : "questions") + (t === "q" ? " · " + sel.qs + "\u00a0s each" : t === "set" ? " · " + (sel.mins || Math.max(1, S.n)) + "\u00a0min in all" : " · no timer") : (hint ? esc(hint.msg) : "");
     var go = !S.loading && !S.err && total > 0;
     var html = '<span class="pn-grab" aria-hidden="true"></span><div class="su-head"><div class="su-ht"><h2 id="suT">How do you want to practise?</h2><p class="pn-mut pn-small">' + esc(sc.title || "") + (sc.sub ? " · " + esc(sc.sub) : "") + "</p></div>" +
       '<button type="button" class="pn-ib su-x" data-act="su-close" aria-label="Close">' + svg("x") + "</button></div>" +
@@ -529,7 +534,14 @@
     var bs = Array.prototype.slice.call(t.parentNode.querySelectorAll(".su-chip:not([disabled]), .su-mc")), i = (bs.indexOf(t) + step + bs.length) % bs.length;
     if (bs[i]) act(bs[i].getAttribute("data-act"), bs[i]);
   }
-  function back() { return S ? close() || true : false; }
+  // A full repaint of the overlay (a screen pushed from under the sheet) takes the sheet's node away: its state goes too,
+  // so back is not swallowed by a sheet that is no longer there.
+  function back() {
+    if (!S) return false;
+    var r = S.host.root(), el = r && r.querySelector("#pnSetup");
+    if (!el) { S = null; return false; }
+    return close() || true;
+  }
   function leave() { S = null; }
   if (G.document) G.document.addEventListener("keydown", function (e) { if (S) { S.kb = Date.now(); onKey(e); } }, true);
 
