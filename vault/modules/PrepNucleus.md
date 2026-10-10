@@ -1113,6 +1113,20 @@ best way of learning."
 - The bundled v5 radiology index is the source of truth for its `search` name (round 1 did not upload
   `v5/radiology/index.json` to R2); build from the repo copy, not the R2 one.
 
+## Owner answer-key fixes, round 3 (2026-10-10, branch `feat/prep-keyfix3`, prep56)
+- The owner answered the 14 items still held after round 2 ("14 round-2 verified key rewrites"). Mapped by item number
+  and checked against each stem: no mismatches. 11 applied or rebuilt (key, stem/option rewrite or new matching column
+  from his repair notes), item 164 split into two questions (new id for part 2), 2 still held: 242 (his foreign-body
+  reading conflicts with the figure, which is the four labelled lateral-neck diagnoses with highlight overlays; the app
+  also has no option E) and 243 (his key needs NET morphology visible on the figure; not confirmed). Haiku sanity pass on
+  every shipped item. Changelog, edits, cleaned figures: `~/prep-data/keyfix/round3/` and
+  `gs://...-prep-batch/private/keyfix/round3/` (item text stays out of git).
+- Shipped: ss-radiology **bank v15** = live v14 + 13 items (no overlay change; all items are srd- modules). Eight real
+  or drawn figures ship de-identified under neutral names `v15/ss-radiology/img/i-<sha12>.webp`: re-rendered from the
+  source page at 4x, margins and caption strips trimmed, an R side marker cropped, OCR plus 2x visual check, RGB
+  re-encode with no metadata. Build scripts: `~/prep-data/keyfix/round3/scripts/` (dl, edits.py, gate, render, clean,
+  build, upload, verify). The de-identification agent builds its ss-radiology release from live v15 as v16 (prep57+).
+
 ## Apple redesign on the owner's palette (2026-10-10, branch `feat/prep-apple-ui`, prep49)
 - Owner after the quiet redesign: "Didn't like the UI. I want it lively, premium, without UI slop, classic Apple-like."
   Palette he supplied: Pastel Amber `#EFC07B`, Prussian Blue `#0F3460`, Dark Navy `#16213E`, Midnight Blue `#1A1A2E`.
