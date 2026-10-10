@@ -1525,15 +1525,20 @@ feature (private custom modules) and an owner authoring tool, on one engine. Dec
   outside `prep-bank/`, never served). Metering: `gateAndCount("prep_qgen", deferRecord)` (new `AI_MODULES.prep_qgen`,
   60 requests a day backstop; MaiK Tokens as Ask MaiK, blocking only with `AI_COST_CAP_ON`), one usage record a request
   (provider anthropic, estCostInr = USD x 96), `addDailyCostInr` + console counters `prep.qgen.*`.
-- **Flags and caps (wrangler.toml vars, both blocks):** `PREP_QGEN_ON` 1, `PREP_QGEN_STUDENT` 1,
-  `PREP_QGEN_MODULES_PER_DAY` 3 (counted at a module's first accepted round), `PREP_QGEN_OWNERS`
-  drmanojkurmana@gmail.com (the Author ops need `ownerOK` AND a verified email on this list: `OWNER_EMAILS` includes
-  accounts that are not the content owner). Defaults in code: 30 questions a module (`PREP_QGEN_MODULE_Q_CAP`), all
+- **Switch and caps: NO wrangler.toml vars.** The production Pages project is at Cloudflare's 128 text-binding limit
+  (vars + secrets): adding 4 vars + 2 secrets made the 640190c production deploy fail ("Too many text bindings, found
+  133"). So the secret is the switch and every limit is a code default that an env var may override or turn off:
+  `PREP_QGEN_ON` "0" off, `PREP_QGEN_STUDENT` "0" students off, `PREP_QGEN_MODULES_PER_DAY` 3 (counted at a module's first
+  accepted round), `PREP_QGEN_OWNERS` default drmanojkurmana@gmail.com ("*" = ownerOK alone; the Author ops need `ownerOK`
+  AND a verified email on this list: `OWNER_EMAILS` includes accounts that are not the content owner). Production keeps
+  the key and the workspace id in ONE secret, `ANTHROPIC_API_KEY` = `<key>::<workspace id>` (`creds()`); preview has both
+  `ANTHROPIC_API_KEY` and `ANTHROPIC_WORKSPACE_ID`. Any new production var or secret now needs one removed first. Other defaults: 30 questions a module (`PREP_QGEN_MODULE_Q_CAP`), all
   students together $5 a day (`PREP_QGEN_DAILY_USD`, KV `prep:qgen:usd:<day>`, 429 budget), owner $20 a day
   (`PREP_QGEN_OWNER_DAILY_USD`), batch jobs up to 400 (`PREP_QGEN_BATCH_MAX`). Secrets (Pages, production and preview):
-  `ANTHROPIC_API_KEY`, `ANTHROPIC_WORKSPACE_ID`, set from stdin (`printf %s "$ANTHROPIC_API_KEY" | npx wrangler pages
-  secret put ANTHROPIC_API_KEY --project-name stewardmd`). Without the key or with `PREP_QGEN_ON` unset: `status.on`
-  false (the app hides every entry point) and every other op 503 not-configured.
+  set from stdin, production: `set -a; . ~/.config/stewardmd/anthropic.env; set +a; printf %s
+  "$ANTHROPIC_API_KEY::$ANTHROPIC_WORKSPACE_ID" | npx wrangler pages secret put ANTHROPIC_API_KEY --project-name stewardmd`.
+  Without the key or with `PREP_QGEN_ON` "0": `status.on` false (the app hides every entry point) and every other op 503
+  not-configured.
 - **Client** `prep-qgen.js` + `prep-qgen.css` (`window.PREP_QGEN`, optional in the loader after prep-create.js; `prep.js`
   forwards `g-` acts, asks `refresh()` on open). Entry rows: Tests > QBank under Custom module, and Menu, only when the
   server's status says on (localStorage `smd_prep_qgen` "0" or `?qgen=0` hides them). Create: from a topic, pasted notes

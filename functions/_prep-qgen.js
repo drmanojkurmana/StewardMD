@@ -53,16 +53,25 @@ export const USD_INR = 96;    // the rate _ai_usage.js MODEL_RATES uses (Rs 96 a
 export const DIFFS = { mix: 0, easy: 1, moderate: 2, hard: 3 };
 const LETTERS = ["A", "B", "C", "D"];
 
-/* qgenConfig(env) -> what this deployment can do. keyed = the secret exists; on = PREP_QGEN_ON is "1" (or "true");
- * student = PREP_QGEN_STUDENT also "1"; owner = on. Models from env when they are known Claude ids. */
+/* creds(env) -> { key, ws }. The workspace id comes from ANTHROPIC_WORKSPACE_ID, or from the key secret written as
+ * "<key>::<workspace id>": the production Pages project is at Cloudflare's 128 text-binding limit, so production keeps
+ * both in the one secret ANTHROPIC_API_KEY (vault PrepNucleus.md "MaiK modules"). */
+export function creds(env) {
+  const raw = String((env && env.ANTHROPIC_API_KEY) || ""), i = raw.indexOf("::");
+  const key = i > 0 ? raw.slice(0, i) : raw, ws = String((env && env.ANTHROPIC_WORKSPACE_ID) || (i > 0 ? raw.slice(i + 2) : "")).trim();
+  return { key: key.trim(), ws };
+}
+/* qgenConfig(env) -> what this deployment can do. keyed = the secret exists; on = keyed and PREP_QGEN_ON is not "0";
+ * student = on and PREP_QGEN_STUDENT is not "0"; owner = on. No env var is needed (the secret is the switch): every var
+ * here only turns something off or changes a limit. Models from env when they are known Claude ids. */
 export function qgenConfig(env) {
-  const e = env || {}, yes = (v) => v === "1" || v === "true" || v === 1 || v === true;
-  const keyed = typeof e.ANTHROPIC_API_KEY === "string" && e.ANTHROPIC_API_KEY.length > 10;
-  const on = keyed && yes(e.PREP_QGEN_ON);
+  const e = env || {}, no = (v) => v === "0" || v === "false" || v === 0 || v === false;
+  const keyed = creds(e).key.length > 10;
+  const on = keyed && !no(e.PREP_QGEN_ON);
   const model = (v, d) => (MODELS.indexOf(String(v || "")) >= 0 ? String(v) : d);
   const num = (k, d) => { const v = Number(e[k]); return Number.isFinite(v) && v > 0 ? v : d; };
   return {
-    keyed, on, student: on && yes(e.PREP_QGEN_STUDENT), owner: on,
+    keyed, on, student: on && !no(e.PREP_QGEN_STUDENT), owner: on,
     genModel: model(e.PREP_QGEN_MODEL, QGEN.genModel), verifyModel: model(e.PREP_QGEN_VERIFY_MODEL, QGEN.verifyModel),
     modulesPerDay: num("PREP_QGEN_MODULES_PER_DAY", 3),
     perModule: num("PREP_QGEN_MODULE_Q_CAP", 30),
@@ -182,8 +191,9 @@ export class QgenError extends Error {
   constructor(code, status, retry) { super("anthropic " + code + (status ? " " + status : "")); this.code = code; this.status = status || 0; this.retry = !!retry; }
 }
 export function apiHeaders(env, beta) {
-  const h = { "content-type": "application/json", "x-api-key": String(env.ANTHROPIC_API_KEY || ""), "anthropic-version": "2023-06-01" };
-  if (env.ANTHROPIC_WORKSPACE_ID) h["anthropic-workspace-id"] = String(env.ANTHROPIC_WORKSPACE_ID);
+  const c = creds(env);
+  const h = { "content-type": "application/json", "x-api-key": c.key, "anthropic-version": "2023-06-01" };
+  if (c.ws) h["anthropic-workspace-id"] = c.ws;
   if (beta) h["anthropic-beta"] = beta;
   return h;
 }
@@ -192,7 +202,7 @@ function baseUrl(env) { return String((env && env.ANTHROPIC_BASE_URL) || "https:
  * (never the key, never the provider's text): auth | bad-request | rate | overloaded | provider | timeout | network. */
 export async function anthropicFetch(env, path, init, opts) {
   const o = opts || {}, f = o.fetch || fetch, ms = o.timeoutMs || QGEN.timeoutMs;
-  if (!env || !env.ANTHROPIC_API_KEY) throw new QgenError("not-configured");
+  if (!env || !creds(env).key) throw new QgenError("not-configured");
   const ac = typeof AbortController !== "undefined" ? new AbortController() : null;
   const t = ac ? setTimeout(() => ac.abort(), ms) : null;
   let r;
