@@ -282,7 +282,7 @@ test("buildTeachPrompt chat: the chat system prompt, the lines in order, the sum
   const p = T.buildTeachPrompt(T.readTeachRequest(chat({ summary: "Asked about X." })).req);
   assert.equal(p.system, T.CHAT_SYSTEM); assert.equal(p.system, PURE.CHAT_SYSTEM);
   assert.equal(p.maxOut, T.CHAT_LIMITS.maxOut);
-  assert.equal(p.user, "GROUNDING:\n" + GROUND + "\n\nEARLIER IN THIS CHAT (summary):\nAsked about X.\n\nCHAT:\nStudent: Why is A wrong?\nMaiK: Y is first line.\nStudent: And X?\n\nTASK: Answer the student's last message using only the grounding.");
+  assert.equal(p.user, "GROUNDING:\n" + GROUND + "\n\nEARLIER IN THIS CHAT (summary):\nAsked about X.\n\nCHAT:\nStudent: Why is A wrong?\nMaiK: Y is first line.\nStudent: And X?\n\nTASK: Reply to the student's last message in your own words.");
   assert.equal(T.buildTeachPrompt(T.readTeachRequest(chat()).req).user.indexOf("EARLIER"), -1);
 });
 
@@ -327,4 +327,60 @@ test("chat: idempotent replay is free", async () => {
   const one = await post(env, b), two = await post(env, b);
   assert.equal(two.replay, "1"); assert.equal(two.json.text, one.json.text);
   assert.equal(calls.length, 1); assert.equal(recs(env)[0][1], "1");
+});
+
+/* ---- owner 2026-10-10: online 10 a chat (server side), conversational replies ---- */
+test("chat-limit: the 11th answered ask on one chat id is 429 chat-limit with no model call; a new chat id starts again", async () => {
+  const env = envFor(); calls = [];
+  const TH = "paabc123chat01";
+  const first = await post(env, mcq({ thread: TH, turn: 1 }));
+  assert.equal(first.status, 200, JSON.stringify(first.json));
+  for (let n = 2; n <= 10; n++) {
+    const r = await post(env, chat({ thread: TH, turn: n, messages: [{ r: "u", t: "Doubt " + n }] }));
+    assert.equal(r.status, 200, n + ": " + JSON.stringify(r.json));
+  }
+  assert.equal(calls.length, 10);
+  // the client is past its cap, or forges turn: the server counts the chat id itself
+  const over = await post(env, chat({ thread: TH, turn: 3, messages: [{ r: "u", t: "Doubt 11" }] }));
+  assert.equal(over.status, 429); assert.equal(over.json.reason, "chat-limit"); assert.equal(over.json.limit, 10);
+  assert.match(over.json.message, /Start a new chat, or continue on this phone/);
+  assert.equal(calls.length, 10, "no model call past the limit");
+  noAI(over.json);
+  assert.equal((await post(env, chat({ thread: "paabc123chat02", turn: 1, messages: [{ r: "u", t: "new chat" }] }))).status, 200, "a new chat id starts again");
+  assert.equal((await post(env, chat({ thread: TH, turn: 1, messages: [{ r: "u", t: "x" }] }), { token: "tok-b" })).status, 200, "counted per user");
+  const kv = [...env.MAIK_KV.m.keys()].filter((k) => k.startsWith("prep:teach:th:"));
+  assert.ok(kv.length === 3 && kv.every((k) => !/Doubt|new chat/.test(env.MAIK_KV.m.get(k))), "only counts are kept: " + kv.join(","));
+  assert.equal(T.readTeachRequest(chat({ thread: "bad id!" })).reason, "thread");
+  assert.equal(T.readTeachRequest(mcq({ turn: 11 })).reason, "turns");
+});
+
+test("chat-limit: a failed model call does not count; a replay does not count", async () => {
+  const env = envFor(); calls = [];
+  const TH = "paabc123chat03";
+  reply = () => { throw new Error("boom"); };
+  assert.equal((await post(env, chat({ thread: TH, turn: 1 }))).status, 502);
+  reply = () => "Option B is correct because the grounding says so. Option A is wrong.";
+  assert.equal(env.MAIK_KV.m.get("prep:teach:th:fb:u-a:" + TH) || null, null, "a failed ask is not counted");
+  const b = chat({ thread: TH, turn: 1, idem: "ck-th-replay-01" });
+  await post(env, b); await post(env, b);
+  assert.equal(env.MAIK_KV.m.get("prep:teach:th:fb:u-a:" + TH), "1", "the replay is free and not counted");
+});
+
+test("owner prompts through the real route: the model is asked to answer the message, and its reply is returned as is", async () => {
+  const env = envFor(); calls = [];
+  const STORED = "Y is first line for this condition.";
+  reply = (body) => {
+    const u = body.contents[0].parts[0].text;
+    const last = /\nStudent: ([^\n]*)\n\nTASK/.exec(u)[1];
+    return /dumb|simple/i.test(last) ? "Think of a bucket with a hole: it loses the same share each minute. (" + last.slice(0, 20) + ")" : STORED;
+  };
+  const P1 = "Tell me about firsy order kinetics in simple way", P2 = "Why is it correct and explain me topic like im dumb";
+  const a1 = await post(env, chat({ thread: "paowner0001", turn: 2, messages: [{ r: "u", t: "Why is A wrong?" }, { r: "m", t: "Y is first line." }, { r: "u", t: P1 }] }));
+  const a2 = await post(env, chat({ thread: "paowner0001", turn: 3, messages: [{ r: "u", t: "Why is A wrong?" }, { r: "m", t: "Y is first line." }, { r: "u", t: P1 }, { r: "m", t: a1.json.text }, { r: "u", t: P2 }] }));
+  reply = () => "Option B is correct because the grounding says so. Option A is wrong.";
+  assert.equal(a1.status, 200); assert.equal(a2.status, 200);
+  assert.notEqual(a1.json.text, STORED); assert.notEqual(a2.json.text, STORED); assert.notEqual(a1.json.text, a2.json.text);
+  const u2 = calls[1].body.contents[0].parts[0].text;
+  assert.ok(u2.indexOf("Student: " + P1 + "\nMaiK: Think of a bucket") > 0 && u2.indexOf("Student: " + P2 + "\n\nTASK: Reply to the student's last message in your own words. Use everyday words") > 0, "multi-turn, with the student's own words and how to answer: " + u2.slice(-300));
+  assert.equal(calls[1].body.generationConfig.maxOutputTokens, T.CHAT_LIMITS.maxOut);
 });

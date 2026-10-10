@@ -162,7 +162,7 @@ test("source: no network or server AI path in prep-teacher.js", () => {
   const code = SRC.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
   for (const bad of [/\bfetch\s*\(/, /XMLHttpRequest/, /sendBeacon/, /WebSocket/, /\/api\//, /SMD_AI\b/, /explainGrounded/, /https?:/, /importScripts/])
     assert.doesNotMatch(code, bad, String(bad));
-  assert.match(code, /local\(\)\.answer\(\{ question: prompt \}, \{ systemOverride: system, _grounding: null, temperature: 0 \}\)/);
+  assert.match(code, /local\(\)\.answer\(\{ question: prompt \}, \{ systemOverride: system, _grounding: null, temperature: opts && opts\.chat \? 0\.3 : 0 \}\)/);
 });
 
 test("ES5 and house style: no arrow functions, let/const, template literals, classes; no em or en dash", () => {
