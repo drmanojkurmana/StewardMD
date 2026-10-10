@@ -122,15 +122,15 @@ test("lesson figures that are bank paths load through the bank API, in-app media
   assert.equal(LP.lessonImgUrl("prep/lessons/media/x.svg", "/api/prep/bank/"), "/prep/lessons/media/x.svg");
 });
 
-test("taxonomy: ss-radiology is valid with its new modules and reads bank v11 (v10 with the image-item stems made neutral)", () => {
+test("taxonomy: ss-radiology is valid with its new modules and reads bank v12 (v11 plus the owner-keyed items of the 2026-10-10 answer-key review)", () => {
   const s = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy/ss-radiology.json", import.meta.url), "utf8"));
   assert.deepEqual(validateSubject(s), []);
-  assert.equal(s.bank, "v11");
+  assert.equal(s.bank, "v12");
   const mods = s.sections.flatMap((x) => x.modules.map((m) => m.id));
   for (const m of ["srd-msk-metabolic", "srd-abd-peritoneum", "srd-anat-neuro", "srd-anat-body", "srd-anat-limbs"]) assert.ok(mods.includes(m), m);
   const app = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy.json", import.meta.url), "utf8"));
   const sub = app.branches.flatMap((b) => b.subjects).find((x) => x.id === "ss-radiology");
-  assert.equal(sub.bv, "v11");
+  assert.equal(sub.bv, "v12");
   assert.deepEqual(sub.sections.flatMap((x) => x.modules.map((m) => m.id)), mods, "the bundled tree matches the source");
   // every target and lesson names a module that exists
   const T = JSON.parse(fs.readFileSync(new URL("../tools/prep-radss/targets.json", import.meta.url), "utf8")).targets;
@@ -227,11 +227,11 @@ test("bankIndex writes the prep-build-bank subject index shape with a row per ta
   assert.ok(!/stewardmd|ai-generated|licen/i.test(JSON.stringify(ix)), "no source or AI field");
 });
 
-test("shipped v11 subject index: taxonomy bv v11, every taxonomy module listed with group and file, counts add up", () => {
+test("shipped v12 subject index: taxonomy bv v12, every taxonomy module listed with group and file, counts add up", () => {
   const tax = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy.json", import.meta.url), "utf8"));
   let sub = null; for (const b of tax.branches) for (const s of b.subjects) if (s.id === "ss-radiology") sub = s;
-  assert.equal(sub && sub.bv, "v11");
-  const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v11/ss-radiology/index.json", import.meta.url), "utf8"));
+  assert.equal(sub && sub.bv, "v12");
+  const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v12/ss-radiology/index.json", import.meta.url), "utf8"));
   const mods = sub.sections.flatMap((x) => x.modules.map((m) => m.id));
   assert.deepEqual(ix.topics.map((t) => t.id).sort(), mods.slice().sort());
   for (const t of ix.topics) { assert.ok(t.group && ix.groups.some((g) => g.id === t.group), t.id); assert.equal(t.file, "mcq/" + t.id + ".json"); }
@@ -257,5 +257,17 @@ test("image-item release: bank v11 keeps v10's modules and counts, the route ser
     "v11/ss-radiology/stack/s-0123abcd/stack.json", "v11/ss-radiology/stack/s-0123abcd/soft/000.webp", "overlay/radnotes2/radiology/rad-gi.json",
     "overlay/radmax4/radiology/rad-interventional.json", "img/radnotes/rn-n2-p090-3-nl.webp"]) assert.equal(bankPath({ path: p.split("/") }), p, p);
   const oc = JSON.parse(fs.readFileSync(new URL("../prep/bank/overlay-counts.json", import.meta.url), "utf8"));
-  assert.ok(oc.sets.radnotes2 && oc.sets.radmax4 && !oc.sets.radnotes && !oc.sets.radmax3, "counts follow the new set folders");
+  assert.ok(oc.sets.radnotes2 && !oc.sets.radnotes && !oc.sets.radmax3, "counts follow the new set folders");
+});
+
+test("answer-key release: bank v12 keeps every v11 module and adds the owner-keyed items; the route serves v12 and the radmax5 / medcov4 sets", () => {
+  const v12 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v12/ss-radiology/index.json", import.meta.url), "utf8"));
+  const v11 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v11/ss-radiology/index.json", import.meta.url), "utf8"));
+  assert.deepEqual(v12.topics.map((t) => t.id), v11.topics.map((t) => t.id));
+  for (const t of v11.topics) assert.ok(v12.topics.find((x) => x.id === t.id).count >= t.count, t.id);
+  assert.ok(v12.counts.total > v11.counts.total, "v12 adds the fixed held items");
+  for (const p of ["v12/ss-radiology/index.json", "v12/ss-radiology/search.json", "v12/ss-radiology/mcq/srd-breast.json", "v12/manifest.json",
+    "overlay/radmax5/radiology/rad-interventional.json", "overlay/medcov4/medicine/med-fungal.json"]) assert.equal(bankPath({ path: p.split("/") }), p, p);
+  const oc = JSON.parse(fs.readFileSync(new URL("../prep/bank/overlay-counts.json", import.meta.url), "utf8"));
+  assert.ok(oc.sets.radmax5 && oc.sets.medcov4 && !oc.sets.radmax4 && !oc.sets.medcov3, "counts follow the radmax5 and medcov4 folders");
 });
