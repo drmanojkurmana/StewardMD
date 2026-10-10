@@ -224,47 +224,102 @@
       '<span style="display:block;font-size:12px;opacity:.7;margin-top:4px">Tap to zoom</span></div>';
   }
 
-  // Full-size view of a flowchart, with +/- zoom and close. Opened by tapping any .kbfc-wrap.
+  // Full-size view of a flowchart. Gestures: pinch to zoom, double tap to zoom in or reset,
+  // one-finger pan when zoomed, swipe left to close. Escape or the Close button also close.
+  // The SVG is re-sized (vector, so it stays sharp), not CSS-scaled, so zoomed text is not blurred.
   function openZoom(wrap) {
     var svg = wrap.querySelector("svg");
     if (!svg) return;
-    var baseW = Number(svg.getAttribute("data-w")) || 600, baseH = Number(svg.getAttribute("data-h")) || 400, scale = 1;
+    var baseW = Number(svg.getAttribute("data-w")) || 600, baseH = Number(svg.getAttribute("data-h")) || 400;
+    var fit = Math.min(1, Math.max(200, window.innerWidth - 24) / baseW);
+    var scale = 1;
     var ov = document.createElement("div");
     ov.className = "kbfc-zoom";
     ov.setAttribute("role", "dialog");
-    ov.setAttribute("aria-label", "Flowchart, full size");
-    ov.style.cssText = "position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;background:rgba(0,0,0,.9);overflow:auto;-webkit-overflow-scrolling:touch;padding:56px 12px 24px;box-sizing:border-box";
-    var card = document.createElement("div");
-    card.style.cssText = "background:#fff;border-radius:8px;padding:8px;display:inline-block;min-width:100%;box-sizing:border-box";
+    ov.setAttribute("aria-label", "Flowchart, full size. Pinch or double tap to zoom, swipe left to close.");
+    ov.style.cssText = "position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;background:#fff;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;padding:12px;box-sizing:border-box";
     var clone = svg.cloneNode(true);
     clone.removeAttribute("style");
-    function size() {
-      clone.setAttribute("width", Math.round(baseW * scale));
-      clone.setAttribute("height", Math.round(baseH * scale));
-    }
-    size();
+    clone.setAttribute("width", Math.round(baseW * fit));
+    clone.setAttribute("height", Math.round(baseH * fit));
+    var card = document.createElement("div");
+    card.style.cssText = "display:inline-block;min-width:100%;box-sizing:border-box";
     card.appendChild(clone);
-    function bar(label, fn) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.textContent = label;
-      b.style.cssText = "min-width:44px;min-height:44px;padding:0 12px;border-radius:999px;border:0;background:#fff;color:#111;font:600 16px system-ui;margin-left:6px";
-      b.onclick = fn;
-      return b;
+    var hint = document.createElement("div");
+    hint.textContent = "Pinch or double tap to zoom. Swipe left to close.";
+    hint.style.cssText = "position:fixed;left:0;right:0;bottom:64px;text-align:center;font:500 13px system-ui;color:#333;opacity:.85;pointer-events:none";
+    var close = document.createElement("button");
+    close.type = "button";
+    close.textContent = "Close";
+    close.style.cssText = "position:fixed;left:50%;bottom:12px;transform:translateX(-50%);min-width:120px;min-height:44px;padding:0 20px;border-radius:999px;border:0;background:#0f766e;color:#fff;font:600 16px system-ui";
+    function setScale(next, cx, cy) {
+      next = Math.max(0.6, Math.min(5, next));
+      var oldW = baseW * fit * scale, newW = baseW * fit * next, ratio = newW / oldW;
+      var contentX = ov.scrollLeft + cx, contentY = ov.scrollTop + cy;
+      scale = next;
+      clone.setAttribute("width", Math.round(newW));
+      clone.setAttribute("height", Math.round(baseH * fit * next));
+      ov.scrollLeft = contentX * ratio - cx;
+      ov.scrollTop = contentY * ratio - cy;
     }
-    var controls = document.createElement("div");
-    controls.style.cssText = "position:fixed;top:8px;right:8px;z-index:1;display:flex";
-    function close() {
+    function localPoint(x, y) {
+      var r = ov.getBoundingClientRect();
+      return { x: x - r.left, y: y - r.top };
+    }
+    function onKey(e) { if (e.key === "Escape") closeZoom(); }
+    function closeZoom() {
       document.removeEventListener("keydown", onKey);
       if (ov.parentNode) ov.parentNode.removeChild(ov);
     }
-    function onKey(e) { if (e.key === "Escape") close(); }
-    controls.appendChild(bar("\u2212", function () { scale = Math.max(0.5, scale - 0.25); size(); }));
-    controls.appendChild(bar("+", function () { scale = Math.min(4, scale + 0.25); size(); }));
-    controls.appendChild(bar("Close", close));
-    ov.appendChild(controls);
+    close.onclick = closeZoom;
     ov.appendChild(card);
-    ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+    ov.appendChild(hint);
+    ov.appendChild(close);
+    setTimeout(function () { if (hint.parentNode) hint.parentNode.removeChild(hint); }, 3500);
+
+    var pinch = null, one = null, lastTap = 0;
+    function dist(t) { var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy); }
+    ov.addEventListener("touchstart", function (e) {
+      if (e.touches.length === 2) {
+        var m = localPoint((e.touches[0].clientX + e.touches[1].clientX) / 2, (e.touches[0].clientY + e.touches[1].clientY) / 2);
+        pinch = { d: dist(e.touches), s: scale, x: m.x, y: m.y };
+        one = null;
+      } else if (e.touches.length === 1 && !pinch) {
+        one = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now() };
+      }
+    }, { passive: true });
+    ov.addEventListener("touchmove", function (e) {
+      if (pinch && e.touches.length === 2) {
+        e.preventDefault();
+        var m = localPoint((e.touches[0].clientX + e.touches[1].clientX) / 2, (e.touches[0].clientY + e.touches[1].clientY) / 2);
+        setScale(pinch.s * dist(e.touches) / pinch.d, m.x, m.y);
+      }
+    }, { passive: false });
+    ov.addEventListener("touchend", function (e) {
+      if (e.touches.length === 0) {
+        if (pinch) { pinch = null; return; }
+        if (!one) return;
+        var ex = e.changedTouches[0].clientX, ey = e.changedTouches[0].clientY;
+        var dx = ex - one.x, dy = ey - one.y, dt = Date.now() - one.t;
+        if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && dt < 300) {
+          var now = Date.now();
+          if (now - lastTap < 320) {
+            var p = localPoint(ex, ey);
+            if (scale > 1.05) setScale(1, p.x, p.y); else setScale(2.2, p.x, p.y);
+            lastTap = 0;
+          } else {
+            lastTap = now;
+          }
+        } else if (dx < -80 && Math.abs(dy) < 60 && dt < 600 && scale <= 1.05) {
+          closeZoom();
+        }
+        one = null;
+      }
+    }, { passive: true });
+    ov.addEventListener("dblclick", function (e) {
+      var p = localPoint(e.clientX, e.clientY);
+      if (scale > 1.05) setScale(1, p.x, p.y); else setScale(2.2, p.x, p.y);
+    });
     document.addEventListener("keydown", onKey);
     document.body.appendChild(ov);
   }
