@@ -4,6 +4,8 @@ name: prep-reason-ui verify (temporary)
 # test/run-prep-reason-ui.mjs on ubuntu where browsers launch, and keeps the
 # screenshots. Delete this file once verified (it is not part of CI).
 on:
+  push:
+    branches: [prep-reasoning-verify]
   workflow_dispatch:
 
 jobs:
