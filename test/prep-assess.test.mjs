@@ -289,3 +289,15 @@ test("opt-in statistics endpoint: de-identified rows only, stub without a bindin
   assert.deepEqual(calls[0][1].slice(0, 9), ["a-1", "fmge", 1, 0, 30, 0, 0, 1, 0]);
   assert.equal((await S.onRequestPost(req("x"))).status, 400);
 });
+
+test("profiles carry the schema's required fields and enums (prep/assess/schemas/assessment-profile.schema.json)", () => {
+  const S = JSON.parse(fs.readFileSync(new URL("prep/assess/schemas/assessment-profile.schema.json", ROOT), "utf8"));
+  for (const id of A.profileIds()) {
+    const p = A.profile(id);
+    for (const k of S.required) assert.ok(k in p, id + " " + k);
+    assert.equal(p.schema, S.properties.schema.const);
+    assert.ok(S.properties.id.enum.includes(p.id)); assert.ok(S.properties.tab.enum.includes(p.tab)); assert.ok(S.properties.status.enum.includes(p.status));
+    for (const k of S.properties.navigation.required) assert.equal(typeof p.navigation[k], "boolean", id + " " + k);
+    for (const t of p.format.item_types) assert.ok(S.properties.format.properties.item_types.items.enum.includes(t));
+  }
+});
