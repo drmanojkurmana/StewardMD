@@ -169,12 +169,12 @@ async function idemKey(uid, canon) {
   const d = await crypto.subtle.digest("SHA-256", _enc.encode(uid + "\n" + canon));
   return crypto.subtle.importKey("raw", d, "AES-GCM", false, ["encrypt", "decrypt"]);
 }
-async function idemSeal(uid, canon, text) {
+export async function idemSeal(uid, canon, text) {
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await idemKey(uid, canon), _enc.encode(text));
   return b64(iv) + "." + b64(new Uint8Array(ct));
 }
-async function idemOpen(uid, canon, sealed) {
+export async function idemOpen(uid, canon, sealed) {
   try {
     const [iv, ct] = String(sealed).split(".");
     const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(iv) }, await idemKey(uid, canon), unb64(ct));

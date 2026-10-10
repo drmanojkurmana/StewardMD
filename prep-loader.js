@@ -15,17 +15,19 @@
    prep-tide.js is the live background behind the top of each screen (WebGL, optional: without it the page is plain).
    prep-nav.js + prep-nav.css are the floating glass tab bar (Home, Learn, Tests, You; optional: without them home keeps
    its Menu button and nothing else changes). prep-ids.js + prep-ids.css are the share IDs (Share on every question and
-   lesson, Open a shared ID; optional: without them no share control shows). prep-profiles.js (the versioned exam profiles,
-   generated from prep/assess/profiles) and prep-assess.js (the assessment engine) load before prep.js, which reads its mock
-   patterns from them. prep-tests.js is the Tests tab's test types (flag smd_prep_tests2, default OFF; optional). */
+   lesson, Open a shared ID; optional: without them no share control shows). prep-qgen.js + prep-qgen.css are "Create a
+   module with MaiK" and the owner's Author screen (optional; the entry rows show only when /api/ai/prep-qgen says the
+   feature is on for this account). prep-profiles.js (the versioned exam profiles, generated from
+   prep/assess/profiles) and prep-assess.js (the assessment engine) load before prep.js, which reads its mock patterns from
+   them. prep-tests.js is the Tests tab's test types (flag smd_prep_tests2, default OFF; optional). */
 (function (G) {
   "use strict";
-  var V = "prep61";
+  var V = "prep62";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
-  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-nav.css", "prep-tests.css"];
-  var JS = ["specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep.js", "prep-tests.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-rad.js", "prep-ids.js", "prep-setup.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
+  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-nav.css", "prep-tests.css"];
+  var JS = ["specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep.js", "prep-tests.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-rad.js", "prep-ids.js", "prep-setup.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js"];
   // Optional files: a missing one (404, not yet shipped) is skipped instead of failing PrepNucleus.
-  var OPTIONAL = { "prep-tests.js": 1, "prep-viewer.js": 1, "prep-ask.js": 1, "prep-setup.js": 1, "prep-rad.js": 1, "prep-motion.js": 1, "prep-tide.js": 1, "prep-nav.js": 1, "prep-ids.js": 1, "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1 };
+  var OPTIONAL = { "prep-tests.js": 1, "prep-viewer.js": 1, "prep-ask.js": 1, "prep-setup.js": 1, "prep-rad.js": 1, "prep-motion.js": 1, "prep-tide.js": 1, "prep-nav.js": 1, "prep-ids.js": 1, "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1, "prep-qgen.js": 1 };
   var loading = null;
 
   function enabled() {
