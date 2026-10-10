@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prep/assessment-profile/v2",
+  "title": "Assessment profile (one exam, one version)",
+  "description": "v2 of the 2026-10-10 audit draft, with the app's exam ids. Enforced in code by prep-assess.js validateProfile (test/prep-assess.test.mjs). Every format, navigation and scoring rule carries provenance: official (a source in `sources`, with the bulletin section) or inferred (with a note). status official = every rule in /format, /navigation and /scoring traced to an official document, except an inferred marks-per-correct where the document states only totals (FMGE).",
+  "type": "object",
+  "required": ["schema", "id", "version", "status", "name", "tab", "verified_on", "sources", "format", "navigation", "scoring", "blueprint", "provenance"],
+  "properties": {
+    "schema": {"const": "prep/assessment-profile/v2"},
+    "id": {"enum": ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1"]},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "status": {"enum": ["official", "provisional"]},
+    "name": {"type": "string"}, "session": {"type": "string"},
+    "tab": {"enum": ["neet-pg", "neet-ss", "usmle", "fmge"], "description": "the app's exam tab"},
+    "verified_on": {"type": "string", "format": "date"},
+    "sources": {"type": "object", "additionalProperties": {"type": "object", "required": ["url", "title"], "properties": {"url": {"type": "string"}, "title": {"type": "string"}, "doc_date": {"type": ["string", "null"]}, "sha256": {"type": "string"}}}},
+    "format": {"type": "object", "required": ["questions", "duration_min", "options", "item_types", "sections"], "properties": {
+      "questions": {"type": "integer"}, "duration_min": {"type": "integer"}, "options": {"type": ["integer", "string"]}, "parts": {"type": "integer"}, "block_max_items": {"type": "integer"},
+      "item_types": {"type": "array", "items": {"enum": ["sba", "multiple_correct"]}},
+      "sections": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "label", "questions", "minutes"], "properties": {"id": {"type": "string"}, "label": {"type": "string"}, "questions": {"type": "integer"}, "minutes": {"type": "integer"}, "part": {"type": "integer"}}}}}},
+    "navigation": {"type": "object", "required": ["locked_sections", "revisit_within_section", "return_to_closed_section", "early_section_submit", "auto_advance_on_timeout", "mark_for_review"], "additionalProperties": {"type": "boolean"}},
+    "scoring": {"type": "object", "required": ["correct", "incorrect", "unanswered"], "properties": {"correct": {"type": "number", "exclusiveMinimum": 0}, "incorrect": {"type": "number", "maximum": 0}, "unanswered": {"const": 0}, "pass": {"type": ["object", "null"], "properties": {"marks": {"type": "number"}, "of": {"type": "number"}}}}},
+    "pace_sec": {"type": "number"},
+    "blueprint": {"type": "object", "required": ["kind"], "properties": {"kind": {"enum": ["none", "official_counts", "inferred_historical"]}, "subjects": {"type": "object", "additionalProperties": {"type": "integer"}}, "unmapped": {"type": "object", "additionalProperties": {"type": "integer"}}, "note": {"type": "string"}}},
+    "item_styles": {"type": "array", "items": {"type": "object", "required": ["style", "share"], "properties": {"style": {"enum": ["statement_combination", "image"]}, "share": {"type": ["number", "null"]}, "basis": {"type": "string"}}}},
+    "previous_formats": {"type": "array"},
+    "legacy_mock": {"type": ["object", "null"], "description": "the pre-smd_prep_tests2 pattern prep.js MOCKS keeps (flag off)"},
+    "legacy": {"type": ["object", "null"], "properties": {"tab": {"type": "string"}, "order": {"type": "integer"}, "scheme": {"type": ["string", "null"]}}},
+    "style": {"type": ["object", "null"], "description": "generation style mix (functions/_prep-core.js EXAM_PROFILES); provisional until calibrated"},
+    "provenance": {"type": "array", "items": {"type": "object", "required": ["field", "official", "verified_on"], "properties": {"field": {"type": "string", "description": "JSON pointer"}, "official": {"type": "boolean"}, "src": {"type": ["string", "null"]}, "section": {"type": ["string", "null"]}, "verified_on": {"type": "string", "format": "date"}, "note": {"type": "string"}}}}
+  }
+}
