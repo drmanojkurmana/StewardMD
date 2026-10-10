@@ -174,6 +174,45 @@ export async function proDailyTokensView(env, request, who, store, deps) {
   } catch (e) { return null; }
 }
 
+/* The numbers the AI Usage screen shows, in ONE unit (MaiK Tokens = the same counter checkQuota enforces).
+ * Owner, 2026-10-10: "keep single MaiK Tokens, show weekly and per day tokens left, 300000 per month for Pro and
+ * 20K per day, reset every night". limit: -1 = unlimited, null = no such limit for this account.
+ * day = this IST day (resets at midnight), week = the last 7 IST days (used only), month = this calendar month. */
+const IST_MS = 19800000, DAY_MS = 86400000;
+export async function allowanceView(env, request, who, store, deps) {
+  deps = deps || {};
+  const now = deps.now || Date.now();
+  try {
+    const owner = await (deps.ownerOK || ownerOK)(request, env).catch(function () { return false; });
+    const pr = await (deps.proFromRequest || proFromRequest)(env, request).catch(function () { return null; });
+    const signedIn = !!(pr && pr.uid), isPro = !!(pr && pr.pro && pr.uid);
+    const cfg = usageConfig(env), id = who && who.id;
+    if (!id || !store) return null;
+    const month = new Date(now).toISOString().slice(0, 7);
+    const days = []; for (let i = 0; i < 7; i++) days.push(istDay(now - i * DAY_MS));
+    const [dayRecs, mrec] = await Promise.all([
+      Promise.all(days.map(function (d) { return readJson(store, "maik:u:" + id + ":" + d); })),
+      readJson(store, "maik:m:" + id + ":" + month),
+    ]);
+    const used = (dayRecs[0] && dayRecs[0].tokens) || 0;
+    const week = dayRecs.reduce(function (a, r) { return a + ((r && r.tokens) || 0); }, 0);
+    const mUsed = (mrec && mrec.tokens) || 0;
+    let dayLimit = null, monthLimit = null;
+    if (owner) { dayLimit = -1; monthLimit = -1; }
+    else if (signedIn) {
+      if (isPro) { const pv = await proDailyTokensView(env, request, who, store, deps); if (pv) dayLimit = pv.limit; }
+      let cap = null;
+      try { cap = await (deps.monthlyCapFor || monthlyCapFor)(env, pr.uid, isPro, !!(pr.claims && pr.claims.phoneVerified === true), month, { kv: store }); } catch (e) {}
+      monthLimit = cap != null ? cap : (isPro ? cfg.monthlyTokens : cfg.freeMonthlyTokens);
+    }
+    const nextMidnightIst = Math.floor((now + IST_MS) / DAY_MS) * DAY_MS + DAY_MS - IST_MS;
+    const d = new Date(now), nextMonth = Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1);
+    return { plan: owner ? "owner" : (isPro ? "pro" : (signedIn ? "free" : "guest")), signedIn: signedIn,
+      day: { limit: dayLimit, used: used }, week: { used: week }, month: { limit: monthLimit, used: mUsed },
+      resetsDayAt: nextMidnightIst, resetsMonthAt: nextMonth };
+  } catch (e) { return null; }
+}
+
 /* Pre-call gate. type ∈ general|case|intent|ocr|pdf|prep. Returns {ok} or {ok:false, reason, message}.
    Enforces: rate limit, per-user daily requests (by class), daily/monthly tokens, OCR/PDF
    quotas, and the global daily-cost circuit breaker. Fail-open when no KV. */
@@ -294,7 +333,7 @@ export async function checkQuota(env, request, type, opts) {
       const _r = callerVerified ? "verified-week-expired" : "unverified";
       return { ok: false, reason: _r, needsPro: true, verified: !!callerVerified, message: proMessageFor(_r), id };
     }
-    return { ok: false, reason: budgetApplied ? "over-budget" : "monthly-tokens", message: QUOTA_MSG, id };
+    return { ok: false, reason: budgetApplied ? "over-budget" : "monthly-tokens", message: "You've used this month's " + Number(monthlyCap).toLocaleString("en-IN") + " MaiK Tokens. They renew on the 1st. Clinical reasoning, calculators, and reference tools remain available.", id };
   }
   if (!exempt) {
     if (type === "general" || type === "intent") { const lim = who.guest ? cfg.guestDaily : cfg.generalDaily; if (u.general >= lim) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }

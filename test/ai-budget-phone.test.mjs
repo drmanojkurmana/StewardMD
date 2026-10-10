@@ -18,8 +18,8 @@ const ENV = { BUDGET_FREE_TOKENS: "5000" };
 test("effectiveAllowance: non-Pro + phoneVerified -> free tokens; non-Pro without it -> 0; Pro unaffected", () => {
   assert.equal(effectiveAllowance(ENV, false, null, true, {}, "2026-09"), 5000);
   assert.equal(effectiveAllowance(ENV, false, null, false, {}, "2026-09"), 0);
-  assert.equal(effectiveAllowance(ENV, true, null, false, {}, "2026-09"), 1000000);
-  assert.equal(effectiveAllowance(ENV, true, "physician", false, {}, "2026-09"), 3000000);
+  assert.equal(effectiveAllowance(ENV, true, null, false, {}, "2026-09"), 300000);
+  assert.equal(effectiveAllowance(ENV, true, "physician", false, {}, "2026-09"), 300000);
   assert.equal(effectiveAllowance(ENV, false, null, false, { aiCapTokens: 800 }, "2026-09"), 800, "an owner override still wins");
 });
 
@@ -91,7 +91,7 @@ test("monthlyCapFor: the free allowance tracks phoneVerified through the cache",
   const d = { kv, getEntitlement: async () => ({}) };
   assert.equal(await monthlyCapFor(env, "bp-u6", false, false, MONTH, d), 0);
   assert.equal(await monthlyCapFor(env, "bp-u6", false, true, MONTH, d), 5000);
-  assert.equal(await monthlyCapFor(env, "bp-u6", true, false, MONTH, d), 1000000);
+  assert.equal(await monthlyCapFor(env, "bp-u6", true, false, MONTH, d), 300000);
 });
 
 test("checkQuota: an approved student/intern (traineeVerified) is not told to verify a registration", async () => {
