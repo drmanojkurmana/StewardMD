@@ -20,7 +20,7 @@ const UNITS = new Set([...range("ob", 12), ...range("obr", 8), ...range("gy", 12
 const isMbbs = (u) => /^(ob|gy)\d+$/.test(u);
 const ITEMS = new Set([
   ...["ctg", "fetal-planes", "hc-biometry"].map((x) => "clinic:" + x),
-  ...["labour", "pph", "eclampsia", "shoulder", "breech", "twins", "collapse", "ovulation", "hrt", "pmb", "steroids", "mullerian", "pcos", "pid", "fibroid"].map((x) => "drill:" + x),
+  ...["labour", "pph", "eclampsia", "shoulder", "breech", "twins", "collapse", "ovulation", "hrt", "pmb", "steroids", "ectopic", "endo", "hysfluid", "pul", "cardiac", "cerclage", "consent", "fgr", "mullerian", "pcos", "pid", "fibroid"].map((x) => "drill:" + x),
   ...["mechanism", "cycle", "palm-coein", "popq", "ovarian-triage", "cervical-screening"].map((x) => "explorer:" + x),
   ...["edd", "bishop", "mgso4", "antid", "dipsi", "apgar", "efw", "weightgain", "vbac", "ganzoni", "rmi", "meows", "mec"].map((x) => "tool:" + x),
 ]);

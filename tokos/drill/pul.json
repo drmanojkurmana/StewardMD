@@ -1,0 +1,176 @@
+{
+  "id": "pul",
+  "kind": "drill",
+  "level": "resident",
+  "review": "ai_drafted",
+  "timeLimitSec": 600,
+  "title": {
+    "en": "Pregnancy of unknown location: act on two hCG values 48 hours apart",
+    "hi": "pregnancy of unknown location (जगह का पता न होने वाली गर्भावस्था): 48 घंटे के दो hCG से अगला कदम"
+  },
+  "scenario": {
+    "en": "Three women come to the early pregnancy assessment service (EPAU). Each has a positive pregnancy test and nothing seen in the uterus or tubes. Each has a second serum hCG 48 hours after the first. Teaching scenario, not real patients.",
+    "hi": "तीन महिलाएँ early pregnancy assessment service (EPAU) में आती हैं। हर एक का pregnancy test positive है, पर गर्भाशय या ट्यूब में कुछ नहीं दिखता। हर एक का दूसरा serum hCG पहले के 48 घंटे बाद लिया गया है। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    {
+      "label": "NICE NG126 Ectopic pregnancy and miscarriage: diagnosis of viable intrauterine and tubal ectopic pregnancy, recommendations 1.8.7 to 1.8.10 (pregnancy of unknown location)",
+      "url": "https://www.nice.org.uk/guidance/ng126/chapter/diagnosis-of-viable-intrauterine-pregnancy-and-of-tubal-ectopic-pregnancy"
+    }
+  ],
+  "stages": [
+    {
+      "id": "rise",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 1: serum hCG has risen by 70% after 48 hours. What do you do?",
+        "hi": "पहली महिला: 48 घंटे बाद serum hCG में 70% की बढ़त है। आप क्या करेंगे?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "fall",
+          "text": {
+            "en": "Tell her a developing intrauterine pregnancy is likely but not confirmed, and offer a transvaginal scan 7 to 14 days later.",
+            "hi": "उसे बताएँ कि गर्भाशय में pregnancy बढ़ने की संभावना है पर पक्की नहीं, और 7 से 14 दिन बाद transvaginal scan दें।"
+          },
+          "feedback": {
+            "en": "NICE 1.8.7: a rise above 63% after 48 hours means she is likely to have a developing intrauterine pregnancy, but ectopic cannot be excluded. Offer a scan 7 to 14 days later, earlier if hCG is 1,500 IU/L or more.",
+            "hi": "NICE 1.8.7: 48 घंटे में 63% से ज़्यादा बढ़त पर गर्भाशय में pregnancy बढ़ने की संभावना है, पर ectopic को अभी नकारा नहीं जा सकता। 7 से 14 दिन बाद scan दें, और hCG 1,500 IU/L या ज़्यादा हो तो पहले।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "fall",
+          "text": {
+            "en": "Diagnose ectopic and book laparoscopy at once.",
+            "hi": "ectopic मानकर तुरंत laparoscopy बुक करें।"
+          },
+          "feedback": {
+            "en": "NICE 1.8.7: a rise above 63% points to a developing intrauterine pregnancy. The next step is a scan 7 to 14 days later, not laparoscopy.",
+            "hi": "NICE 1.8.7: 63% से ज़्यादा बढ़त गर्भाशय में pregnancy की ओर इशारा करती है। अगला कदम 7 से 14 दिन बाद scan है, laparoscopy नहीं।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "fall",
+          "text": {
+            "en": "Discharge her, because a rise means the pregnancy is safe.",
+            "hi": "उसे छुट्टी दें, क्योंकि बढ़त का मतलब है कि pregnancy सुरक्षित है।"
+          },
+          "feedback": {
+            "en": "NICE 1.8.7 says ectopic cannot be excluded and offers a scan 7 to 14 days later. A rise in hCG alone does not settle the location.",
+            "hi": "NICE 1.8.7 के अनुसार ectopic को नकारा नहीं जा सकता, और 7 से 14 दिन बाद scan दिया जाता है। सिर्फ़ hCG बढ़ना जगह तय नहीं करता।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fall",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 2: serum hCG has fallen by 60% after 48 hours. What is the plan?",
+        "hi": "दूसरी महिला: 48 घंटे बाद serum hCG में 60% की गिरावट है। योजना क्या होगी?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "between",
+          "text": {
+            "en": "Tell her the pregnancy is unlikely to continue but not confirmed, give support information, and ask for a urine test 14 days after the second hCG.",
+            "hi": "उसे बताएँ कि pregnancy आगे चलने की संभावना कम है पर पक्की नहीं, support की जानकारी दें, और दूसरे hCG के 14 दिन बाद urine test करने को कहें।"
+          },
+          "feedback": {
+            "en": "NICE 1.8.8: a fall above 50% after 48 hours means the pregnancy is unlikely to continue but not confirmed. Ask for a urine pregnancy test 14 days after the second hCG. If it is positive, she returns within 24 hours.",
+            "hi": "NICE 1.8.8: 48 घंटे में 50% से ज़्यादा गिरावट पर pregnancy आगे चलने की संभावना कम है, पर पक्की नहीं। दूसरे hCG के 14 दिन बाद urine pregnancy test लें। positive हो तो 24 घंटे में वापस आएँ।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "between",
+          "text": {
+            "en": "Immediate laparoscopy to confirm the location.",
+            "hi": "जगह पक्की करने के लिए तुरंत laparoscopy।"
+          },
+          "feedback": {
+            "en": "NICE 1.8.8 sets a urine test 14 days after the second hCG for this fall. It does not call for immediate surgery.",
+            "hi": "NICE 1.8.8 में इस गिरावट के लिए दूसरे hCG के 14 दिन बाद urine test है। इसमें तुरंत surgery नहीं बताई गई है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "between",
+          "text": {
+            "en": "Give methotrexate to complete the fall.",
+            "hi": "गिरावट पूरी करने के लिए methotrexate।"
+          },
+          "feedback": {
+            "en": "Methotrexate is not part of the NICE 1.8.8 plan. The plan is support information and a urine test 14 days after the second hCG.",
+            "hi": "NICE 1.8.8 योजना में methotrexate नहीं है। योजना है support की जानकारी और दूसरे hCG के 14 दिन बाद urine test।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "between",
+      "src": 0,
+      "timeSec": 60,
+      "prompt": {
+        "en": "Woman 3: serum hCG has risen by 40% after 48 hours. What is the next step?",
+        "hi": "तीसरी महिला: 48 घंटे बाद serum hCG में 40% की बढ़त है। अगला कदम क्या है?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "correct": true,
+          "critical": true,
+          "next": "end",
+          "text": {
+            "en": "Refer her to the early pregnancy assessment service for clinical review within 24 hours.",
+            "hi": "उसे 24 घंटे के भीतर early pregnancy assessment service में clinical review के लिए भेजें।"
+          },
+          "feedback": {
+            "en": "NICE 1.8.9: a decrease below 50% or an increase below 63% in serum hCG means clinical review in the early pregnancy assessment service within 24 hours.",
+            "hi": "NICE 1.8.9: serum hCG में 50% से कम गिरावट या 63% से कम बढ़त हो तो 24 घंटे के भीतर early pregnancy assessment service में clinical review।"
+          }
+        },
+        {
+          "id": "b",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Scan in 7 to 14 days.",
+            "hi": "7 से 14 दिन बाद scan।"
+          },
+          "feedback": {
+            "en": "NICE 1.8.7 sets the 7 to 14 day scan for a rise above 63%. A 40% rise is below that threshold.",
+            "hi": "NICE 1.8.7 में 7 से 14 दिन बाद scan 63% से ज़्यादा बढ़त के लिए है। 40% बढ़त इस सीमा से कम है।"
+          }
+        },
+        {
+          "id": "c",
+          "correct": false,
+          "next": "end",
+          "text": {
+            "en": "Measure serum progesterone to decide the location.",
+            "hi": "जगह तय करने के लिए serum progesterone जाँचें।"
+          },
+          "feedback": {
+            "en": "NICE 1.8.10: do not use serum progesterone as an adjunct to diagnose either viable intrauterine pregnancy or ectopic pregnancy.",
+            "hi": "NICE 1.8.10: viable intrauterine pregnancy या ectopic pregnancy के निदान में serum progesterone सहायक के रूप में इस्तेमाल न करें।"
+          }
+        }
+      ]
+    }
+  ]
+}

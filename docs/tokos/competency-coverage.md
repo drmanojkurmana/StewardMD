@@ -43,7 +43,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG9.1 | ob11-miscarriage-types, ob11-miscarriage-manage |  |  |
 | OG9.2 | ob11-rpl |  |  |
 | OG9.3 | ob10-mtp, ob11-miscarriage-manage |  |  |
-| OG9.4 | ob11-ectopic-dx, ob11-ectopic-manage |  |  |
+| OG9.4 | ob11-ectopic-dx, ob11-ectopic-manage | drill:ectopic, drill:pul |  |
 | OG9.5 | ob11-molar |  |  |
 | OG9.6 | ob11-hyperemesis |  |  |
 | OG10.1 | ob6-aph-approach, ob6-placenta-previa, ob6-abruption |  |  |
@@ -52,14 +52,14 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG12.1 | ob5-classification, ob5-pathophysiology, ob5-severe-features, ob5-bp-control, ob5-magnesium, ob5-eclampsia, ob5-hellp | tool:mgso4, drill:eclampsia | yes |
 | OG12.2 | ob7-anaemia | tool:ganzoni |  |
 | OG12.3 | ob7-gdm | tool:dipsi |  |
-| OG12.4 | ob7-heart |  |  |
+| OG12.4 | ob7-heart | drill:cardiac |  |
 | OG12.5 | ob7-uti |  |  |
 | OG12.6 | ob7-hepb |  |  |
 | OG12.7 | ob7-hiv |  |  |
 | OG12.8 | ob9-rh-how, ob9-rh-antid | tool:antid |  |
 | OG12.9 | ob7-thyroid |  |  |
 | OG12.10 | ob7-surgical |  |  |
-| OG12.11 | ob12-fgr-doppler | tool:efw |  |
+| OG12.11 | ob12-fgr-doppler | tool:efw, drill:fgr |  |
 | OG13.1 | ob3-pelvis-head |  |  |
 | OG13.2 | ob3-mechanism | explorer:mechanism, drill:labour |  |
 | OG13.3 | ob3-onset-stages, ob3-bishop-induction, ob3-monitoring-lcg, ob3-third-stage, ob3-respectful-care | tool:bishop, drill:labour, explorer:mechanism, clinic:ctg |  |
@@ -71,7 +71,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG14.1 | ob3-obstructed-labour |  |  |
 | OG14.2 | ob10-rupture |  |  |
 | OG14.3 | ob9-lie-presentation, ob9-breech, ob10-shoulder | drill:breech |  |
-| OG15.1 | ob8-preterm-what, ob9-breech, ob10-episiotomy, ob10-instrumental, ob10-caesarean, ob10-shoulder | drill:breech |  |
+| OG15.1 | ob8-preterm-what, ob9-breech, ob10-episiotomy, ob10-instrumental, ob10-caesarean, ob10-shoulder | drill:breech, drill:cerclage |  |
 | OG15.2 | ob9-breech, ob10-episiotomy, ob10-instrumental |  |  |
 | OG16.1 | ob6-pph-causes, ob6-pph-first-response, ob6-pph-escalation, ob6-third-stage-emergencies | drill:pph |  |
 | OG16.2 | ob6-pph-escalation | drill:pph | yes |
@@ -125,7 +125,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG34.3 | ob11-gtn |  |  |
 | OG34.4 | gy2-sampling |  |  |
 | OG34.5 | gy5-fibroid-treat, gy11-surgery |  |  |
-| OG34.6 | gy5-endometriosis, gy5-endo-care, gy5-adenomyosis |  |  |
+| OG34.6 | gy5-endometriosis, gy5-endo-care, gy5-adenomyosis | drill:endo |  |
 | OG35.1 | ob2-case-record-plan |  | yes |
 | OG35.2 | ob2-case-record-plan |  |  |
 | OG35.3 | ob2-danger-signs, ob6-referral-note | tool:meows, drill:collapse |  |
@@ -135,7 +135,7 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG35.7 | ob2-case-record-plan |  | yes |
 | OG35.8 | ob1-due-date, ob2-booking-history | tool:edd | yes |
 | OG35.9 | ob10-ethics |  | yes |
-| OG35.10 |  |  | yes |
+| OG35.10 |  | drill:consent | yes |
 | OG35.11 | ob2-case-record-plan |  |  |
 | OG35.12 | ob4-discharge-summary |  |  |
 | OG35.13 | ob2-danger-signs, ob6-referral-note |  |  |
@@ -157,6 +157,6 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | OG37.6 | ob9-breech, ob10-instrumental | drill:breech |  |
 | OG37.7 | ob10-mtp, ob11-miscarriage-manage |  |  |
 | OG38.1 | gy11-surgery |  |  |
-| OG38.2 | gy2-hysteroscopy |  |  |
+| OG38.2 | gy2-hysteroscopy | drill:hysfluid |  |
 | OG38.3 | gy8-lap-sterilisation |  |  |
 | OG38.4 | ob10-ethics |  |  |
