@@ -16,7 +16,7 @@ const repo = fileURLToPath(new URL("../", import.meta.url));
 const PORT = Number(process.env.PORT || 9034), CDP = Number(process.env.CDP_PORT || 9434);
 const SHOTS = process.env.SHOTS || "/tmp/stewardmd-kb-reader";
 const DISEASES = (process.env.DISEASES || "MENINGITIS,CAP,gout,sickle_cell_disease,adult_jaundice,stable_angina").split(",");
-const ORDER = ["kbr-glance", "kbr-causes", "kbr-patho", "kbr-dx", "kbr-ddx", "kbr-mgmt", "kbr-prog", "kbr-pearls", "kbr-refs"];
+const ORDER = ["kbr-glance", "kbr-causes", "kbr-patho", "kbr-dx", "kbr-ddx", "kbr-mgmt", "kbr-prog", "kbr-pearls", "kbr-refs", "kbr-related"];
 const HOME = { diagnostic: "kbr-dx", ddx: "kbr-ddx", treatment: "kbr-mgmt", flowchart: "kbr-mgmt", "flowchart-dx": "kbr-dx", foot: "kbr-refs" };
 
 const server = spawn("node", [repo + "test/serve.mjs", repo, String(PORT)], { stdio: "ignore" });
