@@ -24,11 +24,11 @@
   // The 104 authored monographs the SQL-derived bundle never contained (Atropine sulfate,
   // Enoxaparin sodium, Clopidogrel bisulfate, Caspofungin acetate …). Built by
   // scripts/build-clinical-supplement.mjs; merged UNDER the bundle so a bundled record always wins.
-  var SUP_VER = "sup2";
+  var SUP_VER = "sup3";
   var URL_SUP = "/clinical-supplement.json.gz?v=" + SUP_VER;
   // Name/class/tags only, so search costs 329 KB instead of the 6 MB bundle. Loaded on the first
   // search, not at boot. Built by scripts/build-clinical-index.mjs.
-  var IDX_VER = "idx5";
+  var IDX_VER = "idx6";
   var URL_IDX = "/clinical-index.js?v=" + IDX_VER;
   var FLAG = "stewardmd_offline_clinical";        // "0" disables
   var _data = null;      // { v, struct:{comp:{gold|fields}}, mono:{comp:{…}} }
