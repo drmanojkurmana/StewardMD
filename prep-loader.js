@@ -24,7 +24,7 @@
   "use strict";
   var V = "prep62";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
-  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-nav.css", "prep-tests.css"];
+  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-nav.css"];
   var JS = ["specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep.js", "prep-tests.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-rad.js", "prep-ids.js", "prep-setup.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js"];
   // Optional files: a missing one (404, not yet shipped) is skipped instead of failing PrepNucleus.
   var OPTIONAL = { "prep-tests.js": 1, "prep-viewer.js": 1, "prep-ask.js": 1, "prep-setup.js": 1, "prep-rad.js": 1, "prep-motion.js": 1, "prep-tide.js": 1, "prep-nav.js": 1, "prep-ids.js": 1, "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1, "prep-qgen.js": 1 };
