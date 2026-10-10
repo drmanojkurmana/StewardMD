@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prep/blueprint/v1",
+  "title": "Test blueprint (assembly recipe)",
+  "description": "Drives one test type for one exam profile. Assembly selects only eligible items, records actual distribution and deviations, and shrinks or refuses rather than filling with unrelated items.",
+  "type": "object",
+  "required": ["id", "version", "exam", "profile_version", "test_type", "count", "quotas"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string"}, "version": {"type": "string"},
+    "exam": {"type": "string"}, "profile_version": {"type": "string"},
+    "test_type": {"enum": ["grand", "mini", "subject_mini", "topic", "daily10", "daily_mixed", "weak_area", "incorrect", "pyq_paper", "pyq_topic", "image", "case", "custom", "adaptive_diagnostic"]},
+    "count": {"type": "integer", "description": "daily10 must be exactly 10"},
+    "duration_min": {"type": ["number", "null"], "description": "null = derive from profile seconds-per-item x count"},
+    "scope": {"type": "object", "properties": {"subjects": {"type": "array", "items": {"type": "string"}}, "topics": {"type": "array", "items": {"type": "string"}}, "concepts": {"type": "array", "items": {"type": "string"}}, "pyq": {"type": "object", "properties": {"exam": {"type": "string"}, "years": {"type": "array", "items": {"type": "integer"}}}}}},
+    "quotas": {"type": "array", "items": {"type": "object", "required": ["by", "key", "n"], "properties": {
+      "by": {"enum": ["subject", "topic", "difficulty", "cognitive_level", "item_format", "image"]}, "key": {"type": "string"},
+      "n": {"type": "integer"}, "tolerance": {"type": "integer", "default": 0}}}},
+    "eligibility": {"type": "object", "properties": {
+      "min_status": {"enum": ["automated_checks_passed", "approved"], "default": "approved"},
+      "exclude_disputed": {"type": "boolean", "const": true},
+      "exclude_seen_days": {"type": "integer", "default": 30},
+      "require_explanation_score": {"type": "integer"}, "options_per_item": {"type": ["integer", "string"]}}},
+    "shortfall": {"enum": ["shrink", "refuse", "offer_alternative"], "default": "shrink"},
+    "min_viable_count": {"type": "integer", "description": "below this the test type is not shown"},
+    "seed_rule": {"enum": ["random", "daily_utc_date", "daily_ist_date", "fixed"], "description": "daily10 uses daily_ist_date so retries draw the same 10"}
+  }
+}

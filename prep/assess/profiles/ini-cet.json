@@ -1,0 +1,262 @@
+{
+ "schema": "prep/assessment-profile/v2",
+ "id": "ini-cet",
+ "version": "2027.1.0",
+ "status": "official",
+ "name": "INI-CET",
+ "session": "INI-CET January 2027 (exam 1 Nov 2026)",
+ "tab": "neet-pg",
+ "verified_on": "2026-10-10",
+ "sources": {
+  "AIIMS-INICET-JAN2027-A": {
+   "url": "AIIMS Examination Section, INI-CET January 2027 session Prospectus Part A (owner-supplied PDF, ~/prep-data/assessment/src/owner-pdfs/b.pdf; aiimsexams.ac.in)",
+   "title": "INI-CET Prospectus Part A, January 2027 session, Examination Section AIIMS New Delhi",
+   "doc_date": "2026-09-16",
+   "sha256": "2c659e4b067897382ae0e5b504dfc59cc22d2471fb37b5d6d47be87505d1e5bd"
+  },
+  "AIIMS-INICET-JAN2026-A": {
+   "url": "https://jipmer.edu.in/sites/default/files/3.%20Prospectus%20Part%20A%20published%20by%20AIIMS.pdf",
+   "title": "INI-CET Information Brochure (Prospectus Part A), January 2026 session, Examination Section AIIMS New Delhi",
+   "doc_date": "2025-10-15",
+   "sha256": "30394d201659888a0ddbdd932b4b865c705b3ff38dce7b9a77d64c1b56d10ead"
+  }
+ },
+ "format": {
+  "questions": 200,
+  "duration_min": 180,
+  "options": 4,
+  "item_types": [
+   "sba",
+   "multiple_correct"
+  ],
+  "sections": [
+   {
+    "id": "1",
+    "label": "Part 1",
+    "questions": 50,
+    "minutes": 45
+   },
+   {
+    "id": "2",
+    "label": "Part 2",
+    "questions": 50,
+    "minutes": 45
+   },
+   {
+    "id": "3",
+    "label": "Part 3",
+    "questions": 50,
+    "minutes": 45
+   },
+   {
+    "id": "4",
+    "label": "Part 4",
+    "questions": 50,
+    "minutes": 45
+   }
+  ]
+ },
+ "navigation": {
+  "locked_sections": true,
+  "revisit_within_section": true,
+  "return_to_closed_section": false,
+  "early_section_submit": false,
+  "auto_advance_on_timeout": true,
+  "mark_for_review": true,
+  "break_between_parts": false
+ },
+ "scoring": {
+  "correct": 1,
+  "incorrect": -0.3333333333333333,
+  "unanswered": 0,
+  "pass": null
+ },
+ "pace_sec": 54,
+ "blueprint": {
+  "kind": "none",
+  "subjects": {},
+  "unmapped": {},
+  "note": "Part A of the prospectus gives no subject split. Tests spread questions across all MBBS subjects in proportion to the bank and say so."
+ },
+ "item_styles": [
+  {
+   "style": "statement_combination",
+   "share": null,
+   "basis": "Part A (January 2026 and January 2027) confirms Multiple Correct Choice questions but not their share or a partial credit rule. The app shows them as statement-combination single-best-answer items (owner 2026-10-10) and records how many a test holds; no quota is set until a share is known."
+  }
+ ],
+ "previous_formats": [
+  {
+   "id": "ini-cet-2026-01",
+   "label": "INI-CET January 2026",
+   "questions": 200,
+   "duration_min": 180,
+   "src": "AIIMS-INICET-JAN2026-A",
+   "section": "X.B",
+   "official": true,
+   "note": "same format, marking and parts as January 2027; tie-break then: fewer negative marks, then age"
+  }
+ ],
+ "legacy_mock": {
+  "id": "ini-cet",
+  "label": "INI-CET pattern",
+  "n": 200,
+  "min": 180,
+  "plus": 1,
+  "minus": 0.3333333333333333
+ },
+ "legacy": {
+  "tab": "neet-pg",
+  "order": 1,
+  "scheme": "ini-cet",
+  "note": "The pattern the app used before smd_prep_tests2 (one overall timer). Shown only with the flag off."
+ },
+ "style": {
+  "core_id": "ini-cet",
+  "status": "provisional",
+  "basis": "asserted generation mix, not learned from calibration",
+  "text": "conceptual depth, clinical application, recent guideline points, image-free one-liners and short vignettes",
+  "stem": "short vignette or direct",
+  "cog": {
+   "recall": 0.3,
+   "application": 0.45,
+   "reasoning": 0.25
+  },
+  "d": {
+   "1": 0.2,
+   "2": 0.5,
+   "3": 0.3
+  }
+ },
+ "provenance": [
+  {
+   "field": "/format/questions",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B, p15",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/duration_min",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B, p15",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/options",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "four options assumed: the prospectus does not state the option count"
+  },
+  {
+   "field": "/format/item_types",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B, p15",
+   "verified_on": "2026-10-10",
+   "note": "Single Correct Choice and Multiple Correct Choice questions"
+  },
+  {
+   "field": "/format/sections",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B Important, p15",
+   "verified_on": "2026-10-10",
+   "note": "04 parts on a random basis, 50 questions and 45 minutes each"
+  },
+  {
+   "field": "/navigation/locked_sections",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B Important, p15",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/return_to_closed_section",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B Important, p15",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/early_section_submit",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B Important, p15",
+   "verified_on": "2026-10-10",
+   "note": "each part is submitted automatically after its 45 minutes"
+  },
+  {
+   "field": "/navigation/auto_advance_on_timeout",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B Important, p15",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/mark_for_review",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B, p15",
+   "verified_on": "2026-10-10",
+   "note": "Unanswered / Marked for Review: 0"
+  },
+  {
+   "field": "/navigation/break_between_parts",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "no break is described"
+  },
+  {
+   "field": "/scoring/correct",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B, p15",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/scoring/incorrect",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B, p15",
+   "verified_on": "2026-10-10",
+   "note": "minus one-third"
+  },
+  {
+   "field": "/scoring/unanswered",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B, p15",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/pace_sec",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "derived: 180 min x 60 / 200 questions"
+  },
+  {
+   "field": "/blueprint/kind",
+   "official": true,
+   "src": "AIIMS-INICET-JAN2027-A",
+   "section": "X.B, p15",
+   "verified_on": "2026-10-10",
+   "note": "no subject distribution in Part A (January 2026 and January 2027)"
+  },
+  {
+   "field": "/item_styles/0/share",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "share of Multiple Correct Choice questions and any partial credit rule not stated in Part A, January 2026 or January 2027"
+  }
+ ]
+}

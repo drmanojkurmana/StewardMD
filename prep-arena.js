@@ -340,6 +340,15 @@
     // 409 (already in) and 410 (too late) are final; anything else keeps the answers for "Send again".
     }, function (e) { r.arena = { state: e && (e.status === 409 || e.status === 410) ? "dup" : "fail", msg: errText(e) }; H.rerender(); });
   }
+  /* The caller's rank. With Tests 2 on (smd_prep_tests2), only with its N and only from PREP_ASSESS.RANK_MIN_N (100)
+     players: a smaller group of opted-in players is not a cohort to rank against. Below that the line says so. */
+  function rankLine(x) {
+    var A = G.PREP_ASSESS, t2 = !!(G.PREP_TESTS && G.PREP_TESTS.on && G.PREP_TESTS.on());
+    if (!x.rank) return "";
+    if (!t2 || !A) return '<p class="pn-rank">Rank ' + H.fmt(x.rank) + (x.of ? " of " + H.fmt(x.of) : "") + "</p>";
+    if (x.of && A.rankShown(x.of)) return '<p class="pn-rank">Rank ' + H.fmt(x.rank) + " of " + H.fmt(x.of) + " players in this event</p>";
+    return '<p class="pn-mut pn-small">' + (x.of ? H.fmt(x.of) + (x.of === 1 ? " player" : " players") : "Too few players") + " so far: a rank is shown from " + A.RANK_MIN_N + " players.</p>";
+  }
   function renderEventResult(r) {
     var a = r.arena || { state: "sending" }, head = H.bar(esc(r.title), "Result", "back");
     if (a.state === "sending") return H.paint(head + '<div class="pn-body"><p class="pn-load" role="status">Submitting your answers…</p></div>');
@@ -348,7 +357,7 @@
     var x = a.res, missed = [];
     r.items.forEach(function (it, i) { if (it.a != null && r.ans[i] !== it.a) missed.push(i); });
     H.paint(head + '<div class="pn-body"><section class="pn-panel pn-score"><p class="pn-big">' + esc(String(x.score)) + "</p>" +
-      (x.rank ? '<p class="pn-rank">Rank ' + H.fmt(x.rank) + (x.of ? " of " + H.fmt(x.of) : "") + "</p>" : "") +
+      rankLine(x) +
       '<p class="pn-mut">' + (x.right || 0) + " right · " + (x.wrong || 0) + " wrong · " + (x.blank || 0) + " unanswered · " + H.fmtTime(x.ms != null ? x.ms / 1000 : r.secs) + "</p></section>" +
       '<h2 class="pn-h">Leaderboard</h2>' + boardHtml(a.board, "score", 10) +
       (missed.length ? '<h2 class="pn-h">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
