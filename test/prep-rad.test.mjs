@@ -118,7 +118,7 @@ test("the ss-radiology taxonomy entry is valid, ships bv v9 (owner-notes module 
   assert.deepEqual(validateSubject({ ...src, bank: "x6" }), ["bank x6"]);
   const app = taxonomyForApp(loadTaxonomy());
   const rad = app.branches.flatMap((b) => b.subjects).find((s) => s.id === "ss-radiology");
-  assert.equal(rad.bv, "v11");
+  assert.equal(rad.bv, "v12");
   assert.deepEqual(rad.ex, ["neet-ss"]);
   assert.equal(rad.sections.reduce((n, s) => n + s.modules.length, 0), 24);
   assert.equal(app.branches.flatMap((b) => b.subjects).filter((s) => s.bv).length, 1);

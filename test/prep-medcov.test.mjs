@@ -127,7 +127,7 @@ test("tidy: key opener cut only when the line still names the answer; keys, opti
   assert.equal(keyOpener("A is correct because it is specific to the heart.", it), "A (Cardiac troponin): It is specific to the heart.", "a bare letter gets the option text");
   assert.equal(keyOpener("C is correct because it is specific to the heart.", it), "C is correct because it is specific to the heart.", "a wrong letter: kept");
   assert.equal(keyOpener("Troponin rises within hours of necrosis.", it), "Troponin rises within hours of necrosis.");
-  assert.equal(OUT_SET, "medcov3", "a changed release goes to a new immutable folder");
+  assert.equal(OUT_SET, "medcov4", "a changed release goes to a new immutable folder");
 });
 
 test("tidy: applyDrops removes whole lines only, trailing lines only, headings and empty tables follow, refuses big cuts", () => {

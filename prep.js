@@ -528,13 +528,13 @@
       }, function (e) { if (hit) return (st.mem[p] = hit.items); throw e; });
     });
   }
-  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes and licensed review books, sets "radnotes2" and "radmax4"; new
+  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes and licensed review books, sets "radnotes2" and "radmax5"; new
      Medicine questions for topics the bank covered thinly, set "medcov"), at overlay/<set>/<subject>/<module>.json
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
-     goes to a new folder (medcov3, radnotes2 and radmax4 now; the earlier folders' copies are removed) and the folder named here moves with it.
+     goes to a new folder (medcov4, radnotes2 and radmax5 now; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes2", "radmax4"], medicine: ["medcov3"], "ss-pulmonology": ["medcov3"] };
-  // Earlier releases of a set (medcov3 -> medcov, medcov2), whose cached copies a new release replaces.
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes2", "radmax5"], medicine: ["medcov4"], "ss-pulmonology": ["medcov4"] };
+  // Earlier releases of a set (medcov4 -> medcov, medcov2, medcov3), whose cached copies a new release replaces.
   function oldOverlays(set) { var m = /^(.*?[a-z])(\d+)$/.exec(set), out = []; if (!m || +m[2] < 2) return out; out.push(m[1]); for (var k = 2; k < +m[2]; k++) out.push(m[1] + k); return out; }
   function loadOverlay(sid, mid, miss) {
     var sets = OVERLAYS[sid] || [];
