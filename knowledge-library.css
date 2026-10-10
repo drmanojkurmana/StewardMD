@@ -370,3 +370,12 @@ body.dark #dxOverlay #dxMgmt.dx-reader :is(.kbv2-scroll, .kbr-scroll) {
     radial-gradient(farthest-side at 0 50%, rgba(255, 255, 255, .22), transparent) left center / 12px 100% no-repeat scroll,
     radial-gradient(farthest-side at 100% 50%, rgba(255, 255, 255, .22), transparent) right center / 12px 100% no-repeat scroll;
 }
+
+/* Related topics: hairline rows at the end of the reader, 48px touch targets (kb-search.js related()) */
+#dxOverlay #dxMgmt.dx-reader .kbr-related { margin: 8px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .kbr-related li { border-bottom: 1px solid var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .kbr-rel { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 48px; margin: 0; padding: 10px 0; border: 0; background: none; color: var(--rd-ink); font: 500 16px/1.35 var(--sans, system-ui); text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+#dxOverlay #dxMgmt.dx-reader .kbr-rel small { display: block; margin-top: 2px; font: 400 13px/1.3 var(--sans, system-ui); color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .kbr-rel i { flex: 0 0 auto; width: 8px; height: 8px; border-top: 1.5px solid var(--rd-mut); border-right: 1.5px solid var(--rd-mut); transform: rotate(45deg); }
+#dxOverlay #dxMgmt.dx-reader .kbr-rel:focus-visible { outline: 2px solid var(--rd-ink); outline-offset: -2px; }
+@media (hover: hover) { #dxOverlay #dxMgmt.dx-reader .kbr-rel:hover span { text-decoration: underline; text-underline-offset: 3px; } }
