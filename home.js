@@ -7217,6 +7217,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // "@@REFINE: a | b | c@@" line listing patient-context factors that would change the answer.
     // We parse it OUT of the displayed text and render tappable chips that re-ask the question with
     // that context appended (reusing the .maik-fu / data-maik-q delegated handler + answer cache).
+    /* Drop the leading paragraphs of a "Know more" answer that only restate the lead already shown. Mirrors
+     * functions/_maik_finish.js dropRepeatedLead (the server does this first). Never returns blank. */
+    function maikDropRepeatedLead(text, lead) {
+      function norm(x) { return String(x || "").toLowerCase().replace(/[*_`#>|]/g, " ").replace(/\s+/g, " ").trim(); }
+      var L = norm(lead); if (!L || !text) return text;
+      var blocks = String(text).split(/\n{2,}/), i = 0;
+      while (i < blocks.length) {
+        var b = norm(blocks[i]); if (!b) { i++; continue; }
+        var head = b.slice(0, 50);
+        var rep = (head.length >= 12 && L.indexOf(head) >= 0) || (b.length >= 12 && L.indexOf(b) >= 0) || (L.length >= 12 && b.indexOf(L.slice(0, Math.min(L.length, 80))) === 0);
+        if (!rep) break; i++;
+      }
+      if (i === 0 || i >= blocks.length) return text;
+      return blocks.slice(i).join("\n\n").replace(/^\s+/, "");
+    }
     function maikStripRefine(s) { return String(s == null ? "" : s).replace(/@@REFINE:[\s\S]*?@@/gi, "").replace(/@@\s*REFINE:[\s\S]*$/i, "").replace(/\s+$/, ""); }
     function maikParseRefine(md) {
       var chips = [], m = String(md == null ? "" : md).match(/@@REFINE:\s*([\s\S]*?)@@/i);
@@ -7710,6 +7725,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _more = maikSplitMore(md); var _concise = maikConciseOn() && !!_more.detail;
       md = _more.detail ? (_more.lead + "\n\n" + _more.detail) : _more.lead;   // strip @@MORE@@; md = full answer (length/cache/Rx)
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
+      /* The model stopped before finishing (the server retried once and it was still cut). Say so rather
+       * than leave a sentence or a table stopping mid-line (owner, 2026-10-10). */
+      if (r && r.cutShort) rendered += '<div class="maik-cutshort" style="margin-top:8px;font-size:12.5px;opacity:.75">This answer was cut short. Tap Regenerate for the full answer.</div>';
       // Phase 2 — numbered sources footer (matches the [n] markers). Prefer the package's own
       // numbered list (identical numbering to what the model was given) so citations line up.
       // A drug-database answer has exactly one source; the KB titles the package carried would be
@@ -9548,6 +9566,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var _md = function (s) { return maikStripRefine(String(s || "")).replace(/@@\s*MORE\s*@@/gi, "").trim(); };
           var _paint = function (s) {
             if (!kdet || !s) return;
+            // Never repeat the bottom line the clinician has just read (owner, 2026-10-10): a model that
+            // restates it has its opening paragraphs dropped here too, in case the server could not.
+            s = maikDropRepeatedLead(s, _ctx.lead);
             kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(s) : maikEscH(s);
             kdet.hidden = false; kdet.removeAttribute("hidden");
           };

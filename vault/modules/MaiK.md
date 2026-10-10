@@ -529,3 +529,15 @@ Owner gave an account 60k in User control and the app's AI Usage sheet still sho
 `home.js renderAiUsage` draws "Daily MaiK tokens: 56k of 60k left today" with a bar. The wallet is a separate balance of
 bought MaiK Tokens (cost based) and is unchanged. Tests: `test/maik-pro-daily-tokens.test.mjs`, `test/run-aiusage-ui.mjs`
 (11 older checks in it already fail on main, unrelated).
+
+## Cut-short answers and a Know more that repeats (2026-10-10)
+Owner screenshots: MaiK Cloud answered "differential diagnosis for organophosphate poisoning" and the text stopped at
+"| Diagnosis/Option | Distinguishing Features"; Know more then restated the opening and stopped at the same place.
+Root cause NOT confirmed (no live access): candidates are the model's finishReason (MAX_TOKENS, a SAFETY / RECITATION
+filter) or a STOP that ends mid-table. The handler never looked at finishReason. Now (`functions/_maik_finish.js`, wired in
+the explain non-stream path): any non-STOP finish, or a text that ends mid-table (`looksCutOff`), is retried ONCE
+(temperature 0.7; double the budget for MAX_TOKENS) and the better attempt kept (`betterAttempt`); if it is still cut the
+response carries `cutShort: true` (also on the SSE done event) and the sheet adds "This answer was cut short. Tap
+Regenerate". A tier-2 answer has its restated opening paragraphs removed (`dropRepeatedLead`, server and `maikDropRepeatedLead`
+in home.js), and the tier-2 prompt says to start with new content. The server logs `[MaiK cut] finishReason=...` (no
+content) so Cloudflare logs now show which it is. Tests: `test/maik-finish.test.mjs`, `test/run-maik-knowmore-ui.mjs`.
