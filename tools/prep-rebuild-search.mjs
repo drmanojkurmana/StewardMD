@@ -65,17 +65,27 @@ async function rebuildSubject(sid, doUpload = false) {
       if (mc && mc.items) items = items.concat(mc.items);
     }
 
-    // Check local or live maik1
-    const maikLocal = path.join(PUB_MAIK, "maik1", sid, `${t.id}.json`);
-    if (fs.existsSync(maikLocal)) {
+    // Check local or live maik overlay sets
+    let maikSets = ["maik1", "maik2", "maik3"];
+    const pubIdxFile = path.join(PUB_MAIK, "maik", "index.json");
+    if (fs.existsSync(pubIdxFile)) {
       try {
-        const mj = JSON.parse(fs.readFileSync(maikLocal, "utf8"));
-        if (mj && mj.items) items = items.concat(mj.items);
+        const pj = JSON.parse(fs.readFileSync(pubIdxFile, "utf8"));
+        if (pj && pj.sets && pj.sets[sid]) maikSets = pj.sets[sid];
       } catch (_) {}
-    } else {
-      const maikUrl = `${API}overlay/maik1/${sid}/${t.id}.json`;
-      const mj = await fetchJSON(maikUrl);
-      if (mj && mj.items) items = items.concat(mj.items);
+    }
+    for (const mSet of maikSets) {
+      const maikLocal = path.join(PUB_MAIK, mSet, sid, `${t.id}.json`);
+      if (fs.existsSync(maikLocal)) {
+        try {
+          const mj = JSON.parse(fs.readFileSync(maikLocal, "utf8"));
+          if (mj && mj.items) items = items.concat(mj.items);
+        } catch (_) {}
+      } else {
+        const maikUrl = `${API}overlay/${mSet}/${sid}/${t.id}.json`;
+        const mj = await fetchJSON(maikUrl);
+        if (mj && mj.items) items = items.concat(mj.items);
+      }
     }
 
     return { id: t.id, items };
