@@ -23,7 +23,7 @@
    the reasoning explanations and knowledge links (optional: without it every item renders as before). */
 (function (G) {
   "use strict";
-  var V = "prep63";
+  var V = "prep64";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-nav.css"];
   var JS = ["specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep.js", "prep-reason.js", "prep-tests.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-rad.js", "prep-ids.js", "prep-setup.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js"];

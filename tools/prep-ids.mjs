@@ -35,6 +35,18 @@ export function appConfig(root = ROOT) {
   const pyq = /PYQ_VER = G\.SMD_PREP_PYQ_VER \|\| "(v\d+)"/.exec(src)[1];
   const ov = /var OVERLAYS = G\.SMD_PREP_OVERLAYS \|\| (\{[^\n]*\});/.exec(src)[1];
   const overlays = new Function("return " + ov)();
+  const pubIdx = path.join(process.env.HOME || "", "prep-data/qgen/publish/maik/index.json");
+  if (fs.existsSync(pubIdx)) {
+    try {
+      const extra = JSON.parse(fs.readFileSync(pubIdx, "utf8")).sets;
+      if (extra && typeof extra === "object") {
+        for (const [sid, list] of Object.entries(extra)) {
+          const cur = overlays[sid] || (overlays[sid] = []);
+          for (const s of list) if (!cur.includes(s)) cur.push(s);
+        }
+      }
+    } catch (_) {}
+  }
   const tax = JSON.parse(fs.readFileSync(path.join(root, "prep/taxonomy.json"), "utf8"));
   const subjects = [];
   for (const b of tax.branches) for (const s of b.subjects) subjects.push({ id: s.id, bv: s.bv || ver });

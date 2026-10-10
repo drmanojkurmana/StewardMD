@@ -1560,6 +1560,8 @@ feature (private custom modules) and an owner authoring tool, on one engine. Dec
   counts, search rebuild and the Share ID index. `tools/prep-qgen.mjs publish --stage <id> [--set maikN] [--upload]` turns
   the staged set into `overlay/maik<n>/<subject>/<module>.json` (ids `mk-<sha12>`, prov SMD) under
   `~/prep-data/qgen/publish/` and prints the remaining steps; the bank route already whitelists `overlay/maik<n>/...`.
+  Generic discovery (`overlay/maik/index.json` -> `manifest-<hash>.json`) allows prep.js to load future wave overlay sets
+  dynamically without requiring further app bundle code changes. Wave 1 published as `maik1` (234 items across 38 modules).
 - **CLI** `tools/prep-qgen.mjs`: `--source <dir|file> --topic --count [--exam --diff --bank]` = dry run with the estimate
   (default); `--run` submits a Batch job (resumable: `--resume <job>`), `--run --direct` rounds of 5 on the Messages API.
   Key from env or `--env ~/.config/stewardmd/anthropic.env`; work files with item text in `~/prep-data/qgen/` (never git).
