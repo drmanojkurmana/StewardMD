@@ -29,9 +29,9 @@ const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.js
 const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
 // Images a bank item carries (img + imgPlace, set by the bank build): v<n>/img/<name>.webp, immutable.
 const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
-// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"; tools/prep-radmax.mjs and tools/prep-ctc.mjs, sets "radmax" to "radmax5"): figures
+// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"; tools/prep-radmax.mjs and tools/prep-ctc.mjs, sets "radmax" to "radmax6"): figures
 // img/radnotes/rn-<id>.webp or img/radmax/rm-<id>.webp and MCQ overlays overlay/<set>/<subject>/<module>.json (all
-// immutable: a new run writes new names or a new set folder, radnotes2, radmax2 ... radmax5, as medcov).
+// immutable: a new run writes new names or a new set folder, radnotes2, radmax2 ... radmax6, as medcov).
 const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|overlay\/(?:radnotes|radmax)(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
 // Medicine coverage MCQs (tools/prep-medcov.mjs, set "medcov"): overlay/medcov/<subject>/<module>.json, immutable.
 // A new release goes to a new folder (medcov2, medcov3, medcov4, ...) so phones that cached the old file fetch the new one.
