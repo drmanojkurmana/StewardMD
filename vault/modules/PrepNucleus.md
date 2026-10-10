@@ -1197,3 +1197,6 @@ best way of learning."
   GPU process +2.5 points over Tide off.
 - Tests changed on purpose: run-prep-ipad (subject tiles per row), run-prep-setup-ui (token prep52); new prep-app tests
   (dayHash, selfShare, Tide wiring).
+
+## Footer fix 2026-10-10 (prep53)
+Feedback screen "Next question" was a sticky row with `bottom:10px` inside the body's 36px bottom padding and only a gradient behind it, so explanation text scrolled through a ~48px band under the button. Now the run body drops its bottom padding (`.pn-run:has(> .pn-qw > .pn-fb + .pn-navrow)`), the row is sticky `bottom:0` with safe-area padding, and its `::before` is an opaque `--pn-bg` plate with a hairline top border (no gradient). Test: `test/run-prep-footer-ui.mjs` (WebKit, 390/430/820/1180, light+dark). Other floating actions (plan sheet `.pn-sheet-act`, create `.pc-pgfoot`, setup `.su-act`, flash `.pk-bar`, lesson bar) already reach the bottom edge with a fade above; unchanged.

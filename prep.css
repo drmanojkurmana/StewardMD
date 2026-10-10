@@ -923,10 +923,14 @@ body.dark .pn-root .pn-opt.right { background: color-mix(in srgb, var(--pn-ok) 1
 .pn-root .pn-fb .pn-mtag { margin-top: 2px; padding-top: 14px; border-top: 1px solid var(--pn-line); }
 body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 
-/* Next in reach: the study row sticks to the bottom of the scrolling body over a short fade of the page. */
-.pn-root .pn-qw > .pn-fb + .pn-navrow { position: sticky; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); z-index: 2; margin-top: 2px; }
+/* Floating primary action (owner bug 2026-10-10): the study row is a real footer of the scrolling body. The body gives up its
+   own bottom padding on a feedback screen so the row sits flush with the bottom edge; the row carries the safe-area padding,
+   an opaque plate (::before) as wide as the column plus the body's 16px gutters, so it never adds sideways scroll and a hairline top border, so no text ever shows under or around the button, and
+   the last explanation line scrolls clear of it (the 14px gap above the row, plus its own padding). */
+.pn-root .pn-run:has(> .pn-qw > .pn-fb + .pn-navrow) { padding-bottom: 0; }
+.pn-root .pn-qw > .pn-fb + .pn-navrow { position: sticky; bottom: 0; z-index: 2; margin-top: 2px; padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px)); }
 .pn-root .pn-qw > .pn-fb button { scroll-margin-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }   /* a focused chip clears the sticky row */
-.pn-root .pn-qw > .pn-fb + .pn-navrow::before { content: ""; position: absolute; inset: -36px -16px -48px; z-index: -1; pointer-events: none; background: linear-gradient(to bottom, transparent, var(--pn-bg) 48%); }
+.pn-root .pn-qw > .pn-fb + .pn-navrow::before { content: ""; position: absolute; inset: 0 -16px; z-index: -1; pointer-events: none; background: var(--pn-bg); border-top: 1px solid var(--pn-line); }
 
 .pn-root .pn-recap { display: flex; justify-content: center; gap: 4px; margin: 2px auto 0; max-width: 280px; width: 100%; }
 .pn-root .pn-recap i { flex: 1 1 0; max-width: 22px; height: 4px; border-radius: 2px; background: var(--pn-s2); }
@@ -1097,7 +1101,7 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-run:not(.pn-battle) .pn-qw:not(:has(> .pn-yq-fig, > .pn-stack)) > .pn-q { position: sticky; top: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > :is(.pn-yq-fig:last-of-type, .pn-stack) { position: sticky; top: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-stack { margin-top: 2px; }
-  .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow::before { left: -12px; right: -12px; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow { margin-bottom: 0; }   /* the footer row ends flush with the scroller */
 }
 
 /* Landscape iPad lesson: an image step puts the figure beside the text, sized to stay above the bar. Tables, flows and
