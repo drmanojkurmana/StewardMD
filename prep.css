@@ -1267,6 +1267,12 @@ body.dark .pn-root .pn-btn.pri { box-shadow: none; }
 .pn-root .pn-link { color: var(--pn-pri-ink); font-weight: 600; }
 body.dark .pn-root .pn-link { color: var(--pn-c-amber); }
 
+@media (hover: hover) and (pointer: fine) {
+  .pn-root .pn-btn:not(.pri):not([disabled]):hover, .pn-root .pn-chip:not(.on):not([disabled]):hover { background: var(--pn-s2); }
+  .pn-root .pn-btn.pri:not([disabled]):hover { background: var(--pn-fill-press); }
+  .pn-root .pn-tab:not(.on):hover { color: var(--pn-text); }
+}
+
 /* Chips and segmented control. */
 .pn-root .pn-chip { border: 0; background: var(--pn-s1); color: var(--pn-text); font-weight: 600; letter-spacing: -.01em;
   transition: transform var(--pn-d-snap) var(--pn-spring-snap), background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease, box-shadow var(--pn-d-quick) ease; }
@@ -1368,7 +1374,7 @@ body.dark .pn-root .pn-opt.right .pn-l, body.dark .pn-root .pn-opt.wrong .pn-l {
 .pn-root .pn-ans { border: 0; border-radius: var(--pn-r-md); background: var(--pn-ok-bg); }
 .pn-root .pn-ans .pn-l, .pn-root .pn-why .pn-l { border-radius: 50%; }
 .pn-root .pn-fb h3 { font-size: 13px; letter-spacing: .02em; text-transform: none; font-weight: 650; }
-.pn-root .pn-kp { border-left: 0; border-radius: var(--pn-r-md); background: var(--pn-pri-soft); box-shadow: inset 3px 0 0 var(--pn-acc); }
+.pn-root .pn-kp { padding: 12px 16px 13px; border-left: 0; border-radius: var(--pn-r-md); background: var(--pn-pri-soft); }
 body.dark .pn-root .pn-kp > b, body.dark .pn-root .pn-xh { color: var(--pn-c-amber); }
 .pn-root .pn-xnotes ul > li::before, .pn-root .pn-exp ul > li::before { background: var(--pn-acc); }
 .pn-root .pn-qn { border-radius: 12px; }
@@ -1386,6 +1392,9 @@ body.dark .pn-root .pn-kp > b, body.dark .pn-root .pn-xh { color: var(--pn-c-amb
 }
 
 /* ---- Lists, stats, boards ---- */
+/* Row actions in a list (Accept, Play, Challenge) are tinted, not filled: amber stays for the one primary action. */
+.pn-root .ps-item .pn-btn.sm.pri { background: var(--pn-pri-soft); color: var(--pn-pri-ink); box-shadow: none; }
+body.dark .pn-root .ps-item .pn-btn.sm.pri { color: var(--pn-c-amber); }
 .pn-root .pn-again .pn-btn { padding: 0 12px; font-size: 15px; line-height: 1.25; text-wrap: balance; }
 .pn-root .pn-rec b { font-family: var(--pn-disp); font-size: 24px; letter-spacing: -.03em; }
 .pn-root .pn-lb.me { background: var(--pn-pri-soft); }

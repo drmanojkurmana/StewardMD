@@ -1098,3 +1098,30 @@ best way of learning."
   Staging scripts: `$CLAUDE_JOB_DIR/tmp/keyfix/scripts/` (build, patch-repo, upload, verify), built from the live R2 copies.
 - `tools/prep-medcov.mjs` OUT_SET is medcov4, but its `assemble` does not rebuild the key-fix items: never re-upload medcov4
   from an assemble run; a later medcov release starts from the live medcov4 files.
+
+## Apple redesign on the owner's palette (2026-10-10, branch `feat/prep-apple-ui`, prep49)
+- Owner after the quiet redesign: "Didn't like the UI. I want it lively, premium, without UI slop, classic Apple-like."
+  Palette he supplied: Pastel Amber `#EFC07B`, Prussian Blue `#0F3460`, Dark Navy `#16213E`, Midnight Blue `#1A1A2E`.
+  (His swatch image renders the amber tile pale green; the hex he wrote, `#EFC07B`, is what ships.) Supersedes the look
+  of the quiet redesign; its structure (home order, scroll restore, no celebrations, no banner) still holds.
+- Tokens (prep.css top): three layers. Primitives `--pn-c-*` (the four colours plus derived navy steps `#1F2B4D`,
+  `#29375E`, `#34446F`, Prussian-hi `#13396A`, amber-lo `#E2A957`, light paper `#F3F2EE` / `#EBE9E3` / `#DEDCD4`, ink
+  `#13203D` / `#556079`). Semantic tokens keep their old names so every prep-*.css file follows: dark bg Midnight, card
+  Dark Navy, s1 `#1F2B4D`, text `#F5F3EE`, mut `#A9B1C7`, `--pn-pri` amber; light bg `#F3F2EE`, white cards with a
+  two-layer navy-tinted shadow (`--pn-elev`) and no border (`--pn-card-edge` transparent), text `#13203D`, `--pn-pri`
+  Prussian. `--pn-fill` (primary action) is amber with Midnight ink (10:1) in both themes; amber never carries text on
+  light (1.7:1). New: `--pn-hero*` (Prussian moment surface, both themes), `--pn-sel-*` (selected chip: Prussian/white on
+  light, Prussian-hi/amber-ink on dark), `--pn-tile-*` (icon squircles), `--pn-info` (third data series), `--pn-disp`,
+  springs `--pn-spring-snap|soft|pop` (CSS `linear()` sampled from Apple response/damping 0.32/0.72, 0.4/1, 0.36/0.6).
+- Component layer: "Apple pass" section at the end of prep.css. Capsule buttons (50 px), capsule chips, iOS segmented
+  control (thumb + shadow), 16 px cards, 14 px options with a 2 px ring for chosen/right/wrong, 28 px sheet tops with a
+  grabber, 9 px icon squircles. Presses: scale .95/.98 in 90 ms, release on the snap spring. The answer badge and a done
+  plan tick land on the pop spring. Reduced motion: transforms dropped, fades kept.
+- Moment cards on Prussian with the amber figure/ring: readiness (`.pl-hero`, prep-plan.css), set finished (`.pn-score`),
+  lesson finish, cards finish (`.pk-end`), level card (`.pn-lvb`); they redefine the text/ring tokens locally.
+- Up next is a card row led by an amber start disc (CSS play glyph on `.pl-tick::after`), not a filled row.
+- Bar mark: flat amber `prep/art/logo-mark-amber-96.webp` on dark, flat Prussian `logo-mark-prussian-96.webp` on light
+  (alpha of the old flat mark). MaiK mark/wordmark untouched.
+- Share image (`drawCard`, prep-arena.js): Midnight page, amber mark, level on a Prussian card, amber streak words and
+  calendar steps, no painted art (hero-dark/streak webp no longer loaded).
+- Tests changed on purpose: prep-app (the amber and Prussian marks), run-prep-setup-ui (token prep49).
