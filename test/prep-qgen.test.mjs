@@ -379,5 +379,18 @@ test("PREP_QGEN_OWNERS narrows the Author tool to the listed owner", async () =>
   assert.equal((await post(env, { op: "status" }, "tok-k")).json.owner, false);
   assert.equal((await post(env, { op: "stage", subject: "x", module: "y", items: [] }, "tok-k")).status, 403);
   assert.equal((await post(env, { op: "status" }, "tok-o")).json.owner, true);
-  assert.equal((await post(envFor(), { op: "status" }, "tok-k")).json.owner, true, "without the list, ownerOK decides");
+  assert.equal((await post(envFor(), { op: "status" }, "tok-k")).json.owner, false, "default list: the content owner only");
+  assert.equal((await post(envFor(), { op: "status" }, "tok-o")).json.owner, true);
+  assert.equal((await post(envFor({ PREP_QGEN_OWNERS: "*" }), { op: "status" }, "tok-k")).json.owner, true, "* = ownerOK decides");
+});
+test("one secret: key::workspace (production binding limit), no flag vars needed", async () => {
+  reset();
+  const env = envFor({ ANTHROPIC_API_KEY: KEY + "::" + WS, ANTHROPIC_WORKSPACE_ID: undefined, PREP_QGEN_ON: undefined, PREP_QGEN_STUDENT: undefined });
+  assert.deepEqual(E.creds(env), { key: KEY, ws: WS });
+  assert.equal((await post(env, { op: "status" })).json.on, true);
+  const r = await post(env, gen());
+  assert.equal(r.status, 200, r.text);
+  assert.ok(calls.every((c) => c.headers["x-api-key"] === KEY && c.headers["anthropic-workspace-id"] === WS));
+  noKey(r.text);
+  assert.equal((await post(envFor({ PREP_QGEN_ON: "0" }), { op: "status" })).json.on, false);
 });

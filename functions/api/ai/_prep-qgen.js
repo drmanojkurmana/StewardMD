@@ -2,9 +2,10 @@
  * Engine: functions/_prep-qgen.js (Claude via the Anthropic Messages / Message Batches APIs). Vault: PrepNucleus.md
  * "MaiK modules (qgen)".
  *
- * Feature flag: PREP_QGEN_ON = "1" and the secret ANTHROPIC_API_KEY (plus ANTHROPIC_WORKSPACE_ID). Without both every op
- * except status answers 503 { error: "not-configured" } and status says { on: false }, so the app hides its entry points.
- * Students additionally need PREP_QGEN_STUDENT = "1". The owner (ownerOK: owner Google login) needs only PREP_QGEN_ON.
+ * Feature switch: the secret ANTHROPIC_API_KEY (with the workspace id, see creds()). Without it every op except status
+ * answers 503 { error: "not-configured" } and status says { on: false }, so the app hides its entry points.
+ * PREP_QGEN_ON = "0" turns everything off, PREP_QGEN_STUDENT = "0" the student feature only (no var is set by default:
+ * the production Pages project is at the 128 text-binding limit).
  *
  * Ops (JSON body { op, ... }):
  *   status                -> { on, student, owner, caps: { modulesPerDay, perModule, perCall }, left, models }
@@ -63,7 +64,10 @@ export async function qgenOwner(request, env) {
   let ok = false;
   try { ok = await ownerOK(request, env); } catch (e) { ok = false; }
   if (!ok) return false;
-  const list = String((env && env.PREP_QGEN_OWNERS) || "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
+  // Default: the content owner only. PREP_QGEN_OWNERS = "*" falls back to ownerOK alone.
+  const conf = env && env.PREP_QGEN_OWNERS != null ? String(env.PREP_QGEN_OWNERS) : "drmanojkurmana@gmail.com";
+  if (conf.trim() === "*") return true;
+  const list = conf.split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
   if (!list.length) return true;
   try { const c = await verifiedClaimsFor(request, env); const em = c ? String(verifiedEmailOf(c) || "").toLowerCase() : ""; return !!em && list.indexOf(em) >= 0; } catch (e) { return false; }
 }
