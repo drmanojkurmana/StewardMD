@@ -136,3 +136,43 @@ test("usage screen: unlimited account and owner", async () => {
 test("usage screen: a non-Pro account has no daily allowance to show", async () => {
   assert.equal(await view("pv-5", { verified: true }, 0), null);
 });
+
+/* ── One unit, three numbers (owner, 2026-10-10: "keep single MaiK Tokens, show weekly and per day tokens left, 300000 per month, 20K per day") ── */
+import { allowanceView } from "../functions/_usage.js";
+async function allow(uid, claims, seed, owner, extraDeps) {
+  const kv = fakeKv(); if (seed) await seed(kv);
+  const env = { MAIK_KV: kv, OWNER_EMAILS: "owner1@example.com" };
+  const req = new Request("https://stewardmd.in/api/ai/usage", { headers: { Authorization: "Bearer " + (await token(uid, claims)) } });
+  const real = globalThis.fetch;
+  globalThis.fetch = async (u) => String(u).indexOf("securetoken@system") >= 0 ? new Response(JSON.stringify({ keys: [jwk] }), { headers: { "Cache-Control": "max-age=3600" } }) : new Response("{}");
+  try { return await allowanceView(env, req, { id: "fb:" + uid, email: uid + "@example.com" }, kv, { monthlyCapFor: async () => 300000, ...(extraDeps || {}) }); } finally { globalThis.fetch = real; }
+}
+const dayAgo = (n) => istDay(Date.now() - n * 86400000);
+test("Pro: 20,000 a day, 300,000 a month, this week's use, all in one unit", async () => {
+  const a = await allow("al-1", PRO, async (kv) => {
+    await kv.put("maik:u:fb:al-1:" + dayAgo(0), JSON.stringify({ tokens: 4960 }));
+    await kv.put("maik:u:fb:al-1:" + dayAgo(2), JSON.stringify({ tokens: 10000 }));
+    await kv.put("maik:u:fb:al-1:" + dayAgo(9), JSON.stringify({ tokens: 99999 }));   // outside the week
+    await kv.put("maik:m:fb:al-1:" + new Date().toISOString().slice(0, 7), JSON.stringify({ tokens: 40000 }));
+  });
+  assert.equal(a.plan, "pro");
+  assert.deepEqual(a.day, { limit: 20000, used: 4960 });
+  assert.equal(a.week.used, 14960, "the last 7 days, not older ones");
+  assert.deepEqual(a.month, { limit: 300000, used: 40000 });
+  assert.ok(a.resetsDayAt > Date.now() && a.resetsDayAt - Date.now() <= 86400000, "resets at the coming IST midnight");
+  assert.ok(a.resetsMonthAt > Date.now());
+});
+test("an account set to 60,000 a day shows 60,000", async () => {
+  assert.equal((await allow("al-2", PRO, (kv) => setUserProTokens(kv, "al-2@example.com", 60000))).day.limit, 60000);
+});
+test("owner is unlimited; a free account has a month figure and no daily one", async () => {
+  const o = await allow("owner1", PRO); assert.equal(o.plan, "owner"); assert.equal(o.day.limit, -1); assert.equal(o.month.limit, -1);
+  const f = await allow("al-3", { verified: true }, null, false, { monthlyCapFor: async () => 5000 });
+  assert.equal(f.plan, "free"); assert.equal(f.day.limit, null); assert.equal(f.month.limit, 5000);
+});
+test("the Pro monthly default is 300,000 and an old cached cap is not reused", async () => {
+  const { roleAllowance } = await import("../functions/_aibudget.js");
+  assert.equal(roleAllowance({}, true, null, true), 300000); assert.equal(roleAllowance({}, true, "physician", true), 300000);
+  const src = (await import("node:fs")).readFileSync(new URL("../functions/_aibudget.js", import.meta.url), "utf8");
+  assert.match(src, /"maik:budget:v2:" \+ uid/, "caps cached at 1M/3M live under the old key and are ignored");
+});

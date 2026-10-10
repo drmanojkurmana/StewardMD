@@ -541,3 +541,21 @@ response carries `cutShort: true` (also on the SSE done event) and the sheet add
 Regenerate". A tier-2 answer has its restated opening paragraphs removed (`dropRepeatedLead`, server and `maikDropRepeatedLead`
 in home.js), and the tier-2 prompt says to start with new content. The server logs `[MaiK cut] finishReason=...` (no
 content) so Cloudflare logs now show which it is. Tests: `test/maik-finish.test.mjs`, `test/run-maik-knowmore-ui.mjs`.
+
+## One unit: MaiK Tokens (2026-10-10, AI Usage redesign)
+Owner: "It's so confusing. Keep single MaiK Tokens, show weekly and per day tokens left. 300000 per month for Pro and 20K
+per day, reset every night ... no mention of Gemini anywhere."
+- **Unit:** MaiK Token = the counter the server enforces (`maik:u:<id>:<IST day>` and `maik:m:<id>:<month>` tokens). The cost-based
+  wallet "MT" (2,000 per rupee, rate card, per-1,000 prices) is gone from the screen; it was inert anyway (`AI_COST_CAP_ON` off).
+- **Allowances:** Pro = 20,000 a day (`MAIK_PRO_DAILY_TOKENS`, AI control, per account) and 300,000 a month
+  (`_aibudget.js roleAllowance`: Pro and physician both 300,000; env `BUDGET_PRO_TOKENS` / `BUDGET_PROMAX_TOKENS`; per account
+  `aiCapTokens` in User control). The cap cache key is now `maik:budget:v2:<uid>` so accounts cached at 1M/3M re-read. Owners unlimited.
+  Reaching the month limit says "used this month's 300,000 MaiK Tokens, renew on the 1st".
+- **Screen:** `GET /api/ai/usage` returns `allowance` from `allowanceView` (`functions/_usage.js`): plan, day {limit,used},
+  week {used, last 7 IST days}, month {limit,used}, reset times. `home.js renderAiUsage`: big "MaiK Tokens left today" with
+  "of 20,000, resets every night at midnight", then used today / used this week / left this month, then used today by feature
+  (request counts). A free account leads with its month and gets "Upgrade to Pro". Older servers still send `proTokens`.
+- **No model names in the app:** removed from the usage rate card (gone), `voice.js` diagnostics, `fundx.js` setting text, the in-app
+  privacy blurb (`index.html`), `privacy.html`, `terms.html`, `privacy-config.js` (now "Google Cloud Vertex AI": the processor stays
+  disclosed, as the privacy policy requires). Internal names (provider ids, `model` metadata inside prep JSON) are not shown.
+- Tests: `test/run-aiusage-ui.mjs` (rewritten), `test/maik-pro-daily-tokens.test.mjs`, `test/ai-budget-tiers.test.mjs`.

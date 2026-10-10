@@ -1,13 +1,14 @@
-/* AI Usage dashboard — drives the REAL More → AI Usage sheet in a headless browser.
+/* AI Usage dashboard - drives the REAL More > AI Usage sheet in a headless browser.
  *
- * What this pins:
- *  1) the sheet renders the MaiK Token wallet, today's spend, the per-feature list and the rate card
- *     from a live /api/ai/usage payload (stubbed at fetch, no network, no PHI);
- *  2) "Buy MaiK Tokens" actually reaches the existing paywall token store — the button used not to
- *     exist at all, so a doctor who ran out had no route to buy;
- *  3) no cap bar is drawn while the per-module caps are not enforced (the old page always drew
- *     "3 / 50" bars for limits that block nobody);
- *  4) a failed usage read shows an error, not a blank sheet.
+ * Owner, 2026-10-10: "It's so confusing. Keep single MaiK Tokens, show weekly and per day tokens left. 300000 per
+ * month for Pro and 20K per day, reset every night, so the dashboard should be easy, and no mention of Gemini."
+ * What this pins, from a stubbed /api/ai/usage payload (no network, no PHI):
+ *  1) ONE unit, MaiK Tokens: today left (the big number) of the daily allowance, this week used, this month
+ *     left of the monthly allowance. No wallet, no "MT", no rate card, no model name;
+ *  2) an owner reads Unlimited; a free account leads with its month and is offered "Upgrade to Pro", which
+ *     reaches the paywall;
+ *  3) a slow load shows the skeleton, a failed read says so and Try again works in place;
+ *  4) light and dark surfaces, and no em dash.
  *
  * USAGE: node test/run-aiusage-ui.mjs
  */
@@ -37,14 +38,11 @@ const STUB = `
   window.__paywallOpened = 0;
   window.SMD_PRO = { openPaywall: function () { window.__paywallOpened++; } };
   window.__usage = {
-    day: "2026-08-25", req: 7, tokens: 18400, estCostInr: 1.25, avgLatencyMs: 2400,
+    day: "2026-10-10", req: 7, tokens: 18400, estCostInr: 1.25, avgLatencyMs: 2400,
     byModule: { maik: 5, ecg: 2, ocr: 3, tts: 1, kb: 4 },
-    limits: { maik: 50, maik_case: 25, summary: 15, research: 2, ecg: 10, thorex: 10, ocr: 50, fundx: 20,
-              followcare: 100, kb: 0, clinix: 60, surgx_note: 30, surgx_case: 40, stt: 50, tts: 50, scribe: 0 },
-    capsEnforced: false, pooled: false, costCapOn: false,
-    tokensUsedMt: 2500, balanceMt: 250000, dailyFreeMt: 0, mtPerInr: 2000,
-    packs: [{ id: "plus", mt: 250000, inr: 199 }, { id: "boost", mt: 50000, inr: 49 }, { id: "power", mt: 750000, inr: 499 }],
-    rates: { model: "gemini-2.5-flash", inPer1k: 14, outPer1k: 50, perImage: 700, perAudioSec: 40 }
+    limits: { maik: 50 }, capsEnforced: false, pooled: false, costCapOn: false,
+    balanceMt: 0, rates: { model: "gemini-2.5-flash-lite", inPer1k: 19, outPer1k: 77, perImage: 700, perAudioSec: 8 },
+    allowance: { plan: "pro", signedIn: true, day: { limit: 20000, used: 4960 }, week: { used: 14960 }, month: { limit: 300000, used: 40000 } }
   };
   window.__usageFail = false;
   if (!window.fetch.__aiuStub) {
@@ -102,75 +100,43 @@ try {
   await sleep(700);
 
   const u = await J(READ);
+  const T = u.text || "";
+  if (process.env.SHOT) { await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await sleep(400); await ev(`["smdBootSplash","introPoster"].forEach(function(i){var b=document.getElementById(i);if(b)b.style.display="none"});return 1;`); await sleep(200); const r = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT, Buffer.from(r.result.result ? r.result.result.data : r.result.data, "base64")); }
   ok(u.sheet === true, "the AI Usage sheet opens and paints");
-  ok(u.balance === "250k", `the MaiK Token wallet leads the screen (got "${u.balance}")`);
-  ok((u.text.match(/250k/g) || []).length === 1, `the wallet value appears exactly once in the sheet, not doubled by the number roll (${(u.text.match(/250k/g) || []).length})`);
-  ok(u.buy === true, "there is a Buy MaiK Tokens button on it");
-  // Priced at the store's entry pack (Boost: ₹49 for 50,000), not at the AI cost rate (mtPerInr gives ₹125).
-  ok(/Worth about ₹245 at the (store|App Store|Google Play) price \(₹49 for 50,000 tokens\)/.test(u.text || ""), `the wallet says what the balance is worth at the store price (${(u.text || "").slice(0, 160)})`);
-  ok(!/₹125/.test(u.text || ""), "the wallet no longer quotes the AI cost rate");
-  ok((u.stats || []).join("|") === "7|18k|2,500|2.4s", `today's stats are real: requests, tokens, spend, latency (${(u.stats || []).join("|")})`);
-  ok((u.rateCells || []).join("|") === "14 MT|50 MT|700 MT|40 MT", `the rate card prices every unit (${(u.rateCells || []).join("|")})`);
-  ok(/gemini-2\.5-flash/.test(u.text || ""), "the rate card names the model it is quoting");
-  ok(u.bars === 0 && !/5 ?\/ ?50/.test(u.text || ""), `no cap bars while the caps are not enforced (${u.bars} bars)`);
-  ok(/MaiK questions ?5/.test(u.text || "") && /ECG reads \(KardiQ X\) ?2/.test(u.text || ""), "per-feature usage is still counted and shown");
-  // Every AI surface must be visible, including the two the old hardcoded list dropped entirely.
-  ok(/Read-aloud \(text-to-speech\) ?1/.test(u.text || ""), "text-to-speech usage appears (was invisible)");
-  ok(/Knowledge Base search ?4/.test(u.text || ""), "knowledge-base usage appears (was invisible)");
-  ok(/Photo scans \(Vision \/ OCR\) ?3/.test(u.text || ""), "vision/OCR usage appears");
-  ok(/Chest X-ray \(ThoreX\) ?0/.test(u.text || ""), "an unused surface is still listed at 0");
-  ok(/MaiK Scribe/.test(u.text || "") && /CliniX tutor/.test(u.text || "") && /FundX/.test(u.text || ""), "scribe, tutor and retinal surfaces are listed");
-  const groups = await ev(`return [].map.call(document.querySelectorAll("#aiUsageBody .aiu-grp"), function(g){return g.textContent;}).join("|");`);
-  ok(/MaiK AI5/.test(groups || ""), `MaiK group subtotal (${groups})`);
-  ok(/Vision & imaging5/.test(groups || ""), "vision group subtotal = ocr 3 + ecg 2");
-  ok(/Voice1/.test(groups || ""), "voice group subtotal = tts 1");
-  ok(/Knowledge4/.test(groups || ""), "knowledge group subtotal = kb 4");
-  ok(!/undefined|NaN/.test(u.text || ""), "nothing renders as undefined/NaN");
+  ok(u.balance === "15,040", `the big number is MaiK Tokens left today: 20,000 - 4,960 (got "${u.balance}")`);
+  ok(/MaiK Tokens left today/.test(T) && /of 20,000/.test(T) && /resets every night at midnight/.test(T), "it says what it is, the daily allowance and that it resets every night");
+  ok(/Used today\s*4,960/.test(T) && /Used this week\s*14,960/.test(T), "today and this week used, in the same unit");
+  ok(/Left this month\s*2,60,000\s*of 3,00,000/.test(T), "this month left of 300,000 (" + (T.match(/Left this month[^]{0,40}/) || [""])[0] + ")");
+  ok(u.bars === 2, `one bar for today, one for the month (${u.bars})`);
+  ok(!/gemini|vertex/i.test(T), "no model or vendor name anywhere on the screen");
+  ok(!/\bMT\b|wallet|pricing|per 1,000 tokens|Buy MaiK Tokens/i.test(T), "no wallet, no MT, no price list, no second unit");
+  ok(u.buy === false, "a Pro account is not offered an upgrade");
+  ok(/MaiK questions\s*5 requests/.test(T) && /Photo scans \(Vision \/ OCR\)\s*3 requests/.test(T) && /Knowledge Base search\s*4 requests/.test(T), "used today by feature, as request counts");
+  ok(!/\u2014/.test(T), "no em dash on the screen");
+  ok(!/undefined|NaN/.test(T), "nothing renders as undefined/NaN");
 
-  // The button must reach the paywall's token store.
-  await ev(`document.getElementById("aiuBuy").click(); return 1;`);
-  await sleep(400);
-  ok(await ev(`return window.__paywallOpened;`) === 1, "Buy MaiK Tokens opens the paywall token store");
-
-  // SHOT=<path> captures the painted sheet, for eyeballing the design without a device.
-  if (process.env.SHOT) {
-    await call("Page.enable", {});
-    // The launch splash/intro sits above the sheet — drop it so the capture shows the dashboard.
-    await ev(`["introPoster","splash","accountGate","introOverlay"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
-    await sleep(400);
-    const box = await J(`var h=document.getElementById("aiUsageBody"); var s=h.closest("#hvSheet")||h.parentElement; var r=s.getBoundingClientRect();
-      return JSON.stringify({ x: r.left + scrollX, y: r.top + scrollY, w: r.width, h: Math.max(r.height, h.scrollHeight) });`);
-    const shot = await call("Page.captureScreenshot", { format: "png", captureBeyondViewport: true, clip: { x: box.x, y: box.y, width: box.w, height: box.h, scale: 2 } });
-    const data = shot.result && shot.result.data;
-    if (data) { (await import("node:fs")).writeFileSync(process.env.SHOT, Buffer.from(data, "base64")); console.log("   ↳ screenshot: " + process.env.SHOT); }
-  }
-
-  // Caps ON: the bars come back with the real limits.
-  await ev(`window.__usage.capsEnforced = true; return 1;`);
+  // Owner: unlimited.
+  await ev(`window.__usage.allowance = { plan: "owner", signedIn: true, day: { limit: -1, used: 4960 }, week: { used: 14960 }, month: { limit: -1, used: 40000 } }; return 1;`);
   await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
-  const capped = await J(READ);
-  ok(capped.bars >= 2, `with caps enforced, the limit bars are drawn (${capped.bars})`);
-  ok(/MaiK questions ?5 \/ 50/.test(capped.text || ""), "and show used / limit");
+  const own = await J(READ);
+  ok(own.balance === "Unlimited" && /4,960 used today/.test(own.text || "") && /Used this month\s*40,000/.test(own.text || ""), "an owner reads Unlimited with the real use beside it");
 
-  // Free daily allowance (cost cap live).
-  await ev(`window.__usage.costCapOn = true; window.__usage.dailyFreeMt = 20000; window.__usage.tokensUsedMt = 15000; return 1;`);
+  // Free account: only a month figure; offered Pro.
+  await ev(`window.__usage.allowance = { plan: "free", signedIn: true, day: { limit: null, used: 120 }, week: { used: 900 }, month: { limit: 5000, used: 1200 } }; return 1;`);
   await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
-  const free = await J(READ);
-  ok(/free allowance/i.test(free.text || "") && /15k \/ 20k/.test(free.text || ""), "today's included allowance is shown against what is spent");
+  const fr = await J(READ);
+  ok(fr.balance === "3,800" && /MaiK Tokens left this month/.test(fr.text || "") && /renews on the 1st/.test(fr.text || ""), `a free account leads with what is left this month (${fr.balance})`);
+  ok(fr.buy === true && /Upgrade to Pro/.test(fr.text || ""), "and is offered Upgrade to Pro");
+  await ev(`window.__paywallOpened = 0; document.getElementById("aiuBuy").click(); return 1;`); await sleep(500);
+  ok(await ev(`return window.__paywallOpened;`) === 1, "which opens the existing paywall");
 
-  // Pro daily MaiK tokens (owner, 2026-10-10: 60k given in the admin console, the screen did not show it).
-  await ev(`window.__usage.proTokens = { limit: 60000, used: 4500, unlimited: false, owner: false }; return 1;`);
+  // A screen with nothing used yet is still a complete screen.
+  await ev(`window.__usage.allowance = { plan: "pro", signedIn: true, day: { limit: 20000, used: 0 }, week: { used: 0 }, month: { limit: 300000, used: 0 } }; window.__usage.byModule = {}; return 1;`);
   await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
-  const pro = await J(READ);
-  ok(/Daily MaiK tokens/.test(pro.text || "") && /56k of 60k left today/.test(pro.text || ""), `a Pro account sees its daily MaiK token allowance (${((pro.text || "").match(/Daily MaiK tokens[^]{0,60}/) || [""])[0]})`);
-  await ev(`window.__usage.proTokens = { limit: -1, used: 4500, unlimited: true, owner: true }; return 1;`);
-  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
-  ok(/4,500 used today/.test((await J(READ)).text || "") && /no daily limit/.test((await J(READ)).text || ""), "an unlimited account says no daily limit");
-  await ev(`window.__usage.proTokens = null; return 1;`);
-  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
-  ok(!/Daily MaiK tokens/.test((await J(READ)).text || ""), "a non-Pro account shows no daily allowance row");
+  const fresh = await J(READ);
+  ok(fresh.balance === "20,000" && !/Used today by feature/.test(fresh.text || ""), "nothing used yet reads as a full 20,000 and no empty feature list");
 
-  // LOADING: a slow server must show the skeleton, not a blank sheet or a spinner-less gap.
+  // LOADING: a slow server must show the skeleton.
   await ev(`window.__usageDelay = 1500; return 1;`);
   await ev(OPEN); await sleep(600); await ev(TAP); await sleep(350);
   const loading = await J(`
@@ -179,31 +145,18 @@ try {
   ok(loading.skel === true, "a slow load shows the shaped skeleton");
   ok(loading.busy === "true", "and announces itself as busy");
   await sleep(1500);
-  ok(/Tokens in wallet/.test(((await J(READ)).text) || ""), "then resolves to the real dashboard");
+  ok(/MaiK Tokens left today/.test(((await J(READ)).text) || ""), "then resolves to the real dashboard");
   await ev(`window.__usageDelay = 0; return 1;`);
 
-  // Never-purchased user: zero wallet, zero usage. Must still be a complete screen.
-  // capsEnforced back to false = today's real production state (MAIK_ENFORCE_CAPS off).
-  await ev(`window.__usage.capsEnforced = false; window.__usage.costCapOn = false; window.__usage.balanceMt = 0; window.__usage.req = 0;
-    window.__usage.tokens = 0; window.__usage.tokensUsedMt = 0; window.__usage.avgLatencyMs = 0;
-    window.__usage.byModule = {}; return 1;`);
-  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
-  const fresh = await J(READ);
-  ok(/haven.t added any tokens yet/i.test(fresh.text || ""), "a user who never purchased is told so plainly");
-  ok(fresh.buy === true && /Buy MaiK Tokens/.test(fresh.text || ""), "and is offered the top-up");
-  ok(/No AI activity yet today/.test(fresh.text || ""), "zero usage reads as zero, not as a broken screen");
-  ok(!/undefined|NaN/.test(fresh.text || ""), "no undefined/NaN in the empty state");
-
-  // LIGHT MODE: the card surfaces must flip with the theme (a sibling sheet shipped unreadable once).
+  // LIGHT MODE: the card surface flips with the theme.
   await ev(`document.body.classList.remove("dark"); return 1;`);
   await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
   const light = await J(`
     var host = document.getElementById("aiUsageBody");
     var w = host.querySelector(".aiu-wallet"), b = host.querySelector(".bal");
-    var cs = getComputedStyle(w), ts = getComputedStyle(b);
-    return JSON.stringify({ card: cs.backgroundColor, ink: ts.color });`);
-  ok(light.card === "rgb(241, 245, 249)", `wallet card uses the LIGHT surface (${light.card})`);
-  ok(light.ink !== light.card, `and the balance text is not the same colour as its card (${light.ink})`);
+    return JSON.stringify({ card: getComputedStyle(w).backgroundColor, ink: getComputedStyle(b).color });`);
+  ok(light.card === "rgb(241, 245, 249)", `the card uses the LIGHT surface (${light.card})`);
+  ok(light.ink !== light.card, `and the number is not the same colour as its card (${light.ink})`);
   await ev(`document.body.classList.add("dark"); return 1;`);
 
   // A failed read must say so, offer a retry, and that retry must work in place.
@@ -212,13 +165,10 @@ try {
   const err = await J(READ);
   ok(/could not be loaded/i.test(err.text || ""), "a failed usage read shows an error instead of an empty sheet");
   ok(await ev(`return !!document.getElementById("aiuRetry");`) === true, "with a Try again button");
-  ok(/features are unaffected/i.test(err.text || ""), "and reassures that AI itself still works");
-
   await ev(`window.__usageFail = false; document.getElementById("aiuRetry").click(); return 1;`);
   await sleep(800);
-  const recovered = await J(READ);
-  ok(/Tokens in wallet/.test(recovered.text || ""), "Try again reloads the dashboard in place, without reopening the sheet");
+  ok(/MaiK Tokens left today/.test((await J(READ)).text || ""), "Try again reloads the dashboard in place, without reopening the sheet");
 
-  console.log(fails === 0 ? "\nALL GREEN — AI Usage dashboard: wallet, spend, rate card and a working buy route" : `\n${fails} FAILED`);
+  console.log(fails === 0 ? "\nALL GREEN - AI Usage dashboard: one unit, today left, this week, this month" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

@@ -113,8 +113,9 @@ test("caps are reported as enforced only when the flag is on", () => {
 });
 
 // ---- the dashboard's render, lifted out of home.js's IIFE and run for real ----------------------
+// Owner, 2026-10-10: ONE unit (MaiK Tokens), today left, this week, this month; no wallet, rate card or model name.
 const src = readFileSync(join(ROOT, "home.js"), "utf8");
-const A = src.indexOf("  // Compact MaiK Token count");
+const A = src.indexOf("  function aiuBar(");
 const B = src.indexOf("  // AI Control Center — OWNER admin console");
 assert.ok(A > 0 && B > A, "found the AI Usage render block in home.js");
 const renderAiUsage = new Function(
@@ -122,144 +123,59 @@ const renderAiUsage = new Function(
   "function aiCtlEsc(s){return String(s==null?'':s).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});}\n" + src.slice(A, B) + "\nreturn renderAiUsage;"
 )();
 
-const RATES = { model: "gemini-2.5-flash", inPer1k: 14, outPer1k: 50, perImage: 700, perAudioSec: 40 };
-const base = { req: 3, tokens: 4200, estCostInr: 0.5, tokensUsedMt: 1000, avgLatencyMs: 2400, mtPerInr: 2000, byModule: { maik: 3 }, limits: { maik: 50, ecg: 10 }, rates: RATES };
+const PRO = { plan: "pro", signedIn: true, day: { limit: 20000, used: 4960 }, week: { used: 14960 }, month: { limit: 300000, used: 40000 } };
+const base = { req: 3, tokens: 4200, byModule: { maik: 3 }, allowance: PRO };
 
-test("dashboard: wallet, buy button and rate card always render", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 250000 }));
-  assert.match(h, /250k/, "balance shown compactly");
-  assert.match(h, /id="aiuBuy"/, "buy-tokens button is present for the click wiring to find");
-  assert.match(h, /Pricing and details/);
-  assert.match(h, /14 MT/); assert.match(h, /50 MT/); assert.match(h, /700 MT/); assert.match(h, /40 MT/);
-  assert.match(h, /gemini-2\.5-flash/);
-  assert.ok(h.indexOf("undefined") === -1 && h.indexOf("NaN") === -1, "no undefined/NaN leaks into the sheet");
+test("dashboard: today left leads, with the daily allowance and the nightly reset", () => {
+  const h = renderAiUsage(base);
+  assert.match(h, /MaiK Tokens left today/); assert.match(h, /15,040/); assert.match(h, /of 20,000/); assert.match(h, /resets every night at midnight/);
+  assert.match(h, /aria-label="MaiK Tokens used today"/, "and a bar for it");
 });
 
-test("dashboard: withholds the rate card entirely when rates are provisional", () => {
-  const u = Object.assign({}, base, { balanceMt: 1000, rates: undefined, ratesProvisional: true });
-  const h = renderAiUsage(u);
-  assert.match(h, /being confirmed and are not published yet/);
-  assert.ok(!/\d+ MT<|MT<\/span>|per 1,000 tokens/.test(h), "no per-unit price is printed");
-  assert.ok(h.indexOf("gemini-3") === -1, "and no estimated model is named with a price");
-  assert.match(h, /id="aiuBuy"/, "buying is still possible");
+test("dashboard: this week used and this month left, in the same unit", () => {
+  const h = renderAiUsage(base);
+  assert.match(h, /Used this week<\/span><b>14,960/);
+  assert.match(h, /Left this month<\/span><b>2,60,000/); assert.match(h, /of 3,00,000/);
 });
 
-test("dashboard: an empty wallet still invites a top-up instead of showing nothing", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, req: 0, tokens: 0, tokensUsedMt: 0, byModule: {}, avgLatencyMs: 0 }));
-  assert.match(h, /Top up once/);
-  assert.match(h, /id="aiuBuy"/);
-  assert.match(h, /Nothing yet today/);
-  assert.ok(h.indexOf("NaN") === -1);
+test("dashboard: no wallet, no MT, no price list, no model or vendor name", () => {
+  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 250000, rates: { model: "gemini-2.5-flash", inPer1k: 14, outPer1k: 50 }, estCostInr: 3 }));
+  assert.ok(!/gemini|vertex/i.test(h), "no vendor/model name");
+  const text = h.replace(/<[^>]+>/g, " ");   // what the doctor reads, not CSS class names
+  assert.ok(!/\bMT\b|wallet|Pricing|per 1,000 tokens|Buy MaiK Tokens/i.test(text), "no second unit, no rate card");
+  assert.ok(h.indexOf("aiuBuy") === -1, "no buy button for a Pro account");
 });
 
-// Every module in the server registry (functions/_ai_usage.js AI_MODULES).
-const ALL_MODULES = ["maik", "maik_case", "summary", "research", "ecg", "thorex", "ocr", "fundx", "followcare", "kb", "clinix", "surgx_note", "surgx_case", "stt", "tts", "scribe"];
-const ALL_LIMITS = Object.fromEntries(ALL_MODULES.map((m) => [m, 0]));
-
-test("dashboard: EVERY AI surface the server reports is listed", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: ALL_LIMITS, byModule: { maik: 3, ocr: 2, tts: 1, kb: 5 } }));
-  // The old hardcoded ORDER omitted these two outright, so usage on them could never be seen.
-  assert.match(h, /Read-aloud \(text-to-speech\)/, "text-to-speech was invisible before");
-  assert.match(h, /Knowledge Base search/, "knowledge base was invisible before");
-  assert.match(h, /Photo scans \(Vision \/ OCR\)/, "vision/OCR is named for what it is");
-  assert.match(h, /ECG reads \(KardiQ X\)/); assert.match(h, /Chest X-ray \(ThoreX\)/);
-  assert.match(h, /FundX \(retinal\)/); assert.match(h, /MaiK Scribe/); assert.match(h, /CliniX tutor/);
-  assert.match(h, /SURGX notes/); assert.match(h, /SURGX case mentor/); assert.match(h, /FollowCare/);
-  assert.match(h, /Patient summaries/); assert.match(h, /MaiK Evidence Review/);
-  ALL_MODULES.forEach((m) => assert.ok(h.includes(">" + (m === "maik" ? "MaiK questions" : "")) || true));
+test("dashboard: an owner is Unlimited; a free account leads with its month and is offered Pro", () => {
+  const own = renderAiUsage({ allowance: { plan: "owner", day: { limit: -1, used: 10 }, week: { used: 10 }, month: { limit: -1, used: 10 } } });
+  assert.match(own, /Unlimited/); assert.ok(!/aiuBuy/.test(own));
+  const free = renderAiUsage({ allowance: { plan: "free", day: { limit: null, used: 1 }, week: { used: 1 }, month: { limit: 5000, used: 1200 } } });
+  assert.match(free, /MaiK Tokens left this month/); assert.match(free, /3,800/); assert.match(free, /renews on the 1st/);
+  assert.match(free, /id="aiuBuy"[^>]*>Upgrade to Pro/);
 });
 
-// 2026-10-02 owner: "make it easy". "Used today" lists only what was used, in the group order; the
-// full list (with zeros and caps) folds under "All AI features".
-test("dashboard: used-today lists only used features, in group order", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: ALL_LIMITS, byModule: { stt: 6, maik: 3, maik_case: 1, ocr: 2, ecg: 4 } }));
-  const used = h.slice(h.indexOf("Used today"), h.indexOf('data-k="all"'));
-  assert.ok(used.indexOf("MaiK questions") < used.indexOf("Photo scans") && used.indexOf("Photo scans") < used.indexOf("Voice transcription"), "group order");
-  assert.ok(used.indexOf("CliniX tutor") === -1, "an unused feature is not in the headline list");
-  assert.match(h, /<details class="aiu-more" data-k="all">[\s\S]*CliniX tutor/, "but it is in the full list");
+test("dashboard: used today by feature lists only what was used, busiest first, and names unknown modules", () => {
+  const h = renderAiUsage({ allowance: PRO, byModule: { maik: 5, kb: 4, ocr: 0, tts: 1, brand_new: 2 } });
+  assert.match(h, /Used today by feature/);
+  assert.ok(h.indexOf("MaiK questions") < h.indexOf("Knowledge Base search"), "busiest first");
+  assert.ok(h.indexOf("Photo scans") === -1, "an unused feature is not listed");
+  assert.match(h, /brand_new/); assert.match(h, /1 request</, "singular");
+  assert.ok(renderAiUsage({ allowance: PRO, byModule: {} }).indexOf("Used today by feature") === -1, "nothing used, no empty list");
 });
 
-test("dashboard: an unused feature is still listed, so you can see where AI can go", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: ALL_LIMITS, byModule: { maik: 2 } }));
-  assert.match(h, /aiu-row zero/, "zero-usage rows render, dimmed rather than hidden");
-  assert.match(h, /Chest X-ray \(ThoreX\)<\/span><span class="u">0</, "an untouched feature shows 0");
-});
-
-test("dashboard: a module the client has no label for still appears", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: { maik: 0, brand_new_ai: 0 }, byModule: { brand_new_ai: 7 } }));
-  assert.match(h, /brand_new_ai<\/span><span class="u">7</, "an ungrouped module shows its count");
-  assert.match(h, /brand_new_ai/, "and are named by id rather than dropped");
-});
-
-test("dashboard: zero total usage still lists every surface, plus a clear note", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: ALL_LIMITS, byModule: {} }));
-  assert.match(h, /Nothing yet today/);
-  assert.match(h, /Photo scans/, "the surfaces are still enumerated");
-});
-
-test("dashboard: no cap bar is drawn while the caps are not enforced", () => {
-  const off = renderAiUsage(Object.assign({}, base, { balanceMt: 1000, capsEnforced: false }));
-  assert.ok(off.indexOf("3 of 50") === -1, "must not imply a 50/day cap that blocks nobody");
-  assert.match(off, /No per-feature daily limits are in force/);
-  assert.ok(off.indexOf("aiu-bar") === -1, "no bars at all when nothing is capped and no cost cap is on");
-
-  const on = renderAiUsage(Object.assign({}, base, { balanceMt: 1000, capsEnforced: true }));
-  assert.match(on, /3 of 50/, "with caps on, the real limit is shown");
-  assert.match(on, /0 of 10/, "an untouched module still shows its cap");
-  assert.match(on, /aiu-bar/);
-});
-
-test("dashboard: the free daily allowance bar appears only when the cost cap is live", () => {
-  const on = renderAiUsage(Object.assign({}, base, { balanceMt: 0, costCapOn: true, dailyFreeMt: 20000, tokensUsedMt: 15000 }));
-  assert.match(on, /free allowance/i);
-  assert.match(on, /5,000 of 20k MT left/, "what is LEFT, not what is spent");
-  assert.match(on, /width:75%/, "bar reflects 15k of 20k");
-  const off = renderAiUsage(Object.assign({}, base, { balanceMt: 0, costCapOn: false, dailyFreeMt: 20000 }));
-  assert.ok(off.toLowerCase().indexOf("free allowance") === -1);
-});
-
-test("dashboard: a pooled co-resident is told the balance is shared", () => {
-  assert.match(renderAiUsage(Object.assign({}, base, { balanceMt: 5000, pooled: true })), /shared with your linked account/);
-  assert.ok(renderAiUsage(Object.assign({}, base, { balanceMt: 5000 })).indexOf("shared with your linked account") === -1);
-});
-
-test("dashboard: a brand-new user (empty payload) renders a complete, honest screen", () => {
-  const h = renderAiUsage({});                       // every field missing
-  assert.ok(!/undefined|NaN|null/.test(h), "no undefined/NaN/null anywhere");
-  assert.match(h, /haven&rsquo;t added any tokens yet/, "explains the empty wallet");
-  assert.match(h, /Buy MaiK Tokens/, "and offers the top-up");
-  assert.match(h, /Nothing yet today/);
-  assert.ok(h.indexOf("per 1,000 tokens") === -1, "no rate card is invented when the server sent none");
-});
-
-test("dashboard: hostile/garbage values still render as numbers", () => {
-  const h = renderAiUsage({
-    req: "x", tokens: null, tokensUsedMt: -50, balanceMt: -1, avgLatencyMs: -3, mtPerInr: 0,
-    byModule: null, limits: null,
-    rates: { model: "", inPer1k: undefined, outPer1k: "abc", perImage: null, perAudioSec: -9 },
-  });
-  assert.ok(!/undefined|NaN/.test(h), "no undefined/NaN leaks");
-  assert.match(h, /0 MT/, "a malformed rate degrades to 0, not 'undefined MT'");
-  assert.ok(h.indexOf("-") === -1 || !/>-\d/.test(h), "no negative counts are printed");
-  assert.match(h, /&mdash;/, "unknown latency shows a dash");
-});
-
-test("dashboard: the buy button changes wording once a wallet exists", () => {
-  assert.match(renderAiUsage(Object.assign({}, base, { balanceMt: 0 })), /Buy MaiK Tokens/);
-  assert.match(renderAiUsage(Object.assign({}, base, { balanceMt: 250000 })), /Add more tokens/);
-});
-
-test("dashboard: the two kinds of 'token' are named apart", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 1000 }));
-  assert.match(h, /AI tokens/); assert.match(h, /MT spent/);
-  assert.match(h, /measure the text the model read and wrote/, "a legend disambiguates them");
+test("dashboard: an empty or hostile payload still renders a calm screen", () => {
+  for (const u of [{}, { allowance: null, tokens: "x" }, { allowance: { plan: "pro", day: { limit: "abc", used: -5 }, week: { used: null }, month: { limit: undefined, used: NaN } }, byModule: null }]) {
+    const h = renderAiUsage(u);
+    assert.ok(!/undefined|NaN|null/.test(h), "no undefined/NaN/null: " + h.slice(0, 80));
+    assert.ok(!/>-\d/.test(h), "no negative counts");
+  }
+  assert.match(renderAiUsage({}), /Sign in to see your daily and monthly MaiK Tokens/);
 });
 
 test("dashboard: progress bars are readable to a screen reader", () => {
-  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, capsEnforced: true }));
+  const h = renderAiUsage(base);
   assert.match(h, /role="progressbar"/);
-  assert.match(h, /aria-valuenow="6"/, "3 of 50 = 6%");
-  assert.match(h, /aria-label="MaiK questions: 3 of 50 used today"/);
+  assert.match(h, /aria-valuenow="25"/, "4,960 of 20,000 = 25%");
 });
 
 test("the sheet has a retry that reloads in place, and a skeleton while loading", () => {

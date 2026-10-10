@@ -3126,13 +3126,6 @@
       if (buy) buy.onclick = function () { closeSheet(); setTimeout(function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) SMD_PRO.openPaywall(); else toast("Loading…"); } catch (e) {} }, 120); };
     }).catch(fail);
   }
-  // Compact MaiK Token count: 1,240 · 50k · 1.2M — a wallet reads better than a 7-digit number.
-  function aiuMt(n) {
-    n = Math.max(0, Math.round(+n || 0));
-    if (n >= 1000000) return (Math.round(n / 100000) / 10) + "M";
-    if (n >= 10000) return Math.round(n / 1000) + "k";
-    return n.toLocaleString("en-IN");
-  }
   function aiuBar(n, lim, label) {
     var pct = lim > 0 ? Math.min(100, Math.round(n / lim * 100)) : 0;
     var cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
@@ -3140,100 +3133,46 @@
     return '<div class="aiu-bar' + cls + '" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"' +
       (label ? ' aria-label="' + aiCtlEsc(label) + '"' : '') + '><span style="width:' + pct + '%"></span></div>';
   }
+  /* AI Usage (owner, 2026-10-10: "It's so confusing. Keep single MaiK Tokens, show weekly and per day tokens
+   * left. 300000 per month for Pro and 20K per day, reset every night, so the dashboard should be easy, and no
+   * mention of Gemini anywhere"). ONE unit: MaiK Tokens, the same counter the server enforces. Today left
+   * (the big number), this week used, this month left, and where today went. No wallet, no rate card, no model. */
+  function aiuN(n) { return Math.max(0, Math.round(+n || 0)).toLocaleString("en-IN"); }
   function renderAiUsage(u) {
-    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision / OCR)", stt: "Voice transcription", tts: "Read-aloud (text-to-speech)", scribe: "MaiK Scribe", fundx: "FundX (retinal)", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base search" };
-    // Every AI surface, grouped the way a doctor thinks about them. This is PRESENTATION ORDER ONLY —
-    // the modules actually rendered come from what the SERVER reports (limits ∪ byModule), so a module
-    // added to the registry shows up here without a client change. The old hardcoded list silently
-    // dropped `tts` and `kb`: usage on those two could never appear on this screen at all.
-    var GROUPS = [
-      { label: "MaiK AI", ids: ["maik", "maik_case", "summary", "research"] },
-      { label: "Vision & imaging", ids: ["ocr", "ecg", "thorex", "fundx"] },
-      { label: "Voice", ids: ["stt", "scribe", "tts"] },
-      { label: "Specialty & learning", ids: ["clinix", "surgx_note", "surgx_case", "followcare"] },
-      { label: "Knowledge", ids: ["kb"] },
-    ];
-    var limits = u.limits || {}, used = u.byModule || {}, enforced = !!u.capsEnforced, out = "";
-
-    // ---- wallet: MaiK Tokens left, plus today's free allowance if the cost cap is switched on ----
-    var bal = Math.max(0, u.balanceMt | 0), spent = Math.max(0, u.tokensUsedMt | 0);
-    var free = Math.max(0, u.dailyFreeMt | 0);
-    // What the balance is worth to the doctor: priced at the store's entry pack (App Store / Play /
-    // web all charge the same), NOT at mtPerInr, which is our AI cost and read as half the value.
-    // The server sends the live pack prices; the fallback is the launch price of the Boost pack.
-    var pk = (u.packs || []).filter(function (p) { return p && p.mt > 0 && p.inr > 0; }).sort(function (a, b) { return a.mt - b.mt; })[0] || { mt: 50000, inr: 49 };
-    var worthRaw = bal * pk.inr / pk.mt;
-    var worth = worthRaw >= 10 ? Math.round(worthRaw).toLocaleString("en-IN") : String(Math.round(worthRaw * 10) / 10);   // a wallet of 100 MT is ₹0.1, not "₹0"
-    var plat = "web"; try { var Cap = window.Capacitor; plat = (Cap && (typeof Cap.getPlatform === "function" ? Cap.getPlatform() : Cap.platform)) || "web"; } catch (e) {}
-    var storeName = plat === "ios" ? "App Store" : plat === "android" ? "Google Play" : "store";
-    // ---- 1. The one answer a doctor opens this for: how much is left, and what today cost. ----
-    var req = u.req | 0;
-    var freeLeft = Math.max(0, free - spent);
+    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision / OCR)", stt: "Voice transcription", tts: "Read-aloud", scribe: "MaiK Scribe", fundx: "FundX (retinal)", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base search", prep: "PrepNucleus", prep_tutor: "PrepNucleus Ask MaiK" };
+    var A = u.allowance, used = u.byModule || {}, out = "";
     var upd = ""; try { upd = new Date(u.updatedAt || Date.now()).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); } catch (e) {}
-    var resets = ""; try { if (u.resetsAt) resets = new Date(u.resetsAt).toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" }); } catch (e) {}
-    out += '<div class="aiu-wallet">' +
-      '<div class="bl">MaiK Tokens left</div><div class="bal">' + aiuMt(bal) + '</div>' +
-      '<div class="aiu-today">Today: <b>' + aiuMt(spent) + '</b> MT spent on <b>' + req.toLocaleString("en-IN") + '</b> ' + (req === 1 ? "request" : "requests") + '</div>' +
-      /* The Pro daily MaiK allowance (owner, 2026-10-10: set 60k for an account in the admin console and
-       * this screen still showed only the wallet). Raw tokens, the unit the limit is counted in. */
-      (u.proTokens ? '<div class="aiu-free"><div class="h"><span>Daily MaiK tokens</span><span class="u">' +
-        (u.proTokens.unlimited ? aiuMt(u.proTokens.used) + ' used today &middot; no daily limit'
-          : aiuMt(Math.max(0, u.proTokens.limit - u.proTokens.used)) + ' of ' + aiuMt(u.proTokens.limit) + ' left today') + '</span></div>' +
-        (u.proTokens.unlimited ? '' : aiuBar(u.proTokens.used, u.proTokens.limit, "Daily MaiK tokens used")) + '</div>' : '') +
-      (u.costCapOn && free > 0
-        ? '<div class="aiu-free"><div class="h"><span>Free today</span><span class="u">' + aiuMt(freeLeft) + ' of ' + aiuMt(free) + ' MT left</span></div>' + aiuBar(spent, free, "Free allowance used today") + '</div>'
-        : '') +
-      '<div class="sub">' + (bal > 0
-        ? 'Worth about &#8377;' + worth + ' at the ' + storeName + ' price. Tokens never expire and work across every AI feature.'
-        : 'You haven&rsquo;t added any tokens yet. Top up once and spend it on any AI feature.') +
-      (u.pooled ? ' This balance is shared with your linked account.' : '') + '</div>' +
-      '<button id="aiuBuy" class="aiu-buy" type="button">' + (bal > 0 ? 'Add more tokens' : 'Buy MaiK Tokens') + '</button></div>' +
-      '<div class="aiu-upd"><span id="aiuUpd" aria-live="polite">Updated ' + aiCtlEsc(upd) + (resets ? ' &middot; resets ' + aiCtlEsc(resets) : '') + '</span>' +
-      '<button id="aiuRefresh" type="button" class="aiu-ref">Refresh</button></div>' +
-      '<div class="ai-usage-note">A new answer can take up to a minute to show here.' + (u.costCapOn && free > 0 ? ' Past the free allowance your wallet takes over, so nothing stops mid-consult.' : '') + '</div>';
-
-    // ---- 2. Where today went: only what was used; the full list folds away. ----
-    var known = {}, all = [];
-    function addId(id) { if (id && !known[id]) { known[id] = 1; all.push(id); } }
-    Object.keys(limits).forEach(addId);
-    Object.keys(used).forEach(addId);
-    var ORDER = []; GROUPS.forEach(function (g) { ORDER = ORDER.concat(g.ids); });
-    all.sort(function (a, b) { var ia = ORDER.indexOf(a), ib = ORDER.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
-    function moduleRow(id) {
-      var n = used[id] | 0, lim = limits[id] | 0, lbl = LBL[id] || id;
-      var zero = n === 0 ? " zero" : "";
-      if (!enforced) return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="u">' + n + '</span></div></div>';
-      if (lim === 0) return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="aiu-unl">' + n + ' &middot; no limit</span></div></div>';
-      return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="u">' + n + ' of ' + lim + '</span></div>' +
-        aiuBar(n, lim, lbl + ": " + n + " of " + lim + " used today") + '</div>';
+    if (!A) {   // an older server, or nothing metered for this caller: still one calm screen
+      out += '<div class="aiu-wallet"><div class="bl">MaiK Tokens used today</div><div class="bal">' + aiuN(u.tokens) + '</div>' +
+        '<div class="sub">Sign in to see your daily and monthly MaiK Tokens.</div></div>';
+    } else {
+      var D = A.day || {}, M = A.month || {}, W = A.week || {};
+      var dUnl = D.limit === -1, mUnl = M.limit === -1;
+      var hasDay = dUnl || (D.limit != null && D.limit > 0), hasMonth = mUnl || (M.limit != null && M.limit > 0);
+      var dLeft = hasDay && !dUnl ? Math.max(0, D.limit - D.used) : 0, mLeft = hasMonth && !mUnl ? Math.max(0, M.limit - M.used) : 0;
+      // The big number answers "how much can I still use today". A plan with no daily limit leads with the month.
+      var headLbl, headVal, headSub, headBar = "";
+      if (hasDay && !dUnl) { headLbl = "MaiK Tokens left today"; headVal = aiuN(dLeft); headSub = 'of ' + aiuN(D.limit) + ' &middot; resets every night at midnight'; headBar = aiuBar(D.used, D.limit, "MaiK Tokens used today"); }
+      else if (hasMonth && !mUnl) { headLbl = "MaiK Tokens left this month"; headVal = aiuN(mLeft); headSub = 'of ' + aiuN(M.limit) + ' &middot; renews on the 1st'; headBar = aiuBar(M.used, M.limit, "MaiK Tokens used this month"); }
+      else if (dUnl || mUnl) { headLbl = "MaiK Tokens"; headVal = "Unlimited"; headSub = aiuN(D.used) + ' used today'; }
+      else { headLbl = "MaiK Tokens used today"; headVal = aiuN(D.used); headSub = 'Sign in to see your allowance.'; }
+      out += '<div class="aiu-wallet"><div class="bl">' + headLbl + '</div><div class="bal">' + headVal + '</div>' +
+        '<div class="aiu-today">' + headSub + '</div>' + headBar +
+        (A.plan === "free" || A.plan === "guest" ? '<button id="aiuBuy" class="aiu-buy" type="button">Upgrade to Pro</button>' : '') + '</div>';
+      // Week and month, one line each, same unit.
+      out += '<div class="aiu-h">Your MaiK Tokens</div>' +
+        '<div class="aiu-kv"><span>Used today</span><b>' + aiuN(D.used) + '</b></div>' +
+        '<div class="aiu-kv"><span>Used this week</span><b>' + aiuN(W.used) + '</b></div>' +
+        '<div class="aiu-kv"><span>' + (mUnl ? 'Used this month' : 'Left this month') + '</span><b>' + (mUnl ? aiuN(M.used) : (hasMonth ? aiuN(mLeft) + ' <span style="font-weight:600;opacity:.7">of ' + aiuN(M.limit) + '</span>' : '&mdash;')) + '</b></div>' +
+        (hasMonth && !mUnl && hasDay && !dUnl ? aiuBar(M.used, M.limit, "MaiK Tokens used this month") : '');
     }
-    var usedIds = all.filter(function (id) { return (used[id] | 0) > 0; });
-    out += '<div class="aiu-h">Used today</div>' +
-      (usedIds.length ? usedIds.map(moduleRow).join("") : '<div class="ai-usage-note" style="margin-top:0">Nothing yet today.</div>') +
-      '<details class="aiu-more" data-k="all"><summary>All AI features' + (enforced ? ' and daily limits' : '') + '</summary>' + all.map(moduleRow).join("") +
-      (enforced ? '<div class="ai-usage-note">Daily limits reset ' + (resets ? aiCtlEsc(resets) : 'at midnight') + '.</div>'
-                : '<div class="ai-usage-note">No per-feature daily limits are in force. Usage is metered from your wallet.</div>') + '</details>';
-
-    // ---- 3. Detail for the curious: model tokens, speed, and the price list. ----
-    var r = u.rates, det = '<div class="aiu-kv"><span>AI tokens today</span><b>' + aiuMt(u.tokens) + '</b></div>' +
-      '<div class="aiu-kv"><span>Average reply time</span><b>' + (u.avgLatencyMs > 0 ? (Math.round((u.avgLatencyMs / 1000) * 10) / 10) + ' s' : '&mdash;') + '</b></div>' +
-      '<div class="ai-usage-note"><b>AI tokens</b> measure the text the model read and wrote. <b>MaiK Tokens (MT)</b> are what that cost your wallet.</div>';
-    if (r) {
-      var rIn = Math.max(0, r.inPer1k | 0), rOut = Math.max(0, r.outPer1k | 0);
-      var rImg = Math.max(0, r.perImage | 0), rAud = Math.max(0, r.perAudioSec | 0);
-      det += '<table class="aiu-rate"><tbody>' +
-        '<tr><td>Text you send<span class="d">Your question and the case context</span></td><td class="v">' + rIn + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
-        '<tr><td>Text MaiK writes<span class="d">The answer, note or summary</span></td><td class="v">' + rOut + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
-        '<tr><td>Each image<span class="d">ECG, X-ray, prescription or lab photo</span></td><td class="v">' + rImg + ' MT<span class="d">per image</span></td></tr>' +
-        '<tr><td>Voice<span class="d">Dictation and read-aloud</span></td><td class="v">' + rAud + ' MT<span class="d">per second</span></td></tr>' +
-        '</tbody></table>' +
-        '<div class="ai-usage-note">1,000 tokens is roughly 700 words. A typical MaiK question costs about ' + Math.round((rIn * 0.6) + (rOut * 0.8)) + ' MT.' +
-        (r.model ? ' Rates are for ' + aiCtlEsc(r.model) + ' and are' : ' Rates are') + ' billed on actual usage, never rounded up per request.</div>';
-    } else if (u.ratesProvisional) {
-      det += '<div class="ai-usage-note">Rates for the model in use are being confirmed and are not published yet. Your spend above is exact.</div>';
-    }
-    out += '<details class="aiu-more" data-k="price"><summary>Pricing and details</summary>' + det + '</details>';
-    out += '<div class="ai-usage-note">Metered per request, metadata only. Your questions, notes and patient data are never stored in these counts.</div>';
+    out += '<div class="aiu-upd"><span id="aiuUpd" aria-live="polite">Updated ' + aiCtlEsc(upd) + '</span><button id="aiuRefresh" type="button" class="aiu-ref">Refresh</button></div>';
+    // Where today went: only what was used, by feature, as a count of questions.
+    var usedIds = Object.keys(used).filter(function (id) { return (used[id] | 0) > 0; }).sort(function (a, b) { return (used[b] | 0) - (used[a] | 0); });
+    if (usedIds.length) out += '<div class="aiu-h">Used today by feature</div>' + usedIds.map(function (id) {
+      return '<div class="aiu-row"><div class="h"><span>' + aiCtlEsc(LBL[id] || id) + '</span><span class="u">' + (used[id] | 0) + (((used[id] | 0) === 1) ? ' request' : ' requests') + '</span></div></div>';
+    }).join("");
+    out += '<div class="ai-usage-note">Every question and answer uses MaiK Tokens: what you send plus what MaiK writes. A new answer can take up to a minute to show here. Your questions, notes and patient data are never stored in these counts.</div>';
     return out;
   }
   // AI Control Center — OWNER admin console (Phase 4): switch the active model, see today's global
