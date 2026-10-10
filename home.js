@@ -3174,6 +3174,12 @@
     out += '<div class="aiu-wallet">' +
       '<div class="bl">MaiK Tokens left</div><div class="bal">' + aiuMt(bal) + '</div>' +
       '<div class="aiu-today">Today: <b>' + aiuMt(spent) + '</b> MT spent on <b>' + req.toLocaleString("en-IN") + '</b> ' + (req === 1 ? "request" : "requests") + '</div>' +
+      /* The Pro daily MaiK allowance (owner, 2026-10-10: set 60k for an account in the admin console and
+       * this screen still showed only the wallet). Raw tokens, the unit the limit is counted in. */
+      (u.proTokens ? '<div class="aiu-free"><div class="h"><span>Daily MaiK tokens</span><span class="u">' +
+        (u.proTokens.unlimited ? aiuMt(u.proTokens.used) + ' used today &middot; no daily limit'
+          : aiuMt(Math.max(0, u.proTokens.limit - u.proTokens.used)) + ' of ' + aiuMt(u.proTokens.limit) + ' left today') + '</span></div>' +
+        (u.proTokens.unlimited ? '' : aiuBar(u.proTokens.used, u.proTokens.limit, "Daily MaiK tokens used")) + '</div>' : '') +
       (u.costCapOn && free > 0
         ? '<div class="aiu-free"><div class="h"><span>Free today</span><span class="u">' + aiuMt(freeLeft) + ' of ' + aiuMt(free) + ' MT left</span></div>' + aiuBar(spent, free, "Free allowance used today") + '</div>'
         : '') +

@@ -107,3 +107,32 @@ test("stored values are validated", async () => {
   assert.equal(await setUserProTokens(kv, "X@Y.in", -5), false);
   assert.equal(await setUserProTokens(kv, "X@Y.in", "unlimited"), true); assert.equal(await getUserProTokens(kv, "x@y.in"), -1, "email is case-insensitive");
 });
+
+/* ── The AI Usage screen reads the same allowance (owner, 2026-10-10: gave an account 60k in the admin console and the app dashboard still did not show it) ── */
+import { proDailyTokensView } from "../functions/_usage.js";
+async function view(uid, claims, usedToday, seed, owner) {
+  const kv = fakeKv();
+  if (usedToday) await kv.put("maik:u:fb:" + uid + ":" + istDay(Date.now()), JSON.stringify({ tokens: usedToday }));
+  if (seed) await seed(kv);
+  const env = { MAIK_KV: kv, OWNER_EMAILS: "owner1@example.com" };
+  const req = new Request("https://stewardmd.in/api/ai/usage", { headers: { Authorization: "Bearer " + (await token(uid, claims)) } });
+  const real = globalThis.fetch;
+  globalThis.fetch = async (u) => String(u).indexOf("securetoken@system") >= 0 ? new Response(JSON.stringify({ keys: [jwk] }), { headers: { "Cache-Control": "max-age=3600" } }) : new Response("{}");
+  try { return await proDailyTokensView(env, req, { id: "fb:" + uid, email: uid + "@example.com" }, kv); } finally { globalThis.fetch = real; }
+}
+test("usage screen: default allowance and today's use", async () => {
+  const v = await view("pv-1", PRO, 4500);
+  assert.deepEqual({ limit: v.limit, used: v.used, unlimited: v.unlimited }, { limit: 20000, used: 4500, unlimited: false });
+});
+test("usage screen: shows the number set for this account (60,000), which beats the app-wide value", async () => {
+  const v = await view("pv-2", PRO, 100, async (kv) => { await setProDailyTokens(kv, 30000); await setUserProTokens(kv, "pv-2@example.com", 60000); });
+  assert.equal(v.limit, 60000);
+  assert.equal((await view("pv-3", PRO, 0, (kv) => setProDailyTokens(kv, 30000))).limit, 30000, "app-wide when the account has none");
+});
+test("usage screen: unlimited account and owner", async () => {
+  assert.equal((await view("pv-4", PRO, 0, (kv) => setUserProTokens(kv, "pv-4@example.com", "unlimited"))).unlimited, true);
+  assert.equal((await view("owner1", PRO, 0)).unlimited, true);
+});
+test("usage screen: a non-Pro account has no daily allowance to show", async () => {
+  assert.equal(await view("pv-5", { verified: true }, 0), null);
+});

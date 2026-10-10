@@ -521,3 +521,11 @@ Admin control (same day): app-wide value in AI control ("Pro: MaiK tokens per da
 `POST /api/ai/admin/user-tokens`; `userDetail().proTokens` shows today's use). Per account beats app-wide beats
 `MAIK_PRO_DAILY_TOKENS`. For a signed-in Pro account the allowance also replaces the generic 200k/day
 `MAIK_DAILY_TOKEN_LIMIT`, so Unlimited is unlimited per day (the monthly budget still applies).
+
+## AI Usage screen shows the Pro daily allowance (2026-10-10)
+Owner gave an account 60k in User control and the app's AI Usage sheet still showed only the wallet ("MaiK Tokens left
+0", from purchased credits) and per-module limits. `GET /api/ai/usage` now returns `proTokens` (`proDailyTokensView` in
+`functions/_usage.js`: this account's number > app-wide > default, -1/owner = unlimited, `null` for guests and non-Pro) and
+`home.js renderAiUsage` draws "Daily MaiK tokens: 56k of 60k left today" with a bar. The wallet is a separate balance of
+bought MaiK Tokens (cost based) and is unchanged. Tests: `test/maik-pro-daily-tokens.test.mjs`, `test/run-aiusage-ui.mjs`
+(11 older checks in it already fail on main, unrelated).

@@ -158,6 +158,18 @@ try {
   const free = await J(READ);
   ok(/free allowance/i.test(free.text || "") && /15k \/ 20k/.test(free.text || ""), "today's included allowance is shown against what is spent");
 
+  // Pro daily MaiK tokens (owner, 2026-10-10: 60k given in the admin console, the screen did not show it).
+  await ev(`window.__usage.proTokens = { limit: 60000, used: 4500, unlimited: false, owner: false }; return 1;`);
+  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
+  const pro = await J(READ);
+  ok(/Daily MaiK tokens/.test(pro.text || "") && /56k of 60k left today/.test(pro.text || ""), `a Pro account sees its daily MaiK token allowance (${((pro.text || "").match(/Daily MaiK tokens[^]{0,60}/) || [""])[0]})`);
+  await ev(`window.__usage.proTokens = { limit: -1, used: 4500, unlimited: true, owner: true }; return 1;`);
+  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
+  ok(/4,500 used today/.test((await J(READ)).text || "") && /no daily limit/.test((await J(READ)).text || ""), "an unlimited account says no daily limit");
+  await ev(`window.__usage.proTokens = null; return 1;`);
+  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
+  ok(!/Daily MaiK tokens/.test((await J(READ)).text || ""), "a non-Pro account shows no daily allowance row");
+
   // LOADING: a slow server must show the skeleton, not a blank sheet or a spinner-less gap.
   await ev(`window.__usageDelay = 1500; return 1;`);
   await ev(OPEN); await sleep(600); await ev(TAP); await sleep(350);
