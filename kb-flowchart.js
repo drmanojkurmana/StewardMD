@@ -216,11 +216,66 @@
 
     var defs = '<defs><marker id="kbfc-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">' +
       '<path d="M 0 0 L 10 5 L 0 10 z" fill="#444"/></marker></defs>';
-    // Chart keeps its natural size; the wrapper scrolls it so the page never scrolls sideways.
+    // Fit the phone width: the SVG scales to its box and keeps its aspect ratio. Tap opens the full-size view (openZoom).
     var svg = '<svg class="kbfc-svg" role="img" aria-label="' + esc(fc.title || "Flowchart") + '" viewBox="0 0 ' +
-      Math.ceil(L.width) + " " + Math.ceil(L.height) + '" width="' + Math.ceil(L.width) + '" height="' + Math.ceil(L.height) +
-      '" font-family="-apple-system, system-ui, sans-serif">' + defs + edgeParts.join("") + parts.join("") + labelParts.join("") + "</svg>";
-    return '<div class="kbfc-wrap" style="overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch">' + svg + "</div>";
+      Math.ceil(L.width) + " " + Math.ceil(L.height) + '" width="100%" data-w="' + Math.ceil(L.width) + '" data-h="' + Math.ceil(L.height) +
+      '" style="display:block;width:100%;height:auto" font-family="-apple-system, system-ui, sans-serif">' + defs + edgeParts.join("") + parts.join("") + labelParts.join("") + "</svg>";
+    return '<div class="kbfc-wrap" tabindex="0" role="button" aria-label="Tap to zoom flowchart" style="cursor:zoom-in;max-width:100%">' + svg +
+      '<span style="display:block;font-size:12px;opacity:.7;margin-top:4px">Tap to zoom</span></div>';
+  }
+
+  // Full-size view of a flowchart, with +/- zoom and close. Opened by tapping any .kbfc-wrap.
+  function openZoom(wrap) {
+    var svg = wrap.querySelector("svg");
+    if (!svg) return;
+    var baseW = Number(svg.getAttribute("data-w")) || 600, baseH = Number(svg.getAttribute("data-h")) || 400, scale = 1;
+    var ov = document.createElement("div");
+    ov.className = "kbfc-zoom";
+    ov.setAttribute("role", "dialog");
+    ov.setAttribute("aria-label", "Flowchart, full size");
+    ov.style.cssText = "position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;background:rgba(0,0,0,.9);overflow:auto;-webkit-overflow-scrolling:touch;padding:56px 12px 24px;box-sizing:border-box";
+    var card = document.createElement("div");
+    card.style.cssText = "background:#fff;border-radius:8px;padding:8px;display:inline-block;min-width:100%;box-sizing:border-box";
+    var clone = svg.cloneNode(true);
+    clone.removeAttribute("style");
+    function size() {
+      clone.setAttribute("width", Math.round(baseW * scale));
+      clone.setAttribute("height", Math.round(baseH * scale));
+    }
+    size();
+    card.appendChild(clone);
+    function bar(label, fn) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = label;
+      b.style.cssText = "min-width:44px;min-height:44px;padding:0 12px;border-radius:999px;border:0;background:#fff;color:#111;font:600 16px system-ui;margin-left:6px";
+      b.onclick = fn;
+      return b;
+    }
+    var controls = document.createElement("div");
+    controls.style.cssText = "position:fixed;top:8px;right:8px;z-index:1;display:flex";
+    function close() {
+      document.removeEventListener("keydown", onKey);
+      if (ov.parentNode) ov.parentNode.removeChild(ov);
+    }
+    function onKey(e) { if (e.key === "Escape") close(); }
+    controls.appendChild(bar("\u2212", function () { scale = Math.max(0.5, scale - 0.25); size(); }));
+    controls.appendChild(bar("+", function () { scale = Math.min(4, scale + 0.25); size(); }));
+    controls.appendChild(bar("Close", close));
+    ov.appendChild(controls);
+    ov.appendChild(card);
+    ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+    document.addEventListener("keydown", onKey);
+    document.body.appendChild(ov);
+  }
+  if (typeof document !== "undefined") {
+    document.addEventListener("click", function (e) {
+      var w = e.target && e.target.closest ? e.target.closest(".kbfc-wrap") : null;
+      if (w) openZoom(w);
+    });
+    document.addEventListener("keydown", function (e) {
+      if ((e.key === "Enter" || e.key === " ") && e.target && e.target.classList && e.target.classList.contains("kbfc-wrap")) { e.preventDefault(); openZoom(e.target); }
+    });
   }
 
   var api = { render: render, layout: layout, wrap: wrap };
