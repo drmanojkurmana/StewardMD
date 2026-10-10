@@ -2436,7 +2436,7 @@
       '<span class="rnav-badge">' + icon + '</span>' +
       (t.beta ? '<span class="rnav-tile-beta">BETA</span>' : '') +
       (locked ? '<span class="rnav-tile-lock" aria-hidden="true" style="position:absolute;top:6px;right:6px;display:inline-flex">' + ric("lock") + '</span>' : '') +
-      '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
+      '<span class="rnav-tile-tt">' + (t.act === "askai" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label(t.tt) : t.tt) + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
     var html = "", TOOLS = orderedHomeTools();
@@ -2563,7 +2563,7 @@
       '<nav class="rnav-tabbar rds-safe-bottom">' +
         '<button class="rnav-tab" data-act="hospital" aria-label="Hospital">' + ric("local_hospital") + '<span>Hospital</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik">' + ric("auto_awesome") + '<span>Ask Maik</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik"><span class="rds-icon rnav-maik-mark" aria-hidden="true"><img src="/maik-ai-mark.png" alt="" width="26" height="26" draggable="false"></span><span>Ask Maik</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("more_horiz") + '<span>More</span></button>' +
       '</nav>';
@@ -3126,13 +3126,6 @@
       if (buy) buy.onclick = function () { closeSheet(); setTimeout(function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) SMD_PRO.openPaywall(); else toast("Loading…"); } catch (e) {} }, 120); };
     }).catch(fail);
   }
-  // Compact MaiK Token count: 1,240 · 50k · 1.2M — a wallet reads better than a 7-digit number.
-  function aiuMt(n) {
-    n = Math.max(0, Math.round(+n || 0));
-    if (n >= 1000000) return (Math.round(n / 100000) / 10) + "M";
-    if (n >= 10000) return Math.round(n / 1000) + "k";
-    return n.toLocaleString("en-IN");
-  }
   function aiuBar(n, lim, label) {
     var pct = lim > 0 ? Math.min(100, Math.round(n / lim * 100)) : 0;
     var cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
@@ -3140,94 +3133,46 @@
     return '<div class="aiu-bar' + cls + '" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"' +
       (label ? ' aria-label="' + aiCtlEsc(label) + '"' : '') + '><span style="width:' + pct + '%"></span></div>';
   }
+  /* AI Usage (owner, 2026-10-10: "It's so confusing. Keep single MaiK Tokens, show weekly and per day tokens
+   * left. 300000 per month for Pro and 20K per day, reset every night, so the dashboard should be easy, and no
+   * mention of Gemini anywhere"). ONE unit: MaiK Tokens, the same counter the server enforces. Today left
+   * (the big number), this week used, this month left, and where today went. No wallet, no rate card, no model. */
+  function aiuN(n) { return Math.max(0, Math.round(+n || 0)).toLocaleString("en-IN"); }
   function renderAiUsage(u) {
-    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision / OCR)", stt: "Voice transcription", tts: "Read-aloud (text-to-speech)", scribe: "MaiK Scribe", fundx: "FundX (retinal)", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base search" };
-    // Every AI surface, grouped the way a doctor thinks about them. This is PRESENTATION ORDER ONLY —
-    // the modules actually rendered come from what the SERVER reports (limits ∪ byModule), so a module
-    // added to the registry shows up here without a client change. The old hardcoded list silently
-    // dropped `tts` and `kb`: usage on those two could never appear on this screen at all.
-    var GROUPS = [
-      { label: "MaiK AI", ids: ["maik", "maik_case", "summary", "research"] },
-      { label: "Vision & imaging", ids: ["ocr", "ecg", "thorex", "fundx"] },
-      { label: "Voice", ids: ["stt", "scribe", "tts"] },
-      { label: "Specialty & learning", ids: ["clinix", "surgx_note", "surgx_case", "followcare"] },
-      { label: "Knowledge", ids: ["kb"] },
-    ];
-    var limits = u.limits || {}, used = u.byModule || {}, enforced = !!u.capsEnforced, out = "";
-
-    // ---- wallet: MaiK Tokens left, plus today's free allowance if the cost cap is switched on ----
-    var bal = Math.max(0, u.balanceMt | 0), spent = Math.max(0, u.tokensUsedMt | 0);
-    var free = Math.max(0, u.dailyFreeMt | 0);
-    // What the balance is worth to the doctor: priced at the store's entry pack (App Store / Play /
-    // web all charge the same), NOT at mtPerInr, which is our AI cost and read as half the value.
-    // The server sends the live pack prices; the fallback is the launch price of the Boost pack.
-    var pk = (u.packs || []).filter(function (p) { return p && p.mt > 0 && p.inr > 0; }).sort(function (a, b) { return a.mt - b.mt; })[0] || { mt: 50000, inr: 49 };
-    var worthRaw = bal * pk.inr / pk.mt;
-    var worth = worthRaw >= 10 ? Math.round(worthRaw).toLocaleString("en-IN") : String(Math.round(worthRaw * 10) / 10);   // a wallet of 100 MT is ₹0.1, not "₹0"
-    var plat = "web"; try { var Cap = window.Capacitor; plat = (Cap && (typeof Cap.getPlatform === "function" ? Cap.getPlatform() : Cap.platform)) || "web"; } catch (e) {}
-    var storeName = plat === "ios" ? "App Store" : plat === "android" ? "Google Play" : "store";
-    // ---- 1. The one answer a doctor opens this for: how much is left, and what today cost. ----
-    var req = u.req | 0;
-    var freeLeft = Math.max(0, free - spent);
+    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision / OCR)", stt: "Voice transcription", tts: "Read-aloud", scribe: "MaiK Scribe", fundx: "FundX (retinal)", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base search", prep: "PrepNucleus", prep_tutor: "PrepNucleus Ask MaiK" };
+    var A = u.allowance, used = u.byModule || {}, out = "";
     var upd = ""; try { upd = new Date(u.updatedAt || Date.now()).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); } catch (e) {}
-    var resets = ""; try { if (u.resetsAt) resets = new Date(u.resetsAt).toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" }); } catch (e) {}
-    out += '<div class="aiu-wallet">' +
-      '<div class="bl">MaiK Tokens left</div><div class="bal">' + aiuMt(bal) + '</div>' +
-      '<div class="aiu-today">Today: <b>' + aiuMt(spent) + '</b> MT spent on <b>' + req.toLocaleString("en-IN") + '</b> ' + (req === 1 ? "request" : "requests") + '</div>' +
-      (u.costCapOn && free > 0
-        ? '<div class="aiu-free"><div class="h"><span>Free today</span><span class="u">' + aiuMt(freeLeft) + ' of ' + aiuMt(free) + ' MT left</span></div>' + aiuBar(spent, free, "Free allowance used today") + '</div>'
-        : '') +
-      '<div class="sub">' + (bal > 0
-        ? 'Worth about &#8377;' + worth + ' at the ' + storeName + ' price. Tokens never expire and work across every AI feature.'
-        : 'You haven&rsquo;t added any tokens yet. Top up once and spend it on any AI feature.') +
-      (u.pooled ? ' This balance is shared with your linked account.' : '') + '</div>' +
-      '<button id="aiuBuy" class="aiu-buy" type="button">' + (bal > 0 ? 'Add more tokens' : 'Buy MaiK Tokens') + '</button></div>' +
-      '<div class="aiu-upd"><span id="aiuUpd" aria-live="polite">Updated ' + aiCtlEsc(upd) + (resets ? ' &middot; resets ' + aiCtlEsc(resets) : '') + '</span>' +
-      '<button id="aiuRefresh" type="button" class="aiu-ref">Refresh</button></div>' +
-      '<div class="ai-usage-note">A new answer can take up to a minute to show here.' + (u.costCapOn && free > 0 ? ' Past the free allowance your wallet takes over, so nothing stops mid-consult.' : '') + '</div>';
-
-    // ---- 2. Where today went: only what was used; the full list folds away. ----
-    var known = {}, all = [];
-    function addId(id) { if (id && !known[id]) { known[id] = 1; all.push(id); } }
-    Object.keys(limits).forEach(addId);
-    Object.keys(used).forEach(addId);
-    var ORDER = []; GROUPS.forEach(function (g) { ORDER = ORDER.concat(g.ids); });
-    all.sort(function (a, b) { var ia = ORDER.indexOf(a), ib = ORDER.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
-    function moduleRow(id) {
-      var n = used[id] | 0, lim = limits[id] | 0, lbl = LBL[id] || id;
-      var zero = n === 0 ? " zero" : "";
-      if (!enforced) return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="u">' + n + '</span></div></div>';
-      if (lim === 0) return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="aiu-unl">' + n + ' &middot; no limit</span></div></div>';
-      return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="u">' + n + ' of ' + lim + '</span></div>' +
-        aiuBar(n, lim, lbl + ": " + n + " of " + lim + " used today") + '</div>';
+    if (!A) {   // an older server, or nothing metered for this caller: still one calm screen
+      out += '<div class="aiu-wallet"><div class="bl">MaiK Tokens used today</div><div class="bal">' + aiuN(u.tokens) + '</div>' +
+        '<div class="sub">Sign in to see your daily and monthly MaiK Tokens.</div></div>';
+    } else {
+      var D = A.day || {}, M = A.month || {}, W = A.week || {};
+      var dUnl = D.limit === -1, mUnl = M.limit === -1;
+      var hasDay = dUnl || (D.limit != null && D.limit > 0), hasMonth = mUnl || (M.limit != null && M.limit > 0);
+      var dLeft = hasDay && !dUnl ? Math.max(0, D.limit - D.used) : 0, mLeft = hasMonth && !mUnl ? Math.max(0, M.limit - M.used) : 0;
+      // The big number answers "how much can I still use today". A plan with no daily limit leads with the month.
+      var headLbl, headVal, headSub, headBar = "";
+      if (hasDay && !dUnl) { headLbl = "MaiK Tokens left today"; headVal = aiuN(dLeft); headSub = 'of ' + aiuN(D.limit) + ' &middot; resets every night at midnight'; headBar = aiuBar(D.used, D.limit, "MaiK Tokens used today"); }
+      else if (hasMonth && !mUnl) { headLbl = "MaiK Tokens left this month"; headVal = aiuN(mLeft); headSub = 'of ' + aiuN(M.limit) + ' &middot; renews on the 1st'; headBar = aiuBar(M.used, M.limit, "MaiK Tokens used this month"); }
+      else if (dUnl || mUnl) { headLbl = "MaiK Tokens"; headVal = "Unlimited"; headSub = aiuN(D.used) + ' used today'; }
+      else { headLbl = "MaiK Tokens used today"; headVal = aiuN(D.used); headSub = 'Sign in to see your allowance.'; }
+      out += '<div class="aiu-wallet"><div class="bl">' + headLbl + '</div><div class="bal">' + headVal + '</div>' +
+        '<div class="aiu-today">' + headSub + '</div>' + headBar +
+        (A.plan === "free" || A.plan === "guest" ? '<button id="aiuBuy" class="aiu-buy" type="button">Upgrade to Pro</button>' : '') + '</div>';
+      // Week and month, one line each, same unit.
+      out += '<div class="aiu-h">Your MaiK Tokens</div>' +
+        '<div class="aiu-kv"><span>Used today</span><b>' + aiuN(D.used) + '</b></div>' +
+        '<div class="aiu-kv"><span>Used this week</span><b>' + aiuN(W.used) + '</b></div>' +
+        '<div class="aiu-kv"><span>' + (mUnl ? 'Used this month' : 'Left this month') + '</span><b>' + (mUnl ? aiuN(M.used) : (hasMonth ? aiuN(mLeft) + ' <span style="font-weight:600;opacity:.7">of ' + aiuN(M.limit) + '</span>' : '&mdash;')) + '</b></div>' +
+        (hasMonth && !mUnl && hasDay && !dUnl ? aiuBar(M.used, M.limit, "MaiK Tokens used this month") : '');
     }
-    var usedIds = all.filter(function (id) { return (used[id] | 0) > 0; });
-    out += '<div class="aiu-h">Used today</div>' +
-      (usedIds.length ? usedIds.map(moduleRow).join("") : '<div class="ai-usage-note" style="margin-top:0">Nothing yet today.</div>') +
-      '<details class="aiu-more" data-k="all"><summary>All AI features' + (enforced ? ' and daily limits' : '') + '</summary>' + all.map(moduleRow).join("") +
-      (enforced ? '<div class="ai-usage-note">Daily limits reset ' + (resets ? aiCtlEsc(resets) : 'at midnight') + '.</div>'
-                : '<div class="ai-usage-note">No per-feature daily limits are in force. Usage is metered from your wallet.</div>') + '</details>';
-
-    // ---- 3. Detail for the curious: model tokens, speed, and the price list. ----
-    var r = u.rates, det = '<div class="aiu-kv"><span>AI tokens today</span><b>' + aiuMt(u.tokens) + '</b></div>' +
-      '<div class="aiu-kv"><span>Average reply time</span><b>' + (u.avgLatencyMs > 0 ? (Math.round((u.avgLatencyMs / 1000) * 10) / 10) + ' s' : '&mdash;') + '</b></div>' +
-      '<div class="ai-usage-note"><b>AI tokens</b> measure the text the model read and wrote. <b>MaiK Tokens (MT)</b> are what that cost your wallet.</div>';
-    if (r) {
-      var rIn = Math.max(0, r.inPer1k | 0), rOut = Math.max(0, r.outPer1k | 0);
-      var rImg = Math.max(0, r.perImage | 0), rAud = Math.max(0, r.perAudioSec | 0);
-      det += '<table class="aiu-rate"><tbody>' +
-        '<tr><td>Text you send<span class="d">Your question and the case context</span></td><td class="v">' + rIn + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
-        '<tr><td>Text MaiK writes<span class="d">The answer, note or summary</span></td><td class="v">' + rOut + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
-        '<tr><td>Each image<span class="d">ECG, X-ray, prescription or lab photo</span></td><td class="v">' + rImg + ' MT<span class="d">per image</span></td></tr>' +
-        '<tr><td>Voice<span class="d">Dictation and read-aloud</span></td><td class="v">' + rAud + ' MT<span class="d">per second</span></td></tr>' +
-        '</tbody></table>' +
-        '<div class="ai-usage-note">1,000 tokens is roughly 700 words. A typical MaiK question costs about ' + Math.round((rIn * 0.6) + (rOut * 0.8)) + ' MT.' +
-        (r.model ? ' Rates are for ' + aiCtlEsc(r.model) + ' and are' : ' Rates are') + ' billed on actual usage, never rounded up per request.</div>';
-    } else if (u.ratesProvisional) {
-      det += '<div class="ai-usage-note">Rates for the model in use are being confirmed and are not published yet. Your spend above is exact.</div>';
-    }
-    out += '<details class="aiu-more" data-k="price"><summary>Pricing and details</summary>' + det + '</details>';
-    out += '<div class="ai-usage-note">Metered per request, metadata only. Your questions, notes and patient data are never stored in these counts.</div>';
+    out += '<div class="aiu-upd"><span id="aiuUpd" aria-live="polite">Updated ' + aiCtlEsc(upd) + '</span><button id="aiuRefresh" type="button" class="aiu-ref">Refresh</button></div>';
+    // Where today went: only what was used, by feature, as a count of questions.
+    var usedIds = Object.keys(used).filter(function (id) { return (used[id] | 0) > 0; }).sort(function (a, b) { return (used[b] | 0) - (used[a] | 0); });
+    if (usedIds.length) out += '<div class="aiu-h">Used today by feature</div>' + usedIds.map(function (id) {
+      return '<div class="aiu-row"><div class="h"><span>' + aiCtlEsc(LBL[id] || id) + '</span><span class="u">' + (used[id] | 0) + (((used[id] | 0) === 1) ? ' request' : ' requests') + '</span></div></div>';
+    }).join("");
+    out += '<div class="ai-usage-note">Every question and answer uses MaiK Tokens: what you send plus what MaiK writes. A new answer can take up to a minute to show here. Your questions, notes and patient data are never stored in these counts.</div>';
     return out;
   }
   // AI Control Center — OWNER admin console (Phase 4): switch the active model, see today's global
@@ -4196,7 +4141,22 @@
       setRow("phone", d.phone);
       if (profileHubOn()) acctPaintPhone(card.closest(".hv-pf") || card, d);
 
-      function save(obj) { var pr = prefNow(); return pr ? pr.set(obj, { merge: true }) : Promise.reject({ code: "no-db" }); }
+      /* Save one edit. The Firebase SDK does not work inside the iPhone app (owner, 2026-10-10: "Couldn't save, check
+       * your connection" saving the college on a phone with full signal), and an SDK write on a half-open connection
+       * neither resolves nor rejects. So: the SDK write gets 6 seconds, and if it is missing, rejects or is still
+       * pending, the server writes the same document (POST /api/auth/save-profile, patch mode, the signed-in uid only). */
+      function save(obj) {
+        var pr = prefNow();
+        var sdk = pr ? Promise.race([pr.set(obj, { merge: true }), new Promise(function (_, rej) { setTimeout(function () { rej({ code: "sdk-timeout" }); }, 6000); })]) : Promise.reject({ code: "no-db" });
+        return sdk.catch(function () {
+          var cu = null; try { cu = window.SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
+          if (!cu || typeof cu.getIdToken !== "function") return Promise.reject({ code: "no-user" });
+          return cu.getIdToken().then(function (tok) {
+            var body = { patch: true }; Object.keys(obj).forEach(function (k) { if (["verified", "regNoPendingCert"].indexOf(k) < 0) body[k] = obj[k]; });
+            return fetch((window.SMD_API_BASE || "") + "/api/auth/save-profile", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify(body) });
+          }).then(function (r) { if (!r || !r.ok) throw { code: "server-" + (r && r.status) }; });
+        });
+      }
 
       // Edit in place: the value becomes an input with Save / Cancel. No window.prompt.
       function inlineEdit(key, label, cur, onSave) {
@@ -4974,6 +4934,13 @@
    * it settles, so a stale handler can never cancel the NEXT question.
    */
   var _maikStop = null;
+  /* Every clinical turn still running, by its bubble id (data-mg) -> { stop, done }. Owner screenshot
+   * (2026-10-10): two "Searching StewardMD knowledge" orbs spinning for minutes, Stop doing nothing.
+   * _maikStop is ONE slot (the latest turn, and maikSetSendMode(false) clears it), and a bubble restored
+   * from a saved thread after the turn died (app reloaded, OTA, crash) has no turn behind it at all, so
+   * nothing could ever end its orb. Stop now ends every live turn, and any orb with no live turn is
+   * cleared (maikSweepOrphans). */
+  var _maikLiveGens = {};
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
   var _maikRegen = false;         // set by the Regenerate action for exactly the next send (asks the local engine for sampling jitter)
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
@@ -6573,6 +6540,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var stopped = false;
       try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.cancel) { SMD_MAIK_LOCAL.cancel(); stopped = true; } } catch (e) {}
       try { if (typeof _maikStop === "function") { _maikStop(); stopped = true; } } catch (e) {}
+      // Every other turn still running (a question sent before a close/reopen), then any orb left over.
+      Object.keys(_maikLiveGens).forEach(function (k) { var g = _maikLiveGens[k]; try { if (g && !g.done()) { g.stop(); stopped = true; } } catch (e) {} delete _maikLiveGens[k]; });
+      if (maikSweepOrphans(true)) stopped = true;
       maikSetSendMode(false);
       try { toast(stopped ? "Stopped." : "Stopping."); } catch (e) {}
     }
@@ -7201,6 +7171,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // "@@REFINE: a | b | c@@" line listing patient-context factors that would change the answer.
     // We parse it OUT of the displayed text and render tappable chips that re-ask the question with
     // that context appended (reusing the .maik-fu / data-maik-q delegated handler + answer cache).
+    /* Drop the leading paragraphs of a "Know more" answer that only restate the lead already shown. Mirrors
+     * functions/_maik_finish.js dropRepeatedLead (the server does this first). Never returns blank. */
+    function maikDropRepeatedLead(text, lead) {
+      function norm(x) { return String(x || "").toLowerCase().replace(/[*_`#>|]/g, " ").replace(/\s+/g, " ").trim(); }
+      var L = norm(lead); if (!L || !text) return text;
+      var blocks = String(text).split(/\n{2,}/), i = 0;
+      while (i < blocks.length) {
+        var b = norm(blocks[i]); if (!b) { i++; continue; }
+        var head = b.slice(0, 50);
+        var rep = (head.length >= 12 && L.indexOf(head) >= 0) || (b.length >= 12 && L.indexOf(b) >= 0) || (L.length >= 12 && b.indexOf(L.slice(0, Math.min(L.length, 80))) === 0);
+        if (!rep) break; i++;
+      }
+      if (i === 0 || i >= blocks.length) return text;
+      return blocks.slice(i).join("\n\n").replace(/^\s+/, "");
+    }
     function maikStripRefine(s) { return String(s == null ? "" : s).replace(/@@REFINE:[\s\S]*?@@/gi, "").replace(/@@\s*REFINE:[\s\S]*$/i, "").replace(/\s+$/, ""); }
     function maikParseRefine(md) {
       var chips = [], m = String(md == null ? "" : md).match(/@@REFINE:\s*([\s\S]*?)@@/i);
@@ -7611,7 +7596,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // true for the WHOLE animation, so the follow-up chips were visible but taps silently no-op'd
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
       _maikBusy = false; maikSetSendMode(false);
-      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "module-daily" && r.message ? String(r.message) : r.reason === "rate" ? 'One moment, you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
+      /* Quota: say WHICH limit (owner, 2026-10-10, an owner account saw the bare "usage limit reached"
+       * and nobody could tell which of ~10 limits fired). The server's own message when it sent one,
+       * and the limit's code underneath in small type. */
+      if (r && r.error === "quota") {
+        var _qm = r.reason === "rate" ? "One moment, you’re asking questions quickly. Please try again in a few seconds."
+          : (r.message ? String(r.message) : "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.");
+        think.innerHTML = '<div class="maik-welcome">' + maikEscH(_qm) +
+          (r.reason && r.reason !== "rate" ? '<br><br><span style="opacity:.7;font-size:12.5px">Limit: ' + maikEscH(r.reason) + "</span>" : "") + '</div>';
+        return;
+      }
       if (r && r.error === "LOCAL_CAPABILITY_REQUIRED") {
         // Explicit cloud alternative (owner, 2026-09-11): the chip CHANGES the engine, it does not
         // sneak one question past the clinician's choice.
@@ -7685,6 +7679,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _more = maikSplitMore(md); var _concise = maikConciseOn() && !!_more.detail;
       md = _more.detail ? (_more.lead + "\n\n" + _more.detail) : _more.lead;   // strip @@MORE@@; md = full answer (length/cache/Rx)
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
+      /* The model stopped before finishing (the server retried once and it was still cut). Say so rather
+       * than leave a sentence or a table stopping mid-line (owner, 2026-10-10). */
+      if (r && r.cutShort) rendered += '<div class="maik-cutshort" style="margin-top:8px;font-size:12.5px;opacity:.75">This answer was cut short. Tap Regenerate for the full answer.</div>';
       // Phase 2 — numbered sources footer (matches the [n] markers). Prefer the package's own
       // numbered list (identical numbering to what the model was given) so citations line up.
       // A drug-database answer has exactly one source; the KB titles the package carried would be
@@ -7881,6 +7878,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // A cloud call already in flight is left to finish silently (_maikDone makes every later paint a
       // no-op); the on-device engine is cancelled by maikStopNow itself.
       _maikStop = function () {
+        delete _maikLiveGens[_gid];
         if (_maikDone) return;
         _maikStopped = true; maikBuddyCue("stop");
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _fsResume();
@@ -7901,6 +7899,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         _persist();
         _maikBusy = false; maikSetSendMode(false);
       };
+      (function (stopFn) { _maikLiveGens[_gid] = { stop: stopFn, done: function () { return _maikDone; } }; })(_maikStop);
       // ── SCOPE GATE (clinician-only): an obviously NON-clinical request (code, creative writing,
       // "integrate X into my project", lay self-help) is refused INSTANTLY here — BEFORE the KB engine,
       // the semantic router, and any Vertex call — so it can never fuzzy-match a disease name in the
@@ -8857,7 +8856,27 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
       });
     }
+    /* A bubble still showing the thinking orb whose turn is not running any more: end the orb and say
+     * what happened. On Stop (all=true) every orb goes; on reopen only orphans (a bubble with no live
+     * turn, or with no turn id while nothing is busy). Returns how many bubbles it cleared. */
+    function maikSweepOrphans(all) {
+      var n = 0, lb = document.getElementById("maikBody") || body;
+      if (!lb) return 0;
+      Array.prototype.forEach.call(lb.querySelectorAll(".maik-b"), function (b) {
+        if (!b.querySelector(".maik-buffer")) return;
+        var gid = b.getAttribute("data-mg"), g = gid && _maikLiveGens[gid];
+        var live = gid ? !!(g && !g.done()) : !!_maikBusy;
+        if (!all && live) return;
+        if (gid && g && g.done()) delete _maikLiveGens[gid];
+        b.innerHTML = '<div class="maik-welcome">' + (all ? "Stopped." : "This answer was interrupted. Ask the question again.") + '</div>';
+        try { b.removeAttribute("data-mg"); } catch (e) {}
+        n++;
+      });
+      if (n) { try { _maikBodyHTML = lb.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} }
+      return n;
+    }
     function maikRestoreThread() {
+      try { maikSweepOrphans(false); } catch (e) {}
       _maikTurns = [];
       var q = "", lastQ = "";
       Array.prototype.forEach.call(body.children, function (n) {
@@ -9501,6 +9520,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var _md = function (s) { return maikStripRefine(String(s || "")).replace(/@@\s*MORE\s*@@/gi, "").trim(); };
           var _paint = function (s) {
             if (!kdet || !s) return;
+            // Never repeat the bottom line the clinician has just read (owner, 2026-10-10): a model that
+            // restates it has its opening paragraphs dropped here too, in case the server could not.
+            s = maikDropRepeatedLead(s, _ctx.lead);
             kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(s) : maikEscH(s);
             kdet.hidden = false; kdet.removeAttribute("hidden");
           };
@@ -10091,12 +10113,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function applyD() {
     try {
       var _sc = Math.min(2, Math.max(.8, +ds.fontScale || 1)); ds.fontScale = _sc;   // BUG-07: bound scale to a reachable max
-      document.documentElement.style.zoom = _sc;
-      // BUG-07: keep the Display sheet + its Reset OUT of the app zoom (counter-zoom) so the
-      // controls needed to recover are always reachable, even at max scale.
-      var _inv = 1 / _sc;
-      var _sh = document.getElementById("hvSheet"); if (_sh) _sh.style.zoom = _inv;
-      var _scr = document.getElementById("hvScrim"); if (_scr) _scr.style.zoom = _inv;
+      zoomNowD();
     } catch (e) {}
     document.body.classList.remove("smd-dens-compact", "smd-dens-comfortable", "smd-dens-large");
     if (ds.density !== "default") document.body.classList.add("smd-dens-" + ds.density);
@@ -10108,6 +10125,38 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var f = FONTS.filter(function (x) { return x.id === ds.font; })[0]; if (f && f.web) ensureFont(f.web);
     saveD();
   }
+  /* PrepNucleus renders at full size (owner 2026-10-10: "1.0 in PrepNucleus only"). Auto fit shrinks small phones to
+     0.95 (0.9 under 340 px), so a 44 px target drew at ~42. While PrepNucleus is open (html.pn-open, set and cleared by
+     prep.js open()/close(); its sheets, the Ask MaiK sheet and the image viewer only open inside it) the shrink comes
+     off: auto fit -> max(1, scale) (an iPad's 1.08/1.15 is kept); a size the user chose (Settings slider or preset, or
+     the OS text size) -> scale / 0.95, so only the default shrink is removed. Still ONE zoom, on html, so every
+     getBoundingClientRect / clientX conversion that reads documentElement.style.zoom stays right. */
+  var PN_SHRINK = .95;
+  function prepZoomD(scale, autoFit) {
+    var s = Math.min(2, Math.max(.8, +scale || 1));
+    return autoFit ? Math.max(1, s) : Math.min(2, Math.round(s / PN_SHRINK * 1e4) / 1e4);
+  }
+  function zoomOfD() {
+    var s = Math.min(2, Math.max(.8, +ds.fontScale || 1));
+    return document.documentElement.classList.contains("pn-open") ? prepZoomD(s, ds.autoFit) : s;
+  }
+  function zoomNowD() {
+    var z = zoomOfD(), de = document.documentElement;
+    if (String(de.style.zoom) !== String(z)) de.style.zoom = z;
+    // BUG-07: keep the Display sheet + its Reset OUT of the app zoom (counter-zoom) so the
+    // controls needed to recover are always reachable, even at max scale.
+    var _inv = 1 / z;
+    var _sh = document.getElementById("hvSheet"); if (_sh) _sh.style.zoom = _inv;
+    var _scr = document.getElementById("hvScrim"); if (_scr) _scr.style.zoom = _inv;
+  }
+  window.SMD_ZOOM = { prep: prepZoomD, now: zoomOfD, apply: zoomNowD };
+  try {
+    var _pnWas = document.documentElement.classList.contains("pn-open");
+    new MutationObserver(function () {
+      var on = document.documentElement.classList.contains("pn-open");
+      if (on !== _pnWas) { _pnWas = on; zoomNowD(); }
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  } catch (e) {}
   function autoFitD() {
     var w = window.innerWidth, h = window.innerHeight, dpr = window.devicePixelRatio || 1, fs, d;
     if (w < 340) { fs = .9; d = "compact"; } else if (w < 400) { fs = .95; d = "compact"; } else if (w < 600) { fs = 1.0; d = "default"; } else if (w < 900) { fs = 1.08; d = "comfortable"; } else { fs = 1.15; d = "comfortable"; }
@@ -10206,7 +10255,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         atmosphere.querySelector("h4").textContent = "Assistant background";
       }
     }
-    try { var _z = 1 / (Math.min(2, Math.max(.8, +ds.fontScale || 1))); s.style.zoom = _z; var _sc0 = document.getElementById("hvScrim"); if (_sc0) _sc0.style.zoom = _z; } catch (e) {}
+    try { var _z = 1 / zoomOfD(); s.style.zoom = _z; var _sc0 = document.getElementById("hvScrim"); if (_sc0) _sc0.style.zoom = _z; } catch (e) {}
     s.querySelector("#hvFs").addEventListener("input", function () { ds.autoFit = false; ds.userSet = true; ds.fontScale = (+this.value) / 100; applyD(); refreshD(); });
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.addEventListener("click", function () { ds.autoFit = false; ds.density = b.getAttribute("data-d"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvPre button").forEach(function (b) { b.addEventListener("click", function () { var p = DPRE[b.getAttribute("data-p")]; ds.autoFit = false; ds.userSet = true; ds.fontScale = p.fontScale; ds.density = p.density; applyD(); refreshD(); }); });

@@ -708,10 +708,12 @@ function put(key, file, type, dry) {
     catch (e) { const m = String(e.stderr || e.message); if (a === 5 || !/5\d\d|timed out|ECONN|fetch failed|Internal|socket/i.test(m)) throw new Error("put " + key + ": " + m.slice(0, 300)); execFileSync("sleep", [String(a * 3)]); }
   }
 }
-/* indexWith(live, changed) -> the live index with "r": REV and the new step count on every changed lesson. */
+/* indexWith(live, changed) -> the live index with "r": REV and the new step count on every changed lesson. A lesson
+ * the live index already has at a later revision (r > REV, e.g. r 3 / r 4 from the 2026-10 figure re-crop, v3/v4 lessons)
+ * keeps that entry: a re-run of this pass must not send phones back to the older v<REV> copy. */
 export function indexWith(live, changed) {
   const mods = { ...((live && live.modules) || {}) };
-  for (const l of changed) if (mods[l.id]) mods[l.id] = { ...mods[l.id], r: REV, steps: l.steps.length, minutes: l.minutes };
+  for (const l of changed) if (mods[l.id] && !(mods[l.id].r > REV)) mods[l.id] = { ...mods[l.id], r: REV, steps: l.steps.length, minutes: l.minutes };
   return { ...live, v: 1, modules: mods };
 }
 async function upload(D, args) {

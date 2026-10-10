@@ -46,8 +46,9 @@ import { readX, gateX, keyAgrees } from "./prep-radnotes.mjs";
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const SET = "medcov";
 // The R2 folder of this release: overlay/<OUT_SET>/<subject>/<module>.json. Files are immutable and phones keep them,
-// so a changed release goes to a new folder (medcov2: rounds 1 to 3 tidied; medcov3 adds the round 3 combination items rescued by --loose-combo).
-export const OUT_SET = "medcov3";
+// so a changed release goes to a new folder (medcov2: rounds 1 to 3 tidied; medcov3 adds the round 3 combination items rescued by --loose-combo;
+// medcov4 adds the owner-keyed items from the 2026-10-10 answer-key review, which tools/prep-medcov.mjs assemble does not rebuild).
+export const OUT_SET = "medcov4";
 const L = ["A", "B", "C", "D"];
 const readJson = (p, d) => { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return d; } };
 const writeJson = (p, o, pretty) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, pretty ? JSON.stringify(o, null, 1) : JSON.stringify(o)); };

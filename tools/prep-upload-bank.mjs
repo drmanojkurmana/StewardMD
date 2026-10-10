@@ -3,6 +3,7 @@
 // functions/api/prep/bank/[[path]].js serves it. Dev-only, run by the owner with wrangler logged in.
 //
 //   node tools/prep-upload-bank.mjs [--dir prep/bank/v1] [--only <subject>] [--yes] [--jobs 6]
+//   After any upload with --yes the share ID index is rebuilt (node tools/prep-ids.mjs publish --yes; --no-ids skips).
 //   node tools/prep-upload-bank.mjs --dir prep/pyq/out --as v2/pyq [--yes]     PYQ files (tools/prep-pyq.mjs): JSON and
 //       webp images under prep-bank/v2/pyq/; index.json goes last and gets the short cache (it names the items file)
 //
@@ -65,6 +66,17 @@ async function main(argv = process.argv.slice(2)) {
   await Promise.all(Array.from({ length: jobs }, worker));
   for (const f of tail) { await run(putArgs(f)); done++; }
   console.log(`uploaded ${done} files`);
+  // Share IDs: every MCQ and lesson has an ID derived from its item id (prep-ids.js), but the global index that resolves
+  // IDs on phones without the content (v1/ids/) must list the new items. Rebuilt here after any bank, overlay, PYQ or
+  // lesson upload (it reads the LIVE files, so run it after the upload, as here). --no-ids skips it.
+  if (!/\/ids$/.test(as || "") && !argv.includes("--no-ids")) await rebuildIds();
+}
+export function rebuildIds() {
+  console.log("share IDs: node tools/prep-ids.mjs publish --yes");
+  return new Promise((res) => {
+    const p = spawn(process.execPath, [path.join(ROOT, "tools/prep-ids.mjs"), "publish", "--yes"], { stdio: "inherit" });
+    p.on("close", (c) => { if (c !== 0) console.error("share ID index NOT rebuilt (exit " + c + "): run node tools/prep-ids.mjs publish --yes"); res(c); });
+  });
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exit(1); });

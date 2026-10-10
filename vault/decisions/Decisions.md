@@ -11675,3 +11675,25 @@ until 2026-11-01); decks must not be lost: persistent storage, a native file cop
 questions, cards and manifest (not the source file or images) that restores on a new phone after sign-in. Root cause of
 the lost decks: a silent in-memory fallback in prep-decks.js after a failed IndexedDB open, plus best-effort storage and no
 copy outside the WebView. [[modules/PrepNucleus]]
+
+## 2026-10-10 MaiK Pro daily allowance: 20,000 tokens a day; owners unlimited
+Owner: "give every user who is pro 20K MaiK tokens per day ... It should be (10 rupees per day)". `functions/_usage.js`
+`checkQuota`: a signed-in Pro caller (promo, trial or paid, `proFromRequest`) is refused once today's `maik:u:<id>:<IST day>`
+tokens reach `MAIK_PRO_DAILY_TOKENS` (default 20000), reason `pro-daily-tokens`, with a message naming the allowance.
+Owners never meet it (exempt); the router pre-parse and PrepNucleus are not counted; `MAIK_ENFORCE_CAPS=0` lifts it.
+Cost at our published rates (`_ai_usage.js MODEL_RATES`, Rs 96/USD), 20k tokens: default gemini-3.1-flash-lite about
+Rs 1.2 typical (14k in / 6k out), Rs 2.9 if all output; 2.5-flash Rs 1.8 / 4.8; 3.6-flash Rs 3.2 / 7.2 (doubles from
+2027-01-01). Under Rs 10/day on every model except 2.5-pro (up to Rs 19). At ~4-5k tokens a grounded answer that is
+about 4-5 MaiK answers a day.
+Same report: the owner saw "MaiK usage limit reached". Owner exemption needs a verified token; `aiHeaders()` only reads
+the CACHED token (deliberately, no per-call getIdToken), so a lapsed cache sent the owner as a guest. `explainGrounded`
+now retries once after a quota refusal of a call sent WITHOUT a token, with `SMD_IDTOKEN_REFRESH(4000)` (id-token.js,
+bounded). The quota notice shows the server's message and "Limit: <reason>" so the next report names the limit.
+Tests: `test/maik-pro-daily-tokens.test.mjs`, `test/run-maik-quota-ui.mjs`. [[modules/MaiK]]
+
+## 2026-10-10 PrepNucleus share IDs: derived, 8 + 1 characters, no link yet
+Every MCQ and lesson gets an ID derived from its immutable item id (SHA-256, Crockford base32, Luhn mod 32 check), not
+an assigned number: no migration and no ID change across bank versions. 8 body characters (not 7) because 191k items
+would already expect a collision at 35 bits; collisions that ever happen give the later item a long form recorded in
+the index. The share sends the ID and instructions only: no web page opens a PrepNucleus question yet, so a link would
+be dead off the app. Plan for `/p/<ID>` links in [[modules/PrepNucleus]] "Share IDs".

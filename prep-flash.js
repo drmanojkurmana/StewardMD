@@ -284,7 +284,7 @@
     }
     var s = store(), today = host.today();
     // Ask MaiK (prep-ask.js) about the turned card: on this phone or online, from the card's own two sides.
-    var ask = G.PREP_ASK && c.kind !== "occl" ? '<button type="button" class="pn-link pk-ask" data-act="k-ask">' + (function () { var M = G.SMD_MAIK_MARK, m = M ? M.html("tile", { size: 28 }) : ""; return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; })() + 'Ask MaiK about this card</button>' : "";
+    var ask = G.PREP_ASK && c.kind !== "occl" ? '<button type="button" class="pn-link pk-ask" data-act="k-ask">' + (function () { var M = G.SMD_MAIK_MARK, m = M ? M.html("tile", { size: 28 }) : ""; return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; })() + (G.SMD_MAIK_MARK ? G.SMD_MAIK_MARK.label("Ask MaiK about this card") : "Ask MaiK about this card") + '</button>' : "";
     return '<div class="pk-bar" id="pkBar">' + ask + '<div class="pk-grades" role="group" aria-label="How well did you remember it?">' + GRADES.map(function (x) {
       var d = intervalFor(s, c._m, c.id, x.g, today, C());
       return '<button type="button" class="pk-g pk-' + x.k + '" data-act="k-grade" data-g="' + x.g + '" aria-label="' + x.label + ", next in " + ivlWords(d) + '"><b>' + x.label + "</b><small>" + fmtIvl(d) + '</small><kbd class="pk-kbd" aria-hidden="true">' + x.g + "</kbd></button>";

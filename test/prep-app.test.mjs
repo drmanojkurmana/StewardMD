@@ -113,8 +113,12 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.deepEqual(P.oldOverlays("medcov2"), ["medcov"]);
   assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
   assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
-  assert.match(read("prep.js"), /medicine: \["medcov3"\], "ss-pulmonology": \["medcov3"\]/);
-  assert.match(read("prep.js"), /radiology: \["radnotes", "radmax3"\]/, "radiology reads radnotes and the radmax3 release");
+  assert.match(read("prep.js"), /medicine: \["medcov4"\], "ss-pulmonology": \["medcov4"\]/);
+  assert.match(read("prep.js"), /radiology: \["radnotes3", "radmax7"\]/, "radiology reads the radnotes3 and radmax7 releases (de-identified figures)");
+  assert.deepEqual(P.oldOverlays("radmax7"), ["radmax", "radmax2", "radmax3", "radmax4", "radmax5", "radmax6"], "radmax7 replaces cached radmax to radmax6 copies");
+  assert.deepEqual(P.oldOverlays("radmax5"), ["radmax", "radmax2", "radmax3", "radmax4"], "radmax5 replaces cached radmax to radmax4 copies");
+  assert.deepEqual(P.oldOverlays("radnotes3"), ["radnotes", "radnotes2"], "radnotes3 replaces cached radnotes and radnotes2 copies");
+  assert.deepEqual(P.oldOverlays("radmax4"), ["radmax", "radmax2", "radmax3"], "radmax4 replaces cached radmax to radmax3 copies");
   assert.deepEqual(P.oldOverlays("radmax3"), ["radmax", "radmax2"], "radmax3 replaces cached radmax and radmax2 copies");
   assert.deepEqual(P.oldOverlays("radmax"), []);
   assert.deepEqual(P.oldOverlays("radmax2"), ["radmax"], "radmax2 replaces cached radmax copies");
@@ -330,10 +334,16 @@ test("PrepNucleus 4K logo icon and banner assets ship and are wired", () => {
 
   const prepJs = read("prep.js");
   assert.match(prepJs, /pn-bar-logo/, "prep.js must render the logo icon in the header");
-  assert.match(prepJs, /pn-brand-banner/, "prep.js must render the brand banner in renderHome");
+  // Apple pass (2026-10-10, owner palette): no oversized banner on home; the brand is the mark beside the name in the
+  // bar, flat amber (#EFC07B) on dark and flat Prussian blue (#0F3460) on light.
+  assert.doesNotMatch(prepJs, /pn-brand-banner/, "home no longer renders the brand banner");
+  assert.match(prepJs, /logo-mark-amber-96\.webp/, "the dark theme bar uses the flat amber mark");
+  assert.match(prepJs, /logo-mark-prussian-96\.webp/, "the light theme bar uses the flat Prussian mark");
+  assert.ok(fs.existsSync(path.join(ROOT, "prep/art/logo-mark-amber-96.webp")), "logo-mark-amber-96.webp must exist");
+  assert.ok(fs.existsSync(path.join(ROOT, "prep/art/logo-mark-prussian-96.webp")), "logo-mark-prussian-96.webp must exist");
 
   const prepCss = read("prep.css");
-  assert.match(prepCss, /\.pn-brand-banner/, "prep.css must style pn-brand-banner");
+  assert.doesNotMatch(prepCss, /pn-sky|hero-dark\.webp|banner-dark\.webp/, "prep.css draws no painted sky or banner");
   assert.match(prepCss, /\.pn-bar-logo/, "prep.css must style pn-bar-logo");
 
   const homeJs = read("home.js");
@@ -369,4 +379,25 @@ test("bank stamps: a module cached before an in-place republish is fetched again
   assert.match(src, /function \(e\) \{ if \(hit\) return \(st\.mem\[p\] = hit\.items\); throw e; \}/, "a failed refetch falls back to the cached copy");
   const sh = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "scripts/build-www.sh"), "utf8");
   assert.match(sh, /manifest\.json" "\$WWW\/prep\/bank/, "the native bundle ships the manifest");
+});
+
+test("tide pass: question of the day is stable for a day, the self comparison counts only modules below", () => {
+  assert.equal(P.dayHash(20371, 7), P.dayHash(20371, 7), "same day, same pick");
+  assert.notEqual(P.dayHash(20371, 7), P.dayHash(20372, 7), "the next day moves on");
+  assert.ok(P.dayHash(20371, 7) >= 0 && Number.isInteger(P.dayHash(20371, 7)));
+  assert.equal(P.selfShare([40, 50, 60, 70, 80], 65), 60);
+  assert.equal(P.selfShare([40, 50, 60, 70, 80], 40), 0, "ties are not counted as below");
+  assert.equal(P.selfShare([], 50), 0);
+});
+
+test("tide pass: prep-tide.js loads after prep-motion.js, optional, and prep.js attaches, syncs and detaches it", () => {
+  const L = read("prep-loader.js"), J = read("prep.js"), T = read("prep-tide.js");
+  assert.match(L, /"prep-motion\.js", "prep-tide\.js"/);
+  assert.match(L, /"prep-tide\.js": 1/);
+  assert.match(J, /PREP_TIDE\.attach\(root\)/); assert.match(J, /PREP_TIDE\.sync\(root\)/); assert.match(J, /PREP_TIDE\.detach\(\)/);
+  assert.match(T, /prefers-reduced-motion/, "reduced motion draws one still frame");
+  assert.match(T, /visibilitychange/, "pauses when the page is hidden");
+  assert.match(T, /FRAME_MS = 1000 \/ 30/, "capped at 30 frames a second");
+  assert.match(T, /IDLE_MS = 10000/, "settles 10 s after the last interaction");
+  assert.doesNotMatch(T, /https?:\/\//, "no network: offline");
 });

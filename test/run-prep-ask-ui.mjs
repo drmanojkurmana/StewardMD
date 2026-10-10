@@ -1,7 +1,7 @@
 /* PrepNucleus Ask MaiK, MaiK lines and milestone balloons in the REAL app (headless Chrome over CDP), on the fixture bank.
  * Owner decisions 2026-10-09 (vault/plans/PrepNucleus-iPad-Confetti-MaikLines.md, sections 2, 3 and 5):
- * - balloons on a milestone (level-up here): 7 on a phone, 9 on an iPad-width card, transform and opacity only, gone by
- *   4 s, no confetti on the same card; under reduced motion none, the milestone said in words;
+ * - a milestone (level-up here) is said in words on the result card (the chip); balloons and confetti were retired on
+ *   2026-10-10 (owner: no childish gamification), so no celebration layer is ever drawn, at any width or motion setting;
  * - one MaiK line per app session after a set of 5 or more, the subject's first line first;
  * - Ask MaiK on every answer (web too); first use asks "On this phone" or "Online" with "Don't ask again"; a web browser
  *   and a phone that cannot run MaiK are told so at once and offered Online; Online goes to /api/ai/prep-teach (answered
@@ -102,15 +102,11 @@ try {
   await setXp(99);
   ok(await runSet(true), "a set of 6 finishes");
   const b1 = JSON.parse(await ev(`var c=document.querySelector("#smdPrep .pn-score"); return JSON.stringify({ cele: c.getAttribute("data-cele"), chip: (c.querySelector(".pn-mile")||{}).textContent, n: c.querySelectorAll(".pn-balloons > .pn-bl").length, conf: !!c.querySelector(".pn-confetti"), cel: PREP._host.store().cel });`));
-  ok(b1.cele === "balloons" && b1.chip === "Level 2" && b1.n === 7 && !b1.conf, "level-up: balloons (7 at 390 px), the chip says Level 2, no confetti on the same card: " + JSON.stringify(b1));
+  ok(b1.cele === "balloons" && b1.chip === "Level 2" && b1.n === 0 && !b1.conf, "level-up: the chip says Level 2; no balloons or confetti are drawn: " + JSON.stringify(b1));
   ok(b1.cel && b1.cel.keys && b1.cel.keys.indexOf("lv2") >= 0, "the milestone is recorded so it never fires twice");
-  const props = await ev(`var ok=true, n=0; document.querySelectorAll("#smdPrep .pn-bl, #smdPrep .pn-bl > i").forEach(function(el){ el.getAnimations().forEach(function(a){ n++; a.effect.getKeyframes().forEach(function(k){ Object.keys(k).forEach(function(p){ if (["transform","opacity","offset","easing","composite","computedOffset"].indexOf(p) < 0) ok=false; }); }); }); }); return ok && n >= 14;`);
-  ok(props === true, "balloons animate transform and opacity only");
-  ok(await ev(`var c=document.querySelector("#smdPrep .pn-score"); return getComputedStyle(c.querySelector(".pn-balloons")).pointerEvents === "none";`) === true, "the balloon layer never takes a tap");
   const line1 = await ev(`var l=document.querySelector("#smdPrep .pn-maikline"); return l ? l.textContent + "|" + l.getAttribute("role") : "";`);
   ok(line1 === "You are the next great anatomist in the making.|status", "MaiK line: the subject's first line under the result, announced once: " + line1);
   await shot("ask-result-balloons-p390");
-  ok(await until(`return !document.querySelector("#smdPrep .pn-balloons");`, 4500), "the balloon layer is gone by 4 s");
 
   // ---- second set the same session: no line, no balloons (no milestone)
   ok(await runSet(true), "a second set finishes");
@@ -120,7 +116,7 @@ try {
   await size(820, 1180); await setXp(599);
   ok(await runSet(true), "an iPad-width set finishes");
   const b2 = await ev(`var c=document.querySelector("#smdPrep .pn-score"); return c.getAttribute("data-cele")+":"+c.querySelectorAll(".pn-bl").length+":"+Math.round(c.getBoundingClientRect().width);`);
-  ok(/^balloons:9:/.test(b2), "iPad width: 9 balloons on a card wider than 600 px (a level-up without a new rank): " + b2);
+  ok(/^balloons:0:/.test(b2), "iPad width: the milestone is marked on the card, no balloons drawn: " + b2);
   await shot("ask-result-balloons-p820");
 
   // ---- reduced motion: no balloons, the milestone still in words
@@ -135,7 +131,7 @@ try {
   const planDone = () => ev(`var s=PREP._host.store(), td=PREP._host.today(); s.pl=s.pl||{ob:1,exam:null,date:null,min:30,rem:null}; s.pt={ d: td, ex: PREP._host.exam().id, min: s.pl.min, items: [{ k: "mock", id: "neet-pg", label: "NEET-PG pattern", min: 30, t0: 0 }], total: 30 }; s.mh=[{ ts: Date.now(), label: "x", marks: 1, max: 4, n: 1 }]; PREP._host.save(); PREP._st.run=null; PREP._st.stack.length=1; PREP._host.home(); return 1;`);
   await ev(`var s=PREP._host.store(); s.cel={ day: -1, keys: (s.cel&&s.cel.keys)||[] }; PREP._host.save(); return 1;`);
   await planDone();
-  ok(await until(`var p=document.querySelector("#smdPrep .pl-plan[data-cele=balloons]"); return !!p && !!p.querySelector(".pn-balloons .pn-bl") && /Today's plan is done/.test(p.textContent);`, 5000), "today's plan done the first time: balloons on the plan, the line says it is done");
+  ok(await until(`var p=document.querySelector("#smdPrep .pl-plan[data-cele=balloons]"); return !!p && !p.querySelector(".pn-balloons") && /Today's plan is done/.test(p.textContent);`, 5000), "today's plan done the first time: the line says it is done, no balloons");
   ok(await ev(`return PREP._host.store().cel.keys.indexOf("plan1") >= 0;`) === true, "plan1 is recorded");
   await planDone();
   ok(await until(`return !!document.querySelector("#smdPrep .pl-plan") && !document.querySelector("#smdPrep .pl-plan[data-cele]");`, 5000), "the next time: the plain line only");
@@ -149,7 +145,7 @@ try {
   await click('#smdPrep [data-act=start][data-k=study]'); await until(`return !!document.querySelector("#smdPrep .pn-q");`, 8000);
   await ev(`var r=PREP._st.run, it=r.items[r.i]; document.querySelector('#smdPrep .pn-opt[data-k="'+((it.a+1)%4)+'"]').click(); return 1;`);
   const btn = await ev(`var b=document.querySelector("#smdPrep .pn-fb [data-act=ask]"); return b ? b.textContent + "|" + Math.round(b.getBoundingClientRect().height) : "";`);
-  ok(/^Why is [A-D] wrong\? Ask MaiK\|\d+$/.test(btn) && +btn.split("|")[1] >= 44, "a wrong answer offers Ask MaiK on the web, 44 px or more: " + btn);
+  ok(/^Why is [A-D] wrong\? Ask\sMaiK\|\d+$/.test(btn) && +btn.split("|")[1] >= 44, "a wrong answer offers Ask MaiK on the web, 44 px or more: " + btn);
   await click("#smdPrep [data-act=ask]");
   ok(await until(`return !!document.querySelector("#pnAsk .pa-opts") && !!PREP_ASK._s().vd;`, 5000), "the Ask MaiK sheet opens with the two choices");
   const web = JSON.parse(await ev(`var w=document.getElementById("pnAsk"); return JSON.stringify({ note: (w.querySelector(".pa-note")||{}).textContent, local: w.querySelector('[data-v=local]').getAttribute("aria-disabled"), online: w.querySelector('[data-v=online]').getAttribute("aria-checked"), dont: w.querySelector("#paDont").checked, ai: /\\bAI\\b/.test(w.textContent), dash: /\\u2014/.test(w.textContent) });`));
@@ -180,7 +176,7 @@ try {
   await click("#pnAsk [data-act=ak-go]");
   ok(await until(`var a=document.querySelector("#pnAsk .pt-ans-b"); return !!a && /stored explanation says/.test(a.textContent);`, 6000), "online: MaiK's checked answer shows");
   const note = await ev(`return (document.querySelector("#pnAsk .pt-note")||{}).textContent;`);
-  ok(/Answered online by MaiK/.test(note) && /Used about 68 MaiK Tokens; 1,932 left in your account\./.test(note), "online: the note says how it was checked and the MaiK Tokens used and left: " + note);
+  ok(note === "68 MaiK Tokens · 1,932 left in your account", "online: one short line, the MaiK Tokens used and left: " + note);
   const rq = teachReqs[teachReqs.length - 1] || {}, rb = JSON.parse(rq.body || "{}");
   ok(rq.auth === "Bearer tok-1" && rb.kind === "mcq" && /Question: Fixture question/.test(rb.ground) && /Correct answer: [A-D]\./.test(rb.ground) && Number.isInteger(rb.key) && Number.isInteger(rb.chosen) && rb.key !== rb.chosen, "online: signed request with the grounding, key and pick: " + JSON.stringify({ auth: rq.auth, kind: rb.kind, key: rb.key, chosen: rb.chosen }));
   ok(await ev(`var a=PREP._host.store().ask; return a.m==="online" && a.q===1;`) === true, "Don't ask again is stored");
@@ -224,7 +220,7 @@ try {
   await click('#smdPrep [data-act=start][data-k=study]'); await until(`return !!document.querySelector("#smdPrep .pn-q");`, 8000);
   await ev(`var r=PREP._st.run, it=r.items[r.i]; document.querySelector('#smdPrep .pn-opt[data-k="'+it.a+'"]').click(); return 1;`);
   const rightBtn = await ev(`return (document.querySelector("#smdPrep .pn-fb [data-act=ask]")||{}).textContent;`);
-  ok(/^Ask MaiK why [A-D] is right$/.test(rightBtn || ""), "a right answer offers Ask MaiK too: " + rightBtn);
+  ok(/^Ask\sMaiK why [A-D] is right$/.test(rightBtn || ""), "a right answer offers Ask MaiK too: " + rightBtn);
   await click("#smdPrep [data-act=ask]");
   ok(await until(`var n=document.querySelector("#pnAsk .pa-note"); return !!n && n.textContent === "MaiK on this phone needs an iPhone 15 Pro or newer, or an iPad with an M1 chip or newer. You can ask MaiK online instead.";`, 5000), "not capable: the owner's sentence at once");
   ok(await ev(`var w=document.getElementById("pnAsk"); return w.querySelector('[data-v=local]').getAttribute("aria-disabled")==="true" && w.querySelector('[data-v=online]').getAttribute("aria-checked")==="true";`) === true, "not capable: On this phone unavailable, Online selected");
@@ -239,7 +235,7 @@ try {
   await shot("ask-choose-capable-p390");
   const before = teachReqs.length;
   await click("#pnAsk [data-act=ak-go]");
-  ok(await until(`var a=document.querySelector("#pnAsk .pt-ans-b"); return !!a && /stored explanation says/.test(a.textContent) && /Written on this phone by MaiK Lite/.test(document.querySelector("#pnAsk .pt-note").textContent);`, 6000), "on this phone: the phone's checked answer, named as written on this phone");
+  ok(await until(`var a=document.querySelector("#pnAsk .pt-ans-b"); return !!a && /stored explanation says/.test(a.textContent) && !document.querySelector("#pnAsk .pt-note") && document.getElementById("paStat").textContent === "Unlimited";`, 6000), "on this phone: the phone's checked answer, no tokens line, Unlimited");
   ok(teachReqs.length === before, "on this phone: nothing is sent to the server");
   await click("#pnAsk .pa-top [data-act=ak-close]");
 
@@ -251,7 +247,7 @@ try {
   await click("#smdPrep [data-act=ask]");
   ok(await until(`return !!document.querySelector("#pnAsk [data-act=ak-consent]");`, 4000) && teachReqs.length === b4, "engine on Local: Online asks before sending anything");
   await click("#pnAsk [data-act=ak-consent]");
-  ok(await until(`return !!document.querySelector("#pnAsk .pt-ans-b") && /Used about 60 MaiK Tokens\\./.test(document.querySelector("#pnAsk .pt-note").textContent);`, 5000) && teachReqs.length === b4 + 1, "after Send online: one request, the answer, tokens used (no balance when the cap is off)");
+  ok(await until(`return !!document.querySelector("#pnAsk .pt-ans-b") && document.querySelector("#pnAsk .pt-note").textContent === "60 MaiK Tokens";`, 5000) && teachReqs.length === b4 + 1, "after Send online: one request, the answer, tokens used (no balance when the cap is off)");
   ok(await ev(`return SMD_MAIK_ENGINE.cloudAllowed() === false;`) === true, "the app-wide MaiK engine setting is unchanged");
   await click("#pnAsk .pa-top [data-act=ak-close]");
   await ev(`delete window.SMD_MAIK_ENGINE; return 1;`);
