@@ -1,0 +1,287 @@
+{
+ "schema": "prep/assessment-profile/v2",
+ "id": "neet-pg",
+ "version": "2026.1.0",
+ "status": "official",
+ "name": "NEET-PG",
+ "session": "NEET-PG 2026",
+ "tab": "neet-pg",
+ "verified_on": "2026-10-10",
+ "sources": {
+  "NBEMS-NEETPG-2026": {
+   "url": "https://natboard.edu.in/viewnbeexam?exam=neetpg (Information Bulletin link: https://drive.google.com/file/d/1WmFcaFZhEAaRFrBBgTGUENX81cQwQkVT/view)",
+   "title": "NEET-PG 2026 Information Bulletin",
+   "doc_date": "2026-07-01",
+   "sha256": "dc60d2bb5379f8cde413b02b97254703dd1a79446933575dfea323193b84fa1d"
+  },
+  "NBEMS-NEETPG-2025": {
+   "url": "https://nbe.edu.in/IB/IB%20NEET-PG%202025.pdf",
+   "title": "IB NEET PG 2025",
+   "doc_date": "2025-04-17",
+   "sha256": "bbf1c02f3e32986f2bdfd258786290f485f14150a07df528b3c9b74b9a301237"
+  }
+ },
+ "format": {
+  "questions": 180,
+  "duration_min": 210,
+  "options": 4,
+  "item_types": [
+   "sba"
+  ],
+  "sections": [
+   {
+    "id": "A",
+    "label": "Section A",
+    "questions": 36,
+    "minutes": 42
+   },
+   {
+    "id": "B",
+    "label": "Section B",
+    "questions": 36,
+    "minutes": 42
+   },
+   {
+    "id": "C",
+    "label": "Section C",
+    "questions": 36,
+    "minutes": 42
+   },
+   {
+    "id": "D",
+    "label": "Section D",
+    "questions": 36,
+    "minutes": 42
+   },
+   {
+    "id": "E",
+    "label": "Section E",
+    "questions": 36,
+    "minutes": 42
+   }
+  ]
+ },
+ "navigation": {
+  "locked_sections": true,
+  "revisit_within_section": true,
+  "return_to_closed_section": false,
+  "early_section_submit": false,
+  "auto_advance_on_timeout": true,
+  "mark_for_review": true,
+  "break_between_parts": false
+ },
+ "scoring": {
+  "correct": 4,
+  "incorrect": -1,
+  "unanswered": 0,
+  "pass": null
+ },
+ "pace_sec": 70,
+ "blueprint": {
+  "kind": "none",
+  "subjects": {},
+  "unmapped": {},
+  "note": "No subject split is published in the 2022, 2025 or 2026 bulletins. Tests spread questions across all MBBS subjects in proportion to the bank and say so."
+ },
+ "item_styles": [],
+ "previous_formats": [
+  {
+   "id": "neet-pg-2025",
+   "label": "NEET-PG 2025 format",
+   "questions": 200,
+   "duration_min": 210,
+   "sections": [
+    {
+     "id": "A",
+     "label": "Section A",
+     "questions": 40,
+     "minutes": 42
+    },
+    {
+     "id": "B",
+     "label": "Section B",
+     "questions": 40,
+     "minutes": 42
+    },
+    {
+     "id": "C",
+     "label": "Section C",
+     "questions": 40,
+     "minutes": 42
+    },
+    {
+     "id": "D",
+     "label": "Section D",
+     "questions": 40,
+     "minutes": 42
+    },
+    {
+     "id": "E",
+     "label": "Section E",
+     "questions": 40,
+     "minutes": 42
+    }
+   ],
+   "scoring": {
+    "correct": 4,
+    "incorrect": -1,
+    "unanswered": 0
+   },
+   "src": "NBEMS-NEETPG-2025",
+   "section": "5.5-5.8",
+   "official": true
+  }
+ ],
+ "legacy_mock": {
+  "id": "neet-pg",
+  "label": "NEET-PG pattern",
+  "n": 200,
+  "min": 210,
+  "plus": 4,
+  "minus": 1
+ },
+ "legacy": {
+  "tab": "neet-pg",
+  "order": 0,
+  "scheme": "neet-pg",
+  "note": "The pattern the app used before smd_prep_tests2 (one overall timer). Shown only with the flag off."
+ },
+ "style": {
+  "core_id": "neet-pg",
+  "status": "provisional",
+  "basis": "asserted generation mix, not learned from calibration",
+  "text": "high-yield facts, clinical application, common traps, rapid recall",
+  "stem": "short vignette or direct",
+  "cog": {
+   "recall": 0.4,
+   "application": 0.4,
+   "reasoning": 0.2
+  },
+  "d": {
+   "1": 0.3,
+   "2": 0.5,
+   "3": 0.2
+  }
+ },
+ "provenance": [
+  {
+   "field": "/format/questions",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.3",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/duration_min",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.3",
+   "verified_on": "2026-10-10",
+   "note": "03 hrs 30 minutes"
+  },
+  {
+   "field": "/format/options",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.3",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/format/item_types",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.3",
+   "verified_on": "2026-10-10",
+   "note": "select the correct / best / most appropriate response out of 4"
+  },
+  {
+   "field": "/format/sections",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.6",
+   "verified_on": "2026-10-10",
+   "note": "five time-bound sections A to E, 36 questions and 42 minutes each; the actual number may vary"
+  },
+  {
+   "field": "/navigation/locked_sections",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.6",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/return_to_closed_section",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.6",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/early_section_submit",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.6",
+   "verified_on": "2026-10-10",
+   "note": "restricted to proceed to the next section till completion of the allotted time"
+  },
+  {
+   "field": "/navigation/auto_advance_on_timeout",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.6",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/mark_for_review",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.5",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/navigation/break_between_parts",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "no break between sections is described"
+  },
+  {
+   "field": "/scoring/correct",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.4",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/scoring/incorrect",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.4",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/scoring/unanswered",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": "5.4",
+   "verified_on": "2026-10-10"
+  },
+  {
+   "field": "/pace_sec",
+   "official": false,
+   "src": null,
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "derived: 210 min x 60 / 180 questions"
+  },
+  {
+   "field": "/blueprint/kind",
+   "official": true,
+   "src": "NBEMS-NEETPG-2026",
+   "section": null,
+   "verified_on": "2026-10-10",
+   "note": "no subject distribution published"
+  }
+ ]
+}

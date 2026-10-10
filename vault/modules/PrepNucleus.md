@@ -1572,6 +1572,49 @@ feature (private custom modules) and an owner authoring tool, on one engine. Dec
   `test/run-prep-qgen-ui.mjs` (off/on/owner visibility, create, progress, result, mode sheet, honest line, report, offline
   reopen, limit, Author run, review, stage; SHOTS=<dir>).
 
+## Reasoning explanations + knowledge links (prep-reason.js, tools/prep-links.mjs)
+- **Rule:** every question teaches one transferable clinical reasoning pattern. A new item carries optional fields in its
+  explanation object x: clues, ddx, mechanism, why-key, per-option reasons, pearl, lo (learning objective), rev (revision
+  summary), next (preferred next action), link ids (kb, drug, protocol, lesson, card, under x.links or flat) and refs.
+- **Feedback, review and Learning Mode** (prep.js calls `PREP_REASON.body()` only when `has()` is true): learning
+  objective, Key clues, Differential, Mechanism, why the answer is right (unchanged whyHtml), why the others are wrong
+  (one collapsed `<details>` row per option, the student's pick open and first), Exam pearl, Revision summary,
+  references, then Learn more (Knowledge Library article, Drug Index, protocol, lesson, flashcards), ONE next learning
+  action and Related questions. Items without the new fields render exactly as before (unit + headless byte-identity
+  checks); without prep-reason.js (optional in the loader) nothing changes at all.
+- **Next action**, the first whose target exists (x.next prefers one kind): Review the concept (KB article), Revise this
+  topic (lesson or cards), Practise related questions (the related set), Schedule revision (Today's plan). A missing
+  target is never shown.
+- **Opening:** the article through `SMD_REASON.openRef(id, { from: "prep" })` (guarded by `hasDiseaseRef`), a drug through
+  `MEDDB.openComposition`, a protocol through `SMD_KBPROTO.open({ id })`; each overlay lifts above #smdPrep while open
+  (drug-link.js lift) and its own close returns here. Lessons/cards use l-open/k-open; a related question opens alone in
+  practice like a shared ID.
+- **Index** `v1/links/` on R2 (no question text): pointer index.json (short cache, network first, IndexedDB copy),
+  immutable `m/<module>-<8 hex>.json` (+ `c/<subject>-<8 hex>.json` for the owner console), bank route `LINKS_RE`.
+  `tools/prep-links.mjs fetch|build|confirm|verify|publish`: conservative automatic matching (title/tag/entity phrases,
+  upper-case-only acronyms, words two articles share dropped; pipeline x.links at 95 after id checks; the keyed answer
+  92, distractors capped 50, the odd-one-out 60, explanation-only 55; non-clinical subjects get no protocols; one KB id
+  key for the mixed lower/UPPER casings), bridge rows (lesson keys, card decks, PYQ parents, related questions across
+  modules), threshold 75 for what shows. `confirm` (dry run default; `--run --cap 6`, claude-haiku-5-5 Batch through
+  functions/_prep-qgen.js, key file `~/.config/stewardmd/anthropic.env`, workspace header, key never printed, every call
+  in `~/prep-data/assessment/spend-ledger.tsv`) re-scores low-confidence pairs on blind stem-only prompts. Client merges
+  pipeline links with the shard, re-checks lessons/cards against the live indexes, resolves related stems from cached
+  modules (3 modules, 5 rows).
+- **Tests:** `test/prep-reason.test.mjs` (switch, links, action choice, shard/related merge, body order/collapse/escape,
+  slot acts, loader + CSS) and `test/prep-links.test.mjs` (casings, matcher floors/caps, expText, phrases, route, confirm
+  shape, one-module build); fixtures `test/fixtures/prep-reason/` (6 new-field + 2 old items, links shards, modules,
+  lesson, deck); headless `test/run-prep-reason-ui.mjs` (Chrome + WebKit, 390x844 + 820, light + dark, Playwright route
+  serving; BROWSERS=/SIZES=/THEMES=/SHOTS=).
+
+## Tests & Assessment Engine M1 (2026-10-10, branch `feat/prep-tests2`, prep62; flag `smd_prep_tests2`, default OFF)
+Plan: owner "Tests & Assessment Engine" plan; audit `~/prep-data/assessment/AUDIT.md` (C, E, F). Code only, $0 API spend.
+- **Profiles as data.** `prep/assess/profiles/<exam>.json` (neet-pg 2026.1.0, ini-cet 2027.1.0 (January 2027 Part A, owner PDF), fmge 2026.10.0, neet-ss 2025.1.0, ini-ss 2026.1.0 (January 2026 Part A, owner PDF: Stage I 80 Q, 90 min, +1/-1/3, 50% to qualify; Stage II not simulated) official; usmle-step1 2026.5.0 provisional), every format/navigation/scoring rule with provenance (official + bulletin section, or inferred + note). Compiled by `tools/prep-profiles-build.mjs` to `prep-profiles.js` (ES5, also require()-able). `prep-assess.js` (pure engine) derives prep.js `MOCKS` (legacyMocks, the pre-flag patterns, unchanged), `functions/_prep-arena.js SCHEMES` (schemes) and `functions/_prep-core.js EXAM_PROFILES` (coreProfiles). `test/prep-assess.test.mjs` fails on drift. `prep/profiles/*.json` (old readable copies) are untouched and still tested.
+- **Assembly.** `assemble(profile, type, opts, bank)`: eligible items only (no flag, not withdrawn, not excluded, item-quality sidecar does not block: requires_review/rejected/retired, disputed key, rubric "fail"; "approved" never required, owner decision 5), no duplicate id or normalised stem, official quotas (FMGE blueprint) never filled from other subjects (shrink + reason), bank-proportional spreads for exams with no official split, deviations recorded, refusal below the minimum, seeded (daily 10 = exam + IST date).
+- **Locked sections** in prep.js's runner (`r.sc`): only the open section is answerable/navigable, Submit section (confirm says the official rule: no early exit in NEET-PG/INI-CET/FMGE/NEET-SS; practice allows it, unused time is lost), auto-submit at 0, section summary (locked), Start next (its clock starts on that tap; no question visible meanwhile). Clock rule in the `prep-assess.js` header: charge max(monotonic, wall) while running; after a kill the whole wall gap since the last save (every answer and every 5 s, IndexedDB `prep-bank/files` key `run:t2`) is charged; a clock moved back > 2 min ends the section.
+- **Tests segment (flag on, `prep-tests.js` + `prep-tests.css`):** resume card, Daily 10 (exactly 10, 10 x profile pace, counted once a day in `s.t2d`), exam cards (full, one part, one section; NEET-PG previous-format 200-question practice link), subject/topic/diagnostic/Today's set/weak/mistakes/custom, PYQ row. Pre-test screen shows size, time, sections, marking, scope and deviations. Result: marks by profile, counts, accuracy, time, average, by section/subject/difficulty, practise next, own earlier attempts, build record; record in IndexedDB `t2r:<id>`, summary in `s.t2h` (30).
+- **Flag-on only:** readiness renamed "progress score" with a not-a-chance-of-passing line (prep-plan.js); Arena "Rank X of N" only from N >= 100 (`RANK_MIN_N`); AIPGMEE 2012-2016 recall sets are topic sets only (no timed paper, owner decision 9); opt-in de-identified item statistics (asked once on a result, `smd_prep_stats`; `functions/api/prep/stats.js` validates and answers 202 stored:false until the owner binds D1 `PREP_STATS_DB`, then aggregate upserts only).
+- **Not built (M1):** image-based and case-based test types (no index count of image items; no case flag), INI-CET combination-item share (prospectus gives none; recorded, not enforced), item-quality writers, server-side analytics storage binding.
+- Tests: `test/prep-assess.test.mjs`, `test/run-prep-tests2-ui.mjs` (Chromium + WebKit, generated 19-subject bank).
 ## Lesson figure redraws (2026-10-10, branch `prep-redraw`)
 Owner: redraw the ~482 lesson drawings as modern flat-vector art (book figures stay for every real scan and every
 figure without an accepted redraw). The art carries no text; teaching labels are re-set by us in Inter at the book
