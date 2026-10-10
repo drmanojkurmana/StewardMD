@@ -7621,7 +7621,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // true for the WHOLE animation, so the follow-up chips were visible but taps silently no-op'd
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
       _maikBusy = false; maikSetSendMode(false);
-      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "module-daily" && r.message ? String(r.message) : r.reason === "rate" ? 'One moment, you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
+      /* Quota: say WHICH limit (owner, 2026-10-10, an owner account saw the bare "usage limit reached"
+       * and nobody could tell which of ~10 limits fired). The server's own message when it sent one,
+       * and the limit's code underneath in small type. */
+      if (r && r.error === "quota") {
+        var _qm = r.reason === "rate" ? "One moment, you’re asking questions quickly. Please try again in a few seconds."
+          : (r.message ? String(r.message) : "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.");
+        think.innerHTML = '<div class="maik-welcome">' + maikEscH(_qm) +
+          (r.reason && r.reason !== "rate" ? '<br><br><span style="opacity:.7;font-size:12.5px">Limit: ' + maikEscH(r.reason) + "</span>" : "") + '</div>';
+        return;
+      }
       if (r && r.error === "LOCAL_CAPABILITY_REQUIRED") {
         // Explicit cloud alternative (owner, 2026-09-11): the chip CHANGES the engine, it does not
         // sneak one question past the clinician's choice.

@@ -6508,15 +6508,25 @@
       var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, regen: (opts && opts.regen) ? true : undefined, mode: (opts && opts.mode) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
-      function attempt(retried) {
-        return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
+      /* A refusal of a call that went out WITHOUT the sign-in token is retried once with a fresh one
+       * (id-token.js SMD_IDTOKEN_REFRESH): a lapsed cached token made an owner or Pro doctor a guest. */
+      function withAuth(sentAuth, authRetried, res, again) {
+        if (sentAuth || authRetried || typeof window.SMD_IDTOKEN_REFRESH !== "function") return res;
+        return window.SMD_IDTOKEN_REFRESH(4000).then(function (tk) { return tk ? again() : res; }, function () { return res; });
+      }
+      function attempt(retried, authRetried) {
+        var sentAuth = false;
+        return aiHeaders().then(function (h) { sentAuth = !!(h && h.Authorization); return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
           if (r.status === 402) {
-            return r.json().catch(function () { return {}; }).then(function (j) { return { error: "quota", needsPro: true, message: (j && j.message) || "" }; });
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              return withAuth(sentAuth, authRetried, { error: "quota", needsPro: true, reason: (j && j.reason) || "", message: (j && j.message) || "" }, function () { return attempt(retried, true); });
+            });
           }
           if (r.status === 429) {
             return r.json().catch(function () { return {}; }).then(function (j) {
-              if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true); });
-              return { error: "quota", reason: (j && j.reason) || "rate" };
+              if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true, authRetried); });
+              var q = { error: "quota", reason: (j && j.reason) || "rate", message: (j && j.message) || "" };
+              return q.reason === "rate" ? q : withAuth(sentAuth, authRetried, q, function () { return attempt(retried, true); });
             });
           }
           /* EMPTY / UNPARSABLE REPLY (owner screenshot, 2026-10-04, Android): "Reason: Failed to execute
@@ -6529,7 +6539,7 @@
             var j = null;
             try { j = t ? JSON.parse(t) : null; } catch (e) { j = null; }
             if (j && typeof j === "object") { if (!j.sources) j.sources = pkg.sources; return j; }
-            if (!retried) return new Promise(function (res) { setTimeout(res, 800); }).then(function () { return attempt(true); });
+            if (!retried) return new Promise(function (res) { setTimeout(res, 800); }).then(function () { return attempt(true, authRetried); });
             return { error: "server-empty", status: r.status || 0 };
           });
         });

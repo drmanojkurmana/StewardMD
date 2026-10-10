@@ -509,3 +509,9 @@ clinical turn's `data-mg` id to `{stop, done}`; `maikStopNow` stops all of them 
 A fresh browser profile has no AI consent, so `privacy.js guardAI()` holds every `SMD_AI.explain*` call
 waiting on the consent tick (no request is ever made). Seed `smd_consent_guest` with `consentAcceptedAt` +
 `clinicalAuthorityConfirmedAt`, and set `window.AI_PROXY='/api/ai'` on localhost.
+
+## Pro daily allowance + lapsed-token retry (2026-10-10)
+Pro: 20,000 MaiK tokens a day (`MAIK_PRO_DAILY_TOKENS`), owners exempt, reason `pro-daily-tokens`. A quota refusal of a
+call sent without the sign-in token is retried once with `SMD_IDTOKEN_REFRESH` (id-token.js). The notice shows the
+server's message plus "Limit: <reason>". See Decisions 2026-10-10. Tests: `test/maik-pro-daily-tokens.test.mjs`,
+`test/run-maik-quota-ui.mjs`.
