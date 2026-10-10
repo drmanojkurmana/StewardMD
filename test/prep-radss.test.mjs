@@ -122,15 +122,15 @@ test("lesson figures that are bank paths load through the bank API, in-app media
   assert.equal(LP.lessonImgUrl("prep/lessons/media/x.svg", "/api/prep/bank/"), "/prep/lessons/media/x.svg");
 });
 
-test("taxonomy: ss-radiology is valid with its new modules and reads bank v14 (live v13 plus the owner-verified items of the round-2 answer-key review)", () => {
+test("taxonomy: ss-radiology is valid with its new modules and reads bank v15 (live v14 plus the owner-verified items of the round-3 answer-key review)", () => {
   const s = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy/ss-radiology.json", import.meta.url), "utf8"));
   assert.deepEqual(validateSubject(s), []);
-  assert.equal(s.bank, "v14");
+  assert.equal(s.bank, "v15");
   const mods = s.sections.flatMap((x) => x.modules.map((m) => m.id));
   for (const m of ["srd-msk-metabolic", "srd-abd-peritoneum", "srd-anat-neuro", "srd-anat-body", "srd-anat-limbs"]) assert.ok(mods.includes(m), m);
   const app = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy.json", import.meta.url), "utf8"));
   const sub = app.branches.flatMap((b) => b.subjects).find((x) => x.id === "ss-radiology");
-  assert.equal(sub.bv, "v14");
+  assert.equal(sub.bv, "v15");
   assert.deepEqual(sub.sections.flatMap((x) => x.modules.map((m) => m.id)), mods, "the bundled tree matches the source");
   // every target and lesson names a module that exists
   const T = JSON.parse(fs.readFileSync(new URL("../tools/prep-radss/targets.json", import.meta.url), "utf8")).targets;
@@ -227,11 +227,11 @@ test("bankIndex writes the prep-build-bank subject index shape with a row per ta
   assert.ok(!/stewardmd|ai-generated|licen/i.test(JSON.stringify(ix)), "no source or AI field");
 });
 
-test("shipped v14 subject index: taxonomy bv v14, every taxonomy module listed with group and file, counts add up", () => {
+test("shipped v15 subject index: taxonomy bv v15, every taxonomy module listed with group and file, counts add up", () => {
   const tax = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy.json", import.meta.url), "utf8"));
   let sub = null; for (const b of tax.branches) for (const s of b.subjects) if (s.id === "ss-radiology") sub = s;
-  assert.equal(sub && sub.bv, "v14");
-  const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v14/ss-radiology/index.json", import.meta.url), "utf8"));
+  assert.equal(sub && sub.bv, "v15");
+  const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v15/ss-radiology/index.json", import.meta.url), "utf8"));
   const mods = sub.sections.flatMap((x) => x.modules.map((m) => m.id));
   assert.deepEqual(ix.topics.map((t) => t.id).sort(), mods.slice().sort());
   for (const t of ix.topics) { assert.ok(t.group && ix.groups.some((g) => g.id === t.group), t.id); assert.equal(t.file, "mcq/" + t.id + ".json"); }
@@ -293,4 +293,13 @@ test("owner drop 2026-10-10: bank v13 is v12 minus one item in srd-hn-neck (rss-
   assert.equal(v13.counts.d3, v12.counts.d3 - 1, "the dropped item was a d3 item");
   assert.ok(!JSON.stringify(v13).includes("rss-o-tgdc"));
   for (const p of ["v13/ss-radiology/index.json", "v13/ss-radiology/search.json", "v13/ss-radiology/mcq/srd-hn-neck.json", "v13/manifest.json"]) assert.equal(bankPath({ path: p.split("/") }), p, p);
+});
+
+test("answer-key round 3: bank v15 keeps every v14 module and adds the owner-verified items; the route serves v15 bank files and figures", () => {
+  const v15 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v15/ss-radiology/index.json", import.meta.url), "utf8"));
+  const v14 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v14/ss-radiology/index.json", import.meta.url), "utf8"));
+  assert.deepEqual(v15.topics.map((t) => t.id), v14.topics.map((t) => t.id));
+  assert.equal(v15.counts.total, v14.counts.total + 13, "v15 adds the 13 round-3 items");
+  for (const p of ["v15/ss-radiology/index.json", "v15/ss-radiology/search.json", "v15/ss-radiology/mcq/srd-msk-metabolic.json", "v15/manifest.json",
+    "v15/ss-radiology/img/i-3b839e6888df.webp"]) assert.equal(bankPath({ path: p.split("/") }), p, p);
 });
