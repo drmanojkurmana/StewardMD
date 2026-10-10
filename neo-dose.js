@@ -16,7 +16,7 @@
 (function (G) {
   "use strict";
   var GUARD_STOP = 2;       // owner plan: hard stop above 2 x band maximum
-  var FILES = ["dose-bands-ai", "dose-bands-other"];
+  var FILES = ["dose-bands-ai", "dose-bands-other", "paed-register"];
   var NO_DOSE = "No neonatal dose on file. Do not extrapolate.";
 
   function num(v) { if (v == null || v === "") return null; var n = Number(String(v).replace(",", ".")); return isFinite(n) ? n : null; }
@@ -119,7 +119,7 @@
     return null;
   }
 
-  var ENGINE = { context: context, matches: matches, amounts: amounts, compute: compute, guard: guard, condText: condText, findIn: findIn, indexDrugs: indexDrugs, amtText: amtText, GUARD_STOP: GUARD_STOP, NO_DOSE: NO_DOSE };
+  var ENGINE = { context: context, matches: matches, amounts: amounts, compute: compute, guard: guard, condText: condText, findIn: findIn, indexDrugs: indexDrugs, amtText: amtText, GUARD_STOP: GUARD_STOP, NO_DOSE: NO_DOSE, paedHtml: paedHtml };
   if (typeof module !== "undefined" && module.exports) { module.exports = ENGINE; return; }
 
   /* ================================ DATA + UI ================================ */
@@ -159,7 +159,9 @@
       out.push({ key: "m:" + m.n, name: m.n, cls: m.c || "", band: b, mono: m, neoRows: monoNeo(m), stmts: STMT[m.n] || [] });
     });
     (ALL || []).forEach(function (b) { if (!used[b.id]) out.push({ key: "b:" + b.id, name: b.name, cls: b["class"] || "", band: b, mono: null, neoRows: false, stmts: [] }); });
-    out.forEach(function (e) { e.status = e.band ? "calc" : e.neoRows ? "mono" : e.stmts.length ? "info" : "none"; e._q = (e.name + " " + (e.band ? [e.band.name].concat(e.band.aliases || []).join(" ") : "")).toLowerCase(); });
+    /* neonatal_status "none" (paed-register.json): no newborn dose and no monograph newborn dose may be shown. */
+    out.forEach(function (e) { if (e.band && e.band.neonatal_status === "none") e.neoRows = false; });
+    out.forEach(function (e) { e.status = e.band ? (e.band.neonatal_status === "none" ? "nosafety" : "calc") : e.neoRows ? "mono" : e.stmts.length ? "info" : "none"; e._q = (e.name + " " + (e.band ? [e.band.name].concat(e.band.aliases || []).join(" ") : "")).toLowerCase(); });
     out.sort(function (a, b) { return a.name.localeCompare(b.name); });
     ENTRIES = out; return out;
   }
@@ -173,9 +175,20 @@
     if (m) for (i = 0; i < E.length; i++) if (E[i].mono === m) return E[i];
     return null;
   }
-  var CHIP = { calc: ["calc", "Newborn dose"], mono: ["mono", "Newborn dose (monograph)"], info: ["info", "Newborn notes only"], none: ["none", "No newborn dose"] };
+  var CHIP = { calc: ["calc", "Newborn dose"], mono: ["mono", "Newborn dose (monograph)"], info: ["info", "Newborn notes only"], none: ["none", "No newborn dose"], nosafety: ["none", "No safety established"] };
   function chip(st) { var c = CHIP[st]; return '<span class="nh-chip ' + c[0] + '">' + c[1] + "</span>"; }
   function when(b) { return [b.every_h ? "every " + b.every_h + " hours" : b.freq || "", b.infuse || ""].filter(Boolean).join(" · "); }
+
+  /* neonatal_status "none": the no-safety note, then the register's child doses labelled as not neonatal.
+   * Pure markup (A supplies esc and srcLine), so the test can call it without the hub. */
+  function paedHtml(drug, A, doc) {
+    var esc = A.esc, P = drug.paediatric || [], h = '<div class="nh-note bad">' + esc(drug.neonatal_note && drug.neonatal_note.en || "No safety established or reference found for neonates.") + "</div>";
+    h += '<div class="nh-row"><div class="nh-lbl">Paediatric dose (not neonatal)</div>';
+    h += '<div class="nh-work">These are child doses from the owner register. They are not doses for newborns.</div>';
+    if (!P.length) h += '<div class="nh-work">No paediatric dose on file.</div>';
+    P.forEach(function (p) { h += '<div class="nh-answer"><div class="nh-lbl" style="color:var(--nh-mut)">' + esc(p.label || "Paediatric dose") + '</div><div style="font:600 15px var(--nh-f)">' + esc(p.quote) + "</div>" + A.srcLine(doc, p) + "</div>"; });
+    return h + "</div>";
+  }
 
   /* The sourced band result: the answer first, the working and the source folded away. */
   function blockHtml(drug, d, opts) {
@@ -183,6 +196,7 @@
     opts = opts || {};
     if (!opts.noHeader) h += '<div class="nh-row"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="font:700 18px var(--nh-f,inherit)">' + esc(drug.name) + "</b>" + A.badge(drug.review ? drug : doc) + "</div>" + (drug["class"] ? '<div class="nh-work">' + esc(drug["class"]) + "</div>" : "") + "</div>";
     if (drug.highAlert) h += A.secondCheckHtml(drug.name);
+    if (drug.neonatal_status === "none") return h + paedHtml(drug, A, doc);
     if (r.none) return h + '<div class="nh-note bad">' + esc(NO_DOSE) + "</div>";
     if (!d.weightG) h += A.note("Add today's weight (in grams) to the baby details to see the dose in mg.");
     if (r.needs.length) h += A.note("To show every dose, also add: " + r.needs.join(", ") + ".", "info");
@@ -280,7 +294,8 @@
   function resultHtml(A, e, d) {
     var esc = A.esc, h = "", lines = [];
     h += '<div class="nh-row"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="font:700 19px var(--nh-f)">' + esc(e.name) + "</b>" + chip(e.status) + (e.band ? A.badge(e.band._doc) : "") + "</div>" + (e.cls ? '<div class="nh-work">' + esc(e.cls) + "</div>" : "") + "</div>";
-    if (e.band) { h += blockHtml(e.band, d, { noHeader: true }); lines = lines.concat((blockHtml.last && blockHtml.last._lines) || []); }
+    if (e.band && e.band.neonatal_status === "none") { h += blockHtml(e.band, d, { noHeader: true }); lines = [e.band.neonatal_note.en].concat((e.band.paediatric || []).map(function (p) { return "Paediatric (not neonatal): " + p.label + ": " + p.quote; })); }
+    else if (e.band) { h += blockHtml(e.band, d, { noHeader: true }); lines = lines.concat((blockHtml.last && blockHtml.last._lines) || []); }
     else if (e.neoRows) h += monoHtml(e, d, lines);
     if (!e.band && !e.neoRows) h += '<div class="nh-note bad">' + esc(NO_DOSE) + " Adult and child doses are not shown for newborns.</div>";
     h += stmtHtml(e.stmts, !e.band && !e.neoRows);
@@ -302,7 +317,7 @@
       }
       var q = S.q.toLowerCase().trim(), list;
       if (q) { var starts = [], has = []; E.forEach(function (x) { var i = x._q.indexOf(q); if (i === 0) starts.push(x); else if (i > 0) has.push(x); }); list = starts.concat(has); }
-      else list = E.filter(function (x) { return x.status === "calc"; });
+      else list = E.filter(function (x) { return x.status === "calc" || x.status === "nosafety"; });
       var counts = { calc: 0, mono: 0 }; E.forEach(function (x) { if (counts[x.status] != null) counts[x.status]++; });
       el.innerHTML = '<section class="nh-card"><h3>Find a drug ' + A.badge((ALL[0] && ALL[0]._doc) || null) + '</h3><input type="search" data-neo-q="1" placeholder="Search any drug, e.g. ampicillin" value="' + A.esc(S.q) + '" aria-label="Search any drug" autocomplete="off">' +
         '<div class="nh-work">' + E.length.toLocaleString("en-IN") + " drugs. " + counts.calc + " have a worked-out newborn dose, " + counts.mono + " more have a newborn dose in our monograph. Others show what is known, or say there is no newborn dose.</div>" +
@@ -326,7 +341,7 @@
     S.q = t.value; var pos = t.selectionStart; hub().api.go("dose"); var n = G.document.querySelector("[data-neo-q]"); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} }
   }, false);
 
-  G.SMD_NEO_DOSE = { engine: ENGINE, load: load, find: find, on: on, blockHtml: blockHtml, wireGuards: wireGuards, statementsFor: statementsFor, stmtHtml: stmtHtml, entries: entries, NO_DOSE: NO_DOSE, loaded: function () { return !!ALL; } };
+  G.SMD_NEO_DOSE = { engine: ENGINE, load: load, find: find, on: on, blockHtml: blockHtml, wireGuards: wireGuards, statementsFor: statementsFor, stmtHtml: stmtHtml, entries: entries, NO_DOSE: NO_DOSE, paedHtml: paedHtml, loaded: function () { return !!ALL; } };
   function reg() { if (G.SMD_NEO_HUB) G.SMD_NEO_HUB.register({ id: "dose", flag: "dose", order: 1, icon: "medication", title: "Neonatal dosing", sub: "By GA, PNA, PMA, weight", kw: "dose dosing drug medicine antibiotic gentamicin ampicillin caffeine any drug", render: screen }); }
   reg();
 })(typeof window !== "undefined" ? window : globalThis);
