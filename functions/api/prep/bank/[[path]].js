@@ -36,6 +36,9 @@ const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|
 // Medicine coverage MCQs (tools/prep-medcov.mjs, set "medcov"): overlay/medcov/<subject>/<module>.json, immutable.
 // A new release goes to a new folder (medcov2, medcov3, medcov4, ...) so phones that cached the old file fetch the new one.
 const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+// Owner-reviewed MaiK questions (Author screen + tools/prep-qgen.mjs publish, set "maik<n>"): overlay/maik<n>/<subject>/<module>.json,
+// immutable. The staging copies under prep-qgen/ are outside the prep-bank/ prefix and never served.
+const MAIK_RE = /^overlay\/maik[1-9]\d{0,2}\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 // Share IDs (tools/prep-ids.mjs, prep-ids.js): v<n>/ids/index.json names the current shards (short cache); a shard
 // <two ID characters>-<6 hex content hash>.json is immutable (a changed shard gets a new name).
 const IDS_RE = /^v\d{1,3}\/ids\/(?:index|[0-9a-z]{2}-[0-9a-f]{6})\.json$/;
@@ -45,7 +48,7 @@ function notFound() { return new Response(JSON.stringify({ error: "not-found" })
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || MAIK_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {

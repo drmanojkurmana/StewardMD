@@ -1490,3 +1490,79 @@ and turning red when less than 20% time per question left). Default 60 seconds. 
   `test/run-prep-testtab-ui.mjs` (Playwright Chrome + WebKit; SHOTS=<dir>), `test/run-prep-setup-ui.mjs` (rewritten for
   the sheet and the new clock). Strings are English only (PrepNucleus has no locale files).
 - Not verified: a real iPhone/Android (screen lock pause, WKWebView Web Animations under load).
+
+## MaiK modules (qgen): "Create a module with MaiK" + owner Author tool (2026-10-10, branch `feat/prep-qgen`, prep61)
+Owner: "I have a Claude API: can we use it to create more QBank modules? Through the app, on the app." Both a student
+feature (private custom modules) and an owner authoring tool, on one engine. Decision: [[decisions/Decisions]] 2026-10-10
+"PrepNucleus MaiK modules on Claude".
+- **Engine** `functions/_prep-qgen.js` (shared by the route, the app's Author screen and the CLI). Raw HTTP to the
+  Anthropic Messages API (no SDK in Pages Functions). Generate: `claude-sonnet-5-5` (env `PREP_QGEN_MODEL`), effort
+  medium, structured output `GEN_SCHEMA` (json_schema, every object closed, no numeric/length constraints), `fallbacks:
+  "default"` + beta `server-side-fallback-2026-07-01` on Messages (never on Batches). Prompt caching: the system prompt
+  and the module's topic + grounding are the first user block with `cache_control` (byte-identical across rounds; the
+  round's count, round number and stems to avoid come after it). Verify: `claude-haiku-5-5` (env
+  `PREP_QGEN_VERIFY_MODEL`), a different prompt that never sees the key, reasons or pearl: solve blind, flag multi-best,
+  wrong fact, outdated (NICE where it covers the point), and with a grounding "not supported". Every call sends
+  `x-api-key`, `anthropic-version: 2023-06-01` and `anthropic-workspace-id` (the key is not workspace-scoped: without the
+  header the API answers 400). Errors carry a code only (auth, bad-request, rate, overloaded, provider, timeout), never
+  the key or provider text.
+- **Gates** (order): `_prep-core.js` gate 1 (four options with reasons), 2 (one key), 3 (distinct), 5 (length balance),
+  style (`styleGate`: em/en dash, emoji, all/none/both-of-the-above or options naming options, book/brand/source names),
+  with a grounding 9b (numbers in the key and its reason appear in the source) and the 12-word verbatim check, then
+  duplicates: same normalised-stem hash or token Jaccard >= 0.6 against this round, the module's earlier stems (`avoid`,
+  sent by the phone, last 60) and, for the owner, the stems of the module's bank and overlay files read from R2. Then the
+  verifier: disagreement with the key, multiple best, factual doubt, outdated, not in source, or no verdict = `qg.v
+  "flag"` with `qg.why`. Students keep only `qg.v "ok"`; the owner sees flagged items to review. Without a grounding
+  every item carries `qg.u 1` ("not from the library").
+- **Item schema** = the app's stored item (`toStoredItem`: q, o[4], a, exp (the teaching explanation, else the key's
+  reason), r[4], et, kp, d, cog, t, id `q_<sha12>`, gen AI, pv `qg1`) plus `tg` tags, `src { maik: 1 }`, `qg { g, v,
+  why?, pick, u?, note? }`. Key positions spread A to D (seeded).
+- **Route** `POST /api/ai/prep-qgen` (`functions/api/ai/_prep-qgen.js`, wired in the AI router like prep-generate:
+  `MODULE_FOR` `prep_qgen`, pause switch, device cap, skipped by the generic cap; the router's Gemini "ai-disabled" check
+  does not apply to it). Ops: `status` (guests too: `{ on, student, owner, caps, left, models }`), `gen` (n 1..5), `report`
+  (counts by reason, no text), owner `bsubmit` / `bpoll` (Message Batches, 50% price; the verify batch is submitted by
+  bpoll when generation ends; job state in KV 8 days), owner `stage` (reviewed items to R2 `prep-qgen/staging/<id>.json`,
+  outside `prep-bank/`, never served). Metering: `gateAndCount("prep_qgen", deferRecord)` (new `AI_MODULES.prep_qgen`,
+  60 requests a day backstop; MaiK Tokens as Ask MaiK, blocking only with `AI_COST_CAP_ON`), one usage record a request
+  (provider anthropic, estCostInr = USD x 96), `addDailyCostInr` + console counters `prep.qgen.*`.
+- **Flags and caps (wrangler.toml vars, both blocks):** `PREP_QGEN_ON` 1, `PREP_QGEN_STUDENT` 1,
+  `PREP_QGEN_MODULES_PER_DAY` 3 (counted at a module's first accepted round), `PREP_QGEN_OWNERS`
+  drmanojkurmana@gmail.com (the Author ops need `ownerOK` AND a verified email on this list: `OWNER_EMAILS` includes
+  accounts that are not the content owner). Defaults in code: 30 questions a module (`PREP_QGEN_MODULE_Q_CAP`), all
+  students together $5 a day (`PREP_QGEN_DAILY_USD`, KV `prep:qgen:usd:<day>`, 429 budget), owner $20 a day
+  (`PREP_QGEN_OWNER_DAILY_USD`), batch jobs up to 400 (`PREP_QGEN_BATCH_MAX`). Secrets (Pages, production and preview):
+  `ANTHROPIC_API_KEY`, `ANTHROPIC_WORKSPACE_ID`, set from stdin (`printf %s "$ANTHROPIC_API_KEY" | npx wrangler pages
+  secret put ANTHROPIC_API_KEY --project-name stewardmd`). Without the key or with `PREP_QGEN_ON` unset: `status.on`
+  false (the app hides every entry point) and every other op 503 not-configured.
+- **Client** `prep-qgen.js` + `prep-qgen.css` (`window.PREP_QGEN`, optional in the loader after prep-create.js; `prep.js`
+  forwards `g-` acts, asks `refresh()` on open). Entry rows: Tests > QBank under Custom module, and Menu, only when the
+  server's status says on (localStorage `smd_prep_qgen` "0" or `?qgen=0` hides them). Create: from a topic, pasted notes
+  or a PDF (prep-source.js reader, up to 20 pages, 60,000 characters, scrubbed with `prepScrub`), 10/20/30 questions,
+  difficulty, exam; "N of 3 free modules left today" and the MaiK Token estimate; a known limit says so and disables
+  Create. Progress: rounds of 5 (generate + check), "N of M questions ready", stage list, Stop (keeps what was made); up
+  to 2 extra rounds make up dropped questions. The module is a PRIVATE deck (prep-decks.js: source type `maik`,
+  manifest `qgen { g, topic, diff, target }`, the grounding kept in `prep-src` for "Make 10 more"), so it opens through
+  the deck screen and the mode sheet (Learning / Test Mode, timer), works offline, and is mirrored and backed up like
+  every deck. It never enters the shared bank and has no share IDs. Deck screen: "Created with MaiK ..." line, up to 30
+  questions. Runner: the honest line under the explanation; Report hides the question in that module (`qg.rep`) and
+  sends op report.
+- **Owner Author** (Menu, owner only by the server's status): exam, subject, module (or a new name), topic, source text
+  (200,000 characters), count; up to 10 run now (bank + overlay files of the module sent for the duplicate check), more
+  go to the batch queue (polled every 30 s while the screen is open, "Check now"). Review: items with checks, the
+  checker's pick and note; Approve, Edit (stem, explanation), Drop; Approve all unflagged; 50 at a time. "Stage for
+  publishing" -> the command. Draft kept in localStorage `smd_prep_qgen_author` on the owner's phone.
+- **Why publishing is not in the app:** a new overlay set needs prep.js `OVERLAYS` (OTA), immutable cache paths, overlay
+  counts, search rebuild and the Share ID index. `tools/prep-qgen.mjs publish --stage <id> [--set maikN] [--upload]` turns
+  the staged set into `overlay/maik<n>/<subject>/<module>.json` (ids `mk-<sha12>`, prov SMD) under
+  `~/prep-data/qgen/publish/` and prints the remaining steps; the bank route already whitelists `overlay/maik<n>/...`.
+- **CLI** `tools/prep-qgen.mjs`: `--source <dir|file> --topic --count [--exam --diff --bank]` = dry run with the estimate
+  (default); `--run` submits a Batch job (resumable: `--resume <job>`), `--run --direct` rounds of 5 on the Messages API.
+  Key from env or `--env ~/.config/stewardmd/anthropic.env`; work files with item text in `~/prep-data/qgen/` (never git).
+- **Live check 2026-10-10** (real API, local route, DKA, 5 a round): ungrounded round 25 s, 4 kept (1 g5), $0.0285;
+  grounded rounds 21.7 s and 21.6 s, 4 + 4 kept (1 g5 each), $0.0324 (cache write 3,784) and $0.0276 (cache read 3,784):
+  about $0.007 a kept question direct, half that by Batch. Batch path checked live with 5 questions.
+- **Tests:** `test/prep-qgen.test.mjs` (mocked Anthropic via `ANTHROPIC_BASE_URL`: bodies, cache_control, headers incl.
+  workspace, schema, gates, verifier drop vs owner flag, caps, budget, idempotent replay, auth and owner list, key never in
+  replies or logs, report, batch flow, stage, CLI dry run, bank route regex, client helpers) and headless
+  `test/run-prep-qgen-ui.mjs` (off/on/owner visibility, create, progress, result, mode sheet, honest line, report, offline
+  reopen, limit, Author run, review, stage; SHOTS=<dir>).

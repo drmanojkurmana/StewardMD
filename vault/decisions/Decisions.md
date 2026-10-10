@@ -11697,3 +11697,13 @@ an assigned number: no migration and no ID change across bank versions. 8 body c
 would already expect a collision at 35 bits; collisions that ever happen give the later item a long form recorded in
 the index. The share sends the ID and instructions only: no web page opens a PrepNucleus question yet, so a link would
 be dead off the app. Plan for `/p/<ID>` links in [[modules/PrepNucleus]] "Share IDs".
+
+## 2026-10-10 PrepNucleus MaiK modules on Claude (students private, owner via staging)
+Owner gave a Claude API key for making QBank modules in the app, for himself and for students. One engine
+(`functions/_prep-qgen.js`): claude-sonnet-5-5 writes (quality of single-best-answer writing), claude-haiku-5-5 checks
+blind with a different prompt (cheap, independent; a second Sonnet would share the writer's blind spots and cost 20x),
+the content pipelines' code gates in between. Students' modules are private decks (no shared bank, no share IDs), on by
+default with 3 modules a day, 30 questions a module and a $5 daily breaker for all students. The owner's reviewed items
+are STAGED on R2 and published with `tools/prep-qgen.mjs publish`, not from the app: overlay registration, immutable
+cache paths and the Share ID index need the tool, and an in-app publish could ship unreviewed text to every phone.
+`PREP_QGEN_OWNERS` narrows the Author tool to the content owner (OWNER_EMAILS has other accounts). [[modules/PrepNucleus]]
