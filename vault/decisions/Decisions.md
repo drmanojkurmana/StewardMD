@@ -11690,3 +11690,10 @@ the CACHED token (deliberately, no per-call getIdToken), so a lapsed cache sent 
 now retries once after a quota refusal of a call sent WITHOUT a token, with `SMD_IDTOKEN_REFRESH(4000)` (id-token.js,
 bounded). The quota notice shows the server's message and "Limit: <reason>" so the next report names the limit.
 Tests: `test/maik-pro-daily-tokens.test.mjs`, `test/run-maik-quota-ui.mjs`. [[modules/MaiK]]
+
+## 2026-10-10 PrepNucleus share IDs: derived, 8 + 1 characters, no link yet
+Every MCQ and lesson gets an ID derived from its immutable item id (SHA-256, Crockford base32, Luhn mod 32 check), not
+an assigned number: no migration and no ID change across bank versions. 8 body characters (not 7) because 191k items
+would already expect a collision at 35 bits; collisions that ever happen give the later item a long form recorded in
+the index. The share sends the ID and instructions only: no web page opens a PrepNucleus question yet, so a link would
+be dead off the app. Plan for `/p/<ID>` links in [[modules/PrepNucleus]] "Share IDs".

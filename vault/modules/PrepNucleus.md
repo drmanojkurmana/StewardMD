@@ -63,6 +63,8 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
   packs, 697 with StatPearls, 7 modules uncovered; fill dry run over the 891 covered modules $28.57 (not run).
   Test: `test/prep-packs.test.mjs`.
 - Taxonomy source: `prep/taxonomy/*.json` (one per subject; `validateSubject` in the builder).
+- Share IDs: `prep-ids.js` + `prep-ids.css` (optional), `tools/prep-ids.mjs` (fetch, build, verify, publish the
+  `v1/ids/` index). See "Share IDs".
 
 ## Arena server (2026-10-06, merged into `feat/prepnucleus`, not deployed)
 Plan: [[plans/PrepNucleus-Arena]] (deviations listed there). Flags `smd_prep` + `smd_prep_arena` stay OFF.
@@ -1325,3 +1327,67 @@ keyboard; conversation and box hidden under the keyboard, the page showing throu
   `test/run-prep-nav-ui.mjs` (Chromium via `CHROME=` and WebKit; SHOTS=<dir>, REAL=1 for real content via a read-only
   /api/prep/bank proxy). Token-only change: run-prep-setup-ui (prep55).
 - Not verified: a real iPhone (WKWebView blur, safe-area float, keyboard) and a real Android WebView (lens).
+## Share IDs (2026-10-10, branch `feat/prep-ids`, prep58)
+Owner: "Give every MCQ and lesson a unique ID, shareable, so friends can search the ID and get into the topic or MCQ."
+- **Format.** `Q-8K3-M7T-X26` (MCQ) and `L-MES-9NF-WN7` (lesson): type letter, 8 Crockford base32 characters (0-9, A-Z
+  without I, L, O, U), 1 check character, grouped in threes. The 8 characters are the first 40 bits of
+  SHA-256(`prepnucleus:q:<item id>` / `prepnucleus:l:<lesson key>`), so an ID follows from the item's immutable id: no
+  migration, the same ID on every phone and in every bank version, nothing about the content in it. Check = Luhn mod 32
+  over the type value (Q 1, L 2) and the body: every single wrong character is caught, and about 99.8% of swapped
+  neighbours (measured; the misses are swaps of 0 and Z). Typing: case, spaces, hyphens, dots ignored; O reads 0; I and
+  L (after the type letter) read 1; U and anything else outside the alphabet is "a character IDs never use".
+- **Why 8 + 1 and not the owner's 7 + 1 example.** 191,271 MCQs + 1,769 lessons today. At 35 bits about 0.5 collisions
+  were expected now and several at 500k; at 40 bits about 0.02 now (0 found). Collision rule anyway: the key that held
+  the short ID in the published index keeps it, every later key (both new: the larger key) takes the long form, 10
+  characters + check (`Q-8K3-M7T-X2C-4Z`), listed in the pointer's `xt` (kept for good); the app reads `xt` (cached in
+  localStorage `smd_prep_ids_xt`). Live proof 2026-10-10: 193,040 IDs, 0 collisions, 0 long, 0 repeated item ids.
+- **Index on R2** (`prep-bank/v1/ids/`, route `IDS_RE` in `functions/api/prep/bank/[[path]].js`): `index.json`
+  (max-age 300) `{ v, gen, q, l, n, x, xt, s }` where `s` is the 1,024 shard hashes run together (6 hex each);
+  shards `<two body characters, lower case>-<6 hex of content SHA-256>.json` `{ v, k, e: { "<ID>": loc } }` are
+  immutable. loc: `m:<subject>/<module>` (bank or overlay question; the app loads that module and hashes its items),
+  `p` (previous-year item), `l:<lesson key>`, `x` (withdrawn: kept for good). Sizes: pointer 6.2 KB (3.6 KB gzip),
+  shard 7 to 11 KB (about 3.4 KB gzip). Cloudflare compresses JSON on the way out.
+- **Resolution** (`prep-ids.js`, `window.PREP_IDS`, optional in the loader, data-acts `id-*`): index pointer (network,
+  IndexedDB copy offline) and the one shard (IndexedDB first); offline without them, the lesson index and every module,
+  overlay and PYQ file in IndexedDB are hashed. A question opens alone in practice, unanswered (`HOST.run`, so the Pro
+  gate and its limit sheet apply); a lesson opens at step 1 (`PREP_LESSONS.open(..., fromStart)`) after the same
+  `PrepPro.can("lessons")` check as the lesson row. States: "Finding this question" with a two-step meter, "Connect to
+  open this question" (Try again), "This question is no longer available" (tombstone, flagged or hidden item, lesson
+  gone), "No question has this ID" (Enter another ID). Back from an opened question returns to where the student was
+  (the finding screen leaves the stack).
+- **Where.** Share button (bar, 44 px) on the practice runner before and after the answer, the review screen and every
+  lesson step; the ID itself under the question / at the foot of the lesson page (tap copies, says Copied). Not in a
+  timed test (the bar there is the clock) and not on your own deck's items. Search: a subject search for a valid ID
+  (or a pasted share message) shows "Open <ID>"; a hyphenated or digit-bearing token that fails the check says it looks
+  wrong; "Q fever" stays a word search. Menu > "Open a shared ID": field (16 px+, capitals, no spellcheck), Paste
+  (reads the clipboard only on that tap) which offers "Open <ID>", inline errors tied to the field.
+- **Sharing.** Sheet (`.pn-sheet-wrap`, so drag-to-close, scrim and the tab bar hiding all come from prep.js and
+  prep-nav.js): the ID at 34 px, "Copy ID" (the ID only), "Share" (Capacitor Share in the app, navigator.share on the
+  web, else copy). Text: `Try this PrepNucleus question: Q-8K3-M7T-X26 (search this ID in PrepNucleus)`. No link and no
+  user data, answers or progress.
+- **Deep links: what works now and what needs a store build.** Web code (OTA): `native-bridge.js` routes
+  `stewardmd://prep/<ID>` to `SMD_openRoute("prep", { id })` -> `PREP.open({ id })` (also when PrepNucleus is open). The
+  `stewardmd` scheme is registered on iOS only (Info.plist); Android registers only verified https App Links for
+  stewardmd.in. No link ships in the share text because nothing a friend taps would work everywhere: the web root does
+  not serve PrepNucleus, and the AASA (`functions/_middleware.js`) lists only `/` and `/i/*`. Plan for a real share
+  link: (1) a Pages route `/p/<ID>` that renders a small page (the ID, "Open in StewardMD", store badges) so the link
+  is never dead; (2) add `/p/*` to the AASA `paths` (server deploy; Apple's CDN picks it up, no store build since the
+  app already has `applinks:stewardmd.in`); (3) Android already opens every verified `https://stewardmd.in/*` path in
+  the app; (4) route `https://stewardmd.in/p/<ID>` in `routeDeepLink` like the scheme; (5) for Android custom-scheme
+  parity add a `stewardmd` intent-filter (store build). Only (5) needs a store build; test (2)-(4) on real phones first.
+- **Publishing (one command, after every bank, overlay, PYQ or lesson release):** `node tools/prep-ids.mjs publish
+  --yes` (fetch the LIVE files into `~/prep-data/ids/cache` (ids and flags only, no text), build with tombstones from
+  the published index, upload the changed shards + index.json via `prep-upload-bank.mjs --as v1/ids`, then verify).
+  `prep-upload-bank.mjs` now runs it after any other upload with `--yes` (`--no-ids` skips). `node tools/prep-ids.mjs
+  verify` exits 1 when a live MCQ or lesson is missing from, or misplaced in, the published index. Concurrent releases
+  (ss-radiology v16, lesson redraws) change no ID; re-run publish after they land.
+- **Not in scope.** Lesson quick-check items and flashcards/cards decks get no ID (cards are drawn from lessons and
+  modules; a deck share would need its own type letter). Your own Layer C decks stay private.
+- **Tests.** `test/prep-ids.test.mjs` (SHA-256 vs node:crypto, pinned vector, check-character detection, typing,
+  share text, locations, forced collisions with a 2-character ID, 200k synthetic keys, shards + route, tombstones,
+  wiring; plus every live MCQ and lesson when the fetch cache is on the machine or `PREP_IDS_CACHE` names one), headless
+  `test/run-prep-ids-ui.mjs` (Chromium + WebKit: Share and ID on runner, feedback, review and lesson; sheet, Copy,
+  Share text, Escape and focus; search by a lower-case, unhyphenated, O-for-0 ID; Go to ID typo / unknown / withdrawn /
+  flagged / lesson at step 1 / PYQ; Paste of a whole message; offline from IndexedDB and "Connect"; free-tier limit
+  sheet for a locked question and lesson; `PREP.open({ id })`; SHOTS=<dir>). Token-only change: run-prep-setup-ui.
+- **Not verified:** a real iPhone or Android phone (Capacitor Share sheet, clipboard read prompt, the scheme link).
