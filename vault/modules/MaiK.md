@@ -487,3 +487,25 @@ raster JPGs (IMG_2666/2670/2672/2673/2675/2676; they have a fake checkerboard ba
   Not applied to the main assistant (its bottom-nav "Ask Maik", composer, logo) or the footer logo.
 - `window.SMD_askMaikHandoff({ topic, prefill })` (home.js): opens MaiK with a topic chip and the text typed in; used by
   PrepNucleus Ask MaiK's hand-off after 10 messages.
+
+## Bottom-nav Ask Maik tab: the MaiK star mark as a glowing orb (2026-10-09/10)
+The centre `rnav-tab-maik` button in `home.js` shows `maik-ai-mark.png` (the M + four-point star from the
+owner's "MaiK AI" logo, white, no text and no "AI" badge, 192x186) instead of the `auto_awesome` glyph. The
+`.rds-icon.rnav-maik-mark` rules in `redesign-system.css` make it a lit 3D teal sphere with a breathing halo
+(`smdMaikOrbGlow`), a glint sweep (`smdMaikOrbGlint`) and a glowing mark, in both themes; reduced motion
+drops the animation. Test: `test/run-maik-tab-ui.mjs` (screenshots in /tmp/stewardmd-maiktab).
+The older v3 tab bars (`v3-tab`, `svg("ai")`) were left as they were.
+
+## Stop ends every orb; orphaned orbs are cleared (2026-10-10)
+Owner screenshot: two "Searching StewardMD knowledge" orbs spinning for minutes and Stop doing nothing.
+`_maikStop` is ONE slot (the latest turn; `maikSetSendMode(false)` nulls it), and a bubble restored from a
+saved thread after its turn died (reload, OTA, crash) has no turn behind it. Now `_maikLiveGens` maps each
+clinical turn's `data-mg` id to `{stop, done}`; `maikStopNow` stops all of them and then
+`maikSweepOrphans(true)` replaces any leftover `.maik-buffer` with "Stopped."; `maikRestoreThread` calls
+`maikSweepOrphans(false)`, which clears only orbs with no live turn ("This answer was interrupted").
+`thinking-orbs.js` stops its rAF loop once the canvas is detached. Test: `test/run-maik-stop-ui.mjs`.
+
+## Headless test gotcha: AI consent (2026-10-10)
+A fresh browser profile has no AI consent, so `privacy.js guardAI()` holds every `SMD_AI.explain*` call
+waiting on the consent tick (no request is ever made). Seed `smd_consent_guest` with `consentAcceptedAt` +
+`clinicalAuthorityConfirmedAt`, and set `window.AI_PROXY='/api/ai'` on localhost.
