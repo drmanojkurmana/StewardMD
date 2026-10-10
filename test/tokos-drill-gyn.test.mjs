@@ -13,11 +13,11 @@ const NEW = { mullerian: "gy1-anomalies", pcos: "gy3-diagnose", pid: "gy4-pid", 
 for (const [id, lesson] of Object.entries(NEW)) {
   const data = JSON.parse(read(`tokos/drill/${id}.json`));
 
-  test(`${id}: schema valid, mbbs, ai_drafted, https sources`, () => {
+  test(`${id}: schema valid, mbbs, ai_drafted, https or named-document sources`, () => {
     assert.deepEqual(core.validate(data), []);
     assert.equal(data.kind, "drill"); assert.equal(data.level, "mbbs"); assert.equal(data.review, "ai_drafted");
     assert.ok(data.sources.length >= 1);
-    for (const s of data.sources) assert.match(s.url, /^https:\/\//);
+    for (const s of data.sources) if (!s.document) assert.match(s.url, /^https:\/\//);
   });
 
   test(`${id}: every stage has one correct option, a feedback line and a valid next`, () => {
@@ -49,3 +49,13 @@ for (const [id, lesson] of Object.entries(NEW)) {
     assert.match(read(`tokos-models/drill-${id}.js`), new RegExp(`core\\.make\\(.*"id":"${id}"`));
   });
 }
+
+test("sources: a named document needs no url; any other source still needs https or kb/", () => {
+  const pid = JSON.parse(read("tokos/drill/pid.json"));
+  pid.sources = [{ label: "Named document, no url", document: true }];
+  assert.deepEqual(core.validate(pid), []);
+  pid.sources = [{ label: "Web source without https url" }];
+  assert.ok(core.validate(pid).includes("sources[0]"));
+  pid.sources = [{ label: "Non-document with http url", url: "http://example.org/x" }];
+  assert.ok(core.validate(pid).includes("sources[0]"));
+});
