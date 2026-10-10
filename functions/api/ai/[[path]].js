@@ -157,6 +157,7 @@ import * as icdRepo from "../../_icd_repo.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
 import { handlePrepTeach } from "./_prep-teach.js";   // PrepNucleus "Ask MaiK online": metered by the MT balance
 import { handlePrepGenerate } from "./_prep-generate.js";   // PrepNucleus Layer C (vault/plans/PrepNucleus-LayerC.md)
+import { handlePrepQgen } from "./_prep-qgen.js";   // PrepNucleus MaiK modules (Claude; flag PREP_QGEN_ON)
 import { quotaOn, quotaKv, consumeScribeSession, quotaRefusal, state as quotaState, consume as quotaConsume } from "../../_quota.js";
 import { getEntitlement, effectiveTierFor } from "../../_entitlements.js";
 import { sttFallbackOn, planClass, monthlyCredits, chargeCredits, signinBody } from "../../_stt_fallback.js";
@@ -212,6 +213,8 @@ const MODULE_FOR = {
   "prep-generate": "prep",
   // PrepNucleus Ask MaiK online. Self-gating like prep-generate (gateAndCount "prep_tutor" in the handler), metered by MaiK Tokens.
   "prep-teach": "prep_tutor",
+  // PrepNucleus "Create a module with MaiK" (Anthropic). Self-gating like prep-generate (_prep-qgen.js).
+  "prep-qgen": "prep_qgen",
 };
 function moduleLimitMsg(mod, limit) {
   const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions", surgx_note: "SURGX note dictations", surgx_case: "SURGX case questions", prep_tutor: "Ask MaiK online questions" }[mod] || "AI requests";
@@ -1642,7 +1645,8 @@ export async function onRequest(context) {
         : (env.GCP_WIF_PRIVATE_KEY ? "Workload Identity Federation" : "Service Account JWT")
     });
   }
-  if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
+  // prep-qgen calls Anthropic, not Gemini: it answers its own "not-configured" (functions/_prep-qgen.js qgenConfig).
+  if (!enabled && seg !== "prep-qgen") return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
 
   // Related figures under a MaiK answer (owner, 2026-09-18): a SEARCH step, not a model call.
   // TinyFish finds trusted pages for the topic, functions/_figures.js picks the figure each page is
@@ -1722,7 +1726,7 @@ export async function onRequest(context) {
     if (seg === "research" && !_isEvidReview) _mod = "maik";
     // Emergency "pause" kill switch — block every AI-consuming call before any LLM/web work.
     if ((_mod || _isEvidReview) && _emergency && _emergency.mode === "pause") {
-      if (seg === "prep-generate") return json({ error: "quota", reason: "circuit-breaker" }, 429);   // prep's error vocabulary
+      if (seg === "prep-generate" || seg === "prep-qgen") return json({ error: "quota", reason: "circuit-breaker" }, 429);   // prep's error vocabulary
       if (seg === "prep-teach") return json({ error: "quota", reason: "paused", message: "Ask MaiK online is paused for a short while. The stored explanation is above." }, 503);
       return json({ error: "quota", reason: "emergency", message: "AI is temporarily paused by the administrator. Clinical reasoning, calculators, and reference tools remain available." }, 503);
     }
@@ -1741,7 +1745,7 @@ export async function onRequest(context) {
      * committed only when an answer is actually generated (_countQuestion), so a cache hit or a failed
      * generation never uses up one of the doctor's questions. */
     const _skipCap = seg === "refine" || seg === "route" || seg === "verify" || (seg === "explain" && !!(body && body.tier === 2 && body.priorLead));
-    const _capped = _mod && !_isEvidReview && !_skipCap && seg !== "prep-generate" && seg !== "prep-teach";
+    const _capped = _mod && !_isEvidReview && !_skipCap && seg !== "prep-generate" && seg !== "prep-teach" && seg !== "prep-qgen";
     const _whoP = _capped ? identify(request, env) : null;
     // Owner check runs alongside the others so the exemption costs no extra wall time. checkQuota
     // (_usage.js) already exempts owners from ITS per-user throttles; this makes the second cap
@@ -1753,6 +1757,7 @@ export async function onRequest(context) {
         const _dc = await _dcP;
         _hm.dev = Date.now() - _reqT0;
         if (!_dc.ok && seg === "prep-generate") return json({ error: "quota", reason: "daily-calls" }, 429);
+        if (!_dc.ok && seg === "prep-qgen" && !(await _ownerP)) return json({ error: "quota", reason: "device-cap" }, 429);
         if (!_dc.ok && seg === "prep-teach" && !(await _ownerP)) return json({ error: "quota", reason: "device-cap", message: "This phone has asked MaiK online a lot today. Try again after midnight." }, 429);
         if (!_dc.ok && !(await _ownerP)) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
       } catch (e) { /* fail-open */ }
@@ -1801,6 +1806,7 @@ export async function onRequest(context) {
     // PrepNucleus Layer C: one Gemini call per request, its own gates, metering and error shape.
     if (seg === "prep-teach") return await handlePrepTeach({ request, env, body, callGemini, waitUntil: context.waitUntil.bind(context) });
     if (seg === "prep-generate") return await handlePrepGenerate({ request, env, body, callGemini, waitUntil: context.waitUntil.bind(context) });
+    if (seg === "prep-qgen") return await handlePrepQgen({ request, env, body, waitUntil: context.waitUntil.bind(context) });
     if (seg === "explain") {
       // Preferred: grounded RAG package (KB primary). The client assembles it from
       // the deterministic engine output + retrieved StewardMD knowledge; we forward

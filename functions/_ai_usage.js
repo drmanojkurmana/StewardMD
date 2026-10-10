@@ -33,6 +33,7 @@ export const AI_MODULES = {
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
   prep:        { id: "prep",        label: "PrepNucleus decks",  group: "PrepNucleus",   daily: 300, provider: "vertex" }, // Layer C PDF/notes -> deck. Unit = Gemini calls. Owner 2026-10-09: 5 decks a day, up to 50 questions each made 10 at a time (about 13 calls a round, 20 image calls); 300 = the per-device daily cap (MAIK_DEVICE_DAILY_CAP), so it binds no earlier than the device does. env AI_LIMIT_PREP / admin KV override.
+  prep_qgen:   { id: "prep_qgen",   label: "PrepNucleus MaiK modules", group: "PrepNucleus", daily: 60, provider: "anthropic" }, // "Create a module with MaiK" (Claude). Unit = requests (one round = generate + verify). The real student limits are in _prep-qgen.js (modules a day, questions a module, daily USD breaker); this is the per-user backstop. env AI_LIMIT_PREP_QGEN / admin KV override.
   prep_tutor:  { id: "prep_tutor",  label: "PrepNucleus Ask MaiK", group: "PrepNucleus", daily: 0, provider: "vertex" }, // Ask MaiK online. daily 0 = unlimited ON PURPOSE: the owner meters it by the student's MaiK Token balance (gateAndCount + AI_COST_CAP_ON), not a count cap.
 };
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
