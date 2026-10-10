@@ -272,13 +272,25 @@ test("answer-key release: bank v12 keeps every v11 module and adds the owner-key
   assert.ok(oc.sets.medcov4 && !oc.sets.radmax4 && !oc.sets.medcov3, "counts follow the medcov4 folder");
 });
 
-test("answer-key round 2: bank v14 keeps every v12 module and adds the owner-verified items; the route serves v14 and the radmax6 set", () => {
+test("answer-key round 2: bank v14 keeps every v13 module and adds the owner-verified items; the route serves v14 and the radmax6 set", () => {
   const v14 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v14/ss-radiology/index.json", import.meta.url), "utf8"));
-  const v12 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v12/ss-radiology/index.json", import.meta.url), "utf8"));
-  assert.deepEqual(v14.topics.map((t) => t.id), v12.topics.map((t) => t.id));
-  assert.ok(v14.counts.total > v12.counts.total, "v14 adds the round-2 items");
+  const v13 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v13/ss-radiology/index.json", import.meta.url), "utf8"));
+  assert.deepEqual(v14.topics.map((t) => t.id), v13.topics.map((t) => t.id));
+  for (const t of v13.topics) assert.ok(v14.topics.find((x) => x.id === t.id).count >= t.count, t.id);
+  assert.equal(v14.counts.total, v13.counts.total + 11, "v14 adds the 11 round-2 bank items to v13");
   for (const p of ["v14/ss-radiology/index.json", "v14/ss-radiology/search.json", "v14/ss-radiology/mcq/srd-nuclear.json", "v14/manifest.json",
     "overlay/radmax6/radiology/rad-chest.json"]) assert.equal(bankPath({ path: p.split("/") }), p, p);
   const oc = JSON.parse(fs.readFileSync(new URL("../prep/bank/overlay-counts.json", import.meta.url), "utf8"));
   assert.ok(oc.sets.radmax6 && !oc.sets.radmax5, "counts follow the radmax6 folder");
+});
+
+test("owner drop 2026-10-10: bank v13 is v12 minus one item in srd-hn-neck (rss-o-tgdc), nothing else moves; the route serves v13", () => {
+  const v13 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v13/ss-radiology/index.json", import.meta.url), "utf8"));
+  const v12 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v12/ss-radiology/index.json", import.meta.url), "utf8"));
+  assert.deepEqual(v13.topics.map((t) => t.id), v12.topics.map((t) => t.id));
+  for (const t of v12.topics) assert.equal(v13.topics.find((x) => x.id === t.id).count, t.count - (t.id === "srd-hn-neck" ? 1 : 0), t.id);
+  assert.equal(v13.counts.total, v12.counts.total - 1);
+  assert.equal(v13.counts.d3, v12.counts.d3 - 1, "the dropped item was a d3 item");
+  assert.ok(!JSON.stringify(v13).includes("rss-o-tgdc"));
+  for (const p of ["v13/ss-radiology/index.json", "v13/ss-radiology/search.json", "v13/ss-radiology/mcq/srd-hn-neck.json", "v13/manifest.json"]) assert.equal(bankPath({ path: p.split("/") }), p, p);
 });

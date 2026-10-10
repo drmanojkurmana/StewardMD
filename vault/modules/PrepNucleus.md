@@ -1099,7 +1099,7 @@ best way of learning."
 - `tools/prep-medcov.mjs` OUT_SET is medcov4, but its `assemble` does not rebuild the key-fix items: never re-upload medcov4
   from an assemble run; a later medcov release starts from the live medcov4 files.
 
-## Owner answer-key fixes, round 2 (2026-10-10, branch `fix/prep-keyfix-r2`, prep50)
+## Owner answer-key fixes, round 2 (2026-10-10, branch `fix/prep-keyfix-r2`, prep51)
 - The owner answered the 33 items held in round 1 ("33 verified answers", his own evidence-checked PDF). Mapped by item
   number and checked against each stem: no mismatches. 9 applied (key, option or stem per his verdict), 9 rebuilt from his
   repair notes (match items with overlapping rows turned into unique matches or single best answer), 1 dropped (104,
@@ -1139,3 +1139,28 @@ best way of learning."
 - Share image (`drawCard`, prep-arena.js): Midnight page, amber mark, level on a Prussian card, amber streak words and
   calendar steps, no painted art (hero-dark/streak webp no longer loaded).
 - Tests changed on purpose: prep-app (the amber and Prussian marks), run-prep-setup-ui (token prep49).
+
+## Owner decisions 2026-10-10 (branch `fix/prep-owner-1010`, prep50)
+- **Accent** stays Pastel Amber `#EFC07B` (no change).
+- **Full size inside PrepNucleus.** The app's auto fit zooms html to 0.95 on a 340-400 px phone (0.9 under 340), so a
+  44 px target drew at ~42 px. Owner: "1.0 in PrepNucleus only". `home.js` `zoomNowD()` sets the one html zoom from
+  `zoomOfD()`: outside PrepNucleus the app scale as before; while `html.pn-open` is set (prep.js `open()` / `close()`; a
+  MutationObserver on html's class re-applies) it is `prepZoomD(scale, autoFit)`: auto fit -> `max(1, scale)` (an iPad's
+  1.08 / 1.15 is kept), a size the user chose (Settings slider or preset, or the OS text size seed, i.e. autoFit off) ->
+  `scale / 0.95`, clamped to 2, so only the default shrink is removed (user 1.1 -> 1.1579 in PrepNucleus). Still one zoom
+  on html, so every `documentElement.style.zoom` reader (bug-report, atlas, the ghost and iPad geometry) stays right;
+  the Display sheet's counter-zoom uses the same value. `window.SMD_ZOOM = { prep, now, apply }`. No prep CSS changed.
+  Tests: `test/prep-scale.test.mjs` (pure rule), `test/run-prep-scale.mjs` (Playwright Chromium + WebKit at 390x844,
+  820x1180, 1180x820: zoom outside/inside/after close, every `.pn-ib/.pn-btn/.pn-chip/.pn-tab/.pn-opt/.pn-row` >= 44
+  screen px on home, subject, setup sheet and a question; user size 1.1). Before the change 390 failed at 41.8 px.
+- **Dropped item.** `rss-o-tgdc` (srd-hn-neck) is out of the live bank: ss-radiology **bank v13** = live v12 minus that
+  item (24 module files copied, index, search and manifest rebuilt with `bankIndex` / `buildSearch`; the builder was
+  checked to reproduce the live v12 index and search first). No lesson quiz, PYQ paper, card deck or overlay set named it
+  (all 1,768 live lessons, PYQ v2/v5 indexes and the overlays were checked). Images stay at their v11 paths.
+- **Hidden target labels.** The six "find the label" targets that the margin re-crop had made readable (ctcbook-100001
+  s3 Lunate and Capitate, -150101 s1 Jugular Spine, -450501 s4 the "Arrows on the Displaced Fat" caption line, -600650
+  s0 Transverse Mesocolon Defect, radbook-141315 s2 Horizontal fissure) are painted over with the figure's own
+  background (white label box kept empty on the CT); arrows and every other label stay. New media
+  `v1/lessons/media/<name>-h1.webp`; the five lessons moved to `r` 4 (`v4/lessons/<key>.json`, only that step's `src`
+  changed); radbook-110050 still shows the labelled lung drawing as a plain figure (not an interaction). Staging and
+  scripts: `$CLAUDE_JOB_DIR/tmp/owner1010/` (job c927630f).
