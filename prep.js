@@ -1383,8 +1383,9 @@
       return;
     }
     // Running: keep one animation going; restart it from the clock when the question changed, it was paused, or it drifted.
-    var exp = f.__a ? f.__l0 - (now - f.__t0) : 0;
-    if (f.__a && f.__q === i && Math.abs(exp - left) <= 150) return;
+    // Drift: the animation's own progress against the clock's (both in ms since the animation started).
+    var at = f.__a ? +f.__a.currentTime : NaN;
+    if (f.__a && f.__q === i && f.__a.playState !== "idle" && isFinite(at) && Math.abs(at - (now - f.__t0)) <= 150) return;
     if (f.__a) { try { f.__a.cancel(); } catch (e) {} }
     f.style.transform = "scaleX(" + frac.toFixed(4) + ")";
     f.__q = i; f.__t0 = now; f.__l0 = left;
@@ -1724,6 +1725,8 @@
     // Submitted from the question grid (or timed out there): drop the grid so the results sit on the runner's entry.
     while (st.stack.length && st.stack[st.stack.length - 1] !== renderRun) st.stack.pop();
     r.done = true; r.secs = Math.round((Date.now() - r.t0) / 1000);
+    // A clock per question: the time taken is the time the questions were on screen (pauses left out).
+    if (r.qc && r.qc.used) { qcPause(r.qc, pnow()); r.secs = Math.round(r.qc.used.reduce(function (a, b) { return a + b; }, 0) / 1000); }
     if (r.custom) return r.custom.submit(r);
     if (r.qc) qcPause(r.qc, pnow());
     if (r.mode === "exam") r.items.forEach(function (it, i) { if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
@@ -1737,7 +1740,7 @@
   function tstatHtml(r) {
     var x = r.qc && !r.saved ? qcStats(r.qc) : null;
     if (!x || !x.n) return "";
-    return '<p class="pn-tstat"><span><b>' + x.avg + " s</b> average a question</span><span><b>" + x.out + "</b> timed out</span><span><b>" + r.qsec + " s</b> allowed</span></p>";
+    return '<p class="pn-tstat"><span><b>' + x.avg + " s</b> average a question</span><span><b>" + x.out + "</b> timed out (" + r.qsec + "\u00a0s each)</span></p>";
   }
   // Round 7: the set at a glance under the score, one mark a question in order (up to 30): right, missed, not answered.
   function recapHtml(r) {

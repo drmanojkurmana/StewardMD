@@ -99,7 +99,7 @@ const sheetReady = (page) => until(page, () => !!document.querySelector("#pnSetu
 // Move the test clock in 2 s steps, letting the 250 ms tick run after each.
 async function adv(page, ms) { for (let d = 0; d < ms; d += 2000) { await page.evaluate((x) => { window.__off += x; }, Math.min(2000, ms - d)); await sleep(330); } }
 const run = (page) => page.evaluate(() => { const r = PREP._st.run; return r ? { i: r.i, n: r.items.length, mode: r.mode, qsec: r.qsec, on: r.qc ? r.qc.on : null, out: r.qc ? r.qc.out.slice() : [], ans: r.ans.slice(), done: r.done } : null; });
-const line = (page) => page.evaluate(() => { const l = document.querySelector("#pnTl"); if (!l) return null; const f = l.firstElementChild; return { lvl: l.getAttribute("data-lvl"), now: +l.getAttribute("aria-valuenow"), max: +l.getAttribute("aria-valuemax"), role: l.getAttribute("role"), bg: getComputedStyle(f).backgroundColor, live: (document.querySelector("#pnTlLive") || {}).textContent || "", w: l.getBoundingClientRect().width, vw: innerWidth }; });
+const line = (page) => page.evaluate(() => { const l = document.querySelector("#pnTl"); if (!l) return null; const f = l.firstElementChild; return { lvl: l.getAttribute("data-lvl"), now: +l.getAttribute("aria-valuenow"), max: +l.getAttribute("aria-valuemax"), role: l.getAttribute("role"), bg: getComputedStyle(f).backgroundColor, live: (document.querySelector("#pnTlLive") || {}).textContent || "", sx: (function () { const m = /matrix\(([-\d.e]+)/.exec(getComputedStyle(f).transform); return m ? +(+m[1]).toFixed(3) : (getComputedStyle(f).transform === "none" ? 1 : -1); })(), w: l.getBoundingClientRect().width, vw: innerWidth }; });
 const tokenColor = (page, name) => page.evaluate((n) => { const p = document.createElement("i"); p.style.color = "var(" + n + ")"; document.getElementById("smdPrep").appendChild(p); const c = getComputedStyle(p).color; p.remove(); return c; }, name);
 const small = (page, scope) => page.evaluate((s) => [].filter.call(document.querySelectorAll(s + " button"), (b) => b.offsetParent && b.getBoundingClientRect().height < 44 * 0.95 - 0.5).map((b) => (b.getAttribute("data-act") || b.className) + ":" + Math.round(b.getBoundingClientRect().height)).join(","), scope);
 
@@ -221,6 +221,7 @@ async function assertions(engine) {
     await adv(page, 1); await sleep(400);   // the colour change is a 240 ms transition
     l = await line(page);
     ok(l.lvl === "low" && l.bg === await tokenColor(page, "--pn-bad") && /seconds left/.test(l.live), E + "under 20%: red (the danger token), and said: " + JSON.stringify(l));
+    ok(Math.abs(l.sx - 12 / 60) < 0.04, E + "the drawn line matches the clock (about 20% long): " + l.sx);
     if (SHOTS) await page.screenshot({ path: join(SHOTS, engine + "-line-red-390-light.png") });
     // a sheet over the runner stops the clock (share), and so does a frozen page
     const before = (await line(page)).now;
@@ -309,7 +310,7 @@ async function screenshots(engine) {
   await shotsAll(engine, "line-red", async (p) => { await startSet(p, "study"); await adv(p, 52000); });
   await shotsAll(engine, "learning-feedback", async (p) => { await startSet(p, "study"); await tap(p, '#smdPrep .pn-opt[data-k="1"]'); await until(p, () => !!document.querySelector("#smdPrep .pn-fb")); await sleep(600); });
   await shotsAll(engine, "test-midrun", async (p) => { await startSet(p, "exam"); await tap(p, '#smdPrep .pn-opt[data-k="2"]'); await tap(p, "#smdPrep [data-act=next]"); await adv(p, 20000); });
-  await shotsAll(engine, "result", async (p) => { await startSet(p, "exam"); await tap(p, '#smdPrep .pn-opt[data-k="0"]'); await p.evaluate(() => { const r = PREP._st.run; r.ans = r.ans.map((a, i) => (i % 3 ? 1 : 0)); }); await p.evaluate(() => document.querySelector("#smdPrep [data-act=qgrid]").click()); await until(p, () => !!document.querySelector("#smdPrep [data-act=submit]")); await tap(p, "#smdPrep [data-act=submit]"); await until(p, () => !!document.querySelector("#smdPrep .pn-score")); });
+  await shotsAll(engine, "result", async (p) => { await startSet(p, "exam"); await adv(p, 8000); await tap(p, '#smdPrep .pn-opt[data-k="0"]'); await tap(p, "#smdPrep [data-act=next]"); await adv(p, 12000); await p.evaluate(() => { const r = PREP._st.run; r.ans = r.ans.map((a, i) => (i % 3 ? 1 : 0)); }); await p.evaluate(() => document.querySelector("#smdPrep [data-act=qgrid]").click()); await until(p, () => !!document.querySelector("#smdPrep [data-act=submit]")); await tap(p, "#smdPrep [data-act=submit]"); await until(p, () => !!document.querySelector("#smdPrep .pn-score")); });
 }
 
 for (const engine of ENGINES) {
