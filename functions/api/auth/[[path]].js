@@ -108,6 +108,26 @@ async function handle(context) {
     }
   }
 
+  /* POST /api/auth/save-profile -> the CALLER'S OWN users/<uid>/profile/self, written server-side.
+   * Owner, 2026-10-10, screenshot: "Complete your profile" answered "Couldn't reach your account" on a phone
+   * with full signal. Same cause as my-profile above: the Firebase web SDK is not usable inside the iOS
+   * WebView, so Save had no document to write to. Keyed ONLY by the uid in the verified token, and only the
+   * fields the form asks for. Never regNo, smdId or any phone-verification field: those are server-owned. */
+  if (action === "save-profile") {
+    var body = await request.json().catch(function () { return {}; });
+    var SAVE_FIELDS = ["role", "name", "phone", "state", "city", "hospital", "degree", "speciality"];
+    var patch = {};
+    SAVE_FIELDS.forEach(function (k) { if (typeof body[k] === "string") patch[k] = body[k].trim().slice(0, 200); });
+    if (!patch.name || !patch.hospital || String(patch.phone || "").replace(/\D/g, "").length < 7) return json({ ok: false, error: "incomplete" }, 400);
+    patch.profileComplete = true; patch.updatedAt = Date.now();
+    try {
+      await fsCommit(env, [wUpdate(env, "users/" + who.uid + "/profile/self", patch)]);
+      return json({ ok: true });
+    } catch (e) {
+      return json({ ok: false, error: "write-failed" }, 502);
+    }
+  }
+
   // Anchor-email routes verify a USER-SUPPLIED real email, so they must be reachable by an Apple
   // "Hide My Email" account whose token email is a proxy OR literally empty — i.e. BEFORE the
   // `no-email-on-account` gate below (which is what those users are trying to route around).
