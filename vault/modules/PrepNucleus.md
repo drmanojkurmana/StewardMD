@@ -1571,3 +1571,24 @@ feature (private custom modules) and an owner authoring tool, on one engine. Dec
   replies or logs, report, batch flow, stage, CLI dry run, bank route regex, client helpers) and headless
   `test/run-prep-qgen-ui.mjs` (off/on/owner visibility, create, progress, result, mode sheet, honest line, report, offline
   reopen, limit, Author run, review, stage; SHOTS=<dir>).
+
+## Lesson figure redraws (2026-10-10, branch `prep-redraw`)
+Owner: redraw the ~482 lesson drawings as modern flat-vector art (book figures stay for every real scan and every
+figure without an accepted redraw). The art carries no text; teaching labels are re-set by us in Inter at the book
+positions (spot/marks targets omitted from the `-ai1-h` quiz variant). No identifiers, brands, watermarks, figure
+numbers or R-L letters. Book credit kept; the book figures are never called "original" in shipped text.
+- **Swap** `tools/prep-redraw.mjs` (`applyRedraw`, `webpSize`, `checkMap`): `publish --stage DIR --map map.json`
+  re-downloads the LIVE lesson index and every affected live lesson, swaps `vis.src` to `<base>-ai1.webp`
+  (`-ai1-h.webp` for spot/marks steps, compare pairs untouched), recomputes `ar`, writes `v{r+1}`, refuses if `r`
+  moved, uploads media then lessons then the index, refreshes share IDs. `verify` checks every live image answers
+  200 with the mapped dims. Map + source dims in `prep/redraw/`. Test `test/prep-redraw.test.mjs`.
+- **Finish** `tools/finish-g1.sh` (helpers `finish-g1-*.py`): when `full/G1-DONE` exists, streams the 964-image Vertex
+  batch from GCS, undoes the `meta-g1.json` padding, QAs each candidate (tesseract: unlabeled art must be word-free,
+  labeled art only our words; aspect within 3%; Claude vision judge on the Messages Batch API, Batch 50% off, every
+  batch appended to `spend-ledger.tsv`, $6 ceiling with a dry-run estimate first), picks the best passing candidate
+  per figure else keeps the book figure, renders `-ai1`/`-ai1-h` (webp q80 m6, width <= 900), writes `verdicts-g1.tsv`,
+  contact sheets `review/sheet-g1-*.jpg` (~40 sampled accepted, book | redraw | quiz, spot/marks boxes overlaid) and
+  the hardest 15%, publishes in waves of ~100 with per-file SHA verification, then `prep-ids publish --yes` + `verify`
+  and `prep-deid-audit` (generated-art pattern covers `-aiN(-h)?`). Spot/marks alignment is overlaid programmatically;
+  mismatches keep the book figure. `--dry` replays steps 2-5 on the 10 pilot figures without publishing. Resumable via
+  per-step markers; intermediates deleted (2.6 GB disk). Run book: `full/FINISH-README.md`. No app files change: no OTA.
