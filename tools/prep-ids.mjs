@@ -237,7 +237,7 @@ async function main(argv = process.argv.slice(2)) {
     console.log(`build: ${b.c.q.length} MCQs, ${b.c.l.length} lessons, ${b.c.dup} repeated item ids (kept once), ${b.a.ids.size} IDs, ${b.a.long} long, ${b.tomb.length} withdrawn kept, previous index ${prev ? prev.ptr.gen + " (" + Object.keys(prev.e).length + " entries)" : "none"}`);
     if (b.a.errors.length) { for (const e of b.a.errors.slice(0, 20)) console.error("  " + e); throw new Error(b.a.errors.length + " errors"); }
     fs.rmSync(out, { recursive: true, force: true }); fs.mkdirSync(out, { recursive: true });
-    const had = new Set(prev ? prev.ID.shardNames(ptr) : []);
+    const had = new Set(prev ? ID.shardNames(prev.ptr) : []);
     let changed = 0;
     for (const f of b.files) if (!had.has(f.name)) { fs.writeFileSync(path.join(out, f.name), f.body); changed++; }
     fs.writeFileSync(path.join(out, "index.json"), JSON.stringify(b.pointer));

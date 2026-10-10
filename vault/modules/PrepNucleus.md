@@ -1391,3 +1391,44 @@ Owner: "Give every MCQ and lesson a unique ID, shareable, so friends can search 
   flagged / lesson at step 1 / PYQ; Paste of a whole message; offline from IndexedDB and "Connect"; free-tier limit
   sheet for a locked question and lesson; `PREP.open({ id })`; SHOTS=<dir>). Token-only change: run-prep-setup-ui.
 - **Not verified:** a real iPhone or Android phone (Capacitor Share sheet, clipboard read prompt, the scheme link).
+
+## Real-scan de-identification (2026-10-10, branch `feat/prep-deid`, prep59)
+- Owner rule 2026-10-10: no real clinical image (X-ray, CT, MRI, US, nuclear, angio, photo, histology, endoscopy, ECG)
+  may keep a name, ID, age/sex text, date, hospital, scanner or software brand, viewer overlay, publisher credit or
+  watermark, book figure number or panel letter, or a right/left lead marker or orientation letter. Drawings are the
+  redraw agent's (`-ai1` media). Teaching arrows, numbered pointers and structure labels stay; on question images text
+  naming the answer goes too.
+- **Tool:** `tools/prep-deid.py` (stages `ocr` Apple Vision fast + tesseract, `detect` Gemini strict-JSON boxes,
+  `plan` policy, `clean` crop or OpenCV inpaint, `verify`, `selftest`), private work dir `~/prep-data/rad/deid`
+  (originals, plan, manual overrides `manual.json`, verify, contact sheets). Policy notes (learned on this run):
+  gemini-3.1-flash-lite classifies well but its boxes are loose; boxes for images that need cleaning come from
+  gemini-3.5-flash (`detect-boxes.jsonl` wins). Single letters deep inside a picture, boxes over 3% of the image, and
+  orientation letters on non-radiology images are held for a human, never painted (they were often a vessel or a
+  nucleus). ECG lead names and device readings are kept. Lead markers, logos, dates and panel letters are painted as a
+  whole box (strokes alone left ghosts). The pair-compare "verify" on flash-lite reports labels that are no longer
+  there; the final check (`verify_final.py` in the job scripts) re-detects on the cleaned file, re-runs the policy,
+  OCRs for identifier patterns, and asks only "is the clinical content unchanged".
+- **Audit:** `tools/prep-deid-audit.mjs` (`npm run audit:prep-deid`) lists every image the live app reaches (lessons
+  index + files, each subject's bank version, the overlay sets in prep.js, the PYQ items file, cards) and exits 1 when
+  one is missing from `tools/prep-deid/manifest.json` (clean / cleaned / drawing; `-ai<n>` lesson media pass as
+  generated drawings). New real images must go through the tool and the manifest before they ship.
+- **Run 2026-10-10:** 1,912 images + 3 TCIA scroll stacks enumerated; 1,323 real scans, 589 drawings/charts skipped;
+  347 scans had something to remove (panel letters 170, side markers 120, viewer overlays 97, orientation letters 48,
+  brands 8+, IDs 7, dates 5, credits/watermarks 6+); cleaned 344 (inpaint 266, crop 54, both 24), 5 excluded
+  (two PYQ smears with a watermark across the cells: items pyq-neet-pg-2022-r1-99 and -2023-r1-182 left the papers;
+  three lesson figures with dense overlay tables or Doppler scales: figure dropped from the step). 63 hand decisions in
+  `manual.json`. Every real scan of lesson media and the radnotes/radmax sets moved to a neutral name
+  (`v1/lessons/media/m-<sha12>.webp`, `img/radnotes/rn-<sha12>`, `img/radmax/rm-<sha12>`; 661 renamed only, bytes
+  unchanged), because book pages, PMC ids and diagnoses in names are identifiers too.
+- **Shipped:** ss-radiology **bank v16** = live v15 with image paths swapped (items and counts unchanged); overlays
+  **radnotes3** / **radmax7** (images swapped; three radnotes stems that named removed panel letters say left/right);
+  PYQ `v5/pyq/items-c280dc3e.json` (41 items with cleaned images, 2 removed); 445 lessons at a new revision
+  (`r` = live r + 1; captions and alt text that named removed panel letters now say "left", "top right" etc.; spot boxes
+  and label marks remapped for cropped figures). Lessons index re-downloaded and merged at upload. Old files stay in R2
+  (immutable caches, old revisions) but nothing live references them.
+- **Laterality:** 205 image uses lost a side or orientation marker (45 question items, 160 lesson steps). The 12
+  question items and 94 lesson steps that mention a side already state it in text; none needed a rewrite and no side
+  was invented. List: `~/prep-data/rad/deid/laterality-report.json`.
+- **Residual risk (owner):** clinical photographs in PYQs show faces (no identifier text; a face itself was out of
+  scope); 171 detections were held for a human rather than painted (mostly misreads); some scale bars, calipers and
+  Doppler/depth scales remain as teaching content.
