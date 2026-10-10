@@ -10,9 +10,11 @@
  * set to the result and opens row 0.
  *
  * USAGE: CHROME=<path> node test/run-prep-reason-ui.mjs
- *   SHOTS=<dir>   screenshots reason-<browser>-<size>-<theme>-<item>.png
+ *   SHOTS=<dir>   screenshots reason-<browser>-<size>-<theme>-<item>.png (+ -below for the lower half)
  *   BROWSERS=chrome,webkit (default both; either needs playwright-core, else SKIP)
  *   SIZES=phone,ipad (390x844, 820x1180; default both); THEMES=light,dark (default both)
+ * The service worker is neutered: route-served origins are not localhost, so the app would take the web
+ * PWA path and the worker would swallow runtime fetches; localhost harnesses never register it either.
  */
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
@@ -34,7 +36,7 @@ const SHOTS = process.env.SHOTS || "";
 
 let fails = 0;
 const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
-const INIT = `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(RFIX)}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;`;
+const INIT = `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(RFIX)}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try { if (navigator.serviceWorker && navigator.serviceWorker.register) navigator.serviceWorker.register = function () { return Promise.reject(new Error("disabled in UI tests")); }; } catch (e) {}`;
 const CLEAN = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
 const STAMP = (it) => ({ ...it, _s: it.t.indexOf("scd-") === 0 ? "ss-cardiology" : "anatomy", _m: it.t });
 const FINISH_ANIMS = `document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`;
@@ -76,7 +78,8 @@ async function checkItem(d, tag, it, full) {
       return JSON.stringify({ rx: f.querySelectorAll(".pn-ro,.pn-rx,.pn-rlr,.pn-rn,.pn-rqr,.pn-rlo,.pn-rref").length,
         why: f.querySelectorAll(".pn-why li").length, pearl: (f.querySelector(".pn-kp b")||{}).textContent||"",
         html: f.outerHTML });`));
-    ok(s.rx === 0 && s.why === it.o.length - 1 && s.pearl === "Remember", tag + ": old item: legacy list + Remember box, no reasoning node");
+    const exOld = it.id === "fx-reason-old1" ? { why: 0, pearl: "" } : { why: it.o.length - 1, pearl: "Remember" };
+    ok(s.rx === 0 && s.why === exOld.why && s.pearl === exOld.pearl, tag + ": old item: legacy rendering, no reasoning node");
     // byte-identical feedback whether the item takes the reasoning path or not (a bookmark repaint keeps the
     // reveal still, so both paints match; stubbing has() to false takes the same branch as a missing module)
     await d.click(`#smdPrep [data-act="bookmark"]`);
@@ -86,6 +89,7 @@ async function checkItem(d, tag, it, full) {
     const h2 = await d.ev(`return document.querySelector("#smdPrep .pn-fb").outerHTML;`);
     await d.ev(`PREP_REASON.has = window.__rxHas; return 1;`);
     ok(h1 === h2, tag + ": feedback byte-identical off the reasoning path");
+    if (full) { const n = `reason-${d.name}-${d.size}-${d.theme}-${it.id}`; await d.shot(n, 0); await d.shot(n, 1); await d.shot(n, 2); }
     d.stash = d.stash || {};
     d.stash[it.id] = h1;
     await d.ev(`PREP.back(); return 1;`);
@@ -115,7 +119,7 @@ async function checkItem(d, tag, it, full) {
   ok(s2.rel.length === ex.relN, tag + ": " + s2.rel.length + " related questions");
   const ov = await d.ev(`var b=document.querySelector("#smdPrep .pn-body"); return b.scrollWidth<=b.clientWidth+1 && document.documentElement.scrollWidth<=innerWidth+1;`);
   ok(ov === true, tag + ": nothing scrolls sideways");
-  if (full) await d.shot(`reason-${d.name}-${d.size}-${d.theme}-${it.id}`, false);
+  if (full) { const n = `reason-${d.name}-${d.size}-${d.theme}-${it.id}`; await d.shot(n, 0); await d.shot(n, 1); await d.shot(n, 2); }
   return s2;
 }
 
@@ -154,7 +158,7 @@ async function runCombo(d) {
 
   for (const it of ITEMS) {
     const t2 = `${tag} ${it.id}`;
-    const r = await checkItem(d, t2, it, full && it.id === "fx-reason-1");
+    const r = await checkItem(d, t2, it, it.id === "fx-reason-1" || it.id === "fx-reason-old2");
     if (!r || r.old) continue;
     // a closed row opens on tap
     await d.ev(`var s=document.querySelector("#smdPrep details.pn-ro:not([open]) summary"); if(s) s.click(); return 1;`);
@@ -177,8 +181,8 @@ async function runCombo(d) {
   // related question opens alone, unanswered
   await d.click(`#smdPrep [data-act="r-rel"]`);
   ok(await d.waitFor(`return !!document.querySelector("#smdPrep .pn-opt") && !document.querySelector("#smdPrep .pn-fb");`, 8000), tag + ": a related question opens alone, unanswered");
-  const relQ = await d.ev(`return document.querySelector("#smdPrep .pn-q").textContent.slice(0,40);`);
-  ok(/carotid/i.test(relQ), tag + ": it is the linked question (" + relQ + ")");
+  const relQ = await d.ev(`return document.querySelector("#smdPrep .pn-q").textContent.slice(0,140);`);
+  ok(/carotid/i.test(relQ), tag + ": it is the linked question (" + relQ.slice(0, 60) + ")");
   await d.ev(`PREP.back(); return 1;`);
 
   if (full) {
@@ -258,6 +262,7 @@ async function runCombo(d) {
     ok(hn === (d.stash && d.stash[old2.id]), tag + ": old feedback identical with the module file missing");
   } else ok(false, tag + ": old feedback renders with the module file missing");
   ok(d.errors().length === 0, tag + ": no uncaught PrepNucleus error" + (d.errors().length ? ": " + d.errors().join(" | ").slice(0, 300) : ""));
+  if (d.diag && d.diag().length) console.log("  DIAG " + tag + ":\n  " + d.diag().slice(0, 12).join("\n  "));
 }
 
 /* ---------- playwright-core drivers (Chrome + WebKit, served from disk, no server) ---------- */
@@ -291,19 +296,28 @@ async function pwDriver(name, browser, size, theme) {
   const page = await ctx.newPage();
   await page.route("https://prep.test/**", serveFile);
   const errors = [];
+  const diag = []; // failed/400+ requests, printed per combo to explain missing-data failures
   page.on("pageerror", (e) => { if (/prep|PREP/i.test(String((e && e.stack) || e))) errors.push(String((e && e.message) || e)); });
+  page.on("requestfailed", (r) => diag.push("REQFAIL " + r.url().slice(0, 140) + " :: " + (r.failure() || {}).errorText));
+  page.on("response", (r) => { if (r.status() >= 400) diag.push("HTTP" + r.status() + " " + r.url().slice(0, 140)); });
   const wrap = (e) => `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`;
   const d = {
-    name, size, theme, errors: () => errors,
+    name, size, theme, errors: () => errors, diag: () => diag,
     ev: (e) => page.evaluate(wrap(e)),
     waitFor: async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { try { if (await page.evaluate(wrap(e)) === true) return true; } catch {} await sleep(150); } return false; },
     click: async (sel) => page.click("#smdPrep " + sel.replace(/^#smdPrep /, "")).then(() => true, () => false),
-    shot: async (name) => {
+    shot: async (name, pos) => {
       if (!SHOTS) return;
       await sleep(120);
       try { await page.evaluate(FINISH_ANIMS); } catch {}
-      try { await page.evaluate(`var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop += f.getBoundingClientRect().top - b.getBoundingClientRect().top - 12;`); } catch {}
-      await page.screenshot({ path: join(SHOTS, name + ".png") });
+      try {
+        await page.evaluate(pos === 2
+          ? `var b=document.querySelector("#smdPrep .pn-body"); if(b) b.scrollTop = b.scrollHeight;`
+          : pos === 1
+          ? `var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop += f.getBoundingClientRect().top - b.getBoundingClientRect().top + f.getBoundingClientRect().height / 2 - b.clientHeight / 2;`
+          : `var f=document.querySelector("#smdPrep .pn-fb"), b=document.querySelector("#smdPrep .pn-body"); if(f&&b) b.scrollTop += f.getBoundingClientRect().top - b.getBoundingClientRect().top - 12;`);
+      } catch {}
+      await page.screenshot({ path: join(SHOTS, name + (pos === 2 ? "-below" : pos === 1 ? "-mid" : "") + ".png") });
     },
     setup: async () => {
       await page.goto("https://prep.test/?prep=1", { waitUntil: "domcontentloaded" });
