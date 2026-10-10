@@ -176,7 +176,7 @@ try {
   await click("#pnAsk [data-act=ak-go]");
   ok(await until(`var a=document.querySelector("#pnAsk .pt-ans-b"); return !!a && /stored explanation says/.test(a.textContent);`, 6000), "online: MaiK's checked answer shows");
   const note = await ev(`return (document.querySelector("#pnAsk .pt-note")||{}).textContent;`);
-  ok(/Answered online by MaiK/.test(note) && /Used about 68 MaiK Tokens; 1,932 left in your account\./.test(note), "online: the note says how it was checked and the MaiK Tokens used and left: " + note);
+  ok(note === "68 MaiK Tokens · 1,932 left in your account", "online: one short line, the MaiK Tokens used and left: " + note);
   const rq = teachReqs[teachReqs.length - 1] || {}, rb = JSON.parse(rq.body || "{}");
   ok(rq.auth === "Bearer tok-1" && rb.kind === "mcq" && /Question: Fixture question/.test(rb.ground) && /Correct answer: [A-D]\./.test(rb.ground) && Number.isInteger(rb.key) && Number.isInteger(rb.chosen) && rb.key !== rb.chosen, "online: signed request with the grounding, key and pick: " + JSON.stringify({ auth: rq.auth, kind: rb.kind, key: rb.key, chosen: rb.chosen }));
   ok(await ev(`var a=PREP._host.store().ask; return a.m==="online" && a.q===1;`) === true, "Don't ask again is stored");
@@ -235,7 +235,7 @@ try {
   await shot("ask-choose-capable-p390");
   const before = teachReqs.length;
   await click("#pnAsk [data-act=ak-go]");
-  ok(await until(`var a=document.querySelector("#pnAsk .pt-ans-b"); return !!a && /stored explanation says/.test(a.textContent) && /Written on this phone by MaiK Lite/.test(document.querySelector("#pnAsk .pt-note").textContent);`, 6000), "on this phone: the phone's checked answer, named as written on this phone");
+  ok(await until(`var a=document.querySelector("#pnAsk .pt-ans-b"); return !!a && /stored explanation says/.test(a.textContent) && !document.querySelector("#pnAsk .pt-note") && document.getElementById("paStat").textContent === "Unlimited";`, 6000), "on this phone: the phone's checked answer, no tokens line, Unlimited");
   ok(teachReqs.length === before, "on this phone: nothing is sent to the server");
   await click("#pnAsk .pa-top [data-act=ak-close]");
 
@@ -247,7 +247,7 @@ try {
   await click("#smdPrep [data-act=ask]");
   ok(await until(`return !!document.querySelector("#pnAsk [data-act=ak-consent]");`, 4000) && teachReqs.length === b4, "engine on Local: Online asks before sending anything");
   await click("#pnAsk [data-act=ak-consent]");
-  ok(await until(`return !!document.querySelector("#pnAsk .pt-ans-b") && /Used about 60 MaiK Tokens\\./.test(document.querySelector("#pnAsk .pt-note").textContent);`, 5000) && teachReqs.length === b4 + 1, "after Send online: one request, the answer, tokens used (no balance when the cap is off)");
+  ok(await until(`return !!document.querySelector("#pnAsk .pt-ans-b") && document.querySelector("#pnAsk .pt-note").textContent === "60 MaiK Tokens";`, 5000) && teachReqs.length === b4 + 1, "after Send online: one request, the answer, tokens used (no balance when the cap is off)");
   ok(await ev(`return SMD_MAIK_ENGINE.cloudAllowed() === false;`) === true, "the app-wide MaiK engine setting is unchanged");
   await click("#pnAsk .pa-top [data-act=ak-close]");
   await ev(`delete window.SMD_MAIK_ENGINE; return 1;`);
