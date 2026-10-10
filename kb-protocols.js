@@ -341,7 +341,7 @@
         toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'VTbl' + i + '">' + esc(vt.title || vt.id) + '</button>');
         var cols = (vt.columns || []).slice();
         if (cols.length && String(cols[0]).toLowerCase() === 'parameter') cols = cols.slice(1);
-        var ths = '<th scope="col">Parameter</th>' + cols.map(function (c) { return '<th scope="col">' + esc(c) + '</th>'; }).join('') + '<th scope="col">Source</th>';
+        var ths = '<th scope="col">Parameter</th>' + cols.map(function (c) { return '<th scope="col">' + esc(c) + '</th>'; }).join('') ;
         var trs = (vt.rows || []).map(function (r) {
           var unit = r.unit ? '<span class="kbp-unit">' + esc(r.unit) + '</span>' : '';
           var cells = (r.cells || []).map(function (c) {
@@ -349,7 +349,7 @@
             return '<td' + pending + '>' + window.KBHy.html(c.text || '') + '</td>';
           }).join('');
           return '<tr><th scope="row">' + esc(r.parameter || '') + unit + '</th>' + cells +
-            '<td class="kbp-cite">' + esc(v2cites[r.cite] || r.cite || '') + '</td></tr>';
+            '</tr>';
         }).join('');
         return '<section class="kbp-sec kbp-sec-tbl" id="' + pre + 'VTbl' + i + '"><h2><span class="kbp-kind">Value table</span>' + esc(vt.title || vt.id) + '</h2>' +
           '<div class="kbp-table-wrap"><table class="kbp-tbl"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table></div>' +

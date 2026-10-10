@@ -56,14 +56,14 @@
     var cols = (vt.columns || []).slice();
     if (cols.length && String(cols[0]).toLowerCase() === "parameter") cols = cols.slice(1);
     // three or fewer columns fit a phone; wider tables get a floor and scroll inside their own box
-    var n = cols.length + 2, floor = n >= 4 ? ' style="min-width:' + (n * 120) + 'px"' : "";
-    var head = "<th scope=\"col\">" + esc(vt.rowHeader || "Item") + "</th>" + cols.map(function (c) { return "<th scope=\"col\">" + esc(c) + "</th>"; }).join("") + "<th scope=\"col\">Source</th>";
+    var n = cols.length + 1, floor = n >= 4 ? ' style="min-width:' + (n * 120) + 'px"' : "";
+    var head = "<th scope=\"col\">" + esc(vt.rowHeader || "Item") + "</th>" + cols.map(function (c) { return "<th scope=\"col\">" + esc(c) + "</th>"; }).join("");
     var rows = (vt.rows || []).map(function (r) {
       return '<tr><th scope="row">' + esc(r.parameter || "") + (r.unit ? '<span class="kbv2-unit">' + esc(r.unit) + "</span>" : "") + "</th>" +
         (r.cells || []).map(function (c) {
           var pend = String(c.text || "").indexOf("needs-source") >= 0 ? ' class="kbv2-pending"' : "";
           return "<td" + pend + ">" + hy(c.text) + "</td>";
-        }).join("") + '<td class="kbv2-cite">' + esc(cites[r.cite] || r.cite || "") + "</td></tr>";
+        }).join("") + "</tr>";
     }).join("");
     var label = (titled ? esc(KIND[vt.kind] || "Table") + ": " : "") + esc(vt.title || "");
     return '<section class="kbv2-sec"><h4 class="kbv2-h">' + label + "</h4>" +
