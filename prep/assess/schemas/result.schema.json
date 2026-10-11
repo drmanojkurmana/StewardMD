@@ -14,7 +14,8 @@
     "items": {"type": "array", "items": {"type": "object", "required": ["item_id", "chosen"], "properties": {
       "item_id": {"type": "string"}, "content_hash": {"type": "string"}, "chosen": {"type": ["integer", "null"]}, "correct": {"type": ["boolean", "null"]},
       "ms": {"type": "integer"}, "marked": {"type": "boolean"}, "changed": {"type": "integer"}, "section": {"type": ["string", "null"]},
-      "conf": {"type": "string", "enum": ["guessing", "confident", "confused"], "description": "My-coaching capture chip; present only when the student tapped one"}}}},
+      "conf": {"type": "string", "enum": ["guessing", "confident", "confused"], "description": "KnowYourIQ capture chip; present only when the student tapped one"},
+      "pair": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2, "description": "KnowYourIQ confused pair: the two mixed-up option indexes; present only with a Confused chip"}}}},
     "score": {"type": "object", "required": ["raw", "correct", "incorrect", "unanswered"], "properties": {
       "raw": {"type": "number"}, "max": {"type": "number"}, "correct": {"type": "integer"}, "incorrect": {"type": "integer"}, "unanswered": {"type": "integer"},
       "accuracy": {"type": "number"}, "avg_ms": {"type": "number"}, "scheme": {"type": "object", "description": "copy of profile.scoring used"}}},

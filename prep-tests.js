@@ -130,7 +130,7 @@
       if (u.missing === u.items.length) { H.toast("The questions of this test did not load. Check the connection and try again."); return H.rerender(); }
       if (u.missing) H.toast(u.missing + (u.missing === 1 ? " question was" : " questions were") + " withdrawn since; " + (u.missing === 1 ? "it is" : "they are") + " left out of the marks.");
       var p = A.profile(pk.t2.exam);
-      H.run(u.items, pk.mode, pk.title, { t2: pk.t2, sections: pk.t2.sections, limit: pk.limit || 0, scheme: p ? A.scheme(p) : null, resume: { i: pk.i, ans: pk.ans, mark: pk.mark, ms: pk.ms, changed: pk.changed, conf: pk.conf, t0: pk.t0, sc: pk.sc, phase: pk.phase } });
+      H.run(u.items, pk.mode, pk.title, { t2: pk.t2, sections: pk.t2.sections, limit: pk.limit || 0, scheme: p ? A.scheme(p) : null, resume: { i: pk.i, ans: pk.ans, mark: pk.mark, ms: pk.ms, changed: pk.changed, conf: pk.conf, pair: pk.pair, t0: pk.t0, sc: pk.sc, phase: pk.phase } });
     });
   }
 
@@ -750,12 +750,13 @@
   function statsChoice() { try { return G.localStorage.getItem(STATS); } catch (e) { return "0"; } }
   function sendStats(rec) {
     if (statsChoice() !== "1" || !rec || !G.fetch) return;
-    var rows = rec.items.map(function (x) { return [x.item_id, x.chosen == null ? null : x.correct ? 1 : 0, Math.min(3600, Math.round((x.ms || 0) / 1000)), x.chosen == null ? -1 : x.chosen]; });
+    // KnowYourIQ: the confidence tag id only (guessing/confident/confused), never any text.
+    var rows = rec.items.map(function (x) { return [x.item_id, x.chosen == null ? null : x.correct ? 1 : 0, Math.min(3600, Math.round((x.ms || 0) / 1000)), x.chosen == null ? -1 : x.chosen, A.cleanConf(x.conf)]; });
     try { G.fetch((G.SMD_PREP_STATS_API || "/api/prep/stats"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ v: 1, exam: rec.exam, type: rec.test_type, items: rows }), keepalive: rows.length <= 60, credentials: "omit" }).then(null, function () {}); } catch (e) {}
   }
   function statsAsk() {
     if (statsChoice() != null) return "";
-    return '<section class="pn-panel pn-t2ask" aria-labelledby="pnT2AskH"><h2 class="pn-sec" id="pnT2AskH">Help improve the questions?</h2><p class="pn-mut pn-small">Share anonymous answer statistics from your tests: the question number, right or wrong, the time taken and the option chosen. Nothing that identifies you is sent. They are used only to flag questions for review, never to change or remove them by themselves. You can change this in the Tests tab.</p>' +
+    return '<section class="pn-panel pn-t2ask" aria-labelledby="pnT2AskH"><h2 class="pn-sec" id="pnT2AskH">Help improve the questions?</h2><p class="pn-mut pn-small">Share anonymous answer statistics from your tests: the question number, right or wrong, the time taken, the option chosen and your confidence tag (guessing, confident or confused). Nothing that identifies you is sent. They are used only to flag questions for review, never to change or remove them by themselves. You can change this in the Tests tab.</p>' +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="t2-stats" data-v="0">No thanks</button><button type="button" class="pn-btn pri" data-act="t2-stats" data-v="1">Share</button></div></section>';
   }
 
@@ -769,7 +770,7 @@
     var secs = t.sections ? t.sections.map(function (s) { var from = 0, to = 0; keep.forEach(function (i, j) { if (i < s.from) from = j + 1; if (i < s.to) to = j + 1; }); return { id: s.id, label: s.label, from: from, to: to, sec: s.sec }; }) : null;
     var timedOut = r.sc ? r.sc.why.some(function (w) { return w === "timeout" || w === "away" || w === "clock"; }) : r.limit && (Date.now() - r.t0) / 1000 >= r.limit - 1;
     var rec = A.result({ attempt_id: t.attempt_id, idempotency_key: t.idem || undefined, test_type: t.type, blueprint: t.blueprint, started: t.started, finished: Date.now(), state: timedOut ? "auto_submitted_timeout" : "submitted",
-      items: items, ans: ans, mark: keep.map(function (i) { return !!r.mark[i]; }), ms: keep.map(function (i) { return (r.ms || [])[i] || 0; }), changed: keep.map(function (i) { return (r.changed || [])[i] || 0; }), conf: keep.map(function (i) { return (r.conf || [])[i] || null; }), sections: secs, asm: { planned: t.asm.planned, actual: t.asm.actual, deviations: t.asm.deviations } }, p, { subjectName: subjectName, topicName: topicName });
+      items: items, ans: ans, mark: keep.map(function (i) { return !!r.mark[i]; }), ms: keep.map(function (i) { return (r.ms || [])[i] || 0; }), changed: keep.map(function (i) { return (r.changed || [])[i] || 0; }), conf: keep.map(function (i) { return (r.conf || [])[i] || null; }), pair: keep.map(function (i) { return (r.confPair || [])[i] || null; }), sections: secs, asm: { planned: t.asm.planned, actual: t.asm.actual, deviations: t.asm.deviations } }, p, { subjectName: subjectName, topicName: topicName });
     if (r.sc) rec.by_section.forEach(function (b) { var k = -1; t.sections.forEach(function (s, j) { if (s.id === b.key) k = j; }); if (k >= 0) { b.used_ms = Math.round(r.sc.used[k]); b.allowed_ms = r.sc.lim[k]; b.ended = r.sc.why[k] || "submitted"; } });
     r.t2.rec = rec;
     var s = store(), now = Date.now();
@@ -781,14 +782,15 @@
     clearSess();
   }
   function pct(x) { return x == null ? "-" : Math.round(x * 100) + "%"; }
-  /* My-coaching capture: compact chip counts for a t2h row, from the attempt record's items. */
+  /* KnowYourIQ capture: compact chip counts for a t2h row, from the attempt record's items. */
   function confCounts(items) {
     var c = { guessing: 0, confident: 0, confused: 0 };
     (items || []).forEach(function (x) { var v = A.cleanConf(x && x.conf); if (v) c[v]++; });
     return c;
   }
   /* Review-time tag on a flagged question (Solutions tab): toggles the chip, writes it back to the stored attempt
-     record (IndexedDB t2r) and to the study history (the t2h row's counts and the module tally), then repaints. */
+     record (IndexedDB t2r) and to the study history (the t2h row's counts, the module tally and the coach
+     aggregate via reconf), then repaints. A complement for chips skipped during the run. */
   function tagConf(b) {
     var r = H.run_ ? H.run_() : null;
     if (!r || !r.t2 || !r.t2.rec) return;
@@ -803,6 +805,8 @@
     try {
       var s = store(), it = r.items[i], mid = it && (it._m || it.t), mm = mid && s.mod[mid];
       if (mm) { mm.cf = mm.cf || { guessing: 0, confident: 0, confused: 0 }; if (old && mm.cf[old] > 0) mm.cf[old]--; if (nv) mm.cf[nv] = (mm.cf[nv] || 0) + 1; }
+      var CO = G.PREP_COACH, corr = rec.items[i] ? rec.items[i].correct : null;
+      if (CO && corr != null && it && it._s && mid) { if (!s.coach_t) s.coach_t = {}; CO.reconf(s.coach_t, CO.topicKey(it._s, mid), corr, old, nv); }
       s.t2h.forEach(function (x) { if (x.attempt_id === rec.attempt_id) x.cf = confCounts(rec.items); });
       H.save();
     } catch (e) {}
