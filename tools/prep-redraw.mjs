@@ -24,6 +24,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 export const MEDIA = "v1/lessons/media/";
 const NAME = /^[a-z0-9][a-z0-9._-]*\.webp$/;
@@ -115,7 +116,7 @@ async function publish() {
   console.log("published", Object.keys(bump).length, "lessons");
   // shareable lesson IDs derive from lesson keys; only their index needs refreshing after new revisions
   for (const a of [["publish", "--yes"], ["verify"]]) {
-    const r = spawnSync("node", [new URL("./prep-ids.mjs", import.meta.url).pathname, ...a], { stdio: "inherit" });
+    const r = spawnSync("node", [fileURLToPath(new URL("./prep-ids.mjs", import.meta.url)), ...a], { stdio: "inherit" });
     if (r.status !== 0) throw new Error("prep-ids " + a[0] + " failed");
   }
 }
@@ -148,7 +149,7 @@ async function verify() {
   if (bad.length) { console.log(bad.slice(0, 40).join("\n")); process.exitCode = 1; }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (fileURLToPath(import.meta.url) === fs.realpathSync(process.argv[1])) {
   const c = process.argv[2];
   (c === "publish" ? publish() : c === "verify" ? verify() : Promise.reject(new Error("publish | verify"))).catch((e) => { console.error(e.message); process.exit(1); });
 }
