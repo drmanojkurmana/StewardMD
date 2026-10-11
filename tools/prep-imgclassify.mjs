@@ -61,7 +61,7 @@ export function logLedger(job, model, usage, costUsd, note) {
 
 const EYE_SUBJECTS = opt("subjects", "pathology,anatomy,surgery").split(",").map((s) => s.trim()).filter(Boolean);
 const IS_EYE = EYE_SUBJECTS.includes("ophthalmology");
-const IS_FILL = EYE_SUBJECTS.some((s) => ["dermatology", "microbiology", "orthopaedics", "medicine", "paediatrics", "obstetrics-gynaecology"].includes(s));
+const IS_FILL = EYE_SUBJECTS.some((s) => ["dermatology", "microbiology", "orthopaedics", "medicine", "paediatrics", "obstetrics-gynaecology", "ent", "forensic-medicine", "ss-general-medicine", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology", "ss-infectious-diseases", "ss-critical-care"].includes(s));
 
 export const CLASSIFY_SYSTEM_PROMPT = `You are a medical school professor and board exam question reviewer for NEET-PG, INI-CET, and USMLE.
 Analyze the provided medical image and its source caption/metadata.
@@ -116,20 +116,20 @@ Output valid JSON only matching this schema:
 }`;
 
 export const FILL_CLASSIFY_SYSTEM_PROMPT = `You are a medical school professor and board exam question reviewer for NEET-PG, INI-CET, and USMLE.
-Analyze the provided image (clinical photograph, dermoscopy, stain or smear, culture plate, stool or blood microscopy, parasite egg or larva, bone or joint X-ray, chest X-ray, head CT, brain MRI, fetal or pelvic ultrasound, CTG tracing) and its source caption/metadata.
+Analyze the provided image (clinical photograph, dermoscopy, stain or smear, culture plate, stool or blood microscopy, parasite egg or larva, bone or joint X-ray, chest X-ray, head CT, brain MRI, fetal or pelvic ultrasound, CTG tracing, otoscopy, nasal or laryngeal endoscopy, injury or wound close-up, autopsy finding, postmortem change, toxic plant or seed) and its source caption/metadata.
 Evaluate clinical validity, board teachability, de-identification compliance, and image clarity.
 
 Strict Rules:
-1. Patient De-Identification: If ANY human face, recognizable eyes/nose/mouth, patient name, medical record number, birth date, hospital name, or identifiable personal feature is visible, flag is_clinical_photo_with_identifiable_person: true and keep: false. A tight close-up of a lip, nail, tongue, or scalp patch with no other facial features is NOT identifiable. Genital or perineal photographs are never acceptable: keep: false. For X-rays, CT, MRI, and ultrasound: burned-in patient names, dates, or hospital text means keep: false; bare R/L, position, or scale markers are acceptable.
+1. Patient De-Identification: If ANY human face, recognizable eyes/nose/mouth, patient name, medical record number, birth date, hospital name, or identifiable personal feature is visible, flag is_clinical_photo_with_identifiable_person: true and keep: false. A tight close-up of a lip, nail, tongue, scalp patch, tympanic membrane, vocal cords, nasal cavity, or wound with no other facial features is NOT identifiable. Genital or perineal photographs are never acceptable: keep: false. For injury, autopsy, and postmortem photos: tight close-ups of the wound or finding with no face are acceptable; full-body views or visible faces mean keep: false. For X-rays, CT, MRI, and ultrasound: burned-in patient names, dates, or hospital text means keep: false; bare R/L, position, or scale markers are acceptable.
 2. Authority Rule: The caption/source text MUST establish an authoritative diagnosis, organism, stage, grade, or named injury or finding. If the caption is vague, ambiguous, or lacks a definitive diagnosis, keep: false.
 3. Burned-In Text: If the image has text printed directly on it that explicitly states the diagnosis/answer, flag burned_in_text_reveals_diagnosis: true and keep: false. Minor stain labels (e.g. "Gram", "Z-N"), magnification, scale bars, or figure letters are acceptable if they do not spell out the final diagnosis.
 4. Quality & Teachability: Rate teachability 1 to 5. 5 = classic board hallmark, 4 = very good, 3 = acceptable, 1-2 = poor/obscure. Only keep images with teachability >= 3 and quality in ["high", "medium"].
 
 Output valid JSON only matching this schema:
 {
-  "subject": "dermatology" | "microbiology" | "orthopaedics" | "medicine" | "paediatrics" | "obstetrics-gynaecology" | "other",
-  "topic": string (e.g. "psoriasis-plaque", "gram-stain-staph", "colles-fracture", "lobar-pneumonia-cxr", "rickets-wrist", "molar-pregnancy-usg"),
-  "image_type": "clinical_photo" | "dermoscopy" | "stain_smear" | "culture" | "microscopy" | "xray" | "ct" | "mri" | "ultrasound" | "tracing" | "other",
+  "subject": "dermatology" | "microbiology" | "orthopaedics" | "medicine" | "paediatrics" | "obstetrics-gynaecology" | "ent" | "forensic-medicine" | "ss-general-medicine" | "ss-neurology" | "ss-nephrology" | "ss-gastroenterology" | "ss-hepatology" | "ss-endocrinology" | "ss-haematology" | "ss-medical-oncology" | "ss-rheumatology-immunology" | "ss-pulmonology" | "ss-infectious-diseases" | "ss-critical-care" | "other",
+  "topic": string (e.g. "psoriasis-plaque", "gram-stain-staph", "colles-fracture", "lobar-pneumonia-cxr", "rickets-wrist", "molar-pregnancy-usg", "csom-perforation", "stab-wound", "mca-infarct-ct"),
+  "image_type": "clinical_photo" | "dermoscopy" | "stain_smear" | "culture" | "microscopy" | "xray" | "ct" | "mri" | "ultrasound" | "tracing" | "otoscopy" | "endoscopy" | "injury" | "autopsy" | "postmortem" | "plant" | "other",
   "is_clinical_photo_with_identifiable_person": boolean,
   "burned_in_text": string[],
   "burned_in_text_reveals_diagnosis": boolean,
