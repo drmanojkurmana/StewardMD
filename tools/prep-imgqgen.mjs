@@ -224,7 +224,7 @@ export function mapModuleId(subject, topic, caption) {
     if (/colon|rectal|colectomy/i.test(text)) return "sur-colorectal-cancer";
     if (/stomach|gastric|gastrectomy/i.test(text)) return "sur-stomach";
     if (/pancreas|whipple/i.test(text)) return "sur-pancreas";
-    if (/instrument|forceps|retractor|clamp|scalpel/i.test(text)) return "sur-principles";
+    if (/instrument|forceps|retractor|clamp|scalpel/i.test(text)) return "sur-periop";
     return "sur-periop";
   }
   return `${subject}-general`;
