@@ -7,11 +7,11 @@
   "required": ["schema", "id", "version", "status", "name", "tab", "verified_on", "sources", "format", "navigation", "scoring", "blueprint", "provenance"],
   "properties": {
     "schema": {"const": "prep/assessment-profile/v2"},
-    "id": {"enum": ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1"]},
+    "id": {"enum": ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written", "mrcs-part-a"]},
     "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
     "status": {"enum": ["official", "provisional"]},
     "name": {"type": "string"}, "session": {"type": "string"},
-    "tab": {"enum": ["neet-pg", "neet-ss", "usmle", "fmge", "plab", "amc", "mccqe"], "description": "the app's exam tab"},
+    "tab": {"enum": ["neet-pg", "neet-ss", "usmle", "fmge", "plab", "amc", "mccqe", "mrcp", "mrcs"], "description": "the app's exam tab"},
     "verified_on": {"type": "string", "format": "date"},
     "sources": {"type": "object", "additionalProperties": {"type": "object", "required": ["url", "title"], "properties": {"url": {"type": "string"}, "title": {"type": "string"}, "doc_date": {"type": ["string", "null"]}, "sha256": {"type": "string"}}}},
     "format": {"type": "object", "required": ["questions", "duration_min", "options", "item_types", "sections"], "properties": {
