@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prep/result-summary/v1",
+  "title": "Compact test result summary",
+  "description": "Built by PREP_ASSESS.summary() from an attempt record for the richer Tests 2 results. Counts, short arrays and pattern runs only; never the full items array and never rank, percentile, readiness probability or predicted outcome fields. JSON stays under 4096 bytes.",
+  "type": "object",
+  "required": ["v", "id", "exam", "type", "n", "small", "raw", "max", "c", "i", "u"],
+  "additionalProperties": false,
+  "properties": {
+    "v": {"type": "integer", "const": 1},
+    "id": {"type": "string", "description": "attempt_id"},
+    "exam": {"type": "string"}, "pv": {"type": "string", "description": "profile_version"}, "type": {"type": "string", "description": "test_type"},
+    "ts": {"type": "integer", "description": "finished_at (else started_at) as epoch ms, 0 when unparsable"},
+    "n": {"type": "integer", "description": "question count"},
+    "small": {"type": "boolean", "description": "true under 5 questions: trend and bars stay hidden"},
+    "raw": {"type": "number"}, "max": {"type": "number"},
+    "c": {"type": "integer", "description": "correct"}, "i": {"type": "integer", "description": "incorrect"}, "u": {"type": "integer", "description": "unanswered"},
+    "acc": {"type": ["number", "null"], "description": "accuracy over answered; practice mastery only"},
+    "avg_ms": {"type": "integer", "description": "mean ms per timed question, -1 when none"},
+    "secs": {"type": "integer", "description": "wall seconds taken, -1 when unknown"},
+    "pace": {"type": "integer", "description": "exam seconds a question, -1 when unknown"},
+    "best": {"type": "integer", "description": "longest run right in a row"},
+    "slip": {"type": "integer", "description": "longest run wrong in a row"},
+    "rec": {"type": "array", "description": "[recovered, chances]: wrong answers whose next answered question is right", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+    "subj": {"type": "array", "description": "weakest-first [subject key, correct, n], at most 12", "items": {"type": "array"}, "maxItems": 12},
+    "weak": {"type": "array", "description": "weakest topics [target_id, why], at most 3", "items": {"type": "array"}, "maxItems": 3},
+    "trend": {"type": "array", "description": "own earlier attempts [ts, raw, max], oldest first, at most 5", "items": {"type": "array"}, "maxItems": 5}
+  }
+}
