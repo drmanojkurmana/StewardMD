@@ -84,3 +84,52 @@ test("orthopaedics routes across its modules", () => {
   assert.equal(mapModuleId("orthopaedics", "t", "clubfoot CTEV Ponseti"), "ort-ctev");
   assert.equal(mapModuleId("orthopaedics", "ischial-apophysis-avulsion", "Apophysenloesung Sitzbein"), "ort-pelvis-acetabulum");
 });
+
+test("medicine routes chest, neuro and hand images", () => {
+  assert.equal(mapModuleId("medicine", "lobar-pneumonia-cxr", "right upper lobe consolidation air bronchogram"), "med-pneumonia");
+  assert.equal(mapModuleId("medicine", "cavitary-tb-cxr", "cavitary tuberculosis"), "med-tb");
+  assert.equal(mapModuleId("medicine", "pneumothorax-cxr", "pneumothorax pleural line"), "med-pleural");
+  assert.equal(mapModuleId("medicine", "cardiomegaly-cxr", "cardiomegaly Kerley B"), "med-heart-failure");
+  assert.equal(mapModuleId("medicine", "ards-cxr", "ARDS bilateral white-out"), "med-resp-failure");
+  assert.equal(mapModuleId("medicine", "mca-infarct-ct", "stroke infarct MCA territory"), "med-stroke");
+  assert.equal(mapModuleId("medicine", "subdural-ct", "subdural hematoma crescent"), "med-ich");
+  assert.equal(mapModuleId("medicine", "rheumatoid-hand", "rheumatoid ulnar deviation"), "med-ra");
+  assert.equal(mapModuleId("medicine", "gouty-tophus", "gout tophi hand"), "med-crystal");
+  assert.equal(mapModuleId("medicine", "osler-nodes", "Osler nodes Janeway lesions"), "med-endocarditis");
+  assert.equal(mapModuleId("medicine", "t", "thus the patient improved"), "med-clinical-cardiology");
+  assert.equal(mapModuleId("medicine", "lung-abscess-ct", "Pulmonaler Abszess CT"), "med-pneumonia");
+  assert.equal(mapModuleId("medicine", "part-solid-lung-nodule-ct", "part solid lung nodule"), "med-lung-cancer");
+  assert.equal(mapModuleId("medicine", "subarachnoid-haemorrhage-ct", "subarachnoid haemorrhage"), "med-ich");
+  assert.equal(mapModuleId("medicine", "digital-clubbing-ipf", "clubbing IPF"), "med-ild");
+  assert.equal(mapModuleId("medicine", "t", "rheumatoid nodule elbow"), "med-ra");
+});
+
+test("paediatrics routes neonatal, growth and cardiac images", () => {
+  assert.equal(mapModuleId("paediatrics", "rickets-wrist", "cupping fraying wrist"), "ped-micronutrients");
+  assert.equal(mapModuleId("paediatrics", "measles-rash", "measles Koplik spots"), "ped-exanthems");
+  assert.equal(mapModuleId("paediatrics", "rds-cxr", "respiratory distress ground glass neonate"), "ped-neonatal-respiratory");
+  assert.equal(mapModuleId("paediatrics", "double-bubble", "duodenal atresia double bubble"), "ped-gi-disorders");
+  assert.equal(mapModuleId("paediatrics", "intussusception-usg", "target sign intussusception"), "ped-gi-disorders");
+  assert.equal(mapModuleId("paediatrics", "tof-cxr", "tetralogy boot-shaped"), "ped-congenital-heart");
+  assert.equal(mapModuleId("paediatrics", "simian-crease", "Down syndrome simian crease"), "ped-chromosomal");
+  assert.equal(mapModuleId("paediatrics", "kwashiorkor", "flaky paint dermatosis"), "ped-malnutrition");
+  assert.equal(mapModuleId("paediatrics", "ddh-xray", "developmental dysplasia Barlow"), "ped-newborn-care");
+  assert.equal(mapModuleId("paediatrics", "double-bubble-duodenal-atresia-xray", "Double-Bubble"), "ped-gi-disorders");
+  assert.equal(mapModuleId("paediatrics", "umbilical-granulation", "Umbilical Granulation"), "ped-newborn-care");
+  assert.equal(mapModuleId("paediatrics", "hand-foot-and-mouth-disease-sole", "HFMD sole"), "ped-exanthems");
+  assert.equal(mapModuleId("paediatrics", "neonatal-scalp-hematomas-layers", "Scalp hematomas"), "ped-newborn-care");
+});
+
+test("obstetrics-gynaecology routes usg and tracing images", () => {
+  assert.equal(mapModuleId("obstetrics-gynaecology", "molar-usg", "snowstorm molar pregnancy"), "obg-gtd");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "ectopic-usg", "adnexal mass ectopic pregnancy"), "obg-ectopic");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "fibroid-usg", "fibroid uterus"), "obg-fibroid");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "pcos-usg", "polycystic ovaries string of pearls"), "obg-pcos-hirsutism");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "ctg-late", "CTG late decelerations"), "obg-fetal-growth-surveillance");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "previa-usg", "placenta previa"), "obg-aph");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "twins-usg", "lambda sign twins"), "obg-multiple-pregnancy");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "t", "delivery via LSCS"), "obg-operative-obstetrics");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "t", "referred via clinic"), "obg-gyn-procedures");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "bilateral-ovarian-serous-carcinoma-gross", "ovarian serous carcinoma"), "obg-ovarian-cancer");
+  assert.equal(mapModuleId("obstetrics-gynaecology", "ovarian-serous-cystadenoma", "serous cystadenoma"), "obg-benign-ovarian");
+});
