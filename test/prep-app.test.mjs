@@ -444,6 +444,23 @@ test("Eye atlas and its Ophthalmós link", () => {
   }
 });
 
+test("PSM chart atlas", () => {
+  const IL = read("prep-imglearn.js");
+  assert.match(IL, /il-psm/, "atlas opens from the community-medicine subject");
+  assert.match(IL, /prep\/imglearn\/psm\.json/, "chart atlas reads its curated manifest");
+  assert.match(IL, /il-pcat/, "chart atlas filters by topic");
+  const M = JSON.parse(read("prep/imglearn/psm.json"));
+  assert.equal(M.set, "maikimg5", "chart atlas manifest names its overlay set");
+  assert.equal(M.items.length, 12, "chart atlas carries one card per chart");
+  const D = JSON.parse(read("prep/imglearn/psm-data.json"));
+  assert.equal(Object.keys(D).length, 12, "chart number authority covers all charts");
+  for (const c of M.items) {
+    assert.ok(c.img && c.dx && c.finding && c.reason, "card has image, finding, diagnosis, reasoning");
+    assert.equal(c.credit, "StewardMD", "drawn chart credits StewardMD");
+    assert.match(c.modality || "", /drawing/, "chart is labelled as a drawing");
+  }
+});
+
 test("image credit chip, sheet, and menu screen wiring", () => {
   const J = read("prep.js");
   const Y = read("prep-pyq.js");

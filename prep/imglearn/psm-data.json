@@ -1,0 +1,346 @@
+{
+ "epi-curve": {
+  "numbers": {
+   "weeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "cases": [
+    1,
+    3,
+    8,
+    15,
+    28,
+    22,
+    35,
+    30,
+    18,
+    10,
+    4,
+    2
+   ],
+   "total": 176,
+   "peak_week": 7,
+   "peak_cases": 35
+  },
+  "authority": "Propagated (person-to-person) outbreak: successive peaks rise (28 then 35), peak week 7 with 35 cases, total 176 cases over 12 weeks.",
+  "module": "cm-outbreak-surveillance"
+ },
+ "normal-dist": {
+  "numbers": {
+   "mean": 2800,
+   "sd": 450,
+   "lbw_cutoff": 2500,
+   "lbw_fraction": 0.252
+  },
+  "authority": "Normal curve: mean = median = mode = 2800 g; low birth weight (<2500 g) is 25.2% of births (z = -0.67).",
+  "module": "cm-central-tendency"
+ },
+ "skewed-dist": {
+  "numbers": {
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "cases": [
+    2,
+    8,
+    35,
+    55,
+    42,
+    30,
+    22,
+    14,
+    8,
+    4
+   ],
+   "total": 220,
+   "mean": 5.05,
+   "median": 5,
+   "mode": 4
+  },
+  "authority": "Right (positive) skew with a long right tail: mean (5.05 days) > median (5 days) > mode (4 days); median is the preferred average.",
+  "module": "cm-central-tendency"
+ },
+ "forest-plot": {
+  "numbers": {
+   "trials": [
+    {
+     "name": "Sharma 2021",
+     "or": 0.72,
+     "lo": 0.55,
+     "hi": 0.94
+    },
+    {
+     "name": "Verma 2022",
+     "or": 0.81,
+     "lo": 0.62,
+     "hi": 1.06
+    },
+    {
+     "name": "Iyer 2023",
+     "or": 0.65,
+     "lo": 0.48,
+     "hi": 0.88
+    },
+    {
+     "name": "Khan 2023",
+     "or": 0.93,
+     "lo": 0.7,
+     "hi": 1.24
+    },
+    {
+     "name": "Das 2024",
+     "or": 0.78,
+     "lo": 0.6,
+     "hi": 1.01
+    }
+   ],
+   "pooled": 0.78,
+   "pooled_lo": 0.68,
+   "pooled_hi": 0.89
+  },
+  "authority": "Pooled odds ratio 0.78 (95% CI 0.68-0.89) favours zinc; Verma 2022 and Khan 2023 cross the null (OR 1.0) so are individually non-significant.",
+  "module": "cm-experimental"
+ },
+ "funnel-plot": {
+  "numbers": {
+   "n_studies": 12,
+   "pooled_logor": -0.28
+  },
+  "authority": "Asymmetric funnel with a gap at the bottom right (small imprecise studies with null or negative effects are missing): publication bias suspected.",
+  "module": "cm-bias-causation"
+ },
+ "km-survival": {
+  "numbers": {
+   "months": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24
+   ],
+   "treatment": [
+    100,
+    96,
+    92,
+    88,
+    84,
+    80,
+    76
+   ],
+   "control": [
+    100,
+    90,
+    82,
+    74,
+    66,
+    58,
+    50
+   ]
+  },
+  "authority": "Curves separate after 4 months and stay apart: 24-month survival 76% (new regimen) vs 50% (standard); ticks mark censored patients.",
+  "module": "cm-experimental"
+ },
+ "roc-curve": {
+  "numbers": {
+   "fpr": [
+    0.0,
+    0.05,
+    0.12,
+    0.22,
+    0.35,
+    0.5,
+    0.68,
+    0.85,
+    1.0
+   ],
+   "tpr": [
+    0.0,
+    0.42,
+    0.63,
+    0.76,
+    0.85,
+    0.91,
+    0.95,
+    0.98,
+    1.0
+   ],
+   "auc": 0.83
+  },
+  "authority": "AUC 0.83 (good test; 1.0 is perfect, 0.5 is useless); the curve bows to the top-left and the marked operating point gives sensitivity 63% at 88% specificity.",
+  "module": "cm-screening"
+ },
+ "screen-2x2": {
+  "numbers": {
+   "tp": 90,
+   "fn": 10,
+   "fp": 80,
+   "tn": 820,
+   "sensitivity": 0.9,
+   "specificity": 0.911,
+   "ppv": 0.529,
+   "npv": 0.988
+  },
+  "authority": "Sensitivity 90/(90+10) = 90.0%%; specificity 820/(820+80) = 91.1%%; PPV 90/(90+80) = 52.9%%; NPV 820/(820+10) = 98.8%%.",
+  "module": "cm-screening"
+ },
+ "kuppuswamy": {
+  "numbers": {
+   "bands": [
+    [
+     "Profession / Honours",
+     "Legislators, managers",
+     ">= Rs 1,23,321",
+     "7 / 10 / 12"
+    ],
+    [
+     "Graduate",
+     "Professionals",
+     "Rs 61,661 - 1,23,320",
+     "6 / 9 / 10"
+    ],
+    [
+     "Higher secondary",
+     "Technicians",
+     "Rs 46,095 - 61,660",
+     "5 / 8 / 6"
+    ],
+    [
+     "High school",
+     "Clerks",
+     "Rs 30,830 - 46,094",
+     "4 / 7 / 4"
+    ],
+    [
+     "Middle school",
+     "Skilled workers",
+     "Rs 18,498 - 30,829",
+     "3 / 6 / 3"
+    ],
+    [
+     "Primary school",
+     "Machine operators",
+     "Rs 6,175 - 18,497",
+     "2 / 5 / 2"
+    ],
+    [
+     "Illiterate",
+     "Elementary / unemployed",
+     "< Rs 6,175",
+     "1 / 1 / 1"
+    ]
+   ],
+   "classes": "Total 26-29 = Upper (I); 16-25 = Upper middle (II); 11-15 = Lower middle (III); 5-10 = Upper lower (IV); <5 = Lower (V)."
+  },
+  "authority": "Kuppuswamy score = education (1-7) + occupation (1-10) + income (1-12); total 26-29 Upper (I), 16-25 Upper middle (II), 11-15 Lower middle (III), 5-10 Upper lower (IV), below 5 Lower (V).",
+  "module": "cm-behavioural"
+ },
+ "bmi-scale": {
+  "numbers": {
+   "cutoffs": [
+    18.5,
+    25,
+    30
+   ],
+   "plotted": 27.3,
+   "plotted_class": "Overweight (pre-obese)"
+  },
+  "authority": "WHO classes: <18.5 underweight, 18.5-24.9 normal, 25-29.9 overweight (pre-obese), >=30 obese; the plotted adult at BMI 27.3 is overweight.",
+  "module": "cm-diabetes-obesity"
+ },
+ "demo-pyramid": {
+  "numbers": {
+   "bands": [
+    "0-4",
+    "5-9",
+    "10-14",
+    "15-19",
+    "20-24",
+    "25-29",
+    "30-34",
+    "35-39",
+    "40-44",
+    "45-49",
+    "50-54",
+    "55-59",
+    "60-64",
+    "65-69",
+    "70-74",
+    "75+"
+   ],
+   "male": [
+    52,
+    50,
+    48,
+    45,
+    42,
+    39,
+    35,
+    31,
+    27,
+    23,
+    19,
+    15,
+    11,
+    8,
+    5,
+    4
+   ],
+   "female": [
+    50,
+    48,
+    46,
+    43,
+    40,
+    37,
+    33,
+    29,
+    25,
+    21,
+    17,
+    13,
+    10,
+    7,
+    5,
+    4
+   ],
+   "total_thousands": 882,
+   "dependency_ratio": 58.9
+  },
+  "authority": "Expansive pyramid with a broad base (high birth rate): 0-14 years are 294,000 of 882,000; young + old dependency ratio 58.9 per 100 working-age.",
+  "module": "cm-demography"
+ },
+ "cold-chain": {
+  "numbers": {
+   "levels": [
+    "State store",
+    "District store",
+    "PHC",
+    "Subcentre / session"
+   ]
+  },
+  "authority": "Cold chain keeps vaccines at +2C to +8C from state store (walk-in cooler) to session site (vaccine carrier); freeze-sensitive DPT/HepB must never freeze.",
+  "module": "cm-vaccines-cold-chain"
+ }
+}
