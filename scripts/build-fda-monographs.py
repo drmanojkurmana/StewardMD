@@ -34,12 +34,12 @@ CODES = {
     "34069-5": "How supplied", "44425-7": "Storage and handling", "34076-0": "Patient counseling information",
 }
 
-def http_get(url, binary=False, tries=3):
+def http_get(url, binary=False, tries=2):
     last = None
     for i in range(tries):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "StewardMD-label-build/1.0"})
-            with urllib.request.urlopen(req, timeout=60) as r:
+            with urllib.request.urlopen(req, timeout=15) as r:
                 data = r.read()
             return data if binary else data.decode("utf-8", "replace")
         except Exception as e:  # network blips: back off and retry
@@ -285,11 +285,17 @@ def main():
     os.makedirs(CACHE, exist_ok=True)
     os.makedirs(outdir, exist_ok=True)
     report = {"built": [], "exists": [], "no_label": [], "failed": []}
+    import concurrent.futures as cf
+    todo = []
     for name in names[:limit]:
         safe = re.sub(r"[^A-Za-z0-9 ._-]", "", name).strip()
+        if os.path.exists(os.path.join(outdir, slug(safe) + ".json")):
+            report["exists"].append(name)
+        else:
+            todo.append(name)
+    def work(name):
+        safe = re.sub(r"[^A-Za-z0-9 ._-]", "", name).strip()
         out = os.path.join(outdir, slug(safe) + ".json")
-        if os.path.exists(out):
-            report["exists"].append(name); continue
         try:
             rec, via = None, ""
             try:
@@ -299,14 +305,16 @@ def main():
             if rec is None:
                 rec = openfda_record(safe); via = "openFDA"
             if rec is None:
-                report["no_label"].append(name); continue
+                return ("no_label", name)
             rec["generic"] = safe
             with open(out, "w", encoding="utf-8") as f:
                 json.dump(rec, f, ensure_ascii=False, indent=2); f.write("\n")
-            report["built"].append(f"{name} [{via}]")
+            return ("built", f"{name} [{via}]")
         except Exception as e:
-            report["failed"].append([name, str(e)[:160]])
-        time.sleep(0.2)
+            return ("failed", [name, str(e)[:160]])
+    with cf.ThreadPoolExecutor(max_workers=8) as ex:
+        for kind, val in ex.map(work, todo):
+            report[kind].append(val)
     print(json.dumps({k: len(v) for k, v in report.items()}))
     json.dump(report, open(os.path.join(CACHE, "report.json"), "w"), indent=1)
 
