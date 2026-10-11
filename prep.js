@@ -47,6 +47,9 @@
     return n;
   }
   function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
+  /* An item whose recommendation changed with the guideline (tools/prep-item-edits.mjs --outdated, seeded from
+     student outdated reports). The question stays in the pool; its explanation carries a visible note. */
+  function isOutdated(it) { return !!(it && it.outdated); }
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
   function poolFor(items, exam, hidden) {
     var ok = (items || []).filter(function (it) { return usable(it, hidden); });
@@ -450,7 +453,7 @@
     s.cel = { day: day, keys: keys.slice(-200) };
     return s.cel;
   }
-  var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
+  var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
@@ -1618,6 +1621,7 @@
   // A previous-year question still names its paper (exam, year, memory-based recall), which is the paper type, not the origin.
   function provLine(it) { return it._py && G.PREP_PYQ ? G.PREP_PYQ.prov(it) : ""; }
   function provHtml(it) { var l = provLine(it); return l ? '<p class="pn-prov">' + l + "</p>" : ""; }
+  function outdatedHtml(it) { return isOutdated(it) ? '<p class="pn-guide">Guideline changed, check current version.</p>' : ""; }
   /* Round 3 focus mode. The progress strip: one segment per question up to 30 (right, wrong or answered, the current one
      lit), a plain fill beyond that. The streak counts right answers in a row in this set, ending at the current question. */
   function runStreak(r) {
@@ -1729,7 +1733,7 @@
           return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
         pearlHtml(it, xo)) +
-        (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
+        (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") + outdatedHtml(it) +
         // Ask MaiK (prep-ask.js): on every answer, right or wrong, on this phone or online. Without prep-ask.js the
         // older offline-only button, shown only when MaiK runs on this phone.
         (G.PREP_ASK ? askBtn("ask", ok || tup ? "Ask MaiK why " + L[it.a] + " is right" : "Why is " + L[chosen] + " wrong? Ask MaiK") :
@@ -2067,7 +2071,7 @@
         '<div class="t2sol-b"><p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
         '<ol class="pn-opts">' + it.o.map(function (o, k) {
           return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
-        }).join("") + "</ol>" + ex +
+        }).join("") + "</ol>" + ex + outdatedHtml(it) +
         (G.PREP_ASK && !it._gone ? askBtn("ask-rv", a >= 0 && a !== it.a ? "Why is " + (L[a] || "?") + " wrong? Ask MaiK" : "Ask MaiK why " + ansL + " is right", ' data-i="' + i + '"') : "") +
         (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
     }).join("");
@@ -2178,7 +2182,7 @@
           whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo);
-        return ex + (G.PREP_ASK ? askBtn("ask-rv", r.ans[i] >= 0 && r.ans[i] !== it.a ? "Why is " + L[r.ans[i]] + " wrong? Ask MaiK" : "Ask MaiK why " + L[it.a] + " is right", ' data-i="' + i + '"') : "");
+        return ex + outdatedHtml(it) + (G.PREP_ASK ? askBtn("ask-rv", r.ans[i] >= 0 && r.ans[i] !== it.a ? "Why is " + L[r.ans[i]] + " wrong? Ask MaiK" : "Ask MaiK why " + L[it.a] + " is right", ' data-i="' + i + '"') : "");
       })() + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div>");
       if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
       if (G.PREP_RAD) G.PREP_RAD.mount(root);

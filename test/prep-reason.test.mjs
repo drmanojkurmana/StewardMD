@@ -146,3 +146,89 @@ test("wiring: the loader carries prep-reason.js after prep.js, optional; the CSS
   assert.ok(!block.match(/#[0-9a-f]{3,}/i), "tokens only, so light and dark follow");
   assert.ok(!block.includes("box-shadow") && !block.includes("glow"), "no glow");
 });
+
+test("srcOf: source plus version/via only when a version-ish field exists", () => {
+  assert.equal(R.srcOf({ prov: "SMD", x: { links: { ver: "wave-w17@2026-10-11", via: "grounding-tier-1" } } }),
+    "Source: StewardMD · wave-w17 · grounding-tier-1");
+  assert.equal(R.srcOf({ prov: "SMD", x: { links: { via: "grounding-source" } } }), "Source: StewardMD · grounding-source");
+  assert.equal(R.srcOf(byId["fx-reason-1"]), "Source: Licensed bank", "references alone still name the source");
+  assert.equal(R.srcOf(byId["fx-reason-old1"]), "", "bare prov stays unshown");
+  assert.equal(R.srcOf(byId["fx-reason-old2"]), "", "old x stays unshown");
+  assert.equal(R.srcOf({ x: { refs: ["a"] } }), "", "no prov, no line");
+  assert.equal(R.srcOf(null), "");
+});
+
+test("body: the provenance line sits under references, omitted without version fields", () => {
+  const h = R.body(byId["fx-reason-1"], { why: "", pearl: "", rs: null, chosen: -1, md, inl });
+  assert.ok(h.indexOf("References") < h.indexOf("pn-src") && h.indexOf("pn-src") < h.indexOf("pn-rx"), "refs, provenance, slot");
+  assert.match(h, /<p class="pn-src">Source: Licensed bank<\/p>/);
+  const bare = R.body({ ...byId["fx-reason-1"], prov: "LIC", x: { ...byId["fx-reason-1"].x, links: {}, refs: [] } },
+    { why: "", pearl: "", rs: null, chosen: -1, md, inl });
+  assert.doesNotMatch(bare, /pn-src/);
+});
+
+test("findRunItem: the run's item by id, null when absent", () => {
+  assert.equal(R.findRunItem(ITEMS, "fx-reason-1"), byId["fx-reason-1"]);
+  assert.equal(R.findRunItem(ITEMS, "nope"), null);
+  assert.equal(R.findRunItem(null, "fx-reason-1"), null);
+});
+
+test("slotHtml: the practise action carries the slot's own item", () => {
+  const h = R.slotHtml({ next: { kind: "practise", label: "Practise related questions", target: "2 questions" },
+    sid: "anatomy", mid: "ana-gametogenesis", iid: "fx-reason-1" });
+  assert.match(h, /data-act="r-practise" data-i="fx-reason-1" data-m="ana-gametogenesis"/);
+  const bare = R.slotHtml({ next: { kind: "practise", label: "P", target: "1 question" } });
+  assert.match(bare, /data-act="r-practise"><b>/, "no item, no attributes");
+});
+
+test("fill: every gaps slot resolves by its own data-i without remember()", async () => {
+  const src = fs.readFileSync(join(ROOT, "prep-reason.js"), "utf8");
+  const ptr = JSON.parse(fs.readFileSync(join(FIX, "api", "v1", "links", "index.json"), "utf8"));
+  const shards = {};
+  for (const f of fs.readdirSync(join(FIX, "api", "v1", "links", "m")))
+    shards[f] = JSON.parse(fs.readFileSync(join(FIX, "api", "v1", "links", "m", f), "utf8"));
+  const G = {
+    fetch: (url) => {
+      const u = String(url);
+      if (u.endsWith("/v1/links/index.json")) return Promise.resolve({ ok: true, json: () => Promise.resolve(ptr) });
+      const m = /\/v1\/links\/(m\/[^/]+\.json)$/.exec(u);
+      const sh = m && shards[m[1].slice(2)];
+      return Promise.resolve(sh ? { ok: true, json: () => Promise.resolve(sh) } : { ok: false, status: 404 });
+    },
+  };
+  new Function("window", src)(G);
+  const PR = G.PREP_REASON;
+  assert.ok(PR && PR.fill, "the browser branch loads");
+  const slot = (iid, mid) => {
+    const attrs = { "data-i": iid, "data-s": "anatomy", "data-m": mid };
+    return { getAttribute: (k) => attrs[k] || null,
+      setAttribute: (k, v) => { attrs[k] = String(v); }, removeAttribute: (k) => { delete attrs[k]; }, innerHTML: "" };
+  };
+  const s1 = slot("fx-reason-1", "ana-gametogenesis"), s5 = slot("fx-reason-5", "ana-gametogenesis"),
+    s3 = slot("fx-reason-3", "ana-brachial-plexus");
+  const byIid = { "fx-reason-1": s1, "fx-reason-5": s5, "fx-reason-3": s3 };
+  const root = { querySelectorAll: () => [s1, s5, s3],
+    querySelector: (sel) => { const m = /data-i="([^"]+)"/.exec(sel); return (m && byIid[m[1]]) || null; } };
+  const runItems = [{ ...byId["fx-reason-1"], _s: "anatomy", _m: "ana-gametogenesis" },
+    { ...byId["fx-reason-5"], _s: "anatomy", _m: "ana-gametogenesis" },
+    { ...byId["fx-reason-3"], _s: "anatomy", _m: "ana-brachial-plexus" }];
+  const cache = new Map();
+  const H = { root: () => root, run_: () => ({ items: runItems }),
+    loadModule: (sid, mid) => Promise.resolve(mid === "ana-brachial-plexus"
+      ? [{ id: "fx-rel-1", q: "Synthetic related stem one?", o: ["a", "b"], a: 0 },
+        { id: "fx-rel-2", q: "Synthetic related stem two?", o: ["a", "b"], a: 1 }]
+      : mid === "ana-gametogenesis" ? [{ ...byId["fx-reason-1"] }] : []),
+    subjectOfModule: () => "anatomy", bankApi: "https://x/api/prep/bank/",
+    cacheGet: (k) => (cache.has(k) ? cache.get(k) : null), cachePut: (k, v) => { cache.set(k, v); } };
+  PR.fill(H);
+  for (let i = 0; i < 200 && [s1, s5, s3].some((s) => s.getAttribute("data-done") !== "1"); i++)
+    await new Promise((r) => setTimeout(r, 10));
+  assert.equal(s1.getAttribute("data-done"), "1", "first gaps slot fills with no remember()");
+  assert.equal(s5.getAttribute("data-done"), "1", "second gaps slot fills with no remember()");
+  assert.equal(s3.getAttribute("data-done"), "1", "third gaps slot fills with no remember()");
+  assert.match(s1.innerHTML, /Learn more/, "index links render");
+  assert.match(s1.innerHTML, /Fibromuscular [Dd]ysplasia/);
+  assert.match(s1.innerHTML, /Related questions/);
+  assert.match(s5.innerHTML, /Zika [Vv]irus/);
+  assert.match(s3.innerHTML, /data-act="r-practise" data-i="fx-reason-3"/, "practise keeps the slot's item");
+});
