@@ -294,7 +294,7 @@
     }).join("") + "</div></div>";
   }
   // Format-only exam: the official format is shown, but no test types, counts or buttons: the bank holds
-  // no questions for it yet. PLAB 1, AMC, MCCQE and USMLE Step 2 CK until their banks exist.
+  // no questions for it yet. PLAB 1, AMC, MCCQE, USMLE Step 2 CK, MRCP Part 1, MRCP Part 2 Written and MRCS Part A until their banks exist.
   function comingSection(p) {
     var prov = p.status !== "official";
     return '<section class="pn-t2exam" data-p="' + p.id + '" aria-label="' + esc(p.name) + ' format">' +

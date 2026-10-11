@@ -1,0 +1,247 @@
+{
+  "blueprint": {
+    "kind": "none",
+    "note": "MRCP(UK) publishes a likelihood blueprint of likely questions per clinical topic (Part 2 blueprint 2026 update); fixed quotas were not captured, so no subject split is encoded.",
+    "subjects": {},
+    "unmapped": {}
+  },
+  "calibration": {
+    "date": "2026-10-12",
+    "items_studied": 0,
+    "note": "no official samples studied",
+    "sources": [
+      "no official samples studied"
+    ],
+    "status": "provisional"
+  },
+  "bank": {
+    "note": "no MRCP Part 2 Written questions in the bank yet, so no test types are offered",
+    "status": "coming"
+  },
+  "format": {
+    "duration_min": 360,
+    "item_types": [
+      "sba"
+    ],
+    "options": 5,
+    "questions": 200,
+    "sections": [
+      {
+        "id": "1",
+        "label": "Paper 1",
+        "minutes": 180,
+        "questions": 100
+      },
+      {
+        "id": "2",
+        "label": "Paper 2",
+        "minutes": 180,
+        "questions": 100
+      }
+    ]
+  },
+  "id": "mrcp-part2-written",
+  "item_styles": [
+    {
+      "basis": "official Part 2 page states questions include images; share not published",
+      "share": null,
+      "style": "image"
+    }
+  ],
+  "name": "MRCP Part 2 Written",
+  "navigation": {
+    "auto_advance_on_timeout": true,
+    "break_between_parts": false,
+    "early_section_submit": false,
+    "locked_sections": true,
+    "mark_for_review": false,
+    "return_to_closed_section": false,
+    "revisit_within_section": true
+  },
+  "pace_sec": 108,
+  "previous_formats": [],
+  "provenance": [
+    {
+      "field": "/format/questions",
+      "note": "since 2018: two papers, 100 best-of-five questions each",
+      "official": true,
+      "section": "The exam at a glance",
+      "src": "MRCP-P2-PAGE",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/format/duration_min",
+      "note": "each paper is 3 hours in duration",
+      "official": true,
+      "section": "Format",
+      "src": "MRCP-P2-FORMAT",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/format/options",
+      "note": "five options: one correct answer and four distractors",
+      "official": true,
+      "section": "Format",
+      "src": "MRCP-P2-FORMAT",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/format/item_types",
+      "note": "multiple choice in best-of-five format; diagnosis, investigation, management, prognosis",
+      "official": true,
+      "section": "Format",
+      "src": "MRCP-P2-FORMAT",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/format/sections",
+      "note": "two papers taken on one day; computer-based, Surpass at test centres UK and international",
+      "official": true,
+      "section": "The exam at a glance",
+      "src": "MRCP-P2-PAGE",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/locked_sections",
+      "note": "papers are separate 3-hour sittings; whether Paper 1 can be revisited after its time ends is not stated",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/revisit_within_section",
+      "note": "Surpass delivery; within-paper navigation is not described on the official pages",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/return_to_closed_section",
+      "note": "not stated on the official pages",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/early_section_submit",
+      "note": "not stated on the official pages",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/auto_advance_on_timeout",
+      "note": "each paper has a fixed 3-hour duration; auto-advance behaviour is not stated",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/mark_for_review",
+      "note": "not stated on the official pages",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/break_between_parts",
+      "note": "a break between the two papers is not described on the official pages",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/scoring/correct",
+      "note": "Each correct answer is awarded one mark",
+      "official": true,
+      "section": "Format",
+      "src": "MRCP-P2-FORMAT",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/scoring/incorrect",
+      "note": "there is no negative marking",
+      "official": true,
+      "section": "Format",
+      "src": "MRCP-P2-FORMAT",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/scoring/unanswered",
+      "note": "marks are awarded only for correct answers, so unanswered scores 0",
+      "official": true,
+      "section": "Format",
+      "src": "MRCP-P2-FORMAT",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/scoring/pass",
+      "note": "scaled pass mark 444 from diet 2026/1 (Part 2 Standard Setting Group, equated); not expressible as marks/of, so pass is null",
+      "official": true,
+      "section": "Pass marks explained",
+      "src": "MRCP-PASSMARKS",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/pace_sec",
+      "note": "derived: 360 min x 60 / 200 questions",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/blueprint/kind",
+      "note": "likelihood blueprint published; fixed quotas not captured, so kind none",
+      "official": true,
+      "section": "Format",
+      "src": "MRCP-P2-FORMAT",
+      "verified_on": "2026-10-12"
+    }
+  ],
+  "schema": "prep/assessment-profile/v2",
+  "scoring": {
+    "correct": 1,
+    "incorrect": 0,
+    "pass": null,
+    "unanswered": 0
+  },
+  "session": "MRCP(UK) Part 2 Written 2026",
+  "sources": {
+    "MRCP-ATTEMPTS": {
+      "doc_date": null,
+      "publisher": "Federation of the Royal Colleges of Physicians of the UK (MRCP(UK))",
+      "title": "Limit on attempts",
+      "url": "https://www.thefederation.uk/examinations/guidance-and-information/regulations/limit-attempts"
+    },
+    "MRCP-P2-FORMAT": {
+      "doc_date": null,
+      "publisher": "Federation of the Royal Colleges of Physicians of the UK (MRCP(UK))",
+      "title": "MRCP(UK) Part 2 Written format",
+      "url": "https://www.thefederation.uk/examinations/part-2/format"
+    },
+    "MRCP-P2-PAGE": {
+      "doc_date": null,
+      "publisher": "Federation of the Royal Colleges of Physicians of the UK (MRCP(UK))",
+      "title": "MRCP(UK) Part 2 examination page",
+      "url": "https://www.thefederation.uk/examinations/part-2"
+    },
+    "MRCP-PASSMARKS": {
+      "doc_date": null,
+      "publisher": "Federation of the Royal Colleges of Physicians of the UK (MRCP(UK))",
+      "title": "Pass marks explained",
+      "url": "https://www.thefederation.uk/examinations/guidance-and-information/pass-marks-explained"
+    }
+  },
+  "status": "provisional",
+  "tab": "mrcp",
+  "verified_on": "2026-10-12",
+  "version": "2026.1.0"
+}
