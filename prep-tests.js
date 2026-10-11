@@ -137,15 +137,15 @@
   /* ---------- the Tests segment ---------- */
   function examShape(p) {
     var f = p.format, secs = f.sections, n1 = secs[0], parts = f.parts;
-    if (p.id === "usmle-step1") return "Blocks of up to " + f.block_max_items + " questions, " + n1.minutes + " min each; the full exam has " + secs.length + " blocks";
-    if (parts) return f.questions + " questions in " + parts + " parts of " + (f.questions / parts) + ", each in " + (secs.length / parts) + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min";
+    if (p.id === "usmle-step1" || p.id === "usmle-step2-ck") return "Blocks of up to " + f.block_max_items + " questions, " + n1.minutes + " min each; the full exam has " + secs.length + " blocks";
+    if (parts) { var per = secs.length / parts; return f.questions + " questions in " + parts + " parts of " + (f.questions / parts) + (per > 1 ? ", each in " + per + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min" : ", each one locked section of " + n1.questions + " questions and " + n1.minutes + " min"); }
     if (secs.length > 1) return f.questions + " questions in " + secs.length + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min";
     return f.questions + " questions, " + mins(f.duration_min * 60);
   }
   function examPass(p) { return p.scoring.pass ? " " + (p.scoring.pass.label || "Pass mark") + " " + p.scoring.pass.marks + " of " + p.scoring.pass.of + "." : ""; }
-  function examInfoHtml(p) {
+  function examInfoHtml(p, coming) {
     return '<p class="pn-mut pn-small">' + esc(examShape(p)) + ". " + esc(marking(p)) + "." + esc(examPass(p)) + "</p>" +
-      '<p class="pn-mut pn-small pn-t2src">' + esc(srcLine(p)) + (p.blueprint.kind === "official_counts" ? " Subject quotas from the official blueprint." : " No official subject split: questions are spread across the subjects in proportion to the bank.") + "</p>";
+      '<p class="pn-mut pn-small pn-t2src">' + esc(srcLine(p)) + (coming ? "" : (p.blueprint.kind === "official_counts" ? " Subject quotas from the official blueprint." : " No official subject split: questions are spread across the subjects in proportion to the bank.")) + "</p>";
   }
   function covKnown() { try { var v = P.cov[tab()]; return typeof v === "number" ? v : null; } catch (e) { return null; } }
   function engineBtn(p, type, b, label, pri) {
@@ -293,7 +293,16 @@
       return '<button type="button" class="pn-chip pn-t2j" data-act="t2-jump" data-p="' + p.id + '" data-f="' + f + '" aria-label="Jump to ' + esc(grpName(f)) + '">' + esc(grpShort(f)) + "</button>";
     }).join("") + "</div></div>";
   }
+  // Format-only exam: the official format is shown, but no test types, counts or buttons: the bank holds
+  // no questions for it yet. PLAB 1, AMC, MCCQE and USMLE Step 2 CK until their banks exist.
+  function comingSection(p) {
+    var prov = p.status !== "official";
+    return '<section class="pn-t2exam" data-p="' + p.id + '" aria-label="' + esc(p.name) + ' format">' +
+      '<h2 class="pn-t2xh"><span class="pn-t2xt"><b>' + esc(p.name) + '</b><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Official format") + "</span></span></h2>" +
+      '<div class="pn-t2xinfo">' + examInfoHtml(p, true) + '<p class="pn-mut"><b>Format available, question bank coming.</b> ' + esc((p.bank && p.bank.note) || "No questions for this exam in the bank yet.") + "</p></div></section>";
+  }
   function examSection(p, primaryId, st) {
+    if (A.bankStatus(p) === "coming") return comingSection(p);
     var open = examIsOpen(st, p.id, primaryId), c = examCounts(p), prov = p.status !== "official";
     var xid = "pnT2X-" + p.id;
     var inner = '<div class="pn-t2xinfo">' + examInfoHtml(p) + "</div>" + jumpBar(p) + GRP_ORDER.map(function (f) { return groupSection(p, f, primaryId, st); }).join("");
@@ -496,11 +505,13 @@
     var list = A.forTab(tab()), p0 = primary();
     if (!p0) return '<p class="pn-empty">No exam profile for this exam yet.</p>';
     var st = loadGrp(), ordered = examOrder(list, p0.id);
+    var more = A.profileIds().map(A.profile).filter(function (p) { return p && A.bankStatus(p) === "coming" && list.indexOf(p) < 0; });
     P.grpQ = {};
     return '<div id="pnT2Res">' + (P.sess && P.sess.t2 && !P.sess.done ? resumeHtml(P.sess) : "") + "</div>" +
       (H.coachSec ? H.coachSec("tests") : "") +
       '<p class="pn-mut pn-small">The same ready-made papers for every student, grouped by exam and format. Your exam is on top.</p>' +
-      ordered.map(function (p) { return examSection(p, p0.id, st); }).join("") + globalPracticeHtml() +
+      ordered.map(function (p) { return examSection(p, p0.id, st); }).join("") +
+      (more.length ? '<h2 class="pn-h">More exam formats</h2>' + more.map(comingSection).join("") : "") + globalPracticeHtml() +
       '<p class="pn-mut pn-small" id="pnT2Note">Every test shows its size, time and scope before it starts. When the bank cannot fill a blueprint the test is shortened and says why; it is never padded with unrelated questions. Results use the exam\'s marking only: no rank, percentile or predicted score.</p>';
   }
   // After paint: the saved session, the fixed papers, then coverage (subject indexes) hides tests the bank cannot fill.
@@ -622,6 +633,7 @@
   function shuffleR(a, R) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(R() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
   function prepare(pid, type, sid, mid, extra) {
     var p = A.profile(pid); if (!p) return;
+    if (A.bankStatus(p) === "coming") { H.toast("Format available, question bank coming: no " + p.name + " questions in the bank yet."); return; }
     var dailyKind = type === "daily10" ? "daily10" : type === "daily_mixed" ? "daily_mixed" : null;
     var seed = dailyKind ? A.dailyKey(p.id, Date.now(), dailyKind) : String(Date.now()) + Math.random(), R = A.rng(seed + ":files");
     var opts = { seed: seed, hidden: H.hidden(), recent: dailyKind ? null : seenMap() };   // daily: the same set all day, seen or not

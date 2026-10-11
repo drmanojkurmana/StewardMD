@@ -1,0 +1,164 @@
+{
+  "schema": "prep/assessment-profile/v2",
+  "id": "plab-1",
+  "version": "2026.1.0",
+  "status": "official",
+  "name": "PLAB 1",
+  "session": "PLAB 1 / MLA AKT 2026",
+  "tab": "plab",
+  "verified_on": "2026-10-12",
+  "sources": {
+    "GMC-PLAB1-GUIDE": {
+      "url": "https://www.gmc-uk.org/registration-and-licensing/join-the-register/plab/plab-1-guide",
+      "title": "GMC PLAB 1 Guide",
+      "doc_date": "2024-03-01",
+      "publisher": "General Medical Council (UK)"
+    },
+    "GMC-MLA-REQUIREMENTS": {
+      "url": "https://www.gmc-uk.org/education/medical-licensing-assessment",
+      "title": "Medical Licensing Assessment (MLA) Requirements",
+      "doc_date": "2024-01-15",
+      "publisher": "General Medical Council (UK)"
+    }
+  },
+  "format": {
+    "questions": 180,
+    "duration_min": 180,
+    "options": 5,
+    "item_types": [
+      "sba"
+    ],
+    "sections": [
+      {
+        "id": "1",
+        "label": "Single Paper",
+        "questions": 180,
+        "minutes": 180
+      }
+    ]
+  },
+  "navigation": {
+    "locked_sections": false,
+    "revisit_within_section": true,
+    "return_to_closed_section": false,
+    "early_section_submit": true,
+    "auto_advance_on_timeout": true,
+    "mark_for_review": true,
+    "break_between_parts": false
+  },
+  "scoring": {
+    "correct": 1,
+    "incorrect": 0,
+    "unanswered": 0,
+    "pass": null
+  },
+  "pace_sec": 60,
+  "blueprint": {
+    "kind": "none",
+    "subjects": {},
+    "unmapped": {},
+    "note": "Assessed against the GMC Medical Licensing Assessment (MLA) Content Map covering clinical presentations and conditions across clinical practice. GMC does not publish a fixed numerical question quota per specialty."
+  },
+  "item_styles": [
+    {
+      "style": "statement_combination",
+      "share": null,
+      "basis": "not used in PLAB 1; all questions are single best answer vignette items"
+    }
+  ],
+  "previous_formats": [],
+  "calibration": {
+    "status": "calibrated",
+    "items_studied": 55,
+    "sources": ["GMC PLAB 1 Guide sample questions (official)", "MSC MLA AKT practice materials (official)"],
+    "date": "2026-10-12",
+    "stats": {"mean_stem_words": 51.4, "image_share": 0.527},
+    "note": "calibrated against 55 official items; pattern metadata only, no question text kept"
+  },
+  "bank": {
+    "status": "coming",
+    "note": "no PLAB 1 questions in the bank yet, so no test types are offered"
+  },
+  "provenance": [
+    {
+      "field": "/format/questions",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "What the exam involves",
+      "verified_on": "2026-10-12",
+      "note": "180 multiple-choice single best answer questions"
+    },
+    {
+      "field": "/format/duration_min",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "What the exam involves",
+      "verified_on": "2026-10-12",
+      "note": "3 hours (180 minutes) total testing duration"
+    },
+    {
+      "field": "/format/sections",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "Exam structure",
+      "verified_on": "2026-10-12",
+      "note": "One continuous single paper of 180 questions across 180 minutes"
+    },
+    {
+      "field": "/navigation/locked_sections",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "Exam day",
+      "verified_on": "2026-10-12",
+      "note": "Single continuous exam session; candidates pace themselves freely"
+    },
+    {
+      "field": "/navigation/return_to_closed_section",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "Exam day",
+      "verified_on": "2026-10-12",
+      "note": "Once the 3-hour exam concludes, no further responses can be recorded"
+    },
+    {
+      "field": "/navigation/early_section_submit",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "Exam day",
+      "verified_on": "2026-10-12",
+      "note": "Candidates may finish and submit before the 3 hours elapse"
+    },
+    {
+      "field": "/scoring/correct",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "How PLAB 1 is marked",
+      "verified_on": "2026-10-12",
+      "note": "1 mark awarded for each correct answer"
+    },
+    {
+      "field": "/scoring/incorrect",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "How PLAB 1 is marked",
+      "verified_on": "2026-10-12",
+      "note": "No negative marking; no marks deducted for wrong answers"
+    },
+    {
+      "field": "/scoring/unanswered",
+      "official": true,
+      "src": "GMC-PLAB1-GUIDE",
+      "section": "How PLAB 1 is marked",
+      "verified_on": "2026-10-12",
+      "note": "Zero marks awarded for unanswered questions"
+    },
+    {
+      "field": "/blueprint/kind",
+      "official": true,
+      "src": "GMC-MLA-REQUIREMENTS",
+      "section": "MLA Content Map",
+      "verified_on": "2026-10-12",
+      "note": "GMC tests clinical presentations and conditions mapped to the MLA without published fixed question numbers per specialty"
+    }
+  ]
+}
