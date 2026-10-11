@@ -1,0 +1,176 @@
+{
+  "schema": "prep/assessment-profile/v2",
+  "id": "mccqe-1",
+  "version": "2026.1.0",
+  "status": "official",
+  "name": "MCCQE Part I",
+  "session": "MCCQE Part I 2026",
+  "tab": "mccqe",
+  "verified_on": "2026-10-12",
+  "sources": {
+    "MCC-MCCQE1-SPECS": {
+      "url": "https://mcc.ca/examinations/mccqe-part-i/",
+      "title": "MCCQE Part I Examination Specifications",
+      "doc_date": "2025-04-01",
+      "publisher": "Medical Council of Canada"
+    }
+  },
+  "format": {
+    "questions": 230,
+    "duration_min": 320,
+    "options": 5,
+    "item_types": [
+      "sba"
+    ],
+    "parts": 2,
+    "sections": [
+      {
+        "id": "1",
+        "label": "Section 1",
+        "questions": 115,
+        "minutes": 160,
+        "part": 1
+      },
+      {
+        "id": "2",
+        "label": "Section 2",
+        "questions": 115,
+        "minutes": 160,
+        "part": 2
+      }
+    ]
+  },
+  "navigation": {
+    "locked_sections": true,
+    "revisit_within_section": true,
+    "return_to_closed_section": false,
+    "early_section_submit": true,
+    "auto_advance_on_timeout": true,
+    "mark_for_review": true,
+    "break_between_parts": true
+  },
+  "scoring": {
+    "correct": 1,
+    "incorrect": 0,
+    "unanswered": 0,
+    "pass": null
+  },
+  "pace_sec": 83.48,
+  "blueprint": {
+    "kind": "none",
+    "subjects": {},
+    "unmapped": {},
+    "note": "Blueprinted across Dimensions of Care and Physician Activities per CanMEDS roles. MCC does not publish fixed per-discipline item counts."
+  },
+  "item_styles": [
+    {
+      "style": "statement_combination",
+      "share": null,
+      "basis": "not used in MCCQE Part I MCQ format; single best answer with multiple choice options"
+    }
+  ],
+  "previous_formats": [
+    {
+      "id": "mccqe-part1-pre-2025",
+      "label": "Before April 2025 (MCQ + CDM)",
+      "questions": 210,
+      "duration_min": 450,
+      "src": "MCC-MCCQE1-SPECS",
+      "official": true
+    }
+  ],
+  "calibration": {
+    "status": "calibrated",
+    "items_studied": 50,
+    "sources": ["MCC MCCQE Part I sample questions (official)"],
+    "date": "2026-10-12",
+    "stats": {"mean_stem_words": 53.4, "image_share": 0.4},
+    "note": "calibrated against 50 official items; pattern metadata only, no question text kept"
+  },
+  "bank": {
+    "status": "coming",
+    "note": "no MCCQE questions in the bank yet, so no test types are offered"
+  },
+  "provenance": [
+    {
+      "field": "/format/questions",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Exam structure",
+      "verified_on": "2026-10-12",
+      "note": "230 multiple-choice questions (effective April 2025; CDM retired)"
+    },
+    {
+      "field": "/format/duration_min",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Exam structure",
+      "verified_on": "2026-10-12",
+      "note": "320 minutes (two sections of 2 hours and 40 minutes each)"
+    },
+    {
+      "field": "/format/sections",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Exam structure",
+      "verified_on": "2026-10-12",
+      "note": "Two sections of 115 questions and 160 minutes each"
+    },
+    {
+      "field": "/navigation/locked_sections",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Exam day",
+      "verified_on": "2026-10-12",
+      "note": "Each section is individually timed"
+    },
+    {
+      "field": "/navigation/return_to_closed_section",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Exam day",
+      "verified_on": "2026-10-12",
+      "note": "Once section 1 is submitted or expires, candidates cannot return to it"
+    },
+    {
+      "field": "/navigation/early_section_submit",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Exam day",
+      "verified_on": "2026-10-12",
+      "note": "Candidates can submit early and proceed to optional break"
+    },
+    {
+      "field": "/scoring/correct",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Scoring",
+      "verified_on": "2026-10-12",
+      "note": "1 mark per correct answer"
+    },
+    {
+      "field": "/scoring/incorrect",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Scoring",
+      "verified_on": "2026-10-12",
+      "note": "No negative marking; no deduction for incorrect answers"
+    },
+    {
+      "field": "/scoring/unanswered",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Scoring",
+      "verified_on": "2026-10-12",
+      "note": "Zero marks for unanswered questions"
+    },
+    {
+      "field": "/blueprint/kind",
+      "official": true,
+      "src": "MCC-MCCQE1-SPECS",
+      "section": "Blueprint",
+      "verified_on": "2026-10-12",
+      "note": "Content mapped across CanMEDS roles, Dimensions of Care, and Physician Activities without fixed per-discipline item counts"
+    }
+  ]
+}
