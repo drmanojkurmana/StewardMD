@@ -257,6 +257,8 @@
   function itemImg(it, host, f) {
     f = String(f);
     if (/^data:image\//.test(f)) return f;
+    // App-bundled teaching illustrations (KardiqX ECGs, Ophthalmos, PSM charts): same-origin, no bank fetch.
+    if (/^\/assets\/(kardiox-learn|ophthalmos|psm)\//.test(f)) return f;
     if (f.indexOf("/") >= 0) { var u = (host.bankApi || "/api/prep/bank/") + f; return u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u; }
     return imgBase(it, host) + f;
   }

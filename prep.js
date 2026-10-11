@@ -1018,7 +1018,7 @@
     loadTax().then(function () {
       var pid = st.pendId; st.pendId = null;
       if (pid && G.PREP_IDS) { push(renderHome); G.PREP_IDS.open(pid, HOST); }
-      else if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); }
+      else if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); if (opts.module) push(function () { renderModule(opts.subject, opts.module); }); }
       else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
       else if (opts && opts.mode === "plan") { st.stack = [renderHome]; renderHome(); startPlan(); }
       else if (opts && opts.query) openQuery(opts);
@@ -1327,6 +1327,7 @@
       var acts = go + lastBtn("subject", sid, ' data-s="' + esc(sid) + '"');
       if (box) patchHtml(box, head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + (html || '<p class="pn-empty">Nothing in this filter yet.</p>'));
       if (G.PREP_LESSONS && G.PREP_LESSONS.subjectButton) G.PREP_LESSONS.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
+      if (G.PREP_IMGLEARN && G.PREP_IMGLEARN.subjectButton) G.PREP_IMGLEARN.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
     });
   }
   function modRow(sid, t, prog, s, num) {
@@ -2635,6 +2636,7 @@
     if (a.indexOf("a-") === 0 && G.PREP_ARENA && G.PREP_ARENA.act) return G.PREP_ARENA.act(a, b, HOST);
     // Lessons (prep-lessons.js) own every data-act starting "l-".
     if (a.indexOf("l-") === 0 && G.PREP_LESSONS) return G.PREP_LESSONS.act(a, b, HOST);
+    if (a.indexOf("il-") === 0 && G.PREP_IMGLEARN) return G.PREP_IMGLEARN.act(a, b, HOST);
     // Previous year papers (prep-pyq.js) own every data-act starting "y-".
     if (a.indexOf("y-") === 0 && G.PREP_PYQ) return G.PREP_PYQ.act(a, b, HOST);
     // Radiology image series (prep-rad.js) own every data-act starting "rd-".

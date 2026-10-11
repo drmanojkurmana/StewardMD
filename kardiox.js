@@ -90,7 +90,7 @@
   function learnOn() { var f = flags(); return !!(f && f.bool("smd_kardiox_learn")); }
   function signedIn() { try { var p = window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile(); return !!(p && p.signedIn); } catch (e) { return false; } }
   function say(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
-  function openLearn() {
+  function openLearn(id) {
     if (!learnOn()) return;                                   // kill switch: complete no-op
     if (!signedIn()) { say("Sign in to open Learn ECG."); return; }
     var el = root();
@@ -99,6 +99,8 @@
     haptic("light");
     var mount = function () {
       try { if (window.SMD_KARDIOX_ROUTER && SMD_KARDIOX_ROUTER.mountLearn) SMD_KARDIOX_ROUTER.mountLearn(document.getElementById("kxScroll")); } catch (e) {}
+      // PrepNucleus deep link: open one ECG lesson after the library mounts.
+      try { if (id && window.SMD_KARDIOX_ROUTER && SMD_KARDIOX_ROUTER.openLesson) SMD_KARDIOX_ROUTER.openLesson(String(id)); } catch (e) {}
     };
     var lazy = (typeof smdLazy === "function") ? smdLazy('/kardiox-content-pack.js?v=kxpack1') : Promise.resolve();
     Promise.resolve(lazy).then(mount, mount);

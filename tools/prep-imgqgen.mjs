@@ -26,8 +26,10 @@ const OUT_REVIEW = opt("out-review", path.join(DATA_DIR, "review-queue.jsonl"));
 const LIMIT = Number(opt("limit", 0)) || 0;
 const CONCURRENCY = Number(opt("concurrency", 3)) || 3;
 
-const GEN_MODEL = "claude-sonnet-5-5";
-const VERIFY_MODEL = "claude-haiku-5-5";
+const GEN_MODEL = opt("gen-model", "claude-sonnet-5-5");
+const VERIFY_MODEL = opt("verify-model", "claude-haiku-5-5");
+const PROFILE = opt("profile", "default");
+const TARGET_SUBJECTS = opt("subjects", "anatomy,surgery,pathology").split(",").map((s) => s.trim()).filter(Boolean);
 
 const PRICES = {
   "claude-haiku-5-5": { in: 0.10, out: 0.50 },
@@ -90,6 +92,65 @@ Requirements:
    - clues: 2-3 decisive visual or clinical clues.
    - ddx: Differential diagnosis comparison.
    - mech: Underlying pathophysiology or anatomical relationships.
+   - lo: Learning objective statement.
+   - rev: 2-3 bullet-point summary lines for quick recall.
+6. Cognitive Level (cog): "reasoning" or "application" (or "recall").
+7. Difficulty (d): 1 (straightforward classic), 2 (moderate clinical vignette), 3 (challenging).
+8. Module ID (t): Valid module identifier matching the topic.
+
+Return ONLY a valid JSON object matching this schema:
+{
+  "q": string,
+  "o": [string, string, string, string],
+  "a": number (0, 1, 2, or 3),
+  "exp": string,
+  "d": number (1, 2, or 3),
+  "r": [string, string, string, string],
+  "kp": string,
+  "cog": "reasoning" | "application" | "recall",
+  "t": string,
+  "x": {
+    "key": string,
+    "others": { "A": string, ... },
+    "pearl": string,
+    "clues": string,
+    "ddx": string,
+    "mech": string,
+    "lo": string,
+    "rev": string
+  }
+}`;
+
+export const ECG_GEN_SYSTEM_PROMPT = `You are a distinguished senior faculty member of the National Board of Examinations (NBEMS) designing ECG-based single-best-answer MCQs for NEET-PG and INI-CET.
+
+You will be given:
+1. An ECG tracing. It is a clean teaching illustration drawn for education, not a real patient recording. Read rate, rhythm, P waves, PR interval, QRS width and axis, ST segments and T waves from it.
+2. The authoritative ECG diagnosis established by the source teaching entry.
+
+Requirements:
+1. Question Stem (q):
+   - A short, realistic clinical vignette (2 to 4 sentences) including patient age/sex, presentation, and key examination or laboratory findings that fit the authoritative diagnosis.
+   - Conclude with a clear prompt naming the ECG task, e.g. "The ECG is shown in the image. What is the most likely diagnosis?" or "What does this ECG show?" or "Which territory is involved?" or "What is the next best step?"
+   - Vary the task across rhythm/ECG diagnosis, axis determination, ischaemia localisation, and electrolyte/metabolic ECG changes as the tracing allows.
+   - DO NOT reveal the answer, filename, source, or author in the stem!
+   - NO em-dashes (—) or en-dashes (–). Use hyphens (-), commas, colons, or parentheses.
+   - NO emojis.
+   - NO source citations, book names, or hospital mentions.
+2. Four Options (o):
+   - Array of exactly 4 plausible, medically homogeneous options (all ECG diagnoses, all territories, all axes, or all next steps at a similar level).
+   - Exactly ONE correct option matching the authoritative diagnosis.
+   - The correct answer position should be randomly distributed among indices 0, 1, 2, 3.
+3. Reasons (r) & Explanation (exp):
+   - r: Array of 4 concise explanations, one for each option (why the correct option is right based on ECG landmarks, and why each distractor is wrong).
+   - exp: Comprehensive explanation paragraph detailing hallmark ECG features seen in the tracing, diagnostic criteria, and clinical significance.
+4. Key Pearl (kp):
+   - High-yield, memorable "Remember" pearl for rapid exam revision.
+5. Reasoning Object (x):
+   - key: Detailed reason why the keyed option is correct based on ECG findings.
+   - others: Object with keys "A", "B", "C", "D" (for the 3 distractors) explaining why they are ruled out.
+   - clues: 2-3 decisive ECG or clinical clues.
+   - ddx: Differential diagnosis comparison.
+   - mech: Underlying pathophysiology.
    - lo: Learning objective statement.
    - rev: 2-3 bullet-point summary lines for quick recall.
 6. Cognitive Level (cog): "reasoning" or "application" (or "recall").
@@ -187,8 +248,17 @@ function sanitizeText(s) {
     .trim();
 }
 
+export function mediaType(p) {
+  if (/\.jpe?g$/i.test(p)) return "image/jpeg";
+  if (/\.png$/i.test(p)) return "image/png";
+  if (/\.gif$/i.test(p)) return "image/gif";
+  return "image/webp";
+}
+
 // Module mapping heuristic based on subject and keywords
-export function mapModuleId(subject, topic, caption) {
+export function mapModuleId(subject, topic, caption, item) {
+  if (item && item.module) return item.module;
+  if (subject === "ss-cardiology") return "sca-ecg";
   const text = `${topic} ${caption}`.toLowerCase();
   if (subject === "pathology") {
     if (/lymphoma|reed-sternberg|hodgkin/i.test(text)) return "pat-hodgkin-lymphoma";
@@ -232,8 +302,8 @@ export function mapModuleId(subject, topic, caption) {
 
 async function main() {
   if (argv.includes("--help") || argv.includes("-h")) {
-    console.log("Usage: node tools/prep-imgqgen.mjs [--limit N] [--concurrency N] [--manifest F] [--out-passed F] [--out-review F] [--ledger F]");
-    console.log("Writes Sonnet image MCQs with blind Haiku verification. Resumable: skips ids already in out files. Limit 0 = all remaining.");
+    console.log("Usage: node tools/prep-imgqgen.mjs [--limit N] [--concurrency N] [--manifest F] [--out-passed F] [--out-review F] [--ledger F] [--gen-model M] [--verify-model M] [--profile default|ecg] [--subjects a,b]");
+    console.log("Writes image MCQs with blind verification by a second model. Resumable: skips ids already in out files. Limit 0 = all remaining.");
     return;
   }
   console.log("=== PrepNucleus Image MCQ Generator & Blind Verifier ===");
@@ -280,7 +350,6 @@ async function main() {
 
   const todo = items.filter(it => !doneIds.has(it.id) && !doneIds.has(`q_${it.sha12}`) && !doneIds.has(it.neutralName));
 
-  const TARGET_SUBJECTS = ["anatomy", "surgery", "pathology"];
   todo.sort((a, b) => {
     const aIsTarget = TARGET_SUBJECTS.includes(a.subject) ? 0 : 1;
     const bIsTarget = TARGET_SUBJECTS.includes(b.subject) ? 0 : 1;
@@ -309,9 +378,10 @@ Caption: ${item.caption}
 Generate a rigorous Board-style single-best-answer MCQ where the correct answer matches the authoritative diagnosis above.`;
 
     try {
-      // 1. Generate with Sonnet 5.5
-      const genResp = await callClaude(env, GEN_MODEL, GEN_SYSTEM_PROMPT, [
-        { type: "image", source: { type: "base64", media_type: "image/webp", data: b64 } },
+      // 1. Generate with the first-pass model
+      const genSys = PROFILE === "ecg" ? ECG_GEN_SYSTEM_PROMPT : GEN_SYSTEM_PROMPT;
+      const genResp = await callClaude(env, GEN_MODEL, genSys, [
+        { type: "image", source: { type: "base64", media_type: mediaType(item.destPath), data: b64 } },
         { type: "text", text: genPrompt }
       ], 4000);
 
@@ -376,7 +446,7 @@ Generate a rigorous Board-style single-best-answer MCQ where the correct answer 
         return;
       }
 
-      // 2. Blind Verification with Haiku 5.5
+      // 2. Blind verification with the second model
       const verPrompt = `Examine this medical image and answer the multiple-choice question:
 Stem: ${qData.q}
 Options:
@@ -388,7 +458,7 @@ D) ${qData.o[3]}
 Provide the single best answer index (0 for A, 1 for B, 2 for C, 3 for D) with your confidence and brief reasoning.`;
 
       const verResp = await callClaude(env, VERIFY_MODEL, VERIFY_SYSTEM_PROMPT, [
-        { type: "image", source: { type: "base64", media_type: "image/webp", data: b64 } },
+        { type: "image", source: { type: "base64", media_type: mediaType(item.destPath), data: b64 } },
         { type: "text", text: verPrompt }
       ], 1500);
 
@@ -416,7 +486,7 @@ Provide the single best answer index (0 for A, 1 for B, 2 for C, 3 for D) with y
         o: qData.o,
         a: qData.a,
         exp: qData.exp,
-        t: mapModuleId(item.subject, qData.t || item.subject, item.caption),
+        t: mapModuleId(item.subject, qData.t || item.subject, item.caption, item),
         d: qData.d || 2,
         r: qData.r || [],
         kp: qData.kp || "",
@@ -479,12 +549,13 @@ Provide the single best answer index (0 for A, 1 for B, 2 for C, 3 for D) with y
   const costVer = (verTokensIn * PRICES[VERIFY_MODEL].in / 1e6) + (verTokensOut * PRICES[VERIFY_MODEL].out / 1e6);
   const totalCost = costGen + costVer;
 
-  logLedger("qgen-image-sonnet", GEN_MODEL, { input_tokens: genTokensIn, output_tokens: genTokensOut }, costGen, `Generated ${work.length} items`);
-  logLedger("verify-image-haiku", VERIFY_MODEL, { input_tokens: verTokensIn, output_tokens: verTokensOut }, costVer, `Verified ${work.length} items`);
+  const short = (m) => String(m).replace(/^claude-/, "");
+  logLedger(`qgen-image-${short(GEN_MODEL)}`, GEN_MODEL, { input_tokens: genTokensIn, output_tokens: genTokensOut }, costGen, `Generated ${work.length} items (profile ${PROFILE})`);
+  logLedger(`verify-image-${short(VERIFY_MODEL)}`, VERIFY_MODEL, { input_tokens: verTokensIn, output_tokens: verTokensOut }, costVer, `Verified ${work.length} items (profile ${PROFILE})`);
 
   console.log("\n=== Generation & Verification Complete ===");
   console.log(`Passed: ${passCount} | Held for Review: ${reviewCount}`);
-  console.log(`Total Spend: $${totalCost.toFixed(4)} (Sonnet: $${costGen.toFixed(4)}, Haiku: $${costVer.toFixed(4)})`);
+  console.log(`Total Spend: $${totalCost.toFixed(4)} (${GEN_MODEL}: $${costGen.toFixed(4)}, ${VERIFY_MODEL}: $${costVer.toFixed(4)})`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

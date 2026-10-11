@@ -2042,6 +2042,12 @@
       return '<button type="button" class="kx-btn kx-btn-primary kx-lesson-quiz" data-act="kxnav:quiz">' +
         ic('quiz') + 'Take the quiz · <span class="kx-data">' + vm.quizCount + '</span> Q</button>';
     }
+
+    function prepBtn() {
+      if (typeof window === "undefined" || !window.PREP || !window.PREP.open) return "";
+      return '<button type="button" class="kx-btn kx-lesson-prep" data-act="kx-prep">' +
+        ic('quiz') + 'Practise ECG questions in PrepNucleus</button>';
+    }
   
     function paint(vm) {
       var bmPressed = vm.bookmarked ? 'true' : 'false';
@@ -2077,6 +2083,7 @@
           pill('Prognosis', vm.prognosis) +
           tutorBtn() +
           quizBtn(vm) +
+          prepBtn() +
         '</section>';
 
       var ecgPanel =
@@ -2996,6 +3003,11 @@
       case "kardiox-daily": go("daily"); return;
       case "kardiox-quiz": state.quizIntent = "practice"; state.quizLessonId = null; go("quiz"); return;
       case "kxnav:quiz": state.quizIntent = "lesson"; state.quizLessonId = state.lessonId || null; go("quiz"); return;   // the lesson's own "Take the quiz" CTA
+      case "kx-prep":   // the lesson's "Practise ECG questions in PrepNucleus" CTA: close FIRST, then open Prep (as kx-learn-ai does for MaiK)
+        haptic("light");
+        try { closeMod(); } catch (e) {}
+        try { if (window.PREP && window.PREP.open) window.PREP.open({ subject: "ss-cardiology", module: "sca-ecg" }); else toast("PrepNucleus unavailable."); } catch (e2) { toast("PrepNucleus unavailable."); }
+        return;
       case "kardiox-dailyquiz": state.quizIntent = "daily"; state.quizLessonId = t.getAttribute("data-id") || null; go("quiz"); return;
       case "kardiox-history": go("history"); return;
       case "kardiox-settings": go("settings"); return;
@@ -3071,6 +3083,8 @@
    * keep the previous account's data through a sign-out. wireSignout() is idempotent. */
   wireSignout();
 
-  if (typeof window !== "undefined") window.SMD_KARDIOX_ROUTER = { mountLanding: mountLanding, mountLearn: mountLearn, isLearnOnly: function () { return !!state.learnOnly; }, nav: go, runPipeline: runPipeline, wipe: wipe };
+  // PrepNucleus deep link: open one lesson of the Learn library (called after mountLearn).
+  function openLesson(id) { state.lessonId = String(id); if (state.stack[state.stack.length - 1] !== "lesson") state.stack.push("lesson"); show("lesson"); }
+  if (typeof window !== "undefined") window.SMD_KARDIOX_ROUTER = { mountLanding: mountLanding, mountLearn: mountLearn, openLesson: openLesson, isLearnOnly: function () { return !!state.learnOnly; }, nav: go, runPipeline: runPipeline, wipe: wipe };
 
 })();
