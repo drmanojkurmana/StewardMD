@@ -257,3 +257,14 @@ test("radnotes lessons: a module lists its own lesson first, then every entry na
   assert.equal(P.imgUrl(src, "/test/fixtures/x/api/", ""), "/test/fixtures/x/api/img/radnotes/rn-n1-p031-2.webp", "tests: the bank API base");
   assert.equal(P.imgUrl("prep/lessons/media/breast-t-size.svg", "/api/prep/bank/", "https://stewardmd.in"), "/prep/lessons/media/breast-t-size.svg", "bundled media stays in the app");
 });
+
+test("startPage: a link into the lesson opens at its step, a bad step keeps the saved place", () => {
+  const les = { steps: [{}, {}, {}, {}] };
+  assert.equal(P.startPage(les, "2", 0), 2);
+  assert.equal(P.startPage(les, "0", 3), 0);
+  assert.equal(P.startPage(les, "9", 1), 1, "past the last page");
+  assert.equal(P.startPage(les, "-1", 1), 1);
+  assert.equal(P.startPage(les, "x", 1), 1);
+  assert.equal(P.startPage(les, undefined, 1), 1, "no step, no change");
+  assert.equal(P.startPage(les, null, 0), 0);
+});

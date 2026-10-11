@@ -181,6 +181,32 @@ test("slotHtml: the practise action carries the slot's own item", () => {
   assert.match(bare, /data-act="r-practise"><b>/, "no item, no attributes");
 });
 
+test("lessonLinks: tiers from via, the step rides along, the 75 floor, strongest first", () => {
+  const sh = { T: [["ls", "m1", "Liver Masses"], ["ls", "c9", "Adenoma Imaging"], ["kb", "a", "A"]],
+    e: { i: [[0, 75, "lt"], [1, 85, "li", "2"], [2, 92, "k"]], j: [[0, 74, "lt"]] } };
+  assert.deepEqual(R.lessonLinks(sh, "i"), [
+    { key: "c9", title: "Adenoma Imaging", c: 85, tier: "specific", step: "2" },
+    { key: "m1", title: "Liver Masses", c: 75, tier: "topic", step: "" },
+  ]);
+  assert.deepEqual(R.lessonLinks(sh, "j"), [], "74 is not shown");
+  assert.deepEqual(R.lessonLinks(sh, "zz"), []);
+  assert.deepEqual(R.lessonLinks(null, "i"), []);
+});
+
+test("slotHtml: per-item lessons with Read-the-lesson rows and steps, the module fallback stays", () => {
+  const lessons = [{ key: "m1", title: "Liver Masses", tier: "topic", step: "" }, { key: "c9", title: "Adenoma Imaging", tier: "specific", step: "2" }];
+  const h = R.slotHtml({ lessons, sid: "s", mid: "m1" });
+  assert.match(h, /Read the lesson: Liver Masses/);
+  assert.match(h, /data-act="l-open" data-s="s" data-m="m1" data-l="c9" data-step="2"/);
+  assert.ok(!/data-l="m1" data-step/.test(h), "no step, no attribute");
+  const fb = R.slotHtml({ lesson: { key: "m1" }, sid: "s", mid: "m1" });
+  assert.match(fb, /data-act="l-open" data-s="s" data-m="m1" data-l="m1"/);
+  assert.ok(!/Read the lesson/.test(fb), "the untitled fallback keeps its old row");
+  assert.equal(R.slotHtml({ lessons: [], lesson: null }), "");
+  const rv = R.slotHtml({ lessons, next: { kind: "revise", label: "Revise this topic", lkey: "c9", step: "2", target: "Lesson" }, sid: "s", mid: "m1" });
+  assert.match(rv, /data-act="l-open"[^>]*data-l="c9" data-step="2"><b>Revise this topic<\/b>/);
+});
+
 test("fill: every gaps slot resolves by its own data-i without remember()", async () => {
   const src = fs.readFileSync(join(ROOT, "prep-reason.js"), "utf8");
   const ptr = JSON.parse(fs.readFileSync(join(FIX, "api", "v1", "links", "index.json"), "utf8"));
