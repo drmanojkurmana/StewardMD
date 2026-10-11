@@ -1,0 +1,67 @@
+/* KnowYourIQ section, capture row, intro card and results. Restrained dark-green palette:
+   dark surfaces #071318 / #0D1D23 with #42CDB5 accents; light surfaces stay paper with a deep-teal
+   accent kept to 4.5:1 on white. No glows, gradients or backdrops. Honors prefers-reduced-motion. */
+.pn-root {
+  --ky-bg: #fff; --ky-bg2: #f2f5f4; --ky-line: #e3e9e7; --ky-edge: #d7dfdd;
+  --ky-text: #10201c; --ky-mut: #4d6262; --ky-acc: #0a5c4f; --ky-acc-soft: #e3f2ee;
+  --ky-diamond: #1f5b8a; --ky-platinum: #5a6472; --ky-gold: #7a5f1f; --ky-silver: #5a6472;
+}
+body.dark .pn-root {
+  --ky-bg: #0d1d23; --ky-bg2: #071318; --ky-line: #1c3038; --ky-edge: #24414a;
+  --ky-text: #eef5f3; --ky-mut: #9db5ae; --ky-acc: #42cdb5; --ky-acc-soft: #123437;
+  --ky-diamond: #8fc3e8; --ky-platinum: #c9cfd8; --ky-gold: #d3b578; --ky-silver: #9aa3b2;
+}
+.pn-root .ky-sec { max-width: 720px; margin: 0 auto; }
+.pn-root .ky-head { display: flex; align-items: center; gap: 10px; }
+.pn-root .ky-head .pn-h { flex: 1 1 auto; margin: 0; }
+.pn-root .ky-mark { width: 28px; height: 28px; flex: 0 0 auto; border-radius: 8px; }
+.pn-root .ky-mark-d, body.dark .pn-root .ky-mark-l { display: none; }
+body.dark .pn-root .ky-mark-d { display: block; }
+.pn-root .ky-info { display: inline-flex; vertical-align: -4px; padding: 4px; margin: -4px 0; }
+.pn-root .ky-info svg { width: 16px; height: 16px; }
+.pn-root .ky-ib { width: 36px; height: 36px; flex: 0 0 auto; border: 1px solid var(--pn-edge); border-radius: 50%; background: var(--pn-card); display: inline-flex; align-items: center; justify-content: center; }
+.pn-root .ky-ib svg { width: 18px; height: 18px; }
+.pn-root .ky-sub { margin: 2px 0 10px; color: var(--pn-mut); font-size: 13px; }
+.pn-root .ky-card { background: var(--ky-bg); border: 1px solid var(--ky-line); border-radius: var(--pn-r-md); margin: 8px 0; overflow: hidden; }
+.pn-root .ky-card > summary { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; list-style: none; min-height: 44px; }
+.pn-root .ky-card > summary::-webkit-details-marker { display: none; }
+.pn-root .ky-card > summary .ky-t { flex: 1 1 auto; font-weight: 700; font-size: 15px; color: var(--ky-text); }
+.pn-root .ky-card > summary .ky-n { font-size: 13px; color: var(--ky-mut); }
+.pn-root .ky-card > summary .ky-chev { transition: transform var(--pn-d-quick) var(--pn-ease); color: var(--ky-mut); }
+.pn-root .ky-card[open] > summary .ky-chev { transform: rotate(180deg); }
+.pn-root .ky-card .ky-b { border-top: 1px solid var(--ky-line); padding: 6px 14px 12px; }
+.pn-root .ky-topic { display: flex; align-items: baseline; gap: 8px; padding: 8px 0; border-top: 1px solid var(--ky-line); }
+.pn-root .ky-topic:first-child { border-top: 0; }
+.pn-root .ky-topic .ky-tt { flex: 1 1 auto; min-width: 0; }
+.pn-root .ky-topic .ky-tt b { display: block; font-size: 14px; color: var(--ky-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-root .ky-topic .ky-tt small { display: block; font-size: 12px; color: var(--ky-mut); margin-top: 1px; }
+.pn-root .ky-tier { flex: 0 0 auto; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: var(--pn-r-pill); border: 1px solid var(--ky-edge); color: var(--ky-silver); }
+.pn-root .ky-tier.diamond { color: var(--ky-diamond); }
+.pn-root .ky-tier.platinum { color: var(--ky-platinum); }
+.pn-root .ky-tier.gold { color: var(--ky-gold); }
+.pn-root .ky-due { list-style: none; margin: 0; padding: 0; }
+.pn-root .ky-due li { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--ky-line); min-height: 44px; }
+.pn-root .ky-due li:first-child { border-top: 0; }
+.pn-root .ky-due .ky-dt { flex: 1 1 auto; font-size: 14px; color: var(--ky-text); min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-root .ky-empty { margin: 0; padding: 12px 0; color: var(--ky-mut); font-size: 14px; }
+.pn-root .ky-pair { border-top: 1px solid var(--ky-line); padding: 10px 0; }
+.pn-root .ky-pair:first-child { border-top: 0; }
+.pn-root .ky-pair p { margin: 0 0 6px; font-size: 14px; color: var(--ky-text); }
+.pn-root .ky-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 8px; }
+.pn-root .ky-vs div { background: var(--ky-bg2); border: 1px solid var(--ky-line); border-radius: var(--pn-r-sm); padding: 8px 10px; font-size: 13px; color: var(--ky-text); overflow-wrap: break-word; }
+.pn-root .ky-vs div small { display: block; font-size: 11px; color: var(--ky-mut); margin-bottom: 2px; }
+.pn-root .ky-rowbtns { display: flex; flex-wrap: wrap; gap: 8px; }
+.pn-root .ky-ask { width: 100%; margin-top: 8px; justify-content: center; }
+/* Capture row additions: the pair tick sits under the chips; the intro card never shifts options. */
+.pn-root .ky-cap .ky-pair { border-top: 0; padding: 6px 0 0; }
+.pn-root .ky-intro { display: flex; gap: 12px; background: var(--ky-bg); border: 1px solid var(--ky-line); border-radius: var(--pn-r-md); padding: 12px 14px; margin: 0 0 12px; }
+.pn-root .ky-intro .ky-mark { width: 40px; height: 40px; }
+.pn-root .ky-intro p { margin: 0 0 6px; font-size: 14px; }
+.pn-root .ky-intro .pn-navrow { margin-top: 8px; }
+.pn-root .ky-note { color: var(--ky-mut); font-size: 12px; margin: 6px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .ky-card > summary .ky-chev { transition: none; }
+}
+@media (min-width: 700px) {
+  .pn-root .ky-vs { gap: 12px; }
+}

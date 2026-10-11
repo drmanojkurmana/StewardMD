@@ -1075,6 +1075,164 @@
 
   /* ---------- home ---------- */
   function arenaOn() { return !!(G.PREP_ARENA && G.PREP_ARENA.enabled()); }
+  /* KnowYourIQ section (My coaching): importance sources, view, names, section and result cards.
+     All numbers come from the student's own answers on this device; nothing is predicted. */
+  function coachSrc(exam) {
+    var bp = null;
+    try {
+      var P = G.PREP_PROFILES && G.PREP_PROFILES.profiles && G.PREP_PROFILES.profiles[exam];
+      if (P && P.blueprint && P.blueprint.kind === "official_counts") {
+        var tot = 0, ks = Object.keys(P.blueprint.subjects);
+        ks.forEach(function (k) { tot += P.blueprint.subjects[k]; });
+        if (tot > 0) { bp = {}; ks.forEach(function (k) { bp[k] = Math.round(P.blueprint.subjects[k] / tot * 100) / 100; }); }
+      }
+    } catch (e) { bp = null; }
+    var pyq = null;
+    try {
+      var items = G.PREP_PYQ && G.PREP_PYQ._st && G.PREP_PYQ._st.items;
+      if (items && items.length) {
+        var counts = {}, n = 0;
+        items.forEach(function (it) { if (it._s && it._s !== "pyq") { counts[it._s] = (counts[it._s] || 0) + 1; n++; } });
+        if (n >= 5) { pyq = {}; Object.keys(counts).forEach(function (k) { pyq[k] = Math.round(counts[k] / n * 100) / 100; }); }
+      }
+    } catch (e) { pyq = null; }
+    return { blueprint: bp, pyq: pyq, data: G.PREP_KYIQ_DATA || null };
+  }
+  function coachView(s, exam) {
+    var CO = G.PREP_COACH;
+    if (!CO) return { topics: [] };
+    return CO.analyze(s.coach_t || {}, exam, coachSrc(exam));
+  }
+  function coachTopicName(t) {
+    var p = String(t || "").split("|"), sb = subjectById(p[0]), tp = topicOf(p[0], p[1]);
+    var sn = sb ? tx(sb.name) : esc(p[0] || "?"), tn = tp ? tx(tp.title) : esc(p[1] || "?");
+    return sn === tn ? sn : sn + " · " + tn;
+  }
+  function kyMark(size) {
+    var s = size || 28;
+    return '<img class="ky-mark ky-mark-l" src="/prep/art/knowyouriq-mark-light-40.webp" srcset="/prep/art/knowyouriq-mark-light-40.webp 1x, /prep/art/knowyouriq-mark-light-80.webp 2x, /prep/art/knowyouriq-mark-light-120.webp 3x" alt="" width="' + s + '" height="' + s + '">' +
+      '<img class="ky-mark ky-mark-d" src="/prep/art/knowyouriq-mark-40.webp" srcset="/prep/art/knowyouriq-mark-40.webp 1x, /prep/art/knowyouriq-mark-80.webp 2x, /prep/art/knowyouriq-mark-120.webp 3x" alt="" width="' + s + '" height="' + s + '">';
+  }
+  function kyTierChip(x) {
+    if (!x.tier) return "";
+    return ' <span class="ky-tier ' + x.tier + '" title="' + esc(x.tierWhy) + '">' + esc(x.tierLabel) + "</span>";
+  }
+  /* coachSecHtml(kind): "home" is the full section (due, groups, pairs, Ask); "tests" is due + Ask. */
+  function coachSecHtml(kind) {
+    var CO = G.PREP_COACH;
+    if (!CO) return "";
+    var K = CO.KYIQ, s = load(), exam = s.exam, td = today();
+    var view = coachView(s, exam), due = CO.dueToday(s, td).coach, pairs = CO.topPairs(s.coach_pairs, 3);
+    var grouped = view.topics.filter(function (x) { return x.group !== "fresh"; });
+    var freshN = view.topics.length - grouped.length;
+    var h = '<section class="ky-sec" aria-label="My coaching"><div class="ky-head">' + kyMark(28) +
+      '<h2 class="pn-h">My coaching</h2><button type="button" class="ky-ib" data-act="kyinfo" aria-label="About KnowYourIQ" aria-pressed="' + !!st.kySecInfo + '">' + ico("info") + "</button></div>" +
+      '<p class="ky-sub">' + esc(K.NAME) + " · " + esc(K.TAGLINE) + "</p>";
+    if (st.kySecInfo) h += '<p class="ky-note">' + esc(K.NOTEST) + ' Groups build from your own answers on this phone: answer ' + K.MIN_N + " questions on a topic to see its group and tier.</p>";
+    if (!view.topics.length) {
+      return h + '<p class="ky-empty">Answer ' + K.MIN_N + " questions on a topic to see your group. Tap how sure you are on each question, or skip it: skipping changes nothing.</p></section>";
+    }
+    h += '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="pn-sec">Due today</p>' +
+      (due.length ? '<ul class="ky-due">' + due.map(function (t) {
+        return '<li><span class="ky-dt">' + coachTopicName(t) + '</span><button type="button" class="pn-btn sm" data-act="kyDueRun" data-t="' + esc(t) + '">Practise</button></li>';
+      }).join("") + "</ul>" : '<p class="ky-empty">Nothing due today.</p>') + "</div></div>";
+    if (kind === "home") {
+      h += ["reread", "revise", "ready"].map(function (g) {
+        var ts = view.topics.filter(function (x) { return x.group === g; });
+        return '<details class="ky-card"' + (g === "reread" && ts.length ? " open" : "") + ">" +
+          '<summary><span class="ky-t">' + esc(CO.GROUPS[g]) + '</span><span class="ky-n">' + ts.length + "</span>" + ico("chev").replace("<svg", '<svg class="ky-chev"') + "</summary>" +
+          '<div class="ky-b">' + (ts.length ? ts.slice(0, 8).map(function (x) {
+            return '<div class="ky-topic"><span class="ky-tt"><b>' + coachTopicName(x.t) + "</b><small>" + esc(x.why) + (x.tier ? " " + esc(x.tierWhy) : "") + "</small></span>" + kyTierChip(x) + "</div>";
+          }).join("") : '<p class="ky-empty">' + (g === "ready" ? "Nothing here yet: Exam ready needs " + K.MIN_N + "+ answers over " + K.READY_DAYS_MIN + "+ days." : "Nothing here.") + "</p>") + "</div></details>";
+      }).join("");
+      if (freshN) h += '<p class="ky-note">' + freshN + " more topic" + (freshN === 1 ? " needs " : "s need ") + K.MIN_N + " answers first.</p>";
+      if (pairs.length) {
+        h += '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="pn-sec">Mixed-up pairs</p>' + pairs.map(function (e, i) {
+          return '<div class="ky-pair"><p>' + esc(CO.pairLine(e)) + '</p><div class="ky-vs"><div><small>Option ' + "ABCDEF"[e.a] + "</small>" + esc(e.ta) + '</div><div><small>Option ' + "ABCDEF"[e.b] + "</small>" + esc(e.tb) + '</div></div>' +
+            '<div class="ky-rowbtns"><button type="button" class="pn-btn sm" data-act="kyPairQ" data-t="' + esc(e.t) + '" data-q="' + esc(e.q) + '">Practise this question</button>' +
+            '<button type="button" class="pn-link" data-act="kyPairT" data-t="' + esc(e.t) + '">Practise ' + coachTopicName(e.t) + "</button></div></div>";
+        }).join("") + '<p class="ky-note">Why they differ, with KB comparisons when the question links any, shows with each question.</p></div></div>';
+      }
+    }
+    if (grouped.length && G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
+    return h + "</section>";
+  }
+  /* coachResultHtml(r): this run's confidence outcomes (honest counts) plus where to revise first. */
+  function coachResultHtml(r) {
+    var CO = G.PREP_COACH;
+    if (!CO || !r || !r.items) return "";
+    var K = CO.KYIQ, n = { misconception: 0, confused: 0, lucky: 0, tagged: 0 };
+    r.items.forEach(function (it, i) {
+      var c = r.conf && r.conf[i], oc = CO.outcome(r.ans[i] < 0 ? null : r.ans[i] === it.a ? 1 : 0, c);
+      if (c) n.tagged++;
+      if (n[oc] != null && oc !== "tagged") n[oc]++;
+    });
+    if (!n.tagged) return "";
+    var s = load(), view = coachView(s, s.exam), first = null;
+    view.topics.forEach(function (x) { if (!first && x.group !== "fresh" && x.group !== "ready") first = x; });
+    var bits = [];
+    if (n.misconception) bits.push("<b>" + n.misconception + "</b> confident-wrong (misconceptions to fix first)");
+    if (n.confused) bits.push("<b>" + n.confused + "</b> confused between options");
+    if (n.lucky) bits.push("<b>" + n.lucky + "</b> guessed right (lucky, not mastered)");
+    var h = '<section class="ky-sec" aria-label="KnowYourIQ result"><div class="ky-head">' + kyMark(28) +
+      '<h2 class="pn-h">' + esc(K.NAME) + ": this test</h2></div>" +
+      '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="ky-empty">You tagged ' + n.tagged + " of " + r.items.length + ": " + (bits.join(" · ") || "no misconceptions, confused or lucky answers.") + "</p>" +
+      (first ? '<p class="ky-empty">Revise first: <b>' + coachTopicName(first.t) + "</b>" + kyTierChip(first) + " <small>" + esc(first.tierWhy || first.why) + "</small></p>" : "") +
+      "</div></div>";
+    if (G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
+    return h + "</section>";
+  }
+  /* After a run finishes: file each attempted topic's next review from its current group. Fresh
+     topics (under N answers) are left alone: no group, no due date. */
+  function coachFileReviews(r) {
+    var CO = G.PREP_COACH;
+    if (!CO || !r || !r.items) return;
+    try {
+      var s = load(), td = today(), seen = {}, ts = [];
+      r.items.forEach(function (it, i) {
+        if (it._gone || r.ans[i] < 0 || !it._s || !(it._m || it.t)) return;
+        var t = CO.topicKey(it._s, it._m || it.t);
+        if (!seen[t]) { seen[t] = 1; ts.push(t); }
+      });
+      if (!ts.length) return;
+      var view = coachView(s, s.exam), by = {};
+      view.topics.forEach(function (x) { by[x.t] = x.group; });
+      ts.forEach(function (t) { if (by[t] && by[t] !== "fresh") CO.noteReview(s, t, by[t], td); });
+      save();
+    } catch (e) {}
+  }
+  /* "Ask MaiK about my KnowYourIQ": the existing sheet with the compact structured summary as
+     context. The on-phone model writes the plain-language plan; if it cannot, the standard
+     MaiK Cloud handoff applies. No per-attempt LLM call is needed for the screens themselves. */
+  function coachAskOpen() {
+    var CO = G.PREP_COACH;
+    if (!CO || !G.PREP_ASK) return false;
+    var s = load(), view = coachView(s, s.exam), due = CO.dueToday(s, today()).coach;
+    var pairs = CO.topPairs(s.coach_pairs, 4);
+    var title = CO.KYIQ.NAME + ": what should I revise?";
+    return G.PREP_ASK.open({ kind: "card", fr: title, bk: CO.summaryText(view, s.exam, due, pairs), title: title, ask: "What should I revise first?" }, HOST);
+  }
+  /* Practise actions from the section: the pair's topic as a study set, or the pair's own question. */
+  function kySplitT(t) { var p = String(t || "").split("|"); return { s: p[0], m: p[1] }; }
+  function kyTopicRun(t) {
+    var p = kySplitT(t);
+    if (!p.s || !p.m) return;
+    loadModule(p.s, p.m).then(function (items) {
+      var hid = hidden(), pool = (items || []).filter(function (it) { return usable(it, hid); });
+      if (!pool.length) { toast("No questions in this topic on this phone yet."); return; }
+      runQuestions(pool, "study", "Revise: " + coachTopicName(t).replace(/<[^>]*>/g, ""));
+    }, function () { toast("This topic did not load. Check the connection and try again."); });
+  }
+  function kyPairRun(t, q) {
+    var p = kySplitT(t);
+    if (!p.s || !p.m || !q) return;
+    loadModule(p.s, p.m).then(function (items) {
+      var hit = null;
+      (items || []).forEach(function (it) { if (String(it.id) === String(q)) hit = it; });
+      if (!hit) { toast("That question is no longer in this topic. Practise the topic instead."); return; }
+      runQuestions([hit], "study", "Practise the pair");
+    }, function () { toast("This topic did not load. Check the connection and try again."); });
+  }
   // A row in a grouped list: icon, title, one line of detail, chevron.
   function row(act, icon, title, sub, attrs) {
     return '<button type="button" class="pn-row" data-act="' + act + '"' + (attrs || "") + '><span class="pn-ri" aria-hidden="true">' + icon + '</span><span class="pn-rb"><b>' + title + "</b><small>" + sub + "</small></span>" + ico("chev") + "</button>";
@@ -1101,6 +1259,8 @@
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
       (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
+      // KnowYourIQ (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
+      coachSecHtml("home") +
       // Question of the day (prep50): one bank question a day, the same for the whole day; drawn once the subject indexes
       // are read (below). Hidden offline when its module is not on this phone.
       (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd" id="pnQotd" hidden></section>') +
@@ -1713,7 +1873,7 @@
       if (r.ans.some(function (x) { return x >= 0; })) return "";
     }
     var K = CO.KYIQ;
-    return '<section class="ky-intro" aria-label="' + esc(K.NAME) + '"><img class="ky-mark" src="knowyouriq-mark.png" alt="" width="40" height="40" onerror="this.style.display=\'none\'">' +
+    return '<section class="ky-intro" aria-label="' + esc(K.NAME) + '">' + kyMark(40) +
       "<div><p><b>" + esc(K.NAME) + "</b> · " + esc(K.TAGLINE) + "</p>" +
       "<p>Before or after you answer, tap how sure you are. Skipping changes nothing. Your groups build from your own answers, on this phone.</p>" +
       '<p class="pn-mut pn-small">' + esc(K.NOTEST) + "</p>" +
@@ -2044,6 +2204,8 @@
     if (r.custom) return r.custom.submit(r);
     if (r.qc) qcPause(r.qc, pnow());
     if (r.mode === "exam") r.items.forEach(function (it, i) { if (it._gone) return; var cf = r.conf && r.conf[i], cp = r.confPair && r.confPair[i], cm = (r.ms || [])[i] || 0; if (r.ans[i] >= 0) record(it, r.ans[i], { conf: cf, pair: cp, ms: cm }); else record(it, -1, cf); });
+    // KnowYourIQ: each attempted topic's next review, from its current group (fresh topics left alone).
+    coachFileReviews(r);
     // Tests 2: the attempt record (prep-assess.js result), daily completion, the saved session cleared.
     if (r.t2 && G.PREP_TESTS) { try { G.PREP_TESTS.finished(r); } catch (e) {} }
     if (r.save || r.psId) psSave(r);
@@ -2207,7 +2369,7 @@
     paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (t2h ? t2h : r.scheme ? mockAnalysis(r, cele) : '<section class="pn-panel pn-score"' + celeAttrs(cele) + ">" + celeChip(cele) +
       '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + '</svg>' +
       '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" && !r.saved ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + tstatHtml(r) + recapHtml(r) + "</section>" + splitHtml(r) + selfCurveHtml(pct, r)) + line +
-      (t2h ? "" : reviewHtml(r)) +
+      (t2h ? "" : coachResultHtml(r) + reviewHtml(r)) +
       '<div class="pn-navrow pn-again">' + (missed.length ? '<button type="button" class="pn-btn" data-act="retrymissed">' + (missed.length === r.items.length ? "Practise again" : "Practise the missed (" + missed.length + ")") + "</button>" : "") +
       (missed.length < r.items.length ? '<button type="button" class="pn-btn" data-act="retryall">Practise all again (' + r.items.length + ")</button>" : "") +
       '<button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>' +
@@ -2738,7 +2900,13 @@
       if (v === "never" && G.PREP_COACH) G.PREP_COACH.introDismiss(true);
       return renderRun();
     }
-    if (a === "kyinfo") { if (st.run) st.run.kyShow = !st.run.kyShow; return renderRun(); }
+    if (a === "kyinfo") {
+      if (st.run && !st.run.done) { st.run.kyShow = !st.run.kyShow; return renderRun(); }
+      st.kySecInfo = !st.kySecInfo; return rerender();
+    }
+    if (a === "kyAsk") { coachAskOpen(); return; }
+    if (a === "kyDueRun" || a === "kyPairT") return kyTopicRun(b.getAttribute("data-t"));
+    if (a === "kyPairQ") return kyPairRun(b.getAttribute("data-t"), b.getAttribute("data-q"));
     if (a === "qgrid") return openGrid();
     if (a === "goq") { var gi = Number(b.getAttribute("data-i")); if (st.run.sc && !inSec(st.run, gi)) return; st.run.i = gi; st.stack.pop(); return renderRun(); }
     if (a === "submit" && st.run && st.run.sc) return secSubmitAsk();
@@ -2887,6 +3055,7 @@
     stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, shuffle: shuffle, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut, cacheKeys: cacheKeys,
     // Tests 2 (prep-tests.js)
     cacheDel: cacheDel, loadMany: loadMany, hidden: hidden, loadingScreen: loadingScreen, stepMsg: stepMsg, topicOf: topicOf, fmtMin: fmtMin, examOf: examOf, getJSON: getJSON, t2solutions: t2solutionsHtml,
+    coachSec: coachSecHtml, coachResult: coachResultHtml, coachAsk: coachAskOpen,
     startPlan: startPlan, startWeak: startWeak, openCustom: function () { push(renderCustom); }, openMistakes: function () { mf.tag = "all"; push(renderMistakes); }, setTt: ttSet,
     planToday: function () { return planToday(load(), today()); }, staticBase: STATIC, pnow: function () { return pnow(); },
     openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits,

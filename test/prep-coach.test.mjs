@@ -280,3 +280,53 @@ test("intro state: device only, try/catch, never crashes in node", () => {
   assert.equal(C.introSeen(), false);
   assert.equal(C.introDismiss(true), true);
 });
+
+test("UI wiring: My coaching on home, tests and results, with the Ask entry", () => {
+  const J = fs.readFileSync(new URL("../prep.js", import.meta.url), "utf8");
+  const T = fs.readFileSync(new URL("../prep-tests.js", import.meta.url), "utf8");
+  const L = fs.readFileSync(new URL("../prep-loader.js", import.meta.url), "utf8");
+  assert.match(L, /"prep-knowyouriq-data\.js", "prep\.js"/, "importance data loads before prep.js");
+  assert.match(L, /"prep-coach\.css"/, "coach styles ship");
+  assert.match(J, /coachSecHtml\("home"\)/, "study home shows My coaching");
+  assert.match(T, /H\.coachSec\("tests"\)/, "tests home shows the due list");
+  assert.match(J, /coachResultHtml\(r\) \+ reviewHtml\(r\)/, "classic results show the coach card");
+  assert.match(T, /H\.coachResult\(r\)/, "test results show the coach card");
+  assert.match(J, /Ask MaiK about my " \+ K\.NAME/, "Ask entry carries the KnowYourIQ name");
+  assert.match(J, /kind: "card", fr: title, bk: CO\.summaryText/, "Ask opens the existing sheet with the compact summary");
+  assert.match(J, /coachFileReviews\(r\)/, "finishing files each topic's next review");
+  for (const f of ["coachSrc", "coachView", "coachTopicName", "kyMark", "kyTierChip", "coachSecHtml",
+    "coachResultHtml", "coachFileReviews", "coachAskOpen", "kyTopicRun", "kyPairRun", "confRowHtml", "kyIntroHtml", "coachSlowMs"])
+    assert.match(J, new RegExp("function " + f + "\\("), f + " is defined");
+  assert.match(J, /coachSec: coachSecHtml, coachResult: coachResultHtml, coachAsk: coachAskOpen/, "HOST exposes the coach builders");
+  for (const a of ["kyAsk", "kyDueRun", "kyPairT", "kyPairQ", "kyinfo", "kyintro", "confpair"])
+    assert.ok(J.includes('"' + a + '"'), "act " + a + " is routed");
+});
+
+test("Ask sheet: a card may carry its own first question", () => {
+  const Q = fs.readFileSync(new URL("../prep-ask.js", import.meta.url), "utf8");
+  assert.match(Q, /ask: ctx\.ask \|\| null/, "open() keeps the card's ask");
+  assert.match(Q, /return c\.ask \|\| "Explain this card another way\."/, "the card's ask becomes the first question");
+});
+
+test("mark assets: symbol-only webp at 1x/2x/3x, light and dark, shipped", () => {
+  const art = new URL("../prep/art/", import.meta.url);
+  for (const s of [40, 80, 120]) {
+    for (const f of [`knowyouriq-mark-${s}.webp`, `knowyouriq-mark-light-${s}.webp`]) {
+      const st = fs.statSync(new URL(f, art));
+      assert.ok(st.size > 500 && st.size < 30000, f + " ships small (" + st.size + " B)");
+    }
+  }
+  assert.ok(fs.existsSync(new URL("knowyouriq-mark-4k.png", art)), "transparent master kept out of the bundle");
+  const build = fs.readFileSync(new URL("../scripts/build-www.sh", import.meta.url), "utf8");
+  assert.match(build, /prep\/art.*\*\.webp/, "art webp ships to the app bundle");
+});
+
+test("coach styles: owner palette, no glows, light and dark, reduced motion", () => {
+  const rawCss = fs.readFileSync(new URL("../prep-coach.css", import.meta.url), "utf8");
+  const css = rawCss.replace(/\/\*[\s\S]*?\*\//g, "");
+  assert.match(css, /#071318/); assert.match(css, /#0d1d23/i); assert.match(css, /#42cdb5/i);
+  assert.doesNotMatch(css, /box-shadow|text-shadow|backdrop|linear-gradient|radial-gradient/);
+  assert.match(css, /body\.dark \.pn-root/);
+  assert.match(css, /prefers-reduced-motion/);
+  assert.doesNotMatch(css, /percentile|predicted score/i);
+});
