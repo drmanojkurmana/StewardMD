@@ -1,29 +1,33 @@
 /* PrepNucleus Tests 2 (Tests & Assessment Engine M1, 2026-10-10): the Tests tab's test types on the official exam
-   profiles. window.PREP_TESTS. ES5. Flag smd_prep_tests2, default ON (owner 2026-10-11, TestFlight testers only): localStorage smd_prep_tests2 = "0" or ?tests2=0 turns it off; "1" or ?tests2=1
-   turns it on ("0" / ?tests2=0 off). Off, the Tests tab is exactly as before (prep.js MOCKS, one overall timer).
+   profiles. window.PREP_TESTS. ES5. Flag smd_prep_tests2, default ON for all (owner 2026-10-11): localStorage
+   smd_prep_tests2 = "0" or ?tests2=0 turns it off; "1" or ?tests2=1 turns it on. Off, the Tests tab is exactly as
+   before (prep.js MOCKS, one overall timer).
 
-   On, the Tests segment lists, for the exam tab:
+   On, the Tests segment lists, for the exam tab, grouped by exam then by format (owner 2026-10-11, collapsible):
    - an interrupted test to resume (saved in IndexedDB "prep-bank" / "files" under run:t2 at every answer and every 5 s);
+   - one collapsible exam section per profile (prep/assess/profiles via prep-profiles.js), the student's exam first and
+     open, the rest closed: the full exam in its official locked timed sections (NEET-PG 180 = 5 x 36 x 42 min; INI-CET
+     200 = 4 x 50 x 45 min; FMGE 2 parts x 3 x 50 x 50 min; NEET-SS 150 = 3 x 50 x 50 min; USMLE Step 1 blocks of 20 in
+     30 min), one section, one FMGE part; the NEET-PG pattern of earlier years (200 questions, one timer) as "previous
+     format practice" in Grand tests;
+   - inside each exam, one collapsible group per format (Daily 10, Grand, Part, Mini, Subject, Topic, Image, PYQ,
+     Custom/diagnostic), each with its engine starter and its ready-made papers (tools/prep-fixed-tests.mjs, R2
+     prep-bank/v1/tests/, same for every student) with completion status; Daily 10 and Grand open by default, the rest
+     closed; big groups show the first 6 with Show all, and a filter box past 20; a sticky jump bar jumps to a format;
    - Daily 10: exactly 10 questions at the exam's own pace (10 x seconds a question), the same 10 all day (seed = exam +
      IST date), counted once a day (prep-assess.js dailyComplete; a retry is practice);
-   - one card per exam profile (prep/assess/profiles via prep-profiles.js): the full exam in its official locked timed
-     sections (NEET-PG 180 = 5 x 36 x 42 min; INI-CET 200 = 4 x 50 x 45 min; FMGE 2 parts x 3 x 50 x 50 min; NEET-SS
-     150 = 3 x 50 x 50 min; USMLE Step 1 blocks of 20 in 30 min), one section, one FMGE part; INI-SS only as a labelled
-     provisional pattern; the NEET-PG pattern of earlier years (200 questions, one timer) as "previous format practice";
-   - practice tests: subject, topic, adaptive diagnostic, Today's set, weak areas, My mistakes, custom and the previous
-     year papers (NEET-PG), each only when it has questions;
-   - ready-made tests (tools/prep-fixed-tests.mjs, R2 prep-bank/v1/tests/): the same fixed papers for every student,
-     grouped by format with their completion status; formats with no papers are hidden, and the section stays hidden
-     until papers are published.
-   A card shows the count, the time, the exam, the scope and the completion status. Before a test starts, a screen says
-   what the assembly found: the size (reduced, and why, when the bank cannot fill the blueprint) and every deviation.
-   Image-based and case-based test types are not offered yet: the bank index has no count of image items and items carry
-   no case flag (the type filter inside a set still works). The runner, marking, timer line and review are prep.js's. */
+   - practice: subject and topic pickers inside their groups, adaptive diagnostic and custom inside Custom/diagnostic,
+     Today's set, weak areas, My mistakes and the statistics switch once under Your practice, the previous year papers
+     (NEET-PG recall) inside that exam's PYQ group, each only when it has questions.
+   Collapsed groups render lazily (no paper rows until opened) so the tab opens instantly with 800+ papers; open state
+   persists per exam in localStorage smd_prep_t2grp. A group header shows the name, the paper count and the done count.
+   Before a test starts, a screen says what the assembly found: the size (reduced, and why, when the bank cannot fill
+   the blueprint) and every deviation. The runner, marking, timer line and review are prep.js's. */
 (function (G) {
   "use strict";
   var A = G.PREP_ASSESS, D = G.document, FLAG = "smd_prep_tests2", RUN_KEY = "run:t2", REC_KEY = "t2r:";
   var FX_VER = "v1";   // fixed papers version (tools/prep-fixed-tests.mjs TESTS_VER; bumped together)
-  var P = { sess: undefined, sessP: null, cov: {}, qual: null, qualP: null, lastSave: 0, pick: null, fx: null, fxP: null, fxm: {} };
+  var P = { sess: undefined, sessP: null, cov: {}, qual: null, qualP: null, lastSave: 0, pick: null, fx: null, fxP: null, fxm: {}, grpShow: {}, grpQ: {}, grpLis: false };
   var H = null;
 
   function on() {
@@ -54,7 +58,32 @@
   function typeName(t) { return { grand: "Full exam", part: "One part", mini: "One section", daily10: "Daily 10", subject_mini: "Subject test", topic: "Topic test", diagnostic: "Adaptive diagnostic", custom: "Custom" }[t] || t; }
   function lastOf(pid, type) { var h = store().t2h, r = null; h.forEach(function (x) { if (x.exam === pid && x.type === type) r = x; }); return r; }
   function lastOfPaper(id) { var h = store().t2h, r = null; h.forEach(function (x) { if (x.paper === id) r = x; }); return r; }
-  function fxFormatName(f) { return { grand: "Grand tests", part: "Part tests", mini: "Section tests", subject_mini: "Subject tests", topic: "Topic tests", daily10: "Daily 10 sets", image: "Image tests", pyq: "PYQ sets" }[f] || f; }
+  function fxFormatName(f) { return { grand: "Grand tests", part: "Part tests", mini: "Mini tests", subject_mini: "Subject tests", topic: "Topic tests", daily10: "Daily 10", image: "Image tests", pyq: "PYQ papers" }[f] || f; }
+  /* Collapsible grouping (pure helpers, tested in test/prep-tests-collapse.test.mjs). */
+  var GRP_KEY = "smd_prep_t2grp";
+  var GRP_ORDER = ["daily10", "grand", "part", "mini", "subject_mini", "topic", "image", "pyq", "custom"];
+  var GRP_NAME = { daily10: "Daily 10", grand: "Grand tests", part: "Part tests", mini: "Mini tests", subject_mini: "Subject tests", topic: "Topic tests", image: "Image tests", pyq: "PYQ papers", custom: "Custom/diagnostic" };
+  var GRP_SHORT = { daily10: "Daily 10", grand: "Grand", part: "Part", mini: "Mini", subject_mini: "Subject", topic: "Topic", image: "Image", pyq: "PYQ", custom: "Custom" };
+  var GRP_FIRST = 6, GRP_SEARCH_AT = 20;
+  function grpName(f) { return GRP_NAME[f] || fxFormatName(f); }
+  function grpShort(f) { return GRP_SHORT[f] || f; }
+  function examOrder(list, primaryId) { var out = [], rest = []; (list || []).forEach(function (p) { if (p.id === primaryId) out.push(p); else rest.push(p); }); return out.concat(rest); }
+  function fxFor(papers, examId, format) { return (papers || []).filter(function (r) { return r.exam === examId && r.format === format; }); }
+  function paperDone(t2h, paperId) { var d = false; (t2h || []).forEach(function (x) { if (x.paper === paperId) d = true; }); return d; }
+  function engineDone(t2h, pid, type) { var d = false; (t2h || []).forEach(function (x) { if (x.exam === pid && x.type === type && !x.paper) d = true; }); return d; }
+  function dailyDoneByKey(t2d, key) { return !!(t2d && key && t2d[key]); }
+  function countFxDone(list, t2h) { var n = 0; (list || []).forEach(function (r) { if (paperDone(t2h, r.id)) n++; }); return n; }
+  function defaultExamOpen(examId, primaryId) { return examId === primaryId; }
+  function defaultGrpOpen(examId, primaryId, format) { return examId === primaryId && (format === "daily10" || format === "grand"); }
+  function loadGrp() { try { var v = G.localStorage.getItem(GRP_KEY); if (!v) return { v: 1, exams: {} }; var o = JSON.parse(v); if (!o || typeof o !== "object" || !o.exams) return { v: 1, exams: {} }; return o; } catch (e) { return { v: 1, exams: {} }; } }
+  function saveGrp(st) { try { G.localStorage.setItem(GRP_KEY, JSON.stringify(st)); } catch (e) {} return st; }
+  function grpIsOpen(st, examId, primaryId, format) { try { var e = st && st.exams && st.exams[examId]; if (e && e.groups && Object.prototype.hasOwnProperty.call(e.groups, format)) return !!e.groups[format]; } catch (e2) {} return defaultGrpOpen(examId, primaryId, format); }
+  function examIsOpen(st, examId, primaryId) { try { var e = st && st.exams && st.exams[examId]; if (e && Object.prototype.hasOwnProperty.call(e, "open")) return !!e.open; } catch (e2) {} return defaultExamOpen(examId, primaryId); }
+  function setGrpOpen(st, examId, format, open) { st = st && st.exams ? st : { v: 1, exams: {} }; var e = st.exams[examId] || (st.exams[examId] = {}); var g = e.groups || (e.groups = {}); g[format] = !!open; return saveGrp(st); }
+  function setExamOpen(st, examId, open) { st = st && st.exams ? st : { v: 1, exams: {} }; var e = st.exams[examId] || (st.exams[examId] = {}); e.open = !!open; return saveGrp(st); }
+  function filterFx(papers, q) { q = String(q || "").toLowerCase().replace(/^\s+|\s+$/g, ""); if (!q) return papers || []; return (papers || []).filter(function (r) { return String(r.title + " " + (r.scope || "") + " " + r.id).toLowerCase().indexOf(q) >= 0; }); }
+  function visibleFx(papers, showAll) { papers = papers || []; if (showAll || papers.length <= GRP_FIRST) return papers; return papers.slice(0, GRP_FIRST); }
+  function grpKey(pid, f) { return pid + "|" + f; }
 
   /* ---------- saved session ---------- */
   function loadSess() {
@@ -106,47 +135,151 @@
   }
 
   /* ---------- the Tests segment ---------- */
-  function card(p, H0) {
-    var f = p.format, secs = f.sections, n1 = secs[0], parts = f.parts, prov = p.status !== "official";
-    var shape = p.id === "usmle-step1" ? "Blocks of up to " + f.block_max_items + " questions, " + n1.minutes + " min each; the full exam has " + secs.length + " blocks"
-      : parts ? f.questions + " questions in " + parts + " parts of " + (f.questions / parts) + ", each in " + (secs.length / parts) + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min"
-      : secs.length > 1 ? f.questions + " questions in " + secs.length + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min"
-      : f.questions + " questions, " + mins(f.duration_min * 60);
-    var pass = p.scoring.pass ? " " + (p.scoring.pass.label || "Pass mark") + " " + p.scoring.pass.marks + " of " + p.scoring.pass.of + "." : "";
-    var bG = A.blueprint(p, "grand"), bM = A.blueprint(p, "mini"), bP = A.blueprint(p, "part");
-    function btn(type, b, label, pri) { var l = lastOf(p.id, type); return '<button type="button" class="pn-btn pn-t2btn' + (pri ? " pri" : "") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="' + type + '" data-need="' + b.min_viable + '"><span class="pn-t2bl">' + H.ico("clock") + "<span>" + esc(label) + "</span></span>" + (l ? '<small class="pn-t2last">Last ' + esc(fmtMarks(l.raw)) + " of " + l.max + " · " + dm(l.ts) + "</small>" : "") + "</button>"; }
-    var btns = "";
-    if (p.id === "usmle-step1") btns = btn("mini", bM, "One block: " + bM.count + " questions, " + mins(bM.duration_sec), true) + btn("grand", bG, "Full exam: " + bG.count + " questions, " + mins(bG.duration_sec));
-    else {
-      btns = btn("grand", bG, (prov ? "Practice test: " : "Full exam: ") + bG.count + " questions, " + mins(bG.duration_sec), true);
-      if (bP) btns += btn("part", bP, "One part: " + bP.count + " questions, " + mins(bP.duration_sec));
-      if (bM) btns += btn("mini", bM, "One section: " + bM.count + " questions, " + mins(bM.duration_sec));
-    }
-    var prev = p.legacy_mock && p.id === "neet-pg" ? '<button type="button" class="pn-link pn-t2prev" data-act="t2-legacy" data-v="' + p.legacy_mock.id + '">Previous format practice: ' + p.legacy_mock.n + " questions, one timer</button>" : "";
-    return '<section class="pn-panel pn-t2c" data-p="' + p.id + '"><div class="pn-t2h"><p class="pn-big pn-mid">' + esc(p.name) + '</p><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Official format") + "</span></div>" +
-      '<p class="pn-mut">' + esc(shape) + ". " + esc(marking(p)) + "." + pass + "</p>" + btns + prev +
-      '<p class="pn-mut pn-small pn-t2src">' + esc(srcLine(p)) + (p.blueprint.kind === "official_counts" ? " Subject quotas from the official blueprint." : " No official subject split: questions are spread across the subjects in proportion to the bank.") + "</p></section>";
+  function examShape(p) {
+    var f = p.format, secs = f.sections, n1 = secs[0], parts = f.parts;
+    if (p.id === "usmle-step1") return "Blocks of up to " + f.block_max_items + " questions, " + n1.minutes + " min each; the full exam has " + secs.length + " blocks";
+    if (parts) return f.questions + " questions in " + parts + " parts of " + (f.questions / parts) + ", each in " + (secs.length / parts) + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min";
+    if (secs.length > 1) return f.questions + " questions in " + secs.length + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min";
+    return f.questions + " questions, " + mins(f.duration_min * 60);
+  }
+  function examPass(p) { return p.scoring.pass ? " " + (p.scoring.pass.label || "Pass mark") + " " + p.scoring.pass.marks + " of " + p.scoring.pass.of + "." : ""; }
+  function examInfoHtml(p) {
+    return '<p class="pn-mut pn-small">' + esc(examShape(p)) + ". " + esc(marking(p)) + "." + esc(examPass(p)) + "</p>" +
+      '<p class="pn-mut pn-small pn-t2src">' + esc(srcLine(p)) + (p.blueprint.kind === "official_counts" ? " Subject quotas from the official blueprint." : " No official subject split: questions are spread across the subjects in proportion to the bank.") + "</p>";
+  }
+  function covKnown() { try { var v = P.cov[tab()]; return typeof v === "number" ? v : null; } catch (e) { return null; } }
+  function engineBtn(p, type, b, label, pri) {
+    var l = lastOf(p.id, type), cov = covKnown(), short = cov != null && cov < b.min_viable;
+    return '<button type="button" class="pn-btn pn-t2btn' + (pri ? " pri" : "") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="' + type + '" data-need="' + b.min_viable + '"' + (short ? ' disabled aria-disabled="true"' : "") + '><span class="pn-t2bl">' + H.ico("clock") + "<span>" + esc(label) + "</span></span>" +
+      (l ? '<small class="pn-t2last">Last ' + esc(fmtMarks(l.raw)) + " of " + l.max + " · " + dm(l.ts) + "</small>" : "") +
+      (short ? '<small class="pn-t2last">Not enough questions in the bank yet</small>' : "") + "</button>";
+  }
+  function grandEngineHtml(p) {
+    var prov = p.status !== "official", b = A.blueprint(p, "grand");
+    if (!b) return "";
+    if (p.id === "usmle-step1") return engineBtn(p, "grand", b, "Full exam: " + b.count + " questions, " + mins(b.duration_sec), false);
+    return engineBtn(p, "grand", b, (prov ? "Practice test: " : "Full exam: ") + b.count + " questions, " + mins(b.duration_sec), true);
+  }
+  function partEngineHtml(p) { var b = A.blueprint(p, "part"); if (!b) return ""; return engineBtn(p, "part", b, "One part: " + b.count + " questions, " + mins(b.duration_sec), false); }
+  function miniEngineHtml(p) {
+    var b = A.blueprint(p, "mini"); if (!b) return "";
+    if (p.id === "usmle-step1") return engineBtn(p, "mini", b, "One block: " + b.count + " questions, " + mins(b.duration_sec), true);
+    return engineBtn(p, "mini", b, "One section: " + b.count + " questions, " + mins(b.duration_sec), false);
+  }
+  function dailyEngineHtml(p) {
+    var b = A.blueprint(p, "daily10"), key = A.dailyKey(p.id, Date.now()), d = null;
+    try { d = store().t2d[key]; } catch (e) { d = null; }
+    var cov = covKnown(), short = cov != null && cov < 10;
+    return '<div class="pn-t2dline"><div class="pn-t2h"><p class="pn-t2eb">Today\'s set: 10 questions, about ' + mins(b.duration_sec) + "</p>" + (d ? '<span class="pn-t2b ok">' + H.ico("check") + " Done today</span>" : '<span class="pn-t2b">Not done today</span>') + "</div>" +
+      '<p class="pn-mut pn-small">' + esc(p.name) + " pace (" + b.pace + " s a question) and marking. Mixed subjects; the same 10 all day." + (d ? " Today: " + d.correct + " of 10 right, " + fmtMarks(d.raw) + " of " + d.max + " marks. A retry is practice and is not counted again." : "") + "</p>" +
+      '<button type="button" class="pn-btn' + (d ? "" : " pri") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="daily10" data-need="10"' + (short ? ' disabled aria-disabled="true"' : "") + ">" + H.ico("play") + (d ? " Practise again" : " Start Daily 10") + "</button>" +
+      (short ? '<p class="pn-mut pn-small">Not enough questions in the bank yet.</p>' : "") + "</div>";
+  }
+  function pickerRowHtml(p, format) {
+    if (format === "subject_mini") return H.row("t2-pick", H.ico("grid"), "Build a subject test", "20 questions from one subject, " + esc(p.name) + " marking", ' data-k="subject_mini" data-p="' + p.id + '"');
+    if (format === "topic") return H.row("t2-pick", H.ico("search"), "Build a topic test", "Up to 20 questions from one topic", ' data-k="topic" data-p="' + p.id + '"');
+    return "";
+  }
+  function diagCustomHtml(p) {
+    var cov = covKnown(), dis = cov != null && cov < 5;
+    var l = null;
+    try { var h = store().t2h; for (var i = 0; i < h.length; i++) if (h[i].exam === p.id && h[i].type === "diagnostic" && !h[i].paper) l = h[i]; } catch (e) {}
+    return H.row("t2-pre", H.ico("bolt"), "Adaptive diagnostic", "20 questions across subjects, from your own history" + (l ? " · Last " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts) : "") + (dis ? " · Not enough questions yet" : ""), ' data-k="diagnostic" data-p="' + p.id + '" data-need="5"' + (dis ? ' disabled aria-disabled="true"' : "")) +
+      H.row("t2-custom", H.ico("plus"), "Custom test", "Your own mix of subjects and count");
+  }
+  function recallRowHtml(p) { if (p.id !== "neet-pg" || !G.PREP_PYQ) return ""; return G.PREP_PYQ.homeRow(H); }
+  function prevLinkHtml(p) { if (!(p.legacy_mock && p.id === "neet-pg")) return ""; return '<button type="button" class="pn-link pn-t2prev" data-act="t2-legacy" data-v="' + p.legacy_mock.id + '">Previous format practice: ' + p.legacy_mock.n + " questions, one timer</button>"; }
+  function fxRowHtml(r) {
+    var l = lastOfPaper(r.id);
+    var sub = r.count + " questions · " + mins(r.duration_sec) + " · " + r.scope + (l ? " · Done " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts) : " · Not done");
+    return H.row("t2-fixed", l ? H.ico("check") : H.ico("play"), esc(r.title), esc(sub), ' data-fx="' + esc(r.id) + '"');
   }
   function fmtMarks(x) { return String(Math.round(x * 100) / 100); }
-  function dailyHtml(p) {
-    var b = A.blueprint(p, "daily10"), key = A.dailyKey(p.id, Date.now()), d = store().t2d[key];
-    return '<section class="pn-panel pn-t2d" data-p="' + p.id + '"><div class="pn-t2h"><p class="pn-t2eb">Daily 10</p>' + (d ? '<span class="pn-t2b ok">' + H.ico("check") + " Done today</span>" : '<span class="pn-t2b">Not done today</span>') + "</div>" +
-      '<p class="pn-big pn-mid">10 questions · about ' + mins(b.duration_sec) + "</p>" +
-      '<p class="pn-mut">' + esc(p.name) + " pace (" + b.pace + " s a question) and marking. Mixed subjects; the same 10 all day.</p>" +
-      (d ? '<p class="pn-mut pn-small">Today: ' + d.correct + " of 10 right, " + fmtMarks(d.raw) + " of " + d.max + " marks. A retry is practice and is not counted again.</p>" : "") +
-      '<button type="button" class="pn-btn' + (d ? "" : " pri") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="daily10" data-need="10">' + H.ico("play") + (d ? " Practise again" : " Start Daily 10") + "</button></section>";
+  function groupCounts(p, format) {
+    var s = null, t2h = [], t2d = {};
+    try { s = store(); t2h = s.t2h || []; t2d = s.t2d || {}; } catch (e) {}
+    var fx = fxFor(P.fx, p.id, format === "custom" ? "__none__" : format);
+    var fxDone = countFxDone(fx, t2h), eng = 0, engDone = 0;
+    if (format === "daily10") { eng = 1; try { if (dailyDoneByKey(t2d, A.dailyKey(p.id, Date.now()))) engDone = 1; } catch (e2) {} }
+    else if (format === "grand" || format === "part" || format === "mini") { var b = null; try { b = A.blueprint(p, format); } catch (e3) {} if (b) { eng = 1; if (engineDone(t2h, p.id, format)) engDone = 1; } }
+    else if (format === "custom") { eng = 2; if (engineDone(t2h, p.id, "diagnostic")) engDone = 1; }
+    return { total: fx.length + eng, done: fxDone + engDone, fx: fx.length, fxDone: fxDone, eng: eng, engDone: engDone };
   }
-  function practiceHtml(p) {
-    var s = H.store(), pt = H.planToday(), mt = Object.keys(s.mt || {}).length, wk = pt.weak.length;
-    var rows = H.row("t2-pick", H.ico("grid"), "Subject test", "20 questions from one subject, " + esc(p.name) + " marking", ' data-k="subject_mini" data-p="' + p.id + '"') +
-      H.row("t2-pick", H.ico("search"), "Topic test", "Up to 20 questions from one topic", ' data-k="topic" data-p="' + p.id + '"') +
-      H.row("t2-pre", H.ico("bolt"), "Adaptive diagnostic", "20 questions across subjects, from your own history", ' data-k="diagnostic" data-p="' + p.id + '" data-need="5"') +
-      (pt.due || pt.left ? H.row("t2-plan", H.ico("play"), "Today's set", (pt.due ? H.fmt(pt.due) + " reviews due, then new" : "Up to 20 new questions") + ", marked as you go") : "") +
+  function examCounts(p) {
+    var t = 0, d = 0;
+    for (var i = 0; i < GRP_ORDER.length; i++) { var c = groupCounts(p, GRP_ORDER[i]); t += c.total; d += c.done; }
+    return { total: t, done: d };
+  }
+  function metaTxt(c) { return c.total + ", " + c.done + " done"; }
+  function fixedListHtml(p, format) {
+    var key = grpKey(p.id, format), q = P.grpQ[key] || "", showAll = !!P.grpShow[key];
+    if (P.fx == null) return '<p class="pn-load" role="status">Loading papers…</p>';
+    var all = fxFor(P.fx, p.id, format), found = filterFx(all, q), vis = q ? found : visibleFx(found, showAll);
+    var out = "";
+    if (q && all.length) out += '<p class="pn-mut pn-small" role="status">' + found.length + " of " + all.length + " match</p>";
+    if (!all.length) {
+      if (format === "part") return '<p class="pn-empty">One-part tests apply only to FMGE.</p>';
+      if (format === "image") return '<p class="pn-empty">No image tests for this exam yet.</p>';
+      if (format === "pyq") return (recallRowHtml(p) ? "" : '<p class="pn-empty">No PYQ papers for this exam yet.</p>');
+      return "";
+    }
+    if (!found.length) return out + '<p class="pn-empty">No papers match.</p>';
+    out += '<div class="pn-group">' + vis.map(fxRowHtml).join("") + "</div>";
+    if (!q && all.length > GRP_FIRST) out += '<button type="button" class="pn-btn pn-t2more" data-act="t2-more" data-p="' + p.id + '" data-f="' + format + '">' + (showAll ? "Show less" : "Show all " + all.length) + "</button>";
+    return out;
+  }
+  function engineHtml(p, format) {
+    if (format === "daily10") return dailyEngineHtml(p);
+    if (format === "grand") return grandEngineHtml(p) + prevLinkHtml(p);
+    if (format === "part") return partEngineHtml(p);
+    if (format === "mini") return miniEngineHtml(p);
+    if (format === "subject_mini" || format === "topic") return '<div class="pn-group pn-t2p">' + pickerRowHtml(p, format) + "</div>";
+    if (format === "pyq") { var r = recallRowHtml(p); return r ? '<div class="pn-group pn-t2p">' + r + "</div>" : ""; }
+    if (format === "custom") return '<div class="pn-group pn-t2p">' + diagCustomHtml(p) + "</div>";
+    return "";
+  }
+  function groupBodyInner(p, format) {
+    var key = grpKey(p.id, format), eng = engineHtml(p, format), fx = "";
+    if (format === "custom") return eng;
+    var all = P.fx == null ? null : fxFor(P.fx, p.id, format);
+    var search = all != null && all.length > GRP_SEARCH_AT ? '<div class="pn-t2sbox">' + H.ico("search") + '<input type="search" class="pn-in pn-t2search" data-p="' + p.id + '" data-f="' + format + '" name="filter-papers" value="' + esc(P.grpQ[key] || "") + '" placeholder="Filter papers…" aria-label="Filter ' + esc(grpName(format)) + '" autocomplete="off" inputmode="search" spellcheck="false"></div>' : "";
+    fx = '<div class="pn-t2fxwrap">' + fixedListHtml(p, format) + "</div>";
+    if (!eng && all != null && !all.length && (format === "subject_mini" || format === "topic")) return eng + search + fx;
+    return eng + search + fx;
+  }
+  function groupSection(p, format, primaryId, st) {
+    var open = grpIsOpen(st, p.id, primaryId, format), c = groupCounts(p, format);
+    var gid = "pnT2G-" + p.id + "-" + format;
+    var body = open ? '<div class="pn-t2ginner">' + groupBodyInner(p, format) + "</div>" : '<div class="pn-t2ginner"></div>';
+    return '<section class="pn-t2grp" data-p="' + p.id + '" data-f="' + format + '" aria-label="' + esc(grpName(format)) + '">' +
+      '<h3 class="pn-t2gh"><button type="button" class="pn-t2ghead" data-act="t2-g" data-p="' + p.id + '" data-f="' + format + '" aria-expanded="' + open + '" aria-controls="' + gid + '">' +
+      '<span class="pn-t2gt">' + esc(grpName(format)) + '</span><span class="pn-t2gm" data-m="' + p.id + "|" + format + '">' + esc(metaTxt(c)) + '</span><span class="pn-t2chev" aria-hidden="true">' + H.ico("chev") + "</span></button></h3>" +
+      '<div class="pn-t2gbody" id="' + gid + '" data-open="' + (open ? "1" : "0") + '" data-p="' + p.id + '" data-f="' + format + '" data-lazy="' + (open ? "0" : "1") + '">' + body + "</div></section>";
+  }
+  function jumpBar(p) {
+    return '<div class="pn-t2jump" role="navigation" aria-label="Jump to test type"><div class="pn-t2jrow">' + GRP_ORDER.map(function (f) {
+      return '<button type="button" class="pn-chip pn-t2j" data-act="t2-jump" data-p="' + p.id + '" data-f="' + f + '" aria-label="Jump to ' + esc(grpName(f)) + '">' + esc(grpShort(f)) + "</button>";
+    }).join("") + "</div></div>";
+  }
+  function examSection(p, primaryId, st) {
+    var open = examIsOpen(st, p.id, primaryId), c = examCounts(p), prov = p.status !== "official";
+    var xid = "pnT2X-" + p.id;
+    var inner = '<div class="pn-t2xinfo">' + examInfoHtml(p) + "</div>" + jumpBar(p) + GRP_ORDER.map(function (f) { return groupSection(p, f, primaryId, st); }).join("");
+    return '<section class="pn-t2exam" data-p="' + p.id + '" aria-label="' + esc(p.name) + ' tests">' +
+      '<h2 class="pn-t2xh"><button type="button" class="pn-t2xhead" data-act="t2-x" data-p="' + p.id + '" aria-expanded="' + open + '" aria-controls="' + xid + '">' +
+      '<span class="pn-t2xt"><b>' + esc(p.name) + '</b><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Official format") + "</span></span>" +
+      '<span class="pn-t2xm" data-xm="' + p.id + '">' + esc(metaTxt(c)) + '</span><span class="pn-t2chev" aria-hidden="true">' + H.ico("chev") + "</span></button></h2>" +
+      '<div class="pn-t2xbody" id="' + xid + '" data-open="' + (open ? "1" : "0") + '" data-p="' + p.id + '"><div class="pn-t2xinner">' + inner + "</div></div></section>";
+  }
+  function globalPracticeHtml() {
+    var s = H.store(), pt = null, mt = 0, wk = 0;
+    try { pt = H.planToday(); mt = Object.keys(s.mt || {}).length; wk = pt.weak.length; } catch (e) { pt = { due: 0, left: 0, weak: [] }; }
+    var rows = (pt.due || pt.left ? H.row("t2-plan", H.ico("play"), "Today's set", (pt.due ? H.fmt(pt.due) + " reviews due, then new" : "Up to 20 new questions") + ", marked as you go") : "") +
       (wk || mt ? H.row("t2-weak", H.ico("flag"), "Weak areas", (wk ? wk + (wk === 1 ? " weak module" : " weak modules") : "") + (wk && mt ? " and " : "") + (mt ? H.fmt(mt) + " mistakes" : "")) : "") +
       (mt ? H.row("t2-mistakes", H.ico("x"), "My mistakes", H.fmt(mt) + " to fix") : "") +
-      H.row("t2-custom", H.ico("plus"), "Custom test", "Your own mix of subjects and count") +
       (statsChoice() != null ? H.row("t2-statsw", H.ico("flag"), "Anonymous statistics", statsChoice() === "1" ? "On: tap to stop sharing" : "Off: tap to share anonymously") : "");
-    return '<h2 class="pn-h">Practice tests</h2><div class="pn-group pn-t2p">' + rows + "</div>";
+    if (!rows) return "";
+    return '<h2 class="pn-h">Your practice</h2><div class="pn-group pn-t2p">' + rows + "</div>";
   }
   /* ---------- ready-made tests (fixed papers, same for every student) ---------- */
   function fxLoad() {
@@ -157,27 +290,92 @@
     }, function () { P.fx = []; return P.fx; });
     return P.fxP;
   }
-  // Papers for the profiles of this tab, grouped by format (formats with no papers are not shown).
-  function fxHtml() {
-    var ids = {};
-    A.forTab(tab()).forEach(function (p) { ids[p.id] = 1; });
-    var rows = (P.fx || []).filter(function (r) { return ids[r.exam]; });
-    if (!rows.length) return "";
-    var byF = {}, order = [];
-    rows.forEach(function (r) { if (!byF[r.format]) { byF[r.format] = []; order.push(r.format); } byF[r.format].push(r); });
-    return '<h2 class="pn-h">Ready-made tests</h2><p class="pn-mut pn-small">The same papers for every student.</p>' + order.map(function (f) {
-      return '<h3 class="pn-sec">' + esc(fxFormatName(f)) + "</h3>" + '<div class="pn-group">' + byF[f].map(function (r) {
-        var l = lastOfPaper(r.id);
-        var sub = r.count + " questions · " + mins(r.duration_sec) + " · " + r.scope + (l ? " · Done " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts) : " · Not done");
-        return H.row("t2-fixed", l ? H.ico("check") : H.ico("play"), esc(r.title), esc(sub), ' data-fx="' + esc(r.id) + '"');
-      }).join("") + "</div>";
-    }).join("");
+  function grpBodyEl(pid, format) { try { var r = H.root(); return r ? r.querySelector('.pn-t2gbody[data-p="' + pid + '"][data-f="' + format + '"]') : null; } catch (e) { return null; } }
+  function grpHeadEl(pid, format) { try { var r = H.root(); return r ? r.querySelector('.pn-t2ghead[data-p="' + pid + '"][data-f="' + format + '"]') : null; } catch (e) { return null; } }
+  function examBodyEl(pid) { try { var r = H.root(); return r ? r.querySelector('.pn-t2xbody[data-p="' + pid + '"]') : null; } catch (e) { return null; } }
+  function examHeadEl(pid) { try { var r = H.root(); return r ? r.querySelector('.pn-t2xhead[data-p="' + pid + '"]') : null; } catch (e) { return null; } }
+  function ensureGrpBuilt(p, format) {
+    var body = grpBodyEl(p.id, format);
+    if (!body || body.getAttribute("data-lazy") !== "1") return body;
+    body.setAttribute("data-lazy", "0");
+    var inner = body.querySelector(".pn-t2ginner");
+    if (inner) inner.innerHTML = groupBodyInner(p, format);
+    else body.innerHTML = '<div class="pn-t2ginner">' + groupBodyInner(p, format) + "</div>";
+    applyCov(body);
+    return body;
   }
-  function fxMount() {
-    fxLoad().then(function () {
-      var root = H.root(), box = root && root.querySelector("#pnT2Fx");
-      if (box) box.innerHTML = fxHtml();
+  function setGrpDom(p, format, open) {
+    var head = grpHeadEl(p.id, format), body = grpBodyEl(p.id, format);
+    if (head) head.setAttribute("aria-expanded", open ? "true" : "false");
+    if (!body) return;
+    if (open) ensureGrpBuilt(p, format);
+    body.setAttribute("data-open", open ? "1" : "0");
+  }
+  function setExamDom(p, open, primaryId, st) {
+    var head = examHeadEl(p.id), body = examBodyEl(p.id);
+    if (head) head.setAttribute("aria-expanded", open ? "true" : "false");
+    if (!body) return;
+    body.setAttribute("data-open", open ? "1" : "0");
+    if (open) {
+      for (var i = 0; i < GRP_ORDER.length; i++) {
+        var f = GRP_ORDER[i], gb = grpBodyEl(p.id, f);
+        if (gb && gb.getAttribute("data-open") === "1") ensureGrpBuilt(p, f);
+      }
+    }
+  }
+  function applyCov(scope) {
+    var total = covKnown(); if (total == null || !scope || !scope.querySelectorAll) return;
+    var btns = scope.querySelectorAll("[data-act=t2-pre][data-need]");
+    for (var i = 0; i < btns.length; i++) {
+      var b = btns[i];
+      if (b.disabled) continue;
+      if (total < Number(b.getAttribute("data-need"))) {
+        b.disabled = true; b.setAttribute("aria-disabled", "true");
+        if (b.className.indexOf("pn-t2btn") >= 0 && D) { var sm = D.createElement("small"); sm.className = "pn-t2last"; sm.textContent = "Not enough questions in the bank yet"; b.appendChild(sm); }
+      }
+    }
+  }
+  function reducedMotion() { try { return G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
+  function refreshGrpDom() {
+    var root = null;
+    try { root = H.root(); } catch (e) { root = null; }
+    if (!root) return;
+    var list = [];
+    try { list = A.forTab(tab()); } catch (e2) { list = []; }
+    list.forEach(function (p) {
+      var xm = null;
+      try { xm = root.querySelector('[data-xm="' + p.id + '"]'); } catch (e3) {}
+      if (xm) xm.textContent = metaTxt(examCounts(p));
+      GRP_ORDER.forEach(function (f) {
+        var m = null;
+        try { m = root.querySelector('[data-m="' + p.id + "|" + f + '"]'); } catch (e4) {}
+        if (m) m.textContent = metaTxt(groupCounts(p, f));
+        var body = grpBodyEl(p.id, f);
+        if (body && body.getAttribute("data-open") === "1" && body.getAttribute("data-lazy") !== "1") {
+          var inner = body.querySelector(".pn-t2ginner");
+          var html = groupBodyInner(p, f);
+          if (inner) inner.innerHTML = html; else body.innerHTML = '<div class="pn-t2ginner">' + html + "</div>";
+          applyCov(body);
+          var q = P.grpQ[grpKey(p.id, f)];
+          if (q) { var inp = body.querySelector(".pn-t2search"); if (inp) { inp.value = q; try { inp.setSelectionRange(q.length, q.length); } catch (e5) {} } }
+        }
+      });
     });
+  }
+  function fxMount() { fxLoad().then(function () { refreshGrpDom(); }); }
+  function onGrpInput(ev) {
+    var t = ev && ev.target;
+    if (!t || !t.className || String(t.className).indexOf("pn-t2search") < 0) return;
+    var pid = t.getAttribute("data-p"), f = t.getAttribute("data-f");
+    if (!pid || !f) return;
+    P.grpQ[grpKey(pid, f)] = t.value || "";
+    var p = null;
+    try { p = A.profile(pid); } catch (e) { p = null; }
+    if (!p) return;
+    var body = grpBodyEl(pid, f);
+    if (!body) return;
+    var wrap = body.querySelector(".pn-t2fxwrap");
+    if (wrap) wrap.innerHTML = fixedListHtml(p, f);
   }
   // Resolve a paper's [subject, module, id] triples to items in paper order, from the bank versions the paper
   // names (so papers keep working when the live bank moves on). A question no longer there, or hidden by the
@@ -263,17 +461,23 @@
   }
   function testsHtml(h) {
     H = h;
-    var list = A.forTab(tab()), p0 = primary(), s = H.store();
+    var list = A.forTab(tab()), p0 = primary();
     if (!p0) return '<p class="pn-empty">No exam profile for this exam yet.</p>';
-    var pyq = G.PREP_PYQ && tab() === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(H) + "</div>" : "";
-    return '<div id="pnT2Res">' + (P.sess && P.sess.t2 && !P.sess.done ? resumeHtml(P.sess) : "") + "</div>" + dailyHtml(p0) +
-      '<h2 class="pn-h">Exam simulations</h2>' + list.map(function (p) { return card(p); }).join("") + pyq + '<div id="pnT2Fx">' + fxHtml() + "</div>" + practiceHtml(p0) +
+    var st = loadGrp(), ordered = examOrder(list, p0.id);
+    P.grpQ = {};
+    return '<div id="pnT2Res">' + (P.sess && P.sess.t2 && !P.sess.done ? resumeHtml(P.sess) : "") + "</div>" +
+      '<p class="pn-mut pn-small">The same ready-made papers for every student, grouped by exam and format. Your exam is on top.</p>' +
+      ordered.map(function (p) { return examSection(p, p0.id, st); }).join("") + globalPracticeHtml() +
       '<p class="pn-mut pn-small" id="pnT2Note">Every test shows its size, time and scope before it starts. When the bank cannot fill a blueprint the test is shortened and says why; it is never padded with unrelated questions. Results use the exam\'s marking only: no rank, percentile or predicted score.</p>';
   }
   // After paint: the saved session, the fixed papers, then coverage (subject indexes) hides tests the bank cannot fill.
   function mounted(h) {
     H = h;
     fxMount();
+    try {
+      var root0 = H.root();
+      if (root0 && !P.grpLis) { P.grpLis = true; if (root0.addEventListener) root0.addEventListener("input", onGrpInput); }
+    } catch (e) {}
     loadSess().then(function (pk) {
       var box = H.root() && H.root().querySelector("#pnT2Res");
       if (box) box.innerHTML = pk && pk.t2 ? resumeHtml(pk) : "";
@@ -284,9 +488,7 @@
       var ex = tab(), total = 0, ix = H.ix();
       subs.forEach(function (sb) { var x = ix[sb.id]; if (x) x.topics.forEach(function (t) { if (t.group !== "mixed") total += H.pure.countFor(t, ex); }); });
       P.cov[ex] = total;
-      Array.prototype.forEach.call(root.querySelectorAll("[data-act=t2-pre][data-need]"), function (b) {
-        if (total < Number(b.getAttribute("data-need"))) { b.disabled = true; b.setAttribute("aria-disabled", "true"); var sm = D.createElement("small"); sm.className = "pn-t2last"; b.classList.add("pn-t2btn"); sm.textContent = "Not enough questions in the bank yet"; b.appendChild(sm); }
-      });
+      applyCov(root);
     });
   }
 
@@ -676,6 +878,45 @@
     if (a === "t2-weak") return H.startWeak();
     if (a === "t2-mistakes") return H.openMistakes();
     if (a === "t2-custom") return H.openCustom();
+    if (a === "t2-x") {
+      var px = null; try { px = A.profile(pid); } catch (eX) { px = null; }
+      if (!px) return;
+      var xh = examHeadEl(pid), xOpen = xh && xh.getAttribute("aria-expanded") === "true";
+      var sx = loadGrp(); setExamOpen(sx, pid, !xOpen); setExamDom(px, !xOpen);
+      return;
+    }
+    if (a === "t2-g") {
+      var gf = b.getAttribute("data-f"), pg = null; try { pg = A.profile(pid); } catch (eG) { pg = null; }
+      if (!pg || !gf) return;
+      var gh = grpHeadEl(pid, gf), gOpen = gh && gh.getAttribute("aria-expanded") === "true";
+      var sg = loadGrp(); setGrpOpen(sg, pid, gf, !gOpen); setGrpDom(pg, gf, !gOpen);
+      return;
+    }
+    if (a === "t2-more") {
+      var mf = b.getAttribute("data-f"), pm = null; try { pm = A.profile(pid); } catch (eM) { pm = null; }
+      if (!pm || !mf) return;
+      var mk = grpKey(pid, mf); P.grpShow[mk] = !P.grpShow[mk];
+      var mb = grpBodyEl(pid, mf);
+      if (mb) { var mw = mb.querySelector(".pn-t2fxwrap"); if (mw) mw.innerHTML = fixedListHtml(pm, mf); }
+      return;
+    }
+    if (a === "t2-jump") {
+      var jf = b.getAttribute("data-f"), pj = null; try { pj = A.profile(pid); } catch (eJ) { pj = null; }
+      if (!pj || !jf) return;
+      var sj = loadGrp(), xhj = examHeadEl(pid);
+      if (xhj && xhj.getAttribute("aria-expanded") !== "true") { setExamOpen(sj, pid, true); setExamDom(pj, true); sj = loadGrp(); }
+      var ghj = grpHeadEl(pid, jf);
+      if (ghj && ghj.getAttribute("aria-expanded") !== "true") { setGrpOpen(sj, pid, jf, true); setGrpDom(pj, jf, true); }
+      try {
+        var tgt = grpHeadEl(pid, jf);
+        if (tgt) {
+          if (tgt.scrollIntoView) tgt.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth", block: "start" });
+          if (tgt.focus) { try { tgt.focus({ preventScroll: true }); } catch (eF) { tgt.focus(); } }
+        }
+      } catch (eS) {}
+      return;
+    }
   }
-  G.PREP_TESTS = { on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, askCtx: askCtx, _P: P, _clear: clearSess };
+  G.PREP_TESTS = { on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, askCtx: askCtx, _P: P, _clear: clearSess,
+    _grp: { ORDER: GRP_ORDER, FIRST: GRP_FIRST, SEARCH_AT: GRP_SEARCH_AT, name: grpName, short: grpShort, examOrder: examOrder, fxFor: fxFor, paperDone: paperDone, engineDone: engineDone, dailyDoneByKey: dailyDoneByKey, countFxDone: countFxDone, defaultExamOpen: defaultExamOpen, defaultGrpOpen: defaultGrpOpen, loadGrp: loadGrp, saveGrp: saveGrp, grpIsOpen: grpIsOpen, examIsOpen: examIsOpen, setGrpOpen: setGrpOpen, setExamOpen: setExamOpen, filterFx: filterFx, visibleFx: visibleFx, grpKey: grpKey, groupCounts: groupCounts, examCounts: examCounts, metaTxt: metaTxt } };
 })(typeof window !== "undefined" ? window : this);
