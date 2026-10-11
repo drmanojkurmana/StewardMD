@@ -153,7 +153,7 @@ def main():
             prods = find_products(name, by_code_ings, products)
             if not prods:
                 return ("no_product", name)
-            for p in prods[:6]:
+            for p in prods[:40]:
                 din = str(p["drug_identification_number"]).zfill(8)
                 url = f"https://pdf.hres.ca/dpd_pm/{din}.PDF"
                 try:
