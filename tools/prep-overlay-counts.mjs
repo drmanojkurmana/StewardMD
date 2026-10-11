@@ -47,6 +47,7 @@ async function main() {
   }
   const ov = overlaysOf(src, extraSets), sets = {};
   for (const [sid, list] of Object.entries(ov)) {
+    if (!bv[sid]) continue;
     const ix = JSON.parse(fs.readFileSync(join(ROOT, "prep/bank", bv[sid], sid, "index.json"), "utf8"));
     for (const set of list) {
       const jobs = ix.topics.map(async (t) => {
