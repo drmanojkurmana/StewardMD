@@ -328,7 +328,9 @@ export function plan(root = ROOT) {
   for (const s of cfg.subjects) {
     const topics = subjectIndex(s.id, s.bv, root).topics || [];
     const ovMods = new Map();
-    for (const set of cfg.overlays[s.id] || []) for (const m of Object.keys((ovc[set] && ovc[set][s.id]) || {})) { if (!ovMods.has(m)) ovMods.set(m, []); ovMods.get(m).push(`overlay/${set}/${s.id}/${m}.json`); }
+    const sets = new Set(cfg.overlays[s.id] || []);
+    for (const [set, subs] of Object.entries(ovc)) if (subs && subs[s.id]) sets.add(set);
+    for (const set of sets) for (const m of Object.keys((ovc[set] && ovc[set][s.id]) || {})) { if (!ovMods.has(m)) ovMods.set(m, []); ovMods.get(m).push(`overlay/${set}/${s.id}/${m}.json`); }
     const ids = new Set(topics.map((t) => t.id).concat(Array.from(ovMods.keys())));
     for (const mid of ids) mods.push({ sid: s.id, mid, bv: s.bv, bank: topics.some((t) => t.id === mid) ? `${s.bv}/${s.id}/mcq/${mid}.json` : null, overlays: ovMods.get(mid) || [] });
   }
