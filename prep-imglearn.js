@@ -1,4 +1,4 @@
-/* PrepNucleus image learning sections: the ECG atlas (KardiqX) and later atlases. window.PREP_IMGLEARN. ES5.
+/* PrepNucleus image learning sections: the ECG atlas (KardiqX), the Eye atlas and the PSM chart atlas. window.PREP_IMGLEARN. ES5.
    Each card is { image, finding, diagnosis, one reasoning line }. Sections read the shared content
    modules at runtime (SMD_KARDIOX_CONTENT for ECGs): the same ECGs as KardiqX Learn, no copies.
    Mirrors prep-lessons.js: subjectButton(box, sid, topics, host), act(a, el, host). */
@@ -33,13 +33,14 @@
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
-  var S = null;   // { kind: "ecg"|"eye", sid, cat }
+  var S = null;   // { kind: "ecg"|"eye"|"psm", sid, cat }
   var EYE = null;   // the eye atlas manifest (/prep/imglearn/eye.json), once loaded
+  var PSM = null;   // the PSM chart atlas manifest (/prep/imglearn/psm.json), once loaded
   function kxOn() { try { return !!(G.KARDIOX && G.KARDIOX.learnOn && G.KARDIOX.learnOn()); } catch (e) { return false; } }
   function ophOn() { try { return !!(G.OPHTHALMOS && G.OPHTHALMOS.open); } catch (e) { return false; } }
 
-  // Subject screen: an atlas button in the actions block (under Practise) for ss-cardiology (ECG)
-  // and ophthalmology (Eye).
+  // Subject screen: an atlas button in the actions block (under Practise) for ss-cardiology (ECG),
+  // ophthalmology (Eye) and community-medicine (Charts).
   function subjectButton(box, sid, topics, host) {
     if (!box) return;
     if (sid === "ss-cardiology") {
@@ -53,6 +54,13 @@
         if (!m || !m.items || !m.items.length || !box.isConnected) return;
         if (box.querySelector('[data-act="il-eye"]')) { box.hidden = false; return; }
         atlasBtn(box, sid, "il-eye", "Eye atlas", m.items.length + " images");
+      });
+    } else if (sid === "community-medicine") {
+      if (box.querySelector('[data-act="il-psm"]')) { box.hidden = false; return; }
+      psmManifest(host, function (m) {
+        if (!m || !m.items || !m.items.length || !box.isConnected) return;
+        if (box.querySelector('[data-act="il-psm"]')) { box.hidden = false; return; }
+        atlasBtn(box, sid, "il-psm", "Chart atlas", m.items.length + " charts");
       });
     }
   }
@@ -139,6 +147,31 @@
     host.push(function () { drawEye(host); });
   }
 
+  /* ---------- PSM chart atlas (our own drawings, curated in /prep/imglearn/psm.json) ---------- */
+  function psmManifest(host, cb) {
+    if (PSM) return cb(PSM);
+    host.getJSON("prep/imglearn/psm.json").then(function (m) { PSM = m; cb(m); }, function () { cb(null); });
+  }
+  function drawPsm(host) {
+    var esc = host.esc;
+    psmManifest(host, function (m) {
+      var items = (m && m.items) || [];
+      var cats = eyeCats(items);
+      var cards = items.filter(function (c) { return !S.cat || c.deck === S.cat; });
+      host.paint(host.bar("Chart atlas", "Community Medicine", "back") + '<div class="pn-body pn-il">' +
+        '<p class="pn-mut pn-small">Our own teaching drawings (epidemic curves, distributions, plots, programme charts). Every number on the cards matches the chart.</p>' +
+        '<div class="pn-il-cats" role="group" aria-label="Filter by topic">' +
+        '<button type="button" class="pn-chip' + (!S.cat ? " on" : "") + '" data-act="il-pcat" data-v="">All</button>' +
+        cats.map(function (c) { return '<button type="button" class="pn-chip' + (S.cat === c.name ? " on" : "") + '" data-act="il-pcat" data-v="' + esc(c.name) + '">' + esc(c.name) + " (" + c.n + ")</button>"; }).join("") + "</div>" +
+        '<div class="pn-il-grid">' + cards.map(function (c) { return eyeCard(c, items.indexOf(c), esc, host); }).join("") + "</div>" +
+        '<button type="button" class="pn-btn pri" data-act="module" data-s="community-medicine" data-m="cm-screening">Practise image questions</button></div>');
+    });
+  }
+  function openPsm(sid, host, cat) {
+    S = { kind: "psm", sid: sid, cat: cat || "" };
+    host.push(function () { drawPsm(host); });
+  }
+
   function act(a, el, host) {
     if (a === "il-ecg") { openAtlas(el.getAttribute("data-s") || "ss-cardiology", host, ""); return true; }
     if (a === "il-cat") { if (S) { S.cat = el.getAttribute("data-v") || ""; draw(host); } return true; }
@@ -155,8 +188,11 @@
       try { if (G.OPHTHALMOS && G.OPHTHALMOS.open) G.OPHTHALMOS.open(); } catch (e) {}
       return true;
     }
+    if (a === "il-psm") { openPsm(el.getAttribute("data-s") || "community-medicine", host, ""); return true; }
+    if (a === "il-pcat") { if (S) { S.cat = el.getAttribute("data-v") || ""; drawPsm(host); } return true; }
     if (a === "il-credit") {
-      var m = EYE && EYE.items, c = m && m[+el.getAttribute("data-i")];
+      var man = (S && S.kind === "psm") ? PSM : EYE;
+      var m = man && man.items, c = m && m[+el.getAttribute("data-i")];
       if (c && host.openCreditSheet) host.openCreditSheet({ title: c.dx, credit: c.credit, licence: c.licence, licenceUrl: c.licenceUrl, sourceUrl: c.sourceUrl });
       return true;
     }
