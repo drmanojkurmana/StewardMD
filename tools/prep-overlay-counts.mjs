@@ -47,7 +47,10 @@ async function main() {
   }
   const ov = overlaysOf(src, extraSets), sets = {};
   for (const [sid, list] of Object.entries(ov)) {
-    const ix = JSON.parse(fs.readFileSync(join(ROOT, "prep/bank", bv[sid], sid, "index.json"), "utf8"));
+    if (!bv[sid]) continue;
+    const indexPath = join(ROOT, "prep/bank", bv[sid], sid, "index.json");
+    if (!fs.existsSync(indexPath)) continue;
+    const ix = JSON.parse(fs.readFileSync(indexPath, "utf8"));
     for (const set of list) {
       const jobs = ix.topics.map(async (t) => {
         const r = await fetch(API + "overlay/" + set + "/" + sid + "/" + t.id + ".json");
