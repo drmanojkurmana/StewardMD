@@ -426,6 +426,24 @@ test("ECG atlas and PrepNucleus-KardiqX two-way links", () => {
   assert.ok((M.generated || []).some((r) => r.includes("kardiox-learn")), "deid manifest covers KardiqX illustrations as generated");
 });
 
+test("Eye atlas and its Ophthalmós link", () => {
+  const IL = read("prep-imglearn.js");
+  // NOTE: ophthalmos.js/ophthalmos-screens.js are byte-identical mirrors of the
+  // ophthalmos-module repo (see test/ophthalmos-module.test.mjs), so the return
+  // link must land there; PrepNucleus links out via OPHTHALMOS.open only.
+  assert.match(IL, /il-eye/, "atlas opens from the ophthalmology subject");
+  assert.match(IL, /prep\/imglearn\/eye\.json/, "eye atlas reads its curated manifest");
+  assert.match(IL, /il-oph/, "eye atlas links to Ophthalmós");
+  assert.match(IL, /il-credit/, "eye cards open the image credit sheet");
+  assert.match(IL, /img\/maikimg\//, "eye cards resolve staged neutral images");
+  const M = JSON.parse(read("prep/imglearn/eye.json"));
+  assert.ok(M.items && M.items.length > 50, "eye atlas manifest carries the curated cards");
+  for (const c of M.items.slice(0, 5)) {
+    assert.ok(c.img && c.dx && c.finding && c.reason, "card has image, finding, diagnosis, reasoning");
+    assert.ok(c.credit && c.licence, "card carries attribution");
+  }
+});
+
 test("image credit chip, sheet, and menu screen wiring", () => {
   const J = read("prep.js");
   const Y = read("prep-pyq.js");
