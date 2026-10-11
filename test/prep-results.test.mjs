@@ -106,3 +106,61 @@ test("gaps: weakest topics with 2+ missed, at most 3", () => {
   assert.deepEqual(nx.map((x) => x.target_id), ["c|m3", "b|m2", "e|m5"]);
   assert.ok(nx.every((x) => x.kind === "practise_topic"));
 });
+
+test("streaks: long runs, null entries and missing answers", () => {
+  assert.deepEqual(A.streaks([it(true), it(true), it(true), it(true), it(true)]), { best: 5, slip: 0, rec_n: 0, rec_d: 0 });
+  assert.deepEqual(A.streaks([it(false), it(false), it(false), it(false)]), { best: 0, slip: 4, rec_n: 0, rec_d: 3 });
+  assert.deepEqual(A.streaks([null, undefined, {}]), { best: 0, slip: 0, rec_n: 0, rec_d: 0 });
+  assert.deepEqual(A.streaks([it(true), null, it(true), undefined, it(false)]), { best: 1, slip: 1, rec_n: 0, rec_d: 0 });
+});
+
+test("recovery: chains, trailing skips and alternation", () => {
+  assert.deepEqual(A.streaks([it(false), it(false)]), { best: 0, slip: 2, rec_n: 0, rec_d: 1 });
+  assert.deepEqual(A.streaks([it(false), it(null), it(null)]), { best: 0, slip: 1, rec_n: 0, rec_d: 0 });
+  assert.deepEqual(A.streaks([it(true), it(false), it(null), it(true)]), { best: 1, slip: 1, rec_n: 1, rec_d: 1 });
+  assert.deepEqual(A.streaks([it(false), it(true), it(false), it(true)]), { best: 1, slip: 1, rec_n: 2, rec_d: 2 });
+});
+
+test("score time shares: avg_ms over timed answers only, shares add up", () => {
+  const items = [{ a: 0, _s: "med" }, { a: 1, _s: "med" }, { a: 0, _s: "surg" }, { a: 2, _s: "surg" }];
+  const sc = A.score(items, [0, 0, -1, 2], { correct: 4, incorrect: 1, unanswered: 0 }, { ms: [30000, 60000, 0, null] });
+  assert.equal(sc.correct, 2);
+  assert.equal(sc.incorrect, 1);
+  assert.equal(sc.unanswered, 1);
+  assert.equal(sc.avg_ms, 45000);
+  assert.equal(sc.accuracy, 0.67);
+  assert.equal(sc.share_right, 0.5);
+  const none = A.score(items, [-1, -1, -1, -1], { correct: 4, incorrect: 1, unanswered: 0 }, {});
+  assert.equal(none.avg_ms, null);
+  assert.equal(none.accuracy, null);
+  assert.equal(none.share_right, 0);
+});
+
+test("gaps mapping: 1-missed excluded, ties break by size, why text", () => {
+  const sc = { by_topic: [
+    { key: "s|one", correct: 4, n: 5 },
+    { key: "s|big", correct: 5, n: 10 },
+    { key: "s|small", correct: 2, n: 4 },
+    { key: "s|worst", correct: 0, n: 3 }
+  ] };
+  const nx = A.nextActions(sc);
+  assert.deepEqual(nx.map((x) => x.target_id), ["s|worst", "s|big", "s|small"]);
+  assert.deepEqual(nx[0], { kind: "practise_topic", target_id: "s|worst", why: "3 of 3 missed" });
+  assert.deepEqual(A.nextActions({ by_topic: [] }), []);
+  assert.deepEqual(A.nextActions({ by_topic: [{ key: "s|ok", correct: 9, n: 10 }] }), []);
+});
+
+test("small-sample guards: boundary at 5 questions", () => {
+  assert.equal(A.summary(rec(4, [], [], []), {}).small, true);
+  assert.equal(A.summary(rec(5, [], [], []), {}).small, false);
+  const zero = A.summary(rec(0, [], [], []), {});
+  assert.equal(zero.small, true);
+  assert.deepEqual(zero.rec, [0, 0]);
+  assert.ok(JSON.stringify(zero).length < A.SUMMARY_MAX_BYTES);
+});
+
+test("summary: zero time values pass through, unknown stays -1", () => {
+  const s = A.summary(rec(10, [], [], []), { secs: 0, pace: 0 });
+  assert.equal(s.secs, 0);
+  assert.equal(s.pace, 0);
+});
