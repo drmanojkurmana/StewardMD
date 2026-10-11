@@ -10,9 +10,10 @@
    - Online answers come from POST /api/ai/prep-teach (functions/api/ai/_prep-teach.js), signed in, paid from the
      student's MaiK Tokens by the app's existing token rules; when they run out, the app's own "MaiK Tokens are used up"
      sheet opens (pro-paywall.js watches every /api/ai/ 429 "ai-cost-cap").
-   Both paths run prep-teacher.js teach() / teachStep(): the same grounding, the same system prompt, and the same check
-   (every drug and number must appear in the stored text) before anything is shown. A failed check shows the stored
-   explanation. The app-wide MaiK engine setting is never changed here; with it on Local, an online ask asks first.
+   Both paths run prep-teacher.js teach() / teachStep() / teachChat(). On this phone runs the SAME on-device engine
+   and retrieval as the main MaiK chat (drug index/monographs, Knowledge Base, protocols) with the MCQ as context;
+   a follow-up that the phone cannot answer well hands off to MaiK Cloud instead of repeating the stored text
+   (owner 2026-10-11). The app-wide MaiK engine setting is never changed here; with it on Local, an online ask asks first.
 
    Device check, shown before any download or generation (deviceVerdict):
    - Today (any build): the llama plugin's total memory (SMD_MAIK_MODELS.refreshDevice) and, on Android, the Android
@@ -357,6 +358,7 @@
     if (last && lastIdle) {
       if (t.why === "tokens" && G.SMD_PRO && G.SMD_PRO.openAiLimit) acts += '<button type="button" class="pn-btn pri" data-act="ak-tokens">Add MaiK Tokens</button>';
       if (t.why === "no-local") acts += '<button type="button" class="pn-btn pri" data-act="ak-mode" data-v="online">Ask online instead</button>';
+      if (t.why === "handoff") acts += '<button type="button" class="pn-btn pri" data-act="ak-mode" data-v="online">Ask MaiK Online</button>';
       if (t.retry) acts += '<button type="button" class="pn-btn" data-act="ak-retry">Try again</button>';
       if (acts) acts = '<div class="pa-row">' + acts + "</div>";
     }
@@ -604,6 +606,18 @@
       if (mode === "local") t.setBusy(false);
       if (!alive(tok) || S.mode !== mode) return;
       res = res || { ok: false };
+      /* Owner 2026-10-11: on this phone, when the model cannot answer well or retrieval finds nothing useful
+         for a follow-up, do NOT repeat the stored explanation. Say so plainly and offer MaiK Cloud instead.
+         First asks keep the stored fallback (the question screen already shows it); follow-ups hand off. */
+      if (mode === "local" && !first && p && (p.LOCAL_HANDOFF || p.isFactual)) {
+        var offline = G.navigator && G.navigator.onLine === false;
+        var handNote = offline ? (p.LOCAL_HANDOFF_OFFLINE || p.LOCAL_HANDOFF) : p.LOCAL_HANDOFF;
+        var needHand = false;
+        if (!res.ok && (res.why === "not-covered" || res.reason === "not-covered" || res.why === "empty" || res.reason === "empty" || res.why === "model-error" || res.reason === "model-error")) needHand = true;
+        else if (res.ok && res.poor) needHand = true;
+        else if (res.ok && res.factual && res.grounded === false && /dos|rout|giv|administer|iv\b|im\b|intravesical/i.test(String(lastU && lastU.t || ""))) needHand = true;
+        if (needHand && handNote) res = { ok: false, why: "handoff", note: handNote };
+      }
       var why = res.why || res.reason;
       var turn = res.ok ? { r: "m", t: res.text, ok: true, mode: mode } : { r: "m", t: "", ok: false, mode: mode, note: res.note, why: why, retry: retryable(res) };
       if (res.ok && res.beyond && res.beyond.length) turn.beyond = res.beyond;
@@ -622,7 +636,20 @@
       return t.available().then(function (ok) {
         if (!ok) return { ok: false, why: "no-local", note: "MaiK Lite is not ready on this phone. Download it in Settings, MaiK, or ask online now." };
         return groundP().then(function (g) {
-          if (!first) return p.teachChat(g.ground, turns(), { generate: function (prompt, system) { return t.localGenerate(prompt, system, { chat: true }); }, lexicon: lex, local: true });
+          if (!first) {
+            /* Same dose short-circuit as the main MaiK chat (maik-engine.js doseAnswer): a dose-intent
+               follow-up is answered from the drug database, not the model. Fails open to the teacher. */
+            try {
+              var D = G.SMD_DOSE, dq = lastU && lastU.t;
+              if (D && D.intent && D.answer && dq && D.intent(dq)) {
+                return Promise.resolve(D.answer(dq)).then(function (dr) {
+                  if (dr && dr.text) return { ok: true, text: dr.text, check: { ok: true, numbers: [], drugs: [], terms: [] }, beyond: [], engine: "drugdb", drug: dr.drug, factual: true };
+                  return p.teachChat(g.ground, turns(), { generate: function (prompt, system) { return t.localGenerate(prompt, system, { chat: true }); }, lexicon: lex, local: true });
+                }, function () { return p.teachChat(g.ground, turns(), { generate: function (prompt, system) { return t.localGenerate(prompt, system, { chat: true }); }, lexicon: lex, local: true }); });
+              }
+            } catch (e) {}
+            return p.teachChat(g.ground, turns(), { generate: function (prompt, system) { return t.localGenerate(prompt, system, { chat: true }); }, lexicon: lex, local: true });
+          }
           if (c.kind === "mcq") return p.teach(c.item, chosen, { generate: t.localGenerate, lexicon: lex, sents: g.sents });
           return p.teachStep(c.step, c.title, { generate: t.localGenerate, lexicon: lex });
         });
@@ -651,7 +678,7 @@
   }
   // A failure the student can retry as it is (connection, busy, an empty or failed answer); not a check failure,
   // tokens, sign-in, the chat limit or a phone that cannot run MaiK.
-  function retryable(res) { var w = res && (res.why || res.reason); return !!w && w !== "check" && w !== "not-covered" && w !== "tokens" && w !== "sign-in" && w !== "no-grounding" && w !== "no-local" && w !== "chat-limit"; }
+  function retryable(res) { var w = res && (res.why || res.reason); return !!w && w !== "check" && w !== "not-covered" && w !== "handoff" && w !== "tokens" && w !== "sign-in" && w !== "no-grounding" && w !== "no-local" && w !== "chat-limit"; }
   /* send(text?): the student's message (the box, or a quick reply). Trimmed, at most CHAT_LIM.user characters, ignored
      while MaiK is answering; online it stops at this chat's 10, on this phone it never stops. */
   function send(quick) {

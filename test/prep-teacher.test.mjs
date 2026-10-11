@@ -3,8 +3,10 @@
  * (stem, options and key always; the rest within the cap); the number check is gate 9b's (functions/_prep-core.js) to the
  * digit; every drug the answer names must be in the grounding (drug lexicon + suffix rule; capitalised terms without a
  * lexicon); a failed check, "not covered", an empty answer or a model error shows the stored explanation with a note;
- * nothing is called without grounding; and NO server is ever called: the only call is SMD_MAIK_LOCAL.answer with no
- * Knowledge Base retrieval, and on the web (or with no model downloaded) the screen says so and calls nothing.
+ * nothing is called without grounding; and NO server is ever called: the only call is SMD_MAIK_LOCAL.answer with the
+ * SAME on-device retrieval as the main MaiK chat (owner 2026-10-11: the no-retrieval contract repeated the stored
+ * text instead of answering factual follow-ups like the Mesna route question), and on the web (or with no model
+ * downloaded) the screen says so and calls nothing.
  *
  * node --test --experimental-test-module-mocks --experimental-sqlite test/prep-teacher.test.mjs
  */
@@ -162,7 +164,8 @@ test("source: no network or server AI path in prep-teacher.js", () => {
   const code = SRC.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
   for (const bad of [/\bfetch\s*\(/, /XMLHttpRequest/, /sendBeacon/, /WebSocket/, /\/api\//, /SMD_AI\b/, /explainGrounded/, /https?:/, /importScripts/])
     assert.doesNotMatch(code, bad, String(bad));
-  assert.match(code, /local\(\)\.answer\(\{ question: prompt \}, \{ systemOverride: system, _grounding: null, temperature: opts && opts\.chat \? 0\.3 : 0 \}\)/);
+  assert.match(code, /local\(\)\.answer\(\{ question: prompt \}, \{ systemOverride: system, temperature: opts && opts\.chat \? 0\.3 : 0 \}\)/);
+  assert.doesNotMatch(code, /_grounding:\s*null/, "retrieval is on: the MCQ is context, not the only source");
 });
 
 test("ES5 and house style: no arrow functions, let/const, template literals, classes; no em or en dash", () => {
@@ -228,7 +231,7 @@ test("app: native but the pack is not downloaded: same message, no model call", 
   assert.equal(s.answers.length, 0); assert.deepEqual(s.net, { fetch: 0, xhr: 0, ai: 0 });
 });
 
-test("app: native with MaiK Lite: one local call, no retrieval, the checked answer on screen, zero network", async () => {
+test("app: native with MaiK Lite: one local call with retrieval, the checked answer on screen, zero network", async () => {
   const reply = { text: "B is wrong: valproate is not the cause. Phenytoin causes gingival hyperplasia in about 50% of patients.", model: "MAiK Lite" };
   const s = sandbox({ native: true, local: true, installed: true, reply });
   assert.equal(await s.w.PREP_TEACHER.available(), true); assert.equal(s.w.PREP_TEACHER.ready(), true);
@@ -239,7 +242,7 @@ test("app: native with MaiK Lite: one local call, no retrieval, the checked answ
   assert.match(h.html, /Written on this phone by MAiK Lite/);
   assert.equal(s.answers.length, 1);
   const call = s.answers[0];
-  assert.equal(call.o._grounding, null, "no Knowledge Base retrieval: the item is the grounding");
+  assert.equal(call.o._grounding, undefined, "same on-device retrieval as the main MaiK chat: the item is context");
   assert.equal(call.o.systemOverride, T.SYSTEM); assert.equal(call.o.temperature, 0);
   assert.ok(call.pkg.question.startsWith("GROUNDING:\nQuestion: "));
   assert.deepEqual(s.net, { fetch: 0, xhr: 0, ai: 0 });

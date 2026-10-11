@@ -1409,7 +1409,7 @@
   var HEPATIC_Q = /\b(hepatic|liver|cirrho\w*|child-pugh)\b/i;
   var PREG_Q = /\b(pregnan\w*|childbearing|child-bearing|contracept\w*|lactat\w*|breast-?feed\w*|trimester)/i;
   var LACT_Q = /\b(lactat\w*|breast-?feed\w*)/i;
-  var DRUG_DOSE_Q = /\b(dos(?:e|es|ing|age)|how much|how to (?:give|dose|use)|max(?:imum)?|renal|kidney|ckd|egfr|crcl|hepatic|liver|safe|contraindicat\w*|can i (?:give|use|prescribe))\b|\bmg\b/i;
+  var DRUG_DOSE_Q = /\b(dos(?:e|es|ing|age)|how much|how to (?:give|dose|use)|giv(?:e|en|ing)?|administer\w*|rout\w*|max(?:imum)?|renal|kidney|ckd|egfr|crcl|hepatic|liver|safe|contraindicat\w*|indication\w*|side[\s-]*effects?|adverse|interact\w*|precaution\w*|monitor\w*|mechanism|can i (?:give|use|prescribe))\b|\b(mg|iv|im|sc)\b|\b(intravesical|intravenous|intramuscular|subcutaneous|oral)\b/i;
   var SEV_RANK = { contraindicated: 0, major: 1, moderate: 2 };
   function wordSet(s) { var o = {}; String(s).toLowerCase().split(/[^a-z]+/).forEach(function (w) { if (w.length > 3) o[w] = 1; }); return o; }
   function overlap(a, b) {
@@ -1488,6 +1488,33 @@
     }
     return next();
   }
+  /* A drug question for a molecule with no dose-rules row and no formulary line still gets its gold
+   * monograph summary (dosage + administration + contra/monitoring) when the offline bundle holds it.
+   * Fallback only: when indexPassage already answered, this is not added, so existing passages keep
+   * their order and the curated budget holds. -> Promise<passage|null>, never rejects. */
+  function monoPassage(n, q) {
+    var S = window.SMD_OFFLINE_CLINICAL;
+    if (!S || !S.structured) return Promise.resolve(null);
+    var routeQ = /\b(giv\w*|administer\w*|rout\w*|iv\b|im\b|sc\b|intravesical|intravenous|intramuscular|subcutaneous|oral)\b/i.test(String(q || ""));
+    var cands = [n.g, "sodium " + n.g], i = 0;
+    function next() {
+      if (i >= cands.length) return Promise.resolve(null);
+      return S.structured(cands[i++]).then(function (r) {
+        var gd = r && r.found && r.data && r.data.gold;
+        if (typeof gd === "string") { try { gd = JSON.parse(gd); } catch (e) { gd = null; } }
+        if (!gd || (!gd.summary && !(gd.dosage && gd.dosage.length) && !(gd.admin && gd.admin.length))) return next();
+        var parts = [];
+        if (gd.summary) parts.push(gd.summary);
+        (gd.dosage || []).slice(0, 2).forEach(function (d) { parts.push((d.c ? d.c + ": " : "") + (d.d || "") + (d.t ? " (" + d.t + ")" : "")); });
+        (routeQ ? (gd.admin || []).slice(0, 3) : []).forEach(function (a) { parts.push(a); });
+        if (gd.contra && gd.contra.absolute && gd.contra.absolute.length) parts.push("Do not use: " + gd.contra.absolute.slice(0, 2).join("; "));
+        var body = cleanPassage(parts.join(" "));
+        if (body.length < 80) return next();
+        return { heading: "StewardMD Drug Index > " + String(gd.generic || n.n).slice(0, 60), text: body.slice(0, PASSAGE_CHARS), curated: true, drug: "mono" };
+      }, next);
+    }
+    return next();
+  }
   /* -> Promise<passage[]>, never rejects. */
   function drugEvidence(pkg) {
     try {
@@ -1498,13 +1525,15 @@
       if (!names.length || (!many && !DRUG_DOSE_Q.test(q) && !PREG_Q.test(q))) return Promise.resolve([]);
       var DC = w.SMD_DOSECALC, findP = (DC && DC.load && DC.find) ? DC.load().then(function () { return DC.find; }, function () { return null; }) : Promise.resolve(null);
       var pregP = PREG_Q.test(q) ? pregnancyPassage(names[0], LACT_Q.test(q)).catch(function () { return null; }) : Promise.resolve(null);
-      return Promise.all([findP, pregP]).then(function (r) {
+      var monoP = !many ? monoPassage(names[0], q).catch(function () { return null; }) : Promise.resolve(null);
+      return Promise.all([findP, pregP, monoP]).then(function (r) {
         var out = [];
         if (r[1]) out.push(r[1]);
         var ix = many ? interactionPassage(names) : null;
         if (ix) out.push(ix);
         var idx = indexPassage(names, q, r[0]);
         if (idx) out.push(idx);
+        else if (r[2]) out.push(r[2]);
         return out;
       }).catch(function () { return []; });
     } catch (e) { return Promise.resolve([]); }

@@ -1,11 +1,12 @@
 /* PrepNucleus offline teacher (LayerC Phase 6): "Why is B wrong?" answered on the phone. window.PREP_TEACHER. ES5.
    Plan: vault/plans/PrepNucleus-LayerC.md, roadmap row "6 Offline teacher".
 
-   Model. The on-device MaiK pack the clinician selected (MaiK Lite or MxCore, llama.cpp through capacitor-llama, n_ctx
-   4096), run through SMD_MAIK_LOCAL.answer() with a teacher system prompt and NO retrieval (opts._grounding = null:
-   the question's own stored text is the grounding, not the Knowledge Base). Native only, and only when the selected
-   pack is downloaded. There is no other path: no server AI, no SMD_AI, no fetch. Not available means the screen says
-   so and offers nothing else.
+   Model. The on-device MaiK pack the student selected (MaiK Lite or MxCore, llama.cpp through capacitor-llama, n_ctx
+   4096), run through SMD_MAIK_LOCAL.answer() with a teacher system prompt and the SAME retrieval as the main MaiK
+   chat (drug index/monographs, Knowledge Base, protocols). The MCQ's stored text rides in the prompt as CONTEXT,
+   not as the only source: the answer is built from the stored explanation, the model's own knowledge, and retrieval.
+   Native only, and only when the selected pack is downloaded. There is no other path: no server AI, no SMD_AI, no
+   fetch. Not available means the screen says so and offers Online.
 
    Grounding. The stem, the four options, the key, the stored explanation exp, the exam pearl kp, the per-option reasons
    r (Layer B/C items) and, for a student's own deck, the cited source sentences (PREP_DECKS prep-src, by src.sn). The
@@ -346,6 +347,29 @@
     if (/ (tell me about|what is|what are|what s|whats|expl\w*|teach\w*|meaning of|define) /.test(t) && out.length < 2) out.push("Teach the idea briefly, then link it back to this question.");
     return out.join(" ");
   }
+  /* isFactual(text) -> true for a factual follow-up about a drug or disease (dose, route, how given,
+     side effects, contraindication, interaction, pregnancy, mechanism). Those go to retrieval first through
+     the main on-device pipeline; "why not A", "explain simply" and "mnemonic" keep their templates (intentHint)
+     but still run with retrieval on for the facts. Typo tolerant on purpose. */
+  var FACTUAL_Q = /\b(dos(?:e|es|ing|age)|how much|how (?:is|are|was|were|do|does|to|should|can)\b[^?]{0,40}\b(giv\w*|administer\w*|tak\w*|dos\w*|treat\w*|manage\w*)|giv(?:e|en|ing)\b|administer\w*|rout\w*|intravenous|intramuscular|subcutaneous|intravesical|side[\s-]*effects?|adverse|contraindicat\w*|indication\w*|interact\w*|precaution\w*|warn\w+|monitor\w*|mechanism|moa\b|pharmacokinetics|half[\s-]*life|elimination|metabol\w*|excret\w*|pregnan\w*|lactat\w*|breast[\s-]*feed\w*|overdos\w*|toxicity|antidote|treat\w*|therap\w*|manage\w*)\b|\b(iv|im|sc|po|mg|mcg|ml)\b/i;
+  function isFactual(text) {
+    var t = " " + str(text) + " ";
+    if (!FACTUAL_Q.test(t)) return false;
+    /* "Give a mnemonic" / "Give an example" ask for a study aid, not how to give a drug: template, not factual,
+       unless they also name a dose/route/side-effect fact to look up. */
+    if (/\b(mnemo\w*|examples?)\b/i.test(t) && !/\b(dos\w*|rout\w*|\biv\b|\bim\b|mg\b|side[\s-]*effects?|contraindicat\w*|interact\w*)\b/i.test(t)) return false;
+    return true;
+  }
+  /* LOCAL_HANDOFF (owner 2026-10-11): when the on-phone model cannot answer well or retrieval finds nothing
+     useful, the sheet says this instead of repeating the stored explanation, with an "Ask MaiK Online" button
+     that sends the same question (with the MCQ context) to the Online tab. Short and kind; no blame wording. */
+  var LOCAL_HANDOFF = "I am the on-phone offline AI and I am less experienced. For a better explanation, please consult our super-specialist, MaiK Cloud.";
+  var LOCAL_HANDOFF_OFFLINE = "I am the on-phone offline AI and I am less experienced. For a better explanation, please consult our super-specialist, MaiK Cloud. You are offline now; it will work when you are connected.";
+  /* poorAnswer(text) -> true when the model's reply is not an answer ( hedging, a refusal to commit, or the
+     verbatim fallback line). Dose or route facts shown must come from the monograph/KB (retrieval grounded)
+     or be clearly confident; otherwise the sheet hands off to MaiK Cloud instead of inventing. */
+  var POOR_ANSWER = /^\W*(i (?:am not sure|don'?t know|cannot|can'?t)|not sure|don'?t know|cannot answer|can'?t answer|the stored explanation does not cover this)\b/i;
+  function poorAnswer(text) { return !str(text).trim() || POOR_ANSWER.test(str(text).trim()); }
   /* chatPrompt(ground, ctx) -> the user turn; the server builds the same text (chatUser). */
   function chatPrompt(ground, ctx) {
     var ms = ctx.messages || [], lines = ms.map(function (m) { return (m.r === "u" ? "Student: " : "MaiK: ") + m.t; });
@@ -383,7 +407,17 @@
       if (!text) return fail("empty");
       if (/^\W*the stored explanation does not cover this\W*$/i.test(text)) return fail("not-covered");
       var ck = check(text, ground, deps.lexicon);
-      return { ok: true, text: text, check: ck, beyond: ck.ok ? [] : beyondOf(ck) };
+      var out = { ok: true, text: text, check: ck, beyond: ck.ok ? [] : beyondOf(ck) };
+      if (r && typeof r === "object") {
+        if (r.grounded !== undefined) out.grounded = !!r.grounded;
+        if (r.grounding) out.grounding = r.grounding;
+        if (r.engine) out.engine = r.engine;
+        if (r.drug) out.drug = r.drug;
+        if (r.citations) out.citations = r.citations;
+      }
+      out.factual = isFactual(ctx.messages.length ? ctx.messages[ctx.messages.length - 1].t : "");
+      out.poor = poorAnswer(text);
+      return out;
     }, function () { return fail("model-error"); });
   }
   /* handoff(info, turns) -> { topic, prefill } for the MaiK assistant: the topic chip and a short summary of the
@@ -400,7 +434,8 @@
     numbersIn: numbersIn, sourceNumbers: sourceNumbers, missingNumbers: missingNumbers, lexMap: lexMap, drugsIn: drugsIn, capsTerms: capsTerms,
     check: check, cleanAnswer: cleanAnswer, fallbackFor: fallbackFor, teach: teach, stepGround: stepGround, teachStep: teachStep, STEP_SYSTEM: STEP_SYSTEM,
     CHAT_SYSTEM: CHAT_SYSTEM, CHAT_LIM: CHAT_LIM, CHAT_NOTES: CHAT_NOTES, userCount: userCount, onlineCount: onlineCount, canAsk: canAsk, summarise: summarise,
-    chatContext: chatContext, chatPrompt: chatPrompt, intentHint: intentHint, chatClean: chatClean, teachChat: teachChat, handoff: handoff };
+    chatContext: chatContext, chatPrompt: chatPrompt, intentHint: intentHint, chatClean: chatClean, teachChat: teachChat, handoff: handoff,
+    FACTUAL_Q: FACTUAL_Q, isFactual: isFactual, LOCAL_HANDOFF: LOCAL_HANDOFF, LOCAL_HANDOFF_OFFLINE: LOCAL_HANDOFF_OFFLINE, poorAnswer: poorAnswer };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -427,11 +462,12 @@
     return Promise.resolve().then(function () { return M.installed ? M.installed(packId()) : ready(); })
       .then(function (ok) { return !!ok; }, function () { return false; });
   }
-  // MaiK's local engine with the teacher prompt and NO Knowledge Base retrieval (_grounding null): queued with every
-  // other local generation, on the selected pack, at temperature 0.
+  // MaiK's local engine with the teacher prompt and the SAME retrieval as the main MaiK chat: the MCQ's stored
+  // text rides inside the prompt as context, and answer() adds drug index/monograph, Knowledge Base and protocol
+  // passages where they apply. Queued with every other local generation, on the selected pack, at temperature 0.
   // A chat reply (opts.chat) runs a little warmer so it sounds like a conversation, not a recital.
   function localGenerate(prompt, system, opts) {
-    return local().answer({ question: prompt }, { systemOverride: system, _grounding: null, temperature: opts && opts.chat ? 0.3 : 0 });
+    return local().answer({ question: prompt }, { systemOverride: system, temperature: opts && opts.chat ? 0.3 : 0 });
   }
   // A student's own deck item: its cited source sentences, read from the phone (prep-decks.js). Others: none.
   function sourceSentences(item) {
