@@ -59,6 +59,9 @@ export function logLedger(job, model, usage, costUsd, note) {
   fs.appendFileSync(LEDGER, row + "\n");
 }
 
+const EYE_SUBJECTS = opt("subjects", "pathology,anatomy,surgery").split(",").map((s) => s.trim()).filter(Boolean);
+const IS_EYE = EYE_SUBJECTS.includes("ophthalmology");
+
 export const CLASSIFY_SYSTEM_PROMPT = `You are a medical school professor and board exam question reviewer for NEET-PG, INI-CET, and USMLE.
 Analyze the provided medical image and its source caption/metadata.
 Evaluate clinical validity, board teachability, de-identification compliance, and image clarity.
@@ -85,12 +88,38 @@ Output valid JSON only matching this schema:
   "rejection_reason": string | null
 }`;
 
+export const EYE_CLASSIFY_SYSTEM_PROMPT = `You are a medical school professor and board exam question reviewer for NEET-PG, INI-CET, and USMLE.
+Analyze the provided ophthalmology image (OCT scan, fundus photograph, optic disc photograph, slit lamp photograph, or ocular ultrasound) and its source caption/metadata.
+Evaluate clinical validity, board teachability, de-identification compliance, and image clarity.
+
+Strict Rules:
+1. Patient De-Identification: If ANY human face, recognizable eyes/nose/mouth outside a close-up eye photograph, patient name, medical record number, birth date, hospital name, or identifiable personal feature is visible, flag is_clinical_photo_with_identifiable_person: true and keep: false. A close-up of one eye (slit lamp, fundus) with no other facial features is NOT identifiable.
+2. Authority Rule: The caption/source text MUST establish an authoritative diagnosis, grade, or stage. If the caption is vague, ambiguous, or lacks a definitive diagnosis, keep: false.
+3. Burned-In Text: If the image has text printed directly on it that explicitly states the diagnosis/answer, flag burned_in_text_reveals_diagnosis: true and keep: false. Minor scale bars, laterality letters, or acquisition markers are acceptable if they do not spell out the diagnosis.
+4. Quality & Teachability: Rate teachability 1 to 5. 5 = classic board hallmark, 4 = very good, 3 = acceptable, 1-2 = poor/obscure. Only keep images with teachability >= 3 and quality in ["high", "medium"].
+
+Output valid JSON only matching this schema:
+{
+  "subject": "ophthalmology" | "other",
+  "topic": string (e.g. "diabetic-macular-edema", "rop-stage-3", "cataract"),
+  "image_type": "oct" | "fundus" | "optic_disc" | "slit_lamp" | "ultrasound" | "other",
+  "is_clinical_photo_with_identifiable_person": boolean,
+  "burned_in_text": string[],
+  "burned_in_text_reveals_diagnosis": boolean,
+  "quality": "high" | "medium" | "low",
+  "caption_states_specific_diagnosis_or_structure": boolean,
+  "authoritative_answer": string (exact diagnosis, grade, or stage from caption),
+  "teachability": number (1-5),
+  "keep": boolean,
+  "rejection_reason": string | null
+}`;
+
 async function callClaudeVision(env, imageBase64, mediaType, promptText) {
   const body = {
     model: MODEL,
     max_tokens: 2500,
     thinking: { type: "disabled" },
-    system: CLASSIFY_SYSTEM_PROMPT,
+    system: IS_EYE ? EYE_CLASSIFY_SYSTEM_PROMPT : CLASSIFY_SYSTEM_PROMPT,
     messages: [
       {
         role: "user",
@@ -153,7 +182,7 @@ async function callClaudeVision(env, imageBase64, mediaType, promptText) {
 
 async function main() {
   if (argv.includes("--help") || argv.includes("-h")) {
-    console.log("Usage: node tools/prep-imgclassify.mjs [--limit N] [--concurrency N] [--pool F] [--out F] [--ledger F]");
+    console.log("Usage: node tools/prep-imgclassify.mjs [--limit N] [--concurrency N] [--pool F] [--out F] [--ledger F] [--subjects a,b]");
     console.log("Classifies pool images with Haiku vision. Resumable: skips ids already in out file. Limit 0 = all remaining.");
     return;
   }

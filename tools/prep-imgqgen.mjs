@@ -180,6 +180,67 @@ Return ONLY a valid JSON object matching this schema:
   }
 }`;
 
+export const EYE_GEN_SYSTEM_PROMPT = `You are a distinguished senior faculty member of the National Board of Examinations (NBEMS) designing image-based ophthalmology single-best-answer MCQs for NEET-PG and INI-CET.
+
+You will be given:
+1. A real clinical eye image (optical coherence tomography scan, fundus photograph, optic disc photograph, slit lamp photograph, or ocular ultrasound).
+2. The authoritative diagnosis, grade, or stage established by the source dataset ground truth.
+
+Requirements:
+1. Question Stem (q):
+   - A short, realistic clinical vignette (2 to 4 sentences) including patient age/sex, presentation, and key examination findings that fit the authoritative diagnosis.
+   - Conclude with a clear prompt, e.g. "The finding is shown in the image. What is the most likely diagnosis?" or "What grade/stage is shown?" or "What is the next best step?"
+   - Medical term first with the plain meaning in brackets at its first use (e.g. "neovascularisation (new abnormal blood vessel growth)"). Never use a lay word instead of the medical term.
+   - Expand every abbreviation at its first use (e.g. "optical coherence tomography (OCT)", "diabetic retinopathy (DR)", "retinopathy of prematurity (ROP)", "intraocular pressure (IOP)"). Later uses may be short.
+   - DO NOT reveal the answer, filename, source, or author in the stem!
+   - NO em-dashes (—) or en-dashes (–). Use hyphens (-), commas, colons, or parentheses.
+   - NO emojis.
+   - NO source citations, book names, author names, coaching brands, or hospital mentions.
+2. Four Options (o):
+   - Array of exactly 4 plausible, medically homogeneous options (all diagnoses, all grades/stages, or all next steps at a similar level).
+   - Exactly ONE correct option matching the authoritative diagnosis.
+   - The correct answer position should be randomly distributed among indices 0, 1, 2, 3.
+   - Options follow the same term-first and abbreviation rules as the stem.
+3. Reasons (r) & Explanation (exp):
+   - r: Array of 4 concise explanations, one for each option (why the correct option is right based on image landmarks, and why each distractor is wrong).
+   - exp: Comprehensive explanation paragraph detailing hallmark image features, diagnostic criteria or grading, and clinical significance, following the same term-first and abbreviation rules.
+4. Key Pearl (kp):
+   - High-yield, memorable "Remember" pearl for rapid exam revision.
+5. Reasoning Object (x):
+   - key: Detailed reason why the keyed option is correct based on image findings.
+   - others: Object with keys "A", "B", "C", "D" (for the 3 distractors) explaining why they are ruled out.
+   - clues: 2-3 decisive image or clinical clues.
+   - ddx: Differential diagnosis comparison.
+   - mech: Underlying pathophysiology.
+   - lo: Learning objective statement.
+   - rev: 2-3 bullet-point summary lines for quick recall.
+6. Cognitive Level (cog): "reasoning" or "application" (or "recall").
+7. Difficulty (d): 1 (straightforward classic), 2 (moderate clinical vignette), 3 (challenging).
+8. Module ID (t): Valid module identifier matching the topic.
+
+Return ONLY a valid JSON object matching this schema:
+{
+  "q": string,
+  "o": [string, string, string, string],
+  "a": number (0, 1, 2, or 3),
+  "exp": string,
+  "d": number (1, 2, or 3),
+  "r": [string, string, string, string],
+  "kp": string,
+  "cog": "reasoning" | "application" | "recall",
+  "t": string,
+  "x": {
+    "key": string,
+    "others": { "A": string, ... },
+    "pearl": string,
+    "clues": string,
+    "ddx": string,
+    "mech": string,
+    "lo": string,
+    "rev": string
+  }
+}`;
+
 export const VERIFY_SYSTEM_PROMPT = `You are an independent Chief Medical Examiner evaluating an image-based question blind.
 Examine the image and the 4 options carefully without knowing which option the author intended as the key.
 Determine the single best answer based solely on standard medical evidence and visual hallmarks in the image.
@@ -379,7 +440,7 @@ Generate a rigorous Board-style single-best-answer MCQ where the correct answer 
 
     try {
       // 1. Generate with the first-pass model
-      const genSys = PROFILE === "ecg" ? ECG_GEN_SYSTEM_PROMPT : GEN_SYSTEM_PROMPT;
+      const genSys = PROFILE === "ecg" ? ECG_GEN_SYSTEM_PROMPT : PROFILE === "eye" ? EYE_GEN_SYSTEM_PROMPT : GEN_SYSTEM_PROMPT;
       const genResp = await callClaude(env, GEN_MODEL, genSys, [
         { type: "image", source: { type: "base64", media_type: mediaType(item.destPath), data: b64 } },
         { type: "text", text: genPrompt }
