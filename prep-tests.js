@@ -498,6 +498,7 @@
     var st = loadGrp(), ordered = examOrder(list, p0.id);
     P.grpQ = {};
     return '<div id="pnT2Res">' + (P.sess && P.sess.t2 && !P.sess.done ? resumeHtml(P.sess) : "") + "</div>" +
+      (H.coachSec ? H.coachSec("tests") : "") +
       '<p class="pn-mut pn-small">The same ready-made papers for every student, grouped by exam and format. Your exam is on top.</p>' +
       ordered.map(function (p) { return examSection(p, p0.id, st); }).join("") + globalPracticeHtml() +
       '<p class="pn-mut pn-small" id="pnT2Note">Every test shows its size, time and scope before it starts. When the bank cannot fill a blueprint the test is shortened and says why; it is never padded with unrelated questions. Results use the exam\'s marking only: no rank, percentile or predicted score.</p>';
@@ -1011,7 +1012,7 @@
         '<ul class="t2dist">' + Object.keys(rec.distribution.actual).map(function (k) { return "<li><span>" + esc(subjectName(k)) + "</span><span>" + rec.distribution.actual[k] + (rec.distribution.planned[k] != null && rec.distribution.planned[k] !== rec.distribution.actual[k] ? " of " + rec.distribution.planned[k] + " planned" : "") + "</span></li>"; }).join("") + "</ul></details>";
       panel = '<div role="tabpanel" id="t2p-analysis" aria-labelledby="t2tab-analysis" tabindex="0">' +
         (small ? "" : '<h3 class="t2h">Patterns</h3>' + r2patterns(rec)) +
-        '<h3 class="t2h">Knowledge gaps</h3>' + r2gaps(r, rec, p.id) + r2pearls(r) +
+        '<h3 class="t2h">Knowledge gaps</h3>' + r2gaps(r, rec, p.id) + r2pearls(r) + (H.coachResult ? H.coachResult(r) : "") +
         (G.PREP_ASK ? '<button type="button" class="t2btn pri t2ask" data-act="ask-sum">Ask MaiK about this result</button><p class="t2note">MaiK answers from this result on your phone, or online with your say-so.</p>' : "") +
         tr + how + statsAsk() + "</div>";
     }
