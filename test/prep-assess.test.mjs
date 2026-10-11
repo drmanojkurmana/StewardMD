@@ -3,7 +3,10 @@
  *  - every profile is valid, carries provenance for each format/navigation/scoring rule, and the official numbers checked
  *    against the stored bulletins (NEET-PG 2026: 180 Q, 5 x 36 x 42 min, +4/-1; INI-CET Jan 2026: 200, 4 x 50 x 45, +1/-1/3;
  *    FMGE Oct 2026: 2 parts x 150, no negative marking, pass 150/300, official subject blueprint; NEET-SS 2025: 150,
- *    3 x 50 x 50, +4/-1; USMLE Step 1 blocks of 20 in 30 min from 2026-05-14, provisional; INI-SS provisional);
+ *    3 x 50 x 50, +4/-1; USMLE Step 1 blocks of 20 in 30 min from 2026-05-14, provisional; INI-SS provisional;
+ *    PLAB 1, AMC CAT MCQ, MCCQE Part I official, USMLE Step 2 CK provisional);
+ *  - every profile carries a calibration block (status, items studied, sources, date; aggregate stats only, no item
+ *    text) and the four new formats report bankStatus coming: the Tests tab shows their format with no test buttons;
  *  - client and server read one source: prep.js MOCKS equals the pre-flag literal, functions/_prep-arena.js SCHEMES and
  *    functions/_prep-core.js EXAM_PROFILES equal what they were, and prep-profiles.js is the up-to-date compile;
  *  - assemble(): eligible items only, no duplicate id or stem, official quotas never filled from other subjects (shrink,
@@ -32,7 +35,7 @@ test("prep-profiles.js is the up-to-date compile of prep/assess/profiles/*.json"
 });
 
 test("every profile validates; official rules have a source; no dashes", () => {
-  assert.deepEqual(A.profileIds(), ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1"]);
+  assert.deepEqual(A.profileIds(), ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1"]);
   for (const id of A.profileIds()) assert.deepEqual(A.validateProfile(A.profile(id)), [], id);
   // the validator catches drift
   const bad = JSON.parse(JSON.stringify(A.profile("neet-pg"))); bad.format.sections[0].questions = 40;
@@ -72,6 +75,79 @@ test("official numbers as checked in the stored bulletins (2026-10-10)", () => {
   assert.equal(A.provOf(is, "/format/options").official, false, "option count not stated: inferred");
   // INI-CET re-verified against the January 2027 Part A (p15): unchanged format and marking
   assert.equal(ini.version, "2027.1.0"); assert.ok(ini.sources["AIIMS-INICET-JAN2027-A"]); assert.equal(A.provOf(ini, "/format/sections").src, "AIIMS-INICET-JAN2027-A");
+  // New profiles (2026-10-12 research): PLAB 1, AMC CAT MCQ, MCCQE Part I, USMLE Step 2 CK
+  const plab = A.profile("plab-1");
+  assert.equal(plab.status, "official");
+  assert.deepEqual([plab.format.questions, plab.format.duration_min, plab.format.options], [180, 180, 5]);
+  assert.equal(plab.format.sections.length, 1); assert.deepEqual([plab.scoring.correct, plab.scoring.incorrect], [1, 0]);
+  assert.equal(plab.navigation.revisit_within_section, true); assert.equal(plab.blueprint.kind, "none");
+  const amc = A.profile("amc-mcq");
+  assert.equal(amc.status, "official");
+  assert.deepEqual([amc.format.questions, amc.format.duration_min, amc.format.options], [150, 210, 5]);
+  assert.equal(amc.navigation.revisit_within_section, false, "forward-only adaptive: no revisit");
+  assert.equal(amc.navigation.mark_for_review, false);
+  assert.equal(amc.blueprint.kind, "official_counts");
+  assert.deepEqual([amc.blueprint.subjects["adult-health-medicine"], amc.blueprint.subjects["adult-health-surgery"], amc.blueprint.unmapped["pilot-items"]], [36, 24, 30]);
+  const mc = A.profile("mccqe-1");
+  assert.equal(mc.status, "official");
+  assert.deepEqual([mc.format.questions, mc.format.duration_min, mc.format.parts], [230, 320, 2]);
+  assert.deepEqual(mc.format.sections.map((s) => [s.questions, s.minutes]), [[115, 160], [115, 160]]);
+  assert.equal(mc.navigation.return_to_closed_section, false); assert.equal(mc.blueprint.kind, "none");
+  const ck = A.profile("usmle-step2-ck");
+  assert.equal(ck.status, "provisional", "per-block counts and option counts vary");
+  assert.equal(ck.format.block_max_items, 20); assert.equal(ck.format.sections.length, 16);
+  assert.deepEqual([ck.format.questions, ck.format.duration_min], [318, 480]);
+  assert.equal(ck.tab, "usmle");
+});
+
+test("bank status: six banked exams available, four new formats coming", () => {
+  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
+  for (const id of ["usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1"]) {
+    assert.equal(A.bankStatus(A.profile(id)), "coming", id);
+    assert.match(A.profile(id).bank.note, /no .* in the bank yet/);
+  }
+  assert.equal(A.bankStatus(null), "available"); assert.equal(A.bankStatus({}), "available");
+});
+
+test("calibration: status and counts per profile, aggregate stats only", () => {
+  const want = {
+    "neet-pg": ["provisional", 5], "ini-cet": ["provisional", 4], "fmge": ["provisional", 3],
+    "neet-ss": ["provisional", 2], "ini-ss": ["provisional", 2], "usmle-step1": ["calibrated", 119],
+    "usmle-step2-ck": ["calibrated", 60], "plab-1": ["calibrated", 55], "amc-mcq": ["calibrated", 50], "mccqe-1": ["calibrated", 50]
+  };
+  for (const id of A.profileIds()) {
+    const c = A.profile(id).calibration;
+    assert.deepEqual([c.status, c.items_studied], want[id], id);
+    assert.ok(Array.isArray(c.sources) && c.sources.length > 0, id + " sources");
+    assert.match(c.date, /^\d{4}-\d{2}-\d{2}$/, id + " date");
+    assert.ok(c.note && c.note.length < 300, id + " note");
+    for (const k of Object.keys(c)) assert.ok(["status", "items_studied", "sources", "date", "stats", "note"].includes(k), id + " " + k);
+    if (c.stats) for (const v of Object.values(c.stats)) assert.equal(typeof v, "number", id + " stats are numbers only");
+  }
+  assert.equal(A.profile("neet-pg").calibration.note, "calibrated against 5 official items, provisional; 1,899 memory-based recall items coded separately as pattern records");
+  assert.deepEqual(A.profile("usmle-step1").calibration.stats, { mean_stem_words: 105.8, vignette_share: 1.0, image_share: 0.849 });
+  // calibration pattern files stay out of the repo: profiles carry aggregate stats, never item text
+  const names = fs.readdirSync(new URL("prep/assess/profiles/", ROOT));
+  assert.ok(names.every((f) => f.endsWith(".json")), "no .jsonl calibration files in the repo");
+  for (const id of A.profileIds()) assert.doesNotMatch(JSON.stringify(A.profile(id).calibration), /cal-plab1|cal_id|item_ref/);
+});
+
+test("Tests tab: coming exams show format only, no test buttons", () => {
+  const src = fs.readFileSync(new URL("prep-tests.js", ROOT), "utf8");
+  const mkH = (exam) => ({
+    store: () => ({ t2h: [], t2d: {} }), exam: () => ({ id: exam }),
+    ico: () => "", row: () => "", fmt: (n) => String(n), planToday: () => ({ due: 0, left: 0, weak: [] }), pure: {}
+  });
+  const G = { location: { search: "" }, localStorage: { getItem: () => null }, PREP_ASSESS: A };
+  new Function("window", src)(G);
+  const usmle = G.PREP_TESTS.testsHtml(mkH("usmle"));
+  assert.match(usmle, /More exam formats/);
+  assert.match(usmle, /Format available, question bank coming/);
+  for (const id of ["usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1"]) assert.ok(usmle.includes('data-p="' + id + '"'), id + " shown");
+  for (const id of ["usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1"]) assert.ok(!usmle.includes('data-p="' + id + '" data-k='), id + " has no test buttons");
+  assert.ok(usmle.includes('data-p="usmle-step1" data-k='), "Step 1 keeps its test buttons");
+  const pg = G.PREP_TESTS.testsHtml(mkH("neet-pg"));
+  assert.ok(pg.includes("More exam formats") && pg.includes('data-p="plab-1"'));
 });
 
 test("client and server read the same profiles: MOCKS, SCHEMES, EXAM_PROFILES unchanged", async () => {

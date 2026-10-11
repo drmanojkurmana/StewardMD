@@ -129,6 +129,10 @@
     return e;
   }
   function provOf(p, field) { var r = null; (p.provenance || []).forEach(function (x) { if (x.field === field) r = x; }); return r; }
+  // bankStatus(p) -> "available" | "coming": whether the app question bank can build tests for the exam.
+  // Profiles without a bank block are available (the six banked exams); PLAB 1, AMC, MCCQE and USMLE Step 2 CK
+  // carry bank.status "coming" until banked questions exist. The Tests tab shows those as format-only.
+  function bankStatus(p) { return (p && p.bank && p.bank.status) || "available"; }
 
   /* ---------- seeded random ---------- */
   function hashStr(s) { var h = 2166136261; s = String(s); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h >>> 0; }
@@ -528,7 +532,7 @@
   }
 
   var API = { RANK_MIN_N: RANK_MIN_N, CLOCK_BACK_MS: CLOCK_BACK_MS, SAVE_EVERY_MS: SAVE_EVERY_MS, TYPES: TYPES,
-    profiles: profiles, profileIds: profileIds, profile: profile, forTab: forTab, paceSec: paceSec, scheme: scheme, legacyMocks: legacyMocks, schemes: schemes, coreProfiles: coreProfiles, validateProfile: validateProfile, provOf: provOf,
+    profiles: profiles, profileIds: profileIds, profile: profile, forTab: forTab, paceSec: paceSec, scheme: scheme, legacyMocks: legacyMocks, schemes: schemes, coreProfiles: coreProfiles, validateProfile: validateProfile, provOf: provOf, bankStatus: bankStatus,
     rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, isVignette: isVignette, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
     blueprint: blueprint, apportion: apportion, assemble: assemble, targetLevel: targetLevel,
     scNew: scNew, scLeft: scLeft, scStart: scStart, scCharge: scCharge, scResume: scResume, scClose: scClose,
