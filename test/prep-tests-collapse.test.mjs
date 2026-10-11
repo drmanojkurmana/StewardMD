@@ -37,6 +37,8 @@ function mockA(list) {
   return {
     forTab: (tab) => list.filter((p) => p.tab === tab),
     profile: (id) => byId[id] || null,
+    profileIds: () => list.map((p) => p.id),
+    bankStatus: () => "available",
     blueprint: (p, type) => {
       if (!p) return null;
       if (type === "part") return null;
