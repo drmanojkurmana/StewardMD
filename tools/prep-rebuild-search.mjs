@@ -9,6 +9,8 @@ import crypto from "node:crypto";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { buildSearch } from "./tokos-build-mcq-search.mjs";
+import { getR2Config, putR2Object } from "./prep-r2-s3.mjs";
+const hasR2S3 = !!getR2Config();
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const API = "https://stewardmd.in/api/prep/bank/";
@@ -65,17 +67,27 @@ async function rebuildSubject(sid, doUpload = false) {
       if (mc && mc.items) items = items.concat(mc.items);
     }
 
-    // Check local or live maik1
-    const maikLocal = path.join(PUB_MAIK, "maik1", sid, `${t.id}.json`);
-    if (fs.existsSync(maikLocal)) {
+    // Check local or live maik overlay sets
+    let maikSets = ["maik1", "maik2", "maik3"];
+    const pubIdxFile = path.join(PUB_MAIK, "maik", "index.json");
+    if (fs.existsSync(pubIdxFile)) {
       try {
-        const mj = JSON.parse(fs.readFileSync(maikLocal, "utf8"));
-        if (mj && mj.items) items = items.concat(mj.items);
+        const pj = JSON.parse(fs.readFileSync(pubIdxFile, "utf8"));
+        if (pj && pj.sets && pj.sets[sid]) maikSets = pj.sets[sid];
       } catch (_) {}
-    } else {
-      const maikUrl = `${API}overlay/maik1/${sid}/${t.id}.json`;
-      const mj = await fetchJSON(maikUrl);
-      if (mj && mj.items) items = items.concat(mj.items);
+    }
+    for (const mSet of maikSets) {
+      const maikLocal = path.join(PUB_MAIK, mSet, sid, `${t.id}.json`);
+      if (fs.existsSync(maikLocal)) {
+        try {
+          const mj = JSON.parse(fs.readFileSync(maikLocal, "utf8"));
+          if (mj && mj.items) items = items.concat(mj.items);
+        } catch (_) {}
+      } else {
+        const maikUrl = `${API}overlay/${mSet}/${sid}/${t.id}.json`;
+        const mj = await fetchJSON(maikUrl);
+        if (mj && mj.items) items = items.concat(mj.items);
+      }
     }
 
     return { id: t.id, items };
@@ -99,13 +111,17 @@ async function rebuildSubject(sid, doUpload = false) {
     console.log(`  Uploading ${key} to R2...`);
     for (let t = 1; ; t++) {
       try {
-        await runWrangler([
-          "wrangler", "r2", "object", "put", `${BUCKET}/${key}`,
-          "--file", stageFile,
-          "--content-type", "application/json",
-          "--cache-control", "public, max-age=31536000, immutable",
-          "--remote"
-        ]);
+        if (hasR2S3) {
+          await putR2Object(key, stageFile, "application/json", "public, max-age=31536000, immutable");
+        } else {
+          await runWrangler([
+            "wrangler", "r2", "object", "put", `${BUCKET}/${key}`,
+            "--file", stageFile,
+            "--content-type", "application/json",
+            "--cache-control", "public, max-age=31536000, immutable",
+            "--remote"
+          ]);
+        }
         break;
       } catch (e) {
         if (t >= 4) throw e;
@@ -147,13 +163,17 @@ async function main() {
 
   if (doUpload) {
     console.log("Uploading updated manifest.json to R2...");
-    await runWrangler([
-      "wrangler", "r2", "object", "put", `${BUCKET}/prep-bank/v5/manifest.json`,
-      "--file", manPath,
-      "--content-type", "application/json",
-      "--cache-control", "public, max-age=300",
-      "--remote"
-    ]);
+    if (hasR2S3) {
+      await putR2Object("prep-bank/v5/manifest.json", manPath, "application/json", "public, max-age=300");
+    } else {
+      await runWrangler([
+        "wrangler", "r2", "object", "put", `${BUCKET}/prep-bank/v5/manifest.json`,
+        "--file", manPath,
+        "--content-type", "application/json",
+        "--cache-control", "public, max-age=300",
+        "--remote"
+      ]);
+    }
     console.log("Manifest uploaded.");
   }
 }
