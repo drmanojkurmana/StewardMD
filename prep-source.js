@@ -17,7 +17,7 @@
   "use strict";
 
   /* ================= pure ================= */
-  var PAGE_CAP = 60, CHARS_CAP = 300000, MIN_CHARS = 200, CHUNK_TOK = 5000, SCANNED_CHARS = 200;
+  var PAGE_CAP = 60, CHARS_CAP = 300000, MIN_CHARS = 200, CHUNK_TOK = 5000, SCANNED_CHARS = 200, CUT_MB = 50;
 
   function fixText(s) {
     return String(s == null ? "" : s)
@@ -344,13 +344,15 @@
   // pages -> [first, last] for the manifest.
   function pageSpan(pages) { return pages && pages.length ? [pages[0], pages[pages.length - 1]] : null; }
 
-  /* ---------- the page picker (owner 2026-10-09): never a silent "first 60 pages" ----------
+  /* ---------- the page picker (owner 2026-10-09, first-60 default 2026-10-11) ----------
      A selection is a sorted array of page numbers. Every change goes through these, so the 60-page cap holds in one
-     place: a change that would pass the cap is refused whole ({ sel unchanged, error }) and says so in plain words. */
+     place: a change that would pass the cap is refused whole ({ sel unchanged, error }) and says so in plain words.
+     A long PDF starts with the first 60 picked, always beside the plain message (rangeMsg): the default is never
+     silent, and the student picks another range (typed or tapped) or makes another deck for the rest. */
   function capMsg(cap, want) { return "You can pick up to " + cap + " pages for one deck" + (want ? "; that would make " + want + "." : ".") + " Make another deck for the rest."; }
   function selNorm(list, total) { var o = {}; (list || []).forEach(function (p) { p = +p; if (p >= 1 && p <= total && p === Math.floor(p)) o[p] = 1; }); return Object.keys(o).map(Number).sort(function (a, b) { return a - b; }); }
-  // Small PDFs start with every page picked; a long one starts with none (the student chooses the chapter).
-  function selInitial(total, cap) { cap = cap || PAGE_CAP; var out = []; if (total <= cap) for (var i = 1; i <= total; i++) out.push(i); return out; }
+  // Small PDFs start with every page picked; a long one starts with the first 60 (the phone always says so).
+  function selInitial(total, cap) { cap = cap || PAGE_CAP; var out = [], n = Math.max(0, Math.min(total || 0, cap)); for (var i = 1; i <= n; i++) out.push(i); return out; }
   function selToggle(sel, p, total, cap) {
     cap = cap || PAGE_CAP;
     var i = sel.indexOf(p);
@@ -381,6 +383,37 @@
     (sel || []).forEach(function (p) { if (s != null && p === prev + 1) { prev = p; return; } if (s != null) out.push(s === prev ? String(s) : s + "-" + prev); s = prev = p; });
     if (s != null) out.push(s === prev ? String(s) : s + "-" + prev);
     return out.join(", ");
+  }
+  /* Fitting a selection to the intake limits (owner 2026-10-11): at most 60 pages at once, and the pages' share of
+     the file under CUT_MB. Only text ever leaves the phone, so "the cut" is estimated, not measured: each page counts
+     as fileBytes / totalPages. Every fit keeps at least one page: a large PDF is never rejected. */
+  function fitBytes(sel, fileBytes, totalPages, maxBytes) {
+    var pages = (sel || []).slice().sort(function (a, b) { return a - b; });
+    maxBytes = maxBytes || CUT_MB * 1024 * 1024;
+    var per = fileBytes > 0 && totalPages > 0 ? fileBytes / totalPages : 0, before = pages.length;
+    while (pages.length > 1 && per * pages.length > maxBytes) pages.pop();
+    return { sel: pages, cut: pages.length < before, estMB: Math.round(per * pages.length / 104857.6) / 10 };
+  }
+  // The read pages that fit the text cap, dropping from the end. rd.pages entries ({ p, lines: [{ tx }]}).
+  function fitChars(pages, maxChars) {
+    var kept = (pages || []).slice(), dropped = 0;
+    var chars = function () { var n = 0; kept.forEach(function (pg) { (pg.lines || []).forEach(function (ln) { n += String(ln.tx || "").length + 1; }); }); return n; };
+    while (kept.length > 1 && chars() > maxChars) { kept.pop(); dropped++; }
+    return { pages: kept, dropped: dropped };
+  }
+  // The plain message for a PDF over the cap: which pages are used unless the student picks others.
+  function rangeMsg(total, sel, cap, noun) {
+    cap = cap || PAGE_CAP; noun = noun || "deck";
+    if (!total || total <= cap) return "";
+    var sp = pageSpan(sel || []);
+    return "This PDF has " + total + " pages. I can use up to " + cap + " pages at a time. " +
+      (sp ? "Pick pages or I will use pages " + sp[0] + " to " + sp[1] + ". Make another " + noun + " for the rest." : "Pick up to " + cap + " pages to begin.");
+  }
+  // The plain words when a fit shortens the selection: which pages are used and how many.
+  function fitMsg(sel) {
+    var sp = pageSpan(sel || []);
+    if (!sp) return "";
+    return sp[0] === sp[1] ? "Using page " + sp[0] + " to stay under 50 MB." : "Using pages " + sp[0] + " to " + sp[1] + " (" + (sel || []).length + " pages) to stay under 50 MB.";
   }
   /* Virtual grid: which pages to draw for a scroll position. top = the grid's offset inside the scroller, rowH = one
      row's height with its gap. -> { from, to } page numbers (1-based, inclusive), with `buf` rows either side. */
@@ -685,11 +718,12 @@
     IMG_MIN: IMG_MIN, IMG_CAP: IMG_CAP, IMG_MAX_PX: IMG_MAX_PX, imageBoxes: imageBoxes, pickImages: pickImages, nearSents: nearSents, cropScale: cropScale,
     SCAN_SHARE: SCAN_SHARE, isPageScan: isPageScan, pageShare: pageShare, textBoxes: textBoxes, textInBox: textInBox, scanPages: scanPages,
     toGray: toGray, classifyPixels: classifyPixels, figureRegions: figureRegions, figureOk: figureOk,
-    PAGE_CAP: PAGE_CAP, CHARS_CAP: CHARS_CAP, MIN_CHARS: MIN_CHARS, CHUNK_TOK: CHUNK_TOK, SCANNED_CHARS: SCANNED_CHARS,
+    PAGE_CAP: PAGE_CAP, CHARS_CAP: CHARS_CAP, MIN_CHARS: MIN_CHARS, CHUNK_TOK: CHUNK_TOK, SCANNED_CHARS: SCANNED_CHARS, CUT_MB: CUT_MB,
     fixText: fixText, fontSize: fontSize, itemsToLines: itemsToLines, bodySize: bodySize, isHeadingBySize: isHeadingBySize, markHeadings: markHeadings,
     isNoteHeading: isNoteHeading, notesToPages: notesToPages, stripRepeats: stripRepeats, splitSentences: splitSentences, buildDoc: buildDoc,
     docFromNotes: docFromNotes, docFromPdfPages: docFromPdfPages, docText: docText, defaultPages: defaultPages, parsePages: parsePages, pageSpan: pageSpan,
     selInitial: selInitial, selToggle: selToggle, selRange: selRange, selFromSpec: selFromSpec, selSpec: selSpec, gridWindow: gridWindow,
+    fitBytes: fitBytes, fitChars: fitChars, rangeMsg: rangeMsg, fitMsg: fitMsg,
     capCheck: capCheck, estTokens: estTokens, chunkSentences: chunkSentences, chunkOrder: chunkOrder, chunkPayload: chunkPayload,
     scrubFind: scrubFind, prepScrub: prepScrub, scrubSummary: scrubSummary,
     OCR_PAGE_CAP: OCR_PAGE_CAP, OCR_PAGE_MS: OCR_PAGE_MS, nonWordRatio: nonWordRatio, textChars: textChars, pageDecision: pageDecision, ocrToLines: ocrToLines,
@@ -715,12 +749,33 @@
     if (file.arrayBuffer) return file.arrayBuffer();
     return new Promise(function (res, rej) { var fr = new G.FileReader(); fr.onload = function () { res(fr.result); }; fr.onerror = function () { rej(fr.error); }; fr.readAsArrayBuffer(file); });
   }
-  // file -> { doc, pages: total, name }. The file is read in memory only; it is never copied or sent.
+  /* file -> { doc, pages: total, name, bytes }. Files over RANGE_MIN are read by byte range: only the first bytes
+     and the ranges of the pages the student picks are loaded, so a 500 MB file is never loaded whole (and, as ever,
+     only the picked pages' text is read: the file itself is never copied or sent). */
+  var RANGE_MIN = 8 * 1024 * 1024, RANGE_CHUNK = 65536;
   function openPdf(file) {
     var lib;
-    return loadPdfJs().then(function (l) { lib = l; return readFile(file); }).then(function (buf) {
-      return lib.getDocument({ data: new Uint8Array(buf) }).promise;
-    }).then(function (doc) { return { doc: doc, pages: doc.numPages, name: String(file.name || "Document.pdf") }; });
+    return loadPdfJs().then(function (l) {
+      lib = l;
+      if (file && file.size > RANGE_MIN && lib.PDFDataRangeTransport && file.slice) return openRanged(lib, file);
+      return readFile(file).then(function (buf) { return lib.getDocument({ data: new Uint8Array(buf) }).promise.then(function (doc) { return openDone(doc, file); }); });
+    });
+  }
+  function openDone(doc, file) { return { doc: doc, pages: doc.numPages, name: String(file.name || "Document.pdf"), bytes: file.size || 0 }; }
+  function readSlice(file, begin, end) {
+    var bl = file.slice(begin, end);
+    if (bl.arrayBuffer) return bl.arrayBuffer();
+    return new Promise(function (res, rej) { var fr = new G.FileReader(); fr.onload = function () { res(fr.result); }; fr.onerror = function () { rej(fr.error); }; fr.readAsArrayBuffer(bl); });
+  }
+  function openRanged(lib, file) {
+    return readSlice(file, 0, RANGE_CHUNK).then(function (first) {
+      var transport = new lib.PDFDataRangeTransport(file.size, new Uint8Array(first));
+      transport.requestDataRange = function (begin, end) {
+        readSlice(file, begin, end).then(function (buf) { transport.onDataRange(begin, new Uint8Array(buf)); }, function () { try { transport.abort(); } catch (e) {} });
+      };
+      transport.transportReady();
+      return lib.getDocument({ range: transport, rangeChunkSize: RANGE_CHUNK }).promise.then(function (doc) { return openDone(doc, file); });
+    });
   }
   // One page -> a JPEG data URL for OCR, about 2,000 px on the long side, on white (a transparent canvas would
   // encode as black). The canvas is released at once.

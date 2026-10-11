@@ -25,7 +25,7 @@
   "use strict";
 
   /* ================= pure ================= */
-  var PER = 5, COUNTS = [10, 20, 30], PAGE_CAP = 20, GROUND_MAX = 60000, OWNER_GROUND_MAX = 200000, EXTRA_ROUNDS = 2;
+  var PER = 5, COUNTS = [10, 20, 30], PAGE_CAP = 60, GROUND_MAX = 60000, OWNER_GROUND_MAX = 200000, EXTRA_ROUNDS = 2;
   var EXAMS = [["neet-pg", "NEET-PG"], ["ini-cet", "INI-CET"], ["neet-ss", "NEET-SS"], ["usmle", "USMLE"]];
   var DIFFS = [["mix", "Exam mix"], ["easy", "Easy"], ["moderate", "Moderate"], ["hard", "Hard"]];
   var MT_ROUND = 6000;   // MaiK Tokens a round (generate + check, 5 questions), from the first live rounds (Rs 2.6 to 3.1)
@@ -159,7 +159,7 @@
       '<p class="pn-mut pn-small" id="qgChars">' + fmtN(cs.text.length) + " of " + fmtN(GROUND_MAX) + " characters</p>";
     else srcHtml = '<button type="button" class="pc-drop" data-act="g-pick"' + (cs.busy ? " disabled" : "") + '><span class="pn-ic sm" style="--h:174" aria-hidden="true">' + host.ico("dl") + "</span><span><b>" + (cs.pdf ? esc(cs.pdf.name) : "Choose a PDF") + "</b><small>" + (cs.pdf ? fmtN(cs.pdf.pages) + " pages" : "A chapter or your notes, up to " + PAGE_CAP + " pages") + "</small></span></button>" +
       '<input type="file" id="qgFile" accept="application/pdf,.pdf" hidden aria-hidden="true" tabindex="-1">' +
-      (cs.pdf ? '<label class="pc-lbl" for="qgPages">Pages</label><input id="qgPages" name="pages" class="pc-in" inputmode="numeric" spellcheck="false" autocomplete="off" placeholder="For example 1-12…" value="' + esc(cs.spec) + '">' : "");
+      (cs.pdf ? '<label class="pc-lbl" for="qgPages">Pages</label><input id="qgPages" name="pages" class="pc-in" inputmode="numeric" spellcheck="false" autocomplete="off" placeholder="For example 1-12…" value="' + esc(cs.spec) + '">' + rangeLine(esc) : "");
     var grounded = cs.kind !== "topic";
     host.paint(host.bar("Create a module", "With MaiK", "back") + '<div class="pn-body qg-create" id="qgCreateView">' +
       (out ? '<section class="pn-panel qg-limit" role="status"><p class="qg-limh">Today\'s free modules are used</p><p class="pn-mut">You can create ' + st.caps.modulesPerDay + " modules with MaiK a day. Come back tomorrow, or practise the modules you made in Your decks.</p></section>" : "") +
@@ -186,11 +186,21 @@
     ON(fi, "change", function () { if (fi.files && fi.files[0]) pickPdf(fi.files[0], host); });
   }
   function createErr(host, m) { cs.err = m; cs.busy = ""; if (onTop("#qgCreateView", host)) host.rerender(); }
+  /* The plain line under the pages box for a long PDF: which pages are used, and the 50 MB fit when it bites. */
+  function rangeLine(esc) {
+    var S = SR();
+    if (!S || !cs.pdf || cs.pdf.pages <= PAGE_CAP) return "";
+    var rr = S.selFromSpec(cs.spec, cs.pdf.pages, PAGE_CAP), sel = (rr && rr.sel) || S.selInitial(cs.pdf.pages);
+    var msg = S.rangeMsg(cs.pdf.pages, sel, PAGE_CAP, "module");
+    var fit = S.fitBytes(sel, cs.pdf.bytes || 0, cs.pdf.pages || 0);
+    if (fit.cut) msg += (msg ? " " : "") + S.fitMsg(fit.sel);
+    return msg ? '<p class="pn-mut pn-small">' + esc(msg) + "</p>" : "";
+  }
   function pickPdf(file, host) {
     if (!SR()) return createErr(host, "PDFs cannot be read here. Paste the text instead.");
     cs.err = ""; cs.pdf = null; cs.busy = "Opening the PDF…"; host.rerender();
     SR().openPdf(file).then(function (pdf) {
-      cs.busy = ""; cs.pdf = pdf; cs.spec = pdf.pages <= PAGE_CAP ? "1-" + pdf.pages : "1-" + PAGE_CAP;
+      cs.busy = ""; cs.pdf = pdf; cs.spec = SR().defaultPages(pdf.pages);
       if (!cs.topic) cs.topic = pdf.name.replace(/\.pdf$/i, "").slice(0, 120);
       if (onTop("#qgCreateView", host)) host.rerender();
     }, function () { createErr(host, "This PDF could not be opened. It may be protected by a password or damaged."); });
@@ -205,6 +215,7 @@
     var pages = res && res.sel ? res.sel : res && res.pages ? res.pages : null;
     if (!pages || !pages.length) return Promise.reject(new Error((res && res.error) || "Type the pages to use, for example 1-12, up to " + PAGE_CAP + "."));
     if (pages.length > PAGE_CAP) return Promise.reject(new Error("Up to " + PAGE_CAP + " pages in one module."));
+    pages = SR().fitBytes(pages, cs.pdf.bytes || 0, cs.pdf.pages || 0).sel;
     cs.busy = "Reading page 1 of " + pages.length + "…"; host.rerender();
     var say = function (t) { var el = host.root() && host.root().querySelector("#qgCreateView .pc-readp .pn-load"); if (el) el.textContent = t; };
     return SR().readPdfPages(cs.pdf.doc, pages, function (d, n) { if (d < n) say("Reading page " + (d + 1) + " of " + n + "…"); }).then(function (rd) {
