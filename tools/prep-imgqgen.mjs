@@ -614,7 +614,7 @@ async function main() {
 Authoritative Diagnosis / Structure: ${item.authoritativeAnswer}
 Subject: ${item.subject}
 Caption: ${item.caption}
-
+${item.brief ? `Required question angle: ${item.brief}\n` : ""}
 Generate a rigorous Board-style single-best-answer MCQ where the correct answer matches the authoritative diagnosis above.`;
 
     try {
