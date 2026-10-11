@@ -93,7 +93,7 @@ async function session(engine, opts) {
   await page.route(/^https:\/\/prep\.test\/api\/prep\/stats$/, (r) => { page.statsPosts.push({ body: r.request().postData(), headers: r.request().headers() }); return r.fulfill({ status: 202, contentType: "application/json", body: '{"accepted":1,"stored":false}' }); });
   await page.addInitScript(`window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.SMD_PREP_OVERLAYS={};
     window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; window.__off=1000; window.SMD_PREP_NOW=function(){ return window.__off; };
-    try{ localStorage.setItem("smd_prep","1"); ${opts.flag ? 'localStorage.setItem("smd_prep_tests2","1");' : 'localStorage.removeItem("smd_prep_tests2");'} if (!sessionStorage.getItem("pnt2")) { sessionStorage.setItem("pnt2","1"); ["smd_prep_v1","smd_prep_setup","smd_prep_tt"].forEach(function(k){ localStorage.removeItem(k); }); } }catch(e){}`);
+    try{ localStorage.setItem("smd_prep","1"); ${opts.flag ? 'localStorage.setItem("smd_prep_tests2","1");' : 'localStorage.setItem("smd_prep_tests2","0");'} if (!sessionStorage.getItem("pnt2")) { sessionStorage.setItem("pnt2","1"); ["smd_prep_v1","smd_prep_setup","smd_prep_tt"].forEach(function(k){ localStorage.removeItem(k); }); } }catch(e){}`);
   await boot(page, opts);
   return { browser, ctx, page, errors };
 }

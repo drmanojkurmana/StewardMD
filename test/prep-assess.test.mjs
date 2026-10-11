@@ -266,11 +266,12 @@ test("the bank route serves only the versioned quality sidecar paths", async () 
   assert.equal(B.bankPath({ path: ["quality", "v1", "..", "x.json"] }), null);
 });
 
-test("flag smd_prep_tests2 is off by default", () => {
+test("flag smd_prep_tests2 is on by default (owner 2026-10-11)", () => {
   const ls = {}, G = { location: { search: "" }, localStorage: { getItem: (k) => (k in ls ? ls[k] : null) }, PREP_ASSESS: A };
   const src = fs.readFileSync(new URL("prep-tests.js", ROOT), "utf8");
   new Function("window", src)(G);
-  assert.equal(G.PREP_TESTS.on(), false);
+  assert.equal(G.PREP_TESTS.on(), true);
+  ls.smd_prep_tests2 = "0"; assert.equal(G.PREP_TESTS.on(), false); delete ls.smd_prep_tests2;
   ls.smd_prep_tests2 = "1"; assert.equal(G.PREP_TESTS.on(), true);
   G.location.search = "?tests2=0"; assert.equal(G.PREP_TESTS.on(), false);
   ls.smd_prep_tests2 = "0"; G.location.search = "?tests2=1"; assert.equal(G.PREP_TESTS.on(), true);
