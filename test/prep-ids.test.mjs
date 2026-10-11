@@ -9,7 +9,7 @@ import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { assign, shards, build, collect } from "../tools/prep-ids.mjs";
+import { assign, shards, build, collect, appConfig } from "../tools/prep-ids.mjs";
 import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -184,4 +184,18 @@ test("wiring: loader, prep.js, lessons, PYQ and the deep link use prep-ids.js", 
   assert.match(nb, /stewardmd:\\\/\\\/prep\\\//);
   // no link in the share text (no web page opens a PrepNucleus question)
   assert.doesNotMatch(read("prep-ids.js").match(/function shareText[\s\S]*?\n  }/)[0], /https?:/);
+});
+
+test("appConfig: PREP_PUB_MAIK points the overlay seed at a custom publish dir", () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), "prep-ids-"));
+  fs.mkdirSync(join(dir, "maik"), { recursive: true });
+  fs.writeFileSync(join(dir, "maik", "index.json"), JSON.stringify({ v: 1, manifest: "manifest-x.json", sets: { "ss-neurology": ["maik8", "maikimg9"] } }));
+  const prev = process.env.PREP_PUB_MAIK;
+  process.env.PREP_PUB_MAIK = dir;
+  try {
+    assert.ok(appConfig(ROOT).overlays["ss-neurology"].includes("maikimg9"));
+  } finally {
+    if (prev === undefined) delete process.env.PREP_PUB_MAIK; else process.env.PREP_PUB_MAIK = prev;
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
