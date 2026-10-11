@@ -68,7 +68,7 @@
   // routed through the fetch bridge.
   function imgBase(it, host) {
     var api = host.bankApi || "/api/prep/bank/";
-    var u = it._py ? base(host) + "img/" : it._ov && /^[a-z0-9-]{2,40}$/.test(it._ov) ? api + "img/" + it._ov + "/" : api + (host.bankVer ? host.bankVer() : "v4") + "/img/";
+    var u = it._py ? base(host) + "img/" : it._ov && /^[a-z0-9-]{2,40}$/.test(it._ov) ? api + "img/" + it._ov.replace(/\d+$/, "") + "/" : api + (host.bankVer ? host.bankVer() : "v4") + "/img/";
     return u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u;
   }
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
@@ -101,6 +101,7 @@
   var ICO = {
     papers: '<rect x="4" y="3" width="13" height="17" rx="2"/><path d="M8 8h5M8 12h5M8 16h3M20 7v12a2 2 0 0 1-2 2H8"/>',
     tag: '<path d="M12 7v5l3 2"/><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5M3.5 4v4.5H8"/>',
+    lic: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82zM7 7h.01"/>',
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
     zoom: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/>'
   };
@@ -266,10 +267,15 @@
     if (!it.img || !it.img.length || !P.host) return "";
     if ((it.imgPlace === "exp" ? "exp" : "stem") !== (where || "stem")) return "";
     var e = P.host.esc, of = where === "exp" ? "this explanation" : "this question";
-    return it.img.map(function (f, k) {
+    var figs = it.img.map(function (f, k) {
       return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(itemImg(it, P.host, f)) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><img src="' + e(itemImg(it, P.host, f)) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
-        '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + "</span><span>Tap to enlarge.</span></figcaption></figure>";
+        '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + '</span><span>Tap to enlarge.</span></figcaption></figure>';
     }).join("");
+    if ((it.credit || it.licence) && (where || "stem") === "stem") {
+      var cred = (it.credit || it.author || "Image credit") + (it.licence ? " · " + it.licence : "");
+      figs += '<div class="pn-img-credit-wrap"><button type="button" class="pn-chip pn-img-credit-chip" data-act="img-credit" data-id="' + e(it.id) + '" aria-label="Image credit: ' + e(cred) + '">' + svg("lic", 14) + '<span>' + e(cred) + '</span></button></div>';
+    }
+    return figs;
   }
   function prov(it) {
     var p = it.pyq && it.pyq[0], what = p ? (EXAM_LABEL[p.exam] || p.exam) + " " + p.year + " recall question (memory-based, not an official paper)" : "Recall question";

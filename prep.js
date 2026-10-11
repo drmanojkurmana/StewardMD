@@ -717,6 +717,7 @@
     dl: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>', search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>', next: '<path d="M5 12h14M13 6l6 6-6 6"/>', check: '<path d="M5 12l5 5 9-10"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
     grid: '<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/>',
     deck: '<rect x="4" y="6" width="13" height="15" rx="2"/><path d="M8 3h10a2 2 0 0 1 2 2v12"/>', target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12h.01"/>',
+    tag: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82zM7 7h.01"/>',
     stats: '<path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/>', bolt: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>', cal: '<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     versus: '<path d="M4 4l8 8M4 4v4M4 4h4M20 4l-8 8M20 4v4M20 4h-4M7 17l-3 3M17 17l3 3M9 15l-2 2M15 15l2 2"/>', trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 21h6M10 17h4"/>',
     off: '<path d="M3 3l18 18M8.5 8.6A9 9 0 0 0 5 11M2 8a14 14 0 0 1 4-2.4M16 11.5a9 9 0 0 1 3 1.5M10.7 5.1A14 14 0 0 1 22 8M8.5 15a5 5 0 0 1 6.5-.5M12 19h.01"/>',
@@ -952,6 +953,7 @@
   function rerender() { var v = st.stack[st.stack.length - 1]; if (v) v(); }
   function back() {
     if (!st.open) return false;
+    if (closeCreditSheet()) return true;   // an image credit sheet closes first
     if (G.PREP_VIEWER && G.PREP_VIEWER.close()) return true;   // an enlarged image (prep-viewer.js) closes first
     if (G.PREP_IDS && G.PREP_IDS.back()) return true;   // the share sheet (prep-ids.js) closes first
     if (G.PREP_ASK && G.PREP_ASK.back()) return true;   // the Ask MaiK sheet (prep-ask.js) closes first
@@ -1213,8 +1215,66 @@
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days, share your progress") : "") +
       row("bookmarks", ico("bm"), "Bookmarks", fmt(Object.keys(s.bm).length) + " saved") +
       row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
+      row("img-credits", ico("tag"), "Image credits", "Attribution for openly licensed images") +
       (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") + "</div>" +
       '<p class="pn-note">Practice and progress stay on this device.</p></div>');
+  }
+
+  /* ---------- image credit sheet & screen (CC BY compliance) ---------- */
+  var creditSheetEl = null;
+  function closeCreditSheet() {
+    if (!creditSheetEl) return false;
+    try { if (creditSheetEl.parentNode) creditSheetEl.parentNode.removeChild(creditSheetEl); } catch (e) {}
+    creditSheetEl = null;
+    return true;
+  }
+  function openCreditSheet(it) {
+    if (!root || !it) return false;
+    closeCreditSheet();
+    var wrap = D.createElement("div");
+    wrap.className = "pn-sheet-wrap pn-credit-wrap";
+    var title = it.imgTitle || it.title || "Medical photograph / illustration";
+    var author = it.credit || it.author || "Unknown";
+    var lic = it.licence || "Open licence";
+    var licUrl = it.licenceUrl || it.licenseUrl || "";
+    var srcUrl = it.sourceUrl || "";
+    wrap.innerHTML = '<div class="pn-scrim" data-act="credit-close"></div>' +
+      '<section class="pn-sheet pn-credit-sheet" role="dialog" aria-modal="true" aria-label="Image credit" tabindex="-1">' +
+      '<span class="pn-grab" aria-hidden="true"></span>' +
+      '<div class="pn-sheet-h"><h2>Image credit</h2><button type="button" class="pn-ib" data-act="credit-close" aria-label="Close">' + ico("close") + '</button></div>' +
+      '<div class="pn-sheet-b pn-credit-body">' +
+      '<p><strong>Title:</strong> ' + esc(title) + '</p>' +
+      '<p><strong>Author:</strong> ' + esc(author) + '</p>' +
+      '<p><strong>Licence:</strong> ' + (licUrl ? '<a href="' + esc(licUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(lic) + '</a>' : esc(lic)) + '</p>' +
+      (srcUrl ? '<p><strong>Source:</strong> <a href="' + esc(srcUrl) + '" target="_blank" rel="noopener noreferrer">View original source</a></p>' : '') +
+      '</div>' +
+      '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="credit-close">Close</button></div>' +
+      '</section>';
+    root.appendChild(wrap);
+    creditSheetEl = wrap;
+    return true;
+  }
+  function renderImageCredits() {
+    paint(bar("Image credits", "", "back") + '<div class="pn-body pn-credits-body" id="pnCredits"><p class="pn-load" role="status">Loading image credits…</p></div>');
+    var el = root && root.querySelector("#pnCredits");
+    if (!el) return;
+    getJSON(API + "image-credits.json").then(function (list) {
+      if (!list || !list.length) {
+        el.innerHTML = '<p class="pn-empty">No image credits currently registered.</p>';
+        return;
+      }
+      el.innerHTML = '<p class="pn-note" style="margin-bottom:12px;">PrepNucleus displays medical illustrations, histopathology, and clinical photographs under open licences (CC BY, CC BY-SA, CC0/Public Domain). Attribution is provided below in compliance with each licence.</p>' +
+        list.map(function (c) {
+          return '<article class="pn-cred-item">' +
+            '<h3>' + esc(c.title || c.id) + '</h3>' +
+            '<p class="pn-mut"><small>' + esc(c.subject ? c.subject.toUpperCase() : "") + (c.author ? ' · ' + esc(c.author) : '') + '</small></p>' +
+            '<p>Licence: ' + (c.licenceUrl ? '<a href="' + esc(c.licenceUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(c.licence || "Open licence") + '</a>' : esc(c.licence || "Open licence")) + '</p>' +
+            (c.sourceUrl ? '<p><a href="' + esc(c.sourceUrl) + '" target="_blank" rel="noopener noreferrer"><small>Original source</small></a></p>' : '') +
+            '</article>';
+        }).join("");
+    }).catch(function () {
+      if (el) el.innerHTML = '<p class="pn-empty">Unable to load image credits.</p>';
+    });
   }
   function nextLabel(nx) { return (nx.title && nx.title.en) + (nx.why === "due" ? " · " + nx.n + " due" : ""); }
   function tile(sb, ix) {
@@ -2543,6 +2603,14 @@
     if (a === "cmstart") { if (setupOn()) return setupCustom(); st.stack.push(function () {}); return startCustom(); }
     if (a === "downloads") return push(renderDownloads);
     if (a === "menu") return push(renderMenu);
+    if (a === "img-credits") return push(renderImageCredits);
+    if (a === "credit-close") return closeCreditSheet();
+    if (a === "img-credit") {
+      var cid = b.getAttribute("data-id");
+      var itm = (st.run && st.run.items && (st.run.items[st.run.i] || st.run.items.find(function (x) { return x.id === cid; }))) || null;
+      if (itm) openCreditSheet(itm);
+      return;
+    }
     if (a === "qotd") return qotdAnswer(+b.getAttribute("data-k"));
     if (a === "qotd-why") return qotdAnswer(-1);
     if (a === "dlget") return download(b.getAttribute("data-s"));
@@ -2645,9 +2713,10 @@
     cacheDel: cacheDel, loadMany: loadMany, hidden: hidden, loadingScreen: loadingScreen, stepMsg: stepMsg, topicOf: topicOf, fmtMin: fmtMin, examOf: examOf, getJSON: getJSON,
     startPlan: startPlan, startWeak: startWeak, openCustom: function () { push(renderCustom); }, openMistakes: function () { mf.tag = "all"; push(renderMistakes); }, setTt: ttSet,
     planToday: function () { return planToday(load(), today()); }, staticBase: STATIC, pnow: function () { return pnow(); },
+    openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits,
     // MaiK modules (prep-qgen.js): the bank and overlay files of a module, for the owner's duplicate check on the server.
     modulePath: modulePath, overlaysOf: function (sid) { return overlaysOfSid(sid); } };
 
-  var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST };
+  var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
   G.PREP = API_OBJ;
 })(typeof window !== "undefined" ? window : this);
