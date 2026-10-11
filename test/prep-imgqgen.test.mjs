@@ -133,3 +133,55 @@ test("obstetrics-gynaecology routes usg and tracing images", () => {
   assert.equal(mapModuleId("obstetrics-gynaecology", "bilateral-ovarian-serous-carcinoma-gross", "ovarian serous carcinoma"), "obg-ovarian-cancer");
   assert.equal(mapModuleId("obstetrics-gynaecology", "ovarian-serous-cystadenoma", "serous cystadenoma"), "obg-benign-ovarian");
 });
+
+test("ent routes otoscopy, audiology and endoscopy images", () => {
+  assert.equal(mapModuleId("ent", "csom-perforation", "chronic suppurative otitis media central perforation"), "ent-csom");
+  assert.equal(mapModuleId("ent", "aom", "acute otitis media bulging tympanic membrane"), "ent-aom-ome");
+  assert.equal(mapModuleId("ent", "quinsy", "peritonsillar abscess uvula pushed"), "ent-tonsils-adenoids");
+  assert.equal(mapModuleId("ent", "cord-palsy", "vocal cord palsy paramedian"), "ent-vocal-cord-palsy");
+  assert.equal(mapModuleId("ent", "polyps", "nasal polyps endoscopy"), "ent-rhinitis-polyps");
+});
+
+test("forensic-medicine routes injuries, asphyxia and poisons", () => {
+  assert.equal(mapModuleId("forensic-medicine", "stab", "stab wound clean cut margins"), "fmt-mechanical-injuries");
+  assert.equal(mapModuleId("forensic-medicine", "hanging", "ligature mark neck hanging furrow"), "fmt-asphyxia");
+  assert.equal(mapModuleId("forensic-medicine", "gsw", "gunshot entry wound tattooing"), "fmt-firearm");
+  assert.equal(mapModuleId("forensic-medicine", "datura", "datura thornapple plant"), "fmt-plant-animal");
+  assert.equal(mapModuleId("forensic-medicine", "lividity", "postmortem hypostasis lividity"), "fmt-early-changes");
+});
+
+test("ss-neurology/nephrology/pulmonology route to imaging-led modules", () => {
+  assert.equal(mapModuleId("ss-neurology", "mca", "CT head MCA infarct insular ribbon"), "sne-acute-stroke-thrombolysis");
+  assert.equal(mapModuleId("ss-neurology", "ms", "MRI Dawson fingers multiple sclerosis"), "sne-multiple-sclerosis");
+  assert.equal(mapModuleId("ss-nephrology", "crescents", "crescentic glomerulonephritis RBC casts"), "snp-rpgn-anca-vasculitis");
+  assert.equal(mapModuleId("ss-nephrology", "stone", "staghorn calculus KUB"), "snp-nephrolithiasis");
+  assert.equal(mapModuleId("ss-pulmonology", "tb", "tree-in-bud tuberculosis CT"), "spu-tb");
+  assert.equal(mapModuleId("ss-pulmonology", "effusion", "pleural effusion meniscus CXR"), "spu-pleural");
+});
+
+test("ss-gastroenterology/hepatology/endocrinology route to their modules", () => {
+  assert.equal(mapModuleId("ss-gastroenterology", "crohn", "cobblestone Crohn colonoscopy aphthae"), "sgi-crohn-disease");
+  assert.equal(mapModuleId("ss-gastroenterology", "polyp", "adenoma polyp colonoscopy"), "sgi-colorectal-neoplasia");
+  assert.equal(mapModuleId("ss-hepatology", "hcc", "HCC arterial enhancement washout"), "shp-hepatocellular-carcinoma");
+  assert.equal(mapModuleId("ss-hepatology", "ascites", "ascitic fluid SAAG cirrhosis"), "shp-ascites-sbp-hrs");
+  assert.equal(mapModuleId("ss-endocrinology", "goitre", "multinodular goitre thyroid nodule USG"), "sen-thyroid-nodules-cancer");
+  assert.equal(mapModuleId("ss-endocrinology", "cushing", "purple striae Cushing buffalo hump"), "sen-cushing-syndrome");
+});
+
+test("ss-haematology/oncology/rheumatology route to their modules", () => {
+  assert.equal(mapModuleId("ss-haematology", "sickle", "sickle cells drepanocytes smear"), "shm-hereditary-haemolytic-anaemia");
+  assert.equal(mapModuleId("ss-haematology", "auer", "Auer rods AML blasts"), "shm-acute-myeloid-leukaemia");
+  assert.equal(mapModuleId("ss-medical-oncology", "melanoma", "melanoma irregular borders BRAF"), "son-melanoma");
+  assert.equal(mapModuleId("ss-medical-oncology", "mets", "brain mets MRI rings"), "son-brain-mets");
+  assert.equal(mapModuleId("ss-rheumatology-immunology", "gout", "monosodium urate needles gout"), "srh-gout");
+  assert.equal(mapModuleId("ss-rheumatology-immunology", "ra", "rheumatoid ulnar drift anti-CCP"), "srh-ra-management");
+});
+
+test("ss-infectious-diseases/critical-care/general-medicine route to their modules", () => {
+  assert.equal(mapModuleId("ss-infectious-diseases", "eschar", "scrub typhus eschar fever"), "sid-rickettsia");
+  assert.equal(mapModuleId("ss-infectious-diseases", "thrush", "candida thrush tongue HIV"), "sid-candida");
+  assert.equal(mapModuleId("ss-critical-care", "ards", "ARDS bilateral opacities CXR"), "scc-ards-def");
+  assert.equal(mapModuleId("ss-critical-care", "vf", "ventricular fibrillation arrest CPR"), "scc-cardiac-arrest");
+  assert.equal(mapModuleId("ss-general-medicine", "afib", "atrial fibrillation ECG irregular"), "sgm-ecg");
+  assert.equal(mapModuleId("ss-general-medicine", "pneumonia", "lobar pneumonia consolidation"), "sgm-pneumonia");
+});
