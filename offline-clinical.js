@@ -182,7 +182,7 @@
   /* FDA-label monographs (data/fda-labels/<slug>.json, built by scripts/build-fda-monographs.py). Not in
    * the bundle: each is tens of KB, so one is fetched when its drug is opened, never at startup.
    * slugFor() must match the Python slug() in that script exactly. */
-  var LABEL_VER = "lbl1";
+  var LABEL_VER = "lbl2";
   function slugFor(name) {
     var safe = String(name || "").replace(/[^A-Za-z0-9 ._-]/g, "").trim();
     return safe.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -196,7 +196,7 @@
       var slug = slugFor(key);
       if (!slug) return null;
       if (_labelCache[slug] !== undefined) return _labelCache[slug];
-      return fetch("/fda-labels/" + slug + ".json?v=" + LABEL_VER)
+      return fetch("/data/fda-labels/" + slug + ".json?v=" + LABEL_VER)
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (rec) { _labelCache[slug] = rec && rec.generic ? rec : null; return _labelCache[slug]; })
         .catch(function () { return null; });
