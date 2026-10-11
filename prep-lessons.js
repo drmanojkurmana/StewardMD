@@ -843,19 +843,20 @@
   }
   /* open(sid, mid, h, key): key defaults to the module's own lesson. */
   // fromStart: a shared lesson ID opens at the first step, whatever this phone's saved place.
-  // step: a link into the lesson (data-step) opens at that step.
-  function open(sid, mid, h, key, fromStart, step) {
+  // L.jumpStep: a link into the lesson (data-step) opens at that step; act() sets it, open() consumes it.
+  function open(sid, mid, h, key, fromStart) {
     host = h;
     key = key || mid;
     L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = null; L.playing = false; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 };
     var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
+    var jump = L.jumpStep; L.jumpStep = null;   // a second tap while loading carries its own step
     host.push(loading);
     lessonFile(key).then(function (les) {
       if (host.stackTop() !== loading) return;   // left while loading
       var s = store(), p = s.ls[key];
-      L.les = les; L.i = startPage(les, step, !fromStart && p && !p.done && p.i < pages(les).length ? p.i : 0); L.dir = 0;
+      L.les = les; L.i = startPage(les, jump, !fromStart && p && !p.done && p.i < pages(les).length ? p.i : 0); L.dir = 0;
       save(); warm(les);
       var stk = host.stack(); stk[stk.length - 1] = view;
       draw();
@@ -867,7 +868,7 @@
   function act(a, b, h) {
     host = h;
     if (a === "l-subject") return openSubject(b.getAttribute("data-s"), h);
-    if (a === "l-open") { if (L.loading && host.stackTop() === L.loading) host.stack().pop(); return open(b.getAttribute("data-s"), b.getAttribute("data-m"), h, b.getAttribute("data-l") || "", false, b.getAttribute("data-step")); }
+    if (a === "l-open") { if (L.loading && host.stackTop() === L.loading) host.stack().pop(); L.jumpStep = b.getAttribute("data-step") || null; return open(b.getAttribute("data-s"), b.getAttribute("data-m"), h, b.getAttribute("data-l") || ""); }
     if (a === "l-more") {
       var mm = b.getAttribute("data-m"), slot = b.closest && b.closest("#pnLsnSlot");
       L.more[mm] = 1;
