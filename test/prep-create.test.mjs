@@ -387,11 +387,19 @@ test("callOp: a second 504 fails with ai-timeout; no retry for other errors", as
   assert.deepEqual(await PC.callOp({ op: "solve" }, d3), { ok: 1 });
   assert.deepEqual(d3.waits, [3500]);
 });
-test("callOp: no token is sign-in without a request; network failure is offline; junk 200 is ai-failed", async () => {
+test("callOp: no token is sign-in without a request; network failure is retried once, then offline; junk 200 is ai-failed", async () => {
   const d = deps([], { token: async () => null });
   await assert.rejects(PC.callOp({ op: "facts" }, d), (e) => e.code === "sign-in");
   assert.equal(d.sent.length, 0);
-  await assert.rejects(PC.callOp({ op: "facts" }, deps([new TypeError("Failed to fetch")])), (e) => e.code === "offline");
+  const d1 = deps([new TypeError("Failed to fetch"), new TypeError("Failed to fetch")]);
+  await assert.rejects(PC.callOp({ op: "facts" }, d1), (e) => e.code === "offline");
+  assert.equal(d1.sent.length, 2, "one retry after a network failure, never a second");
+  assert.deepEqual(d1.waits, [4000]);
+  assert.equal(d1.sent[0].body.idem, d1.sent[1].body.idem, "the retry carries the same idem");
+  const d1b = deps([new TypeError("Failed to fetch"), resp(200, { ok: 1 })]);
+  assert.deepEqual(await PC.callOp({ op: "facts" }, d1b), { ok: 1 }, "one lost response is absorbed by the retry");
+  const d1c = deps([new TypeError("x"), new TypeError("x")], { online: () => true });
+  await assert.rejects(PC.callOp({ op: "facts" }, d1c), (e) => e.code === "unknown", "a failure with the network up is not called offline");
   await assert.rejects(PC.callOp({ op: "facts" }, deps([resp(200, "<html>")])), (e) => e.code === "ai-failed");
   const ab = new Error("aborted"); ab.name = "AbortError";
   const d4 = deps([ab, resp(200, { ok: 2 })]);
@@ -651,4 +659,56 @@ test("client files: ES5 only, no em or en dash, no console logging of source tex
     assert.ok(!/`/.test(code), f + ": no template literals");
     assert.ok(!/console\.(log|info|warn|error)/.test(code), f + ": no console logging");
   }
+});
+
+test("re-register: an already-done chunk is re-sent first, else the first chunk", () => {
+  assert.equal(PC.reregChunk({ done: { 2: 1, 5: 1 }, order: [0, 1, 2], chunks: [{}, {}, {}] }), 2);
+  assert.equal(PC.reregChunk({ done: {}, order: [3, 4], chunks: [{}, {}] }), 3);
+  assert.equal(PC.reregChunk({ done: {}, order: [], chunks: [{}] }), 0);
+  assert.equal(PC.reregChunk({ done: {}, order: [], chunks: [] }), null);
+});
+
+test("deck-not-started message says the source is gone and the questions stay for practice", () => {
+  assert.equal(PC.MSG["deck-not-started"], "The source for this deck is gone from this phone, so no more questions can be added. What you made is safe: practise it below.");
+  assert.equal(PC.canRetry("deck-not-started"), false);
+});
+
+/* ---------------- screen-lock survival (owner 2026-10-11) ---------------- */
+test("offline is said only when the phone is offline at that moment; a network failure is retried once", () => {
+  assert.equal(PC.errorCode(0, null), "offline", "no signal: the old message");
+  assert.equal(PC.errorCode(0, null, false), "offline");
+  assert.equal(PC.errorCode(0, null, true), "unknown", "network up: not called offline");
+  assert.equal(PC.errorMessage(0, null, true), PC.MSG.unknown);
+  assert.equal(PC.opError(0, null, true).code, "unknown");
+  assert.equal(PC.opError(0, null).code, "offline");
+  assert.equal(PC.shouldRetry(0, 0), 4000, "a network failure waits 4 s and goes once more");
+  assert.equal(PC.shouldRetry(0, 1), 0, "never a second retry");
+  assert.equal(PC.shouldRetry(504, 0), 4000);
+  assert.equal(PC.canRetry("unknown"), true); assert.equal(PC.canRetry("offline"), true);
+  assert.ok(PC.AUTO_RESUME.offline && PC.AUTO_RESUME["ai-timeout"] && PC.AUTO_RESUME.unknown && PC.AUTO_RESUME.rate);
+});
+
+test("partlyLine: a cut-off deck or a short module says Partly made, N of M, tap to finish", () => {
+  assert.equal(PC.partlyLine({ run: { target: 10, accepted: 6, batches: [], failed: [] } }, 6), "Partly made, 6 of 10, tap to finish");
+  assert.equal(PC.partlyLine({ qgen: { target: 10 } }, 6), "Partly made, 6 of 10, tap to finish");
+  assert.equal(PC.partlyLine({ qgen: {} }, 6), "Partly made, 6 of 30, tap to finish", "an old module without a target counts to 30");
+  assert.equal(PC.partlyLine({ qgen: { target: 10 } }, 10), "", "all asked questions made: no label");
+  assert.equal(PC.partlyLine({ qgen: { target: 10 } }, 12), "");
+  assert.equal(PC.partlyLine({ run: null }, 10), "", "a finished round is not partly made");
+  assert.equal(PC.partlyLine({}, 10), "");
+  assert.equal(PC.partlyLine(null, 0), "");
+  assert.equal(/[\u2013\u2014]/.test(PC.partlyLine({ qgen: { target: 10 } }, 6)), false, "no em or en dash in the label");
+});
+
+test("auto-resume wiring: foreground and network triggers resume a cut-off round, never a finished one", () => {
+  const src = readFileSync(join(ROOT, "prep-create.js"), "utf8");
+  assert.match(src, /addEventListener\("visibilitychange", maybeResume\)/);
+  assert.match(src, /addEventListener\("resume", maybeResume\)/);
+  assert.match(src, /addEventListener\("pageshow", maybeResume\)/);
+  assert.match(src, /addEventListener\("online", maybeResume\)/);
+  assert.match(src, /visibilityState === "hidden"\) return/, "no resume while still hidden");
+  assert.match(src, /!AUTO_RESUME\[jobResult\.code\] \|\| !job\.saved\) return/, "only a cut-off saved round resumes");
+  assert.match(src, /jobResult\.code === "offline" && G\.navigator && G\.navigator\.onLine === false\) return/, "no futile resume while still offline");
+  assert.match(src, /var h = G\.PREP && G\.PREP\._host;\s+if \(h\) resume\(h\);/);
+  assert.match(src, /data-act="c-resume">Try again/, "the manual button stays as the fallback");
 });

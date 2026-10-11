@@ -47,13 +47,24 @@ async function main() {
   }
   const ov = overlaysOf(src, extraSets), sets = {};
   for (const [sid, list] of Object.entries(ov)) {
-    const ix = JSON.parse(fs.readFileSync(join(ROOT, "prep/bank", bv[sid], sid, "index.json"), "utf8"));
+    if (!bv[sid]) continue;
+    const indexPath = join(ROOT, "prep/bank", bv[sid], sid, "index.json");
+    if (!fs.existsSync(indexPath)) continue;
+    const ix = JSON.parse(fs.readFileSync(indexPath, "utf8"));
     for (const set of list) {
       const jobs = ix.topics.map(async (t) => {
-        const r = await fetch(API + "overlay/" + set + "/" + sid + "/" + t.id + ".json");
-        if (r.status === 404) return;
-        if (!r.ok) throw new Error(set + "/" + sid + "/" + t.id + ": HTTP " + r.status);
-        const n = usableCount(await r.json());
+        let fileData = null;
+        const localFile = join(process.env.HOME || "", "prep-data/qgen/publish", set, sid, t.id + ".json");
+        if (fs.existsSync(localFile)) {
+          try { fileData = JSON.parse(fs.readFileSync(localFile, "utf8")); } catch (_) {}
+        }
+        if (!fileData) {
+          const r = await fetch(API + "overlay/" + set + "/" + sid + "/" + t.id + ".json");
+          if (r.status === 404) return;
+          if (!r.ok) throw new Error(set + "/" + sid + "/" + t.id + ": HTTP " + r.status);
+          fileData = await r.json();
+        }
+        const n = usableCount(fileData);
         if (n) ((sets[set] ||= {})[sid] ||= {})[t.id] = n;
       });
       await Promise.all(jobs);

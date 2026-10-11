@@ -5,7 +5,8 @@
  * items that passed the code gates, the blind solve and every review gate, in the 6.4 format the runner reads; the key
  * and reasons never reach the solve prompt; the deck counters come back and the cap line shows them; an idempotent
  * replay costs nothing and a lost response is recovered by resending the same idem; "10 more" sends only unused
- * facts; a 429 month-decks and a 400 deck-not-started show their plain messages and save nothing.
+ * facts; a 429 month-decks shows its plain message and saves nothing; a forgotten deck re-registers from the phone's
+ * source and goes on (counting no new deck), and only a deck with no source left ends with the plain message.
  *
  * node --test --experimental-test-module-mocks --experimental-sqlite test/prep-layerc-e2e.test.mjs
  */
@@ -238,22 +239,42 @@ test("an idempotent replay is free: same idem, no model call, no record, no extr
   assert.equal(env.MAIK_KV.m.get("prep:decks:fb:u-a:" + MONTH), "1");
 });
 
-test("a lost response: the run pauses offline, and the resend with the same idem is answered from the replay record", async () => {
+test("one lost response is absorbed by the retry (same idem, replay, no pause); two in a row pause offline and the resend replays", async () => {
   const env2 = envFor(), st2 = memStore();
-  let dropped = false;
-  const P = phone(env2, "tok-d", { drop: (b) => { if (b.op === "mcq" && !dropped) { dropped = true; return true; } return false; } });
+  let drops = 0;
+  const P = phone(env2, "tok-d", { drop: (b) => { if (b.op === "mcq" && drops++ < 2) return true; return false; } });
   const j = newDeckJob("u-d");
   const r1 = await PC.runRound(j, { send: P.send, store: st2, today: TODAY });
   assert.equal(r1.ok, false); assert.equal(r1.code, "offline"); assert.equal(r1.retry, true);
   assert.match(r1.message, /No connection/);
+  assert.deepEqual(P.waits, [4000], "the one retry waited before giving up");
+  const tries = P.log.filter((x) => x.op === "mcq");
+  assert.equal(tries.length, 2);
+  assert.equal(tries[0].body.idem, tries[1].body.idem, "the retry carries the same idem");
+  assert.equal(tries[1].replay, true, "the retry itself was already a replay");
   const modelCalls = vertex.length;
   const r2 = await PC.runRound(j, { send: P.send, store: st2, today: TODAY });
   assert.equal(r2.ok, true);
-  const resent = P.log.filter((x) => x.op === "mcq")[1];
+  const resent = P.log.filter((x) => x.op === "mcq")[2];
   assert.equal(resent.replay, true, "the resent mcq is a replay");
-  assert.equal(resent.body.idem, P.log.filter((x) => x.op === "mcq")[0].body.idem);
+  assert.equal(resent.body.idem, tries[0].body.idem);
   assert.equal(vertex.length - modelCalls, P.log.length - P.log.indexOf(resent) - 1, "no model call for the replay");
   assert.equal(r2.accepted, 10);
+});
+
+test("a single lost response never pauses the run: the retry replays it and the round completes", async () => {
+  const env3 = envFor(), st3 = memStore();
+  let dropped = false;
+  const P = phone(env3, "tok-c", { drop: (b) => { if (b.op === "mcq" && !dropped) { dropped = true; return true; } return false; } });
+  const j = newDeckJob("u-c");
+  const calls = vertex.length;
+  const r = await PC.runRound(j, { send: P.send, store: st3, today: TODAY });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.equal(r.accepted, 10);
+  assert.deepEqual(P.waits, [4000]);
+  const tries = P.log.filter((x) => x.op === "mcq");
+  assert.equal(tries[1].replay, true, "the retry was answered from the replay record");
+  assert.equal(vertex.length - calls, P.log.length - 1, "no model call for the replayed response");
 });
 
 test("10 more: unused facts first, then the next chunk; no new deck counted", async () => {
@@ -287,21 +308,68 @@ test("429 month-decks: the monthly-limit message, the cap line shows the month f
   assert.equal(Object.keys(st.s.decks).length + Object.keys(st.s.items).length + Object.keys(st.s.src).length, 0);
 });
 
-test("400 deck-not-started: a deck the server never saw a facts call for cannot get questions", async () => {
-  // Another account asks for "10 more" on a deck it never started (its facts exist only on the phone).
-  const fresh = memStore();
+test("server forgot the deck (7-day working state gone): the phone re-registers from its source and the round goes on", async () => {
+  const e2 = envFor(), fresh = memStore();
   const j = newDeckJob("u-a");
-  const pre = await PC.runRound(j, { send: phone(envFor(), "tok-a").send, store: fresh, today: TODAY });
-  assert.equal(pre.ok, true);
-  const C = phone(env, "tok-c");
+  const pre = await PC.runRound(j, { send: phone(e2, "tok-a").send, store: fresh, today: TODAY });
+  assert.equal(pre.ok, true, JSON.stringify(pre));
+  const kv = e2.MAIK_KV.m, uid = "fb:u-a";
+  const tokK = "prep:tok:" + uid + ":" + j.deckId, seenK = "prep:seen:" + uid + ":" + j.deckId;
+  assert.ok(kv.has(tokK) && kv.get(seenK) === "1");
+  const dayK = "prep:decks:" + uid + ":" + istDay(Date.now()), monK = "prep:decks:" + uid + ":" + MONTH;
+  const dayBefore = kv.get(dayK), monBefore = kv.get(monK), doneBefore = fresh.s.decks[j.deckId].prog.done.slice();
+  kv.delete(tokK);   // the 7-day working state expired; the counted-once marker survives
+  const C = phone(e2, "tok-a");
   const more = moreJob(fresh, j.deckId, 2);   // 2 wanted, 2 unused facts: the first call is mcq, not facts
-  const before = vertex.length;
+  const vb = vertex.length;
   const r = await PC.runRound(more, { send: C.send, store: fresh, today: TODAY });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.deepEqual(C.log.map((x) => x.op).slice(0, 3), ["mcq", "facts", "mcq"]);
+  assert.equal(C.log[0].status, 400);
+  assert.deepEqual([C.log[0].json.error, C.log[0].json.reason], ["bad-input", "deck-not-started"]);
+  assert.ok(C.log.slice(1).every((x) => x.status === 200));
+  assert.ok(vertex.length > vb, "the re-register facts call reached the model");
+  assert.equal(kv.get(dayK), dayBefore, "a re-register counts no new deck");
+  assert.equal(kv.get(monK), monBefore);
+  assert.ok(kv.has(tokK), "working state recreated");
+  assert.deepEqual(fresh.s.decks[j.deckId].prog.done.slice().sort(), doneBefore.slice().sort(), "the re-sent chunk is not marked done twice");
+  assert.equal(Object.keys(fresh.s.facts).length, 12, "the re-sent facts dedupe by id");
+});
+
+test("another account's 10 more re-registers as its own new deck (counted once)", async () => {
+  const e3 = envFor(), fresh = memStore();
+  const j = newDeckJob("u-a");
+  assert.equal((await PC.runRound(j, { send: phone(e3, "tok-a").send, store: fresh, today: TODAY })).ok, true);
+  const C = phone(e3, "tok-c");
+  const more = moreJob(fresh, j.deckId, 2);
+  const r = await PC.runRound(more, { send: C.send, store: fresh, today: TODAY });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.deepEqual(C.log.map((x) => x.op).slice(0, 3), ["mcq", "facts", "mcq"]);
+  assert.equal(C.log[0].status, 400); assert.equal(C.log[1].status, 200);
+  const kv = e3.MAIK_KV.m, day = istDay(Date.now());
+  assert.equal(kv.get("prep:decks:fb:u-c:" + day), "1", "new to this account: counted");
+  assert.equal(kv.get("prep:decks:fb:u-c:" + MONTH), "1");
+  assert.equal(kv.get("prep:seen:fb:u-c:" + j.deckId), "1");
+});
+
+test("deck-not-started with no source on the phone: plain message, made questions kept for practice", async () => {
+  const e4 = envFor(), fresh = memStore();
+  const j = newDeckJob("u-a");
+  assert.equal((await PC.runRound(j, { send: phone(e4, "tok-a").send, store: fresh, today: TODAY })).ok, true);
+  e4.MAIK_KV.m.delete("prep:tok:fb:u-a:" + j.deckId);
+  const C = phone(e4, "tok-a");
+  // a restored deck: unused facts with quotes, no source sentences
+  const facts = Object.values(fresh.s.facts).map((f) => Object.assign({}, f, { quote: "Iron deficiency is the commonest cause of anaemia in Indian women of reproductive age." }));
+  const m = fresh.s.decks[j.deckId];
+  const noSrc = PC.newJob({ m, sents: [], sections: [], facts, items: Object.values(fresh.s.items), saved: true, target: 2, profile: PC.PROFILE, ctx: { doc: "abcdefabcdef", name: "Notes", exam: "neet-pg", pv: PC.PV, model: PC.MODEL } });
+  const before = vertex.length;
+  const r = await PC.runRound(noSrc, { send: C.send, store: fresh, today: TODAY });
   assert.equal(C.log.length, 1);
   assert.equal(C.log[0].status, 400); assert.deepEqual([C.log[0].json.error, C.log[0].json.reason], ["bad-input", "deck-not-started"]);
   assert.equal(r.ok, false); assert.equal(r.code, "deck-not-started"); assert.equal(r.retry, false);
-  assert.match(r.message, /no longer knows this deck/);
-  assert.equal(vertex.length, before);
+  assert.match(r.message, /gone from this phone/);
+  assert.equal(vertex.length, before, "nothing to re-register with: no model call");
+  assert.equal(Object.keys(fresh.s.items).length, 10, "made questions are kept for practice");
 });
 
 test("server error vocabulary maps to the phone's messages", () => {

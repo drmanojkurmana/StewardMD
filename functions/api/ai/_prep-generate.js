@@ -4,6 +4,8 @@
  *
  * One op per request, one Gemini call per op, so each request fits the router's 28 s deadline:
  *   facts   { chunk: { i, sents: [{ n, p, h, tx }] } }              -> { facts, dropped, usage }
+ *           (a re-register carries rereg: 1, ignored here: it only changes the phone's idem, so the call
+ *           executes instead of replaying the 10-minute record, which would recreate no working state)
  *   mcq     { facts: [<= 7 { fid, ft, sn, sents | quote, p, h, t? }], mix?, avoid? ({ fi, why } or [{ fi, why }]), src? }
  *                                                                   -> { items (6.4, gated, shuffled, rv null), rejected, usage }
  *   solve   { q: [<= 7 { id, q, o[4], a }] }  a stays here; only stem and options reach the model
@@ -27,8 +29,16 @@
  * Token allowance and answers 429 ai-cost-cap), then prep's KV counters: decks a day (5) and a month (30), counted
  * once per deck at its first accepted facts call (owner 2026-10-09), the per-deck token cap (600k, checked before the
  * call, fail closed) and the per-deck question guard (60 accepted: the phone stops at 50, made 10 at a time; the
- * slack covers questions the phone drops as near duplicates after the review), 429 deck-full. A mcq, solve or review on a deck that never had an accepted facts call is a
- * 400 (deck-not-started), so the deck caps cannot be skipped by never calling facts.
+ * slack covers questions the phone drops as near duplicates after the review), 429 deck-full. A mcq, solve, review or
+ * imcq on a deck with no working state is a 400 (deck-not-started), so the deck caps cannot be skipped by never
+ * calling facts.
+ *
+ * Working state (owner 2026-10-11): the deck record (tokens, pages, chars, questions) is kept 7 days from its last
+ * use (DECK_TTL_S) and read through every bound KV namespace, so a dashboard rebinding can never orphan a deck
+ * (the suspected cause of the 2026-10-11 report "the server no longer knows this deck" two days after the deck was
+ * made; the constants were 400 days, the uid stable and no key format changed). When the record is
+ * gone the phone re-registers the deck by sending facts again; a separate counted-once marker (SEEN_TTL_S) tells a
+ * re-register, which counts no new deck, from a genuinely new deck.
  *
  * MaiK Tokens: usage.mt = inrToMt(inr) for the call (the same unit as Ask MaiK) and, on success, wallet { balanceMt,
  * costCapOn }, so the phone can show the estimate before "make 10" and what it used after.
@@ -42,7 +52,7 @@
  * Vertex only (labels { app: "prep" } reach Cloud Billing), model PREP_MODEL (default MODEL_HARD_DEFAULT,
  * the admin override is ignored), thinkingBudget 0 (genBody), responseSchema JSON.
  */
-import { checkQuota, usageKv, identify, usageKeyFor, meterEmail, addDailyCostInr, estTokens } from "../../_usage.js";
+import { checkQuota, usageKv, kvGetFirst, identify, usageKeyFor, meterEmail, addDailyCostInr, estTokens } from "../../_usage.js";
 import { gateAndCount, buildUsageRecord, recordAiUsage, estCostInr, envModel, MODEL_HARD_DEFAULT, poolKeyFor } from "../../_ai_usage.js";
 import { bump, istDay, istNextMidnightMs } from "../../_counters.js";
 import { ownerOK } from "../../_adminauth.js";
@@ -57,7 +67,8 @@ import {
 export const PREP_BODY_MAX = 400 * 1024;      // bytes
 export const PREP_CHUNK_TOK_MAX = 6000;       // facts chunk, estimated at chars / 4
 const IDEM_TTL_S = 600;
-const DECK_TTL_S = 400 * 86400;               // the deck's token record outlives any "10 more" a student asks for
+export const DECK_TTL_S = 7 * 86400;          // the deck's working state, refreshed on every accepted op; the phone re-registers from its local source when it is gone
+export const SEEN_TTL_S = 400 * 86400;        // the counted-once marker: a re-register counts no new deck
 const MONTH_TTL_S = 40 * 86400, DAY_TTL_S = 2 * 86400;
 const IST_MS = 5.5 * 3600 * 1000;
 const IMG_MIMES = { "image/jpeg": 1, "image/webp": 1, "image/png": 1 };
@@ -346,19 +357,23 @@ export async function handlePrepGenerate(ctx) {
     if (mq && typeof mq.commit === "function") commit = mq.commit;
   } catch (e) { /* fail open like every module counter; the record is still written below */ }
 
-  // 6. prep counters: decks a day / month, per-deck tokens, pages and chars (fail closed on a read error)
+  // 6. prep counters: decks a day / month, per-deck tokens, pages and chars (fail closed on a read error).
+  // Reads go through every bound namespace (kvGetFirst): a rebinding must not orphan a deck.
   const caps = prepCaps(env), day = istDay(now), month = day.slice(0, 7);
   const tokK = "prep:tok:" + uid + ":" + req.deckId, dayK = "prep:decks:" + uid + ":" + day, monK = "prep:decks:" + uid + ":" + month;
-  let deck, dayDecks, monthDecks;
+  const seenK = "prep:seen:" + uid + ":" + req.deckId;
+  let deck, dayDecks, monthDecks, counted;
   try {
-    const [d, dd, md] = await Promise.all([store.get(tokK), store.get(dayK), store.get(monK)]);
-    deck = readDeck(d); dayDecks = readNum(dd); monthDecks = readNum(md);
+    const [d, dd, md, mk] = await Promise.all([kvGetFirst(env, tokK), kvGetFirst(env, dayK), kvGetFirst(env, monK), kvGetFirst(env, seenK)]);
+    deck = readDeck(d); dayDecks = readNum(dd); monthDecks = readNum(md); counted = mk != null;
   } catch (e) { return quota("circuit-breaker"); }
   const seen = !!deck;
   if (!seen) {
     if (op !== "facts") return fail(400, "bad-input", "deck-not-started");
-    if (dayDecks >= caps.decksDay) return quota("daily-decks", Math.ceil((istNextMidnightMs(now) - now) / 1000), { dayDecks, monthDecks });
-    if (monthDecks >= caps.decksMonth) return quota("month-decks", secsToNextIstMonth(now), { dayDecks, monthDecks });
+    if (!counted) {
+      if (dayDecks >= caps.decksDay) return quota("daily-decks", Math.ceil((istNextMidnightMs(now) - now) / 1000), { dayDecks, monthDecks });
+      if (monthDecks >= caps.decksMonth) return quota("month-decks", secsToNextIstMonth(now), { dayDecks, monthDecks });
+    }
     deck = { tok: 0, pg: [], ch: 0, q: 0 };
   }
   if ((op === "mcq" || op === "imcq") && deck.q >= caps.deckQ) return quota("deck-full", 0, { deckQ: deck.q, deckCapQ: caps.deckQ });
@@ -402,9 +417,10 @@ export async function handlePrepGenerate(ctx) {
     if (op === "imcq" && payload) deck.q += payload.items.length;
     writes.push(store.put(tokK, JSON.stringify(deck), { expirationTtl: DECK_TTL_S }));
   }
-  if (newDeck) {
+  if (newDeck && !counted) {
     dayDecks += 1; monthDecks += 1;
     writes.push(store.put(dayK, String(dayDecks), { expirationTtl: DAY_TTL_S }), store.put(monK, String(monthDecks), { expirationTtl: MONTH_TTL_S }));
+    writes.push(store.put(seenK, "1", { expirationTtl: SEEN_TTL_S }));
   }
   const usage = { inTok, outTok, thinkTok, inr, mt: inrToMt(inr), deckTok: deck.tok, deckCapTok: caps.deckTok, dayDecks, monthDecks, deckQ: deck.q || 0 };
   let res, out = null;

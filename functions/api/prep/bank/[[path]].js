@@ -38,7 +38,9 @@ const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|
 const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 // Owner-reviewed MaiK questions (Author screen + tools/prep-qgen.mjs publish, set "maik<n>"): overlay/maik<n>/<subject>/<module>.json,
 // immutable. The staging copies under prep-qgen/ are outside the prep-bank/ prefix and never served.
-const MAIK_RE = /^overlay\/maik[1-9]\d{0,2}\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+const MAIK_RE = /^overlay\/maik(?:img)?[1-9]\d{0,2}\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+// Openly licensed images for image MCQs: img/maikimg/i-<hash>.webp, immutable.
+const MAIK_IMG_RE = /^img\/maikimg\/i-[a-z0-9-]{8,40}\.webp$/;
 // MaiK overlay manifest: overlay/maik/index.json (short cache) points to immutable overlay/maik/manifest-[0-9a-f]{8,16}.json
 const MAIK_MANIFEST_RE = /^overlay\/maik\/(?:index\.json|manifest-[0-9a-f]{8,16}\.json)$/;
 // Share IDs (tools/prep-ids.mjs, prep-ids.js): v<n>/ids/index.json names the current shards (short cache); a shard
@@ -55,13 +57,15 @@ const QUALITY_RE = /^quality\/(?:index\.json|v\d{1,3}\/[a-z0-9-]{2,60}\.json)$/;
 // v<n>/tests/index.json names the papers (short cache), v<n>/tests/<exam>/<format>/<paper>.json is immutable
 // (a changed paper gets a new id, never new bytes). Locators only, no question text.
 const TESTS_RE = /^v\d{1,3}\/tests\/(?:index\.json|[a-z0-9-]{2,60}\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,120}\.json)$/;
+// Attribution credits for freely licensed images: image-credits.json
+const CREDITS_RE = /^image-credits\.json$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || MAIK_RE.test(p) || MAIK_MANIFEST_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) || LINKS_RE.test(p) || QUALITY_RE.test(p) || TESTS_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || MAIK_RE.test(p) || MAIK_MANIFEST_RE.test(p) || MAIK_IMG_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) || LINKS_RE.test(p) || QUALITY_RE.test(p) || TESTS_RE.test(p) || CREDITS_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {

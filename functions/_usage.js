@@ -24,6 +24,20 @@ import { verifiedClaimsFor, cfAccessEmail, verifiedEmailOf } from "./_fbauth.js"
 
 export function usageKv(env) { return env.MAIK_KV || env.CASES_KV || env.GHIS_KV || env.UPDATES_KV || null; }
 
+/* Every KV namespace bound to this deployment, primary first. Deck working state is READ through kvGetFirst
+ * (first hit wins), so a binding-set change on the dashboard (a namespace added, removed or rebound while an older
+ * one still holds keys) never orphans a deck the way a single-namespace read did (owner report 2026-10-11: "the
+ * server no longer knows this deck" two days after it was made). WRITES always go to the primary (usageKv) only. */
+export function usageKvAll(env) {
+  const out = [];
+  for (const k of ["MAIK_KV", "CASES_KV", "GHIS_KV", "UPDATES_KV"]) { try { if (env && env[k]) out.push(env[k]); } catch (e) {} }
+  return out;
+}
+export async function kvGetFirst(env, key, type) {
+  for (const s of usageKvAll(env)) { try { const v = await s.get(key, type); if (v != null) return v; } catch (e) {} }
+  return null;
+}
+
 export function usageConfig(env) {
   const n = (k, d) => { const v = Number(env[k]); return Number.isFinite(v) && v > 0 ? v : d; };
   return {

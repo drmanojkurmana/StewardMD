@@ -24,10 +24,15 @@
  * Gate order (gen): sign-in, flag, size, input, idempotent replay (free), the
  * student caps (modules a day, questions a module, the daily USD breaker for all students), checkQuota "prep" (breaker, rate), gateAndCount("prep_qgen",
  * deferRecord) (request backstop, MaiK Tokens with AI_COST_CAP_ON), then the calls. One usage record per request.
+ *
+ * Working state (owner 2026-10-11): the module record (questions, spend) is kept 7 days from its last use (MOD_TTL_S)
+ * and read through every bound KV namespace, so a dashboard rebinding can never orphan a module. When it is gone the
+ * phone simply continues: it re-sends the grounding and the stems it already has (avoid), so no duplicates are made.
+ * A counted-once marker (QGEN_SEEN_TTL_S) keeps a returning module from counting against the modules-a-day cap.
  * Errors { error, reason, message?, retryAfter? }: 400 bad-input, 401 sign-in, 403 owner-only | off, 413 too-large,
  * 429 quota (rate | circuit-breaker | daily-modules | module-full | budget | ai-cost-cap | module-daily), 502 ai-failed,
  * 503 not-configured | busy, 504 ai-timeout. The key and the provider's error text never appear in a reply or a log. */
-import { checkQuota, usageKv, identify, usageKeyFor, meterEmail, addDailyCostInr } from "../../_usage.js";
+import { checkQuota, usageKv, kvGetFirst, identify, usageKeyFor, meterEmail, addDailyCostInr } from "../../_usage.js";
 import { gateAndCount, buildUsageRecord, recordAiUsage, poolKeyFor } from "../../_ai_usage.js";
 import { getCredits, inrToMt, costCapOn } from "../../_credits.js";
 import { bump, istDay } from "../../_counters.js";
@@ -39,7 +44,9 @@ import { QGEN, qgenConfig, readGen, runRound, estimate, batchGenRequests, batchC
   batchGenToItems, batchVerifyRequests, batchApplyVerify, addUsage, usdToInr, QgenError } from "../../_prep-qgen.js";
 
 export const QGEN_BODY_MAX = 90 * 1024, QGEN_OWNER_BODY_MAX = 1200 * 1024;
-const IDEM_TTL_S = 600, DAY_TTL_S = 2 * 86400, MOD_TTL_S = 400 * 86400, JOB_TTL_S = 8 * 86400;
+const IDEM_TTL_S = 600, DAY_TTL_S = 2 * 86400, JOB_TTL_S = 8 * 86400;
+export const MOD_TTL_S = 7 * 86400;             // the module's working state, refreshed on every accepted round
+export const QGEN_SEEN_TTL_S = 400 * 86400;     // the counted-once marker: a returning module counts no new module
 const REPORT_WHY = ["wrong-key", "unclear", "outdated", "typo", "duplicate", "other"];
 const json = (obj, status, h) => new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, h || {}) });
 const fail = (status, error, reason, extra) => json(Object.assign({ error, reason }, extra || {}), status);
@@ -152,14 +159,17 @@ export async function handlePrepQgen(ctx) {
   }
   // student caps: modules a day (counted at the first accepted round), questions a module, the shared daily USD breaker
   const modK = "prep:qgen:mod:" + uid + ":" + req.mod, dayK = "prep:qgen:day:" + uid + ":" + day;
+  const qseenK = "prep:qgen:seen:" + uid + ":" + req.mod;
   const usdK = (owner ? "prep:qgen:ousd:" : "prep:qgen:usd:") + day;
-  const modRec = (await getJ(store, modK)) || { q: 0, usd: 0 };
-  const dayRec = (await getJ(store, dayK)) || { mods: [] };
-  const spent = Number(await store.get(usdK).catch(() => 0)) || 0;
+  const modRec = (await kvGetFirst(env, modK, "json")) || { q: 0, usd: 0 };
+  const dayRec = (await kvGetFirst(env, dayK, "json")) || { mods: [] };
+  const counted = (await kvGetFirst(env, qseenK)) != null;
+  const spent = Number(await kvGetFirst(env, usdK)) || 0;
   if (spent >= (owner ? cfg.ownerDailyUsd : cfg.dailyUsd)) return quota("budget", "MaiK modules have reached today's limit for everyone. Try again tomorrow.");
+  const isNewMod = !owner && dayRec.mods.indexOf(req.mod) < 0 && !modRec.q && !counted;
   let n = req.n;
   if (!owner) {
-    const isNew = dayRec.mods.indexOf(req.mod) < 0 && !modRec.q;
+    const isNew = isNewMod;
     if (isNew && dayRec.mods.length >= cfg.modulesPerDay) return quota("daily-modules", "You have created " + cfg.modulesPerDay + " modules with MaiK today. Make more tomorrow.", { limit: cfg.modulesPerDay, left: 0 });
     if (modRec.q >= cfg.perModule) return quota("module-full", "This module has its " + cfg.perModule + " questions.", { limit: cfg.perModule });
     n = Math.min(n, cfg.perModule - modRec.q);
@@ -204,6 +214,7 @@ export async function handlePrepQgen(ctx) {
     response = new Response(out, { status: 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
     await putJ(store, modK, modRec, MOD_TTL_S);
     await putJ(store, dayK, dayRec, DAY_TTL_S);
+    if (isNewMod && accepted) await putJ(store, qseenK, 1, QGEN_SEEN_TTL_S);
     if (idemK) { try { await store.put(idemK, await idemSeal(uid, canon, out), { expirationTtl: IDEM_TTL_S }); } catch (e) {} }
   } else response = providerFail(err);
   if (usage.usd > 0) { try { await store.put(usdK, String(Math.round((spent + usage.usd) * 1e6) / 1e6), { expirationTtl: DAY_TTL_S }); } catch (e) {} }

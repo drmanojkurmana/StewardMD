@@ -19,15 +19,21 @@
    made 10 at a time ("Make 10 more", "20 of 50"), each round under the same cost ceiling (ceil(10 x 1.4 / 7) mcq
    batches); a deck screen holds the deck's questions as a module with progress; the MaiK Tokens a round is expected to
    use are shown before it and what it used after (usage.mt). A round is saved as it goes (manifest run), so a round cut
-   off by the app going to the background, or closing, continues where it stopped. A PDF's pages are chosen on a page
-   picker (thumbnails, 60 at most), never taken silently.
+   off by the app going to the background, or closing, continues where it stopped, by itself when the app is back
+   in front or the network returns. A PDF's pages are chosen on a page
+   picker (thumbnails, 60 at most): a long PDF starts with the first 60 beside a plain message, never taken silently,
+   and the range is shortened with another message when its share of the file tops 50 MB or its text runs too long.
 
    Image questions (PDF only): after the text is read, the pictures on the chosen pages are cut out on the phone
    (PREP_SRC.extractImages: at least 200 x 200 px, no logos or running headers, at most 20, at most 1280 px) and shown as
    a strip; the student keeps the ones to use. After the text round, each kept image is one `imcq` call with the page
    text near it (PREP_SRC.nearSents); the server keeps a question only when the page text states its key, else the image
    is skipped. An image that got a question is stored with the deck (prep-imgs, a data: URL) and shown with the stem
-   (imgPlace "stem") through the PYQ figure and zoom. The image is sent only for that call and kept nowhere else. */
+   (imgPlace "stem") through the PYQ figure and zoom. The image is sent only for that call and kept nowhere else.
+
+   Owner 2026-10-11: the server keeps a deck's working state 7 days. When it is gone (deck-not-started) and this
+   phone still has the source, the round re-registers the deck with one facts call and goes on; only a deck whose
+   source is gone ends with the plain message, and its questions stay for practice. */
 (function (G) {
   "use strict";
   // Bound once per element and site; a later call swaps the handler (prep.js PREP_DOM.on: a patched repaint keeps nodes).
@@ -71,7 +77,7 @@
     "ai-timeout": "The question writer took too long. Try again.",
     "offline": "No connection. Check the internet and try again.",
     "storage": "The phone storage is full, so the deck could not be saved. Free some space and try again.",
-    "deck-not-started": "The server no longer knows this deck, so it cannot add questions. Make a new deck from the same source.",
+    "deck-not-started": "The source for this deck is gone from this phone, so no more questions can be added. What you made is safe: practise it below.",
     "unknown": "Something went wrong. Try again."
   };
   var BY_STATUS = { 400: "bad-input", 401: "sign-in", 402: "needs-plan", 413: "too-large", 429: "rate", 502: "ai-failed", 504: "ai-timeout" };
@@ -82,23 +88,27 @@
   // Codes worth trying again by themselves when the app comes back to the front (the phone lost the network, or the
   // call was cut off while the app was in the background).
   var AUTO_RESUME = { offline: 1, "ai-timeout": 1, unknown: 1, rate: 1 };
-  function errorCode(status, body) {
+  /* online: navigator.onLine read at the moment of the failure. "offline" only when the phone says so right then;
+     a failure with the network up (a lock suspending the request, a dropped response) is unknown, still retryable. */
+  function errorCode(status, body, online) {
     var b = body && typeof body === "object" ? body : {}, c = [b.reason, b.error, b.code];
     for (var i = 0; i < c.length; i++) if (typeof c[i] === "string" && MSG[c[i]]) return c[i];
-    if (status === 0) return "offline";
+    if (status === 0) return online === true ? "unknown" : "offline";
     return BY_STATUS[status] || "unknown";
   }
-  function errorMessage(status, body) { return MSG[errorCode(status, body)]; }
+  function errorMessage(status, body, online) { return MSG[errorCode(status, body, online)]; }
   function canRetry(code) { return !STOPS[code]; }
   /* Milliseconds to wait before the one retry, or 0 for none: a 504 (or the phone's own timeout) after 4 s (6.0); a
-     429 "rate" (the per-user 3 s limit) after its retryAfter, at least 3.5 s. Never a second retry. */
+     network failure (status 0, a lock or a dropped response) after 4 s too; a 429 "rate" (the per-user 3 s limit)
+     after its retryAfter, at least 3.5 s. Never a second retry. */
   function shouldRetry(status, attempt, code, retryAfter, retryMs) {
     if (attempt !== 0) return 0;
     if (status === 504) return retryMs == null ? RETRY_MS : retryMs;
+    if (status === 0) return retryMs == null ? RETRY_MS : retryMs;
     if (status === 429 && code === "rate") return Math.max(3500, (+retryAfter || 0) * 1000);
     return 0;
   }
-  function opError(status, body) { var e = new Error("prep-generate " + status); e.status = status; e.body = body || null; e.code = errorCode(status, body); return e; }
+  function opError(status, body, online) { var e = new Error("prep-generate " + status); e.status = status; e.body = body || null; e.code = errorCode(status, body, online); return e; }
 
   /* ---------- ids ---------- */
   function without(o, key) { var out = {}; for (var k in o) if (k !== key) out[k] = o[k]; return out; }
@@ -172,6 +182,15 @@
     var t = md ? +md.t || 0 : 0, ok = md ? +md.ok || 0 : 0;
     var max = m && m.qgen ? QGEN_MAX : DECK_MAX;   // a MaiK module (prep-qgen.js) holds up to 30
     return { n: n, max: max, answered: Math.min(pg.answered, n), due: pg.due, cardsDue: pg.cardsDue, acc: t ? Math.round(ok * 100 / t) : null, attempts: t, full: n >= max };
+  }
+  /* A deck cut off mid-round, or a MaiK module short of its asked count: "Partly made, N of M, tap to finish" for
+     Your decks, else "". n is the questions in the deck now. */
+  function partlyLine(m, n) {
+    if (!m) return "";
+    if (runOk(m.run) && m.run.accepted < m.run.target) return "Partly made, " + m.run.accepted + " of " + m.run.target + ", tap to finish";
+    var t = m.qgen && (m.qgen.target || QGEN_MAX);
+    if (t && n < t) return "Partly made, " + n + " of " + t + ", tap to finish";
+    return "";
   }
   function costLine(cost) {
     if (!cost || !(cost.inTok || cost.outTok)) return "";
@@ -404,6 +423,9 @@
     if (op.op === "facts") {
       var chunk = job.chunks[op.chunk];
       body.chunk = SR.chunkPayload(chunk);
+      // A re-register is new work, not a retry: rereg changes its idem so the server executes it instead of
+      // answering from the 10-minute replay record (which would recreate no working state).
+      if (op.rereg) body.rereg = 1;
       return deps.send(body).then(function (res) {
         applyUsage(job, res, deps);
         var fresh = [], cards = [];
@@ -413,7 +435,7 @@
           job.facts[rec.id] = rec; job.factOrder.push(rec.id); fresh.push(rec); cards.push(toCard(rec, job.deckId, job.ctx));
         });
         job.done[op.chunk] = 1;
-        m.prog.done.push(op.chunk);
+        if (m.prog.done.indexOf(op.chunk) < 0) m.prog.done.push(op.chunk);
         m.stats.facts += fresh.length; m.stats.cards += cards.length;
         var first = job.saved ? Promise.resolve() : store.putSrc(srcRec(job)).then(function () {
           if (!job.imgQ.length || !store.putImgs) return;
@@ -544,8 +566,18 @@
     var caps = capsFrom(res && res.usage, deps.today || dayKey());
     if (caps) { job.caps = caps; if (deps.onCaps) deps.onCaps(caps); }
   }
+  /* The chunk a re-register re-sends: one already done (its facts come back with the same ids and are skipped),
+     else the first chunk. */
+  function reregChunk(job) {
+    var ids = Object.keys(job.done || {});
+    if (ids.length) return +ids[0];
+    if (job.order && job.order.length) return job.order[0];
+    return job.chunks && job.chunks.length ? 0 : null;
+  }
   /* Run the round to its end. Never rejects: resolves { ok, code?, accepted, more }. A cap stop is written to the
-     manifest (cost.stopped); everything that passed before it stays saved. */
+     manifest (cost.stopped); everything that passed before it stays saved. When the server has forgotten the deck
+     (deck-not-started: its 7-day working state expired) and this phone still has the source, the deck is
+     re-registered with one facts call and the round goes on; only a deck whose source is gone ends here. */
   function runRound(job, deps) {
     function loop() {
       var op = nextOp(job);
@@ -559,16 +591,27 @@
     }
     return loop().then(null, function (e) {
       var code = e && e.code ? e.code : e && e.name === "QuotaExceededError" ? "storage" : e && e.status != null ? errorCode(e.status, e.body) : "storage";
-      if (CAP_STOPS[code]) { job.stopped = code; job.m.cost.stopped = code; }
-      var eb = e && e.body && typeof e.body === "object" ? e.body : null;
-      if (eb && eb.usage) applyUsage(job, eb, deps);   // a failed AI call is still metered
-      else if (eb && (eb.monthDecks != null || eb.dayDecks != null)) { var c0 = capsFrom(eb, deps.today || dayKey()); job.caps = c0; if (deps.onCaps) deps.onCaps(c0); }
-      var after = capsAfterStop(job.caps, code, deps.today || dayKey());
-      if (after !== job.caps) { job.caps = after; if (deps.onCaps) deps.onCaps(after); }
-      // A stop the student cannot retry ends the round; anything else keeps it in the manifest to continue later.
-      var done = !job.saved ? Promise.resolve() : (canRetry(code) ? saveDeck(job, deps.store) : endRound(job, deps)).then(null, function () {});
-      return done.then(function () { return { ok: false, code: code, message: MSG[code], retry: canRetry(code), accepted: job.round.accepted, more: hasMore(job), mt: job.round.mt || 0, full: DK.questionCount(job.m) >= DECK_MAX }; });
+      if (code === "deck-not-started" && !job.rereg && job.saved && job.sents && job.sents.length && job.chunks && job.chunks.length) {
+        var c = reregChunk(job);
+        if (c != null) {
+          job.rereg = 1;
+          return step(job, { op: "facts", chunk: c, rereg: true }, deps).then(loop).then(null, function (e2) { return failRun(job, deps, e2); });
+        }
+      }
+      return failRun(job, deps, e);
     });
+  }
+  function failRun(job, deps, e) {
+    var code = e && e.code ? e.code : e && e.name === "QuotaExceededError" ? "storage" : e && e.status != null ? errorCode(e.status, e.body) : "storage";
+    if (CAP_STOPS[code]) { job.stopped = code; job.m.cost.stopped = code; }
+    var eb = e && e.body && typeof e.body === "object" ? e.body : null;
+    if (eb && eb.usage) applyUsage(job, eb, deps);   // a failed AI call is still metered
+    else if (eb && (eb.monthDecks != null || eb.dayDecks != null)) { var c0 = capsFrom(eb, deps.today || dayKey()); job.caps = c0; if (deps.onCaps) deps.onCaps(c0); }
+    var after = capsAfterStop(job.caps, code, deps.today || dayKey());
+    if (after !== job.caps) { job.caps = after; if (deps.onCaps) deps.onCaps(after); }
+    // A stop the student cannot retry ends the round; anything else keeps it in the manifest to continue later.
+    var done = !job.saved ? Promise.resolve() : (canRetry(code) ? saveDeck(job, deps.store) : endRound(job, deps)).then(null, function () {});
+    return done.then(function () { return { ok: false, code: code, message: MSG[code], retry: canRetry(code), accepted: job.round.accepted, more: hasMore(job), mt: job.round.mt || 0, full: DK.questionCount(job.m) >= DECK_MAX }; });
   }
 
   // The round is over: it leaves the manifest, its MaiK Tokens count toward this deck's average.
@@ -582,8 +625,8 @@
 
   /* ---------- one HTTP call ---------- */
   /* deps = { fetch, url, token() -> Promise(idToken|null), wait(ms) -> Promise, timeout?, AbortController?, setTimeout?,
-     clearTimeout?, retryMs? }. Adds the idem key, sends, returns the JSON or rejects with opError (status, body, code).
-     One retry with the same key, as shouldRetry says. */
+     clearTimeout?, retryMs?, online?() -> navigator.onLine }. Adds the idem key, sends, returns the JSON or rejects
+     with opError (status, body, code). One retry with the same key, as shouldRetry says. */
   function callOp(body, deps) {
     var payload = without(body, "idem");
     payload.idem = idemKey(body.op, body);
@@ -604,7 +647,7 @@
               if (!j || typeof j !== "object") throw opError(502, { error: "ai-failed" });
               return j;
             });
-          }, function (e) { clear(); throw e && e.name === "AbortError" ? opError(504, { error: "ai-timeout" }) : opError(0, null); });
+          }, function (e) { clear(); if (e && e.name === "AbortError") throw opError(504, { error: "ai-timeout" }); throw opError(0, null, deps.online ? deps.online() : (G.navigator && G.navigator.onLine)); });
       });
     }
     return once().then(null, function (e) {
@@ -617,12 +660,12 @@
   var PURE = {
     URL: URL, MODEL: MODEL, PV: PV, BATCH: BATCH, TARGET: TARGET, RETRY_MS: RETRY_MS, PROFILE: PROFILE, MSG: MSG,
     MONTH_CAP: MONTH_CAP, DAY_CAP: DAY_CAP, DECK_MAX: DECK_MAX, IMG_PER_ROUND: IMG_PER_ROUND, MT_ROUND_DEFAULT: MT_ROUND_DEFAULT, CREATE_EXAMS: CREATE_EXAMS, AUTO_RESUME: AUTO_RESUME,
-    createExam: createExam, mtEstimate: mtEstimate, roundTarget: roundTarget, deckStats: deckStats, runOk: runOk,
+    createExam: createExam, mtEstimate: mtEstimate, roundTarget: roundTarget, deckStats: deckStats, partlyLine: partlyLine, runOk: runOk,
     errorCode: errorCode, errorMessage: errorMessage, canRetry: canRetry, shouldRetry: shouldRetry, opError: opError,
     idemKey: idemKey, deckIdFor: deckIdFor, mixFor: mixFor, addUsage: addUsage, dayKey: dayKey, capsFrom: capsFrom, capLine: capLine, capsAfterStop: capsAfterStop, costLine: costLine,
     factRecord: factRecord, factPayload: factPayload, paraFor: paraFor, gatesPass: gatesPass, toStored: toStored, toCard: toCard, jaccard: jaccard, nearDup: nearDup,
     deckKey: deckKey, cardDeckKey: cardDeckKey, deckProgress: deckProgress, purgeStore: purgeStore, defaultTitle: defaultTitle, readNote: readNote, unreadableMessage: unreadableMessage,
-    newRound: newRound, newJob: newJob, nextOp: nextOp, attachImages: attachImages, imgB64: imgB64, unusedFids: unusedFids, hasMore: hasMore, step: step, runRound: runRound, callOp: callOp
+    newRound: newRound, newJob: newJob, nextOp: nextOp, attachImages: attachImages, imgB64: imgB64, unusedFids: unusedFids, hasMore: hasMore, step: step, runRound: runRound, callOp: callOp, reregChunk: reregChunk
   };
   if (isNode) { module.exports = PURE; return; }
 
@@ -737,10 +780,11 @@
     if (st.acc != null) bits.push(st.acc + "% correct");
     if (st.due) bits.push(host.fmt(st.due) + " due");
     var tag = busy ? "Making" : paused ? "Paused" : m.cost && m.cost.stopped && m.cost.stopped !== "deck-full" ? stopWord(m.cost.stopped) : "";
+    var pl = !busy && partlyLine(m, st.n);   // a partly made deck or module says so, with how to finish it
     var frac = st.n ? Math.min(1, st.answered / st.n) : 0;
-    return '<button type="button" class="pn-panel pc-drow" data-act="c-open" data-d="' + esc(m.id) + '" aria-label="' + t + ", " + esc(bits.join(", ")) + (tag ? ", " + esc(tag) : "") + '">' +
+    return '<button type="button" class="pn-panel pc-drow" data-act="c-open" data-d="' + esc(m.id) + '" aria-label="' + t + ", " + (pl ? esc(pl) : esc(bits.join(", "))) + (tag ? ", " + esc(tag) : "") + '">' +
       '<span class="pn-ic sm" style="--h:' + hueOf(m.title) + '" aria-hidden="true">' + host.ico("deck") + "</span>" +
-      '<span class="pn-mb"><b>' + t + "</b><small>" + esc(bits.join(" · ")) + "</small>" +
+      '<span class="pn-mb"><b>' + t + "</b><small>" + (pl ? esc(pl) : esc(bits.join(" · "))) + "</small>" +
       '<span class="pn-prog pc-mini" aria-hidden="true"><i style="transform:scaleX(' + frac.toFixed(3) + ')"></i></span></span>' +
       (tag ? '<span class="pc-tag' + (busy ? " on" : "") + '">' + esc(tag) + "</span>" : "") + host.ico("chev") + "</button>";
   }
@@ -828,7 +872,11 @@
     cs.err = ""; cs.pdf = null; cs.sel = []; cs.busy = "Opening the PDF…";
     host.rerender();
     SR.openPdf(file).then(function (pdf) {
-      cs.busy = ""; cs.pdf = pdf; cs.sel = SR.selInitial(pdf.pages); cs.anchor = 0; cs.rangeOn = false; cs.pgMsg = ""; cs.spec = "";
+      cs.busy = ""; cs.pdf = pdf; cs.anchor = 0; cs.rangeOn = false; cs.spec = "";
+      var fit = SR.fitBytes(SR.selInitial(pdf.pages), pdf.bytes || 0, pdf.pages || 0);
+      cs.sel = fit.sel;
+      cs.pgMsg = SR.rangeMsg(pdf.pages, cs.sel);
+      if (fit.cut) cs.pgMsg += (cs.pgMsg ? " " : "") + SR.fitMsg(cs.sel);
       if (!cs.title) cs.title = pdf.name.replace(/\.pdf$/i, "").slice(0, 80);
       if (onTop("#pcCreateView", host)) { host.rerender(); host.push(function () { renderPages(host); }); }
     }, function () {
@@ -1017,7 +1065,9 @@
     }
     if (!cs.pdf) return createError(host, "Choose a PDF first.");
     if (!cs.sel.length) return createError(host, "Pick at least one page.");
-    var pages = cs.sel.slice();
+    var pages = cs.sel.slice(), notes = [];
+    var fit = SR.fitBytes(pages, cs.pdf.bytes || 0, cs.pdf.pages || 0);
+    if (fit.cut) { pages = fit.sel; notes.push(SR.fitMsg(pages)); }
     cs.busy = "Reading page 1 of " + pages.length + "…";
     host.rerender();
     var ocrOn = SR.canOcr();
@@ -1027,7 +1077,14 @@
       else if (d < n) say("Reading page " + (d + 1) + " of " + n + "…");
     }).then(function (rd) {
       if (!rd.pages.length) { cs.busy = ""; return createError(host, unreadableMessage(rd, ocrOn)); }
-      var src = { kind: "pdf", raw: rd.pages, title: cs.title, name: cs.pdf.name, pages: pages, scanned: rd.scanned, ocr: rd.ocrPages.length, skipped: rd.skipped.length, note: readNote(rd, ocrOn) };
+      var fc = SR.fitChars(rd.pages, SR.CHARS_CAP);
+      if (fc.dropped) {
+        pages = fc.pages.map(function (p) { return p.p; });
+        notes.push("Using " + pages.length + " of the " + rd.pages.length + " pages read: the text was too long for one deck. Make another deck for the rest.");
+      }
+      var rdNote = readNote({ pages: fc.pages, ocrPages: rd.ocrPages, skipped: rd.skipped, scanned: rd.scanned }, ocrOn);
+      if (rdNote) notes.push(rdNote);
+      var src = { kind: "pdf", raw: fc.pages, title: cs.title, name: cs.pdf.name, pages: pages, scanned: rd.scanned, ocr: rd.ocrPages.length, skipped: rd.skipped.length, note: notes.join(" ") };
       findImages(say, cs.pdf.doc, pages).then(function (imgs) {
         cs.busy = "";
         if (!imgs.length) return review(host, src);
@@ -1091,6 +1148,7 @@
     if (chk.error) { if (onTop("#pcScrubView", host)) host.back(); return createError(host, chk.error); }
     var exam = createExam(cs.exam || host.exam().id), diff = cs.diff, u = user(), sha = DK.sha256(SR.docText(doc)), title = (src.title || "").trim() || defaultTitle(doc, src.name);
     note = src.note || "";
+    if (doc.cut) note += (note ? " " : "") + "Only the first part of the text fits in one deck.";
     loadProfile(exam).then(function (prof) {
       var id = deckIdFor({ uid: u && u.uid, sha: sha, exam: exam, profileV: prof.v || 1, pv: PV, model: MODEL });
       return DK.getDeck(id).then(function (old) {
@@ -1197,12 +1255,20 @@
     if (onTop("#pcProgView", host)) host.rerender();
     runJob(host, job);
   }
-  // Back from the background: a round cut off by a network or timeout error goes on by itself.
-  if (G.document) G.document.addEventListener("visibilitychange", function () {
-    if (G.document.visibilityState !== "visible" || !job || !jobResult || jobResult.ok || !AUTO_RESUME[jobResult.code] || !job.saved) return;
+  // Back from a lock or the background, or the network returning: a round cut off by a network or timeout error
+  // goes on by itself. No resume while still hidden, or still offline after an offline stop (the online event retries that).
+  function maybeResume() {
+    if (G.document && G.document.visibilityState === "hidden") return;
+    if (!job || !jobResult || jobResult.ok || !AUTO_RESUME[jobResult.code] || !job.saved) return;
+    if (jobResult.code === "offline" && G.navigator && G.navigator.onLine === false) return;
     var h = G.PREP && G.PREP._host;
     if (h) resume(h);
-  });
+  }
+  if (G.document && G.document.addEventListener) {
+    G.document.addEventListener("visibilitychange", maybeResume);
+    G.document.addEventListener("resume", maybeResume);
+  }
+  if (G.addEventListener) { G.addEventListener("pageshow", maybeResume); G.addEventListener("online", maybeResume); }
 
   function readsImage(st) {
     var t = String(st || "");

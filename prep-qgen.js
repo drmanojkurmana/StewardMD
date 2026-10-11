@@ -10,9 +10,13 @@
    A student's module is a PRIVATE deck (prep-decks.js): manifest source.type "maik", items in the app's schema with
    qg { g: grounded 1|0, v: "ok", u: 1 when not from the student's own notes }. So it opens like every deck (the mode
    sheet with Learning or Test Mode and the timer), works offline once made, is mirrored to the app's files and backed
-   up encrypted to the account with the other decks. It never enters the shared bank and has no share IDs. A module is
+   up encrypted to the account with the other decks. It never enters the shared bank and has no share IDs. The manifest
+   keeps the page range a PDF module was made from, and the grounding text is backed up with the deck, so more
+   questions stay grounded after a restore. A module is
    made 5 questions a request (generate, code gates, an independent check that solves each question blind); what passes
-   is saved after every request, so stopping or losing the connection keeps what was made.
+   is saved after every request, so stopping or losing the connection keeps what was made. A round that fails is tried
+   once more after a few seconds with the same idempotency key (the server replays instead of remaking); when the app
+   was locked or the network dropped, the rest goes on by itself once the app is back or the network returns.
 
    Owner (server ownerOK, never a client list): Author screen = pick exam, subject, module (or a new name), paste or
    choose a source, count; up to 10 runs here (flagged items kept for review), more goes to the Batch API (half price,
@@ -23,10 +27,11 @@
   "use strict";
 
   /* ================= pure ================= */
-  var PER = 5, COUNTS = [10, 20, 30], PAGE_CAP = 20, GROUND_MAX = 60000, OWNER_GROUND_MAX = 200000, EXTRA_ROUNDS = 2;
+  var PER = 5, COUNTS = [10, 20, 30], PAGE_CAP = 60, GROUND_MAX = 60000, OWNER_GROUND_MAX = 200000, EXTRA_ROUNDS = 2;
   var EXAMS = [["neet-pg", "NEET-PG"], ["ini-cet", "INI-CET"], ["neet-ss", "NEET-SS"], ["usmle", "USMLE"]];
   var DIFFS = [["mix", "Exam mix"], ["easy", "Easy"], ["moderate", "Moderate"], ["hard", "Hard"]];
   var MT_ROUND = 6000;   // MaiK Tokens a round (generate + check, 5 questions), from the first live rounds (Rs 2.6 to 3.1)
+  var QRETRY_MS = 3000;    // one retry of a failed round after this long, same round and key; then it waits for resume
   // What the server's refusals mean, in the app's words.
   var MSG = {
     "sign-in": "Sign in to create a module with MaiK.",
@@ -46,8 +51,10 @@
     "too-large": "The notes are too long. Use a shorter part, up to about 25 pages of text.",
     "bad-input": "Something in the request was not accepted. Check the topic and notes and try again."
   };
-  function codeOf(status, j) {
-    if (!status) return "offline";
+  /* online: navigator.onLine read at the moment of the failure. "offline" only when the phone says so right then;
+     a failure with the network up (a lock suspending the request, a dropped response) is ai-failed, still retryable. */
+  function codeOf(status, j, online) {
+    if (!status) return online === true ? "ai-failed" : "offline";
     var r = j && j.reason, e = j && j.error;
     if (status === 401) return "sign-in";
     if (status === 429) return MSG[r] ? r : "rate";
@@ -86,7 +93,7 @@
   function approved(list) { return (list || []).filter(function (r) { return r.st === "ok"; }).map(function (r) { return r.it; }); }
   var WHY = { disagree: "The checker chose a different answer", "multiple-best": "More than one option may be right", "factual-doubt": "A fact may be wrong", outdated: "May be outdated", "not-in-source": "Not supported by the source", "no-verdict": "Not checked" };
 
-  var PURE = { nextN: nextN, codeOf: codeOf, msgOf: msgOf, retryable: retryable, avoidOf: avoidOf, leftLine: leftLine, bulkApprove: bulkApprove, approved: approved, examFor: examFor, PER: PER, COUNTS: COUNTS, MSG: MSG, WHY: WHY };
+  var PURE = { nextN: nextN, codeOf: codeOf, msgOf: msgOf, retryable: retryable, avoidOf: avoidOf, leftLine: leftLine, bulkApprove: bulkApprove, approved: approved, examFor: examFor, PER: PER, COUNTS: COUNTS, MSG: MSG, WHY: WHY, QRETRY_MS: QRETRY_MS };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= state ================= */
@@ -104,7 +111,8 @@
   function user() { var a = G.SMD_AUTH; return a && a.currentUser ? a.currentUser : null; }
   function token() { var u = user(); return u && u.getIdToken ? Promise.resolve(u.getIdToken()).then(null, function () { return null; }) : Promise.resolve(null); }
   function apiUrl() { return (G.SMD_API_BASE || "") + (G.SMD_PREP_QGEN_API || "/api/ai/prep-qgen"); }
-  /* call(body, ms) -> Promise({ status, json }); status 0 = no connection or timed out. */
+  /* call(body, ms) -> Promise({ status, json, abort? }); status 0 = no connection, cut off, or timed out (abort set
+     when our own wait ran out, so the loop can say "took too long" instead of "offline"). */
   function call(body, ms) {
     return token().then(function (tok) {
       var h = { "Content-Type": "application/json" };
@@ -113,9 +121,12 @@
       return G.fetch(apiUrl(), { method: "POST", headers: h, body: JSON.stringify(body), signal: ac ? ac.signal : undefined }).then(function (r) {
         if (t) G.clearTimeout(t);
         return r.json().then(function (j) { return { status: r.status, json: j }; }, function () { return { status: r.status, json: {} }; });
-      }, function () { if (t) G.clearTimeout(t); return { status: 0, json: {} }; });
+      }, function (e) { if (t) G.clearTimeout(t); return { status: 0, abort: !!(e && e.name === "AbortError"), json: {} }; });
     });
   }
+  /* navigator.onLine read fresh at the moment of a failure, never a stored flag (a lock suspends the request while the
+     phone still reports online). true, false, or undefined when the phone says nothing. */
+  function onlineNow() { try { return G.navigator && G.navigator.onLine; } catch (e) { return undefined; } }
   function refresh(host, force) {
     // Only a signed-in account can create, so a guest never asks (and the rows stay hidden until sign-in).
     if (!flagOn() || !user()) return Promise.resolve(null);
@@ -157,7 +168,7 @@
       '<p class="pn-mut pn-small" id="qgChars">' + fmtN(cs.text.length) + " of " + fmtN(GROUND_MAX) + " characters</p>";
     else srcHtml = '<button type="button" class="pc-drop" data-act="g-pick"' + (cs.busy ? " disabled" : "") + '><span class="pn-ic sm" style="--h:174" aria-hidden="true">' + host.ico("dl") + "</span><span><b>" + (cs.pdf ? esc(cs.pdf.name) : "Choose a PDF") + "</b><small>" + (cs.pdf ? fmtN(cs.pdf.pages) + " pages" : "A chapter or your notes, up to " + PAGE_CAP + " pages") + "</small></span></button>" +
       '<input type="file" id="qgFile" accept="application/pdf,.pdf" hidden aria-hidden="true" tabindex="-1">' +
-      (cs.pdf ? '<label class="pc-lbl" for="qgPages">Pages</label><input id="qgPages" name="pages" class="pc-in" inputmode="numeric" spellcheck="false" autocomplete="off" placeholder="For example 1-12…" value="' + esc(cs.spec) + '">' : "");
+      (cs.pdf ? '<label class="pc-lbl" for="qgPages">Pages</label><input id="qgPages" name="pages" class="pc-in" inputmode="numeric" spellcheck="false" autocomplete="off" placeholder="For example 1-12…" value="' + esc(cs.spec) + '">' + rangeLine(esc) : "");
     var grounded = cs.kind !== "topic";
     host.paint(host.bar("Create a module", "With MaiK", "back") + '<div class="pn-body qg-create" id="qgCreateView">' +
       (out ? '<section class="pn-panel qg-limit" role="status"><p class="qg-limh">Today\'s free modules are used</p><p class="pn-mut">You can create ' + st.caps.modulesPerDay + " modules with MaiK a day. Come back tomorrow, or practise the modules you made in Your decks.</p></section>" : "") +
@@ -184,31 +195,43 @@
     ON(fi, "change", function () { if (fi.files && fi.files[0]) pickPdf(fi.files[0], host); });
   }
   function createErr(host, m) { cs.err = m; cs.busy = ""; if (onTop("#qgCreateView", host)) host.rerender(); }
+  /* The plain line under the pages box for a long PDF: which pages are used, and the 50 MB fit when it bites. */
+  function rangeLine(esc) {
+    var S = SR();
+    if (!S || !cs.pdf || cs.pdf.pages <= PAGE_CAP) return "";
+    var rr = S.selFromSpec(cs.spec, cs.pdf.pages, PAGE_CAP), sel = (rr && rr.sel) || S.selInitial(cs.pdf.pages);
+    var msg = S.rangeMsg(cs.pdf.pages, sel, PAGE_CAP, "module");
+    var fit = S.fitBytes(sel, cs.pdf.bytes || 0, cs.pdf.pages || 0);
+    if (fit.cut) msg += (msg ? " " : "") + S.fitMsg(fit.sel);
+    return msg ? '<p class="pn-mut pn-small">' + esc(msg) + "</p>" : "";
+  }
   function pickPdf(file, host) {
     if (!SR()) return createErr(host, "PDFs cannot be read here. Paste the text instead.");
     cs.err = ""; cs.pdf = null; cs.busy = "Opening the PDF…"; host.rerender();
     SR().openPdf(file).then(function (pdf) {
-      cs.busy = ""; cs.pdf = pdf; cs.spec = pdf.pages <= PAGE_CAP ? "1-" + pdf.pages : "1-" + PAGE_CAP;
+      cs.busy = ""; cs.pdf = pdf; cs.spec = SR().defaultPages(pdf.pages);
       if (!cs.topic) cs.topic = pdf.name.replace(/\.pdf$/i, "").slice(0, 120);
       if (onTop("#qgCreateView", host)) host.rerender();
     }, function () { createErr(host, "This PDF could not be opened. It may be protected by a password or damaged."); });
   }
-  /* The grounding text: pasted notes, or the chosen PDF pages read on this phone (same reader as Make a deck). */
+  /* The grounding: pasted notes, or the chosen PDF pages read on this phone (same reader as Make a deck).
+     Resolves { text, pages } (pages = the PDF page numbers used, else null: the manifest keeps them). */
   function readGround(host) {
-    if (cs.kind === "topic") return Promise.resolve("");
-    if (cs.kind === "notes") return Promise.resolve(cs.text);
+    if (cs.kind === "topic") return Promise.resolve({ text: "", pages: null });
+    if (cs.kind === "notes") return Promise.resolve({ text: cs.text, pages: null });
     if (!cs.pdf) return Promise.reject(new Error("Choose a PDF first."));
     var res = SR().selFromSpec(cs.spec, cs.pdf.pages, PAGE_CAP);
     var pages = res && res.sel ? res.sel : res && res.pages ? res.pages : null;
     if (!pages || !pages.length) return Promise.reject(new Error((res && res.error) || "Type the pages to use, for example 1-12, up to " + PAGE_CAP + "."));
     if (pages.length > PAGE_CAP) return Promise.reject(new Error("Up to " + PAGE_CAP + " pages in one module."));
+    pages = SR().fitBytes(pages, cs.pdf.bytes || 0, cs.pdf.pages || 0).sel;
     cs.busy = "Reading page 1 of " + pages.length + "…"; host.rerender();
     var say = function (t) { var el = host.root() && host.root().querySelector("#qgCreateView .pc-readp .pn-load"); if (el) el.textContent = t; };
     return SR().readPdfPages(cs.pdf.doc, pages, function (d, n) { if (d < n) say("Reading page " + (d + 1) + " of " + n + "…"); }).then(function (rd) {
       cs.busy = "";
       var doc = SR().buildDoc(rd.pages || []), text = (doc.sents || []).map(function (s) { return s.tx; }).join(" ");
       if (text.replace(/\s+/g, "").length < 200) throw new Error("These pages have too little text to make questions from. Try other pages.");
-      return text;
+      return { text: text, pages: pages };
     });
   }
   function go(host) {
@@ -221,16 +244,16 @@
     if (cs.kind === "notes" && cs.text.replace(/\s+/g, "").length < 200) return createErr(host, "Paste a little more text: at least a paragraph or two.");
     if (G.navigator && G.navigator.onLine === false) return createErr(host, MSG.offline);
     var scrub = SR() && SR().prepScrub ? SR().prepScrub : function (x) { return x; };
-    readGround(host).then(function (ground) {
-      ground = scrub(String(ground || "")).slice(0, GROUND_MAX);
-      start(host, { title: topic.slice(0, 120), topic: topic.slice(0, 120), ground: ground, exam: cs.exam, diff: cs.diff, target: cs.count });
+    readGround(host).then(function (g) {
+      var ground = scrub(String(g.text || "")).slice(0, GROUND_MAX);
+      start(host, { title: topic.slice(0, 120), topic: topic.slice(0, 120), ground: ground, pages: g.pages || null, exam: cs.exam, diff: cs.diff, target: cs.count });
       cs.topic = ""; cs.text = ""; cs.pdf = null; cs.spec = ""; cs.own = false;
     }, function (e) { createErr(host, (e && e.message) || "The pages could not be read."); });
   }
 
   /* ================= the job ================= */
   function start(host, o) {
-    job = { mod: o.mod || newMod(), title: o.title, topic: o.topic, ground: o.ground, exam: o.exam, diff: o.diff, target: o.target, base: o.base || 0,
+    job = { mod: o.mod || newMod(), title: o.title, topic: o.topic, ground: o.ground, pages: o.pages || null, note: o.note || "", exam: o.exam, diff: o.diff, target: o.target, base: o.base || 0,
       made: 0, dropped: 0, rounds: 0, stage: "write", stopReq: false, done: false, code: "", mt: 0, items: o.items || [], m: o.m || null };
     if (onTop("#qgCreateView", host)) host.back();
     host.push(function () { renderProgress(host); });
@@ -243,31 +266,48 @@
     var n = nextN(j.target, j.made, j.rounds);
     if (!n) return finish(host, "");
     j.rounds++; j.stage = "write"; upd(host);
+    if (!j.idem) j.idem = idem();   // one key per round: the retry reuses it, so the server replays instead of remaking
     // The checking step runs on the server in the same request; show it after a while so the stage list is honest.
     var tCheck = G.setTimeout(function () { if (job === j && !j.done) { j.stage = "check"; upd(host); } }, 14000);
-    call({ op: "gen", mod: j.mod, topic: j.topic, ground: j.ground || undefined, exam: j.exam, diff: j.diff, n: n, round: j.base + j.rounds, avoid: avoidOf(j.items), idem: idem() }).then(function (r) {
+    call({ op: "gen", mod: j.mod, topic: j.topic, ground: j.ground || undefined, exam: j.exam, diff: j.diff, n: n, round: j.base + j.rounds, avoid: avoidOf(j.items), idem: j.idem }).then(function (r) {
       G.clearTimeout(tCheck);
       if (job !== j) return;
-      if (r.status !== 200) { var c = codeOf(r.status, r.json); return finish(host, c); }
+      if (r.status !== 200) {
+        var c = r.abort ? "ai-timeout" : codeOf(r.status, r.json, onlineNow());
+        if (retryable(c) && !j.retried) {   // once more after a short delay, same round and key; then it waits for resume
+          j.retried = true; j.rounds--; j.stage = "write"; upd(host);
+          G.setTimeout(function () { if (job === j && !j.done) loop(host); }, QRETRY_MS);
+          return;
+        }
+        return finish(host, c);
+      }
+      j.idem = null; j.retried = false;
       var got = (r.json.items || []).filter(function (it) { return it && it.qg && it.qg.v === "ok" && it.o && it.o.length === 4; });
       j.dropped += (r.json.dropped || []).length;
       j.mt += (r.json.usage && r.json.usage.mt) || 0; j.mtUsed = (j.mtUsed || 0) + ((r.json.usage && r.json.usage.mt) || 0);
       if (r.json.left) { if (status) status.left = r.json.left.modules; j.room = r.json.left.questions; }
       j.stage = "save"; upd(host);
-      return save(j, got).then(function () {
-        j.made += got.length; upd(host);
+      return save(j, got).then(function (nSaved) {
+        j.made += nSaved; upd(host);
         if (r.json.left && r.json.left.questions === 0) return finish(host, "");
         loop(host);
       }, function () { finish(host, "save"); });
     });
   }
-  /* Save a round into the module's deck: the manifest on the first accepted round, then the items. */
+  /* Save a round into the module's deck: the manifest on the first accepted round, then the items. Items already
+     in the module (a replayed round after a retry or resume) are left out, so a question is never saved twice.
+     Resolves with how many were newly saved, which is what the progress counts. */
   function save(j, got) {
-    if (!got.length) return Promise.resolve();
+    var seen = {};
+    j.items.forEach(function (it) { if (it && it.id) seen[it.id] = 1; });
+    got = (got || []).filter(function (it) { if (!it || !it.id || seen[it.id]) return false; seen[it.id] = 1; return true; });
+    if (!got.length) return Promise.resolve(0);
     var D = DK(), now = Date.now();
     got.forEach(function (it) { it.deckId = j.mod; it._s = "deck"; it._m = "deck-" + j.mod; it.t = "gen"; });
     j.items = j.items.concat(got);
     var m = j.m || D.newManifest({ id: j.mod, title: j.title, exam: j.exam, profileV: 1, pv: "qg1", model: "maik", source: { type: "maik", name: j.topic, pages: null, sha: j.mod }, now: now });
+    var S = SR();
+    if (j.pages && j.pages.length && S && S.pageSpan) { m.source.pages = S.pageSpan(j.pages); if (S.selSpec) m.source.sel = S.selSpec(j.pages); }
     m.qgen = { g: j.ground ? 1 : 0, topic: j.topic, diff: j.diff, target: Math.max((m.qgen && m.qgen.target) || 0, j.base + j.target) };
     m.diff = j.diff === "mix" ? "mix" : j.diff;
     m.stats.generated += got.length; m.stats.accepted += got.length;
@@ -275,13 +315,35 @@
     m.topics = D.topicsFor(j.mod, j.items, [{ id: "gen", title: j.title }]);
     j.m = m;
     var src = j.ground ? D.putSrc({ deckId: j.mod, name: j.topic, type: "maik", sents: [], ground: j.ground }) : Promise.resolve();
-    return Promise.all([D.putItems(got), src]).then(function () { return D.putDeck(m); }).then(function () { D.changed(j.mod); });
+    return Promise.all([D.putItems(got), src]).then(function () { return D.putDeck(m); }).then(function () { D.changed(j.mod); return got.length; });
   }
   function finish(host, code) {
     var j = job; if (!j) return;
     j.done = true; j.code = code || ""; j.stage = "";
     if (onTop("#qgProgView", host)) host.rerender();
   }
+  /* Pick up the failed round where it stopped: same round number and key, a fresh retry, the saved questions kept
+     (the next round's avoid list carries them, and save() drops any replayed question already in the module). */
+  function resume(host) {
+    if (!job || !job.done || !retryable(job.code) || job.stopReq) return;
+    job.done = false; job.code = ""; job.stopReq = false; job.rounds = Math.max(0, job.rounds - 1); job.retried = false;
+    if (onTop("#qgProgView", host)) host.rerender();
+    loop(host);
+  }
+  // Back from a lock or the background, or the network returning: a round cut off by a retryable error goes on by
+  // itself. No resume while still hidden, or still offline after an offline stop (the online event retries that).
+  function maybeResume() {
+    if (G.document && G.document.visibilityState === "hidden") return;
+    if (!job || !job.done || !retryable(job.code) || job.stopReq) return;
+    if (job.code === "offline" && onlineNow() === false) return;
+    var h = G.PREP && G.PREP._host;
+    if (h) resume(h);
+  }
+  if (G.document && G.document.addEventListener) {
+    G.document.addEventListener("visibilitychange", maybeResume);
+    G.document.addEventListener("resume", maybeResume);
+  }
+  if (G.addEventListener) { G.addEventListener("pageshow", maybeResume); G.addEventListener("online", maybeResume); }
   var STAGES = [["write", "Writing questions"], ["check", "Checking each answer"], ["save", "Saving to your module"]];
   function stageHtml(j) {
     var at = -1; STAGES.forEach(function (s, i) { if (s[0] === j.stage) at = i; });
@@ -315,6 +377,7 @@
       body = (lim ? "" : '<section class="pn-panel pn-score pc-res qg-res"><p class="pn-big" id="qgMade">' + n + '</p><p class="pn-mut">' + (n === 1 ? "question" : "questions") + " ready" + (has > n ? " · " + has + " in the module" : "") + "</p>" +
         (j.dropped ? '<p class="pn-mut pn-small">' + (j.dropped === 1 ? "1 question was left out because it did not pass the checks." : j.dropped + " questions were left out because they did not pass the checks.") + "</p>" : "") +
         (j.mtUsed ? '<p class="pn-mut pn-small" id="qgMt">Used ' + fmtN(j.mtUsed) + " MaiK Tokens.</p>" : "") + "</section>") +
+        (j.note ? '<p class="pn-mut" id="qgNote">' + esc(j.note) + "</p>" : "") +
         (lim && j.code === "daily-modules" ? '<section class="pn-panel qg-limit" role="alert" id="qgErr" tabindex="-1"><p class="qg-limh">Today\'s free modules are used</p><p class="pn-mut">You can create ' + ((status && status.caps && status.caps.modulesPerDay) || 3) + " modules with MaiK a day. Your modules so far are in Your decks.</p></section>" : "") +
         (err && !(lim && j.code === "daily-modules") ? '<p class="pn-err" role="alert" id="qgErr" tabindex="-1">' + esc(err) + "</p>" : "") +
         (!err && short && !j.stopReq ? '<p class="pn-mut">Fewer questions passed the checks than asked for. You can add more from the module.</p>' : "") +
@@ -336,7 +399,10 @@
       if (!room) return host.toast(MSG["module-full"]);
       if (job && !job.done) return host.toast("A module is being made. Wait for it to finish first.");
       job = null;
-      start(host, { mod: deckId, title: m.title, topic: m.qgen.topic || m.title, ground: (a[2] && a[2].ground) || "", exam: m.exam, diff: m.qgen.diff || "mix", target: Math.min(10, room), base: Math.ceil(have / PER), items: items, m: m });
+      var ground = (a[2] && a[2].ground) || "";
+      var note = m.qgen.g && !ground ? "The notes this module was made from are gone from this phone. The new questions below come from general knowledge instead." : "";
+      if (note) host.toast("The original notes are gone from this phone. Using general knowledge.");
+      start(host, { mod: deckId, title: m.title, topic: m.qgen.topic || m.title, ground: ground, exam: m.exam, diff: m.qgen.diff || "mix", target: Math.min(10, room), base: Math.ceil(have / PER), items: items, m: m, note: note });
     });
   }
 
@@ -510,7 +576,7 @@
     if (a === "g-pick") { var f = host.root() && host.root().querySelector("#qgFile"); if (f) f.click(); return; }
     if (a === "g-go") return go(host);
     if (a === "g-stop") { if (job && !job.done) { job.stopReq = true; host.rerender(); } return; }
-    if (a === "g-retry") { if (job && job.done) { job.done = false; job.code = ""; job.stopReq = false; job.rounds = Math.max(0, job.rounds - 1); host.rerender(); loop(host); } return; }
+    if (a === "g-retry") { resume(host); return; }
     if (a === "g-done") return host.back();
     if (a === "g-prac" || a === "g-open") {
       var d = el.getAttribute("data-d");
