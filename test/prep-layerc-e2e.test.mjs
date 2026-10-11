@@ -239,22 +239,42 @@ test("an idempotent replay is free: same idem, no model call, no record, no extr
   assert.equal(env.MAIK_KV.m.get("prep:decks:fb:u-a:" + MONTH), "1");
 });
 
-test("a lost response: the run pauses offline, and the resend with the same idem is answered from the replay record", async () => {
+test("one lost response is absorbed by the retry (same idem, replay, no pause); two in a row pause offline and the resend replays", async () => {
   const env2 = envFor(), st2 = memStore();
-  let dropped = false;
-  const P = phone(env2, "tok-d", { drop: (b) => { if (b.op === "mcq" && !dropped) { dropped = true; return true; } return false; } });
+  let drops = 0;
+  const P = phone(env2, "tok-d", { drop: (b) => { if (b.op === "mcq" && drops++ < 2) return true; return false; } });
   const j = newDeckJob("u-d");
   const r1 = await PC.runRound(j, { send: P.send, store: st2, today: TODAY });
   assert.equal(r1.ok, false); assert.equal(r1.code, "offline"); assert.equal(r1.retry, true);
   assert.match(r1.message, /No connection/);
+  assert.deepEqual(P.waits, [4000], "the one retry waited before giving up");
+  const tries = P.log.filter((x) => x.op === "mcq");
+  assert.equal(tries.length, 2);
+  assert.equal(tries[0].body.idem, tries[1].body.idem, "the retry carries the same idem");
+  assert.equal(tries[1].replay, true, "the retry itself was already a replay");
   const modelCalls = vertex.length;
   const r2 = await PC.runRound(j, { send: P.send, store: st2, today: TODAY });
   assert.equal(r2.ok, true);
-  const resent = P.log.filter((x) => x.op === "mcq")[1];
+  const resent = P.log.filter((x) => x.op === "mcq")[2];
   assert.equal(resent.replay, true, "the resent mcq is a replay");
-  assert.equal(resent.body.idem, P.log.filter((x) => x.op === "mcq")[0].body.idem);
+  assert.equal(resent.body.idem, tries[0].body.idem);
   assert.equal(vertex.length - modelCalls, P.log.length - P.log.indexOf(resent) - 1, "no model call for the replay");
   assert.equal(r2.accepted, 10);
+});
+
+test("a single lost response never pauses the run: the retry replays it and the round completes", async () => {
+  const env3 = envFor(), st3 = memStore();
+  let dropped = false;
+  const P = phone(env3, "tok-c", { drop: (b) => { if (b.op === "mcq" && !dropped) { dropped = true; return true; } return false; } });
+  const j = newDeckJob("u-c");
+  const calls = vertex.length;
+  const r = await PC.runRound(j, { send: P.send, store: st3, today: TODAY });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.equal(r.accepted, 10);
+  assert.deepEqual(P.waits, [4000]);
+  const tries = P.log.filter((x) => x.op === "mcq");
+  assert.equal(tries[1].replay, true, "the retry was answered from the replay record");
+  assert.equal(vertex.length - calls, P.log.length - 1, "no model call for the replayed response");
 });
 
 test("10 more: unused facts first, then the next chunk; no new deck counted", async () => {

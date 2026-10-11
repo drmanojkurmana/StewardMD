@@ -419,3 +419,16 @@ test("a forgotten module continues without counting a new module when the marker
   const third = await post(env, gen({ mod: "gen_cccccccccc03" }));
   assert.equal(third.status, 429); assert.equal(third.json.reason, "daily-modules", "the cap still holds for genuinely new modules");
 });
+
+/* ---- screen-lock survival: honest offline, one retry, auto-resume (owner 2026-10-11) ---- */
+test("client codeOf: offline only when the phone is offline at that moment", async () => {
+  const { createRequire } = await import("node:module");
+  const P = createRequire(import.meta.url)("../prep-qgen.js");
+  assert.equal(P.codeOf(0, {}), "offline", "no signal: the old message");
+  assert.equal(P.codeOf(0, {}, false), "offline");
+  assert.equal(P.codeOf(0, {}, true), "ai-failed", "network up: not called offline");
+  assert.equal(P.msgOf(P.codeOf(0, {}, true)), P.MSG["ai-failed"]);
+  assert.equal(P.retryable("ai-failed"), true); assert.equal(P.retryable("ai-timeout"), true); assert.equal(P.retryable("offline"), true);
+  assert.equal(P.retryable("daily-modules"), false); assert.equal(P.retryable(""), false);
+  assert.equal(P.QRETRY_MS, 3000, "one retry after a short delay");
+});
