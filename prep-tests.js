@@ -55,15 +55,15 @@
   }
   function dmy(iso) { try { return new Date(iso + "T00:00:00Z").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }); } catch (e) { return iso; } }
   function dm(ts) { try { return new Date(ts).toLocaleDateString("en-IN", { day: "numeric", month: "short" }); } catch (e) { return ""; } }
-  function typeName(t) { return { grand: "Full exam", part: "One part", mini: "One section", daily10: "Daily 10", subject_mini: "Subject test", topic: "Topic test", diagnostic: "Adaptive diagnostic", custom: "Custom" }[t] || t; }
+  function typeName(t) { return { grand: "Full exam", part: "One part", mini: "One section", daily10: "Daily 10", daily_mixed: "Daily mixed", subject_mini: "Subject test", topic: "Topic test", image: "Image test", case: "Clinical cases", diagnostic: "Adaptive diagnostic", weak_area: "Weak areas", incorrect: "Incorrect questions", custom: "Custom" }[t] || t; }
   function lastOf(pid, type) { var h = store().t2h, r = null; h.forEach(function (x) { if (x.exam === pid && x.type === type) r = x; }); return r; }
   function lastOfPaper(id) { var h = store().t2h, r = null; h.forEach(function (x) { if (x.paper === id) r = x; }); return r; }
   function fxFormatName(f) { return { grand: "Grand tests", part: "Part tests", mini: "Mini tests", subject_mini: "Subject tests", topic: "Topic tests", daily10: "Daily 10", image: "Image tests", pyq: "PYQ papers" }[f] || f; }
   /* Collapsible grouping (pure helpers, tested in test/prep-tests-collapse.test.mjs). */
   var GRP_KEY = "smd_prep_t2grp";
-  var GRP_ORDER = ["daily10", "grand", "part", "mini", "subject_mini", "topic", "image", "pyq", "custom"];
-  var GRP_NAME = { daily10: "Daily 10", grand: "Grand tests", part: "Part tests", mini: "Mini tests", subject_mini: "Subject tests", topic: "Topic tests", image: "Image tests", pyq: "PYQ papers", custom: "Custom/diagnostic" };
-  var GRP_SHORT = { daily10: "Daily 10", grand: "Grand", part: "Part", mini: "Mini", subject_mini: "Subject", topic: "Topic", image: "Image", pyq: "PYQ", custom: "Custom" };
+  var GRP_ORDER = ["daily10", "grand", "part", "mini", "subject_mini", "topic", "image", "case", "weak_area", "incorrect", "pyq", "custom"];
+  var GRP_NAME = { daily10: "Daily sets", grand: "Grand tests", part: "Part tests", mini: "Mini tests", subject_mini: "Subject tests", topic: "Topic tests", image: "Image tests", case: "Clinical cases", weak_area: "Weak areas", incorrect: "Incorrect questions", pyq: "PYQ papers", custom: "Custom/diagnostic" };
+  var GRP_SHORT = { daily10: "Daily", grand: "Grand", part: "Part", mini: "Mini", subject_mini: "Subject", topic: "Topic", image: "Image", case: "Cases", weak_area: "Weak", incorrect: "Incorrect", pyq: "PYQ", custom: "Custom" };
   var GRP_FIRST = 6, GRP_SEARCH_AT = 20;
   function grpName(f) { return GRP_NAME[f] || fxFormatName(f); }
   function grpShort(f) { return GRP_SHORT[f] || f; }
@@ -166,26 +166,53 @@
     if (p.id === "usmle-step1") return engineBtn(p, "mini", b, "One block: " + b.count + " questions, " + mins(b.duration_sec), true);
     return engineBtn(p, "mini", b, "One section: " + b.count + " questions, " + mins(b.duration_sec), false);
   }
-  function dailyEngineHtml(p) {
-    var b = A.blueprint(p, "daily10"), key = A.dailyKey(p.id, Date.now()), d = null;
+  function dailyBlockHtml(p, kind, count, head, scopeTxt, startTxt) {
+    var b = A.blueprint(p, kind), key = A.dailyKey(p.id, Date.now(), kind), d = null;
     try { d = store().t2d[key]; } catch (e) { d = null; }
-    var cov = covKnown(), short = cov != null && cov < 10;
-    return '<div class="pn-t2dline"><div class="pn-t2h"><p class="pn-t2eb">Today\'s set: 10 questions, about ' + mins(b.duration_sec) + "</p>" + (d ? '<span class="pn-t2b ok">' + H.ico("check") + " Done today</span>" : '<span class="pn-t2b">Not done today</span>') + "</div>" +
-      '<p class="pn-mut pn-small">' + esc(p.name) + " pace (" + b.pace + " s a question) and marking. Mixed subjects; the same 10 all day." + (d ? " Today: " + d.correct + " of 10 right, " + fmtMarks(d.raw) + " of " + d.max + " marks. A retry is practice and is not counted again." : "") + "</p>" +
-      '<button type="button" class="pn-btn' + (d ? "" : " pri") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="daily10" data-need="10"' + (short ? ' disabled aria-disabled="true"' : "") + ">" + H.ico("play") + (d ? " Practise again" : " Start Daily 10") + "</button>" +
+    var cov = covKnown(), short = cov != null && cov < count;
+    return '<div class="pn-t2dline"><div class="pn-t2h"><p class="pn-t2eb">' + head + ": " + count + " questions, about " + mins(b.duration_sec) + "</p>" + (d ? '<span class="pn-t2b ok">' + H.ico("check") + " Done today</span>" : '<span class="pn-t2b">Not done today</span>') + "</div>" +
+      '<p class="pn-mut pn-small">' + esc(p.name) + " pace (" + b.pace + " s a question) and marking. " + scopeTxt + (d ? " Today: " + d.correct + " of " + count + " right, " + fmtMarks(d.raw) + " of " + d.max + " marks. A retry is practice and is not counted again." : "") + "</p>" +
+      '<button type="button" class="pn-btn' + (d ? "" : " pri") + '" data-act="t2-pre" data-p="' + p.id + '" data-k="' + kind + '" data-need="' + count + '"' + (short ? ' disabled aria-disabled="true"' : "") + ">" + H.ico("play") + (d ? " Practise again" : " " + startTxt) + "</button>" +
       (short ? '<p class="pn-mut pn-small">Not enough questions in the bank yet.</p>' : "") + "</div>";
+  }
+  function dailyEngineHtml(p) {
+    return dailyBlockHtml(p, "daily10", 10, "Today's set", "Mixed subjects; the same 10 all day.", "Start Daily 10") +
+      dailyBlockHtml(p, "daily_mixed", 25, "Today's mixed set", "Balanced across subjects; the same 25 all day.", "Start Daily mixed");
   }
   function pickerRowHtml(p, format) {
     if (format === "subject_mini") return H.row("t2-pick", H.ico("grid"), "Build a subject test", "20 questions from one subject, " + esc(p.name) + " marking", ' data-k="subject_mini" data-p="' + p.id + '"');
     if (format === "topic") return H.row("t2-pick", H.ico("search"), "Build a topic test", "Up to 20 questions from one topic", ' data-k="topic" data-p="' + p.id + '"');
+    if (format === "image") return H.row("t2-pick", H.ico("grid"), "Build an image test by subject", "20 image questions from one subject", ' data-k="image" data-p="' + p.id + '"');
+    if (format === "case") return H.row("t2-pick", H.ico("grid"), "Build a clinical case test by subject", "20 clinical case questions from one subject", ' data-k="case" data-p="' + p.id + '"');
     return "";
+  }
+  function imageEngineHtml(p) { var b = A.blueprint(p, "image"); if (!b) return ""; return engineBtn(p, "image", b, "Image test: " + b.count + " questions, " + mins(b.duration_sec), false); }
+  function caseEngineHtml(p) { var b = A.blueprint(p, "case"); if (!b) return ""; return engineBtn(p, "case", b, "Clinical cases: " + b.count + " questions, " + mins(b.duration_sec), false); }
+  // Weak-area and incorrect-question starters: real engine tests from the student's own history (prep.js weakModules
+  // and the mistakes list). With too little history the starter stays visible but disabled and says why.
+  function weakEngineHtml(p) {
+    var weak = [];
+    try { weak = H.pure.weakModules(H.store(), 3); } catch (e) { weak = []; }
+    var l = lastOf(p.id, "weak_area"), dis = weak.length ? "" : " disabled aria-disabled=\"true\"";
+    var sub = weak.length ? "20 questions from your " + weak.length + (weak.length === 1 ? " weak module" : " weak modules") : "No weak modules yet: a module turns weak after 5 tries under 60% right";
+    if (l) sub += " · Last " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts);
+    return H.row("t2-pre", H.ico("flag"), "Weak-area test", sub, ' data-k="weak_area" data-p="' + p.id + '" data-need="5"' + dis);
+  }
+  function incorrectEngineHtml(p) {
+    var n = 0;
+    try { n = Object.keys(H.store().mt || {}).length; } catch (e) { n = 0; }
+    var ok = n >= 5, l = lastOf(p.id, "incorrect"), dis = ok ? "" : " disabled aria-disabled=\"true\"";
+    var sub = ok ? "Up to 20 of your " + H.fmt(n) + " mistakes, exam marking and timer" : H.fmt(n) + " of 5 mistakes needed for a scored test; questions you get wrong collect here";
+    if (l) sub += " · Last " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts);
+    return H.row("t2-pre", H.ico("x"), "Incorrect-questions test", sub, ' data-k="incorrect" data-p="' + p.id + '" data-need="5"' + dis);
   }
   function diagCustomHtml(p) {
     var cov = covKnown(), dis = cov != null && cov < 5;
     var l = null;
     try { var h = store().t2h; for (var i = 0; i < h.length; i++) if (h[i].exam === p.id && h[i].type === "diagnostic" && !h[i].paper) l = h[i]; } catch (e) {}
     return H.row("t2-pre", H.ico("bolt"), "Adaptive diagnostic", "20 questions across subjects, from your own history" + (l ? " · Last " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts) : "") + (dis ? " · Not enough questions yet" : ""), ' data-k="diagnostic" data-p="' + p.id + '" data-need="5"' + (dis ? ' disabled aria-disabled="true"' : "")) +
-      H.row("t2-custom", H.ico("plus"), "Custom test", "Your own mix of subjects and count");
+      H.row("t2-ccpick", H.ico("gear"), "Custom test", "Your subjects, count, difficulty and images, exam marking and timer", ' data-p="' + p.id + '"') +
+      H.row("t2-custom", H.ico("plus"), "Custom module", "Your own mix of subjects and count, practise or timed");
   }
   function recallRowHtml(p) { if (p.id !== "neet-pg" || !G.PREP_PYQ) return ""; return G.PREP_PYQ.homeRow(H); }
   function prevLinkHtml(p) { if (!(p.legacy_mock && p.id === "neet-pg")) return ""; return '<button type="button" class="pn-link pn-t2prev" data-act="t2-legacy" data-v="' + p.legacy_mock.id + '">Previous format practice: ' + p.legacy_mock.n + " questions, one timer</button>"; }
@@ -200,9 +227,10 @@
     try { s = store(); t2h = s.t2h || []; t2d = s.t2d || {}; } catch (e) {}
     var fx = fxFor(P.fx, p.id, format === "custom" ? "__none__" : format);
     var fxDone = countFxDone(fx, t2h), eng = 0, engDone = 0;
-    if (format === "daily10") { eng = 1; try { if (dailyDoneByKey(t2d, A.dailyKey(p.id, Date.now()))) engDone = 1; } catch (e2) {} }
+    if (format === "daily10") { eng = 2; try { if (dailyDoneByKey(t2d, A.dailyKey(p.id, Date.now(), "daily10"))) engDone++; if (dailyDoneByKey(t2d, A.dailyKey(p.id, Date.now(), "daily_mixed"))) engDone++; } catch (e2) {} }
     else if (format === "grand" || format === "part" || format === "mini") { var b = null; try { b = A.blueprint(p, format); } catch (e3) {} if (b) { eng = 1; if (engineDone(t2h, p.id, format)) engDone = 1; } }
-    else if (format === "custom") { eng = 2; if (engineDone(t2h, p.id, "diagnostic")) engDone = 1; }
+    else if (format === "image" || format === "case" || format === "weak_area" || format === "incorrect") { eng = 1; if (engineDone(t2h, p.id, format)) engDone = 1; }
+    else if (format === "custom") { eng = 3; if (engineDone(t2h, p.id, "diagnostic")) engDone++; if (engineDone(t2h, p.id, "custom")) engDone++; }
     return { total: fx.length + eng, done: fxDone + engDone, fx: fx.length, fxDone: fxDone, eng: eng, engDone: engDone };
   }
   function examCounts(p) {
@@ -219,7 +247,7 @@
     if (q && all.length) out += '<p class="pn-mut pn-small" role="status">' + found.length + " of " + all.length + " match</p>";
     if (!all.length) {
       if (format === "part") return '<p class="pn-empty">One-part tests apply only to FMGE.</p>';
-      if (format === "image") return '<p class="pn-empty">No image tests for this exam yet.</p>';
+      if (format === "image") return "";
       if (format === "pyq") return (recallRowHtml(p) ? "" : '<p class="pn-empty">No PYQ papers for this exam yet.</p>');
       return "";
     }
@@ -234,6 +262,10 @@
     if (format === "part") return partEngineHtml(p);
     if (format === "mini") return miniEngineHtml(p);
     if (format === "subject_mini" || format === "topic") return '<div class="pn-group pn-t2p">' + pickerRowHtml(p, format) + "</div>";
+    if (format === "image") return imageEngineHtml(p) + '<div class="pn-group pn-t2p">' + pickerRowHtml(p, format) + "</div>";
+    if (format === "case") return caseEngineHtml(p) + '<div class="pn-group pn-t2p">' + pickerRowHtml(p, format) + "</div>";
+    if (format === "weak_area") return '<div class="pn-group pn-t2p">' + weakEngineHtml(p) + "</div>";
+    if (format === "incorrect") return '<div class="pn-group pn-t2p">' + incorrectEngineHtml(p) + "</div>";
     if (format === "pyq") { var r = recallRowHtml(p); return r ? '<div class="pn-group pn-t2p">' + r + "</div>" : ""; }
     if (format === "custom") return '<div class="pn-group pn-t2p">' + diagCustomHtml(p) + "</div>";
     return "";
@@ -501,7 +533,8 @@
         if (x && !n) return "";
         return H.row(type === "topic" ? "t2-pickm" : "t2-pre", '<span class="pn-ic sm" style="--h:' + H.subjHue(sb.id) + '">' + H.subjIco(sb.id) + "</span>", H.tx(sb.name), x ? H.fmt(n) + " questions" : "", ' data-p="' + p.id + '" data-k="' + type + '" data-s="' + esc(sb.id) + '" data-need="5"');
       }).join("");
-      H.paint(H.bar(typeName(type), esc(p.name), "back") + '<div class="pn-body"><p class="pn-mut">' + (type === "topic" ? "Pick a subject, then a topic." : "Pick a subject. 20 questions, " + esc(marking(p)) + ", " + A.paceSec(p) + " s a question.") + '</p><div class="pn-group">' + rows + "</div></div>");
+      var what = type === "image" ? "20 image questions" : type === "case" ? "20 clinical case questions" : "20 questions";
+      H.paint(H.bar(typeName(type), esc(p.name), "back") + '<div class="pn-body"><p class="pn-mut">' + (type === "topic" ? "Pick a subject, then a topic." : "Pick a subject. " + what + ", " + esc(marking(p)) + ", " + A.paceSec(p) + " s a question.") + '</p><div class="pn-group">' + rows + "</div></div>");
     });
   }
   function pickModule(p, sid) {
@@ -514,6 +547,35 @@
         H.paint(H.bar("Topic test", sb ? H.tx(sb.name) : "", "back") + '<div class="pn-body"><div class="pn-group">' + (rows || '<p class="pn-empty">No topic here has enough questions yet.</p>') + "</div></div>");
       });
     });
+  }
+
+  /* ---------- engine custom picker (subjects, count, difficulty, images) ----------
+     The study Custom module (prep.js renderCustom, act t2-custom) is untouched; this builds an engine custom test
+     with the exam's marking, timer and results screen. Chips mirror the study picker's look and keyboard behaviour. */
+  function pickCustomEngine(p) {
+    P.ccfg = { pid: p.id, subs: {}, n: 20, d: 0, img: 0 };
+    H.push(ccScreen);
+  }
+  function ccScreen() {
+    var c = P.ccfg, p = A.profile(c.pid), subs = H.subjectsOf(tab());
+    var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + v + '">' + label + "</button>"; };
+    var nsub = Object.keys(c.subs).length;
+    var sum = nsub ? c.n + " questions from " + nsub + (nsub === 1 ? " subject" : " subjects") + (c.d ? ", " + ["", "easy", "medium", "hard", "very hard"][c.d] : "") + (c.img ? ", images only" : "") + ", " + p.name + " marking" : "Pick at least one subject";
+    H.paint(H.bar("Custom test", esc(p.name), "back") + '<div class="pn-body pn-cm">' +
+      '<section class="pn-panel"><h2 class="pn-sec">Subjects</h2><div class="pn-wrap">' +
+      subs.map(function (sb) { return chip("t2-ccsub", esc(sb.id), !!c.subs[sb.id], H.tx(sb.name)); }).join("") + "</div></section>" +
+      '<section class="pn-panel"><h2 class="pn-sec">Questions</h2><div class="pn-wrap pn-seg4">' + [10, 20, 30, 50].map(function (x) { return chip("t2-ccn", x, c.n === x, String(x)); }).join("") + "</div>" +
+      '<h2 class="pn-sec">Difficulty</h2><div class="pn-wrap pn-seg4">' + [[0, "Any"], [1, "Easy"], [2, "Medium"], [3, "Hard"], [4, "Very hard"]].map(function (x) { return chip("t2-ccd", x[0], c.d === x[0], x[1]); }).join("") + "</div>" +
+      '<h2 class="pn-sec">Images</h2><div class="pn-wrap pn-seg4">' + chip("t2-cci", "any", !c.img, "Any") + chip("t2-cci", "img", !!c.img, "Images only") + "</div></section>" +
+      '<p class="pn-cm-sum" aria-live="polite">' + esc(sum) + "</p>" +
+      '<button type="button" class="pn-btn pri" data-act="t2-ccgo" data-p="' + p.id + '"' + (nsub ? "" : " disabled") + ">" + H.ico("play") + " Start</button></div>");
+  }
+  function ccGo() {
+    var c = P.ccfg, sids = Object.keys(c.subs);
+    if (!sids.length) return;
+    var names = sids.map(function (s) { var sb = H.subjectById(s); return sb && sb.name ? (sb.name.en || sb.name) : s; });
+    var scopeTxt = names.length <= 2 ? names.join(", ") : names.slice(0, 2).join(", ") + " +" + (names.length - 2) + " more";
+    return prepare(c.pid, "custom", null, null, { subjects: sids, count: c.n, difficulty: c.d || undefined, image: c.img ? true : undefined, scopeTxt: scopeTxt });
   }
 
   /* ---------- assembly and the pre-test screen ---------- */
@@ -537,14 +599,17 @@
   function modulePairs(p, type, opts, R) {
     var ex = tab(), ix = H.ix(), subs = opts.subjects || H.subjectsOf(ex).map(function (s) { return s.id; });
     if (opts.module) return [{ s: opts.subjects[0], m: opts.module }];
+    if (opts.pairs && opts.pairs.length) return opts.pairs.slice();
+    if (opts.modules && opts.modules.length) return opts.modules.map(function (m) { var sid = null; try { sid = H.subjectOfModule(m); } catch (e) { sid = null; } return { s: sid || (opts.subjects && opts.subjects[0]) || subs[0], m: m }; });
     var per = {}, mods = {};
     subs.forEach(function (sid) { var x = ix[sid]; mods[sid] = (x ? x.topics.filter(function (t) { return t.group !== "mixed" && H.pure.countFor(t, ex) > 0; }) : []); });
     var b = A.blueprint(p, type, {}), want = b ? b.count : 20, files;
-    if (type === "daily10" || type === "diagnostic") {
+    if (type === "daily10" || type === "daily_mixed" || type === "diagnostic") {
       var order = subs.filter(function (s) { return mods[s].length; });
       order = shuffleR(order, R);
       if (type === "diagnostic") { var hs = histBySubject(); order.sort(function (a, c) { var x = hs[a] || { t: 0 }, y = hs[c] || { t: 0 }; return (x.t >= 5 ? 1 : 0) - (y.t >= 5 ? 1 : 0) || (x.t >= 5 ? x.ok / x.t - y.ok / y.t : x.t - y.t); }); }
-      return order.slice(0, type === "daily10" ? 10 : 10).map(function (s) { var l = mods[s]; return { s: s, m: l[Math.floor(R() * l.length)].id }; });
+      var take = type === "daily_mixed" ? order.length : 10;
+      return order.slice(0, take).map(function (s) { var l = mods[s]; return { s: s, m: l[Math.floor(R() * l.length)].id }; });
     }
     files = Math.max(4, Math.min(36, Math.ceil(want / 6)));
     var tot = 0; subs.forEach(function (s) { per[s] = 0; mods[s].forEach(function (t) { per[s] += H.pure.countFor(t, ex); }); tot += per[s]; });
@@ -554,14 +619,32 @@
     return out;
   }
   function shuffleR(a, R) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(R() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
-  function prepare(pid, type, sid, mid) {
+  function prepare(pid, type, sid, mid, extra) {
     var p = A.profile(pid); if (!p) return;
-    var daily = type === "daily10", seed = daily ? A.dailyKey(p.id, Date.now()) : String(Date.now()) + Math.random(), R = A.rng(seed + ":files");
-    var opts = { seed: seed, hidden: H.hidden(), recent: daily ? null : seenMap() };   // daily: the same 10 all day, seen or not
+    var dailyKind = type === "daily10" ? "daily10" : type === "daily_mixed" ? "daily_mixed" : null;
+    var seed = dailyKind ? A.dailyKey(p.id, Date.now(), dailyKind) : String(Date.now()) + Math.random(), R = A.rng(seed + ":files");
+    var opts = { seed: seed, hidden: H.hidden(), recent: dailyKind ? null : seenMap() };   // daily: the same set all day, seen or not
     if (sid) opts.subjects = [sid];
     if (mid) { opts.modules = [mid]; opts.module = mid; }
     if (type === "diagnostic") opts.history = histBySubject();
+    if (type === "image") opts.image = true;
+    if (type === "case") opts.caseOnly = true;
+    if (extra) {
+      if (extra.subjects) opts.subjects = extra.subjects;
+      if (extra.count) opts.count = extra.count;
+      if (extra.difficulty) opts.difficulty = extra.difficulty;
+      if (extra.image) opts.image = true;
+      if (extra.modules) opts.modules = extra.modules;
+      if (extra.pairs) opts.pairs = extra.pairs;
+      if (extra.only) opts.only = extra.only;
+    }
+    var scopeTxt = extra && extra.scopeTxt, earlyRefuse = null;
+    if (type === "weak_area") scopeTxt = scopeTxt || historyScope(opts, "weak");
+    if (type === "weak_area" && !opts.modules) earlyRefuse = "No weak modules yet. A module turns weak after 5 tries with under 60% right; mistakes and practise feed it.";
+    if (type === "incorrect") scopeTxt = scopeTxt || historyScope(opts, "incorrect");
+    if (type === "incorrect" && !opts.only) earlyRefuse = incorrectShortfall();
     var title = typeName(type) + (type === "grand" || type === "part" || type === "mini" ? ": " + p.name : sid ? ": " + H.tx((H.subjectById(sid) || {}).name) : "");
+    if (earlyRefuse) { P.pick = { p: p, type: type, asm: { ok: false, refused: earlyRefuse, deviations: [], items: [] }, title: title, sid: sid, mid: mid, scopeTxt: scopeTxt }; H.push(preScreen); return; }
     H.stack().push(function () {}); H.loadingScreen(esc(title), "Choosing questions…");
     var subs = H.subjectsOf(tab()).map(function (s) { return s.id; });
     Promise.all(subs.map(function (s) { return H.loadIndex(s); })).then(function () {
@@ -574,11 +657,56 @@
       var asm = A.assemble(p, type, opts, lists);
       // deviations name subjects by their names
       asm.deviations = asm.deviations.map(function (d) { return d.replace(/^([a-z][a-z-]+):/, function (m0, id) { var sb = H.subjectById(id); return sb ? (sb.name.en || id) + ":" : m0; }); });
+      if (type === "incorrect" && opts.only) missingMistakesNote(lists, opts.only, asm);
+      if (!asm.ok && !asm.count && (type === "image" || type === "case")) asm.refused = (asm.refused || "This test cannot be built now.") + (type === "image" ? " No image questions in the modules checked." : " No clinical cases in the modules checked.");
       H.stack().pop();
       if (res[0].every(function (l) { return !l.items.length; })) asm = { ok: false, refused: "The questions did not load. Check the connection and try again; a subject downloaded for offline works without one.", deviations: [], items: [] };
-      P.pick = { p: p, type: type, asm: asm, title: title, sid: sid, mid: mid };
+      P.pick = { p: p, type: type, asm: asm, title: title, sid: sid, mid: mid, scopeTxt: scopeTxt };
       H.push(preScreen);
     });
+  }
+  // Weak-area scope from the student's own history: the weakest modules (prep.js weakModules, at most 3) that sit in
+  // this exam's subjects. Incorrect scope: the mistake ids (at most 50, like practise) with their exact module files.
+  function historyScope(opts, which) {
+    var st = null;
+    try { st = H.store(); } catch (e) { st = null; }
+    if (!st) return null;
+    if (which === "weak") {
+      var weak = [];
+      try { weak = H.pure.weakModules(st, 3); } catch (e2) { weak = []; }
+      var known = weak.filter(function (m) { try { return !!H.subjectOfModule(m); } catch (e3) { return false; } });
+      if (!known.length) return null;
+      opts.modules = known;
+      var ss = {}, subs = [];
+      known.forEach(function (m) { var s = null; try { s = H.subjectOfModule(m); } catch (e4) {} if (s && !ss[s]) { ss[s] = 1; subs.push(s); } });
+      opts.subjects = subs;
+      return "Your weak modules";
+    }
+    var mt = st.mt || {}, ids = Object.keys(mt);
+    if (ids.length < 5) return null;
+    ids = ids.slice(0, 50);
+    var seen = {}, pairs = [];
+    ids.forEach(function (id) { var b = mt[id]; if (!b || !b[0] || !b[1] || seen[b[1]]) return; seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); });
+    var keep = pairs.slice(0, 12), keepM = {}, ps = {}, psubs = [];
+    keep.forEach(function (x) { keepM[x.m] = 1; if (!ps[x.s]) { ps[x.s] = 1; psubs.push(x.s); } });
+    ids = ids.filter(function (id) { var b = mt[id]; return b && keepM[b[1]]; });
+    var only = {};
+    ids.forEach(function (id) { only[id] = 1; });
+    opts.only = only;
+    opts.count = Math.min(20, ids.length);
+    opts.pairs = keep;
+    opts.subjects = psubs;
+    return "Questions you got wrong";
+  }
+  function incorrectShortfall() {
+    var n = 0;
+    try { n = Object.keys(H.store().mt || {}).length; } catch (e) { n = 0; }
+    return "Only " + n + (n === 1 ? " mistake" : " mistakes") + " so far: a scored test needs at least 5. Questions you get wrong collect here.";
+  }
+  function missingMistakesNote(lists, only, asm) {
+    var want = Object.keys(only).length, found = 0;
+    lists.forEach(function (l) { (l.items || []).forEach(function (it) { if (only[it.id]) found++; }); });
+    if (found < want) asm.deviations.push((want - found) + " of " + want + " mistakes " + ((want - found) === 1 ? "is" : "are") + " no longer in " + ((want - found) === 1 ? "its" : "their") + " module and " + ((want - found) === 1 ? "was" : "were") + " left out.");
   }
   function preScreen() {
     var x = P.pick, p = x.p, a = x.asm;
@@ -587,14 +715,15 @@
       facts.push(["Questions", a.count + (a.reduced ? " of " + a.requested + " planned" : "")]);
       facts.push(["Time", mins(a.duration_sec) + (a.sections && a.sections.length > 1 ? " in " + a.sections.length + " locked sections" : "")]);
       facts.push(["Marking", marking(p)]);
-      facts.push(["Scope", x.fixed ? x.fixed.scope : x.mid ? H.tx((H.topicOf(x.sid, x.mid) || { title: x.mid }).title) : x.sid ? H.tx((H.subjectById(x.sid) || {}).name) : "All " + H.exam().label + " subjects"]);
+      facts.push(["Scope", x.scopeTxt ? x.scopeTxt : x.fixed ? x.fixed.scope : x.mid ? H.tx((H.topicOf(x.sid, x.mid) || { title: x.mid }).title) : x.sid ? H.tx((H.subjectById(x.sid) || {}).name) : "All " + H.exam().label + " subjects"]);
       if (x.fixed) facts.push(["Paper", "The same for every student"]);
       if (x.fixedMissing) facts.push(["Unavailable", x.fixedMissing + " of " + a.count + " left out of the marks (withdrawn or hidden)"]);
     }
     var secs = a.sections && a.sections.length > 1 ? '<ol class="pn-t2secs">' + a.sections.map(function (s) { return "<li><b>" + esc(s.label) + "</b><span>" + s.n + " questions · " + mmss(s.sec) + "</span></li>"; }).join("") + "</ol>" +
       '<p class="pn-mut pn-small">' + H.ico("lock") + (p.navigation.early_section_submit ? " A submitted section is locked." : " Each section is locked when its time ends or when you submit it. In the exam you stay in a section until its time ends; here you may submit early, and the time left is not carried over.") + "</p>" : "";
     var dev = a.deviations && a.deviations.length ? '<section class="pn-panel pn-t2dev' + (a.reduced ? " warn" : "") + '"><h2 class="pn-sec">' + (a.reduced ? "Shorter than the blueprint" : "How it was built") + '</h2><ul class="pn-t2dl">' + a.deviations.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul></section>" : "";
-    var d10 = x.type === "daily10" && store().t2d[A.dailyKey(p.id, Date.now())] ? '<p class="pn-mut pn-small">Today\'s Daily 10 is already counted. This run is practice.</p>' : "";
+    var dKey = x.type === "daily10" || x.type === "daily_mixed" ? A.dailyKey(p.id, Date.now(), x.type) : null;
+    var d10 = dKey && store().t2d[dKey] ? '<p class="pn-mut pn-small">Today\'s ' + (x.type === "daily10" ? "Daily 10" : "Daily mixed") + ' is already counted. This run is practice.</p>' : "";
     H.paint(H.bar(esc(x.title), esc(p.name) + (p.status === "official" ? "" : " · provisional"), "back") + '<div class="pn-body pn-t2pre">' +
       (a.ok ? '<section class="pn-panel"><dl class="pn-t2f">' + facts.map(function (f) { return "<div><dt>" + f[0] + "</dt><dd>" + esc(f[1]) + "</dd></div>"; }).join("") + "</dl>" + secs + d10 + "</section>" + dev +
         '<p class="pn-mut pn-small">' + esc(srcLine(p)) + " Profile " + esc(p.id) + " v" + esc(p.version) + '.</p><button type="button" class="pn-btn pri" data-act="t2-go">' + H.ico("play") + " Start</button>"
@@ -604,7 +733,8 @@
   function go() {
     var x = P.pick; if (!x || !x.asm.ok) return;
     var p = x.p, a = x.asm, now = Date.now();
-    var t2 = { exam: p.id, pv: p.version, type: x.type, attempt_id: "t2-" + now.toString(36) + "-" + Math.floor(Math.random() * 46656).toString(36), idem: x.type === "daily10" && !x.fixed ? A.dailyKey(p.id, now) : null,
+    var dk = !x.fixed && (x.type === "daily10" || x.type === "daily_mixed") ? A.dailyKey(p.id, now, x.type) : null;
+    var t2 = { exam: p.id, pv: p.version, type: x.type, attempt_id: "t2-" + now.toString(36) + "-" + Math.floor(Math.random() * 46656).toString(36), idem: dk,
       paper: x.fixed ? x.fixed.id : null,
       started: now, earlyOk: !!p.navigation.early_section_submit, sections: a.sections && a.sections.length ? a.sections : null, blueprint: { id: a.blueprint.id, version: a.blueprint.version },
       asm: { planned: a.planned, actual: a.actual, deviations: a.deviations, count: a.count, requested: a.requested, reduced: a.reduced, seed: a.seed } };
@@ -870,6 +1000,12 @@
     if (a === "t2-stats") { try { G.localStorage.setItem(STATS, b.getAttribute("data-v") === "1" ? "1" : "0"); } catch (e) {} var r0 = H.run_ && H.run_(); if (b.getAttribute("data-v") === "1" && r0 && r0.t2 && r0.t2.rec) sendStats(r0.t2.rec); var box = b.closest(".pn-t2ask"); if (box) box.innerHTML = '<p class="pn-mut pn-small" role="status">' + (b.getAttribute("data-v") === "1" ? "Thank you. Anonymous statistics are on." : "Nothing will be sent.") + "</p>"; return; }
     if (a === "t2-pick") return pickSubject(A.profile(pid), k);
     if (a === "t2-pickm") return pickModule(A.profile(pid), b.getAttribute("data-s"));
+    if (a === "t2-ccpick") return pickCustomEngine(A.profile(pid));
+    if (a === "t2-ccsub") { var cs = P.ccfg.subs, cv = b.getAttribute("data-v"); if (cs[cv]) delete cs[cv]; else cs[cv] = 1; return H.rerender(); }
+    if (a === "t2-ccn") { P.ccfg.n = Number(b.getAttribute("data-v")) || 20; return H.rerender(); }
+    if (a === "t2-ccd") { P.ccfg.d = Number(b.getAttribute("data-v")) || 0; return H.rerender(); }
+    if (a === "t2-cci") { P.ccfg.img = b.getAttribute("data-v") === "img" ? 1 : 0; return H.rerender(); }
+    if (a === "t2-ccgo") return ccGo();
     if (a === "t2-resume") return resume();
     if (a === "t2-discard") { if (G.confirm && !G.confirm("Discard the saved test? Its answers are not marked.")) return; return Promise.resolve(clearSess()).then(function () { H.rerender(); }); }
     if (a === "t2-legacy") return H.startMock(b.getAttribute("data-v"), "full");
