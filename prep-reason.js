@@ -15,7 +15,8 @@
    (written by the content pipeline, confidence 95) merged with the published index v1/links/ (tools/prep-links.mjs):
    pointer index.json (short cache, network first, IndexedDB copy offline), one immutable shard per module
    (IndexedDB first). Lessons and card decks are re-checked against the live lesson and card indexes before they
-   are shown.
+   are shown. Per-item lesson rows carry a tier: the module's own chapter ("Read the lesson: <title>") or the
+   specific lesson (the step showing the item's image, the lesson teaching its concept), opening at its step.
 
    Opening: the Knowledge Library article through SMD_REASON.openRef (guarded by hasDiseaseRef), a drug through
    MEDDB.openComposition, a protocol through SMD_KBPROTO.open({ id }); each overlay is lifted above PrepNucleus
@@ -175,10 +176,27 @@
     h += '<div class="pn-rx" data-i="' + escH(it.id) + '" data-s="' + escH(it._s || "") + '" data-m="' + escH(it._m || it.t || "") + '"></div>';
     return h;
   }
-  /* slotHtml(d): Learn more + the one next action + related questions. d { links, lesson, cards, related, next,
-     sid, mid, iid }. links [{ k, id, title }], lesson { key, title } | null, cards bool, related [{ mid, id, stem }],
-     next { kind, label, target } | null. "" when nothing exists. The practise action carries the slot's own
-     item (data-i/data-m) so gaps practise the gaps question, not the last remembered one. */
+  /* lessonLinks(sh, iid) -> [{ key, title, c, tier, step }] at confidence >= SHOW, strongest first.
+     tier "topic" (via lt: the module's own chapter) renders as "Read the lesson: <title>"; tier "specific"
+     (via li/lk/lh: the step showing the item's image, the lesson teaching its concept, the chapter under its
+     heading) renders as the bare title. step opens the lesson at that step, "" for none. */
+  function lessonLinks(sh, iid) {
+    var out = [];
+    if (!sh || !sh.T || !sh.e) return out;
+    var rows = sh.e[String(iid)] || [];
+    rows.forEach(function (r) {
+      var t = sh.T[r[0]];
+      if (t && t[0] === "ls" && r[1] >= SHOW) out.push({ key: t[1], title: t[2], c: r[1], tier: r[2] === "lt" ? "topic" : "specific", step: r[3] == null ? "" : String(r[3]) });
+    });
+    out.sort(function (a, b) { return b.c - a.c || (a.key < b.key ? -1 : 1); });
+    return out;
+  }
+  /* slotHtml(d): Learn more + the one next action + related questions. d { links, lessons, lesson, cards, related,
+     next, sid, mid, iid }. links [{ k, id, title }], lessons [{ key, title, tier, step }] (per-item, titled),
+     lesson { key, title } | null (the module fallback when no per-item lesson), cards bool,
+     related [{ mid, id, stem }], next { kind, label, target, lkey, step } | null. "" when nothing exists.
+     The practise action carries the slot's own item (data-i/data-m) so gaps practise the gaps question,
+     not the last remembered one. */
   function slotHtml(d) {
     var h = "", links = d.links || [];
     function row(act, attrs, kind, title) {
@@ -190,13 +208,18 @@
       else if (l.k === "dr") rows += row("r-drug", ' data-t="' + escH(l.title || l.id) + '"', "Drug Index", l.title || l.id);
       else if (l.k === "pr") rows += row("r-proto", ' data-id="' + escH(l.id) + '"', "Protocol", l.title || l.id);
     });
-    if (d.lesson) rows += row("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"', "Lesson", d.lesson.title || "Revise this topic");
+    var lessons = d.lessons || [];
+    lessons.forEach(function (l) {
+      rows += row("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(l.key) + '"' + (l.step ? ' data-step="' + escH(l.step) + '"' : ""),
+        "Lesson", l.tier === "topic" ? "Read the lesson: " + (l.title || "Revise this topic") : (l.title || "Revise this topic"));
+    });
+    if (!lessons.length && d.lesson) rows += row("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"', "Lesson", d.lesson.title || "Revise this topic");
     if (d.cards) rows += row("k-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '"', "Flashcards", "Cards for this topic");
     if (rows) h += "<h3>Learn more</h3>" + '<ul class="pn-rl">' + rows + "</ul>";
     if (d.next) {
       var pract = 'data-act="r-practise"' + (d.iid ? ' data-i="' + escH(d.iid) + '"' : "") + (d.mid ? ' data-m="' + escH(d.mid) + '"' : "");
       var at = d.next.kind === "review" ? 'data-act="r-kb" data-id="' + escH(d.next.id) + '"' :
-        d.next.kind === "revise" ? (d.next.lkey ? 'data-act="l-open" data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.next.lkey) + '"' : 'data-act="k-open" data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '"') :
+        d.next.kind === "revise" ? (d.next.lkey ? 'data-act="l-open" data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.next.lkey) + '"' + (d.next.step ? ' data-step="' + escH(d.next.step) + '"' : "") : 'data-act="k-open" data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '"') :
         d.next.kind === "practise" ? pract : 'data-act="r-plan"';
       h += '<button type="button" class="pn-btn pri pn-rn" ' + at + "><b>" + escH(d.next.label) + "</b>" + (d.next.target ? "<small>" + escH(d.next.target) + "</small>" : "") + "</button>";
     }
@@ -209,8 +232,8 @@
   }
 
   var PURE = { SHOW: SHOW, VER: VER, has: hasItem, hasX: has, linksOf: linksOf, pref: pref, nextAction: nextAction,
-    nextLabel: nextLabel, shardLinks: shardLinks, relOf: relOf, mergeLinks: mergeLinks, body: body, slotHtml: slotHtml,
-    escH: escH, findRunItem: findRunItem, srcOf: srcOf };
+    nextLabel: nextLabel, shardLinks: shardLinks, lessonLinks: lessonLinks, relOf: relOf, mergeLinks: mergeLinks,
+    body: body, slotHtml: slotHtml, escH: escH, findRunItem: findRunItem, srcOf: srcOf };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -333,23 +356,28 @@
         if (l.k !== "kb" || !G.SMD_REASON || !G.SMD_REASON.hasDiseaseRef) return true;
         try { return G.SMD_REASON.hasDiseaseRef(l.id); } catch (e) { return true; }
       });
+      var lessons = sh ? lessonLinks(sh, iid) : [];
       var lsKeys = pipe.filter(function (l) { return l.k === "ls"; }).map(function (l) { return l.id; });
       if (sh && sh.mod && sh.mod.ls) lsKeys = lsKeys.concat(sh.mod.ls);
-      var lkey = lsKeys[0] || null;
+      var checks = lessons.length ? lessons.map(function (l) { return checkLesson(l.key, mid); }) : (lsKeys[0] ? [checkLesson(lsKeys[0], mid)] : []);
       var wantCd = pipe.some(function (l) { return l.k === "cd"; }) || !!(sh && sh.mod && sh.mod.cd);
-      return Promise.all([lkey ? checkLesson(lkey, mid) : false, wantCd ? checkCards(mid) : false,
+      return Promise.all([Promise.all(checks), wantCd ? checkCards(mid) : false,
         resolveRelated(H, sh ? relOf(sh, iid) : [])]).then(function (rr) {
-        var lesson = lkey && rr[0] ? { key: lkey } : null, cards = !!rr[1], related = rr[2] || [];
+        var okLessons = lessons.filter(function (l, i) { return rr[0][i]; });
+        var lesson = (!okLessons.length && lsKeys[0] && rr[0][0]) ? { key: lsKeys[0] } : null;
+        var cards = !!rr[1], related = rr[2] || [];
         var kb = links.filter(function (l) { return l.k === "kb"; });
-        var kind = nextAction(prefKind, { kb: kb.length, lesson: (lesson ? 1 : 0) + (cards ? 1 : 0), related: related.length, plan: G.PREP_PLAN ? 1 : 0 });
+        var nLesson = okLessons.length + (lesson ? 1 : 0) + (cards ? 1 : 0);
+        var kind = nextAction(prefKind, { kb: kb.length, lesson: nLesson, related: related.length, plan: G.PREP_PLAN ? 1 : 0 });
+        var firstL = okLessons[0] || lesson;
         var next = null;
         if (kind === "review") next = { kind: kind, label: nextLabel(kind), id: kb[0].id, target: kb[0].title };
-        else if (kind === "revise") next = { kind: kind, label: nextLabel(kind), lkey: lesson ? lesson.key : null, target: lesson ? "Lesson" : "Flashcards" };
+        else if (kind === "revise") next = { kind: kind, label: nextLabel(kind), lkey: firstL ? firstL.key : null, step: firstL ? firstL.step : null, target: firstL ? "Lesson" : "Flashcards" };
         else if (kind === "practise") next = { kind: kind, label: nextLabel(kind), target: related.length + (related.length === 1 ? " question" : " questions") };
         else if (kind === "plan") next = { kind: kind, label: nextLabel(kind), target: "Today's plan" };
         R.slots[iid] = { related: related, mid: mid, sid: sid };
         if (R.last && R.last.iid === iid) R.last.related = related;
-        var html = slotHtml({ links: links, lesson: lesson, cards: cards, related: related, next: next, sid: sid, mid: mid, iid: iid });
+        var html = slotHtml({ links: links, lessons: okLessons, lesson: lesson, cards: cards, related: related, next: next, sid: sid, mid: mid, iid: iid });
         var live = null;
         try { live = (H.root() || {}).querySelector && H.root().querySelector('.pn-rx[data-i="' + iid + '"]'); } catch (e) {}
         if (live) { live.innerHTML = html; live.setAttribute("data-done", "1"); }
