@@ -19,7 +19,8 @@
    made 10 at a time ("Make 10 more", "20 of 50"), each round under the same cost ceiling (ceil(10 x 1.4 / 7) mcq
    batches); a deck screen holds the deck's questions as a module with progress; the MaiK Tokens a round is expected to
    use are shown before it and what it used after (usage.mt). A round is saved as it goes (manifest run), so a round cut
-   off by the app going to the background, or closing, continues where it stopped. A PDF's pages are chosen on a page
+   off by the app going to the background, or closing, continues where it stopped, by itself when the app is back
+   in front or the network returns. A PDF's pages are chosen on a page
    picker (thumbnails, 60 at most): a long PDF starts with the first 60 beside a plain message, never taken silently,
    and the range is shortened with another message when its share of the file tops 50 MB or its text runs too long.
 
@@ -87,23 +88,27 @@
   // Codes worth trying again by themselves when the app comes back to the front (the phone lost the network, or the
   // call was cut off while the app was in the background).
   var AUTO_RESUME = { offline: 1, "ai-timeout": 1, unknown: 1, rate: 1 };
-  function errorCode(status, body) {
+  /* online: navigator.onLine read at the moment of the failure. "offline" only when the phone says so right then;
+     a failure with the network up (a lock suspending the request, a dropped response) is unknown, still retryable. */
+  function errorCode(status, body, online) {
     var b = body && typeof body === "object" ? body : {}, c = [b.reason, b.error, b.code];
     for (var i = 0; i < c.length; i++) if (typeof c[i] === "string" && MSG[c[i]]) return c[i];
-    if (status === 0) return "offline";
+    if (status === 0) return online === true ? "unknown" : "offline";
     return BY_STATUS[status] || "unknown";
   }
-  function errorMessage(status, body) { return MSG[errorCode(status, body)]; }
+  function errorMessage(status, body, online) { return MSG[errorCode(status, body, online)]; }
   function canRetry(code) { return !STOPS[code]; }
   /* Milliseconds to wait before the one retry, or 0 for none: a 504 (or the phone's own timeout) after 4 s (6.0); a
-     429 "rate" (the per-user 3 s limit) after its retryAfter, at least 3.5 s. Never a second retry. */
+     network failure (status 0, a lock or a dropped response) after 4 s too; a 429 "rate" (the per-user 3 s limit)
+     after its retryAfter, at least 3.5 s. Never a second retry. */
   function shouldRetry(status, attempt, code, retryAfter, retryMs) {
     if (attempt !== 0) return 0;
     if (status === 504) return retryMs == null ? RETRY_MS : retryMs;
+    if (status === 0) return retryMs == null ? RETRY_MS : retryMs;
     if (status === 429 && code === "rate") return Math.max(3500, (+retryAfter || 0) * 1000);
     return 0;
   }
-  function opError(status, body) { var e = new Error("prep-generate " + status); e.status = status; e.body = body || null; e.code = errorCode(status, body); return e; }
+  function opError(status, body, online) { var e = new Error("prep-generate " + status); e.status = status; e.body = body || null; e.code = errorCode(status, body, online); return e; }
 
   /* ---------- ids ---------- */
   function without(o, key) { var out = {}; for (var k in o) if (k !== key) out[k] = o[k]; return out; }
@@ -177,6 +182,15 @@
     var t = md ? +md.t || 0 : 0, ok = md ? +md.ok || 0 : 0;
     var max = m && m.qgen ? QGEN_MAX : DECK_MAX;   // a MaiK module (prep-qgen.js) holds up to 30
     return { n: n, max: max, answered: Math.min(pg.answered, n), due: pg.due, cardsDue: pg.cardsDue, acc: t ? Math.round(ok * 100 / t) : null, attempts: t, full: n >= max };
+  }
+  /* A deck cut off mid-round, or a MaiK module short of its asked count: "Partly made, N of M, tap to finish" for
+     Your decks, else "". n is the questions in the deck now. */
+  function partlyLine(m, n) {
+    if (!m) return "";
+    if (runOk(m.run) && m.run.accepted < m.run.target) return "Partly made, " + m.run.accepted + " of " + m.run.target + ", tap to finish";
+    var t = m.qgen && (m.qgen.target || QGEN_MAX);
+    if (t && n < t) return "Partly made, " + n + " of " + t + ", tap to finish";
+    return "";
   }
   function costLine(cost) {
     if (!cost || !(cost.inTok || cost.outTok)) return "";
@@ -611,8 +625,8 @@
 
   /* ---------- one HTTP call ---------- */
   /* deps = { fetch, url, token() -> Promise(idToken|null), wait(ms) -> Promise, timeout?, AbortController?, setTimeout?,
-     clearTimeout?, retryMs? }. Adds the idem key, sends, returns the JSON or rejects with opError (status, body, code).
-     One retry with the same key, as shouldRetry says. */
+     clearTimeout?, retryMs?, online?() -> navigator.onLine }. Adds the idem key, sends, returns the JSON or rejects
+     with opError (status, body, code). One retry with the same key, as shouldRetry says. */
   function callOp(body, deps) {
     var payload = without(body, "idem");
     payload.idem = idemKey(body.op, body);
@@ -633,7 +647,7 @@
               if (!j || typeof j !== "object") throw opError(502, { error: "ai-failed" });
               return j;
             });
-          }, function (e) { clear(); throw e && e.name === "AbortError" ? opError(504, { error: "ai-timeout" }) : opError(0, null); });
+          }, function (e) { clear(); if (e && e.name === "AbortError") throw opError(504, { error: "ai-timeout" }); throw opError(0, null, deps.online ? deps.online() : (G.navigator && G.navigator.onLine)); });
       });
     }
     return once().then(null, function (e) {
@@ -646,7 +660,7 @@
   var PURE = {
     URL: URL, MODEL: MODEL, PV: PV, BATCH: BATCH, TARGET: TARGET, RETRY_MS: RETRY_MS, PROFILE: PROFILE, MSG: MSG,
     MONTH_CAP: MONTH_CAP, DAY_CAP: DAY_CAP, DECK_MAX: DECK_MAX, IMG_PER_ROUND: IMG_PER_ROUND, MT_ROUND_DEFAULT: MT_ROUND_DEFAULT, CREATE_EXAMS: CREATE_EXAMS, AUTO_RESUME: AUTO_RESUME,
-    createExam: createExam, mtEstimate: mtEstimate, roundTarget: roundTarget, deckStats: deckStats, runOk: runOk,
+    createExam: createExam, mtEstimate: mtEstimate, roundTarget: roundTarget, deckStats: deckStats, partlyLine: partlyLine, runOk: runOk,
     errorCode: errorCode, errorMessage: errorMessage, canRetry: canRetry, shouldRetry: shouldRetry, opError: opError,
     idemKey: idemKey, deckIdFor: deckIdFor, mixFor: mixFor, addUsage: addUsage, dayKey: dayKey, capsFrom: capsFrom, capLine: capLine, capsAfterStop: capsAfterStop, costLine: costLine,
     factRecord: factRecord, factPayload: factPayload, paraFor: paraFor, gatesPass: gatesPass, toStored: toStored, toCard: toCard, jaccard: jaccard, nearDup: nearDup,
@@ -766,10 +780,11 @@
     if (st.acc != null) bits.push(st.acc + "% correct");
     if (st.due) bits.push(host.fmt(st.due) + " due");
     var tag = busy ? "Making" : paused ? "Paused" : m.cost && m.cost.stopped && m.cost.stopped !== "deck-full" ? stopWord(m.cost.stopped) : "";
+    var pl = !busy && partlyLine(m, st.n);   // a partly made deck or module says so, with how to finish it
     var frac = st.n ? Math.min(1, st.answered / st.n) : 0;
-    return '<button type="button" class="pn-panel pc-drow" data-act="c-open" data-d="' + esc(m.id) + '" aria-label="' + t + ", " + esc(bits.join(", ")) + (tag ? ", " + esc(tag) : "") + '">' +
+    return '<button type="button" class="pn-panel pc-drow" data-act="c-open" data-d="' + esc(m.id) + '" aria-label="' + t + ", " + (pl ? esc(pl) : esc(bits.join(", "))) + (tag ? ", " + esc(tag) : "") + '">' +
       '<span class="pn-ic sm" style="--h:' + hueOf(m.title) + '" aria-hidden="true">' + host.ico("deck") + "</span>" +
-      '<span class="pn-mb"><b>' + t + "</b><small>" + esc(bits.join(" · ")) + "</small>" +
+      '<span class="pn-mb"><b>' + t + "</b><small>" + (pl ? esc(pl) : esc(bits.join(" · "))) + "</small>" +
       '<span class="pn-prog pc-mini" aria-hidden="true"><i style="transform:scaleX(' + frac.toFixed(3) + ')"></i></span></span>' +
       (tag ? '<span class="pc-tag' + (busy ? " on" : "") + '">' + esc(tag) + "</span>" : "") + host.ico("chev") + "</button>";
   }
@@ -1240,12 +1255,20 @@
     if (onTop("#pcProgView", host)) host.rerender();
     runJob(host, job);
   }
-  // Back from the background: a round cut off by a network or timeout error goes on by itself.
-  if (G.document) G.document.addEventListener("visibilitychange", function () {
-    if (G.document.visibilityState !== "visible" || !job || !jobResult || jobResult.ok || !AUTO_RESUME[jobResult.code] || !job.saved) return;
+  // Back from a lock or the background, or the network returning: a round cut off by a network or timeout error
+  // goes on by itself. No resume while still hidden, or still offline after an offline stop (the online event retries that).
+  function maybeResume() {
+    if (G.document && G.document.visibilityState === "hidden") return;
+    if (!job || !jobResult || jobResult.ok || !AUTO_RESUME[jobResult.code] || !job.saved) return;
+    if (jobResult.code === "offline" && G.navigator && G.navigator.onLine === false) return;
     var h = G.PREP && G.PREP._host;
     if (h) resume(h);
-  });
+  }
+  if (G.document && G.document.addEventListener) {
+    G.document.addEventListener("visibilitychange", maybeResume);
+    G.document.addEventListener("resume", maybeResume);
+  }
+  if (G.addEventListener) { G.addEventListener("pageshow", maybeResume); G.addEventListener("online", maybeResume); }
 
   function readsImage(st) {
     var t = String(st || "");
