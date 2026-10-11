@@ -1,0 +1,167 @@
+{
+  "schema": "prep/assessment-profile/v2",
+  "id": "amc-mcq",
+  "version": "2026.1.0",
+  "status": "official",
+  "name": "AMC CAT MCQ Examination",
+  "session": "AMC CAT MCQ 2026",
+  "tab": "amc",
+  "verified_on": "2026-10-12",
+  "sources": {
+    "AMC-MCQ-SPECS": {
+      "url": "https://www.amc.org.au/assessment/mcq-examination/",
+      "title": "AMC Multiple-Choice Question Examination Specifications",
+      "doc_date": "2024-01-01",
+      "publisher": "Australian Medical Council"
+    }
+  },
+  "format": {
+    "questions": 150,
+    "duration_min": 210,
+    "options": 5,
+    "item_types": [
+      "sba"
+    ],
+    "sections": [
+      {
+        "id": "CAT",
+        "label": "Computer Adaptive Test MCQ",
+        "questions": 150,
+        "minutes": 210
+      }
+    ]
+  },
+  "navigation": {
+    "locked_sections": false,
+    "revisit_within_section": false,
+    "return_to_closed_section": false,
+    "early_section_submit": true,
+    "auto_advance_on_timeout": true,
+    "mark_for_review": false,
+    "break_between_parts": false
+  },
+  "scoring": {
+    "correct": 1,
+    "incorrect": 0,
+    "unanswered": 0,
+    "pass": null
+  },
+  "pace_sec": 84,
+  "blueprint": {
+    "kind": "official_counts",
+    "subjects": {
+      "adult-health-medicine": 36,
+      "adult-health-surgery": 24,
+      "womens-health": 15,
+      "child-health": 15,
+      "mental-health": 15,
+      "population-health-and-ethics": 15
+    },
+    "unmapped": {
+      "pilot-items": 30
+    },
+    "note": "120 scored items apportioned by official AMC blueprint percentages (Medicine 30%, Surgery 20%, Womens Health 12.5%, Child Health 12.5%, Mental Health 12.5%, Population Health and Ethics 12.5%), plus 30 unscored pilot items."
+  },
+  "item_styles": [
+    {
+      "style": "statement_combination",
+      "share": null,
+      "basis": "not used in AMC CAT MCQ; single best answer with 5 options"
+    }
+  ],
+  "previous_formats": [],
+  "calibration": {
+    "status": "calibrated",
+    "items_studied": 50,
+    "sources": ["AMC MCQ Examination trial and sample materials (official)"],
+    "date": "2026-10-12",
+    "stats": {"mean_stem_words": 53.3, "image_share": 0.48},
+    "note": "calibrated against 50 official items; pattern metadata only, no question text kept"
+  },
+  "bank": {
+    "status": "coming",
+    "note": "no AMC questions in the bank yet, so no test types are offered"
+  },
+  "provenance": [
+    {
+      "field": "/format/questions",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Exam format",
+      "verified_on": "2026-10-12",
+      "note": "150 multiple choice questions: 120 scored items and 30 non-scored pilot items"
+    },
+    {
+      "field": "/format/duration_min",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Exam format",
+      "verified_on": "2026-10-12",
+      "note": "3.5 hours (210 minutes) examination duration"
+    },
+    {
+      "field": "/format/sections",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Exam format",
+      "verified_on": "2026-10-12",
+      "note": "Single continuous adaptive test session of 150 items"
+    },
+    {
+      "field": "/navigation/locked_sections",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Examination rules",
+      "verified_on": "2026-10-12",
+      "note": "Single CAT block timed continuously across the 210 minutes"
+    },
+    {
+      "field": "/navigation/return_to_closed_section",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Examination rules",
+      "verified_on": "2026-10-12",
+      "note": "Forward-only adaptive delivery; candidates cannot return to earlier questions"
+    },
+    {
+      "field": "/navigation/early_section_submit",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Examination rules",
+      "verified_on": "2026-10-12",
+      "note": "Examination concludes upon answering the final item or selecting submit"
+    },
+    {
+      "field": "/scoring/correct",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Scoring",
+      "verified_on": "2026-10-12",
+      "note": "1 raw credit per correct item before Rasch IRT scale transformation to 0-500 scale"
+    },
+    {
+      "field": "/scoring/incorrect",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Scoring",
+      "verified_on": "2026-10-12",
+      "note": "No negative marking; no deduction for incorrect options"
+    },
+    {
+      "field": "/scoring/unanswered",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Scoring",
+      "verified_on": "2026-10-12",
+      "note": "Unanswered questions yield zero credit and may result in insufficient data"
+    },
+    {
+      "field": "/blueprint/kind",
+      "official": true,
+      "src": "AMC-MCQ-SPECS",
+      "section": "Content blueprint",
+      "verified_on": "2026-10-12",
+      "note": "Official AMC blueprint specifies exact proportions: Medicine 30%, Surgery 20%, Womens Health 12.5%, Child Health 12.5%, Mental Health 12.5%, Population Health 12.5% across 120 scored items"
+    }
+  ]
+}

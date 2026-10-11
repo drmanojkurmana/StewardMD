@@ -12,7 +12,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIR = join(ROOT, "prep/assess/profiles");
 const OUT = join(ROOT, "prep-profiles.js");
 // Fixed order: the app's exam tabs, then the rest.
-const ORDER = ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1"];
+const ORDER = ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1"];
 
 export function build() {
   const files = fs.readdirSync(DIR).filter((f) => f.endsWith(".json")).map((f) => f.replace(/\.json$/, ""));

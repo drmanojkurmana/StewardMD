@@ -32,6 +32,18 @@
   var RANK_MIN_N = 100;            // Arena "rank of N": shown only from 100 players up (owner 2026-10-10; conservative)
   var CLOCK_BACK_MS = 120000;      // rule 4
   var SAVE_EVERY_MS = 5000;        // rule 3
+  // KnowYourIQ capture (prep-coach.js chips): one confidence id per question, skippable (null), plus the two
+  // mixed-up option indexes when Confused carries them. Kept here so the attempt record and the saved session
+  // carry it without depending on the coach file.
+  var CONF_IDS = { guessing: 1, confident: 1, confused: 1 };
+  function cleanConf(v) { return v && CONF_IDS[v] ? v : null; }
+  function cleanPair(p, n) {
+    if (!p || typeof p.length !== "number" || p.length < 2) return null;
+    n = n || 4;
+    var a = Math.floor(p[0]), b = Math.floor(p[1]);
+    if (!(a >= 0 && a < n && b >= 0 && b < n && a !== b)) return null;
+    return a < b ? [a, b] : [b, a];
+  }
   var BLOCKED = { requires_review: 1, rejected: 1, retired: 1 };
   // Type names match prep/assess/schemas/blueprint.schema.json test_type (case, image, daily_mixed, weak_area,
   // incorrect). "diagnostic" predates the schema's adaptive_diagnostic and stays as is.
@@ -117,6 +129,10 @@
     return e;
   }
   function provOf(p, field) { var r = null; (p.provenance || []).forEach(function (x) { if (x.field === field) r = x; }); return r; }
+  // bankStatus(p) -> "available" | "coming": whether the app question bank can build tests for the exam.
+  // Profiles without a bank block are available (the six banked exams); PLAB 1, AMC, MCCQE and USMLE Step 2 CK
+  // carry bank.status "coming" until banked questions exist. The Tests tab shows those as format-only.
+  function bankStatus(p) { return (p && p.bank && p.bank.status) || "available"; }
 
   /* ---------- seeded random ---------- */
   function hashStr(s) { var h = 2166136261; s = String(s); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h >>> 0; }
@@ -410,14 +426,16 @@
       by_section: list(by.section), by_subject: list(by.subject), by_topic: list(by.topic), by_difficulty: list(by.difficulty) };
   }
   /* result(run) -> the attempt record (prep/assess/schemas/result.schema.json). run: { attempt_id, idempotency_key, exam,
-     profile_version, test_type, blueprint, started, finished, state, items, ans, mark, changed, ms, sections, asm } */
+     profile_version, test_type, blueprint, started, finished, state, items, ans, mark, changed, ms, conf, pair, sections, asm }.
+     conf[i] is the capture chip (cleanConf), written only when set so skipped questions cost nothing; pair[i] is
+     the confused pair (cleanPair against that item's option count), written only with a Confused chip. */
   function result(x, p, opts) {
     var sc = score(x.items, x.ans, p.scoring, ext(opts || {}, { sections: x.sections, ms: x.ms }));
     var secOf = {}; (x.sections || []).forEach(function (s) { for (var i = s.from; i < s.to; i++) secOf[i] = s.id; });
     var rec = {
       attempt_id: x.attempt_id, idempotency_key: x.idempotency_key || undefined, exam: p.id, profile_version: p.version, blueprint_id: x.blueprint ? x.blueprint.id : undefined, blueprint_version: x.blueprint ? x.blueprint.version : undefined,
       test_type: x.test_type, started_at: new Date(x.started).toISOString(), finished_at: x.finished ? new Date(x.finished).toISOString() : null, state: x.state || "submitted",
-      items: x.items.map(function (it, i) { var a = x.ans[i]; return { item_id: String(it.id), chosen: a >= 0 ? a : null, correct: a >= 0 ? a === it.a : null, ms: Math.round((x.ms && x.ms[i]) || 0), marked: !!(x.mark && x.mark[i]), changed: (x.changed && x.changed[i]) || 0, section: secOf[i] || null }; }),
+      items: x.items.map(function (it, i) { var a = x.ans[i], o = { item_id: String(it.id), chosen: a >= 0 ? a : null, correct: a >= 0 ? a === it.a : null, ms: Math.round((x.ms && x.ms[i]) || 0), marked: !!(x.mark && x.mark[i]), changed: (x.changed && x.changed[i]) || 0, section: secOf[i] || null }, c = cleanConf(x.conf && x.conf[i]), n = (it.o && it.o.length) || 4, pr = c === "confused" ? cleanPair(x.pair && x.pair[i], n) : null; if (c) o.conf = c; if (pr) o.pair = pr; return o; }),
       score: { raw: sc.raw, max: sc.max, correct: sc.correct, incorrect: sc.incorrect, unanswered: sc.unanswered, accuracy: sc.accuracy, avg_ms: sc.avg_ms, scheme: sc.scheme },
       by_section: sc.by_section, by_subject: sc.by_subject, by_topic: sc.by_topic, by_difficulty: sc.by_difficulty,
       distribution: x.asm ? { planned: x.asm.planned, actual: x.asm.actual, deviations: x.asm.deviations.slice() } : { planned: {}, actual: {}, deviations: [] },
@@ -497,7 +515,7 @@
 
   /* ---------- in-progress session (saved to IndexedDB by prep-tests.js) ---------- */
   function sessPack(run, now) {
-    return { v: 1, saved: now, t2: run.t2, title: run.title, mode: run.mode, i: run.i, ans: run.ans.slice(), mark: ext({}, run.mark || {}), ms: (run.ms || []).slice(), changed: (run.changed || []).slice(),
+    return { v: 1, saved: now, t2: run.t2, title: run.title, mode: run.mode, i: run.i, ans: run.ans.slice(), mark: ext({}, run.mark || {}), ms: (run.ms || []).slice(), changed: (run.changed || []).slice(), conf: (run.conf || []).slice(), pair: (run.confPair || []).slice(),
       q: run.items.map(function (it) { return [it._s, it._m || it.t, String(it.id)]; }), sc: run.sc ? JSON.parse(JSON.stringify(run.sc)) : null, t0: run.t0, limit: run.limit || 0, phase: run.phase || "" };
   }
   // sessUnpack(pack, lists) -> { items, missing } with lists { "subject|module": items }; a question no longer in its
@@ -514,12 +532,12 @@
   }
 
   var API = { RANK_MIN_N: RANK_MIN_N, CLOCK_BACK_MS: CLOCK_BACK_MS, SAVE_EVERY_MS: SAVE_EVERY_MS, TYPES: TYPES,
-    profiles: profiles, profileIds: profileIds, profile: profile, forTab: forTab, paceSec: paceSec, scheme: scheme, legacyMocks: legacyMocks, schemes: schemes, coreProfiles: coreProfiles, validateProfile: validateProfile, provOf: provOf,
+    profiles: profiles, profileIds: profileIds, profile: profile, forTab: forTab, paceSec: paceSec, scheme: scheme, legacyMocks: legacyMocks, schemes: schemes, coreProfiles: coreProfiles, validateProfile: validateProfile, provOf: provOf, bankStatus: bankStatus,
     rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, isVignette: isVignette, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
     blueprint: blueprint, apportion: apportion, assemble: assemble, targetLevel: targetLevel,
     scNew: scNew, scLeft: scLeft, scStart: scStart, scCharge: scCharge, scResume: scResume, scClose: scClose,
     score: score, result: result, nextActions: nextActions, ownTrend: ownTrend, rankShown: rankShown, streaks: streaks, summary: summary, SUMMARY_MAX_BYTES: SUMMARY_MAX_BYTES,
-    dailyKey: dailyKey, dailyComplete: dailyComplete, dailyPrune: dailyPrune, sessPack: sessPack, sessUnpack: sessUnpack };
+    dailyKey: dailyKey, dailyComplete: dailyComplete, dailyPrune: dailyPrune, sessPack: sessPack, sessUnpack: sessUnpack, cleanConf: cleanConf, cleanPair: cleanPair };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (G) G.PREP_ASSESS = API;
 })(typeof window !== "undefined" ? window : null);

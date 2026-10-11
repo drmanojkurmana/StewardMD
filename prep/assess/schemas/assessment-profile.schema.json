@@ -7,11 +7,11 @@
   "required": ["schema", "id", "version", "status", "name", "tab", "verified_on", "sources", "format", "navigation", "scoring", "blueprint", "provenance"],
   "properties": {
     "schema": {"const": "prep/assessment-profile/v2"},
-    "id": {"enum": ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1"]},
+    "id": {"enum": ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1"]},
     "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
     "status": {"enum": ["official", "provisional"]},
     "name": {"type": "string"}, "session": {"type": "string"},
-    "tab": {"enum": ["neet-pg", "neet-ss", "usmle", "fmge"], "description": "the app's exam tab"},
+    "tab": {"enum": ["neet-pg", "neet-ss", "usmle", "fmge", "plab", "amc", "mccqe"], "description": "the app's exam tab"},
     "verified_on": {"type": "string", "format": "date"},
     "sources": {"type": "object", "additionalProperties": {"type": "object", "required": ["url", "title"], "properties": {"url": {"type": "string"}, "title": {"type": "string"}, "doc_date": {"type": ["string", "null"]}, "sha256": {"type": "string"}}}},
     "format": {"type": "object", "required": ["questions", "duration_min", "options", "item_types", "sections"], "properties": {
@@ -27,6 +27,8 @@
     "legacy_mock": {"type": ["object", "null"], "description": "the pre-smd_prep_tests2 pattern prep.js MOCKS keeps (flag off)"},
     "legacy": {"type": ["object", "null"], "properties": {"tab": {"type": "string"}, "order": {"type": "integer"}, "scheme": {"type": ["string", "null"]}}},
     "style": {"type": ["object", "null"], "description": "generation style mix (functions/_prep-core.js EXAM_PROFILES); provisional until calibrated"},
+    "calibration": {"type": "object", "description": "evidence the item style was learned from (plan section 4); aggregate pattern metadata only, never question text", "required": ["status", "items_studied", "sources", "date"], "properties": {"status": {"enum": ["calibrated", "provisional"]}, "items_studied": {"type": "integer", "minimum": 0}, "sources": {"type": "array", "items": {"type": "string"}}, "date": {"type": "string", "format": "date"}, "stats": {"type": "object", "description": "aggregate stats only (means, shares); no item text"}, "note": {"type": "string"}}},
+    "bank": {"type": "object", "description": "whether the app question bank can build tests for this exam; absent means available", "properties": {"status": {"enum": ["available", "coming"]}, "note": {"type": "string"}}},
     "provenance": {"type": "array", "items": {"type": "object", "required": ["field", "official", "verified_on"], "properties": {"field": {"type": "string", "description": "JSON pointer"}, "official": {"type": "boolean"}, "src": {"type": ["string", "null"]}, "section": {"type": ["string", "null"]}, "verified_on": {"type": "string", "format": "date"}, "note": {"type": "string"}}}}
   }
 }

@@ -714,7 +714,7 @@
   /* ---------- shell ---------- */
   var ICON = {
     lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
-    menu: '<path d="M4 7h16M4 12h16M4 17h11"/>', back: '<path d="M15 18l-6-6 6-6"/>', close: '<path d="M18 6L6 18M6 6l12 12"/>', chev: '<path d="M9 6l6 6-6 6"/>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h11"/>', back: '<path d="M15 18l-6-6 6-6"/>', close: '<path d="M18 6L6 18M6 6l12 12"/>', chev: '<path d="M9 6l6 6-6 6"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/>',
     bm: '<path d="M6 3h12v18l-6-4-6 4z"/>', plus: '<path d="M12 5v14M5 12h14"/>', star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
     flag: '<path d="M5 21V4h11l-1.5 4L16 12H5"/>', play: '<path d="M7 5l12 7-12 7z"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     dl: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>', search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>', next: '<path d="M5 12h14M13 6l6 6-6 6"/>', check: '<path d="M5 12l5 5 9-10"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
@@ -1075,6 +1075,164 @@
 
   /* ---------- home ---------- */
   function arenaOn() { return !!(G.PREP_ARENA && G.PREP_ARENA.enabled()); }
+  /* KnowYourIQ section (My coaching): importance sources, view, names, section and result cards.
+     All numbers come from the student's own answers on this device; nothing is predicted. */
+  function coachSrc(exam) {
+    var bp = null;
+    try {
+      var P = G.PREP_PROFILES && G.PREP_PROFILES.profiles && G.PREP_PROFILES.profiles[exam];
+      if (P && P.blueprint && P.blueprint.kind === "official_counts") {
+        var tot = 0, ks = Object.keys(P.blueprint.subjects);
+        ks.forEach(function (k) { tot += P.blueprint.subjects[k]; });
+        if (tot > 0) { bp = {}; ks.forEach(function (k) { bp[k] = Math.round(P.blueprint.subjects[k] / tot * 100) / 100; }); }
+      }
+    } catch (e) { bp = null; }
+    var pyq = null;
+    try {
+      var items = G.PREP_PYQ && G.PREP_PYQ._st && G.PREP_PYQ._st.items;
+      if (items && items.length) {
+        var counts = {}, n = 0;
+        items.forEach(function (it) { if (it._s && it._s !== "pyq") { counts[it._s] = (counts[it._s] || 0) + 1; n++; } });
+        if (n >= 5) { pyq = {}; Object.keys(counts).forEach(function (k) { pyq[k] = Math.round(counts[k] / n * 100) / 100; }); }
+      }
+    } catch (e) { pyq = null; }
+    return { blueprint: bp, pyq: pyq, data: G.PREP_KYIQ_DATA || null };
+  }
+  function coachView(s, exam) {
+    var CO = G.PREP_COACH;
+    if (!CO) return { topics: [] };
+    return CO.analyze(s.coach_t || {}, exam, coachSrc(exam));
+  }
+  function coachTopicName(t) {
+    var p = String(t || "").split("|"), sb = subjectById(p[0]), tp = topicOf(p[0], p[1]);
+    var sn = sb ? tx(sb.name) : esc(p[0] || "?"), tn = tp ? tx(tp.title) : esc(p[1] || "?");
+    return sn === tn ? sn : sn + " · " + tn;
+  }
+  function kyMark(size) {
+    var s = size || 28;
+    return '<img class="ky-mark ky-mark-l" src="/prep/art/knowyouriq-mark-light-40.webp" srcset="/prep/art/knowyouriq-mark-light-40.webp 1x, /prep/art/knowyouriq-mark-light-80.webp 2x, /prep/art/knowyouriq-mark-light-120.webp 3x" alt="" width="' + s + '" height="' + s + '">' +
+      '<img class="ky-mark ky-mark-d" src="/prep/art/knowyouriq-mark-40.webp" srcset="/prep/art/knowyouriq-mark-40.webp 1x, /prep/art/knowyouriq-mark-80.webp 2x, /prep/art/knowyouriq-mark-120.webp 3x" alt="" width="' + s + '" height="' + s + '">';
+  }
+  function kyTierChip(x) {
+    if (!x.tier) return "";
+    return ' <span class="ky-tier ' + x.tier + '" title="' + esc(x.tierWhy) + '">' + esc(x.tierLabel) + "</span>";
+  }
+  /* coachSecHtml(kind): "home" is the full section (due, groups, pairs, Ask); "tests" is due + Ask. */
+  function coachSecHtml(kind) {
+    var CO = G.PREP_COACH;
+    if (!CO) return "";
+    var K = CO.KYIQ, s = load(), exam = s.exam, td = today();
+    var view = coachView(s, exam), due = CO.dueToday(s, td).coach, pairs = CO.topPairs(s.coach_pairs, 3);
+    var grouped = view.topics.filter(function (x) { return x.group !== "fresh"; });
+    var freshN = view.topics.length - grouped.length;
+    var h = '<section class="ky-sec" aria-label="My coaching"><div class="ky-head">' + kyMark(28) +
+      '<h2 class="pn-h">My coaching</h2><button type="button" class="ky-ib" data-act="kyinfo" aria-label="About KnowYourIQ" aria-pressed="' + !!st.kySecInfo + '">' + ico("info") + "</button></div>" +
+      '<p class="ky-sub">' + esc(K.NAME) + " · " + esc(K.TAGLINE) + "</p>";
+    if (st.kySecInfo) h += '<p class="ky-note">' + esc(K.NOTEST) + ' Groups build from your own answers on this phone: answer ' + K.MIN_N + " questions on a topic to see its group and tier.</p>";
+    if (!view.topics.length) {
+      return h + '<p class="ky-empty">Answer ' + K.MIN_N + " questions on a topic to see your group. Tap how sure you are on each question, or skip it: skipping changes nothing.</p></section>";
+    }
+    h += '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="pn-sec">Due today</p>' +
+      (due.length ? '<ul class="ky-due">' + due.map(function (t) {
+        return '<li><span class="ky-dt">' + coachTopicName(t) + '</span><button type="button" class="pn-btn sm" data-act="kyDueRun" data-t="' + esc(t) + '">Practise</button></li>';
+      }).join("") + "</ul>" : '<p class="ky-empty">Nothing due today.</p>') + "</div></div>";
+    if (kind === "home") {
+      h += ["reread", "revise", "ready"].map(function (g) {
+        var ts = view.topics.filter(function (x) { return x.group === g; });
+        return '<details class="ky-card"' + (g === "reread" && ts.length ? " open" : "") + ">" +
+          '<summary><span class="ky-t">' + esc(CO.GROUPS[g]) + '</span><span class="ky-n">' + ts.length + "</span>" + ico("chev").replace("<svg", '<svg class="ky-chev"') + "</summary>" +
+          '<div class="ky-b">' + (ts.length ? ts.slice(0, 8).map(function (x) {
+            return '<div class="ky-topic"><span class="ky-tt"><b>' + coachTopicName(x.t) + "</b><small>" + esc(x.why) + (x.tier ? " " + esc(x.tierWhy) : "") + "</small></span>" + kyTierChip(x) + "</div>";
+          }).join("") : '<p class="ky-empty">' + (g === "ready" ? "Nothing here yet: Exam ready needs " + K.MIN_N + "+ answers over " + K.READY_DAYS_MIN + "+ days." : "Nothing here.") + "</p>") + "</div></details>";
+      }).join("");
+      if (freshN) h += '<p class="ky-note">' + freshN + " more topic" + (freshN === 1 ? " needs " : "s need ") + K.MIN_N + " answers first.</p>";
+      if (pairs.length) {
+        h += '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="pn-sec">Mixed-up pairs</p>' + pairs.map(function (e, i) {
+          return '<div class="ky-pair"><p>' + esc(CO.pairLine(e)) + '</p><div class="ky-vs"><div><small>Option ' + "ABCDEF"[e.a] + "</small>" + esc(e.ta) + '</div><div><small>Option ' + "ABCDEF"[e.b] + "</small>" + esc(e.tb) + '</div></div>' +
+            '<div class="ky-rowbtns"><button type="button" class="pn-btn sm" data-act="kyPairQ" data-t="' + esc(e.t) + '" data-q="' + esc(e.q) + '">Practise this question</button>' +
+            '<button type="button" class="pn-link" data-act="kyPairT" data-t="' + esc(e.t) + '">Practise ' + coachTopicName(e.t) + "</button></div></div>";
+        }).join("") + '<p class="ky-note">Why they differ, with KB comparisons when the question links any, shows with each question.</p></div></div>';
+      }
+    }
+    if (grouped.length && G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
+    return h + "</section>";
+  }
+  /* coachResultHtml(r): this run's confidence outcomes (honest counts) plus where to revise first. */
+  function coachResultHtml(r) {
+    var CO = G.PREP_COACH;
+    if (!CO || !r || !r.items) return "";
+    var K = CO.KYIQ, n = { misconception: 0, confused: 0, lucky: 0, tagged: 0 };
+    r.items.forEach(function (it, i) {
+      var c = r.conf && r.conf[i], oc = CO.outcome(r.ans[i] < 0 ? null : r.ans[i] === it.a ? 1 : 0, c);
+      if (c) n.tagged++;
+      if (n[oc] != null && oc !== "tagged") n[oc]++;
+    });
+    if (!n.tagged) return "";
+    var s = load(), view = coachView(s, s.exam), first = null;
+    view.topics.forEach(function (x) { if (!first && x.group !== "fresh" && x.group !== "ready") first = x; });
+    var bits = [];
+    if (n.misconception) bits.push("<b>" + n.misconception + "</b> confident-wrong (misconceptions to fix first)");
+    if (n.confused) bits.push("<b>" + n.confused + "</b> confused between options");
+    if (n.lucky) bits.push("<b>" + n.lucky + "</b> guessed right (lucky, not mastered)");
+    var h = '<section class="ky-sec" aria-label="KnowYourIQ result"><div class="ky-head">' + kyMark(28) +
+      '<h2 class="pn-h">' + esc(K.NAME) + ": this test</h2></div>" +
+      '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="ky-empty">You tagged ' + n.tagged + " of " + r.items.length + ": " + (bits.join(" · ") || "no misconceptions, confused or lucky answers.") + "</p>" +
+      (first ? '<p class="ky-empty">Revise first: <b>' + coachTopicName(first.t) + "</b>" + kyTierChip(first) + " <small>" + esc(first.tierWhy || first.why) + "</small></p>" : "") +
+      "</div></div>";
+    if (G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
+    return h + "</section>";
+  }
+  /* After a run finishes: file each attempted topic's next review from its current group. Fresh
+     topics (under N answers) are left alone: no group, no due date. */
+  function coachFileReviews(r) {
+    var CO = G.PREP_COACH;
+    if (!CO || !r || !r.items) return;
+    try {
+      var s = load(), td = today(), seen = {}, ts = [];
+      r.items.forEach(function (it, i) {
+        if (it._gone || r.ans[i] < 0 || !it._s || !(it._m || it.t)) return;
+        var t = CO.topicKey(it._s, it._m || it.t);
+        if (!seen[t]) { seen[t] = 1; ts.push(t); }
+      });
+      if (!ts.length) return;
+      var view = coachView(s, s.exam), by = {};
+      view.topics.forEach(function (x) { by[x.t] = x.group; });
+      ts.forEach(function (t) { if (by[t] && by[t] !== "fresh") CO.noteReview(s, t, by[t], td); });
+      save();
+    } catch (e) {}
+  }
+  /* "Ask MaiK about my KnowYourIQ": the existing sheet with the compact structured summary as
+     context. The on-phone model writes the plain-language plan; if it cannot, the standard
+     MaiK Cloud handoff applies. No per-attempt LLM call is needed for the screens themselves. */
+  function coachAskOpen() {
+    var CO = G.PREP_COACH;
+    if (!CO || !G.PREP_ASK) return false;
+    var s = load(), view = coachView(s, s.exam), due = CO.dueToday(s, today()).coach;
+    var pairs = CO.topPairs(s.coach_pairs, 4);
+    var title = CO.KYIQ.NAME + ": what should I revise?";
+    return G.PREP_ASK.open({ kind: "card", fr: title, bk: CO.summaryText(view, s.exam, due, pairs), title: title, ask: "What should I revise first?" }, HOST);
+  }
+  /* Practise actions from the section: the pair's topic as a study set, or the pair's own question. */
+  function kySplitT(t) { var p = String(t || "").split("|"); return { s: p[0], m: p[1] }; }
+  function kyTopicRun(t) {
+    var p = kySplitT(t);
+    if (!p.s || !p.m) return;
+    loadModule(p.s, p.m).then(function (items) {
+      var hid = hidden(), pool = (items || []).filter(function (it) { return usable(it, hid); });
+      if (!pool.length) { toast("No questions in this topic on this phone yet."); return; }
+      runQuestions(pool, "study", "Revise: " + coachTopicName(t).replace(/<[^>]*>/g, ""));
+    }, function () { toast("This topic did not load. Check the connection and try again."); });
+  }
+  function kyPairRun(t, q) {
+    var p = kySplitT(t);
+    if (!p.s || !p.m || !q) return;
+    loadModule(p.s, p.m).then(function (items) {
+      var hit = null;
+      (items || []).forEach(function (it) { if (String(it.id) === String(q)) hit = it; });
+      if (!hit) { toast("That question is no longer in this topic. Practise the topic instead."); return; }
+      runQuestions([hit], "study", "Practise the pair");
+    }, function () { toast("This topic did not load. Check the connection and try again."); });
+  }
   // A row in a grouped list: icon, title, one line of detail, chevron.
   function row(act, icon, title, sub, attrs) {
     return '<button type="button" class="pn-row" data-act="' + act + '"' + (attrs || "") + '><span class="pn-ri" aria-hidden="true">' + icon + '</span><span class="pn-rb"><b>' + title + "</b><small>" + sub + "</small></span>" + ico("chev") + "</button>";
@@ -1101,6 +1259,8 @@
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
       (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
+      // KnowYourIQ (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
+      coachSecHtml("home") +
       // Question of the day (prep50): one bank question a day, the same for the whole day; drawn once the subject indexes
       // are read (below). Hidden offline when its module is not on this phone.
       (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd" id="pnQotd" hidden></section>') +
@@ -1410,12 +1570,16 @@
     // PrepNucleus Pro (prep-pro.js): the free tier is checked when a set starts, never mid-set. Arena runs (custom) are free.
     if (!opts.custom && G.PrepPro && !G.PrepPro.can("questions", { items: items })) { rerender(); return G.PrepPro.openLimit("questions"); }
     st.run = { m0: opts.custom ? null : snapNow(), items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: opts.untimed || opts.qsec ? 0 : opts.limit || (mode === "exam" ? items.length * ex.sec : 0), qsec: opts.qsec || 0, scheme: opts.scheme || null, custom: opts.custom || null };
+    // KnowYourIQ capture (prep-coach.js): one confidence chip per question, null until tapped (skippable),
+    // plus the confused pair. Shown in every mode; ignoring them changes nothing about the run.
+    st.run.conf = items.map(function () { return null; });
+    st.run.confPair = items.map(function () { return null; });
     if (st.run.qsec) st.run.qc = qcNew(items.length, st.run.qsec);
     // Tests 2 (prep-tests.js, smd_prep_tests2): t2 = the attempt (profile, type, assembly record), sections = locked timed
     // sections from the assembly ({ id, label, n, sec, from, to }); ms = time each question was on screen.
     if (opts.t2) { st.run.t2 = opts.t2; st.run.ms = items.map(function () { return 0; }); st.run.changed = items.map(function () { return 0; }); }
     if (opts.sections && opts.sections.length && ASSESS) { st.run.limit = 0; st.run.secs = opts.sections; st.run.sc = ASSESS.scNew(opts.sections); ASSESS.scStart(st.run.sc, 0, pnow(), Date.now()); st.run.i = opts.sections[0].from; }
-    if (opts.resume) { var rs = opts.resume; st.run.i = rs.i; st.run.ans = rs.ans; st.run.mark = rs.mark || {}; if (rs.ms) st.run.ms = rs.ms; if (rs.changed) st.run.changed = rs.changed; if (rs.t0) st.run.t0 = rs.t0; if (rs.sc) st.run.sc = rs.sc; if (rs.phase) st.run.phase = rs.phase; }
+    if (opts.resume) { var rs = opts.resume; st.run.i = rs.i; st.run.ans = rs.ans; st.run.mark = rs.mark || {}; if (rs.ms) st.run.ms = rs.ms; if (rs.changed) st.run.changed = rs.changed; if (rs.conf) st.run.conf = rs.conf; if (rs.pair) st.run.confPair = rs.pair; if (rs.t0) st.run.t0 = rs.t0; if (rs.sc) st.run.sc = rs.sc; if (rs.phase) st.run.phase = rs.phase; }
     // A set made by the student (practice setup sheet, custom module) is saved when it finishes (psSave); a re-practise
     // of a whole saved set updates that set (psId).
     if (opts.save && !opts.custom) st.run.save = opts.save;
@@ -1677,6 +1841,53 @@
   // The MaiK AI mark (maik-ai-mark.js, one SVG for every Ask MaiK entry); without it, the old avatar picture.
   function mkAv(size) { var M = G.SMD_MAIK_MARK, m = M ? M.html("tile", { size: size || 34 }) : ""; return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; }
   function askBtn(act, label, attrs) { return '<button type="button" class="pn-btn pa-ask" data-act="' + act + '"' + (attrs || "") + '>' + mkAv(32) + '<span>' + (G.SMD_MAIK_MARK ? G.SMD_MAIK_MARK.label(label) : label) + "</span></button>"; }
+  /* KnowYourIQ capture row: the three one-tap chips (labels from prep-coach.js CONF), an info button that
+     reopens the intro, and, when Confused is lit, the optional pair tick (which two options mix you up).
+     Everything sits below the options; tapping is optional and never blocks answering or the timer. */
+  function confRowHtml(r, it) {
+    var CO = G.PREP_COACH;
+    var chips = CO ? CO.CONF : [["guessing", "I'm guessing"], ["confident", "I'm confident"], ["confused", "I'm confused between options"]];
+    var cur = r.conf && r.conf[r.i];
+    var h = '<div class="pn-mtag ky-cap" role="group" aria-label="How sure are you?"><span class="pn-mut pn-small">How sure are you? (optional) <button type="button" class="pn-link ky-info" data-act="kyinfo" aria-label="About KnowYourIQ">' + ico("info") + "</button></span>" +
+      '<div class="pn-wrap">' + chips.map(function (t) {
+        var on = cur === t[0];
+        return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="conf" data-v="' + t[0] + '">' + esc(t[1]) + "</button>";
+      }).join("") + "</div>";
+    if (cur === "confused") {
+      var pr = (r.confPair && r.confPair[r.i]) || [], n = (it.o && it.o.length) || 4, L = ["A", "B", "C", "D", "E", "F"], ks = [];
+      for (var k = 0; k < n && k < L.length; k++) ks.push(k);
+      h += '<div class="ky-pair" role="group" aria-label="Which two options mix you up?"><span class="pn-mut pn-small">Which two mix you up? (optional)</span><div class="pn-wrap">' + ks.map(function (k) {
+        var on = pr.indexOf(k) >= 0;
+        return '<button type="button" class="pn-chip sm' + (on ? " on" : "") + '" aria-pressed="' + on + '" aria-label="Option ' + L[k] + '" data-act="confpair" data-v="' + k + '">' + L[k] + "</button>";
+      }).join("") + "</div></div>";
+    }
+    return h + "</div>";
+  }
+  /* KnowYourIQ intro card: shown at the start of a run until dismissed, and again from the info button.
+     Never blocks: the question answers normally with it on screen, and it hides after the first answer. */
+  function kyIntroHtml(r) {
+    var CO = G.PREP_COACH;
+    if (!CO || r.done) return "";
+    if (!r.kyShow) {
+      if (CO.introSeen() || r.kyHide) return "";
+      if (r.ans.some(function (x) { return x >= 0; })) return "";
+    }
+    var K = CO.KYIQ;
+    return '<section class="ky-intro" aria-label="' + esc(K.NAME) + '">' + kyMark(40) +
+      "<div><p><b>" + esc(K.NAME) + "</b> · " + esc(K.TAGLINE) + "</p>" +
+      "<p>Before or after you answer, tap how sure you are. Skipping changes nothing. Your groups build from your own answers, on this phone.</p>" +
+      '<p class="pn-mut pn-small">' + esc(K.NOTEST) + "</p>" +
+      '<div class="pn-navrow"><button type="button" class="pn-btn sm" data-act="kyintro" data-v="got">Got it</button><button type="button" class="pn-link" data-act="kyintro" data-v="never">Don\'t show me again</button></div></div></section>';
+  }
+  /* Slow-answer threshold for this run: 1.5x the question pace when the run has one, else the config default. */
+  function coachSlowMs(r) {
+    var def = G.PREP_COACH ? G.PREP_COACH.KYIQ.SLOW_MS : 90000;
+    try {
+      if (r && r.t2 && ASSESS) { var p = ASSESS.profile(r.t2.exam); if (p) return ASSESS.paceSec(p) * 1500; }
+    } catch (e) {}
+    if (r && r.limit && r.items && r.items.length) return Math.round(r.limit / r.items.length * 1500);
+    return def;
+  }
   function renderRun() {
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
@@ -1746,6 +1957,11 @@
     }
     // Time up: the question stays locked for the rest of the set, answered or not.
     var lockNote = locked && !shown ? '<p class="pn-timeup" role="status">' + ico("lock") + "<span><b>Time up</b>" + (chosen >= 0 ? "Your answer " + L[chosen] + " is kept and can no longer be changed." : "This question can no longer be answered.") + "</span></p>" : "";
+    // KnowYourIQ capture: the confidence chips below every question, in every mode (practice, study, timed
+    // exams, grand tests, mock and fixed papers). Skippable: no tap, no record, no extra step, no timer change.
+    // The row sits below the options, so the options never move; Confused opens the optional pair tick.
+    var confRow = !locked ? confRowHtml(r, it) : "";
+    var kyIntro = kyIntroHtml(r);
     var cs = secCur(r), lo = cs ? cs.from : 0, hi = cs ? cs.to : r.items.length;
     var nav = r.mode === "exam" && cs ?
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="prev"' + (r.i > lo ? "" : " disabled") + ">Previous</button>" +
@@ -1762,7 +1978,7 @@
     var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : "";
     st.swipeIn = 0;
     paint(bar(esc(r.title), cs ? esc(cs.label) + " · question " + (r.i - lo + 1) + " of " + cs.n : "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + (cs ? secLineHtml(r) + secStripHtml(r) : tlHtml(r)) + qprogHtml(r) +
-      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + kyIntro + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + confRow + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (revealFb) revealFeedback();
     tlSync(r);
@@ -1928,13 +2144,32 @@
     if (k === "b" && !(r.items[r.i]._s === "deck" || r.items[r.i]._py)) { e.preventDefault(); toggleBookmark(); return; }
     if (k === "g" && r.mode === "exam") { e.preventDefault(); openGrid(); }
   }
-  function record(it, chosen) {
+  function record(it, chosen, cap) {
     var s = load(), ok = chosen === it.a, td = today(), dk = deckKey(it._m || it.t);
     C.review(s, dk, it.id, C.gradeFor(ok), td);
     C.recordAnswer(s, dk, String(it.a), String(chosen));
     if (G.PrepPro) G.PrepPro.use("questions", { items: [it] });
     var ms = s.mod[it._m || it.t] || (s.mod[it._m || it.t] = { t: 0, ok: 0 });
     ms.t++; if (ok) ms.ok++; ms.last = td;
+    // KnowYourIQ capture: cap is the chip id or { conf, pair, ms }. The chip is tallied on the module
+    // (skipped chips leave no trace); counted answers also file the per-topic aggregate and the pair.
+    // Blanks (chosen < 0) are noted by the scheduler above but never feed the coach.
+    var cc = null, pr = null, msT = 0;
+    if (typeof cap === "string") cc = cap;
+    else if (cap) { cc = cap.conf; pr = cap.pair; msT = cap.ms || 0; }
+    var cf = cc == null ? null : ASSESS && ASSESS.cleanConf ? ASSESS.cleanConf(cc) : null;
+    if (cf) { ms.cf = ms.cf || { guessing: 0, confident: 0, confused: 0 }; ms.cf[cf] = (ms.cf[cf] || 0) + 1; }
+    var CO = G.PREP_COACH;
+    if (CO && chosen >= 0 && it._s && (it._m || it.t)) {
+      var tk = CO.topicKey(it._s, it._m || it.t);
+      if (!s.coach_t) s.coach_t = {};
+      CO.noteAnswer(s.coach_t, tk, { ok: ok, conf: cf, slow: msT > coachSlowMs(st.run), day: td, ts: Date.now() });
+      var P = cf === "confused" && pr && ASSESS && ASSESS.cleanPair ? ASSESS.cleanPair(pr, (it.o || []).length || 4) : null;
+      if (P) {
+        if (!s.coach_pairs) s.coach_pairs = {};
+        CO.notePair(s.coach_pairs, tk, { q: it.id, a: P[0], b: P[1], ta: it.o[P[0]] || "", tb: it.o[P[1]] || "", ts: Date.now() });
+      }
+    }
     s.last = { s: it._s, m: it._m || it.t };
     // Answer log for readiness accuracy (prep-plan.js): [module, 1|0], newest last.
     if (G.PREP_PLAN) G.PREP_PLAN.noteAnswer(s, it._m || it.t, ok);
@@ -1950,7 +2185,7 @@
     if (r.qc) { var i0 = r.i; qtick(r); if (r.done || r.i !== i0 || r.qc.out[i0]) return; }   // the time ran out first: no answer after it
     if (r.sc) { secTick(r); if (r.done || r.phase === "between" || !inSec(r, r.i)) return; }   // a closed section never takes an answer
     if (r.changed && r.ans[r.i] >= 0 && r.ans[r.i] !== k) r.changed[r.i]++;
-    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; record(r.items[r.i], k); }
+    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; r.kyHide = true; record(r.items[r.i], k, { conf: r.conf && r.conf[r.i], pair: r.confPair && r.confPair[r.i], ms: Date.now() - (r.qt0 || r.t0) }); }
     else r.ans[r.i] = k;
     renderRun();
   }
@@ -1968,7 +2203,9 @@
     if (r.qc && r.qc.used) { qcPause(r.qc, pnow()); r.secs = Math.round(r.qc.used.reduce(function (a, b) { return a + b; }, 0) / 1000); }
     if (r.custom) return r.custom.submit(r);
     if (r.qc) qcPause(r.qc, pnow());
-    if (r.mode === "exam") r.items.forEach(function (it, i) { if (it._gone) return; if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
+    if (r.mode === "exam") r.items.forEach(function (it, i) { if (it._gone) return; var cf = r.conf && r.conf[i], cp = r.confPair && r.confPair[i], cm = (r.ms || [])[i] || 0; if (r.ans[i] >= 0) record(it, r.ans[i], { conf: cf, pair: cp, ms: cm }); else record(it, -1, cf); });
+    // KnowYourIQ: each attempted topic's next review, from its current group (fresh topics left alone).
+    coachFileReviews(r);
     // Tests 2: the attempt record (prep-assess.js result), daily completion, the saved session cleared.
     if (r.t2 && G.PREP_TESTS) { try { G.PREP_TESTS.finished(r); } catch (e) {} }
     if (r.save || r.psId) psSave(r);
@@ -2066,12 +2303,17 @@
           return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo);
       var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
+      // My-coaching capture: a timed exam shows no chips during the run; flagged questions are tagged here instead.
+      var tagRow = r.mark[i] && !it._gone ? '<div class="pn-mtag" role="group" aria-label="How sure were you?"><span class="pn-mut pn-small">Marked for review: how sure were you? (optional)</span><div class="pn-wrap">' + [["guessing", "Guessing"], ["confident", "Confident"], ["confused", "Confused"]].map(function (t) {
+        var on = r.conf && r.conf[i] === t[0];
+        return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="t2-conftag" data-i="' + i + '" data-v="' + t[0] + '">' + t[1] + "</button>";
+      }).join("") + "</div></div>" : "";
       return '<li><details class="t2sol t2sol-' + st + '" id="t2q' + i + '"' + (list.length === 1 ? " open" : "") + ">" +
         '<summary><span class="t2sol-n" aria-hidden="true">' + (i + 1) + '</span><span class="t2sol-t"><b><span class="pn-sr">' + (i + 1) + ". </span>" + esc(it.q.length > 110 ? it.q.slice(0, 109) + "…" : it.q) + "</b><small>" + esc(stT) + " · answer " + ansL + "</small></span>" + ico("chev") + "</summary>" +
         '<div class="t2sol-b"><p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
         '<ol class="pn-opts">' + it.o.map(function (o, k) {
           return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
-        }).join("") + "</ol>" + ex + outdatedHtml(it) +
+        }).join("") + "</ol>" + ex + outdatedHtml(it) + tagRow +
         (G.PREP_ASK && !it._gone ? askBtn("ask-rv", a >= 0 && a !== it.a ? "Why is " + (L[a] || "?") + " wrong? Ask MaiK" : "Ask MaiK why " + ansL + " is right", ' data-i="' + i + '"') : "") +
         (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
     }).join("");
@@ -2127,7 +2369,7 @@
     paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (t2h ? t2h : r.scheme ? mockAnalysis(r, cele) : '<section class="pn-panel pn-score"' + celeAttrs(cele) + ">" + celeChip(cele) +
       '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + '</svg>' +
       '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" && !r.saved ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + tstatHtml(r) + recapHtml(r) + "</section>" + splitHtml(r) + selfCurveHtml(pct, r)) + line +
-      (t2h ? "" : reviewHtml(r)) +
+      (t2h ? "" : coachResultHtml(r) + reviewHtml(r)) +
       '<div class="pn-navrow pn-again">' + (missed.length ? '<button type="button" class="pn-btn" data-act="retrymissed">' + (missed.length === r.items.length ? "Practise again" : "Practise the missed (" + missed.length + ")") + "</button>" : "") +
       (missed.length < r.items.length ? '<button type="button" class="pn-btn" data-act="retryall">Practise all again (' + r.items.length + ")</button>" : "") +
       '<button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>' +
@@ -2618,6 +2860,53 @@
     if (a === "secstart") { if (st.run && st.run.sc) startSection(st.run, Number(v)); return; }
     if (a === "prev") { if (st.run && st.run.i && canSwipe(-1)) { st.run.i--; if (e.detail) st.swipeIn = -1; renderRun(); } return; }
     if (a === "markq") { var rr = st.run; rr.mark[rr.i] = !rr.mark[rr.i]; return renderRun(); }
+    // KnowYourIQ capture: toggle the confidence chip (tapping the lit chip clears it). Leaving Confused
+    // clears the pair with it. When the question is already answered, the tallies move with the chip so a
+    // retag never double counts (reconf touches confidence counters only, not the answer itself).
+    if (a === "conf") {
+      var rc = st.run, itc = rc && rc.items[rc.i];
+      if (rc && !rc.done && rc.conf && itc) {
+        var cv = ASSESS && ASSESS.cleanConf ? ASSESS.cleanConf(v) : null, old = rc.conf[rc.i], nv = old === cv || !cv ? null : cv;
+        rc.conf[rc.i] = nv;
+        if (nv !== "confused" && rc.confPair) rc.confPair[rc.i] = null;
+        if (rc.ans[rc.i] >= 0 && old !== nv) {
+          var mm = s.mod[itc._m || itc.t];
+          if (mm) { mm.cf = mm.cf || { guessing: 0, confident: 0, confused: 0 }; if (old && mm.cf[old] > 0) mm.cf[old]--; if (nv) mm.cf[nv] = (mm.cf[nv] || 0) + 1; }
+          var COc = G.PREP_COACH;
+          if (COc && itc._s && (itc._m || itc.t)) { if (!s.coach_t) s.coach_t = {}; COc.reconf(s.coach_t, COc.topicKey(itc._s, itc._m || itc.t), rc.ans[rc.i] === itc.a, old, nv); }
+          save();
+        }
+      }
+      return renderRun();
+    }
+    // KnowYourIQ capture: tick which two options mix you up (tapping a lit letter clears it; a third tap
+    // replaces the oldest). Only while Confused is lit, and never after the run is done.
+    if (a === "confpair") {
+      var rp = st.run, itp = rp && rp.items[rp.i];
+      if (rp && !rp.done && rp.conf && rp.conf[rp.i] === "confused" && itp) {
+        var kk = Number(v), nn = (itp.o || []).length || 4;
+        rp.confPair = rp.confPair || [];
+        var cur = rp.confPair[rp.i] || [];
+        if (!(kk >= 0 && kk < nn)) cur = [];
+        else if (cur.indexOf(kk) >= 0) cur = cur.filter(function (x) { return x !== kk; });
+        else { cur = cur.concat([kk]); if (cur.length > 2) cur = cur.slice(-2); }
+        rp.confPair[rp.i] = cur.length ? cur.slice().sort() : null;
+      }
+      return renderRun();
+    }
+    // KnowYourIQ intro: "Got it" hides it for this run; "Don't show me again" persists on this device.
+    if (a === "kyintro") {
+      if (st.run) { st.run.kyHide = true; st.run.kyShow = false; }
+      if (v === "never" && G.PREP_COACH) G.PREP_COACH.introDismiss(true);
+      return renderRun();
+    }
+    if (a === "kyinfo") {
+      if (st.run && !st.run.done) { st.run.kyShow = !st.run.kyShow; return renderRun(); }
+      st.kySecInfo = !st.kySecInfo; return rerender();
+    }
+    if (a === "kyAsk") { coachAskOpen(); return; }
+    if (a === "kyDueRun" || a === "kyPairT") return kyTopicRun(b.getAttribute("data-t"));
+    if (a === "kyPairQ") return kyPairRun(b.getAttribute("data-t"), b.getAttribute("data-q"));
     if (a === "qgrid") return openGrid();
     if (a === "goq") { var gi = Number(b.getAttribute("data-i")); if (st.run.sc && !inSec(st.run, gi)) return; st.run.i = gi; st.stack.pop(); return renderRun(); }
     if (a === "submit" && st.run && st.run.sc) return secSubmitAsk();
@@ -2766,6 +3055,7 @@
     stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, shuffle: shuffle, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut, cacheKeys: cacheKeys,
     // Tests 2 (prep-tests.js)
     cacheDel: cacheDel, loadMany: loadMany, hidden: hidden, loadingScreen: loadingScreen, stepMsg: stepMsg, topicOf: topicOf, fmtMin: fmtMin, examOf: examOf, getJSON: getJSON, t2solutions: t2solutionsHtml,
+    coachSec: coachSecHtml, coachResult: coachResultHtml, coachAsk: coachAskOpen,
     startPlan: startPlan, startWeak: startWeak, openCustom: function () { push(renderCustom); }, openMistakes: function () { mf.tag = "all"; push(renderMistakes); }, setTt: ttSet,
     planToday: function () { return planToday(load(), today()); }, staticBase: STATIC, pnow: function () { return pnow(); },
     openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits,

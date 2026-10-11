@@ -1,0 +1,254 @@
+{
+  "schema": "prep/assessment-profile/v2",
+  "id": "usmle-step2-ck",
+  "version": "2026.1.0",
+  "status": "provisional",
+  "name": "USMLE Step 2 CK",
+  "session": "USMLE Step 2 CK from 2026-05-07",
+  "tab": "usmle",
+  "verified_on": "2026-10-12",
+  "sources": {
+    "USMLE-STEP2-CK": {
+      "url": "https://www.usmle.org/step-exams/step-2-ck",
+      "title": "USMLE Step 2 CK (usmle.org)",
+      "doc_date": "2026-01-01",
+      "publisher": "Federation of State Medical Boards (FSMB) and National Board of Medical Examiners (NBME)"
+    }
+  },
+  "format": {
+    "questions": 318,
+    "duration_min": 480,
+    "options": "4+",
+    "item_types": [
+      "sba"
+    ],
+    "block_max_items": 20,
+    "sections": [
+      {
+        "id": "1",
+        "label": "Block 1",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "2",
+        "label": "Block 2",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "3",
+        "label": "Block 3",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "4",
+        "label": "Block 4",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "5",
+        "label": "Block 5",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "6",
+        "label": "Block 6",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "7",
+        "label": "Block 7",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "8",
+        "label": "Block 8",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "9",
+        "label": "Block 9",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "10",
+        "label": "Block 10",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "11",
+        "label": "Block 11",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "12",
+        "label": "Block 12",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "13",
+        "label": "Block 13",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "14",
+        "label": "Block 14",
+        "questions": 20,
+        "minutes": 30
+      },
+      {
+        "id": "15",
+        "label": "Block 15",
+        "questions": 19,
+        "minutes": 30
+      },
+      {
+        "id": "16",
+        "label": "Block 16",
+        "questions": 19,
+        "minutes": 30
+      }
+    ]
+  },
+  "navigation": {
+    "locked_sections": true,
+    "revisit_within_section": true,
+    "return_to_closed_section": false,
+    "early_section_submit": true,
+    "auto_advance_on_timeout": true,
+    "mark_for_review": true,
+    "break_between_parts": true
+  },
+  "scoring": {
+    "correct": 1,
+    "incorrect": 0,
+    "unanswered": 0,
+    "pass": null
+  },
+  "pace_sec": 90.57,
+  "blueprint": {
+    "kind": "none",
+    "subjects": {},
+    "unmapped": {},
+    "note": "Content outline weights are not modelled yet. USMLE-tagged vignettes are preferred."
+  },
+  "item_styles": [],
+  "previous_formats": [
+    {
+      "id": "usmle-step2ck-pre-2026-05",
+      "label": "Before 7 May 2026",
+      "questions": 318,
+      "duration_min": 480,
+      "block_max_items": 40,
+      "block_minutes": 60,
+      "src": "USMLE-STEP2-CK",
+      "official": true
+    }
+  ],
+  "calibration": {
+    "status": "calibrated",
+    "items_studied": 60,
+    "sources": ["FSMB/NBME USMLE Step 2 CK Sample Test Questions (official)"],
+    "date": "2026-10-12",
+    "stats": {"mean_stem_words": 65.0, "image_share": 0.55},
+    "note": "calibrated against 60 official items; pattern metadata only, no question text kept"
+  },
+  "bank": {
+    "status": "coming",
+    "note": "no Step 2 CK clinical items in the bank yet; the USMLE-tagged items are basic-science style and are not mapped here"
+  },
+  "provenance": [
+    {
+      "field": "/format/questions",
+      "official": true,
+      "src": "USMLE-STEP2-CK",
+      "section": "Exam format",
+      "verified_on": "2026-10-12",
+      "note": "Total number of items does not exceed 318"
+    },
+    {
+      "field": "/format/duration_min",
+      "official": true,
+      "src": "USMLE-STEP2-CK",
+      "section": "Exam format",
+      "verified_on": "2026-10-12",
+      "note": "16 blocks of 30 minutes in an 8-hour testing time (9 hours overall)"
+    },
+    {
+      "field": "/format/sections",
+      "official": true,
+      "src": "USMLE-STEP2-CK",
+      "section": "Exam format",
+      "verified_on": "2026-10-12",
+      "note": "16 blocks of 30 minutes on or after May 7, 2026"
+    },
+    {
+      "field": "/navigation/locked_sections",
+      "official": true,
+      "src": "USMLE-STEP2-CK",
+      "section": "Exam rules",
+      "verified_on": "2026-10-12",
+      "note": "Each block is timed individually"
+    },
+    {
+      "field": "/navigation/return_to_closed_section",
+      "official": true,
+      "src": "USMLE-STEP2-CK",
+      "section": "Exam rules",
+      "verified_on": "2026-10-12",
+      "note": "Cannot return to previously completed or expired blocks"
+    },
+    {
+      "field": "/navigation/early_section_submit",
+      "official": true,
+      "src": "USMLE-STEP2-CK",
+      "section": "Exam rules",
+      "verified_on": "2026-10-12",
+      "note": "Finishing a block early adds unused time to break time"
+    },
+    {
+      "field": "/scoring/correct",
+      "official": false,
+      "src": null,
+      "section": null,
+      "verified_on": "2026-10-12",
+      "note": "Number of correct items assumed before 3-digit score scale conversion"
+    },
+    {
+      "field": "/scoring/incorrect",
+      "official": true,
+      "src": "USMLE-STEP2-CK",
+      "section": "Scoring",
+      "verified_on": "2026-10-12",
+      "note": "No negative marking; no points deducted for wrong answers"
+    },
+    {
+      "field": "/scoring/unanswered",
+      "official": true,
+      "src": "USMLE-STEP2-CK",
+      "section": "Scoring",
+      "verified_on": "2026-10-12",
+      "note": "Zero credit for unanswered questions"
+    },
+    {
+      "field": "/blueprint/kind",
+      "official": false,
+      "src": null,
+      "section": null,
+      "verified_on": "2026-10-12",
+      "note": "Content outline percentage ranges not modelled as fixed question counts"
+    }
+  ]
+}

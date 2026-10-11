@@ -268,7 +268,7 @@
   function title() {
     var c = S.ctx;
     if (c.kind === "mcq") { var a = keyOf(c.item), ch = chosenOf(c); return ch >= 0 && ch !== a ? "Why is " + L(ch) + " wrong?" : "Why is " + L(a) + " right?"; }
-    if (c.kind === "card") return "Explain this card another way.";
+    if (c.kind === "card") return c.ask || "Explain this card another way.";
     return "Explain this step another way.";
   }
   var CHEV = '<svg class="pa-chev" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
@@ -532,7 +532,7 @@
   function open(ctx, host) {
     if (!ctx || !host || !host.root || !host.root()) return false;
     close(true);
-    if (ctx.kind === "card") ctx = { kind: "card", step: { tx: String(ctx.fr || "") + "\n" + String(ctx.bk || "") }, title: ctx.title || "Card" };
+    if (ctx.kind === "card") ctx = { kind: "card", step: { tx: String(ctx.fr || "") + "\n" + String(ctx.bk || "") }, title: ctx.title || "Card", ask: ctx.ask || null };
     var ready = packReady(), pf = pref(host), th = threadFor(ctx);
     S = { ctx: ctx, host: host, prev: D.activeElement, vd: null, ready: ready, sel: firstChoice(pf, ready), dont: !!(pf && pf.q), view: "choose", mode: null, phase: "", token: ++seq, consented: false, th: th, draft: "", scroll: true, reveal: -1, cxOpen: false };
     var w = D.createElement("div");

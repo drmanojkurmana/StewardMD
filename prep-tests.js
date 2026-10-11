@@ -130,22 +130,22 @@
       if (u.missing === u.items.length) { H.toast("The questions of this test did not load. Check the connection and try again."); return H.rerender(); }
       if (u.missing) H.toast(u.missing + (u.missing === 1 ? " question was" : " questions were") + " withdrawn since; " + (u.missing === 1 ? "it is" : "they are") + " left out of the marks.");
       var p = A.profile(pk.t2.exam);
-      H.run(u.items, pk.mode, pk.title, { t2: pk.t2, sections: pk.t2.sections, limit: pk.limit || 0, scheme: p ? A.scheme(p) : null, resume: { i: pk.i, ans: pk.ans, mark: pk.mark, ms: pk.ms, changed: pk.changed, t0: pk.t0, sc: pk.sc, phase: pk.phase } });
+      H.run(u.items, pk.mode, pk.title, { t2: pk.t2, sections: pk.t2.sections, limit: pk.limit || 0, scheme: p ? A.scheme(p) : null, resume: { i: pk.i, ans: pk.ans, mark: pk.mark, ms: pk.ms, changed: pk.changed, conf: pk.conf, pair: pk.pair, t0: pk.t0, sc: pk.sc, phase: pk.phase } });
     });
   }
 
   /* ---------- the Tests segment ---------- */
   function examShape(p) {
     var f = p.format, secs = f.sections, n1 = secs[0], parts = f.parts;
-    if (p.id === "usmle-step1") return "Blocks of up to " + f.block_max_items + " questions, " + n1.minutes + " min each; the full exam has " + secs.length + " blocks";
-    if (parts) return f.questions + " questions in " + parts + " parts of " + (f.questions / parts) + ", each in " + (secs.length / parts) + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min";
+    if (p.id === "usmle-step1" || p.id === "usmle-step2-ck") return "Blocks of up to " + f.block_max_items + " questions, " + n1.minutes + " min each; the full exam has " + secs.length + " blocks";
+    if (parts) { var per = secs.length / parts; return f.questions + " questions in " + parts + " parts of " + (f.questions / parts) + (per > 1 ? ", each in " + per + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min" : ", each one locked section of " + n1.questions + " questions and " + n1.minutes + " min"); }
     if (secs.length > 1) return f.questions + " questions in " + secs.length + " locked sections of " + n1.questions + " questions and " + n1.minutes + " min";
     return f.questions + " questions, " + mins(f.duration_min * 60);
   }
   function examPass(p) { return p.scoring.pass ? " " + (p.scoring.pass.label || "Pass mark") + " " + p.scoring.pass.marks + " of " + p.scoring.pass.of + "." : ""; }
-  function examInfoHtml(p) {
+  function examInfoHtml(p, coming) {
     return '<p class="pn-mut pn-small">' + esc(examShape(p)) + ". " + esc(marking(p)) + "." + esc(examPass(p)) + "</p>" +
-      '<p class="pn-mut pn-small pn-t2src">' + esc(srcLine(p)) + (p.blueprint.kind === "official_counts" ? " Subject quotas from the official blueprint." : " No official subject split: questions are spread across the subjects in proportion to the bank.") + "</p>";
+      '<p class="pn-mut pn-small pn-t2src">' + esc(srcLine(p)) + (coming ? "" : (p.blueprint.kind === "official_counts" ? " Subject quotas from the official blueprint." : " No official subject split: questions are spread across the subjects in proportion to the bank.")) + "</p>";
   }
   function covKnown() { try { var v = P.cov[tab()]; return typeof v === "number" ? v : null; } catch (e) { return null; } }
   function engineBtn(p, type, b, label, pri) {
@@ -293,7 +293,16 @@
       return '<button type="button" class="pn-chip pn-t2j" data-act="t2-jump" data-p="' + p.id + '" data-f="' + f + '" aria-label="Jump to ' + esc(grpName(f)) + '">' + esc(grpShort(f)) + "</button>";
     }).join("") + "</div></div>";
   }
+  // Format-only exam: the official format is shown, but no test types, counts or buttons: the bank holds
+  // no questions for it yet. PLAB 1, AMC, MCCQE and USMLE Step 2 CK until their banks exist.
+  function comingSection(p) {
+    var prov = p.status !== "official";
+    return '<section class="pn-t2exam" data-p="' + p.id + '" aria-label="' + esc(p.name) + ' format">' +
+      '<h2 class="pn-t2xh"><span class="pn-t2xt"><b>' + esc(p.name) + '</b><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Official format") + "</span></span></h2>" +
+      '<div class="pn-t2xinfo">' + examInfoHtml(p, true) + '<p class="pn-mut"><b>Format available, question bank coming.</b> ' + esc((p.bank && p.bank.note) || "No questions for this exam in the bank yet.") + "</p></div></section>";
+  }
   function examSection(p, primaryId, st) {
+    if (A.bankStatus(p) === "coming") return comingSection(p);
     var open = examIsOpen(st, p.id, primaryId), c = examCounts(p), prov = p.status !== "official";
     var xid = "pnT2X-" + p.id;
     var inner = '<div class="pn-t2xinfo">' + examInfoHtml(p) + "</div>" + jumpBar(p) + GRP_ORDER.map(function (f) { return groupSection(p, f, primaryId, st); }).join("");
@@ -496,10 +505,13 @@
     var list = A.forTab(tab()), p0 = primary();
     if (!p0) return '<p class="pn-empty">No exam profile for this exam yet.</p>';
     var st = loadGrp(), ordered = examOrder(list, p0.id);
+    var more = A.profileIds().map(A.profile).filter(function (p) { return p && A.bankStatus(p) === "coming" && list.indexOf(p) < 0; });
     P.grpQ = {};
     return '<div id="pnT2Res">' + (P.sess && P.sess.t2 && !P.sess.done ? resumeHtml(P.sess) : "") + "</div>" +
+      (H.coachSec ? H.coachSec("tests") : "") +
       '<p class="pn-mut pn-small">The same ready-made papers for every student, grouped by exam and format. Your exam is on top.</p>' +
-      ordered.map(function (p) { return examSection(p, p0.id, st); }).join("") + globalPracticeHtml() +
+      ordered.map(function (p) { return examSection(p, p0.id, st); }).join("") +
+      (more.length ? '<h2 class="pn-h">More exam formats</h2>' + more.map(comingSection).join("") : "") + globalPracticeHtml() +
       '<p class="pn-mut pn-small" id="pnT2Note">Every test shows its size, time and scope before it starts. When the bank cannot fill a blueprint the test is shortened and says why; it is never padded with unrelated questions. Results use the exam\'s marking only: no rank, percentile or predicted score.</p>';
   }
   // After paint: the saved session, the fixed papers, then coverage (subject indexes) hides tests the bank cannot fill.
@@ -621,6 +633,7 @@
   function shuffleR(a, R) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(R() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
   function prepare(pid, type, sid, mid, extra) {
     var p = A.profile(pid); if (!p) return;
+    if (A.bankStatus(p) === "coming") { H.toast("Format available, question bank coming: no " + p.name + " questions in the bank yet."); return; }
     var dailyKind = type === "daily10" ? "daily10" : type === "daily_mixed" ? "daily_mixed" : null;
     var seed = dailyKind ? A.dailyKey(p.id, Date.now(), dailyKind) : String(Date.now()) + Math.random(), R = A.rng(seed + ":files");
     var opts = { seed: seed, hidden: H.hidden(), recent: dailyKind ? null : seenMap() };   // daily: the same set all day, seen or not
@@ -750,12 +763,13 @@
   function statsChoice() { try { return G.localStorage.getItem(STATS); } catch (e) { return "0"; } }
   function sendStats(rec) {
     if (statsChoice() !== "1" || !rec || !G.fetch) return;
-    var rows = rec.items.map(function (x) { return [x.item_id, x.chosen == null ? null : x.correct ? 1 : 0, Math.min(3600, Math.round((x.ms || 0) / 1000)), x.chosen == null ? -1 : x.chosen]; });
+    // KnowYourIQ: the confidence tag id only (guessing/confident/confused), never any text.
+    var rows = rec.items.map(function (x) { return [x.item_id, x.chosen == null ? null : x.correct ? 1 : 0, Math.min(3600, Math.round((x.ms || 0) / 1000)), x.chosen == null ? -1 : x.chosen, A.cleanConf(x.conf)]; });
     try { G.fetch((G.SMD_PREP_STATS_API || "/api/prep/stats"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ v: 1, exam: rec.exam, type: rec.test_type, items: rows }), keepalive: rows.length <= 60, credentials: "omit" }).then(null, function () {}); } catch (e) {}
   }
   function statsAsk() {
     if (statsChoice() != null) return "";
-    return '<section class="pn-panel pn-t2ask" aria-labelledby="pnT2AskH"><h2 class="pn-sec" id="pnT2AskH">Help improve the questions?</h2><p class="pn-mut pn-small">Share anonymous answer statistics from your tests: the question number, right or wrong, the time taken and the option chosen. Nothing that identifies you is sent. They are used only to flag questions for review, never to change or remove them by themselves. You can change this in the Tests tab.</p>' +
+    return '<section class="pn-panel pn-t2ask" aria-labelledby="pnT2AskH"><h2 class="pn-sec" id="pnT2AskH">Help improve the questions?</h2><p class="pn-mut pn-small">Share anonymous answer statistics from your tests: the question number, right or wrong, the time taken, the option chosen and your confidence tag (guessing, confident or confused). Nothing that identifies you is sent. They are used only to flag questions for review, never to change or remove them by themselves. You can change this in the Tests tab.</p>' +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="t2-stats" data-v="0">No thanks</button><button type="button" class="pn-btn pri" data-act="t2-stats" data-v="1">Share</button></div></section>';
   }
 
@@ -769,11 +783,11 @@
     var secs = t.sections ? t.sections.map(function (s) { var from = 0, to = 0; keep.forEach(function (i, j) { if (i < s.from) from = j + 1; if (i < s.to) to = j + 1; }); return { id: s.id, label: s.label, from: from, to: to, sec: s.sec }; }) : null;
     var timedOut = r.sc ? r.sc.why.some(function (w) { return w === "timeout" || w === "away" || w === "clock"; }) : r.limit && (Date.now() - r.t0) / 1000 >= r.limit - 1;
     var rec = A.result({ attempt_id: t.attempt_id, idempotency_key: t.idem || undefined, test_type: t.type, blueprint: t.blueprint, started: t.started, finished: Date.now(), state: timedOut ? "auto_submitted_timeout" : "submitted",
-      items: items, ans: ans, mark: keep.map(function (i) { return !!r.mark[i]; }), ms: keep.map(function (i) { return (r.ms || [])[i] || 0; }), changed: keep.map(function (i) { return (r.changed || [])[i] || 0; }), sections: secs, asm: { planned: t.asm.planned, actual: t.asm.actual, deviations: t.asm.deviations } }, p, { subjectName: subjectName, topicName: topicName });
+      items: items, ans: ans, mark: keep.map(function (i) { return !!r.mark[i]; }), ms: keep.map(function (i) { return (r.ms || [])[i] || 0; }), changed: keep.map(function (i) { return (r.changed || [])[i] || 0; }), conf: keep.map(function (i) { return (r.conf || [])[i] || null; }), pair: keep.map(function (i) { return (r.confPair || [])[i] || null; }), sections: secs, asm: { planned: t.asm.planned, actual: t.asm.actual, deviations: t.asm.deviations } }, p, { subjectName: subjectName, topicName: topicName });
     if (r.sc) rec.by_section.forEach(function (b) { var k = -1; t.sections.forEach(function (s, j) { if (s.id === b.key) k = j; }); if (k >= 0) { b.used_ms = Math.round(r.sc.used[k]); b.allowed_ms = r.sc.lim[k]; b.ended = r.sc.why[k] || "submitted"; } });
     r.t2.rec = rec;
     var s = store(), now = Date.now();
-    s.t2h = s.t2h.concat([{ attempt_id: rec.attempt_id, exam: rec.exam, type: rec.test_type, pv: rec.profile_version, paper: t.paper || null, ts: now, raw: rec.score.raw, max: rec.score.max, correct: rec.score.correct, incorrect: rec.score.incorrect, unanswered: rec.score.unanswered, n: items.length, secs: rec.by_section.map(function (b) { return [b.key, b.raw]; }) }]).slice(-30);
+    s.t2h = s.t2h.concat([{ attempt_id: rec.attempt_id, exam: rec.exam, type: rec.test_type, pv: rec.profile_version, paper: t.paper || null, ts: now, raw: rec.score.raw, max: rec.score.max, correct: rec.score.correct, incorrect: rec.score.incorrect, unanswered: rec.score.unanswered, n: items.length, cf: confCounts(rec.items), secs: rec.by_section.map(function (b) { return [b.key, b.raw]; }) }]).slice(-30);
     if (t.idem) { var dc = A.dailyComplete(s.t2d, t.idem, { ts: now, attempt_id: rec.attempt_id, raw: rec.score.raw, max: rec.score.max, correct: rec.score.correct, n: items.length }); r.t2.dailyFresh = dc.fresh; A.dailyPrune(s.t2d, now, 60); }
     H.save();
     H.cachePut(REC_KEY + rec.attempt_id, rec);
@@ -781,6 +795,36 @@
     clearSess();
   }
   function pct(x) { return x == null ? "-" : Math.round(x * 100) + "%"; }
+  /* KnowYourIQ capture: compact chip counts for a t2h row, from the attempt record's items. */
+  function confCounts(items) {
+    var c = { guessing: 0, confident: 0, confused: 0 };
+    (items || []).forEach(function (x) { var v = A.cleanConf(x && x.conf); if (v) c[v]++; });
+    return c;
+  }
+  /* Review-time tag on a flagged question (Solutions tab): toggles the chip, writes it back to the stored attempt
+     record (IndexedDB t2r) and to the study history (the t2h row's counts, the module tally and the coach
+     aggregate via reconf), then repaints. A complement for chips skipped during the run. */
+  function tagConf(b) {
+    var r = H.run_ ? H.run_() : null;
+    if (!r || !r.t2 || !r.t2.rec) return;
+    var i = Number(b.getAttribute("data-i")), v = A.cleanConf(b.getAttribute("data-v"));
+    if (!(i >= 0) || !r.mark[i] || (r.items[i] || {})._gone) return;
+    r.conf = r.conf || [];
+    var old = A.cleanConf(r.conf[i]), nv = old === v || !v ? null : v;
+    r.conf[i] = nv;
+    var rec = r.t2.rec;
+    if (rec.items[i]) { if (nv) rec.items[i].conf = nv; else delete rec.items[i].conf; }
+    H.cachePut(REC_KEY + rec.attempt_id, rec);
+    try {
+      var s = store(), it = r.items[i], mid = it && (it._m || it.t), mm = mid && s.mod[mid];
+      if (mm) { mm.cf = mm.cf || { guessing: 0, confident: 0, confused: 0 }; if (old && mm.cf[old] > 0) mm.cf[old]--; if (nv) mm.cf[nv] = (mm.cf[nv] || 0) + 1; }
+      var CO = G.PREP_COACH, corr = rec.items[i] ? rec.items[i].correct : null;
+      if (CO && corr != null && it && it._s && mid) { if (!s.coach_t) s.coach_t = {}; CO.reconf(s.coach_t, CO.topicKey(it._s, mid), corr, old, nv); }
+      s.t2h.forEach(function (x) { if (x.attempt_id === rec.attempt_id) x.cf = confCounts(rec.items); });
+      H.save();
+    } catch (e) {}
+    H.rerender();
+  }
 
   /* ---------- richer results (Tests 2 ON): Analysis / Graphs / Solutions tabs ----------
      Honesty: counts, accuracy labelled "practice mastery", per-question outcomes and the student's own earlier
@@ -980,7 +1024,7 @@
         '<ul class="t2dist">' + Object.keys(rec.distribution.actual).map(function (k) { return "<li><span>" + esc(subjectName(k)) + "</span><span>" + rec.distribution.actual[k] + (rec.distribution.planned[k] != null && rec.distribution.planned[k] !== rec.distribution.actual[k] ? " of " + rec.distribution.planned[k] + " planned" : "") + "</span></li>"; }).join("") + "</ul></details>";
       panel = '<div role="tabpanel" id="t2p-analysis" aria-labelledby="t2tab-analysis" tabindex="0">' +
         (small ? "" : '<h3 class="t2h">Patterns</h3>' + r2patterns(rec)) +
-        '<h3 class="t2h">Knowledge gaps</h3>' + r2gaps(r, rec, p.id) + r2pearls(r) +
+        '<h3 class="t2h">Knowledge gaps</h3>' + r2gaps(r, rec, p.id) + r2pearls(r) + (H.coachResult ? H.coachResult(r) : "") +
         (G.PREP_ASK ? '<button type="button" class="t2btn pri t2ask" data-act="ask-sum">Ask MaiK about this result</button><p class="t2note">MaiK answers from this result on your phone, or online with your say-so.</p>' : "") +
         tr + how + statsAsk() + "</div>";
     }
@@ -994,6 +1038,7 @@
     if (a === "t2-tab") { var rt = H.run_(); if (rt && rt.t2) r2setTab(rt, b.getAttribute("data-v")); return; }
     if (a === "t2-sol") { var rs = H.run_(); if (rs && rs.t2) { rs.t2.solf = b.getAttribute("data-v"); H.rerender(); try { var fb = H.root().querySelector('[data-act=t2-sol][data-v="' + rs.t2.solf + '"]'); if (fb) fb.focus({ preventScroll: true }); } catch (e) {} } return; }
     if (a === "t2-goto") { var rg = H.run_(); if (rg && rg.t2) { rg.t2.tab = "solutions"; rg.t2.solf = "all"; try { G.location.hash = "tab=solutions"; } catch (e) {} H.rerender(); try { var el = H.root().querySelector("#t2q" + b.getAttribute("data-i")); if (el) { el.setAttribute("open", ""); el.scrollIntoView(); } } catch (e) {} } return; }
+    if (a === "t2-conftag") return tagConf(b);
     if (a === "t2-pre") return prepare(pid, k, b.getAttribute("data-s"), b.getAttribute("data-m"));
     if (a === "t2-fixed") return prepareFixed(b.getAttribute("data-fx"));
     if (a === "t2-go") return go();

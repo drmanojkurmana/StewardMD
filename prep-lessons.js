@@ -276,7 +276,7 @@
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
     swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
-    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair };
+    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -834,8 +834,16 @@
     };
     host.push(view);
   }
+  /* startPage(les, step, saved) -> the page to open: an explicit step (a link into the lesson) wins when it
+     names a real page, else the saved place. */
+  function startPage(les, step, saved) {
+    var n = pages(les).length, s = parseInt(step, 10);
+    if (isFinite(s) && s >= 0 && s < n) return s;
+    return saved;
+  }
   /* open(sid, mid, h, key): key defaults to the module's own lesson. */
   // fromStart: a shared lesson ID opens at the first step, whatever this phone's saved place.
+  // L.jumpStep: a link into the lesson (data-step) opens at that step; act() sets it, open() consumes it.
   function open(sid, mid, h, key, fromStart) {
     host = h;
     key = key || mid;
@@ -843,11 +851,12 @@
     var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
+    var jump = L.jumpStep; L.jumpStep = null;   // a second tap while loading carries its own step
     host.push(loading);
     lessonFile(key).then(function (les) {
       if (host.stackTop() !== loading) return;   // left while loading
       var s = store(), p = s.ls[key];
-      L.les = les; L.i = !fromStart && p && !p.done && p.i < pages(les).length ? p.i : 0; L.dir = 0;
+      L.les = les; L.i = startPage(les, jump, !fromStart && p && !p.done && p.i < pages(les).length ? p.i : 0); L.dir = 0;
       save(); warm(les);
       var stk = host.stack(); stk[stk.length - 1] = view;
       draw();
@@ -859,7 +868,7 @@
   function act(a, b, h) {
     host = h;
     if (a === "l-subject") return openSubject(b.getAttribute("data-s"), h);
-    if (a === "l-open") { if (L.loading && host.stackTop() === L.loading) host.stack().pop(); return open(b.getAttribute("data-s"), b.getAttribute("data-m"), h, b.getAttribute("data-l") || ""); }
+    if (a === "l-open") { if (L.loading && host.stackTop() === L.loading) host.stack().pop(); L.jumpStep = b.getAttribute("data-step") || null; return open(b.getAttribute("data-s"), b.getAttribute("data-m"), h, b.getAttribute("data-l") || ""); }
     if (a === "l-more") {
       var mm = b.getAttribute("data-m"), slot = b.closest && b.closest("#pnLsnSlot");
       L.more[mm] = 1;

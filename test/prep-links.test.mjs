@@ -6,7 +6,8 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { norm, leadIn, leadSec, normKbId, kbDocs, phrases, drugPhrases, matcher, scan, linkItem, expText, dictionaries,
-  confirmRequests, build, reportText, SHOW, CONFIRM_SCHEMA } from "../tools/prep-links.mjs";
+  confirmRequests, build, reportText, SHOW, MAX, CONFIRM_SCHEMA, kbBridge, pickKbLesson, matchChapter, sigWords,
+  addTopicLinks } from "../tools/prep-links.mjs";
 import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const D = dictionaries();
@@ -111,4 +112,38 @@ test("build: one synthetic module links, reports and shards without question tex
     assert.ok(b.sidecar.length === 2 && b.sidecar[0].provenance && b.sidecar[0].links.kb_ids.length, "the sidecar keeps every candidate");
     assert.match(reportText(b.report), /2 of 2 usable items/);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("topic links: the KB bridge stays in-subject, chapters match strictly, lessons cap at two", () => {
+  const bridge = kbBridge(new Map([["m1", new Set(["a"])], ["m2", new Set(["a", "b", "c"])]]));
+  assert.equal(pickKbLesson("a", "m1", "s", bridge, new Map([["m1", "s"]])), "m1", "the module's own lesson wins");
+  assert.equal(pickKbLesson("a", "mx", "s", bridge, new Map([["m1", "s"], ["m2", "s"]])), "m1", "the most focused same-subject lesson");
+  assert.equal(pickKbLesson("a", "mx", "t", bridge, new Map([["m1", "s"], ["m2", "s"]])), null, "lessons never cross subjects");
+  assert.equal(pickKbLesson("zz", "m1", "s", bridge, new Map()), null);
+  const ch = [{ key: "c2", title: "Hepatic Adenoma Imaging" }, { key: "c1", title: "Biliary Colic" }];
+  assert.equal(matchChapter(["Hepatic adenoma"], ch), "c2");
+  assert.equal(matchChapter(["Adenoma"], ch), null, "one word never matches a chapter");
+  assert.equal(matchChapter(["Hepatic adenoma rupture"], ch), null, "every word must be in the heading");
+  assert.deepEqual(sigWords("The approach to liver masses"), ["approach", "liver", "masses"]);
+});
+
+test("addTopicLinks: own chapter at the bar, topics fill slots, one specific lesson with its step", () => {
+  const lessons = new Map([["m1", [{ key: "m1", title: "Liver Masses", own: true }, { key: "c9", title: "Hepatic Adenoma Imaging", own: false }]]]);
+  const meta = new Map([["m1", { title: "Liver Masses" }], ["c9", { title: "Hepatic Adenoma Imaging" }]]);
+  const topics = { m0: { kb: [["cataract", "Cataract"]], pr: [["blood-transfusion", "Blood transfusion"]] } };
+  const it = { q: "What is the best initial treatment?", tg: ["x"] };
+  const ls = addTopicLinks([], it, { mid: "m1", sid: "s", topics, lessons, lessonMeta: meta, bridge: new Map(), midSid: new Map(), images: new Map() });
+  assert.deepEqual(ls, [{ k: "ls", id: "m1", title: "Liver Masses", c: 75, v: "lt", sec: "" }]);
+  const kb = addTopicLinks([], it, { mid: "m0", sid: "s", topics, lessons: new Map(), lessonMeta: meta, bridge: new Map(), midSid: new Map(), images: new Map() });
+  assert.deepEqual(kb.map((l) => [l.k, l.v, l.c]), [["kb", "kt", 75], ["pr", "kt", 75]]);
+  assert.equal(kb[0].sec, "mgmt", "the topic article opens at the answering section");
+  const full = [{ k: "kb", id: "a", title: "A", c: 92, v: "k" }, { k: "kb", id: "b", title: "B", c: 80, v: "q" }];
+  addTopicLinks(full, it, { mid: "m0", sid: "s", topics, lessons: new Map(), lessonMeta: meta, bridge: new Map(), midSid: new Map(), images: new Map() });
+  assert.equal(full.filter((l) => l.k === "kb").length, MAX.kb, "topics never push past the cap");
+  const img = addTopicLinks([], { img: ["v1/x/a.webp"] }, { mid: "m1", sid: "s", topics: {}, lessons, lessonMeta: meta, bridge: new Map(), midSid: new Map(), images: new Map([["a.webp", { l: "c9", step: 2 }]]) });
+  assert.deepEqual(img.map((l) => [l.id, l.v, l.sec]), [["m1", "lt", ""], ["c9", "li", "2"]], "the chapter plus the image's step");
+  const kbL = addTopicLinks([{ k: "kb", id: "a", title: "Atheroma", c: 92, v: "k" }], it,
+    { mid: "m0", sid: "s", topics: {}, lessons: new Map(), lessonMeta: new Map([["m1", { title: "Liver Masses" }]]),
+      bridge: new Map([["a", [{ key: "m1", n: 3 }]]]), midSid: new Map([["m1", "s"]]), images: new Map() });
+  assert.deepEqual(kbL.filter((l) => l.k === "ls"), [{ k: "ls", id: "m1", title: "Liver Masses", c: 80, v: "lk", sec: "" }]);
 });

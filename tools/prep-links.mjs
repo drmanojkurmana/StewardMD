@@ -25,15 +25,22 @@
  *   +8 when the module's lesson cites that KB article (lesson src[], the existing per-module bridge)
  *   A name that is also a wrong option is a distractor, never the concept (capped at 50). Stem-only mentions without
  *   the explanation (65) and explanation-only mentions (55) are kept in the sidecar, never shown.
- * Lessons and card decks are linked per module (the existing bridge), and the app re-checks them against the live
- * lesson and card indexes before it shows them.
+ * The chapter level above it (addTopicLinks; the map is prep/bank/topic-links.json from tools/prep-links-topics.mjs):
+ *   lt the module's own lesson, every item (topic tier: "Read the lesson: <title>")                   75
+ *   kt the mapped KB/protocol topic of a module without its own lesson (topic tier)                   75
+ *   lk the lesson teaching the item's KB concept (lesson src[] bridge, same subject only)             80
+ *   li the lesson step showing the item's image (the step rides in sec)                               85
+ *   lh the book chapter under the item's concept heading (strict all-words title match)               78
+ * Card decks stay per module (mod.cd). The app re-checks lessons and decks against the live lesson and
+ * card indexes before it shows them.
  * KB ids: the Knowledge Library opens an article by its key in KB_ENRICHMENT.byId: kb/reference ids are lower case
  * (zika_virus), kb/diseases ids upper case (BRAIN_ABSCESS); lesson src[] uses "kb-reference-zika-virus". normKbId maps
  * any of these spellings to the one key that opens.
  * Index (R2 prep-bank/v1/links/, route LINKS_RE): index.json { v, ver, gen, th, n, src, m: { module: "<subject>/<hash8>" },
  * c: { subject: hash8 } } (short cache); m/<module>-<hash8>.json { v, m, s, T: [[kind, id, title]], e: { itemId:
  * [[t, conf, via, sec?]] }, x: { t: [[module, itemId]] }, mod: { ls: [lesson keys], cd: 1 } } and c/<subject>-<hash8>.json
- * { v, s, T: [[kind, id, title, nItems, [modules]]] } are immutable. No question text is published.
+ * { v, s, T: [[kind, id, title, nItems, [modules]]] } are immutable. No question text is published. kind is kb/dr/pr/ls;
+ * sec routes a KB row to its reader section and a lesson row to its step. ls rows never enter x or c/ files.
  */
 import fs from "node:fs";
 import os from "node:os";
@@ -49,7 +56,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
 export const LINKS_VER = "v1";
 export const SHOW = 75;
-export const MAX = { kb: 2, dr: 2, pr: 1 };
+export const MAX = { kb: 2, dr: 2, pr: 1, ls: 2 };
 const KINDS = ["kb", "dr", "pr"];
 
 /* ================= text ================= */
@@ -303,6 +310,95 @@ export function linkItem(it, M, ctx = {}) {
   return out;
 }
 
+/* ================= topic links ================= */
+// The chapter level above linkItem: every item in a taught topic links to its lesson or KB topic (tools/
+// prep-links-topics.mjs maps each module once; prep/bank/topic-links.json). Tiers: "specific" (the item's own
+// concept: k/q/s/h/a and lk/li/lh below) and "topic" (the chapter on the module's topic: lt/kt, shown as
+// "Read the lesson: <title>" / the topic article). MAX caps each kind across both tiers.
+/* kbBridge(lessonKb) -> Map(kbId -> [{ key, n }]): the own lessons whose src[] cites each KB article. */
+export function kbBridge(lessonKb) {
+  const out = new Map();
+  for (const [key, set] of lessonKb) for (const id of set) {
+    if (!out.has(id)) out.set(id, []);
+    out.get(id).push({ key, n: set.size });
+  }
+  return out;
+}
+const CH_STOP = new Set("of the and with for from into".split(" "));
+export function sigWords(s) { return words(s).filter((x) => x.length >= 4 && !CH_STOP.has(x)); }
+/* matchChapter(texts, chapters) -> the first chapter (by key) whose title holds every significant word of one text
+   (texts: KB titles, item tags; chapters: [{ key, title }]). Strict all-words containment, 2+ words. */
+export function matchChapter(texts, chapters) {
+  const ch = chapters.map((c) => ({ key: c.key, w: new Set(sigWords(c.title)) })).sort((a, b) => (a.key < b.key ? -1 : 1));
+  for (const t of texts) {
+    const tw = sigWords(t);
+    if (tw.length < 2) continue;
+    const hit = ch.find((c) => tw.every((x) => c.w.has(x)));
+    if (hit) return hit.key;
+  }
+  return null;
+}
+/* pickKbLesson(kbId, mid, sid, bridge, midSid) -> the own-module lesson citing kbId, else the most focused
+   same-subject one, else null. Lessons never cross subjects. */
+export function pickKbLesson(kbId, mid, sid, bridge, midSid) {
+  const cands = bridge.get(kbId) || [];
+  if (!cands.length) return null;
+  const own = cands.find((c) => c.key === mid);
+  if (own) return own.key;
+  const same = cands.filter((c) => (midSid.get(c.key) || null) === sid).sort((a, b) => a.n - b.n || (a.key < b.key ? -1 : 1));
+  return same.length ? same[0].key : null;
+}
+/* addTopicLinks(links, it, ctx) -> links (mutated). ctx: { mid, sid, topics, lessons, bridge, midSid, images }.
+   lessons: Map(mid -> [{ key, title, own }]). images: Map(basename -> { l, step }). */
+export function addTopicLinks(links, it, ctx = {}) {
+  const mid = ctx.mid || "", sid = ctx.sid || null;
+  const L = ctx.lessons ? ctx.lessons.get(mid) || [] : [];
+  const has = new Set(links.map((l) => l.k + ":" + l.id));
+  const count = (k) => links.filter((l) => l.k === k).length;
+  // The module's own lesson: every item reads its chapter (topic tier, confidence at the bar).
+  const own = L.find((l) => l.own && l.title);
+  if (own && !has.has("ls:" + own.key)) { links.push({ k: "ls", id: own.key, title: own.title, c: 75, v: "lt", sec: "" }); has.add("ls:" + own.key); }
+  // Mapped KB/protocol topics fill the kinds' remaining slots (topic tier, routed to the answering section).
+  const entry = ctx.topics && ctx.topics[mid];
+  if (entry) {
+    const sec = leadSec(it.q || "");
+    for (const [id, title] of entry.kb || []) if (count("kb") < MAX.kb && !has.has("kb:" + id)) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
+    for (const [id, title] of entry.pr || []) if (count("pr") < MAX.pr && !has.has("pr:" + id)) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
+  }
+  // Specific lesson refinement (at most one besides the module's own): the step showing the item's image wins,
+  // then the lesson teaching the item's KB concept, then the book chapter under the concept's heading.
+  if (count("ls") < MAX.ls) {
+    const paths = it.img ? (Array.isArray(it.img) ? it.img : [it.img]) : [];
+    let pick = null, sec = "";
+    for (const q of paths) {
+      const m = ctx.images && ctx.images.get(String(q).split("?")[0].split("/").pop().toLowerCase());
+      if (m && m.l && !has.has("ls:" + m.l)) { pick = m.l; sec = String(m.step); break; }
+    }
+    let via = "li";
+    if (!pick && ctx.bridge) {
+      for (const l of links) {
+        if (l.k !== "kb" || l.c < SHOW || l.v === "kt") continue;
+        const k = pickKbLesson(l.id, mid, sid, ctx.bridge, ctx.midSid || new Map());
+        if (k && !has.has("ls:" + k)) { pick = k; via = "lk"; break; }
+      }
+    }
+    if (!pick) {
+      const chapters = L.filter((l) => !l.own && l.title);
+      if (chapters.length) {
+        const texts = links.filter((l) => l.k === "kb" && l.c >= SHOW && l.v !== "kt").map((l) => l.title)
+          .concat((it.tg || []).filter((t) => typeof t === "string"));
+        const c = matchChapter(texts, chapters);
+        if (c && !has.has("ls:" + c)) { pick = c; via = "lh"; }
+      }
+    }
+    if (pick) {
+      const meta = (ctx.lessonMeta && ctx.lessonMeta.get(pick)) || {};
+      links.push({ k: "ls", id: pick, title: meta.title || pick.replace(/-/g, " "), c: via === "li" ? 85 : via === "lk" ? 80 : 78, v: via, sec });
+    }
+  }
+  return links;
+}
+
 /* ================= corpus ================= */
 function readJ(p) { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return null; } }
 async function getJSON(url) {
@@ -425,17 +521,29 @@ export function build({ cache, bank, confirmed = null, log = () => {} }) {
   const les = (readJ(path.join(cache, "lessons-index.json")) || {}).modules || {};
   const cards = (readJ(path.join(cache, "cards-index.json")) || {}).modules || {};
   const lessonsOf = new Map();
-  for (const [k, e] of Object.entries(les)) { const mid = (e && e.module) || k; if (!lessonsOf.has(mid)) lessonsOf.set(mid, []); lessonsOf.get(mid).push(k); }
+  for (const [k, e] of Object.entries(les)) {
+    const mid = (e && e.module) || k;
+    if (!lessonsOf.has(mid)) lessonsOf.set(mid, []);
+    lessonsOf.get(mid).push({ key: k, title: (e && e.title) || "", own: k === mid });
+  }
+  for (const l of lessonsOf.values()) l.sort((a, b) => (b.own - a.own) || (a.key < b.key ? -1 : 1));
+  const lessonMeta = new Map(Object.entries(les).map(([k, e]) => [k, { title: (e && e.title) || "" }]));
+  const topicsDoc = readJ(path.join(ROOT, "prep/bank/topic-links.json")) || {};
+  const topics = topicsDoc.modules || {};
+  const images = new Map(Object.entries(topicsDoc.images || {}));
+  const bridge = kbBridge(lessonKb);
   // Pass 1: how many stems name each phrase (background names are discounted).
   const df = new Map(); let n = 0;
-  for (const { it } of items({ cache, bank })) {
+  const midSid = new Map();
+  for (const { it, sid, mid } of items({ cache, bank })) {
     if (!usableItem(it)) continue;
     n++;
+    if (sid && !midSid.has(mid)) midSid.set(mid, sid);
     for (const k of KINDS) for (const p of scan(D.M[k], it.q)) df.set(p.key, (df.get(p.key) || 0) + 1);
   }
   log(`pass 1: ${n} usable items`);
   // Pass 2: link.
-  const byMod = new Map(), sidecar = [], rep = { items: 0, linked: 0, links: 0, bySubject: {}, byKind: { kb: 0, dr: 0, pr: 0 }, byVia: {}, candidates: 0, low: 0, ver: "" };
+  const byMod = new Map(), sidecar = [], rep = { items: 0, linked: 0, links: 0, bySubject: {}, byKind: { kb: 0, dr: 0, pr: 0, ls: 0 }, byVia: {}, candidates: 0, low: 0, ver: "" };
   const ver = new Date().toISOString().slice(0, 10) + "." + D.src.kb.slice(0, 6);
   for (const { it, sid, mid } of items({ cache, bank })) {
     if (!usableItem(it)) continue;
@@ -447,6 +555,7 @@ export function build({ cache, bank, confirmed = null, log = () => {} }) {
       if (v === true && l.v[0] === "s" && l.c < SHOW) { l.c = 80; l.v = "h"; }
       else if (v === false && l.c >= SHOW && l.v !== "a") l.c = SHOW - 1;   // an audited link the checker rejects is withdrawn
     }
+    addTopicLinks(links, it, { mid, sid, topics, lessons: lessonsOf, lessonMeta, bridge, midSid, images });
     const shown = links.filter((l) => l.c >= SHOW);
     rep.items++;
     const bs = rep.bySubject[sid || "?"] || (rep.bySubject[sid || "?"] = { items: 0, linked: 0 });
@@ -456,7 +565,7 @@ export function build({ cache, bank, confirmed = null, log = () => {} }) {
     if (shown.length) { rep.linked++; bs.linked++; }
     for (const l of shown) { rep.links++; rep.byKind[l.k]++; rep.byVia[l.v] = (rep.byVia[l.v] || 0) + 1; }
     if (links.length) sidecar.push({ item_id: String(it.id), concept_id: shown[0] ? shown[0].k + ":" + shown[0].id : null, subject: sid, topic: mid,
-      links: { kb_ids: links.filter((l) => l.k === "kb").map((l) => [l.id, l.c, l.v]), drug_ids: links.filter((l) => l.k === "dr").map((l) => [l.id, l.c, l.v]), protocol_ids: links.filter((l) => l.k === "pr").map((l) => [l.id, l.c, l.v]), lesson_ids: lessonsOf.get(mid) || [], card_ids: cards[mid] ? [mid] : [] },
+      links: { kb_ids: links.filter((l) => l.k === "kb").map((l) => [l.id, l.c, l.v]), drug_ids: links.filter((l) => l.k === "dr").map((l) => [l.id, l.c, l.v]), protocol_ids: links.filter((l) => l.k === "pr").map((l) => [l.id, l.c, l.v]), lesson_ids: (lessonsOf.get(mid) || []).map((l) => l.key), lesson_links: links.filter((l) => l.k === "ls").map((l) => [l.id, l.c, l.v].concat(l.sec ? [l.sec] : [])), card_ids: cards[mid] ? [mid] : [] },
       provenance: { method: links.some((l) => l.v === "a") ? "human" : links.some((l) => l.v === "h") ? "llm_mapped" : "exact_key", score: shown[0] ? shown[0].c / 100 : null, model: links.some((l) => l.v === "h") ? "claude-haiku-5-5" : null, at: new Date().toISOString(), version: ver } });
     if (!shown.length) continue;
     if (!byMod.has(mid)) byMod.set(mid, { sid, e: [] });
@@ -465,6 +574,7 @@ export function build({ cache, bank, confirmed = null, log = () => {} }) {
   // Related questions across modules: per target, the strongest items elsewhere (same subject first).
   const byTarget = new Map();
   for (const [mid, m] of byMod) for (const [id, links] of m.e) for (const l of links) {
+    if (l.k === "ls") continue;   // lessons are revision rows, not question concepts
     const k = l.k + ":" + l.id;
     if (!byTarget.has(k)) byTarget.set(k, []);
     byTarget.get(k).push({ mid, sid: m.sid, id, c: l.c });
@@ -475,13 +585,14 @@ export function build({ cache, bank, confirmed = null, log = () => {} }) {
     const t = (l) => { const k = l.k + ":" + l.id; if (!tIx.has(k)) { tIx.set(k, T.length); T.push([l.k, l.id, l.title]); } return tIx.get(k); };
     for (const [id, links] of m.e) e[id] = links.map((l) => { const r = [t(l), l.c, l.v]; if (l.sec) r.push(l.sec); return r; });
     for (const [k, i] of tIx) {
+      if (T[i][0] === "ls") continue;   // lessons stay out of related questions and concept files
       const others = (byTarget.get(k) || []).filter((r) => r.mid !== mid).sort((a, b) => (b.sid === m.sid) - (a.sid === m.sid) || b.c - a.c || (a.id < b.id ? -1 : 1)).slice(0, 8);
       if (others.length) x[i] = others.map((r) => [r.mid, r.id]);
       const cs = concepts.get(m.sid) || concepts.set(m.sid, new Map()).get(m.sid);
       const T0 = T[i], ck = T0[0] + ":" + T0[1], cur = cs.get(ck) || { T: T0, n: 0, mods: new Set() };
       cur.n += m.e.filter(([, ls]) => ls.some((l) => l.k + ":" + l.id === k)).length; cur.mods.add(mid); cs.set(ck, cur);
     }
-    const mod = {}; if (lessonsOf.get(mid)) mod.ls = lessonsOf.get(mid); if (cards[mid]) mod.cd = 1;
+    const mod = {}; if (lessonsOf.get(mid)) mod.ls = lessonsOf.get(mid).map((l) => l.key); if (cards[mid]) mod.cd = 1;
     const body = JSON.stringify({ v: 1, m: mid, s: m.sid, ver, T, e, x, mod });
     const h = createHash("sha256").update(body).digest("hex").slice(0, 8);
     files.push({ rel: `m/${mid}-${h}.json`, body });
@@ -564,7 +675,7 @@ function writeOut(out, b, prevNames) {
   return changed;
 }
 export function reportText(r) {
-  const lines = [`links ${r.ver}: ${r.linked} of ${r.items} usable items (${(100 * r.linked / Math.max(1, r.items)).toFixed(1)}%) have at least one link at confidence >= ${SHOW}; ${r.links} links shown (kb ${r.byKind.kb}, drugs ${r.byKind.dr}, protocols ${r.byKind.pr}); by method ${JSON.stringify(r.byVia)}; ${r.low} weaker candidates kept out; ${r.candidates} items with a stem-only candidate (confirm stage)`];
+  const lines = [`links ${r.ver}: ${r.linked} of ${r.items} usable items (${(100 * r.linked / Math.max(1, r.items)).toFixed(1)}%) have at least one link at confidence >= ${SHOW}; ${r.links} links shown (kb ${r.byKind.kb}, drugs ${r.byKind.dr}, protocols ${r.byKind.pr}, lessons ${r.byKind.ls}); by method ${JSON.stringify(r.byVia)}; ${r.low} weaker candidates kept out; ${r.candidates} items with a stem-only candidate (confirm stage)`];
   for (const [s, x] of Object.entries(r.bySubject).sort((a, b) => b[1].items - a[1].items)) lines.push(`  ${s.padEnd(28)} ${String(x.linked).padStart(6)} / ${String(x.items).padStart(6)}  ${(100 * x.linked / Math.max(1, x.items)).toFixed(1)}%`);
   return lines.join("\n");
 }
