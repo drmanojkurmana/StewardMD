@@ -15,6 +15,7 @@ mock.module("../functions/_fbauth.js", { namedExports: { ...realAuth, verifiedCl
 
 const { onRequest } = await import("../functions/api/ai/[[path]].js");
 const C = await import("../functions/_prep-core.js");
+const GEN = await import("../functions/api/ai/_prep-generate.js");
 const { istDay } = await import("../functions/_counters.js");
 const DAY = istDay(Date.now()), MONTH = DAY.slice(0, 7);
 
@@ -464,4 +465,62 @@ test("cost cap OFF (production until 2026-11-01): MaiK Tokens are recorded and s
     assert.equal(r.status, 200, JSON.stringify(r.json)); assert.ok(r.json.usage.mt > 0); assert.equal(r.json.wallet.costCapOn, false);
   }
   assert.equal(recCount(env, "i@example.com"), 3, "each call recorded");
+});
+
+/* ---- 7-day working state + re-register (owner 2026-10-11) ---- */
+test("working state TTL is 7 days; the counted-once marker outlives it", () => {
+  assert.equal(GEN.DECK_TTL_S, 7 * 86400);
+  assert.equal(GEN.SEEN_TTL_S, 400 * 86400);
+});
+
+test("a forgotten deck re-registers: facts recreates working state and counts no new deck when the marker survives", async () => {
+  const env = envFor(); reply = () => FACTS_REPLY;
+  const deck = deckOf("rr1");
+  const facts = await startDeck(env, "rr1");
+  const kv = env.MAIK_KV.m, uid = "fb:u-a";
+  const tokK = "prep:tok:" + uid + ":" + deck, seenK = "prep:seen:" + uid + ":" + deck;
+  assert.ok(kv.has(tokK) && kv.get(seenK) === "1");
+  const dayK = "prep:decks:" + uid + ":" + DAY, monK = "prep:decks:" + uid + ":" + MONTH;
+  assert.equal(kv.get(dayK), "1"); assert.equal(kv.get(monK), "1");
+  kv.delete(tokK);   // 7 days idle: the working state expired
+  reply = () => JSON.stringify({ q: [Q_GOOD0] });
+  const mcq0 = await post(env, { op: "mcq", deckId: deck, idem: idem(), exam: "neet-pg", facts: facts.slice(0, 1) });
+  assert.equal(mcq0.status, 400); assert.equal(mcq0.json.reason, "deck-not-started");
+  reply = () => FACTS_REPLY;
+  const r = await post(env, factsBody(deck, { rereg: 1 }));
+  assert.equal(r.status, 200, JSON.stringify(r.json));
+  assert.equal(kv.get(dayK), "1", "a re-register counts no new deck"); assert.equal(kv.get(monK), "1");
+  assert.ok(kv.has(tokK), "working state recreated");
+  reply = () => JSON.stringify({ q: [Q_GOOD0] });
+  const mcq1 = await post(env, { op: "mcq", deckId: deck, idem: idem(), exam: "neet-pg", facts: facts.slice(0, 1) });
+  assert.equal(mcq1.status, 200, JSON.stringify(mcq1.json));
+});
+
+test("re-register without the marker (all state gone) counts one new deck", async () => {
+  const env = envFor(); reply = () => FACTS_REPLY;
+  const deck = deckOf("rr2");
+  await startDeck(env, "rr2");
+  const kv = env.MAIK_KV.m, uid = "fb:u-a";
+  kv.delete("prep:tok:" + uid + ":" + deck);
+  kv.delete("prep:seen:" + uid + ":" + deck);   // e.g. a namespace swap wiped everything
+  const r = await post(env, factsBody(deck));
+  assert.equal(r.status, 200);
+  assert.equal(kv.get("prep:decks:" + uid + ":" + DAY), "2");
+  assert.equal(kv.get("prep:seen:" + uid + ":" + deck), "1", "marker rewritten");
+});
+
+test("working state is read through every bound namespace: a rebinding orphans no deck", async () => {
+  const env = envFor(); reply = () => FACTS_REPLY;
+  const deck = deckOf("rr3");
+  const facts = await startDeck(env, "rr3");
+  const kv = env.MAIK_KV.m, uid = "fb:u-a", tokK = "prep:tok:" + uid + ":" + deck;
+  const old = fakeKv();   // the previous primary, still bound second
+  old.m.set(tokK, kv.get(tokK));
+  old.m.set("prep:seen:" + uid + ":" + deck, "1");
+  kv.delete(tokK);
+  env.CASES_KV = old;
+  reply = () => JSON.stringify({ q: [Q_GOOD0] });
+  const r = await post(env, { op: "mcq", deckId: deck, idem: idem(), exam: "neet-pg", facts: facts.slice(0, 1) });
+  assert.equal(r.status, 200, JSON.stringify(r.json));
+  assert.ok(kv.has(tokK), "the accepted call heals the primary");
 });

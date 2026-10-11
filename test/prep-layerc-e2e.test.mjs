@@ -5,7 +5,8 @@
  * items that passed the code gates, the blind solve and every review gate, in the 6.4 format the runner reads; the key
  * and reasons never reach the solve prompt; the deck counters come back and the cap line shows them; an idempotent
  * replay costs nothing and a lost response is recovered by resending the same idem; "10 more" sends only unused
- * facts; a 429 month-decks and a 400 deck-not-started show their plain messages and save nothing.
+ * facts; a 429 month-decks shows its plain message and saves nothing; a forgotten deck re-registers from the phone's
+ * source and goes on (counting no new deck), and only a deck with no source left ends with the plain message.
  *
  * node --test --experimental-test-module-mocks --experimental-sqlite test/prep-layerc-e2e.test.mjs
  */
@@ -287,21 +288,68 @@ test("429 month-decks: the monthly-limit message, the cap line shows the month f
   assert.equal(Object.keys(st.s.decks).length + Object.keys(st.s.items).length + Object.keys(st.s.src).length, 0);
 });
 
-test("400 deck-not-started: a deck the server never saw a facts call for cannot get questions", async () => {
-  // Another account asks for "10 more" on a deck it never started (its facts exist only on the phone).
-  const fresh = memStore();
+test("server forgot the deck (7-day working state gone): the phone re-registers from its source and the round goes on", async () => {
+  const e2 = envFor(), fresh = memStore();
   const j = newDeckJob("u-a");
-  const pre = await PC.runRound(j, { send: phone(envFor(), "tok-a").send, store: fresh, today: TODAY });
-  assert.equal(pre.ok, true);
-  const C = phone(env, "tok-c");
+  const pre = await PC.runRound(j, { send: phone(e2, "tok-a").send, store: fresh, today: TODAY });
+  assert.equal(pre.ok, true, JSON.stringify(pre));
+  const kv = e2.MAIK_KV.m, uid = "fb:u-a";
+  const tokK = "prep:tok:" + uid + ":" + j.deckId, seenK = "prep:seen:" + uid + ":" + j.deckId;
+  assert.ok(kv.has(tokK) && kv.get(seenK) === "1");
+  const dayK = "prep:decks:" + uid + ":" + istDay(Date.now()), monK = "prep:decks:" + uid + ":" + MONTH;
+  const dayBefore = kv.get(dayK), monBefore = kv.get(monK), doneBefore = fresh.s.decks[j.deckId].prog.done.slice();
+  kv.delete(tokK);   // the 7-day working state expired; the counted-once marker survives
+  const C = phone(e2, "tok-a");
   const more = moreJob(fresh, j.deckId, 2);   // 2 wanted, 2 unused facts: the first call is mcq, not facts
-  const before = vertex.length;
+  const vb = vertex.length;
   const r = await PC.runRound(more, { send: C.send, store: fresh, today: TODAY });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.deepEqual(C.log.map((x) => x.op).slice(0, 3), ["mcq", "facts", "mcq"]);
+  assert.equal(C.log[0].status, 400);
+  assert.deepEqual([C.log[0].json.error, C.log[0].json.reason], ["bad-input", "deck-not-started"]);
+  assert.ok(C.log.slice(1).every((x) => x.status === 200));
+  assert.ok(vertex.length > vb, "the re-register facts call reached the model");
+  assert.equal(kv.get(dayK), dayBefore, "a re-register counts no new deck");
+  assert.equal(kv.get(monK), monBefore);
+  assert.ok(kv.has(tokK), "working state recreated");
+  assert.deepEqual(fresh.s.decks[j.deckId].prog.done.slice().sort(), doneBefore.slice().sort(), "the re-sent chunk is not marked done twice");
+  assert.equal(Object.keys(fresh.s.facts).length, 12, "the re-sent facts dedupe by id");
+});
+
+test("another account's 10 more re-registers as its own new deck (counted once)", async () => {
+  const e3 = envFor(), fresh = memStore();
+  const j = newDeckJob("u-a");
+  assert.equal((await PC.runRound(j, { send: phone(e3, "tok-a").send, store: fresh, today: TODAY })).ok, true);
+  const C = phone(e3, "tok-c");
+  const more = moreJob(fresh, j.deckId, 2);
+  const r = await PC.runRound(more, { send: C.send, store: fresh, today: TODAY });
+  assert.equal(r.ok, true, JSON.stringify(r));
+  assert.deepEqual(C.log.map((x) => x.op).slice(0, 3), ["mcq", "facts", "mcq"]);
+  assert.equal(C.log[0].status, 400); assert.equal(C.log[1].status, 200);
+  const kv = e3.MAIK_KV.m, day = istDay(Date.now());
+  assert.equal(kv.get("prep:decks:fb:u-c:" + day), "1", "new to this account: counted");
+  assert.equal(kv.get("prep:decks:fb:u-c:" + MONTH), "1");
+  assert.equal(kv.get("prep:seen:fb:u-c:" + j.deckId), "1");
+});
+
+test("deck-not-started with no source on the phone: plain message, made questions kept for practice", async () => {
+  const e4 = envFor(), fresh = memStore();
+  const j = newDeckJob("u-a");
+  assert.equal((await PC.runRound(j, { send: phone(e4, "tok-a").send, store: fresh, today: TODAY })).ok, true);
+  e4.MAIK_KV.m.delete("prep:tok:fb:u-a:" + j.deckId);
+  const C = phone(e4, "tok-a");
+  // a restored deck: unused facts with quotes, no source sentences
+  const facts = Object.values(fresh.s.facts).map((f) => Object.assign({}, f, { quote: "Iron deficiency is the commonest cause of anaemia in Indian women of reproductive age." }));
+  const m = fresh.s.decks[j.deckId];
+  const noSrc = PC.newJob({ m, sents: [], sections: [], facts, items: Object.values(fresh.s.items), saved: true, target: 2, profile: PC.PROFILE, ctx: { doc: "abcdefabcdef", name: "Notes", exam: "neet-pg", pv: PC.PV, model: PC.MODEL } });
+  const before = vertex.length;
+  const r = await PC.runRound(noSrc, { send: C.send, store: fresh, today: TODAY });
   assert.equal(C.log.length, 1);
   assert.equal(C.log[0].status, 400); assert.deepEqual([C.log[0].json.error, C.log[0].json.reason], ["bad-input", "deck-not-started"]);
   assert.equal(r.ok, false); assert.equal(r.code, "deck-not-started"); assert.equal(r.retry, false);
-  assert.match(r.message, /no longer knows this deck/);
-  assert.equal(vertex.length, before);
+  assert.match(r.message, /gone from this phone/);
+  assert.equal(vertex.length, before, "nothing to re-register with: no model call");
+  assert.equal(Object.keys(fresh.s.items).length, 10, "made questions are kept for practice");
 });
 
 test("server error vocabulary maps to the phone's messages", () => {

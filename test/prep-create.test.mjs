@@ -652,3 +652,15 @@ test("client files: ES5 only, no em or en dash, no console logging of source tex
     assert.ok(!/console\.(log|info|warn|error)/.test(code), f + ": no console logging");
   }
 });
+
+test("re-register: an already-done chunk is re-sent first, else the first chunk", () => {
+  assert.equal(PC.reregChunk({ done: { 2: 1, 5: 1 }, order: [0, 1, 2], chunks: [{}, {}, {}] }), 2);
+  assert.equal(PC.reregChunk({ done: {}, order: [3, 4], chunks: [{}, {}] }), 3);
+  assert.equal(PC.reregChunk({ done: {}, order: [], chunks: [{}] }), 0);
+  assert.equal(PC.reregChunk({ done: {}, order: [], chunks: [] }), null);
+});
+
+test("deck-not-started message says the source is gone and the questions stay for practice", () => {
+  assert.equal(PC.MSG["deck-not-started"], "The source for this deck is gone from this phone, so no more questions can be added. What you made is safe: practise it below.");
+  assert.equal(PC.canRetry("deck-not-started"), false);
+});
