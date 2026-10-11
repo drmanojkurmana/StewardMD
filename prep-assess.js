@@ -413,6 +413,59 @@
   function ownTrend(history, rec) { return (history || []).filter(function (h) { return h.exam === rec.exam && h.test_type === rec.test_type && h.attempt_id !== rec.attempt_id; }).slice(-5); }
   function rankShown(n) { return typeof n === "number" && n >= RANK_MIN_N; }
 
+  /* ---------- richer Tests 2 results (pure; rendered by prep-tests.js resultHtml) ----------
+     streaks(items) -> { best, slip, rec_n, rec_d } from the attempt record's items[] in question order:
+     best = longest run of right answers, slip = longest run of wrong answers (a run of one counts; 0 only
+     when there is no right/wrong answer at all). A skipped question breaks both runs and is never counted.
+     Recovery: each wrong answer with a later answered question counts once in rec_d; rec_n counts those whose
+     next answered question is right. No inference is made from these runs: they describe this attempt only. */
+  function streaks(items) {
+    var seq = [];
+    (items || []).forEach(function (x) { seq.push(x ? x.correct : null); });
+    var best = 0, slip = 0, rb = 0, rs = 0, i, c;
+    for (i = 0; i < seq.length; i++) {
+      c = seq[i];
+      if (c === true) { rb++; rs = 0; if (rb > best) best = rb; }
+      else if (c === false) { rs++; rb = 0; if (rs > slip) slip = rs; }
+      else { rb = 0; rs = 0; }
+    }
+    var recN = 0, recD = 0, j;
+    for (i = 0; i < seq.length; i++) {
+      if (seq[i] !== false) continue;
+      for (j = i + 1; j < seq.length; j++) {
+        if (seq[j] === true) { recD++; recN++; break; }
+        if (seq[j] === false) { recD++; break; }
+      }
+    }
+    return { best: best, slip: slip, rec_n: recN, rec_d: recD };
+  }
+  /* summary(rec, extra) -> the compact result summary (prep/assess/schemas/summary.schema.json): counts, short
+     arrays and pattern runs, never the full items array and never rank, percentile, readiness or prediction.
+     extra: { secs (wall seconds), pace (exam seconds a question), trend (ownTrend rows) }. Arrays are capped and
+     then trimmed until the JSON is under SUMMARY_MAX_BYTES (4096). small is true under 5 questions: the results
+     screen hides the trend and the bars then and says so plainly. */
+  var SUMMARY_MAX_BYTES = 4096;
+  function summary(rec, extra) {
+    extra = extra || {};
+    var sc = (rec && rec.score) || {}, items = (rec && rec.items) || [];
+    var pat = streaks(items);
+    var subj = ((rec && rec.by_subject) || []).slice().sort(function (a, b) { return (a.correct / a.n) - (b.correct / b.n); })
+      .slice(0, 12).map(function (b) { return [b.key, b.correct, b.n]; });
+    var weak = ((rec && rec.next_actions) || []).slice(0, 3).map(function (n) { return [n.target_id, n.why]; });
+    var trend = (extra.trend || []).slice(-5).map(function (h) { return [h.ts, h.raw, h.max]; });
+    var o = { v: 1, id: rec.attempt_id, exam: rec.exam, pv: rec.profile_version, type: rec.test_type,
+      ts: Date.parse(rec.finished_at || rec.started_at) || 0, n: items.length, small: items.length < 5,
+      raw: sc.raw, max: sc.max, c: sc.correct, i: sc.incorrect, u: sc.unanswered,
+      acc: sc.accuracy, avg_ms: sc.avg_ms == null ? -1 : sc.avg_ms,
+      secs: extra.secs == null ? -1 : extra.secs, pace: extra.pace == null ? -1 : extra.pace,
+      best: pat.best, slip: pat.slip, rec: [pat.rec_n, pat.rec_d],
+      subj: subj, weak: weak, trend: trend };
+    while (JSON.stringify(o).length > SUMMARY_MAX_BYTES && (o.trend.length || o.subj.length)) {
+      if (o.trend.length) o.trend.shift(); else o.subj.pop();
+    }
+    return o;
+  }
+
   /* ---------- daily 10 ---------- */
   function dailyKey(exam, ms) { return "daily10:" + exam + ":" + istDate(ms); }
   // Completion is written once per key; a retry (or a second finish after a crash) keeps the first record.
@@ -442,7 +495,7 @@
     rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
     blueprint: blueprint, apportion: apportion, assemble: assemble, targetLevel: targetLevel,
     scNew: scNew, scLeft: scLeft, scStart: scStart, scCharge: scCharge, scResume: scResume, scClose: scClose,
-    score: score, result: result, nextActions: nextActions, ownTrend: ownTrend, rankShown: rankShown,
+    score: score, result: result, nextActions: nextActions, ownTrend: ownTrend, rankShown: rankShown, streaks: streaks, summary: summary, SUMMARY_MAX_BYTES: SUMMARY_MAX_BYTES,
     dailyKey: dailyKey, dailyComplete: dailyComplete, dailyPrune: dailyPrune, sessPack: sessPack, sessUnpack: sessUnpack };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (G) G.PREP_ASSESS = API;

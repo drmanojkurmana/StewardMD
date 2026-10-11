@@ -2032,6 +2032,51 @@
         return '<li><button type="button" class="pn-mod pn-rv-' + cls + '" data-act="reviewq" data-i="' + i + '"><span class="pn-rvq" aria-hidden="true">' + (i + 1) + '</span><span class="pn-mb"><b><span class="pn-sr">' + (i + 1) + ". </span>" + esc(it.q.length > 120 ? it.q.slice(0, 119) + "…" : it.q) + "</b><small>" + st0 + " · answer: " + esc(it.o[it.a]) + "</small></span>" + ico("chev") + "</button></li>";
       }).join("") + "</ol>" : '<p class="pn-mut">Nothing here.</p>');
   }
+  /* Tests 2 Solutions tab (prep-tests.js resultHtml calls it through HOST.t2solutions): every question under a
+     filter (All, Correct, Incorrect, Skipped, Unseen), one expandable card each with the stored reasoning
+     explanation and any image. Unseen = never answered and no time recorded, or a withdrawn placeholder. */
+  function t2solStatus(r, i) {
+    var it = r.items[i];
+    if (it._gone) return "unseen";
+    var a = r.ans[i];
+    if (a >= 0) return a === it.a ? "right" : "wrong";
+    return (r.ms || [])[i] > 0 ? "skip" : "unseen";
+  }
+  function t2solutionsHtml(r) {
+    var F = [["all", "All"], ["right", "Correct"], ["wrong", "Incorrect"], ["skip", "Skipped"], ["unseen", "Unseen"]];
+    var sp = { all: [], right: [], wrong: [], skip: [], unseen: [] };
+    r.items.forEach(function (it, i) { sp.all.push(i); sp[t2solStatus(r, i)].push(i); });
+    var f = r.t2.solf && sp[r.t2.solf] ? r.t2.solf : (r.t2.solf = sp.wrong.length ? "wrong" : "all");
+    var list = sp[f].slice(0, RV_LIST_MAX);
+    var L = ["A", "B", "C", "D", "E"];
+    var cards = list.map(function (i) {
+      var it = r.items[i], a = r.ans[i], st = t2solStatus(r, i);
+      var ansL = it.a >= 0 && it.a < L.length ? L[it.a] : "-";
+      var stT = it._gone ? "Withdrawn, left out of the marks" : a >= 0 ? (a === it.a ? "Correct" : "You chose " + (L[a] || "?")) : st === "skip" ? "Skipped" : "Unseen";
+      var xo = explainOf(it), rs = xo.r, why = it.exp || (rs && rs[it.a]) || "";
+      var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
+      var others = rs ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(rs[k] || "").trim(); }) : [];
+      others.sort(function (x, y) { return (y === a) - (x === a) || x - y; });
+      var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
+        whyHtml(it, xo, why, L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+          return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
+        }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+      var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
+      return '<li><details class="t2sol t2sol-' + st + '" id="t2q' + i + '"' + (list.length === 1 ? " open" : "") + ">" +
+        '<summary><span class="t2sol-n" aria-hidden="true">' + (i + 1) + '</span><span class="t2sol-t"><b><span class="pn-sr">' + (i + 1) + ". </span>" + esc(it.q.length > 110 ? it.q.slice(0, 109) + "…" : it.q) + "</b><small>" + esc(stT) + " · answer " + ansL + "</small></span>" + ico("chev") + "</summary>" +
+        '<div class="t2sol-b"><p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
+        '<ol class="pn-opts">' + it.o.map(function (o, k) {
+          return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
+        }).join("") + "</ol>" + ex +
+        (G.PREP_ASK && !it._gone ? askBtn("ask-rv", a >= 0 && a !== it.a ? "Why is " + (L[a] || "?") + " wrong? Ask MaiK" : "Ask MaiK why " + ansL + " is right", ' data-i="' + i + '"') : "") +
+        (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
+    }).join("");
+    return '<div class="pn-filters" role="group" aria-label="Solutions filter">' + F.map(function (x) {
+      var n = sp[x[0]].length, on = x[0] === f;
+      return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="t2-sol" data-v="' + x[0] + '"' + (n || on ? "" : " disabled") + ">" + x[1] + ' <span class="pn-rvn">' + n + "</span></button>";
+    }).join("") + "</div>" +
+      (list.length ? '<ol class="t2sols" aria-live="polite">' + cards + "</ol>" : '<p class="t2note">Nothing here.</p>');
+  }
   function psExpiry(e) { var d = psDaysLeft(e, Date.now()); return d <= 1 ? "Expires within a day" : "Expires in " + d + " days"; }
   // Keep a finished set the student made (ids and answers only). A re-practise of a whole saved set updates it in place.
   function psSave(r) {
@@ -2078,12 +2123,15 @@
     paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (t2h ? t2h : r.scheme ? mockAnalysis(r, cele) : '<section class="pn-panel pn-score"' + celeAttrs(cele) + ">" + celeChip(cele) +
       '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + '</svg>' +
       '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" && !r.saved ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + tstatHtml(r) + recapHtml(r) + "</section>" + splitHtml(r) + selfCurveHtml(pct, r)) + line +
-      reviewHtml(r) +
+      (t2h ? "" : reviewHtml(r)) +
       '<div class="pn-navrow pn-again">' + (missed.length ? '<button type="button" class="pn-btn" data-act="retrymissed">' + (missed.length === r.items.length ? "Practise again" : "Practise the missed (" + missed.length + ")") + "</button>" : "") +
       (missed.length < r.items.length ? '<button type="button" class="pn-btn" data-act="retryall">Practise all again (' + r.items.length + ")</button>" : "") +
       '<button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>' +
       (r.psId && load().ps[r.psId] ? '<p class="pn-mut pn-small">Saved in Your practice sets. ' + psExpiry(load().ps[r.psId]) + ".</p>" : "") +
       '<p class="pn-mut pn-small">Missed questions come back sooner for review; ones you got right come back just before you would forget them.</p></div>');
+    // Tests 2: the knowledge-gap link slots resolve via the links index (cached shards offline), like review.
+    if (t2h && G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
+    if (t2h && G.PREP_RAD) G.PREP_RAD.mount(root);
   }
   /* Tide pass (prep50). The set split: one bar, right / wrong / not answered, with counts and shares. */
   function splitHtml(r) {
@@ -2592,6 +2640,7 @@
     if (a === "tt") { ttSet(v); nav(0); return rerender(); }
     if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], n: rt4.i + 1, side: true, topic: rt4.title }, HOST); return; }
     if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], n: i5 + 1, side: true, topic: rt5.title }, HOST); return; }
+    if (a === "ask-sum") { var rt6 = st.run; if (rt6 && rt6.t2 && G.PREP_ASK && G.PREP_TESTS && G.PREP_TESTS.askCtx) G.PREP_ASK.open(G.PREP_TESTS.askCtx(rt6), HOST); return; }
     if (a.indexOf("ak-") === 0 && G.PREP_ASK) return G.PREP_ASK.act(a, b, HOST);
     if (a === "teach") { var rt3 = st.run, it3 = rt3 && rt3.items[rt3.i]; if (it3 && G.PREP_TEACHER) G.PREP_TEACHER.explain(it3, rt3.ans[rt3.i], HOST); return; }
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));
@@ -2712,7 +2761,7 @@
     snap: snapNow, celeFor: celeFor, celeAttrs: celeAttrs, celeChip: celeChip, maikLine: maikLine,
     stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, shuffle: shuffle, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut, cacheKeys: cacheKeys,
     // Tests 2 (prep-tests.js)
-    cacheDel: cacheDel, loadMany: loadMany, hidden: hidden, loadingScreen: loadingScreen, stepMsg: stepMsg, topicOf: topicOf, fmtMin: fmtMin, examOf: examOf, getJSON: getJSON,
+    cacheDel: cacheDel, loadMany: loadMany, hidden: hidden, loadingScreen: loadingScreen, stepMsg: stepMsg, topicOf: topicOf, fmtMin: fmtMin, examOf: examOf, getJSON: getJSON, t2solutions: t2solutionsHtml,
     startPlan: startPlan, startWeak: startWeak, openCustom: function () { push(renderCustom); }, openMistakes: function () { mf.tag = "all"; push(renderMistakes); }, setTt: ttSet,
     planToday: function () { return planToday(load(), today()); }, staticBase: STATIC, pnow: function () { return pnow(); },
     openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits,

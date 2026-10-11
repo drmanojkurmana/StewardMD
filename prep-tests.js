@@ -449,38 +449,219 @@
     clearSess();
   }
   function pct(x) { return x == null ? "-" : Math.round(x * 100) + "%"; }
+
+  /* ---------- richer results (Tests 2 ON): Analysis / Graphs / Solutions tabs ----------
+     Honesty: counts, accuracy labelled "practice mastery", per-question outcomes and the student's own earlier
+     attempts only. Never a rank, percentile, readiness score or prediction. Under 5 questions the trend and the
+     bars hide behind a plain "too few questions" note. Everything renders from the stored attempt record
+     offline; the only network is the pre-existing opt-in anonymous stats and cached link shards. */
+  function r2tab(r) {
+    var v = r.t2.tab;
+    if (v !== "analysis" && v !== "graphs" && v !== "solutions") {
+      try { var m = String(G.location.hash || "").match(/tab=(analysis|graphs|solutions)/); v = m ? m[1] : "analysis"; }
+      catch (e) { v = "analysis"; }
+      r.t2.tab = v;
+    }
+    return v;
+  }
+  function r2setTab(r, v) {
+    if (v !== "analysis" && v !== "graphs" && v !== "solutions") return;
+    r.t2.tab = v;
+    try { G.location.hash = "tab=" + v; } catch (e) {}
+    H.rerender();
+    try { var b = H.root().querySelector('[data-act=t2-tab][data-v="' + v + '"]'); if (b) b.focus({ preventScroll: true }); } catch (e) {}
+  }
+  // Per-question status from the live run: ok / no / skip / unseen. Unseen = never answered and no time
+  // recorded, or a withdrawn placeholder (_gone, left out of the marks).
+  function r2status(r, i) {
+    var it = r.items[i];
+    if (it._gone) return "unseen";
+    var a = r.ans[i];
+    if (a >= 0) return a === it.a ? "ok" : "no";
+    return (r.ms || [])[i] > 0 ? "skip" : "unseen";
+  }
+  var R2ST = { ok: "Correct", no: "Incorrect", skip: "Skipped", unseen: "Unseen" };
+  // Answers bar: one stacked inline-SVG bar, right / wrong / not answered.
+  function r2answersBar(sc, n) {
+    var w = function (x) { return n ? x * 100 / n : 0; };
+    var c = w(sc.correct), g = w(sc.incorrect), u = Math.max(0, 100 - c - g);
+    return '<svg class="t2bar" viewBox="0 0 100 10" preserveAspectRatio="none" role="img" aria-label="' +
+      sc.correct + " right, " + sc.incorrect + " wrong, " + sc.unanswered + ' not answered"><rect class="b-ok" x="0" y="0" width="' + c.toFixed(1) + '" height="10"/>' +
+      '<rect class="b-no" x="' + c.toFixed(1) + '" y="0" width="' + g.toFixed(1) + '" height="10"/>' +
+      '<rect class="b-sk" x="' + (c + g).toFixed(1) + '" y="0" width="' + u.toFixed(1) + '" height="10"/></svg>';
+  }
+  // Time donut: used vs allowed when the test had a clock, else average a question vs the exam pace.
+  function r2donut(r, rec, p) {
+    var sc = rec.score, used = r.secs, allowed = 0;
+    if (r.t2.sections) allowed = r.t2.sections.reduce(function (a, s) { return a + s.sec; }, 0);
+    else if (r.limit) allowed = r.limit;
+    var frac, cap, sub;
+    if (allowed > 0) { frac = Math.min(1, used / allowed); cap = mmss(used) + " of " + mmss(allowed); sub = "of the test time used"; }
+    else { var pace = A.paceSec(p), avg = sc.avg_ms ? sc.avg_ms / 1000 : 0; frac = pace ? Math.min(1, avg / pace) : 0; cap = avg ? Math.round(avg) + " s" : "-"; sub = "average a question, exam pace " + pace + " s"; }
+    var v = Math.round(frac * 100);
+    return '<div class="t2donut"><svg viewBox="0 0 120 120" role="img" aria-label="' + esc(cap + ", " + sub) + '"><circle class="dt" cx="60" cy="60" r="52" pathLength="100"/>' +
+      (v > 0 ? '<circle class="dv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + v + ' 100"/>' : "") + "</svg>" +
+      '<p class="t2donut-c"><b>' + esc(cap) + "</b><span>" + esc(sub) + "</span></p></div>";
+  }
+  // Per-question strip: one dot a question in order; a tap jumps to its solution card.
+  function r2strip(r) {
+    var dots = r.items.map(function (it, i) {
+      var s = r2status(r, i);
+      return '<li><button type="button" class="t2dot ' + s + '" data-act="t2-goto" data-i="' + i + '" aria-label="Question ' + (i + 1) + ": " + R2ST[s] + '"><i aria-hidden="true"></i></button></li>';
+    }).join("");
+    return '<ol class="t2strip" aria-label="Every question in order">' + dots + "</ol>";
+  }
+  // Time per question: one bar a question coloured by outcome, with an average line. Capped at 3x the
+  // average so one long pause does not flatten the rest.
+  function r2timeSvg(r, rec) {
+    var ms = r.items.map(function (it, i) { return Math.max(0, Math.round(((r.ms || [])[i]) || 0) / 1000); });
+    var n = ms.length, W = Math.max(n * 10, 10), HT = 64, avg = rec.score.avg_ms ? rec.score.avg_ms / 1000 : 0;
+    var cap = Math.max(avg * 3, 1);
+    var bars = ms.map(function (s, i) {
+      var h = Math.max(2, Math.min(HT - 8, s / cap * (HT - 8)));
+      return '<rect class="t-' + r2status(r, i) + '" x="' + (i * 10 + 1) + '" y="' + (HT - 4 - h).toFixed(1) + '" width="8" height="' + h.toFixed(1) + '"><title>Q' + (i + 1) + ": " + Math.round(s) + " s</title></rect>";
+    }).join("");
+    var ay = avg ? (HT - 4 - Math.min(HT - 8, avg / cap * (HT - 8))).toFixed(1) : null;
+    return '<div class="t2scroll"><svg class="t2time" viewBox="0 0 ' + W + " " + HT + '" style="min-width:' + Math.min(W * 2, 640) + 'px" role="img" aria-label="Time per question' + (avg ? ", average " + Math.round(avg) + " seconds" : "") + '">' + bars +
+      (ay != null ? '<line class="t-avg" x1="0" x2="' + W + '" y1="' + ay + '" y2="' + ay + '"/>' : "") + "</svg></div>";
+  }
+  function r2meter(pc) { return '<span class="t2meter" aria-hidden="true"><i style="width:' + Math.max(0, Math.min(100, Math.round(pc))) + '%"></i></span>'; }
+  function r2subjRows(rec) {
+    var rows = rec.by_subject.slice().sort(function (a, b) { return (a.correct / a.n) - (b.correct / b.n); });
+    return rows.map(function (b) {
+      var pc = Math.round(b.correct * 100 / b.n);
+      var inner = '<span class="t2row-t"><b>' + esc(b.label) + "</b><small>" + b.correct + " of " + b.n + " right, " + b.incorrect + " wrong</small>" + r2meter(pc) + '</span><span class="t2row-v">' + pc + "%</span>";
+      return H.subjectById(b.key) ? '<li><button type="button" class="t2row" data-act="subject" data-s="' + esc(b.key) + '">' + inner + "</button></li>" : '<li><div class="t2row static">' + inner + "</div></li>";
+    }).join("");
+  }
+  function r2topicRows(rec) {
+    var rows = rec.by_topic.filter(function (b) { return b.n - b.correct > 0; }).sort(function (a, b) { return (a.correct / a.n) - (b.correct / b.n) || b.n - a.n; }).slice(0, 8);
+    if (!rows.length) return "";
+    return rows.map(function (b) {
+      var k = b.key.split("|"), pc = Math.round(b.correct * 100 / b.n);
+      return '<li><button type="button" class="t2row" data-act="module" data-s="' + esc(k[0]) + '" data-m="' + esc(k[1]) + '"><span class="t2row-t"><b>' + esc(b.label) + "</b><small>" + (b.n - b.correct) + " of " + b.n + " missed</small>" + r2meter(pc) + '</span><span class="t2row-v">' + pc + "%</span></button></li>";
+    }).join("");
+  }
+  // Patterns: best streak, longest slip and recovery rate from the attempt's question order.
+  function r2patterns(rec) {
+    var pat = A.streaks(rec.items);
+    var recB = pat.rec_d ? pat.rec_n + " of " + pat.rec_d : "-", recS = pat.rec_d ? "answered right after a wrong one" : "no wrong answer to recover from";
+    return '<ul class="t2pat">' +
+      "<li><b>" + pat.best + "</b><span>Best streak, right in a row</span></li>" +
+      "<li><b>" + pat.slip + "</b><span>Longest slip, wrong in a row</span></li>" +
+      "<li><b>" + recB + "</b><span>Recoveries: " + recS + "</span></li></ul>" +
+      "<p class=\"t2note\">From this test's question order. Skipped questions break a run.</p>";
+  }
+  // Knowledge gaps: the weakest topics (next_actions, at most 3) with the stored learning objective and
+  // revision summary of a missed question there, its share ID, one-tap Revise (the topic) and Practise
+  // (a topic test), plus a links slot that PREP_REASON.fill() resolves via the PR#1458 links index.
+  function r2gaps(r, rec, pid) {
+    var acts = rec.next_actions || [];
+    if (!acts.length) return '<p class="t2note">No clear gap yet: every topic had at most one missed question.</p>';
+    return '<ul class="t2gaps">' + acts.map(function (n) {
+      var k = n.target_id.split("|"), sid = k[0], mid = k[1], rep = -1, any = -1;
+      r.items.forEach(function (it, i) {
+        if (it._gone || it._s !== sid || (it._m || it.t) !== mid || r.ans[i] === it.a) return;
+        if (any < 0) any = i;
+        if (rep < 0 && it.x && (it.x.lo || it.x.rev)) rep = i;
+      });
+      if (rep < 0) rep = any;
+      var it = rep >= 0 ? r.items[rep] : null, x = (it && it.x) || {};
+      var lo = typeof x.lo === "string" && x.lo.trim() ? x.lo.trim() : "";
+      var rev = typeof x.rev === "string" && x.rev.trim() ? x.rev.trim() : "";
+      var chip = "";
+      try { if (it && G.PREP_IDS) { var id = G.PREP_IDS.ofItem(it); if (id) chip = G.PREP_IDS.chip(id); } } catch (e) {}
+      var slot = it ? '<div class="pn-rx" data-i="' + esc(it.id) + '" data-s="' + esc(sid) + '" data-m="' + esc(mid) + '"></div>' : "";
+      return '<li class="t2gap"><p class="t2gap-h"><b>' + esc(topicName(sid, mid)) + "</b><span>" + esc(n.why) + " in this test</span></p>" +
+        (lo ? '<p class="t2lo"><span>Learning objective</span>' + esc(lo) + "</p>" : "") +
+        (rev ? '<p class="t2rev"><span>Revision summary</span>' + esc(rev) + "</p>" : "") +
+        (rep >= 0 ? '<p class="t2note">From question ' + (rep + 1) + ".</p>" : "") + chip + slot +
+        '<div class="t2gap-act"><button type="button" class="t2btn" data-act="module" data-s="' + esc(sid) + '" data-m="' + esc(mid) + '">Revise this topic</button>' +
+        '<button type="button" class="t2btn pri" data-act="t2-pre" data-p="' + esc(pid) + '" data-k="topic" data-s="' + esc(sid) + '" data-m="' + esc(mid) + '" data-need="5">Practise related questions</button></div></li>';
+    }).join("") + "</ul>";
+  }
+  // Pearls: stored pearls only (x.pearl or kp), never generated. At most 5, deduplicated.
+  function r2pearls(r) {
+    var seen = {}, out = [];
+    r.items.forEach(function (it, i) {
+      var p = (it.x && it.x.pearl) || it.kp;
+      if (typeof p !== "string" || !p.trim() || seen[p.trim()]) return;
+      seen[p.trim()] = 1;
+      if (out.length < 5) out.push({ i: i, p: p.trim() });
+    });
+    if (!out.length) return "";
+    return '<h3 class="t2h">Exam pearls</h3><ul class="t2pearls">' + out.map(function (o) {
+      return '<li><aside aria-label="Exam pearl from question ' + (o.i + 1) + '"><b>Q' + (o.i + 1) + "</b><span>" + esc(o.p) + "</span></aside></li>";
+    }).join("") + "</ul>";
+  }
+  // Ask MaiK about this result: the existing sheet (prep-ask.js) with the attempt summary as its context,
+  // answered on this phone when MaiK runs there, else online behind its one-tap consent (never a silent switch).
+  function askCtx(r) {
+    var rec = r.t2.rec, sc = rec.score;
+    var weak = (rec.next_actions || []).slice(0, 3).map(function (n) { var k = n.target_id.split("|"); return topicName(k[0], k[1]) + " (" + n.why + ")"; });
+    var miss = [];
+    r.items.forEach(function (it, i) { if (!it._gone && r.ans[i] !== it.a && miss.length < 12) miss.push("Q" + (i + 1)); });
+    var tx = r.title + ": " + sc.correct + " right, " + sc.incorrect + " wrong, " + sc.unanswered + " not answered out of " + r.items.length + " (" + fmtMarks(sc.raw) + " of " + sc.max + " marks)." +
+      (weak.length ? " Weakest topics: " + weak.join("; ") + "." : " No topic had more than one missed question.") +
+      (miss.length ? " Missed: " + miss.join(", ") + "." : " Nothing missed.");
+    return { kind: "step", step: { tx: tx }, title: "Test result: " + r.title };
+  }
   function resultHtml(r, cele) {
     var t = r.t2, rec = t.rec, p = A.profile(t.exam); if (!rec || !p) return "";
-    var sc = rec.score, avg = sc.avg_ms ? Math.round(sc.avg_ms / 1000) + " s" : "-";
-    var head = '<section class="pn-panel pn-score pn-t2r"' + H.celeAttrs(cele) + ">" + H.celeChip(cele) +
-      (t.type === "daily10" ? '<p class="pn-t2eb">' + (t.dailyFresh ? "Daily 10 done for today" : "Practice: today's Daily 10 was already counted") + "</p>" : "") +
-      '<p class="pn-big">' + fmtMarks(sc.raw) + " / " + sc.max + '</p><p class="pn-mut">' + esc(p.name) + " marking: " + esc(marking(p)) + "</p>" +
-      '<dl class="pn-t2f pn-t2k"><div><dt>Right</dt><dd>' + sc.correct + "</dd></div><div><dt>Wrong</dt><dd>" + sc.incorrect + "</dd></div><div><dt>Not answered</dt><dd>" + sc.unanswered + "</dd></div><div><dt>Accuracy</dt><dd>" + pct(sc.accuracy) + "</dd></div><div><dt>Time</dt><dd>" + mmss(r.secs) + "</dd></div><div><dt>Average</dt><dd>" + avg + "</dd></div></dl>" +
-      (p.scoring.pass ? '<p class="pn-mut pn-small">' + esc(p.scoring.pass.label || "Pass mark") + ' in the exam: ' + p.scoring.pass.marks + " of " + p.scoring.pass.of + " (" + Math.round(p.scoring.pass.marks * 100 / p.scoring.pass.of) + "%). This test: " + (sc.max ? Math.round(Math.max(0, sc.raw) * 100 / sc.max) : 0) + "% of its marks.</p>" : "") +
-      (rec.state === "auto_submitted_timeout" ? '<p class="pn-mut pn-small">' + H.ico("clock") + " Time ran out: answers given by then were marked.</p>" : "") + "</section>";
-    var secs = rec.by_section.length > 1 ? '<h2 class="pn-sec">By section</h2><ul class="pn-mods pn-t2sec">' + rec.by_section.map(function (b) {
-      return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + esc(b.label) + "</b><small>" + b.correct + " right · " + b.incorrect + " wrong · " + b.unanswered + " not answered" + (b.used_ms ? " · " + mmss(b.used_ms / 1000) + " of " + mmss(b.allowed_ms / 1000) : "") + '</small></span><span class="pn-st">' + fmtMarks(b.raw) + "</span></div></li>";
-    }).join("") + "</ul>" : "";
-    var subj = rec.by_subject.slice().sort(function (a, b) { return (a.correct / a.n) - (b.correct / b.n); });
-    var subs = '<h2 class="pn-sec">By subject, weakest first</h2><ul class="pn-mods">' + subj.map(function (b) {
-      var pc = Math.round(b.correct * 100 / b.n), inner = '<span class="pn-mb"><b>' + esc(b.label) + "</b><small>" + b.correct + " of " + b.n + " right · " + b.incorrect + ' wrong</small><span class="pn-meter' + (pc >= 70 ? " ok" : pc < 40 ? " low" : "") + '" aria-hidden="true"><i style="transform:scaleX(' + (pc / 100) + ')"></i></span></span><span class="pn-st' + (pc >= 70 ? " done" : "") + '">' + pc + "%</span>";
-      return H.subjectById(b.key) ? '<li><button type="button" class="pn-mod" data-act="subject" data-s="' + esc(b.key) + '">' + inner + "</button></li>" : '<li><div class="pn-mod static">' + inner + "</div></li>";
-    }).join("") + "</ul>";
-    var next = rec.next_actions.length ? '<h2 class="pn-sec">Practise next</h2><div class="pn-group">' + rec.next_actions.map(function (n) { var k = n.target_id.split("|"); return H.row("module", H.ico("play"), esc(topicName(k[0], k[1])), esc(n.why) + " in this test", ' data-s="' + esc(k[0]) + '" data-m="' + esc(k[1]) + '"'); }).join("") + "</div>" : "";
-    var diff = rec.by_difficulty.length > 1 ? '<p class="pn-mut pn-small">By difficulty: ' + rec.by_difficulty.sort(function (a, b) { return a.key - b.key; }).map(function (b) { return esc(b.label) + " " + b.correct + "/" + b.n; }).join(" · ") + "</p>" : "";
-    var trend = A.ownTrend(store().t2h, { exam: rec.exam, test_type: rec.test_type, attempt_id: rec.attempt_id });
-    var tr = (t.type === "grand" || t.type === "part" || t.type === "mini") ? '<h2 class="pn-sec">Your earlier attempts</h2>' + (trend.length ? '<ul class="pn-mods">' + trend.slice().reverse().map(function (h) { return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + dm(h.ts) + "</b><small>" + h.correct + " right · " + h.incorrect + " wrong · " + h.unanswered + ' not answered</small></span><span class="pn-st">' + fmtMarks(h.raw) + " / " + h.max + "</span></div></li>"; }).join("") + "</ul>" : '<p class="pn-mut pn-small">Your first ' + esc(typeName(t.type).toLowerCase()) + " for " + esc(p.name) + ". Later attempts are compared with this one.</p>") +
-      '<p class="pn-mut pn-small">Compared only with your own attempts. No national rank or percentile is shown: no representative group of candidates exists to compare with.</p>' : "";
-    var how = '<details class="pn-t2how"><summary>How this test was built</summary><p class="pn-mut pn-small">Profile ' + esc(rec.exam) + " v" + esc(rec.profile_version) + " (" + esc(p.status) + "). " + esc(srcLine(p)) + "</p>" +
-      (rec.distribution.deviations.length ? '<ul class="pn-t2dl">' + rec.distribution.deviations.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul>" : '<p class="pn-mut pn-small">Built as planned.</p>') +
-      '<ul class="pn-t2dist">' + Object.keys(rec.distribution.actual).map(function (k) { return "<li><span>" + esc(subjectName(k)) + "</span><span>" + rec.distribution.actual[k] + (rec.distribution.planned[k] != null && rec.distribution.planned[k] !== rec.distribution.actual[k] ? " of " + rec.distribution.planned[k] + " planned" : "") + "</span></li>"; }).join("") + "</ul></details>";
-    return head + secs + subs + diff + next + tr + how + statsAsk();
+    var sc = rec.score, n = r.items.length, small = n < 5, tab = r2tab(r);
+    var tabs = [["analysis", "Analysis"], ["graphs", "Graphs"], ["solutions", "Solutions"]];
+    var head = '<section class="pn-panel pn-score pn-t2r2" aria-label="Test result"' + H.celeAttrs(cele) + ">" + H.celeChip(cele) +
+      '<p class="pn-t2eb">' + esc(p.name) + " · " + esc(typeName(t.type)) + (t.type === "daily10" ? " · " + (t.dailyFresh ? "counted today" : "practice, already counted today") : "") + "</p>" +
+      '<p class="pn-big">' + fmtMarks(sc.raw) + " / " + sc.max + "</p>" +
+      '<p class="t2mut">' + esc(p.name) + " marking: " + esc(marking(p)) + " · " + mmss(r.secs) + " taken</p>" +
+      r2answersBar(sc, n) +
+      '<ul class="t2key"><li><i class="b-ok" aria-hidden="true"></i>' + sc.correct + " right</li><li><i class=\"b-no\" aria-hidden=\"true\"></i>" + sc.incorrect + " wrong</li><li><i class=\"b-sk\" aria-hidden=\"true\"></i>" + sc.unanswered + " not answered</li></ul>" +
+      '<p class="t2mastery">Practice mastery ' + pct(sc.accuracy) + (sc.accuracy == null ? " · nothing answered" : " right of answered") + " · this test only</p>" +
+      (p.scoring.pass ? '<p class="t2mut t2small-p">' + esc(p.scoring.pass.label || "Pass mark") + " in the exam: " + p.scoring.pass.marks + " of " + p.scoring.pass.of + ". This test: " + (sc.max ? Math.round(Math.max(0, sc.raw) * 100 / sc.max) : 0) + "% of its marks.</p>" : "") +
+      (rec.state === "auto_submitted_timeout" ? '<p class="t2mut">' + H.ico("clock") + " Time ran out: answers given by then were marked.</p>" : "") +
+      (small ? '<p class="t2small" role="note">Too few questions to say much: the trend and the subject bars stay hidden until 5 questions.</p>' : "") +
+      '<div class="t2tabs" role="tablist" aria-label="Result views">' + tabs.map(function (x) {
+        return '<button type="button" role="tab" id="t2tab-' + x[0] + '" aria-selected="' + (tab === x[0]) + '" aria-controls="t2p-' + x[0] + '" class="t2tab' + (tab === x[0] ? " on" : "") + '" data-act="t2-tab" data-v="' + x[0] + '">' + x[1] + "</button>";
+      }).join("") + "</div>";
+    var panel = "";
+    if (tab === "graphs") {
+      var tops = r2topicRows(rec);
+      var secs = rec.by_section.length > 1 ? '<h3 class="t2h">By section</h3><ul class="t2list">' + rec.by_section.map(function (b) {
+        return '<li><div class="t2row static"><span class="t2row-t"><b>' + esc(b.label) + "</b><small>" + b.correct + " right · " + b.incorrect + " wrong · " + b.unanswered + " not answered" + (b.used_ms ? " · " + mmss(b.used_ms / 1000) + " of " + mmss(b.allowed_ms / 1000) : "") + '</small></span><span class="t2row-v">' + fmtMarks(b.raw) + "</span></div></li>";
+      }).join("") + "</ul>" : "";
+      var diff = rec.by_difficulty.length > 1 ? '<p class="t2note">By difficulty: ' + rec.by_difficulty.slice().sort(function (a, b) { return a.key - b.key; }).map(function (b) { return esc(b.label) + " " + b.correct + "/" + b.n; }).join(" · ") + "</p>" : "";
+      panel = '<div role="tabpanel" id="t2p-graphs" aria-labelledby="t2tab-graphs" tabindex="0">' +
+        '<h3 class="t2h">Time</h3>' + r2donut(r, rec, p) +
+        '<h3 class="t2h">Every question in order</h3>' + r2strip(r) +
+        '<h3 class="t2h">Time per question</h3>' + r2timeSvg(r, rec) +
+        (small ? "" : '<h3 class="t2h">By subject, weakest first</h3><ul class="t2list">' + r2subjRows(rec) + "</ul>") +
+        (small || !tops ? "" : '<h3 class="t2h">Missed topics</h3><ul class="t2list">' + tops + "</ul>") +
+        secs + diff + "</div>";
+    } else if (tab === "solutions") {
+      panel = '<div role="tabpanel" id="t2p-solutions" aria-labelledby="t2tab-solutions" tabindex="0">' + (H.t2solutions ? H.t2solutions(r) : "") + "</div>";
+    } else {
+      var trend = small ? [] : A.ownTrend(store().t2h, { exam: rec.exam, test_type: rec.test_type, attempt_id: rec.attempt_id });
+      var tr = (t.type === "grand" || t.type === "part" || t.type === "mini") && !small ? '<h3 class="t2h">Your earlier attempts</h3>' + (trend.length ? '<ul class="t2list">' + trend.slice().reverse().map(function (h) { return '<li><div class="t2row static"><span class="t2row-t"><b>' + dm(h.ts) + "</b><small>" + h.correct + " right · " + h.incorrect + " wrong · " + h.unanswered + ' not answered</small></span><span class="t2row-v">' + fmtMarks(h.raw) + " / " + h.max + "</span></div></li>"; }).join("") + "</ul>" : '<p class="t2note">Your first ' + esc(typeName(t.type).toLowerCase()) + " for " + esc(p.name) + ". Later attempts are compared with this one.</p>") +
+        '<p class="t2note">Compared only with your own attempts. No national rank or percentile is shown: no representative group of candidates exists to compare with.</p>' : "";
+      var how = '<details class="t2how"><summary>How this test was built</summary><p class="t2note">Profile ' + esc(rec.exam) + " v" + esc(rec.profile_version) + " (" + esc(p.status) + "). " + esc(srcLine(p)) + "</p>" +
+        (rec.distribution.deviations.length ? '<ul class="t2dl">' + rec.distribution.deviations.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul>" : '<p class="t2note">Built as planned.</p>') +
+        '<ul class="t2dist">' + Object.keys(rec.distribution.actual).map(function (k) { return "<li><span>" + esc(subjectName(k)) + "</span><span>" + rec.distribution.actual[k] + (rec.distribution.planned[k] != null && rec.distribution.planned[k] !== rec.distribution.actual[k] ? " of " + rec.distribution.planned[k] + " planned" : "") + "</span></li>"; }).join("") + "</ul></details>";
+      panel = '<div role="tabpanel" id="t2p-analysis" aria-labelledby="t2tab-analysis" tabindex="0">' +
+        (small ? "" : '<h3 class="t2h">Patterns</h3>' + r2patterns(rec)) +
+        '<h3 class="t2h">Knowledge gaps</h3>' + r2gaps(r, rec, p.id) + r2pearls(r) +
+        (G.PREP_ASK ? '<button type="button" class="t2btn pri t2ask" data-act="ask-sum">Ask MaiK about this result</button><p class="t2note">MaiK answers from this result on your phone, or online with your say-so.</p>' : "") +
+        tr + how + statsAsk() + "</div>";
+    }
+    return head + panel + "</section>";
   }
 
   /* ---------- acts ---------- */
   function act(a, b, h) {
     H = h;
     var pid = b.getAttribute("data-p"), k = b.getAttribute("data-k");
+    if (a === "t2-tab") { var rt = H.run_(); if (rt && rt.t2) r2setTab(rt, b.getAttribute("data-v")); return; }
+    if (a === "t2-sol") { var rs = H.run_(); if (rs && rs.t2) { rs.t2.solf = b.getAttribute("data-v"); H.rerender(); try { var fb = H.root().querySelector('[data-act=t2-sol][data-v="' + rs.t2.solf + '"]'); if (fb) fb.focus({ preventScroll: true }); } catch (e) {} } return; }
+    if (a === "t2-goto") { var rg = H.run_(); if (rg && rg.t2) { rg.t2.tab = "solutions"; rg.t2.solf = "all"; try { G.location.hash = "tab=solutions"; } catch (e) {} H.rerender(); try { var el = H.root().querySelector("#t2q" + b.getAttribute("data-i")); if (el) { el.setAttribute("open", ""); el.scrollIntoView(); } } catch (e) {} } return; }
     if (a === "t2-pre") return prepare(pid, k, b.getAttribute("data-s"), b.getAttribute("data-m"));
     if (a === "t2-fixed") return prepareFixed(b.getAttribute("data-fx"));
     if (a === "t2-go") return go();
@@ -496,5 +677,5 @@
     if (a === "t2-mistakes") return H.openMistakes();
     if (a === "t2-custom") return H.openCustom();
   }
-  G.PREP_TESTS = { on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, _P: P, _clear: clearSess };
+  G.PREP_TESTS = { on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, askCtx: askCtx, _P: P, _clear: clearSess };
 })(typeof window !== "undefined" ? window : this);
