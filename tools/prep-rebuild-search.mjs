@@ -15,7 +15,7 @@ const hasR2S3 = !!getR2Config();
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const API = "https://stewardmd.in/api/prep/bank/";
 const BUCKET = "stewardmd-offline";
-const PUB_MAIK = path.join(process.env.HOME || "", "prep-data/qgen/publish");
+const PUB_MAIK = process.env.PREP_PUB_MAIK || path.join(process.env.HOME || "", "prep-data/qgen/publish");
 
 async function fetchJSON(url) {
   for (let t = 1; ; t++) {

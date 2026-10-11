@@ -35,7 +35,7 @@ export function appConfig(root = ROOT) {
   const pyq = /PYQ_VER = G\.SMD_PREP_PYQ_VER \|\| "(v\d+)"/.exec(src)[1];
   const ov = /var OVERLAYS = G\.SMD_PREP_OVERLAYS \|\| (\{[^\n]*\});/.exec(src)[1];
   const overlays = new Function("return " + ov)();
-  const pubIdx = path.join(process.env.HOME || "", "prep-data/qgen/publish/maik/index.json");
+  const pubIdx = process.env.PREP_PUB_MAIK ? path.join(process.env.PREP_PUB_MAIK, "maik/index.json") : path.join(process.env.HOME || "", "prep-data/qgen/publish/maik/index.json");
   if (fs.existsSync(pubIdx)) {
     try {
       const extra = JSON.parse(fs.readFileSync(pubIdx, "utf8")).sets;
