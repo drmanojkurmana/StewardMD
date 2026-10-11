@@ -25,15 +25,22 @@
  *   +8 when the module's lesson cites that KB article (lesson src[], the existing per-module bridge)
  *   A name that is also a wrong option is a distractor, never the concept (capped at 50). Stem-only mentions without
  *   the explanation (65) and explanation-only mentions (55) are kept in the sidecar, never shown.
- * Lessons and card decks are linked per module (the existing bridge), and the app re-checks them against the live
- * lesson and card indexes before it shows them.
+ * The chapter level above it (addTopicLinks; the map is prep/bank/topic-links.json from tools/prep-links-topics.mjs):
+ *   lt the module's own lesson, every item (topic tier: "Read the lesson: <title>")                   75
+ *   kt the mapped KB/protocol topic of a module without its own lesson (topic tier)                   75
+ *   lk the lesson teaching the item's KB concept (lesson src[] bridge, same subject only)             80
+ *   li the lesson step showing the item's image (the step rides in sec)                               85
+ *   lh the book chapter under the item's concept heading (strict all-words title match)               78
+ * Card decks stay per module (mod.cd). The app re-checks lessons and decks against the live lesson and
+ * card indexes before it shows them.
  * KB ids: the Knowledge Library opens an article by its key in KB_ENRICHMENT.byId: kb/reference ids are lower case
  * (zika_virus), kb/diseases ids upper case (BRAIN_ABSCESS); lesson src[] uses "kb-reference-zika-virus". normKbId maps
  * any of these spellings to the one key that opens.
  * Index (R2 prep-bank/v1/links/, route LINKS_RE): index.json { v, ver, gen, th, n, src, m: { module: "<subject>/<hash8>" },
  * c: { subject: hash8 } } (short cache); m/<module>-<hash8>.json { v, m, s, T: [[kind, id, title]], e: { itemId:
  * [[t, conf, via, sec?]] }, x: { t: [[module, itemId]] }, mod: { ls: [lesson keys], cd: 1 } } and c/<subject>-<hash8>.json
- * { v, s, T: [[kind, id, title, nItems, [modules]]] } are immutable. No question text is published.
+ * { v, s, T: [[kind, id, title, nItems, [modules]]] } are immutable. No question text is published. kind is kb/dr/pr/ls;
+ * sec routes a KB row to its reader section and a lesson row to its step. ls rows never enter x or c/ files.
  */
 import fs from "node:fs";
 import os from "node:os";
