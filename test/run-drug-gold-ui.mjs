@@ -121,8 +121,8 @@ try {
   // The other 53 authored records are salt forms of a molecule the bundle already carries
   // ("Atropine sulfate" IS atropine) and are deliberately not shipped as a second row; the index
   // strips the counter-ion from a query instead, so those names are still findable.
-  ok(stats && stats.struct > 1500 && stats.index === stats.struct,
-    "bundle + supplement + index all loaded and agree: " + JSON.stringify(stats));
+  ok(stats && stats.struct > 1500 && stats.index >= stats.struct,
+    "bundle + supplement + index loaded; index also lists the label-only drugs: " + JSON.stringify(stats));
 
   console.log(fails ? "\n" + fails + " FAILED" : "\nall passed");
 } finally {
