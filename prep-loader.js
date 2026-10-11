@@ -19,7 +19,7 @@
    module with MaiK" and the owner's Author screen (optional; the entry rows show only when /api/ai/prep-qgen says the
    feature is on for this account). prep-profiles.js (the versioned exam profiles, generated from
    prep/assess/profiles) and prep-assess.js (the assessment engine) load before prep.js, which reads its mock patterns from
-   them. prep-tests.js is the Tests tab's test types (flag smd_prep_tests2, default OFF; optional). prep-reason.js is
+   them. prep-tests.js is the Tests tab's test types (flag smd_prep_tests2, default ON since 2026-10-11; optional). prep-reason.js is
    the reasoning explanations and knowledge links (optional: without it every item renders as before). */
 (function (G) {
   "use strict";
