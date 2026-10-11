@@ -11,7 +11,10 @@
      150 = 3 x 50 x 50 min; USMLE Step 1 blocks of 20 in 30 min), one section, one FMGE part; INI-SS only as a labelled
      provisional pattern; the NEET-PG pattern of earlier years (200 questions, one timer) as "previous format practice";
    - practice tests: subject, topic, adaptive diagnostic, Today's set, weak areas, My mistakes, custom and the previous
-     year papers (NEET-PG), each only when it has questions.
+     year papers (NEET-PG), each only when it has questions;
+   - ready-made tests (tools/prep-fixed-tests.mjs, R2 prep-bank/v1/tests/): the same fixed papers for every student,
+     grouped by format with their completion status; formats with no papers are hidden, and the section stays hidden
+     until papers are published.
    A card shows the count, the time, the exam, the scope and the completion status. Before a test starts, a screen says
    what the assembly found: the size (reduced, and why, when the bank cannot fill the blueprint) and every deviation.
    Image-based and case-based test types are not offered yet: the bank index has no count of image items and items carry
@@ -19,7 +22,8 @@
 (function (G) {
   "use strict";
   var A = G.PREP_ASSESS, D = G.document, FLAG = "smd_prep_tests2", RUN_KEY = "run:t2", REC_KEY = "t2r:";
-  var P = { sess: undefined, sessP: null, cov: {}, qual: null, qualP: null, lastSave: 0, pick: null };
+  var FX_VER = "v1";   // fixed papers version (tools/prep-fixed-tests.mjs TESTS_VER; bumped together)
+  var P = { sess: undefined, sessP: null, cov: {}, qual: null, qualP: null, lastSave: 0, pick: null, fx: null, fxP: null, fxm: {} };
   var H = null;
 
   function on() {
@@ -49,6 +53,8 @@
   function dm(ts) { try { return new Date(ts).toLocaleDateString("en-IN", { day: "numeric", month: "short" }); } catch (e) { return ""; } }
   function typeName(t) { return { grand: "Full exam", part: "One part", mini: "One section", daily10: "Daily 10", subject_mini: "Subject test", topic: "Topic test", diagnostic: "Adaptive diagnostic", custom: "Custom" }[t] || t; }
   function lastOf(pid, type) { var h = store().t2h, r = null; h.forEach(function (x) { if (x.exam === pid && x.type === type) r = x; }); return r; }
+  function lastOfPaper(id) { var h = store().t2h, r = null; h.forEach(function (x) { if (x.paper === id) r = x; }); return r; }
+  function fxFormatName(f) { return { grand: "Grand tests", part: "Part tests", mini: "Section tests", subject_mini: "Subject tests", topic: "Topic tests", daily10: "Daily 10 sets", image: "Image tests", pyq: "PYQ sets" }[f] || f; }
 
   /* ---------- saved session ---------- */
   function loadSess() {
@@ -142,18 +148,105 @@
       (statsChoice() != null ? H.row("t2-statsw", H.ico("flag"), "Anonymous statistics", statsChoice() === "1" ? "On: tap to stop sharing" : "Off: tap to share anonymously") : "");
     return '<h2 class="pn-h">Practice tests</h2><div class="pn-group pn-t2p">' + rows + "</div>";
   }
+  /* ---------- ready-made tests (fixed papers, same for every student) ---------- */
+  function fxLoad() {
+    if (P.fxP) return P.fxP;
+    P.fxP = H.getJSON(H.bankApi + FX_VER + "/tests/index.json").then(function (ix) {
+      P.fx = ix && Array.isArray(ix.papers) ? ix.papers : [];
+      return P.fx;
+    }, function () { P.fx = []; return P.fx; });
+    return P.fxP;
+  }
+  // Papers for the profiles of this tab, grouped by format (formats with no papers are not shown).
+  function fxHtml() {
+    var ids = {};
+    A.forTab(tab()).forEach(function (p) { ids[p.id] = 1; });
+    var rows = (P.fx || []).filter(function (r) { return ids[r.exam]; });
+    if (!rows.length) return "";
+    var byF = {}, order = [];
+    rows.forEach(function (r) { if (!byF[r.format]) { byF[r.format] = []; order.push(r.format); } byF[r.format].push(r); });
+    return '<h2 class="pn-h">Ready-made tests</h2><p class="pn-mut pn-small">The same papers for every student.</p>' + order.map(function (f) {
+      return '<h3 class="pn-sec">' + esc(fxFormatName(f)) + "</h3>" + '<div class="pn-group">' + byF[f].map(function (r) {
+        var l = lastOfPaper(r.id);
+        var sub = r.count + " questions · " + mins(r.duration_sec) + " · " + r.scope + (l ? " · Done " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts) : " · Not done");
+        return H.row("t2-fixed", l ? H.ico("check") : H.ico("play"), esc(r.title), esc(sub), ' data-fx="' + esc(r.id) + '"');
+      }).join("") + "</div>";
+    }).join("");
+  }
+  function fxMount() {
+    fxLoad().then(function () {
+      var root = H.root(), box = root && root.querySelector("#pnT2Fx");
+      if (box) box.innerHTML = fxHtml();
+    });
+  }
+  // Resolve a paper's [subject, module, id] triples to items in paper order, from the bank versions the paper
+  // names (so papers keep working when the live bank moves on). A question no longer there, or hidden by the
+  // student, becomes a placeholder left out of the marks (like an interrupted test's withdrawn questions).
+  function fxFile(sid, mid, ver) {
+    var u = H.bankApi + ver + "/" + sid + "/mcq/" + mid + ".json";
+    if (!P.fxm[u]) P.fxm[u] = H.getJSON(u).then(function (j) { return j.items || []; }, function () { return []; });
+    return P.fxm[u];
+  }
+  function fxPyq(ver) {
+    var u = H.bankApi + ver + "/index.json";
+    if (!P.fxm[u]) P.fxm[u] = H.getJSON(u).then(function (ix) { return H.getJSON(H.bankApi + ver + "/" + ix.file).then(function (j) { return j.items || []; }, function () { return []; }); }, function () { return []; });
+    return P.fxm[u];
+  }
+  function fxResolve(paper) {
+    var verOf = {}, ver;
+    for (ver in paper.bank || {}) (paper.bank[ver] || []).forEach(function (sid) { verOf[sid] = ver; });
+    var files = {}, seen = {};
+    (paper.items || []).forEach(function (t) {
+      var k = t[0] + "|" + t[1];
+      if (!seen[k]) { seen[k] = 1; files[k] = t[0] === "pyq" ? fxPyq(verOf.pyq || "v5/pyq") : fxFile(t[0], t[1], verOf[t[0]] || "v5"); }
+    });
+    return Promise.all(Object.keys(files).map(function (k) { return files[k].then(function (items) { return [k, items]; }); })).then(function (got) {
+      var by = {}, hid = H.hidden();
+      got.forEach(function (g) { var m = {}; g[1].forEach(function (it) { m[String(it.id)] = it; }); by[g[0]] = m; });
+      var items = [], missing = 0;
+      (paper.items || []).forEach(function (t) {
+        var it = (by[t[0] + "|" + t[1]] || {})[t[2]];
+        if (!it || hid[t[2]]) { missing++; items.push({ id: t[2], q: "This question is no longer available.", o: ["-", "-", "-", "-"], a: -9, _s: t[0], _m: t[1], _gone: true }); return; }
+        it._s = t[0]; it._m = t[1]; items.push(it);
+      });
+      return { items: items, missing: missing };
+    });
+  }
+  function prepareFixed(id) {
+    var row = null;
+    (P.fx || []).forEach(function (r) { if (r.id === id) row = r; });
+    if (!row) return;
+    var p = A.profile(row.exam);
+    if (!p) { H.toast("This paper's exam is not on this tab."); return; }
+    H.stack().push(function () {}); H.loadingScreen(esc(row.title), "Loading your test…");
+    H.getJSON(H.bankApi + FX_VER + "/tests/" + row.path).then(function (paper) {
+      return fxResolve(paper).then(function (u) { return [paper, u]; });
+    }).then(function (pu) {
+      var paper = pu[0], u = pu[1];
+      H.stack().pop();
+      if (!u.items.length || u.missing === u.items.length) { H.toast("The questions of this test did not load. Check the connection and try again."); return H.rerender(); }
+      var secs = (paper.sections || []).map(function (s) { return { id: s.id, label: s.label, n: s.n, sec: s.sec, from: s.from, to: s.to }; });
+      P.pick = { p: p, type: paper.test_type, title: paper.title, fixed: paper, fixedMissing: u.missing,
+        asm: { ok: true, count: u.items.length, requested: paper.reduced_from || paper.count, reduced: !!paper.reduced_from,
+          duration_sec: paper.duration_sec, sections: secs.length ? secs : null, deviations: paper.deviations || [],
+          planned: paper.planned || {}, actual: paper.actual || {}, seed: paper.seed, items: u.items,
+          blueprint: paper.blueprint || { id: p.id + ":" + paper.test_type, version: "1" } } };
+      H.push(preScreen);
+    }, function () { H.stack().pop(); H.toast("This paper did not load. Check the connection and try again."); H.rerender(); });
+  }
   function testsHtml(h) {
     H = h;
     var list = A.forTab(tab()), p0 = primary(), s = H.store();
     if (!p0) return '<p class="pn-empty">No exam profile for this exam yet.</p>';
     var pyq = G.PREP_PYQ && tab() === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(H) + "</div>" : "";
     return '<div id="pnT2Res">' + (P.sess && P.sess.t2 && !P.sess.done ? resumeHtml(P.sess) : "") + "</div>" + dailyHtml(p0) +
-      '<h2 class="pn-h">Exam simulations</h2>' + list.map(function (p) { return card(p); }).join("") + pyq + practiceHtml(p0) +
+      '<h2 class="pn-h">Exam simulations</h2>' + list.map(function (p) { return card(p); }).join("") + pyq + '<div id="pnT2Fx">' + fxHtml() + "</div>" + practiceHtml(p0) +
       '<p class="pn-mut pn-small" id="pnT2Note">Every test shows its size, time and scope before it starts. When the bank cannot fill a blueprint the test is shortened and says why; it is never padded with unrelated questions. Results use the exam\'s marking only: no rank, percentile or predicted score.</p>';
   }
-  // After paint: the saved session, then coverage (subject indexes) hides tests the bank cannot fill.
+  // After paint: the saved session, the fixed papers, then coverage (subject indexes) hides tests the bank cannot fill.
   function mounted(h) {
     H = h;
+    fxMount();
     loadSess().then(function (pk) {
       var box = H.root() && H.root().querySelector("#pnT2Res");
       if (box) box.innerHTML = pk && pk.t2 ? resumeHtml(pk) : "";
@@ -265,7 +358,9 @@
       facts.push(["Questions", a.count + (a.reduced ? " of " + a.requested + " planned" : "")]);
       facts.push(["Time", mins(a.duration_sec) + (a.sections && a.sections.length > 1 ? " in " + a.sections.length + " locked sections" : "")]);
       facts.push(["Marking", marking(p)]);
-      facts.push(["Scope", x.mid ? H.tx((H.topicOf(x.sid, x.mid) || { title: x.mid }).title) : x.sid ? H.tx((H.subjectById(x.sid) || {}).name) : "All " + H.exam().label + " subjects"]);
+      facts.push(["Scope", x.fixed ? x.fixed.scope : x.mid ? H.tx((H.topicOf(x.sid, x.mid) || { title: x.mid }).title) : x.sid ? H.tx((H.subjectById(x.sid) || {}).name) : "All " + H.exam().label + " subjects"]);
+      if (x.fixed) facts.push(["Paper", "The same for every student"]);
+      if (x.fixedMissing) facts.push(["Unavailable", x.fixedMissing + " of " + a.count + " left out of the marks (withdrawn or hidden)"]);
     }
     var secs = a.sections && a.sections.length > 1 ? '<ol class="pn-t2secs">' + a.sections.map(function (s) { return "<li><b>" + esc(s.label) + "</b><span>" + s.n + " questions · " + mmss(s.sec) + "</span></li>"; }).join("") + "</ol>" +
       '<p class="pn-mut pn-small">' + H.ico("lock") + (p.navigation.early_section_submit ? " A submitted section is locked." : " Each section is locked when its time ends or when you submit it. In the exam you stay in a section until its time ends; here you may submit early, and the time left is not carried over.") + "</p>" : "";
@@ -280,7 +375,8 @@
   function go() {
     var x = P.pick; if (!x || !x.asm.ok) return;
     var p = x.p, a = x.asm, now = Date.now();
-    var t2 = { exam: p.id, pv: p.version, type: x.type, attempt_id: "t2-" + now.toString(36) + "-" + Math.floor(Math.random() * 46656).toString(36), idem: x.type === "daily10" ? A.dailyKey(p.id, now) : null,
+    var t2 = { exam: p.id, pv: p.version, type: x.type, attempt_id: "t2-" + now.toString(36) + "-" + Math.floor(Math.random() * 46656).toString(36), idem: x.type === "daily10" && !x.fixed ? A.dailyKey(p.id, now) : null,
+      paper: x.fixed ? x.fixed.id : null,
       started: now, earlyOk: !!p.navigation.early_section_submit, sections: a.sections && a.sections.length ? a.sections : null, blueprint: { id: a.blueprint.id, version: a.blueprint.version },
       asm: { planned: a.planned, actual: a.actual, deviations: a.deviations, count: a.count, requested: a.requested, reduced: a.reduced, seed: a.seed } };
     H.stack().pop();   // the pre-test screen
@@ -318,7 +414,7 @@
     if (r.sc) rec.by_section.forEach(function (b) { var k = -1; t.sections.forEach(function (s, j) { if (s.id === b.key) k = j; }); if (k >= 0) { b.used_ms = Math.round(r.sc.used[k]); b.allowed_ms = r.sc.lim[k]; b.ended = r.sc.why[k] || "submitted"; } });
     r.t2.rec = rec;
     var s = store(), now = Date.now();
-    s.t2h = s.t2h.concat([{ attempt_id: rec.attempt_id, exam: rec.exam, type: rec.test_type, pv: rec.profile_version, ts: now, raw: rec.score.raw, max: rec.score.max, correct: rec.score.correct, incorrect: rec.score.incorrect, unanswered: rec.score.unanswered, n: items.length, secs: rec.by_section.map(function (b) { return [b.key, b.raw]; }) }]).slice(-30);
+    s.t2h = s.t2h.concat([{ attempt_id: rec.attempt_id, exam: rec.exam, type: rec.test_type, pv: rec.profile_version, paper: t.paper || null, ts: now, raw: rec.score.raw, max: rec.score.max, correct: rec.score.correct, incorrect: rec.score.incorrect, unanswered: rec.score.unanswered, n: items.length, secs: rec.by_section.map(function (b) { return [b.key, b.raw]; }) }]).slice(-30);
     if (t.idem) { var dc = A.dailyComplete(s.t2d, t.idem, { ts: now, attempt_id: rec.attempt_id, raw: rec.score.raw, max: rec.score.max, correct: rec.score.correct, n: items.length }); r.t2.dailyFresh = dc.fresh; A.dailyPrune(s.t2d, now, 60); }
     H.save();
     H.cachePut(REC_KEY + rec.attempt_id, rec);
@@ -359,6 +455,7 @@
     H = h;
     var pid = b.getAttribute("data-p"), k = b.getAttribute("data-k");
     if (a === "t2-pre") return prepare(pid, k, b.getAttribute("data-s"), b.getAttribute("data-m"));
+    if (a === "t2-fixed") return prepareFixed(b.getAttribute("data-fx"));
     if (a === "t2-go") return go();
     if (a === "t2-stats") { try { G.localStorage.setItem(STATS, b.getAttribute("data-v") === "1" ? "1" : "0"); } catch (e) {} var r0 = H.run_ && H.run_(); if (b.getAttribute("data-v") === "1" && r0 && r0.t2 && r0.t2.rec) sendStats(r0.t2.rec); var box = b.closest(".pn-t2ask"); if (box) box.innerHTML = '<p class="pn-mut pn-small" role="status">' + (b.getAttribute("data-v") === "1" ? "Thank you. Anonymous statistics are on." : "Nothing will be sent.") + "</p>"; return; }
     if (a === "t2-pick") return pickSubject(A.profile(pid), k);

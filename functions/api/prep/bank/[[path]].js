@@ -51,13 +51,17 @@ const LINKS_RE = /^v\d{1,3}\/links\/(?:index\.json|m\/[a-z0-9-]{2,80}-[0-9a-f]{8
 // Item-quality sidecar (Tests 2 reader, prep-tests.js; schema prep/assess/schemas/item-quality.schema.json): quality/index.json
 // names the current per-subject files (short cache), quality/v<n>/<subject>.json is immutable. Absent = every visible item stays eligible.
 const QUALITY_RE = /^quality\/(?:index\.json|v\d{1,3}\/[a-z0-9-]{2,60}\.json)$/;
+// Pre-built common tests (tools/prep-fixed-tests.mjs; schema prep/assess/schemas/fixed-paper.schema.json):
+// v<n>/tests/index.json names the papers (short cache), v<n>/tests/<exam>/<format>/<paper>.json is immutable
+// (a changed paper gets a new id, never new bytes). Locators only, no question text.
+const TESTS_RE = /^v\d{1,3}\/tests\/(?:index\.json|[a-z0-9-]{2,60}\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,120}\.json)$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || MAIK_RE.test(p) || MAIK_MANIFEST_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) || LINKS_RE.test(p) || QUALITY_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || MEDCOV_RE.test(p) || MAIK_RE.test(p) || MAIK_MANIFEST_RE.test(p) || RAD_RE.test(p) || IDS_RE.test(p) || LINKS_RE.test(p) || QUALITY_RE.test(p) || TESTS_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {
@@ -72,8 +76,8 @@ export async function onRequestGet({ env, params }) {
   if (!obj) return notFound();
   const headers = new Headers({
     "Content-Type": /\.webp$/.test(p) ? "image/webp" : /\.svg$/.test(p) ? "image/svg+xml" : "application/json; charset=utf-8",
-    // manifest.json and the pyq/lessons/cards/ids/links/quality index.json name the current files, so they may change; everything else is immutable
-    "Cache-Control": /(?:manifest|(?:pyq|lessons|cards|ids|links|quality|maik)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
+    // manifest.json and the pyq/lessons/cards/ids/links/quality/tests index.json name the current files, so they may change; everything else is immutable
+    "Cache-Control": /(?:manifest|(?:pyq|lessons|cards|ids|links|quality|maik|tests)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
     "X-Content-Type-Options": "nosniff",
   });
   // an SVG opened on its own runs no script and loads nothing

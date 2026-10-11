@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "prep/fixed-paper/v1",
+  "title": "Pre-built common test paper (fixed-tests v1)",
+  "description": "One ready-made test, identical for every student. Built by tools/prep-fixed-tests.mjs with prep-assess.js assemble() and fixed seeds. Served from R2 prep-bank/v1/tests/<exam>/<format>/<id>.json through /api/prep/bank/. Holds question locators only ([subject, module, item id]); never question text. Immutable once published: a changed paper gets a new id, never new bytes.",
+  "type": "object",
+  "required": ["schema", "id", "v", "exam", "format", "title", "count", "duration_sec", "scope", "seed", "profile", "test_type", "blueprint", "planned", "actual", "deviations", "sections", "bank", "createdAt", "items"],
+  "properties": {
+    "schema": { "const": "prep/fixed-paper/v1" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "v": { "const": 1 },
+    "exam": { "type": "string", "description": "Exam profile id this paper was assembled for." },
+    "format": { "type": "string", "enum": ["grand", "part", "mini", "subject_mini", "topic", "daily10", "image", "pyq"] },
+    "title": { "type": "string", "description": "Shown in the Tests tab, e.g. NEET-PG Grand Test 07." },
+    "count": { "type": "integer", "minimum": 1 },
+    "duration_sec": { "type": "integer", "minimum": 60 },
+    "scope": { "type": "string", "description": "Plain-language scope, e.g. All NEET-PG subjects, Part 1, Anatomy." },
+    "seed": { "type": "string", "description": "Fixed seed passed to assemble(); rebuilds byte-identical items." },
+    "profile": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": { "id": { "type": "string" }, "version": { "type": "string" } }
+    },
+    "test_type": { "type": "string", "description": "Assembler test type used (image/pyq use custom)." },
+    "blueprint": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": { "id": { "type": "string" }, "version": { "type": "string" } }
+    },
+    "planned": { "type": "object", "description": "Quota per subject the blueprint asked for." },
+    "actual": { "type": "object", "description": "Questions per subject the paper holds." },
+    "deviations": { "type": "array", "items": { "type": "string" } },
+    "sections": {
+      "type": ["array", "null"],
+      "description": "Locked timed sections ([id, label, n, sec, from, to]) or null for single-timer papers."
+    },
+    "bank": {
+      "type": "object",
+      "description": "Bank versions the items were drawn from, { version: [subjects] }.",
+      "additionalProperties": { "type": "array", "items": { "type": "string" } }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": [{ "type": "string" }, { "type": "string" }, { "type": "string" }]
+      },
+      "description": "[subject, module, item id] per question, in paper order. PYQ items use [pyq, mix, id]."
+    }
+  }
+}
