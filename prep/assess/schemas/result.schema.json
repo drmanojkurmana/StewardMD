@@ -13,7 +13,8 @@
     "state": {"enum": ["in_progress", "submitted", "auto_submitted_timeout", "abandoned"]},
     "items": {"type": "array", "items": {"type": "object", "required": ["item_id", "chosen"], "properties": {
       "item_id": {"type": "string"}, "content_hash": {"type": "string"}, "chosen": {"type": ["integer", "null"]}, "correct": {"type": ["boolean", "null"]},
-      "ms": {"type": "integer"}, "marked": {"type": "boolean"}, "changed": {"type": "integer"}, "section": {"type": ["string", "null"]}}}},
+      "ms": {"type": "integer"}, "marked": {"type": "boolean"}, "changed": {"type": "integer"}, "section": {"type": ["string", "null"]},
+      "conf": {"type": "string", "enum": ["guessing", "confident", "confused"], "description": "My-coaching capture chip; present only when the student tapped one"}}}},
     "score": {"type": "object", "required": ["raw", "correct", "incorrect", "unanswered"], "properties": {
       "raw": {"type": "number"}, "max": {"type": "number"}, "correct": {"type": "integer"}, "incorrect": {"type": "integer"}, "unanswered": {"type": "integer"},
       "accuracy": {"type": "number"}, "avg_ms": {"type": "number"}, "scheme": {"type": "object", "description": "copy of profile.scoring used"}}},

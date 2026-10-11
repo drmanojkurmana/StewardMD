@@ -1410,12 +1410,14 @@
     // PrepNucleus Pro (prep-pro.js): the free tier is checked when a set starts, never mid-set. Arena runs (custom) are free.
     if (!opts.custom && G.PrepPro && !G.PrepPro.can("questions", { items: items })) { rerender(); return G.PrepPro.openLimit("questions"); }
     st.run = { m0: opts.custom ? null : snapNow(), items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: opts.untimed || opts.qsec ? 0 : opts.limit || (mode === "exam" ? items.length * ex.sec : 0), qsec: opts.qsec || 0, scheme: opts.scheme || null, custom: opts.custom || null };
+    // My-coaching capture (prep-coach.js): one confidence chip per question, null until tapped (skippable).
+    st.run.conf = items.map(function () { return null; });
     if (st.run.qsec) st.run.qc = qcNew(items.length, st.run.qsec);
     // Tests 2 (prep-tests.js, smd_prep_tests2): t2 = the attempt (profile, type, assembly record), sections = locked timed
     // sections from the assembly ({ id, label, n, sec, from, to }); ms = time each question was on screen.
     if (opts.t2) { st.run.t2 = opts.t2; st.run.ms = items.map(function () { return 0; }); st.run.changed = items.map(function () { return 0; }); }
     if (opts.sections && opts.sections.length && ASSESS) { st.run.limit = 0; st.run.secs = opts.sections; st.run.sc = ASSESS.scNew(opts.sections); ASSESS.scStart(st.run.sc, 0, pnow(), Date.now()); st.run.i = opts.sections[0].from; }
-    if (opts.resume) { var rs = opts.resume; st.run.i = rs.i; st.run.ans = rs.ans; st.run.mark = rs.mark || {}; if (rs.ms) st.run.ms = rs.ms; if (rs.changed) st.run.changed = rs.changed; if (rs.t0) st.run.t0 = rs.t0; if (rs.sc) st.run.sc = rs.sc; if (rs.phase) st.run.phase = rs.phase; }
+    if (opts.resume) { var rs = opts.resume; st.run.i = rs.i; st.run.ans = rs.ans; st.run.mark = rs.mark || {}; if (rs.ms) st.run.ms = rs.ms; if (rs.changed) st.run.changed = rs.changed; if (rs.conf) st.run.conf = rs.conf; if (rs.t0) st.run.t0 = rs.t0; if (rs.sc) st.run.sc = rs.sc; if (rs.phase) st.run.phase = rs.phase; }
     // A set made by the student (practice setup sheet, custom module) is saved when it finishes (psSave); a re-practise
     // of a whole saved set updates that set (psId).
     if (opts.save && !opts.custom) st.run.save = opts.save;
@@ -1746,6 +1748,12 @@
     }
     // Time up: the question stays locked for the rest of the set, answered or not.
     var lockNote = locked && !shown ? '<p class="pn-timeup" role="status">' + ico("lock") + "<span><b>Time up</b>" + (chosen >= 0 ? "Your answer " + L[chosen] + " is kept and can no longer be changed." : "This question can no longer be answered.") + "</span></p>" : "";
+    // My-coaching capture (prep-coach.js): the confidence chips, study runs only. Skippable: no tap, no record.
+    // Timed exams keep the run clean and tag flagged questions at review time instead (t2solutionsHtml).
+    var confRow = r.mode === "study" && !locked ? '<div class="pn-mtag" role="group" aria-label="How sure are you?"><span class="pn-mut pn-small">How sure are you? (optional)</span><div class="pn-wrap">' + [["guessing", "Guessing"], ["confident", "Confident"], ["confused", "Confused"]].map(function (t) {
+      var on = r.conf && r.conf[r.i] === t[0];
+      return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="conf" data-v="' + t[0] + '">' + t[1] + "</button>";
+    }).join("") + "</div></div>" : "";
     var cs = secCur(r), lo = cs ? cs.from : 0, hi = cs ? cs.to : r.items.length;
     var nav = r.mode === "exam" && cs ?
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="prev"' + (r.i > lo ? "" : " disabled") + ">Previous</button>" +
@@ -1762,7 +1770,7 @@
     var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : "";
     st.swipeIn = 0;
     paint(bar(esc(r.title), cs ? esc(cs.label) + " · question " + (r.i - lo + 1) + " of " + cs.n : "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + (cs ? secLineHtml(r) + secStripHtml(r) : tlHtml(r)) + qprogHtml(r) +
-      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + confRow + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (revealFb) revealFeedback();
     tlSync(r);
@@ -1928,13 +1936,16 @@
     if (k === "b" && !(r.items[r.i]._s === "deck" || r.items[r.i]._py)) { e.preventDefault(); toggleBookmark(); return; }
     if (k === "g" && r.mode === "exam") { e.preventDefault(); openGrid(); }
   }
-  function record(it, chosen) {
+  function record(it, chosen, conf) {
     var s = load(), ok = chosen === it.a, td = today(), dk = deckKey(it._m || it.t);
     C.review(s, dk, it.id, C.gradeFor(ok), td);
     C.recordAnswer(s, dk, String(it.a), String(chosen));
     if (G.PrepPro) G.PrepPro.use("questions", { items: [it] });
     var ms = s.mod[it._m || it.t] || (s.mod[it._m || it.t] = { t: 0, ok: 0 });
     ms.t++; if (ok) ms.ok++; ms.last = td;
+    // My-coaching capture: the chip tallied on the module (skipped chips leave no trace).
+    var cf = conf == null ? null : ASSESS && ASSESS.cleanConf ? ASSESS.cleanConf(conf) : null;
+    if (cf) { ms.cf = ms.cf || { guessing: 0, confident: 0, confused: 0 }; ms.cf[cf] = (ms.cf[cf] || 0) + 1; }
     s.last = { s: it._s, m: it._m || it.t };
     // Answer log for readiness accuracy (prep-plan.js): [module, 1|0], newest last.
     if (G.PREP_PLAN) G.PREP_PLAN.noteAnswer(s, it._m || it.t, ok);
@@ -1950,7 +1961,7 @@
     if (r.qc) { var i0 = r.i; qtick(r); if (r.done || r.i !== i0 || r.qc.out[i0]) return; }   // the time ran out first: no answer after it
     if (r.sc) { secTick(r); if (r.done || r.phase === "between" || !inSec(r, r.i)) return; }   // a closed section never takes an answer
     if (r.changed && r.ans[r.i] >= 0 && r.ans[r.i] !== k) r.changed[r.i]++;
-    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; record(r.items[r.i], k); }
+    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; record(r.items[r.i], k, r.conf && r.conf[r.i]); }
     else r.ans[r.i] = k;
     renderRun();
   }
@@ -1968,7 +1979,7 @@
     if (r.qc && r.qc.used) { qcPause(r.qc, pnow()); r.secs = Math.round(r.qc.used.reduce(function (a, b) { return a + b; }, 0) / 1000); }
     if (r.custom) return r.custom.submit(r);
     if (r.qc) qcPause(r.qc, pnow());
-    if (r.mode === "exam") r.items.forEach(function (it, i) { if (it._gone) return; if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
+    if (r.mode === "exam") r.items.forEach(function (it, i) { if (it._gone) return; var cf = r.conf && r.conf[i]; if (r.ans[i] >= 0) record(it, r.ans[i], cf); else record(it, -1, cf); });
     // Tests 2: the attempt record (prep-assess.js result), daily completion, the saved session cleared.
     if (r.t2 && G.PREP_TESTS) { try { G.PREP_TESTS.finished(r); } catch (e) {} }
     if (r.save || r.psId) psSave(r);
@@ -2066,12 +2077,17 @@
           return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo);
       var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
+      // My-coaching capture: a timed exam shows no chips during the run; flagged questions are tagged here instead.
+      var tagRow = r.mark[i] && !it._gone ? '<div class="pn-mtag" role="group" aria-label="How sure were you?"><span class="pn-mut pn-small">Marked for review: how sure were you? (optional)</span><div class="pn-wrap">' + [["guessing", "Guessing"], ["confident", "Confident"], ["confused", "Confused"]].map(function (t) {
+        var on = r.conf && r.conf[i] === t[0];
+        return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="t2-conftag" data-i="' + i + '" data-v="' + t[0] + '">' + t[1] + "</button>";
+      }).join("") + "</div></div>" : "";
       return '<li><details class="t2sol t2sol-' + st + '" id="t2q' + i + '"' + (list.length === 1 ? " open" : "") + ">" +
         '<summary><span class="t2sol-n" aria-hidden="true">' + (i + 1) + '</span><span class="t2sol-t"><b><span class="pn-sr">' + (i + 1) + ". </span>" + esc(it.q.length > 110 ? it.q.slice(0, 109) + "…" : it.q) + "</b><small>" + esc(stT) + " · answer " + ansL + "</small></span>" + ico("chev") + "</summary>" +
         '<div class="t2sol-b"><p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
         '<ol class="pn-opts">' + it.o.map(function (o, k) {
           return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
-        }).join("") + "</ol>" + ex + outdatedHtml(it) +
+        }).join("") + "</ol>" + ex + outdatedHtml(it) + tagRow +
         (G.PREP_ASK && !it._gone ? askBtn("ask-rv", a >= 0 && a !== it.a ? "Why is " + (L[a] || "?") + " wrong? Ask MaiK" : "Ask MaiK why " + ansL + " is right", ' data-i="' + i + '"') : "") +
         (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
     }).join("");
@@ -2618,6 +2634,20 @@
     if (a === "secstart") { if (st.run && st.run.sc) startSection(st.run, Number(v)); return; }
     if (a === "prev") { if (st.run && st.run.i && canSwipe(-1)) { st.run.i--; if (e.detail) st.swipeIn = -1; renderRun(); } return; }
     if (a === "markq") { var rr = st.run; rr.mark[rr.i] = !rr.mark[rr.i]; return renderRun(); }
+    // My-coaching capture: toggle the confidence chip (tapping the lit chip clears it). When the question is
+    // already answered, the module tally moves with the chip so a retag never double counts.
+    if (a === "conf") {
+      var rc = st.run, itc = rc && rc.items[rc.i];
+      if (rc && !rc.done && rc.conf && itc) {
+        var cv = ASSESS && ASSESS.cleanConf ? ASSESS.cleanConf(v) : null, old = rc.conf[rc.i];
+        rc.conf[rc.i] = old === cv || !cv ? null : cv;
+        if (rc.ans[rc.i] >= 0 && old !== rc.conf[rc.i]) {
+          var mm = s.mod[itc._m || itc.t];
+          if (mm) { mm.cf = mm.cf || { guessing: 0, confident: 0, confused: 0 }; if (old && mm.cf[old] > 0) mm.cf[old]--; if (rc.conf[rc.i]) mm.cf[rc.conf[rc.i]] = (mm.cf[rc.conf[rc.i]] || 0) + 1; save(); }
+        }
+      }
+      return renderRun();
+    }
     if (a === "qgrid") return openGrid();
     if (a === "goq") { var gi = Number(b.getAttribute("data-i")); if (st.run.sc && !inSec(st.run, gi)) return; st.run.i = gi; st.stack.pop(); return renderRun(); }
     if (a === "submit" && st.run && st.run.sc) return secSubmitAsk();
