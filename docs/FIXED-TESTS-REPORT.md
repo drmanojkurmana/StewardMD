@@ -1,4 +1,4 @@
-# Fixed common tests: coverage report (2026-10-11, branch prep-fixed-tests)
+# Fixed common tests: coverage report (2026-10-11, branch prep-fixed-tests; image top-up, branch prep-image-papers)
 
 Owner request 2026-10-11: for each exam and each test format, 10-15 ready-made tests, identical
 for all students, listed in the Tests tab. Built by tools/prep-fixed-tests.mjs from the live bank
@@ -32,19 +32,40 @@ the Tests tab listing, the schema and the tests.
 
 | Exam | grand | part | mini | subject | topic | daily10 | image | pyq | short |
 |---|---|---|---|---|---|---|---|---|---|
-| FMGE | 15 (295/300) | 10 (148/150) | 15 (49/50) | 38 | 95 | 15 | 0/5 | - | image: bank holds no image items in MBBS scope |
-| NEET-PG | 15 | - | 15 | 38 | 95 | 15 | 0/5 | 5 | image: same |
-| INI-CET | 15 | - | 15 | 38 | 95 | 15 | 0/5 | - | image: same |
-| NEET-SS | 15 | - | 15 | 30 | 49 | 15 | 5 | - | - |
-| USMLE Step 1 | 15 | - | 15 | 22 | 55 (14 reduced) | 15 | 0/5 | - | image: same; topics reduced by the vignette filter |
+| FMGE | 15 (295/300) | 10 (148/150) | 15 (49/50) | 38 | 95 | 15 | 18 | - | - |
+| NEET-PG | 15 | - | 15 | 38 | 95 | 15 | 18 | 5 | - |
+| INI-CET | 15 | - | 15 | 38 | 95 | 15 | 18 | - | - |
+| NEET-SS | 15 | - | 15 | 30 | 49 | 15 | 7 | - | image: 2 radiology papers dropped, 75-95% repeats of papers 01-05 |
+| USMLE Step 1 | 15 | - | 15 | 22 | 55 (14 reduced) | 15 | 6 | - | image: 2nd anatomy paper dropped, pool exhausted (121 items); topics reduced by the vignette filter |
 
-800 papers built, 20 shortfalls. FMGE reductions are the official blueprint's unmapped Radiotherapy
+862 papers built, 3 shortfalls. FMGE reductions are the official blueprint's unmapped Radiotherapy
 quota (5/300), recorded in each paper. USMLE topic reductions are small vignette pools per topic,
-recorded in each paper. Image papers exist only for NEET-SS (108 eligible image items in
-ss-radiology); MBBS bank modules carry no image items, so the Image tests group stays hidden on the
-other four exams until such items exist (PYQ holds recall images; mixing them into Image tests is a
-possible follow-up, not done here). NEET-SS has 49 topic papers because small subjects
+recorded in each paper. NEET-SS has 49 topic papers because small subjects
 (ss-biostatistics: 123 items) hold fewer than 5 major topics.
+
+## Image top-up (branch prep-image-papers)
+
+The first build's 20 image shortfalls are gone: the bank now serves image MCQs through overlay
+files (maikimg1-maikimg6, radnotes3, radmax7), which the builder merges bank-first like the app's
+mergeOverlay (unseen overlay ids appended, sets in sorted order). A paper records the overlay sets
+its items came from (paper.overlays { subject: [sets] }); the Tests tab fetches those files for
+modules with ids the bank file lacks, so papers resolve exactly what was assembled. Papers without
+overlay items never pay for this (no missing ids, no extra fetch).
+
+Each exam gets 5 general Image tests plus one paper per subject with >= 22 eligible image items
+(two at >= 80), all 20 questions at the exam's own pace, sharing one numbering per exam
+(--subjects-only builds the subject papers alone, for top-ups like NEET-SS). Image pools at build
+time: FMGE/NEET-PG/INI-CET 975 each (pathology 308, anatomy 160, surgery 155, ophthalmology 93,
+microbiology 79, dermatology 58, orthopaedics 50, community medicine 36, radiology 36), NEET-SS 194
+(ss-radiology 108, ss-cardiology 86 ECG), USMLE Step 1 121 (anatomy 113, microbiology 8, after the
+per-module vignette rule).
+
+3 papers assembled but not shipped (repeat-majority, dropped rather than padding): USMLE Anatomy
+Image Test 07 (20/20 repeats), NEET-SS Radiology Image Tests 08 (15/20) and 09 (19/20). Worst
+sharing pair among shipped image papers: 0/20 on FMGE/NEET-PG/INI-CET, 2/20 on NEET-SS, 1/20 on
+USMLE (excluding the dropped papers). One bank datum found: item mk-99da9d08dfb4 is served from
+two overlay modules (maikimg1 pathology|pat-tumour-diagnosis and maikimg6
+microbiology|mic-other-dna-viruses, different stems); verify now accepts either triple.
 
 ## Publish route (after the PR merges)
 
@@ -110,3 +131,21 @@ Worst grand-test pair overlap: fmge 0%, neet-pg 0%, ini-cet 0%, neet-ss 0%, usml
 - neet-ss: 31402 eligible
 - usmle-step1: 31243 eligible (after the per-module vignette rule)
 - pyq pool (neet-pg recall 2017+): 1280 eligible
+
+### Image top-up (branch prep-image-papers)
+
+Built 62 papers, 0 assembly shortfalls, 3 repeat-majority papers dropped (see above).
+Worst image-pair sharing: fmge 0/20, neet-pg 0/20, ini-cet 0/20, neet-ss 2/20, usmle-step1 1/20.
+
+- fmge image: 18 built (5 general + anatomy 2, community-medicine 1, dermatology 1, microbiology 1, ophthalmology 2, orthopaedics 1, pathology 2, radiology 1, surgery 2)
+- neet-pg image: 18 built (same split)
+- ini-cet image: 18 built (same split)
+- neet-ss image: 2 built (ss-cardiology 2, numbered 06-07 past the 5 general)
+- usmle-step1 image: 6 built (5 general + anatomy 1)
+
+Bank pools at top-up build time (bank modules + overlays, eligible questions):
+- fmge: 136211 eligible, image 975
+- neet-pg: 136211 eligible, image 975
+- ini-cet: 136211 eligible, image 975
+- neet-ss: 32040 eligible, image 194
+- usmle-step1: 33184 eligible, image 121 (after the per-module vignette rule)

@@ -17,13 +17,17 @@
 // RUN (dry run first: no upload, no writes outside --cache/--out)
 //   node tools/prep-fixed-tests.mjs fetch [--cache ~/prep-data/fixed-tests/cache] [--api URL] [--jobs 8]
 //   node tools/prep-fixed-tests.mjs census [--cache ...]            eligible pools per exam and format; no writes
-//   node tools/prep-fixed-tests.mjs build [--cache ...] [--out ...] [--dry] [--exam ID] [--format F]
+//   node tools/prep-fixed-tests.mjs build [--cache ...] [--out ...] [--dry] [--exam ID] [--format F] [--subjects-only]
+// (--subjects-only with --format image: subject image papers only, no general ones; numbering still continues)
 //   node tools/prep-fixed-tests.mjs verify [--cache ...] [--out ...]
 //   node tools/prep-fixed-tests.mjs report [--out ...]              markdown to stdout (per exam/format counts)
 //
 // Rules. Only eligible questions (assembler eligible(): no flag, not withdrawn, no quality blocker; disputed keys
 // out) enter a paper; there is no item-quality sidecar on the server yet, so no status filter applies, and --quality
-// <dir> takes one when it exists. The blueprint is honoured (official quotas shrink, never borrow); no duplicate id
+// <dir> takes one when it exists. Pools are bank modules plus their overlay files, merged like the app's
+// mergeOverlay (bank first, unseen overlay ids appended, sets in sorted order); a paper records the overlay sets
+// its items came from (paper.overlays { subject: [sets] }) so the Tests tab resolves them. The blueprint is
+// honoured (official quotas shrink, never borrow); no duplicate id
 // or stem inside a paper (the assembler guarantees it); grand papers overlap as little as possible (per-exam usage
 // is tracked and passed as the assembler's soft `recent` preference, so fresh questions come first). Gaps are never
 // filled with unrelated questions: a refused paper is recorded as a shortfall and fewer papers ship. Papers are
@@ -57,6 +61,8 @@ export const ASK = { grand: 15, part: 5, mini: 15, subject_mini: 2, topic: 1, da
 export const TOPIC_MIN = 50;          // a "major" topic: the TOP_PER_SUBJECT biggest topics per subject (mixed group excluded)
 export const TOP_PER_SUBJECT = 5;   // ... with at least TOPIC_MIN bank questions each
 export const SET_COUNT = 20;          // subject mini, topic, image and PYQ sets
+export const IMG_SUB2 = 80;             // a subject with >= 80 eligible image items gets two image papers ...
+export const IMG_SUB1 = 22;             // ... >= 22 gets one; below that, its items only join the general image papers
 export const DEFAULT_API = "https://stewardmd.in/api/prep/bank/";
 export const DEFAULT_CACHE = path.join(os.homedir(), "prep-data", "fixed-tests", "cache");
 
@@ -113,7 +119,7 @@ export function paperTitle(exam, format, key, n, label) {
   if (format === "subject_mini") return `${E} ${label} Test ${n}`;
   if (format === "topic") return `${label} Test`;
   if (format === "daily10") return `${E} Daily 10 Set ${NN(n)}`;
-  if (format === "image") return `${E} Image Test ${NN(n)}`;
+  if (format === "image") return key === "all" ? `${E} Image Test ${NN(n)}` : `${E} ${label} Image Test ${NN(n)}`;
   if (format === "pyq") return `${E} PYQ Set ${NN(n)} (recall)`;
   throw new Error("unknown format " + format);
 }
@@ -142,7 +148,9 @@ export function planFor(profileId, format, key) {
     const [sid, mid] = String(key).split("|");
     return { asmType: "topic", profile: p, opts: { count: SET_COUNT, subjects: [sid], modules: [mid] } };
   }
-  if (format === "image") return { asmType: "custom", profile: p, opts: { count: SET_COUNT, image: true } };
+  if (format === "image") return key && key !== "all"
+    ? { asmType: "custom", profile: p, opts: { count: SET_COUNT, image: true, subjects: [key] } }
+    : { asmType: "custom", profile: p, opts: { count: SET_COUNT, image: true } };
   if (format === "pyq") return { asmType: "custom", profile: p, opts: { count: SET_COUNT, pyq: true } };
   throw new Error("unknown format " + format);
 }
@@ -152,10 +160,43 @@ export function scopeFor(tax, exam, format, key) {
   if (format === "subject_mini") return subjectName(tax, key);
   if (format === "topic") return String(key).split("|")[1];
   if (format === "pyq") return "NEET-PG recall 2017-2025";
-  if (format === "image") return `Image questions · all ${E} subjects`;
+  if (format === "image") return key === "all" ? `Image questions · all ${E} subjects` : `Image questions · ${subjectName(tax, key)}`;
   if (format === "daily10") return `Mixed subjects · ${E} pace and marking`;
   if (format === "mini") return `One section · all ${E} subjects`;
   return `All ${E} subjects`;
+}
+
+/* ---------- overlays: extra MCQs outside the bank modules (prep.js loadOverlay) ---------- */
+// Committed per-module counts (tools/prep-overlay-counts.mjs): sets[set][subject][module] = items.
+export function overlaySets(root = ROOT) {
+  try { return JSON.parse(fs.readFileSync(path.join(root, "prep", "bank", "overlay-counts.json"), "utf8")).sets || {}; } catch { return {}; }
+}
+// Every overlay module file for exam-scope subjects, sets and modules sorted (deterministic merge order).
+export function overlayFiles(tax, sets = overlaySets()) {
+  const scope = new Set(EXAMS.flatMap((e) => scopeSubjects(tax, e)));
+  const out = [];
+  for (const set of Object.keys(sets).sort()) {
+    for (const sid of Object.keys(sets[set] || {}).sort()) {
+      if (!scope.has(sid)) continue;
+      for (const mid of Object.keys(sets[set][sid] || {}).sort()) out.push({ set, sid, mid });
+    }
+  }
+  return out;
+}
+export function overlayCached(cache) {
+  let n = 0;
+  const top = path.join(cache, "overlay");
+  if (!fs.existsSync(top)) return 0;
+  for (const set of fs.readdirSync(top)) {
+    const sp = path.join(top, set);
+    if (!fs.statSync(sp).isDirectory()) continue;
+    for (const sid of fs.readdirSync(sp)) {
+      const sidp = path.join(sp, sid);
+      if (!fs.statSync(sidp).isDirectory()) continue;
+      n += fs.readdirSync(sidp).filter((f) => f.endsWith(".json")).length;
+    }
+  }
+  return n;
 }
 
 /* ---------- fetch: live bank modules + PYQ into a disk cache (resumable) ---------- */
@@ -204,6 +245,39 @@ export async function fetchBank({ cache = DEFAULT_CACHE, api = DEFAULT_API, jobs
   };
   let i = 0;
   await Promise.all(Array.from({ length: Math.max(1, jobs) }, async () => { while (i < want.length) await one(want[i++]); }));
+  // Overlay module files (union of the committed counts; image papers draw mostly from these).
+  const ovWant = overlayFiles(tax);
+  let ovFetched = 0;
+  const skipped = [];
+  const oneOv = async (w) => {
+    const rel = `overlay/${w.set}/${w.sid}/${w.mid}.json`;
+    const f = path.join(cache, rel);
+    const hit = readCache(f);
+    if (hit && Array.isArray(hit.items)) { done++; return; }
+    try {
+      const j = await getJSON(api + rel);
+      if (!j || !Array.isArray(j.items)) throw new Error("no items in " + rel);
+      fs.mkdirSync(path.dirname(f), { recursive: true });
+      fs.writeFileSync(f, JSON.stringify(j));
+      ovFetched++;
+    } catch (e) {
+      if (!/HTTP 404/.test(String((e && e.message) || e))) throw e;
+      skipped.push(rel); // counts list a file the bank no longer serves: the pool simply lacks those items
+    }
+    if (++done % 200 === 0) log(`  ${done}/${want.length + ovWant.length} modules`);
+  };
+  let k = 0;
+  await Promise.all(Array.from({ length: Math.max(1, jobs) }, async () => { while (k < ovWant.length) await oneOv(ovWant[k++]); }));
+  // Live manifest cross-check: sets the app serves but the committed counts do not know.
+  try {
+    const ptr = await getJSON(api + "overlay/maik/index.json");
+    const live = new Set();
+    for (const sid of Object.keys((ptr && ptr.sets) || {})) for (const s of ptr.sets[sid]) live.add(s);
+    const known = new Set(Object.keys(overlaySets()));
+    const missing = [...live].filter((s) => !known.has(s)).sort();
+    if (missing.length) log(`  WARNING: live overlay sets missing from prep/bank/overlay-counts.json (pool lacks them): ${missing.join(", ")}`);
+  } catch (e) { log(`  WARNING: live overlay manifest unreadable (${(e && e.message) || e}); pool follows the committed counts`); }
+  if (skipped.length) log(`  WARNING: ${skipped.length} overlay files 404 (${skipped.slice(0, 5).join(", ")}${skipped.length > 5 ? "..." : ""})`);
   // PYQ recall papers (the items file the live index names).
   const pyqIx = await getJSON(api + `${pyq}/pyq/index.json`);
   const pyqF = path.join(cache, `${pyq}/pyq`, pyqIx.file);
@@ -215,31 +289,58 @@ export async function fetchBank({ cache = DEFAULT_CACHE, api = DEFAULT_API, jobs
     pyqFetched = 1;
   }
   fs.writeFileSync(path.join(cache, "pyq-index.json"), JSON.stringify(pyqIx));
-  log(`bank cache: ${want.length} module files (+PYQ), ${fetched + pyqFetched} fetched, ${want.length - fetched} reused`);
-  return { subjects, modules: want.length };
+  log(`bank cache: ${want.length} module files (+PYQ), ${fetched + pyqFetched} fetched, ${want.length - fetched} reused; overlays: ${ovWant.length} files, ${ovFetched} fetched, ${skipped.length} skipped (404)`);
+  return { subjects, modules: want.length, overlays: ovWant.length, ovFetched, ovSkipped: skipped.length };
 }
 
 /* ---------- load: slim pools per subject, exactly what assemble() reads ---------- */
-const slim = (it, s, m) => ({ id: it.id, q: it.q, o: it.o, a: it.a, flags: it.flags, img: it.img, stack: it.stack, d: it.d, vh: it.vh, ex: it.ex, _s: s, _m: m });
-export function loadSubject(cache, tax, ver, sid) {
+const slim = (it, s, m, ov = null) => ({ id: it.id, q: it.q, o: it.o, a: it.a, flags: it.flags, img: it.img, stack: it.stack, d: it.d, vh: it.vh, ex: it.ex, _s: s, _m: m, _ov: ov });
+export function loadSubject(cache, tax, ver, sid, sets = overlaySets()) {
   const bv = bvOf(tax, ver, sid);
   const ix = readCache(path.join(cache, `${bv}/${sid}/index.json`));
   if (!ix) throw new Error("not fetched: " + sid + " (run fetch first)");
-  const lists = [];
+  const lists = [], byMid = {};
   for (const t of ix.topics || []) {
     if (t.group === "mixed" || !(t.count > 0)) continue;
     const j = readCache(path.join(cache, `${bv}/${sid}/mcq/${t.id}.json`));
     if (!j) throw new Error("not fetched: " + sid + "/" + t.id);
-    lists.push({ s: sid, m: t.id, items: (j.items || []).map((it) => slim(it, sid, t.id)) });
+    const l = { s: sid, m: t.id, items: (j.items || []).map((it) => slim(it, sid, t.id)) };
+    lists.push(l);
+    byMid[t.id] = l;
+  }
+  // Overlay items merge in like the app's mergeOverlay: bank items first, then overlay items whose id the
+  // module (bank or an earlier set) does not have, sets in sorted order. Overlay-only modules join as new lists.
+  const perMid = {};
+  for (const set of Object.keys(sets).sort()) {
+    const sm = (sets[set] || {})[sid];
+    if (!sm) continue;
+    for (const mid of Object.keys(sm)) {
+      const j = readCache(path.join(cache, "overlay", set, sid, mid + ".json"));
+      if (!j || !Array.isArray(j.items)) continue; // not fetched: the pool simply lacks those items
+      (perMid[mid] || (perMid[mid] = [])).push({ set, items: j.items });
+    }
+  }
+  for (const mid of Object.keys(perMid)) {
+    let l = byMid[mid];
+    if (!l) { l = { s: sid, m: mid, items: [] }; lists.push(l); byMid[mid] = l; }
+    const seen = {};
+    for (const it of l.items) seen[it.id] = 1;
+    for (const { set, items } of perMid[mid]) {
+      for (const it of items) {
+        if (!it || it.id == null || seen[it.id]) continue;
+        seen[it.id] = 1;
+        l.items.push(slim(it, sid, mid, set));
+      }
+    }
   }
   return { bv, lists };
 }
 // USMLE papers draw vignettes per module exactly like the app (prep.js poolFor); other exams pass every item
 // through and let eligible() decide.
-export function examLists(cache, tax, ver, exam) {
+export function examLists(cache, tax, ver, exam, sets) {
   const out = [], bank = {};
   for (const sid of scopeSubjects(tax, exam)) {
-    const { bv, lists } = loadSubject(cache, tax, ver, sid);
+    const { bv, lists } = loadSubject(cache, tax, ver, sid, sets);
     (bank[bv] || (bank[bv] = [])).push(sid);
     for (const l of lists) out.push(exam.profile === "usmle-step1" ? { ...l, items: PURE.poolFor(l.items, "usmle") } : l);
   }
@@ -305,7 +406,7 @@ export function buildPaper(tax, examId, format, key, n, bankLists, bankVers, use
   const id = paperIdFor(examId, format, key, n);
   if (!r.ok) return { shortfall: { id, reason: r.refused || "refused", requested: r.requested, eligible: countEligible(bankLists, plan, quality) } };
   for (const it of r.items) used[String(it.id)] = 1;
-  const name = label || (format === "subject_mini" ? subjectName(tax, key) : String(key));
+  const name = label || ((format === "subject_mini" || (format === "image" && key !== "all")) ? subjectName(tax, key) : String(key));
   const paper = {
     schema: PAPER_SCHEMA, id, v: 1, exam: examId, format,
     title: paperTitle(examId, format, key, n, name),
@@ -318,6 +419,16 @@ export function buildPaper(tax, examId, format, key, n, bankLists, bankVers, use
     items: r.items.map((it) => [it._s, it._m, String(it.id)]),
   };
   if (r.reduced) paper.reduced_from = r.requested;
+  // Overlay sets the paper's items came from ({ subject: [sets] }, sorted): the Tests tab merges these files
+  // when the bank file lacks an item. Omitted when every item is a bank item.
+  const ov = {};
+  for (const it of r.items) {
+    if (!it._ov) continue;
+    const l = ov[it._s] || (ov[it._s] = []);
+    if (l.indexOf(it._ov) < 0) l.push(it._ov);
+  }
+  Object.values(ov).forEach((v) => v.sort());
+  if (Object.keys(ov).length) paper.overlays = ov;
   return { paper };
 }
 function countEligible(bankLists, plan, quality) {
@@ -333,18 +444,32 @@ function countEligible(bankLists, plan, quality) {
   }
   return n;
 }
+// Subjects with enough eligible image items for their own papers: [{ sid, n }] (IMG_SUB2/IMG_SUB1).
+export function imageSubjects(cache, tax, ver, exam, sets) {
+  const { lists } = examLists(cache, tax, ver, exam, sets);
+  const sizes = poolSizes(lists, { image: true });
+  return Object.keys(sizes)
+    .filter((s) => (sizes[s] || 0) >= IMG_SUB1)
+    .map((s) => ({ sid: s, n: (sizes[s] || 0) >= IMG_SUB2 ? 2 : 1 }))
+    .sort((a, b) => (a.sid < b.sid ? -1 : 1));
+}
 // Full request list for one exam: [format, key, n] in build order (grands first, so they get first pick).
 // startAt {"<exam>/<format>": n} continues NN numbering past existing papers (new papers, new IDs).
-export function requestList(tax, cache, ver, exam, onlyFormat, startAt = {}) {
+// Image papers share one NN numbering per exam: ASK.image general papers, then the subject papers.
+export function requestList(tax, cache, ver, exam, onlyFormat, startAt = {}, subjectsOnly = false) {
   const req = [];
   const fmts = onlyFormat ? [onlyFormat] : FORMATS;
   const parts = (A.profile(exam.profile) || {}).format || {};
   for (const f of fmts) {
     if (f === "part" && !parts.parts) continue;
     if (f === "pyq" && exam.profile !== "neet-pg") continue;
-    if (f === "grand" || f === "mini" || f === "daily10" || f === "image" || f === "pyq") {
+    if (f === "grand" || f === "mini" || f === "daily10" || f === "pyq") {
       const from = (startAt[`${exam.profile}/${f}`] || 0) + 1;
       for (let n = from; n < from + ASK[f]; n++) req.push([f, "all", n]);
+    } else if (f === "image") {
+      let n = (startAt[`${exam.profile}/image`] || 0) + 1;
+      if (!subjectsOnly) for (let k = 0; k < ASK.image; k++) req.push(["image", "all", n++]);
+      for (const { sid, n: cnt } of imageSubjects(cache, tax, ver, exam)) for (let k = 0; k < cnt; k++) req.push(["image", sid, n++]);
     } else if (f === "part") {
       const ps = [...new Set((parts.sections || []).map((s) => String(s.part || "1")))].sort();
       for (const p of ps) {
@@ -364,13 +489,13 @@ export function topicTitle(cache, tax, ver, sid, mid) {
   for (const t of (ix && ix.topics) || []) if (t.id === mid) return (t.title && t.title.en) || mid;
   return mid;
 }
-export function buildExam({ tax, cache, ver, pyqVer, exam, quality = {}, createdAt, onlyFormat = null, startAt = {}, priorUsed = [], log = () => {} }) {
+export function buildExam({ tax, cache, ver, pyqVer, exam, quality = {}, createdAt, onlyFormat = null, startAt = {}, priorUsed = [], subjectsOnly = false, log = () => {} }) {
   const { lists, bank } = examLists(cache, tax, ver, exam);
   const pyq = exam.profile === "neet-pg" ? loadPyq(cache, pyqVer) : null;
   const used = {};
   for (const id of priorUsed) used[id] = 1;
   const papers = [], shortfalls = [];
-  for (const [format, key, n] of requestList(tax, cache, ver, exam, onlyFormat, startAt)) {
+  for (const [format, key, n] of requestList(tax, cache, ver, exam, onlyFormat, startAt, subjectsOnly)) {
     const bankLists = format === "pyq" ? pyq.lists : lists;
     const bankVers = format === "pyq" ? { [pyqVer + "/pyq"]: ["pyq"] } : bank;
     // Topic titles come from the live index.
@@ -475,24 +600,30 @@ export function verify({ cache, out, log = () => {} }) {
   const tax = loadTaxonomy(), { ver, pyq } = appVersions();
   const papers = readOut(out);
   const errors = [];
-  const have = {};
+  const have = {}; // id -> ["subject|module", ...]: one id may be served from two modules (both triples resolve)
+  const mark = (id, where) => { const l = have[id] || (have[id] = []); if (l.indexOf(where) < 0) l.push(where); };
   for (const sid of [...new Set(EXAMS.flatMap((e) => scopeSubjects(tax, e)))]) {
     const bv = bvOf(tax, ver, sid);
     const ix = readCache(path.join(cache, `${bv}/${sid}/index.json`));
     for (const t of (ix && ix.topics) || []) {
       if (t.group === "mixed" || !(t.count > 0)) continue;
       const j = readCache(path.join(cache, `${bv}/${sid}/mcq/${t.id}.json`));
-      for (const it of (j && j.items) || []) have[String(it.id)] = `${sid}|${t.id}`;
+      for (const it of (j && j.items) || []) mark(String(it.id), `${sid}|${t.id}`);
     }
   }
   const pyqIx = readCache(path.join(cache, "pyq-index.json"));
   const pyqJ = pyqIx && readCache(path.join(cache, `${pyq}/pyq`, pyqIx.file));
-  for (const it of (pyqJ && pyqJ.items) || []) have[String(it.id)] = "pyq|mix";
+  for (const it of (pyqJ && pyqJ.items) || []) mark(String(it.id), "pyq|mix");
+  for (const { set, sid, mid } of overlayFiles(tax)) {
+    const j = readCache(path.join(cache, "overlay", set, sid, mid + ".json"));
+    for (const it of (j && j.items) || []) if (it && it.id != null) mark(String(it.id), `${sid}|${mid}`);
+  }
   for (const p of papers) {
     for (const x of validatePaper(p)) errors.push(`${p.id}: ${x}`);
     for (const t of p.items || []) {
-      if (!have[t[2]]) errors.push(`${p.id}: missing ${t[2]}`);
-      else if (have[t[2]] !== `${t[0]}|${t[1]}` && t[0] !== "pyq") errors.push(`${p.id}: moved ${t[2]} (${t[0]}|${t[1]} now ${have[t[2]]})`);
+      const locs = have[t[2]];
+      if (!locs) errors.push(`${p.id}: missing ${t[2]}`);
+      else if (t[0] !== "pyq" && locs.indexOf(`${t[0]}|${t[1]}`) < 0) errors.push(`${p.id}: moved ${t[2]} (${t[0]}|${t[1]} not served; now ${locs.join(", ")})`);
     }
   }
   const idx = readCache(path.join(out, "index.json"));
@@ -566,9 +697,12 @@ async function main(argv = process.argv.slice(2)) {
       const { lists } = examLists(cache, tax, ver, exam);
       const tot = poolSizes(lists, {});
       const n = Object.values(tot).reduce((a, x) => a + x, 0);
-      const img = Object.values(poolSizes(lists, { image: true })).reduce((a, x) => a + x, 0);
+      const imgSizes = poolSizes(lists, { image: true });
+      const img = Object.values(imgSizes).reduce((a, x) => a + x, 0);
       const topics = majorTopics(cache, tax, ver, exam).length;
       console.log(`${exam.profile}: subjects=${scopeSubjects(tax, exam).length} eligible=${n} image=${img} major_topics=${topics}`);
+      const nz = Object.entries(imgSizes).filter(([, x]) => x > 0).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1));
+      for (const [s, x] of nz) console.log(`  image ${s}: ${x}`);
     }
     const pq = loadPyq(cache, pyq);
     console.log(`pyq pool (neet-pg recall 2017+): ${poolSizes(pq.lists, {}).pyq || 0} eligible`);
@@ -577,6 +711,9 @@ async function main(argv = process.argv.slice(2)) {
   if (cmd === "build") {
     const dry = argv.includes("--dry");
     const onlyExam = arg(argv, "--exam", null), onlyFormat = arg(argv, "--format", null);
+    const subjectsOnly = argv.includes("--subjects-only");
+    if (subjectsOnly && onlyFormat !== "image") throw new Error("--subjects-only needs --format image");
+    if ((!onlyFormat || onlyFormat === "image") && !overlayCached(cache)) throw new Error("no overlay files in the cache (run fetch first): image papers would shortfall");
     // Numbering continues past existing papers unless --start restarts it (rebuilds then skip as identical).
     const startAt = argv.includes("--start") ? {} : startNumbers(out);
     const prior = readOut(out);
@@ -586,7 +723,7 @@ async function main(argv = process.argv.slice(2)) {
       const { lists } = examLists(cache, tax, ver, exam);
       bankCounts[exam.profile] = poolSizes(lists, {});
       const priorUsed = prior.filter((p) => p.exam === exam.profile).flatMap((p) => p.items.map((t) => t[2]));
-      const r = buildExam({ tax, cache, ver, pyqVer: pyq, exam, quality, createdAt, onlyFormat, startAt, priorUsed, log });
+      const r = buildExam({ tax, cache, ver, pyqVer: pyq, exam, quality, createdAt, onlyFormat, startAt, priorUsed, subjectsOnly, log });
       papers.push(...r.papers);
       shortfalls.push(...r.shortfalls);
       log(`${exam.profile}: ${r.papers.length} papers, ${r.shortfalls.length} shortfalls`);

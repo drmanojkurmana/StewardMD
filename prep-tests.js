@@ -192,6 +192,18 @@
     if (!P.fxm[u]) P.fxm[u] = H.getJSON(u).then(function (ix) { return H.getJSON(H.bankApi + ver + "/" + ix.file).then(function (j) { return j.items || []; }, function () { return []; }); }, function () { return []; });
     return P.fxm[u];
   }
+  // One module's overlay items for the paper's sets, in the paper's set order, deduplicated by id.
+  function fxOverlays(sid, mid, sets) {
+    return Promise.all((sets || []).map(function (set) {
+      var u = H.bankApi + "overlay/" + set + "/" + sid + "/" + mid + ".json";
+      if (!P.fxm[u]) P.fxm[u] = H.getJSON(u).then(function (j) { return j.items || []; }, function () { return []; });
+      return P.fxm[u];
+    })).then(function (rs) {
+      var out = [], seen = {};
+      rs.forEach(function (items) { (items || []).forEach(function (it) { if (it && it.id != null && !seen[it.id]) { seen[it.id] = 1; out.push(it); } }); });
+      return out;
+    });
+  }
   function fxResolve(paper) {
     var verOf = {}, ver;
     for (ver in paper.bank || {}) (paper.bank[ver] || []).forEach(function (sid) { verOf[sid] = ver; });
@@ -201,9 +213,24 @@
       if (!seen[k]) { seen[k] = 1; files[k] = t[0] === "pyq" ? fxPyq(verOf.pyq || "v5/pyq") : fxFile(t[0], t[1], verOf[t[0]] || "v5"); }
     });
     return Promise.all(Object.keys(files).map(function (k) { return files[k].then(function (items) { return [k, items]; }); })).then(function (got) {
-      var by = {}, hid = H.hidden();
+      var by = {};
       got.forEach(function (g) { var m = {}; g[1].forEach(function (it) { m[String(it.id)] = it; }); by[g[0]] = m; });
-      var items = [], missing = 0;
+      // Papers with overlay items (paper.overlays { subject: [sets] }): modules with ids the bank file
+      // lacks fetch their overlay files, merged bank-first like the app's mergeOverlay. Papers without
+      // overlays never pay for this: no missing ids, no extra fetch.
+      var miss = {};
+      (paper.items || []).forEach(function (t) { if (t[0] !== "pyq" && !(by[t[0] + "|" + t[1]] || {})[t[2]]) miss[t[0] + "|" + t[1]] = 1; });
+      var keys = Object.keys(miss).filter(function (k) { return paper.overlays && paper.overlays[k.split("|")[0]]; });
+      if (!keys.length) return by;
+      return Promise.all(keys.map(function (k) {
+        var p = k.split("|");
+        return fxOverlays(p[0], p[1], paper.overlays[p[0]]).then(function (items) { return [k, items]; });
+      })).then(function (ovs) {
+        ovs.forEach(function (o) { o[1].forEach(function (it) { if (!by[o[0]][String(it.id)]) by[o[0]][String(it.id)] = it; }); });
+        return by;
+      });
+    }).then(function (by) {
+      var items = [], missing = 0, hid = H.hidden();
       (paper.items || []).forEach(function (t) {
         var it = (by[t[0] + "|" + t[1]] || {})[t[2]];
         if (!it || hid[t[2]]) { missing++; items.push({ id: t[2], q: "This question is no longer available.", o: ["-", "-", "-", "-"], a: -9, _s: t[0], _m: t[1], _gone: true }); return; }
