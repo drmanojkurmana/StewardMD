@@ -27,7 +27,11 @@
    a strip; the student keeps the ones to use. After the text round, each kept image is one `imcq` call with the page
    text near it (PREP_SRC.nearSents); the server keeps a question only when the page text states its key, else the image
    is skipped. An image that got a question is stored with the deck (prep-imgs, a data: URL) and shown with the stem
-   (imgPlace "stem") through the PYQ figure and zoom. The image is sent only for that call and kept nowhere else. */
+   (imgPlace "stem") through the PYQ figure and zoom. The image is sent only for that call and kept nowhere else.
+
+   Owner 2026-10-11: the server keeps a deck's working state 7 days. When it is gone (deck-not-started) and this
+   phone still has the source, the round re-registers the deck with one facts call and goes on; only a deck whose
+   source is gone ends with the plain message, and its questions stay for practice. */
 (function (G) {
   "use strict";
   // Bound once per element and site; a later call swaps the handler (prep.js PREP_DOM.on: a patched repaint keeps nodes).
@@ -71,7 +75,7 @@
     "ai-timeout": "The question writer took too long. Try again.",
     "offline": "No connection. Check the internet and try again.",
     "storage": "The phone storage is full, so the deck could not be saved. Free some space and try again.",
-    "deck-not-started": "The server no longer knows this deck, so it cannot add questions. Make a new deck from the same source.",
+    "deck-not-started": "The source for this deck is gone from this phone, so no more questions can be added. What you made is safe: practise it below.",
     "unknown": "Something went wrong. Try again."
   };
   var BY_STATUS = { 400: "bad-input", 401: "sign-in", 402: "needs-plan", 413: "too-large", 429: "rate", 502: "ai-failed", 504: "ai-timeout" };
@@ -404,6 +408,9 @@
     if (op.op === "facts") {
       var chunk = job.chunks[op.chunk];
       body.chunk = SR.chunkPayload(chunk);
+      // A re-register is new work, not a retry: rereg changes its idem so the server executes it instead of
+      // answering from the 10-minute replay record (which would recreate no working state).
+      if (op.rereg) body.rereg = 1;
       return deps.send(body).then(function (res) {
         applyUsage(job, res, deps);
         var fresh = [], cards = [];
@@ -413,7 +420,7 @@
           job.facts[rec.id] = rec; job.factOrder.push(rec.id); fresh.push(rec); cards.push(toCard(rec, job.deckId, job.ctx));
         });
         job.done[op.chunk] = 1;
-        m.prog.done.push(op.chunk);
+        if (m.prog.done.indexOf(op.chunk) < 0) m.prog.done.push(op.chunk);
         m.stats.facts += fresh.length; m.stats.cards += cards.length;
         var first = job.saved ? Promise.resolve() : store.putSrc(srcRec(job)).then(function () {
           if (!job.imgQ.length || !store.putImgs) return;
@@ -544,8 +551,18 @@
     var caps = capsFrom(res && res.usage, deps.today || dayKey());
     if (caps) { job.caps = caps; if (deps.onCaps) deps.onCaps(caps); }
   }
+  /* The chunk a re-register re-sends: one already done (its facts come back with the same ids and are skipped),
+     else the first chunk. */
+  function reregChunk(job) {
+    var ids = Object.keys(job.done || {});
+    if (ids.length) return +ids[0];
+    if (job.order && job.order.length) return job.order[0];
+    return job.chunks && job.chunks.length ? 0 : null;
+  }
   /* Run the round to its end. Never rejects: resolves { ok, code?, accepted, more }. A cap stop is written to the
-     manifest (cost.stopped); everything that passed before it stays saved. */
+     manifest (cost.stopped); everything that passed before it stays saved. When the server has forgotten the deck
+     (deck-not-started: its 7-day working state expired) and this phone still has the source, the deck is
+     re-registered with one facts call and the round goes on; only a deck whose source is gone ends here. */
   function runRound(job, deps) {
     function loop() {
       var op = nextOp(job);
@@ -559,16 +576,27 @@
     }
     return loop().then(null, function (e) {
       var code = e && e.code ? e.code : e && e.name === "QuotaExceededError" ? "storage" : e && e.status != null ? errorCode(e.status, e.body) : "storage";
-      if (CAP_STOPS[code]) { job.stopped = code; job.m.cost.stopped = code; }
-      var eb = e && e.body && typeof e.body === "object" ? e.body : null;
-      if (eb && eb.usage) applyUsage(job, eb, deps);   // a failed AI call is still metered
-      else if (eb && (eb.monthDecks != null || eb.dayDecks != null)) { var c0 = capsFrom(eb, deps.today || dayKey()); job.caps = c0; if (deps.onCaps) deps.onCaps(c0); }
-      var after = capsAfterStop(job.caps, code, deps.today || dayKey());
-      if (after !== job.caps) { job.caps = after; if (deps.onCaps) deps.onCaps(after); }
-      // A stop the student cannot retry ends the round; anything else keeps it in the manifest to continue later.
-      var done = !job.saved ? Promise.resolve() : (canRetry(code) ? saveDeck(job, deps.store) : endRound(job, deps)).then(null, function () {});
-      return done.then(function () { return { ok: false, code: code, message: MSG[code], retry: canRetry(code), accepted: job.round.accepted, more: hasMore(job), mt: job.round.mt || 0, full: DK.questionCount(job.m) >= DECK_MAX }; });
+      if (code === "deck-not-started" && !job.rereg && job.saved && job.sents && job.sents.length && job.chunks && job.chunks.length) {
+        var c = reregChunk(job);
+        if (c != null) {
+          job.rereg = 1;
+          return step(job, { op: "facts", chunk: c, rereg: true }, deps).then(loop).then(null, function (e2) { return failRun(job, deps, e2); });
+        }
+      }
+      return failRun(job, deps, e);
     });
+  }
+  function failRun(job, deps, e) {
+    var code = e && e.code ? e.code : e && e.name === "QuotaExceededError" ? "storage" : e && e.status != null ? errorCode(e.status, e.body) : "storage";
+    if (CAP_STOPS[code]) { job.stopped = code; job.m.cost.stopped = code; }
+    var eb = e && e.body && typeof e.body === "object" ? e.body : null;
+    if (eb && eb.usage) applyUsage(job, eb, deps);   // a failed AI call is still metered
+    else if (eb && (eb.monthDecks != null || eb.dayDecks != null)) { var c0 = capsFrom(eb, deps.today || dayKey()); job.caps = c0; if (deps.onCaps) deps.onCaps(c0); }
+    var after = capsAfterStop(job.caps, code, deps.today || dayKey());
+    if (after !== job.caps) { job.caps = after; if (deps.onCaps) deps.onCaps(after); }
+    // A stop the student cannot retry ends the round; anything else keeps it in the manifest to continue later.
+    var done = !job.saved ? Promise.resolve() : (canRetry(code) ? saveDeck(job, deps.store) : endRound(job, deps)).then(null, function () {});
+    return done.then(function () { return { ok: false, code: code, message: MSG[code], retry: canRetry(code), accepted: job.round.accepted, more: hasMore(job), mt: job.round.mt || 0, full: DK.questionCount(job.m) >= DECK_MAX }; });
   }
 
   // The round is over: it leaves the manifest, its MaiK Tokens count toward this deck's average.
@@ -622,7 +650,7 @@
     idemKey: idemKey, deckIdFor: deckIdFor, mixFor: mixFor, addUsage: addUsage, dayKey: dayKey, capsFrom: capsFrom, capLine: capLine, capsAfterStop: capsAfterStop, costLine: costLine,
     factRecord: factRecord, factPayload: factPayload, paraFor: paraFor, gatesPass: gatesPass, toStored: toStored, toCard: toCard, jaccard: jaccard, nearDup: nearDup,
     deckKey: deckKey, cardDeckKey: cardDeckKey, deckProgress: deckProgress, purgeStore: purgeStore, defaultTitle: defaultTitle, readNote: readNote, unreadableMessage: unreadableMessage,
-    newRound: newRound, newJob: newJob, nextOp: nextOp, attachImages: attachImages, imgB64: imgB64, unusedFids: unusedFids, hasMore: hasMore, step: step, runRound: runRound, callOp: callOp
+    newRound: newRound, newJob: newJob, nextOp: nextOp, attachImages: attachImages, imgB64: imgB64, unusedFids: unusedFids, hasMore: hasMore, step: step, runRound: runRound, callOp: callOp, reregChunk: reregChunk
   };
   if (isNode) { module.exports = PURE; return; }
 

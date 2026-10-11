@@ -22,8 +22,9 @@
    3. A reinstall (or a new phone) starts with empty storage, and nothing was kept anywhere else. Now every saved deck
       is mirrored to the app's own files on native (Capacitor Filesystem, Directory.DATA, prep-decks/<id>.json, the
       whole deck with its images) and backed up, encrypted, to the student's account (/api/prep/decks: manifest,
-      questions, cards and the facts not yet used with the sentences they cite; no file, no images, no other page
-      text). restore() brings back what is missing: native files first, then the account, after sign-in.
+      questions, cards, the facts not yet used with the sentences they cite, and a MaiK module's grounding text;
+      no file, no images, no other page text). restore() brings back what is missing: native files first, then the
+      account, after sign-in.
    Not causes (checked): an OTA update keeps the WebView origin (capacitor-updater swaps the server base path only),
    and sign-out does not touch PrepNucleus storage (no wipe listener here). */
 (function (G) {
@@ -106,9 +107,10 @@
 
   /* ---------- backup payload (pure) ---------- */
   /* What leaves the phone for the account backup: the manifest (title scrubbed again, no running round), every
-     question (an image question keeps its imgId, its picture stays on the phone), every card, and the facts not used
-     yet with only the one or two sentences each cites (quote), so "10 more" still works after a restore. */
-  function backupPayload(m, items, cards, facts, sents, scrub) {
+     question (an image question keeps its imgId, its picture stays on the phone), every card, the facts not used
+     yet with only the one or two sentences each cites (quote), so "10 more" still works after a restore, and a MaiK
+     module's grounding text (ground), so its next questions stay grounded. */
+  function backupPayload(m, items, cards, facts, sents, scrub, ground) {
     var byN = {}, sc = scrub || function (x) { return x; };
     (sents || []).forEach(function (s) { byN[s.n] = s.tx; });
     var mm = JSON.parse(JSON.stringify(m || {}));
@@ -123,7 +125,11 @@
       fx.push({ id: f.id, deckId: f.deckId, ft: f.ft, cq: f.cq, sn: f.sn, fk: f.fk, p: f.p, h: f.h, sec: f.sec, used: false, chunk: f.chunk, quote: q.slice(0, 2000) });
     });
     var it = (items || []).map(function (x) { var o = {}; for (var k in x) if (k !== "img" && k !== "_s" && k !== "_m") o[k] = x[k]; return o; });
-    return { v: 1, m: mm, items: it, cards: (cards || []).slice(), facts: fx };
+    var out = { v: 1, m: mm, items: it, cards: (cards || []).slice(), facts: fx };
+    // A MaiK module's grounding text (its own notes, never a Layer C source): small enough for the backup, so more
+    // questions stay grounded after a restore. Scrubbed like the title: it leaves the phone encrypted either way.
+    if (ground) out.ground = sc(String(ground)).slice(0, 200000);
+    return out;
   }
   /* A payload back to records for IndexedDB, or null when it is not a deck. The source sentences are not part of it,
      so the manifest says so (noSrc): "10 more" uses the saved facts, then asks for the source. */
@@ -132,7 +138,8 @@
     var id = p.m.id, m = p.m;
     m.restored = Date.now(); m.noSrc = true; m.run = null;
     var own = function (r) { return r && typeof r === "object" && r.deckId === id; };
-    return { m: m, items: (p.items || []).filter(own).map(function (x) { x._s = "deck"; x._m = "deck-" + id; return x; }), cards: (p.cards || []).filter(own), facts: (p.facts || []).filter(own) };
+    var src = typeof p.ground === "string" && p.ground ? { deckId: id, name: (m.source && m.source.name) || m.title || "", type: (m.source && m.source.type) || "maik", sents: [], ground: p.ground.slice(0, 200000) } : null;
+    return { m: m, items: (p.items || []).filter(own).map(function (x) { x._s = "deck"; x._m = "deck-" + id; return x; }), cards: (p.cards || []).filter(own), facts: (p.facts || []).filter(own), src: src };
   }
 
   var PURE = { sha256: sha256, sha12: sha12, utf8: utf8, newManifest: newManifest, topicsFor: topicsFor, questionCount: questionCount, sortDecks: sortDecks, LABEL: LABEL,
@@ -358,7 +365,7 @@
             return whole(id).then(function (b) {
               if (!b || (mine.at[id] && mine.at[id] >= (b.m.upd || b.m.created || 0))) return;
               var stamp = b.m.upd || b.m.created || Date.now();
-              return seal(L.key, backupPayload(b.m, b.items, b.cards, b.facts, b.src && b.src.sents, scrubFn())).then(function (text) {
+              return seal(L.key, backupPayload(b.m, b.items, b.cards, b.facts, b.src && b.src.sents, scrubFn(), b.src && b.src.ground)).then(function (text) {
                 return req(u, "PUT", id, text);
               }).then(function (r) { if (r.ok) { mine.at[id] = stamp; sent++; } });
             });
@@ -406,7 +413,7 @@
               return req(u, "GET", d.id).then(function (r) { return r.ok ? r.text() : null; }).then(function (t) { return t ? unseal(L.key, t) : null; }).then(function (pl) {
                 var r = fromPayload(pl);
                 if (!r || r.m.id !== d.id) return;
-                return importDeck({ m: r.m, items: r.items, cards: r.cards, facts: r.facts }).then(function () { have[d.id] = 1; out.account++; mine.at[d.id] = r.m.upd || r.m.created || 0; mirrorSoon(d.id); });
+                return importDeck({ m: r.m, items: r.items, cards: r.cards, facts: r.facts, src: r.src }).then(function () { have[d.id] = 1; out.account++; mine.at[d.id] = r.m.upd || r.m.created || 0; mirrorSoon(d.id); });
               }).then(null, function () {});
             });
           }, Promise.resolve()).then(function () { writeLS(BK_KEY, mine); });
