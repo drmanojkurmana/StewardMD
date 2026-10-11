@@ -401,3 +401,18 @@ test("tide pass: prep-tide.js loads after prep-motion.js, optional, and prep.js 
   assert.match(T, /IDLE_MS = 10000/, "settles 10 s after the last interaction");
   assert.doesNotMatch(T, /https?:\/\//, "no network: offline");
 });
+
+test("image credit chip, sheet, and menu screen wiring", () => {
+  const J = read("prep.js");
+  const Y = read("prep-pyq.js");
+  const C = read("prep.css");
+  assert.match(Y, /pn-img-credit-chip/, "prep-pyq renders credit chip when credit or licence is present");
+  assert.match(C, /\.pn-img-credit-chip/, "prep.css contains credit chip styles");
+  assert.match(C, /\.pn-credit-sheet/, "prep.css contains credit sheet styles");
+  assert.match(J, /openCreditSheet/, "prep.js defines openCreditSheet");
+  assert.match(J, /closeCreditSheet/, "prep.js defines closeCreditSheet");
+  assert.match(J, /renderImageCredits/, "prep.js defines renderImageCredits");
+  assert.match(J, /img-credits/, "Menu contains Image credits row");
+  assert.match(J, /if \(closeCreditSheet\(\)\) return true;/, "back() closes credit sheet first");
+});
+

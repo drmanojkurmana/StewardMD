@@ -62,12 +62,15 @@ function run1(args) {
 
 async function main(argv = process.argv.slice(2)) {
   const arg = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : d; };
+  const fileArg = arg("--file", null);
   const dir = path.resolve(ROOT, arg("--dir", "prep/bank/v1"));
   const only = arg("--only", null);
   const jobs = Math.max(1, Math.min(16, Number(arg("--jobs", 6)) || 6));
   const as = arg("--as", null);
-  if (as && !/^(?:v\d{1,3}|overlay)\/[a-z0-9-]+$/.test(as)) throw new Error("--as must look like v2/pyq or overlay/maik1");
-  let files = listFiles(dir, as);
+  if (as && !/^(?:v\d{1,3}|overlay|img)\/[a-z0-9-]+$|^[a-z0-9-]+\.[a-z0-9]+$/.test(as)) throw new Error("--as must look like v2/pyq, overlay/maik1, img/maikimg or file.json");
+  let files = fileArg
+    ? [{ src: path.resolve(fileArg), key: `${PREFIX}/${as || path.basename(fileArg)}`, bytes: fs.statSync(fileArg).size, last: true }]
+    : listFiles(dir, as);
   if (only) files = files.filter((f) => f.key.includes(`/${only}/`));
   const mb = files.reduce((a, f) => a + f.bytes, 0) / 1e6;
   console.log(`${files.length} files, ${mb.toFixed(1)} MB -> r2://${BUCKET}/${PREFIX}/`);

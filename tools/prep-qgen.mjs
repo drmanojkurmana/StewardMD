@@ -77,6 +77,14 @@ export function toOverlay(items, o) {
     if (it.tg && it.tg.length) out.tg = it.tg;
     if (it.x) out.x = it.x;
     if (it.quality) out.quality = it.quality;
+    if (it.img) out.img = it.img;
+    if (it.imgPlace) out.imgPlace = it.imgPlace;
+    if (it.credit) out.credit = it.credit;
+    if (it.licence) out.licence = it.licence;
+    if (it.licenceStandard) out.licenceStandard = it.licenceStandard;
+    if (it.licenseUrl) out.licenseUrl = it.licenseUrl;
+    if (it.sourceUrl) out.sourceUrl = it.sourceUrl;
+    if (it.title) out.title = it.title;
     return out;
   }) };
 }
@@ -205,7 +213,7 @@ async function publish() {
     }
   }
   const set = arg("--set", "maik1");
-  if (!/^maik[1-9]\d{0,2}$/.test(set)) { say("Need valid --set maik<n>."); process.exit(2); }
+  if (!/^maik(?:img)?[1-9]\d{0,2}$/.test(set)) { say("Need valid --set maik<n> or maikimg<n>."); process.exit(2); }
 
   if (!module) {
     // Multi-module publish: items carry sid/subject and t/module

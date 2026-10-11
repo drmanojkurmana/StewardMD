@@ -1664,3 +1664,14 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
 .pn-root .pn-rrq { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .pn-root .pn-rqr { display: block; width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-md); background: var(--pn-card); text-align: left; font-size: 14.5px; line-height: 1.5; overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) { .pn-root .pn-ro > summary::after { transition: none; } }
+
+/* ---- Image credit chip & sheet (CC BY / CC BY-SA compliance) ---- */
+.pn-root .pn-img-credit-wrap { margin-top: 6px; margin-bottom: 8px; }
+.pn-root .pn-img-credit-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; padding: 4px 10px; background: var(--pn-s1); border-radius: var(--pn-r-sm); border: 1px solid var(--pn-edge); color: var(--pn-mut); cursor: pointer; }
+.pn-root .pn-img-credit-chip:hover { color: var(--pn-text); }
+.pn-root .pn-credit-wrap { z-index: 100; }
+.pn-root .pn-credit-sheet { max-height: 80vh; overflow-y: auto; }
+.pn-root .pn-credit-body { display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.5; margin: 8px 0; }
+.pn-root .pn-credit-body a { color: var(--pn-pri); text-decoration: underline; }
+.pn-root .pn-credits-body { padding: 16px; }
+.pn-root .pn-cred-item { border: 1px solid var(--pn-edge); border-radius: var(--pn-r-md); padding: 12px; margin-bottom: 10px; background: var(--pn-card); }
