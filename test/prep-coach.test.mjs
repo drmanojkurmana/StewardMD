@@ -294,6 +294,12 @@ test("UI wiring: My coaching on home, tests and results, with the Ask entry", ()
   assert.match(J, /Ask MaiK about my " \+ K\.NAME/, "Ask entry carries the KnowYourIQ name");
   assert.match(J, /kind: "card", fr: title, bk: CO\.summaryText/, "Ask opens the existing sheet with the compact summary");
   assert.match(J, /coachFileReviews\(r\)/, "finishing files each topic's next review");
+  for (const f of ["coachSrc", "coachView", "coachTopicName", "kyMark", "kyTierChip", "coachSecHtml",
+    "coachResultHtml", "coachFileReviews", "coachAskOpen", "kyTopicRun", "kyPairRun", "confRowHtml", "kyIntroHtml", "coachSlowMs"])
+    assert.match(J, new RegExp("function " + f + "\\("), f + " is defined");
+  assert.match(J, /coachSec: coachSecHtml, coachResult: coachResultHtml, coachAsk: coachAskOpen/, "HOST exposes the coach builders");
+  for (const a of ["kyAsk", "kyDueRun", "kyPairT", "kyPairQ", "kyinfo", "kyintro", "confpair"])
+    assert.ok(J.includes('"' + a + '"'), "act " + a + " is routed");
 });
 
 test("Ask sheet: a card may carry its own first question", () => {
