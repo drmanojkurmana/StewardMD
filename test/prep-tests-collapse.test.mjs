@@ -4,8 +4,10 @@
  *  - inside it only Daily 10 and Grand open, the rest collapsed; open state persists per exam;
  *  - headers are buttons with aria-expanded/controls, counts read "N, M done";
  *  - collapsed groups render lazily (no paper rows until opened); big groups show 6 + Show all N;
- *  - groups past 20 papers show a filter box; a sticky jump bar lists the 9 formats;
+ *  - groups past 20 papers show a filter box; a sticky jump bar lists the 12 formats;
  *  - resume, done status, honest empties, ?tests2=0 and offline still work.
+ *  - gaps B starters: Daily mixed beside Daily 10; image/case exam + subject starters; weak-area and
+ *    incorrect-questions engine starters with honest disabled whys; engine custom reachable, study custom kept.
  * node --test test/prep-tests-collapse.test.mjs
  */
 import { test } from "node:test";
@@ -13,7 +15,10 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
+const require = createRequire(import.meta.url);
+const PURE = require("../prep.js");
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = fs.readFileSync(path.join(ROOT, "prep-tests.js"), "utf8");
 
@@ -53,7 +58,7 @@ function mockH(store, ls) {
     row: (act, icon, title, sub, attrs) => '<button type="button" class="pn-row" data-act="' + act + '"' + (attrs || "") + "><b>" + title + "</b><small>" + sub + "</small></button>",
     ico: (n) => '<svg data-ico="' + n + '"></svg>',
     fmt: (n) => String(n), planToday: () => ({ due: 0, left: 0, weak: [] }),
-    root: () => null,
+    root: () => null, pure: PURE,
   };
 }
 function loadT2(list, store, lsGet, lsSet, search) {
@@ -94,9 +99,13 @@ function doneStore() {
 test("pure grouping: order, names, exam order, filter and visible", () => {
   const T2 = loadT2(profiles(), mockStore());
   const g = T2._grp;
-  assert.deepEqual(g.ORDER, ["daily10", "grand", "part", "mini", "subject_mini", "topic", "image", "pyq", "custom"]);
+  assert.deepEqual(g.ORDER, ["daily10", "grand", "part", "mini", "subject_mini", "topic", "image", "case", "weak_area", "incorrect", "pyq", "custom"]);
   assert.equal(g.name("subject_mini"), "Subject tests");
   assert.equal(g.name("pyq"), "PYQ papers");
+  assert.equal(g.name("daily10"), "Daily sets");
+  assert.equal(g.name("case"), "Clinical cases");
+  assert.equal(g.name("weak_area"), "Weak areas");
+  assert.equal(g.name("incorrect"), "Incorrect questions");
   assert.equal(g.short("subject_mini"), "Subject");
   const ord = g.examOrder(profiles(), "ini-cet").map((p) => p.id);
   assert.deepEqual(ord, ["ini-cet", "neet-pg"]);
@@ -176,14 +185,14 @@ test("testsHtml: primary exam first and open, Daily 10 and Grand open, counts in
   assert.ok(html.includes("Subject tests</span>"), "group name");
   assert.ok(html.includes("38, 5 done"), "subject counts: 38 papers, 5 done");
   assert.ok(html.includes("16, 3 done") || html.includes("16, 2 done"), "grand counts include the engine starter");
-  assert.ok(html.includes("2, 1 done"), "custom counts diagnostic done");
+  assert.ok(html.includes("3, 1 done"), "custom counts diagnostic done");
   const jumps = (html.match(/data-act="t2-jump"/g) || []).length;
-  assert.equal(jumps, 18, "9 jump chips per exam");
+  assert.equal(jumps, 24, "12 jump chips per exam");
   assert.ok(html.includes('role="navigation" aria-label="Jump to test type"'), "jump bar labelled");
   const gheads = (html.match(/class="pn-t2ghead"[^>]*aria-expanded="[^"]*"[^>]*aria-controls="pnT2G-[^"]+"/g) || []).length;
-  assert.equal(gheads, 18, "every group header exposes expanded/controls");
+  assert.equal(gheads, 24, "every group header exposes expanded/controls");
   assert.equal((html.match(/<h2 class="pn-t2xh">/g) || []).length, 2, "exam headers keep h2 hierarchy");
-  assert.equal((html.match(/<h3 class="pn-t2gh">/g) || []).length, 18, "group headers keep h3 hierarchy");
+  assert.equal((html.match(/<h3 class="pn-t2gh">/g) || []).length, 24, "group headers keep h3 hierarchy");
 });
 
 test("lazy render: collapsed groups build no rows; open groups cap at 6 with Show all", () => {
@@ -215,7 +224,7 @@ test("honest empties, loading and offline fixed states", () => {
   T2._P.sess = null;
   const html = T2.testsHtml(mockH(store));
   assert.ok(html.includes("One-part tests apply only to FMGE."), "part honest on non-FMGE");
-  assert.ok(html.includes("No image tests for this exam yet."), "image honest empty");
+  assert.ok(html.includes("Build an image test"), "image on-demand starter replaces the fixed-only empty");
   assert.ok(html.includes("No PYQ papers for this exam yet."), "pyq honest empty");
   const Tload = loadT2(list, store);
   Tload._P.fx = null;
@@ -251,4 +260,32 @@ test("collapsible CSS: short motion, reduced-motion off switch, no glow/backdrop
   assert.match(css, /\.pn-t2fxwrap \.pn-row[^}]*content-visibility: auto/);
   assert.doesNotMatch(css, /backdrop-filter/);
   assert.doesNotMatch(css, /linear-gradient/);
+});
+
+test("gaps B starters: daily mixed, image/case, weak-area, incorrect, engine custom", () => {
+  const list = profiles(), store = mockStore();
+  const openAll = (k, mem) => (k === "smd_prep_t2grp" ? JSON.stringify({ v: 1, exams: { "neet-pg": { open: true, groups: { daily10: true, image: true, case: true, weak_area: true, incorrect: true, custom: true } } } }) : (mem[k] ?? null));
+  const T2 = loadT2(list, store, openAll);
+  T2._P.fx = papers();
+  T2._P.sess = null;
+  const html = T2.testsHtml(mockH(store));
+  assert.ok(html.includes("Daily sets</span>"), "daily group holds both sets");
+  assert.ok(html.includes("Start Daily mixed") && html.includes('data-k="daily_mixed"'), "daily mixed starter");
+  assert.ok(html.includes("Clinical cases</span>"), "case group");
+  assert.ok(html.includes("Build a clinical case test by subject") && html.includes('data-k="case"'), "case exam + subject starters");
+  assert.ok(html.includes("Build an image test by subject") && html.includes('data-k="image"'), "image exam + subject starters");
+  assert.ok(html.includes("No weak modules yet"), "weak starter says why when no history");
+  assert.ok(html.includes("of 5 mistakes needed"), "incorrect starter says why when too few mistakes");
+  assert.ok(html.includes('data-act="t2-ccpick"'), "engine custom picker reachable");
+  assert.ok(html.includes('data-act="t2-custom"'), "study custom row kept");
+  const Tfull = loadT2(list, store, openAll);
+  Tfull._P.fx = papers();
+  Tfull._P.sess = null;
+  const rich = doneStore();
+  rich.mod = { "anatomy-m0": { t: 10, ok: 3 } };
+  rich.mt = { a: 1, b: 1, c: 1, d: 1, e: 1, f: 1 };
+  const html2 = Tfull.testsHtml(mockH(rich));
+  assert.ok(html2.includes("1 weak module"), "weak starter enables from weakModules history");
+  assert.ok(!html2.includes("No weak modules yet"), "weak why clears with history");
+  assert.ok(html2.includes("Up to 20 of your 6 mistakes"), "incorrect starter enables from the mistakes list");
 });

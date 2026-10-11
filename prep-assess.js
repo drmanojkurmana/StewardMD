@@ -11,7 +11,7 @@
    and not blocked by the optional item-quality sidecar), never the same item or the same normalised stem twice, applies
    the blueprint quotas, and records planned vs actual distribution and every deviation. When the bank cannot meet the
    blueprint it shrinks the test (official subject quotas are never filled from another subject) or refuses with the
-   reason; it never pads with unrelated questions. A seed makes it deterministic (daily 10 uses exam + IST date).
+   reason; it never pads with unrelated questions. A seed makes it deterministic (the daily sets use exam + IST date).
 
    Section clock (locked timed sections). Rule, so a student can never gain time:
      1. Only the open section's clock runs; a section not yet started is never charged, and no question is visible
@@ -33,7 +33,9 @@
   var CLOCK_BACK_MS = 120000;      // rule 4
   var SAVE_EVERY_MS = 5000;        // rule 3
   var BLOCKED = { requires_review: 1, rejected: 1, retired: 1 };
-  var TYPES = ["grand", "part", "mini", "daily10", "subject_mini", "topic", "diagnostic", "custom"];
+  // Type names match prep/assess/schemas/blueprint.schema.json test_type (case, image, daily_mixed, weak_area,
+  // incorrect). "diagnostic" predates the schema's adaptive_diagnostic and stays as is.
+  var TYPES = ["grand", "part", "mini", "daily10", "daily_mixed", "subject_mini", "topic", "image", "case", "diagnostic", "weak_area", "incorrect", "custom"];
 
   /* ---------- profiles ---------- */
   function profiles() { return (PP && PP.profiles) || {}; }
@@ -135,6 +137,17 @@
     return it.o.filter(function (o) { return COMBO.test(String(o)); }).length >= 3;
   }
   function hasImage(it) { return !!(it && ((it.img && it.img.length) || it.stack)); }
+  // Clinical vignette: the same rule the bank build tags USMLE items with (tools/prep-build-bank.mjs isVignette,
+  // plan 5.1): age-led or "presents / is brought / complains", at least 25 words. A USMLE-tagged item counts on any
+  // exam; the pattern covers untagged bank and overlay items so case tests work beyond USMLE subjects.
+  var AGE_LEAD = /^\s*(?:a|an)\s+\d{1,3}[- ]?(?:year|yr|month|day|week)s?[- ]old\b/i;
+  var PRESENTS = /\b(?:presents|presented|is brought|was brought|complains|complained)\b/i;
+  function isVignette(it) {
+    if (!it) return false;
+    if (it.ex && it.ex.indexOf("usmle") >= 0) return true;
+    var q = it.q == null ? "" : String(it.q);
+    return (AGE_LEAD.test(q) || PRESENTS.test(q)) && q.split(/\s+/).length >= 25;
+  }
   function itemStyle(it) { return isCombination(it) ? "statement_combination" : hasImage(it) ? "image" : "sba"; }
   function levelOf(it) { return it.vh === true || it.d === 4 ? 4 : it.d === 1 || it.d === 3 ? it.d : 2; }
   /* eligible(it, ctx) -> "" when the item may enter a test, else the reason. ctx: { hidden: {id:1}, exclude: {id:1},
@@ -180,7 +193,7 @@
   }
   /* blueprint(p, type, opts) -> the recipe, or null when the type does not apply to the profile.
      { id, version, exam, profile_version, test_type, count, duration_sec, sections: [{ id, label, n, sec, part }],
-       spread: "official_counts" | "bank_proportional" | "scope", locked, seed_rule, shortfall, min_viable } */
+       spread: "official_counts" | "bank_proportional" | "balanced" | "diagnostic" | "scope", locked, seed_rule, shortfall, min_viable } */
   function blueprint(p, type, opts) {
     opts = opts || {};
     if (!p || TYPES.indexOf(type) < 0) return null;
@@ -193,6 +206,7 @@
       return ext(base, { count: n, duration_sec: sec, sections: secs, locked: !!p.navigation.locked_sections, spread: p.blueprint.kind === "official_counts" ? "official_counts" : "bank_proportional", min_viable: Math.ceil(n * 0.5) });
     }
     if (type === "daily10") return ext(base, { count: 10, duration_sec: Math.round(10 * pace / 60) * 60, sections: null, locked: false, spread: "bank_proportional", seed_rule: "daily_ist_date", shortfall: "refuse", min_viable: 10 });
+    if (type === "daily_mixed") return ext(base, { count: 25, duration_sec: Math.round(25 * pace / 60) * 60, sections: null, locked: false, spread: "balanced", seed_rule: "daily_ist_date", shortfall: "refuse", min_viable: 25 });
     var c = Math.max(5, Math.min(100, opts.count || 20));
     if (type === "diagnostic") c = opts.count || 20;
     return ext(base, { count: c, duration_sec: c * pace, sections: null, locked: false, spread: type === "diagnostic" ? "diagnostic" : "scope", min_viable: Math.min(c, 5) });
@@ -213,14 +227,16 @@
   /* assemble(p, type, opts, bank) -> { ok, items, count, requested, blueprint, planned, actual, deviations, reduced,
      refused, sections, seed, styles }
      bank: [{ s: subject id, m: module id, items: [...] }] (modules loaded for the scope; items carry _s/_m).
-     opts: { count, seed, subjects: [ids] (scope), modules: [ids], difficulty: 1-4, image: true, exclude: {id:1},
-             recent: {id:1} (soft: used only when unseen run out), hidden, quality, history: { subject: { t, ok } } } */
+     opts: { count, seed, subjects: [ids] (scope), modules: [ids], difficulty: 1-4, image: true, caseOnly: true,
+             only: {id:1} (these items only, e.g. the student's mistakes), exclude: {id:1},
+             recent: {id:1} (soft: used only when unseen run out), hidden, quality, history: { subject: { t, ok } } }
+     The image and case types imply their filter (image / caseOnly) without the caller passing it. */
   function assemble(p, type, opts, bank) {
     opts = opts || {};
     var bp = blueprint(p, type, opts), dev = [];
     if (!bp) return { ok: false, refused: "This test type does not apply to " + (p ? p.name : "this exam") + ".", items: [], deviations: [] };
     var seed = opts.seed != null ? String(opts.seed) : String(Math.random()), R = rng(seed);
-    var want = bp.count;
+    var want = bp.count, needImage = opts.image || type === "image", needCase = opts.caseOnly || type === "case";
     // 1. eligible pool per subject, deduplicated (id and normalised stem) across the whole bank given
     var ctx = { hidden: opts.hidden, exclude: opts.exclude, quality: opts.quality, hashOf: opts.hashOf }, seenId = {}, seenStem = {}, pool = {}, drop = {}, dupN = 0, inScope = {};
     (opts.subjects || []).forEach(function (s) { inScope[s] = 1; });
@@ -231,7 +247,9 @@
       (l.items || []).forEach(function (it) {
         var why = eligible(it, ctx, type);
         if (!why && opts.difficulty && levelOf(it) !== opts.difficulty) why = "difficulty";
-        if (!why && opts.image && !hasImage(it)) why = "no-image";
+        if (!why && needImage && !hasImage(it)) why = "no-image";
+        if (!why && needCase && !isVignette(it)) why = "no-vignette";
+        if (!why && opts.only && !opts.only[it.id]) why = "not-selected";
         if (why) { drop[why] = (drop[why] || 0) + 1; return; }
         var ns = normStem(it.q);
         if (seenId[it.id] || (ns.length >= 12 && seenStem[ns])) { dupN++; return; }
@@ -255,6 +273,11 @@
       for (k in planned) if (k.charAt(0) === "~" && planned[k]) dev.push(cap1(k.slice(1)) + ": " + planned[k] + " planned by the official blueprint; the bank has no " + k.slice(1) + " questions, so the test is " + planned[k] + " shorter.");
     } else if (spread === "diagnostic") {
       planned = diagnosticPlan(want, avail, opts.history || {}, R);
+    } else if (spread === "balanced") {
+      // Daily mixed: equal shares across the subjects that have eligible questions (largest remainder); a subject
+      // with too few questions gives its shortfall to the others through the shared path below, never from outside.
+      var eq = {}; Object.keys(avail).forEach(function (s) { if (avail[s] > 0) eq[s] = 1; });
+      planned = apportion(want, eq);
     } else {
       planned = apportion(want, avail);
     }
@@ -466,8 +489,8 @@
     return o;
   }
 
-  /* ---------- daily 10 ---------- */
-  function dailyKey(exam, ms) { return "daily10:" + exam + ":" + istDate(ms); }
+  /* ---------- daily sets (Daily 10 and Daily mixed share the completion map, under their own keys) ---------- */
+  function dailyKey(exam, ms, kind) { return (kind || "daily10") + ":" + exam + ":" + istDate(ms); }
   // Completion is written once per key; a retry (or a second finish after a crash) keeps the first record.
   function dailyComplete(map, key, rec) { if (map[key]) return { map: map, rec: map[key], fresh: false }; map[key] = rec; return { map: map, rec: rec, fresh: true }; }
   function dailyPrune(map, ms, keepDays) { var cut = istDate(ms - (keepDays || 60) * 864e5); Object.keys(map).forEach(function (k) { if (k.slice(-10) < cut) delete map[k]; }); return map; }
@@ -492,7 +515,7 @@
 
   var API = { RANK_MIN_N: RANK_MIN_N, CLOCK_BACK_MS: CLOCK_BACK_MS, SAVE_EVERY_MS: SAVE_EVERY_MS, TYPES: TYPES,
     profiles: profiles, profileIds: profileIds, profile: profile, forTab: forTab, paceSec: paceSec, scheme: scheme, legacyMocks: legacyMocks, schemes: schemes, coreProfiles: coreProfiles, validateProfile: validateProfile, provOf: provOf,
-    rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
+    rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, isVignette: isVignette, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
     blueprint: blueprint, apportion: apportion, assemble: assemble, targetLevel: targetLevel,
     scNew: scNew, scLeft: scLeft, scStart: scStart, scCharge: scCharge, scResume: scResume, scClose: scClose,
     score: score, result: result, nextActions: nextActions, ownTrend: ownTrend, rankShown: rankShown, streaks: streaks, summary: summary, SUMMARY_MAX_BYTES: SUMMARY_MAX_BYTES,
