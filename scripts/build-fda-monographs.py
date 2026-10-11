@@ -152,6 +152,8 @@ def pick_openfda(name):
                 continue
             if not (r.get("indications_and_usage") or r.get("dosage_and_administration") or r.get("purpose")):
                 continue
+            if re.search(r"homeopath|sulphuricum|sulfuricum|complementary health", json.dumps(r).lower()):
+                continue   # homeopathic remedies share molecule names with the drug (strontium sulphuricum)
             return r
     return None
 
