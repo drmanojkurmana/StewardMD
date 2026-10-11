@@ -1036,7 +1036,14 @@
     if (g.monitoring) H += S('📈', 'Monitoring', 'Follow what?', '<ul class="gd-mon">' + g.monitoring.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>');
     H += '<div class="gd-2">' + (g.counsel ? S('🗣', 'Counselling', 'Tell patient', bl(g.counsel)) : '') + S('⏱', 'Pharmacokinetics', 'Onset / duration', '<div class="gd-pk">' + (g.pk || []).map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>' + (g.missed ? '<div class="gd-kv"><b>Missed</b><span>' + esc(g.missed) + '</span></div>' : '') + (g.overdose ? '<div class="gd-kv"><b>Overdose</b><span>' + esc(g.overdose) + '</span></div>' : '')) + '</div>';
     if (g.pearls) H += '<div class="gd-sec gd-pearls"><div class="gd-h">Clinical Pearls <span class="gd-q">Expert tips</span></div>' + bl(g.pearls) + '</div>';
-    H += S('📚', 'References', 'Source', '<div class="gd-src">' + (g.refs || []).map(function (r) { return '<a href="' + r[1] + '" target="_blank">' + esc(r[0]) + '</a>'; }).join(" · ") + '</div><div class="gd-foot">Faithful summary — pending clinician sign-off; verify locally. Full official label preserved internally.</div>');
+    /* FDA-label records (scripts/build-fda-monographs.py): every label section, verbatim, one collapsible each.
+     * Shown in the order the label gives them; nothing is rewritten. */
+    if (g.label && typeof g.label === "object") {
+      H += S('📄', 'Full FDA label', 'Verbatim', Object.keys(g.label).map(function (k) {
+        return '<details class="gd-lbl"><summary>' + esc(k) + '</summary><div class="gd-lbl-t">' + esc(g.label[k]).replace(/\n/g, '<br>') + '</div></details>';
+      }).join(""));
+    }
+    H += S('📚', 'References', 'Source', '<div class="gd-src">' + (g.refs || []).map(function (r) { return '<a href="' + r[1] + '" target="_blank">' + esc(r[0]) + '</a>'; }).join(" · ") + '</div><div class="gd-foot">' + esc(g.footer || "Faithful summary - pending clinician sign-off; verify locally. Full official label preserved internally.") + '</div>');
     return H;
   }
   function parseGold(s) { try { return JSON.parse(s); } catch (e) { return null; } }
@@ -1157,6 +1164,7 @@
       ".gd-pk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}@media(min-width:560px){.gd-pk{grid-template-columns:repeat(5,minmax(0,1fr))}}",
       ".gd-pk>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:6px;text-align:center;min-width:0}",
       ".gd-pearls{background:linear-gradient(135deg,#e7f3f3,#eef7ee);border:1px solid #bfe3e3}",
+      ".gd-lbl{border-top:1px solid var(--line,#e5e5e0);padding:8px 0}.gd-lbl summary{font:700 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer;padding:4px 0}.gd-lbl-t{font:400 13px/1.55 var(--sans,system-ui);color:var(--ink,#1a1a1a);padding:6px 0 10px;word-break:break-word}",
       ".gd-src a{color:var(--teal,#0a9396)}.gd-foot{font:500 10px var(--sans,system-ui);color:var(--slate-soft,#8aa0ab);margin-top:5px}",
       // severity/pearls blocks have fixed light pastel backgrounds — force dark text so they stay readable in dark mode
       ".gd-sev{color:#1f2d34}.gd-sev .gd-b li{color:#1f2d34}.gd-pearls,.gd-pearls .gd-b li{color:#173a36}",

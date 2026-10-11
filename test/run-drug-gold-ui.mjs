@@ -52,7 +52,7 @@ try {
   if (SHOTS) await page.screenshot({ path: SHOTS + "/gold-search.png" });
 
   /* ── the 104 monographs no bundle contained until now ───────────────────────────────── */
-  for (const q of ["Atropine sulfate", "Caspofungin acetate", "Enoxaparin sodium", "Clopidogrel bisulfate"]) {
+  for (const q of ["Atropine sulfate", "Caspofungin acetate", "Enoxaparin sodium", "Clopidogrel bisulfate", "Belzutifan", "belzut"]) {
     const t = await type(q);
     ok(new RegExp(q.split(" ")[0], "i").test(t) && !/No drugs match/.test(t), "supplement-only monograph is searchable: " + q);
   }
@@ -66,7 +66,7 @@ try {
   ok(/No drugs match/.test(none), "nonsense still says so rather than showing loose matches: " + none.slice(0, 60));
 
   /* ── opening one renders the authored monograph, not a dead end ─────────────────────── */
-  for (const name of ["Cefiderocol", "Caspofungin acetate"]) {
+  for (const name of ["Cefiderocol", "Caspofungin acetate", "Belzutifan"]) {
     await page.evaluate((n) => { MEDDB.openList(); MEDDB.openComposition(n); }, name);
     await page.waitForTimeout(6000);
     const d = await page.evaluate(() => {
@@ -76,6 +76,7 @@ try {
     ok(d.secs.length >= 8 && /Quick Facts/.test(d.secs.join("|")) && /Dosage/.test(d.secs.join("|")),
       name + " opens on its full monograph (" + d.secs.length + " sections)");
     ok(!/No structured clinical record|Full monograph pending/.test(d.txt), name + " is not the 'pending' placeholder");
+    if (name === "Belzutifan") ok(/120 mg/.test(d.txt) && /embryo-fetal/i.test(d.txt) && /HIF-2/.test(d.txt) && !/gemini/i.test(d.txt), "Belzutifan shows its label dose, boxed-warning content and mechanism");
   }
   if (SHOTS) await page.screenshot({ path: SHOTS + "/gold-monograph.png" });
 
@@ -120,8 +121,8 @@ try {
   // The other 53 authored records are salt forms of a molecule the bundle already carries
   // ("Atropine sulfate" IS atropine) and are deliberately not shipped as a second row; the index
   // strips the counter-ion from a query instead, so those names are still findable.
-  ok(stats && stats.struct > 1500 && stats.index === stats.struct,
-    "bundle + supplement + index all loaded and agree: " + JSON.stringify(stats));
+  ok(stats && stats.struct > 1500 && stats.index >= stats.struct,
+    "bundle + supplement + index loaded; index also lists the label-only drugs: " + JSON.stringify(stats));
 
   console.log(fails ? "\n" + fails + " FAILED" : "\nall passed");
 } finally {

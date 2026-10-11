@@ -30,7 +30,10 @@ const supplement = readGz("clinical-supplement.json.gz");
 
 test("the index covers every molecule the app can open, and invents none", () => {
   // offline-clinical.js merges the supplement over the bundle, so the openable set is the union.
-  const openable = new Set([...Object.keys(bundle.struct), ...Object.keys(supplement.struct)]);
+  // Label-only drugs (data/fda-labels/*.json, fetched on open) are openable too, by name.
+  const labelDir = new URL("../data/fda-labels/", import.meta.url);
+  const labelNames = new Set(readdirSync(labelDir).filter((f) => f.endsWith(".json")).map((f) => JSON.parse(readFileSync(new URL(f, labelDir), "utf8")).generic));
+  const openable = new Set([...Object.keys(bundle.struct), ...Object.keys(supplement.struct), ...labelNames]);
   const listed = new Set(I.all().map((r) => r.n));
   assert.equal(listed.size, openable.size, "index lists " + listed.size + " of " + openable.size);
   const phantom = [...listed].filter((n) => !openable.has(n));

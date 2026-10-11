@@ -120,3 +120,18 @@ Deps: [[AI Control Center]] (ocr cap) · [[Medical Knowledge Base]].
 - `scripts/interactions/audit_coverage.mjs` inventories all names/rules and extracts a review queue from 1,634 existing interaction monographs: 8,868 mentions lack an eligible pair rule. Mentions may be negative, conditional or intended combinations; never automatically import them as findings.
 - `collect_label_evidence.py` collects bounded label candidates with provenance. `sync_curated_rules.py` updates explicit reviewed rule IDs without overwriting either consumer's class map.
 - Existing browser/WardSynq drift and recorded sign-off gaps remain. No exhaustive clinical benchmark, external-engine parity or native validation is claimed. Owner requested open sources only and existing tests/browser checks while ARTEMIS is unavailable.
+
+## Belzutifan added from the FDA label (2026-10-10)
+Owner supplied the WELIREG label (NDA 215383, rev 02/2024) and asked for it in the drug index.
+- `worker/data/gold/Belzutifan.json`: authored from the label text only (indications, 120 mg once daily and the 80/40 mg reductions,
+  anemia and hypoxia modification table, boxed embryo-fetal warning, CYP3A4 and hormonal-contraceptive interactions, UGT2B17/CYP2C19
+  poor-metabolizer exposure and the Asian prevalence figures, LITESPARK-004/-005 results). Same key set as the other gold records.
+  Not in the bundle (bundle is keyed by SQL composition), so it ships through `data/clinical-supplement.json.gz` (52 molecules now)
+  and `data/clinical-index.js` (1,593), both rebuilt with `scripts/build-clinical-supplement.mjs` / `build-clinical-index.mjs`
+  (diff checked: exactly one molecule added). `offline-clinical.js` cache tokens bumped (sup3, idx6).
+- A molecule with no Indian brand has no D1 row, so the server `/search` will not return it; the offline library does. To make the
+  server list it too, add it to the hardcoded list in `worker/scripts/import_gold_to_d1.mjs` and re-import (needs a `wrangler` deploy).
+- Test: `test/run-drug-gold-ui.mjs` searches "Belzutifan" and "belzut" and opens the monograph (dose, boxed warning, mechanism).
+- **Coverage gap (same day audit):** `drug-lexicon.js` recognises 2,233 generics but the offline index holds 1,593 molecules. Checking 190
+  recent drugs by hand found ~170 with no monograph (oral oncology kinase/PARP/BCL2 agents, new anti-infectives, new neuro agents, ADCs and
+  bispecifics). A label-sourced batch is the fix; do NOT write doses from memory.
