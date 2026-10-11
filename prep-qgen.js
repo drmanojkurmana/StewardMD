@@ -10,7 +10,9 @@
    A student's module is a PRIVATE deck (prep-decks.js): manifest source.type "maik", items in the app's schema with
    qg { g: grounded 1|0, v: "ok", u: 1 when not from the student's own notes }. So it opens like every deck (the mode
    sheet with Learning or Test Mode and the timer), works offline once made, is mirrored to the app's files and backed
-   up encrypted to the account with the other decks. It never enters the shared bank and has no share IDs. A module is
+   up encrypted to the account with the other decks. It never enters the shared bank and has no share IDs. The manifest
+   keeps the page range a PDF module was made from, and the grounding text is backed up with the deck, so more
+   questions stay grounded after a restore. A module is
    made 5 questions a request (generate, code gates, an independent check that solves each question blind); what passes
    is saved after every request, so stopping or losing the connection keeps what was made.
 
@@ -193,10 +195,11 @@
       if (onTop("#qgCreateView", host)) host.rerender();
     }, function () { createErr(host, "This PDF could not be opened. It may be protected by a password or damaged."); });
   }
-  /* The grounding text: pasted notes, or the chosen PDF pages read on this phone (same reader as Make a deck). */
+  /* The grounding: pasted notes, or the chosen PDF pages read on this phone (same reader as Make a deck).
+     Resolves { text, pages } (pages = the PDF page numbers used, else null: the manifest keeps them). */
   function readGround(host) {
-    if (cs.kind === "topic") return Promise.resolve("");
-    if (cs.kind === "notes") return Promise.resolve(cs.text);
+    if (cs.kind === "topic") return Promise.resolve({ text: "", pages: null });
+    if (cs.kind === "notes") return Promise.resolve({ text: cs.text, pages: null });
     if (!cs.pdf) return Promise.reject(new Error("Choose a PDF first."));
     var res = SR().selFromSpec(cs.spec, cs.pdf.pages, PAGE_CAP);
     var pages = res && res.sel ? res.sel : res && res.pages ? res.pages : null;
@@ -208,7 +211,7 @@
       cs.busy = "";
       var doc = SR().buildDoc(rd.pages || []), text = (doc.sents || []).map(function (s) { return s.tx; }).join(" ");
       if (text.replace(/\s+/g, "").length < 200) throw new Error("These pages have too little text to make questions from. Try other pages.");
-      return text;
+      return { text: text, pages: pages };
     });
   }
   function go(host) {
@@ -221,16 +224,16 @@
     if (cs.kind === "notes" && cs.text.replace(/\s+/g, "").length < 200) return createErr(host, "Paste a little more text: at least a paragraph or two.");
     if (G.navigator && G.navigator.onLine === false) return createErr(host, MSG.offline);
     var scrub = SR() && SR().prepScrub ? SR().prepScrub : function (x) { return x; };
-    readGround(host).then(function (ground) {
-      ground = scrub(String(ground || "")).slice(0, GROUND_MAX);
-      start(host, { title: topic.slice(0, 120), topic: topic.slice(0, 120), ground: ground, exam: cs.exam, diff: cs.diff, target: cs.count });
+    readGround(host).then(function (g) {
+      var ground = scrub(String(g.text || "")).slice(0, GROUND_MAX);
+      start(host, { title: topic.slice(0, 120), topic: topic.slice(0, 120), ground: ground, pages: g.pages || null, exam: cs.exam, diff: cs.diff, target: cs.count });
       cs.topic = ""; cs.text = ""; cs.pdf = null; cs.spec = ""; cs.own = false;
     }, function (e) { createErr(host, (e && e.message) || "The pages could not be read."); });
   }
 
   /* ================= the job ================= */
   function start(host, o) {
-    job = { mod: o.mod || newMod(), title: o.title, topic: o.topic, ground: o.ground, exam: o.exam, diff: o.diff, target: o.target, base: o.base || 0,
+    job = { mod: o.mod || newMod(), title: o.title, topic: o.topic, ground: o.ground, pages: o.pages || null, note: o.note || "", exam: o.exam, diff: o.diff, target: o.target, base: o.base || 0,
       made: 0, dropped: 0, rounds: 0, stage: "write", stopReq: false, done: false, code: "", mt: 0, items: o.items || [], m: o.m || null };
     if (onTop("#qgCreateView", host)) host.back();
     host.push(function () { renderProgress(host); });
@@ -268,6 +271,8 @@
     got.forEach(function (it) { it.deckId = j.mod; it._s = "deck"; it._m = "deck-" + j.mod; it.t = "gen"; });
     j.items = j.items.concat(got);
     var m = j.m || D.newManifest({ id: j.mod, title: j.title, exam: j.exam, profileV: 1, pv: "qg1", model: "maik", source: { type: "maik", name: j.topic, pages: null, sha: j.mod }, now: now });
+    var S = SR();
+    if (j.pages && j.pages.length && S && S.pageSpan) { m.source.pages = S.pageSpan(j.pages); if (S.selSpec) m.source.sel = S.selSpec(j.pages); }
     m.qgen = { g: j.ground ? 1 : 0, topic: j.topic, diff: j.diff, target: Math.max((m.qgen && m.qgen.target) || 0, j.base + j.target) };
     m.diff = j.diff === "mix" ? "mix" : j.diff;
     m.stats.generated += got.length; m.stats.accepted += got.length;
@@ -315,6 +320,7 @@
       body = (lim ? "" : '<section class="pn-panel pn-score pc-res qg-res"><p class="pn-big" id="qgMade">' + n + '</p><p class="pn-mut">' + (n === 1 ? "question" : "questions") + " ready" + (has > n ? " · " + has + " in the module" : "") + "</p>" +
         (j.dropped ? '<p class="pn-mut pn-small">' + (j.dropped === 1 ? "1 question was left out because it did not pass the checks." : j.dropped + " questions were left out because they did not pass the checks.") + "</p>" : "") +
         (j.mtUsed ? '<p class="pn-mut pn-small" id="qgMt">Used ' + fmtN(j.mtUsed) + " MaiK Tokens.</p>" : "") + "</section>") +
+        (j.note ? '<p class="pn-mut" id="qgNote">' + esc(j.note) + "</p>" : "") +
         (lim && j.code === "daily-modules" ? '<section class="pn-panel qg-limit" role="alert" id="qgErr" tabindex="-1"><p class="qg-limh">Today\'s free modules are used</p><p class="pn-mut">You can create ' + ((status && status.caps && status.caps.modulesPerDay) || 3) + " modules with MaiK a day. Your modules so far are in Your decks.</p></section>" : "") +
         (err && !(lim && j.code === "daily-modules") ? '<p class="pn-err" role="alert" id="qgErr" tabindex="-1">' + esc(err) + "</p>" : "") +
         (!err && short && !j.stopReq ? '<p class="pn-mut">Fewer questions passed the checks than asked for. You can add more from the module.</p>' : "") +
@@ -336,7 +342,10 @@
       if (!room) return host.toast(MSG["module-full"]);
       if (job && !job.done) return host.toast("A module is being made. Wait for it to finish first.");
       job = null;
-      start(host, { mod: deckId, title: m.title, topic: m.qgen.topic || m.title, ground: (a[2] && a[2].ground) || "", exam: m.exam, diff: m.qgen.diff || "mix", target: Math.min(10, room), base: Math.ceil(have / PER), items: items, m: m });
+      var ground = (a[2] && a[2].ground) || "";
+      var note = m.qgen.g && !ground ? "The notes this module was made from are gone from this phone. The new questions below come from general knowledge instead." : "";
+      if (note) host.toast("The original notes are gone from this phone. Using general knowledge.");
+      start(host, { mod: deckId, title: m.title, topic: m.qgen.topic || m.title, ground: ground, exam: m.exam, diff: m.qgen.diff || "mix", target: Math.min(10, room), base: Math.ceil(have / PER), items: items, m: m, note: note });
     });
   }
 

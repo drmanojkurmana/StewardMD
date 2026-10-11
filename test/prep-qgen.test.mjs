@@ -394,3 +394,28 @@ test("one secret: key::workspace (production binding limit), no flag vars needed
   noKey(r.text);
   assert.equal((await post(envFor({ PREP_QGEN_ON: "0" }), { op: "status" })).json.on, false);
 });
+
+/* ---- 7-day working state + counted-once marker (owner 2026-10-11) ---- */
+test("module working state TTL is 7 days; the counted-once marker outlives it", async () => {
+  const R = await import("../functions/api/ai/_prep-qgen.js");
+  assert.equal(R.MOD_TTL_S, 7 * 86400);
+  assert.equal(R.QGEN_SEEN_TTL_S, 400 * 86400);
+});
+
+test("a forgotten module continues without counting a new module when the marker survives", async () => {
+  reset();
+  const env = envFor({ PREP_QGEN_MODULES_PER_DAY: "2" });
+  assert.equal((await post(env, gen({ mod: "gen_cccccccccc01" }))).status, 200);
+  assert.equal((await post(env, gen({ mod: "gen_cccccccccc02" }))).status, 200);
+  const kv = env.MAIK_KV.m, uid = "fb:u-a";
+  const modK = "prep:qgen:mod:" + uid + ":gen_cccccccccc01", seenK = "prep:qgen:seen:" + uid + ":gen_cccccccccc01";
+  assert.ok(kv.has(modK) && kv.has(seenK));
+  kv.delete(modK);   // 7 days idle: the working state expired
+  const dayK = [...kv.keys()].find((k) => k.startsWith("prep:qgen:day:" + uid + ":"));
+  kv.set(dayK, JSON.stringify({ mods: ["gen_cccccccccc02", "gen_cccccccccc09"] }));   // today is full without it
+  const r = await post(env, gen({ mod: "gen_cccccccccc01", round: 2, avoid: [] }));
+  assert.equal(r.status, 200, r.text);
+  assert.equal(r.json.items.length, 5, "the phone re-sends stems, so no duplicates are made");
+  const third = await post(env, gen({ mod: "gen_cccccccccc03" }));
+  assert.equal(third.status, 429); assert.equal(third.json.reason, "daily-modules", "the cap still holds for genuinely new modules");
+});

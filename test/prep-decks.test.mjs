@@ -222,3 +222,17 @@ test("a browser without IndexedDB says so (durable false) instead of pretending 
   assert.equal((await P.DK.listDecks()).length, 1);
   assert.equal(P.DK.durable(), false);
 });
+
+test("backup keeps a MaiK module grounding text and page range; restore brings the source back", () => {
+  const id = "gen_" + "c".repeat(12);
+  const m = DKP.newManifest({ id, title: "Bladder", exam: "neet-pg", profileV: 1, pv: "qg1", model: "maik", source: { type: "maik", name: "Bladder", pages: [120, 179], sha: id } });
+  const ground = "The bladder stores urine. Detrusor contraction empties it. ".repeat(30);
+  const p = DKP.backupPayload(m, [], [], [], [], SRP.prepScrub, ground);
+  assert.equal(p.ground, ground);
+  const back = DKP.fromPayload(JSON.parse(JSON.stringify(p)));
+  assert.deepEqual(back.src, { deckId: id, name: "Bladder", type: "maik", sents: [], ground });
+  assert.deepEqual(back.m.source.pages, [120, 179], "the page range survives the restore");
+  const p2 = DKP.backupPayload(m, [], [], [], [], SRP.prepScrub);
+  assert.equal(p2.ground, undefined);
+  assert.equal(DKP.fromPayload(JSON.parse(JSON.stringify(p2))).src, null);
+});
