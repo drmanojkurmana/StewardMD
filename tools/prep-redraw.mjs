@@ -149,7 +149,7 @@ async function verify() {
   if (bad.length) { console.log(bad.slice(0, 40).join("\n")); process.exitCode = 1; }
 }
 
-if (fileURLToPath(import.meta.url) === process.argv[1]) {
+if (fileURLToPath(import.meta.url) === fs.realpathSync(process.argv[1])) {
   const c = process.argv[2];
   (c === "publish" ? publish() : c === "verify" ? verify() : Promise.reject(new Error("publish | verify"))).catch((e) => { console.error(e.message); process.exit(1); });
 }
