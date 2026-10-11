@@ -321,49 +321,131 @@ export function mapModuleId(subject, topic, caption, item) {
   if (item && item.module) return item.module;
   if (subject === "ss-cardiology") return "sca-ecg";
   const text = `${topic} ${caption}`.toLowerCase();
-  if (subject === "pathology") {
-    if (/lymphoma|reed-sternberg|hodgkin/i.test(text)) return "pat-hodgkin-lymphoma";
-    if (/leukemia|leukaemia|blast/i.test(text)) return "pat-acute-leukaemias";
-    if (/granuloma|tuberculosis|caseous|langhans/i.test(text)) return "pat-chronic-granulomatous";
-    if (/necrosis|infarct|gangrene|apoptosis/i.test(text)) return "pat-cell-injury-necrosis";
-    if (/glomerulo|nephr|renal|crescent/i.test(text)) return "pat-glomerular";
-    if (/thyroid|parathyroid|psammoma/i.test(text)) return "pat-thyroid-parathyroid";
-    if (/breast|fibroadenoma|ductal/i.test(text)) return "pat-breast";
-    if (/cervix|uterus|cin|endomet/i.test(text)) return "pat-cervix-uterus";
-    if (/ovary|teratoma|krukenberg/i.test(text)) return "pat-ovary";
-    if (/cirrhosis|hepat|liver|mallory/i.test(text)) return "pat-hepatitis-cirrhosis";
-    if (/bone|osteosarcoma|ewing|chondro/i.test(text)) return "pat-bone";
-    if (/melanoma|nevus|skin/i.test(text)) return "pat-joints-soft-tissue";
-    return "pat-tumour-diagnosis";
-  } else if (subject === "anatomy") {
-    if (/brachial|axill|pectoral/i.test(text)) return "ana-axilla-plexus";
-    if (/femoral|thigh|inguinal/i.test(text)) return "ana-thigh";
-    if (/knee|popliteal/i.test(text)) return "ana-knee-popliteal";
-    if (/cranial|skull|cavity|head/i.test(text)) return "ana-skull-cranial-cavity";
-    if (/neck|triangle|carotid/i.test(text)) return "ana-neck-triangles";
-    if (/heart|coronary|aorta/i.test(text)) return "ana-heart";
-    if (/periton|abdomen|mesenter|celiac|coeliac|portal/i.test(text)) return "ana-peritoneum";
-    if (/brain|cerebel|brainstem|spinal/i.test(text)) return "ana-brainstem";
-    if (/larynx|pharynx|vocal/i.test(text)) return "ana-neck-triangles";
-    return "ana-muscles-nerves-vessels";
-  } else if (subject === "surgery") {
-    if (/cholecyst|gallbladder|calot|biliary/i.test(text)) return "sur-gallbladder";
-    if (/appendix|appendic/i.test(text)) return "sur-appendix";
-    if (/hernia|inguinal|femoral/i.test(text)) return "sur-hernia";
-    if (/thyroid|parathyroid/i.test(text)) return "sur-thyroid";
-    if (/breast|mastectomy/i.test(text)) return "sur-breast-cancer";
-    if (/colon|rectal|colectomy/i.test(text)) return "sur-colorectal-cancer";
-    if (/stomach|gastric|gastrectomy/i.test(text)) return "sur-stomach";
-    if (/pancreas|whipple/i.test(text)) return "sur-pancreas";
-    if (/instrument|forceps|retractor|clamp|scalpel/i.test(text)) return "sur-periop";
-    return "sur-periop";
-  }
+  const route = (rules, dflt) => {
+    for (const [re, mid] of rules) if (new RegExp(re, "i").test(text)) return mid;
+    return dflt;
+  };
+  if (subject === "pathology") return route([
+    ["smudge|cll|small lymphocytic|hairy cell|burkitt|starry sky|diffuse large b|follicular lymphoma|mantle cell|maltoma|mycosis fungoides|sezary", "pat-non-hodgkin-lymphoma"],
+    ["hodgkin|reed-sternberg|nodular scleros", "pat-hodgkin-lymphoma"],
+    ["myeloblast|auer rod|promyelocyt|blast crisis|acute (myeloid|lymphoblastic|leuk|leuk)|leukaem|leukem|lymphoblast", "pat-acute-leukaemias"],
+    ["myelodysplas|ring sideroblast|5q-|myeloproliferat|polycythaemia|polycythemia|myelofibrosis|essential thrombocythaemia|jak2|jak 2", "pat-mpn-mds"],
+    ["myeloma|bence jones|plasmacyt|rouleaux|mgus|waldenstrom|histiocyt|langerhans|erdheim|rosai", "pat-plasma-cell-histiocytic"],
+    ["spherocyt|elliptocyt|sickle|drepanocyte|target cell|schistocyte|bite cell|blister cell|g6pd|thalassaemia|thalassemia|hb bart|hb ?h |brill", "pat-haemolytic-hereditary"],
+    ["haemoglobinopath|hemoglobinopath", "pat-haemoglobinopathies"],
+    ["microcy|hypochrom|pencil cell|koilony|iron deficien|ferritin", "pat-iron-deficiency"],
+    ["macro-ovalocyte|hypersegment|megaloblast|b12|folate|pernicious", "pat-megaloblastic"],
+    ["coombs|cold agglutinin|warm autoimmune|paroxysmal nocturnal|\\bpnh\\b|transfusion reaction", "pat-haemolytic-acquired"],
+    ["blood smear|blood film|peripheral smear|reticulocyte|neutrophil|eosinophil|basophil|monocyte|band form|left shift|leukemoid|pelger|alder|chediak|may-hegglin|leukocyte|wbc ", "pat-benign-wbc-lymph-node"],
+    ["marrow|aplastic|pancytopenia|pure red cell|fanconi|diamond-blackfan", "pat-haematopoiesis-marrow-failure"],
+    ["platelet|megakaryocyte|\\bitp\\b|\\bttp\\b|\\bhus\\b|disseminated intravascular|glanzmann|bernard-soulier", "pat-platelet-disorders"],
+    ["haemophilia|hemophilia|christmas disease|von willebrand|factor (viii|ix|xi)|lupus anticoagulant", "pat-coagulation-disorders"],
+    ["transfusion|crossmatch|blood group|\\babo\\b|rh\\(|iron overload", "pat-transfusion"],
+    ["pap smear|papnicolaou|bethesda|ascus|lsil|hsil|koilocyt", "pat-cervix-uterus"],
+    ["thyroid|papillary|psammoma|parathyroid|medullary carcinoma|hashimoto|graves", "pat-thyroid-parathyroid"],
+    ["fnac|fine needle|aspirat|cytolog|effusion|nipple discharge", "pat-tumour-diagnosis"],
+    ["cervi|uterus|endometr|molar|choriocarcinoma|leiomyoma|fibroid", "pat-cervix-uterus"],
+    ["teratoma.*(mediastin|lung|retroperiton|pineal|sacrococcygeal)|(mediastin|lung|retroperiton|pineal|sacrococcygeal).*teratoma", "pat-tumour-diagnosis"],
+    ["ovary|teratoma|krukenberg", "pat-ovary"],
+    ["glomerul|nephr|kidney|renal|tubulo|polycystic kidney|pyelonephr", "pat-glomerular"],
+    ["hepat|biliary|cholangio|cirrhosis|liver|hepatitis|budd-chiari|alpha-1 antitrypsin", "pat-hepatitis-cirrhosis"],
+    ["pancrea|gallbladder|cholecyst|ampulla|pancreatitis|islet", "pat-gallbladder-pancreas"],
+    ["mammary|breast|fibroadenoma|phyllodes|ductal carcinoma|lobular|fat necrosis", "pat-breast"],
+    ["prostat|testis|seminoma|penile|epididym", "pat-male-genital"],
+    ["pituitary|adrenal|cushing|addison|phaeochromocytoma|\\bmen \\b|diabetes insipidus|acromegaly", "pat-pituitary-adrenal"],
+    ["diabet|insulinoma|gastrinoma|neuroendocrine", "pat-diabetes-men"],
+    ["brain|cns|glio|meningi|medullo|schwann|oligodendro|ependym|craniopharyngioma|astrocytoma", "pat-cns-tumours"],
+    ["alzheimer|parkinson|demyelin|multiple sclerosis|stroke|berry aneurysm|subarachnoid", "pat-cns-non-neoplastic"],
+    ["muscle biopsy|duchenne|myasthenia|neuropathy|guillain", "pat-nerve-muscle"],
+    ["melanoma|nevus|basal cell|keratoacanthoma|pemphigus|psoriasis|lichen|dermatitis|schamberg", "pat-skin"],
+    ["osteosarcoma|ewing|chondrosarcoma|giant cell tumo[u]?r|osteochondroma|osteoid osteoma|bone cyst|paget.*bone", "pat-bone"],
+    ["synov|gout|tophi|rheumatoid|osteoarthritis|ganglion|lipoma|fibrosarcoma|rhabdomyosarcoma|synovial sarcoma|dermatofibroma|neurofibroma", "pat-joints-soft-tissue"],
+    ["atheroscler|aneurysm|aortic dissection|vasculitis|takayasu|kawasaki|polyarteritis|temporal arteritis|varicose|thrombophlebit", "pat-atherosclerosis-aneurysm"],
+    ["myocardial infarct|coronary thrombus|vegetation|endocarditis|rheumatic heart|cardiomyopathy|pericarditis", "pat-ischaemic-heart"],
+    ["pneumoconiosis|silicos|asbestos|ferruginous|coal worker|berylliosis", "pat-pneumoconiosis"],
+    ["emphysema|bronchiectasis|asthma|chronic bronchitis|ards|hyaline membrane|pneumonia|lobar|bronchopneumonia|miliary", "pat-obstructive-restrictive"],
+    ["lung (tumour|tumor|carcinoma)|adenocarcinoma.*lung|squamous.*lung|small cell|mesothelioma|carcinoid.*lung|hamartoma.*lung", "pat-lung-tumours"],
+    ["colorectal|colon|intestine|bowel|rectal|appendi|gastric|stomach|esophag|barrett|coeliac|crohn|ulcerative colitis|polyp|diverticul|hirschsprung|peutz|gardner|turcot", "pat-intestine"],
+    ["oral|squamous.*mouth|leukoplakia|salivary|pleomorphic adenoma|warthin|sialaden", "pat-oral-salivary"],
+    ["granuloma|tuberculo|langhans|caseat|sarcoid|leprosy|rhinoscleroma", "pat-chronic-granulomatous"],
+    ["amyloid|congo red|transthyretin", "pat-amyloidosis"],
+    ["apoptos|necrosis|gangrene|fat necrosis|liquefactive|coagulative|dystrophic calcif", "pat-cell-injury-necrosis"],
+    ["metaplasia|dysplasia|hyperplasia|hypertrophy|atrophy|lipofuscin|steatosis|haemosiderin|bilirubin", "pat-adaptations-accumulations"],
+    ["shock|ards|multiorgan", "pat-shock"],
+    ["thromb|embolus|infarct", "pat-thrombosis-embolism"],
+  ], "pat-tumour-diagnosis");
+  if (subject === "anatomy") return route([
+    ["brachial|axill|pectoral", "ana-axilla-plexus"],
+    ["femoral|thigh|inguinal", "ana-thigh"],
+    ["knee|popliteal", "ana-knee-popliteal"],
+    ["cranial|skull|cavity|calvaria|sella|foramen", "ana-skull-cranial-cavity"],
+    ["triangle|carotid", "ana-neck-triangles"],
+    ["coronary|myocard|pericard|valve", "ana-heart"],
+    ["periton|mesenter|celiac|coeliac|portal", "ana-peritoneum"],
+    ["cerebell|purkinje", "ana-cerebellum"],
+    ["brainstem|pons|medulla|midbrain", "ana-brainstem"],
+    ["spinal cord|vertebra|intervertebral", "ana-spinal-cord"],
+    ["cerebr|cortex|hippocampus|gyrus", "ana-cerebrum"],
+    ["larynx|pharynx|vocal|trachea", "ana-larynx"],
+    ["pleura|bronch|mediastin|thymus", "ana-mediastinum"],
+    ["liver|gallbladder|bile duct", "ana-liver-portal"],
+    ["stomach|spleen|pancreas|duoden", "ana-stomach-spleen"],
+    ["jejun|ileum|colon|rectum|appendix", "ana-intestines"],
+    ["kidney|ureter|suprarenal", "ana-kidney-posterior-wall"],
+    ["prostate|bladder|urethra|testis|uterus|ovary|pelvi|perine", "ana-pelvis-perineum"],
+    ["orbit|extraocular|lacrimal", "ana-orbit"],
+    ["parotid|infratemporal|pterygoid", "ana-parotid-infratemporal"],
+    ["nasal|sinus|turbinate|olfactory", "ana-nose-sinuses"],
+    ["middle ear|ossicle|tympanic|mastoid", "ana-ear"],
+    ["lymph node|lymphatic|tonsil", "ana-lymphoid-vessels"],
+    ["epitheli|goblet|microvilli|basement membrane", "ana-epithelium"],
+    ["osteon|haversian|endochondral|epiphys|diaphys|joint|cartilage|synovi", "ana-connective-cartilage-bone"],
+    ["placenta|umbilical|embryo|fetus|morula|blastocyst|gastrulat", "ana-implantation-placenta"],
+    ["neural tube|somite|pharyngeal arch|dermatome", "ana-germ-layers"],
+    ["retina|cochlea|optic nerve|visual pathway|auditory", "ana-visual-auditory-pathways"],
+    ["circle of willis|cerebral arter", "ana-blood-supply-brain"],
+    ["mening|ventricle|subarachnoid|dura", "ana-ventricles-meninges"],
+  ], "ana-muscles-nerves-vessels");
+  if (subject === "surgery") return route([
+    ["cholecyst|gallbladder|calot|biliary", "sur-gallbladder"],
+    ["appendix|appendic", "sur-appendix"],
+    ["hernia|hydrocele|inguinal canal", "sur-hernia"],
+    ["thyroid|goitre|thyroglossal", "sur-thyroid"],
+    ["parathyroid|adrenal|phaeo|pheo", "sur-parathyroid-adrenal"],
+    ["breast|mastectomy|lactat|mammogra|nipple", "sur-breast-cancer"],
+    ["colon|rectal|colectomy|stoma", "sur-colorectal-cancer"],
+    ["stomach|gastric|gastrectomy|peptic|vagotomy", "sur-stomach"],
+    ["pancreas|whipple|pseudocyst", "sur-pancreas"],
+    ["instrument|forceps|retractor|clamp|scalpel", "sur-periop"],
+    ["oesophag|barrett|achalasia", "sur-oesophagus"],
+    ["liver (tumour|tumor|resection|abscess)|hepatectomy|hydatid", "sur-liver"],
+    ["varic|portal hypertension|splenorenal", "sur-portal-hypertension"],
+    ["splenectomy|spleen", "sur-spleen"],
+    ["obstruct|volvulus|intussuscept|adhesion|ileostomy", "sur-obstruction"],
+    ["crohn|fistula|short bowel|meckel", "sur-small-bowel"],
+    ["polyp|diverticul|ulcerative colitis", "sur-colon-benign"],
+    ["haemorrhoid|hemorrhoid|fissure|perianal|pilonidal", "sur-anorectal"],
+    ["peritonitis|oment|retroperiton", "sur-peritoneum"],
+    ["calculus|stone|ureteric colic|pyelonephr|lithotripsy", "sur-urolithiasis"],
+    ["renal (tumour|tumor|cell carcinoma)|nephrectomy|wilms", "sur-renal-tumours"],
+    ["bladder|prostat|turp|bph", "sur-bladder"],
+    ["testis|torsion|varicocele|phimosis|urethra", "sur-testis"],
+    ["aneurysm|aortic|dissection|claudicat|bypass|graft|av fistula", "sur-aneurysm"],
+    ["venous ulcer|dvt|thrombophlebit", "sur-venous"],
+    ["lymphoedema|lymphedema|filarias|elephantiasis", "sur-lymphatic"],
+    ["thorac|rib fracture|haemothorax|empyema|decortication", "sur-thoracic"],
+    ["burn|contracture|flap|melanoma|skin tumour|basal cell", "sur-plastic"],
+    ["laparoscop|trocar|pneumoperitoneum|robotic", "sur-mis"],
+    ["head injury|gcs|extradural|subdural", "sur-head-injury"],
+    ["transplant|rejection|donor", "sur-transplant"],
+    ["paediat|neonat|hirschsprung|atresia|pyloric stenosis", "sur-paed-gi"],
+  ], "sur-onc-principles");
   return `${subject}-general`;
 }
 
 async function main() {
   if (argv.includes("--help") || argv.includes("-h")) {
-    console.log("Usage: node tools/prep-imgqgen.mjs [--limit N] [--concurrency N] [--manifest F] [--out-passed F] [--out-review F] [--ledger F] [--gen-model M] [--verify-model M] [--profile default|ecg] [--subjects a,b]");
+    console.log("Usage: node tools/prep-imgqgen.mjs [--limit N] [--concurrency N] [--manifest F] [--out-passed F] [--out-review F] [--ledger F] [--gen-model M] [--verify-model M] [--profile default|ecg|eye] [--subjects a,b]");
     console.log("Writes image MCQs with blind verification by a second model. Resumable: skips ids already in out files. Limit 0 = all remaining.");
     return;
   }

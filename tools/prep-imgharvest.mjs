@@ -104,7 +104,27 @@ export const SUBJECT_QUERIES = {
     "Warthin tumor histopathology",
     "meningioma psammoma bodies",
     "glioblastoma pseudopalisading",
-    "schwannoma Antoni A Antoni B"
+    "schwannoma Antoni A Antoni B",
+    "peripheral blood smear spherocytosis",
+    "peripheral blood smear sickle cell",
+    "blood smear chronic lymphocytic leukemia smudge cells",
+    "blood smear acute myeloid leukemia Auer rods",
+    "blood smear target cells thalassemia",
+    "blood smear schistocytes microangiopathic",
+    "bone marrow aspirate",
+    "Pap smear koilocytes",
+    "thyroid FNAC cytology",
+    "pleural fluid cytology malignant",
+    "urine cytology malignant cells",
+    "gross specimen myocardial infarction heart",
+    "gross specimen cirrhosis liver",
+    "gross specimen renal cell carcinoma kidney",
+    "gross specimen teratoma ovary",
+    "X-ray osteosarcoma",
+    "X-ray Ewing sarcoma onion skin",
+    "CT glioblastoma",
+    "mammogram breast cancer",
+    "barium swallow achalasia bird beak"
   ],
   anatomy: [
     "Gray's Anatomy plate",
@@ -490,7 +510,9 @@ async function main() {
   const dateStr = new Date().toISOString().slice(0, 10);
 
   for (const subj of subjectsToHarvest) {
-    const queries = SUBJECT_QUERIES[subj] || [];
+    const only = opt("only", "");
+    let queries = SUBJECT_QUERIES[subj] || [];
+    if (only) queries = queries.filter((q) => only.split(",").some((s) => q.toLowerCase().includes(s.trim().toLowerCase())));
     console.log(`\nStarting harvest for subject: ${subj.toUpperCase()} (target: ${TARGET_PER_SUBJ}, current: ${subjectCounts[subj] || 0})`);
 
     for (const q of queries) {
