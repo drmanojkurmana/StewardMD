@@ -20,7 +20,8 @@
    batches); a deck screen holds the deck's questions as a module with progress; the MaiK Tokens a round is expected to
    use are shown before it and what it used after (usage.mt). A round is saved as it goes (manifest run), so a round cut
    off by the app going to the background, or closing, continues where it stopped. A PDF's pages are chosen on a page
-   picker (thumbnails, 60 at most), never taken silently.
+   picker (thumbnails, 60 at most): a long PDF starts with the first 60 beside a plain message, never taken silently,
+   and the range is shortened with another message when its share of the file tops 50 MB or its text runs too long.
 
    Image questions (PDF only): after the text is read, the pictures on the chosen pages are cut out on the phone
    (PREP_SRC.extractImages: at least 200 x 200 px, no logos or running headers, at most 20, at most 1280 px) and shown as
@@ -856,7 +857,11 @@
     cs.err = ""; cs.pdf = null; cs.sel = []; cs.busy = "Opening the PDF…";
     host.rerender();
     SR.openPdf(file).then(function (pdf) {
-      cs.busy = ""; cs.pdf = pdf; cs.sel = SR.selInitial(pdf.pages); cs.anchor = 0; cs.rangeOn = false; cs.pgMsg = ""; cs.spec = "";
+      cs.busy = ""; cs.pdf = pdf; cs.anchor = 0; cs.rangeOn = false; cs.spec = "";
+      var fit = SR.fitBytes(SR.selInitial(pdf.pages), pdf.bytes || 0, pdf.pages || 0);
+      cs.sel = fit.sel;
+      cs.pgMsg = SR.rangeMsg(pdf.pages, cs.sel);
+      if (fit.cut) cs.pgMsg += (cs.pgMsg ? " " : "") + SR.fitMsg(cs.sel);
       if (!cs.title) cs.title = pdf.name.replace(/\.pdf$/i, "").slice(0, 80);
       if (onTop("#pcCreateView", host)) { host.rerender(); host.push(function () { renderPages(host); }); }
     }, function () {
@@ -1045,7 +1050,9 @@
     }
     if (!cs.pdf) return createError(host, "Choose a PDF first.");
     if (!cs.sel.length) return createError(host, "Pick at least one page.");
-    var pages = cs.sel.slice();
+    var pages = cs.sel.slice(), notes = [];
+    var fit = SR.fitBytes(pages, cs.pdf.bytes || 0, cs.pdf.pages || 0);
+    if (fit.cut) { pages = fit.sel; notes.push(SR.fitMsg(pages)); }
     cs.busy = "Reading page 1 of " + pages.length + "…";
     host.rerender();
     var ocrOn = SR.canOcr();
@@ -1055,7 +1062,14 @@
       else if (d < n) say("Reading page " + (d + 1) + " of " + n + "…");
     }).then(function (rd) {
       if (!rd.pages.length) { cs.busy = ""; return createError(host, unreadableMessage(rd, ocrOn)); }
-      var src = { kind: "pdf", raw: rd.pages, title: cs.title, name: cs.pdf.name, pages: pages, scanned: rd.scanned, ocr: rd.ocrPages.length, skipped: rd.skipped.length, note: readNote(rd, ocrOn) };
+      var fc = SR.fitChars(rd.pages, SR.CHARS_CAP);
+      if (fc.dropped) {
+        pages = fc.pages.map(function (p) { return p.p; });
+        notes.push("Using " + pages.length + " of the " + rd.pages.length + " pages read: the text was too long for one deck. Make another deck for the rest.");
+      }
+      var rdNote = readNote({ pages: fc.pages, ocrPages: rd.ocrPages, skipped: rd.skipped, scanned: rd.scanned }, ocrOn);
+      if (rdNote) notes.push(rdNote);
+      var src = { kind: "pdf", raw: fc.pages, title: cs.title, name: cs.pdf.name, pages: pages, scanned: rd.scanned, ocr: rd.ocrPages.length, skipped: rd.skipped.length, note: notes.join(" ") };
       findImages(say, cs.pdf.doc, pages).then(function (imgs) {
         cs.busy = "";
         if (!imgs.length) return review(host, src);
@@ -1119,6 +1133,7 @@
     if (chk.error) { if (onTop("#pcScrubView", host)) host.back(); return createError(host, chk.error); }
     var exam = createExam(cs.exam || host.exam().id), diff = cs.diff, u = user(), sha = DK.sha256(SR.docText(doc)), title = (src.title || "").trim() || defaultTitle(doc, src.name);
     note = src.note || "";
+    if (doc.cut) note += (note ? " " : "") + "Only the first part of the text fits in one deck.";
     loadProfile(exam).then(function (prof) {
       var id = deckIdFor({ uid: u && u.uid, sha: sha, exam: exam, profileV: prof.v || 1, pv: PV, model: MODEL });
       return DK.getDeck(id).then(function (old) {

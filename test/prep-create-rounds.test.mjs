@@ -138,9 +138,10 @@ test("a restored deck (no source on this phone) sends each unused fact's cited s
 });
 
 /* ---------- the page picker ---------- */
-test("pages: small PDFs start with every page, long ones with none; the 60-page cap holds for taps, ranges and typing", () => {
+test("pages: small PDFs start with every page, long ones with the first 60 beside a plain message; the 60-page cap holds for taps, ranges and typing", () => {
   assert.equal(SR.selInitial(12).length, 12);
-  assert.deepEqual(SR.selInitial(500), [], "never a silent first 60");
+  assert.deepEqual(SR.selInitial(500), Array.from({ length: 60 }, (_, i) => i + 1), "long PDFs default to the first 60");
+  assert.match(SR.rangeMsg(500, SR.selInitial(500)), /I can use up to 60 pages at a time\. Pick pages or I will use pages 1 to 60\./, "the default is never silent");
   let sel = [];
   for (let p = 1; p <= 60; p++) sel = SR.selToggle(sel, p, 500).sel;
   assert.equal(sel.length, 60);
@@ -165,4 +166,56 @@ test("pages: the virtual grid draws only the rows in view plus a buffer, at any 
   const end = SR.gridWindow(200 + 166 * 170, 800, 200, 170, 3, 500, 2);
   assert.equal(end.to, 500);
   assert.ok(end.from > 450);
+});
+
+/* ---------- intake limits (owner 2026-10-11): 60 pages, 50 MB, never a rejection ---------- */
+test("intake limits: the 60-page cap and the 50 MB cut are constants", () => {
+  assert.equal(SR.PAGE_CAP, 60);
+  assert.equal(SR.CUT_MB, 50);
+});
+
+test("fitBytes: a selection under the limit is untouched; over it the largest range that fits is kept", () => {
+  const sel60 = SR.selInitial(500);
+  const ok = SR.fitBytes(sel60, 30 * 1048576, 500);   // 60 pages at ~0.5 MB: fits
+  assert.equal(ok.cut, false); assert.deepEqual(ok.sel, sel60);
+  const over = SR.fitBytes(sel60, 500 * 1048576, 500); // 1 MB a page: 60 pages is 60 MB
+  assert.equal(over.cut, true);
+  assert.deepEqual(over.sel, sel60.slice(0, 50), "the largest range under 50 MB");
+  assert.ok(over.estMB <= 50);
+  const tiny = SR.fitBytes([7, 8, 9], 500 * 1048576, 500);
+  assert.equal(tiny.cut, false, "a small selection is never cut");
+  const one = SR.fitBytes([3, 4, 5], 300 * 1048576, 10); // 30 MB a page
+  assert.deepEqual(one.sel, [3], "at least one page is always kept");
+  assert.equal(one.cut, true);
+  const unknown = SR.fitBytes(sel60, 0, 500);
+  assert.equal(unknown.cut, false, "unknown file size cuts nothing");
+});
+
+test("fitChars: over-long text drops pages from the end and keeps at least one", () => {
+  const pg = (p, n) => ({ p, lines: [{ tx: "x".repeat(n) }] });
+  const pages = [pg(1, 100), pg(2, 100), pg(3, 100)];
+  assert.deepEqual(SR.fitChars(pages, 1000), { pages, dropped: 0 });
+  const r = SR.fitChars(pages, 250);
+  assert.deepEqual(r.pages.map((p) => p.p), [1, 2], "drops from the end");
+  assert.equal(r.dropped, 1);
+  const one = SR.fitChars(pages, 50);
+  assert.deepEqual(one.pages.map((p) => p.p), [1]);
+  assert.equal(one.dropped, 2);
+});
+
+test("rangeMsg: a long PDF names the pages used; a short one says nothing", () => {
+  assert.equal(SR.rangeMsg(12, SR.selInitial(12)), "");
+  assert.equal(SR.rangeMsg(500, SR.selInitial(500)), "This PDF has 500 pages. I can use up to 60 pages at a time. Pick pages or I will use pages 1 to 60. Make another deck for the rest.");
+  assert.match(SR.rangeMsg(500, [120, 121], 60, "module"), /I will use pages 120 to 121\. Make another module for the rest\./);
+  assert.match(SR.rangeMsg(500, []), /Pick up to 60 pages to begin\./);
+  assert.equal(SR.fitMsg([1, 2, 3]), "Using pages 1 to 3 (3 pages) to stay under 50 MB.");
+  assert.equal(SR.fitMsg([5]), "Using page 5 to stay under 50 MB.");
+});
+
+test("typed ranges: 120-179 works; over 60 pages still errors with the cap words", () => {
+  const r = SR.selFromSpec("120-179", 500);
+  assert.equal(r.sel.length, 60); assert.equal(r.sel[0], 120); assert.equal(r.sel[59], 179);
+  assert.match(SR.selFromSpec("1-200", 500).error, /up to 60 pages/);
+  assert.equal(SR.defaultPages(500), "1-60");
+  assert.equal(SR.defaultPages(12), "1-12");
 });
