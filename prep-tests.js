@@ -1,5 +1,5 @@
 /* PrepNucleus Tests 2 (Tests & Assessment Engine M1, 2026-10-10): the Tests tab's test types on the official exam
-   profiles. window.PREP_TESTS. ES5. Flag smd_prep_tests2, default OFF: localStorage smd_prep_tests2 = "1" or ?tests2=1
+   profiles. window.PREP_TESTS. ES5. Flag smd_prep_tests2, default ON (owner 2026-10-11, TestFlight testers only): localStorage smd_prep_tests2 = "0" or ?tests2=0 turns it off; "1" or ?tests2=1
    turns it on ("0" / ?tests2=0 off). Off, the Tests tab is exactly as before (prep.js MOCKS, one overall timer).
 
    On, the Tests segment lists, for the exam tab:
@@ -23,7 +23,7 @@
   var H = null;
 
   function on() {
-    try { var q = (G.location.search.match(/[?&]tests2=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return G.localStorage.getItem(FLAG) === "1"; } catch (e) { return false; }
+    try { var q = (G.location.search.match(/[?&]tests2=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; var v = G.localStorage.getItem(FLAG); return v !== "0"; } catch (e) { return true; }
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function mmss(sec) { sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec / 60), s = sec % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
