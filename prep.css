@@ -1675,3 +1675,15 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
 .pn-root .pn-credit-body a { color: var(--pn-pri); text-decoration: underline; }
 .pn-root .pn-credits-body { padding: 16px; }
 .pn-root .pn-cred-item { border: 1px solid var(--pn-edge); border-radius: var(--pn-r-md); padding: 12px; margin-bottom: 10px; background: var(--pn-card); }
+/* Image learning atlases (prep-imglearn.js): ECG atlas cards reuse pn- tokens. */
+.pn-root .pn-il-cats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pn-root .pn-il-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
+@media (min-width: 640px) { .pn-root .pn-il-grid { grid-template-columns: 1fr 1fr; } }
+.pn-root .pn-il-card { border: 1px solid var(--pn-edge); border-radius: var(--pn-r-md); overflow: hidden; background: var(--pn-s0); }
+.pn-root .pn-il-fig { margin: 0; }
+.pn-root .pn-il-fig img { display: block; width: 100%; height: auto; }
+.pn-root .pn-il-fig figcaption { padding: 2px 12px 0; }
+.pn-root .pn-il-body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; }
+.pn-root .pn-il-body h3 { margin: 0; font-size: 15.5px; }
+.pn-root .pn-il-find { margin: 0; font-size: 13px; color: var(--pn-text); }
+.pn-root .pn-il-why { margin: 0; font-size: 13px; color: var(--pn-mut); }

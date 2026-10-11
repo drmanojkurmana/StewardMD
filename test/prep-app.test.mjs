@@ -402,6 +402,30 @@ test("tide pass: prep-tide.js loads after prep-motion.js, optional, and prep.js 
   assert.doesNotMatch(T, /https?:\/\//, "no network: offline");
 });
 
+test("ECG atlas and PrepNucleus-KardiqX two-way links", () => {
+  const J = read("prep.js");
+  const Y = read("prep-pyq.js");
+  const C = read("prep.css");
+  const L = read("prep-loader.js");
+  const IL = read("prep-imglearn.js");
+  const KX = read("kardiox.js");
+  const KXS = read("kardiox-screens.js");
+  assert.match(L, /"prep-imglearn\.js"/, "loader ships prep-imglearn.js");
+  assert.match(J, /PREP_IMGLEARN\.subjectButton/, "subject screen offers the atlas button");
+  assert.match(J, /a\.indexOf\("il-"\) === 0/, "prep routes il- acts to PREP_IMGLEARN");
+  assert.match(J, /opts\.module/, "PREP.open supports a module deep link");
+  assert.match(IL, /SMD_KARDIOX_CONTENT/, "atlas reads the shared KardiqX content (no copy)");
+  assert.match(IL, /il-ecg/, "atlas opens from the cardiology subject");
+  assert.match(IL, /Open in KardiqX/, "atlas cards link to KardiqX Learn");
+  assert.match(Y, /kardiox-learn\|ophthalmos\|psm/, "itemImg passes app-bundled illustrations through");
+  assert.match(C, /\.pn-il-card/, "prep.css styles atlas cards");
+  assert.match(KX, /function openLearn\(id\)/, "KARDIOX.openLearn takes an ECG id");
+  assert.match(KXS, /openLesson: openLesson/, "router exposes openLesson for the PrepNucleus deep link");
+  assert.match(KXS, /kx-prep/, "lesson screen links back to PrepNucleus ECG questions");
+  const M = JSON.parse(read("tools/prep-deid/manifest.json"));
+  assert.ok((M.generated || []).some((r) => r.includes("kardiox-learn")), "deid manifest covers KardiqX illustrations as generated");
+});
+
 test("image credit chip, sheet, and menu screen wiring", () => {
   const J = read("prep.js");
   const Y = read("prep-pyq.js");
