@@ -63,6 +63,21 @@ test("item edits: a file keeps its shape, takes the new set name, and reports wh
   assert.equal(src.items[1].q, "t", "the input is not mutated");
 });
 
+test("item edits: outdated marks guidance without touching the key; already-marked is a no-op", () => {
+  const it = { id: "o1", q: "s", o: ["p", "q"], a: 1, exp: "why" };
+  assert.deepEqual(editItem(it, { outdated: new Set(["o1", "o2"]) }), ["outdated"]);
+  assert.equal(it.outdated, true);
+  assert.deepEqual([it.a, it.o, it.exp, it.q], [1, ["p", "q"], "why", "s"]);
+  assert.deepEqual(editItem(it, { outdated: new Set(["o1"]) }), [], "already marked: nothing changes");
+  assert.deepEqual(editItem({ id: "o9", q: "s", o: ["p"], a: 0 }, { outdated: new Set(["o1"]) }), [], "unlisted: untouched");
+  const r = editFile({ topic: "t", items: [{ id: "a", q: "s", o: ["p", "q"], a: 0 }, it] },
+    { outdated: new Set(["o1"]) });
+  assert.deepEqual(r.changes, {}, "o1 arrives already marked, so no change is reported");
+  const r2 = editFile({ topic: "t", items: [{ id: "a", q: "s", o: ["p", "q"], a: 0 }] }, { outdated: new Set(["a"]) });
+  assert.deepEqual(r2.changes, { outdated: ["a"] });
+  assert.equal(r2.json.items[0].outdated, true);
+});
+
 test("named search index: the subject index may name search-<hash>.json; anything else reads search.json", () => {
   assert.equal(P.searchFile({ search: "search-2fc5fc18.json" }), "search-2fc5fc18.json");
   for (const bad of [null, {}, { search: "search.json" }, { search: "../x.json" }, { search: "search-2FC5FC18.json" }, { search: 5 }]) assert.equal(P.searchFile(bad), "search.json");

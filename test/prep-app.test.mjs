@@ -32,6 +32,24 @@ test("usable and poolFor: flagged out; USMLE vignettes only when there are at le
   assert.equal(P.usable(item("h"), { h: 1 }), false);
 });
 
+test("isOutdated: a marked item stays usable; its explanation carries the guideline note", () => {
+  assert.equal(P.isOutdated(item("o", { outdated: true })), true);
+  assert.equal(P.isOutdated(item("o", { outdated: "2026-10" })), true, "any truthy mark counts");
+  assert.equal(P.isOutdated(item("o")), false);
+  assert.equal(P.isOutdated(item("o", { outdated: false })), false);
+  assert.equal(P.isOutdated(null), false);
+  assert.equal(P.usable(item("o", { outdated: true })), true, "marking never hides the question");
+  const prep = read("prep.js");
+  assert.match(prep, /Guideline changed, check current version\./, "the exact note text");
+  assert.equal((prep.match(/outdatedHtml\(it\)/g) || []).length, 4, "helper plus feedback, review and solutions");
+  const css = read("prep.css");
+  const guide = /\.pn-root \.pn-guide \{[^}]*\}/.exec(css)[0];
+  assert.ok(guide.includes("var(--pn-ok-bg)") && guide.includes("var(--pn-ok-line)"), "restrained green tokens");
+  assert.ok(!guide.match(/#[0-9a-f]{3,}/i) && !guide.includes("box-shadow") && !guide.includes("glow"), "no hex, no glow");
+  const rblock = css.slice(css.indexOf("Reasoning explanations"));
+  assert.ok(rblock.includes(".pn-src"), "the provenance line is styled with the reasoning block");
+});
+
 test("progressByModule counts answered and due per module from p: deck cards only", () => {
   const s = P.emptyStore();
   s.cards["p:m1:a"] = [5, 2, 10, 12, 1, 0];

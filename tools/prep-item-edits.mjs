@@ -2,7 +2,7 @@
 // Re-release bank or overlay module files with reviewed edits, never touching answer keys.
 //
 //   node tools/prep-item-edits.mjs --src <dir> --out <dir> [--edits stems.json] [--img-map map.json] [--img-prefix img/radnotes/]
-//       [--set <name>] [--spacing]
+//       [--set <name>] [--spacing] [--outdated ids.json]
 //
 // <dir> holds module files (<module>.json, as downloaded from R2: { topic, items } or { topic, set, v, items }).
 // Every file is written to --out (a release is a whole folder: a new bank version or a new overlay set folder, because
@@ -14,6 +14,9 @@
 //   --img-prefix  a bare image name ("rn-n1-p030-3.webp") is resolved by the app against img/<set>/, so when a set moves
 //               to a new folder (radnotes -> radnotes2) bare names are written out in full with this prefix.
 //   --set       the overlay set name written into each file (new folder name).
+//   --outdated  [<item id>, ...] (or { "<item id>": true }): mark outdated guidance (outdated: true, the app shows
+//               "Guideline changed, check current version."). The question stays in the pool; nothing is deleted.
+//               Every id must be found (see outdatedNotApplied). Seeded by tools/prep-outdated-seed.mjs.
 //   --spacing   repair run-together words in exp, q and o (tools/prep-spacing.mjs); --known-root <bank version dir> counts
 //               words over the whole bank (recommended) rather than this folder only.
 // Prints a JSON report (files, items changed per kind). Deterministic: the same inputs give the same bytes.
@@ -29,6 +32,7 @@ export function editItem(it, o) {
     if (!q) throw new Error("empty stem for " + it.id);
     if (q !== it.q) { it.q = q; ch.push("stem"); }
   }
+  if (o.outdated && o.outdated.has(it.id) && !it.outdated) { it.outdated = true; ch.push("outdated"); }
   if (Array.isArray(it.img)) {
     const next = it.img.map((f) => {
       let g = String(f);
@@ -72,7 +76,9 @@ function main(argv = process.argv.slice(2)) {
   const src = arg("--src"), out = arg("--out");
   if (!src || !out) throw new Error("--src and --out are required");
   const rd = (p) => (p ? JSON.parse(fs.readFileSync(p, "utf8")) : null);
-  const o = { stems: rd(arg("--edits")), imgMap: rd(arg("--img-map")), imgPrefix: arg("--img-prefix", null), set: arg("--set", null) };
+  const od = rd(arg("--outdated"));
+  const outdated = od ? new Set(Array.isArray(od) ? od.map(String) : Object.keys(od).filter((k) => od[k])) : null;
+  const o = { stems: rd(arg("--edits")), imgMap: rd(arg("--img-map")), imgPrefix: arg("--img-prefix", null), set: arg("--set", null), outdated };
   const files = fs.readdirSync(src).filter((f) => /\.json$/.test(f) && f !== "index.json" && f !== "search.json").sort();
   if (argv.includes("--spacing")) {
     // word counts over the whole bank (--known-root <bank version dir>, every <subject>/mcq/*.json), else this folder
@@ -81,14 +87,16 @@ function main(argv = process.argv.slice(2)) {
       : files.map((f) => path.join(src, f));
     o.known = makeKnown(paths.map((p) => JSON.parse(fs.readFileSync(p, "utf8")).items || []));
   }
-  const seen = new Set(), report = { files: files.length, changed: {} };
+  const seen = new Set(), allIds = new Set(), report = { files: files.length, changed: {} };
   fs.mkdirSync(out, { recursive: true });
   for (const f of files) {
     const r = editFile(JSON.parse(fs.readFileSync(path.join(src, f), "utf8")), o);
+    for (const it of r.json.items || []) if (it && it.id != null) allIds.add(String(it.id));
     for (const [k, ids] of Object.entries(r.changes)) { report.changed[k] = (report.changed[k] || 0) + ids.length; if (k === "stem") ids.forEach((id) => seen.add(id)); }
     fs.writeFileSync(path.join(out, f), JSON.stringify(r.json));
   }
   if (o.stems) { const miss = Object.keys(o.stems).filter((id) => !seen.has(id)); report.stemsNotApplied = miss; }
+  if (o.outdated) { const miss = Array.from(o.outdated).filter((id) => !allIds.has(id)); report.outdatedNotApplied = miss; }
   console.log(JSON.stringify(report));
 }
 
