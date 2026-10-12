@@ -183,10 +183,10 @@ test("soonFor: data-driven from exam profile bank status", () => {
   assert.equal(arenaClient.soonFor("mrcs-part-a", assess), null);
   assert.equal(arenaClient.soonFor("amc-mcq", assess), null);
   assert.equal(arenaClient.soonFor("mccqe-1", assess), null);
+  assert.equal(arenaClient.soonFor("mrcp-part1", assess), null);
+  assert.equal(arenaClient.soonFor("mrcp-part2-written", assess), null);
   // unbanked exams report their coming soon note
   assert.ok(arenaClient.soonFor("usmle-step2-ck", assess));
-  assert.ok(arenaClient.soonFor("mrcp-part1", assess));
-  assert.ok(arenaClient.soonFor("mrcp-part2-written", assess));
 });
 
 /* ---------- the route ---------- */
