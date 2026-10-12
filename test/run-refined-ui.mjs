@@ -104,6 +104,20 @@ try {
   await call("CSS.forcePseudoState", { nodeId: mi, forcedPseudoClasses: [] });
   ok(bg0 !== bg1 && /15, 23, 42/.test(bg1), "pressed: a sheet row shows the highlight while pressed (" + bg0 + " -> " + bg1 + ")");
 
+  // 4c. Empty and error placeholders
+  await load();
+  await ev(`var w=document.createElement('div');w.id='__es';w.style.cssText='position:fixed;inset:0;z-index:30000;background:#fff;padding:16px';
+    w.innerHTML='<div class="t-empty">No calculators match your search.</div><div class="t-err">Could not load the ward list. Try again.</div><div class="t-empty" id="__ic"><span class="material-symbols-outlined">inbox</span> Nothing saved yet</div><div class="t-empty" id="__btn">No results <button>Retry</button></div><table><tr><td class="t-empty">No labs recorded</td></tr></table>';
+    document.body.appendChild(w);return 1`);
+  await sleep(600);
+  const marks = await ev("return [].map.call(document.querySelectorAll('#__es div, #__es td'),function(e){return (e.getAttribute('data-smd-empty')||'-')+(e.hasAttribute('data-smd-empty-icon')?'+icon':'')}).join(',')");
+  ok(marks === "empty,error,empty+icon,-,-", "empty states: simple ones marked, one with its own icon keeps it, a button and a table cell are left alone (" + marks + ")");
+  ok(/rgb\(228, 242, 239\)/.test(await ev("return getComputedStyle(document.querySelector('#__es div'),'::before').backgroundColor")), "empty states: the soft teal icon circle is drawn");
+  ok((await ev("return getComputedStyle(document.querySelector('#__es .t-err'),'::before').backgroundColor")) === "rgb(251, 233, 236)", "empty states: errors get the soft red circle");
+  ok((await ev("return document.querySelector('#__es .t-err').getAttribute('role')")) === "alert", "empty states: an error placeholder is announced (role=alert)");
+  ok((await ev("return document.querySelectorAll('#homeV2 [data-smd-empty]').length")) === 0, "empty states: nothing on the home page is marked");
+  await ev("document.getElementById('__es').remove();return 1");
+
   // 5. Kill switch
   await load("try{localStorage.setItem('smd_refined','0')}catch(e){}");
   ok(!(await ev("return document.documentElement.classList.contains('smd-refined')")), "kill switch: localStorage smd_refined=0 leaves the old look");

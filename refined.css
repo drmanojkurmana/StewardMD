@@ -133,3 +133,38 @@ html.smd-refined body.v3-dark > :not(#homeV2) .hv-mi:active { background-color: 
   html.smd-refined body > :not(#homeV2) .abg-drug-link-btn:active,
   html.smd-refined body > :not(#homeV2) .abg-back:active { transform: none; }
 }
+
+/* ---- empty and error placeholders (marked by empty-states.js) ----
+ * One calm design for ~500 placeholders that each had their own: a soft icon circle, centred 14px text,
+ * generous air, a gentle fade-in. Block (not flex) so inline markup inside the message stays inline.
+ * An element that already has its own icon (data-smd-empty-icon) keeps it and only gets the typography. */
+html.smd-refined body > :not(#homeV2) [data-smd-empty] {
+  display: block !important; text-align: center !important; max-width: 360px; margin-left: auto !important; margin-right: auto !important;
+  padding: 36px 24px !important; font-size: 14px !important; line-height: 1.5 !important;
+  animation: rfEmptyIn .36s cubic-bezier(.2, .8, .2, 1) both;
+}
+html.smd-refined body > :not(#homeV2) [data-smd-empty="empty"] { color: var(--rds-muted, #5B7083) !important; }
+html.smd-refined body > :not(#homeV2) [data-smd-empty]:not([data-smd-empty-icon])::before {
+  content: ""; display: block; width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%;
+  background-repeat: no-repeat; background-position: center; background-size: 26px 26px;
+}
+html.smd-refined body > :not(#homeV2) [data-smd-empty="empty"]:not([data-smd-empty-icon])::before {
+  background-color: #E4F2EF;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F766E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 12h-6l-2 3h-4l-2-3H2'/%3E%3Cpath d='M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z'/%3E%3C/svg%3E");
+}
+html.smd-refined body > :not(#homeV2) [data-smd-empty="error"]:not([data-smd-empty-icon])::before {
+  background-color: #FBE9EC;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B42332' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 8v4'/%3E%3Cpath d='M12 16h.01'/%3E%3C/svg%3E");
+}
+html.smd-refined body.dark > :not(#homeV2) [data-smd-empty="empty"]:not([data-smd-empty-icon])::before,
+html.smd-refined body.v3-dark > :not(#homeV2) [data-smd-empty="empty"]:not([data-smd-empty-icon])::before {
+  background-color: rgba(76, 194, 176, .14);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234CC2B0' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 12h-6l-2 3h-4l-2-3H2'/%3E%3Cpath d='M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z'/%3E%3C/svg%3E");
+}
+html.smd-refined body.dark > :not(#homeV2) [data-smd-empty="error"]:not([data-smd-empty-icon])::before,
+html.smd-refined body.v3-dark > :not(#homeV2) [data-smd-empty="error"]:not([data-smd-empty-icon])::before {
+  background-color: rgba(241, 114, 135, .14);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F17287' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 8v4'/%3E%3Cpath d='M12 16h.01'/%3E%3C/svg%3E");
+}
+@keyframes rfEmptyIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { html.smd-refined body > :not(#homeV2) [data-smd-empty] { animation: none; } }
