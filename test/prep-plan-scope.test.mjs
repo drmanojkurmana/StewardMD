@@ -132,8 +132,17 @@ test("plan choices resolve to exam profiles; legacy usmle reads Step 1", () => {
   assert.equal(PLAN.planProfileId("usmle-step2-ck"), "usmle-step2-ck");
   assert.equal(PLAN.planProfileId("ini-ss"), "ini-ss");
   assert.equal(PLAN.planProfileId("plab-1"), "plab-1");
+  assert.equal(PLAN.planProfileId("mrcs-part-a"), "mrcs-part-a");
+  assert.equal(PLAN.planProfileId("amc-mcq"), "amc-mcq");
+  assert.equal(PLAN.planProfileId("mccqe-1"), "mccqe-1");
+  assert.equal(PLAN.planProfileId("mrcp-part1"), "mrcp-part1");
+  assert.equal(PLAN.planProfileId("mrcp-part2-written"), "mrcp-part2-written");
   assert.equal(PLAN.choiceOf("ini-cet").tab, "neet-pg");
   assert.equal(PLAN.choiceOf("ini-ss").tab, "neet-ss");
+  assert.equal(PLAN.choiceOf("mrcp-part1").tab, "mrcp");
+  assert.equal(PLAN.choiceOf("mrcp-part2-written").tab, "mrcp");
+  assert.equal(PLAN.choiceOf("amc-mcq").tab, "amc");
+  assert.equal(PLAN.choiceOf("mccqe-1").tab, "mccqe");
 });
 
 test("NEET-SS groups: 15 groups, medical default, surgical has no bank subjects", () => {

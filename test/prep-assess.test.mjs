@@ -181,6 +181,31 @@ test("Tests tab: only the plan exam; a coming exam shows one short state, no tes
   assert.ok(!pg.includes("More exam formats") && !pg.includes('data-p="plab-1"'), "no cross-exam cards on NEET-PG either");
 });
 
+/* Newly banked exams (PLAB 1, MRCS Part A, AMC CAT MCQ, MCCQE Part I, MRCP x2: banks landed 2026-10-12):
+ * a plan on one shows its own tests with test buttons, never a sibling exam or a "More exam formats" section.
+ * Data-driven from the profile bank status: MRCP Part 1 and Part 2 Written stay apart although they share a tab. */
+test("Tests tab: newly banked plan exams show only their own tests", () => {
+  const src = fs.readFileSync(new URL("prep-tests.js", ROOT), "utf8");
+  const mkH = (exam, pl) => ({
+    store: () => ({ t2h: [], t2d: {}, pl: pl || null }), exam: () => ({ id: exam }),
+    ico: () => "", row: () => "", fmt: (n) => String(n), planToday: () => ({ due: 0, left: 0, weak: [] }), pure: {}
+  });
+  const G = { location: { search: "" }, localStorage: { getItem: () => null }, PREP_ASSESS: A };
+  new Function("window", src)(G);
+  const ALL = ["neet-pg", "ini-cet", "neet-ss", "ini-ss", "usmle-step1", "usmle-step2-ck",
+    "plab-1", "mrcs-part-a", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"];
+  for (const [tab, id] of [["plab", "plab-1"], ["mrcs", "mrcs-part-a"], ["amc", "amc-mcq"],
+      ["mccqe", "mccqe-1"], ["mrcp", "mrcp-part1"], ["mrcp", "mrcp-part2-written"]]) {
+    assert.equal(A.bankStatus(A.profile(id)), "available", id + " banked");
+    const html = G.PREP_TESTS.testsHtml(mkH(tab, { exam: id }));
+    assert.ok(html.includes('data-p="' + id + '"'), id + " shown");
+    assert.ok(html.includes('data-p="' + id + '" data-k='), id + " keeps its test buttons");
+    assert.ok(!html.includes("Questions for this exam are being added."), id + " not a coming state");
+    assert.ok(!html.includes("More exam formats"), id + " has no cross-exam section");
+    for (const other of ALL) if (other !== id) assert.ok(!html.includes('data-p="' + other + '"'), other + " not listed on the " + id + " plan");
+  }
+});
+
 test("client and server read the same profiles: MOCKS, SCHEMES, EXAM_PROFILES unchanged", async () => {
   // The literals as they were in prep.js, functions/_prep-arena.js and functions/_prep-core.js before the move.
   const OLD_MOCKS = {
