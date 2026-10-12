@@ -1,0 +1,100 @@
+{
+ "v": 1,
+ "module": "snp-drug-dosing-ckd",
+ "subject": "ss-nephrology",
+ "title": "Drug prescribing in kidney disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Most drugs leave the body through the kidney, so **renal clearance** guides dosing. Estimate function with eGFR or Cockcroft-Gault creatinine clearance, and check which method each drug label uses. Drugs cleared mainly by the kidney need dose reduction as function falls, while drugs eliminated by the liver often need little change. **Dialyzability** also matters: small, weakly protein-bound drugs are removed by haemodialysis, so doses are timed after sessions.",
+   "say": "Most drugs leave the body through the kidney, so renal clearance guides dosing. Estimate function with eGFR or Cockcroft-Gault creatinine clearance, and check which method each drug label uses. Drugs cleared mainly by the kidney need dose reduction as function falls, while drugs eliminated by the liver often need little change. Dialyzability also matters. Small, weakly protein-bound drugs are removed by haemodialysis, so doses are timed after sessions.",
+   "vis": null
+  },
+  {
+   "tx": "Renal clearance determines how much of a **drug** and its **active metabolites** leave the body through the kidneys. When clearance falls, the same dose accumulates, so **dose adjustment** becomes necessary to avoid toxicity. Prescribers should check whether a drug is mainly renally excreted, whether it has a narrow **therapeutic index**, and whether its metabolites are active. **Estimated glomerular filtration rate** guides these decisions, and the trend over time matters as much as any single result.",
+   "say": "Renal clearance decides how much of a drug and its active metabolites leave the body through the kidneys. When clearance falls, the same dose builds up, so dose adjustment becomes necessary to avoid toxicity. Ask three questions: is the drug mainly renally excreted, does it have a narrow therapeutic index, and are its metabolites active? Estimated glomerular filtration rate guides these decisions, and the trend over time matters as much as any single result.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug property",
+     "Prescribing implication"
+    ],
+    "rows": [
+     [
+      "Mainly renally excreted",
+      "Reduce the dose or extend the interval as clearance falls"
+     ],
+     [
+      "Narrow therapeutic index",
+      "Monitor levels closely and adjust early"
+     ],
+     [
+      "Active renal metabolites",
+      "Expect accumulation and toxicity even at a modest dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For atrial fibrillation, **direct oral anticoagulant** dosing in **chronic kidney disease** depends on more than **estimated glomerular filtration rate** alone. Dose reduction usually follows a set of **patient-specific criteria**, such as older age, low body weight, or raised serum creatinine, and the reduced dose applies only when enough of these are present. Some agents in this class are predominantly renally cleared, so they are avoided when clearance is very low. Always check the current product information and local guidance before prescribing.",
+   "say": "For atrial fibrillation, direct oral anticoagulant dosing in chronic kidney disease depends on more than estimated glomerular filtration rate alone. Dose reduction usually follows a set of patient-specific criteria, such as older age, low body weight, or raised serum creatinine, and the reduced dose applies only when enough of these are present. Some agents in this class are predominantly renally cleared, so they are avoided when clearance is very low. Always check the current product information and local guidance before prescribing.",
+   "vis": null
+  },
+  {
+   "tx": "**Gabapentin** and **pregabalin** are excreted unchanged by the kidney, so accumulation causes sedation, ataxia, myoclonus and respiratory depression. The risk is greatest when they are combined with opioids. Dose is reduced according to creatinine clearance, and the dose is given after haemodialysis. Start low in older patients and monitor closely.",
+   "say": "Gabapentin and pregabalin are excreted unchanged by the kidney, so accumulation causes sedation, ataxia, myoclonus and respiratory depression. The risk is greatest when they are combined with opioids. Dose is reduced according to creatinine clearance, and the dose is given after haemodialysis. Start low in older patients and monitor closely.",
+   "vis": null
+  },
+  {
+   "tx": "Several common prescribing hazards need action in CKD. Avoid NSAIDs where possible, and hold **metformin** around iodinated **contrast** when eGFR is low or acute kidney injury is present. Aminoglycosides and vancomycin need level-guided dosing and timing around haemodialysis. **Metoclopramide** needs dose reduction in severe impairment because of accumulation and extrapyramidal effects.",
+   "say": "Several common prescribing hazards need action in CKD. Avoid NSAIDs where possible, and hold metformin around iodinated contrast when eGFR is low or acute kidney injury is present. Aminoglycosides and vancomycin need level-guided dosing and timing around haemodialysis. Metoclopramide needs dose reduction in severe impairment because of accumulation and extrapyramidal effects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Prescribing action"
+    ],
+    "rows": [
+     [
+      "Iodinated contrast with low eGFR or AKI",
+      "Hold metformin and avoid nephrotoxins"
+     ],
+     [
+      "Aminoglycoside or vancomycin on dialysis",
+      "Dose by levels and time after haemodialysis"
+     ],
+     [
+      "Metoclopramide in severe impairment",
+      "Reduce dose and watch for movement disorders"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_3dc87f4bb228",
+  "q_223d16dbea80",
+  "q_c7e06ccb9890"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO 2022 Clinical Practice Guideline for Diabetes Management in CKD",
+  "NICE NG203 Chronic kidney disease: assessment and management",
+  "KDIGO 2012 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 13
+ }
+}

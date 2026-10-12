@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "mcc-cc-thyroid",
+ "subject": "mcc-chronic-care",
+ "title": "Thyroid disease: essentials for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Thyroid disease is a common exam topic, and most cases fall into **hypothyroidism**, **hyperthyroidism** or a **thyroid nodule**. The thyroid secretes T4 and T3 under the control of TSH from the pituitary. **TSH** is the single most useful screening test, and free T4 confirms the picture. Always read the two together, because the pattern tells you whether the disorder is primary, central or subclinical. In India, iodised salt has reduced iodine deficiency but has not eliminated it.",
+   "say": "Thyroid disease is a common topic in your exams. Most cases fall into hypothyroidism, hyperthyroidism or a thyroid nodule. The thyroid makes T4 and T3 under the control of TSH from the pituitary. TSH is the single most useful screening test, and free T4 confirms the picture. Always read the two together, because the pattern tells you whether the disorder is primary, central or subclinical. In India, iodised salt has reduced iodine deficiency but has not removed it.",
+   "vis": null
+  },
+  {
+   "tx": "**Subclinical hypothyroidism** has a raised TSH with a normal free T4. **Overt primary hypothyroidism** has a raised TSH with a low free T4. In **central hypothyroidism** the pituitary fails, so TSH is low or inappropriately normal while free T4 is low. Levothyroxine is the treatment of choice for overt disease. For subclinical disease, treatment is usually considered when TSH is clearly raised, when symptoms are present, or in women planning pregnancy.",
+   "say": "Subclinical hypothyroidism has a raised TSH with normal free T4. Overt primary hypothyroidism has a raised TSH with low free T4. In central hypothyroidism the pituitary fails, so TSH is low or inappropriately normal while free T4 is low. Levothyroxine is the treatment of choice for overt disease. For subclinical disease, treatment is usually considered when TSH is clearly raised, when symptoms are present, or in women planning pregnancy. A mildly raised TSH alone in older adults often does not need treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "TSH",
+     "Free T4"
+    ],
+    "rows": [
+     [
+      "Subclinical",
+      "Raised",
+      "Normal"
+     ],
+     [
+      "Overt primary",
+      "Raised",
+      "Low"
+     ],
+     [
+      "Central (pituitary)",
+      "Low or inappropriately normal",
+      "Low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Graves disease** is the commonest cause of hyperthyroidism and results from stimulating antibodies against the TSH receptor. A **toxic nodule** is an autonomously hyperfunctioning nodule. **Thyroiditis** causes transient thyrotoxicosis with low radioiodine uptake. First-line antithyroid treatment is **carbimazole**, which blocks hormone synthesis. **Propranolol** controls palpitations and tremor while the thyroid settles. Radioiodine or surgery are later options.",
+   "say": "Graves disease is the commonest cause of hyperthyroidism and results from stimulating antibodies against the TSH receptor. A toxic nodule is an autonomously hyperfunctioning nodule. Thyroiditis causes transient thyrotoxicosis with low radioiodine uptake. First-line antithyroid treatment is carbimazole, which blocks hormone synthesis. Propranolol controls palpitations and tremor while the thyroid settles. Radioiodine or surgery are later options.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "Graves disease",
+      "Diffuse goitre with TSH receptor antibodies"
+     ],
+     [
+      "Toxic nodule",
+      "Focal hyperfunction on scan"
+     ],
+     [
+      "Thyroiditis",
+      "Painless, transient, low uptake"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **thyroid nodule** is first assessed with TSH. A normal TSH means the nodule is not hyperfunctioning, so malignancy must be assessed. **Ultrasound** examines margins, echogenicity, calcification and shape. Irregular margins and microcalcifications are suspicious. Such nodules need **fine-needle aspiration cytology**, which guides whether surgery is needed. Absence of neck pressure or family history does not rule out cancer.",
+   "say": "A thyroid nodule is first assessed with TSH. A normal TSH means the nodule is not hyperfunctioning, so malignancy must be assessed. Ultrasound examines margins, echogenicity, calcification and shape. Irregular margins and microcalcifications are suspicious. Such nodules need fine-needle aspiration cytology, which guides whether surgery is needed. Absence of neck pressure or family history does not rule out cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Thyroid nodule"
+     },
+     {
+      "id": "n2",
+      "label": "Check TSH"
+     },
+     {
+      "id": "n3",
+      "label": "Ultrasound"
+     },
+     {
+      "id": "n4",
+      "label": "Suspicious features?"
+     },
+     {
+      "id": "n5",
+      "label": "FNAC"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5",
+      "yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid hormone demand rises in pregnancy, so women on **levothyroxine** often need a higher dose early on. Targets should be **trimester-specific** rather than the non-pregnant range. In Graves disease, **propylthiouracil** is preferred in the first trimester because of its teratogenic profile, and carbimazole is used thereafter. Radioiodine is avoided in pregnancy. Transient hCG-driven gestational thyrotoxicosis is self-limiting and differs from Graves disease.",
+   "say": "Thyroid hormone demand rises in pregnancy, so women on levothyroxine often need a higher dose early on. Targets should be trimester-specific rather than the non-pregnant range. In Graves disease, propylthiouracil is preferred in the first trimester because of its teratogenic profile, and carbimazole is used thereafter. Radioiodine is avoided in pregnancy. Transient hCG-driven gestational thyrotoxicosis is self-limiting and differs from Graves disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypothyroidism in pregnancy",
+     "points": [
+      "Dose often rises early",
+      "Target trimester-specific TSH",
+      "Overt disease needs prompt correction"
+     ]
+    },
+    "right": {
+     "title": "Graves disease in pregnancy",
+     "points": [
+      "Propylthiouracil in first trimester",
+      "Carbimazole after first trimester",
+      "Avoid radioiodine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Graves orbitopathy causes gritty eyes, proptosis and limited upgaze. **Smoking** is a major modifiable risk factor that worsens orbital inflammation and reduces treatment response, so cessation support is essential. Long-term **lithium** can cause hypothyroidism, so TSH should be checked periodically. Overt hypothyroidism should always be corrected with levothyroxine, and steroid-responsive **Hashimoto encephalopathy** is a diagnosis of exclusion.",
+   "say": "Graves orbitopathy causes gritty eyes, proptosis and limited upgaze. Smoking is a major modifiable risk factor that worsens orbital inflammation and reduces treatment response, so cessation support is essential. Long-term lithium can cause hypothyroidism, so TSH should be checked periodically. Overt hypothyroidism should always be corrected with levothyroxine. Steroid-responsive Hashimoto encephalopathy is a diagnosis of exclusion.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-brain-lung-thyroid-syndrome",
+  "kb-reference-gestational-thyroid",
+  "kb-reference-hashimoto-encephalopathy"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 2490,
+  "itemN": 10
+ }
+}
