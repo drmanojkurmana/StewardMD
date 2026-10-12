@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "sid-outbreaks",
+ "subject": "ss-infectious-diseases",
+ "title": "Outbreak investigation and public health: core principles for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "An **outbreak** is more cases of a disease than expected in a given area and time. The first task of an investigation is to confirm the diagnosis and build a **case definition** with clinical, time, place and person criteria. Cases are then classed as suspected, probable or confirmed. Investigators then describe the outbreak by time, place and person, which produces the **epidemic curve**.",
+   "say": "An outbreak is more cases of a disease than expected in a given area and time. The first task of an investigation is to confirm the diagnosis and build a case definition with clinical, time, place and person criteria. Cases are then classed as suspected, probable or confirmed. Investigators then describe the outbreak by time, place and person, which produces the epidemic curve.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect outbreak"
+     },
+     {
+      "id": "b",
+      "label": "Confirm diagnosis"
+     },
+     {
+      "id": "c",
+      "label": "Set case definition"
+     },
+     {
+      "id": "d",
+      "label": "Describe by time, place, person"
+     },
+     {
+      "id": "e",
+      "label": "Plot epidemic curve"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **epidemic curve** plots cases against date of onset. A point-source outbreak shows a sharp single peak with a tight spread of onset. A propagated outbreak shows successive waves spaced by the incubation period of the disease. The shape helps estimate the **incubation period** and the likely source and mode of spread.",
+   "say": "The epidemic curve plots cases against date of onset. A point-source outbreak shows a sharp single peak with a tight spread of onset. A propagated outbreak shows successive waves spaced by the incubation period of the disease. The shape helps estimate the incubation period and the likely source and mode of spread.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Point source",
+     "points": [
+      "Single sharp peak",
+      "Tight spread of onset",
+      "Exposure happens once"
+     ]
+    },
+    "right": {
+     "title": "Propagated",
+     "points": [
+      "Successive waves",
+      "Waves spaced by incubation period",
+      "Person to person spread"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **basic reproduction number** is the average number of secondary cases produced by one infected person in a fully susceptible population. When it is greater than one, the outbreak can grow. When it is less than one, the outbreak will fade out. Control aims to bring the **effective reproduction number** below one by reducing susceptibles or interrupting transmission. The **herd immunity threshold** equals one minus the reciprocal of the basic reproduction number.",
+   "say": "The basic reproduction number is the average count of secondary cases caused by one infected person in a population with no immunity. Above one, the outbreak can expand. Below one, it tends to die away. Control measures aim to push the effective reproduction number under one by shrinking the pool of susceptible people or breaking transmission links. The herd immunity threshold equals one minus the reciprocal of the basic reproduction number.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Reproduction value",
+     "Expected course",
+     "Control implication"
+    ],
+    "rows": [
+     [
+      "Less than one",
+      "Outbreak tends to fade",
+      "Sustain current measures"
+     ],
+     [
+      "Exactly one",
+      "Stable endemic level",
+      "Maintain surveillance"
+     ],
+     [
+      "Greater than one",
+      "Outbreak can expand",
+      "Break transmission chains quickly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In India, the **Integrated Disease Surveillance Programme (IDSP)** collects notifiable disease data through district surveillance units. **Contact tracing** identifies people exposed to a case, who are then followed up. **Quarantine** separates exposed but well people, while **isolation** separates ill people from others. Both are time limited to the incubation period of the disease.",
+   "say": "In India, the Integrated Disease Surveillance Programme, known as IDSP, collects notifiable disease data through district surveillance units. Contact tracing identifies people exposed to a case, who are then followed up. Quarantine separates exposed but well people, while isolation separates ill people from others. Both are time limited to the incubation period of the disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Quarantine",
+     "points": [
+      "Exposed but well people",
+      "Limited to incubation period",
+      "Separates from others"
+     ]
+    },
+    "right": {
+     "title": "Isolation",
+     "points": [
+      "People who are ill",
+      "Confirmed or symptomatic cases",
+      "Separates from others"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Nipah virus has no licensed vaccine or antiviral, so management is **intensive supportive care** in an isolation ward with barrier nursing. Patients with encephalitis may need ventilation and organ support. Contacts are traced and monitored. Reported Nipah outbreaks in Kerala have been handled through the state health system with contact lists, containment zones and laboratory confirmation.",
+   "say": "Nipah virus has no licensed vaccine or antiviral, so management is intensive supportive care in an isolation ward with barrier nursing. Patients with encephalitis may need ventilation and organ support. Contacts are traced and monitored. Reported Nipah outbreaks in Kerala have been handled through the state health system with contact lists, containment zones and laboratory confirmation.",
+   "vis": null
+  },
+  {
+   "tx": "Cholera response rests on the **John Snow** principle that contaminated water spreads the disease. Snow traced the 1854 Broad Street cases to a single pump in London, which disproved the miasma theory. Modern response combines oral rehydration, case management, safe water supply, sanitation and chlorination. Early reporting to IDSP is essential for a rapid response.",
+   "say": "Cholera response rests on the John Snow principle that contaminated water spreads the disease. Snow traced the 1854 Broad Street cases to a single pump in London, which disproved the miasma theory. Modern response combines oral rehydration, case management, safe water supply, sanitation and chlorination. Early reporting to IDSP is essential for a rapid response.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_2029b4a78e48",
+  "q_719d8ea7009c",
+  "q_7e78ba462f9b"
+ ],
+ "src": [],
+ "refs": [
+  "National Centre for Disease Control, Integrated Disease Surveillance Programme guidelines"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "shm-non-hodgkin-lymphoma",
+ "subject": "ss-haematology",
+ "title": "Non-Hodgkin lymphomas: high-yield essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Key subtypes are linked to a **signature translocation**. Follicular lymphoma carries t(14;18) with BCL2 overexpression in over 85 percent of cases. Mantle cell lymphoma shows t(11;14) with cyclin D1. Burkitt lymphoma shows MYC rearrangement, usually t(8;14), with Ki-67 near 100 percent.",
+   "say": "Each major subtype has a signature translocation. Follicular lymphoma carries t(14;18), which drives BCL2 overexpression, and this is found in over eighty-five percent of cases. Mantle cell lymphoma shows t(11;14) with cyclin D1. Burkitt lymphoma shows a MYC rearrangement, usually t(8;14), with a Ki-67 index near one hundred percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lymphoma",
+     "Key marker",
+     "Behaviour"
+    ],
+    "rows": [
+     [
+      "Follicular",
+      "t(14;18), BCL2",
+      "Indolent"
+     ],
+     [
+      "Mantle cell",
+      "t(11;14), cyclin D1",
+      "Aggressive-leaning"
+     ],
+     [
+      "Burkitt",
+      "t(8;14), MYC",
+      "Very aggressive"
+     ],
+     [
+      "DLBCL",
+      "Variable, MYC/BCL2 in double-hit",
+      "Aggressive, curable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment of **diffuse large B-cell lymphoma** (DLBCL) aims at cure in most fit patients. The standard **R-CHOP** regimen pairs **rituximab**, an anti-CD20 antibody, with multi-agent chemotherapy: cyclophosphamide, doxorubicin and vincristine, plus a corticosteroid. The **International Prognostic Index** (IPI) estimates risk using age, LDH, performance status, stage and extranodal involvement, guiding how intensively patients are treated.",
+   "say": "Diffuse large B-cell lymphoma is usually treated with curative intent. The standard R-CHOP regimen combines rituximab, an antibody against CD20, with cyclophosphamide, doxorubicin and vincristine, plus a corticosteroid. The International Prognostic Index estimates risk from age, lactate dehydrogenase, performance status, stage and extranodal disease, helping clinicians decide how intensive treatment should be.",
+   "vis": null
+  },
+  {
+   "tx": "**Burkitt lymphoma** is a haematological emergency because its very rapid cell turnover carries a high risk of **tumour lysis syndrome**. Management starts before chemotherapy, with aggressive intravenous hydration, uric acid lowering therapy and close electrolyte monitoring. Treatment then proceeds to an intensive, short-duration **chemoimmunotherapy** course with **CNS-directed prophylaxis**, because the disease frequently involves the central nervous system.",
+   "say": "Burkitt lymphoma is a haematological emergency because its rapid cell turnover carries a high risk of tumour lysis syndrome. Treatment begins with intravenous hydration, uric acid lowering therapy and close electrolyte monitoring. It then moves to an intensive, short-duration chemoimmunotherapy course with central nervous system directed prophylaxis, since this lymphoma often involves the brain and spinal fluid spaces.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Burkitt diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "Hydration, uric acid lowering and electrolyte monitoring"
+     },
+     {
+      "id": "c",
+      "label": "Intensive short-course chemoimmunotherapy"
+     },
+     {
+      "id": "d",
+      "label": "Built-in CNS-directed prophylaxis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Double-hit lymphoma carries **MYC** plus **BCL2** or **BCL6** rearrangement and is classed as a separate high-grade entity, not simply Burkitt lymphoma. Relapsed **mantle cell lymphoma** after chemoimmunotherapy and **BTK inhibitor** failure may be offered **CD19-directed CAR T-cell therapy**. Gastric **MALT lymphoma** carrying **t(11;18)** tends to respond poorly to H. pylori eradication, so alternative treatment is usually needed.",
+   "say": "Double-hit lymphoma carries MYC plus BCL2 or BCL6 rearrangement and is classed as a separate high-grade entity, not simply Burkitt lymphoma. Relapsed mantle cell lymphoma after chemoimmunotherapy and BTK inhibitor failure may be offered CD19-directed CAR T-cell therapy. Gastric MALT lymphoma carrying t(11;18) tends to respond poorly to H. pylori eradication, so alternative treatment is usually needed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Responds to H. pylori eradication",
+     "points": [
+      "H. pylori positive MALT",
+      "No t(11;18) detected",
+      "Limited-stage disease"
+     ]
+    },
+    "right": {
+     "title": "Responds poorly",
+     "points": [
+      "t(11;18) present",
+      "Gastric MALT with API2-MALT1 fusion",
+      "Consider radiotherapy or other options"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_e1a00e0b37d6",
+  "q_ff6306a23286",
+  "q_0cc11f89600e"
+ ],
+ "src": [],
+ "refs": [
+  "Swerdlow SH et al. WHO Classification of Tumours of Haematopoietic and Lymphoid Tissues (WHO Classification of Tumours Editorial Board)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 29
+ }
+}

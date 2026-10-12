@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "phm-pharmacodynamics",
+ "subject": "pharmacology",
+ "title": "Receptors and pharmacodynamics: the core ideas",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Pharmacodynamics studies what a drug does to the body, including its **mechanism of action**. Pharmacokinetics studies what the body does to the drug, covering absorption, distribution, metabolism and excretion. Keep these two branches separate in your answers. Most receptor questions in NEET-PG and INI-CET test the pharmacodynamic side, so classify each question first.",
+   "say": "Pharmacodynamics studies what a drug does to the body, including its mechanism of action. Pharmacokinetics studies what the body does to the drug, covering absorption, distribution, metabolism and excretion. Keep these two branches separate in your answers. Most receptor questions in NEET-PG and INI-CET test the pharmacodynamic side, so classify each question first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Branch",
+     "Studies",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Pharmacodynamics",
+      "Effect of drug on body",
+      "Mechanism, receptor action"
+     ],
+     [
+      "Pharmacokinetics",
+      "Effect of body on drug",
+      "Absorption, distribution, metabolism, excretion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In G-protein signalling, the **alpha subunit** decides the direction of the response. Gs and Gq are stimulatory, while Gi is inhibitory. Beta receptors work through Gs and raise cAMP. Alpha 2 receptors work through Gi and lower adenylyl cyclase activity. Alpha 1 receptors use Gq, which releases IP3 and DAG, and calcium acts as a **third messenger**.",
+   "say": "In G-protein signalling, the alpha subunit decides the direction of the response. Gs and Gq are stimulatory, while Gi is inhibitory. Beta receptors work through Gs and raise cAMP. Alpha 2 receptors work through Gi and lower adenylyl cyclase activity. Alpha 1 receptors use Gq, which releases IP3 and DAG, and calcium acts as a third messenger.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Receptor",
+     "G protein",
+     "Effect on adenylyl cyclase"
+    ],
+    "rows": [
+     [
+      "Beta 1, Beta 2",
+      "Gs",
+      "Stimulates"
+     ],
+     [
+      "Alpha 2",
+      "Gi",
+      "Inhibits"
+     ],
+     [
+      "Alpha 1",
+      "Gq",
+      "Not directly (IP3/DAG)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drugs can act as **agonists**, which activate the receptor, or as **antagonists**, which block it. A **competitive antagonist** binds the same site as the agonist and shifts the dose-response curve to the right. Its effect can be overcome by more agonist. A **non-competitive antagonist** binds elsewhere, lowers Vmax, and flattens the curve. A partial agonist has high affinity but low intrinsic activity.",
+   "say": "Drugs can act as agonists, which activate the receptor, or as antagonists, which block it. A competitive antagonist binds the same site as the agonist and shifts the dose-response curve to the right. Its effect can be overcome by more agonist. A non-competitive antagonist binds elsewhere, lowers Vmax, and flattens the curve. A partial agonist has high affinity but low intrinsic activity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Competitive",
+     "Non-competitive"
+    ],
+    "rows": [
+     [
+      "Binding site",
+      "Same as agonist",
+      "Different site"
+     ],
+     [
+      "Km",
+      "Increases",
+      "Unchanged"
+     ],
+     [
+      "Vmax or max effect",
+      "Unchanged",
+      "Reduced"
+     ],
+     [
+      "DRC shape",
+      "Shifts right",
+      "Flattens"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Use the dose-response curve to judge a drug. **Potency** is the position on the log curve, and a leftward shift means a lower dose is needed. **Efficacy** is the height, meaning the maximum response. **ED50** is the dose producing half the maximal effect. The **therapeutic index** equals LD50 divided by ED50, and a higher value means a safer drug. Lithium, digoxin and phenytoin have narrow indices.",
+   "say": "Use the dose-response curve to judge a drug. Potency is the position on the log curve, and a leftward shift means a lower dose is needed. Efficacy is the height, meaning the maximum response. ED50 is the dose producing half the maximal effect. The therapeutic index equals LD50 divided by ED50, and a higher value means a safer drug. Lithium, digoxin and phenytoin have narrow indices.",
+   "vis": null
+  },
+  {
+   "tx": "Remember the physiological antagonists. Adrenaline opposes histamine in bronchial smooth muscle, because it acts on beta 2 receptors while histamine acts on H1 receptors. This is **physiological antagonism**, where two drugs act on different receptors. Heparin and protamine are an example of **chemical antagonism**. Steroid hormones cross the membrane and bind **cytoplasmic or nuclear receptors**, not surface receptors. Insulin uses a tyrosine kinase receptor.",
+   "say": "Remember the physiological antagonists. Adrenaline opposes histamine in bronchial smooth muscle, because it acts on beta 2 receptors while histamine acts on H1 receptors. This is physiological antagonism, where two drugs act on different receptors. Heparin and protamine are an example of chemical antagonism. Steroid hormones cross the membrane and bind cytoplasmic or nuclear receptors, not surface receptors. Insulin uses a tyrosine kinase receptor.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "8d07f1a5-e144-49fc-ab94-0403949bd0e6",
+  "01054d6d-5170-42da-89fb-7719d955dcc8",
+  "02a1e5b6-4f71-4e97-a9bb-b6adce5a9bdd"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung's Basic and Clinical Pharmacology (Katzung, B.G.)",
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton, L.L.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 294
+ }
+}

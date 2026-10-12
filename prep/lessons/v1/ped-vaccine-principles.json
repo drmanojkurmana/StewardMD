@@ -1,0 +1,105 @@
+{
+ "v": 1,
+ "module": "ped-vaccine-principles",
+ "subject": "paediatrics",
+ "title": "Vaccine principles, cold chain and optional vaccines in paediatrics",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Vaccines are either **live attenuated** or **killed (inactivated)**. Live vaccines contain weakened organisms that replicate briefly and usually need a single dose for strong immunity. Killed vaccines contain organisms destroyed by heat or chemicals and generally need several doses plus boosters. Live vaccines such as BCG, oral polio, MMR and oral typhoid Ty21a are contraindicated in severe immunodeficiency, including symptomatic HIV, and in pregnancy, except yellow fever vaccine which is a notable exception.",
+   "say": "Vaccines are either live attenuated or killed inactivated. Live vaccines contain weakened organisms that replicate briefly and usually need a single dose for strong immunity. Killed vaccines contain organisms destroyed by heat or chemicals and generally need several doses plus boosters. Live vaccines such as BCG, oral polio, MMR and oral typhoid Ty21a are contraindicated in severe immunodeficiency, including symptomatic HIV, and in pregnancy, except yellow fever vaccine which is a notable exception.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Live attenuated",
+     "Killed or inactivated"
+    ],
+    "rows": [
+     [
+      "Examples",
+      "BCG, OPV, MMR, Ty21a",
+      "Hepatitis B, DPT, IPV, Rabies"
+     ],
+     [
+      "Doses usually needed",
+      "One",
+      "Several plus boosters"
+     ],
+     [
+      "Immunodeficiency",
+      "Usually contraindicated",
+      "Generally safe"
+     ],
+     [
+      "Heat or cold",
+      "Often heat sensitive",
+      "Often freeze sensitive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **cold chain** keeps vaccines between 2 and 8 degrees Celsius from factory to child. Vaccines are stored in the middle racks of an ice lined refrigerator, and never placed on the freezer compartment ice. A **vaccine vial monitor** is a heat sensitive label that changes colour when cumulative heat exposure passes a set point. Freeze sensitive vaccines such as hepatitis B, pentavalent, tetanus toxoid and DPT must be protected from freezing.",
+   "say": "The cold chain keeps vaccines between 2 and 8 degrees Celsius from factory to child. Vaccines are stored in the middle racks of an ice lined refrigerator, and never placed on the freezer compartment ice. A vaccine vial monitor is a heat sensitive label that changes colour when cumulative heat exposure passes a set point. Freeze sensitive vaccines such as hepatitis B, pentavalent, tetanus toxoid and DPT must be protected from freezing.",
+   "vis": null
+  },
+  {
+   "tx": "The **shake test** detects freeze damage in vaccines such as DPT, DT, TT and hepatitis B. After freezing, the vaccine forms flakes that settle faster than in a control vial when shaken. Any vial failing the shake test must be discarded regardless of its expiry date. The **open vial policy** lets partly used multidose vials be reused in later sessions, up to 4 weeks in the case of DPT, provided the expiry date, cold chain and opening date are recorded and aseptic technique is used.",
+   "say": "The shake test detects freeze damage in vaccines such as DPT, DT, TT and hepatitis B. After freezing, the vaccine forms flakes that settle faster than in a control vial when shaken. Any vial failing the shake test must be discarded regardless of its expiry date. The open vial policy lets partly used multidose vials be reused in later sessions, up to 4 weeks in the case of DPT, provided the expiry date, cold chain and opening date are recorded and aseptic technique is used.",
+   "vis": null
+  },
+  {
+   "tx": "An **adverse event following immunisation**, or **AEFI**, is any untoward medical event after vaccination, whether or not caused by it. A **programme error** arises from faults in preparation, handling or administration, such as toxic shock after improperly reconstituted measles vaccine. Contraindications include anaphylaxis to a previous dose, progressive neurological illness and encephalopathy within 7 days of a prior DPT dose. Mild illness, low grade fever, mild diarrhoea, prematurity, malnutrition and penicillin allergy are not contraindications.",
+   "say": "An adverse event following immunisation, or AEFI, is any untoward medical event after vaccination, whether or not caused by it. A programme error arises from faults in preparation, handling or administration, such as toxic shock after improperly reconstituted measles vaccine. Contraindications include anaphylaxis to a previous dose, progressive neurological illness and encephalopathy within 7 days of a prior DPT dose. Mild illness, low grade fever, mild diarrhoea, prematurity, malnutrition and penicillin allergy are not contraindications.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True contraindications",
+     "points": [
+      "Anaphylaxis to previous dose",
+      "Progressive neurological illness",
+      "Encephalopathy within 7 days",
+      "Symptomatic HIV for live vaccines"
+     ]
+    },
+    "right": {
+     "title": "Not contraindications",
+     "points": [
+      "Mild acute illness",
+      "Low grade fever",
+      "Mild diarrhoea",
+      "Prematurity or malnutrition",
+      "Penicillin allergy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "fcbea85a-49ed-44ec-8a01-657aef89fcf9",
+  "0c2df0be-2729-46fd-af8f-6e4cd812b9d8",
+  "19f1884f-00a2-49ff-92b1-16c657b9fd4e"
+ ],
+ "src": [],
+ "refs": [
+  "Ghai Essential Pediatrics",
+  "Indian Academy of Pediatrics Immunization Schedule",
+  "WHO Immunization Guidance"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 111
+ }
+}

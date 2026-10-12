@@ -1,0 +1,193 @@
+{
+ "v": 1,
+ "module": "obg-placenta-fetus",
+ "subject": "obstetrics-gynaecology",
+ "title": "Placenta, fetal development and fetal circulation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **placenta** is a temporary organ formed from fetal and maternal tissue. The fetal part is the chorion frondosum, and the maternal part is the decidua basalis. Trophoblast appears first at the blastocyst stage, so the placenta is not formed at the morula stage. Implantation occurs around day 6 after fertilisation, and fertilisation takes place in the ampulla of the fallopian tube.",
+   "say": "The placenta is a temporary organ. Its fetal part is the chorion frondosum, and its maternal part is the decidua basalis. Trophoblast appears first at the blastocyst stage, so the placenta does not form at the morula stage. Implantation occurs around day six, and fertilisation takes place in the ampulla of the fallopian tube.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Origin",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Chorion frondosum",
+      "Fetal",
+      "Forms the villous placenta"
+     ],
+     [
+      "Decidua basalis",
+      "Maternal",
+      "Forms the maternal side"
+     ],
+     [
+      "Trophoblast",
+      "Embryonic",
+      "First seen at blastocyst stage"
+     ],
+     [
+      "Fertilisation site",
+      "Ampulla",
+      "Fallopian tube"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Human chorionic gonadotropin** (hCG) is made by syncytiotrophoblast. It is a glycoprotein with alpha and beta subunits. The alpha subunit is similar to LH, FSH and TSH, while the beta subunit is unique. Its main job is to maintain the corpus luteum in early pregnancy, so progesterone supports the pregnancy. hCG can be detected in maternal serum about 8 to 9 days after ovulation, and it doubles roughly every 48 hours in normal pregnancy.",
+   "say": "Human chorionic gonadotropin is made by syncytiotrophoblast. It is a glycoprotein with alpha and beta subunits. The alpha subunit resembles LH, FSH and TSH, whereas the beta subunit is unique. Its main job is to keep the corpus luteum working in early pregnancy. It appears in maternal serum about eight to nine days after ovulation and roughly doubles every two days.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Syncytiotrophoblast"
+     },
+     {
+      "id": "b",
+      "label": "hCG released"
+     },
+     {
+      "id": "c",
+      "label": "Keeps corpus luteum"
+     },
+     {
+      "id": "d",
+      "label": "Progesterone supports pregnancy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the **fetal circulation**, oxygenated blood from the placenta returns through the umbilical vein. The **ductus venosus** shunts much of this blood past the liver. The **foramen ovale** lets blood pass from the right atrium to the left atrium. The **ductus arteriosus** carries blood from the pulmonary artery to the aorta. The umbilical cord normally has two arteries and one vein.",
+   "say": "In fetal circulation, oxygenated blood returns from the placenta through the umbilical vein. The ductus venosus shunts much of this blood past the liver. The foramen ovale allows blood to pass from the right atrium to the left atrium. The ductus arteriosus sends blood from the pulmonary artery to the aorta. The normal cord has two arteries and one vein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Placenta"
+     },
+     {
+      "id": "b",
+      "label": "Umbilical vein"
+     },
+     {
+      "id": "c",
+      "label": "Ductus venosus"
+     },
+     {
+      "id": "d",
+      "label": "Foramen ovale"
+     },
+     {
+      "id": "e",
+      "label": "Left heart and aorta"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After birth, the **foramen ovale** and **ductus arteriosus** close within a few hours. The umbilical vessels also close soon after delivery. The first breaths clear lung fluid from the alveoli, which lets the pulmonary circulation open. A single umbilical artery is found in about 0.7 to 0.8 per cent of singleton cords and is linked with higher rates of fetal malformation, so it prompts a detailed fetal review.",
+   "say": "After birth, the foramen ovale and ductus arteriosus close within a few hours, and the umbilical vessels close soon after. The first breaths clear lung fluid, allowing pulmonary circulation to open. A single umbilical artery occurs in under one per cent of singleton cords and raises the chance of fetal malformation, so it prompts a careful review.",
+   "vis": null
+  },
+  {
+   "tx": "Some placental and cord anomalies matter for delivery. In a **battledore placenta**, the cord inserts at the margin, which raises the risk of cord compression in labour. In **placenta succenturiata**, an accessory lobe may stay in the uterus and cause bleeding, subinvolution or sepsis. Placental grading on ultrasound follows the Grannum system, which runs from grade 0 to grade III as calcification increases with gestation.",
+   "say": "Some placental anomalies matter at delivery. In a battledore placenta, the cord inserts at the margin, raising the risk of cord compression. In placenta succenturiata, a retained accessory lobe can cause bleeding, subinvolution or sepsis. Ultrasound grading, following the Grannum system, runs from grade zero to grade three as calcification increases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grannum grade",
+     "Gestation",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Grade 0",
+      "Under 18 weeks",
+      "Uniform, smooth plate"
+     ],
+     [
+      "Grade I",
+      "18 to 29 weeks",
+      "Scattered echoes"
+     ],
+     [
+      "Grade II",
+      "30 to 38 weeks",
+      "Basal stippling"
+     ],
+     [
+      "Grade III",
+      "39 weeks or more",
+      "Cotyledon-like indentations"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "4c49f1f9-24e6-4c2d-93e4-31aa596557f2",
+  "9e90317f-3f5d-4733-ad79-5ef5acf7694a",
+  "3b89dc04-34be-4b33-a61c-ad79b402cb67"
+ ],
+ "src": [],
+ "refs": [
+  "Williams Obstetrics (Cunningham FG, Leveno KJ, et al. Editors)",
+  "Dutta's Textbook of Obstetrics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 275
+ }
+}

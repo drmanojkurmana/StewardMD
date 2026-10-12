@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "module": "ans-specialty",
+ "subject": "anaesthesia",
+ "title": "Anaesthesia for Neurosurgery, ENT, Eye and Laparoscopy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Neuroanaesthesia aims to keep **cerebral perfusion pressure** adequate while controlling **intracranial pressure**. Cerebral perfusion pressure is the mean arterial pressure minus intracranial pressure. Thiopentone, propofol and etomidate are the agents considered safe in raised intracranial pressure, whereas ketamine and volatile agents such as halothane and ether are avoided. Thiopentone reduces cerebral oxygen consumption and intracranial pressure.",
+   "say": "Neuroanaesthesia aims to keep cerebral perfusion pressure adequate while controlling intracranial pressure. Cerebral perfusion pressure is the mean arterial pressure minus intracranial pressure. Thiopentone, propofol and etomidate are the agents considered safe in raised intracranial pressure. Ketamine, halothane and ether are avoided. Thiopentone reduces cerebral oxygen consumption and intracranial pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Status in raised ICP"
+    ],
+    "rows": [
+     [
+      "Thiopentone",
+      "Safe, cerebroprotective"
+     ],
+     [
+      "Propofol",
+      "Safe"
+     ],
+     [
+      "Etomidate",
+      "Safe"
+     ],
+     [
+      "Ketamine",
+      "Avoid"
+     ],
+     [
+      "Halothane, ether",
+      "Avoid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Controlled **hyperventilation** lowers PaCO2 and reduces cerebral blood volume. A target PaCO2 of 30 to 35 mm Hg suits acute rises in intracranial pressure or impending herniation. PEEP can raise intracranial pressure, so it must be used with care. Mannitol and hypertonic saline are first-line osmotic agents, and mild head elevation of 15 to 30 degrees helps venous drainage.",
+   "say": "Controlled hyperventilation lowers PaCO2 and reduces cerebral blood volume. A target PaCO2 of 30 to 35 mm Hg suits acute rises in intracranial pressure or impending herniation. PEEP can raise intracranial pressure, so it must be used with care. Mannitol and hypertonic saline are first-line osmotic agents. Mild head elevation of 15 to 30 degrees helps venous drainage.",
+   "vis": null
+  },
+  {
+   "tx": "Air embolism during **sitting craniotomy** is most likely when the operative site sits above the right atrium. A sudden fall in end-tidal CO2, hypotension or circulatory arrest, and a mill wheel murmur point to this diagnosis. Sudden ETCO2 fall is the earliest sign. Management includes flooding the field with saline, stopping nitrous oxide and placing a central venous catheter to aspirate air.",
+   "say": "Air embolism during sitting craniotomy is most likely when the operative site sits above the right atrium. A sudden fall in end-tidal CO2, hypotension or circulatory arrest, and a mill wheel murmur point to this diagnosis. Sudden fall in end-tidal CO2 is the earliest sign. Management includes flooding the field with saline, stopping nitrous oxide and aspirating air through a central venous catheter.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sudden fall in ETCO2"
+     },
+     {
+      "id": "b",
+      "label": "Hypotension or arrest"
+     },
+     {
+      "id": "c",
+      "label": "Flood field, stop N2O"
+     },
+     {
+      "id": "d",
+      "label": "Aspirate via central line"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **oculocardiac reflex** is trigeminovagal. Traction on the medial rectus or pressure on the eyeball causes bradycardia, ectopy or asystole. Atropine given as 7 micrograms per kg helps, and the surgeon must stop manipulation first. Pretreatment with atropine or glycopyrrolate is advised in patients with conduction block or on beta blockers, although it is not uniformly effective in all cases.",
+   "say": "The oculocardiac reflex is trigeminovagal. Traction on the medial rectus or pressure on the eyeball causes bradycardia, ectopy or asystole. The surgeon must stop manipulation first. Atropine given in 7 micrograms per kg increments helps. Pretreatment with atropine or glycopyrrolate is advised in patients with conduction block or those on beta blockers, although it is not uniformly effective.",
+   "vis": null
+  },
+  {
+   "tx": "For **laser airway surgery**, the greatest fear is a tracheal tube fire. Use laser-resistant tubes, saline-filled cuffs dyed with methylene blue, and the lowest possible inspired oxygen, with nitrous oxide avoided. Microlaryngoscopy uses small-bore tubes such as the Coplan tube, and profound relaxation is needed. Sedative premedication is contraindicated where upper airway obstruction is significant.",
+   "say": "For laser airway surgery, the greatest fear is a tracheal tube fire. Use laser-resistant tubes, saline-filled cuffs dyed with methylene blue, and the lowest possible inspired oxygen, avoiding nitrous oxide. Microlaryngoscopy uses small-bore tubes such as the Coplan tube, and profound relaxation is needed. Sedative premedication is contraindicated where upper airway obstruction is significant.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "7fcab85c-6dfa-4620-8211-8d67dc479268",
+  "3504585d-4fa6-4d99-a45e-fbaddb44f97d",
+  "ffcaea70-4ef1-4ee6-b794-c349a9f1040e"
+ ],
+ "src": [],
+ "refs": [
+  "Paul's Clinical Anesthesia",
+  "Miller's Anesthesia"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 76
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "sur-neck-face-trauma",
+ "subject": "surgery",
+ "title": "Neck, vascular and maxillofacial injuries: high-yield essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Airway comes first in any face or neck trauma. Look for **airway compromise** from bleeding, swelling, or displaced fractures in the nasopharynx and oropharynx. A patient who cannot open the mouth may need a surgical airway, and cricothyroidotomy is preferred when the cervical spine may be unstable. Maintenance of the airway is always the first step before fixation or reconstruction.",
+   "say": "Airway comes first in any face or neck trauma. Look for airway compromise from bleeding, swelling, or displaced fractures in the nasopharynx and oropharynx. A patient who cannot open the mouth may need a surgical airway, and cricothyroidotomy is preferred when the cervical spine may be unstable. Maintenance of the airway is always the first step before fixation or reconstruction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess airway"
+     },
+     {
+      "id": "b",
+      "label": "Compromise?"
+     },
+     {
+      "id": "c",
+      "label": "Secure airway"
+     },
+     {
+      "id": "d",
+      "label": "Then fix fractures"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Penetrating neck injury is the most dangerous. The neck has three **zones**. Zone I runs from the sternal notch to the cricoid cartilage and carries the highest mortality because of the great vessels and difficult access. Zone II lies between the cricoid and the angle of the mandible. Zone III runs from the angle of the mandible to the base of the skull. Injuries that do not penetrate the **platysma** can usually be treated as superficial.",
+   "say": "Penetrating neck injury is the most dangerous. The neck has three zones. Zone I runs from the sternal notch to the cricoid cartilage and carries the highest mortality because of the great vessels and difficult access. Zone II lies between the cricoid and the angle of the mandible. Zone III runs from the angle of the mandible to the base of the skull. Injuries that do not penetrate the platysma can usually be treated as superficial.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Zone",
+     "Extent",
+     "Key concern"
+    ],
+    "rows": [
+     [
+      "I",
+      "Sternal notch to cricoid",
+      "Highest mortality, great vessels"
+     ],
+     [
+      "II",
+      "Cricoid to mandible angle",
+      "Most accessible for surgery"
+     ],
+     [
+      "III",
+      "Mandible angle to skull base",
+      "Skull base and upper vessels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hard signs of vascular injury in the neck include active bleeding, an expanding haematoma, a thrill or bruit, shock, and absent distal pulses. Such signs mandate urgent surgical exploration or imaging. In the limbs, the **popliteal artery** is at risk after knee dislocation, and a missed injury can lead to limb loss. Assess distal perfusion and compare pulses and ankle-brachial index when in doubt.",
+   "say": "Hard signs of vascular injury in the neck include active bleeding, an expanding haematoma, a thrill or bruit, shock, and absent distal pulses. Such signs mandate urgent surgical exploration or imaging. In the limbs, the popliteal artery is at risk after knee dislocation, and a missed injury can lead to limb loss. Assess distal perfusion and compare pulses and ankle-brachial index when in doubt.",
+   "vis": null
+  },
+  {
+   "tx": "The mandible is the most commonly fractured facial bone, and the **condylar neck** is its weakest point. Only displaced zygomatic fractures need treatment. Zygomatic fractures are often called tripod fractures, and open reduction with internal fixation is the treatment of choice for displaced cases. In an **orbital blowout fracture**, the floor is the weakest wall, so diplopia from entrapment with restricted gaze and enophthalmos are typical signs.",
+   "say": "The mandible is the most commonly fractured facial bone, and the condylar neck is its weakest point. Only displaced zygomatic fractures need treatment. Zygomatic fractures are often called tripod fractures, and open reduction with internal fixation is the treatment of choice for displaced cases. In an orbital blowout fracture, the floor is the weakest wall, so diplopia from entrapment with restricted gaze and enophthalmos are typical signs.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "9fc1105b-5218-4a02-941f-3fe81bd4b883",
+  "23dcd164-27e7-49c4-a3d6-49d2a5ba350e",
+  "98ed71f6-3748-48d9-9ff3-79d0b22162e2"
+ ],
+ "src": [],
+ "refs": [
+  "Bailey and Love's Short Practice of Surgery (Williams, N.S., et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 243
+ }
+}

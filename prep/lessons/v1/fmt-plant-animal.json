@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "fmt-plant-animal",
+ "subject": "forensic-medicine",
+ "title": "Plant and animal poisons: key Indian forensic facts",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Plant and animal poisons are common in Indian medicolegal practice. Think of the **active principle** of each agent and its typical clinical picture. Snakes are the most important animal group. Venoms are grouped as **neurotoxic** (cobra, krait, coral snake), **haemotoxic** (vipers) and **myotoxic** (sea snakes). Elapids act mainly on the nervous system, causing paralysis, while vipers cause bleeding and local tissue damage.",
+   "say": "Plant and animal poisons are common in Indian medicolegal practice. Think of the active principle of each agent and its typical clinical picture. Snakes are the most important animal group. Venoms are grouped as neurotoxic, such as cobra, krait and coral snake, haemotoxic, such as vipers, and myotoxic, such as sea snakes. Elapids act mainly on the nervous system, causing paralysis, while vipers cause bleeding and local tissue damage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Venom type",
+     "Typical snakes",
+     "Main effect"
+    ],
+    "rows": [
+     [
+      "Neurotoxic",
+      "Cobra, krait, coral snake",
+      "Paralysis, respiratory failure"
+     ],
+     [
+      "Haemotoxic",
+      "Russell's viper, saw-scaled viper",
+      "Bleeding, incoagulable blood"
+     ],
+     [
+      "Myotoxic",
+      "Sea snakes",
+      "Muscle breakdown, rhabdomyolysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anti snake venom (ASV) is the key treatment. Polyvalent ASV works best within **four hours** of the bite and is of doubtful value after 24 hours. Give a **test dose** first to detect hypersensitivity, then the full dose. Initial dose depends on severity: minimal envenoming needs about 5 vials, moderate about 10 vials and severe 10 to 15 vials. In neurotoxic bites a second dose is given after one hour.",
+   "say": "Anti snake venom is the key treatment. Polyvalent antivenom works best within four hours of the bite and is of doubtful value after 24 hours. Give a test dose first to detect hypersensitivity, then the full dose. Initial dose depends on severity. Minimal envenoming needs about 5 vials, moderate about 10 vials and severe 10 to 15 vials. In neurotoxic bites a second dose is given after one hour.",
+   "vis": null
+  },
+  {
+   "tx": "Anti snake venom is effective for the common cobra, Russell's viper, saw-scaled viper and krait. It is **not** effective for pit vipers. Cobra venom is neurotoxic, and atropine premedication is used before neostigmine in cobra envenoming. Hypersensitivity to ASV must be checked before full dosing. Remember that elapids are in the family Elapidae, while pit vipers belong to Crotalidae.",
+   "say": "Anti snake venom is effective for the common cobra, Russell's viper, saw-scaled viper and krait. It is not effective for pit vipers. Cobra venom is neurotoxic, and atropine premedication is used before neostigmine in cobra envenoming. Hypersensitivity to antivenom must be checked before full dosing. Elapids belong to the family Elapidae, while pit vipers belong to Crotalidae.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antivenom works",
+     "points": [
+      "Common cobra",
+      "Russell's viper",
+      "Saw-scaled viper",
+      "Krait"
+     ]
+    },
+    "right": {
+     "title": "Antivenom does not work",
+     "points": [
+      "Pit vipers",
+      "Crotalidae family members"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Strychnine is a **spinal poison** that blocks glycine inhibition in the anterior horn cells. Convulsions affect all muscles at the same time, are precipitated by slight stimuli, and are clonic at first, later tonic. The body typically arches in **opisthotonus**. Consciousness stays clear. Preserve the brain and spinal cord with the viscera in suspected cases. The antidote is short-acting barbiturates, and the first step is control of convulsions in a dark room.",
+   "say": "Strychnine is a spinal poison that blocks glycine inhibition in the anterior horn cells. Convulsions affect all muscles at the same time, are precipitated by slight stimuli, and are clonic at first, later tonic. The body typically arches in opisthotonus. Consciousness stays clear. Preserve the brain and spinal cord with the viscera in suspected cases. The antidote is short-acting barbiturates, and the first step is control of convulsions in a dark room.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Glycine blocked"
+     },
+     {
+      "id": "b",
+      "label": "Anterior horn excited"
+     },
+     {
+      "id": "c",
+      "label": "Convulsions, opisthotonus"
+     },
+     {
+      "id": "d",
+      "label": "Dark room, barbiturates"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anticholinergic group, from **Datura**, belladonna and hyoscyamus, produces a classic picture: dry mouth, flushed skin, dilated pupils, hyperpyrexia and delirium. Carphologia, the picking of imaginary threads, is typical. **Physostigmine** is the effective antidote for severe anticholinergic poisoning. Mushroom poisoning from muscarine is treated with atropine instead. Hippus is classically linked with aconite.",
+   "say": "The anticholinergic group, from Datura, belladonna and hyoscyamus, produces a classic picture: dry mouth, flushed skin, dilated pupils, hyperpyrexia and delirium. Carphologia, the picking of imaginary threads, is typical. Physostigmine is the effective antidote for severe anticholinergic poisoning. Mushroom poisoning from muscarine is treated with atropine instead. Hippus is classically linked with aconite.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "3e761395-d013-46e5-964a-ab9529fa2c0a",
+  "81043d3f-b05b-493c-b2c8-7ad17022802b",
+  "9c5420aa-9a0f-418f-8654-348a5d400e25"
+ ],
+ "src": [],
+ "refs": [
+  "Reddy KSN, The Essentials of Forensic Medicine and Toxicology",
+  "Parikh CK, Parikh's Textbook of Medical Jurisprudence and Toxicology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 327
+ }
+}

@@ -347,6 +347,10 @@ test("CLI: chunks, plan, estimate, overlay shape; the dry run makes no call", as
   const ov = C.toOverlay([{ id: "q_0123456789ab", q: "Q?", o: ["a", "b", "c", "d"], a: 1, exp: "e", r: ["1", "2", "3", "4"], qg: { v: "ok" } }, { id: "q_bbbbbbbbbbbb", q: "Q2?", o: ["a", "b", "c", "d"], a: 0, qg: { v: "flag" } }], { subject: "medicine", module: "med-dka", set: "maik1" });
   assert.deepEqual(Object.keys(ov), ["topic", "set", "v", "items"]);
   assert.equal(ov.items.length, 1); assert.equal(ov.items[0].id, "mk-0123456789ab"); assert.equal(ov.items[0].t, "med-dka"); assert.equal(ov.items[0].prov, "SMD");
+  assert.equal(ov.items[0].x, undefined, "no concept is invented for a synthetic item");
+  const stamped = C.toOverlay([{ id: "q_abcdef123456", q: "Heart failure with reduced ejection fraction. Drug of choice?", o: ["Lisinopril", "Amlodipine", "Metoprolol", "Digoxin"], a: 0, exp: "The ACE inhibitor lisinopril is first line.", qg: { v: "ok" } }], { subject: "medicine", module: "med-heart-failure", set: "maik99" });
+  assert.ok(stamped.items[0].x && stamped.items[0].x.links, "kept items arrive link-stamped for future banks");
+  assert.ok((stamped.items[0].x.links.drug_ids || []).length > 0, "the keyed drug rides in x.links");
   // the dry run: no fetch to Anthropic, prints an estimate
   const { spawnSync } = await import("node:child_process");
   const r = spawnSync(process.execPath, ["tools/prep-qgen.mjs", "--topic", "DKA", "--count", "10"], { encoding: "utf8", env: { ...process.env, ANTHROPIC_API_KEY: "", ANTHROPIC_BASE_URL: "http://127.0.0.1:9" } });

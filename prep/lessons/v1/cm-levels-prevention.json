@@ -1,0 +1,193 @@
+{
+ "v": 1,
+ "module": "cm-levels-prevention",
+ "subject": "community-medicine",
+ "title": "Levels of Prevention and Modes of Intervention",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Prevention is organised into four levels: **primordial**, **primary**, **secondary** and **tertiary**. Each level is matched to a stage of the natural history of disease. Primordial prevention stops risk factors from ever appearing in a population. Primary prevention acts before disease onset, while the risk factor is already present. Secondary prevention finds and treats disease early. Tertiary prevention limits disability and supports rehabilitation once disease is established. Exam questions usually test whether you can place an intervention at the correct level.",
+   "say": "Prevention is organised into four levels: primordial, primary, secondary and tertiary. Each level is matched to a stage of the natural history of disease. Primordial prevention stops risk factors from ever appearing in a population. Primary prevention acts before disease onset, while the risk factor is already present. Secondary prevention finds and treats disease early. Tertiary prevention limits disability and supports rehabilitation once disease is established. Exam questions usually test whether you can place an intervention at the correct level.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Phase of disease",
+     "Main aim"
+    ],
+    "rows": [
+     [
+      "Primordial",
+      "Before risk factors emerge",
+      "Stop risk factors appearing"
+     ],
+     [
+      "Primary",
+      "Pre-pathogenesis",
+      "Prevent disease onset"
+     ],
+     [
+      "Secondary",
+      "Early disease",
+      "Early diagnosis and prompt treatment"
+     ],
+     [
+      "Tertiary",
+      "Late disease",
+      "Limit disability, rehabilitate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary prevention acts before disease occurs and has two **modes**: **health promotion** and **specific protection**. Health promotion covers health education, environmental modification, nutritional intervention and lifestyle or behavioural change. Specific protection covers immunisation, chemoprophylaxis, targeted nutrient supplementation, and protection against occupational hazards and accidents. Iodised salt for goitre is a classic example. Health education is often described as the most cost-effective intervention.",
+   "say": "Primary prevention acts before disease occurs and has two modes: health promotion and specific protection. Health promotion includes health education, environmental modification, nutritional intervention and lifestyle or behavioural change. Specific protection includes immunisation, chemoprophylaxis, targeted nutrient supplementation, and protection against occupational hazards and accidents. Iodised salt for goitre is a classic example. Health education is often described as the most cost-effective intervention.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p",
+      "label": "Primary prevention"
+     },
+     {
+      "id": "hp",
+      "label": "Health promotion",
+      "sub": "Education, diet, lifestyle"
+     },
+     {
+      "id": "sp",
+      "label": "Specific protection",
+      "sub": "Vaccines, chemoprophylaxis"
+     }
+    ],
+    "edges": [
+     [
+      "p",
+      "hp"
+     ],
+     [
+      "p",
+      "sp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secondary prevention includes **early diagnosis** through screening and **prompt treatment**. Screening searches for unrecognised disease in apparently healthy people. Mammography is a classic example for breast cancer, while self examination and palpation are other basic methods. Tests like the two week cough rule for tuberculosis or treating any fever as possible malaria also belong here. Secondary prevention shortens the duration of disease and reduces prevalence. Treating a risk factor such as hypercholesterolaemia with a statin is primary prevention for coronary heart disease.",
+   "say": "Secondary prevention includes early diagnosis through screening and prompt treatment. Screening searches for unrecognised disease in apparently healthy people. Mammography is a classic example for breast cancer, while self examination and palpation are other basic methods. Tests like the two week cough rule for tuberculosis or treating any fever as possible malaria also belong here. Secondary prevention shortens the duration of disease and reduces prevalence. Treating a risk factor such as hypercholesterolaemia with a statin is primary prevention for coronary heart disease.",
+   "vis": null
+  },
+  {
+   "tx": "Tertiary prevention applies when disease has moved into the late pathogenic phase. Its goals are **disability limitation** and **rehabilitation**. Disability limitation aims to stop impairment turning into handicap, for example early ambulation after surgery to prevent deep vein thrombosis. Rehabilitation restores the person to the highest possible functional level, such as providing an artificial limb after an accident. Rehabilitation has types: medical restores function, vocational restores earning capacity, social restores family and social relations, and psychological restores dignity and confidence.",
+   "say": "Tertiary prevention applies when disease has moved into the late pathogenic phase. Its goals are disability limitation and rehabilitation. Disability limitation aims to stop impairment turning into handicap, for example early ambulation after surgery to prevent deep vein thrombosis. Rehabilitation restores the person to the highest possible functional level, such as providing an artificial limb after an accident. Rehabilitation has types: medical restores function, vocational restores earning capacity, social restores family and social relations, and psychological restores dignity and confidence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rehabilitation type",
+     "Restores"
+    ],
+    "rows": [
+     [
+      "Medical",
+      "Body function"
+     ],
+     [
+      "Vocational",
+      "Capacity to earn a livelihood"
+     ],
+     [
+      "Social",
+      "Family and social relations"
+     ],
+     [
+      "Psychological",
+      "Personal dignity and confidence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disability is best understood through the sequence of **impairment**, **disability** and **handicap**. Impairment is loss of a body part or function, and it has a large medical component. Disability is the resulting restriction in performing ordinary activities. Handicap is the social disadvantage that follows, shaped by environment and social roles. The iceberg phenomenon reminds you that most disease in a community stays hidden as subclinical or undiagnosed cases, so screening can reveal the tip beneath the surface. Overall, primary prevention is the most effective approach to disability in developing countries.",
+   "say": "Disability is best understood through the sequence of impairment, disability and handicap. Impairment is loss of a body part or function, and it has a large medical component. Disability is the resulting restriction in performing ordinary activities. Handicap is the social disadvantage that follows, shaped by environment and social roles. The iceberg phenomenon reminds you that most disease in a community stays hidden as subclinical or undiagnosed cases, so screening can reveal the tip beneath the surface. Overall, primary prevention is the most effective approach to disability in developing countries.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "i",
+      "label": "Impairment",
+      "sub": "Loss of body part or function"
+     },
+     {
+      "id": "d",
+      "label": "Disability",
+      "sub": "Restricted activity"
+     },
+     {
+      "id": "h",
+      "label": "Handicap",
+      "sub": "Social disadvantage"
+     }
+    ],
+    "edges": [
+     [
+      "i",
+      "d"
+     ],
+     [
+      "d",
+      "h"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Use the **epidemiological triad** of agent, host and environment when classifying disease causation. Time is not one of the three components. Remember the main exam traps: BCG at birth is primary prevention by specific protection, and a total mastectomy for breast cancer is secondary prevention rather than tertiary. Primordial prevention is delivered mainly through individual and mass education, aiming at children and lifestyle formation. Indian exam answers follow the Park framework throughout.",
+   "say": "Use the epidemiological triad of agent, host and environment when classifying disease causation. Time is not one of the three components. Remember the main exam traps: BCG at birth is primary prevention by specific protection, and a total mastectomy for breast cancer is secondary prevention rather than tertiary. Primordial prevention is delivered mainly through individual and mass education, aiming at children and lifestyle formation. Indian exam answers follow the Park framework throughout.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Agent",
+      "Mycobacterium tuberculosis"
+     ],
+     [
+      "Host",
+      "Age, immunity, nutrition"
+     ],
+     [
+      "Environment",
+      "Crowding, sanitation, climate"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "251aea01-656e-4df3-8e2b-9dfddc905492",
+  "2ae01cb7-5814-40e9-ba31-3d334f7baf84",
+  "66760373-1065-4fbe-bfd9-88c4724accd4"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K. Park)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 250
+ }
+}

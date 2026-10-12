@@ -1,0 +1,181 @@
+{
+ "v": 1,
+ "module": "sne-coma-brain-death",
+ "subject": "ss-neurology",
+ "title": "Coma, brain death and disorders of consciousness",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Consciousness depends on the **ascending reticular activating system** in the brainstem reticular formation, which projects to the thalamus and cortex. Coma is a state of unarousable unresponsiveness lasting more than a few hours. Always check for reversible metabolic causes first, such as hypoglycaemia, hypoxia, opioids, and sepsis, because these can mimic structural lesions. Structural causes need urgent imaging.",
+   "say": "Consciousness depends on the ascending reticular activating system in the brainstem reticular formation, which projects to the thalamus and cortex. Coma is a state of unarousable unresponsiveness. Always check for reversible metabolic causes first, such as hypoglycaemia, hypoxia, opioids and sepsis, because these can mimic structural lesions. Structural causes need urgent imaging.",
+   "vis": null
+  },
+  {
+   "tx": "The **Glasgow Coma Scale** scores eye opening, verbal response and motor response, giving a total from 3 to 15. Pupils are not part of the GCS. Motor response carries the most prognostic weight in severe head injury. Assess after resuscitation, because hypoxia and hypotension depress scores independently. Use NT for untestable components rather than guessing a value.",
+   "say": "The Glasgow Coma Scale scores eye opening, verbal response and motor response, giving a total from 3 to 15. Pupils are not part of the scale. Motor response carries the most prognostic weight in severe head injury. Assess after resuscitation, because hypoxia and hypotension depress scores independently. Use NT for untestable components rather than guessing a value.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Motor component",
+     "Score",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Obeys commands",
+      "6",
+      "Follows instructions"
+     ],
+     [
+      "Localises pain",
+      "5",
+      "Purposeful reach to stimulus"
+     ],
+     [
+      "Withdraws",
+      "4",
+      "Limb pulls away from pain"
+     ],
+     [
+      "Flexion",
+      "3",
+      "Decorticate posturing"
+     ],
+     [
+      "Extension",
+      "2",
+      "Decerebrate posturing"
+     ],
+     [
+      "No response",
+      "1",
+      "Flaccid, no movement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Decorticate** posturing means arms flexed and legs extended, pointing to a lesion above the red nucleus with preserved brainstem function. **Decerebrate** posturing means arms extended, adducted and pronated, with legs extended, indicating a lesion at or below the red nucleus. Posturing from brainstem damage is generally a poor sign, though variable or intermittent posturing suggests a less severe injury.",
+   "say": "Decorticate posturing means arms flexed and legs extended, pointing to a lesion above the red nucleus. Decerebrate posturing means arms extended, adducted and pronated, with legs extended, indicating a lesion at or below the red nucleus. Variable or intermittent posturing suggests a less severe injury.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Decorticate",
+     "points": [
+      "Arms flexed",
+      "Legs extended",
+      "Lesion above red nucleus",
+      "Rubrospinal drive preserved"
+     ]
+    },
+    "right": {
+     "title": "Decerebrate",
+     "points": [
+      "Arms extended and pronated",
+      "Legs extended",
+      "Lesion at or below red nucleus",
+      "Vestibulospinal drive unopposed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Central transtentorial herniation progresses through stages, moving from diencephalon to midbrain to pons to medulla. Decerebrate posturing marks midbrain and upper pons involvement. Absent **oculocephalic reflex** in a comatose patient suggests brainstem dysfunction. The **cold caloric test** is an alternative, where ice water in the ear produces slow conjugate eye deviation towards the stimulated side in an intact brainstem.",
+   "say": "Central transtentorial herniation progresses through stages. Decerebrate posturing marks midbrain and upper pons involvement. Absent oculocephalic reflex in a comatose patient suggests brainstem dysfunction. The cold caloric test is an alternative, where ice water in the ear produces slow conjugate eye deviation towards the stimulated side in an intact brainstem.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diencephalon"
+     },
+     {
+      "id": "b",
+      "label": "Midbrain"
+     },
+     {
+      "id": "c",
+      "label": "Upper pons"
+     },
+     {
+      "id": "d",
+      "label": "Medulla"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Brain death requires coma with absent brainstem reflexes and a positive **apnoea test**, after excluding confounders such as sedatives, hypothermia and metabolic derangement. In India, certification follows the THOA guidelines, requiring two examinations by separate certifying doctors with an interval as specified. Spinal reflexes and posturing can persist after brain death, so they do not disprove the diagnosis.",
+   "say": "Brain death requires coma with absent brainstem reflexes and a positive apnoea test, after excluding confounders such as sedatives, hypothermia and metabolic derangement. In India, certification follows the THOA guidelines, requiring two examinations by separate certifying doctors. Spinal reflexes can persist after brain death, so they do not disprove the diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "Disorders of consciousness differ in awareness. A **persistent vegetative state** shows wakefulness without awareness, with sleep-wake cycles preserved. A **minimally conscious state** shows inconsistent but reproducible signs of awareness. Coma shows neither wakefulness nor awareness. Prognosis depends on the cause, duration, and early motor scores, and a motor score below 4 at one day after severe injury predicts very poor functional outcome.",
+   "say": "Disorders of consciousness differ in awareness. A persistent vegetative state shows wakefulness without awareness. A minimally conscious state shows inconsistent but reproducible signs of awareness. Coma shows neither. A motor score below 4 at one day after severe injury predicts very poor functional outcome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "State",
+     "Wakefulness",
+     "Awareness"
+    ],
+    "rows": [
+     [
+      "Coma",
+      "Absent",
+      "Absent"
+     ],
+     [
+      "Vegetative state",
+      "Present",
+      "Absent"
+     ],
+     [
+      "Minimally conscious",
+      "Present",
+      "Fluctuating"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_21871241bc95",
+  "q_9357dadbf0ed",
+  "q_062cacc522fb"
+ ],
+ "src": [],
+ "refs": [
+  "Advanced Trauma Life Support Student Course Manual (American College of Surgeons)",
+  "Guidelines for Certification of Brain Stem Death (Indian Government THOA guidelines)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 32
+ }
+}

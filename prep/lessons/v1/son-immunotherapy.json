@@ -1,0 +1,116 @@
+{
+ "v": 1,
+ "module": "son-immunotherapy",
+ "subject": "ss-medical-oncology",
+ "title": "Immune checkpoint inhibitors: mechanisms, key agents and toxicity",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Checkpoint inhibitors remove inhibitory signals that tumours exploit to dampen **T cells**. **PD-1** blockers such as nivolumab and pembrolizumab act on activated T cells within the tumour microenvironment, interrupting signals received from **PD-L1** on tumour cells. **CTLA-4** blockade with ipilimumab works earlier, during **T-cell priming** in lymph nodes. Knowing which axis is targeted helps explain both response patterns and **immune-related adverse events**.",
+   "say": "Checkpoint inhibitors remove inhibitory signals that tumours exploit to dampen T cells. PD-1 blockers such as nivolumab and pembrolizumab act on activated T cells within the tumour microenvironment, interrupting signals received from PD-L1 on tumour cells. CTLA-4 blockade with ipilimumab works earlier, during T-cell priming in lymph nodes. Knowing which axis is targeted helps explain both response patterns and immune-related adverse events.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PD-1 axis",
+     "points": [
+      "Acts mainly in the tumour microenvironment",
+      "Nivolumab and pembrolizumab are examples",
+      "Blocks signal from PD-L1 on tumour cells"
+     ]
+    },
+    "right": {
+     "title": "CTLA-4 axis",
+     "points": [
+      "Acts mainly in lymph nodes during priming",
+      "Ipilimumab is the example",
+      "Often combined with PD-1 blockade"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ipilimumab was the first immune checkpoint inhibitor approved, for advanced melanoma in 2011. It is given as an intravenous infusion over **30 to 90 minutes** using a low-protein-binding filter. Before the first dose, check baseline thyroid function, liver tests, adrenal axis, renal clearance and pregnancy status in women of childbearing potential. Monitor these parameters before each dose.",
+   "say": "Ipilimumab was the first immune checkpoint inhibitor approved, for advanced melanoma in 2011. It is given as an intravenous infusion over 30 to 90 minutes using a low-protein-binding filter. Before the first dose, check baseline thyroid function, liver tests, adrenal axis, renal clearance and pregnancy status in women of childbearing potential. Monitor these parameters before each dose.",
+   "vis": null
+  },
+  {
+   "tx": "Immune-related adverse events are distinct from chemotherapy toxicity. They typically have a **delayed onset** and can persist long after drug withdrawal. Endocrine toxicity tends to appear between about 9 weeks and 9 months, with hypophysitis classically around 6 to 12 weeks on anti-CTLA-4 therapy. Pre-existing thyroid autoantibodies, including anti-TPO, raise the risk of endocrine events. Keep a high index of suspicion throughout this window.",
+   "say": "Immune-related adverse events are distinct from chemotherapy toxicity. They typically have a delayed onset and can persist long after drug withdrawal. Endocrine toxicity tends to appear between about 9 weeks and 9 months, with hypophysitis classically around 6 to 12 weeks on anti-CTLA-4 therapy. Pre-existing thyroid autoantibodies, including anti-TPO, raise the risk of endocrine events. Keep a high index of suspicion throughout this window.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endocrinopathy",
+     "Typical timing",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "Hypophysitis",
+      "6 to 12 weeks",
+      "Secondary adrenal insufficiency, older men on ipilimumab"
+     ],
+     [
+      "Thyroiditis",
+      "Early, often transient",
+      "Thyrotoxicosis then hypothyroidism"
+     ],
+     [
+      "Autoimmune diabetes",
+      "Within months",
+      "Severe hyperglycaemia with ketosis"
+     ],
+     [
+      "Primary adrenalitis",
+      "Variable",
+      "Raised ACTH, mineralocorticoid loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pseudoprogression is an apparent growth on imaging caused by immune cell infiltration, and it can occur in patients who are actually responding. **Hyperprogression** is a rapid acceleration of tumour growth after starting therapy and is a genuine concern. Response assessment should therefore consider clinical status and repeat imaging before changing treatment. Biomarkers include PD-L1 expression, tumour mutational burden and mismatch repair status.",
+   "say": "Pseudoprogression is an apparent growth on imaging caused by immune cell infiltration, and it can occur in patients who are actually responding. Hyperprogression is a rapid acceleration of tumour growth after starting therapy and is a genuine concern. Response assessment should therefore consider clinical status and repeat imaging before changing treatment. Biomarkers include PD-L1 expression, tumour mutational burden and mismatch repair status.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pseudoprogression",
+     "points": [
+      "Imaging growth from immune infiltrate",
+      "Patient often clinically stable",
+      "Confirm with repeat scan"
+     ]
+    },
+    "right": {
+     "title": "Hyperprogression",
+     "points": [
+      "Rapid genuine tumour acceleration",
+      "Worse outcome on therapy",
+      "Clinical deterioration expected"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_8f5a0f3386ad",
+  "q_bdabb7cf1d16",
+  "q_df551256b976"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

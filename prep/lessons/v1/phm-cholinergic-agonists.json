@@ -1,0 +1,156 @@
+{
+ "v": 1,
+ "module": "phm-cholinergic-agonists",
+ "subject": "pharmacology",
+ "title": "Cholinergic transmission and cholinomimetics",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Acetylcholine is synthesised in the axoplasm of cholinergic nerve terminals from **choline** and acetyl coenzyme A, catalysed by **choline acetyltransferase**. Choline enters the terminal by a sodium-coupled transporter, which is the rate-limiting step and is blocked by hemicholinium. Newly made acetylcholine is packed into vesicles by a carrier that vesamicol inhibits. Release occurs by calcium-dependent exocytosis.",
+   "say": "Acetylcholine is synthesised in the axoplasm of cholinergic nerve terminals from choline and acetyl coenzyme A, catalysed by choline acetyltransferase. Choline enters the terminal by a sodium-coupled transporter, which is the rate-limiting step and is blocked by hemicholinium. Newly made acetylcholine is packed into vesicles by a carrier that vesamicol inhibits. Release occurs by calcium-dependent exocytosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Choline uptake"
+     },
+     {
+      "id": "b",
+      "label": "ChAT synthesis"
+     },
+     {
+      "id": "c",
+      "label": "Vesicle storage"
+     },
+     {
+      "id": "d",
+      "label": "Exocytosis"
+     },
+     {
+      "id": "e",
+      "label": "AChE breakdown"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "hemicholinium blocks"
+     ],
+     [
+      "b",
+      "c",
+      "vesamicol blocks"
+     ],
+     [
+      "c",
+      "d",
+      "botulinum blocks"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Muscarinic receptors are **G protein coupled**. M1 receptors sit in gastric glands and CNS, M2 receptors in the heart, and M3 receptors in smooth muscle, glands and endothelium. M3 is the most common type and mediates miosis, bronchoconstriction and salivation. Nicotinic receptors are ion channels found at the neuromuscular junction, autonomic ganglia and adrenal medulla.",
+   "say": "Muscarinic receptors are G protein coupled. M1 receptors sit in gastric glands and the CNS, M2 receptors in the heart, and M3 receptors in smooth muscle, glands and endothelium. M3 is the most common type and mediates miosis, bronchoconstriction and salivation. Nicotinic receptors are ion channels found at the neuromuscular junction, autonomic ganglia and adrenal medulla.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Receptor",
+     "Main site",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "M1",
+      "Gastric glands, CNS",
+      "Acid secretion, cognition"
+     ],
+     [
+      "M2",
+      "Heart",
+      "Slows SA node, reduces AV conduction"
+     ],
+     [
+      "M3",
+      "Smooth muscle, glands, endothelium",
+      "Miosis, bronchoconstriction, NO release"
+     ],
+     [
+      "Nicotinic NM",
+      "Neuromuscular junction",
+      "Skeletal muscle contraction"
+     ],
+     [
+      "Nicotinic NN",
+      "Ganglia, adrenal medulla",
+      "Ganglionic transmission"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Directly acting cholinomimetics are choline esters. Natural alkaloids include **pilocarpine**, arecoline and nicotine. Synthetic esters include **carbachol**, **bethanechol** and **methacholine**. Acetylcholine itself is not used clinically because plasma cholinesterase destroys it rapidly. Bethanechol acts only on muscarinic receptors, while carbachol has the greatest nicotinic activity.",
+   "say": "Directly acting cholinomimetics are choline esters. Natural alkaloids include pilocarpine, arecoline and nicotine. Synthetic esters include carbachol, bethanechol and methacholine. Acetylcholine itself is not used clinically because plasma cholinesterase destroys it rapidly. Bethanechol acts only on muscarinic receptors, while carbachol has the greatest nicotinic activity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Muscarinic-selective",
+     "points": [
+      "Bethanechol: bladder and bowel",
+      "Pilocarpine: eye miosis",
+      "Methacholine: inhaled bronchial test"
+     ]
+    },
+    "right": {
+     "title": "Mixed action",
+     "points": [
+      "Carbachol: strongest nicotinic effect",
+      "Acetylcholine: rapidly hydrolysed",
+      "Nicotine: natural alkaloid"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cholinomimetics are used in **open angle glaucoma**, post-operative atony of bladder and bowel, neurogenic bladder, cobra bite and **myasthenia gravis**. Anticholinesterases such as neostigmine treat myasthenia and paralytic ileus. They are contraindicated in partial heart block and in bradycardia, because they can convert partial block into complete block.",
+   "say": "Cholinomimetics are used in open angle glaucoma, post-operative atony of bladder and bowel, neurogenic bladder, cobra bite and myasthenia gravis. Anticholinesterases such as neostigmine treat myasthenia and paralytic ileus. They are contraindicated in partial heart block and in bradycardia, because they can convert partial block into complete block.",
+   "vis": null
+  },
+  {
+   "tx": "**Botulinum toxin** A and B, made by Clostridium botulinum, block presynaptic release of acetylcholine by interfering with exocytosis. The effect is long lasting. Clinical uses include blepharospasm, strabismus, cervical dystonia, hemifacial spasm and chronic migraine prophylaxis, plus cosmetic treatment of wrinkles. Black widow spider toxin does the opposite and causes massive release.",
+   "say": "Botulinum toxin A and B, made by Clostridium botulinum, block presynaptic release of acetylcholine by interfering with exocytosis. The effect is long lasting. Clinical uses include blepharospasm, strabismus, cervical dystonia, hemifacial spasm and chronic migraine prophylaxis, plus cosmetic treatment of wrinkles. Black widow spider toxin does the opposite and causes massive release.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "a33b5447-0ea0-4c4a-94d3-26d154e5e002",
+  "115a364b-70c5-4b80-9d04-1646bf75411b",
+  "2a0e1d5f-ee0c-4f26-8be1-f70a321d8042"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung's Basic and Clinical Pharmacology (Katzung B G)",
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton L L)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 110
+ }
+}

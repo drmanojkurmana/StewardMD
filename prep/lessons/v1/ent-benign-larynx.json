@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "ent-benign-larynx",
+ "subject": "ent",
+ "title": "Benign laryngeal lesions and voice disorders: high-yield essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Vocal nodules, also called singer's or screamer's nodes, arise symmetrically on the **free edge of the vocal cord** at the junction of the anterior one-third and posterior two-thirds. This is the zone of maximum vibration and trauma. They result from vocal abuse, such as prolonged unnatural low-pitched speech or high-intensity shouting. Early nodules are soft and red; later they turn grey or white. Hoarseness and vocal fatigue are the classic symptoms.",
+   "say": "Vocal nodules, also called singer's or screamer's nodes, arise symmetrically on the free edge of the vocal cord, at the junction of the anterior one-third and posterior two-thirds. This is the zone of maximum vibration and trauma. They result from vocal abuse, such as prolonged unnatural low-pitched speech or high-intensity shouting. Early nodules are soft and red; later they turn grey or white. Hoarseness and vocal fatigue are the classic symptoms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Vocal nodule"
+    ],
+    "rows": [
+     [
+      "Site",
+      "Anterior one-third and posterior two-thirds junction"
+     ],
+     [
+      "Cause",
+      "Vocal misuse or abuse"
+     ],
+     [
+      "First line",
+      "Voice education and speech therapy"
+     ],
+     [
+      "Surgery",
+      "Microlaryngoscopic excision for large or long-standing lesions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most small nodules and early cases settle with **voice rest** and re-education in proper voice production. Many nodules in children disappear completely with this approach. Surgery is reserved for large nodules or long-standing lesions in adults, excised under the operating microscope while protecting the underlying vocal ligament. Speech therapy afterwards is essential to prevent recurrence. Reflux control with a proton pump inhibitor helps when reflux is present.",
+   "say": "Most small nodules and early cases settle with voice rest and re-education in proper voice production. Many nodules in children disappear completely with this approach. Surgery is reserved for large nodules or long-standing lesions in adults, excised under the operating microscope while protecting the underlying vocal ligament. Speech therapy afterwards is essential to prevent recurrence. Reflux control with a proton pump inhibitor helps when reflux is present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Early nodule"
+     },
+     {
+      "id": "b",
+      "label": "Voice rest and speech therapy"
+     },
+     {
+      "id": "c",
+      "label": "Persistent or large nodule"
+     },
+     {
+      "id": "d",
+      "label": "Microlaryngoscopic excision"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "no response"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Reinke's oedema** is a diffuse, bilateral, symmetrical swelling of the membranous vocal cords caused by fluid in the subepithelial Reinke's space. It is linked to heavy smoking and voice abuse, and can also occur in myxoedema. Patients have a low, rough voice. Treatment is decortication (vocal cord stripping), done one side first and the other side three to four weeks later, leaving enough mucosa to re-epithelialise. Laryngeal keratosis and leukoplakia are also managed by stripping.",
+   "say": "Reinke's oedema is a diffuse, bilateral, symmetrical swelling of the membranous vocal cords caused by fluid in the subepithelial Reinke's space. It is linked to heavy smoking and voice abuse, and can also occur in myxoedema. Patients have a low, rough voice. Treatment is decortication, or vocal cord stripping, done one side first and the other side three to four weeks later, leaving enough mucosa to re-epithelialise. Laryngeal keratosis and leukoplakia are also managed by stripping.",
+   "vis": null
+  },
+  {
+   "tx": "**Puberphonia**, or mutational falsetto, is persistence of a childhood high-pitched voice after the larynx should have matured at puberty. It is seen in emotionally immature boys with excessive attachment to their mother. **Gutzmann's pressure test** presses the thyroid prominence backwards and downwards to relax the overstretched cords and allow a lower tone. Training to produce a low-pitched voice is the treatment. In contrast, functional aphonia is a hysterical disorder seen in young women, who communicate by whispering.",
+   "say": "Puberphonia, or mutational falsetto, is persistence of a childhood high-pitched voice after the larynx should have matured at puberty. It is seen in emotionally immature boys with excessive attachment to their mother. Gutzmann's pressure test presses the thyroid prominence backwards and downwards to relax the overstretched cords and allow a lower tone. Training to produce a low-pitched voice is the treatment. In contrast, functional aphonia is a hysterical disorder seen in young women, who communicate by whispering.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Puberphonia",
+     "points": [
+      "Boys after puberty",
+      "High childhood voice persists",
+      "Gutzmann pressure test",
+      "Voice training treats it"
+     ]
+    },
+    "right": {
+     "title": "Functional aphonia",
+     "points": [
+      "Young women 15 to 30 years",
+      "Emotionally labile",
+      "Communicates by whispering",
+      "Psychological support"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "120f1ee6-e89b-40d0-b7d7-c40815e24a34",
+  "33e9dc6c-da56-4dd1-ab7c-e977f42d641c",
+  "4a654366-b3d5-4264-ae78-ac2991f82b0b"
+ ],
+ "src": [],
+ "refs": [
+  "Dhingra Diseases of Ear, Nose and Throat (P.L. Dhingra)",
+  "Scott-Brown's Otorhinolaryngology and Head and Neck Surgery (John Watkinson, Raymond Clarke)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 141
+ }
+}

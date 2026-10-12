@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "sid-ast-resistance",
+ "subject": "ss-infectious-diseases",
+ "title": "Antimicrobial susceptibility testing and resistance mechanisms",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Minimum inhibitory concentration** (MIC) is the lowest concentration of an antibiotic that stops visible growth of an organism after overnight incubation. In broth microdilution, the endpoint is the well that is clear or shows only slight haze. Susceptibility testing needs a standardised inoculum, and the **0.5 McFarland** standard is the usual turbidity target for disk diffusion and MIC preparation. Suspension should be diluted within 15 minutes of preparation.",
+   "say": "Minimum inhibitory concentration, or MIC, is the lowest concentration of an antibiotic that stops visible growth of an organism after overnight incubation. In broth microdilution, the endpoint is the well that is clear or shows only slight haze. Susceptibility testing needs a standardised inoculum, and the 0.5 McFarland standard is the usual turbidity target for disk diffusion and MIC preparation. The suspension should be diluted within 15 minutes of preparation.",
+   "vis": null
+  },
+  {
+   "tx": "A **clinical breakpoint** is the MIC or zone diameter that separates susceptible, intermediate and resistant categories. It is not a measure of in vivo cure. Standardised breakpoints are set by **CLSI** in the United States and **EUCAST** in Europe, and Indian laboratories commonly follow CLSI or EUCAST while labelling which one they use. Regional internal data alone should not set reporting breakpoints.",
+   "say": "A clinical breakpoint is the MIC or zone diameter that separates susceptible, intermediate and resistant categories. It is not a measure of cure in the body. Standardised breakpoints are set by CLSI in the United States and EUCAST in Europe, and Indian laboratories commonly follow CLSI or EUCAST while stating which one they use. Regional internal data alone should not set reporting breakpoints.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Exam meaning"
+    ],
+    "rows": [
+     [
+      "MIC",
+      "Lowest drug level stopping visible growth"
+     ],
+     [
+      "Breakpoint",
+      "Cut-off giving S, I or R category"
+     ],
+     [
+      "CLSI",
+      "US standards body for breakpoints"
+     ],
+     [
+      "EUCAST",
+      "European standards for breakpoints"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Beta-lactamases** are the main enzymatic route to resistance in Gram-negative bacteria. **ESBLs** break down penicillins and extended-spectrum cephalosporins, and their activity is blocked by a standard **beta-lactamase inhibitor** in the laboratory. **AmpC** enzymes are **cephalosporinases** that resist that inhibitor, so the blocking test gives a negative result. Recognising which enzyme is present guides the choice of agent.",
+   "say": "Beta-lactamases are the main enzymatic route to resistance in Gram-negative bacteria. ESBLs break down penicillins and extended-spectrum cephalosporins, and their activity is blocked by a standard beta-lactamase inhibitor in the laboratory. AmpC enzymes are cephalosporinases that resist that inhibitor, so the blocking test gives a negative result. Recognising which enzyme is present guides the choice of agent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ESBL",
+     "points": [
+      "Hydrolyses penicillins and extended-spectrum cephalosporins",
+      "Blocked by a standard beta-lactamase inhibitor",
+      "Often plasmid borne"
+     ]
+    },
+    "right": {
+     "title": "AmpC",
+     "points": [
+      "Cephalosporinase activity",
+      "Resists the standard beta-lactamase inhibitor",
+      "Can be chromosomal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**MRSA** carries the **mecA** gene, which encodes PBP2a, an altered **transpeptidase** with low affinity for beta-lactams. The cassette sits on the **SCCmec** element. In **VRE**, the **vanA** cluster swaps peptidoglycan precursors from D-Ala-D-Ala to D-Ala-D-Lac, so vancomycin cannot bind effectively.",
+   "say": "MRSA carries the mecA gene, which encodes PBP2a, an altered transpeptidase with low affinity for beta-lactams. The cassette sits on the SCCmec element. In VRE, the vanA cluster swaps peptidoglycan precursors from D-Ala-D-Ala to D-Ala-D-Lac, so vancomycin cannot bind effectively.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "mecA gene"
+     },
+     {
+      "id": "b",
+      "label": "Altered PBP2a"
+     },
+     {
+      "id": "c",
+      "label": "Low beta-lactam affinity"
+     },
+     {
+      "id": "d",
+      "label": "MRSA"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Other mechanisms include **efflux pumps** such as MexXY in Pseudomonas, **porin loss** that reduces drug entry in Gram-negatives, and target modification such as rpoB changes causing rifampicin resistance in tuberculosis. Fluoroquinolone resistance without gyrase mutations suggests reduced permeability or efflux. **Adaptive resistance** is transient and reverses when the drug is removed.",
+   "say": "Other mechanisms include efflux pumps such as MexXY in Pseudomonas, porin loss that reduces drug entry in Gram-negatives, and target modification such as rpoB changes causing rifampicin resistance in tuberculosis. Fluoroquinolone resistance without gyrase mutations suggests reduced permeability or efflux. Adaptive resistance is transient and reverses when the drug is removed.",
+   "vis": null
+  },
+  {
+   "tx": "For **quality control**, persistent errors mean patient results should be withheld until the cause is fixed. Internal QC shows system performance but cannot guarantee every isolate result, so external proficiency testing and clinical correlation still matter. Pre-analytical problems such as poor specimen quality, mixed colonies or excessive agar depth can produce invalid endpoints.",
+   "say": "For quality control, persistent errors mean patient results should be withheld until the cause is fixed. Internal QC shows system performance but cannot guarantee every isolate result, so external proficiency testing and clinical correlation still matter. Pre-analytical problems such as poor specimen quality, mixed colonies or excessive agar depth can produce invalid endpoints.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_4ea48dc53d69",
+  "q_2f596b5ff35b",
+  "q_98e3ee3a1b1c"
+ ],
+ "src": [],
+ "refs": [
+  "CLSI M100 Performance Standards for Antimicrobial Susceptibility Testing",
+  "EUCAST Breakpoint Tables for Interpretation of MICs and Zone Diameters"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 50
+ }
+}

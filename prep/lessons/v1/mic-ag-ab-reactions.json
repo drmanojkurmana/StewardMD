@@ -1,0 +1,178 @@
+{
+ "v": 1,
+ "module": "mic-ag-ab-reactions",
+ "subject": "microbiology",
+ "title": "Antigen-antibody reactions and serological tests",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Antigen-antibody reactions are classified by the physical state of the antigen. A **precipitation** reaction uses a soluble antigen that forms an insoluble complex in electrolyte. When the complex stays suspended as small clumps instead of settling, the reaction is called **flocculation**. The VDRL test for syphilis is a slide flocculation test. An **agglutination** reaction uses a particulate antigen, such as bacteria or red cells, which clumps when mixed with its antibody.",
+   "say": "Antigen-antibody reactions are classified by the physical state of the antigen. A precipitation reaction uses a soluble antigen that forms an insoluble complex in electrolyte. When the complex stays suspended as small clumps instead of settling, the reaction is called flocculation. The VDRL test for syphilis is a slide flocculation test. An agglutination reaction uses a particulate antigen, such as bacteria or red cells, which clumps when mixed with its antibody.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Precipitation",
+     "Agglutination"
+    ],
+    "rows": [
+     [
+      "Antigen type",
+      "Soluble",
+      "Particulate"
+     ],
+     [
+      "Typical example",
+      "Ring and gel tests",
+      "Widal, Coombs"
+     ],
+     [
+      "Sensitivity for antibody",
+      "Lower",
+      "Higher"
+     ],
+     [
+      "Sensitivity for antigen",
+      "Very high",
+      "Lower"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **zone of equivalence** is where antigen and antibody are in optimal proportion, so precipitation is fastest and most abundant. Lattice formation, a network of alternating antigen and antibody molecules, can only enlarge here. In **antibody excess** or **antigen excess**, the lattice cannot grow and no visible reaction forms. The lattice hypothesis also explains agglutination.",
+   "say": "The zone of equivalence is where antigen and antibody are in optimal proportion, so precipitation is fastest and most abundant. Lattice formation, a network of alternating antigen and antibody molecules, can only enlarge here. In antibody excess or antigen excess, the lattice cannot grow and no visible reaction forms. The lattice hypothesis also explains agglutination.",
+   "vis": null
+  },
+  {
+   "tx": "The **prozone phenomenon** is a false negative caused by very high antibody concentration. Antibody coats every antigenic site, so no bridges form between particles and no agglutination occurs. Diluting the serum restores the reaction. It is seen in syphilis serology in HIV patients, in cryptococcal antigen testing of undiluted samples, and in brucellosis serology. Remember that the prozone reflects an antibody excess, not an antigen excess.",
+   "say": "The prozone phenomenon is a false negative caused by very high antibody concentration. Antibody coats every antigenic site, so no bridges form between particles and no agglutination occurs. Diluting the serum restores the reaction. It is seen in syphilis serology in HIV patients, in cryptococcal antigen testing of undiluted samples, and in brucellosis serology. Remember that the prozone reflects an antibody excess, not an antigen excess.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prozone",
+     "points": [
+      "Excess antibody",
+      "No visible agglutination",
+      "False negative",
+      "Fixed by dilution"
+     ]
+    },
+    "right": {
+     "title": "Zone of equivalence",
+     "points": [
+      "Optimal proportions",
+      "Maximal lattice",
+      "Strongest reaction",
+      "Visible result"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Heterophile tests detect antibodies that react with unrelated species because of shared antigens. The **Paul-Bunnell test** uses sheep red cells and detects heterophile antibodies of infectious mononucleosis. The **Weil-Felix reaction** uses Proteus strains to screen for rickettsial disease. The **Widal test** is a tube agglutination test for typhoid, using O and H antigens of Salmonella. A titre above 1:320 for O and 1:640 for H is taken as positive in single samples, and a rising titre in paired sera is more useful.",
+   "say": "Heterophile tests detect antibodies that react with unrelated species because of shared antigens. The Paul-Bunnell test uses sheep red cells and detects heterophile antibodies of infectious mononucleosis. The Weil-Felix reaction uses Proteus strains to screen for rickettsial disease. The Widal test is a tube agglutination test for typhoid, using O and H antigens of Salmonella. A titre above 1:320 for O and 1:640 for H is taken as positive in single samples, and a rising titre in paired sera is more useful.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Antigen used",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Paul-Bunnell",
+      "Sheep red cells",
+      "Infectious mononucleosis"
+     ],
+     [
+      "Weil-Felix",
+      "Proteus strains",
+      "Rickettsial infection"
+     ],
+     [
+      "Widal",
+      "Salmonella O and H",
+      "Typhoid"
+     ],
+     [
+      "VDRL",
+      "Cardiolipin extract",
+      "Syphilis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Coombs test** is an agglutination test. The direct test detects antibodies already bound to the surface of red cells, as in haemolytic anaemia. The indirect test detects free antibodies in serum, used in cross matching before transfusion. The **complement fixation test** detects antigen-antibody complexes that bind complement, as in the Wassermann reaction for syphilis. **ELISA** and **Western blot** are enzyme-based methods; ELISA is the usual screen and Western blot the confirmatory test for HIV.",
+   "say": "The Coombs test is an agglutination test. The direct test detects antibodies already bound to the surface of red cells, as in haemolytic anaemia. The indirect test detects free antibodies in serum, used in cross matching before transfusion. The complement fixation test detects antigen-antibody complexes that bind complement, as in the Wassermann reaction for syphilis. ELISA and Western blot are enzyme-based methods; ELISA is the usual screen and Western blot the confirmatory test for HIV.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Suspected HIV"
+     },
+     {
+      "id": "e",
+      "label": "ELISA screen"
+     },
+     {
+      "id": "w",
+      "label": "Western blot confirm"
+     },
+     {
+      "id": "p",
+      "label": "Positive HIV"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "e"
+     ],
+     [
+      "e",
+      "w",
+      "reactive"
+     ],
+     [
+      "w",
+      "p",
+      "confirmed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several techniques label the antigen or antibody to detect it. **Immunofluorescence** uses fluorescent tags, as in the corneal smear test for rabies. **Radioimmunoassay** uses radioactive tags and measures hormones down to picogram levels. **Immunochromatography** gives rapid strip results. **Flow cytometry** counts labelled cells, and **chemiluminescence** measures light emitted from a bound label. Hormones are best measured by RIA or ELISA, and rapid tests exclude gel electrophoresis.",
+   "say": "Several techniques label the antigen or antibody to detect it. Immunofluorescence uses fluorescent tags, as in the corneal smear test for rabies. Radioimmunoassay uses radioactive tags and measures hormones down to picogram levels. Immunochromatography gives rapid strip results. Flow cytometry counts labelled cells, and chemiluminescence measures light emitted from a bound label. Hormones are best measured by RIA or ELISA, and rapid tests exclude gel electrophoresis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "913306f9-0ae4-47e9-bcfa-eb9dbd599692",
+  "4e985043-5ac5-42f9-ba20-271300f46140",
+  "dd29e253-2ea8-49fb-a12d-60c442859ed7"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 189
+ }
+}

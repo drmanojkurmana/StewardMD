@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "module": "pat-molecular-carcinogenesis",
+ "subject": "pathology",
+ "title": "Molecular basis of cancer: oncogenes, tumour suppressors and DNA repair",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cancer arises when **proto-oncogenes** are turned into oncogenes by gain of function, while **tumour suppressor genes** lose their braking action. Both usually need changes in a cell's DNA. Gain of function in RAS mimics loss of function in RB, because both push cells towards uncontrolled division. Mutation of RAS is the most common oncogenic event in human cancer, and it codes for a signal transduction protein.",
+   "say": "Cancer arises when proto-oncogenes are turned into oncogenes by gain of function, while tumour suppressor genes lose their braking action. Both usually need changes in a cell's DNA. Gain of function in RAS mimics loss of function in RB, because both push cells towards uncontrolled division. Mutation of RAS is the most common oncogenic event in human cancer, and it codes for a signal transduction protein.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oncogenes",
+     "points": [
+      "Gain of function",
+      "Dominant effect",
+      "Example: RAS, MYC, HER2",
+      "Signal or nuclear proteins"
+     ]
+    },
+    "right": {
+     "title": "Tumour suppressors",
+     "points": [
+      "Loss of function",
+      "Usually recessive",
+      "Example: RB, TP53, APC",
+      "Brake on cell cycle or repair"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Knudson's **two-hit hypothesis** explains retinoblastoma. In hereditary cases a child inherits one defective RB allele, and the second normal allele is then lost, a process called **loss of heterozygosity**. The RB gene lies on chromosome 13q14 and encodes a pocket protein that binds E2F while hypophosphorylated, holding the cell at the G1 to S checkpoint.",
+   "say": "Knudson's two-hit hypothesis explains retinoblastoma. In hereditary cases a child inherits one defective RB allele, and the second normal allele is then lost, a process called loss of heterozygosity. The RB gene lies on chromosome 13q14 and encodes a pocket protein that binds E2F while hypophosphorylated, holding the cell at the G1 to S checkpoint.",
+   "vis": null
+  },
+  {
+   "tx": "**TP53**, on chromosome 17p, is the guardian of the genome and the most commonly mutated tumour suppressor. In healthy cells p53 has a short half-life of about 20 minutes because MDM2 targets it for destruction. DNA damage stabilises p53, which arrests the cell cycle and can trigger apoptosis. Li-Fraumeni syndrome results from germline TP53 mutation.",
+   "say": "TP53, on chromosome 17p, is the guardian of the genome and the most commonly mutated tumour suppressor. In healthy cells p53 has a short half-life of about 20 minutes because MDM2 targets it for destruction. DNA damage stabilises p53, which arrests the cell cycle and can trigger apoptosis. Li-Fraumeni syndrome results from germline TP53 mutation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene",
+     "Chromosome",
+     "Key associated tumour"
+    ],
+    "rows": [
+     [
+      "RB",
+      "13q14",
+      "Retinoblastoma, osteosarcoma"
+     ],
+     [
+      "TP53",
+      "17p",
+      "Li-Fraumeni syndrome, sarcomas"
+     ],
+     [
+      "APC",
+      "5q21",
+      "Familial adenomatous polyposis, colon cancer"
+     ],
+     [
+      "BRCA1",
+      "17q21",
+      "Breast and ovarian cancer"
+     ],
+     [
+      "BRCA2",
+      "13q12",
+      "Breast, ovarian, male breast and prostate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Defects in **DNA mismatch repair** cause microsatellite instability, the hallmark of Hereditary non-polyposis colorectal cancer, which is also linked to endometrial and ovarian tumours. APC is the gatekeeper of colonic neoplasia and acts in the WNT pathway. BRCA1 and BRCA2 are DNA repair genes. Xeroderma pigmentosum, Bloom syndrome and ataxia telangiectasia are autosomal recessive repair defects.",
+   "say": "Defects in DNA mismatch repair cause microsatellite instability, the hallmark of Hereditary non-polyposis colorectal cancer, which is also linked to endometrial and ovarian tumours. APC is the gatekeeper of colonic neoplasia and acts in the WNT pathway. BRCA1 and BRCA2 are DNA repair genes. Xeroderma pigmentosum, Bloom syndrome and ataxia telangiectasia are autosomal recessive repair defects.",
+   "vis": null
+  },
+  {
+   "tx": "Cancer cells show **Warburg effect**, meaning they favour aerobic glycolysis even when oxygen is available. They also maintain chromosome ends using **telomerase**, which lets them achieve limitless replicative potential. HER2, encoded on 17q, is a receptor tyrosine kinase; its overexpression predicts response to trastuzumab rather than general chemotherapy response. BCR-ABL, from the Philadelphia translocation t(9;22), drives chronic myeloid leukaemia.",
+   "say": "Cancer cells show Warburg effect, meaning they favour aerobic glycolysis even when oxygen is available. They also maintain chromosome ends using telomerase, which lets them achieve limitless replicative potential. HER2, encoded on 17q, is a receptor tyrosine kinase; its overexpression predicts response to trastuzumab rather than general chemotherapy response. BCR-ABL, from the Philadelphia translocation t(9;22), drives chronic myeloid leukaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hallmark"
+     },
+     {
+      "id": "b",
+      "label": "Growth signals"
+     },
+     {
+      "id": "c",
+      "label": "Metabolism"
+     },
+     {
+      "id": "d",
+      "label": "Immortality"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "36fab420-80dc-4502-b2f0-fe8a96289473",
+  "a688d6c9-4426-42ce-8362-20c917bb1faf",
+  "ebcbd62d-3be9-46b8-818d-c77d6a1d910c"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease, 8th edition",
+  "Harshmohan Textbook of Pathology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 266
+ }
+}

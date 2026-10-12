@@ -1,0 +1,192 @@
+{
+ "v": 1,
+ "module": "scc-haemodynamic-monitoring",
+ "subject": "ss-critical-care",
+ "title": "Haemodynamic monitoring: arterial line, CVP, PAC and dynamic indices",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An **arterial line** gives beat-to-beat pressure and allows precise titration of vasoactive drugs such as noradrenaline. It is placed in the radial artery after checking collateral flow, for example with an Allen test. Absent collateral circulation is a contraindication. The dicrotic notch on the waveform marks aortic valve closure. Mean arterial pressure of at least 65 mmHg is the usual target in shock, while the module's key threshold of 60 mmHg is the minimum for organ perfusion.",
+   "say": "An arterial line gives beat to beat pressure and allows precise titration of vasoactive drugs such as noradrenaline. It is placed in the radial artery after checking collateral flow, for example with an Allen test. Absent collateral circulation is a contraindication. The dicrotic notch on the waveform marks aortic valve closure. A mean arterial pressure of at least 65 mmHg is the usual target in shock, and 60 mmHg is the minimum needed for organ perfusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Monitor",
+     "Main use",
+     "Key caution"
+    ],
+    "rows": [
+     [
+      "Arterial line",
+      "Beat to beat pressure, drug titration",
+      "Check collateral flow first"
+     ],
+     [
+      "CVP",
+      "Trend and right heart filling",
+      "Poor predictor of fluid need alone"
+     ],
+     [
+      "PAC",
+      "Wedge, cardiac output, SVR",
+      "Wedge valid only in zone 3"
+     ],
+     [
+      "Pulse contour",
+      "Stroke volume estimation",
+      "Needs calibration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Central venous pressure** reflects right atrial filling, but guidelines such as the Surviving Sepsis Campaign no longer advocate a fixed CVP target for guiding fluids. A low CVP does not reliably predict fluid responsiveness. Ultrasound of the **inferior vena cava** helps: a diameter above 2 cm suggests raised CVP, and the IVC collapsibility index adds information when combined with CVP. Positive pressure ventilation and high PEEP can raise CVP without true volume overload.",
+   "say": "Central venous pressure reflects right atrial filling, but the Surviving Sepsis Campaign no longer advocates a fixed CVP target for guiding fluids. A low CVP does not reliably predict fluid responsiveness. Ultrasound of the inferior vena cava helps, and a diameter above 2 cm suggests raised CVP. The collapsibility index adds information when combined with CVP. Positive pressure ventilation and high PEEP can raise CVP without true volume overload.",
+   "vis": null
+  },
+  {
+   "tx": "A **pulmonary artery catheter** measures pulmonary artery occlusion pressure, which approximates left atrial pressure only when the tip lies in **West zone 3**, where a continuous blood column links it to the left atrium. In zones 1 or 2, particularly with high PEEP or hypovolaemia, the reading reflects alveolar pressure and overestimates left atrial pressure. Thermodilution gives cardiac output by injecting cold saline and tracking the temperature curve. Systemic vascular resistance equals (MAP minus CVP) divided by cardiac output, times 80.",
+   "say": "A pulmonary artery catheter measures occlusion pressure, which approximates left atrial pressure only when the tip lies in West zone 3. In zones 1 or 2, especially with high PEEP or hypovolaemia, the reading reflects alveolar pressure and overestimates left atrial pressure. Thermodilution gives cardiac output by injecting cold saline and tracking the temperature curve. Systemic vascular resistance equals mean arterial pressure minus central venous pressure, divided by cardiac output, then multiplied by 80.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Valid wedge",
+     "points": [
+      "Tip in zone 3",
+      "Continuous column to left atrium",
+      "Reflects left atrial pressure"
+     ]
+    },
+    "right": {
+     "title": "Invalid wedge",
+     "points": [
+      "Tip in zones 1 or 2",
+      "High PEEP or hypovolaemia",
+      "Reflects alveolar pressure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Before giving fluid, clinicians ask whether the patient will actually respond. **Dynamic indices** such as **pulse pressure variation** and **stroke volume variation** track heart and lung interaction across the breathing cycle. Their predictive value depends on strict conditions: controlled ventilation, adequate tidal volume, sinus rhythm and a closed chest. When those conditions are absent, the **passive leg raise** offers a reversible alternative that shifts venous blood back toward the heart and measures the resulting change in output.",
+   "say": "Before giving fluid, clinicians ask whether the patient will actually respond. Dynamic indices such as pulse pressure variation and stroke volume variation track heart and lung interaction across the breathing cycle. Their predictive value depends on strict conditions: controlled ventilation, adequate tidal volume, sinus rhythm and a closed chest. When those conditions are absent, the passive leg raise offers a reversible alternative. It shifts venous blood back toward the heart, and a rise in cardiac output of around 10 percent suggests the patient will respond to a bolus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Hypotension"
+     },
+     {
+      "id": "n2",
+      "label": "Conditions met for PPV or SVV?"
+     },
+     {
+      "id": "n3",
+      "label": "Read PPV or SVV"
+     },
+     {
+      "id": "n4",
+      "label": "Perform passive leg raise"
+     },
+     {
+      "id": "n5",
+      "label": "Cardiac output rises about 10 percent?"
+     },
+     {
+      "id": "n6",
+      "label": "Give fluid bolus"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3",
+      "Yes"
+     ],
+     [
+      "n2",
+      "n4",
+      "No"
+     ],
+     [
+      "n3",
+      "n6",
+      "Above threshold"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **septic shock**, the typical profile on a pulmonary artery catheter is high or normal cardiac output with low systemic vascular resistance and often high mixed venous saturation. Noradrenaline is first-line, and vasopressin may be added. A low mixed venous saturation suggests inadequate oxygen delivery from low output, anaemia or hypoxaemia. A **giant v wave** on the wedge tracing suggests acute mitral regurgitation, for example from papillary muscle rupture after myocardial infarction.",
+   "say": "In septic shock, the typical profile on a pulmonary artery catheter is high or normal cardiac output with low systemic vascular resistance and often high mixed venous saturation. Noradrenaline is first line, and vasopressin may be added. A low mixed venous saturation suggests inadequate oxygen delivery from low output, anaemia or hypoxaemia. A giant v wave on the wedge tracing suggests acute mitral regurgitation, for example from papillary muscle rupture after myocardial infarction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Likely state",
+     "First response"
+    ],
+    "rows": [
+     [
+      "High CO, low SVR",
+      "Distributive shock",
+      "Noradrenaline"
+     ],
+     [
+      "Low CO, high SVR",
+      "Cardiogenic shock",
+      "Inotrope"
+     ],
+     [
+      "Giant v wave",
+      "Acute mitral regurgitation",
+      "Urgent specialist review"
+     ],
+     [
+      "Low SvO2",
+      "Poor delivery or high use",
+      "Correct cause"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_13617867c4b6",
+  "q_c5f750ce9789",
+  "q_e79c9336dbe2"
+ ],
+ "src": [],
+ "refs": [
+  "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock (2021)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 25
+ }
+}

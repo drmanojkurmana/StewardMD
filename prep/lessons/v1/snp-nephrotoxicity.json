@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "snp-nephrotoxicity",
+ "subject": "ss-nephrology",
+ "title": "Contrast and drug-induced nephrotoxicity: high-yield essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Contrast-associated acute kidney injury** (CA-AKI) is a rise in serum creatinine after iodinated contrast, classically at least 0.5 mg/dL or 25% above baseline within 48 to 72 hours. Risk is highest with pre-existing CKD, especially eGFR below 30 ml/min/1.73m2, diabetes, heart failure, anaemia, and large contrast volumes. Creatinine usually returns to baseline within 7 to 14 days. Serum creatinine is insensitive and non-specific, so newer markers such as KIM-1 remain research tools.",
+   "say": "Contrast-associated acute kidney injury is a rise in serum creatinine after iodinated contrast, classically at least 0.5 milligrams per decilitre or 25 percent above baseline within 48 to 72 hours. Risk is highest with pre-existing chronic kidney disease, especially an eGFR below 30, along with diabetes, heart failure, anaemia and large contrast volumes. Creatinine usually returns to baseline within 7 to 14 days. Serum creatinine is insensitive and non-specific, so newer markers such as KIM-1 remain research tools.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Definition",
+      "Creatinine rise of 0.5 mg/dL or 25%"
+     ],
+     [
+      "Timing",
+      "Peak within 48 to 72 hours"
+     ],
+     [
+      "Recovery",
+      "Usually 7 to 14 days"
+     ],
+     [
+      "Biggest risk",
+      "eGFR below 30 ml/min/1.73m2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention rests on **isotonic saline hydration** before and after contrast, given at about 1 ml/kg/hr for 6 to 12 hours in high-risk patients. **Statin pretreatment**, such as rosuvastatin, reduces incidence in meta-analyses. Bicarbonate is proposed to alkalinise tubular fluid and scavenge reactive oxygen species, though its benefit is debated. Withhold metformin on the day of exposure and for 48 hours afterwards, as the FDA advises. Avoid nephrotoxic co-medication where possible.",
+   "say": "Prevention rests on isotonic saline hydration before and after contrast, given at about 1 ml per kilogram per hour for 6 to 12 hours in high-risk patients. Statin pretreatment, such as rosuvastatin, reduces incidence in meta-analyses. Bicarbonate is proposed to alkalinise tubular fluid and scavenge reactive oxygen species, though its benefit is debated. Withhold metformin on the day of exposure and for 48 hours afterwards, as the FDA advises. Avoid nephrotoxic co-medication where possible.",
+   "vis": null
+  },
+  {
+   "tx": "Not every nephrotoxin injures the same part of the kidney. **Aminoglycosides** accumulate in proximal tubular cells and produce **acute tubular necrosis**, with risk tied to high troughs, long courses and volume depletion. **Calcineurin inhibitors** constrict the afferent arteriole, and prolonged exposure leads to **interstitial fibrosis**. **NSAIDs** block the prostaglandins that maintain renal perfusion. Match each agent to its lesion.",
+   "say": "Not every nephrotoxin injures the same part of the kidney. Aminoglycosides build up in proximal tubular cells and cause acute tubular necrosis, with risk linked to high troughs, prolonged courses and volume depletion. Calcineurin inhibitors constrict the afferent arteriole, and long exposure leads to interstitial fibrosis. NSAIDs block the prostaglandins that keep renal blood flow up in vulnerable patients. Pair each agent with its expected lesion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Expected lesion",
+     "Key risk clue"
+    ],
+    "rows": [
+     [
+      "Aminoglycosides",
+      "Acute tubular necrosis",
+      "High troughs, long courses, volume depletion"
+     ],
+     [
+      "Calcineurin inhibitors",
+      "Afferent arteriolar vasoconstriction, interstitial fibrosis",
+      "Prolonged exposure, graft dysfunction"
+     ],
+     [
+      "NSAIDs",
+      "Haemodynamic AKI, interstitial nephritis",
+      "Dehydration, heart failure, ACE inhibitor co-use"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Amphotericin B deoxycholate** causes dose-dependent nephrotoxicity through afferent vasoconstriction and distal renal tubular acidosis with potassium and magnesium wasting. Saline loading reduces azotemia. Lipid formulations are less nephrotoxic. Daily potassium and magnesium checks are advised during initiation. Infusion reactions with fever and rigors occur within 1 to 3 hours. Liposomal amphotericin B can falsely raise serum phosphate on some assays, and concurrent granulocyte transfusion risks pulmonary reactions.",
+   "say": "Amphotericin B deoxycholate causes dose-dependent nephrotoxicity through afferent vasoconstriction and distal renal tubular acidosis with potassium and magnesium wasting. Saline loading reduces azotemia. Lipid formulations are less nephrotoxic. Daily potassium and magnesium checks are advised during initiation. Infusion reactions with fever and rigors occur within 1 to 3 hours. Liposomal amphotericin B can falsely raise serum phosphate on some assays, and concurrent granulocyte transfusion risks pulmonary reactions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Amphotericin B"
+     },
+     {
+      "id": "b",
+      "label": "Afferent constriction"
+     },
+     {
+      "id": "c",
+      "label": "Azotemia and RTA"
+     },
+     {
+      "id": "d",
+      "label": "Saline loading"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "d",
+      "c",
+      "reduces"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_1d0c3e385495",
+  "q_3b3068930db5",
+  "q_b598cc507a21"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for Acute Kidney Injury",
+  "NICE Acute kidney injury: prevention, detection and management (NG148)",
+  "IDSA Clinical Practice Guidelines for the Management of Candidiasis (Pappas et al.)",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 46
+ }
+}

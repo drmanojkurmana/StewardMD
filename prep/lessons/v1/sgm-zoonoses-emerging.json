@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "sgm-zoonoses-emerging",
+ "subject": "ss-general-medicine",
+ "title": "Nipah virus: reservoir, clinical picture, and discharge",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Nipah virus** is a paramyxovirus that causes zoonotic encephalitis and respiratory illness. The natural reservoir is the **Pteropus fruit bat**, which spreads virus to pigs, date palm sap, and humans. Indian exam questions often ask about the reservoir first, so remember the bat. Infection in humans follows contact with infected animals or contaminated food, and it can pass between people in close contact.",
+   "say": "Nipah virus is a paramyxovirus that causes zoonotic encephalitis and respiratory illness. The natural reservoir is the Pteropus fruit bat, which spreads virus to pigs, date palm sap, and humans. Indian exam questions often ask about the reservoir first, so remember the bat. Infection in humans follows contact with infected animals or contaminated food, and it can pass between people in close contact.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pteropus bat"
+     },
+     {
+      "id": "b",
+      "label": "Pigs or date palm sap"
+     },
+     {
+      "id": "c",
+      "label": "Human case"
+     },
+     {
+      "id": "d",
+      "label": "Close contact spread"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Entry into host cells depends on the **G protein**, which binds ephrin-B2 and ephrin-B3 receptors. Replication then spreads through the body, with the brain as the main target. Presentation is fever, headache, vomiting, and dizziness, followed by rapid drowsiness, disorientation, and coma in severe cases. Early recognition matters because the disease can progress within days.",
+   "say": "Entry into host cells depends on the G protein, which binds ephrin-B2 and ephrin-B3 receptors. Replication then spreads through the body, with the brain as the main target. Presentation is fever, headache, vomiting, and dizziness, followed by rapid drowsiness, disorientation, and coma in severe cases. Early recognition matters because the disease can progress within days.",
+   "vis": null
+  },
+  {
+   "tx": "Containment for handling Nipah samples is **BSL-4**, because no licensed vaccine or specific antiviral is available for humans. Diagnosis in the acute phase uses **RT-PCR** on throat swabs, nasopharyngeal swabs, urine, or CSF. Serum IgM is useful later. Blood cultures are not the preferred test here. Laboratory staff must follow strict biosafety rules at every step.",
+   "say": "Containment for handling Nipah samples is BSL-4, because no licensed vaccine or specific antiviral is available for humans. Diagnosis in the acute phase uses RT-PCR on throat swabs, nasopharyngeal swabs, urine, or CSF. Serum IgM is useful later. Blood cultures are not the preferred test here. Laboratory staff must follow strict biosafety rules at every step.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role in NiV"
+    ],
+    "rows": [
+     [
+      "RT-PCR",
+      "Preferred in acute illness"
+     ],
+     [
+      "Serum IgM",
+      "Useful later in course"
+     ],
+     [
+      "Blood culture",
+      "Not the preferred test"
+     ],
+     [
+      "Skin biopsy",
+      "Not used for diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Imaging of the brain in Nipah encephalitis often shows **multiple small white matter lesions**. Large midline shift, hemorrhagic stroke, or heavy perilesional oedema are not typical. Bitemporal periodic complexes on EEG are common in comatose encephalitis patients and signal a poor outlook, not recovery. Brainstem signs such as abnormal oculocephalic reflexes and tachycardia suggest severe disease and a poor prognosis.",
+   "say": "Imaging of the brain in Nipah encephalitis often shows multiple small white matter lesions. Large midline shift, hemorrhagic stroke, or heavy perilesional oedema are not typical. Bitemporal periodic complexes on EEG are common in comatose encephalitis patients and signal a poor outlook, not recovery. Brainstem signs such as abnormal oculocephalic reflexes and tachycardia suggest severe disease and a poor prognosis.",
+   "vis": null
+  },
+  {
+   "tx": "Before discharge, a patient needs a **negative RT-PCR** on a throat swab, and clinical recovery must be sustained. Isolation is usually continued until this test is negative. A patient with mild residual cough should have repeat testing rather than leaving immediately. Follow-up is important because of relapse risk, so counsel the patient on returning if new neurological symptoms appear.",
+   "say": "Before discharge, a patient needs a negative RT-PCR on a throat swab, and clinical recovery must be sustained. Isolation is usually continued until this test is negative. A patient with mild residual cough should have repeat testing rather than leaving immediately. Follow-up is important because of relapse risk, so counsel the patient on returning if new neurological symptoms appear.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_8261182b9f22",
+  "q_cebb0b4130a1",
+  "q_15a660de5387"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

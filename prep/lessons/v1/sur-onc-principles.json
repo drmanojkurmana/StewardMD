@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "module": "sur-onc-principles",
+ "subject": "surgery",
+ "title": "Principles of surgical oncology and soft tissue sarcoma",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Surgical oncology relies on **staging** before treatment. The TNM system describes the **T**umour size and local spread, the **N** lymph node involvement, and the **M** presence of distant metastasis. Staging decides whether surgery alone, neoadjuvant or adjuvant therapy is needed. For the exam, remember that N refers to lymph nodes, not to the number of tumours or the nature of the tumour.",
+   "say": "Surgical oncology relies on staging before treatment. The TNM system describes the tumour size and local spread, the N lymph node involvement, and the M presence of distant metastasis. Staging decides whether surgery alone, neoadjuvant or adjuvant therapy is needed. For the exam, remember that N refers to lymph nodes, not to the number of tumours or the nature of the tumour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Letter",
+     "Meaning",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "T",
+      "Primary tumour size and extent",
+      "Local spread"
+     ],
+     [
+      "N",
+      "Regional lymph nodes",
+      "Not number of tumours"
+     ],
+     [
+      "M",
+      "Distant metastasis",
+      "M0 means none"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Soft tissue sarcomas are mesenchymal tumours. They usually spread by the **haematogenous** route, with lung being the most common site of metastasis. Unlike carcinomas, they rarely reach lymph nodes, so routine nodal surgery is not needed. Exceptions with lymphatic spread include **rhabdomyosarcoma**, synovial sarcoma, clear cell sarcoma, epithelioid sarcoma, angiosarcoma and malignant fibrous histiocytoma.",
+   "say": "Soft tissue sarcomas are mesenchymal tumours. They usually spread by the haematogenous route, with lung being the most common site of metastasis. Unlike carcinomas, they rarely reach lymph nodes, so routine nodal surgery is not needed. Exceptions with lymphatic spread include rhabdomyosarcoma, synovial sarcoma, clear cell sarcoma, epithelioid sarcoma, angiosarcoma and malignant fibrous histiocytoma.",
+   "vis": null
+  },
+  {
+   "tx": "Soft tissue sarcoma management is mainly **wide local excision** with adequate margins, combined with adjuvant radiotherapy with or without chemotherapy. Limb-sparing surgery is possible in most patients, and amputation is reserved for tumours that cannot otherwise be resected. Neoadjuvant chemotherapy means chemotherapy given before surgery or radiotherapy. Histological **grade** is the strongest prognostic factor.",
+   "say": "Soft tissue sarcoma management is mainly wide local excision with adequate margins, combined with adjuvant radiotherapy with or without chemotherapy. Limb-sparing surgery is possible in most patients, and amputation is reserved for tumours that cannot otherwise be resected. Neoadjuvant chemotherapy means chemotherapy given before surgery or radiotherapy. Histological grade is the strongest prognostic factor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Core or incisional biopsy"
+     },
+     {
+      "id": "b",
+      "label": "CT or MRI staging"
+     },
+     {
+      "id": "c",
+      "label": "Neoadjuvant therapy if needed"
+     },
+     {
+      "id": "d",
+      "label": "Wide local excision"
+     },
+     {
+      "id": "e",
+      "label": "Adjuvant radiotherapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hereditary cancer syndromes and screening complete the picture. **BRCA2** mutations are linked to breast, ovarian, prostate, pancreatic and bile duct cancers, but not to liposarcoma. Cowden syndrome is an autosomal dominant condition with multiple hamartomas and increased cancer risk. Tumour markers such as CEA help monitor disease but have low sensitivity, so they cannot confirm cancer or replace histology.",
+   "say": "Hereditary cancer syndromes and screening complete the picture. BRCA2 mutations are linked to breast, ovarian, prostate, pancreatic and bile duct cancers, but not to liposarcoma. Cowden syndrome is an autosomal dominant condition with multiple hamartomas and increased cancer risk. Tumour markers such as CEA help monitor disease but have low sensitivity, so they cannot confirm cancer or replace histology.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "5fa04505-0cca-439c-b7ae-5a85b7adf668",
+  "9657547e-64b3-4d13-891b-cc18fd2849ef",
+  "a91d22e8-f65d-4b70-8f76-7266b0d0314f"
+ ],
+ "src": [],
+ "refs": [
+  "Schwartz's Principles of Surgery",
+  "Sabiston Textbook of Surgery",
+  "SRB's Manual of Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 73
+ }
+}

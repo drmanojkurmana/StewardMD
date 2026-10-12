@@ -1,0 +1,123 @@
+{
+ "v": 1,
+ "module": "pat-pulmonary-infections",
+ "subject": "pathology",
+ "title": "Pulmonary infections: pneumonia patterns and tuberculosis foci",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Lobar pneumonia involves a large confluent area or entire lobe, most often caused by **Streptococcus pneumoniae**. Laennec described four stages: congestion, red hepatisation, grey hepatisation and resolution. Red hepatisation lasts about 2 to 4 days and shows fibrin strands with neutrophils and extravasated red cells. Grey hepatisation follows, with red cells disintegrating and macrophages appearing. Resolution then liquefies the exudate by enzymatic action, restoring aeration.",
+   "say": "Lobar pneumonia involves a large confluent area or an entire lobe, most often caused by Streptococcus pneumoniae. Laennec described four stages: congestion, red hepatisation, grey hepatisation and resolution. Red hepatisation lasts about two to four days and shows fibrin strands with neutrophils and extravasated red cells. Grey hepatisation follows, with red cells disintegrating and macrophages appearing. Resolution then liquefies the exudate by enzymatic action, restoring aeration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Approximate timing",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Congestion",
+      "1 to 2 days",
+      "Congested capillaries, few neutrophils"
+     ],
+     [
+      "Red hepatisation",
+      "2 to 4 days",
+      "Fibrin strands, neutrophils, red cells"
+     ],
+     [
+      "Grey hepatisation",
+      "4 to 8 days",
+      "Dense fibrin, macrophages, degenerating cells"
+     ],
+     [
+      "Resolution",
+      "From day 8 to 9",
+      "Enzymatic liquefaction and clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bronchopneumonia is a **multifocal** patchy inflammation centred on the bronchi, bronchioles and adjacent alveoli. It is suppurative, filled with neutrophils, and often bilateral and basal because secretions gravitate to the lower lobes. **Staphylococcus aureus** is a common cause. Lobar pneumonia, by contrast, is unifocal and spares the distal airways, spreading through the pores of Kohn.",
+   "say": "Bronchopneumonia is a multifocal patchy inflammation centred on the bronchi, bronchioles and adjacent alveoli. It is suppurative, filled with neutrophils, and often bilateral and basal because secretions gravitate to the lower lobes. Staphylococcus aureus is a common cause. Lobar pneumonia, by contrast, is unifocal and spares the distal airways, spreading through the pores of Kohn.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lobar pneumonia",
+     "points": [
+      "Unifocal, confluent consolidation",
+      "Spares distal airways",
+      "Usually Streptococcus pneumoniae",
+      "Spreads via pores of Kohn"
+     ]
+    },
+    "right": {
+     "title": "Bronchopneumonia",
+     "points": [
+      "Multifocal, patchy consolidation",
+      "Centred on bronchi and bronchioles",
+      "Often bilateral and basal",
+      "Staphylococcus aureus is common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Atypical or interstitial pneumonia, usually from **Mycoplasma pneumoniae** or viruses, lacks alveolar exudate and consolidation. Inflammation sits within the alveolar walls, with mononuclear infiltrates. Clinically it gives low grade fever and dry cough. Mycoplasma infection may produce **cold agglutinins**, IgM antibodies reacting with red cells. Viral pneumonia is the commonest childhood pneumonia, with influenza the usual culprit.",
+   "say": "Atypical or interstitial pneumonia, usually from Mycoplasma pneumoniae or viruses, lacks alveolar exudate and consolidation. Inflammation sits within the alveolar walls, with mononuclear infiltrates. Clinically it gives low grade fever and dry cough. Mycoplasma infection may produce cold agglutinins, IgM antibodies reacting with red cells. Viral pneumonia is the commonest childhood pneumonia, with influenza the usual culprit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Typical pneumonia",
+     "points": [
+      "Alveolar exudate and neutrophils",
+      "High grade fever, productive cough",
+      "Signs of consolidation",
+      "Usually bacterial"
+     ]
+    },
+    "right": {
+     "title": "Atypical pneumonia",
+     "points": [
+      "Interstitial wall inflammation",
+      "Low grade fever, dry cough",
+      "No consolidation signs",
+      "Mycoplasma or viral cause"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A lung abscess is a suppurative necrosis of lung tissue with a central cavity. **Aspiration** of oropharyngeal secretions is the commonest cause, so anaerobes such as Bacteroides, Fusobacterium and peptostreptococci predominate. The right side is affected more often because the right main bronchus is more vertical. Aspergillomas are different: they are fungus balls forming within a pre-existing cavity, often from old tuberculosis, and Aspergillus hyphae do not invade the parenchyma.",
+   "say": "A lung abscess is a suppurative necrosis of lung tissue with a central cavity. Aspiration of oropharyngeal secretions is the commonest cause, so anaerobes such as Bacteroides, Fusobacterium and peptostreptococci predominate. The right side is affected more often because the right main bronchus is more vertical. Aspergillomas are different: they are fungus balls forming within a pre-existing cavity, often from old tuberculosis, and Aspergillus hyphae do not invade the parenchyma.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "9de265aa-d2df-4b73-8e4f-ca8ce8af8539",
+  "f12b1944-62d5-44f1-beec-f4f8c1f46d87",
+  "0e9b9822-5a51-480b-9c9a-3ef7fc89b686"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease (Kumar, Abbas, Aster)",
+  "Harsh Mohan Textbook of Pathology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 95
+ }
+}

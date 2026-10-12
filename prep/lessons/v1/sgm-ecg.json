@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "module": "sgm-ecg",
+ "subject": "ss-general-medicine",
+ "title": "Electrocardiography: Axis, Bundle Branch Block, LVH, Ischaemia and Electrolytes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **frontal plane QRS axis** is found from leads I and aVF. Normal axis lies between minus 30 and plus 90 degrees. Left axis deviation is seen when lead I is positive and aVF is negative, often from **left anterior fascicular block**. Right axis deviation is seen when lead I is negative and aVF is positive. Check these two leads first, then confirm with the limb leads.",
+   "say": "The frontal plane QRS axis is found by looking at leads one and aVF. A normal axis lies between minus 30 and plus 90 degrees. Left axis deviation shows up when lead one is positive and aVF is negative, often from left anterior fascicular block. Right axis deviation shows up when lead one is negative and aVF is positive. Check these two leads first, then confirm with the limb leads.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Axis",
+     "Lead I",
+     "aVF"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "Positive",
+      "Positive"
+     ],
+     [
+      "Left deviation",
+      "Positive",
+      "Negative"
+     ],
+     [
+      "Right deviation",
+      "Negative",
+      "Positive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **bundle branch block**, a QRS of 120 ms or more defines complete block, while 100 to 119 ms suggests incomplete block. In **RBBB**, V1 shows an rSR' pattern and broad S waves appear in V6. In **LBBB**, V1 is deeply negative and broad notched R waves appear in I, aVL, V5 and V6. Isolated RBBB in an asymptomatic person needs no workup.",
+   "say": "In bundle branch block, a QRS of 120 milliseconds or more defines complete block, while 100 to 119 milliseconds suggests incomplete block. In right bundle branch block, V1 shows an rSR pattern and broad S waves appear in V6. In left bundle branch block, V1 is deeply negative and broad notched R waves appear in leads one, aVL, V5 and V6. Isolated right bundle branch block in an asymptomatic person needs no workup.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "RBBB",
+     "points": [
+      "QRS 120 ms or more",
+      "rSR' in V1",
+      "Broad S in I, V6",
+      "Often benign if isolated"
+     ]
+    },
+    "right": {
+     "title": "LBBB",
+     "points": [
+      "QRS 120 ms or more",
+      "Deep negative QRS in V1",
+      "Broad notched R in I, aVL, V5, V6",
+      "Hides septal q waves"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Wellens syndrome** shows deep symmetrical T-wave inversion in V2 and V3 or biphasic T waves, with near-normal or minimal ST changes and preserved R waves, in a pain-free patient. It signals a critical proximal **LAD** stenosis and needs urgent catheterisation, as anterior MI is a risk without it. **De Winter T waves** are upsloping ST depression with tall, peaked T waves in precordial leads, and they also signal proximal LAD occlusion requiring emergency reperfusion.",
+   "say": "Wellens syndrome shows deep symmetrical T wave inversion in V2 and V3, or biphasic T waves, with near normal ST segments in a pain free patient. It signals a critical proximal LAD stenosis and needs urgent catheterisation, because anterior myocardial infarction is a real risk without it. De Winter T waves are upsloping ST depression with tall peaked T waves in precordial leads, and they also signal proximal LAD occlusion needing emergency reperfusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pain-free, V2-V3 deep T inversion"
+     },
+     {
+      "id": "b",
+      "label": "Suspect proximal LAD stenosis"
+     },
+     {
+      "id": "c",
+      "label": "Urgent angiography and revascularisation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **hyperkalaemia**, ECG changes progress from peaked T waves to PR prolongation, loss of P waves, QRS widening and a **sine wave**. Give IV calcium gluconate first to stabilise the membrane. Then give insulin with dextrose and nebulised salbutamol to shift potassium. Remove potassium with binders or dialysis. In **digitalis toxicity**, a scooped ST depression with shortened QT and low potassium increases risk.",
+   "say": "In hyperkalaemia, ECG changes progress from peaked T waves to PR prolongation, loss of P waves, QRS widening and finally a sine wave. Give intravenous calcium gluconate first to stabilise the membrane. Then give insulin with dextrose and nebulised salbutamol to shift potassium. Remove potassium with binders or dialysis. In digitalis toxicity, scooped ST depression with a shortened QT, and low potassium, increase the risk of arrhythmia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Peaked T and PR prolongation"
+     },
+     {
+      "id": "b",
+      "label": "P loss and QRS widening"
+     },
+     {
+      "id": "c",
+      "label": "Calcium, then insulin and dextrose"
+     },
+     {
+      "id": "d",
+      "label": "Remove potassium"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**QT prolongation** is judged on the **corrected QT interval** against sex-specific upper limits, which are lower for men than women. Acquired long QT can trigger **torsades de pointes**, a polymorphic ventricular tachycardia, often driven by low potassium, low magnesium or QT-prolonging drugs. Treatment includes intravenous magnesium, potassium repletion, stopping offending agents and pacing or isoproterenol to raise heart rate. In **pre-excitation**, a short PR with a delta wave suggests Wolff-Parkinson-White.",
+   "say": "QT prolongation is judged on the corrected QT interval, compared against sex specific upper limits, which are lower for men than for women. Acquired long QT can trigger torsades de pointes, a polymorphic ventricular tachycardia, often driven by low potassium, low magnesium or QT prolonging drugs. Treatment includes intravenous magnesium, potassium replacement, stopping the offending agents, and pacing or isoproterenol to raise heart rate. In pre-excitation, a short PR with a delta wave suggests Wolff-Parkinson-White.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_cbcfc39e094d",
+  "q_08f9ae5a1f6a",
+  "q_217e47929f61"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 68
+ }
+}

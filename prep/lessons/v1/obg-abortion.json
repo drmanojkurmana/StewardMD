@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "obg-abortion",
+ "subject": "obstetrics-gynaecology",
+ "title": "Miscarriage and medical termination of pregnancy: key classifications, causes and legal limits",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Threatened abortion** shows bleeding with a closed cervix and an alive fetus. Around two-thirds of these pregnancies continue beyond 28 weeks. Those that continue carry higher risks of preterm labour, placenta praevia, growth restriction and fetal anomalies. Management is rest and avoiding coitus, with progesterone support in selected cases.",
+   "say": "Threatened abortion shows bleeding with a closed cervix and a living fetus. Around two-thirds of these pregnancies continue beyond 28 weeks. Those that continue carry higher risks of preterm labour, placenta praevia, growth restriction and fetal anomalies. Management is rest and avoiding intercourse, with progesterone support in selected cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Recurrent pregnancy loss** is usually defined as three or more pregnancy losses. Chromosomal defects, notably balanced translocations, dominate first trimester loss. Second trimester loss is more often anatomical, with **cervical incompetence** as a leading cause. The commonest cause of cervical incompetence is idiopathic, but congenital Mullerian anomalies, DES exposure, obstetric trauma and conization are recognised causes.",
+   "say": "Recurrent pregnancy loss is usually defined as three or more pregnancy losses. Chromosomal defects, notably balanced translocations, dominate first trimester loss. Second trimester loss is more often anatomical, with cervical incompetence as a leading cause. Its commonest cause is idiopathic, but congenital Mullerian anomalies, DES exposure, obstetric trauma and conization are recognised causes.",
+   "vis": null
+  },
+  {
+   "tx": "**Antiphospholipid antibody syndrome** is an autoimmune cause of recurrent second trimester loss. Lupus anticoagulant prolongs the aPTT but acts as a procoagulant. Diagnosis needs two positive tests at least six weeks apart. ACOG suggests low dose aspirin 81 mg with prophylactic LMWH, such as dalteparin 5000 units subcutaneously twice daily, started once pregnancy is confirmed.",
+   "say": "Antiphospholipid antibody syndrome is an autoimmune cause of recurrent second trimester loss. Lupus anticoagulant prolongs the aPTT but acts as a procoagulant. Diagnosis needs two positive tests at least six weeks apart. ACOG suggests low dose aspirin 81 milligrams with prophylactic LMWH, such as dalteparin 5000 units subcutaneously twice daily, started once pregnancy is confirmed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lupus anticoagulant",
+     "points": [
+      "Prolongs aPTT in vitro",
+      "Acts as procoagulant",
+      "Linked to thrombosis",
+      "Named after SLE patients"
+     ]
+    },
+    "right": {
+     "title": "Anticardiolipin antibody",
+     "points": [
+      "Commonest in early loss",
+      "Tested as antibody to cardiolipin",
+      "Distinct from false positive syphilis test antibody"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Medical termination under the **MTP legislation** is permitted up to 20 weeks, which is 140 days. Once the pregnancy passes 12 weeks, two registered medical practitioners must agree. The **mifepristone followed by misoprostol** regimen is restricted to 9 weeks, or 63 days. Key **contraindications** include haemoglobin below 8 grams, suspected **ectopic pregnancy**, glaucoma and uncontrolled hypertension.",
+   "say": "Medical termination under the MTP legislation is permitted up to 20 weeks, which is 140 days. Once the pregnancy passes 12 weeks, two registered medical practitioners must agree. The mifepristone followed by misoprostol regimen is restricted to 9 weeks, or 63 days. Key contraindications include haemoglobin below 8 grams, suspected ectopic pregnancy, glaucoma and uncontrolled hypertension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Up to 9 weeks",
+      "sub": "Drug regimen available"
+     },
+     {
+      "id": "b",
+      "label": "9 to 12 weeks",
+      "sub": "Procedure options widen"
+     },
+     {
+      "id": "c",
+      "label": "12 to 20 weeks",
+      "sub": "Needs two doctors"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "Pregnancy progresses"
+     ],
+     [
+      "b",
+      "c",
+      "Two doctors must agree"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Manual vacuum aspiration** and suction evacuation are the commonest surgical methods. Suction is routinely used up to 12 weeks with a Karman cannula, and can be extended to 15 weeks with ovum forceps. Suction pressure is raised to 400 to 600 mm Hg after the cannula is placed. Uterine perforation is the most dangerous complication, though rare.",
+   "say": "Manual vacuum aspiration and suction evacuation are the commonest surgical methods. Suction is routinely used up to 12 weeks with a Karman cannula, and can be extended to 15 weeks with ovum forceps. Suction pressure is raised to 400 to 600 millimetres of mercury after the cannula is placed. Uterine perforation is the most dangerous complication, though rare.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ea0e091c-8a6d-4b13-b9bb-9f7b2f8d8abb",
+  "a5e3e689-91ce-416c-bb78-2b72a072d546",
+  "c8ec5fc7-ee07-4cdd-97e7-482ca71c931c"
+ ],
+ "src": [],
+ "refs": [
+  "Dutta's Textbook of Obstetrics",
+  "Williams Obstetrics",
+  "Medical Termination of Pregnancy Act 2021",
+  "ACOG Practice Bulletin on antiphospholipid syndrome"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 221
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "module": "phm-metabolism-excretion",
+ "subject": "pharmacology",
+ "title": "Drug metabolism and excretion: enzymes, interactions and renal clearance",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Most drugs are **xenobiotics**, foreign molecules the body tries to remove. Kidneys excrete polar, water soluble compounds best, so lipophilic drugs must first be biotransformed. Biotransformation happens mainly in the liver and occurs in two phases. Phase I reactions add or unmask polar groups, while phase II reactions attach a conjugate such as glucuronic acid, sulfate or an acetyl group. Phase II products are usually inactive.",
+   "say": "Most drugs are xenobiotics, foreign molecules that the body tries to remove. Kidneys excrete polar, water soluble compounds best, so lipophilic drugs must first be biotransformed. Biotransformation happens mainly in the liver and occurs in two phases. Phase I reactions add or unmask polar groups, while phase II reactions attach a conjugate such as glucuronic acid, sulfate or an acetyl group. Phase II products are usually inactive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Phase I",
+     "Phase II"
+    ],
+    "rows": [
+     [
+      "Main reactions",
+      "Oxidation, reduction, hydrolysis",
+      "Glucuronidation, acetylation, methylation, sulfation"
+     ],
+     [
+      "Effect on polarity",
+      "Adds or unmasks polar group",
+      "Attaches a polar conjugate"
+     ],
+     [
+      "Activity of product",
+      "Can activate or inactivate",
+      "Usually inactive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Enzyme inducers** such as rifampicin, phenytoin, carbamazepine, phenobarbitone and chronic alcohol speed up drug metabolism and can cause treatment failure. Examples include warfarin losing effect, and rifampicin making oral contraceptives fail. Cimetidine, ketoconazole, ciprofloxacin and erythromycin act as **enzyme inhibitors**, raising levels of drugs such as warfarin and theophylline. Acute ritonavir inhibits, while chronic use induces.",
+   "say": "Enzyme inducers such as rifampicin, phenytoin, carbamazepine, phenobarbitone and chronic alcohol speed up drug metabolism and can cause treatment failure. Examples include warfarin losing effect, and rifampicin making oral contraceptives fail. Cimetidine, ketoconazole, ciprofloxacin and erythromycin act as enzyme inhibitors, raising levels of drugs such as warfarin and theophylline. Acute ritonavir inhibits, while chronic use induces.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Effect",
+     "Examples",
+     "Clinical consequence"
+    ],
+    "rows": [
+     [
+      "Induction",
+      "Rifampicin, phenytoin, carbamazepine",
+      "Lower warfarin effect, contraceptive failure"
+     ],
+     [
+      "Inhibition",
+      "Cimetidine, ciprofloxacin, ketoconazole",
+      "Higher warfarin and theophylline levels"
+     ],
+     [
+      "Dual pattern",
+      "Ritonavir",
+      "Inhibits acutely, induces chronically"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal excretion depends on **glomerular filtration**, tubular reabsorption and **tubular secretion**. Only unbound drug is filtered, so plasma protein binding matters. Lipid soluble drugs are reabsorbed, while ionised drugs are retained in the lumen and excreted. Probenecid blocks tubular secretion of penicillins, cephalosporins, methotrexate and sulfonamides, so it can be paired with penicillin to prolong its action. Forced alkaline diuresis helps clear barbiturates and salicylates, and urinary alkalinisation protects against methotrexate toxicity.",
+   "say": "Renal excretion depends on glomerular filtration, tubular reabsorption and tubular secretion. Only unbound drug is filtered, so plasma protein binding matters. Lipid soluble drugs are reabsorbed, while ionised drugs are retained in the lumen and excreted. Probenecid blocks tubular secretion of penicillins, cephalosporins, methotrexate and sulfonamides, so it can be paired with penicillin to prolong its action. Forced alkaline diuresis helps clear barbiturates and salicylates, and urinary alkalinisation protects against methotrexate toxicity.",
+   "vis": null
+  },
+  {
+   "tx": "Exam tip: **CYP2C19** metabolises clopidogrel and omeprazole, so these interact. Phenobarbitone increases warfarin metabolism, and warfarin doses may need to rise by about 30 to 60 percent while on a barbiturate. Cimetidine raises warfarin levels and is therefore a common answer for bleeding risk, whereas carbamazepine lowers it. Know which drugs induce and which inhibit.",
+   "say": "Exam tip: CYP2C19 metabolises clopidogrel and omeprazole, so these interact. Phenobarbitone increases warfarin metabolism, and warfarin doses may need to rise by about 30 to 60 percent while on a barbiturate. Cimetidine raises warfarin levels and is therefore a common answer for bleeding risk, whereas carbamazepine lowers it. Know which drugs induce and which inhibit.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "e17373cf-39c2-45db-bdfa-e5a348d4b6b0",
+  "16ce83be-9bdd-4265-9a0f-f3c19df759d3",
+  "65296304-abf6-4f35-9bf8-793f450df172"
+ ],
+ "src": [],
+ "refs": [
+  "Tripathi KD, Essentials of Medical Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 255
+ }
+}

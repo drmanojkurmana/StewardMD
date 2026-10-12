@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "snp-viral-kidney-disease",
+ "subject": "ss-nephrology",
+ "title": "HIV and viral hepatitis-associated kidney disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**HIV-associated nephropathy** (HIVAN) is a collapsing variant of **focal segmental glomerulosclerosis** that occurs mostly in people of African ancestry carrying high-risk **APOL1** variants. Patients typically present with heavy proteinuria and a sharp fall in glomerular filtration. Biopsy reveals collapsing lesions, podocyte hyperplasia and **microcystic tubular dilatation**. Without treatment the disease advances rapidly towards end-stage kidney failure, so prompt antiretroviral therapy is the cornerstone of care.",
+   "say": "HIV associated nephropathy, known as HIVAN, is a collapsing form of focal segmental glomerulosclerosis. It occurs mostly in people of African ancestry who carry high risk APOL1 variants. Patients usually present with heavy proteinuria and a sharp fall in filtration. Biopsy shows collapsing lesions, podocyte hyperplasia and microcystic tubular dilatation. Without treatment it advances quickly to end stage kidney failure, so early antiretroviral therapy is the cornerstone of care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "HIVAN",
+     "HIV immune complex kidney"
+    ],
+    "rows": [
+     [
+      "Typical lesion",
+      "Collapsing FSGS",
+      "Immune complex glomerulonephritis"
+     ],
+     [
+      "Genetic link",
+      "Strong with APOL1",
+      "Weak or absent"
+     ],
+     [
+      "Immune status",
+      "Usually severely impaired",
+      "Often better preserved"
+     ],
+     [
+      "Response to ART",
+      "Good if started early",
+      "Variable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HIV immune complex kidney disease** (HIVICK) is an immune complex glomerulonephritis that can show **membranoproliferative** or **membranous** patterns. It may appear at any stage of HIV infection, regardless of immune status. Unlike HIV-associated nephropathy, it is not closely tied to APOL1 risk variants. Immunofluorescence typically reveals granular deposits. Management pairs antiretroviral therapy with **renin-angiotensin blockade** to reduce proteinuria.",
+   "say": "HIV immune complex kidney disease, known as HIVICK, is an immune complex glomerulonephritis. It can show membranoproliferative or membranous patterns and may appear at any stage of HIV infection. Unlike HIV-associated nephropathy, it is not closely linked to APOL1 risk variants. Immunofluorescence typically shows granular deposits. Management pairs antiretroviral therapy with renin angiotensin blockade to reduce proteinuria.",
+   "vis": null
+  },
+  {
+   "tx": "**Tenofovir disoproxil fumarate** (TDF) can injure the proximal tubule, causing Fanconi-type syndrome with phosphaturia, glycosuria, and low phosphate. Risk rises with older age, low body weight, pre-existing kidney disease and co-prescribed nephrotoxins. Switching to tenofovir alafenamide (TAF), which gives lower plasma levels, is a common step. Monitor serum creatinine, phosphate and urinalysis regularly.",
+   "say": "Tenofovir disoproxil fumarate, called TDF, can injure the proximal tubule. This causes a Fanconi type syndrome with phosphaturia, glycosuria, and low phosphate. Risk rises with older age, low body weight, existing kidney disease, and co-prescribed nephrotoxins. Switching to tenofovir alafenamide, called TAF, which gives lower plasma levels, is a common step. Monitor creatinine, phosphate and urinalysis regularly.",
+   "vis": null
+  },
+  {
+   "tx": "**Hepatitis B** causes membranous nephropathy, typically with subepithelial immune deposits and a nephrotic presentation. Polyarteritis nodosa, a necrotising medium-vessel vasculitis, is also linked to HBV and can cause renal infarcts and hypertension. Antiviral therapy such as entecavir or tenofovir is used alongside immunosuppression where indicated, and the underlying viral load should guide decisions.",
+   "say": "Hepatitis B causes membranous nephropathy, typically with subepithelial immune deposits and a nephrotic presentation. Polyarteritis nodosa, a necrotising medium vessel vasculitis, is also linked to hepatitis B. It can cause renal infarcts and hypertension. Antiviral therapy such as entecavir or tenofovir is used alongside immunosuppression where indicated, and viral load should guide decisions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HBV infection"
+     },
+     {
+      "id": "b",
+      "label": "Immune complex deposition"
+     },
+     {
+      "id": "c",
+      "label": "Membranous nephropathy"
+     },
+     {
+      "id": "d",
+      "label": "Antiviral therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "treat virus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hepatitis C** is the classic cause of **cryoglobulinemia**, with mixed cryoglobulins producing membranoproliferative glomerulonephritis, purpura, arthralgia and weakness. Hepatitis C also links to membranoproliferative patterns without cryoglobulins. Direct-acting antivirals (DAAs) clear the virus and can improve renal disease. DAAs need dose review in CKD because some agents are contraindicated at low GFR, so check the product guidance.",
+   "say": "Hepatitis C is the classic cause of cryoglobulinemia. Mixed cryoglobulins produce membranoproliferative glomerulonephritis, with purpura, arthralgia and weakness. Direct acting antivirals clear the virus and can improve renal disease. Some agents need dose review in chronic kidney disease, so check product guidance before prescribing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cryoglobulinemia link",
+     "points": [
+      "Mixed cryoglobulins",
+      "Membranoproliferative pattern",
+      "Purpura and arthralgia"
+     ]
+    },
+    "right": {
+     "title": "Management points",
+     "points": [
+      "Clear virus with DAAs",
+      "Check dosing at low GFR",
+      "Treat underlying vasculitis"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_09351a5f3911",
+  "q_3b7f6d147477",
+  "q_b2609cc32209"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for Glomerular Diseases"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

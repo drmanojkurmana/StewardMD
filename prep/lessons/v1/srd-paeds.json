@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "module": "srd-paeds",
+ "subject": "ss-radiology",
+ "title": "Paediatric radiology: high-yield essentials for NEET-PG and INI-CET",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Malrotation with **midgut volvulus** is a surgical emergency. Normal embryological rotation fails, so the duodenojejunal junction lies to the right of the midline and the caecum is abnormally placed. The bowel can twist around the **superior mesenteric artery**, causing obstruction and ischaemia. Bilious vomiting in a newborn is the classic presentation. A single bubble with distal gas on plain film prompts an upper GI series, where a corkscrew pattern of duodenum and jejunum confirms volvulus.",
+   "say": "Malrotation with midgut volvulus is a surgical emergency. Normal embryological rotation fails, so the duodenojejunal junction lies to the right of the midline and the caecum is abnormally placed. The bowel can twist around the superior mesenteric artery, causing obstruction and ischaemia. Bilious vomiting in a newborn is the classic presentation. A single bubble with distal gas on plain film prompts an upper GI series, where a corkscrew pattern of duodenum and jejunum confirms volvulus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Failed rotation"
+     },
+     {
+      "id": "b",
+      "label": "Bowel twists on SMA"
+     },
+     {
+      "id": "c",
+      "label": "Bilious vomiting"
+     },
+     {
+      "id": "d",
+      "label": "Upper GI series"
+     },
+     {
+      "id": "e",
+      "label": "Corkscrew sign: surgery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intussusception** is the commonest cause of intestinal obstruction in infants aged roughly 6 to 36 months. Ultrasound shows a **target sign** on transverse views, and a lead point such as a Meckel diverticulum or duplication cyst should be sought in older children. Ultrasound-guided hydrostatic or pneumatic reduction is first-line when the child is stable. Surgical exploration is reserved for failed reduction, peritonitis or suspected lead point.",
+   "say": "Intussusception is the commonest cause of intestinal obstruction in infants aged roughly six to thirty six months. Ultrasound shows a target sign on transverse views, and a lead point such as a Meckel diverticulum or duplication cyst should be sought in older children. Ultrasound guided hydrostatic or pneumatic reduction is first line when the child is stable. Surgical exploration is reserved for failed reduction, peritonitis or a suspected lead point.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Age peak",
+      "Infants, about 6 to 36 months"
+     ],
+     [
+      "Ultrasound sign",
+      "Target sign, transverse view"
+     ],
+     [
+      "Older child",
+      "Look for a lead point"
+     ],
+     [
+      "Reduction",
+      "Hydrostatic or pneumatic, if stable"
+     ],
+     [
+      "Failed reduction",
+      "Proceed to surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Wilms tumour** is the commonest renal malignancy of childhood, usually presenting between 1 and 5 years. It is typically a large, heterogeneous renal mass. **Nephroblastomatosis** is a precursor state with multiple nephrogenic rests and is seen as homogeneous, rind-like lesions that enhance less than normal kidney. Multilocular cystic nephroma, sometimes called the Michael Jackson tumour, shows non-communicating cysts with septal enhancement.",
+   "say": "Wilms tumour is the commonest renal malignancy of childhood, usually presenting between one and five years. It is typically a large, heterogeneous renal mass. Nephroblastomatosis is a precursor state with multiple nephrogenic rests, seen as homogeneous, rind like lesions that enhance less than normal kidney. Multilocular cystic nephroma, sometimes called the Michael Jackson tumour, shows non communicating cysts with septal enhancement.",
+   "vis": null
+  },
+  {
+   "tx": "**Tuberous sclerosis** is an autosomal dominant disorder with cortical tubers, subependymal nodules and renal angiomyolipomas. Angiomyolipomas contain fat, so they are identified on CT or MRI by fat density or signal. Cardiac rhabdomyomas are common in infancy. Non-accidental injury should be considered in any child with multiple fractures of differing ages, and a skeletal survey is the first imaging step, with CT or MRI of the head where indicated.",
+   "say": "Tuberous sclerosis is an autosomal dominant disorder with cortical tubers, subependymal nodules and renal angiomyolipomas. Angiomyolipomas contain fat, so they are identified on CT or MRI by fat density or signal. Cardiac rhabdomyomas are common in infancy. Non accidental injury should be considered in any child with multiple fractures of differing ages, and a skeletal survey is the first imaging step.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "rad-midgut-volvulus",
+  "ct-18866ef987ec",
+  "ct-22b69f2a0970"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 176
+ }
+}

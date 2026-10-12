@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "sbs-regression-survival",
+ "subject": "ss-biostatistics",
+ "title": "Correlation, regression and survival analysis: high-yield essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Pearson correlation** measures the strength and direction of a linear relationship between two continuous variables, such as test scores. The coefficient r ranges from minus 1 to plus 1. Values near zero mean little linear association. **Spearman rank correlation** is the choice when data are ordinal or ranked, such as treatments ordered by effectiveness, because it works on ranks rather than raw values. Correlation describes association only and never proves cause.",
+   "say": "Pearson correlation measures the strength and direction of a linear relationship between two continuous variables, such as test scores. The coefficient r ranges from minus 1 to plus 1. Values near zero mean little linear association. Spearman rank correlation is the choice when data are ordinal or ranked, such as treatments ordered by effectiveness, because it works on ranks rather than raw values. Correlation describes association only and never proves cause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Data type",
+     "Measure"
+    ],
+    "rows": [
+     [
+      "Pearson",
+      "Continuous, linear",
+      "r"
+     ],
+     [
+      "Spearman",
+      "Ordinal or ranked",
+      "rho"
+     ],
+     [
+      "Linear regression",
+      "Continuous outcome",
+      "Slope and r squared"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Multivariable regression models quantify how several predictors relate to an outcome at once. For a **continuous outcome**, such as blood pressure, multivariable linear regression is used. For a **binary outcome**, logistic regression is used and its effect size is the **adjusted odds ratio**, which accounts for other covariates. An odds ratio above 1 signals higher odds of the outcome, and below 1 signals lower odds.",
+   "say": "Multivariable regression models quantify how several predictors relate to an outcome at once. For a continuous outcome, such as blood pressure, multivariable linear regression is used. For a binary outcome, logistic regression is used and its effect size is the adjusted odds ratio, which accounts for other covariates. An odds ratio above 1 signals higher odds of the outcome, and below 1 signals lower odds.",
+   "vis": null
+  },
+  {
+   "tx": "Survival data include **censored** observations, patients who are lost to follow-up or still event-free when the study ends. They are kept in the analysis up to their last contact, not excluded and not counted as events. The **Kaplan-Meier** method estimates survival step by step at each event time and needs no pre-fixed intervals, unlike actuarial life tables. Its median survival is most reliable when most patients have reached the endpoint.",
+   "say": "Survival data include censored observations, patients who are lost to follow-up or still event-free when the study ends. They are kept in the analysis up to their last contact, not excluded and not counted as events. The Kaplan-Meier method estimates survival step by step at each event time and needs no pre-fixed intervals, unlike actuarial life tables. Its median survival is most reliable when most patients have reached the endpoint.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Patient enrolled"
+     },
+     {
+      "id": "b",
+      "label": "Event or censored"
+     },
+     {
+      "id": "c",
+      "label": "Step drop at event"
+     },
+     {
+      "id": "d",
+      "label": "Tick at censoring"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "event"
+     ],
+     [
+      "b",
+      "d",
+      "censored"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **log-rank test** compares survival curves between two or more groups, asking whether the differences are unlikely to be due to chance. The **Cox proportional hazards model** handles several covariates at once, such as age, smoking and blood pressure, giving an adjusted estimate. The **hazard ratio** compares the instantaneous event rate between groups. A hazard ratio below one suggests lower risk, while one above one suggests higher risk. The key assumption is **proportional hazards**, meaning the ratio stays roughly constant over follow-up.",
+   "say": "The log-rank test compares survival curves between two or more groups, asking whether the differences are unlikely to be due to chance. The Cox proportional hazards model handles several covariates at once, such as age, smoking and blood pressure, giving an adjusted estimate. The hazard ratio compares the instantaneous event rate between groups. A hazard ratio below one suggests lower risk, while one above one suggests higher risk. The key assumption is proportional hazards, meaning the ratio stays roughly constant over follow-up.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Result",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Hazard ratio below one",
+      "Reduced instantaneous event risk"
+     ],
+     [
+      "Hazard ratio equal to one",
+      "No difference between groups"
+     ],
+     [
+      "Hazard ratio above one",
+      "Increased instantaneous event risk"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_450a187bbac8",
+  "q_6ffa3863d3ce",
+  "q_cfa902d9c360"
+ ],
+ "src": [],
+ "refs": [
+  "Kirkwood B, Sterne J. Essential Medical Statistics. Blackwell Science."
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 17
+ }
+}

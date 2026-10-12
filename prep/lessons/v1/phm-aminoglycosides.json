@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "phm-aminoglycosides",
+ "subject": "pharmacology",
+ "title": "Aminoglycosides: mechanism, toxicity and key clinical rules",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Aminoglycosides are **bactericidal** drugs that bind the 30S ribosomal subunit and block the formation of the initiation complex, so faulty proteins are made. They are poorly absorbed orally, do not cross the blood brain barrier well, and are cleared almost entirely by glomerular filtration unchanged in urine. Their uptake into bacteria depends on oxygen-dependent transport, so they are inactive against anaerobes.",
+   "say": "Aminoglycosides are bactericidal drugs. They bind the 30S ribosomal subunit and block formation of the initiation complex, so faulty proteins are made. They are poorly absorbed by mouth, do not cross the blood brain barrier well, and are cleared almost entirely by glomerular filtration, unchanged in urine. Their uptake into bacteria depends on oxygen, so they are inactive against anaerobes.",
+   "vis": null
+  },
+  {
+   "tx": "Aminoglycosides show **concentration-dependent killing** and a **post-antibiotic effect**, so they are given as a single daily dose. Beta lactams and vancomycin instead show time-dependent killing. Resistance mostly arises from **inactivating enzymes** such as transferases that acylate, phosphorylate or adenylylate the drug.",
+   "say": "Aminoglycosides show concentration-dependent killing and a post-antibiotic effect, so they are given as a single daily dose. Beta lactams and vancomycin, by contrast, kill in a time-dependent way. Resistance mostly arises from inactivating enzymes, such as transferases that acylate, phosphorylate or adenylylate the drug.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Concentration-dependent",
+     "points": [
+      "Aminoglycosides",
+      "Fluoroquinolones",
+      "Metronidazole"
+     ]
+    },
+    "right": {
+     "title": "Time-dependent",
+     "points": [
+      "Beta lactams",
+      "Vancomycin",
+      "Keep levels above MIC"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Aminoglycosides cause **neuromuscular blockade** by reducing acetylcholine release and lowering end plate sensitivity, so they are dangerous in **myasthenia gravis**. They also potentiate competitive neuromuscular blockers. In pregnancy they should be avoided, since they can damage the fetal eighth nerve. Ear drops are contraindicated with a perforated eardrum.",
+   "say": "Aminoglycosides cause neuromuscular blockade by reducing acetylcholine release and lowering end plate sensitivity, so they are dangerous in myasthenia gravis. They also potentiate competitive neuromuscular blockers. In pregnancy they should be avoided, since they can damage the fetal eighth nerve. Ear drops are contraindicated when the eardrum is perforated.",
+   "vis": null
+  },
+  {
+   "tx": "Renal dosing matters because aminoglycosides accumulate when the glomerular filtration rate falls. In **renal impairment** the dose should be reduced or the interval extended, and levels monitored. Audiometry and renal function should be checked during amikacin or streptomycin therapy. Serum creatinine above 3 times the upper limit of normal is a relative contraindication to certain regimens.",
+   "say": "Renal dosing matters because aminoglycosides accumulate when the glomerular filtration rate falls. In renal impairment the dose should be reduced or the interval extended, and levels monitored. Audiometry and renal function should be checked during amikacin or streptomycin therapy. Serum creatinine above three times the upper limit of normal is a relative contraindication to certain regimens.",
+   "vis": null
+  },
+  {
+   "tx": "Aminoglycosides are **bactericidal** but are used clinically for aerobic Gram negative infections, often combined with a beta lactam for synergy in serious infections such as **enterococcal endocarditis** with ampicillin. They are not used for enteric fever, where fluoroquinolones, azithromycin or third generation cephalosporins are preferred. Streptomycin remains a core tuberculosis drug, but its use needs drug susceptibility testing.",
+   "say": "Aminoglycosides are bactericidal but are used clinically for aerobic Gram negative infections. They are often combined with a beta lactam for synergy in serious infections such as enterococcal endocarditis with ampicillin. They are not used for enteric fever, where fluoroquinolones, azithromycin or third generation cephalosporins are preferred. Streptomycin remains a core tuberculosis drug, but its use needs drug susceptibility testing.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "082dd8c4-4f49-411f-8cc2-f8689d16dc4e",
+  "6c6f8d46-ded7-4238-9e4c-580f2303397d",
+  "afcdb0c2-ef8e-4e31-8330-ca14ca6f3970"
+ ],
+ "src": [
+  "kb-treatments-tb-dr-regimens"
+ ],
+ "refs": [
+  "Essentials of Medical Pharmacology (K.D. Tripathi)",
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 342,
+  "itemN": 136
+ }
+}

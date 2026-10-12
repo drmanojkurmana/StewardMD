@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "module": "pat-acute-inflammation",
+ "subject": "pathology",
+ "title": "Acute inflammation and leukocyte events",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Acute inflammation is the early, rapid response of vascularised tissue to injury. Classic signs, first listed by Celsus, are rubor, tumor, calor and dolor. Virchow added loss of function. Redness and heat arise mainly from **arteriolar vasodilation**, which opens new capillary beds. Fluid leak from venules causes swelling.",
+   "say": "Acute inflammation is the early, rapid response of vascularised tissue to injury. The classic signs, first listed by Celsus, are rubor, tumor, calor and dolor, meaning redness, swelling, heat and pain. Virchow later added loss of function. Redness and heat arise mainly from arteriolar vasodilation, which opens new capillary beds. Fluid leak from venules causes the swelling.",
+   "vis": null
+  },
+  {
+   "tx": "Leukocytes leave the circulation in a fixed sequence. First comes **margination**, where cells line the vessel periphery. Then **rolling** occurs, with loose, transient adhesion mediated by selectins. Firm **adhesion** follows through integrins, then **diapedesis** carries cells through the endothelial gap, mostly in postcapillary venules. Finally, **chemotaxis** guides them along a gradient.",
+   "say": "Leukocytes leave the circulation in a fixed sequence. First comes margination, where cells line the vessel periphery. Then rolling occurs, with loose, transient adhesion mediated by selectins. Firm adhesion follows through integrins, then diapedesis carries cells through the endothelial gap, mostly in postcapillary venules. Finally, chemotaxis guides them along a chemical gradient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Key molecules",
+     "Site or role"
+    ],
+    "rows": [
+     [
+      "Margination",
+      "Cell crowding at wall",
+      "Slow flow, peripheral cells"
+     ],
+     [
+      "Rolling",
+      "P and E selectins, sialyl Lewis X",
+      "Transient tethering"
+     ],
+     [
+      "Adhesion",
+      "ICAM-1, VCAM-1, LFA-1, VLA-4",
+      "Firm arrest"
+     ],
+     [
+      "Diapedesis",
+      "PECAM-1 (CD31)",
+      "Transmigration"
+     ],
+     [
+      "Chemotaxis",
+      "C5a, LTB4, IL-8",
+      "Directed movement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adhesion molecules come in families. **Selectins** (L on leukocytes, E and P on endothelium) mediate rolling. **Integrins** on leukocytes, such as LFA-1 and Mac-1, bind ICAM-1 for firm adhesion. VCAM-1 binds VLA-4. **PECAM-1** (CD31) is the main molecule for diapedesis. Integrins are not chemoattractants; C5a, LTB4 and IL-8 are.",
+   "say": "Adhesion molecules come in families. Selectins, L on leukocytes and E and P on endothelium, mediate rolling. Integrins on leukocytes, such as LFA-1 and Mac-1, bind ICAM-1 for firm adhesion. VCAM-1 binds VLA-4. PECAM-1, also called CD31, is the main molecule for diapedesis. Integrins are not chemoattractants; C5a, LTB4 and IL-8 are.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rolling and adhesion",
+     "points": [
+      "Selectins mediate rolling",
+      "E and P selectin bind sialyl Lewis X",
+      "ICAM-1 binds LFA-1 and Mac-1",
+      "VCAM-1 binds VLA-4"
+     ]
+    },
+    "right": {
+     "title": "Diapedesis and chemotaxis",
+     "points": [
+      "PECAM-1 drives transmigration",
+      "C5a is the most potent chemoattractant",
+      "LTB4 and IL-8 attract neutrophils",
+      "Integrins are not chemoattractants"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Killing begins with **phagocytosis**: recognition, engulfment and killing. Opsonins such as IgG and C3b enhance recognition. Within the phagolysosome, the **NADPH oxidase** respiratory burst generates reactive oxygen species. The most efficient bactericidal system is the **H2O2-myeloperoxidase-halide** system, which forms hypochlorous acid. Patients lacking myeloperoxidase have recurrent infections.",
+   "say": "Killing begins with phagocytosis, which has three steps: recognition, engulfment and killing. Opsonins such as IgG and C3b enhance recognition. Within the phagolysosome, the NADPH oxidase respiratory burst generates reactive oxygen species. The most efficient bactericidal system is the H2O2, myeloperoxidase and halide system, which forms hypochlorous acid. Patients lacking myeloperoxidase have recurrent infections.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Recognition"
+     },
+     {
+      "id": "b",
+      "label": "Engulfment"
+     },
+     {
+      "id": "c",
+      "label": "Phagolysosome"
+     },
+     {
+      "id": "d",
+      "label": "NADPH oxidase burst"
+     },
+     {
+      "id": "e",
+      "label": "MPO-halide kill"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chediak-Higashi syndrome** is autosomal recessive, caused by a LYST gene mutation. Lysosomal trafficking is impaired, so phagolysosomes fail to form and bacteria are not killed. Giant granules also affect melanosomes, causing oculocutaneous albinism, platelet bleeding disorders and neuropathy. **Leukocyte adhesion deficiency** (LAD-1) is a beta-2 integrin defect; umbilical cord separation is delayed there, normally within one week.",
+   "say": "Chediak-Higashi syndrome is autosomal recessive, caused by a LYST gene mutation. Lysosomal trafficking is impaired, so phagolysosomes fail to form and bacteria are not killed. Giant granules also affect melanosomes, causing oculocutaneous albinism, platelet bleeding disorders and neuropathy. Leukocyte adhesion deficiency, type 1, is a beta-2 integrin defect, and umbilical cord separation is delayed there; normally the cord separates within one week.",
+   "vis": null
+  },
+  {
+   "tx": "Exudate is protein-rich fluid with cells, typically from increased permeability, and has high specific gravity. Transudate is low-protein fluid from raised hydrostatic pressure or low oncotic pressure. **Serous** inflammation releases watery fluid, **fibrinous** inflammation deposits fibrin, and **suppurative** inflammation produces pus. A focal collection of pus within tissue is an **abscess**, classically caused by Staphylococci.",
+   "say": "Exudate is protein-rich fluid with cells, typically from increased permeability. Transudate is low-protein fluid from raised hydrostatic pressure or low oncotic pressure. Serous inflammation releases watery fluid, fibrinous inflammation deposits fibrin, and suppurative inflammation produces pus. A focal collection of pus within tissue is an abscess, classically caused by Staphylococci.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Feature",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Exudate",
+      "Protein-rich, cellular",
+      "Permeability injury"
+     ],
+     [
+      "Transudate",
+      "Low protein",
+      "Raised hydrostatic pressure"
+     ],
+     [
+      "Serous",
+      "Watery fluid",
+      "Blisters, serous effusions"
+     ],
+     [
+      "Fibrinous",
+      "Fibrin deposits",
+      "Pericarditis"
+     ],
+     [
+      "Suppurative",
+      "Pus",
+      "Abscess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cells differ by phase. **Neutrophils** dominate the first 6 to 24 hours and persist up to 72 hours, after which **macrophages** take over because they can regenerate lysosomal enzymes. Pseudomonas infection keeps neutrophils dominant for days, viral infection brings lymphocytes first, and eosinophils mark some hypersensitivity reactions. Granuloma formation belongs to chronic, not acute, inflammation.",
+   "say": "Cells differ by phase. Neutrophils dominate the first 6 to 24 hours and persist up to 72 hours, after which macrophages take over because they can regenerate lysosomal enzymes. Pseudomonas infection keeps neutrophils dominant for days, viral infection brings lymphocytes first, and eosinophils mark some hypersensitivity reactions. Granuloma formation belongs to chronic, not acute, inflammation.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "24e9fd56-34ba-4c7f-9433-f614a3c778f7",
+  "8dde9b32-c47d-422e-9720-57c03d99d65c",
+  "6eb50a52-7932-470a-94db-040752c470e6"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology",
+  "Harshmohan Textbook of Pathology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 361
+ }
+}

@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "ana-female-reproductive",
+ "subject": "anatomy",
+ "title": "Female reproductive organs: uterus, supports, ovary, tube, vagina and lymphatics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **uterus** is a pear-shaped muscular organ lying between the bladder in front and the rectum behind. Its cervix protrudes into the vagina. The uterus is normally anteverted, meaning tilted forward, and anteflexed, meaning the body bends forward on the cervix. Examiners often ask about the position of the uterus, so learn these two terms together.",
+   "say": "The uterus is a pear-shaped muscular organ lying between the bladder in front and the rectum behind. Its cervix protrudes into the vagina. The uterus is normally anteverted, meaning tilted forward, and anteflexed, meaning the body bends forward on the cervix. Examiners often ask about the position of the uterus, so learn these two terms together.",
+   "vis": null
+  },
+  {
+   "tx": "The **broad ligament** has three parts: the mesometrium, mesosalpinx and mesovarium. The **ovary** lies in the ovarian fossa on the lateral pelvic wall, bounded in front by the obliterated umbilical artery and behind by the ureter and internal iliac artery. The suspensory or infundibulopelvic ligament carries the ovarian vessels, and the ovarian artery crosses the ureter at the pelvic brim.",
+   "say": "The broad ligament has three parts: the mesometrium, mesosalpinx and mesovarium. The ovary lies in the ovarian fossa on the lateral pelvic wall, bounded in front by the obliterated umbilical artery and behind by the ureter and internal iliac artery. The suspensory or infundibulopelvic ligament carries the ovarian vessels, and the ovarian artery crosses the ureter at the pelvic brim.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ovarian artery",
+      "sub": "from aorta"
+     },
+     {
+      "id": "b",
+      "label": "Crosses ureter"
+     },
+     {
+      "id": "c",
+      "label": "Infundibulopelvic ligament"
+     },
+     {
+      "id": "d",
+      "label": "Ovary and tube"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **uterine artery** is a branch of the anterior division of the **internal iliac artery**. It lies near the ureter, which runs below and lateral to the cervix, about 1 cm from the supravaginal cervix. The ureter is the structure most at risk during hysterectomy ligation. Lymph from the cervix drains to external iliac, internal iliac and sacral nodes, while the fundus drains mainly to para-aortic nodes.",
+   "say": "The uterine artery is a branch of the anterior division of the internal iliac artery. It lies near the ureter, which runs below and lateral to the cervix, about 1 cm from the supravaginal cervix. The ureter is the structure most at risk during hysterectomy ligation. Lymph from the cervix drains to external iliac, internal iliac and sacral nodes, while the fundus drains mainly to para-aortic nodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Region",
+     "Lymph drains to"
+    ],
+    "rows": [
+     [
+      "Cervix",
+      "External iliac, internal iliac, sacral"
+     ],
+     [
+      "Lower body",
+      "External iliac"
+     ],
+     [
+      "Fundus and upper body",
+      "Para-aortic, some superficial inguinal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **fallopian tube** has four parts from lateral to medial: infundibulum, ampulla, isthmus and intramural part. The ampulla is the widest part and the usual site of fertilisation. The intramural part is the shortest and narrowest, so only a fine cannula passes during salpingostomy. The tube is lined by ciliated columnar epithelium with peg cells. Mullerian ducts form the tubes, uterus and vagina.",
+   "say": "The fallopian tube has four parts from lateral to medial: infundibulum, ampulla, isthmus and intramural part. The ampulla is the widest part and the usual site of fertilisation. The intramural part is the shortest and narrowest, so only a fine cannula passes during salpingostomy. The tube is lined by ciliated columnar epithelium with peg cells. Mullerian ducts form the tubes, uterus and vagina.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Infundibulum"
+     },
+     {
+      "id": "2",
+      "label": "Ampulla",
+      "sub": "fertilisation"
+     },
+     {
+      "id": "3",
+      "label": "Isthmus"
+     },
+     {
+      "id": "4",
+      "label": "Intramural part",
+      "sub": "narrowest"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ],
+     [
+      "3",
+      "4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **vagina** is a muscular tube lined by **stratified squamous epithelium** with no glands of its own. Its wall has no mucous glands, and secretions come from cervical mucus and transudation. The posterior wall is longer than the anterior. The **posterior fornix** is the largest recess and is the site for culdocentesis. Vaginal closure is aided by the pubovaginalis, bulbospongiosus and external urethral sphincter.",
+   "say": "The vagina is a muscular tube lined by stratified squamous epithelium with no glands of its own. Its wall has no mucous glands, and secretions come from cervical mucus and transudation. The posterior wall is longer than the anterior. The posterior fornix is the largest recess and is the site for culdocentesis. Vaginal closure is aided by the pubovaginalis, bulbospongiosus and external urethral sphincter.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vagina",
+     "points": [
+      "Stratified squamous lining",
+      "No glands",
+      "Posterior wall about 10 cm",
+      "Anterior wall about 8 cm"
+     ]
+    },
+    "right": {
+     "title": "Sphincters",
+     "points": [
+      "Pubovaginalis",
+      "Bulbospongiosus",
+      "External urethral sphincter",
+      "No internal urethral sphincter in females"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "0bfcc498-b61e-48fd-8347-dec6944abf9a",
+  "67981693-f8cd-4ef1-88f1-17f2bdb65dbc",
+  "6eb92364-6bae-46a7-a40b-7bb6a6168ae0"
+ ],
+ "src": [],
+ "refs": [
+  "Chaurasia's Human Anatomy Volume 2, Sixth Edition",
+  "Williams Obstetrics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 179
+ }
+}

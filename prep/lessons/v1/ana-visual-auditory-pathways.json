@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "ana-visual-auditory-pathways",
+ "subject": "anatomy",
+ "title": "Visual, auditory and autonomic pathways: high-yield anatomy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **optic tract** carries fibres from the temporal half of the ipsilateral retina and the nasal half of the contralateral retina. Nasal fibres cross at the **optic chiasma**, so each tract carries information from the opposite visual field. Lesions here produce incongruous homonymous field loss. The lateral geniculate body is the relay station for vision, and its fibres form the optic radiation.",
+   "say": "The optic tract carries fibres from the temporal half of the ipsilateral retina and the nasal half of the contralateral retina. Nasal fibres cross at the optic chiasma, so each tract carries information from the opposite visual field. Lesions here produce incongruous homonymous field loss. The lateral geniculate body is the relay station for vision, and its fibres form the optic radiation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion site",
+     "Field defect"
+    ],
+    "rows": [
+     [
+      "Optic nerve",
+      "Monocular blindness"
+     ],
+     [
+      "Optic chiasma",
+      "Bitemporal hemianopia"
+     ],
+     [
+      "Optic tract",
+      "Incongruous homonymous hemianopia"
+     ],
+     [
+      "Occipital cortex",
+      "Congruous homonymous hemianopia, macular sparing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Meyer loop** is formed by inferior fibres of the optic radiation that sweep forward into the temporal lobe before reaching the calcarine cortex. A temporal lobe lesion therefore damages these fibres and causes a contralateral upper quadrant defect, sometimes called pie in the sky. Parietal lesions affect the superior fibres (Baum loop), causing a lower quadrant defect.",
+   "say": "The Meyer loop is formed by inferior fibres of the optic radiation that sweep forward into the temporal lobe before reaching the calcarine cortex. A temporal lobe lesion therefore damages these fibres and causes a contralateral upper quadrant defect, sometimes called pie in the sky. Parietal lesions affect the superior fibres, known as Baum loop, causing a lower quadrant defect.",
+   "vis": null
+  },
+  {
+   "tx": "The **pupillary light reflex** uses the optic nerve as afferent and the oculomotor nerve, via the Edinger-Westphal nucleus, as efferent. The **accommodation reflex** needs convergence by the medial rectus, constriction by the sphincter pupillae, and lens thickening by the ciliary muscle. The lateral rectus is not involved. Argyll Robertson pupil shows loss of light reflex with preserved accommodation.",
+   "say": "The pupillary light reflex uses the optic nerve as afferent and the oculomotor nerve, via the Edinger-Westphal nucleus, as efferent. The accommodation reflex needs convergence by the medial rectus, constriction by the sphincter pupillae, and lens thickening by the ciliary muscle. The lateral rectus is not involved. Argyll Robertson pupil shows loss of light reflex with preserved accommodation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Light reflex",
+     "points": [
+      "Afferent: optic nerve",
+      "Efferent: oculomotor via Edinger-Westphal",
+      "Pretectal area relay",
+      "Constriction of both pupils"
+     ]
+    },
+    "right": {
+     "title": "Accommodation reflex",
+     "points": [
+      "Medial rectus converges eyes",
+      "Sphincter pupillae constricts pupil",
+      "Ciliary muscle thickens lens",
+      "Lateral rectus not involved"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **auditory pathway** runs from the spiral ganglion through the cochlear nuclei, where fibres cross at the trapezoid body, then the superior olivary nucleus, **lateral lemniscus**, **inferior colliculus** and **medial geniculate body** before reaching auditory cortex in areas 41 and 42 on the superior temporal gyrus. Mnemonic: SLIM. The medial lemniscus is a somatosensory tract, not auditory.",
+   "say": "The auditory pathway runs from the spiral ganglion through the cochlear nuclei, where fibres cross at the trapezoid body, then the superior olivary nucleus, lateral lemniscus, inferior colliculus and medial geniculate body before reaching auditory cortex in areas 41 and 42 on the superior temporal gyrus. The medial lemniscus is a somatosensory tract, not auditory.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cochlear nuclei"
+     },
+     {
+      "id": "b",
+      "label": "Superior olivary nucleus"
+     },
+     {
+      "id": "c",
+      "label": "Lateral lemniscus"
+     },
+     {
+      "id": "d",
+      "label": "Inferior colliculus"
+     },
+     {
+      "id": "e",
+      "label": "Medial geniculate body"
+     },
+     {
+      "id": "f",
+      "label": "Auditory cortex 41, 42"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **sympathetic outflow** is thoracolumbar, with preganglionic cell bodies in the intermediolateral column of the thoracic and upper lumbar spinal cord. The **parasympathetic outflow** is craniosacral, from cranial nerves III, VII, IX and X and sacral segments S2 to S4. Ciliary ganglion fibres in the oculomotor nerve supply the ciliary muscle and sphincter pupillae.",
+   "say": "The sympathetic outflow is thoracolumbar, with preganglionic cell bodies in the intermediolateral column of the thoracic and upper lumbar spinal cord. The parasympathetic outflow is craniosacral, from cranial nerves three, seven, nine and ten and sacral segments S2 to S4.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Sympathetic",
+     "Parasympathetic"
+    ],
+    "rows": [
+     [
+      "Outflow",
+      "Thoracolumbar",
+      "Craniosacral"
+     ],
+     [
+      "Preganglionic cell bodies",
+      "Thoracic and upper lumbar cord",
+      "Brainstem nuclei and S2 to S4"
+     ],
+     [
+      "Ganglia",
+      "Paravertebral and prevertebral",
+      "Near or within target organ"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "7fddd9b7-ceb2-4767-b094-43f2dcce16a0",
+  "695c36a7-50ba-4909-bec7-d04464191d89",
+  "d975e06b-ae34-42d2-bdb5-03f795b9db3c"
+ ],
+ "src": [],
+ "refs": [
+  "Gray's Anatomy for Students (Drake, Vogl, Mitchell)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

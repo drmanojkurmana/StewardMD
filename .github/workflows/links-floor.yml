@@ -1,0 +1,30 @@
+name: links-floor
+on:
+  schedule:
+    - cron: "23 2 * * 1"
+  workflow_dispatch: {}
+  pull_request:
+    paths:
+      - "tools/prep-links*.mjs"
+      - "tools/prep-qgen.mjs"
+      - "prep/bank/topic-links.json"
+      - "prep/bank/rematch-links.json"
+      - "prep/lessons/**"
+      - "prep/taxonomy.json"
+jobs:
+  gaps:
+    runs-on: ubuntu-latest
+    # Informational until every usable item has a target (LINKS-100-DONE.md tracks the remainder):
+    # the gaps step itself FAILS while unlinked > 0, but does not block the PR yet. Flip to blocking at 100%.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the links index over live bank text
+        run: |
+          node tools/prep-links.mjs fetch --cache /tmp/links-cache
+          node tools/prep-links.mjs build --cache /tmp/links-cache --out /tmp/links-out
+      - name: Fail while any usable item has no target
+        run: node tools/prep-links.mjs gaps --out /tmp/links-out --fail

@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "snp-haemodialysis-principles",
+ "subject": "ss-nephrology",
+ "title": "Haemodialysis principles and prescription",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Haemodialysis removes solutes and water through a **semipermeable membrane** placed between blood and dialysate. Small solutes such as urea and potassium move mainly by **diffusion**, from higher to lower concentration. Water removal is achieved by **ultrafiltration**, driven by a transmembrane hydrostatic pressure gradient. Convection moves solutes dissolved in the water being filtered, and it clears larger molecules better than diffusion does.",
+   "say": "Haemodialysis removes solutes and water through a semipermeable membrane placed between blood and dialysate. Small solutes such as urea and potassium move mainly by diffusion, from higher to lower concentration. Water removal is achieved by ultrafiltration, driven by a transmembrane hydrostatic pressure gradient. Convection moves solutes dissolved in the water being filtered, and it clears larger molecules better than diffusion does.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diffusion",
+     "points": [
+      "Driven by concentration gradient",
+      "Best for small solutes",
+      "Main mechanism in standard haemodialysis"
+     ]
+    },
+    "right": {
+     "title": "Convection and ultrafiltration",
+     "points": [
+      "Driven by hydrostatic pressure",
+      "Removes water and solutes together",
+      "Basis of haemodiafiltration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Adequacy of dialysis is judged by **Kt/V**, where K is the dialyzer urea clearance, t is the session time and V is the volume of urea distribution. Clinicians aim for a value that meets the locally agreed minimum per session. The **urea reduction ratio** (URR) is the proportional fall in blood urea across a session, and it offers a simpler bedside estimate. Low adequacy values are associated with poorer outcomes.",
+   "say": "Adequacy of dialysis is judged by Kt/V, where K is the dialyzer urea clearance, t is the session time and V is the volume of urea distribution. Clinicians aim for a value that meets the locally agreed minimum per session. The urea reduction ratio is the proportional fall in blood urea across a session, and it offers a simpler bedside estimate. Low adequacy values are associated with poorer outcomes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Meaning",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Kt/V",
+      "Urea dose relative to body water volume",
+      "Lower values linked to poorer outcomes"
+     ],
+     [
+      "URR",
+      "Proportional fall in blood urea across a session",
+      "Simple bedside estimate"
+     ],
+     [
+      "Blood pump flow",
+      "Rate at which blood passes the dialyzer",
+      "Set on the machine"
+     ],
+     [
+      "Dialysate flow",
+      "Rate at which fresh dialysate passes the other side",
+      "Usually counter-current"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dialyzer clearance is described by the **KoA** value, the mass transfer coefficient multiplied by membrane surface area. **High flux membranes** have larger pores and greater KoA, clearing middle molecules better. **Haemodiafiltration** adds convection, and the CONVINCE trial showed that high volume online haemodiafiltration reduced all-cause mortality versus high flux haemodialysis. Treat these as trial-based findings, not universal proof.",
+   "say": "Dialyzer clearance is described by the KoA value, the mass transfer coefficient multiplied by membrane surface area. High flux membranes have larger pores and greater KoA, clearing middle molecules better. Haemodiafiltration adds convection, and the CONVINCE trial showed that high volume online haemodiafiltration reduced all-cause mortality compared with high flux haemodialysis. These are trial-based findings, not universal proof.",
+   "vis": null
+  },
+  {
+   "tx": "Timing of initiation matters. The **IDEAL trial** found that starting dialysis early, at an eGFR of 10 to 14 mL/min/1.73 m2, did not improve survival or clinical outcomes compared with late start at 5 to 7. Current practice starts dialysis based on symptoms, complications and fluid overload rather than eGFR alone. Indian and US practice both follow this clinical approach. The **HEMO study** found that higher dose dialysis did not clearly improve mortality.",
+   "say": "Timing of initiation matters. The IDEAL trial found that starting dialysis early, at an eGFR of 10 to 14 millilitres per minute per 1.73 metres squared, did not improve survival or clinical outcomes compared with a late start at 5 to 7. Current practice starts dialysis based on symptoms, complications and fluid overload rather than eGFR alone. The HEMO study found that higher dose dialysis did not clearly improve mortality.",
+   "vis": null
+  },
+  {
+   "tx": "Dialysate must be carefully composed and the water **treated** before use. Water is purified by reverse osmosis to remove bacteria and endotoxins, because contaminated water drives chronic inflammation. Dialysate **sodium** is set close to the patient's plasma level, while potassium and calcium are adjusted individually. **Incremental dialysis**, starting with fewer sessions while residual renal function is preserved, is an option.",
+   "say": "Dialysate must be carefully composed and the water treated before use. Water is purified by reverse osmosis to remove bacteria and endotoxins, because contaminated water drives chronic inflammation. Dialysate sodium is set close to the patient's plasma level, while potassium and calcium are adjusted individually. Incremental dialysis, starting with fewer sessions while residual renal function is preserved, is an option.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Raw water"
+     },
+     {
+      "id": "b",
+      "label": "Reverse osmosis"
+     },
+     {
+      "id": "c",
+      "label": "Ultrapure water"
+     },
+     {
+      "id": "d",
+      "label": "Mix with concentrate"
+     },
+     {
+      "id": "e",
+      "label": "Dialysate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_33fcb5680285",
+  "q_bd9c8fa52e29",
+  "q_0aed0405f4d4"
+ ],
+ "src": [],
+ "refs": [
+  "KDOQI Clinical Practice Guideline for Hemodialysis Adequacy",
+  "IDEAL trial (Cooper et al., Lancet 2010)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 49
+ }
+}

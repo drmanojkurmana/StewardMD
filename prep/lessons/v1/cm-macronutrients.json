@@ -1,0 +1,157 @@
+{
+ "v": 1,
+ "module": "cm-macronutrients",
+ "subject": "community-medicine",
+ "title": "Proteins, fats, carbohydrates and energy requirements",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Protein quality is judged by several indices. **Biological value** measures the share of absorbed nitrogen the body retains. **Net protein utilisation** (NPU) multiplies digestibility by biological value, divided by 100. Egg has the highest value, with NPU taken as 100, and is the reference protein against which others are compared. Milk and egg are biologically complete proteins. Among these indices, DIAAS is now regarded as the best indicator of protein quality.",
+   "say": "Protein quality is judged by several indices. Biological value measures the share of absorbed nitrogen the body retains. Net protein utilisation multiplies digestibility by biological value, divided by 100. Egg has the highest value, with net protein utilisation taken as 100, and is the reference protein against which others are compared. Milk and egg are biologically complete proteins. DIAAS is now regarded as the best indicator of protein quality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Index",
+     "Meaning",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Biological value",
+      "Nitrogen retained as share of absorbed",
+      "Egg about 100"
+     ],
+     [
+      "NPU",
+      "Digestibility times biological value",
+      "Egg 100"
+     ],
+     [
+      "Amino acid score",
+      "Essential amino acids versus reference",
+      "Limiting amino acid lowers it"
+     ],
+     [
+      "PER",
+      "Weight gain per gram protein eaten",
+      "Used in growing animals"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pulses are called **poor man's meat**, yet they supply 20 to 25 per cent protein, about double wheat and three times rice. Their protein is poor in **methionine**, which is the limiting amino acid, but rich in lysine. Soyabean is exceptionally rich, with about 40 per cent protein. Germination and fermentation raise vitamin content. Among the pulses, soyabean is richest in iron, energy and protein.",
+   "say": "Pulses are called poor man's meat, yet they supply twenty to twenty five per cent protein, about double wheat and three times rice. Their protein is poor in methionine, the limiting amino acid, but rich in lysine. Soyabean is exceptionally rich, with about forty per cent protein. Germination and fermentation raise vitamin content. Among the pulses, soyabean is richest in iron, energy and protein.",
+   "vis": null
+  },
+  {
+   "tx": "Fats supply essential fatty acids. **Linoleic acid** is the most important, since it is the base for other essential fatty acids. Safflower oil has the highest linoleic content, followed by corn and sunflower oils. Groundnut oil has less linoleic acid and no omega-3 fatty acids, while coconut oil is very low in it. WHO/FAO advise that total fat be 20 to 30 per cent of energy, with saturated fat below 10 per cent and trans fats below 1 per cent.",
+   "say": "Fats supply essential fatty acids. Linoleic acid is the most important, since it is the base for other essential fatty acids. Safflower oil has the highest linoleic content, followed by corn and sunflower oils. Groundnut oil has less linoleic acid and no omega-3 fatty acids, while coconut oil is very low in it. WHO and FAO advise that total fat be twenty to thirty per cent of energy, with saturated fat below ten per cent and trans fats below one per cent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Omega-6 family",
+     "points": [
+      "Linoleic acid, first double bond at carbon 6",
+      "Safflower, corn, sunflower oils rich",
+      "Minimum about 2.5 per cent of energy"
+     ]
+    },
+    "right": {
+     "title": "Omega-3 family",
+     "points": [
+      "Alpha-linolenic acid, first double bond at carbon 3",
+      "Fish, mustard, soyabean, leafy vegetables",
+      "Minimum about 0.5 per cent of energy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **glycaemic index** ranks foods against glucose, which is set at 100. Low GI foods are 55 or less, medium GI is 56 to 69, and high GI is 70 or more. Basmati rice and sucrose are medium, while white bread is high. Energy need is set by activity: a sedentary adult woman needs about 1900 kcal a day, and pregnancy adds 350 kcal. Protein needs are about 1 gram per kg for adults.",
+   "say": "The glycaemic index ranks foods against glucose, which is set at one hundred. Low glycaemic index foods score fifty five or less, medium scores fifty six to sixty nine, and high scores seventy or more. Basmati rice and sucrose are medium, while white bread is high. Energy need is set by activity. A sedentary adult woman needs about nineteen hundred kilocalories a day, and pregnancy adds three hundred and fifty. Protein needs are about one gram per kilogram for adults.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "GI range",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Low",
+      "55 or less",
+      "Pulses, most fruit"
+     ],
+     [
+      "Medium",
+      "56 to 69",
+      "Basmati rice, sucrose"
+     ],
+     [
+      "High",
+      "70 or more",
+      "White bread, corn flakes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Recommended Dietary Allowance** meets the needs of 97 to 98 per cent of healthy people in an age and sex group. It equals the estimated average requirement plus two standard deviations. The **adequate intake** is used when no EAR exists. The **tolerable upper intake level** warns against harmful excess. Iron need in pregnancy is 35 mg a day, and calcium need is 1200 mg a day, as set by the US framework and the Indian reference values.",
+   "say": "The Recommended Dietary Allowance meets the needs of ninety seven to ninety eight per cent of healthy people in an age and sex group. It equals the estimated average requirement plus two standard deviations. The adequate intake is used when no average requirement exists. The tolerable upper intake level warns against harmful excess. Iron need in pregnancy is thirty five milligrams a day, and calcium need is twelve hundred milligrams a day.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "EAR"
+     },
+     {
+      "id": "b",
+      "label": "Add 2 SD"
+     },
+     {
+      "id": "c",
+      "label": "RDA covers 97 to 98%"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "732a3732-1da6-41ee-869c-c5c8ee5f8a78",
+  "56ad3cd7-ff9c-4082-b62b-e8ecdf873339",
+  "ae768e6a-d046-4b51-b79e-900fa8f3a469"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine",
+  "Dietary Reference Intakes, Institute of Medicine, US National Academy of Sciences",
+  "WHO/FAO Expert Group on Diet, Nutrition and Prevention of Chronic Diseases"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 310
+ }
+}

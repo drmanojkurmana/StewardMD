@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "ans-machine",
+ "subject": "anaesthesia",
+ "title": "Anaesthesia workstation and breathing systems",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **anaesthesia machine** delivers gases and vapours to the patient. Gas sources are the **high pressure system** (cylinders, yoke assembly) and the **intermediate pressure system** (pipeline supply, regulators, oxygen flush delivering roughly 30 to 75 litres per minute). The **low pressure system** begins after the flowmeters and vaporisers. Flowmeters are variable orifice meters, and the rotameter is the usual type. Oxygen is never allowed below 30 percent in routine general anaesthesia unless fire risk demands it.",
+   "say": "The anaesthesia machine delivers gases and vapours to the patient. Gas sources form the high pressure system, made of cylinders and the yoke assembly. The intermediate pressure system includes the pipeline supply, regulators and the oxygen flush, which delivers roughly 30 to 75 litres per minute. The low pressure system begins after the flowmeters and vaporisers. Flowmeters are variable orifice meters, and the rotameter is the usual type. Oxygen is never allowed below 30 percent in routine general anaesthesia unless fire risk demands it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Components",
+     "Pressure"
+    ],
+    "rows": [
+     [
+      "High",
+      "Cylinders, yoke assembly",
+      "Highest"
+     ],
+     [
+      "Intermediate",
+      "Pipeline, regulators, O2 flush",
+      "Reduced"
+     ],
+     [
+      "Low",
+      "Flowmeters, vaporisers",
+      "Near atmospheric"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Safety devices protect against hypoxic mixtures. The **oxygen failure alarm** sounds when oxygen pressure falls. The **hypoxic guard** links nitrous oxide flow to oxygen, so nitrous oxide cannot be given without enough oxygen. In the Indian and US setting, the oxygen control is placed downstream of the nitrous oxide valve, and a fail-safe valve sits downstream of the nitrous oxide supply. Pin index systems prevent wrong cylinder attachment but do not stop hypoxic delivery.",
+   "say": "Safety devices protect against hypoxic mixtures. The oxygen failure alarm sounds when oxygen pressure falls. The hypoxic guard links nitrous oxide flow to oxygen, so nitrous oxide cannot be given without enough oxygen. The oxygen control is placed downstream of the nitrous oxide valve, and a fail-safe valve sits downstream of the nitrous oxide supply. Pin index systems prevent wrong cylinder attachment but do not stop hypoxic delivery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "O2 failure alarm"
+     },
+     {
+      "id": "b",
+      "label": "Hypoxic guard"
+     },
+     {
+      "id": "c",
+      "label": "Fail-safe valve"
+     },
+     {
+      "id": "d",
+      "label": "Safe gas to patient"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Mapleson classification** groups breathing systems into types A to F. **Mapleson A**, the Magill circuit, is the circuit of choice for spontaneous ventilation and needs fresh gas flow about equal to minute ventilation. **Mapleson D**, the **Bain circuit**, is a co-axial modification and is the usual choice for controlled ventilation. Type E is Ayre's T-piece, and type F is the **Jackson-Rees circuit**, the first choice for children.",
+   "say": "The Mapleson classification groups breathing systems into types A to F. Mapleson A, the Magill circuit, is the circuit of choice for spontaneous ventilation and needs fresh gas flow about equal to minute ventilation. Mapleson D, the Bain circuit, is a co-axial modification and is the usual choice for controlled ventilation. Type E is Ayre's T-piece, and type F is the Jackson-Rees circuit, the first choice for children.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Name",
+     "Best use"
+    ],
+    "rows": [
+     [
+      "A",
+      "Magill",
+      "Spontaneous ventilation"
+     ],
+     [
+      "D",
+      "Bain",
+      "Controlled ventilation"
+     ],
+     [
+      "E",
+      "Ayre's T-piece",
+      "Second choice in children"
+     ],
+     [
+      "F",
+      "Jackson-Rees",
+      "First choice in children"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **circle system** rebreathes exhaled gas after carbon dioxide is removed by **soda lime**. Soda lime is about 94 to 95 percent calcium hydroxide, 5 percent sodium hydroxide as catalyst and 1 percent potassium hydroxide, and it contains a colour indicator such as Clayton. **Baralyme** uses barium hydroxide with water, and water of crystallisation is used there. Sevoflurane with dry soda lime forms **compound A**, which is nephrotoxic, and trichloroethylene with soda lime forms toxic phosgene, so these combinations are avoided.",
+   "say": "A circle system rebreathes exhaled gas after carbon dioxide is removed by soda lime. Soda lime is about 94 to 95 percent calcium hydroxide, 5 percent sodium hydroxide as catalyst and 1 percent potassium hydroxide, and it contains a colour indicator such as Clayton. Baralyme uses barium hydroxide with water, and water of crystallisation is used there. Sevoflurane with dry soda lime forms compound A, which is nephrotoxic, and trichloroethylene with soda lime forms toxic phosgene, so these combinations are avoided.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "c0e54415-f4c7-42ac-b4b9-ac355b34d1c3",
+  "1be8f9f3-e274-41c7-864b-ef5726884c01",
+  "31d51cfa-7bd9-4bf5-acc5-c4059ff4c554"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia (Miller RD, editor)",
+  "Morgan and Mikhail's Clinical Anesthesiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 122
+ }
+}

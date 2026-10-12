@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "module": "cm-uip",
+ "subject": "community-medicine",
+ "title": "Universal Immunisation Programme and the National Immunisation Schedule",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **Universal Immunisation Programme** (UIP) delivers free vaccines against vaccine preventable diseases through the public system. India's **National Immunisation Schedule** (NIS) sets the age, dose and route for each vaccine. Core tested diseases include diphtheria, pertussis, tetanus, polio, tuberculosis, measles and hepatitis B. Vaccines are kept in the cold chain, usually at +2 to +8 degrees Celsius, and a frozen vaccine must be discarded.",
+   "say": "The Universal Immunisation Programme delivers free vaccines through the public system. India's National Immunisation Schedule sets the age, dose and route for each vaccine. Core diseases include diphtheria, pertussis, tetanus, polio, tuberculosis, measles and hepatitis B. Vaccines are kept in the cold chain, usually at plus two to plus eight degrees Celsius, and a vaccine that has frozen must be discarded.",
+   "vis": null
+  },
+  {
+   "tx": "At birth the infant receives **BCG**, the first **OPV** (oral polio) dose and hepatitis B. BCG is given intradermally in the left upper arm and is best given at birth, with the latest acceptable age being one year. If missed at birth, it is given with the first DPT dose at 6 weeks. Hepatitis B is given within 24 hours.",
+   "say": "At birth the infant receives BCG, the first OPV oral polio dose and hepatitis B. BCG is given in the left upper arm and is best given at birth, with one year as the upper age limit. If missed at birth, it is given with the first DPT dose at six weeks. Hepatitis B is given within twenty four hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaccine",
+     "Timing",
+     "Route"
+    ],
+    "rows": [
+     [
+      "BCG",
+      "Birth, up to 1 year",
+      "Intradermal, left upper arm"
+     ],
+     [
+      "OPV zero",
+      "Within first 15 days",
+      "Oral"
+     ],
+     [
+      "Hepatitis B birth dose",
+      "Within 24 hours",
+      "Intramuscular, mid-thigh"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary infant doses at 6, 10 and 14 weeks are **DPT**, **OPV** and hepatitis B, with **IPV** given as a single dose at 14 weeks or as fractional doses at 6 and 14 weeks. The **rotavirus vaccine** must start by 12 weeks, and **PCV** is part of the routine series. Intervals between doses of DPT, OPV and hepatitis B should be at least one month.",
+   "say": "Primary infant doses at six, ten and fourteen weeks are DPT, OPV and hepatitis B, with IPV given as a single dose at fourteen weeks or as fractional doses at six and fourteen weeks. The rotavirus vaccine must start by twelve weeks, and PCV is part of the routine series. Intervals between doses of DPT, OPV and hepatitis B should be at least one month.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Vaccines"
+    ],
+    "rows": [
+     [
+      "6 weeks",
+      "DPT 1, OPV 1, Hepatitis B 1, IPV (fractional)"
+     ],
+     [
+      "10 weeks",
+      "DPT 2, OPV 2, Hepatitis B 2"
+     ],
+     [
+      "14 weeks",
+      "DPT 3, OPV 3, Hepatitis B 3, IPV (fractional)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The booster schedule covers **DPT** at 16 to 24 months and 5 to 6 years, **OPV** at 16 to 24 months, and **JE** vaccine in endemic districts. **Td** replaces DT at 10 and 16 years. Pregnant women receive TT or Td, with the second dose before 36 weeks. Minor cough, cold or mild fever are not contraindications to vaccination.",
+   "say": "The booster schedule covers DPT at sixteen to twenty four months and five to six years, OPV at sixteen to twenty four months, and JE vaccine in endemic districts. Td replaces DT at ten and sixteen years. Pregnant women receive TT or Td, with the second dose before thirty six weeks. Minor cough, cold or mild fever are not contraindications.",
+   "vis": null
+  },
+  {
+   "tx": "Before giving a **pertussis-containing vaccine** such as pentavalent, check for true **contraindications**. A **severe allergic reaction** to a previous dose, or an evolving **progressive neurological disease**, means the vaccine should be withheld. Well-controlled **epilepsy** on antiepileptic drugs is not a barrier, and **persistent inconsolable crying** is a recognised side effect rather than a reason to stop. **Egg allergy** does not block this vaccine.",
+   "say": "Before giving a pertussis containing vaccine, such as pentavalent, check for true contraindications. A severe allergic reaction to a previous dose, or an evolving progressive neurological disease, means the vaccine should be withheld. Well controlled epilepsy on antiepileptic drugs is not a barrier, and persistent inconsolable crying is a recognised side effect rather than a reason to stop. Egg allergy does not block this vaccine.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ae860352-baa5-4693-8088-33364f1a66e8",
+  "1c6bdf04-bcdf-4d43-8fcf-8b12cd424652",
+  "2af102e8-c4b8-4301-a351-0ec6eaa479a0"
+ ],
+ "src": [],
+ "refs": [
+  "National Immunisation Schedule, Government of India (Ministry of Health and Family Welfare)",
+  "Park's Textbook of Preventive and Social Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 106
+ }
+}

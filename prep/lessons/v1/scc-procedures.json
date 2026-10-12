@@ -1,0 +1,180 @@
+{
+ "v": 1,
+ "module": "scc-procedures",
+ "subject": "ss-critical-care",
+ "title": "ICU Procedures: Scope Overview and Core Safety Principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "ICU procedures cover **central venous catheterization**, **arterial cannulation**, tracheostomy, bronchoscopy, intercostal drain insertion, lumbar puncture, pericardiocentesis, paracentesis and the central line insertion bundle. Each carries a risk of bleeding, infection or organ injury. Safe practice starts with a clear indication, consent, and a check of coagulation and anticoagulant status. Ultrasound guidance is preferred wherever it is available, because it lowers complications and improves first-pass success.",
+   "say": "ICU procedures cover central venous catheterization, arterial cannulation, tracheostomy, bronchoscopy, intercostal drain insertion, lumbar puncture, pericardiocentesis, paracentesis and the central line insertion bundle. Each carries a risk of bleeding, infection or organ injury. Safe practice starts with a clear indication, consent, and a check of coagulation and anticoagulant status. Ultrasound guidance is preferred wherever it is available, because it lowers complications and improves first-pass success.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedure",
+     "Main risk",
+     "Key safeguard"
+    ],
+    "rows": [
+     [
+      "Central venous line",
+      "Pneumothorax, bleeding",
+      "Ultrasound guidance"
+     ],
+     [
+      "Arterial cannula",
+      "Ischaemia, haematoma",
+      "Allen test and distal checks"
+     ],
+     [
+      "Lumbar puncture",
+      "Spinal haematoma",
+      "Anticoagulant washout"
+     ],
+     [
+      "Pericardiocentesis",
+      "Cardiac puncture",
+      "Echo-guided approach"
+     ],
+     [
+      "Central line bundle",
+      "Bloodstream infection",
+      "Full barrier precautions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before any **lumbar puncture**, review the patient's **anticoagulant** and **antiplatelet** use. Warfarin is usually stopped several days beforehand, and the **INR** should be checked on the day of the procedure. Direct oral anticoagulants generally need a longer washout, often around 48 to 72 hours, although this depends on **renal function** and the specific drug. Antiplatelet agents vary, so timing should be discussed with the treating team and local guidance followed.",
+   "say": "Before any lumbar puncture, review the patient's anticoagulant and antiplatelet use. Warfarin is usually stopped several days beforehand, and the INR should be checked on the day of the procedure. Direct oral anticoagulants generally need a longer washout, often around 48 to 72 hours, although this depends on renal function and the specific drug. Antiplatelet agents vary, so timing should be discussed with the treating team and local guidance followed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Typical pre-procedure gap",
+     "Notes"
+    ],
+    "rows": [
+     [
+      "Warfarin",
+      "Several days, INR checked",
+      "Confirm INR is normal on the day"
+     ],
+     [
+      "Direct oral anticoagulant",
+      "About 48 to 72 hours",
+      "Longer if renal impairment"
+     ],
+     [
+      "Antiplatelet agents",
+      "Varies by drug",
+      "Discuss with the treating team"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with **chronic liver disease**, the INR and platelet count guide safety. Many spinal procedure guidelines accept an INR below 1.5 and a platelet count above 50,000 per microlitre. Platelet thresholds should be interpreted with the clinical picture and any transfusion plan. In a patient with a degenerate spine or a difficult anatomy, fluoroscopy or ultrasound can help place the needle. The operator should record the decision and the reasons in the notes.",
+   "say": "In patients with chronic liver disease, the INR and platelet count guide safety. Many spinal procedure guidelines accept an INR below 1.5 and a platelet count above 50,000 per microlitre. Platelet thresholds should be interpreted with the clinical picture and any transfusion plan. In a patient with a degenerate spine or a difficult anatomy, fluoroscopy or ultrasound can help place the needle. The operator should record the decision and the reasons in the notes.",
+   "vis": null
+  },
+  {
+   "tx": "Before a lumbar puncture, exclude **obstructive hydrocephalus** or a mass lesion with neuroimaging, since herniation is the main hazard. Patients with raised intracranial pressure need imaging first. Post-dural puncture headache is typically positional, and conservative care comes first. If it is refractory, a fluoroscopy-guided epidural blood patch is an established option. Remember that the exam expects you to link imaging, the needle bevel orientation and the blood patch treatment.",
+   "say": "Before a lumbar puncture, exclude obstructive hydrocephalus or a mass lesion with neuroimaging, since herniation is the main hazard. Patients with raised intracranial pressure need imaging first. Post-dural puncture headache is typically positional, and conservative care comes first. If it is refractory, a fluoroscopy-guided epidural blood patch is an established option. Remember that the exam expects you to link imaging, the needle bevel orientation and the blood patch treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected raised ICP"
+     },
+     {
+      "id": "b",
+      "label": "Neuroimaging first"
+     },
+     {
+      "id": "c",
+      "label": "Lumbar puncture if safe"
+     },
+     {
+      "id": "d",
+      "label": "Refractory headache"
+     },
+     {
+      "id": "e",
+      "label": "Epidural blood patch"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **central line insertion bundle** lowers **bloodstream infection** by grouping several evidence-based actions. It includes **hand hygiene**, **maximal sterile barrier precautions**, an **antiseptic skin preparation** applied before insertion, site selection that favours lower infection risk where feasible, and a **daily review** of whether the line is still needed. Ultrasound guidance and sterile technique for arterial and airway procedures rely on the same principles. Document each element, as audits check it.",
+   "say": "The central line insertion bundle lowers bloodstream infection by grouping several evidence-based actions. It includes hand hygiene, maximal sterile barrier precautions, an antiseptic skin preparation applied before insertion, site selection that favours lower infection risk where feasible, and a daily review of whether the line is still needed. Ultrasound guidance and sterile technique for arterial and airway procedures rely on the same principles. Document each element, as audits check it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bundle element",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Hand hygiene",
+      "Reduces contamination"
+     ],
+     [
+      "Maximal barrier precautions",
+      "Covers patient and operator"
+     ],
+     [
+      "Antiseptic skin preparation",
+      "Lowers skin flora before insertion"
+     ],
+     [
+      "Daily line review",
+      "Removes lines no longer needed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_84392b7bd0fa",
+  "q_111d097e7d8d",
+  "q_1a33f1d79258"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 36
+ }
+}

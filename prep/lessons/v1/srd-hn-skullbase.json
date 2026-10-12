@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "module": "srd-hn-skullbase",
+ "subject": "ss-radiology",
+ "title": "Skull base and temporal bone: high-yield imaging essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **scutum** is a shield-like bony spur of the lateral tympanic wall. Its erosion is a key landmark of acquired **cholesteatoma**, which spreads into Prussak's space. The lateral semicircular canal is the most frequent site of labyrinthine fistula in this setting. Air within the semicircular canal, called pneumolabyrinth, is definitive evidence of a fistula.",
+   "say": "The scutum is a shield-like bony spur of the lateral tympanic wall. Its erosion is a key landmark of acquired cholesteatoma, which spreads into Prussak's space. The lateral semicircular canal is the most frequent site of labyrinthine fistula in this setting. Air within the semicircular canal, called pneumolabyrinth, is definitive evidence of a fistula.",
+   "vis": null
+  },
+  {
+   "tx": "**Otosclerosis** causes demineralisation around the oval window in fenestral disease and around the cochlear capsule in retrofenestral disease. Fenestral otosclerosis gives pure conductive hearing loss, while cochlear involvement can add a sensorineural component. Typical patients are young adult women. Think of it when a young woman has progressive conductive loss with normal drum.",
+   "say": "Otosclerosis causes demineralisation around the oval window in fenestral disease and around the cochlear capsule in retrofenestral disease. Fenestral otosclerosis gives pure conductive hearing loss, while cochlear involvement can add a sensorineural component. Typical patients are young adult women. Think of it when a young woman has progressive conductive loss with a normal drum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fenestral",
+     "points": [
+      "Oval window demineralisation",
+      "Pure conductive loss"
+     ]
+    },
+    "right": {
+     "title": "Retrofenestral",
+     "points": [
+      "Cochlear capsule involvement",
+      "Mixed or sensorineural component"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Paragangliomas** of the temporal bone, such as glomus tympanicum and glomus jugulare, cause pulsatile tinnitus and a vascular retrotympanic mass. A key mimic is an aberrant internal carotid artery, which connects to the horizontal carotid canal. Familial paraganglioma type 1 is linked to SDHD mutations. Chordoma and chondrosarcoma arise from the clivus and midline skull base.",
+   "say": "Paragangliomas of the temporal bone, such as glomus tympanicum and glomus jugulare, cause pulsatile tinnitus and a vascular retrotympanic mass. A key mimic is an aberrant internal carotid artery, which connects to the horizontal carotid canal. Familial paraganglioma type 1 is linked to SDHD mutations. Chordoma and chondrosarcoma arise from the clivus and midline skull base.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pulsatile tinnitus"
+     },
+     {
+      "id": "b",
+      "label": "Retrotympanic vascular mass"
+     },
+     {
+      "id": "c",
+      "label": "Check carotid canal link"
+     },
+     {
+      "id": "d",
+      "label": "Aberrant ICA excluded"
+     },
+     {
+      "id": "e",
+      "label": "Paraganglioma likely"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "Connected"
+     ],
+     [
+      "c",
+      "e",
+      "Not connected"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Petrous apex lesions** are a key exam topic. A **cholesterol granuloma** is T1 and T2 bright and does not restrict diffusion, whereas a **congenital cholesteatoma** restricts diffusion. Petrous apex **cephaloceles** arise from herniation of Meckel's cave and appear as smooth cystic expansions. Cholesteatoma, petrous apex and skull base lesions should be reported with diffusion data.",
+   "say": "Petrous apex lesions are a key exam topic. A cholesterol granuloma is T1 and T2 bright and does not restrict diffusion, whereas a congenital cholesteatoma restricts diffusion. Petrous apex cephaloceles arise from herniation of Meckel's cave and appear as smooth cystic expansions. Report these lesions with diffusion data.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "T1",
+     "T2",
+     "Diffusion"
+    ],
+    "rows": [
+     [
+      "Cholesterol granuloma",
+      "Bright",
+      "Bright",
+      "No restriction"
+     ],
+     [
+      "Congenital cholesteatoma",
+      "Low to intermediate",
+      "Bright",
+      "Restricts"
+     ],
+     [
+      "Petrous cephalocele",
+      "CSF-like",
+      "CSF-like",
+      "Not restricted"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gradenigo syndrome** combines otitis media or petrositis with ipsilateral lateral rectus palsy and retro-orbital pain, from abducens involvement in Dorello's canal. **Otomastoiditis** and **apical petrositis** may spread to the carotid canal, causing ICA vasospasm. Subdural empyema and sinus thrombosis are other intracranial complications. Recognise the triad to avoid delay in treatment.",
+   "say": "Gradenigo syndrome combines otitis media or petrositis with ipsilateral lateral rectus palsy and retro-orbital pain, from abducens involvement in Dorello's canal. Otomastoiditis and apical petrositis may spread to the carotid canal, causing ICA vasospasm. Subdural empyema and sinus thrombosis are other intracranial complications. Recognise the triad to avoid delay in treatment.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ct-f0cc20311ced",
+  "ct-0bf167f1901b",
+  "ct-5617839109c3"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 38
+ }
+}

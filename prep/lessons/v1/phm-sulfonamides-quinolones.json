@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "phm-sulfonamides-quinolones",
+ "subject": "pharmacology",
+ "title": "Sulfonamides, cotrimoxazole and fluoroquinolones",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Sulfonamide toxicity matters in exams. **Crystalluria** occurs because acetylated metabolites precipitate in acidic urine; alkalinising the urine with sodium bicarbonate and hydration help. **Kernicterus** risk applies to newborns, especially premature infants, so sulfonamides are avoided in late pregnancy and early infancy. Sulfasalazine is poorly absorbed and acts locally in the gut.",
+   "say": "Sulfonamide toxicity matters in exams. Crystalluria occurs because acetylated metabolites precipitate in acidic urine. Alkalinising the urine with sodium bicarbonate and maintaining hydration help. Kernicterus risk applies to newborns, especially premature infants, so sulfonamides are avoided in late pregnancy and early infancy. Sulfasalazine is poorly absorbed and acts locally in the gut.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Mechanism",
+      "Blocks folate synthesis"
+     ],
+     [
+      "Crystalluria",
+      "Acidic urine, treat by alkalinising"
+     ],
+     [
+      "Kernicterus",
+      "Late pregnancy and newborns"
+     ],
+     [
+      "G6PD",
+      "Hemolysis risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cotrimoxazole** combines **trimethoprim** and sulfamethoxazole in a fixed ratio of 1:5. Trimethoprim blocks bacterial dihydrofolate reductase, so the two drugs act sequentially on the folate pathway. This synergy also slows resistance. The drug of choice for Pneumocystis jirovecii pneumonia, both treatment and prophylaxis, is cotrimoxazole, with an ICMR and US consensus.",
+   "say": "Cotrimoxazole combines trimethoprim and sulfamethoxazole in a fixed ratio of one to five. Trimethoprim blocks bacterial dihydrofolate reductase, so the two drugs act in sequence on the folate pathway. This synergy also slows resistance. Cotrimoxazole is the drug of choice for Pneumocystis jirovecii pneumonia, for both treatment and prophylaxis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PABA"
+     },
+     {
+      "id": "b",
+      "label": "Dihydropteroate synthase"
+     },
+     {
+      "id": "c",
+      "label": "Dihydrofolate"
+     },
+     {
+      "id": "d",
+      "label": "Dihydrofolate reductase"
+     },
+     {
+      "id": "e",
+      "label": "Tetrahydrofolate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "sulfonamide blocks"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "trimethoprim blocks"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pneumocystis prophylaxis is a high-yield area. **Cotrimoxazole** is first line for prophylaxis in HIV patients, started when the **CD4 count falls below 200 per microlitre**. Dapsone, pyrimethamine, atovaquone and pentamidine are second line. Treatment uses high dose cotrimoxazole for 14 to 21 days, while pentamidine or clindamycin with primaquine is an alternative.",
+   "say": "Pneumocystis prophylaxis is a high-yield area. Cotrimoxazole is first line for prophylaxis in HIV patients, started when the CD4 count falls below 200 per microlitre. Dapsone, pyrimethamine, atovaquone and pentamidine are second line. Treatment uses high dose cotrimoxazole for 14 to 21 days, while intravenous pentamidine or clindamycin with primaquine is an alternative.",
+   "vis": null
+  },
+  {
+   "tx": "**Fluoroquinolones** inhibit **DNA gyrase** in gram-negative bacteria and topoisomerase IV in gram-positive bacteria, blocking DNA replication. Resistance usually arises from mutations in the gyrase gene. Ciprofloxacin is the most potent first generation agent. Ciprofloxacin and levofloxacin are the fluoroquinolones active against Pseudomonas, and ciprofloxacin is the drug of choice for anthrax.",
+   "say": "Fluoroquinolones inhibit DNA gyrase in gram-negative bacteria and topoisomerase IV in gram-positive bacteria, blocking DNA replication. Resistance usually arises from mutations in the gyrase gene. Ciprofloxacin is the most potent first generation agent. Ciprofloxacin and levofloxacin are the fluoroquinolones active against Pseudomonas, and ciprofloxacin is the drug of choice for anthrax.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ciprofloxacin and levofloxacin",
+     "points": [
+      "Active against Pseudomonas",
+      "Ciprofloxacin is drug of choice for anthrax",
+      "Less active at acidic pH"
+     ]
+    },
+    "right": {
+     "title": "Safety warnings",
+     "points": [
+      "Tendon rupture in older adults",
+      "QT prolongation",
+      "Avoid in children and pregnancy",
+      "Increases theophylline levels"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "d4f35ac5-f891-4f58-9aa4-95bd607214c3",
+  "18fbc52c-b20e-4e34-b38a-1192d9bb0afb",
+  "7ab414d1-b98c-493d-9e19-9f7f601d25cc"
+ ],
+ "src": [],
+ "refs": [
+  "Essentials of Medical Pharmacology (K.D. Tripathi), Sixth Edition",
+  "Katzung Basic and Clinical Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 150
+ }
+}

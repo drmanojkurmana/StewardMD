@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "sgm-cancer-principles",
+ "subject": "ss-general-medicine",
+ "title": "Principles of cancer biology and therapy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Cancer arises when cells acquire **hallmark** capabilities such as sustained proliferative signalling, evasion of growth suppressors, resistance to cell death, and invasion with metastasis. Two gene classes drive this. **Oncogenes** are gain-of-function activators of growth, while **tumour suppressor genes** need loss of function, usually through two hits. TP53 is the most commonly mutated tumour suppressor and guards the genome by halting the cycle and triggering apoptosis.",
+   "say": "Cancer arises when cells acquire hallmark capabilities such as sustained proliferative signalling, evasion of growth suppressors, resistance to cell death, and invasion with metastasis. Two gene classes drive this. Oncogenes are gain-of-function activators of growth, while tumour suppressor genes need loss of function, usually through two hits. TP53 is the most commonly mutated tumour suppressor and guards the genome by halting the cycle and triggering apoptosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Oncogene",
+     "Tumour suppressor gene"
+    ],
+    "rows": [
+     [
+      "Mutation type",
+      "Gain of function",
+      "Loss of function"
+     ],
+     [
+      "Allele needed",
+      "One altered copy",
+      "Both copies inactivated"
+     ],
+     [
+      "Example",
+      "RAS, MYC",
+      "TP53, RB1, APC"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Knudson's **two-hit hypothesis** explains hereditary cancers such as retinoblastoma. A germline RB1 mutation is the first hit, and a somatic mutation in the remaining normal allele is the second. Viral oncoproteins also disable these checkpoints: HPV E6 inactivates p53 and HPV E7 inhibits RB. Germline TP53 defects cause Li-Fraumeni syndrome, with breast cancer, brain tumours and sarcomas.",
+   "say": "Knudson's two-hit hypothesis explains hereditary cancers such as retinoblastoma. A germline RB1 mutation is the first hit, and a somatic mutation in the remaining normal allele is the second. Viral oncoproteins also disable these checkpoints. HPV E6 inactivates p53 and HPV E7 inhibits RB. Germline TP53 defects cause Li-Fraumeni syndrome, with breast cancer, brain tumours and sarcomas.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Germline RB1 hit"
+     },
+     {
+      "id": "b",
+      "label": "Somatic second hit"
+     },
+     {
+      "id": "c",
+      "label": "Loss of both alleles"
+     },
+     {
+      "id": "d",
+      "label": "Retinoblastoma"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tumour suppressor genes act as brakes on growth, so losing them removes that restraint. **TP53** halts the cell cycle through **p21** and triggers **BAX**-driven apoptosis when damage cannot be repaired. **APC** loss allows **beta-catenin** to accumulate and switch on WNT signalling, as seen in familial adenomatous polyposis. **PTEN** limits the PI3K-AKT-mTOR axis, while **VHL** loss blocks HIF breakdown.",
+   "say": "Tumour suppressor genes act as brakes on growth, so losing them removes that restraint. TP53 raises p21 to pause the cell cycle at the G1 to S checkpoint, and it can push damaged cells towards apoptosis through BAX. APC loss lets beta-catenin build up and drives WNT signalling, which underlies familial adenomatous polyposis. PTEN restrains the PI3K, AKT and mTOR pathway, and VHL loss prevents HIF from being degraded.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene",
+     "Normal role",
+     "Consequence of loss"
+    ],
+    "rows": [
+     [
+      "TP53",
+      "Pauses cycle via p21, drives apoptosis",
+      "Damaged cells survive and proliferate"
+     ],
+     [
+      "APC",
+      "Degrades beta-catenin",
+      "WNT signalling is constitutively active"
+     ],
+     [
+      "PTEN",
+      "Restrains PI3K-AKT-mTOR",
+      "Unchecked growth and survival signals"
+     ],
+     [
+      "VHL",
+      "Degrades HIF",
+      "HIF accumulates and promotes angiogenesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment includes **chemotherapy**, **targeted therapy** and **antibody-drug conjugates**. Adjuvant therapy is given after surgery to clear residual disease, while **neoadjuvant therapy** shrinks a tumour before resection. In stage II colon cancer, universal mismatch repair or microsatellite instability testing is recommended. Metastases confined to a single site such as the liver or lung may be curable by complete resection.",
+   "say": "Treatment includes chemotherapy, targeted therapy and antibody-drug conjugates. Adjuvant therapy is given after surgery to clear residual disease, while neoadjuvant therapy shrinks a tumour before resection. In stage II colon cancer, universal mismatch repair or microsatellite instability testing is recommended. Metastases confined to a single site such as the liver or lung may be curable by complete resection.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1701cefcb983",
+  "q_22290bc65a81",
+  "q_8f8694e02f5a"
+ ],
+ "src": [],
+ "refs": [
+  "Milan criteria, Mazzaferro et al., New England Journal of Medicine, 1996",
+  "Barcelona Clinic Liver Cancer staging system, Llovet et al., Journal of Hepatology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 48
+ }
+}

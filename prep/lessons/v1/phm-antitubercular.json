@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "phm-antitubercular",
+ "subject": "pharmacology",
+ "title": "Antitubercular drugs: key actions, toxicities and regimens",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Antitubercular drugs are grouped by how they kill **bacilli** in different sites. **Isoniazid** and rifampicin are the most powerful bactericidal agents, acting on all populations of tubercle bacilli. Pyrazinamide is strongly **sterilising**, acting on slow-growing bacilli inside macrophages. Ethambutol is the main bacteriostatic first-line drug, used mainly to prevent resistance.",
+   "say": "Antitubercular drugs are grouped by how they kill bacilli in different sites. Isoniazid and rifampicin are the most powerful bactericidal agents, acting on all populations of tubercle bacilli. Pyrazinamide is strongly sterilising, acting on slow-growing bacilli inside macrophages. Ethambutol is the main bacteriostatic first-line drug, used mainly to prevent resistance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Main action",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Isoniazid",
+      "Bactericidal",
+      "Blocks mycolic acid synthesis"
+     ],
+     [
+      "Rifampicin",
+      "Bactericidal",
+      "Most potent sterilising agent"
+     ],
+     [
+      "Pyrazinamide",
+      "Bactericidal",
+      "Acts on intracellular bacilli"
+     ],
+     [
+      "Ethambutol",
+      "Bacteriostatic",
+      "Prevents resistance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ethambutol** causes retrobulbar **optic neuritis**, with loss of acuity and impaired red-green colour vision. Isoniazid can also cause optic neuritis, as can ethionamide. Effects are dose and duration dependent, so baseline and periodic eye testing is essential. Children under six cannot reliably report early visual change, so ethambutol is avoided in them.",
+   "say": "Ethambutol causes retrobulbar optic neuritis, with loss of acuity and impaired red-green colour vision. Isoniazid can also cause optic neuritis, as can ethionamide. Effects are dose and duration dependent, so baseline and periodic eye testing is essential. Children under six cannot reliably report early visual change, so ethambutol is avoided in them.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ethambutol",
+     "points": [
+      "Retrobulbar optic neuritis",
+      "Red-green colour blindness",
+      "Dose and duration dependent"
+     ]
+    },
+    "right": {
+     "title": "Isoniazid and ethionamide",
+     "points": [
+      "Optic neuritis reported",
+      "Eye checks advised",
+      "Stop drug if visual loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hepatotoxicity is caused by **isoniazid**, **rifampicin**, **pyrazinamide** and ethionamide. **Streptomycin** and **ethambutol** are the first-line drugs without significant hepatotoxicity, so they suit patients with liver disease. Pyrazinamide and ethambutol both cause **hyperuricaemia** and gout. Streptomycin causes nephrotoxicity, ototoxicity and neuromuscular blockade.",
+   "say": "Hepatotoxicity is caused by isoniazid, rifampicin, pyrazinamide and ethionamide. Streptomycin and ethambutol are the first-line drugs without significant hepatotoxicity, so they suit patients with liver disease. Pyrazinamide and ethambutol both cause hyperuricaemia and gout. Streptomycin causes nephrotoxicity, ototoxicity and neuromuscular blockade.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Toxicity",
+     "Drugs responsible"
+    ],
+    "rows": [
+     [
+      "Hepatitis",
+      "Isoniazid, rifampicin, pyrazinamide"
+     ],
+     [
+      "Hyperuricaemia",
+      "Pyrazinamide, ethambutol"
+     ],
+     [
+      "Optic neuritis",
+      "Ethambutol, isoniazid"
+     ],
+     [
+      "Ototoxicity",
+      "Streptomycin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rifampicin** turns urine, sweat, tears and contact lenses orange-red, which is harmless. It is an enzyme inducer, so it is avoided with indinavir and other protease inhibitors. Rifampicin is hepatically cleared, so it needs no renal dose change. **MDR-TB** means resistance to isoniazid and rifampicin together. Resistance to isoniazid often predicts rifampicin resistance.",
+   "say": "Rifampicin turns urine, sweat, tears and contact lenses orange-red, which is harmless. It is an enzyme inducer, so it is avoided with indinavir and other protease inhibitors. Rifampicin is hepatically cleared, so it needs no renal dose change. MDR-TB means resistance to isoniazid and rifampicin together. Resistance to isoniazid often predicts rifampicin resistance.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "e1b72df5-c111-4607-9ca6-74d439d64be3",
+  "c81581d9-1d49-4eef-94e7-5996bd88102d",
+  "e56ea2f6-9eef-450c-a5a3-71595ea61798"
+ ],
+ "src": [],
+ "refs": [
+  "Essentials of Medical Pharmacology (K.D. Tripathi, Sixth Edition)",
+  "Katzung's Basic and Clinical Pharmacology (13th Edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 324
+ }
+}

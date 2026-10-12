@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "sen-men-syndromes",
+ "subject": "ss-endocrinology",
+ "title": "Multiple endocrine neoplasia and hereditary endocrine tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Multiple endocrine neoplasia** (MEN) syndromes are inherited tumour predisposition disorders with two or more endocrine tumours, usually following an **autosomal dominant** pattern. The three classic types are MEN1, MEN2A and MEN2B, with MEN4 as a rarer CDKN1B-related variant. Recognising the pattern of tumours and the causative gene drives screening, surgery and family testing. Exam questions usually test the gene, the classic tumour triad and the surgical timing.",
+   "say": "Multiple endocrine neoplasia syndromes are inherited tumour predisposition disorders with two or more endocrine tumours, usually following an autosomal dominant pattern. The three classic types are MEN1, MEN2A and MEN2B, with MEN4 as a rarer CDKN1B related variant. Recognising the pattern of tumours and the causative gene drives screening, surgery and family testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Gene",
+     "Key tumours"
+    ],
+    "rows": [
+     [
+      "MEN1",
+      "MEN1 (menin, 11q13)",
+      "Parathyroid, pancreatic islet, pituitary"
+     ],
+     [
+      "MEN2A",
+      "RET",
+      "Medullary thyroid, phaeochromocytoma, parathyroid"
+     ],
+     [
+      "MEN2B",
+      "RET",
+      "Medullary thyroid, phaeochromocytoma, mucosal neuromas"
+     ],
+     [
+      "MEN4",
+      "CDKN1B (p27)",
+      "Parathyroid, pituitary, others"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **MEN2**, activating **RET** germline variants cause medullary thyroid carcinoma (MTC), which arises from parafollicular C cells. Before any thyroidectomy, **phaeochromocytoma must be excluded** biochemically, because tumour manipulation can trigger a fatal hypertensive crisis. Patients with MEN2B also show a marfanoid habitus and mucosal neuromas of the lips and tongue. Serum calcitonin and CEA are used to monitor MTC.",
+   "say": "In MEN2, activating RET germline variants cause medullary thyroid carcinoma, which arises from parafollicular C cells. Before any thyroidectomy, phaeochromocytoma must be excluded biochemically, because tumour manipulation can trigger a fatal hypertensive crisis. Patients with MEN2B also show a marfanoid habitus and mucosal neuromas of the lips and tongue. Serum calcitonin and CEA are used to monitor medullary thyroid carcinoma.",
+   "vis": null
+  },
+  {
+   "tx": "The **RET codon** involved determines both the risk and the timing of surgery. Under **ATA risk categories**, the highest-risk codons prompt **prophylactic thyroidectomy** in early childhood, whereas lower-risk codons allow surgery to be deferred with **calcitonin surveillance**. **Germline RET testing** is essential once **medullary thyroid carcinoma** is identified, so relatives can be offered cascade screening.",
+   "say": "The RET codon involved determines both the risk and the timing of surgery. Under ATA risk categories, which Indian centres commonly follow, the highest-risk codons prompt prophylactic thyroidectomy in early childhood. Lower-risk codons allow surgery to be deferred, with calcitonin surveillance in the meantime. Germline RET testing is essential once medullary thyroid carcinoma is identified, so relatives can be offered cascade screening.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "RET carrier found"
+     },
+     {
+      "id": "b",
+      "label": "Identify codon"
+     },
+     {
+      "id": "c",
+      "label": "Highest risk codon"
+     },
+     {
+      "id": "d",
+      "label": "Prophylactic thyroidectomy"
+     },
+     {
+      "id": "e",
+      "label": "Lower risk codon"
+     },
+     {
+      "id": "f",
+      "label": "Calcitonin surveillance"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MEN1** is caused by inactivating mutations in the MEN1 gene on chromosome 11q13, which encodes **menin**, a tumour suppressor. Its typical triad is parathyroid hyperplasia, pancreatic neuroendocrine tumours such as gastrinoma and insulinoma, and pituitary adenomas, notably prolactinomas. In MEN1 primary hyperparathyroidism is multiglandular, so subtotal or total parathyroidectomy is preferred over single adenoma removal.",
+   "say": "MEN1 is caused by inactivating mutations in the MEN1 gene on chromosome 11q13, which encodes menin, a tumour suppressor. Its typical triad is parathyroid hyperplasia, pancreatic neuroendocrine tumours such as gastrinoma and insulinoma, and pituitary adenomas, notably prolactinomas. In MEN1 primary hyperparathyroidism is multiglandular, so subtotal or total parathyroidectomy is preferred over single adenoma removal.",
+   "vis": null
+  },
+  {
+   "tx": "**Von Hippel-Lindau** disease, caused by VHL mutations, causes haemangioblastomas, renal cell carcinoma and phaeochromocytoma. **Carney complex**, linked to PRKAR1A, produces cardiac myxomas, skin pigmentation and endocrine overactivity. Genetic screening for these syndromes is guided by the family history and the specific tumour pattern, and it should be combined with counselling and cascade testing of first-degree relatives.",
+   "say": "Von Hippel-Lindau disease, caused by VHL mutations, causes haemangioblastomas, renal cell carcinoma and phaeochromocytoma. Carney complex, linked to PRKAR1A, produces cardiac myxomas, skin pigmentation and endocrine overactivity. Genetic screening for these syndromes is guided by the family history and the tumour pattern, and it should be combined with counselling and cascade testing of first-degree relatives.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_30398bbc0ac3",
+  "q_bec122ff1954",
+  "q_30e1010902a5"
+ ],
+ "src": [],
+ "refs": [
+  "American Thyroid Association Guidelines for Medullary Thyroid Carcinoma (Wells et al.)",
+  "Williams Textbook of Endocrinology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 24
+ }
+}

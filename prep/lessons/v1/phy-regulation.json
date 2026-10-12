@@ -1,0 +1,155 @@
+{
+ "v": 1,
+ "module": "phy-regulation",
+ "subject": "physiology",
+ "title": "Regulation of respiration: centres, chemoreceptors and reflexes",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Breathing rhythm arises in the medulla. The **pre-Botzinger complex** in the ventrolateral medulla acts as the key rhythm generator, while the **dorsal respiratory group** (DRG) mainly drives inspiration and the **ventral respiratory group** (VRG) is largely silent in quiet breathing but recruits in forceful expiration. The pontine **pneumotaxic centre** limits inspiration by switching off the inspiratory ramp, and the **apneustic centre** prolongs inspiration.",
+   "say": "Breathing rhythm arises in the medulla. The pre-Botzinger complex in the ventrolateral medulla acts as the key rhythm generator. The dorsal respiratory group mainly drives inspiration, and the ventral respiratory group is largely silent in quiet breathing but recruits in forceful expiration. The pontine pneumotaxic centre limits inspiration by switching off the inspiratory ramp, and the apneustic centre prolongs inspiration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Centre",
+     "Location",
+     "Main role"
+    ],
+    "rows": [
+     [
+      "Pre-Botzinger complex",
+      "Ventrolateral medulla",
+      "Generates rhythm"
+     ],
+     [
+      "Dorsal respiratory group",
+      "Medulla (NTS region)",
+      "Inspiration and ramp"
+     ],
+     [
+      "Ventral respiratory group",
+      "Medulla",
+      "Forced expiration"
+     ],
+     [
+      "Pneumotaxic centre",
+      "Dorsal upper pons",
+      "Switches off inspiration"
+     ],
+     [
+      "Apneustic centre",
+      "Lower pons",
+      "Prolongs inspiration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Central chemoreceptors** lie on the ventral surface of the medulla near the exit of the ninth and tenth cranial nerves. Their direct stimulus is a rise in hydrogen ion concentration in CSF and brain interstitial fluid. Because H+ cannot cross the blood-brain barrier but CO2 can, arterial PCO2 is the real physiological driver. Hypoxia depresses these neurons rather than stimulating them.",
+   "say": "Central chemoreceptors lie on the ventral surface of the medulla near the exit of the ninth and tenth cranial nerves. Their direct stimulus is a rise in hydrogen ion concentration in cerebrospinal fluid and brain interstitial fluid. Because hydrogen ions cannot cross the blood-brain barrier but carbon dioxide can, arterial PCO2 is the real physiological driver. Hypoxia depresses these neurons rather than stimulating them.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Arterial PCO2 rises"
+     },
+     {
+      "id": "b",
+      "label": "CO2 crosses blood-brain barrier"
+     },
+     {
+      "id": "c",
+      "label": "CSF H+ rises"
+     },
+     {
+      "id": "d",
+      "label": "Central chemoreceptors excited"
+     },
+     {
+      "id": "e",
+      "label": "Rate and depth increase"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vagal integrity shapes the pattern after brainstem lesions. With the **vagi intact**, a mid-pontine cut leaves slow, deep breathing without change in rhythm. With **bilateral vagotomy**, the unopposed apneustic centre causes **apneusis**, a sustained inspiratory gasp interrupted by brief expiration. Transection above the pons has no effect, while transection below the medulla stops respiration completely.",
+   "say": "Vagal integrity shapes the pattern after brainstem lesions. With the vagi intact, a mid-pontine cut leaves slow, deep breathing without change in rhythm. With bilateral vagotomy, the unopposed apneustic centre causes apneusis, a sustained inspiratory gasp interrupted by brief expiration. Transection above the pons has no effect, while transection below the medulla stops respiration completely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Vagi intact",
+     "Bilateral vagotomy"
+    ],
+    "rows": [
+     [
+      "Above pons",
+      "No effect",
+      "No effect"
+     ],
+     [
+      "Mid-pons",
+      "Slow, deep breathing",
+      "Apneusis"
+     ],
+     [
+      "Below medulla",
+      "Apnoea",
+      "Apnoea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Breathing is driven mainly by CO2 and hydrogen ions, not by low oxygen. Ventilation rises linearly with inspired CO2 up to about 6 percent. Above roughly 7 percent, PaCO2 climbs despite hyperventilation, causing CO2 narcosis. After hyperventilation with 6 percent CO2, ventilation remains raised until alveolar PCO2 falls to normal. In **isocapnic exercise**, constraining ventilation to 0.7 times control raises breathing discomfort.",
+   "say": "Breathing is driven mainly by carbon dioxide and hydrogen ions, not by low oxygen. Ventilation rises linearly with inspired carbon dioxide up to about 6 percent. Above roughly 7 percent, arterial PCO2 climbs despite hyperventilation, causing CO2 narcosis. After hyperventilation with 6 percent CO2, ventilation stays raised until alveolar PCO2 falls to normal. In isocapnic exercise, constraining ventilation raises breathing discomfort.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ba2ee4f6-4988-49e7-bffd-795551605b6a",
+  "a58f77a3-87d2-44a4-91bb-bf9ac737e1d1",
+  "e3e32f6a-713d-4895-8bd7-f31c363fad4f"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology (Barrett, Barman, Boitano, Brooks)",
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Nunn's Applied Respiratory Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 194
+ }
+}

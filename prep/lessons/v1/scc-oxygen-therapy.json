@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "scc-oxygen-therapy",
+ "subject": "ss-critical-care",
+ "title": "Oxygen therapy and targets",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Hyperoxaemia and **absorption atelectasis** are linked. High inspired oxygen washes out alveolar nitrogen, and once oxygen is absorbed into blood the alveoli can collapse, particularly at high fractions. Aim for the lowest fraction that meets the target. The **venturi mask** delivers a fixed, predictable fraction, which suits patients who need controlled oxygen, such as those with COPD and a risk of hypercapnia.",
+   "say": "Hyperoxaemia and absorption atelectasis go together. High inspired oxygen washes nitrogen out of the alveoli, and once oxygen is absorbed into the blood, the alveoli can collapse, especially at high fractions. So use the lowest fraction that reaches the target. The venturi mask gives a fixed, accurate fraction, which helps patients who need controlled oxygen, particularly those with COPD.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Device",
+     "Typical fraction",
+     "Best use"
+    ],
+    "rows": [
+     [
+      "Venturi mask",
+      "Fixed and controlled, low to moderate",
+      "Controlled oxygen in COPD"
+     ],
+     [
+      "Non-rebreather mask",
+      "High and variable",
+      "Severe hypoxaemia, short term"
+     ],
+     [
+      "Nasal cannula",
+      "Low to moderate, variable",
+      "Mild need in stable patients"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **non-rebreather mask** with a reservoir bag can deliver high fractions, but its delivered oxygen is variable and it can worsen hypercapnia if used in COPD. It is reserved for short-term, life-threatening hypoxaemia. Remember the **hyperbaric oxygen therapy** setting, where oxygen is given at raised pressure to treat conditions such as decompression illness and carbon monoxide poisoning.",
+   "say": "A non-rebreather mask with a reservoir bag can deliver high fractions, but its delivered oxygen is variable and it can worsen hypercapnia if used in COPD. It is reserved for short-term, life-threatening hypoxaemia. Remember the hyperbaric oxygen therapy setting, where oxygen is given at raised pressure to treat conditions such as decompression illness and carbon monoxide poisoning.",
+   "vis": null
+  },
+  {
+   "tx": "**Oxygen toxicity** has two forms. Pulmonary toxicity develops after prolonged exposure to high fractions and is driven by free radicals. CNS toxicity occurs at high partial pressures, typically in hyperbaric settings above about 2 ATA, and can cause perioral twitching, convulsions and sudden seizures. Early CNS signs during hyperbaric therapy mean the exposure should be stopped immediately. Bleomycin increases susceptibility to pulmonary injury.",
+   "say": "Oxygen toxicity has two forms. Pulmonary toxicity develops after prolonged exposure to high fractions and is driven by free radicals. CNS toxicity occurs at high partial pressures, typically in hyperbaric settings above about 2 ATA, and can cause perioral twitching, convulsions and sudden seizures. Early CNS signs during hyperbaric therapy mean the exposure should be stopped immediately. Bleomycin increases susceptibility to pulmonary injury.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High oxygen exposure"
+     },
+     {
+      "id": "b",
+      "label": "Free radical damage"
+     },
+     {
+      "id": "c",
+      "label": "Early warning signs"
+     },
+     {
+      "id": "d",
+      "label": "Stop exposure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In hyperbaric practice, **intermittent air breaks** reduce the risk of clinical oxygen seizures by about a factor of ten. Terminate the session on early symptoms. Always pair oxygen targets with clinical review, because the safest oxygen is the lowest that meets the saturation goal for that patient.",
+   "say": "In hyperbaric practice, intermittent air breaks reduce the risk of clinical oxygen seizures by about a factor of ten. Terminate the session on early symptoms. Always pair oxygen targets with clinical review, because the safest oxygen is the lowest that meets the saturation goal for that patient.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_8273b15e2bae",
+  "q_1740f7b2834e",
+  "q_c400daef0bc1"
+ ],
+ "src": [],
+ "refs": [
+  "British Thoracic Society Guideline for Oxygen Use in Healthcare and Emergency Settings"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 16
+ }
+}

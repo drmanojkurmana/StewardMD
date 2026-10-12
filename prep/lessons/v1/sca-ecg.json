@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "sca-ecg",
+ "subject": "ss-cardiology",
+ "title": "Electrocardiography: Key High-Yield Patterns",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Left bundle branch block** widens the QRS to 120 ms or more, with broad notched R waves in I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The **Sgarbossa criteria** help detect acute MI in LBBB, and a score of 3 or more confirms it.",
+   "say": "Left bundle branch block widens the QRS to 120 milliseconds or more, with broad notched R waves in leads I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The Sgarbossa criteria help detect acute myocardial infarction in LBBB, and a score of 3 or more confirms it.",
+   "vis": null
+  },
+  {
+   "tx": "**Left ventricular hypertrophy** is usually judged by voltage. Sokolow-Lyon uses the S wave in V1 plus the R wave in V5 or V6 exceeding 35 mm. The Cornell voltage uses the S in V3 plus the R in aVL, with thresholds of 28 mm in men and 20 mm in women. Strain pattern adds ST depression and asymmetric T inversion in lateral leads. The **Cornell** and **Sokolow-Lyon** criteria are both widely used in examinations.",
+   "say": "Left ventricular hypertrophy is usually judged by voltage. Sokolow-Lyon uses the S wave in V1 plus the R wave in V5 or V6, with a total exceeding 35 millimetres. The Cornell voltage uses the S in V3 plus the R in aVL, with thresholds of 28 millimetres in men and 20 millimetres in women. Strain pattern adds ST depression and asymmetric T inversion in lateral leads. The Cornell and Sokolow-Lyon criteria are both widely used in examinations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sokolow-Lyon",
+     "points": [
+      "S in V1 plus R in V5 or V6",
+      "Total above 35 mm"
+     ]
+    },
+    "right": {
+     "title": "Cornell voltage",
+     "points": [
+      "S in V3 plus R in aVL",
+      "Above 28 mm men, 20 mm women"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Wellens syndrome** signals a critical proximal LAD stenosis in a pain-free patient with normal enzymes. Type A shows biphasic T waves in V2 and V3, while type B shows deep symmetric T inversion. Type A is seen in about 25 percent and type B in about 75 percent of cases. Type A often evolves into type B, so the patient needs urgent catheterisation rather than stress testing. The **de Winter pattern** of upsloping ST depression with tall T waves is a STEMI equivalent needing emergent reperfusion.",
+   "say": "Wellens syndrome signals a critical proximal LAD stenosis in a pain-free patient with normal enzymes. Type A shows biphasic T waves in V2 and V3, while type B shows deep symmetric T inversion. Type A is seen in about 25 percent and type B in about 75 percent of cases. Type A often evolves into type B, so the patient needs urgent catheterisation rather than stress testing. The de Winter pattern of upsloping ST depression with tall T waves is a STEMI equivalent needing emergent reperfusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wellens type A",
+     "points": [
+      "Biphasic T in V2 and V3",
+      "About 25 percent of cases"
+     ]
+    },
+    "right": {
+     "title": "Wellens type B",
+     "points": [
+      "Deep symmetric T inversion",
+      "About 75 percent, evolves from A"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hyperkalaemia** progresses from peaked T waves to PR prolongation, P wave loss, QRS widening and a sine-wave pattern. Immediate first-line treatment is intravenous calcium gluconate, which stabilises the myocardium without lowering potassium. Insulin with dextrose and nebulised salbutamol then shift potassium into cells, and dialysis or resins remove it. In **Brugada pattern**, a coved ST elevation of 2 mm or more in V1 and V2 signals SCN5A-related risk, and fever or sodium channel blockers can unmask it.",
+   "say": "Hyperkalaemia progresses from peaked T waves to PR prolongation, P wave loss, QRS widening and a sine-wave pattern. Immediate first-line treatment is intravenous calcium gluconate, which stabilises the myocardium without lowering potassium. Insulin with dextrose and nebulised salbutamol then shift potassium into cells, and dialysis or resins remove it. In Brugada pattern, a coved ST elevation of 2 mm or more in V1 and V2 signals SCN5A related risk, and fever or sodium channel blockers can unmask it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Peaked T waves"
+     },
+     {
+      "id": "b",
+      "label": "PR prolongation"
+     },
+     {
+      "id": "c",
+      "label": "P wave loss"
+     },
+     {
+      "id": "d",
+      "label": "QRS widening"
+     },
+     {
+      "id": "e",
+      "label": "Sine wave"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **QT interval** is measured from the start of QRS to the end of the T wave and corrected for heart rate, with the Bazett formula common in practice. Prolonged QTc above 500 ms raises the risk of torsades de pointes, and drugs such as class III antiarrhythmics and macrolides can prolong it. **Epsilon waves** of arrhythmogenic right ventricular cardiomyopathy appear as small late potentials at the end of the QRS. Electrical alternans, a beat-to-beat change in QRS amplitude, suggests large pericardial effusion or tamponade.",
+   "say": "The QT interval is measured from the start of QRS to the end of the T wave and corrected for heart rate, with the Bazett formula common in practice. Prolonged QTc above 500 milliseconds raises the risk of torsades de pointes, and drugs such as class III antiarrhythmics and macrolides can prolong it. Epsilon waves of arrhythmogenic right ventricular cardiomyopathy appear as small late potentials at the end of the QRS. Electrical alternans, a beat to beat change in QRS amplitude, suggests large pericardial effusion or tamponade.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_473bac1d85b2",
+  "q_f71944cee4ee",
+  "q_06add88e2b47"
+ ],
+ "src": [],
+ "refs": [
+  "Thygesen K et al. Fourth Universal Definition of Myocardial Infarction (Circulation)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 121
+ }
+}

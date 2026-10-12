@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "pat-oedema-haemorrhage",
+ "subject": "pathology",
+ "title": "Oedema, hyperaemia, congestion and haemorrhage",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Oedema** is excess interstitial fluid in tissues. Fluid movement follows Starling forces: **hydrostatic pressure** pushes fluid out of capillaries, while **oncotic pressure** from plasma albumin pulls it back in. Oedema arises when outward forces rise or inward forces fall. Only about 5 percent of body water sits in plasma, so small shifts matter.",
+   "say": "Oedema is excess interstitial fluid in tissues. Fluid movement follows Starling forces. Hydrostatic pressure pushes fluid out of capillaries, while oncotic pressure from plasma albumin pulls it back in. Oedema arises when outward forces rise or inward forces fall. Only about five percent of body water sits in plasma, so small shifts matter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Typical cause"
+    ],
+    "rows": [
+     [
+      "Raised hydrostatic pressure",
+      "Heart failure, deep venous thrombosis"
+     ],
+     [
+      "Low plasma albumin",
+      "Nephrotic syndrome, cirrhosis, protein-losing enteropathy"
+     ],
+     [
+      "Lymphatic obstruction",
+      "Inflammation, neoplasia, surgery, irradiation"
+     ],
+     [
+      "Raised vascular permeability",
+      "Acute and chronic inflammation"
+     ],
+     [
+      "Sodium and water retention",
+      "Renal failure, RAAS activation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hyperaemia** is an active increase in blood volume caused by arteriolar dilatation and greater inflow. **Congestion** is passive: blood backs up because venous outflow is impaired. Congestion is the key pathway in heart failure, where back pressure spreads to the lungs, liver, spleen and kidneys.",
+   "say": "Hyperaemia is an active increase in blood volume caused by arteriolar dilatation and greater inflow. Congestion is passive, because blood backs up when venous outflow is impaired. Congestion is the key pathway in heart failure, where back pressure spreads to the lungs, liver, spleen and kidneys.",
+   "vis": null
+  },
+  {
+   "tx": "Chronic passive congestion of the **liver** produces a nutmeg liver. Right-sided failure, tricuspid regurgitation, constrictive pericarditis and mitral stenosis are common causes. Centrilobular zone 3 becomes congested and haemorrhagic, with necrosis. In chronic cases, fibrous bands link central veins to portal tracts, a pattern called cardiac sclerosis, which differs from bridging fibrosis.",
+   "say": "Chronic passive congestion of the liver produces a nutmeg liver. Right-sided failure, tricuspid regurgitation, constrictive pericarditis and mitral stenosis are common causes. The centrilobular zone becomes congested and haemorrhagic, with necrosis. In chronic cases, fibrous bands link central veins to portal tracts, a pattern called cardiac sclerosis, which differs from bridging fibrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nutmeg liver",
+     "points": [
+      "Zone 3 centrilobular necrosis",
+      "Dark red congested sinusoids",
+      "Mottled cut surface"
+     ]
+    },
+    "right": {
+     "title": "Cirrhosis",
+     "points": [
+      "Bridging fibrosis between portal tracts",
+      "Regenerative nodules",
+      "Diffuse architecture change"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Heart failure cells** are hemosiderin-laden alveolar macrophages. In left-sided failure, raised pulmonary capillary pressure leaks red cells into alveoli. Macrophages digest them and store iron as hemosiderin. Their presence on bronchoalveolar lavage points to chronic pulmonary congestion. Iron stains blue with Prussian blue, and the lung is the most common extracardiac organ affected by left ventricular failure.",
+   "say": "Heart failure cells are hemosiderin laden alveolar macrophages. In left sided failure, raised pulmonary capillary pressure leaks red cells into alveoli. Macrophages digest them and store iron as hemosiderin. Their presence on bronchoalveolar lavage points to chronic pulmonary congestion. Iron stains blue with Prussian blue, and the lung is the most commonly affected extracardiac organ in left ventricular failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "LV failure"
+     },
+     {
+      "id": "b",
+      "label": "Raised pulmonary pressure"
+     },
+     {
+      "id": "c",
+      "label": "Red cells leak"
+     },
+     {
+      "id": "d",
+      "label": "Hemosiderin macrophages"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Haemostasis** has three parts: endothelium, platelets and the coagulation system. Vascular injury first causes brief vasoconstriction. Platelets then adhere and aggregate to form a plug. Endothelial cells promote clotting through tissue factor and von Willebrand factor, while thrombomodulin and prostacyclin act as anticoagulants. Fibrinolysis, not vasospasm, is the later limiting step.",
+   "say": "Haemostasis has three parts: endothelium, platelets and the coagulation system. Vascular injury first causes brief vasoconstriction. Platelets then adhere and aggregate to form a plug. Endothelial cells promote clotting through tissue factor and von Willebrand factor, while thrombomodulin and prostacyclin act as anticoagulants. Fibrinolysis, not vasospasm, is the later limiting step.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "d33dbeb9-24e5-4bbd-8b30-50ac2c065f88",
+  "449f286f-2901-4b5c-aacf-56bcd9bf2d98",
+  "7635aa93-ec01-4325-93b5-d3044d056125"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology",
+  "Harsh Mohan Textbook of Pathology",
+  "Robbins and Cotran Pathologic Basis of Disease"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 112
+ }
+}

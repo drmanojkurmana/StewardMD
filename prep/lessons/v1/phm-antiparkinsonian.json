@@ -1,0 +1,178 @@
+{
+ "v": 1,
+ "module": "phm-antiparkinsonian",
+ "subject": "pharmacology",
+ "title": "Antiparkinsonian drugs and drugs for dementia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Parkinsonism results from loss of dopaminergic neurons in the substantia nigra. **Levodopa** is the most effective drug and is converted to dopamine in the brain. Because it is decarboxylated in the periphery, it is always given with **carbidopa**, a peripheral dopa decarboxylase inhibitor, which raises brain levodopa and cuts nausea. Pyridoxine must be avoided with levodopa alone because it speeds peripheral breakdown.",
+   "say": "Parkinsonism results from loss of dopaminergic neurons in the substantia nigra. Levodopa is the most effective drug and is converted to dopamine in the brain. Because it is decarboxylated in the periphery, it is always given with carbidopa, a peripheral dopa decarboxylase inhibitor, which raises brain levodopa and reduces nausea. Pyridoxine must be avoided with levodopa alone because it speeds peripheral breakdown.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Levodopa",
+      "Dopamine precursor",
+      "Most effective agent"
+     ],
+     [
+      "Carbidopa",
+      "Peripheral decarboxylase block",
+      "Does not enter brain"
+     ],
+     [
+      "Pyridoxine",
+      "Enhances peripheral breakdown",
+      "Reduces levodopa effect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-term levodopa causes **wearing off**, where benefit falls before the next dose, and later **on-off** fluctuations with all-or-none responses. Dyskinesias such as facial tics and choreoathetoid limb movements are dose-limiting. Behavioural effects range from nightmares to psychosis. Dose fractionation helps for a time.",
+   "say": "Long-term levodopa causes wearing off, where benefit falls before the next dose, and later on-off fluctuations with all-or-none responses. Dyskinesias such as facial tics and choreoathetoid limb movements are dose-limiting. Behavioural effects range from nightmares to psychosis. Dose fractionation helps for a time.",
+   "vis": null
+  },
+  {
+   "tx": "**COMT inhibitors** such as **entacapone** and tolcapone block peripheral conversion of levodopa to 3-O-methyldopa. This prolongs levodopa's half-life and extends the on phase. Tolcapone carries a risk of hepatotoxicity, so entacapone is used more often. Entacapone is the selective COMT inhibitor commonly tested in exams.",
+   "say": "COMT inhibitors such as entacapone and tolcapone block peripheral conversion of levodopa to 3-O-methyldopa. This prolongs levodopa's half-life and extends the on phase. Tolcapone carries a risk of hepatotoxicity, so entacapone is used more often. Entacapone is the selective COMT inhibitor commonly tested in exams.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Levodopa"
+     },
+     {
+      "id": "b",
+      "label": "Dopa decarboxylase"
+     },
+     {
+      "id": "c",
+      "label": "Dopamine in brain"
+     },
+     {
+      "id": "d",
+      "label": "COMT pathway"
+     },
+     {
+      "id": "e",
+      "label": "Entacapone blocks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d",
+      "alternative"
+     ],
+     [
+      "e",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bromocriptine**, **ropinirole** and **pramipexole** are direct D2 agonists; pergolide and bromocriptine are ergot derivatives. Ergot agents can cause peripheral vasospasm, and retroperitoneal fibrosis is a feared effect with ergots. Ropinirole and pramipexole are non-ergot and are the agents used for restless legs syndrome, at low doses taken before bed.",
+   "say": "Bromocriptine, ropinirole and pramipexole are direct D2 agonists; pergolide and bromocriptine are ergot derivatives. Ergot agents can cause peripheral vasospasm, and retroperitoneal fibrosis is a feared effect with ergots. Ropinirole and pramipexole are non-ergot and are the agents used for restless legs syndrome, at low doses taken before bed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ergot agonists",
+     "points": [
+      "Bromocriptine, pergolide",
+      "Vasospasm and fibrosis risk",
+      "Can cause postural hypotension"
+     ]
+    },
+    "right": {
+     "title": "Non-ergot agonists",
+     "points": [
+      "Ropinirole, pramipexole",
+      "Preferred for restless legs",
+      "Nausea, sedation, hallucinations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Selegiline** and **rasagiline** are selective MAO-B inhibitors used in Parkinsonism, while MAO-A inhibitors treat depression. Amantadine, an antiviral for influenza A, helps Parkinsonism and can cause ankle oedema and livedo reticularis. **Trihexyphenidyl** is the central anticholinergic of choice for drug-induced Parkinsonism, mainly helping tremor.",
+   "say": "Selegiline and rasagiline are selective MAO-B inhibitors used in Parkinsonism, while MAO-A inhibitors treat depression. Amantadine, an antiviral for influenza A, helps Parkinsonism and can cause ankle oedema and livedo reticularis. Trihexyphenidyl is the central anticholinergic of choice for drug-induced Parkinsonism, mainly helping tremor.",
+   "vis": null
+  },
+  {
+   "tx": "In dementia, the mainstay is a cholinesterase inhibitor: **donepezil**, **rivastigmine**, or **galantamine**, with tacrine now avoided because of hepatotoxicity. **Memantine** is an NMDA receptor antagonist used in Alzheimer disease. Tricyclic antidepressants with strong anticholinergic action reduce cholinesterase inhibitor efficacy, so SSRIs are preferred for depression in these patients.",
+   "say": "In dementia, the mainstay is a cholinesterase inhibitor: donepezil, rivastigmine, or galantamine, with tacrine now avoided because of hepatotoxicity. Memantine is an NMDA receptor antagonist used in Alzheimer disease. Tricyclic antidepressants with strong anticholinergic action reduce cholinesterase inhibitor efficacy, so SSRIs are preferred for depression in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Class",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Donepezil",
+      "Cholinesterase inhibitor",
+      "Alzheimer disease"
+     ],
+     [
+      "Rivastigmine",
+      "Cholinesterase inhibitor",
+      "Alzheimer disease"
+     ],
+     [
+      "Galantamine",
+      "Natural alkaloid inhibitor",
+      "Alzheimer disease"
+     ],
+     [
+      "Memantine",
+      "NMDA antagonist",
+      "Alzheimer disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "6acbb053-f785-4858-8229-cae36ed6267b",
+  "858e4e64-7849-4437-80b6-800f62b5cfa3",
+  "e887e166-20b9-424d-9e91-7a6acfc9e763"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung's Basic and Clinical Pharmacology (Katzung et al.)",
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 169
+ }
+}

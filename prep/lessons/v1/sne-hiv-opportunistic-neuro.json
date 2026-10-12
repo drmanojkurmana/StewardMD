@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "sne-hiv-opportunistic-neuro",
+ "subject": "ss-neurology",
+ "title": "HIV and opportunistic CNS infections: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cryptococcal meningitis is the commonest fungal CNS infection in advanced **HIV**, usually when CD4 counts fall below 100 cells per microlitre. Patients often lack neck stiffness and present with subacute headache, confusion and personality change. The key diagnostic test is the **cryptococcal antigen** in serum or CSF, and **India ink** staining of CSF can show encapsulated yeasts. Serum antigen screening is advised for asymptomatic patients with CD4 counts below 200.",
+   "say": "Cryptococcal meningitis is the commonest fungal central nervous system infection in advanced HIV, usually when CD4 counts fall below one hundred cells per microlitre. Patients often lack neck stiffness and present with subacute headache, confusion and personality change. The key diagnostic test is the cryptococcal antigen in serum or CSF, and India ink staining of CSF can show encapsulated yeasts. Serum antigen screening is advised for asymptomatic patients with CD4 counts below two hundred.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "What it shows",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "CSF India ink",
+      "Encapsulated yeasts",
+      "Quick bedside stain"
+     ],
+     [
+      "Cryptococcal antigen",
+      "Capsular polysaccharide",
+      "Sensitive in serum and CSF"
+     ],
+     [
+      "Serum CrAg screen",
+      "Silent infection",
+      "Advised when CD4 below 200"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Induction therapy combines **amphotericin B** with **flucytosine** for the first two weeks, followed by fluconazole consolidation and then maintenance. Flucytosine causes marrow suppression, so complete blood counts are checked weekly during induction. Maintenance fluconazole is given at 200 mg daily until immune reconstitution is achieved. Under WHO 2022 guidance, a single high dose of liposomal amphotericin with flucytosine and fluconazole is the preferred induction option in HIV patients.",
+   "say": "Induction therapy combines amphotericin B with flucytosine for the first two weeks, followed by fluconazole consolidation and then maintenance. Flucytosine causes marrow suppression, so complete blood counts are checked weekly during induction. Maintenance fluconazole is given at two hundred milligrams daily until immune reconstitution is achieved. Under WHO 2022 guidance, a single high dose of liposomal amphotericin with flucytosine and fluconazole is the preferred induction option in HIV patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Induction",
+      "sub": "Amphotericin plus flucytosine"
+     },
+     {
+      "id": "b",
+      "label": "Consolidation",
+      "sub": "Fluconazole"
+     },
+     {
+      "id": "c",
+      "label": "Maintenance",
+      "sub": "Fluconazole 200 mg daily"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Raised intracranial pressure is a major cause of death and blindness in cryptococcal meningitis. Opening pressure is measured at lumbar puncture, and **therapeutic lumbar punctures** are repeated to bring pressure below 20 cmH2O or to half the baseline value. Acetazolamide and mannitol are not the mainstay, and steroids are avoided in cryptococcal disease because they impair fungal clearance and raise mortality. Shunting is reserved for refractory cases.",
+   "say": "Raised intracranial pressure is a major cause of death and blindness in cryptococcal meningitis. Opening pressure is measured at lumbar puncture, and therapeutic lumbar punctures are repeated to bring pressure below twenty centimetres of water or to half the baseline value. Acetazolamide and mannitol are not the mainstay, and steroids are avoided in cryptococcal disease because they impair fungal clearance and raise mortality. Shunting is reserved for refractory cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pressure control",
+     "points": [
+      "Repeat therapeutic LPs",
+      "Target below 20 cmH2O or half baseline",
+      "Avoid routine steroids"
+     ]
+    },
+    "right": {
+     "title": "Steroids in cryptococcosis",
+     "points": [
+      "Impair fungal clearance",
+      "Linked with higher mortality",
+      "Reserved for IRIS only"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Timing of **antiretroviral therapy** matters in **cryptococcal meningitis**. Starting it straight away, rather than waiting roughly four to six weeks after antifungal treatment begins, raises mortality and the chance of **IRIS**, or **immune reconstitution inflammatory syndrome**. In the CNS, IRIS shows a **CD8 lymphocyte-predominant pleocytosis** and can be life-threatening. Where it occurs, **prednisolone** at about 1 mg/kg daily for at least a week may be given once raised intracranial pressure has been controlled.",
+   "say": "Timing of antiretroviral therapy matters in cryptococcal meningitis. Starting it straight away, rather than waiting roughly four to six weeks after antifungal treatment begins, raises mortality and the chance of IRIS, or immune reconstitution inflammatory syndrome. In the central nervous system, IRIS shows a CD8 lymphocyte-predominant pleocytosis and can be life-threatening. Where it occurs, prednisolone at about one milligram per kilogram daily for at least a week may be given once raised intracranial pressure has been controlled.",
+   "vis": null
+  },
+  {
+   "tx": "HIV-associated neurocognitive disorder spans three grades: asymptomatic impairment, mild neurocognitive disorder and HIV-associated dementia. Asymptomatic impairment is now the most common form in the post-HAART era. Microglia are the main cells infected and act as the reservoir. Before labelling dementia, confounders such as stroke, malignancy and substance use must be excluded. **Progressive multifocal leukoencephalopathy** from JC virus and **CMV ventriculitis** are other opportunistic CNS causes to remember.",
+   "say": "HIV-associated neurocognitive disorder spans three grades: asymptomatic impairment, mild neurocognitive disorder and HIV-associated dementia. Asymptomatic impairment is now the most common form in the post-HAART era. Microglia are the main cells infected and act as the reservoir. Before labelling dementia, confounders such as stroke, malignancy and substance use must be excluded. Progressive multifocal leukoencephalopathy from JC virus and CMV ventriculitis are other opportunistic central nervous system causes to remember.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_32da561e1d56",
+  "q_bfedddf04567",
+  "q_8fe50f3f1c23"
+ ],
+ "src": [],
+ "refs": [
+  "WHO guidelines for diagnosing, preventing and managing cryptococcal disease among adults in the context of HIV (2022)",
+  "Frascati criteria for HIV-associated neurocognitive disorders",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 44
+ }
+}

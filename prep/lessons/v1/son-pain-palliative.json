@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "son-pain-palliative",
+ "subject": "ss-medical-oncology",
+ "title": "Cancer pain and palliative care: the essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cancer pain is often **nociceptive** (somatic or visceral) and sometimes **neuropathic**. Assess intensity with a validated scale and treat the whole person. The WHO analgesic ladder guides therapy: step 1 uses non-opioids such as paracetamol or NSAIDs, step 2 adds a weak opioid, and step 3 uses a strong opioid such as morphine. Adjuvants like steroids or gabapentinoids can be added at any step. Opioids should be given by the clock, not only when needed, to keep steady levels.",
+   "say": "Cancer pain is often nociceptive, meaning somatic or visceral, and sometimes neuropathic. Assess intensity with a validated scale and treat the whole person. The WHO analgesic ladder guides therapy. Step one uses non-opioids such as paracetamol or NSAIDs. Step two adds a weak opioid. Step three uses a strong opioid such as morphine. Adjuvants like steroids or gabapentinoids can be added at any step. Opioids should be given around the clock, not only when needed, to keep steady levels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ladder step",
+     "Typical agents"
+    ],
+    "rows": [
+     [
+      "Step 1",
+      "Paracetamol or NSAID"
+     ],
+     [
+      "Step 2",
+      "Weak opioid plus non-opioid"
+     ],
+     [
+      "Step 3",
+      "Strong opioid such as morphine"
+     ],
+     [
+      "Adjuvant",
+      "Steroid, gabapentinoid, antidepressant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Start opioids low in older or frail patients, and titrate slowly because of reduced renal reserve and heightened sensitivity. Calculate **oral morphine equivalence** when switching agents. When changing to a long-acting morphine formulation, give roughly 50 to 75 percent of the total daily short-acting dose. In **opioid rotation**, the aim is better analgesia and fewer side effects when one opioid fails despite escalation.",
+   "say": "Start opioids low in older or frail patients and titrate slowly, because of reduced renal reserve and heightened sensitivity. Calculate oral morphine equivalence when switching agents. When changing to a long-acting morphine formulation, give roughly 50 to 75 percent of the total daily short-acting dose. In opioid rotation, the aim is better analgesia and fewer side effects when one opioid fails despite escalation.",
+   "vis": null
+  },
+  {
+   "tx": "Opioid toxicity presents with excessive sedation, myoclonus and pinpoint pupils. The priority is an urgent dose review. Renal impairment causes accumulation of **morphine-3 and 6-glucuronide**, which can trigger myoclonus and seizures. For suspected overdose, naloxone 0.4 to 1 mg IV is standard in adults, and it may be repeated after 3 to 8 minutes. Sedation usually comes before respiratory depression, so it is a key early warning sign. Fentanyl suits ventilated patients who are haemodynamically unstable.",
+   "say": "Opioid toxicity presents with excessive sedation, myoclonus and pinpoint pupils. The priority is an urgent dose review. Renal impairment causes accumulation of morphine-3 and 6-glucuronide, which can trigger myoclonus and seizures. For suspected overdose, naloxone 0.4 to 1 mg intravenously is standard in adults, and it may be repeated after 3 to 8 minutes. Sedation usually comes before respiratory depression, so it is a key early warning sign. Fentanyl suits ventilated patients who are haemodynamically unstable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sedation or myoclonus"
+     },
+     {
+      "id": "b",
+      "label": "Urgent opioid dose review"
+     },
+     {
+      "id": "c",
+      "label": "Naloxone 0.4 to 1 mg IV"
+     },
+     {
+      "id": "d",
+      "label": "Repeat after 3 to 8 min if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "New, changing or thoracic back pain in a patient with cancer needs prompt imaging to exclude **malignant spinal cord compression**. Neuropathic pain, such as burning or shooting pain, is treated with adjuvants. Pregabalin treats neuropathic bone pain but needs dose reduction in renal impairment. In India, methadone is used by specialists, but it prolongs the QT interval, so avoid it where cardiac risk is high. Pain that worsens after an opioid dose cut may reflect withdrawal rather than progression.",
+   "say": "New, changing or thoracic back pain in a patient with cancer needs prompt imaging to exclude malignant spinal cord compression. Neuropathic pain, such as burning or shooting pain, is treated with adjuvants. Pregabalin treats neuropathic bone pain but needs dose reduction in renal impairment. Methadone prolongs the QT interval, so avoid it where cardiac risk is high. Pain that worsens after an opioid dose cut may reflect withdrawal rather than progression.",
+   "vis": null
+  },
+  {
+   "tx": "**Total pain**, described by Cicely Saunders, includes physical, emotional, social and spiritual components. Early palliative care, as shown in the Temel trial, improves quality of life and can aid survival. **Palliative sedation** is reserved for refractory suffering near death, not for mild anxiety. Indian (ICMR and NMC) and US practice both support this principle, while NICE guidance on opioid use in cancer should be followed where it applies.",
+   "say": "Total pain, described by Cicely Saunders, includes physical, emotional, social and spiritual components. Early palliative care, as shown in the Temel trial, improves quality of life and can aid survival. Palliative sedation is reserved for refractory suffering near death, not for mild anxiety. Indian and US practice both support this principle, while NICE guidance on opioid use in cancer should be followed where it applies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Total pain domains",
+     "points": [
+      "Physical",
+      "Emotional",
+      "Social",
+      "Spiritual"
+     ]
+    },
+    "right": {
+     "title": "Palliative sedation",
+     "points": [
+      "Refractory suffering",
+      "Impending death",
+      "Not for mild anxiety"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_75ee63efbfec",
+  "q_9681427ca255",
+  "q_f48afe332b9a"
+ ],
+ "src": [],
+ "refs": [
+  "WHO Guidelines for the Pharmacological and Radiotherapeutic Management of Cancer Pain in Adults and Adolescents",
+  "Oxford Textbook of Palliative Medicine (Bennett, Hanks, Kaasa)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 32
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "v": 1,
+ "module": "cm-infectious-epi",
+ "subject": "community-medicine",
+ "title": "Core concepts in infectious disease epidemiology: incubation, carriers, reservoirs and control",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **incubation period** is the time from invasion by an infectious agent to the first sign or symptom of disease. During this window the agent multiplies in the host. Factors that shape it include generation time, infective dose, portal of entry and individual susceptibility. A shorter incubation period generally signals a worse prognosis, as seen in tetanus and rabies. It also helps trace common source outbreaks.",
+   "say": "The incubation period is the time from invasion by an infectious agent to the first sign or symptom of disease. During this window the agent multiplies in the host. Factors that shape it include generation time, infective dose, portal of entry and individual susceptibility. A shorter incubation period generally signals a worse prognosis, as seen in tetanus and rabies. It also helps trace common source outbreaks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Approximate incubation"
+    ],
+    "rows": [
+     [
+      "Influenza",
+      "18 to 72 hours"
+     ],
+     [
+      "Cholera",
+      "1 to 2 days, up to 5"
+     ],
+     [
+      "Measles",
+      "About 10 days to fever"
+     ],
+     [
+      "Mumps",
+      "2 to 3 weeks"
+     ],
+     [
+      "Hepatitis B",
+      "30 to 180 days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Generation time** is the interval between receipt of infection by a host and that host's maximal infectivity. It roughly equals the incubation period but is not identical. The **serial interval** is the gap between onset in a primary case and onset in a secondary case. Collecting many such gaps lets investigators estimate the incubation period. The **median incubation period** is the time by which half of exposed cases have appeared.",
+   "say": "Generation time is the interval between receipt of infection by a host and that host's maximal infectivity. It roughly equals the incubation period but is not identical. The serial interval is the gap between onset in a primary case and onset in a secondary case. Collecting many such gaps lets investigators estimate the incubation period. The median incubation period is the time by which half of exposed cases have appeared.",
+   "vis": null
+  },
+  {
+   "tx": "**Isolation** separates infected persons during their communicable period, so they cannot pass the agent on. **Quarantine** instead restricts well people who were exposed, for no longer than the longest usual incubation period. Quarantine has largely given way to active surveillance. Herd immunity, when high enough, can lead to disease elimination, as achieved for diphtheria and polio. Neonatal tetanus is not controlled by isolation.",
+   "say": "Isolation separates infected persons during their communicable period, so they cannot pass the agent on. Quarantine instead restricts well people who were exposed, for no longer than the longest usual incubation period. Quarantine has largely given way to active surveillance. Herd immunity, when high enough, can lead to disease elimination, as achieved for diphtheria and polio. Neonatal tetanus is not controlled by isolation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Isolation",
+     "points": [
+      "Applies to the infected",
+      "Lasts the communicable period",
+      "Stops transmission to susceptibles"
+     ]
+    },
+    "right": {
+     "title": "Quarantine",
+     "points": [
+      "Applies to exposed well people",
+      "Lasts up to longest incubation period",
+      "Now largely replaced by surveillance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vector borne transmission depends on the agent's change in the vector. In **cyclo-propagative** transmission the agent changes both form and number, as malaria parasites do in mosquitoes. In **propagative** transmission the agent multiplies without changing form, as plague bacilli do in rat fleas. In **cyclo-developmental** transmission the agent develops but does not multiply, as microfilaria do in mosquitoes. Man is a dead-end host in rabies, tetanus and Japanese encephalitis.",
+   "say": "Vector borne transmission depends on the agent's change in the vector. In cyclo-propagative transmission the agent changes both form and number, as malaria parasites do in mosquitoes. In propagative transmission the agent multiplies without changing form, as plague bacilli do in rat fleas. In cyclo-developmental transmission the agent develops but does not multiply, as microfilaria do in mosquitoes. Man is a dead-end host in rabies, tetanus and Japanese encephalitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Agent change",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Cyclo-propagative",
+      "Form and number change",
+      "Malaria in mosquito"
+     ],
+     [
+      "Propagative",
+      "Number only",
+      "Plague in rat flea"
+     ],
+     [
+      "Cyclo-developmental",
+      "Form only",
+      "Microfilaria in mosquito"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "790e2a7d-4101-4e6a-9723-ac99ea0a9fc4",
+  "91465078-c92d-474e-bde1-378d21d671a4",
+  "188ee95a-fa5a-49b1-9a45-23602d35efdc"
+ ],
+ "src": [],
+ "refs": [
+  "Park K. Park's Textbook of Preventive and Social Medicine (Park K)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 227
+ }
+}

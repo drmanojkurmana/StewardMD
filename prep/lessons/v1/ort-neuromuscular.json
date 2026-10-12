@@ -1,0 +1,155 @@
+{
+ "v": 1,
+ "module": "ort-neuromuscular",
+ "subject": "orthopaedics",
+ "title": "Neuromuscular disorders in orthopaedics",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Neuromuscular disorders cause **muscle imbalance**, which produces predictable deformities. Muscle power is graded from 0 to 5. Grade 3 means the joint moves against gravity but not against resistance, and grade 4 means it moves against gravity and some resistance. Limbs that can move against gravity but not against force are therefore grade 3. Recognising the grade pattern helps predict the deformity.",
+   "say": "Neuromuscular disorders cause muscle imbalance, which produces predictable deformities. Muscle power is graded from zero to five. Grade three means the joint moves against gravity but not against resistance, and grade four means it moves against gravity and some resistance. Limbs that can move against gravity but not against force are therefore grade three. Recognising the grade pattern helps predict the deformity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "0",
+      "No contraction"
+     ],
+     [
+      "1",
+      "Flicker only"
+     ],
+     [
+      "2",
+      "Moves joint, not against gravity"
+     ],
+     [
+      "3",
+      "Moves against gravity"
+     ],
+     [
+      "4",
+      "Moves against gravity and resistance"
+     ],
+     [
+      "5",
+      "Normal strength"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **post-polio residual paralysis**, the foot deformity depends on which muscles are strong. If the calf (gastrocnemius) is weak but the tibialis anterior is strong, the foot is pulled into dorsiflexion, producing a calcaneal pattern. If the peronei are weak while tibialis anterior is strong, the foot drifts into varus. Tendon transfers are done only after the child is about five years old, when they can cooperate with rehabilitation.",
+   "say": "In post-polio residual paralysis, the foot deformity depends on which muscles are strong. If the calf gastrocnemius is weak but the tibialis anterior is strong, the foot is pulled into dorsiflexion, producing a calcaneal pattern. If the peronei are weak while tibialis anterior is strong, the foot drifts into varus. Tendon transfers are done only after the child is about five years old, when they can cooperate with rehabilitation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Calcaneal pattern",
+     "points": [
+      "Gastrocnemius weak",
+      "Tibialis anterior strong",
+      "Foot pulled into dorsiflexion"
+     ]
+    },
+    "right": {
+     "title": "Varus pattern",
+     "points": [
+      "Peronei weak",
+      "Tibialis anterior unopposed",
+      "Foot drifts into inversion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Common **tendon transfers** include extensor hallucis longus to the first metatarsal neck for tibialis anterior weakness, and peronei transferred to the dorsum of the foot for dorsiflexor weakness. Hamstrings can be moved to the quadriceps to support a weak knee extensor. The aim is to redistribute working muscle power, not to add strength to a single muscle.",
+   "say": "Common tendon transfers include extensor hallucis longus to the first metatarsal neck for tibialis anterior weakness, and peronei transferred to the dorsum of the foot for dorsiflexor weakness. Hamstrings can be moved to the quadriceps to support a weak knee extensor. The aim is to redistribute working muscle power, not to add strength to a single muscle.",
+   "vis": null
+  },
+  {
+   "tx": "Poliomyelitis also produces a characteristic **hip deformity**. In the acute phase the child lies in a frog-legged posture with hips flexed, abducted and externally rotated, knees flexed and feet in equinovarus. Early spasm later becomes fixed contracture of fascia and intermuscular septum, and growth worsens the deformity. Gait may show a Trendelenburg pattern when gluteus medius and minimus are paralysed.",
+   "say": "Poliomyelitis also produces a characteristic hip deformity. In the acute phase the child lies in a frog-legged posture with hips flexed, abducted and externally rotated, knees flexed and feet in equinovarus. Early spasm later becomes fixed contracture of fascia and intermuscular septum, and growth worsens the deformity. Gait may show a Trendelenburg pattern when gluteus medius and minimus are paralysed.",
+   "vis": null
+  },
+  {
+   "tx": "**Duchenne muscular dystrophy** is X-linked recessive, affects boys, and results from a dystrophin gene defect on Xp21. Proximal weakness forces the child to use hands to climb up the thighs, the Gowers sign. Calf pseudohypertrophy from fatty and fibrous replacement is typical. Cardiomyopathy and cardiac failure may occur, and life expectancy is around the mid-twenties. Diagnosis is confirmed by genetic testing or muscle biopsy.",
+   "say": "Duchenne muscular dystrophy is X-linked recessive, affects boys, and results from a dystrophin gene defect on Xp21. Proximal weakness forces the child to use hands to climb up the thighs, the Gowers sign. Calf pseudohypertrophy from fatty and fibrous replacement is typical. Cardiomyopathy and cardiac failure may occur, and life expectancy is around the mid-twenties. Diagnosis is confirmed by genetic testing or muscle biopsy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dystrophin defect"
+     },
+     {
+      "id": "b",
+      "label": "Proximal weakness"
+     },
+     {
+      "id": "c",
+      "label": "Gowers sign"
+     },
+     {
+      "id": "d",
+      "label": "Calf pseudohypertrophy"
+     },
+     {
+      "id": "e",
+      "label": "Cardiomyopathy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "a",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Charcot's neuropathic joint** is a progressive destructive arthropathy from loss of pain and proprioception. Diabetes mellitus is the most common cause in current practice, followed by tabes dorsalis, syringomyelia, leprosy and myelomeningocele. The classic presentation is a painless, swollen joint, often the ankle, with loose bodies and fragmentation on X-ray. Treatment includes bracing or casting, debridement and arthrodesis, while arthroplasty is least preferred at the ankle.",
+   "say": "Charcot's neuropathic joint is a progressive destructive arthropathy from loss of pain and proprioception. Diabetes mellitus is the most common cause in current practice, followed by tabes dorsalis, syringomyelia, leprosy and myelomeningocele. The classic presentation is a painless, swollen joint, often the ankle, with loose bodies and fragmentation on X-ray. Treatment includes bracing or casting, debridement and arthrodesis, while arthroplasty is least preferred at the ankle.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6e8e4aef-b0ab-4fef-ab93-3309531ff9d4",
+  "427eab8b-80f7-4b9d-bef8-568f7171baad",
+  "530d3285-39a0-4c5f-be19-0d74bb08fd3f"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (16th edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 24
+ }
+}

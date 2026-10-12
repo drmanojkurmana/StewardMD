@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "module": "rad-genitourinary",
+ "subject": "radiology",
+ "title": "Genitourinary radiology: key investigations and classic signs",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Choosing the right test is the core of genitourinary imaging. **Non-contrast CT** is the investigation of choice for renal and ureteric stones, because nearly all calculi show up, even radiolucent ones. **Ultrasound** is the most common initial test for urinary obstruction, hydronephrosis and pyonephrosis, and is also the usual first look at urinary tract malignancy. Remember these pairings, as they recur in NEET-PG and INI-CET questions.",
+   "say": "Choosing the right test is the core of genitourinary imaging. Non-contrast CT is the investigation of choice for renal and ureteric stones, because nearly all calculi show up, even radiolucent ones. Ultrasound is the most common initial test for urinary obstruction, hydronephrosis and pyonephrosis, and is also the usual first look at urinary tract malignancy. Remember these pairings, as they recur in NEET-PG and INI-CET questions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical question",
+     "Investigation of choice"
+    ],
+    "rows": [
+     [
+      "Renal or ureteric stone",
+      "Non-contrast CT"
+     ],
+     [
+      "Hydronephrosis or pyonephrosis",
+      "Ultrasound"
+     ],
+     [
+      "Renal cell carcinoma staging",
+      "Contrast-enhanced CT"
+     ],
+     [
+      "IVC or renal vein involvement",
+      "MRI first, Doppler ultrasound second"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Voiding studies answer the paediatric and reflux questions. The **micturating cystourethrogram (MCU)** is the investigation of choice for **vesicoureteral reflux** and **posterior urethral valves**, and it is the best method to see the posterior urethra. Retrograde urethrography is reserved for the anterior, penile urethra. In a suspected valve, look for a dilated posterior urethra on the voiding film.",
+   "say": "Voiding studies answer the paediatric and reflux questions. The micturating cystourethrogram, abbreviated MCU, is the investigation of choice for vesicoureteral reflux and posterior urethral valves, and it is the best method to see the posterior urethra. Retrograde urethrography is reserved for the anterior, penile urethra. In a suspected valve, look for a dilated posterior urethra on the voiding film.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Voiding (MCU)",
+     "points": [
+      "Best for posterior urethra",
+      "Investigation of choice for reflux",
+      "Investigation of choice for posterior urethral valves"
+     ]
+    },
+    "right": {
+     "title": "Retrograde urethrogram",
+     "points": [
+      "Best for anterior, penile urethra",
+      "Contrast injected at urethral tip"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Several IVU signs point to a specific diagnosis. A **cobra head** or adder head appearance, a bulbous distal ureter inside the opacified bladder, indicates a **ureterocoele**. A **drooping lily** appearance of the distal ureter is typical of an ectopic ureter. In polycystic kidney disease, calyces stretched over cysts give the **spider leg** appearance, and the **Swiss cheese** nephrogram reflects innumerable lucent cysts.",
+   "say": "Several IVU signs point to a specific diagnosis. A cobra head or adder head appearance, a bulbous distal ureter inside the opacified bladder, indicates a ureterocoele. A drooping lily appearance of the distal ureter is typical of an ectopic ureter. In polycystic kidney disease, calyces stretched over cysts give the spider leg appearance, and the Swiss cheese nephrogram reflects innumerable lucent cysts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Classic diagnosis"
+    ],
+    "rows": [
+     [
+      "Cobra head or adder head",
+      "Ureterocoele"
+     ],
+     [
+      "Drooping lily",
+      "Ectopic ureter"
+     ],
+     [
+      "Spider leg calyces",
+      "Polycystic kidney disease"
+     ],
+     [
+      "Swiss cheese nephrogram",
+      "Polycystic kidney disease"
+     ],
+     [
+      "Fish hook distal ureters",
+      "Benign prostatic hypertrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Some signs point to chronic scarring or stones. A **rim sign** of thinned parenchyma around a dilated pelvicalyceal system suggests **chronic hydronephrosis**. **Papillary necrosis** shows an egg-in-cup or ring sign, while **medullary sponge kidney** shows a paint brush appearance. A **staghorn calculus** fills the renal pelvis and extends into the calyces, and it is typically a struvite stone with infection.",
+   "say": "Some signs point to chronic scarring or stones. A rim sign of thinned parenchyma around a dilated pelvicalyceal system suggests chronic hydronephrosis. Papillary necrosis shows an egg-in-cup or ring sign, while medullary sponge kidney shows a paint brush appearance. A staghorn calculus fills the renal pelvis and extends into the calyces, and it is typically a struvite stone with infection.",
+   "vis": null
+  },
+  {
+   "tx": "Renal masses are graded with the **Bosniak classification** on contrast CT. Simple cysts are Bosniak I and need no follow-up. Higher categories have increasing thickened or enhancing septa and solid components, and category IV carries a high malignancy risk. Renal artery stenosis is the classic cause of renovascular hypertension, and the **string of beads** appearance of the renal artery reflects medial fibroplasia. CT angiography is the next most accurate screen after catheter angiography, which remains the gold standard.",
+   "say": "Renal masses are graded with the Bosniak classification on contrast CT. Simple cysts are Bosniak I and need no follow-up. Higher categories have increasing thickened or enhancing septa and solid components, and category IV carries a high malignancy risk. Renal artery stenosis is the classic cause of renovascular hypertension, and the string of beads appearance of the renal artery reflects medial fibroplasia. CT angiography is the next most accurate screen after catheter angiography, which remains the gold standard.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Renal mass on CT"
+     },
+     {
+      "id": "b",
+      "label": "Bosniak I cyst"
+     },
+     {
+      "id": "c",
+      "label": "Higher Bosniak category"
+     },
+     {
+      "id": "d",
+      "label": "Solid or enhancing features"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "Simple fluid"
+     ],
+     [
+      "a",
+      "c",
+      "Septa or nodules"
+     ],
+     [
+      "c",
+      "d",
+      "Further risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uterine and scrotal imaging complete the picture. **Hysterosalpingography** shows the uterine cavity but cannot assess the outer uterine contour, so it cannot reliably separate a bicornuate from a septate uterus. A **didelphys** uterus has two separate horns and cervices, while a **unicornuate** uterus gives a banana-shaped cavity. For **torsion of the testis**, colour Doppler ultrasound is the imaging of choice, showing reduced or absent flow.",
+   "say": "Uterine and scrotal imaging complete the picture. Hysterosalpingography shows the uterine cavity but cannot assess the outer uterine contour, so it cannot reliably separate a bicornuate from a septate uterus. A didelphys uterus has two separate horns and cervices, while a unicornuate uterus gives a banana-shaped cavity. For torsion of the testis, colour Doppler ultrasound is the imaging of choice, showing reduced or absent flow.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6309f768-3118-42f4-9963-4bc101ea7dc5",
+  "505dbb40-bee8-43e6-8c16-a665b9903047",
+  "7bcc7023-7370-4fa6-92cd-895ea96c143b"
+ ],
+ "src": [],
+ "refs": [
+  "Grainger and Allison's Diagnostic Radiology (Grainger and Allison)",
+  "Textbook of Surgery (Das)",
+  "Bailey and Love's Short Practice of Surgery (Williams)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 232
+ }
+}

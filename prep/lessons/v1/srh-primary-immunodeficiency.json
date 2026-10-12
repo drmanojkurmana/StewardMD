@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "srh-primary-immunodeficiency",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Primary immunodeficiency disorders: high-yield overview for NEET-PG",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Primary immunodeficiencies are inherited faults in host defence, sorted by the arm that fails: **humoral** (antibody), **cellular** (T cell), **phagocytic** (neutrophil and macrophage killing), and **complement**. Knowing the failing arm lets you anticipate the likely pathogens, a skill examiners test repeatedly across clinical vignettes.",
+   "say": "Primary immunodeficiencies are inherited faults in host defence, sorted by the arm that fails. The first is humoral, meaning antibody. The second is cellular, meaning T cell. The third is phagocytic, covering neutrophil and macrophage killing. The fourth is complement. Knowing the failing arm lets you anticipate the likely pathogens, a skill examiners test repeatedly across clinical vignettes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arm affected",
+     "Typical infections",
+     "Example disorder"
+    ],
+    "rows": [
+     [
+      "Humoral (antibody)",
+      "Encapsulated pyogenic bacteria, sinopulmonary",
+      "X-linked agammaglobulinaemia (BTK)"
+     ],
+     [
+      "Cellular (T cell)",
+      "Opportunistic, viral, fungal, Pneumocystis",
+      "SCID, ADA deficiency"
+     ],
+     [
+      "Phagocytic",
+      "Skin abscesses, invasive moulds, catalase-positive organisms",
+      "Chronic granulomatous disease"
+     ],
+     [
+      "Complement",
+      "Invasive Neisseria infection",
+      "Terminal complement (C5-C9) deficiency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**X-linked agammaglobulinaemia** results from a defect in the **BTK** gene, which blocks B-cell maturation. Boys present after about 6 months, once maternal IgG wanes. Serum immunoglobulins are very low and B cells are absent from peripheral blood. Treatment is lifelong immunoglobulin replacement.",
+   "say": "X-linked agammaglobulinaemia results from a defect in the BTK gene, which blocks B-cell maturation. Boys present after about 6 months, once maternal IgG wanes. Serum immunoglobulins are very low and B cells are absent from peripheral blood. Treatment is lifelong immunoglobulin replacement.",
+   "vis": null
+  },
+  {
+   "tx": "**Severe combined immunodeficiency** presents in infancy with failure to thrive, chronic diarrhoea and oral candidiasis. An absent thymic shadow and lymphopenia are key clues. **Newborn TREC screening** detects it early, allowing curative treatment such as haematopoietic stem cell transplantation before infections cause lasting damage. **ADA deficiency** is one cause, leading to toxic metabolite build-up in lymphocytes.",
+   "say": "Severe combined immunodeficiency presents in infancy with failure to thrive, chronic diarrhoea and oral candidiasis. An absent thymic shadow and lymphopenia are key clues. Newborn TREC screening detects it early, allowing curative treatment such as haematopoietic stem cell transplantation before infections cause lasting damage. ADA deficiency is one cause, leading to toxic metabolite build-up in lymphocytes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "TREC screen positive"
+     },
+     {
+      "id": "b",
+      "label": "Confirm lymphopenia"
+     },
+     {
+      "id": "c",
+      "label": "Early HSCT"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic granulomatous disease** is a phagocyte defect of the NADPH oxidase complex, so neutrophils cannot generate reactive oxygen species. Patients develop catalase-positive infections and granulomas, and invasive filamentous moulds such as Aspergillus are typical. The **dihydrorhodamine (DHR) assay** is the screening test of choice, showing failure of oxidative burst.",
+   "say": "Chronic granulomatous disease is a phagocyte defect of the NADPH oxidase complex, so neutrophils cannot generate reactive oxygen species. Patients develop catalase-positive infections and granulomas, and invasive filamentous moulds such as Aspergillus are typical. The dihydrorhodamine assay is the screening test of choice, showing failure of oxidative burst.",
+   "vis": null
+  },
+  {
+   "tx": "**Wiskott-Aldrich syndrome** is an X-linked disorder of the **WAS protein**, which links signalling to actin cytoskeleton movement. The classic triad is thrombocytopenia with small platelets, eczema, and recurrent infections. **Haematopoietic cell transplantation** is the only curative option. Splenectomy raises platelet counts but increases the risk of severe sepsis, so lifelong antibiotic prophylaxis follows.",
+   "say": "Wiskott-Aldrich syndrome is an X-linked disorder of the WAS protein, which links signalling to actin cytoskeleton movement. The classic triad is thrombocytopenia with small platelets, eczema, and recurrent infections. Haematopoietic cell transplantation is the only curative option. Splenectomy raises platelet counts but increases the risk of severe sepsis, so lifelong antibiotic prophylaxis follows.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Inheritance",
+      "X-linked"
+     ],
+     [
+      "Platelets",
+      "Thrombocytopenia with small platelets"
+     ],
+     [
+      "Cure",
+      "Haematopoietic cell transplantation"
+     ],
+     [
+      "After splenectomy",
+      "Lifelong antibiotic prophylaxis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hyper-IgE syndrome** from dominant-negative **STAT3** mutations causes cold staphylococcal abscesses, eczema and candidiasis, with raised IgE. Pneumatoceles and skeletal features help separate it from DOCK8 deficiency. **Common variable immunodeficiency** causes low IgG with low IgA or IgM. Its long-term prognosis depends on lymphoproliferation, autoimmunity, granulomatous disease and lymphoma, and IgG replacement is titrated to infection frequency.",
+   "say": "Hyper-IgE syndrome from dominant-negative STAT3 mutations causes cold staphylococcal abscesses, eczema and candidiasis, with raised IgE. Pneumatoceles and skeletal features help separate it from DOCK8 deficiency. Common variable immunodeficiency causes low IgG with low IgA or IgM. Its long-term prognosis depends on lymphoproliferation, autoimmunity, granulomatous disease and lymphoma, and IgG replacement is titrated to infection frequency.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_41c69875bf84",
+  "q_0af58e0aaf77",
+  "q_63381a33b66e"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

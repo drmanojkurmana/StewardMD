@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "scc-neuro-monitoring",
+ "subject": "ss-critical-care",
+ "title": "Neuromonitoring: Intracranial Pressure, Perfusion and Adjunct Tools",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Cerebral perfusion pressure** (CPP) equals mean arterial pressure minus ICP. Ischaemic injury is avoided by keeping CPP above roughly 60 mm Hg in adult trauma care, following Brain Trauma Foundation style targets. Cerebral blood flow is maintained by **autoregulation**: when systemic pressure falls, cerebral vessels dilate. Chronic hypertension shifts the autoregulatory curve to the right, so a higher mean arterial pressure is needed to protect perfusion.",
+   "say": "Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. Ischaemic injury is avoided by keeping this above roughly 60 millimetres of mercury in adult trauma care, in line with Brain Trauma Foundation style targets. Cerebral blood flow is maintained by autoregulation. When systemic pressure falls, cerebral vessels dilate. Chronic hypertension shifts the autoregulatory curve to the right, so a higher mean arterial pressure is needed to protect perfusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mean arterial pressure"
+     },
+     {
+      "id": "b",
+      "label": "Minus ICP"
+     },
+     {
+      "id": "c",
+      "label": "Cerebral perfusion pressure"
+     },
+     {
+      "id": "d",
+      "label": "Keep above about 60"
+     },
+     {
+      "id": "e",
+      "label": "Autoregulation preserves flow"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Invasive monitoring is the reference for **ICP**. A **ventricular catheter** is the gold standard: it gives global pressure, allows therapeutic CSF drainage and can be recalibrated after insertion. Intraparenchymal fibreoptic probes suit patients with midline shift or oedema where ventricles are hard to cannulate, but they cannot be recalibrated. Epidural sensors are least sensitive. Monitoring is indicated in severe traumatic brain injury with GCS 8 or less. Anticoagulation is a contraindication to placement.",
+   "say": "Invasive monitoring is the reference method for intracranial pressure. A ventricular catheter is the gold standard. It gives global pressure, allows therapeutic drainage of cerebrospinal fluid and can be recalibrated after insertion. Intraparenchymal fibreoptic probes suit patients with midline shift or oedema, where ventricles are hard to cannulate, but they cannot be recalibrated. Epidural sensors are the least sensitive. Monitoring is indicated in severe traumatic brain injury with a Glasgow Coma Scale of 8 or less. Anticoagulation is a contraindication to placement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ventricular catheter",
+     "points": [
+      "Gold standard",
+      "Allows CSF drainage",
+      "Can be recalibrated"
+     ]
+    },
+    "right": {
+     "title": "Intraparenchymal probe",
+     "points": [
+      "Useful with midline shift",
+      "Cannot be recalibrated",
+      "Localised reading"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Non-invasive tools estimate pressure. **Optic nerve sheath diameter** (ONSD) is measured by ocular ultrasound about 3 mm behind the globe, with the probe placed gently on the closed eyelid to avoid globe pressure. An upper normal limit of 5 mm is used, and serial readings are more useful than a single one. The 30-degree test helps separate raised pressure from other causes of sheath enlargement. **Transcranial Doppler** gives middle cerebral artery velocity but does not replace direct monitoring. Open globe injury is a contraindication to ocular scanning.",
+   "say": "Non-invasive tools estimate pressure. Optic nerve sheath diameter is measured by ocular ultrasound about 3 millimetres behind the globe, with the probe placed gently on the closed eyelid to avoid pressure on the eye. An upper normal limit of 5 millimetres is used, and serial readings are more useful than a single one. The 30-degree test helps separate raised pressure from other causes of sheath enlargement. Transcranial Doppler gives middle cerebral artery velocity but does not replace direct monitoring. Ocular scanning is contraindicated in open globe injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "What it gives",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "ONSD ultrasound",
+      "Sheath width at 3 mm",
+      "Upper normal 5 mm, trend it"
+     ],
+     [
+      "Transcranial Doppler",
+      "Middle cerebral artery velocity",
+      "Not a replacement for ICP"
+     ],
+     [
+      "Pupillometry",
+      "Pupil size and reactivity",
+      "Quantifies pupil response"
+     ],
+     [
+      "Bispectral index",
+      "Depth of sedation",
+      "Not an ICP measure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Refractory high ICP drops **cerebral perfusion pressure**, causing ischaemia and herniation. Exam answer pattern: ventricular catheter for ICP, ONSD above 5 mm as a screening sign, and CPP above about 60 mm Hg. Remember that CPP is mean arterial pressure minus ICP, and that the bispectral index does not measure intracranial pressure.",
+   "say": "Refractory high intracranial pressure drops cerebral perfusion pressure, causing ischaemia and herniation. For the exam, remember a ventricular catheter for pressure, an optic nerve sheath diameter above 5 millimetres as a screening sign, and a cerebral perfusion pressure above about 60 millimetres of mercury. Cerebral perfusion pressure is mean arterial pressure minus intracranial pressure, and the bispectral index does not measure intracranial pressure.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_55c9976b6811",
+  "q_bea58b43386a",
+  "q_ea2ae423c8d7"
+ ],
+ "src": [],
+ "refs": [
+  "Brain Trauma Foundation: Guidelines for the Management of Severe Traumatic Brain Injury (Editors: Carney N et al.)",
+  "Monro-Kellie doctrine (standard neurocritical care teaching)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

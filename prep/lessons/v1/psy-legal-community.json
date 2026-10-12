@@ -1,0 +1,173 @@
+{
+ "v": 1,
+ "module": "psy-legal-community",
+ "subject": "psychiatry",
+ "title": "Mental Healthcare Act 2017 and Community Psychiatry: High-Yield Essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **Mental Healthcare Act 2017** replaced the Mental Health Act 1987 in India. It guarantees rights to every person with mental illness, including access to services and protection from ill treatment. Its core principle is that every adult is presumed to have **capacity** to make treatment decisions unless proven otherwise. Capacity means being able to understand information, appreciate consequences, reason about options and communicate a choice.",
+   "say": "The Mental Healthcare Act 2017 replaced the Mental Health Act 1987 in India. It guarantees rights to every person with mental illness, including access to services and protection from ill treatment. Its core principle is that every adult is presumed to have capacity to make treatment decisions unless proven otherwise. Capacity means being able to understand information, appreciate consequences, reason about options and communicate a choice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Capacity element",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Understand",
+      "Grasps the information given"
+     ],
+     [
+      "Appreciate",
+      "Sees how it applies to self"
+     ],
+     [
+      "Reason",
+      "Weighs options logically"
+     ],
+     [
+      "Communicate",
+      "Expresses a consistent choice"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Act recognises two main admission routes. **Independent admission** is for a person with capacity who requests admission. **Supported admission** is for a person with high support needs who lacks capacity, where a nominated representative applies on their behalf. Supported admission is initially limited to 30 days. Beyond that, the Act requires a second psychiatrist's opinion and review by a Mental Health Review Board. Reception orders from the 1987 Act no longer apply.",
+   "say": "The Act recognises two main admission routes. Independent admission is for a person with capacity who requests admission. Supported admission is for a person with high support needs who lacks capacity, where a nominated representative applies on their behalf. Supported admission is initially limited to 30 days. Beyond that, the Act requires a second psychiatrist's opinion and review by a Mental Health Review Board. Reception orders from the 1987 Act no longer apply.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Person needs admission"
+     },
+     {
+      "id": "b",
+      "label": "Has capacity?"
+     },
+     {
+      "id": "c",
+      "label": "Independent admission"
+     },
+     {
+      "id": "d",
+      "label": "Supported admission, up to 30 days"
+     },
+     {
+      "id": "e",
+      "label": "Beyond 30 days: review board"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suicide attempts are **decriminalised** under Section 115 of the Mental Healthcare Act 2017. The person is presumed to be under severe stress, and the state must provide care, treatment and rehabilitation to reduce the risk of recurrence. Under the older Indian Penal Code, the test for criminal responsibility was the **McNaughten rule**, which asks whether the accused knew the nature of the act or that it was wrong because of unsoundness of mind.",
+   "say": "Suicide attempts are decriminalised under Section 115 of the Mental Healthcare Act 2017. The person is presumed to be under severe stress, and the state must provide care, treatment and rehabilitation to reduce the risk of recurrence. Under the older Indian Penal Code, the test for criminal responsibility was the McNaughten rule, which asks whether the accused knew the nature of the act or that it was wrong because of unsoundness of mind.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "McNaughten rule",
+     "points": [
+      "Cognitive test",
+      "Did not know nature of act",
+      "Or did not know it was wrong",
+      "Indian Penal Code Section 84 (old)"
+     ]
+    },
+    "right": {
+     "title": "Irresistible impulse",
+     "points": [
+      "Volitional test",
+      "Could not control the act",
+      "Not the usual Indian standard"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "India's community psychiatry programmes began with the **National Mental Health Programme** in 1982. It aimed to ensure minimum mental healthcare availability, apply mental health knowledge in general care, and promote community participation. The **District Mental Health Programme** followed in 1996 to decentralise services to district level, integrating care into primary health. Tele-MANAS is a national tele-mental health helpline that extends access further.",
+   "say": "India's community psychiatry programmes began with the National Mental Health Programme in 1982. It aimed to ensure minimum mental healthcare availability, apply mental health knowledge in general care, and promote community participation. The District Mental Health Programme followed in 1996 to decentralise services to district level, integrating care into primary health. Tele-MANAS is a national tele-mental health helpline that extends access further.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Programme",
+     "Year",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "National Mental Health Programme",
+      "1982",
+      "Minimum care, community participation"
+     ],
+     [
+      "District Mental Health Programme",
+      "1996",
+      "Decentralised district services"
+     ],
+     [
+      "Tele-MANAS",
+      "Recent",
+      "Tele-mental health helpline"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Community care for severe mental illness leans on **tertiary prevention**, which aims to limit disability once illness is already established. Useful measures include vocational training, sheltered workshops, day care and halfway homes. **Assertive community treatment** relies on a multidisciplinary mobile team to lower relapse and readmission. Disability legislation, including the Rights of Persons with Disabilities Act, recognises mental illness as a disability, so people with it can claim the rights and entitlements set out in law.",
+   "say": "Community care for severe mental illness leans on tertiary prevention, which aims to limit disability once illness is already established. Useful measures include vocational training, sheltered workshops, day care and halfway homes. Assertive community treatment relies on a multidisciplinary mobile team to lower relapse and readmission. Disability legislation, including the Rights of Persons with Disabilities Act, recognises mental illness as a disability, so people with it can claim the rights and entitlements set out in law.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "f361defb-1a36-496f-b195-9dcb6bb31ea5",
+  "fd6e108c-cc1f-42f2-98dd-b4ee53b1aed7",
+  "4bd44e1d-9e3a-4ef4-9fbb-3b07223fd901"
+ ],
+ "src": [],
+ "refs": [
+  "Mental Healthcare Act 2017 (India)",
+  "Mental Health Act 1987 (India)",
+  "National Trust for the Welfare of Persons with Autism, Cerebral Palsy, Mental Retardation and Multiple Disabilities Act 1999",
+  "Persons with Disabilities Act 1995",
+  "Rights of Persons with Disabilities Act 2016"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 46
+ }
+}

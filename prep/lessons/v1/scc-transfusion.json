@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "module": "scc-transfusion",
+ "subject": "ss-critical-care",
+ "title": "Transfusion Medicine and Blood Products: Core Principles for NEET-PG and INI-CET",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Transfusion reactions must be recognised early. **TRALI** presents within six hours with hypoxaemia and bilateral infiltrates without fluid overload, and management is supportive ventilation. **TACO** is volume overload from a transfused unit, typically in the elderly or those with heart failure, and is treated with diuretics. Raised **BNP or NT-proBNP** helps separate TACO from TRALI.",
+   "say": "Transfusion reactions must be recognised early. TRALI presents within six hours with hypoxaemia and bilateral infiltrates without fluid overload, and management is supportive ventilation. TACO is volume overload from a transfused unit, typically in the elderly or those with heart failure, and is treated with diuretics. Raised BNP or NT-proBNP helps separate TACO from TRALI.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TRALI",
+     "points": [
+      "Hypoxaemia within six hours",
+      "Bilateral infiltrates, no fluid overload",
+      "Supportive ventilation, avoid diuretics"
+     ]
+    },
+    "right": {
+     "title": "TACO",
+     "points": [
+      "Volume overload, raised BNP",
+      "Elderly or heart failure patients",
+      "Diuretics and slower transfusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Allergic and anaphylactic reactions need rapid action. Stop the transfusion at once and give **adrenaline** intramuscularly, 0.5 mg in adults, repeated every five minutes if needed. Febrile non-haemolytic reactions are managed with paracetamol and stopping the unit, with antihistamines reserved for allergic features. Under the Indian haemovigilance system, moderate and severe reactions must be reported to the hospital transfusion committee and the national programme.",
+   "say": "Allergic and anaphylactic reactions need rapid action. Stop the transfusion at once and give adrenaline intramuscularly, 0.5 mg in adults, repeated every five minutes if needed. Febrile non-haemolytic reactions are managed with paracetamol and stopping the unit, with antihistamines reserved for allergic features. Under the Indian haemovigilance system, moderate and severe reactions must be reported to the hospital transfusion committee and the national programme.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stop transfusion"
+     },
+     {
+      "id": "b",
+      "label": "Adrenaline IM 0.5 mg"
+     },
+     {
+      "id": "c",
+      "label": "Support airway and BP"
+     },
+     {
+      "id": "d",
+      "label": "Report to haemovigilance"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Platelet adhesion and aggregation depend on specific surface proteins. **Glycoprotein IIb-IIIa** binds fibrinogen to link platelets together, and its inhibition is the target of several antiplatelet drugs. Activated platelets expose **phosphatidylserine** on their membrane, providing the catalytic surface for prothrombin conversion to thrombin. Dense granules store serotonin, calcium and adenine nucleotides.",
+   "say": "Platelet adhesion and aggregation depend on specific surface proteins. Glycoprotein IIb-IIIa binds fibrinogen to link platelets together, and its inhibition is the target of several antiplatelet drugs. Activated platelets expose phosphatidylserine on their membrane, providing the catalytic surface for prothrombin conversion to thrombin. Dense granules store serotonin, calcium and adenine nucleotides.",
+   "vis": null
+  },
+  {
+   "tx": "Finally, remember the storage and administration rules. A red cell unit must be completed within **four hours** of leaving controlled storage. Always check identity, compatibility and consent before starting, and monitor the patient closely during the first fifteen minutes. Haemovigilance reporting closes the loop by identifying patterns of reactions across the hospital and the national system.",
+   "say": "Finally, remember the storage and administration rules. A red cell unit must be completed within four hours of leaving controlled storage. Always check identity, compatibility and consent before starting, and monitor the patient closely during the first fifteen minutes. Haemovigilance reporting closes the loop by identifying patterns of reactions across the hospital and the national system.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_e7149e1567aa",
+  "q_14dd528187b8",
+  "q_28a98cd0b945"
+ ],
+ "src": [],
+ "refs": [
+  "Trial of Transfusion Requirements in Critical Care (TRICC), New England Journal of Medicine",
+  "NICE guideline on blood transfusion (NG24)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 5,
+  "kbWords": 0,
+  "itemN": 16
+ }
+}

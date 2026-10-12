@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "module": "ana-kidney-posterior-wall",
+ "subject": "anatomy",
+ "title": "Kidney, ureter, suprarenal gland and posterior abdominal wall: high-yield anatomy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **renal hilum** transmits the renal vein, renal artery and renal pelvis. From front to back the vein lies highest, the artery is intermediate, and the pelvis is lowest. The **ureter** is a retroperitoneal tube with three anatomical constrictions where stones lodge: the pelviureteric junction, the pelvic brim where it crosses the common iliac vessels, and the vesicoureteric junction. The vesicoureteric junction is the narrowest point, which is why 2 to 3 mm stones often impact there.",
+   "say": "The renal hilum transmits the renal vein, the renal artery and the renal pelvis. From front to back, the vein is highest, the artery is in the middle, and the pelvis is lowest. The ureter has three anatomical constrictions where stones lodge. These are the pelviureteric junction, the pelvic brim where it crosses the common iliac vessels, and the vesicoureteric junction. The vesicoureteric junction is the narrowest and commonly traps small stones.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pelviureteric junction"
+     },
+     {
+      "id": "b",
+      "label": "Pelvic brim over iliac vessels"
+     },
+     {
+      "id": "c",
+      "label": "Vesicoureteric junction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **abdominal aorta** gives ventral and paired branches. Ventral branches are the coeliac trunk at T12, the superior mesenteric artery at L1 and the inferior mesenteric artery at L3. Paired lateral branches include the inferior phrenic, middle suprarenal, renal, gonadal and four lumbar arteries. The gonadal arteries are lateral, not ventral, so they are the common exam trap. The **suprarenal gland** receives three arteries: superior from the inferior phrenic, middle from the aorta and inferior from the renal artery.",
+   "say": "The abdominal aorta gives ventral and paired branches. The ventral branches are the coeliac trunk at T12, the superior mesenteric artery at L1 and the inferior mesenteric artery at L3. The gonadal arteries are paired lateral branches, not ventral ones. Each suprarenal gland receives three arteries, from the inferior phrenic, the aorta and the renal artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Branch",
+     "Source",
+     "Level"
+    ],
+    "rows": [
+     [
+      "Coeliac trunk",
+      "Ventral, aorta",
+      "T12"
+     ],
+     [
+      "Superior mesenteric",
+      "Ventral, aorta",
+      "L1"
+     ],
+     [
+      "Inferior mesenteric",
+      "Ventral, aorta",
+      "L3"
+     ],
+     [
+      "Gonadal",
+      "Paired lateral, aorta",
+      "Below renal arteries"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **inferior vena cava** forms at L5 from the union of the common iliac veins. The right suprarenal vein and both renal veins drain directly into it. The left suprarenal, left gonadal and left inferior phrenic veins drain into the **left renal vein**, which crosses the midline anterior to the aorta. The right gonadal vein enters the IVC directly, while the left gonadal vein joins the left renal vein, which explains the higher incidence of left varicocele.",
+   "say": "The inferior vena cava forms at L5 from the union of the common iliac veins. The right suprarenal vein and both renal veins drain directly into it. The left suprarenal, left gonadal and left inferior phrenic veins drain into the left renal vein. That vein crosses the midline in front of the aorta before joining the cava. This explains the greater incidence of left varicocele.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Drains directly into IVC",
+     "points": [
+      "Right suprarenal vein",
+      "Both renal veins",
+      "Right gonadal vein"
+     ]
+    },
+    "right": {
+     "title": "Drains into left renal vein",
+     "points": [
+      "Left suprarenal vein",
+      "Left gonadal vein",
+      "Left inferior phrenic vein"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **lumbar plexus** forms from the ventral rami of L1 to L4 and lies within psoas major. The **femoral nerve** arises from the posterior divisions of L2 to L4 and supplies the anterior thigh. The obturator nerve arises from the anterior divisions. The **psoas major** and **quadratus lumborum** are key posterior abdominal wall muscles. The **cisterna chyli** is an elongated lymph sac in front of L1 and L2, right of the aorta, and it continues as the thoracic duct.",
+   "say": "The lumbar plexus forms from the ventral rami of L1 to L4 and lies within psoas major. The femoral nerve arises from the posterior divisions of L2 to L4 and supplies the anterior thigh. The obturator nerve arises from the anterior divisions. The psoas major and quadratus lumborum are the key posterior muscles. The cisterna chyli lies in front of L1 and L2, to the right of the aorta, and continues as the thoracic duct.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "e100bc9e-fbf6-4ebb-ba81-801b8959d37e",
+  "3e028cce-7825-488a-9801-9b2851eba6a6",
+  "79d6b33d-9f1d-4cc5-b756-26ca2d6725e2"
+ ],
+ "src": [],
+ "refs": [
+  "Gray's Anatomy for Students (Drake, Vogl, Mitchell)",
+  "BD Chaurasia's Human Anatomy (Chaurasia)",
+  "Clinically Oriented Anatomy (Moore, Dalley, Agur)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 224
+ }
+}

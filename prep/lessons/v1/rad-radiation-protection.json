@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "rad-radiation-protection",
+ "subject": "radiology",
+ "title": "Radiation units, biological effects and protection",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Radiation quantities have SI units you must know. **Becquerel** measures radioactivity, meaning disintegrations per second. The old unit was the curie, where one curie equals 3.7 x 10 to the power 10 becquerels. **Gray** measures absorbed dose, the energy deposited per kilogram of tissue. One gray equals 100 rad. **Sievert** measures dose equivalent and effective dose, and one sievert equals 100 rem.",
+   "say": "Radiation quantities have SI units you must know. Becquerel measures radioactivity, meaning disintegrations per second. The old unit was the curie, where one curie equals 3.7 times 10 to the power 10 becquerels. Gray measures absorbed dose, the energy deposited per kilogram of tissue. One gray equals 100 rad. Sievert measures dose equivalent and effective dose, and one sievert equals 100 rem.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Quantity",
+     "Old unit",
+     "SI unit",
+     "Conversion"
+    ],
+    "rows": [
+     [
+      "Radioactivity",
+      "Curie",
+      "Becquerel",
+      "1 Ci = 3.7 x 10^10 Bq"
+     ],
+     [
+      "Absorbed dose",
+      "Rad",
+      "Gray",
+      "1 Gy = 100 rad"
+     ],
+     [
+      "Dose equivalent",
+      "Rem",
+      "Sievert",
+      "1 Sv = 100 rem"
+     ],
+     [
+      "Exposure",
+      "Roentgen",
+      "Coulomb per kg",
+      "1 R = 2.58 x 10^-4 C/kg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ionising radiation damages tissue by ionisation. Alpha particles have the highest ionising power but the least penetration, and a sheet of paper stops them. Beta particles penetrate a few millimetres. **X-rays** and **gamma rays** penetrate deeply, with gamma rays penetrating most. Gamma rays have the least ionising power. Neutrons are heavy and uncharged, so their penetration varies with energy.",
+   "say": "Ionising radiation damages tissue by ionisation. Alpha particles have the highest ionising power but the least penetration, and a sheet of paper stops them. Beta particles penetrate a few millimetres. X-rays and gamma rays penetrate deeply, with gamma rays penetrating most. Gamma rays have the least ionising power. Neutrons are heavy and uncharged, so their penetration varies with energy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Radiation",
+     "Penetration",
+     "Ionising power"
+    ],
+    "rows": [
+     [
+      "Alpha",
+      "Least",
+      "Highest"
+     ],
+     [
+      "Beta",
+      "Intermediate",
+      "Intermediate"
+     ],
+     [
+      "X-ray",
+      "High",
+      "Lower"
+     ],
+     [
+      "Gamma",
+      "Highest",
+      "Lowest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biological damage occurs directly, when radiation ionises a macromolecule such as DNA, or indirectly, through **free radicals** formed from water. Free radicals are unstable and reactive, and they cause most molecular change. **Deterministic effects** have a severity that rises with dose and show a threshold. **Stochastic effects**, such as cancer and heritable change, have no threshold and their probability rises with dose.",
+   "say": "Biological damage occurs directly, when radiation ionises a macromolecule such as DNA, or indirectly, through free radicals formed from water. Free radicals are unstable and reactive, and they cause most molecular change. Deterministic effects have a severity that rises with dose and show a threshold. Stochastic effects, such as cancer and heritable change, have no threshold and their probability rises with dose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Deterministic effects",
+     "points": [
+      "Severity rises with dose",
+      "Has a threshold",
+      "Example: cataract, sterility, skin burn"
+     ]
+    },
+    "right": {
+     "title": "Stochastic effects",
+     "points": [
+      "Probability rises with dose",
+      "No threshold",
+      "Example: cancer, heritable mutation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Radiosensitivity follows the **Law of Bergonie and Tribondeau**: rapidly dividing, undifferentiated cells are most sensitive. Lymphocytes are the most radiosensitive cells, and bone marrow, gonads, lymphoid tissue and gut epithelium are highly sensitive. Bone, cartilage, muscle, brain and nerve are the least sensitive. Among tumours, small cell carcinoma of the lung, seminoma and dysgerminoma are radiosensitive.",
+   "say": "Radiosensitivity follows the Law of Bergonie and Tribondeau. Rapidly dividing, undifferentiated cells are most sensitive. Lymphocytes are the most radiosensitive cells, and bone marrow, gonads, lymphoid tissue and gut epithelium are highly sensitive. Bone, cartilage, muscle, brain and nerve are the least sensitive. Among tumours, small cell carcinoma of the lung, seminoma and dysgerminoma are radiosensitive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sensitivity",
+     "Tissues"
+    ],
+    "rows": [
+     [
+      "High",
+      "Lymphoid, bone marrow, gonads, GIT epithelium"
+     ],
+     [
+      "Moderate",
+      "Skin, endothelium, lung, kidney, liver, lens"
+     ],
+     [
+      "Low",
+      "Bone, cartilage, muscle, CNS, connective tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In practice, the aim is to keep exposure **as low as reasonably achievable**, known as **ALARA**. Key measures include **distance** from the tube, **lead aprons** and **thyroid collars**, and **rectangular collimation** to restrict the beam. In pregnancy, a single chest X-ray delivers a fetal dose far below the threshold for harm, so pregnancy is usually continued. **CT** gives a much larger dose than plain radiography, whereas **MRI** and **ultrasound** use no ionising radiation. **Lead** remains the standard shielding for X-ray and CT rooms.",
+   "say": "In practice, keep exposure as low as reasonably achievable, known as ALARA. Increase your distance from the tube, wear lead aprons and thyroid collars, and collimate the beam to a small rectangle. A single chest X-ray gives a fetal dose well under the level that causes harm, so most pregnancies continue after one. CT delivers a far larger dose than plain radiography. MRI and ultrasound involve no ionising radiation. Lead is the usual shielding in X-ray and CT rooms.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "84c5d953-5500-4dc6-841f-5aabae2b30ae",
+  "68cc8f9e-8d65-418c-8836-de7d8342d94b",
+  "15c5fe6a-931c-4f0c-abf2-b701b62b598e"
+ ],
+ "src": [],
+ "refs": [
+  "Oral Radiology: Principles and Interpretation (White and Pharoah)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 212
+ }
+}

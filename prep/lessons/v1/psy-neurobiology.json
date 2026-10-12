@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "psy-neurobiology",
+ "subject": "psychiatry",
+ "title": "Neurobiology of mental disorders: key pathways and transmitters",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Dopamine runs along four main pathways. The **mesolimbic** pathway, from the ventral tegmental area to the nucleus accumbens, drives positive symptoms of schizophrenia when overactive. The **mesocortical** pathway to the prefrontal cortex, when underactive, links to negative symptoms. The **nigrostriatal** pathway controls movement, and blocking it causes extrapyramidal side effects. The **tuberoinfundibular** pathway carries dopamine that inhibits prolactin release from the pituitary.",
+   "say": "Dopamine runs along four main pathways. The mesolimbic pathway, from the ventral tegmental area to the nucleus accumbens, drives positive symptoms of schizophrenia when overactive. The mesocortical pathway to the prefrontal cortex, when underactive, links to negative symptoms. The nigrostriatal pathway controls movement, and blocking it causes extrapyramidal side effects. The tuberoinfundibular pathway carries dopamine that inhibits prolactin release from the pituitary.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway",
+     "Route",
+     "Clinical link"
+    ],
+    "rows": [
+     [
+      "Mesolimbic",
+      "VTA to nucleus accumbens",
+      "Positive symptoms"
+     ],
+     [
+      "Mesocortical",
+      "VTA to prefrontal cortex",
+      "Negative symptoms"
+     ],
+     [
+      "Nigrostriatal",
+      "Substantia nigra to striatum",
+      "Extrapyramidal effects"
+     ],
+     [
+      "Tuberoinfundibular",
+      "Hypothalamus to pituitary",
+      "Prolactin control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antipsychotics that block D2 receptors in the **tuberoinfundibular** pathway raise prolactin. This explains amenorrhoea, reduced libido and galactorrhoea seen in young women on these drugs. Aripiprazole is a partial D2 agonist and is less likely to cause this hyperprolactinaemia, so it may be chosen when this side effect is a problem.",
+   "say": "Antipsychotics that block D2 receptors in the tuberoinfundibular pathway raise prolactin. This explains amenorrhoea, reduced libido and galactorrhoea seen in young women on these drugs. Aripiprazole is a partial D2 agonist and is less likely to cause this hyperprolactinaemia, so it may be chosen when this side effect is a problem.",
+   "vis": null
+  },
+  {
+   "tx": "The **limbic system**, including the amygdala, hippocampus, hypothalamus and cingulate gyrus, generates emotion and drives such as feeding and sex. The frontal lobe controls and regulates emotion. In Kluver-Bucy syndrome, bilateral amygdala or temporal damage causes hyperphagia, hypersexuality, hyperorality and visual agnosia, and it is most often caused by herpes simplex encephalitis.",
+   "say": "The limbic system, including the amygdala, hippocampus, hypothalamus and cingulate gyrus, generates emotion and drives such as feeding and sex. The frontal lobe controls and regulates emotion. In Kluver-Bucy syndrome, bilateral amygdala or temporal damage causes hyperphagia, hypersexuality, hyperorality and visual agnosia, and it is most often caused by herpes simplex encephalitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bilateral amygdala or temporal damage"
+     },
+     {
+      "id": "b",
+      "label": "Loss of fear and placidity"
+     },
+     {
+      "id": "c",
+      "label": "Hypersexuality and hyperphagia"
+     },
+     {
+      "id": "d",
+      "label": "Visual agnosia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Other neurotransmitters also matter. In Alzheimer's disease, loss of cells in the **nucleus basalis of Meynert** lowers acetylcholine, which is why cholinesterase inhibitors are used. Loss of noradrenergic neurons in the locus coeruleus adds to the picture. GABA deficiency is linked to anxiety, which is why benzodiazepines act on GABA-A receptors, and glutamate acts through NMDA receptors.",
+   "say": "Other neurotransmitters also matter. In Alzheimer's disease, loss of cells in the nucleus basalis of Meynert lowers acetylcholine, which is why cholinesterase inhibitors are used. Loss of noradrenergic neurons in the locus coeruleus adds to the picture. GABA deficiency is linked to anxiety, which is why benzodiazepines act on GABA-A receptors, and glutamate acts through NMDA receptors.",
+   "vis": null
+  },
+  {
+   "tx": "The **HPA axis** is often overactive in depression. Cortisol levels are raised, and dexamethasone fails to suppress cortisol normally, which reflects faulty feedback. Depressed patients also show reduced deep sleep. Neuroimaging in psychiatry supports these findings, with reduced frontal activity and changes in the amygdala and hippocampus in mood disorders, though imaging is not used for routine diagnosis.",
+   "say": "The HPA axis is often overactive in depression. Cortisol levels are raised, and dexamethasone fails to suppress cortisol normally, which reflects faulty feedback. Depressed patients also show reduced deep sleep. Neuroimaging in psychiatry supports these findings, with reduced frontal activity and changes in the amygdala and hippocampus in mood disorders, though imaging is not used for routine diagnosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "e8b27d33-207a-42ef-98d4-929ffa6ecb8e",
+  "737587f0-589e-46b1-8eeb-fa4815ecc559",
+  "4b90ba26-8ee4-438d-8c3f-2f609d137bbd"
+ ],
+ "src": [],
+ "refs": [
+  "Kaplan and Sadock's Synopsis of Psychiatry",
+  "Current Diagnosis and Treatment: Psychiatry"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 39
+ }
+}

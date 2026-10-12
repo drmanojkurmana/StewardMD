@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "module": "phm-glaucoma",
+ "subject": "pharmacology",
+ "title": "Ocular pharmacology and drugs for glaucoma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Glaucoma lowering drugs work by reducing **intraocular pressure**, which is set by aqueous humour production and outflow. Drugs act either by cutting aqueous production, or by improving outflow through the **trabecular meshwork** or the **uveoscleral pathway**. Knowing the site of action of each class is the key to answering most exam questions.",
+   "say": "Glaucoma lowering drugs work by reducing intraocular pressure, which is set by aqueous humour production and outflow. Drugs act either by cutting aqueous production, or by improving outflow through the trabecular meshwork or the uveoscleral pathway. Knowing the site of action of each class is the key to answering most exam questions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Main action",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Beta blockers",
+      "Cut aqueous production",
+      "Timolol"
+     ],
+     [
+      "Alpha 2 agonists",
+      "Cut aqueous production",
+      "Brimonidine"
+     ],
+     [
+      "Carbonic anhydrase inhibitors",
+      "Cut aqueous production",
+      "Dorzolamide"
+     ],
+     [
+      "Prostaglandin analogues",
+      "Raise uveoscleral outflow",
+      "Latanoprost"
+     ],
+     [
+      "Miotics",
+      "Raise trabecular outflow",
+      "Pilocarpine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Timolol** is a non-selective beta blocker and the prototype ocular beta blocker. It reduces aqueous formation and is avoided in **asthma** because blocking beta 2 receptors can cause bronchospasm. Betaxolol is beta 1 selective and is the preferred choice in asthmatic patients. Beta blockers with local anaesthetic action should be avoided in glaucoma.",
+   "say": "Timolol is a non-selective beta blocker and the prototype ocular beta blocker. It reduces aqueous formation and is avoided in asthma because blocking beta 2 receptors can cause bronchospasm. Betaxolol is beta 1 selective and is the preferred choice in asthmatic patients. Beta blockers with local anaesthetic action should be avoided in glaucoma.",
+   "vis": null
+  },
+  {
+   "tx": "**Latanoprost** is a PGF2 alpha analogue that increases **uveoscleral outflow** and is a first line drug because of once daily dosing. Its side effects include iris pigmentation, eyelash growth (hypertrichosis) and cystoid macular edema. **Brimonidine** and **apraclonidine** are alpha 2 agonists that reduce aqueous secretion, but they cross into the brain and must not be used under two years of age.",
+   "say": "Latanoprost is a PGF2 alpha analogue that increases uveoscleral outflow and is a first line drug because of once daily dosing. Its side effects include iris pigmentation, eyelash growth and cystoid macular edema. Brimonidine and apraclonidine are alpha 2 agonists that reduce aqueous secretion, but they cross into the brain and must not be used under two years of age.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Latanoprost",
+     "points": [
+      "Raises uveoscleral outflow",
+      "Once daily dosing",
+      "Iris pigmentation",
+      "Eyelash growth"
+     ]
+    },
+    "right": {
+     "title": "Brimonidine and apraclonidine",
+     "points": [
+      "Alpha 2 agonists",
+      "Reduce aqueous secretion",
+      "Brimonidine crosses blood brain barrier",
+      "Avoid under 2 years: apnoea"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dorzolamide** is a topical **carbonic anhydrase inhibitor** that lowers intraocular pressure by about 20 percent. It is used as an add-on to beta blockers or prostaglandin analogues. **Acetazolamide** is the systemic version and is the oral or intravenous choice in acute angle closure. Brinzolamide is a similar drug that acts non-competitively and reversibly on carbonic anhydrase II.",
+   "say": "Dorzolamide is a topical carbonic anhydrase inhibitor that lowers intraocular pressure by about 20 percent. It is used as an add-on to beta blockers or prostaglandin analogues. Acetazolamide is the systemic version and is the oral or intravenous choice in acute angle closure. Brinzolamide is a similar drug that acts non-competitively and reversibly on carbonic anhydrase II.",
+   "vis": null
+  },
+  {
+   "tx": "In **acute angle closure glaucoma**, the intraocular pressure rises very high and the eye is congested. First line treatment is intravenous **mannitol**, an osmotic agent that decongests the eye, with acetazolamide given alongside. Pilocarpine is then used to constrict the pupil and free the angle. Definitive treatment is laser or surgical iridotomy. Corticosteroids and anticholinergic drugs must be avoided because they raise pressure or narrow the angle.",
+   "say": "In acute angle closure glaucoma, the intraocular pressure rises very high and the eye is congested. First line treatment is intravenous mannitol, an osmotic agent that decongests the eye, with acetazolamide given alongside. Pilocarpine is then used to constrict the pupil and free the angle. Definitive treatment is laser or surgical iridotomy. Corticosteroids and anticholinergic drugs must be avoided because they raise pressure or narrow the angle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute attack"
+     },
+     {
+      "id": "b",
+      "label": "IV mannitol and acetazolamide"
+     },
+     {
+      "id": "c",
+      "label": "Pilocarpine to constrict pupil"
+     },
+     {
+      "id": "d",
+      "label": "Laser or surgical iridotomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "c3b5753f-e4d7-4b40-83f1-11eefe2627e1",
+  "97588d92-bd0a-4cb4-b493-cab9241cc45f",
+  "31d3c98b-cd7d-4b9a-9c9a-92dfe5a6abf9"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung's Basic and Clinical Pharmacology",
+  "KDT Textbook of Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 148
+ }
+}

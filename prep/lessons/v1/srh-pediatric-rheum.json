@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "srh-pediatric-rheum",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Pediatric rheumatology beyond JIA: an exam-focused overview",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Childhood rheumatic disease extends well beyond **juvenile idiopathic arthritis**. Several conditions have their own features, and the exam often tests whether you can separate them. Key areas include **juvenile dermatomyositis**, childhood onset **systemic lupus erythematosus**, neonatal lupus, MIS-C, chronic nonbacterial osteomyelitis, IgA vasculitis and transition care. Start by recognising which condition the child's pattern fits.",
+   "say": "Childhood rheumatic disease extends well beyond juvenile idiopathic arthritis. Several conditions have their own features, and the exam often tests whether you can separate them. Key areas include juvenile dermatomyositis, childhood onset systemic lupus erythematosus, neonatal lupus, MIS-C, chronic nonbacterial osteomyelitis, IgA vasculitis and transition care. Start by recognising which condition the child's pattern fits.",
+   "vis": null
+  },
+  {
+   "tx": "Juvenile dermatomyositis is an inflammatory myopathy with a **microangiopathy** at its core. Complement deposition, particularly the membrane attack complex, injures capillaries and muscle fibres. Unlike adult disease, juvenile dermatomyositis has no strong link to underlying malignancy, so routine cancer screening is not the main focus. Muscle weakness is typically symmetric and proximal, involving the pelvic and shoulder girdles.",
+   "say": "Juvenile dermatomyositis is an inflammatory myopathy with a microangiopathy at its core. Complement deposition, particularly the membrane attack complex, injures capillaries and muscle fibres. Unlike adult disease, juvenile dermatomyositis has no strong link to underlying malignancy, so routine cancer screening is not the main focus. Muscle weakness is typically symmetric and proximal, involving the pelvic and shoulder girdles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Juvenile dermatomyositis"
+    ],
+    "rows": [
+     [
+      "Weakness pattern",
+      "Symmetric, proximal"
+     ],
+     [
+      "Malignancy link",
+      "Weak compared with adults"
+     ],
+     [
+      "Vascular injury",
+      "Complement-mediated microangiopathy"
+     ],
+     [
+      "Skin signs",
+      "Gottron papules, heliotrope rash"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis rests on raised **creatine kinase**, electromyography or MRI findings, and muscle biopsy. Biopsy shows **perifascicular atrophy**, which is the most specific histological clue for this disease. MRI is non-invasive and helps choose the best muscle site for biopsy. Calcinosis is a common and disabling complication that can develop over time and needs early attention.",
+   "say": "Diagnosis rests on raised creatine kinase, electromyography or MRI findings, and muscle biopsy. Biopsy shows perifascicular atrophy, which is the most specific histological clue for this disease. MRI is non-invasive and helps choose the best muscle site for biopsy. Calcinosis is a common and disabling complication that can develop over time and needs early attention.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Raised creatine kinase"
+     },
+     {
+      "id": "b",
+      "label": "MRI guides biopsy site"
+     },
+     {
+      "id": "c",
+      "label": "Biopsy: perifascicular atrophy"
+     },
+     {
+      "id": "d",
+      "label": "Confirmed JDM"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment starts with **corticosteroids**, given intravenously when severe gastrointestinal involvement is present. When oral steroids cause toxicity, **subcutaneous methotrexate** is a standard steroid-sparing switch. Dysphagia needs speech and occupational therapy input to manage food consistency and positioning and reduce aspiration risk. Interstitial lung disease is the key organ concern in adult amyopathic dermatomyositis and should be screened for in children with lung symptoms.",
+   "say": "Treatment starts with corticosteroids, given intravenously when severe gastrointestinal involvement is present. When oral steroids cause toxicity, subcutaneous methotrexate is a standard steroid-sparing switch. Dysphagia needs speech and occupational therapy input to manage food consistency and positioning and reduce aspiration risk. Interstitial lung disease is the key organ concern in adult amyopathic dermatomyositis and should be screened for in children with lung symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Steroid route",
+     "points": [
+      "Oral for typical disease",
+      "Intravenous with gut involvement",
+      "Methotrexate if steroid toxicity"
+     ]
+    },
+    "right": {
+     "title": "Team for dysphagia",
+     "points": [
+      "Speech therapy",
+      "Occupational therapy",
+      "Aspiration precautions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Remaining topics in this module include childhood onset **systemic lupus erythematosus**, neonatal lupus linked to maternal anti-Ro and anti-La antibodies, MIS-C after SARS-CoV-2 infection, chronic nonbacterial osteomyelitis, IgA vasculitis and growth impairment from chronic inflammation. Transition care from paediatric to adult services should begin early. Keep the diagnostic criteria and first-line drugs for each condition distinct when revising.",
+   "say": "Remaining topics in this module include childhood onset systemic lupus erythematosus, neonatal lupus linked to maternal anti-Ro and anti-La antibodies, MIS-C after SARS-CoV-2 infection, chronic nonbacterial osteomyelitis, IgA vasculitis and growth impairment from chronic inflammation. Transition care from paediatric to adult services should begin early. Keep the diagnostic criteria and first-line drugs for each condition distinct when revising.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_86d70dea8418",
+  "q_87e3b252a6b9",
+  "q_905aafa643ba"
+ ],
+ "src": [],
+ "refs": [
+  "Petty RE et al., International League of Associations for Rheumatology classification of juvenile idiopathic arthritis (ILAR)",
+  "Ravelli A, Martini A, Juvenile dermatomyositis, Best Practice and Research Clinical Rheumatology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

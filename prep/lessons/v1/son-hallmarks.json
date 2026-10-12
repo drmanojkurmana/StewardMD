@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "son-hallmarks",
+ "subject": "ss-medical-oncology",
+ "title": "Hallmarks of cancer and carcinogenesis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Cancer arises when a cell acquires a set of **hallmark traits** through successive genetic and epigenetic changes. Most human cancers are driven mainly by environmental and lifestyle exposures, while inherited pathogenic variants account for only a small minority, usually under 10%. **Genomic instability** is an enabling characteristic: it does not itself drive growth but accelerates the acquisition of the other hallmarks by increasing mutation rates.",
+   "say": "Cancer arises when a cell acquires a set of hallmark traits through successive genetic and epigenetic changes. Most human cancers are driven mainly by environmental and lifestyle exposures, while inherited pathogenic variants account for only a small minority, usually under ten percent. Genomic instability is an enabling characteristic. It does not itself drive growth, but it speeds up the acquisition of the other hallmarks by raising the mutation rate.",
+   "vis": null
+  },
+  {
+   "tx": "Carcinogens are classified as chemical, physical, or **biological**. Chemical agents include polycyclic hydrocarbons, asbestos and tobacco products. Physical agents include ionising radiation. Biological agents include oncogenic viruses such as HPV, hepatitis B and hepatitis C, along with the bacterium Helicobacter pylori, which is linked to gastric carcinoma through chronic inflammation and nitric oxide generated DNA damage.",
+   "say": "Carcinogens are classified as chemical, physical, or biological. Chemical agents include polycyclic hydrocarbons, asbestos and tobacco products. Physical agents include ionising radiation. Biological agents include oncogenic viruses such as HPV, hepatitis B and hepatitis C, along with the bacterium Helicobacter pylori, which is linked to gastric carcinoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Examples",
+     "Typical cancer link"
+    ],
+    "rows": [
+     [
+      "Chemical",
+      "Polycyclic hydrocarbons, asbestos",
+      "Lung, mesothelioma"
+     ],
+     [
+      "Physical",
+      "Ionising radiation",
+      "Leukaemia, skin"
+     ],
+     [
+      "Biological",
+      "HPV, HBV, HCV, H. pylori",
+      "Cervix, liver, stomach"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endogenous DNA damage arises from within the cell. The **Fenton reaction** uses iron and hydrogen peroxide to generate highly damaging hydroxyl radicals. **Methyltransferase** enzymes use S-adenosylmethionine as the methyl donor, and aberrant methylation can silence tumour suppressor genes. When damage is irreparable, the cell is removed by apoptosis, and if apoptosis fails, the immune system acts as a third line of defence.",
+   "say": "Endogenous DNA damage arises from within the cell. The Fenton reaction uses iron and hydrogen peroxide to generate highly damaging hydroxyl radicals. Methyltransferase enzymes use S-adenosylmethionine as the methyl donor, and aberrant methylation can silence tumour suppressor genes. When damage is irreparable, the cell is removed by apoptosis, and if apoptosis fails, the immune system acts as a third line of defence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "DNA damage"
+     },
+     {
+      "id": "b",
+      "label": "Repair"
+     },
+     {
+      "id": "c",
+      "label": "Apoptosis"
+     },
+     {
+      "id": "d",
+      "label": "Immune clearance"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "fixable"
+     ],
+     [
+      "b",
+      "c",
+      "irreparable"
+     ],
+     [
+      "c",
+      "d",
+      "apoptosis fails"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oncogenes are activated proto-oncogenes that drive growth, such as MYC and RAS. **Tumour suppressor genes** restrain growth or trigger apoptosis, and include TP53 on 17p13 and RB1. Knudson's **two-hit hypothesis** explains that both alleles of a tumour suppressor gene must be inactivated. In hereditary retinoblastoma, the germline mutation is the first hit and a somatic mutation of the second allele is the second hit.",
+   "say": "Oncogenes are activated proto-oncogenes that drive growth, such as MYC and RAS. Tumour suppressor genes restrain growth or trigger apoptosis, and include TP53 on 17p13 and RB1. Knudson's two-hit hypothesis explains that both alleles of a tumour suppressor gene must be inactivated. In hereditary retinoblastoma, the germline mutation is the first hit and a somatic mutation of the second allele is the second hit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oncogene",
+     "points": [
+      "Gain of function",
+      "Dominant at cell level",
+      "Example: MYC, RAS"
+     ]
+    },
+    "right": {
+     "title": "Tumour suppressor",
+     "points": [
+      "Loss of function",
+      "Needs two hits (Knudson)",
+      "Example: TP53, RB1, APC"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "RB protein in its **hypophosphorylated** state binds and inhibits E2F transcription factors, blocking the G1 to S transition. Germline TP53 loss-of-function causes Li-Fraumeni syndrome, an autosomal dominant disorder with early breast cancer and sarcomas. BCL2 is anti-apoptotic, whereas p53 activates BAX to promote apoptosis. HPV E6 degrades p53 and E7 inactivates RB.",
+   "say": "RB protein in its hypophosphorylated state binds and inhibits E2F transcription factors, blocking the transition from G1 to S phase. Germline TP53 loss of function causes Li-Fraumeni syndrome, an autosomal dominant disorder with early breast cancer and sarcomas. BCL2 is anti-apoptotic, whereas p53 activates BAX to promote apoptosis. HPV E6 degrades p53 and E7 inactivates RB.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Protein",
+     "Normal role",
+     "Cancer effect when altered"
+    ],
+    "rows": [
+     [
+      "RB1",
+      "Holds E2F in check",
+      "Unchecked G1 to S progression"
+     ],
+     [
+      "TP53",
+      "Triggers repair or apoptosis",
+      "Genomic instability, Li-Fraumeni"
+     ],
+     [
+      "BCL2",
+      "Blocks apoptosis",
+      "Survival of damaged cells"
+     ],
+     [
+      "VEGF",
+      "Promotes angiogenesis",
+      "Tumour blood supply"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cancer cells gain **sustained proliferation** and evade growth suppressors, resist apoptosis, and maintain replicative immortality through **telomerase** activity. They reprogram metabolism via the **Warburg effect**, favouring glycolysis even in oxygen, and secrete VEGF to induce angiogenesis. Activating invasion and metastasis is the final hallmark. Mutation accumulation in humans is estimated at roughly 13 to 44 mutations per genome per year.",
+   "say": "Cancer cells gain sustained proliferation and evade growth suppressors, resist apoptosis, and maintain replicative immortality through telomerase activity. They reprogram metabolism via the Warburg effect, favouring glycolysis even in the presence of oxygen, and secrete VEGF to induce angiogenesis. Activating invasion and metastasis is the final hallmark. Mutation accumulation in humans is estimated at roughly 13 to 44 mutations per genome per year.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_5a758d8550fc",
+  "q_8a2e7a786474",
+  "q_0dd645028322"
+ ],
+ "src": [],
+ "refs": [
+  "Hanahan D, Weinberg RA. Hallmarks of Cancer: The Next Generation. Cell (2011)",
+  "Knudson AG. Mutation and cancer: statistical study of retinoblastoma. PNAS (1971)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 38
+ }
+}

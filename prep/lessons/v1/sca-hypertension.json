@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "module": "sca-hypertension",
+ "subject": "ss-cardiology",
+ "title": "Systemic hypertension: diagnosis, targets and resistant hypertension",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Hypertension is confirmed when repeated **office blood pressure** readings remain above the diagnostic threshold set by current guidelines. Readings well above that level, often termed severe, need urgent assessment for **target organ damage**. Always measure after the patient has rested, use a cuff of the correct size, and repeat any abnormal reading before labelling. Screening should be opportunistic at every adult encounter, because many patients are unaware of their diagnosis.",
+   "say": "Hypertension is confirmed when repeated office blood pressure readings remain above the diagnostic threshold set by current guidelines. Readings well above that level, often termed severe, need urgent assessment for target organ damage. Always measure after the patient has rested, use a cuff of the correct size, and repeat any abnormal reading before labelling. Screening should be opportunistic at every adult encounter, because many patients are unaware of their diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "Use **ambulatory blood pressure monitoring** and **home blood pressure monitoring** to separate true disease from **white coat hypertension**. White coat hypertension has raised office but normal daytime readings and needs no drugs. **Masked hypertension** is the reverse: normal office readings but raised daytime ambulatory or home readings, and it carries real cardiovascular risk and needs treatment.",
+   "say": "Use ambulatory blood pressure monitoring and home blood pressure monitoring to separate true disease from white coat hypertension. White coat hypertension has raised office but normal daytime readings and needs no drugs. Masked hypertension is the reverse: normal office readings but raised daytime ambulatory or home readings, and it carries real cardiovascular risk and needs treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "White coat hypertension",
+     "points": [
+      "Raised office readings",
+      "Normal daytime ambulatory or home readings",
+      "No drug treatment needed",
+      "Monitor periodically"
+     ]
+    },
+    "right": {
+     "title": "Masked hypertension",
+     "points": [
+      "Normal office readings",
+      "Raised daytime ambulatory or home readings",
+      "Carries cardiovascular risk",
+      "Treat as true hypertension"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For SPRINT-based targets, guidance in adults at high cardiovascular risk favours a systolic target of about **120 mmHg** when tolerated, measured in a standardised way. The SPRINT trial showed fewer cardiovascular events and deaths with intensive lowering. In patients with diabetes, a general target below 130/80 mmHg applies, and frail or elderly patients need individualised, cautious lowering with orthostatic checks.",
+   "say": "For SPRINT-based targets, guidance in adults at high cardiovascular risk favours a systolic target of about 120 millimetres of mercury when tolerated, measured in a standardised way. The SPRINT trial showed fewer cardiovascular events and deaths with intensive lowering. In patients with diabetes, a general target below 130 over 80 applies, and frail or elderly patients need individualised, cautious lowering with orthostatic checks.",
+   "vis": null
+  },
+  {
+   "tx": "In **resistant hypertension**, blood pressure stays above target despite three drugs at adequate doses, one of which is a **diuretic**. First confirm **adherence** without confrontation and exclude **secondary causes**. The **PATHWAY-2** trial showed **spironolactone** is the preferred fourth agent, with potassium and renal function monitored closely. **Renal denervation** is an option for selected patients who remain uncontrolled.",
+   "say": "In resistant hypertension, blood pressure stays above target despite three drugs at adequate doses, one of which is a diuretic. First confirm adherence without confrontation and exclude secondary causes. The PATHWAY-2 trial showed spironolactone is the preferred fourth agent, with potassium and renal function monitored closely. Renal denervation is an option for selected patients who remain uncontrolled.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Confirm adherence"
+     },
+     {
+      "id": "b",
+      "label": "Exclude secondary causes"
+     },
+     {
+      "id": "c",
+      "label": "Optimise three drugs including a diuretic"
+     },
+     {
+      "id": "d",
+      "label": "Add spironolactone"
+     },
+     {
+      "id": "e",
+      "label": "Consider renal denervation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypertensive emergency** means severe blood pressure with acute target organ damage, needing controlled IV lowering in a monitored setting, not a rapid oral dose. Also screen for **secondary hypertension** in young patients, resistant cases, or sudden onset. In pregnancy, ACE inhibitors and ARBs must be stopped before conception, with labetalol or nifedipine as safer options.",
+   "say": "Hypertensive emergency means severe blood pressure with acute target organ damage, needing controlled intravenous lowering in a monitored setting, not a rapid oral dose. Also screen for secondary hypertension in young patients, resistant cases, or sudden onset. In pregnancy, ACE inhibitors and ARBs must be stopped before conception, with labetalol or nifedipine as safer options.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1c8148e3ef0a",
+  "q_29be1060e877",
+  "q_4d5af8eddb3a"
+ ],
+ "src": [],
+ "refs": [
+  "NICE NG136 Hypertension in adults: diagnosis and management",
+  "ESC/ESH Guidelines for the management of arterial hypertension 2024"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 38
+ }
+}

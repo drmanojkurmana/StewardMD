@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "srh-axspa-treatment",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Management of spondyloarthritis: NSAIDs, biologics and treat to target",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Spondyloarthritis (SpA) is a family of **immune-mediated inflammatory arthritides**. ASAS divides it into axial (axSpA) and peripheral (pSpA) forms. Axial skeletal involvement is not mandatory. Management rests on three pillars: exercise and physiotherapy, NSAIDs for persistent axial inflammation, and biologics for active disease that NSAIDs fail to control. Goals are control of pain and stiffness, preserved spinal mobility and prevention of structural damage.",
+   "say": "Spondyloarthritis is a family of immune-mediated inflammatory arthritides. The ASAS classification divides it into axial and peripheral forms. Axial skeletal involvement is not mandatory. Management rests on three pillars: exercise and physiotherapy, NSAIDs for persistent axial inflammation, and biologics for active disease that NSAIDs fail to control. The goals are control of pain and stiffness, preserved spinal mobility and prevention of structural damage.",
+   "vis": null
+  },
+  {
+   "tx": "Non-drug care forms the **foundation** of spondyloarthritis management. Structured **physiotherapy** aims to preserve spinal movement, good posture and daily function, and it should begin early and carry on long term. Patients benefit from a **home exercise** routine and education about posture and sleep. Multidisciplinary teams combine rheumatology with physiotherapy, while orthopaedic referral is kept for severe spinal deformity or hip disease.",
+   "say": "Non-drug care is the foundation of spondyloarthritis management. Structured physiotherapy helps keep the spine moving, supports good posture and protects daily function, and it should start early and continue over the long term. Patients also benefit from a home exercise routine and advice on posture and sleep. Rheumatology and physiotherapy work together in a multidisciplinary team. Orthopaedic referral is kept for severe spinal deformity or hip disease. Systemic steroids add little in axial disease, although a local injection can settle a single enthesitis or monoarthritis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Purpose",
+     "Lead"
+    ],
+    "rows": [
+     [
+      "Physiotherapy",
+      "Spinal mobility and daily function",
+      "Physiotherapist"
+     ],
+     [
+      "Home exercise",
+      "Regular movement between sessions",
+      "Patient with guidance"
+     ],
+     [
+      "Posture and sleep advice",
+      "Reduce stiffness and pain",
+      "Whole team"
+     ],
+     [
+      "Orthopaedic referral",
+      "Severe deformity or hip disease",
+      "Surgeon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**NSAIDs** are the first-line drugs for pain and stiffness in axial disease and are used continuously while inflammation persists. Peripheral arthritis is treated differently: **sulfasalazine** or methotrexate, as conventional synthetic DMARDs, are used for peripheral joints. Avoid glucocorticoid injection near weight-bearing entheses because of tendon rupture risk. NSAIDs may trigger flares of inflammatory bowel disease, so they need caution in that setting.",
+   "say": "NSAIDs are the first-line drugs for pain and stiffness in axial disease and are used continuously while inflammation persists. Peripheral arthritis is treated differently, with sulfasalazine or methotrexate as conventional synthetic DMARDs. Avoid glucocorticoid injection near weight-bearing entheses because of tendon rupture risk. NSAIDs may trigger flares of inflammatory bowel disease, so they need caution in that setting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Preferred approach"
+    ],
+    "rows": [
+     [
+      "Axial pain, persistent inflammation",
+      "Continuous NSAID plus physiotherapy"
+     ],
+     [
+      "Peripheral arthritis",
+      "Sulfasalazine or methotrexate"
+     ],
+     [
+      "Single enthesitis or monoarthritis",
+      "Local glucocorticoid injection"
+     ],
+     [
+      "Weight-bearing lower limb entheses",
+      "Avoid injection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If **active axial disease** persists despite continuous **NSAIDs**, add a biologic. **TNF-alpha inhibitors** or **IL-17 inhibitors** such as secukinumab or ixekizumab are the usual choices, with **JAK inhibitors** like upadacitinib or tofacitinib as a further option. Where **inflammatory bowel disease** coexists, anti-IL-17 agents are contraindicated. Some newer drug classes offer no benefit for axial disease.",
+   "say": "If active axial disease persists despite continuous NSAIDs, add a biologic. TNF-alpha inhibitors or IL-17 inhibitors such as secukinumab or ixekizumab are the usual choices, with JAK inhibitors like upadacitinib or tofacitinib as a further option. Where inflammatory bowel disease coexists, anti-IL-17 agents are contraindicated. Some newer drug classes offer no benefit for axial disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Active axial disease"
+     },
+     {
+      "id": "b",
+      "label": "NSAIDs fail"
+     },
+     {
+      "id": "c",
+      "label": "TNF or IL-17 inhibitor"
+     },
+     {
+      "id": "d",
+      "label": "JAK inhibitor if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Use **treat to target**. Record a composite index such as BASDAI or ASDAS together with CRP at each review, and aim for low disease activity or remission. Track structural progression on imaging. Change therapy if the target is not reached. Screen for latent TB and check hepatitis B status before any biologic or JAK inhibitor. Avoid live vaccines on these agents, and vaccinate beforehand where possible.",
+   "say": "Use treat to target. Record a composite index such as BASDAI or ASDAS together with CRP at each review, and aim for low disease activity or remission. Track structural progression on imaging. Change therapy if the target is not reached. Screen for latent TB and check hepatitis B status before any biologic or JAK inhibitor. Avoid live vaccines on these agents, and vaccinate beforehand where possible.",
+   "vis": null
+  },
+  {
+   "tx": "Apply the **ASAS-EULAR recommendations** as the reference framework. Diagnose axSpA with the ASAS criteria, which require definite sacroiliitis on imaging or MRI sacroiliitis plus SpA features, and note that HLA-B27 supports but does not confirm the diagnosis. Inflammatory back pain has a typical pattern of improvement with exercise and worsening with rest. Reference points for escalation are persistent active disease and inadequate response to first-line therapy.",
+   "say": "Apply the ASAS-EULAR recommendations as the reference framework. Diagnose axial disease with the ASAS criteria, which require definite sacroiliitis on imaging or MRI sacroiliitis plus SpA features. HLA-B27 supports but does not confirm the diagnosis. Inflammatory back pain typically improves with exercise and worsens with rest. Escalation is triggered by persistent active disease and inadequate response to first-line therapy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_413449e19bb5",
+  "q_796a21f2137d",
+  "q_ce33c0e1f95f"
+ ],
+ "src": [
+  "kb-clinical-protocols-rheumatoid-arthritis",
+  "kb-reference-spondyloarthritis"
+ ],
+ "refs": [
+  "ASAS-EULAR recommendations for the management of axial spondyloarthritis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 1325,
+  "itemN": 30
+ }
+}

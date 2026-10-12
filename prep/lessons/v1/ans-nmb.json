@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "ans-nmb",
+ "subject": "anaesthesia",
+ "title": "Neuromuscular blocking agents and reversal",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Neuromuscular blocking agents act at the **neuromuscular junction** to produce paralysis for intubation and surgery. They are split into **depolarising** and **non-depolarising** groups. **Succinylcholine** is the only depolarising agent still in routine clinical use. It binds the nicotinic receptor, depolarises the end plate, and causes brief fasciculations before paralysis. Its onset is the fastest and its duration the shortest among these drugs.",
+   "say": "Neuromuscular blocking agents act at the neuromuscular junction to produce paralysis for intubation and surgery. They are split into depolarising and non-depolarising groups. Succinylcholine is the only depolarising agent still in routine clinical use. It binds the nicotinic receptor, depolarises the end plate, and causes brief fasciculations before paralysis. Its onset is the fastest and its duration the shortest among these drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Succinylcholine"
+    ],
+    "rows": [
+     [
+      "Group",
+      "Depolarising"
+     ],
+     [
+      "Onset",
+      "Fastest"
+     ],
+     [
+      "Duration",
+      "Shortest"
+     ],
+     [
+      "Fasciculations",
+      "Seen within one minute"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Succinylcholine blockade has a **phase I** and a **phase II** form. In phase I, the twitch height falls with no fade on train of four or tetanic stimulation. Large or repeated doses, usually about 7 to 10 mg/kg or prolonged exposure of 30 to 60 minutes, shift it to **phase II**. Phase II behaves like a non-depolarising block, showing fade and post-tetanic facilitation, and neostigmine can antagonise it.",
+   "say": "Succinylcholine blockade has a phase I and a phase II form. In phase I, the twitch height falls with no fade on train of four or tetanic stimulation. Large or repeated doses, usually about 7 to 10 milligrams per kilogram or prolonged exposure of 30 to 60 minutes, shift it to phase II. Phase II behaves like a non-depolarising block, showing fade and post-tetanic facilitation, and neostigmine can antagonise it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Phase I",
+     "points": [
+      "No fade on TOF",
+      "No post-tetanic facilitation",
+      "Fasciculations first"
+     ]
+    },
+    "right": {
+     "title": "Phase II",
+     "points": [
+      "Fade on TOF and tetanus",
+      "Post-tetanic facilitation",
+      "Neostigmine can reverse"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Succinylcholine is broken down by **plasma pseudocholinesterase** into an inactive metabolite. In **pseudocholinesterase deficiency**, the drug lingers, so paralysis lasts far longer than usual even at the standard dose. Laboratory testing of enzyme activity can confirm an atypical variant. Avoid **succinylcholine** in patients at risk of **hyperkalaemia**, such as those with burns, severe infection, high velocity trauma or neuromuscular disease.",
+   "say": "Succinylcholine is broken down by plasma pseudocholinesterase into an inactive metabolite. In pseudocholinesterase deficiency, the drug lingers, so paralysis lasts far longer than usual even at the standard dose. Laboratory testing of enzyme activity can confirm an atypical variant. Avoid succinylcholine in patients at risk of hyperkalaemia, such as those with burns, severe infection, high velocity trauma or neuromuscular disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Neostigmine** is an indirect reversal agent that inhibits **acetylcholinesterase**, raising acetylcholine levels at the neuromuscular junction. Because it acts at every cholinergic synapse, it needs an **antimuscarinic** such as **atropine** to blunt bradycardia and bronchospasm. The usual dose is 0.035 to 0.05 mg/kg. **Sugammadex** is a modified cyclodextrin that encapsulates **aminosteroid** relaxants such as rocuronium and vecuronium in a 1:1 complex. It acts quickly but has no effect on atracurium or succinylcholine.",
+   "say": "Neostigmine is an indirect reversal agent that inhibits acetylcholinesterase, raising acetylcholine levels at the neuromuscular junction. Because it acts at every cholinergic synapse, it needs an antimuscarinic such as atropine to blunt bradycardia and bronchospasm. The usual dose is 0.035 to 0.05 milligrams per kilogram. Sugammadex is a modified cyclodextrin that encapsulates aminosteroid relaxants such as rocuronium and vecuronium in a 1:1 complex. It acts quickly but has no effect on atracurium or succinylcholine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neostigmine",
+     "points": [
+      "Indirect, acetylcholinesterase inhibitor",
+      "Needs atropine to block muscarinic effects",
+      "Dose 0.035 to 0.05 mg/kg"
+     ]
+    },
+    "right": {
+     "title": "Sugammadex",
+     "points": [
+      "Encapsulates aminosteroids in a 1:1 complex",
+      "Works on rocuronium and vecuronium",
+      "No effect on atracurium or succinylcholine"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "7d5bc4e4-0c7d-4049-a670-2bb60f3c7af9",
+  "912ee9b6-932c-4364-8168-eb1b8aab45ff",
+  "5d5cc43e-7313-481e-a6e1-3dfc27b7bc62"
+ ],
+ "src": [],
+ "refs": [
+  "Morgan and Mikhail's Clinical Anesthesiology (Butterworth, Mackey, Wasnick, Eds)",
+  "Miller's Anesthesia"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 360
+ }
+}

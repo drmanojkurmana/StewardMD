@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "phm-drug-development",
+ "subject": "pharmacology",
+ "title": "Drug development, clinical trial phases and drug regulation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Before any new drug reaches patients, it is tested in **preclinical** studies using animals and in vitro work. If results look promising, the sponsor files an Investigational New Drug application with the FDA in the USA. In India, the regulator is the CDSCO. Only after approval does human testing begin. Human testing is organised into four phases, each answering a different question.",
+   "say": "Before any new drug reaches patients, it is tested in preclinical studies using animals and in vitro work. If results look promising, the sponsor files an Investigational New Drug application with the FDA in the USA. In India, the regulator is the CDSCO. Only after approval does human testing begin. Human testing is organised into four phases, each answering a different question.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p",
+      "label": "Preclinical studies"
+     },
+     {
+      "id": "a",
+      "label": "Regulatory filing"
+     },
+     {
+      "id": "h",
+      "label": "Human trials in four phases"
+     },
+     {
+      "id": "m",
+      "label": "Marketing approval"
+     }
+    ],
+    "edges": [
+     [
+      "p",
+      "a"
+     ],
+     [
+      "a",
+      "h"
+     ],
+     [
+      "h",
+      "m"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Phase I** is the first-in-human study, usually in 20 to 40 healthy volunteers. Its main aims are the **maximum tolerated dose**, pharmacokinetics and safety. Efficacy cannot be judged here. Anticancer drugs are an exception and are tested in patients because healthy people should not be exposed to their toxicity. Phase 0 microdosing studies, using sub-pharmacological doses, may precede it.",
+   "say": "Phase one is the first-in-human study, usually in twenty to forty healthy volunteers. Its main aims are the maximum tolerated dose, pharmacokinetics and safety. Efficacy cannot be judged here. Anticancer drugs are an exception and are tested in patients because healthy people should not be exposed to their toxicity. Phase zero microdosing studies, using sub-pharmacological doses, may precede it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Population",
+     "Main question"
+    ],
+    "rows": [
+     [
+      "I",
+      "Healthy volunteers",
+      "Safety, MTD, pharmacokinetics"
+     ],
+     [
+      "II",
+      "Patients, small group",
+      "Efficacy and dose ranging"
+     ],
+     [
+      "III",
+      "Large patient group, multicentre",
+      "Confirm efficacy and safety"
+     ],
+     [
+      "IV",
+      "Marketed use, general population",
+      "Rare and long-term adverse effects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Phase II** is the first study in patients, with a few dozen to a couple of hundred people, and it explores **therapeutic efficacy** and dose ranging. It proceeds only if Phase I showed positive evidence and no serious adverse effects. **Phase III** enrols larger, multicentre groups, often randomised and double-blind, to confirm efficacy and safety across genetic and ethnic groups. Success here leads to a marketing application.",
+   "say": "Phase two is the first study in patients, with a few dozen to a couple of hundred people, and it explores therapeutic efficacy and dose ranging. It proceeds only if Phase one showed positive evidence and no serious adverse effects. Phase three enrols larger, multicentre groups, often randomised and double-blind, to confirm efficacy and safety across genetic and ethnic groups. Success here leads to a marketing application.",
+   "vis": null
+  },
+  {
+   "tx": "**Phase IV** is postmarketing surveillance, collecting data after general use to find rare, idiosyncratic or long-term adverse effects and unsuspected **drug interactions**. Pharmacovigilance is the science of detecting, assessing and preventing adverse drug effects. Ethical clearance is not required for Phase IV, as it is observational use of an approved drug. Studies in children, pregnant women and the elderly may also be run at this stage.",
+   "say": "Phase four is postmarketing surveillance, collecting data after general use to find rare, idiosyncratic or long-term adverse effects and unsuspected drug interactions. Pharmacovigilance is the science of detecting, assessing and preventing adverse drug effects. Ethical clearance is not required for Phase four, as it is observational use of an approved drug. Studies in children, pregnant women and the elderly may also be run at this stage.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bed70c5e-27d7-46db-bf81-f90f32e512d9",
+  "499a69a6-7794-43d0-91e9-4c7d241d87ab",
+  "84d56281-8f91-4eff-b802-ce01a3ce3de8"
+ ],
+ "src": [],
+ "refs": [
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics",
+  "KD Tripathi Essentials of Medical Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 150
+ }
+}

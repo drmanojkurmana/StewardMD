@@ -1,0 +1,107 @@
+{
+ "v": 1,
+ "module": "ans-iv-agents",
+ "subject": "anaesthesia",
+ "title": "Intravenous induction agents in anaesthesia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Intravenous induction agents bring a patient from consciousness to unconsciousness quickly. Their key features are onset, duration, and effects on the heart, brain and airway. **Thiopentone** is an ultra-short acting barbiturate with rapid onset within about 30 seconds, due to high lipid solubility. It lowers cerebral metabolic rate and intracranial pressure, so it is cerebroprotective. It has no analgesic action, and it is contraindicated in acute intermittent porphyria.",
+   "say": "Intravenous induction agents bring a patient from consciousness to unconsciousness quickly. Their key features are onset, duration, and effects on the heart, brain and airway. Thiopentone is an ultra-short acting barbiturate with rapid onset within about 30 seconds, due to high lipid solubility. It lowers cerebral metabolic rate and intracranial pressure, so it is cerebroprotective. It has no analgesic action, and it is contraindicated in acute intermittent porphyria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Thiopentone"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "About 30 seconds"
+     ],
+     [
+      "Duration",
+      "Under 20 minutes"
+     ],
+     [
+      "Analgesia",
+      "None"
+     ],
+     [
+      "Cerebral effect",
+      "Lowers ICP"
+     ],
+     [
+      "Porphyria",
+      "Contraindicated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Propofol** is an oily emulsion with fast onset and rapid recovery, so it is the preferred induction agent for **day care surgery**. It is highly protein bound and lipid soluble. It lowers blood pressure more than thiopentone, and it has anti-emetic and antipruritic effects. Propofol is safe in porphyria. Its egg lecithin emulsifier and soybean oil phase are formulation details.",
+   "say": "Propofol is an oily emulsion with fast onset and rapid recovery, so it is the preferred induction agent for day care surgery. It is highly protein bound and lipid soluble. It lowers blood pressure more than thiopentone, and it has anti-emetic and antipruritic effects. Propofol is safe in porphyria. Its egg lecithin emulsifier and soybean oil phase are formulation details.",
+   "vis": null
+  },
+  {
+   "tx": "**Ketamine** is a phencyclidine derivative that acts on NMDA receptors and causes **dissociative anaesthesia**. It is sympathomimetic, raising heart rate, blood pressure and cardiac output, so it suits shock and hypovolaemia. It is a bronchodilator, which suits asthmatics. However, it raises intracranial and intraocular pressure, and it causes emergence reactions and hallucinations, so avoid it in head injury and psychiatric illness.",
+   "say": "Ketamine is a phencyclidine derivative that acts on NMDA receptors and causes dissociative anaesthesia. It is sympathomimetic, raising heart rate, blood pressure and cardiac output, so it suits shock and hypovolaemia. It is a bronchodilator, which suits asthmatics. However, it raises intracranial and intraocular pressure, and it causes emergence reactions and hallucinations, so avoid it in head injury and psychiatric illness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Use ketamine in",
+     "points": [
+      "Shock or hypovolaemia",
+      "Asthma",
+      "Children",
+      "Full stomach"
+     ]
+    },
+    "right": {
+     "title": "Avoid ketamine in",
+     "points": [
+      "Head injury or raised ICP",
+      "Glaucoma",
+      "Ischaemic heart disease",
+      "Schizophrenia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Etomidate** gives stable haemodynamics, so it suits cardiac patients, but it causes **adrenal suppression** by inhibiting 11 beta-hydroxylase. This is why it is not used for long-term infusion. Etomidate also causes pain on injection and myoclonus. **Context-sensitive half-time** rises with prolonged infusion for most of these drugs, so recovery slows after long infusions.",
+   "say": "Etomidate gives stable haemodynamics, so it suits cardiac patients, but it causes adrenal suppression by inhibiting 11 beta-hydroxylase. This is why it is not used for long-term infusion. Etomidate also causes pain on injection and myoclonus. Context-sensitive half-time rises with prolonged infusion for most of these drugs, so recovery slows after long infusions.",
+   "vis": null
+  },
+  {
+   "tx": "**Propofol infusion syndrome** is a rare but serious complication of prolonged high-dose propofol, causing metabolic acidosis, rhabdomyolysis and cardiac failure. **Midazolam** is a benzodiazepine used mainly for premedication and sedation, and it causes more respiratory depression and hypotension than diazepam. Choose agents by patient status, not habit.",
+   "say": "Propofol infusion syndrome is a rare but serious complication of prolonged high-dose propofol, causing metabolic acidosis, rhabdomyolysis and cardiac failure. Midazolam is a benzodiazepine used mainly for premedication and sedation, and it causes more respiratory depression and hypotension than diazepam. Choose agents by patient status, not habit.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "1b3e249e-de7f-46f2-83be-cf7b3a431d0a",
+  "e8f81489-98bb-4200-999c-d3903dd55e35",
+  "51f51dc3-a09e-4a3d-9713-cce25ea4f769"
+ ],
+ "src": [],
+ "refs": [
+  "Goodman & Gilman's The Pharmacological Basis of Therapeutics (Brunton, Chabner, Knollmann (Eds))",
+  "A Miller's Anaesthesia (Miller RD (Ed))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 351
+ }
+}

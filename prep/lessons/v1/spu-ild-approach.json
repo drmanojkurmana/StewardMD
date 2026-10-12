@@ -1,0 +1,174 @@
+{
+ "v": 1,
+ "module": "spu-ild-approach",
+ "subject": "ss-pulmonology",
+ "title": "Approach to interstitial lung disease",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Interstitial lung disease (ILD) is a group of disorders affecting the lung parenchyma, classified by the ATS/ERS system into idiopathic interstitial pneumonias, other rare forms, and ILD associated with systemic disease or exposure. The **idiopathic interstitial pneumonias** form the core group, and **idiopathic pulmonary fibrosis** (IPF) is the commonest and most important of them. A clinician must first ask whether a known cause exists before accepting the idiopathic label, because treatable causes such as connective tissue disease and hypersensitivity pneumonitis change management entirely.",
+   "say": "Interstitial lung disease is a group of disorders affecting the lung tissue. The ATS and ERS classification divides them into idiopathic interstitial pneumonias, other rare forms, and disease linked to systemic illness or exposure. The idiopathic interstitial pneumonias form the core group, and idiopathic pulmonary fibrosis is the commonest and most important of them. Before accepting the idiopathic label, a clinician must first ask whether a known cause exists, because treatable causes such as connective tissue disease and hypersensitivity pneumonitis change management entirely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Examples",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Idiopathic interstitial pneumonia",
+      "IPF, NSIP, COP",
+      "No identifiable cause after work-up"
+     ],
+     [
+      "Rare ILD",
+      "PPFE, LAM",
+      "Distinct histology or genetics"
+     ],
+     [
+      "Associated ILD",
+      "CTD-ILD, HP",
+      "Cause must be sought actively"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **HRCT** pattern is central to diagnosis. A **UIP pattern** shows subpleural, basal-predominant reticulation, traction bronchiectasis and honeycombing, with no features suggesting an alternative cause. A **probable UIP** pattern lacks honeycombing but still supports a diagnosis after clinical review. Biopsy is reserved for indeterminate or inconsistent cases. Cryobiopsy, obtained by bronchoscopy with a cryoprobe, yields larger samples than forceps biopsy and is used when the HRCT is unclear.",
+   "say": "HRCT pattern is central to diagnosis. A UIP pattern shows subpleural, basal-predominant reticulation, traction bronchiectasis and honeycombing, with no features pointing to another cause. A probable UIP pattern lacks honeycombing but can still support diagnosis after clinical review. Biopsy is reserved for indeterminate or inconsistent cases. Cryobiopsy, taken through a bronchoscope with a cryoprobe, gives larger samples than forceps biopsy and is used when the scan is unclear.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "UIP pattern",
+     "points": [
+      "Subpleural basal reticulation",
+      "Traction bronchiectasis",
+      "Honeycombing present",
+      "Biopsy often not needed"
+     ]
+    },
+    "right": {
+     "title": "Probable UIP",
+     "points": [
+      "Reticulation without honeycombing",
+      "Needs clinical correlation",
+      "Suggests IPF after MDD",
+      "Biopsy may be considered"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **multidisciplinary discussion** (MDD) combines clinicians, radiologists and pathologists. It is the reference standard for assigning a confident diagnosis. Bronchoalveolar lavage (BAL) helps in specific cases: a lymphocytosis above 20 per cent suggests hypersensitivity pneumonitis or sarcoidosis, while eosinophilia above 25 per cent suggests chronic eosinophilic pneumonia. Autoantibody screening for connective tissue disease should be routine, because serology can be positive before overt systemic features develop.",
+   "say": "The multidisciplinary discussion combines clinicians, radiologists and pathologists, and it is the reference standard for a confident diagnosis. Bronchoalveolar lavage helps in specific cases. A lymphocytosis above 20 percent suggests hypersensitivity pneumonitis or sarcoidosis, while eosinophilia above 25 percent suggests chronic eosinophilic pneumonia. Autoantibody screening for connective tissue disease should be routine, because serology can be positive before systemic features appear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HRCT and clinical data"
+     },
+     {
+      "id": "b",
+      "label": "Autoantibody screen"
+     },
+     {
+      "id": "c",
+      "label": "BAL if indicated"
+     },
+     {
+      "id": "d",
+      "label": "MDD review"
+     },
+     {
+      "id": "e",
+      "label": "Final diagnosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disease **progression** is judged by lung function and imaging. In IPF, a relative fall in forced vital capacity (FVC) of 10 per cent or more is significant, and serial FVC decline predicts mortality. Progressive pulmonary fibrosis (PPF) is defined by physiological, radiological or symptomatic worsening within one year in a non-IPF fibrosing ILD. An **acute exacerbation** is a sudden respiratory worsening within one month with new bilateral ground-glass opacities, and it carries very high mortality, often above 85 per cent in IPF.",
+   "say": "Disease progression is judged by lung function and imaging. In idiopathic pulmonary fibrosis, a relative fall in forced vital capacity of 10 percent or more is significant, and serial decline predicts mortality. Progressive pulmonary fibrosis is defined by worsening within one year in a non-IPF fibrosing disease. An acute exacerbation is a sudden respiratory worsening within one month with new bilateral ground-glass opacities, and it carries very high mortality, often above 85 percent in IPF.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Threshold",
+     "Relevance"
+    ],
+    "rows": [
+     [
+      "FVC in IPF",
+      "Relative fall 10% or more",
+      "Significant progression"
+     ],
+     [
+      "Non-IPF fibrosis",
+      "Absolute FVC fall 5% in one year",
+      "Defines PPF"
+     ],
+     [
+      "Acute exacerbation",
+      "Onset within 1 month",
+      "High mortality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of **IPF** rests on **antifibrotic** drugs, nintedanib and pirfenidone, which slow lung function decline. **Immunosuppression** should be avoided in IPF because it increases harm without benefit. Lung transplantation is the only intervention shown to improve survival in advanced disease, so referral should be made early, ideally at diagnosis. Nintedanib needs liver function monitoring monthly for three months, and diarrhoea is managed with hydration and loperamide, with dose adjustment considered in frail or low-weight patients.",
+   "say": "Management of idiopathic pulmonary fibrosis rests on antifibrotic drugs, nintedanib and pirfenidone, which slow lung function decline. Immunosuppression should be avoided because it increases harm without benefit. Lung transplantation is the only intervention shown to improve survival in advanced disease, so referral should be made early, ideally at diagnosis. Nintedanib needs liver function monitoring monthly for three months, and diarrhoea is managed with hydration and loperamide, with dose reduction considered in frail or low-weight patients.",
+   "vis": null
+  },
+  {
+   "tx": "Here are the **key exam pearls** to keep in mind. **Velcro-type** bibasal crackles and clubbing point towards **idiopathic pulmonary fibrosis**, where median survival is roughly two to five years. **Pleuroparenchymal fibroelastosis** shows upper-lobe fibroelastosis and **platythorax**. **Hypersensitivity pneumonitis** shows loose peribronchiolar granulomas and responds to **antigen avoidance**. **Hantavirus pulmonary syndrome** brings rodent exposure, thrombocytopenia and rapid decline, needing early intensive care.",
+   "say": "Here are the key exam pearls. Velcro-type bibasal crackles and clubbing point towards idiopathic pulmonary fibrosis, where median survival is roughly two to five years. Pleuroparenchymal fibroelastosis shows upper-lobe fibroelastosis and platythorax. Hypersensitivity pneumonitis shows loose peribronchiolar granulomas and responds to antigen avoidance. Hantavirus pulmonary syndrome brings rodent exposure, thrombocytopenia and rapid decline, so it needs early intensive care.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_aa356cde40b2",
+  "q_9179b09d979a",
+  "q_44fea99fc862"
+ ],
+ "src": [],
+ "refs": [
+  "ATS/ERS/JRS/ALAT Clinical Practice Guideline: Idiopathic Pulmonary Fibrosis (2015 update)",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 45
+ }
+}

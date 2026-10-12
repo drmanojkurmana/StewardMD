@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "cm-disinfection",
+ "subject": "community-medicine",
+ "title": "Disinfection and sterilisation: concepts, agents and methods",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sterilisation** destroys all life, including **bacterial spores**. **Disinfection** removes harmful microbes but spores may survive. Antisepsis inhibits growth on living tissue without necessarily killing everything. Know these three terms cold, as NEET-PG and INI-CET often test them directly. Disinfection is further classed by timing: concurrent, terminal and precurrent, which the next step explains.",
+   "say": "Sterilisation destroys all life, including bacterial spores. Disinfection removes harmful microbes, but spores may survive. Antisepsis inhibits growth on living tissue without necessarily killing everything. Know these three terms well, as NEET-PG and INI-CET often test them directly. Disinfection is further classed by timing: concurrent, terminal and precurrent, which the next step explains.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Sterilisation",
+      "Destroys all life including spores"
+     ],
+     [
+      "Disinfection",
+      "Removes harmful microbes, spores may survive"
+     ],
+     [
+      "Antisepsis",
+      "Inhibits growth on living tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Concurrent disinfection** is applied as soon as infectious material leaves the patient, for example urine, faeces, sputum and soiled linen during illness. **Terminal disinfection** follows discharge, death or removal of the patient, and is now rarely practised beyond terminal cleaning, airing and sunning. **Precurrent or prophylactic disinfection** is done before illness, such as chlorination of water, pasteurisation of milk and handwashing.",
+   "say": "Concurrent disinfection is applied as soon as infectious material leaves the patient, for example urine, faeces, sputum and soiled linen during illness. Terminal disinfection follows discharge, death or removal of the patient, and is now rarely practised beyond terminal cleaning, airing and sunning. Precurrent or prophylactic disinfection is done before illness, such as chlorination of water, pasteurisation of milk and handwashing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Precurrent",
+      "sub": "before illness"
+     },
+     {
+      "id": "b",
+      "label": "Concurrent",
+      "sub": "during illness"
+     },
+     {
+      "id": "c",
+      "label": "Terminal",
+      "sub": "after discharge or death"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bleaching powder** (chlorinated lime) is a white amorphous powder with a pungent smell. Freshly made, it contains about **33% available chlorine** and is unstable, losing chlorine on exposure to air, light and moisture. Stabilised bleach is made by mixing with excess lime. For faeces and urine, a **5% solution** is used with one hour contact. Water chlorination needs a free residual chlorine of 0.5 mg per litre after one hour.",
+   "say": "Bleaching powder, also called chlorinated lime, is a white amorphous powder with a pungent smell. Freshly made, it contains about 33 percent available chlorine and is unstable, losing chlorine on exposure to air, light and moisture. Stabilised bleach is made by mixing with excess lime. For faeces and urine, a 5 percent solution is used with one hour contact. For drinking water, a free residual chlorine of 0.5 milligrams per litre after one hour is the target.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Use",
+     "Strength or dose",
+     "Contact"
+    ],
+    "rows": [
+     [
+      "Faeces and urine",
+      "5% solution",
+      "1 hour"
+     ],
+     [
+      "Drinking water",
+      "0.5 mg/L free chlorine",
+      "1 hour"
+     ],
+     [
+      "Cholera stools",
+      "Bleaching powder, roughly 5%",
+      "1 hour"
+     ],
+     [
+      "Water 1000 L",
+      "About 2.5 g powder",
+      "1 hour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Phenol coefficient** (Rideal-Walker coefficient) compares a disinfectant's germicidal power with phenol, which is set at 1. A value of 10 means the agent is ten times as potent, tested against Salmonella typhi. The Chick-Martin test is used when organic matter is present, since the Rideal-Walker method is then unreliable. Cresol and formalin are other common agents for faeces and urine.",
+   "say": "Phenol coefficient, also called the Rideal-Walker coefficient, compares a disinfectant's germicidal power with phenol, which is set at 1. A value of 10 means the agent is ten times as potent, tested against Salmonella typhi. The Chick-Martin test is used when organic matter is present, since the Rideal-Walker method is then unreliable. Cresol and formalin are other common agents for faeces and urine.",
+   "vis": null
+  },
+  {
+   "tx": "**Sterilising methods** differ by agent. **Autoclaving** uses saturated steam at 121 degrees Celsius and about 15 pounds per square inch for 15 minutes, and is the most effective method for linen, dressings, gloves and culture media, but not for plastics or sharp instruments. **Hot air ovens** run at 160 degrees Celsius for one hour for glassware, forceps and scalpels. **Ethylene oxide** suits heat-sensitive items, and **gamma irradiation** suits bulk plastics and syringes.",
+   "say": "Sterilising methods differ by agent. Autoclaving uses saturated steam at 121 degrees Celsius and about 15 pounds per square inch for 15 minutes, and is the most effective method for linen, dressings, gloves and culture media, but not for plastics or sharp instruments. Hot air ovens run at 160 degrees Celsius for one hour for glassware, forceps and scalpels. Ethylene oxide suits heat-sensitive items, and gamma irradiation suits bulk plastics and syringes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Typical condition",
+     "Best use"
+    ],
+    "rows": [
+     [
+      "Autoclave",
+      "121 C, 15 min",
+      "Linen, dressings, media"
+     ],
+     [
+      "Hot air oven",
+      "160 C, 1 hour",
+      "Glassware, forceps, scalpels"
+     ],
+     [
+      "Ethylene oxide",
+      "55 to 60 C",
+      "Heat-sensitive items"
+     ],
+     [
+      "Gamma irradiation",
+      "Bulk industrial",
+      "Syringes, catheters, plastics"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "43b29992-5ed8-42d8-998f-f44706ae7bda",
+  "5783b99d-68d8-43db-8877-c1357e81888d",
+  "ff67a88e-e667-40ed-8923-950da807b38e"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K Park)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 87
+ }
+}

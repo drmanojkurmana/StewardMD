@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "cm-behavioural",
+ "subject": "community-medicine",
+ "title": "Behavioural sciences and medical sociology: key concepts for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sociology** studies human relationships and behaviour, and how other people's thinking and actions affect an individual. **Medical sociology** is a branch of sociology that deals with health, health behaviour and medical institutions. It was first proposed by Charles McIntire in 1894. Behavioural sciences include sociology, social psychology and social anthropology, but political science is not part of them.",
+   "say": "Sociology studies human relationships and behaviour, and how other people's thinking and actions affect an individual. Medical sociology is a branch of sociology that deals with health, health behaviour and medical institutions. It was first proposed by Charles McIntire in 1894. Behavioural sciences include sociology, social psychology and social anthropology, but political science is not part of them.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Behavioural sciences",
+     "points": [
+      "Sociology",
+      "Social psychology",
+      "Social anthropology"
+     ]
+    },
+    "right": {
+     "title": "Not included",
+     "points": [
+      "Political science"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Culture is learned behaviour that is socially acquired and passed from one generation to another. **Socialisation** is the process by which an individual gradually acquires culture and becomes a member of a social group. **Acculturation** is cultural contact between groups, where cultural patterns change but the groups remain distinct. **Internalisation** means adopting the values of others and making them part of your own.",
+   "say": "Culture is learned behaviour that is socially acquired and passed from one generation to another. Socialisation is the process by which an individual gradually acquires culture and becomes a member of a social group. Acculturation is cultural contact between groups, where cultural patterns change but the groups remain distinct. Internalisation means adopting the values of others and making them part of your own.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Core meaning"
+    ],
+    "rows": [
+     [
+      "Culture",
+      "Socially acquired learned behaviour"
+     ],
+     [
+      "Socialisation",
+      "Gaining culture and group membership"
+     ],
+     [
+      "Acculturation",
+      "Change through contact between cultures"
+     ],
+     [
+      "Internalisation",
+      "Adopting others' values as one's own"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **family** is the primary unit of society and a bridge between generations. A **nuclear family** has a married couple and their dependent children. A **joint family** has several related married couples living together, with property held in common and authority with the senior male. A **three generation family** has representatives of three generations. The family cycle has six phases, from formation to dissolution.",
+   "say": "The family is the primary unit of society and a bridge between generations. A nuclear family has a married couple and their dependent children. A joint family has several related married couples living together, with property held in common and authority with the senior male. A three generation family has representatives of three generations. The family cycle has six phases, from formation to dissolution.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "1",
+      "label": "Formation"
+     },
+     {
+      "id": "2",
+      "label": "Extension"
+     },
+     {
+      "id": "3",
+      "label": "Complete extension"
+     },
+     {
+      "id": "4",
+      "label": "Contraction"
+     },
+     {
+      "id": "5",
+      "label": "Complete contraction"
+     },
+     {
+      "id": "6",
+      "label": "Dissolution"
+     }
+    ],
+    "edges": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "3"
+     ],
+     [
+      "3",
+      "4"
+     ],
+     [
+      "4",
+      "5"
+     ],
+     [
+      "5",
+      "6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Social status can change. **Vertical mobility** is movement up or down between socio-economic classes, for example an industrial worker becoming a wealthy businessman. **Horizontal mobility** is a change of position without a change of class, such as moving to a similar job elsewhere. **Social pathology** studies how social conditions and problems relate to disease, and it is studied through social surveys.",
+   "say": "Social status can change. Vertical mobility is movement up or down between socio-economic classes, for example an industrial worker becoming a wealthy businessman. Horizontal mobility is a change of position without a change of class, such as moving to a similar job elsewhere. Social pathology studies how social conditions and problems relate to disease, and it is studied through social surveys.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vertical mobility",
+     "points": [
+      "Change of social class",
+      "Up or down movement"
+     ]
+    },
+    "right": {
+     "title": "Horizontal mobility",
+     "points": [
+      "Same social class",
+      "Similar position elsewhere"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **doctor patient relationship** and the **sick role** shape how illness is managed. A medical social worker visits the family to learn the personal, economic and social causes of illness, and adds this to the medical history. Socialised medicine is provided by the state but run by professional groups, and it gives universal coverage. Mere socialisation is not enough, so **community participation** is also needed for utilisation.",
+   "say": "The doctor patient relationship and the sick role shape how illness is managed. A medical social worker visits the family to learn the personal, economic and social causes of illness, and adds this to the medical history. Socialised medicine is provided by the state but run by professional groups, and it gives universal coverage. Mere socialisation is not enough, so community participation is also needed for utilisation.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "cc2d98a0-71d5-436b-9dc2-a1f3eddc76d4",
+  "5023368a-90a7-41eb-870b-105d33925d04",
+  "323b733d-458a-493a-9049-8ef3d30e7f9f"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 143
+ }
+}

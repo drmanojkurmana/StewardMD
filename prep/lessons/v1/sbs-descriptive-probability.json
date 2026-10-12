@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "sbs-descriptive-probability",
+ "subject": "ss-biostatistics",
+ "title": "Descriptive statistics, distributions and probability",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Descriptive statistics summarise a dataset so its shape, centre and spread are clear. **Mean**, **median** and **mode** locate the centre. The choice depends on symmetry. In a symmetric normal distribution all three coincide. In skewed data the mean is pulled toward the long tail, so the median is preferred. Always report the spread alongside the centre.",
+   "say": "Descriptive statistics summarise a dataset so its shape, centre and spread are clear. The mean, median and mode locate the centre. The choice depends on symmetry. In a symmetric normal distribution all three coincide. In skewed data the mean is pulled toward the long tail, so the median is preferred. Always report the spread alongside the centre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Best used when",
+     "Sensitivity to outliers"
+    ],
+    "rows": [
+     [
+      "Mean",
+      "Symmetric, near-normal data",
+      "High"
+     ],
+     [
+      "Median",
+      "Skewed data or outliers present",
+      "Low"
+     ],
+     [
+      "Mode",
+      "Most frequent category or value",
+      "Not affected by extremes but unstable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Standard deviation** (SD) measures how far individual observations scatter around the mean. **Standard error** (SE) measures the precision of the sample mean and equals SD divided by the square root of n. Increasing sample size shrinks the SE but leaves the SD unchanged. A small SEM does not mean the data are less variable; it only means the mean is estimated more precisely.",
+   "say": "Standard deviation measures how far individual observations scatter around the mean. Standard error measures the precision of the sample mean and equals the standard deviation divided by the square root of n. Increasing sample size shrinks the standard error but leaves the standard deviation unchanged. A small standard error does not mean the data are less variable; it only means the mean is estimated more precisely.",
+   "vis": null
+  },
+  {
+   "tx": "In a **normal distribution**, mean plus or minus 1 SD covers about 68 percent of values, plus or minus 2 SD about 95 percent, and plus or minus 3 SD about 99.7 percent. A **z score** is (value minus mean) divided by SD. Z scores between minus 3 and plus 3 support approximate normality. Skewness and kurtosis quantify departures from normal shape in non-normal data.",
+   "say": "In a normal distribution, the mean plus or minus one standard deviation covers about 68 percent of values, plus or minus two standard deviations about 95 percent, and plus or minus three standard deviations about 99.7 percent. A z score is the value minus the mean, divided by the standard deviation. Z scores between minus 3 and plus 3 support approximate normality. Skewness and kurtosis quantify departures from normal shape in non-normal data.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "1 SD",
+      "sub": "about 68%"
+     },
+     {
+      "id": "b",
+      "label": "2 SD",
+      "sub": "about 95%"
+     },
+     {
+      "id": "c",
+      "label": "3 SD",
+      "sub": "about 99.7%"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Probability underpins clinical testing. The **positive predictive value** of a test depends on **prevalence** as well as **sensitivity** and **specificity**, so when a condition is uncommon, most positive results are false alarms. Requiring two tests to both be positive in series raises overall specificity but lowers overall sensitivity. When trials are numerous and the chance per trial is small, the **binomial** model gives way to the **Poisson** model for counting rare events, where the mean equals the variance.",
+   "say": "Probability underpins clinical testing. The predictive value of a positive result depends on prevalence as well as sensitivity and specificity, so when a condition is uncommon, most positives are false alarms. Requiring two tests to both be positive in series raises overall specificity but lowers overall sensitivity. When there are many trials and the chance per trial is small, the binomial model gives way to the Poisson model for counting rare events, where the mean equals the variance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Binomial",
+     "points": [
+      "Fixed number of trials",
+      "Two outcomes per trial",
+      "Constant success probability per trial"
+     ]
+    },
+    "right": {
+     "title": "Poisson",
+     "points": [
+      "Counts of rare events",
+      "Mean equals variance",
+      "Approximates binomial when p is small and n is large"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **central limit theorem** states that the distribution of sample means approaches normal as sample size grows, even when the underlying data are not normal. This justifies using the normal approximation for means in large samples. Confidence intervals take the form mean plus or minus about 1.96 SE for 95 percent coverage. Parametric tests such as ANOVA assume approximately normal dependent variables, and histograms or boxplots help check this.",
+   "say": "The central limit theorem states that the distribution of sample means approaches normal as sample size grows, even when the underlying data are not normal. This justifies using the normal approximation for means in large samples. A 95 percent confidence interval takes the form mean plus or minus about 1.96 standard errors. Parametric tests such as ANOVA assume an approximately normal dependent variable, and histograms or boxplots help check this.",
+   "vis": null
+  },
+  {
+   "tx": "Choose the **measurement level** before choosing a summary. **Nominal** data are unordered categories, **ordinal** data are ranked categories, and **interval** or ratio data have equal spacing. Missing values must be evaluated responsibly, because mishandling them can invalidate conclusions. Outliers found on exploratory review should be checked before inferential analysis.",
+   "say": "Choose the measurement level before choosing a summary. Nominal data are unordered categories, ordinal data are ranked categories, and interval or ratio data have equal spacing. Missing values must be evaluated responsibly, because mishandling them can invalidate conclusions. Outliers found on exploratory review should be checked before inferential analysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Example",
+     "Typical summary"
+    ],
+    "rows": [
+     [
+      "Nominal",
+      "Blood group",
+      "Counts and mode"
+     ],
+     [
+      "Ordinal",
+      "Pain grade",
+      "Median and range"
+     ],
+     [
+      "Interval",
+      "Temperature in Celsius",
+      "Mean and SD"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_0e3dc4b3383b",
+  "q_10909c965e7a",
+  "q_8ff5c38ee9f0"
+ ],
+ "src": [],
+ "refs": [
+  "Daniel WW and Cross CL, Biostatistics: A Foundation for Analysis in the Health Sciences"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

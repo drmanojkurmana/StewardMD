@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "snp-donor-recipient-evaluation",
+ "subject": "ss-nephrology",
+ "title": "Donor and recipient evaluation for kidney transplantation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Living donor evaluation confirms that the donor gives **voluntary consent** free of coercion and is medically suitable. Key tests include **measured glomerular filtration rate**, urine protein assessment, blood group and HLA typing, and infection screening. An independent donor advocate is standard practice, and the donor must understand lifelong follow up.",
+   "say": "Living donor evaluation confirms that the donor gives voluntary consent, free of any coercion, and is medically suitable. Key tests include measured glomerular filtration rate, urine protein assessment, blood group and HLA typing, and infection screening. An independent donor advocate is standard practice, and the donor must understand that lifelong follow up is needed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "What is checked"
+    ],
+    "rows": [
+     [
+      "Consent",
+      "Free choice, no coercion, independent advocate"
+     ],
+     [
+      "Kidney function",
+      "Measured GFR and urine protein"
+     ],
+     [
+      "Immunology",
+      "ABO group and HLA compatibility"
+     ],
+     [
+      "Safety",
+      "Infection screen and cancer exclusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Donor nephrectomy** carries a small risk of perioperative complications and a long-term risk of reduced renal reserve. Donors must be counselled that the remaining kidney usually compensates, but **hypertension** and proteinuria need lifelong monitoring. Indian centres follow the same principles, with NMC and THOTA norms governing the process.",
+   "say": "Donor nephrectomy carries a small risk of perioperative complications and a long-term risk of reduced renal reserve. Donors must be counselled that the remaining kidney usually compensates, but hypertension and proteinuria need lifelong monitoring. Indian centres follow the same principles, with National Medical Commission and Transplantation of Human Organs and Tissues Act norms governing the process.",
+   "vis": null
+  },
+  {
+   "tx": "**Brain death** in deceased donation is confirmed when the **brainstem functions** are irreversibly lost. Under the Transplantation of Human Organs and Tissues Act in India, a certifying board of medical experts, with the donor's underlying cause established and reversible causes excluded, makes the determination. The result is then documented before organ procurement begins.",
+   "say": "Brain death in deceased donation is confirmed when the brainstem functions are irreversibly lost. Under the Transplantation of Human Organs and Tissues Act in India, a certifying board of medical experts makes the determination, after the underlying cause is established and reversible causes are excluded. The result is documented before organ procurement begins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Establish cause of coma"
+     },
+     {
+      "id": "b",
+      "label": "Exclude reversible causes"
+     },
+     {
+      "id": "c",
+      "label": "Brainstem reflex tests"
+     },
+     {
+      "id": "d",
+      "label": "Certifying board confirms"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Donation after circulatory death** is an alternative pathway where organs are retrieved after cardiac arrest is declared. The **Kidney Donor Profile Index** (KDPI) estimates the relative risk of graft failure from donor characteristics; a higher percentile indicates a poorer expected graft. Delayed graft function, where dialysis is needed within the first week, is more frequent with these kidneys.",
+   "say": "Donation after circulatory death is an alternative pathway where organs are retrieved after cardiac arrest is declared. The Kidney Donor Profile Index estimates the relative risk of graft failure from donor characteristics, and a higher percentile indicates a poorer expected graft. Delayed graft function, where dialysis is needed within the first week, is more frequent with these kidneys.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Brain death donor",
+     "points": [
+      "Organs perfused until retrieval",
+      "Generally lower delayed graft function"
+     ]
+    },
+    "right": {
+     "title": "Circulatory death donor",
+     "points": [
+      "Warm ischaemia before retrieval",
+      "Higher delayed graft function"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recipient evaluation looks for **cardiac disease** through screening such as echocardiography and stress testing, along with malignancy and infection checks. **Paired kidney exchange** allows incompatible donor and recipient pairs to swap donors, and **preemptive transplant** is performed before dialysis begins. Transplant from **HCV positive donors** into HCV negative recipients is an option when direct-acting antivirals are available.",
+   "say": "Recipient evaluation looks for cardiac disease through screening such as echocardiography and stress testing, along with malignancy and infection checks. Paired kidney exchange allows incompatible donor and recipient pairs to swap donors, and preemptive transplant is performed before dialysis begins. Transplant from hepatitis C positive donors into negative recipients is an option when direct-acting antivirals are available.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_b9ccae1a30de",
+  "q_0a9aa3bbc18c",
+  "q_4efd5a97c35c"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline on the Evaluation and Care of Living Kidney Donors (2017)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

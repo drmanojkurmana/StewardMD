@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "phy-hormone-pituitary",
+ "subject": "physiology",
+ "title": "Hormone action, hypothalamus and pituitary",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Hormones act in two broad ways. **Lipophilic** hormones such as steroids and thyroid hormones cross the membrane and bind **intracellular receptors**, which then act on DNA. **Hydrophilic** hormones such as peptides and catecholamines bind **membrane receptors** and use second messengers. Knowing which class a hormone belongs to answers most exam questions on mechanism.",
+   "say": "Hormones act in two broad ways. Lipophilic hormones, such as steroids and thyroid hormones, cross the membrane and bind intracellular receptors, which then act on DNA. Hydrophilic hormones, such as peptides and catecholamines, bind membrane receptors and use second messengers. Knowing which class a hormone belongs to answers most exam questions on mechanism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Lipophilic group",
+     "Hydrophilic group"
+    ],
+    "rows": [
+     [
+      "Examples",
+      "Steroids, thyroid hormones, vitamin D",
+      "Peptides, proteins, catecholamines"
+     ],
+     [
+      "Receptor",
+      "Intracellular",
+      "Plasma membrane"
+     ],
+     [
+      "Plasma half-life",
+      "Hours to days",
+      "Minutes"
+     ],
+     [
+      "Carrier protein needed",
+      "Yes",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Membrane receptors use **second messengers**. The **cAMP** pathway uses adenylyl cyclase and is stimulated by hormones such as ACTH, TSH, FSH, LH, glucagon and PTH. The **IP3-DAG** pathway uses phospholipase C, releasing calcium and activating protein kinase C. Vasopressin V1 and oxytocin use IP3-DAG, while V2 uses cAMP. Tyrosine kinase receptors, used by insulin and IGF-1, and JAK-STAT receptors, used by growth hormone and prolactin, form a third group.",
+   "say": "Membrane receptors use second messengers. The cAMP pathway uses adenylyl cyclase and is stimulated by hormones such as ACTH, TSH, FSH, LH, glucagon and PTH. The IP3-DAG pathway uses phospholipase C, releasing calcium and activating protein kinase C. Vasopressin V1 and oxytocin use IP3-DAG, while V2 uses cAMP. Tyrosine kinase receptors, used by insulin and IGF-1, and JAK-STAT receptors, used by growth hormone and prolactin, form a third group.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway",
+     "Key enzyme or channel",
+     "Example hormones"
+    ],
+    "rows": [
+     [
+      "cAMP",
+      "Adenylyl cyclase",
+      "TSH, ACTH, glucagon, V2"
+     ],
+     [
+      "IP3-DAG",
+      "Phospholipase C",
+      "Oxytocin, V1, GnRH, TRH"
+     ],
+     [
+      "Tyrosine kinase",
+      "Intrinsic kinase",
+      "Insulin, IGF-1"
+     ],
+     [
+      "JAK-STAT",
+      "Associated kinase",
+      "Growth hormone, prolactin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid hormone receptors bind DNA mainly as a **heterodimer** with **retinoid X receptor**. The complex binds thyroid hormone response elements and changes gene transcription. Steroid action is slower, with new proteins appearing after roughly 45 minutes, while peptide hormones such as vasopressin act almost at once. Exams often test this contrast in onset.",
+   "say": "Thyroid hormone receptors bind DNA mainly as a heterodimer with retinoid X receptor. The complex binds thyroid hormone response elements and changes gene transcription. Steroid action is slower, with new proteins appearing after roughly 45 minutes, while peptide hormones such as vasopressin act almost at once. Exams often test this contrast in onset.",
+   "vis": null
+  },
+  {
+   "tx": "The **hypothalamus** controls the anterior pituitary through releasing and inhibiting hormones carried by the **hypophyseal portal system**. Dopamine is the prolactin inhibiting factor, so prolactin is mainly under inhibitory control. Somatostatin inhibits growth hormone, while GHRH stimulates it. TRH stimulates TSH and prolactin. Posterior pituitary hormones, ADH and oxytocin, are made in the supraoptic and paraventricular nuclei and travel along axons.",
+   "say": "The hypothalamus controls the anterior pituitary through releasing and inhibiting hormones carried by the hypophyseal portal system. Dopamine is the prolactin inhibiting factor, so prolactin is mainly under inhibitory control. Somatostatin inhibits growth hormone, while GHRH stimulates it. TRH stimulates TSH and prolactin. Posterior pituitary hormones, ADH and oxytocin, are made in the supraoptic and paraventricular nuclei and travel along axons.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h",
+      "label": "Hypothalamus"
+     },
+     {
+      "id": "p",
+      "label": "Portal system"
+     },
+     {
+      "id": "a",
+      "label": "Anterior pituitary"
+     },
+     {
+      "id": "t",
+      "label": "Target gland"
+     }
+    ],
+    "edges": [
+     [
+      "h",
+      "p",
+      "Releasing hormones"
+     ],
+     [
+      "p",
+      "a"
+     ],
+     [
+      "a",
+      "t",
+      "Trophic hormone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prolactin secretion is **pulsatile**, with the largest surges during **REM sleep** and in the early morning. Under normal conditions the **hypothalamus** holds it under tonic inhibition through **dopamine**, which acts on D2 receptors on lactotrophs. If this dopamine supply is interrupted, for example by **stalk section**, levels rise. **Oestrogen**, **pregnancy** and **breast stimulation** also push secretion upward.",
+   "say": "Prolactin secretion is pulsatile, released in pulses, and its peaks come mostly during REM sleep and early in the morning. Normally the hypothalamus keeps it restrained by releasing dopamine, which binds D2 receptors on lactotroph cells. If that dopamine route is cut, such as by stalk section, prolactin climbs because the brake is removed. Oestrogen, pregnancy and breast stimulation also drive its levels higher.",
+   "vis": null
+  },
+  {
+   "tx": "Pituitary tumours and feedback matter for exams. **Prolactinomas** cause **galactorrhoea** and **hypogonadism**, and **dopamine agonists** are first line. Damage to the hypothalamus tends to raise **prolactin**, since **dopamine** inhibition is lost. Feedback from **cortisol**, **thyroxine** and **oestrogen** acts on both the hypothalamus and pituitary, keeping levels within a set range.",
+   "say": "Pituitary tumours and feedback are worth knowing well for exams. Prolactinomas cause galactorrhoea, or milk production without childbirth, and hypogonadism, or reduced sex hormone levels, and dopamine agonists are the first choice treatment. When the hypothalamus is damaged, prolactin often rises, because the dopamine that normally holds it back is no longer supplied. Target hormones like cortisol, thyroxine and oestrogen feed back onto both the hypothalamus and pituitary, which keeps hormone levels in a narrow range.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "7d819a49-1801-4e12-9b18-de0d56334550",
+  "42ab0383-9534-4175-ac17-23085b729b8f",
+  "064ad927-e0d6-47bd-bf46-1d5359affbfa"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Harper's Illustrated Biochemistry (Bender DA et al. (Eds))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 233
+ }
+}

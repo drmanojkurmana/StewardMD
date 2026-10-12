@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "mic-other-dna-viruses",
+ "subject": "microbiology",
+ "title": "Poxviruses, adenoviruses, papillomaviruses and parvoviruses: high-yield microbiology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Poxviruses are some of the largest viruses, and they carry a **double-stranded DNA** genome. Unusually, they complete their whole replication cycle in the **cytoplasm** rather than the nucleus, so they bring their own transcription machinery. Among vertebrate-infecting members, the **orthopoxviruses** are the key genus, including variola, the cause of smallpox, vaccinia used for vaccination, and monkeypox virus. Under electron microscopy many orthopoxviruses appear brick-shaped, a helpful laboratory clue.",
+   "say": "Poxviruses are some of the biggest viruses, carrying a genome made of double-stranded DNA, and they finish their life cycle in the cytoplasm instead of the nucleus. Within the vertebrate group, orthopoxviruses are the main genus to know, covering variola, which causes smallpox, vaccinia, which was used for vaccination, and monkeypox virus. Electron microscopy often shows them as brick-shaped particles, a useful clue in the laboratory.",
+   "vis": null
+  },
+  {
+   "tx": "Human papillomavirus is a small non-enveloped **DNA virus** with an icosahedral capsid. Types 6 and 11 cause condylomata acuminata and laryngeal papillomas, and are low risk. Types **16 and 18** are high risk and drive cervical intraepithelial neoplasia. Viral E6 and E7 proteins inactivate p53 and Rb. Koilocytes, with perinuclear halos, are the histological hallmark.",
+   "say": "Human papillomavirus is a small non-enveloped DNA virus with an icosahedral capsid. Types 6 and 11 cause condylomata acuminata and laryngeal papillomas, and are low risk. Types 16 and 18 are high risk and drive cervical intraepithelial neoplasia. Viral E6 and E7 proteins inactivate p53 and Rb. Koilocytes, with perinuclear halos, are the histological hallmark.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low risk",
+     "points": [
+      "Types 6 and 11",
+      "Condylomata acuminata",
+      "Laryngeal papillomas"
+     ]
+    },
+    "right": {
+     "title": "High risk",
+     "points": [
+      "Types 16 and 18",
+      "Cervical intraepithelial neoplasia",
+      "Koilocytic atypia on Pap smear"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Human papillomavirus vaccines target the **L1 capsid protein** and are non-infectious virus-like particles. The quadrivalent vaccine covers types 6, 11, 16 and 18. It prevents persistent infection and precancerous lesions but does not treat established disease. Vaccination is targeted at adolescent and young adult females, as they are the initial target population.",
+   "say": "Human papillomavirus vaccines target the L1 capsid protein and are non-infectious virus-like particles. The quadrivalent vaccine covers types 6, 11, 16 and 18. It prevents persistent infection and precancerous lesions but does not treat established disease. Vaccination is targeted at adolescent and young adult females, as they are the initial target population.",
+   "vis": null
+  },
+  {
+   "tx": "Parvovirus B19 is a small **single-stranded DNA** virus of the genus Erythrovirus, spread mainly by respiratory droplets. It binds the P antigen (globoside) on erythroid progenitors and halts red cell production. It causes **erythema infectiosum**, adult symmetrical arthropathy and **transient aplastic crisis** in haemolytic disease such as sickle cell anaemia. Transplacental infection can cause fetal hydrops.",
+   "say": "Parvovirus B19 is a small single-stranded DNA virus of the genus Erythrovirus, spread mainly by respiratory droplets. It binds the P antigen, also called globoside, on erythroid progenitors and halts red cell production. It causes erythema infectiosum, adult symmetrical arthropathy and transient aplastic crisis in haemolytic disease such as sickle cell anaemia. Transplacental infection can cause fetal hydrops.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "B19 binds globoside"
+     },
+     {
+      "id": "b",
+      "label": "Erythroid arrest"
+     },
+     {
+      "id": "c",
+      "label": "Aplastic crisis in haemolysis"
+     },
+     {
+      "id": "d",
+      "label": "Fetal hydrops if pregnant"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "BK and JC polyomaviruses are small DNA viruses. **BK virus** reactivates in kidney transplant recipients and causes nephropathy, detected by plasma BK DNA PCR and SV40 large T antigen staining on biopsy. The first step is to reduce immunosuppression. Decoy cells on urine cytology are a screening clue, not a diagnosis. **JC virus** causes progressive multifocal leukoencephalopathy in immunosuppressed patients.",
+   "say": "BK and JC polyomaviruses are small DNA viruses. BK virus reactivates in kidney transplant recipients and causes nephropathy, detected by plasma BK DNA PCR and SV40 large T antigen staining on biopsy. The first step is to reduce immunosuppression. Decoy cells on urine cytology are a screening clue, not a diagnosis. JC virus causes progressive multifocal leukoencephalopathy in immunosuppressed patients.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "cea73cac-01d9-47a0-97ca-67b0028fbfac",
+  "259c0ff4-3f31-4b44-b380-da30c8b998f3",
+  "9bd898ba-90df-4143-bd8b-ecb80d9fd65d"
+ ],
+ "src": [
+  "kb-reference-erythema-infectiosum",
+  "kb-reference-monkeypox",
+  "kb-reference-bk-virus-nephropathy"
+ ],
+ "refs": [
+  "Sherris Medical Microbiology (Ray CG, Ryan KJ, eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 2500,
+  "itemN": 209
+ }
+}

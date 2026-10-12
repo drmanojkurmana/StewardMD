@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "son-mucositis-skin",
+ "subject": "ss-medical-oncology",
+ "title": "Mucositis, Dermatological and Gonadal Toxicity in Oncology",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Mucositis is inflammation and ulceration of mucosal surfaces, most often the oral cavity, after **chemotherapy** or head and neck **radiotherapy**. Its pathogenesis runs in five stages: initiation, signalling and amplification, then ulceration and healing. Grading uses CTCAE: grade 2 means moderate pain with a modified diet, while grade 3 means severe pain that interferes with oral intake.",
+   "say": "Mucositis is inflammation and ulceration of mucosal surfaces, most often the oral cavity, after chemotherapy or head and neck radiotherapy. Its pathogenesis runs in five stages: initiation, signalling and amplification, then ulceration and healing. Grading uses the CTCAE scale. Grade 2 means moderate pain with a modified diet, while grade 3 means severe pain that interferes with oral intake.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CTCAE grade",
+     "Oral intake",
+     "Pain"
+    ],
+    "rows": [
+     [
+      "Grade 1",
+      "Normal intake",
+      "Minimal or none"
+     ],
+     [
+      "Grade 2",
+      "Modified diet needed",
+      "Moderate"
+     ],
+     [
+      "Grade 3",
+      "Intake interfered with",
+      "Severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For prevention, MASCC/ISOO guidance supports several measures. **Oral cryotherapy** with ice chips is given for about 30 minutes around bolus 5-fluorouracil. **Low-level laser therapy** is recommended in haematopoietic stem cell transplantation. Benzydamine mouthwash is used in head and neck radiotherapy below 50 Gy. Systemic zinc is no longer recommended.",
+   "say": "For prevention, MASCC and ISOO guidance supports several measures. Oral cryotherapy with ice chips is given for about 30 minutes around bolus 5-fluorouracil. Low-level laser therapy is recommended in haematopoietic stem cell transplantation. Benzydamine mouthwash is used in head and neck radiotherapy below 50 Gy. Systemic zinc is no longer recommended.",
+   "vis": null
+  },
+  {
+   "tx": "Palifermin is a **keratinocyte growth factor** that reduces severe oral mucositis in patients undergoing autologous haematopoietic stem cell transplantation for haematological malignancy. Topical morphine 0.2 percent rinse helps relieve severe pain and reduces systemic analgesic use compared with magic mouthwash. Low-level laser therapy should be used cautiously in active oral squamous cell carcinoma because of theoretical pro-tumorigenic signalling.",
+   "say": "Palifermin is a keratinocyte growth factor that reduces severe oral mucositis in patients undergoing autologous haematopoietic stem cell transplantation for haematological malignancy. Topical morphine 0.2 percent rinse helps relieve severe pain and reduces systemic analgesic use compared with magic mouthwash. Low-level laser therapy should be used cautiously in active oral squamous cell carcinoma because of theoretical pro-tumorigenic signalling.",
+   "vis": null
+  },
+  {
+   "tx": "Gonadal damage risk depends largely on the **drug class** rather than a single agent, with **alkylating agents** posing the greatest threat, particularly at higher cumulative doses. In women, **premature ovarian insufficiency** typically presents as amenorrhoea before age 40 alongside raised FSH. Ovarian protection with GnRH agonists may be considered. Men should be offered **sperm banking** before treatment begins, because azoospermia can persist.",
+   "say": "Gonadal damage risk depends largely on the drug class, not one single agent, and alkylating agents pose the greatest threat, particularly at higher cumulative doses. In women, premature ovarian insufficiency usually shows as amenorrhoea before age 40 alongside raised FSH. GnRH agonists may be considered to help protect ovarian function. Men should be offered sperm banking before treatment starts, as azoospermia may persist long term.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_4e75cbcf1f95",
+  "q_65dc185f3595",
+  "q_0e81a4fa665c"
+ ],
+ "src": [],
+ "refs": [
+  "MASCC/ISOO guidelines for prevention of oral mucositis",
+  "Common Terminology Criteria for Adverse Events (CTCAE)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 13
+ }
+}

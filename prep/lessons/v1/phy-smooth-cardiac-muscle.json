@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "phy-smooth-cardiac-muscle",
+ "subject": "physiology",
+ "title": "Smooth and cardiac muscle: key physiology for NEET-PG and USMLE",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Smooth muscle has **no troponin** and no T tubules. Instead, **calmodulin** binds calcium and activates **myosin light chain kinase**, which phosphorylates the myosin light chain so that cross bridges can cycle with actin. Calcium comes from extracellular influx through voltage or ligand gated channels, and from intracellular stores via the ryanodine receptor or IP3 receptor. Caveolae carry L-type calcium channels.",
+   "say": "Smooth muscle has no troponin and no T tubules. Instead, calmodulin binds calcium and activates myosin light chain kinase, which phosphorylates the myosin light chain so that cross bridges can cycle with actin. Calcium comes from extracellular influx through voltage or ligand gated channels, and from intracellular stores via the ryanodine receptor or IP3 receptor. Caveolae carry L-type calcium channels.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ca2+ rises"
+     },
+     {
+      "id": "b",
+      "label": "Calmodulin binds"
+     },
+     {
+      "id": "c",
+      "label": "MLCK phosphorylates myosin"
+     },
+     {
+      "id": "d",
+      "label": "Cross bridge cycling"
+     },
+     {
+      "id": "e",
+      "label": "Contraction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **latch state** lets smooth muscle hold tension for long periods with little ATP use. Some cross bridges stay attached after myosin is dephosphorylated, because the myosin ATPase is slow. Dephosphorylation therefore does not guarantee full relaxation. This explains sustained tone in sphincters, the ureter and the uterus, and it is a frequent MCQ theme.",
+   "say": "The latch state lets smooth muscle hold tension for long periods with little ATP use. Some cross bridges stay attached after myosin is dephosphorylated, because the myosin ATPase is slow. Dephosphorylation therefore does not guarantee full relaxation. This explains sustained tone in sphincters, the ureter and the uterus, and it is a frequent exam theme.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cross bridge cycling",
+     "points": [
+      "Fast ATPase",
+      "Rapid detachment",
+      "High ATP use",
+      "Brief twitch"
+     ]
+    },
+    "right": {
+     "title": "Latch state",
+     "points": [
+      "Slow ATPase",
+      "Bridges stay attached",
+      "Very low ATP use",
+      "Sustained tone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cardiac muscle has a **long refractory period** lasting almost until mechanical relaxation begins, so tetany is prevented. Calcium induced calcium release through L-type channels triggers ryanodine receptors on the sarcoplasmic reticulum. The heart is a **functional syncytium** because gap junctions in intercalated discs let action potentials spread between cells. Phase 2 plateau is due to slow calcium channels, and phase 0 to fast sodium channels.",
+   "say": "Cardiac muscle has a long refractory period lasting almost until mechanical relaxation begins, so tetany is prevented. Calcium induced calcium release through L-type channels triggers ryanodine receptors on the sarcoplasmic reticulum. The heart is a functional syncytium because gap junctions in intercalated discs let action potentials spread between cells. Phase 2 plateau is due to slow calcium channels, and phase 0 to fast sodium channels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Cardiac muscle"
+    ],
+    "rows": [
+     [
+      "Phase 0",
+      "Fast sodium influx"
+     ],
+     [
+      "Phase 2",
+      "Slow calcium influx"
+     ],
+     [
+      "Phase 3",
+      "Potassium efflux"
+     ],
+     [
+      "Refractory",
+      "Long, prevents tetany"
+     ],
+     [
+      "Coupling",
+      "Calcium induced calcium release"
+     ],
+     [
+      "Junctions",
+      "Gap junctions in discs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Slow waves** are spontaneous depolarisations in single unit smooth muscle that set the rhythm of gut contraction, and they do not reach threshold on their own. The resting membrane potential of visceral smooth muscle is about minus 50 mV, ranging from minus 50 to minus 75 mV, and it is unstable. Ureteric peristalsis depends on intrinsic pacemaker cells in the renal calyces, and parasympathetic input enhances it while sympathetic input inhibits it.",
+   "say": "Slow waves are spontaneous depolarisations in single unit smooth muscle that set the rhythm of gut contraction, and they do not reach threshold on their own. The resting membrane potential of visceral smooth muscle is about minus 50 millivolts, ranging from minus 50 to minus 75, and it is unstable. Ureteric peristalsis depends on intrinsic pacemaker cells in the renal calyces, and parasympathetic input enhances it while sympathetic input inhibits it.",
+   "vis": null
+  },
+  {
+   "tx": "In the **phospholamban** system, unphosphorylated phospholamban inhibits the SERCA calcium pump in cardiac sarcoplasmic reticulum. Beta adrenergic stimulation phosphorylates it, relieving inhibition, so calcium is taken up faster and relaxation is quicker. This is the lusitropic effect. Sodium calcium exchange, driven by the Na+ K+ pump, also removes calcium. Digitalis inhibits the pump, reducing calcium extrusion and raising contractility, while reperfusion injury arises from calcium overload after the pump fails.",
+   "say": "In the phospholamban system, unphosphorylated phospholamban inhibits the SERCA calcium pump in cardiac sarcoplasmic reticulum. Beta adrenergic stimulation phosphorylates it, relieving inhibition, so calcium is taken up faster and relaxation is quicker. This is the lusitropic effect. Sodium calcium exchange, driven by the sodium potassium pump, also removes calcium. Digitalis inhibits the pump, reducing calcium extrusion and raising contractility.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "467282d5-8d20-4417-a65e-0b3ec76bb35f",
+  "efb4ab05-2841-48e8-a904-25986d677b68",
+  "b6ba976d-2803-44b7-b532-15ccb1bc45b2"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Ganong's Review of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 96
+ }
+}

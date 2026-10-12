@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "bio-dna-replication-repair",
+ "subject": "biochemistry",
+ "title": "DNA Structure, Replication and Repair",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "DNA is a double helix of two antiparallel strands held together by **hydrogen bonds** between complementary bases. Adenine pairs with thymine using two hydrogen bonds. Guanine pairs with cytosine using three hydrogen bonds. Chargaff's rule states that adenine equals thymine and guanine equals cytosine in any double-stranded DNA. Uracil is absent from DNA and is found only in RNA. The sugar-phosphate backbone is joined by **3' to 5' phosphodiester bonds**.",
+   "say": "DNA is a double helix of two antiparallel strands held together by hydrogen bonds between complementary bases. Adenine pairs with thymine using two hydrogen bonds. Guanine pairs with cytosine using three hydrogen bonds. Chargaff's rule states that adenine equals thymine and guanine equals cytosine in any double-stranded DNA. Uracil is absent from DNA and is found only in RNA. The sugar-phosphate backbone is joined by 3 prime to 5 prime phosphodiester bonds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Purines in DNA",
+      "Adenine and guanine"
+     ],
+     [
+      "Pyrimidines in DNA",
+      "Thymine and cytosine"
+     ],
+     [
+      "A to T bonds",
+      "Two hydrogen bonds"
+     ],
+     [
+      "G to C bonds",
+      "Three hydrogen bonds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chromatin packages DNA into a compact, regulated structure. The core particle is a **histone octamer** containing two copies each of H2A, H2B, H3 and H4. DNA wraps around this core roughly twice, forming the **nucleosome**, a bead about 10 nm across. **Histone H1** binds the linker DNA between beads and helps stabilise the 30 nm fibre. In sperm nuclei, **protamines** replace histones, allowing even tighter packing. Histones are rich in basic amino acids such as lysine and arginine, which bind the negatively charged phosphate backbone.",
+   "say": "Chromatin packages DNA into a compact, regulated structure. The core particle is a histone octamer, containing two copies each of H2A, H2B, H3 and H4. DNA wraps around this core about twice, forming the nucleosome, a bead roughly 10 nanometres across. Histone H1 binds the linker DNA and helps stabilise the 30 nanometre fibre. In sperm nuclei, protamines replace histones, allowing even tighter packing. Histones are rich in basic amino acids, which bind the negatively charged phosphate backbone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Histone octamer (H2A, H2B, H3, H4)",
+      "Core around which DNA wraps"
+     ],
+     [
+      "Nucleosome",
+      "DNA wrapped about twice, roughly 10 nm bead"
+     ],
+     [
+      "Histone H1",
+      "Binds linker DNA, stabilises 30 nm fibre"
+     ],
+     [
+      "Protamines",
+      "Replace histones in sperm nuclei"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "DNA replication is semiconservative and occurs in the **S phase** of the cell cycle. **Helicase** unwinds the double helix at the replication fork. Single-strand binding proteins stop the strands reannealing. **Topoisomerase** relieves the torsional strain ahead of the fork. **Primase** lays down an RNA primer, which DNA polymerase then extends. The leading strand is made continuously, while the lagging strand is made as Okazaki fragments.",
+   "say": "DNA replication is semiconservative and occurs in the S phase of the cell cycle. Helicase unwinds the double helix at the replication fork. Single strand binding proteins stop the strands reannealing. Topoisomerase relieves the torsional strain ahead of the fork. Primase lays down an RNA primer, which DNA polymerase then extends. The leading strand is made continuously, while the lagging strand is made as Okazaki fragments.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Helicase unwinds"
+     },
+     {
+      "id": "b",
+      "label": "SSB stabilise"
+     },
+     {
+      "id": "c",
+      "label": "Primase makes RNA primer"
+     },
+     {
+      "id": "d",
+      "label": "Pol III extends"
+     },
+     {
+      "id": "e",
+      "label": "Pol I removes primer"
+     },
+     {
+      "id": "f",
+      "label": "Ligase seals"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prokaryotes have three main polymerases. **DNA polymerase III** is the main replicative enzyme and has 5' to 3' synthesis with 3' to 5' proofreading. **DNA polymerase I** removes RNA primers and fills gaps. **DNA polymerase II** acts as a backup enzyme. Eukaryotes have five polymerases, alpha, beta, gamma, delta and epsilon. Beta repairs DNA, gamma copies mitochondrial DNA, and alpha has a primase role.",
+   "say": "Prokaryotes have three main polymerases. DNA polymerase III is the main replicative enzyme and has proofreading. DNA polymerase I removes RNA primers and fills gaps. DNA polymerase II acts as a backup enzyme. Eukaryotes have five polymerases, alpha, beta, gamma, delta and epsilon. Beta repairs DNA, gamma copies mitochondrial DNA, and alpha has a primase role.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme",
+     "Key role"
+    ],
+    "rows": [
+     [
+      "Pol III (prokaryote)",
+      "Main replicative enzyme"
+     ],
+     [
+      "Pol I (prokaryote)",
+      "Removes primer, fills gaps"
+     ],
+     [
+      "Pol beta (eukaryote)",
+      "DNA repair"
+     ],
+     [
+      "Pol gamma (eukaryote)",
+      "Mitochondrial DNA synthesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Repair pathways matter for exams. **Mismatch repair** corrects wrong base pairs and is defective in **HNPCC**. **Nucleotide excision repair** removes bulky lesions such as UV-induced thymine dimers. Defective nucleotide excision repair causes **xeroderma pigmentosum**, which in India and the US is tested as a classic photosensitivity disorder. Ataxia telangiectasia is caused by ATM gene defects and is inherited in an autosomal recessive pattern.",
+   "say": "Repair pathways matter for exams. Mismatch repair corrects wrong base pairs and is defective in HNPCC, or hereditary non polyposis colorectal cancer. Nucleotide excision repair removes bulky lesions such as UV induced thymine dimers. Defective nucleotide excision repair causes xeroderma pigmentosum. Ataxia telangiectasia is caused by ATM gene defects and is inherited in an autosomal recessive pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Defective pathway"
+    ],
+    "rows": [
+     [
+      "Xeroderma pigmentosum",
+      "Nucleotide excision repair"
+     ],
+     [
+      "HNPCC",
+      "Mismatch repair"
+     ],
+     [
+      "Ataxia telangiectasia",
+      "ATM signalling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The tumour suppressor **p53** is called the guardian of the genome. After DNA damage it can arrest the cell in G1, activate repair proteins, or trigger apoptosis. It acts partly by inducing p21. Telomerase is an RNA-dependent DNA polymerase that extends telomeres and is active in stem and cancer cells. Telomeres shorten with each replication cycle in somatic cells.",
+   "say": "The tumour suppressor p53 is called the guardian of the genome. After DNA damage it can arrest the cell in G1, activate repair proteins, or trigger apoptosis. It acts partly by inducing p21. Telomerase is an RNA dependent DNA polymerase that extends telomeres and is active in stem and cancer cells.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "12d929b5-8ea2-4e23-9140-460ad767e0a1",
+  "26ec0acc-94c8-40c1-9b06-57c47d8c0de4",
+  "7042151d-45b6-4397-867a-061126747e52"
+ ],
+ "src": [],
+ "refs": [
+  "Harper's Illustrated Biochemistry (Bender, Botham, Weil, Kennelly, Murray, Rodwell, Eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 396
+ }
+}

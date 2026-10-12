@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "oph-community",
+ "subject": "ophthalmology",
+ "title": "Community ophthalmology and eye banking: blindness, Vision 2020, xerophthalmia and corneal donation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Blindness** is defined by WHO as presenting visual acuity of less than 3/60 in the better eye, or its equivalent. Visual impairment in ICD-9 uses 6/60 in the better eye as the cut-off. Economic blindness is the inability to count fingers at 6 metres. Know both cut-offs, since exam questions mix them up.",
+   "say": "Blindness, as defined by WHO, means presenting visual acuity of less than 3/60 in the better eye, or its equivalent. Visual impairment in the ninth revision of the international classification of diseases uses 6/60 in the better eye as the cut-off. Economic blindness is the inability to count fingers at 6 metres. Know both cut-offs, since exam questions mix them up.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Cut-off or feature"
+    ],
+    "rows": [
+     [
+      "WHO blindness",
+      "Better eye below 3/60"
+     ],
+     [
+      "ICD-9 visual impairment",
+      "Better eye below 6/60"
+     ],
+     [
+      "Economic blindness",
+      "Cannot count fingers at 6 m"
+     ],
+     [
+      "Preventable blindness",
+      "Could be prevented, e.g. trachoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vision 2020: The Right to Sight** is a global initiative launched in 1999 by WHO and the International Agency for the Prevention of Blindness. Its target diseases include cataract, childhood blindness, trachoma, refractive errors with low vision, and onchocerciasis. Epidemic conjunctivitis is not a target, so watch for it as the distractor in MCQs.",
+   "say": "Vision 2020, the Right to Sight, is a global initiative launched in 1999 by WHO and the International Agency for the Prevention of Blindness. Its target diseases include cataract, childhood blindness, trachoma, refractive errors with low vision, and onchocerciasis. Epidemic conjunctivitis is not a target, so watch for it as the distractor in multiple choice questions.",
+   "vis": null
+  },
+  {
+   "tx": "**Xerophthalmia** is the term for all ocular manifestations of vitamin A deficiency. Night blindness is the earliest symptom, while conjunctival xerosis is the earliest sign. Bitot spots sit on the bulbar conjunctiva in the interpalpebral zone. Keratomalacia is the severe end, where the cornea melts without inflammation.",
+   "say": "Xerophthalmia is the term for all ocular manifestations of vitamin A deficiency. Night blindness is the earliest symptom, while conjunctival xerosis is the earliest sign. Bitot spots sit on the bulbar conjunctiva in the interpalpebral zone. Keratomalacia is the severe end, where the cornea melts without inflammation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Feature"
+    ],
+    "rows": [
+     [
+      "XN",
+      "Night blindness"
+     ],
+     [
+      "X1A",
+      "Conjunctival xerosis"
+     ],
+     [
+      "X1B",
+      "Conjunctival xerosis with Bitot spots"
+     ],
+     [
+      "X2",
+      "Corneal xerosis"
+     ],
+     [
+      "X3A and X3B",
+      "Corneal ulceration, less or more than a third"
+     ],
+     [
+      "XS",
+      "Corneal scar from xerophthalmia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vitamin A deficiency is the most common cause of **childhood blindness** in developing countries. Keratomalacia usually occurs below 5 years, peaking between 6 months and 3 years. Measles, diarrhoea and protein energy malnutrition often precipitate it. Congenital dacryocystitis is a common distractor but is not a major cause of childhood blindness.",
+   "say": "Vitamin A deficiency is the most common cause of childhood blindness in developing countries. Keratomalacia usually occurs below 5 years, peaking between 6 months and 3 years. Measles, diarrhoea and protein energy malnutrition often precipitate it. Congenital dacryocystitis is a common distractor but is not a major cause of childhood blindness.",
+   "vis": null
+  },
+  {
+   "tx": "Not every donated cornea can be used. **Donor screening** rules out people with **prion diseases** such as Creutzfeldt-Jakob disease, and those with rabies, HIV or hepatitis infections. Corneas are also rejected when the donor had a **retinoblastoma** or active **uveitis**. Careful history and serology protect recipients from transmitted disease.",
+   "say": "Not every donated cornea can be used. Donor screening rules out people with prion diseases, such as Creutzfeldt-Jakob disease, and those with rabies, HIV or hepatitis infections. Corneas are also rejected when the donor had retinoblastoma or active uveitis. A careful history and serology testing protect recipients from transmitted disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Neurological",
+      "Creutzfeldt-Jakob disease, rabies"
+     ],
+     [
+      "Infectious",
+      "HIV, hepatitis"
+     ],
+     [
+      "Ocular",
+      "Retinoblastoma, active uveitis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "4f9d8d15-8b2e-4744-8c4e-ae497ed34d27",
+  "8d4db99a-ddec-4731-985c-aa5fecbe908f",
+  "577ec9cd-e244-4673-a035-9ae77aa73524"
+ ],
+ "src": [],
+ "refs": [
+  "Vaughan and Asbury's General Ophthalmology (Riordan-Eva P, Cunningham E.T. Jr, Editors)",
+  "Nema and Nema, Textbook of Ophthalmology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 111
+ }
+}

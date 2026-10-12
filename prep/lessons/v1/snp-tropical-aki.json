@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "module": "snp-tropical-aki",
+ "subject": "ss-nephrology",
+ "title": "Tropical and community-acquired AKI: an overview for exams",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Acute kidney injury in the tropics is often caused by infections and toxins that are common in India. Key causes include **leptospirosis**, **falciparum malaria**, **snake bite** from Russell viper and hump-nosed viper, and **scrub typhus**. Each has a distinct mechanism, so recognising the exposure history is the first step. Dengue and acute gastroenteritis also contribute. Always ask about farm work, flood water exposure, bites, and travel.",
+   "say": "Acute kidney injury in the tropics is often caused by infections and toxins that are common in India. The key causes include leptospirosis, falciparum malaria, snake bite from the Russell viper and hump-nosed viper, and scrub typhus. Each has a distinct mechanism, so recognising the exposure history is the first step. Dengue and acute gastroenteritis also contribute. Always ask about farm work, flood water exposure, bites, and travel.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Key exposure",
+     "Renal mechanism"
+    ],
+    "rows": [
+     [
+      "Leptospirosis",
+      "Flood water, farm work",
+      "Tubulointerstitial injury and vasculitis"
+     ],
+     [
+      "Falciparum malaria",
+      "Endemic travel",
+      "Microvascular sequestration and tubular damage"
+     ],
+     [
+      "Snake bite",
+      "Rural bite",
+      "Venom coagulopathy and rhabdomyolysis"
+     ],
+     [
+      "Scrub typhus",
+      "Forest or scrub exposure",
+      "Endothelial vasculitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Leptospirosis** is a zoonotic infection that classically produces **Weil disease**, combining jaundice, **acute kidney injury**, and haemorrhage. Kidney involvement is common and is usually non-oliguric, reflecting a **tubulointerstitial** injury rather than cortical damage. Early antimicrobial treatment, started promptly on suspicion, is the main way to limit renal harm. **Dialysis** is reserved for refractory uraemia or fluid overload, and recovery of kidney function is often good.",
+   "say": "Leptospirosis is a zoonotic infection that classically produces Weil disease, combining jaundice, acute kidney injury, and haemorrhage. Kidney involvement is common and is usually non-oliguric, reflecting a tubulointerstitial injury rather than cortical damage. Early antimicrobial treatment, started promptly on suspicion, is the main way to limit renal harm. Dialysis is reserved for refractory uraemia or fluid overload, and recovery of kidney function is often good.",
+   "vis": null
+  },
+  {
+   "tx": "**Falciparum malaria** causes AKI through microvascular sequestration of parasitised red cells, leading to acute tubular necrosis. Hypovolaemia, acidosis, and haemolysis add to the injury. Treat with an effective artemisinin-based regimen and manage fluids carefully, avoiding overload. Dialysis is needed for oliguria, fluid overload, or severe acidosis. Renal failure is a marker of severe disease.",
+   "say": "Falciparum malaria causes acute kidney injury through microvascular sequestration of parasitised red cells, leading to acute tubular necrosis. Hypovolaemia, acidosis, and haemolysis add to the injury. Treat with an effective artemisinin-based regimen and manage fluids carefully, avoiding overload. Dialysis is needed for oliguria, fluid overload, or severe acidosis. Renal failure is a marker of severe disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Cortical necrosis** is a severe form of AKI seen in obstetric haemorrhage, septic shock, and some tropical infections. It may cause irreversible renal failure. Pregnancy-related AKI, such as in eclampsia or post-partum haemorrhage, carries a high risk. Copper sulfate, paraquat, and ethylene dibromide poisonings also cause severe tubular injury, and treatment is supportive with early dialysis when indicated.",
+   "say": "Cortical necrosis is a severe form of acute kidney injury seen in obstetric haemorrhage, septic shock, and some tropical infections. It may cause irreversible renal failure. Pregnancy-related acute kidney injury, such as in eclampsia or post-partum haemorrhage, carries a high risk. Copper sulfate, paraquat, and ethylene dibromide poisonings also cause severe tubular injury, and treatment is supportive with early dialysis when indicated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cortical necrosis",
+     "points": [
+      "Severe, often irreversible",
+      "Obstetric and septic triggers",
+      "Diffuse cortical injury"
+     ]
+    },
+    "right": {
+     "title": "Toxic injury",
+     "points": [
+      "Copper sulfate and paraquat",
+      "Ethylene dibromide exposure",
+      "Early dialysis when indicated"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_2db9ebe70013",
+  "q_67a0b1ef6320",
+  "q_f355797dfd5d"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)",
+  "Chapter Acute Kidney Injury in Tropical Infections in Oxford Textbook of Medicine (Warrell and Firth)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

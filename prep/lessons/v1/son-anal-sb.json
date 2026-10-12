@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "son-anal-sb",
+ "subject": "ss-medical-oncology",
+ "title": "Anal canal, small bowel and appendiceal cancers",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Anal squamous cell carcinoma is strongly linked to **high-risk HPV**, particularly the subtype most often found in anal lesions, and risk is higher in people with **HIV**, immunosuppression and receptive anal intercourse. Most present with **bleeding**, pain or a mass near the anal verge. **Biopsy** confirms the diagnosis, and staging uses **examination under anaesthesia** with imaging of the pelvis and inguinal nodes.",
+   "say": "Anal squamous cell carcinoma is strongly linked to high-risk HPV, particularly the subtype most often found in anal lesions. Risk is higher in people with HIV, immunosuppression and receptive anal intercourse. Most patients present with bleeding, pain or a mass near the anal verge. Biopsy confirms the diagnosis, and staging uses examination under anaesthesia with imaging of the pelvis and inguinal nodes.",
+   "vis": null
+  },
+  {
+   "tx": "Standard curative treatment for **anal squamous carcinoma** is **chemoradiation** using the **Nigro protocol**. Two **radiosensitising chemotherapy agents** are given early in the course, at the start and again around the fifth week, while **radiotherapy** is delivered daily over several weeks. Surgery such as **abdominoperineal resection** is reserved for **persistent or recurrent disease** after chemoradiation.",
+   "say": "Standard curative treatment for anal squamous carcinoma is chemoradiation using the Nigro protocol. Two radiosensitising chemotherapy agents are given early in the course, at the start and again around the fifth week, while radiotherapy is delivered daily over several weeks. Surgery such as abdominoperineal resection is reserved for persistent or recurrent disease after chemoradiation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Chemotherapy pair",
+      "Radiosensitisers given at the start and around week five"
+     ],
+     [
+      "Radiotherapy",
+      "Main curative modality delivered over several weeks"
+     ],
+     [
+      "Abdominoperineal resection",
+      "Salvage for persistent or recurrent disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Small bowel adenocarcinoma is rare and most often arises in the **duodenum** and proximal jejunum. Risk is raised in **Crohn disease**, **coeliac disease** and **familial adenomatous polyposis**. Presentation is often obstructive or with occult bleeding, and delayed diagnosis is common, so prognosis is generally poorer than for colorectal cancer.",
+   "say": "Small bowel adenocarcinoma is rare and most often arises in the duodenum and proximal jejunum. Risk is raised in Crohn disease, coeliac disease and familial adenomatous polyposis. Presentation is often obstructive or with occult bleeding. Delayed diagnosis is common, so prognosis is generally poorer than for colorectal cancer.",
+   "vis": null
+  },
+  {
+   "tx": "Ampullary carcinoma arises at the ampulla of Vater and often presents early with **obstructive jaundice**, which can allow earlier detection than pancreatic head tumours. Surgical resection, usually pancreaticoduodenectomy, is the main curative option. Adjuvant therapy is considered based on stage and histology.",
+   "say": "Ampullary carcinoma arises at the ampulla of Vater and often presents early with obstructive jaundice. This can allow earlier detection than pancreatic head tumours. Surgical resection, usually pancreaticoduodenectomy, is the main curative option. Adjuvant therapy is considered based on stage and histology.",
+   "vis": null
+  },
+  {
+   "tx": "Appendiceal neoplasms are classified into low-grade and high-grade mucinous neoplasms. **Low-grade appendiceal mucinous neoplasm** shows expansile growth without infiltrative invasion, while frank adenocarcinoma invades the wall. Pseudomyxoma peritonei is the peritoneal spread of **mucin**, usually from a ruptured or perforated low-grade primary, and is managed by **cytoreductive surgery with HIPEC**.",
+   "say": "Appendiceal neoplasms are classified into low-grade and high-grade mucinous neoplasms. Low-grade appendiceal mucinous neoplasm shows expansile growth without infiltrative invasion, while frank adenocarcinoma invades the wall. Pseudomyxoma peritonei is the peritoneal spread of mucin, usually from a ruptured low-grade primary. It is managed by cytoreductive surgery with HIPEC.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low-grade LAMN",
+     "points": [
+      "Expansile growth",
+      "No infiltrative invasion",
+      "Better prognosis"
+     ]
+    },
+    "right": {
+     "title": "High-grade adenocarcinoma",
+     "points": [
+      "Infiltrates appendiceal wall",
+      "Higher peritoneal risk",
+      "Poorer prognosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cytoreductive surgery aims for complete removal of visible disease, scored by the **completeness of cytoreduction** score, and is followed by **HIPEC** with heated chemotherapy. The **peritoneal cancer index** estimates disease burden. Ovarian mucinous tumours in pseudomyxoma are usually secondary, so pathology and multidisciplinary review are needed before surgery. Recurrence may still be treated with repeat surgery at a specialist centre.",
+   "say": "Cytoreductive surgery aims for complete removal of visible disease, scored by the completeness of cytoreduction score, and is followed by HIPEC with heated chemotherapy. The peritoneal cancer index estimates disease burden. Ovarian mucinous tumours in pseudomyxoma are usually secondary, so pathology and multidisciplinary review are needed before surgery. Recurrence may still be treated with repeat surgery at a specialist centre.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pathology and MDT review"
+     },
+     {
+      "id": "b",
+      "label": "Cytoreductive surgery"
+     },
+     {
+      "id": "c",
+      "label": "HIPEC"
+     },
+     {
+      "id": "d",
+      "label": "Surveillance or repeat surgery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_3f43634b049a",
+  "q_507b893c916c",
+  "q_6f7344ab8837"
+ ],
+ "src": [],
+ "refs": [
+  "Nigro ND et al. Combined preoperative radiation and chemotherapy for squamous cell carcinoma of the anus (Nigro protocol)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

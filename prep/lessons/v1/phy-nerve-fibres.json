@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "phy-nerve-fibres",
+ "subject": "physiology",
+ "title": "Nerve fibre classification, conduction and degeneration",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Peripheral nerve fibres are classified by the **Erlanger-Gasser** scheme into A alpha, A beta, A gamma, A delta, B and C groups. A fibres are myelinated and fastest, while C fibres are **unmyelinated** and slowest. Fibre diameter is the main determinant of speed: a larger diameter offers less resistance to local current, so conduction is faster. Myelination further speeds conduction by increasing membrane resistance and lowering capacitance.",
+   "say": "Peripheral nerve fibres are classified by the Erlanger-Gasser scheme into A alpha, A beta, A gamma, A delta, B and C groups. A fibres are myelinated and fastest, while C fibres are unmyelinated and slowest. Fibre diameter is the main determinant of speed, because a larger diameter offers less resistance to local current, so conduction is faster. Myelination further speeds conduction by increasing membrane resistance and lowering capacitance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fibre",
+     "Diameter (micrometres)",
+     "Velocity (m/s)",
+     "Example function"
+    ],
+    "rows": [
+     [
+      "A alpha",
+      "12-20",
+      "70-120",
+      "Proprioception, somatic motor"
+     ],
+     [
+      "A beta",
+      "5-12",
+      "30-70",
+      "Touch, pressure"
+     ],
+     [
+      "A gamma",
+      "3-6",
+      "15-30",
+      "Motor to muscle spindles"
+     ],
+     [
+      "A delta",
+      "2-5",
+      "12-30",
+      "Fast pain, cold"
+     ],
+     [
+      "B",
+      "less than 3",
+      "3-15",
+      "Preganglionic autonomic"
+     ],
+     [
+      "C",
+      "0.4-1.2",
+      "0.5-2",
+      "Slow pain, postganglionic sympathetic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Myelinated fibres conduct through **saltatory conduction**, in which the action potential leaps from one **node of Ranvier** to the next. The myelin sheath acts as an insulator, so very little charge leaks across it. As a result, myelinated axons conduct far more rapidly than unmyelinated ones. Under normal circumstances the signal travels in one direction only, known as **orthodromic** conduction, moving from the receptor or synapse towards the terminal.",
+   "say": "Myelinated fibres conduct by saltatory conduction, where the action potential leaps from one node of Ranvier to the next. The myelin sheath acts as an insulator, so very little charge leaks across it. As a result, myelinated axons conduct far more rapidly than unmyelinated ones. Under normal circumstances the signal travels in one direction only, called orthodromic conduction, moving from the receptor or synapse towards the terminal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Action potential at node 1"
+     },
+     {
+      "id": "n2",
+      "label": "Local current passes under myelin"
+     },
+     {
+      "id": "n3",
+      "label": "Node 2 depolarises"
+     },
+     {
+      "id": "n4",
+      "label": "Action potential at node 2"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several factors shape nerve conduction. Local anaesthetics, pressure and **hypoxia** all impair conduction. Among the Erlanger-Gasser groups, the most susceptible to pressure block are the largest A alpha fibres, while the most susceptible to hypoxia are the B fibres. C fibres are least susceptible to pressure. Local anaesthetics act first on small fibres, such as C fibres and A delta, before larger touch fibres.",
+   "say": "Several factors shape nerve conduction. Local anaesthetics, pressure and hypoxia all impair conduction. Among the Erlanger-Gasser groups, the largest A alpha fibres are most susceptible to pressure block, while B fibres are most susceptible to hypoxia. Local anaesthetics act first on small fibres such as C fibres and A delta, before larger touch fibres.",
+   "vis": null
+  },
+  {
+   "tx": "Nerve injury is classified by Seddon. In **neuropraxia** the axon and myelin remain intact, only conduction is disrupted, and recovery is usually complete within weeks. In axonotmesis the axon and myelin are disrupted but the endoneurium is intact. In neurotmesis the whole nerve is divided and recovery is poor. Wallerian degeneration occurs distal to the lesion in the last two types. Electrodiagnostic tests are not useful until two to three weeks after injury.",
+   "say": "Nerve injury is classified by Seddon. In neuropraxia the axon and myelin remain intact, only conduction is disrupted, and recovery is usually complete within weeks. In axonotmesis the axon and myelin are disrupted but the endoneurium is intact. In neurotmesis the whole nerve is divided and recovery is poor. Wallerian degeneration occurs distal to the lesion in the last two types. Electrodiagnostic tests are not useful until two to three weeks after injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Neuropraxia",
+     "Axonotmesis",
+     "Neurotmesis"
+    ],
+    "rows": [
+     [
+      "Axon intact",
+      "Yes",
+      "No",
+      "No"
+     ],
+     [
+      "Myelin intact",
+      "Yes",
+      "No",
+      "No"
+     ],
+     [
+      "Wallerian degeneration",
+      "No",
+      "Yes",
+      "Yes"
+     ],
+     [
+      "Prognosis",
+      "Excellent",
+      "Good to fair",
+      "Poor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **Wallerian degeneration**, the distal axon and its myelin break down after injury, while the cell body reacts. Schwann cells clear the debris and form a guidance path. Regeneration is possible in the peripheral nervous system, at roughly one millimetre per day, guided by these Schwann tubes. In the central nervous system regeneration is poor, because myelin is inhibitory and glial scarring forms. Neurotrophins such as nerve growth factor and brain derived neurotrophic factor support regrowth.",
+   "say": "In Wallerian degeneration, the distal axon and its myelin break down after injury, while the cell body reacts. Schwann cells clear the debris and form a guidance path. Regeneration is possible in the peripheral nervous system, guided by these Schwann tubes. In the central nervous system regeneration is poor, because myelin is inhibitory and glial scarring forms. Neurotrophins such as nerve growth factor and brain derived neurotrophic factor support regrowth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Nerve injury"
+     },
+     {
+      "id": "b",
+      "label": "Distal axon breaks down"
+     },
+     {
+      "id": "c",
+      "label": "Schwann cells clear debris"
+     },
+     {
+      "id": "d",
+      "label": "Axon regrows along tube"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurotrophins act through **Trk receptors**. Brain derived neurotrophic factor binds TrkB, nerve growth factor binds TrkA, and neurotrophin 3 binds TrkC. These signals support neuronal survival, differentiation and plasticity. For exams, remember that brain derived neurotrophic factor acts through TrkB, a frequently tested pairing.",
+   "say": "Neurotrophins act through Trk receptors. Brain derived neurotrophic factor binds TrkB, nerve growth factor binds TrkA, and neurotrophin 3 binds TrkC. These signals support neuronal survival, differentiation and plasticity. For exams, remember that brain derived neurotrophic factor acts through TrkB, a frequently tested pairing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neurotrophin",
+     "Receptor"
+    ],
+    "rows": [
+     [
+      "Nerve growth factor",
+      "TrkA"
+     ],
+     [
+      "Brain derived neurotrophic factor",
+      "TrkB"
+     ],
+     [
+      "Neurotrophin 3",
+      "TrkC"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Myelin is absent from the **nodes of Ranvier**, the proximal axon segment, the axon terminals and the clefts of Schmidt-Lantermann. Conduction velocity is not reduced by motor neuron disease, which affects anterior horn cells rather than nerves. In contrast, Charcot-Marie-Tooth disease and inflammatory demyelination reduce nerve conduction velocity. Remember these points when answering questions on nerve conduction.",
+   "say": "Myelin is absent from the nodes of Ranvier, the proximal axon segment, the axon terminals and the clefts of Schmidt-Lantermann. Conduction velocity is not reduced by motor neuron disease, which affects anterior horn cells rather than nerves. In contrast, Charcot-Marie-Tooth disease and inflammatory demyelination reduce nerve conduction velocity. Remember these points when answering questions on nerve conduction.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "1578ae3d-d7f6-4668-8273-cd1cd6a2ae16",
+  "47ce3733-8510-4c79-9194-ad85b9409678",
+  "5971a5c1-d823-4c72-8a34-47e674b38073"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology",
+  "A.K. Jain Textbook of Physiology",
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 179
+ }
+}

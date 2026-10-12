@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "cm-blindness",
+ "subject": "community-medicine",
+ "title": "Blindness and visual impairment: definitions, programmes and prevention",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Under the **NPCB**, the programme was launched in 1976 as a fully centrally sponsored scheme and absorbed the earlier trachoma control programme of 1968. Its goal was to cut blindness prevalence from 1.4 per cent to 0.3 per cent by 2000. The **World Bank** assisted cataract project began in 1994 and focused on reducing the cataract backlog in seven high-burden states.",
+   "say": "The National Programme for Control of Blindness was launched in 1976 as a fully centrally sponsored scheme. It absorbed the earlier trachoma control programme started in 1968. Its goal was to reduce blindness prevalence from 1.4 per cent to 0.3 per cent by 2000. The World Bank assisted cataract project began in 1994 and targeted the cataract backlog in seven high-burden states.",
+   "vis": null
+  },
+  {
+   "tx": "**Vision 2020: The Right to Sight** is a WHO-led global initiative launched in 1999 to eliminate avoidable blindness by 2020. India adopted it under the NPCB. The three-tier pyramid is key: 20,000 vision centres at primary level, 2,000 service centres at secondary level covering 5 lakh population each, 200 training centres, and 20 centres of excellence.",
+   "say": "Vision 2020, the Right to Sight, is a WHO-led global initiative launched in 1999 to eliminate avoidable blindness by 2020. India adopted it under the NPCB. The pyramid has 20,000 vision centres at primary level, 2,000 service centres at secondary level covering about 5 lakh population each, 200 training centres, and 20 centres of excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Units proposed",
+     "Population covered"
+    ],
+    "rows": [
+     [
+      "Primary: vision centres",
+      "20,000",
+      "About 50,000 each"
+     ],
+     [
+      "Secondary: service centres",
+      "2,000",
+      "About 5 lakh each"
+     ],
+     [
+      "Training centres",
+      "200",
+      "About 50 lakh each"
+     ],
+     [
+      "Centres of excellence",
+      "20",
+      "About 5 crore each"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **cataract surgical rate** (CSR) equals total cataract operations divided by total population, multiplied by one million. Vision 2020 targeted a CSR of 3000 per million for India by 2000. It is a **proportion** rather than a true rate, because the numerator is not derived from the denominator. Cataract remains the leading cause of blindness in India, responsible for roughly 62.6 per cent of cases.",
+   "say": "The cataract surgical rate is total cataract operations divided by total population, multiplied by one million. Vision 2020 targeted a rate of 3000 per million for India by 2000. It is technically a proportion rather than a true rate, because the numerator is not derived from the denominator. Cataract remains the leading cause of blindness in India, at about 62.6 per cent of cases.",
+   "vis": null
+  },
+  {
+   "tx": "Under the **school eye screening** programme, trained teachers screen children first, with a ratio of about one teacher per 150 students. A visual acuity below 6/9 triggers referral. Children suspected of refractive error are then seen by ophthalmic assistants, who prescribe spectacles, free for those below the poverty line. This is secondary prevention. Refractive error is a major treatable cause of childhood visual loss.",
+   "say": "Under the school eye screening programme, trained teachers screen children first, with about one teacher per 150 students. Visual acuity below 6/9 triggers referral. Children suspected of refractive error are seen by ophthalmic assistants, who prescribe spectacles, provided free to those below the poverty line. This is secondary prevention and refractive error is a major treatable cause of childhood visual loss.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Teacher screens"
+     },
+     {
+      "id": "b",
+      "label": "Acuity below 6/9"
+     },
+     {
+      "id": "c",
+      "label": "Ophthalmic assistant"
+     },
+     {
+      "id": "d",
+      "label": "Spectacles prescribed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "9222b876-4f18-4c0e-af98-c6a6e5dce2b5",
+  "53f8a4eb-8b43-4f20-9340-a36794f04dc2",
+  "76cb35e6-e7c2-45e7-9125-3494cd2859ec"
+ ],
+ "src": [],
+ "refs": [
+  "National Programme for Control of Blindness, Government of India",
+  "Vision 2020: The Right to Sight, WHO global initiative (1999)",
+  "Park K. Park's Textbook of Preventive and Social Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 76
+ }
+}

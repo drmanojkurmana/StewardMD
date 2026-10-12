@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "rad-interventional",
+ "subject": "radiology",
+ "title": "Interventional radiology: core techniques and high-yield facts",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Interventional radiology uses **image guidance** such as fluoroscopy, ultrasound and CT to treat disease through needles and catheters rather than open surgery. Most procedures start with **Seldinger technique**, in which a needle enters a vessel, a guidewire passes through it, and a sheath or catheter is then advanced over the wire. Knowing this sequence helps you answer questions on access routes and complications.",
+   "say": "Interventional radiology uses image guidance, such as fluoroscopy, ultrasound and CT, to treat disease through needles and catheters rather than open surgery. Most procedures start with Seldinger technique. A needle enters a vessel, a guidewire passes through it, and a sheath or catheter is then advanced over the wire. Knowing this sequence helps you answer questions on access routes and complications.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Needle enters vessel"
+     },
+     {
+      "id": "b",
+      "label": "Guidewire passed"
+     },
+     {
+      "id": "c",
+      "label": "Sheath or catheter advanced"
+     },
+     {
+      "id": "d",
+      "label": "Contrast or device delivered"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For cerebral angiography the **transfemoral route** is the preferred and most commonly used access, with dye injected through the femoral artery. Direct carotid puncture and axillary or transbrachial routes are rarely used. Four-vessel digital subtraction angiography remains the investigation of choice for the cause of subarachnoid haemorrhage, and it is also the gold standard for arterial occlusive disease.",
+   "say": "For cerebral angiography, the transfemoral route is preferred and most commonly used, with dye injected through the femoral artery. Direct carotid puncture and axillary or transbrachial routes are rarely used. Four-vessel digital subtraction angiography is the investigation of choice for finding the cause of subarachnoid haemorrhage, and it is also the gold standard for arterial occlusive disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Preferred cerebral access",
+      "Transfemoral route"
+     ],
+     [
+      "Rarely used access",
+      "Axillary, transbrachial, direct carotid"
+     ],
+     [
+      "SAH aetiology",
+      "Four-vessel DSA"
+     ],
+     [
+      "Arterial occlusive disease",
+      "DSA is gold standard"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vascular imaging patterns are heavily tested. A **string of beads** or pile-of-plates appearance points to fibromuscular dysplasia, which mainly affects young women and often involves renal and carotid arteries. Corkscrew collaterals at the wrists and ankles suggest **Buerger's disease**, while Takayasu arteritis shows stenosis, poststenotic dilatation and occlusion. A Lyre sign, with splaying of the internal and external carotids, indicates a carotid body tumour.",
+   "say": "Vascular imaging patterns are heavily tested. A string of beads or pile-of-plates appearance points to fibromuscular dysplasia, which mainly affects young women and often involves renal and carotid arteries. Corkscrew collaterals at the wrists and ankles suggest Buerger's disease, while Takayasu arteritis shows stenosis, poststenotic dilatation and occlusion. A Lyre sign, with splaying of the internal and external carotids, indicates a carotid body tumour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Angiographic sign"
+    ],
+    "rows": [
+     [
+      "Fibromuscular dysplasia",
+      "Beaded or pile-of-plates"
+     ],
+     [
+      "Buerger's disease",
+      "Corkscrew collaterals"
+     ],
+     [
+      "Takayasu arteritis",
+      "Stenosis and poststenotic dilatation"
+     ],
+     [
+      "Carotid body tumour",
+      "Lyre sign"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Embolisation agents are picked according to how long the blockage should last. **Temporary** agents such as Gelfoam and thrombin dissolve or resorb, whereas **permanent** agents such as embospheres and detachable coils remain in place. Uterine artery embolisation suits intramural fibroids under 7 cm, heavy menstrual bleeding and uterine AVMs. In tuberculosis with massive haemoptysis, the **bronchial artery** is the usual culprit and should be assessed first.",
+   "say": "Embolisation agents are picked according to how long the blockage should last. Temporary agents such as Gelfoam and thrombin dissolve or resorb, whereas permanent agents such as embospheres and detachable coils remain in place. Uterine artery embolisation suits intramural fibroids under 7 centimetres, heavy menstrual bleeding and uterine AVMs. In tuberculosis with massive haemoptysis, the bronchial artery is the usual culprit and should be assessed first.",
+   "vis": null
+  },
+  {
+   "tx": "Percutaneous ablation and drainage are used for focal liver and biliary disease. Radiofrequency ablation, cryotherapy, microwave coagulation and percutaneous ethanol injection treat liver secondaries, but **ultrasound** itself is only a guidance tool, not an ablation method. Percutaneous aspiration and injection, known as PAIR, suits hydatid cysts in stages CE1 and CE3a, and is never used in complicated CE4 cysts. Percutaneous biliary drainage and nephrostomy relieve obstruction.",
+   "say": "Percutaneous ablation and drainage treat focal liver and biliary disease. Radiofrequency ablation, cryotherapy, microwave coagulation and percutaneous ethanol injection treat liver secondaries, but ultrasound itself is only a guidance tool, not an ablation method. Percutaneous aspiration and injection, known as PAIR, suits hydatid cysts in stages CE1 and CE3a, and is never used in complicated CE4 cysts. Percutaneous biliary drainage and nephrostomy relieve obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Modality",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Radiofrequency ablation",
+      "Liver secondaries"
+     ],
+     [
+      "Cryotherapy",
+      "Liver secondaries"
+     ],
+     [
+      "Ethanol injection",
+      "Liver secondaries"
+     ],
+     [
+      "PAIR",
+      "Hydatid CE1 and CE3a only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Image-guided procedures carry specific risks. Fine-needle biopsy of a **pheochromocytoma** is contraindicated because it can trigger a catastrophic hypertensive crisis, so the tumour should be identified before any adrenal lesion is aspirated. A pulmonary artery catheter advanced too far can cause pulmonary infarction and haemoptysis, so it must be withdrawn. Vertebroplasty uses polymethyl methacrylate cement for osteoporotic or malignant compression fractures.",
+   "say": "Image-guided procedures carry specific risks. Fine-needle biopsy of a pheochromocytoma is contraindicated because it can trigger a catastrophic hypertensive crisis, so the tumour should be identified before any adrenal lesion is aspirated. A pulmonary artery catheter advanced too far can cause pulmonary infarction and haemoptysis, so it must be withdrawn. Vertebroplasty uses polymethyl methacrylate cement for osteoporotic or malignant compression fractures.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "3864d3f3-c8c9-499b-b701-cb78e70623e8",
+  "fd4e7cbb-2410-4e51-9750-7b0d873b3312",
+  "a0d036d2-5f31-444e-a843-8c4f724ba4ad"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Rubin's Radiology (Rubin, Neil M. Rofsky)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 157
+ }
+}

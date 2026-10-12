@@ -1,0 +1,175 @@
+{
+ "v": 1,
+ "module": "cm-planning-management",
+ "subject": "community-medicine",
+ "title": "Health planning and management techniques: network analysis, CEA and key tools",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Health planning follows a **planning cycle**. The first step is analysis of the health situation, which means collecting, assessing and interpreting information to give a clear picture. Then come establishing objectives and goals, assessing resources, fixing priorities, writing the plan, programming and implementation, monitoring and evaluation.",
+   "say": "Health planning follows a planning cycle. The first step is analysis of the health situation, which means collecting, assessing and interpreting information to give a clear picture. Then come establishing objectives and goals, assessing resources, fixing priorities, writing the plan, programming and implementation, monitoring and evaluation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Situation analysis"
+     },
+     {
+      "id": "b",
+      "label": "Objectives and goals"
+     },
+     {
+      "id": "c",
+      "label": "Resource assessment"
+     },
+     {
+      "id": "d",
+      "label": "Fixing priorities"
+     },
+     {
+      "id": "e",
+      "label": "Programming and implementation"
+     },
+     {
+      "id": "f",
+      "label": "Monitoring and evaluation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cost-effectiveness analysis** compares the costs and results of alternatives. Benefits are expressed in results achieved, such as lives saved or days free from disease, not in money. This makes it more promising in health than **cost-benefit analysis**, which converts benefits into monetary terms and is hard to apply to health. The most commonly used outcome measure is the quality-adjusted life year, or QALY.",
+   "say": "Cost-effectiveness analysis compares the costs and results of alternatives. Benefits are expressed in results achieved, such as lives saved or days free from disease, not in money. This makes it more promising in health than cost-benefit analysis, which converts benefits into monetary terms and is hard to apply to health. The most commonly used outcome measure is the quality-adjusted life year, or QALY.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cost-benefit analysis",
+     "points": [
+      "Benefits in money",
+      "Hard to monetise health gains"
+     ]
+    },
+    "right": {
+     "title": "Cost-effectiveness analysis",
+     "points": [
+      "Benefits as results achieved",
+      "Common outcome: QALY"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Other techniques serve different purposes. **Input-output analysis** relates resources consumed to useful outcomes. **Systems analysis** compares two or more cost-effective alternatives. **Work sampling** is systematic observation and recording of activities at predetermined or random intervals. **Cost accounting** gives basic data on the cost structure of a programme. The **Delphi technique** uses anonymous expert panels answering questionnaires in rounds.",
+   "say": "Other techniques serve different purposes. Input-output analysis relates resources consumed to useful outcomes. Systems analysis compares two or more cost-effective alternatives. Work sampling is systematic observation and recording of activities at predetermined or random intervals. Cost accounting gives basic data on the cost structure of a programme. The Delphi technique uses anonymous expert panels answering questionnaires in rounds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "Core use"
+    ],
+    "rows": [
+     [
+      "Input-output analysis",
+      "Resources in versus outcomes out"
+     ],
+     [
+      "Systems analysis",
+      "Choose among cost-effective alternatives"
+     ],
+     [
+      "Work sampling",
+      "Observe activities at set or random intervals"
+     ],
+     [
+      "Cost accounting",
+      "Cost structure of a programme"
+     ],
+     [
+      "Delphi",
+      "Expert panel forecasting in rounds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Key terms must be kept distinct. An **objective** is a precise planned end-point that is either achieved or not. A **target** is a discrete activity showing degree of achievement within a time line. A **goal** is the ultimate desired state and is not constrained by time or resources. **Monitoring** checks day-to-day progress, while **evaluation** judges the final outcome against stated objectives.",
+   "say": "Key terms must be kept distinct. An objective is a precise planned end-point that is either achieved or not. A target is a discrete activity showing degree of achievement within a time line. A goal is the ultimate desired state and is not constrained by time or resources. Monitoring checks day-to-day progress, while evaluation judges the final outcome against stated objectives.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Objective",
+      "Precise end-point, achieved or not"
+     ],
+     [
+      "Target",
+      "Discrete activity with degree of achievement"
+     ],
+     [
+      "Goal",
+      "Ultimate desired state, broad"
+     ],
+     [
+      "Monitoring",
+      "Day-to-day follow-up"
+     ],
+     [
+      "Evaluation",
+      "Final outcome against objectives"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "4cddc991-66e9-4c58-9f1f-9f097c943ca7",
+  "f2c9d460-c89e-4f3b-97d8-8dd4110459e6",
+  "24f8d2f9-2afb-4309-81d9-21bca5f910cc"
+ ],
+ "src": [],
+ "refs": [
+  "Park K. Park's Textbook of Preventive and Social Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 117
+ }
+}

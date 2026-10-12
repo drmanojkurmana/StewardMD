@@ -1,0 +1,168 @@
+{
+ "v": 1,
+ "module": "snp-acid-base",
+ "subject": "ss-nephrology",
+ "title": "Acid-base disorders: a stepwise approach for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Start every acid-base problem with the **pH** to decide whether the patient is **acidaemic** or **alkalaemic**. Next, look at **pCO2** and **HCO3** to name the primary disorder: respiratory disorders follow pCO2, while metabolic disorders follow bicarbonate. **Compensation** partly corrects the pH but never fully normalises it, so an overcorrected pH hints at a second, mixed disorder. Finish by calculating the **anion gap** to refine the diagnosis.",
+   "say": "Start every acid-base problem with the pH to decide whether the patient is acidaemic or alkalaemic. Next, look at pCO2 and bicarbonate to name the primary disorder. Respiratory disorders follow pCO2, while metabolic disorders follow bicarbonate. Compensation partly corrects the pH but never fully normalises it, so an overcorrected pH hints at a second, mixed disorder. Finish by calculating the anion gap to refine the diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Check pH"
+     },
+     {
+      "id": "b",
+      "label": "Acidaemia or alkalaemia"
+     },
+     {
+      "id": "c",
+      "label": "Primary: pCO2 or HCO3"
+     },
+     {
+      "id": "d",
+      "label": "Check compensation"
+     },
+     {
+      "id": "e",
+      "label": "Calculate anion gap"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **anion gap** equals sodium minus the sum of chloride and bicarbonate, normally about 8 to 12 mmol/L. A raised gap points to unmeasured anions such as lactate, ketones, uraemic acids or toxic alcohols, using the mnemonic MUDPILES. Use the **delta ratio**, which is change in gap divided by change in bicarbonate. A ratio below 1 suggests a coexisting normal gap acidosis, while above 2 suggests coexisting metabolic alkalosis.",
+   "say": "The anion gap equals sodium minus the sum of chloride and bicarbonate, normally about 8 to 12 millimoles per litre. A raised gap points to unmeasured anions such as lactate, ketones, uraemic acids or toxic alcohols. Use the delta ratio, which is the change in gap divided by the change in bicarbonate. A ratio below 1 suggests a coexisting normal gap acidosis, while a ratio above 2 suggests a coexisting metabolic alkalosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Delta ratio",
+     "Suggested mixed disorder"
+    ],
+    "rows": [
+     [
+      "Below 1",
+      "Normal gap acidosis added"
+     ],
+     [
+      "1 to 2",
+      "Pure high gap acidosis"
+     ],
+     [
+      "Above 2",
+      "Metabolic alkalosis or prior high bicarbonate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Winter formula** predicts the expected pCO2 in metabolic acidosis from the serum **bicarbonate** level, with an accepted margin of plus or minus 2 mmHg. A measured pCO2 outside this range signals a concurrent **respiratory disorder**. Salicylate poisoning is a classic trap: early **respiratory alkalosis** arises from direct stimulation of the medullary chemoreceptors, and a **metabolic acidosis** follows as the drug accumulates. Acetazolamide should be avoided in these patients because it worsens the acidosis.",
+   "say": "The Winter formula predicts the expected pCO2 in metabolic acidosis from the serum bicarbonate level, with an accepted margin of plus or minus 2 millimetres of mercury. A measured pCO2 outside this range signals a concurrent respiratory disorder. Salicylate poisoning is a classic trap: early respiratory alkalosis comes from direct stimulation of the medullary chemoreceptors, and metabolic acidosis follows as the drug accumulates. Acetazolamide should be avoided in these patients because it worsens the acidosis.",
+   "vis": null
+  },
+  {
+   "tx": "Toxic alcohols raise the **osmolar gap**, the measured osmolality minus the calculated value. Methanol and ethylene glycol produce high anion gap acidosis from formic, glycolic and oxalic acids. Treat with **fomepizole** early, and use haemodialysis for severe acidosis, renal failure or high levels. Isopropanol causes ketosis and a raised osmolar gap but a normal anion gap, so management is largely supportive.",
+   "say": "Toxic alcohols raise the osmolar gap, which is the measured osmolality minus the calculated value. Methanol and ethylene glycol produce a high anion gap acidosis from formic, glycolic and oxalic acids. Treat early with fomepizole, and use haemodialysis for severe acidosis, renal failure or high levels. Isopropanol causes ketosis and a raised osmolar gap but a normal anion gap, so management is largely supportive.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High gap toxins",
+     "points": [
+      "Methanol, ethylene glycol",
+      "Organic acids produced",
+      "Fomepizole first line",
+      "Haemodialysis if severe"
+     ]
+    },
+    "right": {
+     "title": "Isopropanol",
+     "points": [
+      "Ketones, no toxic acid",
+      "Normal anion gap",
+      "Supportive care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lactic acidosis is a common high gap cause, especially with **metformin** in renal impairment, where accumulation impairs mitochondrial function. In India, consider D-lactic acidosis in short bowel syndrome, which standard L-lactate assays miss. Normal anion gap acidosis arises from bicarbonate loss in diarrhoea or cholestyramine, and from chloride-rich fluids such as large volumes of normal saline, which causes **hyperchloraemic acidosis**.",
+   "say": "Lactic acidosis is a common high gap cause, especially with metformin in renal impairment, where accumulation impairs mitochondrial function. In India, consider D-lactic acidosis in short bowel syndrome, which standard L-lactate assays miss. Normal anion gap acidosis arises from bicarbonate loss in diarrhoea or cholestyramine, and from large volumes of normal saline, which causes hyperchloraemic acidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Metformin with renal failure",
+      "Impaired lactate clearance"
+     ],
+     [
+      "Short bowel D-lactate",
+      "Missed by standard assays"
+     ],
+     [
+      "Diarrhoea or cholestyramine",
+      "Bicarbonate loss"
+     ],
+     [
+      "Large saline volumes",
+      "Chloride load"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **metabolic alkalosis**, the **urine chloride** level helps sort the causes. **Chloride-responsive** states, such as vomiting and loop or thiazide diuretic use, produce a low urine chloride and improve with saline. **Chloride-resistant** states, such as primary hyperaldosteronism, keep urine chloride raised despite low serum chloride. Correcting the trigger and the volume status is the core treatment, with potassium repletion where needed.",
+   "say": "In metabolic alkalosis, the urine chloride level helps sort the causes. Chloride-responsive states, such as vomiting and loop or thiazide diuretic use, produce a low urine chloride and improve with saline. Chloride-resistant states, such as primary hyperaldosteronism, keep urine chloride raised despite low serum chloride. Correcting the trigger and the volume status is the core treatment, with potassium replacement where needed.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_30d4d6f758e1",
+  "q_ed62064b6d6b",
+  "q_42e82c677fc7"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 39
+ }
+}

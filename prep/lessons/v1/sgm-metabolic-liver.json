@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "sgm-metabolic-liver",
+ "subject": "ss-general-medicine",
+ "title": "Metabolic and genetic liver disease: Wilson disease and haemochromatosis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Wilson disease** is an inherited disorder of copper handling. Faulty **ATP7B** genes, which encode a copper-pumping enzyme active mainly in hepatocytes and renal cells, stop the liver from clearing copper into bile. Copper then accumulates in the liver and brain. Patients are usually teenagers or young adults. Even when neurological or psychiatric symptoms lead the picture, some liver involvement is almost always present.",
+   "say": "Wilson disease is an inherited disorder of copper handling. Faulty ATP7B genes stop the liver from releasing copper into bile, so the metal builds up in the liver and brain. The gene product is a copper-pumping enzyme found mainly in the liver and kidney. Patients are usually teenagers or young adults. Even when neurological or psychiatric features take centre stage, some liver involvement is almost always there.",
+   "vis": null
+  },
+  {
+   "tx": "Screen with **serum ceruloplasmin**, which is characteristically low, and serum copper, also low. A 24-hour urinary copper above 100 micrograms is typical, collected in acid-washed copper-free containers. The **Kayser-Fleischer ring** is pathognomonic; it is seen in about 95 percent of neurological cases but only about two-thirds of hepatic presentations. Normal copper or ceruloplasmin does not exclude the diagnosis.",
+   "say": "Screen with serum ceruloplasmin, which is characteristically low, and serum copper, which is also low. A 24-hour urinary copper above 100 micrograms is typical, collected in acid-washed copper-free containers. The Kayser-Fleischer ring is pathognomonic. It is seen in about 95 percent of neurological cases but only about two thirds of hepatic presentations. Normal copper or ceruloplasmin results do not exclude the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Typical finding in Wilson disease"
+    ],
+    "rows": [
+     [
+      "Serum ceruloplasmin",
+      "Low"
+     ],
+     [
+      "Serum copper",
+      "Low"
+     ],
+     [
+      "24-h urinary copper",
+      "Above 100 micrograms"
+     ],
+     [
+      "Slit-lamp examination",
+      "Kayser-Fleischer ring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Liver biopsy gives quantitative hepatic copper, where above 200 micrograms per gram dry weight is characteristic against a normal range of about 20 to 50. The **Leipzig score** combines clinical, biochemical and molecular features and is endorsed by EASL. ATP7B genetic testing supports the diagnosis, and screening of first-degree relatives is advised because inheritance is autosomal recessive.",
+   "say": "Liver biopsy gives quantitative hepatic copper. A value above 200 micrograms per gram dry weight is characteristic, compared with a normal range of about 20 to 50. The Leipzig score combines clinical, biochemical and molecular features and is endorsed by EASL. ATP7B genetic testing supports the diagnosis. First-degree relatives should be screened because inheritance is autosomal recessive.",
+   "vis": null
+  },
+  {
+   "tx": "Treatment uses **copper chelation** with penicillamine or trientine to increase urinary copper excretion, alongside a low-copper diet avoiding shellfish, liver, nuts, chocolate and mushrooms. Zinc acetate blocks intestinal absorption and is given as 50 mg elemental zinc three times daily, spaced at least one hour from food and from chelators. When starting penicillamine, watch for paradoxical neurological worsening, especially in neurological presentations.",
+   "say": "Treatment uses copper chelation with penicillamine or trientine to increase urinary copper excretion, together with a low-copper diet that avoids shellfish, liver, nuts, chocolate and mushrooms. Zinc acetate blocks intestinal absorption and is given as 50 milligrams of elemental zinc three times daily, spaced at least one hour from food and from chelators. When penicillamine is started, watch for paradoxical neurological worsening, especially in neurological presentations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chelators",
+     "points": [
+      "Penicillamine, often with pyridoxine",
+      "Trientine",
+      "Mobilise urinary copper"
+     ]
+    },
+    "right": {
+     "title": "Zinc acetate",
+     "points": [
+      "Blocks intestinal absorption",
+      "50 mg elemental zinc three times daily",
+      "Separate from food and chelators"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Wilson disease is treatable, so **early diagnosis** changes outcomes. Untreated, copper accumulates in the liver and brain, and the course is progressive and usually fatal. Prompt **chelation** and lifelong therapy prevent premature death. **Liver transplantation** is reserved for fulminant failure or decompensated cirrhosis, where it also corrects the metabolic defect. Screen any younger person with unexplained hepatic illness, abnormal movements or a new psychiatric diagnosis.",
+   "say": "Wilson disease is treatable, so early diagnosis changes outcomes. Untreated, copper accumulates in the liver and brain, and the course is progressive and usually fatal. Prompt chelation and lifelong therapy prevent premature death. Liver transplantation is reserved for fulminant failure or decompensated cirrhosis, where it also corrects the metabolic defect. Screen any younger person with unexplained hepatic illness, abnormal movements or a new psychiatric diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Haemochromatosis** is iron overload. Classic HFE-related disease is milder and later, but juvenile haemochromatosis from HJV or HAMP variants presents in the second or third decade. The defect removes hepcidin, so ferroportin is not degraded and iron floods the circulation. Transferrin saturation and ferritin are first-line tests, with HJV and HAMP genetics for confirmation and MRI for liver iron.",
+   "say": "Haemochromatosis is iron overload. Classic HFE-related disease is milder and later in onset. Juvenile haemochromatosis, caused by variants in HJV or HAMP, presents in the second or third decade. The defect removes hepcidin, so ferroportin is not degraded and iron floods the circulation. Transferrin saturation and ferritin are first-line tests. HJV and HAMP genetic testing confirms the subtype, and MRI quantifies liver iron.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HJV or HAMP defect"
+     },
+     {
+      "id": "b",
+      "label": "Low hepcidin"
+     },
+     {
+      "id": "c",
+      "label": "Ferroportin not degraded"
+     },
+     {
+      "id": "d",
+      "label": "Iron overload"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_0f3423728175",
+  "q_2673e2fec90b",
+  "q_9041c51df3a4"
+ ],
+ "src": [
+  "kb-reference-wilsons-disease",
+  "kb-reference-hereditary-hemochromatosis-juvenile"
+ ],
+ "refs": [
+  "European Association for the Study of the Liver (EASL) clinical practice guidelines on Wilson's disease",
+  "Leipzig scoring system for Wilson disease (2001)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 1450,
+  "itemN": 13
+ }
+}

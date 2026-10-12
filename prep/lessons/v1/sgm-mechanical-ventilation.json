@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "sgm-mechanical-ventilation",
+ "subject": "ss-general-medicine",
+ "title": "Mechanical ventilation and oxygen therapy: core principles for exams",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Positive pressure raises intrathoracic pressure, which lowers venous return and can cause hypotension, especially when **PEEP** is raised. PEEP keeps alveoli open and improves oxygenation by recruiting collapsed lung. Ventilator-induced lung injury is limited by tidal volumes of 8 mL/kg or less in ARDS, and by avoiding high plateau pressures.",
+   "say": "Positive pressure raises intrathoracic pressure, which lowers venous return and can cause hypotension, especially when PEEP is increased. PEEP keeps alveoli open and improves oxygenation by recruiting collapsed lung. In ARDS, tidal volumes of 8 mL per kg or less help limit ventilator-induced lung injury.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Raised PEEP"
+     },
+     {
+      "id": "b",
+      "label": "Higher intrathoracic pressure"
+     },
+     {
+      "id": "c",
+      "label": "Lower venous return"
+     },
+     {
+      "id": "d",
+      "label": "Reduced preload and hypotension"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oxygen targets are now conservative. In most critically ill adults, aim for a **conservative saturation range** and avoid **hyperoxia**, since excess oxygen can cause harm. **High-flow nasal oxygen** delivers heated, humidified gas at high flow and can reduce intubation in selected hypoxaemic patients, as the FLORALI trial showed. Use **NIV** for COPD exacerbations and cardiogenic pulmonary oedema with hypercapnia.",
+   "say": "Oxygen targets are now conservative. In most critically ill adults, aim for a conservative saturation range and avoid hyperoxia, since excess oxygen can cause harm. High-flow nasal oxygen delivers heated, humidified gas at high flow and can reduce intubation in selected hypoxaemic patients, as the FLORALI trial showed. Non-invasive ventilation suits COPD exacerbations and cardiogenic pulmonary oedema with hypercapnia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-flow nasal oxygen",
+     "points": [
+      "Heated, humidified gas at high flow",
+      "Useful in acute hypoxaemic failure",
+      "May avoid intubation in some patients"
+     ]
+    },
+    "right": {
+     "title": "NIV",
+     "points": [
+      "Pressure support delivered by mask",
+      "Preferred in COPD with hypercapnia",
+      "Unsuitable if the airway is unprotected"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **rapid shallow breathing index** is respiratory rate divided by tidal volume in litres, defined by Yang and Tobin. A value above 105 breaths per minute per litre predicts likely weaning failure. Before extubation, a **cuff leak test** checks that the airway is patent and laryngeal oedema is absent. Prophylactic steroids and post-extubation NIV in high-risk COPD patients reduce reintubation.",
+   "say": "The rapid shallow breathing index is respiratory rate divided by tidal volume in litres, as defined by Yang and Tobin. A value above 105 predicts likely weaning failure. Before extubation, a cuff leak test checks that the airway is patent. Prophylactic steroids and post-extubation non-invasive ventilation in high-risk patients reduce reintubation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Measure RR and tidal volume"
+     },
+     {
+      "id": "b",
+      "label": "Calculate RSBI"
+     },
+     {
+      "id": "c",
+      "label": "RSBI above 105 suggests failure"
+     },
+     {
+      "id": "d",
+      "label": "Check cuff leak before extubation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ventilator-associated pneumonia is prevented by head-of-bed elevation, daily sedation review and early weaning. Monitor **end-tidal CO2** between 35 and 45 mmHg to judge ventilation adequacy. Suspect a dislodged tube if the EtCO2 waveform suddenly disappears. Tracheostomy is considered when prolonged ventilation is expected, usually beyond about 10 to 14 days.",
+   "say": "Ventilator-associated pneumonia is prevented by head-of-bed elevation, daily sedation review and early weaning. Monitor end-tidal CO2 between 35 and 45 mmHg to judge ventilation. A sudden loss of the waveform suggests a dislodged tube. Tracheostomy is considered when prolonged ventilation is expected, usually beyond about 10 to 14 days.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_76b2b1822587",
+  "q_4df09a51fdd1",
+  "q_1db511cea93e"
+ ],
+ "src": [],
+ "refs": [
+  "ARDS Network, NEJM 2000 low tidal volume trial",
+  "FLORALI trial, Frat JP et al., NEJM 2015"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 46
+ }
+}

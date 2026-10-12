@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "sgm-asthma",
+ "subject": "ss-general-medicine",
+ "title": "Asthma: Grading, Acute Management and Long-Term Control",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Asthma is a chronic inflammatory airway disease with **variable expiratory airflow limitation**. Every adult needs ICS-containing treatment. Control is judged over the past 4 weeks: none of the symptom features means well controlled, one or two means partly controlled, and three or four means uncontrolled. Document variable airflow limitation, such as a bronchodilator response of 12% or more and 200 mL or more, or a FeNO of 50 ppb or more in adults.",
+   "say": "Asthma is a chronic inflammatory airway disease with variable expiratory airflow limitation. Every adult needs inhaled corticosteroid containing treatment. Control is judged over the past four weeks. No features means well controlled, one or two means partly controlled, and three or four means uncontrolled. Document variable airflow limitation, such as a bronchodilator response of 12 percent or more and 200 millilitres or more, or a FeNO of 50 ppb or more in adults.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Control level",
+     "Symptom features present",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Well controlled",
+      "None",
+      "Continue current step"
+     ],
+     [
+      "Partly controlled",
+      "One or two",
+      "Review technique and adherence"
+     ],
+     [
+      "Uncontrolled",
+      "Three or four",
+      "Consider step up after checks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In GINA 2026 the preferred route is **Track 1**, using an ICS-formoterol reliever. Adults with symptoms on fewer than 3 to 5 days a week start on AIR-only budesonide-formoterol 160/4.5 mcg delivered, taken as needed. Medium-dose MART at Step 4 is 2 inhalations twice daily plus 1 as needed. Never prescribe a SABA reliever alongside a MART regimen.",
+   "say": "In GINA 2026 the preferred route is Track 1, using an ICS-formoterol reliever. Adults with symptoms on fewer than three to five days a week start on AIR-only budesonide-formoterol 160 slash 4.5 micrograms delivered, taken as needed. Medium-dose maintenance and reliever therapy at Step 4 is two inhalations twice daily plus one as needed. Never prescribe a separate SABA reliever alongside this regimen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Regimen",
+     "Daily use"
+    ],
+    "rows": [
+     [
+      "1 to 2",
+      "AIR-only budesonide-formoterol",
+      "As needed only"
+     ],
+     [
+      "3",
+      "Low-dose MART",
+      "1 twice or once daily plus 1 as needed"
+     ],
+     [
+      "4",
+      "Medium-dose MART",
+      "2 twice daily plus 1 as needed"
+     ],
+     [
+      "5",
+      "Refer and phenotype",
+      "Consider add-on LAMA or biologic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Escalate the **bronchodilator** plan if the patient responds poorly. Give IV **magnesium sulfate** 2 g over 20 minutes as a single dose for a severe attack not responding to initial treatment. Nebulised magnesium is not recommended. IV aminophylline is not routine and needs senior review. Watch for **SABA toxicity**, with tachycardia, tremor, hypokalaemia and lactic acidosis, which can mimic worsening asthma.",
+   "say": "Escalate the bronchodilator plan if the patient responds poorly. Give intravenous magnesium sulfate 2 grams over 20 minutes as a single dose for a severe attack not responding to initial treatment. Nebulised magnesium is not recommended. Intravenous aminophylline is not routine and needs senior review. Watch for salbutamol toxicity, with tachycardia, tremor, hypokalaemia and lactic acidosis, which can mimic worsening asthma.",
+   "vis": null
+  },
+  {
+   "tx": "A patient should never leave hospital on **reliever-only** treatment. Discharge needs **inhaled corticosteroid** cover, a **written action plan** and a clinic review within two to seven days. Dose reduction is considered only after roughly three months of sustained control, lowering the ICS by about a quarter to half at intervals of three months. Pause any **step-down** during infection, travel or pregnancy. Refer after an admission, or when exacerbations exceed one or two yearly despite medium or high dose **ICS-LABA**.",
+   "say": "Nobody should leave hospital on a reliever alone. Discharge needs inhaled corticosteroid cover, a written action plan and review within two to seven days. Any reduction in dose should wait until control has held for around three months, and then the steroid is cut by a quarter to half at intervals of three months. Hold off on stepping down during infection, travel or pregnancy. Refer after an admission, or when exacerbations exceed one or two a year on medium or high dose ICS-LABA.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Discharge with ICS"
+     },
+     {
+      "id": "n2",
+      "label": "Written action plan"
+     },
+     {
+      "id": "n3",
+      "label": "Review in 2 to 7 days"
+     },
+     {
+      "id": "n4",
+      "label": "Stable about 3 months"
+     },
+     {
+      "id": "n5",
+      "label": "Cut ICS 25 to 50%"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_e30db395bc12",
+  "q_b59c6912efec",
+  "q_0d7573ef5539"
+ ],
+ "src": [
+  "kb-clinical-protocols-acute-asthma-adult",
+  "kb-clinical-protocols-asthma-long-term-management",
+  "kb-clinical-protocols-acute-asthma-child"
+ ],
+ "refs": [
+  "Global Initiative for Asthma (GINA) 2026 report",
+  "SIGN 158 British guideline on the management of asthma",
+  "BTS/NICE/SIGN 2024 asthma guideline"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 2498,
+  "itemN": 38
+ }
+}

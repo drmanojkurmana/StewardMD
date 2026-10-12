@@ -1,0 +1,110 @@
+{
+ "v": 1,
+ "module": "sgm-stroke-prevention",
+ "subject": "ss-general-medicine",
+ "title": "Secondary stroke prevention, TIA and stroke syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Amaurosis fugax, a painless monocular vision loss, usually signals **symptomatic internal carotid artery disease** with embolism from the ipsilateral carotid. Limb weakness with dysarthria points to an anterior circulation event, whereas vertigo, diplopia or drop attacks suggest posterior circulation. Urgent **carotid imaging** with CT angiography or Doppler is needed to plan revascularisation decisions.",
+   "say": "Amaurosis fugax, a painless monocular vision loss, usually signals symptomatic internal carotid artery disease with embolism from the ipsilateral carotid. Limb weakness with dysarthria points to an anterior circulation event, whereas vertigo, diplopia or drop attacks suggest posterior circulation. Urgent carotid imaging with CT angiography or Doppler is needed to guide revascularisation decisions.",
+   "vis": null
+  },
+  {
+   "tx": "For a non-cardioembolic TIA or minor stroke, start **aspirin** early, with a loading dose of 300 mg given within 24 hours, then continue antiplatelet therapy. The CHANCE and POINT trials showed that short-course **dual antiplatelet therapy** with aspirin and clopidogrel, started within 24 hours and given for 21 days in high-risk cases, reduces recurrent stroke. Long-term therapy then reverts to single agent treatment.",
+   "say": "For a non cardioembolic TIA or minor stroke, start aspirin early, with a loading dose of 300 milligrams given within 24 hours, then continue antiplatelet therapy. The CHANCE and POINT trials showed that short course dual antiplatelet therapy with aspirin and clopidogrel, started within 24 hours and given for 21 days in high risk cases, reduces recurrent stroke. Long term therapy then reverts to a single agent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High-risk TIA or minor stroke"
+     },
+     {
+      "id": "b",
+      "label": "Aspirin plus clopidogrel within 24 h"
+     },
+     {
+      "id": "c",
+      "label": "21 days DAPT"
+     },
+     {
+      "id": "d",
+      "label": "Single antiplatelet long term"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with atrial fibrillation, a **direct oral anticoagulant** is preferred over antiplatelets for secondary prevention, and antiplatelets are not added on top. Unlike clopidogrel, ticagrelor does not depend on CYP2C19 activation, so it is an option when a loss-of-function variant is found. Lipid control matters too: high-intensity **statin** therapy targets an LDL cholesterol below 70 mg/dL in patients with atherosclerotic disease.",
+   "say": "In patients with atrial fibrillation, a direct oral anticoagulant is preferred over antiplatelets for secondary prevention, and antiplatelets are not added on top. Unlike clopidogrel, ticagrelor does not depend on CYP2C19 activation, so it is an option when a loss of function variant is found. Lipid control matters too, and high intensity statin therapy targets an LDL cholesterol below 70 milligrams per decilitre in patients with atherosclerotic disease.",
+   "vis": null
+  },
+  {
+   "tx": "Carotid stenosis mostly causes stroke through **artery to artery embolism** from an unstable plaque, rather than through lumen narrowing alone. A cervical bruit is neither sensitive nor specific, so **imaging** guides management. For significant symptomatic stenosis, **carotid endarterectomy** or **carotid stenting** is considered early after the event, alongside best medical therapy.",
+   "say": "Carotid stenosis mostly causes stroke through artery to artery embolism from an unstable plaque, rather than through lumen narrowing alone. A cervical bruit is neither sensitive nor specific, so imaging guides management. For significant symptomatic stenosis, carotid endarterectomy or carotid stenting is considered early after the event, alongside best medical therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carotid endarterectomy",
+     "points": [
+      "Surgical plaque removal",
+      "Often favoured in older patients",
+      "Needs an experienced surgeon"
+     ]
+    },
+    "right": {
+     "title": "Carotid stenting",
+     "points": [
+      "Endovascular approach",
+      "Suits high surgical risk or unfavourable anatomy",
+      "Risk of periprocedural stroke"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Small vessel disease causes **lacunar infarcts** of 40 to 900 micrometres, usually from **lipohyalinosis** and microatheroma in penetrating arteries, which are end arteries without collaterals. Pure motor hemiparesis is the commonest lacunar syndrome, while **Dejerine-Roussy syndrome** follows thalamic infarction with neuropathic pain. **CADASIL**, caused by NOTCH3 mutations on chromosome 19, presents with migraine, recurrent strokes and anterior temporal white matter change.",
+   "say": "Small vessel disease causes lacunar infarcts of forty to nine hundred micrometres, usually from lipohyalinosis and microatheroma in penetrating arteries, which are end arteries without collaterals. Pure motor hemiparesis is the commonest lacunar syndrome, while Dejerine Roussy syndrome follows thalamic infarction with neuropathic pain. CADASIL, caused by NOTCH3 mutations on chromosome nineteen, presents with migraine, recurrent strokes and anterior temporal white matter change.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_afce35fe112a",
+  "q_f70ae8298f4c",
+  "q_17dafdc680b4"
+ ],
+ "src": [],
+ "refs": [
+  "NICE NG128 Stroke and transient ischaemic attack in over 16s: diagnosis and initial management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

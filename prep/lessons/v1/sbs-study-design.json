@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "sbs-study-design",
+ "subject": "ss-biostatistics",
+ "title": "Study designs and epidemiological measures",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Study design choice depends on the question. A **cohort study** starts with exposed and unexposed groups and follows them forward, so incidence and relative risk can be measured directly. A **case-control study** starts with diseased and control subjects and looks back at exposure, suiting rare diseases and long latency. It yields an **odds ratio**. A **cross-sectional study** captures a snapshot and measures prevalence, not incidence.",
+   "say": "Study design depends on the question. A cohort study starts with exposed and unexposed groups and follows them forward, so incidence and relative risk can be measured directly. A case-control study starts with diseased and control subjects and looks back at exposure, which suits rare diseases with long latency and gives an odds ratio. A cross-sectional study captures a snapshot and measures prevalence, not incidence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Design",
+     "Starts with",
+     "Measures"
+    ],
+    "rows": [
+     [
+      "Cohort",
+      "Exposure status",
+      "Incidence, relative risk"
+     ],
+     [
+      "Case-control",
+      "Outcome status",
+      "Odds ratio"
+     ],
+     [
+      "Cross-sectional",
+      "Single time point",
+      "Prevalence"
+     ],
+     [
+      "Ecological",
+      "Group data",
+      "Group correlation only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Randomised controlled trials are the strongest design for causation. **Random allocation** spreads known and unknown **confounders** evenly between arms, which controls confounding and selection bias at baseline. Blinding and placebo reduce observer and placebo effects. Ecological studies use group-level data and suffer from the **ecological fallacy**, where group correlations are wrongly applied to individuals.",
+   "say": "Randomised controlled trials are the strongest design for causation. Random allocation spreads known and unknown confounders evenly between arms, which controls confounding and selection bias at baseline. Blinding and a placebo reduce observer and placebo effects. Ecological studies use group-level data and suffer from the ecological fallacy, where group correlations are wrongly applied to individuals.",
+   "vis": null
+  },
+  {
+   "tx": "Measures of association. The **relative risk** is the incidence in exposed divided by incidence in unexposed. The **attributable risk** is the exposed incidence minus the unexposed incidence. The **number needed to treat** is the reciprocal of the absolute risk reduction. An odds ratio below one suggests a protective exposure. Ratios near one indicate no association.",
+   "say": "Measures of association. The relative risk is the incidence in the exposed divided by the incidence in the unexposed. The attributable risk is the exposed incidence minus the unexposed incidence. The number needed to treat is the reciprocal of the absolute risk reduction. An odds ratio below one suggests a protective exposure, and values near one indicate no association.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ratio measures",
+     "points": [
+      "Relative risk from cohort data",
+      "Odds ratio from case-control data",
+      "Value of one means no association"
+     ]
+    },
+    "right": {
+     "title": "Difference measures",
+     "points": [
+      "Attributable risk equals Ie minus Io",
+      "Number needed to treat is reciprocal of absolute risk reduction",
+      "Attributable risk percent is (RR minus 1) over RR"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bias and confounding. **Recall bias** arises in case-control studies when diseased people remember exposures more than controls. **Selection bias** arises when the sample is not representative. **Confounding** arises when an unmeasured or unaccounted factor links exposure and outcome. **Lead-time bias** makes survival look longer after early screening even when mortality is unchanged, so mortality is the fairer outcome.",
+   "say": "Bias and confounding. Recall bias arises in case-control studies when diseased people remember exposures more than controls. Selection bias arises when the sample is not representative. Confounding arises when an unaccounted factor links exposure and outcome. Lead-time bias makes survival look longer after early screening even when mortality is unchanged, so mortality is the fairer outcome.",
+   "vis": null
+  },
+  {
+   "tx": "Analysis in trials. When participants drop out or stop the drug, the **intention-to-treat** analysis keeps everyone in their randomised arm. This preserves the benefit of randomisation and reflects real-world effectiveness, so it is the standard primary analysis. Per-protocol analysis can reintroduce bias and is only supportive.",
+   "say": "Analysis in trials. When participants drop out or stop the drug, the intention-to-treat analysis keeps everyone in their randomised arm. This preserves the benefit of randomisation and reflects real-world effectiveness, so it is the standard primary analysis. Per-protocol analysis can reintroduce bias and is only supportive.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Randomise"
+     },
+     {
+      "id": "b",
+      "label": "Non-compliance"
+     },
+     {
+      "id": "c",
+      "label": "Analyse by arm"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "keep in arm"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_18aa504258b4",
+  "q_04cd68e60a35",
+  "q_b28fba8d217c"
+ ],
+ "src": [],
+ "refs": [
+  "Park K, Textbook of Preventive and Social Medicine (Banarsidas Bhanot)",
+  "Bradford Hill A. The environment and disease: association or causation? Proceedings of the Royal Society of Medicine (1965)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 21
+ }
+}

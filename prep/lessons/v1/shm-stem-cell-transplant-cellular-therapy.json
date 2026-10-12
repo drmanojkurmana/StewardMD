@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "shm-stem-cell-transplant-cellular-therapy",
+ "subject": "ss-haematology",
+ "title": "Haematopoietic cell transplantation: core principles for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Haematopoietic cell transplantation** replaces a diseased or failed marrow with stem cells. An **autologous** graft uses the patient's own cells, so there is no donor immune attack but also no graft-versus-tumour effect. An **allogeneic** graft uses a donor, which brings graft-versus-tumour benefit and also the risk of graft-versus-host disease. Choice of graft type depends on the disease, remission status and donor availability.",
+   "say": "Haematopoietic cell transplantation replaces a diseased or failed marrow with stem cells. An autologous graft uses the patient's own cells, so there is no donor immune attack, but there is also no graft-versus-tumour effect. An allogeneic graft uses a donor, which brings graft-versus-tumour benefit and also the risk of graft-versus-host disease. The choice depends on the disease, remission status and donor availability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Autologous",
+     "Allogeneic"
+    ],
+    "rows": [
+     [
+      "Cell source",
+      "Patient",
+      "Matched or partly matched donor"
+     ],
+     [
+      "Graft-versus-tumour effect",
+      "Absent",
+      "Present"
+     ],
+     [
+      "Graft-versus-host disease",
+      "Not seen",
+      "Major risk"
+     ],
+     [
+      "Typical use",
+      "Myeloma, lymphoma",
+      "Acute leukaemia, MDS, aplastic anaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Post-transplant cyclophosphamide** is the key tool that makes haploidentical transplant feasible. Given on days three and four after the graft, it kills alloreactive donor T cells that would otherwise cause graft-versus-host disease, while sparing the stem cells. Indian centres use this strategy widely because haploidentical donors are often the only option. Conditioning intensity is chosen by age, comorbidity and prior therapy.",
+   "say": "Post-transplant cyclophosphamide is the key tool that makes haploidentical transplant feasible. Given on days three and four after the graft, it kills alloreactive donor T cells that would otherwise cause graft-versus-host disease, while sparing the stem cells. Indian centres use this strategy widely because haploidentical donors are often the only option. Conditioning intensity is chosen by age, comorbidity and prior therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Graft-versus-host disease** is classified by its timing relative to transplant. Acute disease arises in the early post-transplant window and tends to involve the skin, liver and gut. Chronic disease appears later and can resemble autoimmune conditions, with sclerotic skin and dry eyes and mouth. Mild acute disease is often managed by observation, whereas more severe cases require **systemic corticosteroids** such as methylprednisolone, with second-line agents reserved for steroid-refractory disease.",
+   "say": "Graft-versus-host disease is classified by when it appears relative to the transplant. The acute form arises in the early post-transplant window and tends to affect the skin, liver and gut. The chronic form emerges later and can look like an autoimmune condition, with tight, hardened skin and dryness of the eyes and mouth. Mild acute disease is often simply watched, whereas more serious cases need systemic corticosteroids such as methylprednisolone. Second-line agents are kept for disease that does not respond to steroids.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Acute GVHD",
+     "Chronic GVHD"
+    ],
+    "rows": [
+     [
+      "Timing",
+      "Early post-transplant window",
+      "Later post-transplant period"
+     ],
+     [
+      "Main organs",
+      "Skin, liver, gut",
+      "Skin, mouth, eyes, lungs, joints"
+     ],
+     [
+      "Mild disease",
+      "Often observed",
+      "Managed according to organ involvement"
+     ],
+     [
+      "Severe disease",
+      "Systemic corticosteroids first",
+      "Systemic corticosteroids, then second-line agents"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sinusoidal obstruction syndrome**, also called veno-occlusive disease, typically presents within the first month with painful hepatomegaly, jaundice, ascites and weight gain. The formal diagnosis requires bilirubin above 2 mg/dL along with the typical clinical features. Prophylaxis with **ursodeoxycholic acid** lowers incidence. **Defibrotide** is the licensed treatment for severe disease in the setting of multi-organ involvement.",
+   "say": "Sinusoidal obstruction syndrome, also called veno-occlusive disease, typically presents within the first month with painful hepatomegaly, jaundice, ascites and weight gain. The formal diagnosis requires bilirubin above two milligrams per decilitre along with the typical clinical features. Prophylaxis with ursodeoxycholic acid lowers incidence. Defibrotide is the licensed treatment for severe disease with multi-organ involvement.",
+   "vis": null
+  },
+  {
+   "tx": "**CAR-T cell therapy** carries distinct toxicities that appear within days to weeks of infusion. **Cytokine release syndrome** produces fever, hypotension and hypoxia, reflecting a systemic inflammatory surge. **Immune effector cell-associated neurotoxicity syndrome**, or **ICANS**, presents with confusion, aphasia and seizures. Both are graded, and management escalates with severity under specialist centre protocols, with close neurological and haemodynamic monitoring throughout.",
+   "say": "CAR-T cell therapy carries distinct toxicities that appear within days to weeks of infusion. Cytokine release syndrome produces fever, low blood pressure and low oxygen levels, reflecting a systemic inflammatory surge. Immune effector cell-associated neurotoxicity syndrome, known as ICANS, presents with confusion, difficulty speaking and seizures. Both are graded, and management escalates with severity under specialist centre protocols, with close neurological and haemodynamic monitoring throughout.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Toxicity",
+     "Typical features",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "Cytokine release syndrome",
+      "Fever, hypotension, hypoxia",
+      "Graded; escalate supportive care per protocol"
+     ],
+     [
+      "ICANS",
+      "Confusion, aphasia, seizures",
+      "Serial neurological checks; escalate by grade"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_0541c95a51ed",
+  "q_1744142a667f",
+  "q_d8799185acfd"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Dennis Kasper et al.)",
+  "Hoffman Hematology: Basic Principles and Practice (Ronald Hoffman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 41
+ }
+}

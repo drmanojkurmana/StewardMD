@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "ort-splints-implants",
+ "subject": "orthopaedics",
+ "title": "Splints, traction, casts and implants",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Non-plaster splints have named uses. The **Cock-up splint** treats radial nerve palsy, the **knuckle-bender splint** treats ulnar nerve palsy, and the **Aeroplane splint** supports the arm in brachial plexus palsy. The **Denis Browne splint** is used for clubfoot, and the **toe-raising splint** for foot drop.",
+   "say": "Non-plaster splints have named uses. The Cock-up splint treats radial nerve palsy, the knuckle-bender splint treats ulnar nerve palsy, and the Aeroplane splint supports the arm in brachial plexus palsy. The Denis Browne splint is used for clubfoot, and the toe-raising splint for foot drop.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Splint",
+     "Clinical use"
+    ],
+    "rows": [
+     [
+      "Cock-up",
+      "Radial nerve palsy"
+     ],
+     [
+      "Knuckle-bender",
+      "Ulnar nerve palsy"
+     ],
+     [
+      "Aeroplane",
+      "Brachial plexus palsy"
+     ],
+     [
+      "Denis Browne",
+      "Clubfoot"
+     ],
+     [
+      "Toe-raising",
+      "Foot drop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Traction is either **skin traction**, which carries only about 3 to 5 kg, or **skeletal traction**, where a pin or K-wire is placed through bone, behind the tibial tubercle or through the calcaneum, and can carry up to about 20 kg. **Fixed traction** pulls against a fixed point such as a Thomas splint. **Balanced traction** uses pulleys and weights, as in the Hamilton Russell and Gallows systems.",
+   "say": "Traction is either skin traction, which carries only about 3 to 5 kilograms, or skeletal traction, where a pin or K-wire passes through bone and can carry up to about 20 kilograms. Fixed traction pulls against a fixed point such as a Thomas splint. Balanced traction uses pulleys and weights, as in the Hamilton Russell and Gallows systems.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Skin traction"
+     },
+     {
+      "id": "b",
+      "label": "Skeletal traction"
+     },
+     {
+      "id": "c",
+      "label": "Fixed traction"
+     },
+     {
+      "id": "d",
+      "label": "Balanced traction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "more load"
+     ],
+     [
+      "c",
+      "d",
+      "pulleys and weights"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tension band wiring converts distraction forces into compression. It suits the **patella**, **olecranon** and medial malleolus, and is the treatment of choice for a displaced transverse patellar fracture. The Kuntscher nail is a cloverleaf intramedullary nail for femoral shaft fractures, but the **interlocking nail** has largely replaced it. The **Ilizarov fixator** handles infected non-union with shortening.",
+   "say": "Tension band wiring converts distraction forces into compression. It suits the patella, olecranon and medial malleolus, and is the treatment of choice for a displaced transverse patellar fracture. The Kuntscher nail is a cloverleaf intramedullary nail for femoral shaft fractures, but the interlocking nail has largely replaced it. The Ilizarov fixator handles infected non-union with shortening.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tension band wiring",
+     "points": [
+      "Converts distraction to compression",
+      "Patella and olecranon",
+      "Dynamic compression"
+     ]
+    },
+    "right": {
+     "title": "Ilizarov fixator",
+     "points": [
+      "Infected non-union with shortening",
+      "Distraction at about 1 mm per day",
+      "Allows bone transport"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **locking compression plate** is mechanically superior to a conventional plate and suits osteoporotic bone, periarticular fractures and periprosthetic fractures. It does not cause periosteal necrosis and can also act as a compression plate. Vertebroplasty uses **polymethyl methacrylate** cement injected into vertebral bodies for painful osteoporotic compression fractures.",
+   "say": "The locking compression plate is mechanically superior to a conventional plate and suits osteoporotic bone, periarticular fractures and periprosthetic fractures. It does not cause periosteal necrosis and can also act as a compression plate. Vertebroplasty uses polymethyl methacrylate cement injected into vertebral bodies for painful osteoporotic compression fractures.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "99046035-1a17-4668-b2c8-8a12503ff249",
+  "3f7a9bc3-7c1b-490d-903d-3fff141798fe",
+  "5a48ad88-f9ec-4aa6-967e-8448d4eff930"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 4 in Watson-Jones Fractures and Joint Injuries (Court-Brown C)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 100
+ }
+}

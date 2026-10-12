@@ -1,0 +1,129 @@
+{
+ "v": 1,
+ "module": "bio-lipid-synthesis",
+ "subject": "biochemistry",
+ "title": "Fatty acid, triacylglycerol and cholesterol synthesis",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Fatty acid synthesis happens mainly in the **cytosol** of liver, lactating mammary gland and adipose tissue. Acetyl CoA cannot cross the inner mitochondrial membrane alone, so it leaves as **citrate** through the citrate shuttle. In the cytosol, citrate is cleaved back to acetyl CoA and oxaloacetate.",
+   "say": "Fatty acid synthesis happens mainly in the cytosol of liver, lactating mammary gland and adipose tissue. Acetyl CoA cannot cross the inner mitochondrial membrane alone, so it leaves as citrate through the citrate shuttle. In the cytosol, citrate is cleaved back to acetyl CoA and oxaloacetate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acetyl CoA (mito)"
+     },
+     {
+      "id": "b",
+      "label": "Citrate"
+     },
+     {
+      "id": "c",
+      "label": "Cytosol cleavage"
+     },
+     {
+      "id": "d",
+      "label": "Acetyl CoA (cytosol)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acetyl CoA carboxylase** (ACC) is the rate limiting enzyme of fatty acid synthesis. It needs **biotin** and converts acetyl CoA into **malonyl CoA**. Citrate activates it, while palmitoyl CoA and phosphorylation by AMP-activated protein kinase inhibit it. Glucagon acts through phosphorylation to switch it off.",
+   "say": "Acetyl CoA carboxylase is the rate limiting enzyme of fatty acid synthesis. It needs biotin and converts acetyl CoA into malonyl CoA. Citrate activates it, while palmitoyl CoA and phosphorylation by AMP-activated protein kinase inhibit it. Glucagon acts through phosphorylation to switch it off.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Modifier",
+     "Effect on ACC"
+    ],
+    "rows": [
+     [
+      "Citrate",
+      "Activates"
+     ],
+     [
+      "Palmitoyl CoA",
+      "Inhibits"
+     ],
+     [
+      "AMP-activated kinase phosphorylation",
+      "Inhibits"
+     ],
+     [
+      "Insulin",
+      "Activates via dephosphorylation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fatty acid synthase** is a multi-enzyme polypeptide complex. In mammals it is a dimer, and each monomer carries all seven activities. An acyl carrier protein holds the growing chain on a 4'-phosphopantetheine arm. The final product is **palmitate**, a C16 saturated acid, released by thioesterase. Each cycle uses two NADPH molecules.",
+   "say": "Fatty acid synthase is a multi-enzyme polypeptide complex. In mammals it is a dimer, and each monomer carries all seven activities. An acyl carrier protein holds the growing chain on a phosphopantetheine arm. The final product is palmitate, a sixteen carbon saturated acid, released by thioesterase. Each cycle uses two NADPH molecules.",
+   "vis": null
+  },
+  {
+   "tx": "**HMG CoA reductase** is the rate limiting enzyme of cholesterol synthesis. It converts HMG CoA to mevalonate. Statins block this enzyme. Insulin and thyroid hormone increase its activity, while cortisol and glucagon decrease it. Thyroid hormone also raises LDL receptor expression.",
+   "say": "HMG CoA reductase is the rate limiting enzyme of cholesterol synthesis. It converts HMG CoA to mevalonate. Statins block this enzyme. Insulin and thyroid hormone increase its activity, while cortisol and glucagon decrease it. Thyroid hormone also raises LDL receptor expression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cholesterol synthesis",
+     "points": [
+      "HMG CoA to mevalonate",
+      "Rate limiting step",
+      "Blocked by statins"
+     ]
+    },
+    "right": {
+     "title": "HMG CoA synthase and lyase",
+     "points": [
+      "Ketone body synthesis",
+      "HMG CoA synthase is rate limiting for ketogenesis",
+      "Thiolase shared in both routes"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "3039efbb-f11d-487e-aaaf-cd5ca83c8a34",
+  "d2187cc7-5c81-458f-82a9-366fa96782b3",
+  "1a655799-807d-42aa-8f26-db947dbfd41d"
+ ],
+ "src": [],
+ "refs": [
+  "Harper's Illustrated Biochemistry (Bender, Botham, Weil, Kennelly, Murray, Rodwell (Eds))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 266
+ }
+}

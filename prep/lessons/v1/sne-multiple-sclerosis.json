@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "sne-multiple-sclerosis",
+ "subject": "ss-neurology",
+ "title": "Multiple sclerosis: diagnosis and clinical features",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Multiple sclerosis** (MS) is a chronic immune-mediated demyelinating disease of the central nervous system. Diagnosis depends on **dissemination in space and time**, meaning lesions have appeared at separate moments and in different CNS locations. One isolated event or a few white matter spots on MRI are insufficient. No single test confirms it, so the **McDonald criteria** combine clinical, imaging and CSF findings.",
+   "say": "Multiple sclerosis is a chronic immune-mediated demyelinating disease of the central nervous system. Diagnosis depends on dissemination in space and time, meaning lesions have appeared at separate moments and in different parts of the central nervous system. One isolated event or a few white matter spots on MRI are insufficient. No single test confirms it, so the McDonald criteria combine clinical, imaging and cerebrospinal fluid findings.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Concept",
+     "What it means"
+    ],
+    "rows": [
+     [
+      "Dissemination in space",
+      "Lesions in two or more typical CNS regions"
+     ],
+     [
+      "Dissemination in time",
+      "New event or new lesion at a later date"
+     ],
+     [
+      "Clinically isolated syndrome",
+      "First demyelinating event, high MS risk"
+     ],
+     [
+      "Radiologically isolated syndrome",
+      "MRI lesions found incidentally, no symptoms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **clinically isolated syndrome** (CIS) is a single first demyelinating episode, often optic neuritis, that carries a high chance of later MS. A **radiologically isolated syndrome** (RIS) is an incidental finding of MS-type lesions on brain imaging in someone with no neurological symptoms. Typical first presentations include optic neuritis, sensory disturbance and limb weakness. Whether either label becomes MS depends on showing **dissemination in space and time** under the **McDonald criteria**.",
+   "say": "A clinically isolated syndrome is one first demyelinating episode, most often optic neuritis, and it carries a high chance of developing multiple sclerosis later. A radiologically isolated syndrome is found when a scan, ordered for another reason, shows MS-type lesions in someone with no neurological symptoms. Typical first presentations include optic neuritis, sensory disturbance and limb weakness. Whether either label becomes MS depends on showing dissemination in space and time under the McDonald criteria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Clinically isolated syndrome",
+     "Radiologically isolated syndrome"
+    ],
+    "rows": [
+     [
+      "Symptoms",
+      "Yes, one first demyelinating event",
+      "No neurological symptoms"
+     ],
+     [
+      "How found",
+      "Clinical presentation, such as optic neuritis",
+      "Incidental MRI finding"
+     ],
+     [
+      "Risk of MS",
+      "High",
+      "Raised, requires monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When reading an MS scan, the **pattern** of lesions matters as much as their presence. **Dawson fingers** are ovoid plaques aligned at right angles to the lateral ventricles, mirroring inflammation centred on veins. Plaques larger than 6 mm in the callosum, periventricular regions, brainstem, cerebellum or cord carry extra weight. A **central vein sign** on T2* imaging adds support. Cerebrospinal fluid testing looks for **oligoclonal bands** present locally but missing from matched serum.",
+   "say": "When reading an MS scan, the pattern of lesions matters as much as their presence. Dawson fingers are ovoid plaques aligned at right angles to the lateral ventricles, mirroring inflammation centred on veins. Plaques larger than 6 mm in the callosum, periventricular regions, brainstem, cerebellum or spinal cord carry extra weight. A central vein sign on susceptibility imaging adds support. In the cerebrospinal fluid, look for oligoclonal bands present locally but missing from matched serum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MRI clues",
+     "points": [
+      "Ovoid plaques aligned to ventricles",
+      "Plaques over 6 mm in key sites",
+      "Central vein sign on T2*"
+     ]
+    },
+    "right": {
+     "title": "CSF findings",
+     "points": [
+      "Two or more oligoclonal bands",
+      "Bands absent from paired serum",
+      "Found in over 90% of patients"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lhermitte's symptom** is an electric shock sensation down the spine or limbs on neck flexion. It is not specific to MS and also occurs in cervical spondylosis. **Uhthoff's phenomenon** is transient worsening with raised core temperature, from heat, exercise or fever, due to temperature-dependent conduction block. It is a pseudo-relapse, so glucocorticoids are inappropriate.",
+   "say": "Lhermitte's symptom is an electric shock sensation down the spine or limbs on neck flexion. It is not specific to MS and also occurs in cervical spondylosis. Uhthoff's phenomenon is transient worsening with raised core temperature, from heat, exercise or fever, due to temperature-dependent conduction block. It is a pseudo-relapse, so glucocorticoids are inappropriate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rise in core temperature"
+     },
+     {
+      "id": "b",
+      "label": "Conduction block in demyelinated axons"
+     },
+     {
+      "id": "c",
+      "label": "Transient worsening"
+     },
+     {
+      "id": "d",
+      "label": "Recovery on cooling, no steroids"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Course types are **relapsing-remitting MS** (RRMS, about 90%), **secondary progressive MS** (SPMS, from RRMS) and **primary progressive MS** (PPMS, about 10%). Disability is graded by the **Expanded Disability Status Scale** (EDSS). An EDSS of 4 or more with a motor functional status score of 2 or more supports SPMS. Disability accumulates mainly through progression independent of relapse (PIRA).",
+   "say": "Course types are relapsing-remitting MS, about 90 percent of cases, secondary progressive MS, which evolves from relapsing disease, and primary progressive MS, about 10 percent. Disability is graded by the Expanded Disability Status Scale. An EDSS of 4 or more with a motor functional status score of 2 or more supports secondary progressive disease. Disability accumulates mainly through progression independent of relapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Share",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "RRMS",
+      "About 90%",
+      "Attacks with recovery"
+     ],
+     [
+      "SPMS",
+      "From RRMS",
+      "Gradual worsening"
+     ],
+     [
+      "PPMS",
+      "About 10%",
+      "Progressive from onset"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For a true **relapse**, give high-dose intravenous methylprednisolone once infection and fever are excluded. Confirm new activity with contrast MRI of brain and spine. If steroid-refractory, plasma exchange is the standard next step. Pseudo-relapse from heat or infection needs treating the trigger, not steroids.",
+   "say": "For a true relapse, give high-dose intravenous methylprednisolone once infection and fever are excluded. Confirm new activity with contrast MRI of brain and spine. If the patient is steroid refractory, plasma exchange is the standard next step. A pseudo-relapse from heat or infection needs treatment of the trigger, not steroids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected relapse"
+     },
+     {
+      "id": "b",
+      "label": "Exclude infection or fever"
+     },
+     {
+      "id": "c",
+      "label": "IV methylprednisolone"
+     },
+     {
+      "id": "d",
+      "label": "Plasma exchange if refractory"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "no response"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_e0a644e4eec8",
+  "q_e808cee84827",
+  "q_c8fe51d1ca34"
+ ],
+ "src": [
+  "kb-diseases-ms"
+ ],
+ "refs": [
+  "McDonald criteria 2017 revisions (Thompson et al., Lancet Neurology)",
+  "NICE guideline on multiple sclerosis in adults (NG220)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 899,
+  "itemN": 42
+ }
+}

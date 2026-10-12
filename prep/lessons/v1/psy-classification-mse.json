@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "psy-classification-mse",
+ "subject": "psychiatry",
+ "title": "Classification and mental status examination",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Psychiatric diagnosis rests on a **classification system**. The WHO **ICD-10** codes all diseases, and its mental disorders sit in chapter V with an F code. The current WHO edition is **ICD-11**, released in 2018. The APA's **DSM-5-TR** is used mainly in the United States and codes mental disorders only. Indian exams expect ICD first, with DSM labelled as the American system.",
+   "say": "Psychiatric diagnosis rests on a classification system. The WHO ICD-10 codes all diseases, and its mental disorders sit in chapter five with an F code. The current WHO edition is ICD-11, released in 2018. The American Psychiatric Association's DSM-5-TR is used mainly in the United States and codes mental disorders only. Indian exams expect ICD first, with DSM labelled as the American system.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Code block",
+     "Category"
+    ],
+    "rows": [
+     [
+      "F00-F09",
+      "Organic, including symptomatic"
+     ],
+     [
+      "F10-F19",
+      "Substance use"
+     ],
+     [
+      "F20-F29",
+      "Schizophrenia and delusional"
+     ],
+     [
+      "F30-F39",
+      "Mood disorders"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **mental status examination** is a structured observation of the patient. It covers general appearance, behaviour, speech, **mood and affect**, thought, perception, cognition, insight and **judgement**. Cognition includes orientation, attention, concentration and memory. Tests such as the digit span and **serial subtraction** check working memory, not long term memory.",
+   "say": "The mental status examination is a structured observation of the patient. It covers general appearance, behaviour, speech, mood and affect, thought, perception, cognition, insight and judgement. Cognition includes orientation, attention, concentration and memory. Tests such as the digit span and serial subtraction check working memory, not long term memory.",
+   "vis": null
+  },
+  {
+   "tx": "**Insight** is the patient's awareness of their own illness. It is graded on a six point scale, from complete denial of illness at level one to true emotional insight at level six. **Judgement** is the capacity to make sound decisions and act on them. It is tested with hypothetical situations, such as seeing a house on fire, and is called test judgement.",
+   "say": "Insight is the patient's awareness of their own illness. It is graded on a six point scale, from complete denial of illness at level one to true emotional insight at level six. Judgement is the capacity to make sound decisions and act on them. It is tested with hypothetical situations, such as seeing a house on fire, and is called test judgement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "1",
+      "Complete denial of illness"
+     ],
+     [
+      "3",
+      "Aware sick, blames external factors"
+     ],
+     [
+      "5",
+      "Intellectual insight"
+     ],
+     [
+      "6",
+      "True emotional insight"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Psychosis involves a **gross impairment in reality testing**, with delusions and hallucinations and loss of insight. Neurosis keeps contact with reality, preserves insight and judgement, and causes subjective distress. Examples of neurotic disorders are phobia, panic, generalised anxiety, obsessive compulsive and dissociative or conversion disorders. Major psychoses include schizophrenia, mood disorders and delusional disorder.",
+   "say": "Psychosis involves a gross impairment in reality testing, with delusions and hallucinations and loss of insight. Neurosis keeps contact with reality, preserves insight and judgement, and causes subjective distress. Examples of neurotic disorders are phobia, panic, generalised anxiety, obsessive compulsive and dissociative or conversion disorders. Major psychoses include schizophrenia, mood disorders and delusional disorder.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Psychosis",
+     "points": [
+      "Loss of reality contact",
+      "Delusions and hallucinations",
+      "Insight lost",
+      "Personality disturbed"
+     ]
+    },
+    "right": {
+     "title": "Neurosis",
+     "points": [
+      "Reality contact kept",
+      "Insight preserved",
+      "Judgement preserved",
+      "Subjective distress"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Organic disorders, such as delirium, are suspected when there is **clouding of consciousness**, disorientation, memory loss or impaired attention. Schizophrenia keeps consciousness intact. Stupor is a state of mutism and akinesis in which the patient can still be roused by vigorous stimuli. Oneiroid state and twilight state are different entities, so do not confuse them with stupor.",
+   "say": "Organic disorders, such as delirium, are suspected when there is clouding of consciousness, disorientation, memory loss or impaired attention. Schizophrenia keeps consciousness intact. Stupor is a state of mutism and akinesis in which the patient can still be roused by vigorous stimuli. Oneiroid state and twilight state are different entities, so do not confuse them with stupor.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "628f5eda-e8c3-4332-afa7-a9970a22f84e",
+  "762a8cdb-ea0b-4e55-a4f9-1b9c1996158e",
+  "04010c92-232b-4e9d-a84a-58203a2e65f2"
+ ],
+ "src": [],
+ "refs": [
+  "ICD-10 Classification of Mental and Behavioural Disorders, World Health Organization, Geneva, 1992"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 97
+ }
+}

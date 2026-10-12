@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "sgm-geriatric-syndromes",
+ "subject": "ss-general-medicine",
+ "title": "Geriatric Syndromes: Key High-Yield Concepts",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Geriatric syndromes are multifactorial conditions common in older adults that do not fit neatly into single organ diseases. Examples include **urinary incontinence**, **pressure injuries**, **syncope**, **immobility**, **hearing impairment**, and **malnutrition**. Recognising them early prevents disability and loss of independence, and they are frequently tested in NEET-PG and INI-CET.",
+   "say": "Geriatric syndromes are multifactorial conditions common in older adults that do not fit neatly into single organ diseases. Examples include urinary incontinence, pressure injuries, syncope, immobility, hearing impairment, and malnutrition. Recognising them early prevents disability and loss of independence, and they are frequently tested in NEET-PG and INI-CET.",
+   "vis": null
+  },
+  {
+   "tx": "Urinary incontinence has several types, and the classification guides treatment. **Stress incontinence** is the most common form, with leakage on coughing, sneezing or lifting. **Urge incontinence** follows a sudden, strong desire to void. **Overflow incontinence** results from bladder overdistension and is the physically dangerous type, because backpressure can damage the kidneys. A **voiding diary** is the first-line tool to characterise episodes.",
+   "say": "Urinary incontinence has several types, and the classification guides treatment. Stress incontinence is the most common form, with leakage on coughing, sneezing or lifting. Urge incontinence follows a sudden, strong desire to void. Overflow incontinence results from bladder overdistension and is the physically dangerous type, because backpressure can damage the kidneys. A voiding diary is the first-line tool to characterise episodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Typical trigger",
+     "Key concern"
+    ],
+    "rows": [
+     [
+      "Stress",
+      "Cough, sneeze, lift",
+      "Most common form"
+     ],
+     [
+      "Urge",
+      "Sudden strong desire",
+      "Overactive bladder"
+     ],
+     [
+      "Overflow",
+      "Overdistension, dribbling",
+      "Renal damage risk"
+     ],
+     [
+      "Mixed",
+      "Both stress and urge",
+      "Needs combined care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pressure injuries arise when sustained load compresses tissue over bony prominences such as the sacrum, reducing blood flow and causing focal ischaemia. Deep tissue damage can begin beneath intact skin, so a **non-blanchable erythema** is an important early sign. The **Braden scale** rates **pressure injury risk** across six domains, including sensory perception, moisture, activity, mobility, nutrition and friction or shear. Low total scores signal higher risk and prompt preventive care.",
+   "say": "Pressure injuries arise when sustained load squeezes tissue over bony prominences such as the sacrum, cutting off blood flow and causing focal ischaemia. Damage can start deep within the tissue while the skin still looks intact, so a non-blanchable erythema is an important early sign. The Braden scale rates pressure injury risk across six areas: sensory perception, moisture, activity, mobility, nutrition, and friction or shear. The lower the total, the higher the risk, and a low total should prompt preventive care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sustained pressure"
+     },
+     {
+      "id": "b",
+      "label": "Focal ischaemia"
+     },
+     {
+      "id": "c",
+      "label": "Tissue hypoxia and necrosis"
+     },
+     {
+      "id": "d",
+      "label": "Pressure ulcer"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Syncope in the elderly often arises from **carotid sinus hypersensitivity**, where pressure on the carotid sinus triggers bradycardia or hypotension. Carotid sinus massage is performed only after excluding carotid bruits and recent stroke. Other causes include postural hypotension and arrhythmias. Immobility and falls increase morbidity, and **fragility fracture**, a fracture from a fall at standing height, signals osteoporosis needing treatment.",
+   "say": "Syncope in the elderly often arises from carotid sinus hypersensitivity, where pressure on the carotid sinus triggers bradycardia or hypotension. Carotid sinus massage is performed only after excluding carotid bruits and recent stroke. Other causes include postural hypotension and arrhythmias. Immobility and falls increase morbidity, and fragility fracture, a fracture from a fall at standing height, signals osteoporosis needing treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Hearing impairment and malnutrition are common and reversible contributors to frailty. The **Mini Nutritional Assessment** screens older adults for malnutrition using anthropometry, dietary questions and global assessment. Hearing loss should be checked with simple tests and referred for audiometry and hearing aids. Elder abuse is suspected when the companion controls answers, so the clinician should interview the patient alone to allow safe disclosure.",
+   "say": "Hearing impairment and malnutrition are common and reversible contributors to frailty. The Mini Nutritional Assessment screens older adults for malnutrition using anthropometry, dietary questions and global assessment. Hearing loss should be checked with simple tests and referred for audiometry and hearing aids. Elder abuse is suspected when the companion controls answers, so the clinician should interview the patient alone to allow safe disclosure.",
+   "vis": null
+  },
+  {
+   "tx": "**Advance care planning** lets patients state their preferences for future care while they still have capacity, and it should be revisited as dementia progresses. Discussions cover goals, values and surrogate decision makers. Guidance on this varies, so clinicians should follow local legal frameworks in India and note that advance directives are a legally recognised route to respecting autonomy.",
+   "say": "Advance care planning lets patients state their preferences for future care while they still have capacity, and it should be revisited as dementia progresses. Discussions cover goals, values and surrogate decision makers. Guidance on this varies, so clinicians should follow local legal frameworks in India and note that advance directives are a legally recognised route to respecting autonomy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_0eaeb72ba81f",
+  "q_6a5028d19fd1",
+  "q_752d8e91941d"
+ ],
+ "src": [],
+ "refs": [
+  "Mini Nutritional Assessment (Nestle Nutrition Institute) guidance",
+  "Braden Scale for Predicting Pressure Sore Risk (Bergstrom et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 5
+ }
+}

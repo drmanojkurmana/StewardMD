@@ -1,0 +1,162 @@
+{
+ "v": 1,
+ "module": "phy-rbc-haemoglobin",
+ "subject": "physiology",
+ "title": "Plasma proteins, red cells and haemoglobin: core physiology for NEET-PG and USMLE",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Plasma proteins are mostly made by the liver. **Albumin** is the most abundant and it is the main contributor to **colloid osmotic (oncotic) pressure**, which holds water in the circulation. Oncotic pressure depends on the number of molecules, not their mass. Albumin has a low molecular weight and high concentration, so it contributes most. Normal plasma oncotic pressure is about 28 mm Hg.",
+   "say": "Plasma proteins are mostly made by the liver. Albumin is the most abundant, and it is the main contributor to colloid osmotic, also called oncotic, pressure, which holds water in the circulation. Oncotic pressure depends on the number of molecules, not their mass. Albumin has a low molecular weight and a high concentration, so it contributes most. Normal plasma oncotic pressure is about 28 mm Hg.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Protein",
+     "Oncotic role",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Albumin",
+      "Major contributor",
+      "Low molecular weight, high concentration"
+     ],
+     [
+      "Globulins",
+      "Minor contributor",
+      "Higher molecular weight"
+     ],
+     [
+      "Fibrinogen",
+      "Minor contributor",
+      "Large molecule, low number"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Red cells are biconcave discs. This shape gives a **large surface area to volume ratio**, which speeds gas exchange. The shape also lets the cell squeeze through small capillaries and change volume without rupturing. The membrane skeleton, made of **spectrin**, **ankyrin** and **band 3**, gives flexibility. Defects in these proteins cause spherocytosis.",
+   "say": "Red cells are biconcave discs. This shape gives a large surface area to volume ratio, which speeds gas exchange. The shape also lets the cell squeeze through small capillaries and change volume without rupturing. The membrane skeleton, made of spectrin, ankyrin and band 3, gives flexibility. Defects in these proteins cause spherocytosis.",
+   "vis": null
+  },
+  {
+   "tx": "Erythropoietin is a glycoprotein. In adults about 85 percent comes from the **kidney**, from interstitial cells of the peritubular capillary bed, and about 15 percent from the liver. The only key physiological stimulus is **hypoxia**, meaning low tissue oxygen tension. Fetal erythropoietin is made in the liver in early gestation and shifts to the kidney after birth.",
+   "say": "Erythropoietin is a glycoprotein. In adults about 85 percent comes from the kidney, from interstitial cells of the peritubular capillary bed, and about 15 percent from the liver. The only key physiological stimulus is hypoxia, meaning low tissue oxygen tension. Fetal erythropoietin is made in the liver in early gestation and shifts to the kidney after birth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tissue hypoxia"
+     },
+     {
+      "id": "b",
+      "label": "Kidney EPO release"
+     },
+     {
+      "id": "c",
+      "label": "Marrow stimulated"
+     },
+     {
+      "id": "d",
+      "label": "More red cells"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Erythropoiesis shifts sites with age. In the yolk sac first, then the **liver** and spleen in mid-gestation, then **red bone marrow** from late gestation onward. After about 20 years, marrow in long bones becomes fatty and red production shifts to flat bones such as vertebrae, sternum, ribs and ilia. A normal erythroid cycle takes about 7 days in marrow.",
+   "say": "Erythropoiesis shifts sites with age. It starts in the yolk sac, then moves to the liver and spleen in mid-gestation, then to red bone marrow from late gestation onward. After about 20 years, marrow in long bones becomes fatty, and red production shifts to flat bones such as vertebrae, sternum, ribs and ilia. A normal erythroid cycle takes about 7 days in marrow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Period",
+     "Main site"
+    ],
+    "rows": [
+     [
+      "Early embryo",
+      "Yolk sac"
+     ],
+     [
+      "Mid gestation",
+      "Liver, spleen"
+     ],
+     [
+      "Late gestation to 20 years",
+      "Bone marrow of long and flat bones"
+     ],
+     [
+      "After 20 years",
+      "Flat bones of axial skeleton"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal haemoglobin, **HbF** (alpha2 gamma2), has a higher oxygen affinity than adult HbA. The reason is that HbF binds **2,3-DPG** poorly, not that DPG levels are low. The curve is therefore shifted left. Switchover from fetal to adult synthesis begins around 36 weeks of gestation. Normal adult HbA2 is alpha2 delta2 and is about 2.5 percent of total haemoglobin.",
+   "say": "Fetal haemoglobin, HbF, alpha2 gamma2, has a higher oxygen affinity than adult HbA. The reason is that HbF binds 2,3-DPG poorly, not that DPG levels are low. The curve is therefore shifted left. Switchover from fetal to adult synthesis begins around 36 weeks of gestation. Normal adult HbA2 is alpha2 delta2 and is about 2.5 percent of total haemoglobin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HbF",
+     "points": [
+      "Alpha2 gamma2",
+      "Weak 2,3-DPG binding",
+      "Left shifted curve",
+      "Dominant at birth"
+     ]
+    },
+    "right": {
+     "title": "HbA",
+     "points": [
+      "Alpha2 beta2",
+      "Normal 2,3-DPG binding",
+      "Right shifted than HbF",
+      "Main adult form"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "2f28531b-2eac-47fe-9f19-1c96703d1a3c",
+  "991e4708-70f0-4eaf-a67f-109b757d0d27",
+  "e23d622e-e33c-426a-9301-21ab195e986d"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Ganong's Review of Medical Physiology",
+  "Harrison's Principles of Internal Medicine (Longo et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 182
+ }
+}

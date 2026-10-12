@@ -1,0 +1,156 @@
+{
+ "v": 1,
+ "module": "sid-non-beta-lactams",
+ "subject": "ss-infectious-diseases",
+ "title": "Glycopeptides, daptomycin, linezolid and other antibacterials: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Enterococci cause serious bloodstream and endocardial infections, and **E. faecium** carries the worst prognosis because it is often resistant to ampicillin and vancomycin. Start by identifying the species and testing ampicillin, vancomycin and high-level aminoglycoside resistance. Confirm vancomycin resistance by detecting **vanA or vanB** genes.",
+   "say": "Enterococci cause serious bloodstream and heart valve infections. E. faecium carries the worst prognosis, because it is often resistant to ampicillin and vancomycin. Start by identifying the species and testing ampicillin, vancomycin and high-level aminoglycoside resistance. Confirm vancomycin resistance by detecting vanA or vanB genes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Preferred approach"
+    ],
+    "rows": [
+     [
+      "Endocarditis, no high-level aminoglycoside resistance",
+      "Ampicillin plus ceftriaxone, or a penicillin with an aminoglycoside"
+     ],
+     [
+      "Vancomycin-resistant E. faecium",
+      "Linezolid, tedizolid or daptomycin per susceptibility"
+     ],
+     [
+      "Alternatives when other agents fail",
+      "Oritavancin, tigecycline, eravacycline, chloramphenicol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Daptomycin** is a lipopeptide that depolarises the bacterial cell membrane, causing rapid cell death against susceptible gram-positive organisms. It is inactivated by pulmonary surfactant, so it must never be used for pneumonia. Renal impairment prolongs its half-life, and dosing interval is extended to every 48 hours when creatinine clearance falls below 30 mL/min.",
+   "say": "Daptomycin is a lipopeptide that depolarises the bacterial cell membrane, causing rapid cell death against susceptible gram-positive organisms. It is inactivated by pulmonary surfactant, so it must never be used for pneumonia. Renal impairment prolongs its half-life, and the dosing interval is extended to every 48 hours when creatinine clearance falls below 30 mL/min.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Daptomycin uses",
+     "points": [
+      "Bacteraemia and endocarditis",
+      "Complicated skin infection",
+      "Bone and joint infection",
+      "Vancomycin-resistant E. faecium"
+     ]
+    },
+    "right": {
+     "title": "Daptomycin cautions",
+     "points": [
+      "Never for pneumonia",
+      "Monitor CPK weekly beyond one week",
+      "Pause or review statins",
+      "Eosinophilic pneumonia, rare"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Daptomycin myopathy is the key toxicity. If CPK rises above five times the upper limit of normal with symptoms, **stop daptomycin**. Check CPK weekly for courses longer than one week, and pause the statin during therapy. Use an elastomeric pump with caution, since it can leach **2-mercaptobenzothiazole** into the drug solution. Do not shake the vial vigorously.",
+   "say": "Daptomycin myopathy is the key toxicity. If CPK rises above five times the upper limit of normal with symptoms, stop daptomycin. Check CPK weekly for courses longer than one week, and pause the statin during therapy. Use an elastomeric pump with caution, since it can leach 2-mercaptobenzothiazole into the drug solution. Do not shake the vial vigorously.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Muscle pain or weakness"
+     },
+     {
+      "id": "b",
+      "label": "Check CPK"
+     },
+     {
+      "id": "c",
+      "label": "CPK over 5 times ULN"
+     },
+     {
+      "id": "d",
+      "label": "Stop daptomycin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Linezolid** is an oxazolidinone that blocks 70S initiation by binding the 23S rRNA of the 50S subunit, so it is bacteriostatic. It is a nonselective MAO inhibitor, so avoid serotonergic drugs and pseudoephedrine. Watch for myelosuppression, so check a weekly complete blood count, and for optic or peripheral neuropathy after 28 days. Oral bioavailability is near 100 percent.",
+   "say": "Linezolid is an oxazolidinone that blocks 70S initiation by binding the 23S rRNA of the 50S subunit, so it is bacteriostatic. It is a nonselective MAO inhibitor, so avoid serotonergic drugs and pseudoephedrine. Watch for myelosuppression, so check a weekly complete blood count, and for optic or peripheral neuropathy after 28 days. Oral bioavailability is near 100 percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adverse effect",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Serotonin syndrome",
+      "Avoid SSRIs; treat with benzodiazepines, cooling, cyproheptadine"
+     ],
+     [
+      "Myelosuppression",
+      "Weekly CBC; filgrastim helps severe neutropenia"
+     ],
+     [
+      "Optic or peripheral neuropathy",
+      "Risk rises beyond 28 days of therapy"
+     ],
+     [
+      "Hypertensive crisis",
+      "Avoid pseudoephedrine and tyramine-rich foods"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vancomycin** inhibits peptidoglycan polymerisation by binding D-alanyl-D-alanine. Systemic doses should run over at least 60 minutes; if flushing occurs, slow the infusion rather than stopping. Oral vancomycin is poorly absorbed and is used for **Clostridioides difficile** colitis, and needs no renal adjustment. In fluid-restricted patients, concentrations up to 10 mg/mL are acceptable.",
+   "say": "Vancomycin inhibits peptidoglycan polymerisation by binding D-alanyl-D-alanine. Systemic doses should run over at least 60 minutes; if flushing occurs, slow the infusion rather than stopping. Oral vancomycin is poorly absorbed and is used for Clostridioides difficile colitis, and needs no renal adjustment. In fluid-restricted patients, concentrations up to 10 mg/mL are acceptable.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_30a32358bd57",
+  "q_d84f08c05b7a",
+  "q_092fd7959309"
+ ],
+ "src": [
+  "kb-reference-enterococcal-infections"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 328,
+  "itemN": 47
+ }
+}

@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "module": "srd-chest-focal",
+ "subject": "ss-radiology",
+ "title": "Pulmonary tuberculosis: pathogenesis, forms and diagnosis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Mycobacterium tuberculosis** is an aerobic **acid-fast bacillus** whose waxy, mycolic-acid-rich wall resists staining and limits drug entry. Transmission occurs through airborne droplet nuclei from a person with infectious pulmonary or laryngeal disease. Cavitary cases are the most infectious, shedding very high bacillary loads into sputum.",
+   "say": "Mycobacterium tuberculosis is an aerobic acid-fast bacillus. Its waxy, mycolic-acid-rich wall resists staining and limits drug entry. Transmission occurs through airborne droplet nuclei from a person with infectious pulmonary or laryngeal disease. Cavitary cases are the most infectious, shedding very high bacillary loads into sputum.",
+   "vis": null
+  },
+  {
+   "tx": "Inhaled bacilli are engulfed by **alveolar macrophages**, which fail to fuse the phagosome with lysosomes, so the organism replicates. Around two to four weeks, **cell-mediated immunity** (CD4 T cells releasing interferon-gamma) forms granulomas with central caseous necrosis. Only about 10 percent of immunocompetent infected people develop active disease in their lifetime.",
+   "say": "Inhaled bacilli are engulfed by alveolar macrophages, which fail to fuse the phagosome with lysosomes, so the organism replicates. Around two to four weeks, cell-mediated immunity, driven by CD4 T cells releasing interferon-gamma, forms granulomas with central caseous necrosis. Only about 10 percent of immunocompetent infected people develop active disease in their lifetime.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inhaled bacilli"
+     },
+     {
+      "id": "b",
+      "label": "Alveolar macrophage"
+     },
+     {
+      "id": "c",
+      "label": "Granuloma"
+     },
+     {
+      "id": "d",
+      "label": "Caseous necrosis"
+     },
+     {
+      "id": "e",
+      "label": "Cavitation if immunity weak"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pulmonary TB is split into **primary** disease, seen in middle or lower zones and common in children, and **postprimary (adult-type)** disease, typically apical or posterior upper-lobe cavitation. In HIV with CD4 below 200 per microlitre, the picture shifts to a primary-like pattern with diffuse infiltrates, little cavitation, effusion and intrathoracic adenopathy.",
+   "say": "Pulmonary TB is split into primary disease, seen in middle or lower zones and common in children, and postprimary adult-type disease, typically apical or posterior upper-lobe cavitation. In HIV with CD4 below 200 per microlitre, the picture shifts to a primary-like pattern with diffuse infiltrates, little cavitation, effusion and intrathoracic adenopathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Postprimary",
+     "Primary or low CD4 HIV"
+    ],
+    "rows": [
+     [
+      "Site",
+      "Upper lobes",
+      "Middle or lower zones"
+     ],
+     [
+      "Cavitation",
+      "Common",
+      "Little or none"
+     ],
+     [
+      "Nodes",
+      "Usually absent",
+      "Intrathoracic adenopathy"
+     ],
+     [
+      "Typical group",
+      "Adults, immunocompetent",
+      "Children, advanced HIV"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confirm before treating. **Xpert MTB/RIF** is the WHO first-line test: it detects **Mycobacterium tuberculosis** and **rifampicin** resistance in under two hours, with about 85 percent pulmonary sensitivity and 98 percent specificity. **Sputum smear microscopy** alone cannot tell tuberculosis apart from other mycobacteria, so empirical **antitubercular therapy** should usually wait for microbiological proof.",
+   "say": "Confirm before treating. The Xpert MTB/RIF test, the WHO first-line option, identifies Mycobacterium tuberculosis and rifampicin resistance in under two hours, with about 85 percent pulmonary sensitivity and 98 percent specificity. Sputum smear microscopy alone cannot tell tuberculosis apart from other mycobacteria, so empirical antitubercular therapy should usually wait for microbiological proof.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Strength",
+     "Limitation"
+    ],
+    "rows": [
+     [
+      "Xpert MTB/RIF",
+      "Rapid, also detects rifampicin resistance",
+      "Lower sensitivity in smear-negative disease"
+     ],
+     [
+      "Sputum AFB smear",
+      "Quick and inexpensive",
+      "Cannot separate M. tuberculosis from other mycobacteria"
+     ],
+     [
+      "Culture",
+      "Confirms the organism",
+      "Slow turnaround time"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tuberculin skin test and **interferon-gamma release assays** such as QuantiFERON or T-SPOT detect infection, not active disease, and cannot predict who will progress. Non-tuberculous mycobacteria, lung cancer and chronic aspergilloma mimic TB, so a persistent upper-lobe cavity should prompt bronchoscopy or biopsy and cultures before labelling it TB.",
+   "say": "Tuberculin skin test and interferon-gamma release assays such as QuantiFERON or T-SPOT detect infection, not active disease, and cannot predict who will progress. Non-tuberculous mycobacteria, lung cancer and chronic aspergilloma mimic TB, so a persistent upper-lobe cavity should prompt bronchoscopy or biopsy and cultures before labelling it TB.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tests for infection",
+     "points": [
+      "Tuberculin skin test",
+      "IGRA QuantiFERON or T-SPOT",
+      "Cannot show active disease",
+      "Poor prediction of progression"
+     ]
+    },
+    "right": {
+     "title": "Mimics of TB",
+     "points": [
+      "Non-tuberculous mycobacteria",
+      "Lung cancer",
+      "Chronic aspergilloma",
+      "Lung abscess"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Classify resistance, because it changes the regimen. **MDR-TB** means resistance to at least isoniazid and the other core first-line agent. **Pre-XDR-TB** adds fluoroquinolone resistance, while **XDR-TB** adds resistance to another group A agent, for example bedaquiline or linezolid. Smear-positive cavitary disease is the most infectious form and needs prompt action.",
+   "say": "Classify resistance, because it changes the regimen. MDR-TB means resistance to at least isoniazid and the other core first-line agent. Pre-XDR-TB adds fluoroquinolone resistance, while XDR-TB adds resistance to another group A agent, for example bedaquiline or linezolid. Smear-positive cavitary disease is the most infectious form and needs prompt action.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Defining resistance"
+    ],
+    "rows": [
+     [
+      "MDR-TB",
+      "Isoniazid plus the other core first-line agent"
+     ],
+     [
+      "Pre-XDR-TB",
+      "MDR plus fluoroquinolone resistance"
+     ],
+     [
+      "XDR-TB",
+      "Pre-XDR plus resistance to a group A agent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Untreated TB is often fatal, but timely drug-susceptible treatment cures most patients. Survivors may keep **post-TB lung disease**: airflow obstruction, bronchiectasis, pulmonary hypertension and residual cavities that can later host an aspergilloma. Ensure treatment completion and check for HIV, since antiretroviral timing and drug interactions matter.",
+   "say": "Untreated TB is often fatal, but timely drug-susceptible treatment cures most patients. Survivors may keep post-TB lung disease, with airflow obstruction, bronchiectasis, pulmonary hypertension and residual cavities that can later host an aspergilloma. Ensure treatment completion and check for HIV, since antiretroviral timing and drug interactions matter.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-diseases-pulmonary-tb"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Jameson et al.)",
+  "Indian national TB guidelines (RNTCP/NTEP)",
+  "WHO consolidated guidelines on tuberculosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 900,
+  "itemN": 0
+ }
+}

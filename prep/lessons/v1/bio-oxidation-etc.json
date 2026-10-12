@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "bio-oxidation-etc",
+ "subject": "biochemistry",
+ "title": "Biological oxidation, electron transport chain and free radicals",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Oxidation means **loss of electrons**, and reduction means gain of electrons. Reduced coenzymes such as NADH and FADH2 carry electrons from catabolism. These electrons pass along the **electron transport chain** (ETC) to oxygen, the terminal electron acceptor, forming water. The chain sits in the inner mitochondrial membrane, and its enzymes are embedded there. Energy released along the chain is captured to make ATP through oxidative phosphorylation.",
+   "say": "Oxidation means loss of electrons, and reduction means gain of electrons. Reduced coenzymes such as NADH and FADH2 carry electrons from catabolism. These electrons pass along the electron transport chain to oxygen, the terminal electron acceptor, forming water. The chain sits in the inner mitochondrial membrane, and its enzymes are embedded there. Energy released along the chain is captured to make ATP through oxidative phosphorylation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complex",
+     "Name",
+     "Entry or role"
+    ],
+    "rows": [
+     [
+      "I",
+      "NADH CoQ reductase",
+      "Receives NADH"
+     ],
+     [
+      "II",
+      "Succinate CoQ reductase",
+      "Receives FADH2 from succinate"
+     ],
+     [
+      "III",
+      "CoQ cytochrome c reductase",
+      "Passes electrons to cytochrome c"
+     ],
+     [
+      "IV",
+      "Cytochrome c oxidase",
+      "Reduces oxygen to water"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complex I, III and IV are **proton pumps**, moving protons into the intermembrane space. Complex II pumps no protons. Coenzyme Q is a mobile, non-protein carrier that accepts electrons from complexes I and II. Cytochrome c is a soluble carrier between complexes III and IV. The **cytochromes** are haem proteins, and cytochrome oxidase carries copper as well as iron.",
+   "say": "Complexes one, three and four are proton pumps, moving protons into the intermembrane space. Complex two pumps no protons. Coenzyme Q is a mobile, non-protein carrier that accepts electrons from complexes one and two. Cytochrome c is a soluble carrier between complexes three and four. The cytochromes are haem proteins, and cytochrome oxidase carries copper as well as iron.",
+   "vis": null
+  },
+  {
+   "tx": "**Chemiosmotic theory** links the proton gradient to ATP synthesis. ATP synthase, the F0F1 complex, lets protons flow back into the matrix. This drives a conformational change in F1 that makes ATP. **Oligomycin** blocks proton flow through Fo. **Atractyloside** blocks the ADP and ATP translocase. **Uncouplers** such as 2,4-dinitrophenol dissipate the gradient, so oxygen is used without ATP being made.",
+   "say": "Chemiosmotic theory links the proton gradient to ATP synthesis. ATP synthase, the F zero F one complex, lets protons flow back into the matrix. This drives a conformational change in F one that makes ATP. Oligomycin blocks proton flow through F zero. Atractyloside blocks the ADP and ATP translocase. Uncouplers such as 2,4-dinitrophenol dissipate the gradient, so oxygen is used without ATP being made.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inhibitors",
+     "points": [
+      "Oligomycin blocks Fo",
+      "Atractyloside blocks translocase",
+      "Rotenone blocks complex I",
+      "Barbiturates block complex I to CoQ"
+     ]
+    },
+    "right": {
+     "title": "Uncouplers",
+     "points": [
+      "2,4-dinitrophenol",
+      "Thyroid hormone at high levels",
+      "Unconjugated bilirubin",
+      "Thermogenin in brown fat"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Partial reduction of oxygen produces **reactive oxygen species**. Superoxide is formed by one electron transfer. Superoxide dismutase converts it to hydrogen peroxide. **Glutathione peroxidase** and catalase then remove peroxide. The hydroxyl radical is the most reactive species. During the respiratory burst, NADPH oxidase in phagocytes generates superoxide to kill microbes.",
+   "say": "Partial reduction of oxygen produces reactive oxygen species. Superoxide is formed by one electron transfer. Superoxide dismutase converts it to hydrogen peroxide. Glutathione peroxidase and catalase then remove peroxide. The hydroxyl radical is the most reactive species. During the respiratory burst, NADPH oxidase in phagocytes generates superoxide to kill microbes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Species",
+     "Handled by",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Superoxide",
+      "Superoxide dismutase",
+      "Formed by one electron"
+     ],
+     [
+      "Hydrogen peroxide",
+      "Catalase, glutathione peroxidase",
+      "Not a radical"
+     ],
+     [
+      "Hydroxyl radical",
+      "None specific",
+      "Most reactive"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "3edfa2fc-827e-45f4-807f-5646202d3038",
+  "2d7224a3-c352-4f96-86a4-9e17270cadb5",
+  "576c4a99-8430-4d9c-b76a-0e89253a10c7"
+ ],
+ "src": [],
+ "refs": [
+  "Harper's Illustrated Biochemistry",
+  "Textbook of Medical Biochemistry, Chatterjea and Shinde"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 279
+ }
+}

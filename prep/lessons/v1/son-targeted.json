@@ -1,0 +1,119 @@
+{
+ "v": 1,
+ "module": "son-targeted",
+ "subject": "ss-medical-oncology",
+ "title": "Small molecule targeted therapy: kinase inhibitors, resistance and toxicity",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Receptor tyrosine kinases (RTKs) are transmembrane receptors. Ligand binding causes **dimerisation**, then cross-phosphorylation of the cytoplasmic kinase domains. SH2 domains recognise these phosphotyrosine sites and recruit downstream signalling. Signal termination relies on **Cbl ubiquitin ligase**, which tags activated RTKs for endocytosis and lysosomal degradation. Negative feedback through juxtamembrane threonine phosphorylation by PKC and MAPK lowers EGFR ligand affinity.",
+   "say": "Receptor tyrosine kinases are transmembrane receptors. Ligand binding causes dimerisation, then cross phosphorylation of the cytoplasmic kinase domains. SH2 domains recognise these phosphotyrosine sites and recruit downstream signalling. Signal termination relies on Cbl ubiquitin ligase, which tags activated receptors for endocytosis and lysosomal degradation. Negative feedback through juxtamembrane threonine phosphorylation by PKC and MAPK lowers EGFR ligand affinity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ligand binds"
+     },
+     {
+      "id": "b",
+      "label": "Dimerisation"
+     },
+     {
+      "id": "c",
+      "label": "Autophosphorylation"
+     },
+     {
+      "id": "d",
+      "label": "SH2 recruitment"
+     },
+     {
+      "id": "e",
+      "label": "Cbl ubiquitination"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On-target toxicity reflects effective inhibition, not overdosing. EGFR inhibitors such as erlotinib and afatinib impair epidermal differentiation, causing rash and painful skin erosions, and they also impair corneal healing, causing **keratitis**. Osimertinib keratitis occurs in about 0.7 percent of patients, while EGFR-TKIs are the most frequent cause of TKI keratitis. Refractory cases may need TKI interruption, and corneal perforation is a severe complication needing urgent review.",
+   "say": "On-target toxicity reflects effective inhibition, not overdosing. EGFR inhibitors such as erlotinib and afatinib impair epidermal differentiation, causing rash and painful skin erosions, and they also impair corneal healing, causing keratitis. Osimertinib keratitis occurs in about 0.7 percent of patients, while EGFR inhibitors are the most frequent cause of TKI keratitis. Refractory cases may need interruption of the drug, and corneal perforation is a severe complication needing urgent review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug class",
+     "Typical toxicity",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "EGFR-TKI",
+      "Rash, keratitis",
+      "Impaired epidermal and corneal healing"
+     ],
+     [
+      "VEGFR-TKI",
+      "Hypertension, bleeding",
+      "Reduced nitric oxide, endothelial injury"
+     ],
+     [
+      "Osimertinib",
+      "Keratitis about 0.7%",
+      "EGFR inhibition on ocular surface"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "VEGFR inhibitors cause **hypertension** because reduced nitric oxide raises systemic vascular resistance, and anti-VEGF therapy can weaken vessels, raising haemorrhage risk. Prolonged QTc is a specific risk: patients at high risk should be offered an alternative agent where possible. Reproductive counselling matters, since TKIs are potentially teratogenic, so effective contraception is needed during therapy and for several weeks afterwards.",
+   "say": "VEGFR inhibitors cause hypertension because reduced nitric oxide raises systemic vascular resistance, and anti VEGF therapy can weaken vessels, raising haemorrhage risk. Prolonged QTc is a specific risk, and patients at high risk should be offered an alternative agent where possible. Reproductive counselling matters, since TKIs are potentially teratogenic, so effective contraception is needed during therapy and for several weeks afterwards.",
+   "vis": null
+  },
+  {
+   "tx": "Acquired resistance is suspected when a patient improves initially and then progresses. The next step is **genetic testing** for resistance mutations, rather than simply escalating the dose or switching to cytotoxic chemotherapy. Interindividual variation in ABC transporter genes affects absorption and elimination, so it can guide dosing. Targeted small molecules also show synthetic lethality in PARP inhibitor settings, a principle worth remembering for BRCA-deficient tumours.",
+   "say": "Acquired resistance is suspected when a patient improves initially and then progresses. The next step is genetic testing for resistance mutations, rather than simply escalating the dose or switching to cytotoxic chemotherapy. Interindividual variation in ABC transporter genes affects absorption and elimination, so it can guide dosing. Targeted small molecules also show synthetic lethality in PARP inhibitor settings, a principle worth remembering for BRCA deficient tumours.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_dfbc9af20905",
+  "q_09c1107a8873",
+  "q_06ad5b1f650f"
+ ],
+ "src": [],
+ "refs": [
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton, Hilal-Dandan, Knollmann, editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 43
+ }
+}

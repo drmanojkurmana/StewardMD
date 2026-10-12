@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "sne-ms-therapy",
+ "subject": "ss-neurology",
+ "title": "Disease-modifying therapy in multiple sclerosis: choosing and monitoring treatment",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Multiple sclerosis is an immune-mediated demyelinating disease of the CNS. Diagnosis needs **dissemination in time** and **dissemination in space**, as per the McDonald criteria. First-degree relatives carry a risk of about 2 to 4 percent, far above the general population. Disease-modifying therapy aims to reduce relapses and slow disability by dampening the CD4 positive proinflammatory T cell attack within the CNS.",
+   "say": "Multiple sclerosis is an immune-mediated demyelinating disease of the central nervous system. Diagnosis needs dissemination in time and dissemination in space, as per the McDonald criteria. First-degree relatives carry a risk of about 2 to 4 percent, far above the general population. Disease-modifying therapy aims to reduce relapses and slow disability by dampening the CD4 positive proinflammatory T cell attack within the CNS.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Course",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Relapsing-remitting",
+      "Attacks lasting 24 to 48 hours, often resolving"
+     ],
+     [
+      "Clinically isolated syndrome",
+      "Single event, criteria not yet met"
+     ],
+     [
+      "Primary progressive",
+      "Steady worsening from onset"
+     ],
+     [
+      "Secondary progressive",
+      "Relapse-remitting course turning progressive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choose therapy according to **disease activity**. **Interferon beta** and **glatiramer acetate** are first-line, moderate efficacy agents, and **teriflunomide** also sits in this group. Glatiramer 40 mg three times weekly reduces enhancing lesions more than the 20 mg daily dose, so the higher schedule is an option for some patients. Highly active disease usually prompts escalation to stronger agents, weighing **infection risk** and the monitoring burden of each drug.",
+   "say": "Choose therapy according to disease activity. Interferon beta and glatiramer acetate are first-line, moderate efficacy agents, and teriflunomide also sits in this group. Glatiramer 40 mg three times weekly reduces enhancing lesions more than the 20 mg daily dose, so the higher schedule is an option for some patients. Highly active disease usually prompts escalation to stronger agents, weighing infection risk and the monitoring burden of each drug.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Moderate efficacy",
+     "points": [
+      "Interferon beta",
+      "Glatiramer acetate",
+      "Teriflunomide"
+     ]
+    },
+    "right": {
+     "title": "High efficacy",
+     "points": [
+      "Natalizumab",
+      "Ocrelizumab and ofatumumab",
+      "Alemtuzumab",
+      "Cladribine and fingolimod"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Natalizumab** blocks leukocyte adhesion and migration into the CNS, but carries a risk of **progressive multifocal leukoencephalopathy** linked to JC virus. Test anti-JC virus antibodies before starting. **Alemtuzumab** depletes CD52 positive cells and causes later secondary autoimmunity, mainly thyroid disease, so thyroid and blood tests continue for 48 months after the last dose.",
+   "say": "Natalizumab blocks leukocyte adhesion and migration into the central nervous system, but carries a risk of progressive multifocal leukoencephalopathy linked to JC virus. Test anti-JC virus antibodies before starting. Alemtuzumab depletes CD52 positive cells and causes later secondary autoimmunity, mainly thyroid disease, so thyroid and blood tests continue for 48 months after the last dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start natalizumab"
+     },
+     {
+      "id": "b",
+      "label": "Check anti-JC virus"
+     },
+     {
+      "id": "c",
+      "label": "Monitor for PML"
+     },
+     {
+      "id": "d",
+      "label": "Stop if PML suspected"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fingolimod** is a sphingosine-1-phosphate receptor modulator that keeps lymphocytes within lymph nodes, reducing their passage into the central nervous system. Before the first dose, obtain a baseline **ECG** and observe the patient for **bradycardia**, as heart rate can fall after starting. Stopping it abruptly may cause **rebound disease**, so plan a bridging disease-modifying therapy. **Cladribine** is a purine analogue given as short oral courses; screen for active infection and malignancy, and avoid it in pregnancy.",
+   "say": "Fingolimod is a sphingosine-1-phosphate receptor modulator that keeps lymphocytes within lymph nodes, reducing their passage into the central nervous system. Before the first dose, obtain a baseline ECG and observe the patient for bradycardia, as heart rate can fall after starting. Stopping it abruptly may cause rebound disease, so plan a bridging disease-modifying therapy. Cladribine is a purine analogue given as short oral courses; screen for active infection and malignancy, and avoid it in pregnancy.",
+   "vis": null
+  },
+  {
+   "tx": "Pregnancy planning changes choice. **Teriflunomide** is teratogenic and persists for long because of enterohepatic recirculation; stop it before conception and use accelerated elimination with cholestyramine, confirming low levels. Glatiramer is widely regarded as safe during breastfeeding. The AAN advises against starting DMTs in pregnancy unless disease activity is high. Avoid live vaccines during immunomodulating therapy and defer vaccines during an active relapse.",
+   "say": "Pregnancy planning changes the choice. Teriflunomide is teratogenic and persists for long because of enterohepatic recirculation; stop it before conception and use accelerated elimination with cholestyramine, confirming low levels. Glatiramer is widely regarded as safe during breastfeeding. The American Academy of Neurology advises against starting disease-modifying therapy in pregnancy unless disease activity is high. Avoid live vaccines during immunomodulating therapy and defer vaccines during an active relapse.",
+   "vis": null
+  },
+  {
+   "tx": "Manage acute relapses with **methylprednisolone** 1 gram intravenously daily for 5 days. If there is no response, **plasma exchange** is the next step, given as 3 to 7 sessions daily or every other day. Symptoms such as the Lhermitte sign and constipation are managed with patient education, fibre and bulk-forming agents, and phosphodiesterase-5 inhibitors for erectile dysfunction.",
+   "say": "Manage acute relapses with methylprednisolone 1 gram intravenously daily for 5 days. If there is no response, plasma exchange is the next step, given as 3 to 7 sessions daily or every other day. Symptoms such as the Lhermitte sign and constipation are managed with patient education, fibre and bulk-forming agents, and phosphodiesterase-5 inhibitors for erectile dysfunction.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_86ecf750eff1",
+  "q_08a7fc0b50f0",
+  "q_61f1aadac233"
+ ],
+ "src": [],
+ "refs": [
+  "McDonald criteria (2017 revision)",
+  "American Academy of Neurology guideline on disease-modifying therapies in multiple sclerosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 43
+ }
+}

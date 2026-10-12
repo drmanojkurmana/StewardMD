@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "cm-significance-tests",
+ "subject": "community-medicine",
+ "title": "Hypothesis testing and tests of significance",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Every study starts with a **null hypothesis**, which assumes there is no real difference or association. We collect data and ask whether the observed result is unlikely under that assumption. If it is unlikely enough, we reject the null hypothesis. Otherwise we fail to reject it. We never prove the null hypothesis true.",
+   "say": "Every study starts with a null hypothesis, which assumes there is no real difference or association. We collect data and ask whether the observed result is unlikely under that assumption. If it is unlikely enough, we reject the null hypothesis. Otherwise we fail to reject it. We never prove the null hypothesis true.",
+   "vis": null
+  },
+  {
+   "tx": "The **p value** is the probability of getting a result at least as extreme as the one observed, assuming the null hypothesis is true. The usual cut-off for significance is 0.05, and a p value below 0.01 is considered highly significant. A p value does not tell us the size of the effect or the chance that the null is true.",
+   "say": "The p value is the probability of getting a result at least as extreme as the one observed, assuming the null hypothesis is true. The usual cut-off for significance is 0.05, and a p value below 0.01 is considered highly significant. A p value does not tell us the size of the effect or the chance that the null is true.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "p value",
+     "Interpretation"
+    ],
+    "rows": [
+     [
+      "Below 0.05",
+      "Significant at conventional level"
+     ],
+     [
+      "Below 0.01",
+      "Highly significant"
+     ],
+     [
+      "Above 0.05",
+      "Not significant; null not rejected"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two errors can occur. A **type I error** (alpha) is rejecting a true null, a false positive. A **type II error** (beta) is failing to reject a false null, a false negative. The **power** of a study is 1 minus beta, and a power of 0.8 is conventionally accepted. Power rises with larger samples and a more sensitive test.",
+   "say": "Two errors can occur. A type I error, called alpha, is rejecting a true null hypothesis, which is a false positive. A type II error, called beta, is failing to reject a false null hypothesis, which is a false negative. The power of a study is one minus beta, and a power of 0.8 is conventionally accepted.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Error",
+     "Meaning",
+     "Probability"
+    ],
+    "rows": [
+     [
+      "Type I (alpha)",
+      "False positive",
+      "Equals significance level"
+     ],
+     [
+      "Type II (beta)",
+      "False negative",
+      "Beta"
+     ],
+     [
+      "Power",
+      "Detects a false null",
+      "1 minus beta"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choosing the right test depends on the data type and number of groups. For **qualitative** data, the chi square test handles two or more groups, while McNemar's test suits before and after data in one group. For **quantitative** data, the paired t test works on one group measured twice, the unpaired t test compares two groups, and ANOVA compares more than two groups.",
+   "say": "Choosing the right test depends on the data type and number of groups. For qualitative data, the chi square test handles two or more groups, while McNemar's test suits before and after data in one group. For quantitative data, the paired t test works on one group measured twice, the unpaired t test compares two groups, and ANOVA compares more than two groups.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Data type",
+     "Situation",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Qualitative",
+      "Two or more groups",
+      "Chi square"
+     ],
+     [
+      "Qualitative",
+      "One group, before and after",
+      "McNemar"
+     ],
+     [
+      "Quantitative",
+      "One group, before and after",
+      "Paired t"
+     ],
+     [
+      "Quantitative",
+      "Two groups",
+      "Unpaired t"
+     ],
+     [
+      "Quantitative",
+      "More than two groups",
+      "ANOVA"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **confidence interval** gives a range that likely contains the true population value. A 95% interval is roughly the mean plus or minus 2 SD. A narrow interval is preferred, and it becomes narrower with a larger sample or a smaller standard deviation. For relative risk, the null value is 1, so an interval that includes 1 is not significant.",
+   "say": "A confidence interval gives a range that likely contains the true population value. A 95 percent interval is roughly the mean plus or minus 2 standard deviations. A narrow interval is preferred, and it becomes narrower with a larger sample or a smaller standard deviation. For relative risk, the null value is 1, so an interval that includes 1 is not significant.",
+   "vis": null
+  },
+  {
+   "tx": "**Correlation** measures the strength and direction of a linear relationship between two quantitative variables, using the coefficient r which lies between minus 1 and plus 1. A value near zero means no association, and a value near plus or minus 1 means a strong relationship. Correlation does not prove causation and does not measure risk. For survival outcomes, **Cox regression** is the appropriate model, and several binary risk factors call for multiple logistic regression.",
+   "say": "Correlation measures the strength and direction of a linear relationship between two quantitative variables, using the coefficient r, which lies between minus 1 and plus 1. A value near zero means no association, and a value near plus or minus 1 means a strong relationship. Correlation does not prove causation. For survival outcomes, Cox regression is the appropriate model.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Correlation coefficient r",
+     "points": [
+      "Between minus 1 and plus 1",
+      "Near zero: no association",
+      "Near plus or minus 1: strong",
+      "Does not prove causation"
+     ]
+    },
+    "right": {
+     "title": "Regression models",
+     "points": [
+      "Cox: time-to-event data",
+      "Multiple logistic: binary outcome",
+      "Multiple linear: continuous outcome"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "7f5de279-f359-4563-8d8c-48a53aa9a139",
+  "dee50cae-ce38-4eef-b8e5-055ef52e56a3",
+  "e8c7168d-0c68-4a0a-a2c3-b9a34238619f"
+ ],
+ "src": [],
+ "refs": [
+  "Medical Statistics from A-Z: A Guide for Clinicians and Medical Students (Brian Everitt)",
+  "Park's Textbook of Preventive and Social Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 208
+ }
+}

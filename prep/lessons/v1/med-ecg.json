@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "med-ecg",
+ "subject": "medicine",
+ "title": "ECG interpretation: high-yield patterns for NEET-PG, INI-CET and USMLE",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Start every ECG with a systematic read. Check **heart rate**, **rhythm**, **axis**, **PR interval**, **QRS duration** and **QT interval**, then look at ST segments and T waves. Heart rate can be estimated as 300 divided by the number of large squares between two R waves. Normal QRS is under 0.12 seconds, and a QRS of 0.12 seconds or more suggests a bundle branch block or ventricular origin. Normal frontal axis lies between minus 30 and plus 90 degrees.",
+   "say": "Start every ECG with a systematic read. Check heart rate, rhythm, axis, PR interval, QRS duration and QT interval, then look at ST segments and T waves. Heart rate can be estimated as 300 divided by the number of large squares between two R waves. Normal QRS is under 0.12 seconds, and a QRS of 0.12 seconds or more suggests a bundle branch block or ventricular origin. Normal frontal axis lies between minus 30 and plus 90 degrees.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Normal range",
+     "Abnormal clue"
+    ],
+    "rows": [
+     [
+      "Heart rate",
+      "60 to 100 per minute",
+      "300 divided by large squares in R-R"
+     ],
+     [
+      "QRS duration",
+      "Under 0.12 s",
+      "0.12 s or more"
+     ],
+     [
+      "Axis",
+      "-30 to +90 degrees",
+      "Beyond -30 suggests left deviation"
+     ],
+     [
+      "PR interval",
+      "0.12 to 0.20 s",
+      "Over 0.20 s suggests first-degree block"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bundle branch block** broadens the QRS to 0.12 seconds or more because depolarisation of one ventricle runs through slow myocardial conduction. LBBB is more often linked to coronary disease, hypertension, aortic valve disease and cardiomyopathy. RBBB can be a normal variant. Right bundle branch block shows an rSR pattern in V1 and a broad S in lead I, while left bundle branch block shows a broad notched R in V6 and a deep S in V1. ST and T changes run opposite to the QRS in LBBB.",
+   "say": "Bundle branch block broadens the QRS to 0.12 seconds or more because depolarisation of one ventricle runs through slow myocardial conduction. LBBB is more often linked to coronary disease, hypertension, aortic valve disease and cardiomyopathy. RBBB can be a normal variant. Right bundle branch block shows an rSR pattern in V1 and a broad S in lead I, while left bundle branch block shows a broad notched R in V6 and a deep S in V1. ST and T changes run opposite to the QRS in LBBB.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left bundle branch block",
+     "points": [
+      "QRS 0.12 s or more",
+      "Broad notched R in I, aVL, V6",
+      "Deep S in V1",
+      "ST and T opposite to QRS"
+     ]
+    },
+    "right": {
+     "title": "Right bundle branch block",
+     "points": [
+      "QRS 0.12 s or more",
+      "rSR pattern in V1",
+      "Broad S in I and V6",
+      "Can be a normal variant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**ST elevation** most often signals acute ischaemia, but several non-ischaemic causes exist. Acute pericarditis gives elevation in nearly all leads except aVR. **Hyperkalaemia** produces peaked T waves and can give elevation in V1 and V2. Hypercalcaemia and hypothermia can cause J waves or Osborn waves, and the Brugada pattern mimics right bundle branch block with elevation in the right precordial leads. Hypocalcaemia does not cause ST elevation; it prolongs the QT interval.",
+   "say": "ST elevation most often signals acute ischaemia, but several non-ischaemic causes exist. Acute pericarditis gives elevation in nearly all leads except aVR. Hyperkalaemia produces peaked T waves and can give elevation in V1 and V2. Hypercalcaemia and hypothermia can cause J waves or Osborn waves, and the Brugada pattern mimics right bundle branch block with elevation in the right precordial leads. Hypocalcaemia does not cause ST elevation; it prolongs the QT interval.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Typical lead pattern"
+    ],
+    "rows": [
+     [
+      "Acute ischaemia or MI",
+      "Territory-specific"
+     ],
+     [
+      "Acute pericarditis",
+      "All leads except aVR"
+     ],
+     [
+      "Hyperkalaemia",
+      "V1 to V2 with peaked T"
+     ],
+     [
+      "Hypothermia",
+      "J waves, V3 to V6"
+     ],
+     [
+      "Brugada pattern",
+      "Right precordial leads"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**QT prolongation** raises the risk of torsades de pointes, a polymorphic ventricular tachycardia. **Hypocalcaemia** and **hypokalaemia** lengthen the QT interval, whereas **hypercalcaemia** shortens it. **Left ventricular hypertrophy** is most often caused by long-standing hypertension, followed by aortic stenosis and aortic regurgitation. Voltage criteria include SV1 plus RV5 above 35 mm. **Right ventricular hypertrophy** is suggested by an R/S ratio above 1 in V1.",
+   "say": "QT prolongation raises the risk of torsades de pointes, a polymorphic ventricular tachycardia. Hypocalcaemia and hypokalaemia lengthen the QT interval, whereas hypercalcaemia shortens it. Left ventricular hypertrophy is most often caused by long-standing hypertension, followed by aortic stenosis and aortic regurgitation. Voltage criteria include SV1 plus RV5 above 35 mm. Right ventricular hypertrophy is suggested by an R/S ratio above 1 in V1.",
+   "vis": null
+  },
+  {
+   "tx": "**Delta wave** with a short PR interval and slurred QRS upstroke defines **Wolff-Parkinson-White** pattern, with a normal QT. A **low voltage** pattern and **electrical alternans** are classic for large pericardial effusion or tension pneumothorax. Left-sided pneumothorax can cause left axis deviation, reduced R waves in V2 to V6 and T inversion. Remember that V-tachycardia and fibrillation lack distinct P waves, while atrial fibrillation has irregular rhythm and no P waves.",
+   "say": "Delta wave with a short PR interval and slurred QRS upstroke defines Wolff-Parkinson-White pattern, with a normal QT. A low voltage pattern and electrical alternans are classic for large pericardial effusion or tension pneumothorax. Left-sided pneumothorax can cause left axis deviation, reduced R waves in V2 to V6 and T inversion. Remember that ventricular tachycardia and fibrillation lack distinct P waves, while atrial fibrillation has irregular rhythm and no P waves.",
+   "vis": null
+  },
+  {
+   "tx": "**Hyperkalaemia** widens the QRS, flattens P waves and can produce a sine wave pattern at high levels, while **hypokalaemia** flattens T waves and makes U waves prominent. Ashman phenomenon is a transient aberrant conduction with a right bundle branch pattern after a short cycle that follows a long one, usually in atrial fibrillation. In Indian exams, check for the context: an 18-year-old with syncope and a split S2 suggests outflow obstruction.",
+   "say": "Hyperkalaemia widens the QRS, flattens P waves and can produce a sine wave pattern at high levels, while hypokalaemia flattens T waves and makes U waves prominent. Ashman phenomenon is a transient aberrant conduction with a right bundle branch pattern after a short cycle that follows a long one, usually in atrial fibrillation. In Indian exams, check for the context: an 18-year-old with syncope and a split S2 suggests outflow obstruction.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "1b2420ba-7ed6-41a5-8dc3-5beab0dfafa4",
+  "2865a6a7-1f4d-4cba-97d5-bd72085151e1",
+  "aaeb0989-1421-4822-b00c-1bb7f4412b9a"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 125
+ }
+}

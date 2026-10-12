@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "sid-stewardship",
+ "subject": "ss-infectious-diseases",
+ "title": "Antimicrobial stewardship: core principles for exam and practice",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Antimicrobial stewardship** is a coordinated set of actions that makes sure each antibiotic prescription is the right drug, dose, route and duration for the patient. Inappropriate prescribing is common, and surveys in acute care hospitals suggest that a substantial fraction of courses are unnecessary or suboptimal. Stewardship is one of three pillars of integrated healthcare strengthening, alongside **infection prevention and control** and patient safety.",
+   "say": "Antimicrobial stewardship is a coordinated set of actions that makes sure each antibiotic prescription is the right drug, dose, route and duration for the patient. Inappropriate prescribing is common, and surveys in acute care hospitals suggest that a substantial fraction of courses are unnecessary or suboptimal. Stewardship is one of three pillars of integrated healthcare strengthening, alongside infection prevention and control and patient safety.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Reported inappropriate or unnecessary use"
+    ],
+    "rows": [
+     [
+      "US acute care hospitals",
+      "About 20 to 50 percent"
+     ],
+     [
+      "Nursing homes and long-term care",
+      "About 40 to 75 percent"
+     ],
+     [
+      "Outpatient prescribing",
+      "Often high, varies by indication"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Five D's**framework guides every prescription: right drug, right dose, right route, right duration and **timely de-escalation**. De-escalation means narrowing or stopping empirical therapy once culture and susceptibility results are known. A formal **antibiotic time out**, usually at about 48 hours, is the key moment to review cultures and decide whether broad coverage is still needed.",
+   "say": "The Five D's framework guides every prescription: right drug, right dose, right route, right duration and timely de-escalation. De-escalation means narrowing or stopping empirical therapy once culture and susceptibility results are known. A formal antibiotic time out, usually at about 48 hours, is the key moment to review cultures and decide whether broad coverage is still needed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Empirical therapy"
+     },
+     {
+      "id": "b",
+      "label": "Cultures return"
+     },
+     {
+      "id": "c",
+      "label": "Time out at 48 h"
+     },
+     {
+      "id": "d",
+      "label": "Narrow or stop"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Procalcitonin guided discontinuation uses a blood marker of bacterial infection to decide when to stop antibiotics. When levels fall and the patient is clinically improving, the course can often be ended early. **Short course therapy** is also supported for many infections, such as community acquired pneumonia, where shorter regimens achieve similar cure rates. An **IV to oral switch** is appropriate once the patient is stable, absorbs enteral drugs and has no barrier to oral intake.",
+   "say": "Procalcitonin guided discontinuation uses a blood marker of bacterial infection to decide when to stop antibiotics. When levels fall and the patient is clinically improving, the course can often be ended early. Short course therapy is also supported for many infections, such as community acquired pneumonia, where shorter regimens achieve similar cure rates. An IV to oral switch is appropriate once the patient is stable, absorbs enteral drugs and has no barrier to oral intake.",
+   "vis": null
+  },
+  {
+   "tx": "Stewardship is more effective when education is paired with **specific interventions** and **outcome measurements**, rather than teaching alone. Prospective audit and feedback, where a team reviews live prescriptions and reports back to the prescriber, is a core intervention. **Preauthorization** for restricted agents, especially broad-spectrum drugs, adds a check before the drug is dispensed. A **cumulative antibiogram** summarises local resistance patterns and guides empirical choices.",
+   "say": "Stewardship is more effective when education is paired with specific interventions and outcome measurements, rather than teaching alone. Prospective audit and feedback, where a team reviews live prescriptions and reports back to the prescriber, is a core intervention. Preauthorization for restricted agents, especially broad-spectrum drugs, adds a check before the drug is dispensed. A cumulative antibiogram summarises local resistance patterns and guides empirical choices.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stewardship tools",
+     "points": [
+      "Prospective audit and feedback",
+      "Preauthorization of restricted drugs",
+      "Cumulative antibiogram"
+     ]
+    },
+    "right": {
+     "title": "Outcome measures",
+     "points": [
+      "Antibiotic days of therapy",
+      "C. difficile incidence",
+      "Renal dosing compliance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Stewardship outcomes matter because resistance and side effects carry real costs. Around one in five hospitalised patients on antibiotics has an associated adverse effect, and resistant healthcare infections can lengthen stays by roughly 6 to 13 days. Stewardship programmes are linked to lower **Clostridioides difficile** incidence. Laboratory **antimicrobial susceptibility testing** guides the individual regimen, so results must be quality checked before reporting.",
+   "say": "Stewardship outcomes matter because resistance and side effects carry real costs. Around one in five hospitalised patients on antibiotics has an associated adverse effect, and resistant healthcare infections can lengthen stays by roughly 6 to 13 days. Stewardship programmes are linked to lower Clostridioides difficile incidence. Laboratory antimicrobial susceptibility testing guides the individual regimen, so results must be quality checked before reporting.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_09f26d12af12",
+  "q_8fca440db288",
+  "q_a9ff6abf278b"
+ ],
+ "src": [],
+ "refs": [
+  "WHO AWaRe Antibiotic Book",
+  "ICMR Treatment Guidelines for Antimicrobial Use in Common Syndromes",
+  "CDC Core Elements of Hospital Antibiotic Stewardship Programs"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

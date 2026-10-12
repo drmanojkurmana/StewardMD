@@ -1,0 +1,120 @@
+{
+ "v": 1,
+ "module": "srd-msk-joint",
+ "subject": "ss-radiology",
+ "title": "Spinal tuberculosis: high-yield imaging and classification essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Spinal tuberculosis, also called **Pott spine**, is a granulomatous infection that usually starts in the anterior part of the vertebral body. It typically spreads from the subchondral region across the disc, so the **disc space is relatively preserved early** while the vertebral endplates are destroyed. Dorsal spine involvement is most common, and the lower thoracic region is most often affected.",
+   "say": "Spinal tuberculosis, also called Pott spine, is a granulomatous infection that usually starts in the anterior part of the vertebral body. It spreads from the subchondral region across the disc, so the disc space is relatively preserved early while the vertebral endplates are destroyed. The dorsal spine is most commonly involved, and the lower thoracic region is most often affected.",
+   "vis": null
+  },
+  {
+   "tx": "Radiographic features evolve in a predictable order. Early on, there is **endplate erosion and vertebral body destruction** with reduced disc height only later. Paravertebral soft tissue shadows, including a fusiform psoas abscess, are a key clue. Gibbus deformity and wedge collapse follow, and the **skip lesion** pattern points strongly away from pyogenic infection.",
+   "say": "Radiographic features evolve in a predictable order. Early on there is endplate erosion and vertebral body destruction, with reduced disc height appearing only later. Paravertebral soft tissue shadows, including a fusiform psoas abscess, are a key clue. Gibbus deformity and wedge collapse follow, and a skip lesion pattern points strongly away from pyogenic infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Spinal TB",
+     "Pyogenic spondylodiscitis"
+    ],
+    "rows": [
+     [
+      "Disc space",
+      "Relatively preserved early",
+      "Narrowed early"
+     ],
+     [
+      "Lesion pattern",
+      "Skip lesions common",
+      "Usually contiguous"
+     ],
+     [
+      "Paravertebral abscess",
+      "Large, often calcified",
+      "Smaller, less calcified"
+     ],
+     [
+      "Typical site",
+      "Dorsal and lower thoracic",
+      "Lumbar more often"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "MRI is the modality of choice for early detection and staging. Look for **marrow oedema, paravertebral collection and epidural extension**, with contrast enhancement of the abscess wall. Gadolinium-enhanced sequences help distinguish an abscess from a solid mass. Indian practice commonly follows the same MRI approach used internationally, and CT adds value for calcification and bony detail.",
+   "say": "MRI is the modality of choice for early detection and staging. Look for marrow oedema, paravertebral collection and epidural extension, with contrast enhancement of the abscess wall. Gadolinium sequences help distinguish an abscess from a solid mass. CT adds value for calcification and bony detail.",
+   "vis": null
+  },
+  {
+   "tx": "Management in India follows national tuberculosis programme protocols, with **anti-tubercular chemotherapy** as the mainstay for most patients. Surgery is reserved for neurological deficit, progressive kyphosis, instability or abscesses unresponsive to drugs. Guidance on treatment duration should be checked against current NTEP documents, as regimens change.",
+   "say": "Management in India follows national tuberculosis programme protocols, with anti-tubercular chemotherapy as the mainstay for most patients. Surgery is reserved for neurological deficit, progressive kyphosis, instability or abscesses that do not respond to drugs. Check current national programme documents for treatment duration, as regimens change.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected spinal TB"
+     },
+     {
+      "id": "b",
+      "label": "MRI staging"
+     },
+     {
+      "id": "c",
+      "label": "Drug therapy"
+     },
+     {
+      "id": "d",
+      "label": "Surgery if deficit or instability"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "if failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam takeaway: remember that **disc preservation, skip lesions and a large calcified psoas abscess** point to tuberculosis, while early disc narrowing with contiguous endplate destruction points to pyogenic spondylodiscitis. Also recall that restricted diffusion on MRI favours malignant collapse, which is a separate differential.",
+   "say": "Exam takeaway: disc preservation, skip lesions and a large calcified psoas abscess point to tuberculosis, while early disc narrowing with contiguous endplate destruction points to pyogenic spondylodiscitis. Restricted diffusion on MRI favours malignant collapse, a separate differential.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "rss-t163-1",
+  "ct-275f74115c98",
+  "ct-a41b675b0075"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 136
+ }
+}

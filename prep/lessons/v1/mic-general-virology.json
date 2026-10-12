@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "mic-general-virology",
+ "subject": "microbiology",
+ "title": "General virology and prions: structure, replication, culture and prion disease",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Viruses are **obligate intracellular parasites** and cannot grow in cell-free media. Three culture methods are used. Animal inoculation was the earliest method, with mice most common. Embryonated eggs are used for certain viruses: the chorioallantoic membrane produces pocks with HSV, vaccinia and smallpox, while the allantoic cavity suits influenza. Tissue culture is now the most important method for isolation, and cell lines include primary, diploid and continuous types such as HeLa and Vero.",
+   "say": "Viruses are obligate intracellular parasites and cannot grow in cell-free media. Three culture methods are used. Animal inoculation was the earliest method, with mice most common. Embryonated eggs are used for certain viruses. The chorioallantoic membrane produces pocks with herpes simplex virus, vaccinia and smallpox, while the allantoic cavity suits influenza. Tissue culture is now the most important method for isolation, and continuous cell lines include HeLa and Vero.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Animal inoculation",
+      "sub": "Mice most common"
+     },
+     {
+      "id": "b",
+      "label": "Embryonated egg",
+      "sub": "CAM, allantoic, amniotic, yolk sac"
+     },
+     {
+      "id": "c",
+      "label": "Tissue culture",
+      "sub": "Primary, diploid, continuous"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Virus growth is detected by several methods. **Cytopathic effect** (CPE) is the morphological damage seen in infected cells, such as syncytia with measles and discrete focal degeneration with herpes viruses. Other methods include **haemadsorption**, **metabolic inhibition**, **interference**, **transformation** and immunofluorescence. Viral infectivity is quantified by a **plaque assay**, which counts infectious particles on a monolayer.",
+   "say": "Virus growth is detected by several methods. Cytopathic effect is the morphological damage seen in infected cells, such as syncytia with measles and discrete focal degeneration with herpes viruses. Other methods include haemadsorption, metabolic inhibition, interference, transformation and immunofluorescence. Viral infectivity is quantified by a plaque assay, which counts infectious particles on a monolayer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Detection methods",
+     "points": [
+      "Cytopathic effect",
+      "Haemadsorption",
+      "Metabolic inhibition",
+      "Immunofluorescence"
+     ]
+    },
+    "right": {
+     "title": "Quantification",
+     "points": [
+      "Plaque assay",
+      "Pock assay on CAM",
+      "Quantal endpoints",
+      "Infectivity titre"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Interference** occurs when infection by one virus inhibits infection by another; interferon is its most important mediator. The **Von Magnus phenomenon** occurs when serial passage of undiluted infected allantoic fluid yields progeny with high haemagglutinin titres but low infectivity, due to incomplete particles lacking nucleic acid. Oncogenic RNA viruses belong to family Retroviridae, subfamily Oncovirinae. Key DNA oncoviruses include HPV, EBV, HHV-8 and HBV.",
+   "say": "Interference occurs when infection by one virus inhibits infection by another, and interferon is its most important mediator. The Von Magnus phenomenon occurs when serial passage of undiluted infected allantoic fluid yields progeny with high haemagglutinin titres but low infectivity, due to incomplete particles lacking nucleic acid. Oncogenic RNA viruses belong to the family Retroviridae. Key DNA oncoviruses include human papillomavirus, Epstein-Barr virus, herpesvirus 8 and hepatitis B virus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Tumour",
+     "Family"
+    ],
+    "rows": [
+     [
+      "HPV",
+      "Cervical and genital tumours",
+      "Papillomaviridae"
+     ],
+     [
+      "EBV",
+      "Burkitt lymphoma",
+      "Herpesviridae"
+     ],
+     [
+      "HHV-8",
+      "Kaposi sarcoma",
+      "Herpesviridae"
+     ],
+     [
+      "HTLV-1",
+      "Adult T-cell leukaemia",
+      "Retroviridae"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Key exam facts: **Rotavirus** and **reovirus** carry a segmented, double-stranded RNA genome in a double-layered capsid, and this allows genetic reassortment during co-infection. Influenza shows antigenic shift (major change, reassortment) and antigenic drift (minor point mutation). **Bacteriophages** are viruses infecting bacteria and are used for bacterial typing. Burkitt lymphoma is not a virus-linked prion disease; it is a lymphoma linked to EBV.",
+   "say": "Key exam facts. Rotavirus and reovirus carry a segmented, double-stranded RNA genome in a double-layered capsid, which allows genetic reassortment during co-infection. Influenza shows antigenic shift, a major change through reassortment, and antigenic drift, a minor point mutation. Bacteriophages are viruses infecting bacteria and are used for bacterial typing. Burkitt lymphoma is not a prion disease; it is a lymphoma linked to Epstein-Barr virus.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "056f9327-92f6-4fb8-a851-7194c681ea9b",
+  "32a4f819-ef73-499c-9a84-adaa6dbfd146",
+  "40a70dde-bf32-40a6-9f16-e372777d8eed"
+ ],
+ "src": [],
+ "refs": [
+  "Textbook of Microbiology by Ananthanarayan and Paniker"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 195
+ }
+}

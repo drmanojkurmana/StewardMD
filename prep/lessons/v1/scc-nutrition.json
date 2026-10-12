@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "scc-nutrition",
+ "subject": "ss-critical-care",
+ "title": "Nutrition in critical illness: enteral versus parenteral route, timing and targets",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Critically ill patients have high metabolic stress and often cannot eat. The first decision is **route**. If the gut works and the patient is haemodynamically stable, **enteral nutrition** is preferred over **parenteral nutrition** because it preserves gut mucosa, costs less and causes fewer infective and thrombotic complications. Parenteral feeding is reserved for patients in whom the gut cannot be used, such as severe short bowel or contraindicated enteral access.",
+   "say": "Critically ill patients have high metabolic stress and often cannot eat. The first decision is route. If the gut works and the patient is haemodynamically stable, enteral nutrition is preferred over parenteral nutrition, because it preserves gut mucosa, costs less and causes fewer infective and thrombotic complications. Parenteral feeding is reserved for patients in whom the gut cannot be used, such as severe short bowel or contraindicated enteral access.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Enteral",
+     "points": [
+      "Gut preserved",
+      "Cheaper",
+      "Fewer infections",
+      "Needs working gut"
+     ]
+    },
+    "right": {
+     "title": "Parenteral",
+     "points": [
+      "Bypasses gut",
+      "Central line needed",
+      "Higher infection risk",
+      "Used when gut fails"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Timing matters. Feeding should start early once the patient is **haemodynamically stable**, and early enteral feeding is linked with better outcomes. Haemodynamic instability with poor perfusion, such as high-dose vasopressors and mottled skin, is a reason to defer feeding. Absent bowel sounds do not need to delay enteral feeding. Start with **trophic feeding**, a small dose that maintains gut integrity, then advance.",
+   "say": "Timing matters. Feeding should start early once the patient is haemodynamically stable, and early enteral feeding is linked with better outcomes. Haemodynamic instability with poor perfusion, such as high-dose vasopressors and mottled skin, is a reason to defer feeding. Absent bowel sounds do not need to delay enteral feeding. Start with trophic feeding, a small dose that maintains gut integrity, then advance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess perfusion"
+     },
+     {
+      "id": "b",
+      "label": "Stable?"
+     },
+     {
+      "id": "c",
+      "label": "Start trophic feed"
+     },
+     {
+      "id": "d",
+      "label": "Defer and reassess"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Consider the **NUTRIC score** when deciding which patients may benefit most from intensive feeding, since those at high nutritional risk tend to gain more. Routine **gastric residual volume** checks add little, so monitoring should be selective. Severely malnourished patients face **refeeding syndrome**, which shows as **hypophosphataemia** alongside low potassium and magnesium. Begin feeding cautiously at a low rate and check blood chemistry frequently over the first few days.",
+   "say": "Consider the NUTRIC score when deciding which patients may benefit most from intensive feeding, since those at high nutritional risk tend to gain more. Routine gastric residual volume checks add little, so monitoring should be selective. Severely malnourished patients face refeeding syndrome, which shows as hypophosphataemia alongside low potassium and magnesium. Begin feeding cautiously at a low rate and check blood chemistry frequently over the first few days.",
+   "vis": null
+  },
+  {
+   "tx": "Glutamine is not routinely supplemented in critical illness. The REDOXS trial found that high-dose parenteral glutamine did not improve outcomes and may increase mortality in multiorgan failure. Diarrhoea on enteral feeds is often drug related, especially with **antibiotics**, and soluble fibre can help. Remember that lipid emulsions should be given at around 0.7 to 1.5 g/kg/day, and that essential fatty acid deficiency can appear after about three weeks of fat-free parenteral feeding.",
+   "say": "Glutamine is not routinely supplemented in critical illness. The REDOXS trial found that high-dose parenteral glutamine did not improve outcomes and may increase mortality in multiorgan failure. Diarrhoea on enteral feeds is often drug related, especially with antibiotics, and soluble fibre can help. Remember that lipid emulsions should be given at around 0.7 to 1.5 grams per kilogram per day, and that essential fatty acid deficiency can appear after about three weeks of fat-free parenteral feeding.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_b71d4920c9a1",
+  "q_f96ead89ae7a",
+  "q_52e0b042323f"
+ ],
+ "src": [],
+ "refs": [
+  "ESPEN Guidelines on Nutrition in Critical Care",
+  "EDEN Trial (Rice et al., NEJM 2012)",
+  "REDOXS Trial (Heyland et al., NEJM 2011)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 52
+ }
+}

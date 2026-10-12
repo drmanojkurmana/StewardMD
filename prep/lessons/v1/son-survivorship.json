@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "son-survivorship",
+ "subject": "ss-medical-oncology",
+ "title": "Survivorship and late effects after cancer treatment",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Survivorship care covers the physical, psychological and financial problems that persist or appear after cancer therapy. Late effects arise months to years after treatment, and **second malignant neoplasms** and **therapy related acute myeloid leukaemia** are key examples. Follow-up should be planned around the specific exposures each patient received, such as radiation fields and alkylating agents or topoisomerase inhibitors, because these determine the risk profile.",
+   "say": "Survivorship care covers the physical, psychological and financial problems that persist or appear after cancer therapy. Late effects arise months to years after treatment. Second malignant neoplasms and therapy related acute myeloid leukaemia are key examples. Follow-up should be planned around the specific exposures each patient received, such as radiation fields and alkylating agents or topoisomerase inhibitors, because these determine the risk profile.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Late effect",
+     "Typical exposure",
+     "Surveillance focus"
+    ],
+    "rows": [
+     [
+      "Second malignancy",
+      "Radiation and alkylators",
+      "Site specific screening"
+     ],
+     [
+      "Therapy related AML",
+      "Alkylators, topoisomerase II inhibitors",
+      "Blood counts and marrow review if cytopenias"
+     ],
+     [
+      "Infertility",
+      "Gonadotoxic chemotherapy, pelvic radiation",
+      "Fertility counselling before treatment"
+     ],
+     [
+      "Cardiotoxicity",
+      "Anthracyclines, chest radiation",
+      "Echocardiography and lipid review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radiation effects are classed by timing. **Acute** toxicity hits rapidly renewing intermitotic cells such as skin and mucosa within weeks. **Late** effects appear months to years later and include **radiation induced fibrosis**, which reflects fibroblast activation and vascular damage. Fraction size is the dominant determinant of late injury, so hypofractionation is judged carefully against normal tissue tolerance.",
+   "say": "Radiation effects are classed by timing. Acute toxicity hits rapidly renewing intermitotic cells such as skin and mucosa within weeks. Late effects appear months to years later and include radiation induced fibrosis, which reflects fibroblast activation and vascular damage. Fraction size is the dominant determinant of late injury, so hypofractionation is judged carefully against normal tissue tolerance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Radiation dose"
+     },
+     {
+      "id": "b",
+      "label": "Acute: weeks"
+     },
+     {
+      "id": "c",
+      "label": "Late: months to years"
+     },
+     {
+      "id": "d",
+      "label": "Fibrosis and vascular injury"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several organ specific late effects are high yield. **Radiation pneumonitis** typically appears within months and responds to systemic steroids once infection and progression are excluded. Long-term **cardiotoxicity** after chest radiation, including coronary stenosis, emerges years later. Radiation myelopathy and **radiation necrosis** of the brain are assessed with imaging, and PET helps separate necrosis from recurrence.",
+   "say": "Several organ specific late effects are high yield. Radiation pneumonitis typically appears within months and responds to systemic steroids once infection and progression are excluded. Long-term cardiotoxicity after chest radiation, including coronary stenosis, emerges years later. Radiation myelopathy and radiation necrosis of the brain are assessed with imaging, and PET helps separate necrosis from recurrence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early pneumonitis",
+     "points": [
+      "Months after thoracic radiation",
+      "Exclude infection and progression",
+      "Systemic steroids with taper"
+     ]
+    },
+    "right": {
+     "title": "Late cardiac injury",
+     "points": [
+      "Years after chest radiation",
+      "Coronary artery stenosis",
+      "Periodic cardiac review"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cognitive and quality of life issues need attention. **Chemotherapy related cognitive impairment** affects memory and attention, and structured neuropsychological assessment guides support. Psychosocial distress should be screened at each visit, and **financial toxicity**, such as lost income and treatment costs, is a recognised driver of non-adherence to follow-up. Exercise oncology improves fatigue and functional capacity and is recommended where safe.",
+   "say": "Cognitive and quality of life issues need attention. Chemotherapy related cognitive impairment affects memory and attention, and structured neuropsychological assessment guides support. Psychosocial distress should be screened at each visit. Financial toxicity, such as lost income and treatment costs, is a recognised driver of non-adherence to follow-up. Exercise oncology improves fatigue and functional capacity and is recommended where safe.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_0f2093e9a100",
+  "q_628feb4ea865",
+  "q_90fed664b22c"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 18
+ }
+}

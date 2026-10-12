@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "fmt-mechanical-injuries",
+ "subject": "forensic-medicine",
+ "title": "Mechanical injuries and medicolegal aspects of wounds",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Mechanical injuries are classed as blunt force, sharp force or patterned injuries. Blunt force causes **abrasion**, **contusion**, **laceration** and fracture. Sharp force causes incised wounds, stab wounds and chop wounds. Knowing which group a wound belongs to is the first exam step. A lathi, for example, is blunt, so it cannot cause an incised wound. Pointed weapons cause stab wounds, where depth is the largest dimension.",
+   "say": "Mechanical injuries fall into blunt force, sharp force and patterned injuries. Blunt force causes abrasion, contusion, laceration and fracture. Sharp force causes incised wounds, stab wounds and chop wounds. A lathi is a blunt weapon, so it cannot cause an incised wound. Pointed weapons cause stab wounds, where depth is the largest dimension. In an incised wound, length is the largest dimension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wound",
+     "Key feature",
+     "Typical cause"
+    ],
+    "rows": [
+     [
+      "Abrasion",
+      "Epidermis only, heals without scar",
+      "Friction or pressure"
+     ],
+     [
+      "Contusion",
+      "Bleeding into tissue, no skin break",
+      "Blunt force"
+     ],
+     [
+      "Laceration",
+      "Tissue bridges, crushed hair bulbs",
+      "Blunt force on bone"
+     ],
+     [
+      "Incised wound",
+      "Length exceeds depth, clean edges",
+      "Light cutting edge"
+     ],
+     [
+      "Stab wound",
+      "Depth exceeds breadth",
+      "Pointed weapon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **abrasion** involves only the epidermis. It is caused by friction or pressure against a rough surface. There are three types. A scratch is made by a sharp point such as a pin or thorn. A graze, also called brush or friction burn, comes from sliding skin, and is common in road accidents. A **pressure abrasion** is an imprint of an object, such as a ligature mark in hanging. Patterned abrasions reproduce the shape of the object.",
+   "say": "An abrasion involves only the epidermis. It is caused by friction or pressure against a rough surface. There are three types. A scratch is made by a sharp point. A graze, also called a brush or friction burn, comes from sliding skin and is common in road accidents. A pressure abrasion is an imprint of an object, such as a ligature mark in hanging. Patterned abrasions reproduce the shape of the object that caused them.",
+   "vis": null
+  },
+  {
+   "tx": "A **contusion** is bleeding into tissue after blunt force, with the skin often intact. Its colour changes with age. Red appears on day one, blue from deoxyhaemoglobin around days two to three, and bluish black or brown from haemosiderin around days four to five. Greenish haematoidin appears around days five to six, and yellow bilirubin around days seven to ten. Colour is normal by about fourteen days. Blue colour is therefore not a sign of old bruising.",
+   "say": "A contusion is bleeding into tissue after blunt force. Its colour changes with age. Red appears on day one, from haemoglobin. Blue appears around days two to three, from deoxyhaemoglobin. Bluish black or brown appears around days four to five, from haemosiderin. Greenish colour from haematoidin appears around days five to six. Yellow from bilirubin appears around days seven to ten. Colour is normal by about fourteen days.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Colour",
+     "Pigment"
+    ],
+    "rows": [
+     [
+      "Day 1",
+      "Red",
+      "Haemoglobin"
+     ],
+     [
+      "2 to 3 days",
+      "Blue",
+      "Deoxyhaemoglobin"
+     ],
+     [
+      "4 to 5 days",
+      "Bluish black or brown",
+      "Haemosiderin"
+     ],
+     [
+      "5 to 6 days",
+      "Greenish",
+      "Haematoidin"
+     ],
+     [
+      "7 to 10 days",
+      "Yellow",
+      "Bilirubin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **laceration** is a tear of skin or tissue caused by blunt force applied over a broad area. Edges are irregular, with tissue bridges and bruising at the margins. Hair bulbs, nerves and vessels are crushed, so bleeding is less than expected. A **split laceration** occurs where skin lies over bone with little fat, such as the scalp, eyebrow or cheekbone. It can look like an incised wound. Avulsion is tearing away of tissue by shearing force, and flaying is a large avulsion.",
+   "say": "A laceration is a tear of skin or tissue caused by blunt force over a broad area. Edges are irregular, with tissue bridges and bruising at the margins. Hair bulbs, nerves and vessels are crushed, so bleeding is less than expected. A split laceration occurs where skin lies over bone with little fat, such as the scalp, eyebrow or cheekbone. It can look like an incised wound. Flaying is a large avulsion caused by shearing force.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Blunt force on skin over bone"
+     },
+     {
+      "id": "b",
+      "label": "Skin splits between force and bone"
+     },
+     {
+      "id": "c",
+      "label": "Split laceration"
+     },
+     {
+      "id": "d",
+      "label": "Looks like incised wound"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sharp force wounds differ in shape. An **incised wound** is longer than it is deep, has clean edges, and bleeds heavily. Hesitation cuts are multiple, shallow, parallel marks beside the main wound. They are typical of suicidal attempts and are not found in homicidal assault. Wounds on the nose, ears and genitals are usually homicidal. Harakiri is a Japanese ritual suicide by abdominal stabbing, and defence wounds on the hands and forearms suggest an attempt to resist attack.",
+   "say": "Sharp force wounds differ in shape. An incised wound is longer than it is deep, has clean edges and bleeds heavily. Hesitation cuts are multiple, shallow, parallel marks beside the main wound. They are typical of suicide and are not found in homicidal assault. Wounds on the nose, ears and genitals are usually homicidal. Harakiri is a Japanese ritual suicide by abdominal stabbing. Defence wounds on the hands and forearms suggest resistance to attack.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suicidal wounds",
+     "points": [
+      "Hesitation cuts present",
+      "Front of body, approachable sites",
+      "Wrist, throat, front of chest"
+     ]
+    },
+    "right": {
+     "title": "Homicidal wounds",
+     "points": [
+      "Multiple, any region",
+      "Nose, ears, genitals",
+      "Back and areas hard to reach"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Medicolegal grading in India follows the Indian Penal Code. Under section 320, **grievous hurt** includes emasculation, permanent loss of sight or hearing, privation of a limb or joint, permanent facial disfigurement, and fracture or dislocation of a bone or tooth. It also covers hurt that endangers life or causes twenty days of severe pain or inability to follow daily routine. Section 319 defines hurt, and simple injury heals without lasting deformity. A superficial abrasion on the face is not grievous.",
+   "say": "Under section 320 of the Indian Penal Code, grievous hurt includes emasculation, permanent loss of sight or hearing, loss of a limb or joint, permanent facial disfigurement, and fracture or dislocation of a bone or tooth. It also covers hurt that endangers life or causes twenty days of severe pain or inability to follow daily routine. Section 319 defines hurt. A simple injury heals without lasting deformity. A superficial abrasion on the face is not grievous.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0acb7ecc-d6f0-40b7-b599-6b77697d5a92",
+  "20d2413a-06b5-4de0-bea5-2e8afbab4df2",
+  "913d0e84-4c56-4329-98a0-7a53c50d6d9e"
+ ],
+ "src": [],
+ "refs": [
+  "The Synopsis of Forensic Medicine and Toxicology (K.S. Narayan Reddy)",
+  "Indian Penal Code, sections 319 and 320"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 366
+ }
+}

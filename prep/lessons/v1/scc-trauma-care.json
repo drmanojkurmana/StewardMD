@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "scc-trauma-care",
+ "subject": "ss-critical-care",
+ "title": "Trauma critical care: primary survey, haemorrhage and chest trauma essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **xABCDE** approach guides the primary survey. External haemorrhage is controlled first, because exsanguinating bleeding kills faster than any airway problem. Then the airway is secured with cervical spine protection, followed by breathing and circulation. Uncontrolled haemorrhage is the most common preventable cause of early death, so direct pressure and tourniquets come before everything else in a bleeding patient.",
+   "say": "The xABCDE approach guides the primary survey. External haemorrhage is controlled first, because exsanguinating bleeding kills faster than any airway problem. Then the airway is secured with cervical spine protection, followed by breathing and circulation. Uncontrolled haemorrhage is the most common preventable cause of early death, so direct pressure and tourniquets come before everything else in a bleeding patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Control external bleeding"
+     },
+     {
+      "id": "b",
+      "label": "Airway with spine care"
+     },
+     {
+      "id": "c",
+      "label": "Breathing"
+     },
+     {
+      "id": "d",
+      "label": "Circulation"
+     },
+     {
+      "id": "e",
+      "label": "Disability and exposure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In haemorrhagic shock, **tranexamic acid** 1 g is given intravenously over 10 minutes, ideally within 3 hours of injury. Massive transfusion is best delivered in a 1:1 ratio of red cells to plasma to limit **dilutional coagulopathy**. Ionised calcium should be kept between 1.1 and 1.3 mmol/L. Permissive hypotension aims for a systolic pressure of 80 to 90 mmHg in non-head-injured patients, avoiding the aim of normal pressures.",
+   "say": "In haemorrhagic shock, tranexamic acid 1 g is given intravenously over 10 minutes, ideally within 3 hours of injury. Massive transfusion is best delivered in a 1:1 ratio of red cells to plasma to limit dilutional coagulopathy. Ionised calcium should be kept between 1.1 and 1.3 millimoles per litre. Permissive hypotension aims for a systolic pressure of 80 to 90 millimetres of mercury in non-head-injured patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Target or dose",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Tranexamic acid",
+      "1 g IV over 10 minutes",
+      "Within 3 hours of injury"
+     ],
+     [
+      "Red cells to plasma",
+      "1:1 ratio",
+      "Limits dilution"
+     ],
+     [
+      "Ionised calcium",
+      "1.1 to 1.3 mmol/L",
+      "Supports clotting"
+     ],
+     [
+      "Systolic BP (no TBI)",
+      "80 to 90 mmHg",
+      "Permissive hypotension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blunt chest trauma can cause a **flail chest**, defined as three or more ribs fractured in at least two places, creating a segment with paradoxical movement. Pain causes splinting and atelectasis. Multimodal analgesia, including thoracic epidural or paravertebral blocks, improves ventilation. CT is the best imaging for flail segments and lung contusion. Cautious fluids are needed because excess loading worsens pulmonary contusion and **ARDS** risk.",
+   "say": "Blunt chest trauma can cause a flail chest, defined as three or more ribs fractured in at least two places, creating a segment with paradoxical movement. Pain causes splinting and atelectasis. Multimodal analgesia, including thoracic epidural or paravertebral blocks, improves ventilation. CT is the best imaging for flail segments and lung contusion. Cautious fluids are needed because excess loading worsens pulmonary contusion and acute respiratory distress syndrome risk.",
+   "vis": null
+  },
+  {
+   "tx": "Blast injury can damage the lungs even when eardrums are intact, so absent tympanic rupture does not exclude significant primary blast injury. Blast lung can allow air entry into pulmonary veins, causing **arterial air embolism** and sudden collapse. Aggressive positive-pressure ventilation must be avoided because it worsens lung damage. Manage as a full trauma patient with a standard primary survey.",
+   "say": "Blast injury can damage the lungs even when eardrums are intact, so absent eardrum rupture does not exclude significant primary blast injury. Blast lung can allow air entry into pulmonary veins, causing arterial air embolism and sudden collapse. Aggressive positive pressure ventilation must be avoided because it worsens lung damage. Manage as a full trauma patient with a standard primary survey.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Blast lung risks",
+     "points": [
+      "Air embolism to brain or heart",
+      "Worsened by forced ventilation"
+     ]
+    },
+    "right": {
+     "title": "Safe approach",
+     "points": [
+      "Standard primary survey",
+      "Gentle ventilation strategy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A tertiary survey is repeated within 24 hours to find occult injuries missed earlier. Abdominal compartment syndrome and fat embolism syndrome are also key late complications in critical care. Trauma care sits within **damage control surgery**, where a short operation controls bleeding and contamination, and the patient moves to intensive care to be rewarmed and corrected before definitive repair.",
+   "say": "A tertiary survey is repeated within 24 hours to find occult injuries missed earlier. Abdominal compartment syndrome and fat embolism syndrome are also key late complications in critical care. Trauma care sits within damage control surgery, where a short operation controls bleeding and contamination, and the patient moves to intensive care to be rewarmed and corrected before definitive repair.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_c798f421000f",
+  "q_bafc84d7f2f7",
+  "q_fbc974ca9816"
+ ],
+ "src": [],
+ "refs": [
+  "Advanced Trauma Life Support (ATLS) Student Course Manual, American College of Surgeons",
+  "NICE guideline NG39 Major trauma: assessment and initial management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

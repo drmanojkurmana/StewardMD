@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "sid-gp-other",
+ "subject": "ss-infectious-diseases",
+ "title": "Other Gram-Positive Bacterial Infections: Listeria and Anthrax Essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Listeria monocytogenes** is a psychrotrophic, facultatively intracellular gram-positive rod. It grows at refrigerator temperatures and forms **biofilms** on food-processing surfaces, which helps it persist in cold chains. Human listeriosis affects pregnant women, neonates, the elderly and immunocompromised patients. Pregnancy raises risk roughly 10 to 100 fold.",
+   "say": "Listeria monocytogenes is a psychrotrophic, facultatively intracellular gram-positive rod. It grows at refrigerator temperatures and forms biofilms on food processing surfaces, which helps it persist in cold chains. Human listeriosis affects pregnant women, neonates, the elderly and immunocompromised patients. Pregnancy raises the risk roughly 10 to 100 fold.",
+   "vis": null
+  },
+  {
+   "tx": "Listeria enters nonphagocytic cells through **InlA and InlB**, which bind E-cadherin and the Met receptor. Inside the host cell, **listeriolysin O** and phospholipases break the phagosome, and ActA drives actin-based movement between cells. Containment of systemic infection depends on cell-mediated immunity, mainly **CD4 and CD8 T cells with activated macrophages**.",
+   "say": "Listeria enters nonphagocytic cells through InlA and InlB, which bind E-cadherin and the Met receptor. Inside the host cell, listeriolysin O and phospholipases break the phagosome, and ActA drives actin-based movement between cells. Containment of systemic infection depends on cell-mediated immunity, mainly CD4 and CD8 T cells with activated macrophages.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "InlA/InlB bind receptors"
+     },
+     {
+      "id": "b",
+      "label": "Phagosome escape"
+     },
+     {
+      "id": "c",
+      "label": "Cytosolic replication"
+     },
+     {
+      "id": "d",
+      "label": "ActA cell-to-cell spread"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Listeria central nervous system disease usually presents as **meningitis** or **meningoencephalitis**, and it is an important cause in neonates, older adults and pregnant women. **Rhombencephalitis** is a distinctive presentation involving the brainstem, thought to follow bloodborne spread and retrograde neural travel. Cerebrospinal fluid Gram staining often misses the organism, so culture and high clinical suspicion are essential. **Ampicillin** or **penicillin** forms the mainstay of treatment.",
+   "say": "Listeria infection of the central nervous system usually appears as meningitis or meningoencephalitis, and it is an important cause in newborns, older adults and pregnant women. A distinctive form called rhombencephalitis affects the brainstem, probably after spread through the blood and travel along nerves. Gram staining of the cerebrospinal fluid often fails to show the organism, so culture and a high index of suspicion are essential. Ampicillin or penicillin is the mainstay of treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Listeria CNS infection",
+     "Typical bacterial meningitis"
+    ],
+    "rows": [
+     [
+      "Gram stain yield",
+      "Often low",
+      "Usually high"
+     ],
+     [
+      "Typical risk group",
+      "Neonates, elderly, pregnancy",
+      "Varied"
+     ],
+     [
+      "Cephalosporin response",
+      "Intrinsically resistant",
+      "Depends on agent"
+     ],
+     [
+      "Key drug",
+      "Ampicillin or penicillin",
+      "Empirical broad cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vertical transmission and placentitis occur in pregnancy, when physiologic reduction in **Th1 responses** impairs control of intracellular pathogens. Neonatal listeriosis can present as **granulomatosis infantiseptica**, with miliary granulomas and microabscesses. Among live-born infants of mothers with proven listeriosis, about 76 percent develop infection, so prompt maternal treatment is vital.",
+   "say": "Vertical transmission and placentitis occur in pregnancy, when a physiologic reduction in Th1 responses impairs control of intracellular pathogens. Neonatal listeriosis can present as granulomatosis infantiseptica, with miliary granulomas and microabscesses. Among live-born infants of mothers with proven listeriosis, about 76 percent develop infection, so prompt maternal treatment is vital.",
+   "vis": null
+  },
+  {
+   "tx": "**Bacillus anthracis** is a large, **spore-forming** gram-positive rod that causes anthrax. **Cutaneous anthrax** produces a painless **black eschar**, whereas **inhalational anthrax** carries high mortality if treatment is delayed. Management relies on prompt **bactericidal antibiotic therapy**, with **antitoxin** added in severe disease. Compare this with **Clostridium perfringens**, which causes **gas gangrene** through alpha toxin and needs urgent surgical debridement.",
+   "say": "Bacillus anthracis is a large, spore-forming gram-positive rod that causes anthrax. Cutaneous anthrax produces a painless black eschar, whereas inhalational anthrax carries high mortality if treatment is delayed. Management relies on prompt bactericidal antibiotic therapy, with antitoxin added in severe disease. Compare this with Clostridium perfringens, which causes gas gangrene through alpha toxin and needs urgent surgical debridement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anthrax",
+     "points": [
+      "Spore-forming gram-positive rod",
+      "Painless black eschar in cutaneous form",
+      "Inhalational form has high mortality if untreated",
+      "Prompt bactericidal antibiotics, antitoxin in severe cases"
+     ]
+    },
+    "right": {
+     "title": "Gas gangrene",
+     "points": [
+      "Clostridium perfringens",
+      "Alpha toxin drives tissue damage",
+      "Spreading crepitant necrosis",
+      "Urgent surgical debridement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Corynebacterium diphtheriae** produces an exotoxin that inhibits protein synthesis, causing a firmly adherent grey pseudomembrane on the pharynx that bleeds on removal. Bull neck from cervical oedema, airway obstruction, myocarditis and neuropathy are complications. Diagnosis needs swab culture and toxin testing. Treatment is immediate **diphtheria antitoxin** along with penicillin or erythromycin, and the case must be notified.",
+   "say": "Corynebacterium diphtheriae produces an exotoxin that inhibits protein synthesis, causing a firmly adherent grey pseudomembrane on the pharynx that bleeds on removal. Bull neck from cervical oedema, airway obstruction, myocarditis and neuropathy are complications. Diagnosis needs swab culture and toxin testing. Treatment is immediate diphtheria antitoxin along with penicillin or erythromycin, and the case must be notified.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_e99bc4515801",
+  "q_2757cc92ac44",
+  "q_48655fd64fd3"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 'Listeria monocytogenes' in Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases (Bennett and Dolin, Eds.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 18
+ }
+}

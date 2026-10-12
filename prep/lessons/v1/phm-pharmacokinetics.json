@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "phm-pharmacokinetics",
+ "subject": "pharmacology",
+ "title": "Distribution and pharmacokinetic parameters",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Volume of distribution** (Vd) is the apparent volume in which a drug would need to be spread to give the plasma concentration seen. Vd = dose divided by plasma concentration. A drug with high Vd is spread widely into tissues, while a low Vd means most of the drug stays in plasma. Vd can exceed total body water when a drug is sequestered in tissues such as fat.",
+   "say": "Volume of distribution is the apparent volume in which a drug would need to be spread to give the plasma concentration seen. It equals dose divided by plasma concentration. A high value means wide tissue spread, while a low value means most of the drug stays in plasma. Vd can exceed total body water when a drug is sequestered in tissues such as fat.",
+   "vis": null
+  },
+  {
+   "tx": "**Plasma protein binding** restricts a drug to the vascular compartment, so highly bound drugs tend to have a lower volume of distribution. Only the free fraction is active and can be cleared. Bound drugs are also not removed by haemodialysis and often have a longer duration of action. Displacement from binding sites can cause drug interactions.",
+   "say": "Plasma protein binding keeps a drug in the vascular compartment, so highly bound drugs tend to have a lower volume of distribution. Only the free fraction is active and can be cleared. Bound drugs are not removed by haemodialysis and often act for longer. Displacement from binding sites can cause interactions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High protein binding",
+     "points": [
+      "Lower volume of distribution",
+      "Longer duration of action",
+      "Not removed by dialysis",
+      "Possible displacement interactions"
+     ]
+    },
+    "right": {
+     "title": "Low protein binding",
+     "points": [
+      "Wider tissue distribution",
+      "Shorter action, faster clearance",
+      "Removed more easily by dialysis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**First order kinetics** means a constant fraction of drug is eliminated per unit time, so the rate depends on plasma concentration. Half-life stays constant and clearance stays constant. Most drugs follow this pattern. **Zero order kinetics** means a constant amount is eliminated per unit time, as with alcohol, phenytoin and salicylates at high doses, where elimination saturates.",
+   "say": "First order kinetics means a constant fraction of drug is eliminated per unit time, so the rate depends on plasma concentration. Half-life and clearance stay constant, and most drugs behave this way. Zero order kinetics means a constant amount is eliminated per unit time. Alcohol, phenytoin and salicylates show this when elimination saturates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "First order",
+     "Zero order"
+    ],
+    "rows": [
+     [
+      "Amount removed",
+      "Fixed fraction per time",
+      "Fixed amount per time"
+     ],
+     [
+      "Rate versus concentration",
+      "Directly proportional",
+      "Independent"
+     ],
+     [
+      "Half-life",
+      "Constant",
+      "Varies with dose"
+     ],
+     [
+      "Examples",
+      "Most drugs, lithium",
+      "Alcohol, phenytoin, aspirin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Half-life** is the time for plasma concentration to fall by half. After four half-lives about 6.25 percent of the original amount remains. Steady state is reached in about four to five half-lives, whatever the dose. Loading dose depends mainly on **volume of distribution**, while maintenance dose depends on **clearance**. Drugs with a short half-life, such as lignocaine, are a classic example of this two-phase approach.",
+   "say": "Half-life is the time for plasma concentration to fall by half. After four half-lives about six point two five percent of the original amount remains. Steady state takes about four to five half-lives. Loading dose depends mainly on volume of distribution, while maintenance dose depends on clearance. Lignocaine is a classic example of two-phase dosing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Loading dose",
+      "sub": "Target concentration times Vd"
+     },
+     {
+      "id": "b",
+      "label": "Reach target fast"
+     },
+     {
+      "id": "c",
+      "label": "Maintenance dose",
+      "sub": "Target concentration times clearance"
+     },
+     {
+      "id": "d",
+      "label": "Steady state maintained"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Therapeutic drug monitoring** (TDM) is used for drugs with a narrow therapeutic index, large variation between patients, or toxicity risk in renal failure. Examples include digoxin, lithium, phenytoin, aminoglycosides and immunosuppressants such as cyclosporine. TDM is not useful for drugs whose effect is easily measured, such as antihypertensives, diuretics and metformin.",
+   "say": "Therapeutic drug monitoring is used for drugs with a narrow therapeutic index, wide variation between patients, or toxicity risk in renal failure. Examples include digoxin, lithium, phenytoin, aminoglycosides and cyclosporine. It is not useful where the effect is easily measured, such as with antihypertensives, diuretics and metformin.",
+   "vis": null
+  },
+  {
+   "tx": "**Redistribution** explains rapid offset of action after a single intravenous bolus of a highly lipid soluble agent such as thiopentone. The drug first reaches well perfused organs like the brain, then moves to fat and muscle, so the brain concentration falls quickly. Halothane and ether show similar redistribution, which is distinct from true elimination by metabolism or excretion.",
+   "say": "Redistribution explains the rapid end of action after a single intravenous bolus of a highly lipid soluble agent such as thiopentone. The drug reaches well perfused organs like the brain first, then moves into fat and muscle, so brain levels fall quickly. This differs from true elimination by metabolism or excretion.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "188d3826-5416-4fdb-8320-49d2d2a2eb7d",
+  "4d59b80c-7a2a-4478-9f64-4f2cb17f7f42",
+  "6610ffc7-e301-4be6-aecb-8826a3c3847b"
+ ],
+ "src": [],
+ "refs": [
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton, Chabner, Knollmann, eds)",
+  "KD Tripathi, Essentials of Medical Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 361
+ }
+}

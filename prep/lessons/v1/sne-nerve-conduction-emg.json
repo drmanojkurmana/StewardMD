@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "sne-nerve-conduction-emg",
+ "subject": "ss-neurology",
+ "title": "Nerve conduction, EMG and evoked potentials: core principles for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Nerve conduction studies (NCS) measure how fast and how strongly a nerve carries an impulse. Stimulate a nerve and record either a **compound muscle action potential** (CMAP) from a muscle or a **sensory nerve action potential** (SNAP) from the nerve itself. Amplitude mainly reflects the number of surviving conducting axons, while latency and velocity reflect myelin and axonal speed. Velocity is distance divided by time, so distance and latency are the two variables that must be measured.",
+   "say": "Nerve conduction studies measure how fast and how strongly a nerve carries an impulse. You stimulate a nerve and record either a compound muscle action potential from a muscle, or a sensory nerve action potential from the nerve itself. Amplitude mainly reflects the number of surviving conducting axons. Latency and velocity reflect myelin and axonal speed. Velocity is distance divided by time, so distance and latency are the two variables that must be measured.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "What it reflects",
+     "Main clue"
+    ],
+    "rows": [
+     [
+      "CMAP amplitude",
+      "Surviving motor axons",
+      "Low means axon loss"
+     ],
+     [
+      "SNAP amplitude",
+      "Surviving sensory axons",
+      "Low means axon loss"
+     ],
+     [
+      "Conduction velocity",
+      "Myelin and axon calibre",
+      "Slow means demyelination"
+     ],
+     [
+      "Distal latency",
+      "Distal myelin integrity",
+      "Prolonged in entrapment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Needle EMG examines the motor unit, which is the motor neuron, its axon, the neuromuscular junction and the fibres it supplies. In a lower motor neuron lesion, denervated muscle shows **fibrillation potentials** and **positive sharp waves** at rest, along with reduced recruitment. Myotonic discharges, seen in myotonic dystrophy and related myotonias, are another spontaneous pattern. Spontaneous activity at rest signals denervation or inflammation, not normal muscle.",
+   "say": "Needle EMG examines the motor unit, which is the motor neuron, its axon, the neuromuscular junction and the fibres it supplies. In a lower motor neuron lesion, denervated muscle shows fibrillation potentials and positive sharp waves at rest, along with reduced recruitment. Myotonic discharges are another spontaneous pattern. Spontaneous activity at rest signals denervation or inflammation, not normal muscle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Denervation pattern",
+     "points": [
+      "Fibrillation potentials",
+      "Positive sharp waves",
+      "Reduced recruitment"
+     ]
+    },
+    "right": {
+     "title": "Myotonic pattern",
+     "points": [
+      "Repetitive discharges",
+      "Waxing and waning sound",
+      "Seen in myotonias"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Repetitive nerve stimulation (RNS) tests the neuromuscular junction. In a postsynaptic disorder such as **myasthenia gravis**, a 3 Hz train gives a decrement of more than 10 percent between the first and fourth CMAPs. In presynaptic **Lambert-Eaton syndrome**, the pattern reverses: a marked incremental response, often 100 percent or more, appears at high frequency. Single fibre EMG is the most sensitive test, measuring **jitter**, the variability in timing between two fibres of one motor unit.",
+   "say": "Repetitive nerve stimulation tests the neuromuscular junction. In a postsynaptic disorder such as myasthenia gravis, a three hertz train gives a decrement of more than 10 percent between the first and fourth potentials. In presynaptic Lambert-Eaton syndrome, the pattern reverses, with a marked incremental response, often 100 percent or more. Single fibre EMG is the most sensitive test, measuring jitter, the variability in timing between two fibres of one motor unit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "RNS pattern",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Myasthenia gravis",
+      "Decrement over 10 percent at 3 Hz",
+      "Postsynaptic"
+     ],
+     [
+      "Lambert-Eaton syndrome",
+      "Increment 100 percent or more",
+      "Presynaptic"
+     ],
+     [
+      "Single fibre EMG",
+      "Raised jitter",
+      "Most sensitive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evoked potentials record the brain's response to a stimulus. The **visual evoked potential** has a P100 wave, its key peak. **Brainstem auditory evoked response** (BAER) tests the auditory pathway through waves I to V. **Somatosensory evoked potentials** (SSEP) are used to monitor the posterior columns and sensory pathways, especially during spinal surgery. Latency prolongation localises the lesion along the pathway.",
+   "say": "Evoked potentials record the brain's response to a stimulus. The visual evoked potential has a P100 wave, its key peak. Brainstem auditory evoked response tests the auditory pathway through waves one to five. Somatosensory evoked potentials monitor the posterior columns and sensory pathways, especially during spinal surgery. Latency prolongation localises the lesion along the pathway.",
+   "vis": null
+  },
+  {
+   "tx": "Safety matters in every study. Needle EMG carries risks, and the **pneumothorax** risk is most serious when sampling the serratus anterior, so ultrasound guidance helps. Patients with external pacing wires or implanted pacemakers should not undergo stimulation, because current may reach the heart. Anticoagulants such as warfarin do not usually need stopping for routine needle EMG, but platelet counts below about 50,000 per microlitre call for caution.",
+   "say": "Safety matters in every study. Needle EMG carries risks, and pneumothorax is the most serious when sampling the serratus anterior, so ultrasound guidance helps. Patients with external pacing wires or implanted pacemakers should not undergo stimulation, because current may reach the heart. Anticoagulants such as warfarin do not usually need stopping for routine needle EMG, but low platelet counts call for caution.",
+   "vis": null
+  },
+  {
+   "tx": "Age and body factors change **normal values**. **Nerve conduction velocity** slows with age, so **age-corrected reference values** are used for older patients. Taller people have slower velocities because the **conduction path** is longer. Limb temperature matters too: cold slows conduction, so the limb should be **warmed** before testing. Always compare results with the laboratory's own **reference ranges**.",
+   "say": "Age and body factors change normal values. Nerve conduction velocity slows with age, so age-corrected reference values are used for older patients. Taller people have slower velocities because the conduction path is longer. Limb temperature matters too, since cold slows conduction, so the limb should be warmed before testing. Always compare results with the laboratory's own reference ranges.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_8939c7bd3496",
+  "q_70e580440980",
+  "q_765e269b2b7f"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 44
+ }
+}

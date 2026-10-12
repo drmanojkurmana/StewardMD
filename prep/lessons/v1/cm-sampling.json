@@ -1,0 +1,119 @@
+{
+ "v": 1,
+ "module": "cm-sampling",
+ "subject": "community-medicine",
+ "title": "Sampling Methods and Sample Size",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **sampling frame** is the list from which the sample is drawn. **Probability sampling** gives every unit a known, non-zero chance of selection, and random sampling is the main example. Random here does not mean haphazard; the selection probabilities are specified in advance. Non-random methods such as **convenience** and **snowball** sampling cannot support formal inference, and quota sampling is the classic non-random method examiners test.",
+   "say": "A sampling frame is the list from which the sample is drawn. Probability sampling gives every unit a known, non-zero chance of selection, and random sampling is the main example. Random here does not mean haphazard. Non-random methods such as convenience and snowball sampling cannot support formal inference, and quota sampling is the classic non-random method examiners test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Random?",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Simple random",
+      "Yes",
+      "Equal chance for each unit"
+     ],
+     [
+      "Systematic",
+      "Yes",
+      "Every nth unit after random start"
+     ],
+     [
+      "Stratified",
+      "Yes",
+      "Sample within homogeneous strata"
+     ],
+     [
+      "Cluster",
+      "Yes",
+      "Whole groups selected as units"
+     ],
+     [
+      "Quota",
+      "No",
+      "Non-probabilistic quotas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **simple random sampling** every unit has an equal chance, found by lottery, random number tables or computer software. It suits small, homogeneous, readily available populations and is used in clinical trials. In **systematic random sampling**, units are listed in a fixed order, a random start is chosen, and every nth unit follows. If a list has periodic arrangement, the sample may be biased.",
+   "say": "In simple random sampling every unit has an equal chance, found by lottery, random number tables or computer software. It suits small, homogeneous, readily available populations and is used in clinical trials. In systematic random sampling, units are listed in a fixed order, a random start is chosen, and every nth unit follows. If a list has periodic arrangement, the sample may be biased.",
+   "vis": null
+  },
+  {
+   "tx": "In India, the **30 by 7 cluster survey** of the WHO style checks immunisation coverage. Thirty clusters are chosen, and seven children aged 12 to 23 months in each cluster are assessed, giving 210 children. Cluster sampling is a two-stage design, and multistage sampling extends it across successive units such as state, district, village and person. **Multiphase sampling** instead applies different tests to the whole sample and then to sub-samples.",
+   "say": "In India, the thirty by seven cluster survey of the WHO style checks immunisation coverage. Thirty clusters are chosen, and seven children aged twelve to twenty three months in each cluster are assessed, giving two hundred and ten children. Cluster sampling is a two-stage design, and multistage sampling extends it across successive units such as state, district, village and person. Multiphase sampling instead applies different tests to the whole sample and then to sub-samples.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "30 clusters"
+     },
+     {
+      "id": "b",
+      "label": "7 children each"
+     },
+     {
+      "id": "c",
+      "label": "210 total"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sampling error** is the variation between samples drawn from the same population, and it shrinks as sample size grows. **Non-sampling errors** arise from miscalibrated instruments, observer variation, incomplete coverage and conceptual errors, and they are not reduced by a larger sample. The **design effect** adjusts sample size for clustering, so it is used in cluster and multistage designs, not in simple random sampling.",
+   "say": "Sampling error is the variation between samples drawn from the same population, and it shrinks as sample size grows. Non-sampling errors arise from miscalibrated instruments, observer variation, incomplete coverage and conceptual errors, and they are not reduced by a larger sample. The design effect adjusts sample size for clustering, so it is used in cluster and multistage designs, not in simple random sampling.",
+   "vis": null
+  },
+  {
+   "tx": "Sample size depends on the **expected prevalence** or mean, the desired **precision**, and the chosen **confidence level**. For a prevalence study, the standard formula is n equals four times p times q divided by d squared, where d is the absolute precision and q equals one minus p. Where the design uses clusters, the **design effect** inflates this figure. Always check whether the question asks for a random or non-random method, since **quota** and **convenience sampling** are the usual distractors.",
+   "say": "Sample size depends on the expected prevalence or mean, the desired precision, and the chosen confidence level, which is conventionally set at the standard level used in most studies. For a prevalence study the formula is n equals four times p times q divided by d squared, where d is the absolute precision and q equals one minus p. Where the design uses clusters, the design effect inflates this figure. Always check whether the question asks for a random or non-random method, since quota and convenience sampling are the usual distractors.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "03d2d3d5-f05c-4763-9b77-9a4f89362d97",
+  "57305d15-41e5-4cb9-8754-52107b6f294c",
+  "642d717d-29cd-4a84-a42d-1c701a9c106b"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine",
+  "Oxford Handbook of Medical Statistics (Peacock and Peacock)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 93
+ }
+}

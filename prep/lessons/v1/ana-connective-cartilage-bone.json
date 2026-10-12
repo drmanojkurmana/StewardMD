@@ -1,0 +1,181 @@
+{
+ "v": 1,
+ "module": "ana-connective-cartilage-bone",
+ "subject": "anatomy",
+ "title": "Connective tissue, cartilage and bone histology: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Connective tissue is made of cells, **ground substance** and fibres. The main cell is the fibroblast, which secretes collagen and elastin. Mast cells are a prominent source of histamine. Collagen is the most abundant protein in the body, and its fibres show a triple-stranded, quarter-staggered arrangement of tropocollagen molecules, which aids mineralisation of bone.",
+   "say": "Connective tissue is made of cells, ground substance and fibres. The main cell is the fibroblast, which secretes collagen and elastin. Mast cells are a prominent source of histamine. Collagen is the most abundant protein in the body, and its fibres show a triple-stranded, quarter-staggered arrangement of tropocollagen molecules, which aids mineralisation of bone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fibre",
+     "Main collagen type",
+     "Where found"
+    ],
+    "rows": [
+     [
+      "Collagen fibres",
+      "Type I",
+      "Bone, skin, tendon"
+     ],
+     [
+      "Reticular fibres",
+      "Type III",
+      "Lymphoid organs, fine stroma"
+     ],
+     [
+      "Elastic fibres",
+      "Elastin, not collagen",
+      "Aorta, vocal cords, ligamenta flava"
+     ],
+     [
+      "Basement membrane",
+      "Type IV",
+      "Under epithelia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Perichondrium is a connective tissue sheath around cartilage. Chondrocytes are nourished by **diffusion** through the matrix from vessels outside the cartilage, because cartilage is avascular. Hyaline cartilage lacks blood vessels, lymphatics and nerves. Growth of cartilage is appositional when perichondrium is present and interstitial when it is absent.",
+   "say": "Perichondrium is a connective tissue sheath around cartilage. Chondrocytes are nourished by diffusion through the matrix from vessels outside the cartilage, because cartilage is avascular. Hyaline cartilage lacks blood vessels, lymphatics and nerves. Growth of cartilage is appositional when perichondrium is present and interstitial when it is absent.",
+   "vis": null
+  },
+  {
+   "tx": "Bone is made of **osteoblasts**, which are protein-secreting cells with abundant rough endoplasmic reticulum and Golgi, and make type I collagen. **Osteoclasts** are multinucleated cells of monocyte-macrophage origin that resorb bone, sitting in Howship's lacunae. **Osteocytes** are osteoblasts trapped in their own matrix, lying in lacunae and linked by canaliculi.",
+   "say": "Bone is made of osteoblasts, which are protein-secreting cells with abundant rough endoplasmic reticulum and Golgi, and make type I collagen. Osteoclasts are multinucleated cells of monocyte-macrophage origin that resorb bone, sitting in Howship's lacunae. Osteocytes are osteoblasts trapped in their own matrix, lying in lacunae and linked by canaliculi.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ob",
+      "label": "Osteoblast",
+      "sub": "forms bone"
+     },
+     {
+      "id": "oc",
+      "label": "Osteocyte",
+      "sub": "trapped cell"
+     },
+     {
+      "id": "ocl",
+      "label": "Osteoclast",
+      "sub": "resorbs bone"
+     }
+    ],
+    "edges": [
+     [
+      "ob",
+      "oc",
+      "enclosed in matrix"
+     ],
+     [
+      "ocl",
+      "ob",
+      "remodelling coupling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mature bone is **lamellar** bone. In compact bone, lamellae form concentric cylinders called the Haversian system or osteon, centred on a Haversian canal. Volkmann canals run transversely to connect Haversian canals. Spongy or cancellous bone, found at epiphyses and in vertebrae, has no Haversian systems; its canaliculi open into marrow cavities. Woven bone is seen in fetal bone and fracture healing.",
+   "say": "Mature bone is lamellar bone. In compact bone, lamellae form concentric cylinders called the Haversian system or osteon, centred on a Haversian canal. Volkmann canals run transversely to connect Haversian canals. Spongy or cancellous bone, found at epiphyses and in vertebrae, has no Haversian systems; its canaliculi open into marrow cavities. Woven bone is seen in fetal bone and fracture healing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compact bone",
+     "points": [
+      "Haversian systems present",
+      "Central Haversian canal",
+      "Volkmann canals connect",
+      "Diaphysis of long bones"
+     ]
+    },
+    "right": {
+     "title": "Spongy bone",
+     "points": [
+      "No Haversian systems",
+      "Trabeculae and marrow spaces",
+      "Canaliculi open to cavities",
+      "Epiphyses and vertebrae"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **endochondral ossification**, a cartilage model is replaced by bone. The growth plate has zones: resting, proliferative, hypertrophic, calcified and ossification. Chondrocytes stack in columns in the proliferative zone and enlarge in the hypertrophic zone, where the matrix calcifies. Periosteum supplies osteoblasts that make the major share of new bone after a fracture. Remember that most long bones are preformed in hyaline cartilage, except the clavicle.",
+   "say": "In endochondral ossification, a cartilage model is replaced by bone. The growth plate has zones: resting, proliferative, hypertrophic, calcified and ossification. Chondrocytes stack in columns in the proliferative zone and enlarge in the hypertrophic zone, where the matrix calcifies. Periosteum supplies osteoblasts that make the major share of new bone after a fracture. Remember that most long bones are preformed in hyaline cartilage, except the clavicle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r",
+      "label": "Resting zone"
+     },
+     {
+      "id": "p",
+      "label": "Proliferative zone"
+     },
+     {
+      "id": "h",
+      "label": "Hypertrophic zone"
+     },
+     {
+      "id": "c",
+      "label": "Calcified zone"
+     },
+     {
+      "id": "o",
+      "label": "Ossification zone"
+     }
+    ],
+    "edges": [
+     [
+      "r",
+      "p"
+     ],
+     [
+      "p",
+      "h"
+     ],
+     [
+      "h",
+      "c"
+     ],
+     [
+      "c",
+      "o"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "875341ea-f358-446c-88d2-8c4221b2fe67",
+  "19220d49-4256-4eb0-93df-ecf36c896ae3",
+  "5184ba3a-2c28-4c94-a11d-9548ae8b822d"
+ ],
+ "src": [],
+ "refs": [
+  "Inderbir Singh's Textbook of Human Histology",
+  "BD Chaurasia's Handbook of General Anatomy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 116
+ }
+}

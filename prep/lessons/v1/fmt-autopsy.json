@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "module": "fmt-autopsy",
+ "subject": "forensic-medicine",
+ "title": "Medicolegal autopsy and exhumation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **medicolegal autopsy** is a post-mortem examination done for legal purposes, to establish the **cause of death**, the **manner of death** and the time since death. It can also establish identity when unknown, collect physical evidence and determine live birth and viability in newborns. Consent of the relatives is not needed; written orders from a police officer or magistrate are required.",
+   "say": "A medicolegal autopsy is a post mortem examination done for legal purposes. It aims to establish the cause of death, the manner of death and the time since death. It can also establish identity when unknown, collect physical evidence, and determine live birth and viability in newborns. Relatives' permission is not needed, but a written order from a police officer or magistrate is required before the autopsy is done.",
+   "vis": null
+  },
+  {
+   "tx": "Three classical **evisceration techniques** are described. In **Virchow's technique** each organ is removed individually. In **Rokitansky's technique** organ blocks are removed, such as the thoracic and abdominal blocks. In **Letulle's technique** all organs are removed en masse, and **Ghon's technique** removes them in organ blocks in a sequence that suits the case.",
+   "say": "Three classical evisceration techniques are described. In Virchow's technique each organ is removed individually. In Rokitansky's technique organ blocks are removed. In Letulle's technique all organs are removed en masse together, while Ghon's technique removes them in organ blocks in a sequence that suits the case.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "How organs are removed"
+    ],
+    "rows": [
+     [
+      "Virchow",
+      "One organ at a time"
+     ],
+     [
+      "Rokitansky",
+      "In organ blocks, in situ dissection"
+     ],
+     [
+      "Letulle",
+      "All organs together en masse"
+     ],
+     [
+      "Ghon",
+      "Organ blocks, sequence adapted to case"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **asphyxial deaths** such as hanging or strangulation, the neck is dissected last. Cranial, thoracic and abdominal organs are removed first so the body is drained of blood, giving a clean bloodless field. A modified Y-shaped or T-shaped incision is preferred for neck study. Never open the neck early, as artificial haemorrhage may mislead the examiner.",
+   "say": "In asphyxial deaths such as hanging or strangulation, the neck is dissected last. The cranial, thoracic and abdominal organs are removed first so the body is drained of blood. This gives a clean, bloodless field for the neck organs. A modified Y shaped or T shaped incision is preferred for neck study, and early opening of the neck may create artificial haemorrhage that misleads the examiner.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Skull and brain"
+     },
+     {
+      "id": "b",
+      "label": "Thorax"
+     },
+     {
+      "id": "c",
+      "label": "Abdomen"
+     },
+     {
+      "id": "d",
+      "label": "Neck last"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Specimens for **toxicology** are preserved in a **saturated solution of common salt** (sodium chloride), and this is the standard preservative for viscera. Formalin is never used for toxicology because it denatures proteins and can hide poisons. **Sodium fluoride** (about 10 mg/ml) preserves blood and vitreous humour, and vitreous is the best sample for alcohol and glucose in decomposed bodies. Blood for toxicology is taken from the femoral vein.",
+   "say": "Specimens for toxicology are preserved in a saturated solution of common salt, which is the standard preservative for viscera. Formalin is never used for toxicology because it denatures proteins and can hide poisons. Sodium fluoride, at about 10 milligrams per millilitre, preserves blood and vitreous humour. Vitreous is the best sample for alcohol and glucose in decomposed bodies, and blood is best taken from the femoral vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Specimen",
+     "Preservative"
+    ],
+    "rows": [
+     [
+      "Viscera (toxicology)",
+      "Saturated salt solution"
+     ],
+     [
+      "Blood",
+      "Sodium or potassium fluoride"
+     ],
+     [
+      "Vitreous humour",
+      "Sodium fluoride 10 mg/ml"
+     ],
+     [
+      "Virology tissue",
+      "50% glycerine"
+     ],
+     [
+      "Brain (rabies)",
+      "50% glycerine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exhumation** is the lawful digging out of a buried body, for identification or to find the cause of death. In India there is **no time limit**. An executive magistrate, sub-divisional magistrate or coroner orders it in writing. It is done in the presence of a police officer and a medical officer, in **natural daylight**, usually early in the morning.",
+   "say": "Exhumation is the lawful digging out of a buried body, to identify it or find the cause of death. In India there is no time limit for it. An executive magistrate, sub divisional magistrate or coroner must order it in writing. It is carried out in the presence of a police officer and a medical officer, in natural daylight, and is usually started early in the morning.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "e6b6f9fa-01e1-476d-bb68-5185054efccd",
+  "a10b0b43-4c3d-43e7-9221-f860fc8bd646",
+  "f6115abc-4025-4631-a2c1-e6d51f9b975f"
+ ],
+ "src": [],
+ "refs": [
+  "Parikh's Textbook of Medical Jurisprudence and Toxicology (6th edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 161
+ }
+}

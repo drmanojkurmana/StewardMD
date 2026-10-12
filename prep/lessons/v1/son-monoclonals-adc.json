@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "module": "son-monoclonals-adc",
+ "subject": "ss-medical-oncology",
+ "title": "Monoclonal antibodies and antibody drug conjugates",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Monoclonal antibodies are **immunoglobulins** made from a single B cell clone, so every molecule binds one epitope. In practice, IgG is the class used almost exclusively for therapeutic monoclonal antibodies. The Fab arms carry the **complementarity-determining regions (CDRs)** that set specificity and affinity, while the Fc region recruits immune effectors and drives antibody-dependent cellular cytotoxicity and complement activation.",
+   "say": "Monoclonal antibodies are immunoglobulins produced from one B cell clone, so each molecule recognises a single epitope. In practice, IgG is almost always the class chosen for therapy. The Fab arms hold the complementarity-determining regions, which determine specificity and affinity. The Fc region recruits immune effectors, driving antibody-dependent cellular cytotoxicity and complement activation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Suffix",
+     "Structure",
+     "Example"
+    ],
+    "rows": [
+     [
+      "-omab",
+      "Murine",
+      "Not used clinically in this module"
+     ],
+     [
+      "-ximab",
+      "Chimeric",
+      "Cetuximab"
+     ],
+     [
+      "-zumab",
+      "Humanised",
+      "Trastuzumab, bevacizumab"
+     ],
+     [
+      "-umab",
+      "Fully human",
+      "Not named in this module"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antibody names carry a **nomenclature stem** that signals their origin. **Chimeric** antibodies keep murine variable regions fused to human constant regions, as with cetuximab. **Humanised** antibodies, such as trastuzumab and bevacizumab, retain only the mouse complementarity-determining regions grafted onto a human framework. Because greater murine content drives **anti-drug antibody** formation, a more human sequence is generally less immunogenic.",
+   "say": "Antibody names carry a nomenclature stem that signals their origin. Chimeric antibodies keep mouse variable regions joined to human constant regions, as seen with cetuximab. Humanised antibodies, such as trastuzumab and bevacizumab, keep only the mouse complementarity-determining regions grafted onto a human framework. Since more murine content drives anti-drug antibody formation, a more human sequence is generally less immunogenic.",
+   "vis": null
+  },
+  {
+   "tx": "Oncology monoclonal antibodies work through two broad routes. Some **block signalling** by binding a receptor on the tumour cell surface, which stops ligands from activating it or stops receptor pairs from forming, so growth messages are lost. Others rely on the **Fc region** to recruit immune effector mechanisms, namely **antibody-dependent cellular cytotoxicity** and **complement-dependent cytotoxicity**. Some antibodies also trap soluble growth factors before they reach their receptors.",
+   "say": "Oncology monoclonal antibodies work in two broad ways. Some block signalling, binding a receptor on the tumour cell so that its growth messages cannot be received. Others use their Fc region to recruit immune killing, through antibody-dependent cellular cytotoxicity and complement-dependent cytotoxicity. Some also trap a soluble growth factor so it cannot reach its receptor.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Signalling blockade",
+     "points": [
+      "Binds a receptor on the tumour cell",
+      "Stops ligand activation or receptor pairing",
+      "Traps soluble growth factors"
+     ]
+    },
+    "right": {
+     "title": "Immune effector killing",
+     "points": [
+      "Fc region recruits immune cells",
+      "Antibody-dependent cellular cytotoxicity",
+      "Complement-dependent cytotoxicity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Key toxicities are **infusion reactions**, **cardiotoxicity** and **neutropenia**. Trastuzumab causes LVEF decline, and anthracycline co-therapy raises severe cardiotoxicity risk about three to four times. Sacituzumab causes neutropenia and diarrhoea; UGT1A1 variants raise toxicity, so dose reduction is preemptive. Febrile neutropenia calls for holding the dose, reducing it and giving growth-factor support. Cetuximab requires KRAS wild-type status, as codon 12 mutations predict non-response.",
+   "say": "Key toxicities are infusion reactions, cardiotoxicity and neutropenia. Trastuzumab causes LVEF decline, and anthracycline co-therapy raises severe cardiotoxicity risk about three to four times. Sacituzumab causes neutropenia and diarrhoea; UGT1A1 variants raise toxicity, so dose reduction is preemptive. Febrile neutropenia calls for holding the dose, reducing it and giving growth factor. Cetuximab requires KRAS wild type status.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_253df52566e4",
+  "q_64be8b41d5c4",
+  "q_b637c20fa613"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 44
+ }
+}

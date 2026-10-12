@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "shp-vascular-liver-disorders",
+ "subject": "ss-hepatology",
+ "title": "Vascular Liver Disorders: Budd-Chiari Syndrome and Portal Vein Thrombosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Budd-Chiari syndrome** is obstruction of hepatic venous outflow at any level, from the small hepatic veins to the junction with the inferior vena cava. It causes congestion of the liver, leading to hepatomegaly, abdominal pain, and ascites. The caudate lobe is often spared because it drains directly into the inferior vena cava through its own veins, so it may appear enlarged on imaging.",
+   "say": "Budd-Chiari syndrome is obstruction of hepatic venous outflow at any level, from the small hepatic veins to the junction with the inferior vena cava. It causes congestion of the liver, leading to hepatomegaly, abdominal pain, and ascites. The caudate lobe is often spared because it drains directly into the inferior vena cava through its own veins, so it may appear enlarged on imaging.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Small hepatic veins"
+     },
+     {
+      "id": "b",
+      "label": "Major hepatic veins"
+     },
+     {
+      "id": "c",
+      "label": "IVC junction"
+     },
+     {
+      "id": "d",
+      "label": "Congestion and ascites"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common causes include **myeloproliferative neoplasms**, which account for roughly half of cases, along with hypercoagulable states, oral contraceptive use, and membranous obstruction of the inferior vena cava. Membranous IVC obstruction is especially common in India and Asia. Work-up should exclude cardiac causes and sinusoidal obstruction syndrome before a diagnosis is made.",
+   "say": "The most common causes include myeloproliferative neoplasms, which account for roughly half of cases, along with hypercoagulable states, oral contraceptive use, and membranous obstruction of the inferior vena cava. Membranous IVC obstruction is especially common in India and Asia. Work-up should exclude cardiac causes and sinusoidal obstruction syndrome before a diagnosis is made.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Myeloproliferative neoplasm",
+      "About half of cases; test for JAK2"
+     ],
+     [
+      "Hypercoagulable state",
+      "Includes thrombophilia and pregnancy"
+     ],
+     [
+      "Oral contraceptives",
+      "Consider in young women"
+     ],
+     [
+      "Membranous IVC obstruction",
+      "Common in India and Asia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis starts with **Doppler ultrasound**, but when results are equivocal or the test is unavailable, **CT or MRI** should follow. Imaging shows hepatic vein thrombosis, webs, or narrowing. Liver biopsy is useful for confirming the pattern of injury but is not the first step. Treatment depends on severity and includes anticoagulation, with angioplasty, stenting, or shunting for selected cases.",
+   "say": "Diagnosis starts with Doppler ultrasound, but when results are equivocal or the test is unavailable, CT or MRI should follow. Imaging shows hepatic vein thrombosis, webs, or narrowing. Liver biopsy is useful for confirming the pattern of injury but is not the first step. Treatment depends on severity and includes anticoagulation, with angioplasty, stenting, or shunting for selected cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Portal vein thrombosis** is a clot in the portal venous system and follows Virchow's triad: reduced portal flow, endothelial injury, and a hypercoagulable state. Persistent obstruction leads to **cavernous transformation**, a network of periportal collaterals. Extension into the superior mesenteric vein threatens bowel ischaemia and infarction, which is the most urgent concern.",
+   "say": "Portal vein thrombosis is a clot in the portal venous system and follows Virchow's triad: reduced portal flow, endothelial injury, and a hypercoagulable state. Persistent obstruction leads to cavernous transformation, a network of periportal collaterals. Extension into the superior mesenteric vein threatens bowel ischaemia and infarction, which is the most urgent concern.",
+   "vis": null
+  },
+  {
+   "tx": "Before starting **anticoagulation** for acute portal vein thrombosis, screen for varices and give prophylaxis, since bleeding is the main risk. Non-cirrhotic cases need a wider work-up, including JAK2 V617F testing for myeloproliferative neoplasms even when standard thrombophilia tests are negative. Sinusoidal and porto-sinusoidal disorders are separate entities and are not treated the same way.",
+   "say": "Before starting anticoagulation for acute portal vein thrombosis, screen for varices and give prophylaxis, since bleeding is the main risk. Non-cirrhotic cases need a wider work-up, including JAK2 V617F testing for myeloproliferative neoplasms even when standard thrombophilia tests are negative. Sinusoidal and porto-sinusoidal disorders are separate entities and are not treated the same way.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1b2d7c89e149",
+  "q_febb42a1d686",
+  "q_24f65ee168c3"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 22
+ }
+}

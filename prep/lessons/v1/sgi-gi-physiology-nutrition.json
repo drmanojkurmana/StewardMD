@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "sgi-gi-physiology-nutrition",
+ "subject": "ss-gastroenterology",
+ "title": "Gastrointestinal hormones and motility: secretin, gastrin, CCK, motilin and the migrating motor complex",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Secretin** is a 27-amino acid peptide released from duodenal S cells when luminal hydrogen ion concentration rises. It acts on a **G protein-coupled receptor** that raises cAMP, prompting pancreatic ducts to secrete bicarbonate and water. The alkaline load neutralises acid so that pancreatic lipase and amylase work at an optimal pH. Secretin also lowers gastrin release, which is why it is useful in diagnosis.",
+   "say": "Secretin is a 27 amino acid peptide released from duodenal S cells when hydrogen ion concentration rises in the duodenum. It acts on a G protein coupled receptor that raises cAMP, prompting the pancreatic ducts to secrete bicarbonate and water. The alkaline load neutralises acid so that pancreatic lipase and amylase work at an optimal pH. Secretin also lowers gastrin release, which is why it is useful in diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Gastrin** is released from antral G cells and stimulates acid secretion mainly by acting on enterochromaffin-like cells to release histamine, which then acts on parietal cells. Gastrin and **cholecystokinin** share the same C-terminal pentapeptide, which explains their overlapping actions. D cells release somatostatin, which restrains G cells. Helicobacter pylori reduces D-cell numbers, so gastrin rises.",
+   "say": "Gastrin is released from antral G cells and stimulates acid secretion mainly by acting on enterochromaffin-like cells to release histamine, which then acts on parietal cells. Gastrin and cholecystokinin share the same C terminal pentapeptide, which explains their overlapping actions. D cells release somatostatin, which restrains G cells. Helicobacter pylori reduces D-cell numbers, so gastrin rises.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastrin",
+     "points": [
+      "Antral G cells",
+      "Acts via CCKB receptors",
+      "Indirect acid stimulus via histamine",
+      "Restrained by somatostatin"
+     ]
+    },
+    "right": {
+     "title": "Cholecystokinin",
+     "points": [
+      "Duodenal and jejunal I cells",
+      "Same C-terminal pentapeptide",
+      "Gallbladder contraction",
+      "Pancreatic enzyme release"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gastrin binds **CCKB receptors**, activating phospholipase C, which releases intracellular calcium and activates protein kinase C. In **Zollinger-Ellison syndrome**, gastrinoma causes persistently high gastrin and refractory ulceration with diarrhoea. Secretin stimulation paradoxically raises gastrin in these patients, supporting the diagnosis. Pentagastrin, by contrast, stimulates calcitonin release and helps detect medullary thyroid carcinoma.",
+   "say": "Gastrin binds CCKB receptors, activating phospholipase C, which releases intracellular calcium and activates protein kinase C. In Zollinger-Ellison syndrome, a gastrinoma causes persistently high gastrin, refractory ulceration and diarrhoea. Secretin stimulation paradoxically raises gastrin in these patients, supporting the diagnosis. Pentagastrin, by contrast, stimulates calcitonin release and helps detect medullary thyroid carcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gastrin binds CCKB"
+     },
+     {
+      "id": "b",
+      "label": "PLC activated"
+     },
+     {
+      "id": "c",
+      "label": "Calcium and PKC rise"
+     },
+     {
+      "id": "d",
+      "label": "Acid secretion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Motilin** is released from the duodenum and jejunum and drives the **migrating motor complex** in the fasting state. Phase III is the most intense contractile phase, sweeping undigested material from stomach to ileum. Motilin falls in pregnancy and after cholecystectomy, and glucose suppresses its release. Erythromycin acts as a motilin receptor agonist, which is why it is used as a prokinetic in gastroparesis.",
+   "say": "Motilin is released from the duodenum and jejunum and drives the migrating motor complex in the fasting state. Phase three is the most intense contractile phase, sweeping undigested material from stomach to ileum. Motilin falls in pregnancy and after cholecystectomy, and glucose suppresses its release. Erythromycin acts as a motilin receptor agonist, which is why it is used as a prokinetic in gastroparesis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MMC phase",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Phase I",
+      "Quiescent, no contractions"
+     ],
+     [
+      "Phase II",
+      "Irregular, intermittent contractions"
+     ],
+     [
+      "Phase III",
+      "Strongest bursts, clears the gut"
+     ],
+     [
+      "Phase IV",
+      "Brief transition back to phase I"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Key exam points: in **cystic fibrosis**, a defective **CFTR** channel blocks **bicarbonate** and water secretion into the pancreatic ducts, giving thick secretions and **malabsorption**. **Histamine** released from **enterochromaffin-like cells** is the main amplifier of acid output. The **secretin test** helps separate **gastrinoma** from other causes of raised gastrin. Always interpret hormone levels alongside the clinical picture.",
+   "say": "Key exam points: in cystic fibrosis, a defective CFTR channel blocks bicarbonate and water secretion into the pancreatic ducts, giving thick secretions and malabsorption. Histamine released from enterochromaffin-like cells is the main amplifier of acid output. The secretin test helps separate gastrinoma from other causes of raised gastrin. Always interpret hormone levels alongside the clinical picture.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_d8c2384677a9",
+  "q_850cb86e4e8c",
+  "q_325056960b35"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Sleisenger and Fordtran's Gastrointestinal and Liver Disease (Feldman M, Friedman LS, Brandt LJ)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 24
+ }
+}

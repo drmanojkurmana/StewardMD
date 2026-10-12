@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "scc-post-icu",
+ "subject": "ss-critical-care",
+ "title": "ICU-acquired complications and rehabilitation",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "ICU survivors often carry **post intensive care syndrome**, a cluster of new or worsened problems in physical, cognitive and mental health that persist after discharge. It is common and under-recognised. Its three domains are physical weakness, cognitive impairment and psychological distress. Screening should be planned from the start, not left until the patient leaves hospital. Families are affected too, so family support forms part of care.",
+   "say": "ICU survivors often carry post intensive care syndrome, a cluster of new or worsened problems in physical, cognitive and mental health that persist after discharge. It is common and under-recognised. Its three domains are physical weakness, cognitive impairment and psychological distress. Screening should be planned from the start, not left until the patient leaves hospital. Families are affected too, so family support forms part of care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Typical problem",
+     "Example feature"
+    ],
+    "rows": [
+     [
+      "Physical",
+      "Muscle weakness",
+      "ICU acquired weakness"
+     ],
+     [
+      "Cognitive",
+      "Memory and attention loss",
+      "Slowed processing"
+     ],
+     [
+      "Psychological",
+      "Distress and flashbacks",
+      "PTSD symptoms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ICU acquired weakness** is symmetrical limb and respiratory muscle weakness that develops during critical illness without another cause. Prolonged immobility, sepsis and high dose corticosteroids raise the risk. **Early mobilisation** and progressive rehabilitation, started as soon as the patient is stable, reduce its duration and help function recover. Physiotherapy should be part of daily ICU routine.",
+   "say": "ICU acquired weakness is symmetrical limb and respiratory muscle weakness that develops during critical illness without another cause. Prolonged immobility, sepsis and high dose corticosteroids raise the risk. Early mobilisation and progressive rehabilitation, started as soon as the patient is stable, reduce its duration and help function recover. Physiotherapy should be part of daily ICU routine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Critical illness"
+     },
+     {
+      "id": "b",
+      "label": "Immobility and sepsis"
+     },
+     {
+      "id": "c",
+      "label": "Muscle weakness"
+     },
+     {
+      "id": "d",
+      "label": "Early mobilisation"
+     },
+     {
+      "id": "e",
+      "label": "Better recovery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "prevent"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pressure injuries arise when **sustained pressure** and **shear forces** compromise blood flow to skin over bony prominences, particularly in patients who cannot move. A **risk assessment** tool should be completed on admission and revisited at regular intervals. Prevention rests on **repositioning schedules**, **pressure redistributing surfaces** and adequate **nutrition**. Staging depends on tissue depth, ranging from non-blanching erythema through to full-thickness loss.",
+   "say": "Pressure injuries happen when sustained pressure and shear forces reduce blood flow to skin over bony points, especially in patients who cannot move. Risk should be assessed on admission and reviewed regularly. The main preventive steps are repositioning on a schedule, using pressure redistributing surfaces and ensuring good nutrition. Staging is based on how deep the tissue damage goes, from skin that stays red when pressed through to loss of full skin thickness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "1",
+      "Intact skin with non-blanching redness"
+     ],
+     [
+      "2",
+      "Partial thickness loss, shallow ulcer or blister"
+     ],
+     [
+      "3",
+      "Full thickness loss, fat visible, no exposed bone or tendon"
+     ],
+     [
+      "4",
+      "Full thickness loss with exposed bone, tendon or muscle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Critically ill patients carry a high **venous thromboembolism** risk because of immobility, sepsis and central lines. Unless contraindicated, **pharmacological prophylaxis** with a daily injected anticoagulant is the default, and **mechanical methods** such as compression devices are added when bleeding risk is high. **Stress ulcer prophylaxis** should be limited to patients with clear risk factors, such as coagulopathy or prolonged ventilation, because routine use adds little benefit and can increase pneumonia.",
+   "say": "Critically ill patients carry a high venous thromboembolism risk because of immobility, sepsis and central lines. Unless contraindicated, pharmacological prophylaxis with a daily injected anticoagulant is the default, and mechanical methods such as compression devices are added when bleeding risk is high. Stress ulcer prophylaxis should be limited to patients with clear risk factors, such as coagulopathy or prolonged ventilation, because routine use adds little benefit and can increase pneumonia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Give prophylaxis",
+     "points": [
+      "Injected anticoagulant first line",
+      "Mechanical methods if bleeding risk high"
+     ]
+    },
+    "right": {
+     "title": "Targeted ulcer prophylaxis",
+     "points": [
+      "Only with clear risk factors",
+      "Avoid routine use in others"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long term **cognitive impairment** and **post traumatic stress disorder** are common after critical illness. Memory, attention and executive function may remain impaired for months. PTSD symptoms include flashbacks, nightmares and avoidance of reminders of the ICU. **ICU diaries**, written by staff or family during the stay, help patients make sense of lost memories and can reduce distress. Follow up clinics allow structured review of physical, cognitive and psychological needs.",
+   "say": "Long term cognitive impairment and post traumatic stress disorder are common after critical illness. Memory, attention and executive function may remain impaired for months. PTSD symptoms include flashbacks, nightmares and avoidance of reminders of the ICU. ICU diaries, written by staff or family during the stay, help patients make sense of lost memories and can reduce distress. Follow up clinics allow structured review of physical, cognitive and psychological needs.",
+   "vis": null
+  },
+  {
+   "tx": "Plan a structured **follow up clinic** for survivors, usually reviewing them within weeks to months of discharge. The review covers function, cognition, mood, sleep and return to work, with referral to physiotherapy, psychology or rehabilitation as needed. Early identification of problems is the key exam point, as it allows timely rehabilitation and support for the patient and family.",
+   "say": "Plan a structured follow up clinic for survivors, usually reviewing them within weeks to months of discharge. The review covers function, cognition, mood, sleep and return to work, with referral to physiotherapy, psychology or rehabilitation as needed. Early identification of problems is the key exam point, as it allows timely rehabilitation and support for the patient and family.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_f6b05688eebe",
+  "q_00ff33f33daf",
+  "q_c562b58a417b"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline on rehabilitation after critical illness"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

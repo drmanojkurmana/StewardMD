@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "shp-hdv-other-viruses",
+ "subject": "ss-hepatology",
+ "title": "Hepatitis D and Other Hepatotropic Infections",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Hepatitis D virus (HDV) is a defective **RNA virus** that needs hepatitis B surface antigen (HBsAg) to package its envelope. It cannot infect anyone without HBV. Therefore, HBsAg-negative patients cannot have HDV infection. HDV spreads through blood and needle exposure, and it worsens the course of HBV disease.",
+   "say": "Hepatitis D virus is a defective RNA virus. It needs hepatitis B surface antigen to package its envelope, so it cannot infect anyone without hepatitis B. An HBsAg-negative patient therefore cannot have hepatitis D. It spreads through blood and needle exposure and worsens the course of hepatitis B.",
+   "vis": null
+  },
+  {
+   "tx": "HDV infection occurs in two settings. **Coinfection** is simultaneous acquisition of HDV with acute HBV, and it usually resolves. **Superinfection** is HDV acquired on top of chronic HBV, and it often leads to rapid progression to cirrhosis. High IgM anti-HDV suggests active infection, and HDV RNA confirms viral replication.",
+   "say": "Hepatitis D occurs as coinfection, where it is acquired at the same time as acute hepatitis B and usually resolves, or as superinfection on chronic hepatitis B, which often progresses rapidly to cirrhosis. High IgM anti-HDV suggests active infection, and HDV RNA confirms ongoing replication.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Coinfection",
+     "Superinfection"
+    ],
+    "rows": [
+     [
+      "Setting",
+      "Acute HBV with HDV together",
+      "HDV added to chronic HBV"
+     ],
+     [
+      "Course",
+      "Usually self-limiting",
+      "Often progresses to cirrhosis"
+     ],
+     [
+      "Key marker",
+      "IgM anti-HDV with IgM anti-HBc",
+      "IgM anti-HDV with IgG anti-HBc"
+     ],
+     [
+      "Chronicity risk",
+      "Low",
+      "High"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In acute viral hepatitis, the key early warning sign of **acute liver failure** is a rising INR, along with new encephalopathy and rising bilirubin, even when aminotransferases are falling. Injury is largely immune-mediated, with cytolytic T cells damaging infected hepatocytes. Suspicion of progression calls for urgent admission and transplant assessment.",
+   "say": "In acute viral hepatitis, the most important early warning of acute liver failure is a rising INR. Encephalopathy, rising bilirubin and prolonged prothrombin time can appear even as aminotransferases fall. Injury is largely immune mediated, with cytolytic T cells damaging infected liver cells. Such patients need urgent admission and transplant assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Falling ALT"
+     },
+     {
+      "id": "b",
+      "label": "Rising INR and bilirubin"
+     },
+     {
+      "id": "c",
+      "label": "Encephalopathy"
+     },
+     {
+      "id": "d",
+      "label": "Urgent transplant review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Other hepatotropic infections have characteristic patterns. **CMV** and **EBV** hepatitis usually cause mild transaminase rises with atypical lymphocytosis. **Herpes simplex** hepatitis is different: it is severe and fulminant, with very high aminotransferases and fever, so early recognition is essential. **Dengue** causes transaminase rises with thrombocytopenia, while **leptospirosis** in Weil disease produces jaundice together with renal failure.",
+   "say": "Other hepatotropic infections have characteristic patterns. CMV and EBV hepatitis usually cause mild transaminase rises with atypical lymphocytosis. Herpes simplex hepatitis is different: it is severe and fulminant, with very high aminotransferases and fever, so early recognition is essential. Dengue causes transaminase rises with thrombocytopenia, while leptospirosis in Weil disease produces jaundice together with renal failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Herpes simplex hepatitis",
+     "points": [
+      "Fulminant course",
+      "Very high aminotransferases",
+      "Fever present",
+      "Early recognition essential"
+     ]
+    },
+    "right": {
+     "title": "Dengue and Weil disease",
+     "points": [
+      "Dengue: thrombocytopenia with transaminase rise",
+      "Weil disease: jaundice with renal failure",
+      "Both need early supportive care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hepatitis E deserves special mention in pregnancy, where it carries a high risk of **fulminant hepatic failure**, especially in third trimester. Malarial hepatopathy causes jaundice with raised bilirubin in severe Plasmodium falciparum infection. In India, always test for hepatitis E in pregnant women with jaundice and monitor INR closely.",
+   "say": "Hepatitis E carries a high risk of fulminant hepatic failure in pregnancy, especially in the third trimester. Malarial hepatopathy causes jaundice in severe Plasmodium falciparum infection. In India, pregnant women with jaundice should be tested for hepatitis E and their INR monitored closely.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_885c4ecbf14d",
+  "q_9b8613ceff6f",
+  "q_e4dd5887f3d9"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)",
+  "Sleisenger and Fordtran's Gastrointestinal and Liver Disease (Feldman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 24
+ }
+}

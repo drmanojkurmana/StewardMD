@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "snp-post-transplant-complications",
+ "subject": "ss-nephrology",
+ "title": "Medical complications after transplantation: NODAT, dyslipidaemia and key post-transplant problems",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Post-transplant **new-onset diabetes after transplantation** (NODAT) is a major metabolic complication. Steroids, calcineurin inhibitors such as tacrolimus, and obesity all contribute. Tacrolimus reduces glucokinase activity and GLUT-4 expression, which impairs insulin secretion and uptake. Hepatitis C also raises risk. Cumulative incidence reaches about 24 percent by three years in registry data. Screen glucose at 3, 6 and 12 months after transplant. HbA1c is unreliable in the early months because red cell turnover is altered.",
+   "say": "New-onset diabetes after transplantation is a major metabolic complication. Steroids, calcineurin inhibitors such as tacrolimus, and obesity all contribute. Tacrolimus reduces glucokinase activity and GLUT-4 expression, which impairs insulin secretion and uptake. Hepatitis C also raises the risk. Registry data show a cumulative incidence of about 24 percent by three years. Screen glucose at 3, 6 and 12 months after transplant. HbA1c is unreliable in the early months because red cell turnover is altered.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Driver",
+     "Mechanism",
+     "Practical step"
+    ],
+    "rows": [
+     [
+      "Steroids",
+      "Raise hepatic glucose output",
+      "Taper to 5 mg or less"
+     ],
+     [
+      "Tacrolimus",
+      "Lower glucokinase and GLUT-4",
+      "Reduce dose or switch if needed"
+     ],
+     [
+      "Obesity",
+      "TNF-alpha blunts glucose uptake",
+      "Lifestyle and weight control"
+     ],
+     [
+      "Hepatitis C",
+      "Insulin resistance",
+      "Treat the infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management starts with **non-drug measures** and adjusting immunosuppression. Tapering prednisone to 5 mg or less per day clearly improves glucose tolerance. If hyperglycaemia persists, reduce tacrolimus or change agent, since the metabolic effect is partly reversible. Metformin is the usual first-line oral agent when graft function is adequate. Avoid thiazolidinediones in heart failure, and note that glyburide carries hypoglycaemia risk. Insulin is used when oral agents fail.",
+   "say": "Management starts with non-drug measures and adjusting immunosuppression. Tapering prednisone to 5 mg or less per day clearly improves glucose tolerance. If hyperglycaemia persists, reduce tacrolimus or change the agent, since the metabolic effect is partly reversible. Metformin is the usual first-line oral agent when graft function is adequate. Avoid pioglitazone in heart failure, and remember that glyburide carries a hypoglycaemia risk. Insulin is used when oral agents fail.",
+   "vis": null
+  },
+  {
+   "tx": "Post-transplant **erythrocytosis** and **hypertension** are frequent. Calcineurin inhibitors cause vasoconstriction, so BP control matters for graft and heart. Skin cancer and other malignancies are increased by lifelong immunosuppression, so annual skin review and sun protection are essential. Screen for cancer per standard age-based programmes. Recurrent disease such as FSGS and aHUS can threaten the new graft, and renal artery stenosis presents with new hypertension or falling function.",
+   "say": "Post-transplant erythrocytosis and hypertension are frequent. Calcineurin inhibitors cause vasoconstriction, so blood pressure control matters for the graft and the heart. Skin cancer and other malignancies are increased by lifelong immunosuppression, so annual skin review and sun protection are essential. Screen for cancer per standard age-based programmes. Recurrent disease such as FSGS and aHUS can threaten the new graft, and renal artery stenosis presents with new hypertension or falling function.",
+   "vis": null
+  },
+  {
+   "tx": "Surgical complications need prompt recognition. A **lymphocele** is a collection of lymph near the graft, often seen weeks after surgery, and may compress the ureter or vessels. A **urinary leak** typically appears in the first weeks as falling urine output with a raised drain or creatinine. Ultrasound confirms both, and drainage or stenting is used. Bone disease, including steroid-related osteoporosis and avascular necrosis, needs DEXA and calcium and vitamin D support.",
+   "say": "Surgical complications need prompt recognition. A lymphocele is a collection of lymph near the graft, often seen weeks after surgery, and may compress the ureter or vessels. A urinary leak typically appears in the first weeks as falling urine output with a raised drain or creatinine. Ultrasound confirms both, and drainage or stenting is used. Bone disease, including steroid-related osteoporosis and avascular necrosis, needs DEXA scanning and calcium and vitamin D support.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Falling graft function"
+     },
+     {
+      "id": "b",
+      "label": "Ultrasound"
+     },
+     {
+      "id": "c",
+      "label": "Lymphocele: drain or fenestrate"
+     },
+     {
+      "id": "d",
+      "label": "Urine leak: drain or stent"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Fluid collection"
+     ],
+     [
+      "b",
+      "d",
+      "Urinoma"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_c9c063084384",
+  "q_30b83c270707",
+  "q_3578118b1824"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "sgm-skin-systemic",
+ "subject": "ss-general-medicine",
+ "title": "Sweet syndrome: a febrile neutrophilic dermatosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sweet syndrome**, also called acute febrile neutrophilic dermatosis, is a reactive condition in which **neutrophils** accumulate in the dermis. It produces tender, red-violaceous plaques, fever and systemic inflammation. It is thought to be a hypersensitivity-type response driven by cytokines and colony-stimulating factors, not by infection or primary vasculitis.",
+   "say": "Sweet syndrome, also called acute febrile neutrophilic dermatosis, is a reactive condition in which neutrophils accumulate in the dermis. It produces tender, red-violaceous plaques, fever and systemic inflammation. It is thought to be a hypersensitivity-type response driven by cytokines and colony-stimulating factors, not by infection or primary vasculitis.",
+   "vis": null
+  },
+  {
+   "tx": "Triggers include preceding infections, inflammatory and autoimmune diseases, pregnancy and certain drugs. The most important trigger to remember for examinations is **underlying malignancy**, most often a **myeloid haematological disorder**, where the syndrome is paraneoplastic. Acute myeloid leukaemia is the classic association.",
+   "say": "Triggers include preceding infections, inflammatory and autoimmune diseases, pregnancy and certain drugs. The most important trigger to remember for examinations is underlying malignancy, most often a myeloid haematological disorder, where the syndrome is paraneoplastic. Acute myeloid leukaemia is the classic association.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trigger group",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Infection",
+      "Preceding infections"
+     ],
+     [
+      "Inflammatory or autoimmune",
+      "Inflammatory and autoimmune diseases"
+     ],
+     [
+      "Other",
+      "Pregnancy, certain drugs"
+     ],
+     [
+      "Malignancy",
+      "Myeloid haematological disorders, especially acute myeloid leukaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis rests on a **skin biopsy** showing a dense dermal neutrophilic infiltrate **without vasculitis**. Pathergy may occur, with new lesions at sites of trauma, and neutrophilic involvement of eyes, joints, lungs or other organs can accompany the skin disease. Full blood count with differential, blood film, ESR and CRP support the workup.",
+   "say": "Diagnosis rests on a skin biopsy showing a dense dermal neutrophilic infiltrate without vasculitis. Pathergy may occur, with new lesions at sites of trauma, and neutrophilic involvement of eyes, joints, lungs or other organs can accompany the skin disease. Full blood count with differential, blood film, ESR and CRP support the workup.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tender plaques with fever"
+     },
+     {
+      "id": "b",
+      "label": "Neutrophilia on blood count"
+     },
+     {
+      "id": "c",
+      "label": "Biopsy: neutrophils, no vasculitis"
+     },
+     {
+      "id": "d",
+      "label": "Screen for myeloid malignancy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several conditions can look similar and must be separated from Sweet syndrome. **Erythema nodosum** and other panniculitides involve subcutaneous fat rather than the dermis. **Pyoderma gangrenosum** is a neutrophilic ulcer, **cellulitis** is an infection, and **erythema multiforme** produces target lesions. **Behcet disease** may also cause skin lesions. Biopsy showing no vasculitis argues against leukocytoclastic vasculitis.",
+   "say": "Several conditions can look similar to Sweet syndrome and must be separated from it. Erythema nodosum and other panniculitides affect the fat layer beneath the skin rather than the dermis. Pyoderma gangrenosum is another neutrophilic condition that forms painful ulcers. Cellulitis is a bacterial infection, and erythema multiforme produces target-shaped lesions. Behcet disease can also cause skin lesions. A biopsy showing no vasculitis argues against leukocytoclastic vasculitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sweet syndrome",
+     "points": [
+      "Dense neutrophils in dermis",
+      "No true vasculitis",
+      "Fever and tender plaques"
+     ]
+    },
+    "right": {
+     "title": "Look-alikes",
+     "points": [
+      "Erythema nodosum: panniculitis",
+      "Pyoderma gangrenosum: ulcer",
+      "Cellulitis: infection",
+      "Erythema multiforme: target lesions",
+      "Behcet disease: oral and genital ulcers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Systemic corticosteroids** are the mainstay of treatment and usually produce rapid resolution of both skin lesions and systemic inflammation. **Steroid-sparing agents** are used for recurrent or refractory disease. Treating any underlying trigger, especially malignancy, is essential, because recurrence or relapse of the skin disease can signal haematological relapse.",
+   "say": "Systemic corticosteroids are the mainstay of treatment and usually produce rapid resolution of both skin lesions and systemic inflammation. Steroid-sparing agents are used for recurrent or refractory disease. Treating any underlying trigger, especially malignancy, is essential, because recurrence of the skin disease can signal haematological relapse.",
+   "vis": null
+  },
+  {
+   "tx": "Think of three exam anchors for **Sweet syndrome**. First, the **skin biopsy** shows a dense **neutrophilic infiltrate** in the dermis, yet no true vasculitis. Second, look for an **underlying myeloid malignancy**, most notably **acute myeloid leukaemia**, so a full blood count with differential is essential. Third, **systemic corticosteroids** give a rapid response, which helps distinguish it from other causes.",
+   "say": "Think of three exam anchors for Sweet syndrome. First, the skin biopsy shows a dense neutrophilic infiltrate in the dermis, yet no true vasculitis. Second, look for an underlying myeloid malignancy, most notably acute myeloid leukaemia, so a full blood count with differential is essential. Third, systemic corticosteroids give a rapid response, which helps distinguish it from other causes.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_b3201488e01a",
+  "q_0e4bca12c71c",
+  "q_3012a1bfe768"
+ ],
+ "src": [
+  "kb-reference-sweet-syndrome"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 454,
+  "itemN": 32
+ }
+}

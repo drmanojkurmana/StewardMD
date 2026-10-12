@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "rad-radiobiology",
+ "subject": "radiology",
+ "title": "Radiobiology and fractionation: the essentials for NEET-PG and INI-CET",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Radiotherapy works mainly by producing **ionisation** and free radicals in tissue. The most important lesion is a **double-strand break** in DNA, because single-strand breaks are usually repaired using the opposite strand as a template. Cell killing therefore depends on whether DNA damage is repaired correctly.",
+   "say": "Radiotherapy works mainly by producing ionisation and free radicals in tissue. The most important lesion is a double-strand break in DNA, because single-strand breaks are usually repaired using the opposite strand as a template. Cell killing therefore depends on whether DNA damage is repaired correctly.",
+   "vis": null
+  },
+  {
+   "tx": "The **four Rs** of radiobiology explain why fractionation spares normal tissue. They are repair of sublethal damage between fractions, repopulation of cells between fractions, redistribution of cells into more sensitive phases of the cell cycle, and **reoxygenation** of hypoxic cells. Reperfusion is not one of the four Rs.",
+   "say": "The four Rs of radiobiology explain why fractionation spares normal tissue. They are repair of sublethal damage between fractions, repopulation of cells between fractions, redistribution of cells into more sensitive phases of the cell cycle, and reoxygenation of hypoxic cells. Reperfusion is not one of the four Rs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "R",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Repair",
+      "Recovery of sublethal damage between fractions"
+     ],
+     [
+      "Repopulation",
+      "Regrowth of surviving cells during treatment"
+     ],
+     [
+      "Redistribution",
+      "Cells move into sensitive cell cycle phases"
+     ],
+     [
+      "Reoxygenation",
+      "Hypoxic cells gain oxygen and become sensitive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cell cycle sensitivity follows the order **G2M** greater than G2, then M, then G1, then early S, and **late S** is most resistant. Chromosomal aberrations arise when cells are irradiated in G1, while chromatid aberrations arise after DNA replication, in G2. Non-dividing cells such as neurons and muscle are relatively resistant.",
+   "say": "Cell cycle sensitivity follows the order G2M greater than G2, then M, then G1, then early S, and late S is most resistant. Chromosomal aberrations arise when cells are irradiated in G1, while chromatid aberrations arise after DNA replication, in G2. Non-dividing cells such as neurons and muscle are relatively resistant.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "G2M"
+     },
+     {
+      "id": "b",
+      "label": "G2"
+     },
+     {
+      "id": "c",
+      "label": "M"
+     },
+     {
+      "id": "d",
+      "label": "G1"
+     },
+     {
+      "id": "e",
+      "label": "Early S"
+     },
+     {
+      "id": "f",
+      "label": "Late S"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oxygen is the most effective **radiosensitiser**, because hypoxic cells are about two to three times more resistant. Oxygen enhancement ratio is high, about 2 to 3, for low LET radiation such as X-rays and gamma rays, and close to 1 for high LET radiation such as alpha particles. Hypoxia arises chronically from limited oxygen diffusion or acutely from temporary closure of tumour vessels.",
+   "say": "Oxygen is the most effective radiosensitiser, because hypoxic cells are about two to three times more resistant. Oxygen enhancement ratio is high, about 2 to 3, for low LET radiation such as X-rays and gamma rays, and close to 1 for high LET radiation such as alpha particles. Hypoxia arises chronically from limited oxygen diffusion or acutely from temporary closure of tumour vessels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low LET (X, gamma)",
+     "points": [
+      "OER about 2 to 3",
+      "Oxygen strongly sensitises",
+      "Indirect action via free radicals"
+     ]
+    },
+    "right": {
+     "title": "High LET (alpha)",
+     "points": [
+      "OER close to 1",
+      "Dense ionisation",
+      "Direct DSB induction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ionising radiation has no effect from the **image receptor used**, since that is an imaging variable, not a biological one. Dose rate matters: a high dose rate causes more damage than the same dose given slowly. Remember that the most radiosensitive tissue is bone marrow and the least is nervous tissue, and that the radiosensitive phase is G2M.",
+   "say": "Ionising radiation has no effect from the image receptor used, since that is an imaging variable, not a biological one. Dose rate matters: a high dose rate causes more damage than the same dose given slowly. Remember that the most radiosensitive tissue is bone marrow and the least is nervous tissue, and that the radiosensitive phase is G2M.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "7517f252-9bfa-4022-b41e-a806e54eba03",
+  "0116fef7-f670-4477-9b84-49c357e23669",
+  "01dfa21f-3221-422e-a229-4d6c887dbea7"
+ ],
+ "src": [],
+ "refs": [
+  "White and Pharoah's Oral Radiology: Principles and Interpretation (Mosby)",
+  "Devita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology (Lippincott)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 111
+ }
+}

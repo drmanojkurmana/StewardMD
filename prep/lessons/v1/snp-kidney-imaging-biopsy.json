@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "snp-kidney-imaging-biopsy",
+ "subject": "ss-nephrology",
+ "title": "Kidney imaging and biopsy: choosing the right test",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Renal **ultrasound** is the first-line test for most kidney patients. It shows kidney size, cortical thickness, **echogenicity** and obstruction, without radiation or contrast. Increased cortical echogenicity suggests chronic parenchymal disease. A raised **Doppler resistive index** suggests intrinsic or obstructive parenchymal disease, though it is not specific. Use it to judge perfusion and vascular status.",
+   "say": "Renal ultrasound is the first line test for most kidney patients. It shows kidney size, cortical thickness, echogenicity and obstruction, without radiation or contrast. Increased cortical echogenicity suggests chronic parenchymal disease. A raised Doppler resistive index suggests intrinsic or obstructive parenchymal disease, though it is not specific. Use it to judge perfusion and vascular status.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Likely meaning"
+    ],
+    "rows": [
+     [
+      "Small echogenic kidneys",
+      "Chronic kidney disease"
+     ],
+     [
+      "Large kidneys",
+      "Polycystic disease, amyloid, diabetes"
+     ],
+     [
+      "Hydronephrosis",
+      "Obstruction until proven otherwise"
+     ],
+     [
+      "High resistive index",
+      "Intrinsic or obstructive disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal scintigraphy answers functional questions. **MAG3 renogram** measures tubular secretion and drainage, and is preferred in renal impairment. **DTPA scan** is a glomerular filtration agent, used for GFR estimation and split function. **DMSA scan** binds proximal tubular cells and detects cortical scarring, especially after pyelonephritis in children.",
+   "say": "Renal scintigraphy answers functional questions. MAG3 renogram measures tubular secretion and drainage, and is preferred when renal function is impaired. DTPA is a glomerular filtration agent, used for estimating GFR and split function. DMSA binds proximal tubular cells and detects cortical scarring, especially after pyelonephritis in children.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scan",
+     "Tests",
+     "Best use"
+    ],
+    "rows": [
+     [
+      "MAG3",
+      "Tubular secretion and drainage",
+      "Obstruction in reduced function"
+     ],
+     [
+      "DTPA",
+      "Glomerular filtration",
+      "GFR and split function"
+     ],
+     [
+      "DMSA",
+      "Proximal tubular cortex",
+      "Scarring after pyelonephritis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gadolinium-based contrast carries a risk of **nephrogenic systemic fibrosis** in patients with advanced kidney disease. Risk is greatest with less stable linear agents and with prolonged clearance. **Macrocyclic agents** bind gadolinium more tightly and carry a much lower risk, so they are preferred in stage 4 to 5 disease. NSF causes skin thickening, joint contractures and, in severe cases, pulmonary and cardiac involvement.",
+   "say": "Gadolinium based contrast carries a risk of nephrogenic systemic fibrosis in patients with advanced kidney disease. Risk is greatest with less stable linear agents and with prolonged clearance. Macrocyclic agents bind gadolinium more tightly and carry a much lower risk, so they are preferred in stage 4 to 5 disease. NSF causes skin thickening, joint contractures and, in severe cases, pulmonary and cardiac involvement.",
+   "vis": null
+  },
+  {
+   "tx": "Percutaneous **kidney biopsy** is indicated for unexplained nephrotic or nephritic syndrome, unexplained acute kidney injury, and suspected systemic disease such as lupus. Light microscopy, **immunofluorescence** and **electron microscopy** together give the diagnosis. Immunofluorescence shows immune deposits such as granular IgG in membranous nephropathy or IgA mesangial deposits in IgA nephropathy. Electron microscopy shows sub-epithelial or sub-endothelial deposits and foot process effacement.",
+   "say": "Percutaneous kidney biopsy is indicated for unexplained nephrotic or nephritic syndrome, unexplained acute kidney injury, and suspected systemic disease such as lupus. Light microscopy, immunofluorescence and electron microscopy together give the diagnosis. Immunofluorescence shows immune deposits, and electron microscopy shows the location of deposits and foot process effacement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Light microscopy"
+     },
+     {
+      "id": "b",
+      "label": "Immunofluorescence"
+     },
+     {
+      "id": "c",
+      "label": "Electron microscopy"
+     },
+     {
+      "id": "d",
+      "label": "Diagnosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biopsy complications are mainly **bleeding**, including perinephric haematoma and gross haematuria. Arteriovenous fistula and pseudoaneurysm are rarer late complications. Check haemoglobin, platelet count and coagulation before the procedure, and observe the patient for several hours afterwards. Ultrasound guidance reduces the risk. Biopsy is relatively contraindicated in uncontrolled hypertension, bleeding diathesis and a solitary kidney.",
+   "say": "Biopsy complications are mainly bleeding, including perinephric haematoma and gross haematuria. Arteriovenous fistula and pseudoaneurysm are rarer late complications. Check haemoglobin, platelets and coagulation before the procedure, and observe the patient afterwards. Ultrasound guidance reduces the risk.",
+   "vis": null
+  },
+  {
+   "tx": "Remember the key distinction for **nephrogenic systemic fibrosis** (NSF). Skin changes begin on the distal limbs and move towards the trunk, reaching deep tissue such as fascia and muscle. Because no proven cure exists, **prevention** is the mainstay. Avoid unnecessary **gadolinium** in patients with severe kidney disease, and choose **macrocyclic agents** when contrast is essential.",
+   "say": "Remember the key distinction for nephrogenic systemic fibrosis. Skin changes begin on the distal limbs and spread towards the trunk, reaching deep tissue such as fascia and muscle. Because there is no proven cure, prevention is the mainstay. Avoid unnecessary gadolinium in patients with severe kidney disease, and choose macrocyclic agents when contrast is essential.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_01213418b894",
+  "q_052d45d0eefa",
+  "q_1dae72757cf4"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 42 in Brenner and Rector's The Kidney (Skorecki et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

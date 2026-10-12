@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "sne-neurometabolic-storage",
+ "subject": "ss-neurology",
+ "title": "Neurometabolic and storage disorders: high-yield overview for NEET-PG",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Neurometabolic and **lysosomal storage disorders** arise from enzyme or transporter defects that cause toxic substrate build-up in neurons. Many present in infancy with regression, hypotonia or seizures. Recognising a few signature signs, such as the **cherry-red spot** and **Kayser-Fleischer ring**, is often enough to name the disease in an exam.",
+   "say": "Neurometabolic and lysosomal storage disorders arise from enzyme or transporter defects that cause toxic substrate build-up in neurons. Many present in infancy with regression, hypotonia or seizures. Recognising a few signature signs, such as the cherry-red spot and the Kayser-Fleischer ring, is often enough to name the disease in an exam.",
+   "vis": null
+  },
+  {
+   "tx": "Tay-Sachs disease is caused by deficiency of **beta-hexosaminidase A**, leading to GM2 ganglioside accumulation. Infants show developmental regression and an exaggerated startle to sound. The **cherry-red spot** reflects ganglion cell swelling at the macula, with the pale fovea contrasting against the normal choroid. Hepatosplenomegaly is typically absent, which helps separate it from Niemann-Pick.",
+   "say": "Tay-Sachs disease is caused by deficiency of beta-hexosaminidase A, leading to GM2 ganglioside accumulation. Infants show developmental regression and an exaggerated startle to sound. The cherry-red spot reflects ganglion cell swelling at the macula, with the pale fovea contrasting against the normal choroid. Hepatosplenomegaly is typically absent, which helps separate it from Niemann-Pick.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Tay-Sachs",
+     "Niemann-Pick C"
+    ],
+    "rows": [
+     [
+      "Enzyme or gene defect",
+      "Hex A deficiency",
+      "NPC1 or NPC2 defect"
+     ],
+     [
+      "Cherry-red spot",
+      "Usual in infantile form",
+      "Uncommon"
+     ],
+     [
+      "Vertical gaze palsy",
+      "Not typical",
+      "Hallmark"
+     ],
+     [
+      "Hepatosplenomegaly",
+      "Absent",
+      "Present"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Niemann-Pick type C is a cholesterol trafficking disorder, with **vertical gaze palsy** as a key feature. Wilson disease, caused by **ATP7B** mutations, causes copper accumulation. Its **Kayser-Fleischer ring** at the corneal Descemet membrane is a slit-lamp clue. Both can present with young-onset extrapyramidal signs, so they must be separated.",
+   "say": "Niemann-Pick type C is a cholesterol trafficking disorder, with vertical gaze palsy as a key feature. Wilson disease, caused by ATP7B mutations, causes copper accumulation. Its Kayser-Fleischer ring at the corneal Descemet membrane is a slit-lamp clue. Both can present with young-onset extrapyramidal signs, so they must be separated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Niemann-Pick C",
+     "points": [
+      "Cholesterol trafficking defect",
+      "Vertical gaze palsy",
+      "Hepatosplenomegaly",
+      "Cognitive decline"
+     ]
+    },
+    "right": {
+     "title": "Wilson disease",
+     "points": [
+      "ATP7B copper transporter defect",
+      "Kayser-Fleischer ring",
+      "Low serum ceruloplasmin",
+      "Hepatic and neuropsychiatric signs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neurodegeneration with brain iron accumulation includes **PKAN** and related disorders, which show the **eye of the tiger** sign on MRI. Kufor-Rakeb syndrome, due to **ATP13A2** variants, causes juvenile parkinsonism with supranuclear gaze palsy. Dyskinesias from levodopa may be treated with amantadine in these patients.",
+   "say": "Neurodegeneration with brain iron accumulation includes PKAN and related disorders, which show the eye of the tiger sign on MRI. Kufor-Rakeb syndrome, due to ATP13A2 variants, causes juvenile parkinsonism with supranuclear gaze palsy. Dyskinesias from levodopa may be treated with amantadine in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Iron accumulates in basal ganglia"
+     },
+     {
+      "id": "b",
+      "label": "Eye of the tiger on MRI"
+     },
+     {
+      "id": "c",
+      "label": "ATP13A2 testing for Kufor-Rakeb"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neuronal ceroid lipofuscinosis, the **Batten disease** group, causes progressive myoclonic epilepsy, visual failure and regression. Lipofuscin accumulates in lysosomes. Gaucher disease results from **glucocerebrosidase** deficiency and is the commonest sphingolipidosis, with splenomegaly and bone involvement, and neuronopathic forms affecting the brain.",
+   "say": "Neuronal ceroid lipofuscinosis, the Batten disease group, causes progressive myoclonic epilepsy, visual failure and regression. Lipofuscin accumulates in lysosomes. Gaucher disease results from glucocerebrosidase deficiency and is the commonest sphingolipidosis, with splenomegaly and bone involvement, and neuronopathic forms affecting the brain.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_8feacd690007",
+  "q_d7fb20f60661",
+  "q_dc75dc213208"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics (Kliegman et al.)",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 14
+ }
+}

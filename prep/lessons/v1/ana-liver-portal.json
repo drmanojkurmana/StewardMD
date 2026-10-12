@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "ana-liver-portal",
+ "subject": "anatomy",
+ "title": "Liver lobes, segments and the portal venous system",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The liver is the largest gland in the body, weighing about 1500 to 1600 g in males and 1200 to 1300 g in females. It has five surfaces but only one prominent border, the inferior border. The **porta hepatis** is the deep fissure on the visceral surface through which the portal vein, hepatic artery, and bile ducts enter or leave. Hepatic veins do not pass through it.",
+   "say": "The liver is the largest gland in the body, weighing about 1500 to 1600 grams in males and 1200 to 1300 grams in females. It has five surfaces but only one prominent border, the inferior border. The porta hepatis is the deep fissure on the visceral surface through which the portal vein, hepatic artery and bile ducts enter or leave. Hepatic veins do not pass through it.",
+   "vis": null
+  },
+  {
+   "tx": "Couinaud divided the liver into **eight functional segments** based on portal venous branches and hepatic venous drainage, with a ninth variant recognised later. Segment I is the caudate lobe and is drained directly into the inferior vena cava by small veins. Segments are numbered I to VIII, with the right part containing V to VIII.",
+   "say": "Couinaud divided the liver into eight functional segments based on portal venous branches and hepatic venous drainage, with a ninth variant recognised later. Segment I is the caudate lobe and drains directly into the inferior vena cava by small veins. The segments are numbered one to eight, with the right part containing segments five to eight.",
+   "vis": null
+  },
+  {
+   "tx": "The portal vein is formed behind the neck of the pancreas at the level of the second lumbar vertebra by the union of the **superior mesenteric vein** and the splenic vein. It is about 8 cm long, lies anterior to the inferior vena cava, and carries about 70 to 75 percent of hepatic blood flow. It has no valves.",
+   "say": "The portal vein is formed behind the neck of the pancreas at the level of the second lumbar vertebra by the union of the superior mesenteric vein and the splenic vein. It is about 8 centimetres long, lies anterior to the inferior vena cava, and carries about 70 to 75 percent of hepatic blood flow. It has no valves.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "smv",
+      "label": "Superior mesenteric vein"
+     },
+     {
+      "id": "spv",
+      "label": "Splenic vein"
+     },
+     {
+      "id": "pv",
+      "label": "Portal vein at L2"
+     },
+     {
+      "id": "liv",
+      "label": "Liver sinusoids"
+     }
+    ],
+    "edges": [
+     [
+      "smv",
+      "pv"
+     ],
+     [
+      "spv",
+      "pv"
+     ],
+     [
+      "pv",
+      "liv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Portosystemic anastomoses occur where portal tributaries meet systemic veins. The key sites are the **lower oesophagus and gastric cardia** (left gastric to oesophageal veins), the **anal canal** (superior to middle and inferior rectal veins), the umbilicus (paraumbilical vein to epigastric veins), and the retroperitoneum. Dilated oesophageal veins form varices, and dilated paraumbilical veins form caput medusae. The spleen does not form such shunts.",
+   "say": "Portosystemic anastomoses occur where portal tributaries meet systemic veins. The key sites are the lower oesophagus and gastric cardia, where the left gastric vein meets oesophageal veins, the anal canal, the umbilicus, and the retroperitoneum. Dilated oesophageal veins form varices, and dilated paraumbilical veins form caput medusae. The spleen does not form such shunts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Portal vein link",
+     "Systemic link",
+     "Clinical sign"
+    ],
+    "rows": [
+     [
+      "Lower oesophagus",
+      "Left gastric vein",
+      "Oesophageal veins",
+      "Oesophageal varices"
+     ],
+     [
+      "Anal canal",
+      "Superior rectal vein",
+      "Middle and inferior rectal veins",
+      "Haemorrhoids"
+     ],
+     [
+      "Umbilicus",
+      "Paraumbilical vein",
+      "Epigastric veins",
+      "Caput medusae"
+     ],
+     [
+      "Retroperitoneum",
+      "Colic tributaries",
+      "Renal and lumbar veins",
+      "Retroperitoneal dilatation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **ligamentum teres** is the obliterated left umbilical vein, running in the falciform ligament to the umbilical fissure. The **ligamentum venosum** is the remnant of the ductus venosus, and it lies in the fissure separating the caudate lobe from the left lobe. The ligamentum arteriosum is the remnant of the ductus arteriosus. The median umbilical ligament is the urachus remnant.",
+   "say": "The ligamentum teres is the obliterated left umbilical vein, running in the falciform ligament to the umbilical fissure. The ligamentum venosum is the remnant of the ductus venosus, lying in the fissure separating the caudate lobe from the left lobe. The ligamentum arteriosum is the remnant of the ductus arteriosus. The median umbilical ligament is the urachus remnant.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adult structure",
+     "Fetal origin",
+     "Relevant lobe or region"
+    ],
+    "rows": [
+     [
+      "Ligamentum teres",
+      "Left umbilical vein",
+      "Falciform ligament"
+     ],
+     [
+      "Ligamentum venosum",
+      "Ductus venosus",
+      "Caudate lobe fissure"
+     ],
+     [
+      "Ligamentum arteriosum",
+      "Ductus arteriosus",
+      "Aortic and pulmonary junction"
+     ],
+     [
+      "Median umbilical ligament",
+      "Urachus",
+      "Anterior abdominal wall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Left-sided, or sinistral, portal hypertension results from splenic vein thrombosis, most often from pancreatitis, and causes isolated gastric varices. Portal and superior mesenteric pressures stay normal. Splenectomy is the treatment of choice. The **bare area** of the liver is bounded by the coronary ligaments, which attach the liver to the diaphragm.",
+   "say": "Left-sided, or sinistral, portal hypertension results from splenic vein thrombosis, most often from pancreatitis, and causes isolated gastric varices. Portal and superior mesenteric pressures stay normal. Splenectomy is the treatment of choice. The bare area of the liver is bounded by the coronary ligaments, which attach the liver to the diaphragm.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "01736105-4c43-437d-9e43-ab96502ee8c1",
+  "06da6a39-ef70-4737-93b0-cf32eadf1146",
+  "02de87ba-bea9-4632-b077-06ca1d713df1"
+ ],
+ "src": [],
+ "refs": [
+  "Schwartz's Principles of Surgery (Brunicardi et al.)",
+  "Gray's Anatomy: The Anatomical Basis of Clinical Practice"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 198
+ }
+}

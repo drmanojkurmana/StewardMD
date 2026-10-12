@@ -1,0 +1,113 @@
+{
+ "v": 1,
+ "module": "son-thrombosis",
+ "subject": "ss-medical-oncology",
+ "title": "Cancer associated thrombosis: risk, diagnosis and anticoagulation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "For cancer-associated **venous thromboembolism**, a **direct oral anticoagulant** or a **low molecular weight heparin** is preferred over a vitamin K antagonist. The CLOT trial found that the injectable heparin reduced recurrence, with no rise in major bleeding compared with oral therapy. Anticoagulation usually continues for at least six months while the malignancy remains active. Check renal function, platelet count and liver function before choosing a regimen.",
+   "say": "For cancer associated venous thromboembolism, a direct oral anticoagulant or a low molecular weight heparin is generally preferred over a vitamin K antagonist. The CLOT trial showed that the injectable heparin lowered recurrence without more major bleeding than oral treatment. Anticoagulation usually continues for at least six months, and longer while the cancer stays active. Before choosing a regimen, check renal function, platelet count and liver function.",
+   "vis": null
+  },
+  {
+   "tx": "**DOACs** have trial support in cancer-associated thrombosis. In the Hokusai VTE Cancer trial, **edoxaban** matched a **low molecular weight heparin** for recurrence, but **gastrointestinal** cancers bled more. In **Caravaggio**, **apixaban** was non-inferior for recurrence with similar major bleeding. **SELECT-D** tested **rivaroxaban** in a small study and found fewer recurrences. Caution remains in upper gastrointestinal and genitourinary tumours because of bleeding risk.",
+   "say": "DOACs, or direct oral anticoagulants, have trial support in cancer. The Hokusai VTE Cancer trial found edoxaban matched low molecular weight heparin for recurrence, although gastrointestinal cancers bled more. In Caravaggio, apixaban was non-inferior with similar major bleeding. SELECT-D, a small study, found fewer recurrences with rivaroxaban. Caution remains in upper gastrointestinal and genitourinary tumours because of bleeding risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Trial and agent",
+     "points": [
+      "Hokusai VTE Cancer: edoxaban",
+      "Caravaggio: apixaban",
+      "SELECT-D: rivaroxaban"
+     ]
+    },
+    "right": {
+     "title": "Key message",
+     "points": [
+      "Recurrence similar to heparin, more bleeding in GI cancers",
+      "Non-inferior recurrence, similar major bleeding",
+      "Fewer recurrences, small trial"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An **incidental pulmonary embolism** found on CT in a cancer patient should be treated like a symptomatic one unless there is a clear contraindication. Check for right heart strain and haemodynamic stability first. Avoid thrombolysis unless the patient is unstable. Indian practice often uses LMWH for the first days in cancer patients when oral agents are not yet suitable, and creatinine clearance should guide dosing. Reduce LMWH dosing when clearance falls below 30 mL/min.",
+   "say": "An incidental pulmonary embolism found on computed tomography in a cancer patient should be treated like a symptomatic one unless there is a clear contraindication. Check for right heart strain and haemodynamic stability first. Avoid thrombolysis unless the patient is unstable. Creatinine clearance should guide dosing, and low molecular weight heparin dosing is reduced when clearance falls below 30 millilitres per minute.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Incidental PE on CT"
+     },
+     {
+      "id": "b",
+      "label": "Check haemodynamics and RV strain"
+     },
+     {
+      "id": "c",
+      "label": "Unstable: thrombolysis"
+     },
+     {
+      "id": "d",
+      "label": "Stable: anticoagulate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Unstable"
+     ],
+     [
+      "b",
+      "d",
+      "Stable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Primary thromboprophylaxis** is reserved for hospitalised or ambulatory cancer patients at high risk, with bleeding risk assessed first. Mechanical prophylaxis is used when anticoagulation is contraindicated, such as active bleeding or platelets below 50,000/mcL. After major abdominal or pelvic cancer surgery, prophylaxis may be extended up to four weeks. Watch for the fall in platelets with heparin, which needs review.",
+   "say": "Primary thromboprophylaxis is reserved for hospitalised or ambulatory cancer patients at high risk, after bleeding risk is assessed. Mechanical prophylaxis is used when anticoagulation is contraindicated, such as active bleeding or platelets below 50,000 per microlitre. After major abdominal or pelvic cancer surgery, prophylaxis may be extended for up to four weeks.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_110b8d6dd976",
+  "q_2ddeba1f098f",
+  "q_a6510b227f5a"
+ ],
+ "src": [],
+ "refs": [
+  "Khorana AA et al. Blood 2008, Khorana score",
+  "Lee AYY et al. CLOT trial, New England Journal of Medicine 2003",
+  "Raskob GE et al. Hokusai VTE Cancer, New England Journal of Medicine 2018",
+  "Agnelli G et al. Caravaggio, New England Journal of Medicine 2020",
+  "Young AM et al. SELECT-D, Journal of Clinical Oncology 2018",
+  "Key NS et al. AVERT, New England Journal of Medicine 2019",
+  "Khorana AA et al. CASSINI, Lancet Haematology 2019"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 44
+ }
+}

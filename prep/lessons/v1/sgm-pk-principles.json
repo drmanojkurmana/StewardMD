@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "sgm-pk-principles",
+ "subject": "ss-general-medicine",
+ "title": "Pharmacokinetics in clinical practice",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Pharmacokinetics describes what the body does to a drug. **Volume of distribution** (Vd) links the amount of drug in the body to the plasma concentration, so Vd equals total body drug divided by plasma concentration. A lipophilic drug spreads into tissues and has a large Vd, while a drug confined to plasma has a small one. Vd is a theoretical space, not a real anatomical volume.",
+   "say": "Pharmacokinetics describes what the body does to a drug. Volume of distribution, written Vd, links the amount of drug in the body to the plasma concentration. It equals total body drug divided by plasma concentration. A lipophilic drug spreads into tissues and has a large Vd, while a drug confined to plasma has a small one. Vd is a theoretical space, not a real anatomical volume.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Formula or meaning",
+     "Clinical point"
+    ],
+    "rows": [
+     [
+      "Volume of distribution",
+      "Total body drug divided by plasma concentration",
+      "Large for lipophilic drugs"
+     ],
+     [
+      "Clearance",
+      "Elimination rate divided by plasma concentration",
+      "Sets maintenance dose"
+     ],
+     [
+      "Half-life",
+      "Time for concentration to halve",
+      "Sets time to steady state"
+     ],
+     [
+      "Bioavailability",
+      "Fraction reaching systemic circulation",
+      "IV route equals one"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clearance** is the volume of plasma cleared of drug per unit time, calculated as elimination rate divided by plasma concentration. The **maintenance dose** rate is clearance multiplied by the desired plasma concentration, divided by bioavailability. The **loading dose** is target concentration times Vd, adjusted for bioavailability, and it fills the body store quickly without waiting for accumulation.",
+   "say": "Clearance is the volume of plasma cleared of drug per unit time. It is calculated as elimination rate divided by plasma concentration. The maintenance dose rate equals clearance multiplied by the desired plasma concentration, divided by bioavailability. The loading dose equals target concentration times volume of distribution, adjusted for bioavailability. It fills the body store quickly without waiting for the drug to accumulate.",
+   "vis": null
+  },
+  {
+   "tx": "Most drugs follow **first-order kinetics**, where elimination is proportional to concentration and a fixed fraction leaves each half-life. After four to five half-lives, about 94 to 97 percent of the drug is gone, and steady state is reached after roughly four to five half-lives of constant dosing. In contrast, **zero-order kinetics** removes a fixed amount per unit time. Phenytoin is the classic example, so small dose increases can cause sudden toxicity.",
+   "say": "Most drugs follow first-order kinetics, where elimination is proportional to concentration and a fixed fraction leaves with each half-life. After four to five half-lives, about 94 to 97 percent of the drug is gone. In contrast, zero-order kinetics removes a fixed amount per unit time. Phenytoin is the classic example, so small dose increases can cause sudden toxicity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-order",
+     "points": [
+      "Rate proportional to concentration",
+      "Constant half-life",
+      "Steady state in four to five half-lives"
+     ]
+    },
+    "right": {
+     "title": "Zero-order",
+     "points": [
+      "Fixed amount removed per time",
+      "Enzyme saturation",
+      "Phenytoin is the classic example"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bioavailability** (F) is the fraction of an administered dose reaching systemic circulation unchanged. Intravenous dosing gives F equal to one by definition. Oral drugs may lose part of the dose to **first-pass metabolism** in the gut wall or liver before entering circulation. Absolute bioavailability is the ratio of AUC after oral dosing to AUC after intravenous dosing, corrected for dose.",
+   "say": "Bioavailability, written F, is the fraction of an administered dose reaching systemic circulation unchanged. Intravenous dosing gives F equal to one by definition. Oral drugs may lose part of the dose to first-pass metabolism in the gut wall or liver before entering circulation. Absolute bioavailability is the ratio of area under the curve after oral dosing to that after intravenous dosing, corrected for dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Oral dose"
+     },
+     {
+      "id": "b",
+      "label": "Gut wall"
+     },
+     {
+      "id": "c",
+      "label": "Liver"
+     },
+     {
+      "id": "d",
+      "label": "Systemic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Protein binding** matters because only the unbound fraction is pharmacologically active and can move out of plasma. Hypoalbuminaemia, uraemia and displacement by drugs such as aspirin raise the free fraction, which can cause toxicity, as with warfarin. **Therapeutic drug monitoring** is most useful for narrow therapeutic index drugs like phenytoin, where total levels must be interpreted alongside albumin. Enzyme inhibition, for example by amiodarone or metronidazole, and transporter effects such as P-glycoprotein inhibition by verapamil can also change exposure.",
+   "say": "Protein binding matters because only the unbound fraction is pharmacologically active and can leave plasma. Hypoalbuminaemia, uraemia and displacement by drugs such as aspirin raise the free fraction, which can cause toxicity, as with warfarin. Therapeutic drug monitoring is most useful for narrow therapeutic index drugs like phenytoin, where total levels must be read alongside albumin. Enzyme inhibition, for example by amiodarone or metronidazole, and transporter effects such as P-glycoprotein inhibition by verapamil can also change exposure.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_3adb975e0165",
+  "q_b79c5ab19cdf",
+  "q_8d4101f28b8d"
+ ],
+ "src": [],
+ "refs": [
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics",
+  "Katzung's Basic and Clinical Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 39
+ }
+}

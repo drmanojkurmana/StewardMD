@@ -1,0 +1,99 @@
+{
+ "v": 1,
+ "module": "son-breast-bio",
+ "subject": "ss-medical-oncology",
+ "title": "Breast cancer biology and staging: receptors, molecular subtypes and prognostic groups",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Breast cancer is classified first by **immunohistochemistry** (IHC) on core biopsy. Oestrogen receptor (ER) and progesterone receptor (PR) are tested routinely in every invasive cancer, as is **HER2** status. These three markers decide systemic therapy. ER or PR positivity predicts response to endocrine therapy, and HER2 amplification predicts response to anti-HER2 agents. Ki-67 is a proliferation marker that helps separate luminal A from luminal B tumours.",
+   "say": "Breast cancer is first classified by immunohistochemistry on the core biopsy. Oestrogen receptor and progesterone receptor are tested in every invasive cancer, as is HER2 status. These three markers decide systemic therapy. Receptor positivity predicts response to endocrine therapy, and HER2 amplification predicts response to anti-HER2 agents. Ki-67 is a proliferation marker that helps separate luminal A from luminal B tumours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Clinical meaning",
+     "Drives therapy"
+    ],
+    "rows": [
+     [
+      "ER and PR",
+      "Hormone receptor status",
+      "Endocrine therapy"
+     ],
+     [
+      "HER2",
+      "Receptor tyrosine kinase amplification",
+      "Anti-HER2 agents"
+     ],
+     [
+      "Ki-67",
+      "Proliferation index",
+      "Luminal A versus B"
+     ],
+     [
+      "Triple negative",
+      "ER, PR and HER2 all absent",
+      "Chemotherapy focus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Molecular subtypes combine these markers. **Luminal A** is ER or PR positive, HER2 negative and has low Ki-67. **Luminal B** is hormone receptor positive with either high Ki-67 or HER2 positivity. **HER2 enriched** tumours are HER2 positive with no hormone receptors. **Triple negative** tumours lack ER, PR and HER2, and carry a poorer short-term prognosis.",
+   "say": "Molecular subtypes combine these markers. Luminal A is receptor positive, HER2 negative and has low Ki-67. Luminal B is hormone receptor positive with either high Ki-67 or HER2 positivity. HER2 enriched tumours are HER2 positive with no hormone receptors. Triple negative tumours lack oestrogen receptor, progesterone receptor and HER2, and carry a poorer short-term prognosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Luminal A and B",
+     "points": [
+      "Luminal A: ER or PR positive, HER2 negative, low Ki-67",
+      "Luminal B: hormone positive with high Ki-67 or HER2 positive"
+     ]
+    },
+    "right": {
+     "title": "HER2 enriched and triple negative",
+     "points": [
+      "HER2 enriched: HER2 positive, hormone receptors absent",
+      "Triple negative: ER, PR and HER2 all absent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Genomic assays refine risk in early, node negative, hormone receptor positive disease. **Oncotype DX** gives a recurrence score; TAILORx showed that patients with low scores can safely omit chemotherapy. **MammaPrint**, tested in the MINDACT trial, classifies risk as high or low. RxPONDER later showed that chemotherapy benefit is limited in node positive patients with low recurrence scores. Only one assay should be used for a given patient.",
+   "say": "Genomic assays refine risk in early, node negative, hormone receptor positive disease. Oncotype DX gives a recurrence score, and the TAILORx trial showed that patients with low scores can safely omit chemotherapy. MammaPrint, tested in the MINDACT trial, classifies risk as high or low. RxPONDER later showed limited chemotherapy benefit in node positive patients with low recurrence scores. Only one assay should be used for a given patient.",
+   "vis": null
+  },
+  {
+   "tx": "Germline testing matters for biology and counselling. **BRCA1** and **BRCA2** mutations carry a lifetime risk of invasive breast cancer of roughly 50 to 80 percent by age 80. First degree relatives of an affected woman have a two to three fold increased risk. Invasive lobular carcinoma loses E-cadherin expression and tends to be multifocal and bilateral, while medullary carcinoma is more common in BRCA carriers.",
+   "say": "Germline testing matters for biology and counselling. BRCA1 and BRCA2 mutations carry a lifetime risk of invasive breast cancer of roughly fifty to eighty percent by age eighty. First degree relatives of an affected woman have a two to three fold increased risk. Invasive lobular carcinoma loses E-cadherin expression and tends to be multifocal and bilateral, while medullary carcinoma is more common in BRCA carriers.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_68033b92edce",
+  "q_7f7d692cf381",
+  "q_8844d7cead42"
+ ],
+ "src": [],
+ "refs": [
+  "TAILORx trial (Sparano et al., New England Journal of Medicine)",
+  "MINDACT trial (Cardoso et al., New England Journal of Medicine)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 38
+ }
+}

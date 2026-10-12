@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "rad-neuroradiology",
+ "subject": "radiology",
+ "title": "Neuroradiology essentials: trauma bleeds, stroke, and lesions that mimic each other on imaging",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Non-contrast CT is the **first-line imaging** in head trauma. Indications include loss of consciousness, altered mental status, focal neurological signs, suspected basal skull fracture and depressed skull fracture. Contrast is usually not needed for head injury alone. Skull radiographs have limited value except for depressed or basal fractures. Temporal bone fractures are also best seen on CT.",
+   "say": "Non-contrast CT is the first-line imaging in head trauma. Indications include loss of consciousness, altered mental status, focal neurological signs, suspected basal skull fracture and depressed skull fracture. Contrast is usually not needed for head injury alone. Skull radiographs have limited value, except for depressed or basal fractures. Temporal bone fractures are also best seen on CT.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bleed",
+     "Shape on CT",
+     "Density"
+    ],
+    "rows": [
+     [
+      "Extradural",
+      "Biconvex, lentiform",
+      "Hyperdense when acute"
+     ],
+     [
+      "Subdural",
+      "Crescentic, concavo-convex",
+      "Hyperdense when acute"
+     ],
+     [
+      "Subarachnoid",
+      "Fills sulci and cisterns",
+      "Hyperdense when acute"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood density changes with age. **Acute** blood is hyperdense, while **chronic** subdural blood becomes hypodense. A biconvex hyperdense collection is typical of an **extradural haematoma**, which often follows temporal bone fracture and middle meningeal artery injury. A concavo-convex hyperdense collection suggests an acute **subdural haematoma**, and these are common in elderly patients after minor falls.",
+   "say": "Blood density changes with age. Acute blood is hyperdense, while chronic subdural blood becomes hypodense. A biconvex hyperdense collection is typical of an extradural haematoma, which often follows temporal bone fracture and middle meningeal artery injury. A concavo-convex hyperdense collection suggests an acute subdural haematoma, and these are common in elderly patients after minor falls.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Extradural",
+     "points": [
+      "Biconvex, lentiform",
+      "Hyperdense when acute",
+      "Temporal bone fracture link"
+     ]
+    },
+    "right": {
+     "title": "Subdural",
+     "points": [
+      "Concavo-convex crescent",
+      "Hyperdense when acute",
+      "Hypodense when chronic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Subarachnoid haemorrhage** appears as hyperdensity in sulci, the sylvian fissures, basal cisterns and interhemispheric fissure. Non-contrast CT is the investigation of choice, and it is most sensitive within about 12 to 24 hours. After a week the scan may look normal. If CT is negative and suspicion stays high, CT angiography or lumbar puncture is considered. A **hyperdense MCA sign** on CT suggests thrombus in the middle cerebral artery.",
+   "say": "Subarachnoid haemorrhage appears as hyperdensity in sulci, the sylvian fissures, basal cisterns and interhemispheric fissure. Non-contrast CT is the investigation of choice, and it is most sensitive within about twelve to twenty four hours. After a week the scan may look normal. If CT is negative and suspicion stays high, CT angiography or lumbar puncture is considered. A hyperdense middle cerebral artery sign on CT suggests thrombus in that vessel.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected SAH"
+     },
+     {
+      "id": "b",
+      "label": "Non-contrast CT"
+     },
+     {
+      "id": "c",
+      "label": "Positive: treat"
+     },
+     {
+      "id": "d",
+      "label": "Negative: CTA or LP"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "hyperdense"
+     ],
+     [
+      "b",
+      "d",
+      "normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In acute ischaemic stroke, **diffusion-weighted MRI** shows restricted diffusion early, often within minutes. This is due to cytotoxic oedema. The ADC map shows low values in the same area. **Dural tail sign** on contrast MRI points to a meningioma rather than a stroke or infection. **Dawson fingers** are periventricular white matter lesions perpendicular to the ventricles and are a hallmark of multiple sclerosis.",
+   "say": "In acute ischaemic stroke, diffusion weighted MRI shows restricted diffusion early, often within minutes. This is due to cytotoxic oedema. The ADC map shows low values in the same area. A dural tail sign on contrast MRI points to a meningioma. Dawson fingers are periventricular white matter lesions perpendicular to the ventricles and are a hallmark of multiple sclerosis.",
+   "vis": null
+  },
+  {
+   "tx": "A **ring-enhancing lesion** in an HIV patient needs a differential. **Tuberculoma** with a solid caseating centre shows central T2 and FLAIR hypointensity. **Neurocysticercosis** shows a cyst with a **scolex**, which is a mural nodule, and its calcified form is common. In a patient with CD4 below 100, cryptococcosis may show a soap-bubble appearance in the basal ganglia. Pyogenic abscess usually has restricted diffusion in its centre.",
+   "say": "A ring enhancing lesion in an HIV patient needs a differential. Tuberculoma with a solid caseating centre shows central T2 and FLAIR hypointensity. Neurocysticercosis shows a cyst with a scolex, which is a mural nodule, and its calcified form is common. In a patient with CD4 below one hundred, cryptococcosis may show a soap bubble appearance in the basal ganglia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Key MRI clue",
+     "Typical setting"
+    ],
+    "rows": [
+     [
+      "Tuberculoma",
+      "Central T2 hypointensity",
+      "HIV or endemic area"
+     ],
+     [
+      "Neurocysticercosis",
+      "Scolex in cyst",
+      "Endemic, seizures"
+     ],
+     [
+      "Cryptococcoma",
+      "Soap-bubble basal ganglia",
+      "CD4 under 100"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tram track calcification** is a cortical and subcortical calcification that is classic for **Sturge-Weber syndrome**. It is linked to a facial port wine stain and ipsilateral leptomeningeal angioma. Periventricular calcification favours congenital CMV. A **butterfly glioma** crosses the corpus callosum in a bilateral pattern. Dandy-Walker malformation shows vermian agenesis with a large posterior fossa.",
+   "say": "Tram track calcification is a cortical and subcortical calcification that is classic for Sturge Weber syndrome. It is linked to a facial port wine stain and ipsilateral leptomeningeal angioma. Periventricular calcification favours congenital CMV. A butterfly glioma crosses the corpus callosum in a bilateral pattern. Dandy Walker malformation shows vermian agenesis with a large posterior fossa.",
+   "vis": null
+  },
+  {
+   "tx": "Use the **investigation of choice** for each target. For **cystic brain lesions**, MRI is preferred. For leptomeningeal spread, **gadolinium-enhanced MRI** is the investigation of choice. For the Indian exam, remember that the findings of Tuberous sclerosis include subependymal giant cell astrocytomas, and the classic triad is seizures, facial angiofibromas and intellectual disability.",
+   "say": "Use the investigation of choice for each target. For cystic brain lesions, MRI is preferred. For leptomeningeal spread, gadolinium enhanced MRI is the investigation of choice. For the Indian exam, remember that tuberous sclerosis includes subependymal giant cell astrocytomas, and the classic triad is seizures, facial angiofibromas and intellectual disability.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6946b8cb-82f1-44ee-b09c-d65b60703848",
+  "9924642a-0c7d-4a53-8e0c-2f4154759c8d",
+  "96da9f5e-7dba-4af8-a987-866c7b4cdef2"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 556
+ }
+}

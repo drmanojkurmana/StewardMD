@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "phm-histamine",
+ "subject": "pharmacology",
+ "title": "Histamine and antihistamines",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Histamine is a local autacoid released mainly by **mast cells**. It acts on **H1 receptors** to cause arteriolar dilatation, increased capillary permeability, bronchoconstriction and itch, and on **H2 receptors** to increase gastric acid secretion. Histamine also produces the triple response of Lewis: a red spot, a flare and a wheal.",
+   "say": "Histamine is a local autacoid released mainly by mast cells. It acts on H1 receptors to cause arteriolar dilatation, increased capillary permeability, bronchoconstriction and itch, and on H2 receptors to increase gastric acid secretion. Histamine also produces the triple response of Lewis: a red spot, a flare and a wheal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Receptor",
+     "Main effects",
+     "Blocked by"
+    ],
+    "rows": [
+     [
+      "H1",
+      "Vasodilatation, oedema, bronchoconstriction, itch",
+      "Diphenhydramine, cetirizine, loratadine"
+     ],
+     [
+      "H2",
+      "Gastric acid secretion, some vasodilatation",
+      "Cimetidine, ranitidine"
+     ],
+     [
+      "H3",
+      "Presynaptic brake on histamine release",
+      "Tiprolisant (inverse agonist)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "H1 antihistamines are split into **first generation** and **second generation** drugs. First generation agents, such as **promethazine**, **diphenhydramine** and **chlorpheniramine**, cross the blood brain barrier, cause sedation and have strong anticholinergic action. Second generation agents, such as **cetirizine**, **fexofenadine** and **loratadine**, are more H1 selective and largely non sedating.",
+   "say": "H1 antihistamines are split into first generation and second generation drugs. First generation agents, such as promethazine, diphenhydramine and chlorpheniramine, cross the blood brain barrier, cause sedation and have strong anticholinergic action. Second generation agents, such as cetirizine, fexofenadine and loratadine, are more H1 selective and largely non sedating.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First generation",
+     "points": [
+      "Crosses blood brain barrier",
+      "Sedating",
+      "Anticholinergic effects",
+      "Examples: promethazine, diphenhydramine"
+     ]
+    },
+    "right": {
+     "title": "Second generation",
+     "points": [
+      "Poor brain penetration",
+      "Largely non sedating",
+      "Few anticholinergic effects",
+      "Examples: cetirizine, fexofenadine, loratadine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "First generation H1 blockers have several clinical uses beyond allergy. **Promethazine** is an antiemetic for motion sickness and an anti-Parkinsonian agent. **Cinnarizine** and **meclizine** are used for vertigo, and **cyproheptadine** also blocks serotonin 5-HT2 receptors. H1 blockers do not reduce gastric acid at normal doses; that job belongs to H2 blockers.",
+   "say": "First generation H1 blockers have several clinical uses beyond allergy. Promethazine is an antiemetic for motion sickness and an anti-Parkinsonian agent. Cinnarizine and meclizine are used for vertigo, and cyproheptadine also blocks serotonin 5-HT2 receptors. H1 blockers do not reduce gastric acid at normal doses; that job belongs to H2 blockers.",
+   "vis": null
+  },
+  {
+   "tx": "**Mast cell stabilisers** protect against allergic triggers rather than reversing them. **Sodium cromoglycate**, also known as cromolyn, works by blocking calcium entry into the mast cell, so the **histamine-containing granules** cannot fuse with the membrane and release their contents. Because it is poorly absorbed from the gut, it is given locally as an inhaler, nasal spray or eye drop, or orally for conditions such as **mastocytosis**. It is preventive, so it must be started before exposure rather than used during an attack.",
+   "say": "Mast cell stabilisers protect against allergic triggers rather than reversing them. Sodium cromoglycate, also known as cromolyn, works by blocking calcium entry into the mast cell, so the histamine-containing granules cannot fuse with the membrane and release their contents. Because it is poorly absorbed from the gut, it is given locally as an inhaler, nasal spray or eye drop, or orally for conditions such as mastocytosis. It is preventive, so it must be started before exposure rather than used during an attack.",
+   "vis": null
+  },
+  {
+   "tx": "**Terfenadine** and **astemizole** were withdrawn because they prolong the QT interval and cause torsades de pointes. The risk rises when CYP3A4 metabolism is blocked by drugs such as erythromycin, clarithromycin, ketoconazole or itraconazole, or when high doses are taken. Fexofenadine, the active metabolite of terfenadine, is free of this cardiac toxicity.",
+   "say": "Terfenadine and astemizole were withdrawn because they prolong the QT interval and cause torsades de pointes. The risk rises when CYP3A4 metabolism is blocked by drugs such as erythromycin, clarithromycin, ketoconazole or itraconazole, or when high doses are taken. Fexofenadine, the active metabolite of terfenadine, is free of this cardiac toxicity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Terfenadine"
+     },
+     {
+      "id": "b",
+      "label": "CYP3A4 blocked"
+     },
+     {
+      "id": "c",
+      "label": "Raised drug level"
+     },
+     {
+      "id": "d",
+      "label": "QT prolongation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For allergic rhinitis in a patient who must avoid sedation, prefer a second generation agent such as **loratadine** or **cetirizine**. Avoid first generation drugs in drivers, machine operators and swimmers. Anaphylaxis is treated first with **epinephrine**, since antihistamines and steroids act too slowly for airway oedema.",
+   "say": "For allergic rhinitis in a patient who must avoid sedation, prefer a second generation agent such as loratadine or cetirizine. Avoid first generation drugs in drivers, machine operators and swimmers. Anaphylaxis is treated first with epinephrine, since antihistamines and steroids act too slowly for airway oedema.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "b90a228b-20de-486e-b0dc-63018e6e64c5",
+  "270083ad-2d1b-4d7e-910e-ecfd81bef10c",
+  "8013db82-e5a4-4751-9cfa-5db47bd58a41"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung's Basic and Clinical Pharmacology",
+  "Satoskar Pharmacology and Pharmacotherapeutics",
+  "KD Tripathi Essentials of Medical Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 117
+ }
+}

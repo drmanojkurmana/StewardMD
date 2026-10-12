@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "srd-neuro-metabolic",
+ "subject": "ss-radiology",
+ "title": "Infection, demyelination, toxic and metabolic disease: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Wernicke encephalopathy** results from **thiamine** (vitamin B1) deficiency. Thiamine is a cofactor for transketolase, pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase. Lesions cluster around the third and fourth ventricles and aqueduct, favouring the mammillary bodies, dorsomedial thalamus and periaqueductal grey. Think of it in any confused, ataxic patient who is malnourished, not only alcoholics.",
+   "say": "Wernicke encephalopathy results from thiamine, also called vitamin B1, deficiency. Thiamine is a cofactor for transketolase, pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase. Lesions cluster around the third and fourth ventricles and the aqueduct, favouring the mammillary bodies, dorsomedial thalamus and periaqueductal grey. Think of it in any confused, ataxic patient who is malnourished, not only in alcoholics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk group",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Alcohol use",
+      "Chronic misuse"
+     ],
+     [
+      "Nutritional",
+      "Hyperemesis, starvation"
+     ],
+     [
+      "Gastrointestinal",
+      "Bariatric or gastric surgery"
+     ],
+     [
+      "Other",
+      "Dialysis, cancer, HIV, diuretics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Giving **glucose** before **thiamine** can precipitate Wernicke in an at-risk patient or worsen an early case. Give parenteral thiamine first whenever deficiency is possible. Ocular palsies improve within hours of thiamine, whereas ataxia recovers more slowly and about half of patients are left with a wide-based gait.",
+   "say": "Giving glucose before thiamine can precipitate Wernicke in an at-risk patient or worsen an early case. Give parenteral thiamine first whenever deficiency is possible. Ocular palsies improve within hours of thiamine, whereas ataxia recovers more slowly, and about half of patients are left with a wide-based gait.",
+   "vis": null
+  },
+  {
+   "tx": "**Korsakoff psychosis** is often permanent, with memory gaps, **confabulation** and disordered temporal sequencing. Wernicke-Korsakoff is underdiagnosed. Its mimics include other metabolic encephalopathies, herpes simplex encephalitis, limbic encephalitis and stroke. Acute MRI may show abnormal enhancement of the mammillary bodies on coronal T1 postcontrast images.",
+   "say": "Korsakoff psychosis is often permanent, with memory gaps, confabulation and disordered temporal sequencing. Wernicke Korsakoff is underdiagnosed. Its mimics include other metabolic encephalopathies, herpes simplex encephalitis, limbic encephalitis and stroke. Acute MRI may show abnormal enhancement of the mammillary bodies on coronal T1 postcontrast images.",
+   "vis": null
+  },
+  {
+   "tx": "**Limbic encephalitis** is an immune attack on the hippocampi and amygdalae, often antibody mediated. Antibodies against neuronal surface proteins such as NMDA receptor and LGI1 respond better to immunotherapy. Always exclude herpes simplex encephalitis with lumbar puncture, and start empirical aciclovir while it remains possible.",
+   "say": "Limbic encephalitis is an immune attack on the hippocampi and amygdalae, often antibody mediated. Antibodies against neuronal surface proteins, such as NMDA receptor and LGI1, respond better to immunotherapy. Always exclude herpes simplex encephalitis with lumbar puncture, and start empirical aciclovir while it remains possible.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Subacute encephalopathy"
+     },
+     {
+      "id": "b",
+      "label": "Exclude HSV, aciclovir"
+     },
+     {
+      "id": "c",
+      "label": "Screen for antibodies and tumour"
+     },
+     {
+      "id": "d",
+      "label": "Immunotherapy if surface antibody"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neuromyelitis optica spectrum disorder** is an autoimmune astrocytopathy in which **aquaporin-4 antibodies** injure astrocytes and myelin. Unlike multiple sclerosis, it seldom turns progressive; disability builds mainly through repeated relapses. Early high-dose intravenous steroids during an attack are the mainstay of care, and **interferon-beta**, **natalizumab** and **fingolimod** should be avoided because they may aggravate it. Tumefactive demyelination forms a large mass-like plaque that can mimic a tumour or abscess, so imaging and biopsy guide management.",
+   "say": "Neuromyelitis optica spectrum disorder is an autoimmune condition in which antibodies against aquaporin-4 injure astrocytes and myelin. Unlike multiple sclerosis, it seldom becomes progressive, and disability mostly accumulates through relapses. Prompt high-dose intravenous steroids during an attack form the cornerstone of treatment. Interferon-beta, natalizumab and fingolimod should be avoided, since they may aggravate the disease. Tumefactive demyelination forms a large mass-like plaque that can mimic a tumour or abscess, so imaging and biopsy guide decisions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Multiple sclerosis",
+     "points": [
+      "Progressive course possible",
+      "Dissemination in space and time",
+      "Disease-modifying drugs used first line"
+     ]
+    },
+    "right": {
+     "title": "Neuromyelitis optica",
+     "points": [
+      "Relapse-driven disability",
+      "Aquaporin-4 antibody positive",
+      "Interferon, natalizumab, fingolimod may worsen"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **tumefactive multiple sclerosis**, a lesion over two centimetres may mimic a glioma, lymphoma or abscess. Red flags include features favouring malignancy or abscess. Biopsy or advanced imaging is used before any resection, and steroids usually help. Ensure the lesion is confirmed as demyelination with dissemination in space and time before starting disease-modifying therapy.",
+   "say": "In tumefactive multiple sclerosis, a lesion over two centimetres may mimic a glioma, lymphoma or abscess. Red flags include features favouring malignancy or abscess. Biopsy or advanced imaging is used before any resection, and steroids usually help. Confirm the lesion is demyelination with dissemination in space and time before starting disease-modifying therapy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ct-232481bdc7e1",
+  "ct-ff2b8ad299fc",
+  "rad-ods"
+ ],
+ "src": [
+  "kb-diseases-wernicke",
+  "kb-reference-limbic-encephalitis",
+  "kb-reference-neuromyelitis-optica",
+  "kb-reference-tumefactive-multiple-sclerosis"
+ ],
+ "refs": [
+  "NICE guideline on multiple sclerosis in adults",
+  "Adams and Victor's Principles of Neurology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 1479,
+  "itemN": 53
+ }
+}

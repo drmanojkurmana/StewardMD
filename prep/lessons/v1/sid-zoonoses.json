@@ -1,0 +1,102 @@
+{
+ "v": 1,
+ "module": "sid-zoonoses",
+ "subject": "ss-infectious-diseases",
+ "title": "Bacterial zoonoses: plague and anthrax essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Diagnosis rests on finding **bipolar-staining gram-negative coccobacilli** on Wayson or Giemsa stain, described as a closed safety pin appearance. Culture grows best at 25 to 29 degrees Celsius and the organism is nonmotile and lactose-negative. Visible bipolar bacilli on a blood smear signal very high bacteraemia and a poor prognosis.",
+   "say": "Diagnosis rests on finding bipolar staining gram-negative coccobacilli on Wayson or Giemsa stain, described as a closed safety pin appearance. Culture grows best at 25 to 29 degrees Celsius, and the organism is nonmotile and lactose-negative. Visible bipolar bacilli on a blood smear signal very high bacteraemia and a poor prognosis.",
+   "vis": null
+  },
+  {
+   "tx": "Treatment of plague is with **streptomycin or gentamicin** as first line, while doxycycline or a fluoroquinolone serves as an oral alternative. **Chloramphenicol** is the preferred agent for plague meningitis. Treated pneumonic plague has a death rate of about 17 percent, against 98 percent when untreated.",
+   "say": "Treatment of plague is with streptomycin or gentamicin as first line, while doxycycline or a fluoroquinolone serves as an oral alternative. Chloramphenicol is the preferred agent for plague meningitis. Treated pneumonic plague has a death rate of about 17 percent, against 98 percent when untreated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First line",
+     "points": [
+      "Streptomycin",
+      "Gentamicin",
+      "Severe or pneumonic disease"
+     ]
+    },
+    "right": {
+     "title": "Alternatives",
+     "points": [
+      "Doxycycline",
+      "Ciprofloxacin",
+      "Chloramphenicol for meningitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anthrax** is caused by **Bacillus anthracis**, a large gram-positive rod with a poly-D-glutamate capsule. Cutaneous anthrax is the commonest form and begins as a painless papule that becomes a black eschar with marked oedema. Inhalational anthrax is fulminant, with a widened mediastinum from haemorrhagic lymphadenitis, and needs urgent care.",
+   "say": "Anthrax is caused by Bacillus anthracis, a large gram-positive rod with a poly-D-glutamate capsule. Cutaneous anthrax is the commonest form and begins as a painless papule that becomes a black eschar with marked oedema. Inhalational anthrax is fulminant, with a widened mediastinum from haemorrhagic lymphadenitis, and needs urgent care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Painless papule"
+     },
+     {
+      "id": "b",
+      "label": "Vesicle then ulcer"
+     },
+     {
+      "id": "c",
+      "label": "Black eschar with oedema"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tularaemia**, caused by **Francisella tularensis**, presents with a sudden influenza-like illness after animal or tick exposure and is often missed. Use gentamicin or streptomycin first line, with ciprofloxacin or doxycycline as alternatives. Avoid doxycycline alone for severe infection. **Glanders**, from Burkholderia mallei, needs prolonged co-trimoxazole with or without doxycycline to prevent relapse.",
+   "say": "Tularaemia, caused by Francisella tularensis, presents with a sudden influenza-like illness after animal or tick exposure and is often missed. Use gentamicin or streptomycin first line, with ciprofloxacin or doxycycline as alternatives. Avoid doxycycline alone for severe infection. Glanders, from Burkholderia mallei, needs prolonged co-trimoxazole with or without doxycycline to prevent relapse.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_e9b49971a05f",
+  "q_b047106d16a4",
+  "q_e359e043eac1"
+ ],
+ "src": [
+  "kb-reference-anthrax",
+  "kb-reference-glanders",
+  "kb-reference-plague",
+  "kb-reference-tularemia"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 2030,
+  "itemN": 37
+ }
+}

@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "ana-twinning-teratology",
+ "subject": "anatomy",
+ "title": "Twinning, teratogens and congenital anomalies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Development in the uterus has three phases. The **germinal phase** runs from day 0 to about week 3, the **embryonic period** runs from week 4 to week 8 and is the period of organogenesis, and the fetal phase runs from about week 8 to term. Organogenesis is therefore most vulnerable in weeks 4 to 8, when the main organ systems form from the three germinal layers.",
+   "say": "Development in the uterus has three phases. The germinal phase runs from day 0 to about week 3. The embryonic period runs from week 4 to week 8 and is the period of organogenesis, when the main organ systems form from the three germinal layers. The fetal phase runs from about week 8 to term. Organogenesis is therefore most vulnerable in weeks 4 to 8. The cardiovascular system is the first system to function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Approximate timing",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Germinal",
+      "Day 0 to week 3",
+      "Pre-embryo stage"
+     ],
+     [
+      "Embryonic",
+      "Week 4 to week 8",
+      "Organogenesis"
+     ],
+     [
+      "Fetal",
+      "Week 8 to term",
+      "Growth and maturation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Limb development follows a timetable. The **forelimb bud** appears around day 26, and the hind limb bud around day 28. Limbs are most susceptible to teratogens between weeks 4 and 7. Position along the head to tail axis is set by **HOX genes**, and misexpression of HOXB8 alters forelimb position.",
+   "say": "Limb development follows a timetable. The forelimb bud appears around day 26, and the hind limb bud around day 28. Limbs are most susceptible to teratogens between weeks 4 and 7. Position along the head to tail axis is set by HOX genes, and misexpression of HOXB8 alters forelimb position. Thumb and great toe form on the preaxial border.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Day 26 forelimb bud"
+     },
+     {
+      "id": "b",
+      "label": "Day 28 hind limb bud"
+     },
+     {
+      "id": "c",
+      "label": "Week 4 to 7 teratogen window"
+     },
+     {
+      "id": "d",
+      "label": "HOX genes set position"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anomalies are classed by mechanism. A **malformation** is an intrinsic developmental defect giving a primary structural error. A **deformation** is an extrinsic force acting on a normally formed structure. A **disruption** is secondary damage to a normally developing organ, as in amniotic band syndrome. A **sequence** is a cluster of anomalies from one primary event.",
+   "say": "Anomalies are classed by mechanism. A malformation is an intrinsic developmental defect giving a primary structural error. A deformation is an abnormal development caused by an extrinsic force. A disruption is secondary damage to a normally developing organ, as in amniotic band syndrome. A sequence is a cluster of anomalies arising from one primary event.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intrinsic cause",
+     "points": [
+      "Malformation: primary structural defect",
+      "Example: intrinsic genetic error"
+     ]
+    },
+    "right": {
+     "title": "Extrinsic or secondary cause",
+     "points": [
+      "Deformation: external mechanical force",
+      "Disruption: secondary damage, e.g. amniotic bands"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Twinning arises in two ways. **Monozygotic** twins come from one zygote and are genetically identical. **Dizygotic** twins come from two ova. **Superfecundation** is fertilisation of two ova released in the same cycle by separate acts of coitus. **Superfoetation** is fertilisation of a second ovum in an already pregnant woman. A **vanishing twin** is an early fetus that disappears during gestation.",
+   "say": "Twinning arises in two ways. Monozygotic twins come from one zygote and are genetically identical. Dizygotic twins come from two ova. Superfecundation is fertilisation of two ova released in the same cycle by separate acts of coitus. Superfoetation is fertilisation of a second ovum in an already pregnant woman. A vanishing twin is an early fetus that disappears during gestation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Mechanism",
+     "Zygosity"
+    ],
+    "rows": [
+     [
+      "Monozygotic",
+      "One zygote splits",
+      "Identical"
+     ],
+     [
+      "Dizygotic",
+      "Two ova fertilised",
+      "Non-identical"
+     ],
+     [
+      "Superfecundation",
+      "Two ova, same cycle",
+      "Non-identical"
+     ],
+     [
+      "Superfoetation",
+      "Second ovum, already pregnant",
+      "Non-identical"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chimerism and mosaicism are related but different. A **mosaic** has two or more genetically distinct cell lines from a single zygote. A **chimera** has cell lines from two different zygotes, for example after fusion of embryos or transplantation. Turner syndrome survivors are often mosaics. Isograft means transfer between genetically identical individuals, such as identical twins.",
+   "say": "Chimerism and mosaicism are related but different. A mosaic has two or more genetically distinct cell lines from a single zygote. A chimera has cell lines from two different zygotes, for example after fusion of embryos. Turner syndrome survivors are often mosaics. An isograft is transferred between genetically identical individuals, such as identical twins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mosaic",
+     "points": [
+      "One zygote origin",
+      "Turner survivors often mosaic"
+     ]
+    },
+    "right": {
+     "title": "Chimera",
+     "points": [
+      "Two or more zygotes",
+      "Intermingled cell lines"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "22fbd9e2-145a-4481-a3ea-f96b06fb371f",
+  "8115625e-924d-4f62-8398-e819ac1a4054",
+  "e62e106e-0242-4f1c-a606-15ecdc74e36f"
+ ],
+ "src": [],
+ "refs": [
+  "Inderbir Singh's Human Embryology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 36
+ }
+}

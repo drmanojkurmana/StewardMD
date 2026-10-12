@@ -1,0 +1,200 @@
+{
+ "v": 1,
+ "module": "rad-xray",
+ "subject": "radiology",
+ "title": "X-ray production and conventional radiography",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "X-rays are produced when fast **electrons** strike a metal target inside an X-ray tube. The tube has two electrodes. The **cathode** is a tungsten filament that releases electrons by **thermionic emission** when heated. The **anode** holds a tungsten target, which is chosen for its high atomic number of 74 and high melting point of about 3422 degrees Celsius. Most of the energy becomes heat, and only a small fraction becomes X-rays.",
+   "say": "X-rays are produced when fast electrons strike a metal target inside an X-ray tube. The tube has two electrodes. The cathode is a tungsten filament that releases electrons by thermionic emission when heated. The anode holds a tungsten target, chosen for its high atomic number of 74 and high melting point. Most of the energy becomes heat, and only a small fraction becomes X-rays.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Heated filament"
+     },
+     {
+      "id": "b",
+      "label": "Electron emission"
+     },
+     {
+      "id": "c",
+      "label": "Tungsten target"
+     },
+     {
+      "id": "d",
+      "label": "X-ray photons plus heat"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The target produces two kinds of X-ray. **Bremsstrahlung** is a continuous spectrum made when electrons slow down near the nuclei of target atoms. **Characteristic radiation** appears as sharp peaks when an inner shell electron is knocked out and an outer electron drops into the gap. Both are useful, but bremsstrahlung forms most of the beam. The peak voltage, called **kVp**, sets the energy and penetrating power of the beam.",
+   "say": "The target produces two kinds of X-ray. Bremsstrahlung is a continuous spectrum made when electrons slow down near the nuclei of target atoms. Characteristic radiation appears as sharp peaks when an inner shell electron is knocked out. Bremsstrahlung forms most of the beam. The peak voltage, called kVp, sets the energy and penetrating power of the beam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Bremsstrahlung",
+     "Characteristic"
+    ],
+    "rows": [
+     [
+      "Spectrum",
+      "Continuous",
+      "Discrete peaks"
+     ],
+     [
+      "Origin",
+      "Electron slowing near nucleus",
+      "Inner shell vacancy filled"
+     ],
+     [
+      "Share of beam",
+      "Most of beam",
+      "Small share"
+     ],
+     [
+      "Set by",
+      "kVp",
+      "Target element"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **focal spot** is the area of the target struck by electrons. A small focal spot gives sharper images, but it concentrates heat. To balance these, the target is angled about 20 degrees to the central ray. This makes the effective focal spot about 1 mm by 1 mm, while the actual spot is about 1 mm by 3 mm. A **rotating anode** spreads heat over a larger track, which is its main purpose. Filtration removes soft, low energy photons that add dose but little image information.",
+   "say": "The focal spot is the area of the target struck by electrons. A small focal spot gives sharper images, but it concentrates heat. The target is angled about 20 degrees, so the effective spot is about 1 by 1 millimetre, while the actual spot is about 1 by 3 millimetres. A rotating anode spreads heat over a larger track. Filtration removes soft low energy photons that add dose but little image information.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Focal spot effects",
+     "points": [
+      "Small spot gives sharper detail",
+      "Small spot concentrates heat",
+      "Target angled near 20 degrees",
+      "Effective spot about 1 by 1 mm",
+      "Actual spot about 1 by 3 mm"
+     ]
+    },
+    "right": {
+     "title": "Rotating anode and filters",
+     "points": [
+      "Spreads heat over larger track",
+      "Main role is heat dissipation",
+      "Filtration removes soft photons",
+      "Reduces patient dose"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Image quality depends on several controls. The **mAs** value, which is tube current multiplied by exposure time, controls the number of photons and so the density of the film. Increasing **kVp** raises penetration and reduces contrast. A **grid** placed between patient and film absorbs scattered radiation, which improves contrast, but it needs more exposure, so patient dose rises. Intensifying screens containing rare earth phosphors, such as gadolinium and lanthanum, emit green light and reduce patient exposure compared with older calcium tungstate screens.",
+   "say": "Image quality depends on several controls. The mAs value controls the number of photons and so the density of the film. Increasing kVp raises penetration and reduces contrast. A grid absorbs scattered radiation, which improves contrast, but it needs more exposure. Rare earth intensifying screens emit green light and reduce patient exposure compared with older calcium tungstate screens.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Main effect",
+     "Trade off"
+    ],
+    "rows": [
+     [
+      "mAs",
+      "Film density",
+      "Dose rises with mAs"
+     ],
+     [
+      "kVp",
+      "Penetration",
+      "Contrast falls"
+     ],
+     [
+      "Grid",
+      "Less scatter, better contrast",
+      "More exposure needed"
+     ],
+     [
+      "Rare earth screen",
+      "Green light, less dose",
+      "Needs matching film"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Digital systems replace film. **Digital radiography** uses a solid detector that converts X-rays directly into a digital signal. **Computed radiography** uses a photostimulable phosphor plate that is read by a laser scanner. **Fluoroscopy** gives real time images, and the older **image intensifier** converts X-rays to light and then electrons to a brighter output. In India, exam questions often ask about the historical discovery: William Roentgen discovered X-rays in November 1895.",
+   "say": "Digital systems replace film. Digital radiography uses a solid detector that converts X-rays directly into a digital signal. Computed radiography uses a phosphor plate read by a laser scanner. Fluoroscopy gives real time images, and the older image intensifier converts X-rays to light and then to electrons. Roentgen discovered X-rays in November 1895.",
+   "vis": null
+  },
+  {
+   "tx": "Processing faults are a common cause of poor radiographs. An unexposed **film** still shows **base plus fog** density of roughly 0.2 to 0.3, which is the baseline darkening of the emulsion and support. A **developer** running too hot or left in too long raises fog, while **light leaks** and unsafe darkroom lighting add further fogging. Careful **replenishment** and temperature control keep the **optical density** within the diagnostic range.",
+   "say": "Processing faults are a common cause of poor radiographs. An unexposed film still shows base plus fog density of roughly 0.2 to 0.3. A developer that runs too hot or too long raises fog. Light leaks and unsafe darkroom lighting add more fogging. Careful replenishment and temperature control keep the optical density within the diagnostic range.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Processing fault",
+     "Typical effect on image"
+    ],
+    "rows": [
+     [
+      "Developer too hot",
+      "Raised background fog"
+     ],
+     [
+      "Light leak in darkroom",
+      "Greyed, fogged film"
+     ],
+     [
+      "Excess exposure",
+      "Overall blackening"
+     ],
+     [
+      "Unexposed film",
+      "Base plus fog near 0.2 to 0.3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "69791c25-3634-46b6-be42-f415ac466182",
+  "968aa8b7-8a50-43de-b8c3-f5c380a61be9",
+  "d9fe3cfe-1d93-40fd-a4fb-04bf9be5fd46"
+ ],
+ "src": [],
+ "refs": [
+  "White and Pharoah, Oral Radiology: Principles and Interpretation"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 445
+ }
+}

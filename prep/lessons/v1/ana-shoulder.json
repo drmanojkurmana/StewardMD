@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "ana-shoulder",
+ "subject": "anatomy",
+ "title": "Scapular region and shoulder joint",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **rotator cuff** is a musculotendinous cuff made of four muscles: **supraspinatus**, **infraspinatus**, **teres minor** and **subscapularis**. Their tendons blend with the shoulder capsule. Together they stabilise the joint and hold the large humeral head against the small glenoid. Teres major is not part of the cuff, which is a frequent distractor.",
+   "say": "The rotator cuff is a musculotendinous cuff made of four muscles: supraspinatus, infraspinatus, teres minor and subscapularis. Their tendons blend with the shoulder capsule. Together they stabilise the joint and hold the large humeral head against the small glenoid. Teres major is not part of the cuff, which is a frequent distractor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle",
+     "Main action",
+     "Nerve supply"
+    ],
+    "rows": [
+     [
+      "Supraspinatus",
+      "Initiates abduction",
+      "Suprascapular"
+     ],
+     [
+      "Infraspinatus",
+      "Lateral rotation",
+      "Suprascapular"
+     ],
+     [
+      "Teres minor",
+      "Lateral rotation",
+      "Axillary"
+     ],
+     [
+      "Subscapularis",
+      "Medial rotation",
+      "Upper and lower subscapular"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Abduction happens in two phases. **Supraspinatus** drives the first 10 to 15 degrees. Beyond about 30 degrees, the **deltoid** becomes the main abductor. Supraspinatus lies under the coracoacromial arch, and it is the most commonly injured rotator cuff muscle. Its tendon inserts on the greater tubercle, not the lesser tubercle.",
+   "say": "Abduction happens in two phases. Supraspinatus drives the first ten to fifteen degrees. Beyond about thirty degrees, the deltoid becomes the main abductor. Supraspinatus lies under the coracoacromial arch, and it is the most commonly injured rotator cuff muscle. Its tendon inserts on the greater tubercle, not the lesser tubercle.",
+   "vis": null
+  },
+  {
+   "tx": "The **scapular anastomosis** keeps the arm supplied if the subclavian or axillary artery is blocked. It links the **suprascapular** and **dorsal scapular** arteries from the subclavian artery with the **circumflex scapular** branch of the subscapular artery. Here the suprascapular artery forms an open anastomosis with the circumflex scapular artery. Anterior circumflex humeral and thoracodorsal arteries do not take part.",
+   "say": "The scapular anastomosis keeps the arm supplied if the subclavian or axillary artery is blocked. It links the suprascapular and dorsal scapular arteries from the subclavian artery with the circumflex scapular branch of the subscapular artery. Here the suprascapular artery forms an open anastomosis with the circumflex scapular artery. Anterior circumflex humeral and thoracodorsal arteries do not take part.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Subclavian: suprascapular, dorsal scapular"
+     },
+     {
+      "id": "b",
+      "label": "Scapular anastomosis"
+     },
+     {
+      "id": "c",
+      "label": "Axillary: circumflex scapular"
+     },
+     {
+      "id": "d",
+      "label": "Upper limb perfused"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two **triangular and quadrangular spaces** lie at the back of the shoulder. The **quadrangular space** is bounded by teres minor and subscapularis above, teres major below, the long head of triceps medially and the surgical neck of humerus laterally. It transmits the axillary nerve and posterior humeral circumflex vessels. The **triangular space** transmits the circumflex scapular vessels.",
+   "say": "Two triangular and quadrangular spaces lie at the back of the shoulder. The quadrangular space is bounded by teres minor and subscapularis above, teres major below, the long head of triceps medially and the surgical neck of humerus laterally. It transmits the axillary nerve and posterior humeral circumflex vessels. The triangular space transmits the circumflex scapular vessels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Quadrangular space",
+     "points": [
+      "Transmits axillary nerve",
+      "Posterior humeral circumflex vessels",
+      "Lateral wall: surgical neck of humerus"
+     ]
+    },
+    "right": {
+     "title": "Triangular space",
+     "points": [
+      "Transmits circumflex scapular vessels",
+      "Bounded by teres minor and teres major",
+      "Medial side: long head of triceps"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Winging of the scapula** follows injury to the **long thoracic nerve**, which supplies **serratus anterior**. The muscle normally holds the scapula against the chest wall. When it fails, the medial border lifts away, most visibly on pushing against resistance. Dorsal scapular nerve injury affects rhomboids and levator scapulae instead, and it is not the classic cause.",
+   "say": "Winging of the scapula follows injury to the long thoracic nerve, which supplies serratus anterior. The muscle normally holds the scapula against the chest wall. When it fails, the medial border lifts away, most visibly on pushing against resistance. Dorsal scapular nerve injury affects rhomboids and levator scapulae instead, and it is not the classic cause.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "4615f9f1-1993-4cd5-9ba8-0bd26f47cb71",
+  "3af600ec-32b1-4c2d-a208-134d5d513ec0",
+  "f150931f-7682-4cc7-8b31-1982a5cee737"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 233
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "sgm-acid-base",
+ "subject": "ss-general-medicine",
+ "title": "Acid-base disorders: anion gap, RTA and alkalosis essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Begin every acid-base problem by checking the **arterial pH**, then identify the **primary disturbance**: metabolic or respiratory, and acidosis or alkalosis. The **anion gap** is sodium minus the combined **chloride** and **bicarbonate**. When it is raised, look for unmeasured anions such as lactate, ketones, uraemic acids or toxic alcohols. Because **albumin** carries negative charge, a low level masks part of the gap, so correct the value before interpreting it.",
+   "say": "Begin every acid-base problem by checking the arterial pH, then identify the primary disturbance: metabolic or respiratory, and acidosis or alkalosis. The anion gap is sodium minus the combined chloride and bicarbonate. When it is raised, look for unmeasured anions such as lactate, ketones, uraemic acids or toxic alcohols. Because albumin carries negative charge, a low level masks part of the gap, so correct the value before interpreting it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause of raised gap",
+     "Typical example"
+    ],
+    "rows": [
+     [
+      "Lactic acidosis",
+      "Sepsis, shock, tissue hypoperfusion"
+     ],
+     [
+      "Ketoacidosis",
+      "Diabetic or starvation ketones"
+     ],
+     [
+      "Uraemia",
+      "Advanced chronic kidney disease"
+     ],
+     [
+      "Toxic alcohols or salicylates",
+      "Methanol, ethylene glycol, aspirin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Use the **delta ratio**, which is the change in anion gap divided by the change in bicarbonate from its normal value. A ratio below one suggests a coexisting normal gap acidosis, while a ratio above two suggests a coexisting metabolic alkalosis. For expected compensation, apply the **Winter formula**, which predicts the PaCO2 from the measured bicarbonate. A PaCO2 outside the predicted range, with a tolerance of plus or minus two, signals a second respiratory disorder.",
+   "say": "Use the delta ratio, which is the change in anion gap divided by the change in bicarbonate from its normal value. A ratio below one suggests a coexisting normal gap acidosis, while a ratio above two suggests a coexisting metabolic alkalosis. For expected compensation, apply the Winter formula, which predicts the PaCO2 from the measured bicarbonate. A PaCO2 outside the predicted range, with a tolerance of plus or minus two, signals a second respiratory disorder.",
+   "vis": null
+  },
+  {
+   "tx": "In salicylate poisoning, the **mixed picture** is a respiratory alkalosis from direct stimulation of the medullary chemoreceptor, plus a high gap metabolic acidosis from uncoupled oxidative phosphorylation and Krebs cycle inhibition. Serial levels matter because sustained-release forms and bezoars delay absorption. Acid diuresis is avoided as potentially harmful; urinary alkalinisation is used instead, and it needs correction of hypokalaemia to work.",
+   "say": "In salicylate poisoning, the mixed picture is a respiratory alkalosis from direct stimulation of the medullary chemoreceptor, plus a high gap metabolic acidosis from uncoupled oxidative phosphorylation and Krebs cycle inhibition. Serial levels matter because sustained-release forms and bezoars delay absorption. Acid diuresis is avoided as potentially harmful, and urinary alkalinisation is used instead, which needs potassium correction to work.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Salicylate effects",
+     "points": [
+      "Respiratory alkalosis early",
+      "High gap metabolic acidosis later",
+      "PH falls, unionised drug enters brain",
+      "Cerebral edema at high levels"
+     ]
+    },
+    "right": {
+     "title": "Management points",
+     "points": [
+      "Serial salicylate levels",
+      "Urinary alkalinisation with bicarbonate",
+      "Correct potassium first",
+      "Haemodialysis if severe or refractory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Renal tubular acidosis is classified by where the defect lies. **Type 1 distal RTA** reflects failed hydrogen secretion by alpha-intercalated cells, producing a normal anion gap acidosis. Urine stays inappropriately alkaline despite systemic acidaemia, and patients often have hypokalaemia and nephrocalcinosis. Management uses alkali, with **potassium citrate** often preferred. **Type 2 proximal RTA** arises from **bicarbonate wasting** in the proximal tubule. Bicarbonate replacement can worsen potassium loss, so potassium needs close monitoring during correction.",
+   "say": "Renal tubular acidosis is classified by where the defect lies. Type 1 distal RTA reflects failed hydrogen secretion by alpha intercalated cells, producing a normal anion gap acidosis. Urine stays inappropriately alkaline despite systemic acidaemia, and patients often have hypokalaemia and nephrocalcinosis. Management uses alkali, with potassium citrate often preferred. Type 2 proximal RTA arises from bicarbonate wasting in the proximal tubule. Bicarbonate replacement can worsen potassium loss, so potassium needs close monitoring during correction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Type 1 distal",
+     "Type 2 proximal"
+    ],
+    "rows": [
+     [
+      "Defect",
+      "Failed distal acid secretion",
+      "Proximal bicarbonate wasting"
+     ],
+     [
+      "Urine pH in acidosis",
+      "Inappropriately alkaline",
+      "Acidic once acidosis is established"
+     ],
+     [
+      "Key complication",
+      "Nephrocalcinosis, stones",
+      "Phosphate loss, Fanconi features"
+     ],
+     [
+      "Treatment",
+      "Alkali, potassium citrate",
+      "High-dose alkali with potassium replacement"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_2fe3923cfc41",
+  "q_231f7f17a7bc",
+  "q_2e93df8a6c49"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Dan L. Longo et al. (Editors))",
+  "Chapter on acid-base disorders in Davidson's Principles and Practice of Medicine (Nicki R. Colledge et al. (Editors))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 42
+ }
+}

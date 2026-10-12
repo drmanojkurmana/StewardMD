@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "srh-neuro-rheum",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Neurological manifestations of rheumatic disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Rheumatic diseases can damage the nervous system in several distinct patterns. The **mononeuritis multiplex** pattern means several separate peripheral nerves are injured in an asymmetric way, classically seen in vasculitis such as polyarteritis nodosa and rheumatoid vasculitis. Nerve biopsy and nerve conduction studies help confirm the pattern. Recognising which nerves are involved guides urgent treatment decisions.",
+   "say": "Rheumatic diseases can damage the nervous system in several distinct patterns. The mononeuritis multiplex pattern means several separate peripheral nerves are injured in an asymmetric way. It is classically seen in vasculitis such as polyarteritis nodosa and rheumatoid vasculitis. Nerve biopsy and nerve conduction studies help confirm the pattern. Recognising which nerves are involved guides urgent treatment decisions.",
+   "vis": null
+  },
+  {
+   "tx": "Sjogren syndrome commonly causes a **small fibre neuropathy**. Patients complain of burning pain, numbness and dysautonomia, while strength and large fibre reflexes are often preserved. Skin biopsy showing reduced intraepidermal nerve fibre density supports the diagnosis. Testing for small fibre function is the key step in examination.",
+   "say": "Sjogren syndrome commonly causes a small fibre neuropathy. Patients complain of burning pain, numbness and dysautonomia, while strength and large fibre reflexes are often preserved. Skin biopsy showing reduced intraepidermal nerve fibre density supports the diagnosis. Testing for small fibre function is the key step in examination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Small fibre neuropathy",
+     "Large fibre neuropathy"
+    ],
+    "rows": [
+     [
+      "Main symptom",
+      "Burning pain, numbness",
+      "Weakness, unsteadiness"
+     ],
+     [
+      "Reflexes",
+      "Usually preserved",
+      "Often reduced"
+     ],
+     [
+      "Key test",
+      "Skin biopsy",
+      "Nerve conduction studies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neuropsychiatric lupus** covers central and peripheral nervous involvement in systemic lupus erythematosus. Antiribosomal P antibodies are associated with diffuse psychosis and mood disturbance. Acute confusional states, seizures and cerebrovascular events also occur. Exclude infection and metabolic causes before attributing symptoms to lupus.",
+   "say": "Neuropsychiatric lupus covers central and peripheral nervous involvement in systemic lupus erythematosus. Antiribosomal P antibodies are associated with diffuse psychosis and mood disturbance. Acute confusional states, seizures and cerebrovascular events also occur. Exclude infection and metabolic causes before attributing symptoms to lupus.",
+   "vis": null
+  },
+  {
+   "tx": "**CNS vasculitis** can cause headache, focal deficits and cognitive change. Primary angiitis of the central nervous system is diagnosed after excluding secondary causes, and MRI with angiography plus leptomeningeal biopsy are key investigations. **Transverse myelitis** presents with a sensory level, limb weakness and bladder dysfunction over hours to days. Its link with aquaporin-4 antibodies in neuromyelitis optica spectrum disorder matters, because overlap with connective tissue disease is recognised.",
+   "say": "CNS vasculitis can cause headache, focal deficits and cognitive change. Primary angiitis of the central nervous system is diagnosed after excluding secondary causes. MRI with angiography plus leptomeningeal biopsy are key investigations. Transverse myelitis presents with a sensory level, limb weakness and bladder dysfunction over hours to days. Its link with aquaporin-4 antibodies in neuromyelitis optica spectrum disorder matters, because overlap with connective tissue disease is recognised.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Myelitis symptoms"
+     },
+     {
+      "id": "b",
+      "label": "MRI spinal cord"
+     },
+     {
+      "id": "c",
+      "label": "Test aquaporin-4 antibody"
+     },
+     {
+      "id": "d",
+      "label": "Treat and monitor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trigeminal sensory neuropathy** causes numbness or pain over the face in the trigeminal distribution, often a clue to Sjogren syndrome or connective tissue disease. **Sensory ganglionopathy** affects dorsal root ganglia and produces asymmetric sensory ataxia with pseudoathetosis. Both conditions tend to be underdiagnosed, so sensory examination and nerve conduction studies help distinguish them from peripheral neuropathy.",
+   "say": "Trigeminal sensory neuropathy causes numbness or pain over the face in the trigeminal distribution. It is often a clue to Sjogren syndrome or connective tissue disease. Sensory ganglionopathy affects dorsal root ganglia and produces asymmetric sensory ataxia with pseudoathetosis. Both conditions tend to be underdiagnosed, so sensory examination and nerve conduction studies help distinguish them from peripheral neuropathy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_c7e2a9272710",
+  "q_fa17c5c4fccf",
+  "q_2a6b8aaa30c8"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Kelley and Firestein's Textbook of Rheumatology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 22
+ }
+}

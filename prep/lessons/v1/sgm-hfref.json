@@ -1,0 +1,104 @@
+{
+ "v": 1,
+ "module": "sgm-hfref",
+ "subject": "ss-general-medicine",
+ "title": "HFrEF: diagnosis, four pillars and devices",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**HFrEF** means an LVEF of 40% or below. Confirm the diagnosis with an echocardiogram after a raised natriuretic peptide. In outpatients, NT-proBNP of 125 pg/mL or more, or BNP of 35 pg/mL or more, supports heart failure; lower values make it unlikely. In India, coronary disease is the commonest cause, followed by dilated cardiomyopathy and rheumatic heart disease, so check troponin and look for ischaemia, valve disease and thyroid disease.",
+   "say": "HFrEF means an ejection fraction of 40 percent or below. Confirm the diagnosis with an echocardiogram after a raised natriuretic peptide. In outpatients, NT-proBNP of 125 picograms per millilitre or more, or BNP of 35 picograms per millilitre or more, supports heart failure; lower values make it unlikely. In India, coronary disease is the commonest cause, followed by dilated cardiomyopathy and rheumatic heart disease, so check troponin and look for ischaemia, valve disease and thyroid disease.",
+   "vis": null
+  },
+  {
+   "tx": "Track **potassium** and **creatinine** at every review. A rise in **creatinine** of up to half above baseline is tolerable, and so is **potassium** up to 5.5 mmol/L, so keep treatment going. Once **potassium** climbs above 5.5, the **MRA** dose is halved. Beyond 6.0, the **MRA** is stopped and the **RAAS inhibitor** is reassessed.",
+   "say": "Check potassium and creatinine at every review. A creatinine rise of up to half above baseline is tolerable, and so is potassium up to 5.5 millimoles per litre, so treatment should continue. If potassium goes above 5.5, halve the MRA dose. If it goes above 6.0, stop the MRA and review the RAAS inhibitor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "k",
+      "label": "K+ above 5.5"
+     },
+     {
+      "id": "h",
+      "label": "Halve MRA dose"
+     },
+     {
+      "id": "s",
+      "label": "K+ above 6.0"
+     },
+     {
+      "id": "x",
+      "label": "Stop MRA, review RAAS inhibitor"
+     }
+    ],
+    "edges": [
+     [
+      "k",
+      "h"
+     ],
+     [
+      "s",
+      "x"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Add **ivabradine** if in sinus rhythm with heart rate 70/min or more on the maximally tolerated beta-blocker and LVEF 35% or less. Add **vericiguat** after worsening HF despite foundational therapy with EF below 45%; start 2.5 mg once daily. Never combine vericiguat with PDE5 inhibitors such as sildenafil. Iron deficiency (ferritin below 100 mcg/L, or 100 to 299 with TSAT below 20%) warrants IV iron.",
+   "say": "Add ivabradine if the patient is in sinus rhythm with a heart rate of 70 per minute or more on the maximally tolerated beta-blocker and an ejection fraction of 35 percent or less. Add vericiguat after worsening heart failure despite foundational therapy with an ejection fraction below 45 percent; start 2.5 milligrams once daily. Never combine vericiguat with PDE5 inhibitors such as sildenafil. Iron deficiency, with ferritin below 100 micrograms per litre, or 100 to 299 with TSAT below 20 percent, warrants intravenous iron.",
+   "vis": null
+  },
+  {
+   "tx": "Device therapy follows optimised medication. An **ICD** guards against sudden death: for **primary prevention**, the ejection fraction should still sit at or below 35 percent after about three months of good drug treatment, and expected survival should exceed one year. It also covers **secondary prevention** after ventricular fibrillation or unstable ventricular tachycardia without a reversible trigger. **CRT** suits patients with wide QRS complexes showing left bundle branch morphology, because it resynchronises contraction of the ventricles.",
+   "say": "Device therapy follows optimised medication. An ICD is used for primary prevention when ejection fraction remains at or below 35 percent after about three months of good drug treatment, provided expected survival exceeds one year. It also serves secondary prevention after ventricular fibrillation or unstable ventricular tachycardia without a reversible cause. CRT suits patients with ejection fraction at or below 35 percent, sinus rhythm, left bundle branch block and a QRS of 150 milliseconds or more, because it resynchronises the ventricles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ICD",
+     "points": [
+      "Primary prevention: EF still 35% or below after about 3 months of therapy",
+      "Secondary prevention: after VF or unstable VT without reversible cause",
+      "Needs expected survival over 1 year"
+     ]
+    },
+    "right": {
+     "title": "CRT",
+     "points": [
+      "EF 35% or below in sinus rhythm",
+      "Left bundle branch block with QRS 150 ms or more",
+      "Resynchronises ventricular contraction"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_741262918ac6",
+  "q_1f1a7d328db5",
+  "q_c0d38ac56fed"
+ ],
+ "src": [
+  "kb-clinical-protocols-chronic-heart-failure-hfref-india",
+  "kb-clinical-protocols-chronic-heart-failure-hfref"
+ ],
+ "refs": [
+  "ACC/AHA/HFSA Guideline for the Management of Heart Failure (2022)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 1799,
+  "itemN": 61
+ }
+}

@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "module": "fmt-sexual-offences",
+ "subject": "forensic-medicine",
+ "title": "Sexual offences, POCSO and medicolegal examination",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Rape is defined in the older penal code and carried forward into the newer Bharatiya Nyaya Sanhita, which keeps the same core elements. Non-consensual penetration of the vagina, mouth, urethra or anus, or manipulation of body parts, counts. **Penetration** need not be complete, and slight entry suffices. Punishment carries a **minimum term** of imprisonment, extending to life. Mere **impotence** is not a defence.",
+   "say": "Rape is defined in the older penal code and carried forward into the newer Bharatiya Nyaya Sanhita, which keeps the same core elements. Non-consensual penetration of the vagina, mouth, urethra or anus, or manipulation of body parts, counts. Penetration need not be complete, and slight entry is enough. Punishment carries a minimum term of imprisonment, which can extend to life. Mere impotence is not a defence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Framework",
+     "Subject",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Older penal code",
+      "Definition",
+      "Non-consensual penetration"
+     ],
+     [
+      "Older penal code",
+      "Punishment",
+      "Minimum term, possibly life"
+     ],
+     [
+      "Newer criminal code",
+      "Definition",
+      "Carries forward the old definition"
+     ],
+     [
+      "Newer criminal code",
+      "Punishment",
+      "Carries forward the old penalty"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **POCSO Act, 2012** protects children under 18. Section 19 makes reporting mandatory to the Special Juvenile Police Unit or local police. Failure to report carries up to six months imprisonment, a fine or both. A teacher who learns of abuse must report it. Identity of a victim must stay protected, as under Section 228A IPC and the POCSO framework.",
+   "say": "The POCSO Act, 2012 protects children under 18. Section 19 makes reporting mandatory to the Special Juvenile Police Unit or local police. Failure to report carries up to six months imprisonment, a fine or both. A teacher who learns of abuse must report it. Identity of a victim must stay protected, as under Section 228A IPC and the POCSO framework.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Disclosure by child"
+     },
+     {
+      "id": "b",
+      "label": "Informant tells SJPU or police"
+     },
+     {
+      "id": "c",
+      "label": "Medical examination"
+     },
+     {
+      "id": "d",
+      "label": "Identity kept confidential"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The accused is examined under **Section 53 CrPC**, now Section 53 of the BNSS. A registered medical practitioner examines the arrested person at a police officer's request, not below sub-inspector rank. Reasonable force may be used. A female accused must be examined by or under a female practitioner. Samples such as swabs, smegma and nail clippings are taken.",
+   "say": "The accused is examined under Section 53 CrPC, now Section 53 of the BNSS. A registered medical practitioner examines the arrested person at a police officer's request, not below sub-inspector rank. Reasonable force may be used. A female accused must be examined by or under a female practitioner. Samples such as swabs, smegma and nail clippings are taken.",
+   "vis": null
+  },
+  {
+   "tx": "Sexual perversions are common exam topics. **Sadism** means infliction of pain or humiliation on a partner. **Masochism** means gratification from self-inflicted pain. **Fetishism** uses objects like shoes or underclothing. **Voyeurism** means gratification by watching others. **Frotteurism** means rubbing against unknown persons in crowds. Sexual asphyxia belongs to sadism and masochism.",
+   "say": "Sexual perversions are common exam topics. Sadism means infliction of pain or humiliation on a partner. Masochism means gratification from self-inflicted pain. Fetishism uses objects like shoes or underclothing. Voyeurism means gratification by watching others. Frotteurism means rubbing against unknown persons in crowds. Sexual asphyxia belongs to sadism and masochism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Perversion",
+     "Gratification"
+    ],
+    "rows": [
+     [
+      "Sadism",
+      "Inflicting pain"
+     ],
+     [
+      "Masochism",
+      "Self-inflicted pain"
+     ],
+     [
+      "Fetishism",
+      "Inanimate objects"
+     ],
+     [
+      "Voyeurism",
+      "Watching others"
+     ],
+     [
+      "Frotteurism",
+      "Rubbing against crowds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several terms are often confused. **Incest** is intercourse between blood relatives within prohibited degrees. In India incest is not a separate offence, though it may be charged under other sections. **Sodomy** is anal intercourse and is covered by Section 377 IPC. **Tribadism** is sexual contact between women and is not an offence in India. **Buccal coitus** is oral insertion of the penis.",
+   "say": "Several terms are often confused. Incest is intercourse between blood relatives within prohibited degrees. In India incest is not a separate offence, though it may be charged under other sections. Sodomy is anal intercourse and is covered by Section 377 IPC. Tribadism is sexual contact between women and is not an offence in India. Buccal coitus is oral insertion of the penis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Incest",
+     "points": [
+      "Blood relatives",
+      "Prohibited degrees",
+      "Not separate offence in India"
+     ]
+    },
+    "right": {
+     "title": "Tribadism",
+     "points": [
+      "Female homosexual contact",
+      "Not an offence in India",
+      "Also called lesbianism"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "b329cbe6-a788-4dbb-a7c4-d0cd029c3b36",
+  "4fd3318f-2f50-4288-8dd8-c842ee92803e",
+  "50aa8601-effc-4163-95e3-d2e8cec5ce16"
+ ],
+ "src": [],
+ "refs": [
+  "Indian Penal Code, 1860",
+  "Bharatiya Nyaya Sanhita, 2023",
+  "Protection of Children from Sexual Offences Act, 2012",
+  "Code of Criminal Procedure, 1973, Section 53",
+  "Reddy KSN, The Essentials of Forensic Medicine and Toxicology (K Sai Reddy)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 285
+ }
+}
