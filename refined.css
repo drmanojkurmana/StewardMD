@@ -1,0 +1,72 @@
+/* StewardMD - "Refined clinical" look for the INNER screens (owner pick, 2026-10-12).
+ *
+ * Same Inter + teal. Calmer layered shadows, 16px radii, a touch more air, 14px text where the app
+ * used 13px, tighter large titles. The HOME PAGE IS NOT TOUCHED (owner: "Keep existing look home page"):
+ * every rule below is scoped to P = `html.smd-refined body > :not(#homeV2)`, i.e. every top-level layer
+ * of the app except #homeV2 (tool screens, sheets, the sidebar, alerts, search).
+ *
+ * Switch: the `smd-refined` class on <html>, added by an inline script in index.html unless
+ * localStorage smd_refined=0. Tokens first (the design system's own --rds-* values), then the shared
+ * component classes. No !important: P carries an id in :not(), so it outranks module rules. */
+
+/* ---- tokens (inherited by every inner screen) ---- */
+html.smd-refined body > :not(#homeV2) {
+  --rds-r: 16px; --rds-r-lg: 20px; --rds-r-ctl: 12px; --rds-r-sheet: 26px;
+  --rds-fs-body: 14px; --rds-fs-sec: 13px;
+  --rf-line: rgba(15, 23, 42, .07);
+  --rf-card: 0 1px 2px rgba(15, 23, 42, .04), 0 6px 16px rgba(15, 23, 42, .045);
+  --rf-card-hover: 0 1px 2px rgba(15, 23, 42, .05), 0 10px 24px rgba(15, 23, 42, .07);
+  --rds-el-card: var(--rf-card);
+}
+html.smd-refined body.dark > :not(#homeV2),
+html.smd-refined body.v3-dark > :not(#homeV2) {
+  --rf-line: rgba(255, 255, 255, .09);
+  --rf-card: 0 1px 2px rgba(0, 0, 0, .35), 0 8px 20px rgba(0, 0, 0, .26);
+  --rf-card-hover: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 26px rgba(0, 0, 0, .34);
+}
+
+/* ---- cards and list rows: one radius, one hairline, one soft layered shadow ---- */
+html.smd-refined body > :not(#homeV2) [class$="-card"],
+html.smd-refined body > :not(#homeV2) [class*="-card "],
+html.smd-refined body > :not(#homeV2) .db-comp {
+  /* !important: home.js's older `body.ui-v2 .mc-card {...!important}` skin sets these on cards too. */
+  border-radius: 16px !important;
+  border-color: var(--rf-line) !important;
+  box-shadow: var(--rf-card) !important;
+}
+
+/* ---- search fields and primary buttons ---- */
+html.smd-refined body > :not(#homeV2) .mc-search,
+html.smd-refined body > :not(#homeV2) .sp-input-wrap,
+html.smd-refined body > :not(#homeV2) .db-search {
+  border-radius: 14px !important;
+  border-color: var(--rf-line) !important;
+}
+html.smd-refined body > :not(#homeV2) .ghis-connect-btn,
+html.smd-refined body > :not(#homeV2) .abg-tab { border-radius: 12px; }
+
+/* ---- type: tighter large titles, calmer secondary text ---- */
+html.smd-refined body > :not(#homeV2) h1,
+html.smd-refined body > :not(#homeV2) [class*="bigt"] { letter-spacing: -.03em; }
+html.smd-refined body > :not(#homeV2) .db-bigt { font-size: 34px; }
+html.smd-refined body > :not(#homeV2) .db-comp-name { font-size: 15.5px; font-weight: 650; letter-spacing: -.01em; }
+html.smd-refined body > :not(#homeV2) .db-comp-sub { font-size: 13.5px; }
+html.smd-refined body > :not(#homeV2) .hv-mi { font-size: 14.5px; }
+
+/* ---- sheets ---- */
+html.smd-refined body > .hv-sheet,
+html.smd-refined body > #maikSheet { border-radius: 26px 26px 0 0; }
+
+/* ---- calm hairlines under top bars ---- */
+html.smd-refined body > :not(#homeV2) .db-top,
+html.smd-refined body > :not(#homeV2) .ghis-header,
+html.smd-refined body > :not(#homeV2) .mc-head { border-color: var(--rf-line); }
+
+@media (prefers-reduced-motion: no-preference) {
+  html.smd-refined body > :not(#homeV2) [class$="-card"],
+  html.smd-refined body > :not(#homeV2) .db-comp { transition: box-shadow .2s ease, transform .2s ease; }
+}
+@media (hover: hover) {
+  html.smd-refined body > :not(#homeV2) [class$="-card"]:hover,
+  html.smd-refined body > :not(#homeV2) .db-comp:hover { box-shadow: var(--rf-card-hover); }
+}

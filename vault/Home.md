@@ -65,6 +65,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
 - [[Push]] — APNs/FCM. Read the "one thing to understand" first: the server can see no further
   than Apple, so "sent but nothing arrived" is the normal shape of a DEVICE-side failure.
+- [[Refined Look]] — "Refined clinical" skin for INNER screens only (never the home page). `smd_refined=0` turns it off.
 - [[Premium Motion]] — iOS-like layer: draggable sheets + depth, shared-element transitions, large
   titles, pull to refresh, picker haptics, skeletons, long-press previews, Live Activities; round 2: swipe
   actions, tab-bar hide + status-tap, A-Z scrubber, keyboard-aware, Undo cards, blur-up, launch morph, sounds. One kill switch each.

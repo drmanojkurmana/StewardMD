@@ -56,6 +56,8 @@
      than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
 <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/redesign-system.css?v=hit1-spheretiles2-splashv2e-betachip1-darksphere1-appfeel1-energy1-icons1-fr1-live1-knife1-ox2-alltools1-maikmark3-glow20">
+<!-- Refined clinical look for INNER screens only (never #homeV2; owner 2026-10-12). Class smd-refined on <html> is set below; localStorage smd_refined="0" turns it off. -->
+<link rel="stylesheet" href="/refined.css?v=rf1">
 <link rel="stylesheet" href="/motion.css?v=gold1-pf2">
 <script src="/smd-num.js?v=num2" defer></script>
 <!-- B2 privacy mode (window.SMD_PRIVACY_MODE; not privacy-config.js's SMD_PRIVACY): one tap in the home header masks patient names, IDs, phones and photos ON
@@ -64,6 +66,7 @@
 <link rel="stylesheet" href="/maik-ask.css?v=mkfast2">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
+<script>try{if(localStorage.getItem("smd_refined")!=="0")document.documentElement.classList.add("smd-refined");}catch(e){document.documentElement.classList.add("smd-refined");}</script>
 <script>/* Interstitial revamp flag → html.smd-splash-v2, set before first paint so the boot splash,
    intro poster and landing splash all pick it up with no flash. Presentation only (CSS overrides
    + the personalised greeting on the boot splash); default ON, ?splashv2=0 or
