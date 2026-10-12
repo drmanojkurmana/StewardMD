@@ -243,6 +243,8 @@
   /* assemble(p, type, opts, bank) -> { ok, items, count, requested, blueprint, planned, actual, deviations, reduced,
      refused, sections, seed, styles }
      bank: [{ s: subject id, m: module id, items: [...] }] (modules loaded for the scope; items carry _s/_m).
+     p.item_ex (when the profile sets it) admits only items carrying that exam tag, so two profiles sharing
+     subjects (MRCP Part 1 / Part 2 Written) never mix pools.
      opts: { count, seed, subjects: [ids] (scope), modules: [ids], difficulty: 1-4, image: true, caseOnly: true,
              only: {id:1} (these items only, e.g. the student's mistakes), exclude: {id:1},
              recent: {id:1} (soft: used only when unseen run out), hidden, quality, history: { subject: { t, ok } } }
@@ -265,6 +267,7 @@
         if (!why && opts.difficulty && levelOf(it) !== opts.difficulty) why = "difficulty";
         if (!why && needImage && !hasImage(it)) why = "no-image";
         if (!why && needCase && !isVignette(it)) why = "no-vignette";
+        if (!why && p && p.item_ex && !(it.ex && it.ex.indexOf(p.item_ex) >= 0)) why = "profile-scope";
         if (!why && opts.only && !opts.only[it.id]) why = "not-selected";
         if (why) { drop[why] = (drop[why] || 0) + 1; return; }
         var ns = normStem(it.q);

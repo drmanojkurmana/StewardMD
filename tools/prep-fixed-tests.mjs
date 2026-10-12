@@ -57,6 +57,8 @@ export const EXAMS = [
   { profile: "mrcs-part-a", tab: "mrcs", branch: "uk", tag: "mrcs-part-a" },
   { profile: "amc-mcq", tab: "amc", branch: "intl", tag: "amc-mcq" },
   { profile: "mccqe-1", tab: "mccqe", branch: "intl", tag: "mccqe-1" },
+  { profile: "mrcp-part1", tab: "mrcp", branch: "mrcp", tag: "mrcp-part1" },
+  { profile: "mrcp-part2-written", tab: "mrcp", branch: "mrcp", tag: "mrcp-part2-written" },
 ];
 export const FORMATS = ["grand", "part", "mini", "subject_mini", "topic", "daily10", "image", "pyq"];
 // Papers requested per format. Topic papers are one per major topic (TOP_PER_SUBJECT biggest per subject,

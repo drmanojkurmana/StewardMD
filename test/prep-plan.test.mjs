@@ -195,7 +195,7 @@ test("subjectAction: most due, then the weakest, then the first untouched module
 test("onboarding answers: first open needs onboarding until finished or skipped", () => {
   assert.equal(L.needsOnboard(P.emptyStore()), true);
   assert.equal(L.needsOnboard({ pl: { ob: 1 } }), false);
-  assert.deepEqual(L.EXAM_CHOICES.map((e) => e.id), ["neet-pg", "ini-cet", "neet-ss", "ini-ss", "usmle", "fmge", "plab-1", "mrcs-part-a", "amc-mcq", "mccqe-1"]);
+  assert.deepEqual(L.EXAM_CHOICES.map((e) => e.id), ["neet-pg", "ini-cet", "neet-ss", "ini-ss", "usmle", "fmge", "plab-1", "mrcs-part-a", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]);
   assert.equal(L.choiceOf("ini-cet").tab, "neet-pg");
   assert.deepEqual(L.MINUTES, [15, 30, 60, 90, 120]);
 });
@@ -232,4 +232,20 @@ test("lessons keyed apart from their module (radnotes): pickLesson and itemProgr
   const day = (t) => Math.floor(t / 864e5), td = day(Date.now());
   assert.equal(L.itemProgress(it, { ls: { "radnotes-n1-b": { done: Date.now() } } }, td, day).done, true);
   assert.equal(L.itemProgress(it, { ls: { "rad-gi": { done: Date.now() } } }, td, day).done, false);
+});
+
+test("MRCP: plan choices, QBank exams and pool scoping per profile", () => {
+  const ids = L.EXAM_CHOICES.map((e) => e.id);
+  assert.ok(ids.includes("mrcp-part1") && ids.includes("mrcp-part2-written"));
+  assert.equal(L.choiceOf("mrcp-part1").tab, "mrcp"); assert.equal(L.choiceOf("mrcp-part2-written").tab, "mrcp");
+  const e1 = P.examOf("mrcp-part1"), e2 = P.examOf("mrcp-part2-written");
+  assert.equal(e1.branch, "mrcp"); assert.equal(e1.itemEx, "mrcp-part1");
+  assert.equal(e2.branch, "mrcp"); assert.equal(e2.itemEx, "mrcp-part2-written");
+  const items = [];
+  for (let i = 0; i < 6; i++) items.push({ id: "p1." + i, ex: ["mrcp-part1"] });
+  for (let i = 0; i < 6; i++) items.push({ id: "p2." + i, ex: ["mrcp-part2-written"] });
+  items.push({ id: "untagged" });
+  assert.deepEqual(P.poolFor(items, "mrcp-part1").map((x) => x.id).sort(), ["p1.0", "p1.1", "p1.2", "p1.3", "p1.4", "p1.5"]);
+  assert.deepEqual(P.poolFor(items, "mrcp-part2-written").map((x) => x.id).sort(), ["p2.0", "p2.1", "p2.2", "p2.3", "p2.4", "p2.5"]);
+  assert.equal(P.poolFor(items, "neet-pg").length, 13, "exams without itemEx keep the whole pool");
 });

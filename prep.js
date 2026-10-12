@@ -29,7 +29,10 @@
     { id: "mrcs", label: "MRCS Part A", branch: "uk", tag: "mrcs-part-a", sec: 60 },
     // International licensing banks (branch intl; subjects carry per-exam tags).
     { id: "amc", label: "AMC CAT MCQ", branch: "intl", tag: "amc-mcq", sec: 84 },
-    { id: "mccqe", label: "MCCQE Part I", branch: "intl", tag: "mccqe-1", sec: 83 }
+    { id: "mccqe", label: "MCCQE Part I", branch: "intl", tag: "mccqe-1", sec: 83 },
+    // MRCP: one bank branch, two profiles; itemEx scopes QBank pools to the profile's own items (see poolFor).
+    { id: "mrcp-part1", label: "MRCP Part 1", branch: "mrcp", tag: "mrcp-part1", itemEx: "mrcp-part1", sec: 60 },
+    { id: "mrcp-part2-written", label: "MRCP Part 2 Written", branch: "mrcp", tag: "mrcp-part2-written", itemEx: "mrcp-part2-written", sec: 60 }
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
@@ -68,7 +71,8 @@
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
   function poolFor(items, exam, hidden, qual) {
     var ok = (items || []).filter(function (it) { return usable(it, hidden, qual); });
-    if (exam === "usmle") { var v = ok.filter(function (it) { return it.ex && it.ex.indexOf("usmle") >= 0; }); if (v.length >= 5) return v; }
+    var tag = exam === "usmle" ? "usmle" : (examOf(exam) || {}).itemEx;
+    if (tag) { var v = ok.filter(function (it) { return it.ex && it.ex.indexOf(tag) >= 0; }); if (v.length >= 5) return v; }
     return ok;
   }
   // One pass over the FSRS cards: answered and due counts per module.
@@ -591,7 +595,7 @@
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
      goes to a new folder (medcov4, radnotes3 and radmax7 now, de-identified figures 2026-10-10; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7", "maiktopic1"], medicine: ["medcov4", "maik1", "maiktopic1"], pathology: ["maik1", "maiktopic1"], pharmacology: ["maik1", "maiktopic1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23", "maik24"], "mcc-health-promotion": ["maik24", "maik25"], "mcc-professional-behaviours": ["maik25"], "community-medicine": ["maiktopic1"], paediatrics: ["maiktopic1"], surgery: ["maiktopic1"], "ss-biostatistics": ["maiktopic1"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1"], "ss-infectious-diseases": ["maiktopic1"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1"], physiology: ["maiktopic1"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7", "maiktopic1"], medicine: ["medcov4", "maik1", "maiktopic1"], pathology: ["maik1", "maiktopic1"], pharmacology: ["maik1", "maiktopic1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23", "maik24"], "mcc-health-promotion": ["maik24", "maik25"], "mcc-professional-behaviours": ["maik25"], "community-medicine": ["maiktopic1"], paediatrics: ["maiktopic1"], surgery: ["maiktopic1"], "ss-biostatistics": ["maiktopic1"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1"], "ss-infectious-diseases": ["maiktopic1"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1"], physiology: ["maiktopic1"], "mrcp-basic-science": ["maik18", "maik19"], "mrcp-cardiology": ["maik18", "maik19", "maikimg10"], "mrcp-dermatology": ["maik18", "maik19", "maikimg10"], "mrcp-endocrinology": ["maik18", "maik19", "maikimg10"], "mrcp-gastroenterology": ["maik18", "maik19", "maikimg10"], "mrcp-geriatrics": ["maik18", "maik19"], "mrcp-haematology-oncology": ["maik18", "maik19", "maikimg10"], "mrcp-infectious-diseases": ["maik18", "maik19"], "mrcp-nephrology": ["maik18", "maik19", "maikimg10"], "mrcp-neurology": ["maik18", "maik19", "maikimg10"], "mrcp-ophthalmology": ["maik18", "maik19"], "mrcp-pharmacology": ["maik18", "maik19"], "mrcp-psychiatry": ["maik18", "maik19"], "mrcp-respiratory": ["maik18", "maik19", "maikimg10"], "mrcp-rheumatology": ["maik18", "maik19", "maikimg10"], "mrcp-statistics": ["maik18", "maik19"] };
   /* MaiK overlays: generic discovery of published waves (maik1, maik2, ...) so later waves need NO app code changes.
      Pointer: overlay/maik/index.json (Cache-Control: max-age=300) -> manifest: "manifest-<hash>.json" (immutable, cached in IndexedDB).
      Fallback: local OVERLAYS static map (works offline or before manifest is loaded). */
