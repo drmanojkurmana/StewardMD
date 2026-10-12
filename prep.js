@@ -23,7 +23,10 @@
     { id: "neet-ss", label: "NEET-SS", branch: "ss-medicine", tag: "neet-ss", sec: 60 },
     { id: "usmle", label: "USMLE", branch: "mbbs", tag: "usmle", sec: 90 },
     // FMGE: the MBBS bank as is (all 19 subjects; all: true ignores the subjects' exam tags).
-    { id: "fmge", label: "FMGE", branch: "mbbs", tag: "fmge", all: true, sec: 60 }
+    { id: "fmge", label: "FMGE", branch: "mbbs", tag: "fmge", all: true, sec: 60 },
+    // UK licensing banks (branch uk; subjects carry per-exam tags).
+    { id: "plab", label: "PLAB 1", branch: "uk", tag: "plab-1", sec: 60 },
+    { id: "mrcs", label: "MRCS Part A", branch: "uk", tag: "mrcs-part-a", sec: 60 }
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.

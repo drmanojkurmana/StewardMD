@@ -121,9 +121,9 @@ test("official numbers as checked in the stored bulletins (2026-10-10)", () => {
   assert.equal(ma.tab, "mrcs"); assert.equal(ma.blueprint.kind, "none");
 });
 
-test("bank status: six banked exams available, seven new formats coming", () => {
-  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
-  for (const id of ["usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written", "mrcs-part-a"]) {
+test("bank status: eight banked exams available, five new formats coming", () => {
+  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "plab-1", "mrcs-part-a"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
+  for (const id of ["usmle-step2-ck", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) {
     assert.equal(A.bankStatus(A.profile(id)), "coming", id);
     assert.match(A.profile(id).bank.note, /no .* in the bank yet/);
   }
@@ -166,11 +166,11 @@ test("Tests tab: coming exams show format only, no test buttons", () => {
   const usmle = G.PREP_TESTS.testsHtml(mkH("usmle"));
   assert.match(usmle, /More exam formats/);
   assert.match(usmle, /Format available, question bank coming/);
-  for (const id of ["usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written", "mrcs-part-a"]) assert.ok(usmle.includes('data-p="' + id + '"'), id + " shown");
-  for (const id of ["usmle-step2-ck", "plab-1", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written", "mrcs-part-a"]) assert.ok(!usmle.includes('data-p="' + id + '" data-k='), id + " has no test buttons");
+  for (const id of ["usmle-step2-ck", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) assert.ok(usmle.includes('data-p="' + id + '"'), id + " shown");
+  for (const id of ["usmle-step2-ck", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) assert.ok(!usmle.includes('data-p="' + id + '" data-k='), id + " has no test buttons");
   assert.ok(usmle.includes('data-p="usmle-step1" data-k='), "Step 1 keeps its test buttons");
   const pg = G.PREP_TESTS.testsHtml(mkH("neet-pg"));
-  assert.ok(pg.includes("More exam formats") && pg.includes('data-p="plab-1"'));
+  assert.ok(pg.includes("More exam formats") && pg.includes('data-p="amc-mcq"'));
 });
 
 test("client and server read the same profiles: MOCKS, SCHEMES, EXAM_PROFILES unchanged", async () => {
