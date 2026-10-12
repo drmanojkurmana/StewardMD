@@ -3,12 +3,19 @@
 // read-only. All items synthetic except the read-only universe assertions.
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 import { mapPrompt, verifyPrompt, parseMapResponse, resolveTargets, parseVerifyResponse, lessonCatalog,
   kbAliasMap, unlinkedByModule } from "../tools/prep-links-rematch.mjs";
 import { applyRematch, SHOW } from "../tools/prep-links.mjs";
 
-const ROOT = "/tmp/links100-wt", CACHE = "/tmp/links100-cache", OUT = "/tmp/links100-final";
-const BANK = "/Users/diwakarkumar/prep-work/StewardMD-prep/prep/bank/v5";
+// Hermetic: the repo under test plus committed fixtures. Live bank/out paths are dev-machine only and
+// never required: tests that need them skip with a reason instead of failing.
+const REPO = path.join(path.dirname(new URL(import.meta.url).pathname), "..");
+const FIX = path.join(REPO, "test/fixtures/prep-links-rematch");
+const DEV = { root: "/tmp/links100-wt", cache: "/tmp/links100-cache", out: "/tmp/links100-final", bank: "/Users/diwakarkumar/prep-work/StewardMD-prep/prep/bank/v5" };
+const devReady = () => [DEV.root, DEV.cache, DEV.out, DEV.bank].every((p) => { try { return fs.statSync(p).isDirectory(); } catch { return false; } })
+  && fs.existsSync(path.join(DEV.out, "index.json"));
 const ITEMS = [
   { id: "a", q: "Tibial mass, small round cells. Which translocation?", key: "22q translocation", exp: "Ewings sarcoma t(11;22)." },
   { id: "b", q: "Beaded renal artery in a young woman?", key: "Fibromuscular dysplasia", exp: "String of beads." },
@@ -91,14 +98,28 @@ test("applyRematch caps at 80, respects MAX slots, never duplicates", () => {
   assert.ok(!full.some((l) => l.id === "x3"), "MAX slots per kind are respected");
 });
 
-test("universe (read-only): catalog has the bundled lessons; residue is sorted, biggest first", () => {
-  const cat = lessonCatalog(ROOT, CACHE);
+test("universe (read-only): catalog has the bundled lessons", () => {
+  // Cache-free on purpose: the bundled lessons alone must clear the bar in any checkout.
+  const cat = lessonCatalog(REPO, null);
   assert.ok(cat.length >= 555 && new Set(cat.map((c) => c.key)).size === cat.length);
-  const kb = kbAliasMap(ROOT);
+  const kb = kbAliasMap(REPO);
   assert.equal(kb.get("ewing_sarcoma"), "ewing_sarcoma");
-  const mods = unlinkedByModule({ root: ROOT, cache: CACHE, bank: BANK, out: OUT });
-  assert.ok(mods.length > 0, "residue modules listed");
-  assert.ok(mods[0].items.length >= mods[mods.length - 1].items.length, "sorted biggest first");
-  const pm = mods.find((m) => m.mid === "pat-mixed");
-  assert.ok(pm && pm.items.length > 0 && pm.items.every((it) => it.id && it.q && it.key !== undefined));
+});
+
+test("universe (fixtures): residue is sorted biggest first; linked, flagged and unusable items stay out", () => {
+  const mods = unlinkedByModule({ root: path.join(FIX, "root"), cache: path.join(FIX, "cache"), bank: path.join(FIX, "bank"), out: path.join(FIX, "out") });
+  assert.deepEqual(mods.map((m) => m.mid), ["m-big", "m-small"]);
+  assert.deepEqual(mods[0].items.map((it) => it.id), ["u1", "u2"], "linked l1, flagged f1 and one-option b1 are out");
+  assert.deepEqual(mods[1].items.map((it) => it.id), ["u3"]);
+  for (const m of mods) for (const it of m.items) assert.ok(it.id && it.q && it.key !== undefined, "rematch jobs carry id, stem and answer");
+});
+
+test("universe (live, dev-machine only): residue rows keep the rematch job shape", (t) => {
+  if (!devReady()) { t.skip("no live bank/out on this machine; fixtures cover the contract"); return; }
+  const mods = unlinkedByModule({ root: DEV.root, cache: DEV.cache, bank: DEV.bank, out: DEV.out });
+  for (let i = 1; i < mods.length; i++) assert.ok(mods[i - 1].items.length >= mods[i].items.length, "sorted biggest first");
+  for (const m of mods) {
+    assert.ok(m.mid && m.sid && Array.isArray(m.items));
+    for (const it of m.items) assert.ok(it.id && it.q && it.key !== undefined);
+  }
 });
