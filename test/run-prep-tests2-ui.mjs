@@ -2,8 +2,9 @@
  * app, Playwright Chromium (CHROME=<path>) and WebKit, iPhone-sized with touch, against a generated bank (19 MBBS subjects,
  * 2 modules of 60 questions each, plus 3 NEET-SS subjects). What must hold:
  *  - flag OFF (default): the Tests segment is the old one (NEET-PG "Full mock: 200 questions"), no Tests 2 card;
- *  - flag ON: Daily 10 card, NEET-PG (official, 180 in 5 locked sections of 36 / 42 min, +4/-1) and INI-CET cards, the
- *    previous-format practice link, practice tests; Progress score wording instead of readiness;
+ *  - flag ON (plan scope, owner 2026-10-12): ONLY the plan exam's section (no plan stored here, so the tab default
+ *    NEET-PG: official, 180 in 5 locked sections of 36 / 42 min, +4/-1; no INI-CET card, no "More exam formats"),
+ *    Daily 10 sets, the previous-format practice link, practice tests; Progress score wording instead of readiness;
  *  - NEET-PG full exam: the pre-test screen shows 180 questions and the 5 sections; the runner shows Section A only
  *    (question 1 of 36, Previous disabled at its start, Submit section on its last question, the grid lists 36);
  *    a question of another section cannot be opened or answered; at 42:00 the section submits by itself and the
@@ -144,7 +145,7 @@ async function flagOn(engine) {
     const card = await txt(page, '#pnTests .pn-t2c[data-p="neet-pg"]');
     ok(/Official format/.test(card) && /180 questions in 5 locked sections of 36 questions and 42 min/.test(card) && /\+4 right, minus 1 wrong/.test(card) && /NEET-PG 2026 Information Bulletin/.test(card), E + "NEET-PG card: official 2026 format and its source: " + card.slice(0, 160));
     ok(/Previous format practice: 200 questions, one timer/.test(card), E + "the old 200-question pattern only as labelled previous-format practice");
-    ok(!!(await page.evaluate(() => document.querySelector('#pnTests .pn-t2c[data-p="ini-cet"]'))), E + "INI-CET card");
+    ok(!(await page.evaluate(() => !!document.querySelector('#pnTests [data-p="ini-cet"]'))), E + "no cross-exam INI-CET card: Tests follows the plan");
     ok(await until(page, () => !!document.querySelector("#pnTests [data-act=t2-pick][data-k=subject_mini]")), E + "practice tests");
     ok((await small(page, "#pnTests")) === "", E + "Tests controls at least 44 px: " + (await small(page, "#pnTests")));
     ok(await dashFree(page), E + "no en or em dash on the Tests segment");
