@@ -140,8 +140,9 @@
   /* matchConcepts(outline, items, type) -> { assign: { conceptId: [itemId] }, unassigned: [itemId] }. Weighted token
      overlap with the concept (title + slot hints): the stem states what the question tests (x3), the options (x2);
      the explanation and reasoning fields teach broadly, so their vote is capped at 2 points and never drowns the
-     tested point. Ties go to the earlier concept, then item order. Deterministic. Items matching nothing are listed,
-     never forced. */
+     tested point. The Images concept only accepts items that actually bear an image: a stem that merely mentions
+     a picture teaches no image reading. Ties go to the earlier concept, then item order. Deterministic. Items
+     matching nothing are listed, never forced. */
   function matchConcepts(outline, items, type) {
     var ws = (outline || []).map(function (c) { return wordsOf(c, type); });
     var assign = {}, un = [];
@@ -156,6 +157,7 @@
       ];
       var best = -1, bestS = 0;
       for (var i = 0; i < outline.length; i++) {
+        if (outline[i].id === "img" && !(it.img || (it.x && it.x.img))) continue;
         var sc = 0, seen = {};
         for (var f = 0; f < fields.length; f++) {
           var tk = fields[f].t, cap = fields[f].w > 1 ? 99 : 2, used = 0;

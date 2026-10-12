@@ -296,6 +296,33 @@ async function cmdCollect() {
   say("kept total: " + Object.values(kept).flat().length + " (see /tmp/n360-gapfill.json)");
 }
 
+/* Spend ledger to /tmp/topic-a-to-z-spend.tsv: date, job, model, input_tokens,
+ * output_tokens, cost_usd, note. Real usage from each job file; per-phase rows
+ * where the poll snapshotted the gen->verify transition, otherwise one combined
+ * row (never split by estimate). */
+async function cmdLedger() {
+  const jobs = JSON.parse(fs.readFileSync(JOBS, "utf8"));
+  const rows = [];
+  const day = new Date().toISOString().slice(0, 10);
+  for (const [key, j] of Object.entries(jobs)) {
+    const jf = path.join(WORK, j.job, "job.json");
+    if (!fs.existsSync(jf)) { rows.push([day, j.job, "?", 0, 0, 0, key + ": no job file"]); continue; }
+    const jj = JSON.parse(fs.readFileSync(jf, "utf8"));
+    const u = jj.usage || {};
+    const sub = (a, b) => ({ inTok: (a.inTok || 0) - (b.inTok || 0), outTok: (a.outTok || 0) - (b.outTok || 0), usd: Math.round(((a.usd || 0) - (b.usd || 0)) * 1e6) / 1e6 });
+    if (j.genUsage && jj.stage === "done") {
+      const v = sub(u, j.genUsage);
+      rows.push([day, j.job, "claude-sonnet-5-5", j.genUsage.inTok || 0, j.genUsage.outTok || 0, j.genUsage.usd || 0, key + " gen"]);
+      rows.push([day, j.job, "claude-haiku-5-5", v.inTok, v.outTok, v.usd, key + " blind verify"]);
+    } else {
+      rows.push([day, j.job, "sonnet-5-5+haiku-5-5", u.inTok || 0, u.outTok || 0, u.usd || 0, key + " gen+verify total" + (jj.stage === "done" ? "" : " (" + jj.stage + ")")]);
+    }
+  }
+  fs.writeFileSync("/tmp/topic-a-to-z-spend.tsv", "date\tjob\tmodel\tinput_tokens\toutput_tokens\tcost_usd\tnote\n" + rows.map((r) => r.join("\t")).join("\n") + "\n");
+  const total = rows.reduce((a, r) => a + Number(r[5] || 0), 0);
+  say("ledger: " + rows.length + " rows, real total $" + total.toFixed(4) + " (cap $8) -> /tmp/topic-a-to-z-spend.tsv");
+}
+
 const cmd = argv[0];
 if (cmd === "--sources") await cmdSources();
 else if (cmd === "--estimate") await cmdEstimate();
@@ -303,5 +330,6 @@ else if (cmd === "--submit") await cmdSubmit();
 else if (cmd === "--poll") await cmdPoll();
 else if (cmd === "--collect") await cmdCollect();
 else if (cmd === "--repair") await cmdRepair();
-else { say("usage: --sources | --estimate | --submit | --poll | --collect | --repair"); process.exit(2); }
+else if (cmd === "--ledger") await cmdLedger();
+else { say("usage: --sources | --estimate | --submit | --poll | --collect | --repair | --ledger"); process.exit(2); }
 

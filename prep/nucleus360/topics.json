@@ -1,6 +1,6 @@
 {
  "v": 1,
- "tool": "tools/prep-nucleus360.mjs",
+ "tool": "tools/prep-nucleus360.mjs + maiktopic1 overlay (187 verified items)",
  "topics": [
   {
    "id": "pancreatic-adenocarcinoma",
@@ -130,7 +130,7 @@
      ]
     },
     "aet": {
-     "n": 66,
+     "n": 20,
      "items": [
       "01d36f5c-72d8-406a-abfc-cb86a265dba5",
       "0959f901-5abf-4be2-abbf-956547335f1a",
@@ -174,7 +174,7 @@
      ]
     },
     "clin": {
-     "n": 76,
+     "n": 20,
      "items": [
       "03d7fd83-ac4a-4d9e-9215-32e3decf6512",
       "06df9638-8d07-4a4c-83b2-5742bfd05447",
@@ -199,7 +199,7 @@
      ]
     },
     "comp": {
-     "n": 30,
+     "n": 20,
      "items": [
       "0fd8ccfe-e492-4116-8d5e-9eb7c8c9860f",
       "31eac744-7160-4345-86fc-68d69fcabd7e",
@@ -224,7 +224,7 @@
      ]
     },
     "inv": {
-     "n": 60,
+     "n": 20,
      "items": [
       "009e7a81-382e-4a7a-b8f1-b1a3ee60f8eb",
       "062ba886-b753-4b24-b83b-360c4dc9bb1a",
@@ -249,7 +249,7 @@
      ]
     },
     "dx": {
-     "n": 44,
+     "n": 20,
      "items": [
       "10220c90-3a0b-4c68-bdaf-e7ab2e2d7990",
       "1266cb14-709f-45d9-add6-1db6f513fdf0",
@@ -281,7 +281,7 @@
      ]
     },
     "rx": {
-     "n": 94,
+     "n": 20,
      "items": [
       "00291c70-3ed9-4a45-b647-0ecb0a5b5de9",
       "008a8a9d-96c4-4138-9514-4b40b3cdca91",
@@ -347,18 +347,22 @@
      ]
     },
     "img": {
-     "n": 1,
-     "items": [
-      "36e905ea-f7b1-429b-b212-f45b97c435e7"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 50,
+   "unassigned": 51,
    "fetched": 470,
    "coverage": {
     "total": 14,
-    "covered": 14,
-    "gaps": []
+    "covered": 13,
+    "gaps": [
+     "img"
+    ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {}
    }
   },
   {
@@ -484,7 +488,7 @@
      ]
     },
     "aet": {
-     "n": 48,
+     "n": 21,
      "items": [
       "08677e57-f44c-4318-9112-7a110d77d769",
       "1f06e388-2d73-406c-92d2-1c0dd67ab9f1",
@@ -505,11 +509,12 @@
       "566e8fa6-d6cb-407e-9101-b3742eb26e42",
       "56fea2b5-f6b5-44cb-a127-5d3138a204a2",
       "60ec2e40-155b-40da-a4ce-08bb7a3ece23",
-      "681c79ab-9f80-4d29-bd33-cb22737f5312"
+      "681c79ab-9f80-4d29-bd33-cb22737f5312",
+      "mk-7a0baa83a609"
      ]
     },
     "path": {
-     "n": 53,
+     "n": 20,
      "items": [
       "2208e6b0-4bb9-43e7-b2de-58edf2109394",
       "2e424721-4b08-4898-8f74-2f16c87aeb7d",
@@ -534,7 +539,7 @@
      ]
     },
     "clin": {
-     "n": 117,
+     "n": 20,
      "items": [
       "06f5a0c0-3346-4ea6-82e8-b7ab1b0f487f",
       "07c00e38-c42a-40df-8b8a-d59da615690b",
@@ -559,13 +564,16 @@
      ]
     },
     "comp": {
-     "n": 1,
+     "n": 4,
      "items": [
-      "c121da64-8770-4750-9c35-6667e25439f4"
+      "c121da64-8770-4750-9c35-6667e25439f4",
+      "mk-24d2b8ff6943",
+      "mk-dca9496d3b0e",
+      "mk-11b8b8b42e13"
      ]
     },
     "inv": {
-     "n": 92,
+     "n": 20,
      "items": [
       "0172d766-b2e1-46aa-a1d0-f2f8a80fd233",
       "03f033bc-43d0-46e6-8c40-cdaeff1f8971",
@@ -590,7 +598,7 @@
      ]
     },
     "dx": {
-     "n": 24,
+     "n": 20,
      "items": [
       "15a3373f-f276-457d-99ed-dbec6054279f",
       "2f00d9e1-c8d8-467d-bcc8-dd2d2ce44ecb",
@@ -627,7 +635,7 @@
      ]
     },
     "rx": {
-     "n": 35,
+     "n": 20,
      "items": [
       "141ec649-d5d7-4ae2-a84f-dd618c824d68",
       "313362b8-045e-40d7-a004-ddaecc2ac51a",
@@ -652,10 +660,11 @@
      ]
     },
     "prog": {
-     "n": 2,
+     "n": 3,
      "items": [
       "3ed0f428-f8ae-43f2-9cd9-3c12c72e363f",
-      "5bafd9a5-8497-48a3-ad28-d3474b60d773"
+      "5bafd9a5-8497-48a3-ad28-d3474b60d773",
+      "mk-76d81e3f48f0"
      ]
     },
     "prev": {
@@ -692,7 +701,7 @@
      ]
     },
     "pearl": {
-     "n": 29,
+     "n": 20,
      "items": [
       "16d64937-1ff1-47d7-8b01-dfb8bede2c41",
       "267da226-6427-41cd-a829-1f11c4bdb15e",
@@ -717,26 +726,34 @@
      ]
     },
     "img": {
-     "n": 9,
-     "items": [
-      "14d52ca1-99e1-42bb-97d1-301f929e80bc",
-      "5917c471-25be-4885-be4b-12a2f809c7b8",
-      "68cb16be-61c1-4fc9-87b4-afe2ca95414c",
-      "8b7cb7d2-a306-408c-b0d4-1525a778dc8b",
-      "aef694ca-ba5a-46ac-a73f-d1d3f68960de",
-      "ea2a0202-3287-4a55-a9b7-942b48879839",
-      "1186ecd4-31ac-4f77-bd81-e70ca6fe28cb",
-      "d127e3b3-9772-40cf-9543-570d79f4c921",
-      "e074eff2-acd5-4ec8-bab2-b07366d04cbc"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 599,
+   "unassigned": 608,
    "fetched": 1046,
    "coverage": {
     "total": 14,
-    "covered": 14,
-    "gaps": []
+    "covered": 13,
+    "gaps": [
+     "img"
+    ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-7a0baa83a609"
+     ],
+     "comp": [
+      "mk-24d2b8ff6943",
+      "mk-dca9496d3b0e",
+      "mk-11b8b8b42e13"
+     ],
+     "prog": [
+      "mk-76d81e3f48f0"
+     ]
+    }
    }
   },
   {
@@ -880,7 +897,7 @@
      "items": []
     },
     "clin": {
-     "n": 23,
+     "n": 21,
      "items": [
       "q_48dddb4f75f7",
       "q_65ac643b6895",
@@ -901,7 +918,8 @@
       "q_015971437348",
       "q_8b4dc45d0aa3",
       "q_246479651cd4",
-      "q_527d7420e3e5"
+      "q_527d7420e3e5",
+      "mk-da7abe86cbf7"
      ]
     },
     "comp": {
@@ -909,7 +927,7 @@
      "items": []
     },
     "inv": {
-     "n": 9,
+     "n": 12,
      "items": [
       "q_79125de32437",
       "q_84d2ed01f922",
@@ -919,17 +937,21 @@
       "q_3007e732a7bb",
       "q_347056e40d93",
       "q_75b14c4fc3bc",
-      "q_0cf83d141a2f"
+      "q_0cf83d141a2f",
+      "mk-2a0ef8dad770",
+      "mk-8a55d8647d11",
+      "mk-f8fbebaece76"
      ]
     },
     "dx": {
-     "n": 5,
+     "n": 6,
      "items": [
       "q_e32c1149877b",
       "q_10909c965e7a",
       "q_1c1de993beca",
       "q_0e3dc4b3383b",
-      "q_2ddcb197727f"
+      "q_2ddcb197727f",
+      "mk-c867ad35680d"
      ]
     },
     "ddx": {
@@ -937,19 +959,24 @@
      "items": []
     },
     "rx": {
-     "n": 2,
+     "n": 4,
      "items": [
       "q_9d05661cf0e4",
-      "q_609c646e5d07"
+      "q_609c646e5d07",
+      "mk-ccf38b51d2e8",
+      "mk-e2ff0c71991f"
      ]
     },
     "prog": {
-     "n": 4,
+     "n": 7,
      "items": [
       "q_84f5f0c3c5c9",
       "q_1796c4cdebc2",
       "q_4b40f16ad73d",
-      "q_e51d4a0caca1"
+      "q_e51d4a0caca1",
+      "mk-377e8e568153",
+      "mk-bcd971fc3d18",
+      "mk-265b47a978d0"
      ]
     },
     "prev": {
@@ -985,6 +1012,31 @@
      "pearl",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "clin": [
+      "mk-da7abe86cbf7"
+     ],
+     "inv": [
+      "mk-2a0ef8dad770",
+      "mk-8a55d8647d11",
+      "mk-f8fbebaece76"
+     ],
+     "dx": [
+      "mk-c867ad35680d"
+     ],
+     "rx": [
+      "mk-ccf38b51d2e8",
+      "mk-e2ff0c71991f"
+     ],
+     "prog": [
+      "mk-377e8e568153",
+      "mk-bcd971fc3d18",
+      "mk-265b47a978d0"
+     ]
+    }
    }
   },
   {
@@ -1129,14 +1181,17 @@
      ]
     },
     "comp": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-85902097e179"
+     ]
     },
     "inv": {
-     "n": 2,
+     "n": 3,
      "items": [
       "q_4a5e3f5a9261",
-      "q_3d959e17b776"
+      "q_3d959e17b776",
+      "mk-55609af5aee3"
      ]
     },
     "dx": {
@@ -1154,7 +1209,7 @@
      ]
     },
     "rx": {
-     "n": 9,
+     "n": 10,
      "items": [
       "q_e891ef42886d",
       "q_890068cc3ecd",
@@ -1164,18 +1219,22 @@
       "q_67052cfb1fb1",
       "q_ccd67152f05a",
       "q_ca16b64a06fa",
-      "q_eb3ba9d92dcd"
+      "q_eb3ba9d92dcd",
+      "mk-ffad30200d01"
      ]
     },
     "prog": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "q_00dd23abd5f4"
+      "q_00dd23abd5f4",
+      "mk-e18b4e5c86a6"
      ]
     },
     "prev": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-78a8a4198ff8"
+     ]
     },
     "guide": {
      "n": 0,
@@ -1194,14 +1253,32 @@
    "fetched": 40,
    "coverage": {
     "total": 14,
-    "covered": 9,
+    "covered": 11,
     "gaps": [
-     "comp",
-     "prev",
      "guide",
      "pearl",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "comp": [
+      "mk-85902097e179"
+     ],
+     "inv": [
+      "mk-55609af5aee3"
+     ],
+     "rx": [
+      "mk-ffad30200d01"
+     ],
+     "prog": [
+      "mk-e18b4e5c86a6"
+     ],
+     "prev": [
+      "mk-78a8a4198ff8"
+     ]
+    }
    }
   },
   {
@@ -1339,7 +1416,7 @@
      ]
     },
     "aet": {
-     "n": 88,
+     "n": 21,
      "items": [
       "11863d8a-1cd6-456c-99d7-c15be303569c",
       "1c6873c7-9db2-4c75-a4e7-bd2e90ce3797",
@@ -1360,11 +1437,12 @@
       "98ebcfd8-60c8-432b-acef-097ba5b05772",
       "af1b3f4a-f28c-4d17-b854-62df4478fc5e",
       "b3efa7be-9363-4ba0-b4c8-01c57dc03989",
-      "c3ab7e29-5e60-4e06-816b-26e912a3f783"
+      "c3ab7e29-5e60-4e06-816b-26e912a3f783",
+      "mk-f81970786e7b"
      ]
     },
     "path": {
-     "n": 21,
+     "n": 20,
      "items": [
       "09bdccf6-5bb6-4fb8-93a5-6a8ac5a82aad",
       "4bdd1cbf-271f-4aee-8ebf-f571fbf7c7b5",
@@ -1389,7 +1467,7 @@
      ]
     },
     "clin": {
-     "n": 45,
+     "n": 20,
      "items": [
       "0aaaf64a-1853-4d1e-ad35-509b897410eb",
       "13162c73-a210-4072-ae06-6d3480790b7e",
@@ -1418,7 +1496,7 @@
      "items": []
     },
     "inv": {
-     "n": 171,
+     "n": 21,
      "items": [
       "01ac79f2-406b-453f-bf49-74e9eccf86b9",
       "07b88973-19fc-4936-a68c-abcc36055857",
@@ -1439,7 +1517,8 @@
       "75037cd8-82e0-4544-b8b4-39b0c3c894e8",
       "7f9ff3ac-e997-4b64-8cad-0b315a5f8ce3",
       "831c04f9-7c83-4549-8d41-20ef4f4b8351",
-      "83920894-371b-498e-8026-405e2f970efa"
+      "83920894-371b-498e-8026-405e2f970efa",
+      "mk-057ed1cc59f4"
      ]
     },
     "dx": {
@@ -1480,9 +1559,10 @@
      ]
     },
     "prog": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "4d0d3f6f-be16-4294-97c5-a5715c19fff1"
+      "4d0d3f6f-be16-4294-97c5-a5715c19fff1",
+      "mk-3d75f21ac936"
      ]
     },
     "prev": {
@@ -1497,7 +1577,7 @@
      ]
     },
     "guide": {
-     "n": 38,
+     "n": 20,
      "items": [
       "159474c8-a4ec-404a-9952-d67d079f1eae",
       "42cee702-a4c5-4307-bf57-86b9d9e77146",
@@ -1544,6 +1624,20 @@
      "comp",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-f81970786e7b"
+     ],
+     "inv": [
+      "mk-057ed1cc59f4"
+     ],
+     "prog": [
+      "mk-3d75f21ac936"
+     ]
+    }
    }
   },
   {
@@ -1675,7 +1769,7 @@
      ]
     },
     "aet": {
-     "n": 77,
+     "n": 22,
      "items": [
       "01d36f5c-72d8-406a-abfc-cb86a265dba5",
       "0959f901-5abf-4be2-abbf-956547335f1a",
@@ -1696,7 +1790,9 @@
       "2a010ceb-aa73-48bf-b898-12123b70d6e7",
       "2b12b6ca-98ff-42a1-b87b-9858a7a1a034",
       "30792641-90a2-4471-b402-f2f7ffc8e5fd",
-      "3b2f0bb4-9acc-4f29-a919-b2d97af02a17"
+      "3b2f0bb4-9acc-4f29-a919-b2d97af02a17",
+      "mk-bfb1f60a8e8e",
+      "mk-9e2872093b12"
      ]
     },
     "path": {
@@ -1713,7 +1809,7 @@
      ]
     },
     "clin": {
-     "n": 79,
+     "n": 20,
      "items": [
       "03d7fd83-ac4a-4d9e-9215-32e3decf6512",
       "06df9638-8d07-4a4c-83b2-5742bfd05447",
@@ -1738,7 +1834,7 @@
      ]
     },
     "comp": {
-     "n": 37,
+     "n": 20,
      "items": [
       "0fd8ccfe-e492-4116-8d5e-9eb7c8c9860f",
       "31eac744-7160-4345-86fc-68d69fcabd7e",
@@ -1763,7 +1859,7 @@
      ]
     },
     "inv": {
-     "n": 46,
+     "n": 20,
      "items": [
       "009e7a81-382e-4a7a-b8f1-b1a3ee60f8eb",
       "062ba886-b753-4b24-b83b-360c4dc9bb1a",
@@ -1788,7 +1884,7 @@
      ]
     },
     "dx": {
-     "n": 49,
+     "n": 20,
      "items": [
       "10220c90-3a0b-4c68-bdaf-e7ab2e2d7990",
       "1266cb14-709f-45d9-add6-1db6f513fdf0",
@@ -1822,7 +1918,7 @@
      ]
     },
     "rx": {
-     "n": 111,
+     "n": 20,
      "items": [
       "00291c70-3ed9-4a45-b647-0ecb0a5b5de9",
       "008a8a9d-96c4-4138-9514-4b40b3cdca91",
@@ -1870,7 +1966,7 @@
      ]
     },
     "prev": {
-     "n": 8,
+     "n": 9,
      "items": [
       "b2bd2f11-f550-4149-8428-540832b37bbb",
       "12bb6df2-5ce0-4012-a6ab-65b2c330c4da",
@@ -1879,7 +1975,8 @@
       "676545ce-e759-4450-998d-e8556fb553c0",
       "b0ea0c6b-f08d-4bd5-b39f-a76f84ffd256",
       "da25d047-819e-4f00-8649-c1ca02a63f4b",
-      "e7c3b25e-60dc-4c98-af9f-dde175b580c4"
+      "e7c3b25e-60dc-4c98-af9f-dde175b580c4",
+      "mk-85581d231640"
      ]
     },
     "guide": {
@@ -1895,20 +1992,31 @@
      "items": []
     },
     "img": {
-     "n": 1,
-     "items": [
-      "36e905ea-f7b1-429b-b212-f45b97c435e7"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 73,
+   "unassigned": 74,
    "fetched": 531,
    "coverage": {
     "total": 14,
-    "covered": 13,
+    "covered": 12,
     "gaps": [
-     "pearl"
+     "pearl",
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-bfb1f60a8e8e",
+      "mk-9e2872093b12"
+     ],
+     "prev": [
+      "mk-85581d231640"
+     ]
+    }
    }
   },
   {
@@ -2032,7 +2140,7 @@
      ]
     },
     "aet": {
-     "n": 36,
+     "n": 21,
      "items": [
       "0147be1e-53ea-4850-83de-1cb05f913816",
       "0299ec05-d6b7-4595-8f7b-fc084f1657d3",
@@ -2053,7 +2161,8 @@
       "6158307b-a942-4636-917b-f502310dffba",
       "67bcc5c3-13c7-4c58-8295-96148dbc9fdb",
       "69c1618a-c619-4450-9b9d-1dfdc6d9cd76",
-      "6e9ea73b-13c6-4306-9945-0dbfcdfa071f"
+      "6e9ea73b-13c6-4306-9945-0dbfcdfa071f",
+      "mk-1a93e386a437"
      ]
     },
     "path": {
@@ -2064,7 +2173,7 @@
      ]
     },
     "clin": {
-     "n": 29,
+     "n": 21,
      "items": [
       "157316a2-cd60-4eb0-94bc-c62da236f92f",
       "18405d66-ec58-4a82-bf97-9cd279a1bb09",
@@ -2085,17 +2194,19 @@
       "afeb42f9-9482-48f8-a2b4-76b26b0faefb",
       "b2374762-a95d-4a95-9a2d-ee091d4a3587",
       "b420e433-2234-41e1-8c8f-533064837095",
-      "b6209cff-f3c6-497c-b0fe-4ec5a5184300"
+      "b6209cff-f3c6-497c-b0fe-4ec5a5184300",
+      "mk-cd79edac21e7"
      ]
     },
     "comp": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "267d08f9-1749-4b43-92a6-d6c2b93cc167"
+      "267d08f9-1749-4b43-92a6-d6c2b93cc167",
+      "mk-0ba167d58316"
      ]
     },
     "inv": {
-     "n": 54,
+     "n": 21,
      "items": [
       "011cb59e-80e7-48fe-aeba-65cc0fef4c7b",
       "08f3b41c-4e9d-4a86-b637-f79920f61905",
@@ -2116,11 +2227,12 @@
       "59acd92b-bc67-4869-a07c-d2b9f0ea88a3",
       "650c0d2a-6c11-4001-8ca5-36fd6faefffa",
       "6ab70daa-d9ea-4e64-b401-04b5b1bfeaac",
-      "72febbde-2425-4456-9e27-8dcc1a648e97"
+      "72febbde-2425-4456-9e27-8dcc1a648e97",
+      "mk-d7f56d0d69a8"
      ]
     },
     "dx": {
-     "n": 39,
+     "n": 21,
      "items": [
       "001ce4f7-c83d-4a63-a70c-4ad324138f99",
       "10b8ff0a-426d-4620-a09c-cc3133ad4deb",
@@ -2141,7 +2253,8 @@
       "6f563a3c-f59d-4e57-a3a6-ac83e2f51df4",
       "7226dd85-cbfd-42a4-8d2d-b9453144becb",
       "77e9cbef-8dcc-4c4e-b388-25f07da145d8",
-      "84a75dd0-0a64-4156-b555-b3fbf7df44f4"
+      "84a75dd0-0a64-4156-b555-b3fbf7df44f4",
+      "mk-d70fd585198f"
      ]
     },
     "ddx": {
@@ -2153,7 +2266,7 @@
      ]
     },
     "rx": {
-     "n": 9,
+     "n": 10,
      "items": [
       "65e16533-66e6-427d-8bb5-b66d7b7c154a",
       "6e1b6985-c2d0-4705-bc5f-97a1ca4480d2",
@@ -2163,7 +2276,8 @@
       "acdeecf1-885c-4f78-8750-378141419f88",
       "ba74314a-2adf-4b6a-8c74-2c8c7f5b641f",
       "e2c562c4-e82b-487a-9d25-e60ddebe6c9b",
-      "f07fa537-0e18-4e69-971c-30593e42b1fb"
+      "f07fa537-0e18-4e69-971c-30593e42b1fb",
+      "mk-e43f3aa7a19e"
      ]
     },
     "prog": {
@@ -2171,10 +2285,11 @@
      "items": []
     },
     "prev": {
-     "n": 2,
+     "n": 3,
      "items": [
       "7b855d01-30d4-4b71-8f6b-6f03f8d10921",
-      "cf773a89-7c49-4bb8-8d99-4ccae09dda4e"
+      "cf773a89-7c49-4bb8-8d99-4ccae09dda4e",
+      "mk-9752d32c0905"
      ]
     },
     "guide": {
@@ -2195,20 +2310,45 @@
      ]
     },
     "img": {
-     "n": 1,
-     "items": [
-      "83c8a9f2-cad7-4dcb-976d-d478176c8a1f"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 22,
+   "unassigned": 23,
    "fetched": 218,
    "coverage": {
     "total": 14,
-    "covered": 13,
+    "covered": 12,
     "gaps": [
-     "prog"
+     "prog",
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-1a93e386a437"
+     ],
+     "clin": [
+      "mk-cd79edac21e7"
+     ],
+     "comp": [
+      "mk-0ba167d58316"
+     ],
+     "inv": [
+      "mk-d7f56d0d69a8"
+     ],
+     "dx": [
+      "mk-d70fd585198f"
+     ],
+     "rx": [
+      "mk-e43f3aa7a19e"
+     ],
+     "prev": [
+      "mk-9752d32c0905"
+     ]
+    }
    }
   },
   {
@@ -2322,7 +2462,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 46,
+     "n": 20,
      "items": [
       "04114650-d956-4047-98f9-2be5840aea70",
       "603a961b-cfe1-44cc-92cf-98325e5c347c",
@@ -2367,7 +2507,7 @@
      ]
     },
     "clin": {
-     "n": 22,
+     "n": 20,
      "items": [
       "61c4e133-d1be-45dc-8fa8-fd0fe0ef2c79",
       "0a36f00c-859b-433a-afd3-ec0f312ce795",
@@ -2392,13 +2532,14 @@
      ]
     },
     "comp": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "eb3876fc-e635-403c-84be-90ac04002cd6"
+      "eb3876fc-e635-403c-84be-90ac04002cd6",
+      "mk-76acb55b543c"
      ]
     },
     "inv": {
-     "n": 57,
+     "n": 20,
      "items": [
       "33e83183-efc7-45e3-ac38-35ed981696dc",
       "180e6263-73ee-4917-95ea-103b12abb5e6",
@@ -2423,7 +2564,7 @@
      ]
     },
     "dx": {
-     "n": 26,
+     "n": 20,
      "items": [
       "9814ccc2-8084-41c5-9610-ee020d1f3f3a",
       "b259b28b-4d42-41fa-9a39-97d7b8b7dcb4",
@@ -2455,7 +2596,7 @@
      ]
     },
     "rx": {
-     "n": 173,
+     "n": 21,
      "items": [
       "05a702aa-5866-4b4e-8c05-1a305b1d2103",
       "17867621-f839-4cc7-8474-c134a5d83cdb",
@@ -2476,7 +2617,8 @@
       "d4591a67-4704-4912-9b1d-c23952e49a77",
       "f83cf785-4402-41c3-8854-59081bfa9d2c",
       "0105c7b9-be5b-440d-bf9e-70e87ef822bb",
-      "06be2bf1-164f-4286-a8b9-6937940293b4"
+      "06be2bf1-164f-4286-a8b9-6937940293b4",
+      "mk-cb4223420a33"
      ]
     },
     "prog": {
@@ -2547,6 +2689,17 @@
     "gaps": [
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "comp": [
+      "mk-76acb55b543c"
+     ],
+     "rx": [
+      "mk-cb4223420a33"
+     ]
+    }
    }
   },
   {
@@ -2652,15 +2805,16 @@
    ],
    "match": {
     "def-epi": {
-     "n": 3,
+     "n": 4,
      "items": [
       "5d7c8d82-1597-4175-bee5-d917abb9f319",
       "bb5d2ab1-fb81-426d-b7c8-92e31177c27b",
-      "f7814da1-9745-46e4-b47a-df1bee804c4a"
+      "f7814da1-9745-46e4-b47a-df1bee804c4a",
+      "mk-db2668cd23f4"
      ]
     },
     "aet": {
-     "n": 12,
+     "n": 15,
      "items": [
       "024fa1a0-4c04-4a69-aea9-f26b971df0cb",
       "20ac9121-690b-4290-aad0-0ba78f357cba",
@@ -2673,13 +2827,19 @@
       "70305fd3-0205-40a7-9922-40918c7b5173",
       "977622e2-d33e-4fdf-91d4-f01e96fc6048",
       "9f239ba9-577f-4bdb-8438-a2f8df491447",
-      "f0943a2d-7650-468c-a13d-1e926f5f1f05"
+      "f0943a2d-7650-468c-a13d-1e926f5f1f05",
+      "mk-e7760311618b",
+      "mk-873b208d0727",
+      "mk-60d53eeb8656"
      ]
     },
     "path": {
-     "n": 1,
+     "n": 4,
      "items": [
-      "71761e66-ee6e-4424-80f0-430269c72665"
+      "71761e66-ee6e-4424-80f0-430269c72665",
+      "mk-82dc3f923599",
+      "mk-cc6ded70aa35",
+      "mk-c69aca18124f"
      ]
     },
     "clin": {
@@ -2702,8 +2862,11 @@
      ]
     },
     "inv": {
-     "n": 0,
-     "items": []
+     "n": 2,
+     "items": [
+      "mk-f40d27e2c120",
+      "mk-edb7b370b7dc"
+     ]
     },
     "dx": {
      "n": 2,
@@ -2746,9 +2909,10 @@
      "items": []
     },
     "guide": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "b29e3934-7059-4cf8-8f1f-0987b8a11eab"
+      "b29e3934-7059-4cf8-8f1f-0987b8a11eab",
+      "mk-864b65b2aa8c"
      ]
     },
     "pearl": {
@@ -2756,22 +2920,45 @@
      "items": []
     },
     "img": {
-     "n": 1,
-     "items": [
-      "862d1807-06f3-4aec-9c02-a3631e85467a"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 19,
+   "unassigned": 20,
    "fetched": 62,
    "coverage": {
     "total": 14,
     "covered": 11,
     "gaps": [
-     "inv",
      "prev",
-     "pearl"
+     "pearl",
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "def-epi": [
+      "mk-db2668cd23f4"
+     ],
+     "aet": [
+      "mk-e7760311618b",
+      "mk-873b208d0727",
+      "mk-60d53eeb8656"
+     ],
+     "path": [
+      "mk-82dc3f923599",
+      "mk-cc6ded70aa35",
+      "mk-c69aca18124f"
+     ],
+     "inv": [
+      "mk-f40d27e2c120",
+      "mk-edb7b370b7dc"
+     ],
+     "guide": [
+      "mk-864b65b2aa8c"
+     ]
+    }
    }
   },
   {
@@ -2889,7 +3076,7 @@
      ]
     },
     "aet": {
-     "n": 134,
+     "n": 20,
      "items": [
       "094a4640-ed9e-422a-8cb0-8bbe97e09d08",
       "14d35b3b-a95e-4609-9dcf-c6eaf4d136a2",
@@ -2934,7 +3121,7 @@
      ]
     },
     "clin": {
-     "n": 61,
+     "n": 20,
      "items": [
       "02cfae82-91bc-4626-b151-664d3a82137f",
       "05c944bf-10b3-4bab-a170-7834ecd808b1",
@@ -2959,11 +3146,13 @@
      ]
     },
     "comp": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-472133ab2548"
+     ]
     },
     "inv": {
-     "n": 63,
+     "n": 21,
      "items": [
       "075c3d5f-6200-45ae-8782-b8fc39b2532a",
       "0a83dff2-f508-43f5-9f36-fb5e9ce987f3",
@@ -2984,7 +3173,8 @@
       "4c77793c-e4a1-4fe7-ab7a-d6af9273797f",
       "537663af-f2a3-4628-a64d-44f36d42d120",
       "55286a92-4404-47e1-bbfc-47e790df3b73",
-      "60c8d0ca-e380-4719-bb29-2e3944848285"
+      "60c8d0ca-e380-4719-bb29-2e3944848285",
+      "mk-e7d295d85976"
      ]
     },
     "dx": {
@@ -3013,7 +3203,7 @@
      ]
     },
     "rx": {
-     "n": 31,
+     "n": 20,
      "items": [
       "0f028a4c-6f95-47d5-97fb-4ea8e5e396b8",
       "11121e33-8daa-4df5-aa7c-5610fe2cd813",
@@ -3090,22 +3280,29 @@
      ]
     },
     "img": {
-     "n": 3,
-     "items": [
-      "33314ced-29f4-4048-a325-2ea760291862",
-      "de06674a-413b-40ce-8690-297d59a8458a",
-      "561ff766-c15b-456a-8d7a-80318ca05694"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 311,
+   "unassigned": 314,
    "fetched": 668,
    "coverage": {
     "total": 14,
     "covered": 13,
     "gaps": [
-     "comp"
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "comp": [
+      "mk-472133ab2548"
+     ],
+     "inv": [
+      "mk-e7d295d85976"
+     ]
+    }
    }
   },
   {
@@ -3228,7 +3425,7 @@
      ]
     },
     "aet": {
-     "n": 69,
+     "n": 20,
      "items": [
       "0024f7d2-17f6-40ba-b71b-57c2024fa8d2",
       "005c9f0e-a5f2-4735-8f3f-721f59f2be68",
@@ -3266,7 +3463,7 @@
      ]
     },
     "clin": {
-     "n": 46,
+     "n": 20,
      "items": [
       "094776a9-8ba4-4f25-b216-64304d58165b",
       "0cecd36a-c16e-4498-89e1-a56aab6c11fe",
@@ -3291,11 +3488,13 @@
      ]
     },
     "comp": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-4c9d99c68037"
+     ]
     },
     "inv": {
-     "n": 51,
+     "n": 20,
      "items": [
       "0241258d-0b31-4ba5-a06b-9461ac02a07a",
       "089bade7-51d7-4c5b-8880-7d762c7150f6",
@@ -3419,11 +3618,18 @@
    "fetched": 347,
    "coverage": {
     "total": 14,
-    "covered": 12,
+    "covered": 13,
     "gaps": [
-     "comp",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "comp": [
+      "mk-4c9d99c68037"
+     ]
+    }
    }
   },
   {
@@ -3539,7 +3745,7 @@
      ]
     },
     "aet": {
-     "n": 45,
+     "n": 21,
      "items": [
       "00baf563-bcc0-408f-88bd-fe65dd0039eb",
       "0c1e4f8c-ce15-41f2-a4a6-e3b84f3b1fb9",
@@ -3560,7 +3766,8 @@
       "70f79487-157a-477a-b83c-2ce0e273bbcf",
       "797d94e2-f414-44f6-ae32-dc61e2b1c172",
       "8098bf20-599e-4e3e-944d-ece9aa983a24",
-      "83d2c3ba-b1ba-4512-a6a4-37de091425e8"
+      "83d2c3ba-b1ba-4512-a6a4-37de091425e8",
+      "mk-2e5c732eb710"
      ]
     },
     "path": {
@@ -3576,7 +3783,7 @@
      ]
     },
     "clin": {
-     "n": 34,
+     "n": 21,
      "items": [
       "03884aad-cea8-456c-9a3c-bc77e3d6cb25",
       "07731bd4-275b-47ff-99cf-ad85dfe696c7",
@@ -3597,7 +3804,8 @@
       "7bd3d563-6834-4360-9126-a6b45b091297",
       "8136966a-0466-49fe-a024-7bc232dda041",
       "85825f74-cf55-4c74-af2b-0b3e39369ec3",
-      "87bb954d-c8b5-4849-9b3a-37aa19837c27"
+      "87bb954d-c8b5-4849-9b3a-37aa19837c27",
+      "mk-3dde45aaca3e"
      ]
     },
     "comp": {
@@ -3609,7 +3817,7 @@
      ]
     },
     "inv": {
-     "n": 62,
+     "n": 22,
      "items": [
       "06ba5ad9-005e-4954-9e14-a5681717fabc",
       "085a1266-36ae-454c-badb-d59e45671d54",
@@ -3630,7 +3838,9 @@
       "411d10b0-1f53-473b-81c2-3398f970db4a",
       "475448a8-7226-499a-92b1-6134907daea0",
       "4dc1b44d-d73a-4a31-b7e9-5fd37494beb1",
-      "516d3b50-9106-45f7-a7af-a1563b0a1c30"
+      "516d3b50-9106-45f7-a7af-a1563b0a1c30",
+      "mk-76a115a3ca01",
+      "mk-f834f3130175"
      ]
     },
     "dx": {
@@ -3657,7 +3867,7 @@
      ]
     },
     "rx": {
-     "n": 68,
+     "n": 20,
      "items": [
       "0162acad-6672-4320-807a-d5213009b25e",
       "06810250-d0cf-4b09-bfed-f98f22dc4073",
@@ -3686,10 +3896,12 @@
      "items": []
     },
     "prev": {
-     "n": 2,
+     "n": 4,
      "items": [
       "95f88bb5-6006-4ab3-9e53-42c27ee43330",
-      "b945d923-c531-4e8e-b5fd-073af7538046"
+      "b945d923-c531-4e8e-b5fd-073af7538046",
+      "mk-dbb897e840d6",
+      "mk-bd6e439cc351"
      ]
     },
     "guide": {
@@ -3723,6 +3935,25 @@
      "prog",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-2e5c732eb710"
+     ],
+     "clin": [
+      "mk-3dde45aaca3e"
+     ],
+     "inv": [
+      "mk-76a115a3ca01",
+      "mk-f834f3130175"
+     ],
+     "prev": [
+      "mk-dbb897e840d6",
+      "mk-bd6e439cc351"
+     ]
+    }
    }
   },
   {
@@ -3828,7 +4059,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 117,
+     "n": 23,
      "items": [
       "03fbabfd-1c5c-4c44-9f09-b05d48b99227",
       "073ba420-5549-456b-a92d-8a72de24425a",
@@ -3849,14 +4080,20 @@
       "2e1bb215-3f3d-417f-9336-2dd3217394b1",
       "3029a833-ccd6-4832-983c-be598d0531eb",
       "311b2d81-0d4d-424c-ae73-a578e5a6112d",
-      "340767a9-302c-4e64-bd91-34dd35c0573e"
+      "340767a9-302c-4e64-bd91-34dd35c0573e",
+      "mk-786e1faaee1b",
+      "mk-80e8bfcfc19a",
+      "mk-703b748110ec"
      ]
     },
     "aet": {
-     "n": 2,
+     "n": 5,
      "items": [
       "2ba93a83-52e8-4cb6-ba17-c282b6bf8b9a",
-      "86b8b160-c20a-4cfe-9a37-9dab83a61388"
+      "86b8b160-c20a-4cfe-9a37-9dab83a61388",
+      "mk-8b11b82d1bb6",
+      "mk-376ab91ea32c",
+      "mk-6509c7adabed"
      ]
     },
     "path": {
@@ -3879,7 +4116,7 @@
      "items": []
     },
     "dx": {
-     "n": 29,
+     "n": 23,
      "items": [
       "083858f6-b321-4768-86f7-5d34e587ecc6",
       "0f0657b6-d8bb-4a78-a22d-572669350c1d",
@@ -3900,7 +4137,10 @@
       "8cd6f14c-c1a9-415a-a4c2-8edb156b7d0f",
       "8e1381bd-c0c8-4dbc-854a-377a5029be3d",
       "a07e4620-4ff2-4219-9182-697080c2f7d9",
-      "b306e881-090d-4d85-a490-d1759e4e168e"
+      "b306e881-090d-4d85-a490-d1759e4e168e",
+      "mk-3ea724908f5f",
+      "mk-3d3ab8e01d80",
+      "mk-49449df7fa08"
      ]
     },
     "ddx": {
@@ -3914,7 +4154,7 @@
      ]
     },
     "prog": {
-     "n": 18,
+     "n": 21,
      "items": [
       "06e03203-c287-4628-8f50-79c452c404cf",
       "06fe61f0-a0e1-42b6-8c44-b0f2a7c6a23b",
@@ -3933,7 +4173,10 @@
       "9114f515-d56c-4e2e-b692-aeb59bf73d58",
       "aca1d477-8a7f-4f33-b6e7-701d98cc575e",
       "f0a8a5cd-841a-40d5-a463-617f1d516d3b",
-      "f0b993f2-f688-4900-838b-d8913cf6e699"
+      "f0b993f2-f688-4900-838b-d8913cf6e699",
+      "mk-793231dbe492",
+      "mk-4d676e14d3f4",
+      "mk-c4f82b9ae0f0"
      ]
     },
     "prev": {
@@ -3941,9 +4184,10 @@
      "items": []
     },
     "guide": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "9e8a64b2-9419-4550-be55-4ad722cda16c"
+      "9e8a64b2-9419-4550-be55-4ad722cda16c",
+      "mk-539ef986fbe9"
      ]
     },
     "pearl": {
@@ -3951,25 +4195,52 @@
      "items": []
     },
     "img": {
-     "n": 1,
-     "items": [
-      "28d9e971-76ca-4ea6-8433-079d9781a8c0"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 49,
+   "unassigned": 50,
    "fetched": 220,
    "coverage": {
     "total": 14,
-    "covered": 8,
+    "covered": 7,
     "gaps": [
      "path",
      "comp",
      "inv",
      "ddx",
      "prev",
-     "pearl"
+     "pearl",
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "def-epi": [
+      "mk-786e1faaee1b",
+      "mk-80e8bfcfc19a",
+      "mk-703b748110ec"
+     ],
+     "aet": [
+      "mk-8b11b82d1bb6",
+      "mk-376ab91ea32c",
+      "mk-6509c7adabed"
+     ],
+     "dx": [
+      "mk-3ea724908f5f",
+      "mk-3d3ab8e01d80",
+      "mk-49449df7fa08"
+     ],
+     "prog": [
+      "mk-793231dbe492",
+      "mk-4d676e14d3f4",
+      "mk-c4f82b9ae0f0"
+     ],
+     "guide": [
+      "mk-539ef986fbe9"
+     ]
+    }
    }
   },
   {
@@ -4102,7 +4373,7 @@
      ]
     },
     "aet": {
-     "n": 167,
+     "n": 20,
      "items": [
       "0525a968-325b-4ab6-9488-331eb0f60f31",
       "06295e8c-42ba-445c-80b0-3caa5d590f90",
@@ -4127,7 +4398,7 @@
      ]
     },
     "path": {
-     "n": 62,
+     "n": 20,
      "items": [
       "0351753c-0551-4687-9337-0eb40cfcec67",
       "040067c8-a077-49f3-a773-224097f9c242",
@@ -4152,7 +4423,7 @@
      ]
     },
     "clin": {
-     "n": 99,
+     "n": 20,
      "items": [
       "06acf535-195e-483b-a09b-f5bd8380a066",
       "3babd686-81a4-4fbf-a4c4-d0b8832bfb06",
@@ -4184,7 +4455,7 @@
      ]
     },
     "inv": {
-     "n": 109,
+     "n": 20,
      "items": [
       "02d700e6-589f-4cf7-b27c-cf432e9874da",
       "0a2b5f92-3059-4219-bd77-0657986a1a0f",
@@ -4310,19 +4581,22 @@
      ]
     },
     "img": {
-     "n": 2,
-     "items": [
-      "79e642b8-e423-4b53-a3d1-57977ea565e4",
-      "c4e6060f-5f0e-4ec7-a49a-6f9a0fd171e6"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 334,
+   "unassigned": 335,
    "fetched": 855,
    "coverage": {
     "total": 14,
-    "covered": 14,
-    "gaps": []
+    "covered": 13,
+    "gaps": [
+     "img"
+    ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {}
    }
   },
   {
@@ -4491,7 +4765,7 @@
      "items": []
     },
     "inv": {
-     "n": 8,
+     "n": 9,
      "items": [
       "00763b4b-5087-4811-8925-5c4e62d27c33",
       "1f0be9b0-4929-4bf4-9838-a209fec84ab3",
@@ -4500,11 +4774,12 @@
       "d35a3494-4e1c-427c-9bda-ae12e543f616",
       "d375ff31-f1c9-4cf8-82a5-11b1b2b8b342",
       "e10179b6-493c-42d6-a69c-f1cbc47e01a0",
-      "ff5ef9cc-e083-433f-8c02-7f2df232377d"
+      "ff5ef9cc-e083-433f-8c02-7f2df232377d",
+      "mk-bfffba7d1578"
      ]
     },
     "dx": {
-     "n": 11,
+     "n": 12,
      "items": [
       "08201631-21ae-43a4-aada-cd2d347593ce",
       "1c913736-c1f6-43d2-96e8-e68ef4d25275",
@@ -4516,7 +4791,8 @@
       "81757af8-0ec8-4f51-ba7a-2670b78a5046",
       "b86845b1-9895-4ecd-91de-d68b943952e7",
       "f6479f5c-41e3-4b6a-9dbe-6f7bdd27c68f",
-      "f9cecf3d-6596-4fe8-a530-2b37f115d6dd"
+      "f9cecf3d-6596-4fe8-a530-2b37f115d6dd",
+      "mk-36a2bb22b1fc"
      ]
     },
     "ddx": {
@@ -4595,6 +4871,17 @@
      "comp",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "inv": [
+      "mk-bfffba7d1578"
+     ],
+     "dx": [
+      "mk-36a2bb22b1fc"
+     ]
+    }
    }
   },
   {
@@ -4715,7 +5002,7 @@
      ]
     },
     "aet": {
-     "n": 169,
+     "n": 23,
      "items": [
       "01bb80eb-1eaa-475d-98d0-37b60e856c71",
       "0acd6cd9-a84f-4743-aacf-423ba246799c",
@@ -4736,11 +5023,14 @@
       "3b6201fa-84c9-467b-a265-832bf5df87b1",
       "4ed9c15f-d91d-44f7-8ed0-2faec534554a",
       "4f2812df-ab9a-4167-92a0-8ee1adaa07d3",
-      "5189bcdb-69f8-4817-831c-1c2e7ebee5c4"
+      "5189bcdb-69f8-4817-831c-1c2e7ebee5c4",
+      "mk-71f54653ab9e",
+      "mk-0d3609aaa704",
+      "mk-2fb177f8ce24"
      ]
     },
     "path": {
-     "n": 10,
+     "n": 11,
      "items": [
       "12ad9861-1b29-491f-998e-612e32cf5f3e",
       "1f66d130-92c3-400d-845a-e24eb260a523",
@@ -4751,11 +5041,12 @@
       "02d36d4b-a89c-4756-b20a-51cb7c392eec",
       "34b1638d-9326-4413-a61d-784fbb9b115e",
       "60a2fe40-fd5b-4a7a-a50e-5ad327547344",
-      "7a67eef0-0c2c-4f5c-9ecc-2a1d1751ad2f"
+      "7a67eef0-0c2c-4f5c-9ecc-2a1d1751ad2f",
+      "mk-c69d60067075"
      ]
     },
     "clin": {
-     "n": 31,
+     "n": 20,
      "items": [
       "002907ab-a54e-46c1-9549-5122b3a858c5",
       "020cec11-6bc3-4cf7-ac00-07c850eb71b3",
@@ -4792,7 +5083,7 @@
      ]
     },
     "inv": {
-     "n": 57,
+     "n": 22,
      "items": [
       "1cbd4167-2803-464f-a250-cd8825be672d",
       "20ab42b1-14e4-4f5d-b3ee-44c2296bbff4",
@@ -4813,7 +5104,9 @@
       "c8f67a60-b3b7-4e9c-9c5f-46c3aff77a06",
       "e9795b0e-872e-4d18-b74b-71a7b729e5e0",
       "e9ad66fe-0c0c-46c3-98d8-2032a5e0d0dd",
-      "e9e699fe-5c3e-4633-b2f7-73f753b3b3ab"
+      "e9e699fe-5c3e-4633-b2f7-73f753b3b3ab",
+      "mk-5d9e090e9c50",
+      "mk-df6f7224b453"
      ]
     },
     "dx": {
@@ -4908,6 +5201,23 @@
      "prev",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-71f54653ab9e",
+      "mk-0d3609aaa704",
+      "mk-2fb177f8ce24"
+     ],
+     "path": [
+      "mk-c69d60067075"
+     ],
+     "inv": [
+      "mk-5d9e090e9c50",
+      "mk-df6f7224b453"
+     ]
+    }
    }
   },
   {
@@ -5013,7 +5323,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 32,
+     "n": 20,
      "items": [
       "058763fa-4ae1-4d6f-93d5-2623f9245028",
       "0877ea06-4321-4538-9a61-a795a7ea8c97",
@@ -5038,7 +5348,7 @@
      ]
     },
     "aet": {
-     "n": 19,
+     "n": 21,
      "items": [
       "0df7b11c-74ce-4860-bf2c-f736ac4770c7",
       "128701c2-65d1-47f4-bb1b-50b491e80bc9",
@@ -5058,7 +5368,9 @@
       "cd3f756b-7a0e-4616-8f24-efca87b22854",
       "d10a068b-1e81-464c-bca1-3fda3ce65ffa",
       "d606a2c8-8704-4b2e-b538-b9072d562a8a",
-      "d8caff68-4d20-454f-9321-a3ced7c5ccee"
+      "d8caff68-4d20-454f-9321-a3ced7c5ccee",
+      "mk-40b74b6780da",
+      "mk-c89321164abc"
      ]
     },
     "path": {
@@ -5071,7 +5383,7 @@
      ]
     },
     "clin": {
-     "n": 25,
+     "n": 21,
      "items": [
       "1a664aa3-49b6-4700-996f-c2c4c4cc838b",
       "264a44ef-4862-4258-b7fb-e71df8fa7d0a",
@@ -5092,7 +5404,8 @@
       "a5ea732d-914c-4d8d-9bd1-eb849bea46cc",
       "abaa0edb-28c0-4b17-a3a2-af3a4de51626",
       "bef28401-d79c-4829-b9e5-edceb1e75cba",
-      "c7bf58ad-4fc0-4bd7-bce5-055bac90eb47"
+      "c7bf58ad-4fc0-4bd7-bce5-055bac90eb47",
+      "mk-d2771f7a135e"
      ]
     },
     "comp": {
@@ -5102,7 +5415,7 @@
      ]
     },
     "inv": {
-     "n": 19,
+     "n": 20,
      "items": [
       "21406f7e-2534-494b-9768-fcd09535ea51",
       "2d5b75c8-1dfd-482b-8010-e0961d2d2452",
@@ -5110,6 +5423,7 @@
       "53b0d622-bf9e-41da-ad0c-b3d37a037b9e",
       "57c475b7-79f4-45df-a478-fb164d30ada1",
       "6e9e2952-e746-4c28-bd65-e1e4dc89ecc8",
+      "83834d60-67a2-4622-ab2e-7faa433fdecb",
       "8999fda7-cfa0-4158-aad4-83785a29d812",
       "96b470fb-092d-4ae8-a882-fd5ec4271e0f",
       "a032969a-43b8-4e39-ad8d-a1b2c35e3608",
@@ -5134,11 +5448,13 @@
      ]
     },
     "ddx": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-6470e6b0b94d"
+     ]
     },
     "rx": {
-     "n": 31,
+     "n": 20,
      "items": [
       "07bf3175-376b-4659-b3ef-474cb2c0a97b",
       "0c869d50-df76-48ec-b0c4-499a6f2568d5",
@@ -5207,21 +5523,33 @@
      ]
     },
     "img": {
-     "n": 2,
-     "items": [
-      "83834d60-67a2-4622-ab2e-7faa433fdecb",
-      "bcb0efe5-bd26-4647-813d-a3f0e4ddbe7d"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 88,
+   "unassigned": 89,
    "fetched": 248,
    "coverage": {
     "total": 14,
     "covered": 13,
     "gaps": [
-     "ddx"
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-40b74b6780da",
+      "mk-c89321164abc"
+     ],
+     "clin": [
+      "mk-d2771f7a135e"
+     ],
+     "ddx": [
+      "mk-6470e6b0b94d"
+     ]
+    }
    }
   },
   {
@@ -5335,7 +5663,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 40,
+     "n": 20,
      "items": [
       "0802be31-b97b-460b-84d5-3faaa2977da9",
       "1b86320e-3012-4f89-bd19-360d24a746fb",
@@ -5360,7 +5688,7 @@
      ]
     },
     "aet": {
-     "n": 71,
+     "n": 20,
      "items": [
       "0f567fdb-0a59-4bfd-9dcf-3aee842f59ee",
       "2b8a3961-bacc-4d6d-bd77-14258285bb24",
@@ -5398,7 +5726,7 @@
      ]
     },
     "clin": {
-     "n": 76,
+     "n": 20,
      "items": [
       "053a2505-107e-4168-abab-565f43cf2d57",
       "1a5efeb3-7f37-4537-a02f-06e5a5d8734e",
@@ -5423,17 +5751,20 @@
      ]
     },
     "comp": {
-     "n": 5,
+     "n": 8,
      "items": [
       "5878bf9b-881b-485c-a34d-8fd6a6022c94",
       "58e11c02-db6b-43c0-b8b5-102cfedfe31f",
       "b7e0bbb1-0338-4b06-9c19-73903e320cc0",
       "c35ec938-5003-4209-862a-0c025fd5a2dc",
-      "e181fa74-7b41-40c5-a13a-879082db3c2d"
+      "e181fa74-7b41-40c5-a13a-879082db3c2d",
+      "mk-fa96fc8fc48d",
+      "mk-fccb3873101c",
+      "mk-ce876c2d64cf"
      ]
     },
     "inv": {
-     "n": 73,
+     "n": 21,
      "items": [
       "0f1a5ab8-01c3-4ec4-b37b-a1e1abe44518",
       "14489a75-1d62-4d80-8146-99c915a9b485",
@@ -5454,11 +5785,12 @@
       "bb6a69d1-2e61-40c1-bfdb-48484dc79e10",
       "bf600eb9-e69c-41e6-9337-5be1bf529394",
       "c0a11969-90f3-4f92-94a2-0eb345291c15",
-      "cfd037d5-868e-49d9-89e8-a084e84ce0dc"
+      "cfd037d5-868e-49d9-89e8-a084e84ce0dc",
+      "mk-0cdc25daae66"
      ]
     },
     "dx": {
-     "n": 72,
+     "n": 20,
      "items": [
       "1031c23d-b7a0-4a0a-ad8f-aa0caad3d162",
       "17278ff1-cbf5-4bb9-a6c8-ff7734a46a9f",
@@ -5494,7 +5826,7 @@
      ]
     },
     "rx": {
-     "n": 78,
+     "n": 21,
      "items": [
       "0830b6b6-fa27-4936-ac03-ca44b3997c31",
       "150b481d-8a9f-4916-95d6-d59204cde9d0",
@@ -5515,7 +5847,8 @@
       "870e3907-d606-4e2c-8bde-cadf904e74bd",
       "8a4d5f43-f89b-4dc9-979d-c4fc563e3e16",
       "8ba0bc36-9024-4605-8f22-56ee2d8c2d24",
-      "8ccd16ed-5390-4db4-9c8e-2d29e2759fa5"
+      "8ccd16ed-5390-4db4-9c8e-2d29e2759fa5",
+      "mk-9e98f5cbe06f"
      ]
     },
     "prog": {
@@ -5551,22 +5884,35 @@
      "items": []
     },
     "img": {
-     "n": 3,
-     "items": [
-      "4a5d2acf-e102-4a0c-a422-86c45db0509a",
-      "cc90cfb9-df9b-45ed-8f60-c9ac2302154a",
-      "6912d946-d0b3-4ffd-b3c0-b58ff597adca"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 75,
+   "unassigned": 77,
    "fetched": 520,
    "coverage": {
     "total": 14,
-    "covered": 13,
+    "covered": 12,
     "gaps": [
-     "pearl"
+     "pearl",
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "comp": [
+      "mk-fa96fc8fc48d",
+      "mk-fccb3873101c",
+      "mk-ce876c2d64cf"
+     ],
+     "inv": [
+      "mk-0cdc25daae66"
+     ],
+     "rx": [
+      "mk-9e98f5cbe06f"
+     ]
+    }
    }
   },
   {
@@ -5680,7 +6026,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 40,
+     "n": 20,
      "items": [
       "0802be31-b97b-460b-84d5-3faaa2977da9",
       "1b86320e-3012-4f89-bd19-360d24a746fb",
@@ -5705,7 +6051,7 @@
      ]
     },
     "aet": {
-     "n": 100,
+     "n": 20,
      "items": [
       "0f567fdb-0a59-4bfd-9dcf-3aee842f59ee",
       "2b8a3961-bacc-4d6d-bd77-14258285bb24",
@@ -5740,7 +6086,7 @@
      ]
     },
     "clin": {
-     "n": 72,
+     "n": 20,
      "items": [
       "053a2505-107e-4168-abab-565f43cf2d57",
       "1a5efeb3-7f37-4537-a02f-06e5a5d8734e",
@@ -5781,7 +6127,7 @@
      ]
     },
     "inv": {
-     "n": 73,
+     "n": 22,
      "items": [
       "0f1a5ab8-01c3-4ec4-b37b-a1e1abe44518",
       "14489a75-1d62-4d80-8146-99c915a9b485",
@@ -5802,11 +6148,13 @@
       "bb6a69d1-2e61-40c1-bfdb-48484dc79e10",
       "bf600eb9-e69c-41e6-9337-5be1bf529394",
       "c0a11969-90f3-4f92-94a2-0eb345291c15",
-      "cfd037d5-868e-49d9-89e8-a084e84ce0dc"
+      "cfd037d5-868e-49d9-89e8-a084e84ce0dc",
+      "mk-8e4e3ef8cd60",
+      "mk-0f3ad075d277"
      ]
     },
     "dx": {
-     "n": 64,
+     "n": 20,
      "items": [
       "1031c23d-b7a0-4a0a-ad8f-aa0caad3d162",
       "17278ff1-cbf5-4bb9-a6c8-ff7734a46a9f",
@@ -5831,18 +6179,19 @@
      ]
     },
     "ddx": {
-     "n": 6,
+     "n": 7,
      "items": [
       "a488675d-ee02-4851-a9b8-bd755e93c4aa",
       "a565066a-3395-4231-b2ab-787ec24f1e63",
       "aa2e5b43-3b8a-4e19-965d-6fcac310cd27",
       "fff5df1b-3b24-4214-aed1-29fc83a08345",
       "29bea49e-6aff-4fcc-9e5b-baee7886cadb",
-      "bf0eabec-95a0-46e1-a9b7-dae6c29dadde"
+      "bf0eabec-95a0-46e1-a9b7-dae6c29dadde",
+      "mk-4b0aaf6225c3"
      ]
     },
     "rx": {
-     "n": 64,
+     "n": 20,
      "items": [
       "0830b6b6-fa27-4936-ac03-ca44b3997c31",
       "150b481d-8a9f-4916-95d6-d59204cde9d0",
@@ -5911,19 +6260,30 @@
      ]
     },
     "img": {
-     "n": 2,
-     "items": [
-      "65463ca7-6632-45a6-a895-917d62984089",
-      "7e572677-2cac-404f-83fe-d07f6aa474bc"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 110,
+   "unassigned": 112,
    "fetched": 571,
    "coverage": {
     "total": 14,
-    "covered": 14,
-    "gaps": []
+    "covered": 13,
+    "gaps": [
+     "img"
+    ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "inv": [
+      "mk-8e4e3ef8cd60",
+      "mk-0f3ad075d277"
+     ],
+     "ddx": [
+      "mk-4b0aaf6225c3"
+     ]
+    }
    }
   },
   {
@@ -6038,7 +6398,7 @@
      ]
     },
     "aet": {
-     "n": 13,
+     "n": 14,
      "items": [
       "20c5987b-54d0-4abc-bb1d-c5d0448d1cba",
       "379863c4-69ad-4db0-b95d-a1ca9e585669",
@@ -6052,21 +6412,24 @@
       "abb38441-2b30-47fa-9fdb-549314663682",
       "b3b14ace-1c71-480f-8798-ed5237f37c81",
       "def674ba-077c-4d02-9863-fb4ef7d8998c",
-      "ec47ac5f-201c-4110-9dae-4016145f55a7"
+      "ec47ac5f-201c-4110-9dae-4016145f55a7",
+      "mk-0b60602eb3a0"
      ]
     },
     "path": {
-     "n": 5,
+     "n": 7,
      "items": [
       "119f682e-a3b4-4af6-a546-b6ce3aa5b1fa",
       "3a4f40ae-927a-407e-9c7d-ec140b27d74d",
       "836ce8d1-4690-48a5-ac85-b84d4c9f8563",
       "b3221deb-4b2f-4a83-99c8-7bece776d82b",
-      "e6d5965f-b2ad-4765-90db-4bf98446c09f"
+      "e6d5965f-b2ad-4765-90db-4bf98446c09f",
+      "mk-6c036d568dc0",
+      "mk-96fb99c54c9e"
      ]
     },
     "clin": {
-     "n": 24,
+     "n": 20,
      "items": [
       "04bbd3ee-990c-4a18-a095-953ee2dabef0",
       "176cc460-e991-41b4-a636-3cc6b2236e84",
@@ -6091,11 +6454,13 @@
      ]
     },
     "comp": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-4161bfd74bb9"
+     ]
     },
     "inv": {
-     "n": 34,
+     "n": 23,
      "items": [
       "015f0a88-60af-4c89-84d4-1ad7aea10929",
       "07a6bf1e-1fdc-4c8d-9a18-33baece127e2",
@@ -6116,11 +6481,14 @@
       "65000261-326e-4a4d-8a1c-90298a046ad4",
       "70ff7caa-9ffd-43f4-9c4a-d0c863706ac5",
       "74585ba6-c514-4f31-82be-52788955797e",
-      "7be7ce41-9c7c-48cc-82ad-0a36f2a53af7"
+      "7be7ce41-9c7c-48cc-82ad-0a36f2a53af7",
+      "mk-afb8a8237a61",
+      "mk-979686616ce2",
+      "mk-7a285f69140e"
      ]
     },
     "dx": {
-     "n": 25,
+     "n": 20,
      "items": [
       "058da16d-efb1-4856-8c25-096bea8e1a78",
       "106fe05f-f5e1-4624-a0f6-cd1706de8ef4",
@@ -6149,7 +6517,7 @@
      "items": []
     },
     "rx": {
-     "n": 39,
+     "n": 20,
      "items": [
       "007f0c03-fdc2-41c2-aaf3-a88bd3d122f4",
       "0133832d-0e36-49e7-8baa-600057233cd9",
@@ -6182,7 +6550,7 @@
      ]
     },
     "prev": {
-     "n": 7,
+     "n": 8,
      "items": [
       "1d736063-c6c1-4e65-a397-80e9289d4b53",
       "22234afc-268d-4c12-b7f5-8b882a02fbd0",
@@ -6190,7 +6558,8 @@
       "88713cee-71e1-494d-aad9-f442908a5963",
       "b84c90b8-2f19-481c-b93c-2ce0a2e4b439",
       "f3e981e7-7c8d-45f4-b722-eb651b3f39b2",
-      "fb9901ad-6e58-4e70-b26b-85e23c679a86"
+      "fb9901ad-6e58-4e70-b26b-85e23c679a86",
+      "mk-753cb5de228b"
      ]
     },
     "guide": {
@@ -6226,12 +6595,34 @@
    "fetched": 321,
    "coverage": {
     "total": 14,
-    "covered": 11,
+    "covered": 12,
     "gaps": [
-     "comp",
      "ddx",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-0b60602eb3a0"
+     ],
+     "path": [
+      "mk-6c036d568dc0",
+      "mk-96fb99c54c9e"
+     ],
+     "comp": [
+      "mk-4161bfd74bb9"
+     ],
+     "inv": [
+      "mk-afb8a8237a61",
+      "mk-979686616ce2",
+      "mk-7a285f69140e"
+     ],
+     "prev": [
+      "mk-753cb5de228b"
+     ]
+    }
    }
   },
   {
@@ -6352,13 +6743,14 @@
      ]
     },
     "path": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "604e80d3-5b8e-4648-b8c9-4fd265012806"
+      "604e80d3-5b8e-4648-b8c9-4fd265012806",
+      "mk-394e13951b91"
      ]
     },
     "clin": {
-     "n": 117,
+     "n": 23,
      "items": [
       "010a4abd-0de8-4463-ad39-1e1fac9c021f",
       "034acb90-7da1-4d1d-b8ea-012c88b42193",
@@ -6379,17 +6771,23 @@
       "259c9f8a-4a43-4540-b8d1-8f8fa803e4b6",
       "277ed52c-ae1d-49cd-82db-8bd6abb334ed",
       "284409b1-3833-4094-a0ca-155a726cce83",
-      "295fc5b8-bc7a-4a5e-b808-616162916e36"
+      "295fc5b8-bc7a-4a5e-b808-616162916e36",
+      "mk-9f8922573665",
+      "mk-1d5969c42dfb",
+      "mk-b07e9b8c24ce"
      ]
     },
     "comp": {
-     "n": 1,
+     "n": 4,
      "items": [
-      "2b63ab76-64dc-4ee2-8830-f16050881649"
+      "2b63ab76-64dc-4ee2-8830-f16050881649",
+      "mk-4a09ee189a4a",
+      "mk-1de70f7ffe20",
+      "mk-8de321efc462"
      ]
     },
     "inv": {
-     "n": 39,
+     "n": 23,
      "items": [
       "0e8dced2-b505-4d5d-ab8e-59ba774b0c6b",
       "0f5928ca-ebd9-4b7a-851b-8e50830036b6",
@@ -6410,11 +6808,14 @@
       "64e836ef-0107-4442-9752-bbf8069cb506",
       "6a5b3145-f0fb-4c99-afac-e11d0fb83c34",
       "6aa2c360-031c-4f63-a7a9-e63a0379ea60",
-      "73a6b28d-6be4-47c3-b026-08d3bb4325db"
+      "73a6b28d-6be4-47c3-b026-08d3bb4325db",
+      "mk-357e132b6fae",
+      "mk-4c2df0000d9b",
+      "mk-be47521a43c7"
      ]
     },
     "dx": {
-     "n": 8,
+     "n": 10,
      "items": [
       "197d637b-5648-4107-9ab3-29494eff7874",
       "51f02b8d-c695-41e3-b8ed-b71a62475edd",
@@ -6423,7 +6824,9 @@
       "a0ba44b3-7ad0-4c62-ab93-abf9f63e4569",
       "ac97d655-cdb1-478c-9917-93a66ed0cc1a",
       "c502c657-8f56-47f4-8ec6-ee50eef66d76",
-      "fe8678f2-af9b-499e-b794-03db838596d5"
+      "fe8678f2-af9b-499e-b794-03db838596d5",
+      "mk-617dbe71c420",
+      "mk-3e8f30829ee8"
      ]
     },
     "ddx": {
@@ -6467,25 +6870,49 @@
      ]
     },
     "img": {
-     "n": 3,
-     "items": [
-      "d65af515-20e7-4ba0-af71-8cf91d3a1298",
-      "ee72a148-4d68-4e5d-8b20-feed13121852",
-      "f748ceb2-26f6-42d8-b766-702123b64c8a"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 31,
+   "unassigned": 32,
    "fetched": 219,
    "coverage": {
     "total": 14,
-    "covered": 10,
+    "covered": 9,
     "gaps": [
      "def-epi",
      "ddx",
      "prev",
-     "guide"
+     "guide",
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "path": [
+      "mk-394e13951b91"
+     ],
+     "clin": [
+      "mk-9f8922573665",
+      "mk-1d5969c42dfb",
+      "mk-b07e9b8c24ce"
+     ],
+     "comp": [
+      "mk-4a09ee189a4a",
+      "mk-1de70f7ffe20",
+      "mk-8de321efc462"
+     ],
+     "inv": [
+      "mk-357e132b6fae",
+      "mk-4c2df0000d9b",
+      "mk-be47521a43c7"
+     ],
+     "dx": [
+      "mk-617dbe71c420",
+      "mk-3e8f30829ee8"
+     ]
+    }
    }
   },
   {
@@ -6595,7 +7022,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 44,
+     "n": 20,
      "items": [
       "03df61ba-9432-4bef-89ba-c3d5ac56e27e",
       "0a3d446a-b19d-464f-b943-07d247aa5046",
@@ -6620,7 +7047,7 @@
      ]
     },
     "aet": {
-     "n": 33,
+     "n": 21,
      "items": [
       "043515af-cf70-4ce9-9842-0463ff2f073c",
       "0740ef70-afe2-4b31-9992-cca3eb25e536",
@@ -6641,7 +7068,8 @@
       "f0ef11d9-28d7-459e-aff1-11cc380cde78",
       "1badc5bb-d61a-48ea-9288-3754612f74a5",
       "1ce7097a-79b7-49e1-a027-232734636da3",
-      "1d31bfbd-0ba7-4edf-a293-44f7b0b82337"
+      "1d31bfbd-0ba7-4edf-a293-44f7b0b82337",
+      "mk-53db0b54850f"
      ]
     },
     "path": {
@@ -6649,7 +7077,7 @@
      "items": []
     },
     "clin": {
-     "n": 71,
+     "n": 20,
      "items": [
       "03354352-046f-4865-8257-435af4bc5f70",
       "095d569e-e0d6-48fe-9be3-06daac7de73a",
@@ -6683,7 +7111,7 @@
      ]
     },
     "inv": {
-     "n": 40,
+     "n": 20,
      "items": [
       "02fd6ce5-2c86-4344-9ea8-6c316fa47f2d",
       "1aba8d6c-11e5-4496-bc72-63d74d91aff3",
@@ -6756,7 +7184,7 @@
      ]
     },
     "prog": {
-     "n": 44,
+     "n": 20,
      "items": [
       "4884b55a-2e29-4fee-a781-fa98820b235e",
       "89449b3f-aee9-4894-a02e-125138c9a4c4",
@@ -6819,6 +7247,14 @@
      "pearl",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-53db0b54850f"
+     ]
+    }
    }
   },
   {
@@ -6932,7 +7368,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 21,
+     "n": 20,
      "items": [
       "2354462c-7d5d-48c9-abe1-5f201a16de9e",
       "3872d3fb-03b1-4345-b675-d03df7ab78a6",
@@ -6957,7 +7393,7 @@
      ]
     },
     "aet": {
-     "n": 70,
+     "n": 20,
      "items": [
       "0eac0c29-270f-4d85-a61c-6eec02bd1b01",
       "1c84e0de-2784-45de-a25d-79ed40cf0fe2",
@@ -6982,7 +7418,7 @@
      ]
     },
     "path": {
-     "n": 55,
+     "n": 20,
      "items": [
       "3b5fd55d-ea76-4c5e-8ebe-79d366279b4b",
       "538ef57b-9b58-4be3-b70e-49f492885264",
@@ -7007,7 +7443,7 @@
      ]
     },
     "clin": {
-     "n": 117,
+     "n": 20,
      "items": [
       "018520cb-460c-4eac-b76b-598fcc76506b",
       "0524958a-a93f-470a-9443-f271c4568998",
@@ -7039,7 +7475,7 @@
      ]
     },
     "inv": {
-     "n": 171,
+     "n": 20,
      "items": [
       "0bc6f3ec-349f-42f5-ae5d-8bc6160a35be",
       "10685f1c-caed-4641-85c4-8b3030df9185",
@@ -7064,7 +7500,7 @@
      ]
     },
     "dx": {
-     "n": 40,
+     "n": 20,
      "items": [
       "1fd64c35-6c0a-4561-949b-21ebe17be46c",
       "3d8d76ab-6729-4e77-95da-c427364ffcd0",
@@ -7175,18 +7611,22 @@
      ]
     },
     "img": {
-     "n": 1,
-     "items": [
-      "79e642b8-e423-4b53-a3d1-57977ea565e4"
-     ]
+     "n": 0,
+     "items": []
     }
    },
    "unassigned": 197,
    "fetched": 730,
    "coverage": {
     "total": 14,
-    "covered": 14,
-    "gaps": []
+    "covered": 13,
+    "gaps": [
+     "img"
+    ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {}
    }
   },
   {
@@ -7307,7 +7747,7 @@
      ]
     },
     "aet": {
-     "n": 36,
+     "n": 20,
      "items": [
       "00d26c08-111d-4657-91f2-316145a8eea7",
       "053e21ab-7267-46d4-bdf9-55601188bb1b",
@@ -7339,7 +7779,7 @@
      ]
     },
     "clin": {
-     "n": 44,
+     "n": 20,
      "items": [
       "0eacd5b3-5361-4f86-af4d-edbe5d8016cf",
       "16a19447-9679-4a1b-82cf-a855874fa7c7",
@@ -7372,7 +7812,7 @@
      ]
     },
     "inv": {
-     "n": 27,
+     "n": 20,
      "items": [
       "015a6f41-e5a6-4c50-b10e-6275cbe630c7",
       "15011886-e31f-4d49-bb45-4fcd1ebedc1a",
@@ -7463,10 +7903,11 @@
      "items": []
     },
     "pearl": {
-     "n": 2,
+     "n": 3,
      "items": [
       "1abdb8a5-c4b1-4889-8011-0c18fa36fa1b",
-      "e575d0fa-7d03-44f7-bfd4-317c3477b5a7"
+      "e575d0fa-7d03-44f7-bfd4-317c3477b5a7",
+      "mk-fc0268d63109"
      ]
     },
     "img": {
@@ -7483,6 +7924,14 @@
      "guide",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "pearl": [
+      "mk-fc0268d63109"
+     ]
+    }
    }
   },
   {
@@ -7612,7 +8061,7 @@
      ]
     },
     "aet": {
-     "n": 35,
+     "n": 23,
      "items": [
       "43991b66-9ac7-4e08-8ad9-46ad0fcc6fc4",
       "448ad4af-9e2b-4bf9-a69e-735ce47fb59b",
@@ -7633,19 +8082,23 @@
       "255bc7c5-2931-490c-b557-330744c7ef96",
       "2a40be3a-d341-48b7-a90b-d37f62e0a9bd",
       "2d3b2382-b950-4829-b6ee-2a5bdd5b97b2",
-      "4b69e424-811e-477e-b279-4811bdafc4e2"
+      "4b69e424-811e-477e-b279-4811bdafc4e2",
+      "mk-2fa512a242ee",
+      "mk-592ca10960ad",
+      "mk-19159062ea11"
      ]
     },
     "path": {
-     "n": 3,
+     "n": 4,
      "items": [
       "a4adc3c3-3480-46d8-9d4c-43ae417d6d81",
       "e620e205-9d18-4b6f-b0bd-b1ce27a58052",
-      "88e350ec-f6e9-4345-ac14-0d5d5d1d1690"
+      "88e350ec-f6e9-4345-ac14-0d5d5d1d1690",
+      "mk-66dfdae38e70"
      ]
     },
     "clin": {
-     "n": 51,
+     "n": 20,
      "items": [
       "0225816b-c76b-4a35-a454-d75294f54ff7",
       "175a62fd-b438-4fb0-a878-ae08bcd3ef2a",
@@ -7685,7 +8138,7 @@
      ]
     },
     "inv": {
-     "n": 118,
+     "n": 21,
      "items": [
       "05da5ea5-aaf2-4057-88cb-556b8144a5c9",
       "0e3200da-551b-4629-8e45-4be0f47e52e2",
@@ -7706,11 +8159,12 @@
       "4d1bf559-92af-48c1-8d70-4cfe2e89e63b",
       "4d82e8f5-b8e6-4bfd-b864-b9e4114c9257",
       "4ddaca09-6f23-4065-8440-3170832405e1",
-      "4f4ce2f5-161a-47cf-9c6f-351d32ebe253"
+      "4f4ce2f5-161a-47cf-9c6f-351d32ebe253",
+      "mk-ef1e88c47d23"
      ]
     },
     "dx": {
-     "n": 43,
+     "n": 22,
      "items": [
       "073e11e3-e09f-4b42-88f3-b2e14ed6ffbf",
       "14e303a3-f677-448d-b990-64103fd4912e",
@@ -7731,7 +8185,9 @@
       "a82ee225-fa3b-4fa6-afa3-51bc69aaec26",
       "b20920e2-b16b-4aa0-9896-c0a96714580f",
       "bfba1027-0796-4b6f-874e-72623f3420e2",
-      "caf677aa-ab4f-4ae5-b453-e132fce3c101"
+      "caf677aa-ab4f-4ae5-b453-e132fce3c101",
+      "mk-9d569c14a653",
+      "mk-8dce0af6d585"
      ]
     },
     "ddx": {
@@ -7742,7 +8198,7 @@
      ]
     },
     "rx": {
-     "n": 168,
+     "n": 20,
      "items": [
       "02192c1f-a33e-417a-a490-7045d4065449",
       "0356a93a-10b1-4b87-9252-bf4f391843af",
@@ -7813,6 +8269,26 @@
     "gaps": [
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-2fa512a242ee",
+      "mk-592ca10960ad",
+      "mk-19159062ea11"
+     ],
+     "path": [
+      "mk-66dfdae38e70"
+     ],
+     "inv": [
+      "mk-ef1e88c47d23"
+     ],
+     "dx": [
+      "mk-9d569c14a653",
+      "mk-8dce0af6d585"
+     ]
+    }
    }
   },
   {
@@ -7937,7 +8413,7 @@
      ]
     },
     "aet": {
-     "n": 63,
+     "n": 20,
      "items": [
       "03bcd63a-b87b-42c1-af91-ca4b0d3278a1",
       "10c89805-08ba-468c-877d-0eb2b9423a39",
@@ -7962,7 +8438,7 @@
      ]
     },
     "path": {
-     "n": 24,
+     "n": 20,
      "items": [
       "18e05d5d-2f04-4dc1-b784-b5614fec8bcb",
       "2bcb08b3-c89b-4dc6-810b-39f82d420a1c",
@@ -7987,7 +8463,7 @@
      ]
     },
     "clin": {
-     "n": 56,
+     "n": 20,
      "items": [
       "0be3ca18-a243-4be7-b79b-bf6595a3556b",
       "221cb0f1-6ae6-438f-8430-512fba3e7086",
@@ -8022,7 +8498,7 @@
      ]
     },
     "inv": {
-     "n": 119,
+     "n": 22,
      "items": [
       "0047f515-e403-4b33-9ea1-97863434449d",
       "06a24553-3031-463e-bec7-b191881021ca",
@@ -8043,11 +8519,13 @@
       "97e5b4e5-9a1d-4064-bb9b-c9d324a3ac08",
       "a2dae05c-e9dd-43d6-b80f-100bd800da94",
       "a5384e5e-3917-46a7-9fe9-aa9ab02e6ce1",
-      "b4b5ebb7-0b97-49e0-a699-2e22b78b653f"
+      "b4b5ebb7-0b97-49e0-a699-2e22b78b653f",
+      "mk-82baa2393c2f",
+      "mk-5b3854a3b11e"
      ]
     },
     "dx": {
-     "n": 22,
+     "n": 20,
      "items": [
       "00eed50e-20ec-46f3-bb4d-03c72a225334",
       "24b647d9-f022-4dc3-831c-a9ab01a8a4eb",
@@ -8147,6 +8625,15 @@
     "gaps": [
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "inv": [
+      "mk-82baa2393c2f",
+      "mk-5b3854a3b11e"
+     ]
+    }
    }
   },
   {
@@ -8271,7 +8758,7 @@
      ]
     },
     "aet": {
-     "n": 53,
+     "n": 22,
      "items": [
       "0b1b213b-d453-4735-bd9f-99aa913962d3",
       "31e6d303-24ee-4886-bd7d-cae40cea8534",
@@ -8279,6 +8766,7 @@
       "3e63e118-3bd0-4409-b270-44c51fca96c7",
       "4e434e4e-0592-4760-80f6-4e6a60bee821",
       "51b36686-f184-4030-adfb-13fbbae24226",
+      "53c4ea3f-3458-4f63-ab94-efd05d26b05a",
       "5a3972a6-3346-4668-b827-45ea809e0ab2",
       "5a6cfd20-d8c0-403d-a27c-135476025a0c",
       "6bb1fb2d-ad56-43fe-b79b-1de490a5cf8c",
@@ -8292,11 +8780,12 @@
       "afc3e0ac-26cc-4e2f-8314-550bc09da5a7",
       "b90ed278-3b41-425c-ba99-6f7f4de04165",
       "be5d11ed-78c4-4cce-a45d-5ef92676fba4",
-      "d0385d28-2282-443a-9eb6-8aef120b39c2"
+      "mk-aecdf6e098ee",
+      "mk-3a799b226d0e"
      ]
     },
     "path": {
-     "n": 18,
+     "n": 20,
      "items": [
       "08d6a5c2-d9cf-4443-8d30-c4ba401283b0",
       "204f60ec-322d-4b95-a2c9-98e0a5073679",
@@ -8310,6 +8799,8 @@
       "91432e89-d86a-43a2-a7e4-6d832838a4b2",
       "bdb823d3-ab14-40d2-9866-f6f923e99a09",
       "d3e527af-f21a-4ada-8604-5666fa926aa7",
+      "e02ab28b-bb7b-4c2a-aaf0-d2a15da63017",
+      "eaf0919c-a3c1-4203-a9f4-399797f1d1d4",
       "1918fea4-43c8-4453-b154-b35ec5c08410",
       "5ae498cf-5150-4d58-94a2-29be8de8d5ce",
       "6b5ae263-c556-4d0a-9565-f4291e8c80a2",
@@ -8319,7 +8810,7 @@
      ]
     },
     "clin": {
-     "n": 334,
+     "n": 20,
      "items": [
       "02f66096-c05a-4bb5-9cd5-df63ae930acf",
       "069dcb39-966e-4ca6-b0ef-eb28d4aae478",
@@ -8350,7 +8841,7 @@
      ]
     },
     "inv": {
-     "n": 234,
+     "n": 23,
      "items": [
       "0051af9f-8cc4-4dae-a5b0-937e2ff9da3c",
       "038e9b1a-1bd7-43af-9ead-5e789e213efb",
@@ -8371,11 +8862,14 @@
       "23acddf7-76c8-4c41-9882-32b47d7f7470",
       "23aea8ec-7c29-4cb9-9bda-c6eee73006d2",
       "283242ee-c9e4-4dd4-afce-79e3b2d5a941",
-      "2be65396-a9c3-4be6-9efa-67e10295af2d"
+      "2be65396-a9c3-4be6-9efa-67e10295af2d",
+      "mk-5af676570f34",
+      "mk-95d436d14de1",
+      "mk-a48c140ce518"
      ]
     },
     "dx": {
-     "n": 58,
+     "n": 21,
      "items": [
       "01482ef5-7f38-4362-8133-758a2c0049de",
       "014e8839-39af-464a-a5f8-0d793f0ad75f",
@@ -8396,7 +8890,8 @@
       "7367a56d-342d-4ebb-874e-6d21cd5d4296",
       "755c46df-1062-4795-a120-a3f08ce8bb09",
       "7a9acf0b-82f8-4dc3-98d3-4ba908f9fdd3",
-      "827bddd9-a3d8-4941-b103-37bf74dfefbe"
+      "827bddd9-a3d8-4941-b103-37bf74dfefbe",
+      "mk-ef1126cfd758"
      ]
     },
     "ddx": {
@@ -8414,7 +8909,7 @@
      ]
     },
     "rx": {
-     "n": 24,
+     "n": 20,
      "items": [
       "083508c2-26cb-4dc3-afd3-5473c3bdb4d7",
       "0b94e1ef-dc4f-4ea2-8edd-f84c0ed7f4b4",
@@ -8489,37 +8984,35 @@
      ]
     },
     "img": {
-     "n": 33,
-     "items": [
-      "049d4931-bd30-42e3-b580-fe56c14ae25a",
-      "402ee6c8-8e0b-437d-a648-c6c44b00fa03",
-      "53c4ea3f-3458-4f63-ab94-efd05d26b05a",
-      "7308af04-1093-4f75-9aab-2914019d5a63",
-      "839a33f2-e5fa-47e5-9d6f-4bd9a30af7fc",
-      "847ecec4-2616-475b-9a88-7ce75a312da2",
-      "9e64cfef-77c7-448b-8f62-4adfa7f3f5f1",
-      "e02ab28b-bb7b-4c2a-aaf0-d2a15da63017",
-      "e04018ed-7b64-42bc-9489-1a07fd810f48",
-      "eaf0919c-a3c1-4203-a9f4-399797f1d1d4",
-      "0c4c8239-53c7-4c27-b9c4-11add8cc0198",
-      "252aeef6-e637-4fb0-bd9f-409a34b3dce9",
-      "2ad3cd1a-e4d3-4e94-bf77-0e808c67f5e3",
-      "2ff785e1-db86-408c-bf62-a5c4b8f23d2e",
-      "45534f43-c502-472c-b84b-f3852e8283e6",
-      "51945f8c-c646-408b-aabe-cdb4aa389bae",
-      "5e824650-1ba7-402b-b74c-76bd9e3ad5d1",
-      "66f6caa9-efb2-4342-a28c-6a3f54830ef9",
-      "9558b7c0-021a-4d5e-915c-1947f93eb69d",
-      "9c7d8c1c-b074-41a5-b546-f44deaf23052"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 171,
+   "unassigned": 191,
    "fetched": 971,
    "coverage": {
     "total": 14,
-    "covered": 14,
-    "gaps": []
+    "covered": 13,
+    "gaps": [
+     "img"
+    ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-aecdf6e098ee",
+      "mk-3a799b226d0e"
+     ],
+     "inv": [
+      "mk-5af676570f34",
+      "mk-95d436d14de1",
+      "mk-a48c140ce518"
+     ],
+     "dx": [
+      "mk-ef1126cfd758"
+     ]
+    }
    }
   },
   {
@@ -8640,7 +9133,7 @@
      ]
     },
     "aet": {
-     "n": 17,
+     "n": 18,
      "items": [
       "0d2dd9a6-b1ef-4672-a90e-c8879f94a1ae",
       "10ecc809-e788-4279-a10c-6e72cb6ce9d1",
@@ -8658,7 +9151,8 @@
       "ecf867a6-ba1e-4ee6-83d3-024cd1b6699b",
       "f3496cc2-6cba-4725-8a0b-e218f725f388",
       "q_7c2ce61e882a",
-      "q_0653e7f0c470"
+      "q_0653e7f0c470",
+      "mk-b9e5144028c9"
      ]
     },
     "path": {
@@ -8683,7 +9177,8 @@
       "q_b19e26d19ba4",
       "q_30f975e6111d",
       "q_09482b5f4739",
-      "q_328141850647"
+      "q_328141850647",
+      "mk-1008c7b6eddc"
      ]
     },
     "clin": {
@@ -8710,9 +9205,10 @@
      ]
     },
     "comp": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "10bf34e4-d615-42ff-88f0-2e460e210d9e"
+      "10bf34e4-d615-42ff-88f0-2e460e210d9e",
+      "mk-7af63df733ac"
      ]
     },
     "inv": {
@@ -8812,6 +9308,20 @@
      "guide",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-b9e5144028c9"
+     ],
+     "path": [
+      "mk-1008c7b6eddc"
+     ],
+     "comp": [
+      "mk-7af63df733ac"
+     ]
+    }
    }
   },
   {
@@ -8925,7 +9435,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 49,
+     "n": 20,
      "items": [
       "1b842582-b8b4-4e9e-b8e7-0762666b752c",
       "1bc57225-7192-493b-98a4-d0dfd40bb06d",
@@ -8950,7 +9460,7 @@
      ]
     },
     "aet": {
-     "n": 18,
+     "n": 19,
      "items": [
       "2a86af34-7f34-4928-9589-da139571dba7",
       "32af9193-a209-493f-ab2b-685e4a4e786f",
@@ -8969,7 +9479,8 @@
       "78b6f593-c946-4acb-8067-7023a6fadde1",
       "b4208ab7-070e-412c-81b2-00dcee1ba764",
       "d783b641-7f84-46b2-8172-a6c41b3dc632",
-      "e42b4658-c5c0-4825-b211-bd8139bcc824"
+      "e42b4658-c5c0-4825-b211-bd8139bcc824",
+      "mk-57fe425b3ecd"
      ]
     },
     "path": {
@@ -8990,7 +9501,7 @@
      ]
     },
     "clin": {
-     "n": 24,
+     "n": 20,
      "items": [
       "24200963-1923-43f3-b634-3640d9b3ae53",
       "4820f185-3f2d-4f00-9a6d-26c83d5cfa22",
@@ -9072,7 +9583,7 @@
      ]
     },
     "rx": {
-     "n": 57,
+     "n": 20,
      "items": [
       "0381f00d-20ce-43aa-a82b-ba99af94abe7",
       "065afc70-e6ff-46fb-a268-07a41d85c54a",
@@ -9109,7 +9620,7 @@
      ]
     },
     "prev": {
-     "n": 34,
+     "n": 21,
      "items": [
       "145cfa48-63c4-4475-bf55-b47710e2de03",
       "18cbac57-e769-4613-bc31-81bf9e2c3940",
@@ -9130,7 +9641,8 @@
       "f61d6cd3-68ac-4d31-9e09-5db4512f2223",
       "fd3d9ad0-983d-49b0-92f5-f073b1c9ad99",
       "0c79e1f1-a56d-41f2-a642-7b7f03723b7a",
-      "1bc024fc-b578-4dde-a1df-10663df327f3"
+      "1bc024fc-b578-4dde-a1df-10663df327f3",
+      "mk-9109d62f6c6b"
      ]
     },
     "guide": {
@@ -9164,6 +9676,17 @@
     "gaps": [
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-57fe425b3ecd"
+     ],
+     "prev": [
+      "mk-9109d62f6c6b"
+     ]
+    }
    }
   },
   {
@@ -9345,7 +9868,7 @@
      "items": []
     },
     "rx": {
-     "n": 29,
+     "n": 23,
      "items": [
       "0851cbb2-1ef7-4ba7-9ec9-7209e433bdc1",
       "18fed78a-8067-466f-b4e7-9c25f65f4ea5",
@@ -9366,7 +9889,10 @@
       "95362e98-3263-4f73-bff7-f71306c6fa16",
       "9996b317-f498-4c47-9890-ca9b2a5d8f99",
       "a4faa18b-44e2-4045-bc6c-addc08dee265",
-      "af0a6a0d-948b-4039-9c06-6069a1c83af7"
+      "af0a6a0d-948b-4039-9c06-6069a1c83af7",
+      "mk-b75d73d9a512",
+      "mk-7ac8bd61baef",
+      "mk-69aad9097213"
      ]
     },
     "prog": {
@@ -9421,6 +9947,16 @@
      "prev",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "rx": [
+      "mk-b75d73d9a512",
+      "mk-7ac8bd61baef",
+      "mk-69aad9097213"
+     ]
+    }
    }
   },
   {
@@ -9532,7 +10068,7 @@
      ]
     },
     "aet": {
-     "n": 26,
+     "n": 21,
      "items": [
       "0b1b213b-d453-4735-bd9f-99aa913962d3",
       "31e6d303-24ee-4886-bd7d-cae40cea8534",
@@ -9540,6 +10076,7 @@
       "3e63e118-3bd0-4409-b270-44c51fca96c7",
       "4e434e4e-0592-4760-80f6-4e6a60bee821",
       "51b36686-f184-4030-adfb-13fbbae24226",
+      "53c4ea3f-3458-4f63-ab94-efd05d26b05a",
       "5a3972a6-3346-4668-b827-45ea809e0ab2",
       "5a6cfd20-d8c0-403d-a27c-135476025a0c",
       "6bb1fb2d-ad56-43fe-b79b-1de490a5cf8c",
@@ -9553,11 +10090,11 @@
       "afc3e0ac-26cc-4e2f-8314-550bc09da5a7",
       "b90ed278-3b41-425c-ba99-6f7f4de04165",
       "be5d11ed-78c4-4cce-a45d-5ef92676fba4",
-      "d0385d28-2282-443a-9eb6-8aef120b39c2"
+      "mk-d254a7d677ed"
      ]
     },
     "path": {
-     "n": 12,
+     "n": 14,
      "items": [
       "08d6a5c2-d9cf-4443-8d30-c4ba401283b0",
       "204f60ec-322d-4b95-a2c9-98e0a5073679",
@@ -9570,11 +10107,13 @@
       "87e91670-8ce9-414c-a6ca-6030ad7cd018",
       "91432e89-d86a-43a2-a7e4-6d832838a4b2",
       "bdb823d3-ab14-40d2-9866-f6f923e99a09",
-      "d3e527af-f21a-4ada-8604-5666fa926aa7"
+      "d3e527af-f21a-4ada-8604-5666fa926aa7",
+      "e02ab28b-bb7b-4c2a-aaf0-d2a15da63017",
+      "eaf0919c-a3c1-4203-a9f4-399797f1d1d4"
      ]
     },
     "clin": {
-     "n": 95,
+     "n": 22,
      "items": [
       "02f66096-c05a-4bb5-9cd5-df63ae930acf",
       "069dcb39-966e-4ca6-b0ef-eb28d4aae478",
@@ -9595,15 +10134,19 @@
       "39266652-75d4-4331-83d3-2b5fca41a7c2",
       "4137b8d3-a180-439a-b638-2ec13ef61a84",
       "4aabbee4-a4fe-4c3e-9283-1d1c8024dd07",
-      "4cc1ac3c-6994-46ee-b14f-46e9a42f6d61"
+      "4cc1ac3c-6994-46ee-b14f-46e9a42f6d61",
+      "mk-eb01765f9c20",
+      "mk-97f40735b6f9"
      ]
     },
     "comp": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-be9678130082"
+     ]
     },
     "inv": {
-     "n": 138,
+     "n": 23,
      "items": [
       "0051af9f-8cc4-4dae-a5b0-937e2ff9da3c",
       "038e9b1a-1bd7-43af-9ead-5e789e213efb",
@@ -9624,11 +10167,14 @@
       "23acddf7-76c8-4c41-9882-32b47d7f7470",
       "23aea8ec-7c29-4cb9-9bda-c6eee73006d2",
       "283242ee-c9e4-4dd4-afce-79e3b2d5a941",
-      "2be65396-a9c3-4be6-9efa-67e10295af2d"
+      "2be65396-a9c3-4be6-9efa-67e10295af2d",
+      "mk-3eb397c76191",
+      "mk-a3031cb90434",
+      "mk-3c0db21cda05"
      ]
     },
     "dx": {
-     "n": 33,
+     "n": 21,
      "items": [
       "01482ef5-7f38-4362-8133-758a2c0049de",
       "014e8839-39af-464a-a5f8-0d793f0ad75f",
@@ -9649,7 +10195,8 @@
       "7367a56d-342d-4ebb-874e-6d21cd5d4296",
       "755c46df-1062-4795-a120-a3f08ce8bb09",
       "7a9acf0b-82f8-4dc3-98d3-4ba908f9fdd3",
-      "827bddd9-a3d8-4941-b103-37bf74dfefbe"
+      "827bddd9-a3d8-4941-b103-37bf74dfefbe",
+      "mk-4776e4fb1a6d"
      ]
     },
     "ddx": {
@@ -9691,12 +10238,13 @@
      "items": []
     },
     "guide": {
-     "n": 4,
+     "n": 5,
      "items": [
       "23bbc9aa-56a3-4fcf-a018-d49faf4c90e9",
       "29e9f138-9cd7-40fb-9c10-7a8daf4db354",
       "65bd7ea0-5e2d-4d1a-8967-045d35e351a8",
-      "a9b8853d-39d9-41d4-9946-8c5a9babcb88"
+      "a9b8853d-39d9-41d4-9946-8c5a9babcb88",
+      "mk-085af8e1ff0b"
      ]
     },
     "pearl": {
@@ -9708,31 +10256,46 @@
      ]
     },
     "img": {
-     "n": 10,
-     "items": [
-      "049d4931-bd30-42e3-b580-fe56c14ae25a",
-      "402ee6c8-8e0b-437d-a648-c6c44b00fa03",
-      "53c4ea3f-3458-4f63-ab94-efd05d26b05a",
-      "7308af04-1093-4f75-9aab-2914019d5a63",
-      "839a33f2-e5fa-47e5-9d6f-4bd9a30af7fc",
-      "847ecec4-2616-475b-9a88-7ce75a312da2",
-      "9e64cfef-77c7-448b-8f62-4adfa7f3f5f1",
-      "e02ab28b-bb7b-4c2a-aaf0-d2a15da63017",
-      "e04018ed-7b64-42bc-9489-1a07fd810f48",
-      "eaf0919c-a3c1-4203-a9f4-399797f1d1d4"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 57,
+   "unassigned": 63,
    "fetched": 399,
    "coverage": {
     "total": 14,
     "covered": 11,
     "gaps": [
-     "comp",
      "prog",
-     "prev"
+     "prev",
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-d254a7d677ed"
+     ],
+     "clin": [
+      "mk-eb01765f9c20",
+      "mk-97f40735b6f9"
+     ],
+     "comp": [
+      "mk-be9678130082"
+     ],
+     "inv": [
+      "mk-3eb397c76191",
+      "mk-a3031cb90434",
+      "mk-3c0db21cda05"
+     ],
+     "dx": [
+      "mk-4776e4fb1a6d"
+     ],
+     "guide": [
+      "mk-085af8e1ff0b"
+     ]
+    }
    }
   },
   {
@@ -9846,7 +10409,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 25,
+     "n": 20,
      "items": [
       "06f2e342-dae2-43f3-ad99-f1702e65634d",
       "25faba55-5d8e-42fd-ac6d-cd6d0f5444d3",
@@ -9871,7 +10434,7 @@
      ]
     },
     "aet": {
-     "n": 81,
+     "n": 21,
      "items": [
       "0d82eb9a-f032-429f-9024-56a0cbe2fdf3",
       "0e1f2025-dfa7-4620-844e-7dd60f0de85b",
@@ -9892,7 +10455,8 @@
       "72a9be45-1c1a-42e4-8147-3f3f49ccfbc2",
       "78701808-6337-435e-96ef-1fbc29861af3",
       "7c766808-e39a-497e-aca2-bd880626f351",
-      "7df170b2-9f13-4ebb-bf1a-b4b214f22e63"
+      "7df170b2-9f13-4ebb-bf1a-b4b214f22e63",
+      "mk-1d2d379437fe"
      ]
     },
     "path": {
@@ -9903,7 +10467,7 @@
      ]
     },
     "clin": {
-     "n": 132,
+     "n": 21,
      "items": [
       "06f5929f-e516-4bbe-9b26-d5266a7d5e30",
       "07e3450b-b8e9-4904-9b65-8f2d4a0cdaf0",
@@ -9924,7 +10488,8 @@
       "39e6cda5-d6dd-4cf0-bbfe-cc8bb0b73f3c",
       "3a4d3273-8490-4f63-8ee8-47983b66f78e",
       "3b59e8ac-7cb1-4613-89c1-e17fcb6b87a5",
-      "3f8af85e-ab37-4166-8a00-1bfef605431b"
+      "3f8af85e-ab37-4166-8a00-1bfef605431b",
+      "mk-2fd369573acf"
      ]
     },
     "comp": {
@@ -9947,7 +10512,7 @@
      ]
     },
     "inv": {
-     "n": 33,
+     "n": 20,
      "items": [
       "3921f1d3-592c-4233-8fed-2ed2e937e2d2",
       "6b3fbab5-0329-4080-bc0e-69784483eeb9",
@@ -9972,7 +10537,7 @@
      ]
     },
     "dx": {
-     "n": 72,
+     "n": 21,
      "items": [
       "033b4baf-96d6-4f66-9dcd-99524c63e86d",
       "06ae0c41-d9ff-4f79-af9a-5e7e2b951670",
@@ -9993,7 +10558,8 @@
       "0793dae8-2aa1-4079-837a-9e78976814cd",
       "086cd30e-0ed9-4b7b-9346-38529b1445b8",
       "0e732f27-1c08-4936-a9e1-55824c298415",
-      "10cf727f-9e74-46c9-b32c-03d39a6422f1"
+      "10cf727f-9e74-46c9-b32c-03d39a6422f1",
+      "mk-701ec75f0996"
      ]
     },
     "ddx": {
@@ -10003,7 +10569,7 @@
      ]
     },
     "rx": {
-     "n": 95,
+     "n": 20,
      "items": [
       "1c6e3d80-8703-43b8-8e3f-22d95ab00716",
       "286bb7cc-6e4d-47df-96d1-a09d65f16244",
@@ -10071,18 +10637,32 @@
      ]
     },
     "img": {
-     "n": 1,
-     "items": [
-      "c19cdef6-07a7-478d-8aee-5a2d9d4f9399"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 111,
+   "unassigned": 112,
    "fetched": 590,
    "coverage": {
     "total": 14,
-    "covered": 14,
-    "gaps": []
+    "covered": 13,
+    "gaps": [
+     "img"
+    ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-1d2d379437fe"
+     ],
+     "clin": [
+      "mk-2fd369573acf"
+     ],
+     "dx": [
+      "mk-701ec75f0996"
+     ]
+    }
    }
   },
   {
@@ -10220,7 +10800,7 @@
      ]
     },
     "aet": {
-     "n": 129,
+     "n": 20,
      "items": [
       "01190c4d-ba38-4992-a1cd-e7ee9a69a826",
       "08ddf9a7-226f-401f-96f0-534a8ce3d8b0",
@@ -10245,7 +10825,7 @@
      ]
     },
     "path": {
-     "n": 56,
+     "n": 20,
      "items": [
       "05b15218-e934-4e06-96fe-43c081a795ac",
       "11a6ee3b-13e3-45b4-913f-054e0d9ea677",
@@ -10350,7 +10930,7 @@
      ]
     },
     "rx": {
-     "n": 615,
+     "n": 21,
      "items": [
       "0189c0d4-f07b-4eac-af39-9d59fde71109",
       "019f722e-2b58-4cbd-ae88-a38c1a7efd34",
@@ -10371,7 +10951,8 @@
       "20728012-9be7-40e6-9bc8-a0a96620de5c",
       "21597709-3c1f-414d-b7b6-6a2945f49574",
       "23d93fb5-f562-42ad-97c4-d1a78eda624e",
-      "253f5f05-3641-41ef-9d3d-40fdbfa3f63d"
+      "253f5f05-3641-41ef-9d3d-40fdbfa3f63d",
+      "mk-289b9a9ed62f"
      ]
     },
     "prog": {
@@ -10379,7 +10960,7 @@
      "items": []
     },
     "prev": {
-     "n": 24,
+     "n": 20,
      "items": [
       "0e832f9e-dff2-4c1e-bf47-2b4d7838df10",
       "3d43296f-c18c-49d3-a4d0-67316b0aa7bc",
@@ -10442,6 +11023,14 @@
      "prog",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "rx": [
+      "mk-289b9a9ed62f"
+     ]
+    }
    }
   },
   {
@@ -10547,7 +11136,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 39,
+     "n": 23,
      "items": [
       "02686e88-16b5-431a-b436-7c4c783b0f9e",
       "08227ec4-cd97-404e-b792-326f1b485e87",
@@ -10568,7 +11157,10 @@
       "5ac6c771-f384-4bf9-a868-fa2ff03d0818",
       "5be04934-e75c-4b10-9dc0-fa583efb77ed",
       "65c317e6-402f-43a8-bfd8-528254726026",
-      "6a4039c5-e372-49bd-b2a3-024d88c8a6b5"
+      "6a4039c5-e372-49bd-b2a3-024d88c8a6b5",
+      "mk-8e59cda77856",
+      "mk-d74272bc47ec",
+      "mk-83da3c4c7357"
      ]
     },
     "aet": {
@@ -10583,7 +11175,7 @@
      "items": []
     },
     "clin": {
-     "n": 7,
+     "n": 9,
      "items": [
       "03472aac-64ce-4928-85c9-00b7645cf86f",
       "38fca7d8-3ec0-4783-b61c-9a812c69e48d",
@@ -10591,7 +11183,9 @@
       "8b85aac5-b7d8-4d51-a8e3-3335401d4c24",
       "941d7b08-d7c9-4dc1-88a5-1e614af0ee2c",
       "ab807dfd-518c-4dbe-963b-0287f46ac054",
-      "afd5ce7d-6fe8-4851-8c0b-28e78f43a6e5"
+      "afd5ce7d-6fe8-4851-8c0b-28e78f43a6e5",
+      "mk-f94409ea2f6b",
+      "mk-7a2f726947c2"
      ]
     },
     "comp": {
@@ -10599,7 +11193,7 @@
      "items": []
     },
     "inv": {
-     "n": 149,
+     "n": 22,
      "items": [
       "01456a5d-f686-4b5c-b82c-47782fe0a4dd",
       "025ab57f-f74c-418e-9211-63a4036c7038",
@@ -10620,11 +11214,13 @@
       "1cecbafb-49b4-423c-a3dc-387058cb433f",
       "1d92cf41-96d5-45e9-bfcf-8c164e982074",
       "2003e517-e1e0-4c76-924a-bb547068b33a",
-      "224dfdde-ee01-4435-bc49-e638e5a33a5c"
+      "224dfdde-ee01-4435-bc49-e638e5a33a5c",
+      "mk-9e115411e7e3",
+      "mk-f6afd34052c0"
      ]
     },
     "dx": {
-     "n": 27,
+     "n": 22,
      "items": [
       "09b74fb5-bfe4-4334-9f47-d227386939df",
       "187797ac-19f4-4c6d-9419-7d894c8fd4d6",
@@ -10645,7 +11241,9 @@
       "a557df61-2140-403f-ab4e-d1e238ad9d99",
       "c9a5c855-f2ba-4e83-85b6-9e977eabe11a",
       "cc4d97ae-cddb-478d-838d-20fe991422e9",
-      "dd96146f-a6bf-4867-819c-0dc38751bb56"
+      "dd96146f-a6bf-4867-819c-0dc38751bb56",
+      "mk-1c0247152094",
+      "mk-a8da969c5b6c"
      ]
     },
     "ddx": {
@@ -10659,15 +11257,17 @@
      ]
     },
     "prog": {
-     "n": 3,
+     "n": 5,
      "items": [
       "299f10cc-f1a9-45da-866d-f62042eb5789",
       "38326e13-b11a-4283-9daf-054a16af2fd4",
-      "85cb1f96-f234-4dd7-83e5-a15f5267c508"
+      "85cb1f96-f234-4dd7-83e5-a15f5267c508",
+      "mk-7e6dacc17105",
+      "mk-35555f573034"
      ]
     },
     "prev": {
-     "n": 32,
+     "n": 23,
      "items": [
       "07bc33e7-c0b5-4d74-8fe0-dc77e8a70bc7",
       "0d8d840e-e7f4-4067-aa87-ef06881255f5",
@@ -10688,7 +11288,10 @@
       "8f438c6c-b9c9-48de-ba67-3b6c16ee9c4b",
       "90cba5be-e1b9-4860-b21b-c6cac5b50621",
       "9d710e4c-ad73-4d47-bbd6-dbb064ea7014",
-      "a580c38a-c307-41f6-96de-79a69bac897a"
+      "a580c38a-c307-41f6-96de-79a69bac897a",
+      "mk-c03c689be060",
+      "mk-42ef5a927b7b",
+      "mk-6e3d21715d8e"
      ]
     },
     "guide": {
@@ -10705,22 +11308,52 @@
      ]
     },
     "img": {
-     "n": 1,
-     "items": [
-      "25db45c8-ad16-4f5a-be2d-4396a201485e"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 8,
+   "unassigned": 9,
    "fetched": 272,
    "coverage": {
     "total": 14,
-    "covered": 11,
+    "covered": 10,
     "gaps": [
      "path",
      "comp",
-     "ddx"
+     "ddx",
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "def-epi": [
+      "mk-8e59cda77856",
+      "mk-d74272bc47ec",
+      "mk-83da3c4c7357"
+     ],
+     "clin": [
+      "mk-f94409ea2f6b",
+      "mk-7a2f726947c2"
+     ],
+     "inv": [
+      "mk-9e115411e7e3",
+      "mk-f6afd34052c0"
+     ],
+     "dx": [
+      "mk-1c0247152094",
+      "mk-a8da969c5b6c"
+     ],
+     "prog": [
+      "mk-7e6dacc17105",
+      "mk-35555f573034"
+     ],
+     "prev": [
+      "mk-c03c689be060",
+      "mk-42ef5a927b7b",
+      "mk-6e3d21715d8e"
+     ]
+    }
    }
   },
   {
@@ -10842,14 +11475,15 @@
      ]
     },
     "path": {
-     "n": 2,
+     "n": 3,
      "items": [
       "7d52bb13-cce5-42fb-8ca1-afca426604fb",
-      "fa962efe-7a98-4af3-aab9-77a271699bda"
+      "fa962efe-7a98-4af3-aab9-77a271699bda",
+      "mk-e6755b037494"
      ]
     },
     "clin": {
-     "n": 7,
+     "n": 9,
      "items": [
       "573ca804-ae8b-44fd-ae01-14ae97af8af1",
       "6f20fca1-2b60-4e9d-a035-9ec7c8bce762",
@@ -10857,7 +11491,9 @@
       "d637e2c8-fc11-4907-863d-be6117a19d99",
       "dbaa3ae8-25b9-4e4b-a7d4-b19104b78b22",
       "eac55df6-440b-4e56-8928-83c91fdce185",
-      "ec109e50-48ad-4255-aa36-5cc9cbbfc1f2"
+      "ec109e50-48ad-4255-aa36-5cc9cbbfc1f2",
+      "mk-809c6559432c",
+      "mk-77ab781e72ba"
      ]
     },
     "comp": {
@@ -10895,7 +11531,7 @@
      "items": []
     },
     "rx": {
-     "n": 227,
+     "n": 23,
      "items": [
       "0073d328-e4a7-42fe-9197-74aafc728830",
       "039b8495-950f-4d1d-a350-e9ae02d086f6",
@@ -10916,7 +11552,10 @@
       "1286873c-5682-4785-b86c-69aa63962f2d",
       "13780ba3-12ad-4419-9efa-aa5b3905bc0b",
       "1397b13d-0695-4b87-b583-7cbd1c7f9bd8",
-      "151de014-6d9c-4caf-bdff-e96f214ac8d8"
+      "151de014-6d9c-4caf-bdff-e96f214ac8d8",
+      "mk-ad249e4d37ce",
+      "mk-32904149106f",
+      "mk-78060b4cc7be"
      ]
     },
     "prog": {
@@ -10959,6 +11598,23 @@
      "pearl",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "path": [
+      "mk-e6755b037494"
+     ],
+     "clin": [
+      "mk-809c6559432c",
+      "mk-77ab781e72ba"
+     ],
+     "rx": [
+      "mk-ad249e4d37ce",
+      "mk-32904149106f",
+      "mk-78060b4cc7be"
+     ]
+    }
    }
   },
   {
@@ -11068,7 +11724,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 32,
+     "n": 20,
      "items": [
       "18335b72-0fba-40c1-874a-e00d860259cb",
       "1e3726d0-8064-4ef9-bcc6-5f5cc1dd79db",
@@ -11093,7 +11749,7 @@
      ]
     },
     "aet": {
-     "n": 83,
+     "n": 20,
      "items": [
       "02822b49-7e2e-4242-be13-00ea86d52dac",
       "0540ff8d-5847-493d-b5db-ea4bb8849329",
@@ -11137,7 +11793,7 @@
      ]
     },
     "clin": {
-     "n": 66,
+     "n": 20,
      "items": [
       "03bf6be6-72e4-4bf5-b5fc-81c294d23dee",
       "0f720d39-14de-4200-b2a2-1c7b08260d53",
@@ -11177,7 +11833,7 @@
      ]
     },
     "inv": {
-     "n": 99,
+     "n": 23,
      "items": [
       "04cba066-95aa-449d-b740-f99380a013a9",
       "08f5d6e5-8134-4d94-afec-ff9f7f648a9d",
@@ -11198,11 +11854,14 @@
       "438bf93a-d441-4291-ac94-041d058823d7",
       "4591d835-2eb2-405b-9a9d-547118937649",
       "45a9957a-1574-431d-b2f7-cdaf4f3d19de",
-      "47d48d6c-6314-4917-be3b-6d78c4164e93"
+      "47d48d6c-6314-4917-be3b-6d78c4164e93",
+      "mk-c4e2433d94aa",
+      "mk-f0aa5a7a095e",
+      "mk-34373e67d4df"
      ]
     },
     "dx": {
-     "n": 64,
+     "n": 20,
      "items": [
       "03bb358e-f202-4541-bc03-c927dd4c0441",
       "05ebc374-7a11-4211-9641-37cbf0503bfb",
@@ -11236,7 +11895,7 @@
      ]
     },
     "rx": {
-     "n": 146,
+     "n": 21,
      "items": [
       "0061b25f-6f69-4591-b5b4-342a3db13274",
       "03f9d7f7-e479-43cc-b5fe-9b154a52bc8e",
@@ -11257,11 +11916,12 @@
       "29380deb-8d7c-4c99-8e92-9ec38aa87e1f",
       "298e0e77-d018-499a-87a0-d42e76b75393",
       "2ade9c27-bff5-4935-940b-bb8c5a7b5ede",
-      "2bc823c0-4629-4e52-8ffa-b878be4d7c24"
+      "2bc823c0-4629-4e52-8ffa-b878be4d7c24",
+      "mk-da34770c79bf"
      ]
     },
     "prog": {
-     "n": 23,
+     "n": 20,
      "items": [
       "02cb1dae-e6af-4b7e-9334-51a59df81536",
       "035f31b5-49d9-4cda-8447-5a8148ba54f9",
@@ -11310,18 +11970,31 @@
      ]
     },
     "img": {
-     "n": 1,
-     "items": [
-      "b8611cc2-ccc3-4ac7-9e5e-ca7fa40211d5"
-     ]
+     "n": 0,
+     "items": []
     }
    },
-   "unassigned": 90,
+   "unassigned": 91,
    "fetched": 641,
    "coverage": {
     "total": 14,
-    "covered": 14,
-    "gaps": []
+    "covered": 13,
+    "gaps": [
+     "img"
+    ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "inv": [
+      "mk-c4e2433d94aa",
+      "mk-f0aa5a7a095e",
+      "mk-34373e67d4df"
+     ],
+     "rx": [
+      "mk-da34770c79bf"
+     ]
+    }
    }
   },
   {
@@ -11434,16 +12107,19 @@
      ]
     },
     "aet": {
-     "n": 3,
+     "n": 4,
      "items": [
       "1dc5d458-6fca-4cd7-bc7b-6659819b9eb2",
       "5b0287fc-7e96-444f-9686-c9ea4407b98a",
-      "e4acb1dc-f973-47d4-97ab-6cbf8b744075"
+      "e4acb1dc-f973-47d4-97ab-6cbf8b744075",
+      "mk-0924f6b94f6f"
      ]
     },
     "path": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-6217bc39286b"
+     ]
     },
     "clin": {
      "n": 1,
@@ -11452,22 +12128,27 @@
      ]
     },
     "comp": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-75aa73718d08"
+     ]
     },
     "inv": {
-     "n": 4,
+     "n": 6,
      "items": [
       "5b010840-6b82-4d01-a65e-abd6ca61c438",
       "a22f6b92-23b8-4095-9558-a3d6434a9e84",
       "c351ebc6-e76b-40e9-93a1-4a4036616150",
-      "e156c0bd-1a4d-4395-97a2-05979dcf8dac"
+      "e156c0bd-1a4d-4395-97a2-05979dcf8dac",
+      "mk-809f1c5814ff",
+      "mk-cccace38c633"
      ]
     },
     "dx": {
-     "n": 1,
+     "n": 2,
      "items": [
-      "02f63f07-f870-4107-bafc-455eafb12ca6"
+      "02f63f07-f870-4107-bafc-455eafb12ca6",
+      "mk-e63867dfeae9"
      ]
     },
     "ddx": {
@@ -11475,7 +12156,7 @@
      "items": []
     },
     "rx": {
-     "n": 12,
+     "n": 13,
      "items": [
       "036b304c-1cba-4a87-89bc-701934e56aa9",
       "1f89a37b-99d7-4837-9169-3fc3f0547cbf",
@@ -11488,23 +12169,26 @@
       "a5f415f4-c085-46c1-936b-4550065920f9",
       "ae9ab9aa-b77f-4c2b-babe-fa461c62fb3c",
       "b0c8aea5-d978-4977-b76e-478cc6fb8cef",
-      "b3159ebc-ecaa-47d2-b7c0-1d0c263892ad"
+      "b3159ebc-ecaa-47d2-b7c0-1d0c263892ad",
+      "mk-47c186644806"
      ]
     },
     "prog": {
-     "n": 2,
+     "n": 3,
      "items": [
       "28ae332c-7fc7-47f9-b814-ff4720f2ce49",
-      "a191f07b-72ae-413d-90a1-f40b730b602c"
+      "a191f07b-72ae-413d-90a1-f40b730b602c",
+      "mk-9e327aacd1aa"
      ]
     },
     "prev": {
-     "n": 4,
+     "n": 5,
      "items": [
       "17207443-9dad-4492-b0fc-7df779b09cc1",
       "6bd26624-793e-4ec0-94f6-a7dca3d54278",
       "e5b023db-e16c-4deb-8ba3-7b0aa05dc2d3",
-      "ec1501ef-51bf-4bca-8058-6b8ed2b623ed"
+      "ec1501ef-51bf-4bca-8058-6b8ed2b623ed",
+      "mk-88e97e16f4ca"
      ]
     },
     "guide": {
@@ -11528,13 +12212,41 @@
    "fetched": 63,
    "coverage": {
     "total": 14,
-    "covered": 10,
+    "covered": 12,
     "gaps": [
-     "path",
-     "comp",
      "ddx",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-0924f6b94f6f"
+     ],
+     "path": [
+      "mk-6217bc39286b"
+     ],
+     "comp": [
+      "mk-75aa73718d08"
+     ],
+     "inv": [
+      "mk-809f1c5814ff",
+      "mk-cccace38c633"
+     ],
+     "dx": [
+      "mk-e63867dfeae9"
+     ],
+     "rx": [
+      "mk-47c186644806"
+     ],
+     "prog": [
+      "mk-9e327aacd1aa"
+     ],
+     "prev": [
+      "mk-88e97e16f4ca"
+     ]
+    }
    }
   },
   {
@@ -11664,7 +12376,7 @@
      ]
     },
     "aet": {
-     "n": 28,
+     "n": 22,
      "items": [
       "0332f53c-1444-4264-91cc-6b0cf371b18b",
       "0f0691da-78ff-4054-ae1a-4515a9760ce1",
@@ -11685,7 +12397,9 @@
       "8e4f61b0-cd26-4647-913d-136f0d3e6e16",
       "ba22f848-0e6e-4f7e-ad47-e5c230cef4e3",
       "be557c9c-ee2c-4578-80be-c9be9b9fd305",
-      "c98c746f-1732-44b1-9578-a7895bc30c6c"
+      "c98c746f-1732-44b1-9578-a7895bc30c6c",
+      "mk-d1004a081367",
+      "mk-b2d1b5006dc5"
      ]
     },
     "path": {
@@ -11723,11 +12437,13 @@
      ]
     },
     "inv": {
-     "n": 3,
+     "n": 5,
      "items": [
       "2ce43e71-5496-43da-acdd-41cf548dc8a3",
       "c309a7f6-91d5-48ce-bc38-43687a665de7",
-      "d70d5576-f7f5-4340-8a08-834797a916e8"
+      "d70d5576-f7f5-4340-8a08-834797a916e8",
+      "mk-c1b4022c6ba8",
+      "mk-31028915ed35"
      ]
     },
     "dx": {
@@ -11751,7 +12467,7 @@
      "items": []
     },
     "rx": {
-     "n": 33,
+     "n": 20,
      "items": [
       "03d4ccc4-5fe0-4b0e-a63a-9656f203f61a",
       "16af5f0c-910f-49ac-ab59-4a81c6486349",
@@ -11813,7 +12529,7 @@
      ]
     },
     "pearl": {
-     "n": 39,
+     "n": 20,
      "items": [
       "028d5d73-b4d4-4e70-80b6-97f20a250e80",
       "041d0902-e965-4ea0-90a2-bd28ad44006f",
@@ -11851,6 +12567,19 @@
      "ddx",
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-d1004a081367",
+      "mk-b2d1b5006dc5"
+     ],
+     "inv": [
+      "mk-c1b4022c6ba8",
+      "mk-31028915ed35"
+     ]
+    }
    }
   },
   {
@@ -11962,7 +12691,7 @@
      ]
     },
     "aet": {
-     "n": 41,
+     "n": 21,
      "items": [
       "00406793-d8fa-4b9c-8fe1-a84a2dca7229",
       "04140f89-671e-4375-8f0f-2918a6454ee8",
@@ -11983,11 +12712,12 @@
       "5ba62b8f-9bcd-4646-b9b0-59c0b5374ff6",
       "64c4e759-e16a-44a0-b29a-509f23ed5a80",
       "6e41daf2-4d0f-47f9-ae33-44cbf14458ac",
-      "71ecda0f-c41e-4aa2-b07d-fdaeb031fc82"
+      "71ecda0f-c41e-4aa2-b07d-fdaeb031fc82",
+      "mk-121163b826db"
      ]
     },
     "path": {
-     "n": 29,
+     "n": 20,
      "items": [
       "0127f7b0-0c1a-4dec-8ec5-3974352d9ac7",
       "04de28e0-909f-44d9-aa05-9a5a4f7b650d",
@@ -12012,7 +12742,7 @@
      ]
     },
     "clin": {
-     "n": 53,
+     "n": 20,
      "items": [
       "0e1ea89e-9d35-48e5-b30e-a84de545e747",
       "0e6b7a38-aea0-4d11-aaee-e1d2afbf0562",
@@ -12037,11 +12767,13 @@
      ]
     },
     "comp": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-800668c491aa"
+     ]
     },
     "inv": {
-     "n": 66,
+     "n": 20,
      "items": [
       "01e71a32-6e43-4106-8a02-26f6bb12f85a",
       "05ee5e97-b228-47a1-bf1b-9ced016b5989",
@@ -12097,7 +12829,7 @@
      ]
     },
     "rx": {
-     "n": 12,
+     "n": 14,
      "items": [
       "0b86db79-943d-4699-8a53-0d5b8e396007",
       "19872619-fc4a-45cf-89b9-c10687e4b1b7",
@@ -12110,12 +12842,16 @@
       "8f69ac4e-5229-44e8-92d8-76eaa4f340c6",
       "a1d1e97d-4291-4a38-b829-eb6dd3e8d5c1",
       "db175a52-bf16-40b7-8cbc-882eb2cd34ac",
-      "e511d4b3-e919-4dee-b5a0-7a1d84b3b5a1"
+      "e511d4b3-e919-4dee-b5a0-7a1d84b3b5a1",
+      "mk-f06d21e24427",
+      "mk-79fca85db0bf"
      ]
     },
     "prog": {
-     "n": 0,
-     "items": []
+     "n": 1,
+     "items": [
+      "mk-0ade87d9c875"
+     ]
     },
     "prev": {
      "n": 2,
@@ -12125,10 +12861,11 @@
      ]
     },
     "guide": {
-     "n": 2,
+     "n": 3,
      "items": [
       "4b38f9e3-d604-4fe6-900b-9606ceebeec3",
-      "79ad80e2-c2d7-45d1-89f2-0bf878a82dfd"
+      "79ad80e2-c2d7-45d1-89f2-0bf878a82dfd",
+      "b23ca1af-7ce7-453f-9304-828ffc22ee10"
      ]
     },
     "pearl": {
@@ -12143,21 +12880,36 @@
      ]
     },
     "img": {
-     "n": 1,
-     "items": [
-      "b23ca1af-7ce7-453f-9304-828ffc22ee10"
-     ]
+     "n": 0,
+     "items": []
     }
    },
    "unassigned": 104,
    "fetched": 338,
    "coverage": {
     "total": 14,
-    "covered": 12,
+    "covered": 13,
     "gaps": [
-     "comp",
-     "prog"
+     "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {
+     "aet": [
+      "mk-121163b826db"
+     ],
+     "comp": [
+      "mk-800668c491aa"
+     ],
+     "rx": [
+      "mk-f06d21e24427",
+      "mk-79fca85db0bf"
+     ],
+     "prog": [
+      "mk-0ade87d9c875"
+     ]
+    }
    }
   },
   {
@@ -12271,7 +13023,7 @@
    ],
    "match": {
     "def-epi": {
-     "n": 49,
+     "n": 20,
      "items": [
       "1b842582-b8b4-4e9e-b8e7-0762666b752c",
       "1bc57225-7192-493b-98a4-d0dfd40bb06d",
@@ -12336,7 +13088,7 @@
      ]
     },
     "clin": {
-     "n": 24,
+     "n": 20,
      "items": [
       "24200963-1923-43f3-b634-3640d9b3ae53",
       "4820f185-3f2d-4f00-9a6d-26c83d5cfa22",
@@ -12418,7 +13170,7 @@
      ]
     },
     "rx": {
-     "n": 57,
+     "n": 20,
      "items": [
       "0381f00d-20ce-43aa-a82b-ba99af94abe7",
       "065afc70-e6ff-46fb-a268-07a41d85c54a",
@@ -12455,7 +13207,7 @@
      ]
     },
     "prev": {
-     "n": 34,
+     "n": 20,
      "items": [
       "145cfa48-63c4-4475-bf55-b47710e2de03",
       "18cbac57-e769-4613-bc31-81bf9e2c3940",
@@ -12510,7 +13262,12 @@
     "gaps": [
      "img"
     ]
+   },
+   "new": {
+    "set": "maiktopic1",
+    "byConcept": {}
    }
   }
- ]
+ ],
+ "overlay": "maiktopic1"
 }
