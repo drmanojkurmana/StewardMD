@@ -122,9 +122,10 @@ test("a busy hospital with a long rota history can still assign: checks read onl
 
 test("a swap needs the colleague to accept and the admin to approve, and is re-checked at approval", async () => {
   await seed();
+  const d = new Date().toISOString().slice(0, 10);
   await call("POST", "roster/shift", { ...O, id: "day", name: "Day", unit: "Ward A", start: "08:00", end: "20:00" }, tok.admin1);
   await call("POST", "roster/shift", { ...O, id: "late", name: "Late", unit: "ICU", start: "14:00", end: "22:00" }, tok.admin1);
-  const a = (await call("POST", "roster/assign", { ...O, identity: "nurse1", date: "2026-09-17", shiftId: "day" }, tok.admin1)).assigned[0];
+  const a = (await call("POST", "roster/assign", { ...O, identity: "nurse1", date: d, shiftId: "day" }, tok.admin1)).assigned[0];
 
   assert.equal((await call("POST", "roster/swap-propose", { ...O, assignmentId: a.id, to: "nurse1" }, tok.nurse2)).error, "not_your_shift", "you cannot give away someone else's shift");
   const p = await call("POST", "roster/swap-propose", { ...O, assignmentId: a.id, to: "nurse2" }, tok.nurse1);
@@ -134,7 +135,7 @@ test("a swap needs the colleague to accept and the admin to approve, and is re-c
   assert.equal((await call("POST", "roster/swap-respond", { ...O, swapId: p.swapId, accept: true }, tok.nurse2)).status, 200);
 
   // Between accepting and approval nurse2 is given an overlapping late shift: the approval must notice.
-  await call("POST", "roster/assign", { ...O, identity: "nurse2", date: "2026-09-17", shiftId: "late" }, tok.admin1);
+  await call("POST", "roster/assign", { ...O, identity: "nurse2", date: d, shiftId: "late" }, tok.admin1);
   const blocked = await call("POST", "roster/swap-approve", { ...O, swapId: p.swapId, approve: true }, tok.admin1);
   assert.equal(blocked.error, "double_booked");
 
@@ -142,6 +143,6 @@ test("a swap needs the colleague to accept and the admin to approve, and is re-c
   await call("POST", "roster/unassign", { ...O, assignmentId: late.id, reason: "Swap instead" }, tok.admin1);
   assert.equal((await call("POST", "roster/swap-approve", { ...O, swapId: p.swapId, approve: true }, tok.admin1)).status, 200);
   const mine = await call("GET", "roster/mine?orgId=org1", null, tok.nurse2);
-  assert.deepEqual(mine.assignments.map((x) => x.date + " " + x.shiftId), ["2026-09-17 day"]);
+  assert.deepEqual(mine.assignments.map((x) => x.date + " " + x.shiftId), [d + " day"]);
   assert.equal((await call("GET", "roster/mine?orgId=org1", null, tok.nurse1)).assignments.length, 0);
 });
