@@ -155,22 +155,30 @@ test("calibration: status and counts per profile, aggregate stats only", () => {
   for (const id of A.profileIds()) assert.doesNotMatch(JSON.stringify(A.profile(id).calibration), /cal-plab1|cal_id|item_ref/);
 });
 
-test("Tests tab: coming exams show format only, no test buttons", () => {
+/* Plan scope (owner 2026-10-12): the Tests tab shows ONLY the selected plan's exam. The old contract listed every
+ * coming exam under "More exam formats" with the "Format available, question bank coming." wall; cross-exam cards
+ * are removed, and a selected coming exam gets one short clean state instead. */
+test("Tests tab: only the plan exam; a coming exam shows one short state, no test buttons", () => {
   const src = fs.readFileSync(new URL("prep-tests.js", ROOT), "utf8");
-  const mkH = (exam) => ({
-    store: () => ({ t2h: [], t2d: {} }), exam: () => ({ id: exam }),
+  const mkH = (exam, pl) => ({
+    store: () => ({ t2h: [], t2d: {}, pl: pl || null }), exam: () => ({ id: exam }),
     ico: () => "", row: () => "", fmt: (n) => String(n), planToday: () => ({ due: 0, left: 0, weak: [] }), pure: {}
   });
   const G = { location: { search: "" }, localStorage: { getItem: () => null }, PREP_ASSESS: A };
   new Function("window", src)(G);
   const usmle = G.PREP_TESTS.testsHtml(mkH("usmle"));
-  assert.match(usmle, /More exam formats/);
-  assert.match(usmle, /Format available, question bank coming/);
-  for (const id of ["usmle-step2-ck", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) assert.ok(usmle.includes('data-p="' + id + '"'), id + " shown");
-  for (const id of ["usmle-step2-ck", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) assert.ok(!usmle.includes('data-p="' + id + '" data-k='), id + " has no test buttons");
+  assert.doesNotMatch(usmle, /More exam formats/);
   assert.ok(usmle.includes('data-p="usmle-step1" data-k='), "Step 1 keeps its test buttons");
+  assert.ok(!usmle.includes('data-p="usmle-step2-ck"'), "the unselected step is gone");
+  for (const id of ["plab-1", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written", "mrcs-part-a"]) assert.ok(!usmle.includes('data-p="' + id + '"'), id + " not listed");
+  const ck = G.PREP_TESTS.testsHtml(mkH("usmle", { exam: "usmle-step2-ck" }));
+  assert.ok(ck.includes('data-p="usmle-step2-ck"'), "the selected coming exam shown");
+  assert.ok(ck.includes("Questions for this exam are being added."), "one short line");
+  assert.ok(!ck.includes("Format available, question bank coming."), "no bold wall of grey text");
+  assert.ok(ck.includes("<summary>Exam format</summary>"), "format notes behind an info row");
+  assert.ok(!ck.includes('data-p="usmle-step2-ck" data-k='), "no test buttons without a bank");
   const pg = G.PREP_TESTS.testsHtml(mkH("neet-pg"));
-  assert.ok(pg.includes("More exam formats") && pg.includes('data-p="amc-mcq"'));
+  assert.ok(!pg.includes("More exam formats") && !pg.includes('data-p="plab-1"'), "no cross-exam cards on NEET-PG either");
 });
 
 test("client and server read the same profiles: MOCKS, SCHEMES, EXAM_PROFILES unchanged", async () => {

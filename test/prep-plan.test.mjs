@@ -195,7 +195,7 @@ test("subjectAction: most due, then the weakest, then the first untouched module
 test("onboarding answers: first open needs onboarding until finished or skipped", () => {
   assert.equal(L.needsOnboard(P.emptyStore()), true);
   assert.equal(L.needsOnboard({ pl: { ob: 1 } }), false);
-  assert.deepEqual(L.EXAM_CHOICES.map((e) => e.id), ["neet-pg", "ini-cet", "neet-ss", "ini-ss", "usmle", "fmge", "plab-1", "mrcs-part-a"]);
+  assert.deepEqual(L.EXAM_CHOICES.map((e) => e.id), ["neet-pg", "ini-cet", "neet-ss", "ini-ss", "usmle-step1", "usmle-step2-ck", "fmge", "plab-1", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written", "mrcs-part-a"]);
   assert.equal(L.choiceOf("ini-cet").tab, "neet-pg");
   assert.deepEqual(L.MINUTES, [15, 30, 60, 90, 120]);
 });
