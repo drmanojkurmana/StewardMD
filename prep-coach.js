@@ -274,7 +274,9 @@
     return "This topic is " + iw + ", and you got " + st.ok + " of " + st.n + " right" + (st.cw ? " with " + st.cw + " confident-wrong" : "") + ".";
   }
   function examLabel(id) {
-    var L = { "neet-pg": "NEET-PG", "ini-cet": "INI-CET", fmge: "FMGE", "neet-ss": "NEET-SS", "ini-ss": "INI-SS", "usmle-step1": "USMLE Step 1" };
+    var L = { "neet-pg": "NEET-PG", "ini-cet": "INI-CET", fmge: "FMGE", "neet-ss": "NEET-SS", "ini-ss": "INI-SS",
+      usmle: "USMLE", "usmle-step1": "USMLE Step 1", "usmle-step2-ck": "USMLE Step 2 CK", "plab-1": "PLAB 1", "amc-mcq": "AMC MCQ",
+      "mccqe-1": "MCCQE Part 1", "mrcp-part1": "MRCP Part 1", "mrcp-part2-written": "MRCP Part 2 Written", "mrcs-part-a": "MRCS Part A" };
     return L[id] || String(id || "your exam");
   }
   /* Rows from one stored attempt record (rows carry ms/ts/conf/pair for one-shot analysis).

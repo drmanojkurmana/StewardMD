@@ -179,6 +179,9 @@
   function online() { return !(G.navigator && G.navigator.onLine === false); }
   function token() { var u = user(); try { return u && u.getIdToken ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function exam() { return H.exam().id; }
+  // Arena lists name the selected plan's exam (INI-SS, Step 2 CK), never the tab it shares; the server calls below
+  // keep the tab id they already use.
+  function planLabel() { try { return H.planExamLabel ? H.planExamLabel() : H.exam().label; } catch (e) { return H.exam().label; } }
   function esc(s) { return H.esc(s); }
   function api(method, path, body) {
     return token().then(function (tok) {
@@ -201,8 +204,9 @@
     H = host;
     if (!online()) return '<div class="pn-group">' + H.row("a-retryhome", H.ico("off"), "Needs a connection", "Arena events and battles run online. Practice works offline.") + "</div>";
     if (!user()) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("user") + '</span><span class="pn-rb"><b>Sign in to compete</b><small>Daily sprints, the weekly grand test and 1v1 battles need a StewardMD account. Practice works without one.</small></span></div></div>';
-    var soon = soonFor(exam());
-    if (soon) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(H.exam().label) + " Arena: coming soon</b><small>Sprints, grand tests and battles " + esc(soon) + ".</small></span></div></div>";
+    var planEx = (H.planProfileId && H.planProfileId()) || exam();
+    var soon = soonFor(planEx) || soonFor(exam());
+    if (soon) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(planLabel()) + " Arena: coming soon</b><small>Sprints, grand tests and battles " + esc(soon) + ".</small></span></div></div>";
     var now = Date.now(), ev = A.events || [], d = pickEvent(ev, "daily", now), w = pickEvent(ev, "weekly", now);
     var line = function (e) { return A.events ? eventLine(e || null, now) : "Loading…"; };
     var cdAttr = function (e) { return e ? ' data-cd="' + esc(e.id) + '"' : ""; };
