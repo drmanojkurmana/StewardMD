@@ -79,8 +79,10 @@ sandbox; documented in PR), share-ID index republished (927 shards, verify
 - PYQ items with no explanation: count still unknown from repo (live PYQ
   file R2-only; explained=942). Needs an R2-side count, then explanation
   batches for items that have none.
-- Profiles: MRCP available (bank-backed); only usmle-step2-ck intentionally
-  left "coming" until its clinical bank merges.
+- Profiles: MRCP available (#1524, bank-backed); usmle-step2-ck flipped to
+  available by #1526 during the rebase (2,316-clinical-vignette pool,
+  verified in profile). NO exam profile has bank.status "coming" left: the
+  coming-section/Arena-gate neutrals are now dormant fallbacks.
 
 ## Spend
 
