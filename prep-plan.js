@@ -30,7 +30,9 @@
     { id: "usmle", tab: "usmle", label: "USMLE", sub: "Clinical vignettes where the bank has them" },
     { id: "fmge", tab: "fmge", label: "FMGE", sub: "Screening test for foreign medical graduates" },
     { id: "plab-1", tab: "plab", label: "PLAB 1", sub: "GMC MLA AKT, 180 questions" },
-    { id: "mrcs-part-a", tab: "mrcs", label: "MRCS Part A", sub: "Intercollegiate MRCS Part A, 300 questions" }
+    { id: "mrcs-part-a", tab: "mrcs", label: "MRCS Part A", sub: "Intercollegiate MRCS Part A, 300 questions" },
+    { id: "amc-mcq", tab: "amc", label: "AMC CAT MCQ", sub: "Australian Medical Council MCQ, 150 questions" },
+    { id: "mccqe-1", tab: "mccqe", label: "MCCQE Part I", sub: "Medical Council of Canada, 230 questions" }
   ];
   var MINUTES = [15, 30, 60, 90, 120];
   /* Blueprints: marks per subject as published. FMGE: NBEMS FMGE October 2026 information bulletin, section 12.2

@@ -26,7 +26,10 @@
     { id: "fmge", label: "FMGE", branch: "mbbs", tag: "fmge", all: true, sec: 60 },
     // UK licensing banks (branch uk; subjects carry per-exam tags).
     { id: "plab", label: "PLAB 1", branch: "uk", tag: "plab-1", sec: 60 },
-    { id: "mrcs", label: "MRCS Part A", branch: "uk", tag: "mrcs-part-a", sec: 60 }
+    { id: "mrcs", label: "MRCS Part A", branch: "uk", tag: "mrcs-part-a", sec: 60 },
+    // International licensing banks (branch intl; subjects carry per-exam tags).
+    { id: "amc", label: "AMC CAT MCQ", branch: "intl", tag: "amc-mcq", sec: 84 },
+    { id: "mccqe", label: "MCCQE Part I", branch: "intl", tag: "mccqe-1", sec: 83 }
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
