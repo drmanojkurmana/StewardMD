@@ -61,6 +61,28 @@ export async function onRequestPost({ request, env }) {
     let hid = {}; try { hid = JSON.parse((await kv.get(HIDDEN_KEY)) || "{}") || {}; } catch (e) { hid = {}; }
     hid[itemId] = now;
     await kv.put(HIDDEN_KEY, JSON.stringify(hid));
+    const reasonsStr = Object.entries(rec.reasons || {}).map(([k, v]) => k + "x" + v).join(", ") || reason;
+    const qKey = `prep:quality:${itemId}`;
+    let qRec = null; try { qRec = JSON.parse((await kv.get(qKey)) || "null"); } catch (e) {}
+    qRec = (qRec && typeof qRec === "object") ? qRec : {
+      item_id: itemId,
+      subject,
+      module: mod,
+      status: "requires_review",
+      status_changed_at: new Date(now).toISOString(),
+      history: []
+    };
+    qRec.status = "requires_review";
+    qRec.status_changed_at = new Date(now).toISOString();
+    qRec.history = Array.isArray(qRec.history) ? qRec.history : [];
+    qRec.history.push({
+      at: new Date(now).toISOString(),
+      by: "prep-flag",
+      action: "flagged",
+      reason: `${rec.n} separate student reports (${reasonsStr})`,
+      source: "student report"
+    });
+    await kv.put(qKey, JSON.stringify(qRec));
   }
   return json({ ok: true, counted: true, n: rec.n });
 }
