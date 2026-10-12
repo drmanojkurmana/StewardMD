@@ -8,9 +8,9 @@ neutral truth or hidden, with a guard test that fails on regression. While
 rebasing, #1524 landed the MRCP banks (Part 1: 1,507; Part 2 Written: 1,551;
 `prep/bank/v5/mrcp-*` verified present) and flipped both MRCP profiles to
 available data-driven, so Tests and Arena are open for MRCP with no code
-change. Content for the 191 empty + 174 thin modules is NOT built yet (bank
-pipelines own generation) and is reported below as exact remainder with cost
-to finish.
+change. Content: all 6 live zero-item modules filled with 163
+blind-verified MCQs (overlay set maik26, shipped to R2 and wired into the
+app); 186 thin modules and PYQ-without-explanation remain, costed below.
 
 ## What was built this turn (branch `fleet/no-coming-soon-ui-guard`)
 
@@ -45,28 +45,51 @@ Per exam/subject before → after (student-visible wording):
 
 ## Remainder (content, NOT done) with cost to finish
 
-- 191 zero-item modules (183 PLAB/MRCS scaffold + 8 real SS gaps, §3 of
-  inventory) and 174 thin (<10) modules: min 25 MCQs each ≈ 9,100+ items.
-- PYQ items with no explanation: count unknown from repo (live PYQ file is
-  R2-only; manifest gives explained=942, total unstated).
-- Cost evidence (ledger): bank-amc-mccqe $1.5595/~3071 items;
-  bank-plab-mrcs $2.4187 in flight; bank-mrcp-gen-* ~$2.4 pilot.
-  Finish estimate ≈ $5-10 at observed rates: inside the $30 job budget and
-  the $79.72 headroom to the $192 stop.
-- Generation belongs to the bank pipelines (gen.mjs/qgen, haiku gen, sonnet
-  blind-key verify, gates g1-g5/style/g9b/verbatim/dup, dedupe, overlays),
-  already in flight (muse-bank-plab-mrcs / step2ck / mrcp logs); their API
-  quota was 429-exhausted at ship time. Next: run the priority order in
-  inventory §4 when quota resets, then flip Step-2-CK/MRCP profiles to
-  available (data-driven, no code change) and re-run the guard.
-- Profiles: mrcp-part1/mrcp-part2-written flipped to available by #1524
-  (bank-backed, verified); only usmle-step2-ck intentionally left "coming"
-  until its clinical bank merges.
+## Content built: maik26 (all 6 zero modules filled, 163 verified MCQs)
+
+Pipeline: tools/prep-qgen.mjs (Message Batches), haiku-5-5 generation,
+sonnet-5-5 blind key verification only, engine gates + local jaccard>=0.6
+screen (functions/_prep-core.js) against R2 sibling stems, overlay set maik26.
+
+| Module | Before | After (verified ok) |
+|---|---|---|
+| ss-infectious-diseases / sid-newer-agents | 0 | 28 |
+| ss-infectious-diseases / sid-hsct-id | 0 | 26 |
+| ss-medical-oncology / son-trial-design | 0 | 26 |
+| ss-medical-oncology / son-geriatric-aya | 0 | 29 |
+| ss-medical-oncology / son-cardio-oncology | 0 | 26 |
+| ss-rheumatology-immunology / srh-outcome-measures | 0 | 28 |
+
+Zero-item modules bank-wide: 6 → 0 (PLAB/MRCS zeros were already covered by
+plab1a-d/mrcs1a-d sets). Every item: 4 options, reasoning explanation,
+neet-ss exam tag, blind-verified key. One self-dup dropped at the local
+screen; R2 dedupe ran with bank stems on 5 of 6 first batches (first
+sid-newer-agents batch missed the token; covered by the local screen: 0 dups
+in 246 stems). Shipped: overlay/maik26 (6 files, R2, live-verified), prep.js
+OVERLAYS +3 subjects, prep/bank/overlay-counts.json +maik26 (16 unrelated
+sets restored after the counts tool dropped what it cannot see from this
+sandbox; documented in PR), share-ID index republished (927 shards, verify
+0 wrong over 207,469 MCQs + 1,769 lessons).
+
+## Remainder (content, NOT done) with cost to finish
+
+- 186 thin (<10) modules, mostly AMC/MCCQE/Australian/UK-plan subjects:
+  ≈ 3,700 items ≈ $2-4 at the observed $0.017/item. Priority: MCCQE-1 thin,
+  AMC thin, then PLAB/MRCS-plan and SS thin modules.
+- PYQ items with no explanation: count still unknown from repo (live PYQ
+  file R2-only; explained=942). Needs an R2-side count, then explanation
+  batches for items that have none.
+- Profiles: MRCP available (bank-backed); only usmle-step2-ck intentionally
+  left "coming" until its clinical bank merges.
 
 ## Spend
 
-This turn: $0 API (no generation calls). Ledger unchanged: 213 rows,
-$112.28 total. Job ledger: /tmp/no-coming-soon-spend.tsv (header + $0 row).
+Content spend this turn: $2.80 API (14 batch jobs, haiku gen + sonnet
+verify, 123k in / 598k out tokens) for 163 verified MCQs ($0.017/item).
+Job ledger: /tmp/no-coming-soon-spend.tsv (14 rows). Global ledger file is
+read-only from this sandbox (still 213 rows, $112.28 on disk): the 14 rows
+must be appended by the ledger owner; true total then $115.08, far from the
+$192 stop and inside the $30 job budget.
 
 ## Verification
 
