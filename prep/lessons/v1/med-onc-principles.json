@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "med-onc-principles",
+ "subject": "medicine",
+ "title": "Immune checkpoint inhibitors: pembrolizumab and immune-related adverse events",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Immune checkpoint inhibitors release the brakes on T cells by blocking **CTLA-4** and the **PD-1/PD-L1** axis. This boosts antitumour immunity but can also break self-tolerance, so **immune-related adverse events** can affect almost any organ. Pembrolizumab is a PD-1 inhibitor used in biomarker-selected anaplastic thyroid carcinoma and is given as 200 mg IV every 3 weeks until progression or toxicity, for up to about 2 years.",
+   "say": "Immune checkpoint inhibitors release the brakes on T cells by blocking CTLA-4 and the PD-1 and PD-L1 axis. This boosts antitumour immunity but can also break self-tolerance, so immune-related adverse events can affect almost any organ. Pembrolizumab is a PD-1 inhibitor used in biomarker-selected anaplastic thyroid carcinoma and is given as 200 mg intravenously every 3 weeks until progression or toxicity, for up to about 2 years.",
+   "vis": null
+  },
+  {
+   "tx": "Manage each event by **grade** and organ, not by cancer stage. Grade 1 events allow continuation with close monitoring. Grade 2 events need the drug withheld and **corticosteroids** started. Severe grade 3 to 4 events call for withholding or permanent discontinuation, depending on organ and reversibility. Steroid-refractory cases may need TNF-alpha blocking antibodies such as infliximab.",
+   "say": "Manage each event by grade and organ, not by cancer stage. Grade 1 events allow continuation with close monitoring. Grade 2 events need the drug withheld and corticosteroids started. Severe grade 3 to 4 events call for withholding or permanent discontinuation, depending on organ and reversibility. Steroid-refractory cases may need TNF-alpha blocking antibodies such as infliximab.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Checkpoint inhibitor",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "1 (mild)",
+      "Continue",
+      "Supportive care, monitor"
+     ],
+     [
+      "2 (moderate)",
+      "Withhold",
+      "Start corticosteroids"
+     ],
+     [
+      "3 to 4 (severe)",
+      "Withhold or stop",
+      "Steroids as cornerstone"
+     ],
+     [
+      "Steroid-refractory",
+      "Stop or hold",
+      "Add TNF-alpha blocker"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Immune myocarditis** is an emergency. It presents with chest pain, arrhythmia, or heart failure and can be rapidly fatal, so check cardiac markers, an ECG, and cardiac imaging early. **Immune colitis** needs infection excluded by stool studies first, then the drug held and steroids given. Adrenal crisis can follow unrecognised hypophysitis, so check cortisol and pituitary hormones.",
+   "say": "Immune myocarditis is an emergency. It presents with chest pain, arrhythmia, or heart failure and can be rapidly fatal, so check cardiac markers, an ECG, and cardiac imaging early. Immune colitis needs infection excluded by stool studies first, then the drug held and steroids given. Adrenal crisis can follow unrecognised hypophysitis, so check cortisol and pituitary hormones.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "New symptom on checkpoint inhibitor"
+     },
+     {
+      "id": "b",
+      "label": "Exclude infection and progression"
+     },
+     {
+      "id": "c",
+      "label": "Grade the event"
+     },
+     {
+      "id": "d",
+      "label": "Steroids and hold drug"
+     },
+     {
+      "id": "e",
+      "label": "Resolved to grade 1: consider rechallenge"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A scan showing progression during an immune event may reflect **pseudoprogression** rather than true cancer growth. In clinically stable patients, therapy may continue once the irAE is controlled. Exam tip: the Nobel prize in 2018 honoured the discovery of cancer therapy through inhibition of negative immune regulation, shared by Allison and Honjo.",
+   "say": "A scan showing progression during an immune event may reflect pseudoprogression rather than true cancer growth. In clinically stable patients, therapy may continue once the immune adverse event is controlled. For the exam, the 2018 Nobel prize in medicine honoured the discovery of cancer therapy through inhibition of negative immune regulation, shared by Allison and Honjo.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ab41d31d-e169-4394-96c9-f8147e5a2e77",
+  "62fd1ef0-2810-47a0-a00f-10b311e3ae19",
+  "9ba605e2-bf6d-427b-a4ed-c8948569ac22"
+ ],
+ "src": [
+  "kb-protocols-thyroid-pembrolizumab",
+  "kb-reference-immunotherapy-toxicity"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 991,
+  "itemN": 61
+ }
+}

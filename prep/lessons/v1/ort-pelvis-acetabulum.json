@@ -1,0 +1,156 @@
+{
+ "v": 1,
+ "module": "ort-pelvis-acetabulum",
+ "subject": "orthopaedics",
+ "title": "Pelvic and acetabular fractures",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Pelvic ring injuries are classified by force direction using the **Young-Burgess** system: **lateral compression**, **anteroposterior compression**, **vertical shear** and combined. Lateral compression is the most common pattern, followed by anteroposterior compression, then acetabular fractures. Stability depends on whether the posterior sacroiliac complex is intact.",
+   "say": "Pelvic ring injuries are classified by the direction of force using the Young-Burgess system. The four groups are lateral compression, anteroposterior compression, vertical shear and combined injuries. Lateral compression is the most common pattern, followed by anteroposterior compression, and then acetabular fractures. Stability depends on whether the posterior sacroiliac complex is intact.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Typical injury",
+     "Stability"
+    ],
+    "rows": [
+     [
+      "Lateral compression I",
+      "Pubic rami and sacral compression",
+      "Stable"
+     ],
+     [
+      "Lateral compression II",
+      "Crescent fracture of iliac wing",
+      "Vertically stable, rotationally unstable"
+     ],
+     [
+      "Anteroposterior compression",
+      "Symphyseal diastasis, open book",
+      "Unstable if posterior injury"
+     ],
+     [
+      "Vertical shear",
+      "Hemipelvis displaced vertically",
+      "Completely unstable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **open book** injury is an anteroposterior compression pattern in which the pubic symphysis separates and the pelvis opens like a book. A **bucket handle** injury is a side-to-side compression pattern. A **Malgaigne** fracture is a same-side combination of pubic rami fracture and sacroiliac or iliac disruption. A **straddle** fracture involves both superior and inferior pubic rami and is unstable.",
+   "say": "An open book injury is an anteroposterior compression pattern in which the pubic symphysis separates and the pelvis opens like a book. A bucket handle injury is a side-to-side compression pattern. A Malgaigne fracture is a same-side combination of pubic rami fracture and sacroiliac or iliac disruption. A straddle fracture involves both superior and inferior pubic rami and is unstable.",
+   "vis": null
+  },
+  {
+   "tx": "Radiological signs of an **unstable pelvis** include posterior sacroiliac displacement greater than 1 cm, avulsion of the sacral or ischial end of the sacrospinous ligament, and avulsion of the L5 transverse process. Symphyseal diastasis of 2 cm alone is not enough; it is unstable only with posterior injury. A gap, rather than impaction, in the posterior ring also signals instability.",
+   "say": "Radiological signs of an unstable pelvis include posterior sacroiliac displacement greater than one centimetre, avulsion of the sacral or ischial end of the sacrospinous ligament, and avulsion of the L5 transverse process. Symphyseal diastasis of two centimetres alone is not enough; it is unstable only with posterior injury. A gap rather than impaction in the posterior ring also signals instability.",
+   "vis": null
+  },
+  {
+   "tx": "Pelvic haemorrhage is mainly venous or from fracture surfaces. Apply a **pelvic binder** at the level of the **greater trochanters**, not the iliac crests, to reduce pelvic volume and stabilise clots. If bleeding persists, use preperitoneal packing, external fixation or **angioembolisation**. Blood at the urethral meatus means a **retrograde urethrogram** is needed before any catheter is passed.",
+   "say": "Pelvic haemorrhage is mainly venous or from fracture surfaces. Apply a pelvic binder at the level of the greater trochanters, not the iliac crests, to reduce pelvic volume and stabilise clots. If bleeding persists, use preperitoneal packing, external fixation or angioembolisation. Blood at the urethral meatus means a retrograde urethrogram is needed before any catheter is passed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Unstable pelvis, shock"
+     },
+     {
+      "id": "b",
+      "label": "Binder at greater trochanters"
+     },
+     {
+      "id": "c",
+      "label": "Persistent bleeding"
+     },
+     {
+      "id": "d",
+      "label": "Packing or external fixation"
+     },
+     {
+      "id": "e",
+      "label": "Angioembolisation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In acetabular fractures, **Judet views** (45-degree oblique views of the affected hip) are supplementary to plain radiographs and are used with the **Letournel** classification. The **iliopubic line** outlines the anterior column and the **ilioischial line** the posterior column. Early complications include sciatic nerve injury and venous thromboembolism. Late complications include **secondary osteoarthritis**, avascular necrosis and heterotopic ossification.",
+   "say": "In acetabular fractures, Judet views are 45-degree oblique views of the affected hip and act as supplementary films alongside plain radiographs. They are used with the Letournel classification. The iliopubic line outlines the anterior column and the ilioischial line outlines the posterior column. Early complications include sciatic nerve injury and venous thromboembolism. Late complications include secondary osteoarthritis, avascular necrosis and heterotopic ossification.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early complications",
+     "points": [
+      "Venous thromboembolism",
+      "Sciatic nerve injury",
+      "Iliofemoral vessel injury",
+      "Malreduction",
+      "Infection"
+     ]
+    },
+    "right": {
+     "title": "Late complications",
+     "points": [
+      "Secondary osteoarthritis",
+      "Avascular necrosis of femoral head",
+      "Heterotopic ossification",
+      "Nonunion",
+      "Posttraumatic arthritis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For **Kocher-Langenbeck** posterior approach, a significant **Morel-Lavallee lesion** is a contraindication because it raises wound infection, dehiscence and secondary healing rates, reaching about 12 percent. An ilioinguinal approach can be used instead. Posterior hip dislocation from a dashboard injury, often with posterior wall fracture, carries sciatic nerve risk. Urgent reduction is needed.",
+   "say": "For the Kocher-Langenbeck posterior approach, a significant Morel-Lavallee lesion is a contraindication, because it raises the rates of wound infection, dehiscence and secondary healing to about twelve percent. An ilioinguinal approach can be used instead. Posterior hip dislocation from a dashboard injury, often with a posterior wall fracture, carries sciatic nerve risk, so urgent reduction is needed.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "869b2292-4aa1-4b94-ac70-f868cd8e1b87",
+  "a3d0f293-76c3-442f-8768-53894889400f",
+  "bd97a47c-0ad8-4fd4-ab94-bee6445f5ea0"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 'Fractures of the pelvis' in Apley's System of Orthopaedics and Fractures (Solomon, Warwick, Nayagam)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 44
+ }
+}

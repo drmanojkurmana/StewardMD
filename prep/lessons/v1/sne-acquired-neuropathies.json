@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "sne-acquired-neuropathies",
+ "subject": "ss-neurology",
+ "title": "Acquired, metabolic and toxic neuropathies: a high-yield overview",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Acquired neuropathies are often length-dependent, so they start in the longest nerves, usually the feet. **Distal symmetric polyneuropathy** is the commonest diabetic neuropathy and typically begins with distal sensory and autonomic fibres, then progresses proximally. About 10 to 20 percent of people already have neuropathy when type 2 diabetes is first diagnosed, so screening at diagnosis is important.",
+   "say": "Acquired neuropathies are often length dependent, so they start in the longest nerves, usually the feet. Distal symmetric polyneuropathy is the commonest diabetic neuropathy and typically begins with distal sensory and autonomic fibres, then progresses proximally. About 10 to 20 percent of people already have neuropathy when type 2 diabetes is first diagnosed, so screening at diagnosis is important.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Length-dependent polyneuropathy",
+     "Mononeuritis multiplex"
+    ],
+    "rows": [
+     [
+      "Pattern",
+      "Symmetric, distal to proximal",
+      "Asymmetric, named nerves"
+     ],
+     [
+      "Onset",
+      "Gradual",
+      "Sequential or simultaneous"
+     ],
+     [
+      "Typical cause",
+      "Diabetes, B12 lack, toxins",
+      "Vasculitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Small fibre neuropathy** presents with burning pain and loss of pain and temperature sensation, while vibration and position sense remain intact. Nerve conduction studies are often normal, so the diagnosis rests on clinical assessment and **skin biopsy** showing reduced intraepidermal nerve fibre density. Sensory ganglionopathy, by contrast, causes profound proprioceptive loss with non-length-dependent distribution.",
+   "say": "Small fibre neuropathy presents with burning pain and loss of pain and temperature sensation, while vibration and position sense remain intact. Nerve conduction studies are often normal, so the diagnosis rests on clinical assessment and skin biopsy showing reduced intraepidermal nerve fibre density. Sensory ganglionopathy, by contrast, causes profound proprioceptive loss with a non length dependent distribution.",
+   "vis": null
+  },
+  {
+   "tx": "**Mononeuritis multiplex** is the hallmark of **vasculitic neuropathy**, caused by inflammation or occlusion of the vasa nervorum. Causing focal ischaemia and axonal loss, it demands prompt workup for systemic vasculitis. Standard initial treatment combines corticosteroids with cyclophosphamide or rituximab to prevent irreversible axonal damage, rather than waiting for the disease to declare itself.",
+   "say": "Mononeuritis multiplex is the hallmark of vasculitic neuropathy, caused by inflammation or occlusion of the vasa nervorum. Causing focal ischaemia and axonal loss, it demands prompt workup for systemic vasculitis. Standard initial treatment combines corticosteroids with cyclophosphamide or rituximab to prevent irreversible axonal damage, rather than waiting for the disease to declare itself.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sequential nerve deficits"
+     },
+     {
+      "id": "b",
+      "label": "Urgent vasculitis workup"
+     },
+     {
+      "id": "c",
+      "label": "Steroids plus cyclophosphamide or rituximab"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diabetic lumbosacral radiculoplexus neuropathy**, also called diabetic amyotrophy, causes acute severe thigh pain followed by proximal weakness and weight loss. It is thought to involve microvasculitis and ischaemia. It typically affects older patients with lower body mass index and better glycaemic control. Diagnosis is clinical, with EMG showing patchy involvement and fibrillation potentials. The course is self-limited, lasting months up to about two years.",
+   "say": "Diabetic lumbosacral radiculoplexus neuropathy, also called diabetic amyotrophy, causes acute severe thigh pain followed by proximal weakness and weight loss. It is thought to involve microvasculitis and ischaemia. It typically affects patients with lower body mass index and better glycaemic control. Diagnosis is clinical, with EMG showing patchy involvement and fibrillation potentials. The course is self limited, lasting months up to about two years.",
+   "vis": null
+  },
+  {
+   "tx": "**Vitamin B12 deficiency** neuropathy can occur without anaemia or macrocytosis, so a normal blood count does not exclude it. Treatment should begin early because at least half of patients keep permanent deficits despite replacement. Screen with B12 and metabolite testing, and check renal function, thyroid hormone and B12 levels in all diabetic neuropathy workups to exclude mimics.",
+   "say": "Vitamin B12 deficiency neuropathy can occur without anaemia or macrocytosis, so a normal blood count does not exclude it. Treatment should begin early because at least half of patients keep permanent deficits despite replacement. Screen with B12 and metabolite testing, and check renal function, thyroid hormone and B12 levels in all diabetic neuropathy workups to exclude mimics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Serum B12 and metabolites",
+      "Confirm deficiency"
+     ],
+     [
+      "Renal function, TSH",
+      "Exclude mimic causes"
+     ],
+     [
+      "Skin biopsy",
+      "Support small fibre diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Entrapment neuropathies** such as **carpal tunnel syndrome** cause focal compression of the median nerve at the wrist, often in patients with diabetes. Hereditary liability to pressure palsies is linked to PMP22 deletion on chromosome 17. Foot drop from common peroneal compression is first managed with an ankle-foot orthosis and physiotherapy, with surgery reserved for failure or progressive deficit.",
+   "say": "Entrapment neuropathies such as carpal tunnel syndrome cause focal compression of the median nerve at the wrist, often in patients with diabetes. Hereditary liability to pressure palsies is linked to PMP22 deletion on chromosome 17. Foot drop from common peroneal compression is first managed with an ankle foot orthosis and physiotherapy, with surgery reserved for failure or progressive deficit.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_0a3a5e0432e3",
+  "q_494495fb96b9",
+  "q_bc3c2bbb4890"
+ ],
+ "src": [],
+ "refs": [
+  "Dyck PJ, Thomas PK (Editors), Peripheral Neuropathy, Chapter Diabetic Neuropathy in Peripheral Neuropathy (Editors Dyck and Thomas)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

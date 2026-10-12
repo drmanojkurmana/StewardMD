@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "sgm-iv-fluids",
+ "subject": "ss-general-medicine",
+ "title": "Intravenous fluid therapy: key principles for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Intravenous fluids correct **deficits**, cover **maintenance** needs and replace ongoing losses. Choose the fluid by the clinical problem, not habit. Crystalloids are the first line for most patients, while colloids have a narrower role. Always reassess volume status before and after each bolus, since overload is as harmful as underfilling.",
+   "say": "Intravenous fluids correct deficits, cover maintenance needs and replace ongoing losses. Choose the fluid by the clinical problem, not by habit. Crystalloids are the first line for most patients, while colloids have a narrower role. Always reassess volume status before and after each bolus, since overload is as harmful as underfilling.",
+   "vis": null
+  },
+  {
+   "tx": "Crystalloids divide into **balanced** and **unbalanced** solutions. Ringer lactate and Plasmalyte contain buffers close to plasma composition and have less chloride than 0.9% saline. Large volumes of 0.9% saline are linked with **hyperchloraemic acidosis** and reduced renal perfusion, which matters in major surgery and trauma. Balanced crystalloids are the usual choice for large resuscitation volumes.",
+   "say": "Crystalloids divide into balanced and unbalanced solutions. Ringer lactate and Plasmalyte contain buffers close to plasma composition and have less chloride than 0.9 percent saline. Large volumes of 0.9 percent saline are linked with hyperchloraemic acidosis and reduced renal perfusion, which matters in major surgery and trauma. Balanced crystalloids are the usual choice for large resuscitation volumes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "0.9% saline",
+     "Ringer lactate / Plasmalyte"
+    ],
+    "rows": [
+     [
+      "Chloride load",
+      "High",
+      "Lower"
+     ],
+     [
+      "Acid-base effect",
+      "Hyperchloraemic acidosis risk",
+      "Buffer-based, less acidosis"
+     ],
+     [
+      "Calcium content",
+      "None",
+      "Ringer lactate has some; Plasmalyte has none"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Colloids such as **albumin** hold fluid within the intravascular space better than crystalloids, so smaller volumes can expand plasma volume. In the ALBIOS trial, albumin added to crystalloid in septic patients did not lower overall mortality compared with crystalloid alone. Albumin therefore remains a reasonable option when large crystalloid volumes are needed, although **balanced crystalloid** is usually the first choice for resuscitation.",
+   "say": "Colloids such as albumin hold fluid within the intravascular space better than crystalloids, so smaller volumes can expand plasma volume. In the ALBIOS trial, albumin added to crystalloid in septic patients did not lower overall mortality compared with crystalloid alone. Albumin therefore remains a reasonable option when large crystalloid volumes are needed, although balanced crystalloid is usually the first choice for resuscitation.",
+   "vis": null
+  },
+  {
+   "tx": "Before giving more fluid, check whether the patient is **fluid responsive**. A passive leg raise test lifts the legs and watches for a rise in stroke volume or cardiac output, a rough bedside guide to fluid responsiveness. A rise suggests the patient will likely benefit from a bolus. No rise suggests more fluid is unlikely to help and may cause harm.",
+   "say": "Before giving more fluid, check whether the patient is fluid responsive. A passive leg raise test lifts the legs and watches for a rise in stroke volume or cardiac output, which is a rough bedside guide to fluid responsiveness. A rise suggests the patient will likely benefit from a bolus. No rise suggests more fluid is unlikely to help and may cause harm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess need for fluid"
+     },
+     {
+      "id": "b",
+      "label": "Passive leg raise"
+     },
+     {
+      "id": "c",
+      "label": "Output rises"
+     },
+     {
+      "id": "d",
+      "label": "Give bolus"
+     },
+     {
+      "id": "e",
+      "label": "Output unchanged"
+     },
+     {
+      "id": "f",
+      "label": "Withhold fluid"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maintenance fluid needs are often estimated with a **weight-based hourly rule**, but the result should be checked against the patient's clinical state rather than applied blindly. In **sodium-sensitive states**, **rapid correction** of serum sodium risks osmotic demyelination, so changes should be gradual and closely monitored. The **SMART** trial suggested **balanced crystalloids** reduce major adverse kidney events in critical illness, whereas **BaSICS** found no mortality difference between balanced solutions and saline, and **PLUS** showed no mortality gain from Plasmalyte over saline.",
+   "say": "Maintenance fluid needs are often estimated with a weight-based hourly rule, but the result should be checked against the patient's clinical state rather than applied blindly. In sodium-sensitive states, rapid correction of serum sodium risks osmotic demyelination, so changes should be gradual and closely monitored. The SMART trial suggested balanced crystalloids reduce major adverse kidney events in critical illness, whereas BaSICS found no mortality difference between balanced solutions and saline, and PLUS showed no mortality gain from Plasmalyte over saline.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_0ed7e18b1029",
+  "q_441007789452",
+  "q_9d9045467748"
+ ],
+ "src": [],
+ "refs": [
+  "Surviving Sepsis Campaign guidelines",
+  "NICE guideline on intravenous fluid therapy in adults in hospital",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 17
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "sgm-research-ethics-qi",
+ "subject": "ss-general-medicine",
+ "title": "Research ethics and quality improvement: core frameworks for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Research ethics governs how human participants are protected in studies. The **Declaration of Helsinki** is the core international document, and it places participant welfare above the interests of science and society. In India, the **ICMR National Ethical Guidelines for Biomedical and Health Research** apply, and every study needs review by an **ethics committee** before it begins. Ethics committee approval must be obtained before enrolment starts.",
+   "say": "Research ethics governs how human participants are protected in studies. The Declaration of Helsinki is the core international document, and it places participant welfare above the interests of science and society. In India, the ICMR National Ethical Guidelines for Biomedical and Health Research apply, and every study needs review by an ethics committee before it begins. Ethics committee approval must be obtained before enrolment starts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Document",
+     "Scope",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Declaration of Helsinki",
+      "International principles for human research",
+      "Welfare of participants comes first"
+     ],
+     [
+      "ICMR National Ethical Guidelines",
+      "Indian biomedical research",
+      "Applies to all studies in India"
+     ],
+     [
+      "Ethics committee",
+      "Independent review body",
+      "Approval needed before enrolment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Informed consent** is the voluntary agreement of a participant after receiving adequate information about a study. The participant must understand the purpose, procedures, risks, benefits and the right to withdraw at any time. Consent is a process, not just a signature on a form. Participants who cannot consent for themselves may need a legally authorised representative, and the ethics committee must approve that arrangement.",
+   "say": "Informed consent is the voluntary agreement of a participant after receiving adequate information about a study. The participant must understand the purpose, procedures, risks, benefits and the right to withdraw at any time. Consent is a process, not just a signature on a form. Participants who cannot consent for themselves may need a legally authorised representative, and the ethics committee must approve that arrangement.",
+   "vis": null
+  },
+  {
+   "tx": "Trial registration and regulation come next. The **Clinical Trials Registry of India (CTRI)** is the national database where interventional trials should be listed before the first participant is enrolled. **Good clinical practice (GCP)** provides the international standard for designing, conducting and reporting trials. In India, the **New Drugs and Clinical Trials Rules** govern trials of new drugs and define the duties of sponsors and investigators.",
+   "say": "Trial registration and regulation come next. The Clinical Trials Registry of India, known as CTRI, is the national database where interventional trials should be listed before the first participant is enrolled. Good clinical practice is the international standard for designing, conducting and reporting trials. In India, the New Drugs and Clinical Trials Rules govern trials of new drugs and define the duties of sponsors and investigators.",
+   "vis": null
+  },
+  {
+   "tx": "Quality improvement uses structured cycles to change practice. The **PDSA cycle** moves through four stages: plan the change, do a small test, study the results, and act to adopt, adapt or abandon. When a patient safety event occurs, a **root cause analysis** looks for system-level causes rather than blaming individuals. Clinical audit compares practice with agreed standards and then acts on the gaps found.",
+   "say": "Quality improvement uses structured cycles to change practice. The PDSA cycle moves through four stages: plan the change, do a small test, study the results, and act to adopt, adapt or abandon. When a patient safety event occurs, a root cause analysis looks for system-level causes rather than blaming individuals. Clinical audit compares practice with agreed standards and then acts on the gaps found.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "P",
+      "label": "Plan"
+     },
+     {
+      "id": "D",
+      "label": "Do"
+     },
+     {
+      "id": "S",
+      "label": "Study"
+     },
+     {
+      "id": "A",
+      "label": "Act"
+     }
+    ],
+    "edges": [
+     [
+      "P",
+      "D"
+     ],
+     [
+      "D",
+      "S"
+     ],
+     [
+      "S",
+      "A"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ethical theory helps frame these decisions. **Deontology** judges acts by duty and rules, while **consequentialism** judges them by outcomes, and **utilitarianism** seeks the greatest good for the greatest number. **Autonomy**, beneficence, non-maleficence and justice remain the four working principles in clinical ethics. Expect exam questions that ask you to match a scenario to the correct school of thought.",
+   "say": "Ethical theory helps frame these decisions. Deontology judges acts by duty and rules, while consequentialism judges them by outcomes, and utilitarianism seeks the greatest good for the greatest number. Autonomy, beneficence, non-maleficence and justice remain the four working principles in clinical ethics. Expect exam questions that ask you to match a scenario to the correct school of thought.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Deontology",
+     "points": [
+      "Duty and rules decide right action",
+      "Intentions matter",
+      "Strict rule-following"
+     ]
+    },
+    "right": {
+     "title": "Consequentialism",
+     "points": [
+      "Outcomes decide right action",
+      "Aims at greatest good",
+      "Utilitarianism is a form"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_7edd9f5b7c72",
+  "q_a76cda544634",
+  "q_b04c9fab4c18"
+ ],
+ "src": [],
+ "refs": [
+  "Declaration of Helsinki (World Medical Association)",
+  "ICMR National Ethical Guidelines for Biomedical and Health Research",
+  "New Drugs and Clinical Trials Rules 2019 (India)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 13
+ }
+}

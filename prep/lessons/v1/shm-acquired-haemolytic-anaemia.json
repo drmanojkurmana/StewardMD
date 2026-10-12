@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "module": "shm-acquired-haemolytic-anaemia",
+ "subject": "ss-haematology",
+ "title": "Acquired haemolytic anaemias: key mechanisms and tests",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **direct antiglobulin test**, or DAT, detects antibody or complement already bound to red cells in vivo. In warm AIHA the DAT is usually positive for IgG, sometimes with C3d. In **paroxysmal cold haemoglobinuria**, the Donath-Landsteiner antibody is IgG and the DAT shows complement alone. Cold agglutinin disease shows complement, mainly C3d, on the cells.",
+   "say": "The direct antiglobulin test, or DAT, detects antibody or complement already bound to red cells in vivo. In warm AIHA the DAT is usually positive for IgG, sometimes with C3d. In paroxysmal cold haemoglobinuria, the Donath-Landsteiner antibody is IgG and the DAT shows complement alone. Cold agglutinin disease shows complement, mainly C3d, on the cells.",
+   "vis": null
+  },
+  {
+   "tx": "Warm AIHA is treated first with **corticosteroids**, and refractory cases may need **rituximab** or **splenectomy**. Cold agglutinin disease is driven by IgM that fixes **complement** at lower temperatures, so the key measure is **cold avoidance**. Complement-directed therapy is reserved for specialist centres when cold disease remains severe despite these steps.",
+   "say": "Warm AIHA is treated first with corticosteroids, and refractory cases may need rituximab or splenectomy. Cold agglutinin disease is driven by IgM that fixes complement at lower temperatures, so the key measure is cold avoidance. Complement-directed therapy is reserved for specialist centres when cold disease remains severe despite these steps.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warm AIHA",
+     "points": [
+      "IgG antibody",
+      "Works at 37 degrees",
+      "Steroids first line",
+      "Rituximab or splenectomy if refractory"
+     ]
+    },
+    "right": {
+     "title": "Cold agglutinin disease",
+     "points": [
+      "IgM antibody",
+      "Works in cold",
+      "Cold avoidance essential",
+      "Complement-directed therapy if severe"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Microangiopathic haemolysis produces **schistocytes** when fibrin strands or microthrombi shear red cells in small vessels. Thrombotic thrombocytopenic purpura is the classic example, caused by deficient ADAMTS13 activity. Paroxysmal nocturnal haemoglobinuria is a clonal stem cell disorder lacking GPI-anchored proteins CD55 and CD59, and is diagnosed by **flow cytometry** using FLAER, CD55 and CD59 on granulocytes.",
+   "say": "Microangiopathic haemolysis produces schistocytes when fibrin strands or microthrombi shear red cells in small vessels. Thrombotic thrombocytopenic purpura is the classic example, caused by deficient ADAMTS13 activity. Paroxysmal nocturnal haemoglobinuria is a clonal stem cell disorder lacking GPI-anchored proteins CD55 and CD59, and is diagnosed by flow cytometry using FLAER, CD55 and CD59 on granulocytes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Microthrombi"
+     },
+     {
+      "id": "b",
+      "label": "Shear stress"
+     },
+     {
+      "id": "c",
+      "label": "Schistocytes"
+     },
+     {
+      "id": "d",
+      "label": "Intravascular haemolysis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug-induced immune haemolysis has two main mechanisms. In **drug adsorption**, the drug binds the red cell membrane and antibody reacts against it; stopping the drug is the essential step. Some drugs instead trigger true autoantibodies. Infections such as **Clostridium perfringens** sepsis can cause severe intravascular haemolysis through lecithinase, and haptoglobin and LDH help confirm the diagnosis.",
+   "say": "Drug-induced immune haemolysis has two main mechanisms. In drug adsorption, the drug binds the red cell membrane and antibody reacts against it; stopping the drug is the essential step. Some drugs instead trigger true autoantibodies. Infections such as Clostridium perfringens sepsis can cause severe intravascular haemolysis through lecithinase, and haptoglobin and LDH help confirm the diagnosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_07fdfa19f915",
+  "q_4e5bb7a83826",
+  "q_c8c2024d710b"
+ ],
+ "src": [],
+ "refs": [
+  "Hoffbrand's Essential Haematology (Hoffbrand, Higgs, Ganeshaguru and Brown)",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 24
+ }
+}

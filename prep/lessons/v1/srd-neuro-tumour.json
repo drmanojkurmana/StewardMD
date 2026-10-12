@@ -1,0 +1,168 @@
+{
+ "v": 1,
+ "module": "srd-neuro-tumour",
+ "subject": "ss-radiology",
+ "title": "Brain tumours and the posterior fossa: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Brain tumours announce themselves in two broad ways. **Generalised** symptoms reflect raised intracranial pressure or hydrocephalus, including a dull headache, sickness, slowed thinking and unsteady walking. **Focal** symptoms, such as limb weakness, language disturbance or a visual field defect, point towards the tumour's location. **Seizures** are common with low-grade gliomas, and every tumour-related fit begins focally. Morning headaches are less typical than many students expect.",
+   "say": "Brain tumours announce themselves in two broad ways. Generalised symptoms reflect raised intracranial pressure or hydrocephalus, including a dull headache, sickness, slowed thinking and unsteady walking. Focal symptoms, such as limb weakness, language disturbance or a visual field defect, point towards the location of the tumour. Seizures are common with low-grade gliomas, and every tumour-related fit begins focally. Morning headaches are less typical than many students expect.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Symptom type",
+     "Typical examples",
+     "What it suggests"
+    ],
+    "rows": [
+     [
+      "Generalised",
+      "Dull headache, sickness, slowed thinking, unsteady gait",
+      "Raised intracranial pressure or hydrocephalus"
+     ],
+     [
+      "Focal",
+      "Limb weakness, aphasia, visual field defect",
+      "Lesion location in the brain"
+     ],
+     [
+      "Seizure",
+      "Fits in low-grade glioma or metastasis",
+      "Focal onset, even if not obvious"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gadolinium-enhanced MRI** is the preferred study for any suspected brain tumour; CT is reserved for patients who cannot have MRI. Malignant tumours usually enhance, while low-grade gliomas often do not and are best seen on **FLAIR**. Meningiomas are extra-axial, dural-based lesions with a dural tail that compress but do not invade brain. Perfusion MRI, spectroscopy and PET help separate tumour progression from treatment necrosis.",
+   "say": "Gadolinium-enhanced MRI is the preferred study for any suspected brain tumour; CT is reserved for patients who cannot have MRI. Malignant tumours usually enhance, while low-grade gliomas often do not and are best seen on FLAIR. Meningiomas are extra-axial, dural-based lesions with a dural tail that compress but do not invade brain. Perfusion MRI, spectroscopy and PET help separate tumour progression from treatment necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Malignant or high-grade",
+     "points": [
+      "Usually enhances with gadolinium",
+      "Central necrosis and white-matter oedema",
+      "Restricted diffusion in many cases"
+     ]
+    },
+    "right": {
+     "title": "Low-grade glioma",
+     "points": [
+      "Usually does not enhance",
+      "Best seen as raised FLAIR signal",
+      "Can present with seizures"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diffuse gliomas are sorted by molecular profile as well as histology, and this shapes both prognosis and treatment choice. **IDH-mutant astrocytomas** keep 1p and 19q intact, whereas **oligodendrogliomas** carry co-deletion of 1p and 19q. **IDH wild-type glioblastoma** sits at the aggressive end of the spectrum, typically as a ring-like enhancing mass with a necrotic centre and possible butterfly extension across the corpus callosum. An **unmethylated MGMT promoter** signals weaker response to temozolomide.",
+   "say": "Diffuse gliomas are sorted by molecular profile as well as histology, and that shapes both prognosis and treatment choice. IDH-mutant astrocytomas keep 1p and 19q intact, whereas oligodendrogliomas carry co-deletion of both. IDH wild-type glioblastoma is the aggressive end of the spectrum, often appearing as a ring-like enhancing mass with a necrotic centre and sometimes extending across the midline. An unmethylated MGMT promoter suggests a weaker response to temozolomide.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Key molecular feature",
+     "Typical survival"
+    ],
+    "rows": [
+     [
+      "IDH-mutant astrocytoma (grade 2)",
+      "IDH mutated, 1p/19q intact",
+      "Around 10 years"
+     ],
+     [
+      "Oligodendroglioma",
+      "IDH mutated, 1p/19q co-deleted",
+      "Over 10 years"
+     ],
+     [
+      "Glioblastoma",
+      "IDH wild-type",
+      "About 15 to 18 months"
+     ],
+     [
+      "H3 K27-altered midline glioma",
+      "H3 K27 alteration",
+      "About 1 year"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Brain metastases lodge at the **grey-white junction** in watershed territory, so about 85% are supratentorial and about 15% lie in the posterior fossa. Lung and breast are the commonest sources, while melanoma has the greatest propensity to seed the brain. Metastasis is about three times more common than primary brain tumours in adults, according to Harrison, though Merck quotes about ten times. A solitary lesion in a cancer patient still needs systemic staging.",
+   "say": "Brain metastases lodge at the grey-white junction in watershed territory, so about 85 percent are supratentorial and about 15 percent lie in the posterior fossa. Lung and breast are the commonest sources, while melanoma has the greatest propensity to seed the brain. Metastasis is about three times more common than primary brain tumours in adults, according to Harrison, though Merck quotes about ten times. A solitary lesion in a cancer patient still needs systemic staging.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Haematogenous spread"
+     },
+     {
+      "id": "b",
+      "label": "Lodges at grey-white junction"
+     },
+     {
+      "id": "c",
+      "label": "About 85% supratentorial"
+     },
+     {
+      "id": "d",
+      "label": "About 15% posterior fossa"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prognosis in neuro-oncology depends on the **tumour grade** and **molecular profile**. Surgically removed meningiomas and schwannomas are often curable. Brain metastases given only **whole-brain radiotherapy** survive a few months, but **stereotactic radiosurgery** controls the lesion in most patients and occasionally cures it. Leptomeningeal spread is treated with palliative intent. Medulloblastoma reaches long-term survival in roughly seven in ten, and the **WNT subgroup** carries the best outlook.",
+   "say": "Prognosis in brain tumours depends on the tumour grade and molecular profile. Meningiomas and schwannomas that are fully removed by surgery can often be cured. When brain metastases are treated with whole brain radiotherapy alone, median survival is only around four to six months. Stereotactic radiosurgery, by contrast, controls the lesion locally in roughly 80 to 90 per cent of cases and sometimes cures it. Leptomeningeal spread is managed with palliative intent. Medulloblastoma achieves long term survival in about seven in ten patients, with the WNT subgroup having the best outlook.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ct-df6a8794e11c",
+  "rad-st-gbm",
+  "ct-25c736093483"
+ ],
+ "src": [
+  "kb-reference-primary-and-metastatic-tumors-of",
+  "kb-reference-glioblastoma",
+  "kb-diseases-brain-tumour"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Merck Manual"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 2498,
+  "itemN": 60
+ }
+}

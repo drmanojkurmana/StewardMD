@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "sid-infection-control",
+ "subject": "ss-infectious-diseases",
+ "title": "Infection prevention and control practices",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Standard precautions** apply to every patient, every time, because any person may carry an infectious agent. They cover hand hygiene, gloves, gowns, masks, eye protection and safe handling of sharps. Hand hygiene is the single most effective measure. The WHO five moments are before patient contact, before aseptic procedures, after body fluid exposure, after patient contact, and after touching the patient's surroundings.",
+   "say": "Standard precautions apply to every patient, every time, because any person may carry an infectious agent. They cover hand hygiene, gloves, gowns, masks, eye protection and safe handling of sharps. Hand hygiene is the single most effective measure. The WHO five moments are before patient contact, before aseptic procedures, after body fluid exposure, after patient contact, and after touching the patient's surroundings.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Moment",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "1",
+      "Before patient contact"
+     ],
+     [
+      "2",
+      "Before aseptic procedure"
+     ],
+     [
+      "3",
+      "After body fluid exposure"
+     ],
+     [
+      "4",
+      "After patient contact"
+     ],
+     [
+      "5",
+      "After touching surroundings"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transmission-based precautions are added on top of standard precautions. **Contact precautions** need gown and gloves and cover organisms such as MRSA, VRE and **Clostridioides difficile**. **Droplet precautions** need a surgical mask and cover large particles that travel roughly up to 1 metre, as in influenza and bacterial meningitis. **Airborne precautions** need a fit-tested N95 and an airborne isolation room for tuberculosis, measles and varicella.",
+   "say": "Transmission-based precautions are added on top of standard precautions. Contact precautions need gown and gloves and cover organisms such as MRSA, VRE and Clostridioides difficile. Droplet precautions need a surgical mask and cover large particles that travel roughly up to 1 metre, as in influenza and bacterial meningitis. Airborne precautions need a fit-tested N95 and an airborne isolation room for tuberculosis, measles and varicella.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Precaution",
+     "PPE and setting"
+    ],
+    "rows": [
+     [
+      "Contact",
+      "Gown and gloves"
+     ],
+     [
+      "Droplet",
+      "Surgical mask, about 1 m"
+     ],
+     [
+      "Airborne",
+      "Fit-tested N95, isolation room"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **N95 respirator** must form a tight seal, with leakage below 10 percent, and filter at least 95 percent of particles of 0.3 micrometres. Staff must complete a fit test before use. Seal checks are done each time it is put on. When removing it, hold the straps rather than the front, and do not touch the mask surface. A surgical mask does not protect against small airborne particles.",
+   "say": "An N95 respirator must form a tight seal, with leakage below 10 percent, and filter at least 95 percent of particles of 0.3 micrometres. Staff must complete a fit test before use. Seal checks are done each time it is put on. When removing it, hold the straps rather than the front, and do not touch the mask surface. A surgical mask does not protect against small airborne particles.",
+   "vis": null
+  },
+  {
+   "tx": "Airborne isolation rooms are kept under **negative pressure** so air flows into the room rather than out. Indian and US guidance both call for at least 12 air changes per hour in such rooms. Doors stay closed and windows stay shut to prevent airflow reversal. After an infectious patient leaves, the room must stand empty for a period of air exchange before cleaning and reuse.",
+   "say": "Airborne isolation rooms are kept under negative pressure so air flows into the room rather than out. Indian and US guidance both call for at least 12 air changes per hour in such rooms. Doors stay closed and windows stay shut to prevent airflow reversal. After an infectious patient leaves, the room must stand empty for a period of air exchange before cleaning and reuse.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Door closed"
+     },
+     {
+      "id": "b",
+      "label": "Negative pressure"
+     },
+     {
+      "id": "c",
+      "label": "12 air changes per hour"
+     },
+     {
+      "id": "d",
+      "label": "Room cleaned and reused"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Spaulding classification** guides cleaning and sterilisation of equipment. Critical items enter sterile tissue or the vascular system and need sterilisation. Semi-critical items touch mucous membranes and need at least high-level disinfection. Non-critical items touch only intact skin and need low-level disinfection or cleaning. **Cohorting** groups patients with the same organism together, and MDRO screening and colonisation pressure guide where resources go.",
+   "say": "Spaulding classification guides cleaning and sterilisation of equipment. Critical items enter sterile tissue or the vascular system and need sterilisation. Semi-critical items touch mucous membranes and need at least high-level disinfection. Non-critical items touch only intact skin and need low-level disinfection or cleaning. Cohorting groups patients with the same organism together, and MDRO screening and colonisation pressure guide where resources go.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Example",
+     "Level needed"
+    ],
+    "rows": [
+     [
+      "Critical",
+      "Surgical instruments",
+      "Sterilisation"
+     ],
+     [
+      "Semi-critical",
+      "Endoscopes",
+      "High-level disinfection"
+     ],
+     [
+      "Non-critical",
+      "Blood pressure cuff",
+      "Low-level disinfection"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_388e172cb37d",
+  "q_0d5502482bca",
+  "q_7bfec3567d8d"
+ ],
+ "src": [],
+ "refs": [
+  "WHO Guidelines on Hand Hygiene in Health Care",
+  "CDC Guideline for Isolation Precautions (Siegel et al.)",
+  "Spaulding classification as described in Disinfection, Sterilization, and Antisepsis in Health Care"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 43
+ }
+}

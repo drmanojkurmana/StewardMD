@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "der-benign-tumours",
+ "subject": "dermatology",
+ "title": "Port-wine stain and capillary malformation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A **port-wine stain** is a capillary malformation present at birth. Unlike an infantile haemangioma, it does not proliferate and does not spontaneously resolve. It is caused by somatic activating mutations, most often in GNAQ, which drive MAPK signalling in endothelial cells. The vessels are structurally abnormal and dilate over time, so the lesion darkens and thickens with age.",
+   "say": "A port-wine stain is a capillary malformation present at birth. Unlike an infantile haemangioma, it does not proliferate and does not spontaneously resolve. It is caused by somatic activating mutations, most often in GNAQ, which drive MAPK signalling in endothelial cells. The vessels are structurally abnormal and dilate over time, so the lesion darkens and thickens with age.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Port-wine stain",
+     "points": [
+      "Present at birth",
+      "Does not proliferate",
+      "Does not involute",
+      "Darkens and thickens with age"
+     ]
+    },
+    "right": {
+     "title": "Infantile haemangioma",
+     "points": [
+      "Appears in early infancy",
+      "Proliferative phase",
+      "Involutes over years",
+      "GLUT1 positive endothelium"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A facial stain in the **V1 distribution** (forehead and upper eyelid) raises concern for **Sturge-Weber syndrome**. This carries leptomeningeal vascular malformation, seizures, and **glaucoma**. Screen with contrast-enhanced brain MRI and ophthalmology review with intraocular pressure measurement. Look for tram-track calcification on imaging.",
+   "say": "A facial stain in the V1 distribution, meaning the forehead and upper eyelid, raises concern for Sturge-Weber syndrome. This carries leptomeningeal vascular malformation, seizures, and glaucoma. Screen with contrast-enhanced brain MRI and ophthalmology review with intraocular pressure measurement. Look for tram-track calcification on imaging.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "V1 facial port-wine stain"
+     },
+     {
+      "id": "b",
+      "label": "Contrast brain MRI"
+     },
+     {
+      "id": "c",
+      "label": "Ophthalmology and intraocular pressure"
+     },
+     {
+      "id": "d",
+      "label": "Seizures, neurology referral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Limb capillary stains that are geographic and well demarcated may signal an overgrowth syndrome, such as **RASA1** capillary malformation-arteriovenous malformation or a **PIK3CA**-related disorder. Overgrowth of soft tissue and bone can occur, especially in segmental facial or limb lesions. Monitor limb length and refer syndromic or extensive disease to a vascular anomalies team.",
+   "say": "Limb capillary stains that are geographic and well demarcated may signal an overgrowth syndrome, such as RASA1 capillary malformation-arteriovenous malformation or a PIK3CA-related disorder. Overgrowth of soft tissue and bone can occur, especially in segmental facial or limb lesions. Monitor limb length and refer syndromic or extensive disease to a vascular anomalies team.",
+   "vis": null
+  },
+  {
+   "tx": "Do not confuse a port-wine stain with a **salmon patch** (naevus simplex), which is transient, pale, and often fades by about two years, except on the nape. A persistent, darkening stain is a port-wine stain and should not be reassured as self-resolving. Keep the **Sturge-Weber** screen in mind for any V1 lesion.",
+   "say": "Do not confuse a port-wine stain with a salmon patch, which is transient, pale, and often fades, except on the nape. A persistent, darkening stain is a port-wine stain and should not be reassured as self-resolving. Keep the Sturge-Weber screen in mind for any V1 lesion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Port-wine stain",
+     "points": [
+      "Persistent lifelong",
+      "Darkens with age",
+      "Needs laser"
+     ]
+    },
+    "right": {
+     "title": "Salmon patch",
+     "points": [
+      "Pale and transient",
+      "Fades, nape may persist",
+      "No treatment needed"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "073b4b52-6fa4-458c-9b51-c05ed2826d70",
+  "8f41e0ba-a885-483e-bde1-9e47da941056",
+  "f764ad5e-a74c-4a1c-aaeb-7f93b209d7e6"
+ ],
+ "src": [
+  "kb-reference-capillary-malformation",
+  "kb-reference-dermatofibroma",
+  "kb-reference-hypertrophic-scar",
+  "kb-reference-keloid",
+  "kb-reference-port-wine-stain"
+ ],
+ "refs": [
+  "Adams and Victor's Principles of Neurology (Ropper, Samuels, Eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 2499,
+  "itemN": 35
+ }
+}

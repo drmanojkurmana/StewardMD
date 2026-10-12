@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "srh-ra-extraarticular",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Extra-articular rheumatoid arthritis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Extra-articular disease occurs in a minority of patients with **rheumatoid arthritis**, most often those with high **rheumatoid factor** titres, anti-CCP positivity and long disease duration. Rheumatoid nodules are the commonest feature, typically on extensor surfaces such as the elbow. Nodules may appear with methotrexate use, known as accelerated nodulosis, which does not signal joint flare. Fever above 38.3 degrees should prompt a search for infection or vasculitis.",
+   "say": "Extra-articular disease occurs in a minority of patients with rheumatoid arthritis, most often those with high rheumatoid factor titres, anti-CCP positivity and long disease duration. Rheumatoid nodules are the commonest feature, typically on extensor surfaces such as the elbow. Nodules may appear with methotrexate use, known as accelerated nodulosis, which does not signal joint flare. Fever above 38.3 degrees should prompt a search for infection or vasculitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point",
+     "Exam clue"
+    ],
+    "rows": [
+     [
+      "Rheumatoid nodule",
+      "Firm subcutaneous lesion over extensor surfaces",
+      "Commonest extra-articular feature"
+     ],
+     [
+      "Accelerated nodulosis",
+      "Sudden nodules during methotrexate therapy",
+      "Benign, no need for biopsy"
+     ],
+     [
+      "Fever above 38.3 C",
+      "Suspect infection or vasculitis first",
+      "Not simple flare"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rheumatoid vasculitis affects small and medium vessels and can cause **mononeuritis multiplex**, with foot drop and sensory change from nerve infarction. **Scleritis** is the most dangerous ocular complication and can threaten vision. **Felty syndrome** combines seropositive erosive arthritis, splenomegaly and neutropenia, and is linked to HLA-DR4. Large granular lymphocyte leukaemia causes neutropenia with CD3, CD8 and CD57 positive T cells.",
+   "say": "Rheumatoid vasculitis affects small and medium vessels and can cause mononeuritis multiplex, with foot drop and sensory change from nerve infarction. Scleritis is the most dangerous ocular complication and can threaten vision. Felty syndrome combines seropositive erosive arthritis, splenomegaly and neutropenia, and is linked to HLA-DR4. Large granular lymphocyte leukaemia causes neutropenia with CD3, CD8 and CD57 positive T cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Felty syndrome",
+     "points": [
+      "Erosive seropositive arthritis",
+      "Splenomegaly",
+      "Neutropenia",
+      "Linked to HLA-DR4"
+     ]
+    },
+    "right": {
+     "title": "LGL leukaemia",
+     "points": [
+      "Clonal CD3 CD8 CD57 T cells",
+      "STAT3 mutation, JAK/STAT activation",
+      "Treat with methotrexate or ciclosporin",
+      "Observe if no cytopenia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnosis of **rheumatoid arthritis** uses the 2010 ACR-EULAR score, where a total of at least 6 defines definite disease. Rheumatoid factor and anti-CCP antibodies support the diagnosis, with anti-CCP offering high specificity. Anti-CarP antibodies may be present when anti-CCP is negative, arising from lysine converted to homocitrulline. Early disease is defined as symptoms under six months. MRI is the most sensitive imaging tool for synovitis and bone marrow oedema.",
+   "say": "Diagnosis of rheumatoid arthritis uses the 2010 ACR-EULAR score, where a total of at least 6 defines definite disease. Rheumatoid factor and anti-CCP antibodies support the diagnosis, with anti-CCP offering high specificity. Anti-CarP antibodies may be present when anti-CCP is negative, arising from lysine converted to homocitrulline. Early disease is defined as symptoms under six months. MRI is the most sensitive imaging tool for synovitis and bone marrow oedema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Polyarthritis with synovitis"
+     },
+     {
+      "id": "b",
+      "label": "ACR-EULAR score 6 or more"
+     },
+     {
+      "id": "c",
+      "label": "Definite RA"
+     },
+     {
+      "id": "d",
+      "label": "Symptoms under 6 months: early RA"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiovascular risk is raised in RA, and the **cardiovascular risk** is driven by systemic inflammation rather than classical factors alone. Median life expectancy is shortened by roughly 7 years in men and 3 years in women. Smoking is the strongest modifiable environmental risk, and it acts synergistically with the **shared epitope** in HLA-DRB1 to raise risk in anti-CCP positive people. Obesity above BMI 30 adds about 30 percent to risk.",
+   "say": "Cardiovascular risk is raised in RA, and the cardiovascular risk is driven by systemic inflammation rather than classical factors alone. Median life expectancy is shortened by roughly 7 years in men and 3 years in women. Smoking is the strongest modifiable environmental risk, and it acts synergistically with the shared epitope in HLA-DRB1 to raise risk in anti-CCP positive people. Obesity above BMI 30 adds about 30 percent to risk.",
+   "vis": null
+  },
+  {
+   "tx": "Juvenile idiopathic arthritis is arthritis before age 16 lasting at least 6 weeks, with other causes excluded. Oligoarticular disease in young girls carries a high risk of chronic anterior **uveitis**, which needs slit lamp screening. Systemic JIA can progress to macrophage activation syndrome with raised ferritin and cytopenias. Polyarticular disease is treated first with methotrexate.",
+   "say": "Juvenile idiopathic arthritis is arthritis before age 16 lasting at least 6 weeks, with other causes excluded. Oligoarticular disease in young girls carries a high risk of chronic anterior uveitis, which needs slit lamp screening. Systemic JIA can progress to macrophage activation syndrome with raised ferritin and cytopenias. Polyarticular disease is treated first with methotrexate.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_20c12ad6d354",
+  "q_3b230b08d091",
+  "q_293274f1f7fb"
+ ],
+ "src": [],
+ "refs": [
+  "2010 ACR-EULAR classification criteria for rheumatoid arthritis",
+  "Kelley and Firestein's Textbook of Rheumatology (Firestein GS, Budd RC, et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 43
+ }
+}

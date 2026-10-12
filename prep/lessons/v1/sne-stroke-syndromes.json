@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "module": "sne-stroke-syndromes",
+ "subject": "ss-neurology",
+ "title": "Ischaemic stroke mechanisms and vascular syndromes",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Ischaemic stroke is classified by mechanism using the **TOAST** system: large artery atherosclerosis, cardioembolism, small vessel (lacunar) disease, other determined causes, and undetermined or cryptogenic causes. Identifying the mechanism guides secondary prevention. Carotid stenosis of about 70 percent points to large artery disease, while atrial fibrillation is the commonest cardioembolic source. Patent foramen ovale is present in about 15 percent of people and is often incidental, so it should not be assumed causal without a full work-up.",
+   "say": "Ischaemic stroke is classified by mechanism using the TOAST system. The five groups are large artery atherosclerosis, cardioembolism, small vessel or lacunar disease, other determined causes, and undetermined or cryptogenic causes. Identifying the mechanism guides secondary prevention. Carotid stenosis of about 70 percent points to large artery disease, while atrial fibrillation is the commonest cardioembolic source. Patent foramen ovale is present in about 15 percent of people and is often incidental, so it should not be assumed to be causal without a full work-up.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TOAST group",
+     "Typical clue",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Large artery atherosclerosis",
+      "Significant stenosis of a major vessel",
+      "70 percent ICA stenosis"
+     ],
+     [
+      "Cardioembolism",
+      "Cardiac source of clot",
+      "Atrial fibrillation"
+     ],
+     [
+      "Small vessel",
+      "Deep, small infarct",
+      "Lacune"
+     ],
+     [
+      "Other determined",
+      "Rare identified cause",
+      "Arterial dissection"
+     ],
+     [
+      "Undetermined",
+      "Work-up incomplete or equivocal",
+      "Cryptogenic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **ischaemic penumbra** is the reversibly dysfunctional tissue surrounding the non-viable infarct core. It is the target of reperfusion therapy. Blood pressure should not be lowered aggressively in the acute phase, because pressure-dependent collateral flow feeds the penumbra. Blood glucose above 200 mg/dL worsens secondary ischaemic injury, so glucose must be checked early with a finger-stick test before thrombolysis.",
+   "say": "The ischaemic penumbra is the reversibly dysfunctional tissue surrounding the non-viable infarct core. It is the target of reperfusion therapy. Blood pressure should not be lowered aggressively in the acute phase, because pressure-dependent collateral flow feeds the penumbra. Blood glucose above 200 mg/dL worsens secondary ischaemic injury, so glucose must be checked early with a finger-stick test before thrombolysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Occlusion"
+     },
+     {
+      "id": "b",
+      "label": "Infarct core"
+     },
+     {
+      "id": "c",
+      "label": "Penumbra"
+     },
+     {
+      "id": "d",
+      "label": "Reperfusion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "Salvage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Posterior circulation** is supplied by the vertebrobasilar system. The posterior cerebral artery usually arises from the basilar artery and supplies the occipital lobe, inferomedial temporal lobe and inferior thalamus. Occipital infarcts usually spare the macula because of dual MCA and PCA supply. A **top of basilar** occlusion can cause bilateral paramedian thalamic and midbrain infarcts, presenting with hypersomnolence and amnesia. Non-contrast CT is insensitive in the posterior fossa, so DWI-MRI is preferred.",
+   "say": "Posterior circulation is supplied by the vertebrobasilar system. The posterior cerebral artery usually arises from the basilar artery and supplies the occipital lobe, inferomedial temporal lobe and inferior thalamus. Occipital infarcts usually spare the macula because of dual supply from the MCA and PCA. A top of basilar occlusion can cause bilateral paramedian thalamic and midbrain infarcts, presenting with hypersomnolence and amnesia. Non-contrast CT is insensitive in the posterior fossa, so DWI-MRI is preferred.",
+   "vis": null
+  },
+  {
+   "tx": "Lateral medullary, or **Wallenberg**, syndrome is usually due to PICA or vertebral artery occlusion. It causes vertigo, hoarseness, dysphagia and ataxia, with ipsilateral facial sensory loss and contralateral pain and temperature loss. Medial medullary syndrome, from paramedian branches, gives contralateral hemiparesis with ipsilateral tongue deviation. Foville syndrome involves the caudal pons and produces ipsilateral CN VI and VII palsy with contralateral hemiparesis. Dejerine-Roussy syndrome is chronic central pain after a thalamic infarct.",
+   "say": "Lateral medullary, or Wallenberg, syndrome is usually due to PICA or vertebral artery occlusion. It causes vertigo, hoarseness, dysphagia and ataxia, with ipsilateral facial sensory loss and contralateral pain and temperature loss. Medial medullary syndrome, from paramedian branches, gives contralateral hemiparesis with ipsilateral tongue deviation. Foville syndrome involves the caudal pons and produces ipsilateral abducens and facial palsy with contralateral hemiparesis. Dejerine-Roussy syndrome is chronic central pain after a thalamic infarct.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lateral medullary",
+     "points": [
+      "PICA or vertebral origin",
+      "Vertigo and dysphagia",
+      "Ipsilateral facial sensory loss",
+      "Contralateral pain loss"
+     ]
+    },
+    "right": {
+     "title": "Medial medullary",
+     "points": [
+      "Paramedian branches",
+      "Contralateral hemiparesis",
+      "Ipsilateral tongue deviation",
+      "Preserved facial sensation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cortical syndromes follow territory. In **MCA** infarcts, contralateral face and arm weakness dominate. **ACA** infarcts cause leg weakness and urinary incontinence. In **PCA** infarcts, contralateral homonymous hemianopia with macular sparing is typical. Right PCA lesions cause prosopagnosia, while left temporal lesions cause amnestic aphasia with preserved repetition. Anton syndrome is denial of cortical blindness after bilateral occipital infarction.",
+   "say": "Cortical syndromes follow territory. In MCA infarcts, contralateral face and arm weakness dominate. ACA infarcts cause leg weakness and urinary incontinence. In PCA infarcts, contralateral homonymous hemianopia with macular sparing is typical. Right PCA lesions cause prosopagnosia, while left temporal lesions cause amnestic aphasia with preserved repetition. Anton syndrome is denial of cortical blindness after bilateral occipital infarction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Territory",
+     "Key feature",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "MCA",
+      "Face and arm weakness",
+      "Aphasia if dominant"
+     ],
+     [
+      "ACA",
+      "Leg weakness",
+      "Urinary incontinence"
+     ],
+     [
+      "PCA",
+      "Hemianopia with macular sparing",
+      "Prosopagnosia if right"
+     ],
+     [
+      "Basilar",
+      "Coma or locked-in",
+      "Top of basilar thalamic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **transient ischaemic attack** is a brief focal deficit without acute infarction on imaging. The **ABCD2 score** stratifies early stroke risk using age, blood pressure, clinical features, duration and diabetes. Mimics such as hypoglycaemia must be excluded in any suspected stroke. Thrombolysis requires finger-stick glucose and brain imaging before treatment, and aspirin is delayed 24 hours after intravenous thrombolysis. Aggressive blood pressure lowering is avoided in the acute phase.",
+   "say": "A transient ischaemic attack is a brief focal deficit without acute infarction on imaging. The ABCD2 score stratifies early stroke risk using age, blood pressure, clinical features, duration and diabetes. Mimics such as hypoglycaemia must be excluded in any suspected stroke. Thrombolysis requires finger-stick glucose and brain imaging before treatment, and aspirin is delayed 24 hours after intravenous thrombolysis. Aggressive blood pressure lowering is avoided in the acute phase.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_fd538b600e2b",
+  "q_473cc05798d5",
+  "q_4f64940ffd9f"
+ ],
+ "src": [],
+ "refs": [
+  "Adams HP et al. Classification of subtype of acute ischemic stroke. Definitions for use in a multicenter clinical trial (TOAST). Stroke 1993",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 38
+ }
+}

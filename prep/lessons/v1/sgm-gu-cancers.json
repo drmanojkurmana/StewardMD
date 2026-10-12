@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "sgm-gu-cancers",
+ "subject": "ss-general-medicine",
+ "title": "Genitourinary Cancers: Prostate, Kidney, Bladder and Testis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Prostate-specific antigen is a **prostate-specific** but not cancer-specific marker. Benign conditions such as **benign prostatic hyperplasia** and prostatitis can raise it. After a radical prostatectomy, PSA should become undetectable; any detectable level suggests residual or recurrent disease. Digital rectal examination findings alone are not diagnostic.",
+   "say": "Prostate specific antigen is prostate specific but not cancer specific. Benign conditions such as benign prostatic hyperplasia and prostatitis can raise it. After a radical prostatectomy, PSA should become undetectable. Any detectable level suggests residual or recurrent disease.",
+   "vis": null
+  },
+  {
+   "tx": "Prostate cancer grading uses the **Gleason grade group**, which runs from 1 to 5. Grade group 1 corresponds to a Gleason score of 6 or less and carries the most favourable risk. Patients with grade group 1 disease can often be reassured rather than treated aggressively. Higher grade groups indicate more aggressive behaviour.",
+   "say": "Prostate cancer grading uses the Gleason grade group, which runs from one to five. Grade group one corresponds to a Gleason score of six or less and carries the most favourable risk. Patients with grade group one disease can often be reassured rather than treated aggressively. Higher grade groups indicate more aggressive behaviour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade group",
+     "Gleason score",
+     "Risk pattern"
+    ],
+    "rows": [
+     [
+      "1",
+      "6 or less",
+      "Most favourable"
+     ],
+     [
+      "2",
+      "3+4 = 7",
+      "Favourable intermediate"
+     ],
+     [
+      "3",
+      "4+3 = 7",
+      "Unfavourable intermediate"
+     ],
+     [
+      "4",
+      "8",
+      "High risk"
+     ],
+     [
+      "5",
+      "9 to 10",
+      "Highest risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal cell carcinoma most often arises from proximal tubule cells, and **clear cell carcinoma** is the commonest subtype. Its driver is usually loss of the **VHL** gene on chromosome 3p25. VHL protein is part of an E3 ubiquitin ligase that degrades HIF, so its loss drives HIF accumulation and angiogenesis. Clear cell tumours are yellow on gross section from lipid content and tend to invade the renal vein.",
+   "say": "Renal cell carcinoma most often arises from proximal tubule cells, and clear cell carcinoma is the commonest subtype. Its driver is usually loss of the VHL gene on chromosome three p twenty five. VHL protein is part of an E3 ubiquitin ligase that degrades HIF, so its loss drives HIF accumulation and angiogenesis. Clear cell tumours look yellow on cut section from lipid content and tend to invade the renal vein.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clear cell RCC",
+     "points": [
+      "Commonest subtype",
+      "VHL loss, 3p25",
+      "Yellow, lipid-rich",
+      "Renal vein invasion"
+     ]
+    },
+    "right": {
+     "title": "Other RCC subtypes",
+     "points": [
+      "Papillary: intermediate risk",
+      "Chromophobe: intercalated cell origin",
+      "Chromophobe: lower metastatic rate",
+      "Oncocytoma: usually benign"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Management of small renal masses depends on size, age and comorbidity. Masses under 4 cm in frail elderly patients may be placed on **active surveillance**, while partial nephrectomy preserves function in T1a disease. Radical nephrectomy removes the kidney, perirenal fat, adrenal and regional nodes. Open radical nephrectomy remains the standard for locally advanced T3 and T4 tumours. Adjuvant sunitinib has shown no survival benefit.",
+   "say": "Management of small renal masses depends on size, age and comorbidity. Masses under four centimetres in frail elderly patients may be placed on active surveillance, while partial nephrectomy preserves function in T1a disease. Radical nephrectomy removes the kidney, perirenal fat, adrenal and regional nodes. Open radical nephrectomy remains the standard for locally advanced T3 and T4 tumours. Adjuvant sunitinib has shown no survival benefit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "Preferred approach"
+    ],
+    "rows": [
+     [
+      "Small mass, frail elderly",
+      "Active surveillance"
+     ],
+     [
+      "T1a, function matters",
+      "Partial nephrectomy"
+     ],
+     [
+      "Locally advanced T3 or T4",
+      "Open radical nephrectomy"
+     ],
+     [
+      "Localised, no adjuvant benefit",
+      "Observation after surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bladder cancer and testicular germ cell tumours complete this module. **Intravesical BCG** is an immunotherapy instilled into the bladder for high-risk non-muscle invasive disease after transurethral resection, reducing recurrence. Testicular germ cell tumours are among the most curable solid cancers, and **seminoma** is typically radiosensitive, while systemic chemotherapy handles disseminated disease.",
+   "say": "Bladder cancer and testicular germ cell tumours finish off this module. Intravesical BCG is an immunotherapy placed directly into the bladder for high risk non muscle invasive disease once the tumour has been resected through the urethra, and it lowers the chance of recurrence. Testicular germ cell tumours rank among the most curable solid cancers. Seminoma tends to respond well to radiotherapy, whereas systemic chemotherapy treats disease that has spread beyond the testis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_2e3c68e79f8c",
+  "q_91dc2b9855e5",
+  "q_cd908db396d7"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guidance on prostate cancer",
+  "NICE guidance on renal and ureteric cancer",
+  "NICE guidance on bladder cancer",
+  "Campbell-Walsh-Wein Urology (Wein et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

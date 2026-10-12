@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "sid-anaerobic-infections",
+ "subject": "ss-infectious-diseases",
+ "title": "Anaerobic and clostridial infections: key principles for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Anaerobic infections** arise from the patient's own flora, mainly mucosal surfaces of the gut, mouth and female genital tract. **Bacteroides fragilis** is the most frequently isolated anaerobe in intra-abdominal infection, despite forming a tiny fraction of colonic flora. Its capsular polysaccharide A drives abscess formation. Foul-smelling pus is only present in about a third to a half of cases, so its absence does not exclude anaerobes.",
+   "say": "Anaerobic infections arise from the patient's own flora, mainly on mucosal surfaces of the gut, mouth and female genital tract. Bacteroides fragilis is the most frequently isolated anaerobe in intra-abdominal infection, despite forming a tiny fraction of colonic flora. Its capsular polysaccharide A drives abscess formation. Foul-smelling pus is present in only about a third to a half of cases, so its absence does not exclude anaerobes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Source",
+      "Patient's own mucosal flora"
+     ],
+     [
+      "Prime isolate",
+      "Bacteroides fragilis"
+     ],
+     [
+      "Odour",
+      "Present in minority of cases"
+     ],
+     [
+      "Culture hazard",
+      "Needs anaerobic transport"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Culture-negative pus with many neutrophils and gram-negative rods suggests **anaerobes** that were lost because of poor transport or handling. Specimens should be sent in anaerobic transport media, and sterile sites such as pleural fluid or aspirated pus are preferred over swabs. Deep needle aspiration gives the most reliable sample. Antibiotics given before sampling can also sterilise cultures.",
+   "say": "Culture-negative pus with many neutrophils and gram-negative rods suggests anaerobes that were lost because of poor transport or handling. Specimens should go in anaerobic transport media, and sterile sites such as pleural fluid or aspirated pus are preferred over swabs. Deep needle aspiration gives the most reliable sample. Antibiotics given before sampling can also sterilise cultures.",
+   "vis": null
+  },
+  {
+   "tx": "**Clostridioides difficile** is an obligate anaerobe that forms spores, and it causes antibiotic-associated diarrhoea. Testing should only be done on unformed stools in a patient with recent antibiotic exposure, and laxative use should be excluded first. A test of cure is not performed after symptoms settle, because many patients stay colonised. Hand hygiene needs soap and water, since alcohol rubs do not kill spores.",
+   "say": "Clostridioides difficile is an obligate anaerobe that forms spores, and it causes antibiotic-associated diarrhoea. Testing should only be done on unformed stools in a patient with recent antibiotic exposure, and laxative use should be excluded first. A test of cure is not performed after symptoms settle, because many patients stay colonised. Hand hygiene needs soap and water, since alcohol rubs do not kill spores.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Unformed stool"
+     },
+     {
+      "id": "b",
+      "label": "GDH and toxin EIA"
+     },
+     {
+      "id": "c",
+      "label": "Discordant? Send NAAT"
+     },
+     {
+      "id": "d",
+      "label": "Confirmed CDI"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "GDH+ toxin-"
+     ],
+     [
+      "b",
+      "d",
+      "Toxin+"
+     ],
+     [
+      "c",
+      "d",
+      "NAAT+"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Toxins A and B glucosylate Rho-family GTPases, which disrupts the actin cytoskeleton and tight junctions. Toxin B is the key driver of pathology, and disease can occur even without toxin A. Severity is graded by the current criteria: **leukocytosis above 15,000 cells per microlitre** or a **rising creatinine** defines severe disease. Fulminant disease adds hypotension, ileus or megacolon.",
+   "say": "Toxins A and B glucosylate Rho-family GTPases, which disrupts the actin cytoskeleton and tight junctions. Toxin B is the key driver of pathology, and disease can occur even without toxin A. Severity is graded by the current criteria: leukocytosis above 15,000 cells per microlitre or a rising creatinine defines severe disease. Fulminant disease adds hypotension, ileus or megacolon.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Marker"
+    ],
+    "rows": [
+     [
+      "Mild",
+      "Low white count, normal creatinine"
+     ],
+     [
+      "Severe",
+      "White count above 15,000 or creatinine rising"
+     ],
+     [
+      "Fulminant",
+      "Hypotension, ileus or megacolon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For **fulminant colitis**, give high-dose oral vancomycin with IV metronidazole. If ileus blocks oral drug reaching the colon, add rectal vancomycin as a retention enema. Surgical review is urgent, since a rising lactate or toxic megacolon may need colectomy. Antiperistaltic agents such as loperamide should be avoided because they can mask severity. Bezlotoxumab, a monoclonal antibody to toxin B, can reduce recurrence.",
+   "say": "For fulminant colitis, give high-dose oral vancomycin with IV metronidazole. If ileus blocks oral drug reaching the colon, add rectal vancomycin as a retention enema. Surgical review is urgent, since a rising lactate or toxic megacolon may need colectomy. Antiperistaltic agents such as loperamide should be avoided because they can mask severity. Bezlotoxumab, a monoclonal antibody to toxin B, can reduce recurrence.",
+   "vis": null
+  },
+  {
+   "tx": "**Lemierre syndrome** is septic thrombophlebitis of the internal jugular vein after oropharyngeal infection, usually caused by Fusobacterium necrophorum. Clostridium septicum bacteraemia in neutropenic enterocolitis should prompt a search for occult colon cancer. Gentamicin lacks anaerobic activity, so it fails in mixed abdominal infections. Aspiration while supine favours the posterior upper or superior lower lobe segments.",
+   "say": "Lemierre syndrome is septic thrombophlebitis of the internal jugular vein after oropharyngeal infection, usually caused by Fusobacterium necrophorum. Clostridium septicum bacteraemia in neutropenic enterocolitis should prompt a search for occult colon cancer. Gentamicin lacks anaerobic activity, so it fails in mixed abdominal infections. Aspiration while supine favours the posterior upper or superior lower lobe segments.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_e94693222bd9",
+  "q_e362f9c4b898",
+  "q_38914d2fd918"
+ ],
+ "src": [],
+ "refs": [
+  "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases (Bennett, Dolin, Blaser)",
+  "IDSA/SHEA Clinical Practice Guidelines for Clostridioides difficile Infection (2017 update)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

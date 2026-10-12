@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "snp-immunosuppression",
+ "subject": "ss-nephrology",
+ "title": "Immunosuppressive therapy: calcineurin inhibitors and key agents",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Calcineurin inhibitors such as **cyclosporine** and **tacrolimus** block T-cell activation by inhibiting calcineurin, which stops nuclear transcription of interleukin-2. Their most important dose-limiting toxicity is **nephrotoxicity**, caused mainly by afferent arteriolar vasoconstriction that lowers glomerular filtration rate. Acute changes are often reversible, but chronic use can cause permanent tubulointerstitial damage. Monitoring of trough levels and creatinine is therefore essential.",
+   "say": "Calcineurin inhibitors such as cyclosporine and tacrolimus block T-cell activation by inhibiting calcineurin, which stops nuclear transcription of interleukin-2. Their most important dose-limiting toxicity is nephrotoxicity, caused mainly by afferent arteriolar vasoconstriction that lowers glomerular filtration rate. Acute changes are often reversible, but chronic use can cause permanent tubulointerstitial damage. Monitoring of trough levels and creatinine is therefore essential.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Cyclosporine",
+     "Tacrolimus"
+    ],
+    "rows": [
+     [
+      "Main side effect",
+      "Hirsutism and gum hyperplasia",
+      "Hyperglycaemia and alopecia"
+     ],
+     [
+      "Neurotoxicity",
+      "Tremor, headache, seizures",
+      "Tremor, headache, seizures"
+     ],
+     [
+      "Drug interaction hazard",
+      "CYP3A4 inhibitors raise levels",
+      "CYP3A4 inhibitors raise levels"
+     ],
+     [
+      "Metabolic effect",
+      "Hypomagnesaemia",
+      "Hyperglycaemia, hyperkalaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cyclosporine is a **calcineurin inhibitor** cleared largely by the **CYP3A4** enzyme system in the liver and gut. Drugs that block this enzyme, such as clarithromycin, ketoconazole and grapefruit juice, slow clearance and raise the blood level, which increases the risk of **calcineurin inhibitor nephrotoxicity**. Enzyme inducers do the opposite and can lower levels enough to threaten graft survival. Patients should avoid grapefruit and grapefruit juice, and every new medicine should be checked for interactions before it is started.",
+   "say": "Cyclosporine is a calcineurin inhibitor cleared largely by the CYP3A4 enzyme system. Drugs that block this enzyme, such as clarithromycin, ketoconazole and grapefruit juice, slow clearance and raise the blood level, which increases the risk of nephrotoxicity. Enzyme inducers do the opposite and can lower levels enough to threaten the graft. Patients should avoid grapefruit and grapefruit juice, and every new medicine should be checked for interactions before it is started.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CYP3A4 inhibitor"
+     },
+     {
+      "id": "b",
+      "label": "Reduced drug clearance"
+     },
+     {
+      "id": "c",
+      "label": "Higher blood level"
+     },
+     {
+      "id": "d",
+      "label": "Nephrotoxicity risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mycophenolate** blocks **IMPDH**, the enzyme driving de novo guanine nucleotide synthesis, so lymphocytes, which depend on this route, are selectively starved. **Azathioprine** is a purine analogue whose metabolites interfere with DNA synthesis; its dose must be lowered when **TPMT** or **NUDT15** activity is deficient. Both are steroid-sparing maintenance agents.",
+   "say": "Mycophenolate works by blocking IMPDH, the enzyme that drives de novo guanine nucleotide synthesis. Lymphocytes depend heavily on that route, so they are selectively short of building blocks. Azathioprine is a purine analogue, and its active metabolites disrupt DNA synthesis. Before starting it, check TPMT and NUDT15 activity, because deficient enzyme function means the dose must come down. Both drugs allow steroid sparing during maintenance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mycophenolate",
+     "points": [
+      "Blocks IMPDH, halting guanine nucleotide synthesis",
+      "Diarrhoea and cytopenias common",
+      "Teratogenic, needs contraception"
+     ]
+    },
+    "right": {
+     "title": "Azathioprine",
+     "points": [
+      "Purine analogue with active metabolites",
+      "Check TPMT and NUDT15 before dosing",
+      "Steroid-sparing maintenance option"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sirolimus** and **everolimus** are mTOR inhibitors that block T-cell and smooth muscle proliferation. They are useful when calcineurin inhibitors must be withdrawn because of nephrotoxicity, but they cause proteinuria, poor wound healing and dyslipidaemia. Steroid withdrawal protocols, as in the ELITE-Symphony study, aim to reduce long-term metabolic harm while maintaining graft survival in stable patients.",
+   "say": "Sirolimus and everolimus are mTOR inhibitors that block T-cell and smooth muscle proliferation. They are useful when calcineurin inhibitors must be withdrawn because of nephrotoxicity, but they cause proteinuria, poor wound healing and dyslipidaemia. Steroid withdrawal protocols, as in the ELITE-Symphony study, aim to reduce long-term metabolic harm while maintaining graft survival in stable patients.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_3ef03a3f16d7",
+  "q_6d152f690360",
+  "q_729021c82f69"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for the Care of Kidney Transplant Recipients",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 51
+ }
+}

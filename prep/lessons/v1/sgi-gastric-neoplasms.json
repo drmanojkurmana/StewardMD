@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "module": "sgi-gastric-neoplasms",
+ "subject": "ss-gastroenterology",
+ "title": "Gastric neoplasms: adenocarcinoma, hereditary diffuse cancer, GIST, MALT lymphoma and neuroendocrine tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Gastric adenocarcinoma is classified by **Lauren** criteria into **intestinal** and **diffuse** types. Intestinal type forms gland-like structures and follows the Correa cascade from chronic gastritis through atrophy and **intestinal metaplasia** to dysplasia and cancer. Diffuse type infiltrates the wall without gland formation and includes **signet ring cells**. Diffuse tumours can thicken the wall, producing linitis plastica.",
+   "say": "Gastric adenocarcinoma is classified by Lauren criteria into intestinal and diffuse types. Intestinal type forms gland-like structures and follows the Correa cascade from chronic gastritis through atrophy and intestinal metaplasia to dysplasia and cancer. Diffuse type infiltrates the wall without forming glands and includes signet ring cells. Diffuse tumours can thicken the wall, producing linitis plastica.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Intestinal",
+     "Diffuse"
+    ],
+    "rows": [
+     [
+      "Glands",
+      "Present",
+      "Absent"
+     ],
+     [
+      "Typical cells",
+      "Columnar",
+      "Signet ring"
+     ],
+     [
+      "Precursor path",
+      "Correa cascade",
+      "Often de novo"
+     ],
+     [
+      "Key gene",
+      "Not gene-specific",
+      "CDH1 loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Germline **CDH1** mutation causes **hereditary diffuse gastric cancer**. Carriers face high lifetime gastric risk and also a raised risk of **lobular breast cancer**. Because early diffuse cancer spreads beneath intact mucosa, superficial biopsies can be falsely negative. Current practice for confirmed carriers is prophylactic total gastrectomy, with enhanced breast surveillance including annual breast MRI and clinical examination for women.",
+   "say": "Germline CDH1 mutation causes hereditary diffuse gastric cancer. Carriers face a high lifetime gastric risk and also a raised risk of lobular breast cancer. Because early diffuse cancer spreads beneath intact mucosa, superficial biopsies can be falsely negative. Current practice for confirmed carriers is prophylactic total gastrectomy, with enhanced breast surveillance including annual breast MRI and clinical examination for women.",
+   "vis": null
+  },
+  {
+   "tx": "Staging and surgery matter for prognosis. A **junction tumour** whose epicentre lies within 2 cm of the gastro-oesophageal junction and extends into the oesophagus is staged as oesophageal. Pathological nodal staging needs at least **16 regional nodes** examined. Para-aortic node involvement is **M1**, not regional. Staging laparoscopy with peritoneal washing detects occult disease in advanced tumours, and FDG-PET is often unhelpful for diffuse, non-avid tumours.",
+   "say": "Staging and surgery matter for prognosis. A junction tumour whose epicentre lies within 2 centimetres of the gastro-oesophageal junction and extends into the oesophagus is staged as oesophageal. Pathological nodal staging needs at least 16 regional nodes examined. Para-aortic node involvement is M1, not regional. Staging laparoscopy with peritoneal washing detects occult disease in advanced tumours, and FDG-PET is often unhelpful for diffuse, non-avid tumours.",
+   "vis": null
+  },
+  {
+   "tx": "**Gastrointestinal stromal tumours** arise from **interstitial cells of Cajal** and usually carry activating **KIT** mutations, sometimes PDGFRA. Risk depends on size, mitotic count and site. Small tumours with very low mitotic counts carry negligible recurrence risk and need no adjuvant therapy. Higher-risk tumours are treated with adjuvant **imatinib**, a tyrosine kinase inhibitor. HER2 testing is a separate question: about 20% of metastatic gastric cancers overexpress HER2.",
+   "say": "Gastrointestinal stromal tumours arise from interstitial cells of Cajal and usually carry activating KIT mutations, sometimes PDGFRA. Risk depends on size, mitotic count and site. Small tumours with very low mitotic counts carry negligible recurrence risk and need no adjuvant therapy. Higher-risk tumours are treated with adjuvant imatinib, a tyrosine kinase inhibitor. HER2 testing is a separate question, because about 20 percent of metastatic gastric cancers overexpress HER2.",
+   "vis": null
+  },
+  {
+   "tx": "Work-up of gastric neuroendocrine tumours separates **achlorhydria** from acid hypersecretion. Gastric pH and serum gastrin help distinguish type 1 from ZES-related type 2. Serum chromogranin A is a non-specific marker that PPI use can falsely raise. For tumours above 2 cm, contrast-enhanced CT is used for systemic staging. Recurrent or multiple type 1 tumours respond to somatostatin analogues such as octreotide or lanreotide, while poorly differentiated neuroendocrine carcinoma is evaluated with FDG-PET/CT. Total gastrectomy removes intrinsic factor, so lifelong vitamin B12 is mandatory.",
+   "say": "Work-up of gastric neuroendocrine tumours separates achlorhydria from acid hypersecretion. Gastric pH and serum gastrin help distinguish type 1 from ZES-related type 2. Serum chromogranin A is a non-specific marker that PPI use can falsely raise. For tumours above 2 centimetres, contrast-enhanced CT is used for systemic staging. Recurrent or multiple type 1 tumours respond to somatostatin analogues such as octreotide or lanreotide, while poorly differentiated neuroendocrine carcinoma is evaluated with FDG-PET/CT. Total gastrectomy removes intrinsic factor, so lifelong vitamin B12 is mandatory.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_3713a8f21096",
+  "q_e5a485315753",
+  "q_21bb7a6b2b9a"
+ ],
+ "src": [],
+ "refs": [
+  "Sobin LH, Gospodarowicz MK, Wittekind C. TNM Classification of Malignant Tumours, 8th edition (UICC/AJCC)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 36
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "sgm-immunocompromised-host",
+ "subject": "ss-general-medicine",
+ "title": "Infections in the immunocompromised host",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Immunocompromised patients face a broader and different set of pathogens than healthy people. Pneumonia in these patients carries much higher mortality, with roughly half dying within a year when hospitalised. **Opportunistic organisms** such as Pneumocystis jirovecii, Aspergillus and cytomegalovirus must be considered alongside usual bacteria. Clinical signs such as fever and raised CRP may be blunted, so low threshold for imaging and cultures is needed.",
+   "say": "Immunocompromised patients face a broader and different set of pathogens than healthy people. Pneumonia in these patients carries much higher mortality, with roughly half dying within a year when hospitalised. Opportunistic organisms such as Pneumocystis jirovecii, Aspergillus and cytomegalovirus must be considered alongside usual bacteria. Clinical signs such as fever and raised CRP may be blunted, so a low threshold for imaging and cultures is needed.",
+   "vis": null
+  },
+  {
+   "tx": "Febrile neutropenia is a medical emergency. Obtain **peripheral blood cultures** from peripheral veins and any catheter before starting empirical antibiotics. Risk is stratified with the MASCC score, where a score of 21 or more indicates low risk and suitable for oral therapy, while lower scores indicate high risk needing inpatient care. The CISNE score is an alternative tool. High-risk patients should receive intravenous antibiotics within one hour of triage.",
+   "say": "Febrile neutropenia is a medical emergency. Obtain peripheral blood cultures from peripheral veins and any catheter before starting empirical antibiotics. Risk is stratified with the MASCC score, where a score of 21 or more indicates low risk and suitable for oral therapy, while lower scores indicate high risk needing inpatient care. The CISNE score is an alternative tool. High-risk patients should receive intravenous antibiotics within one hour of triage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Low risk",
+     "High risk"
+    ],
+    "rows": [
+     [
+      "MASCC score",
+      "21 or more",
+      "Below 21"
+     ],
+     [
+      "Setting",
+      "Oral or outpatient",
+      "Inpatient, IV"
+     ],
+     [
+      "Antibiotic example",
+      "Oral fluoroquinolone with amoxicillin-clavulanate",
+      "IV cefepime"
+     ],
+     [
+      "Antibiotic timing",
+      "Per local protocol",
+      "Within 1 hour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pneumocystis jirovecii pneumonia classically presents with subacute dyspnoea, dry cough and low-grade fever, with diffuse ground-glass opacities. Prophylaxis with **TMP-SMX** is indicated when CD4 count falls below 200 cells per microlitre in HIV. Azithromycin is used for disseminated Mycobacterium avium complex when CD4 is below 50. Anti-TNF therapy is a major risk factor for PCP in autoimmune disease.",
+   "say": "Pneumocystis jirovecii pneumonia classically presents with subacute dyspnoea, dry cough and low-grade fever, with diffuse ground-glass opacities. Prophylaxis with TMP-SMX is indicated when CD4 count falls below 200 cells per microlitre in HIV. Azithromycin is used for disseminated Mycobacterium avium complex when CD4 is below 50. Anti-TNF therapy is a major risk factor for PCP in autoimmune disease.",
+   "vis": null
+  },
+  {
+   "tx": "Transplant recipients have distinct infection timing. In the first month after transplantation, bacterial pneumonia and **Aspergillus** are the main concerns. CMV reactivation is a leading viral threat in the months after transplant, and **valganciclovir** is used for prophylaxis in high-risk recipients. BK virus and EBV-driven post-transplant lymphoproliferative disorder need monitoring, and reducing immunosuppression is a key step in severe viral pneumonia.",
+   "say": "Transplant recipients have distinct infection timing. In the first month after transplantation, bacterial pneumonia and Aspergillus are the main concerns. CMV reactivation is a leading viral threat in the months after transplant, and valganciclovir is used for prophylaxis in high-risk recipients. BK virus and EBV-driven post-transplant lymphoproliferative disorder need monitoring, and reducing immunosuppression is a key step in severe viral pneumonia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Week 1 to 4",
+      "sub": "Bacteria, Aspergillus"
+     },
+     {
+      "id": "b",
+      "label": "Month 1 to 6",
+      "sub": "CMV, Pneumocystis"
+     },
+     {
+      "id": "c",
+      "label": "Late",
+      "sub": "BK virus, EBV PTLD"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Asplenic and hypogammaglobulinaemic patients are at high risk of invasive infection from **encapsulated organisms** such as Streptococcus pneumoniae, Haemophilus influenzae and Neisseria meningitidis. Vaccination with pneumococcal conjugate vaccine and polysaccharide vaccine is recommended. Biologic agents, especially anti-TNF drugs, raise the risk of tuberculosis, so screening is needed before starting them. Hepatitis B status should be checked, with prophylaxis for carriers receiving immunosuppression.",
+   "say": "Asplenic and hypogammaglobulinaemic patients are at high risk of invasive infection from encapsulated organisms such as Streptococcus pneumoniae, Haemophilus influenzae and Neisseria meningitidis. Vaccination with pneumococcal conjugate vaccine and polysaccharide vaccine is recommended. Biologic agents, especially anti-TNF drugs, raise the risk of tuberculosis, so screening is needed before starting them. Hepatitis B status should be checked, with prophylaxis for carriers receiving immunosuppression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Encapsulated risk",
+     "points": [
+      "Pneumococcus",
+      "Haemophilus influenzae",
+      "Meningococcus"
+     ]
+    },
+    "right": {
+     "title": "Biologic screening",
+     "points": [
+      "Tuberculosis test",
+      "Hepatitis B status",
+      "Strongyloides serology"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_41991551b4e0",
+  "q_06d168315aa3",
+  "q_2e612c4c6f38"
+ ],
+ "src": [],
+ "refs": [
+  "Infectious Diseases Society of America guidelines on fever and neutropenia in cancer patients",
+  "National Institute for Health and Care Excellence guidance on febrile neutropenia"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

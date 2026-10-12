@@ -1,0 +1,110 @@
+{
+ "v": 1,
+ "module": "srh-soft-tissue",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Regional and soft tissue rheumatism: practical essentials for NEET-PG",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Adhesive capsulitis** is defined by thickening and fibrosis of the glenohumeral capsule, producing global restriction of active and passive movement. It is strongly linked to diabetes and typically runs a self-limiting course over **1 to 3 years**. Physiotherapy, intra-articular steroid and hydrodilatation help shorten symptoms, while surgery is reserved for refractory cases.",
+   "say": "Adhesive capsulitis is defined by thickening and fibrosis of the glenohumeral capsule, producing global restriction of active and passive movement. It is strongly linked to diabetes and typically runs a self-limiting course over 1 to 3 years. Physiotherapy, intra-articular steroid and hydrodilatation help shorten symptoms, while surgery is reserved for refractory cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Calcific tendinitis** involves hydroxyapatite deposition, most often in the supraspinatus tendon, and causes sudden severe shoulder pain. Radiography shows focal density near the insertion. **Bicipital tendinitis** is suggested by pain on resisted supination with the elbow flexed at 90 degrees, which is the Yergason test. Both are key differentials for shoulder pain in examinations.",
+   "say": "Calcific tendinitis involves hydroxyapatite deposition, most often in the supraspinatus tendon, and causes sudden severe shoulder pain. Radiography shows focal density near the insertion. Bicipital tendinitis is suggested by pain on resisted supination with the elbow flexed at 90 degrees, which is the Yergason test. Both are key differentials for shoulder pain in examinations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Calcific tendinitis",
+     "points": [
+      "Hydroxyapatite deposits",
+      "Supraspinatus most common",
+      "Sudden severe pain",
+      "Visible on X-ray"
+     ]
+    },
+    "right": {
+     "title": "Bicipital tendinitis",
+     "points": [
+      "Pain on resisted supination",
+      "Elbow flexed at 90 degrees",
+      "Yergason test positive",
+      "Long head of biceps"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**De Quervain tenosynovitis** affects the abductor pollicis longus and extensor pollicis brevis tendons at the radial styloid. The **Finkelstein test** reproduces radial wrist pain when the thumb is tucked in the fist and the wrist is deviated ulnarly. **Carpal tunnel syndrome** causes median nerve compression, with night paresthesia, and is confirmed by nerve conduction studies. Trigger finger involves nodular flexor tendon catching at the A1 pulley.",
+   "say": "De Quervain tenosynovitis affects the abductor pollicis longus and extensor pollicis brevis tendons at the radial styloid. The Finkelstein test reproduces radial wrist pain when the thumb is tucked in the fist and the wrist is deviated ulnarly. Carpal tunnel syndrome causes median nerve compression, with night paresthesia, and is confirmed by nerve conduction studies. Trigger finger involves nodular flexor tendon catching at the A1 pulley.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thumb tucked, wrist ulnar deviation"
+     },
+     {
+      "id": "b",
+      "label": "Radial pain reproduced"
+     },
+     {
+      "id": "c",
+      "label": "De Quervain tenosynovitis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Plantar fasciitis** causes medial heel pain that is worst with the first steps after waking. It is diagnosed clinically, and imaging is not needed initially. The **Windlass test** is positive when passive first metatarsophalangeal dorsiflexion reproduces pain. Over **80%** of patients recover within a year without surgery. Surgery is considered only after at least 6 to 12 months of nonoperative care, and it carries a risk of longitudinal arch flattening.",
+   "say": "Plantar fasciitis causes medial heel pain that is worst with the first steps after waking. It is diagnosed clinically, and imaging is not needed initially. The Windlass test is positive when passive first metatarsophalangeal dorsiflexion reproduces pain. Over 80% of patients recover within a year without surgery. Surgery is considered only after at least 6 to 12 months of nonoperative care, and it carries a risk of longitudinal arch flattening.",
+   "vis": null
+  },
+  {
+   "tx": "**Greater trochanteric pain syndrome** causes lateral hip pain, often worse on lying on the affected side. Recent imaging shows abductor tendinosis and tears are more frequent pain sources than bursitis alone. Pain on adduction that eases with abduction suggests bursitis. A **Trendelenburg gait** points to gluteus medius weakness. High BMI raises risk about 2.8-fold, and the condition peaks between 40 and 60 years.",
+   "say": "Greater trochanteric pain syndrome causes lateral hip pain, often worse on lying on the affected side. Recent imaging shows abductor tendinosis and tears are more frequent pain sources than bursitis alone. Pain on adduction that eases with abduction suggests bursitis. A Trendelenburg gait points to gluteus medius weakness. High BMI raises risk about 2.8-fold, and the condition peaks between 40 and 60 years.",
+   "vis": null
+  },
+  {
+   "tx": "**Achilles enthesopathy** and drug-induced tendinopathy deserve attention. Fluoroquinolones and corticosteroids are classic triggers, and aromatase inhibitors are relevant in older patients on hormone therapy. Adhesive capsulitis, plantar fasciitis and tendinopathies generally improve with graded loading, so an exam answer usually favours conservative care first, and septic causes must be excluded when fever is present.",
+   "say": "Achilles enthesopathy and drug-induced tendinopathy deserve attention. Fluoroquinolones and corticosteroids are classic triggers, and aromatase inhibitors are relevant in older patients on hormone therapy. Adhesive capsulitis, plantar fasciitis and tendinopathies generally improve with graded loading, so an exam answer usually favours conservative care first, and septic causes must be excluded when fever is present.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_208a9b6c253d",
+  "q_54486d1012a7",
+  "q_66cd212563f1"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)",
+  "Kelley and Firestein's Textbook of Rheumatology (Firestein et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

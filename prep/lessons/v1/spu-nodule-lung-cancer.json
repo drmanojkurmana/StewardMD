@@ -1,0 +1,56 @@
+{
+ "v": 1,
+ "module": "spu-nodule-lung-cancer",
+ "subject": "ss-pulmonology",
+ "title": "Pulmonary nodules and lung cancer: a pulmonologist's approach",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **Brock University (PanCan) model** estimates the probability of malignancy in nodules of 4 mm or more found incidentally. Its variables include age, family history of lung cancer, emphysema, nodule count, nodule size, spiculation, location in the upper lobe and presence of a previous malignancy. Smoking status is not included in the model. It is useful for deciding on follow-up or biopsy but does not replace clinical judgement.",
+   "say": "The Brock University model, also called the PanCan model, estimates the probability of malignancy in incidental nodules of four millimetres or more. Its variables include age, family history of lung cancer, emphysema, nodule count, nodule size, spiculation, upper lobe location and any previous malignancy. Smoking status is not included in the model. It helps decide on follow-up or biopsy but does not replace clinical judgement.",
+   "vis": null
+  },
+  {
+   "tx": "In **low-dose CT screening**, the NLST trial in the United States showed a mortality reduction with annual LDCT in high-risk smokers. The NELSON trial in Europe used volumetric analysis of nodules. Lung-RADS categorises screen-detected nodules, and category 3 nodules are typically re-scanned at 6 months. In India, screening is not yet programmatic, so its use is confined to research and selected high-risk patients.",
+   "say": "In low-dose CT screening, the NLST trial in the United States showed a mortality reduction with annual low-dose scans in high-risk smokers. The NELSON trial in Europe used volumetric analysis of nodules. Lung-RADS categorises screen-detected nodules, and category three nodules are typically re-scanned at six months. In India, screening is not yet programmatic, so its use is limited to research and selected high-risk patients.",
+   "vis": null
+  },
+  {
+   "tx": "Radiologically, **subsolid nodules** contain ground-glass or part-solid components. Persistent part-solid nodules carry a higher risk of invasive adenocarcinoma than pure ground-glass nodules. Nodules that enlarge or develop a solid core warrant closer review or resection. PET avidity is generally low in ground-glass lesions, so PET is less reliable there. Tissue diagnosis is often needed for persistent solid-component growth.",
+   "say": "Radiologically, subsolid nodules contain ground-glass or part-solid components. Persistent part-solid nodules carry a higher risk of invasive adenocarcinoma than pure ground-glass nodules. Nodules that enlarge or develop a solid core warrant closer review or resection. PET avidity is generally low in ground-glass lesions, so PET is less reliable there. Tissue diagnosis is often needed when a solid component keeps growing.",
+   "vis": null
+  },
+  {
+   "tx": "For nodules with a high pretest probability, **EBUS-TBNA** and PET-CT guide mediastinal staging, with biopsy confirming nodal involvement. Malignant **central airway obstruction** is treated by interventional pulmonology, using rigid bronchoscopy, laser, cryotherapy or stenting to restore airway patency. Surgical resection remains the definitive option for early-stage disease, while SBRT suits medically inoperable stage I non-small cell lung cancer.",
+   "say": "For nodules with a high pretest probability, endobronchial ultrasound with transbronchial needle aspiration and PET-CT guide mediastinal staging, with biopsy confirming nodal involvement. Malignant central airway obstruction is treated by interventional pulmonology, using rigid bronchoscopy, laser, cryotherapy or stenting to restore airway patency. Surgical resection remains the definitive option for early-stage disease, while stereotactic body radiotherapy suits medically inoperable stage one non-small cell lung cancer.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_ca491a5d8f39",
+  "q_e6109deb6c79",
+  "q_e7371cb0d7a5"
+ ],
+ "src": [],
+ "refs": [
+  "Fleischner Society 2017 guidelines for management of incidental pulmonary nodules",
+  "Brock University (PanCan) malignancy risk model",
+  "National Lung Screening Trial (NLST) and NELSON trial reports",
+  "Lung-RADS, American College of Radiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 20
+ }
+}

@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "son-infusion-extravasation",
+ "subject": "ss-medical-oncology",
+ "title": "Infusion reactions, hypersensitivity and extravasation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Platinum agents, especially **carboplatin**, cause **hypersensitivity** that typically appears after about six cycles, reflecting sensitisation with cumulative exposure. Risk rises with a treatment-free interval longer than 12 months, because the immune system is primed again on re-exposure. Cross-reactivity with other platinum agents is common, so switching to cisplatin or oxaliplatin is not a reliable escape route.",
+   "say": "Platinum agents, especially carboplatin, cause hypersensitivity that typically appears after about six cycles. This reflects sensitisation with cumulative exposure. Risk rises when the treatment-free interval is longer than 12 months, because the immune system is primed again on re-exposure. Cross-reactivity with other platinum agents is common, so switching to cisplatin or oxaliplatin is not a reliable escape route.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Carboplatin pattern"
+    ],
+    "rows": [
+     [
+      "Typical onset",
+      "About cycle six"
+     ],
+     [
+      "Key risk factor",
+      "Interval over 12 months"
+     ],
+     [
+      "Overall incidence",
+      "About 15 to 20 percent"
+     ],
+     [
+      "Mechanism",
+      "Type I IgE mediated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Reactions are classified by timing and severity, and the **immunopathology** is mainly **type I IgE-mediated**, with platinum-specific IgE found in a large share of moderate to severe cases. Skin testing has a poor negative predictive value, so diagnosis remains largely clinical. Serum tryptase is useful only as supportive evidence during an acute event.",
+   "say": "Reactions are classified by timing and severity. The immunopathology is mainly type I IgE mediated, with platinum-specific IgE found in a large share of moderate to severe cases. Skin testing has a poor negative predictive value, so diagnosis remains largely clinical. Serum tryptase is useful only as supportive evidence during an acute event.",
+   "vis": null
+  },
+  {
+   "tx": "When a sensitised patient must continue platinum, the standard approach is a **rapid desensitisation protocol** given under close observation, often in a day-care setting. Protocols use graded, shorter dosing increments so tolerance is built steadily. Premedication with antihistamines and steroids, and slower infusion rates, form part of routine mitigation alongside observation for recurrence.",
+   "say": "When a sensitised patient must continue platinum, the standard approach is a rapid desensitisation protocol given under close observation, often in a day-care setting. Protocols use graded, shorter dosing increments so tolerance is built steadily. Premedication and slower infusion rates form part of routine mitigation, alongside observation for recurrence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected reaction"
+     },
+     {
+      "id": "b",
+      "label": "Stop infusion"
+     },
+     {
+      "id": "c",
+      "label": "Treat acute event"
+     },
+     {
+      "id": "d",
+      "label": "Graded desensitisation"
+     },
+     {
+      "id": "e",
+      "label": "Continue under observation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oxaliplatin causes **acute cold-induced dysaesthesia** in roughly 90 percent of patients, likely from altered sodium channel conductance after calcium binding. Cumulative sensory neuropathy is the dose-limiting problem for platinum and taxane neurotoxicity. Cisplatin additionally causes **ototoxicity** through reactive oxygen species and glutathione depletion in cochlear hair cells, and accumulates in proximal tubular cells.",
+   "say": "Oxaliplatin causes acute cold-induced dysaesthesia in roughly 90 percent of patients, likely from altered sodium channel conductance after calcium binding. Cumulative sensory neuropathy is the dose-limiting problem for platinum and taxane neurotoxicity. Cisplatin additionally causes ototoxicity through reactive oxygen species and glutathione depletion in cochlear hair cells, and it accumulates in proximal tubular cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oxaliplatin",
+     "points": [
+      "Acute cold dysaesthesia about 90 percent",
+      "Calcium binding alters sodium channels",
+      "Cumulative sensory neuropathy later"
+     ]
+    },
+    "right": {
+     "title": "Cisplatin",
+     "points": [
+      "Ototoxicity via reactive oxygen species",
+      "Proximal tubular accumulation",
+      "Nephrotoxicity needs hydration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extravasation of a **vesicant** drug is an emergency because tissue injury can progress even after the infusion seems fine. Stop the infusion immediately, leave the **cannula** in situ, and **aspirate** residual drug from the line. Follow the local protocol for the specific agent, which determines whether a **cold** or **warm** compress is applied and whether a specific antidote is needed. Document the site and inform the prescriber promptly.",
+   "say": "Extravasation of a vesicant drug is an emergency, because tissue injury can progress even after the infusion seems fine. Stop the infusion immediately, leave the cannula in place, and aspirate residual drug from the line. Then follow the local protocol for the specific agent, which decides whether a cold or warm compress is applied and whether a specific antidote is needed. Document the site and inform the prescriber promptly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Action",
+     "Priority",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Stop infusion",
+      "Immediate",
+      "Do not flush through the site"
+     ],
+     [
+      "Aspirate line",
+      "Immediate",
+      "Remove residual drug"
+     ],
+     [
+      "Leave cannula",
+      "Immediate",
+      "Allows access for treatment"
+     ],
+     [
+      "Choose compress",
+      "Per protocol",
+      "Cold or warm depending on agent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Monoclonal antibody **infusion reactions** are most frequent during the first infusion and often ease with slower rates and **premedication**. Clinicians should watch for fever, rigors, flushing and bronchospasm, and pause the infusion at the first sign. Keep **resuscitation equipment** available, because severe **anaphylaxis** can occur at any cycle.",
+   "say": "Monoclonal antibody infusion reactions are most frequent during the first infusion and often ease with slower rates and premedication. Clinicians should watch for fever, rigors, flushing and bronchospasm, and pause the infusion at the first sign. Keep resuscitation equipment available, because severe anaphylaxis can occur at any cycle.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_32d1792f8b3e",
+  "q_77ee7dfd28fa",
+  "q_95ba29ff4b28"
+ ],
+ "src": [],
+ "refs": [
+  "Dexrazoxane prescribing information, US FDA labelling",
+  "Chapter 96 in Principles and Practice of Oncology (DeVita, Hellman and Rosenberg)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 19
+ }
+}

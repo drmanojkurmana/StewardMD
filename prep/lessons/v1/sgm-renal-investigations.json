@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "module": "sgm-renal-investigations",
+ "subject": "ss-general-medicine",
+ "title": "Renal investigations and urinalysis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Urinalysis starts with a properly collected sample. A **clean-catch midstream** specimen is standard for routine tests, while a **24-hour urine collection** measures total protein and creatinine clearance. Samples should reach the laboratory quickly, because urine left at room temperature degrades; refrigerated samples should be analysed within about 24 hours. Catheter urine must be taken from the sampling port, never from the drainage bag.",
+   "say": "Urinalysis starts with a properly collected sample. A clean catch midstream specimen is standard for routine tests, while a twenty four hour urine collection measures total protein and creatinine clearance. Samples should reach the laboratory quickly, because urine left at room temperature degrades. Refrigerated samples should be analysed within about twenty four hours. Catheter urine must be taken from the sampling port, never from the drainage bag.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Specimen",
+     "Best use"
+    ],
+    "rows": [
+     [
+      "Midstream clean catch",
+      "Routine dipstick and microscopy"
+     ],
+     [
+      "First morning",
+      "Concentrated sample for protein and casts"
+     ],
+     [
+      "24-hour collection",
+      "Quantifying proteinuria and creatinine clearance"
+     ],
+     [
+      "Catheter sampling port",
+      "Preferred route when catheterised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Urine microscopy separates the causes of kidney injury. **Muddy-brown granular casts** with tubular epithelial cells point to **acute tubular necrosis**. **RBC casts** signal glomerulonephritis, while **white cell casts** suggest interstitial nephritis or pyelonephritis. Dysmorphic red cells on phase contrast favour a glomerular source of haematuria.",
+   "say": "Urine microscopy separates the causes of kidney injury. Muddy brown granular casts with tubular epithelial cells point to acute tubular necrosis. RBC casts signal glomerulonephritis, while white cell casts suggest interstitial nephritis or pyelonephritis. Dysmorphic red cells on phase contrast favour a glomerular source of haematuria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glomerular source",
+     "points": [
+      "RBC casts",
+      "Dysmorphic red cells",
+      "Proteinuria with haematuria"
+     ]
+    },
+    "right": {
+     "title": "Tubular or interstitial source",
+     "points": [
+      "Muddy brown granular casts",
+      "White cell casts",
+      "Tubular epithelial cells"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Proteinuria is best measured with a **urine albumin-creatinine ratio (UACR)** on a spot sample, so a timed 24-hour collection is usually unnecessary. In routine practice, **eGFR** is calculated with the **CKD-EPI race-free equation**, which drops the race multiplier used in older versions. When muscle mass is unusual, as in amputees or severe malnutrition, **serum cystatin C** gives a more reliable alternative estimate of filtration.",
+   "say": "Proteinuria is best measured with a urine albumin creatinine ratio on a spot sample, so a timed twenty four hour collection is usually unnecessary. In routine practice, eGFR is calculated with the CKD EPI race free equation, which drops the race multiplier used in older versions. When muscle mass is unusual, as in amputees or severe malnutrition, serum cystatin C gives a more reliable alternative estimate of filtration.",
+   "vis": null
+  },
+  {
+   "tx": "Imaging answers different questions. **Renal Doppler ultrasound** assesses renal artery stenosis, vein thrombosis and resistive index, while the **isotope renogram** measures differential function and drainage. Small, echogenic kidneys with cortical thinning suggest chronic disease, whereas normal or enlarged kidneys favour acute injury or obstruction.",
+   "say": "Imaging answers different questions. Renal Doppler ultrasound assesses renal artery stenosis, vein thrombosis and resistive index, while the isotope renogram measures differential function and drainage. Small echogenic kidneys with cortical thinning suggest chronic disease, whereas normal or enlarged kidneys favour acute injury or obstruction.",
+   "vis": null
+  },
+  {
+   "tx": "A **renal biopsy** is indicated when the diagnosis is uncertain and treatment depends on histology. Typical triggers include nephrotic syndrome in adults, an active nephritic picture with RBC casts, and unexplained acute kidney injury without an obvious cause. Biopsy is relatively contraindicated in uncontrolled hypertension, bleeding disorders and a single functioning kidney.",
+   "say": "A renal biopsy is indicated when the diagnosis is uncertain and treatment depends on histology. Typical triggers include nephrotic syndrome in adults, an active nephritic picture with RBC casts, and unexplained acute kidney injury without an obvious cause. Biopsy is relatively contraindicated in uncontrolled hypertension, bleeding disorders and a single functioning kidney.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_39a47d615fd7",
+  "q_bf3c9389168e",
+  "q_999a16e49405"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for the Evaluation and Management of CKD",
+  "NICE Chronic kidney disease: assessment and management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 13
+ }
+}

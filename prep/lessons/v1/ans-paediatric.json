@@ -1,0 +1,100 @@
+{
+ "v": 1,
+ "module": "ans-paediatric",
+ "subject": "anaesthesia",
+ "title": "Paediatric and neonatal anaesthesia: key high-yield principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Paediatric airways differ from adults. The larynx sits higher, at C3 to C4 in newborns, and is funnel shaped. The **cricoid cartilage** is the narrowest point until about 5 years of age, after which the glottis takes over. Infants are obligate nasal breathers until about 5 months, so nasal obstruction matters.",
+   "say": "Paediatric airways differ from adult airways. The larynx sits higher in the neck, at about C3 to C4 in newborns, and it is funnel shaped. The cricoid cartilage is the narrowest point until about 5 years of age, after which the glottis becomes the narrowest part. Infants are obligate nasal breathers until about 5 months, so nasal obstruction matters greatly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Newborn or infant",
+     "Adult"
+    ],
+    "rows": [
+     [
+      "Narrowest point",
+      "Cricoid cartilage",
+      "Glottis"
+     ],
+     [
+      "Larynx level",
+      "About C3 to C4",
+      "About C5 to C6"
+     ],
+     [
+      "Breathing",
+      "Obligate nasal breather to about 5 months",
+      "Mouth and nose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uncuffed tubes are used in young children because the **cricoid** seals the airway well. The tube size formula for children aged over one year is age divided by four plus four, giving internal diameter in millimetres. A full-term neonate usually takes a **3.5 mm** tube, cut at about 12 cm. Oversized tubes cause mucosal trauma and subglottic oedema; undersized tubes increase leak and aspiration.",
+   "say": "Uncuffed tubes are used in young children because the cricoid cartilage forms a good seal. For children over one year, the internal diameter in millimetres is age divided by four, plus four. A full-term neonate usually takes a 3.5 millimetre tube, cut at about 12 centimetres. An oversized tube causes mucosal trauma and subglottic oedema, while an undersized tube increases leak and aspiration.",
+   "vis": null
+  },
+  {
+   "tx": "In children, **sevoflurane** is the preferred volatile agent for inhalational induction. Its **non-pungent** odour means the child is less likely to hold their breath or cough, and its low **blood gas solubility** allows a rapid, smooth loss of consciousness. By contrast, **desflurane** and **isoflurane** irritate the airway and raise the risk of **laryngospasm**. **Halothane** is a second-line option. Sevoflurane is delivered in oxygen, with or without **nitrous oxide**.",
+   "say": "In children, sevoflurane is the preferred agent for inhalational induction. It is non-pungent, so children are less likely to breath hold or cough, and its low blood gas solubility gives a rapid, smooth induction. Desflurane and isoflurane are pungent and raise the risk of laryngospasm. Halothane is a second-line option. Sevoflurane is given in oxygen, with or without nitrous oxide.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preferred",
+     "points": [
+      "Sevoflurane first choice",
+      "Non-pungent, smooth induction",
+      "Halothane second choice"
+     ]
+    },
+    "right": {
+     "title": "Avoid for induction",
+     "points": [
+      "Desflurane: pungent",
+      "Isoflurane: pungent",
+      "Risk of breath holding and laryngospasm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neonates have immature hepatic enzymes, so **lidocaine** is cleared more slowly. For muscle relaxants, **atracurium** and **cisatracurium** are useful in neonates and in children with liver or renal disease because they undergo Hofmann elimination. Succinylcholine can cause hyperkalaemia and bradycardia in children, so it is reserved for full stomach or laryngospasm.",
+   "say": "Neonates have immature hepatic enzymes, so lidocaine is eliminated more slowly. Atracurium and cisatracurium are useful in neonates and in children with liver or renal disease, because they undergo Hofmann elimination. Succinylcholine can cause hyperkalaemia and profound bradycardia in children, so it is reserved for full stomach or laryngospasm.",
+   "vis": null
+  },
+  {
+   "tx": "Neonates and young infants have high oxygen consumption and a higher metabolic rate than older children. Antagonise neuromuscular blockade in all neonates and small infants, even if they seem recovered, because rising work of breathing can cause fatigue. Post-intubation croup is managed with **racemic epinephrine** and steroids.",
+   "say": "Neonates and young infants have a higher oxygen consumption and metabolic rate than older children. Reverse neuromuscular blockade in all neonates and small infants, even when they appear recovered, because rising work of breathing can cause fatigue. Post-intubation croup is managed with racemic epinephrine and steroids.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "b9c3dc38-29dc-4cd9-b8e8-5d06cf5cd18f",
+  "a2227bc4-4ebd-4338-b79a-13a0dde1e739",
+  "a739f3b8-cf30-448e-9651-9e2604efef32"
+ ],
+ "src": [],
+ "refs": [
+  "Snick J.D. (2013). Pediatric Anesthesia. In J.F. Butterworth IV, D.C. Mackey, J.D. Wasnick (Eds), Morgan and Mikhail's Clinical Anesthesiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 74
+ }
+}

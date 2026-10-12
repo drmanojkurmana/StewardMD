@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "module": "snp-ckd-nutrition-conservative",
+ "subject": "ss-nephrology",
+ "title": "Nutrition and conservative kidney management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Protein energy wasting (PEW) is a state of **loss of body protein and energy stores** seen in advanced CKD. It reflects reduced intake, inflammation and metabolic stress together. Malnutrition in CKD predicts poor outcomes, so nutritional status must be assessed early and repeatedly. Two commonly used tools are **subjective global assessment (SGA)** and the **malnutrition inflammation score (MIS)**, which adds inflammatory and dialysis-specific markers to the clinical history.",
+   "say": "Protein energy wasting is a state of loss of body protein and energy stores seen in advanced kidney disease. It reflects reduced intake, inflammation and metabolic stress together. Malnutrition predicts poor outcomes, so nutritional status must be assessed early and repeatedly. Two commonly used tools are subjective global assessment and the malnutrition inflammation score, which adds inflammatory and dialysis-specific markers to the clinical history.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "What it uses",
+     "Use"
+    ],
+    "rows": [
+     [
+      "SGA",
+      "History and physical signs",
+      "Bedside screening"
+     ],
+     [
+      "MIS",
+      "SGA plus inflammation and body mass",
+      "Richer risk scoring"
+     ],
+     [
+      "Serum albumin",
+      "Liver output and inflammation",
+      "Supportive only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In conservative management of advanced CKD, protein restriction is considered to slow decline, but it must never worsen wasting. Ketoanalogues are **essential amino acid analogues** given with a very low protein diet to supply nitrogen-free building blocks. They are an option for selected patients who cannot tolerate adequate protein intake. Energy intake should be maintained, as calorie deficit accelerates muscle loss.",
+   "say": "In conservative management of advanced kidney disease, protein restriction is considered to slow decline, but it must never worsen wasting. Ketoanalogues are essential amino acid analogues given with a very low protein diet to supply nitrogen-free building blocks. They suit selected patients who cannot tolerate adequate protein intake. Energy intake should be maintained, because a calorie deficit accelerates muscle loss.",
+   "vis": null
+  },
+  {
+   "tx": "Dietary management of **potassium** and **phosphorus** is central in CKD. Potassium restriction is needed when serum levels rise, while hyperphosphataemia is treated with diet and phosphate binders. Phosphorus is often hidden in processed foods as **phosphate additives**, which are absorbed far more completely than natural organic phosphate. Patients should be taught to read food labels for phosphate additives.",
+   "say": "Dietary management of potassium and phosphorus is central in kidney disease. Potassium restriction is needed when serum levels rise, while raised phosphate is treated with diet and phosphate binders. Phosphorus is often hidden in processed foods as phosphate additives, which are absorbed far more completely than natural phosphate. Patients should learn to read food labels for these additives.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Natural phosphate",
+     "points": [
+      "Found in whole foods",
+      "Partly absorbed",
+      "Lower risk"
+     ]
+    },
+    "right": {
+     "title": "Phosphate additives",
+     "points": [
+      "Added to processed foods",
+      "Almost fully absorbed",
+      "Higher risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Restless legs syndrome affects many people on dialysis, disrupting sleep and daily life. First line steps include **correcting iron deficiency** and **optimising dialysis adequacy**, with gabapentinoids used when symptoms persist. **Advance care planning** is an ongoing dialogue about values, goals and preferred treatment, recorded so future decisions honour the patient's wishes. Start it early rather than waiting until dialysis is withdrawn.",
+   "say": "Restless legs syndrome affects many people on dialysis, disrupting sleep and daily life. First line steps include correcting iron deficiency and optimising dialysis adequacy, with gabapentinoids used when symptoms persist. Advance care planning is an ongoing dialogue about values, goals and preferred treatment, recorded so future decisions honour the patient's wishes. Start it early rather than waiting until dialysis is withdrawn.",
+   "vis": null
+  },
+  {
+   "tx": "Conservative kidney management offers an alternative to dialysis and is chosen through a **shared decision** that weighs the patient's wishes and **comorbidity**. Serum **albumin** is a poor marker of nutrition because it reflects inflammation as much as intake. Distinguish **protein energy wasting** from simple dietary restriction, since the former carries a worse prognosis. Before finalising any conservative plan, record **nutritional status**, potassium, phosphate and symptom burden.",
+   "say": "Conservative kidney management is an alternative to dialysis, and it is chosen through a shared decision that weighs the patient's wishes and comorbidity. Serum albumin is a poor marker of nutrition, because it reflects inflammation as much as intake. Distinguish protein energy wasting from simple dietary restriction, since the former carries a worse prognosis. Before finalising any conservative plan, record nutritional status, potassium, phosphate and symptom burden.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_3986b3015681",
+  "q_69768a4666b6",
+  "q_837ca185df45"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for the Evaluation and Management of CKD",
+  "NICE Chronic kidney disease guideline"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 17
+ }
+}

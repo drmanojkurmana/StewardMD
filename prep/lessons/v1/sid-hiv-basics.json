@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "module": "sid-hiv-basics",
+ "subject": "ss-infectious-diseases",
+ "title": "HIV Infection: Pathogenesis and Diagnosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "HIV enters CD4 T cells in a sequence. The viral **gp120** binds CD4, which exposes a site for a coreceptor, either **CCR5** (R5 tropism) or **CXCR4** (X4 tropism). The **gp41** subunit then drives membrane fusion. Most transmitted viruses are R5-tropic, and people homozygous for the CCR5 delta-32 deletion are largely resistant to R5 virus. Late-stage disease often shows CXCR4 or dual tropism.",
+   "say": "HIV enters CD4 T cells in a sequence. The viral gp120 protein binds CD4, which exposes a site for a coreceptor, either CCR5, giving R5 tropism, or CXCR4, giving X4 tropism. The gp41 subunit then drives membrane fusion. Most transmitted viruses are R5-tropic, and people homozygous for the CCR5 delta-32 deletion are largely resistant to R5 virus. Late-stage disease often shows CXCR4 or dual tropism.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "gp120 binds CD4"
+     },
+     {
+      "id": "b",
+      "label": "Coreceptor CCR5 or CXCR4"
+     },
+     {
+      "id": "c",
+      "label": "gp41 mediates fusion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early after exposure, **HIV RNA** is the first marker to become detectable in plasma, followed by the **p24 antigen** and then **antibody** responses. Modern **fourth-generation combination assays** pick up p24 antigen alongside antibodies, which narrows the diagnostic gap. A reactive screen should be confirmed with a differentiation test that separates HIV-1 from HIV-2. When results are discordant, **nucleic acid testing** settles the question.",
+   "say": "Early after exposure, HIV RNA is the first marker to become detectable in plasma, followed by the p24 antigen and then antibody responses. Modern fourth-generation combination assays pick up p24 antigen alongside antibodies, which narrows the diagnostic gap. A reactive screen should be confirmed with a differentiation test that separates HIV-1 from HIV-2. When results are discordant, nucleic acid testing settles the question.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Order of detection in acute infection"
+    ],
+    "rows": [
+     [
+      "HIV RNA",
+      "First"
+     ],
+     [
+      "p24 antigen",
+      "Second"
+     ],
+     [
+      "Antibody",
+      "Last"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute retroviral syndrome** causes fever, pharyngitis, rash and generalised lymphadenopathy, typically 2 to 4 weeks after exposure. Antibody tests may be negative during this window, so viral load testing is diagnostic. In infants under 18 months, maternal IgG persists, so **DNA or RNA PCR** is used instead of antibody tests.",
+   "say": "Acute retroviral syndrome causes fever, pharyngitis, rash and generalised lymphadenopathy, typically 2 to 4 weeks after exposure. Antibody tests may be negative during this window, so viral load testing is diagnostic. In infants under 18 months, maternal IgG persists, so DNA or RNA PCR is used instead of antibody tests.",
+   "vis": null
+  },
+  {
+   "tx": "**Viral load** and **CD4 count** guide monitoring. Genotypic resistance testing needs a viral load usually above 500 to 1,000 copies/mL, and should be done while the patient is on the failing regimen or within 4 weeks of stopping. Before starting maraviroc, a **CCR5 tropism assay** is mandatory, because only R5-tropic virus predicts response.",
+   "say": "Viral load and CD4 count guide monitoring. Genotypic resistance testing needs a viral load usually above 500 to 1,000 copies per mL, and should be done while the patient is on the failing regimen or within 4 weeks of stopping. Before starting maraviroc, a CCR5 tropism assay is mandatory, because only R5-tropic virus predicts response.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genotype testing",
+     "points": [
+      "Needs viral load above 500 to 1,000 copies/mL",
+      "Test on failing regimen or within 4 weeks of stopping"
+     ]
+    },
+    "right": {
+     "title": "Tropism assay",
+     "points": [
+      "Mandatory before maraviroc",
+      "Only R5 virus predicts response"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Elite controllers** keep viral loads undetectable without therapy, and HIV-2 is intrinsically resistant to NNRTIs. Latent reservoirs in resting memory CD4 cells persist despite suppression, which is why ART is lifelong. Transmission risk is effectively zero once viral load is sustained undetectable, a principle commonly called U=U.",
+   "say": "Elite controllers keep viral loads undetectable without therapy, and HIV-2 is intrinsically resistant to NNRTIs. Latent reservoirs in resting memory CD4 cells persist despite suppression, which is why ART is lifelong. Transmission risk is effectively zero once viral load is sustained undetectable, a principle commonly called U equals U.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_337daf7c3192",
+  "q_c3320d0a2a48",
+  "q_64126ad3d902"
+ ],
+ "src": [],
+ "refs": [
+  "NACO Guidelines for HIV Testing and Counselling, India",
+  "WHO Consolidated Guidelines on HIV Testing Services"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 51
+ }
+}

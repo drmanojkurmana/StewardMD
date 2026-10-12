@@ -1,0 +1,191 @@
+{
+ "v": 1,
+ "module": "srh-malignancy-rheum",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Rheumatic manifestations of malignancy and checkpoint inhibitors",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Paraneoplastic rheumatic syndromes can unmask an **occult malignancy**, sometimes months before the tumour becomes clinically obvious. Consider them when an older adult develops sudden, symmetric **small joint synovitis** with **pitting oedema** over the dorsum of the hands, especially with negative rheumatoid serology. Rapid improvement with **low-dose oral corticosteroids** is common, but that benefit should never be taken as reassurance. Full, age-appropriate cancer screening remains essential.",
+   "say": "Paraneoplastic rheumatic syndromes can unmask an occult malignancy, sometimes months before the tumour becomes clinically obvious. Consider them when an older adult develops sudden, symmetric small joint synovitis with pitting oedema over the back of the hands, especially with negative rheumatoid serology. Rapid improvement with low-dose oral corticosteroids is common, but that benefit should never be taken as reassurance. Full, age-appropriate cancer screening remains essential.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Older adult with sudden symmetric hand synovitis"
+     },
+     {
+      "id": "n2",
+      "label": "Check rheumatoid and autoimmune serology"
+     },
+     {
+      "id": "n3",
+      "label": "Assess for pitting oedema and exclude other causes"
+     },
+     {
+      "id": "n4",
+      "label": "Start low-dose oral corticosteroids"
+     },
+     {
+      "id": "n5",
+      "label": "Screen thoroughly for occult malignancy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5",
+      "Do not stop screening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypertrophic osteoarthropathy (HOA)** combines digital clubbing, arthralgia and periostitis. Primary HOA is inherited, often with **HPGD** mutations that reduce prostaglandin breakdown, and it usually settles after adolescence. Secondary HOA is most often linked to **non-small cell lung carcinoma**, so a malignancy search is mandatory in any adult case.",
+   "say": "Hypertrophic osteoarthropathy combines digital clubbing, arthralgia and periostitis. Primary hypertrophic osteoarthropathy is inherited, often with HPGD mutations that reduce prostaglandin breakdown, and it usually settles after adolescence. Secondary disease is most often linked to non-small cell lung carcinoma, so a malignancy search is mandatory in any adult case.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Clubbing and periostitis"
+     },
+     {
+      "id": "b",
+      "label": "Secondary HOA"
+     },
+     {
+      "id": "c",
+      "label": "Lung carcinoma search"
+     },
+     {
+      "id": "d",
+      "label": "Primary HOA"
+     },
+     {
+      "id": "e",
+      "label": "HPGD gene screen"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clubbing is confirmed on examination. The **Lovibond sign** is positive when the angle between the proximal nail fold and the nail exceeds 180 degrees. The **Schamroth sign** is lost when the diamond-shaped window between opposed terminal phalanges disappears. A distal to interphalangeal depth ratio above 1 supports clubbing on measurement.",
+   "say": "Clubbing is confirmed on examination. The Lovibond sign is positive when the angle between the proximal nail fold and the nail exceeds 180 degrees. The Schamroth sign is lost when the diamond-shaped window between opposed terminal phalanges disappears. A distal to interphalangeal depth ratio above 1 supports clubbing on measurement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lovibond sign",
+     "points": [
+      "Nail fold angle above 180 degrees",
+      "Indicates true clubbing",
+      "Measured at the nail bed"
+     ]
+    },
+    "right": {
+     "title": "Schamroth sign",
+     "points": [
+      "Diamond window obliterated",
+      "Tested by opposing terminal phalanges",
+      "Loss of window suggests clubbing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **VEGF** pathway drives the bone changes. Raised **PGE2** induces VEGF expression in osteoblasts and joint tissue, promoting angiogenesis, increased vascular permeability and osteoblast migration. This explains periosteal new bone formation and soft tissue edema. Serum VEGF is raised in both primary and secondary forms.",
+   "say": "The VEGF pathway drives the bone changes. Raised PGE2 induces VEGF expression in osteoblasts and joint tissue, promoting angiogenesis, increased vascular permeability and osteoblast migration. This explains periosteal new bone formation and soft tissue edema. Serum VEGF is raised in both primary and secondary forms.",
+   "vis": null
+  },
+  {
+   "tx": "**Technetium 99m MDP bone scintigraphy** is the most sensitive test for skeletal HOA and can show the **tramline sign**, a symmetric tracer uptake along the cortical margins of long bones. Synovial fluid is pauci-inflammatory, usually under 500 white cells per microlitre, which helps separate it from inflammatory arthritis. Chest imaging is needed in any adult with clinical HOA.",
+   "say": "Technetium 99m MDP bone scintigraphy is the most sensitive test for skeletal hypertrophic osteoarthropathy and can show the tramline sign, a symmetric tracer uptake along the cortical margins of long bones. Synovial fluid is pauci-inflammatory, usually under 500 white cells per microlitre, which helps separate it from inflammatory arthritis. Chest imaging is needed in any adult with clinical disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Investigation",
+     "Key finding"
+    ],
+    "rows": [
+     [
+      "Bone scan (Tc 99m MDP)",
+      "Tramline sign, most sensitive"
+     ],
+     [
+      "Radiograph",
+      "Symmetric periosteal reaction"
+     ],
+     [
+      "Synovial fluid",
+      "Under 500 WBC per microlitre"
+     ],
+     [
+      "Chest imaging",
+      "Screen for lung cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cancer-associated myositis** and **immune checkpoint inhibitor (ICI)** toxicity are important modern mimics. ICI arthritis and myositis can occur with PD-1 or PD-L1 blockade, and ICI myositis can overlap with **myocarditis**, which carries high mortality. Evaluate for raised troponin and creatine kinase, and treat with high-dose steroids while holding the drug if severe. Indian guidance on immunotherapy toxicity should be followed locally.",
+   "say": "Cancer-associated myositis and immune checkpoint inhibitor toxicity are important modern mimics. Checkpoint inhibitor arthritis and myositis can occur with PD-1 or PD-L1 blockade, and checkpoint myositis can overlap with myocarditis, which carries high mortality. Evaluate for raised troponin and creatine kinase, and treat with high-dose steroids while holding the drug if severe. Indian guidance on immunotherapy toxicity should be followed locally.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_277d0b71923c",
+  "q_82a0c159848e",
+  "q_c2a59c0f2b6b"
+ ],
+ "src": [],
+ "refs": [
+  "Rheumatology (Hochberg et al., Elsevier)",
+  "Kelley and Firestein's Textbook of Rheumatology (Firestein et al., Elsevier)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

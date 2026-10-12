@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "module": "sgm-hiv-opportunistic",
+ "subject": "ss-general-medicine",
+ "title": "Opportunistic infections in HIV: key lessons for NEET-PG and INI-CET",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Opportunistic infections, or OIs, occur when **CD4 counts** fall, usually below 200 cells/mm3. Pneumocystis pneumonia risk rises sharply below 200, while cryptococcal and toxoplasma risk rises below 100. Knowing these thresholds guides both prophylaxis and screening. Start by recognising the CD4 cut-offs that drive each infection.",
+   "say": "Opportunistic infections in HIV occur when CD4 counts fall, usually below 200 cells per cubic millimetre. Pneumocystis pneumonia risk rises sharply below 200, while cryptococcal and toxoplasma risk rises below 100. Knowing these thresholds guides both prophylaxis and screening.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infection",
+     "Typical CD4 threshold",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "Pneumocystis pneumonia",
+      "Below 200",
+      "Dry cough, hypoxia"
+     ],
+     [
+      "Cryptococcal meningitis",
+      "Below 100",
+      "Headache, raised pressure"
+     ],
+     [
+      "Toxoplasma encephalitis",
+      "Below 100",
+      "Ring-enhancing lesions"
+     ],
+     [
+      "CMV retinitis",
+      "Below 50",
+      "Painless visual loss"
+     ],
+     [
+      "MAC",
+      "Below 50",
+      "Fever, anaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cryptococcal meningitis is a leading cause of death in advanced HIV. Screen with serum **CrAg** in patients with CD4 below 100 before starting ART. A positive result needs lumbar puncture to exclude meningitis. For induction, the WHO 2022 preferred regimen is a **single dose of liposomal amphotericin B** with fluconazole and flucytosine, which is the AMBITION-based approach.",
+   "say": "Cryptococcal meningitis is a leading cause of death in advanced HIV. Screen with serum cryptococcal antigen in patients with CD4 below 100 before starting antiretroviral therapy. A positive result needs lumbar puncture. The WHO 2022 preferred induction uses a single dose of liposomal amphotericin B with fluconazole and flucytosine, based on the AMBITION trial.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CD4 below 100"
+     },
+     {
+      "id": "b",
+      "label": "Serum CrAg"
+     },
+     {
+      "id": "c",
+      "label": "Positive: LP"
+     },
+     {
+      "id": "d",
+      "label": "Induction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In cryptococcal meningitis, raised **opening pressure** is common and must be treated. Therapeutic lumbar punctures aim to lower pressure below 20 cmH2O. Pressure above 25 cmH2O predicts worse outcomes. Flucytosine causes dose-related marrow suppression, so check the blood count at least weekly. Indian programmes often lack flucytosine, so amphotericin with high-dose fluconazole is the alternative.",
+   "say": "In cryptococcal meningitis, raised opening pressure is common and must be treated. Therapeutic lumbar punctures aim to lower pressure below 20 centimetres of water. Pressure above 25 predicts worse outcomes. Flucytosine causes marrow suppression, so check the blood count at least weekly. When flucytosine is unavailable, amphotericin with high-dose fluconazole is used.",
+   "vis": null
+  },
+  {
+   "tx": "Timing of ART matters. In cryptococcal meningitis, start ART about **4 to 6 weeks** after antifungal therapy begins to reduce mortality while limiting IRIS risk. Cryptococcal IRIS with life-threatening neurological deterioration is treated with prednisolone 1 mg/kg/day for at least one week, then tapered. For TB meningitis, adjunctive dexamethasone 0.3 to 0.4 mg/kg/day reduces mortality.",
+   "say": "Timing of antiretroviral therapy matters. In cryptococcal meningitis, start it about four to six weeks after antifungal therapy begins. Cryptococcal immune reconstitution inflammatory syndrome with life-threatening deterioration is treated with prednisolone one milligram per kilogram per day for at least one week, then tapered. For tuberculous meningitis, adjunctive dexamethasone reduces mortality.",
+   "vis": null
+  },
+  {
+   "tx": "Pneumocystis pneumonia presents with a **dry cough**, **hypoxia** and bilateral **ground-glass opacities** on imaging. Serum **lactate dehydrogenase** is raised but not specific. Start **adjunctive corticosteroids** when arterial oxygen is below 70 mm Hg on room air. **Prophylaxis** is started once the CD4 count falls below 200 cells per microlitre. Toxoplasma encephalitis needs **induction therapy** for at least six weeks.",
+   "say": "Pneumocystis pneumonia presents with a dry cough, hypoxia and bilateral ground-glass opacities on imaging. Serum lactate dehydrogenase is raised but not specific. Start adjunctive corticosteroids when arterial oxygen is below 70 millimetres of mercury on room air. Prophylaxis begins once the CD4 count drops under 200 cells per microlitre. Toxoplasma encephalitis needs induction therapy for at least six weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pneumocystis",
+     "points": [
+      "Ground-glass opacities",
+      "Raised LDH, not specific",
+      "Steroids if PaO2 under 70 mm Hg on air"
+     ]
+    },
+    "right": {
+     "title": "Toxoplasma",
+     "points": [
+      "Ring-enhancing lesions",
+      "Induction therapy",
+      "At least six weeks"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_108355cfe733",
+  "q_57c08d5dc241",
+  "q_ab6dcc629783"
+ ],
+ "src": [],
+ "refs": [
+  "WHO guidelines on cryptococcal disease 2022",
+  "NACO National guidelines for HIV care and treatment 2021",
+  "AMBITION-cm trial (Jarvis et al.)",
+  "Harrison's Principles of Internal Medicine (Loscalzo et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 38
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "sid-head-neck-eye",
+ "subject": "ss-infectious-diseases",
+ "title": "Ocular, Head and Neck Infections: Cavernous Sinus Thrombosis and Deep Infections",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Cavernous sinus thrombosis** is a septic clot forming within the cavernous sinus, most often arising from infection in the sphenoid sinus, face or orbit. The sinus sits beside the sella turcica, and its contents include several cranial nerves plus the internal carotid artery. **Staphylococcus aureus** is the leading organism, so it is the usual target for empirical antibiotic cover.",
+   "say": "Cavernous sinus thrombosis is a septic clot forming within the cavernous sinus, most often arising from infection in the sphenoid sinus, face or orbit. The sinus sits beside the sella turcica, and its contents include several cranial nerves plus the internal carotid artery. Staphylococcus aureus is the leading organism, so it is the usual target for empirical antibiotic cover.",
+   "vis": null
+  },
+  {
+   "tx": "Clinically, the classic picture is fever, severe headache and periorbital oedema, often with **chemosis**. Abducens palsy tends to appear earliest, because that nerve runs through the sinus lumen. Oculomotor and trochlear palsies follow, while the ophthalmic and maxillary divisions cause facial numbness. A **picket fence** fever pattern suggests ongoing septic venous disease.",
+   "say": "Clinically, the classic picture is fever, severe headache and swelling around the eye, often with chemosis. Palsy of the abducens nerve tends to appear earliest, because that nerve runs through the sinus lumen. Oculomotor and trochlear palsies follow, while the ophthalmic and maxillary divisions cause facial numbness. A picket fence fever pattern suggests ongoing septic venous disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Typical deficit"
+    ],
+    "rows": [
+     [
+      "Abducens nerve",
+      "Limited abduction, earliest sign"
+     ],
+     [
+      "Oculomotor nerve",
+      "Ptosis, ophthalmoplegia, fixed pupil"
+     ],
+     [
+      "Trochlear nerve",
+      "Vertical diplopia on looking down"
+     ],
+     [
+      "Ophthalmic and maxillary divisions",
+      "Facial numbness, corneal sensation loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The sinuses are valveless and link with each other through **intercavernous sinuses**, so infection crosses the midline and can become bilateral. Proptosis results from obstruction of orbital venous drainage, and internal ophthalmoplegia with a fixed dilated pupil reflects paralysis of the iris and ciliary body. Non-contrast CT may show engorged ophthalmic veins, while contrast MRI or CT venography confirms the thrombus.",
+   "say": "The sinuses are valveless and link with each other through intercavernous sinuses, so infection crosses the midline and can become bilateral. Proptosis results from obstruction of orbital venous drainage, and internal ophthalmoplegia with a fixed dilated pupil reflects paralysis of the iris and ciliary body. Non-contrast CT may show engorged ophthalmic veins, while contrast MRI or CT venography confirms the thrombus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sphenoid sinusitis"
+     },
+     {
+      "id": "b",
+      "label": "Cavernous sinus thrombus"
+     },
+     {
+      "id": "c",
+      "label": "Bilateral spread via intercavernous sinuses"
+     },
+     {
+      "id": "d",
+      "label": "Meningitis or subdural empyema"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management needs urgent **broad-spectrum IV antibiotics** covering Staphylococcus aureus and anaerobes, typically vancomycin with a third-generation cephalosporin and metronidazole. Neuroimaging must exclude a mass lesion before any lumbar puncture if meningitis is suspected. Heparin may be considered per specialist advice. Thrombophilia screening should wait until anticoagulation ends, because treatment can distort results.",
+   "say": "Management needs urgent broad spectrum intravenous antibiotics covering Staphylococcus aureus and anaerobes, typically vancomycin with a third generation cephalosporin and metronidazole. Neuroimaging must exclude a mass lesion before any lumbar puncture if meningitis is suspected. Heparin may be considered per specialist advice. Thrombophilia screening should wait until anticoagulation ends, because treatment can distort results.",
+   "vis": null
+  },
+  {
+   "tx": "Other head and neck infections follow similar deep-space logic. **Ludwig angina** is a bilateral submandibular space cellulitis that threatens the airway, while **orbital cellulitis** threatens vision and can extend to the cavernous sinus. Malignant otitis externa, usually from **Pseudomonas aeruginosa** in diabetics, can erode the skull base. Deep neck space infection needs early imaging and surgical drainage.",
+   "say": "Other head and neck infections follow similar deep space logic. Ludwig angina is a bilateral submandibular space cellulitis that threatens the airway, while orbital cellulitis threatens vision and can extend to the cavernous sinus. Malignant otitis externa, usually from Pseudomonas aeruginosa in diabetics, can erode the skull base. Deep neck space infection needs early imaging and surgical drainage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Orbital and sinus spread",
+     "points": [
+      "Threatens vision",
+      "Can reach cavernous sinus",
+      "Sphenoid sinusitis is a common source"
+     ]
+    },
+    "right": {
+     "title": "Deep neck and skull base",
+     "points": [
+      "Ludwig angina threatens airway",
+      "Malignant otitis externa in diabetics",
+      "Pseudomonas aeruginosa is typical"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In summary, cavernous sinus thrombosis presents with fever, headache and multiple cranial nerve palsies, starting with abducens. Treat with IV antibiotics and anticoagulation, image before lumbar puncture, and screen for thrombophilia later. Remember the **intercavernous sinuses** for bilateral spread. Fungal and Acanthamoeba keratitis and endophthalmitis are separate topics beyond this summary.",
+   "say": "In summary, cavernous sinus thrombosis presents with fever, headache and multiple cranial nerve palsies, starting with abducens. Treat with intravenous antibiotics and anticoagulation, image before lumbar puncture, and screen for thrombophilia later. Remember the intercavernous sinuses for bilateral spread. Fungal and Acanthamoeba keratitis and endophthalmitis are separate topics beyond this summary.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_00e98c9cc866",
+  "q_b236be04b21c",
+  "q_03c00e86b983"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 16
+ }
+}
