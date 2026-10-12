@@ -32,3 +32,10 @@ Log:
   Appended 2763 wave stems to pipe dedup harvest (cross-wave protection).
   Launched mrcp-e P2-weighted top-up (all 16 subjects, P1 n=2/P2 n=6, 1024 req;
   gen batch msgbatch_01Gwjt8MJD82J8XKtTgnFPgq). Spend ~$8.12/$18.
+- 2026-10-12 (agy, cont.): P1/P2 separation landed on branch (profile item_ex,
+  prep-assess assemble filter, prep.js EXAMS+poolFor, plan choices, fixed-tests
+  EXAMS; tests 21+22 pass) + pushed. Publish staging ready in
+  /tmp/bank-mrcp-pipe/publish (maik18 1322 P1, maik19 1050 P2, maikimg10 61 P2).
+  Quality gate found 82 items with placeholder short stems (e.g. 'Q4', topic
+  slugs; vignette not stored): DROPPED from staging, reported, not released.
+  Wave mrcp-e still in gen. Spend $8.12/$18.
