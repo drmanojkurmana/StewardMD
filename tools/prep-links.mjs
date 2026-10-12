@@ -422,6 +422,17 @@ export function topicKbForModule({ title, lessonTitle, cited, kb }) {
   }
   return null;
 }
+/* floorEntries(floorDoc, n360Doc) -> { mid: { id, title } }: the guarantee floor (any item still without a
+   target gets its module's Nucleus360 walkthrough). Only topics present in topics.json survive, so the button
+   never opens a missing topic. */
+export function floorEntries(floorDoc, n360Doc) {
+  const titles = new Map((((n360Doc && n360Doc.topics) || [])).map((t) => [t && t.id, (t && t.title) || (t && t.id)]));
+  const out = {};
+  for (const [mid, tid] of Object.entries((floorDoc && floorDoc.map) || {})) {
+    if (typeof tid === "string" && titles.has(tid)) out[mid] = { id: tid, title: titles.get(tid) };
+  }
+  return out;
+}
 /* addTopicLinks(links, it, ctx) -> links (mutated). ctx: { mid, sid, topics, lessons, bridge, midSid, images }.
    lessons: Map(mid -> [{ key, title, own }]). images: Map(basename -> { l, step }). */
 export function addTopicLinks(links, it, ctx = {}) {
@@ -692,7 +703,7 @@ function lessonKbMap(cache, byKey) {
   return m;
 }
 /* build({ cache, bank }) -> { files: [{ rel, body }], pointer, sidecar: [records], report } */
-export function build({ cache, bank, confirmed = null, rematch = null, log = () => {} }) {
+export function build({ cache, bank, confirmed = null, rematch = null, floor = null, log = () => {} }) {
   const D = dictionaries();
   const lessonKb = lessonKbMap(cache, D.byKey);
   // Lessons: the bank index plus the bundled pilot lessons, merged the way the app merges them
@@ -728,6 +739,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, log = () 
     }
     return topicKbMemo.get(mid);
   };
+  if (!floor) floor = floorEntries(readJ(path.join(ROOT, "prep/nucleus360/floor-map.json")), readJ(path.join(ROOT, "prep/nucleus360/topics.json")));
   // Pass 1: how many stems name each phrase (background names are discounted).
   const df = new Map(); let n = 0;
   const midSid = new Map();
@@ -791,10 +803,20 @@ export function build({ cache, bank, confirmed = null, rematch = null, log = () 
       cur.n += m.e.filter(([, ls]) => ls.some((l) => l.k + ":" + l.id === k)).length; cur.mods.add(mid); cs.set(ck, cur);
     }
     const mod = {}; if (lessonsOf.get(mid)) mod.ls = lessonsOf.get(mid).map((l) => l.key); if (cards[mid]) mod.cd = 1;
+    if (floor[mid]) mod.n360 = floor[mid];
     const body = JSON.stringify({ v: 1, m: mid, s: m.sid, ver, T, e, x, mod });
     const h = createHash("sha256").update(body).digest("hex").slice(0, 8);
     files.push({ rel: `m/${mid}-${h}.json`, body });
     ptrM[mid] = (m.sid || "") + "/" + h;
+  }
+  // The floor needs a shard even where nothing linked: a mod-only record carrying the walkthrough.
+  for (const mid of Object.keys(floor).sort()) {
+    if (ptrM[mid]) continue;
+    const sid = midSid.get(mid) || "";
+    const body = JSON.stringify({ v: 1, m: mid, s: sid, ver, T: [], e: {}, x: {}, mod: { n360: floor[mid] } });
+    const h = createHash("sha256").update(body).digest("hex").slice(0, 8);
+    files.push({ rel: `m/${mid}-${h}.json`, body });
+    ptrM[mid] = (sid || "") + "/" + h;
   }
   const ptrC = {};
   for (const [sid, cs] of Array.from(concepts.entries()).sort((a, b) => (String(a[0]) < String(b[0]) ? -1 : 1))) {

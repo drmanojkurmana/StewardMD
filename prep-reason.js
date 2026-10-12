@@ -255,6 +255,7 @@
     if (t.k === "dr") return "Drug Index";
     if (t.k === "pr") return "Protocol";
     if (t.k === "cd") return "Flashcards";
+    if (t.k === "n360") return "Nucleus360";
     return "";
   }
 
@@ -264,6 +265,7 @@
     if (t.k === "dr") return "Drug: " + (t.title || t.id);
     if (t.k === "pr") return "Protocol: " + (t.title || t.id);
     if (t.k === "cd") return "Flashcards: Cards for this topic";
+    if (t.k === "n360") return "Cover this topic with Nucleus360";
     return t.title || "";
   }
 
@@ -316,6 +318,15 @@
       rowTargets.push(tCd); allTargets.push(tCd);
     } else if (d.cards) {
       allTargets.push({ k: "cd", mid: mid, title: "Cards for this topic", act: "k-open", attrs: ' data-s="' + escH(sid) + '" data-m="' + escH(mid) + '"' });
+    }
+
+    /* Guarantee floor: when nothing else exists, the module's Nucleus360 walkthrough (shard mod.n360,
+       direct membership only) so no answered MCQ shows nothing. Labelled honestly, never as a lesson. */
+    var n360 = d.n360 || null;
+    var n360id = n360 && (n360.id || n360[0]);
+    if (!rowTargets.length && n360id) {
+      var tN = { k: "n360", id: n360id, title: n360.title || n360[1] || n360id, act: "n360-topic", attrs: ' data-t="' + escH(n360id) + '"' };
+      rowTargets.push(tN); allTargets.push(tN);
     }
 
     return { rowTargets: rowTargets, allTargets: allTargets };
@@ -574,7 +585,8 @@
 
         if (isKm) {
           var hasAny = pipe.length > 0 || (sh && sh.e && sh.e[String(iid)] && sh.e[String(iid)].some(function (r) { return r[1] >= SHOW; }));
-          var km = hasAny ? kmTargets({ links: links, okLessons: okLessons, lesson: lesson, cards: cards, itemCards: itemCards, sid: sid, mid: mid }) : { rowTargets: [], allTargets: [] };
+          var n360 = (sh && sh.mod && sh.mod.n360) || null;
+          var km = (hasAny || n360) ? kmTargets({ links: links, okLessons: okLessons, lesson: lesson, cards: cards, itemCards: itemCards, sid: sid, mid: mid, n360: n360 }) : { rowTargets: [], allTargets: [] };
           if (!km.rowTargets.length) {
             updateEl("", true);
             return;
