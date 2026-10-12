@@ -108,6 +108,19 @@ try {
   await until(`return !!document.querySelector('[data-act=clinic][data-t=monitor]');`);
   await ev(`document.querySelector('[data-act=clinic][data-t=monitor]').click(); return 1;`);
   ok(await until(`${R} return !!(R.querySelector('.nkc-line.ecg') && R.querySelector('.nkc-line.spo2') && R.querySelector('.nkc-nibp'));`), "monitor case draws ECG and pleth with NIBP");
+  // Two monitor scenarios (high spinal, LAST) have no capnograph attached, so their screens rightly have
+  // no EtCO2 trend row; session order is shuffled (buildSession uses Math.random), so walk (answer, Next)
+  // to a case that has one before checking its layout. 18 of the 21 MBBS monitor cases have a trend.
+  let trendReady = false;
+  for (let hop = 0; hop < 18 && !trendReady; hop++) {
+    trendReady = await ev(`${R} return !!R.querySelector('.nkc-mon > .nkc-trend');`) === true;
+    if (trendReady) break;
+    await ev(`document.querySelector('#smdNarke [data-act=nkc-ans]').click(); return 1;`);
+    await until(`return !!document.querySelector('#smdNarke .nkc-verdict');`);
+    await ev(`document.querySelector('[data-act=nkc-next]').click(); return 1;`);
+    await until(`${R} return !R.querySelector('.nkc-verdict');`);
+  }
+  ok(trendReady, "monitor: a case with an EtCO2 trend row is reached");
   // Layout is only meaningful once narke-clinic.css is applied (the trend row is position:relative there);
   // measuring before the stylesheet lands races the loader and flakes the width check below.
   ok(await until(`${R} var t=R.querySelector('.nkc-mon > .nkc-trend'); return !!t && getComputedStyle(t).position === 'relative';`), "monitor: clinic stylesheet applied before the trend layout check");
