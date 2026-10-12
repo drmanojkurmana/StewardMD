@@ -262,14 +262,18 @@ export function expText(it) {
    module topic (ctx.moduleTitle / it.t / ctx.topicIds). A target that merely shares a keyword with the
    item (a drug target, gene or transporter named in the key, e.g. SGLT2 -> Familial Renal Glucosuria) has
    none of its name words in that text and fails closed. Module-topic targets (kt) are exempt by design. */
+const GENERIC_HIT = new Set("renal cardiac hepatic pulmonary cerebral gastric intestinal familial congenital inherited hereditary chronic acute primary secondary".split(" "));
 export function linkRelevant(it, l, ctx = {}) {
   if (!l || l.v === "kt" || l.v === "lt") return true;
   if (ctx.topicIds && ctx.topicIds.has(l.k + ":" + l.id)) return true;
   const key = (it && it.o && typeof it.a === "number" && it.o[it.a]) || "";
   const hay = new Set(words([key, (it && it.q) || "", expText(it || {}), ctx.moduleTitle || "", String((it && it.t) || ctx.mid || "").replace(/[-_]/g, " ")].join(" ")));
-  const nameWords = l.k === "dr" ? words(l.id) : sigWords(l.title || l.id);
+  const nameWords = l.k === "dr" ? words(l.id) : sigWords(String(l.title || l.id).replace(/\s*\([^)]*\)\s*/g, " "));
   if (!nameWords.length) return false;
-  return nameWords.some((w) => hay.has(w));
+  const hits = nameWords.filter((w) => hay.has(w));
+  // One shared word is not enough when it is only a generic organ/qualifier word (renal, cardiac,
+  // familial): that is the namesake trap. A distinctive name word (zika, glucosuria) suffices alone.
+  return hits.length >= 2 || hits.some((w) => !GENERIC_HIT.has(w));
 }
 /* linkItem(it, M, ctx) -> [{ k, id, title, c, v, sec }] best first, at most MAX per kind (c >= 50 only).
    M: { kb, pr, dr } matchers. ctx: { lessonKb: Set of KB ids cited by the module's lessons, df: Map(phrase key -> items

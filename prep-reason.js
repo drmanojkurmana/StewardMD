@@ -127,10 +127,12 @@
      name shares no significant word with the item's stem, keyed answer or module is a keyword namesake
      (SGLT2 -> Familial Renal Glucosuria), never the concept. Module-topic rows (via kt) are exempt. */
   function titleRelevant(title, text) {
-    var tw = String(title || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").split(" ").filter(function (w) { return w.length >= 4; });
+    var tw = String(title || "").replace(/\s*\([^)]*\)\s*/g, " ").toLowerCase().replace(/[^a-z0-9]+/g, " ").split(" ").filter(function (w) { return w.length >= 4; });
     if (!tw.length) return false;
     var hay = " " + String(text || "").toLowerCase().replace(/[^a-z0-9]+/g, " ") + " ";
-    return tw.some(function (w) { return hay.indexOf(" " + w + " ") >= 0 || hay.indexOf(" " + w) >= 0; });
+    var hits = tw.filter(function (w) { return hay.indexOf(" " + w + " ") >= 0 || hay.indexOf(" " + w) >= 0; });
+    var generic = { renal: 1, cardiac: 1, hepatic: 1, pulmonary: 1, cerebral: 1, gastric: 1, intestinal: 1, familial: 1, congenital: 1, inherited: 1, hereditary: 1, chronic: 1, acute: 1, primary: 1, secondary: 1 };
+    return hits.length >= 2 || hits.some(function (w) { return !generic[w]; });
   }
   /* findRunItem(items, iid) -> the run's item with this id, or null. The gaps slots carry only data-i/s/m
      (they never call remember()), so fill() finds each slot's own item here for its pipeline links. */
