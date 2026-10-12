@@ -591,7 +591,7 @@
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
      goes to a new folder (medcov4, radnotes3 and radmax7 now, de-identified figures 2026-10-10; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7"], medicine: ["medcov4", "maik1"], pathology: ["maik1"], pharmacology: ["maik1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7"], medicine: ["medcov4", "maik1"], pathology: ["maik1"], pharmacology: ["maik1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23", "maik24"], "mcc-health-promotion": ["maik24"] };
   /* MaiK overlays: generic discovery of published waves (maik1, maik2, ...) so later waves need NO app code changes.
      Pointer: overlay/maik/index.json (Cache-Control: max-age=300) -> manifest: "manifest-<hash>.json" (immutable, cached in IndexedDB).
      Fallback: local OVERLAYS static map (works offline or before manifest is loaded). */
