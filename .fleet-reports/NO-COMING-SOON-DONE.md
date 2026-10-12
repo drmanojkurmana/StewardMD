@@ -101,19 +101,20 @@ screen vs R2 stems; 0 dups). Shipped: overlay/maik29 (12 files, R2,
 live-verified per file), prep.js OVERLAYS +4 subjects (+maik29 on 2 more),
 counts +maik29 (52 sets, nothing dropped/changed), share-ID index
 republished (211,478 MCQs checked, 0 wrong). Spend $3.57 across 19 jobs.
-Exception: sen-monogenic-diabetes at 23/25 (first top-up fully g5-gated;
-steered retry with 223 R2 bank stems still running) — 16 banked items held
-locally, to publish as maik30 with the retry output.
+Follow-up maik30: sen-monogenic-diabetes retry (steered with 223 R2 bank
+stems) yielded 4/4 blind-verified; shipped with the 16 held items as
+overlay/maik30 (19 items; the publish gate dropped one off-topic stem
+about transient neonatal hyperinsulinism). Base 7 + 19 = 26, at the bar.
+Spend $0.07. All 12 wave-4 SS modules plus ch-haem now >=25.
 
 ## Remainder (content, NOT done) with cost to finish
 
-- Thin (<10) modules left: 98 (was 110 before wave 4, 186 before wave 2):
+- Thin (<10) modules left: 97 (was 110 before wave 4, 186 before wave 2):
   AMC-plan adult-health-medicine 18, adult-health-surgery 10,
   womens-health 11, population-health-and-ethics 10; SS gen-med 12, neuro 6,
-  rheum 6, onco 5, ID 4, endo 1 (sen-monogenic, maik30 pending); PLAB/MRCS/
-  MRCP-plan smalls 10. ≈ 1,694 items to the 25-bar ≈ $28.80 at
-  $0.017/item — beyond the remaining $1.22 of the $30 job budget; needs a
-  follow-up budget.
+  rheum 6, onco 5, ID 4; PLAB/MRCS/MRCP-plan smalls 10. ≈ 1,675 items to
+  the 25-bar ≈ $28.50 at $0.017/item — beyond the remaining $1.16 of the
+  $30 job budget; needs a follow-up budget.
 - PYQ without explanation: counted exactly — 2,570 of 10,483 live items
   (660 empty + 1,910 short, 19 subjects). Dry-run estimate $1.53 via
   tools/prep-explain.mjs (Vertex Batch) — NOT runnable from this sandbox
@@ -126,14 +127,14 @@ locally, to publish as maik30 with the retry output.
 
 ## Spend
 
-Content spend, all waves: $28.78 API (145 batch jobs, haiku gen + sonnet
-verify) for 1,856 verified MCQs ($0.0155/item):
+Content spend, all waves: $28.84 API (146 batch jobs, haiku gen + sonnet
+verify) for 1,875 verified MCQs ($0.0154/item):
 maik26 $2.80 (163), maik27 $17.97 (1,204), maik28 $4.43 (273),
-maik29 $3.57 (216).
-Job ledger: /tmp/no-coming-soon-spend.tsv (145 rows). Global ledger file is
+maik29 $3.57 (216), maik30 $0.07 (19).
+Job ledger: /tmp/no-coming-soon-spend.tsv (146 rows). Global ledger file is
 read-only from this sandbox (still 213 rows, $112.28 on disk): the rows must
-be appended by the ledger owner; true total then $141.06, under the $192
-stop and inside the $30 job budget ($1.22 left).
+be appended by the ledger owner; true total then $141.12, under the $192
+stop and inside the $30 job budget ($1.16 left).
 
 ## Verification
 

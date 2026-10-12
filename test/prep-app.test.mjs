@@ -143,7 +143,8 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.deepEqual(P.oldOverlays("medcov2"), ["medcov"]);
   assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
   assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
-  assert.match(read("prep.js"), /medicine: \["medcov4", "maik1", "maiktopic1", "ck2"\], pathology: \["maik1", "maiktopic1"\], pharmacology: \["maik1", "maiktopic1"\], "ss-pulmonology": \["medcov4", "maik29"\], "ss-cardiology": \["maik29"\], "ss-critical-care": \["maik29"\], "ss-endocrinology": \["maik29"\], "ss-nephrology": \["maik29"\]/, "maik29 wires the SS wave-4 subjects");
+  assert.match(read("prep.js"), /medicine: \["medcov4", "maik1", "maiktopic1", "ck2"\], pathology: \["maik1", "maiktopic1"\], pharmacology: \["maik1", "maiktopic1"\], "ss-pulmonology": \["medcov4", "maik29"\], "ss-cardiology": \["maik29"\], "ss-critical-care": \["maik29"\], "ss-endocrinology": \["maik29", "maik30"\], "ss-nephrology": \["maik29"\]/, "maik29 wires the SS wave-4 subjects (maik30 on endocrinology)");
+  assert.match(read("prep.js"), /"ss-endocrinology": \["maik29", "maik30"\]/, "maik30 wires sen-monogenic-diabetes");
   assert.match(read("prep.js"), /paediatrics: \["maiktopic1", "ck2"\], surgery: \["maiktopic1", "ck2"\]/, "step2ck subjects read the ck1 overlay");
   assert.deepEqual(P.oldOverlays("radmax7"), ["radmax", "radmax2", "radmax3", "radmax4", "radmax5", "radmax6"], "radmax7 replaces cached radmax to radmax6 copies");
   assert.deepEqual(P.oldOverlays("radmax5"), ["radmax", "radmax2", "radmax3", "radmax4"], "radmax5 replaces cached radmax to radmax4 copies");
