@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "cm-mixed",
+ "subject": "community-medicine",
+ "title": "Mixed practice rapid review: community medicine essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **national immunisation schedule** in India gives the primary DPT series at 6, 10 and 14 weeks of age. The first **DPT booster** is due at 16 to 24 months, and the second booster at 5 to 6 years. Learn these as a set of three primary doses followed by two boosters. Exam questions often test the booster timings.",
+   "say": "The national immunisation schedule in India gives the primary DPT series at 6, 10 and 14 weeks of age. The first DPT booster is due at 16 to 24 months, and the second booster at 5 to 6 years. Learn these as a set of three primary doses followed by two boosters. Exam questions often test the booster timings.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dose",
+     "Due age"
+    ],
+    "rows": [
+     [
+      "Primary 1",
+      "6 weeks"
+     ],
+     [
+      "Primary 2",
+      "10 weeks"
+     ],
+     [
+      "Primary 3",
+      "14 weeks"
+     ],
+     [
+      "First booster",
+      "16 to 24 months"
+     ],
+     [
+      "Second booster",
+      "5 to 6 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antimicrobial consumption is dominated by **animal non-therapeutic use**, which accounts for roughly 70 percent of the total. Animal therapeutic use is about 15 percent, and human use together is only about 15 percent. Growth promotion in livestock therefore drives most antibiotic exposure, a point frequently tested in mixed papers.",
+   "say": "Antimicrobial consumption is dominated by animal non-therapeutic use, which accounts for roughly 70 percent of the total. Animal therapeutic use is about 15 percent, and human use together is only about 15 percent. Growth promotion in livestock therefore drives most antibiotic exposure, a point frequently tested in mixed papers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Use category",
+     "Approximate share"
+    ],
+    "rows": [
+     [
+      "Animal non-therapeutic",
+      "70 percent"
+     ],
+     [
+      "Animal therapeutic",
+      "15 percent"
+     ],
+     [
+      "Human use (all)",
+      "15 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **medical certificate of cause of death** records the chain of events leading to death. Part I lists the **immediate cause** on line Ia, with earlier antecedent causes on lines Ib and Ic. Part II captures other significant conditions that contributed to death but were not part of the causal chain.",
+   "say": "The medical certificate of cause of death records the chain of events leading to death. Part I lists the immediate cause on line Ia, with earlier antecedent causes on lines Ib and Ic. Part II captures other significant conditions that contributed to death but were not part of the causal chain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Line",
+     "What it records"
+    ],
+    "rows": [
+     [
+      "Ia",
+      "Immediate cause"
+     ],
+     [
+      "Ib",
+      "First antecedent cause"
+     ],
+     [
+      "Ic",
+      "Earlier antecedent cause"
+     ],
+     [
+      "II",
+      "Other significant condition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Each growth indicator answers a separate clinical question. **Height-for-age** tracks linear growth and flags **stunting**, a long-standing shortfall often set during the first two years of life. **Weight-for-height** captures current body mass relative to length and identifies **wasting**, an acute form of undernutrition. **Weight-for-age** is widely used but blends both processes, so it cannot tell them apart.",
+   "say": "Each growth indicator answers a separate clinical question. Height-for-age tracks linear growth and flags stunting, a long-standing shortfall often set during the first two years of life. Weight-for-height captures current body mass relative to length and identifies wasting, an acute form of undernutrition. Weight-for-age is widely used but blends both processes, so it cannot tell them apart.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indicator",
+     "What it signals"
+    ],
+    "rows": [
+     [
+      "Height-for-age",
+      "Stunting (chronic)"
+     ],
+     [
+      "Weight-for-height",
+      "Wasting (acute)"
+     ],
+     [
+      "Weight-for-age",
+      "Overall status, not specific"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "317bfd68-471b-4947-b479-89c04699e6dd",
+  "74c2bc39-f5ab-490a-834a-e2d6e8365dd5",
+  "7ec8537e-71e7-42c2-a237-58d6d2b92346"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (Park K.)",
+  "National Immunization Schedule, Ministry of Health and Family Welfare, India"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 82
+ }
+}

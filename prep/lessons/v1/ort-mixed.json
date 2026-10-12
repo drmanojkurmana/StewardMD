@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "ort-mixed",
+ "subject": "orthopaedics",
+ "title": "Orthopaedics mixed rapid review",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Nerve injuries in orthopaedics are high yield. **Crutch palsy** is a very high radial nerve lesion, seen in thin elderly patients using crutches and in intoxicated people who sleep with the arm dangling over a chair. Know the difference between **neuropraxia**, a contusion with intact axons and sheath, and **neurotmesis**, complete nerve disruption. Foot drop follows common peroneal palsy, and the tibialis anterior tendon rupture or compartment syndromes can mimic it.",
+   "say": "Nerve injuries are high yield in orthopaedics. Crutch palsy is a very high radial nerve lesion, seen in thin elderly patients using crutches and in intoxicated people who sleep with the arm dangling over a chair. Know the difference between neuropraxia, a contusion where the axons and sheath stay intact, and neurotmesis, which is complete nerve disruption. Foot drop follows common peroneal palsy, and tibialis anterior tendon rupture or compartment syndromes can mimic it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key feature",
+     "Nerve involved"
+    ],
+    "rows": [
+     [
+      "Crutch palsy",
+      "Very high radial lesion",
+      "Radial"
+     ],
+     [
+      "Neuropraxia",
+      "Contusion, continuity kept",
+      "Any"
+     ],
+     [
+      "Neurotmesis",
+      "Complete disruption",
+      "Any"
+     ],
+     [
+      "Foot drop",
+      "Dorsiflexor weakness",
+      "Common peroneal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fat embolism classically follows long bone or pelvic fractures, typically 1 to 3 days later. Look for the triad of respiratory distress, neurological change and a **petechial rash**. The chest X-ray may show a snowstorm pattern. Sudden chest pain and collapse after pelvic fixation suggests this. Other conditions that mimic it include pulmonary embolism, which is confirmed by spiral CT, and pneumothorax.",
+   "say": "Fat embolism classically follows long bone or pelvic fractures, typically one to three days later. Look for respiratory distress, neurological change and a petechial rash. The chest X-ray may show a snowstorm pattern. Sudden chest pain and collapse after pelvic fixation suggests this. Pulmonary embolism is a mimic, and spiral CT is a sensitive test for it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Long bone or pelvic fracture"
+     },
+     {
+      "id": "b",
+      "label": "Fat globules enter circulation"
+     },
+     {
+      "id": "c",
+      "label": "Lung and brain involvement"
+     },
+     {
+      "id": "d",
+      "label": "Petechial rash and snowstorm X-ray"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Osteoarthritis and gout are frequent exam topics. In primary knee osteoarthritis the **medial** compartment narrows first, producing a varus deformity. The American College of Rheumatology clinical criteria include age over 50, stiffness under 30 minutes, crepitus, bony tenderness and bony enlargement, plus lack of warmth. Quadriceps atrophy is not a criterion. In tophaceous gout, Martel's sign reflects bony erosion from a long-standing tophus.",
+   "say": "Osteoarthritis and gout are frequent exam topics. In primary knee osteoarthritis the medial compartment narrows first, producing a varus deformity. The American College of Rheumatology clinical criteria include age over fifty, stiffness under thirty minutes, crepitus, bony tenderness and bony enlargement, plus lack of warmth. Quadriceps atrophy is not a criterion. In tophaceous gout, Martel's sign reflects bony erosion from a long-standing tophus.",
+   "vis": null
+  },
+  {
+   "tx": "Charcot's neuropathic joint is a painless, swollen, destroyed joint, most often caused by **diabetes** through loss of pain and position sense. Loose bodies and marked hypertrophic change are typical. Pigmented villonodular synovitis is a benign synovial proliferation that most often involves the knee. Ossified posterior longitudinal ligament is most common in the mid cervical spine. Schmorl's nodes are herniations of nucleus pulposus into the vertebral end plate.",
+   "say": "Charcot's neuropathic joint is a painless, swollen, destroyed joint, most often caused by diabetes through loss of pain and position sense. Loose bodies and marked hypertrophic change are typical. Pigmented villonodular synovitis is a benign synovial proliferation that most often involves the knee. Ossified posterior longitudinal ligament is most common in the mid cervical spine. Schmorl's nodes are herniations of nucleus pulposus into the vertebral end plate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Most typical site or cause"
+    ],
+    "rows": [
+     [
+      "Charcot joint",
+      "Diabetes, neuropathy"
+     ],
+     [
+      "Pigmented villonodular synovitis",
+      "Knee"
+     ],
+     [
+      "OPLL",
+      "Mid cervical spine"
+     ],
+     [
+      "Schmorl's node",
+      "Vertebral end plate"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "5d19e77f-804c-429b-825d-c6128abc7fa7",
+  "65357557-8804-4643-b3e2-16fdc797d402",
+  "680c41e0-bfc2-4cb5-bc69-105927332b51"
+ ],
+ "src": [],
+ "refs": [
+  "Current Diagnosis and Treatment: Rheumatology (Imboden, Hellmann, Stone (Eds))",
+  "Total Hip Replacement Surgery: Principles and Techniques (Marya, Bawari)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 254
+ }
+}

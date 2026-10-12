@@ -1,0 +1,195 @@
+{
+ "v": 1,
+ "module": "ahs-hpb",
+ "subject": "adult-health-surgery",
+ "title": "Liver, pancreas and spleen surgery: high-yield essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **cirrhotic liver** lesion showing **arterial hyperenhancement** followed by washout on the portal venous phase is hepatocellular carcinoma until proven otherwise. Tumour arteries are poorly formed and drain quickly, so contrast enters early and leaves early. Surveillance ultrasound every six months in cirrhosis detects most tumours while they are small. When imaging criteria are typical, diagnosis can be made without biopsy. Haemangioma, metastasis and focal nodular hyperplasia have different enhancement patterns.",
+   "say": "Hepatocellular carcinoma is the key diagnosis when a lesion appears in a cirrhotic liver and shows arterial hyperenhancement followed by washout on the portal venous phase. Tumour arteries are poorly formed and drain quickly, so contrast enters early and leaves early. Surveillance ultrasound every six months in cirrhosis detects most tumours while they are small. When imaging criteria are typical, diagnosis can be made without biopsy. Haemangioma, metastasis and focal nodular hyperplasia each have different enhancement patterns, which is why the pattern matters in the exam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Typical enhancement"
+    ],
+    "rows": [
+     [
+      "Hepatocellular carcinoma",
+      "Early arterial, then washout"
+     ],
+     [
+      "Haemangioma",
+      "Peripheral nodular fill-in"
+     ],
+     [
+      "Metastasis",
+      "Rim enhancement, hypovascular"
+     ],
+     [
+      "Focal nodular hyperplasia",
+      "Arterial, with central scar"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **grade 3 splenic laceration** on CT needs a decision based on stability and active bleeding. A stable patient with no peritonism and no **active contrast extravasation** can be managed non-operatively with monitored observation. Serial **haemoglobin** checks detect delayed bleeding, which can occur in the first few days. Instability, peritonitis or contrast blush on CT call for **splenic artery embolisation** or laparotomy. Splenic salvage is preferred where safe because asplenia carries lifelong infection risk.",
+   "say": "A grade 3 splenic laceration seen on CT needs a decision based on stability and active bleeding. A stable patient with no peritonism and no active contrast extravasation can be managed non-operatively with monitored observation. Serial haemoglobin checks detect delayed bleeding, which can occur in the first few days. Instability, peritonitis or a contrast blush on CT call for splenic artery embolisation or laparotomy. Splenic salvage is preferred where it is safe, because asplenia carries lifelong risk of serious infection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Splenic injury on CT"
+     },
+     {
+      "id": "n2",
+      "label": "Stable, no blush"
+     },
+     {
+      "id": "n3",
+      "label": "Monitor haemoglobin"
+     },
+     {
+      "id": "n4",
+      "label": "Unstable or blush"
+     },
+     {
+      "id": "n5",
+      "label": "Embolise or operate"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3",
+      "yes"
+     ],
+     [
+      "n2",
+      "n4",
+      "no"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fresh haematemesis with **cirrhosis** and ascites suggests **variceal haemorrhage**, a medical emergency. Start a **vasoactive drug** such as **octreotide** before endoscopy to lower portal pressure. Give prophylactic **ceftriaxone**, because infection raises rebleeding and mortality in cirrhosis. Prefer restrictive transfusion over aggressive volume replacement. **Endoscopic band ligation** is the definitive haemostatic step, ideally performed promptly after presentation.",
+   "say": "Fresh haematemesis in a patient with cirrhosis and ascites suggests variceal haemorrhage, which is a medical emergency. Start a vasoactive drug such as octreotide before endoscopy to lower portal pressure. Give prophylactic ceftriaxone, because infection raises the risk of rebleeding and death in cirrhosis. Prefer restrictive transfusion over aggressive volume replacement. Endoscopic band ligation is the definitive haemostatic step and should be performed promptly after presentation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Octreotide infusion",
+      "Lowers portal pressure"
+     ],
+     [
+      "Ceftriaxone",
+      "Prevents infection"
+     ],
+     [
+      "Restrictive transfusion",
+      "Avoids raising portal pressure"
+     ],
+     [
+      "Band ligation",
+      "Definitive bleeding control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After **pancreaticoduodenectomy**, a raised drain **amylase** signals a **postoperative pancreatic fistula**. The International Study Group of Pancreatic Surgery grades it as A, B or C. Grade A needs no change in care, and the drain can stay in place. Grade B requires modified management such as antibiotics or drain adjustment. Grade C requires intervention, often radiological or surgical. A well patient with a small uninfected collection is usually managed conservatively.",
+   "say": "After pancreaticoduodenectomy, a raised drain amylase signals a postoperative pancreatic fistula. The International Study Group of Pancreatic Surgery grades it as A, B or C. Grade A needs no change in care, and the drain can stay in place. Grade B requires modified management, such as antibiotics or drain adjustment. Grade C requires intervention, often radiological or surgical. A well patient with a small uninfected collection is usually managed conservatively.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Management"
+    ],
+    "rows": [
+     [
+      "A",
+      "No change in care"
+     ],
+     [
+      "B",
+      "Modified management"
+     ],
+     [
+      "C",
+      "Intervention required"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After a **splenectomy**, the patient is **asplenic** and at risk of overwhelming **encapsulated bacterial infection**. Give **pneumococcal**, **meningococcal** and **Hib** vaccines as soon as practical after surgery, ideally before discharge. Elective splenectomy allows vaccines about two weeks before the operation. Patients with unknown vaccine history should be assumed unprotected. Lifelong antibiotic prophylaxis and patient education about fever are also important.",
+   "say": "After a splenectomy, the patient is asplenic and at risk of overwhelming encapsulated bacterial infection. Give pneumococcal, meningococcal and Hib vaccines as soon as practical after surgery, ideally before discharge. Elective splenectomy allows vaccines about two weeks before the operation. Patients with unknown vaccine history should be assumed unprotected. Lifelong antibiotic prophylaxis and education about fever are also important.",
+   "vis": null
+  },
+  {
+   "tx": "Deterioration after a **major hepatectomy** with rising **bilirubin**, raised **INR**, low **albumin** and low platelets suggests **posthepatectomy liver failure**. The International Study Group of Liver Surgery defines it using bilirubin and INR, mainly later in the postoperative course. Clear drain output and no collection on CT argue against a bile leak or abscess. Encephalopathy reflects loss of hepatic clearance. Management is supportive, with attention to remnant liver volume, fluids and avoiding nephrotoxins.",
+   "say": "Deterioration after a major hepatectomy, with rising bilirubin, raised INR, low albumin and low platelets, suggests posthepatectomy liver failure. The International Study Group of Liver Surgery defines it using bilirubin and INR, mainly later in the postoperative course. Clear drain output and no collection on CT argue against a bile leak or abscess. Encephalopathy reflects loss of hepatic clearance. Management is supportive, with attention to remnant liver volume, fluids and avoiding nephrotoxins.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Points towards"
+    ],
+    "rows": [
+     [
+      "Rising bilirubin and INR",
+      "Liver failure"
+     ],
+     [
+      "Clear drain, no collection",
+      "Not a leak or abscess"
+     ],
+     [
+      "Drowsiness",
+      "Encephalopathy"
+     ],
+     [
+      "Low albumin and platelets",
+      "Reduced synthesis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Bailey and Love's Short Practice of Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "v": 1,
+ "module": "ans-mixed",
+ "subject": "anaesthesia",
+ "title": "Mixed practice: rapid anaesthesia review",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A fall in **end tidal CO2** during surgery with hypotension should prompt thinking about **pulmonary embolism**, because emboli cut blood flow to parts of the lung. Less CO2 reaches alveolar air, so the end tidal value drops. Hyperventilation and raised dead space also lower it, while malignant hyperthermia can raise it. A sudden fall with hypotension points first to embolism.",
+   "say": "A sudden fall in end tidal CO2 during surgery, with hypotension, should make you think of pulmonary embolism. Emboli cut blood flow to parts of the lung, so less CO2 reaches the alveolar air. Hyperventilation and raised dead space also lower end tidal CO2, whereas malignant hyperthermia raises it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Emboli block lung flow"
+     },
+     {
+      "id": "b",
+      "label": "Less CO2 in alveolar air"
+     },
+     {
+      "id": "c",
+      "label": "End tidal CO2 falls"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For **air embolism**, **transoesophageal echocardiography** is the most sensitive investigation. It detects tiny volumes of air in the right heart and pulmonary veins and can identify paradoxical embolism. Doppler allows audible detection of venous air. End tidal nitrogen and CO2 are less sensitive. Continuous monitoring is needed to catch venous embolism.",
+   "say": "For air embolism, transoesophageal echocardiography is the most sensitive investigation. It can detect very small volumes of air in the right heart and pulmonary veins, and it can identify paradoxical embolism. Doppler gives an audible signal for venous air. End tidal nitrogen and CO2 are less sensitive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Sensitivity order"
+    ],
+    "rows": [
+     [
+      "Transoesophageal echo",
+      "Highest"
+     ],
+     [
+      "Doppler",
+      "Second"
+     ],
+     [
+      "End tidal nitrogen",
+      "Third"
+     ],
+     [
+      "End tidal CO2",
+      "Lowest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **malignant hyperthermia**, the defect lies in the **ryanodine receptor** of skeletal muscle sarcoplasmic reticulum, on chromosome 19, and it is inherited as autosomal dominant. Triggers such as halothane and succinylcholine cause a rapid rise in intracellular calcium. Features include hyperthermia, rigidity, rhabdomyolysis and acidosis, and the condition is often fatal.",
+   "say": "In malignant hyperthermia, the defect lies in the ryanodine receptor of skeletal muscle, on chromosome 19, and it is inherited as autosomal dominant. Triggers such as halothane and succinylcholine cause a rapid rise in intracellular calcium. Features include hyperthermia, muscle rigidity, rhabdomyolysis and acidosis, and the condition is often fatal.",
+   "vis": null
+  },
+  {
+   "tx": "Operative vaginal delivery calls for a **sensory block** spanning **S2 to S4**, which covers perineal stretching and instrumentation. Early labour pain, by contrast, needs cover up to the **umbilicus**. **Atropine** premedication is valued for drying **secretions**, while **ethmoidal** involvement counts as a relative reason to avoid **nasopharyngeal airways**. For **electroconvulsive therapy**, **methohexital** remains the preferred induction agent.",
+   "say": "Operative vaginal delivery needs a sensory block from S2 to S4, covering perineal stretching and instrumentation. The first stage of labour needs cover up to the umbilicus. Atropine premedication reduces secretions. Ethmoidal involvement is a relative contraindication to nasopharyngeal airways. Methohexital is the induction agent of choice for electroconvulsive therapy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0dc21a76-030f-4c08-ae01-f88bf6aa8ae2",
+  "2be4e31f-6838-47ae-b104-cdd612ea51fa",
+  "5dd8f838-17c9-4df8-9d98-678879fe8b56"
+ ],
+ "src": [],
+ "refs": [
+  "Morgan and Mikhail's Clinical Anesthesiology",
+  "Miller's Anesthesia"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 96
+ }
+}
