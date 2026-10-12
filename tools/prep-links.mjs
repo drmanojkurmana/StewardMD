@@ -291,12 +291,18 @@ export function linkItem(it, M, ctx = {}) {
       put({ k: kind, id, title: p.title, c, v, sec: kind === "kb" ? sec : "" });
     }
   }
-  // Links the content pipeline wrote on the item (only ids that exist).
+  // Links the content pipeline wrote on the item (only ids that exist). Module-level grounding tags
+  // (x.links.via === "grounding-source": the module's concepts stamped on every item in the file) are kept
+  // only when this item's own text corroborates the target (a wrong link is worse than none: e.g. a helmet
+  // headache inheriting CPEO, or precocious puberty inheriting central core disease). Hand-written links
+  // without the grounding marker keep today's trust.
   const L = it.x && it.x.links;
   if (L && typeof L === "object") {
-    for (const raw of [].concat(L.kb_ids || L.kb || [])) { const id = ctx.byKey ? normKbId(raw, ctx.byKey) : null; if (id) put({ k: "kb", id, title: (ctx.kbTitle && ctx.kbTitle.get(id)) || id, c: 95, v: "a", sec }); }
-    for (const raw of [].concat(L.drug_ids || L.drug || [])) { const id = words(raw).join(" "); if (id && ctx.drugIds && ctx.drugIds.has(id)) put({ k: "dr", id, title: ctx.drugIds.get(id), c: 95, v: "a", sec: "" }); }
-    for (const raw of [].concat(L.protocol_ids || L.protocol || L.proto || [])) { const id = String(raw || "").trim(); if (id && ctx.protoIds && ctx.protoIds.has(id)) put({ k: "pr", id, title: ctx.protoIds.get(id), c: 95, v: "a", sec: "" }); }
+    const grounding = L.via === "grounding-source";
+    const corroborated = (k, id) => { const b = best.get(k + ":" + id); return !!b && b.c >= 65; };
+    for (const raw of [].concat(L.kb_ids || L.kb || [])) { const id = ctx.byKey ? normKbId(raw, ctx.byKey) : null; if (id && (!grounding || corroborated("kb", id))) put({ k: "kb", id, title: (ctx.kbTitle && ctx.kbTitle.get(id)) || id, c: 95, v: "a", sec }); }
+    for (const raw of [].concat(L.drug_ids || L.drug || [])) { const id = words(raw).join(" "); if (id && ctx.drugIds && ctx.drugIds.has(id) && (!grounding || corroborated("dr", id))) put({ k: "dr", id, title: ctx.drugIds.get(id), c: 95, v: "a", sec: "" }); }
+    for (const raw of [].concat(L.protocol_ids || L.protocol || L.proto || [])) { const id = String(raw || "").trim(); if (id && ctx.protoIds && ctx.protoIds.has(id) && (!grounding || corroborated("pr", id))) put({ k: "pr", id, title: ctx.protoIds.get(id), c: 95, v: "a", sec: "" }); }
   }
   // When the answer itself is an article or protocol, a condition met only in the stem is the vignette, not the lesson.
   const top = {};

@@ -183,3 +183,13 @@ test("gapsReport: counts linked from shards against the index total", () => {
   assert.deepEqual(gapsReport(dir), { items: 5, linked: 3, unlinked: 2 });
   assert.equal(gapsReport(path.join(dir, "nope")), null);
 });
+
+test("linkItem: module grounding tags need per-item corroboration, hand links keep trust", () => {
+  const gx = (kb_ids) => ({ x: { links: { kb_ids, via: "grounding-source" } } });
+  const good = IT({ q: "Cataract blurs vision. What is the treatment of cataract?", exp: "Cataract surgery restores sight.", ...gx(["cataract"]) });
+  assert.ok(linkItem(good, D.M, C0).some((l) => l.k === "kb" && l.id === "cataract" && l.v === "a" && l.c === 95), "corroborated grounding tag stays at pipeline confidence");
+  const bad = IT({ q: "Painless loss of vision with an afferent defect. What is the likely cause?", exp: "Glaucoma damages the optic nerve.", ...gx(["cataract"]) });
+  assert.ok(!linkItem(bad, D.M, C0).some((l) => l.id === "cataract"), "an uncorroborated grounding tag is dropped, never shown");
+  const hand = IT({ q: "Painless loss of vision with an afferent defect. What is the likely cause?", exp: "Glaucoma damages the optic nerve.", x: { links: { kb_ids: ["cataract"] } } });
+  assert.ok(linkItem(hand, D.M, C0).some((l) => l.id === "cataract" && l.v === "a"), "a hand-written link without the grounding marker keeps trust");
+});
