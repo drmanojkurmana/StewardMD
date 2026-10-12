@@ -69,8 +69,13 @@
      student outdated reports). The question stays in the pool; its explanation carries a visible note. */
   function isOutdated(it) { return !!(it && it.outdated); }
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
-  function poolFor(items, exam, hidden, qual) {
+  // strict: an exam-owned pool (a profile's bank.pool tag, e.g. "usmle-step2-ck"): only items carrying the tag,
+  // however few, so pooled exams never borrow other exams' questions. Callers pass strict explicitly; legacy
+  // callers keep the old behaviour. qual: optional sidecar quality records to block flagged/held items.
+  function poolFor(items, exam, hidden, strict, qual) {
+    if (strict && typeof strict === "object" && !qual) { qual = strict; strict = false; }
     var ok = (items || []).filter(function (it) { return usable(it, hidden, qual); });
+    if (strict) return ok.filter(function (it) { return it.ex && it.ex.indexOf(exam) >= 0; });
     var tag = exam === "usmle" ? "usmle" : (examOf(exam) || {}).itemEx;
     if (tag) { var v = ok.filter(function (it) { return it.ex && it.ex.indexOf(tag) >= 0; }); if (v.length >= 5) return v; }
     return ok;
@@ -93,7 +98,16 @@
   function stars(ms) { if (!ms || (ms.t || 0) < 5) return null; return Math.max(0, Math.min(5, Math.round((ms.ok / ms.t) * 5))); }
   // A module's MCQs: the bank count plus its overlay items (t.ov, from prep/bank/overlay-counts.json via loadIndex), the
   // same questions loadModule draws. USMLE with 5 or more vignettes counts those only.
-  function countFor(t, exam) { return exam === "usmle" && t.usmle >= 5 ? t.usmle : (t.count || 0) + (t.ov || 0); }
+  // A module's MCQs: the bank count plus its overlay items (t.ov, from prep/bank/overlay-counts.json via loadIndex), the
+  // same questions loadModule draws. USMLE with 5 or more vignettes counts those only. A pooled exam (t.pools carries
+  // its bank.pool tag) counts its pool only; other exams do not count pooled items (strict pools never leak).
+  function countFor(t, exam) {
+    if (!t) return 0;
+    if (t.pools && t.pools[exam] != null) return t.pools[exam];
+    var n = exam === "usmle" && t.usmle >= 5 ? t.usmle : (t.count || 0) + (t.ov || 0);
+    if (t.pools) for (var k in t.pools) n -= t.pools[k];
+    return Math.max(0, n);
+  }
   /* What to solve next, within the exam's subjects (in taxonomy order): the module with the most reviews due; else
      the started, unfinished module with the lowest share right; else the first module never opened that has questions. */
   function solveNext(subjects, indexes, store, today, exam) {
@@ -636,7 +650,7 @@
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
      goes to a new folder (medcov4, radnotes3 and radmax7 now, de-identified figures 2026-10-10; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7", "maiktopic1"], medicine: ["medcov4", "maik1", "maiktopic1"], pathology: ["maik1", "maiktopic1"], pharmacology: ["maik1", "maiktopic1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23", "maik24"], "mcc-health-promotion": ["maik24", "maik25"], "mcc-professional-behaviours": ["maik25"], "community-medicine": ["maiktopic1"], paediatrics: ["maiktopic1"], surgery: ["maiktopic1"], "ss-biostatistics": ["maiktopic1"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1"], "ss-infectious-diseases": ["maiktopic1"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1"], physiology: ["maiktopic1"], "mrcp-basic-science": ["maik18", "maik19"], "mrcp-cardiology": ["maik18", "maik19", "maikimg10"], "mrcp-dermatology": ["maik18", "maik19", "maikimg10"], "mrcp-endocrinology": ["maik18", "maik19", "maikimg10"], "mrcp-gastroenterology": ["maik18", "maik19", "maikimg10"], "mrcp-geriatrics": ["maik18", "maik19"], "mrcp-haematology-oncology": ["maik18", "maik19", "maikimg10"], "mrcp-infectious-diseases": ["maik18", "maik19"], "mrcp-nephrology": ["maik18", "maik19", "maikimg10"], "mrcp-neurology": ["maik18", "maik19", "maikimg10"], "mrcp-ophthalmology": ["maik18", "maik19"], "mrcp-pharmacology": ["maik18", "maik19"], "mrcp-psychiatry": ["maik18", "maik19"], "mrcp-respiratory": ["maik18", "maik19", "maikimg10"], "mrcp-rheumatology": ["maik18", "maik19", "maikimg10"], "mrcp-statistics": ["maik18", "maik19"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7", "maiktopic1"], medicine: ["medcov4", "maik1", "maiktopic1", "ck2"], pathology: ["maik1", "maiktopic1"], pharmacology: ["maik1", "maiktopic1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23", "maik24"], "mcc-health-promotion": ["maik24", "maik25"], "mcc-professional-behaviours": ["maik25"], "community-medicine": ["maiktopic1", "ck2"], paediatrics: ["maiktopic1", "ck2"], surgery: ["maiktopic1", "ck2"], "ss-biostatistics": ["maiktopic1"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1"], "ss-infectious-diseases": ["maiktopic1"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1", "ck2"], psychiatry: ["ck2"], physiology: ["maiktopic1"], "mrcp-basic-science": ["maik18", "maik19"], "mrcp-cardiology": ["maik18", "maik19", "maikimg10"], "mrcp-dermatology": ["maik18", "maik19", "maikimg10"], "mrcp-endocrinology": ["maik18", "maik19", "maikimg10"], "mrcp-gastroenterology": ["maik18", "maik19", "maikimg10"], "mrcp-geriatrics": ["maik18", "maik19"], "mrcp-haematology-oncology": ["maik18", "maik19", "maikimg10"], "mrcp-infectious-diseases": ["maik18", "maik19"], "mrcp-nephrology": ["maik18", "maik19", "maikimg10"], "mrcp-neurology": ["maik18", "maik19", "maikimg10"], "mrcp-ophthalmology": ["maik18", "maik19"], "mrcp-pharmacology": ["maik18", "maik19"], "mrcp-psychiatry": ["maik18", "maik19"], "mrcp-respiratory": ["maik18", "maik19", "maikimg10"], "mrcp-rheumatology": ["maik18", "maik19", "maikimg10"], "mrcp-statistics": ["maik18", "maik19"] };
   /* MaiK overlays: generic discovery of published waves (maik1, maik2, ...) so later waves need NO app code changes.
      Pointer: overlay/maik/index.json (Cache-Control: max-age=300) -> manifest: "manifest-<hash>.json" (immutable, cached in IndexedDB).
      Fallback: local OVERLAYS static map (works offline or before manifest is loaded). */

@@ -32,6 +32,14 @@ test("usable and poolFor: flagged out; USMLE vignettes only when there are at le
   assert.equal(P.usable(item("h"), { h: 1 }), false);
 });
 
+test("strict pools: a pooled exam draws only its tagged items, however few; legacy callers unchanged", () => {
+  const items = [item("x1"), item("x2", { ex: ["usmle-step2-ck"] }), item("x3", { ex: ["usmle-step2-ck"] }), item("x4", { ex: ["usmle"], flags: ["key"] })];
+  assert.deepEqual(P.poolFor(items, "usmle-step2-ck", null, true).map((i) => i.id), ["x2", "x3"], "strict: tagged only, no 5-item minimum");
+  assert.deepEqual(P.poolFor([item("x1")], "usmle-step2-ck", null, true), [], "strict: nothing tagged, nothing shown");
+  assert.deepEqual(P.poolFor(items, "usmle-step2-ck").map((i) => i.id), ["x1", "x2", "x3"], "no strict flag: legacy whole-pool behaviour");
+  assert.deepEqual(P.poolFor(items, "neet-pg").map((i) => i.id), ["x1", "x2", "x3"], "legacy exams keep the old behaviour");
+});
+
 test("isOutdated: a marked item stays usable; its explanation carries the guideline note", () => {
   assert.equal(P.isOutdated(item("o", { outdated: true })), true);
   assert.equal(P.isOutdated(item("o", { outdated: "2026-10" })), true, "any truthy mark counts");
@@ -71,6 +79,10 @@ test("statusOf, stars, countFor", () => {
   assert.equal(P.countFor({ count: 40, usmle: 3 }, "usmle"), 40);
   assert.equal(P.countFor({ count: 40, usmle: 12 }, "usmle"), 12);
   assert.equal(P.countFor({ count: 40, usmle: 12 }, "neet-pg"), 40);
+  assert.equal(P.countFor({ count: 40, ov: 12, pools: { "usmle-step2-ck": 12 } }, "usmle-step2-ck"), 12, "pooled exam counts its pool only");
+  assert.equal(P.countFor({ count: 40, ov: 12, pools: { "usmle-step2-ck": 12 } }, "neet-pg"), 40, "other exams do not count pooled items");
+  assert.equal(P.countFor({ count: 40, usmle: 12, ov: 5, pools: { "usmle-step2-ck": 5 } }, "usmle"), 7, "usmle vignette count minus pooled items");
+  assert.equal(P.countFor({ count: 40, pools: { "usmle-step2-ck": 0 } }, "usmle-step2-ck"), 0, "zero pool stays zero");
 });
 
 test("solveNext: most due first, then the weakest started module, then the first fresh one", () => {
@@ -131,8 +143,8 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.deepEqual(P.oldOverlays("medcov2"), ["medcov"]);
   assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
   assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
-  assert.match(read("prep.js"), /medicine: \["medcov4", "maik1", "maiktopic1"\], pathology: \["maik1", "maiktopic1"\], pharmacology: \["maik1", "maiktopic1"\], "ss-pulmonology": \["medcov4"\]/);
-  assert.match(read("prep.js"), /radiology: \["radnotes3", "radmax7", "maiktopic1"\]/, "radiology reads the radnotes3 and radmax7 releases (de-identified figures)");
+  assert.match(read("prep.js"), /medicine: \["medcov4", "maik1", "maiktopic1", "ck2"\], pathology: \["maik1", "maiktopic1"\], pharmacology: \["maik1", "maiktopic1"\], "ss-pulmonology": \["medcov4"\]/);
+  assert.match(read("prep.js"), /paediatrics: \["maiktopic1", "ck2"\], surgery: \["maiktopic1", "ck2"\]/, "step2ck subjects read the ck1 overlay");
   assert.deepEqual(P.oldOverlays("radmax7"), ["radmax", "radmax2", "radmax3", "radmax4", "radmax5", "radmax6"], "radmax7 replaces cached radmax to radmax6 copies");
   assert.deepEqual(P.oldOverlays("radmax5"), ["radmax", "radmax2", "radmax3", "radmax4"], "radmax5 replaces cached radmax to radmax4 copies");
   assert.deepEqual(P.oldOverlays("radnotes3"), ["radnotes", "radnotes2"], "radnotes3 replaces cached radnotes and radnotes2 copies");

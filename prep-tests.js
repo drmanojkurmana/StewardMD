@@ -40,6 +40,22 @@
   function marking(p) { var sc = p.scoring; return "+" + mark(sc.correct) + " right, " + (sc.incorrect ? "minus " + mark(sc.incorrect) + " wrong" : "no negative marking") + ", unanswered 0"; }
   function store() { var s = H.store(); if (!s.t2h || !Array.isArray(s.t2h)) s.t2h = []; if (!s.t2d || typeof s.t2d !== "object") s.t2d = {}; return s; }
   function tab() { return H.exam().id; }
+  // Exam-owned pools (profile bank.pool, e.g. "usmle-step2-ck"): a pooled exam draws only items carrying
+  // its tag, however few; every other exam drops items owned by a pool, so pooled banks never leak.
+  function poolOf(p) { return p && p.bank && p.bank.pool; }
+  function poolTags() { var out = {}; try { A.profileIds().forEach(function (id) { var q = A.profile(id); if (q && q.bank && q.bank.pool) out[q.bank.pool] = 1; }); } catch (e) {} return out; }
+  function poolItems(items, p, hidden) {
+    var pt = poolOf(p);
+    if (pt) return H.pure.poolFor(items, pt, hidden, true);
+    var tags = poolTags(), any = false, k;
+    for (k in tags) { any = true; break; }
+    if (!any) return items;
+    return (items || []).filter(function (it) {
+      if (!it.ex || !it.ex.length) return true;
+      for (var i = 0; i < it.ex.length; i++) if (tags[it.ex[i]]) return false;
+      return true;
+    });
+  }
   // The plan's subjects on this tab (the NEET-SS group, the one INI-SS subject); the whole tab without a plan host.
   function planSubs() {
     try { if (H.planSubjects) { var r = H.planSubjects(); if (r) return r; } } catch (e) {}
@@ -790,7 +806,7 @@
       var pairs = modulePairs(p, type, opts, R);
       return Promise.all([H.loadMany(pairs, H.stepMsg), loadQuality(opts.subjects || subs)]);
     }).then(function (res) {
-      var lists = res[0].map(function (l) { return { s: l.s, m: l.m, items: tab() === "usmle" ? H.pure.poolFor(l.items, "usmle", opts.hidden) : l.items }; });
+      var lists = res[0].map(function (l) { var base = (poolOf(p) || tab() !== "usmle") ? l.items : H.pure.poolFor(l.items, "usmle", opts.hidden); return { s: l.s, m: l.m, items: poolItems(base, p, opts.hidden) }; });
       opts.quality = res[1];
       opts.subjectName = function (s) { var sb = H.subjectById(s); return sb ? (sb.name.en || s) : s; };
       var asm = A.assemble(p, type, opts, lists);
@@ -1224,6 +1240,6 @@
       return;
     }
   }
-  G.PREP_TESTS = { on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, askCtx: askCtx, _P: P, _clear: clearSess,
+  G.PREP_TESTS = { on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, askCtx: askCtx, _P: P, _clear: clearSess, poolOf: poolOf, poolItems: poolItems,
     _grp: { ORDER: GRP_ORDER, FIRST: GRP_FIRST, SEARCH_AT: GRP_SEARCH_AT, name: grpName, short: grpShort, examOrder: examOrder, fxFor: fxFor, paperSubject: paperSubject, fxInPlan: fxInPlan, groupVisible: groupVisible, visibleFormats: visibleFormats, paperDone: paperDone, engineDone: engineDone, dailyDoneByKey: dailyDoneByKey, countFxDone: countFxDone, defaultExamOpen: defaultExamOpen, defaultGrpOpen: defaultGrpOpen, loadGrp: loadGrp, saveGrp: saveGrp, grpIsOpen: grpIsOpen, examIsOpen: examIsOpen, setGrpOpen: setGrpOpen, setExamOpen: setExamOpen, filterFx: filterFx, visibleFx: visibleFx, grpKey: grpKey, groupCounts: groupCounts, examCounts: examCounts, metaTxt: metaTxt } };
 })(typeof window !== "undefined" ? window : this);
