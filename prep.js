@@ -46,13 +46,22 @@
     (setIds || []).forEach(function (set) { var m = sets && sets[set] && sets[set][sid]; n += (m && +m[mid]) || 0; });
     return n;
   }
-  function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
+  var QUAL_BLOCKED = { requires_review: 1, rejected: 1, retired: 1 };
+  // A sidecar record that keeps the item out of every test (prep-assess.js eligible() blocks the same).
+  function qualBlocked(q) {
+    if (!q) return false;
+    if (QUAL_BLOCKED[q.status]) return true;
+    if (q.key && q.key.confidence === "disputed") return true;
+    if (q.rubric) for (var k in q.rubric) if (q.rubric[k] === "fail") return true;
+    return false;
+  }
+  function usable(it, hidden, qual) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]) && !qualBlocked(qual && qual[it.id]); }
   /* An item whose recommendation changed with the guideline (tools/prep-item-edits.mjs --outdated, seeded from
      student outdated reports). The question stays in the pool; its explanation carries a visible note. */
   function isOutdated(it) { return !!(it && it.outdated); }
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
-  function poolFor(items, exam, hidden) {
-    var ok = (items || []).filter(function (it) { return usable(it, hidden); });
+  function poolFor(items, exam, hidden, qual) {
+    var ok = (items || []).filter(function (it) { return usable(it, hidden, qual); });
     if (exam === "usmle") { var v = ok.filter(function (it) { return it.ex && it.ex.indexOf("usmle") >= 0; }); if (v.length >= 5) return v; }
     return ok;
   }
@@ -453,7 +462,7 @@
     s.cel = { day: day, keys: keys.slice(-200) };
     return s.cel;
   }
-  var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
+  var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, qualBlocked: qualBlocked, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
@@ -666,6 +675,23 @@
     }, function () {});
   }
   function hidden() { var h = load().hid; return (h && h.ids) || {}; }
+  // Item-quality sidecar (tools/prep-quality.mjs): quality/index.json names the current per-subject files
+  // (short cache); each subject file is immutable and cached like module files, so tests stay filtered
+  // offline. Absent = {} (every visible item stays eligible, as before the sidecar existed).
+  function loadQuality(subs) {
+    if (!st.qualIxP) st.qualIxP = getJSON(API + "quality/index.json").then(function (ix) { return ix && ix.subjects ? ix : null; }, function () { return null; });
+    return st.qualIxP.then(function (ix) {
+      if (!ix) return {};
+      return Promise.all((subs || []).filter(function (s) { return ix.subjects[s]; }).map(function (s) {
+        var u = "quality/" + ix.subjects[s];
+        if (st.mem[u]) return st.mem[u];
+        return cacheGet(u).then(function (hit) {
+          if (hit && hit.qf) return (st.mem[u] = ASSESS.readQuality(hit.qf));
+          return getJSON(API + u).then(function (f) { st.mem[u] = ASSESS.readQuality(f); cachePut(u, { qf: f, ts: Date.now() }); return st.mem[u]; }, function () { return {}; });
+        });
+      })).then(function (maps) { var out = {}; maps.forEach(function (m) { for (var k in m) out[k] = m[k]; }); return out; });
+    });
+  }
 
   // Subject search index (search.json, built with the bank): fetched on the first search, cached like module files.
   // The subject index may name the file (search: "search-<hash>.json", a rebuilt index under a new immutable name, e.g. with
@@ -2574,7 +2600,9 @@
       var pairs = mockModules(subs.map(function (sb) { return { id: sb.id, ix: st.ix[sb.id] }; }), s.exam, kind === "mini" ? 12 : 30);
       return loadMany(pairs, stepMsg);
     }).then(function (lists) {
-      var list = customDraw(lists.map(function (l) { return poolFor(l.items, s.exam, hid); }), n, 0);
+      return loadQuality(subs.map(function (sb) { return sb.id; })).then(function (qual) { return [lists, qual]; });
+    }).then(function (lq) {
+      var list = customDraw(lq[0].map(function (l) { return poolFor(l.items, s.exam, hid, lq[1]); }), n, 0);
       st.stack.pop();
       if (list.length < Math.min(n, 5)) { toast("Not enough questions loaded for a mock. Check the connection and try again."); return rerender(); }
       runQuestions(list, "exam", m.label + (kind === "mini" ? " (mini)" : kind === "part" ? " (one part)" : ""), { limit: Math.round(m.min * 60 * list.length / m.n), scheme: { plus: m.plus, minus: m.minus, label: m.label, pass: m.pass ? m.pass / (m.n * m.plus) : 0 } });
@@ -3054,7 +3082,7 @@
     snap: snapNow, celeFor: celeFor, celeAttrs: celeAttrs, celeChip: celeChip, maikLine: maikLine,
     stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, shuffle: shuffle, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut, cacheKeys: cacheKeys,
     // Tests 2 (prep-tests.js)
-    cacheDel: cacheDel, loadMany: loadMany, hidden: hidden, loadingScreen: loadingScreen, stepMsg: stepMsg, topicOf: topicOf, fmtMin: fmtMin, examOf: examOf, getJSON: getJSON, t2solutions: t2solutionsHtml,
+    cacheDel: cacheDel, loadMany: loadMany, hidden: hidden, loadQuality: loadQuality, loadingScreen: loadingScreen, stepMsg: stepMsg, topicOf: topicOf, fmtMin: fmtMin, examOf: examOf, getJSON: getJSON, t2solutions: t2solutionsHtml,
     coachSec: coachSecHtml, coachResult: coachResultHtml, coachAsk: coachAskOpen,
     startPlan: startPlan, startWeak: startWeak, openCustom: function () { push(renderCustom); }, openMistakes: function () { mf.tag = "all"; push(renderMistakes); }, setTt: ttSet,
     planToday: function () { return planToday(load(), today()); }, staticBase: STATIC, pnow: function () { return pnow(); },

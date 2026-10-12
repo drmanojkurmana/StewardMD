@@ -4,7 +4,8 @@
    Data (tools/prep-pyq.mjs, served from R2 through /api/prep/bank/v2/pyq/): index.json { papers, file, tags, mods } and
    the items file it names. Both are kept in IndexedDB prep-bank so papers open offline after the first time.
    Honesty: every paper here is a memory-based recall, labelled "recall" everywhere; NBEMS does not publish NEET-PG
-   papers. Flagged items (key unclear, image missing, disputed, papers that disagree) never show.
+   papers. Flagged items (key unclear, image missing, disputed, papers that disagree) and items under review in the
+   quality sidecar (requires_review/rejected/retired) never show.
    Screens: Previous year papers (home row) -> a paper (timed test in the NEET-PG pattern from MOCKS, or practice);
    a PYQ chip on a module; "Asked in NEET-PG 2025 (recall)" chips on bank and PYQ items; question images with tap to
    enlarge (tap again for 2.2x; back or Escape closes). */
@@ -36,8 +37,17 @@
   function paperScheme(mock, n) {
     return { limit: Math.round(n * mock.min * 60 / mock.n), plus: mock.plus, minus: mock.minus, label: mock.label };
   }
+  var QUAL_BLOCKED = { requires_review: 1, rejected: 1, retired: 1 };
+  // A sidecar record that keeps the item out of every paper (prep-assess.js eligible() blocks the same).
+  function qualBlocked(q) {
+    if (!q) return false;
+    if (QUAL_BLOCKED[q.status]) return true;
+    if (q.key && q.key.confidence === "disputed") return true;
+    if (q.rubric) for (var k in q.rubric) if (q.rubric[k] === "fail") return true;
+    return false;
+  }
   // exp-pending (our explanation is not written yet) never hides a question; every other flag does.
-  function usable(it, hidden) { return !!it && !(it.flags && it.flags.some(function (f) { return f !== "exp-pending"; })) && !(hidden && hidden[it.id]); }
+  function usable(it, hidden, qual) { return !!it && !(it.flags && it.flags.some(function (f) { return f !== "exp-pending"; })) && !(hidden && hidden[it.id]) && !qualBlocked(qual && qual[it.id]); }
   // A paper's questions in paper order (an item asked in two papers carries both numbers in pyq).
   function paperItems(items, pid) {
     var out = [];
@@ -54,7 +64,7 @@
     return n;
   }
   function bySubject(items) { var c = {}; items.forEach(function (it) { var s = it.subject || "unsorted"; c[s] = (c[s] || 0) + 1; }); return c; }
-  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject };
+  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -97,6 +107,11 @@
     return P.itP;
   }
   function warm(host) { P.host = host; loadIndex(host).then(null, function () {}); }
+  // The sidecar records for recall items (quality/v<n>/pyq.json), loaded once; none = {}.
+  function qualOf(host) {
+    if (!P.qualP) P.qualP = host.loadQuality ? host.loadQuality(["pyq"]).then(null, function () { return {}; }) : Promise.resolve({});
+    return P.qualP;
+  }
 
   var ICO = {
     papers: '<rect x="4" y="3" width="13" height="17" rx="2"/><path d="M8 8h5M8 12h5M8 16h3M20 7v12a2 2 0 0 1-2 2H8"/>',
@@ -119,15 +134,15 @@
   function renderPapers(host) {
     var esc = host.esc;
     host.paint(host.bar("Previous year papers", "NEET-PG and AIPGMEE · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers…</p></div>');
-    Promise.all([loadIndex(host), loadItems(host)]).then(function (r) {
+    Promise.all([loadIndex(host), loadItems(host), qualOf(host)]).then(function (r) {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
-      var ix = r[0], items = r[1], hid = hiddenOf(host), years = {}, html = "";
+      var ix = r[0], items = r[1], qual = r[2], hid = hiddenOf(host), years = {}, html = "";
       ix.papers.filter(function (p) { return PG[p.exam]; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
       var ys = Object.keys(years).sort(function (a, b) { return b - a; });
       if (!ys.length) { box.innerHTML = NOTE + '<p class="pn-empty">No previous year papers for this exam yet.</p>'; return; }
       ys.forEach(function (y) {
         html += '<h2 class="pn-sec">' + esc(y) + '</h2><div class="pn-group">' + years[y].map(function (p) {
-          var list = paperItems(items, p.id), ok = list.filter(function (it) { return usable(it, hid); }), img = ok.filter(function (it) { return it.img; }).length;
+          var list = paperItems(items, p.id), ok = list.filter(function (it) { return usable(it, hid, qual); }), img = ok.filter(function (it) { return it.img; }).length;
           return '<button type="button" class="pn-row pn-yq-row" data-act="y-paper" data-v="' + esc(p.id) + '"><span class="pn-ri" aria-hidden="true">' + icon() + '</span><span class="pn-rb"><b>' + esc(paperTitle(p)) + "</b><small>" + host.fmt(ok.length) + " questions" + (img ? " · " + img + " with images" : "") + '</small></span><span class="pn-yq-kind">' + (p.kind === "official" ? "Official" : "Recall") + "</span>" + host.ico("chev") + "</button>";
         }).join("") + "</div>";
       });
@@ -143,12 +158,12 @@
   /* Owner 2026-10-10 (Tests 2, smd_prep_tests2 on): the AIPGMEE 2012-2016 sets hold 1,446 to 2,094 items each, more than
      any real paper, so they are topic sets only: no timed paper simulation, practice and per-subject sets stay. */
   function topicOnly(p) { return !!(p && p.exam === "aipgmee" && G.PREP_TESTS && G.PREP_TESTS.on && G.PREP_TESTS.on()); }
-  function renderPaper(host, pid) {
+  function renderPaper(host, pid, qual) {
     var esc = host.esc, p = null;
     (P.ix ? P.ix.papers : []).forEach(function (x) { if (x.id === pid) p = x; });
     if (!p || !P.items) return;
     var tOnly = topicOnly(p);
-    var list = paperItems(P.items, pid), hid = hiddenOf(host), ok = list.filter(function (it) { return usable(it, hid); });
+    var list = paperItems(P.items, pid), hid = hiddenOf(host), ok = list.filter(function (it) { return usable(it, hid, qual); });
     // a compilation bigger than the real paper is timed as one real-size paper drawn at random from it
     var held = list.length - ok.length, mock = mockFor(host, "neet-pg"), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
     // Round 6: each subject row carries its icon tile and a bar for its share of the paper.
@@ -169,16 +184,18 @@
       (subs ? '<h2 class="pn-sec">By subject</h2><ul class="pn-yq-subs pn-fills">' + subs + "</ul>" : "") + "</div>");
   }
   function startPaper(host, pid, kind) {
-    var p = null; P.ix.papers.forEach(function (x) { if (x.id === pid) p = x; });
-    var hid = hiddenOf(host), ok = paperItems(P.items, pid).filter(function (it) { return usable(it, hid); });
-    if (!p || !ok.length) return host.toast("This paper has no questions to show yet.");
-    if (kind === "exam" && topicOnly(p)) kind = "study";
-    var title = paperTitle(p) + " (recall)";
-    if (kind === "exam") {
-      var mock = mockFor(host, "neet-pg"), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
-      return host.run(pick, "exam", title, { limit: sc.limit, scheme: { plus: sc.plus, minus: sc.minus, label: sc.label } });
-    }
-    host.run(ok.slice(), "study", title);
+    qualOf(host).then(function (qual) {
+      var p = null; P.ix.papers.forEach(function (x) { if (x.id === pid) p = x; });
+      var hid = hiddenOf(host), ok = paperItems(P.items, pid).filter(function (it) { return usable(it, hid, qual); });
+      if (!p || !ok.length) return host.toast("This paper has no questions to show yet.");
+      if (kind === "exam" && topicOnly(p)) kind = "study";
+      var title = paperTitle(p) + " (recall)";
+      if (kind === "exam") {
+        var mock = mockFor(host, "neet-pg"), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
+        return host.run(pick, "exam", title, { limit: sc.limit, scheme: { plus: sc.plus, minus: sc.minus, label: sc.label } });
+      }
+      host.run(ok.slice(), "study", title);
+    });
   }
 
   // Module screen: "All questions" / "PYQ n" chips; PYQ swaps the module's panel for its own.
@@ -215,7 +232,7 @@
     if (!p || !P.items) return;
     var sb = sid ? host.subjectById(sid) : null, title = paperTitle(p) + " (recall)", sname = sid ? (sb ? host.tx(sb.name) : "Not sorted yet") : "";
     return G.PREP_SETUP.open({ kind: "pyq", id: pid + (sid ? "/" + sid : ""), title: paperTitle(p), sub: sid ? sname : "Recall paper", hue: sb ? host.subjHue(sid) : 262,
-      load: function () { var hid = hiddenOf(host); return [paperItems(P.items, pid).filter(function (it) { return usable(it, hid) && (!sid || (it.subject || "unsorted") === sid); })]; },
+      load: function () { var hid = hiddenOf(host); return qualOf(host).then(function (qual) { return [paperItems(P.items, pid).filter(function (it) { return usable(it, hid, qual) && (!sid || (it.subject || "unsorted") === sid); })]; }); },
       start: function (list, mode, ro) { setupRun(host, list, mode, sid ? sname + " \u00b7 " + title : title, ro); } }, host);
   }
   function setupModulePyq(host, sid, mid, kind) {
@@ -225,15 +242,15 @@
       start: function (list, mode, ro) { setupRun(host, list, mode, "PYQs" + (t ? " \u00b7 " + host.tx(t.name) : ""), ro); } }, host);
   }
   function modulePyqList(host, sid, mid) {
-    return Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; })]).then(function (r) {
-      var hid = hiddenOf(host), tags = P.ix.tags || {};
-      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid); }));
+    return Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; }), qualOf(host)]).then(function (r) {
+      var hid = hiddenOf(host), tags = P.ix.tags || {}, qual = r[2];
+      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid, qual); }));
     });
   }
   function startModulePyq(host, sid, mid, kind) {
-    Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; })]).then(function (r) {
-      var hid = hiddenOf(host), tags = P.ix.tags || {};
-      var own = r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid); });
+    Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; }), qualOf(host)]).then(function (r) {
+      var hid = hiddenOf(host), tags = P.ix.tags || {}, qual = r[2];
+      var own = r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid, qual); });
       var bank = host.pool(r[1]).filter(function (it) { return tags[it.id]; });
       var list = bank.concat(own);
       if (!list.length) return host.toast("No previous-year questions to show here yet.");
@@ -312,7 +329,7 @@
     var v = b.getAttribute("data-v");
     if (a === "y-home") return host.push(function () { renderPapers(host); });
     if (a === "y-home-retry") return renderPapers(host);
-    if (a === "y-paper") return loadItems(host).then(function () { host.push(function () { renderPaper(host, v); }); }, function () { host.toast("The paper did not load. Check the connection and try again."); });
+    if (a === "y-paper") return Promise.all([loadItems(host), qualOf(host)]).then(function (r) { host.push(function () { renderPaper(host, v, r[1]); }); }, function () { host.toast("The paper did not load. Check the connection and try again."); });
     if (a === "y-start") return startPaper(host, v, b.getAttribute("data-k"));
     if (a === "y-mf") { P.mf[b.getAttribute("data-m")] = v; var slot = host.root().querySelector("#pnPyqSlot"); return drawSlot(slot, b.getAttribute("data-s"), b.getAttribute("data-m"), moduleCount(P.ix, b.getAttribute("data-m")), host); }
     if (a === "y-setup") return setupPaper(host, v, null);

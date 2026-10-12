@@ -12,6 +12,7 @@
     "bank_version": {"type": "string"},
     "content_hash": {"type": "string", "description": "sha256 of normalised stem+options+key at time of check; a mismatch invalidates the record"},
     "status": {"enum": ["draft", "automated_checks_passed", "requires_review", "approved", "rejected", "retired"]},
+    "status_changed_at": {"type": ["string", "null"], "format": "date-time", "description": "when status last changed (the matching history entry's at); written by tools/prep-quality.mjs"},
     "eligible_for": {"type": "array", "items": {"type": "string"}, "description": "test types this item may enter"},
     "learning_objective": {"type": ["string", "null"]},
     "cognitive_level": {"enum": ["recall", "understanding", "application", "analysis", null]},
@@ -28,6 +29,8 @@
     "history": {"type": "array", "items": {"type": "object", "required": ["at", "by", "action"], "properties": {
       "at": {"type": "string", "format": "date-time"}, "by": {"type": "string", "description": "tool name+version or human reviewer id"},
       "action": {"enum": ["created", "checked", "flagged", "status_change", "key_change_proposed", "key_change_approved", "explanation_upgraded", "retired"]},
-      "from": {}, "to": {}, "reason": {"type": "string"}, "evidence": {"type": "string"}}}}
+      "from": {}, "to": {}, "reason": {"type": "string"}, "evidence": {"type": "string"},
+      "source": {"type": "string", "description": "where the change came from: screen tool, bank build, student report, owner review, item statistics"},
+      "reviewer": {"type": "string", "description": "named qualified reviewer behind an approval (approvals need one)"}}}}
   }
 }

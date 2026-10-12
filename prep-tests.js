@@ -469,13 +469,19 @@
         return by;
       });
     }).then(function (by) {
-      var items = [], missing = 0, hid = H.hidden();
-      (paper.items || []).forEach(function (t) {
-        var it = (by[t[0] + "|" + t[1]] || {})[t[2]];
-        if (!it || hid[t[2]]) { missing++; items.push({ id: t[2], q: "This question is no longer available.", o: ["-", "-", "-", "-"], a: -9, _s: t[0], _m: t[1], _gone: true }); return; }
-        it._s = t[0]; it._m = t[1]; items.push(it);
+      // A paper built before an item was flagged still resolves it: re-check every item against the live
+      // sidecar, so requires_review/rejected/retired items become placeholders left out of the marks.
+      var subs = {}, hid = H.hidden();
+      (paper.items || []).forEach(function (t) { subs[t[0]] = 1; });
+      return loadQuality(Object.keys(subs)).then(function (qual) {
+        var items = [], missing = 0;
+        (paper.items || []).forEach(function (t) {
+          var it = (by[t[0] + "|" + t[1]] || {})[t[2]];
+          if (!it || hid[t[2]] || A.eligible(it, { hidden: hid, quality: qual }, paper.test_type)) { missing++; items.push({ id: t[2], q: "This question is no longer available.", o: ["-", "-", "-", "-"], a: -9, _s: t[0], _m: t[1], _gone: true }); return; }
+          it._s = t[0]; it._m = t[1]; items.push(it);
+        });
+        return { items: items, missing: missing };
       });
-      return { items: items, missing: missing };
     });
   }
   function prepareFixed(id) {
@@ -597,9 +603,11 @@
     Object.keys(s.mod || {}).forEach(function (m) { var sid = H.subjectOfModule(m); if (!sid) return; var o = out[sid] || (out[sid] = { t: 0, ok: 0 }); o.t += s.mod[m].t || 0; o.ok += s.mod[m].ok || 0; });
     return out;
   }
-  // Item-quality sidecar (reader only): /api/prep/bank/quality/index.json names versioned per-subject files; none = {}.
+  // Item-quality sidecar (reader only): the host loads and caches quality/index.json + the per-subject files;
+  // none = {} (every visible item stays eligible, as before the sidecar existed).
   function loadQuality(subs) {
     if (G.SMD_PREP_QUALITY) return Promise.resolve(A.readQuality(G.SMD_PREP_QUALITY));
+    if (H.loadQuality) return H.loadQuality(subs);
     if (!P.qualP) P.qualP = H.getJSON(H.bankApi + "quality/index.json").then(function (ix) { return ix && ix.subjects ? ix : null; }, function () { return null; });
     return P.qualP.then(function (ix) {
       if (!ix) return {};
@@ -730,7 +738,7 @@
       facts.push(["Marking", marking(p)]);
       facts.push(["Scope", x.scopeTxt ? x.scopeTxt : x.fixed ? x.fixed.scope : x.mid ? H.tx((H.topicOf(x.sid, x.mid) || { title: x.mid }).title) : x.sid ? H.tx((H.subjectById(x.sid) || {}).name) : "All " + H.exam().label + " subjects"]);
       if (x.fixed) facts.push(["Paper", "The same for every student"]);
-      if (x.fixedMissing) facts.push(["Unavailable", x.fixedMissing + " of " + a.count + " left out of the marks (withdrawn or hidden)"]);
+      if (x.fixedMissing) facts.push(["Unavailable", x.fixedMissing + " of " + a.count + " left out of the marks (withdrawn, hidden or under review)"]);
     }
     var secs = a.sections && a.sections.length > 1 ? '<ol class="pn-t2secs">' + a.sections.map(function (s) { return "<li><b>" + esc(s.label) + "</b><span>" + s.n + " questions · " + mmss(s.sec) + "</span></li>"; }).join("") + "</ol>" +
       '<p class="pn-mut pn-small">' + H.ico("lock") + (p.navigation.early_section_submit ? " A submitted section is locked." : " Each section is locked when its time ends or when you submit it. In the exam you stay in a section until its time ends; here you may submit early, and the time left is not carried over.") + "</p>" : "";
