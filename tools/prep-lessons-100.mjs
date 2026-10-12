@@ -165,7 +165,7 @@ const DRAFT_SCHEMA = {
   properties: {
     title: { type: "string" },
     steps: {
-      type: "array", minItems: 5, maxItems: 6,
+      type: "array",
       items: {
         type: "object", additionalProperties: false, required: ["tx", "say", "kind"],
         properties: {
