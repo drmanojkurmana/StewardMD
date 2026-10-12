@@ -154,7 +154,9 @@ async function cmdRepair() {
   let tb = 0;
   for (const t of topics()) {
     const missing = missByTopic[t.id] || [];
-    if (!missing.length || jobs[t.id + "#r2"]) continue;
+    let key = t.id + "#r2", k = 2;
+    while (jobs[key]) { k++; key = t.id + "#r" + k; }
+    if (!missing.length || k > 3) continue;
     const r = await buildRepairSource(t, missing);
     const est = QGEN.estimateJob(QGEN.plan({ text: fs.readFileSync(r.file, "utf8"), n: r.n, chunkChars: 40000 }), cfg);
     tb += est.batch;
@@ -164,7 +166,7 @@ async function cmdRepair() {
       "--env", os.homedir() + "/.config/stewardmd/anthropic.env", "--run"]);
     say(t.title + " repair " + r.n + " Qs batch $" + est.batch.toFixed(4) + " -> " + out.trim().split("\n").slice(-1));
     const jm = out.match(/Job (\w+)/);
-    if (jm) jobs[t.id + "#r2"] = { job: jm[1], stage: "gen", genUsage: null, topic: t.id };
+    if (jm) jobs[key] = { job: jm[1], stage: "gen", genUsage: null, topic: t.id };
     fs.writeFileSync(JOBS, JSON.stringify(jobs, null, 1));
   }
   say("repair batch estimate total: $" + tb.toFixed(4));

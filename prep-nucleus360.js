@@ -88,6 +88,9 @@
 
   function isStr(s) { return typeof s === "string" && !!s.trim(); }
   function toks(s) { return String(s == null ? "" : s).toLowerCase().match(/[a-z0-9]+/g) || []; }
+  // Function words carry no concept meaning ("and" sits in half the chapter titles); never match on them.
+  var STOPW = {};
+  "and,the,with,for,from,that,this,these,those,are,was,were,been,has,have,had,does,did,who,whom,which,what,when,where,how,why,not,nor,but,per,all,any,one,two,can,may,might,must,shall,will,would,could,should,more,most,very,own,such,than,then,also,into,over,under,between,through,during,without,within,about,against,among,across,behind,along,upon,else,just,are,was".split(",").forEach(function (w) { STOPW[w] = 1; });
   function escH(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 
   // typeOf(topic) -> disease|drug|procedure|basic. Explicit type wins; names ending in a drug suffix read as drugs.
@@ -125,7 +128,7 @@
     var slots = TEMPLATES[ty] || TEMPLATES.disease;
     for (i = 0; i < slots.length; i++) if (slots[i].id === c.id) {
       var all = toks(c.title + " " + slots[i].kw);
-      for (var k = 0; k < all.length; k++) if (all[k].length > 2) set[all[k]] = 1;
+      for (var k = 0; k < all.length; k++) if (all[k].length > 2 && !STOPW[all[k]]) set[all[k]] = 1;
       break;
     }
     return set;
@@ -134,20 +137,33 @@
     var x = (it && it.x) || {};
     return [it.q, (it.o || []).join(" "), it.exp, x.lo, x.clues, x.ddx, x.mechanism, x.mech, x.rev, x.pearl].map(function (v) { return String(v == null ? "" : v); }).join(" ");
   }
-  /* matchConcepts(outline, items, type) -> { assign: { conceptId: [itemId] }, unassigned: [itemId] }. Token overlap
-     between the item (stem, options, explanation, reasoning fields) and the concept (title + slot hints); ties go to
-     the earlier concept, then item order. Deterministic. Items matching nothing are listed, never forced. */
+  /* matchConcepts(outline, items, type) -> { assign: { conceptId: [itemId] }, unassigned: [itemId] }. Weighted token
+     overlap with the concept (title + slot hints): the stem states what the question tests (x3), the options (x2);
+     the explanation and reasoning fields teach broadly, so their vote is capped at 2 points and never drowns the
+     tested point. Ties go to the earlier concept, then item order. Deterministic. Items matching nothing are listed,
+     never forced. */
   function matchConcepts(outline, items, type) {
     var ws = (outline || []).map(function (c) { return wordsOf(c, type); });
     var assign = {}, un = [];
     (outline || []).forEach(function (c) { assign[c.id] = []; });
     (items || []).forEach(function (it) {
       if (!it || !it.id) return;
-      var tk = toks(itemText(it)), best = -1, bestS = 0;
-      var seen = {};
+      var x = (it && it.x) || {};
+      var fields = [
+        { t: toks(it.q), w: 3 },
+        { t: toks((it.o || []).join(" ")), w: 2 },
+        { t: toks([it.exp, x.lo, x.clues, x.ddx, x.mechanism, x.mech, x.rev, x.pearl].map(function (v) { return String(v == null ? "" : v); }).join(" ")), w: 1 }
+      ];
+      var best = -1, bestS = 0;
       for (var i = 0; i < outline.length; i++) {
-        var sc = 0;
-        for (var j = 0; j < tk.length; j++) { var w = tk[j]; if (w.length > 2 && ws[i][w] && !seen[w]) { sc++; seen[w] = 1; } }
+        var sc = 0, seen = {};
+        for (var f = 0; f < fields.length; f++) {
+          var tk = fields[f].t, cap = fields[f].w > 1 ? 99 : 2, used = 0;
+          for (var j = 0; j < tk.length; j++) {
+            var w = tk[j];
+            if (w.length > 2 && !STOPW[w] && ws[i][w] && !seen[w] && used < cap) { sc += fields[f].w; seen[w] = 1; used++; }
+          }
+        }
         if (sc > bestS) { bestS = sc; best = i; }
       }
       if (best >= 0) assign[outline[best].id].push(it.id);

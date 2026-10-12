@@ -46,6 +46,12 @@ test("reasoning fields (lo, clues, mechanism) count as item text", () => {
   assert.deepEqual(m.assign.path, ["q4"]);
 });
 
+test("the stem outranks the explanation; function words never match", () => {
+  const items = [IT({ id: "q5", q: "A patient with chronic diverticular disease has pneumaturia. Which complication is most likely?", o: ["Fistula", "Stricture", "Bleed", "Nothing"], exp: "In older adults the incidence rises with age; epidemiology and prevalence vary by sex and definition, and the diagnosis rests on imaging." })];
+  const m = N.matchConcepts(OUTLINE, items, "disease");
+  assert.deepEqual(m.assign.comp, ["q5"], "stem 'complication' beats epi-flavoured explanation; 'and' matches nothing");
+});
+
 test("items without ids are skipped, empty bank matches nothing", () => {
   const m = N.matchConcepts(OUTLINE, [{ q: "no id" }], "disease");
   assert.deepEqual(m.unassigned, []);
