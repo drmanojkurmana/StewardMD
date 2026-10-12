@@ -32,7 +32,9 @@
     { id: "plab-1", tab: "plab", label: "PLAB 1", sub: "GMC MLA AKT, 180 questions" },
     { id: "mrcs-part-a", tab: "mrcs", label: "MRCS Part A", sub: "Intercollegiate MRCS Part A, 300 questions" },
     { id: "amc-mcq", tab: "amc", label: "AMC CAT MCQ", sub: "Australian Medical Council MCQ, 150 questions" },
-    { id: "mccqe-1", tab: "mccqe", label: "MCCQE Part I", sub: "Medical Council of Canada, 230 questions" }
+    { id: "mccqe-1", tab: "mccqe", label: "MCCQE Part I", sub: "Medical Council of Canada, 230 questions" },
+    { id: "mrcp-part1", tab: "mrcp", label: "MRCP Part 1", sub: "MRCP(UK) Part 1, 2 papers of 100 best-of-five" },
+    { id: "mrcp-part2-written", tab: "mrcp", label: "MRCP Part 2 Written", sub: "MRCP(UK) Part 2 Written, 2 papers of 100 best-of-five" }
   ];
   var MINUTES = [15, 30, 60, 90, 120];
   /* Blueprints: marks per subject as published. FMGE: NBEMS FMGE October 2026 information bulletin, section 12.2

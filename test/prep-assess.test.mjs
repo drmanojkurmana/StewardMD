@@ -406,3 +406,23 @@ test("profiles carry the schema's required fields and enums (prep/assess/schemas
     for (const t of p.format.item_types) assert.ok(S.properties.format.properties.item_types.items.enum.includes(t));
   }
 });
+
+test("assemble: profile item_ex keeps MRCP Part 1 and Part 2 pools apart", () => {
+  const P1 = A.profile("mrcp-part1"), P2 = A.profile("mrcp-part2-written");
+  assert.equal(P1.item_ex, "mrcp-part1"); assert.equal(P2.item_ex, "mrcp-part2-written");
+  const bank = [];
+  for (const s of ["mrcp-cardiology", "mrcp-neurology"]) {
+    const items = [];
+    for (let i = 0; i < 60; i++) items.push({ id: s + ".1." + i, q: "Part one best-of-five question about " + s + " case number " + i + " with enough words", o: ["a1", "b1", "c1", "d1", "e1"], a: 0, ex: ["mrcp-part1"] });
+    for (let i = 0; i < 60; i++) items.push({ id: s + ".2." + i, q: "Part two clinical vignette question about " + s + " case number " + i + " with enough words", o: ["a2", "b2", "c2", "d2", "e2"], a: 0, ex: ["mrcp-part2-written"] });
+    bank.push({ s, m: s + "-m0", items });
+  }
+  const r1 = A.assemble(P1, "mini", { seed: "m1" }, bank);
+  assert.equal(r1.ok, true); assert.equal(r1.items.length, 100);
+  assert.ok(r1.items.every((it) => it.ex && it.ex.indexOf("mrcp-part1") >= 0), "Part 1 mini has Part 1 items only");
+  const r2 = A.assemble(P2, "mini", { seed: "m1" }, bank);
+  assert.equal(r2.ok, true); assert.equal(r2.items.length, 100);
+  assert.ok(r2.items.every((it) => it.ex && it.ex.indexOf("mrcp-part2-written") >= 0), "Part 2 mini has Part 2 items only");
+  const ids1 = r1.items.map((i) => i.id), ids2 = r2.items.map((i) => i.id);
+  assert.equal(ids1.filter((id) => ids2.includes(id)).length, 0, "no shared item");
+});

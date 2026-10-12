@@ -29,7 +29,10 @@
     { id: "mrcs", label: "MRCS Part A", branch: "uk", tag: "mrcs-part-a", sec: 60 },
     // International licensing banks (branch intl; subjects carry per-exam tags).
     { id: "amc", label: "AMC CAT MCQ", branch: "intl", tag: "amc-mcq", sec: 84 },
-    { id: "mccqe", label: "MCCQE Part I", branch: "intl", tag: "mccqe-1", sec: 83 }
+    { id: "mccqe", label: "MCCQE Part I", branch: "intl", tag: "mccqe-1", sec: 83 },
+    // MRCP: one bank branch, two profiles; itemEx scopes QBank pools to the profile's own items (see poolFor).
+    { id: "mrcp-part1", label: "MRCP Part 1", branch: "mrcp", tag: "mrcp-part1", itemEx: "mrcp-part1", sec: 60 },
+    { id: "mrcp-part2-written", label: "MRCP Part 2 Written", branch: "mrcp", tag: "mrcp-part2-written", itemEx: "mrcp-part2-written", sec: 60 }
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
@@ -68,7 +71,8 @@
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
   function poolFor(items, exam, hidden, qual) {
     var ok = (items || []).filter(function (it) { return usable(it, hidden, qual); });
-    if (exam === "usmle") { var v = ok.filter(function (it) { return it.ex && it.ex.indexOf("usmle") >= 0; }); if (v.length >= 5) return v; }
+    var tag = exam === "usmle" ? "usmle" : (examOf(exam) || {}).itemEx;
+    if (tag) { var v = ok.filter(function (it) { return it.ex && it.ex.indexOf(tag) >= 0; }); if (v.length >= 5) return v; }
     return ok;
   }
   // One pass over the FSRS cards: answered and due counts per module.
