@@ -1,11 +1,12 @@
-/* Collapsible Tests tab (owner 2026-10-11, prep-tests.js grouping).
+/* Collapsible Tests tab (owner 2026-10-11, prep-tests.js grouping; plan scope owner 2026-10-12).
  * What must hold:
- *  - exams order with the student's exam first; only it is open, others closed;
+ *  - ONLY the selected plan's exam renders (no sibling exam, no "More exam formats"); it is open;
  *  - inside it only Daily 10 and Grand open, the rest collapsed; open state persists per exam;
  *  - headers are buttons with aria-expanded/controls, counts read "N, M done";
  *  - collapsed groups render lazily (no paper rows until opened); big groups show 6 + Show all N;
- *  - groups past 20 papers show a filter box; a sticky jump bar lists the 12 formats;
- *  - resume, done status, honest empties, ?tests2=0 and offline still work.
+ *  - groups past 20 papers show a filter box; a sticky jump bar lists the visible formats;
+ *  - empty groups are hidden (no starter, builder, paper or PYQ row);
+ *  - resume, done status, ?tests2=0 and offline still work.
  *  - gaps B starters: Daily mixed beside Daily 10; image/case exam + subject starters; weak-area and
  *    incorrect-questions engine starters with honest disabled whys; engine custom reachable, study custom kept.
  * node --test test/prep-tests-collapse.test.mjs
@@ -172,15 +173,18 @@ test("?tests2=0 still turns the tab off; default stays on", () => {
   assert.equal(T2.on(), false);
 });
 
-test("testsHtml: primary exam first and open, Daily 10 and Grand open, counts in headers", () => {
+/* Plan scope (owner 2026-10-12): the Tests tab shows ONLY the selected plan's exam. The old contract rendered every
+ * exam on the tab (primary first, the rest closed) plus "More exam formats"; that cross-exam listing is removed, so
+ * these assertions now pin the single-exam view: one exam section, no other exam, no "More exam formats". */
+test("testsHtml: only the plan exam, open, Daily 10 and Grand open, counts in headers", () => {
   const list = profiles(), store = doneStore();
   const T2 = loadT2(list, store);
   T2._P.fx = papers();
   T2._P.sess = null;
   const html = T2.testsHtml(mockH(store));
-  assert.ok(html.indexOf('data-p="neet-pg"') < html.indexOf('data-p="ini-cet"'), "primary first");
-  assert.ok(html.includes('class="pn-t2xhead" data-act="t2-x" data-p="neet-pg" aria-expanded="true"'), "primary exam open");
-  assert.ok(html.includes('data-act="t2-x" data-p="ini-cet" aria-expanded="false"'), "other exam closed");
+  assert.ok(!html.includes('data-p="ini-cet"'), "no cross-exam card for the tab sibling");
+  assert.ok(!html.includes("More exam formats"), "no more-formats section");
+  assert.ok(html.includes('class="pn-t2xhead" data-act="t2-x" data-p="neet-pg" aria-expanded="true"'), "plan exam open");
   assert.ok(html.includes('data-act="t2-g" data-p="neet-pg" data-f="daily10" aria-expanded="true"'), "daily open");
   assert.ok(html.includes('data-act="t2-g" data-p="neet-pg" data-f="grand" aria-expanded="true"'), "grand open");
   assert.ok(html.includes('data-act="t2-g" data-p="neet-pg" data-f="mini" aria-expanded="false"'), "mini closed");
@@ -188,13 +192,15 @@ test("testsHtml: primary exam first and open, Daily 10 and Grand open, counts in
   assert.ok(html.includes("38, 5 done"), "subject counts: 38 papers, 5 done");
   assert.ok(html.includes("16, 3 done") || html.includes("16, 2 done"), "grand counts include the engine starter");
   assert.ok(html.includes("3, 1 done"), "custom counts diagnostic done");
+  assert.ok(html.includes('data-act="p-settings"'), "the one way to change exam");
+  // neet-pg here: part has no blueprint and pyq has no papers, so both groups stay hidden: 10 chips, 10 groups.
   const jumps = (html.match(/data-act="t2-jump"/g) || []).length;
-  assert.equal(jumps, 24, "12 jump chips per exam");
+  assert.equal(jumps, 10, "one jump chip per visible group");
   assert.ok(html.includes('role="navigation" aria-label="Jump to test type"'), "jump bar labelled");
   const gheads = (html.match(/class="pn-t2ghead"[^>]*aria-expanded="[^"]*"[^>]*aria-controls="pnT2G-[^"]+"/g) || []).length;
-  assert.equal(gheads, 24, "every group header exposes expanded/controls");
-  assert.equal((html.match(/<h2 class="pn-t2xh">/g) || []).length, 2, "exam headers keep h2 hierarchy");
-  assert.equal((html.match(/<h3 class="pn-t2gh">/g) || []).length, 24, "group headers keep h3 hierarchy");
+  assert.equal(gheads, 10, "every group header exposes expanded/controls");
+  assert.equal((html.match(/<h2 class="pn-t2xh">/g) || []).length, 1, "one exam header keeps h2 hierarchy");
+  assert.equal((html.match(/<h3 class="pn-t2gh">/g) || []).length, 10, "group headers keep h3 hierarchy");
 });
 
 test("lazy render: collapsed groups build no rows; open groups cap at 6 with Show all", () => {
@@ -218,16 +224,20 @@ test("lazy render: collapsed groups build no rows; open groups cap at 6 with Sho
   assert.ok(html2.includes('aria-label="Filter Subject tests"'), "past 20 papers a filter box appears");
 });
 
-test("honest empties, loading and offline fixed states", () => {
+/* No empty groups (owner 2026-10-12): a format group with no starter, builder, paper or PYQ row is not shown at
+ * all, instead of an honest-empty note. The old contract asserted those notes; absence is now the assertion. */
+test("empty groups hidden, loading and offline fixed states", () => {
   const list = profiles(), store = mockStore();
   const openPart = (k, mem) => (k === "smd_prep_t2grp" ? JSON.stringify({ v: 1, exams: { "neet-pg": { open: true, groups: { part: true, image: true, pyq: true } } } }) : (mem[k] ?? null));
   const T2 = loadT2(list, store, openPart);
   T2._P.fx = [];
   T2._P.sess = null;
   const html = T2.testsHtml(mockH(store));
-  assert.ok(html.includes("One-part tests apply only to FMGE."), "part honest on non-FMGE");
-  assert.ok(html.includes("Build an image test"), "image on-demand starter replaces the fixed-only empty");
-  assert.ok(html.includes("No PYQ papers for this exam yet."), "pyq honest empty");
+  assert.ok(!html.includes("One-part tests apply only to FMGE."), "part group hidden on non-FMGE");
+  assert.ok(!html.includes('data-f="part"'), "no part section or jump chip");
+  assert.ok(html.includes("Build an image test"), "image on-demand starter kept");
+  assert.ok(!html.includes("No PYQ papers for this exam yet."), "pyq group hidden without papers");
+  assert.ok(!html.includes('data-f="pyq"'), "no pyq section or jump chip");
   const Tload = loadT2(list, store);
   Tload._P.fx = null;
   Tload._P.sess = null;

@@ -29,7 +29,10 @@
     { id: "mrcs", label: "MRCS Part A", branch: "uk", tag: "mrcs-part-a", sec: 60 },
     // International licensing banks (branch intl; subjects carry per-exam tags).
     { id: "amc", label: "AMC CAT MCQ", branch: "intl", tag: "amc-mcq", sec: 84 },
-    { id: "mccqe", label: "MCCQE Part I", branch: "intl", tag: "mccqe-1", sec: 83 }
+    { id: "mccqe", label: "MCCQE Part I", branch: "intl", tag: "mccqe-1", sec: 83 },
+    // MRCP: one bank branch, two profiles; itemEx scopes QBank pools to the profile's own items (see poolFor).
+    { id: "mrcp-part1", label: "MRCP Part 1", branch: "mrcp", tag: "mrcp-part1", itemEx: "mrcp-part1", sec: 60 },
+    { id: "mrcp-part2-written", label: "MRCP Part 2 Written", branch: "mrcp", tag: "mrcp-part2-written", itemEx: "mrcp-part2-written", sec: 60 }
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
@@ -68,7 +71,8 @@
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
   function poolFor(items, exam, hidden, qual) {
     var ok = (items || []).filter(function (it) { return usable(it, hidden, qual); });
-    if (exam === "usmle") { var v = ok.filter(function (it) { return it.ex && it.ex.indexOf("usmle") >= 0; }); if (v.length >= 5) return v; }
+    var tag = exam === "usmle" ? "usmle" : (examOf(exam) || {}).itemEx;
+    if (tag) { var v = ok.filter(function (it) { return it.ex && it.ex.indexOf(tag) >= 0; }); if (v.length >= 5) return v; }
     return ok;
   }
   // One pass over the FSRS cards: answered and due counts per module.
@@ -111,9 +115,12 @@
     if (fresh) return { why: "new", subject: fresh.subject, module: fresh.module, title: fresh.title };
     return null;
   }
+  // Empty modules (no questions for this exam) are never listed: no row, no placeholder line.
   function filterModules(topics, prog, filter, exam) {
     return topics.filter(function (t) {
-      var n = countFor(t, exam), st = statusOf((prog[t.id] || {}).answered || 0, n);
+      var n = countFor(t, exam);
+      if (!n) return false;
+      var st = statusOf((prog[t.id] || {}).answered || 0, n);
       return filter === "all" || (filter === "paused" && st === "paused") || (filter === "done" && st === "done") || (filter === "new" && st === "new");
     });
   }
@@ -535,6 +542,44 @@
     (st.tax ? st.tax.branches : []).forEach(function (b) { if (b.id === ex.branch) b.subjects.forEach(function (s) { if (ex.all || !s.ex || s.ex.indexOf(ex.tag) >= 0) out.push(s); }); });
     return out;
   }
+  /* The selected plan's scope (prep-plan.js EXAM_CHOICES/SS_GROUPS): Tests and QBank follow the plan's exam, group and
+     subject, never the whole tab. planChoice() = the stored choice; planProfileId() = its exam profile;
+     planExamLabel() = its name on this tab; planScopeLabel() = its group or subject; planSubjects() = the tab's
+     subjects narrowed to the plan (the NEET-SS group, the one INI-SS subject); planNeed() = the one blocking step
+     (INI-SS with no subject yet) or null; planProfile() = the plan's exam profile or null. */
+  function planPure() { return (G.PREP_PLAN && G.PREP_PLAN._pure) || null; }
+  function planChoice() { var PP = planPure(), s = load(); return (PP && s.pl && s.pl.exam && PP.choiceOf(s.pl.exam)) || null; }
+  function planProfileId() { var PP = planPure(), s = load(); if (!PP || !s.pl || !s.pl.exam) return null; return PP.planProfileId(s.pl.exam); }
+  function planExamLabel() { var s = load(), ex = examOf(s.exam), c = planChoice(); return (c && c.tab === ex.id ? c.label : ex.label); }
+  function planScopeLabel() {
+    var s = load(), PP = planPure(), pl = s.pl || {};
+    if (!PP || !pl.exam) return "";
+    if (pl.exam === "neet-ss") { var g = PP.ssGroupOf(PP.planGroup(pl)); return g ? g.label : ""; }
+    if (pl.exam === "ini-ss" && pl.subject) { var sb = subjectById(pl.subject); return sb ? tx(sb.name) : ""; }
+    return "";
+  }
+  function planSubjects() {
+    var s = load(), all = subjectsOf(s.exam), PP = planPure(), pl = s.pl || {};
+    if (!PP || !pl.exam) return all;
+    var want = {}, out;
+    if (pl.exam === "neet-ss") PP.ssGroupSubjects(PP.planGroup(pl)).forEach(function (id) { want[id] = 1; });
+    else if (pl.exam === "ini-ss" && pl.subject) want[pl.subject] = 1;
+    else if (pl.exam === "ini-ss") return [];
+    else return all;
+    out = all.filter(function (x) { return want[x.id]; });
+    return out;
+  }
+  function planNeed() {
+    var s = load(), PP = planPure();
+    if (!PP || !s.pl || !s.pl.exam) return null;
+    if (s.pl.exam === "ini-ss" && !planSubjects().length) return { kind: "subject" };
+    return null;
+  }
+  function planProfile() {
+    if (!ASSESS) return null;
+    var id = planProfileId();
+    return id ? ASSESS.profile(id) : null;
+  }
   // A subject piloted in its own bank path (taxonomy `bv`, e.g. ss-radiology in v6) reads from there; the rest from VER.
   function bvOf(sid) { var s = subjectById(sid); return (s && s.bv) || VER; }
   function subjectById(id) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (s) { if (s.id === id) r = s; }); }); return r; }
@@ -591,7 +636,7 @@
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
      goes to a new folder (medcov4, radnotes3 and radmax7 now, de-identified figures 2026-10-10; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7", "maiktopic1"], medicine: ["medcov4", "maik1", "maiktopic1"], pathology: ["maik1", "maiktopic1"], pharmacology: ["maik1", "maiktopic1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23", "maik24"], "mcc-health-promotion": ["maik24", "maik25"], "mcc-professional-behaviours": ["maik25"], "community-medicine": ["maiktopic1"], paediatrics: ["maiktopic1"], surgery: ["maiktopic1"], "ss-biostatistics": ["maiktopic1"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1"], "ss-infectious-diseases": ["maiktopic1"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1"], physiology: ["maiktopic1"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7", "maiktopic1"], medicine: ["medcov4", "maik1", "maiktopic1"], pathology: ["maik1", "maiktopic1"], pharmacology: ["maik1", "maiktopic1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23", "maik24"], "mcc-health-promotion": ["maik24", "maik25"], "mcc-professional-behaviours": ["maik25"], "community-medicine": ["maiktopic1"], paediatrics: ["maiktopic1"], surgery: ["maiktopic1"], "ss-biostatistics": ["maiktopic1"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1"], "ss-infectious-diseases": ["maiktopic1"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1"], physiology: ["maiktopic1"], "mrcp-basic-science": ["maik18", "maik19"], "mrcp-cardiology": ["maik18", "maik19", "maikimg10"], "mrcp-dermatology": ["maik18", "maik19", "maikimg10"], "mrcp-endocrinology": ["maik18", "maik19", "maikimg10"], "mrcp-gastroenterology": ["maik18", "maik19", "maikimg10"], "mrcp-geriatrics": ["maik18", "maik19"], "mrcp-haematology-oncology": ["maik18", "maik19", "maikimg10"], "mrcp-infectious-diseases": ["maik18", "maik19"], "mrcp-nephrology": ["maik18", "maik19", "maikimg10"], "mrcp-neurology": ["maik18", "maik19", "maikimg10"], "mrcp-ophthalmology": ["maik18", "maik19"], "mrcp-pharmacology": ["maik18", "maik19"], "mrcp-psychiatry": ["maik18", "maik19"], "mrcp-respiratory": ["maik18", "maik19", "maikimg10"], "mrcp-rheumatology": ["maik18", "maik19", "maikimg10"], "mrcp-statistics": ["maik18", "maik19"] };
   /* MaiK overlays: generic discovery of published waves (maik1, maik2, ...) so later waves need NO app code changes.
      Pointer: overlay/maik/index.json (Cache-Control: max-age=300) -> manifest: "manifest-<hash>.json" (immutable, cached in IndexedDB).
      Fallback: local OVERLAYS static map (works offline or before manifest is loaded). */
@@ -1134,8 +1179,15 @@
   function coachView(s, exam) {
     var CO = G.PREP_COACH;
     if (!CO) return { topics: [] };
-    return CO.analyze(s.coach_t || {}, exam, coachSrc(exam));
+    var out = CO.analyze(s.coach_t || {}, exam, coachSrc(exam)), psubs = planSubjects();
+    if (psubs && psubs.length) {
+      var keep = {}; psubs.forEach(function (sb) { keep[sb.id] = 1; });
+      out.topics = (out.topics || []).filter(function (x) { var sid = String(x.t || "").split("|")[0]; return !sid || !!keep[sid]; });
+    }
+    return out;
   }
+  // My coaching (KnowYourIQ) compares against the selected plan's exam, never the tab it shares.
+  function coachExam(s) { var p = planProfileId(); return p || s.exam; }
   function coachTopicName(t) {
     var p = String(t || "").split("|"), sb = subjectById(p[0]), tp = topicOf(p[0], p[1]);
     var sn = sb ? tx(sb.name) : esc(p[0] || "?"), tn = tp ? tx(tp.title) : esc(p[1] || "?");
@@ -1154,8 +1206,13 @@
   function coachSecHtml(kind) {
     var CO = G.PREP_COACH;
     if (!CO) return "";
-    var K = CO.KYIQ, s = load(), exam = s.exam, td = today();
+    var K = CO.KYIQ, s = load(), exam = coachExam(s), td = today(), psubs = planSubjects();
     var view = coachView(s, exam), due = CO.dueToday(s, td).coach, pairs = CO.topPairs(s.coach_pairs, 3);
+    if (psubs && psubs.length) {
+      var keep = {}; psubs.forEach(function (sb) { keep[sb.id] = 1; });
+      due = due.filter(function (t) { var sid = String(t || "").split("|")[0]; return !sid || !!keep[sid]; });
+      pairs = pairs.filter(function (e) { var sid = String((e && e.t) || "").split("|")[0]; return !sid || !!keep[sid]; });
+    }
     var grouped = view.topics.filter(function (x) { return x.group !== "fresh"; });
     var freshN = view.topics.length - grouped.length;
     var h = '<section class="ky-sec" aria-label="My coaching"><div class="ky-head">' + kyMark(28) +
@@ -1201,7 +1258,7 @@
       if (n[oc] != null && oc !== "tagged") n[oc]++;
     });
     if (!n.tagged) return "";
-    var s = load(), view = coachView(s, s.exam), first = null;
+    var s = load(), view = coachView(s, coachExam(s)), first = null;
     view.topics.forEach(function (x) { if (!first && x.group !== "fresh" && x.group !== "ready") first = x; });
     var bits = [];
     if (n.misconception) bits.push("<b>" + n.misconception + "</b> confident-wrong (misconceptions to fix first)");
@@ -1228,7 +1285,7 @@
         if (!seen[t]) { seen[t] = 1; ts.push(t); }
       });
       if (!ts.length) return;
-      var view = coachView(s, s.exam), by = {};
+      var view = coachView(s, coachExam(s)), by = {};
       view.topics.forEach(function (x) { by[x.t] = x.group; });
       ts.forEach(function (t) { if (by[t] && by[t] !== "fresh") CO.noteReview(s, t, by[t], td); });
       save();
@@ -1240,10 +1297,10 @@
   function coachAskOpen() {
     var CO = G.PREP_COACH;
     if (!CO || !G.PREP_ASK) return false;
-    var s = load(), view = coachView(s, s.exam), due = CO.dueToday(s, today()).coach;
+    var s = load(), view = coachView(s, coachExam(s)), due = CO.dueToday(s, today()).coach;
     var pairs = CO.topPairs(s.coach_pairs, 4);
     var title = CO.KYIQ.NAME + ": what should I revise?";
-    return G.PREP_ASK.open({ kind: "card", fr: title, bk: CO.summaryText(view, s.exam, due, pairs), title: title, ask: "What should I revise first?" }, HOST);
+    return G.PREP_ASK.open({ kind: "card", fr: title, bk: CO.summaryText(view, coachExam(s), due, pairs), title: title, ask: "What should I revise first?" }, HOST);
   }
   /* Practise actions from the section: the pair's topic as a study set, or the pair's own question. */
   function kySplitT(t) { var p = String(t || "").split("|"); return { s: p[0], m: p[1] }; }
@@ -1476,12 +1533,14 @@
   function tile(sb, ix) {
     var s = load(), prog = progressByModule(s, today()), mods = ix ? ix.topics.filter(function (t) { return t.group !== "mixed"; }) : [], done = 0, total = mods.length, q = 0;
     mods.forEach(function (t) { var n = countFor(t, s.exam); q += n; if (n && statusOf((prog[t.id] || {}).answered, n) === "done") done++; });
+    // Subjects with no questions for this exam are not shown as cards at all.
+    if (ix && !q) return "";
     var pct = total ? Math.round(done * 100 / total) : 0;
     // Tide pass (prep50): a tile, the subject's icon on a disc ringed by its modules completed (the ring is the progress).
     return '<button type="button" class="pn-tile' + (total && done === total ? " full" : "") + '" data-act="subject" data-s="' + esc(sb.id) + '" style="--h:' + subjHue(sb.id) + '">' +
       '<span class="pn-disc" aria-hidden="true"><svg viewBox="0 0 48 48"><circle class="rt" cx="24" cy="24" r="22" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="24" cy="24" r="22" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + "</svg>" +
       '<span class="pn-ic">' + subjIco(sb.id) + "</span></span>" +
-      '<span class="pn-tb"><b>' + tx(sb.name) + "</b><small>" + (ix ? done + "/" + total + " modules" + "<br>" + (q ? fmt(q) + " MCQs" : "questions coming soon") : "&nbsp;") + "</small></span>" + "</button>";
+      '<span class="pn-tb"><b>' + tx(sb.name) + "</b><small>" + (ix ? done + "/" + total + " modules" + "<br>" + fmt(q) + " MCQs" : "&nbsp;") + "</small></span>" + "</button>";
   }
 
   /* ---------- subject ---------- */
@@ -1512,7 +1571,7 @@
       var due = 0; mods.forEach(function (t) { due += (prog[t.id] || {}).due || 0; });
       var dpct = mods.length ? Math.round(done * 100 / mods.length) : 0, nm = mods.length || 1;
       var seg = function (k, n) { return n ? '<i class="' + k + '" style="flex-grow:' + n + '"></i>' : ""; };
-      var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><div class="pn-subtop"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + "</span>" + mring(dpct, dpct + "%") + '</div><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "Questions coming soon") + (due ? " · " + fmt(due) + " due" : "") + "</small></span>" +
+      var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><div class="pn-subtop"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + "</span>" + mring(dpct, dpct + "%") + '</div><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "No questions in this subject for this exam yet") + (due ? " · " + fmt(due) + " due" : "") + "</small></span>" +
         (mods.length ? '<span class="pn-subbar pn-fills" aria-hidden="true">' + seg("d", done) + seg("p", part) + seg("n", nm - done - part) + '</span><span class="pn-subkey"><span><i class="d"></i>' + done + ' completed</span><span><i class="p"></i>' + part + ' in progress</span><span><i class="n"></i>' + (mods.length - done - part) + " not started</span></span>" : "") + "</section>";
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
@@ -1529,7 +1588,7 @@
   function modRow(sid, t, prog, s, num) {
     var n = countFor(t, s.exam), p = prog[t.id] || { answered: 0, due: 0 }, stt = statusOf(p.answered, n), sr = stars(s.mod[t.id]);
     var chip = stt === "done" ? '<span class="pn-st done">Completed</span>' : stt === "paused" ? '<span class="pn-st">' + fmt(Math.min(p.answered, n)) + "/" + fmt(n) + "</span>" : "";
-    var line = n ? fmt(n) + " MCQs" : "Questions coming soon";
+    var line = n ? fmt(n) + " MCQs" : "No questions in this module for this exam yet";
     return '<li class="pn-tl-' + stt + '"><button type="button" class="pn-mod" data-act="module" data-s="' + esc(sid) + '" data-m="' + esc(t.id) + '"' + (n ? "" : ' aria-disabled="true"') + ">" +
       (num ? '<span class="pn-num" aria-hidden="true">' + num + "</span>" : "") +
       '<span class="pn-mb"><b>' + tx(t.title) + '</b><small>' + (sr != null ? '<span class="pn-stars" aria-label="Mastery ' + sr + ' of 5">' + ico("star", true) + sr + "/5</span> · " : "") + line + (p.due ? " · " + fmt(p.due) + " due" : "") + "</small></span>" + chip + "</button></li>";
@@ -1866,7 +1925,7 @@
     if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
     if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + mdLite(legacyExp(why)) + "</div>" + fig;
     if (fig) return "<h3>Explanation</h3>" + fig;
-    return '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>";
+    return '<p class="pn-mut">No explanation is stored for this question yet.</p>';
   }
   function pearlHtml(it, xo) {
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
@@ -2569,7 +2628,10 @@
     var t2 = !q && G.PREP_TESTS && G.PREP_TESTS.on();
     if (t2) body = G.PREP_TESTS.testsHtml(HOST);
     else if (!q) {
-      var list = MOCKS[s.exam] || MOCKS["neet-pg"];
+      var list = MOCKS[s.exam];
+      if (!list) body = '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(planExamLabel()) + '</p><p class="pn-mut">No questions for this exam in the bank yet.</p></section>' +
+        '<div class="pn-group">' + row("p-settings", ico("gear"), "Change exam", "Exam: " + esc(planExamLabel())) + "</div>";
+      else {
       // The previous year papers row (NEET-PG) sits on top.
       var pyq = G.PREP_PYQ && s.exam === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(HOST) + "</div>" : "";
       body = '<div class="pn-banner pn-art-mock" aria-hidden="true"></div>' + pyq + list.map(function (m) {
@@ -2579,15 +2641,28 @@
             : '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="full">' + ico("clock") + " Full mock: " + m.n + " questions</button>") +
           (mini < m.n ? '<button type="button" class="pn-btn" data-act="mock" data-v="' + m.id + '" data-k="mini">' + ico("clock") + " Mini mock: " + mini + " questions, " + fmtMin(Math.round(m.min * mini / m.n)) + "</button>" : "") + "</section>";
       }).join("") + '<p class="pn-mut pn-small">Questions are drawn across every subject of the exam in proportion to the bank. Patterns follow the published bulletins; check the current one before your exam.</p>';
+      }
     } else {
+      var psubs = planSubjects(), need = planNeed(), prof = planProfile(), coming = !!(prof && ASSESS && ASSESS.bankStatus(prof) === "coming");
+      subs = psubs;
+      // A NEET-SS group with no bank subjects yet (e.g. surgical) reads like a coming bank: rare and clearly worded.
+      var gEmpty = !psubs.length && !need && !coming && planPure() && ((load().pl || {}).exam === "neet-ss");
+      if (need || coming || gEmpty) {
+        var scope = planScopeLabel();
+        var why = need ? "Pick your one INI-SS subject first: INI-SS is set per superspeciality." :
+          gEmpty && scope ? "No questions for the " + scope + " in the bank yet." : "No questions for this exam in the bank yet.";
+        body = '<div class="pn-group">' + row("p-settings", ico("gear"), need ? "Choose subject" : "Change exam", "Exam: " + esc(planExamLabel()) + (scope ? " · " + esc(scope) : "")) + "</div>" +
+          '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(planExamLabel()) + (scope ? " · " + esc(scope) : "") + '</p><p class="pn-mut">' + esc(why) + "</p></section>";
+      } else {
       var known = subs.every(function (sb) { return !!st.ix[sb.id]; });
       body = '<div class="pn-group">' + row("custom", ico("plus"), "Custom module", "Your own mix of subjects and count") +
         (G.PREP_QGEN && G.PREP_QGEN.canCreate() ? row("g-new", ico("bolt"), "Create a module with MaiK", G.PREP_QGEN.sub()) : "") +
         row("bookmarks", ico("bm"), "Bookmarks", fmt(Object.keys(s.bm).length) + " saved") +
         row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") + "</div>" +
         '<h2 class="pn-h">Subjects</h2><p class="pn-mut pn-small pn-qbs" id="pnQbS">' + qbSummary(subs, known) + '</p><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>";
+      }
     }
-    paint(bar("Tests", examOf(s.exam).label, "back") + segHtml + '<div class="pn-body pn-mocks' + (q ? " pn-qbank" : "") + (t2 ? " pn-t2" : "") + '" id="pnTests">' + body + "</div>");
+    paint(bar("Tests", planExamLabel(), "back") + segHtml + '<div class="pn-body pn-mocks' + (q ? " pn-qbank" : "") + (t2 ? " pn-t2" : "") + '" id="pnTests">' + body + "</div>");
     if (t2) G.PREP_TESTS.mounted(HOST);
     if (q) Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
       if (!st.open || st.stack[st.stack.length - 1] !== renderMocks || ttGet() !== "qbank") return;
@@ -3088,7 +3163,8 @@
     // Tab roots for the floating tab bar (prep-nav.js): Tests and You.
     screens: { mocks: renderMocks, menu: renderMenu }, run_: function () { return st.run; },
     // Lessons (prep-lessons.js)
-    // Plan (prep-plan.js)
+    // Plan (prep-plan.js): Tests and QBank scope to these, never the whole tab.
+    planSubjects: planSubjects, planNeed: planNeed, planProfile: planProfile, planProfileId: planProfileId, planExamLabel: planExamLabel, planScopeLabel: planScopeLabel,
     subjectsOf: subjectsOf, loadIndex: loadIndex, ix: function () { return st.ix; }, startMock: startMock, pure: PURE,
     // Celebrations and MaiK lines (lessons): celeFor(m0, holder), celeAttrs, celeChip, maikLine({ subject }, holder), snap().
     snap: snapNow, celeFor: celeFor, celeAttrs: celeAttrs, celeChip: celeChip, maikLine: maikLine,

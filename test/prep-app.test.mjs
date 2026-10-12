@@ -293,7 +293,7 @@ test("arena: answers map, signed change, the server's refusals in plain words", 
   assert.match(AR.errWord(410, "closed"), /has closed/);
   assert.match(AR.errWord(409, "already-submitted"), /already taken/);
   assert.match(AR.errWord(409, "not-started"), /Start the event/);
-  assert.match(AR.errWord(503, "bank-empty"), /Coming soon/);
+  assert.match(AR.errWord(503, "bank-empty"), /temporarily unavailable/);
   assert.match(AR.errWord(401), /Sign in/);
 });
 

@@ -15,8 +15,8 @@
     "status": "provisional"
   },
   "bank": {
-    "note": "no MRCP Part 1 questions in the bank yet, so no test types are offered",
-    "status": "coming"
+    "note": "1,507 MRCP Part 1 best-of-five questions across the 16 Federation syllabus categories",
+    "status": "available"
   },
   "format": {
     "duration_min": 360,
@@ -41,6 +41,7 @@
     ]
   },
   "id": "mrcp-part1",
+  "item_ex": "mrcp-part1",
   "item_styles": [
     {
       "basis": "official Part 1 page states 'no images'",
@@ -203,6 +204,14 @@
       "official": true,
       "section": "Format",
       "src": "MRCP-P1-FORMAT",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/item_ex",
+      "note": "bank items for MRCP Part 1 carry the 'mrcp-part1' exam tag; the assembler admits only items carrying it, so Part 1 and Part 2 pools never mix",
+      "official": false,
+      "section": "Bank build (StewardMD)",
+      "src": "BANK-BUILD",
       "verified_on": "2026-10-12"
     }
   ],
