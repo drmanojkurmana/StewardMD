@@ -30,6 +30,17 @@ first paint.
   centred 14px text and a fade-in. ~500 placeholders across ~60 module classes. Ones that already have an icon keep it.
   Errors get `role="alert"`. Anything with a button or rich structure is left as the module drew it.
 
+## Onboarding and sign-in (same day)
+- **`font: 600 28px/1.15 inherit` is invalid CSS** (`inherit` cannot be the family in the shorthand), so the browser drops
+  the whole declaration. On the Welcome screen that left the heading, role chips and call-to-action at default size.
+  Fixed all 22 in `onboarding.js` (family is now `var(--sans,'Inter',...)`), and the wordmark moved off IBM Plex Mono
+  (not bundled; fell back to a generic mono) to Inter 800. Guard: `test/onboarding-font-shorthand.test.mjs`.
+  **Same bug remains in 27 declarations elsewhere** (not fixed: each module needs its own look at the result):
+  `smd-nfc.js` 9, `clinix.css` 9, `native-ota.js` 3, `experimental-beta-notice.js` 3, `pro-notice.js` 2, `bug-report.js` 2,
+  `opd-dashboard.css` 1. Find them with `grep -rnE "font:\s*[0-9]{3}\s+[0-9.]+px(/[0-9.]+)?\s+inherit"`.
+- **Sign-in**: `#googleBtnContainer` reserves 42px for Google's own button, which only renders on the web, so the native
+  app showed a blank gap above the first button. `:empty` collapses it and brings it back when Google renders.
+
 ## Gotchas
 - **home.js has an older `body.ui-v2 .mc-card {...!important}` skin**, so card rules here use `!important`.
   Other modules may have the same; check computed style, not the stylesheet, when a rule seems ignored.

@@ -168,3 +168,9 @@ html.smd-refined body.v3-dark > :not(#homeV2) [data-smd-empty="error"]:not([data
 }
 @keyframes rfEmptyIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { html.smd-refined body > :not(#homeV2) [data-smd-empty] { animation: none; } }
+
+/* ---- sign-in (onboarding audit, 2026-10-12) ----
+ * #googleBtnContainer reserves 42px for Google's own button, which only ever renders on the web. In the native
+ * app (where Google sign-in is native) it stays empty and left a blank gap above the first button. :empty means
+ * it collapses exactly when nothing is inside, and returns the moment Google renders its button. */
+html.smd-refined #accountGate .google-btn-container:empty { display: none; }

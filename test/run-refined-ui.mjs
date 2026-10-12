@@ -24,14 +24,14 @@ const ev = async (e) => { const r = await call("Runtime.evaluate", { expression:
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const waitFor = async (expr, ms = 9000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(expr)) return true; await sleep(150); } return false; };
 let preload = null;   // new-document scripts accumulate across loads: drop the previous one so a "look off" setup cannot leak
-const load = async (setup) => {
+const load = async (setup, keepGate) => {
   await call("Storage.clearDataForOrigin", { origin: BASE.replace(/\/$/, ""), storageTypes: "all" });
   if (preload) await call("Page.removeScriptToEvaluateOnNewDocument", { identifier: preload });
   preload = (await call("Page.addScriptToEvaluateOnNewDocument", { source: "try{localStorage.setItem('stewardmd_guest_used','1')}catch(e){}" + (setup || "") })).result.identifier;
   await call("Page.navigate", { url: BASE });
   await waitFor("return !!document.querySelector('.rnav-tab')", 20000);
   await sleep(1500);
-  await ev(`["introPoster","splash","smdBootSplash","accountGate","introOverlay","harrisonQuotePopup"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
+  await ev(`["introPoster","splash","smdBootSplash","accountGate","introOverlay","harrisonQuotePopup"].forEach(function(k){if(${keepGate ? "k==='accountGate'" : "false"})return;var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
   await sleep(400);
 };
 // A fingerprint of how every visible element on the home page is drawn.
@@ -117,6 +117,20 @@ try {
   ok((await ev("return document.querySelector('#__es .t-err').getAttribute('role')")) === "alert", "empty states: an error placeholder is announced (role=alert)");
   ok((await ev("return document.querySelectorAll('#homeV2 [data-smd-empty]').length")) === 0, "empty states: nothing on the home page is marked");
   await ev("document.getElementById('__es').remove();return 1");
+
+  // 4d. Onboarding: the Welcome screen's typography applies (it was silently dropped by `font: ... inherit`)
+  await load();
+  await ev("SMD_TOUR.start('welcome');return 1"); await sleep(1500);
+  const wf = await ev("var f=function(s){var c=getComputedStyle(document.querySelector(s));return c.fontSize+'/'+c.fontWeight};return [f('.smdt-wel-h'),f('.smdt-wel-cta'),f('.smdt-wel-brand')].join(' ')");
+  ok(wf === "28px/600 16px/700 28px/800", "onboarding: Welcome heading 28/600, call-to-action 16/700, wordmark 28/800 (" + wf + ")");
+  ok(/^Inter/.test(await ev("return getComputedStyle(document.querySelector('.smdt-wel-brand')).fontFamily")), "onboarding: the wordmark is Inter (not an unbundled mono font)");
+  await ev("var w=document.querySelector('.smdt-wel');w&&w.remove();return 1");
+
+  // 4e. Sign-in: the empty Google container no longer leaves a gap
+  await load(null, true);
+  await ev("var g=document.getElementById('accountGate');if(g){g.classList.remove('hidden');}return 1"); await sleep(600);
+  const gd = await ev("var c=document.getElementById('googleBtnContainer');return !c?'missing':(c.childNodes.length===0?getComputedStyle(c).display:'has '+c.childNodes.length+' nodes: '+c.innerHTML.slice(0,60))");
+  ok(gd === "none", "sign-in: an empty Google button container collapses (no blank gap) (" + gd + ")");
 
   // 5. Kill switch
   await load("try{localStorage.setItem('smd_refined','0')}catch(e){}");
