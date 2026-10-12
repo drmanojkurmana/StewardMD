@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "srh-ctd-ild",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Connective tissue disease associated ILD: NSIP, UIP, antisynthetase and key treatments",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Antisynthetase syndrome** is defined by antibodies to aminoacyl-tRNA synthetases, most often anti-Jo-1. It typically causes myositis, **interstitial lung disease**, arthritis, Raynaud phenomenon and mechanic's hands. Non-anti-Jo-1 antibodies may cause more prominent lung disease with less myositis, so the full antibody panel must be sent when anti-Jo-1 is negative.",
+   "say": "Antisynthetase syndrome is defined by antibodies to aminoacyl transfer RNA synthetases, most often anti Jo-1. It typically causes myositis, interstitial lung disease, arthritis, Raynaud phenomenon and mechanic's hands. Non anti Jo-1 antibodies may cause more prominent lung disease with less myositis, so the full antibody panel must be sent when anti Jo-1 is negative.",
+   "vis": null
+  },
+  {
+   "tx": "In **systemic sclerosis**, ILD is common, and **anti-centromere** antibodies signal limited disease with a higher risk of pulmonary arterial hypertension. **Anti-topoisomerase I** antibodies signal diffuse disease with more severe organ involvement and poorer survival. Scleroderma renal crisis mostly occurs within the first 4 years, and ACE inhibitors markedly reduce its mortality.",
+   "say": "In systemic sclerosis, interstitial lung disease is common. Anti centromere antibodies signal limited disease with a higher risk of pulmonary arterial hypertension. Anti topoisomerase I antibodies signal diffuse disease with more severe organ involvement and poorer survival. Scleroderma renal crisis mostly occurs within the first 4 years, and ACE inhibitors markedly reduce its mortality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Limited SSc",
+     "points": [
+      "Anti-centromere positive",
+      "Higher pulmonary arterial hypertension risk",
+      "Skin thickening distal to elbows and knees"
+     ]
+    },
+    "right": {
+     "title": "Diffuse SSc",
+     "points": [
+      "Anti-topoisomerase I positive",
+      "Rapid skin spread, more organ damage",
+      "Renal crisis risk in early years"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Assess ILD with **HRCT** and pulmonary function tests including **forced vital capacity** (FVC) and transfer factor (DLCO). A fall in FVC on serial tests signals progression and higher mortality. Progressive pulmonary fibrosis is suspected when two of symptoms, FVC decline or radiological progression occur within one year. Treat ILD in CTD with corticosteroids and a steroid-sparing agent such as mycophenolate or azathioprine.",
+   "say": "Assess interstitial lung disease with high resolution CT and pulmonary function tests including forced vital capacity and transfer factor. A fall in forced vital capacity on serial tests signals progression and higher mortality. Progressive pulmonary fibrosis is suspected when two of symptoms, forced vital capacity decline or radiological progression occur within one year. Treat connective tissue disease related lung disease with corticosteroids and a steroid sparing agent such as mycophenolate or azathioprine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HRCT and PFT with DLCO"
+     },
+     {
+      "id": "b",
+      "label": "Progression? FVC fall or new symptoms"
+     },
+     {
+      "id": "c",
+      "label": "Steroids plus mycophenolate or azathioprine"
+     },
+     {
+      "id": "d",
+      "label": "Rapid or refractory: rituximab"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Stable CTD-ILD"
+     ],
+     [
+      "c",
+      "d",
+      "Worsening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antifibrotic therapy with **nintedanib** is indicated for progressive fibrosis, including the INBUILD trial population of progressive pulmonary fibrosis of non-IPF type. Check liver function before starting and monthly for three months, and reduce or interrupt for transaminases above three times the upper limit. Pirfenidone must be avoided if creatinine clearance is below 30 mL/min, and steroid plus azathioprine plus N-acetylcysteine should be avoided in IPF.",
+   "say": "Antifibrotic therapy with nintedanib is indicated for progressive fibrosis, including the INBUILD trial population of progressive pulmonary fibrosis of non idiopathic type. Check liver function before starting and monthly for three months, and reduce or interrupt for transaminases above three times the upper limit. Pirfenidone must be avoided if creatinine clearance is below 30 mL/min, and steroid plus azathioprine plus N-acetylcysteine should be avoided in idiopathic pulmonary fibrosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_89add4820c98",
+  "q_694df7ca408e",
+  "q_bb690089d5d7"
+ ],
+ "src": [
+  "kb-reference-antisynthetase-syndrome",
+  "kb-reference-nonspecific-interstitial-pneumonia"
+ ],
+ "refs": [
+  "Raghu G et al. ATS/ERS guideline on idiopathic pulmonary fibrosis and progressive pulmonary fibrosis",
+  "Flaherty KR et al. INBUILD trial, New England Journal of Medicine",
+  "NICE guidance on idiopathic pulmonary fibrosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 1112,
+  "itemN": 41
+ }
+}
