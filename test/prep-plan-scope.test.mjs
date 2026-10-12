@@ -262,3 +262,19 @@ test("legacy usmle plan reads Step 1; no plan reads the tab default", () => {
   const html2 = t2.T2.testsHtml(t2.H);
   assert.ok(html2.includes('data-p="neet-ss"') && !html2.includes('data-p="ini-ss"'), "no plan: the tab default only");
 });
+
+test("INI-SS subjectless plan: planSubjects is empty and planNeed asks for subject", () => {
+  const plWithout = { exam: "ini-ss" };
+  const subsWithout = planSubsFor(plWithout);
+  assert.deepEqual(subsWithout, [], "without subject, planSubjects is empty");
+  const hWithout = mockH(storeFor(plWithout), "neet-ss", plWithout);
+  assert.deepEqual(hWithout.planNeed(), { kind: "subject" }, "asks for subject");
+
+  const plWith = { exam: "ini-ss", subject: "ss-cardiology" };
+  const subsWith = planSubsFor(plWith);
+  assert.equal(subsWith.length, 1, "with subject, exactly one subject");
+  assert.equal(subsWith[0].id, "ss-cardiology");
+  const hWith = mockH(storeFor(plWith), "neet-ss", plWith);
+  assert.equal(hWith.planNeed(), null, "no need once subject is picked");
+});
+

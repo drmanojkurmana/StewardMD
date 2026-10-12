@@ -218,7 +218,8 @@
   }
   function homeMounted(host) {
     H = host;
-    if (!online() || !user() || soonFor(exam())) return;
+    var planEx = (H.planProfileId && H.planProfileId()) || exam();
+    if (!online() || !user() || soonFor(planEx) || soonFor(exam())) return;
     if (!A.events || Date.now() - A.evAt > 60e3) loadEvents().then(function () { var box = root() && root().querySelector("#pnCompete"); if (box) box.innerHTML = homeHtml(H); tick(); }, function () {
       var box = root() && root().querySelector("#pnCompete");
       if (box) box.innerHTML = '<div class="pn-group">' + H.row("a-retryhome", H.ico("off"), "Arena did not load", "Tap to try again") + "</div>";
@@ -311,14 +312,14 @@
   function renderLobby(kind) {
     var now = Date.now(), ev = A.ev && A.ev.kind === kind ? A.ev : pickEvent(A.events, kind, now), title = kind === "weekly" ? "Weekly grand test" : "Daily sprint";
     if (!ev) {
-      H.paint(H.bar(title, H.exam().label, "back") + '<div class="pn-body"><p class="pn-empty pn-art-sc">No ' + (kind === "weekly" ? "weekly test" : "sprint") + " is scheduled for this exam yet.</p></div>");
+      H.paint(H.bar(title, planLabel(), "back") + '<div class="pn-body"><p class="pn-empty pn-art-sc">No ' + (kind === "weekly" ? "weekly test" : "sprint") + " is scheduled for this exam yet.</p></div>");
       return;
     }
     A.ev = ev;
     var p = phase(ev, now), when = new Date(ev.start), end = new Date(ev.end);
     var t = function (d) { try { return d.toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit" }); } catch (e) { return d.toTimeString().slice(0, 5); } };
     var day = function (d) { try { return d.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" }); } catch (e) { return ""; } };
-    H.paint(H.bar(title, H.exam().label, "back") + '<div class="pn-body"><section class="pn-panel pn-lobby">' +
+    H.paint(H.bar(title, planLabel(), "back") + '<div class="pn-body"><section class="pn-panel pn-lobby">' +
       '<p class="pn-lobby-when">' + esc(day(when)) + ", " + esc(t(when)) + " to " + esc(t(end)) + "</p>" +
       '<p class="pn-big pn-cdbig" data-cd="' + esc(ev.id) + '" role="timer" aria-live="off">' + esc(eventLine(ev, now)) + "</p>" +
       '<p class="pn-mut">' + esc(rulesLine(ev)) + "</p>" +
@@ -420,7 +421,7 @@
   }
   function renderBoards() {
     var tabs = [["event", "Today's sprint"], ["week", "This week"], ["all", "All time"]];
-    H.paint(H.bar("Leaderboard", H.exam().label, "back") + '<div class="pn-tabs" role="tablist" aria-label="Board">' + tabs.map(function (t) {
+    H.paint(H.bar("Leaderboard", planLabel(), "back") + '<div class="pn-tabs" role="tablist" aria-label="Board">' + tabs.map(function (t) {
       return '<button type="button" role="tab" class="pn-tab' + (A.board === t[0] ? " on" : "") + '" aria-selected="' + (A.board === t[0]) + '" data-act="a-tab" data-v="' + t[0] + '">' + t[1] + "</button>";
     }).join("") + '</div><div class="pn-body"><p class="pn-mut pn-small" id="pnBoardNote">' + (A.board === "event" ? "Score in the sprint, ties to the faster entry." : "Battle rating. Everyone starts at 1200.") + '</p><div id="pnBoard">' + boardHtml(null) + "</div>" +
       '<button type="button" class="pn-link pn-danger" data-act="a-leave">' + H.ico("leave") + " Leave the Arena</button></div>");
@@ -516,7 +517,7 @@
     var b = A.battle || battleNew(), L = ["A", "B", "C", "D", "E", "F"], body = "", focus = null;
     if (A.bTimer) { G.clearInterval(A.bTimer); A.bTimer = 0; }
     if (b.phase === "queue") body = '<section class="pn-panel pn-mm" role="status"><span class="pn-mm-bar" aria-hidden="true"><i></i></span><p class="pn-mid">' + (A.room ? "Waiting for your friend" : "Finding an opponent") + '</p><p class="pn-mut">' +
-      (A.room ? "The battle starts when both of you are in." : esc(H.exam().label) + ", nearest rating first. This takes up to 30 seconds.") + "</p></section><button type=\"button\" class=\"pn-btn\" data-act=\"back\">Cancel</button>";
+      (A.room ? "The battle starts when both of you are in." : esc(planLabel()) + ", nearest rating first. This takes up to 30 seconds.") + "</p></section><button type=\"button\" class=\"pn-btn\" data-act=\"back\">Cancel</button>";
     else if (b.phase === "nobody") body = '<section class="pn-panel pn-score"><p class="pn-mid">' + (A.room ? "Your friend did not join in time" : "Nobody is free right now") + '</p><p class="pn-mut">' + (A.room ? "A challenge room waits 3 minutes. Send a new challenge from Friends." : "No opponent joined in 30 seconds. Battles are only against real players. Try again in a few minutes, or practise meanwhile.") + "</p></section>" +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back</button><button type="button" class="pn-btn pri" data-act="a-again">Try again</button></div>';
     else if (b.phase === "busy" || b.phase === "slow") body = '<section class="pn-panel pn-score"><p class="pn-mid">' + (b.phase === "busy" ? "You are already in a battle" : "Too many tries") + '</p><p class="pn-mut">' +
@@ -547,7 +548,7 @@
         (rt ? '<p class="pn-mut pn-rtl">Rating ' + rt.before + ' to <b class="pn-rtick" data-from="' + rt.before + '" data-to="' + rt.after + '">' + rt.after + '</b> <span class="pn-dchip' + (rt.after >= rt.before ? " up" : " down") + '">(' + signed(rt.after - rt.before) + ")</span></p>" : "") + "</section>" +
         '<div class="pn-navrow"><button type="button" class="pn-btn' + (A.room ? " pri" : "") + '" data-act="back">Done</button>' + (A.room ? "" : '<button type="button" class="pn-btn pri" data-act="a-again">Play again</button>') + "</div>";
     }
-    H.paint(H.bar(battleTitle(b), b.opp ? "vs " + esc(b.opp.name) : esc(H.exam().label), "back") + '<div class="pn-body pn-run pn-battle">' + body + "</div>", focus);
+    H.paint(H.bar(battleTitle(b), b.opp ? "vs " + esc(b.opp.name) : esc(planLabel()), "back") + '<div class="pn-body pn-run pn-battle">' + body + "</div>", focus);
   }
 
   /* ---------- My stats ---------- */

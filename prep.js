@@ -559,6 +559,7 @@
     var want = {}, out;
     if (pl.exam === "neet-ss") PP.ssGroupSubjects(PP.planGroup(pl)).forEach(function (id) { want[id] = 1; });
     else if (pl.exam === "ini-ss" && pl.subject) want[pl.subject] = 1;
+    else if (pl.exam === "ini-ss") return [];
     else return all;
     out = all.filter(function (x) { return want[x.id]; });
     return out;
@@ -1172,7 +1173,12 @@
   function coachView(s, exam) {
     var CO = G.PREP_COACH;
     if (!CO) return { topics: [] };
-    return CO.analyze(s.coach_t || {}, exam, coachSrc(exam));
+    var out = CO.analyze(s.coach_t || {}, exam, coachSrc(exam)), psubs = planSubjects();
+    if (psubs && psubs.length) {
+      var keep = {}; psubs.forEach(function (sb) { keep[sb.id] = 1; });
+      out.topics = (out.topics || []).filter(function (x) { var sid = String(x.t || "").split("|")[0]; return !sid || !!keep[sid]; });
+    }
+    return out;
   }
   // My coaching (KnowYourIQ) compares against the selected plan's exam, never the tab it shares.
   function coachExam(s) { var p = planProfileId(); return p || s.exam; }
@@ -1194,8 +1200,13 @@
   function coachSecHtml(kind) {
     var CO = G.PREP_COACH;
     if (!CO) return "";
-    var K = CO.KYIQ, s = load(), exam = coachExam(s), td = today();
+    var K = CO.KYIQ, s = load(), exam = coachExam(s), td = today(), psubs = planSubjects();
     var view = coachView(s, exam), due = CO.dueToday(s, td).coach, pairs = CO.topPairs(s.coach_pairs, 3);
+    if (psubs && psubs.length) {
+      var keep = {}; psubs.forEach(function (sb) { keep[sb.id] = 1; });
+      due = due.filter(function (t) { var sid = String(t || "").split("|")[0]; return !sid || !!keep[sid]; });
+      pairs = pairs.filter(function (e) { var sid = String((e && e.t) || "").split("|")[0]; return !sid || !!keep[sid]; });
+    }
     var grouped = view.topics.filter(function (x) { return x.group !== "fresh"; });
     var freshN = view.topics.length - grouped.length;
     var h = '<section class="ky-sec" aria-label="My coaching"><div class="ky-head">' + kyMark(28) +

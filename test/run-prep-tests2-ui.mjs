@@ -141,11 +141,12 @@ async function flagOn(engine) {
   const E = engine + ": ";
   try {
     await openTests(page);
-    ok(await until(page, () => !!document.querySelector("#pnTests .pn-t2d") && !!document.querySelector('#pnTests .pn-t2c[data-p="neet-pg"]')), E + "Daily 10 card and the NEET-PG card");
-    const card = await txt(page, '#pnTests .pn-t2c[data-p="neet-pg"]');
+    ok(await until(page, () => !!document.querySelector('#pnTests .pn-t2grp[data-f="daily10"]') && !!document.querySelector('#pnTests .pn-t2exam[data-p="neet-pg"]')), E + "Daily 10 group and the NEET-PG section");
+    const card = await txt(page, '#pnTests .pn-t2exam[data-p="neet-pg"]');
     ok(/Official format/.test(card) && /180 questions in 5 locked sections of 36 questions and 42 min/.test(card) && /\+4 right, minus 1 wrong/.test(card) && /NEET-PG 2026 Information Bulletin/.test(card), E + "NEET-PG card: official 2026 format and its source: " + card.slice(0, 160));
     ok(/Previous format practice: 200 questions, one timer/.test(card), E + "the old 200-question pattern only as labelled previous-format practice");
     ok(!(await page.evaluate(() => !!document.querySelector('#pnTests [data-p="ini-cet"]'))), E + "no cross-exam INI-CET card: Tests follows the plan");
+    await tap(page, '#pnTests [data-act=t2-jump][data-f="subject_mini"]');
     ok(await until(page, () => !!document.querySelector("#pnTests [data-act=t2-pick][data-k=subject_mini]")), E + "practice tests");
     ok((await small(page, "#pnTests")) === "", E + "Tests controls at least 44 px: " + (await small(page, "#pnTests")));
     ok(await dashFree(page), E + "no en or em dash on the Tests segment");
@@ -272,8 +273,8 @@ async function flagOn(engine) {
     // ---- FMGE: a shortened test says why
     await page.evaluate(() => PREP._host.setExam("fmge"));
     await tab(page, "home"); await tab(page, "tests");
-    ok(await until(page, () => !!document.querySelector('#pnTests .pn-t2c[data-p="fmge"]')), E + "FMGE card");
-    const fc = await txt(page, '#pnTests .pn-t2c[data-p="fmge"]');
+    ok(await until(page, () => !!document.querySelector('#pnTests .pn-t2exam[data-p="fmge"]')), E + "FMGE card");
+    const fc = await txt(page, '#pnTests .pn-t2exam[data-p="fmge"]');
     ok(/no negative marking/.test(fc) && /Pass mark 150 of 300/.test(fc) && /2 parts of 150/.test(fc) && /official blueprint/.test(fc), E + "FMGE card: 2 parts, no negative marking, pass mark, official blueprint");
     await tap(page, '#pnTests [data-act=t2-pre][data-p="fmge"][data-k=grand]');
     ok(await until(page, () => !!document.querySelector(".pn-t2pre .pn-t2dev"), 30000), E + "FMGE pre-test: deviations up front");
@@ -290,7 +291,7 @@ async function shots(engine, vp, dark) {
   const tag = engine + "-" + vp.width + "-" + (dark ? "dark" : "light");
   try {
     await openTests(page);
-    await until(page, () => !!document.querySelector('#pnTests .pn-t2c[data-p="neet-pg"]'));
+    await until(page, () => !!document.querySelector('#pnTests .pn-t2exam[data-p="neet-pg"]'));
     await shot(page, tag + "-tests");
     await tap(page, '#pnTests [data-act=t2-pre][data-p="neet-pg"][data-k=grand]');
     await until(page, () => !!document.querySelector("[data-act=t2-go]"), 20000);
