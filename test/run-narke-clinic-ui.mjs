@@ -108,7 +108,11 @@ try {
   await until(`return !!document.querySelector('[data-act=clinic][data-t=monitor]');`);
   await ev(`document.querySelector('[data-act=clinic][data-t=monitor]').click(); return 1;`);
   ok(await until(`${R} return !!(R.querySelector('.nkc-line.ecg') && R.querySelector('.nkc-line.spo2') && R.querySelector('.nkc-nibp'));`), "monitor case draws ECG and pleth with NIBP");
-  ok(await ev(`${R} var t=R.querySelector('.nkc-mon > .nkc-trend'), m=R.querySelector('.nkc-mon'); if(!t) return "no trend row"; var a=t.getBoundingClientRect(), b=m.getBoundingClientRect(); return a.width >= b.width - 2 && !t.closest('.nkc-nibp');`) === true, "monitor: the EtCO2 trend is its own full-width row, apart from NIBP");
+  // Layout is only meaningful once narke-clinic.css is applied (the trend row is position:relative there);
+  // measuring before the stylesheet lands races the loader and flakes the width check below.
+  ok(await until(`${R} var t=R.querySelector('.nkc-mon > .nkc-trend'); return !!t && getComputedStyle(t).position === 'relative';`), "monitor: clinic stylesheet applied before the trend layout check");
+  const trendW = await ev(`${R} var t=R.querySelector('.nkc-mon > .nkc-trend'), m=R.querySelector('.nkc-mon'); if(!t) return "no trend row"; var a=t.getBoundingClientRect(), b=m.getBoundingClientRect(); return JSON.stringify({ tw: a.width, mw: b.width, ok: a.width >= b.width - 2 && !t.closest('.nkc-nibp') });`);
+  ok(trendW !== "no trend row" && JSON.parse(trendW).ok === true, "monitor: the EtCO2 trend is its own full-width row, apart from NIBP (" + trendW + ")");
   ok(await ev(`${R} return /HR/.test(R.querySelector('.nkc-ecg .nkc-num').textContent) && /most likely problem/.test(R.textContent);`) === true, "monitor numerics and question");
   ok(await ev(`${R} var s=R.querySelector('.sp-scroll'); return s.scrollWidth <= s.clientWidth + 1;`) === true, "monitor: no horizontal scroll at 390 px");
   await shot("monitor-light-question");
