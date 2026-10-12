@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "module": "psy-anxiolytics-hypnotics",
+ "subject": "psychiatry",
+ "title": "Anxiolytics and hypnotics: classes, choice and safety",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Benzodiazepines are the **drug of choice** for generalised anxiety disorder and for the immediate relief of an acute panic attack. They act by enhancing GABA-A receptor activity at the benzodiazepine site, increasing chloride influx. Long-term use carries a real risk of **dependence**, so SSRIs and cognitive behavioural therapy are preferred for maintenance in panic disorder.",
+   "say": "Benzodiazepines are the drug of choice for generalised anxiety disorder and for the immediate relief of an acute panic attack. They act by enhancing GABA-A receptor activity at the benzodiazepine site, which increases chloride influx into the neuron. Long-term use carries a real risk of dependence, so SSRIs and cognitive behavioural therapy are preferred for maintenance treatment in panic disorder.",
+   "vis": null
+  },
+  {
+   "tx": "**Flumazenil** is a competitive benzodiazepine receptor antagonist. It is the ideal antidote for an isolated benzodiazepine overdose, especially when iatrogenic. It can precipitate withdrawal seizures in chronic users and must not be given in mixed overdoses, such as with tricyclic antidepressants, because of seizure and arrhythmia risk. It does not reverse barbiturates, ethanol or opioids.",
+   "say": "Flumazenil is a competitive benzodiazepine receptor antagonist. It is the ideal antidote for an isolated benzodiazepine overdose, especially when the overdose is iatrogenic. It can precipitate withdrawal seizures in chronic users and must not be given in mixed overdoses, such as with tricyclic antidepressants, because of seizure and arrhythmia risk. It does not reverse barbiturates, ethanol or opioids.",
+   "vis": null
+  },
+  {
+   "tx": "Buspirone is a non-benzodiazepine anxiolytic that acts as a partial agonist at presynaptic 5-HT1A receptors. It has **very low abuse potential** and no sedative or withdrawal liability, so it suits a patient with generalised anxiety disorder and a history of benzodiazepine abuse. Its onset is slow, taking several weeks, and it is not effective for acute panic.",
+   "say": "Buspirone is a non-benzodiazepine anxiolytic that acts as a partial agonist at presynaptic 5-HT1A receptors. It has very low abuse potential and no sedative or withdrawal liability, so it suits a patient with generalised anxiety disorder and a history of benzodiazepine abuse. Its onset is slow, taking several weeks, and it is not effective for acute panic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benzodiazepines",
+     "points": [
+      "Fast onset",
+      "GABA-A modulation",
+      "High abuse risk",
+      "Acute panic"
+     ]
+    },
+    "right": {
+     "title": "Buspirone",
+     "points": [
+      "Slow onset",
+      "5-HT1A partial agonist",
+      "Very low abuse risk",
+      "Generalised anxiety only"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Z-drugs** such as zolpidem, zaleplon and zopiclone are non-benzodiazepine hypnotics that act on the GABA-A receptor, binding a different subsite from classic benzodiazepines. Their half-lives differ: zaleplon is shortest at about 1 hour, zolpidem about 2.4 hours and zopiclone about 5 hours. **Melatonin** is a separate option, acting on melatonin receptors to help sleep onset. Benzodiazepine hypnotics carry a risk of **anterograde amnesia**.",
+   "say": "Z-drugs such as zolpidem, zaleplon and zopiclone are non-benzodiazepine hypnotics that act on the GABA-A receptor, binding a different subsite from classic benzodiazepines. Their half-lives differ. Zaleplon is shortest at about 1 hour, zolpidem about 2.4 hours and zopiclone about 5 hours. Melatonin is a separate option, acting on melatonin receptors to help sleep onset. Benzodiazepine hypnotics carry a risk of anterograde amnesia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Half-life",
+     "Class"
+    ],
+    "rows": [
+     [
+      "Zaleplon",
+      "About 1 hour",
+      "Z-drug"
+     ],
+     [
+      "Zolpidem",
+      "About 2.4 hours",
+      "Z-drug"
+     ],
+     [
+      "Zopiclone",
+      "About 5 hours",
+      "Z-drug"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Abrupt withdrawal from a **short-acting benzodiazepine** such as alprazolam can cause severe withdrawal, including seizures, because of physiological dependence. Taper slowly rather than stopping abruptly. Propranolol, a beta-blocker, is useful for performance anxiety and for neuroleptic-induced akathisia. Clonazepam can help night terrors in children. Acute alcohol withdrawal is treated with diazepam.",
+   "say": "Abrupt withdrawal from a short-acting benzodiazepine such as alprazolam can cause severe withdrawal, including seizures, because of physiological dependence. Taper slowly rather than stopping abruptly. Propranolol, a beta-blocker, is useful for performance anxiety and for neuroleptic-induced akathisia. Clonazepam can help night terrors in children. Acute alcohol withdrawal is treated with diazepam.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "9cff557b-82b0-4d30-b750-7ca47822c777",
+  "aaf6c5e2-6326-4cb3-b629-11839acfcfda",
+  "84d28ff6-e033-4ca3-80aa-5425bbc65fbe"
+ ],
+ "src": [],
+ "refs": [
+  "Kaplan and Sadock's Synopsis of Psychiatry",
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 21
+ }
+}

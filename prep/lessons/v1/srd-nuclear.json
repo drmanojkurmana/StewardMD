@@ -1,0 +1,129 @@
+{
+ "v": 1,
+ "module": "srd-nuclear",
+ "subject": "ss-radiology",
+ "title": "Nuclear medicine and PET: core radiopharmaceuticals and patterns",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Nuclear medicine images **radiopharmaceuticals** that show physiology rather than anatomy. Each tracer has a fixed biodistribution, and recognising that pattern is the key exam skill, especially for unlabelled studies. Tracers are chosen for the process they follow, such as blood flow, cell membrane transport, bone mineral turnover or glucose metabolism.",
+   "say": "Nuclear medicine images radiopharmaceuticals that show physiology rather than anatomy. Each tracer has a fixed biodistribution, and recognising that pattern is the key exam skill, especially for unlabelled studies. Tracers are chosen for the process they follow, such as blood flow, cell membrane transport, bone mineral turnover or glucose metabolism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tracer",
+     "Mechanism",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "Tc-99m MAA",
+      "Capillary blockade",
+      "Lung perfusion"
+     ],
+     [
+      "Tc-99m MDP",
+      "Adsorption to hydroxyapatite",
+      "Bone scan"
+     ],
+     [
+      "Tl-201",
+      "Na/K ATPase uptake",
+      "Myocardial perfusion"
+     ],
+     [
+      "Tc-99m MAG3",
+      "Tubular secretion",
+      "Renal plasma flow"
+     ],
+     [
+      "F-18 FDG",
+      "Glucose analogue trapping",
+      "PET metabolism"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tc-99m **MAA** lodges in pulmonary capillaries by capillary blockade, which is why particle numbers must be reduced in pulmonary hypertension or a single lung. Ventilation imaging uses **Xenon-133** gas, which must be acquired before perfusion because of its low energy, or aerosol Tc-99m DTPA, which needs a mouthpiece and nose clamp. Gastric activity on DTPA images reflects swallowed tracer.",
+   "say": "Tc-99m MAA lodges in pulmonary capillaries by capillary blockade, which is why particle numbers must be reduced in pulmonary hypertension or a single lung. Ventilation imaging uses Xenon-133 gas, which must be acquired before perfusion because of its low energy, or aerosol Tc-99m DTPA, which needs a mouthpiece and nose clamp. Gastric activity on DTPA images reflects swallowed tracer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v",
+      "label": "Xenon-133 ventilation first"
+     },
+     {
+      "id": "p",
+      "label": "Tc-99m MAA perfusion"
+     },
+     {
+      "id": "q",
+      "label": "Quantify split function"
+     }
+    ],
+    "edges": [
+     [
+      "v",
+      "p"
+     ],
+     [
+      "p",
+      "q"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bone scintigraphy uses **Tc-99m MDP**, which adsorbs onto hydroxyapatite at the mineralisation front. Physiological uptake is seen at growth plates in children. Diffusely reduced skeletal uptake suggests free technetium or bisphosphonate therapy. A **superscan** shows intense, diffuse uptake with faint soft tissue activity. Metastatic superscans are heterogeneous and axial, while metabolic superscans, from hyperparathyroidism or renal osteodystrophy, are uniform and reach the distal limbs.",
+   "say": "Bone scintigraphy uses Tc-99m MDP, which adsorbs onto hydroxyapatite at the mineralisation front. Physiological uptake is seen at growth plates in children. Diffusely reduced skeletal uptake suggests free technetium or bisphosphonate therapy. A superscan shows intense, diffuse uptake with faint soft tissue activity. Metastatic superscans are heterogeneous and axial, while metabolic superscans, from hyperparathyroidism or renal osteodystrophy, are uniform and reach the distal limbs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Metastatic superscan",
+     "points": [
+      "Heterogeneous uptake",
+      "Axial and proximal predominance",
+      "Patchy lesions"
+     ]
+    },
+    "right": {
+     "title": "Metabolic superscan",
+     "points": [
+      "Uniform uptake",
+      "Extends to distal limbs",
+      "Linked to high bone turnover"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cardiac viability is assessed with **FDG PET-CT** using a perfusion-metabolism mismatch, where hypoperfused but metabolically active myocardium is viable. Thallium-201 enters cells through the Na/K ATPase pump. In thyroid disease, Graves shows diffuse high uptake, while subacute thyroiditis shows low uptake despite similar hyperthyroid labs. Radioiodine therapy requires residual dose checks at one metre before discharge, and pregnancy should be avoided for a period after treatment.",
+   "say": "Cardiac viability is assessed with FDG PET-CT using a perfusion-metabolism mismatch, where hypoperfused but metabolically active myocardium is viable. Thallium-201 enters cells through the Na/K ATPase pump. In thyroid disease, Graves shows diffuse high uptake, while subacute thyroiditis shows low uptake despite similar hyperthyroid labs. Radioiodine therapy requires residual dose checks at one metre before discharge, and pregnancy should be avoided for a period after treatment.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ct-8d4ebdb21008",
+  "ct-95d6137906a9",
+  "ct-06fedb41680f"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 131
+ }
+}

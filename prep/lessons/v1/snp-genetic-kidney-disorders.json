@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "snp-genetic-kidney-disorders",
+ "subject": "ss-nephrology",
+ "title": "ADTKD-UMOD: uromodulin kidney disease",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The misfolded protein triggers **endoplasmic reticulum stress** in tubular cells. Thick ascending limb transport is disturbed, causing mild salt wasting and volume contraction. This raises proximal urate reabsorption, so the **fractional excretion of urate** is low and early hyperuricaemia with gout appears. Over years, tubular stress drives interstitial fibrosis and tubular atrophy.",
+   "say": "The misfolded protein triggers endoplasmic reticulum stress in tubular cells. Thick ascending limb transport is disturbed, causing mild salt wasting and volume contraction. This raises proximal urate reabsorption, so the fractional excretion of urate is low and early hyperuricaemia with gout appears. Over years, tubular stress drives interstitial fibrosis and tubular atrophy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "UMOD variant"
+     },
+     {
+      "id": "b",
+      "label": "Misfolding in ER"
+     },
+     {
+      "id": "c",
+      "label": "Low urate excretion"
+     },
+     {
+      "id": "d",
+      "label": "Gout"
+     },
+     {
+      "id": "e",
+      "label": "Fibrosis and CKD"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suspect this disease in a patient with **gout in adolescence or early adulthood** and a family history of kidney failure, especially with a bland urinary sediment. Key early tests are serum urate with fractional excretion of urate, renal ultrasound for kidney size and cysts, and quantification of proteinuria. Do not label the case as simple primary gout without looking for hereditary kidney disease.",
+   "say": "Suspect this disease in a patient with gout in adolescence or early adulthood and a family history of kidney failure, especially with a bland urinary sediment. Key early tests are serum urate with fractional excretion of urate, renal ultrasound for kidney size and cysts, and quantification of proteinuria. Do not label the case as simple primary gout without looking for hereditary kidney disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Serum urate with FEurate",
+      "Low urate excretion"
+     ],
+     [
+      "Renal ultrasound",
+      "Kidney size and cysts"
+     ],
+     [
+      "Urinalysis and proteinuria",
+      "Quantify kidney damage"
+     ],
+     [
+      "Targeted UMOD or ADTKD panel",
+      "Confirm the diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confirm the diagnosis with **targeted UMOD sequencing** or a dedicated ADTKD gene panel, since other ADTKD genes such as MUC1 and REN can look similar. Renal biopsy with uromodulin staining showing endoplasmic reticulum retention is supportive only when biopsy is done. Offer genetic counselling and refer to nephrology with clinical genetics input.",
+   "say": "Confirm the diagnosis with targeted UMOD sequencing or a dedicated ADTKD gene panel, since other ADTKD genes such as MUC1 and REN can look similar. Renal biopsy with uromodulin staining showing endoplasmic reticulum retention is supportive only when biopsy is done. Offer genetic counselling and refer to nephrology with clinical genetics input.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genetic confirmation",
+     "points": [
+      "UMOD sequencing first",
+      "ADTKD panel if unclear",
+      "Rule out MUC1 and REN",
+      "Biopsy is supportive only"
+     ]
+    },
+    "right": {
+     "title": "Differential diagnoses",
+     "points": [
+      "Primary gout with urate nephropathy",
+      "ADPKD on ultrasound",
+      "Other ADTKD subtypes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Management is general chronic kidney disease care, including **blood pressure control**, avoidance of nephrotoxins and cardiovascular risk management. Plan renal replacement therapy as disease advances. **Kidney transplantation** is the preferred option because the disease does not recur in the allograft. Because inheritance is autosomal dominant, offer cascade UMOD testing to at-risk relatives.",
+   "say": "Management is general chronic kidney disease care, including blood pressure control, avoidance of nephrotoxins and cardiovascular risk management. Plan renal replacement therapy as disease advances. Kidney transplantation is the preferred option because the disease does not recur in the allograft. Because inheritance is autosomal dominant, offer cascade UMOD testing to at-risk relatives.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_27c76904bed1",
+  "q_cd8c4adefb08",
+  "q_285f1d8301c4"
+ ],
+ "src": [
+  "kb-reference-adtkd-uromodulin"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 646,
+  "itemN": 14
+ }
+}

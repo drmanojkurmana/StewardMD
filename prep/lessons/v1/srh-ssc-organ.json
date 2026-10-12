@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "srh-ssc-organ",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Organ complications of systemic sclerosis: lung, kidney and gut",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Systemic sclerosis is a **connective tissue disease** with fibrosis of skin and internal organs. Interstitial lung disease is the leading cause of disease-related death, and pulmonary arterial hypertension is the second major contributor. Screening for internal organ involvement is needed even when skin thickening is minimal, since limited and sine scleroderma forms carry similar organ risks. Key screening tools include **high-resolution CT** of the chest, pulmonary function tests and echocardiography.",
+   "say": "Systemic sclerosis is a connective tissue disease with fibrosis of the skin and internal organs. Interstitial lung disease is the leading cause of disease related death, and pulmonary arterial hypertension is the second major contributor. Screening for internal organ involvement is needed even when skin thickening is minimal, since limited and sine scleroderma forms carry similar organ risks. Key screening tools include high-resolution CT of the chest, pulmonary function tests and echocardiography.",
+   "vis": null
+  },
+  {
+   "tx": "Interstitial lung disease is found in a large share of patients, and HRCT is the principal screening method. Pulmonary function tests are nonspecific, so they grade severity and track treatment response rather than diagnose. A reduced forced vital capacity and impaired diffusion indicate restrictive physiology. Reported prognostic markers include a high HRCT lung burden and a falling FVC. For patients with **SSc-ILD**, ambulatory desaturation tests are repeated every 3 to 12 months under the 2023 ACR/CHEST guidance.",
+   "say": "Interstitial lung disease is found in a large share of patients, and HRCT is the principal screening method. Pulmonary function tests are nonspecific, so they grade severity and track treatment response rather than diagnose. A reduced forced vital capacity and impaired diffusion indicate restrictive physiology. Reported prognostic markers include a high HRCT lung burden and a falling FVC. For patients with SSc-ILD, ambulatory desaturation tests are repeated every 3 to 12 months under the 2023 ACR and CHEST guidance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "High HRCT lung burden",
+      "Linked to higher future mortality"
+     ],
+     [
+      "Falling FVC",
+      "Marker of progression and poor prognosis"
+     ],
+     [
+      "Reduced diffusion",
+      "Restrictive, gas exchange impairment"
+     ],
+     [
+      "Ambulatory desaturation",
+      "Repeat every 3 to 12 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Scleroderma renal crisis presents with sudden hypertension and a rise in serum creatinine, typically in diffuse disease. The standard of care is an **ACE inhibitor**, started early to control blood pressure and protect kidney function. Glucocorticoids should be avoided in this setting because they can precipitate the crisis. Dialysis may be needed in some patients, and some recover renal function.",
+   "say": "Scleroderma renal crisis presents with sudden hypertension and a rise in serum creatinine, typically in diffuse disease. The standard of care is an ACE inhibitor, started early to control blood pressure and protect kidney function. Glucocorticoids should be avoided in this setting because they can precipitate the crisis. Dialysis may be needed in some patients, and some recover renal function.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sudden hypertension"
+     },
+     {
+      "id": "b",
+      "label": "Rising creatinine"
+     },
+     {
+      "id": "c",
+      "label": "Start ACE inhibitor"
+     },
+     {
+      "id": "d",
+      "label": "Control BP and protect kidney"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For **SSc-ILD**, the **SENSCIS** trial supports **nintedanib**, a tyrosine kinase inhibitor that slows **FVC** decline in progressive fibrosing disease. **Mycophenolate** was assessed in SLS II, where it helped stabilise lung function, while **cyclophosphamide** was studied in SLS I. The **SCOT** trial examined **autologous stem cell transplantation** in severe disease, which carries its own risks and trade-offs.",
+   "say": "For systemic sclerosis associated interstitial lung disease, the SENSCIS trial supports nintedanib, a tyrosine kinase inhibitor that slows the decline in forced vital capacity in progressive fibrosing disease. Mycophenolate was assessed in the SLS II trial, where it helped stabilise lung function. Cyclophosphamide was studied in the SLS I trial. The SCOT trial examined autologous stem cell transplantation in severe disease, which carries its own risks and trade-offs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Nintedanib",
+      "Slows FVC decline, SENSCIS"
+     ],
+     [
+      "Mycophenolate",
+      "Stabilises lung function, SLS II"
+     ],
+     [
+      "Cyclophosphamide",
+      "Older evidence, SLS I"
+     ],
+     [
+      "Stem cell transplant",
+      "Severe disease, SCOT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gastric antral vascular ectasia** (GAVE) is a vascular lesion of the gastric antrum that gives a characteristic watermelon pattern of dilated mucosal capillaries on endoscopy. It is over-represented in **systemic sclerosis** and often presents with occult bleeding, leading to **iron deficiency anaemia**. First-line treatment is endoscopic, typically with **argon plasma coagulation**, combined with iron replacement. Acid suppression helps reflux symptoms but does not treat the underlying vessels.",
+   "say": "Gastric antral vascular ectasia, usually called GAVE, is a lesion of the stomach's antrum. On endoscopy it looks like watermelon stripes of dilated vessels. It is much more common in people with systemic sclerosis, and it often causes slow, hidden blood loss that leads to iron deficiency anaemia. The main treatment is endoscopic, most often argon plasma coagulation, along with iron replacement. Proton pump inhibitors can ease reflux symptoms, but they do nothing to close the abnormal vessels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Endoscopic appearance",
+      "Watermelon stripes of dilated antral mucosal vessels"
+     ],
+     [
+      "Typical presentation",
+      "Occult blood loss and iron deficiency anaemia"
+     ],
+     [
+      "First-line treatment",
+      "Argon plasma coagulation plus iron replacement"
+     ],
+     [
+      "Role of proton pump inhibitors",
+      "Symptom relief only, vessels remain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pulmonary arterial hypertension complicates systemic sclerosis in about 10 to 16 percent of patients and carries a poor prognosis. Screening uses echocardiography, with right heart catheterisation for confirmation. Interstitial lung disease and PAH should both be considered when exertional intolerance develops. Exam questions often pair **PAH** with the need for right heart assessment.",
+   "say": "Pulmonary arterial hypertension complicates systemic sclerosis in about 10 to 16 percent of patients and carries a poor prognosis. Screening uses echocardiography, with right heart catheterisation for confirmation. Interstitial lung disease and PAH should both be considered when exertional intolerance develops. Exam questions often pair PAH with the need for right heart assessment.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_84ff5f94372f",
+  "q_0c27f4dd9e71",
+  "q_82b18b4cbb83"
+ ],
+ "src": [],
+ "refs": [
+  "Distler O et al. SENSCIS trial, New England Journal of Medicine",
+  "Tashkin DP et al. Scleroderma Lung Study II",
+  "Tashkin DP et al. Scleroderma Lung Study I",
+  "Kowal-Bielecka O et al. EULAR recommendations for systemic sclerosis, Annals of the Rheumatic Diseases"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 45
+ }
+}

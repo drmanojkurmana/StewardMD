@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "module": "scc-endocrine-icu",
+ "subject": "ss-critical-care",
+ "title": "Endocrine emergencies in critical care: DKA, HHS and glycaemic control",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Hyperosmolar hyperglycaemic state** (HHS) has marked hyperglycaemia and **hyperosmolality** with little ketosis, often in older adults with type 2 diabetes. Effective osmolality is 2Na plus glucose divided by 18. Common triggers include infection, stroke, and drugs such as **thiazide diuretics**. Mortality is substantially higher than in DKA, so precipitants must be sought actively.",
+   "say": "Hyperosmolar hyperglycaemic state, or HHS, has marked hyperglycaemia and hyperosmolality with little ketosis, often in older adults with type 2 diabetes. Effective osmolality is calculated as twice sodium plus glucose divided by 18. Common triggers include infection, stroke, and drugs such as thiazide diuretics. Mortality is substantially higher than in DKA, so precipitants must be sought actively.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dehydration and glucose above 600"
+     },
+     {
+      "id": "b",
+      "label": "Hyperosmolality and little ketosis"
+     },
+     {
+      "id": "c",
+      "label": "Look for trigger such as infection"
+     },
+     {
+      "id": "d",
+      "label": "Slow fluids and insulin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Potassium** needs careful handling in both conditions. Total body potassium is depleted by osmotic diuresis and vomiting, even when the serum value looks normal or high. Insulin drives potassium into cells, so serum levels can fall quickly. Do not start insulin if potassium is below 3.3 mEq/L, and replace it first. Check electrolytes and gases every 2 to 3 hours during treatment.",
+   "say": "Potassium needs careful handling in both conditions. Total body potassium is depleted by osmotic diuresis and vomiting, even when the serum value looks normal or high. Insulin drives potassium into cells, so serum levels can fall quickly. Do not start insulin if potassium is below 3.3 mEq/L, and replace it first. Check electrolytes and gases every 2 to 3 hours during treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Euglycaemic DKA** occurs with glucose below about 250 mg/dL and is linked to **SGLT2 inhibitors**, low carbohydrate intake, pregnancy and surgery. These drugs raise glucagon and ketone production while lowering insulin. Diagnose with beta-hydroxybutyrate. Treat with insulin and dextrose infusion together, so acidosis resolves while glucose stays safe. Stop the SGLT2 inhibitor. In pregnancy, maternal and fetal mortality risk is high.",
+   "say": "Euglycaemic DKA occurs with glucose below about 250 mg/dL and is linked to SGLT2 inhibitors, low carbohydrate intake, pregnancy and surgery. These drugs raise glucagon and ketone production while lowering insulin. Diagnose it with beta-hydroxybutyrate. Treat with insulin and dextrose infusion together, so acidosis resolves while glucose stays safe. Stop the SGLT2 inhibitor. In pregnancy, maternal and fetal mortality risk is high.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanism",
+     "points": [
+      "Less insulin",
+      "More glucagon",
+      "More ketones"
+     ]
+    },
+    "right": {
+     "title": "Treatment",
+     "points": [
+      "Insulin infusion",
+      "Add dextrose",
+      "Stop SGLT2 inhibitor"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In critical illness, **NICE-SUGAR** trials showed that tight glucose control increases **hypoglycaemia** and mortality, so a moderate target is preferred over strict normalisation. **Sliding-scale insulin** alone is inadequate. Use scheduled **basal plus prandial insulin** when eating, or an **intravenous infusion** when unstable. Consider **critical illness corticosteroid insufficiency** and **adrenal crisis** in shock unresponsive to fluids.",
+   "say": "In critical illness, NICE-SUGAR trials showed that tight glucose control increases hypoglycaemia and mortality, so a moderate target is preferred over strict normalisation. Sliding-scale insulin alone is inadequate. Use scheduled basal plus prandial insulin when eating, or an intravenous infusion when unstable. Consider critical illness corticosteroid insufficiency and adrenal crisis in shock unresponsive to fluids.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_738a32063dd2",
+  "q_4b2f8d62abea",
+  "q_8dacd1bd36d9"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline on diabetes in adults: management of hyperglycaemia in hospital",
+  "NICE-SUGAR Study Investigators, New England Journal of Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

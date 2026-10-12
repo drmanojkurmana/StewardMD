@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "sen-type2-pharmacotherapy",
+ "subject": "ss-endocrinology",
+ "title": "Pharmacotherapy of type 2 diabetes: choosing and sequencing agents",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Type 2 diabetes treatment is built around the individual, not just the HbA1c. **Metformin** remains the usual first-line drug unless there is a contraindication, and it works by reducing hepatic glucose output. Lifestyle measures run alongside every drug choice. For a patient with established cardiovascular disease or heart failure, or with chronic kidney disease, the choice of second agent should favour drugs with proven organ protection. Glycaemic targets should be individualised.",
+   "say": "Type 2 diabetes treatment is built around the individual, not just the HbA1c. Metformin remains the usual first line drug unless there is a contraindication, and it works by reducing hepatic glucose output. Lifestyle measures run alongside every drug choice. For a patient with established cardiovascular disease or heart failure, or with chronic kidney disease, the choice of second agent should favour drugs with proven organ protection. Glycaemic targets should be individualised.",
+   "vis": null
+  },
+  {
+   "tx": "Choose agents by comorbidity. **SGLT2 inhibitors** are preferred when there is heart failure or chronic kidney disease, even at low glucose levels, and they carry a risk of genital infection and euglycaemic ketoacidosis that must be taught. **GLP-1 receptor agonists** and **tirzepatide** suit patients needing weight reduction or cardiovascular protection. Avoid pioglitazone in heart failure because of fluid retention, and avoid GLP-1 agonists in personal or family history of medullary thyroid cancer or MEN2.",
+   "say": "Choose agents by comorbidity. SGLT2 inhibitors are preferred when there is heart failure or chronic kidney disease, even at low glucose levels, and they carry a risk of genital infection and euglycaemic ketoacidosis that must be taught. GLP-1 receptor agonists and tirzepatide suit patients needing weight reduction or cardiovascular protection. Avoid pioglitazone in heart failure because of fluid retention, and avoid GLP-1 agonists in personal or family history of medullary thyroid cancer or MEN2.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical situation",
+     "Preferred choice",
+     "Key caution"
+    ],
+    "rows": [
+     [
+      "Heart failure",
+      "SGLT2 inhibitor",
+      "Genital infection, ketoacidosis"
+     ],
+     [
+      "Chronic kidney disease",
+      "SGLT2 inhibitor",
+      "Monitor eGFR"
+     ],
+     [
+      "Established cardiovascular disease",
+      "GLP-1 receptor agonist or SGLT2 inhibitor",
+      "Avoid GLP-1 if medullary thyroid cancer"
+     ],
+     [
+      "Heart failure with pioglitazone",
+      "Avoid pioglitazone",
+      "Fluid retention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sulfonylureas and DPP-4 inhibitors are cheaper options but work less well for cardio-renal protection. **Sulfonylureas** stimulate insulin release by closing ATP-sensitive potassium channels on beta cells, so they carry hypoglycaemia and weight gain. **DPP-4 inhibitors** prolong incretin action and are weight neutral. Glimepiride is often preferred to glibenclamide in patients with ischaemic heart disease, and tirzepatide should never be combined with a DPP-4 inhibitor.",
+   "say": "Sulfonylureas and DPP-4 inhibitors are cheaper options but work less well for cardio-renal protection. Sulfonylureas stimulate insulin release by closing ATP-sensitive potassium channels on beta cells, so they carry hypoglycaemia and weight gain. DPP-4 inhibitors prolong incretin action and are weight neutral. Glimepiride is often preferred to glibenclamide in patients with ischaemic heart disease, and tirzepatide should never be combined with a DPP-4 inhibitor.",
+   "vis": null
+  },
+  {
+   "tx": "When HbA1c is very high, typically above 10 percent with symptoms such as weight loss, polyuria or polydipsia, start **basal insulin** early. A usual starting dose is 10 units at bedtime or about 0.1 to 0.2 units per kg. Titrate by 2 to 4 units every few days or weekly until the fasting target is reached. Avoid delaying insulin when glucose toxicity is evident, since clinical inertia prolongs poor control.",
+   "say": "When HbA1c is very high, typically above 10 percent with symptoms such as weight loss, polyuria or polydipsia, start basal insulin early. A usual starting dose is 10 units at bedtime or about 0.1 to 0.2 units per kg. Titrate by 2 to 4 units every few days or weekly until the fasting target is reached. Avoid delaying insulin when glucose toxicity is evident, since clinical inertia prolongs poor control.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HbA1c above 10 percent with symptoms"
+     },
+     {
+      "id": "b",
+      "label": "Start basal insulin about 10 units at bedtime"
+     },
+     {
+      "id": "c",
+      "label": "Titrate 2 to 4 units every 2 to 3 days or weekly"
+     },
+     {
+      "id": "d",
+      "label": "Fasting target reached"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evidence from the large trials shapes these choices. **UKPDS** showed that tight early control gives a legacy benefit that persists after the trial. **ACCORD** found that intensive glucose lowering to very low HbA1c increased mortality, so targets must not be pushed too hard in older or high-risk patients. **ADVANCE** and **VADT** confirmed modest microvascular and cardiovascular gains from intensive control, with less benefit in long-standing disease.",
+   "say": "Evidence from the large trials shapes these choices. UKPDS showed that tight early control gives a legacy benefit that persists after the trial. ACCORD found that intensive glucose lowering to very low HbA1c increased mortality, so targets must not be pushed too hard in older or high-risk patients. ADVANCE and VADT confirmed modest microvascular and cardiovascular gains from intensive control, with less benefit in long-standing disease.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_5a4cfd51d336",
+  "q_2e3028602faf",
+  "q_6b9d78779387"
+ ],
+ "src": [],
+ "refs": [
+  "ADA EASD consensus report on management of hyperglycaemia in type 2 diabetes",
+  "NICE NG28 Type 2 diabetes in adults: management",
+  "UKPDS Group, UK Prospective Diabetes Study",
+  "ACCORD Study Group, ACCORD trial",
+  "ADVANCE Collaborative Group, ADVANCE trial",
+  "VADT Investigators, Veterans Affairs Diabetes Trial"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 48
+ }
+}

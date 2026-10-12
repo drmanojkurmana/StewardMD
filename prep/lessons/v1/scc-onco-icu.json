@@ -1,0 +1,123 @@
+{
+ "v": 1,
+ "module": "scc-onco-icu",
+ "subject": "ss-critical-care",
+ "title": "Tumour lysis syndrome in the critically ill cancer patient",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Tumour lysis syndrome** (TLS) follows rapid release of intracellular contents after cytotoxic therapy kills tumour cells. The release causes **hyperkalaemia**, **hyperphosphataemia**, hypocalcaemia, and **hyperuricaemia**, which can lead to acute kidney injury and arrhythmias. Burkitt lymphoma, high-grade non-Hodgkin lymphoma, and acute leukaemia carry the highest risk. Pre-existing renal impairment is an established predisposing factor, as is high tumour proliferation rate and large tumour burden.",
+   "say": "Tumour lysis syndrome follows rapid release of intracellular contents after cytotoxic therapy kills tumour cells. The release causes hyperkalaemia, hyperphosphataemia, hypocalcaemia, and hyperuricaemia, which can lead to acute kidney injury and arrhythmias. Burkitt lymphoma, high-grade non-Hodgkin lymphoma, and acute leukaemia carry the highest risk. Pre-existing renal impairment is an established predisposing factor, as is high tumour proliferation rate and large tumour burden.",
+   "vis": null
+  },
+  {
+   "tx": "Diagnosis of **tumour lysis syndrome** relies on the **Cairo-Bishop** definitions. Laboratory disease requires abnormal levels of uric acid, potassium, phosphate or calcium around the time of cytotoxic treatment, judged against a recent window before and after therapy. Clinical disease adds kidney injury, cardiac rhythm disturbance or seizures. Raised phosphate is typical after chemotherapy, whereas spontaneous breakdown may leave phosphate normal. Dangerous **ventricular arrhythmias** make continuous ECG monitoring essential.",
+   "say": "Diagnosis of tumour lysis syndrome relies on the Cairo-Bishop definitions. Laboratory disease needs abnormal levels of uric acid, potassium, phosphate or calcium around the time of cytotoxic treatment, judged against a recent window before and after therapy. Clinical disease adds kidney injury, cardiac rhythm disturbance or seizures. Raised phosphate is typical after chemotherapy, whereas spontaneous breakdown may leave phosphate normal. Dangerous ventricular arrhythmias make continuous ECG monitoring essential.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Laboratory TLS",
+     "Clinical TLS"
+    ],
+    "rows": [
+     [
+      "Lab criteria",
+      "Abnormal uric acid, potassium, phosphate or calcium",
+      "Lab criteria plus organ effect"
+     ],
+     [
+      "Organ effect",
+      "None",
+      "Renal impairment, arrhythmia or seizure"
+     ],
+     [
+      "Management focus",
+      "Prevention and monitoring",
+      "Urgent treatment and dialysis if needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention is the priority. Start **allopurinol** 24 to 48 hours before chemotherapy, or use **rasburicase** when uric acid is high or the patient is at high risk. Rasburicase converts uric acid to allantoin, which is far more soluble. Check G6PD status before rasburicase, because it can cause haemolysis in G6PD deficiency. Give hydration with urine output near 2 mL/kg/h. Avoid potassium and calcium in initial fluids, and avoid routine alkalinisation because it promotes calcium-phosphate precipitation.",
+   "say": "Prevention is the priority. Start allopurinol 24 to 48 hours before chemotherapy, or use rasburicase when uric acid is high or the patient is at high risk. Rasburicase converts uric acid to allantoin, which is far more soluble. Check G6PD status before rasburicase, because it can cause haemolysis in G6PD deficiency. Give hydration with urine output near 2 mL per kilogram per hour. Avoid potassium and calcium in initial fluids, and avoid routine alkalinisation because it promotes calcium-phosphate precipitation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High risk?"
+     },
+     {
+      "id": "b",
+      "label": "Allopurinol 24-48 h before"
+     },
+     {
+      "id": "c",
+      "label": "Rasburicase if uric acid high"
+     },
+     {
+      "id": "d",
+      "label": "Hydrate to 2 mL/kg/h"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "Standard"
+     ],
+     [
+      "a",
+      "c",
+      "Very high"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Beyond TLS, the critically ill cancer patient often has **neutropenic sepsis**, **cytokine release syndrome** after CAR-T therapy, and **haemophagocytic lymphohistiocytosis** (HLH). HLH is diagnosed by at least five of eight HLH-2004 criteria. Malignancy is the commonest adult trigger, and malignancy-associated HLH carries a much poorer median survival than non-malignant HLH. Differentiation syndrome occurs with arsenic and retinoic acid therapy in acute promyelocytic leukaemia.",
+   "say": "Beyond TLS, the critically ill cancer patient often has neutropenic sepsis, cytokine release syndrome after CAR-T therapy, and haemophagocytic lymphohistiocytosis. HLH is diagnosed by at least five of eight HLH-2004 criteria. Malignancy is the commonest adult trigger, and malignancy-associated HLH carries a much poorer median survival than non-malignant HLH. Differentiation syndrome occurs with arsenic and retinoic acid therapy in acute promyelocytic leukaemia.",
+   "vis": null
+  },
+  {
+   "tx": "Set goals early. A **time limited trial** of intensive care is reasonable when the expected outcome is poor, with shared decisions involving the patient and family. Relapsed lymphoma with HLH and multiorgan failure that does not respond to bridging therapy has a poor prognosis, and **haematopoietic stem cell transplant** is the only potentially curative option once stable. Document the review points and the criteria for stopping escalation.",
+   "say": "Set goals early. A time limited trial of intensive care is reasonable when the expected outcome is poor, with shared decisions involving the patient and family. Relapsed lymphoma with HLH and multiorgan failure that does not respond to bridging therapy has a poor prognosis, and haematopoietic stem cell transplant is the only potentially curative option once stable. Document the review points and the criteria for stopping escalation.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1fbeea96db52",
+  "q_496f4173ba93",
+  "q_21125503a1f0"
+ ],
+ "src": [],
+ "refs": [
+  "Cairo MS, Bishop M. Tumour lysis syndrome: new therapeutic strategies and classification. British Journal of Haematology (2004)",
+  "Histiocyte Society HLH-2004 diagnostic criteria"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

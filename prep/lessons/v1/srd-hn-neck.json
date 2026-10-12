@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "srd-hn-neck",
+ "subject": "ss-radiology",
+ "title": "Sinonasal, pharynx and neck spaces: high-yield imaging for NEET-PG and INI-CET",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **sinonasal tract** is best assessed with CT for bone and MRI for soft tissue. Chronic sinonasal disease most often follows the **infundibular pattern**, which involves the ostiomeatal complex and the drainage pathway from the frontal, anterior ethmoid and maxillary sinuses. Recognised associations include cystic fibrosis and aspirin sensitivity. Frontal sinus mucoceles are less common than maxillary or ethmoidal ones.",
+   "say": "The sinonasal tract is best assessed with CT for bone and MRI for soft tissue. Chronic sinonasal disease most often follows the infundibular pattern, which involves the ostiomeatal complex and the drainage pathway from the frontal, anterior ethmoid and maxillary sinuses. Recognised associations include cystic fibrosis and aspirin sensitivity. Frontal sinus mucoceles are less common than maxillary or ethmoidal ones.",
+   "vis": null
+  },
+  {
+   "tx": "Fungal sinusitis has two key forms. **Allergic fungal sinusitis** shows hyperdense sinus contents on CT, often with bilateral ethmoid and maxillary involvement. **Acute invasive fungal sinusitis** is the dangerous form in immunocompromised or diabetic patients, and its hallmark is extension into the fat around the sinuses. A mucocele is an obstructed, airless sinus that expands circumferentially over time.",
+   "say": "Fungal sinusitis has two key forms. Allergic fungal sinusitis shows hyperdense sinus contents on CT, often with bilateral ethmoid and maxillary involvement. Acute invasive fungal sinusitis is the dangerous form in immunocompromised or diabetic patients, and its hallmark is extension into the fat around the sinuses. A mucocele is an obstructed, airless sinus that expands circumferentially over time.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Allergic fungal",
+     "Acute invasive"
+    ],
+    "rows": [
+     [
+      "Sinus content",
+      "Hyperdense",
+      "Variable, often soft tissue"
+     ],
+     [
+      "Pattern",
+      "Bilateral ethmoid and maxillary",
+      "Extension into orbit or fat"
+     ],
+     [
+      "Host",
+      "Atopic, immunocompetent",
+      "Immunocompromised, diabetic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lemierre syndrome** follows an oropharyngeal infection, often from Fusobacterium necrophorum, which causes internal jugular vein thrombophlebitis. Septic pulmonary emboli then appear on chest imaging. A **retropharyngeal abscess** is suggested on lateral neck X-ray by a widened prevertebral shadow, and an abscess that involves the danger space can track into the mediastinum.",
+   "say": "Lemierre syndrome follows an oropharyngeal infection, often from Fusobacterium necrophorum, which causes internal jugular vein thrombophlebitis. Septic pulmonary emboli then appear on chest imaging. A retropharyngeal abscess is suggested on lateral neck X-ray by a widened prevertebral shadow, and an abscess that involves the danger space can track into the mediastinum.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Oropharyngeal infection"
+     },
+     {
+      "id": "b",
+      "label": "IJV thrombophlebitis"
+     },
+     {
+      "id": "c",
+      "label": "Septic pulmonary emboli"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neck spaces guide localisation. A **carotid body tumour** lies in the carotid space and displaces the parapharyngeal fat anteromedially, and its classic MRI pattern is salt and pepper. Level 2B nodes lie posterior to the internal jugular vein. In laryngeal cancer, **pre-epiglottic fat** matters for staging because it is rich in lymphatics, and paraglottic involvement makes a tumour T3.",
+   "say": "Neck spaces guide localisation. A carotid body tumour lies in the carotid space and displaces the parapharyngeal fat anteromedially, and its classic MRI pattern is salt and pepper. Level 2B nodes lie posterior to the internal jugular vein. In laryngeal cancer, pre-epiglottic fat matters for staging because it is rich in lymphatics, and paraglottic involvement makes a tumour T3.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carotid body tumour",
+     "points": [
+      "Carotid space",
+      "Anteromedial fat displacement",
+      "Salt and pepper on MRI"
+     ]
+    },
+    "right": {
+     "title": "Laryngeal staging",
+     "points": [
+      "Pre-epiglottic fat is lymphatic-rich",
+      "Paraglottic space defines T3",
+      "Cricoid invasion blocks conservation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For the **thyroid**, ultrasound is the first-line modality. A solid, hypoechoic nodule with central vascularity and microcalcifications has the highest suspicion for malignancy and should be prioritised for biopsy. The **Zuckerkandl tubercle** is a posterior thyroid extension that serves as a landmark for the recurrent laryngeal nerve, which lies medial to it. Thyroglossal duct cysts are midline, and branchial cleft cysts are lateral.",
+   "say": "For the thyroid, ultrasound is the first-line modality. A solid, hypoechoic nodule with central vascularity and microcalcifications has the highest suspicion for malignancy and should be prioritised for biopsy. The Zuckerkandl tubercle is a posterior thyroid extension that serves as a landmark for the recurrent laryngeal nerve, which lies medial to it. Thyroglossal duct cysts are midline, and branchial cleft cysts are lateral.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ct-147f2d25570a",
+  "ct-1ab994ee6e3f",
+  "ct-c75df87f9672"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 64
+ }
+}

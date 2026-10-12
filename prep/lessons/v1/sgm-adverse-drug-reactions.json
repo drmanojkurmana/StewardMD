@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "module": "sgm-adverse-drug-reactions",
+ "subject": "ss-general-medicine",
+ "title": "Adverse drug reactions and pharmacovigilance",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An **adverse drug reaction** is any noxious, unintended response to a drug given at normal doses for prophylaxis, diagnosis or therapy. Reactions are classified as **Type A** (augmented, predictable, dose-dependent, common, high morbidity but low mortality) and **Type B** (bizarre, unpredictable, not linked to known pharmacology, low frequency, high mortality). Type B reactions include immune-mediated and idiosyncratic events.",
+   "say": "An adverse drug reaction is any noxious, unintended response to a drug given at normal doses. Type A reactions are augmented, predictable, dose dependent and common, with high morbidity but low mortality. Type B reactions are bizarre and unpredictable, not linked to the known pharmacology of the drug, rare, and carry high mortality. Immune-mediated and idiosyncratic events fall under Type B.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Type A",
+     "Type B"
+    ],
+    "rows": [
+     [
+      "Predictability",
+      "Predictable",
+      "Unpredictable"
+     ],
+     [
+      "Dose relation",
+      "Dose dependent",
+      "Usually not dose dependent"
+     ],
+     [
+      "Frequency",
+      "Common",
+      "Rare"
+     ],
+     [
+      "Mortality",
+      "Low",
+      "High"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug-induced **lupus** is a lupus-like syndrome with arthralgia, myalgia, fever and serositis, often with anti-histone antibodies. Hydralazine and procainamide are classic culprits. Drug-induced **drug fever** is a common, often overlooked cause of fever in hospital. Withdrawing the offending drug usually resolves drug-induced lupus promptly.",
+   "say": "Drug induced lupus is a lupus like syndrome with arthralgia, myalgia, fever and serositis, often with anti histone antibodies. Hydralazine and procainamide are classic culprits. Drug fever is a common, often overlooked cause of fever in hospital. Withdrawing the offending drug usually resolves drug induced lupus promptly.",
+   "vis": null
+  },
+  {
+   "tx": "Causality is assessed with the **Naranjo algorithm**, which scores temporal relation, previous reports, dechallenge and rechallenge, alternative causes and placebo response. A score of 9 or more means the reaction is definite, 5 to 8 probable, 1 to 4 possible and 0 or less doubtful. **Pharmacovigilance** in India runs through the **PvPI** programme under IPC, reporting to the national centre.",
+   "say": "Causality is assessed with the Naranjo algorithm, which scores timing, previous reports, dechallenge, rechallenge, alternative causes and placebo response. A score of nine or more means definite, five to eight probable, one to four possible, and zero or less doubtful. Pharmacovigilance in India runs through the PvPI programme under the Indian Pharmacopoeia Commission, which reports to the national centre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Naranjo score",
+     "Category"
+    ],
+    "rows": [
+     [
+      "9 or more",
+      "Definite"
+     ],
+     [
+      "5 to 8",
+      "Probable"
+     ],
+     [
+      "1 to 4",
+      "Possible"
+     ],
+     [
+      "0 or less",
+      "Doubtful"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe cutaneous reactions follow a clear sequence. Stop the **culprit drug** first. Anaphylaxis needs immediate intramuscular epinephrine. **SJS** involves less than 10 percent body surface area, **TEN** more than 30 percent, and overlap lies between. In **DRESS**, systemic corticosteroids are first line. Drug challenge is contraindicated after SJS or TEN.",
+   "say": "Severe cutaneous reactions follow a clear sequence. First stop the culprit drug. Anaphylaxis needs immediate intramuscular epinephrine. SJS involves less than ten percent of body surface area, TEN more than thirty percent, and overlap lies between. In DRESS, systemic corticosteroids are first line. Drug challenge is contraindicated after SJS or TEN.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stop culprit drug"
+     },
+     {
+      "id": "b",
+      "label": "Assess BSA"
+     },
+     {
+      "id": "c",
+      "label": "SJS or TEN or overlap"
+     },
+     {
+      "id": "d",
+      "label": "Supportive care and steroids as indicated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remember the **black box warning**, the strongest regulatory alert, used for serious risks such as QT prolongation with certain drugs, and ototoxicity and nephrotoxicity from aminoglycosides and cisplatin. AGEP usually settles within one to two weeks after stopping the drug, with mortality around 5 percent. Medication errors should be reported to PvPI as part of safety culture.",
+   "say": "Remember the black box warning, the strongest regulatory alert, used for serious risks such as drug induced QT prolongation, ototoxicity and nephrotoxicity from aminoglycosides and cisplatin. AGEP usually settles within one to two weeks after stopping the drug, with mortality around five percent. Medication errors should be reported as part of safety culture.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_2e7c305f9e23",
+  "q_a2f6d70e13d4",
+  "q_0400004e2286"
+ ],
+ "src": [],
+ "refs": [
+  "Gell and Coombs classification of hypersensitivity reactions",
+  "Naranjo ADR probability scale",
+  "Pharmacovigilance Programme of India guidance"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 30
+ }
+}

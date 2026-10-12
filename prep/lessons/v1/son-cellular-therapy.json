@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "son-cellular-therapy",
+ "subject": "ss-medical-oncology",
+ "title": "Cellular therapy and bispecific antibodies: CRS, ICANS and key agents",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Bispecific T cell engagers** link a tumour antigen on one arm with **CD3** on T cells through the other arm, creating a bridge that brings cytotoxic T cells into contact with the malignant cell. Teclistamab targets BCMA and CD3 and is used in relapsed or refractory **multiple myeloma**. By contrast, **lifileucel** is an autologous **tumour infiltrating lymphocyte** product, expanded from the patient's own resected tumour and reinfused, so it is a cellular rather than antibody-based strategy.",
+   "say": "Bispecific T cell engagers have one arm that grabs a tumour antigen and another arm that grabs CD3 on T cells. This forms a bridge that pulls cytotoxic T cells onto the malignant cell so it can be destroyed. Teclistamab follows this design, targeting BCMA and CD3, and is used in relapsed or refractory multiple myeloma. Lifileucel works differently: it is made from the patient's own tumour infiltrating lymphocytes, grown outside the body and then given back, so it belongs to the cellular therapy family rather than the antibody family.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Target or basis",
+     "Main use"
+    ],
+    "rows": [
+     [
+      "Teclistamab",
+      "BCMA and CD3 (bispecific antibody)",
+      "Relapsed or refractory multiple myeloma"
+     ],
+     [
+      "Lifileucel",
+      "Autologous tumour infiltrating lymphocytes",
+      "Advanced melanoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cytokine release syndrome** follows T cell activation and is driven largely by IFN-gamma from T cells, which stimulates macrophages to release **IL-6**. Typical features are fever, tachycardia and hypotension, sometimes progressing to circulatory collapse and multiorgan failure. Step-up priming doses of teclistamab (0.06 mg/kg then 0.3 mg/kg) are given to reduce this risk before the full 1.5 mg/kg dose. Premedication with corticosteroid, antihistamine and antipyretic is used before each step-up.",
+   "say": "Cytokine release syndrome follows T cell activation and is driven largely by interferon gamma from T cells, which stimulates macrophages to release interleukin 6. Typical features are fever, tachycardia and hypotension, sometimes progressing to circulatory collapse and multiorgan failure. Step-up priming doses of teclistamab, 0.06 mg/kg then 0.3 mg/kg, are given to reduce this risk before the full 1.5 mg/kg dose. Premedication with corticosteroid, antihistamine and antipyretic is used before each step-up.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "T cell activation"
+     },
+     {
+      "id": "b",
+      "label": "IFN-gamma"
+     },
+     {
+      "id": "c",
+      "label": "Macrophage IL-6"
+     },
+     {
+      "id": "d",
+      "label": "Fever and hypotension"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tocilizumab** is an IL-6 receptor antagonist and the first-line agent for CRS that is severe or life-threatening, given for adults and children. For severe CRS the usual dose is 8 mg/kg, and up to three further doses may be given at intervals of at least 8 hours if there is no improvement. Dexamethasone is added for steroid-refractory cases. Tocilizumab does not treat ICANS well, so neurological toxicity needs separate management.",
+   "say": "Tocilizumab is an interleukin 6 receptor antagonist and the first-line agent for cytokine release syndrome that is severe or life-threatening, given to adults and children. For severe cases the usual dose is 8 mg/kg, and up to three further doses may be given at intervals of at least 8 hours if there is no improvement. Dexamethasone is added for steroid refractory cases. Tocilizumab does not treat neurotoxicity well, so neurological toxicity needs separate management.",
+   "vis": null
+  },
+  {
+   "tx": "**ICANS** is immune effector cell-associated neurotoxicity, presenting as confusion, tremor, language disturbance or reduced attention. Serial neurological examinations detect early change. Neuroimaging, usually MRI, should precede any lumbar puncture to exclude raised pressure or oedema. For grade 2 or higher ICANS, dexamethasone 10 mg every 6 to 12 hours is used and tapered over 2 to 5 days. Levetiracetam is used for seizure prophylaxis. MRI is more sensitive than CT for soft tissue and brain inflammation.",
+   "say": "ICANS is immune effector cell associated neurotoxicity, presenting as confusion, tremor, language disturbance or reduced attention. Serial neurological examinations detect early change. Neuroimaging, usually MRI, should precede any lumbar puncture to exclude raised pressure or oedema. For grade 2 or higher ICANS, dexamethasone 10 mg every 6 to 12 hours is used and tapered over 2 to 5 days. Levetiracetam is used for seizure prophylaxis. MRI is more sensitive than CT for brain inflammation and oedema.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CT head",
+     "points": [
+      "Quick and available",
+      "Less sensitive for oedema",
+      "Poor soft tissue detail"
+     ]
+    },
+    "right": {
+     "title": "MRI brain",
+     "points": [
+      "More sensitive for inflammation",
+      "Detects soft tissue change",
+      "Preferred before lumbar puncture"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tumour lysis syndrome** occurs with rapid tumour cell death and produces hyperkalaemia, hyperphosphataemia, hyperuricaemia and hypocalcaemia. High tumour burden calls for pre-emptive intravenous fluids and allopurinol. Rasburicase is reserved for established TLS with renal dysfunction, since it reduces uric acid quickly. Note that **haemophagocytic lymphohistiocytosis** differs from CRS by showing hemophagocytosis, fever, hepatosplenomegaly and pancytopenia.",
+   "say": "Tumour lysis syndrome occurs with rapid tumour cell death and produces hyperkalaemia, hyperphosphataemia, hyperuricaemia and hypocalcaemia. High tumour burden calls for pre-emptive intravenous fluids and allopurinol. Rasburicase is reserved for established tumour lysis syndrome with renal dysfunction, since it reduces uric acid quickly. Haemophagocytic lymphohistiocytosis differs from cytokine release syndrome by showing haemophagocytosis, fever, hepatosplenomegaly and pancytopenia.",
+   "vis": null
+  },
+  {
+   "tx": "**Tocilizumab safety** matters in practice. Live vaccines are contraindicated, and it is avoided in patients with active serious infection. Dose adjustment is not needed when creatinine clearance is above 30 mL/min. Treatment is stopped if ALT or AST exceeds 5 times the upper limit of normal. In India, check hepatitis B and tuberculosis status and baseline counts before use. Immunosuppression from steroids in CRS also raises the risk of secondary infection.",
+   "say": "Tocilizumab safety matters in practice. Live vaccines are contraindicated, and it is avoided in patients with active serious infection. Dose adjustment is not needed when creatinine clearance is above 30 mL/min. Treatment is stopped if ALT or AST exceeds 5 times the upper limit of normal. In India, check hepatitis B and tuberculosis status and baseline counts before use. Immunosuppression from steroids given for cytokine release syndrome also raises the risk of secondary infection.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_56b82f4d779a",
+  "q_de893d6fa95f",
+  "q_2fdfc1df2cce"
+ ],
+ "src": [],
+ "refs": [
+  "Teclistamab US prescribing information",
+  "Lee DW et al. ASTCT consensus grading for cytokine release syndrome and neurologic toxicity associated with immune effector cells, Biol Blood Marrow Transplant"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

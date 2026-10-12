@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "sgm-gi-systemic",
+ "subject": "ss-general-medicine",
+ "title": "Gut in systemic disease and therapeutic endoscopy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Protein-losing enteropathy (PLE) is excessive loss of **plasma proteins** into the gut lumen. Loss is non-selective, so both albumin and globulins fall, causing oedema. Common causes include Fontan circulation, where raised systemic venous pressure leads to intestinal lymphatic obstruction, and intestinal lymphangiectasia. Serum albumin is low while liver function and urinary protein are normal, which separates PLE from liver and renal causes.",
+   "say": "Protein-losing enteropathy is excessive loss of plasma proteins into the gut. The loss is non-selective, so both albumin and globulins fall, and oedema follows. Common causes include the Fontan circulation, where raised systemic venous pressure obstructs intestinal lymphatics, and intestinal lymphangiectasia. Liver function and urinary protein are normal in this condition, which helps separate it from liver and kidney causes.",
+   "vis": null
+  },
+  {
+   "tx": "The key confirmatory test is **alpha-1 antitrypsin (A1AT) clearance**, measured in stool. A1AT resists degradation in the gut lumen, so high faecal clearance points to enteric protein leakage. Gold standard quantification uses **51Cr-labelled albumin clearance**. Stool A1AT is the usual screening test, while acid suppression is needed before testing in hypersecretory states such as Zollinger-Ellison syndrome, since acid degrades A1AT.",
+   "say": "The key confirmatory test is alpha-1 antitrypsin clearance measured in stool. This protein resists breakdown in the gut, so high faecal clearance points to protein leaking into the bowel. Chromium-labelled albumin clearance is the reference standard for quantification. In hypersecretory states such as Zollinger-Ellison syndrome, acid suppression with antacids is needed first, because stomach acid breaks down this protein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low albumin and oedema"
+     },
+     {
+      "id": "b",
+      "label": "Normal liver and urine"
+     },
+     {
+      "id": "c",
+      "label": "Stool A1AT clearance"
+     },
+     {
+      "id": "d",
+      "label": "51Cr albumin clearance"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "quantify"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management starts with treating the cause. Diet is central: use a **high-protein, low-fat diet with medium-chain triglycerides (MCTs)**. MCTs are absorbed directly into the portal circulation, bypassing lymphatics, which reduces lymphatic pressure and leakage. Protein intake of about 2 to 3 g/kg/day is targeted to replace losses. Octreotide lowers splanchnic lymph flow and can reduce protein loss in refractory cases.",
+   "say": "Management starts with treating the underlying cause. Diet is central, using a high-protein, low-fat diet with medium-chain triglycerides. These fats are absorbed straight into the portal circulation, bypassing the lymphatics, which lowers lymphatic pressure and leakage. A protein intake of about 2 to 3 grams per kilogram per day is targeted to replace losses. Octreotide can reduce protein loss in refractory cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "Fat type",
+      "Medium-chain triglycerides"
+     ],
+     [
+      "Fat amount",
+      "Restricted"
+     ],
+     [
+      "Protein goal",
+      "2 to 3 g/kg/day"
+     ],
+     [
+      "Drug option",
+      "Octreotide"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Therapeutic endoscopy carries specific risks that shape how a procedure is planned. **Post-ERCP pancreatitis** is the most frequent serious complication, and **rectal prophylaxis** together with **pancreatic duct stenting** lowers its incidence. When **medication-related small-bowel ulceration** is suspected, **capsule endoscopy** can image areas that standard scopes cannot reach. **Endoscopic ultrasound** stages pancreatic and biliary lesions and samples nearby nodes.",
+   "say": "Therapeutic endoscopy carries specific risks that shape how a procedure is planned. Post-ERCP pancreatitis is the most frequent serious complication, and rectal prophylaxis along with pancreatic duct stenting lowers its incidence. When medication-related small-bowel ulceration is suspected, capsule endoscopy can image areas standard scopes cannot reach. Endoscopic ultrasound stages pancreatic and biliary lesions and samples nearby lymph nodes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prevention",
+     "points": [
+      "Rectal prophylaxis",
+      "Pancreatic duct stent"
+     ]
+    },
+    "right": {
+     "title": "Other tools",
+     "points": [
+      "Capsule endoscopy",
+      "Endoscopic ultrasound"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Remember the exam essentials. Amyloidosis, scleroderma and eosinophilic gastroenteritis all disturb gut motility or absorption. Abdominal **tuberculosis** is often ileocaecal and needs biopsy to separate it from Crohn's disease. Always treat the systemic disease first, then manage the gut complication. Early gastroenterology referral is essential for any suspected PLE.",
+   "say": "Remember the exam essentials. Amyloidosis, scleroderma and eosinophilic gastroenteritis all disturb gut motility or absorption. Abdominal tuberculosis is often ileocaecal and needs biopsy to separate it from Crohn's disease. Treat the systemic disease first, then manage the gut complication. Early gastroenterology referral is essential for any suspected protein-losing enteropathy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1e0ff4734abd",
+  "q_541a44784d4d",
+  "q_4773b5f21b8d"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 14
+ }
+}

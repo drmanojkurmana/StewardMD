@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "med-iv-fluids",
+ "subject": "medicine",
+ "title": "Intravenous fluid therapy: crystalloids, colloids and maintenance",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Intravenous fluids fall into two families: **crystalloids** and **colloids**. Crystalloids are small-molecule solutions, such as normal saline, Ringer lactate and dextrose. They distribute across the extracellular and intracellular compartments, so only a minority remains within the vessels. Colloids contain larger molecules, such as **albumin**, and they stay mostly intravascular. Crystalloids remain the usual first choice for resuscitation.",
+   "say": "Intravenous fluids fall into two families: crystalloids and colloids. Crystalloids are small-molecule solutions, such as normal saline, Ringer lactate and dextrose. They distribute across the extracellular and intracellular compartments, so only a minority remains within the vessels. Colloids contain larger molecules, such as albumin, and they stay mostly intravascular. Crystalloids remain the usual first choice for resuscitation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Crystalloids",
+     "points": [
+      "Small molecules",
+      "Spread to interstitial and intracellular spaces",
+      "Normal saline, Ringer lactate, dextrose",
+      "Usual first choice in shock"
+     ]
+    },
+    "right": {
+     "title": "Colloids",
+     "points": [
+      "Large molecules",
+      "Stay mostly intravascular",
+      "Albumin and other synthetic colloids",
+      "Not first line for routine resuscitation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ringer lactate is an **isotonic crystalloid** with osmolarity about 273 mOsm/L, close to extracellular fluid. One litre contains sodium 130 mEq, chloride 109 mEq, lactate 28 mEq, potassium 4 mEq and calcium 3 mEq. Its pH is about 6.5 and it is mildly alkalising because lactate is metabolised to bicarbonate. Dextrose is only a free-water source, so it does not expand the extracellular volume.",
+   "say": "Ringer lactate is an isotonic crystalloid with osmolarity about 273 milliosmoles per litre, close to extracellular fluid. One litre contains sodium 130 milliequivalents, chloride 109, lactate 28, potassium 4 and calcium 3. Its pH is about 6.5 and it is mildly alkalising because lactate is metabolised to bicarbonate. Dextrose is only a free-water source, so it does not expand the extracellular volume.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ion or component",
+     "Amount per litre"
+    ],
+    "rows": [
+     [
+      "Sodium",
+      "130 mEq"
+     ],
+     [
+      "Chloride",
+      "109 mEq"
+     ],
+     [
+      "Lactate",
+      "28 mEq"
+     ],
+     [
+      "Potassium",
+      "4 mEq"
+     ],
+     [
+      "Calcium",
+      "3 mEq"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maximum potassium concentration depends on the **access route**. Through a central vein, potassium may be given at up to 60 mmol/L. Through a peripheral vein the ceiling is 40 mmol/L. The usual adult central-line preference is 20 mEq per 100 ml, and fluid-restricted patients may receive 20 mEq per 50 ml. Potassium must never be given as a rapid bolus because of the risk of fatal arrhythmia.",
+   "say": "Maximum potassium concentration depends on the access route. Through a central vein, potassium may be given at up to 60 millimoles per litre. Through a peripheral vein the ceiling is 40 millimoles per litre. The usual adult central-line preference is 20 milliequivalents per 100 millilitres, and fluid-restricted patients may receive 20 milliequivalents per 50 millilitres. Potassium must never be given as a rapid bolus because of the risk of fatal arrhythmia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Max K+ concentration"
+    ],
+    "rows": [
+     [
+      "Central vein",
+      "60 mmol/L"
+     ],
+     [
+      "Peripheral vein",
+      "40 mmol/L"
+     ],
+     [
+      "Usual central preference",
+      "20 mEq/100 ml"
+     ],
+     [
+      "Fluid-restricted central",
+      "20 mEq/50 ml"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normal saline causes **hyperchloraemic acidosis** when given in large volumes, because the excess chloride lowers bicarbonate. Balanced crystalloids such as Plasma-Lyte and Ringer lactate avoid this problem and are preferred in most adults. Recent data suggest lactated Ringer solution may reduce the systemic inflammatory response more than saline, so a balanced crystalloid is the usual choice in acute pancreatitis. Assess **fluid responsiveness** before giving more fluid.",
+   "say": "Normal saline causes hyperchloraemic acidosis when given in large volumes, because the excess chloride lowers bicarbonate. Balanced crystalloids such as Plasma-Lyte and Ringer lactate avoid this problem and are preferred in most adults. Recent data suggest lactated Ringer solution may reduce the systemic inflammatory response more than saline, so a balanced crystalloid is the usual choice in acute pancreatitis. Assess fluid responsiveness before giving more fluid.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "55e5be37-a230-430e-b8ef-f9a0434a3dbf",
+  "ae6ae361-a842-4ccd-866b-2f9d71002099",
+  "aebe8fa2-f60e-47de-ba0e-664c65fd69f5"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Kasper et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

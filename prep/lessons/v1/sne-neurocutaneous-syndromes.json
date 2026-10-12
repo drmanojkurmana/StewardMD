@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "sne-neurocutaneous-syndromes",
+ "subject": "ss-neurology",
+ "title": "Neurocutaneous syndromes: NF1, NF2, TSC, Sturge-Weber, VHL and related disorders",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Neurocutaneous syndromes are **genodermatoses** with combined skin and nervous system involvement. The classic group includes neurofibromatosis type 1, neurofibromatosis type 2, tuberous sclerosis complex, Sturge-Weber syndrome and von Hippel-Lindau disease. Most follow autosomal dominant inheritance with variable expressivity. Recognising the skin clue early directs the screening that follows.",
+   "say": "Neurocutaneous syndromes are genodermatoses, meaning they involve both the skin and the nervous system. The classic group includes neurofibromatosis type 1, neurofibromatosis type 2, tuberous sclerosis complex, Sturge-Weber syndrome and von Hippel-Lindau disease. Most follow autosomal dominant inheritance with variable expressivity. Recognising the skin clue early directs the screening that follows.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Key skin clue",
+     "Key CNS or other lesion"
+    ],
+    "rows": [
+     [
+      "NF1",
+      "Café-au-lait macules, axillary freckling",
+      "Optic glioma, Lisch nodules"
+     ],
+     [
+      "NF2",
+      "Few skin signs, schwannomas",
+      "Bilateral vestibular schwannoma"
+     ],
+     [
+      "TSC",
+      "Ash-leaf spots, facial angiofibromas",
+      "SEGA, cortical tubers"
+     ],
+     [
+      "Sturge-Weber",
+      "Port wine stain, facial distribution",
+      "Leptomeningeal angioma, glaucoma"
+     ],
+     [
+      "VHL",
+      "Often skin-sparing",
+      "Haemangioblastoma, RCC, phaeochromocytoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neurofibromatosis type 1** is the commonest of these, with an incidence near 1 in 2600 to 3000. Diagnosis uses NIH criteria: six or more café-au-lait macules over 5 mm before puberty, two or more neurofibromas or one plexiform neurofibroma, axillary or inguinal freckling, optic pathway glioma, two or more Lisch nodules, and a first-degree relative. Two or more criteria are needed.",
+   "say": "Neurofibromatosis type 1 is the commonest of these, with an incidence near 1 in 2600 to 3000. Diagnosis uses NIH criteria. Six or more café-au-lait macules over 5 mm before puberty, two or more neurofibromas or one plexiform neurofibroma, axillary or inguinal freckling, optic pathway glioma, two or more Lisch nodules, and a first-degree relative. Two or more criteria are needed.",
+   "vis": null
+  },
+  {
+   "tx": "**Tuberous sclerosis complex** results from mutations in **TSC1** or **TSC2**, which code for hamartin and tuberin that restrain mTOR signalling. Skin clues include hypomelanotic ash-leaf macules, shagreen-type plaques on the lower back, facial angiofibromas and ungual fibromas. Cardiac rhabdomyomas frequently involute. A **subependymal giant cell astrocytoma** near the foramen of Monro may obstruct cerebrospinal fluid flow, so raised intracranial pressure needs prompt imaging and neurosurgical review. Surveillance includes periodic brain and renal imaging.",
+   "say": "Tuberous sclerosis complex results from mutations in TSC1 or TSC2, which code for hamartin and tuberin that restrain mTOR signalling. Skin clues include hypomelanotic ash-leaf macules, shagreen-type plaques on the lower back, facial angiofibromas and ungual fibromas. Cardiac rhabdomyomas frequently involute. A subependymal giant cell astrocytoma near the foramen of Monro may obstruct cerebrospinal fluid flow, so raised intracranial pressure needs prompt imaging and neurosurgical review. Surveillance includes periodic brain and renal imaging.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Raised ICP symptoms"
+     },
+     {
+      "id": "b",
+      "label": "Urgent MRI brain"
+     },
+     {
+      "id": "c",
+      "label": "SEGA suspected"
+     },
+     {
+      "id": "d",
+      "label": "Neurosurgical referral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neurofibromatosis type 2** is driven by NF2 on chromosome 22, which encodes merlin. Bilateral vestibular schwannomas are the hallmark. A first-degree relative with NF2 needs audiological screening for early hearing loss. Small asymptomatic tumours are observed with serial MRI and audiometry. Symptomatic tumours are treated surgically, or with radiosurgery for small tumours. Bevacizumab is reserved for progressive tumours when standard surgery and radiation are unsuitable.",
+   "say": "Neurofibromatosis type 2 is driven by NF2 on chromosome 22, which encodes merlin. Bilateral vestibular schwannomas are the hallmark. A first-degree relative with NF2 needs audiological screening for early hearing loss. Small asymptomatic tumours are observed with serial MRI and audiometry. Symptomatic tumours are treated surgically, or with radiosurgery for small tumours. Bevacizumab is reserved for progressive tumours when standard surgery and radiation are unsuitable.",
+   "vis": null
+  },
+  {
+   "tx": "**Sturge-Weber syndrome** is a sporadic disorder with a facial port wine stain in the trigeminal V1 and V2 distribution, leptomeningeal angiomatosis causing **seizures** and cortical calcification, and ipsilateral **glaucoma**. **Von Hippel-Lindau disease** is autosomal dominant, with **haemangioblastomas** of the cerebellum, spinal cord and retina, plus **renal cell carcinoma** and **phaeochromocytoma**. A cutaneous vascular stain points towards Sturge-Weber, whereas multiple vascular tumours suggest VHL.",
+   "say": "Sturge-Weber syndrome is a sporadic condition with a facial port wine stain in the trigeminal territory, leptomeningeal angiomatosis that leads to seizures and cortical calcification, and ipsilateral glaucoma. Von Hippel-Lindau disease is autosomal dominant and produces haemangioblastomas in the cerebellum, spinal cord and retina, alongside renal cell carcinoma and phaeochromocytoma. A cutaneous vascular stain points towards Sturge-Weber, whereas multiple vascular tumours suggest VHL.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sturge-Weber",
+     "points": [
+      "Facial port wine stain in V1 and V2",
+      "Leptomeningeal angiomatosis",
+      "Seizures and cortical calcification",
+      "Ipsilateral glaucoma"
+     ]
+    },
+    "right": {
+     "title": "VHL disease",
+     "points": [
+      "Cerebellar and spinal haemangioblastomas",
+      "Retinal haemangioblastoma",
+      "Renal cell carcinoma",
+      "Phaeochromocytoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Schwannomatosis** and **neurofibromatosis** cause peripheral nerve sheath tumours, so multiple schwannomas should prompt consideration of schwannomatosis, NF2 or Carney complex. Benign schwannomas are encapsulated and composed only of Schwann cells, showing Antoni A areas with Verocay bodies. Malignant peripheral nerve sheath tumour is the key malignant mimic. Exam tip: a plexiform neurofibroma shows nerve bundles in myxoid stroma.",
+   "say": "Schwannomatosis and neurofibromatosis cause peripheral nerve sheath tumours, so multiple schwannomas should prompt consideration of schwannomatosis, NF2 or Carney complex. Benign schwannomas are encapsulated and composed only of Schwann cells, showing Antoni A areas with Verocay bodies. Malignant peripheral nerve sheath tumour is the key malignant mimic. Exam tip: a plexiform neurofibroma shows nerve bundles in myxoid stroma.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_f52cb04ccf20",
+  "q_0154a3be0d41",
+  "q_0863220489e3"
+ ],
+ "src": [],
+ "refs": [
+  "NIH Consensus Development Conference on Neurofibromatosis (1988) criteria",
+  "Tuberous sclerosis complex international consensus diagnostic criteria (Northrup and Krueger, 2012 update)",
+  "Robbins and Cotran Pathologic Basis of Disease (Kumar, Abbas, Aster)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

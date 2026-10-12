@@ -1,0 +1,187 @@
+{
+ "v": 1,
+ "module": "phm-eicosanoids",
+ "subject": "pharmacology",
+ "title": "Prostaglandins, leukotrienes and platelet activating factor",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Arachidonic acid is a 20 carbon **polyunsaturated fatty acid** released from membrane phospholipids by **phospholipase A2**. It is the common precursor of eicosanoids. The **cyclooxygenase** pathway produces prostaglandins and thromboxane A2, while the **lipoxygenase** pathway produces leukotrienes. Corticosteroids block the release step by inducing lipocortin, which is why they suppress all eicosanoids, whereas NSAIDs block only the cyclooxygenase branch.",
+   "say": "Arachidonic acid is a twenty carbon polyunsaturated fatty acid released from membrane phospholipids by phospholipase A2. It is the common precursor of eicosanoids. The cyclooxygenase pathway produces prostaglandins and thromboxane A2, while the lipoxygenase pathway produces leukotrienes. Corticosteroids block the release step by inducing lipocortin, which is why they suppress all eicosanoids, whereas NSAIDs block only the cyclooxygenase branch.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pl",
+      "label": "Membrane phospholipid"
+     },
+     {
+      "id": "aa",
+      "label": "Arachidonic acid"
+     },
+     {
+      "id": "cox",
+      "label": "Cyclooxygenase",
+      "sub": "prostaglandins, TXA2"
+     },
+     {
+      "id": "lox",
+      "label": "Lipoxygenase",
+      "sub": "leukotrienes"
+     }
+    ],
+    "edges": [
+     [
+      "pl",
+      "aa",
+      "PLA2"
+     ],
+     [
+      "aa",
+      "cox"
+     ],
+     [
+      "aa",
+      "lox"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**COX-1** is a housekeeping enzyme that makes gastroprotective prostaglandins and platelet TXA2. **COX-2** is inducible at inflammatory sites. **Indomethacin** inhibits both isoforms. NSAID ulceration and renal toxicity follow COX-1 inhibition. Aspirin acts irreversibly on platelet COX, which is why it lowers thromboxane A2 and reduces platelet aggregation after coronary bypass.",
+   "say": "COX-1 is a housekeeping enzyme that makes gastroprotective prostaglandins and platelet thromboxane A2. COX-2 is inducible at inflammatory sites. Indomethacin inhibits both isoforms. NSAID ulceration and renal toxicity follow COX-1 inhibition. Aspirin acts irreversibly on platelet COX, which is why it lowers thromboxane A2 and reduces platelet aggregation after coronary bypass.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "COX-1",
+     "COX-2"
+    ],
+    "rows": [
+     [
+      "Expression",
+      "Constitutive",
+      "Inducible"
+     ],
+     [
+      "Main role",
+      "Gastric mucosa, platelets",
+      "Inflammation, pain"
+     ],
+     [
+      "Drug effect",
+      "Ulcer and renal toxicity",
+      "Anti-inflammatory benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prostaglandin E1** analogues include **misoprostol**, given as a 200 microgram oral dose for ulcer protection and paired with mifepristone for early termination of pregnancy, and **alprostadil**, used for erectile dysfunction and to keep the **ductus arteriosus** open. **Dinoprostone** is PGE2, whereas **dinoprost** is PGF2 alpha. **Carboprost**, a PGF2 alpha analogue, is used to control postpartum haemorrhage.",
+   "say": "Prostaglandin E1 analogues include misoprostol, given as a two hundred microgram oral dose for ulcer protection and paired with mifepristone for early termination of pregnancy, and alprostadil, used for erectile dysfunction and to keep the ductus arteriosus open. Dinoprostone is PGE2, whereas dinoprost is PGF2 alpha. Carboprost, a PGF2 alpha analogue, is used to control postpartum haemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Parent PG",
+     "Key use"
+    ],
+    "rows": [
+     [
+      "Misoprostol",
+      "PGE1",
+      "Ulcer protection, abortion"
+     ],
+     [
+      "Alprostadil",
+      "PGE1",
+      "Erectile dysfunction, ductus patency"
+     ],
+     [
+      "Dinoprostone",
+      "PGE2",
+      "Cervical ripening, midterm abortion"
+     ],
+     [
+      "Carboprost",
+      "PGF2 alpha",
+      "Postpartum haemorrhage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ductus arteriosus** closure after birth is driven by oxygenated blood reducing prostaglandin production. In transposition of great vessels, **alprostadil** (PGE1) or **epoprostenol** (PGI2) is given intravenously to keep the duct patent before surgery. For a patent duct that should close, **indomethacin** or ibuprofen is used. Alprostadil is not used to close a duct. **Epoprostenol** is also used in pulmonary hypertension.",
+   "say": "Ductus arteriosus closure after birth is driven by oxygenated blood reducing prostaglandin production. In transposition of great vessels, alprostadil, a PGE1 analogue, or epoprostenol, a PGI2 analogue, is given intravenously to keep the duct patent before surgery. For a patent duct that should close, indomethacin or ibuprofen is used. Alprostadil is not used to close a duct. Epoprostenol is also used in pulmonary hypertension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Keep duct open",
+     "points": [
+      "Alprostadil PGE1 IV",
+      "Epoprostenol PGI2 IV",
+      "Used in transposition of great vessels"
+     ]
+    },
+    "right": {
+     "title": "Close duct",
+     "points": [
+      "Indomethacin",
+      "Ibuprofen",
+      "Lowers prostaglandin synthesis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cysteinyl leukotrienes LTC4, LTD4 and LTE4 cause bronchoconstriction and oedema. **Montelukast** and **zafirlukast** are **cysteinyl leukotriene receptor antagonists** used as add-on prophylaxis, and they help aspirin-induced asthma. **Zileuton** is a **5-lipoxygenase inhibitor** that blocks LTB4 and cysteinyl leukotrienes, but it causes hepatotoxicity. None of these drugs stops an acute attack. **Platelet activating factor** is a phospholipid mediator that antagonists target in asthma, but it is not a prostaglandin.",
+   "say": "Cysteinyl leukotrienes LTC4, LTD4 and LTE4 cause bronchoconstriction and oedema. Montelukast and zafirlukast are cysteinyl leukotriene receptor antagonists used as add-on prophylaxis, and they help aspirin-induced asthma. Zileuton is a 5-lipoxygenase inhibitor that blocks LTB4 and cysteinyl leukotrienes, but it causes hepatotoxicity. None of these drugs stops an acute attack. Platelet activating factor is a phospholipid mediator that antagonists target in asthma, but it is not a prostaglandin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Montelukast, zafirlukast",
+     "points": [
+      "Block cys-LT1 receptor",
+      "Prophylaxis only",
+      "Good in aspirin-induced asthma"
+     ]
+    },
+    "right": {
+     "title": "Zileuton",
+     "points": [
+      "Blocks 5-lipoxygenase",
+      "Reduces LTB4 and cysteinyl LTs",
+      "Hepatotoxicity, short action"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute asthma is treated with **short acting beta-2 agonists** such as salbutamol, which act within about five minutes, plus ipratropium and systemic steroids in severe attacks. Leukotriene antagonists are not used to abort attacks. Inhaled corticosteroids are the drug of choice for chronic asthma. Remember that **misoprostol** is the PGE1 analogue, while **carboprost** is PGF2 alpha.",
+   "say": "Acute asthma is treated with short acting beta-2 agonists such as salbutamol, which act within about five minutes, plus ipratropium and systemic steroids in severe attacks. Leukotriene antagonists are not used to abort attacks. Inhaled corticosteroids are the drug of choice for chronic asthma. Remember that misoprostol is the PGE1 analogue, while carboprost is PGF2 alpha.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "5ad2d574-ca1e-42f4-b3d6-61d45515ae12",
+  "441e102a-9aae-4236-bd46-91d047657b5b",
+  "4b295fbd-3809-4f98-8a6b-257c740124e9"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 110
+ }
+}
