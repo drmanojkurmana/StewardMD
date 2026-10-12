@@ -7,7 +7,7 @@
  *    PLAB 1, AMC CAT MCQ, MCCQE Part I official, USMLE Step 2 CK provisional; MRCP Part 1, MRCP Part 2 Written,
  *    MRCS Part A provisional);
  *  - every profile carries a calibration block (status, items studied, sources, date; aggregate stats only, no item
- *    text) and the seven coming formats report bankStatus coming: the Tests tab shows their format with no test buttons;
+ *    text) and the one coming format reports bankStatus coming: the Tests tab shows its format with no test buttons;
  *  - client and server read one source: prep.js MOCKS equals the pre-flag literal, functions/_prep-arena.js SCHEMES and
  *    functions/_prep-core.js EXAM_PROFILES equal what they were, and prep-profiles.js is the up-to-date compile;
  *  - assemble(): eligible items only, no duplicate id or stem, official quotas never filled from other subjects (shrink,
@@ -121,9 +121,9 @@ test("official numbers as checked in the stored bulletins (2026-10-10)", () => {
   assert.equal(ma.tab, "mrcs"); assert.equal(ma.blueprint.kind, "none");
 });
 
-test("bank status: eight banked exams available, five new formats coming", () => {
-  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "plab-1", "mrcs-part-a"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
-  for (const id of ["usmle-step2-ck", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) {
+test("bank status: twelve banked exams available, one new format coming", () => {
+  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "plab-1", "mrcs-part-a", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
+  for (const id of ["usmle-step2-ck"]) {
     assert.equal(A.bankStatus(A.profile(id)), "coming", id);
     assert.match(A.profile(id).bank.note, /no .* in the bank yet/);
   }
@@ -413,4 +413,24 @@ test("profiles carry the schema's required fields and enums (prep/assess/schemas
     for (const k of S.properties.navigation.required) assert.equal(typeof p.navigation[k], "boolean", id + " " + k);
     for (const t of p.format.item_types) assert.ok(S.properties.format.properties.item_types.items.enum.includes(t));
   }
+});
+
+test("assemble: profile item_ex keeps MRCP Part 1 and Part 2 pools apart", () => {
+  const P1 = A.profile("mrcp-part1"), P2 = A.profile("mrcp-part2-written");
+  assert.equal(P1.item_ex, "mrcp-part1"); assert.equal(P2.item_ex, "mrcp-part2-written");
+  const bank = [];
+  for (const s of ["mrcp-cardiology", "mrcp-neurology"]) {
+    const items = [];
+    for (let i = 0; i < 60; i++) items.push({ id: s + ".1." + i, q: "Part one best-of-five question about " + s + " case number " + i + " with enough words", o: ["a1", "b1", "c1", "d1", "e1"], a: 0, ex: ["mrcp-part1"] });
+    for (let i = 0; i < 60; i++) items.push({ id: s + ".2." + i, q: "Part two clinical vignette question about " + s + " case number " + i + " with enough words", o: ["a2", "b2", "c2", "d2", "e2"], a: 0, ex: ["mrcp-part2-written"] });
+    bank.push({ s, m: s + "-m0", items });
+  }
+  const r1 = A.assemble(P1, "mini", { seed: "m1" }, bank);
+  assert.equal(r1.ok, true); assert.equal(r1.items.length, 100);
+  assert.ok(r1.items.every((it) => it.ex && it.ex.indexOf("mrcp-part1") >= 0), "Part 1 mini has Part 1 items only");
+  const r2 = A.assemble(P2, "mini", { seed: "m1" }, bank);
+  assert.equal(r2.ok, true); assert.equal(r2.items.length, 100);
+  assert.ok(r2.items.every((it) => it.ex && it.ex.indexOf("mrcp-part2-written") >= 0), "Part 2 mini has Part 2 items only");
+  const ids1 = r1.items.map((i) => i.id), ids2 = r2.items.map((i) => i.id);
+  assert.equal(ids1.filter((id) => ids2.includes(id)).length, 0, "no shared item");
 });

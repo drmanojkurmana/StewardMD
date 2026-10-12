@@ -33,12 +33,12 @@
     { id: "usmle-step1", tab: "usmle", profile: "usmle-step1", label: "USMLE Step 1", sub: "Basic-science vignettes in blocks" },
     { id: "usmle-step2-ck", tab: "usmle", profile: "usmle-step2-ck", label: "USMLE Step 2 CK", sub: "Clinical vignettes in blocks" },
     { id: "fmge", tab: "fmge", profile: "fmge", label: "FMGE", sub: "Screening test for foreign medical graduates" },
-    { id: "plab-1", tab: "plab", profile: "plab-1", label: "PLAB 1", sub: "UK licensing, one single paper" },
-    { id: "amc-mcq", tab: "amc", profile: "amc-mcq", label: "AMC MCQ", sub: "Australian licensing exam" },
-    { id: "mccqe-1", tab: "mccqe", profile: "mccqe-1", label: "MCCQE Part 1", sub: "Canadian licensing exam" },
-    { id: "mrcp-part1", tab: "mrcp", profile: "mrcp-part1", label: "MRCP Part 1", sub: "UK physician membership, written" },
-    { id: "mrcp-part2-written", tab: "mrcp", profile: "mrcp-part2-written", label: "MRCP Part 2 Written", sub: "UK physician membership, written" },
-    { id: "mrcs-part-a", tab: "mrcs", profile: "mrcs-part-a", label: "MRCS Part A", sub: "UK surgical membership, written" }
+    { id: "plab-1", tab: "plab", profile: "plab-1", label: "PLAB 1", sub: "GMC MLA AKT, 180 questions" },
+    { id: "amc-mcq", tab: "amc", profile: "amc-mcq", label: "AMC CAT MCQ", sub: "Australian Medical Council MCQ, 150 questions" },
+    { id: "mccqe-1", tab: "mccqe", profile: "mccqe-1", label: "MCCQE Part I", sub: "Medical Council of Canada, 230 questions" },
+    { id: "mrcp-part1", tab: "mrcp", profile: "mrcp-part1", label: "MRCP Part 1", sub: "MRCP(UK) Part 1, 2 papers of 100 best-of-five" },
+    { id: "mrcp-part2-written", tab: "mrcp", profile: "mrcp-part2-written", label: "MRCP Part 2 Written", sub: "MRCP(UK) Part 2 Written, 2 papers of 100 best-of-five" },
+    { id: "mrcs-part-a", tab: "mrcs", profile: "mrcs-part-a", label: "MRCS Part A", sub: "Intercollegiate MRCS Part A, 300 questions" }
   ];
   /* NEET-SS papers are set per specialty group (NBEMS NEET-SS bulletin: one 150-question paper per group; the 2025
      groups below, each with its feeder broad specialty). subjects = the bank's ss-* subjects in that group: the
