@@ -7604,8 +7604,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
              "<br><br>The deterministic StewardMD engine, calculators and reference tools remain available." +
              (r && r.status ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: empty reply (HTTP ' + maikEscH(r.status) + ")</span>" : "");
     }
+    // The server's catch-all 500 names its cause in r.reason (errReason: provider_rate_limit,
+    // provider_auth, provider_unavailable, internal...). Showing only "server_error" hid it (owner
+    // screenshot, 2026-10-12). Only a short fixed-vocabulary code is shown, never free text.
+    var why = String((r && r.reason) || "");
+    if (!/^[a-z0-9_]{1,40}$/.test(why)) why = "";
     return "MaiK is unavailable right now. The deterministic StewardMD engine, calculators and reference tools remain available." +
-           (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");
+           (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + (why ? " (" + why + ")" : "") + "</span>" : "");
   }
 
       // requestAnimationFrame typewriter (explainGroundedStream fallback replay) that held _maikBusy
