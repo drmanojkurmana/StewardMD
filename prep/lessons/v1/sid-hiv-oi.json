@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "sid-hiv-oi",
+ "subject": "ss-infectious-diseases",
+ "title": "Opportunistic infections in HIV: key syndromes and prophylaxis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Opportunistic infections in HIV emerge as **CD4 counts** fall and **cell-mediated immunity** fails. The threshold that matters most for **Toxoplasma encephalitis** is a count below 100 per microlitre, when latent parasites reactivate in the brain. Empiric treatment combines **pyrimethamine** with **sulfadiazine** and **folinic acid**, while **preventive therapy** against Pneumocystis and toxoplasma continues until immune reconstitution on **antiretroviral therapy**.",
+   "say": "Opportunistic infections in HIV emerge as CD4 counts fall and cell-mediated immunity fails. The threshold that matters most for toxoplasma encephalitis is a count below 100 per microlitre, when latent parasites reactivate in the brain. Empiric treatment combines pyrimethamine with sulfadiazine and folinic acid, while preventive therapy against Pneumocystis and toxoplasma continues until immune reconstitution on antiretroviral therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "Likely infection",
+     "Practical step"
+    ],
+    "rows": [
+     [
+      "CD4 below 100 with ring-enhancing brain lesion",
+      "Toxoplasma encephalitis",
+      "Empiric pyrimethamine with sulfadiazine and folinic acid"
+     ],
+     [
+      "Fever, sepsis or travel to South-East Asia",
+      "Talaromycosis",
+      "Liposomal amphotericin B induction"
+     ],
+     [
+      "Advanced HIV without prophylaxis",
+      "Pneumocystis, toxoplasma",
+      "Start preventive therapy; continue until immune reconstitution"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Toxoplasma encephalitis causes multiple **ring-enhancing lesions** in the basal ganglia and corticomedullary junction, usually with CD4 below 100. A single lesion raises suspicion of primary CNS lymphoma. Empirical treatment is pyrimethamine with sulfadiazine and folinic acid. Improvement is expected by day 7. Failure by day 7 prompts brain biopsy. Secondary prophylaxis continues until CD4 recovers.",
+   "say": "Toxoplasma encephalitis causes multiple ring-enhancing lesions in the basal ganglia and corticomedullary junction, usually when CD4 is below 100. A single lesion raises suspicion of primary CNS lymphoma. Empirical treatment is pyrimethamine with sulfadiazine and folinic acid. Failure to improve by day 7 prompts brain biopsy. Secondary prophylaxis continues until CD4 recovers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ring-enhancing lesions, CD4 under 100"
+     },
+     {
+      "id": "b",
+      "label": "Empirical pyrimethamine and sulfadiazine"
+     },
+     {
+      "id": "c",
+      "label": "Improving by day 7"
+     },
+     {
+      "id": "d",
+      "label": "Continue, then secondary prophylaxis"
+     },
+     {
+      "id": "e",
+      "label": "Worse by day 7: brain biopsy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cryptococcal meningitis is treated in phases. Induction uses **liposomal amphotericin B** with flucytosine for about 2 weeks. Consolidation follows with oral fluconazole for 8 weeks. Then maintenance fluconazole continues until CD4 recovers. Raised opening pressure above 25 cm H2O predicts worse outcome and needs serial lumbar drainage. Systemic corticosteroids are reserved for severe cryptococcal IRIS, not routine use.",
+   "say": "Cryptococcal meningitis is treated in phases. Induction uses liposomal amphotericin B with flucytosine for about 2 weeks. Consolidation follows with oral fluconazole for 8 weeks, then maintenance continues until CD4 recovers. Raised opening pressure above 25 centimetres of water predicts worse outcome and needs serial lumbar drainage. Corticosteroids are reserved for severe cryptococcal immune reconstitution inflammatory syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Induction and consolidation",
+     "points": [
+      "Liposomal amphotericin B plus flucytosine, about 2 weeks",
+      "Oral fluconazole for 8 weeks",
+      "Maintenance fluconazole until CD4 recovers"
+     ]
+    },
+    "right": {
+     "title": "Key adjuncts",
+     "points": [
+      "Serial lumbar drainage if opening pressure above 25 cm H2O",
+      "Steroids only for severe cryptococcal IRIS"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "CMV retinitis causes retinal haemorrhages and necrosis with CD4 usually below 50. Diagnosis is clinical, by ophthalmoscopy. Induction uses **valganciclovir** orally or intravenous ganciclovir. Maintenance continues until CD4 exceeds 100 for at least 3 to 6 months on ART. CMV esophagitis is confirmed by biopsy showing intranuclear inclusions. Disseminated **Mycobacterium avium complex** is prevented with azithromycin when CD4 is below 50, if not on ART.",
+   "say": "CMV retinitis causes retinal haemorrhages and necrosis, usually with CD4 below 50. Diagnosis is clinical, by ophthalmoscopy. Induction uses valganciclovir, and maintenance continues until CD4 exceeds 100 for at least three to six months on antiretroviral therapy. CMV esophagitis is confirmed by biopsy showing intranuclear inclusions. Disseminated Mycobacterium avium complex is prevented with azithromycin when CD4 is below 50.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key test or sign",
+     "Management"
+    ],
+    "rows": [
+     [
+      "CMV retinitis",
+      "Ophthalmoscopy",
+      "Valganciclovir, maintenance"
+     ],
+     [
+      "CMV esophagitis",
+      "Biopsy inclusions",
+      "Ganciclovir or valganciclovir"
+     ],
+     [
+      "Disseminated MAC",
+      "CD4 below 50",
+      "Azithromycin prophylaxis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progressive multifocal leukoencephalopathy is caused by reactivated **JC virus** destroying oligodendrocytes. MRI shows non-enhancing white-matter lesions. Diagnosis rests on CSF JC virus DNA PCR, with brain biopsy if CSF is negative but suspicion persists. No proven anti-JC-virus drug exists. Restoring immunity with ART is the main goal. PML-IRIS may cause new enhancement, treated with corticosteroids for symptomatic deterioration.",
+   "say": "Progressive multifocal leukoencephalopathy is caused by reactivated JC virus destroying oligodendrocytes. MRI shows non-enhancing white-matter lesions. Diagnosis rests on CSF JC virus DNA PCR, with brain biopsy if CSF is negative but suspicion persists. No proven anti-JC-virus drug exists, so restoring immunity with antiretroviral therapy is the main goal. Immune reconstitution may cause PML-IRIS, treated with corticosteroids.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1adf8f998381",
+  "q_91d020fc4bdd",
+  "q_02e8f4e03d29"
+ ],
+ "src": [
+  "kb-reference-progressive-multifocal-leukoencephalopathy",
+  "kb-reference-talaromycosis",
+  "kb-reference-toxoplasmosis"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Jameson et al.)",
+  "Chapter Toxoplasmosis in Harrison's Principles of Internal Medicine (Jameson et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 1790,
+  "itemN": 55
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "sne-young-stroke-vasculopathies",
+ "subject": "ss-neurology",
+ "title": "Moyamoya disease: stroke in the young",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Moyamoya disease is a chronic, progressive **steno-occlusive arteriopathy** affecting the terminal internal carotid arteries and their proximal branches. The name describes the hazy, puff-of-smoke network of fragile **basal collaterals** seen on angiography. The cause is unknown in most patients, although the RNF213 variant is a major susceptibility gene, especially in East Asian populations. It has a bimodal age distribution, with one peak in childhood and a second in midlife.",
+   "say": "Moyamoya disease is a chronic, progressive steno-occlusive arteriopathy affecting the terminal internal carotid arteries and their proximal branches. The name describes the hazy, puff-of-smoke network of fragile basal collaterals seen on angiography. The cause is unknown in most patients, although the RNF213 variant is a major susceptibility gene, especially in East Asian populations. It has a bimodal age distribution, with one peak in childhood and a second in midlife.",
+   "vis": null
+  },
+  {
+   "tx": "Children usually present with **ischaemic** events such as transient ischaemic attacks and hemiparesis, often triggered by crying or hyperventilation. Adults more often present with **intracranial haemorrhage**, and haemorrhage in adults is a key exam point. Hyperventilation causes cerebral vasoconstriction through hypocapnia, which worsens hypoperfusion. An EEG may show the rebuild-up phenomenon, with slow waves appearing about 20 to 60 seconds after hyperventilation stops.",
+   "say": "Children usually present with ischaemic events such as transient ischaemic attacks and hemiparesis, often triggered by crying or hyperventilation. Adults more often present with intracranial haemorrhage, and haemorrhage in adults is a key exam point. Hyperventilation causes cerebral vasoconstriction through hypocapnia, which worsens hypoperfusion. An EEG may show the rebuild-up phenomenon, with slow waves appearing about 20 to 60 seconds after hyperventilation stops.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Children",
+     "Adults"
+    ],
+    "rows": [
+     [
+      "Usual presentation",
+      "Ischaemia, TIAs",
+      "Haemorrhage"
+     ],
+     [
+      "Trigger",
+      "Crying, hyperventilation",
+      "Not typical"
+     ],
+     [
+      "Key test",
+      "DSA, MRA",
+      "DSA, MRA"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis is made by imaging. **Digital subtraction angiography** is the gold standard, showing steno-occlusion and the collateral network. MRI and MR angiography are used for screening and follow-up. Moyamoya syndrome describes the same vascular pattern in a patient who has an underlying predisposing condition, such as neurofibromatosis type 1, sickle cell disease, or Down syndrome. Distinguishing these two is important on exams.",
+   "say": "Diagnosis is made by imaging. Digital subtraction angiography is the gold standard, showing steno-occlusion and the collateral network. MRI and MR angiography are used for screening and follow-up. Moyamoya syndrome describes the same vascular pattern in a patient who has an underlying predisposing condition, such as neurofibromatosis type 1, sickle cell disease, or Down syndrome. Distinguishing these two is important on exams.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Moyamoya disease",
+     "points": [
+      "Idiopathic",
+      "RNF213 susceptibility",
+      "Bilateral terminal ICA stenosis"
+     ]
+    },
+    "right": {
+     "title": "Moyamoya syndrome",
+     "points": [
+      "Linked to an underlying disease",
+      "Eg neurofibromatosis type 1",
+      "Same vascular pattern"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Management is mainly surgical. **Revascularisation**, either direct bypass such as superficial temporal to middle cerebral artery or indirect techniques, is the preferred treatment and lowers recurrent events. Children have small vessels, so indirect methods are often used. Perioperatively, **normocapnia** and euvolaemia must be maintained, and hypotension should be avoided. New focal deficits after surgery are first managed with fluids, as recommended.",
+   "say": "Management is mainly surgical. Revascularisation, either direct bypass such as superficial temporal to middle cerebral artery or indirect techniques, is the preferred treatment and lowers recurrent events. Children have small vessels, so indirect methods are often used. Perioperatively, normocapnia and euvolaemia must be maintained, and hypotension should be avoided. New focal deficits after surgery are first managed with fluids, as recommended.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Moyamoya confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Child: indirect bypass"
+     },
+     {
+      "id": "c",
+      "label": "Adult: direct or combined"
+     },
+     {
+      "id": "d",
+      "label": "Keep normocapnia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suzuki staging describes angiographic progression over six stages. Stage 4 shows the deep moyamoya vessels minimised and transdural collaterals appearing. Recurrent ischaemia is more likely in patients with **posterior cerebral artery** involvement. Medical treatment with antiplatelet drugs and blood pressure control is supportive only, and cannot halt progression. The same team should follow these patients with repeat imaging to watch for new territories.",
+   "say": "Suzuki staging describes angiographic progression over six stages. Stage 4 shows the deep moyamoya vessels minimised and transdural collaterals appearing. Recurrent ischaemia is more likely in patients with posterior cerebral artery involvement. Medical treatment with antiplatelet drugs and blood pressure control is supportive only, and cannot halt progression. The same team should follow these patients with repeat imaging to watch for new territories.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_3ca112db11d3",
+  "q_928fed463d16",
+  "q_c7e27b59d2ee"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

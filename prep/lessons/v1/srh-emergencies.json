@@ -1,0 +1,120 @@
+{
+ "v": 1,
+ "module": "srh-emergencies",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Rheumatologic emergencies: key syndromes for NEET-PG and INI-CET",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Scleroderma renal crisis** is an emergency in systemic sclerosis, marked by sudden severe hypertension and rapidly falling kidney function. Vasospasm reduces renal perfusion and activates the renin-angiotensin system. Recent high-dose corticosteroid use is a documented risk factor. Early recognition matters because untreated disease carries very high one-year mortality.",
+   "say": "Scleroderma renal crisis is an emergency in systemic sclerosis, marked by sudden severe hypertension and rapidly falling kidney function. Vasospasm reduces renal perfusion and activates the renin angiotensin system. Recent high dose corticosteroid use is a documented risk factor. Early recognition matters because untreated disease carries very high one year mortality.",
+   "vis": null
+  },
+  {
+   "tx": "The cornerstone of treatment is an **ACE inhibitor**, with captopril the classic short-acting agent used to titrate blood pressure safely. ACE inhibitors have transformed survival in this condition. If blood pressure stays above target on maximal dosing, a **dihydropyridine calcium channel blocker** is the appropriate add-on. Continue the ACE inhibitor even if dialysis is started, since some patients recover renal function.",
+   "say": "The cornerstone of treatment is an ACE inhibitor, with captopril the classic short acting agent used to titrate blood pressure safely. ACE inhibitors have transformed survival in this condition. If blood pressure stays above target on maximal dosing, a dihydropyridine calcium channel blocker is the appropriate add on. Continue the ACE inhibitor even if dialysis is started, since some patients recover renal function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Initial crisis",
+      "Short-acting ACE inhibitor, titrated"
+     ],
+     [
+      "BP above target at max dose",
+      "Add dihydropyridine calcium channel blocker"
+     ],
+     [
+      "Dialysis needed",
+      "Continue ACE inhibitor"
+     ],
+     [
+      "Prophylaxis in normal patients",
+      "Not effective, avoid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antiphospholipid syndrome** requires a clinical event plus persistent laboratory positivity. Lupus anticoagulant, anticardiolipin and anti-beta2-glycoprotein I antibodies are the key tests. Confirm persistence on two occasions at least **12 weeks apart** to exclude transient antibodies. Warfarin with an INR of 2.0 to 3.0 is the standard long-term anticoagulant after a first venous thrombosis in definite APS.",
+   "say": "Antiphospholipid syndrome requires a clinical event plus persistent laboratory positivity. Lupus anticoagulant, anticardiolipin and anti beta two glycoprotein I antibodies are the key tests. Confirm persistence on two occasions at least 12 weeks apart to exclude transient antibodies. Warfarin with an INR of 2.0 to 3.0 is the standard long term anticoagulant after a first venous thrombosis in definite APS.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Clinical event"
+     },
+     {
+      "id": "b",
+      "label": "Antibody positive"
+     },
+     {
+      "id": "c",
+      "label": "Repeat at 12 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Definite APS"
+     },
+     {
+      "id": "e",
+      "label": "Warfarin INR 2-3"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Catastrophic antiphospholipid syndrome** involves thrombosis in three or more organs within about a week, with small vessel occlusion. Surgery, infection and anticoagulation withdrawal are important triggers. Definite diagnosis needs histological confirmation plus laboratory evidence. Pregnancy-related management is different: no treatment is needed for positive antibodies alone, while a prior thrombosis or pregnancy loss calls for aspirin with or without heparin.",
+   "say": "Catastrophic antiphospholipid syndrome involves thrombosis in three or more organs within about a week, with small vessel occlusion. Surgery, infection and anticoagulation withdrawal are important triggers. Definite diagnosis needs histological confirmation plus laboratory evidence. Pregnancy related management is different: no treatment is needed for positive antibodies alone, while a prior thrombosis or pregnancy loss calls for aspirin with or without heparin.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_0fd15db67711",
+  "q_37c1bf7f675e",
+  "q_490f7375e48b"
+ ],
+ "src": [],
+ "refs": [
+  "Revised Sapporo (Sydney) classification criteria for antiphospholipid syndrome",
+  "EULAR recommendations for the management of systemic sclerosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 36
+ }
+}

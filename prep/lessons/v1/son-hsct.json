@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "module": "son-hsct",
+ "subject": "ss-medical-oncology",
+ "title": "Haematopoietic stem cell transplantation: core principles for NEET-PG and INI-CET",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Haematopoietic stem cell transplantation replaces a diseased or deficient marrow with healthy stem cells. It is either **autologous**, using the patient's own cells, or **allogeneic**, using a donor's cells. Autologous transplant carries no graft versus host disease risk but offers no immune graft versus tumour effect, so relapse from contaminated reinfused cells is a concern. Allogeneic transplant offers a graft versus tumour effect but carries higher transplant-related mortality.",
+   "say": "Haematopoietic stem cell transplantation replaces a diseased or deficient marrow with healthy stem cells. It is either autologous, using the patient's own cells, or allogeneic, using a donor's cells. Autologous transplant carries no graft versus host disease risk but offers no immune graft versus tumour effect, so relapse from contaminated reinfused cells is a concern. Allogeneic transplant offers a graft versus tumour effect but carries higher transplant-related mortality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autologous",
+     "points": [
+      "Patient's own cells",
+      "No GVHD risk",
+      "No graft versus tumour effect",
+      "Relapse from contaminated product"
+     ]
+    },
+    "right": {
+     "title": "Allogeneic",
+     "points": [
+      "Donor cells",
+      "Graft versus tumour effect",
+      "GVHD risk",
+      "Higher transplant-related mortality"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**HLA matching** governs donor selection. HLA genes lie on the short arm of chromosome 6. A matched sibling donor has a fifty percent chance of being identical for a given sibling. For unrelated donors, high-resolution typing of **HLA-A, HLA-B, HLA-C and HLA-DRB1** is preferred because mismatches at these loci worsen survival. **Haploidentical** donors, usually a parent or child, are now widely used, especially with post-transplant cyclophosphamide.",
+   "say": "HLA matching governs donor selection. HLA genes lie on the short arm of chromosome 6. A matched sibling donor has a fifty percent chance of being identical for a given sibling. For unrelated donors, high-resolution typing of HLA-A, HLA-B, HLA-C and HLA-DRB1 is preferred because mismatches at these loci worsen survival. Haploidentical donors, usually a parent or child, are now widely used, especially with post-transplant cyclophosphamide.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Donor type",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Matched sibling",
+      "Fifty percent chance of identical sibling"
+     ],
+     [
+      "Unrelated",
+      "High-resolution HLA-A, B, C, DRB1 typing"
+     ],
+     [
+      "Haploidentical",
+      "Half-matched; post-transplant cyclophosphamide used"
+     ],
+     [
+      "Identical twin",
+      "No GVHD, but no graft versus tumour effect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Conditioning** intensity is chosen by age, comorbidity and prior therapy. **Myeloablative conditioning** gives maximal tumour kill but higher transplant-related mortality. **Reduced-intensity conditioning** suits older patients or those with comorbidities, relying more on graft versus tumour effect. In severe aplastic anaemia an intact immune system must be suppressed, so conditioning is mandatory. In SCID, intrinsic immunodeficiency allows engraftment, so conditioning may be omitted.",
+   "say": "Conditioning intensity is chosen by age, comorbidity and prior therapy. Myeloablative conditioning gives maximal tumour kill but higher transplant-related mortality. Reduced-intensity conditioning suits older patients or those with comorbidities, relying more on graft versus tumour effect. In severe aplastic anaemia an intact immune system must be suppressed, so conditioning is mandatory. In SCID, intrinsic immunodeficiency allows engraftment, so conditioning may be omitted.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myeloablative",
+     "points": [
+      "Maximal tumour kill",
+      "Higher transplant-related mortality",
+      "Fit, younger patients"
+     ]
+    },
+    "right": {
+     "title": "Reduced intensity",
+     "points": [
+      "Lower transplant-related mortality",
+      "Older or comorbid patients",
+      "Relies on graft versus tumour effect"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Graft versus host disease** is managed with systemic **corticosteroids** added to calcineurin inhibitor therapy as first-line treatment for acute GVHD. Suspected gut GVHD must be confirmed by endoscopy with biopsy after excluding infection such as Clostridioides difficile. **Ruxolitinib**, a JAK inhibitor, is an important option for steroid-refractory disease. Mild GVHD after transplant is associated with a lower relapse risk because it reflects donor immunity against malignant cells.",
+   "say": "Graft versus host disease is managed with systemic corticosteroids added to calcineurin inhibitor therapy as first-line treatment for acute GVHD. Suspected gut GVHD must be confirmed by endoscopy with biopsy after excluding infection such as Clostridioides difficile. Ruxolitinib, a JAK inhibitor, is an important option for steroid-refractory disease. Mild GVHD after transplant is associated with a lower relapse risk because it reflects donor immunity against malignant cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected acute GVHD"
+     },
+     {
+      "id": "b",
+      "label": "Exclude infection"
+     },
+     {
+      "id": "c",
+      "label": "Steroids plus calcineurin inhibitor"
+     },
+     {
+      "id": "d",
+      "label": "Steroid refractory: ruxolitinib"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "No response"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sinusoidal obstruction syndrome** usually appears within the first month after conditioning, with tender hepatomegaly, jaundice and fluid retention. The injury centres on hepatic sinusoidal endothelium. **Defibrotide** is the principal disease-directed treatment for severe disease. For **CMV** in seropositive allogeneic recipients, **antiviral prophylaxis** reduces clinically significant infection, and the choice of agent is guided by marrow toxicity and local protocol.",
+   "say": "Sinusoidal obstruction syndrome usually appears within the first month after conditioning, with tender hepatomegaly, jaundice and fluid retention. The injury centres on hepatic sinusoidal endothelium. Defibrotide is the principal disease-directed treatment for severe disease. For CMV in seropositive allogeneic recipients, antiviral prophylaxis reduces clinically significant infection, and the choice of agent is guided by marrow toxicity and local protocol.",
+   "vis": null
+  },
+  {
+   "tx": "**Immune recovery** is slow after transplant. Innate immunity returns first, while adaptive T- and B-cell function may take one to two years to recover fully. For stem cell mobilisation, **G-CSF** is the standard agent, and **plerixafor**, a CXCR4 antagonist, is added for poor mobilisers. Autologous engraftment is reliable with at least 2.5 million CD34 positive cells per kilogram. Peripheral blood cells engraft about five days faster than marrow.",
+   "say": "Immune recovery is slow after transplant. Innate immunity returns first, while adaptive T- and B-cell function may take one to two years to recover fully. For stem cell mobilisation, G-CSF is the standard agent, and plerixafor, a CXCR4 antagonist, is added for poor mobilisers. Autologous engraftment is reliable with at least 2.5 million CD34 positive cells per kilogram. Peripheral blood cells engraft about five days faster than marrow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Innate immunity",
+      "Recovers first"
+     ],
+     [
+      "T and B cells",
+      "Take one to two years"
+     ],
+     [
+      "Mobilisation",
+      "G-CSF, plus plerixafor if poor"
+     ],
+     [
+      "CD34 target",
+      "At least 2.5 million per kilogram"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_fbe5867c3e57",
+  "q_197247b3771b",
+  "q_4736955a8898"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 39
+ }
+}

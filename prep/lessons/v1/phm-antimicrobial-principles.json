@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "module": "phm-antimicrobial-principles",
+ "subject": "pharmacology",
+ "title": "General principles of antimicrobial therapy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Combining drugs can be synergistic or antagonistic. Combining a **bactericidal** drug with a **bacteriostatic** drug is usually antagonistic, because cidal agents work best on rapidly dividing organisms and static agents slow that division. For example, ampicillin with chloramphenicol is a poor pairing. Useful synergy is seen with combinations such as trimethoprim with sulfamethoxazole, and rifampicin with doxycycline in brucellosis. Combination therapy is also used to prevent resistance emerging during treatment of tuberculosis.",
+   "say": "Combining drugs can be synergistic or antagonistic. Combining a bactericidal drug with a bacteriostatic drug is usually antagonistic, because cidal agents work best on rapidly dividing organisms and static agents slow that division. For example, ampicillin with chloramphenicol is a poor pairing. Useful synergy is seen with trimethoprim and sulfamethoxazole, and with rifampicin plus doxycycline in brucellosis. Combination therapy is also used to prevent resistance emerging during treatment of tuberculosis.",
+   "vis": null
+  },
+  {
+   "tx": "Resistance arises by three main routes: **enzyme inactivation** such as beta-lactamase, **altered target** or **reduced permeability** such as porin change, and **active efflux** pumps. Resistance can come from a single-step mutation, as with streptomycin and rifampicin, or from multi-step mutation, as with erythromycin, tetracycline and chloramphenicol. Inhibiting DNA gyrase is the action of fluoroquinolones, not a resistance mechanism. Extended-spectrum beta-lactamase producers, mainly Klebsiella and E. coli, hydrolyse oxyimino cephalosporins and aztreonam but not carbapenems.",
+   "say": "Resistance arises by three main routes. These are enzyme inactivation such as beta-lactamase, altered target or reduced permeability such as porin change, and active efflux pumps. Resistance can come from a single-step mutation, as with streptomycin and rifampicin, or from multi-step mutation, as with erythromycin, tetracycline and chloramphenicol. Inhibiting DNA gyrase is the action of fluoroquinolones, not a resistance mechanism. Extended-spectrum beta-lactamase producers, mainly Klebsiella and E. coli, hydrolyse oxyimino cephalosporins and aztreonam but not carbapenems.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Resistance"
+     },
+     {
+      "id": "b",
+      "label": "Enzyme"
+     },
+     {
+      "id": "c",
+      "label": "Target or porin"
+     },
+     {
+      "id": "d",
+      "label": "Efflux"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chemoprophylaxis** prevents infection in exposed contacts. Rifampicin is the drug of choice for meningococcal meningitis contacts. In AIDS patients with Mycobacterium avium complex, once-weekly azithromycin can give prophylaxis against bacteraemia, replacing daily clarithromycin. Prophylaxis for surgical site infection should be given so that tissue levels are high at incision, ideally within 30 to 60 minutes before incision. The **Jarisch-Herxheimer reaction** follows penicillin in syphilis, with fever, myalgia and lesion flare lasting 12 to 72 hours; it is managed with aspirin and sedation and does not need the drug stopped.",
+   "say": "Chemoprophylaxis prevents infection in exposed contacts. Rifampicin is the drug of choice for meningococcal meningitis contacts. In AIDS patients with Mycobacterium avium complex, once-weekly azithromycin can give prophylaxis against bacteraemia, replacing daily clarithromycin. Surgical prophylaxis should give high tissue levels at incision, ideally within 30 to 60 minutes before incision. The Jarisch-Herxheimer reaction follows penicillin in syphilis, with fever, myalgia and lesion flare lasting 12 to 72 hours. It is managed with aspirin and sedation and does not need the drug stopped.",
+   "vis": null
+  },
+  {
+   "tx": "**Antibiotic stewardship** aims to give the right drug, dose and duration, which slows the spread of **antimicrobial resistance**. Broad-spectrum therapy can wipe out normal flora, allowing an opportunist such as Clostridioides difficile or Candida to overgrow; this is **superinfection**. Good practice means choosing empirical therapy guided by local data, narrowing the spectrum once culture results return, and setting a defined course length. Early formal review of the regimen is a key checkpoint.",
+   "say": "Antibiotic stewardship aims to give the right drug, dose and duration, which slows the spread of antimicrobial resistance. Broad-spectrum therapy can wipe out normal flora, allowing an opportunist such as Clostridioides difficile or Candida to overgrow. This is superinfection. Good practice means choosing empirical therapy guided by local data, narrowing the spectrum once culture results return, and setting a defined course length. Early formal review of the regimen is a key checkpoint.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "b9404a12-6e6b-456a-ba8e-8e6bcd615f4d",
+  "497ef737-83de-4f4d-a7bc-9cad37abe363",
+  "5b091fbb-6b2f-4ec3-a457-5f1d45e139a0"
+ ],
+ "src": [],
+ "refs": [
+  "Essentials of Medical Pharmacology (K D Tripathi, Sixth edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 87
+ }
+}

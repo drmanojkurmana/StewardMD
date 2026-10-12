@@ -1,0 +1,97 @@
+{
+ "v": 1,
+ "module": "spu-pft",
+ "subject": "ss-pulmonology",
+ "title": "Pulmonary function tests: spirometry, lung volumes, DLCO and bronchoprovocation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Spirometry** measures how much air a person can forcibly exhale in a single effort. The central ratio is **FEV1/FVC**, the forced expiratory volume in the first second divided by forced vital capacity. If the ratio stays below the **lower limit of normal** after a bronchodilator, persistent airflow limitation is confirmed, which is the core criterion for **COPD**. Because expiratory flow levels off once small airways collapse, harder effort no longer raises flow past a certain point, which defines the effort-independent part of the curve.",
+   "say": "Spirometry measures how much air a person can forcibly exhale in a single effort. The central ratio is FEV1 over FVC, the forced expiratory volume in the first second divided by forced vital capacity. If that ratio stays below the lower limit of normal after a bronchodilator, persistent airflow limitation is confirmed, the core criterion for COPD. Because flow levels off once small airways collapse, harder effort no longer raises it past a certain point.",
+   "vis": null
+  },
+  {
+   "tx": "Lung volumes are best measured by **body plethysmography**, which captures total thoracic gas including trapped air. Inert-gas dilution methods miss poorly ventilated areas and so underestimate volumes in obstructive disease. **DLCO** tests gas transfer; an isolated low DLCO with normal volumes and spirometry should prompt evaluation for **pulmonary vascular disease**, such as pulmonary hypertension or thromboembolism.",
+   "say": "Lung volumes are best measured by body plethysmography, which captures total thoracic gas including trapped air. Inert-gas dilution methods miss poorly ventilated areas and so underestimate volumes in obstructive disease. DLCO tests gas transfer. An isolated low DLCO with normal volumes and spirometry should prompt evaluation for pulmonary vascular disease, such as pulmonary hypertension or thromboembolism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Plethysmography",
+     "points": [
+      "Measures total thoracic gas",
+      "Preferred in obstruction",
+      "Gives accurate residual volume"
+     ]
+    },
+    "right": {
+     "title": "Inert-gas dilution",
+     "points": [
+      "Misses trapped gas",
+      "Underestimates volumes in obstruction",
+      "Simpler equipment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bronchodilator reversibility** is assessed by repeating spirometry after a short-acting agent such as salbutamol. If the **FEV1/FVC ratio** stays reduced despite treatment, this indicates **fixed airflow limitation**. A clear improvement in FEV1 after bronchodilator favours asthma. **Methacholine challenge** tests **airway hyperresponsiveness**; a meaningful fall in FEV1 after graded inhalation is considered positive.",
+   "say": "Bronchodilator reversibility is assessed by repeating spirometry after a short-acting agent such as salbutamol. If the FEV1 over FVC ratio stays reduced despite treatment, this indicates fixed airflow limitation. A clear improvement in FEV1 after bronchodilator favours asthma. Methacholine challenge tests airway hyperresponsiveness. A meaningful fall in FEV1 after graded inhalation is considered positive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Interpretation"
+    ],
+    "rows": [
+     [
+      "Bronchodilator reversibility",
+      "Clear FEV1 improvement after salbutamol",
+      "Favours asthma"
+     ],
+     [
+      "Repeat spirometry",
+      "Persistently reduced FEV1/FVC ratio",
+      "Fixed airflow limitation"
+     ],
+     [
+      "Methacholine challenge",
+      "Meaningful fall in FEV1 after graded inhalation",
+      "Airway hyperresponsiveness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exercise and functional tests add prognostic value. The **six-minute walk test** needs a 30-metre flat straight course and a 10-minute rest before starting. Acute coronary syndrome within the past month is a contraindication. In idiopathic pulmonary fibrosis, a walk distance below 250 metres roughly doubles mortality risk. The **BODE index** combines BMI, obstruction, dyspnoea and exercise capacity, and predicts COPD mortality better than FEV1 alone.",
+   "say": "Exercise and functional tests add prognostic value. The six-minute walk test needs a 30-metre flat straight course and a 10-minute rest before starting. Acute coronary syndrome within the past month is a contraindication. In idiopathic pulmonary fibrosis, a walk distance below 250 metres roughly doubles mortality risk. The BODE index combines BMI, obstruction, dyspnoea and exercise capacity, and predicts COPD mortality better than FEV1 alone.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_615ca48e45b0",
+  "q_30d4c8092108",
+  "q_aaecb71dca78"
+ ],
+ "src": [],
+ "refs": [
+  "Global Initiative for Chronic Obstructive Lung Disease (GOLD) report",
+  "ATS/ERS Standardisation of Lung Function Testing",
+  "Global Lung Function Initiative (GLI) reference equations"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 44
+ }
+}

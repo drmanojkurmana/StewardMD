@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "snp-renal-physiology",
+ "subject": "ss-nephrology",
+ "title": "Renal physiology: filtration, feedback and tubular handling of sodium",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **glomerular filtration rate** (GFR) is the volume of plasma filtered per minute across the glomerular capillaries. Filtration is driven by Starling forces: capillary hydrostatic pressure favours filtration, while capillary oncotic pressure and Bowman space hydrostatic pressure oppose it. Filtration is restricted by size and by charge, the negatively charged glomerular basement membrane repelling anionic proteins such as albumin. In healthy adults the glomerular capillary hydrostatic pressure is about 55 mm Hg, which is the main driving force.",
+   "say": "The glomerular filtration rate is the volume of plasma filtered per minute across the glomerular capillaries. Filtration is driven by Starling forces. Capillary hydrostatic pressure favours filtration, while capillary oncotic pressure and Bowman space hydrostatic pressure oppose it. Filtration is restricted by size and by charge, because the negatively charged glomerular basement membrane repels anionic proteins such as albumin. In healthy adults the glomerular capillary hydrostatic pressure is about 55 mm Hg, which is the main driving force.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hydrostatic pressure",
+      "sub": "about 55 mm Hg, favours filtration"
+     },
+     {
+      "id": "b",
+      "label": "Oncotic pressure",
+      "sub": "opposes filtration"
+     },
+     {
+      "id": "c",
+      "label": "Bowman hydrostatic",
+      "sub": "opposes filtration"
+     },
+     {
+      "id": "d",
+      "label": "Net filtration"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d",
+      "minus"
+     ],
+     [
+      "c",
+      "d",
+      "minus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal blood flow is kept steady by **autoregulation**. The **myogenic response** is an intrinsic reaction of the afferent arteriole to stretch. The **tubuloglomerular feedback** (TGF) works through the macula densa, which senses sodium chloride delivered to the thick ascending limb. High delivery constricts the afferent arteriole and lowers GFR. Loop diuretics block NKCC2 and therefore blunt this feedback, a point often tested in exams.",
+   "say": "Renal blood flow is kept steady by autoregulation. The myogenic response is an intrinsic reaction of the afferent arteriole to stretch. Tubuloglomerular feedback works through the macula densa, which senses sodium chloride delivered to the thick ascending limb. High delivery constricts the afferent arteriole and lowers the glomerular filtration rate. Loop diuretics block the NKCC2 transporter and therefore blunt this feedback, a point often tested in exams.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High NaCl at macula densa"
+     },
+     {
+      "id": "b",
+      "label": "Afferent arteriole constricts"
+     },
+     {
+      "id": "c",
+      "label": "GFR falls"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **renin-angiotensin-aldosterone system** (RAAS) starts when juxtaglomerular cells release renin in response to low renal perfusion pressure, macula densa signalling and sympathetic beta-1 stimulation. Renin cleaves angiotensinogen to angiotensin I. **ACE** removes two C-terminal amino acids to form angiotensin II. Angiotensin II constricts the efferent arteriole, stimulates aldosterone, and acts centrally to raise sympathetic drive. Circulating renin has a half-life of about 10 to 15 minutes.",
+   "say": "The renin angiotensin aldosterone system starts when juxtaglomerular cells release renin in response to low renal perfusion pressure, macula densa signalling and sympathetic beta-1 stimulation. Renin cleaves angiotensinogen to angiotensin I. ACE removes two C-terminal amino acids to form angiotensin II. Angiotensin II constricts the efferent arteriole, stimulates aldosterone, and acts centrally to raise sympathetic drive. Circulating renin has a half-life of about 10 to 15 minutes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Enzyme or agent",
+     "Product effect"
+    ],
+    "rows": [
+     [
+      "Renin release",
+      "Juxtaglomerular cells",
+      "Starts cascade"
+     ],
+     [
+      "Angiotensinogen cleavage",
+      "Renin",
+      "Angiotensin I"
+     ],
+     [
+      "C-terminal trimming",
+      "ACE",
+      "Angiotensin II"
+     ],
+     [
+      "Adrenal action",
+      "Angiotensin II",
+      "Aldosterone release"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Aldosterone** acts on principal cells of the collecting duct. It raises the apical abundance of the epithelial sodium channel (**ENaC**) and the basolateral Na/K ATPase, so sodium is retained and potassium is lost. In primary hyperaldosteronism, aldosterone is autonomous, so renin is suppressed. Resistant hypertension, defined as poor control on three drugs including a diuretic, is a formal indication to screen for primary hyperaldosteronism.",
+   "say": "Aldosterone acts on principal cells of the collecting duct. It raises the apical abundance of the epithelial sodium channel, called ENaC, and the basolateral Na/K ATPase, so sodium is retained and potassium is lost. In primary hyperaldosteronism, aldosterone is autonomous, so renin is suppressed. Resistant hypertension, defined as poor control on three drugs including a diuretic, is a formal indication to screen for primary hyperaldosteronism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aldosterone effects",
+     "points": [
+      "Raises apical ENaC",
+      "Boosts basolateral Na/K ATPase",
+      "Sodium retained",
+      "Potassium lost"
+     ]
+    },
+    "right": {
+     "title": "Primary hyperaldosteronism",
+     "points": [
+      "Renin suppressed",
+      "Aldosterone high",
+      "Screen if resistant hypertension"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **countercurrent multiplier** builds the medullary osmotic gradient. The thick ascending limb pumps out sodium, potassium and chloride through NKCC2, leaving the interstitium hypertonic while the fluid stays dilute. The descending limb is permeable to water through aquaporins, allowing concentration. NCC in the distal convoluted tubule handles thiazide-sensitive sodium reabsorption. Proximal tubule reabsorbs about 65 percent of filtered sodium and water.",
+   "say": "The countercurrent multiplier builds the medullary osmotic gradient. The thick ascending limb pumps out sodium, potassium and chloride through NKCC2, leaving the interstitium hypertonic while the fluid stays dilute. The descending limb is permeable to water through aquaporins, allowing concentration. NCC in the distal convoluted tubule handles thiazide-sensitive sodium reabsorption. The proximal tubule reabsorbs about 65 percent of filtered sodium and water.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Segment",
+     "Key transporter",
+     "Handling"
+    ],
+    "rows": [
+     [
+      "Proximal tubule",
+      "Na/H exchanger",
+      "About 65 percent reabsorbed"
+     ],
+     [
+      "Descending limb",
+      "Aquaporins",
+      "Water leaves"
+     ],
+     [
+      "Thick ascending limb",
+      "NKCC2",
+      "Sodium, potassium, chloride out"
+     ],
+     [
+      "Distal convoluted tubule",
+      "NCC",
+      "Thiazide-sensitive sodium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal clearance quantifies handling. Clearance equals urine concentration times urine flow divided by plasma concentration. **Fractional excretion** compares the clearance of a solute with that of creatinine, and a clearance ratio above 1 against inulin signals net secretion. Creatinine is a practical GFR marker because it is produced steadily but is slightly secreted. Free water clearance estimates the excess water excreted beyond osmolar clearance, guiding dilution and concentration.",
+   "say": "Renal clearance quantifies handling. Clearance equals urine concentration times urine flow divided by plasma concentration. Fractional excretion compares the clearance of a solute with that of creatinine. A clearance ratio above 1 against inulin signals net tubular secretion. Creatinine is a practical marker of glomerular filtration rate because it is produced steadily but is slightly secreted. Free water clearance estimates the excess water excreted beyond osmolar clearance, guiding dilution and concentration.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_04e23acfc4f0",
+  "q_86aa15c8d363",
+  "q_5bd517458038"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 50
+ }
+}

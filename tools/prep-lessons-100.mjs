@@ -71,10 +71,17 @@ export function targetModules(root = ROOT, cache = null, bank = null) {
 export function moduleItems(mid, sids, o = {}) {
   const all = [], bankItems = [], ovItems = [];
   const bank = o.bank, cache = o.cache;
-  // Bank versions move over time (ss-radiology now ships v16): try the caller's version, then siblings.
+  // Bank versions move over time (ss-radiology now ships v16): try the caller's version, then siblings,
+  // then the fetched cache (mirrors the links build's file order).
   const bankVers = bank ? [...new Set([bank, bank.replace(/\/v\d+$/, "/v16"), bank.replace(/\/v\d+$/, "/v5")])] : [];
+  const cacheVers = o.cache ? ["v16", "v5", "v1"].map((v) => path.join(o.cache, v)) : [];
   for (const sid of sids) {
+    let hit = false;
     if (bank) for (const bv of bankVers) {
+      const j = readJ(path.join(bv, sid, "mcq", mid + ".json"));
+      if (j && j.items) { all.push(...j.items); bankItems.push(...j.items); hit = true; break; }
+    }
+    if (!hit) for (const bv of cacheVers) {
       const j = readJ(path.join(bv, sid, "mcq", mid + ".json"));
       if (j && j.items) { all.push(...j.items); bankItems.push(...j.items); break; }
     }

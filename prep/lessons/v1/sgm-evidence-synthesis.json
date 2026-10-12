@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "sgm-evidence-synthesis",
+ "subject": "ss-general-medicine",
+ "title": "Evidence synthesis and clinical guidelines: the essentials for NEET-PG",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Evidence synthesis combines results from several studies on one clinical question. A **systematic review** uses a predefined, reproducible search and appraisal method, while a **meta-analysis** pools the numerical results statistically. A single small observational study should never drive practice alone. Clinicians should first look for systematic reviews and guidelines, because pooling reduces the chance that one flawed study misleads decisions.",
+   "say": "Evidence synthesis combines results from several studies on one clinical question. A systematic review uses a predefined, reproducible search and appraisal method, while a meta-analysis pools the numerical results statistically. A single small observational study should never drive practice alone. Clinicians should first look for systematic reviews and guidelines, because pooling reduces the chance that one flawed study misleads decisions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Clinical question"
+     },
+     {
+      "id": "b",
+      "label": "Systematic search"
+     },
+     {
+      "id": "c",
+      "label": "Critical appraisal"
+     },
+     {
+      "id": "d",
+      "label": "Pooled estimate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a **forest plot**, each study is shown as a point estimate with a confidence interval, and a diamond shows the pooled effect. **Heterogeneity** is measured by I-squared, which estimates the percentage of variation across studies due to real differences rather than chance. Low I-squared suggests the studies are consistent, while high values call for caution and exploration of causes. A funnel plot assesses **publication bias**: asymmetry suggests small negative studies are missing.",
+   "say": "In a forest plot, each study is shown as a point estimate with a confidence interval, and a diamond shows the pooled effect. Heterogeneity is measured by I-squared, which estimates the percentage of variation across studies due to real differences rather than chance. Low I-squared suggests the studies are consistent, while high values call for caution and exploration of causes. A funnel plot assesses publication bias: asymmetry suggests small negative studies are missing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Question answered",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "Forest plot",
+      "Individual and pooled effect",
+      "Diamond crossing no-effect line"
+     ],
+     [
+      "I-squared",
+      "How much studies disagree",
+      "Higher percent means more heterogeneity"
+     ],
+     [
+      "Funnel plot",
+      "Are small negative studies missing",
+      "Asymmetry suggests publication bias"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**GRADE** rates the certainty of evidence as high, moderate, low or very low. Randomised trials start high, while observational studies start low, and factors such as risk of bias, inconsistency and imprecision can lower the rating. Strength of recommendation is separate from certainty. Levels of evidence are older hierarchy systems that place systematic reviews of RCTs at the top. Students should know both frameworks for exam questions.",
+   "say": "GRADE rates the certainty of evidence as high, moderate, low or very low. Randomised trials start high, while observational studies start low, and factors such as risk of bias, inconsistency and imprecision can lower the rating. Strength of recommendation is separate from certainty. Levels of evidence are older hierarchy systems that place systematic reviews of randomised trials at the top. Students should know both frameworks for exam questions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "GRADE",
+     "points": [
+      "Starts RCTs high",
+      "Starts observational low",
+      "Can be downgraded for bias",
+      "Rates certainty then strength"
+     ]
+    },
+    "right": {
+     "title": "Levels of evidence",
+     "points": [
+      "Hierarchy by study design",
+      "Systematic reviews of RCTs at top",
+      "Less nuanced than GRADE"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**PRISMA** is the reporting checklist for systematic reviews and meta-analyses, and it includes a flow diagram of study selection. The **Cochrane** collaboration produces high-quality systematic reviews and maintains a risk of bias tool. **Network meta-analysis** compares several treatments at once, even when some have never been tested head to head, using a common comparator. Exam questions often pair these terms with their correct purposes.",
+   "say": "PRISMA is the reporting checklist for systematic reviews and meta-analyses, and it includes a flow diagram of study selection. The Cochrane collaboration produces high-quality systematic reviews and maintains a risk of bias tool. Network meta-analysis compares several treatments at once, even when some have never been tested head to head, using a common comparator. Exam questions often pair these terms with their correct purposes.",
+   "vis": null
+  },
+  {
+   "tx": "Economic evaluation informs guideline decisions. A **QALY** combines life expectancy and health-related quality of life, where one year in perfect health equals one QALY. **Cost-effectiveness** compares the extra cost of an intervention with the extra health gained, often expressed as cost per QALY. **Real-world evidence** comes from routine practice data and complements, but does not replace, randomised trials. In India, ICMR and NMC guidance should be checked alongside NICE, which takes precedence where it covers the point.",
+   "say": "Economic evaluation informs guideline decisions. A QALY combines life expectancy and health-related quality of life, where one year in perfect health equals one QALY. Cost-effectiveness compares the extra cost of an intervention with the extra health gained, often expressed as cost per QALY. Real-world evidence comes from routine practice data and complements, but does not replace, randomised trials. In India, ICMR and NMC guidance should be checked alongside NICE, which takes precedence where it covers the point.",
+   "vis": null
+  },
+  {
+   "tx": "Bias threatens every evidence synthesis, so reviewers look for it actively. A **funnel plot** that looks lopsided suggests **publication bias**, where small negative trials go unpublished. **Outcome reporting bias** is a related trap, in which only favourable secondary endpoints appear in print. Between-study variability is quantified with **I-squared**, and **GRADE** rates how certain the evidence is, separately from how strongly a guideline recommends an action.",
+   "say": "Bias threatens every evidence synthesis, so reviewers look for it actively. A funnel plot that looks lopsided suggests publication bias, where small negative trials go unpublished. Outcome reporting bias is a related trap, in which only favourable secondary endpoints appear in print. Between-study variability is quantified with I-squared, and GRADE rates how certain the evidence is, separately from how strongly a guideline recommends an action.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_ac6ef2c9cffd",
+  "q_0646213270d9",
+  "q_2739eab2a6a8"
+ ],
+ "src": [],
+ "refs": [
+  "Cochrane Handbook for Systematic Reviews of Interventions",
+  "PRISMA 2020 statement",
+  "GRADE Working Group guidance"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

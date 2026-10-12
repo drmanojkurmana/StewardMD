@@ -1,0 +1,93 @@
+{
+ "v": 1,
+ "module": "snp-ckd-progression",
+ "subject": "ss-nephrology",
+ "title": "CKD Staging and Progression",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Chronic kidney disease is staged on two axes. The **GFR category** runs from G1 to G5, and the **albuminuria category** runs from A1 to A3. G3a means eGFR 45 to 59, G3b means 30 to 44, G4 means 15 to 29 and G5 means under 15 mL/min/1.73 m2. Albuminuria is graded as A1 below 30 mg/g, A2 from 30 to 300 mg/g and A3 above 300 mg/g. Both axes together predict prognosis and set monitoring frequency.",
+   "say": "Chronic kidney disease is staged on two axes. The GFR category runs from G1 to G5, and the albuminuria category runs from A1 to A3. G3a means eGFR 45 to 59, G3b means 30 to 44, G4 means 15 to 29 and G5 means under 15 millilitres per minute per 1.73 square metres. Albuminuria is graded as A1 below 30 milligrams per gram, A2 from 30 to 300 milligrams per gram and A3 above 300 milligrams per gram. Both axes together predict prognosis and set how often the patient is monitored.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Range",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "G3a",
+      "eGFR 45-59",
+      "Mildly to moderately reduced"
+     ],
+     [
+      "G3b",
+      "eGFR 30-44",
+      "Moderately to severely reduced"
+     ],
+     [
+      "G4",
+      "eGFR 15-29",
+      "Severely reduced"
+     ],
+     [
+      "A2",
+      "ACR 30-300 mg/g",
+      "Moderately increased albuminuria"
+     ],
+     [
+      "A3",
+      "ACR above 300 mg/g",
+      "Severely increased albuminuria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progression depends on the **kidney failure risk equation**, which uses age, sex, eGFR and urine albumin-creatinine ratio to estimate the two and five year probability of kidney failure. NICE advises referral to nephrology when the five year risk exceeds 5 percent. Estimated GFR itself should be read with caution, because creatinine is affected by muscle mass, so cystatin C may be needed in people with extremes of muscle mass.",
+   "say": "Progression depends on the kidney failure risk equation, which uses age, sex, eGFR and urine albumin-creatinine ratio to estimate the two and five year probability of kidney failure. NICE advises referral to nephrology when the five year risk exceeds 5 percent. Estimated GFR itself should be read with caution, because creatinine is affected by muscle mass, so cystatin C may be needed in people with extremes of muscle mass.",
+   "vis": null
+  },
+  {
+   "tx": "Add-on therapy is now central. **SGLT2 inhibitors** such as dapagliflozin and empagliflozin reduce progression in CKD with or without diabetes, particularly with albuminuria, and can be started down to an eGFR of about 20 to 25. **Finerenone**, a nonsteroidal mineralocorticoid antagonist, reduces kidney and cardiovascular events in type 2 diabetes with albuminuria on maximal RAS blockade, provided potassium is at most about 4.8 to 5.0 mmol/L before starting. Dual RAS blockade should be avoided.",
+   "say": "Add-on therapy is now central. SGLT2 inhibitors such as dapagliflozin and empagliflozin reduce progression in chronic kidney disease with or without diabetes, particularly with albuminuria, and can be started down to an eGFR of about 20 to 25. Finerenone, a nonsteroidal mineralocorticoid antagonist, reduces kidney and cardiovascular events in type 2 diabetes with albuminuria on maximal RAS blockade, provided potassium is at most about 4.8 to 5.0 millimoles per litre before starting. Dual RAS blockade should be avoided.",
+   "vis": null
+  },
+  {
+   "tx": "Metabolic issues drive further decline. **Metabolic acidosis** is corrected with sodium bicarbonate when bicarbonate falls low, which slows loss of kidney function. A low protein diet is considered in advanced CKD under supervision, to limit uraemic toxins. Hyperuricaemia is linked to progression, and urate lowering with allopurinol in the CKD-FIX trial did not slow decline, so it is not routinely used for kidney protection.",
+   "say": "Metabolic issues drive further decline. Metabolic acidosis is corrected with sodium bicarbonate when bicarbonate falls low, which slows loss of kidney function. A low protein diet is considered in advanced chronic kidney disease under supervision, to limit uraemic toxins. Hyperuricaemia is linked to progression, and urate lowering with allopurinol in the CKD-FIX trial did not slow decline, so it is not routinely used for kidney protection.",
+   "vis": null
+  },
+  {
+   "tx": "Sick day rules protect the kidney during acute illness. During vomiting, diarrhoea or dehydration, **RAS blockers**, metformin and diuretics should be temporarily paused. Nephrotoxins such as NSAIDs and iodinated contrast need caution. Acute kidney injury is staged by creatinine rise, with stage 2 meaning a rise to 2.0 to 2.9 times baseline. Early, appropriate fluid resuscitation with buffered crystalloids is preferred over hydroxyethyl starch.",
+   "say": "Sick day rules protect the kidney during acute illness. During vomiting, diarrhoea or dehydration, RAS blockers, metformin and diuretics should be temporarily paused. Nephrotoxins such as NSAIDs and iodinated contrast need caution. Acute kidney injury is staged by creatinine rise, with stage 2 meaning a rise to 2.0 to 2.9 times baseline. Early, appropriate fluid resuscitation with buffered crystalloids is preferred over hydroxyethyl starch.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_4f8f16586d4d",
+  "q_086e8a6867c4",
+  "q_27f3abbf8c51"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of CKD",
+  "NICE Chronic kidney disease: assessment and management (NG203)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 47
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "scc-ecmo",
+ "subject": "ss-critical-care",
+ "title": "Extracorporeal life support: modes, cannulation and weaning",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Extracorporeal life support** (ECLS) uses a pump and oxygenator outside the body to take over gas exchange or circulation. The two main modes are **venovenous (VV) ECMO**, which supports the lungs alone, and **venoarterial (VA) ECMO**, which supports both heart and lungs. VV ECMO suits severe ARDS when cardiac output is adequate, while VA ECMO suits cardiogenic shock. Choose the mode by the failing organ, not by habit.",
+   "say": "Extracorporeal life support uses a pump and oxygenator outside the body to take over gas exchange or circulation. The two main modes are venovenous ECMO, which supports the lungs alone, and venoarterial ECMO, which supports both heart and lungs. Venovenous ECMO suits severe ARDS when cardiac output is adequate, while venoarterial ECMO suits cardiogenic shock. Choose the mode by the failing organ, not by habit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "VV ECMO",
+     "VA ECMO"
+    ],
+    "rows": [
+     [
+      "Main target",
+      "Lungs",
+      "Heart and lungs"
+     ],
+     [
+      "Typical indication",
+      "Severe ARDS, stable cardiac index",
+      "Cardiogenic shock, post-cardiotomy"
+     ],
+     [
+      "Returns blood to",
+      "Venous system",
+      "Arterial system"
+     ],
+     [
+      "Risk to watch",
+      "Harlequin syndrome",
+      "Left ventricular distension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cannulation choice shapes flow and recirculation. **Bicaval dual-lumen cannulas** and **multistage right internal jugular catheters** reduce recirculation and allow mobilisation in VV ECMO. For femoral VA ECMO, a **distal perfusion catheter** lowers the risk of acute limb ischaemia. Peripheral arterial disease is a reason to avoid femoral arterial cannulation. After cardiotomy, central cannulation lets existing bypass cannulas join the circuit.",
+   "say": "Cannulation choice shapes flow and recirculation. Bicaval dual-lumen cannulas and multistage right internal jugular catheters reduce recirculation and allow mobilisation in venovenous ECMO. For femoral venoarterial ECMO, a distal perfusion catheter lowers the risk of acute limb ischaemia. Peripheral arterial disease is a reason to avoid femoral arterial cannulation. After cardiotomy, central cannulation lets existing bypass cannulas join the circuit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Venovenous options",
+     "points": [
+      "Bicaval dual-lumen cannula",
+      "Multistage right IJ catheter",
+      "Allows out-of-bed mobilisation"
+     ]
+    },
+    "right": {
+     "title": "Venoarterial options",
+     "points": [
+      "Distal perfusion catheter for femoral access",
+      "Avoid femoral arterial cannula if peripheral arterial disease",
+      "Central cannulation after cardiotomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Timing and candidacy matter. In acute myocardial infarction with cardiogenic shock, each 12-hour delay in **VA ECMO** start is associated with about a 6 percent rise in adjusted in-hospital mortality. **E-CPR** is reasonable when flow can be established within 60 minutes of arrest in selected patients. Confirm cannula position daily, and again whenever ECMO flow drops significantly, because displacement is a common silent problem.",
+   "say": "Timing and candidacy matter. In acute myocardial infarction with cardiogenic shock, each twelve hour delay in venoarterial ECMO start is associated with about a six percent rise in adjusted in hospital mortality. Extracorporeal cardiopulmonary resuscitation is reasonable when flow can be established within sixty minutes of arrest in selected patients. Confirm cannula position daily, and again whenever ECMO flow drops significantly, because displacement is a common silent problem.",
+   "vis": null
+  },
+  {
+   "tx": "Weaning from **VA ECMO** is a structured trial. Reduce pump flow stepwise, holding each reduced flow for at least 60 minutes, and monitor with echocardiography. A reasonable ejection fraction threshold to start weaning is about 25 to 30 percent. If perfusion fails, with falling urine output or rising lactate, return to full support rather than pushing lower. Circuit flow below about 2.5 L/min raises thrombosis risk, so avoid prolonged low flows.",
+   "say": "Weaning from venoarterial ECMO is a structured trial. Reduce pump flow stepwise, holding each reduced flow for at least sixty minutes, and monitor with echocardiography. A reasonable ejection fraction threshold to start weaning is about twenty five to thirty percent. If perfusion fails, with rising lactate, return to full support rather than pushing lower. Circuit flow below about two and a half litres per minute raises thrombosis risk, so avoid prolonged low flows.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Reduce flow stepwise"
+     },
+     {
+      "id": "b",
+      "label": "Hold 60 min and echo"
+     },
+     {
+      "id": "c",
+      "label": "Perfusion stable?"
+     },
+     {
+      "id": "d",
+      "label": "Continue lower flow"
+     },
+     {
+      "id": "e",
+      "label": "Return to full support"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ],
+     [
+      "c",
+      "e",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After decannulation, perform a **venous Doppler ultrasound** of the limbs to exclude thrombosis in cannulated vessels. If cannulas are left in situ, flush them with heparin and maintain systemic anticoagulation to prevent line clot. Anticoagulate the circuit throughout, monitoring with activated clotting time or anti-Xa levels, and watch for pump flow drops. A sudden 40 percent fall in flow with stable pump speed suggests impaired venous return, so consider tamponade first.",
+   "say": "After decannulation, perform a venous Doppler ultrasound of the limbs to exclude thrombosis in cannulated vessels. If cannulas are left in place, flush them with heparin and maintain systemic anticoagulation to prevent clot. Anticoagulate the circuit throughout, monitoring with activated clotting time or anti-Xa levels. A sudden forty percent fall in flow with stable pump speed suggests impaired venous return, so consider tamponade first.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_5a080730aab0",
+  "q_19049c333b74",
+  "q_772f5b2651a1"
+ ],
+ "src": [],
+ "refs": [
+  "Extracorporeal Life Support Organization (ELSO) General Guidelines"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

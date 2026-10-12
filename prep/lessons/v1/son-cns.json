@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "son-cns",
+ "subject": "ss-medical-oncology",
+ "title": "Central nervous system tumours: key diagnostic and treatment points",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Diffuse gliomas are classified using **IDH status** first. IDH mutant tumours carry a better outlook than IDH wildtype tumours. The IDH mutation produces the oncometabolite 2-hydroxyglutarate, which can be detected on magnetic resonance spectroscopy. Under WHO CNS5, IDH wildtype diffuse astrocytic tumours with glioblastoma features are graded as glioblastoma even when histology looks lower grade.",
+   "say": "Diffuse gliomas are classified using IDH status first. IDH mutant tumours have a better outlook than IDH wildtype tumours. The IDH mutation produces the oncometabolite 2-hydroxyglutarate, which can be detected on magnetic resonance spectroscopy. Under WHO CNS5, IDH wildtype diffuse astrocytic tumours with glioblastoma features are graded as glioblastoma even when histology looks lower grade.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diffuse glioma"
+     },
+     {
+      "id": "b",
+      "label": "IDH mutant"
+     },
+     {
+      "id": "c",
+      "label": "IDH wildtype"
+     },
+     {
+      "id": "d",
+      "label": "1p19q codeleted"
+     },
+     {
+      "id": "e",
+      "label": "Oligodendroglioma"
+     },
+     {
+      "id": "f",
+      "label": "Astrocytoma"
+     },
+     {
+      "id": "g",
+      "label": "Glioblastoma"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "b",
+      "f"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "c",
+      "g"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oligodendroglioma is defined by an **IDH mutation** together with **1p/19q codeletion**. These tumours are often frontal and seizure-presenting, and they respond well to chemotherapy and radiotherapy. Vorasidenib, an IDH inhibitor, has shown benefit in the INDIGO trial for grade 2 IDH mutant gliomas, delaying progression. Subtotal debulking still helps seizure control and survival when complete resection is not possible.",
+   "say": "Oligodendroglioma is defined by an IDH mutation together with 1p/19q codeletion. These tumours are often frontal and present with seizures, and they respond well to chemotherapy and radiotherapy. Vorasidenib, an IDH inhibitor, has shown benefit in the INDIGO trial for grade 2 IDH mutant gliomas, delaying progression. Subtotal debulking still helps seizure control and survival when complete resection is not possible.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Oligodendroglioma",
+     "IDH mutant astrocytoma"
+    ],
+    "rows": [
+     [
+      "Molecular key",
+      "IDH mutant with 1p19q codeletion",
+      "IDH mutant, 1p19q intact"
+     ],
+     [
+      "Typical site",
+      "Frontal lobe",
+      "Frontal or temporal"
+     ],
+     [
+      "Prognosis",
+      "Better",
+      "Intermediate"
+     ],
+     [
+      "Imaging clue",
+      "Calcification",
+      "Diffuse infiltration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "PCV is a three-drug chemotherapy combination used as an adjuvant option for anaplastic oligodendroglioma and 1p19q codeleted gliomas. Treatment usually runs for around six cycles, since **myelosuppression** accumulates over time, mainly causing low white cells and platelets. Clinicians should also recall that **radiation necrosis** is a late effect of cranial irradiation, so new enhancement after treatment may reflect injury rather than progression.",
+   "say": "PCV is a three-drug chemotherapy combination used as an adjuvant option for anaplastic oligodendroglioma and 1p19q codeleted gliomas. Treatment usually runs for around six cycles, since myelosuppression accumulates over time, mainly causing low white cells and platelets. Clinicians should also recall that radiation necrosis is a late effect of cranial irradiation, so new enhancement after treatment may reflect injury rather than progression.",
+   "vis": null
+  },
+  {
+   "tx": "**Medulloblastoma** is the most common malignant **posterior fossa tumour** in children and arises in the **cerebellum**. It often causes **raised intracranial pressure** and can seed through **cerebrospinal fluid**, so whole spine **MRI** is required at staging. Under **WHO CNS5**, it is classified by **molecular subgroup** (WNT, SHH, group 3 and group 4) rather than histology alone.",
+   "say": "Medulloblastoma is the most common malignant posterior fossa tumour in children and arises in the cerebellum. It often causes raised intracranial pressure and can seed through cerebrospinal fluid, so whole spine MRI is required at staging. Under WHO CNS5, it is classified by molecular subgroup, such as WNT, SHH, group 3 and group 4, rather than histology alone.",
+   "vis": null
+  },
+  {
+   "tx": "Primary CNS lymphoma, mostly diffuse large B-cell type, is seen in immunocompetent and immunosuppressed patients. Steroids can kill lymphoma cells, so biopsy should be done before dexamethasone where possible. Brain metastases preferentially lodge at the **gray-white junction**, while meningiomas are dural-based with a dural tail and do not invade brain tissue.",
+   "say": "Primary CNS lymphoma, mostly diffuse large B-cell type, is seen in immunocompetent and immunosuppressed patients. Steroids can kill lymphoma cells, so biopsy should be done before dexamethasone where possible. Brain metastases preferentially lodge at the gray-white junction, while meningiomas are dural-based with a dural tail and do not invade brain tissue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Meningioma",
+     "points": [
+      "Dural based",
+      "Dural tail",
+      "Does not invade brain",
+      "Small asymptomatic cases watched"
+     ]
+    },
+    "right": {
+     "title": "Brain metastasis",
+     "points": [
+      "Gray-white junction",
+      "Multiple lesions",
+      "Rim enhancement",
+      "Often from lung or breast"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_1de0fb9f099d",
+  "q_d445b83ce021",
+  "q_305388381e1d"
+ ],
+ "src": [],
+ "refs": [
+  "WHO Classification of Tumours of the Central Nervous System, 5th edition (WHO CNS5)",
+  "Stupp R et al. Radiotherapy plus concomitant and adjuvant temozolomide for glioblastoma, NEJM 2005"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 45
+ }
+}

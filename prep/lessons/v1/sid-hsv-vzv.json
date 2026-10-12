@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "module": "sid-hsv-vzv",
+ "subject": "ss-infectious-diseases",
+ "title": "Herpes simplex and varicella zoster infections: high-yield essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Herpes simplex virus (HSV) and varicella zoster virus (VZV) are both **alpha herpesviruses** that establish lifelong latency in sensory ganglia. HSV-1 usually causes orolabial disease, while HSV-2 is the main cause of genital herpes. VZV causes primary varicella (chickenpox) and, after reactivation, herpes zoster (shingles). Reactivation risk rises with age and immunosuppression. Know the sites of latency and the typical clinical patterns, because exams test these links directly.",
+   "say": "Herpes simplex virus and varicella zoster virus are both alpha herpesviruses that stay latent for life in sensory ganglia. HSV-1 usually causes lip and oral disease, while HSV-2 is the main cause of genital herpes. VZV causes chickenpox first and shingles later, when it reactivates. Reactivation becomes more likely with age and immunosuppression. Learn where each virus hides and what disease each one produces.",
+   "vis": null
+  },
+  {
+   "tx": "Primary acute herpetic gingivostomatitis is the classic presentation of primary HSV-1 infection in young children. It causes fever, cervical lymphadenopathy and painful vesicles on the oral mucosa that rapidly become shallow ulcers. Treat supportively with fluids, analgesia and antipyretics. Antiviral therapy is reserved for severe or high-risk cases. Aspirin must be avoided in children with viral illness because of the risk of **Reye syndrome**.",
+   "say": "Primary acute herpetic gingivostomatitis is the classic picture of first HSV-1 infection in young children. It causes fever, enlarged neck glands and painful blisters in the mouth that quickly turn into shallow ulcers. Management is mainly supportive, with fluids and analgesia. Antiviral drugs are kept for severe or high-risk cases. Aspirin must be avoided in children with viral illness because of the risk of Reye syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Primary HSV gingivostomatitis",
+     "Herpes zoster"
+    ],
+    "rows": [
+     [
+      "Typical age",
+      "Young children",
+      "Older adults"
+     ],
+     [
+      "Distribution",
+      "Oral mucosa, gums",
+      "Single dermatome"
+     ],
+     [
+      "Pain pattern",
+      "Intense, mouth ulcers",
+      "Burning, neuralgic"
+     ],
+     [
+      "Key management",
+      "Supportive, antivirals if severe",
+      "Early oral antiviral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In herpes zoster, the **Hutchinson sign** is a vesicle on the tip or side of the nose. It signals involvement of the nasociliary branch of the trigeminal ophthalmic division and a high risk of ocular disease. Any such patient needs urgent ophthalmology review, including dilated fundus examination, because sight-threatening complications such as keratitis, uveitis and retinitis can occur. Oral antiviral therapy should be started early for zoster in general.",
+   "say": "In herpes zoster, the Hutchinson sign is a blister on the tip or side of the nose. It shows that the nasociliary branch of the trigeminal ophthalmic division is involved and that the eye is at risk. These patients need urgent ophthalmology review, including a dilated fundus examination, because keratitis, uveitis and retinitis can threaten sight. Early oral antiviral treatment should also be given for zoster.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vesicle on nose tip"
+     },
+     {
+      "id": "b",
+      "label": "Nasociliary branch involved"
+     },
+     {
+      "id": "c",
+      "label": "Eye at risk"
+     },
+     {
+      "id": "d",
+      "label": "Urgent ophthalmology review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Herpes simplex encephalitis is the most common sporadic fatal encephalitis, with a predilection for the **temporal lobes**. Suspect it in patients with fever, altered mental status and focal or seizure features. Start empirical intravenous aciclovir without waiting for results, because early CSF HSV PCR can be falsely negative. Confirm with MRI showing temporal lobe changes and CSF PCR. A negative PCR should not stop treatment unless repeat testing is also negative.",
+   "say": "Herpes simplex encephalitis is the commonest sporadic fatal encephalitis and tends to affect the temporal lobes. Suspect it in patients with fever, altered mental state and focal or seizure features. Start intravenous aciclovir empirically without waiting, because early CSF PCR can be falsely negative. MRI often shows temporal lobe changes, and CSF PCR confirms the diagnosis. A single negative PCR should not stop treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Aciclovir for HSV encephalitis is given intravenously at **10 mg/kg every 8 hours**, with the treatment course usually 14 to 21 days. Monitor renal function and hydrate well, because crystal nephropathy and neurotoxicity are the main risks. Corticosteroids are not recommended for HSV or VZV encephalitis. Acyclovir-resistant HSV, seen mainly in immunocompromised patients, is treated with **foscarnet**.",
+   "say": "Aciclovir for HSV encephalitis is given intravenously at ten milligrams per kilogram every eight hours, usually for 14 to 21 days. Monitor kidney function and keep the patient well hydrated, because crystal nephropathy and neurotoxicity are the main risks. Corticosteroids are not recommended for HSV or VZV encephalitis. Aciclovir-resistant HSV, mainly seen in immunocompromised patients, is treated with foscarnet.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Issue",
+     "Practice point"
+    ],
+    "rows": [
+     [
+      "Standard dose",
+      "10 mg/kg IV every 8 hours"
+     ],
+     [
+      "Duration",
+      "14 to 21 days"
+     ],
+     [
+      "Key monitoring",
+      "Creatinine, hydration, mental state"
+     ],
+     [
+      "Resistant HSV",
+      "Foscarnet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Varicella pneumonia is the most serious complication of chickenpox in adults and must be treated with **intravenous aciclovir**. Herpes zoster vaccine should be given to adults aged 50 and above; the recombinant zoster vaccine is preferred over the live vaccine and is recommended even after prior zoster. Live varicella vaccine is contraindicated in immunocompromised patients. Discharge teaching on contact precautions and vaccination completes the lesson.",
+   "say": "Varicella pneumonia is the most serious complication of chickenpox in adults and needs intravenous aciclovir. The recombinant zoster vaccine is preferred and is advised for adults aged 50 and over, even after a previous episode of zoster. Live varicella vaccine is contraindicated in immunocompromised patients. Remember these points for exams.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_6a3cdf8d0d58",
+  "q_b469b001c823",
+  "q_bc6e0fd518a5"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline NG217 Shingles (diagnosis and management)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

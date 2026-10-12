@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "scc-mv-modes",
+ "subject": "ss-critical-care",
+ "title": "Modes of mechanical ventilation and waveforms",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Every ventilator breath is described by its **trigger** (how the breath starts), its **limit** (what is held constant during inspiration) and its **cycle** (how the breath ends). Volume control delivers a set tidal volume with a set flow, so peak pressure varies with compliance and resistance. Pressure control sets the inspiratory pressure and time, so delivered volume varies with mechanics. Knowing which variable is fixed is the first step in reading any waveform.",
+   "say": "Every ventilator breath is described by its trigger, which is how the breath starts, its limit, which is what is held constant during inspiration, and its cycle, which is how the breath ends. Volume control delivers a set tidal volume at a set flow, so peak pressure changes with compliance and resistance. Pressure control sets the inspiratory pressure and time, so the delivered volume changes with the mechanics of the lungs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mode",
+     "Fixed variable",
+     "Varies with mechanics"
+    ],
+    "rows": [
+     [
+      "Volume control",
+      "Tidal volume and flow",
+      "Peak and plateau pressure"
+     ],
+     [
+      "Pressure control",
+      "Inspiratory pressure and time",
+      "Tidal volume and flow"
+     ],
+     [
+      "Pressure support",
+      "Pressure above PEEP",
+      "Volume and rate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Assist-control (AC) gives a full set breath for every patient trigger, while **SIMV** delivers mandatory breaths at a set rate and allows spontaneous breaths between them. **Pressure support ventilation (PSV)** supports each spontaneous breath to a set pressure and cycles when flow falls to a set percentage of peak flow, often 25 percent. PSV reduces the work of breathing and is the usual mode for weaning. Its back-up rate should be active during weaning trials.",
+   "say": "Assist-control gives a full set breath for every patient trigger. SIMV delivers mandatory breaths at a set rate and allows spontaneous breaths between them. Pressure support ventilation supports each spontaneous breath to a set pressure and cycles when flow falls to a set percentage of peak flow, often 25 percent. It reduces the work of breathing and is the usual mode for weaning, and its back-up rate should be active.",
+   "vis": null
+  },
+  {
+   "tx": "**Patient ventilator dyssynchrony** occurs when the patient's timing or demand does not match the machine. **Double triggering** happens when two breaths are delivered for one effort, often when inspiratory time is too short. **Reverse triggering** means a passive ventilator breath provokes an effort from the patient. Scalloped inspiratory pressure curves suggest flow starvation, where the set flow cannot meet demand.",
+   "say": "Patient ventilator dyssynchrony occurs when the patient's timing or demand does not match the machine. Double triggering happens when two breaths are delivered for one effort, often when inspiratory time is too short. Reverse triggering means a passive ventilator breath provokes an effort from the patient. Scalloped inspiratory pressure curves suggest flow starvation, where the set flow cannot meet demand.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Effort starts"
+     },
+     {
+      "id": "b",
+      "label": "Flow too low"
+     },
+     {
+      "id": "c",
+      "label": "Scalloped curve"
+     },
+     {
+      "id": "d",
+      "label": "Raise flow or switch mode"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Auto-PEEP** (intrinsic PEEP) appears when expiratory flow does not return to zero before the next breath, usually from dynamic hyperinflation in COPD or asthma. It causes hypotension through reduced venous return and makes triggering difficult. Management is to lower the respiratory rate and tidal volume, lengthen expiratory time, and treat bronchospasm. External PEEP near 80 percent of the auto-PEEP value may help triggering.",
+   "say": "Auto-PEEP, also called intrinsic PEEP, appears when expiratory flow does not return to zero before the next breath, usually from dynamic hyperinflation in COPD or asthma. It causes hypotension through reduced venous return and makes triggering difficult. Management is to lower the respiratory rate and tidal volume, lengthen expiratory time, and treat bronchospasm. External PEEP near 80 percent of the auto-PEEP value may help triggering.",
+   "vis": null
+  },
+  {
+   "tx": "In volume control, **plateau pressure** reflects elastic recoil and tidal volume, while **peak pressure** adds airway resistance. A rise in peak pressure with unchanged plateau points to resistance, such as bronchospasm, secretions or a kinked tube. In ARDS, the ARDSNet protocol uses a tidal volume of 6 mL/kg predicted body weight and keeps plateau pressure at or below 30 cm H2O, accepting permissive hypercapnia.",
+   "say": "In volume control, plateau pressure reflects elastic recoil and tidal volume, while peak pressure adds airway resistance. A rise in peak pressure with an unchanged plateau points to resistance, such as bronchospasm, secretions or a kinked tube. In ARDS, the ARDSNet protocol uses a tidal volume of 6 mL per kg predicted body weight and keeps plateau pressure at or below 30 centimetres of water, accepting permissive hypercapnia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peak pressure",
+     "points": [
+      "Includes resistance",
+      "Rises with secretions",
+      "Rises with bronchospasm"
+     ]
+    },
+    "right": {
+     "title": "Plateau pressure",
+     "points": [
+      "Reflects elastic recoil",
+      "Target 30 cm H2O or less",
+      "Guides barotrauma risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**NAVA** (neurally adjusted ventilatory assist) uses the electrical activity of the diaphragm to time and scale each breath, improving synchrony. **Adaptive support ventilation (ASV)** automatically chooses the pressure, rate and volume needed for a target minute ventilation. **APRV** holds a high CPAP for most of the cycle with brief releases. In India, use these modes according to local ICU availability and the clinical question.",
+   "say": "NAVA uses the electrical activity of the diaphragm to time and scale each breath, improving synchrony. Adaptive support ventilation automatically chooses the pressure, rate and volume needed for a target minute ventilation. APRV holds a high CPAP for most of the cycle with brief releases. Choose these modes according to local ICU availability and the clinical question.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_3065e8ca11b5",
+  "q_20e18fc6fdd3",
+  "q_a290d7517ed3"
+ ],
+ "src": [],
+ "refs": [
+  "ARDS Network. Ventilation with lower tidal volumes as compared with traditional tidal volumes for acute lung injury and the acute respiratory distress syndrome. N Engl J Med 2000",
+  "Tobin MJ. Principles and Practice of Mechanical Ventilation (Tobin MJ, Editor)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

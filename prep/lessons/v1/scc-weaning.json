@@ -1,0 +1,174 @@
+{
+ "v": 1,
+ "module": "scc-weaning",
+ "subject": "ss-critical-care",
+ "title": "Weaning and liberation from mechanical ventilation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Weaning is the process of moving a patient from invasive mechanical support to **spontaneous breathing**. Liberation is the final outcome, meaning the patient is off the ventilator and, usually, extubated. Weaning often consumes a large share of total ventilation time, roughly 40 percent in commonly quoted estimates. Planning for extubation should begin on day one of intubation, not when the patient seems ready. Ventilator-induced diaphragm dysfunction and respiratory muscle weakness are common reasons weaning fails.",
+   "say": "Weaning is the process of moving a patient from invasive mechanical support to spontaneous breathing. Liberation is the final outcome, meaning the patient is off the ventilator and, usually, extubated. Weaning often consumes a large share of total ventilation time, roughly 40 percent in commonly quoted estimates. Planning for extubation should begin on day one of intubation, not when the patient seems ready. Ventilator-induced diaphragm dysfunction and respiratory muscle weakness are common reasons weaning fails.",
+   "vis": null
+  },
+  {
+   "tx": "A **spontaneous breathing trial** (SBT) tests whether the patient can breathe without support, usually for 30 to 120 minutes on minimal pressure support of about 5 to 8 cmH2O. Trials lasting 30 to 120 minutes predict safe extubation in roughly 80 percent of patients. A **rapid shallow breathing index** (RSBI) below 105 breaths per minute per litre is associated with success, while values above 105 predict failure. Passing an SBT does not guarantee success, as extubation failure still occurs in 10 to 20 percent.",
+   "say": "A spontaneous breathing trial tests whether the patient can breathe without support, usually for 30 to 120 minutes on minimal pressure support of about 5 to 8 centimetres of water. Trials lasting 30 to 120 minutes predict safe extubation in roughly 80 percent of patients. A rapid shallow breathing index below 105 breaths per minute per litre is associated with success, while values above 105 predict failure. Passing an SBT does not guarantee success, as extubation failure still occurs in 10 to 20 percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Favours success",
+     "Predicts failure"
+    ],
+    "rows": [
+     [
+      "RSBI (breaths/min/L)",
+      "Below 105",
+      "Above 105"
+     ],
+     [
+      "SBT duration",
+      "30 to 120 min",
+      "Shorter or incomplete"
+     ],
+     [
+      "Extubation failure",
+      "Around 10 to 20 percent despite passing SBT",
+      "Not applicable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two main methods are used for weaning: **T-piece** trials and **pressure support ventilation** (PSV). Pressure support reduces the resistive work of the endotracheal tube and circuit, and it is associated with higher extubation success than T-piece trials in many analyses. After failing an SBT, gradual reduction of pressure support or repeat T-piece trials is recommended rather than abrupt withdrawal. Cuff leak testing before extubation helps identify airway oedema risk, and a leak under 110 mL is linked to post-extubation stridor.",
+   "say": "Two main methods are used for weaning, T-piece trials and pressure support ventilation. Pressure support reduces the resistive work of the endotracheal tube and circuit, and it is associated with higher extubation success than T-piece trials in many analyses. After failing a trial, gradual reduction of pressure support or repeat T-piece trials is recommended rather than abrupt withdrawal. A cuff leak test before extubation helps identify airway swelling risk, and a leak under 110 millilitres is linked to post-extubation stridor.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "T-piece trial",
+     "points": [
+      "Patient breathes through humidified tube",
+      "No added support",
+      "Work of breathing higher"
+     ]
+    },
+    "right": {
+     "title": "Pressure support",
+     "points": [
+      "Support offsets tube resistance",
+      "Patient triggers and flow cycles",
+      "Associated with higher success"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extubation should be followed by prophylactic **non-invasive ventilation** (NIV) in high-risk patients, such as those with COPD and hypercapnia, to reduce reintubation. Where NIV is not tolerated or not suitable, **high-flow nasal oxygen** (HFNO) is an alternative. Before extubation, a patient lacking a cuff leak may receive short-course corticosteroids to reduce post-extubation stridor. Indian and US practice both follow these principles, though local protocols vary.",
+   "say": "Extubation should be followed by prophylactic non-invasive ventilation in high-risk patients, such as those with COPD and hypercapnia, to reduce reintubation. Where non-invasive ventilation is not tolerated or not suitable, high-flow nasal oxygen is an alternative. Before extubation, a patient lacking a cuff leak may receive short-course corticosteroids to reduce post-extubation stridor. Indian and US practice both follow these principles, though local protocols vary.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "SBT passed"
+     },
+     {
+      "id": "b",
+      "label": "Cuff leak check"
+     },
+     {
+      "id": "c",
+      "label": "Steroids if no leak"
+     },
+     {
+      "id": "d",
+      "label": "Extubate"
+     },
+     {
+      "id": "e",
+      "label": "Prophylactic NIV or HFNO"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "No leak"
+     ],
+     [
+      "b",
+      "d",
+      "Leak present"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "High risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weaning categories help guide management. **Simple weaning** means extubation succeeds at the first SBT. **Difficult weaning** requires up to three trials or up to seven days. **Prolonged weaning** needs more than three trials or more than seven days. Failure of weaning is often linked to diaphragm dysfunction, poor cardiac reserve, metabolic issues and high work of breathing. Structured protocols reduce time on the ventilator.",
+   "say": "Weaning categories help guide management. Simple weaning means extubation succeeds at the first trial. Difficult weaning requires up to three trials or up to seven days. Prolonged weaning needs more than three trials or more than seven days. Failure of weaning is often linked to diaphragm dysfunction, poor cardiac reserve, metabolic issues and high work of breathing. Structured protocols reduce time on the ventilator.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Trials or time",
+     "Typical course"
+    ],
+    "rows": [
+     [
+      "Simple",
+      "First SBT succeeds",
+      "Extubate promptly"
+     ],
+     [
+      "Difficult",
+      "Up to 3 trials or up to 7 days",
+      "Gradual support reduction"
+     ],
+     [
+      "Prolonged",
+      "More than 3 trials or over 7 days",
+      "Specialist weaning unit"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_2ac1d367800d",
+  "q_df86a9d47531",
+  "q_351f86de855b"
+ ],
+ "src": [],
+ "refs": [
+  "Boles JM et al. Weaning from mechanical ventilation. European Respiratory Journal, 2007.",
+  "Mehta AB et al. ATS/ERS Guideline Update: Liberation from mechanical ventilation. Am J Respir Crit Care Med, 2017."
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

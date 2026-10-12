@@ -1,0 +1,92 @@
+{
+ "v": 1,
+ "module": "scc-cardiac-icu",
+ "subject": "ss-critical-care",
+ "title": "Arrhythmias and Acute Cardiac Care in the ICU",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Start by sorting every tachycardia by stability. An **unstable** patient, with hypotension, altered consciousness or chest pain, needs immediate **synchronised cardioversion** for a broad-complex tachycardia, not drugs. A regular broad-complex tachycardia in a patient with prior myocardial infarction is presumed ventricular tachycardia until proven otherwise. Stable patients get a slower, drug-based approach.",
+   "say": "Start by sorting every tachycardia by stability. An unstable patient, with hypotension, altered consciousness or chest pain, needs immediate synchronised cardioversion for a broad-complex tachycardia, not drugs. A regular broad-complex tachycardia in a patient with prior myocardial infarction is presumed ventricular tachycardia until proven otherwise. Stable patients get a slower, drug-based approach.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tachycardia on ECG"
+     },
+     {
+      "id": "b",
+      "label": "Unstable?"
+     },
+     {
+      "id": "c",
+      "label": "Synchronised cardioversion"
+     },
+     {
+      "id": "d",
+      "label": "Stable: narrow or broad?"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For stable **narrow-complex** supraventricular tachycardia, adenosine is the first drug. The initial dose is 6 mg as a rapid bolus followed immediately by a 20 mL saline flush, with a second dose of 12 mg if needed. Adenosine is useful diagnostically as well as therapeutically, since it terminates AV nodal dependent circuits. Unstable patients still need cardioversion first.",
+   "say": "For stable narrow-complex supraventricular tachycardia, adenosine is the first drug. The initial dose is 6 mg as a rapid bolus followed immediately by a 20 mL saline flush, with a second dose of 12 mg if needed. Adenosine is useful diagnostically as well as therapeutically, since it terminates AV nodal dependent circuits. Unstable patients still need cardioversion first.",
+   "vis": null
+  },
+  {
+   "tx": "Torsades de pointes is a polymorphic tachycardia with QRS complexes twisting around the baseline, usually linked to a prolonged QT. Give **magnesium sulfate** 2 g IV over 10 minutes as first-line treatment, even if serum magnesium looks normal. Keep serum potassium between 4.5 and 5.0 mmol/L. Levels above 3.5 mmol/L risk respiratory depression. For refractory cases, overdrive pacing or isoproterenol may be used.",
+   "say": "Torsades de pointes is a polymorphic tachycardia with QRS complexes twisting around the baseline, usually linked to a prolonged QT. Give magnesium sulfate 2 g IV over 10 minutes as first-line treatment, even if serum magnesium looks normal. Keep serum potassium between 4.5 and 5.0 mmol/L. Levels above 3.5 mmol/L risk respiratory depression. For refractory cases, overdrive pacing or isoproterenol may be used.",
+   "vis": null
+  },
+  {
+   "tx": "Recurrent ventricular arrhythmias need a structured plan. An ICD gives **secondary prevention** after sustained VT with structural heart disease, and antitachycardia pacing terminates most VT episodes without shock. Three or more VT or VF episodes within 24 hours define **electrical storm**. Manage it by treating reversible triggers such as ischaemia, hypokalaemia and hypomagnesaemia first, then antiarrhythmics and sympathetic blockade.",
+   "say": "Recurrent ventricular arrhythmias need a structured plan. An ICD gives secondary prevention after sustained VT with structural heart disease, and antitachycardia pacing terminates most VT episodes without shock. Three or more VT or VF episodes within 24 hours define electrical storm. Manage it by treating reversible triggers such as ischaemia, hypokalaemia and hypomagnesaemia first, then antiarrhythmics and sympathetic blockade.",
+   "vis": null
+  },
+  {
+   "tx": "Atrial fibrillation of 48 hours or more needs anticoagulation or a transoesophageal echocardiogram before elective cardioversion, to exclude left atrial thrombus. Anticoagulation continues for at least 4 weeks after successful cardioversion. In acute decompensated heart failure, consider the **hypertensive emergency** and **aortic dissection** pathways separately, because the drugs and targets differ. Confirm the diagnosis before choosing antihypertensives.",
+   "say": "Atrial fibrillation of 48 hours or more needs anticoagulation or a transoesophageal echocardiogram before elective cardioversion, to exclude left atrial thrombus. Anticoagulation continues for at least 4 weeks after successful cardioversion. In acute decompensated heart failure, consider the hypertensive emergency and aortic dissection pathways separately, because the drugs and targets differ. Confirm the diagnosis before choosing antihypertensives.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_846b913672e6",
+  "q_ba67a54f9660",
+  "q_d7eca831dcf7"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 51
+ }
+}

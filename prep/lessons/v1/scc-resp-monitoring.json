@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "scc-resp-monitoring",
+ "subject": "ss-critical-care",
+ "title": "Respiratory mechanics and capnography",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Transpulmonary pressure** is the net distending force across the lung. It equals alveolar pressure minus **intrapleural pressure**. During spontaneous inspiration, intrapleural pressure becomes more negative, so the gradient across the lung widens and the lung expands. Stiff lungs with low **static compliance** need a larger transpulmonary pressure to deliver the same tidal volume.",
+   "say": "Transpulmonary pressure is the net distending force across the lung. It equals alveolar pressure minus intrapleural pressure. During spontaneous inspiration, intrapleural pressure becomes more negative, so the gradient across the lung widens and the lung expands. Stiff lungs with low static compliance need a larger transpulmonary pressure to deliver the same tidal volume.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Quantity",
+     "Meaning",
+     "Clinical note"
+    ],
+    "rows": [
+     [
+      "Transpulmonary pressure",
+      "Alveolar minus pleural pressure",
+      "Distending force on lung"
+     ],
+     [
+      "Intrapleural pressure",
+      "Pressure in pleural space",
+      "Estimated by oesophageal pressure"
+     ],
+     [
+      "Static compliance",
+      "Volume change per unit pressure",
+      "Falls in ARDS and fibrosis"
+     ],
+     [
+      "Driving pressure",
+      "Plateau minus PEEP",
+      "Predicts outcome in ARDS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **oesophageal balloon** is used to estimate intrapleural pressure, because the oesophagus lies beside the lungs and transmits pleural pressure. The measured oesophageal pressure is then used to calculate transpulmonary pressure. This helps guide PEEP titration and detect injurious stress in ARDS when chest wall stiffness is a concern.",
+   "say": "An oesophageal balloon is used to estimate intrapleural pressure, because the oesophagus lies beside the lungs and transmits pleural pressure. The measured oesophageal pressure is then used to calculate transpulmonary pressure. This helps guide PEEP titration and detect injurious stress in ARDS when chest wall stiffness is a concern.",
+   "vis": null
+  },
+  {
+   "tx": "**Auto-PEEP** occurs when expiration is incomplete, so air is trapped and alveolar pressure stays positive at end expiration. It is typical of obstructive disease such as severe COPD or asthma with high minute ventilation. Capnography shows a waveform that fails to return to baseline before the next breath. Auto-PEEP raises work of breathing, can cause barotrauma and haemodynamic collapse, and is reduced by slowing the rate and prolonging expiration.",
+   "say": "Auto-PEEP occurs when expiration is incomplete, so air is trapped and alveolar pressure stays positive at end expiration. It is typical of obstructive disease such as severe COPD or asthma with high minute ventilation. Capnography shows a waveform that fails to return to baseline before the next breath. Auto-PEEP raises work of breathing, can cause barotrauma and haemodynamic collapse, and is reduced by slowing the rate and prolonging expiration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High minute ventilation"
+     },
+     {
+      "id": "b",
+      "label": "Short expiratory time"
+     },
+     {
+      "id": "c",
+      "label": "Air trapping"
+     },
+     {
+      "id": "d",
+      "label": "Auto-PEEP"
+     },
+     {
+      "id": "e",
+      "label": "Barotrauma or collapse"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In cardiac arrest, a **persistently low ETCO2** below about 10 mm Hg after 20 minutes of CPR suggests poor resuscitation outcome, while a **sudden rise** towards 35 mm Hg suggests return of spontaneous circulation. Capnography also detects opioid-induced hypoventilation earlier than pulse oximetry, which can stay normal on supplemental oxygen. Microstream sampling is preferred in neonates and low tidal volume patients for accuracy.",
+   "say": "In cardiac arrest, a persistently low ETCO2 below about 10 mm Hg after 20 minutes of CPR suggests poor resuscitation outcome, while a sudden rise towards 35 mm Hg suggests return of spontaneous circulation. Capnography also detects opioid-induced hypoventilation earlier than pulse oximetry, which can stay normal on supplemental oxygen. Microstream sampling is preferred in neonates and low tidal volume patients for accuracy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_d027ab669c61",
+  "q_10373ea21820",
+  "q_d04b3b7515f0"
+ ],
+ "src": [],
+ "refs": [
+  "American Heart Association Guidelines for CPR and ECC"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 39
+ }
+}

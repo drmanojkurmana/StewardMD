@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "ort-tb-spine",
+ "subject": "orthopaedics",
+ "title": "Tuberculosis of the spine: Pott spine essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Spinal tuberculosis, or **Pott spine**, is the commonest site of skeletal tuberculosis, involving the spine in about half of cases. Infection usually arrives by haematogenous spread from a primary focus, most often the lungs. The **paradiscal** pattern is by far the commonest, seen in roughly 98 percent of cases, because the two adjacent vertebrae and the disc between them share an embryological origin and a common blood supply. Lower thoracic and dorsolumbar levels, around T12 to L1, are most affected.",
+   "say": "Spinal tuberculosis, also called Pott spine, is the commonest site of skeletal tuberculosis, involving the spine in about half of cases. Infection usually arrives by haematogenous spread from a primary focus, most often the lungs. The paradiscal pattern is by far the commonest, seen in roughly 98 percent of cases, because the two adjacent vertebrae and the disc between them share an embryological origin and a common blood supply. Lower thoracic and dorsolumbar levels, around T12 to L1, are most affected.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Paradiscal",
+      "Most common; disc and two vertebrae involved"
+     ],
+     [
+      "Central",
+      "Body affected, disc usually spared"
+     ],
+     [
+      "Anterior",
+      "Spreads under anterior longitudinal ligament"
+     ],
+     [
+      "Posterior",
+      "Pedicle, lamina or processes; rare"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **classic radiological sign** is destruction of two adjacent vertebrae with loss of the intervertebral disc space. Neoplastic and osteoporotic collapse usually spare the disc, so a preserved disc points away from tuberculosis. Early signs include local osteoporosis and disc narrowing. Back pain and stiffness are the earliest symptoms, and a **cold abscess** may form beside the spine.",
+   "say": "The classic radiological sign is destruction of two adjacent vertebrae with loss of the intervertebral disc space. Neoplastic and osteoporotic collapse usually spare the disc, so a preserved disc points away from tuberculosis. Early signs include local osteoporosis and disc narrowing. Back pain and stiffness are the earliest symptoms, and a cold abscess may form beside the spine.",
+   "vis": null
+  },
+  {
+   "tx": "Pain is the earliest and commonest symptom, initially on sudden movement. Later a **gibbus** or kyphosis develops from vertebral collapse, and constitutional features such as evening rise of temperature and night sweats appear. Paraplegia is the most feared complication. Tubercular paraplegia is usually spastic at first, and cord compression by an abscess or displaced bone is the main cause. Upper thoracic involvement is more prone to paraplegia because the canal is narrow there.",
+   "say": "Pain is the earliest and commonest symptom, initially on sudden movement. Later a gibbus or kyphosis develops from vertebral collapse, and constitutional features such as evening rise of temperature and night sweats appear. Paraplegia is the most feared complication. Tubercular paraplegia is usually spastic at first, and cord compression by an abscess or displaced bone is the main cause. Upper thoracic involvement is more prone to paraplegia because the canal is narrow there.",
+   "vis": null
+  },
+  {
+   "tx": "Imaging is central to spinal **tuberculosis**. **MRI** is the preferred study because it shows **disc destruction**, a **paravertebral abscess**, granulation tissue and cord involvement, and it can reveal **skip lesions** that plain films miss. When the diagnosis is unclear, a **CT guided biopsy** supplies tissue for histology and culture. **CBNAAT** on that tissue gives a rapid molecular result that can flag drug resistance, which matters greatly in India.",
+   "say": "Imaging is central to spinal tuberculosis. MRI is the preferred study, as it reveals disc destruction, a paravertebral abscess, granulation tissue and cord involvement, and can show skip lesions that plain films miss. When the diagnosis is unclear, a CT guided biopsy supplies tissue for histology and culture. CBNAAT on that tissue gives a quick molecular result that can flag drug resistance, which matters greatly in India.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Imaging",
+     "points": [
+      "MRI is best overall",
+      "X-ray shows early signs",
+      "CT for bone detail"
+     ]
+    },
+    "right": {
+     "title": "Tissue",
+     "points": [
+      "CT guided biopsy",
+      "Culture confirms organism",
+      "CBNAAT flags resistance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Treatment starts with **antitubercular therapy** for all patients, even those with paraplegia. Surgery is indicated if neurology does not improve after about three to four weeks, if it deteriorates, if paraplegia appears on treatment, or if bladder or bowel involvement occurs. Common surgical options include **anterior decompression**, the Hong Kong operation and costotransversectomy for thoracic lesions. Laminectomy has only a limited role, and vertebroplasty is contraindicated in tuberculosis.",
+   "say": "Treatment starts with antitubercular therapy for all patients, even those with paraplegia. Surgery is indicated if neurology does not improve after about three to four weeks, if it deteriorates, if paraplegia appears on treatment, or if bladder or bowel involvement occurs. Common surgical options include anterior decompression, the Hong Kong operation and costotransversectomy for thoracic lesions. Laminectomy has only a limited role, and vertebroplasty is contraindicated in tuberculosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected spinal TB"
+     },
+     {
+      "id": "b",
+      "label": "Start ATT"
+     },
+     {
+      "id": "c",
+      "label": "Review neurology at 3 to 4 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Improving: continue ATT"
+     },
+     {
+      "id": "e",
+      "label": "Not improving or worse: surgery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sequelae of healed spinal tuberculosis are usually **bony ankylosis**, unlike peripheral joints where fibrous ankylosis is typical. Kyphosis is most marked in the dorsal spine. The exam-relevant contrasts are that disc preservation argues against tuberculosis, while disc loss with vertebral destruction supports it. Remember that the pivotal first step is still ATT, with surgery reserved for failure or neurological decline.",
+   "say": "Sequelae of healed spinal tuberculosis are usually bony ankylosis, unlike peripheral joints where fibrous ankylosis is typical. Kyphosis is most marked in the dorsal spine. The exam-relevant contrasts are that disc preservation argues against tuberculosis, while disc loss with vertebral destruction supports it. Remember that the pivotal first step is still antitubercular therapy, with surgery reserved for failure or neurological decline.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "76390cee-7d53-4ab0-b2b5-41d13f184fac",
+  "90dbca2f-c7e0-4e31-8a44-fd0887d62eee",
+  "db8b0f5b-9b1a-4686-89ca-8ab24889d012"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 83
+ }
+}

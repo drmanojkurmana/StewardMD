@@ -1,0 +1,110 @@
+{
+ "v": 1,
+ "module": "scc-infections-icu",
+ "subject": "ss-critical-care",
+ "title": "Infections and antimicrobials in the ICU",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Ventilator-associated pneumonia (**VAP**) is pneumonia arising more than 48 hours after starting mechanical ventilation. Its pathogenesis follows a sequence: oropharyngeal colonisation by potential pathogens, aspiration of colonised secretions, and compromise of host defences. Antibiotic exposure is the dominant driver of replacement of commensal flora by resistant organisms. Endotracheal tube **biofilm** shelters bacteria from both antibiotics and immune cells, which explains recurrence with the same strain.",
+   "say": "Ventilator-associated pneumonia, or VAP, is pneumonia arising more than 48 hours after starting mechanical ventilation. Its pathogenesis follows a sequence: oropharyngeal colonisation by potential pathogens, aspiration of colonised secretions, and compromise of host defences. Antibiotic exposure is the dominant driver of replacement of commensal flora by resistant organisms. Endotracheal tube biofilm shelters bacteria from both antibiotics and immune cells, which explains recurrence with the same strain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Oropharyngeal colonisation"
+     },
+     {
+      "id": "n2",
+      "label": "Aspiration of secretions"
+     },
+     {
+      "id": "n3",
+      "label": "Host defences compromised"
+     },
+     {
+      "id": "n4",
+      "label": "VAP after 48 h ventilation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Carbapenem-resistant **Acinetobacter baumannii** is a major ICU pathogen, with crude mortality reaching up to 70 percent in bacteraemia. Resistance is mostly mediated by Ambler class D oxacillinases. The abaI quorum-sensing gene drives biofilm on devices. For carbapenem-resistant isolates, combination therapy with a polymyxin and a sulbactam-containing agent is favoured. Empirical choice is unreliable without local susceptibility data.",
+   "say": "Carbapenem-resistant Acinetobacter baumannii is a major ICU pathogen, with crude mortality reaching up to 70 percent in bacteraemia. Resistance is mostly mediated by Ambler class D oxacillinases. The abaI quorum-sensing gene drives biofilm on devices. For carbapenem-resistant isolates, combination therapy with a polymyxin and a sulbactam-containing agent is favoured. Empirical choice is unreliable without local susceptibility data.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanism",
+     "points": [
+      "Class D oxacillinases",
+      "Porin loss and efflux",
+      "Biofilm via abaI"
+     ]
+    },
+    "right": {
+     "title": "Treatment",
+     "points": [
+      "Polymyxin combination",
+      "Sulbactam-containing agent",
+      "Local antibiogram guides choice"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Carbapenem-resistant **Enterobacterales** most often resist carbapenems through carbapenemase enzymes, which hydrolyse carbapenems. Polymyxins are reserved for confirmed carbapenem-resistant organisms rather than used empirically. Colistin and polymyxin B cause dose-limiting **nephrotoxicity** and neurotoxicity, so renal function and drug levels need monitoring. Aminoglycosides must not be the sole anti-pseudomonal agent in pneumonia.",
+   "say": "Carbapenem-resistant Enterobacterales most often resist carbapenems through carbapenemase enzymes, which hydrolyse carbapenems. Polymyxins are reserved for confirmed carbapenem-resistant organisms rather than used empirically. Colistin and polymyxin B cause dose-limiting nephrotoxicity and neurotoxicity, so renal function and drug levels need monitoring. Aminoglycosides must not be the sole anti-pseudomonal agent in pneumonia.",
+   "vis": null
+  },
+  {
+   "tx": "Reassess **empirical antibiotics** at 48 to 72 hours. Clinical improvement and negative cultures allow **de-escalation** to a narrower agent. A falling **procalcitonin** can support early stopping, but it must never override treatment of a clinically suspected pneumonia. For pneumonia with a good response, a seven day course is standard. For MRSA ventilator associated pneumonia, older practice aimed for a **vancomycin trough** of 15 to 20 mg/L, whereas **AUC guided dosing** is increasingly preferred.",
+   "say": "Reassess empirical antibiotics at 48 to 72 hours. Clinical improvement and negative cultures allow de-escalation to a narrower agent. A falling procalcitonin can support early stopping, but it must never override treatment of a clinically suspected pneumonia. For pneumonia with a good response, a seven day course is standard. For MRSA ventilator associated pneumonia, older practice aimed for a vancomycin trough of 15 to 20 mg/L, whereas AUC guided dosing is increasingly preferred.",
+   "vis": null
+  },
+  {
+   "tx": "Invasive candidiasis and **Clostridioides difficile** complicate ICU care. Central line associated bloodstream infection (**CLABSI**) and catheter associated urinary tract infection (CAUTI) are device-related infections needing line removal and culture-guided therapy. Indian practice under ICMR and NMC frameworks emphasises local antibiogram use, while US IDSA guidance is similar on reassessment. Augmented renal clearance may need higher beta-lactam doses, and therapeutic drug monitoring guides aminoglycosides and vancomycin.",
+   "say": "Invasive candidiasis and Clostridioides difficile complicate ICU care. Central line associated bloodstream infection, or CLABSI, and catheter associated urinary tract infection, or CAUTI, are device-related infections needing line removal and culture-guided therapy. Indian practice under ICMR and NMC frameworks emphasises local antibiogram use, while US IDSA guidance is similar on reassessment. Augmented renal clearance may need higher beta-lactam doses, and therapeutic drug monitoring guides aminoglycosides and vancomycin.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_7d47c46ef2f7",
+  "q_cc3a79ee6a0c",
+  "q_fc58c02f9802"
+ ],
+ "src": [],
+ "refs": [
+  "Kalil AC et al. Management of Adults With Hospital-Acquired and Ventilator-Associated Pneumonia, IDSA/ATS Clinical Practice Guidelines (2016)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 54
+ }
+}

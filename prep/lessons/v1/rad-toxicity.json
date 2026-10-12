@@ -1,0 +1,100 @@
+{
+ "v": 1,
+ "module": "rad-toxicity",
+ "subject": "radiology",
+ "title": "Radiation toxicity and tissue tolerance",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Tissue response to radiation depends on **radiosensitivity**, which is highest in rapidly dividing cells. The most sensitive tissues include lymphoid tissue, bone marrow, the intestinal epithelium and gonads. Bone, cartilage, muscle, nerve and the CNS are comparatively radioresistant. Cartilage is the classic most radioresistant tissue in exam questions. Embryonic tissue is the most sensitive of all.",
+   "say": "Tissue response to radiation depends on radiosensitivity, which is highest in rapidly dividing cells. The most sensitive tissues include lymphoid tissue, bone marrow, the intestinal epithelium and gonads. Bone, cartilage, muscle, nerve and the central nervous system are comparatively radioresistant. Cartilage is the classic most radioresistant tissue in exam questions. Embryonic tissue is the most sensitive of all.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Highly sensitive",
+      "Lymphoid, bone marrow, gut epithelium, gonads"
+     ],
+     [
+      "Moderately sensitive",
+      "Skin, vascular endothelium, salivary glands"
+     ],
+     [
+      "Least sensitive",
+      "Cartilage, bone, muscle, nerve, CNS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tolerance doses are quoted as TD 5/5 style values for organs. The whole **liver** tolerates about 40 Gy, while two-thirds of the volume tolerates about 45 Gy. Rectum tolerates about 60 Gy, bladder about 65 Gy and vagina about 90 Gy. The **ovary** is the most radiosensitive pelvic organ, with tolerance around 2 to 3 Gy.",
+   "say": "Tolerance doses are quoted for organs. The whole liver tolerates about 40 Gy, while two-thirds of the volume tolerates about 45 Gy. The rectum tolerates about 60 Gy, the bladder about 65 Gy and the vagina about 90 Gy. The ovary is the most radiosensitive pelvic organ, with tolerance around 2 to 3 Gy.",
+   "vis": null
+  },
+  {
+   "tx": "Skin reaction starts with **erythema** within about two weeks of fractionated therapy, followed by dry or moist desquamation. Mucositis also begins around two weeks and heals about two months after therapy. Chronic skin changes such as atrophy and hyperpigmentation appear months later. Radiation pneumonitis, proctitis and myelitis are the main late organ-specific toxicities.",
+   "say": "Skin reaction starts with erythema within about two weeks of fractionated therapy, followed by dry or moist desquamation. Mucositis also begins around two weeks and heals about two months after therapy. Chronic skin changes such as atrophy and hyperpigmentation appear months later. Radiation pneumonitis, proctitis and myelitis are the main late organ-specific toxicities.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Erythema"
+     },
+     {
+      "id": "b",
+      "label": "Desquamation"
+     },
+     {
+      "id": "c",
+      "label": "Chronic atrophy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-term risks include **radiation-induced malignancy**, such as papillary thyroid carcinoma after childhood exposure, and radon-linked lung cancer. Radiation carries an increased risk for thyroid and salivary tumours. Protection uses amifostine, a radioprotector that reduces xerostomia after head and neck radiotherapy, and PET helps separate necrosis from recurrence.",
+   "say": "Long-term risks include radiation-induced malignancy, such as papillary thyroid carcinoma after childhood exposure, and radon-linked lung cancer. Radiation carries an increased risk for thyroid and salivary tumours. Protection uses amifostine, a radioprotector that reduces xerostomia after head and neck radiotherapy, and PET helps separate necrosis from recurrence.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "a000bee5-e76a-4d19-a876-e3fc7fe85db5",
+  "2ba217af-9a59-4565-aa54-9496da2cf669",
+  "765c59e4-4893-4eee-ab34-ed483f5909c8"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Longo, Fauci, Kasper et al. (Eds))",
+  "White and Pharoah's Oral Radiology: Principles and Interpretation"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 112
+ }
+}
