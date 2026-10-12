@@ -39,3 +39,9 @@ Log:
   Quality gate found 82 items with placeholder short stems (e.g. 'Q4', topic
   slugs; vignette not stored): DROPPED from staging, reported, not released.
   Wave mrcp-e still in gen. Spend $8.12/$18.
+- 2026-10-12 (agy, cont.): wave-e DONE (598 passed: 152 P1 + 446 P2, $2.29).
+  Staging now maik18 1446 / maik19 1490 / maikimg10 61 (34 wave-e shorts dropped).
+  Wave-f P1-only (128 req) in verify; gen 91 kept. Overlay dry-builds OK
+  (maik18 128 mods, maik19 126, maikimg10 27); image items mapped to real
+  curriculum topics (keyword match, fallback first module). Uploads wait for
+  wave-f (overlay files immutable). Spend $10.41/$18.
