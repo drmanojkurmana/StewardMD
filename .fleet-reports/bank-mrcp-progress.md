@@ -17,3 +17,12 @@ Design (2026-10-12):
 
 Log:
 - 2026-10-12: discovery done; sets claimed; branch bank-mrcp-1 pushed.
+- 2026-10-12 (restart, new worker): continued from origin/bank-mrcp-1 (c37795fdf).
+  Text gen done a-d: 2763 kept post-gates (a 658, b 694, c 646, d 765).
+  Pilot 0/24 verify-ok was stale code; live verify parses 40/40.
+  Wave A verify: 583/658 ok, upgrade batch msgbatch_01Lyfc4jpNsFrPvubNaMPkj8 submitted;
+  waves B/C/D verify+upgrade running. Spend ~$3.78/$18.
+  Fixed mrcp-img.mjs: gen used legacy tools/tool_choice which readMessage cannot
+  parse (all 180 bad-output); switched to output_config json_schema + engine gates
+  + mrcp-* sid mapping (4 out-of-syllabus histology images dropped, 176 remain).
+  NOTE: /tmp/mrcp-wt worktree vanished; adopted /private/tmp/bank-mrcp-wt.
