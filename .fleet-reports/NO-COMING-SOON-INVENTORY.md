@@ -43,11 +43,13 @@ stale comment (comments allowed, updated anyway with the UI patch).
   so MRCP "coming" is unreachable via tabs today (needs plan choice + tab as
   new scope). Step2CK "coming" shows at profile/Tests level (usmle tab resolves
   to step1 via forTab).
-- "MRCP now landed #1524: flip it" could NOT be verified: #1524 is not on
-  origin/main, `find prep -iname '*mrcp*'` returns only the two profiles, and
-  no MRCP bank exists under prep/bank/. MRCP profiles STAY "coming" until a
-  bank lands. (Parallel pilots exist: ledger `bank-mrcp-gen-*` ~$2.4 spent,
-  logs ~/prep-data/assessment/muse-bank-mrcp.log; nothing merged.)
+- UPDATE during rebase (origin/main 2f5cc705b): #1524 DID land after inventory:
+  `prep/bank/v5/mrcp-*` subject dirs exist (Part 1: 1,507; Part 2 Written:
+  1,551 best-of-five), both MRCP profiles now read
+  `bank.status "available"` with tab "mrcp", and the Tests/Arena open for
+  them data-driven with zero code change. Only usmle-step2-ck stays
+  "coming". #1520 (plan-scope) reworked the coming-exam UX and introduced
+  three "being added" surfaces (fixed neutrally in the UI patch).
 
 ## 3. Live bank counts [agent] (v5 176430 items / 33 subjects / 2271 modules + overlays)
 

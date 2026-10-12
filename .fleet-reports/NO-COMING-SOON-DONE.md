@@ -2,11 +2,15 @@
 
 ## Top finding
 
-No student-visible "coming soon" remains in PrepNucleus: 15 surfaces found,
-all reworded to neutral truth or hidden, with a guard test that fails on
-regression. Content for the 191 empty + 174 thin modules is NOT built yet
-(bank pipelines own generation; their quota was exhausted at ship time) and
-is reported below as exact remainder with cost to finish.
+No student-visible "coming soon" remains in PrepNucleus: 18 surfaces found
+(15 original + 3 "being added" from #1520 plan-scope), all reworded to
+neutral truth or hidden, with a guard test that fails on regression. While
+rebasing, #1524 landed the MRCP banks (Part 1: 1,507; Part 2 Written: 1,551;
+`prep/bank/v5/mrcp-*` verified present) and flipped both MRCP profiles to
+available data-driven, so Tests and Arena are open for MRCP with no code
+change. Content for the 191 empty + 174 thin modules is NOT built yet (bank
+pipelines own generation) and is reported below as exact remainder with cost
+to finish.
 
 ## What was built this turn (branch `fleet/no-coming-soon-ui-guard`)
 
@@ -24,9 +28,9 @@ Per exam/subject before → after (student-visible wording):
   coming.` → `No questions for this exam in the bank yet.` (+ neutral
   note); toast likewise; Arena home gate `Arena: coming soon` →
   `Arena is unavailable` + bank note; `soonFor` fallback neutral.
-  Structure kept: format shown, no test buttons, Arena closed. NO profile
-  flipped: #1524 (MRCP bank) is not on origin/main and no MRCP bank exists
-  under prep/bank/ (`find prep -iname '*mrcp*'` = 2 profiles only).
+  Structure kept: format shown, no test buttons, Arena closed. No profile
+  flipped by this patch itself: #1524 (rebased in) flipped both MRCP
+  profiles on banked evidence (`prep/bank/v5/mrcp-*` verified present).
 - Arena 503: `Coming soon: ...` → `Arena is temporarily unavailable,
   try again` (only on real server 503).
 - Qgen `not open yet` → `not available right now`; Social likewise.
@@ -55,8 +59,9 @@ Per exam/subject before → after (student-visible wording):
   quota was 429-exhausted at ship time. Next: run the priority order in
   inventory §4 when quota resets, then flip Step-2-CK/MRCP profiles to
   available (data-driven, no code change) and re-run the guard.
-- Profiles intentionally left "coming": usmle-step2-ck, mrcp-part1,
-  mrcp-part2-written.
+- Profiles: mrcp-part1/mrcp-part2-written flipped to available by #1524
+  (bank-backed, verified); only usmle-step2-ck intentionally left "coming"
+  until its clinical bank merges.
 
 ## Spend
 
