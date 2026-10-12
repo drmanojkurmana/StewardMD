@@ -115,9 +115,12 @@
     if (fresh) return { why: "new", subject: fresh.subject, module: fresh.module, title: fresh.title };
     return null;
   }
+  // Empty modules (no questions for this exam) are never listed: no row, no placeholder line.
   function filterModules(topics, prog, filter, exam) {
     return topics.filter(function (t) {
-      var n = countFor(t, exam), st = statusOf((prog[t.id] || {}).answered || 0, n);
+      var n = countFor(t, exam);
+      if (!n) return false;
+      var st = statusOf((prog[t.id] || {}).answered || 0, n);
       return filter === "all" || (filter === "paused" && st === "paused") || (filter === "done" && st === "done") || (filter === "new" && st === "new");
     });
   }
@@ -1529,12 +1532,14 @@
   function tile(sb, ix) {
     var s = load(), prog = progressByModule(s, today()), mods = ix ? ix.topics.filter(function (t) { return t.group !== "mixed"; }) : [], done = 0, total = mods.length, q = 0;
     mods.forEach(function (t) { var n = countFor(t, s.exam); q += n; if (n && statusOf((prog[t.id] || {}).answered, n) === "done") done++; });
+    // Subjects with no questions for this exam are not shown as cards at all.
+    if (ix && !q) return "";
     var pct = total ? Math.round(done * 100 / total) : 0;
     // Tide pass (prep50): a tile, the subject's icon on a disc ringed by its modules completed (the ring is the progress).
     return '<button type="button" class="pn-tile' + (total && done === total ? " full" : "") + '" data-act="subject" data-s="' + esc(sb.id) + '" style="--h:' + subjHue(sb.id) + '">' +
       '<span class="pn-disc" aria-hidden="true"><svg viewBox="0 0 48 48"><circle class="rt" cx="24" cy="24" r="22" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="24" cy="24" r="22" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + "</svg>" +
       '<span class="pn-ic">' + subjIco(sb.id) + "</span></span>" +
-      '<span class="pn-tb"><b>' + tx(sb.name) + "</b><small>" + (ix ? done + "/" + total + " modules" + "<br>" + (q ? fmt(q) + " MCQs" : "questions coming soon") : "&nbsp;") + "</small></span>" + "</button>";
+      '<span class="pn-tb"><b>' + tx(sb.name) + "</b><small>" + (ix ? done + "/" + total + " modules" + "<br>" + fmt(q) + " MCQs" : "&nbsp;") + "</small></span>" + "</button>";
   }
 
   /* ---------- subject ---------- */
@@ -1565,7 +1570,7 @@
       var due = 0; mods.forEach(function (t) { due += (prog[t.id] || {}).due || 0; });
       var dpct = mods.length ? Math.round(done * 100 / mods.length) : 0, nm = mods.length || 1;
       var seg = function (k, n) { return n ? '<i class="' + k + '" style="flex-grow:' + n + '"></i>' : ""; };
-      var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><div class="pn-subtop"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + "</span>" + mring(dpct, dpct + "%") + '</div><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "Questions coming soon") + (due ? " · " + fmt(due) + " due" : "") + "</small></span>" +
+      var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><div class="pn-subtop"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + "</span>" + mring(dpct, dpct + "%") + '</div><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "No questions in this subject for this exam yet") + (due ? " · " + fmt(due) + " due" : "") + "</small></span>" +
         (mods.length ? '<span class="pn-subbar pn-fills" aria-hidden="true">' + seg("d", done) + seg("p", part) + seg("n", nm - done - part) + '</span><span class="pn-subkey"><span><i class="d"></i>' + done + ' completed</span><span><i class="p"></i>' + part + ' in progress</span><span><i class="n"></i>' + (mods.length - done - part) + " not started</span></span>" : "") + "</section>";
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
@@ -1582,7 +1587,7 @@
   function modRow(sid, t, prog, s, num) {
     var n = countFor(t, s.exam), p = prog[t.id] || { answered: 0, due: 0 }, stt = statusOf(p.answered, n), sr = stars(s.mod[t.id]);
     var chip = stt === "done" ? '<span class="pn-st done">Completed</span>' : stt === "paused" ? '<span class="pn-st">' + fmt(Math.min(p.answered, n)) + "/" + fmt(n) + "</span>" : "";
-    var line = n ? fmt(n) + " MCQs" : "Questions coming soon";
+    var line = n ? fmt(n) + " MCQs" : "No questions in this module for this exam yet";
     return '<li class="pn-tl-' + stt + '"><button type="button" class="pn-mod" data-act="module" data-s="' + esc(sid) + '" data-m="' + esc(t.id) + '"' + (n ? "" : ' aria-disabled="true"') + ">" +
       (num ? '<span class="pn-num" aria-hidden="true">' + num + "</span>" : "") +
       '<span class="pn-mb"><b>' + tx(t.title) + '</b><small>' + (sr != null ? '<span class="pn-stars" aria-label="Mastery ' + sr + ' of 5">' + ico("star", true) + sr + "/5</span> · " : "") + line + (p.due ? " · " + fmt(p.due) + " due" : "") + "</small></span>" + chip + "</button></li>";
@@ -1919,7 +1924,7 @@
     if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
     if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + mdLite(legacyExp(why)) + "</div>" + fig;
     if (fig) return "<h3>Explanation</h3>" + fig;
-    return '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>";
+    return '<p class="pn-mut">No explanation is stored for this question yet.</p>';
   }
   function pearlHtml(it, xo) {
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
@@ -2623,7 +2628,7 @@
     if (t2) body = G.PREP_TESTS.testsHtml(HOST);
     else if (!q) {
       var list = MOCKS[s.exam];
-      if (!list) body = '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(planExamLabel()) + '</p><p class="pn-mut">Questions for this exam are being added.</p></section>' +
+      if (!list) body = '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(planExamLabel()) + '</p><p class="pn-mut">No questions for this exam in the bank yet.</p></section>' +
         '<div class="pn-group">' + row("p-settings", ico("gear"), "Change exam", "Exam: " + esc(planExamLabel())) + "</div>";
       else {
       // The previous year papers row (NEET-PG) sits on top.
@@ -2644,7 +2649,7 @@
       if (need || coming || gEmpty) {
         var scope = planScopeLabel();
         var why = need ? "Pick your one INI-SS subject first: INI-SS is set per superspeciality." :
-          gEmpty && scope ? "Questions for the " + scope + " are being added." : "Questions for this exam are being added.";
+          gEmpty && scope ? "No questions for the " + scope + " in the bank yet." : "No questions for this exam in the bank yet.";
         body = '<div class="pn-group">' + row("p-settings", ico("gear"), need ? "Choose subject" : "Change exam", "Exam: " + esc(planExamLabel()) + (scope ? " · " + esc(scope) : "")) + "</div>" +
           '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(planExamLabel()) + (scope ? " · " + esc(scope) : "") + '</p><p class="pn-mut">' + esc(why) + "</p></section>";
       } else {

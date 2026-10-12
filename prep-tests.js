@@ -381,16 +381,16 @@
   function comingSection(p) {
     var prov = p.status !== "official";
     return '<section class="pn-t2exam pn-t2coming" data-p="' + p.id + '" aria-label="' + esc(p.name) + ' format">' +
-      '<div class="pn-t2xstatic"><span class="pn-t2xt"><b>' + esc(p.name) + '</b><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Coming soon") + "</span></span></div>" +
-      '<div class="pn-t2xinfo"><p class="pn-mut">Questions for this exam are being added.</p>' +
+      '<div class="pn-t2xstatic"><span class="pn-t2xt"><b>' + esc(p.name) + '</b><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Official format") + "</span></span></div>" +
+      '<div class="pn-t2xinfo"><p class="pn-mut">No questions for this exam in the bank yet.</p>' +
       '<details class="pn-t2how"><summary>Exam format</summary>' + examInfoHtml(p, true) +
       ((p.bank && p.bank.note) ? '<p class="pn-mut pn-small">' + esc(p.bank.note) + "</p>" : "") + "</details></div></section>";
   }
   // A plan group with no bank subjects yet (rare): the same shell, clearly worded for the group.
   function groupComingHtml(p, gl) {
     return '<section class="pn-t2exam pn-t2coming" aria-label="' + esc(p.name + (gl ? " " + gl : "")) + '">' +
-      '<div class="pn-t2xstatic"><span class="pn-t2xt"><b>' + esc(p.name) + (gl ? " · " + esc(gl) : "") + '</b><span class="pn-t2b">Coming soon</span></span></div>' +
-      '<div class="pn-t2xinfo"><p class="pn-mut">Questions for the ' + esc(gl || "group") + " are being added.</p></div></section>";
+      '<div class="pn-t2xstatic"><span class="pn-t2xt"><b>' + esc(p.name) + (gl ? " · " + esc(gl) : "") + '</b><span class="pn-t2b">No questions yet</span></span></div>' +
+      '<div class="pn-t2xinfo"><p class="pn-mut">No questions for the ' + esc(gl || "group") + " in the bank yet.</p></div></section>";
   }
   // One small line under the segment: the plan's exam and scope, with the one way to change it.
   function planCtxHtml(p0) {
@@ -759,7 +759,7 @@
   function shuffleR(a, R) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(R() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
   function prepare(pid, type, sid, mid, extra) {
     var p = A.profile(pid); if (!p) return;
-    if (A.bankStatus(p) === "coming") { H.toast("Format available, question bank coming: no " + p.name + " questions in the bank yet."); return; }
+    if (A.bankStatus(p) === "coming") { H.toast("No " + p.name + " questions in the bank yet."); return; }
     var dailyKind = type === "daily10" ? "daily10" : type === "daily_mixed" ? "daily_mixed" : null;
     var seed = dailyKind ? A.dailyKey(p.id, Date.now(), dailyKind) : String(Date.now()) + Math.random(), R = A.rng(seed + ":files");
     var opts = { seed: seed, hidden: H.hidden(), recent: dailyKind ? null : seenMap() };   // daily: the same set all day, seen or not
