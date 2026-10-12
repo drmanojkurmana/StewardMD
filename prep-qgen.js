@@ -36,7 +36,7 @@
   var MSG = {
     "sign-in": "Sign in to create a module with MaiK.",
     "not-configured": "Creating modules with MaiK is not switched on yet.",
-    "off": "Creating modules with MaiK is not open yet.",
+    "off": "Creating modules with MaiK is not available right now.",
     "daily-modules": "You have created today's free modules. Make more tomorrow.",
     "module-full": "This module has all its questions.",
     "budget": "MaiK modules have reached today's limit for everyone. Try again tomorrow.",

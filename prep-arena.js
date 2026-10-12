@@ -145,10 +145,10 @@
     if (status === 409 && code === "not-started") return "Start the event before submitting.";
     if (status === 409) return "You have already taken this event. Only the first entry counts.";
     if (status === 410) return code === "too-late" ? "Too late: the event closed before your answers arrived." : "This event has closed.";
-    if (status === 503) return "Coming soon: questions for this exam are still being prepared.";
+    if (status === 503) return "Arena is temporarily unavailable, try again";
     return "The Arena did not answer. Try again in a moment.";
   }
-  // Data-driven coming soon message from PREP_ASSESS exam profile bank status.
+  // Data-driven unavailability note from the PREP_ASSESS exam profile bank status.
   // Returns null when the bank is ready (open for Arena); returns note string when "coming".
   function soonFor(ex, assess) {
     assess = assess || (G && G.PREP_ASSESS);
@@ -160,7 +160,7 @@
     }
     if (!p) return null;
     var st = assess.bankStatus ? assess.bankStatus(p) : ((p.bank && p.bank.status) || "available");
-    if (st === "coming") return (p.bank && p.bank.note) || "questions for this exam are still being prepared";
+    if (st === "coming") return (p.bank && p.bank.note) || "no questions for this exam in the bank yet";
     return null;
   }
   var PURE = { enabled: enabled, ms: ms, normEvent: normEvent, eventsFrom: eventsFrom, phase: phase, pickEvent: pickEvent, countdown: countdown, eventLine: eventLine,
@@ -206,7 +206,7 @@
     if (!user()) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("user") + '</span><span class="pn-rb"><b>Sign in to compete</b><small>Daily sprints, the weekly grand test and 1v1 battles need a StewardMD account. Practice works without one.</small></span></div></div>';
     var planEx = (H.planProfileId && H.planProfileId()) || exam();
     var soon = soonFor(planEx) || soonFor(exam());
-    if (soon) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(planLabel()) + " Arena: coming soon</b><small>Sprints, grand tests and battles " + esc(soon) + ".</small></span></div></div>";
+    if (soon) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(planLabel()) + " Arena is unavailable</b><small>" + esc(soon) + ".</small></span></div></div>";
     var now = Date.now(), ev = A.events || [], d = pickEvent(ev, "daily", now), w = pickEvent(ev, "weekly", now);
     var line = function (e) { return A.events ? eventLine(e || null, now) : "Loading…"; };
     var cdAttr = function (e) { return e ? ' data-cd="' + esc(e.id) + '"' : ""; };

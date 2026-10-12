@@ -179,8 +179,8 @@
     loadErr: T("This drill did not load. Check the connection and try again.", "यह ड्रिल लोड नहीं हुई। कनेक्शन जांचें और फिर कोशिश करें।"),
     loading: T("Loading the drill…", "ड्रिल लोड हो रही है…"), retry: T("Try again", "फिर कोशिश करें"),
     obstetrics: T("Obstetrics", "प्रसूति"), gynaecology: T("Gynaecology", "स्त्री रोग"), drill: T("Drill", "ड्रिल"), sim: T("Simulator", "सिम्युलेटर"),
-    simSoon: T("Screen coming in the next update", "स्क्रीन अगले अपडेट में"),
-    simSoonLong: T("This simulator's model is built and tested; its screen arrives in the next update.", "इस सिम्युलेटर का मॉडल बन चुका है और जाँचा गया है; इसकी स्क्रीन अगले अपडेट में आएगी।")
+    simSoon: T("This simulator screen is not available", "यह सिम्युलेटर स्क्रीन उपलब्ध नहीं है"),
+    simSoonLong: T("This simulator's model is built and tested; its screen is not available in this version.", "इस सिम्युलेटर का मॉडल बन चुका है और जाँचा गया है; इसकी स्क्रीन इस संस्करण में उपलब्ध नहीं है।")
   };
   function kit(host) {
     var I = host._internal, D = G.SPECIALTY_DATA, cfg = host.cfg, own = (cfg.strings && cfg.strings.tools) || {}, S = {}, k;
