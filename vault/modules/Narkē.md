@@ -49,3 +49,5 @@
 ## Gotchas
 - The Pages deploy file cap (20,000) is close: about 16,850 on 2026-10-06. Keep Narkē within 450 files (test enforced).
 - Never put "narke" in an engine file (`test/specialty-engine.test.mjs`).
+
+- **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.

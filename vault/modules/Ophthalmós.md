@@ -236,3 +236,5 @@ quizzes; English and Hindi). Full text with examples: `ophthalmos/CONTENT-RULES.
   is not available in `codex exec` on this account; `agy` needed a Google sign-in), so the scene is a CC0 photo.
 - Explorer, neuro simulator and tools strings were rewritten to R1 to R9 here; **port to the module repo**, along
   with the renderer, glossary and test, before the next sync. Cache token `?v=oph14`.
+
+- **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.

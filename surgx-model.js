@@ -416,6 +416,8 @@
       updated: str(p.updated),
       nextReviewDue: str(p.nextReviewDue),
       disclaimer: str(p.disclaimer) || DEFAULT_PROTOCOL_DISCLAIMER,
+      // an isometric equipment figure shown with the protocol (iso-figures.js), by id
+      isoFigure: /^[a-z0-9-]+$/.test(str(p.isoFigure)) ? str(p.isoFigure) : null,
       interactive: false
     };
   }

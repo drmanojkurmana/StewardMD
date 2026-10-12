@@ -288,3 +288,5 @@ linking still fall back to the ward selection.
 config for project `stewardmd`). Verified against production, not assumed: a POST to
 `/api/ghis/assessment-save` with an invalid token returns **401 login_required**, not 501 — so the
 write gate is open and the request only failed on auth. Probe writes nothing (no valid session).
+
+- **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.
