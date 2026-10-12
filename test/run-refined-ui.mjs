@@ -23,9 +23,11 @@ const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.se
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const waitFor = async (expr, ms = 9000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(expr)) return true; await sleep(150); } return false; };
+let preload = null;   // new-document scripts accumulate across loads: drop the previous one so a "look off" setup cannot leak
 const load = async (setup) => {
   await call("Storage.clearDataForOrigin", { origin: BASE.replace(/\/$/, ""), storageTypes: "all" });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: "try{localStorage.setItem('stewardmd_guest_used','1')}catch(e){}" + (setup || "") });
+  if (preload) await call("Page.removeScriptToEvaluateOnNewDocument", { identifier: preload });
+  preload = (await call("Page.addScriptToEvaluateOnNewDocument", { source: "try{localStorage.setItem('stewardmd_guest_used','1')}catch(e){}" + (setup || "") })).result.identifier;
   await call("Page.navigate", { url: BASE });
   await waitFor("return !!document.querySelector('.rnav-tab')", 20000);
   await sleep(1500);
@@ -86,6 +88,21 @@ try {
   await ev("[].slice.call(document.querySelectorAll('#homeV2 button')).filter(function(b){return /Calculators/.test(b.textContent)})[0].click();return 1");
   await waitFor("return document.querySelectorAll('.mc-cat').length>3");
   ok((await ev("return getComputedStyle(document.querySelector('.mc-cat.on')).backgroundColor")) !== "rgb(31, 122, 110)", "dark: with the look off the chip keeps its old teal");
+
+  // 4b. Pressed state: the release springs (overshoot curve) and sheet rows get the iOS highlight
+  await load();
+  await ev("[].slice.call(document.querySelectorAll('.rnav-tab')).filter(function(b){return /More/.test(b.textContent)})[0].click();return 1"); await sleep(1100);
+  await call("DOM.enable"); await call("CSS.enable");
+  const doc = (await call("DOM.getDocument", { depth: 0 })).result.root.nodeId;
+  await ev("var e=[].filter.call(document.querySelectorAll('body > .hv-sheet .hv-mi'),function(x){return x.getClientRects().length})[0];e.setAttribute('data-_mi','1');return 1");
+  const mi = (await call("DOM.querySelector", { nodeId: doc, selector: "[data-_mi]" })).result.nodeId;
+  const tf = await ev("return getComputedStyle(document.querySelector('[data-_mi]')).transitionTimingFunction");
+  ok(/cubic-bezier\(0\.32, 1\.25, 0\.5, 1\)/.test(tf), "pressed: the release spring curve is on sheet rows (" + tf.slice(0, 50) + ")");
+  const bg0 = await ev("return getComputedStyle(document.querySelector('[data-_mi]')).backgroundColor");
+  await call("CSS.forcePseudoState", { nodeId: mi, forcedPseudoClasses: ["active"] }); await sleep(400);
+  const bg1 = await ev("return getComputedStyle(document.querySelector('[data-_mi]')).backgroundColor");
+  await call("CSS.forcePseudoState", { nodeId: mi, forcedPseudoClasses: [] });
+  ok(bg0 !== bg1 && /15, 23, 42/.test(bg1), "pressed: a sheet row shows the highlight while pressed (" + bg0 + " -> " + bg1 + ")");
 
   // 5. Kill switch
   await load("try{localStorage.setItem('smd_refined','0')}catch(e){}");

@@ -167,8 +167,10 @@ try {
   await ev("__hDrag('#__r1',330,150,6,12);return 1"); await sleep(900);
   ok((await ev("return [].map.call(document.querySelectorAll('[role=toolbar] button'),function(b){return b.textContent}).join('|')")) === "Call|Remove", "a long left swipe reveals the row's own actions");
   ok((await ev("return (window.__sopen||0)+'/'+(window.__scall||0)+'/'+(window.__srm||0)")) === "0/0/0", "a swipe fires nothing by itself (no open, no call, no remove)");
+  ok((await ev("return document.getElementById('__r1').style.transition")) === "none", "while open the row's own transform transition is off (no lag behind the finger)");
   await ev("[].filter.call(document.querySelectorAll('[role=toolbar] button'),function(b){return b.textContent==='Call'})[0].click();return 1"); await sleep(500);
   ok((await ev("return window.__scall||0")) === 1 && !(await ev("return !!document.querySelector('[role=toolbar]')")), "tapping an action presses the real control and closes the tray");
+  ok((await ev("return document.getElementById('__r1').style.transition")) === "", "and the row's transition is handed back when it closes");
   await ev("document.getElementById('__sw').remove();return 1");
 
   // 10. Tab bar + status tap

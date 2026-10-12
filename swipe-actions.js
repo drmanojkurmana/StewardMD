@@ -78,7 +78,7 @@
     var o = open; if (!o) return; open = null;
     clearInterval(o.timer);
     var row = o.row, S = window.SMD_SPRING;
-    var done = function () { row.style.transform = ""; row.style.willChange = ""; o.tray.remove(); };
+    var done = function () { row.style.transform = ""; row.style.willChange = ""; row.style.transition = ""; o.tray.remove(); };
     if (animate && S && !S.reduced() && row.isConnected) S.animate({ from: -o.w, to: 0, stiffness: 420, damping: 36, onUpdate: function (x) { row.style.transform = "translate3d(" + x + "px,0,0)"; o.tray.style.clipPath = clip(o.w, -x); }, onDone: done });
     else done();
   }
@@ -134,7 +134,8 @@
         g.tray = buildTray(g.row, g.acts, g.w);
         open = { row: g.row, tray: g.tray, w: g.w, timer: 0 };
       } else { clearInterval(open.timer); g.tray = open.tray; }
-      g.active = true; g.row.style.willChange = "transform";
+      // The row may carry its own transform transition (cards, list rows): off while the finger drives it, or the row lags behind.
+      g.active = true; g.row.style.willChange = "transform"; g.row.style.transition = "none";
     }
     if (e.cancelable) e.preventDefault();
     var now = performance.now();
@@ -157,7 +158,7 @@
     var upd = function (x) { st.row.style.transform = "translate3d(" + x + "px,0,0)"; o.tray.style.clipPath = clip(st.w, Math.min(st.w, -x)); };
     if (lock && !st.base) { try { window.SMD_HAPTICS && SMD_HAPTICS.medium(); } catch (x) {} }
     var fin = function () {
-      if (!lock) { if (open === o) { open = null; } st.row.style.transform = ""; st.row.style.willChange = ""; o.tray.remove(); return; }
+      if (!lock) { if (open === o) { open = null; } st.row.style.transform = ""; st.row.style.willChange = ""; st.row.style.transition = ""; o.tray.remove(); return; }
       // Open: close itself if the row is re-rendered away or moves (scroll / layout change).
       var r0 = st.row.getBoundingClientRect().top;
       o.timer = setInterval(function () { if (!st.row.isConnected || Math.abs(st.row.getBoundingClientRect().top - r0) > 2) closeOpen(false); }, 250);

@@ -95,3 +95,41 @@ html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-steplbl,
 html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-sub,
 html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-pickttl,
 html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-empty p { color: #4D6272 !important; }
+
+/* ---- pressed state (audit 2026-10-12) ----
+ * Measured with :active forced on 5 inner screens: ~95% of tappables already scale to .97 over 120ms. Two gaps:
+ *  1. List rows in sheets (.hv-mi) and the antibiogram pills / links only dimmed. Rows get the iOS-style
+ *     background highlight; the pills and links get the same .97 press as every other button.
+ *  2. The release was a flat 120ms ease. Now press-in is quick (80ms) and the release springs back with a
+ *     small overshoot, which is what makes a tap feel physical rather than switched. */
+html.smd-refined body > :not(#homeV2) button:not(:disabled),
+html.smd-refined body > :not(#homeV2) [role="button"],
+html.smd-refined body > :not(#homeV2) a[href],
+html.smd-refined body > :not(#homeV2) .db-comp,
+html.smd-refined body > :not(#homeV2) .hv-mi,
+html.smd-refined body > :not(#homeV2) .mc-card-head {
+  transition: transform .34s cubic-bezier(.32, 1.25, .5, 1), background-color .15s ease, color .15s ease,
+    border-color .15s ease, box-shadow .2s ease, opacity .15s ease;
+}
+html.smd-refined body > :not(#homeV2) button:not(:disabled):active,
+html.smd-refined body > :not(#homeV2) [role="button"]:active,
+html.smd-refined body > :not(#homeV2) a[href]:active,
+html.smd-refined body > :not(#homeV2) .db-comp:active,
+html.smd-refined body > :not(#homeV2) .hv-mi:active,
+html.smd-refined body > :not(#homeV2) .mc-card-head:active { transition-duration: .08s, .08s, .08s, .08s, .08s, .08s; }
+html.smd-refined body > :not(#homeV2) .abg-filter-pill:active,
+html.smd-refined body > :not(#homeV2) .abg-drug-link-btn:active,
+html.smd-refined body > :not(#homeV2) .abg-back:active { transform: scale(.97); }
+html.smd-refined body > :not(#homeV2) .hv-mi:active { background-color: rgba(15, 23, 42, .06); transform: none; }
+html.smd-refined body.dark > :not(#homeV2) .hv-mi:active,
+html.smd-refined body.v3-dark > :not(#homeV2) .hv-mi:active { background-color: rgba(255, 255, 255, .08); }
+@media (prefers-reduced-motion: reduce) {
+  html.smd-refined body > :not(#homeV2) button:not(:disabled),
+  html.smd-refined body > :not(#homeV2) [role="button"],
+  html.smd-refined body > :not(#homeV2) a[href],
+  html.smd-refined body > :not(#homeV2) .db-comp,
+  html.smd-refined body > :not(#homeV2) .hv-mi { transition: background-color .15s ease, opacity .15s ease; }
+  html.smd-refined body > :not(#homeV2) .abg-filter-pill:active,
+  html.smd-refined body > :not(#homeV2) .abg-drug-link-btn:active,
+  html.smd-refined body > :not(#homeV2) .abg-back:active { transform: none; }
+}
