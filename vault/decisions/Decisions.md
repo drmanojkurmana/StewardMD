@@ -11742,3 +11742,9 @@ restore the data exactly and nothing is on a server (antibiogram "remove from th
 removal, ECG wipes and follow-up deletes keep their confirmation. (2) Swipe actions reveal a row's own buttons and never
 fire one on a full swipe. (3) Sounds are synthesized, whisper-level and OFF until switched on in Settings. (4) The tab
 bar's tabs are launchers, so no "re-tap the active tab" or sliding indicator was built. [[modules/Premium Motion]]
+
+## 2026-10-12 Home page look stays; "classic premium" applies to inner screens only
+Owner, after the audit: "Keep existing look home page." The home screen (greeting, quick buttons, hero card, tool
+grid, header, tab bar) keeps today's design. Any look change (Refined clinical / Editorial luxury / Apple-native,
+14px body text, pressed states, empty and error states, dark mode refinements) applies to the screens inside the
+app, never to `#homeV2`. Owner picks the look after seeing examples of the inner screens. [[modules/Premium Motion]]
