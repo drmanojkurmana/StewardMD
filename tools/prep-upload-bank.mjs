@@ -6,6 +6,9 @@
 //   After any upload with --yes the share ID index is rebuilt (node tools/prep-ids.mjs publish --yes; --no-ids skips).
 //   node tools/prep-upload-bank.mjs --dir prep/pyq/out --as v2/pyq [--yes]     PYQ files (tools/prep-pyq.mjs): JSON and
 //       webp images under prep-bank/v2/pyq/; index.json goes last and gets the short cache (it names the items file)
+//   node tools/prep-upload-bank.mjs --dir prep/quality --as quality [--yes]  item-quality sidecar
+//       (tools/prep-quality.mjs): prep-bank/quality/index.json (last, short cache: it names the current
+//       per-subject files) + immutable prep-bank/quality/v<n>/<subject>.json
 //
 // Without --yes it lists what it would upload and the total size. Uploads module and search files first and
 // manifest.json last, so the app never sees a manifest that names files not yet in the bucket. Files are
@@ -67,7 +70,7 @@ async function main(argv = process.argv.slice(2)) {
   const only = arg("--only", null);
   const jobs = Math.max(1, Math.min(16, Number(arg("--jobs", 6)) || 6));
   const as = arg("--as", null);
-  if (as && !/^(?:v\d{1,3}|overlay|img)\/[a-z0-9-]+$|^[a-z0-9-]+\.[a-z0-9]+$/.test(as)) throw new Error("--as must look like v2/pyq, overlay/maik1, img/maikimg or file.json");
+  if (as && !/^(?:(?:v\d{1,3}|overlay|img)\/[a-z0-9-]+|quality)$|^[a-z0-9-]+\.[a-z0-9]+$/.test(as)) throw new Error("--as must look like v2/pyq, overlay/maik1, img/maikimg, quality or file.json");
   let files = fileArg
     ? [{ src: path.resolve(fileArg), key: `${PREFIX}/${as || path.basename(fileArg)}`, bytes: fs.statSync(fileArg).size, last: true }]
     : listFiles(dir, as);

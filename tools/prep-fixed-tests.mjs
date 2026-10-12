@@ -23,8 +23,8 @@
 //   node tools/prep-fixed-tests.mjs report [--out ...]              markdown to stdout (per exam/format counts)
 //
 // Rules. Only eligible questions (assembler eligible(): no flag, not withdrawn, no quality blocker; disputed keys
-// out) enter a paper; there is no item-quality sidecar on the server yet, so no status filter applies, and --quality
-// <dir> takes one when it exists. Pools are bank modules plus their overlay files, merged like the app's
+// out) enter a paper; the item-quality sidecar (tools/prep-quality.mjs) applies when present (--quality <dir>
+// overrides; --quality none disables). Pools are bank modules plus their overlay files, merged like the app's
 // mergeOverlay (bank first, unseen overlay ids appended, sets in sorted order); a paper records the overlay sets
 // its items came from (paper.overlays { subject: [sets] }) so the Tests tab resolves them. The blueprint is
 // honoured (official quotas shrink, never borrow); no duplicate id
@@ -691,13 +691,18 @@ async function main(argv = process.argv.slice(2)) {
     return;
   }
   const tax = loadTaxonomy(), { ver, pyq } = appVersions();
-  const quality = loadQuality(arg(argv, "--quality", null));
+  // The sidecar applies by default (requires_review/rejected/retired stay out of papers); --quality none skips it.
+  let qdir = arg(argv, "--quality", null);
+  if (qdir === "none") qdir = null;
+  else if (!qdir) qdir = [path.join(ROOT, "prep", "quality", "v1"), path.join(os.homedir(), "prep-data", "quality", "out", "v1")].find((d) => fs.existsSync(d)) || null;
+  const quality = loadQuality(qdir);
+  if (qdir) log(`quality sidecar: ${Object.keys(quality).length} records from ${qdir}`);
   if (cmd === "census") {
     for (const exam of EXAMS) {
       const { lists } = examLists(cache, tax, ver, exam);
-      const tot = poolSizes(lists, {});
+      const tot = poolSizes(lists, { quality });
       const n = Object.values(tot).reduce((a, x) => a + x, 0);
-      const imgSizes = poolSizes(lists, { image: true });
+      const imgSizes = poolSizes(lists, { image: true, quality });
       const img = Object.values(imgSizes).reduce((a, x) => a + x, 0);
       const topics = majorTopics(cache, tax, ver, exam).length;
       console.log(`${exam.profile}: subjects=${scopeSubjects(tax, exam).length} eligible=${n} image=${img} major_topics=${topics}`);
@@ -705,7 +710,7 @@ async function main(argv = process.argv.slice(2)) {
       for (const [s, x] of nz) console.log(`  image ${s}: ${x}`);
     }
     const pq = loadPyq(cache, pyq);
-    console.log(`pyq pool (neet-pg recall 2017+): ${poolSizes(pq.lists, {}).pyq || 0} eligible`);
+    console.log(`pyq pool (neet-pg recall 2017+): ${poolSizes(pq.lists, { quality }).pyq || 0} eligible`);
     return;
   }
   if (cmd === "build") {
@@ -721,7 +726,7 @@ async function main(argv = process.argv.slice(2)) {
     const papers = [], shortfalls = [], bankCounts = {};
     for (const exam of EXAMS.filter((e) => !onlyExam || e.profile === onlyExam)) {
       const { lists } = examLists(cache, tax, ver, exam);
-      bankCounts[exam.profile] = poolSizes(lists, {});
+      bankCounts[exam.profile] = poolSizes(lists, { quality });
       const priorUsed = prior.filter((p) => p.exam === exam.profile).flatMap((p) => p.items.map((t) => t[2]));
       const r = buildExam({ tax, cache, ver, pyqVer: pyq, exam, quality, createdAt, onlyFormat, startAt, priorUsed, subjectsOnly, log });
       papers.push(...r.papers);
