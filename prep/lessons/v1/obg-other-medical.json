@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "obg-other-medical",
+ "subject": "obstetrics-gynaecology",
+ "title": "Other medical disorders in pregnancy: key high-yield points",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Hypothyroidism** in pregnancy is most often due to **Hashimoto thyroiditis**. Overt disease is marked by a raised **TSH** with a low free thyroxine. Untreated disease raises the risk of **anaemia**, **pre-eclampsia**, **placental abruption**, **preterm birth** and **stillbirth**. Standard care is **thyroid hormone replacement**, and the dose often needs to rise early in pregnancy. **Polyhydramnios** is not a typical feature, so it is the least likely association in exam questions.",
+   "say": "Hypothyroidism in pregnancy is most often due to Hashimoto thyroiditis. Overt disease is marked by a raised TSH with a low free thyroxine. Untreated disease raises the risk of anaemia, pre-eclampsia, placental abruption, preterm birth and stillbirth. Standard care is thyroid hormone replacement, and the dose often needs to rise early in pregnancy. Polyhydramnios is not a typical feature, so it is the least likely association in exam questions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Hashimoto thyroiditis",
+      "Most common cause of hypothyroidism"
+     ],
+     [
+      "Overt hypothyroidism",
+      "Raised TSH with low free thyroxine"
+     ],
+     [
+      "Pregnancy risks",
+      "Abruption, preterm birth, stillbirth"
+     ],
+     [
+      "Least associated",
+      "Polyhydramnios"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hyperthyroidism** in the first trimester is treated with propylthiouracil, the drug of choice because it is less likely to cause fetal defects. Methimazole and carbimazole are linked to aplasia cutis, choanal atresia and oesophageal atresia, so they are avoided early. Because of rare hepatotoxicity, propylthiouracil is limited to the first trimester and then switched to methimazole. Gestational thyrotoxicosis from high hCG usually resolves by weeks 14 to 18 without drugs.",
+   "say": "Hyperthyroidism in the first trimester is treated with propylthiouracil, the drug of choice because it is less likely to cause fetal defects. Methimazole and carbimazole are linked to aplasia cutis, choanal atresia and oesophageal atresia, so they are avoided early. Because of rare hepatotoxicity, propylthiouracil is limited to the first trimester and then switched to methimazole. Gestational thyrotoxicosis from high hCG usually resolves by weeks 14 to 18 without drugs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Propylthiouracil",
+     "points": [
+      "Drug of choice in first trimester",
+      "Rare hepatotoxicity, switch later"
+     ]
+    },
+    "right": {
+     "title": "Methimazole and carbimazole",
+     "points": [
+      "Aplasia cutis, choanal atresia",
+      "Usually avoided early in pregnancy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Systemic lupus erythematosus** carries risk of nephritis, preterm labour and fetal loss. Anti-Ro (SS-A) and anti-La (SS-B) antibodies predispose to **neonatal congenital heart block**, so fetal cardiac monitoring is done between 18 and 26 weeks. **Antiphospholipid syndrome** causes recurrent miscarriage and thrombosis, and is treated with heparin and low-dose aspirin in pregnancy. A prolonged aPTT with recurrent loss suggests lupus anticoagulant.",
+   "say": "Systemic lupus erythematosus carries risk of nephritis, preterm labour and fetal loss. Anti-Ro, also called SS-A, and anti-La, also called SS-B, antibodies predispose to neonatal congenital heart block, so fetal cardiac monitoring is done between 18 and 26 weeks. Antiphospholipid syndrome causes recurrent miscarriage and thrombosis, and is treated with heparin and low-dose aspirin in pregnancy. A prolonged aPTT with recurrent loss suggests lupus anticoagulant.",
+   "vis": null
+  },
+  {
+   "tx": "**Intrahepatic cholestasis of pregnancy** presents in the third trimester with generalised pruritus, often worse on palms and soles and at night, with or without jaundice. Bile acids are the best diagnostic marker, and the condition is linked to high oestrogen levels. **Ursodeoxycholic acid** is the preferred treatment because it reduces bile acid levels and pruritus. Cholestyramine relieves itch but does not correct liver tests, so it is used less often. Recurrence in later pregnancies is common.",
+   "say": "Intrahepatic cholestasis of pregnancy presents in the third trimester with generalised pruritus, often worse on palms and soles and at night, with or without jaundice. Bile acids are the best diagnostic marker, and the condition is linked to high oestrogen levels. Ursodeoxycholic acid is the preferred treatment because it reduces bile acid levels and pruritus. Cholestyramine relieves itch but does not correct liver tests, so it is used less often. Recurrence in later pregnancies is common.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pruritus in third trimester"
+     },
+     {
+      "id": "b",
+      "label": "Raised serum bile acids"
+     },
+     {
+      "id": "c",
+      "label": "Ursodeoxycholic acid"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Epilepsy** in pregnancy needs folic acid, and it should be started at least one month before conception in women on antiepileptics. Phenytoin and other enzyme-inducing drugs lower folate and vitamin D, and they raise the risk of fetal hydantoin syndrome. Vitamin D of about 400 IU daily is advised. Women with asthma should continue their inhalers, because poor control is more harmful to the fetus than most drugs. Renal disease in pregnancy increases the risk of pre-eclampsia and must be monitored closely.",
+   "say": "Epilepsy in pregnancy needs folic acid, and it should be started at least one month before conception in women on antiepileptics. Phenytoin and other enzyme-inducing drugs lower folate and vitamin D, and they raise the risk of fetal hydantoin syndrome. Vitamin D of about 400 IU daily is advised. Women with asthma should continue their inhalers, because poor control is more harmful to the fetus than most drugs. Renal disease in pregnancy increases the risk of pre-eclampsia and must be monitored closely.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "d1dd13f9-ee85-4f5a-979e-0f9f00b1d81e",
+  "95fcdc82-35eb-43e3-b204-18ee96f3b658",
+  "a6d68325-7756-4fec-9cb1-4d081c380eec"
+ ],
+ "src": [],
+ "refs": [
+  "Medical Disorders in Obstetric Practice (Michael de Swiet, Editor)",
+  "Williams Obstetrics (Cunningham et al.)",
+  "Current Diagnosis and Treatment: Obstetrics and Gynecology (DeCherney et al., Editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 146
+ }
+}

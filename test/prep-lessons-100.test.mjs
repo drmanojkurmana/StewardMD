@@ -34,3 +34,17 @@ test("targetModules: gap modules in, lessons/mixed/mapped out", () => {
   assert.ok(!mods.has("pat-mixed"), "mixed modules are never targeted");
   assert.ok(!mods.has("oph-cataract"), "KB-mapped modules are skipped");
 });
+
+test("bankFirstQuiz: bank ids win, overlay backfills", async () => {
+  const { bankFirstQuiz } = await import("../tools/prep-lessons-100.mjs");
+  const bank = [
+    { id: "b1", q: "Heart failure drug of choice in a diabetic patient?", o: ["a", "b", "c", "d"], a: 0 },
+    { id: "b2", q: "Heart failure with preserved ejection fraction management?", o: ["a", "b", "c", "d"], a: 1 },
+    { id: "b3", q: "Heart failure bedside signs of congestion?", o: ["a", "b", "c", "d"], a: 2 },
+  ];
+  const ov = [{ id: "mk-1", q: "Heart failure bedside vignette?", o: ["a", "b", "c", "d"], a: 2 }];
+  const q = bankFirstQuiz(bank, ov, ["heart failure"]);
+  assert.ok(!q.some((id) => String(id).startsWith("mk-")), "no overlay id while bank covers: " + JSON.stringify(q));
+  const q2 = bankFirstQuiz(bank.slice(0, 1), ov, ["heart failure"]);
+  assert.ok(q2.includes("mk-1"), "overlay backfills a short bank quiz: " + JSON.stringify(q2));
+});

@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "ans-ventilation",
+ "subject": "anaesthesia",
+ "title": "Mechanical ventilation and intensive care: core principles for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Mechanical ventilation supports gas exchange when a patient cannot breathe adequately alone. **Volume control ventilation** delivers a preselected tidal volume at a constant flow, so peak pressure varies with compliance and resistance. **Pressure control ventilation** fixes the inspiratory pressure, giving a square pressure waveform and a decelerating flow, which limits peak alveolar pressure and protects alveoli from overdistension. Choose the mode according to the target: a fixed volume for reliable ventilation, or a fixed pressure to limit barotrauma.",
+   "say": "Mechanical ventilation supports gas exchange when a patient cannot breathe adequately alone. Volume control ventilation delivers a preselected tidal volume at a constant flow, so peak pressure varies with compliance and resistance. Pressure control ventilation fixes the inspiratory pressure, giving a square pressure waveform and a decelerating flow, which limits peak alveolar pressure and protects alveoli from overdistension. Choose the mode according to the target: a fixed volume for reliable ventilation, or a fixed pressure to limit barotrauma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Volume control",
+     "points": [
+      "Constant inspiratory flow",
+      "Preset tidal volume",
+      "Pressure varies with compliance",
+      "Parabolic pressure waveform"
+     ]
+    },
+    "right": {
+     "title": "Pressure control",
+     "points": [
+      "Preset inflation pressure",
+      "Decelerating flow",
+      "Square pressure waveform",
+      "Peak alveolar pressure capped"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**PEEP** keeps alveoli open at end expiration, reducing atelectasis and V/Q mismatch, so oxygenation improves. The price is raised intrathoracic pressure, which can reduce venous return and cardiac output, and overdistension can cause barotrauma. PEEP does not lower pneumothorax risk; it raises it. In ARDS, guidelines suggest high PEEP in moderate and severe disease, averaging about 15 cm H2O, with the PEEP and FiO2 table guiding titration.",
+   "say": "PEEP keeps alveoli open at end expiration, reducing atelectasis and V/Q mismatch, so oxygenation improves. The price is raised intrathoracic pressure, which can reduce venous return and cardiac output, and overdistension can cause barotrauma. PEEP does not lower pneumothorax risk; it raises it. In ARDS, guidelines suggest high PEEP in moderate and severe disease, averaging about 15 cm H2O, with the PEEP and FiO2 table guiding titration.",
+   "vis": null
+  },
+  {
+   "tx": "The Berlin definition of **ARDS** needs a known insult within one week, bilateral opacities not explained by effusions or collapse, and respiratory failure not fully explained by cardiac failure or fluid overload. Severity uses the PaO2/FiO2 ratio on PEEP or CPAP above 5 cm H2O: mild 200 to 300, moderate 100 to 200, and severe below 100. The cornerstone of ARDS care is low tidal volume ventilation of about 6 mL/kg predicted body weight, with plateau pressure kept below 30 cm H2O.",
+   "say": "The Berlin definition of ARDS needs a known insult within one week, bilateral opacities not explained by effusions or collapse, and respiratory failure not fully explained by cardiac failure or fluid overload. Severity uses the PaO2 to FiO2 ratio on PEEP or CPAP above 5 cm H2O: mild 200 to 300, moderate 100 to 200, and severe below 100. The cornerstone of ARDS care is low tidal volume ventilation of about 6 mL per kg predicted body weight, with plateau pressure kept below 30 cm H2O.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity",
+     "PaO2/FiO2 on PEEP above 5"
+    ],
+    "rows": [
+     [
+      "Mild",
+      "200 to 300"
+     ],
+     [
+      "Moderate",
+      "100 to 200"
+     ],
+     [
+      "Severe",
+      "Below 100"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weaning begins when the cause has resolved and the patient is haemodynamically stable. Useful predictors include a rapid shallow breathing index below about 100 per minute per litre, minute ventilation below 10 L/min, vital capacity above 10 mL/kg, and negative inspiratory force of at least minus 20 cm H2O. Oxygen saturation above 90 percent and PEEP below 5 cm H2O also support success. A spontaneous breathing trial, often with low pressure support, tests readiness before **extubation**. No single index is fully predictive.",
+   "say": "Weaning begins when the cause has resolved and the patient is haemodynamically stable. Useful predictors include a rapid shallow breathing index below about 100 per minute per litre, minute ventilation below 10 litres per minute, vital capacity above 10 mL per kg, and negative inspiratory force of at least minus 20 cm H2O. Oxygen saturation above 90 percent and PEEP below 5 cm H2O also support success. A spontaneous breathing trial, often with low pressure support, tests readiness before extubation. No single index is fully predictive.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cause resolved"
+     },
+     {
+      "id": "b",
+      "label": "Stable haemodynamics"
+     },
+     {
+      "id": "c",
+      "label": "Indices met"
+     },
+     {
+      "id": "d",
+      "label": "Spontaneous breathing trial"
+     },
+     {
+      "id": "e",
+      "label": "Extubate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-invasive ventilation uses a mask rather than an airway. **CPAP** is the simplest form and helps congestive heart failure and obstructive sleep apnoea. **BiPAP** provides inspiratory and expiratory pressures, with the expiratory level acting as PEEP. Switch to invasive ventilation if there is respiratory arrest, respiratory rate above 35 per minute, severe acidosis with pH below 7.25, life-threatening hypoxaemia, or failure to improve. Ventilator-associated pneumonia is pneumonia starting 48 hours or more after intubation.",
+   "say": "Non-invasive ventilation uses a mask rather than an airway. CPAP is the simplest form and helps congestive heart failure and obstructive sleep apnoea. BiPAP provides inspiratory and expiratory pressures, with the expiratory level acting as PEEP. Switch to invasive ventilation if there is respiratory arrest, respiratory rate above 35 per minute, severe acidosis with pH below 7.25, life-threatening hypoxaemia, or failure to improve. Ventilator-associated pneumonia is pneumonia starting 48 hours or more after intubation.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "52ddf02a-20d5-4cd6-ab77-f51d63a10817",
+  "b7ade264-8ad8-4cd0-9748-bb2bf2d0955b",
+  "1d17ce39-7cd3-4219-bfba-b475ef729ee6"
+ ],
+ "src": [],
+ "refs": [
+  "ARDS Definition Task Force (Ranieri VM et al.), JAMA 2012 Berlin definition",
+  "ARDSNet trial (2000), low tidal volume ventilation",
+  "Morgan and Mikhail's Clinical Anesthesiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 91
+ }
+}

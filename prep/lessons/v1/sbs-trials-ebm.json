@@ -1,0 +1,178 @@
+{
+ "v": 1,
+ "module": "sbs-trials-ebm",
+ "subject": "ss-biostatistics",
+ "title": "Clinical trials, meta-analysis and research ethics: core concepts for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Randomisation allocates participants to study arms by chance, which balances known and unknown confounders across groups. **Allocation concealment** hides the upcoming assignment from the person enrolling participants, so selection bias is prevented. **Blinding** keeps participants, caregivers and assessors unaware of the arm, reducing performance and detection bias. Blinding of the outcome assessor matters most for subjective endpoints.",
+   "say": "Randomisation allocates participants to study arms by chance, which balances known and unknown confounders across groups. Allocation concealment hides the upcoming assignment from the person enrolling participants, so selection bias is prevented. Blinding keeps participants, caregivers and assessors unaware of the arm, reducing performance and detection bias. Blinding of the outcome assessor matters most for subjective endpoints.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Protects against",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Randomisation",
+      "Confounding",
+      "Balances unknown factors too"
+     ],
+     [
+      "Allocation concealment",
+      "Selection bias",
+      "Done before enrolment"
+     ],
+     [
+      "Blinding",
+      "Performance and detection bias",
+      "Assessor blinding key for subjective outcomes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intention-to-treat** analysis keeps every participant in the group to which they were randomised, whatever they later did. **Per-protocol** analysis includes only those who adhered fully, which breaks randomisation and can exaggerate benefit. For non-inferiority trials, intention-to-treat tends to be conservative, so regulators often want both analyses to agree before accepting a result.",
+   "say": "Intention-to-treat analysis keeps every participant in the group to which they were randomised, whatever they later did. Per-protocol analysis includes only those who adhered fully, which breaks randomisation and can exaggerate benefit. For non-inferiority trials, intention-to-treat tends to be conservative, so regulators often want both analyses to agree before accepting a result.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intention-to-treat",
+     "points": [
+      "Analyses all as randomised",
+      "Preserves randomisation",
+      "Conservative for non-inferiority"
+     ]
+    },
+    "right": {
+     "title": "Per-protocol",
+     "points": [
+      "Includes adherent participants only",
+      "Can exaggerate benefit",
+      "Breaks randomisation balance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **noninferiority margin** is a prespecified limit of the largest loss of efficacy that is still acceptable. Non-inferiority is claimed when the upper bound of the confidence interval for the hazard or risk ratio lies below that margin. For example, a hazard ratio of 0.90 with interval 0.75 to 1.08 and margin 1.20 shows non-inferiority, because 1.08 is below 1.20. Superiority is claimed only if the interval also excludes 1.",
+   "say": "A noninferiority margin is a prespecified limit of the largest loss of efficacy that is still acceptable. Non-inferiority is claimed when the upper bound of the confidence interval for the hazard or risk ratio lies below that margin. For example, a hazard ratio of 0.90 with interval 0.75 to 1.08 and margin 1.20 shows non-inferiority, because 1.08 is below 1.20. Superiority is claimed only if the interval also excludes 1.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prespecify margin"
+     },
+     {
+      "id": "b",
+      "label": "Read CI upper bound"
+     },
+     {
+      "id": "c",
+      "label": "Upper bound below margin?"
+     },
+     {
+      "id": "d",
+      "label": "Non-inferiority shown"
+     },
+     {
+      "id": "e",
+      "label": "Interval excludes 1?"
+     },
+     {
+      "id": "f",
+      "label": "Superiority also shown"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f",
+      "yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **systematic review** collects all eligible studies using a predefined search and bias assessment. In a **forest plot**, each study shows its point estimate and confidence interval, and the diamond gives the pooled estimate. **I squared** describes the share of variation across studies due to heterogeneity rather than chance. High values, above about 75 percent, call for exploring sources and usually a random-effects model. A funnel plot with a missing lower-left gap suggests publication bias.",
+   "say": "A systematic review collects all eligible studies using a predefined search and bias assessment. In a forest plot, each study shows its point estimate and confidence interval, and the diamond gives the pooled estimate. I squared describes the share of variation across studies due to heterogeneity rather than chance. High values, above about 75 percent, call for exploring sources and usually a random-effects model. A funnel plot with a missing lower-left gap suggests publication bias.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Reads",
+     "Warning sign"
+    ],
+    "rows": [
+     [
+      "Forest plot",
+      "Estimates and CIs per study",
+      "Diamond crossing null"
+     ],
+     [
+      "I squared",
+      "Heterogeneity share",
+      "Above about 75 percent"
+     ],
+     [
+      "Funnel plot",
+      "Effect against precision",
+      "Gap in lower left"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clinical equipoise** means genuine professional uncertainty about which arm of a trial is better, and it justifies randomisation. Research ethics in India follow the ICMR National Ethical Guidelines, and trials must be registered on the **CTRI** before enrolment. Informed consent must be voluntary, and a participant may withdraw at any time. Under ICMR and standard practice, patient welfare outranks research goals.",
+   "say": "Clinical equipoise means genuine professional uncertainty about which arm of a trial is better, and it justifies randomisation. Research ethics in India follow the ICMR National Ethical Guidelines, and trials must be registered on the CTRI before enrolment. Informed consent must be voluntary, and a participant may withdraw at any time. Under ICMR and standard practice, patient welfare outranks research goals.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_cc337d38c96d",
+  "q_33cb1294230f",
+  "q_e8b29075ecd0"
+ ],
+ "src": [],
+ "refs": [
+  "ICMR National Ethical Guidelines for Biomedical and Health Research Involving Human Participants",
+  "CONSORT 2010 Statement",
+  "Declaration of Helsinki"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 51
+ }
+}

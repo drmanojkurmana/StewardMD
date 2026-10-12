@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "rad-hepatobiliary",
+ "subject": "radiology",
+ "title": "Hepatobiliary and pancreatic imaging: key patterns and investigations",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Ultrasound is the **investigation of choice** for suspected gallstones and most gallbladder disease, because it is highly accurate even for non-opaque stones and also assesses the liver and pancreas. Gallstones show a bright echo with posterior acoustic shadowing. The **wall-echo-shadow sign** describes a stone with a bright front wall echo followed by a dark shadow behind it.",
+   "say": "Ultrasound is the investigation of choice for suspected gallstones and most gallbladder disease. It is highly accurate, even for non-opaque stones, and also lets you look at the liver and pancreas. Gallstones show a bright echo with posterior acoustic shadowing. The wall-echo-shadow sign describes a stone with a bright front wall echo followed by a dark shadow behind it.",
+   "vis": null
+  },
+  {
+   "tx": "In acute cholecystitis, ultrasound is usually diagnostic, but a **HIDA scan** is the most accurate test when ultrasound is equivocal. On HIDA, the gallbladder fails to fill, which suggests cystic duct obstruction. **Porcelain gallbladder**, calcification of a chronically inflamed wall, is premalignant and is an indication for prophylactic cholecystectomy.",
+   "say": "In acute cholecystitis, ultrasound is usually diagnostic, but a HIDA scan is the most accurate test when ultrasound is equivocal. On HIDA, the gallbladder fails to fill, which suggests cystic duct obstruction. Porcelain gallbladder, calcification of a chronically inflamed wall, is premalignant and is an indication for prophylactic cholecystectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Test of choice, gallstones",
+      "Ultrasound"
+     ],
+     [
+      "Equivocal cholecystitis",
+      "HIDA scan"
+     ],
+     [
+      "Porcelain gallbladder",
+      "Premalignant, prophylactic cholecystectomy"
+     ],
+     [
+      "Limey bile",
+      "Not premalignant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MRCP** shows the pancreatobiliary tree without contrast or radiation and carries no risk of pancreatitis. In **primary sclerosing cholangitis**, multiple intrahepatic and extrahepatic strictures give a beaded, pruned appearance. In **Caroli disease**, saccular dilatations communicate with the biliary tree and show a central dot sign on contrast CT or MRI.",
+   "say": "MRCP shows the pancreatobiliary tree without contrast or radiation and carries no risk of pancreatitis. In primary sclerosing cholangitis, multiple intrahepatic and extrahepatic strictures give a beaded, pruned appearance. In Caroli disease, saccular dilatations communicate with the biliary tree and show a central dot sign on contrast CT or MRI.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary sclerosing cholangitis",
+     "points": [
+      "Multiple strictures, intra and extrahepatic",
+      "Pruned tree look on MRCP",
+      "Strong link with inflammatory bowel disease"
+     ]
+    },
+    "right": {
+     "title": "Caroli disease",
+     "points": [
+      "Saccular dilatations communicating with bile ducts",
+      "Central dot sign on contrast CT or MRI",
+      "Autosomal recessive congenital ductal plate malformation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For **acute pancreatitis**, the investigation of choice is **contrast-enhanced CT**, which grades severity using the Balthazar system. Fuzzy pancreatic outline, peripancreatic fluid and an oedematous gland are acute features. Pancreatic duct dilatation is a feature of chronic pancreatitis, not acute. In chronic pancreatitis, a **string of pearls** appearance of beaded ducts is seen.",
+   "say": "For acute pancreatitis, the investigation of choice is contrast-enhanced CT, which grades severity using the Balthazar system. A fuzzy pancreatic outline, peripancreatic fluid and an oedematous gland are acute features. Duct dilatation belongs to chronic pancreatitis rather than acute. In chronic pancreatitis, a string of pearls appearance of beaded ducts is seen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Balthazar grade",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "A",
+      "Normal pancreas"
+     ],
+     [
+      "B",
+      "Focal or diffuse enlargement"
+     ],
+     [
+      "C",
+      "Gland change with fat infiltration"
+     ],
+     [
+      "D",
+      "Single fluid collection"
+     ],
+     [
+      "E",
+      "Two or more fluid collections"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On multiphasic liver CT, the arterial phase shows **hypervascular lesions** such as hepatocellular carcinoma, which then show **washout** on portal venous and delayed phases. A **central scar** in focal nodular hyperplasia is a classic feature. Haemangioma shows **peripheral nodular enhancement** that fills in centripetally. MRI with hepatocyte-specific agents helps characterise FNH and adenoma.",
+   "say": "On multiphasic liver CT, the arterial phase shows hypervascular lesions such as hepatocellular carcinoma, which then show washout on portal venous and delayed phases. A central scar in focal nodular hyperplasia is a classic feature. Haemangioma shows peripheral nodular enhancement that fills in centripetally. MRI with hepatocyte-specific agents helps characterise focal nodular hyperplasia and adenoma.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "5af3502a-6ca3-46e9-aee0-a23927d514ca",
+  "69237049-1faf-47a3-81f7-e47069db0abb",
+  "f26ac0c0-e320-4c63-99ec-f312960ce03b"
+ ],
+ "src": [],
+ "refs": [
+  "Sutton, Textbook of Radiology and Imaging (17th edition)",
+  "Harrison's Principles of Internal Medicine",
+  "Clinical Medicine, Kumar and Clark"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 199
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "module": "cm-vital-statistics",
+ "subject": "community-medicine",
+ "title": "Vital statistics and health information: registration, SRS, NFHS, ICD and death certificates",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Vital statistics** describe the size, structure and events of a population: birth rate, death rate, sex ratio, age composition, natural growth rate and life expectancy at birth. They are the basis of community health planning. Data come from **civil registration**, the **census** taken every 10 years, and sample surveys such as the **Sample Registration System** and the **National Family Health Survey**. Know which source gives which measure.",
+   "say": "Vital statistics describe the size, structure and events of a population. They include birth rate, death rate, sex ratio, age composition, natural growth rate and life expectancy at birth. They are the basis of community health planning. Data come from civil registration, the census taken every 10 years, and sample surveys such as the Sample Registration System and the National Family Health Survey. Know which source gives which measure.",
+   "vis": null
+  },
+  {
+   "tx": "Under the **Registration of Births and Deaths Act, 1969**, which came into force on 1 April 1970, births and deaths must be registered compulsorily. The time limit for registering both birth and death is **21 days** uniformly across India. Heads of hospitals, nursing homes, jails and dharamshalas must report events in their institutions. Some sources quote 14 and 7 days, so rely on the 21-day rule for exams.",
+   "say": "Under the Registration of Births and Deaths Act, 1969, which came into force on 1 April 1970, births and deaths must be registered compulsorily. The time limit for registering both birth and death is 21 days uniformly across India. Heads of hospitals, nursing homes, jails and dharamshalas must report events in their institutions. Some sources quote 14 and 7 days, so rely on the 21-day rule for exams.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Event",
+     "Time limit",
+     "Reporter"
+    ],
+    "rows": [
+     [
+      "Birth",
+      "21 days",
+      "Parents or institution head"
+     ],
+     [
+      "Death",
+      "21 days",
+      "Relatives or institution head"
+     ],
+     [
+      "Marriage",
+      "30 days",
+      "As per local rules"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Sample Registration System (SRS)**, started in the mid-1960s, gives reliable birth and death rates at national and state level. It is a **dual record system**: continuous enumeration by an enumerator, plus an independent half-yearly survey by an investigator-supervisor. Its design is a unistage stratified simple random sample. The **NFHS** is a separate survey run at intervals of several years; NFHS-3 was conducted in 2005-06.",
+   "say": "The Sample Registration System, started in the mid-1960s, gives reliable birth and death rates at national and state level. It is a dual record system: continuous enumeration by an enumerator, plus an independent half-yearly survey by an investigator-supervisor. Its design is a unistage stratified simple random sample. The National Family Health Survey is a separate survey run at intervals of several years; NFHS-3 was conducted in 2005-06.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SRS",
+     "points": [
+      "Dual record system",
+      "Half-yearly independent survey",
+      "Gives birth and death rates"
+     ]
+    },
+    "right": {
+     "title": "NFHS",
+     "points": [
+      "Household survey of health indicators",
+      "NFHS-3 in 2005-06",
+      "Covers fertility and family planning"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **ICD** is produced by WHO and revised about once every 10 years. ICD-10 came into effect on 1 January 1993 and has **21 chapters**, with Chapter XXI covering factors influencing health status and contact with health services. ICD-11 was released in 2018 and has 26 chapters. Remember that the ICD is a **classification** of diseases used for coding, not a drug list.",
+   "say": "The ICD is produced by WHO and revised about once every 10 years. ICD-10 came into effect on 1 January 1993 and has 21 chapters, with Chapter XXI covering factors influencing health status and contact with health services. ICD-11 was released in 2018 and has 26 chapters. Remember that the ICD is a classification of diseases used for coding, not a drug list.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Version",
+     "Year",
+     "Chapters"
+    ],
+    "rows": [
+     [
+      "ICD-10",
+      "1993",
+      "21"
+     ],
+     [
+      "ICD-11",
+      "2018",
+      "26"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **WHO international death certificate** has four lines. Line Ia is the disease directly causing death, Line Ib the antecedent cause, Line Ic the **main underlying cause**, and Line II other significant contributing conditions. Line Ic is called the essence of the death certificate and is the key line for mortality coding. Example: renal failure, then diabetic nephropathy, then diabetes mellitus, with hypertension on Line II.",
+   "say": "The WHO international death certificate has four lines. Line Ia is the disease directly causing death, Line Ib the antecedent cause, Line Ic the main underlying cause, and Line II other significant contributing conditions. Line Ic is called the essence of the death certificate and is the key line for mortality coding. For example, renal failure, then diabetic nephropathy, then diabetes mellitus, with hypertension on Line II.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ia: direct cause"
+     },
+     {
+      "id": "b",
+      "label": "Ib: antecedent"
+     },
+     {
+      "id": "c",
+      "label": "Ic: underlying cause"
+     },
+     {
+      "id": "d",
+      "label": "II: contributing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Key rates use the **mid-year population**, estimated on 1 July, as the denominator. The **crude death rate** uses this population. The **stillbirth rate** counts foetal deaths weighing 1000 g or more, equal to about 28 weeks of gestation. Health information is used for planning and quantifying needs, not for measuring people's attitudes, which is a separate purpose of health information.",
+   "say": "Key rates use the mid-year population, estimated on 1 July, as the denominator. The crude death rate uses this population. The stillbirth rate counts foetal deaths weighing 1000 grams or more, equal to about 28 weeks of gestation. Health information is used for planning and quantifying needs, not for measuring people's attitudes, which is a separate purpose of health information.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "73e5b1d7-7b18-457d-8508-d6a97ac33af4",
+  "1f4ea27e-cc11-4791-b388-aa1655d6f8bf",
+  "c523d0a9-6d7f-4910-80e5-5a265f49fc6f"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine",
+  "Registration of Births and Deaths Act, 1969",
+  "WHO International Classification of Diseases, ICD-10 and ICD-11"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 85
+ }
+}

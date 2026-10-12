@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "pat-transfusion",
+ "subject": "pathology",
+ "title": "Blood banking and transfusion medicine: core principles for exams",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **ABO system** is the most clinically important blood group system, because antibodies against the missing antigen are naturally present in plasma. Group O has no A or B antigen, so its plasma carries anti-A and anti-B. Group AB has both antigens and no natural antibodies, so it is the universal recipient for red cells, while group O is the universal red cell donor. The **Rh D antigen** is the next most important antigen, and anti-D is not present naturally.",
+   "say": "The ABO system is the most clinically important blood group system, because antibodies against the missing antigen are naturally present in plasma. Group O has no A or B antigen, so its plasma carries anti-A and anti-B. Group AB has both antigens and no natural antibodies, so it is the universal recipient for red cells, while group O is the universal red cell donor. The Rh D antigen is the next most important antigen, and anti-D is not present naturally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Antigens on red cells",
+     "Natural plasma antibodies",
+     "Role for red cells"
+    ],
+    "rows": [
+     [
+      "O",
+      "None of A or B",
+      "Anti-A and anti-B",
+      "Universal donor"
+     ],
+     [
+      "A",
+      "A",
+      "Anti-B",
+      "Donates to A and AB"
+     ],
+     [
+      "B",
+      "B",
+      "Anti-A",
+      "Donates to B and AB"
+     ],
+     [
+      "AB",
+      "A and B",
+      "None",
+      "Universal recipient"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Bombay phenotype** (Oh) is a rare group in which the H antigen is absent, so A and B antigens cannot be made even if the ABO genes are inherited. These people have anti-H, anti-A and anti-B in their plasma. They look like group O on routine testing, but they must receive blood from another Bombay donor. Ordinary group O blood can cause a serious haemolytic reaction in them.",
+   "say": "The Bombay phenotype, also written Oh, is a rare group in which the H antigen is absent, so A and B antigens cannot be made even if the ABO genes are inherited. These people have anti-H, anti-A and anti-B in their plasma. They look like group O on routine testing, but they must receive blood from another Bombay donor. Ordinary group O blood can cause a serious haemolytic reaction in them.",
+   "vis": null
+  },
+  {
+   "tx": "Storage life depends on the preservative. **CPD** allows **21 days**, while **CPDA-1** extends red cell storage to **35 days** by adding adenine. **SAG-M** allows **42 days**. Packed red cells are stored at 2 to 6 degrees Celsius, and **FFP** must be kept at or below minus 25 degrees Celsius until thawed, since factors V and VIII are heat-labile. Cryoprecipitate is rich in **factor VIII**, **von Willebrand factor** and fibrinogen, making it useful for hypofibrinogenaemia.",
+   "say": "Storage life depends on the preservative. CPD allows 21 days, while CPDA-1 extends red cell storage to 35 days by adding adenine. SAG-M allows 42 days. Packed red cells are stored at 2 to 6 degrees Celsius, and FFP must be kept at or below minus 25 degrees Celsius until thawed, since factors V and VIII are heat-labile. Cryoprecipitate is rich in factor VIII, von Willebrand factor and fibrinogen, making it useful for hypofibrinogenaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Product",
+     "Key feature",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "Packed red cells",
+      "Store 2 to 6 C",
+      "Anaemia, blood loss"
+     ],
+     [
+      "FFP",
+      "Store at or below minus 25 C",
+      "Multiple factor deficiency, warfarin reversal"
+     ],
+     [
+      "Cryoprecipitate",
+      "Rich in factor VIII and fibrinogen",
+      "Hypofibrinogenaemia"
+     ],
+     [
+      "Platelet concentrate",
+      "Room temperature, short shelf life",
+      "Thrombocytopenia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Transfusion-related acute lung injury** (TRALI) occurs within 6 hours of transfusion, usually with plasma-rich products such as FFP and platelets. It is thought to be immune mediated, often from donor anti-HLA or anti-neutrophil antibodies. **TACO**, by contrast, is volume overload and is not immune mediated. Irradiation prevents **transfusion-associated graft versus host disease** in at-risk patients, and leukoreduction reduces febrile reactions.",
+   "say": "Transfusion related acute lung injury, or TRALI, occurs within 6 hours of transfusion, usually with plasma-rich products such as FFP and platelets. It is thought to be immune mediated, often from donor anti-HLA or anti-neutrophil antibodies. TACO, by contrast, is volume overload and is not immune mediated. Irradiation prevents transfusion associated graft versus host disease in at-risk patients, and leukoreduction reduces febrile reactions.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "f89b26fe-ce4b-45a8-b6ad-8db91902e7e5",
+  "61599f44-dcb2-465f-bfda-6b0229f5147e",
+  "18b726eb-09df-4dd1-8fb0-102b5de4dc53"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Dacie and Lewis Practical Haematology (Bain, Bates, Laffan, Lewis, editors)",
+  "Chapter on Transfusion Medicine in Robbins and Cotran Pathologic Basis of Disease (Kumar, Abbas, Aster, editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 149
+ }
+}

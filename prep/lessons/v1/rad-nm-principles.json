@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "rad-nm-principles",
+ "subject": "radiology",
+ "title": "Radionuclides and Nuclear Medicine Instrumentation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Isotopes share the same **atomic number** but differ in mass number. Isobars share mass number, isotones share neutron number, and isomers share both numbers but sit in different **energy states** within the nucleus. Recognising these four terms is a common NEET-PG starting point.",
+   "say": "Isotopes share the same atomic number but differ in mass number. Isobars share mass number, isotones share neutron number, and isomers share both numbers but sit in different energy states within the nucleus. Recognising these four terms is a common NEET-PG starting point.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Shared feature"
+    ],
+    "rows": [
+     [
+      "Isotopes",
+      "Same atomic number"
+     ],
+     [
+      "Isobars",
+      "Same mass number"
+     ],
+     [
+      "Isotones",
+      "Same neutron number"
+     ],
+     [
+      "Isomers",
+      "Same atomic and mass number"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radioactive emissions are alpha, beta, gamma and neutrons. Alpha particles are the **least penetrating** but most ionising when internalised. Beta particles are electrons stopped by a few millimetres of tissue. Gamma rays are high-energy electromagnetic waves with the highest penetration, which is why they are used for imaging.",
+   "say": "Radioactive emissions are alpha, beta, gamma and neutrons. Alpha particles are the least penetrating but most ionising when internalised. Beta particles are electrons stopped by a few millimetres of tissue. Gamma rays are high-energy electromagnetic waves with the highest penetration, which is why they are used for imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Emission",
+     "Penetration",
+     "Ionising power"
+    ],
+    "rows": [
+     [
+      "Alpha",
+      "Lowest",
+      "Highest"
+     ],
+     [
+      "Beta",
+      "Intermediate",
+      "Intermediate"
+     ],
+     [
+      "Gamma",
+      "Highest",
+      "Lowest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physical half-life is the time for radioactivity to fall by half. Tc-99m has a **physical half-life of 6 hours**, Fluorine-18 about 110 minutes, and Iodine-131 about 8 days. Biological half-life is the time the body takes to clear half of a substance, and the **effective half-life** combines both, always shorter than either alone.",
+   "say": "Physical half-life is the time for radioactivity to fall by half. Tc-99m has a physical half-life of 6 hours, Fluorine-18 about 110 minutes, and Iodine-131 about 8 days. Biological half-life is the time the body takes to clear half of a substance, and the effective half-life combines both, always shorter than either alone.",
+   "vis": null
+  },
+  {
+   "tx": "The **molybdenum-technetium generator** holds parent Molybdenum-99, which decays to give Technetium-99m. Tc-99m emits pure gamma radiation at a useful energy and has a short half-life, so it is the most widely used diagnostic radiopharmaceutical. Its uses include bone, liver, kidney and cardiac studies, and MIBI for myocardial perfusion.",
+   "say": "The molybdenum-technetium generator holds parent Molybdenum-99, which decays to give Technetium-99m. Tc-99m emits pure gamma radiation at a useful energy and has a short half-life, so it is the most widely used diagnostic radiopharmaceutical. Its uses include bone, liver, kidney and cardiac studies, and MIBI for myocardial perfusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Use",
+     "Agent"
+    ],
+    "rows": [
+     [
+      "Bone scan",
+      "Tc-99m MDP"
+     ],
+     [
+      "Liver scan",
+      "Tc-99m sulphur colloid"
+     ],
+     [
+      "Myocardial perfusion",
+      "Tc-99m MIBI"
+     ],
+     [
+      "Kidney study",
+      "Tc-99m DTPA"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A gamma camera detects gamma rays using a **sodium iodide scintillating crystal** coupled to photomultiplier tubes, and lead collimators define the direction of origin. Planar imaging and SPECT use gamma cameras, whereas PET uses paired 511 keV annihilation photons from positron emitters such as Fluorine-18 labelled FDG, produced in a cyclotron.",
+   "say": "A gamma camera detects gamma rays using a sodium iodide scintillating crystal coupled to photomultiplier tubes, and lead collimators define the direction of origin. Planar imaging and SPECT use gamma cameras, whereas PET uses paired 511 keV annihilation photons from positron emitters such as Fluorine-18 labelled FDG, produced in a cyclotron.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SPECT",
+     "points": [
+      "Gamma camera rotates around patient",
+      "Single photon emission",
+      "Uses Tc-99m, Tl-201, I-123"
+     ]
+    },
+    "right": {
+     "title": "PET",
+     "points": [
+      "Dedicated ring of detectors",
+      "Paired 511 keV photons",
+      "Uses Fluorine-18 FDG"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "12b450e4-1e44-4808-8d77-bcb8a887dcba",
+  "52d9eccf-370b-4c6e-b178-025534088313",
+  "aeeef03d-7bec-4a19-a1ce-596fa49a6fd1"
+ ],
+ "src": [],
+ "refs": [
+  "Bushong SC, Radiologic Science for Technologists (Textbook)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 81
+ }
+}

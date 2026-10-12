@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "phy-hearing-vestibular",
+ "subject": "physiology",
+ "title": "Hearing and vestibular function: high-yield physiology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **organ of Corti** sits on the basilar membrane inside the scala media and holds the auditory receptors. Its hair cells are arranged in one row of inner hair cells and three to four rows of outer hair cells. Each hair cell's stereocilia are embedded in the tectorial membrane. The scala media is filled with **endolymph**, a potassium-rich fluid that is electrically positive, at about +85 mV, because the stria vascularis secretes potassium into it.",
+   "say": "The organ of Corti sits on the basilar membrane inside the scala media and holds the auditory receptors. Its hair cells form one row of inner hair cells and three to four rows of outer hair cells. The stereocilia are embedded in the tectorial membrane. The scala media is filled with endolymph, a potassium-rich fluid that is electrically positive, at about plus 85 millivolts, because the stria vascularis secretes potassium into it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Inner hair cells",
+      "One row, mainly afferent"
+     ],
+     [
+      "Outer hair cells",
+      "Three to four rows"
+     ],
+     [
+      "Endocochlear potential",
+      "About +85 mV"
+     ],
+     [
+      "Fluid in scala media",
+      "Endolymph, high potassium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sound moves the basilar membrane, creating a shearing force between the reticular lamina and the tectorial membrane. The stereocilia bend and open **potassium channels**, so potassium enters and depolarises the hair cell. Voltage-gated calcium channels then open, calcium enters, and **glutamate** is released onto the eighth nerve. Inner hair cells supply about 90 to 95 percent of the afferent fibres.",
+   "say": "Sound moves the basilar membrane, creating a shearing force between the reticular lamina and the tectorial membrane. The stereocilia bend and open potassium channels, so potassium enters and depolarises the hair cell. Voltage gated calcium channels then open, calcium enters, and glutamate is released onto the eighth nerve. Inner hair cells supply about 90 to 95 percent of the afferent fibres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Basilar membrane moves"
+     },
+     {
+      "id": "b",
+      "label": "Stereocilia bend"
+     },
+     {
+      "id": "c",
+      "label": "K+ channels open"
+     },
+     {
+      "id": "d",
+      "label": "Depolarisation"
+     },
+     {
+      "id": "e",
+      "label": "Ca2+ enters"
+     },
+     {
+      "id": "f",
+      "label": "Glutamate released"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Frequency is coded by **place theory**. A travelling wave builds up along the basilar membrane and peaks at the point whose resonant frequency matches the sound. High-frequency sounds peak near the base by the oval window, while low frequencies travel to the apex near the helicotrema. The auditory pathway runs from the spiral ganglion to the cochlear nuclei, superior olivary complex, inferior colliculus, medial geniculate body and auditory cortex, Brodmann area 41.",
+   "say": "Frequency is coded by place theory. A travelling wave builds up along the basilar membrane and peaks at the point whose resonant frequency matches the sound. High frequencies peak near the base by the oval window, while low frequencies travel to the apex near the helicotrema. The auditory pathway runs from the spiral ganglion to the cochlear nuclei, superior olivary complex, inferior colliculus, medial geniculate body and auditory cortex, Brodmann area 41.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High frequency",
+     "points": [
+      "Peaks near base",
+      "Close to oval window",
+      "Short travel distance"
+     ]
+    },
+    "right": {
+     "title": "Low frequency",
+     "points": [
+      "Peaks near apex",
+      "Near helicotrema",
+      "Travels whole membrane"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The middle ear ossicles act as a **lever** that transfers energy from the large tympanic membrane to the small oval window, raising efficiency of transmission. Interference by the stapedius and tensor tympani muscles reduces this transfer. The Eustachian tube is separate and does not depend on the ossicles. Intensity of sound is measured in decibels.",
+   "say": "The middle ear ossicles act as a lever that transfers energy from the large tympanic membrane to the small oval window, raising the efficiency of transmission. Interference by the stapedius and tensor tympani muscles reduces this transfer. The Eustachian tube is separate and does not depend on the ossicles. Intensity of sound is measured in decibels.",
+   "vis": null
+  },
+  {
+   "tx": "The **otolith organs**, the utricle and saccule, detect linear acceleration, gravity and head tilt. Their macula contains hair cells beneath a membrane of calcium carbonate otoconia. The three **semicircular canals** sense angular acceleration. Each canal ends in an ampulla whose crista holds hair cells under a cupula. Endolymph inertia bends the cupula during rotation, and the canals sit at right angles to one another.",
+   "say": "The otolith organs, the utricle and saccule, detect linear acceleration, gravity and head tilt. Their macula contains hair cells beneath a membrane of calcium carbonate otoconia. The three semicircular canals sense angular acceleration. Each canal ends in an ampulla whose crista holds hair cells under a cupula. Endolymph inertia bends the cupula during rotation, and the canals sit at right angles to one another.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Receptor",
+     "Site",
+     "Detects"
+    ],
+    "rows": [
+     [
+      "Utricle and saccule",
+      "Macula",
+      "Gravity, linear acceleration"
+     ],
+     [
+      "Anterior, posterior, lateral canals",
+      "Ampulla, crista",
+      "Angular acceleration"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "24213f15-5b87-4c84-ada5-9649f0c4a86f",
+  "a2c1e82b-6615-42b5-8c9a-da5c952a5f3e",
+  "c00cdde7-a3e4-4a4e-8a98-e83e997428b9"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology",
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 57
+ }
+}

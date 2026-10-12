@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "pat-infectious-pathology",
+ "subject": "pathology",
+ "title": "Pathology of Infectious Diseases: Inclusions, Granulomas and Special Stains",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Viral inclusions are the classic histological clue to a specific virus. **Cowdry bodies** are intranuclear inclusions seen in herpes simplex and varicella-zoster infections, and in cytomegalovirus infection the nucleus shows an **owl eye** appearance. **Negri bodies** are intracytoplasmic, eosinophilic inclusions that are pathognomonic of rabies, found in hippocampal pyramidal cells and Purkinje cells.",
+   "say": "Viral inclusions are the classic histological clue to a specific virus. Cowdry bodies are intranuclear inclusions seen in herpes simplex and varicella-zoster infections, and in cytomegalovirus infection the nucleus shows an owl eye appearance. Negri bodies are intracytoplasmic, eosinophilic inclusions that are pathognomonic of rabies, found in hippocampal pyramidal cells and Purkinje cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inclusion",
+     "Virus",
+     "Location"
+    ],
+    "rows": [
+     [
+      "Cowdry bodies",
+      "Herpes simplex, varicella-zoster",
+      "Intranuclear"
+     ],
+     [
+      "Owl eye cells",
+      "Cytomegalovirus",
+      "Intranuclear"
+     ],
+     [
+      "Negri bodies",
+      "Rabies",
+      "Intracytoplasmic"
+     ],
+     [
+      "Warthin-Finkeldey cells",
+      "Measles",
+      "Multinucleate giant cells in lymphoid tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Herpes simplex virus causes multinucleated squamous cells with **ground glass** nuclei and eosinophilic to basophilic inclusions. Warthin-Finkeldey cells are multinucleate giant cells found in hyperplastic lymph nodes early in **measles**. Durck granulomas, collections of microglia around demyelinated areas, are seen in cerebral malaria caused by Plasmodium falciparum.",
+   "say": "Herpes simplex virus causes multinucleated squamous cells with ground glass nuclei and eosinophilic to basophilic inclusions. Warthin-Finkeldey cells are multinucleate giant cells found in hyperplastic lymph nodes early in measles. Durck granulomas, collections of microglia around demyelinated areas, are seen in cerebral malaria caused by Plasmodium falciparum.",
+   "vis": null
+  },
+  {
+   "tx": "Granulomatous and chronic infections show distinctive bodies. **Michaelis-Gutmann bodies** are laminated, calcified concretions within enlarged macrophage lysosomes, seen in **malakoplakia**, which is classically linked to E. coli infection and immunosuppression. Sulfur granules, formed from branching filaments, suggest Actinomyces, and Mickey Mouse ear budding yeasts suggest paracoccidioidomycosis.",
+   "say": "Granulomatous and chronic infections show distinctive bodies. Michaelis-Gutmann bodies are laminated, calcified concretions within enlarged macrophage lysosomes, seen in malakoplakia, which is classically linked to E. coli infection and immunosuppression. Sulfur granules, formed from branching filaments, suggest Actinomyces, and Mickey Mouse ear budding yeasts suggest paracoccidioidomycosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Malakoplakia",
+     "points": [
+      "Sheets of macrophages with PAS-positive granules",
+      "Michaelis-Gutmann bodies",
+      "Often E. coli, immunosuppressed patients",
+      "Bladder most common site"
+     ]
+    },
+    "right": {
+     "title": "Actinomycosis",
+     "points": [
+      "Sulfur granules",
+      "Branching filaments",
+      "Chronic abscesses and draining sinuses",
+      "Mandible and abdomen involved"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Special stains help reveal organisms in tissue. **GMS** (Gomori methenamine silver) and **PAS** are the two most common stains for fungi in tissue sections, and the presence of fungus in tissue is strong evidence of invasive infection. **Mucicarmine** stains the capsule of Cryptococcus neoformans. PAS stains glycogen, carbohydrates and mucins, but not lipids.",
+   "say": "Special stains help reveal organisms in tissue. GMS, Gomori methenamine silver, and PAS are the two most common stains for fungi in tissue sections, and the presence of fungus in tissue is strong evidence of invasive infection. Mucicarmine stains the capsule of Cryptococcus neoformans. PAS stains glycogen, carbohydrates and mucins, but not lipids.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stain",
+     "Target",
+     "Use"
+    ],
+    "rows": [
+     [
+      "GMS",
+      "Fungal cell wall",
+      "Fungi in tissue"
+     ],
+     [
+      "PAS",
+      "Carbohydrates, mucins",
+      "Fungi, glycogen"
+     ],
+     [
+      "Mucicarmine",
+      "Polysaccharide capsule",
+      "Cryptococcus"
+     ],
+     [
+      "Masson Fontana",
+      "Melanin",
+      "Melanin and argentaffin cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prions are **infectious proteins** devoid of nucleic acid, and they are highly resistant to heat, irradiation and formalin. Prion diseases show neurodegeneration and spongiform change, with no inflammatory response and a long incubation period. Measles-related subacute sclerosing panencephalitis is a separate entity caused by the measles virus.",
+   "say": "Prions are infectious proteins devoid of nucleic acid, and they are highly resistant to heat, irradiation and formalin. Prion diseases show neurodegeneration and spongiform change, with no inflammatory response and a long incubation period. Measles-related subacute sclerosing panencephalitis is a separate entity caused by the measles virus.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "3adcd0e9-6770-4767-aab6-7ca55db64a7e",
+  "4d992e48-65ac-472c-909a-0e2b7ccba0a4",
+  "348c6688-2336-4519-9d2b-678850df3565"
+ ],
+ "src": [],
+ "refs": [
+  "Harsh Mohan, Textbook of Pathology",
+  "Rubin's Pathology: Clinicopathologic Foundations of Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 170
+ }
+}

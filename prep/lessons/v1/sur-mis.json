@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "sur-mis",
+ "subject": "surgery",
+ "title": "Minimally invasive surgery: pneumoperitoneum, insufflation gas and laparoscopic physiology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Laparoscopy needs a **pneumoperitoneum**, a controlled gas distension of the abdomen, to lift the wall off the organs and give a working space. Carbon dioxide is the gas of choice. It is highly diffusible, cleared quickly by the lungs, does not support combustion, and is cheap. Room air was used historically but is now avoided because of air embolism risk.",
+   "say": "Laparoscopy needs a pneumoperitoneum, a controlled gas distension of the abdomen, to lift the wall off the organs and give a working space. Carbon dioxide is the gas of choice. It is highly diffusible, cleared quickly by the lungs, does not support combustion, and is cheap. Room air was used historically but is now avoided because of air embolism risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gas",
+     "Key feature",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Carbon dioxide",
+      "Diffusible, cleared by lungs",
+      "Gas of choice"
+     ],
+     [
+      "Nitrous oxide",
+      "Mild analgesia",
+      "Avoid with diathermy"
+     ],
+     [
+      "Room air",
+      "Poorly soluble in blood",
+      "Embolism risk, obsolete"
+     ],
+     [
+      "Helium, argon",
+      "Inert, low solubility",
+      "Rarely used, costly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pneumoperitoneum is usually created with a **Veress needle** at the umbilicus or by an open Hasson technique. The Hasson method uses a cut-down and a blunt cannula, avoiding blind puncture of deeper structures. Intra-abdominal pressure is kept around 12 to 15 mm Hg, and should never exceed 20 mm Hg, because higher pressure reduces venous return and renal flow.",
+   "say": "Pneumoperitoneum is usually created with a Veress needle at the umbilicus or by an open Hasson technique. The Hasson method uses a cut-down and a blunt cannula, avoiding blind puncture of deeper structures. Intra-abdominal pressure is kept around 12 to 15 mm Hg, and should never exceed 20 mm Hg, because higher pressure reduces venous return and renal flow.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Umbilical access"
+     },
+     {
+      "id": "b",
+      "label": "Veress or Hasson entry"
+     },
+     {
+      "id": "c",
+      "label": "Insufflate CO2"
+     },
+     {
+      "id": "d",
+      "label": "Keep 12 to 15 mm Hg"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gas embolism** is a rare but serious complication, most often during insufflation when gas enters an open vessel. Suspect it if pO2 or end-tidal CO2 falls suddenly or hypotension appears. A classic example is a splenic laceration bleeding into the gas path. Treatment is to stop insufflation, place the patient left lateral and head down, and aspirate from the right ventricle via a central line.",
+   "say": "Gas embolism is a rare but serious complication, most often during insufflation when gas enters an open vessel. Suspect it if pO2 or end-tidal CO2 falls suddenly or hypotension appears. A classic example is a splenic laceration bleeding into the gas path. Treatment is to stop insufflation, place the patient left lateral and head down, and aspirate from the right ventricle via a central line.",
+   "vis": null
+  },
+  {
+   "tx": "Pneumoperitoneum produces **physiological changes** that matter during **laparoscopy**. Raised **intra-abdominal pressure** pushes the diaphragm upward, reducing **functional residual capacity**, and it lowers **renal** and **splanchnic perfusion**. **Carbon dioxide** is absorbed into the blood, so **hypercapnia** and **acidosis** can develop. Steep **reverse Trendelenburg** improves exposure but raises **venous thromboembolism** risk during long cases. Residual gas irritating the diaphragm explains **shoulder tip pain** after surgery.",
+   "say": "Pneumoperitoneum produces physiological changes that matter during laparoscopy. Raised intra-abdominal pressure pushes the diaphragm upward, reducing functional residual capacity, and it lowers renal and splanchnic perfusion. Carbon dioxide is absorbed into the blood, so hypercapnia and acidosis can develop. Steep reverse Trendelenburg improves exposure but raises venous thromboembolism risk during long cases. Residual gas irritating the diaphragm explains shoulder tip pain after surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gas-specific effects",
+     "points": [
+      "Hypercapnia and respiratory acidosis",
+      "Carbonic acid irritates the diaphragm",
+      "Shoulder tip pain after surgery"
+     ]
+    },
+    "right": {
+     "title": "Pressure-specific effects",
+     "points": [
+      "Lower functional residual capacity",
+      "Reduced renal and splanchnic perfusion",
+      "Impaired venous return on steep tilt"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Laparoscopic cholecystectomy history matters for exams. **Erich Muhe** performed the first in 1985 (some sources say 1982), while **Philippe Mouret** performed the first video laparoscopic cholecystectomy in 1987. Kurt Semm, the father of pelviscopy, performed the first laparoscopic appendectomy in 1980. Dr Eddie Reddick reported 100 cases in 1989. NOTES uses natural orifices such as the mouth or vagina for entry, not the umbilicus.",
+   "say": "Laparoscopic cholecystectomy history matters for exams. Erich Muhe performed the first in 1985, though some sources say 1982, while Philippe Mouret performed the first video laparoscopic cholecystectomy in 1987. Kurt Semm, the father of pelviscopy, performed the first laparoscopic appendectomy in 1980. Dr Eddie Reddick reported 100 cases in 1989. NOTES uses natural orifices such as the mouth or vagina for entry, not the umbilicus.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0ee35b3e-a64d-4b67-83a9-49bb93c92f9d",
+  "48b75502-6f9d-442c-b062-46e35ebb860f",
+  "097ad71d-fdf1-4768-9002-51c44ab6a154"
+ ],
+ "src": [],
+ "refs": [
+  "Mastery of Endoscopic and Laparoscopic Surgery (Soper, Swanstrom, Eubanks)",
+  "Bailey and Love's Short Practice of Surgery (Williams, Bulstrode)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 75
+ }
+}

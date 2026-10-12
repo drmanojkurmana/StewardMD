@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "module": "ans-preop",
+ "subject": "anaesthesia",
+ "title": "Preoperative assessment and premedication",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Preoperative assessment aims to find **risks** before anaesthesia. The **ASA physical status** grade is the simplest and most widely used system. It is a physical status grade, not a measure of mental state or lung capacity. Grade 1 is a normal healthy patient, grade 2 has mild systemic disease without limitation, grade 3 has severe disease limiting activity but not incapacitating, and grade 4 has disease that is a constant threat to life.",
+   "say": "Preoperative assessment aims to find risks before anaesthesia. The ASA physical status grade is the simplest and most widely used system. It describes the physical status of the patient, not mental state or lung capacity. Grade 1 is a normal healthy patient. Grade 2 has mild systemic disease without limitation of activity. Grade 3 has severe disease that limits activity but is not incapacitating. Grade 4 has disease that is a constant threat to life. Grade 5 is moribund, and grade 6 is a brain dead organ donor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ASA grade",
+     "Typical picture"
+    ],
+    "rows": [
+     [
+      "1",
+      "Normal healthy person"
+     ],
+     [
+      "2",
+      "Mild disease, no limit on activity"
+     ],
+     [
+      "3",
+      "Severe disease limiting activity"
+     ],
+     [
+      "4",
+      "Life threatening disease"
+     ],
+     [
+      "5",
+      "Moribund, not expected to survive without surgery"
+     ],
+     [
+      "6",
+      "Brain dead organ donor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Mallampati classification** predicts difficulty in **intubation**, not ventilation or cardiac risk. It is judged by how much of the oral structures is visible with the mouth open. Class I shows the full palatal arch and pillars, while class IV shows only the hard palate. Class III shows only the soft and hard palates.",
+   "say": "The Mallampati classification predicts difficulty in intubation, not ventilation or cardiac risk. It is judged by how much of the oral structures is visible with the mouth open. Class one shows the full palatal arch and the pillars. Class four shows only the hard palate. Class three shows only the soft and hard palates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Visible structures"
+    ],
+    "rows": [
+     [
+      "I",
+      "Full palatal arch and pillars"
+     ],
+     [
+      "II",
+      "Upper pillars and most of uvula"
+     ],
+     [
+      "III",
+      "Soft and hard palate only"
+     ],
+     [
+      "IV",
+      "Hard palate only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Routine tests include blood count and renal function. Men over 40 and women over 45 need an ECG and chest X-ray. For a patient with a **drug eluting stent**, elective surgery is usually delayed for one year. A bare metal stent needs about one month. Clopidogrel is stopped about **7 days** before surgery, while aspirin is usually continued.",
+   "say": "Routine tests include blood count and renal function. Men over 40 and women over 45 need an ECG and chest X-ray. For a patient with a drug eluting stent, elective surgery is usually delayed for one year. A bare metal stent needs about one month. Clopidogrel is stopped about seven days before surgery, while aspirin is usually continued.",
+   "vis": null
+  },
+  {
+   "tx": "Premedication aims to reduce anxiety, secretions, vagal reflexes and aspiration risk. **Lorazepam** is the most commonly used sedative and gives the longest amnesia, while **midazolam** suits day care surgery. **Glycopyrrolate** is preferred over atropine and hyoscine for secretions because it does not cross the blood brain barrier. **Hyoscine** is the most potent antiemetic.",
+   "say": "Premedication aims to reduce anxiety, secretions, vagal reflexes and aspiration risk. Lorazepam is the most commonly used sedative and gives the longest amnesia, while midazolam suits day care surgery. Glycopyrrolate is preferred over atropine and hyoscine for secretions because it does not cross the blood brain barrier. Hyoscine is the most potent antiemetic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sedatives and drugs",
+     "points": [
+      "Lorazepam most used",
+      "Midazolam for day care",
+      "Glycopyrrolate for secretions"
+     ]
+    },
+    "right": {
+     "title": "Antiemetics",
+     "points": [
+      "Hyoscine most potent",
+      "Metoclopramide",
+      "Ondansetron"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "226b3ae8-bc2d-4c66-b2a2-483fd3607e30",
+  "33cbbb23-54ed-449b-8da8-ee4395883862",
+  "f40f86c2-439d-4abf-acfc-ce2f1ee4a413"
+ ],
+ "src": [],
+ "refs": [
+  "American Society of Anesthesiologists physical status classification",
+  "AHA/ACC guideline on perioperative cardiovascular evaluation for noncardiac surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 170
+ }
+}

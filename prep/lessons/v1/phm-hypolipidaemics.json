@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-hypolipidaemics",
+ "subject": "pharmacology",
+ "title": "Hypolipidaemic drugs: mechanisms, key statins and adverse effects",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Hypolipidaemic drugs lower **LDL cholesterol** or **triglycerides**, and the choice depends on the lipid abnormality. **Statins** are the most potent LDL-lowering class. They competitively inhibit **HMG-CoA reductase**, the rate-limiting enzyme of cholesterol synthesis, which raises hepatic LDL receptor expression. Statins are taken with food to enhance absorption, except pravastatin, whose absorption is minimally affected.",
+   "say": "Hypolipidaemic drugs lower LDL cholesterol or triglycerides, and the choice depends on the lipid abnormality. Statins are the most potent LDL-lowering class. They competitively inhibit HMG-CoA reductase, the rate-limiting enzyme of cholesterol synthesis, which raises hepatic LDL receptor expression. Food enhances statin absorption, except for pravastatin, whose absorption is minimally affected.",
+   "vis": null
+  },
+  {
+   "tx": "Statins differ in half-life and handling. **Rosuvastatin** has the longest half-life, about 19 hours, and is mostly excreted unchanged in faeces. **Atorvastatin** is also long-acting and has active metabolites, so it can be taken at any time of day. **Pravastatin** is hydrophilic and penetrates the CNS poorly. **Simvastatin** and **lovastatin** are lipophilic and are given at night.",
+   "say": "Statins differ in half-life and handling. Rosuvastatin has the longest half-life, about 19 hours, and is mostly excreted unchanged in faeces. Atorvastatin is also long-acting and has active metabolites, so it can be taken at any time of day. Pravastatin is hydrophilic and penetrates the central nervous system poorly. Simvastatin and lovastatin are lipophilic and are usually given at night.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Statin",
+     "Relative feature",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Rosuvastatin",
+      "Longest half-life",
+      "Mostly faecal excretion"
+     ],
+     [
+      "Atorvastatin",
+      "Long-acting, active metabolites",
+      "Any time of day"
+     ],
+     [
+      "Pravastatin",
+      "Hydrophilic",
+      "Least CNS entry"
+     ],
+     [
+      "Simvastatin",
+      "Lipophilic, CYP3A4",
+      "Give at night"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Statin toxicity centres on **myopathy** and **rhabdomyolysis**, with muscle pain and myoglobinuria. Fibric acid derivatives carry a smaller but real myopathy risk, particularly when combined with statins. Niacin rarely causes myopathy. Monitor transaminases with statin use and avoid combining statins with fibrates where possible.",
+   "say": "Statin toxicity centres on myopathy and rhabdomyolysis, with muscle pain and myoglobin in the urine. Fibric acid derivatives carry a smaller but real myopathy risk, particularly when combined with statins. Niacin rarely causes myopathy. Transaminases should be monitored during statin use.",
+   "vis": null
+  },
+  {
+   "tx": "**Niacin** (nicotinic acid, not niacinamide) raises HDL more than any other agent and lowers Lp(a), but its most frequent effect is cutaneous flushing, often facial. High doses worsen glycaemic control and insulin resistance, so it should be avoided in diabetics. **Ezetimibe** blocks intestinal cholesterol uptake by inhibiting NPC1L1 and is added to a statin when further LDL lowering or statin intolerance applies. **Bile acid resins** like cholestyramine and colesevelam can raise triglycerides.",
+   "say": "Niacin, which is nicotinic acid and not niacinamide, raises HDL more than any other agent and lowers lipoprotein a, but its most frequent effect is flushing, often facial. High doses worsen glycaemic control, so it should be avoided in diabetics. Ezetimibe blocks intestinal cholesterol uptake by inhibiting NPC1L1 and is added to a statin when further LDL lowering is needed or statins are not tolerated. Bile acid resins such as cholestyramine and colesevelam can raise triglycerides.",
+   "vis": null
+  },
+  {
+   "tx": "Newer agents include **PCSK9 inhibitors**, such as **evolocumab** and alirocumab. These monoclonal antibodies block PCSK9, a protein that normally breaks down LDL receptors, so more receptors remain on liver cells and LDL is cleared from the blood more efficiently. They are injected and reserved for patients who cannot reach their target with maximal oral therapy. **Omega-3 fatty acids** mainly lower triglycerides, and common effects include dyspepsia, diarrhoea and fishy breath.",
+   "say": "Newer agents include PCSK9 inhibitors, such as evolocumab and alirocumab. These monoclonal antibodies block PCSK9, a protein that normally breaks down LDL receptors, so more receptors stay on liver cells and LDL is cleared from the blood more efficiently. They are injected and reserved for patients who cannot reach their target with maximal oral therapy. Omega-3 fatty acids mainly lower triglycerides, and common effects include dyspepsia, diarrhoea and fishy breath.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "667cea8d-f188-443b-8313-3a34e4713e0c",
+  "f196ff59-2196-4fd8-bc54-b48aa0acd09b",
+  "0f3a3c0c-9a45-4e44-86f7-f25cd72a371f"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung's Basic and Clinical Pharmacology",
+  "KDT Pharmacology",
+  "Essentials of Medical Pharmacology (Tripathi)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 133
+ }
+}

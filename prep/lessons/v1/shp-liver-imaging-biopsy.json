@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "shp-liver-imaging-biopsy",
+ "subject": "ss-hepatology",
+ "title": "Liver imaging, elastography and biopsy: non-invasive staging to histology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Non-invasive assessment of **liver fibrosis** starts with a simple blood-based score. The **FIB-4 index** combines age, AST, ALT and platelet count. A score below 1.3 makes advanced fibrosis unlikely, while a score of 2.67 or higher indicates moderate to high risk. Scores between these thresholds need a second-line test, most often **vibration-controlled transient elastography**, which measures liver stiffness in kilopascals.",
+   "say": "Non-invasive assessment of liver fibrosis starts with a simple blood-based score. The FIB-4 index combines age, AST, ALT and platelet count. A score below 1.3 makes advanced fibrosis unlikely, while a score of 2.67 or higher indicates moderate to high risk. Scores between these thresholds need a second-line test, most often vibration-controlled transient elastography, which measures liver stiffness in kilopascals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "What it measures",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "FIB-4",
+      "Age, AST, ALT, platelets",
+      "First-line blood screen"
+     ],
+     [
+      "Transient elastography",
+      "Liver stiffness (kPa)",
+      "Second-line staging"
+     ],
+     [
+      "Controlled attenuation parameter",
+      "Hepatic steatosis (dB/m)",
+      "Fat grading alongside stiffness"
+     ],
+     [
+      "ELF test",
+      "Matrix turnover markers",
+      "Serum alternative to imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normal aminotransferases do not exclude **advanced fibrosis**. Many patients with MASLD have near-normal ALT yet significant histological disease, so enzymes alone must never be used to reassure. The **controlled attenuation parameter** quantifies steatosis, and shear wave elastography or MR elastography can stage fibrosis when transient elastography is unreliable, for example in obesity or ascites.",
+   "say": "Normal aminotransferases do not exclude advanced fibrosis. Many patients with MASLD have near-normal ALT yet significant histological disease, so enzymes alone must never be used to reassure. The controlled attenuation parameter quantifies steatosis, and shear wave elastography or MR elastography can stage fibrosis when transient elastography is unreliable, for example in obesity or ascites.",
+   "vis": null
+  },
+  {
+   "tx": "Imaging also helps with focal lesions. **LI-RADS** standardises the reporting of liver lesions in at-risk patients, typically cirrhosis or chronic hepatitis B. A lesion showing **arterial phase hyperenhancement** with washout on delayed phases, and size over 1 cm, is classified as a high-probability hepatocellular carcinoma. Such lesions can often be diagnosed without biopsy.",
+   "say": "Imaging also helps with focal lesions. LI-RADS standardises the reporting of liver lesions in at-risk patients, typically cirrhosis or chronic hepatitis B. A lesion showing arterial phase hyperenhancement with washout on delayed phases, and size over 1 cm, is classified as a high-probability hepatocellular carcinoma. Such lesions can often be diagnosed without biopsy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cirrhosis or at-risk liver"
+     },
+     {
+      "id": "b",
+      "label": "Lesion over 1 cm"
+     },
+     {
+      "id": "c",
+      "label": "Arterial hyperenhancement"
+     },
+     {
+      "id": "d",
+      "label": "Washout on delayed phase"
+     },
+     {
+      "id": "e",
+      "label": "LI-RADS 5 HCC"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interpret the histology carefully. **Lobular necro-inflammation** lies within the lobule away from portal tracts and reflects ongoing hepatocyte injury, while **interface hepatitis** affects the limiting plate. Both raise activity scores. Fibrosis stage, not steatosis or enzyme level, is the strongest predictor of liver-related death, so it guides surveillance and treatment decisions.",
+   "say": "Interpret the histology carefully. Lobular necro-inflammation lies within the lobule away from portal tracts and reflects ongoing hepatocyte injury, while interface hepatitis affects the limiting plate. Both raise activity scores. Fibrosis stage, not steatosis or enzyme level, is the strongest predictor of liver-related death, so it guides surveillance and treatment decisions.",
+   "vis": null
+  },
+  {
+   "tx": "Remember the **MASLD** definition: hepatic steatosis, absence of significant alcohol intake, and at least one cardiometabolic risk factor. Patients with advanced fibrosis need surveillance for **hepatocellular carcinoma** and varices, and cardiovascular risk reduction is a priority because it is the leading cause of death. Weight loss of at least 10 percent is needed for histological fibrosis regression.",
+   "say": "Remember the MASLD definition: hepatic steatosis, absence of significant alcohol intake, and at least one cardiometabolic risk factor. Patients with advanced fibrosis need surveillance for hepatocellular carcinoma and varices, and cardiovascular risk reduction is a priority because it is the leading cause of death. Weight loss of at least 10 percent is needed for histological fibrosis regression.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_27a88e326f44",
+  "q_1935f4808f0a",
+  "q_3911b9b7d42a"
+ ],
+ "src": [],
+ "refs": [
+  "Baveno VII consensus on portal hypertension",
+  "AASLD Practice Guidance on MASLD",
+  "EASL Clinical Practice Guidelines on non-invasive tests for liver disease",
+  "LI-RADS v2018 (American College of Radiology)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 93
+ }
+}

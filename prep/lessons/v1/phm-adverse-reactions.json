@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "phm-adverse-reactions",
+ "subject": "pharmacology",
+ "title": "Adverse drug reactions, interactions and pharmacogenetics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Adverse drug reactions are classified by mechanism. **Type A** reactions are augmented, dose-related and predictable, such as postural hypotension or hypoglycaemia, and can occur in everyone. **Type B** reactions are bizarre, not dose-related and occur only in some people; **idiosyncrasy** and **drug allergy** are examples. Type C is chronic, Type D is delayed, such as teratogenesis or carcinogenesis, and Type E is withdrawal on stopping, as with clonidine.",
+   "say": "Adverse drug reactions are classified by mechanism. Type A reactions are augmented, dose-related and predictable, such as postural hypotension or hypoglycaemia, and can occur in everyone. Type B reactions are bizarre, not dose-related and occur only in some people. Idiosyncrasy and drug allergy are examples. Type C is chronic, Type D is delayed, such as teratogenesis or carcinogenesis, and Type E is withdrawal on stopping, as with clonidine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Feature",
+     "Example"
+    ],
+    "rows": [
+     [
+      "A",
+      "Dose-related, predictable",
+      "Postural hypotension"
+     ],
+     [
+      "B",
+      "Unusual, not dose-related",
+      "Drug allergy"
+     ],
+     [
+      "C",
+      "Long-term exposure",
+      "Analgesic nephropathy"
+     ],
+     [
+      "D",
+      "Delayed",
+      "Teratogenesis"
+     ],
+     [
+      "E",
+      "On stopping",
+      "Clonidine withdrawal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Teratogenicity** depends on timing. The embryonic period, roughly the first trimester, is the most vulnerable because organogenesis occurs then. Before day 14 an insult usually causes miscarriage rather than malformation. **Thalidomide** was the classic teratogen, causing **phocomelia** (seal-like limbs) when given around days 34 to 51 after the last menstrual period. It was withdrawn, then reintroduced for multiple myeloma and erythema nodosum leprosum.",
+   "say": "Teratogenicity depends on timing. The embryonic period, roughly the first trimester, is the most vulnerable because organogenesis occurs then. Before day 14 an insult usually causes miscarriage rather than malformation. Thalidomide was the classic teratogen, causing phocomelia, meaning seal-like limbs, when given around days 34 to 51 after the last menstrual period. It was withdrawn, then reintroduced for multiple myeloma and erythema nodosum leprosum.",
+   "vis": null
+  },
+  {
+   "tx": "**Pharmacogenetics** explains why patients differ in drug response. **G6PD deficiency** causes haemolysis with drugs such as primaquine, dapsone, nalidixic acid, nitrofurantoin and sulfonamides, but not with chloroquine or corticosteroids. **Slow acetylators** accumulate drugs such as isoniazid, risking toxicity. **Pseudocholinesterase deficiency** prolongs suxamethonium apnoea. **Malignant hyperthermia** is triggered by volatile anaesthetics and suxamethonium through a ryanodine receptor defect.",
+   "say": "Pharmacogenetics explains why patients differ in drug response. G6PD deficiency causes haemolysis with drugs such as primaquine, dapsone, nalidixic acid, nitrofurantoin and sulfonamides, but not with chloroquine or corticosteroids. Slow acetylators accumulate drugs such as isoniazid, risking toxicity. Pseudocholinesterase deficiency prolongs suxamethonium apnoea. Malignant hyperthermia is triggered by volatile anaesthetics and suxamethonium through a ryanodine receptor defect.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Trigger drugs",
+     "Result"
+    ],
+    "rows": [
+     [
+      "G6PD deficiency",
+      "Primaquine, dapsone",
+      "Haemolysis"
+     ],
+     [
+      "Slow acetylators",
+      "Isoniazid",
+      "Toxicity"
+     ],
+     [
+      "Pseudocholinesterase deficiency",
+      "Suxamethonium",
+      "Prolonged apnoea"
+     ],
+     [
+      "Malignant hyperthermia",
+      "Volatile anaesthetics",
+      "Hypermetabolic crisis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Drug interactions** matter most with warfarin. Broad-spectrum antibiotics reduce vitamin K producing gut flora, so the anticoagulant effect increases. **Cimetidine** inhibits warfarin metabolism and raises prothrombin time. **Oral contraceptives** containing estrogen increase clotting factor synthesis and reduce warfarin effect. Phenytoin reduces contraceptive efficacy by enzyme induction. Ketoconazole and erythromycin inhibit CYP3A4, and combining them with astemizole or cisapride risks **torsades de pointes**.",
+   "say": "Drug interactions matter most with warfarin. Broad-spectrum antibiotics reduce vitamin K producing gut flora, so the anticoagulant effect increases. Cimetidine inhibits warfarin metabolism and raises prothrombin time. Oral contraceptives containing estrogen increase clotting factor synthesis and reduce warfarin effect. Phenytoin reduces contraceptive efficacy by enzyme induction. Ketoconazole and erythromycin inhibit CYP3A4, and combining them with astemizole or cisapride risks torsades de pointes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Enzyme inhibitor"
+     },
+     {
+      "id": "b",
+      "label": "Less drug cleared"
+     },
+     {
+      "id": "c",
+      "label": "Higher drug level"
+     },
+     {
+      "id": "d",
+      "label": "QT prolongation"
+     },
+     {
+      "id": "e",
+      "label": "Torsades"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Older patients need careful dosing. Renal excretion and hepatic metabolism fall with age, and body water and lean mass decline, so drug levels rise and toxicity is more likely. Baroreceptor sensitivity actually falls with age, so the response to blood pressure drugs is blunted rather than heightened. **Pregnancy category X** drugs, including ACE inhibitors and warfarin, must be avoided in pregnancy, although some teratogens such as carbamazepine remain essential for epilepsy.",
+   "say": "Older patients need careful dosing. Renal excretion and hepatic metabolism fall with age, and body water and lean mass decline, so drug levels rise and toxicity is more likely. Baroreceptor sensitivity actually falls with age, so the response to blood pressure drugs is blunted rather than heightened. Pregnancy category X drugs, including ACE inhibitors and warfarin, must be avoided in pregnancy, although some teratogens such as carbamazepine remain essential for epilepsy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "5f67cc98-4ff6-4b11-affd-98e441c5865c",
+  "6b7dca06-0169-4695-9dbb-ca4ec5ae2a0d",
+  "8e3c5e80-515f-4a8e-979f-a38df57262bc"
+ ],
+ "src": [],
+ "refs": [
+  "Essentials of Medical Pharmacology (K.D. Tripathi)",
+  "Katzung's Basic and Clinical Pharmacology (Katzung)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 200
+ }
+}

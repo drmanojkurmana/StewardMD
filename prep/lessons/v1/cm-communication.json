@@ -1,0 +1,178 @@
+{
+ "v": 1,
+ "module": "cm-communication",
+ "subject": "community-medicine",
+ "title": "Health Communication and Health Education: Methods, Approaches and Principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Health education plans learning so people value good health, understand how to maintain it, and know when to seek care. Effective **communication** carries a message from a **sender** through a **channel** to a **receiver**. The receiver's **feedback** then shows whether the message was understood, so the educator can adjust it. Each component matters, because a gap at any stage weakens the whole exchange and reduces the chance of behaviour change.",
+   "say": "Health education plans learning so people value good health, understand how to maintain it, and know when to seek care. Effective communication carries a message from a sender through a channel to a receiver. The receiver's feedback then shows whether the message was understood, so the educator can adjust it. Each component matters, because a gap at any stage weakens the whole exchange and reduces the chance of behaviour change.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Sender"
+     },
+     {
+      "id": "c",
+      "label": "Channel"
+     },
+     {
+      "id": "r",
+      "label": "Receiver"
+     },
+     {
+      "id": "f",
+      "label": "Feedback"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "c"
+     ],
+     [
+      "c",
+      "r"
+     ],
+     [
+      "r",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Health education has four **approaches**: regulatory, service, health education, and primary health care. The regulatory approach uses laws, such as compulsory seat belts. The service approach depends on the **felt needs** of people. The health education approach changes behaviour through planned learning, but results are slow.",
+   "say": "Health education has four approaches: regulatory, service, health education, and primary health care. The regulatory approach uses laws, such as compulsory seat belts. The service approach depends on the felt needs of people. The health education approach changes behaviour through planned learning, but results are slow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Approach",
+     "Core idea",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Regulatory",
+      "Laws and enforcement",
+      "Compulsory seat belts"
+     ],
+     [
+      "Service",
+      "Provide facilities people need",
+      "Immunisation services"
+     ],
+     [
+      "Health education",
+      "Planned learning changes behaviour",
+      "Cessation of smoking"
+     ],
+     [
+      "Primary health care",
+      "Self-reliance with community role",
+      "Community participation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Group methods include the **lecture**, which should suit a group of no more than 30 and last 15 to 20 minutes. A **group discussion** has 6 to 12 members who exchange ideas face to face. A **panel discussion** has 4 to 8 qualified speakers and a moderator. A **symposium** is a series of speeches with no discussion among speakers.",
+   "say": "Group methods include the lecture, which should suit a group of no more than 30 and last 15 to 20 minutes. A group discussion has 6 to 12 members who exchange ideas face to face. A panel discussion has 4 to 8 qualified speakers and a moderator. A symposium is a series of speeches with no discussion among speakers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Size or format",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Lecture",
+      "Up to 30, 15 to 20 minutes",
+      "One-way talk"
+     ],
+     [
+      "Group discussion",
+      "6 to 12 members",
+      "Face to face exchange"
+     ],
+     [
+      "Panel discussion",
+      "4 to 8 speakers plus moderator",
+      "Speakers then audience"
+     ],
+     [
+      "Symposium",
+      "Series of speeches",
+      "No discussion among speakers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a **workshop**, participants work individually within a group, supported by consultants. **Role play** is socio-drama, useful when values cannot be put into words. **Demonstration** shows a skill step by step, as in preparing ORS. Demonstration is the best choice for teaching mothers the oral rehydration technique.",
+   "say": "In a workshop, participants work individually within a group, supported by consultants. Role play is socio-drama, useful when values cannot be put into words. Demonstration shows a skill step by step, as in preparing ORS. Demonstration is the best choice for teaching mothers the oral rehydration technique.",
+   "vis": null
+  },
+  {
+   "tx": "Good health education rests on a few **guiding principles** that make messages stick. Learners trust a **credible** source and engage more when content feels relevant and personal. Hands-on involvement builds skills, while starting from what people already understand helps new ideas land. Clear explanations, repetition and **timely feedback** reinforce learning. Finally, the educator's own behaviour matters: a teacher who practises what they preach is far more persuasive, because information alone rarely changes behaviour.",
+   "say": "Good health education rests on a few guiding principles. Learners trust a credible source and engage more when the content feels relevant to them. Hands-on involvement builds skills, and starting from what people already understand helps new ideas land. Clear explanations, repetition and timely feedback reinforce learning. Finally, the educator's own behaviour matters. A teacher who practises what they preach is far more persuasive, because information alone rarely changes behaviour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Principle",
+     "What it looks like in practice"
+    ],
+    "rows": [
+     [
+      "Credibility",
+      "Educator is trusted and knowledgeable"
+     ],
+     [
+      "Participation",
+      "Learners take part through doing, not only listening"
+     ],
+     [
+      "Known to unknown",
+      "Teaching starts from existing knowledge"
+     ],
+     [
+      "Reinforcement",
+      "Key messages are repeated and reviewed"
+     ],
+     [
+      "Feedback",
+      "Learners receive timely information on their progress"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "03824384-91a2-4a30-a04d-23d8d612e342",
+  "3275aff5-a5ad-4d54-9e34-d1d65be868de",
+  "104f60f6-4e80-4eee-9e06-4f623eeef5d0"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 121
+ }
+}

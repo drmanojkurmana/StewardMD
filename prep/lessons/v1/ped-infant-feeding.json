@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "ped-infant-feeding",
+ "subject": "paediatrics",
+ "title": "Breastfeeding and complementary feeding",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Exclusive **breastfeeding** means the baby receives only breast milk, with no water or other fluids, for the first six months of life. Breast milk is nutritionally complete for this period and protects against infection. Complementary feeding, or weaning, starts at about six months while breastfeeding continues. Exclusive breastfeeding is the single most effective intervention to reduce newborn and child deaths.",
+   "say": "Exclusive breastfeeding means the baby receives only breast milk, with no water or other fluids, for the first six months of life. Breast milk is nutritionally complete for this period and protects against infection. Complementary feeding, also called weaning, starts at about six months while breastfeeding continues. Exclusive breastfeeding is the single most effective intervention to reduce newborn and child deaths.",
+   "vis": null
+  },
+  {
+   "tx": "**Colostrum** is secreted in the first three to four days. It is small in volume, thick and yellow, and rich in **immunoglobulin A** and fat-soluble vitamins. Transitional milk follows for about two weeks, then mature milk is thinner and more watery. Breast milk is rich in all vitamins except vitamin D, vitamin K and, in strict vegan mothers, vitamin B12.",
+   "say": "Colostrum is secreted in the first three to four days. It is small in volume, thick and yellow, and rich in immunoglobulin A and fat-soluble vitamins. Transitional milk follows for about two weeks, then mature milk is thinner and more watery. Breast milk is rich in all vitamins except vitamin D, vitamin K and, in strict vegan mothers, vitamin B12.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Milk type",
+     "Timing",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Colostrum",
+      "First 3 to 4 days",
+      "Thick, yellow, high IgA"
+     ],
+     [
+      "Transitional",
+      "To about 2 weeks",
+      "Protein falls, fat and sugar rise"
+     ],
+     [
+      "Mature",
+      "After transitional",
+      "Thin, watery, complete nutrition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Foremilk** comes at the start of a feed and is watery, quenching thirst. **Hindmilk** comes at the end of the feed, is richer in fat and gives satiety and energy. Human milk has higher **lactose** than cow's milk, which aids calcium absorption and growth of lactobacilli. Breast milk iron is absorbed two to three times better than iron from cow's milk.",
+   "say": "Foremilk comes at the start of a feed and is watery, quenching thirst. Hindmilk comes at the end of the feed, is richer in fat and gives satiety and energy. Human milk has higher lactose than cow's milk, which aids calcium absorption and growth of lactobacilli. Breast milk iron is absorbed two to three times better than iron from cow's milk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Foremilk",
+     "points": [
+      "Start of feed",
+      "Watery, thirst-quenching",
+      "Rich in protein and sugar"
+     ]
+    },
+    "right": {
+     "title": "Hindmilk",
+     "points": [
+      "End of feed",
+      "Rich in fat",
+      "Gives satiety and energy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **let-down reflex** releases milk: suckling triggers oxytocin release, causing milk ejection. The **prolactin reflex** drives milk production: suckling sends nerve impulses to the anterior pituitary, which releases prolactin, stimulating the alveolar glands. Prolactin peaks at night, so night feeds help maintain supply. Lack of night feeding and inadequate emptying of the breast reduce production.",
+   "say": "The let-down reflex releases milk: suckling triggers oxytocin release, causing milk ejection. The prolactin reflex drives milk production: suckling sends nerve impulses to the anterior pituitary, which releases prolactin, stimulating the alveolar glands. Prolactin peaks at night, so night feeds help maintain supply. Lack of night feeding and inadequate emptying of the breast reduce production.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suckling"
+     },
+     {
+      "id": "b",
+      "label": "Prolactin release"
+     },
+     {
+      "id": "c",
+      "label": "Alveolar milk secretion"
+     },
+     {
+      "id": "d",
+      "label": "Oxytocin release"
+     },
+     {
+      "id": "e",
+      "label": "Milk ejection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Signs of **good attachment** include the baby's mouth wide open, the lower lip everted, the chin touching the breast, and more areola visible above the mouth than below. There should be no pain. Signs of **inadequate intake** in a neonate include weight loss over 7 to 10 percent of birth weight, fewer than six wet diapers a day, fewer than four stools a day, and fewer than eight feeds a day. Breastfed neonates should feed on demand.",
+   "say": "Signs of good attachment include the baby's mouth wide open, the lower lip everted, the chin touching the breast, and more areola visible above the mouth than below. There should be no pain. Signs of inadequate intake in a neonate include weight loss over seven to ten percent of birth weight, fewer than six wet diapers a day, fewer than four stools a day, and fewer than eight feeds a day. Breastfed neonates should feed on demand.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "8d1f4a89-c843-4bfc-8326-4067e008a9f9",
+  "d934265b-e659-47f4-b51e-3791bae825bc",
+  "34ead5e7-8c0b-4533-9f73-cb59faacb292"
+ ],
+ "src": [],
+ "refs": [
+  "Ghai Essential Pediatrics (Ghai)",
+  "Current Diagnosis and Treatment: Pediatrics (Hay and others)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 154
+ }
+}

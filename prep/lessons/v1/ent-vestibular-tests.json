@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "ent-vestibular-tests",
+ "subject": "ent",
+ "title": "Vestibular function tests and vertigo assessment",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Vertigo is a false sense of spinning or motion while stationary. Vestibular function is assessed by bedside clinical tests and laboratory tests. The **Romberg test** checks proprioception: the patient stands feet together with eyes open, then closed. Sway or falling with eyes closed indicates posterior column disease, not cerebellar disease. Spontaneous nystagmus, the head impulse test and the Dix-Hallpike manoeuvre are key bedside tools.",
+   "say": "Vertigo is a false sense of spinning or motion while stationary. Vestibular function is assessed by bedside clinical tests and laboratory tests. The Romberg test checks proprioception. The patient stands with feet together, first with eyes open, then closed. Sway or falling with eyes closed points to posterior column disease, not cerebellar disease. Spontaneous nystagmus, the head impulse test and the Dix-Hallpike manoeuvre are key bedside tools.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Tests what",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Romberg",
+      "Proprioception",
+      "Positive with eyes closed only"
+     ],
+     [
+      "Head impulse",
+      "Vestibulo-ocular reflex",
+      "Refixation saccade means peripheral lesion"
+     ],
+     [
+      "Dix-Hallpike",
+      "Posterior canal BPPV",
+      "Latent, fatigable, geotropic nystagmus"
+     ],
+     [
+      "Fistula test",
+      "Pressure-induced nystagmus",
+      "Positive in perilymph fistula"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Fitzgerald-Hallpike bithermal caloric test** tests the lateral (horizontal) semicircular canal. The patient lies supine with the head tilted 30 degrees forward, so the horizontal canal is vertical. Each ear is irrigated for 40 seconds with water at 30 degrees C and then 44 degrees C. The time to nystagmus end point is charted on a calorigram. Caloric testing is the gold standard for unilateral vestibular deficit.",
+   "say": "The Fitzgerald-Hallpike bithermal caloric test tests the lateral horizontal semicircular canal. The patient lies supine with the head tilted 30 degrees forward, so the horizontal canal is vertical. Each ear is irrigated for 40 seconds with water at 30 degrees C and then at 44 degrees C. The time to the end point of nystagmus is charted on a calorigram. Caloric testing is the gold standard for unilateral vestibular deficit.",
+   "vis": null
+  },
+  {
+   "tx": "Remember **COWS**: cold water produces nystagmus to the opposite side, warm water to the same side. Cold water in the left ear therefore gives nystagmus to the right, and warm water gives nystagmus to the left. Direction-changing nystagmus suggests a central lesion. A canal paresis is shown when one ear gives a reduced or absent response compared with the other.",
+   "say": "Remember COWS. Cold water produces nystagmus to the opposite side, and warm water produces nystagmus to the same side. Cold water in the left ear therefore gives nystagmus to the right, and warm water gives nystagmus to the left. Direction-changing nystagmus suggests a central lesion. A reduced or absent response from one ear suggests canal paresis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cold water",
+     "points": [
+      "Nystagmus to opposite ear",
+      "Cold in left ear gives right beating",
+      "Used to test canal integrity"
+     ]
+    },
+    "right": {
+     "title": "Warm water",
+     "points": [
+      "Nystagmus to same ear",
+      "Warm in left ear gives left beating",
+      "Stimulates ipsilateral canal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Peripheral and central nystagmus can be separated at the bedside. **Peripheral** nystagmus usually beats in one direction, fades when the patient fixes on a target, and often brings vertigo and nausea. **Central** nystagmus may change direction with gaze, resists suppression by fixation, and tends to accompany brainstem or cerebellar signs. **Frenzel glasses** remove visual fixation and enlarge the eye image, exposing subtle movements.",
+   "say": "Peripheral and central nystagmus can be separated at the bedside. Peripheral nystagmus usually beats in one direction, eases when the patient fixes on a target, and often brings vertigo and nausea. Central nystagmus may change direction with gaze, persists despite fixation, and tends to accompany brainstem or cerebellar signs. Frenzel glasses remove fixation and enlarge the eye image, making subtle movements easier to see.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peripheral",
+     "points": [
+      "Unidirectional",
+      "Suppressed by fixation",
+      "Unilateral tinnitus or deafness",
+      "No brainstem signs"
+     ]
+    },
+    "right": {
+     "title": "Central",
+     "points": [
+      "Bidirectional or gaze-changing",
+      "Persists with fixation",
+      "Brainstem or cerebellar signs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **Dix-Hallpike manoeuvre** is the test for **BPPV**. The patient sits on a couch, the head is turned 45 degrees to one side, and the patient is laid supine with the head hanging 30 degrees below the horizontal. Nystagmus appears after a latent period of about 2 to 20 seconds, lasts under a minute, and fatigues on repetition. Positional vertigo without latency or fatigability suggests a central cause.",
+   "say": "The Dix-Hallpike manoeuvre is the test for BPPV. The patient sits on a couch, the head is turned 45 degrees to one side, and the patient is laid supine with the head hanging 30 degrees below the horizontal. Nystagmus appears after a latent period of about 2 to 20 seconds, lasts under a minute, and fatigues on repetition. Positional vertigo without latency or fatigability suggests a central cause.",
+   "vis": null
+  },
+  {
+   "tx": "Sound- or pressure-induced symptoms point to a **superior canal dehiscence** or a **perilymph fistula**. The **Hennebert sign** is nystagmus or vertigo on pressure in the external canal. The **Tullio phenomenon** is vertigo provoked by loud sound. Note that a false positive fistula test occurs in congenital syphilis and Meniere disease, through stapes hypermobility or a utricular band. Vestibular-evoked myogenic potentials help exclude dehiscence.",
+   "say": "Sound or pressure induced symptoms point to a superior canal dehiscence or a perilymph fistula. The Hennebert sign is nystagmus or vertigo on pressure in the external canal. The Tullio phenomenon is vertigo provoked by loud sound. A false positive fistula test occurs in congenital syphilis and Meniere disease, through stapes hypermobility or a utricular band. Vestibular-evoked myogenic potentials help exclude dehiscence.",
+   "vis": null
+  },
+  {
+   "tx": "Lastly, **electronystagmography** and **videonystagmography** record eye movements from spontaneous, positional, optokinetic or caloric stimuli. The **galvanic test** and **posturography** are further laboratory tools. The Lombard test is a hearing test, not a vestibular one. Caloric testing is limited in bilateral loss and tests only low frequencies, so it is paired with other tests.",
+   "say": "Lastly, electronystagmography and videonystagmography record eye movements from spontaneous, positional, optokinetic or caloric stimuli. The galvanic test and posturography are further laboratory tools. The Lombard test is a hearing test, not a vestibular one. Caloric testing is limited in bilateral loss and tests only low frequencies, so it is paired with other tests.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "2e503cf9-96b0-45e0-b8e0-e41d93e9ec8a",
+  "735ebf92-7013-4f25-8c37-7b22f55d1ba9",
+  "de44676a-c317-4175-b7a8-bb935324586f"
+ ],
+ "src": [
+  "kb-reference-perilymph-fistula"
+ ],
+ "refs": [
+  "Dhingra PL, Dhingra S. Diseases of Ear, Nose and Throat and Head and Neck Surgery (Dhingra and Dhingra)",
+  "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 652,
+  "itemN": 99
+ }
+}

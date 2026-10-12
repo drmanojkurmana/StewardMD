@@ -105,15 +105,22 @@ export function groundingFor(mod, items, kb) {
   const its = (items || []).filter((it) => it && Array.isArray(it.o) && typeof it.a === "number");
   const parts = [];
   let w = 0;
+  // Model grounding is capped (API cost); the gate grounding is full (local CPU is free), so standard
+  // numbers living in tail items never false-fail the numbers gate.
+  const gateParts = [];
+  let gw = 0;
   for (const it of its) {
     const t = [it.q, ...(it.o || []), it.exp || ""].join("\n").replace(/\s+/g, " ").trim();
     const n = t.split(" ").length;
-    if (!t || w + n > 3500) continue;
+    if (!t) continue;
+    if (gw + n <= 40000) { gateParts.push(t); gw += n; }
+    if (w + n > 3500) continue;
     parts.push(t); w += n;
   }
   return {
     kbText: kbOk ? g.text : "", kbSrc: kbOk ? g.src : [], kbWords: kbOk ? g.text.split(/\s+/).length : 0,
     itemText: parts.join("\n---\n"), itemWords: w, itemN: its.length,
+    gateText: gateParts.join("\n---\n"), gateWords: gw,
     scope: [mod.title, mod.scope].filter(Boolean).join("; "),
   };
 }
@@ -181,7 +188,7 @@ const VERIFY_SCHEMA = {
       },
     },
     refsOk: { type: "array", items: { type: "string" } },
-    confirmed: { type: "array", items: { type: "string" }, description: "Numbers, drugs, doses or criteria stated in SUPPORTED steps that are correct standard knowledge but absent from the source text" },
+    confirmed: { type: "array", items: { type: "string" }, description: "EVERY number, drug, dose and criterion stated in SUPPORTED steps that is correct standard knowledge but absent from the source text; list each one verbatim, omitting none, because unlisted terms fail the gates" },
   },
 };
 export function verifyBody(mod, ground, lesson) {
@@ -266,19 +273,22 @@ function normStep(r) {
 /* gateLesson(steps, ground, verified) -> { okSteps, problems }: shape + verbatim + dashes + numbers/drugs
  * (verified allowlist from sonnet merges in after verify; pre-verify numbers/drugs must be in ground). */
 export function gateLesson(steps, ground, verified = { numbers: [], drugs: [] }) {
-  const gtext = [ground.kbText, ground.itemText].filter(Boolean).join("\n");
+  // Numbers/drugs check against the FULL gate grounding (local CPU is free); shape, dashes and the
+  // verbatim bars check against the capped model grounding (a 20-word echo of a tail item the model never
+  // saw is independent phrasing, not a leak).
+  const capped = [ground.kbText, ground.itemText].filter(Boolean).join("\n");
+  const full = [ground.kbText, ground.gateText || ground.itemText].filter(Boolean).join("\n");
   const okSteps = [], problems = [];
   for (let i = 0; i < steps.length; i++) {
     const st = steps[i];
-    // gateStep covers shape, numbers/drugs (vs combined ground), dashes, images. Its single verbatim
-    // line is replaced below by a two-tier bar: 12 words vs KB text (the established plagiarism bar) and
-    // 20 vs the module's own item text (fixed anatomy phrasing needs room; a 20-word copy is still
-    // teaching the test verbatim).
-    const ck = gateStep(st, gtext).filter((x) => x !== "copies 12 or more words from the source");
-    const code = ck.filter((x) => !x.startsWith("numbers not in the source") && !x.startsWith("drugs not in the source"));
+    // gateStep covers shape, dashes, images. Its single verbatim line is replaced below by a two-tier bar:
+    // 12 words vs KB text (the established plagiarism bar) and 20 vs the module's own item text.
+    const ck = gateStep(st, capped).filter((x) => x !== "copies 12 or more words from the source"
+      && !x.startsWith("numbers not in the source") && !x.startsWith("drugs not in the source"));
+    const code = ck;
     const allow = new Set([...(verified.numbers || []), ...(verified.drugs || [])].map((x) => String(x).toLowerCase()));
     const rest = [];
-    for (const x of ck) {
+    for (const x of gateStep(st, full)) {
       const m = /^(numbers|drugs) not in the source: (.*)$/.exec(x);
       if (!m) continue;
       const missing = m[2].split(", ").filter((t) => !allow.has(t.toLowerCase()));
@@ -384,6 +394,8 @@ async function main(argv = process.argv.slice(2)) {
   // Stage 3: sonnet verify, then drop unsupported steps (min 3 survive) + refsOk filter.
   const verifiable = mods.filter((m) => { const g = gated.get(m.mid); return g.steps && g.steps.length >= 4; });
   const vrf = await runBatch(env, verifiable.map((m) => { const g = gated.get(m.mid); return { custom_id: "v-" + m.mid, params: verifyBody(m, grounds.get(m.mid), { title: g.title, steps: g.steps, refs: g.refs }) }; }), { ledger, tag: "links100-verify", cap });
+  // Persist every verdict: the audit trail for shipped lessons and faithful re-gates.
+  for (const [cid, r] of vrf.results) writeJ(path.join(work, cid.slice(2) + ".verify.json"), r.json);
   let written = 0;
   for (const m of mods) {
     const g = gated.get(m.mid);

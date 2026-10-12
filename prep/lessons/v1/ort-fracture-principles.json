@@ -1,0 +1,168 @@
+{
+ "v": 1,
+ "module": "ort-fracture-principles",
+ "subject": "orthopaedics",
+ "title": "Fracture classification, healing and management principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Fracture treatment is best described by three goals: **reduction** (restoring alignment), **retention** (holding the fragments in position), and **rehabilitation** (restoring function). Reduction may be closed or open. Open reduction is always surgical, but closed reduction can be conservative (plaster or splint) or surgical (percutaneous K-wire or screw). Immobilisation may use plaster, intramedullary nails, plates, external fixators, dynamic hip screws or screws for short bones.",
+   "say": "Fracture treatment is best described by three goals: reduction, retention and rehabilitation. Reduction means restoring alignment and may be closed or open. Open reduction is always surgical, but closed reduction can be conservative, using plaster or a splint, or surgical, using percutaneous K-wires or screws. Retention means immobilisation, using plaster, intramedullary nails, plates, external fixators, dynamic hip screws or screws for short bones. Rehabilitation restores function afterwards.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Approach",
+     "Reduction",
+     "Implant or immobilisation"
+    ],
+    "rows": [
+     [
+      "Closed conservative",
+      "Closed manipulation",
+      "Plaster or splint"
+     ],
+     [
+      "Closed surgical",
+      "Closed manipulation",
+      "K-wire or screw"
+     ],
+     [
+      "Open",
+      "Surgical exposure",
+      "Plate, nail or screw"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fracture healing follows either primary (direct) or secondary (indirect) routes. **Secondary healing** is the usual pattern when some micromovement persists at the fracture site, and it forms a **callus** that bridges the break. **Primary healing** needs absolute stability and a very small gap, so bone crosses the fracture directly through cutting cones without a callus. **Consolidation** is the stage when the callus bridges the fracture, and **remodelling** is the final phase.",
+   "say": "Fracture healing follows either a primary or a secondary route. Secondary healing is the usual pattern when some micromovement persists at the fracture site, and it forms a callus that bridges the break. Primary healing needs absolute stability and a very small gap, so bone crosses the fracture directly without a callus. Consolidation is when the callus bridges the fracture, and remodelling is the final phase.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h",
+      "label": "Haematoma"
+     },
+     {
+      "id": "c",
+      "label": "Callus formation"
+     },
+     {
+      "id": "k",
+      "label": "Consolidation"
+     },
+     {
+      "id": "r",
+      "label": "Remodelling"
+     }
+    ],
+    "edges": [
+     [
+      "h",
+      "c"
+     ],
+     [
+      "c",
+      "k"
+     ],
+     [
+      "k",
+      "r"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remodelling is the final stage of healing and is best in **children**. Metaphyseal fractures remodel better than diaphyseal ones. Angulation in the plane of joint motion remodels well, while rotational deformity does not. Injury to the epiphyseal plate is a poor prognostic sign, and good predictors include youth, closeness of the fracture to the end of the bone, and angulation in the natural plane of motion.",
+   "say": "Remodelling is the final stage of healing and works best in children. Metaphyseal fractures remodel better than diaphyseal fractures. Angulation in the plane of joint motion remodels well, while rotational deformity does not. Injury to the epiphyseal plate is a poor prognostic sign. Good predictors of remodelling include youth, a fracture close to the end of the bone, and angulation in the natural plane of joint motion.",
+   "vis": null
+  },
+  {
+   "tx": "Open fractures are classified by the **Gustilo-Anderson** system. Type I is a wound under 1 cm; type II is 1 to 10 cm with moderate damage; type III is extensive, with type IIIA keeping bone cover, IIIB needing a flap because of periosteal stripping, and IIIC having an arterial injury needing repair. Management follows three steps: aggressive **debridement**, stabilisation, and delayed wound closure. Debridement is the most important step to prevent infection.",
+   "say": "Open fractures are classified by the Gustilo-Anderson system. Type I is a wound under 1 centimetre. Type II is one to ten centimetres with moderate damage. Type III is extensive. Type IIIA keeps bone cover, IIIB needs a flap because of periosteal stripping, and IIIC has an arterial injury needing repair. Management has three steps: aggressive debridement, stabilisation and delayed wound closure. Debridement is the most important step to prevent infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Wound",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "I",
+      "Under 1 cm",
+      "Clean, minimal damage"
+     ],
+     [
+      "II",
+      "1 to 10 cm",
+      "Moderate soft tissue damage"
+     ],
+     [
+      "IIIA",
+      "Over 10 cm",
+      "Bone still covered"
+     ],
+     [
+      "IIIB",
+      "Over 10 cm",
+      "Needs flap cover"
+     ],
+     [
+      "IIIC",
+      "Over 10 cm",
+      "Arterial repair needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Salter-Harris** classification describes physeal injuries. Type I is a slip through the physis, type II crosses the physis and takes a metaphyseal triangle (Thurston Holland sign), and type III runs into the epiphysis. Type IV passes through the epiphysis, physis and metaphysis and needs perfect reduction. Type V is a crush injury that may show normal early X-rays, and type VI, by Rang, damages the perichondrial ring and can cause bony bridge formation.",
+   "say": "The Salter-Harris classification describes physeal injuries. Type I is a slip through the physis. Type II crosses the physis and takes a metaphyseal triangle, the Thurston Holland sign. Type III runs into the epiphysis. Type IV passes through the epiphysis, physis and metaphysis and needs perfect reduction. Type V is a crush injury that may show normal early X-rays. Type VI, described by Rang, damages the perichondrial ring and can cause a bony bridge.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Types I to III",
+     "points": [
+      "Type I: slip through physis",
+      "Type II: adds metaphyseal triangle",
+      "Type III: runs into epiphysis"
+     ]
+    },
+    "right": {
+     "title": "Types IV to VI",
+     "points": [
+      "Type IV: through all three parts",
+      "Type V: crush, normal early X-ray",
+      "Type VI: perichondrial ring injury"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "29043d0b-e9f0-4908-b521-d9fb686b10e8",
+  "2c5ae4a5-5bfd-427b-bd53-4352606ee9c6",
+  "40baf881-0683-449f-9e25-c6e898646bcb"
+ ],
+ "src": [],
+ "refs": [
+  "Campbell's Operative Orthopaedics (Canale and Beaty)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 140
+ }
+}
