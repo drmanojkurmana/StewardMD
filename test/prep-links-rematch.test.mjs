@@ -60,6 +60,15 @@ test("resolveTargets resolves real ids, drops unknown names and anything below t
   assert.ok(!got.some((g) => g.c < SHOW), "nothing below the confidence floor survives");
 });
 
+test("chunkItems splits big modules into fittable slices", async () => {
+  const { chunkItems } = await import("../tools/prep-links-rematch.mjs");
+  const items = Array.from({ length: 250 }, (_, i) => ({ id: String(i) }));
+  const chunks = chunkItems(items);
+  assert.equal(chunks.length, 3);
+  assert.ok(chunks.every((c) => c.length <= 100));
+  assert.equal(chunks.flat().length, 250);
+});
+
 test("parseVerifyResponse keeps valid numbers only", () => {
   const jobs = [{ id: "a" }, { id: "b" }];
   assert.deepEqual(Array.from(parseVerifyResponse({ keep: [2, 7, "x"] }, jobs)), [2]);

@@ -159,6 +159,13 @@ export function parseVerifyResponse(json, jobs) {
   return out;
 }
 
+/* chunkItems(items, n) -> item slices of at most n: big modules split so one map call's JSON fits max_tokens. */
+export function chunkItems(items, n = 100) {
+  const out = [];
+  for (let i = 0; i < items.length; i += n) out.push(items.slice(i, i + n));
+  return out;
+}
+
 /* ---------- paid runner ---------- */
 async function retry(fn, n = 5) {
   for (let i = 0; ; i++) { try { return await fn(); } catch (e) { if (i >= n - 1 || !e.retry) throw e; await new Promise((r) => setTimeout(r, 3000 * (i + 1))); } }
@@ -238,10 +245,13 @@ async function main(args = argv) {
   const env = loadEnv();
   const work = arg("--work", "/tmp/links100-lgen");
   fs.mkdirSync(work, { recursive: true });
-  // Pass 1: map.
-  const mapReqs = mods.map((m, i) => {
-    const p = mapPrompt(m, m.items, catalog);
-    return { custom_id: `r-${String(i).padStart(4, "0")}`, mid: m.mid, items: m.items, params: { model: MODEL, max_tokens: 8192, system: p.system, messages: [{ role: "user", content: p.user }] } };
+  // Pass 1: map (chunked: a big module's whole answer never fits one max_tokens window).
+  const mapReqs = [];
+  mods.forEach((m, i) => {
+    chunkItems(m.items).forEach((chunk, c) => {
+      const p = mapPrompt(m, chunk, catalog);
+      mapReqs.push({ custom_id: `r-${String(i).padStart(4, "0")}-${c}`, mid: m.mid, items: chunk, params: { model: MODEL, max_tokens: 8192, system: p.system, messages: [{ role: "user", content: p.user }] } });
+    });
   });
   const mapRes = await runBatch(env, mapReqs, "links100-remap");
   const byId = new Map(mapReqs.map((r) => [r.custom_id, r]));
@@ -265,8 +275,10 @@ async function main(args = argv) {
   // Pass 2: verify each resolved proposal against the item's tested concept.
   const verReqs = [];
   resolved.forEach((g, i) => {
-    const p = verifyPrompt({ mid: g.mid, sid: g.sid }, g.jobs);
-    verReqs.push({ custom_id: `v-${String(i).padStart(4, "0")}`, g, params: { model: MODEL, max_tokens: 2048, system: p.system, messages: [{ role: "user", content: p.user }] } });
+    chunkItems(g.jobs, 150).forEach((chunk, c) => {
+      const p = verifyPrompt({ mid: g.mid, sid: g.sid }, chunk);
+      verReqs.push({ custom_id: `v-${String(i).padStart(4, "0")}-${c}`, g: { ...g, jobs: chunk }, params: { model: MODEL, max_tokens: 2048, system: p.system, messages: [{ role: "user", content: p.user }] } });
+    });
   });
   const kept = {}; // itemId -> [{ k, id, title, c }]
   let verBad = 0;
