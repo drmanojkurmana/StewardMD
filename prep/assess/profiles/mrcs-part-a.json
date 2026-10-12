@@ -1,0 +1,235 @@
+{
+  "blueprint": {
+    "kind": "none",
+    "note": "The Candidate Guide lists content areas (anatomy, physiology, pathology, etc.) with indicative coverage; no fixed quotas were captured, so no subject split is encoded.",
+    "subjects": {},
+    "unmapped": {}
+  },
+  "calibration": {
+    "date": "2026-10-12",
+    "items_studied": 0,
+    "note": "no official samples studied",
+    "sources": [
+      "no official samples studied"
+    ],
+    "status": "provisional"
+  },
+  "bank": {
+    "note": "no MRCS Part A questions in the bank yet, so no test types are offered",
+    "status": "coming"
+  },
+  "format": {
+    "duration_min": 300,
+    "item_types": [
+      "sba"
+    ],
+    "options": 5,
+    "questions": 300,
+    "sections": [
+      {
+        "id": "1",
+        "label": "Paper 1 Applied Basic Science",
+        "minutes": 180,
+        "questions": 180
+      },
+      {
+        "id": "2",
+        "label": "Paper 2 Principles of Surgery in General",
+        "minutes": 120,
+        "questions": 120
+      }
+    ]
+  },
+  "id": "mrcs-part-a",
+  "item_styles": [],
+  "name": "MRCS Part A",
+  "navigation": {
+    "auto_advance_on_timeout": true,
+    "break_between_parts": true,
+    "early_section_submit": true,
+    "locked_sections": true,
+    "mark_for_review": false,
+    "return_to_closed_section": false,
+    "revisit_within_section": true
+  },
+  "pace_sec": 60,
+  "previous_formats": [],
+  "provenance": [
+    {
+      "field": "/format/questions",
+      "note": "Applied Basic Science 180 questions, Principles of Surgery in General 120 questions",
+      "official": true,
+      "section": "Part A examination",
+      "src": "MRCS-GUIDE-2020",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/format/duration_min",
+      "note": "five-hour MCQ examination: three-hour paper plus two-hour paper",
+      "official": true,
+      "section": "General information",
+      "src": "MRCS-CG-RCPSG",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/format/options",
+      "note": "Each question contains five possible answers of which there is only one single best answer",
+      "official": true,
+      "section": "Sample Questions",
+      "src": "MRCS-GUIDE-2020",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/format/item_types",
+      "note": "The exam uses single best answer MCQs",
+      "official": true,
+      "section": "Exam details",
+      "src": "MRCS-RCSED",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/format/sections",
+      "note": "three-hour Paper 1 (Applied Basic Science) plus two-hour Paper 2 (Principles of Surgery in General), same day, Pearson VUE test centre",
+      "official": true,
+      "section": "General information",
+      "src": "MRCS-CG-RCPSG",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/locked_sections",
+      "note": "papers are separate sittings with a scheduled break between; return to Paper 1 is not described",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/revisit_within_section",
+      "note": "questions in randomised order is stated; within-paper revisit is not described",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/return_to_closed_section",
+      "note": "not stated in the official documents",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/early_section_submit",
+      "note": "finish Paper 1 early: remain at station until the break; finish Paper 2 early: may leave the test centre",
+      "official": true,
+      "section": "General information",
+      "src": "MRCS-CG-RCPSG",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/auto_advance_on_timeout",
+      "note": "each paper has a fixed duration; auto-advance behaviour is not stated",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/mark_for_review",
+      "note": "not stated in the official documents",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/navigation/break_between_parts",
+      "note": "scheduled one-hour candidate break between the two papers; may leave the premises",
+      "official": true,
+      "section": "General information",
+      "src": "MRCS-CG-RCPSG",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/scoring/correct",
+      "note": "There are equal marks for each question",
+      "official": true,
+      "section": "Instructions to candidates",
+      "src": "MRCS-GUIDE-2020",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/scoring/incorrect",
+      "note": "Marks will not be deducted for a wrong answer",
+      "official": true,
+      "section": "Instructions to candidates",
+      "src": "MRCS-GUIDE-2020",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/scoring/unanswered",
+      "note": "marks are awarded only for correct answers, so unanswered scores 0",
+      "official": true,
+      "section": "Instructions to candidates",
+      "src": "MRCS-GUIDE-2020",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/scoring/pass",
+      "note": "minimum competence in each paper plus the combined pass mark, set by standard setting; not expressible as marks/of, so pass is null",
+      "official": true,
+      "section": "Part A examination",
+      "src": "MRCS-GUIDE-2020",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/pace_sec",
+      "note": "derived: 300 min x 60 / 300 questions",
+      "official": false,
+      "section": null,
+      "src": null,
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/blueprint/kind",
+      "note": "content areas published without fixed quotas, so kind none",
+      "official": true,
+      "section": "Syllabus content",
+      "src": "MRCS-GUIDE-2020",
+      "verified_on": "2026-10-12"
+    }
+  ],
+  "schema": "prep/assessment-profile/v2",
+  "scoring": {
+    "correct": 1,
+    "incorrect": 0,
+    "pass": null,
+    "unanswered": 0
+  },
+  "session": "Intercollegiate MRCS Part A 2026",
+  "sources": {
+    "MRCS-CG-RCPSG": {
+      "doc_date": "2025-04",
+      "publisher": "Royal College of Physicians and Surgeons of Glasgow (RCPSG)",
+      "title": "MRCS Part A (MCQ) Candidate Guidance Notes, Pearson VUE",
+      "url": "https://rcpsg.ac.uk/sites/default/files/2025-04/MRCS%20Candidate%20guidance.pdf"
+    },
+    "MRCS-GUIDE-2020": {
+      "doc_date": "2020-01",
+      "publisher": "Intercollegiate Committee for Basic Surgical Examinations (ICBSE)",
+      "title": "Candidate Guide to MRCS examination January 2020",
+      "url": "https://intercollegiatemrcsexams.org.uk/-/media/Files/IMRCS/MRCS/MRCS-candidate-guidance/Candidate-Guide-to-MRCS-examination-January-2020.pdf"
+    },
+    "MRCS-RCSED": {
+      "doc_date": null,
+      "publisher": "Royal College of Surgeons of Edinburgh (RCSEd)",
+      "title": "Exam Details | Intercollegiate MRCS Part A",
+      "url": "https://services.rcsed.ac.uk/exams/exam-details-intercollegiate-mrcs-part-a"
+    }
+  },
+  "status": "provisional",
+  "tab": "mrcs",
+  "verified_on": "2026-10-12",
+  "version": "2026.1.0"
+}
