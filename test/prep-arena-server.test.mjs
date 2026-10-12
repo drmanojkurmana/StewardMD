@@ -50,18 +50,21 @@ function bankR2() {
     "physiology/mcq/phy-1.json": { items: Array.from({ length: 15 }, (_, i) => item("phy1-" + i, (i + 2) % 4)) },
     "pathology/index.json": { id: "pathology", topics: [{ id: "pat-1", count: 10, usmle: 6, file: "mcq/pat-1.json" }] },
     "pathology/mcq/pat-1.json": { items: Array.from({ length: 10 }, (_, i) => item("pat1-" + i, 3, i < 6 ? { ex: ["usmle"] } : {})) },
+    "ss-cardiology/index.json": { id: "ss-cardiology", topics: [{ id: "ssc-1", count: 12, file: "mcq/ssc-1.json" }] },
+    "ss-cardiology/mcq/ssc-1.json": { items: Array.from({ length: 12 }, (_, i) => item("ssc1-" + i, i % 4)) },
+    "ss-neurology/index.json": { id: "ss-neurology", topics: [{ id: "ssn-1", count: 12, file: "mcq/ssn-1.json" }] },
+    "ss-neurology/mcq/ssn-1.json": { items: Array.from({ length: 12 }, (_, i) => item("ssn1-" + i, (i + 1) % 4)) },
   };
-  return { get: async (k) => { const f = k.startsWith("prep-bank/v1/") && files[k.slice(13)]; return f ? { text: async () => JSON.stringify(f) } : null; } };
+  return { get: async (k) => { const key = k.replace(/^prep-bank\/(v1|v5|v16)\//, ""); const f = files[key]; return f ? { text: async () => JSON.stringify(f) } : null; } };
 }
 const bank = () => A.bankFrom(bankR2());
 
 /* ---------- pure helpers ---------- */
 
 test("marking matches prep.js scoreMock for every MOCKS pattern", () => {
-  // FMGE has no Arena yet (client shows "coming soon", no server scheme), so its pattern is not compared.
-  const pats = [].concat(...Object.values(P.MOCKS)).filter((p) => p.id !== "fmge");
+  const pats = [].concat(...Object.values(P.MOCKS));
   for (const pat of pats) {
-    const scheme = A.SCHEMES[pat.id === "usmle-block" ? "usmle" : pat.id];
+    const scheme = A.schemeFor(pat.id === "usmle-block" ? "usmle" : pat.id);
     assert.deepEqual(scheme, { plus: pat.plus, minus: pat.minus }, pat.id);
     const items = Array.from({ length: 9 }, (_, i) => ({ id: "x" + i, a: i % 4, _s: "s" }));
     const arr = [0, 1, 2, -1, 3, 1, -1, 3, 2];   // index answers for scoreMock
@@ -74,6 +77,7 @@ test("marking matches prep.js scoreMock for every MOCKS pattern", () => {
   assert.deepEqual(A.markEntry(it3, { a: 0, b: 1, c: 0, d: "3", zz: 1 }, A.SCHEMES["ini-cet"]), { right: 2, wrong: 1, blank: 1, score: 1.67 });
   assert.equal(A.markEntry(it3, { a: 0, b: 0, c: 0, d: 0 }, A.SCHEMES["neet-pg"]).score, 1);
   assert.equal(A.markEntry(it3, { a: 7, b: -1, c: 1.5 }, A.SCHEMES["neet-ss"]).blank, 4);
+  assert.equal(A.markEntry(it3, { a: 0, b: 0, c: 0, d: 0 }, A.schemeFor("fmge")).score, 1);
 });
 
 test("Elo K=24: even match moves 12, a draw between equals moves nothing, an upset moves more", () => {
@@ -93,7 +97,7 @@ test("identity: uid hash is sha256 prefix 24; name from the token, never an emai
   assert.equal(A.displayName({}, "0123456789abcdef"), "Doctor cdef");
 });
 
-test("schedule: daily 20:00-20:20 IST, weekly Sunday 11:00-14:00 IST, NEET-SS weekly 50 Q / 60 min", () => {
+test("schedule: daily 20:00-20:20 IST, weekly Sunday 11:00-14:00 IST, NEET-SS weekly 150 Q / 150 min (3 sections), FMGE 300 Q / 300 min (6 sections)", () => {
   const d = A.eventFromId("daily-neet-pg-20261006");
   assert.equal(new Date(d.starts_at).toISOString(), "2026-10-06T14:30:00.000Z");
   assert.equal(d.ends_at - d.starts_at, 20 * 60e3);
@@ -102,7 +106,14 @@ test("schedule: daily 20:00-20:20 IST, weekly Sunday 11:00-14:00 IST, NEET-SS we
   assert.equal(new Date(w.starts_at).toISOString(), "2026-10-11T05:30:00.000Z");
   assert.deepEqual([w.n, w.secs, w.ends_at - w.starts_at], [100, 7200, 3 * 3600e3]);
   const ss = A.eventFromId("weekly-neet-ss-20261011");
-  assert.deepEqual([ss.n, ss.secs], [50, 3600]);
+  assert.deepEqual([ss.n, ss.secs], [150, 9000]);
+  assert.equal(ss.sections.length, 3);
+  assert.deepEqual(ss.sections.map((s) => [s.id, s.n, s.sec]), [["A", 50, 3000], ["B", 50, 3000], ["C", 50, 3000]]);
+  const fm = A.eventFromId("weekly-fmge-20261011");
+  assert.deepEqual([fm.n, fm.secs], [300, 18000]);
+  assert.equal(fm.sections.length, 6);
+  const dfm = A.eventFromId("daily-fmge-20261006");
+  assert.deepEqual([dfm.n, dfm.secs], [20, 1200]);
   for (const bad of ["weekly-neet-pg-20261012", "daily-neet-pg-20261332", "daily-ini-cet-20261006", "daily-neet-pg-2026106", "x"]) assert.equal(A.eventFromId(bad), null, bad);
   assert.deepEqual(A.eventFromId("daily-usmle-20261006"), A.eventFromId("daily-usmle-20261006"), "deterministic");
 
@@ -133,8 +144,45 @@ test("draw: deterministic per seed, screened (no flagged items), spread across s
   // USMLE: only the USMLE subjects, vignettes when a module has 5+
   const u = await A.drawItems(bank(), "usmle", 30, "u");
   assert.ok(u.filter((x) => x.s === "pathology").every((x) => +x.id.split("-")[1] < 6));
-  // NEET-SS: no bank yet -> empty, not a crash
-  assert.deepEqual(await A.drawItems(bank(), "neet-ss", 20, "x"), []);
+  // empty when subjects not in bank, not a crash
+  const emptyBank = A.bankFrom({ get: async () => null });
+  assert.deepEqual(await A.drawItems(emptyBank, "neet-ss", 20, "x"), []);
+});
+
+test("draw NEET-SS: draws from super-specialty subjects, balanced and deterministic", async () => {
+  const ssFiles = {
+    "ss-cardiology/index.json": { id: "ss-cardiology", topics: [{ id: "ssc-1", count: 10, file: "mcq/ssc-1.json" }] },
+    "ss-cardiology/mcq/ssc-1.json": { items: Array.from({ length: 10 }, (_, i) => item("ssc-" + i, i % 4)) },
+    "ss-neurology/index.json": { id: "ss-neurology", topics: [{ id: "ssn-1", count: 10, file: "mcq/ssn-1.json" }] },
+    "ss-neurology/mcq/ssn-1.json": { items: Array.from({ length: 10 }, (_, i) => item("ssn-" + i, (i + 1) % 4)) },
+  };
+  const ssR2 = { get: async (k) => {
+    const key = k.replace(/^prep-bank\/(v1|v5|v16)\//, "");
+    const f = ssFiles[key];
+    return f ? { text: async () => JSON.stringify(f) } : null;
+  } };
+  const ssBank = A.bankFrom(ssR2);
+  const drawn = await A.drawItems(ssBank, "neet-ss", 10, "v1:daily-neet-ss-20261006");
+  assert.equal(drawn.length, 10);
+  assert.ok(drawn.some((x) => x.s === "ss-cardiology"));
+  assert.ok(drawn.some((x) => x.s === "ss-neurology"));
+  assert.equal(new Set(drawn.map((x) => x.id)).size, 10);
+});
+
+test("soonFor: data-driven from exam profile bank status", () => {
+  const arenaClient = require("../prep-arena.js");
+  const assess = require("../prep-assess.js");
+  // banked exams are open (null)
+  assert.equal(arenaClient.soonFor("neet-pg", assess), null);
+  assert.equal(arenaClient.soonFor("neet-ss", assess), null);
+  assert.equal(arenaClient.soonFor("fmge", assess), null);
+  assert.equal(arenaClient.soonFor("ini-cet", assess), null);
+  assert.equal(arenaClient.soonFor("usmle", assess), null);
+  // unbanked exams report their coming soon note
+  assert.ok(arenaClient.soonFor("plab-1", assess));
+  assert.ok(arenaClient.soonFor("amc-mcq", assess));
+  assert.ok(arenaClient.soonFor("mccqe-1", assess));
+  assert.ok(arenaClient.soonFor("usmle-step2-ck", assess));
 });
 
 /* ---------- the route ---------- */
@@ -271,3 +319,77 @@ test("rating board and stats read the battles the Worker writes", async () => {
   assert.deepEqual(st.body.trend.map((x) => x.rating), [1200, 1188, 1188]);
   assert.deepEqual(st.body.player, { name: "Bilal K", rating: 1188, battles: 2, wins: 1, since: T0 });
 });
+
+test("NEET-SS and FMGE full event flow: events query, start with sections, submit with profile scoring", async () => {
+  const env = envOf();
+  await call(env, "POST", "consent", "tok-a");
+
+  // NEET-SS events query
+  const resSS = await call(env, "GET", "events?exam=neet-ss", "tok-a", null, T0 + 60e3);
+  assert.equal(resSS.status, 200);
+  assert.equal(resSS.body.events.length, 4);
+  const ssDaily = resSS.body.events.find((e) => e.kind === "daily" && e.role === "current");
+  const ssWeekly = resSS.body.events.find((e) => e.kind === "weekly" && e.role === "next");
+  assert.equal(ssDaily.id, "daily-neet-ss-20261006");
+  assert.equal(ssWeekly.id, "weekly-neet-ss-20261011");
+
+  // NEET-SS daily start & submit
+  const startSS = await call(env, "POST", `events/${ssDaily.id}/start`, "tok-a", null, T0 + 2000);
+  assert.equal(startSS.status, 200);
+  assert.ok(startSS.body.items.length > 0);
+  assert.ok(!startSS.body.sections, "daily has no sections");
+
+  // NEET-SS submit (+4/-1 scoring)
+  const ssItems = await A.drawItems(bank(), "neet-ss", 20, "v1:" + ssDaily.id);
+  const ansSS = {};
+  ssItems.forEach((it, i) => {
+    if (i < 5) ansSS[it.id] = it.a;
+    else if (i < 7) ansSS[it.id] = (it.a + 1) % 4;
+  });
+  const subSS = await call(env, "POST", `events/${ssDaily.id}/submit`, "tok-a", { ans: ansSS }, T0 + 60000);
+  assert.equal(subSS.status, 200);
+  assert.deepEqual([subSS.body.right, subSS.body.wrong, subSS.body.blank], [5, 2, ssItems.length - 7]);
+  // 5 * 4 - 2 * 1 = 18
+  assert.equal(subSS.body.score, 18);
+
+  // NEET-SS weekly start returns 3 locked sections
+  const sunStart = Date.parse("2026-10-11T05:30:00Z");
+  const startSSW = await call(env, "POST", `events/${ssWeekly.id}/start`, "tok-a", null, sunStart + 1000);
+  assert.equal(startSSW.status, 200);
+  assert.ok(startSSW.body.sections);
+  assert.equal(startSSW.body.sections.length, 3);
+  assert.deepEqual(startSSW.body.sections.map((s) => s.id), ["A", "B", "C"]);
+
+  // FMGE events query
+  const resFM = await call(env, "GET", "events?exam=fmge", "tok-a", null, T0 + 60e3);
+  assert.equal(resFM.status, 200);
+  const fmDaily = resFM.body.events.find((e) => e.kind === "daily" && e.role === "current");
+  const fmWeekly = resFM.body.events.find((e) => e.kind === "weekly" && e.role === "next");
+  assert.equal(fmDaily.id, "daily-fmge-20261006");
+  assert.equal(fmWeekly.id, "weekly-fmge-20261011");
+
+  // FMGE daily start & submit (+1/0 scoring, no negative marking)
+  await call(env, "POST", "consent", "tok-b");
+  const startFM = await call(env, "POST", `events/${fmDaily.id}/start`, "tok-b", null, T0 + 2000);
+  assert.equal(startFM.status, 200);
+
+  const fmItems = await A.drawItems(bank(), "fmge", 20, "v1:" + fmDaily.id);
+  const ansFM = {};
+  fmItems.forEach((it, i) => {
+    if (i < 8) ansFM[it.id] = it.a;
+    else if (i < 12) ansFM[it.id] = (it.a + 1) % 4;
+  });
+  const subFM = await call(env, "POST", `events/${fmDaily.id}/submit`, "tok-b", { ans: ansFM }, T0 + 60000);
+  assert.equal(subFM.status, 200);
+  assert.deepEqual([subFM.body.right, subFM.body.wrong, subFM.body.blank], [8, 4, fmItems.length - 12]);
+  // FMGE scoring: 8 * 1 - 4 * 0 = 8 (no negative marking)
+  assert.equal(subFM.body.score, 8);
+
+  // FMGE weekly start returns 6 locked sections
+  const startFMW = await call(env, "POST", `events/${fmWeekly.id}/start`, "tok-b", null, sunStart + 1000);
+  assert.equal(startFMW.status, 200);
+  assert.ok(startFMW.body.sections);
+  assert.equal(startFMW.body.sections.length, 6);
+  assert.deepEqual(startFMW.body.sections.map((s) => s.id), ["1A", "1B", "1C", "2A", "2B", "2C"]);
+});
+
