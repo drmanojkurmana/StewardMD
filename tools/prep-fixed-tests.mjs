@@ -53,6 +53,8 @@ export const EXAMS = [
   { profile: "ini-cet", tab: "neet-pg", branch: "mbbs", tag: "ini-cet" },
   { profile: "neet-ss", tab: "neet-ss", branch: "ss-medicine", tag: "neet-ss" },
   { profile: "usmle-step1", tab: "usmle", branch: "mbbs", tag: "usmle" },
+  { profile: "plab-1", tab: "plab", branch: "uk", tag: "plab-1" },
+  { profile: "mrcs-part-a", tab: "mrcs", branch: "uk", tag: "mrcs-part-a" },
 ];
 export const FORMATS = ["grand", "part", "mini", "subject_mini", "topic", "daily10", "image", "pyq"];
 // Papers requested per format. Topic papers are one per major topic (TOP_PER_SUBJECT biggest per subject,

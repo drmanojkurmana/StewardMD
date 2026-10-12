@@ -1,0 +1,104 @@
+{
+ "id": "plab-radiology",
+ "v": 5,
+ "source": "smd-uk",
+ "subject": "Radiology",
+ "branch": "uk",
+ "title": {
+  "en": "Radiology"
+ },
+ "ex": [
+  "plab-1"
+ ],
+ "counts": {
+  "total": 0,
+  "all": 0,
+  "flagged": 0
+ },
+ "groups": [
+  {
+   "id": "plab-radiology-rad-diagnostic",
+   "title": {
+    "en": "Systemic diagnostic radiology"
+   }
+  },
+  {
+   "id": "plab-radiology-rad-radiotherapy",
+   "title": {
+    "en": "Radiotherapy"
+   }
+  }
+ ],
+ "topics": [
+  {
+   "id": "rad-musculoskeletal",
+   "title": {
+    "en": "Musculoskeletal radiology and bone tumours"
+   },
+   "group": "plab-radiology-rad-diagnostic",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/rad-musculoskeletal.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "rad-gi",
+   "title": {
+    "en": "Gastrointestinal radiology"
+   },
+   "group": "plab-radiology-rad-diagnostic",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/rad-gi.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "rad-neuroradiology",
+   "title": {
+    "en": "Neuroradiology"
+   },
+   "group": "plab-radiology-rad-diagnostic",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/rad-neuroradiology.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "rad-teletherapy",
+   "title": {
+    "en": "External beam radiotherapy techniques"
+   },
+   "group": "plab-radiology-rad-radiotherapy",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/rad-teletherapy.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "rad-radiobiology",
+   "title": {
+    "en": "Radiobiology and fractionation"
+   },
+   "group": "plab-radiology-rad-radiotherapy",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/rad-radiobiology.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  }
+ ]
+}

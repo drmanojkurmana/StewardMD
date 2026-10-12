@@ -1,0 +1,104 @@
+{
+ "id": "plab-dermatology",
+ "v": 5,
+ "source": "smd-uk",
+ "subject": "Dermatology",
+ "branch": "uk",
+ "title": {
+  "en": "Dermatology"
+ },
+ "ex": [
+  "plab-1"
+ ],
+ "counts": {
+  "total": 0,
+  "all": 0,
+  "flagged": 0
+ },
+ "groups": [
+  {
+   "id": "plab-dermatology-der-infections",
+   "title": {
+    "en": "Infections and infestations"
+   }
+  },
+  {
+   "id": "plab-dermatology-der-papulosquamous-eczema",
+   "title": {
+    "en": "Papulosquamous disorders and eczema"
+   }
+  }
+ ],
+ "topics": [
+  {
+   "id": "der-fungal",
+   "title": {
+    "en": "Superficial and deep fungal infections"
+   },
+   "group": "plab-dermatology-der-infections",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/der-fungal.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "der-viral-parasitic",
+   "title": {
+    "en": "Viral infections and infestations"
+   },
+   "group": "plab-dermatology-der-infections",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/der-viral-parasitic.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "der-eczema",
+   "title": {
+    "en": "Eczema and dermatitis"
+   },
+   "group": "plab-dermatology-der-papulosquamous-eczema",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/der-eczema.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "der-psoriasis",
+   "title": {
+    "en": "Psoriasis"
+   },
+   "group": "plab-dermatology-der-papulosquamous-eczema",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/der-psoriasis.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "der-other-papulosquamous",
+   "title": {
+    "en": "Lichen planus and other papulosquamous disorders"
+   },
+   "group": "plab-dermatology-der-papulosquamous-eczema",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/der-other-papulosquamous.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  }
+ ]
+}
