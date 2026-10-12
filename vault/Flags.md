@@ -50,6 +50,12 @@ The clinical position is unchanged by the flag: each module is still clinically 
 regulatory-pending, and the in-module wording that says so must stay. Set `def:false` in the relevant
 `*-flags.js` to close one again; `?kardiox=0` / `?thorex=0` / `?fundx=0` disables per device.
 
+## Isometric figures, added 2026-10-12
+
+| Flag | State | What it does |
+|---|---|---|
+| `smd_iso` | **ON** (no flag set) | Shows the isometric equipment figures in Narke, Neonatal infusions, CliniX (BP), SURGX (chest trauma) and Ophthalmos (focus). `"0"` in localStorage or `?iso=0` turns every one off; the hosts then render as before. Content is `ai_drafted`. [[Iso Figures]] |
+
 ## WardSynQ — three flags, all OFF, added 2026-09-05
 
 Registry: `wardsynq-flags.js` (repo root), read as query param → localStorage → default. Not in the

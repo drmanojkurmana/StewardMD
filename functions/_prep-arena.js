@@ -8,17 +8,23 @@
 import { sha256Hex, mulberry32, seedFrom } from "./_prep-core.js";
 import ASSESS from "../prep-assess.js";
 
-export const EXAMS = ["neet-pg", "neet-ss", "usmle"];
-const NEET_SS_SUBJECTS = ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology", "ss-infectious-diseases", "ss-critical-care", "ss-biostatistics"];
+export const EXAMS = ["neet-pg", "neet-ss", "usmle", "fmge"];
+const NEET_SS_SUBJECTS = ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology", "ss-infectious-diseases", "ss-critical-care", "ss-biostatistics", "ss-radiology"];
 const USMLE_SUBJECTS = ["anatomy", "physiology", "biochemistry", "pathology", "pharmacology", "microbiology", "medicine", "surgery", "obstetrics-gynaecology", "paediatrics", "psychiatry"];
 const PG_ONLY = ["forensic-medicine", "community-medicine", "ophthalmology", "ent", "orthopaedics", "dermatology", "anaesthesia", "radiology"];
 // Subjects per exam, from prep/taxonomy.json (`ex` tags). Keep in step with the taxonomy.
-export const SUBJECTS = { "neet-pg": USMLE_SUBJECTS.concat(PG_ONLY), "usmle": USMLE_SUBJECTS, "neet-ss": NEET_SS_SUBJECTS };
+export const SUBJECTS = { "neet-pg": USMLE_SUBJECTS.concat(PG_ONLY), "usmle": USMLE_SUBJECTS, "neet-ss": NEET_SS_SUBJECTS, "fmge": USMLE_SUBJECTS.concat(PG_ONLY) };
 
 // Marking schemes, read from the versioned exam profiles (prep/assess/profiles via prep-assess.js schemes()), the same
 // source as prep.js MOCKS: { "neet-pg": +4/-1, "ini-cet": +1/-1/3, "neet-ss": +4/-1, "usmle": +1/0 }. An event uses its
 // exam's first pattern (INI-CET is a pattern of the neet-pg exam tab; its scheme is here for parity and tests).
 export const SCHEMES = ASSESS.schemes();
+export function schemeFor(exam) {
+  if (SCHEMES[exam]) return SCHEMES[exam];
+  const p = ASSESS.profile(exam);
+  if (p && p.scoring) return { plus: p.scoring.correct, minus: -p.scoring.incorrect || 0 };
+  return { plus: 1, minus: 0 };
+}
 
 /* ---------- identity ---------- */
 export function uidHash(uid) { return sha256Hex(String(uid)).slice(0, 24); }
@@ -58,20 +64,40 @@ const IST = 5.5 * 3600e3, DAY = 86400e3;
 export const EVENT_GRACE_MS = 60e3;
 const ymdOf = (t) => new Date(t + IST).toISOString().slice(0, 10).replace(/-/g, "");
 const istAt = (ymd, h, m) => Date.UTC(+ymd.slice(0, 4), +ymd.slice(4, 6) - 1, +ymd.slice(6, 8), h, m) - IST;
-export const EVENT_ID_RE = /^(daily|weekly)-(neet-pg|neet-ss|usmle)-(\d{8})$/;
+export const EVENT_ID_RE = /^(daily|weekly)-(neet-pg|neet-ss|usmle|fmge)-(\d{8})$/;
 
-/* The event with this id, or null. Daily 20:00-20:20 IST, 20 Q, 20 min; weekly Sunday 11:00-14:00 IST, 100 Q, 120 min
- * (NEET-SS 50 Q, 60 min). Deterministic: the same id always gives the same row. */
+/* The event with this id, or null. Daily 20:00-20:20 IST, 20 Q, 20 min; weekly Sunday 11:00-14:00 IST (longer window for FMGE),
+ * matching exam format: NEET-SS 150 Q / 150 min in 3 locked sections (50 Q / 50 min), FMGE 300 Q / 300 min in 2 parts
+ * x 3 sections (50 Q / 50 min), NEET-PG 100 Q / 120 min, USMLE 100 Q / 120 min. Deterministic: the same id always gives the same row. */
 export function eventFromId(id) {
   const m = EVENT_ID_RE.exec(String(id || ""));
   if (!m) return null;
   const [, kind, exam, ymd] = m, start = kind === "daily" ? istAt(ymd, 20, 0) : istAt(ymd, 11, 0);
   if (!Number.isFinite(start) || ymdOf(start) !== ymd) return null;               // 20261332 and friends
   if (kind === "weekly" && new Date(start + IST).getUTCDay() !== 0) return null;   // Sundays only
-  const ss = exam === "neet-ss";
-  return kind === "daily"
-    ? { id, kind, exam, starts_at: start, ends_at: start + 20 * 60e3, n: 20, secs: 1200, seed: "v1:" + id }
-    : { id, kind, exam, starts_at: start, ends_at: start + 3 * 3600e3, n: ss ? 50 : 100, secs: ss ? 3600 : 7200, seed: "v1:" + id };
+  if (kind === "daily") {
+    return { id, kind, exam, starts_at: start, ends_at: start + 20 * 60e3, n: 20, secs: 1200, seed: "v1:" + id };
+  }
+  if (exam === "neet-ss") {
+    const sections = [
+      { id: "A", label: "Section A", n: 50, sec: 3000, from: 0, to: 50 },
+      { id: "B", label: "Section B", n: 50, sec: 3000, from: 50, to: 100 },
+      { id: "C", label: "Section C", n: 50, sec: 3000, from: 100, to: 150 },
+    ];
+    return { id, kind, exam, starts_at: start, ends_at: start + Math.max(3 * 3600e3, 9000 * 1000 + 3600e3), n: 150, secs: 9000, seed: "v1:" + id, sections };
+  }
+  if (exam === "fmge") {
+    const sections = [
+      { id: "1A", label: "Part 1, section A", n: 50, sec: 3000, from: 0, to: 50, part: 1 },
+      { id: "1B", label: "Part 1, section B", n: 50, sec: 3000, from: 50, to: 100, part: 1 },
+      { id: "1C", label: "Part 1, section C", n: 50, sec: 3000, from: 100, to: 150, part: 1 },
+      { id: "2A", label: "Part 2, section A", n: 50, sec: 3000, from: 150, to: 200, part: 2 },
+      { id: "2B", label: "Part 2, section B", n: 50, sec: 3000, from: 200, to: 250, part: 2 },
+      { id: "2C", label: "Part 2, section C", n: 50, sec: 3000, from: 250, to: 300, part: 2 },
+    ];
+    return { id, kind, exam, starts_at: start, ends_at: start + Math.max(3 * 3600e3, 18000 * 1000 + 3600e3), n: 300, secs: 18000, seed: "v1:" + id, sections };
+  }
+  return { id, kind, exam, starts_at: start, ends_at: start + 3 * 3600e3, n: 100, secs: 7200, seed: "v1:" + id };
 }
 /* Per kind: `current` = the latest event that has started (open or closed), `next` = the first not yet started. */
 export function scheduleFor(exam, now) {
@@ -90,19 +116,27 @@ export function scheduleFor(exam, now) {
 export function submitDeadline(ev, startedAt) { return Math.min(startedAt + ev.secs * 1000, ev.ends_at) + EVENT_GRACE_MS; }
 
 /* ---------- the screened bank ---------- */
-const PREFIX = "prep-bank/v1/";
 const _cache = new Map();
-/* bank(r2) -> { index(subject), module(subject, file) } over R2 keys prep-bank/v1/...; files are immutable within a
- * version, so they are cached per isolate (bounded). Missing or broken files read as null. */
-export function bankFrom(r2) {
-  const read = async (key) => {
-    if (_cache.has(key)) return _cache.get(key);
+/* bank(r2) -> { index(subject), module(subject, file) } over R2 keys prep-bank/<ver>/...; files are immutable within a
+ * version, so they are cached per isolate (bounded). Missing or broken files read as null.
+ * Reads v5 by default (v16 for ss-radiology) with fallback to v1 for test harnesses and backward compatibility. */
+export function bankFrom(r2, defaultVer = "v5") {
+  const read = async (subject, path) => {
+    const prefVer = subject === "ss-radiology" ? "v16" : defaultVer;
+    const cacheKey = `${prefVer}:${subject}/${path}`;
+    if (_cache.has(cacheKey)) return _cache.get(cacheKey);
     let v = null;
-    try { const o = r2 && (await r2.get(PREFIX + key)); v = o ? JSON.parse(await (o.text ? o.text() : new Response(o.body).text())) : null; } catch (e) { v = null; }
-    if (v) { if (_cache.size > 400) _cache.clear(); _cache.set(key, v); }   // ponytail: crude bound, LRU if it matters
+    try {
+      let o = r2 && (await r2.get(`prep-bank/${prefVer}/${subject}/${path}`));
+      if (!o && prefVer !== "v1") {
+        o = r2 && (await r2.get(`prep-bank/v1/${subject}/${path}`));
+      }
+      v = o ? JSON.parse(await (o.text ? o.text() : new Response(o.body).text())) : null;
+    } catch (e) { v = null; }
+    if (v) { if (_cache.size > 400) _cache.clear(); _cache.set(cacheKey, v); }
     return v;
   };
-  return { index: (s) => read(`${s}/index.json`), module: (s, file) => (/^mcq\/[a-z0-9-]{2,80}\.json$/.test(file) ? read(`${s}/${file}`) : Promise.resolve(null)) };
+  return { index: (s) => read(s, "index.json"), module: (s, file) => (/^mcq\/[a-z0-9-]{2,80}\.json$/.test(file) ? read(s, file) : Promise.resolve(null)) };
 }
 const usable = (it) => !!it && !(it.flags && it.flags.length) && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4 && typeof it.id === "string";
 // prep.js poolFor: flagged items out; for USMLE, vignettes when a module has at least 5.

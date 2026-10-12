@@ -68,12 +68,15 @@ export function estimateJob(parts, cfg) {
   const r = (x) => Math.round(x * 10000) / 10000;
   return { questions: n, batch: r(b), direct: r(d), perQuestionBatch: r(b / Math.max(1, n)), perQuestionDirect: r(d / Math.max(1, n)) };
 }
-/* toOverlay(items, { subject, module, set }) -> { topic, set, v, items } in the overlay shape prep.js loads. */
+/* toOverlay(items, { subject, module, set }) -> { topic, set, v, items } in the overlay shape prep.js loads.
+   Four options (the qgen engine) or five (best-of-five banks such as MRCP); exam tags pass through so the
+   Tests tab can scope overlay items to one profile. */
 export function toOverlay(items, o) {
-  const keep = (items || []).filter((it) => it && it.q && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && (!it.qg || it.qg.v === "ok" || it.qg.approved));
+  const keep = (items || []).filter((it) => it && it.q && Array.isArray(it.o) && (it.o.length === 4 || it.o.length === 5) && Number.isInteger(it.a) && it.a >= 0 && it.a < it.o.length && (!it.qg || it.qg.v === "ok" || it.qg.approved));
   return { topic: o.module, set: o.set, v: 1, items: keep.map((it) => {
     const id = "mk-" + String(it.id || "").replace(/^q_/, "");
     const out = { id, q: it.q, o: it.o, a: it.a, exp: it.exp || "", r: it.r || [], kp: it.kp || "", t: o.module, d: it.d || 2, cog: it.cog || "recall", prov: "SMD", gen: "AI", set: o.set };
+    if (it.ex && it.ex.length) out.ex = it.ex.slice();
     if (it.tg && it.tg.length) out.tg = it.tg;
     if (it.x) out.x = it.x;
     if (it.quality) out.quality = it.quality;
@@ -213,7 +216,7 @@ async function publish() {
     }
   }
   const set = arg("--set", "maik1");
-  if (!/^maik(?:img)?[1-9]\d{0,2}$/.test(set)) { say("Need valid --set maik<n> or maikimg<n>."); process.exit(2); }
+  if (!/^maik(?:img|topic)?[1-9]\d{0,2}$/.test(set)) { say("Need valid --set maik<n>, maikimg<n> or maiktopic<n>."); process.exit(2); }
 
   if (!module) {
     // Multi-module publish: items carry sid/subject and t/module

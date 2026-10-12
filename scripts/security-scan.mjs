@@ -269,7 +269,7 @@ export function scanTextForCors(text) {
  * _rx_public the opaque-handle prescription verification. */
 export const AUTH_MARKERS = [
   "resolveActor", "resolveClinicalActor", "resolveIdentity", "authorizeOrg",
-  "verifyStaffSession", "verifyFirebaseToken", "identify(", "ownerOK",
+  "verifyStaffSession", "verifyFirebaseToken", "verifiedClaimsFor", "identify(", "ownerOK",
   "resolveBearer", "callerUid", "verifyDisplayToken", "redeemCode",
   "portalRead", "sessionPatient", "smartEnabled", "authorise", "hmacHex",
   "makeSecrets", "_rx_public", "verifySecret", "verifyMfaChallenge",
@@ -297,6 +297,7 @@ export const PUBLIC_ALLOWLIST = {
   "functions/api/validation.js": "passphrase gate acknowledged weak by design in its own header; append-only storage is the real protection, no patient data",
   "functions/api/ws-feedback.js": "anonymous by design: header documents an aggregate feedback signal pipe storing no identity; GET returns counts only",
   "functions/api/prep/bank/[[path]].js": "public by design: header documents read-only serving of the versioned PrepNucleus question bank (MedMCQA MIT plus StewardMD items) from R2 behind a strict path whitelist; nothing per user, no writes",
+  "functions/api/prep/stats.js": "public by design: opt-in de-identified item statistics (plan section 11), POST reads no identity or PII, GET is owner-gated or snapshot",
   "functions/api/unsubscribe.js": "session-free by design: header documents a SIGNED unsubscribe token (functions/_unsub.js) as the credential, RFC 8058 one-click; a forged link does nothing and it flips only the marketing flag",
 };
 

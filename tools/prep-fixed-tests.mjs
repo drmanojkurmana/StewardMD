@@ -46,13 +46,19 @@ const PURE = need(path.join(ROOT, "prep.js"));
 
 export const TESTS_VER = "v1";
 export const PAPER_SCHEMA = "prep/fixed-paper/v1";
-// The five exams of the owner request (ini-ss is a profile but not a common-tests exam).
+// The common-tests exams (ini-ss is a profile but not a common-tests exam).
 export const EXAMS = [
   { profile: "fmge", tab: "fmge", branch: "mbbs", tag: "fmge", all: true },
   { profile: "neet-pg", tab: "neet-pg", branch: "mbbs", tag: "neet-pg" },
   { profile: "ini-cet", tab: "neet-pg", branch: "mbbs", tag: "ini-cet" },
   { profile: "neet-ss", tab: "neet-ss", branch: "ss-medicine", tag: "neet-ss" },
   { profile: "usmle-step1", tab: "usmle", branch: "mbbs", tag: "usmle" },
+  { profile: "plab-1", tab: "plab", branch: "uk", tag: "plab-1" },
+  { profile: "mrcs-part-a", tab: "mrcs", branch: "uk", tag: "mrcs-part-a" },
+  { profile: "amc-mcq", tab: "amc", branch: "intl", tag: "amc-mcq" },
+  { profile: "mccqe-1", tab: "mccqe", branch: "intl", tag: "mccqe-1" },
+  { profile: "mrcp-part1", tab: "mrcp", branch: "mrcp", tag: "mrcp-part1" },
+  { profile: "mrcp-part2-written", tab: "mrcp", branch: "mrcp", tag: "mrcp-part2-written" },
 ];
 export const FORMATS = ["grand", "part", "mini", "subject_mini", "topic", "daily10", "image", "pyq"];
 // Papers requested per format. Topic papers are one per major topic (TOP_PER_SUBJECT biggest per subject,

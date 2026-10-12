@@ -16,6 +16,7 @@ test("every registered diagram renders a valid non-empty SVG", () => {
   assert.ok(ids.length >= 19, `expected at least 19 diagrams, got ${ids.length}`);
   for (const id of ids) {
     assert.ok(Diagrams.has(id), `Diagrams.has('${id}') should be true`);
+    if (Diagrams.DIAGRAMS[id].iso) continue; // an isometric figure slot, mounted in the browser (test/iso-figures.test.mjs)
     const svg = Diagrams.render(id, {});
     assert.ok(typeof svg === "string" && svg.includes("<svg"), `${id} must render an SVG element`);
     assert.ok(svg.includes("</svg>"), `${id} must close the SVG element`);

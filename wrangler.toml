@@ -58,6 +58,12 @@ binding = "PREP_ARENA_DB"
 database_name = "prep-arena-db"
 database_id = "45bc1834-baa0-4f75-890e-cc0d81fdff08"
 
+# D1 - PrepNucleus Item Statistics (plan section 11; reuses prep-arena-db)
+[[d1_databases]]
+binding = "PREP_STATS_DB"
+database_name = "prep-arena-db"
+database_id = "45bc1834-baa0-4f75-890e-cc0d81fdff08"
+
 # R2 — FollowCare patient photos (wound/rash/etc). PHI-minimising: private bucket, 7-day lifecycle expiry on
 # the followcare/ prefix + view-once (FOLLOWCARE_PHOTO_VIEW_ONCE=1) + purge-on-erase. Code binding = FOLLOWCARE_R2.
 [[r2_buckets]]
@@ -303,6 +309,11 @@ database_id = "b38bab39-65aa-41d3-9200-033ab41da541"
 # REPLACE_AFTER_CREATE below (both blocks) and in prep-arena-worker/wrangler.toml with the returned id.
 [[env.production.d1_databases]]
 binding = "PREP_ARENA_DB"
+database_name = "prep-arena-db"
+database_id = "45bc1834-baa0-4f75-890e-cc0d81fdff08"
+
+[[env.production.d1_databases]]
+binding = "PREP_STATS_DB"
 database_name = "prep-arena-db"
 database_id = "45bc1834-baa0-4f75-890e-cc0d81fdff08"
 

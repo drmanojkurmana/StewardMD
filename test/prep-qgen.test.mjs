@@ -353,6 +353,18 @@ test("CLI: chunks, plan, estimate, overlay shape; the dry run makes no call", as
   assert.equal(r.status, 0, r.stderr);
   assert.match(r.stdout, /Estimate: Batch \$\d/); assert.match(r.stdout, /DRY RUN: nothing was sent/);
 });
+test("CLI toOverlay: five-option best-of-five items keep their options and exam tags", async () => {
+  const C = await import("../tools/prep-qgen.mjs");
+  const o5 = ["a", "b", "c", "d", "e"], r5 = ["1", "2", "3", "4", "5"];
+  const ov = C.toOverlay([
+    { id: "q_0123456789ab", q: "Q?", o: o5, a: 4, exp: "e", r: r5, ex: ["mrcp-part1"], qg: { v: "ok" } },
+    { id: "q_bbbbbbbbbbbb", q: "Q2?", o: o5, a: 5, qg: { v: "ok" } },
+    { id: "q_cccccccccccc", q: "Q3?", o: ["a", "b", "c"], a: 0, qg: { v: "ok" } },
+  ], { subject: "mrcp-cardiology", module: "mcard-valvular", set: "maik18" });
+  assert.equal(ov.items.length, 1);
+  assert.deepEqual(ov.items[0].o, o5); assert.equal(ov.items[0].a, 4);
+  assert.deepEqual(ov.items[0].ex, ["mrcp-part1"]);
+});
 test("bank route serves maik overlays, never the staging prefix", async () => {
   const src = (await import("node:fs")).readFileSync(new URL("../functions/api/prep/bank/[[path]].js", import.meta.url), "utf8");
   const re = /const MAIK_RE = (\/.+\/);/.exec(src)[1];

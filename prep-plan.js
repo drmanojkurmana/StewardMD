@@ -3,9 +3,11 @@
    through PREP._host (same overlay, back stack, runner and store). prep.js forwards every data-act starting "p-" here,
    asks back() first on back, shows onboard() on the first plain open and draws homeHtml() where the Today card was.
 
-   Store (smd_prep_v1): pl { ob, exam, date, min, rem } = onboarding answers (ob 1 once finished or skipped; exam is one
-   of EXAM_CHOICES; date "YYYY-MM-DD" or null; min daily minutes; rem "HH:MM" or null: the daily reminder time,
-   scheduled by prep-native.js when the student turns the reminder on). pt { d, ex, items } = today's plan, made once per local day and exam tab. ra = the last answers as
+   Store (smd_prep_v1): pl { ob, exam, group?, subject?, date, min, rem } = onboarding answers (ob 1 once finished or
+   skipped; exam is one of EXAM_CHOICES; group the NEET-SS specialty group (SS_GROUPS id, default medical); subject the
+   one INI-SS subject (an ss-* subject id); date "YYYY-MM-DD" or null; min daily minutes; rem "HH:MM" or null: the daily
+   reminder time, scheduled by prep-native.js when the student turns the reminder on). pt { d, ex, items } = today's plan,
+   made once per local day and exam tab. ra = the last answers as
    [module, 1|0] (written by prep.js record()), read by readiness.
 
    Readiness per exam = geometric mean of coverage (share of the exam's modules attempted, weighted by the exam's
@@ -21,15 +23,62 @@
   var CORE = NODE ? require("./specialty-core.js") : G.SPECIALTY_CORE;
 
   /* ================= pure ================= */
-  // Exams a student can pick; tab = the exam tab in prep.js (INI-CET shares the NEET-PG bank and tab).
+  // Exams a student can pick; tab = the exam tab in prep.js (exams sharing a bank share the tab), profile = the exam
+  // profile in prep/assess/profiles (Tests, marking and results follow the profile, never the tab).
   var EXAM_CHOICES = [
-    { id: "neet-pg", tab: "neet-pg", label: "NEET-PG", sub: "MD, MS and DNB entrance, 19 MBBS subjects" },
-    { id: "ini-cet", tab: "neet-pg", label: "INI-CET", sub: "AIIMS, JIPMER, PGIMER and NIMHANS entrance" },
-    { id: "neet-ss", tab: "neet-ss", label: "NEET-SS", sub: "Superspeciality entrance, medicine group" },
-    { id: "ini-ss", tab: "neet-ss", label: "INI-SS", sub: "Superspeciality entrance of AIIMS, JIPMER and PGIMER, medicine group" },
-    { id: "usmle", tab: "usmle", label: "USMLE", sub: "Clinical vignettes where the bank has them" },
-    { id: "fmge", tab: "fmge", label: "FMGE", sub: "Screening test for foreign medical graduates" }
+    { id: "neet-pg", tab: "neet-pg", profile: "neet-pg", label: "NEET-PG", sub: "MD, MS and DNB entrance, 19 MBBS subjects" },
+    { id: "ini-cet", tab: "neet-pg", profile: "ini-cet", label: "INI-CET", sub: "AIIMS, JIPMER, PGIMER and NIMHANS entrance" },
+    { id: "neet-ss", tab: "neet-ss", profile: "neet-ss", label: "NEET-SS", sub: "Superspeciality entrance, one group paper" },
+    { id: "ini-ss", tab: "neet-ss", profile: "ini-ss", label: "INI-SS", sub: "AIIMS, JIPMER and PGIMER superspeciality entrance, one subject" },
+    { id: "usmle-step1", tab: "usmle", profile: "usmle-step1", label: "USMLE Step 1", sub: "Basic-science vignettes in blocks" },
+    { id: "usmle-step2-ck", tab: "usmle", profile: "usmle-step2-ck", label: "USMLE Step 2 CK", sub: "Clinical vignettes in blocks" },
+    { id: "fmge", tab: "fmge", profile: "fmge", label: "FMGE", sub: "Screening test for foreign medical graduates" },
+    { id: "plab-1", tab: "plab", profile: "plab-1", label: "PLAB 1", sub: "GMC MLA AKT, 180 questions" },
+    { id: "amc-mcq", tab: "amc", profile: "amc-mcq", label: "AMC CAT MCQ", sub: "Australian Medical Council MCQ, 150 questions" },
+    { id: "mccqe-1", tab: "mccqe", profile: "mccqe-1", label: "MCCQE Part I", sub: "Medical Council of Canada, 230 questions" },
+    { id: "mrcp-part1", tab: "mrcp", profile: "mrcp-part1", label: "MRCP Part 1", sub: "MRCP(UK) Part 1, 2 papers of 100 best-of-five" },
+    { id: "mrcp-part2-written", tab: "mrcp", profile: "mrcp-part2-written", label: "MRCP Part 2 Written", sub: "MRCP(UK) Part 2 Written, 2 papers of 100 best-of-five" },
+    { id: "mrcs-part-a", tab: "mrcs", profile: "mrcs-part-a", label: "MRCS Part A", sub: "Intercollegiate MRCS Part A, 300 questions" }
   ];
+  /* NEET-SS papers are set per specialty group (NBEMS NEET-SS bulletin: one 150-question paper per group; the 2025
+     groups below, each with its feeder broad specialty). subjects = the bank's ss-* subjects in that group: the
+     question bank covers the Medical group (plus the single-group subjects named), so every other group lists no
+     subjects yet and its students see the honest "being added" state until its bank exists. */
+  var SS_GROUPS = [
+    { id: "medical", label: "Medical group", feeder: "MD or DNB General Medicine",
+      subjects: ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology",
+        "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology",
+        "ss-infectious-diseases", "ss-biostatistics"] },
+    { id: "surgical", label: "Surgical group", feeder: "MS or DNB General Surgery", subjects: [] },
+    { id: "anaesthesiology", label: "Anaesthesiology group", feeder: "MD or DNB Anaesthesiology", subjects: [] },
+    { id: "critical-care", label: "Critical Care group", feeder: "MD or DNB Anaesthesiology, Medicine or equivalent", subjects: ["ss-critical-care", "ss-pulmonology"] },
+    { id: "ent", label: "ENT group", feeder: "MS or DNB ENT", subjects: [] },
+    { id: "medical-oncology", label: "Medical Oncology group", feeder: "MD or DNB General Medicine or equivalent", subjects: ["ss-medical-oncology"] },
+    { id: "microbiology", label: "Microbiology group", feeder: "MD or DNB Microbiology", subjects: [] },
+    { id: "obs-gynae", label: "Obstetrics and Gynaecology group", feeder: "MS or DNB Obstetrics and Gynaecology", subjects: [] },
+    { id: "orthopaedics", label: "Orthopaedics group", feeder: "MS or DNB Orthopaedics", subjects: [] },
+    { id: "paediatric", label: "Paediatric group", feeder: "MD or DNB Paediatrics", subjects: [] },
+    { id: "pathology", label: "Pathology group", feeder: "MD or DNB Pathology", subjects: [] },
+    { id: "pharmacology", label: "Pharmacology group", feeder: "MD or DNB Pharmacology", subjects: [] },
+    { id: "psychiatry", label: "Psychiatry group", feeder: "MD or DNB Psychiatry", subjects: [] },
+    { id: "radio-diagnosis", label: "Radio-diagnosis group", feeder: "MD or DNB Radio-diagnosis", subjects: ["ss-radiology"] },
+    { id: "respiratory", label: "Respiratory Medicine group", feeder: "MD or DNB Respiratory Medicine or equivalent", subjects: ["ss-pulmonology", "ss-critical-care"] }
+  ];
+  function ssGroupOf(id) { for (var gi = 0; gi < SS_GROUPS.length; gi++) if (SS_GROUPS[gi].id === id) return SS_GROUPS[gi]; return null; }
+  function ssGroupSubjects(id) { var g = ssGroupOf(id); return g ? g.subjects.slice() : []; }
+  function defaultSsGroup() { return "medical"; }
+  // The exam profile a plan choice resolves to. Legacy "usmle" plans (before the Step 1 / Step 2 CK split) read Step 1.
+  function planProfileId(id) { if (id === "usmle") return "usmle-step1"; var c = choiceOf(id); return c ? (c.profile || c.id) : id; }
+  // The validated NEET-SS group on a plan: the stored one, else the bank's group (medical). null off the NEET-SS plan.
+  function planGroup(pl) { if (!pl || pl.exam !== "neet-ss") return null; return ssGroupOf(pl.group) ? pl.group : defaultSsGroup(); }
+  // Keep group/subject to the exams they belong to; NEET-SS without a group means the bank's group.
+  function normalizePlan(c) {
+    c = c || {};
+    if (c.exam === "neet-ss" && !ssGroupOf(c.group)) c.group = defaultSsGroup();
+    if (c.exam !== "neet-ss") delete c.group;
+    if (c.exam !== "ini-ss") delete c.subject;
+    return c;
+  }
   var MINUTES = [15, 30, 60, 90, 120];
   /* Blueprints: marks per subject as published. FMGE: NBEMS FMGE October 2026 information bulletin, section 12.2
      (pre and para clinical 100, clinical 200). Radiotherapy (5) has no subject in the bank and is left out. */
@@ -182,7 +231,8 @@
     return { n: n, rank: rank, xp: xp, lo: lo, hi: hi, p: (xp - lo) / (hi - lo) };
   }
 
-  var PURE = { xpOf: xpOf, levelOf: levelOf, EXAM_CHOICES: EXAM_CHOICES, MINUTES: MINUTES, BLUEPRINT: BLUEPRINT, choiceOf: choiceOf, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
+  var PURE = { xpOf: xpOf, levelOf: levelOf, EXAM_CHOICES: EXAM_CHOICES, SS_GROUPS: SS_GROUPS, MINUTES: MINUTES, BLUEPRINT: BLUEPRINT, choiceOf: choiceOf,
+    ssGroupOf: ssGroupOf, ssGroupSubjects: ssGroupSubjects, defaultSsGroup: defaultSsGroup, planProfileId: planProfileId, planGroup: planGroup, normalizePlan: normalizePlan, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
     dayOfDate: dayOfDate, daysLeft: daysLeft, geo: geo, readiness: readiness, subjectAction: subjectAction, pickLesson: pickLesson, planDay: planDay,
     newToday: newToday, dueNow: dueNow, itemProgress: itemProgress, noteAnswer: noteAnswer, isQ: isQ };
   if (NODE) { module.exports = PURE; return; }
@@ -506,13 +556,38 @@
     if (arg.charAt(0) === "h") h = (h + d + 24) % 24; else m = (m + 5 * d + 60) % 60;
     return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
   }
+  // The ss-* subjects an INI-SS student picks one of, in taxonomy order. [] before the tree loads.
+  function ssSubjectOptions() {
+    var out = [];
+    try { (H.subjectsOf("neet-ss") || []).forEach(function (sb) { out.push([sb.id, H.tx(sb.name)]); }); } catch (e) {}
+    return out;
+  }
+  // The second half of the exam step: the NEET-SS group (one paper per group) or the one INI-SS subject.
+  function examSubHtml(c) {
+    if (!c) return "";
+    if (c.exam === "neet-ss") {
+      return '<div class="pl-subq" role="radiogroup" aria-label="NEET-SS group"><p class="pn-mut pn-small">Your group: one paper per group.</p><div class="pl-opts">' + SS_GROUPS.map(function (g) {
+        var on = (c.group || defaultSsGroup()) === g.id, noq = !g.subjects.length;
+        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder + (noq ? ". Questions being added" : "")) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
+      }).join("") + "</div></div>";
+    }
+    if (c.exam === "ini-ss") {
+      var opts = ssSubjectOptions();
+      if (!opts.length) return "";
+      return '<div class="pl-subq" role="radiogroup" aria-label="INI-SS subject"><p class="pn-mut pn-small">Your one subject: INI-SS is set per superspeciality.</p><div class="pl-opts">' + opts.map(function (o) {
+        var on = c.subject === o[0];
+        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-subject" data-v="' + esc(o[0]) + '"><span class="pn-rb"><b>' + esc(o[1]) + '</b></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
+      }).join("") + "</div></div>";
+    }
+    return "";
+  }
   function fieldsHtml(c, step) {
     var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + esc(v) + '">' + label + "</button>"; };
     var out = {}, ch = choiceOf(c.exam);
     out.exam = step ? '<div class="pl-opts" role="radiogroup" aria-label="Exam">' + EXAM_CHOICES.map(function (e) {
       var on = c.exam === e.id;
       return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-exam" data-v="' + e.id + '"><span class="pn-rb"><b>' + esc(e.label) + "</b><small>" + esc(e.sub) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
-    }).join("") + "</div>" : segHtml("p-f-exam", "Exam", EXAM_CHOICES.map(function (e) { return [e.id, esc(e.label)]; }), c.exam) + '<p class="pn-mut pn-small pl-segsub">' + esc(ch ? ch.sub : "") + "</p>";
+    }).join("") + "</div>" + examSubHtml(c) : segHtml("p-f-exam", "Exam", EXAM_CHOICES.map(function (e) { return [e.id, esc(e.label)]; }), c.exam) + '<p class="pn-mut pn-small pl-segsub">' + esc(ch ? ch.sub : "") + "</p>" + examSubHtml(c);
     var d = new Date(H.today() * 864e5), iso = d.toISOString().slice(0, 10), left = c.date ? dayOfDate(c.date) - H.today() : null;
     var exact = '<details class="pl-exact"><summary>Type a date</summary><label class="pn-sl"><span class="pn-mut pn-small">Exam date</span><input class="pn-in" type="date" id="plDate" name="examDate" min="' + iso + '" value="' + esc(c.date || "") + '"></label></details>';
     var calBody = calHtml(c) + '<div class="pn-wrap">' + chip("p-f-nodate", "1", !c.date, "Not decided yet") + "</div>" + exact;
@@ -530,16 +605,26 @@
       (G.PREP_NATIVE ? G.PREP_NATIVE.remHtml(c, !step) : '<p class="pn-mut pn-small">Your reminder time is kept on this phone.</p>');
     return step ? out[step] : out;
   }
+  // A plan choice for an exam tab: the first choice on it (legacy "usmle" reads Step 1).
+  function choiceForTab(tab) { for (var i = 0; i < EXAM_CHOICES.length; i++) if (EXAM_CHOICES[i].tab === tab) return EXAM_CHOICES[i].id; return null; }
   function settingsSheet() {
     SET = JSON.parse(JSON.stringify(cfg())); P.cal = null; P.calOpen = false;
-    if (!SET.exam) SET.exam = H.exam().id;
+    if (SET.exam === "usmle") SET.exam = "usmle-step1";
+    if (!choiceOf(SET.exam)) SET.exam = choiceForTab(H.exam().id);
     drawSettings(true);
+  }
+  // The plan's scope under the exam name: the NEET-SS group or the one INI-SS subject.
+  function scopeLabel(c) {
+    if (!c) return "";
+    if (c.exam === "neet-ss") { var g = ssGroupOf(c.group || defaultSsGroup()); return g ? " · " + g.label : ""; }
+    if (c.exam === "ini-ss" && c.subject) { try { var sb = H.subjectById(c.subject); if (sb) return " · " + H.tx(sb.name); } catch (e) {} return ""; }
+    return "";
   }
   function drawSettings(first) {
     var f = fieldsHtml(SET);
     var ch = choiceOf(SET.exam), mins = SET.min < 60 ? SET.min + " min" : SET.min === 60 ? "1 hour" : SET.min === 90 ? "1 h 30 min" : "2 hours";
     var sec = function (k, icon, title, body) { return '<section class="pl-grp pl-g-' + k + '"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true">' + ic(icon) + "</span>" + title + "</h3>" + body + "</section>"; };
-    var html = '<span class="pn-grab" aria-hidden="true"></span><div class="pl-shead"><span class="pl-shart" aria-hidden="true"></span><div><h2 id="pnSetT">Your plan</h2><p class="pn-mut pn-small">' + esc((ch ? ch.label : "Your exam") + " · " + mins + " a day" + (SET.rem ? " · reminder " + SET.rem : "")) + '</p></div></div><div class="pl-setbody">' +
+    var html = '<span class="pn-grab" aria-hidden="true"></span><div class="pl-shead"><span class="pl-shart" aria-hidden="true"></span><div><h2 id="pnSetT">Your plan</h2><p class="pn-mut pn-small">' + esc((ch ? ch.label : "Your exam") + scopeLabel(SET) + " · " + mins + " a day" + (SET.rem ? " · reminder " + SET.rem : "")) + '</p></div></div><div class="pl-setbody">' +
       sec("exam", "cap", "Exam", f.exam) + sec("date", "cal", "Exam date", f.date) + sec("min", "clock", "Time a day", f.min) + sec("rem", "bell", "Reminder", f.rem) + (G.PREP_ASK ? G.PREP_ASK.settingsHtml(H) : "") + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="p-save">Save</button><button type="button" class="pn-btn" data-act="p-close">Cancel</button></div>';
     if (first) openSheet("set", html, "pnSetT");
@@ -590,8 +675,12 @@
   }
   function normCal() { while (P.cal.m < 0) { P.cal.m += 12; P.cal.y--; } while (P.cal.m > 11) { P.cal.m -= 12; P.cal.y++; } var td = new Date(H.today() * 864e5); if (P.cal.y * 12 + P.cal.m < td.getUTCFullYear() * 12 + td.getUTCMonth()) P.cal = { y: td.getUTCFullYear(), m: td.getUTCMonth() }; }
   function apply(c) {
-    var s = store(), ch = choiceOf(c.exam);
-    s.pl = { ob: 1, exam: ch ? ch.id : null, date: c.date || null, min: MINUTES.indexOf(c.min) >= 0 ? c.min : 30, rem: c.rem || null };
+    var s = store(), ch = choiceOf((c || {}).exam);
+    c = normalizePlan({ exam: ch ? ch.id : null, group: c.group, subject: c.subject, date: c.date || null,
+      min: MINUTES.indexOf(c.min) >= 0 ? c.min : 30, rem: c.rem || null });
+    s.pl = { ob: 1, exam: c.exam, date: c.date, min: c.min, rem: c.rem };
+    if (c.group) s.pl.group = c.group;
+    if (c.subject) s.pl.subject = c.subject;
     if (ch) s.exam = ch.tab;
     s.pt = null;
     H.save();
@@ -608,7 +697,8 @@
   function onboard(h) {
     H = h;
     if (!P.ob) { P.ob = { i: 0, c: { exam: null, date: null, min: 30, rem: null } }; P.cal = null; }
-    var o = P.ob, st = STEPS[o.i], last = o.i === STEPS.length - 1, can = st[0] !== "exam" || !!o.c.exam;
+    var o = P.ob, st = STEPS[o.i], last = o.i === STEPS.length - 1,
+      can = st[0] !== "exam" || (!!o.c.exam && (o.c.exam !== "ini-ss" || !!o.c.subject));
     H.paint('<div class="pn-sky" aria-hidden="true"></div>' + H.bar("PrepNucleus", "Step " + (o.i + 1) + " of 4", "close", st[0] === "exam" ? "" : '<button type="button" class="pn-link pl-skip" data-act="p-skip">Skip</button>') +
       '<div class="pn-lsn-prog" aria-hidden="true">' + STEPS.map(function (x, i) { return "<i" + (i <= o.i ? ' class="on"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pl-ob"><img class="pl-art" src="/prep/art/ob-' + st[0] + '.webp" alt="" width="640" height="640" decoding="async"><h2 class="pl-q" id="plQ" tabindex="-1">' + st[1] + '</h2><p class="pn-mut">' + st[2] + "</p>" + fieldsHtml(o.c, st[0]) +
@@ -644,7 +734,9 @@
     var c = P.sheet && P.sheet.id === "set" ? SET : P.ob && P.ob.c, redraw = P.sheet && P.sheet.id === "set" ? function () { drawSettings(false); } : function () { onboard(H); };
     if (a.indexOf("p-n-") === 0) return G.PREP_NATIVE && G.PREP_NATIVE.act(a, b, H, c && redraw);
     if (a.indexOf("p-f-") === 0 && c) {
-      if (a === "p-f-exam") c.exam = v;
+      if (a === "p-f-exam") { c.exam = v; if (v === "neet-ss" && !ssGroupOf(c.group)) c.group = defaultSsGroup(); if (v !== "ini-ss") c.subject = null; }
+      if (a === "p-f-group" && c.exam === "neet-ss" && ssGroupOf(v)) c.group = v;
+      if (a === "p-f-subject" && c.exam === "ini-ss") c.subject = v;
       if (a === "p-f-nodate") c.date = null;
       if (a === "p-f-min") c.min = Number(v);
       if (a === "p-f-norem") c.rem = null;

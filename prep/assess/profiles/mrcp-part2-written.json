@@ -15,8 +15,8 @@
     "status": "provisional"
   },
   "bank": {
-    "note": "no MRCP Part 2 Written questions in the bank yet, so no test types are offered",
-    "status": "coming"
+    "note": "1,551 MRCP Part 2 Written best-of-five questions (1,490 text + 61 image-based) across the 16 Federation syllabus categories",
+    "status": "available"
   },
   "format": {
     "duration_min": 360,
@@ -41,6 +41,7 @@
     ]
   },
   "id": "mrcp-part2-written",
+  "item_ex": "mrcp-part2-written",
   "item_styles": [
     {
       "basis": "official Part 2 page states questions include images; share not published",
@@ -203,6 +204,14 @@
       "official": true,
       "section": "Format",
       "src": "MRCP-P2-FORMAT",
+      "verified_on": "2026-10-12"
+    },
+    {
+      "field": "/item_ex",
+      "note": "bank items for MRCP Part 2 Written carry the 'mrcp-part2-written' exam tag; the assembler admits only items carrying it, so Part 1 and Part 2 pools never mix",
+      "official": false,
+      "section": "Bank build (StewardMD)",
+      "src": "BANK-BUILD",
       "verified_on": "2026-10-12"
     }
   ],

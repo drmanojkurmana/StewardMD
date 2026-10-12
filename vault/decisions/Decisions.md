@@ -5,6 +5,18 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-12 · Isometric equipment figures: the Anatomy kit runs at build time only (owner asked)
+
+**Decision.** Use the MIT Anatomy skill/kit (wheresryan22/anatomy) for working equipment figures, but vendor its kit
+into `tools/iso/` and run it only in Node at build time. The app ships static SVG plus a hand-written ES5 driver per
+figure and a ~16 KB ES5 runtime (`iso-figures.js`); no kit code reaches the WebView. **Why:** the kit is modern ES
+modules (the app is ES5 and buildless), its live pages run 136 KB to 1.6 MB, and its CSS has its own palette. Static
+SVG + projection basis + morph keyframes keeps the motion while staying ES5 and themeable (`body.dark`). **Trade-off:**
+a figure change needs `node tools/iso/build.mjs` and a token bump; the kit's geometry audit is not part of the build.
+Each driver mirrors its module's model (Narke circuit, Ophthalmos retinoscopy) and a test pins them equal. Flag
+`smd_iso` default ON with kill switch; all figures `ai_drafted`. **Status:** branch `claude/determined-hopper-ayuqpd`.
+See [[Iso Figures]].
+
 ## 2026-10-04 · WardSynQ: a return to the supplier reverses input GST with a debit note (owner)
 
 **Decision.** Every supplier return (`stock.js returnToSupplier`) carries a debit note written on the return movement:

@@ -40,12 +40,44 @@
   function marking(p) { var sc = p.scoring; return "+" + mark(sc.correct) + " right, " + (sc.incorrect ? "minus " + mark(sc.incorrect) + " wrong" : "no negative marking") + ", unanswered 0"; }
   function store() { var s = H.store(); if (!s.t2h || !Array.isArray(s.t2h)) s.t2h = []; if (!s.t2d || typeof s.t2d !== "object") s.t2d = {}; return s; }
   function tab() { return H.exam().id; }
-  // The student's exam within the tab (plan choice: INI-CET on the NEET-PG tab, INI-SS on NEET-SS, USMLE = Step 1).
+  // The plan's subjects on this tab (the NEET-SS group, the one INI-SS subject); the whole tab without a plan host.
+  function planSubs() {
+    try { if (H.planSubjects) { var r = H.planSubjects(); if (r) return r; } } catch (e) {}
+    try { return H.subjectsOf(tab()); } catch (e2) { return []; }
+  }
+  // The student's exam: the selected plan's exam profile, wherever it sits (plan choice INI-SS on the NEET-SS tab,
+  // USMLE Step 1 or Step 2 CK as selected). The tab's first profile only when no plan is stored.
   function primary() {
-    var s = H.store(), ch = s.pl && s.pl.exam, list = A.forTab(tab()).filter(function (p) { return p.status === "official" || p.id !== "ini-ss"; });
-    var id = ch === "usmle" ? "usmle-step1" : ch;
-    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
-    return list[0] || A.forTab(tab())[0] || null;
+    var s = H.store(), ch = s.pl && s.pl.exam, list = A.forTab(tab());
+    var PP = G.PREP_PLAN && G.PREP_PLAN._pure;
+    var id = PP && ch ? PP.planProfileId(ch) : (ch === "usmle" ? "usmle-step1" : ch);
+    if (id) {
+      var hit = null;
+      try { hit = A.profile(id); } catch (e) { hit = null; }
+      if (hit) return hit;
+    }
+    var sub = list.filter(function (p) { return p.status === "official" || p.id !== "ini-ss"; });
+    for (var i = 0; i < sub.length; i++) if (sub[i].id === id) return sub[i];
+    return sub[0] || list[0] || null;
+  }
+  // The plan's paper scope for an exam: null = the whole exam; else { subs, names, all } and ready-made papers
+  // narrow to these subjects (subject and topic papers by their bank subject, exam-wide papers need the whole exam).
+  function planScope(p0) {
+    var subs = null, all = null;
+    try { subs = H.planSubjects ? H.planSubjects() : H.subjectsOf(tab()); } catch (e) { subs = null; }
+    try { all = H.subjectsOf(tab()); } catch (e2) { all = null; }
+    if (!subs || !all) return null;
+    var sids = subs.map(function (x) { return x.id; }), aids = all.map(function (x) { return x.id; });
+    if (sids.length === aids.length) return null;
+    var names = {};
+    sids.forEach(function (id) {
+      var sb = null;
+      try { sb = H.subjectById(id); } catch (e3) { sb = null; }
+      var nm = "";
+      try { nm = sb ? (H.tx ? H.tx(sb.name) : (sb.name && sb.name.en) || sb.name) : id; } catch (e4) { nm = id; }
+      names[id] = String(nm || id).toLowerCase();
+    });
+    return { subs: sids, names: names, all: aids };
   }
   function srcLine(p) {
     var keys = Object.keys(p.sources || {});
@@ -68,7 +100,36 @@
   function grpName(f) { return GRP_NAME[f] || fxFormatName(f); }
   function grpShort(f) { return GRP_SHORT[f] || f; }
   function examOrder(list, primaryId) { var out = [], rest = []; (list || []).forEach(function (p) { if (p.id === primaryId) out.push(p); else rest.push(p); }); return out.concat(rest); }
-  function fxFor(papers, examId, format) { return (papers || []).filter(function (r) { return r.exam === examId && r.format === format; }); }
+  /* The bank subject a ready-made paper belongs to, from its id (<exam>-sub-<sid>-<n>, <exam>-topic-<sid>-...):
+     the subject id, false for a subject paper whose subject is not in sids, null when the paper is exam-wide
+     (grand, mini, general image) or its id is unknown. Exam-wide papers stay exam-wide. */
+  function paperSubject(r, sids) {
+    if (!r || !r.id) return null;
+    var pre = null;
+    if (r.format === "subject_mini") pre = r.exam + "-sub-";
+    else if (r.format === "topic") pre = r.exam + "-topic-";
+    else return null;
+    if (r.id.indexOf(pre) !== 0) return null;
+    var rest = r.id.slice(pre.length);
+    if (r.format === "subject_mini") { var m = /^(.*)-\d+$/.exec(rest), sid = m ? m[1] : rest; return (sids || []).indexOf(sid) >= 0 ? sid : false; }
+    var best = null;
+    (sids || []).forEach(function (sid) { if ((rest === sid || rest.indexOf(sid + "-") === 0) && (!best || sid.length > best.length)) best = sid; });
+    return best || false;
+  }
+  // A paper under a plan scope ({ subs, names, all } from planScope, else null = the whole exam): subject and topic
+  // papers keep the plan's subjects; a subject image paper keeps its named subject; exam-wide papers need the plan
+  // to cover the whole exam (so a filtered group never shows a paper built from other subjects).
+  function fxInPlan(r, format, plan) {
+    if (!plan || !plan.subs) return true;
+    if (format === "subject_mini" || format === "topic") { var sid = paperSubject(r, plan.all); return !!sid && plan.subs.indexOf(sid) >= 0; }
+    if (format === "image") {
+      var sc = String(r.scope || "").toLowerCase(), hit = false;
+      plan.subs.forEach(function (id) { var nm = plan.names && plan.names[id]; if (nm && sc.indexOf(nm) >= 0) hit = true; });
+      return hit;
+    }
+    return false;
+  }
+  function fxFor(papers, examId, format, plan) { return (papers || []).filter(function (r) { return r.exam === examId && r.format === format && fxInPlan(r, format, plan); }); }
   function paperDone(t2h, paperId) { var d = false; (t2h || []).forEach(function (x) { if (x.paper === paperId) d = true; }); return d; }
   function engineDone(t2h, pid, type) { var d = false; (t2h || []).forEach(function (x) { if (x.exam === pid && x.type === type && !x.paper) d = true; }); return d; }
   function dailyDoneByKey(t2d, key) { return !!(t2d && key && t2d[key]); }
@@ -189,18 +250,31 @@
   function imageEngineHtml(p) { var b = A.blueprint(p, "image"); if (!b) return ""; return engineBtn(p, "image", b, "Image test: " + b.count + " questions, " + mins(b.duration_sec), false); }
   function caseEngineHtml(p) { var b = A.blueprint(p, "case"); if (!b) return ""; return engineBtn(p, "case", b, "Clinical cases: " + b.count + " questions, " + mins(b.duration_sec), false); }
   // Weak-area and incorrect-question starters: real engine tests from the student's own history (prep.js weakModules
-  // and the mistakes list). With too little history the starter stays visible but disabled and says why.
+  // and the mistakes list), narrowed to the plan's subjects. With too little history the starter stays visible but
+  // disabled and says why.
+  function planSubjectIds() {
+    try {
+      if (H.planSubjects) { var keep = {}; H.planSubjects().forEach(function (x) { keep[x.id] = 1; }); return keep; }
+    } catch (e) {}
+    return null;
+  }
+  function mistakeIds() {
+    var mt = {}, keep = planSubjectIds();
+    try { mt = H.store().mt || {}; } catch (e) { mt = {}; }
+    return Object.keys(mt).filter(function (id) { var b = mt[id]; return b && (!keep || keep[b[0]]); });
+  }
   function weakEngineHtml(p) {
     var weak = [];
     try { weak = H.pure.weakModules(H.store(), 3); } catch (e) { weak = []; }
+    var keep = planSubjectIds();
+    if (keep) weak = weak.filter(function (m) { try { return keep[H.subjectOfModule(m)]; } catch (e2) { return false; } });
     var l = lastOf(p.id, "weak_area"), dis = weak.length ? "" : " disabled aria-disabled=\"true\"";
     var sub = weak.length ? "20 questions from your " + weak.length + (weak.length === 1 ? " weak module" : " weak modules") : "No weak modules yet: a module turns weak after 5 tries under 60% right";
     if (l) sub += " · Last " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts);
     return H.row("t2-pre", H.ico("flag"), "Weak-area test", sub, ' data-k="weak_area" data-p="' + p.id + '" data-need="5"' + dis);
   }
   function incorrectEngineHtml(p) {
-    var n = 0;
-    try { n = Object.keys(H.store().mt || {}).length; } catch (e) { n = 0; }
+    var n = mistakeIds().length;
     var ok = n >= 5, l = lastOf(p.id, "incorrect"), dis = ok ? "" : " disabled aria-disabled=\"true\"";
     var sub = ok ? "Up to 20 of your " + H.fmt(n) + " mistakes, exam marking and timer" : H.fmt(n) + " of 5 mistakes needed for a scored test; questions you get wrong collect here";
     if (l) sub += " · Last " + fmtMarks(l.raw) + " of " + l.max + " · " + dm(l.ts);
@@ -225,7 +299,7 @@
   function groupCounts(p, format) {
     var s = null, t2h = [], t2d = {};
     try { s = store(); t2h = s.t2h || []; t2d = s.t2d || {}; } catch (e) {}
-    var fx = fxFor(P.fx, p.id, format === "custom" ? "__none__" : format);
+    var fx = fxFor(P.fx, p.id, format === "custom" ? "__none__" : format, P.plan);
     var fxDone = countFxDone(fx, t2h), eng = 0, engDone = 0;
     if (format === "daily10") { eng = 2; try { if (dailyDoneByKey(t2d, A.dailyKey(p.id, Date.now(), "daily10"))) engDone++; if (dailyDoneByKey(t2d, A.dailyKey(p.id, Date.now(), "daily_mixed"))) engDone++; } catch (e2) {} }
     else if (format === "grand" || format === "part" || format === "mini") { var b = null; try { b = A.blueprint(p, format); } catch (e3) {} if (b) { eng = 1; if (engineDone(t2h, p.id, format)) engDone = 1; } }
@@ -242,7 +316,7 @@
   function fixedListHtml(p, format) {
     var key = grpKey(p.id, format), q = P.grpQ[key] || "", showAll = !!P.grpShow[key];
     if (P.fx == null) return '<p class="pn-load" role="status">Loading papers…</p>';
-    var all = fxFor(P.fx, p.id, format), found = filterFx(all, q), vis = q ? found : visibleFx(found, showAll);
+    var all = fxFor(P.fx, p.id, format, P.plan), found = filterFx(all, q), vis = q ? found : visibleFx(found, showAll);
     var out = "";
     if (q && all.length) out += '<p class="pn-mut pn-small" role="status">' + found.length + " of " + all.length + " match</p>";
     if (!all.length) {
@@ -273,7 +347,7 @@
   function groupBodyInner(p, format) {
     var key = grpKey(p.id, format), eng = engineHtml(p, format), fx = "";
     if (format === "custom") return eng;
-    var all = P.fx == null ? null : fxFor(P.fx, p.id, format);
+    var all = P.fx == null ? null : fxFor(P.fx, p.id, format, P.plan);
     var search = all != null && all.length > GRP_SEARCH_AT ? '<div class="pn-t2sbox">' + H.ico("search") + '<input type="search" class="pn-in pn-t2search" data-p="' + p.id + '" data-f="' + format + '" name="filter-papers" value="' + esc(P.grpQ[key] || "") + '" placeholder="Filter papers…" aria-label="Filter ' + esc(grpName(format)) + '" autocomplete="off" inputmode="search" spellcheck="false"></div>' : "";
     fx = '<div class="pn-t2fxwrap">' + fixedListHtml(p, format) + "</div>";
     if (!eng && all != null && !all.length && (format === "subject_mini" || format === "topic")) return eng + search + fx;
@@ -288,24 +362,52 @@
       '<span class="pn-t2gt">' + esc(grpName(format)) + '</span><span class="pn-t2gm" data-m="' + p.id + "|" + format + '">' + esc(metaTxt(c)) + '</span><span class="pn-t2chev" aria-hidden="true">' + H.ico("chev") + "</span></button></h3>" +
       '<div class="pn-t2gbody" id="' + gid + '" data-open="' + (open ? "1" : "0") + '" data-p="' + p.id + '" data-f="' + format + '" data-lazy="' + (open ? "0" : "1") + '">' + body + "</div></section>";
   }
-  function jumpBar(p) {
-    return '<div class="pn-t2jump" role="navigation" aria-label="Jump to test type"><div class="pn-t2jrow">' + GRP_ORDER.map(function (f) {
+  // A format group with nothing in it (no starter, no builder, no paper, no PYQ row) is not shown at all.
+  function groupVisible(p, format) {
+    if (engineHtml(p, format)) return true;
+    if (format === "subject_mini" || format === "topic") return true;
+    if (format === "pyq" && recallRowHtml(p)) return true;
+    if (P.fx == null) return true;
+    return fxFor(P.fx, p.id, format === "custom" ? "__none__" : format, P.plan).length > 0;
+  }
+  function visibleFormats(p) { return GRP_ORDER.filter(function (f) { return groupVisible(p, f); }); }
+  function jumpBar(p, formats) {
+    return '<div class="pn-t2jump" role="navigation" aria-label="Jump to test type"><div class="pn-t2jrow">' + (formats || GRP_ORDER).map(function (f) {
       return '<button type="button" class="pn-chip pn-t2j" data-act="t2-jump" data-p="' + p.id + '" data-f="' + f + '" aria-label="Jump to ' + esc(grpName(f)) + '">' + esc(grpShort(f)) + "</button>";
     }).join("") + "</div></div>";
   }
-  // Format-only exam: the official format is shown, but no test types, counts or buttons: the bank holds
-  // no questions for it yet. PLAB 1, AMC, MCCQE, USMLE Step 2 CK, MRCP Part 1, MRCP Part 2 Written and MRCS Part A until their banks exist.
+  // The one short state for an exam whose bank is not ready: the same card shell as an exam section (one title
+  // size, one badge style), one short line, and the format and provenance notes behind an info row.
   function comingSection(p) {
     var prov = p.status !== "official";
-    return '<section class="pn-t2exam" data-p="' + p.id + '" aria-label="' + esc(p.name) + ' format">' +
-      '<h2 class="pn-t2xh"><span class="pn-t2xt"><b>' + esc(p.name) + '</b><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Official format") + "</span></span></h2>" +
-      '<div class="pn-t2xinfo">' + examInfoHtml(p, true) + '<p class="pn-mut"><b>Format available, question bank coming.</b> ' + esc((p.bank && p.bank.note) || "No questions for this exam in the bank yet.") + "</p></div></section>";
+    return '<section class="pn-t2exam pn-t2coming" data-p="' + p.id + '" aria-label="' + esc(p.name) + ' format">' +
+      '<div class="pn-t2xstatic"><span class="pn-t2xt"><b>' + esc(p.name) + '</b><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Coming soon") + "</span></span></div>" +
+      '<div class="pn-t2xinfo"><p class="pn-mut">Questions for this exam are being added.</p>' +
+      '<details class="pn-t2how"><summary>Exam format</summary>' + examInfoHtml(p, true) +
+      ((p.bank && p.bank.note) ? '<p class="pn-mut pn-small">' + esc(p.bank.note) + "</p>" : "") + "</details></div></section>";
+  }
+  // A plan group with no bank subjects yet (rare): the same shell, clearly worded for the group.
+  function groupComingHtml(p, gl) {
+    return '<section class="pn-t2exam pn-t2coming" aria-label="' + esc(p.name + (gl ? " " + gl : "")) + '">' +
+      '<div class="pn-t2xstatic"><span class="pn-t2xt"><b>' + esc(p.name) + (gl ? " · " + esc(gl) : "") + '</b><span class="pn-t2b">Coming soon</span></span></div>' +
+      '<div class="pn-t2xinfo"><p class="pn-mut">Questions for the ' + esc(gl || "group") + " are being added.</p></div></section>";
+  }
+  // One small line under the segment: the plan's exam and scope, with the one way to change it.
+  function planCtxHtml(p0) {
+    var exam = p0.name, scope = "";
+    try { exam = H.planExamLabel ? H.planExamLabel() : p0.name; } catch (e) { exam = p0.name; }
+    try { scope = H.planScopeLabel ? H.planScopeLabel() : ""; } catch (e2) { scope = ""; }
+    return '<p class="pn-mut pn-small pn-t2ctx">' + esc(exam) + (scope ? " · " + esc(scope) : "") + ' · <button type="button" class="pn-link" data-act="p-settings">Change exam</button></p>';
+  }
+  function needSubjectHtml() {
+    return '<section class="pn-panel"><p class="pn-big pn-mid">Pick your INI-SS subject</p><p class="pn-mut">INI-SS is set per superspeciality: Tests and QBank follow the one subject you pick.</p>' +
+      '<button type="button" class="pn-btn pri" data-act="p-settings">' + H.ico("plus") + " Choose subject</button></section>";
   }
   function examSection(p, primaryId, st) {
     if (A.bankStatus(p) === "coming") return comingSection(p);
     var open = examIsOpen(st, p.id, primaryId), c = examCounts(p), prov = p.status !== "official";
-    var xid = "pnT2X-" + p.id;
-    var inner = '<div class="pn-t2xinfo">' + examInfoHtml(p) + "</div>" + jumpBar(p) + GRP_ORDER.map(function (f) { return groupSection(p, f, primaryId, st); }).join("");
+    var xid = "pnT2X-" + p.id, vis = visibleFormats(p);
+    var inner = '<div class="pn-t2xinfo">' + examInfoHtml(p) + "</div>" + jumpBar(p, vis) + vis.map(function (f) { return groupSection(p, f, primaryId, st); }).join("");
     return '<section class="pn-t2exam" data-p="' + p.id + '" aria-label="' + esc(p.name) + ' tests">' +
       '<h2 class="pn-t2xh"><button type="button" class="pn-t2xhead" data-act="t2-x" data-p="' + p.id + '" aria-expanded="' + open + '" aria-controls="' + xid + '">' +
       '<span class="pn-t2xt"><b>' + esc(p.name) + '</b><span class="pn-t2b' + (prov ? " prov" : "") + '">' + (prov ? "Provisional" : "Official format") + "</span></span>" +
@@ -391,6 +493,14 @@
         var m = null;
         try { m = root.querySelector('[data-m="' + p.id + "|" + f + '"]'); } catch (e4) {}
         if (m) m.textContent = metaTxt(groupCounts(p, f));
+        // The papers arrived after the first paint: groups that stayed empty leave the view with their jump chip.
+        if (P.fx != null && !groupVisible(p, f)) {
+          var sec = null, chip = null;
+          try { sec = root.querySelector('section.pn-t2grp[data-p="' + p.id + '"][data-f="' + f + '"]'); } catch (e5) {}
+          try { chip = root.querySelector('[data-act="t2-jump"][data-p="' + p.id + '"][data-f="' + f + '"]'); } catch (e6) {}
+          if (sec) sec.style.display = "none";
+          if (chip) chip.style.display = "none";
+        }
         var body = grpBodyEl(p.id, f);
         if (body && body.getAttribute("data-open") === "1" && body.getAttribute("data-lazy") !== "1") {
           var inner = body.querySelector(".pn-t2ginner");
@@ -506,19 +616,27 @@
       H.push(preScreen);
     }, function () { H.stack().pop(); H.toast("This paper did not load. Check the connection and try again."); H.rerender(); });
   }
+  // The Tests segment shows ONLY the selected plan's exam: its ready-made papers and engine tests, grouped by
+  // format. Other exams stay reachable only through the Change exam link (the plan setup), never as cards here.
   function testsHtml(h) {
     H = h;
-    var list = A.forTab(tab()), p0 = primary();
+    var p0 = primary();
     if (!p0) return '<p class="pn-empty">No exam profile for this exam yet.</p>';
-    var st = loadGrp(), ordered = examOrder(list, p0.id);
-    var more = A.profileIds().map(A.profile).filter(function (p) { return p && A.bankStatus(p) === "coming" && list.indexOf(p) < 0; });
-    P.grpQ = {};
-    return '<div id="pnT2Res">' + (P.sess && P.sess.t2 && !P.sess.done ? resumeHtml(P.sess) : "") + "</div>" +
-      (H.coachSec ? H.coachSec("tests") : "") +
-      '<p class="pn-mut pn-small">The same ready-made papers for every student, grouped by exam and format. Your exam is on top.</p>' +
-      ordered.map(function (p) { return examSection(p, p0.id, st); }).join("") +
-      (more.length ? '<h2 class="pn-h">More exam formats</h2>' + more.map(comingSection).join("") : "") + globalPracticeHtml() +
-      '<p class="pn-mut pn-small" id="pnT2Note">Every test shows its size, time and scope before it starts. When the bank cannot fill a blueprint the test is shortened and says why; it is never padded with unrelated questions. Results use the exam\'s marking only: no rank, percentile or predicted score.</p>';
+    var st = loadGrp(), need = null;
+    try { need = H.planNeed ? H.planNeed() : null; } catch (e) { need = null; }
+    P.grpQ = {}; P.plan = planScope(p0);
+    var resume = '<div id="pnT2Res">' + (P.sess && P.sess.t2 && !P.sess.done ? resumeHtml(P.sess) : "") + "</div>";
+    var coach = H.coachSec ? H.coachSec("tests") : "";
+    var pract = globalPracticeHtml();
+    var note = '<p class="pn-mut pn-small" id="pnT2Note">Every test shows its size, time and scope before it starts. When the bank cannot fill a blueprint the test is shortened and says why; it is never padded with unrelated questions. Results use the exam\'s marking only: no rank, percentile or predicted score.</p>';
+    if (need) return resume + coach + planCtxHtml(p0) + needSubjectHtml() + pract + note;
+    if (A.bankStatus(p0) === "coming") return resume + coach + planCtxHtml(p0) + comingSection(p0) + pract + note;
+    if (P.plan && !P.plan.subs.length) {
+      var gl = "";
+      try { gl = H.planScopeLabel ? H.planScopeLabel() : ""; } catch (e2) { gl = ""; }
+      return resume + coach + planCtxHtml(p0) + groupComingHtml(p0, gl) + pract + note;
+    }
+    return resume + coach + planCtxHtml(p0) + examSection(p0, p0.id, st) + pract + note;
   }
   // After paint: the saved session, the fixed papers, then coverage (subject indexes) hides tests the bank cannot fill.
   function mounted(h) {
@@ -532,7 +650,7 @@
       var box = H.root() && H.root().querySelector("#pnT2Res");
       if (box) box.innerHTML = pk && pk.t2 ? resumeHtml(pk) : "";
     });
-    var subs = H.subjectsOf(tab());
+    var subs = planSubs();
     Promise.all(subs.map(function (sb) { return H.loadIndex(sb.id); })).then(function () {
       var root = H.root(); if (!root) return;
       var ex = tab(), total = 0, ix = H.ix();
@@ -545,7 +663,7 @@
   /* ---------- pickers ---------- */
   function pickSubject(p, type) {
     H.push(function () {
-      var subs = H.subjectsOf(tab()), ix = H.ix(), ex = tab();
+      var subs = planSubs(), ix = H.ix(), ex = tab();
       var rows = subs.map(function (sb) {
         var n = 0, x = ix[sb.id]; if (x) x.topics.forEach(function (t) { if (t.group !== "mixed") n += H.pure.countFor(t, ex); });
         if (x && !n) return "";
@@ -575,7 +693,7 @@
     H.push(ccScreen);
   }
   function ccScreen() {
-    var c = P.ccfg, p = A.profile(c.pid), subs = H.subjectsOf(tab());
+    var c = P.ccfg, p = A.profile(c.pid), subs = planSubs();
     var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + v + '">' + label + "</button>"; };
     var nsub = Object.keys(c.subs).length;
     var sum = nsub ? c.n + " questions from " + nsub + (nsub === 1 ? " subject" : " subjects") + (c.d ? ", " + ["", "easy", "medium", "hard", "very hard"][c.d] : "") + (c.img ? ", images only" : "") + ", " + p.name + " marking" : "Pick at least one subject";
@@ -617,7 +735,7 @@
   }
   // Which module files to load for a test: per subject, enough modules for its share (bank counts), seeded.
   function modulePairs(p, type, opts, R) {
-    var ex = tab(), ix = H.ix(), subs = opts.subjects || H.subjectsOf(ex).map(function (s) { return s.id; });
+    var ex = tab(), ix = H.ix(), subs = opts.subjects || planSubs().map(function (s) { return s.id; });
     if (opts.module) return [{ s: opts.subjects[0], m: opts.module }];
     if (opts.pairs && opts.pairs.length) return opts.pairs.slice();
     if (opts.modules && opts.modules.length) return opts.modules.map(function (m) { var sid = null; try { sid = H.subjectOfModule(m); } catch (e) { sid = null; } return { s: sid || (opts.subjects && opts.subjects[0]) || subs[0], m: m }; });
@@ -667,7 +785,7 @@
     var title = typeName(type) + (type === "grand" || type === "part" || type === "mini" ? ": " + p.name : sid ? ": " + H.tx((H.subjectById(sid) || {}).name) : "");
     if (earlyRefuse) { P.pick = { p: p, type: type, asm: { ok: false, refused: earlyRefuse, deviations: [], items: [] }, title: title, sid: sid, mid: mid, scopeTxt: scopeTxt }; H.push(preScreen); return; }
     H.stack().push(function () {}); H.loadingScreen(esc(title), "Choosing questions…");
-    var subs = H.subjectsOf(tab()).map(function (s) { return s.id; });
+    var subs = planSubs().map(function (s) { return s.id; });
     Promise.all(subs.map(function (s) { return H.loadIndex(s); })).then(function () {
       var pairs = modulePairs(p, type, opts, R);
       return Promise.all([H.loadMany(pairs, H.stepMsg), loadQuality(opts.subjects || subs)]);
@@ -695,7 +813,8 @@
     if (which === "weak") {
       var weak = [];
       try { weak = H.pure.weakModules(st, 3); } catch (e2) { weak = []; }
-      var known = weak.filter(function (m) { try { return !!H.subjectOfModule(m); } catch (e3) { return false; } });
+      var keep = planSubjectIds();
+      var known = weak.filter(function (m) { try { var sid = H.subjectOfModule(m); return !!sid && (!keep || keep[sid]); } catch (e3) { return false; } });
       if (!known.length) return null;
       opts.modules = known;
       var ss = {}, subs = [];
@@ -703,7 +822,7 @@
       opts.subjects = subs;
       return "Your weak modules";
     }
-    var mt = st.mt || {}, ids = Object.keys(mt);
+    var mt = st.mt || {}, ids = mistakeIds();
     if (ids.length < 5) return null;
     ids = ids.slice(0, 50);
     var seen = {}, pairs = [];
@@ -720,8 +839,7 @@
     return "Questions you got wrong";
   }
   function incorrectShortfall() {
-    var n = 0;
-    try { n = Object.keys(H.store().mt || {}).length; } catch (e) { n = 0; }
+    var n = mistakeIds().length;
     return "Only " + n + (n === 1 ? " mistake" : " mistakes") + " so far: a scored test needs at least 5. Questions you get wrong collect here.";
   }
   function missingMistakesNote(lists, only, asm) {
@@ -1107,5 +1225,5 @@
     }
   }
   G.PREP_TESTS = { on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, askCtx: askCtx, _P: P, _clear: clearSess,
-    _grp: { ORDER: GRP_ORDER, FIRST: GRP_FIRST, SEARCH_AT: GRP_SEARCH_AT, name: grpName, short: grpShort, examOrder: examOrder, fxFor: fxFor, paperDone: paperDone, engineDone: engineDone, dailyDoneByKey: dailyDoneByKey, countFxDone: countFxDone, defaultExamOpen: defaultExamOpen, defaultGrpOpen: defaultGrpOpen, loadGrp: loadGrp, saveGrp: saveGrp, grpIsOpen: grpIsOpen, examIsOpen: examIsOpen, setGrpOpen: setGrpOpen, setExamOpen: setExamOpen, filterFx: filterFx, visibleFx: visibleFx, grpKey: grpKey, groupCounts: groupCounts, examCounts: examCounts, metaTxt: metaTxt } };
+    _grp: { ORDER: GRP_ORDER, FIRST: GRP_FIRST, SEARCH_AT: GRP_SEARCH_AT, name: grpName, short: grpShort, examOrder: examOrder, fxFor: fxFor, paperSubject: paperSubject, fxInPlan: fxInPlan, groupVisible: groupVisible, visibleFormats: visibleFormats, paperDone: paperDone, engineDone: engineDone, dailyDoneByKey: dailyDoneByKey, countFxDone: countFxDone, defaultExamOpen: defaultExamOpen, defaultGrpOpen: defaultGrpOpen, loadGrp: loadGrp, saveGrp: saveGrp, grpIsOpen: grpIsOpen, examIsOpen: examIsOpen, setGrpOpen: setGrpOpen, setExamOpen: setExamOpen, filterFx: filterFx, visibleFx: visibleFx, grpKey: grpKey, groupCounts: groupCounts, examCounts: examCounts, metaTxt: metaTxt } };
 })(typeof window !== "undefined" ? window : this);

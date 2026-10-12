@@ -211,6 +211,15 @@
 .pn-root .pn-t2jrow::-webkit-scrollbar { display: none; }
 .pn-root .pn-chip.pn-t2j { min-height: 36px; padding: 0 12px; font-size: 13px; }
 .pn-root .pn-t2grp + .pn-t2grp { border-top: 1px solid var(--pn-line); }
+/* Plan scope (owner 2026-10-12): the context line under the segment, the static coming-soon card header (same card
+   shell, title size and badge as an exam section; the old bare h2 clipped at the card edge), and bottom padding so
+   the last card always clears the floating tab bar, with or without the nav offset. */
+.pn-root .pn-t2ctx { display: block; }
+.pn-root .pn-t2ctx .pn-link { display: inline; min-height: 0; padding: 0; font-size: inherit; }
+.pn-root .pn-t2xstatic { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+.pn-root .pn-t2coming .pn-t2xinfo { padding-bottom: 14px; }
+.pn-root .pn-t2coming .pn-t2how { margin-top: 10px; }
+.pn-root .pn-body.pn-mocks { padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)); }
 .pn-root .pn-t2ghead { width: 100%; display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 11px 14px; border: 0; background: none; text-align: left; color: var(--pn-text); scroll-margin-top: 64px; }
 .pn-root .pn-t2ghead:active { background: var(--pn-s1); }
 .pn-root .pn-t2gt { flex: 1 1 auto; min-width: 0; font-size: 15px; font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -234,6 +243,8 @@
   .pn-root .pn-t2xhead:hover, .pn-root .pn-t2ghead:hover { background: var(--pn-s1); }
 }
 @media (min-width: 700px) {
+  .pn-root .pn-t2xstatic { padding: 14px 18px; }
+  .pn-root .pn-t2coming .pn-t2xinfo { padding-bottom: 16px; }
   .pn-root .pn-t2xhead { min-height: 62px; padding: 14px 18px; }
   .pn-root .pn-t2xinfo { padding: 14px 18px 0; }
   .pn-root .pn-t2jrow { padding: 10px 18px; }

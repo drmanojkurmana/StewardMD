@@ -384,6 +384,10 @@ test("every cleared inline diagram exists in the diagram registry", async () => 
     const m = mediaManifest.media[id];
     if (!m.inline) continue;
     assert.ok(D.has(m.diagramId), `${id} names diagram '${m.diagramId}', which is not in the registry`);
+    // An isometric figure (iso: "<figure id>") is a slot that iso-figures.js mounts in the browser; its figure
+    // file must exist and the slot is tested in test/iso-figures.test.mjs.
+    const iso = D.DIAGRAMS[m.diagramId].iso;
+    if (iso) { assert.ok(existsSync(join(ROOT, "iso-fig-" + iso + ".js")), `${m.diagramId} names figure '${iso}', which was not built`); continue; }
     const svg = D.render(m.diagramId, {});
     assert.ok(svg.indexOf("<svg") >= 0, `${m.diagramId} rendered nothing`);
   }

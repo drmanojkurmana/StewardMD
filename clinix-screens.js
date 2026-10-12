@@ -685,6 +685,8 @@
             '<span class="cx-media-src">' + esc(m.attribution) + " \u00b7 " + esc(m.licence) + "</span></figcaption></figure>";
       }
 
+      // An isometric figure (iso: true) is empty when its runtime is switched off: keep the caption alone.
+      if (!svg) return head + '<figure class="cx-media cx-media--dia"><figcaption class="cx-media-cap">' + esc(m.caption) + "</figcaption></figure>";
       return head + '<figure class="cx-media cx-media--dia">' + svg +
         '<figcaption class="cx-media-cap">' + esc(m.caption) +
         '<span class="cx-media-src">' + esc(m.attribution) + " \u00b7 " + esc(m.licence) + "</span></figcaption></figure>";

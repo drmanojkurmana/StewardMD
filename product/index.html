@@ -340,6 +340,11 @@
 
   /* ───────────────────────── act 5 · verified numbers ──────────────────── */
   .figures{ padding-block:var(--sc-8) var(--sc-9); }
+  .machines{ padding-block:var(--sc-8) var(--sc-9); }
+  .machines__lede,.machines__more{ color:var(--sc-ink-soft); max-width:60ch; }
+  .machines__grid{ display:grid; gap:var(--sc-6); margin-top:var(--sc-6); }
+  .machines .smd-iso[data-theme="dark"]{ --anatomy-card:var(--sc-surface); }
+  .machines .smd-iso-card{ box-shadow:0 0 0 1px var(--edge); }
   .figures h2{
     font:600 var(--sc-t-lg)/1.25 var(--sc-font-display);
     letter-spacing:var(--sc-track-tight); margin:0 0 var(--sc-2);
@@ -782,6 +787,30 @@
     </div>
   </section>
 
+  <!-- ══ 5b · MACHINES ══
+       the teaching figures the app ships: each is a working object driven by
+       the same model the module uses (tools/iso, drawn with the MIT Anatomy kit).
+       iso-figures.js mounts them; they animate only while on screen. -->
+  <section class="sc-section machines" data-sc-drift="#0d1b26">
+    <div class="sc-wrap sc-stack">
+      <h2>Equipment you can watch work.</h2>
+      <p class="machines__lede">
+        The anaesthesia, newborn, examination, surgery and eye modules teach with
+        working machines, not labelled boxes. Every number on a figure comes from
+        the model that moves it, and each lists its sources.
+      </p>
+      <div class="machines__grid">
+        <div class="smd-iso-slot" data-smd-iso="circle-system" data-iso-theme="dark"></div>
+        <div class="smd-iso-slot" data-smd-iso="syringe-pump" data-iso-theme="dark"></div>
+        <div class="smd-iso-slot" data-smd-iso="chest-drain" data-iso-theme="dark"></div>
+      </div>
+      <p class="machines__more">
+        Also in the app: the vaporizer, sidestream capnography, the blood pressure
+        cuff and the retinoscope. Teaching models, awaiting specialist review.
+      </p>
+    </div>
+  </section>
+
   <!-- ══ 6 · BREADTH · pan · 2.8 ══
        lateral travel reads as range. real product captures, unframed, from
        store-assets/raw-app-screens. lead card and trail note are in the rail
@@ -1075,5 +1104,6 @@ ScrollCraft.mount(document.body);
   render();
 })();
 </script>
+<script src="/iso-figures.js?v=iso2" defer></script>
 </body>
 </html>
