@@ -23,7 +23,13 @@
     { id: "neet-ss", label: "NEET-SS", branch: "ss-medicine", tag: "neet-ss", sec: 60 },
     { id: "usmle", label: "USMLE", branch: "mbbs", tag: "usmle", sec: 90 },
     // FMGE: the MBBS bank as is (all 19 subjects; all: true ignores the subjects' exam tags).
-    { id: "fmge", label: "FMGE", branch: "mbbs", tag: "fmge", all: true, sec: 60 }
+    { id: "fmge", label: "FMGE", branch: "mbbs", tag: "fmge", all: true, sec: 60 },
+    // UK licensing banks (branch uk; subjects carry per-exam tags).
+    { id: "plab", label: "PLAB 1", branch: "uk", tag: "plab-1", sec: 60 },
+    { id: "mrcs", label: "MRCS Part A", branch: "uk", tag: "mrcs-part-a", sec: 60 },
+    // International licensing banks (branch intl; subjects carry per-exam tags).
+    { id: "amc", label: "AMC CAT MCQ", branch: "intl", tag: "amc-mcq", sec: 84 },
+    { id: "mccqe", label: "MCCQE Part I", branch: "intl", tag: "mccqe-1", sec: 83 }
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
@@ -585,7 +591,7 @@
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
      goes to a new folder (medcov4, radnotes3 and radmax7 now, de-identified figures 2026-10-10; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7"], medicine: ["medcov4", "maik1"], pathology: ["maik1"], pharmacology: ["maik1"], "ss-pulmonology": ["medcov4"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes3", "radmax7", "maiktopic1"], medicine: ["medcov4", "maik1", "maiktopic1"], pathology: ["maik1", "maiktopic1"], pharmacology: ["maik1", "maiktopic1"], "ss-pulmonology": ["medcov4"], "adult-health-medicine": ["maik20"], "adult-health-surgery": ["maik20", "maik21"], "child-health": ["maik21", "maik22"], "womens-health": ["maik21"], "mental-health": ["maik22"], "population-health-and-ethics": ["maik22"], "mcc-acute-care": ["maik23"], "mcc-chronic-care": ["maik23", "maik24"], "mcc-health-promotion": ["maik24", "maik25"], "mcc-professional-behaviours": ["maik25"], "community-medicine": ["maiktopic1"], paediatrics: ["maiktopic1"], surgery: ["maiktopic1"], "ss-biostatistics": ["maiktopic1"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1"], "ss-infectious-diseases": ["maiktopic1"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1"], physiology: ["maiktopic1"] };
   /* MaiK overlays: generic discovery of published waves (maik1, maik2, ...) so later waves need NO app code changes.
      Pointer: overlay/maik/index.json (Cache-Control: max-age=300) -> manifest: "manifest-<hash>.json" (immutable, cached in IndexedDB).
      Fallback: local OVERLAYS static map (works offline or before manifest is loaded). */
@@ -1537,7 +1543,7 @@
     // Lessons (prep-lessons.js): the slot fills when the lesson index lists this module.
     // PYQ (prep-pyq.js): the slot draws "All questions / PYQ n" chips when the module has previous-year questions.
     var apct = n ? Math.min(100, Math.round(Math.min(p.answered, n) * 100 / n)) : 0;
-    paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><div id="pnCardSlot"></div><div id="pnPyqSlot"></div><section class="pn-panel pn-modp" id="pnModPanel" style="--h:' + subjHue(sid) + '">' +
+    paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><div id="pnCardSlot"></div><div id="pnPyqSlot"></div><div id="pnN360Slot"></div><section class="pn-panel pn-modp" id="pnModPanel" style="--h:' + subjHue(sid) + '">' +
       '<div class="pn-modh"><div class="pn-modt"><span class="pn-ic sm pn-modi" aria-hidden="true">' + subjIco(sid) + '</span><p class="pn-big">' + fmt(n) + ' MCQs</p><p class="pn-mut">' + fmt(Math.min(p.answered, n)) + " answered" + (sr != null ? " · mastery " + sr + "/5" : "") + (p.due ? " · " + fmt(p.due) + " due for review" : "") + "</p></div>" + mring(apct, apct + "%") + "</div>" +
       (setupOn() ?
         // Timer box (owner 2026-10-10): one Practise button opens the mode sheet (Learning or Test Mode, the timer, the
@@ -1551,6 +1557,7 @@
       '<p class="pn-mut pn-small">Practice marks each answer at once with its explanation. A timed test marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>'));
     st.cur = { s: sid, m: mid };
     if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
+    if (G.PREP_NUCLEUS360) G.PREP_NUCLEUS360.mountModule(root.querySelector("#pnN360Slot"), sid, mid, HOST);
     if (G.PREP_PYQ) G.PREP_PYQ.mount(root.querySelector("#pnPyqSlot"), sid, mid, HOST);
     if (G.PREP_FLASH) G.PREP_FLASH.mount(root.querySelector("#pnCardSlot"), sid, mid, HOST);
   }
@@ -1981,6 +1988,9 @@
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
         }).join("") + "</div></div>" : "") +
         provHtml(it) + (it.qg && G.PREP_QGEN ? G.PREP_QGEN.provLine(it, HOST) : "") + (qid ? IDS.chip(qid) : "") + "</section>";
+      // Nucleus360 (prep-nucleus360.js): inside a Nucleus360 session the concept rail + title go above the unchanged
+      // explanation and the Chapter note below it. Without the file, or outside a session, fb is untouched.
+      if (G.PREP_NUCLEUS360 && G.PREP_NUCLEUS360.wrap) fb = G.PREP_NUCLEUS360.wrap(fb, it);
     }
     // Time up: the question stays locked for the rest of the set, answered or not.
     var lockNote = locked && !shown ? '<p class="pn-timeup" role="status">' + ico("lock") + "<span><b>Time up</b>" + (chosen >= 0 ? "Your answer " + L[chosen] + " is kept and can no longer be changed." : "This question can no longer be answered.") + "</span></p>" : "";
@@ -2873,6 +2883,7 @@
     if (a === "close") return close();
     if (a.indexOf("n-") === 0 && G.PREP_NAV) return G.PREP_NAV.act(a, b, HOST);
     if (a.indexOf("t2-") === 0 && G.PREP_TESTS) return G.PREP_TESTS.act(a, b, HOST);
+    if (a.indexOf("n360-") === 0 && G.PREP_NUCLEUS360) return G.PREP_NUCLEUS360.act(a, b, HOST);
     if (a === "back") return back();
     if (a === "retry") { close(); return open(); }
     if (a === "exam") { s.exam = v; save(); nav(0); return rerender(); }

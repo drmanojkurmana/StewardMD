@@ -1,0 +1,110 @@
+{
+ "id": "plab-pathology",
+ "v": 5,
+ "source": "smd-uk",
+ "subject": "Pathology",
+ "branch": "uk",
+ "title": {
+  "en": "Pathology"
+ },
+ "ex": [
+  "plab-1"
+ ],
+ "counts": {
+  "total": 0,
+  "all": 0,
+  "flagged": 0
+ },
+ "groups": [
+  {
+   "id": "plab-pathology-pat-haem-wbc",
+   "title": {
+    "en": "Haematopathology: white cell and lymphoid disorders"
+   }
+  },
+  {
+   "id": "plab-pathology-pat-inflammation",
+   "title": {
+    "en": "Inflammation and repair"
+   }
+  },
+  {
+   "id": "plab-pathology-pat-renal-genitourinary",
+   "title": {
+    "en": "Renal and genitourinary pathology"
+   }
+  }
+ ],
+ "topics": [
+  {
+   "id": "pat-non-hodgkin-lymphoma",
+   "title": {
+    "en": "Non-Hodgkin lymphomas and chronic lymphoid leukaemias"
+   },
+   "group": "plab-pathology-pat-haem-wbc",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/pat-non-hodgkin-lymphoma.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "pat-mediators",
+   "title": {
+    "en": "Chemical mediators of inflammation"
+   },
+   "group": "plab-pathology-pat-inflammation",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/pat-mediators.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "pat-chronic-granulomatous",
+   "title": {
+    "en": "Chronic and granulomatous inflammation"
+   },
+   "group": "plab-pathology-pat-inflammation",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/pat-chronic-granulomatous.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "pat-acute-inflammation",
+   "title": {
+    "en": "Acute inflammation and leukocyte events"
+   },
+   "group": "plab-pathology-pat-inflammation",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/pat-acute-inflammation.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  },
+  {
+   "id": "pat-glomerular",
+   "title": {
+    "en": "Glomerular diseases"
+   },
+   "group": "plab-pathology-pat-renal-genitourinary",
+   "count": 0,
+   "all": 0,
+   "file": "mcq/pat-glomerular.json",
+   "size": "m",
+   "target": 20,
+   "lic": "SMD",
+   "cite": "PrepNucleus"
+  }
+ ]
+}
