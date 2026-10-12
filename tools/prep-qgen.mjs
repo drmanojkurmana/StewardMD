@@ -213,7 +213,7 @@ async function publish() {
     }
   }
   const set = arg("--set", "maik1");
-  if (!/^maik(?:img)?[1-9]\d{0,2}$/.test(set)) { say("Need valid --set maik<n> or maikimg<n>."); process.exit(2); }
+  if (!/^maik(?:img|topic)?[1-9]\d{0,2}$/.test(set)) { say("Need valid --set maik<n>, maikimg<n> or maiktopic<n>."); process.exit(2); }
 
   if (!module) {
     // Multi-module publish: items carry sid/subject and t/module
