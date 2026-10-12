@@ -22,6 +22,8 @@
  *   q  the name is in the stem's question sentence (the lead-in)                                      82
  *   s  the name is elsewhere in the stem AND in the stored explanation                                77
  *   h  a stem-only candidate confirmed by Haiku (confirm stage)                                       80
+ *   rm a per-module rematch target: mapped by Haiku, resolved to a real id, verified in a second pass  min(c, 80)
+ *      (prep/bank/rematch-links.json from tools/prep-links-rematch.mjs; only items the phrase matcher missed)
  *   +8 when the module's lesson cites that KB article (lesson src[], the existing per-module bridge)
  *   A name that is also a wrong option is a distractor, never the concept (capped at 50). Stem-only mentions without
  *   the explanation (65) and explanation-only mentions (55) are kept in the sidecar, never shown.
@@ -412,6 +414,23 @@ export function addTopicLinks(links, it, ctx = {}) {
   return links;
 }
 
+/* applyRematch(links, entries) -> links: model-rematched targets (v "rm") the deterministic pass missed.
+ * Entries are pre-verified ({ k, id, title, c }) but self-reported confidence is capped at 80 (the confirm-stage
+ * precedent); kinds respect the same MAX slots and an already-present k:id is never duplicated. */
+export function applyRematch(links, entries) {
+  if (!entries || !entries.length) return links;
+  const has = new Set(links.map((l) => l.k + ":" + l.id));
+  const count = (k) => links.filter((l) => l.k === k).length;
+  for (const e of entries) {
+    if (!e || !e.k || !e.id || !MAX[e.k]) continue;
+    if (has.has(e.k + ":" + e.id)) continue;
+    if (count(e.k) >= MAX[e.k]) continue;
+    links.push({ k: e.k, id: e.id, title: e.title || e.id, c: Math.min(Number(e.c) || SHOW, 80), v: "rm", sec: "" });
+    has.add(e.k + ":" + e.id);
+  }
+  return links;
+}
+
 /* gapsReport(outDir) -> { items, linked, unlinked } over a built links out dir (fast, no bank needed).
    Modules with zero links have no shard, so their items sit inside `unlinked` (see the per-module gap report
    for names). The floor CI job fails while unlinked exceeds 0. */
@@ -593,7 +612,7 @@ function lessonKbMap(cache, byKey) {
   return m;
 }
 /* build({ cache, bank }) -> { files: [{ rel, body }], pointer, sidecar: [records], report } */
-export function build({ cache, bank, confirmed = null, log = () => {} }) {
+export function build({ cache, bank, confirmed = null, rematch = null, log = () => {} }) {
   const D = dictionaries();
   const lessonKb = lessonKbMap(cache, D.byKey);
   // Lessons: the bank index plus the bundled pilot lessons, merged the way the app merges them
@@ -634,6 +653,8 @@ export function build({ cache, bank, confirmed = null, log = () => {} }) {
     const ls = lessonKb.get(mid);
     const links = linkItem(it, D.M, { lessonKb: ls, df, n, clinical: CLINICAL.test(sid || ""), byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds });
     const conf = confirmed && confirmed[String(it.id)];
+    const rm = rematch && rematch.items && rematch.items[String(it.id)];
+    if (rm && Array.isArray(rm.links)) applyRematch(links, rm.links);
     if (conf) for (const l of links) {
       const v = conf[l.k + ":" + l.id];
       if (v === true && l.v[0] === "s" && l.c < SHOW) { l.c = 80; l.v = "h"; }
@@ -650,7 +671,7 @@ export function build({ cache, bank, confirmed = null, log = () => {} }) {
     for (const l of shown) { rep.links++; rep.byKind[l.k]++; rep.byVia[l.v] = (rep.byVia[l.v] || 0) + 1; }
     if (links.length) sidecar.push({ item_id: String(it.id), concept_id: shown[0] ? shown[0].k + ":" + shown[0].id : null, subject: sid, topic: mid,
       links: { kb_ids: links.filter((l) => l.k === "kb").map((l) => [l.id, l.c, l.v]), drug_ids: links.filter((l) => l.k === "dr").map((l) => [l.id, l.c, l.v]), protocol_ids: links.filter((l) => l.k === "pr").map((l) => [l.id, l.c, l.v]), lesson_ids: (lessonsOf.get(mid) || []).map((l) => l.key), lesson_links: links.filter((l) => l.k === "ls").map((l) => [l.id, l.c, l.v].concat(l.sec ? [l.sec] : [])), card_ids: cards[mid] ? [mid] : [] },
-      provenance: { method: links.some((l) => l.v === "a") ? "human" : links.some((l) => l.v === "h") ? "llm_mapped" : "exact_key", score: shown[0] ? shown[0].c / 100 : null, model: links.some((l) => l.v === "h") ? "claude-haiku-5-5" : null, at: new Date().toISOString(), version: ver } });
+      provenance: { method: links.some((l) => l.v === "a") ? "human" : links.some((l) => l.v === "h" || l.v === "rm") ? "llm_mapped" : "exact_key", score: shown[0] ? shown[0].c / 100 : null, model: links.some((l) => l.v === "h" || l.v === "rm") ? "claude-haiku-5-5" : null, at: new Date().toISOString(), version: ver } });
     if (!shown.length) continue;
     if (!byMod.has(mid)) byMod.set(mid, { sid, e: [] });
     byMod.get(mid).e.push([String(it.id), shown, it.pyq ? 1 : 0]);
@@ -774,7 +795,7 @@ async function main(argv = process.argv.slice(2)) {
   const confP = path.join(path.dirname(out), "confirmed.json");
   if (cmd === "fetch") return fetchLive({ api, cache, bank });
   if (cmd === "build" || cmd === "publish") {
-    const b = build({ cache, bank, confirmed: readJ(confP), log: console.log });
+    const b = build({ cache, bank, confirmed: readJ(confP), rematch: readJ(path.join(ROOT, "prep/bank/rematch-links.json")), log: console.log });
     let prevNames = new Set();
     if (cmd === "publish") { const p = await getJSON(api + LINKS_VER + "/links/index.json"); if (p) prevNames = new Set(Object.entries(p.m).map(([m, v]) => `m/${m}-${v.split("/")[1]}.json`).concat(Object.entries(p.c).map(([s, h]) => `c/${s}-${h}.json`))); }
     const changed = writeOut(out, b, prevNames);
