@@ -2308,7 +2308,10 @@ window.openExternal = function (u) {
 <script src="/engagement.js?v=gold992-fr1-cel1" defer></script>
 <!-- Global toast shim: defines window.toast + window.SMD_toast (many modules call these but
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
-<script src="/toast.js?v=gold363-rm1-pf13-op1" defer></script>
+<!-- Dynamic Island in-app notifications (window.SMD_dynNotify); toast.js and native-push.js route
+     through it. Kill switch: localStorage smd_dyn_notify=0. -->
+<script src="/dynamic-notify.js?v=dyn1" defer></script>
+<script src="/toast.js?v=gold363-rm1-pf13-op1-dyn1" defer></script>
 <script src="/capture-guard.js?v=cg2" defer></script>
 <script src="/native-auth.js?v=gold363" defer></script>
 <!-- OTA update client (window.SMD_OTA) — Phase 2. Native-only; wires the dormant "Software
@@ -2552,7 +2555,7 @@ window.openExternal = function (u) {
 <script src="/icu-collab.js?v=gold455-energy1" defer></script><script src="/referrals.js?v=ref1-pm1" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
-<script src="/native-push.js?v=gold364-thread-ref1-wsqp1-fu3-kits1-pushdiag1-bl1-prepndg1" defer></script>
+<script src="/native-push.js?v=gold364-thread-ref1-wsqp1-fu3-kits1-pushdiag1-bl1-prepndg1-dyn1" defer></script>
 <script src="/watch-lab.js?v=gold363-ref1" defer></script>
 <!-- Apple Watch bridge — publishes session + favorites/recents to the paired
      watch via the WatchBridge plugin (App Group + WatchConnectivity). No-op on

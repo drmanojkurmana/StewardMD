@@ -175,6 +175,11 @@
 
   function show(msg) {
     if (msg == null || msg === "") return;
+    // Dynamic Island notifications (dynamic-notify.js) take over every toast unless smd_dyn_notify=0.
+    try {
+      var D = window.SMD_dynNotify;
+      if (D && D.enabled()) { D.fromText(String(msg)); return; }
+    } catch (e) {}
     try {
       var text = String(msg);
       ensureRoot();

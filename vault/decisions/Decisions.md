@@ -11707,3 +11707,11 @@ default with 3 modules a day, 30 questions a module and a $5 daily breaker for a
 are STAGED on R2 and published with `tools/prep-qgen.mjs publish`, not from the app: overlay registration, immutable
 cache paths and the Share ID index need the tool, and an in-app publish could ship unreviewed text to every phone.
 `PREP_QGEN_OWNERS` narrows the Author tool to the content owner (OWNER_EMAILS has other accounts). [[modules/PrepNucleus]]
+
+## 2026-10-12 Dynamic Island notifications: a port, not the Expo package
+Owner asked for rit3zh/expo-dynamic-notifications on every in-app notification, "same smooth and premium". The package
+is React Native (Skia, Reanimated, Gesture Handler, Expo) and cannot load in the Capacitor WebView, so
+`dynamic-notify.js` reproduces its look (pill on the island, card joined by goo, blur reveal, swipe to dismiss) with an
+SVG metaball filter and rAF springs. toast.js, foreground push and SMD_localNotify all route to it; WardSynQ critical
+alerts keep their full-screen screen. iOS push `presentationOptions` drops `alert` so the OS banner does not double the
+card. Flag `smd_dyn_notify` (default on, "0" = old toast + banner). [[modules/Dynamic Notifications]]

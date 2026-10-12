@@ -63,6 +63,8 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
 - [[Push]] — APNs/FCM. Read the "one thing to understand" first: the server can see no further
   than Apple, so "sent but nothing arrived" is the normal shape of a DEVICE-side failure.
+- [[Dynamic Notifications]] — every in-app notification (toast, foreground push, local) as a
+  Dynamic Island card. Flag `smd_dyn_notify` (default on).
 - [[Widgets]] — iOS home-screen and Lock Screen widgets. Ask MaiK ships three surfaces the
   owner picks in Edit Widget; read the `topCritical` contract gotcha before touching the parser.
 - [[Role-Tiers]] - PROPOSED role-based plans (UG Student to Clinician Pro, WardSynQ): who gets what, devices, audit bugs, owner decisions
