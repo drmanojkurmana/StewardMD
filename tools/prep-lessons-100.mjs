@@ -98,7 +98,7 @@ export function groundingFor(mod, items, kb) {
   for (const it of its) {
     const t = [it.q, ...(it.o || []), it.exp || ""].join("\n").replace(/\s+/g, " ").trim();
     const n = t.split(" ").length;
-    if (!t || w + n > 6000) continue;
+    if (!t || w + n > 3500) continue;
     parts.push(t); w += n;
   }
   return {
@@ -137,7 +137,7 @@ const DRAFT_SCHEMA = {
         },
       },
     },
-    refs: { type: "array", items: { type: "string" } },
+    refs: { type: "array", items: { type: "string" }, description: "Real guideline or textbook names only; a chapter must read 'Chapter X in Book (Editors)', never as its own volume" },
   },
 };
 export function draftBody(mod, ground) {
@@ -380,11 +380,12 @@ async function main(argv = process.argv.slice(2)) {
     // No verdict (batch error) means no allowlist: ungrounded numbers/drugs fail closed.
     const allow = { numbers: verdict && verdict.confirmed ? verdict.confirmed : [], drugs: verdict && verdict.confirmed ? verdict.confirmed : [] };
     const steps = g.steps.filter((_, i) => !bad.has(i));
+    const verifyDropped = g.steps.length - steps.length;
     if (steps.length < 4) { console.log(`drop ${m.mid}: only ${steps.length}/4+ steps verified (lesson needs 4-8)`); continue; }
     const g3 = gateLesson(steps, grounds.get(m.mid), allow);
     // Steps the final gate rejects are dropped (a short honest lesson beats a long doubtful one).
     const finalSteps = g3.okSteps;
-    const finalDropped = (g.dropped || 0) + g3.problems.length;
+    const finalDropped = (g.dropped || 0) + verifyDropped + g3.problems.length;
     if (finalSteps.length < 4) { console.log(`drop ${m.mid}: only ${finalSteps.length}/4+ steps survive the final gate`); continue; }
     const sids = sidsOf.get(m.mid) || [m.sid];
     const items = moduleItems(m.mid, sids, { bank, cache });

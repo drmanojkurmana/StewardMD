@@ -24,7 +24,7 @@ test("gateLesson: 12-word KB copies fail, sub-20-word item echoes pass", () => {
 
 test("targetModules: gap modules in, lessons/mixed/mapped out", () => {
   const mods = new Map(targetModules(undefined, null, null).map((m) => [m.mid, m]));
-  assert.ok(mods.has("oph-anatomy"), "top gap module is targeted");
+  assert.ok(mods.has("bio-protein-structure"), "a top gap module is targeted");
   assert.ok(!mods.has("med-heart-failure"), "modules with a bundled lesson are skipped");
   assert.ok(!mods.has("pat-mixed"), "mixed modules are never targeted");
   assert.ok(!mods.has("oph-cataract"), "KB-mapped modules are skipped");
