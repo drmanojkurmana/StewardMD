@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "shp-hav-hev",
+ "subject": "ss-hepatology",
+ "title": "Hepatitis A and E: Key Concepts for NEET-PG and INI-CET",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Hepatitis A virus** (HAV) is a small RNA picornavirus spread by the **faecal-oral route**, often through contaminated water or food. It causes acute self-limited hepatitis and never becomes chronic. The incubation period averages about 30 days. Diagnosis rests on **IgM anti-HAV**, which appears early and marks acute infection. IgG anti-HAV appears in convalescence and gives lifelong protection.",
+   "say": "Hepatitis A virus is a small RNA picornavirus spread by the faecal-oral route, often through contaminated water or food. It causes acute, self-limited hepatitis and never becomes chronic. The incubation period averages about thirty days. Diagnosis rests on IgM anti-HAV, which appears early and marks acute infection. IgG anti-HAV appears in convalescence and gives lifelong protection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "IgM anti-HAV",
+      "Acute infection"
+     ],
+     [
+      "IgG anti-HAV",
+      "Past infection, immunity"
+     ],
+     [
+      "HAV RNA",
+      "Active viraemia, research use"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Relapsing hepatitis A** is a recognised variant in which jaundice and transaminases improve, then rise again within weeks to months. It is usually benign and does not progress to chronic disease. Breastfeeding is not contraindicated in mothers with hepatitis A. Standard supportive care is enough, and antivirals are not needed.",
+   "say": "Relapsing hepatitis A is a recognised variant in which jaundice and transaminases improve, then rise again within weeks to months. It is usually benign and does not progress to chronic disease. Breastfeeding is not contraindicated in mothers with hepatitis A. Standard supportive care is enough, and antivirals are not needed.",
+   "vis": null
+  },
+  {
+   "tx": "**Hepatitis E virus** (HEV) is a small RNA virus with four main genotypes that behave differently. Genotypes 1 and 2 infect only humans, spread by the **faecal-oral** route through contaminated drinking water, and drive outbreaks in low-resource settings. Genotypes 3 and 4 are **zoonotic**, reaching people through undercooked pork or game, and usually cause isolated cases. In **immunocompromised** patients, particularly transplant recipients, genotype 3 may persist and progress to **chronic hepatitis**.",
+   "say": "Hepatitis E virus is a small RNA virus with four main genotypes that behave differently. Genotypes one and two infect only humans, spread by the faecal-oral route through contaminated drinking water, and drive outbreaks in low-resource settings. Genotypes three and four are zoonotic, reaching people through undercooked pork or game, and usually cause isolated cases. In immunocompromised patients, particularly transplant recipients, genotype three may persist and progress to chronic hepatitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genotype",
+     "Main source",
+     "Typical pattern"
+    ],
+    "rows": [
+     [
+      "1 and 2",
+      "Humans, contaminated water",
+      "Epidemic outbreaks"
+     ],
+     [
+      "3 and 4",
+      "Animals, undercooked meat",
+      "Sporadic cases"
+     ],
+     [
+      "3 in transplant recipients",
+      "Zoonotic exposure plus immunosuppression",
+      "Risk of chronic infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hepatitis E in pregnancy** is especially dangerous. Case-fatality rises to about **10 to 20 percent** in the third trimester, compared with 1 to 2 percent in the general population. Vertical transmission is reported between 23.3 and 50 percent. Fulminant hepatitis is more likely in pregnant women. Management is supportive, and early specialist referral is key.",
+   "say": "Hepatitis E in pregnancy is especially dangerous. Case-fatality rises to about ten to twenty percent in the third trimester, compared with one to two percent in the general population. Vertical transmission is reported between twenty three point three and fifty percent. Fulminant hepatitis is more likely in pregnant women. Management is supportive, and early specialist referral is key.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "General population",
+     "points": [
+      "Case-fatality 1 to 2 percent",
+      "Usually self-limited"
+     ]
+    },
+    "right": {
+     "title": "Pregnancy, third trimester",
+     "points": [
+      "Case-fatality 10 to 20 percent",
+      "Vertical transmission 23.3 to 50 percent"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_d32fb2e0aba1",
+  "q_fa5824233f39",
+  "q_0a3b3e837027"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Kasper et al.)",
+  "Chapter Hepatitis E in Sleisenger and Fordtran's Gastrointestinal and Liver Disease (Feldman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 53
+ }
+}

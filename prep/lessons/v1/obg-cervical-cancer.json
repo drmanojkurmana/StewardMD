@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "module": "obg-cervical-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Premalignant and malignant lesions of the cervix",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Cervical cancer is strongly linked to **high-risk HPV**, mainly types 16 and 18, which together account for most cases. Most infections clear spontaneously, but persistent infection drives **CIN**, or cervical intraepithelial neoplasia, graded 1 to 3. HPV-16 is the commonest type in invasive disease and in CIN 2 and 3. Smoking, multiparity, HIV infection and early sexual activity raise risk. Low-risk types 6 and 11 cause warts rather than cancer.",
+   "say": "Cervical cancer is strongly linked to high-risk HPV, mainly types 16 and 18, which together account for most cases. Most infections clear spontaneously, but persistent infection drives CIN, or cervical intraepithelial neoplasia, graded 1 to 3. HPV-16 is the commonest type in invasive disease and in CIN 2 and 3. Smoking, multiparity, HIV infection and early sexual activity raise risk. Low-risk types 6 and 11 cause warts rather than cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "HPV group",
+     "Types",
+     "Clinical link"
+    ],
+    "rows": [
+     [
+      "Low risk",
+      "6, 11",
+      "Genital warts"
+     ],
+     [
+      "Intermediate",
+      "31, 33, 35, 51, 52",
+      "CIN 1 to 2"
+     ],
+     [
+      "High risk",
+      "16, 18, 45, 56",
+      "CIN 2 to 3, invasive cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Bethesda system** reports Pap smears. ASCUS, or atypical squamous cells of undetermined significance, is managed by **reflex HPV DNA testing** in women aged 25 or over. If high-risk HPV is positive, colposcopy follows. Women under 25 are simply repeated after one year. A **Pap smear** should be fixed promptly in 95 percent ethyl alcohol to avoid air drying, which distorts cells. Koilocytes signal HPV effect but need tissue biopsy to grade.",
+   "say": "The Bethesda system reports Pap smears. ASCUS, or atypical squamous cells of undetermined significance, is managed by reflex HPV DNA testing in women aged 25 or over. If high-risk HPV is positive, colposcopy follows. Women under 25 are simply repeated after one year. A Pap smear should be fixed promptly in 95 percent ethyl alcohol to avoid air drying, which distorts cells. Koilocytes signal HPV effect but need tissue biopsy to grade.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "ASCUS on Pap"
+     },
+     {
+      "id": "b",
+      "label": "Age 25 or over?"
+     },
+     {
+      "id": "c",
+      "label": "HPV DNA test"
+     },
+     {
+      "id": "d",
+      "label": "Colposcopy if positive"
+     },
+     {
+      "id": "e",
+      "label": "Under 25: repeat smear in 1 year"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "e",
+      "no"
+     ],
+     [
+      "c",
+      "d",
+      "high risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For CIN 2 and CIN 3 in a woman who has finished childbearing, **LEEP**, or loop electrosurgical excision, is the preferred treatment. Cryotherapy suits only small, fully ectocervical lesions, not CIN 3. Cone biopsy is reserved for cases where the margin or invasion status is unclear. Hysterectomy is not a first-line treatment for CIN in young women, since conization can cause stenosis, infertility and short-cervix problems. Complications include bleeding, stenosis and sepsis.",
+   "say": "For CIN 2 and CIN 3 in a woman who has finished childbearing, LEEP, or loop electrosurgical excision, is the preferred treatment. Cryotherapy suits only small, fully ectocervical lesions, not CIN 3. Cone biopsy is reserved for cases where the margin or invasion status is unclear. Hysterectomy is not a first-line treatment for CIN in young women, since conization can cause stenosis, infertility and short-cervix problems. Complications include bleeding, stenosis and sepsis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Option",
+     "Best use",
+     "Key limit"
+    ],
+    "rows": [
+     [
+      "LEEP",
+      "CIN 2 and 3",
+      "Preferred first line"
+     ],
+     [
+      "Cryotherapy",
+      "Small ectocervical CIN",
+      "Not for CIN 3"
+     ],
+     [
+      "Cone biopsy",
+      "Unclear margins",
+      "Stenosis, bleeding, sepsis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pelvic lymph drainage of the cervix runs to the obturator, internal iliac, external iliac, common iliac and para-aortic nodes, not the inguinal group. In the **Wertheim** procedure, type III radical hysterectomy removes most uterosacral and cardinal ligaments, the upper third of the vagina and pelvic nodes. Ovaries may be preserved if not diseased. Radiation causes bladder and bowel fibrosis, while surgery preserves vaginal function. Postcoital bleeding is the earliest symptom, and the commonest metastasis site is the lung.",
+   "say": "Pelvic lymph drainage of the cervix runs to the obturator, internal iliac, external iliac, common iliac and para-aortic nodes, not the inguinal group. In the Wertheim procedure, type III radical hysterectomy removes most uterosacral and cardinal ligaments, the upper third of the vagina and pelvic nodes. Ovaries may be preserved if not diseased. Radiation causes bladder and bowel fibrosis, while surgery preserves vaginal function. Postcoital bleeding is the earliest symptom, and the commonest metastasis site is the lung.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "e1af03ea-cf5b-49bc-ad4a-bf417e273560",
+  "948722e9-44a3-426e-8d3f-13eec3c1346f",
+  "c7644e3c-19eb-4cd4-8cee-a8e1cb38a730"
+ ],
+ "src": [],
+ "refs": [
+  "Dutta's Textbook of Gynaecology (D.C. Dutta)",
+  "Colposcopy and Treatment of Cervical Intraepithelial Neoplasia: A Beginner's Manual (Sellors and Sankaranarayanan)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 395
+ }
+}

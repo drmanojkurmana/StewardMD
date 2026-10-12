@@ -1,0 +1,196 @@
+{
+ "v": 1,
+ "module": "cm-disaster",
+ "subject": "community-medicine",
+ "title": "Disaster management: cycle, triage and post-disaster health",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **disaster** is any occurrence causing damage, ecological disruption, loss of life or deterioration of health services on a scale needing an extraordinary response from outside the affected area. A **hazard** is the phenomenon with potential to cause that harm. Management runs through three fundamental aspects: **mitigation**, **preparedness** and **response**, followed by rehabilitation and reconstruction.",
+   "say": "A disaster is any occurrence that causes damage, ecological disruption, loss of human life or deterioration of health services on a scale that needs an extraordinary response from outside the affected area. A hazard is the phenomenon with the potential to cause that harm. Disaster management has three fundamental aspects: mitigation, preparedness and response, followed by rehabilitation and reconstruction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mitigation"
+     },
+     {
+      "id": "b",
+      "label": "Preparedness"
+     },
+     {
+      "id": "c",
+      "label": "Response"
+     },
+     {
+      "id": "d",
+      "label": "Rehabilitation"
+     },
+     {
+      "id": "e",
+      "label": "Reconstruction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hydrological disasters such as **floods** and tsunamis cause the largest death toll among natural disasters. Geological disasters include earthquakes, avalanches and volcanic eruptions. Meteorological disasters include cyclones, tornadoes, hailstorms, drought, heatwaves and blizzards. Floods also severely damage health facilities and water systems.",
+   "say": "Hydrological disasters, such as floods and tsunamis, cause the largest death toll among natural disasters. Geological disasters include earthquakes, avalanches and volcanic eruptions. Meteorological disasters include cyclones, tornadoes, hailstorms, drought, heatwaves and blizzards. Floods also cause severe damage to health facilities and water systems.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Hydrological",
+      "Floods, tsunamis"
+     ],
+     [
+      "Geological",
+      "Earthquakes, avalanches, volcanic eruptions"
+     ],
+     [
+      "Meteorological",
+      "Cyclones, drought, heatwaves, blizzards"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Triage sorts the injured by severity and likelihood of survival when injuries overwhelm facilities, so the usual **first come, first treated** rule does not apply. The four-colour system is used internationally: **Red** for immediate high priority or transfer, **Yellow** for medium priority, **Green** for ambulatory patients and **Black** for dead or moribund patients. Black carries the lowest priority.",
+   "say": "Triage sorts the injured by severity and likelihood of survival when injuries overwhelm facilities, so the usual first come, first treated rule does not apply. The four colour system is used internationally. Red means high priority treatment or transfer, Yellow means medium priority, Green means ambulatory patients and Black means dead or moribund patients. Black carries the lowest priority.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Colour",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Red",
+      "High priority, immediate treatment or transfer"
+     ],
+     [
+      "Yellow",
+      "Medium priority, delayed care"
+     ],
+     [
+      "Green",
+      "Ambulatory, minor injuries"
+     ],
+     [
+      "Black",
+      "Dead or moribund, lowest priority"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **START** style triage, a casualty who cannot walk is assessed for breathing, perfusion and mental status. Breathing absent after airway repositioning means Black. Breathing above 30 per minute, poor perfusion or inability to follow commands means Red. Otherwise the patient is Yellow. Walking casualties are Green. Triage yields best results when done at the site of the disaster.",
+   "say": "In START style triage, a casualty who cannot walk is assessed for breathing, perfusion and mental status. Absent breathing after airway repositioning means Black. Breathing above thirty per minute, poor perfusion or inability to follow commands means Red. Otherwise the patient is Yellow. Walking casualties are Green. Triage works best when done at the site of the disaster.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Can walk?"
+     },
+     {
+      "id": "b",
+      "label": "Green"
+     },
+     {
+      "id": "c",
+      "label": "Breathing?"
+     },
+     {
+      "id": "d",
+      "label": "Red or Yellow"
+     },
+     {
+      "id": "e",
+      "label": "Black"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "Yes"
+     ],
+     [
+      "a",
+      "c",
+      "No"
+     ],
+     [
+      "c",
+      "d",
+      "Yes"
+     ],
+     [
+      "c",
+      "e",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early after a disaster, **acute gastroenteritis** is the disease reported most often, followed by **acute respiratory infections**. Water contamination and crowded shelters drive these illnesses. **Leptospirosis** and rickettsial infections also appear while floods and damp conditions persist. Vector-borne outbreaks usually need several weeks to reach epidemic proportions. Leishmaniasis is not a typical early post-disaster epidemic, so do not expect it in the first phase.",
+   "say": "In the early days after a disaster, acute gastroenteritis is the illness reported most often, with acute respiratory infections close behind. Contaminated water and crowded shelters fuel these infections. Leptospirosis and rickettsial infections can also emerge while floods and damp conditions last. Outbreaks spread by vectors usually need several weeks to become epidemics. Leishmaniasis is not a typical early epidemic after a disaster, so it should not be expected in the first phase.",
+   "vis": null
+  },
+  {
+   "tx": "At national level, the **National Disaster Management Authority** provides overall policy direction and is chaired by the Prime Minister. It operates under the **disaster management legislation** enacted by Parliament. Each state and district has its own **disaster management authority**, and a **control room** acts as the nodal centre for coordinating response during an emergency.",
+   "say": "At national level, the National Disaster Management Authority provides overall policy direction and is chaired by the Prime Minister. It operates under the disaster management legislation enacted by Parliament. Each state and district has its own disaster management authority, and a control room acts as the nodal centre for coordinating response during an emergency.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "a7f00513-e258-4c36-8f1c-6b3a067be882",
+  "82adaa45-683a-41f1-acfc-fb8335651e7c",
+  "95a556de-85bc-4aa7-aa87-ab7dc6044307"
+ ],
+ "src": [],
+ "refs": [
+  "Disaster Management Act 2005",
+  "Park's Textbook of Preventive and Social Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 82
+ }
+}

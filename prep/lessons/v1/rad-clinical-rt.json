@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "rad-clinical-rt",
+ "subject": "radiology",
+ "title": "Radiotherapy in Clinical Oncology: Radiosensitivity, Radical and Palliative Use",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Highly resistant** tumours need surgery or systemic therapy rather than radiation. Melanoma and **osteosarcoma** are the classic examples, so radiation has no routine role in osteosarcoma, which is treated with chemotherapy and limb-sparing surgery. Gastric adenocarcinoma is also radioresistant, so radiotherapy in stomach cancer is mainly for palliation of pain.",
+   "say": "Highly resistant tumours need surgery or systemic therapy rather than radiation. Melanoma and osteosarcoma are the classic examples. Osteosarcoma is treated with chemotherapy and limb-sparing surgery. Gastric adenocarcinoma is also radioresistant, so radiotherapy there is mainly for palliation of pain.",
+   "vis": null
+  },
+  {
+   "tx": "**Radical radiotherapy** aims to cure. For early laryngeal cancer, radiotherapy is preferred for glottic T2 N0 disease because it preserves the voice. Nasopharyngeal carcinoma is treated mainly by radiotherapy with concurrent **cisplatin** when surgery is not feasible. Cisplatin acts as a radiosensitiser in advanced disease.",
+   "say": "Radical radiotherapy aims to cure. For early glottic cancer, radiotherapy is preferred for T2 N0 disease because it preserves the voice. Nasopharyngeal carcinoma is treated mainly with radiotherapy, and cisplatin is given concurrently in advanced disease as a radiosensitiser.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Early glottic T2 N0"
+     },
+     {
+      "id": "b",
+      "label": "Radical radiotherapy"
+     },
+     {
+      "id": "c",
+      "label": "Voice preserved"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cervix cancer is treated with combined **external beam** pelvic radiation and **brachytherapy**. A pelvic dose of about 40 to 45 Gy is given first, followed by brachytherapy to point A aiming for at least 85 Gy with low dose rate. External beam doses above 40 to 45 Gy to the central pelvis raise late toxicity, though IMRT allows higher doses with better sparing.",
+   "say": "Cervix cancer is treated with combined external beam pelvic radiation and brachytherapy. A pelvic dose of about 40 to 45 Gy is given first, followed by brachytherapy aiming for at least 85 Gy to point A. Higher external beam doses to the central pelvis raise late toxicity, although intensity modulated radiotherapy allows doses above 60 Gy with better sparing.",
+   "vis": null
+  },
+  {
+   "tx": "**Palliative radiotherapy** relieves symptoms. Bone metastases are treated with short courses, and **spinal cord compression** needs emergency radiation, often with steroids. Superior vena cava syndrome also responds to urgent radiotherapy. **Whole brain radiotherapy** for multiple brain metastases is standard at 30 Gy in 10 fractions.",
+   "say": "Palliative radiotherapy relieves symptoms. Bone metastases are treated with short courses. Spinal cord compression needs emergency radiation, often with steroids. Superior vena cava syndrome also responds to urgent radiotherapy. Whole brain radiotherapy for multiple brain metastases is standard at 30 Gy in 10 fractions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Typical approach"
+    ],
+    "rows": [
+     [
+      "Spinal cord compression",
+      "Emergency radiotherapy"
+     ],
+     [
+      "Superior vena cava syndrome",
+      "Urgent radiotherapy"
+     ],
+     [
+      "Multiple brain metastases",
+      "30 Gy in 10 fractions"
+     ],
+     [
+      "Bone metastases",
+      "Short palliative course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prophylactic cranial irradiation** is used in **small cell lung cancer** that has responded to chemotherapy, reducing brain metastases and improving survival in limited disease. It is not indicated in Hodgkin lymphoma or non-Hodgkin lymphoma. Postoperative radiotherapy is largely used in head and neck cancers, colon cancer and soft tissue sarcomas.",
+   "say": "Prophylactic cranial irradiation is used in small cell lung cancer that has responded to chemotherapy, reducing brain metastases. It is not indicated in Hodgkin lymphoma or non-Hodgkin lymphoma. Postoperative radiotherapy is largely used in head and neck cancers, colon cancer and soft tissue sarcomas.",
+   "vis": null
+  },
+  {
+   "tx": "**Wilms tumour** postoperative radiotherapy should begin within **10 days** of surgery, since delay allows tumour cell repopulation and more relapse. Craniospinal irradiation is used for **medulloblastoma**, the most radiosensitive brain tumour apart from lymphoma. Intraoperative radiotherapy is most valued in pancreatic carcinoma.",
+   "say": "Wilms tumour postoperative radiotherapy should begin within 10 days of surgery, since delay allows tumour cell repopulation and more relapse. Craniospinal irradiation is used for medulloblastoma, the most radiosensitive brain tumour apart from lymphoma. Intraoperative radiotherapy is most valued in pancreatic carcinoma.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "16d39c5e-9183-4937-a134-51632b9ba664",
+  "bb2572ab-d3e5-4b2f-b3c1-61192e2bdd07",
+  "0d8e3586-862f-49fc-a098-851878461d08"
+ ],
+ "src": [],
+ "refs": [
+  "Walter and Miller's Textbook of Radiotherapy (Bomford, Kunkler, Walter)",
+  "Harrison's Principles of Internal Medicine (Longo, Fauci, Kasper, Hauser, Jameson, Loscalzo (Eds))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 83
+ }
+}

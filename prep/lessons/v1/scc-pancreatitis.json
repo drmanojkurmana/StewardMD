@@ -1,0 +1,157 @@
+{
+ "v": 1,
+ "module": "scc-pancreatitis",
+ "subject": "ss-critical-care",
+ "title": "Severe Acute Pancreatitis: Classification, Resuscitation, Nutrition and Infected Necrosis",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Gallstones and alcohol are the commonest causes, with gallstones responsible for roughly 30 to 60 percent of cases. An **ALT above three times normal** or biliary dilatation on imaging points to a biliary cause. Hypertriglyceridaemia can falsely lower amylase, so **lipase** is the preferred enzyme. Persistent organ failure, not enzyme magnitude, decides severity.",
+   "say": "Gallstones and alcohol are the commonest causes, with gallstones responsible for roughly 30 to 60 percent of cases. An ALT above three times normal or biliary dilatation on imaging points to a biliary cause. Hypertriglyceridaemia can falsely lower amylase, so lipase is the preferred enzyme. Persistent organ failure, not enzyme magnitude, decides severity.",
+   "vis": null
+  },
+  {
+   "tx": "Early fluid resuscitation should be moderate and goal-directed, not aggressive. **Ringer lactate** is preferred over 0.9 percent saline. A **10 mL/kg bolus** is reserved for signs of hypovolaemia. Haemoconcentration above 44 percent and BUN above 25 mg/dL are markers of severity. Aggressive high-volume fluid loading risks abdominal compartment syndrome.",
+   "say": "Early fluid resuscitation should be moderate and goal-directed, not aggressive. Ringer lactate is preferred over 0.9 percent saline. A 10 mL per kg bolus is reserved for signs of hypovolaemia. Haemoconcentration above 44 percent and BUN above 25 mg per dL are markers of severity. Aggressive high-volume fluid loading risks abdominal compartment syndrome.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess volume status"
+     },
+     {
+      "id": "b",
+      "label": "Hypovolaemic signs?"
+     },
+     {
+      "id": "c",
+      "label": "10 mL/kg Ringer lactate"
+     },
+     {
+      "id": "d",
+      "label": "Moderate goal-directed fluids"
+     },
+     {
+      "id": "e",
+      "label": "Monitor urine output and haematocrit"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Infected pancreatic necrosis** typically appears after one to two weeks, with persistent fever, leucocytosis and gas bubbles in a collection on CT. Contrast-enhanced CT defines extent and wall maturity. Drainage is delayed until the **walled-off necrosis** wall matures, usually about four weeks. Asymptomatic sterile collections are managed conservatively.",
+   "say": "Infected pancreatic necrosis typically appears after one to two weeks, with persistent fever, leucocytosis and gas bubbles in a collection on CT. Contrast-enhanced CT defines extent and wall maturity. Drainage is delayed until the walled-off necrosis wall matures, usually about four weeks. Asymptomatic sterile collections are managed conservatively.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sterile necrosis",
+     "points": [
+      "No gas on CT",
+      "Stable clinically",
+      "Conservative care"
+     ]
+    },
+    "right": {
+     "title": "Infected necrosis",
+     "points": [
+      "Gas bubbles on CT",
+      "Fever and leucocytosis",
+      "Targeted antibiotics and drainage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **step-up approach** is the preferred strategy for infected necrosis: start with percutaneous or endoscopic transmural drainage, then move to minimally invasive necrosectomy if needed, and reserve open surgery as a last resort. This reduces morbidity. Intra-abdominal hypertension above 12 mmHg with organ dysfunction signals **abdominal compartment syndrome**, requiring decompression.",
+   "say": "The step-up approach is the preferred strategy for infected necrosis. Start with percutaneous or endoscopic transmural drainage, then move to minimally invasive necrosectomy if needed, and reserve open surgery as a last resort. This reduces morbidity. Intra-abdominal hypertension above 12 mmHg with organ dysfunction signals abdominal compartment syndrome, requiring decompression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Infected necrosis confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Percutaneous or endoscopic drainage"
+     },
+     {
+      "id": "c",
+      "label": "Minimally invasive necrosectomy"
+     },
+     {
+      "id": "d",
+      "label": "Open surgery if still failing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "if no improvement"
+     ],
+     [
+      "c",
+      "d",
+      "if no improvement"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_58a9c70f8d36",
+  "q_d51db961fbd8",
+  "q_c10163db7ef6"
+ ],
+ "src": [],
+ "refs": [
+  "Revised Atlanta Classification of acute pancreatitis (2012)",
+  "NICE guideline on acute pancreatitis (NG104)",
+  "IAP/APA evidence-based guidelines for the management of acute pancreatitis (2013)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 58
+ }
+}

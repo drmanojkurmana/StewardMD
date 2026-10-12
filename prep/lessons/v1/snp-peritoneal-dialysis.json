@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "snp-peritoneal-dialysis",
+ "subject": "ss-nephrology",
+ "title": "Peritoneal dialysis: membrane, adequacy and complications",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Peritoneal dialysis uses the **peritoneum** as a semipermeable membrane. Solute moves by **diffusion** down concentration gradients and water moves by **ultrafiltration** driven by the osmotic gradient of hypertonic glucose dialysate. The three pore model explains transport: small pores of 4 to 6 nm handle urea and most small solutes, while ultrasmall pores under 0.8 nm allow water movement through aquaporins. Large pores of 20 to 40 nm allow protein loss. Patients are classified by their peritoneal equilibration test as high, high average, low average or low transporters.",
+   "say": "Peritoneal dialysis uses the peritoneum as a semipermeable membrane. Solute moves by diffusion down concentration gradients, and water moves by ultrafiltration, driven by the osmotic gradient of hypertonic glucose dialysate. In the three pore model, small pores of 4 to 6 nanometres handle urea and most small solutes. Ultrasmall pores under 0.8 nanometres allow water movement through aquaporins. Large pores of 20 to 40 nanometres allow protein loss. Patients are classified by their peritoneal equilibration test as high, high average, low average or low transporters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Transport type",
+     "Key feature",
+     "Prescription implication"
+    ],
+    "rows": [
+     [
+      "High transporter",
+      "Rapid glucose equilibration",
+      "Short dwells, icodextrin for long dwell"
+     ],
+     [
+      "Low transporter",
+      "Slow solute clearance",
+      "Longer dwells, larger fill volumes"
+     ],
+     [
+      "Ultrafiltration failure",
+      "Lost osmotic gradient",
+      "Review transport status and fluid intake"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Peritonitis** is diagnosed by two of three features: abdominal pain or cloudy effluent, effluent leucocytes above 100 per microlitre with more than 50 percent neutrophils, and a positive culture. Start empirical intraperitoneal antibiotics covering Gram-positive and Gram-negative organisms as soon as cultures are sent. Clinical improvement is expected within 48 to 72 hours. Persistent cloudy effluent after 5 days of appropriate therapy is **refractory peritonitis**, and Pseudomonas, S. aureus and fungi predict treatment failure and permanent haemodialysis.",
+   "say": "Peritonitis is diagnosed by two of three features: abdominal pain or cloudy effluent, effluent leucocytes above 100 per microlitre with more than 50 percent neutrophils, and a positive culture. Start empirical intraperitoneal antibiotics covering Gram-positive and Gram-negative organisms as soon as cultures are sent. Clinical improvement is expected within 48 to 72 hours. Persistent cloudy effluent after 5 days of appropriate therapy is refractory peritonitis. Pseudomonas, S. aureus and fungi predict treatment failure and permanent haemodialysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cloudy effluent or pain"
+     },
+     {
+      "id": "b",
+      "label": "Cell count and culture"
+     },
+     {
+      "id": "c",
+      "label": "Empirical intraperitoneal antibiotics"
+     },
+     {
+      "id": "d",
+      "label": "Review at 48 to 72 hours"
+     },
+     {
+      "id": "e",
+      "label": "Refractory at 5 days: remove catheter"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "No clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Encapsulating peritoneal sclerosis** (EPS) is a rare, serious complication of long-term PD. Risk rises after about 5 years of treatment and with recurrent peritonitis. Glucose degradation products form advanced glycation end products that drive inflammation, fibrin deposition and a fibrocollagenous cocoon around bowel loops. Presentation is recurrent obstruction, weight loss and ultrafiltration failure. CT is the key diagnostic imaging test. Management includes stopping PD, nutritional support, steroids or tamoxifen, and surgery in selected cases.",
+   "say": "Encapsulating peritoneal sclerosis is a rare, serious complication of long-term peritoneal dialysis. Risk rises after about 5 years of treatment and with recurrent peritonitis. Glucose degradation products form advanced glycation end products that drive inflammation, fibrin deposition and a fibrocollagenous cocoon around bowel loops. Presentation includes recurrent obstruction, weight loss and ultrafiltration failure. CT is the key imaging test. Management includes stopping peritoneal dialysis, nutritional support, steroids or tamoxifen, and surgery in selected cases.",
+   "vis": null
+  },
+  {
+   "tx": "In India, peritoneal dialysis is used widely with **automated peritoneal dialysis** (APD) and continuous ambulatory peritoneal dialysis (CAPD). Each CAPD exchange takes about 30 to 40 minutes. For high transporters, short automated dwells with **icodextrin** for the long dwell maintain ultrafiltration for 8 to 16 hours, because it is a colloid osmotic agent. Low transporters benefit from longer dwells and larger fill volumes. Dialysate leak is suspected when ultrafiltration falls and weight rises.",
+   "say": "In India, peritoneal dialysis is used widely with automated peritoneal dialysis and continuous ambulatory peritoneal dialysis. Each CAPD exchange takes about 30 to 40 minutes. For high transporters, short automated dwells with icodextrin for the long dwell maintain ultrafiltration for 8 to 16 hours, because icodextrin is a colloid osmotic agent. Low transporters benefit from longer dwells and larger fill volumes. Dialysate leak is suspected when ultrafiltration falls and weight rises.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High transporter",
+     "points": [
+      "Rapid glucose equilibration",
+      "Short automated dwells",
+      "Icodextrin for long dwell"
+     ]
+    },
+    "right": {
+     "title": "Low transporter",
+     "points": [
+      "Slow solute clearance",
+      "Longer dwells",
+      "Larger fill volumes"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_b386686aa5a0",
+  "q_e1b2703c716c",
+  "q_2e69d979abf5"
+ ],
+ "src": [],
+ "refs": [
+  "ISPD Guidelines for Peritoneal Dialysis-Related Infections (Figueiredo et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 45
+ }
+}

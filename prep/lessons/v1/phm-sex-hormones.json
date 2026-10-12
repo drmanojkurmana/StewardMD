@@ -1,0 +1,105 @@
+{
+ "v": 1,
+ "module": "phm-sex-hormones",
+ "subject": "pharmacology",
+ "title": "Androgens, estrogens, progestins and their antagonists",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Finasteride and dutasteride are **5-alpha-reductase inhibitors**, not androgen receptor blockers. They lower dihydrotestosterone, the more potent androgen, and shrink the prostate over months. Flutamide and bicalutamide, in contrast, block the **androgen receptor** directly. Confusing these two groups is a common trap.",
+   "say": "Finasteride and dutasteride are 5-alpha-reductase inhibitors, not androgen receptor blockers. They lower dihydrotestosterone, the more potent androgen, and shrink the prostate over months. Flutamide and bicalutamide, in contrast, block the androgen receptor directly. Confusing these two groups is a common trap.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "5-ARI (finasteride)",
+     "points": [
+      "Blocks DHT formation",
+      "Shrinks prostate slowly",
+      "Lowers PSA about half"
+     ]
+    },
+    "right": {
+     "title": "AR antagonist (bicalutamide)",
+     "points": [
+      "Blocks receptor binding",
+      "Used in prostate cancer",
+      "Can cause gynaecomastia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tamoxifen** is a non-steroidal SERM with antagonist action in breast tissue and partial agonist action in the uterus. It can therefore raise endometrial carcinoma risk and increase venous thromboembolism. **Raloxifene** is also a SERM but acts as an antagonist on the endometrium, so it does not stimulate it. Raloxifene is mainly used for osteoporosis prevention and treatment.",
+   "say": "Tamoxifen is a non-steroidal SERM with antagonist action in breast tissue and partial agonist action in the uterus. It can therefore raise endometrial carcinoma risk and increase venous thromboembolism. Raloxifene is also a SERM but acts as an antagonist on the endometrium, so it does not stimulate it. Raloxifene is mainly used for osteoporosis prevention and treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tamoxifen",
+     "points": [
+      "Antagonist in breast",
+      "Partial agonist in uterus",
+      "Raises endometrial cancer risk",
+      "Raises thromboembolism risk"
+     ]
+    },
+    "right": {
+     "title": "Raloxifene",
+     "points": [
+      "Antagonist in breast",
+      "Antagonist in endometrium",
+      "Agonist on bone",
+      "Mainly for osteoporosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Letrozole** and **anastrozole** are non-steroidal aromatase inhibitors used in hormone-receptor-positive breast cancer. They work only when estrogen is low, so they suit postmenopausal women or premenopausal women with ovarian suppression. Letrozole is also first line for ovulation induction in anovulatory infertility, usually 2.5 mg daily for 5 days, off-label in many countries.",
+   "say": "Letrozole and anastrozole are non-steroidal aromatase inhibitors used in hormone-receptor-positive breast cancer. They work only when estrogen is low, so they suit postmenopausal women or premenopausal women with ovarian suppression. Letrozole is also first line for ovulation induction in anovulatory infertility, usually 2.5 milligrams daily for 5 days, off-label in many countries.",
+   "vis": null
+  },
+  {
+   "tx": "**Testosterone replacement** is the mainstay for symptomatic androgen deficiency with confirmed low levels, confirmed on a fasting early-morning sample. Monitor haematocrit, PSA and bone density. Exogenous testosterone suppresses spermatogenesis, so secondary hypogonadism needing fertility is treated with gonadotropins or pulsatile GnRH instead. Anabolic steroids share androgen side effects such as acne, gynaecomastia and early epiphyseal closure.",
+   "say": "Testosterone replacement is the mainstay for symptomatic androgen deficiency with confirmed low levels, confirmed on a fasting early-morning sample. Monitor haematocrit, PSA and bone density. Exogenous testosterone suppresses spermatogenesis, so secondary hypogonadism needing fertility is treated with gonadotropins or pulsatile GnRH instead. Anabolic steroids share androgen side effects such as acne, gynaecomastia and early epiphyseal closure.",
+   "vis": null
+  },
+  {
+   "tx": "**Hormone replacement therapy** with estrogen helps vasomotor hot flushes, urogenital atrophy and osteoporosis. It increases cardiovascular and breast cancer risk, so it is not used to prevent coronary heart disease. Estrogen is also not a treatment for gynaecomastia, which it can cause in males. Choose the lowest effective dose for the shortest time.",
+   "say": "Hormone replacement therapy with estrogen helps vasomotor hot flushes, urogenital atrophy and osteoporosis. It increases cardiovascular and breast cancer risk, so it is not used to prevent coronary heart disease. Estrogen is also not a treatment for gynaecomastia, which it can cause in males. Choose the lowest effective dose for the shortest time.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "8f66e418-c66c-4729-8b32-0b80abea81f8",
+  "49d743ff-1ee7-4864-9bee-9c08dbca53b1",
+  "83fb5ffb-3d0c-4f8c-a55f-f5e819d2f37b"
+ ],
+ "src": [
+  "kb-clinical-protocols-benign-prostatic-hyperplasia",
+  "kb-clinical-protocols-polycystic-ovary-syndrome",
+  "kb-protocols-breast-anastrozole",
+  "kb-protocols-breast-letrozole",
+  "kb-reference-disorders-of-the-testes-and"
+ ],
+ "refs": [
+  "Essentials of Medical Pharmacology (K.D. Tripathi)",
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics",
+  "Katzung, Basic and Clinical Pharmacology (Gonadal Hormones and Inhibitors)",
+  "DeVita, Cancer: Principles and Practice of Oncology (Chapter 16)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 2499,
+  "itemN": 175
+ }
+}

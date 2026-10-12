@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "module": "obg-multiple-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "Multiple pregnancy: zygosity, chorionicity and key complications",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Chorionicity** is best settled by first trimester ultrasound. The lambda or twin peak sign, with a thick inter-twin membrane of more than 2 mm, indicates dichorionic placentation. A **T sign**, with a thin membrane under 2 mm, indicates monochorionic placentation. Dichorionic twins can still be monozygotic, so chorionicity does not prove zygosity.",
+   "say": "Chorionicity is best settled by first trimester ultrasound. The lambda or twin peak sign, with a thick inter-twin membrane of more than 2 mm, indicates dichorionic placentation. A T sign, with a thin membrane under 2 mm, indicates monochorionic placentation. Dichorionic twins can still be monozygotic, so chorionicity does not prove zygosity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dichorionic",
+     "points": [
+      "Membrane over 2 mm",
+      "Lambda or twin peak sign",
+      "Two placentae or fused",
+      "No vascular anastomosis"
+     ]
+    },
+    "right": {
+     "title": "Monochorionic",
+     "points": [
+      "Membrane under 2 mm",
+      "T sign",
+      "One placenta",
+      "Vascular anastomoses likely"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **monochorionic** pregnancy, shared placental circulation can cause **twin-twin transfusion syndrome**, which is seen only in monochorionic placentas and is more common in monochorionic diamniotic twins. The donor twin is small with oligohydramnios and anaemia, while the recipient is plethoric with polyhydramnios and heart failure. The recipient may also develop thrombosis from polycythaemia. Earlier onset carries a worse prognosis.",
+   "say": "In monochorionic pregnancy, shared placental circulation can cause twin-twin transfusion syndrome, which is seen only in monochorionic placentas and is more common in monochorionic diamniotic twins. The donor twin is small with oligohydramnios and anaemia, while the recipient is plethoric with polyhydramnios and heart failure. The recipient may also develop thrombosis from polycythaemia. Earlier onset carries a worse prognosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Deep arteriovenous shunt"
+     },
+     {
+      "id": "b",
+      "label": "Donor: small, anaemic, oligohydramnios"
+     },
+     {
+      "id": "c",
+      "label": "Recipient: plethoric, polyhydramnios"
+     },
+     {
+      "id": "d",
+      "label": "Heart failure and preterm birth"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Monochorionic monoamniotic** twins share one sac and carry a high risk of cord entanglement, with fetal mortality reported above 40 per cent in some series. Vaginal delivery is not advised. Caesarean section is usually planned between 32 and 34 weeks after lung maturity is confirmed. Conjoined twins and locked twins are other rare situations where planned delivery needs specialist input.",
+   "say": "Monochorionic monoamniotic twins share one sac and carry a high risk of cord entanglement, with fetal mortality reported above 40 per cent in some series. Vaginal delivery is not advised. Caesarean section is usually planned between 32 and 34 weeks after lung maturity is confirmed. Conjoined twins and locked twins are other rare situations where planned delivery needs specialist input.",
+   "vis": null
+  },
+  {
+   "tx": "Multiple pregnancy carries higher risks for the mother and baby, including **pre-eclampsia**, anaemia, polyhydramnios, preterm labour, postpartum haemorrhage and peripartum hysterectomy. Preterm birth occurs in about half of twin pregnancies. Selective reduction of a multichorionic pregnancy is usually done between 10 and 13 weeks. Twin gestation is more common with advancing maternal age and assisted reproduction, and Japan has the lowest frequency.",
+   "say": "Multiple pregnancy carries higher risks for the mother and baby, including pre-eclampsia, anaemia, polyhydramnios, preterm labour, postpartum haemorrhage and peripartum hysterectomy. Preterm birth occurs in about half of twin pregnancies. Selective reduction of a multichorionic pregnancy is usually done between 10 and 13 weeks. Twin gestation is more common with advancing maternal age and assisted reproduction, and Japan has the lowest frequency.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "50b3a058-8bf0-42c9-aa35-596d594b00de",
+  "92519ea0-6846-458c-a81e-70d2396646f4",
+  "9f169eab-4a81-46eb-82e1-25bc421f3e8b"
+ ],
+ "src": [],
+ "refs": [
+  "Williams Obstetrics (Cunningham and others, Eds)",
+  "Chapter Multifetal Gestation in Williams Obstetrics (Cunningham and others, Eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 154
+ }
+}

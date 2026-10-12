@@ -1,0 +1,186 @@
+{
+ "v": 1,
+ "module": "sgm-hypertension",
+ "subject": "ss-general-medicine",
+ "title": "Systemic Hypertension: Diagnosis, Targets and Management",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Systemic hypertension** is persistently raised arterial pressure, so the diagnosis rests on repeated measurements rather than one reading. **Ambulatory blood pressure monitoring** records readings across a full day and night and is the reference for separating **white-coat hypertension** from **masked hypertension**. Home readings usually run lower than clinic readings, which is why the home threshold is set lower than the office threshold.",
+   "say": "Systemic hypertension is persistently raised arterial pressure, so the diagnosis rests on repeated measurements rather than one reading. Ambulatory blood pressure monitoring records readings across a full day and night and is the reference for separating white-coat hypertension from masked hypertension. Home readings usually run lower than clinic readings, which is why the home threshold is set lower than the office threshold.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Office threshold",
+     "Home threshold"
+    ],
+    "rows": [
+     [
+      "Treatment threshold",
+      "140/90 or higher",
+      "135/85 or higher"
+     ],
+     [
+      "White-coat pattern",
+      "High in clinic, normal outside",
+      "Normal outside clinic"
+     ],
+     [
+      "Masked pattern",
+      "Normal in clinic, high outside",
+      "High outside clinic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screen for **secondary hypertension** when the patient is young, has severe readings, or has unexplained hypokalaemia, as these suggest primary aldosteronism. An aldosterone to renin ratio above 20 is a common screening marker. Inter-arm blood pressure differences greater than 20 mmHg should prompt evaluation for vascular disease, and the higher arm is used for future readings.",
+   "say": "Screen for secondary hypertension when the patient is young, has severe readings, or has unexplained hypokalaemia, as these suggest primary aldosteronism. An aldosterone to renin ratio above 20 is a common screening marker. Inter-arm blood pressure differences greater than 20 mmHg should prompt evaluation for vascular disease, and the higher arm is used for future readings.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect hypertension"
+     },
+     {
+      "id": "b",
+      "label": "Office BP confirmed"
+     },
+     {
+      "id": "c",
+      "label": "Screen for secondary cause"
+     },
+     {
+      "id": "d",
+      "label": "Aldosterone renin ratio"
+     },
+     {
+      "id": "e",
+      "label": "Targeted imaging or referral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **ESC 2024** target for most treated adults is a systolic pressure of 120 to 129 mmHg, provided therapy is tolerated. In **CKD** and diabetes, drug therapy is generally started at 130/80 or higher. Note that ACC/AHA uses 130/80 as its stage 1 threshold, so Indian and US classifications differ and should be stated explicitly in exams. The **SPRINT** trial showed benefit of intensive systolic control below 120 in high-risk patients.",
+   "say": "The ESC 2024 target for most treated adults is a systolic pressure of 120 to 129 mmHg, provided therapy is tolerated. In CKD and diabetes, drug therapy is generally started at 130/80 or higher. ACC/AHA uses 130/80 as its stage 1 threshold, so Indian and US classifications differ and should be stated explicitly in exams. The SPRINT trial showed benefit of intensive systolic control below 120 in high-risk patients.",
+   "vis": null
+  },
+  {
+   "tx": "First-line drugs are **ACE inhibitors**, **ARBs**, **dihydropyridine calcium channel blockers** and **thiazide-like diuretics**. In diabetes with albuminuria, an ACE inhibitor or ARB is preferred. Beta-blockers are reserved for compelling indications such as angina or heart failure. ACE inhibitors and ARBs must be stopped in pregnancy, and combining an ACE inhibitor with an ARB is avoided because of hyperkalaemia and kidney injury. Amlodipine can cause dose-related ankle oedema from precapillary vasodilation.",
+   "say": "First-line drugs are ACE inhibitors, ARBs, dihydropyridine calcium channel blockers and thiazide-like diuretics. In diabetes with albuminuria, an ACE inhibitor or ARB is preferred. Beta-blockers are reserved for compelling indications such as angina or heart failure. ACE inhibitors and ARBs must be stopped in pregnancy, and combining an ACE inhibitor with an ARB is avoided because of hyperkalaemia and kidney injury. Amlodipine can cause dose-related ankle oedema from precapillary vasodilation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preferred in diabetes or albuminuria",
+     "points": [
+      "ACE inhibitor or ARB",
+      "Avoid ACEI plus ARB combination",
+      "Monitor creatinine and potassium"
+     ]
+    },
+    "right": {
+     "title": "Avoid or reserve",
+     "points": [
+      "ACE inhibitors and ARBs in pregnancy",
+      "Beta-blockers without compelling indication",
+      "Potassium above 5.5 mmol/L on RAS blockers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Resistant hypertension** is blood pressure above target despite three drugs at maximum tolerated doses, one of which is a diuretic. Before labelling it truly resistant, check adherence, since non-adherence is the commonest cause of apparent resistance. **PATHWAY-2** showed that spironolactone is effective in this group. **Renal denervation** is considered only after a spironolactone trial and confirmed true resistance. In hypertensive emergency, reduce mean arterial pressure by 20 to 25 percent over hours, not minutes.",
+   "say": "Resistant hypertension is blood pressure above target despite three drugs at maximum tolerated doses, one of which is a diuretic. Before labelling it truly resistant, check adherence, since non-adherence is the commonest cause of apparent resistance. PATHWAY-2 showed that spironolactone is effective in this group. Renal denervation is considered only after a spironolactone trial and confirmed true resistance. In hypertensive emergency, reduce mean arterial pressure by 20 to 25 percent over hours, not minutes.",
+   "vis": null
+  },
+  {
+   "tx": "In **hypertensive emergency**, blood pressure is very high with acute target organ damage such as pulmonary oedema, encephalopathy or acute kidney injury. Treatment is intravenous, with **labetalol** as a common choice, alongside other titratable parenteral agents selected by the clinical team. Over-rapid lowering can cause end-organ ischaemia, because chronic hypertension shifts the autoregulation curve. Severe asymptomatic hypertension without organ damage needs oral adjustment, not urgent parenteral drugs.",
+   "say": "In hypertensive emergency, blood pressure is very high with acute target organ damage such as pulmonary oedema, encephalopathy or acute kidney injury. Treatment is intravenous, with labetalol as a common choice, alongside other titratable parenteral agents selected by the clinical team. Over-rapid lowering can cause end-organ ischaemia, because chronic hypertension shifts the autoregulation curve. Severe asymptomatic hypertension without organ damage needs oral adjustment, not urgent parenteral drugs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severe BP elevation"
+     },
+     {
+      "id": "b",
+      "label": "Organ damage present?"
+     },
+     {
+      "id": "c",
+      "label": "Emergency: IV labetalol or other titratable agent"
+     },
+     {
+      "id": "d",
+      "label": "Urgency: oral adjustment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_2a53b10c991a",
+  "q_99e8bda3b35c",
+  "q_c23fce9c62a1"
+ ],
+ "src": [],
+ "refs": [
+  "European Society of Cardiology 2024 Guidelines for the management of elevated blood pressure and hypertension",
+  "ACC/AHA 2017 Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults",
+  "SPRINT Research Group, New England Journal of Medicine 2015",
+  "PATHWAY-2 Trial, Lancet 2015"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 46
+ }
+}

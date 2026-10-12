@@ -1,0 +1,129 @@
+{
+ "v": 1,
+ "module": "shp-cirrhosis-prognosis-care",
+ "subject": "ss-hepatology",
+ "title": "Cirrhosis prognosis, nutrition and comprehensive care",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **Child-Turcotte-Pugh (CTP) score** remains a widely used way to group patients with cirrhosis by severity. It combines five items: **bilirubin**, **albumin**, **prothrombin time or INR**, **ascites** and **encephalopathy**. Each item earns one to three points, and the total places a patient in class A, B or C, with class C carrying the highest risk. Because ascites and encephalopathy rely on clinical judgement, different examiners may grade them differently, which limits precision.",
+   "say": "The Child-Turcotte-Pugh score is still widely used to group people with cirrhosis by severity. It combines five items: bilirubin, albumin, prothrombin time or INR, ascites and encephalopathy. Each item earns one to three points, and the total places a patient in class A, B or C, where class C carries the highest risk. Because ascites and encephalopathy rely on clinical judgement, different examiners may grade them differently, which limits precision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "1 point",
+     "2 points",
+     "3 points"
+    ],
+    "rows": [
+     [
+      "Bilirubin",
+      "Normal",
+      "Moderately raised",
+      "Markedly raised"
+     ],
+     [
+      "Albumin",
+      "Normal",
+      "Mildly reduced",
+      "Markedly reduced"
+     ],
+     [
+      "INR",
+      "Normal",
+      "Mildly prolonged",
+      "Markedly prolonged"
+     ],
+     [
+      "Ascites",
+      "None",
+      "Mild or controlled",
+      "Moderate to severe"
+     ],
+     [
+      "Encephalopathy",
+      "None",
+      "Grade 1 to 2",
+      "Grade 3 to 4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sarcopenia** is loss of skeletal muscle mass and strength, and it strongly predicts higher morbidity and mortality after major surgery. The EWGSOP2 pathway runs Find, Assess, Confirm and Severity. SARC-F of 4 or more suggests probable sarcopenia. Low grip strength (under 27 kg in men, under 16 kg in women) and a slow gait speed (0.8 m/s or less) support the diagnosis. Psoas area at L3 on CT is a validated surgical risk marker.",
+   "say": "Sarcopenia is loss of skeletal muscle mass and strength, and it strongly predicts higher morbidity and mortality after major surgery. The EWGSOP2 pathway runs through Find, Assess, Confirm and Severity. A SARC-F score of 4 or more suggests probable sarcopenia. Low grip strength, under 27 kilograms in men and under 16 kilograms in women, and a slow gait speed of 0.8 metres per second or less support the diagnosis. Psoas area at the third lumbar vertebra on CT is a validated surgical risk marker.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f",
+      "label": "Find: SARC-F 4 or more"
+     },
+     {
+      "id": "a",
+      "label": "Assess: grip strength, gait"
+     },
+     {
+      "id": "c",
+      "label": "Confirm: muscle mass by DXA or CT"
+     },
+     {
+      "id": "s",
+      "label": "Severity: performance tests"
+     }
+    ],
+    "edges": [
+     [
+      "f",
+      "a"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "c",
+      "s"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cirrhosis causes a **coagulopathy** that is rebalanced rather than simply deficient, because procoagulant and anticoagulant pathways both fall. INR alone does not predict bleeding. **Thromboelastography** gives a global view of clot formation and is useful before procedures. Routine FFP or platelet transfusion for an isolated INR is not recommended. Portal vein thrombosis is treated with anticoagulation when no contraindication exists.",
+   "say": "Cirrhosis causes a coagulopathy that is rebalanced rather than simply deficient, because procoagulant and anticoagulant pathways both fall. INR alone does not predict bleeding. Thromboelastography gives a global view of clot formation and is useful before procedures. Routine plasma or platelet transfusion for an isolated INR is not recommended. Portal vein thrombosis is treated with anticoagulation when no contraindication exists.",
+   "vis": null
+  },
+  {
+   "tx": "The **liver frailty index** is a bedside measure of grip strength, chair stands and balance. Frailty predicts waitlist death and post-transplant outcomes better than age alone. A higher score means greater frailty. Frailty is multi-system, whereas sarcopenia is specific to muscle. Early prehabilitation with exercise and nutrition is the practical goal before transplant or surgery.",
+   "say": "The liver frailty index is a bedside measure of grip strength, chair stands and balance. Frailty predicts waitlist death and post-transplant outcomes better than age alone. A higher score means greater frailty. Frailty is a multi-system impairment, whereas sarcopenia is specific to muscle. Early prehabilitation with exercise and nutrition is the practical goal before transplant or surgery.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_5e6c1832f2fc",
+  "q_324b159fe5b6",
+  "q_605da88c7fa3"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline NG50 Cirrhosis in over 16s",
+  "EASL Clinical Practice Guidelines on decompensated cirrhosis",
+  "EWGSOP2 consensus on sarcopenia (Cruz-Jentoft et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 62
+ }
+}

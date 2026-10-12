@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "ana-diencephalon",
+ "subject": "anatomy",
+ "title": "Thalamus, hypothalamus and diencephalon: nuclei, connections and syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **diencephalon** sits between the cerebrum and the brainstem and surrounds the **third ventricle**. Its five parts are the **thalamus**, **metathalamus**, **epithalamus**, **subthalamus** and **hypothalamus**. Each part carries distinct nuclei, and the table summarises the main structures you should recognise for examinations.",
+   "say": "Think of the diencephalon as the central core sitting between the cerebrum and the brainstem, wrapped around the third ventricle. It has five parts: thalamus, metathalamus, epithalamus, subthalamus and hypothalamus. Each part has its own nuclei and connections, so the table lists the key structures to learn for your exams.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Part",
+     "Key structures"
+    ],
+    "rows": [
+     [
+      "Thalamus",
+      "Relay nuclei, sensory and motor"
+     ],
+     [
+      "Metathalamus",
+      "Medial and lateral geniculate bodies"
+     ],
+     [
+      "Epithalamus",
+      "Habenula, pineal body, commissures"
+     ],
+     [
+      "Subthalamus",
+      "Subthalamic nucleus"
+     ],
+     [
+      "Hypothalamus",
+      "Supraoptic, paraventricular, mammillary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The thalamus is a relay station for almost all sensory pathways except smell, which reaches cortex directly. The **ventral posterolateral (VPL)** nucleus receives the medial lemniscus and spinothalamic tract and projects to the primary sensory cortex. The **ventral posteromedial (VPM)** nucleus receives the trigeminal lemniscus and the solitariothalamic tract.",
+   "say": "The thalamus is a relay station for almost all sensory pathways except smell, which reaches cortex directly. The ventral posterolateral nucleus receives the medial lemniscus and spinothalamic tract and projects to the primary sensory cortex. The ventral posteromedial nucleus receives the trigeminal lemniscus and the solitariothalamic tract.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Medial lemniscus, STT"
+     },
+     {
+      "id": "b",
+      "label": "VPL"
+     },
+     {
+      "id": "c",
+      "label": "Primary sensory cortex"
+     },
+     {
+      "id": "d",
+      "label": "Trigeminal lemniscus"
+     },
+     {
+      "id": "e",
+      "label": "VPM"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Each thalamic nucleus has a defined cortical target. The **lateral geniculate body** relays vision to the primary visual cortex, and the **medial geniculate body** relays hearing to the auditory cortex. The **ventral lateral (VL)** nucleus carries cerebellar input from the dentate nucleus and basal ganglia input to the motor cortex, while the pulvinar goes to the inferior parietal lobule.",
+   "say": "Each thalamic nucleus has a defined cortical target. The lateral geniculate body relays vision to the primary visual cortex, and the medial geniculate body relays hearing to the auditory cortex. The ventral lateral nucleus carries cerebellar input from the dentate nucleus and basal ganglia input to the motor cortex, while the pulvinar goes to the inferior parietal lobule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nucleus",
+     "Main target"
+    ],
+    "rows": [
+     [
+      "Lateral geniculate",
+      "Primary visual cortex"
+     ],
+     [
+      "Medial geniculate",
+      "Auditory cortex"
+     ],
+     [
+      "Ventral lateral",
+      "Primary motor cortex"
+     ],
+     [
+      "Pulvinar",
+      "Inferior parietal lobule"
+     ],
+     [
+      "Anterior",
+      "Cingulate gyrus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Every thalamic nucleus except the **reticular nucleus** projects to neocortex. The reticular nucleus sends its output mainly to other thalamic nuclei and so regulates information flow. Dorsal-group nuclei, namely pulvinar, intralaminar and anterior, project to neocortex, which is why reticular nucleus is the usual answer to 'which nucleus does not project'.",
+   "say": "Every thalamic nucleus except the reticular nucleus projects to neocortex. The reticular nucleus sends its output mainly to other thalamic nuclei and so regulates information flow. Dorsal group nuclei, namely pulvinar, intralaminar and anterior, project to neocortex, which is why reticular nucleus is the usual answer to which nucleus does not project.",
+   "vis": null
+  },
+  {
+   "tx": "The **epithalamus** sits on the roof of the third ventricle and includes the habenular nuclei, the pineal body and the posterior commissure. The **geniculate bodies** are not epithalamus; they belong to the metathalamus. The hypothalamus includes the **supraoptic** and **paraventricular** nuclei, which make oxytocin and vasopressin, and the **suprachiasmatic** nucleus, the circadian pacemaker.",
+   "say": "The epithalamus sits on the roof of the third ventricle and includes the habenular nuclei, the pineal body and the posterior commissure. The geniculate bodies are not epithalamus; they belong to the metathalamus. The hypothalamus includes the supraoptic and paraventricular nuclei, which make oxytocin and vasopressin, and the suprachiasmatic nucleus, the circadian pacemaker.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epithalamus",
+     "points": [
+      "Habenular nuclei",
+      "Pineal body",
+      "Posterior commissure",
+      "Habenular commissure"
+     ]
+    },
+    "right": {
+     "title": "Metathalamus",
+     "points": [
+      "Medial geniculate body",
+      "Lateral geniculate body"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Thalamic syndrome** follows a lesion of the thalamus, usually involving VPL, and causes contralateral hemisensory loss affecting the whole side including the trunk, often with dysaesthesia and pain. A small lacunar infarct of VPL typically spares motor power. Mammillary bodies connect to the anterior thalamic nucleus through the mammillothalamic tract, and damage there contributes to memory loss.",
+   "say": "Thalamic syndrome follows a lesion of the thalamus, usually involving the ventral posterolateral nucleus, and causes contralateral hemisensory loss affecting the whole side including the trunk, often with dysaesthesia and pain. A small lacunar infarct of this nucleus typically spares motor power. Mammillary bodies connect to the anterior thalamic nucleus through the mammillothalamic tract, and damage there contributes to memory loss.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "fedfdef0-372b-43b9-9c2c-30d9d33c135c",
+  "003c7eae-f788-40cb-b779-e592b9217c16",
+  "22784de7-ffb3-45a2-8b70-763f4766e60a"
+ ],
+ "src": [],
+ "refs": [
+  "Snell's Clinical Neuroanatomy",
+  "Gray's Anatomy for Students"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 32
+ }
+}

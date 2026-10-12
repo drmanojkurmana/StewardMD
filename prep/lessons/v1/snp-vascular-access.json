@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "snp-vascular-access",
+ "subject": "ss-nephrology",
+ "title": "Vascular access for haemodialysis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Haemodialysis needs reliable **vascular access**. The three options are a native **arteriovenous fistula**, an AV graft, and a **tunneled catheter**. Fistula First is the national and international principle: create a fistula whenever possible because it has the lowest infection rate and best long-term patency. Catheters are a bridge, not a destination, and should be used only when a fistula is not yet usable or not feasible.",
+   "say": "Haemodialysis needs reliable vascular access. The three options are a native arteriovenous fistula, an AV graft, and a tunneled catheter. Fistula First is the guiding principle: create a fistula whenever possible, because it has the lowest infection rate and the best long-term patency. Catheters are a bridge, not a destination, and should be used only when a fistula is not yet usable or not feasible.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Access type",
+     "Infection risk",
+     "Long-term patency"
+    ],
+    "rows": [
+     [
+      "Native fistula",
+      "Lowest",
+      "Best"
+     ],
+     [
+      "AV graft",
+      "Intermediate",
+      "Intermediate"
+     ],
+     [
+      "Tunneled catheter",
+      "Highest",
+      "Poorest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Site choice matters. The **right internal jugular vein** is preferred for central catheters because it gives a straight path to the superior vena cava. Left-sided catheters carry more stenosis risk through the narrow, angulated left brachiocephalic vein. Avoid the subclavian vein where possible, since it commonly causes **central venous stenosis** that can ruin a future fistula on the same arm.",
+   "say": "Site choice matters. The right internal jugular vein is preferred for central catheters because it gives a straight path to the superior vena cava. Left-sided catheters carry more stenosis risk through the narrow, angulated left brachiocephalic vein. Avoid the subclavian vein where possible, since it commonly causes central venous stenosis that can ruin a future fistula on the same arm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right IJ",
+     "points": [
+      "Straight path to SVC",
+      "Preferred site",
+      "Lower stenosis risk"
+     ]
+    },
+    "right": {
+     "title": "Left IJ or subclavian",
+     "points": [
+      "Angulated left brachiocephalic route",
+      "Higher stenosis risk",
+      "Subclavian access harms future fistula"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tunneled catheters need clear contraindications. **Uncontrolled sepsis and bacteraemia** are absolute contraindications, and correcting a coagulopathy first lowers haematoma risk. A minor skin infection or antiplatelet use is not an absolute bar. If a catheter-related bloodstream infection occurs with sepsis, the catheter should be removed, and systemic antibiotics alone are not enough. Lock therapy is an adjunct, not a replacement.",
+   "say": "Tunneled catheters need clear contraindications. Uncontrolled sepsis and bacteraemia are absolute contraindications, and correcting a coagulopathy first lowers haematoma risk. A minor skin infection or antiplatelet use is not an absolute bar. If a catheter-related bloodstream infection occurs with sepsis, the catheter should be removed, and systemic antibiotics alone are not enough. Lock therapy is an adjunct, not a replacement.",
+   "vis": null
+  },
+  {
+   "tx": "**Lock solutions** prevent catheter thrombosis between sessions. Sodium citrate is generally preferred over concentrated heparin because it shows lower biofilm formation and a better bleeding profile. Non-tunneled catheters used for dialysis should be removed promptly if catheter-related bloodstream infection is confirmed or strongly suspected. Monitor for access stenosis, which may show as rising venous pressure or reduced blood flow.",
+   "say": "Lock solutions prevent catheter thrombosis between sessions. Sodium citrate is generally preferred over concentrated heparin because it shows lower biofilm formation and a better bleeding profile. Non-tunneled catheters used for dialysis should be removed promptly if catheter-related bloodstream infection is confirmed or strongly suspected. Monitor for access stenosis, which may show as rising venous pressure or reduced blood flow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lock agent",
+     "Thrombosis prevention",
+     "Bleeding and biofilm"
+    ],
+    "rows": [
+     [
+      "Sodium citrate",
+      "Good",
+      "Lower biofilm, better bleeding profile"
+     ],
+     [
+      "Concentrated heparin",
+      "Good",
+      "Higher bleeding risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **fistula** needs time before it can be used. The vein must widen and move closer to the surface, a process called **maturation**, which usually takes several weeks. The main complications to recognise are **steal syndrome**, **high output heart failure** and **access thrombosis**. Because the low resistance shunt draws extra blood back to the heart, cardiac workload rises. Stenosis or clotting should be treated promptly, often with angioplasty or surgical revision.",
+   "say": "A fistula needs time before it can be used. The vein has to widen and move closer to the surface, a process called maturation, which usually takes several weeks. The main complications to recognise are steal syndrome, high output heart failure and access thrombosis. Because the low resistance shunt pulls extra blood back to the heart, the heart's workload rises. Narrowing or clotting should be treated promptly, often with angioplasty or surgical revision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Expected change"
+    ],
+    "rows": [
+     [
+      "Vein calibre",
+      "Enlarges over time"
+     ],
+     [
+      "Depth from skin",
+      "Becomes more superficial"
+     ],
+     [
+      "Time to usable",
+      "Several weeks"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_403f84fc80c7",
+  "q_957f1a5edfb8",
+  "q_9d1caf0ed431"
+ ],
+ "src": [],
+ "refs": [
+  "KDOQI Clinical Practice Guideline for Vascular Access (2006)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 42
+ }
+}

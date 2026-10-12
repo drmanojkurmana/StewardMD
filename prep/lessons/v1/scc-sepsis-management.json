@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "scc-sepsis-management",
+ "subject": "ss-critical-care",
+ "title": "Sepsis resuscitation and management: the hour one approach",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Sepsis is life-threatening organ dysfunction caused by a **dysregulated host response** to infection. Septic shock is sepsis with vasopressor need to keep mean arterial pressure at 65 mmHg or more, plus lactate above 2 mmol/L despite adequate fluid. Recognise it early, because every hour of delay raises mortality. Use the qSOFA and SOFA scores to flag patients at risk.",
+   "say": "Sepsis is life-threatening organ dysfunction caused by a dysregulated host response to infection. Septic shock is sepsis with a need for vasopressors to keep mean arterial pressure at 65 millimetres of mercury or more, plus a lactate above 2 millimoles per litre despite adequate fluid. Recognise it early, because every hour of delay raises mortality. Use the qSOFA and SOFA scores to flag patients at risk.",
+   "vis": null
+  },
+  {
+   "tx": "The **hour one bundle** is the core of early sepsis care and is designed to be completed within the first hour of recognition. Measure **lactate** and repeat it if the first value is raised, since this guides how urgently tissue hypoperfusion is being treated. Draw **blood cultures** before the first antibiotic dose, then give **broad-spectrum antibiotics** promptly when septic shock is probable. Start a **crystalloid** fluid bolus for hypotension or raised lactate, and add a **vasopressor** if hypotension persists during or after fluid.",
+   "say": "The hour one bundle is the heart of early sepsis care and aims to be finished within the first hour. Check lactate and repeat it if the first result is high, because this shows how much tissue is being underperfused. Take blood cultures before the first antibiotic dose, then start broad spectrum antibiotics quickly when septic shock is likely. Give a crystalloid fluid bolus for low blood pressure or raised lactate, and add a vasopressor if the pressure stays low during or after fluids.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Action",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Lactate",
+      "Measure and repeat if raised",
+      "Within the first hour"
+     ],
+     [
+      "Blood cultures",
+      "Draw before the first antibiotic dose",
+      "Before antibiotics"
+     ],
+     [
+      "Antibiotics",
+      "Broad spectrum when shock is probable",
+      "Within the first hour"
+     ],
+     [
+      "Fluids",
+      "Crystalloid bolus for hypotension or raised lactate",
+      "Early, during resuscitation"
+     ],
+     [
+      "Vasopressor",
+      "Add if hypotension persists after fluid",
+      "When pressure stays low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early **antibiotics** and **source control** work together in septic shock. Treatment should begin within one hour of recognition, because each hour of delay is linked to higher mortality. Select empirical agents according to the likely infective source and local resistance patterns. Once **culture** results return, **de-escalate** to a narrower agent. Drain collections, remove infected catheters or devices, and relieve obstruction as soon as feasible.",
+   "say": "Early antibiotics and source control work together in septic shock. Treatment should begin within one hour of recognition, because each hour of delay is linked to higher mortality. Select empirical agents according to the likely infective source and local resistance patterns. Once culture results return, de-escalate to a narrower agent. Drain collections, remove infected catheters or devices, and relieve obstruction as soon as feasible.",
+   "vis": null
+  },
+  {
+   "tx": "Early goal directed therapy from the Rivers trial used central venous oxygen saturation targets. Later trials, ProCESS, ARISE and ProMISe, found protocolised resuscitation did not beat usual care. Current practice therefore uses **individualised resuscitation** guided by perfusion markers such as lactate, capillary refill and urine output. Avoid over-reliance on any single fixed target.",
+   "say": "Early goal directed therapy from the Rivers trial used central venous oxygen saturation targets. Later trials, ProCESS, ARISE and ProMISe, found protocolised resuscitation did not beat usual care. Current practice therefore uses individualised resuscitation guided by perfusion markers such as lactate, capillary refill and urine output. Avoid over-reliance on any single fixed target.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rivers era",
+     "points": [
+      "Protocolised targets",
+      "Central venous oxygen saturation",
+      "Mortality benefit in original trial"
+     ]
+    },
+    "right": {
+     "title": "Modern practice",
+     "points": [
+      "Individualised resuscitation",
+      "Lactate and capillary refill guide",
+      "Later trials showed no added benefit"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Adjunct therapies should be used selectively rather than as routine add-ons. A **corticosteroid** may be considered in septic shock when **vasopressor** requirements stay high despite adequate fluid resuscitation and first-line support, based on trials such as ADRENAL and APROCCHSS. Large trials of **antioxidant vitamin infusion** have not shown a survival benefit, so routine use is discouraged. For **prolonged beta-lactam infusion**, BLING III found no mortality difference compared with intermittent dosing, although target drug levels were reached more often.",
+   "say": "Adjunct therapies should be used selectively rather than as routine add-ons. A corticosteroid may be considered in septic shock when vasopressor requirements stay high despite adequate fluid resuscitation and first-line support, based on trials such as ADRENAL and APROCCHSS. Large trials of antioxidant vitamin infusion have not shown a survival benefit, so routine use is discouraged. For prolonged beta-lactam infusion, BLING III found no mortality difference compared with intermittent dosing, although target drug levels were reached more often.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_4e58df050b14",
+  "q_a294e1ab41fb",
+  "q_b3210cfaac60"
+ ],
+ "src": [],
+ "refs": [
+  "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021 (Evans L et al.)",
+  "ADRENAL trial; APROCCHSS trial; LOVIT trial; BLING III trial; ProCESS, ARISE and ProMISe trials"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 44
+ }
+}

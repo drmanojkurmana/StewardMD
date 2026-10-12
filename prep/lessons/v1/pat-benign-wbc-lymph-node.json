@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "pat-benign-wbc-lymph-node",
+ "subject": "pathology",
+ "title": "Non-neoplastic leukocyte and lymph node disorders: reactive changes and key differentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Leukocytosis means a raised total white cell count, usually from infection or inflammation. **Neutrophilia** is the commonest pattern in bacterial infection. When neutrophils reach 30,000 to 50,000 per microlitre or more, the picture can mimic leukaemia; this is called a **leukemoid reaction**. The cells are mature, unlike the immature myeloid cells of chronic myeloid leukaemia.",
+   "say": "Leukocytosis means a raised total white cell count, usually from infection or inflammation. Neutrophilia is the commonest pattern in bacterial infection. When neutrophils reach thirty thousand to fifty thousand per microlitre or more, the picture can mimic leukaemia; this is called a leukemoid reaction. The cells are mature, unlike the immature myeloid cells of chronic myeloid leukaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Leukemoid reaction",
+     "Chronic myeloid leukaemia"
+    ],
+    "rows": [
+     [
+      "Cell maturity",
+      "Mostly mature",
+      "Immature myeloid forms"
+     ],
+     [
+      "LAP score",
+      "High",
+      "Low"
+     ],
+     [
+      "Philadelphia chromosome",
+      "Absent",
+      "Present in most cases"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eosinophilia** is driven by IL-5 and is typically seen in allergic disease such as asthma, hay fever and drug reactions, and in **parasitic infection** such as helminths and filariasis. It also occurs in Hodgkin disease, HIV and HTLV-1. Corticosteroids cause eosinopenia instead. Eosinophil major basic protein is toxic to helminths.",
+   "say": "Eosinophilia is driven by interleukin five and is typically seen in allergic disease such as asthma, hay fever and drug reactions, and in parasitic infection such as helminths and filariasis. It also occurs in Hodgkin disease, HIV and HTLV-1. Corticosteroids cause eosinopenia instead. Eosinophil major basic protein is toxic to helminths.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Causes of eosinophilia",
+     "points": [
+      "Allergy: asthma, drug reactions",
+      "Parasites: helminths, filariasis",
+      "Malignancy: Hodgkin disease, CML",
+      "Viral: HIV, HTLV-1"
+     ]
+    },
+    "right": {
+     "title": "Not causing eosinophilia",
+     "points": [
+      "Corticosteroid therapy",
+      "Eosinopenia is the expected effect"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Infectious mononucleosis** is caused by **Epstein-Barr virus (HHV-4)**, which enters B cells via CD21. It presents with the triad of fever, pharyngitis and lymphadenopathy after an incubation of 2 to 5 weeks. The blood shows atypical lymphocytes, mostly CD8+ T cells, with Downey cells. The **monospot test** (horse erythrocyte agglutination) is the most sensitive screen; the Paul-Bunnell test uses sheep cells.",
+   "say": "Infectious mononucleosis is caused by Epstein-Barr virus, which enters B cells via CD21. It presents with the triad of fever, pharyngitis and lymphadenopathy after an incubation of two to five weeks. The blood shows atypical lymphocytes, mostly CD8 positive T cells, with Downey cells. The monospot test, using horse erythrocyte agglutination, is the most sensitive screen; the Paul-Bunnell test uses sheep cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "EBV infects oral epithelium"
+     },
+     {
+      "id": "b",
+      "label": "Spreads to B cells"
+     },
+     {
+      "id": "c",
+      "label": "CD8+ T cell response"
+     },
+     {
+      "id": "d",
+      "label": "Atypical lymphocytes and Downey cells"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Reactive **lymphadenitis** enlarges nodes draining an infected site. Histology shows cortical follicles, macrophages and many plasma cells, reflecting antigen-driven B cell activation. **Kikuchi-Fujimoto disease** (histiocytic necrotising lymphadenitis) is a benign, self-limiting condition in young women with tender cervical nodes, fever, and leukopenia in some cases. Its key feature is necrosis with karyorrhexis on excisional biopsy.",
+   "say": "Reactive lymphadenitis enlarges nodes draining an infected site. Histology shows cortical follicles, macrophages and many plasma cells, reflecting antigen-driven B cell activation. Kikuchi-Fujimoto disease, also called histiocytic necrotising lymphadenitis, is a benign, self-limiting condition in young women with tender cervical nodes, fever, and leukopenia in some cases. Its key feature is necrosis with karyorrhexis on excisional biopsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Typical feature"
+    ],
+    "rows": [
+     [
+      "Reactive lymphadenitis",
+      "Follicular hyperplasia, plasma cells"
+     ],
+     [
+      "Kikuchi-Fujimoto",
+      "Tender cervical nodes, necrosis"
+     ],
+     [
+      "Kimura disease",
+      "Eosinophilic abscesses, eosinophilia"
+     ],
+     [
+      "Castleman disease",
+      "Hyaline vascular or plasma cell type"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "560f218a-4a28-4a3b-951f-ca89d4aee09e",
+  "a96e05b0-55c6-44f7-be63-78dac774895a",
+  "4b66b2f3-321e-4bf1-8179-0fb8e5651d53"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease (Kumar V, Abbas AK, Aster JC)",
+  "Wintrobe's Clinical Hematology (Greer JP et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 110
+ }
+}

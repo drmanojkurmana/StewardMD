@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "obg-induction",
+ "subject": "obstetrics-gynaecology",
+ "title": "Induction and augmentation of labour",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Cervical ripening softens and shortens the cervix before labour. Pharmacological options include **dinoprostone** (PGE2) as gel or vaginal insert, and **misoprostol** (PGE1) given orally or vaginally. Mifepristone, a progesterone receptor antagonist, is another agent. Non-pharmacological options include stripping of membranes, Foley balloon catheter, and hygroscopic laminaria. Oxytocin is a labour-inducing agent, not a ripening agent.",
+   "say": "Cervical ripening softens and shortens the cervix before labour. Pharmacological options include dinoprostone, which is PGE2, as gel or vaginal insert, and misoprostol, which is PGE1, given orally or vaginally. Mifepristone, a progesterone receptor antagonist, is another agent. Non-pharmacological options include stripping of membranes, Foley balloon catheter, and hygroscopic laminaria. Oxytocin is a labour-inducing agent, not a ripening agent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pharmacological",
+     "points": [
+      "Dinoprostone PGE2 gel or insert",
+      "Misoprostol PGE1 oral or vaginal",
+      "Mifepristone antiprogestogen"
+     ]
+    },
+    "right": {
+     "title": "Non-pharmacological",
+     "points": [
+      "Stripping of membranes",
+      "Foley balloon catheter",
+      "Laminaria dilators"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Indications for induction include **pre-eclampsia**, abruptio placentae, prelabour rupture of membranes, chorioamnionitis, oligohydramnios or polyhydramnios, post-maturity and fetal malformation. Absolute contraindications include placenta previa, contracted pelvis, a classical caesarean scar, myomectomy entering the endometrium and transverse lie. Active genital herpes and cervical cancer are also contraindications.",
+   "say": "Indications for induction include pre-eclampsia, abruptio placentae, prelabour rupture of membranes, chorioamnionitis, oligohydramnios or polyhydramnios, post-maturity and fetal malformation. Absolute contraindications include placenta previa, contracted pelvis, a classical caesarean scar, myomectomy entering the endometrium and transverse lie. Active genital herpes and cervical cancer are also contraindications.",
+   "vis": null
+  },
+  {
+   "tx": "Oxytocin is used for augmentation and induction. It has a very short half-life, so its effect falls quickly once stopped. Uterine response occurs within three to five minutes and steady state is reached in about forty minutes. Stop the infusion if contractions exceed **five in ten minutes**, or seven in fifteen minutes, or if the fetal heart rate becomes non-reassuring. These features define **tachysystole** and hyperstimulation.",
+   "say": "Oxytocin is used for augmentation and induction. It has a very short half-life, so its effect falls quickly once stopped. Uterine response occurs within three to five minutes and steady state is reached in about forty minutes. Stop the infusion if contractions exceed five in ten minutes, or seven in fifteen minutes, or if the fetal heart rate becomes non-reassuring. These features define tachysystole and hyperstimulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start oxytocin"
+     },
+     {
+      "id": "b",
+      "label": "Check contractions"
+     },
+     {
+      "id": "c",
+      "label": "Over 5 in 10 min"
+     },
+     {
+      "id": "d",
+      "label": "Stop infusion"
+     },
+     {
+      "id": "e",
+      "label": "Reassess and resume"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ],
+     [
+      "c",
+      "e",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Induction is generally avoided in women with prior classical or vertical caesarean scar, because of uterine rupture risk. In vaginal birth after caesarean, induction with **prostaglandin E1** is not advised owing to scar rupture risk, and a previous transverse scar is usually acceptable. Hypertension at term with a favourable cervix is not a contraindication to induction. Ask for an exam question's specific context before choosing.",
+   "say": "Induction is generally avoided in women with prior classical or vertical caesarean scar, because of uterine rupture risk. In vaginal birth after caesarean, induction with prostaglandin E1 is not advised owing to scar rupture risk, and a previous transverse scar is usually acceptable. Hypertension at term with a favourable cervix is not a contraindication to induction. Ask for an exam question's specific context before choosing.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6f3a5036-4b83-4d5f-836d-ac0d8c1a93fc",
+  "da14134d-9afc-4b5e-ada6-6231d81eba07",
+  "c4c06a19-10e4-4c25-9dcd-e343810704d4"
+ ],
+ "src": [],
+ "refs": [
+  "Text book of obstetrics, Sheila Balakrishnan",
+  "Williams Obstetrics (Cunningham F.G. et al.)",
+  "Current Diagnosis and Treatment: Obstetrics and Gynecology (DeCherney A.H. et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 85
+ }
+}

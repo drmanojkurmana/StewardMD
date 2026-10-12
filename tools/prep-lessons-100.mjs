@@ -71,8 +71,10 @@ export function targetModules(root = ROOT, cache = null, bank = null) {
 export function moduleItems(mid, sids, o = {}) {
   const all = [], bankItems = [], ovItems = [];
   const bank = o.bank, cache = o.cache;
+  // Bank versions move over time (ss-radiology now ships v16): try the caller's version, then siblings.
+  const bankVers = bank ? [...new Set([bank, bank.replace(/\/v\d+$/, "/v16"), bank.replace(/\/v\d+$/, "/v5")])] : [];
   for (const sid of sids) {
-    if (bank) for (const bv of [bank, bank.replace(/\/v\d+$/, "/v5")]) {
+    if (bank) for (const bv of bankVers) {
       const j = readJ(path.join(bv, sid, "mcq", mid + ".json"));
       if (j && j.items) { all.push(...j.items); bankItems.push(...j.items); break; }
     }
