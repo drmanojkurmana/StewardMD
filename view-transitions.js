@@ -12,7 +12,8 @@
  * is given the same view-transition-name, so the title flies there. No match: a plain crossfade.
  *
  * Skipped: no API, reduced motion, modifier clicks, inner controls inside the row (stars, toggles,
- * checkboxes), anything marked [data-no-vt], form submits, toggles (aria-pressed/aria-expanded/switch).
+ * checkboxes), anything marked [data-no-vt], form submits, toggles (aria-pressed/aria-expanded/switch),
+ * and rows inside modal dialogs ([role=dialog]/[aria-modal]: module overlays apply taps synchronously).
  * Kill switch: localStorage smd_view_tx=0. */
 (function () {
   "use strict";
@@ -25,7 +26,11 @@
     return a === b || (b.indexOf(a) === 0 && b.length - a.length < 40) || (a.indexOf(b) === 0 && b.length >= 4);
   }
   function isRowRect(r, vw) { return r.width >= vw * 0.7 && r.height >= 40 && r.height <= 180; }
-  var seam = { titleMatch: titleMatch, isRowRect: isRowRect, norm: norm };
+  // Module overlays (Tokos, PrepNucleus, Narke: role=dialog roots) apply taps synchronously: holding
+  // one of their rows for a transition would delay the screen by a frame and break same-tick
+  // contracts (a Tokos clinic tap must paint its caliper steppers in the first markup). Never hold those.
+  function inOverlay(el) { return !!(el && el.closest && el.closest('[role="dialog"],[aria-modal="true"]')); }
+  var seam = { titleMatch: titleMatch, isRowRect: isRowRect, norm: norm, inOverlay: inOverlay };
   if (typeof module !== "undefined" && module.exports) module.exports = seam;
   if (typeof window === "undefined") return;
   try { if (localStorage.getItem("smd_view_tx") === "0") return; } catch (e) {}
@@ -100,6 +105,7 @@
     if (reduced()) return;
     var t = e.target; if (!t || !t.closest) return;
     var row = t.closest(ROW); if (!row) return;
+    if (inOverlay(t) || inOverlay(row)) return;
     if (t.closest(SKIP) || row.closest("[data-no-vt]")) return;
     if (!isRowRect(row.getBoundingClientRect(), innerWidth)) return;
     if (row.disabled || row.getAttribute("aria-disabled") === "true") return;
