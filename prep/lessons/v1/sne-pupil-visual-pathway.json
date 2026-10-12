@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "sne-pupil-visual-pathway",
+ "subject": "ss-neurology",
+ "title": "Pupil and Visual Pathway Disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **pupillary light reflex** uses afferent input from the retina and optic nerve, and efferent output through the Edinger-Westphal nucleus. A **relative afferent pupillary defect** appears when the affected eye sends weaker input. On the swinging flashlight test, moving the light from the normal eye to the affected eye makes both pupils dilate paradoxically. It is a sign of optic nerve or severe retinal disease, and it can be present even when visual acuity looks only mildly reduced.",
+   "say": "The pupillary light reflex uses afferent input from the retina and optic nerve, and efferent output through the Edinger-Westphal nucleus. A relative afferent pupillary defect appears when the affected eye sends weaker input. On the swinging flashlight test, moving the light from the normal eye to the affected eye makes both pupils dilate paradoxically. It signals optic nerve or severe retinal disease, and it can be present even when visual acuity looks only mildly reduced.",
+   "vis": null
+  },
+  {
+   "tx": "Several pupil patterns help localise the cause. A **Marcus Gunn pupil** is an RAPD found with **optic neuritis** and some amblyopic eyes. **Macular disease** usually gives poor acuity without an RAPD. **Horner syndrome** gives a small pupil with ptosis and anhidrosis. An **Adie tonic pupil** is a large, slowly reacting pupil, often with **light-near dissociation**, where near response is better than light response.",
+   "say": "Several pupil patterns help localise the cause. A Marcus Gunn pupil is an RAPD found with optic neuritis and some amblyopic eyes. Macular disease usually gives poor acuity without an RAPD. Horner syndrome gives a small pupil with ptosis and anhidrosis. An Adie tonic pupil is a large, slowly reacting pupil, often with light-near dissociation, where the near response is better than the light response.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Pupil clue",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Optic neuritis",
+      "RAPD usually present",
+      "Marcus Gunn pupil pattern"
+     ],
+     [
+      "Macular disease",
+      "RAPD usually absent",
+      "Poor acuity, normal reflex"
+     ],
+     [
+      "Horner syndrome",
+      "Small pupil, ptosis",
+      "Anhidrosis on same side"
+     ],
+     [
+      "Adie tonic pupil",
+      "Large, slow reaction",
+      "Light-near dissociation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **Horner syndrome**, the **sympathetic pathway** is interrupted, so the dilator muscle of the iris loses its supply. Anisocoria is usually more obvious in dim light, when the normal pupil dilates fully. A **dilute topical alpha agonist** test can help when the signs are unclear: the denervated dilator becomes supersensitive, so the affected pupil dilates more than the normal one. Pharmacological testing is an adjunct, not a first-line bedside check.",
+   "say": "In Horner syndrome, the sympathetic pathway is interrupted, so the dilator muscle of the iris loses its supply. Anisocoria is usually more obvious in dim light, when the normal pupil dilates fully. A dilute topical alpha agonist test can help when the signs are unclear: the denervated dilator becomes supersensitive, so the affected pupil dilates more than the normal one. Pharmacological testing is an adjunct, not a first-line bedside check.",
+   "vis": null
+  },
+  {
+   "tx": "Visual field patterns depend on where the lesion sits. A **chiasmal lesion**, such as a pituitary adenoma, causes **bitemporal hemianopia**, and an anterior lesion can cause a **junctional scotoma** with a central field loss in one eye. A **retrochiasmal lesion** causes a **homonymous hemianopia**, which is congruous and affects the same side of both eyes.",
+   "say": "Visual field patterns depend on where the lesion sits. A chiasmal lesion, such as a pituitary adenoma, causes bitemporal hemianopia, and an anterior lesion can cause a junctional scotoma with a central field loss in one eye. A retrochiasmal lesion causes a homonymous hemianopia, which is congruous and affects the same side of both eyes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chiasmal lesion",
+     "points": [
+      "Bitemporal hemianopia",
+      "Pituitary adenoma common",
+      "Junctional scotoma if anterior"
+     ]
+    },
+    "right": {
+     "title": "Retrochiasmal lesion",
+     "points": [
+      "Homonymous hemianopia",
+      "Congruous field loss",
+      "Same side of both eyes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Within retrochiasmal lesions, **macular sparing** occurs because the occipital pole has a dual blood supply, so central vision survives. A lesion in the temporal lobe can damage **Meyer loop**, causing a contralateral upper quadrant defect. Bilateral occipital damage causes **cortical blindness**, yet the pupils stay normal because the light reflex pathway is intact.",
+   "say": "Within retrochiasmal lesions, macular sparing occurs because the occipital pole has a dual blood supply, so central vision survives. A lesion in the temporal lobe can damage Meyer loop, causing a contralateral upper quadrant defect. Bilateral occipital damage causes cortical blindness, yet the pupils stay normal because the light reflex pathway is intact.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Optic tract"
+     },
+     {
+      "id": "b",
+      "label": "Lateral geniculate"
+     },
+     {
+      "id": "c",
+      "label": "Optic radiation"
+     },
+     {
+      "id": "d",
+      "label": "Visual cortex"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_f9d3a0bda934",
+  "q_48e70d62d701",
+  "q_ba8166544836"
+ ],
+ "src": [],
+ "refs": [
+  "Walsh and Hoyt's Clinical Neuro-Ophthalmology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

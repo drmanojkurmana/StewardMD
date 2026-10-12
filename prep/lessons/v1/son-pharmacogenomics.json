@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "son-pharmacogenomics",
+ "subject": "ss-medical-oncology",
+ "title": "Pharmacogenomics and drug interactions in medical oncology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Pharmacogenomics explains why the same **dose** can help one patient and harm another. Inherited variants in drug-handling **enzymes** change how a medicine is activated, cleared or broken down. Testing before treatment, for example for **DPYD** variants before fluoropyrimidines, allows dose adjustment and helps prevent serious toxicity. Clinicians should still check **renal** and **hepatic** function before dosing.",
+   "say": "Pharmacogenomics explains why the same dose can help one patient and harm another. Inherited variants in drug-handling enzymes change how a medicine is activated, cleared or broken down. Testing before treatment, for example for DPYD variants before fluoropyrimidines, allows dose adjustment and helps prevent serious toxicity. Clinicians should still check renal and hepatic function before dosing, because kidney or liver impairment can raise drug levels independently of genotype.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene",
+     "Drug affected",
+     "Main risk"
+    ],
+    "rows": [
+     [
+      "DPYD",
+      "Fluorouracil",
+      "Severe mucositis and neutropenia"
+     ],
+     [
+      "UGT1A1",
+      "Irinotecan",
+      "Neutropenia from SN-38 buildup"
+     ],
+     [
+      "TPMT",
+      "Azathioprine",
+      "Bone marrow suppression"
+     ],
+     [
+      "CYP2D6",
+      "Codeine",
+      "Poor analgesia in poor metabolisers, toxicity in ultrarapid metabolisers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dihydropyrimidine dehydrogenase**, encoded by DPYD, breaks down most of an administered fluorouracil dose. A **DPYD variant** lowers this enzyme's activity, so the active drug accumulates. Patients with reduced function develop severe mucositis, diarrhoea and neutropenia. CPIC advises genotype-guided starting doses, with carriers of a single reduced-function allele usually receiving about half the standard dose.",
+   "say": "Dihydropyrimidine dehydrogenase, encoded by DPYD, breaks down most of an administered fluorouracil dose. A DPYD variant lowers this enzyme's activity, so the active drug accumulates. Patients with reduced function develop severe mucositis, diarrhoea and neutropenia. CPIC advises genotype-guided starting doses, with carriers of a single reduced-function allele usually receiving about half the standard dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "DPYD variant"
+     },
+     {
+      "id": "n2",
+      "label": "Low DPD enzyme"
+     },
+     {
+      "id": "n3",
+      "label": "Fluorouracil builds up"
+     },
+     {
+      "id": "n4",
+      "label": "Severe toxicity"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**TPMT** inactivates thiopurine drugs such as azathioprine through methylation. When enzyme activity falls, more drug is channelled into active cytotoxic metabolites, raising the risk of severe **bone marrow suppression**. CPIC guidance advises genotype-guided dosing: intermediate metabolisers need a moderate dose reduction, whereas poor metabolisers need a marked reduction or an alternative agent, alongside frequent blood count checks.",
+   "say": "TPMT deactivates thiopurine drugs like azathioprine by adding a methyl group. When this enzyme is less active, more of the drug turns into harmful cytotoxic metabolites, so severe bone marrow suppression becomes a real danger. CPIC advises dosing guided by the patient's genotype. Intermediate metabolisers usually need a moderate cut, while poor metabolisers need a much larger reduction or a different drug, with blood counts checked often.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TPMT status",
+     "Enzyme activity",
+     "Thiopurine action"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "High",
+      "Standard dose"
+     ],
+     [
+      "Intermediate",
+      "Reduced",
+      "Moderate dose reduction"
+     ],
+     [
+      "Poor",
+      "Very low",
+      "Marked reduction or switch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Proton pump inhibitors are moderate **CYP2C19** inhibitors. Omeprazole and esomeprazole reduce conversion of clopidogrel to its active form, so they should be avoided with it. Pantoprazole is the preferred agent in this setting. Acid suppression also lowers absorption of pH-dependent drugs such as erlotinib, which absorbs poorly at higher gastric pH.",
+   "say": "Proton pump inhibitors are moderate CYP2C19 inhibitors. Omeprazole and esomeprazole reduce conversion of clopidogrel to its active form, so they should be avoided with it. Pantoprazole is the preferred agent in this setting. Acid suppression also lowers absorption of pH-dependent drugs such as erlotinib, which absorbs poorly at higher gastric pH.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Omeprazole, esomeprazole",
+     "points": [
+      "Inhibit CYP2C19",
+      "Reduce clopidogrel activation",
+      "Avoid with clopidogrel"
+     ]
+    },
+    "right": {
+     "title": "Pantoprazole",
+     "points": [
+      "Weaker CYP2C19 effect",
+      "Preferred PPI with clopidogrel",
+      "Still check interactions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Strong **CYP3A4** inhibitors such as clarithromycin and ketoconazole can raise levels of tyrosine kinase inhibitors like imatinib, so they should be avoided or the dose reduced. Strong CYP2D6 inhibitors such as paroxetine and fluoxetine reduce endoxifen, the active form of tamoxifen, and are best avoided. Drugs that prolong the QT interval need baseline and follow-up ECG review. Adjust doses for hepatic impairment using Child-Pugh class and for renal impairment using creatinine clearance.",
+   "say": "Strong CYP3A4 inhibitors such as clarithromycin and ketoconazole can raise levels of tyrosine kinase inhibitors like imatinib, so they should be avoided or the dose reduced. Strong CYP2D6 inhibitors such as paroxetine and fluoxetine reduce endoxifen, the active form of tamoxifen, and are best avoided. Drugs that prolong the QT interval need baseline and follow-up ECG review. Adjust doses for hepatic impairment using Child-Pugh class and for renal impairment using creatinine clearance.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_81646637248f",
+  "q_b50e70b8b6df",
+  "q_cd808c697dab"
+ ],
+ "src": [],
+ "refs": [
+  "Clinical Pharmacogenetics Implementation Consortium (CPIC) guideline for dihydropyrimidine dehydrogenase genotype and fluoropyrimidine dosing (Amstutz et al., Clinical Pharmacology and Therapeutics, 2018)",
+  "Clinical Pharmacogenetics Implementation Consortium (CPIC) guideline for UGT1A1 and irinotecan dosing (Gammal et al., Clinical Pharmacology and Therapeutics, 2016)",
+  "Clinical Pharmacogenetics Implementation Consortium (CPIC) guideline for thiopurine methyltransferase genotype and thiopurine dosing (Relling et al., Clinical Pharmacology and Therapeutics, 2019)",
+  "Clinical Pharmacogenetics Implementation Consortium (CPIC) guideline for CYP2D6 genotype and tamoxifen therapy (Goetz et al., Clinical Pharmacology and Therapeutics, 2018)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

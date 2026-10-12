@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "module": "snp-transplant-infections",
+ "subject": "ss-nephrology",
+ "title": "Infections after kidney transplantation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Infection risk after a **kidney transplant** follows a predictable timeline driven by immunosuppression. In the first month, surgical wound, catheter and urinary infections dominate. From one to six months, the highest risk period, **opportunistic infections** such as CMV, Pneumocystis, tuberculosis, fungi and herpes viruses appear. After six months, community-acquired infections predominate, along with late CMV, EBV-related lymphoproliferation and hepatitis B reactivation.",
+   "say": "Infection risk after a kidney transplant follows a predictable timeline driven by immunosuppression. In the first month, surgical wound, catheter and urinary infections dominate. From one to six months, the highest risk period, opportunistic infections such as CMV, Pneumocystis, tuberculosis, fungi and herpes viruses appear. After six months, community-acquired infections predominate, along with late CMV, EBV-related lymphoproliferation and hepatitis B reactivation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Period",
+     "Typical infections"
+    ],
+    "rows": [
+     [
+      "First month",
+      "Surgical wound, catheter, urinary"
+     ],
+     [
+      "1 to 6 months",
+      "CMV, PJP, TB, fungal, herpes viruses"
+     ],
+     [
+      "After 6 months",
+      "Community acquired, late CMV, PTLD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before transplant, screen recipients for **latent tuberculosis** with an **interferon gamma release assay**, a blood test that matters a great deal in India because exposure is common. If latent infection is found, a preventive course is started before or soon after transplant, usually lasting several months, with liver function monitored throughout. Active disease needs a full treatment regimen. Several of the antibiotics used are **enzyme inducers** that sharply lower calcineurin inhibitor levels, so **drug levels** must be checked often.",
+   "say": "Before transplant, test recipients for latent tuberculosis using an interferon gamma release assay, a blood test that is especially important in India because exposure is common. If latent infection is found, a preventive course starts before or soon after transplant and usually runs for several months, with liver function checked along the way. Active disease needs a full regimen. Several of these antibiotics induce liver enzymes and sharply reduce calcineurin inhibitor levels, so immunosuppressant levels need frequent checking.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "IGRA screen before transplant"
+     },
+     {
+      "id": "n2",
+      "label": "Latent TB found"
+     },
+     {
+      "id": "n3",
+      "label": "Preventive course with liver monitoring"
+     },
+     {
+      "id": "n4",
+      "label": "Check calcineurin inhibitor levels"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2",
+      "positive"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**EBV** infection can drive **post-transplant lymphoproliferative disorder**, or **PTLD**, so serial **EBV PCR** monitoring matters, particularly in seronegative recipients. The first-line response is lowering immunosuppression, with targeted B-cell depleting therapy reserved for persistent disease. Separately, **hepatitis B reactivation** threatens patients who are HBsAg positive or core antibody positive, so antiviral prophylaxis guided by hepatology is essential. Vaccinate HBsAg negative candidates before transplant to achieve protective **anti-HBs** levels.",
+   "say": "EBV infection can drive post-transplant lymphoproliferative disorder, or PTLD, so serial EBV PCR monitoring matters, particularly in seronegative recipients. The first-line response is lowering immunosuppression, with targeted B-cell depleting therapy reserved for persistent disease. Separately, hepatitis B reactivation threatens patients who are HBsAg positive or core antibody positive, so antiviral prophylaxis guided by hepatology is essential. Vaccinate HBsAg negative candidates before transplant to achieve protective anti-HBs levels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EBV and PTLD",
+     "points": [
+      "Serial EBV PCR monitoring",
+      "Reduce immunosuppression first",
+      "Targeted B-cell therapy if persistent"
+     ]
+    },
+    "right": {
+     "title": "Hepatitis B reactivation",
+     "points": [
+      "Screen HBsAg and core antibody",
+      "Antiviral prophylaxis per hepatology",
+      "Vaccinate before transplant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vaccination should ideally happen before transplant, because response is weaker afterwards. **Live attenuated vaccines** are contraindicated once immunosuppressed. Give inactivated influenza and pneumococcal vaccines, and the **recombinant zoster vaccine**, which is preferred over live zoster vaccine and given as two doses. Household contacts should also be vaccinated to reduce exposure risk.",
+   "say": "Vaccination should ideally happen before transplant, because response is weaker afterwards. Live attenuated vaccines are contraindicated once immunosuppressed. Give inactivated influenza and pneumococcal vaccines, and the recombinant zoster vaccine, which is preferred over live zoster vaccine and given as two doses. Household contacts should also be vaccinated to reduce exposure risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaccine type",
+     "Advice"
+    ],
+    "rows": [
+     [
+      "Live attenuated",
+      "Avoid after transplant"
+     ],
+     [
+      "Inactivated influenza",
+      "Give annually"
+     ],
+     [
+      "Recombinant zoster",
+      "Preferred, two doses"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_936b001c2f96",
+  "q_b1a8ebdff8f6",
+  "q_84a6b6eadd87"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

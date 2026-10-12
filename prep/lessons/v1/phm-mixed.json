@@ -1,0 +1,173 @@
+{
+ "v": 1,
+ "module": "phm-mixed",
+ "subject": "pharmacology",
+ "title": "Mixed pharmacology rapid review: antidotes, toxicology and key high-yield drugs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Many exam questions in mixed pharmacology test a single antidote or toxin pairing. **Atropine** is the antidote for organophosphate poisoning and is also used for muscarinic toxicity. Belladonna and Dhatura poisoning causes an anticholinergic picture: dry mouth, dilated pupils, photophobia and urinary retention. **Physostigmine** is the classic reversal agent for central anticholinergic toxicity, though it is used cautiously.",
+   "say": "Many exam questions in mixed pharmacology test a single antidote or toxin pairing. Atropine is the antidote for organophosphate poisoning and is also used for muscarinic toxicity. Belladonna and Dhatura poisoning causes an anticholinergic picture with dry mouth, dilated pupils, photophobia and urinary retention. Physostigmine is the classic reversal agent for central anticholinergic toxicity, though it is used cautiously.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Poison",
+     "Key clinical clue",
+     "Antidote or approach"
+    ],
+    "rows": [
+     [
+      "Belladonna or Dhatura",
+      "Dry skin, dilated pupils, urinary retention",
+      "Physostigmine (central effects)"
+     ],
+     [
+      "Organophosphates",
+      "Pinpoint pupils, lacrimation, salivation",
+      "Atropine with oximes"
+     ],
+     [
+      "Cyanide",
+      "Tissue hypoxia, metabolic acidosis",
+      "Amyl nitrite then sodium thiosulphate"
+     ],
+     [
+      "Salicylate",
+      "Mixed acid-base disturbance",
+      "Urinary alkalinisation and haemodialysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cyanide blocks the terminal step of the electron transport chain by binding the ferric ion of cytochrome oxidase a3. In acute poisoning, **amyl nitrite** converts haemoglobin to methaemoglobin, which binds cyanide, followed by **sodium thiosulphate**. This is an example of chemical antagonism, where one agent binds another and makes it unavailable. Physiological antagonism works through a different mechanism, not by binding the same receptor.",
+   "say": "Cyanide blocks the terminal step of the electron transport chain by binding the ferric ion of cytochrome oxidase a3. In acute poisoning, amyl nitrite converts haemoglobin to methaemoglobin, which binds cyanide, followed by sodium thiosulphate. This is an example of chemical antagonism, where one agent binds another and makes it unavailable. Physiological antagonism works through a different mechanism, not by binding the same receptor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Amyl nitrite"
+     },
+     {
+      "id": "b",
+      "label": "Methaemoglobin"
+     },
+     {
+      "id": "c",
+      "label": "Binds cyanide"
+     },
+     {
+      "id": "d",
+      "label": "Sodium thiosulphate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For first-order kinetics, each half-life removes half of the remaining drug. After **three half-lives**, about 87.5 percent of the drug is eliminated, leaving one-eighth of the original concentration. Four half-lives remove about 93.75 percent. Acetylcholine is not used therapeutically because of its non-selective action and rapid breakdown by cholinesterase.",
+   "say": "For first-order kinetics, each half-life removes half of the remaining drug. After three half-lives, about 87.5 percent of the drug is eliminated, leaving one-eighth of the original concentration. Four half-lives remove about 93.75 percent. Acetylcholine is not used therapeutically because of its non-selective action and rapid breakdown by cholinesterase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Half-lives",
+     "Fraction left",
+     "Percent eliminated"
+    ],
+    "rows": [
+     [
+      "1",
+      "1/2",
+      "50.0"
+     ],
+     [
+      "2",
+      "1/4",
+      "75.0"
+     ],
+     [
+      "3",
+      "1/8",
+      "87.5"
+     ],
+     [
+      "4",
+      "1/16",
+      "93.75"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drugs for alcohol dependence fall into groups. **Acamprosate** is used for long-term maintenance of abstinence, while **disulfiram** blocks aldehyde dehydrogenase, causing an unpleasant reaction with alcohol. **Naltrexone** reduces craving. Lorazepam and clonidine are used for withdrawal symptoms rather than as anti-craving agents, so they are the exception in anti-craving questions.",
+   "say": "Drugs for alcohol dependence fall into groups. Acamprosate is used for long-term maintenance of abstinence, while disulfiram blocks aldehyde dehydrogenase, causing an unpleasant reaction with alcohol. Naltrexone reduces craving. Lorazepam and clonidine are used for withdrawal symptoms rather than as anti-craving agents, so they are the exception in anti-craving questions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-craving agents",
+     "points": [
+      "Acamprosate for maintenance",
+      "Naltrexone reduces craving"
+     ]
+    },
+    "right": {
+     "title": "Withdrawal and deterrent",
+     "points": [
+      "Lorazepam for withdrawal",
+      "Clonidine for withdrawal",
+      "Disulfiram for deterrence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Several drugs have high-yield toxicity profiles. **Carbamazepine** causes aplastic anaemia, agranulocytosis, hyponatraemia and Stevens-Johnson syndrome, and it is teratogenic. Its markers include HLA-B*1502, which raises the risk of Stevens-Johnson syndrome. **Thioridazine** causes dose-related QTc prolongation and can cause hypotension. Methotrexate is not given intrathecally in the standard exam framing.",
+   "say": "Several drugs have high-yield toxicity profiles. Carbamazepine causes aplastic anaemia, agranulocytosis, hyponatraemia and Stevens-Johnson syndrome, and it is teratogenic. Its marker HLA-B star 1502 raises the risk of Stevens-Johnson syndrome. Thioridazine causes dose-related QTc prolongation and can cause hypotension.",
+   "vis": null
+  },
+  {
+   "tx": "For infections and cancer, choose the drug that matches the exam context. For typhoid in Indian practice, **cephalosporins such as cefixime** are now preferred because of resistance to chloramphenicol and ciprofloxacin. Palivizumab is a monoclonal antibody against RSV. In leptospirosis with renal failure, **penicillin G** is the drug of choice. Early East African sleeping sickness is treated with suramin.",
+   "say": "For infections and cancer, pick the agent that fits the exam scenario. In Indian typhoid, cephalosporins, for example cefixime, are now favoured because resistance to chloramphenicol and ciprofloxacin is common. Palivizumab is a monoclonal antibody directed at RSV. Leptospirosis with renal impairment still responds to penicillin G. Early East African sleeping sickness is managed with suramin.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "037f40a8-3fb5-4f47-966e-802e9e97cbc0",
+  "0385ffea-aa76-4383-bfd4-9d2956a5789d",
+  "0ddd6de0-cc23-4250-8267-1d7dc8572d74"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung Basic and Clinical Pharmacology",
+  "KD Tripathi Essentials of Medical Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 250
+ }
+}
