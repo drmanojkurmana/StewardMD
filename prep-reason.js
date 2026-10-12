@@ -96,7 +96,7 @@
     var rows = sh.e[String(iid)] || [];
     rows.forEach(function (r) {
       var t = sh.T[r[0]];
-      if (t && r[1] >= SHOW) out.push({ k: t[0], id: t[1], title: t[2], c: r[1], sec: r[3] || "" });
+      if (t && r[1] >= SHOW) out.push({ k: t[0], id: t[1], title: t[2], c: r[1], v: r[2] || "", sec: r[3] || "" });
     });
     out.sort(function (a, b) { return b.c - a.c || (a.id < b.id ? -1 : 1); });
     return out;
@@ -122,6 +122,17 @@
       if (!seen[k]) { seen[k] = 1; out.push(l); }
     });
     return out;
+  }
+  /* titleRelevant(title, text): the client mirror of the index relevance guard. A specific target whose
+     name shares no significant word with the item's stem, keyed answer or module is a keyword namesake
+     (SGLT2 -> Familial Renal Glucosuria), never the concept. Module-topic rows (via kt) are exempt. */
+  function titleRelevant(title, text) {
+    var tw = String(title || "").replace(/\s*\([^)]*\)\s*/g, " ").toLowerCase().replace(/[^a-z0-9]+/g, " ").split(" ").filter(function (w) { return w.length >= 4; });
+    if (!tw.length) return false;
+    var hay = " " + String(text || "").toLowerCase().replace(/[^a-z0-9]+/g, " ") + " ";
+    var hits = tw.filter(function (w) { return hay.indexOf(" " + w + " ") >= 0 || hay.indexOf(" " + w) >= 0; });
+    var generic = { renal: 1, cardiac: 1, hepatic: 1, pulmonary: 1, cerebral: 1, gastric: 1, intestinal: 1, familial: 1, congenital: 1, inherited: 1, hereditary: 1, chronic: 1, acute: 1, primary: 1, secondary: 1 };
+    return hits.length >= 2 || hits.some(function (w) { return !generic[w]; });
   }
   /* findRunItem(items, iid) -> the run's item with this id, or null. The gaps slots carry only data-i/s/m
      (they never call remember()), so fill() finds each slot's own item here for its pipeline links. */
@@ -371,7 +382,7 @@
   var PURE = { SHOW: SHOW, VER: VER, has: hasItem, hasX: has, linksOf: linksOf, pref: pref, nextAction: nextAction,
     nextLabel: nextLabel, shardLinks: shardLinks, lessonLinks: lessonLinks, relOf: relOf, mergeLinks: mergeLinks,
     body: body, slotHtml: slotHtml, escH: escH, findRunItem: findRunItem, srcOf: srcOf,
-    kmSlot: kmSlot, kmKindLabel: kmKindLabel, kmTargetLabel: kmTargetLabel, kmTargets: kmTargets,
+    kmSlot: kmSlot, kmKindLabel: kmKindLabel, kmTargetLabel: kmTargetLabel, kmTargets: kmTargets, titleRelevant: titleRelevant,
     knowMoreHtml: knowMoreHtml, knowMoreSheetBodyHtml: knowMoreSheetBodyHtml };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -531,6 +542,15 @@
         if (l.k !== "kb" || !G.SMD_REASON || !G.SMD_REASON.hasDiseaseRef) return true;
         try { return G.SMD_REASON.hasDiseaseRef(l.id); } catch (e) { return true; }
       });
+      /* Relevance guard: pipeline (x.links) and specific index rows must relate to this item's own text;
+         a keyword namesake is dropped here even before a republished index lands. Module-topic rows
+         (via kt) always survive, and order first so Know more and the next action lead with the topic. */
+      if (found) {
+        var hay = [found.q || "", (found.o && typeof found.a === "number" ? found.o[found.a] : "") || "", found.exp || "",
+          ((found.x || {}).key || ""), ((found.x || {}).notes || ""), mid.replace(/[-_]/g, " ")].join(" ");
+        links = links.filter(function (l) { return l.v === "kt" || l.v || titleRelevant(l.title || l.id, hay); });
+      }
+      links.sort(function (a, b) { return ((a.v === "kt" ? 0 : 1) - (b.v === "kt" ? 0 : 1)) || (b.c - a.c); });
       var lessons = sh ? lessonLinks(sh, iid) : [];
       var lsKeys = pipe.filter(function (l) { return l.k === "ls"; }).map(function (l) { return l.id; });
       if (sh && sh.mod && sh.mod.ls) lsKeys = lsKeys.concat(sh.mod.ls);

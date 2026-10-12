@@ -7,7 +7,7 @@ import os from "node:os";
 import path from "node:path";
 import { norm, leadIn, leadSec, normKbId, kbDocs, phrases, drugPhrases, matcher, scan, linkItem, expText, dictionaries,
   confirmRequests, build, reportText, SHOW, MAX, CONFIRM_SCHEMA, kbBridge, pickKbLesson, matchChapter, sigWords,
-  addTopicLinks, stampLinks, gapsReport, topicKbForModule, LINKS_VER } from "../tools/prep-links.mjs";
+  addTopicLinks, stampLinks, gapsReport, topicKbForModule, LINKS_VER, linkRelevant } from "../tools/prep-links.mjs";
 import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const D = dictionaries();
@@ -41,7 +41,7 @@ test("linkItem: the keyed answer links, a distractor never does, negation stays 
 });
 
 test("linkItem: pipeline links win at 95, unknown ids are dropped, at most two articles", () => {
-  const ls = linkItem(IT({ x: { links: { kb: ["zika_virus", "no-such-article"], drug: ["metformin"], protocol: ["accidental-hypothermia"] } } }), D.M, C0);
+  const ls = linkItem(IT({ exp: "Zika virus infection; metformin and accidental hypothermia are covered here.", x: { links: { kb: ["zika_virus", "no-such-article"], drug: ["metformin"], protocol: ["accidental-hypothermia"] } } }), D.M, C0);
   assert.ok(ls.some((l) => l.id === "zika_virus" && l.c === 95 && l.v === "a"));
   assert.ok(ls.some((l) => l.id === "metformin" && l.c === 95));
   assert.ok(ls.some((l) => l.id === "accidental-hypothermia" && l.c === 95));
@@ -123,7 +123,7 @@ test("build: one synthetic module links, reports and shards without question tex
     fs.mkdirSync(path.join(dir, path.dirname(rel)), { recursive: true });
     fs.writeFileSync(path.join(dir, rel), JSON.stringify({ topic: "ana-bones-ossification", items: [
       { id: "plk-1", q: "Synthetic: beaded mid renal artery in a young woman. Cause?", o: ["Atheroma", "Fibromuscular dysplasia", "Arteritis", "Embolism"], a: 1, exp: "Beaded mid artery is fibromuscular dysplasia." },
-      { id: "plk-2", q: "Synthetic: what lowers glucose in pregnancy?", o: ["Insulin", "Metformin", "Glyburide", "Empagliflozin"], a: 0, exp: "", x: { links: { drug: ["metformin"] } } },
+      { id: "plk-2", q: "Synthetic: what lowers glucose in pregnancy?", o: ["Insulin", "Metformin", "Glyburide", "Empagliflozin"], a: 0, exp: "Metformin lowers glucose.", x: { links: { drug: ["metformin"] } } },
       { id: "plk-3", q: "Synthetic: an unclear stem with no names anywhere?", o: ["Alpha", "Beta", "Gamma", "Delta"], a: 0, exp: "", flags: ["disputed"] },
     ] }));
     fs.writeFileSync(path.join(dir, "lessons-index.json"), JSON.stringify({ modules: { "ana-bones-ossification": { module: "ana-bones-ossification" } } }));
@@ -240,4 +240,18 @@ test("linkItem: module grounding tags need per-item corroboration, hand links ke
   assert.ok(!linkItem(bad, D.M, C0).some((l) => l.id === "cataract"), "an uncorroborated grounding tag is dropped, never shown");
   const hand = IT({ q: "Painless loss of vision with an afferent defect. What is the likely cause?", exp: "Glaucoma damages the optic nerve.", x: { links: { kb_ids: ["cataract"] } } });
   assert.ok(linkItem(hand, D.M, C0).some((l) => l.id === "cataract" && l.v === "a"), "a hand-written link without the grounding marker keeps trust");
+});
+
+test("linkItem: SGLT2 key never links Familial Renal Glucosuria (owner screenshot 2026-10-13)", () => {
+  const stem = "A 62-year-old woman with heart failure with reduced ejection fraction (LVEF 30%) is on sacubitril-valsartan and bisoprolol. She is non-diabetic. Which additional drug class reduces cardiovascular death and heart failure hospitalisation irrespective of diabetes status?";
+  const opts = ["Loop diuretic escalation", "SGLT2 inhibitor (dapagliflozin)", "Calcium channel blocker", "Thiazide diuretic"];
+  const exp = "Dapagliflozin, an SGLT2 inhibitor, reduces CV death and HF hospitalisation in HFrEF irrespective of diabetes.";
+  const viaMatcher = linkItem({ id: "sg1", t: "med-heart-failure", q: stem, o: opts, a: 1, exp }, D.M, { ...C0, mid: "med-heart-failure", moduleTitle: "Heart failure" });
+  assert.ok(!viaMatcher.some((l) => l.id === "renal_glucosuria" && l.c >= SHOW), "matcher SGLT2 alias must not show the genetic-condition article");
+  assert.ok(viaMatcher.some((l) => l.k === "dr" && l.id === "dapagliflozin" && l.c >= SHOW), "the keyed drug stays");
+  const viaPipe = linkItem({ id: "sg2", t: "med-heart-failure", q: stem, o: opts, a: 1, exp, x: { links: { kb_ids: ["renal_glucosuria"], drug_ids: ["dapagliflozin"], via: "grounding-tier-4", ver: "wave-w2" } } }, D.M, { ...C0, mid: "med-heart-failure", moduleTitle: "Heart failure" });
+  assert.ok(!viaPipe.some((l) => l.id === "renal_glucosuria" && l.c >= SHOW), "pipeline x.links at 95 must not show it either");
+  assert.ok(viaPipe.some((l) => l.k === "dr" && l.id === "dapagliflozin" && l.c === 95), "the relevant pipeline drug link keeps pipeline confidence");
+  assert.equal(linkRelevant({ q: stem, o: opts, a: 1, exp }, { k: "kb", id: "renal_glucosuria", title: "Familial Renal Glucosuria", v: "a" }, { mid: "med-heart-failure", moduleTitle: "Heart failure" }), false);
+  assert.equal(linkRelevant({ q: stem, o: opts, a: 1, exp }, { k: "kb", id: "heart_failure", title: "Heart failure", v: "k" }, { mid: "med-heart-failure", moduleTitle: "Heart failure" }), true);
 });
