@@ -7,7 +7,7 @@ import os from "node:os";
 import path from "node:path";
 import { norm, leadIn, leadSec, normKbId, kbDocs, phrases, drugPhrases, matcher, scan, linkItem, expText, dictionaries,
   confirmRequests, build, reportText, SHOW, MAX, CONFIRM_SCHEMA, kbBridge, pickKbLesson, matchChapter, sigWords,
-  addTopicLinks, stampLinks, gapsReport } from "../tools/prep-links.mjs";
+  addTopicLinks, stampLinks, gapsReport, topicKbForModule, LINKS_VER } from "../tools/prep-links.mjs";
 import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const D = dictionaries();
@@ -68,7 +68,37 @@ test("phrases: acronyms match upper case only, shared phrases are dropped", () =
   assert.ok(!drugPhrases({ generics: ["water"] }).length, "ordinary words are not drugs");
 });
 
+test("topicKbForModule: exact, lesson-cited, ambiguous and off-topic cases", () => {
+  const kb = [
+    { id: "heart_failure_management", name: "Heart Failure: Management", aliases: ["HFrEF", "Chronic heart failure"] },
+    { id: "heart_failure_pathophysiology_and_diagnosi", name: "Heart Failure: Pathophysiology and Diagnosis", aliases: ["HF"] },
+    { id: "acute_appendicitis", name: "Acute Appendicitis and Peritonitis", aliases: ["appendicitis"] },
+    { id: "pseudomyxoma_peritonei", name: "Pseudomyxoma peritonei", aliases: [] },
+  ];
+  const cited = new Set(["heart_failure_management", "heart_failure_pathophysiology_and_diagnosi", "acute_appendicitis", "pseudomyxoma_peritonei"]);
+  assert.deepEqual(topicKbForModule({ title: "Heart failure", lessonTitle: "Management of Heart Failure with Reduced Ejection Fraction", cited, kb }),
+    { id: "heart_failure_management", title: "Heart Failure: Management" }, "the lesson's management article, not the pathophysiology one");
+  assert.deepEqual(topicKbForModule({ title: "Appendix", lessonTitle: "Acute Appendicitis and Appendage Torsion", cited, kb }),
+    { id: "acute_appendicitis", title: "Acute Appendicitis and Peritonitis" },
+    "a one-word module title resolves through its own lesson's heading, never to the cited differentials");
+  assert.deepEqual(topicKbForModule({ title: "Acute appendicitis", lessonTitle: "", cited: new Set(), kb }),
+    { id: "acute_appendicitis", title: "Acute Appendicitis and Peritonitis" }, "an exact alias match needs no citation");
+  assert.equal(topicKbForModule({ title: "Heart failure", lessonTitle: "", cited, kb }), null, "a tie with no lesson words stays unlinked");
+  assert.equal(topicKbForModule({ title: "Beta blockers", lessonTitle: "", cited: new Set(), kb }), null, "no article about the topic, no link");
+  assert.equal(LINKS_VER, "v2", "the rebuilt index publishes under the new versioned path");
+});
+
+test("addTopicLinks: topicKb gives an own-lesson module its KB article next to the lesson", () => {
+  const lessons = new Map([["m1", [{ key: "m1", title: "Heart Failure Care", own: true }]]]);
+  const out = addTopicLinks([], { q: "What is the best initial treatment?" },
+    { mid: "m1", sid: "s", topics: {}, topicKb: { id: "heart_failure_management", title: "Heart Failure: Management" },
+      lessons, lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map() });
+  assert.deepEqual(out.map((l) => [l.k, l.id, l.v, l.c]), [["ls", "m1", "lt", 75], ["kb", "heart_failure_management", "kt", 75]],
+    "lesson and KB article together at the floor");
+});
+
 test("bank route: the links index and shards are served, traversal and bad names are not", () => {
+  assert.ok(bankPath({ path: ["v2", "links", "index.json"] }), "the new versioned path is served");
   assert.ok(bankPath({ path: ["v1", "links", "index.json"] }));
   assert.ok(bankPath({ path: ["v1", "links", "m", "ana-bones-ossification-1234abcd.json"] }));
   assert.ok(bankPath({ path: ["v12", "links", "c", "anatomy-1234abcd.json"] }));

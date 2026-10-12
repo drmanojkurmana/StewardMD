@@ -252,14 +252,15 @@ test("CSS design: restrained dark green palette (#071318, #0D1D23, #42CDB5), no 
 });
 
 /* ---------- 9. Version and cache-busting tokens ---------- */
-test("cache-busting: index.html and prep-loader.js at prep67, sw.js has whychips marker", () => {
+test("cache-busting: index.html and prep-loader.js at prep68, sw.js has whychips and km2 markers", () => {
   const indexHtml = read("index.html");
   const loaderJs = read("prep-loader.js");
   const swJs = read("sw.js");
 
-  assert.ok(indexHtml.includes('/prep-loader.js?v=prep67"'), "index.html bumped to prep67");
-  assert.ok(loaderJs.includes('var V = "prep67";'), "prep-loader.js bumped to prep67");
+  assert.ok(indexHtml.includes('/prep-loader.js?v=prep68"'), "index.html bumped to prep68");
+  assert.ok(loaderJs.includes('var V = "prep68";'), "prep-loader.js bumped to prep68");
   assert.ok(swJs.includes("whychips1"), "sw.js CACHE contains whychips1");
+  assert.ok(swJs.includes("km2"), "sw.js CACHE contains the Know more km2 marker");
 });
 
 /* ---------- 10. Isolation: unique prefixed names, no shared-class or global-selector leakage ----------

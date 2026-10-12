@@ -9,13 +9,13 @@
    Feedback body order: learning objective, Key clues, Differential, Mechanism, why the answer is right (prep.js
    whyHtml, unchanged), why the others are wrong (one collapsed row per option, the student's pick open),
    Exam pearl, Revision summary, references, then a slot the module fills once the links index arrives:
-   Learn more (Knowledge Library article, Drug Index, protocol, lesson, flashcards), one next learning action
+   Know more (Knowledge Library article, Drug Index, protocol, lesson, flashcards), one next learning action
    (Review the concept, Revise this topic, Practise related questions, Schedule revision: the first whose target
    exists) and Related questions. A link below confidence 75 is never shown. Links come from the item's own x.links
-   (written by the content pipeline, confidence 95) merged with the published index v1/links/ (tools/prep-links.mjs):
+   (written by the content pipeline, confidence 95) merged with the published index v2/links/ (tools/prep-links.mjs):
    pointer index.json (short cache, network first, IndexedDB copy offline), one immutable shard per module
    (IndexedDB first). Lessons and card decks are re-checked against the live lesson and card indexes before they
-   are shown. Per-item lesson rows carry a tier: the module's own chapter ("Read the lesson: <title>") or the
+   are shown. Per-item lesson rows carry a tier: the module's own chapter ("Lesson: <title>") or the
    specific lesson (the step showing the item's image, the lesson teaching its concept), opening at its step.
 
    Opening: the Knowledge Library article through SMD_REASON.openRef (guarded by hasDiseaseRef), a drug through
@@ -26,7 +26,7 @@
   "use strict";
 
   /* ================= pure ================= */
-  var SHOW = 75, VER = "v1";
+  var SHOW = 75, VER = "v2";
   var LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
   function isStr(s) { return typeof s === "string" && !!s.trim(); }
@@ -177,7 +177,7 @@
     return h;
   }
   /* lessonLinks(sh, iid) -> [{ key, title, c, tier, step }] at confidence >= SHOW, strongest first.
-     tier "topic" (via lt: the module's own chapter) renders as "Read the lesson: <title>"; tier "specific"
+     tier "topic" (via lt: the module's own chapter) renders as "Lesson: <title>"; tier "specific"
      (via li/lk/lh: the step showing the item's image, the lesson teaching its concept, the chapter under its
      heading) renders as the bare title. step opens the lesson at that step, "" for none. */
   function lessonLinks(sh, iid) {
@@ -191,7 +191,7 @@
     out.sort(function (a, b) { return b.c - a.c || (a.key < b.key ? -1 : 1); });
     return out;
   }
-  /* slotHtml(d): Learn more + the one next action + related questions. d { links, lessons, lesson, cards, related,
+  /* slotHtml(d): Know more + the one next action + related questions. d { links, lessons, lesson, cards, related,
      next, sid, mid, iid }. links [{ k, id, title }], lessons [{ key, title, tier, step }] (per-item, titled),
      lesson { key, title } | null (the module fallback when no per-item lesson), cards bool,
      related [{ mid, id, stem }], next { kind, label, target, lkey, step } | null. "" when nothing exists.
@@ -211,11 +211,11 @@
     var lessons = d.lessons || [];
     lessons.forEach(function (l) {
       rows += row("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(l.key) + '"' + (l.step ? ' data-step="' + escH(l.step) + '"' : ""),
-        "Lesson", l.tier === "topic" ? "Read the lesson: " + (l.title || "Revise this topic") : (l.title || "Revise this topic"));
+        "Lesson", "Lesson: " + (l.title || "Revise this topic"));
     });
-    if (!lessons.length && d.lesson) rows += row("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"', "Lesson", d.lesson.title || "Revise this topic");
+    if (!lessons.length && d.lesson) rows += row("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"', "Lesson", d.lesson.title ? "Lesson: " + d.lesson.title : "Revise this topic");
     if (d.cards) rows += row("k-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '"', "Flashcards", "Cards for this topic");
-    if (rows) h += "<h3>Learn more</h3>" + '<ul class="pn-rl">' + rows + "</ul>";
+    if (rows) h += '<h3 class="pn-km-h">Know more</h3>' + '<ul class="pn-rl">' + rows + "</ul>";
     if (d.next) {
       var pract = 'data-act="r-practise"' + (d.iid ? ' data-i="' + escH(d.iid) + '"' : "") + (d.mid ? ' data-m="' + escH(d.mid) + '"' : "");
       var at = d.next.kind === "review" ? 'data-act="r-kb" data-id="' + escH(d.next.id) + '"' :
@@ -248,11 +248,11 @@
   }
 
   function kmTargetLabel(t) {
-    if (t.k === "kb") return "Read more in Knowledge Library: " + (t.title || t.id);
-    if (t.k === "ls") return t.tier === "topic" ? ("Read the lesson: " + (t.title || "Revise this topic")) : ("Learn the lesson: " + (t.title || "Revise this topic"));
+    if (t.k === "kb") return "Knowledge Library: " + (t.title || t.id);
+    if (t.k === "ls") return "Lesson: " + (t.title || "Revise this topic");
     if (t.k === "dr") return "Drug: " + (t.title || t.id);
     if (t.k === "pr") return "Protocol: " + (t.title || t.id);
-    if (t.k === "cd") return "Cards for this topic";
+    if (t.k === "cd") return "Flashcards: Cards for this topic";
     return t.title || "";
   }
 
@@ -310,41 +310,28 @@
     return { rowTargets: rowTargets, allTargets: allTargets };
   }
 
-  /* knowMoreHtml(d): compact "Know more" row below explanation.
-     1 target -> direct button
-     2 targets of different kinds -> 2 buttons side by side
-     >2 targets or several of one kind -> 1 "Know more" button opening bottom sheet */
+  /* knowMoreHtml(d): the "Know more" block below the explanation. The header always shows, even for one
+     target, so the row is recognisable. One or two targets render as direct buttons (two side by side);
+     three or more show the top two plus a "More (N)" button (N = every target) opening the sheet. */
+  function kmBtn(t) {
+    return '<button type="button" class="pn-km-btn" data-act="' + t.act + '"' + t.attrs + '>' +
+      '<b>' + escH(kmTargetLabel(t)) + '</b></button>';
+  }
   function knowMoreHtml(d) {
     var tg = d.targets || [];
     if (!tg.length) return "";
-    if (tg.length === 1) {
-      var t = tg[0];
-      return '<div class="pn-km-row">' +
-        '<button type="button" class="pn-km-btn" data-act="' + t.act + '"' + t.attrs + '>' +
-        '<small>' + escH(kmKindLabel(t)) + '</small>' +
-        '<b>' + escH(kmTargetLabel(t)) + '</b>' +
-        '</button></div>';
+    var all = d.allTargets && d.allTargets.length ? d.allTargets : tg;
+    var head = '<h3 class="pn-km-h">Know more</h3>';
+    if (all.length <= 2) {
+      if (tg.length === 1) return head + '<div class="pn-km-row">' + kmBtn(tg[0]) + '</div>';
+      return head + '<div class="pn-km-row pn-km-duo">' + kmBtn(tg[0]) + kmBtn(tg[1]) + '</div>';
     }
-    if (tg.length === 2 && tg[0].k !== tg[1].k) {
-      var t0 = tg[0], t1 = tg[1];
-      return '<div class="pn-km-row pn-km-duo">' +
-        '<button type="button" class="pn-km-btn" data-act="' + t0.act + '"' + t0.attrs + '>' +
-        '<small>' + escH(kmKindLabel(t0)) + '</small>' +
-        '<b>' + escH(kmTargetLabel(t0)) + '</b>' +
-        '</button>' +
-        '<button type="button" class="pn-km-btn" data-act="' + t1.act + '"' + t1.attrs + '>' +
-        '<small>' + escH(kmKindLabel(t1)) + '</small>' +
-        '<b>' + escH(kmTargetLabel(t1)) + '</b>' +
-        '</button></div>';
-    }
-    var n = (d.allTargets && d.allTargets.length) || tg.length;
-    return '<div class="pn-km-row">' +
+    var top = tg.slice(0, 2);
+    var duo = top.length === 2 ? '<div class="pn-km-row pn-km-duo">' + kmBtn(top[0]) + kmBtn(top[1]) + '</div>'
+      : '<div class="pn-km-row">' + kmBtn(top[0]) + '</div>';
+    return head + duo + '<div class="pn-km-row">' +
       '<button type="button" class="pn-km-btn pn-km-more" data-act="r-km-sheet" data-i="' + escH(d.iid) + '" data-s="' + escH(d.sid || "") + '" data-m="' + escH(d.mid || "") + '">' +
-      '<div class="pn-km-more-left">' +
-      '<small>Topic links</small>' +
-      '<b>Know more</b>' +
-      '</div>' +
-      '<span class="pn-km-count">' + n + ' topics &rsaquo;</span>' +
+      '<b>More (' + all.length + ')</b><span class="pn-km-count" aria-hidden="true">&rsaquo;</span>' +
       '</button></div>';
   }
 
@@ -373,10 +360,9 @@
       }
       h += '<div class="pn-km-group"><h3 class="pn-km-gh">' + escH(g.title) + '</h3><ul class="pn-rl">' +
         items.map(function (t) {
-          var lbl = t.k === "ls" && t.tier === "topic" ? ("Read the lesson: " + (t.title || "Revise this topic")) : (t.title || t.id);
           return '<li><button type="button" class="pn-rlr" data-act="' + t.act + '"' + t.attrs + '>' +
             '<small>' + escH(kmKindLabel(t)) + '</small>' +
-            '<b>' + escH(lbl) + '</b></button></li>';
+            '<b>' + escH(kmTargetLabel(t)) + '</b></button></li>';
         }).join("") + '</ul></div>';
     });
     return h;
