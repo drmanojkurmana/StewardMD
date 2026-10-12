@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "sid-hiv-comorbidities",
+ "subject": "ss-infectious-diseases",
+ "title": "HIV Comorbidities and ART Complications",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Immune reconstitution inflammatory syndrome** (IRIS) is a paradoxical worsening of a known or latent infection after antiretroviral therapy restores immunity. It typically appears within weeks of starting ART, most often when the CD4 count is low. Mild cases with fever and pain are managed symptomatically with paracetamol or NSAIDs. Severe cases, such as hypoxic pneumonitis, need systemic corticosteroids. ART should usually continue.",
+   "say": "Immune reconstitution inflammatory syndrome, or IRIS, is a paradoxical worsening of a known or latent infection after antiretroviral therapy restores immunity. It usually appears within weeks of starting treatment, especially when the CD4 count was low. Mild cases with fever and pain are managed with paracetamol or NSAIDs. Severe cases, such as hypoxic pneumonitis, need systemic corticosteroids. Antiretroviral therapy should usually continue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Management"
+    ],
+    "rows": [
+     [
+      "Mild fever, pain",
+      "Paracetamol or NSAIDs"
+     ],
+     [
+      "Severe hypoxic pneumonitis",
+      "Systemic corticosteroids"
+     ],
+     [
+      "Refractory CNS IRIS",
+      "Consider TNF-alpha antagonists"
+     ],
+     [
+      "CMV ocular IRIS",
+      "Intraocular steroid injection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HIV-associated lipodystrophy** includes fat loss from the face, limbs and buttocks, and fat gain in the abdomen and dorsocervical region. Older stavudine and zidovudine exposure is a classic cause. Metabolic syndrome, with insulin resistance and dyslipidaemia, often accompanies it. For inherited forms, Berardinelli-Seip syndrome (congenital generalised) is autosomal recessive, while Dunnigan's FPLD type 2 involves LMNA mutations. Low leptin drives hypertriglyceridaemia, and very high triglycerides can cause pancreatitis.",
+   "say": "HIV associated lipodystrophy includes fat loss from the face, limbs and buttocks, with fat gain in the abdomen and neck. Older stavudine and zidovudine exposure is a classic cause, and metabolic syndrome often accompanies it. Congenital generalised lipodystrophy, or Berardinelli-Seip syndrome, is autosomal recessive. Dunnigan's familial partial type, linked to LMNA mutations, is another form. Low leptin drives high triglycerides, and very high levels can cause pancreatitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Congenital generalised",
+     "points": [
+      "Near-total fat absence at birth",
+      "Autosomal recessive",
+      "Low leptin, insulin resistance"
+     ]
+    },
+    "right": {
+     "title": "Familial partial (FPLD2)",
+     "points": [
+      "LMNA gene mutation",
+      "Fat loss in limbs, sparing face",
+      "Hypertriglyceridaemia, pancreatitis risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dolutegravir** can cause weight gain, particularly in women, and this has been linked to ART exposure. **Rifampicin** is the key TB interaction: it induces UGT1A1 and CYP3A4 and lowers dolutegravir levels, so the dose is increased to 50 mg twice daily when given with rifampicin. Bictegravir and raltegravir are alternatives in some settings. Always check interactions before TB therapy.",
+   "say": "Dolutegravir can cause weight gain, particularly in women. Rifampicin is the key tuberculosis interaction, because it induces UGT1A1 and CYP3A4 and lowers dolutegravir levels. When rifampicin is given, dolutegravir is increased to 50 milligrams twice daily. Always check interactions before starting TB therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rifampicin started"
+     },
+     {
+      "id": "b",
+      "label": "Enzyme induction"
+     },
+     {
+      "id": "c",
+      "label": "Dolutegravir falls"
+     },
+     {
+      "id": "d",
+      "label": "Dose 50 mg twice daily"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HIV-associated neurocognitive disorder** (HAND) spans asymptomatic impairment through to dementia and is identified with bedside cognitive screening. **HIVAN** is a collapsing form of **focal segmental glomerulosclerosis** that arises in people with high viral loads and low CD4 counts. Prompt **antiretroviral therapy** is the cornerstone of treatment for both conditions.",
+   "say": "HIV-associated neurocognitive disorder spans asymptomatic impairment through to dementia, and clinicians pick it up with cognitive screening. HIVAN is a collapsing form of focal segmental glomerulosclerosis seen when viral loads are high and CD4 counts are low. Starting antiretroviral therapy promptly is the main treatment for both conditions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key feature",
+     "Management"
+    ],
+    "rows": [
+     [
+      "HIV-associated neurocognitive disorder",
+      "Ranges from asymptomatic impairment to dementia",
+      "Clinical cognitive assessment; start or optimise antiretroviral therapy"
+     ],
+     [
+      "HIVAN",
+      "Collapsing focal segmental glomerulosclerosis with high viral load and low CD4 count",
+      "Antiretroviral therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tuberculosis preventive therapy** in HIV uses 3HP, which is weekly isoniazid 900 mg with rifapentine 900 mg for 12 weeks. Start only after active TB is excluded. Before starting ART, confirm the regimen contains tenofovir with lamivudine or emtricitabine when hepatitis B status is unknown or positive. Screen for cryptococcal antigen when CD4 is below 100 cells per microlitre.",
+   "say": "Tuberculosis preventive therapy in HIV uses 3HP, which is weekly isoniazid 900 milligrams with rifapentine 900 milligrams for 12 weeks, started only after active TB is excluded. Before ART, confirm the regimen contains tenofovir with lamivudine or emtricitabine when hepatitis B status is unknown or positive. Screen for cryptococcal antigen when CD4 is below 100 cells per microlitre.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_fdbd1499e96c",
+  "q_2673fdc6525f",
+  "q_36566b547d67"
+ ],
+ "src": [],
+ "refs": [
+  "WHO Consolidated Guidelines on HIV Service Delivery",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}
