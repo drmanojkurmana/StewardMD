@@ -511,11 +511,17 @@ export function addTopicLinks(links, it, ctx = {}) {
 export function applyRematch(links, entries) {
   if (!entries || !entries.length) return links;
   const has = new Set(links.map((l) => l.k + ":" + l.id));
-  const count = (k) => links.filter((l) => l.k === k).length;
+  // A verified rematch target beats an unshown mention: below-the-bar same-kind links vacate their slots
+  // (shown links are never evicted, and the cap still holds).
   for (const e of entries) {
     if (!e || !e.k || !e.id || !MAX[e.k]) continue;
     if (has.has(e.k + ":" + e.id)) continue;
-    if (count(e.k) >= MAX[e.k]) continue;
+    if (links.filter((l) => l.k === e.k).length >= MAX[e.k]) {
+      const i = links.findIndex((l) => l.k === e.k && l.c < SHOW);
+      if (i < 0) continue;
+      has.delete(links[i].k + ":" + links[i].id);
+      links.splice(i, 1);
+    }
     links.push({ k: e.k, id: e.id, title: e.title || e.id, c: Math.min(Number(e.c) || SHOW, 80), v: "rm", sec: "" });
     has.add(e.k + ":" + e.id);
   }

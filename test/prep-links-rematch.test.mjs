@@ -96,6 +96,10 @@ test("applyRematch caps at 80, respects MAX slots, never duplicates", () => {
   const full = [{ k: "kb", id: "x1", c: 90, v: "k" }, { k: "kb", id: "x2", c: 90, v: "k" }];
   applyRematch(full, [{ k: "kb", id: "x3", title: "x3", c: 90 }]);
   assert.ok(!full.some((l) => l.id === "x3"), "MAX slots per kind are respected");
+  const weak = [{ k: "kb", id: "w1", c: 55, v: "e" }, { k: "kb", id: "w2", c: 50, v: "e" }];
+  applyRematch(weak, [{ k: "kb", id: "v1", title: "Verified", c: 78 }]);
+  assert.ok(weak.some((l) => l.id === "v1" && l.v === "rm"), "a verified target vacates an unshown slot");
+  assert.equal(weak.filter((l) => l.k === "kb").length, 2, "the cap still holds");
 });
 
 test("universe (read-only): catalog has the bundled lessons", () => {
