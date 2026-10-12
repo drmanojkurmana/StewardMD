@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "ped-development",
+ "subject": "paediatrics",
+ "title": "Developmental milestones and adolescence",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Development is a **continuous process** that depends on maturation of the nervous system. Its sequence is the same in all children, although the age at which each milestone appears varies. Growth means a net increase in size, while development means maturation of function. Development moves in a **cephalocaudal** direction, head first, and from proximal to distal in the limbs for gross motor skills.",
+   "say": "Development is a continuous process that depends on maturation of the nervous system. The sequence of milestones is the same in all children, although the age varies. Growth means a net increase in size, while development means maturation of function. Development moves in a cephalocaudal direction, head first, and from proximal to distal in the limbs for gross motor skills.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Head control"
+     },
+     {
+      "id": "b",
+      "label": "Trunk and arms"
+     },
+     {
+      "id": "c",
+      "label": "Legs"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fine motor skills progress from the **bidextrous** approach at 4 months to the **unassisted pincer grasp** at 12 months. The immature, assisted pincer grasp appears at 9 months. Tower building is a useful marker: two blocks at 15 months, six blocks at 2 years and nine blocks at 3 years. Copying a circle is expected by 3 years, a cross by 4 years and a triangle by 5 years.",
+   "say": "Fine motor skills progress from the bidextrous approach at 4 months to the unassisted pincer grasp at 12 months. The immature, assisted pincer grasp appears at 9 months. Tower building is a useful marker, with two blocks at 15 months, six blocks at 2 years and nine blocks at 3 years. Copying a circle is expected by 3 years, a cross by 4 years and a triangle by 5 years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Fine motor skill"
+    ],
+    "rows": [
+     [
+      "4 months",
+      "Bidextrous reach"
+     ],
+     [
+      "6 months",
+      "Unidextrous reach"
+     ],
+     [
+      "9 months",
+      "Immature pincer grasp"
+     ],
+     [
+      "12 months",
+      "Unassisted pincer grasp"
+     ],
+     [
+      "2 years",
+      "Tower of 6 blocks"
+     ],
+     [
+      "3 years",
+      "Tower of 9 blocks, copies circle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Developmental screening uses the **developmental quotient**, calculated as developmental age divided by chronological age, multiplied by 100. Delay should be suspected if the DQ is below 70 percent. In preterm infants, use **corrected age** rather than postnatal age until two years. IQ is mental age divided by chronological age, multiplied by 100, and an IQ of 51 to 70 is classed as mild intellectual disability.",
+   "say": "Developmental screening uses the developmental quotient, calculated as developmental age divided by chronological age, multiplied by 100. Delay should be suspected if the DQ is below 70 percent. In preterm infants, use corrected age rather than postnatal age until two years. IQ is mental age divided by chronological age, multiplied by 100, and an IQ of 51 to 70 is classed as mild intellectual disability.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Developmental quotient",
+     "points": [
+      "Developmental age over chronological age",
+      "Suspect delay below 70 percent",
+      "Use corrected age if preterm"
+     ]
+    },
+    "right": {
+     "title": "IQ",
+     "points": [
+      "Mental age over chronological age",
+      "51 to 70 is mild",
+      "36 to 50 is moderate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Puberty begins in girls with **thelarche**, the appearance of breast buds, usually between 8 and 12 years, followed by **pubarche** and then **menarche**. In boys, the first visible sign is testicular enlargement, which marks the start of **gonadarche**. The adolescent period is divided into early, middle and late stages. The **adolescent growth spurt** is a key feature of early and middle adolescence.",
+   "say": "Puberty begins in girls with thelarche, the appearance of breast buds, usually between 8 and 12 years, followed by pubarche and then menarche. In boys, the first visible sign is testicular enlargement, which marks the start of gonadarche. The adolescent period is divided into early, middle and late stages. The adolescent growth spurt is a key feature of early and middle adolescence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adolescent stage",
+     "Age range"
+    ],
+    "rows": [
+     [
+      "Early",
+      "10 to 13 years"
+     ],
+     [
+      "Middle",
+      "14 to 16 years"
+     ],
+     [
+      "Late",
+      "17 to 19 years"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "4cb159c6-fefb-400e-a87d-dd00e72a2940",
+  "9f39953a-98e0-4851-9900-55e3d3ba1c90",
+  "dd3e14e3-a46f-4b16-8c87-1d85acaf43df"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 368
+ }
+}

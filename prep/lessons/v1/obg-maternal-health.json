@@ -1,0 +1,169 @@
+{
+ "v": 1,
+ "module": "obg-maternal-health",
+ "subject": "obstetrics-gynaecology",
+ "title": "Maternal mortality and safe motherhood programmes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **maternal death** is the death of a woman while pregnant or within 42 days of termination of pregnancy, from any cause related to or aggravated by the pregnancy or its management. Deaths from accidents or incidental causes are non-maternal. The **maternal mortality ratio** (MMR) is expressed per 100,000 live births, and it reflects the level of obstetric risk. It is a ratio rather than a rate because the numerator can include cases not in the denominator.",
+   "say": "A maternal death is the death of a woman while pregnant or within 42 days of ending a pregnancy, from any cause related to or made worse by the pregnancy or its management. Deaths from accidents or incidental causes are non-maternal. The maternal mortality ratio is expressed per one lakh live births, and it reflects the level of obstetric risk. It is a ratio rather than a rate because the numerator can include cases that are not in the denominator.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Meaning",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Maternal death",
+      "Death within 42 days of pregnancy end",
+      "Excludes accidents"
+     ],
+     [
+      "Non-maternal death",
+      "Incidental or accidental cause",
+      "E.g. road traffic injury"
+     ],
+     [
+      "MMR",
+      "Deaths per 1,00,000 live births",
+      "Ratio, not rate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Causes are split into **direct** and **indirect**. Direct obstetric deaths, about 75 percent, result from complications of pregnancy, labour or puerperium, or their management. Haemorrhage, mostly postpartum haemorrhage, is the commonest direct cause, followed by infection and obstructed labour. Anaemia is an indirect cause. Eclampsia and abortion complications also count as direct causes.",
+   "say": "Causes are split into direct and indirect. Direct obstetric deaths, about 75 percent, result from complications of pregnancy, labour or the puerperium, or their management. Haemorrhage, mostly postpartum haemorrhage, is the commonest direct cause, followed by infection and obstructed labour. Anaemia is an indirect cause. Eclampsia and complications of abortion also count as direct causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Approx share",
+     "Category"
+    ],
+    "rows": [
+     [
+      "Haemorrhage",
+      "20 to 25 percent",
+      "Direct"
+     ],
+     [
+      "Infection",
+      "15 to 20 percent",
+      "Direct"
+     ],
+     [
+      "Obstructed labour",
+      "About 8 percent",
+      "Direct"
+     ],
+     [
+      "Anaemia",
+      "15 to 20 percent",
+      "Indirect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **near miss** is a woman who survives a life-threatening condition during pregnancy, labour or within six weeks postpartum. It is recognised only retrospectively, once she survives. **Basic emergency obstetric care** includes antibiotics, oxytocics and anticonvulsants, manual removal of placenta, removal of retained products, and assisted vaginal delivery. **Comprehensive** care at district hospitals adds caesarean section, safe blood transfusion and newborn care.",
+   "say": "A near miss is a woman who survives a life-threatening condition during pregnancy, labour or within six weeks after delivery. She is recognised only in hindsight, once she has survived. Basic emergency obstetric care includes antibiotics, oxytocics and anticonvulsants, manual removal of the placenta, removal of retained products, and assisted vaginal delivery. Comprehensive care at district hospitals adds caesarean section, safe blood transfusion and newborn care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b",
+      "label": "Basic EmOC",
+      "sub": "Health centres"
+     },
+     {
+      "id": "c",
+      "label": "Comprehensive EmOC",
+      "sub": "District hospital"
+     },
+     {
+      "id": "s",
+      "label": "Adds C-section and transfusion"
+     }
+    ],
+    "edges": [
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "s"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Key definitions matter for exams. **Birth** is the complete expulsion or extraction of a fetus after 20 weeks gestation. The **perinatal period** runs from 20 completed weeks until 28 completed days after birth. **Stillbirth** is a baby born dead after 28 completed weeks, weighing 1000 g or more. Teenage pregnancy is a pregnancy in a girl below 19, with complications highest below 17 years.",
+   "say": "Key definitions matter for exams. Birth is the complete expulsion or extraction of a fetus after 20 weeks gestation. The perinatal period runs from 20 completed weeks until 28 completed days after birth. Stillbirth is a baby born dead after 28 completed weeks, weighing 1000 grams or more. Teenage pregnancy is a pregnancy in a girl below 19, with complications highest below 17 years.",
+   "vis": null
+  },
+  {
+   "tx": "Indian programmes support safe motherhood. **Janani Suraksha Yojana** gives cash incentives to promote institutional delivery. **JSSK** provides free delivery and sick newborn care, transport and diagnostics. **LaQshya** improves labour room and maternity operation theatre quality. **PMSMA** offers free antenatal check-ups on the ninth of each month, and **PMMVY** gives conditional cash support to pregnant women. The **MCP card** records antenatal and delivery care.",
+   "say": "Indian programmes support safe motherhood. Janani Suraksha Yojana gives cash incentives to promote institutional delivery. JSSK provides free delivery and sick newborn care, transport and diagnostics. LaQshya improves labour room and maternity operation theatre quality. PMSMA offers free antenatal check-ups on the ninth of each month, and PMMVY gives conditional cash support to pregnant women. The MCP card records antenatal and delivery care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scheme",
+     "Focus"
+    ],
+    "rows": [
+     [
+      "Janani Suraksha Yojana",
+      "Cash for institutional delivery"
+     ],
+     [
+      "JSSK",
+      "Free delivery and transport"
+     ],
+     [
+      "LaQshya",
+      "Labour room quality"
+     ],
+     [
+      "PMSMA",
+      "Free antenatal check-ups, ninth of month"
+     ],
+     [
+      "PMMVY",
+      "Conditional cash support"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "58d0c900-8bfc-4652-8a46-ee40ced34d27",
+  "6fa3bead-c4c1-4d63-be94-7709d1a4a196",
+  "9dc90d4a-4e07-4a61-849c-4c81a7ca15ec"
+ ],
+ "src": [],
+ "refs": [
+  "Dutta's Textbook of Obstetrics",
+  "Textbook of Obstetrics, Sheila Balakrishnan",
+  "Overview of Obstetrics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 19
+ }
+}

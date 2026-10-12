@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "spu-imaging-bronchoscopy",
+ "subject": "ss-pulmonology",
+ "title": "Thoracic imaging and bronchoscopy: a high-yield lesson",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Flexible bronchoscopy** is the core airway tool. It allows direct inspection of the trachea and bronchi, **bronchoalveolar lavage** (BAL) for cellular and microbial analysis, and tissue sampling. Before any procedure, check for contraindications such as recent myocardial infarction, since an unstable cardiac status makes sedation risky and the procedure should be deferred until stable.",
+   "say": "Flexible bronchoscopy is the core airway tool. It lets you inspect the trachea and bronchi directly, perform bronchoalveolar lavage for cellular and microbial analysis, and take tissue samples. Before any procedure, check for contraindications such as a recent myocardial infarction. An unstable cardiac status makes sedation risky, so the procedure should be deferred until the patient is stable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedure",
+     "Main use",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Flexible bronchoscopy",
+      "Airway inspection, lavage, biopsy",
+      "Defer if cardiac unstable"
+     ],
+     [
+      "BAL",
+      "Infection, ILD cell profile",
+      "Differential cell count guides diagnosis"
+     ],
+     [
+      "Transbronchial biopsy",
+      "Diffuse lung disease",
+      "Pneumothorax is the key complication"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Radial EBUS** localises peripheral nodules beyond direct vision. A concentric probe position within the lesion gives higher diagnostic yield than an eccentric one. Use a **guide sheath** to allow repeated sampling at one site with lower pneumothorax risk than percutaneous CT-guided biopsy. Navigational platforms, including electromagnetic and robotic systems, further improve reach to small peripheral lesions.",
+   "say": "Radial EBUS localises peripheral nodules beyond direct vision. A concentric probe position within the lesion gives a higher diagnostic yield than an eccentric one. A guide sheath allows repeated sampling at one site with lower pneumothorax risk than percutaneous CT-guided biopsy. Navigational platforms, including electromagnetic and robotic systems, further improve access to small peripheral lesions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Peripheral nodule on CT"
+     },
+     {
+      "id": "b",
+      "label": "Navigation to target"
+     },
+     {
+      "id": "c",
+      "label": "Radial EBUS confirms position"
+     },
+     {
+      "id": "d",
+      "label": "Sheath-guided biopsy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**EBUS-TBNA** samples mediastinal and hilar nodes through the airway wall. In suspected **sarcoidosis** with hilar adenopathy and no skin lesions, it gives the highest yield for noncaseating granulomas, outperforming conventional transbronchial lung biopsy and BAL alone. Adding endobronchial and transbronchial biopsies can raise the yield further.",
+   "say": "EBUS-TBNA samples mediastinal and hilar nodes through the airway wall. In suspected sarcoidosis with hilar adenopathy and no skin lesions, it gives the highest yield for noncaseating granulomas. It outperforms conventional transbronchial lung biopsy and lavage alone. Adding endobronchial and transbronchial biopsies can raise the yield further.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sarcoidosis workup",
+     "points": [
+      "Hilar adenopathy on CT",
+      "EBUS-TBNA first-line sampling",
+      "Noncaseating granulomas sought",
+      "Add transbronchial biopsy if needed"
+     ]
+    },
+    "right": {
+     "title": "Alternatives",
+     "points": [
+      "BAL CD4/CD8 ratio alone",
+      "Transbronchial lung biopsy",
+      "VATS if others fail"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pneumothorax** is the main complication of transbronchial biopsy, occurring in a few percent of cases. **Tension physiology**, with hypotension, absent breath sounds and tracheal shift, is a clinical diagnosis. It needs immediate needle or chest tube decompression, not waiting for a chest radiograph, followed by an intercostal drain.",
+   "say": "Pneumothorax is the main complication of transbronchial biopsy, occurring in a few percent of cases. Tension physiology, with hypotension, absent breath sounds and tracheal shift, is a clinical diagnosis. It needs immediate needle or chest tube decompression, without waiting for a chest radiograph, followed by an intercostal drain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hypotension and absent breath sounds"
+     },
+     {
+      "id": "b",
+      "label": "Immediate decompression"
+     },
+     {
+      "id": "c",
+      "label": "Intercostal drain"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Massive haemoptysis** needs airway protection, positioning the bleeding lung down, and bronchoscopy to localise the source. CT angiography maps the bronchial vessels, and **bronchial artery embolisation** is usually the first definitive step. Surgical resection is reserved for recurrence or failed embolisation in a fit patient, as with an aspergilloma.",
+   "say": "Massive haemoptysis needs airway protection, positioning the bleeding lung down, and bronchoscopy to localise the source. CT angiography maps the bronchial vessels, and bronchial artery embolisation is usually the first definitive step. Surgical resection is reserved for recurrence or failed embolisation in a fit patient, as with an aspergilloma.",
+   "vis": null
+  },
+  {
+   "tx": "An **aspergilloma** forms in a preexisting cavity, such as a post-tubercular or sarcoid cavity. It appears as a mobile rounded mass with an air crescent, the **Monod sign**, which shifts on prone or decubitus imaging. Hemoptysis is the main complication. Use HRCT to distinguish it from cavitating malignancy or abscess.",
+   "say": "An aspergilloma forms in a preexisting cavity, such as a post-tubercular or sarcoid cavity. It appears as a mobile rounded mass with an air crescent, known as the Monod sign, which shifts on prone or decubitus imaging. Hemoptysis is the main complication. Use high resolution CT to distinguish it from cavitating malignancy or abscess.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_08852598d434",
+  "q_bbf484f6a4de",
+  "mk-24d9fd5b4f5a"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Jameson et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

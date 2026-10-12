@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "sid-protozoa-other",
+ "subject": "ss-infectious-diseases",
+ "title": "Intestinal and Tissue Protozoa: Entamoeba, Giardia, Cryptosporidium, Toxoplasma, Trypanosomes, Babesia and Naegleria",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Entamoeba histolytica** is the pathogenic amoeba, while **Entamoeba coli** is a nonpathogenic commensal. Both look alike on stool microscopy, so identification matters. Misreading E. coli as E. histolytica leads to unnecessary metronidazole and needless investigations. The key morphological difference lies in the nuclei count within the mature cyst.",
+   "say": "Entamoeba histolytica is the pathogenic amoeba, while Entamoeba coli is a nonpathogenic commensal. Both look alike on stool microscopy, so identification matters. Misreading coli as histolytica leads to unnecessary metronidazole and needless investigations. The key morphological difference lies in the nuclei count within the mature cyst.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "E. histolytica",
+     "points": [
+      "One to four nuclei in cyst",
+      "Pathogenic, causes colitis and liver abscess",
+      "Ingests red cells in trophozoites"
+     ]
+    },
+    "right": {
+     "title": "E. coli",
+     "points": [
+      "Eight nuclei in mature cyst",
+      "Nonpathogenic commensal",
+      "No pathogenic role, look for other causes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Stool microscopy identifies cysts, but it cannot reliably separate **E. histolytica** from **E. dispar** or nonpathogenic species. The **PCR** on stool is the most specific and rapid method for species-level diagnosis. Indian practice increasingly uses antigen detection and PCR in reference labs, while stool microscopy remains the first screen.",
+   "say": "Stool microscopy identifies cysts, but it cannot reliably separate histolytica from dispar or other nonpathogenic species. PCR on stool is the most specific and rapid method for species-level diagnosis. Indian practice increasingly uses antigen detection and PCR in reference labs, while stool microscopy remains the first screen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Use",
+     "Limitation"
+    ],
+    "rows": [
+     [
+      "Stool microscopy",
+      "First screen for cysts",
+      "Cannot separate species"
+     ],
+     [
+      "Stool PCR",
+      "Species-level confirmation",
+      "Needs lab access"
+     ],
+     [
+      "Antigen detection",
+      "Rapid pathogen check",
+      "Less available in routine setup"
+     ],
+     [
+      "Colonoscopy",
+      "Mucosal lesion assessment",
+      "Invasive, not first line"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Invasive amoebiasis often presents as an **amoebic liver abscess**, sometimes after **dysentery**, although many affected people never have bowel symptoms. Tissue damage is caused by **trophozoites** invading the bowel wall and tissues, not by cysts, which are the infective stage. Management has two parts: a tissue-active course treats the abscess, then a luminal course eradicates residual cysts in the gut.",
+   "say": "Invasive amoebiasis often presents as a liver abscess, sometimes after dysentery, although many people never have bowel symptoms. The damage comes from trophozoites that invade the bowel wall and tissues, not from cysts, which are the infective stage. Treatment has two parts. A tissue-active course treats the abscess, and then a luminal course clears any remaining cysts from the gut.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cyst swallowed"
+     },
+     {
+      "id": "b",
+      "label": "Trophozoites invade bowel wall"
+     },
+     {
+      "id": "c",
+      "label": "Spread to liver via portal vein"
+     },
+     {
+      "id": "d",
+      "label": "Tissue-active course"
+     },
+     {
+      "id": "e",
+      "label": "Luminal course clears cysts"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Toxoplasma gondii** and **Trypanosoma cruzi** are tissue protozoa. Toxoplasmosis is severe in pregnancy and immunosuppression, causing congenital infection and encephalitis. Chagas disease, from T. cruzi, causes cardiomyopathy and megaoesophagus in chronic infection. African trypanosomiasis from T. brucei causes sleeping sickness with CNS involvement.",
+   "say": "Toxoplasma gondii and Trypanosoma cruzi are tissue protozoa. Toxoplasmosis is severe in pregnancy and immunosuppression, causing congenital infection and encephalitis. Chagas disease, from Trypanosoma cruzi, causes cardiomyopathy and megaoesophagus in chronic infection. African trypanosomiasis from Trypanosoma brucei causes sleeping sickness with central nervous system involvement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Organism",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Chagas",
+      "T. cruzi",
+      "Cardiomyopathy, megaoesophagus"
+     ],
+     [
+      "Sleeping sickness",
+      "T. brucei",
+      "CNS involvement"
+     ],
+     [
+      "Toxoplasmosis",
+      "T. gondii",
+      "Congenital infection, encephalitis"
+     ],
+     [
+      "Babesiosis",
+      "Babesia",
+      "Haemolysis, tick-borne"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Naegleria fowleri** causes **primary amoebic meningoencephalitis** after swimming or diving in warm fresh water, with the organism entering through the nasal mucosa and travelling along the olfactory nerves to the brain. The disease progresses rapidly and mortality is very high. Suspicion should prompt urgent examination of cerebrospinal fluid, where a wet mount may reveal motile **trophozoites**, and expert advice on specialised antimicrobial regimens without delay.",
+   "say": "Naegleria fowleri causes primary amoebic meningoencephalitis in people who have been swimming or diving in warm fresh water. The organism enters through the nasal lining and moves along the olfactory nerves into the brain. The illness advances quickly and most patients die. When it is suspected, examine the cerebrospinal fluid straight away, because a wet mount may show motile trophozoites. Seek specialist advice on targeted antimicrobial treatment without delay.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_172971cef09e",
+  "q_56cc3386e1cd",
+  "q_7922c04c120a"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Loscalzo et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}
