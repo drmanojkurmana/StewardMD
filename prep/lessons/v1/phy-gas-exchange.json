@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "phy-gas-exchange",
+ "subject": "physiology",
+ "title": "Gas exchange, ventilation-perfusion matching and pulmonary circulation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Gas exchange happens across the **alveolar-capillary membrane**, made of alveolar epithelium, capillary endothelium and their fused basement membranes. Oxygen moves into blood by passive diffusion, driven by partial pressure difference. Normal arterial PO2 is about 95 mmHg and mixed venous PO2 about 40 mmHg, with arterial oxygen content about 19 ml per 100 ml and venous content about 14 ml per 100 ml.",
+   "say": "Gas exchange happens across the alveolar-capillary membrane, made of alveolar epithelium, capillary endothelium and their fused basement membranes. Oxygen moves into blood by passive diffusion, driven by the partial pressure difference. Normal arterial PO2 is about 95 mmHg and mixed venous PO2 about 40 mmHg. Arterial oxygen content is about 19 ml per 100 ml and venous content about 14 ml per 100 ml.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Arterial blood",
+     "Mixed venous blood"
+    ],
+    "rows": [
+     [
+      "PO2",
+      "95 mmHg",
+      "40 mmHg"
+     ],
+     [
+      "O2 content",
+      "19 ml per 100 ml",
+      "14 ml per 100 ml"
+     ],
+     [
+      "Haemoglobin saturation",
+      "95 percent",
+      "75 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **alveolar gas equation** estimates alveolar PO2 as inspired oxygen fraction times barometric minus water vapour pressure, minus PaCO2 divided by the respiratory quotient. At sea level breathing air with RQ 0.8, PaCO2 40 mmHg and PiO2 149 mmHg gives an alveolar PO2 near 100 mmHg. The **A-a gradient** is the difference between alveolar and arterial PO2 and is normally small.",
+   "say": "The alveolar gas equation estimates alveolar PO2 as inspired oxygen fraction times barometric minus water vapour pressure, minus PaCO2 divided by the respiratory quotient. At sea level breathing air, with RQ 0.8 and PaCO2 40 mmHg, alveolar PO2 is near 100 mmHg. The A-a gradient is the difference between alveolar and arterial PO2 and is normally small.",
+   "vis": null
+  },
+  {
+   "tx": "Ventilation and perfusion both fall from base to apex in the upright lung, but perfusion falls more steeply. So the **V/Q ratio** is highest at the apex, about 3, and lowest at the base, about 0.6. Whole-lung V/Q at rest is about 0.8. High apical V/Q gives high alveolar PO2 and low PCO2, which is one reason tuberculosis favours the apex.",
+   "say": "Ventilation and perfusion both fall from base to apex in the upright lung, but perfusion falls more steeply. So the V/Q ratio is highest at the apex, about 3, and lowest at the base, about 0.6. Whole-lung V/Q at rest is about 0.8. High apical V/Q gives high alveolar PO2 and low PCO2, which is one reason tuberculosis favours the apex.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Apex",
+     "points": [
+      "V/Q about 3",
+      "High alveolar PO2",
+      "Low PCO2",
+      "Favoured site for tuberculosis"
+     ]
+    },
+    "right": {
+     "title": "Base",
+     "points": [
+      "V/Q about 0.6",
+      "Lower alveolar PO2",
+      "Higher PCO2",
+      "Greater perfusion and ventilation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pulmonary circulation is a **low pressure, low resistance** system with high compliance, about 24 times that of systemic vessels. Mean pulmonary artery pressure is about 15 mmHg, with systolic about 25 and diastolic about 10. Pulmonary venous pressure is about 8 mmHg. Mean PAP equals cardiac output times pulmonary vascular resistance plus pulmonary venous pressure. Hypoxia causes **hypoxic pulmonary vasoconstriction**, a local response that diverts blood away from poorly ventilated alveoli.",
+   "say": "Pulmonary circulation is a low pressure, low resistance system with high compliance, about 24 times that of systemic vessels. Mean pulmonary artery pressure is about 15 mmHg, with systolic about 25 and diastolic about 10. Pulmonary venous pressure is about 8 mmHg. Mean PAP equals cardiac output times pulmonary vascular resistance plus pulmonary venous pressure. Hypoxia causes hypoxic pulmonary vasoconstriction, a local response that diverts blood away from poorly ventilated alveoli.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Typical value"
+    ],
+    "rows": [
+     [
+      "Mean PAP",
+      "15 mmHg"
+     ],
+     [
+      "Systolic and diastolic PAP",
+      "25 and 10 mmHg"
+     ],
+     [
+      "Pulmonary venous pressure",
+      "8 mmHg"
+     ],
+     [
+      "Compliance versus systemic",
+      "About 24 times higher"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "529daf03-638a-4a95-88d4-615e8ed649e1",
+  "9ecf17c1-5c56-4bd3-a022-d98e5417937d",
+  "b3fc253c-5561-4f76-92c7-31e99b245523"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology (Barrett KE et al.)",
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 142
+ }
+}

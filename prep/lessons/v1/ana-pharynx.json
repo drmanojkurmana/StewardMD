@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "ana-pharynx",
+ "subject": "anatomy",
+ "title": "Pharynx and tonsils: regions, muscles, gaps and lymphoid ring",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The pharynx is a muscular tube behind the nose, mouth and larynx. It is divided into **nasopharynx**, **oropharynx** and **laryngopharynx**. The nasopharynx lies above the soft palate, the oropharynx lies between the soft palate and epiglottis, and the laryngopharynx lies between the epiglottis and the lower border of the cricoid cartilage, where it becomes the oesophagus.",
+   "say": "The pharynx is a muscular tube behind the nose, mouth and larynx. It is divided into the nasopharynx, oropharynx and laryngopharynx. The nasopharynx lies above the soft palate, the oropharynx lies between the soft palate and epiglottis, and the laryngopharynx lies between the epiglottis and the lower border of the cricoid cartilage, where it becomes the oesophagus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Region",
+     "Upper limit",
+     "Lower limit"
+    ],
+    "rows": [
+     [
+      "Nasopharynx",
+      "Skull base",
+      "Soft palate"
+     ],
+     [
+      "Oropharynx",
+      "Soft palate",
+      "Epiglottis"
+     ],
+     [
+      "Laryngopharynx",
+      "Epiglottis",
+      "Lower cricoid border"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pharyngeal wall has an outer circular layer of three **constrictors** (superior, middle, inferior) and an inner longitudinal layer of stylopharyngeus, salpingopharyngeus and palatopharyngeus. All pharyngeal muscles are supplied by the pharyngeal plexus (vagus), except **stylopharyngeus**, which is supplied by the glossopharyngeal nerve. Between the inferior constrictor parts lies **Killian dehiscence**, a weak area and a common site of pharyngeal pouch and perforation.",
+   "say": "The pharyngeal wall has an outer circular layer of three constrictors, superior, middle and inferior, and an inner longitudinal layer of stylopharyngeus, salpingopharyngeus and palatopharyngeus. All pharyngeal muscles are supplied by the pharyngeal plexus, mainly from the vagus, except stylopharyngeus, which is supplied by the glossopharyngeal nerve. Between the two parts of the inferior constrictor lies Killian dehiscence, a weak area and a common site of pharyngeal pouch and perforation.",
+   "vis": null
+  },
+  {
+   "tx": "The gap between the upper concave border of the superior constrictor and the base of skull is the **sinus of Morgagni**. Three structures pass through it: the auditory tube, levator veli palatini and the ascending palatine artery. The **Passavant ridge** is formed by the upper fibres of palatopharyngeus, which act as a sphincter and meet the elevated soft palate to close the nasopharyngeal isthmus during swallowing.",
+   "say": "The gap between the upper concave border of the superior constrictor and the base of skull is the sinus of Morgagni. Three structures pass through it: the auditory tube, levator veli palatini and the ascending palatine artery. The Passavant ridge is formed by the upper fibres of palatopharyngeus, which act as a sphincter and meet the elevated soft palate to close the nasopharyngeal isthmus during swallowing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sinus of Morgagni",
+     "points": [
+      "Gap below skull base",
+      "Above superior constrictor",
+      "Auditory tube passes",
+      "Levator veli palatini passes",
+      "Ascending palatine artery passes"
+     ]
+    },
+    "right": {
+     "title": "Passavant ridge",
+     "points": [
+      "Formed by palatopharyngeus",
+      "Lies on posterior nasopharyngeal wall",
+      "Meets soft palate",
+      "Closes nasopharyngeal isthmus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The palatine tonsil sits in the tonsillar fossa, bounded by the palatoglossal and palatopharyngeal arches. Its lateral surface is covered by a **tonsillar hemicapsule** and lies on the superior constrictor. The principal arterial supply is the tonsillar branch of the facial artery. The **glossopharyngeal nerve** supplies sensation, with the lesser palatine nerve also contributing, and lies just lateral to the tonsillar bed, which is why it is at risk during tonsillectomy.",
+   "say": "The palatine tonsil sits in the tonsillar fossa, bounded by the palatoglossal and palatopharyngeal arches. Its lateral surface is covered by a tonsillar hemicapsule and lies on the superior constrictor. The principal arterial supply is the tonsillar branch of the facial artery. The glossopharyngeal nerve supplies sensation, with the lesser palatine nerve also contributing, and lies just lateral to the tonsillar bed, which is why it is at risk during tonsillectomy.",
+   "vis": null
+  },
+  {
+   "tx": "Zenker diverticulum is a pharyngeal pouch through the Killian dehiscence caused by mismatch between thyropharyngeus contraction and cricopharyngeus failure to relax. Patients present with occasional **dysphagia**, regurgitation of food, halitosis and aspiration. The **piriform fossa** is a recess on each side of the laryngeal inlet in the laryngopharynx and is a common site for hypopharyngeal carcinoma. Diagnosis is confirmed by barium swallow.",
+   "say": "Zenker diverticulum is a pharyngeal pouch through the Killian dehiscence caused by mismatch between thyropharyngeus contraction and cricopharyngeus failure to relax. Patients present with occasional dysphagia, regurgitation of food, halitosis and aspiration. The piriform fossa is a recess on each side of the laryngeal inlet in the laryngopharynx and is a common site for hypopharyngeal carcinoma. Diagnosis is confirmed by barium swallow.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cricopharyngeus fails to relax"
+     },
+     {
+      "id": "b",
+      "label": "Food pushed back"
+     },
+     {
+      "id": "c",
+      "label": "Pouch at Killian dehiscence"
+     },
+     {
+      "id": "d",
+      "label": "Dysphagia and regurgitation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "f0795e38-3b6a-4806-ba85-c83c7e56129d",
+  "593ac6b1-5d08-4cd3-8548-f8bf234c2477",
+  "3a561db9-29af-4a06-821b-d9ff7fd37e86"
+ ],
+ "src": [],
+ "refs": [
+  "Chaurasia's Human Anatomy, Volume 1 (B.D. Chaurasia)",
+  "Inderbir Singh's Textbook of Human Histology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 125
+ }
+}

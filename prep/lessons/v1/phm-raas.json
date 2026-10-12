@@ -1,0 +1,120 @@
+{
+ "v": 1,
+ "module": "phm-raas",
+ "subject": "pharmacology",
+ "title": "Renin-angiotensin system drugs: ACE inhibitors and ARBs",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **renin-angiotensin-aldosterone system** (RAAS) raises blood pressure. Renin converts angiotensinogen to angiotensin I, and **ACE** (angiotensin converting enzyme) converts it to the potent vasoconstrictor angiotensin II. ACE inhibitors block this conversion, while ARBs such as losartan and telmisartan block the **AT1 receptor**. Aliskiren inhibits renin itself. Sacubitril, combined with valsartan, inhibits neprilysin as well.",
+   "say": "The renin angiotensin aldosterone system raises blood pressure. Renin converts angiotensinogen to angiotensin I, and ACE, angiotensin converting enzyme, converts it to the potent vasoconstrictor angiotensin II. ACE inhibitors block this conversion, while ARBs such as losartan and telmisartan block the AT1 receptor. Aliskiren inhibits renin itself. Sacubitril, combined with valsartan, also inhibits neprilysin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Angiotensinogen"
+     },
+     {
+      "id": "b",
+      "label": "Angiotensin I"
+     },
+     {
+      "id": "c",
+      "label": "Angiotensin II"
+     },
+     {
+      "id": "d",
+      "label": "AT1 effects"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "Renin"
+     ],
+     [
+      "b",
+      "c",
+      "ACE"
+     ],
+     [
+      "c",
+      "d",
+      "Vasoconstriction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "ACE inhibitors inhibit kininase II, so **bradykinin** breaks down more slowly. This explains the **dry cough** and **angioedema** seen with them. ARBs do not raise bradykinin, so they rarely cause cough. Captopril, the shortest acting agent, and lisinopril, the slowest acting, are the two that are not prodrugs. Lisinopril is the lysine analogue of enalapril.",
+   "say": "ACE inhibitors inhibit kininase II, so bradykinin breaks down more slowly. This explains the dry cough and angioedema seen with them. ARBs do not raise bradykinin, so they rarely cause cough. Captopril is the shortest acting agent, and lisinopril is the slowest acting. Captopril and lisinopril are the two that are not prodrugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "ACE inhibitors",
+     "ARBs"
+    ],
+    "rows": [
+     [
+      "Cough",
+      "Common, dose unrelated",
+      "Rare"
+     ],
+     [
+      "Angioedema",
+      "Possible",
+      "Rare"
+     ],
+     [
+      "Bradykinin",
+      "Raised",
+      "Not raised"
+     ],
+     [
+      "Prodrug status",
+      "Most are, except captopril and lisinopril",
+      "Mostly active"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hyperkalaemia** is a key risk with ACE inhibitors and ARBs, especially with renal impairment, potassium sparing diuretics, NSAIDs or beta blockers. Losartan with amiloride is a classic dangerous combination. Aliskiren can also cause hyperkalaemia. Hypotension is most marked in salt depleted, diuretic treated or hypovolaemic patients, and a first dose drop is possible with captopril.",
+   "say": "Hyperkalaemia is a key risk with ACE inhibitors and ARBs, especially with renal impairment, potassium sparing diuretics, NSAIDs or beta blockers. Losartan with amiloride is a classic dangerous combination. Aliskiren can also cause hyperkalaemia. Hypotension is most marked in salt depleted, diuretic treated or hypovolaemic patients, and a first dose drop is possible with captopril.",
+   "vis": null
+  },
+  {
+   "tx": "ACE inhibitors and ARBs are **fetotoxic** in the second and third trimesters, because fetal renal development depends on angiotensin. They are contraindicated in pregnancy. Enalapril is the classic example. Methyldopa, labetalol and nifedipine are the safer choices. In **bilateral renal artery stenosis**, ACE inhibitors cause acute renal failure by dilating the efferent arteriole and lowering glomerular filtration pressure.",
+   "say": "ACE inhibitors and ARBs are fetotoxic in the second and third trimesters, because fetal renal development depends on angiotensin. They are contraindicated in pregnancy, and enalapril is the classic example. Methyldopa, labetalol and nifedipine are safer choices. In bilateral renal artery stenosis, ACE inhibitors cause acute renal failure by dilating the efferent arteriole and lowering glomerular filtration pressure.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0d6172c9-ced2-44bb-a6da-709cc0a6abc7",
+  "a5b2e089-3e8a-490a-9387-74687302149f",
+  "209c5ced-b3fa-4fad-81f3-1392b560a399"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung BG, Masters SB, Trevor AJ (Eds). Basic and Clinical Pharmacology. Antihypertensive Agents chapter.",
+  "Chapter 'Antihypertensive Agents' in Basic and Clinical Pharmacology (Katzung)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 230
+ }
+}

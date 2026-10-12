@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "cm-case-control",
+ "subject": "community-medicine",
+ "title": "Case-control studies: design, bias and odds ratio",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A **case-control study** starts with the outcome. Investigators select people with the disease (cases) and people without it (controls), then look backwards to compare past exposure. Both exposure and outcome have already occurred before the study begins, so it is called a **retrospective study**. It proceeds from effect to cause and is usually the first approach to test a causal hypothesis.",
+   "say": "A case-control study starts with the outcome. Investigators select people with the disease, called cases, and people without it, called controls, then look backwards to compare past exposure. Both exposure and outcome have already occurred before the study begins, so it is called a retrospective study. It proceeds from effect to cause and is usually the first approach to test a causal hypothesis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Outcome present (cases)"
+     },
+     {
+      "id": "b",
+      "label": "Controls without outcome"
+     },
+     {
+      "id": "c",
+      "label": "Look back at exposure"
+     },
+     {
+      "id": "d",
+      "label": "Compare exposure odds"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The main measure is the **odds ratio**, a cross-product ratio from a 2 by 2 table. It estimates the **relative risk** but cannot give true incidence, because there is no population at risk as a denominator. Odds ratio is valid when the disease is **rare**, cases represent those with the disease, and controls represent those without it.",
+   "say": "The main measure is the odds ratio, a cross-product ratio from a two by two table. It estimates the relative risk but cannot give true incidence, because there is no population at risk as a denominator. The odds ratio is valid when the disease is rare, cases represent those with the disease, and controls represent those without it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Exposed",
+     "Not exposed"
+    ],
+    "rows": [
+     [
+      "Cases",
+      "a",
+      "b"
+     ],
+     [
+      "Controls",
+      "c",
+      "d"
+     ],
+     [
+      "Odds ratio",
+      "a times d",
+      "b times c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Case-control studies are **inexpensive**, quick, need few subjects, suit rare diseases, and carry minimal ethical risk. They can study several aetiological factors at once and need no follow-up, so there is no attrition. Their weaknesses are reliance on memory or records, difficulty choosing controls, and inability to measure incidence or distinguish cause from associated factors.",
+   "say": "Case-control studies are inexpensive, quick, need few subjects, suit rare diseases, and carry minimal ethical risk. They can study several causes at once and need no follow-up, so there is no attrition. Their weaknesses are reliance on memory or records, difficulty choosing controls, and inability to measure incidence or separate causes from associated factors.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Advantages",
+     "points": [
+      "Cheap and rapid",
+      "Good for rare disease",
+      "Few subjects needed",
+      "No follow-up needed"
+     ]
+    },
+    "right": {
+     "title": "Disadvantages",
+     "points": [
+      "Recall and records bias",
+      "Hard to pick controls",
+      "No incidence measured",
+      "Cannot prove causation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Key biases: **recall bias** arises when cases remember past exposures more fully than controls. **Interviewer bias** occurs when the interviewer knows the hypothesis and probes cases more deeply. **Berksonian bias**, or admission rate bias, arises in hospital-based studies when people with two diseases are admitted more often than those with one. Matching controls on confounders such as age and sex reduces confounding and improves comparability.",
+   "say": "Key biases include recall bias, where cases remember past exposures more fully than controls. Interviewer bias occurs when the interviewer knows the hypothesis and probes cases more deeply. Berksonian bias, also called admission rate bias, arises in hospital-based studies when people with two diseases are admitted more often than those with one. Matching controls on confounders such as age and sex improves comparability.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "620706d2-9b38-4007-8e7d-c276ba0396e6",
+  "8a70196e-a7b7-4543-8e92-d8c23a6bce48",
+  "00f3813b-3b11-45a5-a46c-b29ab3f4033d"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K Park), 23rd edition"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 115
+ }
+}

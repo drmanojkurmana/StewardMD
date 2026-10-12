@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "ana-digestive",
+ "subject": "anatomy",
+ "title": "Digestive system and gland histology: key high-yield facts",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **oesophagus** wall has four layers: mucosa, submucosa, muscularis externa and adventitia. The mucosa is lined by **stratified squamous non-keratinised** epithelium, and the serosa is absent except over a short lower segment. The muscularis externa is striated in the upper third, mixed in the middle third and smooth in the lower third.",
+   "say": "The oesophagus wall has four layers: mucosa, submucosa, muscularis externa and adventitia. The mucosa is lined by stratified squamous non-keratinised epithelium. A serosa is absent except over a short lower segment. The muscularis externa is striated in the upper third, mixed in the middle third and smooth in the lower third.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Region",
+     "Muscle type"
+    ],
+    "rows": [
+     [
+      "Upper third",
+      "Striated"
+     ],
+     [
+      "Middle third",
+      "Mixed"
+     ],
+     [
+      "Lower third",
+      "Smooth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **gastric glands** of the body and fundus contain parietal cells, chief cells and mucous neck cells. **Parietal cells** secrete hydrochloric acid and intrinsic factor, and sit in the middle and basal parts of the gland. **Chief cells** secrete pepsinogen and lie near the base. Goblet cells are normally absent from the stomach.",
+   "say": "Gastric glands of the body and fundus contain parietal cells, chief cells and mucous neck cells. Parietal cells secrete hydrochloric acid and intrinsic factor, and sit in the middle and basal parts of the gland. Chief cells secrete pepsinogen and lie near the base. Goblet cells are normally absent from the stomach.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Parietal cells",
+     "points": [
+      "Secrete HCl",
+      "Secrete intrinsic factor",
+      "Middle and basal gland"
+     ]
+    },
+    "right": {
+     "title": "Chief cells",
+     "points": [
+      "Secrete pepsinogen",
+      "Near gland base",
+      "Abundant in fundus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Brunner glands** are compound tubuloalveolar glands in the submucosa of the duodenum, mainly between the pylorus and the papilla of Vater. They secrete alkaline mucus that neutralises acidic chyme. They also release urogastrone, which is human epidermal growth factor and inhibits acid production. They are absent from the jejunum, ileum and colon.",
+   "say": "Brunner glands are compound tubuloalveolar glands in the submucosa of the duodenum, mainly between the pylorus and the papilla of Vater. They secrete alkaline mucus that neutralises acidic chyme. They also release urogastrone, which is human epidermal growth factor and inhibits acid production. They are absent from the jejunum, ileum and colon.",
+   "vis": null
+  },
+  {
+   "tx": "**Paneth cells** sit at the base of the crypts of Lieberkuhn in the small intestine. They are rich in zinc, rough endoplasmic reticulum and eosinophilic granules containing lysozyme and defensins. Unlike most epithelial cells, they do not migrate up the villi and stay near the crypt base. **Goblet cells** secrete mucin and are found in the small intestine, colon, trachea and conjunctiva.",
+   "say": "Paneth cells sit at the base of the crypts of Lieberkuhn in the small intestine. They are rich in zinc, rough endoplasmic reticulum and eosinophilic granules containing lysozyme and defensins. Unlike most epithelial cells, they do not migrate up the villi and stay near the crypt base. Goblet cells secrete mucin and are found in the small intestine, colon, trachea and conjunctiva.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paneth cells",
+     "points": [
+      "Base of crypts",
+      "Zinc and lysozyme",
+      "Do not migrate up villi"
+     ]
+    },
+    "right": {
+     "title": "Goblet cells",
+     "points": [
+      "Secrete mucin",
+      "Small intestine and colon",
+      "Absent from normal stomach"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **liver lobule** is the classic unit centred on a central vein, with a portal triad at each corner. A **portal triad** holds a hepatic artery branch, a portal vein branch and a bile duct. The **space of Disse** lies between hepatocytes and sinusoids, and hepatocyte microvilli project into it. **Kupffer cells** are fixed macrophages lining the sinusoids, mainly in the liver.",
+   "say": "The liver lobule is the classic unit centred on a central vein, with a portal triad at each corner. A portal triad holds a hepatic artery branch, a portal vein branch and a bile duct. The space of Disse lies between hepatocytes and sinusoids, and hepatocyte microvilli project into it. Kupffer cells are fixed macrophages lining the sinusoids, mainly in the liver.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Portal triad"
+     },
+     {
+      "id": "b",
+      "label": "Sinusoid"
+     },
+     {
+      "id": "c",
+      "label": "Space of Disse"
+     },
+     {
+      "id": "d",
+      "label": "Hepatocyte"
+     },
+     {
+      "id": "e",
+      "label": "Central vein"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serous acini secrete watery fluid and have round, dark nuclei, whereas **mucous acini** are larger, have flattened nuclei pushed to the base and stain pale with haematoxylin and eosin. **Myoepithelial (basket) cells** lie between secretory cells and the basal lamina and squeeze secretions out. The **myenteric plexus of Auerbach** lies between the muscle layers along the whole gut.",
+   "say": "Serous acini secrete watery fluid and have round, dark nuclei, whereas mucous acini are larger, have flattened nuclei pushed to the base and stain pale with haematoxylin and eosin. Myoepithelial basket cells lie between secretory cells and the basal lamina and squeeze secretions out. The myenteric plexus of Auerbach lies between the muscle layers along the whole gut.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "21281e47-f9b1-43f0-b75f-66418536a6e8",
+  "36272772-14ff-4329-b9eb-c3c491168d02",
+  "19b1eba1-26b7-4eca-9bd1-57f93280efde"
+ ],
+ "src": [],
+ "refs": [
+  "Inderbir Singh's Textbook of Human Histology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 119
+ }
+}

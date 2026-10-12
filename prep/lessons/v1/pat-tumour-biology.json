@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "pat-tumour-biology",
+ "subject": "pathology",
+ "title": "Nomenclature, characteristics and spread of tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **neoplasm** is an abnormal new growth whose proliferation is not matched by the normal stimuli. Tumours are named by their cell of origin: a smooth muscle tumour is a leiomyoma when benign and a leiomyosarcoma when malignant. Benign tumours usually take the suffix **oma**, while malignant epithelial tumours are **carcinomas** and malignant mesenchymal tumours are **sarcomas**. Exceptions such as melanoma, seminoma, lymphoma and hepatoma are malignant despite the suffix.",
+   "say": "A neoplasm is an abnormal new growth whose proliferation is not matched by normal stimuli. Tumours are named by their cell of origin. A smooth muscle tumour is a leiomyoma when benign and a leiomyosarcoma when malignant. Benign tumours usually take the suffix oma, while malignant epithelial tumours are carcinomas and malignant mesenchymal tumours are sarcomas. Exceptions such as melanoma, seminoma, lymphoma and hepatoma are malignant despite the suffix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Benign name",
+     "Malignant name"
+    ],
+    "rows": [
+     [
+      "Smooth muscle",
+      "Leiomyoma",
+      "Leiomyosarcoma"
+     ],
+     [
+      "Fibroblast",
+      "Fibroma",
+      "Fibrosarcoma"
+     ],
+     [
+      "Cartilage",
+      "Chondroma",
+      "Chondrosarcoma"
+     ],
+     [
+      "Glandular epithelium",
+      "Adenoma",
+      "Adenocarcinoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Differentiation** describes how closely tumour cells resemble their normal counterparts. **Anaplasia** is the loss of structural and functional differentiation and is a hallmark of malignancy. **Dysplasia** is disorderly, non-neoplastic epithelial change that can precede cancer, graded mild, moderate or severe. **Metaplasia** is the reversible replacement of one adult cell type by another, as seen in columnar to squamous change in smokers' airways.",
+   "say": "Differentiation describes how closely tumour cells resemble their normal counterparts. Anaplasia is the loss of structural and functional differentiation and is a hallmark of malignancy. Dysplasia is disorderly, non-neoplastic epithelial change that can precede cancer and is graded mild, moderate or severe. Metaplasia is the reversible replacement of one adult cell type by another, as seen in columnar to squamous change in smokers' airways.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dysplasia and metaplasia",
+     "points": [
+      "Dysplasia: disorderly, non-neoplastic epithelium",
+      "Can precede cancer; severe grade often progresses to carcinoma in situ",
+      "Metaplasia: reversible switch of one adult cell type to another"
+     ]
+    },
+    "right": {
+     "title": "Anaplasia",
+     "points": [
+      "Loss of structural and functional differentiation",
+      "Marker of malignancy",
+      "Pleomorphism and atypical mitoses"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Carcinoma in situ** is full-thickness atypia of epithelium with an intact basement membrane, so no invasion is present. Invasion is shown by breaching the basement membrane or nests of cells in the dermis. Dysplasia involves only the lower layers of the epidermis, whereas carcinoma in situ extends to the surface. Matrix metalloproteinases help tumour cells invade by remodelling the basement membrane and interstitial matrix, while loss of **E-cadherin** weakens cell to cell adhesion.",
+   "say": "Carcinoma in situ is full thickness atypia of epithelium with an intact basement membrane, so no invasion is present. Invasion is shown by breaching the basement membrane or finding nests of cells in the dermis. Dysplasia involves only the lower layers of the epidermis, whereas carcinoma in situ extends to the surface. Matrix metalloproteinases help tumour cells invade by remodelling the basement membrane, while loss of E-cadherin weakens cell to cell adhesion.",
+   "vis": null
+  },
+  {
+   "tx": "Spread occurs by three routes. **Lymphatic spread** is the commonest route for carcinomas and follows natural drainage; the **sentinel lymph node** is the first node receiving flow from the tumour, and skip metastasis can occur. **Haematogenous spread** is typical of sarcomas and veins are invaded more often than arteries. Portal drainage sends tumour to the liver and caval blood to the lung. **Seeding** into body cavities, especially peritoneal, is characteristic of ovarian carcinoma.",
+   "say": "Spread occurs by three routes. Lymphatic spread is the commonest route for carcinomas and follows natural drainage. The sentinel lymph node is the first node receiving flow from the tumour, and skip metastasis can occur. Haematogenous spread is typical of sarcomas, and veins are invaded more often than arteries. Portal drainage sends tumour to the liver and caval blood to the lung. Seeding into body cavities, especially the peritoneal cavity, is characteristic of ovarian carcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p",
+      "label": "Primary tumour"
+     },
+     {
+      "id": "l",
+      "label": "Lymphatic spread"
+     },
+     {
+      "id": "h",
+      "label": "Haematogenous spread"
+     },
+     {
+      "id": "s",
+      "label": "Seeding of cavities"
+     },
+     {
+      "id": "ln",
+      "label": "Sentinel then regional nodes"
+     },
+     {
+      "id": "lu",
+      "label": "Lung and liver"
+     },
+     {
+      "id": "pc",
+      "label": "Peritoneum"
+     }
+    ],
+    "edges": [
+     [
+      "p",
+      "l"
+     ],
+     [
+      "p",
+      "h"
+     ],
+     [
+      "p",
+      "s"
+     ],
+     [
+      "l",
+      "ln"
+     ],
+     [
+      "h",
+      "lu"
+     ],
+     [
+      "s",
+      "pc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Benign developmental lesions are classed by tissue location. A **hamartoma** is normal tissue in a normal site, such as a skin birthmark. A **choristoma** is normal tissue in an abnormal site, such as pancreatic tissue in the duodenum, so ectopic rest of normal tissue is a choristoma. A **teratoma** contains tissue from all three germ layers and arises from totipotent cells, mainly in gonads. Mature teratomas are benign and immature teratomas are malignant.",
+   "say": "Benign developmental lesions are classed by tissue location. A hamartoma is normal tissue in a normal site, such as a skin birthmark. A choristoma is normal tissue in an abnormal site, such as pancreatic tissue in the duodenum, so ectopic rest of normal tissue is a choristoma. A teratoma contains tissue from all three germ layers and arises from totipotent cells, mainly in gonads. Mature teratomas are benign and immature teratomas are malignant.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "4b747ae3-d083-4f16-8f2e-5d4b97377b70",
+  "2dfc2034-6ca8-4fca-9eb9-19a10f90d910",
+  "3fc25984-8e34-44a0-b95a-239430630d23"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease",
+  "Harrison's Principles of Internal Medicine",
+  "Neoplasia in Wyatt et al. (Eds), Pathology: The Big Picture"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 210
+ }
+}

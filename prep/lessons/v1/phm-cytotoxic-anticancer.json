@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "phm-cytotoxic-anticancer",
+ "subject": "pharmacology",
+ "title": "Cytotoxic anticancer drugs: key toxicities, rescues and mechanisms",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cytotoxic drugs are classed as **cell cycle specific** or **cell cycle non-specific**. Alkylating agents such as cyclophosphamide are non-specific and act on resting as well as dividing cells. Antimetabolites such as methotrexate, cytarabine and 5-fluorouracil are S-phase specific. Vinca alkaloids like vincristine act in M phase by blocking spindle formation, while paclitaxel stabilises spindles. Bleomycin acts mainly in G2 phase.",
+   "say": "Cytotoxic drugs are classed as cell cycle specific or cell cycle non-specific. Alkylating agents such as cyclophosphamide are non-specific and act on resting as well as dividing cells. Antimetabolites such as methotrexate, cytarabine and 5-fluorouracil are S-phase specific. Vinca alkaloids like vincristine act in M phase by blocking spindle formation, while paclitaxel stabilises spindles. Bleomycin acts mainly in G2 phase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Example drugs",
+     "Phase or action"
+    ],
+    "rows": [
+     [
+      "Alkylating agents",
+      "Cyclophosphamide, melphalan, busulfan",
+      "Non-specific, DNA cross-linking"
+     ],
+     [
+      "Antimetabolites",
+      "Methotrexate, cytarabine, 5-FU",
+      "S-phase specific"
+     ],
+     [
+      "Vinca alkaloids",
+      "Vincristine, vinblastine",
+      "M phase, block spindle"
+     ],
+     [
+      "Taxanes",
+      "Paclitaxel, docetaxel",
+      "M phase, stabilise spindle"
+     ],
+     [
+      "Antitumour antibiotics",
+      "Bleomycin, doxorubicin",
+      "Varies, bleomycin G2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cyclophosphamide, an **alkylating agent**, causes **haemorrhagic cystitis** through its urinary metabolite acrolein. **Mesna** is a thiol chemoprotectant given with cyclophosphamide or ifosfamide to ameliorate this bladder injury. Mesna can be given intravenously or as an oral tablet. Alkylating agents also cause sterility through azoospermia and ovarian atrophy.",
+   "say": "Cyclophosphamide, an alkylating agent, causes haemorrhagic cystitis through its urinary metabolite acrolein. Mesna is a thiol chemoprotectant given with cyclophosphamide or ifosfamide to ameliorate this bladder injury. Mesna can be given intravenously or as an oral tablet. Alkylating agents also cause sterility through azoospermia and ovarian atrophy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cyclophosphamide"
+     },
+     {
+      "id": "b",
+      "label": "Acrolein in urine"
+     },
+     {
+      "id": "c",
+      "label": "Haemorrhagic cystitis"
+     },
+     {
+      "id": "d",
+      "label": "Mesna binds acrolein"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "d",
+      "b",
+      "neutralises"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Methotrexate** inhibits dihydrofolate reductase, blocking tetrahydrofolate formation. High-dose methotrexate toxicity is treated with **leucovorin rescue**, which supplies reduced folate that bypasses the block. Methotrexate resistance can arise from defective transport, altered DHFR with lower affinity, or increased DHFR. Low-dose methotrexate is used in rheumatoid arthritis.",
+   "say": "Methotrexate inhibits dihydrofolate reductase, blocking tetrahydrofolate formation. High-dose methotrexate toxicity is treated with leucovorin rescue, which supplies reduced folate that bypasses the block. Methotrexate resistance can arise from defective transport, altered DHFR with lower affinity, or increased DHFR. Low-dose methotrexate is used in rheumatoid arthritis.",
+   "vis": null
+  },
+  {
+   "tx": "**Doxorubicin** is an anthracycline whose main dose-limiting toxicity is cumulative, irreversible **cardiotoxicity**, which can present as arrhythmias or cardiomyopathy. Risk rises with total lifetime dose, so cardiac function is checked before and during treatment. **Bleomycin** differs: its most serious complication is dose-related **pulmonary fibrosis**, alongside skin changes such as flagellate dermatitis. Pulmonary toxicity is the key bleomycin exam fact.",
+   "say": "Doxorubicin is an anthracycline whose main dose-limiting toxicity is cumulative, irreversible cardiotoxicity, which can present as arrhythmias or cardiomyopathy. Risk rises with total lifetime dose, so cardiac function is checked before and during treatment. Bleomycin differs: its most serious complication is dose-related pulmonary fibrosis, alongside skin changes such as flagellate dermatitis. Pulmonary toxicity is the key bleomycin exam fact.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Doxorubicin",
+     "points": [
+      "Cumulative cardiotoxicity",
+      "Risk tied to total lifetime dose",
+      "Serial cardiac monitoring"
+     ]
+    },
+    "right": {
+     "title": "Bleomycin",
+     "points": [
+      "Dose-related pulmonary fibrosis",
+      "Flagellate dermatitis",
+      "Monitor lung function"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tumour lysis syndrome** follows rapid cell kill, especially in fast-growing haematological malignancies with high tumour burden. Intracellular **potassium**, **phosphate** and **uric acid** flood the circulation, causing hyperkalaemia, hyperphosphataemia, secondary hypocalcaemia and acute kidney injury. Prevention relies on vigorous intravenous hydration, close electrolyte monitoring and starting treatment with care in high-risk patients.",
+   "say": "Tumour lysis syndrome follows rapid cell kill, particularly in fast-growing blood cancers with a large tumour burden. When cells break open, potassium, phosphate and uric acid pour into the bloodstream. This causes high potassium, high phosphate, low calcium and acute kidney injury. Prevention depends on vigorous intravenous fluids, close electrolyte monitoring and cautious starting of treatment in high-risk patients.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "978ef597-1e96-464b-86ee-28e6e6067cd4",
+  "4efc0f02-7636-46d0-a016-d19b46e385b4",
+  "515385e9-6c2b-4c4a-95be-33d9b5be1601"
+ ],
+ "src": [],
+ "refs": [
+  "Essentials of Medical Pharmacology (K.D. Tripathi)",
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton, Hilal-Dandan, Knollmann (Editors))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 498
+ }
+}

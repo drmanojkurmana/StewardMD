@@ -66,26 +66,36 @@ export function targetModules(root = ROOT, cache = null, bank = null) {
   }
   return out;
 }
-/* moduleItems(mid, sids, { bank, cache }) -> bank + overlay item texts for grounding + quiz. */
+/* moduleItems(mid, sids, { bank, cache }) -> { all, bank, ov }: bank + overlay items.
+ * Grounding uses all; quiz prefers bank ids (always loaded in the lesson player) with overlay backfill. */
 export function moduleItems(mid, sids, o = {}) {
-  const items = [];
+  const all = [], bankItems = [], ovItems = [];
   const bank = o.bank, cache = o.cache;
   for (const sid of sids) {
     if (bank) for (const bv of [bank, bank.replace(/\/v\d+$/, "/v5")]) {
       const j = readJ(path.join(bv, sid, "mcq", mid + ".json"));
-      if (j && j.items) { items.push(...j.items); break; }
+      if (j && j.items) { all.push(...j.items); bankItems.push(...j.items); break; }
     }
     if (cache) {
       const ovc = (readJ(path.join(ROOT, "prep/bank/overlay-counts.json")) || {}).sets || {};
       for (const [set, subs] of Object.entries(ovc)) {
         if (subs && subs[sid] && subs[sid][mid]) {
           const j = readJ(path.join(cache, "overlay", set, sid, mid + ".json"));
-          if (j && j.items) items.push(...j.items);
+          if (j && j.items) { all.push(...j.items); ovItems.push(...j.items); }
         }
       }
     }
   }
-  return items;
+  return { all, bank: bankItems, ov: ovItems };
+}
+/* bankFirstQuiz(bankItems, ovItems, terms) -> 3 ids: bank first, overlay backfill. */
+export function bankFirstQuiz(bankItems, ovItems, terms) {
+  const quiz = pickQuizIds(bankItems, terms);
+  if (quiz.length < 3) for (const id of pickQuizIds(ovItems, terms)) {
+    if (quiz.length >= 3) break;
+    if (!quiz.includes(id)) quiz.push(id);
+  }
+  return quiz.slice(0, 3);
 }
 /* groundingFor(mod, items, kb) -> { kbText, kbSrc, kbWords, itemText, itemWords, scope }: capped, on-topic KB
  * sentences plus item Q/options/explanations (consensus scope) plus taxonomy scope terms. */
@@ -332,7 +342,8 @@ async function main(argv = process.argv.slice(2)) {
   for (const m of mods) {
     const sids = sidsOf.get(m.mid) || [m.sid];
     const items = moduleItems(m.mid, sids, { bank, cache });
-    grounds.set(m.mid, groundingFor({ title: m.title, scope: m.scope }, items, kb));
+    grounds.set(m.mid, groundingFor({ title: m.title, scope: m.scope }, items.all, kb));
+    grounds.get(m.mid).bank = items.bank; grounds.get(m.mid).ov = items.ov;
     const g = grounds.get(m.mid);
     if (!g.itemText && !g.kbText) console.log(`skip ${m.mid}: no grounding at all`);
   }
@@ -394,10 +405,9 @@ async function main(argv = process.argv.slice(2)) {
     const finalSteps = g3.okSteps;
     const finalDropped = (g.dropped || 0) + verifyDropped + g3.problems.length;
     if (finalSteps.length < 4) { console.log(`drop ${m.mid}: only ${finalSteps.length}/4+ steps survive the final gate`); continue; }
-    const sids = sidsOf.get(m.mid) || [m.sid];
-    const items = moduleItems(m.mid, sids, { bank, cache });
+    const gr = grounds.get(m.mid);
     const terms = [g.title, m.title, m.scope];
-    const quiz = pickQuizIds(items, terms);
+    const quiz = bankFirstQuiz(gr.bank || [], gr.ov || [], terms);
     const lesson = {
       v: 1, module: m.mid, subject: m.sid, title: g.title, minutes: minutesFor(finalSteps), steps: finalSteps,
       quiz, src: grounds.get(m.mid).kbSrc, refs: (g.refs || []).filter((r) => refsOk.has(r)),

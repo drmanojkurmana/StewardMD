@@ -1,0 +1,90 @@
+{
+ "v": 1,
+ "module": "ans-intubation",
+ "subject": "anaesthesia",
+ "title": "Rapid sequence induction and failed intubation (adult)",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Before any induction, the team must **plan and brief**. Assign roles such as intubator, drugs, monitoring, cricoid force, equipment and runner, and state Plans A to D aloud. Check monitoring, including waveform **capnography**, and have a videolaryngoscope first line with a bougie and stylet, a second-generation supraglottic airway, and an eFONA kit ready. If difficulty is predicted, mark the cricothyroid membrane before induction.",
+   "say": "Before any induction, the team must plan and brief. Assign roles such as intubator, drugs, monitoring, cricoid force, equipment and runner, and state Plans A to D aloud. Check monitoring, including waveform capnography, and have a videolaryngoscope as first line with a bougie and stylet, a second generation supraglottic airway, and an eFONA kit ready. If difficulty is predicted, mark the cricothyroid membrane before induction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p",
+      "label": "Brief roles and Plans A to D"
+     },
+     {
+      "id": "m",
+      "label": "Check monitoring and capnography"
+     },
+     {
+      "id": "e",
+      "label": "Ready videolaryngoscope and eFONA"
+     },
+     {
+      "id": "c",
+      "label": "Mark cricothyroid if difficult"
+     }
+    ],
+    "edges": [
+     [
+      "p",
+      "m"
+     ],
+     [
+      "m",
+      "e"
+     ],
+     [
+      "e",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Preoxygenate** head-up to an end-tidal O2 of 0.9, and keep oxygen running during apnoea, for example by nasal cannula at 15 L/min or high-flow nasal oxygen above 30 L/min. Optimise the patient first: resuscitate shock, treat severe hypoxaemia with CPAP or NIV, and aspirate any nasogastric tube. Reduce the induction dose in shock or old age, since full-dose propofol in a shocked patient can precipitate arrest.",
+   "say": "Preoxygenate with the head up to an end tidal oxygen of 0.9, and keep oxygen running during apnoea, for example by nasal cannula at 15 litres per minute or high flow nasal oxygen above 30 litres per minute. Optimise the patient first by resuscitating shock, treating severe hypoxaemia with CPAP or NIV, and aspirating any nasogastric tube. Reduce the induction dose in shock or old age, because full dose propofol in a shocked patient can precipitate arrest.",
+   "vis": null
+  },
+  {
+   "tx": "Once the team brief is complete, give the **induction agent** and the **neuromuscular blocker** one after the other, with no pause to test the mask. A **partial block** produces poor intubating conditions and can also make **bag-mask ventilation** harder. A trained assistant applies **cricoid force**, which should come off if the laryngoscopy view worsens, a supraglottic device is inserted, or the patient starts to vomit. Reserve gentle, low-pressure mask ventilation for patients who desaturate quickly.",
+   "say": "Once the brief is done, give the induction agent and the neuromuscular blocker one after the other, with no pause to test the mask. A partial block leads to poor intubating conditions and can make bag-mask ventilation harder too. A trained assistant applies cricoid force, and it should come off if the view worsens, a supraglottic device goes in, or the patient starts to vomit. Reserve gentle, low-pressure mask ventilation for patients who desaturate quickly.",
+   "vis": null
+  },
+  {
+   "tx": "Do not rescue **rocuronium** with sugammadex as a CICO strategy, since it may not restore a patent airway and delays eFONA (DAS 2025). Avoid blind intubation through a supraglottic airway. After intubation, secure the tube, note the depth, check bilateral air entry and insert a nasogastric tube. Expect post-intubation hypotension, so use lung-protective ventilation at 6 to 8 mL/kg predicted body weight and treat with fluid and vasopressor.",
+   "say": "Do not rescue rocuronium with sugammadex as a can't intubate can't oxygenate strategy, since it may not restore a patent airway and delays eFONA, according to the DAS 2025 guidance. Avoid blind intubation through a supraglottic airway. After intubation, secure the tube, note the depth, check bilateral air entry and insert a nasogastric tube. Expect post intubation hypotension, so use lung protective ventilation at 6 to 8 mL/kg predicted body weight and treat with fluid and vasopressor.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "33291f0b-24b0-45b8-b343-1070958191a3",
+  "530193c2-9336-49d3-901a-f523792fd7c8",
+  "688c9d08-fe12-4159-84db-1d670eded7b7"
+ ],
+ "src": [
+  "kb-clinical-protocols-rapid-sequence-intubation"
+ ],
+ "refs": [
+  "Difficult Airway Society (DAS) guidelines for tracheal intubation in adults, 2015 and 2025 update",
+  "Miller's Anaesthesia (Miller RD, ed.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 5,
+  "kbWords": 763,
+  "itemN": 146
+ }
+}

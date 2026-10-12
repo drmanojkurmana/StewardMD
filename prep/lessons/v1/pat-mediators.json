@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "pat-mediators",
+ "subject": "pathology",
+ "title": "Chemical mediators of inflammation: key facts for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Chemical mediators are molecules that drive the inflammatory response. They are **preformed** (stored in granules, such as histamine and serotonin) or **newly synthesised** (such as prostaglandins and leukotrienes from arachidonic acid). Some are plasma-derived, such as the complement system, kinins and coagulation proteins, while others come from cells. Cytokines are soluble proteins that mediate specific reactions and are short acting.",
+   "say": "Chemical mediators are molecules that drive the inflammatory response. They are preformed, stored in granules, such as histamine and serotonin, or newly synthesised, such as prostaglandins and leukotrienes from arachidonic acid. Some are plasma derived, such as the complement system, kinins and coagulation proteins, while others come from cells. Cytokines are soluble proteins that mediate specific reactions and are short acting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mediator",
+     "Main source",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "Histamine",
+      "Mast cells, basophils",
+      "Arteriolar dilation, venular leakage"
+     ],
+     [
+      "Serotonin",
+      "Platelets, enterochromaffin cells",
+      "Vasoactive amine"
+     ],
+     [
+      "Leukotrienes",
+      "Arachidonic acid (lipoxygenase)",
+      "Slow acting, chemotaxis"
+     ],
+     [
+      "Bradykinin",
+      "Plasma kinin system",
+      "Pain, vascular permeability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Arachidonic acid is metabolised by the **cyclooxygenase** and **lipoxygenase** pathways. Thromboxane A2 promotes platelet aggregation and vasoconstriction, while prostacyclin (PGI2) inhibits platelet aggregation and causes vasodilation. Leukotriene B4 is chemotactic. **Lipoxins** are anti-inflammatory: they inhibit neutrophil chemotaxis and leukocyte recruitment and promote clearance of apoptotic neutrophils.",
+   "say": "Arachidonic acid is metabolised by the cyclooxygenase and lipoxygenase pathways. Thromboxane A2 promotes platelet aggregation and vasoconstriction, while prostacyclin, also called PGI2, inhibits platelet aggregation and causes vasodilation. Leukotriene B4 is chemotactic. Lipoxins are anti-inflammatory: they inhibit neutrophil chemotaxis and leukocyte recruitment and promote clearance of apoptotic neutrophils.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pro-inflammatory",
+     "points": [
+      "Thromboxane A2: aggregation, vasoconstriction",
+      "Leukotriene B4: chemotaxis"
+     ]
+    },
+    "right": {
+     "title": "Anti-inflammatory",
+     "points": [
+      "Lipoxins: block neutrophil recruitment",
+      "Prostacyclin: inhibits platelet aggregation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complement is a set of about 20 plasma proteins, mostly inactive precursors. The **classical** pathway starts with antigen-antibody complexes, and the **alternative** pathway is triggered by microbial surfaces such as lipopolysaccharide. Both converge on **C3**, which splits into C3a and C3b. The terminal pathway from C5 to C9 forms the membrane attack complex, which kills bacteria such as Neisseria. C3a and C5a are anaphylatoxins.",
+   "say": "Complement is a set of about 20 plasma proteins, mostly inactive precursors. The classical pathway starts with antigen antibody complexes, and the alternative pathway is triggered by microbial surfaces such as lipopolysaccharide. Both converge on C3, which splits into C3a and C3b. The terminal pathway from C5 to C9 forms the membrane attack complex, which kills bacteria such as Neisseria. C3a and C5a are anaphylatoxins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Classical or alternative"
+     },
+     {
+      "id": "b",
+      "label": "C3 split"
+     },
+     {
+      "id": "c",
+      "label": "C5 cleavage"
+     },
+     {
+      "id": "d",
+      "label": "C5b to C9 MAC"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hereditary angioedema results from a deficiency of **C1 esterase inhibitor**, an autosomal dominant disorder in classical teaching, although some sources describe autosomal recessive inheritance. Unchecked complement activation and kinin release cause swelling of skin, larynx and gut, often triggered by trauma or emotional stress. Bradykinin is a peptide that increases vascular permeability, whereas histamine is an amine.",
+   "say": "Hereditary angioedema results from a deficiency of C1 esterase inhibitor. It is usually taught as autosomal dominant, although some sources describe autosomal recessive inheritance. Unchecked complement activation and kinin release cause swelling of skin, larynx and gut, often triggered by trauma or emotional stress. Bradykinin is a peptide that increases vascular permeability, whereas histamine is an amine.",
+   "vis": null
+  },
+  {
+   "tx": "Pyrogenic cytokines, mainly **IL-1**, **TNF** and IL-6, act on the hypothalamus and trigger prostaglandin E2 production, which raises the thermoregulatory set point and causes fever. IL-18 is not pyrogenic. Prostaglandins themselves are not classed as cytokines. Among IL-1, TNF, IL-6 and IFN-gamma, IL-1 and TNF are the most important pyrogens.",
+   "say": "Pyrogenic cytokines, mainly IL-1, TNF and IL-6, act on the hypothalamus and trigger prostaglandin E2 production, which raises the thermoregulatory set point and causes fever. IL-18 is not pyrogenic. Among these, IL-1 and TNF are the most important pyrogens.",
+   "vis": null
+  },
+  {
+   "tx": "Acute phase reactants are plasma proteins made mainly by the liver. **Positive** reactants, such as CRP, fibrinogen, serum amyloid A and ceruloplasmin, rise in inflammation. **Negative** reactants, such as albumin and transferrin, fall. C-reactive protein is a sensitive marker, and it is an independent predictor of atherosclerotic cardiovascular risk. Procalcitonin helps distinguish sepsis from other systemic inflammation, while ESR is nonspecific and markedly raised in giant cell arteritis.",
+   "say": "Acute phase reactants are plasma proteins made mainly by the liver. Positive reactants, such as CRP, fibrinogen, serum amyloid A and ceruloplasmin, rise in inflammation. Negative reactants, such as albumin and transferrin, fall. C-reactive protein is a sensitive marker and an independent predictor of atherosclerotic cardiovascular risk. Procalcitonin helps distinguish sepsis from other systemic inflammation, while ESR is nonspecific and markedly raised in giant cell arteritis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Behaviour",
+     "Clinical use"
+    ],
+    "rows": [
+     [
+      "CRP",
+      "Positive reactant",
+      "Sensitive inflammation and cardiovascular risk"
+     ],
+     [
+      "Fibrinogen",
+      "Positive reactant",
+      "Raises ESR"
+     ],
+     [
+      "Procalcitonin",
+      "Rises in bacterial infection",
+      "Marker of sepsis"
+     ],
+     [
+      "Albumin",
+      "Negative reactant",
+      "Falls in inflammation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Key exam pearls: **histamine** is the main vasodilating amine; **IL-5** drives eosinophil production; **IL-17** from Th17 cells recruits neutrophils; the MAC is built from C5b to C9. Chemical fixatives are not mediators, so do not confuse them with inflammatory molecules. Recall these pairings for NEET-PG and USMLE questions.",
+   "say": "Key exam pearls: histamine is the main vasodilating amine; IL-5 drives eosinophil production; IL-17 from Th17 cells recruits neutrophils; and the membrane attack complex is built from C5b to C9. Recall these pairings for NEET-PG and USMLE questions.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "49a01a3b-35ac-4184-8f3a-7b3a9ad39cdc",
+  "a30490e4-264e-4f06-beec-cce4ca052eeb",
+  "51c05b24-e326-4145-89eb-6a1bf460b91d"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology",
+  "Mohan H. Textbook of Pathology, Jaypee Brothers"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 402
+ }
+}

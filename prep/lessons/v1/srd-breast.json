@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "srd-breast",
+ "subject": "ss-radiology",
+ "title": "Breast imaging: hamartoma, fibroadenoma and phyllodes tumour",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **breast hamartoma** is a benign, developmental, tumour-like malformation rather than a true neoplasm. Ducts, lobules, fibrous stroma and mature fat are arranged haphazardly inside a thin **pseudocapsule**. Because the tissue is cytologically normal, it grows slowly and stays well defined.",
+   "say": "A breast hamartoma is a benign, developmental, tumour-like malformation rather than a true neoplasm. Ducts, lobules, fibrous stroma and mature fat are arranged haphazardly inside a thin pseudocapsule. Because the tissue is cytologically normal, it grows slowly and stays well defined.",
+   "vis": null
+  },
+  {
+   "tx": "On mammography, the hallmark is an encapsulated lesion with both fat and soft-tissue density, called the **breast within a breast** sign. Fat alone would suggest a lipoma, so the mixed density is the key clue. Ultrasound shows a heterogeneous, circumscribed mass.",
+   "say": "On mammography, the hallmark is an encapsulated lesion with both fat and soft-tissue density, called the breast within a breast sign. Fat alone would suggest a lipoma, so the mixed density is the key clue. Ultrasound shows a heterogeneous, circumscribed mass.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hamartoma",
+     "points": [
+      "Mixed fat and glandular density",
+      "Encapsulated, breast within a breast",
+      "Slow, well-defined growth"
+     ]
+    },
+    "right": {
+     "title": "Lipoma",
+     "points": [
+      "Fat density only",
+      "Encapsulated and well defined",
+      "Usually no glandular elements"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because a hamartoma contains normal breast elements, a **core needle biopsy** can look deceptively normal. Always correlate the radiology with the pathology. A benign biopsy that conflicts with a suspicious image needs further action, such as repeat biopsy or excision.",
+   "say": "Because a hamartoma contains normal breast elements, a core needle biopsy can look deceptively normal. Always correlate the radiology with the pathology. A benign biopsy that conflicts with a suspicious image needs further action, such as repeat biopsy or excision.",
+   "vis": null
+  },
+  {
+   "tx": "Management depends on the picture. Typical lesions get reassurance and **interval imaging** to confirm stability. Excision is reserved for uncertain diagnoses or symptomatic lesions. Breast MRI helps large or atypical cases. Hamartomas carry an excellent prognosis, and malignancy arising within them is rare.",
+   "say": "Management depends on the picture. Typical lesions get reassurance and interval imaging to confirm stability. Excision is reserved for uncertain diagnoses or symptomatic lesions. Breast MRI helps large or atypical cases. Hamartomas carry an excellent prognosis, and malignancy arising within them is rare.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mixed density lesion"
+     },
+     {
+      "id": "b",
+      "label": "Core biopsy with correlation"
+     },
+     {
+      "id": "c",
+      "label": "Concordant benign"
+     },
+     {
+      "id": "d",
+      "label": "Interval imaging"
+     },
+     {
+      "id": "e",
+      "label": "Discordant: excise"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "e"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **fibroadenoma** is the commonest benign solid breast lump in young women. It is a smooth, firm, mobile, well-defined mass, nicknamed the breast mouse. Ultrasound is first-line in younger women and shows an oval, circumscribed, hypoechoic lesion. Mammography is added in older patients.",
+   "say": "A fibroadenoma is the commonest benign solid breast lump in young women. It is a smooth, firm, mobile, well-defined mass, nicknamed the breast mouse. Ultrasound is first-line in younger women and shows an oval, circumscribed, hypoechoic lesion. Mammography is added in older patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Young women",
+     "Older women"
+    ],
+    "rows": [
+     [
+      "First-line imaging",
+      "Ultrasound",
+      "Mammography added"
+     ],
+     [
+      "Typical sonographic look",
+      "Oval, hypoechoic, circumscribed",
+      "Same features, check for carcinoma"
+     ],
+     [
+      "Tissue diagnosis",
+      "Core biopsy",
+      "Core biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **phyllodes tumour** is a fibroepithelial neoplasm with stromal hypercellularity. It grows faster than a fibroadenoma and can be benign, borderline or malignant. Core biopsy cannot reliably separate it from a cellular fibroadenoma, so a rapidly enlarging or giant lesion needs excision. Axillary dissection is not indicated because spread is haematogenous.",
+   "say": "A phyllodes tumour is a fibroepithelial neoplasm with stromal hypercellularity. It grows faster than a fibroadenoma and can be benign, borderline or malignant. Core biopsy cannot reliably separate it from a cellular fibroadenoma, so a rapidly enlarging or giant lesion needs excision. Axillary dissection is not indicated because spread is haematogenous.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-breast-hamartoma",
+  "kb-reference-breast-fibroadenoma",
+  "kb-reference-phyllodes-tumour"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 1879,
+  "itemN": 0
+ }
+}

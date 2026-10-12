@@ -1,0 +1,162 @@
+{
+ "v": 1,
+ "module": "ana-nervous-senses",
+ "subject": "anatomy",
+ "title": "Development of the nervous system, eye and ear",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **neural tube** arises from the neural plate by neurulation and gives rise to the entire central nervous system. Its cranial part forms three primary brain vesicles: **prosencephalon**, **mesencephalon** and **rhombencephalon**. The caudal part forms the spinal cord. Closure begins in the future cervical region and spreads both cranially and caudally, finishing around day 27.",
+   "say": "The neural tube arises from the neural plate by neurulation and gives rise to the entire central nervous system. Its cranial part forms three primary brain vesicles: the prosencephalon, the mesencephalon and the rhombencephalon. The caudal part forms the spinal cord. Closure begins in the future cervical region and spreads both cranially and caudally, finishing around day 27.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Primary vesicle",
+     "Secondary vesicle",
+     "Main adult derivatives"
+    ],
+    "rows": [
+     [
+      "Prosencephalon",
+      "Telencephalon",
+      "Cerebral hemispheres, lateral ventricles"
+     ],
+     [
+      "Prosencephalon",
+      "Diencephalon",
+      "Thalamus, hypothalamus, retina, third ventricle"
+     ],
+     [
+      "Mesencephalon",
+      "Mesencephalon",
+      "Midbrain, cerebral aqueduct"
+     ],
+     [
+      "Rhombencephalon",
+      "Metencephalon and myelencephalon",
+      "Cerebellum, pons, medulla, fourth ventricle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **alar plate** lies dorsally and gives sensory, afferent neurons such as posterior horn cells. The **basal plate** lies ventrally and gives motor, efferent neurons. Visceral efferent columns, which supply cardiac and smooth muscle, arise from the basal plate as lateral horn cells. Anterior horn cells, which supply skeletal muscle, also come from the basal plate.",
+   "say": "The alar plate lies dorsally and gives sensory, afferent neurons such as posterior horn cells. The basal plate lies ventrally and gives motor, efferent neurons. Visceral efferent columns, which supply cardiac and smooth muscle, arise from the basal plate as lateral horn cells. Anterior horn cells, which supply skeletal muscle, also come from the basal plate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alar plate",
+     "points": [
+      "Dorsal part of neural tube",
+      "Sensory, afferent",
+      "Posterior horn cells",
+      "Carries pain and temperature pathways"
+     ]
+    },
+    "right": {
+     "title": "Basal plate",
+     "points": [
+      "Ventral part of neural tube",
+      "Motor, efferent",
+      "Anterior horn cells for skeletal muscle",
+      "Lateral horn cells for visceral muscle"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **optic vesicle** is an outgrowth of the prosencephalon, so the retina and optic nerve are neuroectodermal. The vesicle invaginates to form the **optic cup**, whose outer thin layer becomes the retinal pigmented epithelium. The **lens placode** is surface ectoderm and forms the lens. Failure of the optic fissure to close produces a **coloboma**.",
+   "say": "The optic vesicle is an outgrowth of the prosencephalon, so the retina and optic nerve are neuroectodermal. The vesicle invaginates to form the optic cup, whose outer thin layer becomes the retinal pigmented epithelium. The lens placode is surface ectoderm and forms the lens. Failure of the optic fissure to close produces a coloboma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prosencephalon outgrowth"
+     },
+     {
+      "id": "b",
+      "label": "Optic vesicle"
+     },
+     {
+      "id": "c",
+      "label": "Optic cup"
+     },
+     {
+      "id": "d",
+      "label": "Retina and RPE"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **pituitary** has two embryological origins. The anterior lobe, the adenohypophysis, develops from **Rathke pouch**, an ectodermal upgrowth of the stomodeum roof. The posterior lobe, the neurohypophysis, develops from the infundibulum, a downgrowth of the diencephalon floor. A **craniopharyngioma** arising from remnants of Rathke pouch is a classic exam association. The **inner ear** develops from the **otic vesicle** and is adult sized by about 20 to 22 weeks.",
+   "say": "The pituitary has two embryological origins. The anterior lobe, the adenohypophysis, develops from Rathke pouch, an ectodermal upgrowth of the stomodeum roof. The posterior lobe, the neurohypophysis, develops from the infundibulum, a downgrowth of the diencephalon floor. A craniopharyngioma arising from remnants of Rathke pouch is a classic exam association. The inner ear develops from the otic vesicle and is adult sized by about 20 to 22 weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adenohypophysis",
+     "points": [
+      "From Rathke pouch",
+      "Stomodeal ectoderm origin",
+      "Prolactin secreting anterior lobe",
+      "Craniopharyngioma origin"
+     ]
+    },
+    "right": {
+     "title": "Neurohypophysis",
+     "points": [
+      "From infundibulum",
+      "Diencephalic origin",
+      "Stores ADH and oxytocin",
+      "Pituicytes are glial cells"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neural tube defects are high yield. Failure of the **rostral neuropore** to close causes **anencephaly**, usually between days 23 and 26. Failure of caudal closure causes **spina bifida**. On ultrasound, spina bifida shows the **lemon sign** and the **banana sign**. The spinal cord ends at L3 in newborns and reaches the adult level around L1, which is why lumbar puncture sites differ with age.",
+   "say": "Neural tube defects are high yield. Failure of the rostral neuropore to close causes anencephaly, usually between days 23 and 26. Failure of caudal closure causes spina bifida. On ultrasound, spina bifida shows the lemon sign and the banana sign. The spinal cord ends at L3 in newborns and reaches the adult level around L1, which is why lumbar puncture sites differ with age.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "2525fce8-2786-4771-a54b-4756ee0cf02a",
+  "52aeaaf0-b1a9-4f3f-a626-9e263be754ea",
+  "0fce1456-8b13-48a2-a910-fd919fcc407b"
+ ],
+ "src": [],
+ "refs": [
+  "Inderbir Singh's Human Embryology, tenth edition",
+  "Langman's Medical Embryology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 104
+ }
+}

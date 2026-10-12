@@ -1,0 +1,187 @@
+{
+ "v": 1,
+ "module": "ana-organ-systems",
+ "subject": "anatomy",
+ "title": "Respiratory, urinary, endocrine, skin and reproductive histology: high-yield essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **respiratory tract** changes epithelium as airways narrow. Trachea and bronchi are lined by **pseudostratified ciliated columnar epithelium** with goblet cells. Cartilage is present in the walls of the trachea and bronchi, and it disappears in bronchioles, which is the key feature separating a bronchiole from a bronchus. Clara cells appear in terminal and respiratory bronchioles.",
+   "say": "The respiratory tract changes its lining as the airways narrow. The trachea and bronchi are lined by pseudostratified ciliated columnar epithelium with goblet cells. Cartilage is present in their walls, and it disappears in bronchioles. This absence of cartilage is the key feature that separates a bronchiole from a bronchus. Clara cells appear in the terminal and respiratory bronchioles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Airway",
+     "Lining epithelium",
+     "Cartilage"
+    ],
+    "rows": [
+     [
+      "Trachea and bronchi",
+      "Pseudostratified ciliated columnar",
+      "Present"
+     ],
+     [
+      "Bronchioles",
+      "Simple columnar then cuboidal",
+      "Absent"
+     ],
+     [
+      "Terminal bronchiole",
+      "Ciliated cuboidal with Clara cells",
+      "Absent"
+     ],
+     [
+      "Respiratory bronchiole",
+      "Cuboidal with Clara cells",
+      "Absent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **alveolus** is lined by two pneumocyte types. **Type I pneumocytes** are squamous cells that cover more than 90 percent of the alveolar surface and form the blood-air barrier. **Type II pneumocytes** are cuboidal cells with lamellar bodies that secrete **surfactant**, and they are the stem cells that regenerate the alveolar lining after injury. Alveolar macrophages clear debris.",
+   "say": "The alveolus is lined by two types of pneumocytes. Type I pneumocytes are squamous cells covering more than ninety percent of the alveolar surface, and they form the blood-air barrier. Type II pneumocytes are cuboidal cells with lamellar bodies that secrete surfactant. They also act as the progenitor cells that regenerate the alveolar lining after injury. Alveolar macrophages clear debris.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I pneumocyte",
+     "points": [
+      "Squamous, over 90 percent of surface",
+      "Forms blood-air barrier",
+      "Cannot divide after injury"
+     ]
+    },
+    "right": {
+     "title": "Type II pneumocyte",
+     "points": [
+      "Cuboidal, secretory",
+      "Lamellar bodies make surfactant",
+      "Replaces damaged type I cells"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Clara cells** are non-ciliated secretory cells of the bronchioles that produce a protective lipoprotein and are functionally similar to type II pneumocytes. **Basal cells** are stem cells of the larger airways, **brush cells** have sensory afferent contact, and **neuroendocrine (Kulchitsky) cells** are most numerous in the fetal lung. Squamous cells are not normal in the lung and indicate metaplasia.",
+   "say": "Clara cells are non-ciliated secretory cells of the bronchioles. They produce a protective lipoprotein and are functionally similar to type II pneumocytes. Basal cells are stem cells of the larger airways. Brush cells have sensory contact with afferent nerve fibres. Neuroendocrine Kulchitsky cells are most numerous in the fetal lung. Squamous cells are not normal in the lung and indicate metaplasia.",
+   "vis": null
+  },
+  {
+   "tx": "In the **kidney**, the glomerulus sits in the cortex and is enclosed by **Bowman capsule**. Its inner layer is formed by **podocytes**, the visceral epithelium resting on the glomerular basement membrane. At the vascular pole lies the **juxtaglomerular apparatus**. Its **granular JG cells** secrete renin, while the **macula densa** of the distal tubule monitors the ionic composition of tubular fluid and signals the JG cells to adjust renin release.",
+   "say": "In the kidney, the glomerulus sits in the cortex and is enclosed by Bowman capsule. Its inner layer is formed by podocytes, the visceral epithelium resting on the glomerular basement membrane. At the vascular pole lies the juxtaglomerular apparatus. Its granular JG cells secrete renin, while the macula densa of the distal tubule monitors the ionic composition of tubular fluid and signals the JG cells to adjust renin release.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Macula densa"
+     },
+     {
+      "id": "b",
+      "label": "Senses tubular ionic composition"
+     },
+     {
+      "id": "c",
+      "label": "JG cells"
+     },
+     {
+      "id": "d",
+      "label": "Renin release"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **epidermis** has layers from deep to superficial: basal (stratum basale), spinosum, granulosum, lucidum (only in thick skin) and corneum. **Melanocytes** and **Merkel cells** sit in the basal layer, while **Langerhans cells** are immunologically active dendritic cells found mainly in the spinous layer. Their characteristic **Birbeck granules** are rod-shaped, tennis-racket organelles unique to these cells.",
+   "say": "The epidermis has layers from deep to superficial: basal, spinous, granular, clear in thick skin only, and cornified. Melanocytes and Merkel cells sit in the basal layer. Langerhans cells are immunologically active dendritic cells found mainly in the spinous layer. Their characteristic Birbeck granules are rod-shaped, tennis-racket organelles found only in these cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Layer",
+     "Key cells"
+    ],
+    "rows": [
+     [
+      "Stratum corneum",
+      "Anucleated corneocytes"
+     ],
+     [
+      "Stratum granulosum",
+      "Lamellar bodies release lipids"
+     ],
+     [
+      "Stratum spinosum",
+      "Langerhans cells"
+     ],
+     [
+      "Stratum basale",
+      "Melanocytes, Merkel cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the **testis**, **Sertoli cells** nurture developing germ cells and form the **blood-testis barrier** through tight junctions, isolating later germ cell stages from the blood. **Leydig cells** are epithelioid interstitial cells that secrete male sex steroids, mainly **androgens**. In the **ovary**, a mature graafian follicle carries the cumulus oophorus around the oocyte, with a PAS-positive **zona pellucida** and theca and granulosa layers.",
+   "say": "In the testis, Sertoli cells nurture developing germ cells and form the blood-testis barrier through tight junctions, isolating later germ cell stages from the blood. Leydig cells are epithelioid interstitial cells that secrete male sex steroids, mainly androgens. In the ovary, a mature graafian follicle carries the cumulus oophorus around the oocyte, with a PAS-positive zona pellucida and theca and granulosa layers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sertoli cell",
+     "points": [
+      "Nurtures developing germ cells",
+      "Forms blood-testis barrier",
+      "Tight junctions between cells"
+     ]
+    },
+    "right": {
+     "title": "Leydig cell",
+     "points": [
+      "Interstitial, epithelioid",
+      "Secretes male sex steroids",
+      "Lies between seminiferous tubules"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "7fee21b0-2fb8-4cb7-b772-fbe5fcbb87de",
+  "babc3683-1eae-43c5-ad17-5a0ccd785340",
+  "e25e8e0a-6b34-4aa3-813c-8e59ba0f7a1e"
+ ],
+ "src": [],
+ "refs": [
+  "Inderbir Singh's Textbook of Human Histology",
+  "Ross and Pawlina Histology: A Text and Atlas"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 130
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "module": "pat-cytogenetics",
+ "subject": "pathology",
+ "title": "Cytogenetic disorders: karyotyping and key syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Karyotyping** is the study of chromosomes, usually arrested in metaphase with colchicine and stained with Giemsa to give G-bands. Chromosomes are arranged in order of decreasing length. Any change in number or structure of chromosomes, including trisomies, monosomies and translocations, can be detected. It is the test used for chromosomal disorders, not for single-gene autosomal dominant or recessive disorders.",
+   "say": "Karyotyping is the study of chromosomes. Cells are arrested in metaphase using colchicine and stained with Giemsa, which gives G-bands. Chromosomes are arranged in order of decreasing length. Any change in number or structure can be detected, including trisomies, monosomies and translocations. It is the test for chromosomal disorders, not for single-gene autosomal dominant or recessive disorders.",
+   "vis": null
+  },
+  {
+   "tx": "**Down syndrome** is trisomy 21, karyotype 47,XX,+21 or 47,XY,+21, and is the commonest chromosomal disorder compatible with live birth. Most cases arise from **maternal nondisjunction**. A **Robertsonian translocation**, usually involving chromosome 14, accounts for about 2 to 4 percent of cases. Features include a flat face, upslanting palpebral fissures, a single palmar crease and an increased gap between the first and second toes.",
+   "say": "Down syndrome is trisomy 21, with karyotype 47,XX,+21 in females or 47,XY,+21 in males. Most cases arise from maternal nondisjunction. A Robertsonian translocation, usually with chromosome 14, accounts for about 2 to 4 percent of cases. Features include a flat face, upslanting palpebral fissures, a single palmar crease and a wide gap between the first and second toes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Approximate share",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Maternal nondisjunction",
+      "Majority",
+      "Risk rises with maternal age"
+     ],
+     [
+      "Robertsonian translocation",
+      "2 to 4 percent",
+      "Can be inherited from a carrier parent"
+     ],
+     [
+      "Mosaicism",
+      "Small minority",
+      "Milder phenotype possible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trisomies cause most chromosomal abortions. **Edwards syndrome** is trisomy 18 and **Patau syndrome** is trisomy 13. Both have severe multisystem malformations and very poor survival. Patau syndrome shows holoprosencephaly and polydactyly, while Edwards syndrome shows rocker-bottom feet and clenched hands with overlapping fingers. Trisomy 21 is the most survivable of the three.",
+   "say": "Trisomies cause most chromosomal abortions. Edwards syndrome is trisomy 18 and Patau syndrome is trisomy 13. Both have severe multisystem malformations and very poor survival. Patau syndrome shows holoprosencephaly and polydactyly, while Edwards syndrome shows rocker-bottom feet and clenched hands. Trisomy 21 is the most survivable of the three.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Trisomy",
+     "Hallmark feature"
+    ],
+    "rows": [
+     [
+      "Down",
+      "21",
+      "Flat face, single palmar crease"
+     ],
+     [
+      "Edwards",
+      "18",
+      "Rocker-bottom feet, clenched hands"
+     ],
+     [
+      "Patau",
+      "13",
+      "Holoprosencephaly, polydactyly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lyonisation** is the random inactivation of one X chromosome in each female cell, forming a Barr body, and it occurs around day 16 of embryonic life. The inactivation is inherited by daughter cells. The **XIST** gene drives this process. **Mosaicism** means that two or more cell lines arise from one zygote, as in some Turner cases with 45,X/46,XX. **FISH** uses fluorescent probes on interphase or metaphase cells to detect specific deletions or duplications quickly, such as 22q11 deletion.",
+   "say": "Lyonisation is the random inactivation of one X chromosome in each female cell, forming a Barr body around day 16 of embryonic life. The XIST gene drives this process. Mosaicism means two or more cell lines arise from one zygote, as in some Turner cases with 45,X and 46,XX. FISH uses fluorescent probes to detect specific deletions or duplications quickly, such as the 22q11 deletion.",
+   "vis": null
+  },
+  {
+   "tx": "**22q11.2 deletion syndrome** covers DiGeorge syndrome and velocardiofacial syndrome. The deletion involves the TBX1 region, causing thymic and parathyroid hypoplasia, so patients have T-cell immunodeficiency and hypocalcaemia with tetany in the neonatal period. Cardiac defects and cleft palate are common. Later, schizophrenia, bipolar disorder and ADHD occur more often. Intelligence is usually not the central problem, so mental retardation is not a typical feature.",
+   "say": "The 22q11.2 deletion syndrome includes DiGeorge syndrome and velocardiofacial syndrome. The deletion involves the TBX1 region, causing thymic and parathyroid hypoplasia. Patients have T-cell immunodeficiency and hypocalcaemia with neonatal tetany. Cardiac defects and cleft palate are common. Later, schizophrenia, bipolar disorder and ADHD occur more often. Intellectual disability is not a typical feature.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "00cb8783-7769-4c3a-ad21-42cb46a31d9b",
+  "423d5d29-5d8e-4a2d-b6ca-8dd41e27cd83",
+  "7818c1ec-5109-4d2e-bd92-2f999bc7ee93"
+ ],
+ "src": [],
+ "refs": [
+  "Mohan H. Textbook of Pathology. Jaypee Brothers Medical Publishers; 7th edition, 2015"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 232
+ }
+}

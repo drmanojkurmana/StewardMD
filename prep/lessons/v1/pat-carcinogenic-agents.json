@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "pat-carcinogenic-agents",
+ "subject": "pathology",
+ "title": "Carcinogenic agents and oncogenic viruses",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Carcinogens act either directly or after **metabolic activation**. Most organic carcinogens, such as polycyclic aromatic hydrocarbons, aromatic amines and azo dyes, need cytochrome P450 enzymes to become reactive. Aflatoxin B1 from Aspergillus flavus is converted to an epoxide and causes hepatocellular carcinoma, especially with hepatitis B co-infection in parts of Africa and the Far East. Vinyl chloride is also activated to an epoxide.",
+   "say": "Carcinogens act either directly or after metabolic activation. Most organic carcinogens, such as polycyclic aromatic hydrocarbons, aromatic amines and azo dyes, need cytochrome P450 enzymes to become reactive. Aflatoxin B1 from Aspergillus flavus is converted to an epoxide and causes hepatocellular carcinoma, especially with hepatitis B co-infection in parts of Africa and the Far East. Vinyl chloride is also activated to an epoxide.",
+   "vis": null
+  },
+  {
+   "tx": "Occupational carcinogens are high yield. **Vinyl chloride** causes hepatic angiosarcoma, along with arsenic and Thorotrast. Asbestos and chromium compounds cause lung cancer. Cadmium is linked to prostate cancer, ethylene oxide to leukaemia, and aniline dyes to bladder cancer. Benzene is linked to leukaemia.",
+   "say": "Occupational carcinogens are high yield. Vinyl chloride causes hepatic angiosarcoma, along with arsenic and Thorotrast. Asbestos and chromium compounds cause lung cancer. Cadmium is linked to prostate cancer, ethylene oxide to leukaemia, and aniline dyes to bladder cancer. Benzene is linked to leukaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Main tumour"
+    ],
+    "rows": [
+     [
+      "Vinyl chloride",
+      "Hepatic angiosarcoma"
+     ],
+     [
+      "Asbestos",
+      "Lung cancer"
+     ],
+     [
+      "Cadmium",
+      "Prostate cancer"
+     ],
+     [
+      "Ethylene oxide",
+      "Leukaemia"
+     ],
+     [
+      "Aniline dyes",
+      "Bladder cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radiation and UV light cause cancer through DNA damage. **Ionising radiation** causes leukaemia, breast carcinoma, papillary thyroid carcinoma and skin cancers, and radon-222 is a lung carcinogen. **Xeroderma pigmentosum** is an autosomal recessive defect in nucleotide excision repair of UV-induced pyrimidine dimers, so patients develop sun-exposed skin tumours, including melanoma.",
+   "say": "Radiation and UV light cause cancer through DNA damage. Ionising radiation causes leukaemia, breast carcinoma, papillary thyroid carcinoma and skin cancers, and radon-222 is a lung carcinogen. Xeroderma pigmentosum is an autosomal recessive defect in nucleotide excision repair of UV-induced pyrimidine dimers, so patients develop sun-exposed skin tumours, including melanoma.",
+   "vis": null
+  },
+  {
+   "tx": "HPV oncoproteins drive cervical and other carcinomas. The **E6** protein binds and degrades p53, while **E7** binds Rb, releasing E2F and inactivating CDK inhibitors. HPV 16 and 18 cause about 70 percent of cervical cancers. Condyloma acuminatum is usually caused by HPV 6 and 11, which are low-risk types, and shows koilocytosis.",
+   "say": "HPV oncoproteins drive cervical and other carcinomas. The E6 protein binds and degrades p53, while E7 binds Rb, releasing E2F and inactivating CDK inhibitors. HPV 16 and 18 cause about 70 percent of cervical cancers. Condyloma acuminatum is usually caused by HPV 6 and 11, which are low-risk types, and shows koilocytosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "HPV type",
+     "Lesion"
+    ],
+    "rows": [
+     [
+      "6 and 11",
+      "Condyloma acuminatum"
+     ],
+     [
+      "16 and 18",
+      "Cervical carcinoma"
+     ],
+     [
+      "16",
+      "Bowen's disease"
+     ],
+     [
+      "16",
+      "Bowenoid papulosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remember that **radiation** risk in the thyroid is highest for papillary carcinoma in childhood, and that Kaposi sarcoma is linked to HHV-8 and HIV. Chemical and viral causes are tested together. Consolidate by linking each agent to one tumour and one mechanism.",
+   "say": "Remember that radiation risk in the thyroid is highest for papillary carcinoma in childhood, and that Kaposi sarcoma is linked to HHV-8 and HIV. Chemical and viral causes are tested together. Consolidate by linking each agent to one tumour and one mechanism.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "601275ff-b2e0-4ef2-a2f9-acb6db94eddb",
+  "8c98e23c-b24b-417d-bf05-a8be166db814",
+  "12ca604d-8eaa-4ded-b302-811dab8b732e"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease (Kumar V, Abbas AK, Aster JC)",
+  "Harsh Mohan Textbook of Pathology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 143
+ }
+}

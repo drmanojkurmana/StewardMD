@@ -1,0 +1,163 @@
+{
+ "v": 1,
+ "module": "ana-intestines",
+ "subject": "anatomy",
+ "title": "Small and large intestine: vessels, appendix and watershed zones",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **jejunum** forms the proximal two fifths of the small intestine and the **ileum** the distal three fifths, with no sharp line between them. The jejunum is thicker, wider and has tall, closely packed plicae circulares. It has fewer arcades, with one or two long vasa recta, while the ileum has four or five arcades with shorter vasa recta.",
+   "say": "The jejunum forms the proximal two fifths of the small intestine and the ileum the distal three fifths, with no sharp line between them. The jejunum is thicker and wider, and has tall, closely packed plicae circulares. It has one or two arcades sending out long vasa recta, whereas the ileum has four or five arcades with shorter vasa recta.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Jejunum",
+     "points": [
+      "Proximal two fifths",
+      "Thicker, wider",
+      "Tall, dense plicae",
+      "One or two arcades",
+      "Long vasa recta"
+     ]
+    },
+    "right": {
+     "title": "Ileum",
+     "points": [
+      "Distal three fifths",
+      "Thinner, narrower",
+      "Sparse, absent distally",
+      "Four or five arcades",
+      "Short vasa recta"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The superior mesenteric artery supplies the midgut, from the second part of the duodenum to the proximal half of the transverse colon. Its **ileocolic**, **right colic** and **middle colic** branches join the **marginal artery of Drummond**, a continuous arcade along the inner border of the colon. The inferior mesenteric artery supplies the left third of the transverse colon, the descending and sigmoid colon, and the upper rectum.",
+   "say": "The superior mesenteric artery supplies the midgut, from the second part of the duodenum to the proximal half of the transverse colon. Its ileocolic, right colic and middle colic branches join the marginal artery of Drummond, a continuous arcade along the inner border of the colon. The inferior mesenteric artery supplies the left third of the transverse colon, the descending and sigmoid colon, and the upper rectum.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Superior mesenteric"
+     },
+     {
+      "id": "b",
+      "label": "Ileocolic, right, middle colic"
+     },
+     {
+      "id": "c",
+      "label": "Marginal artery"
+     },
+     {
+      "id": "d",
+      "label": "Left colic, sigmoid"
+     },
+     {
+      "id": "e",
+      "label": "Inferior mesenteric"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "e",
+      "d"
+     ],
+     [
+      "d",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **watershed areas** of the colon are weak points where the marginal artery anastomoses are incomplete. **Griffith point** lies at the splenic flexure, between the superior and inferior mesenteric systems. **Sudeck point** lies at the rectosigmoid junction, between the inferior mesenteric and internal iliac arteries. The splenic flexure is the most ischaemia-prone site.",
+   "say": "The watershed areas of the colon are weak points where marginal artery anastomoses are incomplete. Griffith point lies at the splenic flexure, between the superior and inferior mesenteric systems. Sudeck point lies at the rectosigmoid junction, between the inferior mesenteric and internal iliac arteries. The splenic flexure is the most ischaemia-prone site.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Watershed point",
+     "Location",
+     "Supply junction"
+    ],
+    "rows": [
+     [
+      "Griffith point",
+      "Splenic flexure",
+      "Superior and inferior mesenteric"
+     ],
+     [
+      "Sudeck point",
+      "Rectosigmoid junction",
+      "Inferior mesenteric and internal iliac"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **appendix** arises from the posteromedial caecal wall, about 2 cm below the ileocaecal junction. Its base is fixed but its tip varies. The **retrocaecal** position is commonest, at about 65 percent, followed by the **pelvic** position at about 30 percent. The appendix is supplied by the appendicular artery, a branch of the posterior caecal artery from the ileocolic artery.",
+   "say": "The appendix arises from the posteromedial caecal wall, about 2 cm below the ileocaecal junction. Its base is fixed but its tip varies. The retrocaecal position is commonest, at about 65 percent, followed by the pelvic position at about 30 percent. The appendix is supplied by the appendicular artery, a branch of the posterior caecal artery from the ileocolic artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Position",
+     "Approximate frequency"
+    ],
+    "rows": [
+     [
+      "Retrocaecal",
+      "About 65 percent"
+     ],
+     [
+      "Pelvic",
+      "About 30 percent"
+     ],
+     [
+      "Pre or post ileal",
+      "About 5 percent"
+     ],
+     [
+      "Promontoric",
+      "Under 1 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **mesentery** varies along the colon. The transverse and sigmoid colon have mesenteries, and the ascending and descending colon are largely retroperitoneal. The **rectum** lies retroperitoneal below the rectosigmoid junction. The **superior rectal vein** drains into the inferior mesenteric vein, while the inferior rectal vein drains into the internal pudendal vein.",
+   "say": "The mesentery varies along the colon. The transverse and sigmoid colon have mesenteries, and the ascending and descending colon are largely retroperitoneal. The rectum lies retroperitoneal below the rectosigmoid junction. The superior rectal vein drains into the inferior mesenteric vein, while the inferior rectal vein drains into the internal pudendal vein.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "59f63253-8911-4deb-a386-a6bc11fa2488",
+  "0ea4ed34-d02e-49ac-943e-81c9e7b819a6",
+  "2a22a227-c81c-4d09-8232-62aebd967118"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 118
+ }
+}

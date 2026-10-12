@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "ans-inhalational",
+ "subject": "anaesthesia",
+ "title": "Inhalational anaesthetic agents: key pharmacology for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Inhalational agents work through their **partial pressure** in the brain. The **minimum alveolar concentration** (MAC) is the alveolar concentration that stops movement in 50 percent of patients to a standard surgical stimulus. Low MAC means high potency, so halothane (0.75) is more potent than desflurane (6.0).",
+   "say": "Inhalational agents work through their partial pressure in the brain. The minimum alveolar concentration, or MAC, is the alveolar concentration that stops movement in 50 percent of patients to a standard surgical stimulus. A low MAC means high potency, so halothane, with a MAC of 0.75, is more potent than desflurane, with a MAC of 6.0.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "MAC (%)",
+     "Potency"
+    ],
+    "rows": [
+     [
+      "Halothane",
+      "0.75",
+      "High"
+     ],
+     [
+      "Isoflurane",
+      "1.2",
+      "High"
+     ],
+     [
+      "Sevoflurane",
+      "2.0",
+      "Moderate"
+     ],
+     [
+      "Desflurane",
+      "6.0",
+      "Low"
+     ],
+     [
+      "Nitrous oxide",
+      "104",
+      "Lowest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **blood gas partition coefficient** governs speed of induction and recovery. A low value means little agent dissolves in blood, so alveolar levels rise and fall quickly. Desflurane (0.42) and nitrous oxide (0.47) are fast; ether (12) and methoxyflurane (15) are slow. The **oil gas partition coefficient** relates to lipid solubility and potency, and MAC falls as oil solubility rises.",
+   "say": "The blood gas partition coefficient governs speed of induction and recovery. A low value means little agent dissolves in blood, so alveolar levels rise and fall quickly. Desflurane, at 0.42, and nitrous oxide, at 0.47, are fast. Ether, at 12, and methoxyflurane, at 15, are slow. The oil gas partition coefficient relates to lipid solubility and potency, and MAC falls as oil solubility rises.",
+   "vis": null
+  },
+  {
+   "tx": "Nitrous oxide is a colourless, non-inflammable gas with a MAC of 104 percent, so it cannot give complete anaesthesia alone. It is a good analgesic and a poor muscle relaxant, and it is used as a carrier gas. The **second gas effect** and **diffusion hypoxia** occur with nitrous oxide. Diffusion hypoxia follows abrupt stopping, so give 100 percent oxygen when tapering.",
+   "say": "Nitrous oxide is a colourless, non-inflammable gas with a MAC of 104 percent, so it cannot give complete anaesthesia alone. It is a good analgesic and a poor muscle relaxant, and it is used as a carrier gas. The second gas effect and diffusion hypoxia occur with nitrous oxide. Diffusion hypoxia follows abrupt stopping, so give 100 percent oxygen when tapering.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stop N2O abruptly"
+     },
+     {
+      "id": "b",
+      "label": "Rapid N2O efflux into alveoli"
+     },
+     {
+      "id": "c",
+      "label": "Dilutes alveolar oxygen"
+     },
+     {
+      "id": "d",
+      "label": "Hypoxia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Xenon** has a very low blood gas coefficient (0.115), so induction and emergence are rapid. It is non-explosive, environmentally safe and does not trigger malignant hyperthermia, but it is costly and has low potency. Its high density raises the work of breathing. **Sevoflurane** and **desflurane** are preferred for day care because they allow fast, controllable recovery.",
+   "say": "Xenon has a very low blood gas coefficient, of 0.115, so induction and emergence are rapid. It is non-explosive, environmentally safe and does not trigger malignant hyperthermia, but it is costly and has low potency. Its high density raises the work of breathing. Sevoflurane and desflurane are preferred for day care because they allow fast, controllable recovery.",
+   "vis": null
+  },
+  {
+   "tx": "Ether is slow to induce because its blood gas coefficient is high, and it is highly inflammable, so it must not be used with diathermy. Halothane dilates the bronchi and is the inhalational agent of choice in asthmatics. Halothane, however, can precipitate **malignant hyperthermia**, and succinylcholine accentuates this. Remember that most surgery is performed in stage 3, the stage of surgical anaesthesia.",
+   "say": "Ether is slow to induce because its blood gas coefficient is high, and it is highly inflammable, so it must not be used with diathermy. Halothane dilates the bronchi and is the inhalational agent of choice in asthmatics. Halothane, however, can precipitate malignant hyperthermia, and succinylcholine accentuates this. Remember that most surgery is performed in stage 3, the stage of surgical anaesthesia.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "53531f0c-becb-4175-b637-b2a626815848",
+  "e818abfc-d969-48a7-935f-d2d05d3c4554",
+  "f66a9478-28b0-4564-8694-90ea49833677"
+ ],
+ "src": [],
+ "refs": [
+  "Morgan GE, Mikhail MS, Murray MJ (Eds). Clinical Anesthesiology, Inhalation Anesthetics chapter"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 285
+ }
+}

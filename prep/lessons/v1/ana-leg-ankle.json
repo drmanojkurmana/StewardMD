@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "ana-leg-ankle",
+ "subject": "anatomy",
+ "title": "Leg and ankle joint: compartments, key muscles and stability",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The leg is divided by fascia into **anterior**, **lateral** and **posterior** compartments. The anterior compartment holds tibialis anterior, extensor hallucis longus, extensor digitorum longus and peroneus tertius. Its nerve is the **deep peroneal nerve** and its artery is the anterior tibial artery. These muscles mainly dorsiflex the foot.",
+   "say": "The leg is divided by fascia into anterior, lateral and posterior compartments. The anterior compartment holds tibialis anterior, extensor hallucis longus, extensor digitorum longus and peroneus tertius. Its nerve is the deep peroneal nerve and its artery is the anterior tibial artery. These muscles mainly dorsiflex the foot.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Compartment",
+     "Key muscles",
+     "Nerve"
+    ],
+    "rows": [
+     [
+      "Anterior",
+      "Tibialis anterior, EHL, EDL, peroneus tertius",
+      "Deep peroneal"
+     ],
+     [
+      "Lateral",
+      "Peroneus longus, peroneus brevis",
+      "Superficial peroneal"
+     ],
+     [
+      "Posterior",
+      "Triceps surae, plantaris, tibialis posterior, FHL, FDL",
+      "Tibial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **triceps surae** is gastrocnemius plus soleus, inserting into the calcaneus through the **tendocalcaneus** (Achilles tendon). Together they cause plantar flexion, and the tibial nerve (S1, S2) supplies them. Soleus is powerful and gastrocnemius acts quickly. Plantaris can also join the Achilles tendon.",
+   "say": "The triceps surae is gastrocnemius plus soleus, inserting into the calcaneus through the tendocalcaneus, also called the Achilles tendon. Together they cause plantar flexion, and the tibial nerve, with roots S1 and S2, supplies them. Soleus is powerful and gastrocnemius acts quickly. Plantaris can also join the Achilles tendon.",
+   "vis": null
+  },
+  {
+   "tx": "The soleus and gastrocnemius act as a **peripheral heart**. Their contraction squeezes valveless venous sinuses in the muscle, pushing blood up the leg. When they relax, blood is drawn in from superficial veins through perforators. Failure of this pump can contribute to venous stasis.",
+   "say": "The soleus and gastrocnemius act as a peripheral heart. Their contraction squeezes valveless venous sinuses in the muscle, pushing blood up the leg. When they relax, blood is drawn in from superficial veins through perforators. Failure of this pump can contribute to venous stasis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Calf muscle contracts"
+     },
+     {
+      "id": "b",
+      "label": "Sinuses emptied"
+     },
+     {
+      "id": "c",
+      "label": "Muscle relaxes"
+     },
+     {
+      "id": "d",
+      "label": "Blood drawn from superficial veins"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **ankle (talocrural) joint** is a hinge joint, formed by the tibia, fibula and talus. It is most stable in **dorsiflexion**, when the wider anterior part of the talus fits the tibial socket. Plantar flexion loosens the joint, which is why high heels can predispose to dislocation. Stability comes from bone shape, collateral ligaments and crossing tendons.",
+   "say": "The ankle, or talocrural, joint is a hinge joint formed by the tibia, fibula and talus. It is most stable in dorsiflexion, when the wider anterior part of the talus fits the tibial socket. Plantar flexion loosens the joint, which is why high heels can predispose to dislocation. Stability comes from bone shape, collateral ligaments and crossing tendons.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dorsiflexion",
+     "points": [
+      "Talus wider anterior part fits socket",
+      "Most stable position",
+      "Principal muscle: tibialis anterior"
+     ]
+    },
+    "right": {
+     "title": "Plantar flexion",
+     "points": [
+      "Narrow posterior part of talus in socket",
+      "Looser, dislocation risk",
+      "Principal muscles: gastrocnemius, soleus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **deltoid ligament** on the medial side attaches to the tibia, navicular, calcaneus and talus. The lateral ligaments, including the **posterior talofibular ligament**, resist inversion. Inversion sprains usually injure the lateral ligaments. The calcaneonavicular (spring) ligament is not part of the ankle joint stabilisers.",
+   "say": "The deltoid ligament on the medial side attaches to the tibia, navicular, calcaneus and talus. The lateral ligaments, including the posterior talofibular ligament, resist inversion. Inversion sprains usually injure the lateral ligaments. The calcaneonavicular, or spring, ligament is not counted among the ankle joint stabilisers.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "76e7bdf5-3051-466c-942a-3c4d80cd3987",
+  "79fed6d1-9ab9-45a0-b7d7-64dd4a46d41c",
+  "20833593-4fdf-4f2c-b1d7-05528ac9c8f6"
+ ],
+ "src": [],
+ "refs": [
+  "Snell's Clinical Anatomy by Regions",
+  "BD Chaurasia's Human Anatomy, Volume 2"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 145
+ }
+}

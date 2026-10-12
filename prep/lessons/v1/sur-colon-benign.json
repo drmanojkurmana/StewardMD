@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "sur-colon-benign",
+ "subject": "surgery",
+ "title": "Benign colorectal disease: diverticular disease, polyps and stomas",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Diverticula are outpouchings of colonic mucosa through the muscular wall. The **sigmoid colon** is the commonest site, because its narrow lumen allows very high intraluminal pressure. **Diverticulitis** is inflammation of these pouches. Diverticulosis is the most common cause of massive painless bleeding per rectum in adults, although haemorrhoids remain the most common cause of small bleeds. Bleeding usually stops spontaneously but rebleeds in a minority.",
+   "say": "Diverticula are outpouchings of colonic mucosa through the muscular wall. The sigmoid colon is the commonest site, because its narrow lumen allows very high intraluminal pressure. Diverticulitis is inflammation of these pouches. Diverticulosis is the most common cause of massive painless bleeding per rectum in adults, although haemorrhoids remain the most common cause of small bleeds. Bleeding usually stops spontaneously but rebleeds in a minority of patients.",
+   "vis": null
+  },
+  {
+   "tx": "The **Hinchey classification** grades complicated diverticulitis. Stage I is a pericolic or mesenteric abscess, stage II a pelvic abscess, stage III purulent peritonitis from a ruptured abscess, and stage IV faecal peritonitis from free perforation. Faecal peritonitis carries the worst prognosis and usually needs resection with a **Hartmann procedure**, which means resection, end colostomy and closure of the rectal stump. CT is the investigation of choice for diverticulitis.",
+   "say": "The Hinchey classification grades complicated diverticulitis. Stage one is a pericolic or mesenteric abscess, stage two a pelvic abscess, stage three purulent peritonitis from a ruptured abscess, and stage four faecal peritonitis from free perforation. Faecal peritonitis carries the worst prognosis and usually needs resection with a Hartmann procedure, meaning resection, end colostomy and closure of the rectal stump. CT is the investigation of choice for diverticulitis, while barium enema is used to look at diverticulosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hinchey stage",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "I",
+      "Pericolic or mesenteric abscess"
+     ],
+     [
+      "II",
+      "Pelvic abscess"
+     ],
+     [
+      "III",
+      "Purulent peritonitis"
+     ],
+     [
+      "IV",
+      "Faecal peritonitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Polyps are classified by malignant potential. **Adenomatous polyps** are the only truly premalignant type. Villous adenomas carry the highest risk, followed by tubular adenomas. Juvenile and hamartomatous polyps have no malignant potential in the solitary form, though those in **Peutz-Jeghers syndrome** can degenerate. Risk rises with size: under 1.5 cm is negligible, 1.5 to 2.5 cm intermediate, and over 2.5 cm substantial. Sessile lesions carry more risk than pedunculated ones.",
+   "say": "Polyps are classified by malignant potential. Adenomatous polyps are the only truly premalignant type. Villous adenomas carry the highest risk, followed by tubular adenomas. Juvenile and hamartomatous polyps have no malignant potential in the solitary form, though those in Peutz-Jeghers syndrome can degenerate. Risk rises with size: under 1.5 centimetres is negligible, 1.5 to 2.5 centimetres intermediate, and over 2.5 centimetres substantial. Sessile lesions carry more risk than pedunculated ones.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Polyp type",
+     "Malignant potential"
+    ],
+    "rows": [
+     [
+      "Villous adenoma",
+      "Highest"
+     ],
+     [
+      "Tubular adenoma",
+      "Intermediate"
+     ],
+     [
+      "Juvenile polyp",
+      "Negligible"
+     ],
+     [
+      "Peutz-Jeghers polyp",
+      "Low, but can degenerate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Familial adenomatous polyposis** is an autosomal dominant disease caused by mutations in the APC gene, with more than 100 adenomas. Colorectal cancer is almost certain without surgery, usually appearing by the fourth or fifth decade. **Gardner's syndrome** is a variant with osteomas, desmoid tumours and epidermoid cysts. Peutz-Jeghers syndrome has jejunal hamartomatous polyps and melanosis of the lips, but the cancer risk is lower than in FAP. Juvenile polyps are the commonest colonic hamartoma in children under five.",
+   "say": "Familial adenomatous polyposis is an autosomal dominant disease caused by mutations in the APC gene, with more than 100 adenomas. Colorectal cancer is almost certain without surgery, usually appearing by the fourth or fifth decade. Gardner's syndrome is a variant with osteomas, desmoid tumours and epidermoid cysts. Peutz-Jeghers syndrome has jejunal hamartomatous polyps and melanosis of the lips, but its cancer risk is lower than in FAP. Juvenile polyps are the commonest colonic hamartoma in children under five, and a toddler with a few drops of rectal blood most likely has one.",
+   "vis": null
+  },
+  {
+   "tx": "In **restorative proctocolectomy** with ileal pouch-anal anastomosis, the colon and rectum are removed, the sphincter is preserved, and a J-shaped ileal reservoir is joined to the anal canal. It is the procedure of choice for ulcerative colitis when a permanent ileostomy is to be avoided. Pouchitis is the most common complication, followed by small bowel obstruction. In emergency toxic megacolon, total abdominal colectomy with end ileostomy is preferred, and pouch reconstruction is avoided.",
+   "say": "In restorative proctocolectomy with ileal pouch-anal anastomosis, the colon and rectum are removed, the sphincter is preserved, and a J-shaped ileal reservoir is joined to the anal canal. It is the procedure of choice for ulcerative colitis when a permanent ileostomy is to be avoided. Pouchitis is the most common complication, followed by small bowel obstruction. In emergency toxic megacolon, total abdominal colectomy with end ileostomy is preferred, and pouch reconstruction is avoided in the critically ill.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Colectomy and rectal removal"
+     },
+     {
+      "id": "b",
+      "label": "J-pouch from ileum"
+     },
+     {
+      "id": "c",
+      "label": "Pouch to anal canal"
+     },
+     {
+      "id": "d",
+      "label": "Loop ileostomy often temporary"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "protective"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "774bc919-e781-42b6-9a2d-68d6867feafc",
+  "15010fcb-950e-46e2-8bcb-246768944481",
+  "56d45d37-0f97-475a-b2c3-ab1026e66c0b"
+ ],
+ "src": [],
+ "refs": [
+  "Schwartz's Principles of Surgery (Brunicardi et al.)",
+  "Bailey and Love's Short Practice of Surgery (Williams, Bulstrode, O'Connell)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 216
+ }
+}

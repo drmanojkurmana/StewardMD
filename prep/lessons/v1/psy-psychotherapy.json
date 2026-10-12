@@ -1,0 +1,156 @@
+{
+ "v": 1,
+ "module": "psy-psychotherapy",
+ "subject": "psychiatry",
+ "title": "Psychotherapy and behaviour therapy: core concepts for exams",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Behaviour therapy rests on **learning theory**: problem behaviours are learned and can be unlearned. Its main techniques include systematic desensitisation, flooding, aversion therapy, token economy and biofeedback. Systematic desensitisation, developed by Joseph Wolpe, treats phobias through **reciprocal inhibition**, pairing graded exposure with relaxation so that fear cannot coexist with calm.",
+   "say": "Behaviour therapy rests on learning theory. Problem behaviours are learned, so they can be unlearned. Its main techniques include systematic desensitisation, flooding, aversion therapy, token economy and biofeedback. Systematic desensitisation, developed by Joseph Wolpe, treats phobias through reciprocal inhibition. Graded exposure is paired with relaxation, so that fear cannot coexist with calm.",
+   "vis": null
+  },
+  {
+   "tx": "Systematic desensitisation has three steps. First, a **hierarchy chart** ranks fear-provoking stimuli from weakest to strongest. Second, the patient learns **coping skills** such as paced breathing or progressive muscle relaxation. Third, **graded exposure** proceeds stimulus by stimulus, with relaxation applied at each level. Flooding, by contrast, exposes the patient to the strongest fear at once.",
+   "say": "Systematic desensitisation has three steps. First, a hierarchy chart ranks fear-provoking stimuli from weakest to strongest. Second, the patient learns coping skills such as paced breathing or progressive muscle relaxation. Third, graded exposure proceeds stimulus by stimulus, with relaxation applied at each level. Flooding, by contrast, exposes the patient to the strongest fear at once, and it can backfire by increasing anxiety.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "Exposure style",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Systematic desensitisation",
+      "Graded, weakest first",
+      "Relaxation paired with each step"
+     ],
+     [
+      "Flooding",
+      "Sudden, strongest stimulus",
+      "Fear extinguished in one session"
+     ],
+     [
+      "Exposure and response prevention",
+      "Graded, escape blocked",
+      "Used in OCD"
+     ],
+     [
+      "Virtual reality exposure",
+      "Simulated",
+      "Useful in PTSD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Operant conditioning, described by B F Skinner, uses **reinforcement**. Positive reinforcement adds a reward so the behaviour recurs. **Negative reinforcement** removes an aversive stimulus, which also strengthens the behaviour. **Extinction** withdraws a rewarding response, so the behaviour becomes less frequent. **Token economy** is a contingency method, where tokens earned for desirable behaviour are exchanged for privileges.",
+   "say": "Operant conditioning, described by B F Skinner, uses reinforcement. Positive reinforcement adds a reward so the behaviour recurs. Negative reinforcement removes an aversive stimulus, which also strengthens the behaviour. Extinction withdraws a rewarding response, so the behaviour becomes less frequent. Token economy is a contingency method, where tokens earned for desirable behaviour are exchanged for privileges, often in psychiatric hospitals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reinforcement",
+     "points": [
+      "Adds reward, behaviour increases",
+      "Removes aversive stimulus, behaviour increases"
+     ]
+    },
+    "right": {
+     "title": "Withdrawal",
+     "points": [
+      "Extinction removes reward, behaviour decreases",
+      "Punishment adds aversive response"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Aversion therapy** pairs a pleasant but unwanted stimulus with an unpleasant response, as in alcohol dependence or ego-dystonic sexual behaviour. The aversive agent may be low-voltage electric shock, drugs such as disulfiram or apomorphine, or imagery, called covert sensitisation. **Biofeedback** teaches voluntary control of involuntary responses such as muscle tension, and is commonly used in tension-type headache. Habit reversal treats tics and nail biting by substituting a competing voluntary action.",
+   "say": "Aversion therapy pairs a pleasant but unwanted stimulus with an unpleasant response, as in alcohol dependence or ego-dystonic sexual behaviour. The aversive agent may be low-voltage electric shock, drugs such as disulfiram or apomorphine, or imagery, called covert sensitisation. Biofeedback teaches voluntary control of involuntary responses such as muscle tension, and is commonly used in tension-type headache. Habit reversal treats tics and nail biting by substituting a competing voluntary action.",
+   "vis": null
+  },
+  {
+   "tx": "Cognitive behaviour therapy corrects **cognitive distortions**, which are errors in logic within automatic thoughts. Beck described arbitrary inference, selective abstraction, overgeneralisation, magnification and minimisation, personalisation and **dichotomous thinking**. Thought block is not a cognitive distortion, because it is a break in the continuity of thought rather than a faulty logical process. Psychodynamic therapy explores **transference**, the patient's displaced feelings onto the therapist, and **countertransference**, the therapist's feelings toward the patient.",
+   "say": "Cognitive behaviour therapy corrects cognitive distortions, which are errors in logic within automatic thoughts. Beck described arbitrary inference, selective abstraction, overgeneralisation, magnification and minimisation, personalisation and dichotomous thinking. Thought block is not a cognitive distortion, because it is a break in the continuity of thought rather than a faulty logical process. Psychodynamic therapy explores transference, the patient's displaced feelings onto the therapist, and countertransference, the therapist's feelings toward the patient.",
+   "vis": null
+  },
+  {
+   "tx": "Motivational interviewing supports change through the **stages of change**: precontemplation, contemplation, preparation, action and maintenance. In contemplation the person weighs benefits and costs but has not committed. In preparation the person intends to act within the next month. Maintenance works to prevent relapse, and for addictive behaviour it may last well beyond six months after action begins.",
+   "say": "Motivational interviewing supports change through the stages of change. These are precontemplation, contemplation, preparation, action and maintenance. In contemplation the person weighs benefits and costs but has not committed. In preparation the person intends to act within the next month. Maintenance works to prevent relapse, and for addictive behaviour it may last well beyond six months after action begins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Precontemplation"
+     },
+     {
+      "id": "b",
+      "label": "Contemplation"
+     },
+     {
+      "id": "c",
+      "label": "Preparation"
+     },
+     {
+      "id": "d",
+      "label": "Action"
+     },
+     {
+      "id": "e",
+      "label": "Maintenance"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Psychotherapy comprises supportive, cognitive, behavioural, cognitive behavioural, dialectical behaviour and psychodynamic approaches. **Psychoanalysis**, founded by Freud, uses free association and transference analysis. Supportive therapy is the most widely used form and is intended as an initial, short-term measure. **Psychoeducation** improves adherence, as in bipolar disorder, where it helps prevent relapse after mood stabilisers are tapered.",
+   "say": "Psychotherapy comprises supportive, cognitive, behavioural, cognitive behavioural, dialectical behaviour and psychodynamic approaches. Psychoanalysis, founded by Freud, uses free association and transference analysis. Supportive therapy is the most widely used form and is intended as an initial, short-term measure. Psychoeducation improves adherence, as in bipolar disorder, where it helps prevent relapse after mood stabilisers are tapered.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "2429ec43-75d5-4dfd-900d-0ed6a41d617f",
+  "9b7a12a1-16b0-4ef8-9068-935e11803c56",
+  "f9316e9d-7fdf-4e4f-a05b-6db836b7fdbb"
+ ],
+ "src": [],
+ "refs": [
+  "Kaplan and Sadock's Synopsis of Psychiatry",
+  "Sadock and Sadock, Kaplan and Sadock's Comprehensive Textbook of Psychiatry"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 120
+ }
+}

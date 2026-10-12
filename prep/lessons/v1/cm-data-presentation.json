@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "cm-data-presentation",
+ "subject": "community-medicine",
+ "title": "Types of data and data presentation",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Data are either **qualitative** or **quantitative**. Qualitative data describe a characteristic in categories, such as sex, blood group or presence of anaemia, and cannot be measured as a quantity. Quantitative data have a magnitude that can be measured, such as height, weight, pulse rate or haemoglobin. Variables can also be discrete, taking only whole-number values like family size, or continuous, able to take in-between values like birth weight or height.",
+   "say": "Data are either qualitative or quantitative. Qualitative data describe a characteristic in categories, such as sex, blood group or presence of anaemia, and cannot be measured as a quantity. Quantitative data have a magnitude that can be measured, such as height, weight, pulse rate or haemoglobin. Variables can also be discrete, taking only whole-number values like family size, or continuous, able to take in-between values like birth weight or height.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Feature",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Qualitative",
+      "Categories, no measurable size",
+      "Blood group"
+     ],
+     [
+      "Quantitative discrete",
+      "Whole numbers only",
+      "Family size"
+     ],
+     [
+      "Quantitative continuous",
+      "Any value in between",
+      "Birth weight"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measurement scales come in four levels. The **nominal** scale only names categories, with no order, such as race or blood group. The **ordinal** scale ranks categories in a natural order, such as mild, moderate and severe disease. The **interval** scale has equal distances between points but no true zero, while the **ratio** scale has equal distances and a true zero, as with weight or blood pressure in metric terms.",
+   "say": "Measurement scales come in four levels. The nominal scale only names categories, with no order, such as race or blood group. The ordinal scale ranks categories in a natural order, such as mild, moderate and severe disease. The interval scale has equal distances between points but no true zero, while the ratio scale has equal distances and a true zero, as with weight or blood pressure in metric terms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scale",
+     "Order",
+     "True zero",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Nominal",
+      "No",
+      "No",
+      "Race, sex"
+     ],
+     [
+      "Ordinal",
+      "Yes",
+      "No",
+      "Disease severity"
+     ],
+     [
+      "Interval",
+      "Yes",
+      "No",
+      "Calendar year"
+     ],
+     [
+      "Ratio",
+      "Yes",
+      "Yes",
+      "Weight, length"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choose the chart by purpose. **Line diagrams** show the trend of an event over time, such as yearly disease incidence. **Bar charts** compare frequencies of separate categories, and **pie charts** show the share of each part of a whole. A **histogram** shows a continuous frequency distribution with adjacent bars, and a **frequency polygon** joins the midpoints of those bars.",
+   "say": "Choose the chart by purpose. Line diagrams show the trend of an event over time, such as yearly disease incidence. Bar charts compare frequencies of separate categories, and pie charts show the share of each part of a whole. A histogram shows a continuous frequency distribution with adjacent bars, and a frequency polygon joins the midpoints of those bars.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Purpose",
+     "Best chart"
+    ],
+    "rows": [
+     [
+      "Trend over time",
+      "Line diagram"
+     ],
+     [
+      "Compare categories",
+      "Bar chart"
+     ],
+     [
+      "Share of a whole",
+      "Pie chart"
+     ],
+     [
+      "Continuous distribution",
+      "Histogram"
+     ],
+     [
+      "Distribution outline",
+      "Frequency polygon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To show association between two quantitative variables, use a **scatter diagram**, also called a dot diagram. Height against weight is the classic example. A positive correlation has points rising together, a negative correlation has points falling as one variable rises, and a scatter with no pattern suggests no correlation. The **ogive** plots cumulative frequency, and a **frequency curve** is a polygon whose angles smooth out when observations are large.",
+   "say": "To show association between two quantitative variables, use a scatter diagram, also called a dot diagram. Height against weight is the classic example. A positive correlation has points rising together, a negative correlation has points falling as one variable rises, and a scatter with no pattern suggests no correlation. The ogive plots cumulative frequency, and a frequency curve is a polygon whose angles smooth out when observations are large.",
+   "vis": null
+  },
+  {
+   "tx": "Two further displays are high-yield. A **stem and leaf plot** keeps the raw values while showing the shape of the distribution, with the stem as leading digits and the leaf as the last digit. A **box plot** summarises the median, quartiles and range. A **pictogram** uses pictures to present data for the general public, and it is a common answer when the question asks for a display for the man in the street.",
+   "say": "Two further displays are high yield. A stem and leaf plot keeps the raw values while showing the shape of the distribution, with the stem as leading digits and the leaf as the last digit. A box plot summarises the median, quartiles and range. A pictogram uses pictures to present data for the general public, and it is a common answer when the question asks for a display for the man in the street.",
+   "vis": null
+  },
+  {
+   "tx": "For exams, remember the key pairings. Mean and standard deviation need interval or ratio data. Correlation uses a scatter diagram, and the Pearson coefficient suits interval or ratio data while Spearman suits ordinal data. A **population pyramid** is a variant of the bar diagram showing age and sex distribution. Indian exam questions follow the same classical scale definitions used in standard biostatistics texts.",
+   "say": "For exams, remember the key pairings. Mean and standard deviation need interval or ratio data. Correlation uses a scatter diagram, and the Pearson coefficient suits interval or ratio data while Spearman suits ordinal data. A population pyramid is a variant of the bar diagram showing age and sex distribution. Indian exam questions follow the same classical scale definitions used in standard biostatistics texts.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "4003db67-988b-4875-a6db-c241edf0b13a",
+  "de1700d4-14f2-47ce-ad41-564159de0f56",
+  "afac4d6d-9a58-45d0-9c69-b6b747d5ee25"
+ ],
+ "src": [],
+ "refs": [
+  "Anthony N. Glaser, High-Yield Biostatistics (Lippincott Williams & Wilkins, 2005)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 162
+ }
+}
