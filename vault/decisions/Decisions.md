@@ -11715,3 +11715,11 @@ is React Native (Skia, Reanimated, Gesture Handler, Expo) and cannot load in the
 SVG metaball filter and rAF springs. toast.js, foreground push and SMD_localNotify all route to it; WardSynQ critical
 alerts keep their full-screen screen. iOS push `presentationOptions` drops `alert` so the OS banner does not double the
 card. Flag `smd_dyn_notify` (default on, "0" = old toast + banner). [[modules/Dynamic Notifications]]
+
+## 2026-10-12 Premium motion layer: generic modules, the app's own controls, one kill switch each
+Owner: "Do all" (eight iOS-style adaptations). Each is a standalone module that recognises its targets
+from the live DOM (sheet geometry, full-width rows with a bold title, a control named "Refresh", "Loading…"
+placeholders) instead of editing ~40 modules. Every action goes through the app's own controls (scrim
+click, Refresh button, the row's inner buttons, a replayed click), so no second code path can drift.
+Long-press menus never add copy/share (PHI). Live Activities carry counts/tokens/timers only (Lock Screen
+is public). Native Live Activity Swift is uncompiled until the next native build. [[modules/Premium Motion]]

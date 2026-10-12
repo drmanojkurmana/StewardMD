@@ -38,6 +38,7 @@ struct StewardMDWidgetsBundle: WidgetBundle {
             SepsisLiveActivity()
             ProcedureLiveActivity()
             PrepLiveActivity()
+            ClinicalLiveActivity()
         }
         // Control Center / Action-button Controls (iOS 18+)
         if #available(iOS 18.0, *) {

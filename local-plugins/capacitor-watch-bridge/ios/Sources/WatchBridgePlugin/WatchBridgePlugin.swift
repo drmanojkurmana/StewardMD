@@ -35,7 +35,9 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "publish", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clear", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "getStatus", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "openCodeBlue", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "openCodeBlue", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "clinicalActivityUpsert", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "clinicalActivityEnd", returnType: CAPPluginReturnPromise)
     ]
 
     private let suiteName = "group.in.stewardmd.app"
@@ -247,6 +249,10 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
 
     /// Present the native SwiftUI Code Blue Command Center full-screen from the web
     /// home card (design §4.1). Export taps are relayed to JS via `codeBlueExport`.
+    /// Phone-app Live Activities (live-activities.js). See ClinicalActivityBridge.
+    @objc func clinicalActivityUpsert(_ call: CAPPluginCall) { ClinicalActivityBridge.upsert(call) }
+    @objc func clinicalActivityEnd(_ call: CAPPluginCall) { ClinicalActivityBridge.end(call) }
+
     @objc func openCodeBlue(_ call: CAPPluginCall) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self, let presenter = self.bridge?.viewController else {

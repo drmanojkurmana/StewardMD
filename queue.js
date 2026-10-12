@@ -587,6 +587,7 @@
     knob.addEventListener("mousedown", down);
   }
   function paint() {
+    try { liveActivity(); } catch (e) {}
     var r = root();
     // While the user is typing in search, DON'T rebuild the DOM - a full innerHTML swap blurs
     // the input and closes the Android soft keyboard. Refresh only the filtered rows in place.
@@ -1458,7 +1459,24 @@
     if (wp.indexOf("wardsynq:") === 0) { st.ghisToken = null; st.openOpts = { hospitalId: wp.slice(9), source: "wardsynq" }; loadSession(); return; }
     el.innerHTML = _chooseType();   // no remembered workplace -> Hospital vs Personal clinic
   }
-  function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); st.demo = false; }
+  function close() { var el = document.getElementById("smdQueue"); if (el) el.classList.remove("on"); clearInterval(st.pollId); st.demo = false; liveActivity(); }
+  // Lock Screen / Dynamic Island (live-activities.js): the consult in progress (counting up) and how
+  // many are waiting. Token number and counts ONLY, never a patient name (the Lock Screen is public).
+  // Ends when the queue screen closes or nobody is in consult or waiting.
+  function liveActivity() {
+    var LA = G.SMD_liveActivity; if (!LA) return;
+    var el = document.getElementById("smdQueue"), open = !!(el && el.classList.contains("on"));
+    if (!open || st.demo || !st.session) { LA.end("opd-queue"); return; }
+    var curId = st.session.currentTicketId, cur = null, waiting = computeKpis(st.tickets || []).waiting;
+    (st.tickets || []).forEach(function (t) { if (t.id === curId && t.consultStartAt && !t.consultEndAt) cur = t; });
+    if (!cur && !waiting) { LA.end("opd-queue"); return; }
+    LA.upsert({
+      key: "opd-queue", symbol: "person.2", tint: "#0F766E", urgent: computeKpis(st.tickets || []).health === "late",
+      title: cur ? (cur.token ? "In consult \u00b7 token " + cur.token : "In consult") : "OPD queue",
+      detail: waiting + " waiting",
+      startedAt: cur ? cur.consultStartAt : (st.session.startedAt || st.session.createdAt || (st.laSince = st.laSince || Date.now())), endsAt: 0
+    });
+  }
   // Sign out of GHIS: drop the GHIS session token + doctor identity, tell the server to forget the session,
   // and re-open the login gate so a different doctor can sign in.
   function doLogout() {

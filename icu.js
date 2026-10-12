@@ -4961,6 +4961,7 @@
     if (_grpMirrorT) { try { clearTimeout(_grpMirrorT); } catch (e) {} _grpMirrorT = null; }
     var api = groupsApi(); if (api && api.leavePatient) { try { api.leavePatient(); } catch (e) {} }
     _grpPtId = null; _grpPtVM = null; _grpPresence = []; _grpLastHash = null; _grpPrevSync = null;
+    try { window.SMD_liveActivity && window.SMD_liveActivity.end("icu-tasks"); } catch (e) {}
   }
   // Open a shared patient: subscribe to the doc (+ timeline + tasks) + presence, join presence.
   function grpOpenPatient(id) {
@@ -5851,7 +5852,32 @@
       if (newest > _grpNotifiedTs) _grpNotifiedTs = newest;
     } catch (e) {}
   }
-  function grpNotifTick() { if (!grpActive()) return; try { grpDeviceNotifyNew(grpNotifRows()); } catch (e) {} try { grpEscalateOverdue(); } catch (e) {} }
+  function grpNotifTick() { if (!grpActive()) return; try { grpDeviceNotifyNew(grpNotifRows()); } catch (e) {} try { grpEscalateOverdue(); } catch (e) {} try { grpLiveActivity(); } catch (e) {} }
+  // Lock Screen / Dynamic Island (live-activities.js): the open shared patient's next task deadline,
+  // ticking natively. Counts and times ONLY: no patient name, bed or task text (the Lock Screen is
+  // readable by anyone holding the phone). startedAt values are stable so an unchanged picture is
+  // not re-sent every minute.
+  function grpLiveActivity() {
+    var LA = window.SMD_liveActivity; if (!LA) return;
+    var tasks = (_grpPtVM && _grpPtVM.tasks) || [], now = nowTs(), open = 0, over = 0, next = 0, oldestOver = 0;
+    tasks.forEach(function (t) {
+      if (t.status === "done") return;
+      open++;
+      if (!t.dueAt) return;
+      if (now > t.dueAt) { over++; if (!oldestOver || t.dueAt < oldestOver) oldestOver = t.dueAt; }
+      else if (!next || t.dueAt < next) next = t.dueAt;
+    });
+    if (!open || (!next && !over)) { LA.end("icu-tasks"); return; }
+    var plural = function (n, one, many) { return n + " " + (n === 1 ? one : many); };
+    LA.upsert({
+      key: "icu-tasks", symbol: "checklist", tint: "#0F766E", urgent: over > 0,
+      title: over ? plural(over, "ICU task overdue", "ICU tasks overdue") : "Next ICU task due",
+      detail: plural(open, "open task", "open tasks") + " on this patient",
+      // Overdue: count up from the oldest deadline missed. Else: count down to the next deadline
+      // (the range start only needs to be in the past and stable).
+      startedAt: over ? oldestOver : next - 7 * 864e5, endsAt: over ? 0 : next
+    });
+  }
   // When a shared task goes overdue, ask the backend to push the WHOLE unit (APNs/FCM) so a member
   // whose app is CLOSED still gets alerted. The server re-verifies overdue + membership and de-dups
   // via escalatedAt; we also de-dup per-session (_grpOverdueNotified) to avoid re-hitting the endpoint.

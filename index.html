@@ -2487,6 +2487,20 @@ window.openExternal = function (u) {
 <script src="/search.js?v=us2-nodash1-kbproto2-kits1-alltools1-neo1-pf1-adultref1-mkai1-mkw1" defer></script>
 <script src="/asp-region.js?v=gold363-abg7-r4" defer></script>
 <script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1-energy1-pip1-tokos2-pf14-prep1-nrk1" defer></script>
+<!-- Premium motion layer (iOS-like). Each is generic, additive and has its own kill switch
+     (localStorage smd_sheet_drag / smd_sheet_depth / smd_view_tx / smd_large_title / smd_pull_refresh /
+     smd_picker_haptics / smd_skeletons / smd_peek / smd_live_activity = "0"). smd-spring.js first (shared
+     physics); long-press-preview.js before view-transitions.js so a long-press's lifting finger is
+     swallowed before a transition could take the click. -->
+<script src="/smd-spring.js?v=pm1" defer></script>
+<script src="/sheet-drag.js?v=pm1" defer></script>
+<script src="/long-press-preview.js?v=pm1" defer></script>
+<script src="/view-transitions.js?v=pm1" defer></script>
+<script src="/large-title.js?v=pm1" defer></script>
+<script src="/pull-refresh.js?v=pm1" defer></script>
+<script src="/picker-haptics.js?v=pm1" defer></script>
+<script src="/skeletons.js?v=pm1" defer></script>
+<script src="/live-activities.js?v=pm1" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1-energy1-esc1-neo1-mkai1-mkw1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -2498,7 +2512,7 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=hardlocal3-qa24-fr1r925-pushdiag1-dosecalc1-cel1-pm2-wg1-mkai1-mkw1" defer></script>
+<script src="/icu.js?v=hardlocal3-qa24-fr1r925-pushdiag1-dosecalc1-cel1-pm2-wg1-mkai1-mkw1-la1" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 
 <!-- WardSynQ shadow observation of GHIS ingest. BOTH DEFAULT OFF and neither ships enabled.
@@ -2804,7 +2818,7 @@ window.openExternal = function (u) {
 <script src="/opd-pulse-model.js?v=2" defer></script>
 <script src="/opd-offline-desk.js?v=3" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
-<script src="/queue.js?v=fdesk4-pulse1-profilex1-sid1-phi1-fu1-prio1-off2-live1-pm1" defer></script>
+<script src="/queue.js?v=fdesk4-pulse1-profilex1-sid1-phi1-fu1-prio1-off2-live1-pm1-la1" defer></script>
 <!-- Unified NFC bridge (native Capacitor NfcPlugin + Web NFC). The file-tag tap listener below
      (smdNfcBoot) routes a tapped folder to the patient's full chart, or offers to write a UHID
      to a blank tag. No-op on browsers without NFC. -->
