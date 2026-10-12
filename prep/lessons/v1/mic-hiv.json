@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "mic-hiv",
+ "subject": "microbiology",
+ "title": "HIV and retroviruses: structure, entry, diagnosis and the NACO approach",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "HIV is a **retrovirus** whose genome is diploid, made of two identical single stranded positive sense RNA copies. It carries a **reverse transcriptase** enzyme, which copies viral RNA into DNA. The gag gene encodes the core proteins, while the pol gene encodes reverse transcriptase, protease and integrase. HIV was first isolated in 1983 and shown to cause AIDS in 1984.",
+   "say": "HIV is a retrovirus. Its genome is diploid, made of two identical single stranded positive sense RNA copies. It carries reverse transcriptase, which copies viral RNA into DNA. The gag gene encodes the core, and the pol gene encodes reverse transcriptase, protease and other enzymes. HIV was isolated in 1983 and shown to cause AIDS in 1984.",
+   "vis": null
+  },
+  {
+   "tx": "Entry needs two binding steps. The **gp120** envelope glycoprotein binds the **CD4** receptor on helper T cells. A coreceptor then binds, and the transmembrane **gp41** drives membrane fusion. T cell tropic strains use CXCR4, while macrophage tropic R5 strains use **CCR5**. People with a CCR5 delta 32 mutation resist infection or progress slowly.",
+   "say": "Entry needs two binding steps. The gp120 envelope glycoprotein binds the CD4 receptor on helper T cells. A coreceptor then binds, and the transmembrane gp41 drives membrane fusion. T cell tropic strains use CXCR4, while macrophage tropic R5 strains use CCR5. People with a CCR5 delta 32 mutation resist infection or progress slowly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Strain",
+     "Coreceptor",
+     "Main target cell"
+    ],
+    "rows": [
+     [
+      "T tropic or X4",
+      "CXCR4",
+      "CD4 helper T cells"
+     ],
+     [
+      "M tropic or R5",
+      "CCR5",
+      "Macrophages and T cells"
+     ],
+     [
+      "Dual tropic",
+      "CCR5 and CXCR4",
+      "Both cell types"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After entry, reverse transcriptase makes single stranded DNA and then double stranded DNA, the **provirus**. This integrates into host chromosomes and directs viral RNA synthesis. CD4 cells are the main site of virus production. The window period is the phase when the patient is infective but tests are still negative, since antibodies have not yet appeared.",
+   "say": "After entry, reverse transcriptase makes single stranded DNA and then double stranded DNA, called the provirus. This integrates into host chromosomes and directs viral RNA synthesis. CD4 cells are the main site of virus production. The window period is when a person is infective but tests remain negative, because antibodies have not yet appeared.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Viral RNA"
+     },
+     {
+      "id": "b",
+      "label": "Single stranded DNA"
+     },
+     {
+      "id": "c",
+      "label": "Double stranded DNA provirus"
+     },
+     {
+      "id": "d",
+      "label": "Integrated in host chromosome"
+     },
+     {
+      "id": "e",
+      "label": "Viral RNA and proteins"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "reverse transcriptase"
+     ],
+     [
+      "b",
+      "c",
+      "reverse transcriptase"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "viral promoters"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening uses **ELISA**, which is highly sensitive but less specific, so it suits testing many samples. Reactive results need a confirmatory test, classically **Western blot**, though nucleic acid tests are the gold standard for confirmation. p24 antigen is the earliest marker to appear, and gp41 antibodies are detected first among antibodies. Viral load is measured by real time PCR.",
+   "say": "Screening uses ELISA, which is highly sensitive but less specific, so it suits testing many samples at once. Reactive results need a confirmatory test, classically Western blot, though nucleic acid tests are the gold standard. p24 antigen is the earliest marker to appear, and gp41 antibodies are detected first among antibodies. Viral load is measured by real time PCR.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Screening and confirmation",
+     "points": [
+      "ELISA: sensitive, screening test",
+      "Western blot: specific, confirmatory",
+      "HIV RNA PCR: gold standard for confirmation",
+      "Real time PCR: viral load"
+     ]
+    },
+    "right": {
+     "title": "Infant diagnosis",
+     "points": [
+      "Maternal IgG persists until about 18 months",
+      "Use p24 antigen, PCR or viral culture",
+      "Standard ELISA antibody tests are unreliable"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transmission is mainly **sexual**, with heterosexual spread the commonest mode. Blood and blood products, injecting drug use and needle stick injury also transmit. Mother to child transmission is 15 to 25 percent in industrialised countries and 25 to 35 percent in developing countries. Breast feeding is the least common route, and caesarean section reduces transmission. HTLV-1, a different RNA retrovirus, causes adult T cell leukaemia and tropical spastic paraparesis.",
+   "say": "Transmission is mainly sexual, with heterosexual spread the commonest mode. Blood and blood products, injecting drug use and needle stick injury also transmit. Mother to child transmission is 15 to 25 percent in industrialised countries and 25 to 35 percent in developing countries. Breast feeding is the least common route, and caesarean section reduces transmission. HTLV-1 causes adult T cell leukaemia and tropical spastic paraparesis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "87b35125-091f-4235-a427-ef35ae11018f",
+  "1aa9e9d2-03ef-417d-a382-ebb817173b78",
+  "d05a30c5-edac-4bb3-95d4-737d9cd5580c"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Textbook of Diagnostic Microbiology (Ananthanarayan and Paniker)",
+  "Jawetz, Melnick and Adelberg's Medical Microbiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 221
+ }
+}

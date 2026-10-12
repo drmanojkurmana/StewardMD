@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "cm-foods-toxins",
+ "subject": "community-medicine",
+ "title": "Nutritive value of foods, food toxins and food safety",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Milk is the classic nutrition topic. Compared with **cow milk**, **human milk** has more lactose (about 7.4 g per 100 ml), more antibodies and lactoferrin, but less protein (about 1.1 g per 100 ml), less fat, less calcium and fewer minerals. Buffalo milk has the highest fat and the highest energy of the common milks, while goat milk is a known cause of folate deficiency.",
+   "say": "Milk is the classic nutrition topic. Compared with cow milk, human milk has more lactose, about 7.4 grams per 100 millilitres, along with more antibodies and lactoferrin. It has less protein, about 1.1 grams per 100 millilitres, less fat, less calcium and fewer minerals. Buffalo milk has the highest fat and the highest energy of the common milks. Goat milk is a known cause of folate deficiency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Per 100 g",
+     "Human",
+     "Cow",
+     "Buffalo"
+    ],
+    "rows": [
+     [
+      "Lactose (g)",
+      "7.4",
+      "4.4",
+      "5.1"
+     ],
+     [
+      "Protein (g)",
+      "1.1",
+      "3.2",
+      "4.3"
+     ],
+     [
+      "Calcium (mg)",
+      "28",
+      "120",
+      "210"
+     ],
+     [
+      "Energy (kcal)",
+      "65",
+      "67",
+      "117"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pasteurisation** heats milk to destroy pathogens while keeping its composition and nutritive value. The **Holder method** heats milk to 63 to 66 degrees Celsius for 30 minutes, then cools it quickly. The **HTST method** heats to 72 degrees Celsius for 15 seconds and is the most widely used. Pasteurisation kills tubercle bacilli and Q fever organisms, but not thermoduric bacteria or spores.",
+   "say": "Pasteurisation heats milk to destroy pathogens while keeping its composition and nutritive value. The Holder method heats milk to 63 to 66 degrees Celsius for 30 minutes, then cools it quickly. The HTST method heats to 72 degrees Celsius for 15 seconds and is the most widely used. Pasteurisation kills tubercle bacilli and Q fever organisms, but not thermoduric bacteria or spores.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Temperature",
+     "Time"
+    ],
+    "rows": [
+     [
+      "Holder",
+      "63 to 66 C",
+      "30 minutes"
+     ],
+     [
+      "HTST",
+      "72 C",
+      "15 seconds"
+     ],
+     [
+      "UHT",
+      "125 C",
+      "few seconds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **phosphatase test** checks the efficiency of pasteurisation, and it is the test most often asked. The **methylene blue reduction test** is an indirect measure of bacterial activity, where milk that stays blue longest is the best quality. Other tests include the standard plate count and the coliform count.",
+   "say": "The phosphatase test checks the efficiency of pasteurisation, and it is the test most often asked. The methylene blue reduction test is an indirect measure of bacterial activity. Milk that stays blue the longest is the best quality. Other tests include the standard plate count and the coliform count.",
+   "vis": null
+  },
+  {
+   "tx": "**Lathyrism** results from eating **Khesari dal** (Lathyrus sativus), whose toxin is **BOAA**. Neurolathyrism causes spastic paralysis of the lower limbs and typically follows a diet with over 30 percent of this dal for 2 to 6 months. Prevention uses vitamin C, banning the crop, and removing the toxin by soaking or parboiling. Vitamin A is not a prophylactic.",
+   "say": "Lathyrism results from eating Khesari dal, Lathyrus sativus, whose toxin is BOAA. Neurolathyrism causes spastic paralysis of the lower limbs and typically follows a diet with over 30 percent of this dal for 2 to 6 months. Prevention uses vitamin C, banning the crop, and removing the toxin by soaking or parboiling. Vitamin A is not a prophylactic.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Khesari dal diet"
+     },
+     {
+      "id": "b",
+      "label": "BOAA toxin"
+     },
+     {
+      "id": "c",
+      "label": "Spastic paralysis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Argemone oil** contaminating mustard oil contains **sanguinarine**, which causes **epidemic dropsy**. Features are sudden, non-inflammatory, bilateral leg swelling, diarrhoea and dyspnoea, and rarely glaucoma. The **nitric acid test** is the basic screen, while **paper chromatography** is the most sensitive, detecting argemone oil down to 0.001 percent. Endemic ascites comes from Jhunjhunia seeds containing hepatotoxic pyrrolizidine alkaloids.",
+   "say": "Argemone oil contaminating mustard oil contains sanguinarine, which causes epidemic dropsy. Features are sudden, non-inflammatory, bilateral leg swelling, diarrhoea and breathlessness, and rarely glaucoma. The nitric acid test is the basic screen, while paper chromatography is the most sensitive, detecting argemone oil down to 0.001 percent. Endemic ascites comes from Jhunjhunia seeds containing hepatotoxic pyrrolizidine alkaloids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epidemic dropsy",
+     "points": [
+      "Sanguinarine from argemone oil",
+      "Sudden leg swelling",
+      "Diarrhoea and breathlessness"
+     ]
+    },
+    "right": {
+     "title": "Endemic ascites",
+     "points": [
+      "Jhunjhunia seeds in millet",
+      "Pyrrolizidine alkaloids",
+      "Hepatotoxic effect"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**FSSAI** regulates food safety and standards in India, while **Codex Alimentarius** provides international food standards. **Food fortification** adds nutrients; Dalda vanaspati is fortified with 2500 IU of vitamin A and 175 IU of vitamin D per 100 g. Adulteration with harmful substances, as in the Cuttack hooch tragedy of 2012, is a key public health concern.",
+   "say": "FSSAI regulates food safety and standards in India, while Codex Alimentarius provides international food standards. Food fortification adds nutrients. Dalda vanaspati is fortified with 2500 IU of vitamin A and 175 IU of vitamin D per 100 grams. Adulteration with harmful substances, as in the Cuttack hooch tragedy of 2012, is a key public health concern.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "e19b28d8-f61f-4f99-b055-5d05593d9fcb",
+  "141e3f5f-9b11-42b2-b7e3-324fae542b43",
+  "2a1d90fb-20e8-46b1-ae38-c1ddec88845f"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K. Park)",
+  "National Health Programme of India (J. Kishore)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 180
+ }
+}

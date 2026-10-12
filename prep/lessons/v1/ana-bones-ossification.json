@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "ana-bones-ossification",
+ "subject": "anatomy",
+ "title": "Bones: ossification, epiphyses and blood supply",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Bone formation starts before birth. The **clavicle** is the first bone to begin ossifying, in the fifth and sixth weeks of intrauterine life. Long bone shafts start ossifying around the seventh week, with the femoral shaft leading. Ossification is either **endochondral**, forming within hyaline cartilage, or **intramembranous**, forming within membrane. Most long bones ossify endochondrally; flat skull vault bones ossify in membrane.",
+   "say": "Bone formation starts before birth. The clavicle is the first bone to begin ossifying, in the fifth and sixth weeks of intrauterine life. Long bone shafts start ossifying around the seventh week, with the femoral shaft leading. Ossification is either endochondral, forming within hyaline cartilage, or intramembranous, forming within membrane. Most long bones ossify endochondrally, while flat skull vault bones ossify in membrane.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Typical bones"
+    ],
+    "rows": [
+     [
+      "Endochondral",
+      "Most long bones"
+     ],
+     [
+      "Intramembranous",
+      "Skull vault, facial bones"
+     ],
+     [
+      "Both",
+      "Clavicle, mandible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Each long bone has a **diaphysis**, the shaft, and **epiphyses** at each end. The **metaphysis** is the zone between diaphysis and epiphysis, joined by the growth plate. Epiphyses are classed as **pressure** (articular, weight bearing, e.g. head of femur), **traction** (non articular, pulled by tendons, e.g. greater trochanter), **atavistic** (an old independent bone fused on, e.g. coracoid process) and **aberrant** (not always present, e.g. head of first metacarpal).",
+   "say": "Each long bone has a diaphysis, the shaft, and epiphyses at each end. The metaphysis is the zone between diaphysis and epiphysis, joined by the growth plate. Epiphyses are classed as pressure, which are articular and weight bearing, such as the head of femur. They can be traction epiphyses, which are non articular and pulled by tendons, such as the greater trochanter. Atavistic epiphyses are old independent bones fused on, such as the coracoid process. Aberrant epiphyses are not always present, such as the head of the first metacarpal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Epiphysis type",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Pressure",
+      "Head of femur, lower radius"
+     ],
+     [
+      "Traction",
+      "Greater trochanter, humeral tubercles"
+     ],
+     [
+      "Atavistic",
+      "Coracoid process, os trigonum"
+     ],
+     [
+      "Aberrant",
+      "Head of first metacarpal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sesamoid bones form in tendons that undergo friction, act as pulleys, and ossify after birth. Examples are the **patella** in quadriceps, the **pisiform** in flexor carpi ulnaris and the **fabella** in gastrocnemius. Pneumatic bones contain air spaces lined by epithelium: maxilla, frontal, sphenoid and ethmoid. The mastoid is usually pneumatic but can be diploic or sclerotic, and the malleus is not pneumatic.",
+   "say": "Sesamoid bones form in tendons that undergo friction, act as pulleys, and ossify after birth. Examples are the patella in quadriceps, the pisiform in flexor carpi ulnaris and the fabella in gastrocnemius. Pneumatic bones contain air spaces lined by epithelium: maxilla, frontal, sphenoid and ethmoid. The mastoid is usually pneumatic but can be diploic or sclerotic, and the malleus is not pneumatic.",
+   "vis": null
+  },
+  {
+   "tx": "The **nutrient artery** enters the diaphysis and supplies the cortex and marrow. In the metaphysis, vessels form hairpin bends, so blood flow slows and bacteria can settle there. This is why the metaphysis is the commonest site of acute **osteomyelitis** and haematogenous spread. Cortical bone of the diaphysis contains **Haversian systems**, concentric lamellae around central canals. **Wolff's law** states that bone formation is directly proportional to stress and strain.",
+   "say": "The nutrient artery enters the diaphysis and supplies the cortex and marrow. In the metaphysis, vessels form hairpin bends, so blood flow slows and bacteria can settle there. This is why the metaphysis is the commonest site of acute osteomyelitis and haematogenous spread. Cortical bone of the diaphysis contains Haversian systems, which are concentric lamellae around central canals. Wolff's law states that bone formation is directly proportional to stress and strain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Nutrient artery"
+     },
+     {
+      "id": "b",
+      "label": "Diaphysis"
+     },
+     {
+      "id": "c",
+      "label": "Metaphysis hairpin bends"
+     },
+     {
+      "id": "d",
+      "label": "Stasis and infection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "582301b9-adb4-4c03-9abe-db402adcf23d",
+  "39eea8ce-c86a-4277-96ef-a44c7023a526",
+  "5b47730c-ed7d-4a72-9feb-091d75f7d06f"
+ ],
+ "src": [],
+ "refs": [
+  "Chaurasia's Handbook of General Anatomy (B D Chaurasia)",
+  "Standring's Gray's Anatomy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 151
+ }
+}

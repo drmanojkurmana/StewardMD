@@ -1,0 +1,156 @@
+{
+ "v": 1,
+ "module": "ana-vertebral-column",
+ "subject": "anatomy",
+ "title": "Vertebral column and back: high-yield anatomy for NEET-PG and USMLE",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **vertebral column** has 33 vertebrae: 7 cervical, 12 thoracic, 5 lumbar, 5 fused sacral and 4 coccygeal. Cervical vertebrae are identified by the **foramen transversarium**, which transmits the vertebral artery. Of the seven, C3 to C6 are typical, while C1, C2 and C7 are atypical. Exam questions often contrast typical cervical, thoracic and lumbar features, so learn the differences in shape of body, foramen, and facets.",
+   "say": "The vertebral column has 33 vertebrae: 7 cervical, 12 thoracic, 5 lumbar, 5 fused sacral and 4 coccygeal. Cervical vertebrae are identified by the foramen transversarium, which transmits the vertebral artery. Of the seven, C3 to C6 are typical, while C1, C2 and C7 are atypical. Exam questions often contrast typical cervical, thoracic and lumbar features, so learn the differences in shape of body, foramen, and facets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Cervical",
+     "Thoracic",
+     "Lumbar"
+    ],
+    "rows": [
+     [
+      "Body",
+      "Small, broad",
+      "Heart-shaped",
+      "Large, kidney-shaped"
+     ],
+     [
+      "Vertebral foramen",
+      "Triangular",
+      "Circular",
+      "Triangular"
+     ],
+     [
+      "Superior facet",
+      "Backwards, upwards",
+      "Backwards, laterally",
+      "Medially"
+     ],
+     [
+      "Spinous process",
+      "Short, bifid",
+      "Long, downward",
+      "Short, flat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **hangman fracture** is a bilateral fracture through the pars interarticularis of C2, causing traumatic spondylolisthesis of C2 on C3. The canal is wide at this level, so cord injury is often absent. Check for vertebral artery injury and other cervical fractures. Anterior translation with C2-3 disc disruption signals instability. Imaging includes lateral and anteroposterior radiographs, CT, and MRI for disco-ligamentous injury.",
+   "say": "A hangman fracture is a bilateral fracture through the pars interarticularis of C2, causing traumatic spondylolisthesis of C2 on C3. The canal is wide at this level, so cord injury is often absent. Check for vertebral artery injury and other cervical fractures. Anterior translation with C2-3 disc disruption signals instability. Imaging includes lateral and anteroposterior radiographs, CT, and MRI for disco-ligamentous injury.",
+   "vis": null
+  },
+  {
+   "tx": "The **lumbar puncture** needle passes through skin, subcutaneous fat, **supraspinous** and **interspinous ligaments**, then the **ligamentum flavum** and the epidural space before piercing dura and arachnoid. The usual site is L3-L4 or L4-L5 because the cord ends near L1-L2. The **iliac crest** highest point lies at the L3-L4 interval, a useful landmark. Muscles are not penetrated because they lie lateral to the midline.",
+   "say": "The lumbar puncture needle passes through skin, subcutaneous fat, supraspinous and interspinous ligaments, then the ligamentum flavum and the epidural space before piercing dura and arachnoid. The usual site is L3-L4 or L4-L5 because the cord ends near L1-L2. The iliac crest highest point lies at the L3-L4 interval, a useful landmark. Muscles are not penetrated because they lie lateral to the midline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Skin and subcutaneous fat"
+     },
+     {
+      "id": "b",
+      "label": "Supraspinous and interspinous ligaments"
+     },
+     {
+      "id": "c",
+      "label": "Ligamentum flavum"
+     },
+     {
+      "id": "d",
+      "label": "Epidural space"
+     },
+     {
+      "id": "e",
+      "label": "Dura and arachnoid, subarachnoid CSF"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Disc prolapse** is most common at **L5-S1**, then L4-L5, and is rare at L3-L4 or above. The nucleus pulposus is white fibrocartilage, surrounded by the annulus fibrosus. The **erector spinae** group, made of iliocostalis, longissimus and spinalis, extends the vertebral column when acting bilaterally and laterally flexes and rotates it when acting alone. Note that the lumbar region rotates least.",
+   "say": "Disc prolapse is most common at L5-S1, then L4-L5, and is rare at L3-L4 or above. The nucleus pulposus is white fibrocartilage, surrounded by the annulus fibrosus. The erector spinae group, made of iliocostalis, longissimus and spinalis, extends the vertebral column when acting bilaterally and laterally flexes and rotates it when acting alone. Note that the lumbar region rotates least.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield fact"
+    ],
+    "rows": [
+     [
+      "Prolapse site",
+      "L5-S1 most common"
+     ],
+     [
+      "Nucleus pulposus",
+      "White fibrocartilage"
+     ],
+     [
+      "Erector spinae",
+      "Extends spine bilaterally"
+     ],
+     [
+      "Lumbar rotation",
+      "Least of all regions"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "2e0313aa-ae3e-4733-bd39-dfbc797574fe",
+  "e66ed21f-0fb1-40ce-b54b-271d1eef1673",
+  "1d55b5f1-f973-4825-96f5-7d229640247b"
+ ],
+ "src": [
+  "kb-reference-hangman-fracture",
+  "kb-reference-jefferson-fracture"
+ ],
+ "refs": [
+  "Chapter 2 in B.D. Chaurasia's Human Anatomy (Chaurasia)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 824,
+  "itemN": 181
+ }
+}

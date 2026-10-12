@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "cm-descriptive-epi",
+ "subject": "community-medicine",
+ "title": "Descriptive epidemiology: time, place, person and disease patterns",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Descriptive epidemiology describes **distribution** of disease by time, place and person. It answers when, where and who. It is usually the first phase of an investigation and generates hypotheses rather than testing them. Observational descriptive designs include case reports, case series, cross-sectional surveys and ecological studies.",
+   "say": "Descriptive epidemiology describes the distribution of disease by time, place and person. It answers when, where and who. It is usually the first phase of an investigation and generates hypotheses rather than testing them. Observational descriptive designs include case reports, case series, cross-sectional surveys and ecological studies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Design",
+     "Unit of study",
+     "Main use"
+    ],
+    "rows": [
+     [
+      "Case report",
+      "Individual",
+      "Unusual feature or association"
+     ],
+     [
+      "Case series",
+      "Individuals",
+      "Early clues, no control group"
+     ],
+     [
+      "Cross-sectional",
+      "Individuals",
+      "Prevalence at one point in time"
+     ],
+     [
+      "Ecological",
+      "Population",
+      "Group-level correlation, prone to ecological fallacy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disease occurrence over time is classed as **short term** fluctuation (epidemic), **periodic** fluctuation (seasonal or **cyclic** trend) and **secular** trend, a long term change over years or decades. Measles, rubella and influenza show cyclic patterns; URTI peaks in winter and gastrointestinal infection in summer.",
+   "say": "Disease occurrence over time is classed as short term fluctuation, which is an epidemic, periodic fluctuation, which is a seasonal or cyclic trend, and secular trend, which is a long term change over years or decades. Measles, rubella and influenza show cyclic patterns. Upper respiratory infections peak in winter and gastrointestinal infections in summer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Time frame",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Epidemic",
+      "Short term",
+      "Food poisoning"
+     ],
+     [
+      "Seasonal",
+      "Each season",
+      "URTI in winter"
+     ],
+     [
+      "Cyclic",
+      "Every few years",
+      "Measles pre-vaccine era"
+     ],
+     [
+      "Secular",
+      "Years to decades",
+      "Coronary artery disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **point source** epidemic results from a single common exposure. All cases occur within one incubation period, the curve rises and falls rapidly with one peak, and no secondary wave appears. Bhopal gas tragedy and food poisoning are classic examples. A **propagated** epidemic spreads person to person, shows a gradual rise and slow tail, and has secondary waves, as in polio and hepatitis A.",
+   "say": "A point source epidemic results from a single common exposure. All cases occur within one incubation period, the curve rises and falls rapidly with one peak, and no secondary wave appears. Bhopal gas tragedy and food poisoning are classic examples. A propagated epidemic spreads person to person, shows a gradual rise and slow tail, and has secondary waves, as in polio and hepatitis A.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Point source",
+     "points": [
+      "Single exposure",
+      "One incubation period",
+      "Rapid rise and fall",
+      "One peak, no secondary wave"
+     ]
+    },
+    "right": {
+     "title": "Propagated",
+     "points": [
+      "Person to person spread",
+      "Gradual rise, slow tail",
+      "Secondary waves present",
+      "Polio, hepatitis A"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A common source epidemic with continuous or repeated exposure, such as a contaminated well, may run beyond one incubation period and show several peaks. Cholera often begins as a common source and then becomes propagated. Spread in a propagated epidemic depends on **herd immunity**, contact patterns and the **secondary attack rate**.",
+   "say": "A common source epidemic with continuous or repeated exposure, such as a contaminated well, may run beyond one incubation period and show several peaks. Cholera often begins as a common source and then becomes propagated. Spread in a propagated epidemic depends on herd immunity, contact patterns and the secondary attack rate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Contaminated well"
+     },
+     {
+      "id": "b",
+      "label": "Common source cases"
+     },
+     {
+      "id": "c",
+      "label": "Person to person spread"
+     },
+     {
+      "id": "d",
+      "label": "Secondary waves"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Endemic** means constant presence at the expected level, **epidemic** means occurrence clearly above expected, and **pandemic** means an epidemic spread over a wide area. **Sporadic** cases occur irregularly and unconnected. **Hyperendemic** means high, constant incidence affecting all age groups, while holoendemic means high infection beginning early in life.",
+   "say": "Endemic means constant presence at the expected level, epidemic means occurrence clearly above expected, and pandemic means an epidemic spread over a wide area. Sporadic cases occur irregularly and unconnected. Hyperendemic means high, constant incidence affecting all age groups, while holoendemic means high infection beginning early in life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Meaning",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Endemic",
+      "Expected constant level",
+      "Common cold"
+     ],
+     [
+      "Sporadic",
+      "Irregular, unconnected",
+      "Tetanus"
+     ],
+     [
+      "Epidemic",
+      "Above expected level",
+      "Acute watery diarrhoea outbreak"
+     ],
+     [
+      "Pandemic",
+      "Epidemic over wide area",
+      "Influenza pandemic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Descriptive studies such as the ecological design examine **population** level data. A correlation between two group level measures does not prove that the same link holds in individuals, which is the **ecological fallacy**. Migrant studies compare disease rates in people who move between areas, helping separate genetic from environmental causes. Spot maps localise local distribution, as John Snow did.",
+   "say": "Descriptive studies such as the ecological design examine population level data. A correlation between two group level measures does not prove that the same link holds in individuals, which is the ecological fallacy. Migrant studies compare disease rates in people who move between areas, helping separate genetic from environmental causes. Spot maps localise local distribution, as John Snow did.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0b73d141-6695-45c3-825a-b60ed4d2eb28",
+  "3635116b-1fb3-4e98-a0dc-93a5bba54cee",
+  "mk-f64fbd9a8559"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K Park)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 147
+ }
+}

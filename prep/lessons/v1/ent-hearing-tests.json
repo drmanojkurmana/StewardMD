@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "module": "ent-hearing-tests",
+ "subject": "ent",
+ "title": "Assessment of hearing: tuning fork tests and audiometry",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Hearing assessment starts at the bedside with a **512 Hz tuning fork**. This frequency is preferred because it lies in the speech range and has a good decay time. Lower forks feel like bone vibration, while higher forks decay too quickly for routine use.",
+   "say": "Hearing assessment starts at the bedside with a five hundred and twelve hertz tuning fork. This frequency is preferred because it lies in the speech range and has a good decay time. Lower forks feel like bone vibration, while higher forks decay too quickly for routine use.",
+   "vis": null
+  },
+  {
+   "tx": "The **Rinne test** compares air conduction with bone conduction in one ear. Normally air conduction is longer, so the test is positive. A **negative Rinne** means bone conduction exceeds air conduction, which points to a conductive loss of roughly 15 to 20 dB or more. Sensorineural deafness gives a positive Rinne.",
+   "say": "The Rinne test compares air conduction with bone conduction in one ear. Normally air conduction is longer, so the test is positive. A negative Rinne means bone conduction exceeds air conduction, which points to a conductive loss of roughly fifteen to twenty decibels or more. Sensorineural deafness gives a positive Rinne.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Normal",
+     "Conductive",
+     "Sensorineural"
+    ],
+    "rows": [
+     [
+      "Rinne",
+      "Positive",
+      "Negative",
+      "Positive"
+     ],
+     [
+      "Weber",
+      "Central",
+      "Lateralises to worse ear",
+      "Lateralises to better ear"
+     ],
+     [
+      "Schwabach",
+      "Equal",
+      "Lengthened",
+      "Shortened"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Weber test** places the vibrating fork on the forehead or teeth. In a **conductive loss** the sound moves to the worse ear. In **sensorineural loss** it moves to the better ear. Weber is the most sensitive test and can lateralise with only about 5 dB difference between ears.",
+   "say": "The Weber test places the vibrating fork on the forehead or teeth. In a conductive loss the sound moves to the worse ear. In sensorineural loss it moves to the better ear. Weber is the most sensitive test and can lateralise with only about five decibels difference between ears.",
+   "vis": null
+  },
+  {
+   "tx": "The **absolute bone conduction test** compares the patient with the examiner, both with ears occluded. Bone conduction reflects cochlear function, so a shorter hearing time in the patient suggests **sensorineural** damage. The **Bing test** checks occlusion effect: a normal or sensorineural ear hears louder when the canal is closed.",
+   "say": "The absolute bone conduction test compares the patient with the examiner, both with ears occluded. Bone conduction reflects cochlear function, so a shorter hearing time in the patient suggests sensorineural damage. The Bing test checks occlusion effect: a normal or sensorineural ear hears louder when the canal is closed.",
+   "vis": null
+  },
+  {
+   "tx": "Objective tests include **BERA**, the investigation of choice for hearing in neonates and infants, and **otoacoustic emissions** for neonatal screening. BERA wave I arises from the distal eighth nerve and wave V from the lateral lemniscus. **Tone decay** above 25 dB suggests a retrocochlear lesion, and **recruitment** points to cochlear disease.",
+   "say": "Objective tests include BERA, the investigation of choice for hearing in neonates and infants, and otoacoustic emissions for neonatal screening. BERA wave one arises from the distal eighth nerve and wave five from the lateral lemniscus. Tone decay above twenty five decibels suggests a retrocochlear lesion, and recruitment points to cochlear disease.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "abfab05a-0f08-419f-ae94-582589acfa86",
+  "c9f7b7da-b1cd-4272-892f-de9c8af2e488",
+  "mk-1b20d36ae431"
+ ],
+ "src": [],
+ "refs": [
+  "Ghai Essential Pediatrics",
+  "Dhingra Diseases of Ear, Nose and Throat"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 183
+ }
+}

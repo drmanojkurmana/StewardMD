@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "module": "bio-minor-pathways",
+ "subject": "biochemistry",
+ "title": "HMP shunt, uronic acid pathway, fructose and galactose metabolism",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **hexose monophosphate shunt**, also called the pentose phosphate pathway, oxidises glucose-6-phosphate to generate **NADPH** and pentoses. It is active in liver, adrenal cortex, lactating mammary gland and red cells. Its oxidative phase is irreversible, while the non-oxidative phase is reversible. The shunt produces no ATP and consumes none. Its key regulatory enzyme is glucose-6-phosphate dehydrogenase, which is inhibited by NADPH.",
+   "say": "The hexose monophosphate shunt, also called the pentose phosphate pathway, oxidises glucose-6-phosphate to generate NADPH and pentoses. It is active in the liver, adrenal cortex and lactating mammary gland. Its oxidative phase is irreversible, while the non-oxidative phase is reversible. The shunt produces no ATP and consumes none. Its key regulatory enzyme is glucose-6-phosphate dehydrogenase, which is inhibited by NADPH.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "HMP shunt detail"
+    ],
+    "rows": [
+     [
+      "Main product",
+      "NADPH for lipogenesis and reduced glutathione"
+     ],
+     [
+      "Oxidative phase",
+      "Irreversible, generates NADPH"
+     ],
+     [
+      "Non-oxidative phase",
+      "Reversible, gives ribose-5-phosphate and glycolytic intermediates"
+     ],
+     [
+      "ATP",
+      "Neither generated nor used"
+     ],
+     [
+      "Key enzyme",
+      "Glucose-6-phosphate dehydrogenase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **G6PD deficiency**, red cells struggle to make enough **NADPH**, so they cannot keep **reduced glutathione** topped up. Without it, oxidants damage haemoglobin and the cell membrane, leading to haemolysis. The disorder is X-linked recessive and is the commonest enzyme deficiency worldwide. Attacks are usually precipitated by an exogenous trigger such as an oxidant drug or fava beans. Most affected people remain well between episodes.",
+   "say": "In G6PD deficiency, red cells struggle to make NADPH, so they cannot maintain reduced glutathione. Oxidants then damage haemoglobin and the membrane, causing haemolysis. It is X-linked recessive and is the commonest enzyme deficiency worldwide. Attacks are usually set off by an outside agent, such as an oxidant drug or fava beans.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "G6PD deficient red cell"
+     },
+     {
+      "id": "b",
+      "label": "Less NADPH"
+     },
+     {
+      "id": "c",
+      "label": "Low reduced glutathione"
+     },
+     {
+      "id": "d",
+      "label": "Oxidative haemolysis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **uronic acid pathway** converts glucose to glucuronic acid, which is then used for conjugation of bilirubin and xenobiotics, a phase II reaction. It also forms glycosaminoglycans. The pathway does not generate ATP. Humans cannot make vitamin C by this route because they lack L-gulonolactone oxidase. In **essential pentosuria**, the enzyme that reduces L-xylulose to xylitol is absent, so L-xylulose appears in urine. This reducing sugar can be mistaken for diabetes, but blood glucose is normal.",
+   "say": "The uronic acid pathway converts glucose to glucuronic acid, used for bilirubin conjugation and xenobiotic excretion. It also forms glycosaminoglycans and does not generate ATP. Humans cannot make vitamin C by this route because they lack L-gulonolactone oxidase. In essential pentosuria, L-xylulose appears in urine because its reduction to xylitol is blocked. This reducing sugar can mimic diabetes, but blood glucose is normal.",
+   "vis": null
+  },
+  {
+   "tx": "**Hereditary fructose intolerance** results from deficiency of **aldolase B**. Fructose-1-phosphate accumulates in the liver, causing vomiting, jaundice, hepatomegaly, hypoglycaemia and lethargy once fruit or sucrose is taken. Urine tests for reducing sugar are positive, while Seliwanoff's test is positive for ketoses. Treatment is removal of fructose and sucrose from the diet. In contrast, **essential fructosuria** is due to fructokinase deficiency and is benign. Fructose is also highly lipogenic because it bypasses phosphofructokinase.",
+   "say": "Hereditary fructose intolerance results from deficiency of aldolase B. Fructose-1-phosphate accumulates in the liver, causing vomiting, jaundice, hepatomegaly, hypoglycaemia and lethargy after fruit or sucrose. Treatment is removal of fructose and sucrose from the diet. Essential fructosuria is due to fructokinase deficiency and is benign. Fructose is also highly lipogenic because it bypasses phosphofructokinase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Enzyme lacking",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Essential fructosuria",
+      "Fructokinase",
+      "Benign, fructose in urine"
+     ],
+     [
+      "Hereditary fructose intolerance",
+      "Aldolase B",
+      "Hypoglycaemia, liver injury"
+     ],
+     [
+      "Essential pentosuria",
+      "Xylulose reductase",
+      "L-xylulose in urine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **classical galactosemia**, the enzyme **galactose-1-phosphate uridyl transferase (GALT)** is deficient. This is autosomal recessive. Galactose-1-phosphate accumulates in the liver, causing hepatomegaly, jaundice, vomiting and hypoglycaemia. Galactitol accumulates in the lens, causing oil-drop cataract. Urine reducing sugar is positive, while blood glucose may be low. Treatment is a galactose-free diet. Galactokinase deficiency causes cataract alone, and UDP-galactose-4-epimerase deficiency is rare. Lactase deficiency causes lactose intolerance, not galactosemia.",
+   "say": "In classical galactosemia, the enzyme galactose-1-phosphate uridyl transferase is deficient. It is autosomal recessive. Galactose-1-phosphate accumulates in the liver, causing hepatomegaly, jaundice, vomiting and hypoglycaemia. Galactitol accumulates in the lens, causing oil-drop cataract. Treatment is a galactose-free diet. Lactase deficiency causes lactose intolerance instead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classical galactosemia",
+     "points": [
+      "GALT deficient",
+      "Liver damage and hypoglycaemia",
+      "Oil-drop cataract",
+      "Galactose-free diet"
+     ]
+    },
+    "right": {
+     "title": "Galactokinase deficiency",
+     "points": [
+      "GALK deficient",
+      "Cataract as main feature",
+      "Less common form"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Aldose reductase** reduces glucose to **sorbitol** and galactose to galactitol in the polyol pathway. In diabetes, high intracellular glucose raises sorbitol in the lens, nerves and kidney. Sorbitol is poorly permeable, so it accumulates, causes osmotic swelling, and contributes to cataract, neuropathy and nephropathy. Sorbitol dehydrogenase is low or absent in these tissues, so sorbitol is not converted to fructose. Galactitol also causes cataract in galactosemia.",
+   "say": "Aldose reductase reduces glucose to sorbitol and galactose to galactitol in the polyol pathway. In diabetes, high intracellular glucose raises sorbitol in the lens, nerves and kidney. Sorbitol is poorly permeable, so it accumulates, causes osmotic swelling, and contributes to cataract and neuropathy. Galactitol also causes cataract in galactosemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Glucose"
+     },
+     {
+      "id": "b",
+      "label": "Sorbitol"
+     },
+     {
+      "id": "c",
+      "label": "Osmotic swelling"
+     },
+     {
+      "id": "d",
+      "label": "Cataract"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "aldose reductase"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "00aae2bb-17f0-4120-90dc-ec39f0b192da",
+  "39b8b0bd-d476-49bf-b294-7ec2e85c8f21",
+  "97813adf-0c84-4c2b-8ff2-0b7568055597"
+ ],
+ "src": [],
+ "refs": [
+  "Harper's Illustrated Biochemistry (Bender, Botham, Weil, Kennelly, Murray, Rodwell)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 226
+ }
+}

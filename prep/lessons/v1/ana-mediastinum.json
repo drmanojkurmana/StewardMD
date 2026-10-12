@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "ana-mediastinum",
+ "subject": "anatomy",
+ "title": "Mediastinum, great vessels and oesophagus",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **mediastinum** is the central compartment of the thorax between the two pleural sacs. It is divided into superior, anterior, middle and posterior parts. The superior mediastinum lies above the plane through the sternal angle and the lower border of T4. Its key contents include the arch of aorta with its three branches, the brachiocephalic veins, the trachea, the thymus, and the left recurrent laryngeal nerve.",
+   "say": "The mediastinum is the central compartment of the thorax, lying between the two pleural sacs. It is divided into superior, anterior, middle and posterior parts. The superior mediastinum lies above the plane through the sternal angle and the lower border of T4. Its key contents include the arch of aorta with its three branches, the brachiocephalic veins, the trachea, the thymus, and the left recurrent laryngeal nerve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Part",
+     "Key contents"
+    ],
+    "rows": [
+     [
+      "Superior",
+      "Arch of aorta, brachiocephalic veins, trachea, thymus"
+     ],
+     [
+      "Anterior",
+      "Sternopericardial ligaments, lowest thymus"
+     ],
+     [
+      "Middle",
+      "Heart, bifurcation of trachea, main bronchi"
+     ],
+     [
+      "Posterior",
+      "Oesophagus, thoracic duct, azygos and hemiazygos veins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **arch of aorta** begins behind the sternal angle and ends at the lower border of T4. Its convex upper surface gives off three branches in order from right to left: the brachiocephalic artery, the left common carotid artery and the left subclavian artery. The **left recurrent laryngeal nerve** hooks under the arch, lying beside the **ligamentum arteriosum**, the fibrous remnant of the ductus arteriosus.",
+   "say": "The arch of aorta begins behind the sternal angle and ends at the lower border of T4. Its convex upper surface gives off three branches in order from right to left: the brachiocephalic artery, the left common carotid artery and the left subclavian artery. The left recurrent laryngeal nerve hooks under the arch, lying beside the ligamentum arteriosum, the fibrous remnant of the ductus arteriosus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Arch of aorta"
+     },
+     {
+      "id": "b",
+      "label": "Brachiocephalic"
+     },
+     {
+      "id": "c",
+      "label": "Left common carotid"
+     },
+     {
+      "id": "d",
+      "label": "Left subclavian"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "first"
+     ],
+     [
+      "b",
+      "c",
+      "second"
+     ],
+     [
+      "c",
+      "d",
+      "third"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **superior vena cava** forms behind the first right costal cartilage when the two brachiocephalic veins join. It descends to enter the right atrium at about the level of T5. The **azygos vein** arches over the right lung root and drains into the back of the SVC at T4. The left brachiocephalic vein crosses in front of the arch branches, and it is longer than the right.",
+   "say": "The superior vena cava forms behind the first right costal cartilage when the two brachiocephalic veins join. It descends to enter the right atrium at about the level of T5. The azygos vein arches over the right lung root and drains into the back of the SVC at T4. The left brachiocephalic vein crosses in front of the arch branches, and it is longer than the right.",
+   "vis": null
+  },
+  {
+   "tx": "The **oesophagus** runs from the pharynx at C6 to the cardiac orifice of the stomach at about T11. It has four constrictions. The first, at C6, lies 15 cm from the incisors. The second, at T4 where the arch of aorta crosses it, lies 22.5 cm away. The third, at T6 where the left main bronchus crosses it, lies 27.5 cm away. The fourth, at T10 where it pierces the diaphragm, is the **lower oesophageal sphincter** at 37.5 to 40 cm.",
+   "say": "The oesophagus runs from the pharynx at C6 to the cardiac orifice of the stomach at about T11. It has four constrictions. The first, at C6, lies 15 cm from the incisors. The second, at T4 where the arch of aorta crosses it, lies 22.5 cm away. The third, at T6 where the left main bronchus crosses it, lies 27.5 cm away. The fourth, at T10 where it pierces the diaphragm, is the lower oesophageal sphincter at 37.5 to 40 cm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Constriction",
+     "Distance from incisor",
+     "Level",
+     "Landmark"
+    ],
+    "rows": [
+     [
+      "First",
+      "15 cm",
+      "C6",
+      "Pharyngo-oesophageal junction"
+     ],
+     [
+      "Second",
+      "22.5 cm",
+      "T4",
+      "Aortic arch"
+     ],
+     [
+      "Third",
+      "27.5 cm",
+      "T6",
+      "Left main bronchus"
+     ],
+     [
+      "Fourth",
+      "37.5 to 40 cm",
+      "T10",
+      "Diaphragm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **thoracic duct** begins at the cisterna chyli near T12 and enters the thorax through the aortic opening. It ascends in the posterior mediastinum, lying between the aorta on its left and the **azygos vein** on its right. At T5 it crosses from right to left. It drains the whole body below the diaphragm and the left upper body, opening at the junction of the left subclavian and internal jugular veins.",
+   "say": "The thoracic duct begins at the cisterna chyli near T12 and enters the thorax through the aortic opening. It ascends in the posterior mediastinum, lying between the aorta on its left and the azygos vein on its right. At T5 it crosses from right to left. It drains the whole body below the diaphragm and the left upper body, opening at the junction of the left subclavian and internal jugular veins.",
+   "vis": null
+  },
+  {
+   "tx": "The **vagus** nerves supply the oesophagus and the larynx through the recurrent laryngeal branches. The left recurrent laryngeal nerve is most at risk where it winds under the arch and beside the ligamentum arteriosum, so a mass at the aortopulmonary window can cause hoarseness. The **splanchnic nerves** are preganglionic sympathetic fibres from the lower thoracic ganglia that run in the posterior mediastinum. The upper oesophagus is striated muscle and is supplied by the vagus.",
+   "say": "The vagus nerves supply the oesophagus and the larynx through the recurrent laryngeal branches. The left recurrent laryngeal nerve is most at risk where it winds under the arch and beside the ligamentum arteriosum, so a mass at the aortopulmonary window can cause hoarseness. The splanchnic nerves are preganglionic sympathetic fibres from the lower thoracic ganglia that run in the posterior mediastinum. The upper oesophagus is striated muscle and is supplied by the vagus.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6d10e09f-2cfc-4fff-af9d-f87a4d2d925b",
+  "0e37047c-4621-4741-aaa4-75db07eec846",
+  "c1c1f90c-2982-4ee2-9010-84a669d0ea17"
+ ],
+ "src": [],
+ "refs": [
+  "Chaurasia's Human Anatomy: Upper Limb and Thorax, Volume 1 (B D Chaurasia)",
+  "Gray's Anatomy for Students"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 193
+ }
+}

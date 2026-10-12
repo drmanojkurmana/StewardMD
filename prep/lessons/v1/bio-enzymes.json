@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "bio-enzymes",
+ "subject": "biochemistry",
+ "title": "Enzymes and clinical enzymology",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Enzymes are biological catalysts that speed up reactions without being consumed. Most are **proteins**, and many need a non-protein helper called a **coenzyme** or a metal ion as a prosthetic group. Enzymes are classified into six main classes: oxidoreductases, transferases, hydrolases, lyases, isomerases and ligases. Digestive enzymes are hydrolases, and synthetases are ligases that use ATP to join two molecules.",
+   "say": "Enzymes are biological catalysts that speed up reactions without being consumed. Most are proteins, and many need a non-protein helper called a coenzyme or a metal ion as a prosthetic group. Enzymes are classified into six main classes: oxidoreductases, transferases, hydrolases, lyases, isomerases and ligases. Digestive enzymes are hydrolases, and synthetases are ligases that use ATP to join two molecules.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Typical action",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Oxidoreductase",
+      "Electron or hydrogen transfer",
+      "Succinate dehydrogenase"
+     ],
+     [
+      "Transferase",
+      "Moves a functional group",
+      "Aminotransferases"
+     ],
+     [
+      "Hydrolase",
+      "Splits bonds using water",
+      "Pepsin, trypsin"
+     ],
+     [
+      "Lyase",
+      "Adds or removes a small group",
+      "Fumarase"
+     ],
+     [
+      "Isomerase",
+      "Rearranges isomers",
+      "Racemases"
+     ],
+     [
+      "Ligase",
+      "Joins two molecules using ATP",
+      "Glutamine synthetase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Michaelis-Menten** equation links reaction velocity to substrate concentration. **Km** is the substrate concentration at which velocity is half of **Vmax**. A low Km means high affinity. Specificity is better judged by the ratio Kcat/Km, the specificity constant, than by Km alone. Kcat is the turnover number.",
+   "say": "The Michaelis-Menten equation links reaction velocity to substrate concentration. Km is the substrate concentration at which velocity is half of Vmax. A low Km means high affinity. Specificity is better judged by the ratio Kcat over Km, the specificity constant, than by Km alone. Kcat is the turnover number.",
+   "vis": null
+  },
+  {
+   "tx": "In **competitive inhibition** the inhibitor binds the active site, so Km rises and Vmax is unchanged, since high substrate overcomes it. In **non-competitive inhibition** the inhibitor binds a remote site, so Vmax falls while Km stays the same. Malonate is the classic competitive inhibitor of succinate dehydrogenase.",
+   "say": "In competitive inhibition the inhibitor binds the active site, so Km rises and Vmax is unchanged, since high substrate overcomes it. In non-competitive inhibition the inhibitor binds a remote site, so Vmax falls while Km stays the same. Malonate is the classic competitive inhibitor of succinate dehydrogenase.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Competitive",
+     "points": [
+      "Binds active site",
+      "Km increases",
+      "Vmax unchanged",
+      "Overcome by substrate"
+     ]
+    },
+    "right": {
+     "title": "Non-competitive",
+     "points": [
+      "Binds remote site",
+      "Km unchanged",
+      "Vmax decreases",
+      "Not overcome by substrate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Key enzyme points for exams include that **proenzymes** or zymogens, such as chymotrypsinogen and pepsinogen, are inactive precursors. Serine proteases use a serine at the active site, and asparaginase is a bacterial enzyme used against leukaemia. Superoxide dismutase protects cells from free radical injury. Creatine kinase is the enzyme used to support evaluation of myopathy. NAD and NADP are hydrogen carriers, and PLP is the coenzyme for transamination.",
+   "say": "Key enzyme points for exams include that proenzymes or zymogens, such as chymotrypsinogen and pepsinogen, are inactive precursors. Serine proteases use a serine at the active site, and asparaginase is a bacterial enzyme used against leukaemia. Superoxide dismutase protects cells from free radical injury. Creatine kinase supports evaluation of myopathy. NAD and NADP are hydrogen carriers, and PLP is the coenzyme for transamination.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "c5ca5fca-155f-43a4-8422-efcd4e01afcb",
+  "mk-b0d2036e534b",
+  "cdc2a765-9cec-4f86-a325-3ffdd09bc356"
+ ],
+ "src": [],
+ "refs": [
+  "Harper's Illustrated Biochemistry (Bender, Botham, Weil, Kennelly, Murray, Rodwell (Eds))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 376
+ }
+}

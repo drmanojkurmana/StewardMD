@@ -1,0 +1,180 @@
+{
+ "v": 1,
+ "module": "pat-tumour-diagnosis",
+ "subject": "pathology",
+ "title": "Host response, paraneoplastic syndromes and diagnosis of cancer",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Cancers can affect the host far beyond the tumour mass. **Paraneoplastic syndromes** are remote effects caused by hormones, cytokines or other substances released by tumour cells. Cachexia, the wasting syndrome with loss of body fat, weakness, anorexia and anaemia, is driven mainly by **tumour necrosis factor** released from macrophages and some tumour cells.",
+   "say": "Cancers can affect the host far beyond the tumour mass. Paraneoplastic syndromes are remote effects caused by hormones, cytokines or other substances released by tumour cells. Cachexia, the wasting syndrome with loss of body fat, weakness, anorexia and anaemia, is driven mainly by tumour necrosis factor released from macrophages and some tumour cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Typical mediator or cause",
+     "Classic association"
+    ],
+    "rows": [
+     [
+      "Cachexia",
+      "Tumour necrosis factor",
+      "Advanced solid cancers"
+     ],
+     [
+      "Hypercalcaemia",
+      "PTH-related peptide",
+      "Breast, lung cancer, myeloma"
+     ],
+     [
+      "SIADH",
+      "Ectopic ADH",
+      "Small cell lung carcinoma"
+     ],
+     [
+      "Cushing syndrome",
+      "Ectopic ACTH",
+      "Small cell lung carcinoma"
+     ],
+     [
+      "Hypertrophic osteoarthropathy",
+      "Unclear, periosteal new bone",
+      "Lung carcinoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Humoral hypercalcaemia of malignancy** results from tumour secretion of PTH-related peptide, which shares homology with PTH only in its amino-terminal region. Because the parathyroid glands do not make it, the hypercalcaemia does not feed back to suppress it. Common sources are breast and lung cancers and multiple myeloma.",
+   "say": "Humoral hypercalcaemia of malignancy results from tumour secretion of PTH-related peptide, which shares homology with PTH only in its amino-terminal region. Because the parathyroid glands do not make it, the hypercalcaemia does not feed back to suppress it. Common sources are breast and lung cancers and multiple myeloma.",
+   "vis": null
+  },
+  {
+   "tx": "**Ectopic ACTH** from small cell lung carcinoma causes Cushing syndrome with hypertension and hyperglycaemia. Ectopic ACTH is typically not suppressed by high dose dexamethasone, unlike a pituitary adenoma. **SIADH** from small cell carcinoma produces hyponatraemia with normal blood volume and can cause seizures and coma.",
+   "say": "Ectopic ACTH from small cell lung carcinoma causes Cushing syndrome with hypertension and hyperglycaemia. Ectopic ACTH is typically not suppressed by high dose dexamethasone, unlike a pituitary adenoma. SIADH from small cell carcinoma produces hyponatraemia with normal blood volume and can cause seizures and coma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ectopic ACTH",
+     "points": [
+      "Cushing features",
+      "Not suppressed by dexamethasone",
+      "Small cell lung cancer"
+     ]
+    },
+    "right": {
+     "title": "SIADH",
+     "points": [
+      "Hyponatraemia",
+      "Normal blood volume",
+      "Seizures and coma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **tumour marker** is a substance in blood, urine or tissue that can be raised by cancer, but raised levels can also occur in benign disease. Tissue-specific markers include **PSA** for prostate, **AFP** for liver and yolk sac tumours, **beta-hCG** for testicular germ cell tumours, and **CA-125** for ovarian cancer. CEA is raised in colorectal cancer but also in other conditions.",
+   "say": "A tumour marker is a substance in blood, urine or tissue that can be raised by cancer, but raised levels can also occur in benign disease. Tissue-specific markers include PSA for prostate, AFP for liver and yolk sac tumours, beta-hCG for testicular germ cell tumours, and CA-125 for ovarian cancer. CEA is raised in colorectal cancer but also in other conditions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Main tumour link",
+     "Note"
+    ],
+    "rows": [
+     [
+      "PSA",
+      "Prostate cancer",
+      "Also raised in BPH and prostatitis"
+     ],
+     [
+      "AFP",
+      "Hepatocellular carcinoma, yolk sac tumour",
+      "Raised in most HCC"
+     ],
+     [
+      "Beta-hCG",
+      "Testicular germ cell tumour",
+      "Falls after successful treatment"
+     ],
+     [
+      "CA-125",
+      "Ovarian cancer",
+      "Also endometriosis, TB"
+     ],
+     [
+      "CEA",
+      "Colorectal cancer",
+      "Also smoking, colitis, cirrhosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Immunohistochemistry** identifies tumour lineage. **Cytokeratin** is a highly sensitive marker of carcinomas, while **vimentin** marks mesenchymal tumours. **Desmin** marks muscle, supporting rhabdomyosarcoma, and **HMB-45** is the most specific marker for melanoma, whereas S-100 is the most sensitive. Fine needle aspiration cytology and frozen section give rapid tissue diagnosis.",
+   "say": "Immunohistochemistry identifies tumour lineage. Cytokeratin is a highly sensitive marker of carcinomas, while vimentin marks mesenchymal tumours. Desmin marks muscle, supporting rhabdomyosarcoma, and HMB-45 is the most specific marker for melanoma, whereas S-100 is the most sensitive. Fine needle aspiration cytology and frozen section give rapid tissue diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Lineage",
+     "Tumour example"
+    ],
+    "rows": [
+     [
+      "Cytokeratin",
+      "Epithelial",
+      "Carcinoma"
+     ],
+     [
+      "Vimentin",
+      "Mesenchymal",
+      "Sarcoma"
+     ],
+     [
+      "Desmin",
+      "Skeletal muscle",
+      "Rhabdomyosarcoma"
+     ],
+     [
+      "HMB-45",
+      "Melanocyte",
+      "Melanoma, most specific"
+     ],
+     [
+      "S-100",
+      "Neural crest, glial",
+      "Melanoma, most sensitive"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "88524b08-bbae-42ef-9cc8-35ea7d85a948",
+  "40a16ae8-46f4-4716-9996-c63a0803ab34",
+  "95b661ff-e172-4206-8d0a-7ca8e2d447d4"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease",
+  "Harsh Mohan Textbook of Pathology",
+  "The Big Picture: Medical Biochemistry"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 264
+ }
+}

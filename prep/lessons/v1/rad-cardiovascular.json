@@ -1,0 +1,167 @@
+{
+ "v": 1,
+ "module": "rad-cardiovascular",
+ "subject": "radiology",
+ "title": "Cardiovascular imaging: key chest radiograph and modality signs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Chest radiography is the first-line screen for many cardiac lesions. Look at cardiac size, pulmonary vascularity and the shape of the heart border. A **boot-shaped heart** suggests **tetralogy of Fallot**, caused by right ventricular outflow obstruction with a subaortic VSD. Chest films may also show small hila and **pulmonary oligaemia**.",
+   "say": "Chest radiography is the first line screen for many cardiac lesions. Look at cardiac size, pulmonary vascularity and the shape of the heart border. A boot shaped heart suggests tetralogy of Fallot, caused by right ventricular outflow obstruction with a subaortic VSD. Chest films may also show small hila and pulmonary oligaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Typical cause",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Boot-shaped heart",
+      "Tetralogy of Fallot",
+      "Upturned apex, concave pulmonary segment"
+     ],
+     [
+      "Egg on side",
+      "Transposition of great arteries",
+      "Narrow vascular pedicle"
+     ],
+     [
+      "Egg in cup",
+      "Constrictive pericarditis",
+      "Heart tucked into pericardial outline"
+     ],
+     [
+      "Snowman or figure of 8",
+      "Supracardiac TAPVC",
+      "Dilated vertical vein above heart"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coarctation of the aorta produces **rib notching**, usually of the inferior borders of ribs 3 to 8, from erosion by dilated intercostal collaterals. The **3 sign** reflects pre-stenotic dilatation, the coarctation itself and post-stenotic dilatation. Rib notching is a feature of high pressure collaterals and sometimes appears only after about age 9.",
+   "say": "Coarctation of the aorta produces rib notching, usually of the inferior borders of ribs 3 to 8, from erosion by dilated intercostal collaterals. The 3 sign reflects pre-stenotic dilatation, the coarctation itself and post-stenotic dilatation. Rib notching is a feature of high pressure collaterals and sometimes appears only after about age 9.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Coarctation"
+     },
+     {
+      "id": "b",
+      "label": "Collaterals dilate"
+     },
+     {
+      "id": "c",
+      "label": "Intercostal erosion"
+     },
+     {
+      "id": "d",
+      "label": "Rib notching"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Left atrial enlargement shows a **double density** or double right heart border, elevation of the left main bronchus (the earliest sign), widening of the carina and posterior displacement of the oesophagus. Causes include mitral stenosis and chronic left heart failure. Pulmonary venous hypertension adds cephalisation, Kerley B lines and perihilar haze.",
+   "say": "Left atrial enlargement shows a double density or double right heart border, elevation of the left main bronchus, which is the earliest sign, widening of the carina and posterior displacement of the oesophagus. Causes include mitral stenosis and chronic left heart failure. Pulmonary venous hypertension adds cephalisation, Kerley B lines and perihilar haze.",
+   "vis": null
+  },
+  {
+   "tx": "Pulmonary hypertension shows central artery enlargement with **peripheral pruning**, where peripheral vessels abruptly narrow. A main pulmonary artery diameter above 29 mm with segmental artery to bronchus ratio above 1 is suggestive on CT. Pulmonary plethora, by contrast, means increased flow from left to right shunts such as ASD, VSD and PDA, and is distinct from oligaemia seen in Fallot.",
+   "say": "Pulmonary hypertension shows central artery enlargement with peripheral pruning, where peripheral vessels abruptly narrow. A main pulmonary artery diameter above 29 millimetres with a segmental artery to bronchus ratio above 1 is suggestive on CT. Pulmonary plethora, by contrast, means increased flow from left to right shunts such as atrial septal defect, ventricular septal defect and patent ductus arteriosus, and is distinct from the oligaemia seen in Fallot.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pulmonary plethora",
+     "points": [
+      "Increased flow",
+      "ASD, VSD, PDA",
+      "Prominent hila"
+     ]
+    },
+    "right": {
+     "title": "Pulmonary oligaemia",
+     "points": [
+      "Reduced flow",
+      "Tetralogy of Fallot",
+      "Small, clear lung fields"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Imaging choice depends on the question. **CT pulmonary angiography** is the best test for pulmonary embolism and CT angiography is the investigation of choice for suspected aortic dissection in stable patients. **CT coronary angiography** and the **coronary calcium score** assess coronary disease, while **cardiac MRI** is preferred for tissue characterisation and right ventricular function.",
+   "say": "Imaging choice depends on the question. CT pulmonary angiography is the best test for pulmonary embolism, and CT angiography is the investigation of choice for suspected aortic dissection in stable patients. CT coronary angiography and the coronary calcium score assess coronary disease, while cardiac MRI is preferred for tissue characterisation and right ventricular function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "Best test"
+    ],
+    "rows": [
+     [
+      "Pulmonary embolism",
+      "CT pulmonary angiography"
+     ],
+     [
+      "Aortic dissection, stable",
+      "CT angiography"
+     ],
+     [
+      "Coronary artery disease",
+      "CT coronary angiography"
+     ],
+     [
+      "Coronary calcium burden",
+      "Coronary calcium score"
+     ],
+     [
+      "Right ventricular function",
+      "Cardiac MRI"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "8fbc2341-0392-4065-bb10-067bb070786b",
+  "9e03f788-81aa-41be-a6b6-21410218bdb8",
+  "a0b9cfe2-b1ff-4747-ae57-68632bb902aa"
+ ],
+ "src": [],
+ "refs": [
+  "The Chest X-Ray (Strobel, Smith, Burgener, Kormano)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 228
+ }
+}

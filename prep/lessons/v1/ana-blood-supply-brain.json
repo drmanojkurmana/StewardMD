@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "module": "ana-blood-supply-brain",
+ "subject": "anatomy",
+ "title": "Blood supply of the brain and spinal cord",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The brain receives its blood from two systems: the **internal carotid arteries** anteriorly and the **vertebrobasilar system** posteriorly. They join at the **circle of Willis**, an arterial anastomosis at the base of the brain. It is formed by the anterior communicating artery, two anterior cerebral arteries, two posterior communicating arteries, two posterior cerebral arteries and the proximal internal carotid arteries. The middle cerebral arteries are not part of the circle.",
+   "say": "The brain receives its blood from two systems. The internal carotid arteries supply it anteriorly, and the vertebrobasilar system supplies it posteriorly. They join at the circle of Willis, an arterial anastomosis at the base of the brain. It is formed by the anterior communicating artery, two anterior cerebral arteries, two posterior communicating arteries, two posterior cerebral arteries and the proximal internal carotid arteries. The middle cerebral arteries are not part of the circle.",
+   "vis": null
+  },
+  {
+   "tx": "The **lenticulostriate arteries** arise from the middle cerebral artery and supply the basal ganglia and internal capsule. Occlusion of a lenticulostriate branch causes a small lacunar stroke in the internal capsule and produces contralateral hemiplegia. The **medial striate artery of Heubner**, a branch of the anterior cerebral artery, supplies the caudate, putamen and anterior limb of the internal capsule. The **anterior choroidal artery**, from the internal carotid, supplies the posterior limb of the internal capsule.",
+   "say": "The lenticulostriate arteries arise from the middle cerebral artery and supply the basal ganglia and internal capsule. Occlusion of a lenticulostriate branch causes a small lacunar stroke in the internal capsule and produces contralateral hemiplegia. The medial striate artery of Heubner, a branch of the anterior cerebral artery, supplies the caudate, putamen and anterior limb of the internal capsule. The anterior choroidal artery, from the internal carotid, supplies the posterior limb of the internal capsule.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lenticulostriate branch occluded"
+     },
+     {
+      "id": "b",
+      "label": "Internal capsule lacune"
+     },
+     {
+      "id": "c",
+      "label": "Contralateral hemiplegia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **great cerebral vein of Galen** is a single median vein formed by the union of the two **internal cerebral veins**. It drains into the straight sinus. The deep venous system comprises the internal cerebral veins, the basal veins and the great vein. Ruptured **berry aneurysms** are saccular, arise at arterial bifurcations and cause **subarachnoid haemorrhage**, with the anterior communicating junction the most common site.",
+   "say": "The great cerebral vein of Galen is a single median vein formed by the union of the two internal cerebral veins. It drains into the straight sinus. The deep venous system comprises the internal cerebral veins, the basal veins and the great vein. Ruptured berry aneurysms are saccular, arise at arterial bifurcations and cause subarachnoid haemorrhage, with the anterior communicating junction the most common site.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Berry aneurysm",
+     "points": [
+      "Saccular, at bifurcations",
+      "Most common at anterior communicating junction",
+      "Rupture causes subarachnoid haemorrhage"
+     ]
+    },
+    "right": {
+     "title": "Watershed infarct",
+     "points": [
+      "Border zones between arterial territories",
+      "Occurs after hypoperfusion",
+      "Often seen between MCA and ACA or PCA"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **spinal cord** receives one **anterior spinal artery** and two **posterior spinal arteries**. The anterior artery supplies roughly the ventral two-thirds, and the posterior arteries supply the dorsal third. Segmental radicular arteries reinforce the cord. The **artery of Adamkiewicz** is the dominant thoracolumbar radicular artery. Its occlusion, for example during thoracoabdominal aneurysm repair, causes spinal cord infarction and paraplegia.",
+   "say": "The spinal cord receives one anterior spinal artery and two posterior spinal arteries. The anterior artery supplies roughly the ventral two-thirds, and the posterior arteries supply the dorsal third. Segmental radicular arteries reinforce the cord. The artery of Adamkiewicz is the dominant thoracolumbar radicular artery. Its occlusion, for example during thoracoabdominal aneurysm repair, causes spinal cord infarction and paraplegia.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "2abed94e-85c2-4409-ac20-57335a50a48f",
+  "e0945f83-d8d4-4877-a2e8-ad16d603e7bb",
+  "mk-3152d391fa58"
+ ],
+ "src": [],
+ "refs": [
+  "Chaurasia's Human Anatomy, Volume 3 (B.D. Chaurasia)",
+  "Anne Agur, Essential Clinical Anatomy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 159
+ }
+}

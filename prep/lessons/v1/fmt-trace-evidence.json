@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "fmt-trace-evidence",
+ "subject": "forensic-medicine",
+ "title": "Blood stains, seminal stains and trace evidence",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Forensic examination of a **blood stain** begins with identifying whether the stain is blood at all, then its species and group. Chemical tests for blood rely on the **peroxidase** activity of haem. The benzidine test gives a greenish blue colour with hydrogen peroxide, and the phenolphthalein (Kastle-Meyer) test gives a pink colour.",
+   "say": "Forensic examination of a blood stain begins with identifying whether the stain is blood at all, then its species and group. Chemical tests for blood rely on the peroxidase activity of haem. The benzidine test gives a greenish blue colour with hydrogen peroxide, and the phenolphthalein, or Kastle-Meyer, test gives a pink colour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Reagent or basis",
+     "Result"
+    ],
+    "rows": [
+     [
+      "Benzidine",
+      "Benzidine in glacial acetic acid with hydrogen peroxide",
+      "Greenish blue"
+     ],
+     [
+      "Kastle-Meyer (phenolphthalein)",
+      "Peroxidase-type reaction with hydrogen peroxide",
+      "Pink"
+     ],
+     [
+      "Teichmann",
+      "Haemin crystal formation, no peroxide used",
+      "Brown rhombic crystals"
+     ],
+     [
+      "Takayama",
+      "Haemochromogen crystal formation",
+      "Salmon pink feathery crystals"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Crystal tests** confirm blood beyond colour changes. The Teichmann test heats the stain with glacial acetic acid and sodium chloride to form dark brown rhomboid **haemin crystals**. The Takayama test gives pink feathery **haemochromogen** crystals. Spectroscopy is the most specific of all tests.",
+   "say": "Crystal tests confirm blood beyond colour changes. The Teichmann test heats the stain with glacial acetic acid and sodium chloride to form dark brown rhomboid haemin crystals. The Takayama test gives pink feathery haemochromogen crystals. Spectroscopy is the most specific of all tests.",
+   "vis": null
+  },
+  {
+   "tx": "To find the **species** of origin, the **precipitin test** is used. It is a species-specific immunological test. For grouping old stains, the **absorption elution** method is preferred over the benzidine test. Kunkel's tannic acid test separates carbon monoxide blood, which stays cherry red.",
+   "say": "To find the species of origin, the precipitin test is used. It is a species-specific immunological test. For grouping old stains, the absorption elution method is preferred over the benzidine test. Kunkel's tannic acid test separates carbon monoxide blood, which stays cherry red.",
+   "vis": null
+  },
+  {
+   "tx": "A **seminal stain** is confirmed by chemical and enzyme tests. The Florence test gives brown rhomboid **choline** periodide crystals, and Barberio's test gives yellow needle-shaped **spermine picrate** crystals. The **acid phosphatase** test is highest in seminal fluid, and it is conclusive when sperms are absent or the man is azoospermic.",
+   "say": "A seminal stain is confirmed by chemical and enzyme tests. The Florence test gives brown rhomboid choline periodide crystals, and Barberio's test gives yellow needle-shaped spermine picrate crystals. The acid phosphatase test is highest in seminal fluid, and it is conclusive when sperms are absent or the man is azoospermic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Target",
+     "Key result"
+    ],
+    "rows": [
+     [
+      "Florence",
+      "Choline (seminal vesicle)",
+      "Brown rhomboid crystals"
+     ],
+     [
+      "Barberio",
+      "Spermine (prostate)",
+      "Yellow needle crystals"
+     ],
+     [
+      "Acid phosphatase",
+      "Seminal enzyme",
+      "Over 100 Bodansky units suggests semen"
+     ],
+     [
+      "PSA (P30)",
+      "Prostate glycoprotein",
+      "Reliable in old stains"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sperm demonstration** is the only absolute proof of semen when at least one unbroken spermatozoon is seen. Under **UV light**, dried semen fluoresces bluish white, though blood can mask this. The **post coital interval** is judged from persistence of markers: sperm persist up to about 72 hours, while P30 is lost within about 24 hours.",
+   "say": "Sperm demonstration is the only absolute proof of semen when at least one unbroken spermatozoon is seen. Under ultraviolet light, dried semen fluoresces bluish white, though blood can mask this. The post coital interval is judged from persistence of markers. Sperm persist up to about 72 hours, while P30 is lost within about 24 hours.",
+   "vis": null
+  },
+  {
+   "tx": "In **hair examination**, human hair has thick cortex, a narrow fragmented medulla with medullary index below one third, and fine scales. Animal hair has a wide continuous medulla with index above one half. Trichology is the study of hair. **Locard's exchange principle** states that contact always transfers material between two objects.",
+   "say": "In hair examination, human hair has thick cortex, a narrow fragmented medulla with medullary index below one third, and fine scales. Animal hair has a wide continuous medulla with index above one half. Trichology is the study of hair. Locard's exchange principle states that contact always transfers material between two objects.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Human hair",
+     "points": [
+      "Fine and thin",
+      "Cortex 4 to 10 times medulla",
+      "Medullary index below 1/3",
+      "Short flat scales"
+     ]
+    },
+    "right": {
+     "title": "Animal hair",
+     "points": [
+      "Coarse and thick",
+      "Thin cortex",
+      "Medullary index above 1/2",
+      "Large step-like scales"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "bcbd14b5-ae79-4b47-956b-8e7d60a4e90e",
+  "f08f2ba0-868c-4081-9c22-1c0a226f0168",
+  "8df4f040-8ec5-4887-813b-16d18c939f9a"
+ ],
+ "src": [],
+ "refs": [
+  "Parikh's Textbook of Medical Jurisprudence and Toxicology",
+  "Reddy's Essentials of Forensic Medicine and Toxicology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 152
+ }
+}

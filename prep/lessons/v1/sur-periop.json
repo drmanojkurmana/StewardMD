@@ -1,0 +1,163 @@
+{
+ "v": 1,
+ "module": "sur-periop",
+ "subject": "surgery",
+ "title": "Perioperative care and surgical complications: key high-yield points",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Before any operation, the **preoperative assessment** looks for cardiac, respiratory, renal and metabolic risk. Blood gases and pulmonary function tests are needed in lung disease, and smokers should stop smoking and continue inhalers for at least four weeks before surgery where possible. Patients on warfarin need an **International Normalised Ratio** check before surgery. Glucocorticoid users taking more than 20 mg prednisone daily for three weeks or more, or those with a Cushingoid look, may have HPA axis suppression and need dose cover, so steroids should not simply be stopped.",
+   "say": "Before any operation, preoperative assessment looks for cardiac, respiratory, renal and metabolic risk. Blood gases and pulmonary function tests are needed in lung disease, and smokers should stop smoking and continue inhalers for at least four weeks before surgery where possible. Patients on warfarin need an International Normalised Ratio check before surgery. Glucocorticoid users taking more than 20 milligrams of prednisone daily for three weeks or more, or those with a Cushingoid look, may have suppression of the hypothalamic pituitary adrenal axis and need dose cover, so steroids should not simply be stopped.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient group",
+     "Perioperative action"
+    ],
+    "rows": [
+     [
+      "Lung disease or smoker",
+      "Blood gases, lung function tests, stop smoking"
+     ],
+     [
+      "On warfarin",
+      "Check International Normalised Ratio"
+     ],
+     [
+      "Steroid for under 3 weeks",
+      "Continue usual dose"
+     ],
+     [
+      "Prednisone over 20 mg for 3 weeks plus",
+      "Assume adrenal suppression, consider extra cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Deep vein thrombosis** is a major surgical risk, and a thrombus above the knee can cause fatal **pulmonary embolism**. Prevention is guided by a risk score and uses early ambulation, **pneumatic compression stockings** and low molecular weight heparin. Duplex ultrasound is the investigation of choice. Significant proximal disease is treated with initial parenteral anticoagulation, then warfarin or a newer oral agent. An inferior vena cava filter is reserved for patients who cannot receive anticoagulation or who fail it.",
+   "say": "Deep vein thrombosis is a major surgical risk, and a thrombus above the knee can cause fatal pulmonary embolism. Prevention is guided by a risk score and uses early ambulation, pneumatic compression stockings and low molecular weight heparin. Duplex ultrasound is the investigation of choice. Significant proximal disease is treated with initial parenteral anticoagulation, then warfarin or a newer oral agent. An inferior vena cava filter is reserved for patients who cannot receive anticoagulation or who fail it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Risk score"
+     },
+     {
+      "id": "b",
+      "label": "Early ambulation and compression"
+     },
+     {
+      "id": "c",
+      "label": "Duplex ultrasound"
+     },
+     {
+      "id": "d",
+      "label": "Parenteral anticoagulation"
+     },
+     {
+      "id": "e",
+      "label": "Warfarin or oral agent"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Respiratory problems are the commonest serious postoperative complications. **Atelectasis** typically causes crackles over the affected lobe, most often the right lower lobe, and often appears within hours after general anaesthesia. Hypoxia can arise from airway obstruction, residual neuromuscular blockade, opioid overdose, **pulmonary embolism** and cardiac causes. Early mobilisation, physiotherapy, oxygen and avoiding respiratory depressants reduce risk, and epidural analgesia is useful after major surgery.",
+   "say": "Respiratory problems are the commonest serious postoperative complications. Atelectasis typically causes crackles over the affected lobe, most often the right lower lobe, and often appears within hours after general anaesthesia. Hypoxia can arise from airway obstruction, residual neuromuscular blockade, opioid overdose, pulmonary embolism and cardiac causes. Early mobilisation, physiotherapy, oxygen and avoiding respiratory depressants reduce risk, and epidural analgesia is useful after major surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cardiac or embolic causes",
+     "points": [
+      "Myocardial infarction",
+      "Heart failure",
+      "Pulmonary embolism"
+     ]
+    },
+    "right": {
+     "title": "Local or drug causes",
+     "points": [
+      "Atelectasis",
+      "Opioid overdose",
+      "Residual muscle relaxant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Wound dehiscence** is disruption of the wound, and a **burst abdomen** is disruption of a laparotomy wound, usually between the 7th and 10th postoperative day. Its first sign is serosanguineous discharge, and it results from failure of the deep layers. Risk rises with chromic catgut, midline incisions, obesity, malignancy, raised intra-abdominal pressure and infection. Small fascial defects of 1 to 2 cm may be managed with a binder, while larger ones need reclosure and are not usually treated with antibiotics.",
+   "say": "Wound dehiscence is disruption of the wound, and a burst abdomen is disruption of a laparotomy wound, usually between the seventh and tenth postoperative day. Its first sign is serosanguineous discharge, and it results from failure of the deep layers. Risk rises with chromic catgut, midline incisions, obesity, malignancy, raised intra-abdominal pressure and infection. Small fascial defects of one to two centimetres may be managed with a binder, while larger ones need reclosure and are not usually treated with antibiotics.",
+   "vis": null
+  },
+  {
+   "tx": "**Anastomotic leak** typically presents after bowel surgery with fever, peritonitis and rising inflammatory markers. **Postoperative ileus** is a functional failure of peristalsis, and **paralytic ileus** shows multiple air fluid levels on imaging. Causes include surgery, infection such as typhoid, reflex causes like spinal fracture, uraemia, and hypokalaemia, which reduces smooth muscle contraction. Postoperative ileus is most marked in the colon and stomach are less affected.",
+   "say": "Anastomotic leak typically presents after bowel surgery with fever, peritonitis and rising inflammatory markers. Postoperative ileus is a functional failure of peristalsis, and paralytic ileus shows multiple air fluid levels on imaging. Causes include surgery, infection such as typhoid, reflex causes like spinal fracture, uraemia, and hypokalaemia, which reduces smooth muscle contraction. Postoperative ileus is most marked in the colon.",
+   "vis": null
+  },
+  {
+   "tx": "Surgical sites are classified by contamination: **clean**, **clean contaminated**, **contaminated** and **dirty**. Elective cholecystectomy is classed as clean contaminated. The **Clavien-Dindo** classification grades postoperative complications from grade I, needing only minor change, to grade V, causing death. Surgical diathermy uses **monopolar** current, which returns through a dispersive pad and carries burn risk, whereas **bipolar** current stays between forceps tips and is safer near implanted devices.",
+   "say": "Surgical sites are classified by contamination into clean, clean contaminated, contaminated and dirty. Elective cholecystectomy is classed as clean contaminated. The Clavien-Dindo classification grades postoperative complications from grade one, needing only minor change, to grade five, causing death. Surgical diathermy uses monopolar current, which returns through a dispersive pad and carries burn risk, whereas bipolar current stays between forceps tips and is safer near implanted devices.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Monopolar diathermy",
+     "points": [
+      "Return pad needed",
+      "Higher burn risk",
+      "Current travels through body"
+     ]
+    },
+    "right": {
+     "title": "Bipolar diathermy",
+     "points": [
+      "Current between forceps tips",
+      "Lower burn risk",
+      "Safer near implants"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "b718d697-e370-4445-ba21-d6b29cf6c78c",
+  "mk-67cf102357eb",
+  "mk-df9043fc2d7f"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 275
+ }
+}

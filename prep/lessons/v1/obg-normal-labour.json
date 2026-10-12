@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-normal-labour",
+ "subject": "obstetrics-gynaecology",
+ "title": "Normal labour: stages, partograph and third stage",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Labour has **stages** that are defined by cervical dilatation and birth events. The first stage runs from the onset of true labour to full dilatation, and is split into a **latent phase** and an **active phase**. Active labour is traditionally taken to begin at 4 cm dilatation under the older definition used for exam answers, though newer guidance moves this to 6 cm. The Friedman curve describes the sigmoid pattern of dilatation.",
+   "say": "Labour has stages defined by cervical dilatation and birth events. The first stage runs from the onset of true labour to full dilatation, and is split into a latent phase and an active phase. Under the older definition used for exam answers, active labour begins at 4 cm dilatation, although newer guidance moves this to 6 cm. The Friedman curve describes the sigmoid pattern of dilatation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Cervix",
+     "Typical rate or feature"
+    ],
+    "rows": [
+     [
+      "Latent",
+      "Up to about 3 to 4 cm",
+      "Mainly effacement"
+     ],
+     [
+      "Active, acceleration",
+      "3 to 4 cm",
+      "Rising slope"
+     ],
+     [
+      "Active, maximum slope",
+      "4 to 9 cm",
+      "Steepest rise"
+     ],
+     [
+      "Active, deceleration",
+      "9 to 10 cm",
+      "Slowing rise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The active phase rate is key. Minimum dilatation is **1.2 cm per hour** in nulliparous women and **1.5 cm per hour** in parous women. Slower rates indicate a **protracted active phase**. Arrest of dilatation means no change for 2 or more hours. Precipitate labour means dilatation above 5 cm per hour in nulliparae and above 10 cm per hour in multiparae.",
+   "say": "The active phase rate is key. The minimum dilatation is 1.2 centimetres per hour in nulliparous women and 1.5 centimetres per hour in parous women. Slower rates indicate a protracted active phase. Arrest of dilatation means no change for two or more hours. Precipitate labour means dilatation above 5 centimetres per hour in nulliparae and above 10 centimetres per hour in multiparae.",
+   "vis": null
+  },
+  {
+   "tx": "The **partograph** is a graphic record of maternal and fetal data against time. It is started at 4 cm in the older convention, and the **alert line** runs from 4 cm at 1 cm per hour to expected full dilatation. The **action line** lies parallel and 4 hours to the right. Crossing the action line prompts review. Descent is marked by station using fifths of the head palpable above the pelvic brim.",
+   "say": "The partograph is a graphic record of maternal and fetal data against time. It is started at 4 centimetres under the older convention, and the alert line runs from 4 centimetres at 1 centimetre per hour to expected full dilatation. The action line lies parallel and four hours to the right. Crossing the action line prompts review. Descent is marked by station, using fifths of the head palpable above the pelvic brim.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start at 4 cm"
+     },
+     {
+      "id": "b",
+      "label": "Alert line 1 cm per hour"
+     },
+     {
+      "id": "c",
+      "label": "Action line 4 h right"
+     },
+     {
+      "id": "d",
+      "label": "Review or intervene"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Bishop score** assesses cervical readiness for induction, scoring dilatation, effacement, consistency, position and station of the head. The **cardinal movements** of labour are engagement, descent, flexion, internal rotation, extension, restitution and external rotation, with expulsion. **Ha's rule** describes the elastic recoil of the levator ani bringing the occiput forward to the midline.",
+   "say": "The Bishop score assesses cervical readiness for induction, scoring dilatation, effacement, consistency, position and station of the head. The cardinal movements of labour are engagement, descent, flexion, internal rotation, extension, restitution and external rotation, followed by expulsion. Ha's rule describes the elastic recoil of the levator ani bringing the occiput forward to the midline.",
+   "vis": null
+  },
+  {
+   "tx": "Active management of the **third stage** uses a uterotonic, with **oxytocin 10 IU** intramuscularly as the drug of choice, controlled cord traction, and uterine massage. Delayed cord clamping is advised and does not raise postpartum haemorrhage risk. Normal third stage lasts about 15 minutes. Spontaneous placental delivery lowers operative blood loss and infection compared with manual removal.",
+   "say": "Active management of the third stage uses a uterotonic, with oxytocin 10 IU intramuscularly as the drug of choice, controlled cord traction, and uterine massage. Delayed cord clamping is advised and does not raise postpartum haemorrhage risk. A normal third stage lasts about 15 minutes. Spontaneous placental delivery lowers operative blood loss and infection compared with manual removal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Uterotonic",
+      "Oxytocin 10 IU IM"
+     ],
+     [
+      "Cord traction",
+      "Controlled"
+     ],
+     [
+      "Cord clamping",
+      "Delayed, not part of early clamping"
+     ],
+     [
+      "Fundal care",
+      "Uterine massage"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "b46ae4ef-80f0-43d6-8a3e-3187d0b5b7ad",
+  "3797c8f6-4b6d-4513-92cb-304b471a6d1b",
+  "3e2bf1e2-45f4-4abb-a098-2ffa77307236"
+ ],
+ "src": [],
+ "refs": [
+  "Dutta's Textbook of Gynecology",
+  "ACOG Committee Opinion on umbilical cord clamping (2017)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 202
+ }
+}

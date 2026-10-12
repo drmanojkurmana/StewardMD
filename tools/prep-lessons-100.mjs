@@ -216,11 +216,12 @@ export async function runBatch(env, reqs, o = {}) {
   const res = await retry(() => E.batchResults(env, st));
   const byId = new Map(reqs.map((r) => [r.custom_id, r]));
   let bad = 0;
+  const badKinds = {};
   for (const r of res) {
     const q = byId.get(r.custom_id);
-    if (!q || !r.ok) { bad++; continue; }
+    if (!q || !r.ok) { bad++; badKinds[r.ok ? "unknown-id" : ("batch-" + (r.error || "error"))] = (badKinds[r.ok ? "unknown-id" : ("batch-" + (r.error || "error"))] || 0) + 1; continue; }
     const m = E.readMessage(r.message, q.params.model);
-    if (!m.json || m.stop === "refusal") { bad++; continue; }
+    if (!m.json || m.stop === "refusal") { bad++; const k = m.stop === "refusal" ? "refusal" : ("bad-json(stop=" + m.stop + ")"); badKinds[k] = (badKinds[k] || 0) + 1; continue; }
     results.set(r.custom_id, { ok: true, json: m.json, usage: m.usage || {}, model: q.params.model });
     const u = usage[q.params.model] = usage[q.params.model] || { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 };
     for (const k of Object.keys(u)) u[k] += (m.usage && m.usage[k]) || 0;
@@ -233,7 +234,7 @@ export async function runBatch(env, reqs, o = {}) {
       u.input_tokens + u.cache_read_input_tokens + u.cache_creation_input_tokens, u.output_tokens, v.toFixed(4),
       `batch ${b.id}; ${reqs.filter((r) => r.params.model === model).length} requests; errors ${bad}; tools/prep-lessons-100.mjs`].join("\t") + "\n");
   }
-  console.log(JSON.stringify({ batch: b.id, requests: reqs.length, errors: bad, usd: Number(usd.toFixed(4)) }));
+  console.log(JSON.stringify({ batch: b.id, requests: reqs.length, errors: bad, errorKinds: badKinds, usd: Number(usd.toFixed(4)) }));
   return { results, usd };
 }
 
@@ -419,7 +420,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
 
 export function redoBody(mod, ground, step, why) {
   return {
-    model: DRAFT, max_tokens: 1200,
+    model: DRAFT, max_tokens: 2000,
     system: [{ type: "text", text: DRAFT_SYSTEM + " Rewrite ONE lesson step that failed checks. Same shape rules (tx 40-90 words with **key terms**, say under 110 words, one table/flow/compare visual or kind none, British spelling, no em/en dashes, paraphrase, never 8+ consecutive source words)." + "\n" + DATA_RULE }],
     messages: [{ role: "user", content: [{ type: "text", text: `<module>${mod.title}</module>\n<scope>${ground.scope}</scope>\n<source>\n${ground.kbText}\n</source>\n<problems>${why.join("; ")}</problems>\n<failed-step>${JSON.stringify(step)}</failed-step>\nReply with the replacement step JSON (tx, say, kind + visual fields).` }] }],
     output_config: { effort: "low", format: { type: "json_schema", schema: DRAFT_SCHEMA.properties.steps.items } },

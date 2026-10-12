@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "module": "cm-demography",
+ "subject": "community-medicine",
+ "title": "Demographic cycle and population indicators",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **demographic cycle** describes how a population moves from high birth and death rates to low birth and death rates. It has five stages. Stage one is high stationary, where births and deaths both stay high and cancel out. Stage two is early expanding, where death rate falls first while birth rate stays high. Stage three is late expanding, where both rates fall but births still exceed deaths. India is currently in this late expanding phase.",
+   "say": "The demographic cycle describes how a population moves from high birth and death rates to low birth and death rates. It has five stages. Stage one is high stationary, where births and deaths both stay high and cancel out. Stage two is early expanding, where the death rate falls first while the birth rate stays high. Stage three is late expanding, where both rates fall but births still exceed deaths. India is currently in this late expanding phase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Name",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "I",
+      "High stationary",
+      "High birth and death rates, little growth"
+     ],
+     [
+      "II",
+      "Early expanding",
+      "Death rate falls first, birth rate high"
+     ],
+     [
+      "III",
+      "Late expanding",
+      "Both rates fall, births still exceed deaths"
+     ],
+     [
+      "IV",
+      "Low stationary",
+      "Low birth and death rates, near zero growth"
+     ],
+     [
+      "V",
+      "Declining",
+      "Death rate exceeds birth rate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **demographic gap** is crude birth rate minus crude death rate. It is widest in the late part of the early expanding stage, and it is negative in the declining stage. Growth rate is essentially this gap, measured with migration excluded. A growth rate above 2 percent per year is called explosive growth, and this is the usual exam threshold for a population explosion.",
+   "say": "The demographic gap is crude birth rate minus crude death rate. It is widest in the late part of the early expanding stage, and it is negative in the declining stage. Growth rate is essentially this gap, measured with migration excluded. A growth rate above 2 percent per year is called explosive growth, and this is the usual exam threshold for a population explosion.",
+   "vis": null
+  },
+  {
+   "tx": "Growth rates are graded from slow to explosive. A **doubling time** of about 70 years corresponds to a growth rate near 1 percent, using the rule of 70. A growth rate of 1.5 to 2 percent is rated very rapid and doubles the population in roughly 35 to 47 years. Above 2 percent, growth is explosive.",
+   "say": "Growth rates are graded from slow to explosive. A doubling time of about 70 years corresponds to a growth rate near 1 percent, using the rule of 70. A growth rate of 1.5 to 2 percent is rated very rapid and doubles the population in roughly 35 to 47 years. Above 2 percent, growth is explosive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Annual growth (%)",
+     "Rating",
+     "Doubling time (years)"
+    ],
+    "rows": [
+     [
+      "Under 0.5",
+      "Slow",
+      "Over 139"
+     ],
+     [
+      "0.5 to 1.0",
+      "Moderate",
+      "139 to 70"
+     ],
+     [
+      "1.0 to 1.5",
+      "Rapid",
+      "70 to 47"
+     ],
+     [
+      "1.5 to 2.0",
+      "Very rapid",
+      "47 to 35"
+     ],
+     [
+      "Over 2.0",
+      "Explosive",
+      "35 or less"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **dependency ratio** is the population aged under 15 plus those over 65, divided by the population aged 15 to 64. A **demographic window** occurs when the working age share is large, and it follows falling fertility. This produces a **demographic dividend**, when the dependency ratio falls. The dependency ratio later rises again through increasing longevity, which is called the demographic burden.",
+   "say": "The dependency ratio is the population aged under 15 plus those over 65, divided by the population aged 15 to 64. A demographic window occurs when the working age share is large, and it follows falling fertility. This produces a demographic dividend, when the dependency ratio falls. The dependency ratio later rises again through increasing longevity, which is called the demographic burden.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fertility falls"
+     },
+     {
+      "id": "b",
+      "label": "Under 15 share shrinks"
+     },
+     {
+      "id": "c",
+      "label": "Working age share rises"
+     },
+     {
+      "id": "d",
+      "label": "Demographic dividend"
+     },
+     {
+      "id": "e",
+      "label": "Longevity rises"
+     },
+     {
+      "id": "f",
+      "label": "Demographic burden"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fertility indicators differ in their denominators. The **crude birth rate** uses the whole mid-year population. The **general fertility rate** uses only women aged 15 to 44 or 49, so it is a better measure of fertility. The **total fertility rate** gives the approximate completed family size. The **gross reproduction rate** counts only daughters, assuming no mortality, while the **net reproduction rate** also allows for mortality. A net reproduction rate of 1 corresponds to the two-child norm.",
+   "say": "Fertility indicators differ in their denominators. The crude birth rate uses the whole mid-year population. The general fertility rate uses only women aged 15 to 44 or 49, so it is a better measure of fertility. The total fertility rate gives the approximate completed family size. The gross reproduction rate counts only daughters, assuming no mortality, while the net reproduction rate also allows for mortality. A net reproduction rate of 1 corresponds to the two-child norm.",
+   "vis": null
+  },
+  {
+   "tx": "Census and sex indicators are frequently tested. The **child sex ratio** counts **girls per 1000 boys** aged zero to six, and a low value signals strong son preference. The **literacy rate** uses the population aged seven years and above as denominator, whereas the **crude literacy rate** uses the whole population. The **Sample Registration System** supplies birth and death rates between censuses.",
+   "say": "Census and sex indicators are frequently tested. The child sex ratio counts girls per 1000 boys aged zero to six, and a low value signals strong son preference. The literacy rate uses the population aged seven years and above as denominator, whereas the crude literacy rate uses the whole population. The Sample Registration System supplies birth and death rates between censuses.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "57db2514-5a5d-430f-834e-ce6b00bd3be3",
+  "10e7851a-6ad2-4eac-8b85-bcacbd676348",
+  "4c31817f-ef02-4b5f-96dd-9aec18d6f263"
+ ],
+ "src": [],
+ "refs": [
+  "Park K. Park's Textbook of Preventive and Social Medicine (Banarsidas Bhanot)",
+  "Census of India 2011"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 237
+ }
+}

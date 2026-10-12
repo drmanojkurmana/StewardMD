@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "ana-duodenum-pancreas-biliary",
+ "subject": "anatomy",
+ "title": "Duodenum, pancreas and biliary tract: key anatomy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **ampulla of Vater** is formed where the common bile duct meets the main pancreatic duct on the posteromedial wall of the second part of the duodenum. It is guarded by the **sphincter of Oddi**. The minor papilla, 6 to 8 cm from the pylorus, takes the accessory pancreatic duct of Santorini. Occasionally the bile and pancreatic ducts open separately.",
+   "say": "The ampulla of Vater is formed where the common bile duct meets the main pancreatic duct on the posteromedial wall of the second part of the duodenum. It is guarded by the sphincter of Oddi. The minor papilla, 6 to 8 centimetres from the pylorus, takes the accessory pancreatic duct of Santorini. Occasionally the bile and pancreatic ducts open separately.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Major papilla",
+     "points": [
+      "8 to 10 cm from pylorus",
+      "Bile and main pancreatic duct",
+      "Sphincter of Oddi guards it"
+     ]
+    },
+    "right": {
+     "title": "Minor papilla",
+     "points": [
+      "6 to 8 cm from pylorus",
+      "Accessory pancreatic duct",
+      "Duct of Santorini"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **head of the pancreas** sits in the C-loop. Its posterior relations are the common bile duct, the inferior vena cava and the renal veins, while the **uncinate process** lies in front of the aorta. The superior mesenteric artery and vein pass anterior to the uncinate process. A tumour here can compress the superior mesenteric artery, and the first part of the duodenum lies in front of the head, not behind it.",
+   "say": "The head of the pancreas sits in the C-loop. Its posterior relations are the common bile duct, the inferior vena cava and the renal veins, while the uncinate process lies in front of the aorta. The superior mesenteric artery and vein pass anterior to the uncinate process. A tumour here can compress the superior mesenteric artery, and the first part of the duodenum lies in front of the head, not behind it.",
+   "vis": null
+  },
+  {
+   "tx": "The **Calot triangle** is bounded by the cystic duct below, the common hepatic duct medially and the inferior surface of the liver above. It contains the **cystic artery** and the right hepatic artery in most cases, and the node of Lund, the sentinel node of the gallbladder. The portal vein is not a content. This triangle is used to identify the cystic artery during laparoscopic cholecystectomy.",
+   "say": "The Calot triangle is bounded by the cystic duct below, the common hepatic duct medially and the inferior surface of the liver above. It contains the cystic artery and the right hepatic artery in most cases, and the node of Lund, the sentinel node of the gallbladder. The portal vein is not a content. This triangle is used to identify the cystic artery during laparoscopic cholecystectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cystic duct"
+     },
+     {
+      "id": "b",
+      "label": "Common hepatic duct"
+     },
+     {
+      "id": "c",
+      "label": "Liver surface"
+     },
+     {
+      "id": "d",
+      "label": "Cystic artery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **supraduodenal bile duct** gets most of its blood from axial vessels. About 60 percent comes from the retroduodenal artery, a branch of the gastroduodenal artery, running up from the duodenal end. About 38 percent comes from the right hepatic artery at the hepatic end. Only about 2 percent is non-axial from the proper hepatic artery. The **superior pancreaticoduodenal artery** arises from the gastroduodenal artery, and the inferior one from the superior mesenteric artery.",
+   "say": "The supraduodenal bile duct gets most of its blood from axial vessels. About 60 percent comes from the retroduodenal artery, a branch of the gastroduodenal artery, running up from the duodenal end. About 38 percent comes from the right hepatic artery at the hepatic end. Only about 2 percent is non-axial from the proper hepatic artery. The superior pancreaticoduodenal artery arises from the gastroduodenal artery, and the inferior one from the superior mesenteric artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Source",
+     "Share",
+     "Route"
+    ],
+    "rows": [
+     [
+      "Retroduodenal branch",
+      "About 60 percent",
+      "From duodenal end"
+     ],
+     [
+      "Right hepatic artery",
+      "About 38 percent",
+      "From hepatic end"
+     ],
+     [
+      "Proper hepatic branches",
+      "About 2 percent",
+      "Non-axial"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "0fd9ea6b-15ed-4a1d-a21d-97f10e8e63b2",
+  "ee20f7ae-f555-42ac-944a-4554f1bc421d",
+  "affeace2-1170-4ede-9005-bc9a5d1f3dc7"
+ ],
+ "src": [],
+ "refs": [
+  "Snell's Clinical Anatomy by Regions",
+  "Gray's Anatomy for Students"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 156
+ }
+}

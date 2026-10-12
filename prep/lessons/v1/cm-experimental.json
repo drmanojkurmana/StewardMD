@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "cm-experimental",
+ "subject": "community-medicine",
+ "title": "Randomised controlled trials and experimental studies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Experimental studies are **intervention studies**. Unlike observational studies, the investigator actively changes a determinant of disease or its course, and the study tests a hypothesis. The **randomised controlled trial** is the top experimental design. Participants are allocated to study or control groups by chance, so the groups are comparable on baseline characteristics and known and unknown confounders are spread evenly between them.",
+   "say": "Experimental studies are intervention studies. Unlike observational studies, the investigator actively changes a determinant of disease or its course, and the study tests a hypothesis. The randomised controlled trial is the top experimental design. Participants are allocated to study or control groups by chance, so the groups are comparable on baseline characteristics, and known and unknown confounders are spread evenly between them.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Eligible participants"
+     },
+     {
+      "id": "b",
+      "label": "Informed consent"
+     },
+     {
+      "id": "c",
+      "label": "Random allocation"
+     },
+     {
+      "id": "d",
+      "label": "Study group"
+     },
+     {
+      "id": "e",
+      "label": "Control group"
+     },
+     {
+      "id": "f",
+      "label": "Outcome comparison"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "f"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Randomisation** is the heart of the trial. Allocation is done by chance, not by choice, and the investigator has no control over which group a participant enters. This removes **selection bias** and aims for comparable groups. Randomisation is done after eligibility is confirmed and consent is taken. A random number table or computer generated sequence is the best method; odd or even admission days and lotteries are weaker.",
+   "say": "Randomisation is the heart of the trial. Allocation is done by chance, not by choice, and the investigator has no control over which group a participant enters. This removes selection bias and aims for comparable groups. Randomisation is done after eligibility is confirmed and consent is taken. A random number table or computer generated sequence is the best method; odd or even admission days and lotteries are weaker.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strengths",
+     "points": [
+      "Removes selection bias",
+      "Aims for comparable groups",
+      "Balances known and unknown confounders"
+     ]
+    },
+    "right": {
+     "title": "Limits",
+     "points": [
+      "Does not guarantee comparability",
+      "Does not raise external validity",
+      "Odd or even days are weaker methods"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Blinding** guards against assessment and interviewer bias. In a **single blind** trial the participant does not know the group. In a **double blind** trial neither the participant nor the investigator knows the allocation. In a **triple blind** trial the data analyst is also unaware. Double blinding removes interviewer bias and placebo effects. When the outcome is hard, such as death, blinding matters less.",
+   "say": "Blinding guards against assessment and interviewer bias. In a single blind trial the participant does not know the group. In a double blind trial neither the participant nor the investigator knows the allocation. In a triple blind trial the data analyst is also unaware. Double blinding removes interviewer bias and placebo effects. When the outcome is hard, such as death, blinding matters less.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Who is unaware",
+     "Bias addressed"
+    ],
+    "rows": [
+     [
+      "Single blind",
+      "Participant",
+      "Participant expectation"
+     ],
+     [
+      "Double blind",
+      "Participant and investigator",
+      "Interviewer and placebo effect"
+     ],
+     [
+      "Triple blind",
+      "Participant, investigator, analyst",
+      "Analysis bias as well"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Analysis rules matter. **Intention to treat** analysis keeps every randomised participant in the group to which they were first allocated, including drop-outs. Attrition from death, migration or loss of interest must be minimised. A **crossover** design lets each patient act as their own control and reduces the number of patients needed, though it is not chosen only for ethical reasons. **Allocation concealment** prevents guessing the next assignment.",
+   "say": "Analysis rules matter. Intention to treat analysis keeps every randomised participant in the group to which they were first allocated, including drop-outs. Attrition from death, migration or loss of interest must be minimised. A crossover design lets each patient act as their own control and reduces the number of patients needed. Allocation concealment prevents guessing the next assignment.",
+   "vis": null
+  },
+  {
+   "tx": "Know the **phases of clinical trials**. Phase I uses healthy volunteers, often 20 to 80, to test safety, tolerability, pharmacokinetics and dose. Phase II uses patients to assess efficacy and dosing. Phase III is a large randomised multicentre comparison with the existing gold standard. Phase IV is post marketing surveillance for long term side effects. Oncology and HIV trials may use end stage patients in phase I.",
+   "say": "Know the phases of clinical trials. Phase I uses healthy volunteers, often twenty to eighty, to test safety, tolerability, pharmacokinetics and dose. Phase II uses patients to assess efficacy and dosing. Phase III is a large randomised multicentre comparison with the existing gold standard. Phase IV is post marketing surveillance for long term side effects. Oncology and HIV trials may use end stage patients in phase I.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Subjects",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "I",
+      "Healthy volunteers",
+      "Safety and dose"
+     ],
+     [
+      "II",
+      "Patients",
+      "Efficacy"
+     ],
+     [
+      "III",
+      "Large patient group",
+      "Comparison with gold standard"
+     ],
+     [
+      "IV",
+      "Patients after approval",
+      "Long term side effects"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "c453e9ea-b6e7-4e91-868c-4bb852b6dd42",
+  "626f70d0-17dc-4902-881a-3df61f210f06",
+  "mk-4c563915fa72"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K Park)",
+  "CONSORT 2010 Statement"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 144
+ }
+}

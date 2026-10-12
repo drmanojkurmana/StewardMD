@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "module": "rad-ultrasound",
+ "subject": "radiology",
+ "title": "Ultrasound and Doppler: Physics, Artefacts and Key Clinical Uses",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Diagnostic ultrasound works on the **piezoelectric effect**. Transducer crystals, often lead zirconate titanate, convert electrical pulses into mechanical oscillations that send sound into the body, and the returning echoes are converted back into electrical signals. Frequency decides depth and resolution: abdominal and obstetric scans use 3.5 to 5 MHz, while transvaginal scans use 5 to 7.5 MHz and thyroid, breast and scrotal scans use higher frequencies.",
+   "say": "Diagnostic ultrasound works on the piezoelectric effect. Transducer crystals, often lead zirconate titanate, convert electrical pulses into mechanical oscillations that send sound into the body, and the returning echoes are converted back into electrical signals. Frequency decides depth and resolution. Abdominal and obstetric scans use 3.5 to 5 MHz, transvaginal scans use 5 to 7.5 MHz, and thyroid, breast and scrotal scans use higher frequencies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Application",
+     "Typical transducer frequency"
+    ],
+    "rows": [
+     [
+      "Abdominal and obstetric",
+      "3.5 to 5 MHz"
+     ],
+     [
+      "Transvaginal and transrectal",
+      "5 to 7.5 MHz"
+     ],
+     [
+      "Thyroid, breast, scrotal",
+      "Higher frequency range"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ultrasound behaves differently at tissue boundaries. The **acoustic impedance** difference between two tissues decides how much sound is reflected. Bone, calculi and gas reflect almost all sound, so the beam cannot pass and a dark **acoustic shadow** forms behind them. Fluid transmits sound well, so structures behind a fluid-filled cyst appear brighter, which is **posterior enhancement**.",
+   "say": "Ultrasound behaves differently at tissue boundaries. The acoustic impedance difference between two tissues decides how much sound is reflected. Bone, calculi and gas reflect almost all sound, so the beam cannot pass and a dark acoustic shadow forms behind them. Fluid transmits sound well, so structures behind a fluid-filled cyst appear brighter, which is posterior enhancement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Large impedance difference"
+     },
+     {
+      "id": "b",
+      "label": "Sound reflected"
+     },
+     {
+      "id": "c",
+      "label": "Acoustic shadow behind bone, stone, gas"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several artefacts are high-yield. **Reverberation** occurs when sound bounces repeatedly between two reflecting surfaces, giving parallel lines. A **comet tail** is a bright, narrow, ring-down artefact from cholesterol crystals or gas, and is typical of gallbladder adenomyomatosis with Rokitansky-Aschoff sinuses. A **mirror artefact** appears when the beam reflects off a strong interface, duplicating a structure on the far side of it.",
+   "say": "Several artefacts are high yield. Reverberation occurs when sound bounces repeatedly between two reflecting surfaces, giving parallel lines. A comet tail is a bright, narrow, ring-down artefact from cholesterol crystals or gas, and is typical of gallbladder adenomyomatosis with Rokitansky-Aschoff sinuses. A mirror artefact appears when the beam reflects off a strong interface, duplicating a structure on the far side of it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Artefact",
+     "Typical clinical clue"
+    ],
+    "rows": [
+     [
+      "Reverberation",
+      "Repeated parallel lines"
+     ],
+     [
+      "Comet tail",
+      "Gallbladder adenomyomatosis"
+     ],
+     [
+      "Mirror image",
+      "Duplicate structure beyond a strong reflector"
+     ],
+     [
+      "Acoustic shadow",
+      "Dark zone behind bone or stone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Doppler measures the frequency shift of sound reflected from moving red cells. The **Doppler angle** matters: the shift is zero at 90 degrees, and the ideal angle lies between 45 and 60 degrees. In **colour Doppler**, blue usually means flow towards the probe and red means flow away, while paler shades mean higher velocity. **Spectral Doppler** gives a velocity waveform, and power Doppler shows flow well in slow or small vessels but loses direction and velocity.",
+   "say": "Doppler measures the frequency shift of sound reflected from moving red cells. The Doppler angle matters. The shift is zero at 90 degrees, and the ideal angle lies between 45 and 60 degrees. In colour Doppler, blue usually means flow towards the probe and red means flow away, while paler shades mean higher velocity. Spectral Doppler gives a velocity waveform, and power Doppler shows flow well in slow or small vessels but loses direction and velocity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Colour Doppler",
+     "points": [
+      "Blue: towards probe",
+      "Red: away from probe",
+      "Paler shade: higher velocity"
+     ]
+    },
+    "right": {
+     "title": "Power Doppler",
+     "points": [
+      "Good for slow or small-vessel flow",
+      "No direction information",
+      "No velocity information"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ultrasound is the first-line test in many common Indian exam scenarios. **Transthoracic echocardiography** is the investigation of choice for pericardial effusion and tamponade. Ultrasound is also the investigation of choice for **hypertrophic pyloric stenosis**, where pyloric wall thickness of 3 mm or more and channel length of 14 mm or more are abnormal. For minimal ascites, ultrasound is preferred, and in neonates it is used for hip dysplasia.",
+   "say": "Ultrasound is the first-line test in many common Indian exam scenarios. Transthoracic echocardiography is the investigation of choice for pericardial effusion and tamponade. Ultrasound is also the investigation of choice for hypertrophic pyloric stenosis, where pyloric wall thickness of 3 mm or more and channel length of 14 mm or more are abnormal. For minimal ascites, ultrasound is preferred, and in neonates it is used for hip dysplasia.",
+   "vis": null
+  },
+  {
+   "tx": "Several specialised techniques are tested. **Elastography** measures tissue stiffness, and **contrast-enhanced ultrasound** uses microbubble agents to show perfusion. **Endoscopic ultrasound** places a probe in the gut lumen, allowing fine-needle aspiration of pancreatic masses, with a reported sensitivity of 91 percent and specificity of 100 percent for histological diagnosis. **Harmonic imaging** uses non-linear propagation to reduce artefacts and improve resolution.",
+   "say": "Several specialised techniques are tested. Elastography measures tissue stiffness, and contrast-enhanced ultrasound uses microbubble agents to show perfusion. Endoscopic ultrasound places a probe in the gut lumen, allowing fine-needle aspiration of pancreatic masses, with a reported sensitivity of 91 percent and specificity of 100 percent for histological diagnosis. Harmonic imaging uses non-linear propagation to reduce artefacts and improve resolution.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-068224f8c16b",
+  "583b086c-3276-499a-bb46-aabed97b3afd",
+  "0a91d4d7-7792-433d-a1b3-53100c4c93f9"
+ ],
+ "src": [],
+ "refs": [
+  "Christensen's Physics of Diagnostic Radiology",
+  "Differential Diagnosis in Ultrasound: A Teaching Atlas (Schmidt G)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 184
+ }
+}

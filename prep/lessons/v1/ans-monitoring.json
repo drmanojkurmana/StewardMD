@@ -1,0 +1,180 @@
+{
+ "v": 1,
+ "module": "ans-monitoring",
+ "subject": "anaesthesia",
+ "title": "Monitoring in anaesthesia: essentials for NEET-PG and INI-CET",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Monitoring in anaesthesia aims to detect problems early, before they cause harm. **Pulse oximetry** measures arterial oxygen saturation (SpO2) non-invasively. It is affected by **methaemoglobinaemia**, which pushes the reading toward 85 percent, and it can read falsely in dark skin, so it must be interpreted with clinical judgement. Minimum monitoring standards for every anaesthetic include oxygenation, ventilation, circulation and temperature.",
+   "say": "Monitoring in anaesthesia aims to detect problems early, before they cause harm. Pulse oximetry measures arterial oxygen saturation, SpO2, non-invasively. It is affected by methaemoglobinaemia, which pushes the reading toward 85 percent, and it can read falsely in dark skin, so it must be interpreted with clinical judgement. Minimum monitoring standards for every anaesthetic include oxygenation, ventilation, circulation and temperature.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Monitor",
+     "Key use",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Pulse oximetry",
+      "Oxygenation",
+      "Misleads in methaemoglobinaemia"
+     ],
+     [
+      "Capnography",
+      "Ventilation and tube position",
+      "Waveform is the surest sign of tracheal intubation"
+     ],
+     [
+      "ECG",
+      "Rhythm and ischaemia",
+      "Sensitivity depends on leads used"
+     ],
+     [
+      "Temperature",
+      "Core and peripheral heat",
+      "Oesophageal probe gives core temperature"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Capnography** is continuous measurement of end-tidal CO2 (ETCO2), normally 35 to 45 mm Hg. It works because CO2 absorbs infrared light. It is the surest confirmatory sign of correct tracheal intubation; oesophageal intubation or tube displacement gives ETCO2 of zero. A sudden rise above 100 mm Hg suggests **malignant hyperthermia**, while a sudden fall suggests anaphylaxis, circuit disconnection or cardiac arrest.",
+   "say": "Capnography is continuous measurement of end-tidal CO2, normally 35 to 45 millimetres of mercury. It works because CO2 absorbs infrared light. It is the surest confirmatory sign of correct tracheal intubation; oesophageal intubation or tube displacement gives an ETCO2 of zero. A sudden rise above 100 millimetres of mercury suggests malignant hyperthermia, while a sudden fall suggests anaphylaxis, circuit disconnection or cardiac arrest.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sudden rise in ETCO2"
+     },
+     {
+      "id": "b",
+      "label": "Malignant hyperthermia, fever, shivering"
+     },
+     {
+      "id": "c",
+      "label": "Sudden fall in ETCO2"
+     },
+     {
+      "id": "d",
+      "label": "Tube out, anaphylaxis, arrest"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bispectral index (BIS)** is a processed EEG score from 0 to 100 that tracks depth of hypnosis. Scores of 40 to 60 indicate general anaesthesia with low awareness risk; below 40 is deep hypnosis; 20 indicates burst suppression; 0 is an isoelectric EEG. BIS was approved by the FDA in 2004 to reduce intraoperative awareness. Clinically, depth is also judged by signs such as **lacrimation**, sweating, tachycardia, hypertension and movement on painful stimuli.",
+   "say": "Bispectral index, or BIS, is a processed EEG score from 0 to 100 that tracks depth of hypnosis. Scores of 40 to 60 indicate general anaesthesia with low awareness risk; below 40 is deep hypnosis; 20 indicates burst suppression; 0 is an isoelectric EEG. BIS was approved by the FDA in 2004 to reduce intraoperative awareness. Clinically, depth is also judged by signs such as lacrimation, sweating, tachycardia, hypertension and movement on painful stimuli.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "BIS score",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "80 to 100",
+      "Awake or light sedation"
+     ],
+     [
+      "60 to 80",
+      "Moderate sedation"
+     ],
+     [
+      "40 to 60",
+      "General anaesthesia"
+     ],
+     [
+      "Below 40",
+      "Deep hypnotic state"
+     ],
+     [
+      "Below 20",
+      "Burst suppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neuromuscular monitoring** uses supramaximal stimulation of a peripheral nerve. The **ulnar nerve** is the most popular site, with the adductor pollicis as the response muscle. The **train-of-four (TOF)** delivers four stimuli at 0.2 seconds over 2 seconds, so the gap between stimuli is 0.5 seconds. TOF is preferred in non-depolarising blockade because the degree of block can be read directly. The diaphragm recovers earlier than the adductor pollicis.",
+   "say": "Neuromuscular monitoring uses supramaximal stimulation of a peripheral nerve. The ulnar nerve is the most popular site, with the adductor pollicis as the response muscle. The train-of-four delivers four stimuli at 0.2 seconds over 2 seconds, so the gap between stimuli is 0.5 seconds. TOF is preferred in non-depolarising blockade because the degree of block can be read directly. The diaphragm recovers earlier than the adductor pollicis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ulnar nerve stimulation"
+     },
+     {
+      "id": "b",
+      "label": "Adductor pollicis twitch"
+     },
+     {
+      "id": "c",
+      "label": "Four stimuli, 0.5 s apart"
+     },
+     {
+      "id": "d",
+      "label": "Read fade in TOF ratio"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Transoesophageal echocardiography (TEE)** is the most sensitive intraoperative tool for myocardial ischaemia, detecting regional wall motion abnormality earlier than ECG, though it needs expertise and equipment. ECG sensitivity depends on the number of leads monitored. Pulmonary artery catheter pressures show ischaemia as a rise in wedge pressure. Ask whether the question is asking for the best or the most practical monitor. Indian exam papers often test this distinction.",
+   "say": "Transoesophageal echocardiography is the most sensitive intraoperative tool for myocardial ischaemia, detecting regional wall motion abnormality earlier than ECG, though it needs expertise and equipment. ECG sensitivity depends on the number of leads monitored. Pulmonary artery catheter pressures show ischaemia as a rise in wedge pressure. Ask whether the question is asking for the best or the most practical monitor, as Indian exam papers often test this distinction.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ebd0249b-97ec-4be0-9268-b42e496a1786",
+  "ad9e717d-95c8-46e2-b69f-0c020b632d6f",
+  "mk-d9ccad3955ac"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anaesthesia (Miller RD, ed.)",
+  "Morgan and Mikhail's Clinical Anesthesiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 190
+ }
+}
