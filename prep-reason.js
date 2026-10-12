@@ -231,13 +231,166 @@
     return h;
   }
 
+  /* kmSlot(it): returns the compact Know more slot element for items that do not have the reasoning body. */
+  function kmSlot(it) {
+    if (!it || hasItem(it)) return "";
+    var id = it.id, s = it._s || "", m = it._m || it.t || "";
+    return '<div class="pn-km" data-i="' + escH(id) + '" data-s="' + escH(s) + '" data-m="' + escH(m) + '"></div>';
+  }
+
+  function kmKindLabel(t) {
+    if (t.k === "kb") return "Knowledge Library";
+    if (t.k === "ls") return "Lesson";
+    if (t.k === "dr") return "Drug Index";
+    if (t.k === "pr") return "Protocol";
+    if (t.k === "cd") return "Flashcards";
+    return "";
+  }
+
+  function kmTargetLabel(t) {
+    if (t.k === "kb") return "Read more in Knowledge Library: " + (t.title || t.id);
+    if (t.k === "ls") return t.tier === "topic" ? ("Read the lesson: " + (t.title || "Revise this topic")) : ("Learn the lesson: " + (t.title || "Revise this topic"));
+    if (t.k === "dr") return "Drug: " + (t.title || t.id);
+    if (t.k === "pr") return "Protocol: " + (t.title || t.id);
+    if (t.k === "cd") return "Cards for this topic";
+    return t.title || "";
+  }
+
+  /* kmTargets(d) -> { rowTargets, allTargets }
+     Separates item-specific topic targets (for the direct row) and full targets (for the bottom sheet). */
+  function kmTargets(d) {
+    var rowTargets = [], allTargets = [];
+    var sid = d.sid || "", mid = d.mid || "";
+    var links = d.links || [];
+    var kb = links.filter(function (l) { return l.k === "kb"; });
+    var dr = links.filter(function (l) { return l.k === "dr"; });
+    var pr = links.filter(function (l) { return l.k === "pr"; });
+    var okLessons = d.okLessons || [];
+    var lesson = d.lesson;
+
+    kb.forEach(function (l) {
+      var t = { k: "kb", id: l.id, title: l.title || l.id, act: "r-kb", attrs: ' data-id="' + escH(l.id) + '"' };
+      rowTargets.push(t); allTargets.push(t);
+    });
+
+    var lsList = okLessons.slice();
+    if (!lsList.length && lesson) {
+      lsList.push({ key: lesson.key, title: lesson.title || pretty(lesson.key), tier: "topic", step: "" });
+    }
+    lsList.sort(function (a, b) {
+      var at = a.tier === "topic" ? 0 : 1;
+      var bt = b.tier === "topic" ? 0 : 1;
+      return at - bt;
+    });
+    lsList.forEach(function (l) {
+      var t = {
+        k: "ls", key: l.key, title: l.title || l.key, tier: l.tier || "specific", step: l.step || "",
+        act: "l-open", attrs: ' data-s="' + escH(sid) + '" data-m="' + escH(mid) + '" data-l="' + escH(l.key) + '"' + (l.step ? ' data-step="' + escH(l.step) + '"' : "")
+      };
+      rowTargets.push(t); allTargets.push(t);
+    });
+
+    dr.forEach(function (l) {
+      var t = { k: "dr", id: l.id, title: l.title || l.id, act: "r-drug", attrs: ' data-t="' + escH(l.title || l.id) + '"' };
+      rowTargets.push(t); allTargets.push(t);
+    });
+
+    pr.forEach(function (l) {
+      var t = { k: "pr", id: l.id, title: l.title || l.id, act: "r-proto", attrs: ' data-id="' + escH(l.id) + '"' };
+      rowTargets.push(t); allTargets.push(t);
+    });
+
+    if (d.itemCards) {
+      var tCd = { k: "cd", mid: mid, title: "Cards for this topic", act: "k-open", attrs: ' data-s="' + escH(sid) + '" data-m="' + escH(mid) + '"' };
+      rowTargets.push(tCd); allTargets.push(tCd);
+    } else if (d.cards) {
+      allTargets.push({ k: "cd", mid: mid, title: "Cards for this topic", act: "k-open", attrs: ' data-s="' + escH(sid) + '" data-m="' + escH(mid) + '"' });
+    }
+
+    return { rowTargets: rowTargets, allTargets: allTargets };
+  }
+
+  /* knowMoreHtml(d): compact "Know more" row below explanation.
+     1 target -> direct button
+     2 targets of different kinds -> 2 buttons side by side
+     >2 targets or several of one kind -> 1 "Know more" button opening bottom sheet */
+  function knowMoreHtml(d) {
+    var tg = d.targets || [];
+    if (!tg.length) return "";
+    if (tg.length === 1) {
+      var t = tg[0];
+      return '<div class="pn-km-row">' +
+        '<button type="button" class="pn-km-btn" data-act="' + t.act + '"' + t.attrs + '>' +
+        '<small>' + escH(kmKindLabel(t)) + '</small>' +
+        '<b>' + escH(kmTargetLabel(t)) + '</b>' +
+        '</button></div>';
+    }
+    if (tg.length === 2 && tg[0].k !== tg[1].k) {
+      var t0 = tg[0], t1 = tg[1];
+      return '<div class="pn-km-row pn-km-duo">' +
+        '<button type="button" class="pn-km-btn" data-act="' + t0.act + '"' + t0.attrs + '>' +
+        '<small>' + escH(kmKindLabel(t0)) + '</small>' +
+        '<b>' + escH(kmTargetLabel(t0)) + '</b>' +
+        '</button>' +
+        '<button type="button" class="pn-km-btn" data-act="' + t1.act + '"' + t1.attrs + '>' +
+        '<small>' + escH(kmKindLabel(t1)) + '</small>' +
+        '<b>' + escH(kmTargetLabel(t1)) + '</b>' +
+        '</button></div>';
+    }
+    var n = (d.allTargets && d.allTargets.length) || tg.length;
+    return '<div class="pn-km-row">' +
+      '<button type="button" class="pn-km-btn pn-km-more" data-act="r-km-sheet" data-i="' + escH(d.iid) + '" data-s="' + escH(d.sid || "") + '" data-m="' + escH(d.mid || "") + '">' +
+      '<div class="pn-km-more-left">' +
+      '<small>Topic links</small>' +
+      '<b>Know more</b>' +
+      '</div>' +
+      '<span class="pn-km-count">' + n + ' topics &rsaquo;</span>' +
+      '</button></div>';
+  }
+
+  /* knowMoreSheetBodyHtml(d): targets grouped by kind for the bottom sheet.
+     Group order: Knowledge Library, Lessons (module chapter first, then specific), Drugs, Protocols, Flashcards. */
+  function knowMoreSheetBodyHtml(d) {
+    var targets = d.allTargets || d.targets || [];
+    if (!targets.length) return "";
+    var groups = [
+      { k: "kb", title: "Knowledge Library" },
+      { k: "ls", title: "Lessons" },
+      { k: "dr", title: "Drugs" },
+      { k: "pr", title: "Protocols" },
+      { k: "cd", title: "Flashcards" }
+    ];
+    var h = "";
+    groups.forEach(function (g) {
+      var items = targets.filter(function (t) { return t.k === g.k; });
+      if (!items.length) return;
+      if (g.k === "ls") {
+        items.sort(function (a, b) {
+          var at = a.tier === "topic" ? 0 : 1;
+          var bt = b.tier === "topic" ? 0 : 1;
+          return at - bt;
+        });
+      }
+      h += '<div class="pn-km-group"><h3 class="pn-km-gh">' + escH(g.title) + '</h3><ul class="pn-rl">' +
+        items.map(function (t) {
+          var lbl = t.k === "ls" && t.tier === "topic" ? ("Read the lesson: " + (t.title || "Revise this topic")) : (t.title || t.id);
+          return '<li><button type="button" class="pn-rlr" data-act="' + t.act + '"' + t.attrs + '>' +
+            '<small>' + escH(kmKindLabel(t)) + '</small>' +
+            '<b>' + escH(lbl) + '</b></button></li>';
+        }).join("") + '</ul></div>';
+    });
+    return h;
+  }
+
   var PURE = { SHOW: SHOW, VER: VER, has: hasItem, hasX: has, linksOf: linksOf, pref: pref, nextAction: nextAction,
     nextLabel: nextLabel, shardLinks: shardLinks, lessonLinks: lessonLinks, relOf: relOf, mergeLinks: mergeLinks,
-    body: body, slotHtml: slotHtml, escH: escH, findRunItem: findRunItem, srcOf: srcOf };
+    body: body, slotHtml: slotHtml, escH: escH, findRunItem: findRunItem, srcOf: srcOf,
+    kmSlot: kmSlot, kmKindLabel: kmKindLabel, kmTargetLabel: kmTargetLabel, kmTargets: kmTargets,
+    knowMoreHtml: knowMoreHtml, knowMoreSheetBodyHtml: knowMoreSheetBodyHtml };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
-  var R = { ptr: null, ptrP: null, last: null, slots: {} };
+  var R = { ptr: null, ptrP: null, last: null, slots: {}, kmTargets: {}, kmSheet: null };
   function api(H) { return (H.bankApi || "/api/prep/bank/").replace(/\/?$/, "/"); }
   function cget(H, k) { try { return H.cacheGet ? Promise.resolve(H.cacheGet(k)).then(null, function () { return null; }) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function cput(H, k, v) { try { if (H.cachePut) H.cachePut(k, v); } catch (e) {} }
@@ -319,8 +472,43 @@
       return out;
     });
   }
-  /* fill(H): patch every links slot on screen, each by its own data-i/s/m. The feedback slot and each
-     Knowledge-gaps slot resolve independently; a gaps slot finds its item in the current run (gaps never call
+  function closeKmSheet() {
+    var el = G.document && G.document.getElementById("pnKmSheet");
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+    var had = !!R.kmSheet;
+    R.kmSheet = null;
+    return had;
+  }
+  function openKmSheet(d, H) {
+    closeKmSheet();
+    var root = (H && H.root) ? H.root() : (G.document && G.document.getElementById("smdPrep"));
+    if (!root) return;
+    var wrap = G.document.createElement("div");
+    wrap.className = "pn-sheet-wrap pn-km-wrap";
+    wrap.id = "pnKmSheet";
+    var closeIco = (H && H.ico) ? H.ico("close") : '<svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 13.41 12z"/></svg>';
+    wrap.innerHTML = '<div class="pn-scrim" data-act="r-km-close"></div>' +
+      '<section class="pn-sheet pn-km-sheet" role="dialog" aria-modal="true" aria-labelledby="pnKmSheetT" tabindex="-1">' +
+      '<span class="pn-grab" aria-hidden="true"></span>' +
+      '<div class="pn-sheet-h"><h2 id="pnKmSheetT">Know more</h2><button type="button" class="pn-ib" data-act="r-km-close" aria-label="Close">' + closeIco + '</button></div>' +
+      '<div class="pn-km-sheet-b">' + knowMoreSheetBodyHtml(d) + '</div>' +
+      '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="r-km-close">Close</button></div>' +
+      '</section>';
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-act], [data-act='r-km-close']");
+      if (!b) return;
+      var act = b.getAttribute("data-act");
+      if (act === "r-km-close") {
+        closeKmSheet();
+      } else if (act !== "r-km-sheet") {
+        setTimeout(closeKmSheet, 0);
+      }
+    });
+    root.appendChild(wrap);
+    R.kmSheet = wrap;
+  }
+  /* fill(H): patch every links slot on screen, each by its own data-i/s/m. The feedback slot, Know more row,
+     and each Knowledge-gaps slot resolve independently; a gaps slot finds its item in the current run (gaps never call
      remember()). A slot that fails stays unmarked, so a later paint retries it. */
   function fill(H) {
     var root = null;
@@ -328,7 +516,7 @@
     if (!root || !root.querySelectorAll) return;
     var slots = [];
     try {
-      var list = root.querySelectorAll(".pn-rx[data-i]");
+      var list = root.querySelectorAll(".pn-rx[data-i], .pn-km[data-i]");
       for (var i = 0; i < list.length; i++) if (!list[i].getAttribute("data-done")) slots.push(list[i]);
     } catch (e) { return; }
     if (!slots.length) return;
@@ -340,6 +528,7 @@
     var iid = slot.getAttribute("data-i"), sid = slot.getAttribute("data-s") || "", mid = slot.getAttribute("data-m") || "";
     if (!iid || slot.getAttribute("data-done")) return;
     slot.setAttribute("data-done", "wait");
+    var isKm = slot.classList ? slot.classList.contains("pn-km") : (slot.className && slot.className.indexOf("pn-km") !== -1);
     var found = findRunItem(runItems, iid);
     var x = (found && found.x) || (R.last && R.last.iid === iid ? R.last.x : {}) || {};
     if (found) {
@@ -360,12 +549,36 @@
       var lsKeys = pipe.filter(function (l) { return l.k === "ls"; }).map(function (l) { return l.id; });
       if (sh && sh.mod && sh.mod.ls) lsKeys = lsKeys.concat(sh.mod.ls);
       var checks = lessons.length ? lessons.map(function (l) { return checkLesson(l.key, mid); }) : (lsKeys[0] ? [checkLesson(lsKeys[0], mid)] : []);
-      var wantCd = pipe.some(function (l) { return l.k === "cd"; }) || !!(sh && sh.mod && sh.mod.cd);
+      var itemCards = pipe.some(function (l) { return l.k === "cd"; });
+      var wantCd = itemCards || !!(sh && sh.mod && sh.mod.cd);
       return Promise.all([Promise.all(checks), wantCd ? checkCards(mid) : false,
         resolveRelated(H, sh ? relOf(sh, iid) : [])]).then(function (rr) {
         var okLessons = lessons.filter(function (l, i) { return rr[0][i]; });
         var lesson = (!okLessons.length && lsKeys[0] && rr[0][0]) ? { key: lsKeys[0] } : null;
         var cards = !!rr[1], related = rr[2] || [];
+        var sel = isKm ? '.pn-km[data-i="' + iid + '"]' : '.pn-rx[data-i="' + iid + '"]';
+        var updateEl = function (html, hide) {
+          var live = null;
+          try { live = (H.root() || {}).querySelector ? H.root().querySelector(sel) : null; } catch (e) {}
+          var el = live || slot;
+          el.innerHTML = html;
+          el.setAttribute("data-done", "1");
+          if (el.style) { el.style.display = hide ? "none" : ""; }
+        };
+
+        if (isKm) {
+          var hasAny = pipe.length > 0 || (sh && sh.e && sh.e[String(iid)] && sh.e[String(iid)].some(function (r) { return r[1] >= SHOW; }));
+          var km = hasAny ? kmTargets({ links: links, okLessons: okLessons, lesson: lesson, cards: cards, itemCards: itemCards, sid: sid, mid: mid }) : { rowTargets: [], allTargets: [] };
+          if (!km.rowTargets.length) {
+            updateEl("", true);
+            return;
+          }
+          R.kmTargets[iid] = { targets: km.rowTargets, allTargets: km.allTargets, sid: sid, mid: mid, iid: iid };
+          var kmHtml = knowMoreHtml({ targets: km.rowTargets, allTargets: km.allTargets, sid: sid, mid: mid, iid: iid });
+          updateEl(kmHtml, false);
+          return;
+        }
+
         var kb = links.filter(function (l) { return l.k === "kb"; });
         var nLesson = okLessons.length + (lesson ? 1 : 0) + (cards ? 1 : 0);
         var kind = nextAction(prefKind, { kb: kb.length, lesson: nLesson, related: related.length, plan: G.PREP_PLAN ? 1 : 0 });
@@ -378,10 +591,7 @@
         R.slots[iid] = { related: related, mid: mid, sid: sid };
         if (R.last && R.last.iid === iid) R.last.related = related;
         var html = slotHtml({ links: links, lessons: okLessons, lesson: lesson, cards: cards, related: related, next: next, sid: sid, mid: mid, iid: iid });
-        var live = null;
-        try { live = (H.root() || {}).querySelector && H.root().querySelector('.pn-rx[data-i="' + iid + '"]'); } catch (e) {}
-        if (live) { live.innerHTML = html; live.setAttribute("data-done", "1"); }
-        else { slot.innerHTML = html; slot.setAttribute("data-done", "1"); }
+        updateEl(html, false);
       });
     }, function () { try { slot.removeAttribute("data-done"); } catch (e) {} });
   }
@@ -461,6 +671,17 @@
     }
   }
   function act(a, b, H) {
+    if (a === "r-km-sheet") {
+      var iid = b.getAttribute("data-i");
+      var d = iid && R.kmTargets && R.kmTargets[iid];
+      if (d) openKmSheet(d, H);
+      return;
+    }
+    if (a === "r-km-close") {
+      closeKmSheet();
+      return;
+    }
+    if (R.kmSheet) closeKmSheet();
     if (a === "r-kb") {
       var id = b.getAttribute("data-id");
       try {
@@ -491,5 +712,7 @@
   }
 
   G.PREP_REASON = { has: hasItem, body: function (it, o) { remember(it); return body(it, o); }, slotHtml: slotHtml,
-    fill: fill, act: act, linksOf: linksOf, nextAction: nextAction, pref: pref, _pure: PURE, _r: R };
+    fill: fill, act: act, back: function () { return closeKmSheet(); }, linksOf: linksOf, nextAction: nextAction,
+    pref: pref, kmSlot: kmSlot, knowMoreHtml: knowMoreHtml, kmTargets: kmTargets, closeKmSheet: closeKmSheet,
+    _pure: PURE, _r: R };
 })(typeof window !== "undefined" ? window : this);
