@@ -507,11 +507,17 @@
       // navigated, so give it ONE short retry before deciding a target is truly absent — otherwise
       // present-but-not-yet-rendered steps (group switcher, deep review, tasks) get wrongly skipped.
       if (s.optional && !_run.resolve(s)) {
-        setTimeout(function () {
-          if (!_run || _step !== i) return;                 // moved on / torn down meanwhile
-          if (!_run.resolve(s)) { goStep(_step + (_dir < 0 ? -1 : 1)); return; }
-          paint();
-        }, 220);
+        // Retry for up to ~1.3s, not once: the More sheet's rows fade in one after another, so a row far down the
+        // list is still at opacity 0 (not "present") when the sheet opens, and a single 220ms retry skipped it.
+        var tries = 0;
+        (function retry() {
+          setTimeout(function () {
+            if (!_run || _step !== i) return;               // moved on / torn down meanwhile
+            if (_run.resolve(s)) { paint(); return; }
+            if (++tries >= 6) { goStep(_step + (_dir < 0 ? -1 : 1)); return; }
+            retry();
+          }, 220);
+        })();
         return;
       }
       paint();
@@ -953,7 +959,7 @@
       { screen: "home", sel: '[data-act="hospital"]', title: "Hospital: the patient hub", body: "ICU and Ward, Ward Sync, OPD Queue, FollowCare, Prescription and Connect all live under Hospital." },
       { screen: "home", sel: '[data-act="notifications"]', title: "Alerts", body: "Lab Watch results, referrals, unit activity and updates arrive here. Allow notifications the first time the app asks." },
       { screen: "home", sel: '[data-act="menu"]', title: "The sidebar", body: "Calculators, Drugs, Guidelines, RadioAnatome, Help & Support and Settings. Something not working? Shake your phone to report it." },
-      { screen: "home", sel: '[data-act="more"]', title: "More", body: "Profile and StewardMD ID, Subscription, AI Usage, NMC eLOGBook, notification preferences, display, help and this guide." },
+      { screen: "home", sel: '[data-act="more"]', title: "More", body: "Profile and StewardMD ID, Subscription, AI Usage, NMC eLOGBook, Settings, help, this guide and the legal pages." },
       { screen: "home", sel: '[data-act="theme"]', title: "Dark or light", body: "Tap the sun or moon to switch. Appearance and fonts live in Settings; the choice is remembered." }
     ] },
     { id: "reasoning", icon: "brain", name: "Clinical reasoning", sub: "Differential, syndromes, antibiogram · 1 min", steps: [
@@ -999,7 +1005,7 @@
       { screen: "hospital", sel: null, title: "Take the ICU walkthrough", cta: "Start ICU tour", then: "icu", body: "The ICU tour opens the real dashboard on a demo patient and walks board, patient, monitoring, rounds and handover end to end." }
     ] },
     { id: "imaging", icon: "scan", name: "Imaging AI and learning", sub: "KardiQ X, ThoreX, FundX, SknX, CliniX, SURGX, Logbook · 1 min", steps: [
-      { screen: "sidebar", sel: '[data-sbr-act="settings"]', title: "Settings, then Experimental Features", body: "The Beta modules live under Settings: the four image readers, CliniX for students and SURGX for surgeons. Each is decision support under clinical evaluation." },
+      { screen: "more", sel: '[data-mi="settings"]', title: "Settings, then Experimental Features", body: "The Beta modules live under Settings (More, then Settings): the four image readers, CliniX for students and SURGX for surgeons. Each is decision support under clinical evaluation." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="kardiox"]', title: "KardiQ X: the ECG", body: "Photograph the 12-lead flat and in good light. Rhythm, intervals and the STEMI question, with the confidence shown. Treat a flag as a prompt to look, not a result to act on." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="thorex"]', title: "ThoreX: the chest film", body: "On-device chest radiograph interpretation: consolidation, effusion, pneumothorax, cardiomegaly, flagged for your review." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="fundx"]', title: "FundX: the retina", body: "Smartphone fundus imaging support with retinal red flags and referral advice." },
@@ -1014,8 +1020,7 @@
       { screen: "more", sel: '[data-mi="account"]', title: "Verification", body: "Upload the NMC or State Medical Council certificate, or the registration number with a photo ID. Verified doctors unlock prescribing and get Pro free for 7 days. Your mobile number is verified by a WhatsApp code, SMS as backup." },
       { screen: "more", sel: '[data-mi="subscription"]', title: "Subscription", body: "Trainee, Co-Resident, Pro, Physician and yearly plans, quoted per day. The clinical engine, calculators, drugs and reference stay free forever." },
       { screen: "more", sel: '[data-mi="aiusage"]', title: "AI Usage", body: "MaiK tokens used today, the remaining allowance and the top-up packs." },
-      { screen: "more", sel: '[data-mi="notifprefs"]', title: "Notification preferences", body: "Choose what reaches you: tasks, labs, guidelines, unit activity. Critical and overdue alerts always come through." },
-      { screen: "more", sel: '[data-mi="display"]', title: "Display and accessibility", body: "Font size, density and auto-fit. Themes and typefaces, including Atkinson Hyperlegible and Lexend, are under Appearance in the sidebar." },
+      { screen: "more", sel: '[data-mi="settings"]', title: "Settings", body: "Notifications (choose what reaches you; critical and overdue alerts always come through), Appearance and Theme (font size, density, auto-fit, and typefaces such as Atkinson Hyperlegible and Lexend), AI and advanced options, all in one place." },
       { screen: "more", sel: '[data-mi="help"]', title: "Help and support", body: "Contact the team and track your requests. Feature news email can be switched off with the Unsubscribe button in any such email; account notices always arrive." },
       { screen: "more", sel: '[data-mi="disclaimer"]', title: "The rules the app follows", body: "Clinical decision support and an educational aid: verify every dose and recommendation against the primary source. No confirmed diagnoses. Patient details never leave the device in notifications, SMS or logs." }
     ] }
@@ -1147,11 +1152,13 @@
       else if (name === "maik") { try { if (window.SMD_askMaik) SMD_askMaik(""); } catch (e) {} }
       else if (name === "calc") { try { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); } catch (e) {} }
       else if (name === "sidebar" || name === "sidebar-exp") {
-        try { if (window.SB && SB.open) SB.open(); } catch (e) {}
+        // The Experimental page is inside Settings, which now lives in More (not the sidebar): open the page directly.
+        // Only the plain "sidebar" screen (RadioAnatome) still needs the drawer.
+        if (name === "sidebar") { try { if (window.SB && SB.open) SB.open(); } catch (e) {} }
         // The Experimental Features page is a page inside Settings (sidebar-redesign.js): open
         // Settings from the drawer, then Experimental from Settings. Both stack as .sbr-set-ov.
         if (name === "sidebar-exp") setTimeout(function () {
-          var st = firstPresent('#sbDrawer [data-sbr-act="settings"]'); if (st) { try { st.click(); } catch (e) {} }
+          try { if (window.SMD_openSettings) SMD_openSettings(); } catch (e) {}
           setTimeout(function () { var x = firstPresent('.sbr-set-ov [data-sbr-act="experimental"]'); if (x) { try { x.click(); } catch (e) {} } }, 300);
         }, 260);
       }

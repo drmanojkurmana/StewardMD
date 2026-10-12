@@ -2942,6 +2942,8 @@
   // One flag check for every Govt Schemes entry point (HOME_TOOLS tile, Hospital hub, More sheet).
   function govschemesOn() { return !!(window.SMD_GOVSCHEMES_FLAGS && SMD_GOVSCHEMES_FLAGS.bool("smd_govt_schemes")); }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
+  // A small section label inside the More sheet (same look as the old "Legal & safety" heading).
+  function sec(t) { return '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">' + t + '</div>'; }
   function openMore() {
     openSheet(
       '<div class="hv-sh-t">More</div>' +
@@ -2950,7 +2952,11 @@
       // Guidelines & References, About StewardMD, Acknowledgements — plus a "switch back to the
       // old UI" toggle that, per the same report, should stop being offered. Removed all five
       // rather than maintain the same destination from two different menus.
-      mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
+      // MENU DE-DUPLICATION (2026-10-12, owner): More is the ONE home for account, settings, help, the tour and the
+      // legal pages; the sidebar is reference only. Supersedes the 2026-08-23 note above for About and Acknowledgements.
+      // Settings is the full Settings page (sidebar-redesign.js: account, notifications, appearance, AI, advanced), which
+      // replaces the separate Display and Notification rows. Without that page (it did not load) the old rows stay.
+      sec("Clinical") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
       // Govt Schemes: same flag gate as the HOME_TOOLS tile (default OFF, ?gs=1 per device). Flag off = no row.
@@ -2961,6 +2967,12 @@
       // the flag object does not exist yet when this sheet is built. Flag off = the row is absent,
       // not a row that opens nothing.
       (pglogOn() ? mi("book", "NMC eLOGBook", "Digital Residency Logbook &amp; Competency Portfolio Powered by AI", "pglog") : "") +
+      // AgentConnect: unified onboarding hub for doctor EMR login, IT protocol feeds, and WardSynq hospital ID.
+      ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
+        ? mi("hub", "AgentConnect", "Connect your hospital's EMR", "agentconnect")
+        : mi("hub", "Connect EMR", "Onboard a hospital or EMR", "connect")) +
+      mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
+      sec("Account") +
       mi("user", "Profile", "ID, verification, hospital, plan &amp; sign-in", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
@@ -2968,20 +2980,22 @@
       // Owner Mail (mail.js): the hello@maiknowledge.com mailbox, live through /api/mail. The caption is
       // replaced with the unread count once /api/mail/status answers.
       ((nIsOwner() && window.SMD_MAIL && SMD_MAIL.enabled()) ? mi("mail", "Mail", "hello@maiknowledge.com (owner)", "mail") : "") +
-      // AgentConnect: unified onboarding hub for doctor EMR login, IT protocol feeds, and WardSynq hospital ID.
-      ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
-        ? mi("hub", "AgentConnect", "Connect your hospital's EMR", "agentconnect")
-        : mi("hub", "Connect EMR", "Onboard a hospital or EMR", "connect")) +
-      mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
-      mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
-      mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
+      (window.SMD_openSettings
+        ? mi("settings", "Settings", "Notifications, appearance, AI &amp; advanced", "settings")
+        : mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
+          mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs")) +
+      sec("Help") +
+      mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
       mi("play", "App tour", "Replay the guided tour", "apptour") +
-      '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">Legal &amp; safety</div>' +
+      sec("About &amp; legal") +
+      mi("award", "About &amp; Acknowledgements", "StewardMD, version history, credits", "ack") +
       mi("shield", "Medical disclaimer", "Decision support — not medical advice", "disclaimer") +
       mi("lock", "Privacy policy", "How your data is handled", "privacy") +
       mi("book", "Terms of use", "Terms &amp; conditions", "terms")
     );
     var s = sheetEl();
+    // Help & support used to carry its unread-reply count in the sidebar; it lives here now.
+    try { var _un = window.SMD_BUGS && SMD_BUGS.unread ? SMD_BUGS.unread() : 0; var _hm = s.querySelector('[data-mi="help"] .ml'); if (_un && _hm) _hm.insertAdjacentHTML('afterbegin', '<span style="float:right;margin-left:8px;background:#EF4444;color:#fff;border-radius:999px;padding:1px 7px;font:700 11px var(--hfont,sans-serif)">' + _un + ' new</span>'); } catch (e) {}
     var mailRow = s.querySelector('[data-mi="mail"] .mc');
     if (mailRow && window.SMD_MAIL) SMD_MAIL.checkUnread().then(function (n) { if (mailRow.isConnected) mailRow.textContent = n ? n + " unread" : "hello@maiknowledge.com (owner)"; });
     s.querySelectorAll("[data-ui]").forEach(function (b) {
@@ -2990,6 +3004,7 @@
     s.querySelectorAll("[data-mi]").forEach(function (b) {
       b.addEventListener("click", function () {
         var a = b.getAttribute("data-mi");
+        if (a === "settings") { closeSheet(); return setTimeout(function () { try { if (window.SMD_openSettings) SMD_openSettings(); else openDisplay(); } catch (e) {} }, 120); }
         if (a === "display") return openDisplay();
         if (a === "notifprefs") return openNotifPrefs();
         // One Help & Support centre (bug-report.js, 2026-09-27); the old sheet is the fallback only.
@@ -2999,7 +3014,8 @@
         if (a === "aiusage") { closeSheet(); return openAiUsage(); }
         if (a === "aictl") { closeSheet(); return openAiControl(); }
         if (a === "mail") { closeSheet(); if (window.SMD_MAIL) return SMD_MAIL.open(); return toast("Mail loading…"); }
-        if (a === "ack") { closeSheet(); return openAck(); }
+        // About & Acknowledgements: the combined About modal (what the sidebar row opened), else the old acknowledgements view.
+        if (a === "ack") { closeSheet(); if (window.openAbout) return openAbout(); if (window.SB && SB.modal) return SB.modal("aboutModal"); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
         if (a === "nmcsearch") { closeSheet(); setTimeout(function () { try { window.SMD_NMC ? SMD_NMC.open() : toast("Loading…"); } catch (e) {} }, 120); return; }
         if (a === "apptour") { closeSheet(); setTimeout(function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, 120); return; }

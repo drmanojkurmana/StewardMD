@@ -177,12 +177,16 @@ try {
   ok(sent.body.bug.screen && sent.body.bug.screen.w === 390, "and the screen size");
   await ev(`document.getElementById("bgDone").click(); return 1;`);
 
-  // ── sidebar: ONE Help & Support (no separate Feedback / Bug Centre); AgentConnect and My Clinic out ──
+  // ── menus: ONE Help & Support, in the More sheet (owner 2026-10-12: one home per destination); AgentConnect and My Clinic out of the sidebar ──
   await ev(`try{localStorage.setItem("smd_personal_clinic","1")}catch(e){} try { if (window.SB && SB.open) SB.open(); } catch (e) {} return 1;`);
-  ok(await waitFor(`return !!document.querySelector('[data-sbr-act="help"]')`), "the sidebar has one Help & Support entry");
+  ok(await waitFor(`return document.querySelectorAll('#sbDrawer .sbr-row').length > 0`), "the sidebar opens");
+  ok(await ev(`return !document.querySelector('[data-sbr-act="help"]')`) === true, "the sidebar no longer has Help & Support (it lives in More)");
   ok(await ev(`return !document.querySelector('[data-sbr-act="feedback"]') && !document.querySelector('[data-sbr-act="bugs"]');`) === true, "Send Feedback and Bug Report Centre are folded into it");
   ok(await ev(`return !document.querySelector('[data-sbr-act="agentconnect"]') && !document.querySelector('[data-sbr-act="clinic"]');`) === true, "AgentConnect and My Clinic are gone from the sidebar (even with My Clinic switched on)");
-  await ev(`document.querySelector('[data-sbr-act="help"]').click(); return 1;`);
+  await ev(`var bd=document.getElementById("sbBackdrop"); if (bd) bd.click(); return 1;`); await sleep(700);
+  await ev(`[].slice.call(document.querySelectorAll('.rnav-tab')).filter(function(b){return /More/.test(b.textContent)})[0].click(); return 1;`);
+  ok(await waitFor(`return !!document.querySelector('#hvSheet.on [data-mi="help"]')`), "More has the one Help & support entry");
+  await ev(`document.querySelector('#hvSheet [data-mi="help"]').click(); return 1;`);
   ok(await waitFor(`var r=document.getElementById("bugcRoot"); return !!(r && r.classList.contains("on") && /How can we help/.test(r.innerText) && /SMD-ABC123|ICU|does nothing/.test(r.innerText));`), "Help & Support opens with the three ways in and the doctor's conversations");
   ok(await ev(`return document.querySelectorAll('#bugcRoot [data-new]').length === 3 && /Report a problem/.test(document.getElementById("bugcRoot").innerText) && /Ask a question/.test(document.getElementById("bugcRoot").innerText) && /Share feedback/.test(document.getElementById("bugcRoot").innerText);`) === true, "Report a problem, Ask a question, Share feedback");
   ok(/Fix due in 24 h/.test(await text("bugcRoot")), "the bug shows its 24-hour promise");

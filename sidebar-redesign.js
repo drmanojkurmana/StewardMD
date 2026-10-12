@@ -482,23 +482,14 @@
     menu.setAttribute("data-sbr", "1");
     menu.innerHTML =
       wsRow() +
-      '<div class="sbr-sec">Tools</div>' +
-      row("drugs", "pills", "Drugs Database") +
-      row("interactions", "interact", "Interaction Checker") +
-      row("calculators", "calc", "Calculators") +
-      // AgentConnect and My Clinic left the sidebar on 2026-09-26 (owner). Both still open from their
-      // other entry points (home tile / More sheet, OPD queue); their ACT handlers stay for those.
-      '<div class="sbr-sec">Reference &amp; Help</div>' +
-      // ONE Help & Support centre (2026-09-27): bugs, questions and feedback, live chat with the team.
-      row("help", "chat", "Help &amp; Support", bugBadge()) +
+      // MENU DE-DUPLICATION (2026-10-12, owner): every destination now lives in exactly ONE menu.
+      // The sidebar is REFERENCE only. Tools (Drugs Database, Interaction Checker, Calculators) repeated the Drugs tab
+      // and the home tiles; Help & Support, App tour, About & Acknowledgements and Settings moved to the More sheet
+      // (home.js openMore), which is now the one home for account, settings, help, tour and legal. Their ACT handlers
+      // stay below: the Settings page, the tour and the other entry points still call them.
+      '<div class="sbr-sec">Reference</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
         (flag("smd_atlas", true) ? row("atlas", "atlas", "RadioAnatome") : "") +
-      row("tour", "info", "How it works · App tour") +
-      row("ack", "award", "About &amp; Acknowledgements") +
-      '<div class="sbr-sec">Settings</div>' +
-      // One entry → the full Settings page (account, notifications, appearance, watch, advanced +
-      // experimental). Replaces the old inline "Advanced & Experimental" expand-in-sidebar.
-      '<button class="sbr-row" data-sbr-act="settings">' + svg("sliders") + '<span class="sbr-lbl">Settings</span><span class="sbr-chev">▸</span></button>' +
       '<div class="sbr-status"><b></b>System Online</div>';
 
     if (menu.__sbrClick) return;   // delegate once per element (survives innerHTML rebuilds)

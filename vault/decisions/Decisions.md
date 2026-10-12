@@ -11748,3 +11748,18 @@ Owner, after the audit: "Keep existing look home page." The home screen (greetin
 grid, header, tab bar) keeps today's design. Any look change (Refined clinical / Editorial luxury / Apple-native,
 14px body text, pressed states, empty and error states, dark mode refinements) applies to the screens inside the
 app, never to `#homeV2`. Owner picks the look after seeing examples of the inner screens. [[modules/Premium Motion]]
+
+## 2026-10-12 Menus: one home per destination (More = account, settings, help, tour, legal; sidebar = reference)
+Owner: "I see many options repeating in both sidebar and more menu. Confusing." Audit of the live menus found Profile,
+Help & Support, App tour and (via Settings) Display and Notifications in BOTH, and the sidebar's Tools group
+(Drugs Database, Interaction Checker, Calculators) repeating the Drugs tab and home tiles. Owner chose: More is the
+one home for account, settings, help, the tour and the legal pages; the sidebar keeps reference only (Guidelines &
+Protocols, RadioAnatome) plus its identity header and workspace row; Tools group removed; straight change (no flag).
+Recovery point: local git tag `pre-menu-dedupe-2026-10-12` (the push of the tag to origin failed; the branch history is
+the other recovery point). More is now grouped Clinical / Account / Help / About & legal; one Settings row (the full
+Settings page: account, notifications, appearance, AI, advanced) replaces the separate Display and Notification rows; the
+combined About & Acknowledgements row is back in More (supersedes the 2026-08-23 removal, which kept it in the sidebar).
+Help's unread-reply count moved onto the More row. The guided tour follows: the Settings step points at More, the
+Experimental step opens the Settings page directly, and the tour now retries ~1.3s for a target (the More rows fade in
+one by one; a single 220ms retry skipped late rows). Test: `test/run-menu-dedupe-ui.mjs` (no label in both menus).
+Older tests that pinned the old layout were updated. [[modules/Refined Look]]

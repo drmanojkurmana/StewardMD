@@ -258,14 +258,20 @@ try {
   ok((await ev("return __osc")) >= 4, "a success card plays its note");
   await ev("SMD_dynNotify.dismiss();SMD_SOUND.setEnabled(false);return 1"); await sleep(900);
   await tab("/More/"); await sleep(900);
-  await ev("var b=[].slice.call(document.querySelectorAll('.hv-sheet button, .hv-sheet .hv-mi')).filter(function(b){return /Display/.test(b.textContent)})[0]; b&&b.click(); return 1"); await sleep(900);
-  ok(await ev("return !!document.getElementById('hvSounds')"), "Settings > Display & Accessibility has the Sounds switch");
+  // Display & Accessibility is reached through More > Settings > Appearance & Theme (menus de-duplicated 2026-10-12).
+  await ev("var b=[].slice.call(document.querySelectorAll('#hvSheet .hv-mi')).filter(function(b){return /^Settings/.test(b.textContent)})[0]; b&&b.click(); return 1");
+  await waitFor("return !!document.querySelector('.sbr-set-ov')"); await sleep(500);
+  await ev("var b=[].slice.call(document.querySelectorAll('.sbr-set-ov .smd-nav-row, .sbr-set-ov .sbr-row, .sbr-set-ov button')).filter(function(b){return /^Appearance/.test(b.textContent.trim())&&b.getClientRects().length})[0]; b&&b.click(); return 1");
+  await waitFor("return !!document.getElementById('hvSounds')");
+  ok(await ev("return !!document.getElementById('hvSounds')"), "More > Settings > Appearance & Theme (Display & Accessibility) has the Sounds switch");
   await ev("document.getElementById('hvSounds').click();return 1"); await sleep(200);
   ok((await ev("return localStorage.getItem('smd_sound')")) === "1" && (await ev("return document.getElementById('hvSounds').classList.contains('on')")), "the switch turns sounds on");
   await ev("localStorage.removeItem('smd_sound');return 1");
 
   // 16. Touch targets: the home header icons and legal links are hit beyond their visible box
-  await ev("var sc=document.getElementById('hvScrim');if(sc)sc.click();return 1"); await sleep(900);   // close the Settings sheet from the sound test
+  // Closing the Display sheet returns to the Settings page it was opened from (onClose), so close the sheet first, then the page.
+  await ev("var sc=document.getElementById('hvScrim');if(sc)sc.click();return 1"); await sleep(900);
+  await ev("[].forEach.call(document.querySelectorAll('.sbr-set-ov'),function(e){e.remove()});return 1"); await sleep(500);
   await ev("document.querySelector('.v3-main').scrollTop=0;return 1"); await sleep(300);
   ok(await ev(`var b=document.querySelector('#homeV2 .rnav-head .rds-icon-btn'),r=b.getBoundingClientRect(),cy=r.top+r.height/2;
     return [document.elementFromPoint(r.left-4,cy),document.elementFromPoint(r.left+r.width/2,r.top-3),document.elementFromPoint(r.left+r.width/2,r.bottom+3)].every(function(e){return e&&e.closest('.rds-icon-btn')===b})`), "the first header icon is hit 4px beyond its visible box (touch target >= 44pt)");

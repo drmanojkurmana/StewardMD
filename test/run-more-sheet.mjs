@@ -52,12 +52,16 @@ try {
   ok(rows.open === true, "the More sheet actually opens");
   const joined = rows.labels.join(" | ");
   ok(!/New design/.test(joined), `the old-UI switch-back row is gone from the real DOM (${joined.slice(0, 200)})`);
-  ok(!rows.labels.some((l) => l.startsWith("About StewardMD")), "About StewardMD row is gone");
-  ok(!rows.labels.some((l) => l.startsWith("Acknowledgements")), "Acknowledgements row is gone");
+  // 2026-10-12 (owner): More is the one home for account, settings, help, the tour and the legal pages, so the
+  // combined About & Acknowledgements row is back here (and gone from the sidebar). The old separate rows stay gone.
+  ok(!rows.labels.some((l) => l.startsWith("About StewardMD")), "the old About StewardMD row is gone");
+  ok(!rows.labels.some((l) => l.startsWith("Acknowledgements")), "the old Acknowledgements row is gone");
+  ok(rows.labels.some((l) => l.startsWith("About & Acknowledgements")), "the combined About & Acknowledgements row is here (and not in the sidebar)");
   ok(!rows.labels.some((l) => l.startsWith("Guidelines")), "Guidelines & References row is gone");
   ok(!rows.labels.some((l) => l.startsWith("Calculators")), "Calculators row is gone");
   ok(rows.labels.some((l) => l.startsWith("Open shared case")), "Open shared case (not duplicated elsewhere) is still there");
-  ok(rows.labels.some((l) => l.startsWith("Notification preferences")), "Notification preferences (not duplicated elsewhere) is still there");
+  ok(rows.labels.some((l) => l.startsWith("Settings")), "Settings (the page that holds notifications, appearance, AI and advanced) is here");
+  ok(!rows.labels.some((l) => l.startsWith("Notification preferences") || l.startsWith("Display")), "separate Notification and Display rows are gone (inside Settings)");
   ok(rows.labels.some((l) => l.startsWith("Profile")), "Profile (not duplicated elsewhere) is still there");
 
   // Dark mode: .hv-sheet must actually resolve dark colors, not just have a rule sitting unused.

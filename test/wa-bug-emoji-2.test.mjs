@@ -84,11 +84,14 @@ test("home.js: the More screen no longer duplicates sidebar navigation", () => {
   assert.ok(body.includes('"opencase"') && body.includes('"notifprefs"') && body.includes('"account"'), "rows that are NOT duplicated elsewhere stay in More");
 });
 
-test("sidebar-redesign.js: confirms the rows removed from More really are reachable elsewhere", () => {
-  const s = read("sidebar-redesign.js");
-  assert.ok(s.includes('row("calculators", "calc", "Calculators")'), "Calculators exists in the live sidebar");
-  assert.ok(s.includes('row("guidelines", "book", "Guidelines &amp; Protocols")'), "Guidelines exists in the live sidebar");
-  assert.ok(s.includes('row("ack", "award", "About &amp; Acknowledgements")'), "a combined About & Acknowledgements row exists in the live sidebar");
+test("menus: every destination has exactly one home (owner, 2026-10-12)", () => {
+  const sb = read("sidebar-redesign.js"), home = read("home.js");
+  const menu = sb.slice(sb.indexOf("function build(menu)"), sb.indexOf("if (menu.__sbrClick) return;"));
+  assert.ok(menu.includes('row("guidelines", "book", "Guidelines &amp; Protocols")'), "Guidelines stays in the sidebar (reference)");
+  for (const gone of ["drugs", "interactions", "calculators", "help", "tour", "ack"]) assert.equal(menu.includes('row("' + gone + '"'), false, "the sidebar no longer has " + gone);
+  assert.equal(menu.includes('data-sbr-act="settings"'), false, "the sidebar no longer has a Settings row");
+  assert.ok(home.includes('mi("award", "About &amp; Acknowledgements"'), "a combined About & Acknowledgements row exists in More");
+  assert.ok(home.includes('"settings"') && home.includes('mi("play", "App tour"'), "Settings and the App tour live in More");
 });
 
 test("home.js: .hv-sheet (the More sheet, and every other sheet) dark-themes", () => {
