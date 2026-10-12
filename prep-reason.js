@@ -27,7 +27,7 @@
 
   /* ================= pure ================= */
   var SHOW = 75, VER = "v1";
-  var LETTERS = ["A", "B", "C", "D"];
+  var LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
   function isStr(s) { return typeof s === "string" && !!s.trim(); }
   function asList(v) {

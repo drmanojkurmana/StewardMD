@@ -24,7 +24,7 @@
   "use strict";
 
   /* ================= pure ================= */
-  var LETTERS = ["A", "B", "C", "D", "E"];
+  var LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   // Prompt budget: MaiK Lite prefills at roughly 14 tokens a second on a Pixel 9, so about 800 tokens of grounding
   // keeps the answer near the plan's 10 to 20 s. Fields go in priority order and the total is capped.
   var LIM = { q: 900, o: 220, exp: 900, kp: 300, r: 350, sent: 350, sents: 6, total: 3200 };
@@ -46,7 +46,7 @@
      (key + notes, markdown made plain) when x is whole, else exp; kpOf is kp, else x.pearl; reasons come from r, else
      from x (the key's reason is x.key). Before this, Ask MaiK grounded such items on the stem alone and its fallback
      said "No explanation is stored" under a question that showed one. */
-  var XL = ["A", "B", "C", "D", "E"];
+  var XL = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   function xOf(item) { var x = item && item.x; return x && typeof x === "object" && typeof x.key === "string" && x.key.trim() ? x : null; }
   function plainMd(t) {
     return str(t).replace(/\r\n?/g, "\n").split("\n").map(function (l) {
