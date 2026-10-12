@@ -35,6 +35,10 @@
   --pn-shadow: 0 1px 2px rgba(19, 32, 61, .10), 0 2px 8px -2px rgba(19, 32, 61, .10);
   --pn-sh-sheet: 0 -1px 0 rgba(19, 32, 61, .04), 0 -18px 48px -24px rgba(19, 32, 61, .28);
   --pn-aura: none;
+  /* Why option chips: restrained dark green palette #071318/#0D1D23/#42CDB5 */
+  --pn-why-bg: #071318; --pn-why-card: #0D1D23; --pn-why-edge: #16323B; --pn-why-accent: #42CDB5;
+  --pn-why-ink: #E2F1EE; --pn-why-mut: #94B4AB; --pn-why-body: #CDE2DC; --pn-why-key-edge: #1F4A42;
+  --pn-why-on: #16383E; --pn-why-hover: #142830; --pn-why-hover-edge: #234852; --pn-why-ask-hover: #50E2C8;
   /* the moment surface: Prussian in both themes */
   --pn-hero: var(--pn-c-prussian); --pn-hero-ink: #f5f3ee; --pn-hero-mut: #b9c4da; --pn-hero-chip: rgba(255, 255, 255, .12); --pn-hero-acc: var(--pn-c-amber);
   --pn-hero-line: rgba(255, 255, 255, .14);
@@ -1725,4 +1729,119 @@ body.dark .pn-root .pn-km-sheet .pn-rlr:active { background: color-mix(in srgb, 
 body.dark .pn-root .pn-km-sheet .pn-rlr small { color: var(--pn-km-mut); }
 body.dark .pn-root .pn-km-sheet .pn-rlr b { color: var(--pn-km-ink); }
 body.dark .pn-root .pn-km-sheet .pn-sheet-act .pn-btn { background: var(--pn-km-deep); border: 1px solid color-mix(in srgb, var(--pn-km-mint) 20%, transparent); color: var(--pn-km-ink); }
+
+/* ---- Why option chips (free stored explanation) ---- */
+.pn-root .pn-why-wrap { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 8px; }
+.pn-root .pn-why-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pn-root .pn-why-chip {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--pn-r-pill, 999px);
+  border: 1px solid var(--pn-why-edge);
+  background: var(--pn-why-card);
+  color: var(--pn-why-mut);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+.pn-root .pn-why-chip:hover {
+  background: var(--pn-why-hover);
+  color: var(--pn-why-ink);
+  border-color: var(--pn-why-hover-edge);
+}
+.pn-root .pn-why-chip.pn-why-key {
+  border-color: var(--pn-why-key-edge);
+  color: var(--pn-why-accent);
+}
+.pn-root .pn-why-chip.on {
+  background: var(--pn-why-on);
+  border-color: var(--pn-why-accent);
+  color: var(--pn-why-ink);
+}
+.pn-root .pn-why-chip:focus-visible {
+  outline: 2px solid var(--pn-why-accent);
+  outline-offset: 2px;
+}
+.pn-root .pn-why-box { margin-top: 4px; }
+.pn-root .pn-why-card {
+  padding: 14px 16px;
+  border-radius: var(--pn-r-md, 12px);
+  background: var(--pn-why-bg);
+  border: 1px solid var(--pn-why-edge);
+  color: var(--pn-why-ink);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.pn-root .pn-why-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 14.5px;
+  color: var(--pn-why-accent);
+}
+.pn-root .pn-why-head .pn-why-l {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--pn-why-edge);
+  color: var(--pn-why-accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+.pn-root .pn-why-body {
+  color: var(--pn-why-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.pn-root .pn-why-body p { margin: 0; }
+.pn-root .pn-why-body p + p { margin-top: 8px; }
+.pn-root .pn-why-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.pn-root .pn-why-none {
+  margin: 0;
+  font-size: 14px;
+  color: var(--pn-why-mut);
+}
+.pn-root .pn-why-ask {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--pn-r-pill, 999px);
+  background: var(--pn-why-accent);
+  color: var(--pn-why-bg);
+  border: 0;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.pn-root .pn-why-ask:hover {
+  background: var(--pn-why-ask-hover);
+}
+.pn-root .pn-why-ask:focus-visible {
+  outline: 2px solid var(--pn-why-accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pn-why-chip { transition: none; }
+}
 

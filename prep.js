@@ -421,11 +421,60 @@
   }
   /* explainOf(item) -> { x, r } the parts the feedback draws: x when it is whole, r one reason per option (the item's own,
      else built from x). */
+  var OPT_LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+  function optLetter(k) { return (typeof k === "number" && k >= 0) ? (OPT_LETTERS[k] || String.fromCharCode(65 + k)) : "A"; }
   function explainOf(it) {
-    var L4 = ["A", "B", "C", "D"], x = it && it.x && typeof it.x === "object" && typeof it.x.key === "string" && it.x.key.trim() ? it.x : null;
+    var x = it && it.x && typeof it.x === "object" && typeof it.x.key === "string" && it.x.key.trim() ? it.x : null;
     var r = it && it.r && it.r.length === it.o.length ? it.r : null;
-    if (!r && x && x.others) r = it.o.map(function (o, k) { return k === it.a ? x.key : String(x.others[L4[k]] || ""); });
+    if (!r && x && x.others) r = it.o.map(function (o, k) { return k === it.a ? x.key : String(x.others[optLetter(k)] || x.others[optLetter(k).toLowerCase()] || ""); });
     return { x: x, r: r };
+  }
+  function storedForOption(it, k) {
+    if (!it || !it.o || k < 0 || k >= it.o.length) return "";
+    var L = optLetter(k), isKey = k === it.a;
+    if (it.r) {
+      if (Array.isArray(it.r) && it.r[k] != null && String(it.r[k]).trim()) return String(it.r[k]).trim();
+      if (it.r[L] != null && String(it.r[L]).trim()) return String(it.r[L]).trim();
+      if (it.r[L.toLowerCase()] != null && String(it.r[L.toLowerCase()]).trim()) return String(it.r[L.toLowerCase()]).trim();
+    }
+    var x = it.x;
+    if (x && typeof x === "object") {
+      if (isKey) {
+        if (x.key && String(x.key).trim()) return String(x.key).trim();
+        if (x.ky && String(x.ky).trim()) return String(x.ky).trim();
+      } else {
+        var oth = x.others || x.other || it.others;
+        if (oth) {
+          if (oth[L] != null && String(oth[L]).trim()) return String(oth[L]).trim();
+          if (oth[L.toLowerCase()] != null && String(oth[L.toLowerCase()]).trim()) return String(oth[L.toLowerCase()]).trim();
+          if (Array.isArray(oth) && oth[k] != null && String(oth[k]).trim()) return String(oth[k]).trim();
+        }
+        var whyW = x.why_wrong || x.whyWrong || x.why || it.why_wrong;
+        if (whyW) {
+          if (whyW[L] != null && String(whyW[L]).trim()) return String(whyW[L]).trim();
+          if (whyW[L.toLowerCase()] != null && String(whyW[L.toLowerCase()]).trim()) return String(whyW[L.toLowerCase()]).trim();
+          if (Array.isArray(whyW) && whyW[k] != null && String(whyW[k]).trim()) return String(whyW[k]).trim();
+        }
+      }
+    }
+    if (!isKey) {
+      if (it.others && it.others[L] != null && String(it.others[L]).trim()) return String(it.others[L]).trim();
+      if (it.optionNotes && it.optionNotes[k] != null && String(it.optionNotes[k]).trim()) return String(it.optionNotes[k]).trim();
+      if (it.opt_notes && it.opt_notes[k] != null && String(it.opt_notes[k]).trim()) return String(it.opt_notes[k]).trim();
+    }
+    if (isKey && it.exp && String(it.exp).trim()) return String(it.exp).trim();
+    return "";
+  }
+  function whyRowHtml(it, chosen, i) {
+    if (!it || !it.o || !it.o.length) return "";
+    var a = it.a, iAttr = i != null ? String(i) : "";
+    var chips = it.o.map(function (o, k) {
+      var L = optLetter(k);
+      var isKey = k === a;
+      var label = isKey ? ("Why " + L + " is right") : ("Why " + L + "?");
+      return '<button type="button" class="pn-why-chip' + (isKey ? " pn-why-key" : "") + '" data-act="why-opt" data-opt="' + k + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + ' aria-pressed="false">' + esc(label) + '</button>';
+    }).join("");
+    return '<div class="pn-why-wrap"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + '><div class="pn-why-row" role="group" aria-label="Why each option">' + chips + '</div><div class="pn-why-box" style="display:none;" role="region" aria-live="polite"></div></div>';
   }
   /* Module files of a bank version can be republished in place (explanations added to v5 items), but a module once
      opened is kept in IndexedDB. bankStamps(manifest) -> { subject: stamp } from prep/bank/<ver>/manifest.json (each
@@ -493,7 +542,8 @@
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
-    mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh };
+    mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh,
+    optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -2012,7 +2062,7 @@
     var pyq = G.PREP_PYQ ? { tags: G.PREP_PYQ.chips(it, HOST), fig: G.PREP_PYQ.figure(it, HOST) } : { tags: "", fig: "" };
     // Radiology image series (prep-rad.js): the scroll stack sits under the image slot.
     if (G.PREP_RAD) pyq.fig += G.PREP_RAD.figure(it, HOST);
-    var L = ["A", "B", "C", "D"];
+    var L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
     var opts = it.o.map(function (o, k) {
       var cls = "pn-opt";
       if (shown) { if (k === it.a) cls += " right"; else if (k === chosen) cls += " wrong"; }
@@ -2051,10 +2101,11 @@
           return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
         pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) +
+        whyRowHtml(it, chosen, r.i) +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") + outdatedHtml(it) +
         // Ask MaiK (prep-ask.js): on every answer, right or wrong, on this phone or online. Without prep-ask.js the
         // older offline-only button, shown only when MaiK runs on this phone.
-        (G.PREP_ASK ? askBtn("ask", ok || tup ? "Ask MaiK why " + L[it.a] + " is right" : "Why is " + L[chosen] + " wrong? Ask MaiK") :
+        (G.PREP_ASK ? askBtn("ask", "Ask MaiK") :
           !ok && !tup && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
         (!ok && !own ? '<div class="pn-mtag" role="group" aria-label="Why did you miss it?"><span class="pn-mut pn-small">Why did you miss it?</span><div class="pn-wrap">' + MISTAKE_TAGS.map(function (t) {
           var on = (s.mt[it.id] || [])[2] === t[0];
@@ -2399,7 +2450,7 @@
     r.items.forEach(function (it, i) { sp.all.push(i); sp[t2solStatus(r, i)].push(i); });
     var f = r.t2.solf && sp[r.t2.solf] ? r.t2.solf : (r.t2.solf = sp.wrong.length ? "wrong" : "all");
     var list = sp[f].slice(0, RV_LIST_MAX);
-    var L = ["A", "B", "C", "D", "E"];
+    var L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
     var cards = list.map(function (i) {
       var it = r.items[i], a = r.ans[i], st = t2solStatus(r, i);
       var ansL = it.a >= 0 && it.a < L.length ? L[it.a] : "-";
@@ -2423,8 +2474,8 @@
         '<div class="t2sol-b"><p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
         '<ol class="pn-opts">' + it.o.map(function (o, k) {
           return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
-        }).join("") + "</ol>" + ex + outdatedHtml(it) + tagRow +
-        (G.PREP_ASK && !it._gone ? askBtn("ask-rv", a >= 0 && a !== it.a ? "Why is " + (L[a] || "?") + " wrong? Ask MaiK" : "Ask MaiK why " + ansL + " is right", ' data-i="' + i + '"') : "") +
+        }).join("") + "</ol>" + ex + whyRowHtml(it, a, i) + outdatedHtml(it) + tagRow +
+        (G.PREP_ASK && !it._gone ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") +
         (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
     }).join("");
     return '<div class="pn-filters" role="group" aria-label="Solutions filter">' + F.map(function (x) {
@@ -2522,7 +2573,7 @@
   function reviewQuestion(i) {
     var r = st.run, it = r.items[i];
     st.stack.push(function () {
-      var L = ["A", "B", "C", "D"];
+      var L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
       var rid = G.PREP_IDS && it._s !== "deck" ? G.PREP_IDS.ofItem(it) : null;
       var tu = r.qc && r.qc.out[i] ? '<p class="pn-timeup">' + ico("lock") + "<span><b>Time ran out</b>" + (r.ans[i] >= 0 ? "Your answer was kept." : "Not answered.") + "</span></p>" : "";
       paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
@@ -2534,7 +2585,8 @@
           whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-        return ex + outdatedHtml(it) + (G.PREP_ASK ? askBtn("ask-rv", r.ans[i] >= 0 && r.ans[i] !== it.a ? "Why is " + L[r.ans[i]] + " wrong? Ask MaiK" : "Ask MaiK why " + L[it.a] + " is right", ' data-i="' + i + '"') : "");
+        return ex + whyRowHtml(it, r.ans[i], i) + outdatedHtml(it) +
+          (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "");
       })() + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div>");
       if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
       if (G.PREP_RAD) G.PREP_RAD.mount(root);
@@ -2960,6 +3012,68 @@
     return l ? '<button type="button" class="pn-btn su-lastb" data-act="su-last" data-k="' + kind + '"' + (attrs || "") + ">" + ico("bolt") + '<span><b>Start with last settings</b><small>' + esc(l) + "</small></span></button>" : "";
   }
 
+  function onWhyOpt(b) {
+    var wrap = b.closest ? b.closest(".pn-why-wrap") : b.parentNode.parentNode;
+    if (!wrap) return;
+    var box = wrap.querySelector(".pn-why-box");
+    if (!box) return;
+    var opt = Number(b.getAttribute("data-opt"));
+    var isOpen = b.classList.contains("on");
+    var chips = wrap.querySelectorAll(".pn-why-chip");
+    for (var j = 0; j < chips.length; j++) {
+      chips[j].classList.remove("on");
+      chips[j].setAttribute("aria-pressed", "false");
+    }
+    if (isOpen) {
+      box.style.display = "none";
+      box.innerHTML = "";
+      return;
+    }
+    b.classList.add("on");
+    b.setAttribute("aria-pressed", "true");
+    var iAttr = b.getAttribute("data-i");
+    var it = null;
+    if (st.run && st.run.items) {
+      if (iAttr !== null && iAttr !== "" && !isNaN(Number(iAttr)) && st.run.items[Number(iAttr)]) {
+        it = st.run.items[Number(iAttr)];
+      } else if (iAttr) {
+        for (var m = 0; m < st.run.items.length; m++) {
+          if (String(st.run.items[m].id) === String(iAttr)) { it = st.run.items[m]; break; }
+        }
+      }
+      if (!it && st.run.items[st.run.i]) it = st.run.items[st.run.i];
+    }
+    var text = storedForOption(it, opt);
+    var L = optLetter(opt), isKey = it && opt === it.a;
+    if (text) {
+      box.innerHTML = '<div class="pn-why-card"><div class="pn-why-head"><span class="pn-why-l">' + esc(L) + '</span> <b>' + esc(isKey ? "Why " + L + " is right" : "Why " + L + " is wrong") + '</b></div><div class="pn-why-body">' + (inlineMd ? inlineMd(text) : esc(text)) + '</div></div>';
+      box.style.display = "";
+    } else {
+      box.innerHTML = '<div class="pn-why-card pn-why-empty"><p class="pn-why-none">No stored note for this option</p><button type="button" class="pn-why-ask" data-act="why-ask" data-opt="' + opt + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + '>Ask MaiK why</button></div>';
+      box.style.display = "";
+    }
+  }
+  function onWhyAsk(b) {
+    var opt = Number(b.getAttribute("data-opt"));
+    var iAttr = b.getAttribute("data-i");
+    var it = null, idx = st.run ? st.run.i : 0;
+    if (st.run && st.run.items) {
+      if (iAttr !== null && iAttr !== "" && !isNaN(Number(iAttr)) && st.run.items[Number(iAttr)]) {
+        idx = Number(iAttr);
+        it = st.run.items[idx];
+      } else if (iAttr) {
+        for (var m = 0; m < st.run.items.length; m++) {
+          if (String(st.run.items[m].id) === String(iAttr)) { idx = m; it = st.run.items[m]; break; }
+        }
+      }
+      if (!it && st.run.items[st.run.i]) { idx = st.run.i; it = st.run.items[idx]; }
+    }
+    if (!it || !G.PREP_ASK) return;
+    var L = optLetter(opt), isKey = it && opt === it.a;
+    var prefill = isKey ? ("Why is " + L + " right?") : ("Why is " + L + " wrong?");
+    G.PREP_ASK.open({ kind: "mcq", item: it, chosen: opt, n: idx + 1, side: true, topic: (st.run && st.run.title), prefill: prefill }, HOST);
+  }
+
   /* ---------- events ---------- */
   function onClick(e) {
     var b = e.target.closest ? e.target.closest("[data-act]") : null;
@@ -2969,6 +3083,8 @@
     var a = b.getAttribute("data-act"), v = b.getAttribute("data-v"), s = load();
     // Starting an item of today's plan may start the Live Activity (prep-native.js).
     if (G.PREP_NATIVE && b.classList.contains("pl-item")) G.PREP_NATIVE.planStarted();
+    if (a === "why-opt") return onWhyOpt(b);
+    if (a === "why-ask") return onWhyAsk(b);
     if (a === "close") return close();
     if (a.indexOf("n-") === 0 && G.PREP_NAV) return G.PREP_NAV.act(a, b, HOST);
     if (a.indexOf("t2-") === 0 && G.PREP_TESTS) return G.PREP_TESTS.act(a, b, HOST);

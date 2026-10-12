@@ -126,7 +126,8 @@
     if (ctx.kind !== "mcq") return ["Explain simply", "Give an example", "Give a mnemonic"];
     var it = ctx.item || {}, a = typeof it.a === "number" ? it.a : -1, ch = typeof ctx.chosen === "number" ? ctx.chosen : -1, o = -1, i;
     if (ch >= 0 && ch !== a) o = ch; else for (i = 0; i < ((it.o && it.o.length) || 0); i++) if (i !== a) { o = i; break; }
-    return ["Explain simply", o >= 0 ? "Why not " + ["A", "B", "C", "D", "E"][o] + "?" : "Why is this right?", "Give a mnemonic"];
+    var l = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"][o] || String.fromCharCode(65 + o);
+    return ["Explain simply", o >= 0 ? "Why not " + l + "?" : "Why is this right?", "Give a mnemonic"];
   }
   /* ---- chat threads (pure) ---- */
   var TH = { max: 12, turns: 24, chars: 1200, days: 7 };
@@ -223,7 +224,7 @@
     check: '<path d="M5 12l5 5 9-10"/>', close: '<path d="M18 6L6 18M6 6l12 12"/>', send: '<path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/>'
   };
   function ic(n, sz) { return '<svg viewBox="0 0 24 24" width="' + (sz || 20) + '" height="' + (sz || 20) + '" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICO[n] + "</svg>"; }
-  function L(k) { return ["A", "B", "C", "D", "E"][k] || "?"; }
+  function L(k) { return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"][k] || String.fromCharCode(65 + k); }
   function keyOf(item) { var a = item && item.a; return typeof a === "number" && a >= 0 && item.o && a < item.o.length ? a : -1; }
 
   /* ---------- threads: one chat per MCQ, lesson step or card ----------
@@ -273,7 +274,7 @@
   }
   var CHEV = '<svg class="pa-chev" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
   /* The question as one line at the top of the conversation ("Question 2 · You chose C · Answer C"); a tap opens the
-     stem and the options. It scrolls with the chat (one scroll region), never pinned over it. */
+     stem, options, and stored explanation. It scrolls with the chat (one scroll region), never pinned over it. */
   function ctxHtml() {
     var c = S.ctx, open = S.cxOpen ? " open" : "", inner;
     if (c.kind === "mcq") {
@@ -281,7 +282,8 @@
       var line = '<span class="pa-cxk">' + (c.n ? "Question " + esc(c.n) : "Question") + "</span>" +
         (ch >= 0 ? '<span class="pa-cxp ' + (wrong ? "bad" : "ok") + '">You chose ' + L(ch) + "</span>" : "") + (a >= 0 ? '<span class="pa-cxp ok">Answer ' + L(a) + "</span>" : "");
       var opts = (c.item.o || []).map(function (o, i) { return '<li class="' + (i === a ? "key" : i === ch ? "pick" : "") + '"><b>' + L(i) + "</b><span>" + esc(o) + "</span></li>"; }).join("");
-      inner = '<summary class="pa-cxs" aria-label="The question: ' + esc((c.n ? "question " + c.n + ", " : "") + (ch >= 0 ? "you chose " + L(ch) + ", " : "") + "answer " + L(a)) + '">' + line + CHEV + '</summary><div class="pa-cxb"><p class="pa-cxq">' + esc(c.item.q) + '</p><ol class="pa-cxo">' + opts + "</ol></div>";
+      var stExp = storedHtml();
+      inner = '<summary class="pa-cxs" aria-label="The question: ' + esc((c.n ? "question " + c.n + ", " : "") + (ch >= 0 ? "you chose " + L(ch) + ", " : "") + "answer " + L(a)) + '">' + line + CHEV + '</summary><div class="pa-cxb"><p class="pa-cxq">' + esc(c.item.q) + '</p><ol class="pa-cxo">' + opts + "</ol>" + (stExp ? '<div class="pa-cx-stored">' + stExp + "</div>" : "") + "</div>";
     } else {
       inner = '<summary class="pa-cxs"><span class="pa-cxk">' + (c.kind === "card" ? "Card" : "Lesson step") + '</span><span class="pa-cxt">' + esc(c.title || "") + "</span>" + CHEV + '</summary><div class="pa-cxb"><p class="pa-cxq">' + esc(String(c.step.tx || "").replace(/\*\*/g, "")) + "</p></div>";
     }
@@ -534,7 +536,7 @@
     close(true);
     if (ctx.kind === "card") ctx = { kind: "card", step: { tx: String(ctx.fr || "") + "\n" + String(ctx.bk || "") }, title: ctx.title || "Card", ask: ctx.ask || null };
     var ready = packReady(), pf = pref(host), th = threadFor(ctx);
-    S = { ctx: ctx, host: host, prev: D.activeElement, vd: null, ready: ready, sel: firstChoice(pf, ready), dont: !!(pf && pf.q), view: "choose", mode: null, phase: "", token: ++seq, consented: false, th: th, draft: "", scroll: true, reveal: -1, cxOpen: false };
+    S = { ctx: ctx, host: host, prev: D.activeElement, vd: null, ready: ready, sel: firstChoice(pf, ready), dont: !!(pf && pf.q), view: "choose", mode: null, phase: "", token: ++seq, consented: false, th: th, draft: ctx.prefill || "", scroll: true, reveal: -1, cxOpen: false };
     var w = D.createElement("div");
     w.className = "pn-sheet-wrap pa-wrap" + (side() && ctx.side ? " pa-side" : "");
     w.id = "pnAsk";
@@ -692,11 +694,11 @@
     addTurn({ r: "u", t: txt });
     ask(mode);
   }
-  /* resume(mode): open the chat in this place. A fresh thread asks its first question (a "new chat" opens empty); a
-     thread whose last answer failed asks that message again; one that ended on an answer just shows (no new call). */
+  /* resume(mode): open the chat in this place. A fresh thread opens empty with input focused (no automatic call);
+     a thread whose last answer failed asks that message again; one that ended on an answer just shows (no new call). */
   function resume(mode) {
     var all = turns(), last = all[all.length - 1];
-    if (!all.length) { if (S.th.rec.nc) { S.mode = mode; S.phase = ""; return draw(); } return ask(mode); }
+    if (!all.length) { S.mode = mode; S.phase = ""; S.scroll = true; return draw("#paIn"); }
     if (last.r === "u" || !last.ok) { if (last.r === "m") { all.pop(); saveThreads(); } return ask(mode); }
     S.mode = mode; S.phase = ""; S.scroll = true; return draw();
   }
@@ -774,8 +776,8 @@
     if (a === "ak-mode") {
       if (b.getAttribute("aria-disabled") === "true" || S.phase === "run") return;
       var all = turns(), last = all[all.length - 1];
-      // No answer yet, or the last one failed: ask it again in the new place. Otherwise the next message goes there.
-      if ((!all.length && !S.th.rec.nc) || S.phase === "consent" || S.phase === "busy" || (last && last.r === "m" && !last.ok)) {
+      // A failed turn or consent asks again in the new place. Otherwise next message goes there.
+      if (S.phase === "consent" || S.phase === "busy" || (last && last.r === "m" && !last.ok)) {
         if (last && last.r === "m" && !last.ok) { all.pop(); saveThreads(); }
         S.phase = ""; return ask(v);
       }
@@ -784,7 +786,13 @@
     }
     if (a === "ak-consent") { S.consented = true; return ask("online"); }
     if (a === "ak-send") { if (b.getAttribute("aria-disabled") === "true") return; return send(); }
-    if (a === "ak-quick") { if (b.getAttribute("aria-disabled") === "true") return; return send(v); }
+    if (a === "ak-quick") {
+      if (b.getAttribute("aria-disabled") === "true") return;
+      var box = sheet() && sheet().querySelector("#paIn");
+      if (box) { box.value = v; S.draft = v; try { box.focus(); } catch (e) {} }
+      else { S.draft = v; }
+      return;
+    }
     if (a === "ak-new") return newChat();
     if (a === "ak-retry") return retry();
     if (a === "ak-hand") return handoffNow();
