@@ -1,0 +1,50 @@
+/* card, controls and caption around a figure (tools/iso/card.css) */
+.smd-iso-slot{display:block;margin:14px 0}
+.smd-iso-slot[data-iso-on="loading"]{min-height:220px;border-radius:14px;background:var(--anatomy-card,rgba(127,127,127,.06))}
+.smd-iso{--anatomy-card:#fbfbfa;margin:0;color:var(--anatomy-text);font:13px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body.dark .smd-iso:not([data-theme="light"]),.smd-iso[data-theme="dark"]{--anatomy-card:#131313}
+.smd-iso-card{position:relative;background:var(--anatomy-card);--anatomy-paper:var(--anatomy-card);border-radius:14px;box-shadow:0 0 0 1px var(--anatomy-faint);padding:30px 10px 34px;overflow:hidden}
+.smd-iso-top,.smd-iso-bot{position:absolute;left:14px;right:14px;display:flex;justify-content:space-between;gap:12px;font:10.5px/1.2 var(--anatomy-mono);letter-spacing:.04em;color:var(--anatomy-muted);pointer-events:none}
+.smd-iso-top{top:12px}
+.smd-iso-top span:last-child{text-transform:uppercase;letter-spacing:.1em;text-align:right}
+.smd-iso-bot{bottom:12px}
+.smd-iso-hint{text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.smd-iso-read{color:var(--anatomy-text);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.smd-iso-stage svg{display:block;width:100%;height:auto;max-height:62vh;margin:0 auto;overflow:visible}
+.smd-iso-ctl{display:grid;gap:10px;margin:12px 2px 0}
+.smd-iso-c{display:grid;gap:6px}
+.smd-iso-cl{display:flex;justify-content:space-between;gap:10px;color:var(--anatomy-strong);font-weight:600;font-size:13px}
+.smd-iso-cl output{white-space:nowrap;font-weight:500;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.smd-iso-c input[type=range]{width:100%;min-height:44px;margin:0;accent-color:var(--anatomy-hi)}
+.smd-iso-seg{display:flex;flex-wrap:wrap;gap:6px}
+.smd-iso-seg button{min-height:44px;padding:6px 12px;border-radius:999px;border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;cursor:pointer}
+.smd-iso-seg button[aria-pressed="true"]{background:var(--anatomy-hi);border-color:var(--anatomy-hi);color:var(--anatomy-card)}
+.smd-iso-seg button:focus-visible,.smd-iso-c input:focus-visible{outline:2px solid var(--anatomy-blue);outline-offset:2px}
+.smd-iso-cap{display:grid;gap:6px;margin:10px 2px 0;color:var(--anatomy-muted);font-size:12.5px;line-height:1.5}
+.smd-iso-keys{display:flex;flex-wrap:wrap;gap:4px 14px}
+.smd-iso-key{display:inline-flex;align-items:center;gap:6px}
+.smd-iso-key i{display:inline-block;width:14px;height:0;border-top:2px solid var(--anatomy-hi)}
+.smd-iso-key i[data-mark="red"]{border-color:var(--anatomy-red)}
+.smd-iso-key i[data-mark="green"]{border-color:var(--anatomy-green)}
+.smd-iso-key i[data-mark="blue"]{border-color:var(--anatomy-blue)}
+.smd-iso-key i[data-mark="lit"]{border-color:var(--anatomy-lit)}
+.smd-iso-key i[data-mark="dotted"]{border-top-style:dotted}
+.smd-iso-mark{font-size:11.5px;color:var(--anatomy-muted);font-style:italic}
+.smd-iso-src summary{cursor:pointer;color:var(--anatomy-text);min-height:44px;display:flex;align-items:center}
+.smd-iso-src ul{margin:6px 0;padding-left:18px}
+.smd-iso-src p{margin:4px 0 0}
+.smd-iso-say{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.smd-iso .iso-gas{stroke:none}
+.smd-iso .iso-gas[data-tone="red"]{fill:var(--anatomy-red)}
+.smd-iso .iso-gas[data-tone="green"]{fill:var(--anatomy-green)}
+.smd-iso .iso-gas[data-tone="blue"]{fill:var(--anatomy-blue)}
+.smd-iso .iso-gas[data-tone="hi"]{fill:var(--anatomy-hi)}
+.smd-iso .iso-tint{stroke:none;opacity:.55}
+.smd-iso .iso-tint[data-tone="red"]{fill:var(--anatomy-red)}
+.smd-iso .iso-tint[data-tone="green"]{fill:var(--anatomy-green)}
+.smd-iso .iso-tint[data-tone="blue"]{fill:var(--anatomy-blue)}
+.smd-iso .iso-tint[data-tone="hi"]{fill:var(--anatomy-hi)}
+.smd-iso .iso-glass>.iso-fill{fill-opacity:.35}
+.smd-iso .iso-glass>.iso-shade,.smd-iso .iso-glass>.iso-top{fill-opacity:.25}
+@media (max-width:420px){.smd-iso-card{padding:28px 4px 40px}.smd-iso-bot{flex-direction:column;gap:2px;align-items:flex-start}.smd-iso-read{text-align:left}}
+@media (prefers-reduced-motion:reduce){.smd-iso *{animation:none!important;transition:none!important}}

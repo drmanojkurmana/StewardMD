@@ -2298,6 +2298,10 @@ window.openExternal = function (u) {
      no-op that resolved without loading anything, html2canvas stayed undefined, and Save as
      JPEG/PDF did nothing at all. The file is 15 lines and has no dependencies. -->
 <script src="/lazy-load.js?v=ll1"></script>
+<!-- Isometric equipment figures (circle system, vaporizer, sampling line, syringe pump, BP cuff, chest drain,
+     retinoscope): iso-figures.js is the small runtime; each figure (iso-fig-<id>.js, built by tools/iso/build.mjs with
+     the MIT Anatomy kit) and iso-figures.css load only when a module shows one. Kill switch: smd_iso = "0" or ?iso=0. -->
+<script src="/iso-figures.js?v=iso2" defer></script>
 <script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1-trainee1-cel1-pf1-ddisync1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
@@ -2409,7 +2413,7 @@ window.openExternal = function (u) {
 <!-- Neonatal layer (neo-*.js): master flag smd_neo, DEFAULT ON under a Beta label (owner 2026-10-01); off: Settings > Experimental Features, ?neo=0.
      neo-flags.js loads the rest only when the flag is on. Data: data/neo/*.json (quoted sources,
      ai_drafted). vault/modules/Neonatal.md -->
-<script src="/neo-flags.js?v=neo3-pm1" defer></script>
+<script src="/neo-flags.js?v=neo3-pm1-iso1" defer></script>
 <!-- Adult normal values (adult-ref.js): sourced adult lab reference ranges, data/ref/adult-ref-values.json,
      review pending. Search "Adult normal values"; MaiK value questions use it as evidence. -->
 <script src="/adult-ref.js?v=aref2" defer></script>
@@ -2733,7 +2737,7 @@ window.openExternal = function (u) {
      surgical decision engine has exactly one home and parity is structural.
      Content is NOT bundled - it is lazily fetched from /surgx/*.json on first open. -->
 <script src="/surgx-flags.js?v=sg14-allopen3-media" defer></script>
-<script src="/surgx-model.js?v=sg17-allopen" defer></script>
+<script src="/surgx-model.js?v=sg17-allopen-iso1" defer></script>
 <script src="/surgx-content.js?v=sg2-allopen" defer></script>
 <script src="/surgx-note-schema.js?v=sg1" defer></script>
 <script src="/surgx-store.js?v=sg13-backup" defer></script>
@@ -2743,7 +2747,7 @@ window.openExternal = function (u) {
 <script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
 <script src="/surgx-evidence.js?v=hardlocal3" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=hardlocal3-allopen1-cel1-pm1-mkai1-mkw1" defer></script>
+<script src="/surgx-screens.js?v=hardlocal3-allopen1-cel1-pm1-mkai1-mkw1-iso1" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
      owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
@@ -3251,13 +3255,13 @@ window.openExternal = function (u) {
 <script src="/ophthalmos-tools-model.js?v=oph14" defer></script>
 <script src="/ophthalmos-tools.js?v=oph14" defer></script>
 <script src="/ophthalmos-learn.js?v=oph14" defer></script>
-<script src="/ophthalmos-explore.js?v=oph14" defer></script>
+<script src="/ophthalmos-explore.js?v=oph14-iso1" defer></script>
 <!-- Tokós: only the loader at boot; the engine and Tokós files load on first open (tokos-loader.js) -->
 <script src="/tokos-loader.js?v=tok10" defer></script>
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
 <script src="/prep-loader.js?v=prep64" defer></script>
 <!-- Narkē (Anaesthesia): only the loader at boot; the engine and Narkē files load on first open (narke-loader.js) -->
-<script src="/narke-loader.js?v=nrk8" defer></script>
+<script src="/narke-loader.js?v=nrk9" defer></script>
 </body>
 </html>

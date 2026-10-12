@@ -60,7 +60,8 @@
   var STR = {
     mbbs: T("MBBS", "MBBS"), resident: T("Resident", "रेज़िडेंट"),
     draft: T("AI draft, awaiting specialist review", "AI ड्राफ़्ट, विशेषज्ञ समीक्षा बाकी"),
-    learnThis: T("Learn this", "यह सीखें"), min: T("{n} min", "{n} मिनट"),
+    learnThis: T("Learn this", "यह सीखें"),
+    isoH: T("The machine, working", "चलती हुई मशीन"), isoMore: T("Vaporizer and gas sampling", "Vaporizer और gas sampling"), min: T("{n} min", "{n} मिनट"),
     sources: T("Sources and notes", "स्रोत और टिप्पणियाँ"), reset: T("Reset", "रीसेट"),
     // odc
     pao2: T("PaO2", "PaO2"), sat: T("Saturation", "Saturation"), p50: T("P50", "P50"), shifts: T("What shifts the curve", "Curve को क्या खिसकाता है"),
@@ -479,13 +480,17 @@
     body: function (m) {
       return '<section class="nkx-sec nkx-first" aria-labelledby="nkxCiH"><h2 class="nkx-h" id="nkxCiH">' + tx(m.title) + "</h2>" +
         '<div id="nkxLive">' + this.live(m) + "</div>" +
+        // The isometric circle system (iso-fig-circle-system.js) runs this model; the sliders below drive it.
+        (G.SMD_ISO && G.SMD_ISO.enabled() ? '<h3 class="nkx-h3">' + s("isoH") + "</h3>" + G.SMD_ISO.slot("circle-system", { controls: false, state: { fgfI: CI.fgfI, ve: CI.ve, absorber: CI.absorber } }) : "") +
         '<h3 class="nkx-h3" id="nkxCiP">' + s("parts") + '</h3><div class="nkx-chips" role="group" aria-labelledby="nkxCiP">' + m.partOrder.map(function (p) {
           return '<button type="button" class="nkx-chip" data-act="nkxcipart" data-v="' + p + '" aria-pressed="' + (CI.part === p) + '">' + tx(m.parts[p].name) + "</button>";
         }).join("") + "</div>" + (CI.part ? '<p class="nkx-p nkx-role">' + tx(m.parts[CI.part].role) + "</p>" : "") + "</section>" +
         '<section class="nkx-sec" aria-labelledby="nkxCiS"><h2 class="sp-h2" id="nkxCiS">' + s("settings") + "</h2>" +
         range("fgf", s("fgf"), 0, FGF_STEPS.length - 1, 1, CI.fgfI, raw("lmin", { n: FGF_STEPS[CI.fgfI] }), raw("lmin", { n: FGF_STEPS[CI.fgfI] })) +
         range("ve", s("ve"), 3, 15, 0.5, CI.ve, raw("lmin", { n: CI.ve }), raw("lmin", { n: CI.ve })) +
-        seg("nkxciabs", s("absorber"), Object.keys(m.absorbers).map(function (k) { return [k, tx(m.absorbers[k].name)]; }), CI.absorber, "nkxCiAL") + "</section>";
+        seg("nkxciabs", s("absorber"), Object.keys(m.absorbers).map(function (k) { return [k, tx(m.absorbers[k].name)]; }), CI.absorber, "nkxCiAL") + "</section>" +
+        (G.SMD_ISO && G.SMD_ISO.enabled() ? '<section class="nkx-sec" aria-labelledby="nkxCiV"><h2 class="sp-h2" id="nkxCiV">' + s("isoMore") + "</h2>" +
+          G.SMD_ISO.slot("vaporizer") + G.SMD_ISO.slot("capno-line") + "</section>" : "");
     },
     live: function (m) {
       var st = m.state({ fgf: FGF_STEPS[CI.fgfI], ve: CI.ve, absorber: CI.absorber }), cap = m.capnogram(st, 80);
@@ -508,6 +513,7 @@
     input: function (el) {
       var k = el.getAttribute("data-xin"), v = +el.value;
       if (k === "fgf") { CI.fgfI = v; setOut(el, raw("lmin", { n: FGF_STEPS[v] })); } else { CI.ve = v; setOut(el, raw("lmin", { n: v })); }
+      if (G.SMD_ISO) G.SMD_ISO.set("circle-system", { fgfI: CI.fgfI, ve: CI.ve });
       repaintLive("circuit"); touched("circuit");
     }
   };
