@@ -197,7 +197,7 @@ export function draftBody(mod, ground) {
   ];
   const user = `<module>${mod.title} (${mod.sid})</module>\n<scope>${ground.scope}</scope>\n<source>\n${ground.kbText}\n</source>\n<items>\n${ground.itemText}\n</items>\nReply with the lesson JSON: title, steps (tx, say, kind + visual fields), refs.`;
   return {
-    model: DRAFT, max_tokens: 3000,
+    model: DRAFT, max_tokens: 5000,
     system: [{ type: "text", text: DRAFT_SYSTEM + "\nRULES:\n- " + rules.join("\n- ") }],
     messages: [{ role: "user", content: [{ type: "text", text: user, cache_control: { type: "ephemeral" } }] }],
     output_config: { effort: "low", format: { type: "json_schema", schema: DRAFT_SCHEMA } },
