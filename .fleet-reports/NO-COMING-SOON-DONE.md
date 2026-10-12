@@ -71,27 +71,50 @@ sets restored after the counts tool dropped what it cannot see from this
 sandbox; documented in PR), share-ID index republished (927 shards, verify
 0 wrong over 207,469 MCQs + 1,769 lessons).
 
+## Content built, wave 2: maik27 (61 MCCQE modules, 1,204 verified MCQs)
+
+Same pipeline (haiku gen, sonnet blind verify, gates + local jaccard>=0.6
+screen vs 1,521 R2 overlay stems; 10 dups dropped). MCCQE Part I vignettes
+in Canadian practice. All 61 thin mcc-* modules now >=25.
+Shipped: overlay/maik27 (61 files, R2, live-verified), prep.js OVERLAYS +4
+subjects, counts +maik27, share-ID index republished (0 wrong). Spend $17.97.
+
+## Content built, wave 3: maik28 (15 AMC modules, 273 verified MCQs)
+
+child-health (7: jaundice, exanthems, cardiac, renal, endo, adolescent,
+indigenous) + mental-health (8: depression, anxiety, ocd, ptsd, sleep,
+drugs, child, crisis), Australian GP framing, screened vs 390 R2 stems
+(2 dups dropped). Shipped: overlay/maik28 (15 files, R2, live-verified),
+OVERLAYS +2 subjects, counts +maik28, share-ID index republished (211,262
+MCQs, 0 wrong). Spend $4.43. Exception: ch-haem reached only 17/25 (heavy
+gate losses, then its retry batch wedged 60+ min at 0/3) — still thin.
+
 ## Remainder (content, NOT done) with cost to finish
 
-- 186 thin (<10) modules, mostly AMC/MCCQE/Australian/UK-plan subjects:
-  ≈ 3,700 items ≈ $2-4 at the observed $0.017/item. Priority: MCCQE-1 thin,
-  AMC thin, then PLAB/MRCS-plan and SS thin modules.
-- PYQ items with no explanation: count still unknown from repo (live PYQ
-  file R2-only; explained=942). Needs an R2-side count, then explanation
-  batches for items that have none.
-- Profiles: MRCP available (#1524, bank-backed); usmle-step2-ck flipped to
-  available by #1526 during the rebase (2,316-clinical-vignette pool,
-  verified in profile). NO exam profile has bank.status "coming" left: the
-  coming-section/Arena-gate neutrals are now dormant fallbacks.
+- Thin (<10) modules left: 49 (was 186): ch-haem (17, retry when batch
+  backlog clears), remaining AMC/PLAB/MRCS-plan thin, SS thin (gen-med 12,
+  neuro 6, rheum 6, onco 5, nephro 5, ID 4, pulm 2, endo 2, cards 1, crit 3,
+  biostat 1). ≈ 49 × ~18 ≈ 900 items ≈ $15 at $0.017/item — beyond the
+  remaining $4.79 of the $30 job budget; needs a follow-up budget.
+- PYQ without explanation: counted exactly — 2,570 of 10,483 live items
+  (660 empty + 1,910 short, 19 subjects). Dry-run estimate $1.53 via
+  tools/prep-explain.mjs (Vertex Batch) — NOT runnable from this sandbox
+  (no PREP_VERTEX_PROJECT / gcloud auth). Run there when creds exist.
+- Modules at 10-24 (never "thin", out of this job's scope): remainder of
+  child-health/mental-health to 25 (~340 items ≈ $6), SS 10-24s.
+- Profiles: MRCP + Step 2 CK available (bank-backed). NO exam profile has
+  bank.status "coming" left: the coming-section/Arena-gate neutrals are now
+  dormant fallbacks.
 
 ## Spend
 
-Content spend this turn: $2.80 API (14 batch jobs, haiku gen + sonnet
-verify, 123k in / 598k out tokens) for 163 verified MCQs ($0.017/item).
-Job ledger: /tmp/no-coming-soon-spend.tsv (14 rows). Global ledger file is
-read-only from this sandbox (still 213 rows, $112.28 on disk): the 14 rows
-must be appended by the ledger owner; true total then $115.08, far from the
-$192 stop and inside the $30 job budget.
+Content spend, all waves: $25.21 API (126 batch jobs, haiku gen + sonnet
+verify, 1.12M in / 5.36M out tokens) for 1,640 verified MCQs ($0.015/item):
+maik26 $2.80 (163), maik27 $17.97 (1,204), maik28 $4.43 (273).
+Job ledger: /tmp/no-coming-soon-spend.tsv (126 rows). Global ledger file is
+read-only from this sandbox (still 213 rows, $112.28 on disk): the rows must
+be appended by the ledger owner; true total then $137.49, under the $192
+stop and inside the $30 job budget ($4.79 left).
 
 ## Verification
 
