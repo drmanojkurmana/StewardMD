@@ -1,0 +1,178 @@
+{
+ "v": 1,
+ "module": "bio-transcription",
+ "subject": "biochemistry",
+ "title": "Transcription and RNA processing",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Transcription copies a DNA sequence into RNA. Three nuclear **RNA polymerases** do this in eukaryotes. Pol I makes most ribosomal RNA, except 5S rRNA. Pol II makes precursors of mRNA, most snRNA and microRNA. Pol III makes tRNA, 5S rRNA and other small RNAs. Pol II is the enzyme most often tested, and it is the one blocked by alpha-amanitin.",
+   "say": "Transcription copies a DNA sequence into RNA. In eukaryotes, three nuclear RNA polymerases do this. Polymerase I makes most ribosomal RNA, except 5S rRNA. Polymerase II makes precursors of messenger RNA, most small nuclear RNA and microRNA. Polymerase III makes transfer RNA, 5S rRNA and other small RNAs. Polymerase II is the enzyme most often tested, and it is the one blocked by alpha-amanitin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Polymerase",
+     "Main products"
+    ],
+    "rows": [
+     [
+      "Pol I",
+      "Most rRNA (not 5S)"
+     ],
+     [
+      "Pol II",
+      "mRNA precursors, most snRNA, microRNA"
+     ],
+     [
+      "Pol III",
+      "tRNA, 5S rRNA, small RNAs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bacteria have one **RNA polymerase** with a core enzyme and a **sigma factor**. Sigma recognises the promoter and raises the enzyme's affinity for it. Eukaryotic promoters hold a TATA box, the Hogness box, about 25 base pairs upstream of the start site. Its prokaryotic counterpart is the Pribnow box, TATAAT, about 10 base pairs upstream.",
+   "say": "Bacteria use a single RNA polymerase made of a core enzyme plus a sigma factor. Sigma recognises the promoter and raises the enzyme's affinity for it. In eukaryotes, the TATA box, also called the Hogness box, sits about 25 base pairs upstream of the start site. Its prokaryotic equivalent is the Pribnow box, with the sequence TATAAT, about 10 base pairs upstream.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prokaryote",
+     "points": [
+      "Pribnow box, TATAAT",
+      "About 10 bp upstream",
+      "Sigma factor recognises promoter"
+     ]
+    },
+    "right": {
+     "title": "Eukaryote",
+     "points": [
+      "Hogness (TATA) box",
+      "About 25 bp upstream",
+      "Enhancers and transcription factors act at a distance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Transcription factors** bind promoter and enhancer DNA and recruit the polymerase. Their **DNA-binding domains** include zinc finger, helix-turn-helix, helix-loop-helix and basic domains. Helix-loop-helix is a dimerisation motif; the DNA contact is made by a separate basic region. Enhancers can act at a distance, while the promoter is needed for the start of transcription.",
+   "say": "Transcription factors bind promoter and enhancer DNA and recruit the polymerase. Their DNA-binding domains include zinc finger, helix-turn-helix and basic domains. Helix-loop-helix is mainly a dimerisation motif, and its DNA contact comes from a separate basic region. Enhancers can act at a distance, while the promoter is needed to start transcription.",
+   "vis": null
+  },
+  {
+   "tx": "Transcription has four stages: initiation, elongation, termination and post-transcriptional processing. Processing of eukaryotic pre-mRNA adds a **7-methylguanosine cap** at the 5 prime end, a **poly-A tail** at the 3 prime end, and removes **introns** by **splicing**. Only the mRNA carries this cap. Mutations in promoter regions usually impair initiation.",
+   "say": "Transcription has four stages: initiation, elongation, termination and processing. Processing of eukaryotic pre-messenger RNA adds a seven-methylguanosine cap at the five prime end, a poly-A tail at the three prime end, and removes introns by splicing. Only messenger RNA carries this cap. Promoter mutations usually impair initiation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Initiation"
+     },
+     {
+      "id": "b",
+      "label": "Elongation"
+     },
+     {
+      "id": "c",
+      "label": "Termination"
+     },
+     {
+      "id": "d",
+      "label": "5 prime cap"
+     },
+     {
+      "id": "e",
+      "label": "Splicing"
+     },
+     {
+      "id": "f",
+      "label": "Poly-A tail"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Splicing removes **introns** and joins **exons**. Each intron starts with GU and ends with AG. The **spliceosome** is the complex that does this. It contains five snRNAs, U1, U2, U4, U5 and U6, with more than 60 proteins. snRNAs are the splicing RNAs, while the spliceosome is the macromolecular machine. Faulty splicing causes disease, such as beta-thalassaemia from a splice-junction mutation.",
+   "say": "Splicing removes introns and joins exons. Each intron begins with the letters GU and ends with AG. The spliceosome is the complex that carries this out. It contains five small nuclear RNAs, U1, U2, U4, U5 and U6, together with more than sixty proteins. Faulty splicing causes disease, for example some forms of beta thalassaemia caused by a mutation at an exon-intron junction.",
+   "vis": null
+  },
+  {
+   "tx": "**Alternative splicing** lets one gene encode several proteins. Immunoglobulin membrane and secreted forms come from differently processed heavy-chain mRNA. ApoB100 and ApoB48 differ because of **RNA editing**, not splicing. Know the inhibitors too: alpha-amanitin blocks Pol II, while **rifampicin** blocks bacterial RNA polymerase, and actinomycin D blocks transcription generally.",
+   "say": "Alternative splicing lets one gene encode several proteins. Immunoglobulin membrane and secreted forms come from differently processed heavy chain messenger RNA. ApoB100 and ApoB48 differ because of RNA editing, not splicing. Alpha-amanitin blocks polymerase II. Rifampicin blocks bacterial RNA polymerase, and actinomycin D blocks transcription generally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Target"
+    ],
+    "rows": [
+     [
+      "Alpha-amanitin",
+      "Eukaryotic Pol II"
+     ],
+     [
+      "Rifampicin",
+      "Bacterial RNA polymerase"
+     ],
+     [
+      "Actinomycin D",
+      "DNA-template transcription"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Small RNAs regulate gene expression. **microRNAs** are made by Pol II and processed by Drosha and Dicer. They guide the RISC complex to target mRNA, causing cleavage or repression of translation. **Ribozymes** are RNAs with catalytic activity, such as snRNA in splicing and the RNA in peptidyl transferase. Northern blotting detects RNA, while Southern detects DNA and Western detects protein.",
+   "say": "Small RNAs regulate gene expression. MicroRNAs are made by polymerase II and processed by Drosha and Dicer. They guide the RISC complex to target messenger RNA, causing cleavage or repression of translation. Ribozymes are RNAs with catalytic activity. Northern blotting detects RNA, Southern blotting detects DNA and Western blotting detects protein.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "43049bcc-8a30-40ae-b5b1-6bb57c3687ee",
+  "7ada0f7c-45ae-478a-88eb-2af186f237f8",
+  "2561f5ce-f570-4701-87b9-ca516224d0db"
+ ],
+ "src": [],
+ "refs": [
+  "Harper's Illustrated Biochemistry (Bender, Botham, Weil, Kennelly, Murray, Rodwell, Eds)",
+  "Satyanarayana, Biochemistry",
+  "Lippincott Illustrated Reviews: Biochemistry"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 219
+ }
+}

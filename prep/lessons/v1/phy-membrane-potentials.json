@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "module": "phy-membrane-potentials",
+ "subject": "physiology",
+ "title": "Resting membrane potential and action potential",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The resting membrane potential is the voltage difference across the cell membrane at rest, conventionally about **-70 mV** inside negative. It is set mainly by **potassium** because the resting membrane is far more permeable to K+ than to Na+. Sodium and chloride contribute little at rest.",
+   "say": "The resting membrane potential is the voltage difference across the cell membrane at rest, conventionally about minus seventy millivolts. It is set mainly by potassium, because the resting membrane is far more permeable to potassium than to sodium. Sodium and chloride contribute little at rest.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ion",
+     "Approximate equilibrium potential",
+     "Role at rest"
+    ],
+    "rows": [
+     [
+      "Na+",
+      "+60 mV",
+      "Low permeability, little effect"
+     ],
+     [
+      "K+",
+      "-90 mV",
+      "Dominant, sets resting potential"
+     ],
+     [
+      "Cl-",
+      "-70 mV",
+      "Minor contribution"
+     ],
+     [
+      "Ca2+",
+      "+100 to +110 mV",
+      "Not significant at rest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Nernst equation** gives the potential at which a single ion is in equilibrium across a membrane. The **Goldman equation** instead accounts for all permeable ions together, weighted by their permeabilities. The **Gibbs-Donnan effect** explains why non-diffusible intracellular anions, such as proteins, shift the distribution of diffusible ions.",
+   "say": "The Nernst equation gives the potential at which a single ion is in equilibrium across a membrane. The Goldman equation instead accounts for all permeable ions together, weighted by their permeabilities. The Gibbs-Donnan effect explains how non-diffusible intracellular anions, such as proteins, shift the distribution of diffusible ions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nernst equation",
+     "points": [
+      "Single ion at equilibrium",
+      "Gives equilibrium potential",
+      "Ignores other ions"
+     ]
+    },
+    "right": {
+     "title": "Goldman equation",
+     "points": [
+      "All permeable ions included",
+      "Weighted by permeability",
+      "Gives resting potential estimate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An action potential has a **threshold** near **-55 mV**. Below threshold, a sub-threshold stimulus fails to trigger a spike. Once threshold is reached, voltage-gated Na+ channels open fully and the potential rises rapidly towards about +35 mV. The response is **all or none**, so its size does not grow with stimulus strength.",
+   "say": "An action potential has a threshold near minus fifty five millivolts. Below threshold, a sub-threshold stimulus fails to trigger a spike. Once threshold is reached, voltage gated sodium channels open fully and the potential rises rapidly towards about plus thirty five millivolts. The response is all or none, so its size does not grow with stimulus strength.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stimulus reaches threshold"
+     },
+     {
+      "id": "b",
+      "label": "Na+ channels open fully"
+     },
+     {
+      "id": "c",
+      "label": "Rapid depolarisation"
+     },
+     {
+      "id": "d",
+      "label": "K+ channels open"
+     },
+     {
+      "id": "e",
+      "label": "Repolarisation and hyperpolarisation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Repolarisation happens as Na+ channels close and **voltage-gated K+ channels** open, letting potassium leave the cell. The slow closing of these K+ channels causes a brief **after-hyperpolarisation**, when the potential dips below resting level. The Na+/K+ pump then restores the normal ionic gradients.",
+   "say": "Repolarisation happens as sodium channels close and voltage gated potassium channels open, letting potassium leave the cell. The slow closing of these potassium channels causes a brief after hyperpolarisation, when the potential dips below resting level. The sodium potassium pump then restores the normal ionic gradients.",
+   "vis": null
+  },
+  {
+   "tx": "During the **absolute refractory period**, a new action potential cannot be triggered by any stimulus, because Na+ channels are inactivated. The **relative refractory period** follows, when a strong stimulus can still excite the membrane. Impulses do not travel backwards because the area behind a moving impulse is refractory.",
+   "say": "During the absolute refractory period, a new action potential cannot be triggered by any stimulus, because sodium channels are inactivated. The relative refractory period follows, when a strong stimulus can still excite the membrane. Impulses do not travel backwards because the area behind a moving impulse is refractory.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Period",
+     "Excitability",
+     "Cause"
+    ],
+    "rows": [
+     [
+      "Absolute refractory",
+      "None",
+      "Na+ channel inactivation"
+     ],
+     [
+      "Relative refractory",
+      "Reduced, strong stimulus works",
+      "Recovering channels"
+     ],
+     [
+      "After-depolarisation",
+      "Hyperexcitable",
+      "Near firing level"
+     ],
+     [
+      "After-hyperpolarisation",
+      "Low, slowly recovers",
+      "Slow K+ channel closure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electrical events differ across tissues. **Electrotonic potentials** are graded, local and decay with distance, whereas action potentials propagate without decrement. Gradual, slowly rising stimuli cause **accommodation**, where the threshold rises and no spike is produced. Potassium changes shift resting potential: high extracellular K+ depolarises, while low K+ hyperpolarises.",
+   "say": "Electrical events differ across tissues. Electrotonic potentials are graded, local and decay with distance, whereas action potentials propagate without decrement. Gradual, slowly rising stimuli cause accommodation, where the threshold rises and no spike is produced. High extracellular potassium depolarises the membrane, while low potassium hyperpolarises it.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-bb8c4bff1341",
+  "mk-0041762c9fea",
+  "mk-d01863017519"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology (Barrett et al.)",
+  "Guyton and Hall Textbook of Medical Physiology (Hall)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 220
+ }
+}

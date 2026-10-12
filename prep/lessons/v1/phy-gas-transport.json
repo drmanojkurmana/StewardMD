@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "phy-gas-transport",
+ "subject": "physiology",
+ "title": "Oxygen and carbon dioxide transport",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Oxygen travels in blood in two ways. Almost all of it, roughly 97 to 99 percent, rides on **haemoglobin**. The rest is dissolved in plasma. Each haemoglobin molecule has four haem groups, so it can carry four oxygen molecules. Dissolved oxygen follows Henry's law, so its amount rises in direct proportion to its partial pressure. Because dissolved oxygen is a small fraction, haemoglobin governs most of what the tissues receive.",
+   "say": "Oxygen travels in blood in two ways. Almost all of it, roughly 97 to 99 percent, rides on haemoglobin. The rest is dissolved in plasma. Each haemoglobin molecule has four haem groups, so it can carry four oxygen molecules. Dissolved oxygen follows Henry's law, so its amount rises in direct proportion to its partial pressure. Because dissolved oxygen is a small fraction, haemoglobin governs most of what the tissues receive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Form",
+     "Approximate share",
+     "Notes"
+    ],
+    "rows": [
+     [
+      "Bound to haemoglobin",
+      "97 to 99 percent",
+      "Four O2 per Hb"
+     ],
+     [
+      "Dissolved in plasma",
+      "1 to 3 percent",
+      "Follows Henry's law"
+     ],
+     [
+      "Myoglobin",
+      "Muscle store",
+      "One O2 per molecule"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **oxygen-haemoglobin dissociation curve** is sigmoid because haemoglobin shows **positive cooperativity**: each bound oxygen makes further binding easier. Haemoglobin shifts between a low affinity **T state** and a high affinity **R state**. **Myoglobin** has a single binding site, so its curve is a rectangular hyperbola with no cooperativity. Its higher affinity lets it accept oxygen from haemoglobin in muscle and store it to support sustained contraction.",
+   "say": "The oxygen haemoglobin dissociation curve is sigmoid because haemoglobin shows positive cooperativity. Each bound oxygen makes further binding easier. Haemoglobin shifts between a low affinity T state and a high affinity R state. Myoglobin is different. It has a single binding site, so its curve is a rectangular hyperbola with no cooperativity. Its higher affinity lets it accept oxygen from haemoglobin in muscle and store it to support sustained contraction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemoglobin",
+     "points": [
+      "Four subunits",
+      "Sigmoid curve",
+      "Positive cooperativity",
+      "Shifts between T and R states"
+     ]
+    },
+    "right": {
+     "title": "Myoglobin",
+     "points": [
+      "One binding site",
+      "Rectangular hyperbola",
+      "No cooperativity",
+      "Higher affinity than haemoglobin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Shifts of the curve change how readily haemoglobin releases oxygen. A **right shift** lowers affinity and favours unloading. It follows a rise in CO2, a fall in pH, a rise in temperature, and more **2,3-BPG**. This is the Bohr effect. A left shift does the opposite and is seen with fetal haemoglobin, carbon monoxide, alkalosis and hypothermia. Stored blood loses 2,3-BPG, so it shifts left. Chronic hypoxia raises 2,3-BPG and shifts the curve right.",
+   "say": "Shifts of the curve change how readily haemoglobin releases oxygen. A right shift lowers affinity and favours unloading. It follows a rise in CO2, a fall in pH, a rise in temperature, and more 2,3-BPG. This is the Bohr effect. A left shift does the opposite and is seen with fetal haemoglobin, carbon monoxide, alkalosis and hypothermia. Stored blood loses 2,3-BPG, so it shifts left. Chronic hypoxia raises 2,3-BPG and shifts the curve right.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect on curve",
+     "Oxygen release"
+    ],
+    "rows": [
+     [
+      "Rise in CO2 or fall in pH",
+      "Right",
+      "Increased"
+     ],
+     [
+      "Rise in temperature",
+      "Right",
+      "Increased"
+     ],
+     [
+      "Raised 2,3-BPG",
+      "Right",
+      "Increased"
+     ],
+     [
+      "Fetal Hb, CO, alkalosis",
+      "Left",
+      "Reduced"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Carbon dioxide is carried mainly as **bicarbonate**, about 70 percent. Carbamino compounds on haemoglobin account for about 23 percent, and dissolved CO2 about 7 percent. In the tissues, CO2 enters red cells and forms bicarbonate. Bicarbonate leaves the cell in exchange for chloride through band 3, which is the **chloride shift**. Venous haematocrit is therefore slightly higher than arterial. The **Haldane effect** describes how oxygenated haemoglobin releases more CO2 in the lungs.",
+   "say": "Carbon dioxide is carried mainly as bicarbonate, about 70 percent. Carbamino compounds on haemoglobin account for about 23 percent, and dissolved CO2 about 7 percent. In the tissues, CO2 enters red cells and forms bicarbonate. Bicarbonate leaves the cell in exchange for chloride through band 3, which is the chloride shift. Venous haematocrit is therefore slightly higher than arterial. The Haldane effect describes how oxygenated haemoglobin releases more CO2 in the lungs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CO2 enters RBC"
+     },
+     {
+      "id": "b",
+      "label": "Carbonic anhydrase forms HCO3-"
+     },
+     {
+      "id": "c",
+      "label": "HCO3- exits, Cl- enters"
+     },
+     {
+      "id": "d",
+      "label": "Plasma carries HCO3-"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Carbon monoxide** binds haemoglobin with an affinity more than 200 times that of oxygen. It cuts oxygen-carrying capacity and also shifts the curve left, so tissues get less oxygen. Carboxyhaemoglobin is cherry red, which can mask cyanosis. Treatment is high-flow oxygen, and in severe cases hyperbaric oxygen. Oxygen delivery depends on cardiac output, haemoglobin level, dissolved oxygen and the affinity of haemoglobin for oxygen. Indian and US texts agree on these principles.",
+   "say": "Carbon monoxide binds haemoglobin with an affinity more than 200 times that of oxygen. It cuts oxygen carrying capacity and also shifts the curve left, so tissues get less oxygen. Carboxyhaemoglobin is cherry red, which can mask cyanosis. Treatment is high flow oxygen, and in severe cases hyperbaric oxygen. Oxygen delivery depends on cardiac output, haemoglobin level, dissolved oxygen and the affinity of haemoglobin for oxygen. Indian and US texts agree on these principles.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "74d4dfbf-b8e4-4d43-a5b0-0c4c3cb70a53",
+  "mk-398df876af84",
+  "21ff554a-4754-42cf-913a-d95a61a669f3"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Longo, Fauci, Kasper, Hauser, Jameson, Loscalzo (Eds))",
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 271
+ }
+}

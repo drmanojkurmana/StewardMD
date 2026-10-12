@@ -1,0 +1,216 @@
+{
+ "v": 1,
+ "module": "pat-apoptosis",
+ "subject": "pathology",
+ "title": "Apoptosis and Other Cell Death Pathways",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Apoptosis** is programmed, controlled cell death. The cell shrinks, its chromatin condenses, and it breaks into membrane-bound apoptotic bodies. The cell membrane stays intact, so there is no inflammation. Macrophages or neighbouring cells clear these bodies. This contrasts with necrosis, where the membrane is damaged and inflammation follows.",
+   "say": "Apoptosis is programmed, controlled cell death. The cell shrinks, its chromatin condenses, and it breaks into membrane-bound apoptotic bodies. The cell membrane stays intact, so there is no inflammation. Macrophages or neighbouring cells clear these bodies. This contrasts with necrosis, where the membrane is damaged and inflammation follows.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Apoptosis",
+     "Necrosis"
+    ],
+    "rows": [
+     [
+      "Cell membrane",
+      "Intact",
+      "Disrupted"
+     ],
+     [
+      "Inflammation",
+      "Absent",
+      "Usually present"
+     ],
+     [
+      "Nuclear change",
+      "Chromatin condensation",
+      "Pyknosis, karyorrhexis, karyolysis"
+     ],
+     [
+      "Nature",
+      "Often physiological",
+      "Always pathological"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Apoptosis has two main **initiating pathways**. The intrinsic pathway is triggered inside the cell by stress or loss of growth signals. The extrinsic pathway is triggered by **death receptors** such as Fas (CD95) and TNFR1. Both pathways converge on the activation of caspases. Caspases are cysteine proteases, and they cleave after aspartate residues.",
+   "say": "Apoptosis has two main initiating pathways. The intrinsic pathway is triggered inside the cell by stress or loss of growth signals. The extrinsic pathway is triggered by death receptors such as Fas and TNFR1. Both pathways converge on the activation of caspases. Caspases are cysteine proteases, and they cleave after aspartate residues.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stress or growth factor loss"
+     },
+     {
+      "id": "b",
+      "label": "Mitochondrial leak"
+     },
+     {
+      "id": "c",
+      "label": "Caspase 9"
+     },
+     {
+      "id": "d",
+      "label": "Fas or TNFR1 signal"
+     },
+     {
+      "id": "e",
+      "label": "Caspase 8"
+     },
+     {
+      "id": "f",
+      "label": "Executioner caspases 3 and 6"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "intrinsic"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "d",
+      "e",
+      "extrinsic"
+     ],
+     [
+      "c",
+      "f"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the **intrinsic pathway**, BCL-2 and BCL-XL are anti-apoptotic. BAX and BAK are pro-apoptotic. When they shift the balance, the mitochondrial membrane becomes permeable. **Cytochrome c** leaks into the cytosol and binds Apaf-1 to form the apoptosome. This activates caspase 9. Venetoclax, a BCL-2 inhibitor, works on this pathway.",
+   "say": "In the intrinsic pathway, BCL-2 and BCL-XL are anti-apoptotic. BAX and BAK are pro-apoptotic. When they shift the balance, the mitochondrial membrane becomes permeable. Cytochrome c leaks into the cytosol and binds Apaf-1 to form the apoptosome. This activates caspase 9. Venetoclax, a BCL-2 inhibitor, works on this pathway.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-apoptotic",
+     "points": [
+      "BCL-2",
+      "BCL-XL",
+      "MCL-1"
+     ]
+    },
+    "right": {
+     "title": "Pro-apoptotic",
+     "points": [
+      "BAX",
+      "BAK",
+      "BIM, BID, BAD, PUMA"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Executioner caspases, mainly caspase 3, cleave cytoskeletal and nuclear proteins. They also activate a DNase that cuts DNA between nucleosomes. This produces fragments of about 200 base pairs. On gel electrophoresis these form a **ladder pattern**. Necrosis gives a smeared pattern instead. The TUNEL assay detects these DNA breaks. Annexin V detects phosphatidylserine on the outer membrane.",
+   "say": "Executioner caspases, mainly caspase 3, cleave cytoskeletal and nuclear proteins. They also activate a DNase that cuts DNA between nucleosomes. This produces fragments of about 200 base pairs. On gel electrophoresis these form a ladder pattern. Necrosis gives a smeared pattern instead. The TUNEL assay detects these DNA breaks. Annexin V detects phosphatidylserine on the outer membrane.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Detects",
+     "Points to"
+    ],
+    "rows": [
+     [
+      "Gel electrophoresis",
+      "Nucleosome-sized fragments",
+      "Ladder means apoptosis"
+     ],
+     [
+      "TUNEL",
+      "DNA strand breaks",
+      "Apoptosis"
+     ],
+     [
+      "Annexin V",
+      "Phosphatidylserine outside membrane",
+      "Apoptosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Other forms of cell death are important. **Necroptosis** is a regulated, caspase-independent death that involves RIPK3 and MLKL. **Pyroptosis** is inflammatory programmed death driven by inflammasomes and gasdermin pores. It is studied in Salmonella-infected macrophages. **Ferroptosis** is iron-dependent lipid peroxidation. **Autophagy** is self-digestion of cell components, and it can either support survival or lead to death.",
+   "say": "Other forms of cell death are important. Necroptosis is a regulated, caspase-independent death that involves RIPK3 and MLKL. Pyroptosis is inflammatory programmed death driven by inflammasomes and gasdermin pores. It is studied in Salmonella-infected macrophages. Ferroptosis is iron-dependent lipid peroxidation. Autophagy is self-digestion of cell components, and it can either support survival or lead to death.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Death type",
+     "Key feature",
+     "Inflammation"
+    ],
+    "rows": [
+     [
+      "Necroptosis",
+      "Caspase-independent, RIPK3 and MLKL",
+      "Present"
+     ],
+     [
+      "Pyroptosis",
+      "Inflammasome and gasdermin pores",
+      "Strong"
+     ],
+     [
+      "Ferroptosis",
+      "Iron-dependent lipid peroxidation",
+      "Present"
+     ],
+     [
+      "Apoptosis",
+      "Caspase-driven, membrane intact",
+      "Absent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Key exam facts. **Councilman bodies** are apoptotic hepatocytes, seen in viral hepatitis and yellow fever. Glucocorticoids induce apoptosis, while sex steroids inhibit it. Pathological apoptosis occurs with DNA damage, ER stress, viral infection and transplant rejection. Physiological apoptosis occurs in hormone withdrawal and embryogenesis. Caspase 3 is the most important executioner.",
+   "say": "Key exam facts. Councilman bodies are apoptotic hepatocytes, seen in viral hepatitis and yellow fever. Glucocorticoids induce apoptosis, while sex steroids inhibit it. Pathological apoptosis occurs with DNA damage, ER stress, viral infection and transplant rejection. Physiological apoptosis occurs in hormone withdrawal and embryogenesis. Caspase 3 is the most important executioner.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "292e7517-21fc-4326-9c1d-9f812896ac5d",
+  "9fa1ba6f-330b-460f-9d45-2a359931dbda",
+  "4c9f6223-6382-4868-b6b6-eaa97353d4b2"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease (Kumar V, Abbas AK, Aster JC)",
+  "Harrison's Principles of Internal Medicine (Longo DL et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 294
+ }
+}

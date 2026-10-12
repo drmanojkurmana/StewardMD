@@ -1,0 +1,169 @@
+{
+ "v": 1,
+ "module": "ort-hip-injuries",
+ "subject": "orthopaedics",
+ "title": "Hip dislocation and proximal femur fractures",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **posterior hip dislocation** is the commonest hip dislocation in adults. It usually follows a road traffic accident, when a seated occupant strikes the knee on the dashboard. The hip is typically flexed, adducted and internally rotated, and the limb looks shortened. The femoral head can be felt posteriorly. The pattern of injury depends on the position of the hip at the moment of impact.",
+   "say": "Posterior hip dislocation is the most common hip dislocation in adults. It usually follows a road traffic accident, when a seated occupant strikes the knee on the dashboard. The hip is typically flexed, adducted and internally rotated, and the limb looks shortened. The femoral head can be felt posteriorly. The position of the hip at the moment of impact decides the pattern of injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Hip position at injury",
+     "Typical limb attitude"
+    ],
+    "rows": [
+     [
+      "Pure posterior",
+      "Flexion, adduction, internal rotation",
+      "Flexed, adducted, medially rotated"
+     ],
+     [
+      "Posterior fracture dislocation",
+      "Less flexion, neutral or slight abduction, internal rotation",
+      "Similar, with associated rim fracture"
+     ],
+     [
+      "Anterior dislocation",
+      "Hyperabduction with extension",
+      "Externally rotated, abducted, flexed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Posterior dislocation carries the highest risk of **sciatic nerve injury**, because the nerve lies behind the posterior acetabular wall. The superior gluteal artery may also be damaged. Vascular compromise can make the femoral pulse feeble or impalpable. Simple dislocations are reduced under anaesthesia by closed methods. Stimson's gravity method, Allis manoeuvre and Bigelow manoeuvre are common options. Kocher's manoeuvre is used for the shoulder, not the hip.",
+   "say": "Posterior dislocation carries the highest risk of sciatic nerve injury, because the nerve lies behind the posterior acetabular wall. The superior gluteal artery may also be damaged. Vascular compromise can make the femoral pulse feeble or impalpable. Simple dislocations are reduced under anaesthesia by closed methods. Stimson's gravity method, Allis manoeuvre and Bigelow manoeuvre are common options. Kocher's manoeuvre is used for the shoulder, not the hip.",
+   "vis": null
+  },
+  {
+   "tx": "The **Thompson and Epstein classification** grades posterior dislocations from type I to V. Type V involves a femoral head fracture, and **Pipkin** further subdivides it into four types. Open reduction is needed if closed reduction fails after two or three attempts, or when the dislocation is associated with a fracture. Early reduction matters, since avascular necrosis risk rises sharply with delay.",
+   "say": "The Thompson and Epstein classification grades posterior dislocations from type one to five. Type five involves a femoral head fracture, and Pipkin further subdivides it into four types. Open reduction is needed if closed reduction fails after two or three attempts, or when the dislocation is associated with a fracture. Early reduction matters, since avascular necrosis risk rises sharply with delay.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Thompson and Epstein type",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "No fracture or minor chip"
+     ],
+     [
+      "Type II",
+      "Single large posterior rim fragment"
+     ],
+     [
+      "Type III",
+      "Comminuted posterior rim"
+     ],
+     [
+      "Type IV",
+      "Acetabular floor fracture"
+     ],
+     [
+      "Type V",
+      "Femoral head fracture, subdivided by Pipkin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fracture of the **neck of femur** is common in elderly women, usually after a simple fall. Osteoporosis is the main underlying factor. The limb lies **externally rotated**, and the patient cannot lift the straight leg. Impacted fractures may still allow walking. Plain X-rays confirm most cases. If X-rays are equivocal, MRI is the best test, because delay in fixation raises morbidity and mortality.",
+   "say": "Fracture of the neck of femur is common in elderly women, usually after a simple fall. Osteoporosis is the main underlying factor. The limb lies externally rotated, and the patient cannot lift the straight leg. Impacted fractures may still allow walking. Plain X-rays confirm most cases. If X-rays are equivocal, MRI is the best test, because delay in fixation raises morbidity and mortality.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fall in elderly"
+     },
+     {
+      "id": "b",
+      "label": "Plain X-ray"
+     },
+     {
+      "id": "c",
+      "label": "Fracture seen"
+     },
+     {
+      "id": "d",
+      "label": "MRI if equivocal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No or unclear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment of intracapsular neck fracture depends on age, fitness and displacement. Undisplaced fractures in fit patients are fixed with **cannulated screws**. **Hemiarthroplasty** suits the frail elderly and pathological or irreducible fractures. Total hip replacement is chosen for pre-existing arthritis or avascular necrosis. Avascular necrosis and nonunion are the main complications of intracapsular fracture. Malunion is the commonest complication of extracapsular fracture.",
+   "say": "Treatment of intracapsular neck fracture depends on age, fitness and displacement. Undisplaced fractures in fit patients are fixed with cannulated screws. Hemiarthroplasty suits the frail elderly and pathological or irreducible fractures. Total hip replacement is chosen for pre-existing arthritis or avascular necrosis. Avascular necrosis and nonunion are the main complications of intracapsular fracture. Malunion is the commonest complication of extracapsular fracture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fixation",
+     "points": [
+      "Cannulated screws for undisplaced fracture",
+      "Preserves head in fit patients",
+      "Risk of nonunion and avascular necrosis"
+     ]
+    },
+    "right": {
+     "title": "Replacement",
+     "points": [
+      "Hemiarthroplasty for frail or pathological fracture",
+      "Allows early weight bearing",
+      "Total replacement if arthritis is present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Avascular necrosis of the femoral head is a late complication of posterior dislocation. Its risk is about 10 percent with early reduction and rises to around 40 percent with delayed reduction. Plain X-rays are often normal early, because changes appear only months after bone death. **MRI** shows marrow changes long before X-ray signs. Pain is the usual presentation.",
+   "say": "Avascular necrosis of the femoral head is a late complication of posterior dislocation. Its risk is about 10 percent with early reduction and rises to around 40 percent with delayed reduction. Plain X-rays are often normal early, because changes appear only months after bone death. MRI shows marrow changes long before X-ray signs. Pain is the usual presentation.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "306c79b0-e757-47fe-a719-be35ecb1c264",
+  "a15f83d6-caf6-42be-853d-54c0a5e894ac",
+  "80762abf-48ae-4315-8fbb-08aa116806a5"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 26 in Apley's System of Orthopaedics and Fractures (Solomon L, Warwick D, Nayagam S)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 233
+ }
+}

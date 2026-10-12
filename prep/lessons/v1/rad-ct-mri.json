@@ -1,0 +1,104 @@
+{
+ "v": 1,
+ "module": "rad-ct-mri",
+ "subject": "radiology",
+ "title": "CT and MRI principles",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Computed tomography** (CT) measures how much an X-ray beam is attenuated as it passes through tissue. Attenuation is expressed in **Hounsfield units** (HU). Water is defined as 0 HU and air as -1000 HU. Fat is about -50 to -100 HU, cerebrospinal fluid about 15 HU, and kidney about 30 HU. A change of one HU is a 0.1 percent change in the attenuation of water.",
+   "say": "Computed tomography measures how much an X-ray beam is weakened by tissue. The result is expressed in Hounsfield units. Water is zero, air is minus one thousand, fat is around minus fifty to minus one hundred, cerebrospinal fluid is about fifteen, and kidney is about thirty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tissue",
+     "Approximate HU"
+    ],
+    "rows": [
+     [
+      "Air",
+      "-1000"
+     ],
+     [
+      "Fat",
+      "-50 to -100"
+     ],
+     [
+      "Water",
+      "0"
+     ],
+     [
+      "CSF",
+      "about 15"
+     ],
+     [
+      "Kidney",
+      "about 30"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "CT technology moved through several **generations**, and **helical** (spiral) CT then allowed continuous data acquisition while the table moves. A single breath hold covers a larger lung volume with less motion artefact. **Multidetector CT** (MDCT) uses many detector rows, up to 64, to produce several thin slices per rotation. Data can be reformatted into coronal, sagittal or 3D views. Sir Godfrey Hounsfield introduced clinical CT in 1972.",
+   "say": "CT moved through several generations; helical scanning collects continuous data during one breath hold, which reduces motion artefact. Multidetector scanners use many detector rows to make thin slices quickly, and the data can be reformatted in several planes. Godfrey Hounsfield introduced clinical CT in nineteen seventy two.",
+   "vis": null
+  },
+  {
+   "tx": "**Window width** sets the range of HU shown on the display, and **window level** sets the centre of that range. A narrow width gives high contrast between similar tissues, such as grey and white matter in the brain. A wide width suits structures with very different densities, such as lung and bone. Changing the window changes how the image looks, not the underlying data.",
+   "say": "Window width controls the span of Hounsfield units displayed, and window level sets the middle of that span. A narrow window shows subtle differences, as in brain tissue. A wide window suits lung and bone. The raw data stay the same.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Narrow window",
+     "points": [
+      "Small HU range",
+      "High contrast between similar tissues",
+      "Used for brain parenchyma"
+     ]
+    },
+    "right": {
+     "title": "Wide window",
+     "points": [
+      "Large HU range",
+      "Shows very dense and very light tissue",
+      "Used for lung and bone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diffusion-weighted imaging** (DWI) detects restricted movement of water, which is seen early in acute ischaemic stroke. **Gadolinium** is a paramagnetic contrast agent that shortens T1 and brightens enhancing lesions, and it is the usual contrast for brain tumours and meningeal disease. **MR angiography** can use the **time of flight** technique, which shows flowing blood without contrast. MRI is non-ionising, so it avoids the radiation dose of CT.",
+   "say": "Diffusion weighted imaging shows restricted water movement, which appears early in acute stroke. Gadolinium brightens enhancing lesions such as brain tumours. Time of flight angiography shows flowing blood without contrast. MRI uses no ionising radiation.",
+   "vis": null
+  },
+  {
+   "tx": "For radiation exposure, **CT** delivers far more dose than plain radiographs. The **CT dose index** (CTDI) and **dose-length product** (DLP) are standard measures of CT output. Radiation units include the gray and the rad, while the tesla measures magnetic field strength. For suspected renal or ureteric stones, non-contrast helical CT is the investigation of choice, being around 95 to 100 percent sensitive.",
+   "say": "CT gives the highest radiation dose among common imaging tests. Dose is measured with the CT dose index and the dose length product. For renal stones, non contrast helical CT is the gold standard, with very high sensitivity.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "02e45239-9c95-4257-b67e-2c5ad54e59fa",
+  "mk-fcd0c3d459a8",
+  "ad25759d-a066-404c-895f-42208d0f7048"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 314
+ }
+}

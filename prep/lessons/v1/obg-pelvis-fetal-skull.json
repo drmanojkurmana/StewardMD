@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "module": "obg-pelvis-fetal-skull",
+ "subject": "obstetrics-gynaecology",
+ "title": "Obstetric pelvis and fetal skull",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **obstetric pelvis** is the bony passage the fetus must pass through. It has an inlet, a midpelvis and an outlet. Each has its own key diameters, and examiners test them repeatedly. Learn the numbers as a set rather than one at a time.",
+   "say": "The obstetric pelvis is the bony passage the fetus must pass through. It has an inlet, a midpelvis and an outlet. Each has its own key diameters, and examiners test them repeatedly. Learn the numbers as a set rather than one at a time.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diameter",
+     "Approx. length"
+    ],
+    "rows": [
+     [
+      "True conjugate (inlet)",
+      "11 cm"
+     ],
+     [
+      "Obstetric conjugate",
+      "10 cm or more"
+     ],
+     [
+      "Diagonal conjugate (clinical)",
+      "12 cm"
+     ],
+     [
+      "Interspinous (midpelvis)",
+      "10 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **interspinous diameter** is the smallest midplane diameter, at about 10 cm. It lies between the two ischial spines. The **obstetric conjugate** is the shortest anteroposterior inlet diameter. It cannot be measured directly, so it is estimated by subtracting 1.5 to 2 cm from the diagonal conjugate. An obstetric conjugate under 10 cm suggests an contracted inlet.",
+   "say": "The interspinous diameter is the smallest midplane diameter, at about 10 centimetres. It lies between the two ischial spines. The obstetric conjugate is the shortest anteroposterior inlet diameter. It cannot be measured directly, so it is estimated by subtracting one and a half to two centimetres from the diagonal conjugate. An obstetric conjugate under 10 centimetres suggests a contracted inlet.",
+   "vis": null
+  },
+  {
+   "tx": "Pelvic types follow the **gynaecoid** pattern in most women. Caldwell and Moloy described four types. The **android** pelvis is heart-shaped and gives a posterior or transverse fit. The **anthropoid** pelvis has the longest anteroposterior diameter. The **platypelloid** pelvis is flat and wide. Naegele's pelvis has one absent sacral ala. Robert's pelvis has both alae absent.",
+   "say": "Pelvic types follow the gynaecoid pattern in most women. Caldwell and Moloy described four types. The android pelvis is heart-shaped and gives a posterior or transverse fit. The anthropoid pelvis has the longest anteroposterior diameter. The platypelloid pelvis is flat and wide. Naegele's pelvis has one absent sacral ala. Robert's pelvis has both alae absent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Gynaecoid",
+      "Round inlet, most common"
+     ],
+     [
+      "Android",
+      "Heart-shaped, deep"
+     ],
+     [
+      "Anthropoid",
+      "Longest anteroposterior inlet"
+     ],
+     [
+      "Platypelloid",
+      "Flat, wide transverse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fetal skull has several named **diameters**. The **suboccipitobregmatic** diameter is 9.5 cm and is the presenting diameter in complete flexion. The **mentovertical** diameter is 14 cm and is the longest. The **occipitofrontal** diameter is 11.5 cm. Among transverse diameters, the **biparietal** diameter at 9.5 cm is the widest, and the bimastoid at 7.5 cm is the smallest.",
+   "say": "The fetal skull has several named diameters. The suboccipitobregmatic diameter is 9.5 centimetres and is the presenting diameter in complete flexion. The mentovertical diameter is 14 centimetres and is the longest. The occipitofrontal diameter is 11.5 centimetres. Among transverse diameters, the biparietal diameter at 9.5 centimetres is the widest, and the bimastoid at 7.5 centimetres is the smallest.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diameter",
+     "Length"
+    ],
+    "rows": [
+     [
+      "Suboccipitobregmatic",
+      "9.5 cm"
+     ],
+     [
+      "Suboccipitofrontal",
+      "10 cm"
+     ],
+     [
+      "Occipitofrontal",
+      "11.5 cm"
+     ],
+     [
+      "Mentovertical",
+      "14 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Keep the **lie**, **presentation**, **position** and **attitude** apart as four separate ideas. The **lie** describes how the fetal long axis sits against the mother's long axis. The **presentation** names the fetal part sitting over the pelvic inlet. The **position** tracks a chosen **denominator** against the maternal pelvic quadrants. The **attitude** describes how fetal parts sit in relation to one another, with flexion being the usual arrangement.",
+   "say": "Keep lie, presentation, position and attitude apart as four separate ideas. Lie describes how the fetal long axis sits against the mother's long axis. Presentation names the fetal part sitting over the pelvic inlet. Position tracks a chosen denominator against the maternal pelvic quadrants. Attitude describes how fetal parts sit in relation to one another, and flexion is the usual arrangement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lie and presentation",
+     "points": [
+      "Lie: fetal long axis against maternal axis",
+      "Longitudinal lie is the overwhelming majority",
+      "Presentation: fetal part over pelvic inlet"
+     ]
+    },
+    "right": {
+     "title": "Attitude and position",
+     "points": [
+      "Attitude: fetal parts relative to each other",
+      "Flexion is the typical attitude",
+      "Position: denominator against pelvic quadrants"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "1e3df6fb-6291-4a91-98be-d46c0455e2e9",
+  "0c9fc38d-1592-4ccb-bd5c-9b881b5f5e21",
+  "4a5ef156-b5f4-4ffe-b3c1-ee5a4fc0af54"
+ ],
+ "src": [],
+ "refs": [
+  "Dutta's Textbook of Obstetrics",
+  "Williams Obstetrics",
+  "Daftary Manual of Obstetrics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 216
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "cm-water",
+ "subject": "community-medicine",
+ "title": "Water supply and purification: essentials for NEET-PG",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Safe water must be free from pathogens, chemicals and radiological hazards, and should be pleasant to drink. Physiological needs are about **2 litres per head per day** for survival, but public health needs much more. Water supply is judged by bacteriology first. Coliform organisms serve as the **indicator organism** of faecal pollution because they are abundant in the human gut, easy to culture, and more resistant to natural purification than most waterborne pathogens.",
+   "say": "Safe water must be free from pathogens, chemical and radiological hazards, and should be pleasant to drink. Physiological needs are about two litres per head per day for survival, but public health needs far more. Coliform organisms are the indicator organism of faecal pollution. They are abundant in the human gut, easy to culture, and more resistant to natural purification than most waterborne pathogens.",
+   "vis": null
+  },
+  {
+   "tx": "Slow sand filters are a biological method. A new bed acts only as a mechanical strainer. Over days a slimy **schmutzdecke**, also called the vital layer, forms on the surface and is the heart of the filter. It holds back bacteria and oxidises ammoniacal nitrogen to nitrates. Filtrate from the first few days is run to waste until ripening is complete. Compared with rapid sand filters, slow filters need more space and time but give better bacterial removal and need less skilled operation.",
+   "say": "Slow sand filters are a biological method. A new bed acts only as a mechanical strainer. Over several days a slimy layer called the schmutzdecke, or vital layer, forms on the surface. This is the heart of the filter. It holds back bacteria and converts ammoniacal nitrogen to nitrates. Early filtrate is run to waste until ripening is complete. Compared with rapid filters, slow filters need more space and time but give better bacterial removal and need less skilled operation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Slow sand filter",
+     "points": [
+      "Large area needed",
+      "Less skilled operation",
+      "Better bacterial removal",
+      "Longer purification time",
+      "Finer sand, about 0.2 to 0.3 mm"
+     ]
+    },
+    "right": {
+     "title": "Rapid sand filter",
+     "points": [
+      "Small area needed",
+      "Skilled operation needed",
+      "Poorer bacterial removal",
+      "Faster throughput",
+      "Coarser sand"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chlorine works mainly through **hypochlorous acid**, which is far more effective than hypochlorite ion. Chlorine demand is the amount of chlorine consumed by organic matter and other substances. The dose equals chlorine demand plus residual chlorine. Free residual chlorine of at least **0.5 mg per litre after one hour contact** is the standard for drinking water. Chlorine does not reliably kill spores, protozoal cysts or helminth ova, and it does not kill polio virus or hepatitis A virus at usual doses.",
+   "say": "Chlorine works mainly through hypochlorous acid, which is far more effective than hypochlorite ion. Chlorine demand is the amount consumed by organic matter and other substances. The dose equals chlorine demand plus residual chlorine. Free residual chlorine of at least 0.5 milligrams per litre after one hour contact is the standard for drinking water. Chlorine does not reliably kill spores, cysts or helminth ova, and usual doses do not kill polio or hepatitis A virus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chlorine added"
+     },
+     {
+      "id": "b",
+      "label": "Hypochlorous acid forms"
+     },
+     {
+      "id": "c",
+      "label": "Kills bacteria"
+     },
+     {
+      "id": "d",
+      "label": "Free residual 0.5 mg/L at 1 h"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Breakpoint chlorination is the point where all combined chlorine has been destroyed and free residual chlorine first appears. The **orthotoluidine test** measures free chlorine within about 10 seconds and total chlorine after 15 to 20 minutes. The orthotoluidine arsenite test separates free and combined chlorine and avoids interference from nitrates, iron and manganese. **Horrock's apparatus** finds the bleaching powder dose using starch-iodine indicator. For example, 2.5 grams of bleaching powder disinfects 1000 litres.",
+   "say": "Breakpoint chlorination is the point where all combined chlorine has been destroyed and free residual chlorine first appears. The orthotoluidine test measures free chlorine within about ten seconds and total chlorine after fifteen to twenty minutes. The orthotoluidine arsenite test separates free and combined chlorine and avoids interference from nitrates, iron and manganese. Horrock's apparatus finds the bleaching powder dose using starch-iodine indicator. For example, 2.5 grams of bleaching powder disinfects 1000 litres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Measures",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Orthotoluidine",
+      "Free and total chlorine",
+      "Free read at 10 s"
+     ],
+     [
+      "OTA test",
+      "Free and combined separately",
+      "Not affected by nitrates"
+     ],
+     [
+      "Horrock's",
+      "Bleaching powder dose",
+      "Starch-iodine indicator"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "mk-af2ac43332e6",
+  "0ddc7f7a-85b6-4827-a7db-1bf4e63af394",
+  "1dd14e8a-9b69-4ea4-b9d7-567730c5ca94"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K Park), 23rd edition"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 338
+ }
+}

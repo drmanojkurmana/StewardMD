@@ -1,0 +1,162 @@
+{
+ "v": 1,
+ "module": "ent-ear-anatomy",
+ "subject": "ent",
+ "title": "Anatomy of the ear: key high-yield facts",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **external auditory canal** is about 4 cm long. Its outer one-third is cartilaginous and its inner two-thirds is bony. Hair and ceruminous glands are confined to the cartilaginous part, which is why furuncles occur only in the outer third. The narrowing called the isthmus lies about 6 mm from the tympanic membrane, and foreign bodies medial to it are hard to remove.",
+   "say": "The external auditory canal is about four centimetres long. The outer third is cartilaginous and the inner two thirds is bony. Hair and ceruminous glands are found only in the cartilaginous part, so furuncles occur only in the outer third. A narrowing called the isthmus lies about six millimetres from the tympanic membrane. Foreign bodies lodged medial to it are difficult to remove.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Cartilaginous part",
+     "Bony part"
+    ],
+    "rows": [
+     [
+      "Share of canal",
+      "Outer one-third",
+      "Inner two-thirds"
+     ],
+     [
+      "Hair and glands",
+      "Present",
+      "Absent"
+     ],
+     [
+      "Skin thickness",
+      "Thick",
+      "Thin"
+     ],
+     [
+      "Infection spread",
+      "Parotid via fissures of Santorini",
+      "Less direct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **tympanic membrane** is pearly grey when normal. Its surface area is about 90 mm2, but only about 55 mm2 is functional. A healed membrane has only two layers, the epithelial and mucosal layers, because the middle fibrous layer is absent. Active otosclerosis gives a flamingo pink colour, while glue ear gives a dull or blue appearance.",
+   "say": "The normal tympanic membrane is pearly grey. Its total surface area is about ninety square millimetres, but only about fifty five is functional. A healed membrane has only two layers, because the middle fibrous layer is absent. Active otosclerosis can give a flamingo pink colour, while glue ear produces a dull or bluish look.",
+   "vis": null
+  },
+  {
+   "tx": "The **pars flaccida** lies above the lateral process of the malleus. **Prussak's space** is the small gap between the pars flaccida, the neck of the malleus, and the short process of the malleus. It communicates with the epitympanum through a posterior gap. Prussak's space is the usual site where pars flaccida acquired cholesteatoma begins.",
+   "say": "The pars flaccida sits above the lateral process of the malleus. Prussak's space is the small gap bounded by the pars flaccida, the neck of the malleus, and the short process of the malleus. It opens into the epitympanum through a posterior gap. It is the usual site where pars flaccida acquired cholesteatoma begins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pars flaccida"
+     },
+     {
+      "id": "b",
+      "label": "Prussak space"
+     },
+     {
+      "id": "c",
+      "label": "Epitympanum"
+     },
+     {
+      "id": "d",
+      "label": "Cholesteatoma"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **facial recess** is on the posterior wall of the middle ear. It is limited above by the fossa incudis, laterally by the entry of the chorda tympani, and medially by the vertical facial nerve. Surgeons open this recess in intact canal wall surgery, called posterior tympanotomy. The **sinus tympani** lies behind the pyramid and is deep to this region.",
+   "say": "The facial recess lies on the posterior wall of the middle ear. Above, it is limited by the fossa incudis. Laterally, it is bounded by the chorda tympani, and medially by the vertical facial nerve. Surgeons open this recess in intact canal wall surgery, known as posterior tympanotomy. The sinus tympani lies behind the pyramid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Borders of facial recess",
+     "points": [
+      "Above: fossa incudis",
+      "Lateral: chorda tympani",
+      "Medial: vertical facial nerve"
+     ]
+    },
+    "right": {
+     "title": "Use in surgery",
+     "points": [
+      "Intact canal wall surgery",
+      "Posterior tympanotomy approach"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **cochlea** and vestibule form the bony labyrinth within the petrous temporal bone. The membranous labyrinth lies inside it and contains **endolymph**, which is potassium rich. The scala media holds endolymph, while the scala vestibuli and scala tympani hold perilymph, which is sodium rich. The organ of Corti rests on the basilar membrane. The cochlear aqueduct links the scala tympani to the subarachnoid space, so meningitis can reach the inner ear through it.",
+   "say": "The cochlea and vestibule form the bony labyrinth inside the petrous temporal bone. The membranous labyrinth contains endolymph, which is potassium rich. The scala media holds endolymph, while the scala vestibuli and scala tympani hold perilymph, which is sodium rich. The organ of Corti rests on the basilar membrane. The cochlear aqueduct connects the scala tympani to the subarachnoid space, which allows meningitis to reach the inner ear.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Perilymph",
+     "points": [
+      "Scala vestibuli and tympani",
+      "Sodium rich",
+      "Links to CSF via cochlear aqueduct"
+     ]
+    },
+    "right": {
+     "title": "Endolymph",
+     "points": [
+      "Fills scala media and membranous labyrinth",
+      "Potassium rich",
+      "Made by stria vascularis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **MacEwen triangle**, also called the suprameatal triangle, is a surgical landmark behind the external canal. Its borders are the supramastoid crest above, the posterosuperior canal margin anteroinferiorly, and a tangent to the zygomatic arch posteriorly. The **Citelli angle** is the sinodural angle between the sinus plate and the dural plate, and marks the superior petrosal sinus. Arnold's nerve supplies the posterior canal wall, and stimulating it causes the ear cough reflex.",
+   "say": "The MacEwen triangle is also called the suprameatal triangle. It is a surgical landmark behind the external canal. The Citelli angle is the sinodural angle and marks the superior petrosal sinus. Arnold's nerve supplies the posterior canal wall, and stimulating it causes the ear cough reflex.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "a38ab09e-f067-4032-b5ac-9e7912c40ec5",
+  "a8515d79-d6bc-4a09-a6d9-e45ec0bd5475",
+  "3627ed15-b137-445f-bbcd-6e3513334913"
+ ],
+ "src": [],
+ "refs": [
+  "Dhingra PL, Dhingra S. Diseases of Ear, Nose and Throat and Head and Neck Surgery (Dhingra's ENT textbook)",
+  "Standring S (Editor). Gray's Anatomy: The Anatomical Basis of Clinical Practice"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 272
+ }
+}

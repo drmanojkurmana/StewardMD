@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "bio-recombinant-techniques",
+ "subject": "biochemistry",
+ "title": "Recombinant DNA technology and laboratory techniques",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Restriction endonucleases are enzymes that cut DNA at specific recognition sequences called **restriction sites**. Most of these sites are palindromic, meaning the sequence reads the same in both directions on opposite strands, so both strands are cut at the same place. Bacteria use these enzymes as a defence against invading viral DNA. Cutting can leave blunt ends or **sticky ends**, which help join fragments during cloning.",
+   "say": "Restriction endonucleases are enzymes that cut DNA at specific recognition sequences called restriction sites. Most of these sites are palindromic, so both strands are cut at the same place. Bacteria use these enzymes as a defence against invading viral DNA. Cutting can leave blunt ends or sticky ends, which help join fragments during cloning.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Point"
+    ],
+    "rows": [
+     [
+      "Recognition",
+      "Specific short DNA sequence"
+     ],
+     [
+      "Cut pattern",
+      "Blunt or staggered (sticky) ends"
+     ],
+     [
+      "Biological role",
+      "Defence of bacteria against viruses"
+     ],
+     [
+      "Key use",
+      "Creating fragments for cloning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **vector** carries foreign DNA into a host cell. Plasmids are small circular duplex DNA molecules that replicate independently and accept inserts of about 6 to 10 kb. Bacteriophage vectors accept about 10 to 20 kb. **Cosmids** combine plasmid and phage features and carry inserts of roughly 35 to 50 kb. Very large inserts need BAC, YAC or PAC vectors.",
+   "say": "A vector carries foreign DNA into a host cell. Plasmids are small circular molecules that accept inserts of about 6 to 10 kilobases. Bacteriophage vectors accept about 10 to 20 kilobases. Cosmids combine plasmid and phage features and carry inserts of roughly 35 to 50 kilobases. Very large inserts need BAC, YAC or PAC vectors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vector",
+     "Approx insert size"
+    ],
+    "rows": [
+     [
+      "Plasmid",
+      "6 to 10 kb"
+     ],
+     [
+      "Bacteriophage",
+      "10 to 20 kb"
+     ],
+     [
+      "Cosmid",
+      "35 to 50 kb"
+     ],
+     [
+      "BAC, YAC, PAC",
+      "Very large inserts"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**PCR** amplifies a target DNA segment in vitro. Each cycle has three steps in order: denaturation, annealing of primers, and extension by a **thermostable DNA polymerase** (Taq polymerase, from Thermus aquaticus). Denaturation is usually at 94 to 95 degrees Celsius, and extension at 72 degrees Celsius. Each cycle doubles the product, so n cycles give 2 to the power n copies. Nested PCR uses two primer sets to raise specificity and sensitivity.",
+   "say": "PCR amplifies a target DNA segment in vitro. Each cycle has three steps in order: denaturation, annealing of primers, and extension by a thermostable DNA polymerase, called Taq polymerase. Denaturation is usually at 94 to 95 degrees Celsius, and extension at 72 degrees Celsius. Each cycle doubles the product. Nested PCR uses two primer sets to raise specificity and sensitivity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Denature",
+      "sub": "94 to 95 C"
+     },
+     {
+      "id": "b",
+      "label": "Anneal primers"
+     },
+     {
+      "id": "c",
+      "label": "Extend",
+      "sub": "72 C"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blotting techniques detect specific molecules after gel separation. The **Southern blot** detects DNA, the **Northern blot** detects RNA and shows mRNA size and expression, and the **Western blot** detects proteins using a labelled antibody probe. The Eastern blot is used for post-translational modifications such as carbohydrate epitopes, so it is not a standard nucleic acid or protein technique. Reverse transcriptase makes cDNA from an RNA template for these studies.",
+   "say": "Blotting techniques detect specific molecules after gel separation. The Southern blot detects DNA, the Northern blot detects RNA and shows mRNA size and expression, and the Western blot detects proteins using a labelled antibody probe. The Eastern blot studies post-translational modifications, so it is not a standard nucleic acid or protein technique.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blot",
+     "Detects"
+    ],
+    "rows": [
+     [
+      "Southern",
+      "DNA"
+     ],
+     [
+      "Northern",
+      "RNA"
+     ],
+     [
+      "Western",
+      "Proteins via antibody probe"
+     ],
+     [
+      "Eastern",
+      "Post-translational modifications"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Proteins are separated by different properties. **SDS-PAGE** separates by molecular weight, so it is the standard method for estimating molecular weight. **Gel filtration** separates by size and shape. **Ion-exchange chromatography** separates by charge. **Isoelectric focusing** finds the isoelectric point, where each protein stops in a pH gradient. **Affinity chromatography** uses specific non-covalent binding to ligands.",
+   "say": "Proteins are separated by different properties. SDS-PAGE separates by molecular weight, so it is the standard method for estimating molecular weight. Gel filtration separates by size and shape. Ion-exchange chromatography separates by charge. Isoelectric focusing finds the isoelectric point. Affinity chromatography uses specific binding to ligands.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Size or weight",
+     "points": [
+      "SDS-PAGE for molecular weight",
+      "Gel filtration by size and shape"
+     ]
+    },
+    "right": {
+     "title": "Charge or binding",
+     "points": [
+      "Ion exchange by charge",
+      "Isoelectric focusing finds pI",
+      "Affinity uses specific ligand binding"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "115db66d-17c3-44a9-8828-bcb67d8d419b",
+  "1d9e3cf3-13d2-455a-b4be-0ecd106deed2",
+  "b4893222-25d3-48d8-81c3-3f311d5ab38b"
+ ],
+ "src": [],
+ "refs": [
+  "Lehninger Principles of Biochemistry (Nelson and Cox)",
+  "Harper's Illustrated Biochemistry (Rodwell et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 418
+ }
+}

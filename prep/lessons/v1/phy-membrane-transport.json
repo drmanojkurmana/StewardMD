@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "phy-membrane-transport",
+ "subject": "physiology",
+ "title": "Cell membrane and transport: the essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **cell membrane** is a lipid bilayer with embedded proteins. Substances cross it by passive or active routes. Passive movement runs down a gradient and needs no ATP. Active transport runs uphill and needs energy. Know which route suits each molecule, because exam questions test this directly.",
+   "say": "The cell membrane is a lipid bilayer with embedded proteins. Substances cross it by passive or active routes. Passive movement runs down a gradient and needs no ATP. Active transport runs uphill and needs energy. Know which route suits each molecule, because exam questions test this directly.",
+   "vis": null
+  },
+  {
+   "tx": "**Simple diffusion** needs no carrier protein and suits small, lipid soluble molecules such as steroid hormones and oxygen. Its rate follows **Fick's law**, which links flux to surface area, concentration gradient, diffusion coefficient and solubility. Flux falls as membrane thickness and molecular size increase. Temperature is treated as constant within the equation.",
+   "say": "Simple diffusion needs no carrier protein and suits small, lipid soluble molecules such as steroid hormones and oxygen. Its rate follows Fick's law, which links flux to surface area, concentration gradient, diffusion coefficient and solubility. Flux falls as membrane thickness and molecular size increase. Temperature is treated as constant within the equation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect on simple diffusion"
+    ],
+    "rows": [
+     [
+      "Surface area",
+      "Directly proportional"
+     ],
+     [
+      "Concentration gradient",
+      "Directly proportional"
+     ],
+     [
+      "Membrane thickness",
+      "Inversely proportional"
+     ],
+     [
+      "Molecular size",
+      "Inversely proportional"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Facilitated diffusion** uses a carrier or channel but still runs down the gradient, so no energy is spent. Glucose entering cells via GLUT transporters is the classic example, and insulin speeds this up. Carriers have finite binding sites, so the process shows **saturation kinetics**. Simple diffusion does not.",
+   "say": "Facilitated diffusion uses a carrier or channel but still runs down the gradient, so no energy is spent. Glucose entering cells via GLUT transporters is the classic example, and insulin speeds this up. Carriers have finite binding sites, so the process shows saturation kinetics. Simple diffusion does not.",
+   "vis": null
+  },
+  {
+   "tx": "**Primary active transport** uses ATP directly. The **Na-K ATPase** pumps three sodium ions out and two potassium ions in per ATP. The alpha subunit carries the binding sites and ATPase activity. **Secondary active transport** uses the sodium gradient the pump creates. Sodium-glucose cotransport in the gut is the model. Symport moves both solutes the same way, and antiport moves them opposite ways.",
+   "say": "Primary active transport uses ATP directly. The Na-K ATPase pumps three sodium ions out and two potassium ions in per ATP. The alpha subunit carries the binding sites and ATPase activity. Secondary active transport uses the sodium gradient the pump creates. Sodium-glucose cotransport in the gut is the model. Symport moves both solutes the same way, and antiport moves them opposite ways.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary active",
+     "points": [
+      "Direct ATP hydrolysis",
+      "Na-K ATPase is the model",
+      "Pumps 3 Na out, 2 K in",
+      "Alpha subunit has the sites"
+     ]
+    },
+    "right": {
+     "title": "Secondary active",
+     "points": [
+      "Uses an existing gradient",
+      "Na-glucose symport in gut",
+      "Symport: same direction",
+      "Antiport: opposite directions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Endocytosis** takes material into the cell inside vesicles. **Phagocytosis** engulfs large particles such as bacteria. **Pinocytosis** takes in fluid and solutes in small vesicles. **Clathrin-mediated endocytosis** internalises receptors and their ligands, such as LDL. Inside the early endosome, the acidic pH releases the ligand from its receptor. Clathrin is recycled.",
+   "say": "Endocytosis takes material into the cell inside vesicles. Phagocytosis engulfs large particles such as bacteria. Pinocytosis takes in fluid and solutes in small vesicles. Clathrin-mediated endocytosis internalises receptors and their ligands, such as LDL. Inside the early endosome, the acidic pH releases the ligand from its receptor. Clathrin is recycled.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ligand binds receptor"
+     },
+     {
+      "id": "b",
+      "label": "Clathrin coated pit"
+     },
+     {
+      "id": "c",
+      "label": "Vesicle pinched off"
+     },
+     {
+      "id": "d",
+      "label": "Acidic early endosome"
+     },
+     {
+      "id": "e",
+      "label": "Ligand released"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Second messengers** carry signals from receptors on the cell surface into the cytoplasm. The **cAMP** pathway is switched on by Gs-linked receptors and activates protein kinase A. The **IP3 and DAG** pair follows Gq-linked receptors: IP3 frees calcium from the endoplasmic reticulum while DAG activates protein kinase C. **cGMP** is produced after nitric oxide or natriuretic peptide binds its receptor. Steroid hormones cross the membrane and act on intracellular receptors, so they do not rely on these messengers.",
+   "say": "Second messengers carry signals from receptors on the cell surface into the cytoplasm. The cAMP pathway is switched on by Gs-linked receptors and activates protein kinase A. The IP3 and DAG pair follows Gq-linked receptors. IP3 frees calcium from the endoplasmic reticulum, while DAG activates protein kinase C. cGMP is produced after nitric oxide or natriuretic peptide binds its receptor. Steroid hormones cross the membrane and act on intracellular receptors, so they do not rely on these messengers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Messenger",
+     "Typical trigger",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "cAMP",
+      "Gs-linked receptor activation",
+      "Activates protein kinase A"
+     ],
+     [
+      "IP3",
+      "Gq-linked receptor activation",
+      "Releases calcium from the endoplasmic reticulum"
+     ],
+     [
+      "DAG",
+      "Gq-linked receptor activation",
+      "Activates protein kinase C"
+     ],
+     [
+      "cGMP",
+      "Nitric oxide or natriuretic peptide",
+      "Activates cGMP-dependent kinase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Osmosis** moves water across a membrane down its osmotic gradient. In the proximal tubule water follows sodium, so reabsorption is obligatory. Distal segments and collecting ducts reabsorb water only when **ADH** makes them permeable, which is facultative. **Aquaporins** are water channels that speed this movement. Remember the fixed versus controlled distinction.",
+   "say": "Osmosis moves water across a membrane down its osmotic gradient. In the proximal tubule water follows sodium, so reabsorption is obligatory. Distal segments and collecting ducts reabsorb water only when ADH makes them permeable, which is facultative. Aquaporins are water channels that speed this movement. Remember the fixed versus controlled distinction.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6723b9a4-c285-4de4-8a15-f139970aea43",
+  "0a330aa2-3c66-4d74-bf8a-8eb41cf725b6",
+  "2d5e2f95-4522-494e-b039-719cb403d41d"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Ganong's Review of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 290
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "cm-screening",
+ "subject": "community-medicine",
+ "title": "Screening and Evaluation of Diagnostic Tests",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **screening test** is applied to apparently healthy people to find unrecognised disease. It is different from case finding, where tests are used in people who attend for another reason. Screening aims to find disease early, before symptoms, so that treatment can change the course. Examples include serological testing of blood donors and neonatal screening.",
+   "say": "A screening test is applied to apparently healthy people to find disease that has not yet been recognised. It differs from case finding, where tests are used in people who come for another reason. Screening aims to detect disease early, before symptoms appear, so that treatment can change the course. Examples include testing blood donors and newborn screening.",
+   "vis": null
+  },
+  {
+   "tx": "Screening suits a condition only when several conditions are met. The illness should be a significant public health burden with a recognisable **latent phase**, and its **natural history** should be clearly understood. A **screening test** must identify disease before symptoms appear, confirmatory services must be available, and effective treatment must exist. Early intervention should lower illness and death, with benefits exceeding harms and expenses.",
+   "say": "Screening suits a condition only when several conditions are met. The illness should be a significant public health burden with a recognisable latent phase, and its natural history should be clearly understood. A screening test must identify disease before symptoms appear, confirmatory services must be available, and effective treatment must exist. Early intervention should lower illness and death, with benefits exceeding harms and expenses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Criterion",
+     "What it requires"
+    ],
+    "rows": [
+     [
+      "Latent phase",
+      "A window where disease is detectable before symptoms"
+     ],
+     [
+      "Natural history",
+      "Clear knowledge of how the disease progresses"
+     ],
+     [
+      "Effective treatment",
+      "Available care that improves outcomes when started early"
+     ],
+     [
+      "Benefit over cost",
+      "Gains that outweigh harms and expenses"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Four **validity measures** describe a test's 2 by 2 performance. **Sensitivity** is true positives divided by all diseased people. **Specificity** is true negatives divided by all healthy people. **Positive predictive value** is true positives divided by all test positives. **Negative predictive value** is true negatives divided by all test negatives. Sensitivity and specificity are fixed properties of the test, while predictive values depend on prevalence.",
+   "say": "Four validity measures describe how a test performs against the true disease status. Sensitivity is the proportion of diseased people who test positive. Specificity is the proportion of healthy people who test negative. Positive predictive value is the chance that a positive result is truly disease. Negative predictive value is the chance that a negative result is truly healthy. Sensitivity and specificity belong to the test itself, but predictive values change with prevalence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Formula",
+     "Depends on prevalence"
+    ],
+    "rows": [
+     [
+      "Sensitivity",
+      "TP divided by TP plus FN",
+      "No"
+     ],
+     [
+      "Specificity",
+      "TN divided by TN plus FP",
+      "No"
+     ],
+     [
+      "PPV",
+      "TP divided by TP plus FP",
+      "Yes"
+     ],
+     [
+      "NPV",
+      "TN divided by TN plus FN",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prevalence** strongly shapes predictive values. When prevalence is high, PPV rises and fewer results are false positive. When prevalence is low, most positives may be false, so PPV falls and NPV rises. Likelihood ratios and ROC curves help judge a test across cut-offs. The ROC curve trades sensitivity against specificity, and a curve closer to the top left corner indicates a better test.",
+   "say": "Prevalence strongly affects predictive values. When prevalence is high, positive predictive value rises and false positives are relatively few. When prevalence is low, many positives may be false, so positive predictive value falls and negative predictive value rises. The ROC curve shows the trade off between sensitivity and specificity across cut-off values. A curve closer to the top left corner indicates a better test.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High prevalence",
+     "points": [
+      "PPV rises",
+      "Fewer false positives",
+      "Good for confirmation"
+     ]
+    },
+    "right": {
+     "title": "Low prevalence",
+     "points": [
+      "PPV falls",
+      "Many false positives",
+      "NPV rises"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Combining tests changes performance. In **series**, people must be positive on every test, so combined sensitivity falls while specificity and PPV rise. In **parallel**, a positive result on any test counts, so sensitivity rises while specificity and PPV fall. **Multiphasic screening** applies two or more tests together to a large group at one time, often with a questionnaire and examinations.",
+   "say": "Combining tests changes how they perform. In series, a person must test positive on every test, so sensitivity falls while specificity and positive predictive value rise. In parallel, a positive result on any test counts, so sensitivity rises while specificity and positive predictive value fall. Multiphasic screening applies several tests together to many people at once.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tests in series",
+     "points": [
+      "Combined sensitivity falls",
+      "Combined specificity rises",
+      "PPV rises"
+     ]
+    },
+    "right": {
+     "title": "Tests in parallel",
+     "points": [
+      "Combined sensitivity rises",
+      "Combined specificity falls",
+      "PPV falls"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Screening outcomes can mislead. **Lead time** is the gap between early detection by screening and the time of usual clinical diagnosis. **Lead time bias** makes survival look longer without any real benefit. **Length bias** arises because slowly progressing disease is more likely to be caught on screening, so screen-detected cases look better. Both biases must be considered before crediting a programme with success.",
+   "say": "Screening outcomes can mislead. Lead time is the gap between detection by screening and usual clinical diagnosis. Lead time bias makes survival look longer even when nothing has truly improved. Length bias arises because slowly progressing disease is more likely to be picked up by screening, so these cases look more favourable. Both biases must be considered before judging a programme as successful.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "eea47061-62d2-40bd-a772-8b8d8dfb431d",
+  "98b62170-1f68-47f0-a3f4-724239195718",
+  "157101aa-f928-4f25-8b8a-51e712b3e7ff"
+ ],
+ "src": [],
+ "refs": [
+  "Park K. Park's Textbook of Preventive and Social Medicine (Banarsidas Bhanot)",
+  "Wilson JMG, Jungner G. Principles and Practice of Screening for Disease (WHO)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 319
+ }
+}

@@ -146,7 +146,7 @@ export function draftBody(mod, ground) {
     "Use standard medical knowledge plus the source. Guideline precedence: NICE wins where it covers the point; label Indian (ICMR/NMC) vs US guidance explicitly when they differ.",
     "Every number, drug, dose, threshold and criterion MUST be traceable to the source or to a named guideline/reference you list in refs. Never invent a citation: refs holds ONLY real guideline or textbook names (no pages, no URLs, no DOIs). Omit refs when unsure.",
     "tx: 40 to 90 words, short plain sentences. Mark 2 to 4 key terms with **double asterisks**.",
-    "say: the same content as natural spoken sentences, under 110 words, no asterisks, no symbols, no tables.",
+    "say: the same content as natural spoken sentences, under 110 words, no asterisks, no symbols, no tables. say must keep every drug, dose, number and proper name the tx names (a narration that drops the tested names fails).",
     "Visual per step where it helps (kind table: cols 2-5, rows 2-8, equal row lengths, short cells; flow: 3-8 nodes with short nid/lab, edges src->dst, no cycles, max 3 side by side; compare: lt/rt titles with 1-6 short points each lp/rp); kind none when text alone is clearer. NEVER an image.",
     "British spelling. No em dashes or en dashes. No headings, no emoji, no 'In this step'. Never copy 8+ consecutive words from the source; paraphrase everything into your own words, including table cells and list points, which must never repeat a source phrase verbatim.",
     regionLine(mod),
@@ -179,7 +179,7 @@ export function verifyBody(mod, ground, lesson) {
   const user = `<module>${mod.title} (${mod.sid})</module>\n<scope>${ground.scope}</scope>\n<source>\n${ground.kbText}\n</source>\n<items>\n${ground.itemText}\n</items>\n<lesson title="${lesson.title}">\n${steps}\n</lesson>\n<claimed-refs>\n${(lesson.refs || []).join("\n")}\n</claimed-refs>`;
   return {
     model: VERIFY, max_tokens: 1500,
-    system: [{ type: "text", text: "You verify a medical revision lesson against its sources. For each step, supported=true ONLY when every factual claim (numbers, drugs, doses, criteria, anatomy, sequences) is stated in <source>/<items> or is uncontroversial standard textbook knowledge. Reject anything that contradicts the source, overstates a guideline (check NICE-first precedence), or states an unverifiable number/dose. confirmed lists the exact numbers/drugs/doses/criteria from SUPPORTED steps that are correct standard knowledge although absent from the source text (these and only these may stay despite missing from the source). refsOk lists ONLY the claimed refs that are real, correctly named guidelines/textbooks and actually relevant to this module; drop the rest. Reply with the verdict JSON." + "\n" + DATA_RULE }],
+    system: [{ type: "text", text: "You verify a medical revision lesson against its sources. For each step, supported=true ONLY when every factual claim (numbers, drugs, doses, criteria, anatomy, sequences) is stated in <source>/<items> or is uncontroversial standard textbook knowledge. Check every table cell and list point individually against the step text and sources: a row or point that belongs to a different column, entity or structure than labelled fails the step. Reject anything that contradicts the source, overstates a guideline (check NICE-first precedence), or states an unverifiable number/dose. confirmed lists the exact numbers/drugs/doses/criteria from SUPPORTED steps that are correct standard knowledge although absent from the source text (these and only these may stay despite missing from the source). refsOk lists ONLY the claimed refs that are real, correctly named guidelines/textbooks and actually relevant to this module; drop the rest. Reply with the verdict JSON." + "\n" + DATA_RULE }],
     messages: [{ role: "user", content: [{ type: "text", text: user, cache_control: { type: "ephemeral" } }] }],
     output_config: { effort: "medium", format: { type: "json_schema", schema: VERIFY_SCHEMA } },
   };
@@ -274,7 +274,13 @@ export function gateLesson(steps, ground, verified = { numbers: [], drugs: [] })
       if (missing.length) rest.push(`${m[1]} not in the source: ${missing.join(", ")}`);
     }
     const texts = [LP.plain(st.tx), st.say].concat(st.vis ? LP.visText(st.vis).split(/\s*\n\s*/).filter(Boolean) : []);
+    // The narration must keep every bold key term the text names (6-letter stem match, British/US spelling tolerant).
+    const sayLow = String(st.say || "").toLowerCase();
+    const droppedNames = (typeof LP.boldTerms === "function" ? LP.boldTerms(st.tx) : [])
+      .flatMap((t) => String(t).split(/[^a-zA-Z]+/)).filter((w) => w.length >= 5)
+      .filter((w) => !sayLow.includes(w.slice(0, 6).toLowerCase()));
     const verb = [];
+    if (droppedNames.length) verb.push("say drops named terms: " + [...new Set(droppedNames)].slice(0, 4).join(", "));
     if (ground.kbText && verbatim(texts, ground.kbText, 12)) verb.push("copies 12 or more words from the KB source");
     if (ground.itemText && verbatim(texts, ground.itemText, 20)) verb.push("copies 20 or more words from the module items");
     const why = [...code, ...rest, ...verb];

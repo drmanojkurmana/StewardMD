@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "phy-gfr",
+ "subject": "physiology",
+ "title": "Renal blood flow and glomerular filtration",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The kidneys receive about **20 to 25 percent** of cardiac output, roughly 1.1 to 1.3 litres per minute. Renal plasma flow is about 600 mL per minute. Renal blood flow is derived from plasma flow using the haematocrit, since only plasma is delivered to the filter.",
+   "say": "The kidneys receive roughly twenty to twenty-five percent of cardiac output, about one point one to one point three litres per minute. Renal plasma flow is about six hundred millilitres per minute. To get renal blood flow from plasma flow, you divide by the plasma fraction, which is one minus the haematocrit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "co",
+      "label": "Cardiac output"
+     },
+     {
+      "id": "rbf",
+      "label": "Renal blood flow"
+     },
+     {
+      "id": "rpf",
+      "label": "Renal plasma flow"
+     },
+     {
+      "id": "gfr",
+      "label": "GFR about 125 mL/min"
+     }
+    ],
+    "edges": [
+     [
+      "co",
+      "rbf",
+      "20-25%"
+     ],
+     [
+      "rbf",
+      "rpf",
+      "times plasma fraction"
+     ],
+     [
+      "rpf",
+      "gfr",
+      "filtration fraction 20%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glomerular filtration rate** is about 125 mL per minute, or 180 litres per day. Net filtration pressure is the sum of hydrostatic and oncotic forces. Glomerular hydrostatic pressure of about 60 mmHg favours filtration, while Bowman's capsule pressure of about 18 mmHg and capillary oncotic pressure of about 32 mmHg oppose it, leaving roughly 10 mmHg net.",
+   "say": "Glomerular filtration rate is about one hundred and twenty five millilitres per minute, which is about one hundred and eighty litres a day. Net filtration pressure is about ten millimetres of mercury, calculated from glomerular hydrostatic pressure, minus Bowman's capsule pressure, minus the oncotic pressure of the capillary plasma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Force",
+     "Typical value",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Glomerular hydrostatic",
+      "60 mmHg",
+      "Favours filtration"
+     ],
+     [
+      "Bowman's capsule hydrostatic",
+      "18 mmHg",
+      "Opposes filtration"
+     ],
+     [
+      "Capillary oncotic",
+      "32 mmHg",
+      "Opposes filtration"
+     ],
+     [
+      "Net filtration pressure",
+      "About 10 mmHg",
+      "Filtration occurs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inulin clearance is the reference standard for GFR because it is freely filtered and neither secreted nor reabsorbed. **Creatinine clearance** is the clinical surrogate, but it overestimates GFR by about 10 to 20 percent because small amounts are secreted. **PAH clearance** measures effective renal plasma flow, about 625 mL per minute, which underestimates true flow by about 10 percent.",
+   "say": "Inulin clearance is the gold standard for measuring glomerular filtration rate. Creatinine clearance is used clinically but overestimates it by ten to twenty percent, because creatinine is partly secreted. Para-aminohippurate clearance measures effective renal plasma flow, which is about six hundred and twenty five millilitres per minute.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Measures",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Inulin",
+      "GFR",
+      "Reference standard"
+     ],
+     [
+      "Creatinine",
+      "GFR (estimate)",
+      "Overestimates by 10-20%"
+     ],
+     [
+      "PAH",
+      "Effective renal plasma flow",
+      "Underestimates flow by about 10%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The glomerular filtration barrier has three layers: fenestrated endothelium, the **glomerular basement membrane**, and podocyte slit diaphragms. Mesangial cells are not part of the barrier. Filtration is both size and **charge selective**, because negatively charged proteoglycans repel plasma albumin. Mesangial cells contract under angiotensin II and endothelin, and relax under dopamine, ANP and prostaglandin E2.",
+   "say": "The filtration barrier has three layers: fenestrated endothelium, the glomerular basement membrane, and podocyte slit diaphragms. Mesangial cells are not a barrier layer. Filtration is both size and charge selective, because negatively charged proteoglycans repel albumin. Angiotensin II and endothelin contract mesangial cells, while dopamine, natriuretic peptide and prostaglandin E2 relax them.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "9fc266e8-395c-4382-953c-d44a91acf98c",
+  "mk-341d932fcb48",
+  "88902352-13a8-48c6-936d-216026730082"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Ganong's Review of Medical Physiology (Barrett KE et al.)",
+  "Vander's Renal Physiology (Eaton DC, Pooler JP)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 291
+ }
+}

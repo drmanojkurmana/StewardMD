@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "module": "pat-mendelian-disorders",
+ "subject": "pathology",
+ "title": "Mendelian disorders: inheritance patterns and key single-gene diseases",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "In X-linked recessive inheritance, an affected father cannot pass the disorder to his son, because he gives his Y chromosome to sons. All his daughters, however, become **carriers**. Carrier females usually do not show the phenotype because the normal allele compensates. In contrast, **X-linked dominant** disorders can pass from an affected father to all daughters. A common exam trap is to assume a father always passes a trait to his sons, which is wrong for X-linked traits.",
+   "say": "In X-linked recessive inheritance, an affected father cannot pass the disorder to his son, because he gives his Y chromosome to sons. All his daughters, however, become carriers. Carrier females usually do not show the disease because the normal allele compensates. By contrast, X-linked dominant disorders can pass from an affected father to all of his daughters. A common trap is assuming a father always passes a trait to his sons, which is false for X-linked traits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "X-linked recessive",
+     "points": [
+      "Father cannot pass to sons",
+      "All daughters become carriers",
+      "Males affected more often"
+     ]
+    },
+    "right": {
+     "title": "X-linked dominant",
+     "points": [
+      "Father passes to all daughters",
+      "Affected mother passes to half of children",
+      "Sons of affected father are spared"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Familial hypercholesterolaemia is an autosomal dominant disorder caused by mutations in the **LDL receptor** gene, or in apolipoprotein B, the part of LDL that binds the receptor. Without working receptors, LDL stays high in the blood. Tendon and tuberous xanthomas are typical in these patients. Cystic fibrosis, by contrast, is autosomal recessive and results from mutations in the **CFTR** gene on chromosome 7. Its classic defect is a chloride channel problem, causing thick secretions and raised sweat chloride.",
+   "say": "Familial hypercholesterolaemia is an autosomal dominant disorder caused by mutations in the LDL receptor gene, or in apolipoprotein B, the part of LDL that binds the receptor. Without working receptors, LDL remains high in the blood. Tendon and tuberous xanthomas are typical. Cystic fibrosis, by contrast, is autosomal recessive and results from mutations in the CFTR gene on chromosome 7. Its defect is a chloride channel problem, causing thick secretions and raised sweat chloride.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Gene and site",
+     "Pattern"
+    ],
+    "rows": [
+     [
+      "Familial hypercholesterolaemia",
+      "LDL receptor (or ApoB)",
+      "Autosomal dominant"
+     ],
+     [
+      "Cystic fibrosis",
+      "CFTR, chromosome 7",
+      "Autosomal recessive"
+     ],
+     [
+      "Marfan syndrome",
+      "FBN1, chromosome 15",
+      "Autosomal dominant"
+     ],
+     [
+      "Phenylketonuria",
+      "PAH gene",
+      "Autosomal recessive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Marfan syndrome results from a defect in **fibrillin-1**, a glycoprotein of elastic microfibrils. The classic triad is a tall, thin build with long limbs, ectopia lentis, and aortic root dilatation. Cystic medial necrosis of the aorta is the most common cause of death. Ehlers-Danlos syndrome is a group of disorders caused by defects in **fibrillar collagen** synthesis or structure. Hypermobile joints and hyperextensible skin are common, and the vascular type is the most severe because it involves internal organs.",
+   "say": "Marfan syndrome results from a defect in fibrillin-1, a glycoprotein of elastic microfibrils. The classic triad is a tall, thin build with long limbs, ectopia lentis, and aortic root dilatation. Cystic medial necrosis of the aorta is the most common cause of death. Ehlers-Danlos syndrome is a group of disorders caused by defects in fibrillar collagen synthesis or structure. Hypermobile joints and stretchy skin are common, and the vascular type is the most severe because it involves internal organs.",
+   "vis": null
+  },
+  {
+   "tx": "Neurofibromatosis type 1 is autosomal dominant and caused by mutations in the NF1 gene. Its product, neurofibromin, is a **GTPase-activating protein** that switches off RAS signalling, so it acts as a tumour suppressor. Clinical clues include café-au-lait spots, Lisch nodules, and tibial pseudarthrosis with scoliosis. Phenylketonuria and galactosaemia are autosomal recessive metabolic disorders, and they are treated by diet. Alkaptonuria is also autosomal recessive, but it presents with dark urine and ochronosis.",
+   "say": "Neurofibromatosis type 1 is autosomal dominant and caused by mutations in the NF1 gene. Its product, neurofibromin, is a GTPase activating protein that switches off RAS signalling, so it acts as a tumour suppressor. Clinical clues include cafe au lait spots, Lisch nodules, and tibial pseudarthrosis with scoliosis. Phenylketonuria and galactosaemia are autosomal recessive metabolic disorders managed by diet. Alkaptonuria is also autosomal recessive and presents with dark urine and ochronosis.",
+   "vis": null
+  },
+  {
+   "tx": "Penetrance and expressivity explain why a disorder may look different between people with the same mutation. **Penetrance** is the proportion of carriers of a mutant gene who actually show the phenotype. **Expressivity** is the range of severity seen among those who do show it. Haemochromatosis is an autosomal recessive disorder of iron overload, usually from HFE mutations. Exam questions often test whether you can separate these two ideas, so remember that penetrance is all or none and expressivity is about degree.",
+   "say": "Penetrance and expressivity explain why a disorder may look different between people with the same mutation. Penetrance is the proportion of carriers of a mutant gene who actually show the phenotype. Expressivity is the range of severity among those who do show it. Haemochromatosis is an autosomal recessive disorder of iron overload, usually from HFE mutations. Exam questions often test whether you can separate these two ideas. Penetrance is essentially yes or no, while expressivity concerns degree.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "85cabf43-4f55-452e-ba1e-6a9aec2da054",
+  "65f33222-8ead-41f2-8166-26518039e316",
+  "345a7cb3-3ea6-4536-99cc-1ae3f37eea2d"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease, South Asia Edition",
+  "Harsh Mohan Textbook of Pathology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 297
+ }
+}

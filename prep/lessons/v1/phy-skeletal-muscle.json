@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "phy-skeletal-muscle",
+ "subject": "physiology",
+ "title": "Skeletal muscle contraction: coupling, cross-bridges and energy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Skeletal muscle contracts when a motor neuron releases **acetylcholine** at the neuromuscular junction. This produces an end plate potential that spreads as an action potential along the sarcolemma. The signal travels down the **transverse tubules**, which lie close to the sarcoplasmic reticulum. Here the action potential triggers calcium release, so the link between electrical and mechanical events is called electromechanical coupling.",
+   "say": "Skeletal muscle contracts when a motor neuron releases acetylcholine at the neuromuscular junction. This produces an end plate potential that spreads as an action potential along the sarcolemma. The signal travels down the transverse tubules, which lie close to the sarcoplasmic reticulum. Here the action potential triggers calcium release. This link between electrical and mechanical events is called electromechanical coupling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acetylcholine release"
+     },
+     {
+      "id": "b",
+      "label": "End plate potential"
+     },
+     {
+      "id": "c",
+      "label": "Action potential along sarcolemma"
+     },
+     {
+      "id": "d",
+      "label": "T-tubule signal"
+     },
+     {
+      "id": "e",
+      "label": "Calcium release"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Calcium released from the sarcoplasmic reticulum binds to **troponin C**. This shifts the **tropomyosin** strands away from the myosin binding sites on actin. Myosin heads can then attach and form cross-bridges. In skeletal muscle the trigger is calcium binding to troponin, not to tropomyosin. Cardiac muscle uses a different initiating mechanism, so do not mix the two up in exam questions.",
+   "say": "Calcium released from the sarcoplasmic reticulum binds to troponin C. This shifts the tropomyosin strands away from the myosin binding sites on actin. Myosin heads can then attach and form cross-bridges. In skeletal muscle the trigger is calcium binding to troponin, not to tropomyosin. Cardiac muscle uses a different initiating mechanism, so take care with this point in exams.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Troponin role",
+     "points": [
+      "Binds calcium",
+      "Moves tropomyosin aside",
+      "Exposes actin sites"
+     ]
+    },
+    "right": {
+     "title": "Tropomyosin role",
+     "points": [
+      "Blocks myosin sites at rest",
+      "Not the calcium binding site",
+      "Shifts when troponin changes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Each cross-bridge cycle uses **ATP**. ATP binds the myosin head and detaches it from actin. The head hydrolyses ATP and re-cocks, then binds actin again and releases phosphate to produce the power stroke. Without ATP the heads stay bound to actin, which explains rigor mortis after death. Relaxation needs calcium to be pumped back into the sarcoplasmic reticulum by SERCA, a process that also uses ATP.",
+   "say": "Each cross-bridge cycle uses ATP. ATP binds the myosin head and detaches it from actin. The head hydrolyses ATP and re-cocks, then binds actin again and releases phosphate to produce the power stroke. Without ATP the heads stay bound to actin, which explains rigor mortis after death. Relaxation needs calcium to be pumped back into the sarcoplasmic reticulum, a process that also uses ATP.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "ATP binds myosin"
+     },
+     {
+      "id": "b",
+      "label": "Head detaches from actin"
+     },
+     {
+      "id": "c",
+      "label": "ATP hydrolysed, head re-cocked"
+     },
+     {
+      "id": "d",
+      "label": "Head binds actin"
+     },
+     {
+      "id": "e",
+      "label": "Power stroke"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Energy for contraction comes in stages. Stored **ATP** and **creatine phosphate** supply very fast work for about 8 to 10 seconds, using the creatine kinase reaction to regenerate ATP from ADP. Anaerobic glycolysis then supplies energy for roughly 20 to 180 seconds, with lactic acid as the limiting factor. Oxidative metabolism of glucose and fatty acids takes over for longer exercise. The creatine kinase step is a common exam target.",
+   "say": "Energy for contraction comes in stages. Stored ATP and creatine phosphate supply very fast work for about eight to ten seconds. The creatine kinase reaction regenerates ATP from ADP. Anaerobic glycolysis then supplies energy for roughly twenty to one hundred and eighty seconds, with lactic acid as the limiting factor. Oxidative metabolism of glucose and fatty acids takes over for longer exercise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Substrate",
+     "Typical duration"
+    ],
+    "rows": [
+     [
+      "Phosphagen",
+      "ATP and creatine phosphate",
+      "Up to about 10 s"
+     ],
+     [
+      "Anaerobic glycolysis",
+      "Glycogen or glucose",
+      "About 20 to 180 s"
+     ],
+     [
+      "Oxidative",
+      "Glucose and fatty acids",
+      "Beyond about 3 min"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fibre types matter for exam questions. **Type I** fibres are red, slow twitch and oxidative, with high myoglobin, many mitochondria and low myosin ATPase activity. **Type II** fibres are white, fast twitch and glycolytic, with high glycogen content and high myosin ATPase activity. Type IIa is intermediate and fatigue resistant, while Type IIb is fast and fatigable. Motor units contain only one fibre type.",
+   "say": "Fibre types matter for exam questions. Type I fibres are red, slow twitch and oxidative, with high myoglobin, many mitochondria and low myosin ATPase activity. Type II fibres are white, fast twitch and glycolytic, with high glycogen content and high myosin ATPase activity. Type IIa is intermediate and fatigue resistant, while Type IIb is fast and fatigable. Each motor unit contains only one fibre type.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Type I",
+     "Type II"
+    ],
+    "rows": [
+     [
+      "Colour",
+      "Red",
+      "White"
+     ],
+     [
+      "Twitch speed",
+      "Slow",
+      "Fast"
+     ],
+     [
+      "Metabolism",
+      "Oxidative",
+      "Glycolytic"
+     ],
+     [
+      "Myosin ATPase",
+      "Low",
+      "High"
+     ],
+     [
+      "Glycogen",
+      "Low",
+      "High"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Force is graded by **recruitment** of more motor units, by increasing firing frequency that produces summation, and by fibre length. Maximal active tension occurs at the optimal length, near 2.2 micrometres, where actin and myosin overlap best. Action potential amplitude does not grade force, because the action potential is all or none. Isometric contractions generate tension without shortening, while isotonic contractions shorten or lengthen against a constant load.",
+   "say": "Force is graded by recruitment of more motor units, by increasing firing frequency that produces summation, and by fibre length. Maximal active tension occurs at the optimal length, near 2.2 micrometres, where actin and myosin overlap best. Action potential amplitude does not grade force, because the action potential is all or none. Isometric contractions generate tension without shortening, while isotonic contractions shorten or lengthen against a constant load.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "80b3c9e4-4cbd-46fe-84bd-f8c30d42fe5f",
+  "4fe3f20f-c528-4681-a9f8-ba0b2b2c372d",
+  "56041719-2299-4024-9eab-41d981273a69"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Ganong's Review of Medical Physiology (Barrett KE et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 230
+ }
+}

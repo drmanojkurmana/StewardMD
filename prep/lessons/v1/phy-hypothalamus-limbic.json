@@ -1,0 +1,207 @@
+{
+ "v": 1,
+ "module": "phy-hypothalamus-limbic",
+ "subject": "physiology",
+ "title": "Hypothalamus, limbic system and thermoregulation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Thermoregulation depends on a **set point** in the preoptic area. When body temperature rises above this set point, heat loss mechanisms switch on, such as cutaneous vasodilatation and sweating. When it falls, heat production rises through shivering and increased voluntary activity. Radiation accounts for the largest share of heat loss at rest, followed by evaporation and conduction.",
+   "say": "Thermoregulation depends on a set point in the preoptic area. When body temperature rises above this set point, heat loss mechanisms switch on, such as cutaneous vasodilatation and sweating. When it falls, heat production rises through shivering and increased voluntary activity. Radiation accounts for the largest share of heat loss at rest, followed by evaporation and conduction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Body temperature rises"
+     },
+     {
+      "id": "b",
+      "label": "Preoptic set point exceeded"
+     },
+     {
+      "id": "c",
+      "label": "Vasodilatation and sweating"
+     },
+     {
+      "id": "d",
+      "label": "Heat lost"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fever raises the **set point**, so the body defends a higher temperature. Each one degree rise in body temperature increases basal metabolic rate by about 7 percent. During sleep, metabolic rate falls about 10 percent below waking levels. Rectal temperature is the best reflection of core temperature and varies least with the environment, while oral temperature runs about 0.5 degrees lower.",
+   "say": "Fever raises the set point, so the body defends a higher temperature. Each one degree rise in body temperature increases basal metabolic rate by about 7 percent. During sleep, metabolic rate falls about 10 percent below waking levels. Rectal temperature is the best reflection of core temperature and varies least with the environment, while oral temperature runs about 0.5 degrees lower.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Heat conservation in cold",
+     "points": [
+      "Cutaneous vasoconstriction",
+      "Curling up and horripilation",
+      "Decreased heat loss"
+     ]
+    },
+    "right": {
+     "title": "Heat loss in heat",
+     "points": [
+      "Cutaneous vasodilatation",
+      "Sweating with cooling effect",
+      "Anorexia and reduced activity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **lateral hypothalamus** drives feeding, while the **ventromedial nucleus** provides satiety. Leptin, made by fat cells, reduces food intake by raising alpha-MSH signalling through melanocortin-4 receptors. Ghrelin, released mainly from the stomach, increases appetite and stimulates growth hormone. Orexin from the lateral hypothalamus also increases appetite. Alpha-MSH promotes satiety, while neuropeptide Y increases appetite.",
+   "say": "The lateral hypothalamus drives feeding, while the ventromedial nucleus provides satiety. Leptin, made by fat cells, reduces food intake by raising alpha-MSH signalling through melanocortin-4 receptors. Ghrelin, released mainly from the stomach, increases appetite and stimulates growth hormone. Orexin from the lateral hypothalamus also increases appetite. Alpha-MSH promotes satiety, while neuropeptide Y increases appetite.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Signal",
+     "Effect on appetite",
+     "Source"
+    ],
+    "rows": [
+     [
+      "Leptin",
+      "Decreases",
+      "Fat cells"
+     ],
+     [
+      "Ghrelin",
+      "Increases",
+      "Stomach"
+     ],
+     [
+      "Orexin",
+      "Increases",
+      "Lateral hypothalamus"
+     ],
+     [
+      "Alpha-MSH",
+      "Decreases",
+      "Hypothalamic pathway"
+     ],
+     [
+      "Neuropeptide Y",
+      "Increases",
+      "Hypothalamus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **suprachiasmatic nucleus** is the body's biological clock. It sits above the optic chiasm and receives light information from the retina. Light and dark cycles, called zeitgebers, keep the roughly 25 hour internal rhythm aligned to 24 hours. The pineal gland then releases melatonin at night. Destruction of the suprachiasmatic nucleus abolishes the regular sleep and wake rhythm.",
+   "say": "The suprachiasmatic nucleus is the body's biological clock. It sits above the optic chiasm and receives light information from the retina. Light and dark cycles, called zeitgebers, keep the roughly 25 hour internal rhythm aligned to 24 hours. The pineal gland then releases melatonin at night. Destruction of the suprachiasmatic nucleus abolishes the regular sleep and wake rhythm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Retina detects light"
+     },
+     {
+      "id": "b",
+      "label": "Suprachiasmatic nucleus"
+     },
+     {
+      "id": "c",
+      "label": "Pineal gland"
+     },
+     {
+      "id": "d",
+      "label": "Melatonin released at night"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **limbic system** governs emotion, memory, sexual behaviour and autonomic responses. Its core structures include the cingulate gyrus, septal nuclei, hippocampus and amygdala. The Papez circuit links the hippocampus, fornix, mamillary body, anterior thalamic nucleus and cingulate gyrus. Bilateral damage to the anterior temporal lobes and amygdala causes Kluver-Bucy syndrome, with placidity, hyperorality, hypersexuality, hypermetamorphosis and visual agnosia. Hyperactivity is not a feature.",
+   "say": "The limbic system governs emotion, memory, sexual behaviour and autonomic responses. Its core structures include the cingulate gyrus, septal nuclei, hippocampus and amygdala. The Papez circuit links the hippocampus, fornix, mamillary body, anterior thalamic nucleus and cingulate gyrus. Bilateral damage to the anterior temporal lobes and amygdala causes Kluver-Bucy syndrome, with placidity, hyperorality, hypersexuality, hypermetamorphosis and visual agnosia. Hyperactivity is not a feature.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Kluver-Bucy feature",
+     "Present"
+    ],
+    "rows": [
+     [
+      "Placidity or docility",
+      "Yes"
+     ],
+     [
+      "Hyperorality",
+      "Yes"
+     ],
+     [
+      "Hypersexuality",
+      "Yes"
+     ],
+     [
+      "Visual agnosia",
+      "Yes"
+     ],
+     [
+      "Hyperactivity",
+      "No"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "fc45ac36-a682-43c8-9476-cf0b712e6840",
+  "0365fe69-cc3c-4217-b33b-0a3afc82a3e5",
+  "a08e1c48-1ff4-4ff6-92d0-90d22caa6f74"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology (Barrett et al.)",
+  "Guyton and Hall Textbook of Medical Physiology (Hall, J.E.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 226
+ }
+}

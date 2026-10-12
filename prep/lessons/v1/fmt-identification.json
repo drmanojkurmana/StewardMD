@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "module": "fmt-identification",
+ "subject": "forensic-medicine",
+ "title": "Identification and age estimation: key forensic principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Identification of a person after death or in disputed cases relies on **unique physical markers**. **Dactylography**, the study of **fingerprint ridges**, gives highly distinctive evidence. Prints form before birth, persist throughout life and are not inherited, so they cannot establish paternity. Identical twins can still be told apart by their prints even though their **DNA fingerprinting** profiles match. Lasting changes in prints may follow leprosy, electrical injury or radiation exposure.",
+   "say": "Identification of a person after death, or in disputed cases, relies on unique physical markers. Dactylography, the study of fingerprint ridges, gives highly distinctive evidence. Prints form before birth, persist throughout life and are not inherited, so they cannot establish paternity. Identical twins can still be told apart by their prints, even though their DNA fingerprinting profiles match. Lasting changes in prints may follow leprosy, electrical injury or radiation exposure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern type",
+     "Ridge feature"
+    ],
+    "rows": [
+     [
+      "Loops",
+      "Ridges enter and leave on the same side"
+     ],
+     [
+      "Whorls",
+      "Ridges form circular or spiral patterns"
+     ],
+     [
+      "Arches",
+      "Ridges rise and fall across the print with no delta"
+     ],
+     [
+      "Composite",
+      "Mixture of loop, whorl or arch features"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fingerprint classification uses three main groups: **loops**, **whorls** and **arches**, with composites as a rarer mixed form. Poroscopy studies the pores along ridges and is useful when only fragments of a print survive. Rugoscopy examines the palatal rugae, which are individual and stable, and the lips show their own unique grooves known as lip prints. Galton and Locard systems are the classic names linked to these methods.",
+   "say": "Fingerprint classification uses three main groups: loops, whorls and arches, with composites as a rarer mixed form. Poroscopy studies the pores along ridges and is useful when only fragments of a print survive. Rugoscopy examines the palatal rugae, which are individual and stable. Lip prints also show unique grooves. Galton and Locard systems are the classic names linked to these methods.",
+   "vis": null
+  },
+  {
+   "tx": "Race and sex are estimated from skeletal features. The **cephalic index** equals maximum skull breadth divided by maximum length, multiplied by 100. Dolichocephalic skulls score 70 to 75, mesaticephalic 75 to 80, and brachycephalic above 80, the last typical of Mongolians. Pelvis is the best bone for sex determination, with about 95 percent accuracy alone, while the skull alone gives about 90 percent.",
+   "say": "Race and sex are estimated from skeletal features. The cephalic index equals maximum skull breadth divided by maximum length, multiplied by 100. Dolichocephalic skulls score 70 to 75, mesaticephalic 75 to 80, and brachycephalic above 80, the last typical of Mongolians. Pelvis is the best bone for sex determination, with about 95 percent accuracy alone, while the skull alone gives about 90 percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pelvis for sex",
+     "points": [
+      "Sub-pubic angle about 80 to 85 in females, 50 to 60 in males",
+      "Female inlet wide and circular",
+      "Male pelvis thicker with more prominent markings",
+      "Ischiopubic index about 100 in females, 83 in males"
+     ]
+    },
+    "right": {
+     "title": "Cephalic index for race",
+     "points": [
+      "Above 80 suggests Mongolian",
+      "75 to 80 suggests European or Chinese",
+      "70 to 75 suggests Indian, Aboriginal or Negroid",
+      "Measured as breadth over length times 100"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Stature estimation uses long bones. The femur is about 27 percent of height, the tibia about 22 percent, the humerus about 20 percent and the spine about 35 percent. Femur and tibia give more accurate results than humerus and radius. Add about 2.5 cm for soft tissue when the full skeletal length is present. The **Hepburn osteometric board** measures long bone length. Fetal age is estimated by Hasse's rule, using the square root of crown-rump length in the first five months, and length in centimetres divided by five afterwards.",
+   "say": "Stature estimation uses long bones. The femur is about 27 percent of height, the tibia about 22 percent, the humerus about 20 percent and the spine about 35 percent. Femur and tibia give more accurate results than humerus and radius. Add about 2.5 centimetres for soft tissue when the full skeletal length is present. The Hepburn osteometric board measures long bone length. Fetal age uses Hasse's rule, based on crown-rump length in early pregnancy and length divided by five later on.",
+   "vis": null
+  },
+  {
+   "tx": "Tattoo marks and **DNA fingerprinting** complete the identification toolkit. Faint tattoos can be made visible with **ultraviolet light**, **infrared photography** or a **magnifying lens**, whereas laser is not used for this purpose. If a tattoo is missing at autopsy, **histology** of regional lymph nodes may still reveal pigment. DNA profiles are usually obtained from **hair roots**, **buccal mucosa** and **teeth**, not from cerebrospinal fluid.",
+   "say": "Tattoo marks and DNA fingerprinting complete the identification toolkit. Faint tattoos can be made visible with ultraviolet light, infrared photography or a magnifying lens, whereas laser is not used for this purpose. If a tattoo is missing at autopsy, histology of regional lymph nodes may still reveal pigment. DNA profiles are usually obtained from hair roots, buccal mucosa and teeth, not from cerebrospinal fluid.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "68c48716-e95b-4309-83e7-c6ead69b6432",
+  "bb7415ea-8a93-4cf3-8eeb-7681502f0773",
+  "mk-fe3ba517e8a7"
+ ],
+ "src": [],
+ "refs": [
+  "Parikh's Textbook of Medical Jurisprudence and Toxicology",
+  "Reddy's Essentials of Forensic Medicine and Toxicology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 441
+ }
+}

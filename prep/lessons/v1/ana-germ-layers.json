@@ -1,0 +1,191 @@
+{
+ "v": 1,
+ "module": "ana-germ-layers",
+ "subject": "anatomy",
+ "title": "Bilaminar and trilaminar disc, gastrulation and neurulation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The embryo starts as a **bilaminar disc** in the second week. It has two layers, the **epiblast** and the **hypoblast**. The epiblast is the source of all three germ layers. The hypoblast contributes mainly to extraembryonic tissue and the prochordal plate.",
+   "say": "The embryo starts as a bilaminar disc in the second week. It has two layers, the epiblast and the hypoblast. The epiblast is the source of all three germ layers. The hypoblast contributes mainly to extraembryonic tissue and the prochordal plate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Layer",
+     "Main fate"
+    ],
+    "rows": [
+     [
+      "Epiblast",
+      "All three germ layers"
+     ],
+     [
+      "Hypoblast",
+      "Prochordal plate, extraembryonic endoderm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gastrulation** happens in the third week. It converts the bilaminar disc into a **trilaminar disc** with ectoderm, mesoderm and endoderm. It is the start of morphogenesis. The first visible sign is the **primitive streak**, a midline furrow on the dorsal epiblast at the caudal end. The streak lets us define the head, tail, and left and right sides.",
+   "say": "Gastrulation happens in the third week. It converts the bilaminar disc into a trilaminar disc with ectoderm, mesoderm and endoderm. It is the start of morphogenesis. The first visible sign is the primitive streak, a midline furrow on the dorsal epiblast at the caudal end. The streak lets us define the head, tail, and left and right sides.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Epiblast cells"
+     },
+     {
+      "id": "b",
+      "label": "Primitive streak"
+     },
+     {
+      "id": "c",
+      "label": "Ingression through streak"
+     },
+     {
+      "id": "d",
+      "label": "Trilaminar disc"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cells that move through the streak follow fixed paths. Cells through the node become **notochord**. Cells from the lateral streak edges form **paraxial mesoderm**, which becomes somites. Mid-streak cells form intermediate mesoderm. Caudal cells form lateral plate mesoderm. The most caudal cells form extraembryonic mesoderm. The notochord then signals the overlying ectoderm.",
+   "say": "Cells that move through the streak follow fixed paths. Cells through the node become notochord. Cells from the lateral streak edges form paraxial mesoderm, which becomes somites. Mid-streak cells form intermediate mesoderm. Caudal cells form lateral plate mesoderm. The most caudal cells form extraembryonic mesoderm. The notochord then signals the overlying ectoderm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mesoderm type",
+     "Main derivative"
+    ],
+    "rows": [
+     [
+      "Notochord",
+      "Nucleus pulposus"
+     ],
+     [
+      "Paraxial",
+      "Somites, axial skeleton, skeletal muscle"
+     ],
+     [
+      "Intermediate",
+      "Urinary and genital systems, adrenal cortex"
+     ],
+     [
+      "Lateral plate",
+      "Serous linings, heart, gut muscle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neurulation** follows. The notochord induces the ectoderm to form the **neural plate**. The plate folds into a **neural tube**. The neural crest arises at the edges of the folds. Closure starts in the middle and spreads both ways. In the fourth week, the anterior neuropore closes by day 25 and the posterior neuropore by day 28. Failed anterior closure causes anencephaly, and failed posterior closure causes rachischisis.",
+   "say": "Neurulation follows. The notochord induces the ectoderm to form the neural plate. The plate folds into a neural tube. The neural crest arises at the edges of the folds. Closure starts in the middle and spreads both ways. In the fourth week, the anterior neuropore closes by day 25 and the posterior neuropore by day 28. Failed anterior closure causes anencephaly, and failed posterior closure causes rachischisis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Notochord induction"
+     },
+     {
+      "id": "b",
+      "label": "Neural plate"
+     },
+     {
+      "id": "c",
+      "label": "Neural tube"
+     },
+     {
+      "id": "d",
+      "label": "Neuropores close week 4"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neural crest** cells give rise to many structures. These include dorsal root and autonomic ganglia, the **adrenal medulla**, melanocytes, Schwann cells, odontoblasts, and parafollicular C cells. The adrenal cortex, enamel and the thoracic duct are not neural crest derived. Defective crest migration causes Hirschsprung disease, albinism and some neurocristopathies.",
+   "say": "Neural crest cells give rise to many structures. These include dorsal root and autonomic ganglia, the adrenal medulla, melanocytes, Schwann cells, odontoblasts, and parafollicular C cells. The adrenal cortex, enamel and the thoracic duct are not neural crest derived. Defective crest migration causes Hirschsprung disease, albinism and some neurocristopathies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Origin",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Neural crest",
+      "Adrenal medulla, melanocytes, Schwann cells"
+     ],
+     [
+      "Neural crest",
+      "Dorsal root and autonomic ganglia"
+     ],
+     [
+      "Not neural crest",
+      "Adrenal cortex (mesoderm)"
+     ],
+     [
+      "Not neural crest",
+      "Enamel (surface ectoderm)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "fffbc1a6-349b-410f-a8c5-b0e5cade4636",
+  "1d0d3b27-aafa-4d73-83ab-5e93a999a7bb",
+  "d52cba85-9f47-4cc9-bafa-d987f01ba391"
+ ],
+ "src": [],
+ "refs": [
+  "Inderbir Singh, Human Embryology, Tenth edition",
+  "BD Chaurasia, Human Anatomy Vol 1"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 206
+ }
+}

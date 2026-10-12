@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "ana-pelvis-perineum",
+ "subject": "anatomy",
+ "title": "Pelvic walls, pelvic floor and perineum: high-yield anatomy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **pelvic floor** is formed mainly by the pelvic diaphragm. It is made of levator ani and coccygeus. It separates the pelvic cavity above from the perineum below. The urethra, anal canal and, in females, the vagina pass through it.",
+   "say": "The pelvic floor is formed mainly by the pelvic diaphragm, made of levator ani and coccygeus. It separates the pelvic cavity above from the perineum below. The urethra, anal canal and, in females, the vagina pass through it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Layer",
+     "Key role"
+    ],
+    "rows": [
+     [
+      "Pelvic diaphragm",
+      "Levator ani and coccygeus",
+      "Separates pelvis from perineum"
+     ],
+     [
+      "Urogenital diaphragm",
+      "Sphincter urethrae and deep transverse perineal muscles",
+      "Lies across the pubic arch"
+     ],
+     [
+      "Perineal membrane",
+      "Inferior fascia of urogenital diaphragm",
+      "Floor of the deep perineal pouch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **urogenital diaphragm** is a musculo-fascial sheet across the pubic arch. It lies between the pelvic cavity and the anterior part of the pelvic outlet. Its muscles get their motor supply from the perineal branch of the pudendal nerve. The urethra pierces it in both sexes, and the vagina does so in females.",
+   "say": "The urogenital diaphragm is a musculo-fascial sheet across the pubic arch. It lies between the pelvic cavity and the front of the pelvic outlet. Its muscles are supplied by the perineal branch of the pudendal nerve. The urethra pierces it in both sexes, and in females the vagina passes through as well.",
+   "vis": null
+  },
+  {
+   "tx": "The **ischioanal fossa** lies in the anal triangle. It is a fat-filled space with the inferior rectal vessels inside it. Its lateral wall is the obturator internus with its fascia. Its medial wall is the external anal sphincter and levator ani. Bleeding here can track into a large swelling, so rupture of its vessels matters clinically.",
+   "say": "The ischioanal fossa lies in the anal triangle and is filled with fat. Its lateral wall is the obturator internus with its fascia. Its medial wall is the external anal sphincter and levator ani. It contains the inferior rectal vessels, so bleeding from them can be significant.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lateral and medial walls",
+     "points": [
+      "Lateral: obturator internus and fascia",
+      "Medial: external anal sphincter",
+      "Medial: levator ani"
+     ]
+    },
+    "right": {
+     "title": "Contents and apex",
+     "points": [
+      "Inferior rectal vessels",
+      "Apex where levator ani meets obturator internus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **pudendal nerve** arises from S2 to S4. It leaves the pelvis through the greater sciatic foramen and re-enters through the lesser sciatic foramen. It runs in the **pudendal canal** with the internal pudendal vessels. It gives the inferior anal nerve, the perineal nerve and the dorsal nerve of the penis or clitoris. Pain below the pectinate line is carried by its inferior rectal branch.",
+   "say": "The pudendal nerve arises from S2 to S4. It leaves the pelvis through the greater sciatic foramen and re-enters through the lesser sciatic foramen. It runs in the pudendal canal with the internal pudendal vessels. Pain below the pectinate line is carried by its inferior rectal branch.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "S2 to S4 roots"
+     },
+     {
+      "id": "b",
+      "label": "Greater sciatic foramen"
+     },
+     {
+      "id": "c",
+      "label": "Pudendal canal"
+     },
+     {
+      "id": "d",
+      "label": "Lesser sciatic foramen"
+     },
+     {
+      "id": "e",
+      "label": "Perineal and dorsal nerves"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **anal canal** is split by the **pectinate line**. Above it, the mucosa is supplied by visceral nerves and is insensitive to pain. Below it, the skin is supplied by somatic nerves and is painful. External haemorrhoids lie below this line, which explains their pain. The anorectal ring is the main continence structure. It is formed by the internal sphincter, the deep external sphincter and puborectalis.",
+   "say": "The anal canal is divided by the pectinate line. Above it the mucosa is insensitive to pain. Below it the skin is painful. External haemorrhoids lie below the line, which explains their pain. The anorectal ring, made of the internal sphincter, deep external sphincter and puborectalis, is the main continence structure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Above pectinate line",
+     "Below pectinate line"
+    ],
+    "rows": [
+     [
+      "Nerve supply",
+      "Visceral (autonomic)",
+      "Somatic, pudendal branch"
+     ],
+     [
+      "Pain sensation",
+      "Insensitive",
+      "Sensitive"
+     ],
+     [
+      "Blood supply",
+      "Superior rectal artery",
+      "Inferior rectal artery"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "13b07b1b-dd7a-4df9-968e-27e62ad26210",
+  "1a8b2d4b-928b-4f1b-8e2a-71c18f852f77",
+  "aa0c7d41-72c9-4916-a1ea-0c01d8fd6582"
+ ],
+ "src": [],
+ "refs": [
+  "Bailey and Love's Short Practice of Surgery (Williams, Bulstrode, O'Connell)",
+  "Gray's Anatomy for Students"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 285
+ }
+}

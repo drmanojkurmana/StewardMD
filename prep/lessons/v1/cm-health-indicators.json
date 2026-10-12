@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "module": "cm-health-indicators",
+ "subject": "community-medicine",
+ "title": "Concept of Health and Health Indicators",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The spectral concept says health is not static. It lies on a continuum, from **positive health** at one end, through better health and freedom from sickness, to unrecognised sickness, mild and severe sickness, and finally death. Positive health itself is treated as a mirage, because the determinants keep changing with time, environment and behaviour.",
+   "say": "The spectral concept says health is not static. It lies on a continuum, from positive health at one end, through better health and freedom from sickness, to unrecognised sickness, mild and severe sickness, and finally death. Positive health is treated as something of a mirage, because the determinants keep changing with time, environment and behaviour.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Positive health"
+     },
+     {
+      "id": "b",
+      "label": "Better health"
+     },
+     {
+      "id": "c",
+      "label": "Freedom from sickness"
+     },
+     {
+      "id": "d",
+      "label": "Unrecognised sickness"
+     },
+     {
+      "id": "e",
+      "label": "Mild or severe sickness"
+     },
+     {
+      "id": "f",
+      "label": "Death"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Health concepts have changed over time. The **biomedical** concept equates health with absence of disease and rests on germ theory. The **ecological** concept sees health as a dynamic equilibrium between man and environment. The **psychological** concept adds social, cultural and economic influences. The **holistic** concept combines all of these, echoing the ancient idea of a sound mind in a sound body.",
+   "say": "Health concepts have changed over time. The biomedical concept equates health with absence of disease and rests on germ theory. The ecological concept sees health as a dynamic equilibrium between man and environment. The psychological concept adds social, cultural and economic influences. The holistic concept combines all of these, echoing the ancient idea of a sound mind in a sound body.",
+   "vis": null
+  },
+  {
+   "tx": "Health indicators are used to compare populations. **Infant mortality rate** is among the most universally accepted indicators of the health status of the whole population and its socio-economic conditions. Under five mortality is called the single best indicator of development by UNICEF. **Sullivan's index** is life expectancy minus the duration of disability, so it measures life free of disability. **DALY** combines years of life lost to premature death with years lived with disability, while **HALE** is health adjusted life expectancy.",
+   "say": "Health indicators are used to compare populations. Infant mortality rate is among the most universally accepted indicators of the health status of the whole population and its socio-economic conditions. UNICEF calls under five mortality the single best indicator of development. Sullivan's index is life expectancy minus the duration of disability, so it measures life free of disability. DALY combines years lost to premature death with years lived with disability, while HALE is health adjusted life expectancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indicator",
+     "What it measures"
+    ],
+    "rows": [
+     [
+      "Sullivan's index",
+      "Life expectancy free of disability"
+     ],
+     [
+      "DALY",
+      "Premature death plus disability"
+     ],
+     [
+      "HALE",
+      "Health adjusted life expectancy"
+     ],
+     [
+      "Pearl index",
+      "Contraceptive failure, not disability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Composite indices rank development. The **HDI** combines longevity, measured by life expectancy at birth, knowledge, measured by mean and expected years of schooling, and income, measured by GNI per capita. The **PQLI** uses literacy, infant mortality and life expectancy at age one, each weighted equally on a zero to 100 scale. Life expectancy at birth belongs to HDI, not PQLI, a frequent confusion.",
+   "say": "Composite indices rank development. The HDI combines longevity, measured by life expectancy at birth, knowledge, measured by mean and expected years of schooling, and income, measured by GNI per capita. The PQLI uses literacy, infant mortality and life expectancy at age one, each weighted equally on a zero to 100 scale. Life expectancy at birth belongs to HDI, not PQLI, which is a frequent confusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HDI",
+     "points": [
+      "Life expectancy at birth",
+      "Mean and expected schooling",
+      "GNI per capita",
+      "Range 0 to 1"
+     ]
+    },
+    "right": {
+     "title": "PQLI",
+     "points": [
+      "Literacy rate",
+      "Infant mortality rate",
+      "Life expectancy at age one",
+      "Range 0 to 100"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Determinants of health shape both **disease** and **positive health**. Four broad groups act together: **genetic make-up**, such as G-6-PD deficiency; **lifestyle**, including regular exercise, avoiding smoking and adequate sleep, which lower coronary risk; **environment**, covering sanitation, safe water and clean air; and **health infrastructure**, especially accessible primary care that supports earlier detection and better outcomes.",
+   "say": "Determinants of health shape both disease and positive health: genetics, lifestyle, environment and health infrastructure. Genetics matter here, for instance G-6-PD deficiency. Lifestyle choices such as exercise, not smoking and getting enough sleep reduce the risk of coronary disease. The surroundings, including sanitation, clean water and low air pollution, also help. Finally, easy access to primary care improves results.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Determinant",
+     "Example",
+     "Effect on health"
+    ],
+    "rows": [
+     [
+      "Genetic make-up",
+      "G-6-PD deficiency",
+      "Susceptibility to haemolysis"
+     ],
+     [
+      "Lifestyle",
+      "Exercise, no smoking, adequate sleep",
+      "Lower coronary risk"
+     ],
+     [
+      "Environment",
+      "Sanitation, safe water, low air pollution",
+      "Fewer infections and respiratory disease"
+     ],
+     [
+      "Health infrastructure",
+      "Accessible primary care",
+      "Earlier detection and better outcomes"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "a579cce7-9289-44ae-b410-223582417c58",
+  "7ff148d9-0cbc-45d2-869d-6b9c48d43bc3",
+  "865607d7-34fb-4e41-b7c5-6fec2ec358fe"
+ ],
+ "src": [],
+ "refs": [
+  "World Health Organization Constitution (preamble definition of health)",
+  "Park's Textbook of Preventive and Social Medicine (K. Park)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 231
+ }
+}

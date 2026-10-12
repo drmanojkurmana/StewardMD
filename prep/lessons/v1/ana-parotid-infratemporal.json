@@ -1,0 +1,175 @@
+{
+ "v": 1,
+ "module": "ana-parotid-infratemporal",
+ "subject": "anatomy",
+ "title": "Parotid, temporal and infratemporal regions and TMJ",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **parotid gland** is the largest salivary gland. It lies below the external acoustic meatus, between the ramus of the mandible and the sternocleidomastoid. Three structures traverse it from superficial to deep: the **facial nerve**, the retromandibular vein and the external carotid artery. The parotid duct leaves the anterior border and opens into the vestibule opposite the upper second molar.",
+   "say": "The parotid gland is the largest salivary gland. It sits below the ear canal, between the ramus of the mandible and the sternocleidomastoid. From superficial to deep, the facial nerve, the retromandibular vein and the external carotid artery pass through it. The parotid duct opens into the mouth opposite the upper second molar.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Position in gland"
+    ],
+    "rows": [
+     [
+      "Facial nerve",
+      "Most superficial"
+     ],
+     [
+      "Retromandibular vein",
+      "Middle"
+     ],
+     [
+      "External carotid artery",
+      "Deepest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **otic ganglion** lies just below the foramen ovale and relays parasympathetic fibres to the parotid. Its secretomotor root is the **lesser petrosal nerve**, carrying preganglionic fibres from the inferior salivatory nucleus via the glossopharyngeal nerve. Postganglionic fibres then travel in the auriculotemporal nerve to reach the gland. Its sensory root also comes from the auriculotemporal nerve.",
+   "say": "The otic ganglion relays parasympathetic fibres to the parotid gland. Its secretomotor root is the lesser petrosal nerve, which carries preganglionic fibres from the glossopharyngeal nerve. These synapse in the ganglion, and postganglionic fibres then travel in the auriculotemporal nerve to the gland.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inferior salivatory nucleus"
+     },
+     {
+      "id": "b",
+      "label": "Glossopharyngeal nerve"
+     },
+     {
+      "id": "c",
+      "label": "Lesser petrosal nerve"
+     },
+     {
+      "id": "d",
+      "label": "Otic ganglion"
+     },
+     {
+      "id": "e",
+      "label": "Auriculotemporal nerve"
+     },
+     {
+      "id": "f",
+      "label": "Parotid gland"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **mandibular nerve** (V3) passes through the foramen ovale. It supplies the muscles of mastication, along with the mylohyoid, the anterior belly of the digastric, the tensor tympani and the tensor veli palatini. The **nerve to medial pterygoid** passes through the otic ganglion unrelayed. The posterior belly of the digastric is supplied by the facial nerve, not the mandibular nerve.",
+   "say": "The mandibular nerve leaves the skull through the foramen ovale. It supplies the four muscles of mastication, the mylohyoid, the anterior belly of the digastric, and two small tensor muscles. The nerve to the medial pterygoid passes through the otic ganglion without relay. The posterior belly of the digastric is an exception, because it is supplied by the facial nerve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle",
+     "Action",
+     "Nerve branch"
+    ],
+    "rows": [
+     [
+      "Temporalis",
+      "Elevates mandible",
+      "Anterior division"
+     ],
+     [
+      "Masseter",
+      "Elevates mandible",
+      "Anterior division"
+     ],
+     [
+      "Medial pterygoid",
+      "Elevates mandible",
+      "Main trunk"
+     ],
+     [
+      "Lateral pterygoid",
+      "Depresses and protrudes",
+      "Anterior division"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **lateral pterygoid** is the main depressor of the mandible and is the only muscle of mastication that opens the jaw. Protrusion is also produced by the lateral pterygoids. Lateral movement of the jaw involves the contralateral **medial and lateral pterygoids** acting alternately, along with the posterior fibres of the temporalis. Retraction is performed by the posterior temporalis fibres.",
+   "say": "The lateral pterygoid is the main muscle that opens the jaw, and it also protrudes the mandible. Side to side chewing depends on alternate action of the medial and lateral pterygoids of each side. Retraction of the mandible is performed mainly by the posterior fibres of the temporalis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Opening and protrusion",
+     "points": [
+      "Lateral pterygoid is the main depressor",
+      "Protrusion by both pterygoids",
+      "Suprahyoids assist early opening"
+     ]
+    },
+    "right": {
+     "title": "Retraction and lateral movement",
+     "points": [
+      "Posterior temporalis retracts",
+      "Alternate pterygoid action moves sideways",
+      "Geniohyoid and digastric reverse protrusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Injury to the **auriculotemporal nerve** during parotid surgery can cause **Frey syndrome**, or gustatory sweating. Parasympathetic fibres regrow and synapse on sweat glands instead of salivary glands, so eating or smelling food triggers facial sweating and flushing. Because the parotid tumour is removed close to this nerve, surgeons must protect it where possible.",
+   "say": "Frey syndrome is gustatory sweating, caused by injury to the auriculotemporal nerve during parotid surgery. Regenerating parasympathetic fibres grow into sweat glands. As a result, the patient sweats and flushes when tasting or smelling food.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "15c62242-c651-4c41-9835-768afa3d832e",
+  "6e2f2af5-ed2a-488a-9223-a21b46a8a02b",
+  "77497ca2-557b-4884-b2f8-9d6567b2fe36"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 5 in Gray's Anatomy for Students (Drake, Vogl, Mitchell)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 300
+ }
+}

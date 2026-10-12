@@ -1,0 +1,157 @@
+{
+ "v": 1,
+ "module": "cm-measures",
+ "subject": "community-medicine",
+ "title": "Measurements of morbidity and mortality",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Morbidity and mortality measures turn raw counts into rates so that populations can be compared. **Incidence** counts new cases over a period in a population at risk. **Prevalence** counts all existing cases, old and new, at a point or over a period. Prevalence equals incidence multiplied by mean duration of disease, so long-lasting conditions accumulate higher prevalence even when incidence is modest.",
+   "say": "Morbidity and mortality measures turn raw counts into rates so that populations can be compared. Incidence counts new cases over a period in a population at risk. Prevalence counts all existing cases, old and new, at a point or over a period. Prevalence equals incidence multiplied by mean duration of disease, so long-lasting conditions accumulate higher prevalence even when incidence is modest.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Counts",
+     "Denominator"
+    ],
+    "rows": [
+     [
+      "Incidence",
+      "New cases in a period",
+      "Population at risk"
+     ],
+     [
+      "Point prevalence",
+      "All cases at one moment",
+      "Total population at that moment"
+     ],
+     [
+      "Period prevalence",
+      "All cases during a period",
+      "Population at risk midway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Attack rates describe infectious spread. The **attack rate** is the proportion of an exposed group who fall ill during an outbreak. The **secondary attack rate** counts cases among susceptible contacts of a primary case, within the incubation period. The primary case is excluded from numerator and denominator. It best reflects communicability of an infection.",
+   "say": "Attack rates describe infectious spread. The attack rate is the proportion of an exposed group who fall ill during an outbreak. The secondary attack rate counts cases among susceptible contacts of a primary case, within the incubation period. The primary case is excluded from numerator and denominator. It best reflects communicability of an infection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Primary case"
+     },
+     {
+      "id": "b",
+      "label": "Susceptible contacts"
+     },
+     {
+      "id": "c",
+      "label": "Cases within incubation period"
+     },
+     {
+      "id": "d",
+      "label": "Secondary attack rate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Case fatality rate** is deaths divided by cases of the same disease, multiplied by 100. It reflects the killing power or severity of a disease and is best for acute infectious illnesses such as cholera or measles. It is closely linked to virulence. Its limitation is that no time period is specified, and it can vary between epidemics. Survival rate is its complement.",
+   "say": "Case fatality rate is deaths divided by cases of the same disease, multiplied by 100. It reflects the killing power or severity of a disease and is best for acute infectious illnesses such as cholera or measles. It is closely linked to virulence. Its limitation is that no time period is specified, and it can vary between epidemics. Survival rate is its complement.",
+   "vis": null
+  },
+  {
+   "tx": "Death rates measure mortality. The **crude death rate** uses total population as denominator. The **proportional mortality rate** uses all deaths in a year as denominator, so it shows the share of deaths due to a cause. The **specific death rate** restricts deaths to a group, such as an age band. Survival rate is a therapy yardstick, especially in cancer, counted from diagnosis or treatment start.",
+   "say": "Death rates measure mortality. The crude death rate uses total population as denominator. The proportional mortality rate uses all deaths in a year as denominator, so it shows the share of deaths due to a cause. The specific death rate restricts deaths to a group, such as an age band. Survival rate is a therapy yardstick, especially in cancer, counted from diagnosis or treatment start.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proportional mortality",
+     "points": [
+      "Deaths from one cause",
+      "Divided by all deaths in the year",
+      "Shows share of deaths"
+     ]
+    },
+    "right": {
+     "title": "Crude death rate",
+     "points": [
+      "All deaths in a year",
+      "Divided by total population",
+      "Ignores age structure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Age confounds comparisons, so age standardisation is used. In **direct standardisation**, age specific rates of the study population are applied to a standard population. It needs age specific rates and population in each age group. In **indirect standardisation**, standard age specific rates are applied to the study population. It is used when study population rates are unavailable. The **standardised mortality ratio** is observed deaths divided by expected deaths, often multiplied by 100.",
+   "say": "Age confounds comparisons, so age standardisation is used. In direct standardisation, age specific rates of the study population are applied to a standard population. It needs age specific rates and population in each age group. In indirect standardisation, standard age specific rates are applied to the study population. It is used when study population rates are unavailable. The standardised mortality ratio is observed deaths divided by expected deaths, often multiplied by 100.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Direct standardisation",
+     "points": [
+      "Study rates applied to standard population",
+      "Needs age specific death rates",
+      "Needs population in each age group"
+     ]
+    },
+    "right": {
+     "title": "Indirect standardisation",
+     "points": [
+      "Standard rates applied to study population",
+      "Used when study rates unavailable",
+      "Gives standardised mortality ratio"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prevalence and incidence are linked in a simple way. When **incidence** is high but **prevalence** stays low, the disease is usually brief or rapidly fatal, so few people carry it at any moment. When prevalence exceeds incidence, the condition tends to be chronic, or a treatment prolongs survival without curing it. A drug that reduces deaths yet leaves the disease intact can therefore push prevalence upward. For comparing death rates between populations with different age profiles, the **age standardised death rate** is the preferred measure.",
+   "say": "Prevalence and incidence are linked in a simple way. When incidence is high but prevalence stays low, the disease is usually brief or rapidly fatal, so few people carry it at any moment. When prevalence exceeds incidence, the condition tends to be chronic, or a treatment prolongs survival without curing it. A drug that reduces deaths yet leaves the disease intact can therefore push prevalence upward. For comparing death rates between populations with different age profiles, the age standardised death rate is the preferred measure.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "a1f2c84d-ba32-4c8e-a5bd-259ac867a9fe",
+  "6bff184c-ff4f-4f84-a558-a0fc728f45dc",
+  "aa3a81ee-9ef7-46ba-bcb7-fcfcdf9ba630"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K Park), 23rd edition"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 275
+ }
+}

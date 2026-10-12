@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "phy-motor-reflexes",
+ "subject": "physiology",
+ "title": "Spinal reflexes, motor control and posture",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Muscle spindles sit in parallel with extrafusal fibres and sense muscle length. They contain **intrafusal fibres**, of which nuclear bag fibres give a phasic, velocity-sensitive response and nuclear chain fibres give a tonic, length-sensitive response. The spindle's sensory afferents are Ia (primary) and II (secondary). Gamma motor neurons supply the contractile ends of intrafusal fibres, keeping the spindle sensitive during contraction. This gamma loop is the basis of muscle tone.",
+   "say": "Muscle spindles sit in parallel with the main muscle fibres and sense muscle length. They contain intrafusal fibres. Nuclear bag fibres give a phasic response that tracks velocity. Nuclear chain fibres give a tonic response that tracks length. Gamma motor neurons supply the ends of these intrafusal fibres and keep the spindle sensitive, which is the basis of muscle tone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Receptor part",
+     "Afferent",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Nuclear bag fibre",
+      "Ia (primary)",
+      "Phasic, velocity"
+     ],
+     [
+      "Nuclear chain fibre",
+      "Ia and II",
+      "Tonic, length"
+     ],
+     [
+      "Contractile ends",
+      "Gamma efferent",
+      "Keeps spindle sensitive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **stretch reflex** is the only truly monosynaptic reflex in the body. A sudden stretch excites Ia afferents, which synapse directly on alpha motor neurons in the anterior horn. The homonymous muscle then contracts. The lowest level of integration is the spinal cord. Reciprocal innervation, mediated through an inhibitory interneuron, relaxes the antagonist during this reflex.",
+   "say": "The stretch reflex is the only truly monosynaptic reflex. A sudden stretch excites Ia afferents, which synapse directly on alpha motor neurons in the anterior horn of the spinal cord. The same muscle then contracts. Antagonists relax through reciprocal innervation, which uses an inhibitory interneuron.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Muscle stretched"
+     },
+     {
+      "id": "b",
+      "label": "Ia afferent"
+     },
+     {
+      "id": "c",
+      "label": "Alpha motor neuron"
+     },
+     {
+      "id": "d",
+      "label": "Muscle contracts"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Golgi tendon organ** lies in series with the muscle and senses tension, not length. It is supplied by Ib fibres. Its signal reaches an inhibitory interneuron that inhibits the same alpha motor neuron. This is the **inverse stretch reflex**, which relaxes the muscle when tension becomes very high. It protects against tendon avulsion and muscle tearing.",
+   "say": "The Golgi tendon organ lies in series with the muscle and senses tension rather than length. It is supplied by Ib fibres. Its signal reaches an inhibitory interneuron that switches off the same alpha motor neuron. This is the inverse stretch reflex, which relaxes the muscle when tension becomes very high, protecting against tendon avulsion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Muscle spindle",
+     "points": [
+      "Parallel to fibres",
+      "Detects length and speed",
+      "Stretch excites motor neuron",
+      "Ia afferent"
+     ]
+    },
+    "right": {
+     "title": "Golgi tendon organ",
+     "points": [
+      "In series with fibres",
+      "Detects tension",
+      "Contraction inhibits motor neuron",
+      "Ib afferent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An **upper motor neuron** lesion, such as in the corticospinal tract, causes spasticity, hyperreflexia and a positive **Babinski sign**. In adults the normal plantar response is flexion of the toes. A positive Babinski sign is dorsiflexion of the great toe with fanning of the others. In children up to about two years it can be normal. A **lower motor neuron** lesion instead causes flaccidity and fasciculation.",
+   "say": "An upper motor neuron lesion, such as in the corticospinal tract, causes spasticity, hyperreflexia and a positive Babinski sign. In adults the normal plantar response is flexion of the toes. A positive sign is great toe dorsiflexion with fanning. A lower motor neuron lesion instead causes flaccidity and fasciculation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper motor neuron",
+     "points": [
+      "Spasticity",
+      "Hyperreflexia",
+      "Positive Babinski sign"
+     ]
+    },
+    "right": {
+     "title": "Lower motor neuron",
+     "points": [
+      "Flaccidity",
+      "Hyporeflexia",
+      "Fasciculation"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "09c911e9-9268-4b05-ac1e-e7ebd57606cc",
+  "1f1a647c-9dbd-4fab-862b-934334fd72ee",
+  "86be0b3f-40ad-42b0-b9a9-0c80bc28ca73"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology (Barrett K.E., Boitano S., Barman S.M., Brooks H.L., Eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 215
+ }
+}

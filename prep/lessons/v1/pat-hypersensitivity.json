@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "pat-hypersensitivity",
+ "subject": "pathology",
+ "title": "Hypersensitivity reactions and transplant rejection",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Hypersensitivity is an exaggerated or misdirected immune response that injures the host. Gell and Coombs classify it into four types. Type I is **IgE-mediated** and immediate. Antigen cross-links IgE bound to sensitised **mast cells** and basophils, releasing histamine and other vasoactive amines. Examples include anaphylaxis, asthma, urticaria and the wheal and flare reaction. Type I reactions appear within minutes of exposure.",
+   "say": "Hypersensitivity is an exaggerated or misdirected immune response that injures the host. Gell and Coombs classify it into four types. Type one is IgE mediated and immediate. Antigen cross links IgE bound to sensitised mast cells and basophils, releasing histamine and other vasoactive amines. Examples include anaphylaxis, asthma, urticaria and the wheal and flare reaction. Type one reactions appear within minutes of exposure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Key mediator",
+     "Classic example"
+    ],
+    "rows": [
+     [
+      "I",
+      "IgE on mast cells",
+      "Anaphylaxis, asthma"
+     ],
+     [
+      "II",
+      "IgG or IgM against cell surface",
+      "Goodpasture syndrome, AIHA"
+     ],
+     [
+      "III",
+      "Immune complexes and complement",
+      "SLE, serum sickness"
+     ],
+     [
+      "IV",
+      "Sensitised T cells",
+      "Contact dermatitis, TB skin test"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Type II is **antibody-mediated cytotoxicity**. IgG or IgM binds an antigen on a host cell, which is then destroyed by complement or phagocytosis. Examples include autoimmune haemolytic anaemia, ITP and myasthenia gravis. In **Goodpasture syndrome**, antibodies target type IV collagen in glomerular and alveolar basement membranes. The result is rapidly progressive glomerulonephritis with pulmonary haemorrhage, and linear IgG deposition is seen on immunofluorescence.",
+   "say": "Type two is antibody mediated cytotoxicity. IgG or IgM binds an antigen on a host cell, which is then destroyed by complement or phagocytosis. Examples include autoimmune haemolytic anaemia, ITP and myasthenia gravis. In Goodpasture syndrome, antibodies target type four collagen in glomerular and alveolar basement membranes. The result is rapidly progressive glomerulonephritis with pulmonary haemorrhage, and linear IgG deposition is seen on immunofluorescence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Goodpasture syndrome",
+     "points": [
+      "Anti-GBM antibodies",
+      "Type IV collagen target",
+      "Kidney and lung involved",
+      "Linear IgG on biopsy"
+     ]
+    },
+    "right": {
+     "title": "Type III immune complex",
+     "points": [
+      "Antigen-antibody complexes",
+      "Complement activation",
+      "Neutrophil lysosomal injury",
+      "Granular immunofluorescence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Type III is **immune complex mediated**. Complexes deposit in vessel walls or membranes, fix complement and attract neutrophils. Examples include SLE, rheumatoid arthritis, PSGN and polyarteritis nodosa. **Serum sickness** appears about 5 to 10 days after exposure, with fever, urticaria, arthralgia, proteinuria and lymphadenopathy. Most cases now follow drugs rather than animal serum. The **Arthus reaction** is a local type III reaction. Intradermal antigen meets preformed antibody, producing oedema, haemorrhage and necrosis within 4 to 10 hours.",
+   "say": "Type three is immune complex mediated. Complexes deposit in vessel walls or membranes, fix complement and attract neutrophils. Examples include SLE, rheumatoid arthritis, PSGN and polyarteritis nodosa. Serum sickness appears about five to ten days after exposure, with fever, urticaria, arthralgia, proteinuria and lymphadenopathy. Most cases now follow drugs rather than animal serum. The Arthus reaction is a local type three reaction. Intradermal antigen meets preformed antibody, producing oedema, haemorrhage and necrosis within four to ten hours.",
+   "vis": null
+  },
+  {
+   "tx": "Type IV is **T-cell mediated** and delayed. It takes 12 to 48 hours because effector T cells must be recruited. Sensitised CD4 TH1 cells release cytokines that activate macrophages. Repeated stimulation can form **granulomas**, made of epithelioid cells with a lymphocyte collar. Examples include the tuberculin test, contact dermatitis, granulomatous disease and graft rejection. Because it is cell mediated, it cannot be transferred by serum. Contact dermatitis from urushiol is a classic exam example.",
+   "say": "Type four is T cell mediated and delayed. It takes twelve to forty eight hours because effector T cells must be recruited. Sensitised CD four TH one cells release cytokines that activate macrophages. Repeated stimulation can form granulomas, made of epithelioid cells with a lymphocyte collar. Examples include the tuberculin test, contact dermatitis, granulomatous disease and graft rejection. Because it is cell mediated, it cannot be transferred by serum. Contact dermatitis from urushiol is a classic exam example.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sensitised T cell"
+     },
+     {
+      "id": "b",
+      "label": "Cytokine release"
+     },
+     {
+      "id": "c",
+      "label": "Macrophage activation"
+     },
+     {
+      "id": "d",
+      "label": "Granuloma"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transplant rejection follows timing. **Hyperacute** rejection happens within minutes to hours. Preformed anti-donor antibodies, often anti-HLA or ABO, cause thrombosis and ischaemic necrosis. It is now rare because of crossmatching, and no immunosuppression helps. **Acute cellular** rejection occurs days to weeks later and is the most common type. T cells attack foreign MHC, giving mononuclear infiltration, usually reversible with immunosuppression. **Chronic** rejection occurs over months to years, with intimal fibrosis and graft atrophy, and is difficult to treat.",
+   "say": "Transplant rejection follows timing. Hyperacute rejection happens within minutes to hours. Preformed anti donor antibodies, often anti HLA or ABO, cause thrombosis and ischaemic necrosis. It is now rare because of crossmatching, and no immunosuppression helps. Acute cellular rejection occurs days to weeks later and is the most common type. T cells attack foreign MHC, giving mononuclear infiltration, usually reversible with immunosuppression. Chronic rejection occurs over months to years, with intimal fibrosis and graft atrophy, and is difficult to treat.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rejection",
+     "Onset",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Hyperacute",
+      "Minutes to hours",
+      "Preformed antibody, thrombosis"
+     ],
+     [
+      "Acute cellular",
+      "Days to weeks",
+      "T cell driven, reversible"
+     ],
+     [
+      "Chronic",
+      "Months to years",
+      "Intimal fibrosis, atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Graft versus host disease** occurs when immunocompetent donor T cells attack an immunosuppressed recipient. It is seen mainly after haematopoietic stem cell transplant. Acute GVHD, within about 100 days, classically causes a skin rash, bloody diarrhoea and jaundice. Chronic GVHD, after 100 days, causes skin fibrosis and oesophageal stricture. Prevention relies on HLA matching. Remember the donor T cell is the culprit, not the host.",
+   "say": "Graft versus host disease occurs when immunocompetent donor T cells attack an immunosuppressed recipient. It is seen mainly after haematopoietic stem cell transplant. Acute GVHD, within about one hundred days, classically causes a skin rash, bloody diarrhoea and jaundice. Chronic GVHD, after one hundred days, causes skin fibrosis and oesophageal stricture. Prevention relies on HLA matching. Remember the donor T cell is the culprit, not the host.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "e1ad3a00-116d-4b91-9c00-660ae0d94bf5",
+  "ddb28223-7ab2-4267-a8ef-492e7372c380",
+  "00406793-d8fa-4b9c-8fe1-a84a2dca7229"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease (Kumar, Abbas, Aster)",
+  "Harsh Mohan Textbook of Pathology",
+  "Janeway's Immunobiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 353
+ }
+}

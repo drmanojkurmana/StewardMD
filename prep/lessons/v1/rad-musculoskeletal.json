@@ -1,0 +1,198 @@
+{
+ "v": 1,
+ "module": "rad-musculoskeletal",
+ "subject": "radiology",
+ "title": "Musculoskeletal Radiology and Bone Tumours: High-Yield Signs",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Bone tumours are classified partly by their radiological pattern. A **destructive lesion** erodes bone, and the way the margin looks tells you how fast it grows. Patients under forty mostly have primary bone sarcomas, while those forty and over need metastasis and myeloma excluded. Night pain with a swelling in a young person is a red flag.",
+   "say": "Bone tumours are classified partly by their radiological pattern. A destructive lesion erodes bone, and the way its margin looks tells you how fast it grows. Patients under forty mostly have primary bone sarcomas, while patients forty and over need metastasis and myeloma excluded. Night pain with a swelling in a young person is a red flag that needs urgent referral.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient age",
+     "Likely category",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "Under 40",
+      "Primary sarcoma (osteosarcoma, Ewing)",
+      "Urgent specialist referral"
+     ],
+     [
+      "40 and over",
+      "Metastasis or myeloma",
+      "Exclude carcinoma and myeloma"
+     ],
+     [
+      "Any age, benign-looking",
+      "Benign but aggressive lesion",
+      "Histology to confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Osteosarcoma is the commonest primary malignant bone tumour in adolescents. Its radiograph shows a **sunburst** spiculated periosteal reaction and a **Codman triangle**, which is a cuff of new bone at the soft-tissue margin. Codman triangle is not specific, because it also appears in Ewing sarcoma and osteomyelitis. Biopsy must be done at the sarcoma centre.",
+   "say": "Osteosarcoma is the commonest primary malignant bone tumour in adolescents. Its radiograph shows a sunburst spiculated periosteal reaction and a Codman triangle, which is a cuff of new bone at the soft-tissue margin. Codman triangle is not specific, because it also appears in Ewing sarcoma and osteomyelitis. The biopsy must be planned at the sarcoma centre so limb salvage is not compromised.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Night bone pain with swelling"
+     },
+     {
+      "id": "b",
+      "label": "Radiograph: sunburst and Codman triangle"
+     },
+     {
+      "id": "c",
+      "label": "MRI whole bone and CT chest"
+     },
+     {
+      "id": "d",
+      "label": "Biopsy at sarcoma centre"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ewing sarcoma is a small round blue cell tumour that peaks in the second decade. Its classic sign is an **onion peel** periosteal reaction with a soft-tissue mass. It carries the t(11;22) translocation, which fuses EWSR1 with FLI1. Chondrosarcoma, by contrast, shows popcorn or mottled calcification and favours flat bones in adults.",
+   "say": "Ewing sarcoma is a small round blue cell tumour that peaks in the second decade. Its classic sign is an onion peel periosteal reaction with a soft-tissue mass. It carries the t(11;22) translocation, which fuses EWSR1 with FLI1. Chondrosarcoma, by contrast, shows popcorn or mottled calcification and favours flat bones in adults.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ewing sarcoma",
+     "points": [
+      "Peaks in second decade",
+      "Onion peel periosteal reaction",
+      "t(11;22) EWSR1 with FLI1",
+      "CD99 positive"
+     ]
+    },
+    "right": {
+     "title": "Chondrosarcoma",
+     "points": [
+      "Peaks in fourth to sixth decades",
+      "Popcorn or mottled calcification",
+      "Favours flat bones",
+      "Largely chemoresistant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Giant cell tumour is a benign but locally aggressive osteolytic lesion at the end of long bones. Its radiograph shows an eccentric lesion with a **soap bubble** appearance that extends into the corners of the bone. Osteoblastoma also shows this appearance. Treatment is intralesional curettage with adjuvants, or denosumab when surgery is not possible.",
+   "say": "Giant cell tumour is a benign but locally aggressive osteolytic lesion at the end of long bones. Its radiograph shows a soap bubble appearance that extends into the corners of the bone. Osteoblastoma also shows this appearance. Treatment is intralesional curettage with adjuvants, or denosumab when surgery is not possible.",
+   "vis": null
+  },
+  {
+   "tx": "Osteoid osteoma is a small benign bone lesion containing a **nidus**, a tiny vascular core often ringed by a **sclerotic rim** of reactive bone. Patients typically describe pain that worsens at night. By contrast, **Looser zones** are pseudofractures of **osteomalacia**, appearing as wide transverse lucencies at right angles to the cortex, most often in the pubic rami, femoral neck and medial scapula.",
+   "say": "Osteoid osteoma is a small, benign bone lesion with a nidus, which is a tiny core often surrounded by a sclerotic ring of reactive bone. Its pain tends to be worse at night. Looser zones, by contrast, are pseudofractures seen in osteomalacia. They appear as wide lucencies running across the bone at right angles to the cortex, most often in the pubic rami, femoral neck and medial scapula.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Osteoid osteoma",
+     "Looser zone"
+    ],
+    "rows": [
+     [
+      "Nature",
+      "Benign tumour",
+      "Pseudofracture"
+     ],
+     [
+      "Key sign",
+      "Nidus with sclerotic rim",
+      "Transverse lucency"
+     ],
+     [
+      "Typical site",
+      "Long bone cortex",
+      "Pubic rami, femoral neck"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In metabolic bone disease, the spine and long bones show characteristic signs. **Rugger jersey spine** shows alternating sclerotic bands at the end plates, seen in renal osteodystrophy and hyperparathyroidism. A **picture frame vertebra** is a rim of dense bone around a central depressed body in Paget disease. Rickets shows cupping and fraying of the metaphyses, while Pott spine is tuberculous vertebral destruction.",
+   "say": "In metabolic bone disease, the spine and long bones show characteristic signs. Rugger jersey spine shows alternating sclerotic bands at the end plates, seen in renal osteodystrophy and hyperparathyroidism. A picture frame vertebra is a rim of dense bone around a central depressed body in Paget disease. Rickets shows cupping and fraying of the metaphyses, while Pott spine is tuberculous vertebral destruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Typical condition",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Rugger jersey spine",
+      "Renal osteodystrophy, hyperparathyroidism",
+      "Alternating end plate bands"
+     ],
+     [
+      "Picture frame vertebra",
+      "Paget disease",
+      "Dense peripheral rim"
+     ],
+     [
+      "Cupping and fraying",
+      "Rickets",
+      "Metaphyseal changes"
+     ],
+     [
+      "Pott spine",
+      "Tuberculosis",
+      "Vertebral destruction"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "5ae498cf-5150-4d58-94a2-29be8de8d5ce",
+  "19460d37-257e-40ae-a0c5-18119a75b0fa",
+  "8b883f59-47a8-4f2f-b04a-05f676d2af98"
+ ],
+ "src": [
+  "kb-reference-soft-tissue-sarcoma",
+  "kb-reference-osteosarcoma",
+  "kb-oncotree-bone"
+ ],
+ "refs": [
+  "NCCN Guidelines Bone Cancer"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 2248,
+  "itemN": 619
+ }
+}
