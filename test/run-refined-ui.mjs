@@ -79,6 +79,14 @@ try {
   const dk = await ev("var c=getComputedStyle(document.querySelector('.mc-card'));return c.boxShadow+'|'+c.borderTopColor");
   ok(/0\.26|0\.35/.test(dk) && /255, 255, 255/.test(dk), "dark: card shadow is the deeper dark one and the hairline is a light alpha (" + dk + ")");
 
+  ok((await ev("return getComputedStyle(document.querySelector('.mc-cat.on')).backgroundColor")) === "rgb(31, 122, 110)", "dark: the selected category chip is the deeper teal, so its white text clears 4.5:1");
+  ok((await ev("return getComputedStyle(document.querySelector('.mc-count')).color")) === "rgb(76, 194, 176)", "dark: the teal count badge text is the lighter teal (4.0:1 before)");
+  await load("try{localStorage.setItem('smd_refined','0')}catch(e){}");
+  await ev("document.body.classList.add('dark','v3-dark');return 1");
+  await ev("[].slice.call(document.querySelectorAll('#homeV2 button')).filter(function(b){return /Calculators/.test(b.textContent)})[0].click();return 1");
+  await waitFor("return document.querySelectorAll('.mc-cat').length>3");
+  ok((await ev("return getComputedStyle(document.querySelector('.mc-cat.on')).backgroundColor")) !== "rgb(31, 122, 110)", "dark: with the look off the chip keeps its old teal");
+
   // 5. Kill switch
   await load("try{localStorage.setItem('smd_refined','0')}catch(e){}");
   ok(!(await ev("return document.documentElement.classList.contains('smd-refined')")), "kill switch: localStorage smd_refined=0 leaves the old look");

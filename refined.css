@@ -70,3 +70,28 @@ html.smd-refined body > :not(#homeV2) .mc-head { border-color: var(--rf-line); }
   html.smd-refined body > :not(#homeV2) [class$="-card"]:hover,
   html.smd-refined body > :not(#homeV2) .db-comp:hover { box-shadow: var(--rf-card-hover); }
 }
+
+/* ---- contrast (dark-mode audit, 2026-10-12; WCAG AA 4.5:1 for small text) ----
+ * Dark: the accent teal is both a FILL under white text (needs it darker) and a TEXT colour on dark panels
+ * (needs it lighter), so one value cannot serve both. Fills get #1F7A6E (white on it: 5.2:1, was 3.8),
+ * teal text on dark gets #4CC2B0 (on the dark panel: 7:1, was 4.0; the lightbulb icon was 2.5). */
+html.smd-refined body.dark > :not(#homeV2) .settings-done,
+html.smd-refined body.dark > :not(#homeV2) .hv-seg button.on,
+html.smd-refined body.dark > :not(#homeV2) .db-btab.on,
+html.smd-refined body.dark > :not(#homeV2) .mc-cat.on,
+html.smd-refined body.v3-dark > :not(#homeV2) .settings-done,
+html.smd-refined body.v3-dark > :not(#homeV2) .hv-seg button.on,
+html.smd-refined body.v3-dark > :not(#homeV2) .db-btab.on,
+html.smd-refined body.v3-dark > :not(#homeV2) .mc-cat.on { background: #1F7A6E !important; }
+html.smd-refined body.dark > :not(#homeV2) .abg-filter-pill.active,
+html.smd-refined body.dark > :not(#homeV2) .mc-count,
+html.smd-refined body.dark > :not(#homeV2) .abxw-modehint > .rds-icon,
+html.smd-refined body.v3-dark > :not(#homeV2) .abg-filter-pill.active,
+html.smd-refined body.v3-dark > :not(#homeV2) .mc-count,
+html.smd-refined body.v3-dark > :not(#homeV2) .abxw-modehint > .rds-icon { color: #4CC2B0 !important; }
+/* Light: muted text on the tinted antibiotic-engine panels was 3.1-4.5:1. */
+html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-brands,
+html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-steplbl,
+html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-sub,
+html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-pickttl,
+html.smd-refined body:not(.dark):not(.v3-dark) > :not(#homeV2) .abxw-empty p { color: #4D6272 !important; }
