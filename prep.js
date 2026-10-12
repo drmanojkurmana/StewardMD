@@ -539,6 +539,44 @@
     (st.tax ? st.tax.branches : []).forEach(function (b) { if (b.id === ex.branch) b.subjects.forEach(function (s) { if (ex.all || !s.ex || s.ex.indexOf(ex.tag) >= 0) out.push(s); }); });
     return out;
   }
+  /* The selected plan's scope (prep-plan.js EXAM_CHOICES/SS_GROUPS): Tests and QBank follow the plan's exam, group and
+     subject, never the whole tab. planChoice() = the stored choice; planProfileId() = its exam profile;
+     planExamLabel() = its name on this tab; planScopeLabel() = its group or subject; planSubjects() = the tab's
+     subjects narrowed to the plan (the NEET-SS group, the one INI-SS subject); planNeed() = the one blocking step
+     (INI-SS with no subject yet) or null; planProfile() = the plan's exam profile or null. */
+  function planPure() { return (G.PREP_PLAN && G.PREP_PLAN._pure) || null; }
+  function planChoice() { var PP = planPure(), s = load(); return (PP && s.pl && s.pl.exam && PP.choiceOf(s.pl.exam)) || null; }
+  function planProfileId() { var PP = planPure(), s = load(); if (!PP || !s.pl || !s.pl.exam) return null; return PP.planProfileId(s.pl.exam); }
+  function planExamLabel() { var s = load(), ex = examOf(s.exam), c = planChoice(); return (c && c.tab === ex.id ? c.label : ex.label); }
+  function planScopeLabel() {
+    var s = load(), PP = planPure(), pl = s.pl || {};
+    if (!PP || !pl.exam) return "";
+    if (pl.exam === "neet-ss") { var g = PP.ssGroupOf(PP.planGroup(pl)); return g ? g.label : ""; }
+    if (pl.exam === "ini-ss" && pl.subject) { var sb = subjectById(pl.subject); return sb ? tx(sb.name) : ""; }
+    return "";
+  }
+  function planSubjects() {
+    var s = load(), all = subjectsOf(s.exam), PP = planPure(), pl = s.pl || {};
+    if (!PP || !pl.exam) return all;
+    var want = {}, out;
+    if (pl.exam === "neet-ss") PP.ssGroupSubjects(PP.planGroup(pl)).forEach(function (id) { want[id] = 1; });
+    else if (pl.exam === "ini-ss" && pl.subject) want[pl.subject] = 1;
+    else if (pl.exam === "ini-ss") return [];
+    else return all;
+    out = all.filter(function (x) { return want[x.id]; });
+    return out;
+  }
+  function planNeed() {
+    var s = load(), PP = planPure();
+    if (!PP || !s.pl || !s.pl.exam) return null;
+    if (s.pl.exam === "ini-ss" && !planSubjects().length) return { kind: "subject" };
+    return null;
+  }
+  function planProfile() {
+    if (!ASSESS) return null;
+    var id = planProfileId();
+    return id ? ASSESS.profile(id) : null;
+  }
   // A subject piloted in its own bank path (taxonomy `bv`, e.g. ss-radiology in v6) reads from there; the rest from VER.
   function bvOf(sid) { var s = subjectById(sid); return (s && s.bv) || VER; }
   function subjectById(id) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (s) { if (s.id === id) r = s; }); }); return r; }
@@ -1137,8 +1175,15 @@
   function coachView(s, exam) {
     var CO = G.PREP_COACH;
     if (!CO) return { topics: [] };
-    return CO.analyze(s.coach_t || {}, exam, coachSrc(exam));
+    var out = CO.analyze(s.coach_t || {}, exam, coachSrc(exam)), psubs = planSubjects();
+    if (psubs && psubs.length) {
+      var keep = {}; psubs.forEach(function (sb) { keep[sb.id] = 1; });
+      out.topics = (out.topics || []).filter(function (x) { var sid = String(x.t || "").split("|")[0]; return !sid || !!keep[sid]; });
+    }
+    return out;
   }
+  // My coaching (KnowYourIQ) compares against the selected plan's exam, never the tab it shares.
+  function coachExam(s) { var p = planProfileId(); return p || s.exam; }
   function coachTopicName(t) {
     var p = String(t || "").split("|"), sb = subjectById(p[0]), tp = topicOf(p[0], p[1]);
     var sn = sb ? tx(sb.name) : esc(p[0] || "?"), tn = tp ? tx(tp.title) : esc(p[1] || "?");
@@ -1157,8 +1202,13 @@
   function coachSecHtml(kind) {
     var CO = G.PREP_COACH;
     if (!CO) return "";
-    var K = CO.KYIQ, s = load(), exam = s.exam, td = today();
+    var K = CO.KYIQ, s = load(), exam = coachExam(s), td = today(), psubs = planSubjects();
     var view = coachView(s, exam), due = CO.dueToday(s, td).coach, pairs = CO.topPairs(s.coach_pairs, 3);
+    if (psubs && psubs.length) {
+      var keep = {}; psubs.forEach(function (sb) { keep[sb.id] = 1; });
+      due = due.filter(function (t) { var sid = String(t || "").split("|")[0]; return !sid || !!keep[sid]; });
+      pairs = pairs.filter(function (e) { var sid = String((e && e.t) || "").split("|")[0]; return !sid || !!keep[sid]; });
+    }
     var grouped = view.topics.filter(function (x) { return x.group !== "fresh"; });
     var freshN = view.topics.length - grouped.length;
     var h = '<section class="ky-sec" aria-label="My coaching"><div class="ky-head">' + kyMark(28) +
@@ -1204,7 +1254,7 @@
       if (n[oc] != null && oc !== "tagged") n[oc]++;
     });
     if (!n.tagged) return "";
-    var s = load(), view = coachView(s, s.exam), first = null;
+    var s = load(), view = coachView(s, coachExam(s)), first = null;
     view.topics.forEach(function (x) { if (!first && x.group !== "fresh" && x.group !== "ready") first = x; });
     var bits = [];
     if (n.misconception) bits.push("<b>" + n.misconception + "</b> confident-wrong (misconceptions to fix first)");
@@ -1231,7 +1281,7 @@
         if (!seen[t]) { seen[t] = 1; ts.push(t); }
       });
       if (!ts.length) return;
-      var view = coachView(s, s.exam), by = {};
+      var view = coachView(s, coachExam(s)), by = {};
       view.topics.forEach(function (x) { by[x.t] = x.group; });
       ts.forEach(function (t) { if (by[t] && by[t] !== "fresh") CO.noteReview(s, t, by[t], td); });
       save();
@@ -1243,10 +1293,10 @@
   function coachAskOpen() {
     var CO = G.PREP_COACH;
     if (!CO || !G.PREP_ASK) return false;
-    var s = load(), view = coachView(s, s.exam), due = CO.dueToday(s, today()).coach;
+    var s = load(), view = coachView(s, coachExam(s)), due = CO.dueToday(s, today()).coach;
     var pairs = CO.topPairs(s.coach_pairs, 4);
     var title = CO.KYIQ.NAME + ": what should I revise?";
-    return G.PREP_ASK.open({ kind: "card", fr: title, bk: CO.summaryText(view, s.exam, due, pairs), title: title, ask: "What should I revise first?" }, HOST);
+    return G.PREP_ASK.open({ kind: "card", fr: title, bk: CO.summaryText(view, coachExam(s), due, pairs), title: title, ask: "What should I revise first?" }, HOST);
   }
   /* Practise actions from the section: the pair's topic as a study set, or the pair's own question. */
   function kySplitT(t) { var p = String(t || "").split("|"); return { s: p[0], m: p[1] }; }
@@ -2572,7 +2622,10 @@
     var t2 = !q && G.PREP_TESTS && G.PREP_TESTS.on();
     if (t2) body = G.PREP_TESTS.testsHtml(HOST);
     else if (!q) {
-      var list = MOCKS[s.exam] || MOCKS["neet-pg"];
+      var list = MOCKS[s.exam];
+      if (!list) body = '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(planExamLabel()) + '</p><p class="pn-mut">Questions for this exam are being added.</p></section>' +
+        '<div class="pn-group">' + row("p-settings", ico("gear"), "Change exam", "Exam: " + esc(planExamLabel())) + "</div>";
+      else {
       // The previous year papers row (NEET-PG) sits on top.
       var pyq = G.PREP_PYQ && s.exam === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(HOST) + "</div>" : "";
       body = '<div class="pn-banner pn-art-mock" aria-hidden="true"></div>' + pyq + list.map(function (m) {
@@ -2582,15 +2635,28 @@
             : '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="full">' + ico("clock") + " Full mock: " + m.n + " questions</button>") +
           (mini < m.n ? '<button type="button" class="pn-btn" data-act="mock" data-v="' + m.id + '" data-k="mini">' + ico("clock") + " Mini mock: " + mini + " questions, " + fmtMin(Math.round(m.min * mini / m.n)) + "</button>" : "") + "</section>";
       }).join("") + '<p class="pn-mut pn-small">Questions are drawn across every subject of the exam in proportion to the bank. Patterns follow the published bulletins; check the current one before your exam.</p>';
+      }
     } else {
+      var psubs = planSubjects(), need = planNeed(), prof = planProfile(), coming = !!(prof && ASSESS && ASSESS.bankStatus(prof) === "coming");
+      subs = psubs;
+      // A NEET-SS group with no bank subjects yet (e.g. surgical) reads like a coming bank: rare and clearly worded.
+      var gEmpty = !psubs.length && !need && !coming && planPure() && ((load().pl || {}).exam === "neet-ss");
+      if (need || coming || gEmpty) {
+        var scope = planScopeLabel();
+        var why = need ? "Pick your one INI-SS subject first: INI-SS is set per superspeciality." :
+          gEmpty && scope ? "Questions for the " + scope + " are being added." : "Questions for this exam are being added.";
+        body = '<div class="pn-group">' + row("p-settings", ico("gear"), need ? "Choose subject" : "Change exam", "Exam: " + esc(planExamLabel()) + (scope ? " · " + esc(scope) : "")) + "</div>" +
+          '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(planExamLabel()) + (scope ? " · " + esc(scope) : "") + '</p><p class="pn-mut">' + esc(why) + "</p></section>";
+      } else {
       var known = subs.every(function (sb) { return !!st.ix[sb.id]; });
       body = '<div class="pn-group">' + row("custom", ico("plus"), "Custom module", "Your own mix of subjects and count") +
         (G.PREP_QGEN && G.PREP_QGEN.canCreate() ? row("g-new", ico("bolt"), "Create a module with MaiK", G.PREP_QGEN.sub()) : "") +
         row("bookmarks", ico("bm"), "Bookmarks", fmt(Object.keys(s.bm).length) + " saved") +
         row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") + "</div>" +
         '<h2 class="pn-h">Subjects</h2><p class="pn-mut pn-small pn-qbs" id="pnQbS">' + qbSummary(subs, known) + '</p><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>";
+      }
     }
-    paint(bar("Tests", examOf(s.exam).label, "back") + segHtml + '<div class="pn-body pn-mocks' + (q ? " pn-qbank" : "") + (t2 ? " pn-t2" : "") + '" id="pnTests">' + body + "</div>");
+    paint(bar("Tests", planExamLabel(), "back") + segHtml + '<div class="pn-body pn-mocks' + (q ? " pn-qbank" : "") + (t2 ? " pn-t2" : "") + '" id="pnTests">' + body + "</div>");
     if (t2) G.PREP_TESTS.mounted(HOST);
     if (q) Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
       if (!st.open || st.stack[st.stack.length - 1] !== renderMocks || ttGet() !== "qbank") return;
@@ -3091,7 +3157,8 @@
     // Tab roots for the floating tab bar (prep-nav.js): Tests and You.
     screens: { mocks: renderMocks, menu: renderMenu }, run_: function () { return st.run; },
     // Lessons (prep-lessons.js)
-    // Plan (prep-plan.js)
+    // Plan (prep-plan.js): Tests and QBank scope to these, never the whole tab.
+    planSubjects: planSubjects, planNeed: planNeed, planProfile: planProfile, planProfileId: planProfileId, planExamLabel: planExamLabel, planScopeLabel: planScopeLabel,
     subjectsOf: subjectsOf, loadIndex: loadIndex, ix: function () { return st.ix; }, startMock: startMock, pure: PURE,
     // Celebrations and MaiK lines (lessons): celeFor(m0, holder), celeAttrs, celeChip, maikLine({ subject }, holder), snap().
     snap: snapNow, celeFor: celeFor, celeAttrs: celeAttrs, celeChip: celeChip, maikLine: maikLine,

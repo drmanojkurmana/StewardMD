@@ -74,7 +74,7 @@ try {
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pl-q");`, 20000), "the first plain open shows onboarding");
   await ev(STUB_LESSONS);
-  ok(/Which exam/.test(await text("#smdPrep .pl-q")) && await ev(`return document.querySelectorAll("#smdPrep [data-act=p-f-exam]").length;`) === 6, "step 1 offers the six exams");
+  ok(/Which exam/.test(await text("#smdPrep .pl-q")) && await ev(`return document.querySelectorAll("#smdPrep [data-act=p-f-exam]").length;`) === 13, "step 1 offers the thirteen exams");
   ok(await ev(`return document.querySelector("#smdPrep [data-act=p-ob-next]").disabled;`) === true, "Continue waits for an exam");
   ok(await ev(`return !document.querySelector("#smdPrep [data-act=p-skip]") && !document.querySelector("#smdPrep #pnHome");`) === true, "the exam step has no Skip (the exam is asked once); home is not drawn behind");
   await click('#smdPrep [data-act=p-f-exam][data-v=neet-pg]');
