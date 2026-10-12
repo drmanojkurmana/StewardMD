@@ -53,6 +53,7 @@ export const EXAMS = [
   { profile: "ini-cet", tab: "neet-pg", branch: "mbbs", tag: "ini-cet" },
   { profile: "neet-ss", tab: "neet-ss", branch: "ss-medicine", tag: "neet-ss" },
   { profile: "usmle-step1", tab: "usmle", branch: "mbbs", tag: "usmle" },
+  { profile: "usmle-step2-ck", tab: "usmle", branch: "mbbs", tag: "usmle-step2-ck" },
   { profile: "plab-1", tab: "plab", branch: "uk", tag: "plab-1" },
   { profile: "mrcs-part-a", tab: "mrcs", branch: "uk", tag: "mrcs-part-a" },
   { profile: "amc-mcq", tab: "amc", branch: "intl", tag: "amc-mcq" },
@@ -64,6 +65,28 @@ export const FORMATS = ["grand", "part", "mini", "subject_mini", "topic", "daily
 // Papers requested per format. Topic papers are one per major topic (TOP_PER_SUBJECT biggest per subject,
 // at least TOPIC_MIN bank questions); subject minis per subject.
 export const ASK = { grand: 15, part: 5, mini: 15, subject_mini: 2, topic: 1, daily10: 15, image: 5, pyq: 5 };
+// Per-exam overrides (papers per format; topicCount/topicMin size topic papers for smaller pools).
+export const EXAM_CFG = {
+  "usmle-step2-ck": { grand: 6, mini: 6, daily10: 10, subject_mini: 2, topic: 1, image: 2, topicCount: 10, topicMin: 10 },
+};
+export const askFor = (profile, f) => ((EXAM_CFG[profile] || {})[f] != null ? EXAM_CFG[profile][f] : ASK[f]);
+// Exam-owned pool tags (profile bank.pool): pooled exams draw only their tagged items; other exams' papers
+// drop them. Mirrors the Tests tab dropForeign (prep-tests.js).
+export function bankPool(profileId) { const p = A.profile(profileId); return (p && p.bank && p.bank.pool) || null; }
+export function allPoolTags() {
+  const out = {};
+  for (const id of A.profileIds()) { const q = A.profile(id); if (q && q.bank && q.bank.pool) out[q.bank.pool] = 1; }
+  return out;
+}
+export function dropForeign(items, pt, tags = allPoolTags()) {
+  if (!Object.keys(tags).length) return items;
+  return (items || []).filter((it) => {
+    if (!it.ex || !it.ex.length) return true;
+    let home = false, foreign = false;
+    for (const t of it.ex) if (tags[t]) { if (t === pt) home = true; else foreign = true; }
+    return home || !foreign;
+  });
+}
 export const TOPIC_MIN = 50;          // a "major" topic: the TOP_PER_SUBJECT biggest topics per subject (mixed group excluded)
 export const TOP_PER_SUBJECT = 5;   // ... with at least TOPIC_MIN bank questions each
 export const SET_COUNT = 20;          // subject mini, topic, image and PYQ sets
@@ -152,7 +175,8 @@ export function planFor(profileId, format, key) {
   if (format === "subject_mini") return { asmType: "subject_mini", profile: p, opts: { count: SET_COUNT, subjects: [key] } };
   if (format === "topic") {
     const [sid, mid] = String(key).split("|");
-    return { asmType: "topic", profile: p, opts: { count: SET_COUNT, subjects: [sid], modules: [mid] } };
+    const tc = (EXAM_CFG[profileId] || {}).topicCount || SET_COUNT;
+    return { asmType: "topic", profile: p, opts: { count: tc, subjects: [sid], modules: [mid] } };
   }
   if (format === "image") return key && key !== "all"
     ? { asmType: "custom", profile: p, opts: { count: SET_COUNT, image: true, subjects: [key] } }
@@ -342,13 +366,18 @@ export function loadSubject(cache, tax, ver, sid, sets = overlaySets()) {
   return { bv, lists };
 }
 // USMLE papers draw vignettes per module exactly like the app (prep.js poolFor); other exams pass every item
-// through and let eligible() decide.
+// through and let eligible() decide. Pooled exams (bank.pool) draw their strict pool; every exam's papers drop
+// items owned by another pool.
 export function examLists(cache, tax, ver, exam, sets) {
   const out = [], bank = {};
+  const pt = bankPool(exam.profile), tags = allPoolTags();
   for (const sid of scopeSubjects(tax, exam)) {
     const { bv, lists } = loadSubject(cache, tax, ver, sid, sets);
     (bank[bv] || (bank[bv] = [])).push(sid);
-    for (const l of lists) out.push(exam.profile === "usmle-step1" ? { ...l, items: PURE.poolFor(l.items, "usmle") } : l);
+    for (const l of lists) {
+      const items = pt ? PURE.poolFor(l.items, pt, null, true) : (exam.profile === "usmle-step1" ? PURE.poolFor(l.items, "usmle") : l.items);
+      out.push({ ...l, items: dropForeign(items, pt, tags) });
+    }
   }
   Object.values(bank).forEach((v) => v.sort());
   return { lists: out, bank };
@@ -387,14 +416,20 @@ export function poolSizes(lists, opts = {}) {
 }
 
 /* ---------- build: one paper is one assembler call with a fixed seed ---------- */
+export function poolCounts(root = ROOT) {
+  try { return JSON.parse(fs.readFileSync(path.join(root, "prep", "bank", "overlay-counts.json"), "utf8")).pools || {}; } catch { return {}; }
+}
 export function majorTopics(cache, tax, ver, exam) {
   const out = [];
+  const pt = bankPool(exam.profile), pools = pt ? (poolCounts()[pt] || {}) : null;
+  const min = (EXAM_CFG[exam.profile] || {}).topicMin || TOPIC_MIN;
   for (const sid of scopeSubjects(tax, exam)) {
     const ix = readCache(path.join(cache, `${bvOf(tax, ver, sid)}/${sid}/index.json`));
     const ts = [];
     for (const t of (ix && ix.topics) || []) {
-      if (t.group === "mixed" || !(t.count >= TOPIC_MIN)) continue;
-      ts.push({ sid, mid: t.id, title: (t.title && t.title.en) || t.id, count: t.count });
+      const n = pools ? ((pools[sid] || {})[t.id] || 0) : t.count;
+      if (t.group === "mixed" || !(n >= min)) continue;
+      ts.push({ sid, mid: t.id, title: (t.title && t.title.en) || t.id, count: n });
     }
     ts.sort((a, b) => b.count - a.count || (a.mid < b.mid ? -1 : 1));
     out.push(...ts.slice(0, TOP_PER_SUBJECT));
@@ -471,19 +506,19 @@ export function requestList(tax, cache, ver, exam, onlyFormat, startAt = {}, sub
     if (f === "pyq" && exam.profile !== "neet-pg") continue;
     if (f === "grand" || f === "mini" || f === "daily10" || f === "pyq") {
       const from = (startAt[`${exam.profile}/${f}`] || 0) + 1;
-      for (let n = from; n < from + ASK[f]; n++) req.push([f, "all", n]);
+      for (let n = from; n < from + askFor(exam.profile, f); n++) req.push([f, "all", n]);
     } else if (f === "image") {
       let n = (startAt[`${exam.profile}/image`] || 0) + 1;
-      if (!subjectsOnly) for (let k = 0; k < ASK.image; k++) req.push(["image", "all", n++]);
+      if (!subjectsOnly) for (let k = 0; k < askFor(exam.profile, "image"); k++) req.push(["image", "all", n++]);
       for (const { sid, n: cnt } of imageSubjects(cache, tax, ver, exam)) for (let k = 0; k < cnt; k++) req.push(["image", sid, n++]);
     } else if (f === "part") {
       const ps = [...new Set((parts.sections || []).map((s) => String(s.part || "1")))].sort();
       for (const p of ps) {
         const from = (startAt[`${exam.profile}/part`] || 0) + 1;
-        for (let n = from; n < from + ASK.part; n++) req.push(["part", p, n]);
+        for (let n = from; n < from + askFor(exam.profile, "part"); n++) req.push(["part", p, n]);
       }
     } else if (f === "subject_mini") {
-      for (const sid of scopeSubjects(tax, exam)) for (let n = 1; n <= ASK.subject_mini; n++) req.push(["subject_mini", sid, n]);
+      for (const sid of scopeSubjects(tax, exam)) for (let n = 1; n <= askFor(exam.profile, "subject_mini"); n++) req.push(["subject_mini", sid, n]);
     } else if (f === "topic") {
       for (const t of majorTopics(cache, tax, ver, exam)) req.push(["topic", `${t.sid}|${t.mid}`, 1]);
     }
