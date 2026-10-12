@@ -19,7 +19,7 @@
  * min(start + secs, window end) + 60 s. Bindings: PREP_ARENA_DB (D1), PREP_BANK_R2 (the screened bank).
  */
 import { verifiedClaimsFor } from "../../../_fbauth.js";
-import { EXAMS, SCHEMES, uidHash, displayName, markEntry, eventFromId, scheduleFor, submitDeadline, bankFrom, drawItems } from "../../../_prep-arena.js";
+import { EXAMS, SCHEMES, schemeFor, uidHash, displayName, markEntry, eventFromId, scheduleFor, submitDeadline, bankFrom, drawItems } from "../../../_prep-arena.js";
 import { socialDeleteStmts } from "../../../_prep-social.js";
 import { passed, safely } from "../../../_prep-nudge-push.js";
 
@@ -130,7 +130,9 @@ export async function handle(request, env, path, now = Date.now(), bg = null) {
       }
       const endsAt = Math.min(entry.started_at + ev.secs * 1000, ev.ends_at);
       if (now > endsAt + 60e3) return json({ error: "closed" }, 410);
-      return json({ id: ev.id, items: items.map((it) => ({ id: it.id, q: it.q, o: it.o })), secs: ev.secs, startedAt: entry.started_at, endsAt });
+      const res = { id: ev.id, items: items.map((it) => ({ id: it.id, q: it.q, o: it.o })), secs: ev.secs, startedAt: entry.started_at, endsAt };
+      if (ev.sections) res.sections = ev.sections;
+      return json(res);
     }
 
     // submit
@@ -141,7 +143,7 @@ export async function handle(request, env, path, now = Date.now(), bg = null) {
     if (!ans || typeof ans !== "object" || Array.isArray(ans) || Object.keys(ans).length > 500) return json({ error: "bad-request" }, 400);
     const items = await itemsFor(env, ev);
     if (!items.length) return json({ error: "bank-empty" }, 503);
-    const m = markEntry(items, ans, SCHEMES[ev.exam]);
+    const m = markEntry(items, ans, schemeFor(ev.exam));
     // server time, capped at the entry's own end (the grace minute does not count); the client's ms is not trusted
     const ms = Math.max(0, Math.min(now, entry.started_at + ev.secs * 1000, ev.ends_at) - entry.started_at);
     const r = await db.prepare("UPDATE arena_entries SET submitted_at = ?, score = ?, \"right\" = ?, wrong = ?, blank = ?, ms = ? WHERE event_id = ? AND uidh = ? AND submitted_at IS NULL")

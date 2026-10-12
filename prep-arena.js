@@ -148,8 +148,23 @@
     if (status === 503) return "Coming soon: questions for this exam are still being prepared.";
     return "The Arena did not answer. Try again in a moment.";
   }
+  // Data-driven coming soon message from PREP_ASSESS exam profile bank status.
+  // Returns null when the bank is ready (open for Arena); returns note string when "coming".
+  function soonFor(ex, assess) {
+    assess = assess || (G && G.PREP_ASSESS);
+    if (!assess) return null;
+    var p = assess.profile ? assess.profile(ex) : null;
+    if (!p && assess.forTab) {
+      var list = assess.forTab(ex);
+      if (list && list.length) p = list[0];
+    }
+    if (!p) return null;
+    var st = assess.bankStatus ? assess.bankStatus(p) : ((p.bank && p.bank.status) || "available");
+    if (st === "coming") return (p.bank && p.bank.note) || "questions for this exam are still being prepared";
+    return null;
+  }
   var PURE = { enabled: enabled, ms: ms, normEvent: normEvent, eventsFrom: eventsFrom, phase: phase, pickEvent: pickEvent, countdown: countdown, eventLine: eventLine,
-    lastDays: lastDays, heatWeeks: heatWeeks, heatLevel: heatLevel, bestStreak: bestStreak, accuracyBySubject: accuracyBySubject, signed: signed, answersOf: answersOf, battleNew: battleNew, battleStep: battleStep, battleClosed: battleClosed, canPick: canPick, liveBattle: liveBattle, errWord: errWord };
+    lastDays: lastDays, heatWeeks: heatWeeks, heatLevel: heatLevel, bestStreak: bestStreak, accuracyBySubject: accuracyBySubject, signed: signed, answersOf: answersOf, battleNew: battleNew, battleStep: battleStep, battleClosed: battleClosed, canPick: canPick, liveBattle: liveBattle, errWord: errWord, soonFor: soonFor };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -180,16 +195,14 @@
     if (e && e.status === 403) A.consent = null;   // consent gone (left on another phone): ask again next time
     return errWord(e && e.status, e && e.body && e.body.error);
   }
-  // Exams whose Arena is not open yet, with the reason: NEET-SS until its bank is filled (the server answers 503
-  // bank-empty); FMGE has no Arena events on the server yet.
-  var SOON = { "neet-ss": "open once this exam's question bank is ready", "fmge": "for FMGE come in a later update" };
 
   /* ---------- home: Compete ---------- */
   function homeHtml(host) {
     H = host;
     if (!online()) return '<div class="pn-group">' + H.row("a-retryhome", H.ico("off"), "Needs a connection", "Arena events and battles run online. Practice works offline.") + "</div>";
     if (!user()) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("user") + '</span><span class="pn-rb"><b>Sign in to compete</b><small>Daily sprints, the weekly grand test and 1v1 battles need a StewardMD account. Practice works without one.</small></span></div></div>';
-    if (SOON[exam()]) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(H.exam().label) + " Arena: coming soon</b><small>Sprints, grand tests and battles " + SOON[exam()] + ". NEET-PG and USMLE are open.</small></span></div></div>";
+    var soon = soonFor(exam());
+    if (soon) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(H.exam().label) + " Arena: coming soon</b><small>Sprints, grand tests and battles " + esc(soon) + ".</small></span></div></div>";
     var now = Date.now(), ev = A.events || [], d = pickEvent(ev, "daily", now), w = pickEvent(ev, "weekly", now);
     var line = function (e) { return A.events ? eventLine(e || null, now) : "Loading…"; };
     var cdAttr = function (e) { return e ? ' data-cd="' + esc(e.id) + '"' : ""; };
@@ -201,7 +214,7 @@
   }
   function homeMounted(host) {
     H = host;
-    if (!online() || !user() || SOON[exam()]) return;
+    if (!online() || !user() || soonFor(exam())) return;
     if (!A.events || Date.now() - A.evAt > 60e3) loadEvents().then(function () { var box = root() && root().querySelector("#pnCompete"); if (box) box.innerHTML = homeHtml(H); tick(); }, function () {
       var box = root() && root().querySelector("#pnCompete");
       if (box) box.innerHTML = '<div class="pn-group">' + H.row("a-retryhome", H.ico("off"), "Arena did not load", "Tap to try again") + "</div>";
@@ -283,8 +296,13 @@
     });
   }
   function rulesLine(ev) {
-    var m = H.mockOf(exam(), exam()), mins = Math.round((ev.secs || 0) / 60), third = Math.abs(m.minus - 1 / 3) < 1e-9;
-    return ev.n + " questions, " + mins + " min. Right +" + m.plus + (m.minus ? ", wrong minus " + (third ? "1/3" : m.minus) : ", no negative marking") + ", unanswered 0.";
+    var assess = G.PREP_ASSESS, prof = assess && assess.profile ? assess.profile(exam()) : null;
+    var m = (assess && assess.scheme && prof) ? assess.scheme(prof) : (H.mockOf ? H.mockOf(exam(), exam()) : { plus: 1, minus: 0 });
+    var mins = Math.round((ev.secs || 0) / 60), third = Math.abs(m.minus - 1 / 3) < 1e-9;
+    var line = ev.n + " questions, " + mins + " min. Right +" + m.plus + (m.minus ? ", wrong minus " + (third ? "1/3" : m.minus) : ", no negative marking") + ", unanswered 0.";
+    var secs = ev.sections || (prof && prof.navigation && prof.navigation.locked_sections && prof.format && prof.format.sections);
+    if (secs && secs.length > 1) line += " " + secs.length + " locked timed sections.";
+    return line;
   }
   function renderLobby(kind) {
     var now = Date.now(), ev = A.ev && A.ev.kind === kind ? A.ev : pickEvent(A.events, kind, now), title = kind === "weekly" ? "Weekly grand test" : "Daily sprint";
@@ -318,7 +336,16 @@
       if (!items.length) throw new Error("empty");
       var endsAt = ms(j.endsAt || j.ends_at) || ev.end, secs = Number(j.secs) || ev.secs || items.length * 60;
       var limit = Math.max(1, Math.min(secs, Math.floor((endsAt - Date.now()) / 1000)));
-      H.run(items, "exam", ev.kind === "weekly" ? "Weekly grand test" : "Daily sprint", { limit: limit, custom: { submit: submitEvent, render: renderEventResult } });
+      var sections = j.sections || ev.sections || null;
+      var assess = G.PREP_ASSESS, prof = assess && assess.profile ? assess.profile(exam()) : null;
+      var sch = (assess && assess.scheme && prof) ? assess.scheme(prof) : (H.mockOf ? H.mockOf(exam(), exam()) : null);
+      var runOpts = { limit: limit, custom: { submit: submitEvent, render: renderEventResult } };
+      if (sch) runOpts.scheme = sch;
+      if (sections && sections.length) {
+        runOpts.sections = sections;
+        runOpts.limit = 0;
+      }
+      H.run(items, "exam", ev.kind === "weekly" ? "Weekly grand test" : "Daily sprint", runOpts);
     }).then(null, function (e) {
       var el = root() && root().querySelector("#pnLobbyErr");
       btn.textContent = "Start";

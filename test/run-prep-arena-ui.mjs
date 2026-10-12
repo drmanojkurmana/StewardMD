@@ -21,7 +21,7 @@ import fs from "node:fs";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || await freePort()) + "/").replace(/\/?$/, "/");
 const PORT = +(process.env.CHROME_PORT || await freePort()), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/prep-arena-chrome-" + PORT + "-" + Date.now();
-const CHROME = process.env.CHROME || "/opt/pw-browsers/chromium";
+const CHROME = process.env.CHROME || (fs.existsSync("/opt/pw-browsers/chromium") ? "/opt/pw-browsers/chromium" : (fs.existsSync("/opt/pw-browsers/chromium-1194/chrome-linux/chrome") ? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"));
 const FIX = "/test/fixtures/prep/";
 
 let serveProc = null;
@@ -60,7 +60,7 @@ function arena(method, path, body) {
     S.submitted++; S.lastSubmit = body;
     if (S.submitted > 1) return [409, { error: "already-submitted" }];
     let right = 0, wrong = 0; Object.keys(KEY).forEach((id) => { if (body.ans[id] == null) return; if (body.ans[id] === KEY[id]) right++; else wrong++; });
-    return [200, { score: right * 4 - wrong, right, wrong, blank: 5 - right - wrong, ms: 61000, rank: 3, of: 40, key: KEY }];
+    return [200, { score: right * 4 - wrong, right, wrong, blank: 5 - right - wrong, ms: 61000, rank: 3, of: 140, key: KEY }];
   }
   if (/^events\/daily-neet-pg-20261006\/board/.test(path)) return [200, board("score")];
   if (/^board\?exam=neet-pg&period=(week|all)$/.test(path)) return [200, board("rating")];
@@ -159,7 +159,7 @@ try {
   ok(await openPrep(), "PrepNucleus opens with the fixture bank");
   ok(await ev(`return PREP_ARENA.enabled();`) === false, "smd_prep_arena=0 turns the Arena off");
   ok(await ev(`return !document.getElementById("pnCompete") && !Array.from(document.querySelectorAll("#smdPrep .pn-h")).some(function(h){return /Compete/.test(h.textContent);});`) === true, "arena off: no Compete section");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Practise|Subjects|Your progress", "home sections (quiet home, 2026-10-10): Today's plan, Practise, Subjects, Your progress");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|My coaching|Practise|Subjects|Your progress", "home sections (quiet home, 2026-10-10): Today's plan, My coaching, Practise, Subjects, Your progress");
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic svg") && !/[A-Z]{3}/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic").textContent);`) === true, "subject cards carry an SVG icon, not a text monogram");
   await shot("home-off");
   // some local practice so My stats has something to show
@@ -193,7 +193,7 @@ try {
   ok(await until(`var c=document.getElementById("pnCompete"); return !!c && /Live now, ends in 1\\d:\\d\\d/.test(c.textContent) && /Starts in 2 d/.test(c.textContent);`, 8000), "Compete: live daily sprint with its countdown, weekly test coming: " + await ev(`return (document.getElementById("pnCompete")||{}).textContent;`));
   const cd1 = await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`); await sleep(1300);
   ok(await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`) !== cd1, "the countdown ticks");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Practise|Subjects|Your progress|Compete", "home sections (quiet home, 2026-10-10): Today's plan, Practise, Subjects, Your progress, then Compete");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|My coaching|Practise|Subjects|Your progress|Compete", "home sections (quiet home, 2026-10-10): Today's plan, My coaching, Practise, Subjects, Your progress, then Compete");
   await shot("home");
 
   // ---- consent
@@ -229,7 +229,7 @@ try {
   await click("#smdPrep [data-act=next]"); await click('#smdPrep .pn-opt[data-k="0"]');
   await click("#smdPrep [data-act=qgrid]");
   await click("#smdPrep .pn-qgrid + p + [data-act=submit]");
-  ok(await until(`return /Rank 3 of 40/.test(((document.querySelector("#smdPrep .pn-rank")||{}).textContent)||"");`, 5000), "submit shows the server's mark and rank");
+  ok(await until(`return /Rank 3 of 140/.test(((document.querySelector("#smdPrep .pn-rank")||{}).textContent)||"");`, 5000), "submit shows the server's mark and rank");
   ok(S.submitted === 1 && S.lastSubmit && JSON.stringify(S.lastSubmit.ans) === JSON.stringify({ "ev-q1": 0, "ev-q2": 1, "ev-q3": 0 }) && S.lastSubmit.ms >= 0, "submit sends { ans: itemId -> option, ms } once: " + JSON.stringify(S.lastSubmit));
   ok(await ev(`return document.querySelector("#smdPrep .pn-score .pn-big").textContent;`) === "7", "score from the server (2 right x4, 1 wrong -1)");
   ok(await ev(`return /1:01/.test(document.querySelector("#smdPrep .pn-score").textContent);`) === true, "time taken is the server's ms");
@@ -254,9 +254,10 @@ try {
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.getElementById("pnCompete");`, 3000);
 
-  // ---- NEET-SS: Arena coming soon (no bank yet)
+  // ---- NEET-SS: Arena is now open with its question bank
   await ev(`PREP._host.setExam("neet-ss"); return 1;`);
-  ok(await until(`return /NEET-SS Arena: coming soon/.test((document.getElementById("pnCompete")||{}).textContent||"");`, 4000), "NEET-SS Compete says coming soon");
+  ok(await until(`return !!document.querySelector("#smdPrep [data-act=a-battle]");`, 4000), "NEET-SS Compete is open with battle and events");
+  ok(await ev(`return PREP_ARENA._pure.soonFor("plab-1") !== null && PREP_ARENA._pure.soonFor("neet-ss") === null;`), "data-driven coming soon: unbanked says coming soon, NEET-SS is open");
   await shot("home-ss");
   await ev(`PREP._host.setExam("neet-pg"); return 1;`);
   await until(`return !!document.querySelector("#smdPrep [data-act=a-battle]");`, 4000);
