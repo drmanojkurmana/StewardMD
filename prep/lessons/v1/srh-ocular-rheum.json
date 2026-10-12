@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "srh-ocular-rheum",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Ocular manifestations of rheumatic disease",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Anterior uveitis** linked to spondyloarthropathy is typically acute, unilateral and recurrent, often switching between eyes. Patients report pain, photophobia and ciliary flush, and a **hypopyon** may be visible on slit lamp examination. It associates with ankylosing spondylitis, reactive arthritis, psoriasis and inflammatory bowel disease, and carriage of an **HLA class I antigen** strengthens the link. Management starts with topical corticosteroid and cycloplegia, while systemic steroids or biologics are kept for severe or recurrent disease.",
+   "say": "Anterior uveitis linked to spondyloarthropathy is typically acute, unilateral and recurrent, often switching between eyes. Patients report pain, photophobia and ciliary flush, and a hypopyon may be visible on slit lamp examination. It associates with ankylosing spondylitis, reactive arthritis, psoriasis and inflammatory bowel disease, and carriage of a particular class I HLA antigen strengthens the link. Management starts with topical corticosteroid and cycloplegia. Systemic steroids or biologics are kept for severe or recurrent disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "HLA class I antigen carriage"
+     },
+     {
+      "id": "n2",
+      "label": "Acute anterior uveitis"
+     },
+     {
+      "id": "n3",
+      "label": "Topical steroid and cycloplegia"
+     },
+     {
+      "id": "n4",
+      "label": "Screen for spondyloarthropathy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Scleritis** is a painful, deep inflammation of the sclera that can threaten the globe, whereas **episcleritis** is a superficial, self-limiting condition. Necrotising scleritis, especially with inflammation, carries a high risk of systemic vasculitis and needs urgent systemic immunosuppression. Episcleritis usually responds to topical or oral non-steroidal anti-inflammatory drugs. The distinction rests mainly on pain and the depth of inflammation.",
+   "say": "Scleritis is a painful, deep inflammation of the sclera that can threaten the globe, whereas episcleritis is a superficial, self-limiting condition. Necrotising scleritis, especially with inflammation, carries a high risk of systemic vasculitis and needs urgent systemic immunosuppression. Episcleritis usually responds to topical or oral non-steroidal anti-inflammatory drugs. The distinction rests mainly on pain and the depth of inflammation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Episcleritis",
+     "points": [
+      "Superficial inflammation",
+      "Mild, self-limiting",
+      "Often treated with NSAIDs"
+     ]
+    },
+    "right": {
+     "title": "Scleritis",
+     "points": [
+      "Deep, boring pain",
+      "Can cause scleral thinning",
+      "Necrotising form needs systemic therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Keratoconjunctivitis sicca** is the most frequent eye complication of **Sjogren syndrome**. Lymphocytes infiltrate the lacrimal glands, so aqueous tear output falls and the ocular surface dries. The **Schirmer test** measures how far a paper strip wets over a timed interval, and a short wetting length confirms deficiency. First-line care uses lubricating artificial tears and punctal occlusion, while anti-inflammatory eye drops suit moderate disease.",
+   "say": "Keratoconjunctivitis sicca is the most frequent eye complication of Sjogren syndrome. Lymphocytes infiltrate the lacrimal glands, so aqueous tear output falls and the ocular surface dries. The Schirmer test measures how far a paper strip wets over a timed interval, and a short wetting length confirms deficiency. First-line care uses lubricating artificial tears and punctal occlusion, while anti-inflammatory eye drops suit moderate disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test or step",
+     "Finding or action"
+    ],
+    "rows": [
+     [
+      "Schirmer test",
+      "Short wetting length confirms deficiency"
+     ],
+     [
+      "First-line",
+      "Artificial tears, punctal occlusion"
+     ],
+     [
+      "Escalation",
+      "Anti-inflammatory eye drops"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vogt-Koyanagi-Harada disease** is a bilateral granulomatous panuveitis with serous retinal detachment, common in Asian and Indian patients, and is treated with high-dose oral corticosteroids. Early introduction of a **steroid-sparing agent** reduces chronic recurrence. The **VISUAL trials** showed that adalimumab reduced uveitic flares and allowed steroid tapering in non-infectious uveitis, including panuveitis. Chronic disease can leave a sunset glow fundus.",
+   "say": "Vogt-Koyanagi-Harada disease is a bilateral granulomatous panuveitis with serous retinal detachment, common in Asian and Indian patients, and is treated with high-dose oral corticosteroids. Early introduction of a steroid-sparing agent reduces chronic recurrence. The VISUAL trials showed that adalimumab reduced uveitic flares and allowed steroid tapering in non-infectious uveitis, including panuveitis. Chronic disease can leave a sunset glow fundus.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_5cfabdfed5d3",
+  "q_6bc5c05b1c36",
+  "q_c8e22abd2da3"
+ ],
+ "src": [],
+ "refs": [
+  "Kanski's Clinical Ophthalmology",
+  "Ophthalmology by Yanoff and Duker"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

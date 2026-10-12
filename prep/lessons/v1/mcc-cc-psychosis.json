@@ -1,0 +1,155 @@
+{
+ "v": 1,
+ "module": "mcc-cc-psychosis",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic psychotic disorders: long-term management essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Chronic psychotic disorders, chiefly **schizophrenia**, usually need **maintenance antipsychotic treatment** for years, because relapse is common after stopping. Relapse is most often driven by missed doses. The core goals are preventing relapse, controlling symptoms, protecting function and monitoring side effects. Treatment decisions should be shared with the patient and family wherever possible.",
+   "say": "Chronic psychotic disorders, chiefly schizophrenia, usually need maintenance antipsychotic treatment for years, because relapse is common after stopping. Relapse is most often driven by missed doses. The core goals are preventing relapse, controlling symptoms, protecting function and monitoring side effects. Treatment decisions should be shared with the patient and family wherever possible.",
+   "vis": null
+  },
+  {
+   "tx": "**Treatment resistance** is defined by poor response to at least two antipsychotic trials, each at adequate dose and duration, with adherence confirmed. In this setting **clozapine** is the most effective option. Its serious risk is **neutropenia**, so regular absolute neutrophil count monitoring is mandatory under the prescribing programme. Clozapine should be used deliberately, not as a default for every first episode.",
+   "say": "Treatment resistance is defined by poor response to at least two antipsychotic trials, each at adequate dose and duration, with adherence confirmed. In this setting clozapine is the most effective option. Its serious risk is neutropenia, so regular absolute neutrophil count monitoring is mandatory under the prescribing programme. Clozapine should be used deliberately, not as a default for every first episode.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clozapine use",
+     "points": [
+      "Start after two failed adequate trials",
+      "Mandatory neutrophil monitoring",
+      "Reduces suicide risk in schizophrenia"
+     ]
+    },
+    "right": {
+     "title": "Clozapine cautions",
+     "points": [
+      "Fever with low neutrophils is an emergency",
+      "Myocarditis early in treatment",
+      "Smoking change alters levels"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Clozapine emergencies** need quick recognition. Fever with severe neutropenia, such as an absolute neutrophil count of 0.5 x10^9/L or less, requires stopping clozapine and urgent admission. Early myocarditis can present with fever, chest pain and tachycardia, needing stopping, ECG and troponin. **Smoking cessation** raises clozapine levels through loss of CYP1A2 induction, so levels should be checked and the dose reduced.",
+   "say": "Clozapine emergencies need quick recognition. Fever with severe neutropenia, such as an absolute neutrophil count of 0.5 x10^9 per litre or less, requires stopping clozapine and urgent admission. Early myocarditis can present with fever, chest pain and tachycardia, needing stopping, an ECG and troponin. Smoking cessation raises clozapine levels through loss of CYP1A2 induction, so levels should be checked and the dose reduced.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Likely problem",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Fever, low neutrophils",
+      "Severe neutropenia",
+      "Stop clozapine, admit urgently"
+     ],
+     [
+      "Fever, chest pain, tachycardia",
+      "Myocarditis",
+      "Stop, ECG, troponin, cardiology"
+     ],
+     [
+      "Sedation, drooling after quitting smoking",
+      "Raised clozapine level",
+      "Check level, reduce dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tardive dyskinesia** follows long-term dopamine-blocking exposure, with rhythmic tongue protrusion and lip smacking typical. The first step is to review and reduce or switch the antipsychotic, since some movements may improve. **Acute dystonia** is different: it appears within days and is relieved by anticholinergic medication such as benztropine. Anticholinergics do not treat tardive dyskinesia, which may need a VMAT2 inhibitor if persistent.",
+   "say": "Tardive dyskinesia follows long-term dopamine-blocking exposure, with rhythmic tongue protrusion and lip smacking typical. The first step is to review and reduce or switch the antipsychotic, since some movements may improve. Acute dystonia is different: it appears within days and is relieved by anticholinergic medication such as benztropine. Anticholinergics do not treat tardive dyskinesia, which may need a VMAT2 inhibitor if persistent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tardive dyskinesia",
+     "points": [
+      "Late, after months to years",
+      "Orofacial rhythmic movements",
+      "Review or switch antipsychotic first"
+     ]
+    },
+    "right": {
+     "title": "Acute dystonia",
+     "points": [
+      "Within days of starting or raising dose",
+      "Neck, jaw or tongue spasm",
+      "Benztropine relieves it quickly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Long-acting injectable antipsychotics** suit patients with recurrent relapse after stopping oral tablets, particularly when adherence is the problem. Paliperidone palmitate is one example. They deliver steady drug levels and need fewer administrations. Consent and capacity must be respected: if a patient lacks decision-specific capacity, a legally recognised substitute decision-maker decides in the patient's best interests.",
+   "say": "Long-acting injectable antipsychotics suit patients with recurrent relapse after stopping oral tablets, particularly when adherence is the problem. Paliperidone palmitate is one example. They deliver steady drug levels and need fewer administrations. Consent and capacity must be respected: if a patient lacks decision-specific capacity, a legally recognised substitute decision-maker decides in the patient's best interests.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Recurrent relapse"
+     },
+     {
+      "id": "b",
+      "label": "Assess capacity"
+     },
+     {
+      "id": "c",
+      "label": "Capacity present: offer LAI"
+     },
+     {
+      "id": "d",
+      "label": "Capacity absent: substitute decides"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "mk-5a531442f39c",
+  "mk-293b0296f17b",
+  "mk-38c053a415f2"
+ ],
+ "src": [],
+ "refs": [
+  "Canadian Schizophrenia Guidelines (Kolivakis et al.)",
+  "Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition (American Psychiatric Association)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

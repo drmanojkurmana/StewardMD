@@ -1,0 +1,167 @@
+{
+ "v": 1,
+ "module": "sgm-cardiac-investigations",
+ "subject": "ss-general-medicine",
+ "title": "Cardiac imaging and investigations: choosing and reading the right test",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Cardiac imaging answers three questions: is the heart structurally normal, is the myocardium receiving enough blood at rest or under stress, and is there scar or infiltration. **Transthoracic echocardiography** is the first-line bedside tool for structure and function. **Stress testing** unmasks ischaemia, while **cardiac MRI** characterises tissue. Choose the test that answers the clinical question, not the most advanced one.",
+   "say": "Cardiac imaging answers three questions. Is the heart structurally normal? Is the myocardium receiving enough blood at rest or under stress? Is there scar or infiltration? Transthoracic echocardiography is the first-line bedside tool for structure and function. Stress testing unmasks ischaemia, while cardiac MRI characterises tissue. Choose the test that answers the clinical question, not the most advanced one.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Main question answered"
+    ],
+    "rows": [
+     [
+      "Transthoracic echo",
+      "Structure, ejection fraction, wall motion"
+     ],
+     [
+      "Stress testing",
+      "Inducible ischaemia and functional risk"
+     ],
+     [
+      "Cardiac MRI",
+      "Tissue scar, oedema, volumes"
+     ],
+     [
+      "CT coronary angiography",
+      "Coronary anatomy and plaque"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Echocardiography assesses **ejection fraction** and regional wall motion, with the heart divided into standard segments for reporting. **Global longitudinal strain** quantifies how much the myocardium stretches and shortens, and it frequently becomes abnormal before ejection fraction falls. Ischaemia shows up as a new regional wall motion abnormality confined to one coronary territory, for example the lateral wall supplied by the left circumflex artery.",
+   "say": "Echocardiography assesses ejection fraction and regional wall motion, with the heart divided into standard segments for reporting. Global longitudinal strain quantifies how much the myocardium stretches and shortens, and it often becomes abnormal before ejection fraction falls. Ischaemia shows up as a new regional wall motion abnormality confined to one coronary territory, for example the lateral wall supplied by the left circumflex artery.",
+   "vis": null
+  },
+  {
+   "tx": "Exercise treadmill testing can be scored with the **Duke treadmill score**, which combines exercise duration, the amount of **ST segment depression** and the **angina index** into one risk value. A high score signals low risk, a middle-range score calls for further assessment, and a low score marks high risk. Where wall motion or Doppler data are needed, bicycle ergometry allows simultaneous echo assessment. In patients on beta-blockers, **atropine** may help reach target heart rate during dobutamine stress.",
+   "say": "Exercise treadmill testing can be scored with the Duke treadmill score, which combines exercise duration, the amount of ST segment depression and the angina index into one risk value. A high score signals low risk, a middle-range score calls for further assessment, and a low score marks high risk. Where wall motion or Doppler data are needed, bicycle ergometry allows simultaneous echo assessment. In patients on beta-blockers, atropine may help reach target heart rate during dobutamine stress.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Duke band",
+     "Score",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Low risk",
+      "High score",
+      "Low annual event risk"
+     ],
+     [
+      "Intermediate",
+      "Middle-range score",
+      "Needs further testing"
+     ],
+     [
+      "High risk",
+      "Low score",
+      "High event risk, consider angiography"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **coronary artery calcium score** quantifies calcified plaque; a score of zero makes obstructive disease unlikely in low to intermediate risk patients. **CT coronary angiography** images the lumen and plaque non-invasively and has a high negative predictive value. Calcium does not measure stenosis directly, and heavy calcification causes blooming artefact that can overestimate narrowing.",
+   "say": "A coronary artery calcium score quantifies calcified plaque. A score of zero makes obstructive disease unlikely in low to intermediate risk patients. CT coronary angiography images the lumen and plaque non-invasively and has a high negative predictive value. Calcium does not measure stenosis directly, and heavy calcification causes blooming artefact that can overestimate narrowing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Calcium score",
+     "points": [
+      "Counts calcified plaque",
+      "Zero score makes obstruction unlikely",
+      "Does not show lumen narrowing",
+      "Useful for risk reclassification"
+     ]
+    },
+    "right": {
+     "title": "CT angiography",
+     "points": [
+      "Images lumen and plaque",
+      "High negative predictive value",
+      "Blooming artefact with calcium",
+      "Uses iodinated contrast and radiation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cardiac MRI is the reference standard for ventricular volumes and ejection fraction. **Late gadolinium enhancement** shows scar; a subendocardial pattern suggests ischaemic infarction, while mid-wall patchy enhancement suggests non-ischaemic myocarditis or cardiomyopathy. **Myocardial perfusion scintigraphy** using SPECT or PET detects reversible perfusion defects during stress and helps locate ischaemia.",
+   "say": "Cardiac MRI is the reference standard for ventricular volumes and ejection fraction. Late gadolinium enhancement shows scar. A subendocardial pattern suggests ischaemic infarction, while mid-wall patchy enhancement suggests non-ischaemic myocarditis or cardiomyopathy. Myocardial perfusion scintigraphy using SPECT or PET detects reversible perfusion defects during stress and helps locate ischaemia.",
+   "vis": null
+  },
+  {
+   "tx": "High sensitivity troponin assays compare results against an **upper reference limit** set for each assay, usually at a high percentile of a healthy population. A rise or fall beyond that limit, together with ischaemic symptoms, defines **myocardial infarction**. **Type 2 infarction** arises from a supply and demand mismatch, for example severe anaemia, rather than plaque rupture. **Fractional flow reserve** below the accepted cut-off, expressed as a low pressure ratio, flags a haemodynamically significant lesion when invasive testing is needed.",
+   "say": "High sensitivity troponin assays compare results against an upper reference limit set for each assay, usually at a high percentile of a healthy population. A rise or fall beyond that limit, together with ischaemic symptoms, defines myocardial infarction. Type 2 infarction arises from a supply and demand mismatch, for example severe anaemia, rather than plaque rupture. Fractional flow reserve below the accepted cut off, expressed as a low pressure ratio, flags a haemodynamically significant lesion when invasive testing is needed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ischaemic symptoms"
+     },
+     {
+      "id": "b",
+      "label": "hs-troponin above upper reference limit"
+     },
+     {
+      "id": "c",
+      "label": "Rise or fall on serial samples"
+     },
+     {
+      "id": "d",
+      "label": "Type 1 or Type 2 infarction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_7ce1cf822cd5",
+  "q_57f8d61345d4",
+  "q_97bd423ad62d"
+ ],
+ "src": [],
+ "refs": [
+  "2023 ESC Guidelines for the management of acute coronary syndromes",
+  "Lang RM et al. Recommendations for cardiac chamber quantification by echocardiography in adults, Journal of the American Society of Echocardiography 2015",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 16
+ }
+}
