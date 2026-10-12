@@ -385,8 +385,20 @@ export function topicKbForModule({ title, lessonTitle, cited, kb }) {
   // the lesson-citation and lesson-word scores then separate).
   const named = docs.filter((d) => { const n = norm(d.name); return n === nt || n.startsWith(nt + " ") || (d.aliases || []).some((a) => norm(a) === nt); });
   if (named.length) return pick(named);
-  if (tw.length < 2) return null;
-  return pick(docs.filter((d) => citedSet.has(d.id) && tw.every((w) => words(d.name).includes(w))));
+  if (tw.length >= 2) {
+    const hit = pick(docs.filter((d) => citedSet.has(d.id) && tw.every((w) => words(d.name).includes(w))));
+    if (hit) return hit;
+  }
+  // One-word or qualified module titles ("Appendix"): the module's own lesson title names the topic, so
+  // its comma/and-separated headings get the same exact-or-prefix test ("Acute Appendicitis" from
+  // "Acute Appendicitis and Appendage Torsion"). A heading needs two significant words.
+  for (const part of String(lessonTitle || "").split(/,|\band\b/i)) {
+    const np = norm(part);
+    if (!np || sigWords(part).length < 2) continue;
+    const hit = pick(docs.filter((d) => { const n = norm(d.name); return n === np || n.startsWith(np + " "); }));
+    if (hit) return hit;
+  }
+  return null;
 }
 /* addTopicLinks(links, it, ctx) -> links (mutated). ctx: { mid, sid, topics, lessons, bridge, midSid, images }.
    lessons: Map(mid -> [{ key, title, own }]). images: Map(basename -> { l, step }). */

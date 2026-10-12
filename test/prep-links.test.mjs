@@ -78,8 +78,9 @@ test("topicKbForModule: exact, lesson-cited, ambiguous and off-topic cases", () 
   const cited = new Set(["heart_failure_management", "heart_failure_pathophysiology_and_diagnosi", "acute_appendicitis", "pseudomyxoma_peritonei"]);
   assert.deepEqual(topicKbForModule({ title: "Heart failure", lessonTitle: "Management of Heart Failure with Reduced Ejection Fraction", cited, kb }),
     { id: "heart_failure_management", title: "Heart Failure: Management" }, "the lesson's management article, not the pathophysiology one");
-  assert.deepEqual(topicKbForModule({ title: "Appendix", lessonTitle: "Acute Appendicitis and Appendage Torsion", cited, kb }), null,
-    "appendix alone is not an exact or contained match, so nothing is invented");
+  assert.deepEqual(topicKbForModule({ title: "Appendix", lessonTitle: "Acute Appendicitis and Appendage Torsion", cited, kb }),
+    { id: "acute_appendicitis", title: "Acute Appendicitis and Peritonitis" },
+    "a one-word module title resolves through its own lesson's heading, never to the cited differentials");
   assert.deepEqual(topicKbForModule({ title: "Acute appendicitis", lessonTitle: "", cited: new Set(), kb }),
     { id: "acute_appendicitis", title: "Acute Appendicitis and Peritonitis" }, "an exact alias match needs no citation");
   assert.equal(topicKbForModule({ title: "Heart failure", lessonTitle: "", cited, kb }), null, "a tie with no lesson words stays unlinked");
