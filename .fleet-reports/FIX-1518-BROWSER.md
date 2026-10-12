@@ -100,3 +100,16 @@ in CI post-fix).
 - Heads-up: `test/run-premium-motion-ui.mjs` §7 builds a `role=dialog` fixture whose tap
   previously ran a transition; post-fix it applies synchronously and its asserts
   (`__open===1`, no menu) still hold. That harness has no CI runner (manual only).
+
+## Addendum: two process gaps found while landing the fix
+
+- The motion commit's OWN head (`edebc4761`) ran Tokos UI in CI and FAILED the same
+  check, yet still merged to main. Red-on-its-own-PR is the signal; please do not merge
+  motion-layer (or any global-boot-script) PRs over a red Tokos/Narke browser job.
+- `tokos-ui.yml` path filters did not watch `view-transitions.js`: a future edit to that
+  file alone would re-break Tokos with no browser run. Fixed in this branch by adding
+  `view-transitions.js` to both `paths` lists (which also re-triggered the browser job
+  for this PR after the main-merge absorbed the `index.html` token diff).
+- CI scheduling lag observed ~16:40-16:55 UTC: three pushes produced zero Actions runs
+  for ~15 min (status page green, other branches ran at 16:47), then the merge push ran
+  normally. If a push shows no runs after 5 min, wait before assuming a filter problem.
