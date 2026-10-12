@@ -26,3 +26,9 @@ Log:
   parse (all 180 bad-output); switched to output_config json_schema + engine gates
   + mrcp-* sid mapping (4 out-of-syllabus histology images dropped, 176 remain).
   NOTE: /tmp/mrcp-wt worktree vanished; adopted /private/tmp/bank-mrcp-wt.
+- 2026-10-12 (restart, agy worker): verified text waves a-d DONE post-upgrade:
+  2454 passed with explanations (P1 1392, P2 1062) + 309 review-queue.
+  mrcp-img verify+upgrade DONE: 61 passed (all P2, CC-licensed, files staged) + 14 review.
+  Appended 2763 wave stems to pipe dedup harvest (cross-wave protection).
+  Launched mrcp-e P2-weighted top-up (all 16 subjects, P1 n=2/P2 n=6, 1024 req;
+  gen batch msgbatch_01Gwjt8MJD82J8XKtTgnFPgq). Spend ~$8.12/$18.
