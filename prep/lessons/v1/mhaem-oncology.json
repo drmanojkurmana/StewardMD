@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "mhaem-oncology",
+ "subject": "mrcp-haematology-oncology",
+ "title": "Suspected cancer: recognition and referral",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "NICE NG12 is the main UK framework for recognising suspected cancer in primary care. It lists **symptom clusters**, age thresholds and specific tests that trigger a **suspected cancer pathway referral**, or an **urgent direct access investigation**. Learn the trigger first, then decide the route. Referral criteria are separate from criteria to consider investigation.",
+   "say": "NICE NG12 is the main UK framework for recognising suspected cancer in primary care. It lists symptom clusters, age thresholds and specific tests that trigger a suspected cancer pathway referral, or an urgent direct access investigation. Learn the trigger first, then decide the route. Referral criteria are separate from criteria to consider investigation.",
+   "vis": null
+  },
+  {
+   "tx": "Jaundice in people aged 40 and over is a direct trigger for **pancreatic cancer** referral. Painless jaundice with pale stools should not be managed with a trial of ursodeoxycholic acid or a repeat blood test. Benign causes such as gallstones must still be excluded, but they must not delay the referral.",
+   "say": "Jaundice in people aged 40 and over is a direct trigger for pancreatic cancer referral. Painless jaundice with pale stools should not be managed with a trial of ursodeoxycholic acid or a repeat blood test. Benign causes such as gallstones must still be excluded, but they must not delay the referral.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Jaundice aged 40 plus"
+     },
+     {
+      "id": "b",
+      "label": "Suspected pancreatic cancer referral"
+     },
+     {
+      "id": "c",
+      "label": "Benign causes excluded in parallel"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weight loss with new-onset diabetes in people aged 60 and over prompts an **urgent direct access CT** for pancreatic cancer. Ultrasound is the alternative only if CT is unavailable. Back pain or abdominal pain alone is not enough, but combined with these features it strengthens concern.",
+   "say": "Weight loss with new-onset diabetes in people aged 60 and over prompts an urgent direct access CT for pancreatic cancer. Ultrasound is the alternative only if CT is unavailable. Back pain or abdominal pain alone is not enough, but combined with these features it strengthens concern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Presentation",
+     "Suggested action"
+    ],
+    "rows": [
+     [
+      "Jaundice, age 40 plus",
+      "Suspected cancer referral"
+     ],
+     [
+      "Weight loss and new diabetes, age 60 plus",
+      "Urgent direct access CT"
+     ],
+     [
+      "CT unavailable",
+      "Ultrasound as alternative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For lung cancer, an **urgent direct access chest X-ray** is used for people aged 40 and over with two or more unexplained symptoms, or with ever smoking and one or more. Unexplained haemoptysis at this age is a separate referral trigger. A normal chest X-ray can be falsely reassuring, so persistent symptoms need re-evaluation.",
+   "say": "For lung cancer, an urgent direct access chest X-ray is used for people aged 40 and over with two or more unexplained symptoms, or with ever smoking and one or more. Unexplained haemoptysis at this age is a separate referral trigger. A normal chest X-ray can be falsely reassuring, so persistent symptoms need re-evaluation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chest X-ray route",
+     "points": [
+      "Age 40 plus, two or more symptoms",
+      "Ever smoker with one or more symptom"
+     ]
+    },
+    "right": {
+     "title": "Direct referral route",
+     "points": [
+      "Unexplained haemoptysis, age 40 plus",
+      "Referral made regardless of normal X-ray"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For colorectal cancer, **quantitative FIT** guides referral in primary care for several presentations, including anaemia in people aged 60 and over without iron deficiency. A rectal mass is an exception: a palpable mass goes straight to referral consideration, without FIT. A negative FIT never dismisses ongoing symptoms.",
+   "say": "For colorectal cancer, quantitative FIT guides referral in primary care for several presentations, including anaemia in people aged 60 and over without iron deficiency. A rectal mass is an exception: a palpable mass goes straight to referral consideration, without FIT. A negative FIT never dismisses ongoing symptoms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anaemia or bleeding"
+     },
+     {
+      "id": "b",
+      "label": "Rectal mass on exam?"
+     },
+     {
+      "id": "c",
+      "label": "Consider referral directly"
+     },
+     {
+      "id": "d",
+      "label": "Quantitative FIT"
+     },
+     {
+      "id": "e",
+      "label": "Refer if above threshold"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Upper GI cancers need attention to **dysphagia**, which is a referral trigger on its own. Treatment-resistant dyspepsia at age 55 and over prompts consideration of non-urgent direct access endoscopy, while weight loss with upper abdominal symptoms at this age triggers referral. Once referral criteria are met, they take precedence over treatment trials.",
+   "say": "Upper GI cancers need attention to dysphagia, which is a referral trigger on its own. Treatment-resistant dyspepsia at age 55 and over prompts consideration of non-urgent direct access endoscopy, while weight loss with upper abdominal symptoms at this age triggers referral. Once referral criteria are met, they take precedence over treatment trials.",
+   "vis": null
+  },
+  {
+   "tx": "Once the decision to refer is made, NG12 requires the referral within **1 working day**. The letter must state whether the referral is urgent or non-urgent. The two-week wait is an appointment target and is separate from the timing of the referral itself. Local systems should track people who miss appointments.",
+   "say": "Once the decision to refer is made, NG12 requires the referral within 1 working day. The letter must state whether the referral is urgent or non-urgent. The two-week wait is an appointment target and is separate from the timing of the referral itself. Local systems should track people who miss appointments.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG12 Suspected cancer: recognition and referral"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 29
+ }
+}

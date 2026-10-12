@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "mcc-pb-indigenous",
+ "subject": "mcc-professional-behaviours",
+ "title": "Indigenous cultural safety in clinical practice",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Cultural safety** means care is shaped by the patient's experience, not only by the clinician's intent. Patients who feel dismissed, judged or unheard often miss follow-up, delay care or withhold information. For Indigenous patients in Canada, this link to colonial history and mistrust is well recognised. In India, the parallel concern is equitable access and respect for tribal and adivasi communities, and the same principles apply.",
+   "say": "Cultural safety means care is shaped by the patient's experience, not only by the clinician's intent. Patients who feel dismissed, judged or unheard often miss follow-up, delay care or withhold information. For Indigenous patients in Canada, this link to colonial history and mistrust is well recognised. In India, the parallel concern is equitable access and respect for tribal and adivasi communities, and the same principles apply.",
+   "vis": null
+  },
+  {
+   "tx": "Start by asking the patient who they want involved in planning care. A patient with capacity decides who attends and who receives information. Family or Elders may be included at her request. Asking about preferences respects **autonomy** and builds **trust**, which are the two barriers most often driving missed appointments and poor glycaemic control.",
+   "say": "Start by asking the patient who they want involved in planning care. A patient with capacity decides who attends and who receives information. Family or Elders may be included at her request. Asking about preferences respects autonomy and builds trust, which are the two barriers most often driving missed appointments and poor glycaemic control.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ask preferences"
+     },
+     {
+      "id": "b",
+      "label": "Confirm support people"
+     },
+     {
+      "id": "c",
+      "label": "Co-plan care"
+     },
+     {
+      "id": "d",
+      "label": "Review engagement"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a patient lacks capacity, a legally recognised **substitute decision-maker** decides in her best interests and in line with her known wishes. Consult family and trusted Elders, but do not assume they hold legal authority. Capacity is decision-specific and should be reassessed as the patient's condition changes.",
+   "say": "When a patient lacks capacity, a legally recognised substitute decision-maker decides in her best interests and in line with her known wishes. Consult family and trusted Elders, but do not assume they hold legal authority. Capacity is decision-specific and should be reassessed as the patient's condition changes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Capacity present",
+     "points": [
+      "Patient decides",
+      "Chooses who is involved",
+      "Consent from the patient"
+     ]
+    },
+    "right": {
+     "title": "Capacity absent",
+     "points": [
+      "Legal substitute decides",
+      "Best interests and known wishes",
+      "Family and Elders consulted"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Take a full history before starting treatment. Ask openly about **traditional remedies** and herbal products, because patients often hide them when they fear judgement. Some remedies affect blood pressure, fluid balance, kidney function or interact with prescribed drugs. Document what is used, respond without criticism, and then adjust the plan.",
+   "say": "Take a full history before starting treatment. Ask openly about traditional remedies and herbal products, because patients often hide them when they fear judgement. Some remedies affect blood pressure, fluid balance, kidney function or interact with prescribed drugs. Document what is used, respond without criticism, and then adjust the plan.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Issue",
+     "Why it matters",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Herbal remedy",
+      "Can alter blood pressure",
+      "Ask and record"
+     ],
+     [
+      "Fluid retention",
+      "May mimic cardiac cause",
+      "Assess oedema"
+     ],
+     [
+      "Kidney effect",
+      "Some remedies nephrotoxic",
+      "Check creatinine"
+     ],
+     [
+      "Judgement fear",
+      "Hidden use",
+      "Respond calmly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Discriminatory remarks about Indigenous patients must be addressed, even when the person making them is more senior. Raise the **concern privately** with the colleague first, then escalate through **local reporting pathways** if the behaviour continues. Avoid public confrontation, which can entrench defensiveness. Absent patients still merit **dignity**, and documentation must stick to **verified clinical findings** rather than assumptions.",
+   "say": "Discriminatory remarks about Indigenous patients must be addressed, even when the person making them is more senior. Raise the concern privately with the colleague first, then escalate through local reporting pathways if the behaviour continues. Avoid public confrontation, which can entrench defensiveness. Absent patients still merit dignity, and documentation must stick to verified clinical findings rather than assumptions.",
+   "vis": null
+  },
+  {
+   "tx": "Judge each clinical problem on current findings, not on past labels such as drug-seeking or difficult. Prior notes can anchor clinicians and lead to undertreatment of pain. Reassess pain directly, check for red flags, and review response to analgesia. For opioid use disorder, offer **buprenorphine-naloxone** where there is no contraindication, alongside Elder-supported care. Naloxone reverses overdose but does not treat the disorder.",
+   "say": "Judge each clinical problem on current findings, not on past labels such as drug-seeking or difficult. Prior notes can anchor clinicians and lead to undertreatment of pain. Reassess pain directly, check for red flags, and review response to analgesia. For opioid use disorder, offer buprenorphine-naloxone where there is no contraindication, alongside Elder-supported care. Naloxone reverses overdose but does not treat the disorder.",
+   "vis": null
+  },
+  {
+   "tx": "Research using community data needs **collective governance**. Under **Indigenous data sovereignty**, the community agrees on how its information is accessed and used before any analysis starts. Personal consent, anonymising records and university ethics approval do not substitute for that community agreement. Clinical follow-up should also account for travel and distance, relying where possible on local blood testing and community health workers.",
+   "say": "Research using community data needs collective governance. Under Indigenous data sovereignty, the community agrees on how its information is accessed and used before any analysis starts. Personal consent, anonymising records and university ethics approval do not substitute for that community agreement. Clinical follow-up should also account for travel and distance, relying where possible on local blood testing and community health workers.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Canadian Medical Association Code of Ethics and Professionalism",
+  "National Collaborating Centre for Indigenous Health (Indigenous data sovereignty principles)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

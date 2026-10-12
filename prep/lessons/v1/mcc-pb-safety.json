@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "mcc-pb-safety",
+ "subject": "mcc-professional-behaviours",
+ "title": "Patient safety and reporting",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Patient safety means preventing harm from care that should help. An **adverse event** causes harm, while a **near miss** is an error caught before it reaches the patient. Both matter, because near misses reveal hazards before they injure anyone. Indian hospitals are guided by NMC expectations and NABH standards for incident reporting. Learn to tell these terms apart quickly in the exam.",
+   "say": "Patient safety means preventing harm from care that should help. An adverse event causes harm, while a near miss is an error caught before it reaches the patient. Both matter, because near misses reveal hazards before they injure anyone. Indian hospitals are guided by NMC expectations and NABH standards for incident reporting. Learn to tell these terms apart quickly in the exam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Meaning",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Adverse event",
+      "Harm reached the patient",
+      "Wrong-patient insulin causing hypoglycaemia"
+     ],
+     [
+      "Near miss",
+      "Error caught before harm",
+      "Wrong strength label corrected before dosing"
+     ],
+     [
+      "Sentinel event",
+      "Serious unexpected harm",
+      "Death from a preventable error"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Errors are usually produced by **latent system weaknesses**, such as confusing labels, poor order design or ignored alerts, rather than by one careless person. Reporting is therefore non-punitive in intent. A **just culture** separates honest human error from reckless conduct, so staff feel safe to speak up. Fear of blame is the most common reason reports go missing.",
+   "say": "Errors are usually produced by latent system weaknesses, such as confusing labels, poor order design or ignored alerts, rather than by one careless person. Reporting is therefore non-punitive in intent. A just culture separates honest human error from reckless conduct, so staff feel safe to speak up. Fear of blame is the most common reason reports go missing.",
+   "vis": null
+  },
+  {
+   "tx": "When an error causes harm, the **duty of candour** applies. Clinicians should tell the patient, or family where the patient lacks capacity, promptly and honestly. Disclosure should explain what happened, what is being done and include an apology. The investigation runs alongside disclosure and does not delay it. Hiding or deferring disclosure breaches trust and professional standards.",
+   "say": "When an error causes harm, the duty of candour applies. Clinicians should tell the patient, or family where the patient lacks capacity, promptly and honestly. Disclosure should explain what happened, what is being done and include an apology. The investigation runs alongside disclosure and does not delay it. Hiding or deferring disclosure breaches trust and professional standards.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Harm recognised"
+     },
+     {
+      "id": "b",
+      "label": "Stabilise patient"
+     },
+     {
+      "id": "c",
+      "label": "Open disclosure"
+     },
+     {
+      "id": "d",
+      "label": "Report and review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Every adverse event and near miss should be reported through the **internal safety event report**. Reporting feeds trend analysis and supports a **root cause analysis**, which looks at system causes rather than blaming individuals. Do not alter, delete or add retrospective entries to the medical record once a complaint or review is open. Such records are potential evidence, and uncertain late notes mislead later readers.",
+   "say": "Every adverse event and near miss should be reported through the internal safety event report. Reporting feeds trend analysis and supports a root cause analysis, which looks at system causes rather than blaming individuals. Do not alter, delete or add retrospective entries to the medical record once a complaint or review is open. Such records are potential evidence, and uncertain late notes mislead later readers.",
+   "vis": null
+  },
+  {
+   "tx": "Support for staff matters after an adverse event. Involved clinicians may feel guilt and distress, a response called the **second victim** effect. Confidential peer support and wellness resources help them stay engaged in review and disclosure. Patient identification is a common error source, so use **two independent identifiers** checked against the request at every collection and administration. Wristband checks beat relying on names on bed sheets.",
+   "say": "Support for staff matters after an adverse event. Involved clinicians may feel guilt and distress, a response called the second victim effect. Confidential peer support and wellness resources help them stay engaged in review and disclosure. Patient identification is a common error source, so use two independent identifiers checked against the request at every collection and administration. Wristband checks beat relying on names on bed sheets.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Weak practice",
+     "points": [
+      "Name from bed sheet",
+      "Bed number as identifier",
+      "Labels written later"
+     ]
+    },
+    "right": {
+     "title": "Safer practice",
+     "points": [
+      "Two identifiers checked",
+      "Wristband read at bedside",
+      "Labels made at the bedside"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "National Medical Commission, Indian Medical Council (Professional Conduct) Regulations",
+  "NABH Standards for Hospitals, Patient Safety chapter"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

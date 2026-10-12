@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "mcc-pb-interpreters",
+ "subject": "mcc-professional-behaviours",
+ "title": "Language barriers and interpreters",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Patients with **limited English proficiency** can be harmed when communication is poor. Accurate history, informed consent and safe discharge all depend on the patient and clinician understanding each other directly. A **qualified professional interpreter** is the standard of care, not a courtesy.",
+   "say": "Patients with limited English proficiency can be harmed when communication is poor. Accurate history, informed consent and safe discharge all depend on the patient and clinician understanding each other directly. A qualified professional interpreter is the standard of care, not a courtesy.",
+   "vis": null
+  },
+  {
+   "tx": "Family members, particularly children, should not act as **interpreters** in clinical encounters. They may leave out, soften or filter what is said, and **confidentiality** is lost. Even when a fluent relative is willing and the patient requests their presence, a **qualified interpreter** is still preferred for sensitive topics such as gynaecological symptoms or possible abuse.",
+   "say": "Family members, particularly children, should not act as interpreters in clinical encounters. They may leave out, soften or filter what is said, and confidentiality is lost. Even when a fluent relative is willing and the patient requests their presence, a qualified interpreter is still preferred for sensitive topics such as gynaecological symptoms or possible abuse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Family interpreting",
+     "points": [
+      "Risks omission and filtering",
+      "Breaches confidentiality",
+      "Child interpreters unsuitable",
+      "Relationship may distort answers"
+     ]
+    },
+    "right": {
+     "title": "Qualified interpreter",
+     "points": [
+      "Accurate, faithful translation",
+      "Confidential by design",
+      "Allows private history",
+      "Supports verifiable consent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When a patient needs urgent treatment, clinicians should not hold care until a qualified **interpreter** arrives. The **emergency exception** allows time-critical treatment when waiting would risk serious harm. Meanwhile, teams keep arranging language support so that informed consent and communication can follow as soon as possible.",
+   "say": "When a patient needs urgent care, staff should not delay treatment until a qualified interpreter turns up. The emergency exception permits time-critical treatment when waiting would threaten serious harm. Meanwhile, the team keeps working to secure language support, so consent and communication can follow as quickly as possible.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Time-critical emergency"
+     },
+     {
+      "id": "b",
+      "label": "Interpreter unavailable"
+     },
+     {
+      "id": "c",
+      "label": "Treat under emergency exception"
+     },
+     {
+      "id": "d",
+      "label": "Pursue interpreter in parallel"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confirming understanding needs more than nodding or saying yes. **Teach-back** asks the patient to restate the diagnosis, dose, timing and warning signs in their own words, through the interpreter. This exposes gaps that passive methods miss, and it is especially important for high-risk drugs such as anticoagulants or oral iron.",
+   "say": "Confirming understanding needs more than nodding or saying yes. Teach-back asks the patient to restate the diagnosis, dose, timing and warning signs in their own words, through the interpreter. This exposes gaps that passive methods miss, and it is especially important for high-risk drugs such as anticoagulants or oral iron.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Reliable?"
+    ],
+    "rows": [
+     [
+      "Nodding or saying yes",
+      "No, may reflect courtesy"
+     ],
+     [
+      "Asking if questions exist",
+      "Weak, often no response"
+     ],
+     [
+      "Signed English form only",
+      "No, not comprehension"
+     ],
+     [
+      "Teach-back via interpreter",
+      "Yes, tests understanding"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

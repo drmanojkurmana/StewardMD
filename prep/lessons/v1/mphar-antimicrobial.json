@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "mphar-antimicrobial",
+ "subject": "mrcp-pharmacology",
+ "title": "Antimicrobial prescribing and stewardship",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Antimicrobial **stewardship** means using antibiotics so that each patient gets the right drug, dose, route and duration, while limiting resistance across the population. Every prescribing decision begins with a clinical assessment and a working diagnosis. Prescribers should weigh the individual benefit of an antibiotic against the risk of **resistance** and adverse effects, both for the patient and for the wider community. Shared decision-making with the patient follows the assessment.",
+   "say": "Antimicrobial stewardship means using antibiotics so that each patient gets the right drug, dose, route and duration, while limiting resistance across the population. Every prescribing decision begins with a clinical assessment and a working diagnosis. Prescribers should weigh the individual benefit of an antibiotic against the risk of resistance and adverse effects, both for the patient and for the wider community. Shared decision-making with the patient follows the assessment.",
+   "vis": null
+  },
+  {
+   "tx": "Many sore throats, coughs and ear infections are self-limiting. For these, NICE advises against an immediate prescription. Instead, the clinician should explain the likely course of illness and the benefits and harms of prescribing, then offer alternatives such as **self-care**, over-the-counter treatment or a **back-up prescription**. **Safety-netting** advice tells the patient what to do if they deteriorate.",
+   "say": "Many sore throats, coughs and ear infections are self-limiting. For these, NICE advises against an immediate prescription. Instead, the clinician should explain the likely course of illness and the benefits and harms of prescribing, then offer alternatives such as self-care, over-the-counter treatment or a back-up prescription. Safety-netting advice tells the patient what to do if they deteriorate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Suggested approach"
+    ],
+    "rows": [
+     [
+      "Likely self-limiting, well patient",
+      "Self-care, back-up prescription, safety-netting"
+     ],
+     [
+      "Non-severe, treatment can safely wait",
+      "Consider sampling first, then decide"
+     ],
+     [
+      "Severe or deteriorating illness",
+      "Treat promptly after appropriate sampling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In hospital, take **microbiological samples** before the first antimicrobial dose wherever this is safe, then review the prescription when results return. Results allow the drug to be targeted, narrowed or stopped. In severe illness, treatment must never be delayed for sampling. For non-severe infection, sampling first is reasonable if treatment can safely wait.",
+   "say": "In hospital, take microbiological samples before the first antimicrobial dose wherever this is safe, then review the prescription when results return. Results allow the drug to be targeted, narrowed or stopped. In severe illness, treatment must never be delayed for sampling. For non-severe infection, sampling first is reasonable if treatment can safely wait.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected infection"
+     },
+     {
+      "id": "b",
+      "label": "Take samples"
+     },
+     {
+      "id": "c",
+      "label": "Start treatment"
+     },
+     {
+      "id": "d",
+      "label": "Review on results"
+     },
+     {
+      "id": "e",
+      "label": "Narrow, stop or continue"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Documentation makes antimicrobial decisions transparent and auditable. Record the working **diagnosis**, the reason for prescribing or not prescribing, the plan agreed with the patient, and the planned **duration** of any treatment. Where an antibiotic is withheld, the reason and safety-netting advice should still be written down.",
+   "say": "Documentation makes antimicrobial decisions transparent and auditable. Record the working diagnosis, the reason for prescribing or not prescribing, the plan agreed with the patient, and the planned duration of any treatment. Where an antibiotic is withheld, the reason and safety-netting advice should still be written down.",
+   "vis": null
+  },
+  {
+   "tx": "Stewardship covers handover and supply too. When a patient moves between settings, the team should pass on current antimicrobial use, the review date and a contact for concerns, so courses are not continued unreviewed. Supply pack sizes should match **guideline course lengths** to avoid surplus tablets stored at home. Shortest effective courses remain the goal.",
+   "say": "Stewardship covers handover and supply too. When a patient moves between settings, the team should pass on current antimicrobial use, the review date and a contact for concerns, so courses are not continued unreviewed. Supply pack sizes should match guideline course lengths to avoid surplus tablets stored at home. Shortest effective courses remain the goal.",
+   "vis": null
+  },
+  {
+   "tx": "A stewardship programme needs core expertise in prescribing and microbiology. NICE names an **antimicrobial pharmacist** and a **medical microbiologist** as core members, with others co-opted depending on the care setting. Teams monitor prescribing and resistance data, and where volumes are unusually high or low they first explore reasons with the prescriber through education and feedback.",
+   "say": "A stewardship programme needs core expertise in prescribing and microbiology. NICE names an antimicrobial pharmacist and a medical microbiologist as core members, with others co-opted depending on the care setting. Teams monitor prescribing and resistance data, and where volumes are unusually high or low they first explore reasons with the prescriber through education and feedback.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Core members",
+     "points": [
+      "Antimicrobial pharmacist",
+      "Medical microbiologist"
+     ]
+    },
+    "right": {
+     "title": "Co-opted as needed",
+     "points": [
+      "Clinicians for the setting",
+      "Infection prevention staff"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG15 Antimicrobial stewardship: systems and processes for effective antimicrobial medicine use",
+  "NICE NG138 Urinary tract infection (lower): antimicrobial prescribing",
+  "NICE NG84 Sore throat (acute): antimicrobial prescribing"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

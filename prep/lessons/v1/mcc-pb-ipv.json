@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "mcc-pb-ipv",
+ "subject": "mcc-professional-behaviours",
+ "title": "Intimate partner violence: recognition, safety and safe care in India",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Intimate partner violence** covers physical, sexual, emotional and controlling behaviour by a current or former partner. Clinicians should ask about it privately whenever injuries, unexplained symptoms or changing accounts appear. Many women do not disclose on the first visit, so the clinical picture matters as much as the history given. Recognising patterns early allows safe, timely response.",
+   "say": "Intimate partner violence covers physical, sexual, emotional and controlling behaviour by a current or former partner. Clinicians should ask about it privately whenever injuries, unexplained symptoms or changing accounts appear. Many women do not disclose on the first visit, so the clinical picture matters as much as the history given. Recognising patterns early allows safe, timely response.",
+   "vis": null
+  },
+  {
+   "tx": "Always interview the patient **alone**, without the partner in the room. A partner who insists on staying, answers for her or controls the phone or money is a warning sign. Use a private interview to elicit the history, assess danger and plan safety. Never confront the partner, because this can increase the danger to her.",
+   "say": "Always interview the patient alone, without the partner in the room. A partner who insists on staying, answers for her or controls the phone or money is a warning sign. Use a private interview to elicit the history, assess danger and plan safety. Never confront the partner, because this can increase the danger to her.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Warning sign",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Partner insists on staying",
+      "Limits honest disclosure"
+     ],
+     [
+      "Changing or vague injury account",
+      "Possible concealment"
+     ],
+     [
+      "Control of money or phone",
+      "Coercive control"
+     ],
+     [
+      "Threats to kill or harm",
+      "High lethality risk"
+     ],
+     [
+      "Recent separation or plan to leave",
+      "Period of raised danger"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Assess **lethality risk** before planning. Threats to kill, firearm access, strangulation, escalating control and planned separation all raise danger. Strangulation needs urgent evaluation even when the patient looks well, because airway swelling and vascular injury can appear hours later. Firearm access should be addressed in safety planning, since it substantially raises the risk of homicide.",
+   "say": "Assess lethality risk before planning. Threats to kill, firearm access, strangulation, escalating control and planned separation all raise danger. Strangulation needs urgent evaluation even when the patient looks well, because airway swelling and vascular injury can appear hours later. Firearm access should be addressed in safety planning, since it substantially raises the risk of homicide.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Disclose privately"
+     },
+     {
+      "id": "b",
+      "label": "Assess danger"
+     },
+     {
+      "id": "c",
+      "label": "Treat injuries"
+     },
+     {
+      "id": "d",
+      "label": "Safety plan"
+     },
+     {
+      "id": "e",
+      "label": "Support services"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Respect the patient's **autonomy and capacity**. A calm adult with capacity who asks that police not be contacted should have her choice respected, unless there is an immediate duty such as a child at serious risk or a mandatory report. Document injuries objectively, with body maps and photographs where consented. Culturally safe, Indigenous-led and family-sensitive services can improve engagement for patients in remote or minority communities.",
+   "say": "Respect the patient's autonomy and capacity. A calm adult with capacity who asks that police not be contacted should have her choice respected, unless there is an immediate duty such as a child at serious risk or a mandatory report. Document injuries objectively, with body maps and photographs where consented. Culturally safe, Indigenous-led and family-sensitive services can improve engagement for patients in remote or minority communities.",
+   "vis": null
+  },
+  {
+   "tx": "**Strangulation** needs prompt action, because neck compression can cause **airway oedema**, laryngeal injury and carotid or vertebral injury, so observe and reassess serially. Crush or kick injuries with raised **creatine kinase** and **creatinine** need early intravenous fluids to protect the kidneys. **Pregnancy**, **iron deficiency** and **hyponatraemia** may coexist, so check each finding rather than attributing it to the abuse alone.",
+   "say": "Strangulation needs prompt action, because neck compression can cause airway oedema, laryngeal injury and carotid or vertebral injury, so observe and reassess serially. Crush or kick injuries with raised creatine kinase and creatinine need early intravenous fluids to protect the kidneys. Pregnancy, iron deficiency and hyponatraemia may coexist, so check each finding rather than attributing it to the abuse alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Priority action"
+    ],
+    "rows": [
+     [
+      "Hoarseness after neck compression",
+      "Observe, serial airway checks"
+     ],
+     [
+      "Raised creatine kinase with low urine",
+      "Early intravenous fluids"
+     ],
+     [
+      "Pregnancy with bruising",
+      "Private safety assessment"
+     ],
+     [
+      "Confusion with low sodium",
+      "Check osmolality, review drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Agree a **safety plan** with the patient that covers where she can go in an emergency, what to pack and which **local helplines** and **shelters** to call. Give her written details she can keep somewhere the partner cannot see. Record the plan in the notes, book a **follow-up review** and agree a safe way to contact her, such as a number the partner does not know about, because phones and accounts may be monitored.",
+   "say": "Agree a safety plan with the patient that covers where she can go in an emergency, what to pack and which local helplines and shelters to call. Give her written details she can keep somewhere the partner cannot see. Record the plan in the notes, book a follow-up review and agree a safe way to contact her, such as a number the partner does not know about, because phones and accounts may be monitored.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "National Institute for Health and Care Excellence guidance on domestic violence and abuse",
+  "World Health Organization clinical guidelines on responding to intimate partner violence and sexual violence against women"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

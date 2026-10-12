@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "mstat-audit",
+ "subject": "mrcp-statistics",
+ "title": "Clinical audit, governance and quality improvement",
+ "minutes": 4,
+ "steps": [
+  {
+   "tx": "Clinical **audit** compares practice against explicit standards and then acts to improve it. The audit cycle has three stages: measure current practice, compare it with a standard, and change practice before re-auditing. Audit is distinct from research, which seeks generalisable knowledge.",
+   "say": "Clinical audit compares practice against explicit standards and then acts to improve it. The audit cycle has three stages: measure current practice, compare it with a standard, and change practice before re-auditing. Audit is distinct from research, which seeks generalisable knowledge.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Measure practice"
+     },
+     {
+      "id": "b",
+      "label": "Compare with standard"
+     },
+     {
+      "id": "c",
+      "label": "Change practice"
+     },
+     {
+      "id": "d",
+      "label": "Re-audit"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **PDSA cycle** tests a change on a small scale. Plan sets a prediction, Do tests the change, Study compares results with the prediction, and Act decides to adopt, adapt or abandon. The cycle then repeats. PDSA is a quality improvement method rather than a controlled trial.",
+   "say": "A PDSA cycle tests a change on a small scale. Plan sets a prediction, Do tests the change, Study compares results with the prediction, and Act decides to adopt, adapt or abandon. The cycle then repeats. PDSA is a quality improvement method rather than a controlled trial.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Plan",
+      "Set aim and prediction"
+     ],
+     [
+      "Do",
+      "Test change on small scale"
+     ],
+     [
+      "Study",
+      "Compare results with prediction"
+     ],
+     [
+      "Act",
+      "Adopt, adapt or abandon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Regression to the mean** is a major audit bias. Patients selected for extreme values, such as the highest blood pressures, tend to measure closer to average on retesting, even without treatment. Audits should use a comparison group chosen independently of the baseline value.",
+   "say": "Regression to the mean is a major audit bias. Patients selected for extreme values, such as the highest blood pressures, tend to measure closer to average on retesting, even without treatment. Audits should use a comparison group chosen independently of the baseline value.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Apparent improvement",
+     "points": [
+      "Selected on extreme baseline",
+      "Retest moves towards average",
+      "Credited to intervention"
+     ]
+    },
+    "right": {
+     "title": "Safeguards",
+     "points": [
+      "Independent comparison group",
+      "Baseline averages over time",
+      "Run charts or control data"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Statistical process control uses a **control chart** with limits at three standard deviations. Common cause variation is random noise inherent to a stable process. A **special cause** point beyond the limits signals a change and should be investigated before limits or data are altered.",
+   "say": "Statistical process control uses a control chart with limits at three standard deviations. Common cause variation is random noise inherent to a stable process. A special cause point beyond the limits signals a change and should be investigated before limits or data are altered.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Common cause",
+     "points": [
+      "Random noise in stable system",
+      "Within control limits",
+      "No immediate action needed"
+     ]
+    },
+    "right": {
+     "title": "Special cause",
+     "points": [
+      "Point beyond limits",
+      "Assignable reason likely",
+      "Investigate and document"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Health and Social Care Act 2008 (Regulated Activities) Regulations, duty of candour"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

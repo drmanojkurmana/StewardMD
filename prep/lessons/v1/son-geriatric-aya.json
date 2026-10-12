@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "module": "son-geriatric-aya",
+ "subject": "ss-medical-oncology",
+ "title": "Geriatric oncology, AYA and cancer in pregnancy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Older adults with cancer are assessed using the **G8 screening questionnaire**, which has a maximum score of 17. A score of 14 or less flags possible impairment. A positive screen does not decide treatment on its own; it prompts a **comprehensive geriatric assessment** covering function, cognition, mood, nutrition, polypharmacy and social support. Chronological age alone should never exclude treatment.",
+   "say": "Older adults with cancer are first screened with the G8 questionnaire, which has a maximum score of 17. A score of 14 or less flags possible impairment. A positive screen does not decide treatment on its own. It prompts a comprehensive geriatric assessment covering function, cognition, mood, nutrition, polypharmacy and social support. Chronological age alone should never exclude treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "G8",
+      "Brief screen",
+      "Score 14 or less is positive"
+     ],
+     [
+      "Comprehensive geriatric assessment",
+      "Full evaluation",
+      "Guides dose and intensity"
+     ],
+     [
+      "Chronological age",
+      "Not a criterion",
+      "Never used alone to withhold therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **CARG toxicity tool** estimates the risk of grade 3 to 5 chemotherapy toxicity in older adults. It uses age, sex, cancer type, regimen, haemoglobin, creatinine clearance and geriatric assessment items. Patients are placed into low, intermediate or high risk bands. A high band prompts discussion, dose planning and supportive care, rather than automatic exclusion. It predicts toxicity, not survival.",
+   "say": "The CARG toxicity tool estimates the risk of grade 3 to 5 chemotherapy toxicity in older adults. It uses age, sex, cancer type, regimen, haemoglobin, creatinine clearance and geriatric items. Patients fall into low, intermediate or high risk bands. A high band prompts discussion, dose planning and supportive care, rather than automatic exclusion. The tool predicts toxicity, not survival.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CARG score"
+     },
+     {
+      "id": "b",
+      "label": "Risk band"
+     },
+     {
+      "id": "c",
+      "label": "Discuss toxicity"
+     },
+     {
+      "id": "d",
+      "label": "Adjust dose and G-CSF"
+     },
+     {
+      "id": "e",
+      "label": "Monitor closely"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adolescents and young adults, usually defined as aged **15 to 39 years**, do better on **paediatric-inspired regimens** for acute lymphoblastic leukaemia than on adult-type regimens. Fitness, organ function and risk features still guide intensity. Fertility should be discussed at diagnosis, and sperm banking should not delay induction chemotherapy. Early referral to a specialist AYA service supports safe delivery.",
+   "say": "Adolescents and young adults, usually defined as aged 15 to 39 years, do better on paediatric-inspired regimens for acute lymphoblastic leukaemia than on adult-type regimens. Fitness, organ function and risk features still guide intensity. Fertility should be discussed at diagnosis, and sperm banking should not delay induction chemotherapy. Early referral to a specialist service supports safe delivery.",
+   "vis": null
+  },
+  {
+   "tx": "Chemotherapy with alkylating agents can damage the **ovarian reserve**, and the danger grows with patient age and total dose. For a young adult who can safely postpone treatment, **oocyte or embryo banking** remains the best-supported way to keep future fertility. A **GnRH agonist** given alongside chemotherapy offers only modest ovarian shielding and cannot substitute for banking eggs or embryos.",
+   "say": "Chemotherapy with alkylating agents can damage the ovarian reserve, and the danger grows with patient age and total dose. For a young adult who can safely postpone treatment, oocyte or embryo banking remains the best-supported way to keep future fertility. A GnRH agonist given alongside chemotherapy offers only modest ovarian shielding and cannot substitute for banking eggs or embryos.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oocyte or embryo banking",
+     "points": [
+      "Established option",
+      "Requires a short treatment delay",
+      "Keeps eggs or embryos for later use"
+     ]
+    },
+    "right": {
+     "title": "GnRH agonist",
+     "points": [
+      "Adjunct during chemotherapy",
+      "Partial, modest protection",
+      "Cannot replace banking"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cancer in pregnancy needs shared decisions between oncology, obstetrics and maternal-fetal medicine. Chemotherapy is generally avoided in the **first trimester** because of organogenesis. From the **second trimester**, anthracycline-based regimens may be given with fetal monitoring. Trastuzumab is usually deferred because of oligohydramnios risk. Give the final cycle at least **three weeks before delivery** to reduce neonatal myelosuppression.",
+   "say": "Cancer in pregnancy needs shared decisions between oncology, obstetrics and maternal-fetal medicine. Chemotherapy is generally avoided in the first trimester because of organogenesis. From the second trimester, anthracycline-based regimens may be given with fetal monitoring. Trastuzumab is usually deferred because of oligohydramnios risk. Give the final cycle at least three weeks before delivery to reduce neonatal myelosuppression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trimester",
+     "Chemotherapy",
+     "Key timing point"
+    ],
+    "rows": [
+     [
+      "First",
+      "Generally avoided",
+      "Organogenesis"
+     ],
+     [
+      "Second",
+      "Anthracyclines may be used",
+      "Monitor fetal growth"
+     ],
+     [
+      "Third",
+      "Anthracyclines may be used",
+      "Final cycle 3 weeks before delivery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Imaging is not contraindicated in pregnancy when it is needed. Diagnostic doses, including chest CT, are far below levels linked to deterministic fetal effects, so staging should not be delayed without reason. **Gadolinium-based contrast** is generally avoided, while non-contrast MRI may be used. Radiation risk is weighed against the harm of delaying diagnosis or treatment.",
+   "say": "Imaging is not contraindicated in pregnancy when it is needed. Diagnostic doses, including chest CT, are far below levels linked to deterministic fetal effects, so staging should not be delayed without reason. Gadolinium-based contrast is generally avoided, while non-contrast MRI may be used. Radiation risk is weighed against the harm of delaying diagnosis or treatment.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-e1d9ac76968e",
+  "mk-676446a4b012",
+  "mk-0b5b24a2847b"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guidance on older people with cancer"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 29
+ }
+}

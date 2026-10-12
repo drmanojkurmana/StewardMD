@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "son-trial-design",
+ "subject": "ss-medical-oncology",
+ "title": "Clinical trial design and evidence in oncology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Phase I trials find the **maximum tolerated dose** (MTD) using a 3+3 design. Three patients are treated per dose level. If none has a dose-limiting toxicity, the dose is escalated. If one of three has a toxicity, three more are added. If at most one of six has a toxicity, that level is the MTD; two or more toxicities among six means the level is too toxic. Phase I is about safety, not efficacy.",
+   "say": "Phase I trials find the maximum tolerated dose, or MTD, using a 3+3 design. Three patients are treated per dose level. If none has a dose-limiting toxicity, the dose is escalated. If one of three has a toxicity, three more are added. If at most one of six has a toxicity, that level is the MTD. Two or more toxicities among six means the level is too toxic. Phase I is about safety, not efficacy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Toxicities in cohort",
+     "Action"
+    ],
+    "rows": [
+     [
+      "0 of 3",
+      "Escalate to next level"
+     ],
+     [
+      "1 of 3",
+      "Expand cohort to six"
+     ],
+     [
+      "1 of 6",
+      "That level is the MTD"
+     ],
+     [
+      "2 or more of 6",
+      "Level too toxic; go one lower"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Phase III trials compare a new treatment with a control arm. **Overall survival** (OS) is time from randomisation to death from any cause and is the most direct clinical endpoint. **Progression-free survival** (PFS) also counts progression, so it is reached sooner and more often. The **hazard ratio** (HR) compares event rates over time; a value below one favours the experimental arm.",
+   "say": "Phase three trials compare a new treatment with a control arm. Overall survival is the time from randomisation to death from any cause, and it is the most direct clinical endpoint. Progression-free survival also counts progression, so it is reached sooner and more often. The hazard ratio compares event rates over time. A value below one favours the experimental arm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Overall survival",
+     "points": [
+      "Time to death from any cause",
+      "Most direct clinical endpoint",
+      "Needs longer follow-up"
+     ]
+    },
+    "right": {
+     "title": "Progression-free survival",
+     "points": [
+      "Counts progression or death",
+      "Observed earlier",
+      "Surrogate, may not predict OS"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Crossover, where control patients receive the experimental drug at progression, dilutes the overall survival difference. The primary analysis is **intention-to-treat** (ITT), which keeps patients in their randomised group. Per-protocol analyses that drop crossover patients are prone to selection bias and are secondary at most. **Rank-preserving structural failure time** models are sensitivity methods that estimate the effect of treatment actually received.",
+   "say": "Crossover, where control patients receive the experimental drug at progression, dilutes the overall survival difference. The primary analysis is intention to treat, which keeps patients in their randomised group. Per-protocol analyses that drop crossover patients are prone to selection bias and are secondary at most. Rank-preserving structural failure time models are sensitivity methods that estimate the effect of the treatment actually received.",
+   "vis": null
+  },
+  {
+   "tx": "A **surrogate endpoint** such as PFS is valid only when it reliably predicts overall survival in that disease. An adverse or immature OS trend must be reviewed, and benefit on PFS alone may be provisional. Group sequential designs use an **O'Brien-Fleming** boundary, which is very strict at early looks, so an interim p of 0.02 usually does not justify stopping for efficacy. Single-arm phase II designs use a Simon two-stage design: stop at stage one if too few responses occur.",
+   "say": "A surrogate endpoint such as progression-free survival is valid only when it reliably predicts overall survival in that disease. An adverse or immature overall survival trend must be reviewed, and benefit on progression-free survival alone may be provisional. Group sequential designs use an O'Brien-Fleming boundary, which is very strict at early looks, so an interim p value of 0.02 usually does not justify stopping for efficacy. Single-arm phase II designs use a Simon two-stage design, stopping at stage one if too few responses occur.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Simon stage 1"
+     },
+     {
+      "id": "b",
+      "label": "Responses at or below threshold"
+     },
+     {
+      "id": "c",
+      "label": "Stop for futility"
+     },
+     {
+      "id": "d",
+      "label": "Responses above threshold"
+     },
+     {
+      "id": "e",
+      "label": "Enrol stage 2"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dose selection after phase I should not rest on the MTD alone. For targeted or immune agents, efficacy can plateau below toxicity limits, so randomised phase II dose-optimisation compares two doses on efficacy, safety and exposure. Accelerated approval may rest on a surrogate such as response rate, but a **noninferiority** trial must show the upper confidence bound stays below a prespecified margin, and confirmatory randomised trials are required.",
+   "say": "Dose selection after phase one should not rest on the maximum tolerated dose alone. For targeted or immune agents, efficacy can plateau below toxicity limits, so randomised phase two dose optimisation compares two doses on efficacy, safety and exposure. Accelerated approval may rest on a surrogate such as response rate, but a noninferiority trial must show that the upper confidence bound stays below a prespecified margin. Confirmatory randomised trials are required.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-0825c0b1d172",
+  "mk-e7bfbefe91e2",
+  "mk-ee67c143af75"
+ ],
+ "src": [],
+ "refs": [
+  "Simon R. Optimal two-stage designs for phase II clinical trials. Controlled Clinical Trials. 1989"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}
