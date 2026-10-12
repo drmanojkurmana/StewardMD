@@ -112,7 +112,7 @@ test("slotHtml: Learn more rows, the one action per kind, related rows, empty wh
     lesson: { key: "ana-placenta" }, cards: true, related: [{ mid: "m", id: "q", stem: "Why is the sky blue?" }],
     next: { kind: "review", label: "Review the concept", id: "zika_virus", target: "Zika virus" }, sid: "anatomy", mid: "ana-placenta" };
   const h = R.slotHtml(d);
-  assert.match(h, /Learn more/);
+  assert.match(h, /Know more/);
   assert.match(h, /data-act="r-kb" data-id="zika_virus"/);
   assert.match(h, /data-act="r-drug" data-t="Metformin"/);
   assert.match(h, /data-act="r-proto" data-id="p"/);
@@ -196,12 +196,12 @@ test("lessonLinks: tiers from via, the step rides along, the 75 floor, strongest
 test("slotHtml: per-item lessons with Read-the-lesson rows and steps, the module fallback stays", () => {
   const lessons = [{ key: "m1", title: "Liver Masses", tier: "topic", step: "" }, { key: "c9", title: "Adenoma Imaging", tier: "specific", step: "2" }];
   const h = R.slotHtml({ lessons, sid: "s", mid: "m1" });
-  assert.match(h, /Read the lesson: Liver Masses/);
+  assert.match(h, /Lesson: Liver Masses/);
   assert.match(h, /data-act="l-open" data-s="s" data-m="m1" data-l="c9" data-step="2"/);
   assert.ok(!/data-l="m1" data-step/.test(h), "no step, no attribute");
   const fb = R.slotHtml({ lesson: { key: "m1" }, sid: "s", mid: "m1" });
   assert.match(fb, /data-act="l-open" data-s="s" data-m="m1" data-l="m1"/);
-  assert.ok(!/Read the lesson/.test(fb), "the untitled fallback keeps its old row");
+  assert.match(fb, /Revise this topic/, "the untitled fallback keeps its plain row");
   assert.equal(R.slotHtml({ lessons: [], lesson: null }), "");
   const rv = R.slotHtml({ lessons, next: { kind: "revise", label: "Revise this topic", lkey: "c9", step: "2", target: "Lesson" }, sid: "s", mid: "m1" });
   assert.match(rv, /data-act="l-open"[^>]*data-l="c9" data-step="2"><b>Revise this topic<\/b>/);
@@ -216,8 +216,8 @@ test("fill: every gaps slot resolves by its own data-i without remember()", asyn
   const G = {
     fetch: (url) => {
       const u = String(url);
-      if (u.endsWith("/v1/links/index.json")) return Promise.resolve({ ok: true, json: () => Promise.resolve(ptr) });
-      const m = /\/v1\/links\/(m\/[^/]+\.json)$/.exec(u);
+      if (u.endsWith("/v2/links/index.json")) return Promise.resolve({ ok: true, json: () => Promise.resolve(ptr) });
+      const m = /\/v2\/links\/(m\/[^/]+\.json)$/.exec(u);
       const sh = m && shards[m[1].slice(2)];
       return Promise.resolve(sh ? { ok: true, json: () => Promise.resolve(sh) } : { ok: false, status: 404 });
     },
@@ -252,7 +252,7 @@ test("fill: every gaps slot resolves by its own data-i without remember()", asyn
   assert.equal(s1.getAttribute("data-done"), "1", "first gaps slot fills with no remember()");
   assert.equal(s5.getAttribute("data-done"), "1", "second gaps slot fills with no remember()");
   assert.equal(s3.getAttribute("data-done"), "1", "third gaps slot fills with no remember()");
-  assert.match(s1.innerHTML, /Learn more/, "index links render");
+  assert.match(s1.innerHTML, /Know more/, "index links render");
   assert.match(s1.innerHTML, /Fibromuscular [Dd]ysplasia/);
   assert.match(s1.innerHTML, /Related questions/);
   assert.match(s5.innerHTML, /Zika [Vv]irus/);
@@ -279,78 +279,73 @@ test("kmSlot: old items get slot, reasoning items return empty, no duplicate", (
   assert.equal(R.kmSlot(null), "");
 });
 
-test("knowMoreHtml: exactly 1 target renders direct button with exact label", () => {
-  // Knowledge Library
+test("knowMoreHtml: exactly 1 target shows the Know more header and one direct button", () => {
   const hKb = R.knowMoreHtml({ targets: [{ k: "kb", id: "heart_failure", title: "Heart failure", act: "r-kb", attrs: ' data-id="heart_failure"' }] });
+  assert.match(hKb, /<h3 class="pn-km-h">Know more<\/h3>/, "header shows with a single target");
   assert.match(hKb, /class="pn-km-row"/);
   assert.doesNotMatch(hKb, /pn-km-duo/);
-  assert.match(hKb, /<small>Knowledge Library<\/small>/);
-  assert.match(hKb, /<b>Read more in Knowledge Library: Heart failure<\/b>/);
+  assert.match(hKb, /<b>Knowledge Library: Heart failure<\/b>/);
   assert.match(hKb, /data-act="r-kb" data-id="heart_failure"/);
+  assert.equal((hKb.match(/<button /g) || []).length, 1);
 
-  // Lesson - module chapter (tier: topic)
   const hLsTopic = R.knowMoreHtml({ targets: [{ k: "ls", key: "hf", title: "Heart failure", tier: "topic", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf"' }] });
-  assert.match(hLsTopic, /<small>Lesson<\/small>/);
-  assert.match(hLsTopic, /<b>Read the lesson: Heart failure<\/b>/);
+  assert.match(hLsTopic, /<h3 class="pn-km-h">Know more<\/h3>/);
+  assert.match(hLsTopic, /<b>Lesson: Heart failure<\/b>/);
 
-  // Lesson - specific concept (tier: specific)
   const hLsSpec = R.knowMoreHtml({ targets: [{ k: "ls", key: "hf_echo", title: "Echo in HF", tier: "specific", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf_echo"' }] });
-  assert.match(hLsSpec, /<small>Lesson<\/small>/);
-  assert.match(hLsSpec, /<b>Learn the lesson: Echo in HF<\/b>/);
+  assert.match(hLsSpec, /<b>Lesson: Echo in HF<\/b>/);
 
-  // Drug
   const hDr = R.knowMoreHtml({ targets: [{ k: "dr", id: "furosemide", title: "furosemide", act: "r-drug", attrs: ' data-t="furosemide"' }] });
-  assert.match(hDr, /<small>Drug Index<\/small>/);
+  assert.match(hDr, /<h3 class="pn-km-h">Know more<\/h3>/);
   assert.match(hDr, /<b>Drug: furosemide<\/b>/);
 
-  // Protocol
   const hPr = R.knowMoreHtml({ targets: [{ k: "pr", id: "hf_guideline", title: "Acute HF Management", act: "r-proto", attrs: ' data-id="hf_guideline"' }] });
-  assert.match(hPr, /<small>Protocol<\/small>/);
   assert.match(hPr, /<b>Protocol: Acute HF Management<\/b>/);
 
-  // Flashcards
   const hCd = R.knowMoreHtml({ targets: [{ k: "cd", mid: "med-heart-failure", title: "Cards for this topic", act: "k-open", attrs: ' data-s="medicine" data-m="med-heart-failure"' }] });
-  assert.match(hCd, /<small>Flashcards<\/small>/);
-  assert.match(hCd, /<b>Cards for this topic<\/b>/);
+  assert.match(hCd, /<b>Flashcards: Cards for this topic<\/b>/);
+  assert.equal(R.knowMoreHtml({ targets: [] }), "");
 });
 
-test("knowMoreHtml: 2 targets of different kinds render side-by-side duo buttons", () => {
+test("knowMoreHtml: 2 targets render side-by-side duo buttons under the header", () => {
   const targets = [
     { k: "kb", id: "heart_failure", title: "Heart failure", act: "r-kb", attrs: ' data-id="heart_failure"' },
     { k: "ls", key: "hf", title: "Heart failure", tier: "topic", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf"' }
   ];
   const hDuo = R.knowMoreHtml({ targets });
+  assert.match(hDuo, /<h3 class="pn-km-h">Know more<\/h3>/);
   assert.match(hDuo, /class="pn-km-row pn-km-duo"/);
-  assert.match(hDuo, /Read more in Knowledge Library: Heart failure/);
-  assert.match(hDuo, /Read the lesson: Heart failure/);
-  const btns = hDuo.match(/<button /g) || [];
-  assert.equal(btns.length, 2, "exactly two buttons");
+  assert.match(hDuo, /Knowledge Library: Heart failure/);
+  assert.match(hDuo, /Lesson: Heart failure/);
+  assert.equal((hDuo.match(/<button /g) || []).length, 2, "exactly two buttons");
+  assert.doesNotMatch(hDuo, /pn-km-more/, "two targets need no More button");
+
+  const targetsSame = [
+    { k: "kb", id: "hf", title: "Heart failure", act: "r-kb", attrs: ' data-id="hf"' },
+    { k: "kb", id: "cardiomyopathy", title: "Cardiomyopathy", act: "r-kb", attrs: ' data-id="cardiomyopathy"' }
+  ];
+  const hSame = R.knowMoreHtml({ targets: targetsSame, allTargets: targetsSame, iid: "item2" });
+  assert.match(hSame, /class="pn-km-row pn-km-duo"/, "two of one kind still sit side by side");
+  assert.equal((hSame.match(/<button /g) || []).length, 2);
 });
 
-test("knowMoreHtml: >2 targets or several of one kind render single Know more button opening sheet", () => {
-  // >2 targets
+test("knowMoreHtml: 3 or more show the top two plus More (N) opening the sheet", () => {
   const targets3 = [
     { k: "kb", id: "heart_failure", title: "Heart failure", act: "r-kb", attrs: ' data-id="heart_failure"' },
     { k: "ls", key: "hf", title: "Heart failure", tier: "topic", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf"' },
     { k: "dr", id: "furosemide", title: "furosemide", act: "r-drug", attrs: ' data-t="furosemide"' }
   ];
   const h3 = R.knowMoreHtml({ targets: targets3, allTargets: targets3, iid: "item1" });
-  assert.match(h3, /class="pn-km-row"/);
-  assert.doesNotMatch(h3, /pn-km-duo/);
+  assert.match(h3, /<h3 class="pn-km-h">Know more<\/h3>/);
+  assert.match(h3, /class="pn-km-row pn-km-duo"/, "the top two stay visible");
+  assert.match(h3, /Knowledge Library: Heart failure/);
+  assert.match(h3, /Lesson: Heart failure/);
+  assert.doesNotMatch(h3, /Drug: furosemide/, "the third target lives in the sheet");
   assert.match(h3, /class="pn-km-btn pn-km-more"/);
   assert.match(h3, /data-act="r-km-sheet"/);
   assert.match(h3, /data-i="item1"/);
-  assert.match(h3, /<b>Know more<\/b>/);
-  assert.match(h3, /3 topics/);
-
-  // 2 targets of the SAME kind (e.g. 2 KB articles) -> single button
-  const targetsSame = [
-    { k: "kb", id: "hf", title: "Heart failure", act: "r-kb", attrs: ' data-id="hf"' },
-    { k: "kb", id: "cardiomyopathy", title: "Cardiomyopathy", act: "r-kb", attrs: ' data-id="cardiomyopathy"' }
-  ];
-  const hSame = R.knowMoreHtml({ targets: targetsSame, allTargets: targetsSame, iid: "item2" });
-  assert.match(hSame, /class="pn-km-btn pn-km-more"/);
-  assert.match(hSame, /2 topics/);
+  assert.match(h3, /<b>More \(3\)<\/b>/);
+  assert.equal((h3.match(/<button /g) || []).length, 3, "two direct buttons plus More");
 });
 
 test("knowMoreSheetBodyHtml: groups all targets in kind order with module chapter first", () => {
@@ -369,7 +364,7 @@ test("knowMoreSheetBodyHtml: groups all targets in kind order with module chapte
     at("Drugs") < at("Protocols") && at("Protocols") < at("Flashcards"), "kind order preserved");
 
   // Check lesson ordering: topic tier before specific tier
-  assert.ok(at("Read the lesson: Heart failure chapter") < at("Echo in HF"), "topic chapter comes before specific lesson");
+  assert.ok(at("Lesson: Heart failure chapter") < at("Lesson: Echo in HF"), "topic chapter comes before specific lesson");
 });
 
 test("fill: old item with links resolves .pn-km, offline caching works, low confidence hidden, no links hidden", async () => {
@@ -400,8 +395,8 @@ test("fill: old item with links resolves .pn-km, offline caching works, low conf
     fetch: (url) => {
       if (networkDown) return Promise.reject(new Error("Network offline"));
       const u = String(url);
-      if (u.endsWith("/v1/links/index.json")) return Promise.resolve({ ok: true, json: () => Promise.resolve(ptr) });
-      const m = /\/v1\/links\/(m\/[^/]+\.json)$/.exec(u);
+      if (u.endsWith("/v2/links/index.json")) return Promise.resolve({ ok: true, json: () => Promise.resolve(ptr) });
+      const m = /\/v2\/links\/(m\/[^/]+\.json)$/.exec(u);
       const sh = m && shards[m[1].slice(2)];
       return Promise.resolve(sh ? { ok: true, json: () => Promise.resolve(sh) } : { ok: false, status: 404 });
     },
@@ -467,8 +462,8 @@ test("fill: old item with links resolves .pn-km, offline caching works, low conf
 
   // Test offline caching: now kill the network, fill another slot from cache
   networkDown = true;
-  assert.ok(cache.has("v1/links/index.json"), "index was cached");
-  assert.ok(cache.has("v1/links/m/med-test-mod-12345678.json"), "shard was cached");
+  assert.ok(cache.has("v2/links/index.json"), "index was cached");
+  assert.ok(cache.has("v2/links/m/med-test-mod-12345678.json"), "shard was cached");
 
   const sOffline = makeSlot("old-with-links", "med-test-mod");
   root.querySelectorAll = () => [sOffline];

@@ -10,7 +10,7 @@
  *   node tools/prep-links.mjs confirm   OPTIONAL paid step: Haiku (Message Batches) confirms stem-only candidates.
  *                                       --dry-run (default) prints the request count and cost; --run --cap <usd>
  *   node tools/prep-links.mjs verify    read the PUBLISHED index over the API and check every file against its hash
- *   node tools/prep-links.mjs publish   build + upload (tools/prep-upload-bank.mjs --as v1/links) + verify
+ *   node tools/prep-links.mjs publish   build + upload (tools/prep-upload-bank.mjs --as v2/links) + verify
  *
  * Options: --bank <dir> a local copy of the main bank version with module files (default ~/prep-work/StewardMD-prep/
  * prep/bank/<ver>; missing modules are fetched), --cache <dir> (~/prep-data/links/cache, outside git: question text),
@@ -38,7 +38,7 @@
  * KB ids: the Knowledge Library opens an article by its key in KB_ENRICHMENT.byId: kb/reference ids are lower case
  * (zika_virus), kb/diseases ids upper case (BRAIN_ABSCESS); lesson src[] uses "kb-reference-zika-virus". normKbId maps
  * any of these spellings to the one key that opens.
- * Index (R2 prep-bank/v1/links/, route LINKS_RE): index.json { v, ver, gen, th, n, src, m: { module: "<subject>/<hash8>" },
+ * Index (R2 prep-bank/v2/links/, route LINKS_RE): index.json { v, ver, gen, th, n, src, m: { module: "<subject>/<hash8>" },
  * c: { subject: hash8 } } (short cache); m/<module>-<hash8>.json { v, m, s, T: [[kind, id, title]], e: { itemId:
  * [[t, conf, via, sec?]] }, x: { t: [[module, itemId]] }, mod: { ls: [lesson keys], cd: 1 } } and c/<subject>-<hash8>.json
  * { v, s, T: [[kind, id, title, nItems, [modules]]] } are immutable. No question text is published. kind is kb/dr/pr/ls;
@@ -56,7 +56,7 @@ import { appConfig, subjectIndex } from "./prep-ids.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
-export const LINKS_VER = "v1";
+export const LINKS_VER = "v2";
 export const SHOW = 75;
 export const MAX = { kb: 2, dr: 2, pr: 1, ls: 2 };
 const KINDS = ["kb", "dr", "pr"];
@@ -356,6 +356,38 @@ export function pickKbLesson(kbId, mid, sid, bridge, midSid) {
   const same = cands.filter((c) => (midSid.get(c.key) || null) === sid).sort((a, b) => a.n - b.n || (a.key < b.key ? -1 : 1));
   return same.length ? same[0].key : null;
 }
+/* topicKbForModule({ title, lessonTitle, cited, kb }) -> { id, title } | null: the module's own Knowledge
+   Library topic article, for modules the topic map (prep/bank/topic-links.json) does not cover, above all
+   modules with their own lesson, which the map skips. Precision only, so a wrong link is never added:
+   an exact name/alias match on the module title, else a KB article the module's own lesson cites whose
+   name holds every significant word of the title, with ties broken by the lesson title's own words (the
+   heart-failure lesson is about management, so "Heart Failure: Management" beats the pathophysiology
+   article). Anything ambiguous returns null. */
+export function topicKbForModule({ title, lessonTitle, cited, kb }) {
+  const docs = kb || [];
+  if (!title || !docs.length) return null;
+  const nt = norm(title), tw = sigWords(title);
+  const citedSet = cited || new Set();
+  const pick = (pool) => {
+    if (!pool.length) return null;
+    if (pool.length === 1) return { id: pool[0].id, title: pool[0].name };
+    const lw = new Set(sigWords(lessonTitle || ""));
+    let best = null, bestScore = -1, tie = false;
+    for (const d of pool) {
+      const score = (citedSet.has(d.id) ? 10 : 0) + words(d.name).filter((w) => w.length >= 4 && !tw.includes(w) && lw.has(w)).length;
+      if (score > bestScore) { best = d; bestScore = score; tie = false; }
+      else if (score === bestScore) tie = true;
+    }
+    return !tie && best ? { id: best.id, title: best.name } : null;
+  };
+  // The title is the article's name, an alias, or the name's opening words ("Acute appendicitis" ->
+  // "Acute Appendicitis and Peritonitis"; "Heart failure" -> both "Heart Failure: ..." articles, which
+  // the lesson-citation and lesson-word scores then separate).
+  const named = docs.filter((d) => { const n = norm(d.name); return n === nt || n.startsWith(nt + " ") || (d.aliases || []).some((a) => norm(a) === nt); });
+  if (named.length) return pick(named);
+  if (tw.length < 2) return null;
+  return pick(docs.filter((d) => citedSet.has(d.id) && tw.every((w) => words(d.name).includes(w))));
+}
 /* addTopicLinks(links, it, ctx) -> links (mutated). ctx: { mid, sid, topics, lessons, bridge, midSid, images }.
    lessons: Map(mid -> [{ key, title, own }]). images: Map(basename -> { l, step }). */
 export function addTopicLinks(links, it, ctx = {}) {
@@ -370,12 +402,16 @@ export function addTopicLinks(links, it, ctx = {}) {
   // The module's topic is verified for every item in it: a weak same-target mention below the bar (a typo'd or
   // explanation-only name) is upgraded to the topic tier instead of leaving the item with nothing.
   const entry = ctx.topics && ctx.topics[mid];
-  if (entry) {
+  // The map skips own-lesson modules; topicKbForModule still gives those modules their KB topic article,
+  // so a taught module shows the article next to its lesson (both, whenever both exist).
+  const topicKb = (!entry || !(entry.kb || []).length) && ctx.topicKb ? [[ctx.topicKb.id, ctx.topicKb.title]] : null;
+  const kbList = entry && (entry.kb || []).length ? entry.kb : topicKb || [];
+  if (entry || topicKb) {
     const sec = leadSec(it.q || "");
     for (const l of links) {
       if (l.c >= SHOW || l.v === "kt") continue;
-      if (l.k === "kb" && (entry.kb || []).some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = sec; }
-      else if (l.k === "pr" && (entry.pr || []).some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = ""; }
+      if (l.k === "kb" && kbList.some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = sec; }
+      else if (l.k === "pr" && entry && (entry.pr || []).some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = ""; }
     }
     // A verified module topic beats an unshown mention: below-the-bar same-kind links vacate their slots
     // so the topic tier still lands (shown links are never evicted, and the cap still holds).
@@ -387,8 +423,8 @@ export function addTopicLinks(links, it, ctx = {}) {
       links.splice(i, 1);
       return true;
     };
-    for (const [id, title] of entry.kb || []) if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
-    for (const [id, title] of entry.pr || []) if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
+    for (const [id, title] of kbList) if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
+    for (const [id, title] of (entry && entry.pr) || []) if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
   }
   // Specific lesson refinement (at most one besides the module's own): the step showing the item's image wins,
   // then the lesson teaching the item's KB concept, then the book chapter under the concept's heading.
@@ -645,6 +681,19 @@ export function build({ cache, bank, confirmed = null, rematch = null, log = () 
   const topics = topicsDoc.modules || {};
   const images = new Map(Object.entries(topicsDoc.images || {}));
   const bridge = kbBridge(lessonKb);
+  // Topic KB for modules the map does not cover (it skips own-lesson modules): one article per module,
+  // only on an exact or lesson-cited title match, so every taught item can show article + lesson together.
+  const kbAll = kbDocs();
+  const modTitle = new Map();
+  for (const s of appConfig().subjects) for (const t of subjectIndex(s.id, s.bv, ROOT).topics || []) if (!modTitle.has(t.id)) modTitle.set(t.id, (t.title && t.title.en) || t.title || "");
+  const topicKbMemo = new Map();
+  const topicKbOf = (mid) => {
+    if (!topicKbMemo.has(mid)) {
+      const own = (lessonsOf.get(mid) || []).find((l) => l.own);
+      topicKbMemo.set(mid, topicKbForModule({ title: modTitle.get(mid) || "", lessonTitle: own ? own.title : "", cited: lessonKb.get(mid) || new Set(), kb: kbAll }));
+    }
+    return topicKbMemo.get(mid);
+  };
   // Pass 1: how many stems name each phrase (background names are discounted).
   const df = new Map(); let n = 0;
   const midSid = new Map();
@@ -670,7 +719,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, log = () 
       if (v === true && l.v[0] === "s" && l.c < SHOW) { l.c = 80; l.v = "h"; }
       else if (v === false && l.c >= SHOW && l.v !== "a") l.c = SHOW - 1;   // an audited link the checker rejects is withdrawn
     }
-    addTopicLinks(links, it, { mid, sid, topics, lessons: lessonsOf, lessonMeta, bridge, midSid, images });
+    addTopicLinks(links, it, { mid, sid, topics, topicKb: topicKbOf(mid), lessons: lessonsOf, lessonMeta, bridge, midSid, images });
     const shown = links.filter((l) => l.c >= SHOW);
     rep.items++;
     const bs = rep.bySubject[sid || "?"] || (rep.bySubject[sid || "?"] = { items: 0, linked: 0 });
