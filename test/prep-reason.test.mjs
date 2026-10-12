@@ -67,7 +67,7 @@ test("shardLinks: the 75 floor, strongest first; relOf: union across targets, 8 
   const sh = JSON.parse(fs.readFileSync(join(FIX, "api", "v1", "links", "m", fs.readdirSync(join(FIX, "api", "v1", "links", "m")).find((f) => f.startsWith("ana-gametogenesis-"))), "utf8"));
   const ls = R.shardLinks(sh, "fx-reason-1");
   assert.equal(ls.length, 1);
-  assert.deepEqual(ls[0], { k: "kb", id: "fibromuscular_dysplasia", title: "Fibromuscular dysplasia", c: 92, sec: "causes" });
+  assert.deepEqual(ls[0], { k: "kb", id: "fibromuscular_dysplasia", title: "Fibromuscular dysplasia", c: 92, v: "k", sec: "causes" });
   assert.deepEqual(R.shardLinks(sh, "fx-reason-old1"), [], "an unlinked item has no links");
   assert.deepEqual(R.shardLinks({ T: [["kb", "a", "A"]], e: { i: [[0, 74, "s"]] } }, "i"), [], "74 is not shown");
   assert.deepEqual(R.shardLinks(null, "i"), []);
@@ -479,3 +479,16 @@ test("fill: old item with links resolves .pn-km, offline caching works, low conf
   assert.match(sOffline.innerHTML, /High confidence target/, "cached content rendered while offline");
 });
 
+
+test("titleRelevant: SGLT2 namesake fails, the module topic passes (owner screenshot 2026-10-13)", () => {
+  const hay = "A 62-year-old woman with heart failure with reduced ejection fraction LVEF 30% on ARNI and bisoprolol non-diabetic which additional drug class reduces death SGLT2 inhibitor (dapagliflozin) med-heart-failure heart failure";
+  assert.equal(R.titleRelevant("Familial Renal Glucosuria", hay), false);
+  assert.equal(R.titleRelevant("Heart failure", hay), true);
+  assert.equal(R.titleRelevant("Dapagliflozin", hay), true);
+});
+
+test("shardLinks keeps via so the module topic (kt) can lead the next action", () => {
+  const sh = { T: [["kb", "renal_glucosuria", "Familial Renal Glucosuria"], ["kb", "heart_failure", "Heart failure"]], e: { i1: [[0, 95, "a"], [1, 75, "kt"]] } };
+  const ls = R.shardLinks ? R.shardLinks(sh, "i1") : null;
+  if (ls) { assert.equal(ls.find((l) => l.id === "heart_failure").v, "kt"); }
+});

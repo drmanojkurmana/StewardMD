@@ -257,6 +257,20 @@ export function expText(it) {
   const x = it && it.x && typeof it.x === "object" ? it.x : {};
   return [it.exp, x.key, x.why, x.notes, x.mech, x.mechanism, x.ddx, x.clues, x.pearl, x.rev].map(textOf).join("\n");
 }
+/* linkRelevant(it, l, ctx) -> bool: a specific (item-level) link survives only when the target's own name
+   relates to what the item teaches: the keyed answer, the stem's central ask, the explanation, or the
+   module topic (ctx.moduleTitle / it.t / ctx.topicIds). A target that merely shares a keyword with the
+   item (a drug target, gene or transporter named in the key, e.g. SGLT2 -> Familial Renal Glucosuria) has
+   none of its name words in that text and fails closed. Module-topic targets (kt) are exempt by design. */
+export function linkRelevant(it, l, ctx = {}) {
+  if (!l || l.v === "kt" || l.v === "lt") return true;
+  if (ctx.topicIds && ctx.topicIds.has(l.k + ":" + l.id)) return true;
+  const key = (it && it.o && typeof it.a === "number" && it.o[it.a]) || "";
+  const hay = new Set(words([key, (it && it.q) || "", expText(it || {}), ctx.moduleTitle || "", String((it && it.t) || ctx.mid || "").replace(/[-_]/g, " ")].join(" ")));
+  const nameWords = l.k === "dr" ? words(l.id) : sigWords(l.title || l.id);
+  if (!nameWords.length) return false;
+  return nameWords.some((w) => hay.has(w));
+}
 /* linkItem(it, M, ctx) -> [{ k, id, title, c, v, sec }] best first, at most MAX per kind (c >= 50 only).
    M: { kb, pr, dr } matchers. ctx: { lessonKb: Set of KB ids cited by the module's lessons, df: Map(phrase key -> items
    whose stem names it) and n (items), clinical (subject takes protocols), byKey (KB key map), protoIds, drugIds }. */
@@ -306,6 +320,10 @@ export function linkItem(it, M, ctx = {}) {
     for (const raw of [].concat(L.drug_ids || L.drug || [])) { const id = words(raw).join(" "); if (id && ctx.drugIds && ctx.drugIds.has(id) && (!grounding || corroborated("dr", id))) put({ k: "dr", id, title: ctx.drugIds.get(id), c: 95, v: "a", sec: "" }); }
     for (const raw of [].concat(L.protocol_ids || L.protocol || L.proto || [])) { const id = String(raw || "").trim(); if (id && ctx.protoIds && ctx.protoIds.has(id) && (!grounding || corroborated("pr", id))) put({ k: "pr", id, title: ctx.protoIds.get(id), c: 95, v: "a", sec: "" }); }
   }
+  // Relevance guard (every source, pipeline x.links included): a specific link whose target name does not
+  // relate to the key, stem, explanation or module topic is capped below the floor, never shown. It stays
+  // in the sidecar for audit. This is what keeps SGLT2 -> Familial Renal Glucosuria from ever returning.
+  for (const l of best.values()) if ((l.k === "kb" || l.k === "pr" || l.k === "dr") && !linkRelevant(it, l, ctx)) l.c = Math.min(l.c, 40);
   // When the answer itself is an article or protocol, a condition met only in the stem is the vignette, not the lesson.
   const top = {};
   for (const l of best.values()) if (l.v[0] === "k" && l.c >= 92) top[l.k] = 1;
@@ -533,7 +551,7 @@ export function stampLinks(its, o = {}) {
   const midSid = new Map(mid && sid ? [[mid, sid]] : []);
   for (const it of its || []) {
     if (!it || (it.flags && it.flags.length) || !Array.isArray(it.o) || it.o.length < 2 || typeof it.a !== "number") continue;
-    const links = linkItem(it, D.M, { df: new Map(), n: 0, clinical: typeof CLINICAL !== "undefined" ? CLINICAL.test(sid || "") : undefined, byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds });
+    const links = linkItem(it, D.M, { df: new Map(), n: 0, clinical: typeof CLINICAL !== "undefined" ? CLINICAL.test(sid || "") : undefined, byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds, mid, moduleTitle: ((topics[mid] || {}).t || "") });
     addTopicLinks(links, it, { mid: it.t || mid, sid, topics, lessons: lessonsOf, lessonMeta, bridge: new Map(), midSid, images });
     const keep = links.filter((l) => l.c >= SHOW && l.v !== "kt");
     if (!keep.length) continue;
@@ -722,7 +740,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, log = () 
   for (const { it, sid, mid } of items({ cache, bank })) {
     if (!usableItem(it)) continue;
     const ls = lessonKb.get(mid);
-    const links = linkItem(it, D.M, { lessonKb: ls, df, n, clinical: CLINICAL.test(sid || ""), byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds });
+    const links = linkItem(it, D.M, { lessonKb: ls, df, n, clinical: CLINICAL.test(sid || ""), byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds, mid, moduleTitle: ((topics[mid] || {}).t || "") });
     const conf = confirmed && confirmed[String(it.id)];
     const rm = rematch && rematch.items && rematch.items[String(it.id)];
     if (rm && Array.isArray(rm.links)) applyRematch(links, rm.links);
@@ -799,7 +817,7 @@ export function confirmRequests({ cache, bank }) {
   const pairs = [], audit = [];
   for (const { it, sid, mid } of items({ cache, bank })) {
     if (!usableItem(it)) continue;
-    const links = linkItem(it, D.M, { lessonKb: lessonKb.get(mid), df, n, clinical: CLINICAL.test(sid || ""), byKey: D.byKey });
+    const links = linkItem(it, D.M, { lessonKb: lessonKb.get(mid), df, n, clinical: CLINICAL.test(sid || ""), byKey: D.byKey, mid });
     const pair = (l, audit) => ({ id: String(it.id), key: l.k + ":" + l.id, title: (l.k === "dr" ? "Drug: " : l.k === "pr" ? "Protocol: " : "") + l.title, q: String(it.q).slice(0, 600), ans: String(it.o[it.a]).slice(0, 160), audit });
     if (links.some((l) => l.c >= SHOW)) {
       // Audit sample: about 1 shown link in 180 (deterministic by item id), judged blind to estimate precision.
