@@ -173,7 +173,7 @@ test("Tests tab: only the plan exam; a coming exam shows one short state, no tes
   for (const id of ["plab-1", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written", "mrcs-part-a"]) assert.ok(!usmle.includes('data-p="' + id + '"'), id + " not listed");
   const ck = G.PREP_TESTS.testsHtml(mkH("usmle", { exam: "usmle-step2-ck" }));
   assert.ok(ck.includes('data-p="usmle-step2-ck"'), "the selected coming exam shown");
-  assert.ok(ck.includes("Questions for this exam are being added."), "one short line");
+  assert.ok(ck.includes("No questions for this exam in the bank yet."), "one short line");
   assert.ok(!ck.includes("Format available, question bank coming."), "no bold wall of grey text");
   assert.ok(ck.includes("<summary>Exam format</summary>"), "format notes behind an info row");
   assert.ok(!ck.includes('data-p="usmle-step2-ck" data-k='), "no test buttons without a bank");

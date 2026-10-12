@@ -25,7 +25,7 @@
   // Plain words for the server's refusals.
   function errWord(status, code) {
     if (status === 401) return "Sign in to use friends and groups.";
-    if (status === 404 && !code) return "Friends and groups are not open yet. Try again later.";
+    if (status === 404 && !code) return "Friends and groups are not available right now. Try again later.";
     code = String(code || "").replace(/-/g, "_");
     var W = { not_found: "No one has that ID or code. Check it and try again.", self: "That is your own StewardMD ID.",
       consent_required: "Join the Arena first.", no_smd_id: "Your account does not have a StewardMD ID yet.", lookup_failed: "Could not look that up right now. Try again in a moment.",

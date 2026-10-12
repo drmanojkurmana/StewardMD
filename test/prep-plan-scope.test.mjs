@@ -226,17 +226,17 @@ test("INI-SS plan without a subject: one prompt, no exam section", () => {
   assert.ok(html.includes('data-act="p-settings"'), "settings is the way through");
 });
 
-test("surgical NEET-SS plan: one short coming state for the group", () => {
+test("surgical NEET-SS plan: one short empty state for the group", () => {
   const list = profiles(), pl = { exam: "neet-ss", group: "surgical" };
   const { T2, H } = loadT2(list, storeFor(pl), "neet-ss", pl);
   T2._P.fx = papers();
   T2._P.sess = null;
   const html = T2.testsHtml(H);
-  assert.ok(html.includes("Questions for the Surgical group are being added."), "rare state, clearly worded");
+  assert.ok(html.includes("No questions for the Surgical group in the bank yet."), "rare state, clearly worded");
   assert.ok(!html.includes('data-p="neet-ss"'), "no empty exam section");
 });
 
-test("coming bank (Step 2 CK, PLAB): one short state, format behind an info row", () => {
+test("empty bank (Step 2 CK, PLAB): one short state, format behind an info row", () => {
   const list = profiles();
   const ck = { exam: "usmle-step2-ck" };
   const t1 = loadT2(list, storeFor(ck), "usmle", ck);
@@ -245,7 +245,7 @@ test("coming bank (Step 2 CK, PLAB): one short state, format behind an info row"
   const html = t1.T2.testsHtml(t1.H);
   assert.ok(html.includes('data-p="usmle-step2-ck"'), "the selected step shown");
   assert.ok(!html.includes('data-p="usmle-step1"'), "the other step gone");
-  assert.ok(html.includes("Questions for this exam are being added."), "one short line");
+  assert.ok(html.includes("No questions for this exam in the bank yet."), "one short line");
   assert.ok(!html.includes("Format available, question bank coming."), "no bold wall of grey text");
   assert.ok(html.includes("<summary>Exam format</summary>"), "format notes behind an info row");
   assert.ok(html.includes("no Step 2 CK clinical items in the bank yet"), "bank note kept in the info row");
@@ -255,7 +255,7 @@ test("coming bank (Step 2 CK, PLAB): one short state, format behind an info row"
   t2.T2._P.fx = papers();
   t2.T2._P.sess = null;
   const html2 = t2.T2.testsHtml(t2.H);
-  assert.ok(html2.includes('data-p="plab-1"') && html2.includes("Questions for this exam are being added."), "PLAB plan reads the coming state");
+  assert.ok(html2.includes('data-p="plab-1"') && html2.includes("No questions for this exam in the bank yet."), "PLAB plan reads the empty state");
 });
 
 test("legacy usmle plan reads Step 1; no plan reads the tab default", () => {

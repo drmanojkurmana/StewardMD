@@ -43,7 +43,7 @@
   /* NEET-SS papers are set per specialty group (NBEMS NEET-SS bulletin: one 150-question paper per group; the 2025
      groups below, each with its feeder broad specialty). subjects = the bank's ss-* subjects in that group: the
      question bank covers the Medical group (plus the single-group subjects named), so every other group lists no
-     subjects yet and its students see the honest "being added" state until its bank exists. */
+     subjects yet and its students see the honest empty state until its bank exists. */
   var SS_GROUPS = [
     { id: "medical", label: "Medical group", feeder: "MD or DNB General Medicine",
       subjects: ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology",
@@ -568,7 +568,7 @@
     if (c.exam === "neet-ss") {
       return '<div class="pl-subq" role="radiogroup" aria-label="NEET-SS group"><p class="pn-mut pn-small">Your group: one paper per group.</p><div class="pl-opts">' + SS_GROUPS.map(function (g) {
         var on = (c.group || defaultSsGroup()) === g.id, noq = !g.subjects.length;
-        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder + (noq ? ". Questions being added" : "")) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
+        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder + (noq ? ". No questions in the bank yet" : "")) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
       }).join("") + "</div></div>";
     }
     if (c.exam === "ini-ss") {

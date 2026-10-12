@@ -172,7 +172,7 @@
       rowNew: T("Study sets, topics, timed exam", "अभ्यास सेट, विषय, टाइम्ड परीक्षा"), rowSeen: T("{n} answered", "{n} उत्तर दिए"), rowDue: T("{n} due", "{n} बाकी"),
       nQ: T("{n} questions", "{n} प्रश्न"), loading: T("Loading questions…", "प्रश्न लोड हो रहे हैं…"), loadingN: T("Loading questions: {d} of {n} topics", "प्रश्न लोड हो रहे हैं: {n} में से {d} विषय"),
       loadErr: T("The questions did not load. Check the connection and try again.", "प्रश्न लोड नहीं हुए। कनेक्शन जांचें और फिर कोशिश करें।"), retry: T("Try again", "फिर कोशिश करें"),
-      none: T("The question bank is being prepared. It will appear here soon.", "प्रश्न बैंक तैयार हो रहा है। यह जल्द ही यहाँ दिखेगा।"),
+      none: T("No questions in this bank yet.", "अभी इस बैंक में कोई प्रश्न नहीं है।"),
       back: T("Back to Test", "टेस्ट पर वापस"), backBank: T("Back to question bank", "प्रश्न बैंक पर वापस"),
       mode: T("Mode", "मोड"), study: T("Study", "अभ्यास"), exam: T("Exam", "परीक्षा"),
       studyLine: T("Each answer is marked at once, with its explanation.", "हर उत्तर तुरंत जाँचा जाता है, व्याख्या के साथ।"),
@@ -217,7 +217,7 @@
     function levelGate(run) { return I.level() === "resident" ? I.gate("bank.resident", run) : run(); }
 
     /* ---------- data ---------- */
-    // Never rejects: a missing index (404) is "being prepared"; any other failure is Q.err.
+    // Never rejects: a missing index (404) is "empty"; any other failure is Q.err.
     function load() {
       if (Q.ix) return Promise.resolve(Q.ix);
       if (Q.loading) return Q.loading;
