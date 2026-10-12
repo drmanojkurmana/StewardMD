@@ -360,8 +360,9 @@ export function verifySidecar(dir, { cache = null, root = ROOT } = {}) {
 
 /* ---------- cli ---------- */
 function upload(dir, yes) {
+  // --no-ids: the sidecar names existing items, so the share-ID index needs no rebuild.
   return new Promise((res, rej) => {
-    const p = spawn(process.execPath, [path.join(ROOT, "tools/prep-upload-bank.mjs"), "--dir", dir, "--as", "quality", "--jobs", "8"].concat(yes ? ["--yes"] : []), { stdio: "inherit" });
+    const p = spawn(process.execPath, [path.join(ROOT, "tools/prep-upload-bank.mjs"), "--dir", dir, "--as", "quality", "--jobs", "8", "--no-ids"].concat(yes ? ["--yes"] : []), { stdio: "inherit" });
     p.on("close", (c) => (c === 0 ? res() : rej(new Error("upload failed"))));
   });
 }
