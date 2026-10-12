@@ -7,7 +7,7 @@
  *    PLAB 1, AMC CAT MCQ, MCCQE Part I official, USMLE Step 2 CK provisional; MRCP Part 1, MRCP Part 2 Written,
  *    MRCS Part A provisional);
  *  - every profile carries a calibration block (status, items studied, sources, date; aggregate stats only, no item
- *    text) and the seven coming formats report bankStatus coming: the Tests tab shows their format with no test buttons;
+ *    text) and the one coming format reports bankStatus coming: the Tests tab shows its format with no test buttons;
  *  - client and server read one source: prep.js MOCKS equals the pre-flag literal, functions/_prep-arena.js SCHEMES and
  *    functions/_prep-core.js EXAM_PROFILES equal what they were, and prep-profiles.js is the up-to-date compile;
  *  - assemble(): eligible items only, no duplicate id or stem, official quotas never filled from other subjects (shrink,
@@ -121,9 +121,9 @@ test("official numbers as checked in the stored bulletins (2026-10-10)", () => {
   assert.equal(ma.tab, "mrcs"); assert.equal(ma.blueprint.kind, "none");
 });
 
-test("bank status: ten banked exams available, three new formats coming", () => {
-  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "plab-1", "mrcs-part-a", "amc-mcq", "mccqe-1"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
-  for (const id of ["usmle-step2-ck", "mrcp-part1", "mrcp-part2-written"]) {
+test("bank status: twelve banked exams available, one new format coming", () => {
+  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "plab-1", "mrcs-part-a", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
+  for (const id of ["usmle-step2-ck"]) {
     assert.equal(A.bankStatus(A.profile(id)), "coming", id);
     assert.match(A.profile(id).bank.note, /no .* in the bank yet/);
   }
@@ -164,10 +164,9 @@ test("Tests tab: coming exams show format only, no test buttons", () => {
   const G = { location: { search: "" }, localStorage: { getItem: () => null }, PREP_ASSESS: A };
   new Function("window", src)(G);
   const usmle = G.PREP_TESTS.testsHtml(mkH("usmle"));
-  assert.match(usmle, /More exam formats/);
   assert.match(usmle, /Format available, question bank coming/);
-  for (const id of ["usmle-step2-ck", "mrcp-part1", "mrcp-part2-written"]) assert.ok(usmle.includes('data-p="' + id + '"'), id + " shown");
-  for (const id of ["usmle-step2-ck", "mrcp-part1", "mrcp-part2-written"]) assert.ok(!usmle.includes('data-p="' + id + '" data-k='), id + " has no test buttons");
+  assert.ok(usmle.includes('data-p="usmle-step2-ck"'), "step2ck shown");
+  assert.ok(!usmle.includes('data-p="usmle-step2-ck" data-k='), "step2ck has no test buttons");
   assert.ok(usmle.includes('data-p="usmle-step1" data-k='), "Step 1 keeps its test buttons");
   const pg = G.PREP_TESTS.testsHtml(mkH("neet-pg"));
   assert.ok(pg.includes("More exam formats") && pg.includes('data-p="usmle-step2-ck"'));
