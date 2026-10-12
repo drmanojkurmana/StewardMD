@@ -7,7 +7,7 @@ import os from "node:os";
 import path from "node:path";
 import { norm, leadIn, leadSec, normKbId, kbDocs, phrases, drugPhrases, matcher, scan, linkItem, expText, dictionaries,
   confirmRequests, build, reportText, SHOW, MAX, CONFIRM_SCHEMA, kbBridge, pickKbLesson, matchChapter, sigWords,
-  addTopicLinks } from "../tools/prep-links.mjs";
+  addTopicLinks, stampLinks, gapsReport } from "../tools/prep-links.mjs";
 import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const D = dictionaries();
@@ -146,4 +146,40 @@ test("addTopicLinks: own chapter at the bar, topics fill slots, one specific les
     { mid: "m0", sid: "s", topics: {}, lessons: new Map(), lessonMeta: new Map([["m1", { title: "Liver Masses" }]]),
       bridge: new Map([["a", [{ key: "m1", n: 3 }]]]), midSid: new Map([["m1", "s"]]), images: new Map() });
   assert.deepEqual(kbL.filter((l) => l.k === "ls"), [{ k: "ls", id: "m1", title: "Liver Masses", c: 80, v: "lk", sec: "" }]);
+});
+
+test("addTopicLinks: a weak same-topic mention upgrades to the topic tier instead of nothing", () => {
+  const topics = { m0: { kb: [["cataract", "Cataract"]], pr: [] } };
+  const ctx = { mid: "m0", sid: "s", topics, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map() };
+  const weak = [{ k: "kb", id: "cataract", title: "Cataract", c: 55, v: "e", sec: "" }];
+  addTopicLinks(weak, { q: "Rosette shaped cataract is seen in?" }, ctx);
+  assert.deepEqual(weak.map((l) => [l.k, l.id, l.v, l.c]), [["kb", "cataract", "kt", 75]]);
+  const other = [{ k: "kb", id: "glaucoma", title: "Glaucoma", c: 55, v: "e", sec: "" }];
+  addTopicLinks(other, { q: "What?" }, ctx);
+  assert.equal(other[0].v, "e", "a weak off-topic mention stays below the bar");
+  assert.ok(other.some((l) => l.k === "kb" && l.id === "cataract" && l.v === "kt" && l.c === 75), "the module topic still fills the slot");
+});
+
+test("stampLinks: kept items arrive with honest concept links and the module lesson, never inflated topics", () => {
+  const items = [
+    { id: "q_new1", q: "Heart failure with reduced ejection fraction. Drug of choice?", o: ["Lisinopril", "Amlodipine", "Metoprolol", "Digoxin"], a: 0, exp: "The ACE inhibitor lisinopril is first line." },
+    { id: "q_new2", q: "Which structure passes through the carpal tunnel?", o: ["Median nerve", "Ulnar nerve", "Radial artery", "Palmaris longus"], a: 0, exp: "" },
+  ];
+  stampLinks(items, { sid: "medicine", mid: "med-acid-base" });
+  assert.ok(items[0].x && items[0].x.links, "a concept item is stamped");
+  assert.ok((items[0].x.links.drug_ids || []).length > 0, "the keyed drug is stamped");
+  assert.deepEqual(items[0].x.links.lesson_ids, ["med-acid-base"], "the module's own bundled lesson is stamped");
+  assert.ok(items[1].x && items[1].x.links, "an item with no mappable concept still gets its chapter");
+  assert.deepEqual(items[1].x.links.lesson_ids, ["med-acid-base"]);
+  assert.equal((items[1].x.links.kb_ids || []).length, 0, "no concept is invented, and no kt topic is stamped at pipeline confidence");
+});
+
+test("gapsReport: counts linked from shards against the index total", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "links-gaps-"));
+  fs.mkdirSync(path.join(dir, "m"), { recursive: true });
+  fs.writeFileSync(path.join(dir, "index.json"), JSON.stringify({ n: { items: 5 }, m: { m1: "s/h1", m2: "s/h2" } }));
+  fs.writeFileSync(path.join(dir, "m/m1-h1.json"), JSON.stringify({ e: { a: [], b: [] } }));
+  fs.writeFileSync(path.join(dir, "m/m2-h2.json"), JSON.stringify({ e: { c: [] } }));
+  assert.deepEqual(gapsReport(dir), { items: 5, linked: 3, unlinked: 2 });
+  assert.equal(gapsReport(path.join(dir, "nope")), null);
 });

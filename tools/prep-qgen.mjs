@@ -25,6 +25,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const E = await import(pathToFileURL(path.join(ROOT, "functions/_prep-qgen.js")).href);
+const { stampLinks } = await import(pathToFileURL(path.join(ROOT, "tools/prep-links.mjs")).href);
 const WORK = process.env.PREP_QGEN_WORK || path.join(os.homedir(), "prep-data", "qgen");
 
 const argv = process.argv.slice(2);
@@ -70,9 +71,12 @@ export function estimateJob(parts, cfg) {
 }
 /* toOverlay(items, { subject, module, set }) -> { topic, set, v, items } in the overlay shape prep.js loads.
    Four options (the qgen engine) or five (best-of-five banks such as MRCP); exam tags pass through so the
-   Tests tab can scope overlay items to one profile. */
+   Tests tab can scope overlay items to one profile. Kept items are link-stamped first (tools/prep-links.mjs
+   stampLinks: deterministic concept links plus the module's own lesson), so new banks arrive linked and future
+   indexes keep 100% without a retro-fix. */
 export function toOverlay(items, o) {
   const keep = (items || []).filter((it) => it && it.q && Array.isArray(it.o) && (it.o.length === 4 || it.o.length === 5) && Number.isInteger(it.a) && it.a >= 0 && it.a < it.o.length && (!it.qg || it.qg.v === "ok" || it.qg.approved));
+  try { stampLinks(keep, { sid: o.subject, mid: o.module, root: ROOT }); } catch (_) { /* stamping never blocks a publish */ }
   return { topic: o.module, set: o.set, v: 1, items: keep.map((it) => {
     const id = "mk-" + String(it.id || "").replace(/^q_/, "");
     const out = { id, q: it.q, o: it.o, a: it.a, exp: it.exp || "", r: it.r || [], kp: it.kp || "", t: o.module, d: it.d || 2, cog: it.cog || "recall", prov: "SMD", gen: "AI", set: o.set };

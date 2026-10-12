@@ -359,9 +359,16 @@ export function addTopicLinks(links, it, ctx = {}) {
   const own = L.find((l) => l.own && l.title);
   if (own && !has.has("ls:" + own.key)) { links.push({ k: "ls", id: own.key, title: own.title, c: 75, v: "lt", sec: "" }); has.add("ls:" + own.key); }
   // Mapped KB/protocol topics fill the kinds' remaining slots (topic tier, routed to the answering section).
+  // The module's topic is verified for every item in it: a weak same-target mention below the bar (a typo'd or
+  // explanation-only name) is upgraded to the topic tier instead of leaving the item with nothing.
   const entry = ctx.topics && ctx.topics[mid];
   if (entry) {
     const sec = leadSec(it.q || "");
+    for (const l of links) {
+      if (l.c >= SHOW || l.v === "kt") continue;
+      if (l.k === "kb" && (entry.kb || []).some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = sec; }
+      else if (l.k === "pr" && (entry.pr || []).some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = ""; }
+    }
     for (const [id, title] of entry.kb || []) if (count("kb") < MAX.kb && !has.has("kb:" + id)) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
     for (const [id, title] of entry.pr || []) if (count("pr") < MAX.pr && !has.has("pr:" + id)) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
   }
@@ -397,6 +404,71 @@ export function addTopicLinks(links, it, ctx = {}) {
     }
   }
   return links;
+}
+
+/* gapsReport(outDir) -> { items, linked, unlinked } over a built links out dir (fast, no bank needed).
+   Modules with zero links have no shard, so their items sit inside `unlinked` (see the per-module gap report
+   for names). The floor CI job fails while unlinked exceeds 0. */
+export function gapsReport(outDir) {
+  const ix = readJ(path.join(outDir, "index.json"));
+  if (!ix) return null;
+  let linked = 0;
+  for (const [m, v] of Object.entries(ix.m || {})) {
+    const sh = readJ(path.join(outDir, `m/${m}-${String(v).split("/")[1]}.json`));
+    if (sh) linked += Object.keys(sh.e || {}).length;
+  }
+  const items = (ix.n && ix.n.items) || 0;
+  return { items, linked, unlinked: items - linked };
+}
+
+/* ================= new-item stamping ================= */
+/* stampLinks(its, { sid, mid, root, cache }) -> its (mutated, also returned) with honest x.links stamped.
+   The content pipeline calls this when it keeps new items, so future banks arrive linked: deterministic
+   concept links at/above the bar (specific tiers only) plus the module's own lesson. The module's KB/protocol
+   topic (kt) is deliberately NOT stamped: downstream it would ride at pipeline confidence, and the topic tier
+   belongs to the index build, which adds it on the next publish. Items with nothing honest get no x.links
+   (a wrong link is worse than none); the runtime floor covers their display. */
+export function stampLinks(its, o = {}) {
+  const root = o.root || ROOT;
+  const D = dictionaries(root);
+  if (!D || !D.M) return its;
+  const topicsDoc = readJ(path.join(root, "prep/bank/topic-links.json")) || {};
+  const topics = topicsDoc.modules || {};
+  const bankLes = (o.cache && readJ(path.join(o.cache, "lessons-index.json")) || {}).modules || {};
+  const appLes = (readJ(path.join(root, "prep/lessons/v1/index.json")) || {}).modules || {};
+  const merged = { ...bankLes };
+  for (const [k, e] of Object.entries(appLes)) if (!merged[k] || e.gen === "hand") merged[k] = e;
+  const lessonsOf = new Map();
+  for (const [k, e] of Object.entries(merged)) {
+    const m = (e && e.module) || k;
+    if (!lessonsOf.has(m)) lessonsOf.set(m, []);
+    lessonsOf.get(m).push({ key: k, title: (e && e.title) || "", own: k === m });
+  }
+  const lessonMeta = new Map(Object.entries(merged).map(([k, e]) => [k, { title: (e && e.title) || "" }]));
+  const images = new Map(Object.entries(topicsDoc.images || {}));
+  const sid = o.sid || null, mid = o.mid || "";
+  const midSid = new Map(mid && sid ? [[mid, sid]] : []);
+  for (const it of its || []) {
+    if (!it || (it.flags && it.flags.length) || !Array.isArray(it.o) || it.o.length < 2 || typeof it.a !== "number") continue;
+    const links = linkItem(it, D.M, { df: new Map(), n: 0, clinical: typeof CLINICAL !== "undefined" ? CLINICAL.test(sid || "") : undefined, byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds });
+    addTopicLinks(links, it, { mid: it.t || mid, sid, topics, lessons: lessonsOf, lessonMeta, bridge: new Map(), midSid, images });
+    const keep = links.filter((l) => l.c >= SHOW && l.v !== "kt");
+    if (!keep.length) continue;
+    const L = {};
+    for (const l of keep) {
+      const k = l.k === "kb" ? "kb_ids" : l.k === "dr" ? "drug_ids" : l.k === "pr" ? "protocol_ids" : l.k === "ls" ? "lesson_ids" : l.k === "cd" ? "card_ids" : null;
+      if (!k) continue;
+      if (!L[k]) L[k] = [];
+      if (!L[k].includes(l.id)) L[k].push(l.id);
+    }
+    if (!Object.keys(L).length) continue;
+    const x = it.x && typeof it.x === "object" ? it.x : {};
+    const old = x.links && typeof x.links === "object" ? x.links : {};
+    const M = { ...old };
+    for (const [k, ids] of Object.entries(L)) M[k] = Array.from(new Set([].concat(M[k] || [], ids)));
+    it.x = { ...x, links: M };
+  }
+  return its;
 }
 
 /* ================= corpus ================= */
@@ -518,7 +590,13 @@ function lessonKbMap(cache, byKey) {
 export function build({ cache, bank, confirmed = null, log = () => {} }) {
   const D = dictionaries();
   const lessonKb = lessonKbMap(cache, D.byKey);
-  const les = (readJ(path.join(cache, "lessons-index.json")) || {}).modules || {};
+  // Lessons: the bank index plus the bundled pilot lessons, merged the way the app merges them
+  // (prep-lessons.js mergeIx: bank wins, except a hand-written bundled file wins for its module), so a
+  // bundled-only lesson links its module too and future bundled lessons never need a retro-fix.
+  const bankLes = (readJ(path.join(cache, "lessons-index.json")) || {}).modules || {};
+  const appLes = (readJ(path.join(ROOT, "prep/lessons/v1/index.json")) || {}).modules || {};
+  const les = { ...bankLes };
+  for (const [k, e] of Object.entries(appLes)) if (!les[k] || e.gen === "hand") les[k] = e;
   const cards = (readJ(path.join(cache, "cards-index.json")) || {}).modules || {};
   const lessonsOf = new Map();
   for (const [k, e] of Object.entries(les)) {
@@ -725,6 +803,13 @@ async function main(argv = process.argv.slice(2)) {
   }
   if (cmd === "publish") { await upload(out, argv.includes("--yes")); if (!argv.includes("--yes")) return; }
   if (cmd === "verify" || cmd === "publish") { const bad = await verifyPublished({ api }); if (bad.length) process.exit(1); }
-  if (!["fetch", "build", "verify", "publish", "confirm"].includes(cmd)) { console.log("usage: node tools/prep-links.mjs fetch|build|confirm|verify|publish [--yes] [--run --cap 6] [--bank dir] [--cache dir] [--out dir] [--api base]"); process.exit(2); }
+  if (cmd === "gaps") {
+    const g = gapsReport(out);
+    if (!g) { console.log("gaps: no index.json under " + out + " (run build first)"); process.exit(2); }
+    console.log(JSON.stringify(g));
+    if (argv.includes("--fail") && g.unlinked > 0) process.exit(1);
+    return;
+  }
+  if (!["fetch", "build", "verify", "publish", "confirm", "gaps"].includes(cmd)) { console.log("usage: node tools/prep-links.mjs fetch|build|confirm|verify|publish|gaps [--fail] [--yes] [--run --cap 6] [--bank dir] [--cache dir] [--out dir] [--api base]"); process.exit(2); }
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message || e); process.exit(1); });
