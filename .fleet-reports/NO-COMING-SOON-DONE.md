@@ -89,13 +89,31 @@ OVERLAYS +2 subjects, counts +maik28, share-ID index republished (211,262
 MCQs, 0 wrong). Spend $4.43. Exception: ch-haem reached only 17/25 (heavy
 gate losses, then its retry batch wedged 60+ min at 0/3) — still thin.
 
+## Content built, wave 4: maik29 (12 modules, 216 verified MCQs)
+
+ch-haem retry as a fresh batch (8/8 verified; 9 base + 16 new = exactly 25)
+plus 11 NEET-SS thin modules to >=25: ss-cardiology 1 (pericardial),
+ss-critical-care 3 (scoring, environmental, post-icu), ss-endocrinology 1
+(polyglandular-immunotherapy), ss-nephrology 4 (alport, BK polyomavirus, GFR
+biomarkers, paediatric), ss-pulmonology 2 (DAH-vasculitis, rare ILD).
+Same pipeline (haiku gen, sonnet blind verify, gates + local jaccard>=0.6
+screen vs R2 stems; 0 dups). Shipped: overlay/maik29 (12 files, R2,
+live-verified per file), prep.js OVERLAYS +4 subjects (+maik29 on 2 more),
+counts +maik29 (52 sets, nothing dropped/changed), share-ID index
+republished (211,478 MCQs checked, 0 wrong). Spend $3.57 across 19 jobs.
+Exception: sen-monogenic-diabetes at 23/25 (first top-up fully g5-gated;
+steered retry with 223 R2 bank stems still running) — 16 banked items held
+locally, to publish as maik30 with the retry output.
+
 ## Remainder (content, NOT done) with cost to finish
 
-- Thin (<10) modules left: 49 (was 186): ch-haem (17, retry when batch
-  backlog clears), remaining AMC/PLAB/MRCS-plan thin, SS thin (gen-med 12,
-  neuro 6, rheum 6, onco 5, nephro 5, ID 4, pulm 2, endo 2, cards 1, crit 3,
-  biostat 1). ≈ 49 × ~18 ≈ 900 items ≈ $15 at $0.017/item — beyond the
-  remaining $4.79 of the $30 job budget; needs a follow-up budget.
+- Thin (<10) modules left: 98 (was 110 before wave 4, 186 before wave 2):
+  AMC-plan adult-health-medicine 18, adult-health-surgery 10,
+  womens-health 11, population-health-and-ethics 10; SS gen-med 12, neuro 6,
+  rheum 6, onco 5, ID 4, endo 1 (sen-monogenic, maik30 pending); PLAB/MRCS/
+  MRCP-plan smalls 10. ≈ 1,694 items to the 25-bar ≈ $28.80 at
+  $0.017/item — beyond the remaining $1.22 of the $30 job budget; needs a
+  follow-up budget.
 - PYQ without explanation: counted exactly — 2,570 of 10,483 live items
   (660 empty + 1,910 short, 19 subjects). Dry-run estimate $1.53 via
   tools/prep-explain.mjs (Vertex Batch) — NOT runnable from this sandbox
@@ -108,13 +126,14 @@ gate losses, then its retry batch wedged 60+ min at 0/3) — still thin.
 
 ## Spend
 
-Content spend, all waves: $25.21 API (126 batch jobs, haiku gen + sonnet
-verify, 1.12M in / 5.36M out tokens) for 1,640 verified MCQs ($0.015/item):
-maik26 $2.80 (163), maik27 $17.97 (1,204), maik28 $4.43 (273).
-Job ledger: /tmp/no-coming-soon-spend.tsv (126 rows). Global ledger file is
+Content spend, all waves: $28.78 API (145 batch jobs, haiku gen + sonnet
+verify) for 1,856 verified MCQs ($0.0155/item):
+maik26 $2.80 (163), maik27 $17.97 (1,204), maik28 $4.43 (273),
+maik29 $3.57 (216).
+Job ledger: /tmp/no-coming-soon-spend.tsv (145 rows). Global ledger file is
 read-only from this sandbox (still 213 rows, $112.28 on disk): the rows must
-be appended by the ledger owner; true total then $137.49, under the $192
-stop and inside the $30 job budget ($4.79 left).
+be appended by the ledger owner; true total then $141.06, under the $192
+stop and inside the $30 job budget ($1.22 left).
 
 ## Verification
 
@@ -122,7 +141,7 @@ stop and inside the $30 job budget ($4.79 left).
   scan logic against HEAD: 9 hits (proves the guard catches the old code).
 - Neighbour suites green with the prescribed flags
   (`--experimental-test-module-mocks --experimental-sqlite`):
-  prep-app 32, prep-assess 20, prep-arena-server 14, prep-qgen 26,
+  prep-app 33, prep-assess 23, prep-arena-server 14, prep-qgen 26,
   prep-social-server 7, prep-create 37, specialty-bank 10,
   specialty-tools 9, specialty-engine 5, prep-core 18, prep-nav 10,
   prep-lessons 23, prep-subject 6.
