@@ -1,0 +1,116 @@
+{
+ "v": 1,
+ "module": "ahm-neuropathy",
+ "subject": "adult-health-medicine",
+ "title": "Neuropathy and weakness: a practical approach",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Nutritional causes matter, especially **vitamin B12 deficiency**, which is linked to long-term metformin use. Anaemia and finger tingling suggest B12 deficiency. Serum B12 is the most useful next test in this setting. Mild neuropathy with a clear cause should not prompt invasive testing first.",
+   "say": "Nutritional causes matter, especially vitamin B12 deficiency, which is linked to long-term metformin use. Anaemia and finger tingling suggest B12 deficiency. Serum B12 is the most useful next test in this setting. Mild neuropathy with a clear cause should not prompt invasive testing first.",
+   "vis": null
+  },
+  {
+   "tx": "Upper and lower motor neurone signs together point to **motor neurone disease**. Lower motor neurone loss causes wasting, fasciculations and reduced reflexes. Upper motor neurone loss causes brisk reflexes and extensor plantars. Sensation, eye movements and pupils are normal, which helps separate it from multiple sclerosis and cervical myelopathy.",
+   "say": "Upper and lower motor neurone signs together point to motor neurone disease. Lower motor neurone loss causes wasting, fasciculations and reduced reflexes. Upper motor neurone loss causes brisk reflexes and extensor plantars. Sensation, eye movements and pupils are normal, which helps separate it from multiple sclerosis and cervical myelopathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper motor neurone",
+     "points": [
+      "Brisk reflexes",
+      "Extensor plantar response",
+      "Spasticity"
+     ]
+    },
+    "right": {
+     "title": "Lower motor neurone",
+     "points": [
+      "Wasting",
+      "Fasciculations",
+      "Reduced or absent reflexes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Carpal tunnel syndrome** causes median nerve distribution numbness, often worse at night and relieved by shaking the hand. A positive Phalen test supports the diagnosis. Without wasting or weakness, initial management is conservative, with night-time wrist splinting. Surgery is reserved for persistent symptoms, wasting or failed conservative care.",
+   "say": "Carpal tunnel syndrome causes median nerve distribution numbness, often worse at night and relieved by shaking the hand. A positive Phalen test supports the diagnosis. Without wasting or weakness, initial management is conservative, with night-time wrist splinting. Surgery is reserved for persistent symptoms, wasting or failed conservative care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Night numbness, median territory"
+     },
+     {
+      "id": "b",
+      "label": "Phalen positive"
+     },
+     {
+      "id": "c",
+      "label": "No wasting or weakness"
+     },
+     {
+      "id": "d",
+      "label": "Night wrist splint"
+     },
+     {
+      "id": "e",
+      "label": "Surgery if refractory"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cauda equina syndrome** is a surgical emergency. Red flags include low back pain with leg radiation, foot drop, saddle sensory loss and urinary retention. MRI of the lumbar spine should be urgent, not routine. Delay can cause permanent bladder, bowel and leg deficit.",
+   "say": "Cauda equina syndrome is a surgical emergency. Red flags include low back pain with leg radiation, foot drop, saddle sensory loss and urinary retention. MRI of the lumbar spine should be urgent, not routine. Delay can cause permanent bladder, bowel and leg deficit.",
+   "vis": null
+  },
+  {
+   "tx": "**Guillain-Barre syndrome** presents with ascending symmetrical flaccid weakness, areflexia and often a preceding infection. Falling vital capacity signals impending respiratory failure and needs admission with close monitoring. Intravenous immunoglobulin is the key immediate treatment. Tick paralysis, in contrast, is treated by removing the tick.",
+   "say": "Guillain-Barre syndrome presents with ascending symmetrical flaccid weakness, areflexia and often a preceding infection. Falling vital capacity signals impending respiratory failure and needs admission with close monitoring. Intravenous immunoglobulin is the key immediate treatment. Tick paralysis, in contrast, is treated by removing the tick.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Davidson's Principles and Practice of Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

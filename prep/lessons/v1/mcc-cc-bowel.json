@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "mcc-cc-bowel",
+ "subject": "mcc-chronic-care",
+ "title": "Bowel habit change and constipation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Constipation means infrequent or hard stools that are difficult to pass. A **change in bowel habit** in an older adult is a red flag until proven otherwise. Clinicians should ask about onset, duration, stool form, bleeding, weight loss, anaemia and family history of **colorectal cancer**. New symptoms in an older patient, or **iron deficiency anaemia**, warrant prompt colonic visualisation rather than symptomatic treatment alone.",
+   "say": "Constipation means infrequent or hard stools that are difficult to pass. A change in bowel habit in an older adult is a red flag until proven otherwise. Clinicians should ask about onset, duration, stool form, bleeding, weight loss, anaemia and family history of colorectal cancer. New symptoms in an older patient, or iron deficiency anaemia, warrant prompt colonic visualisation rather than symptomatic treatment alone.",
+   "vis": null
+  },
+  {
+   "tx": "Alarm features include **rectal bleeding**, unintentional weight loss, **iron deficiency anaemia**, a palpable abdominal mass, nocturnal symptoms and new onset of symptoms in older adults. Any of these warrants prompt investigation, usually colonoscopy, before attributing symptoms to a functional cause. Guaiac-positive stool in a patient with microcytic anaemia is a strong signal of colorectal neoplasia.",
+   "say": "Alarm features include rectal bleeding, unintentional weight loss, iron deficiency anaemia, a palpable abdominal mass, nocturnal symptoms and new onset of symptoms in older adults. Any of these warrants prompt investigation, usually colonoscopy, before attributing symptoms to a functional cause. Guaiac-positive stool in a patient with microcytic anaemia is a strong signal of colorectal neoplasia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Implication"
+    ],
+    "rows": [
+     [
+      "Rectal bleeding",
+      "Colonoscopy needed"
+     ],
+     [
+      "Weight loss",
+      "Consider malignancy"
+     ],
+     [
+      "Iron deficiency",
+      "Colon must be seen"
+     ],
+     [
+      "Palpable mass",
+      "Urgent referral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Opioid-induced constipation is common with long-term use. Opioids act on **mu receptors** in the enteric nervous system, reducing peristalsis and increasing fluid absorption. First-line management is a scheduled **osmotic laxative** such as polyethylene glycol, which draws water into the lumen. Stimulant laxatives can be added if needed, and loperamide must not be used because it worsens the problem.",
+   "say": "Opioid-induced constipation is common with long-term use. Opioids act on mu receptors in the enteric nervous system, reducing peristalsis and increasing fluid absorption. First-line management is a scheduled osmotic laxative such as polyethylene glycol, which draws water into the lumen. Stimulant laxatives can be added if needed, and loperamide must not be used because it worsens the problem.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Osmotic",
+     "points": [
+      "Draws water into bowel",
+      "Softens stool",
+      "Scheduled dosing"
+     ]
+    },
+    "right": {
+     "title": "Avoid",
+     "points": [
+      "Loperamide",
+      "Worsens constipation",
+      "Opioid dose cut not first step"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Faecal impaction presents as overflow diarrhoea, a palpable hard rectal mass, and distension in an older, immobile or demented patient. Anticholinergic drugs and reduced mobility slow transit. Treatment is **manual disimpaction** under analgesia, followed by rectal treatment and a regular laxative regimen. Abdominal imaging is not the first step when the mass is palpable on examination.",
+   "say": "Faecal impaction presents as overflow diarrhoea, a palpable hard rectal mass, and distension in an older, immobile or demented patient. Anticholinergic drugs and reduced mobility slow transit. Treatment is manual disimpaction under analgesia, followed by rectal treatment and a regular laxative regimen. Abdominal imaging is not the first step when the mass is palpable on examination.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Overflow diarrhoea"
+     },
+     {
+      "id": "b",
+      "label": "Palpable rectal mass"
+     },
+     {
+      "id": "c",
+      "label": "Manual disimpaction"
+     },
+     {
+      "id": "d",
+      "label": "Regular laxatives"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sigmoid volvulus is a closed-loop obstruction in which the sigmoid colon rotates on its **mesentery**. It presents with distension, no flatus, vomiting and a coffee-bean sign on imaging. Stable patients without peritonitis may be decompressed endoscopically with **flexible sigmoidoscopy**, while peritonitis or ischaemia requires surgery. Delay raises the risk of perforation and necrosis.",
+   "say": "Sigmoid volvulus is a closed-loop obstruction in which the sigmoid colon rotates on its mesentery. It presents with distension, no flatus, vomiting and a coffee-bean sign on imaging. Stable patients without peritonitis may be decompressed endoscopically with flexible sigmoidoscopy, while peritonitis or ischaemia requires surgery. Delay raises the risk of perforation and necrosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)",
+  "Bailey and Love's Short Practice of Surgery (Williams et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

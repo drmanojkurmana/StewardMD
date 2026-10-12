@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "son-tissue-agnostic",
+ "subject": "ss-medical-oncology",
+ "title": "Tissue agnostic and precision oncology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Tissue agnostic therapy means a drug is approved for a **biomarker** rather than for the organ where the tumour began. Early approvals rested on single-arm trials across many cancer types, so the evidence is usually weaker than for randomised trials. In India, molecular testing is concentrated at tertiary centres, so **companion diagnostic** confirmation of the biomarker must come before treatment.",
+   "say": "Tissue agnostic therapy means a drug is approved for a biomarker rather than for the organ where the tumour began. Early approvals rested on single-arm trials across many cancer types, so the evidence is usually weaker than for randomised trials. In India, molecular testing is concentrated at tertiary centres, so companion diagnostic confirmation of the biomarker must come before treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Some **biomarkers** predict benefit regardless of where the cancer started, so treatment follows the **molecular alteration** rather than the organ. Examples include **NTRK fusions**, **mismatch repair deficiency**, and **RET fusions**. Results are usually reviewed at a **molecular tumour board**, which weighs the test result, the patient's prior treatment, and available trials before a plan is chosen.",
+   "say": "Some biomarkers predict benefit regardless of where the cancer started, so treatment follows the molecular alteration rather than the organ. Examples include NTRK fusions, mismatch repair deficiency, and RET fusions. Results are usually reviewed at a molecular tumour board, which weighs the test result, the patient's prior treatment, and available trials before a plan is chosen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Tumour sequencing"
+     },
+     {
+      "id": "n2",
+      "label": "Actionable biomarker found"
+     },
+     {
+      "id": "n3",
+      "label": "Matched tissue-agnostic therapy"
+     },
+     {
+      "id": "n4",
+      "label": "Molecular tumour board review"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "NTRK gene fusions are uncommon across tumour types, yet they can be **actionable** because a single **tropomyosin receptor kinase** pathway drives growth. Matching a **targeted therapy** to the fusion, rather than to the organ of origin, is the core idea of tissue agnostic practice. Mismatch repair deficiency and high **microsatellite instability** signal a different route, where **immune checkpoint inhibitors** are often considered early.",
+   "say": "NTRK gene fusions are uncommon across tumour types, yet they can be actionable because a single tropomyosin receptor kinase pathway drives growth. Matching a targeted therapy to the fusion, rather than to the organ of origin, is the core idea of tissue agnostic practice. Mismatch repair deficiency and high microsatellite instability signal a different route, where immune checkpoint inhibitors are often considered early.",
+   "vis": null
+  },
+  {
+   "tx": "HER2 testing is not confined to breast and gastric cancer. Tumours of many tissue types can show strong HER2 protein expression on **immunohistochemistry**, and such patients may become eligible for an **antibody-drug conjugate** once standard options have been exhausted. The **molecular tumour board** brings together pathology, genomics and oncology to confirm the result before treatment is chosen.",
+   "say": "HER2 testing is not confined to breast and gastric cancer. Tumours of many tissue types can show strong HER2 protein expression on immunohistochemistry, and these patients may become eligible for an antibody-drug conjugate once standard options have been used up. The molecular tumour board brings together pathology, genomics and oncology to confirm the result before a treatment is chosen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Tissue or liquid biopsy"
+     },
+     {
+      "id": "n2",
+      "label": "Immunohistochemistry or NGS report"
+     },
+     {
+      "id": "n3",
+      "label": "Molecular tumour board"
+     },
+     {
+      "id": "n4",
+      "label": "Matched therapy decision"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **molecular tumour board** is a multidisciplinary meeting that interprets genomic results and matches them with therapy. Board decisions are especially important when a biomarker is rare or evidence is limited. In India, where access to some agents is restricted by cost and availability, the board also helps prioritise options and manage expectations.",
+   "say": "A molecular tumour board is a multidisciplinary meeting that interprets genomic results and matches them with therapy. Board decisions are especially important when a biomarker is rare or evidence is limited. In India, where access to some agents is restricted by cost and availability, the board also helps prioritise options and manage expectations.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_5c6f07b2a273",
+  "q_1c74853c5b95",
+  "q_3b837fde3f9e"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

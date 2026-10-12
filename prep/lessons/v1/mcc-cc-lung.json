@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "mcc-cc-lung",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic lung disease and ILD: diagnosis, oxygen and key treatments",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Interstitial lung disease (ILD) describes a family of conditions that **scar and stiffen the lung parenchyma**, producing a restrictive picture. Spirometry shows a **reduced FVC** with a normal or raised FEV1/FVC ratio. **DLCO** is typically low. **High-resolution CT** is the key investigation and grades the pattern. Search for drug, occupational, connective tissue and environmental triggers before labelling a case idiopathic.",
+   "say": "Interstitial lung disease covers a family of conditions that scar and stiffen the lung parenchyma, giving a restrictive picture. Spirometry shows a low FVC with a normal or raised FEV1 to FVC ratio. Transfer factor, DLCO, is typically reduced. High-resolution CT is the central test and sorts the pattern. Before accepting an idiopathic label, check carefully for drug, occupational, connective tissue and environmental causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "HRCT pattern",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "UIP",
+      "Basal subpleural honeycombing, diagnostic in the right setting"
+     ],
+     [
+      "Probable UIP",
+      "Likely IPF, confirm at multidisciplinary review"
+     ],
+     [
+      "Indeterminate",
+      "Mixed features, consider biopsy"
+     ],
+     [
+      "Alternative",
+      "Suggests another named cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Idiopathic pulmonary fibrosis is the commonest **idiopathic interstitial pneumonia** and carries a poor prognosis. **Antifibrotic** drugs such as nintedanib are the main disease-modifying treatment, as they slow the decline in forced vital capacity. Long-term corticosteroids are not recommended because they cause harm. Supportive care includes pulmonary rehabilitation, vaccination and oxygen when hypoxaemic. **Lung transplant** referral suits selected younger patients.",
+   "say": "Idiopathic pulmonary fibrosis is the commonest idiopathic interstitial pneumonia and carries a poor prognosis. Antifibrotic drugs such as nintedanib are the main disease modifying treatment, because they slow the decline in forced vital capacity. Long term corticosteroids are not recommended, as they cause harm. Supportive care includes pulmonary rehabilitation, vaccination and oxygen when the patient is hypoxaemic. Lung transplant referral suits selected younger patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "UIP or probable UIP"
+     },
+     {
+      "id": "b",
+      "label": "MDT confirmation"
+     },
+     {
+      "id": "c",
+      "label": "Antifibrotic therapy"
+     },
+     {
+      "id": "d",
+      "label": "Supportive care"
+     },
+     {
+      "id": "e",
+      "label": "Transplant if eligible"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In COPD, a **LAMA plus LABA** combination is the usual maintenance step, with an inhaled corticosteroid added for frequent exacerbations and raised eosinophils, as in GOLD. Long-term oral corticosteroids are avoided because of harm. Lung volume reduction or endobronchial valves suit selected upper-lobe emphysema with low exercise capacity. Lung transplantation is referred for severe, progressive disease. Hypoxic pulmonary hypertension is managed mainly by oxygen, not sildenafil.",
+   "say": "In COPD, a long-acting muscarinic antagonist plus long-acting beta agonist combination is the usual maintenance step, with an inhaled corticosteroid added for frequent exacerbations and raised eosinophils, as in GOLD. Long-term oral corticosteroids are avoided because of harm. Lung volume reduction or endobronchial valves suit selected upper-lobe emphysema with low exercise capacity. Lung transplantation is referred for severe, progressive disease. Hypoxic pulmonary hypertension is managed mainly by oxygen, not sildenafil.",
+   "vis": null
+  },
+  {
+   "tx": "Compare the two main chronic lung disease groups. COPD is an **obstructive** disorder where the FEV1 to FVC ratio falls. ILD is a **restrictive** disorder with a low FVC and a preserved ratio. Hypoxaemia occurs in both, but ILD usually shows a low DLCO. Corticosteroids have limited value in stable COPD and are harmful in IPF. Matching the spirometry pattern to the gas transfer result guides the right diagnosis.",
+   "say": "Compare the two main chronic lung disease groups. COPD is an obstructive disorder where the FEV1 to FVC ratio falls. ILD is a restrictive disorder with a low FVC and a preserved ratio. Hypoxaemia occurs in both, but ILD usually shows a low DLCO. Corticosteroids have limited value in stable COPD and are harmful in IPF. Matching the spirometry pattern to the gas transfer result guides the right diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "COPD",
+     "ILD"
+    ],
+    "rows": [
+     [
+      "Main defect",
+      "Airflow obstruction",
+      "Restriction"
+     ],
+     [
+      "Spirometry",
+      "Ratio reduced",
+      "Ratio preserved, FVC low"
+     ],
+     [
+      "Gas transfer",
+      "Often normal or mildly low",
+      "Usually reduced DLCO"
+     ],
+     [
+      "Steroid role",
+      "Limited, for exacerbations",
+      "Harmful in IPF"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "British Thoracic Society guideline for home oxygen use in adults",
+  "ATS/ERS/JRS/ALAT clinical practice guideline: idiopathic pulmonary fibrosis (2015)",
+  "Global Initiative for Chronic Obstructive Lung Disease (GOLD) report"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 4
+ }
+}

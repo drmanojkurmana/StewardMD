@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "mcc-ac-chest-pain",
+ "subject": "mcc-acute-care",
+ "title": "Chest pain assessment: a structured approach in acute care",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Chest pain has many causes, and the first task is to separate life-threatening conditions from benign ones. Ask about the **character**, **site**, **radiation**, **timing** and **exertional pattern** of the pain. Check vital signs in both arms, examine the heart and lungs, and record a 12-lead ECG within ten minutes. A normal ECG does not exclude acute coronary syndrome, so serial testing matters.",
+   "say": "Chest pain has many causes, and the first task is to separate life-threatening conditions from benign ones. Ask about the character, site, radiation, timing and exertional pattern of the pain. Check vital signs in both arms, examine the heart and lungs, and record a twelve lead ECG within ten minutes. A normal ECG does not exclude acute coronary syndrome, so serial testing matters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Suggests",
+     "Think first"
+    ],
+    "rows": [
+     [
+      "Central pressure, exertional, sweating",
+      "Ischaemia",
+      "Acute coronary syndrome"
+     ],
+     [
+      "Sharp, worse lying flat, eased sitting forward",
+      "Inflammation",
+      "Pericarditis"
+     ],
+     [
+      "Pleuritic, breathless, tachycardic",
+      "Hypoxia or clot",
+      "Pulmonary embolism"
+     ],
+     [
+      "Tearing, radiating to back, arm pressure gap",
+      "Vessel wall tear",
+      "Aortic dissection"
+     ],
+     [
+      "Reproducible on palpation, brief",
+      "Chest wall",
+      "Musculoskeletal pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute coronary syndrome is the most dangerous cause and must be treated quickly. Central pressure with sweating and nausea, ST depression and a raised **troponin** suggest myocardial injury. Plaque rupture exposes thrombogenic material, platelets activate and a thrombus forms. **Aspirin** irreversibly inhibits cyclo-oxygenase 1, reducing thromboxane A2 and limiting clot growth. For non-ST elevation presentations, a **P2Y12 inhibitor** is added to block a second platelet pathway.",
+   "say": "Acute coronary syndrome is the most dangerous cause and must be treated quickly. Central pressure with sweating and nausea, ST depression and a raised troponin suggest myocardial injury. Plaque rupture exposes thrombogenic material, platelets activate and a thrombus forms. Aspirin irreversibly inhibits cyclo-oxygenase one, reducing thromboxane A2 and limiting clot growth. For non-ST elevation presentations, a P2Y12 inhibitor is added to block a second platelet pathway.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Plaque rupture"
+     },
+     {
+      "id": "b",
+      "label": "Platelet activation"
+     },
+     {
+      "id": "c",
+      "label": "Aspirin blocks COX-1"
+     },
+     {
+      "id": "d",
+      "label": "P2Y12 added in NSTEACS"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pericarditis causes **sharp pleuritic pain** that is worse lying flat and eases on leaning forward. A recent viral illness, low-grade fever and a pericardial friction rub support it. Diffuse concave ST elevation with PR depression and a normal troponin favour pericarditis over infarction. First-line treatment is an **NSAID** with **colchicine**, which lowers recurrence. Drainage or anticoagulation is not needed without tamponade.",
+   "say": "Pericarditis causes sharp pleuritic pain that is worse lying flat and eases on leaning forward. A recent viral illness, low grade fever and a pericardial friction rub support it. Diffuse concave ST elevation with PR depression and a normal troponin favour pericarditis over infarction. First line treatment is an NSAID with colchicine, which lowers recurrence. Drainage or anticoagulation is not needed without tamponade.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pericarditis",
+     "points": [
+      "Worse lying flat",
+      "Eased leaning forward",
+      "Friction rub",
+      "Normal troponin",
+      "NSAID plus colchicine"
+     ]
+    },
+    "right": {
+     "title": "Myocardial infarction",
+     "points": [
+      "Pressure, exertional",
+      "Reciprocal changes",
+      "Raised troponin",
+      "Antiplatelet and reperfusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pulmonary embolism presents with **pleuritic pain**, breathlessness, tachycardia and hypoxia. Long-haul travel and oral contraceptive use are provoking factors. A raised **D-dimer** supports the diagnosis, and a normal troponin argues against a cardiac cause. **CT pulmonary angiography** is the standard next test when suspicion is significant. Clot in the pulmonary arteries causes ventilation-perfusion mismatch and hypoxia.",
+   "say": "Pulmonary embolism presents with pleuritic pain, breathlessness, tachycardia and hypoxia. Long haul travel and oral contraceptive use are provoking factors. A raised D dimer supports the diagnosis, and a normal troponin argues against a cardiac cause. CT pulmonary angiography is the standard next test when suspicion is significant. Clot in the pulmonary arteries causes ventilation perfusion mismatch and hypoxia.",
+   "vis": null
+  },
+  {
+   "tx": "Aortic dissection is a time-critical emergency. Sudden tearing pain radiating to the back, a **blood pressure difference** of more than 20 mmHg between arms, reduced limb pulses and mediastinal widening point to it. A normal ECG does not exclude it. An intimal tear lets blood split the aortic layers. **CT angiography of the thoracic aorta** is the investigation of choice, showing the flap, extent and branch vessel involvement.",
+   "say": "Aortic dissection is a time critical emergency. Sudden tearing pain radiating to the back, a blood pressure difference of more than twenty mmHg between arms, reduced limb pulses and mediastinal widening point to it. A normal ECG does not exclude it. An intimal tear lets blood split the aortic layers. CT angiography of the thoracic aorta is the investigation of choice, showing the flap, extent and branch vessel involvement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Significance"
+    ],
+    "rows": [
+     [
+      "Tearing pain to back",
+      "Classic presentation"
+     ],
+     [
+      "Arm BP gap over 20 mmHg",
+      "Possible branch involvement"
+     ],
+     [
+      "Widened mediastinum",
+      "Supports diagnosis"
+     ],
+     [
+      "Normal ECG",
+      "Does not exclude"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Musculoskeletal chest pain is brief, sharp and reproducible on palpation over the costochondral junction. With a normal ECG, two normal **troponins** and normal vital signs, acute coronary syndrome is unlikely. Coronary testing at low pretest probability has low yield and can produce false positives. Reassurance and outpatient review are usually appropriate, with safety-netting advice for any new symptoms.",
+   "say": "Musculoskeletal chest pain is brief, sharp and reproducible on palpation over the costochondral junction. With a normal ECG, two normal troponins and normal vital signs, acute coronary syndrome is unlikely. Coronary testing at low pretest probability has low yield and can produce false positives. Reassurance and outpatient review are usually appropriate, with safety netting advice for any new symptoms.",
+   "vis": null
+  },
+  {
+   "tx": "Stable coronary disease needs long-term **secondary prevention**. After a prior stent, diabetes and a raised LDL cholesterol, a **high-intensity statin** is indicated. Statins inhibit HMG-CoA reductase, upregulate hepatic LDL receptors and stabilise plaque, reducing recurrent events. Antiplatelet therapy is usually continued, and sublingual nitrate is used only for symptom relief.",
+   "say": "Stable coronary disease needs long term secondary prevention. After a prior stent, diabetes and a raised LDL cholesterol, a high intensity statin is indicated. Statins inhibit HMG CoA reductase, upregulate hepatic LDL receptors and stabilise plaque, reducing recurrent events. Antiplatelet therapy is usually continued, and sublingual nitrate is used only for symptom relief.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "ESC Guidelines for acute and chronic coronary syndromes"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

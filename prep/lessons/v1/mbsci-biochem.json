@@ -1,0 +1,115 @@
+{
+ "v": 1,
+ "module": "mbsci-biochem",
+ "subject": "mrcp-basic-science",
+ "title": "Core principles of intermediary metabolism: control points, cofactors and fasting",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Intermediary metabolism links the pathways that break down and build fuels. **Glycolysis** converts glucose to pyruvate with a net gain of two ATP. The committed, rate-limiting step is catalysed by **phosphofructokinase-1**, which is stimulated by AMP and fructose-2,6-bisphosphate and inhibited by high ATP and citrate. This matches glycolytic flux to the cell's energy state, a favourite single-best-answer target in NEET-PG and PLAB.",
+   "say": "Intermediary metabolism links the pathways that break down and build fuels. Glycolysis converts glucose to pyruvate with a net gain of two ATP. The committed, rate-limiting step is catalysed by phosphofructokinase-1, which is stimulated by AMP and fructose-2,6-bisphosphate and inhibited by high ATP and citrate. This matches glycolytic flux to the cell's energy state, a favourite single-best-answer target in NEET-PG and PLAB.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g",
+      "label": "Glucose"
+     },
+     {
+      "id": "f",
+      "label": "Fructose-1,6-bisphosphate",
+      "sub": "PFK-1 step"
+     },
+     {
+      "id": "p",
+      "label": "Pyruvate"
+     },
+     {
+      "id": "a",
+      "label": "Acetyl-CoA"
+     }
+    ],
+    "edges": [
+     [
+      "g",
+      "f",
+      "net 2 ATP"
+     ],
+     [
+      "f",
+      "p"
+     ],
+     [
+      "p",
+      "a",
+      "PDH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cofactors decide whether enzymes work. **Thiamine pyrophosphate** is needed by pyruvate dehydrogenase, 2-oxoglutarate dehydrogenase and transketolase, so thiamine deficiency from alcohol misuse or poor intake raises lactate and causes Wernicke encephalopathy. Transketolase activity in erythrocytes is used to assess thiamine status. Cobalamin and folate both feed the remethylation of homocysteine, while cobalamin also supports methylmalonyl-CoA mutase.",
+   "say": "Cofactors decide whether enzymes work. Thiamine pyrophosphate is needed by pyruvate dehydrogenase, 2-oxoglutarate dehydrogenase and transketolase, so thiamine deficiency from alcohol misuse or poor intake raises lactate and causes Wernicke encephalopathy. Transketolase activity in erythrocytes is used to assess thiamine status. Cobalamin and folate both feed the remethylation of homocysteine, while cobalamin also supports methylmalonyl-CoA mutase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vitamin",
+     "Key enzyme or pathway",
+     "Clinical clue"
+    ],
+    "rows": [
+     [
+      "Thiamine (B1)",
+      "Pyruvate dehydrogenase, transketolase",
+      "Confusion, ataxia, nystagmus"
+     ],
+     [
+      "Cobalamin (B12)",
+      "Methionine synthase, methylmalonyl-CoA mutase",
+      "Raised homocysteine and methylmalonic acid"
+     ],
+     [
+      "Folate",
+      "Methionine synthase",
+      "Raised homocysteine alone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fasting exposes the liver's reliance on glucose release. **Glucose-6-phosphatase** removes phosphate from glucose-6-phosphate, the final step of glycogenolysis and gluconeogenesis. Its deficiency (glycogen storage disease type I) causes fasting hypoglycaemia, lactic acidosis, high urate and high triglycerides with hepatomegaly. Glucagon fails to raise glucose, which separates it from other glycogen storage disorders.",
+   "say": "Fasting exposes the liver's reliance on glucose release. Glucose-6-phosphatase removes phosphate from glucose-6-phosphate, the final step of glycogenolysis and gluconeogenesis. Its deficiency, glycogen storage disease type I, causes fasting hypoglycaemia, lactic acidosis, high urate and high triglycerides with hepatomegaly. Glucagon fails to raise glucose, which separates it from other glycogen storage disorders.",
+   "vis": null
+  },
+  {
+   "tx": "Fatty acid oxidation is the second fasting fuel. **Medium-chain acyl-CoA dehydrogenase** deficiency blocks beta-oxidation of medium-chain fatty acids. Affected children and adults develop hypoketotic hypoglycaemia during fasting or illness, with dicarboxylic aciduria and raised octanoylcarnitine (C8). Insulin is appropriately low, which distinguishes this from hyperinsulinism. Fat oxidation therefore cannot replace glucose for the brain.",
+   "say": "Fatty acid oxidation is the second fasting fuel. Medium-chain acyl-CoA dehydrogenase deficiency blocks beta-oxidation of medium-chain fatty acids. Affected children and adults develop hypoketotic hypoglycaemia during fasting or illness, with dicarboxylic aciduria and raised octanoylcarnitine, C8. Insulin is appropriately low, which distinguishes this from hyperinsulinism. Fat oxidation therefore cannot replace glucose for the brain.",
+   "vis": null
+  },
+  {
+   "tx": "Refeeding and drug toxicities are high-risk situations. **Refeeding syndrome** follows carbohydrate reintroduction after starvation, as insulin drives phosphate, potassium and magnesium into cells. Thiamine should be given first, and feeding started low and advanced slowly. Metformin-associated lactic acidosis needs urgent dialysis when acidosis and renal failure coexist.",
+   "say": "Refeeding and drug toxicities are high-risk situations. Refeeding syndrome follows carbohydrate reintroduction after starvation, as insulin drives phosphate, potassium and magnesium into cells. Thiamine should be given first, and feeding started low and advanced slowly. Metformin-associated lactic acidosis needs urgent dialysis when acidosis and renal failure coexist.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Clinical Guideline CG32: Nutrition support in adults"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 29
+ }
+}

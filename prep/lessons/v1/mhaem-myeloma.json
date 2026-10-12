@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "mhaem-myeloma",
+ "subject": "mrcp-haematology-oncology",
+ "title": "Myeloma and plasma cell disorders: key principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Multiple myeloma is a **clonal plasma cell** malignancy that produces a monoclonal paraprotein. Diagnosis needs clonal plasma cells in the marrow or a biopsy-proven plasmacytoma, plus **myeloma-defining events** such as hypercalcaemia, renal impairment, anaemia, or bone lesions. Serum and urine electrophoresis, immunofixation and serum free light chains confirm the paraprotein, but none alone excludes disease.",
+   "say": "Multiple myeloma is a clonal plasma cell malignancy that produces a monoclonal paraprotein. Diagnosis needs clonal plasma cells in the marrow or a biopsy-proven plasmacytoma, plus myeloma-defining events such as hypercalcaemia, renal impairment, anaemia, or bone lesions. Serum and urine electrophoresis, immunofixation and serum free light chains confirm the paraprotein, but none alone excludes disease.",
+   "vis": null
+  },
+  {
+   "tx": "Imaging is offered to everyone with suspected myeloma. **Whole-body MRI** is first-line. **Whole-body low-dose CT** is the alternative if MRI is unsuitable or declined. A **skeletal survey** is used only when both are unsuitable or declined. Isotope bone scans do not reliably detect myeloma lesions and should not be used for this purpose.",
+   "say": "Imaging is offered to everyone with suspected myeloma. Whole-body MRI is first-line. Whole-body low-dose CT is the alternative if MRI is unsuitable or declined. A skeletal survey is used only when both are unsuitable or declined. Isotope bone scans do not reliably detect myeloma lesions and should not be used for this purpose.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Whole-body MRI",
+      "First-line"
+     ],
+     [
+      "Whole-body low-dose CT",
+      "If MRI unsuitable or declined"
+     ],
+     [
+      "Skeletal survey",
+      "If both are unsuitable or declined"
+     ],
+     [
+      "Isotope bone scan",
+      "Not used"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Myeloma-induced **acute kidney injury** is usually caused by light chain cast nephropathy. Treatment should start immediately rather than waiting for a renal biopsy. NICE recommends a **bortezomib and dexamethasone** regimen for untreated newly diagnosed disease. Thalidomide with dexamethasone is the alternative if bortezomib is unsuitable. **Plasma exchange** is not used for this indication.",
+   "say": "Myeloma-induced acute kidney injury is usually caused by light chain cast nephropathy. Treatment should start immediately rather than waiting for a renal biopsy. NICE recommends a bortezomib and dexamethasone regimen for untreated newly diagnosed disease. Thalidomide with dexamethasone is the alternative if bortezomib is unsuitable. Plasma exchange is not used for this indication.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Myeloma AKI suspected"
+     },
+     {
+      "id": "b",
+      "label": "Start anti-myeloma therapy now"
+     },
+     {
+      "id": "c",
+      "label": "Bortezomib and dexamethasone"
+     },
+     {
+      "id": "d",
+      "label": "Thalidomide and dexamethasone if bortezomib unsuitable"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d",
+      "alternative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bone-protecting treatment reduces skeletal events. **Zoledronic acid** is first choice, then **disodium pamidronate**, with **sodium clodronate** reserved for when both are contraindicated or unsuitable. Before starting zoledronic acid or pamidronate, NICE advises considering **dental assessment and treatment**, because jaw osteonecrosis is a recognised risk. Urgent cases can have dental referral shortly after starting.",
+   "say": "Bone-protecting treatment reduces skeletal events. Zoledronic acid is first choice, then disodium pamidronate, with sodium clodronate reserved for when both are contraindicated or unsuitable. Before starting zoledronic acid or pamidronate, NICE advises considering dental assessment and treatment, because jaw osteonecrosis is a recognised risk. Urgent cases can have dental referral shortly after starting.",
+   "vis": null
+  },
+  {
+   "tx": "Suitability for **first autologous stem cell transplant** should be judged by **frailty and performance status**, including comorbidities. Chronological age and renal impairment alone must not exclude a person. Cytogenetic risk informs prognosis and is assessed separately from fitness. Allogeneic transplant is reserved for a small number of people and needs its own detailed assessment.",
+   "say": "Suitability for first autologous stem cell transplant should be judged by frailty and performance status, including comorbidities. Chronological age and renal impairment alone must not exclude a person. Cytogenetic risk informs prognosis and is assessed separately from fitness. Allogeneic transplant is reserved for a small number of people and needs its own detailed assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Use for transplant decisions",
+     "points": [
+      "Frailty measures",
+      "Performance status",
+      "Comorbidities included"
+     ]
+    },
+    "right": {
+     "title": "Do not use alone",
+     "points": [
+      "Chronological age",
+      "Renal function alone",
+      "Patient request"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Not every paraprotein finding is myeloma, and a normal screen does not end the work-up when symptoms suggest it. Persisting back pain, anaemia, bone pain or unexplained fatigue still needs whole-body imaging. Recognise the **CRAB** features (hypercalcaemia, renal impairment, anaemia, bone lesions) as the core indications for treatment once myeloma is confirmed.",
+   "say": "Not every paraprotein finding is myeloma, and a normal screen does not end the work-up when symptoms suggest it. Persisting back pain, anaemia, bone pain or unexplained fatigue still needs whole-body imaging. Recognise the CRAB features, meaning hypercalcaemia, renal impairment, anaemia and bone lesions, as the core indications for treatment once myeloma is confirmed.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG35: Myeloma: diagnosis and management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 14
+ }
+}

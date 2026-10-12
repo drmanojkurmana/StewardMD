@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "mneph-dialysis",
+ "subject": "mrcp-nephrology",
+ "title": "Dialysis: indications, complications and management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Dialysis is indicated when kidney function can no longer keep the patient safe. The classic urgent indications are summarised by the **AEIOU** mnemonic: acidosis, electrolytes (refractory hyperkalaemia), intoxication, overload unresponsive to diuretics, and uraemic features such as **pericarditis** and encephalopathy. Urgent features should prompt dialysis rather than further medical delay.",
+   "say": "Dialysis is indicated when kidney function can no longer keep the patient safe. The classic urgent indications are summarised by the AEIOU mnemonic: acidosis, electrolytes, meaning refractory hyperkalaemia, intoxication, overload unresponsive to diuretics, and uraemic features such as pericarditis and encephalopathy. When these are present, dialysis should not be deferred.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Practical point"
+    ],
+    "rows": [
+     [
+      "Acidosis",
+      "Severe, refractory to bicarbonate"
+     ],
+     [
+      "Electrolytes",
+      "Hyperkalaemia not controlled medically"
+     ],
+     [
+      "Intoxication",
+      "Dialysable drug or toxin"
+     ],
+     [
+      "Overload",
+      "Fluid unresponsive to diuretics"
+     ],
+     [
+      "Uraemia",
+      "Pericarditis or encephalopathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uraemic pericarditis is a late sign of kidney failure. It presents with pleuritic chest pain and a friction rub, and it can progress to **tamponade**. Urgent dialysis is the definitive treatment, while pericardiocentesis is reserved for tamponade or haemodynamic compromise. NSAIDs should be avoided in advanced kidney disease.",
+   "say": "Uraemic pericarditis is a late sign of kidney failure. It presents with pleuritic chest pain and a friction rub, and it can progress to tamponade. Urgent dialysis is the definitive treatment. Pericardiocentesis is reserved for tamponade or haemodynamic compromise, and nonsteroidal anti-inflammatory drugs should be avoided in advanced kidney disease.",
+   "vis": null
+  },
+  {
+   "tx": "Dialysis disequilibrium syndrome occurs when urea is removed faster than it equilibrates across the blood-brain barrier. The resulting **osmotic gradient** draws water into brain cells, causing cerebral oedema. It appears during or after early sessions with headache, nausea, confusion and seizures. Prevention uses shorter, gentler early sessions.",
+   "say": "Dialysis disequilibrium syndrome occurs when urea is removed faster than it equilibrates across the blood-brain barrier. The resulting osmotic gradient draws water into brain cells, causing cerebral oedema. It appears during or after early sessions with headache, nausea, confusion and seizures. Prevention uses shorter, gentler early sessions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rapid urea removal"
+     },
+     {
+      "id": "b",
+      "label": "Osmotic gradient"
+     },
+     {
+      "id": "c",
+      "label": "Water enters brain"
+     },
+     {
+      "id": "d",
+      "label": "Cerebral oedema and seizures"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peritonitis in peritoneal dialysis is diagnosed by cloudy effluent with a white cell count above 100 cells per microlitre, mostly neutrophils. Empirical **intraperitoneal antibiotics** should cover Gram-positive and Gram-negative organisms after cultures are sent. Catheter removal is reserved for fungal infection, exit site or tunnel infection, or failure to respond.",
+   "say": "Peritonitis in peritoneal dialysis is diagnosed by cloudy effluent with a white cell count above 100 cells per microlitre, mostly neutrophils. Empirical intraperitoneal antibiotics should cover Gram-positive and Gram-negative organisms after cultures are sent. Catheter removal is reserved for fungal infection, exit site or tunnel infection, or failure to respond.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Retain catheter",
+     "points": [
+      "Routine bacterial peritonitis",
+      "Responds within days",
+      "Tailor antibiotics to culture"
+     ]
+    },
+    "right": {
+     "title": "Remove catheter",
+     "points": [
+      "Fungal peritonitis",
+      "Exit site or tunnel infection",
+      "Persistent or refractory infection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long-term haemodialysis access is planned early. An **arteriovenous fistula** is preferred where veins allow, as it has lower infection and thrombosis rates than catheters and grafts. Fistulae need time to mature, so creation should occur before dialysis is needed. Tunnelled catheters are a temporary bridge only. Haemodialysis catheter sepsis needs paired blood cultures and prompt empirical antibiotics.",
+   "say": "Long-term haemodialysis access is planned early. An arteriovenous fistula is preferred where veins allow, as it has lower infection and thrombosis rates than catheters and grafts. Fistulae need time to mature, so creation should occur before dialysis is needed. Tunnelled catheters are a temporary bridge only.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Oxford Handbook of Clinical Medicine",
+  "Oxford Textbook of Nephrology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 22
+ }
+}

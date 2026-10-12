@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "scc-fluids",
+ "subject": "ss-critical-care",
+ "title": "Fluid therapy and resuscitation: choosing and limiting crystalloids",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Fluid therapy starts with picking a **crystalloid**, a salt solution that moves freely between the intravascular and interstitial compartments. Only a fraction of each infused litre remains within the blood vessels, so resuscitation often needs large volumes. **Balanced solutions** such as Lactated Ringer and Plasma-Lyte carry electrolyte levels nearer to plasma than normal saline does. Chloride-heavy saline is associated with hyperchloraemic acidosis.",
+   "say": "Fluid therapy starts with picking a crystalloid, a salt solution that moves freely between the blood vessels and the spaces around cells. Only a fraction of each litre you infuse remains inside the vessels, so resuscitation often needs large volumes. Balanced solutions such as Lactated Ringer and Plasma-Lyte carry electrolyte levels closer to plasma than normal saline does. Chloride-heavy saline is associated with hyperchloraemic acidosis, so the choice of fluid matters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fluid",
+     "Chloride content",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Normal saline",
+      "High, above plasma",
+      "Hyperchloraemic acidosis risk"
+     ],
+     [
+      "Lactated Ringer",
+      "Lower, nearer plasma",
+      "Close to plasma composition"
+     ],
+     [
+      "Plasma-Lyte",
+      "Lower, nearer plasma",
+      "Balanced, contains buffer precursors"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Large trials have compared fluid types in critically ill adults. The **SMART** trial found that balanced crystalloids reduced major adverse kidney events compared with saline. **PLUS** and **BaSICS** found no mortality difference between balanced fluids and saline. **ALBIOS** found no overall survival benefit from albumin in sepsis. Balanced crystalloids are therefore a sensible default, especially for large volumes.",
+   "say": "Large trials have compared fluid types in critically ill adults. The SMART trial found that balanced crystalloids reduced major adverse kidney events compared with saline. PLUS and BaSICS found no mortality difference between balanced fluids and saline. ALBIOS found no overall survival benefit from albumin in sepsis. Balanced crystalloids are therefore a sensible default, especially for large volumes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial",
+     "Comparison",
+     "Main finding"
+    ],
+    "rows": [
+     [
+      "SMART",
+      "Balanced vs saline",
+      "Fewer major adverse kidney events"
+     ],
+     [
+      "PLUS",
+      "Plasma-Lyte vs saline",
+      "No mortality difference"
+     ],
+     [
+      "BaSICS",
+      "Balanced vs saline",
+      "No mortality difference"
+     ],
+     [
+      "ALBIOS",
+      "Albumin vs crystalloid",
+      "No overall survival gain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In sepsis, an initial bolus of about **30 mL/kg** crystalloid within three hours is advised by the Surviving Sepsis guidelines, followed by reassessment. Further fluid should be given only if the patient is **fluid responsive**. The **CLASSIC** trial in septic shock and **CLOVERS** in sepsis-induced hypotension showed that a restrictive strategy did not raise mortality and used less fluid.",
+   "say": "In sepsis, an initial bolus of about 30 millilitres per kilogram of crystalloid within three hours is advised by the Surviving Sepsis guidelines, followed by reassessment. Further fluid should be given only if the patient is fluid responsive. The CLASSIC trial in septic shock and CLOVERS in sepsis-induced hypotension showed that a restrictive strategy did not raise mortality and used less fluid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess perfusion"
+     },
+     {
+      "id": "b",
+      "label": "Bolus about 30 mL/kg"
+     },
+     {
+      "id": "c",
+      "label": "Reassess at 3 hours"
+     },
+     {
+      "id": "d",
+      "label": "Fluid responsive?"
+     },
+     {
+      "id": "e",
+      "label": "Give small further bolus"
+     },
+     {
+      "id": "f",
+      "label": "Stop, consider vasopressor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "Yes"
+     ],
+     [
+      "d",
+      "f",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hydroxyethyl starch** should be avoided in sepsis and critically ill patients, because the CHEST and 6S trials linked it with kidney injury and higher mortality. **Albumin** is an option when large crystalloid volumes are needed, but it has no clear survival advantage. Its cost is higher than crystalloid, so use should be deliberate and justified.",
+   "say": "Hydroxyethyl starch should be avoided in sepsis and critically ill patients, because the CHEST and 6S trials linked it with kidney injury and higher mortality. Albumin is an option when large crystalloid volumes are needed, but it has no clear survival advantage. Its cost is higher than crystalloid, so use should be deliberate and justified.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hydroxyethyl starch",
+     "points": [
+      "Avoid in sepsis",
+      "Raises kidney injury risk",
+      "Linked with higher mortality"
+     ]
+    },
+    "right": {
+     "title": "Albumin",
+     "points": [
+      "Option for large volumes",
+      "No clear survival gain",
+      "Higher cost than crystalloid"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fluid overload often follows resuscitation and is linked with worse outcomes, such as prolonged **mechanical ventilation**. Once the patient is haemodynamically stable, stop maintenance fluids and consider **de-resuscitation**, usually with a **diuretic** to remove excess extracellular volume. Track urine output, daily weight and **blood urea nitrogen** to judge response. Sound **fluid stewardship** means giving only the volume the patient truly needs.",
+   "say": "Fluid overload often follows resuscitation and is linked with worse outcomes, such as prolonged mechanical ventilation. Once the patient is haemodynamically stable, stop maintenance fluids and consider de-resuscitation, usually with a diuretic to remove excess extracellular volume. Track urine output, daily weight and blood urea nitrogen to judge response. Sound fluid stewardship means giving only the volume the patient truly needs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Signs of overload"
+     },
+     {
+      "id": "b",
+      "label": "Stop maintenance fluids"
+     },
+     {
+      "id": "c",
+      "label": "Diuretic if needed"
+     },
+     {
+      "id": "d",
+      "label": "Daily review of urine output, weight and BUN"
+     },
+     {
+      "id": "e",
+      "label": "Stable, stop de-resuscitation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_cc35faa9a755",
+  "q_012330f72b97",
+  "q_085f3140662a"
+ ],
+ "src": [],
+ "refs": [
+  "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021",
+  "NICE guideline CG174: Intravenous fluid therapy in adults in hospital"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

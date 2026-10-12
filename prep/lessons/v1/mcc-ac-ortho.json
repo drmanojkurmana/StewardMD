@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mcc-ac-ortho",
+ "subject": "mcc-acute-care",
+ "title": "Orthopaedic emergencies and compartment syndrome",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Compartment syndrome** is raised pressure inside a fixed fascial compartment, most often after a fracture such as a tibial shaft fracture. When pressure exceeds capillary perfusion, muscle and nerve become ischaemic. Classic features are pain out of proportion, pain on passive stretch of the toes, a tense compartment, and altered sensation. Palpable pedal pulses do not exclude it. Raised **creatine kinase** reflects muscle injury but is not diagnostic alone. Clinical diagnosis drives urgent decision making.",
+   "say": "Compartment syndrome is raised pressure inside a fixed fascial compartment, most often after a fracture such as a tibial shaft fracture. When pressure exceeds capillary perfusion, muscle and nerve become ischaemic. Classic features are pain out of proportion, pain on passive stretch of the toes, a tense compartment, and altered sensation. Palpable pedal pulses do not exclude it. Raised creatine kinase reflects muscle injury but is not diagnostic alone. Clinical diagnosis drives urgent decision making.",
+   "vis": null
+  },
+  {
+   "tx": "**Rhabdomyolysis** results from muscle breakdown, often after prolonged immobilisation, and releases myoglobin and potassium. Myoglobin can block renal tubules, so early intravenous crystalloid fluid is the cornerstone of treatment. Dark urine, very high creatine kinase and hyperkalaemia are typical. Soft compartments with present pulses suggest rhabdomyolysis rather than compartment syndrome. Monitor potassium, creatinine and urine output closely.",
+   "say": "Rhabdomyolysis results from muscle breakdown, often after prolonged immobilisation, and releases myoglobin and potassium. Myoglobin can block renal tubules, so early intravenous crystalloid fluid is the cornerstone of treatment. Dark urine, very high creatine kinase and hyperkalaemia are typical. Soft compartments with present pulses suggest rhabdomyolysis rather than compartment syndrome. Monitor potassium, creatinine and urine output closely.",
+   "vis": null
+  },
+  {
+   "tx": "A **posterior hip dislocation** typically follows a motor vehicle collision with the hip flexed, adducted and internally rotated, and the leg shortened. It is a true orthopaedic emergency because the femoral head loses its blood supply and the sciatic nerve may be stretched. Check distal pulses and sensation first, and confirm there is no associated femoral head or acetabular fracture on radiographs. Prompt **closed reduction** under sedation or anaesthesia is the usual next step when no fracture is present.",
+   "say": "A posterior hip dislocation typically follows a motor vehicle collision with the hip flexed, adducted and internally rotated, and the leg shortened. It is a true orthopaedic emergency because the femoral head loses its blood supply and the sciatic nerve may be stretched. Check distal pulses and sensation first, and confirm there is no associated femoral head or acetabular fracture on radiographs. Prompt closed reduction under sedation or anaesthesia is the usual next step when no fracture is present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Collision"
+     },
+     {
+      "id": "b",
+      "label": "Leg shortened, adducted"
+     },
+     {
+      "id": "c",
+      "label": "Check pulses and nerve"
+     },
+     {
+      "id": "d",
+      "label": "Radiograph: no fracture"
+     },
+     {
+      "id": "e",
+      "label": "Urgent closed reduction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cauda equina syndrome** is a spinal emergency in which compression of the lumbosacral nerve roots below the conus causes sphincter and saddle disturbance. Red flags include low back pain with bilateral leg weakness, reduced perianal sensation, reduced anal tone and urinary retention. Urgent **MRI of the lumbar spine** is needed, and decompression should not be delayed for outpatient review. Missed diagnosis leads to permanent bladder, bowel and sexual dysfunction.",
+   "say": "Cauda equina syndrome is a spinal emergency in which compression of the lumbosacral nerve roots below the conus causes sphincter and saddle disturbance. Red flags include low back pain with bilateral leg weakness, reduced perianal sensation, reduced anal tone and urinary retention. Urgent MRI of the lumbar spine is needed, and decompression should not be delayed for outpatient review. Missed diagnosis leads to permanent bladder, bowel and sexual dysfunction.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 6
+ }
+}

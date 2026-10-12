@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mderm-vasculitis",
+ "subject": "mrcp-dermatology",
+ "title": "Cutaneous vasculitis and panniculitis",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Cutaneous vasculitis is inflammation of small or medium dermal vessels, and **palpable purpura** is its hallmark. The most common form is **leukocytoclastic vasculitis**, a small vessel disease of postcapillary venules driven by immune complexes. Common triggers include drugs such as penicillins and co-trimoxazole, infections, and connective tissue disease. Biopsy shows neutrophils, fibrinoid necrosis and nuclear dust.",
+   "say": "Cutaneous vasculitis is inflammation of small or medium blood vessels in the skin, and palpable purpura is its hallmark. The most common form is leukocytoclastic vasculitis, a small vessel disease of postcapillary venules driven by immune complexes. Common triggers include drugs such as penicillins and co-trimoxazole, infections, and connective tissue disease. Biopsy shows neutrophils, fibrinoid necrosis and nuclear dust.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Leukocytoclastic vasculitis"
+    ],
+    "rows": [
+     [
+      "Vessel",
+      "Postcapillary venules"
+     ],
+     [
+      "Main trigger",
+      "Drugs and infection"
+     ],
+     [
+      "Skin sign",
+      "Palpable purpura on legs"
+     ],
+     [
+      "Biopsy",
+      "Neutrophils and nuclear dust"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**IgA vasculitis** is the commonest childhood vasculitis, with IgA1 immune complexes after an upper respiratory infection. It causes palpable purpura on the buttocks and lower limbs, arthralgia and colicky abdominal pain. Most children recover without specific treatment, but urine and blood pressure must be monitored for **nephritis**.",
+   "say": "IgA vasculitis is the commonest childhood vasculitis, caused by IgA1 immune complexes, often after an upper respiratory infection. It causes palpable purpura on the buttocks and lower limbs, arthralgia and colicky abdominal pain. Most children recover without specific treatment, but urine and blood pressure must be monitored for nephritis.",
+   "vis": null
+  },
+  {
+   "tx": "**Polyarteritis nodosa** is a necrotising vasculitis of medium-sized arteries that spares the lungs. Cutaneous forms cause livedo reticularis, subcutaneous nodules and ulceration, mainly on the legs, and are not ANCA-associated. Systemic disease adds neuropathy, renal involvement and mesenteric ischaemia. **Hepatitis B** is a recognised trigger, so screen for it.",
+   "say": "Polyarteritis nodosa is a necrotising vasculitis of medium-sized arteries that spares the lungs. Cutaneous forms cause livedo reticularis, subcutaneous nodules and ulceration, mainly on the legs, and are not ANCA associated. Systemic disease adds neuropathy, renal involvement and mesenteric ischaemia. Hepatitis B is a recognised trigger, so screen for it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cutaneous PAN",
+     "points": [
+      "Skin limited",
+      "Livedo and nodules",
+      "Usually less intensive therapy"
+     ]
+    },
+    "right": {
+     "title": "Systemic PAN",
+     "points": [
+      "Nerves, kidney, gut",
+      "Mononeuritis multiplex",
+      "Visceral angiography abnormal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Investigate the cause before treating the skin. For erythema induratum, screen for tuberculosis with chest imaging and an interferon-gamma release assay, then give standard **multidrug anti-tuberculosis therapy**. For cutaneous vasculitis from a drug, **stop the trigger** and check urine and renal function. Steroids are reserved for severe or organ-threatening disease.",
+   "say": "Investigate the cause before treating the skin. For erythema induratum, screen for tuberculosis with chest imaging and an interferon-gamma release assay, then give standard multidrug anti-tuberculosis therapy. For cutaneous vasculitis from a drug, stop the trigger and check urine and renal function. Steroids are reserved for severe or organ-threatening disease.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 19
+ }
+}

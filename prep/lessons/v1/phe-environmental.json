@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "phe-environmental",
+ "subject": "population-health-and-ethics",
+ "title": "Environmental and occupational health: toxic exposures and heat illness",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Environmental and occupational illness often presents as a vague, multi-system picture, so exposure history is the key clue. Ask about fuel-burning appliances, noise at work, pesticides, metals and working conditions. **Carbon monoxide** binds haemoglobin with far greater affinity than oxygen, forming **carboxyhaemoglobin**, which reduces oxygen delivery to tissues. Headache, nausea and confusion after a closed-space heater or generator exposure should raise suspicion.",
+   "say": "Environmental and occupational illness often presents as a vague, multi-system picture, so the exposure history is the key clue. Ask about fuel-burning appliances, noise at work, pesticides, metals and working conditions. Carbon monoxide binds haemoglobin with far greater affinity than oxygen, forming carboxyhaemoglobin, which reduces oxygen delivery to tissues. Headache, nausea and confusion after a closed-space heater or generator exposure should raise suspicion.",
+   "vis": null
+  },
+  {
+   "tx": "Occupational noise causes **sensorineural hearing loss** through damage to hair cells in the basal cochlea. The classic early sign is a notch on audiometry at about 4 kHz, usually bilateral and symmetrical. Loss is permanent and progresses with continued exposure, so the priority is referral for a hearing conservation programme and workplace noise assessment. Normal otoscopy and absence of vertigo or discharge help distinguish it from other causes.",
+   "say": "Occupational noise causes sensorineural hearing loss through damage to hair cells in the basal cochlea. The classic early sign is a notch on audiometry at about 4 kHz, usually bilateral and symmetrical. The loss is permanent and progresses with continued exposure, so the priority is referral for a hearing conservation programme and workplace noise assessment. Normal otoscopy and no vertigo or discharge help distinguish it from other causes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prolonged loud noise"
+     },
+     {
+      "id": "b",
+      "label": "Basal hair cell damage"
+     },
+     {
+      "id": "c",
+      "label": "4 kHz audiometric notch"
+     },
+     {
+      "id": "d",
+      "label": "Refer, reduce exposure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Organophosphate** insecticides inhibit acetylcholinesterase, so acetylcholine accumulates at muscarinic and nicotinic synapses. Muscarinic features include salivation, miosis, vomiting and bradycardia; nicotinic features include fasciculations and weakness. Low red cell cholinesterase supports the diagnosis. Immediate care combines **atropine** to block muscarinic effects, decontamination of skin and clothing, and supportive treatment. Atropine does not reverse nicotinic weakness.",
+   "say": "Organophosphate insecticides inhibit acetylcholinesterase, so acetylcholine accumulates at muscarinic and nicotinic synapses. Muscarinic features include salivation, miosis, vomiting and slow heart rate, while nicotinic features include fasciculations and weakness. Low red cell cholinesterase supports the diagnosis. Immediate care combines atropine to block muscarinic effects, decontamination of skin and clothing, and supportive treatment. Atropine does not reverse nicotinic weakness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Muscarinic signs",
+     "points": [
+      "Salivation and vomiting",
+      "Pinpoint pupils",
+      "Bradycardia"
+     ]
+    },
+    "right": {
+     "title": "Nicotinic signs",
+     "points": [
+      "Fasciculations",
+      "Muscle weakness",
+      "Atropine does not reverse these"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Exertional heat stroke** is a medical emergency defined by a markedly raised core temperature with **central nervous system dysfunction**, such as confusion. It follows failure of **thermoregulation** during strenuous activity in heat, with heat-induced cellular injury. Hypotension and tachycardia signal organ stress. Treatment is rapid **active cooling**, such as immersion, started at once. Antipyretics such as paracetamol are ineffective because the hypothalamic set point is not raised.",
+   "say": "Exertional heat stroke is a medical emergency defined by a markedly raised core temperature with central nervous system dysfunction, such as confusion. It follows failure of thermoregulation during strenuous activity in heat, with heat-induced cellular injury. Hypotension and tachycardia signal organ stress. Treatment is rapid active cooling, such as immersion, started at once. Antipyretics such as paracetamol are ineffective because the hypothalamic set point is not raised.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Heat exposure and exertion"
+     },
+     {
+      "id": "b",
+      "label": "Markedly raised core temperature with confusion"
+     },
+     {
+      "id": "c",
+      "label": "Rapid active cooling"
+     },
+     {
+      "id": "d",
+      "label": "Monitor organ function"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lead poisoning** in workers is suspected from prolonged unprotected exposure, here at a battery recycling plant. Lead inhibits haem synthesis, causing anaemia, and affects smooth muscle and nerves, causing colicky abdominal pain, constipation and fatigue. A raised blood lead confirms exposure. Ongoing absorption continues while the worker stays exposed, so **removal from exposure** is the essential immediate step, together with notification to the workplace regulator and chelation only where indicated.",
+   "say": "Lead poisoning in workers is suspected after prolonged unprotected exposure, here at a battery recycling plant. Lead inhibits haem synthesis, causing anaemia, and affects smooth muscle and nerves, causing colicky abdominal pain, constipation and fatigue. A raised blood lead confirms exposure. Ongoing absorption continues while the worker stays exposed, so removal from exposure is the essential immediate step, together with notification to the workplace regulator and chelation only where indicated.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prolonged unprotected exposure"
+     },
+     {
+      "id": "b",
+      "label": "Anaemia and colic"
+     },
+     {
+      "id": "c",
+      "label": "Raised blood lead"
+     },
+     {
+      "id": "d",
+      "label": "Remove from exposure, notify regulator"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 6
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "ahm-liver",
+ "subject": "adult-health-medicine",
+ "title": "Jaundice and liver disease: a practical approach",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Jaundice reflects raised **bilirubin** in the blood, usually becoming visible in the sclerae before the skin. Bilirubin is classed as **unconjugated** or **conjugated**, and this split steers the work-up. Unconjugated rises suggest overproduction, haemolysis or impaired hepatic uptake and conjugation, whereas conjugated rises suggest impaired excretion. Establish which fraction dominates before selecting investigations.",
+   "say": "Jaundice reflects raised bilirubin in the blood, usually becoming visible in the sclerae before the skin. Bilirubin is classed as unconjugated or conjugated, and this split steers the work-up. Unconjugated rises suggest overproduction, haemolysis or impaired hepatic uptake and conjugation, whereas conjugated rises suggest impaired excretion. Establish which fraction dominates before selecting investigations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Unconjugated",
+     "Conjugated"
+    ],
+    "rows": [
+     [
+      "Urine bilirubin",
+      "Absent",
+      "Present"
+     ],
+     [
+      "Main mechanism",
+      "Overproduction or conjugation defect",
+      "Impaired excretion"
+     ],
+     [
+      "Typical example",
+      "Haemolysis, Gilbert syndrome",
+      "Biliary obstruction, hepatitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gilbert syndrome** is a benign inherited reduction in UGT1A1 activity. It causes mild unconjugated hyperbilirubinaemia that rises with fasting, illness or stress. Liver enzymes, albumin and the full blood count are normal, and no treatment is needed. Reassurance is the key step, because the main error is ordering invasive tests such as biopsy. Haemolysis should be excluded with a reticulocyte count and blood film.",
+   "say": "Gilbert syndrome is a benign inherited reduction in UGT1A1 activity. It causes mild unconjugated hyperbilirubinaemia that rises with fasting, illness or stress. Liver enzymes, albumin and the full blood count are normal, and no treatment is needed. Reassurance is the key step, because the main error is ordering invasive tests such as biopsy. Haemolysis should be excluded with a reticulocyte count and blood film.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gilbert syndrome",
+     "points": [
+      "Mild unconjugated rise",
+      "Worse with fasting",
+      "Normal liver enzymes",
+      "Reassure, no treatment"
+     ]
+    },
+    "right": {
+     "title": "Haemolysis",
+     "points": [
+      "Unconjugated rise",
+      "Raised reticulocytes",
+      "Low haemoglobin",
+      "Check film and LDH"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cholangitis** is infection of an obstructed biliary tree. Charcot triad is fever, right upper quadrant pain and jaundice. Reynolds pentad adds hypotension and confusion, signalling severe disease. Blood cultures and intravenous antibiotics come first, but definitive care needs urgent biliary drainage, usually endoscopic retrograde cholangiopancreatography (ERCP). Antibiotics alone do not relieve the obstruction, so sepsis persists.",
+   "say": "Cholangitis is infection of an obstructed biliary tree. Charcot triad is fever, right upper quadrant pain and jaundice. Reynolds pentad adds hypotension and confusion, signalling severe disease. Blood cultures and intravenous antibiotics come first, but definitive care needs urgent biliary drainage, usually endoscopic retrograde cholangiopancreatography, known as ERCP. Antibiotics alone do not relieve the obstruction, so sepsis persists.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect cholangitis"
+     },
+     {
+      "id": "b",
+      "label": "Blood cultures, IV antibiotics"
+     },
+     {
+      "id": "c",
+      "label": "Urgent biliary drainage"
+     },
+     {
+      "id": "d",
+      "label": "Treat cause, e.g. cholecystectomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Primary biliary cholangitis** is an autoimmune destruction of small intrahepatic bile ducts, typically in middle-aged women. It presents with fatigue and pruritus, raised alkaline phosphatase and positive anti-mitochondrial antibodies. Ultrasound shows no duct dilatation. **Ursodeoxycholic acid** is the first-line drug, replacing toxic bile acids and slowing progression. Pruritus and fatigue are managed symptomatically.",
+   "say": "Primary biliary cholangitis is an autoimmune destruction of small intrahepatic bile ducts, typically in middle-aged women. It presents with fatigue and pruritus, raised alkaline phosphatase and positive anti-mitochondrial antibodies. Ultrasound shows no duct dilatation. Ursodeoxycholic acid is the first-line drug, replacing toxic bile acids and slowing progression. Pruritus and fatigue are managed symptomatically.",
+   "vis": null
+  },
+  {
+   "tx": "**Paracetamol overdose** is a medical emergency, even when the patient looks well. Paracetamol forms the toxic metabolite NAPQI, which depletes glutathione and injures hepatocytes. **N-acetylcysteine** restores glutathione and works best when started early, ideally within eight hours. Do not wait for the level or liver tests before starting it when timing is uncertain. Liver function should be monitored after treatment.",
+   "say": "Paracetamol overdose is a medical emergency, even when the patient looks well. Paracetamol forms the toxic metabolite NAPQI, which depletes glutathione and injures hepatocytes. N-acetylcysteine restores glutathione and works best when started early, ideally within eight hours. Do not wait for the level or liver tests before starting it when timing is uncertain. Liver function should be monitored after treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Hepatic encephalopathy** is a brain dysfunction caused by liver failure, most often in cirrhosis. Look for sleep reversal, confusion, drowsiness and **asterixis**. Actively search for triggers including infection, gastrointestinal bleeding, constipation, dehydration and electrolyte upset. **Lactulose** is the mainstay of treatment, acidifying colonic contents so that ammonia is trapped and expelled. Treat the precipitant alongside it.",
+   "say": "Hepatic encephalopathy is a brain dysfunction caused by liver failure, most often in cirrhosis. Look for sleep reversal, confusion, drowsiness and asterixis. Actively search for triggers including infection, gastrointestinal bleeding, constipation, dehydration and electrolyte upset. Lactulose is the mainstay of treatment, acidifying colonic contents so that ammonia is trapped and expelled. Treat the precipitant alongside it.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)",
+  "Davidson's Principles and Practice of Medicine (Ralston et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

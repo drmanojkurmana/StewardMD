@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "mcc-hp-newcomers",
+ "subject": "mcc-health-promotion",
+ "title": "Newcomer and refugee health: screening, mental health and communication",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Refugees and newcomers often arrive with **infectious**, nutritional and **mental health** needs shaped by conflict, displacement and limited earlier care. Screening should be offered early, ideally within the first weeks, and tailored to the country of origin. Pre-departure checks and post-arrival assessment both matter. Newcomers are not unhealthy by default. Most risks relate to exposure and barriers to access, so care should be trauma-informed and respectful.",
+   "say": "Refugees and newcomers often arrive with infectious, nutritional and mental health needs. These reflect conflict, displacement and limited earlier care. Screening should be offered early, ideally within the first weeks, and tailored to the country of origin. Pre-departure checks and post-arrival assessment both matter. Newcomers are not unhealthy by default. Most risks relate to exposure and barriers to access, so care should be trauma-informed and respectful.",
+   "vis": null
+  },
+  {
+   "tx": "A positive **interferon-gamma release assay** does not by itself mean active disease. Check for **symptoms** such as cough, fever, night sweats and weight loss, and review the chest radiograph. If both are normal, the picture points to **latent tuberculosis**, which is managed with a preventive regimen chosen according to local guidance. Screening for **Chagas disease** is also worth considering in people who have lived in Latin America, because it can cause serious heart disease many years later.",
+   "say": "A positive interferon-gamma release assay does not by itself mean active disease. Check for symptoms such as cough, fever, night sweats and weight loss, and review the chest radiograph. If both are normal, the picture points to latent tuberculosis, which is managed with a preventive regimen chosen according to local guidance. Screening for Chagas disease is also worth considering in people who have lived in Latin America, because it can cause serious heart disease many years later.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "IGRA positive"
+     },
+     {
+      "id": "b",
+      "label": "Symptoms or abnormal chest film?"
+     },
+     {
+      "id": "c",
+      "label": "Active TB: full treatment"
+     },
+     {
+      "id": "d",
+      "label": "Latent TB: preventive therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Post-traumatic stress disorder is common after conflict. First-line care combines **trauma-focused psychotherapy** with an SSRI such as **sertraline**. Benzodiazepines and sedative hypnotics such as zolpidem may relieve symptoms briefly, but they risk dependence and can impair recovery, so they are avoided. Antipsychotics such as quetiapine are not first-line for PTSD.",
+   "say": "Post-traumatic stress disorder is common after conflict. First-line care combines trauma-focused psychotherapy with an SSRI such as sertraline. Benzodiazepines and sedative hypnotics such as zolpidem may relieve symptoms briefly, but they risk dependence and can impair recovery, so they are avoided. Antipsychotics such as quetiapine are not first-line for PTSD.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preferred first-line",
+     "points": [
+      "Trauma-focused psychotherapy",
+      "Sertraline or another SSRI",
+      "Effect builds over weeks",
+      "Addresses memory and avoidance"
+     ]
+    },
+    "right": {
+     "title": "Avoid as routine",
+     "points": [
+      "Benzodiazepines",
+      "Sedative hypnotics such as zolpidem",
+      "Quetiapine not first-line",
+      "Risk of dependence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Communication shapes every newcomer encounter. Use a qualified professional **interpreter** for consent and history, not a relative, since family members may soften or omit information. Interview patients alone when safety may be at risk, such as suspected **intimate partner violence**. If a capable adult cannot decide, a legally ranked substitute decision-maker is identified under provincial or state law.",
+   "say": "Communication shapes every newcomer encounter. Use a qualified professional interpreter for consent and history, not a relative, since family members may soften or omit information. Interview patients alone when safety may be at risk, such as suspected intimate partner violence. If a capable adult cannot decide, a legally ranked substitute decision-maker is identified under provincial or state law.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Best approach"
+    ],
+    "rows": [
+     [
+      "Consent for biopsy or surgery",
+      "Qualified interpreter, patient-centred explanation"
+     ],
+     [
+      "Relative offers to interpret",
+      "Decline and arrange a professional"
+     ],
+     [
+      "Possible abuse disclosed",
+      "Private interview with professional interpreter"
+     ],
+     [
+      "Patient lacks capacity",
+      "Identify legal substitute decision-maker"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

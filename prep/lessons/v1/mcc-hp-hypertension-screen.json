@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "mcc-hp-hypertension-screen",
+ "subject": "mcc-health-promotion",
+ "title": "Hypertension screening: finding and confirming raised blood pressure",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Hypertension is often **silent**, so screening means checking **blood pressure** opportunistically at routine contacts with clinicians. One elevated reading is never a diagnosis on its own. Under **NICE** guidance, a raised clinic value prompts confirmation, typically with **ambulatory** or **home monitoring**, before any treatment decision. The aim is detecting disease early, ideally before **target organ damage** appears.",
+   "say": "Hypertension is often silent, so screening means checking blood pressure opportunistically at routine contacts with clinicians. One elevated reading is never a diagnosis on its own. Under NICE guidance, a raised clinic value prompts confirmation, typically with ambulatory or home monitoring, before any treatment decision. The aim is detecting disease early, ideally before target organ damage appears.",
+   "vis": null
+  },
+  {
+   "tx": "Accurate **measurement technique** matters before any diagnosis. The patient should sit quietly for about five minutes with the back supported and feet flat. Choose a **cuff** whose bladder suits the arm circumference, because an undersized cuff overestimates pressure. Take at least two readings a minute apart and average them.",
+   "say": "Accurate measurement technique matters before any diagnosis. The patient should sit quietly for about five minutes with the back supported and feet flat. Choose a cuff whose bladder suits the arm circumference, because an undersized cuff overestimates pressure. Take at least two readings a minute apart and average them.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Correct practice",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Cuff size",
+      "Bladder fits arm circumference",
+      "Small cuff overestimates pressure"
+     ],
+     [
+      "Rest",
+      "Five minutes seated, back supported",
+      "Anxiety and exertion raise readings"
+     ],
+     [
+      "Arm position",
+      "Arm bare and at heart level",
+      "Posture shifts the reading"
+     ],
+     [
+      "Repeats",
+      "Two or more readings, averaged",
+      "Single readings vary widely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once a clinic reading is raised, confirmation relies on **ambulatory blood pressure monitoring** or **home blood pressure monitoring**. Both average many readings across daily life, which limits the artefact of a single visit. Out-of-office averages are compared against lower diagnostic thresholds than clinic readings. Only **sustained elevation** confirms the diagnosis, so one high value is never enough.",
+   "say": "Once a clinic reading is raised, confirmation relies on ambulatory blood pressure monitoring or home blood pressure monitoring. Both average many readings across daily life, which limits the artefact of a single visit. Out-of-office averages are compared against lower diagnostic thresholds than clinic readings. Only sustained elevation confirms the diagnosis, so one high value is never enough.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Raised clinic reading"
+     },
+     {
+      "id": "n2",
+      "label": "Out-of-office monitoring"
+     },
+     {
+      "id": "n3",
+      "label": "Sustained average above diagnostic threshold"
+     },
+     {
+      "id": "n4",
+      "label": "Hypertension confirmed"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screen for **secondary hypertension** only when clues are present. Low potassium without diuretic use, especially with raised bicarbonate, points towards primary aldosteronism, tested by the aldosterone to renin ratio. Episodic headache with sweating or palpitations raises suspicion of a phaeochromocytoma, tested by metanephrines.",
+   "say": "Screen for secondary hypertension only when clues are present. Low potassium without diuretic use, especially with raised bicarbonate, points towards primary aldosteronism, tested by the aldosterone to renin ratio. Episodic headache with sweating or palpitations raises suspicion of a phaeochromocytoma, tested by metanephrines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Possible cause",
+     "Screening test"
+    ],
+    "rows": [
+     [
+      "Low potassium, raised bicarbonate",
+      "Primary aldosteronism",
+      "Aldosterone to renin ratio"
+     ],
+     [
+      "Episodic headache, sweating, palpitations",
+      "Phaeochromocytoma",
+      "Plasma or urine metanephrines"
+     ],
+     [
+      "Resistant hypertension on three drugs",
+      "Nonadherence or secondary cause",
+      "Review adherence and drug list"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Baseline **end-organ** screening looks for damage and co-risk. A **urine albumin to creatinine ratio** finds early kidney injury, even when serum creatinine is normal. A **12-lead ECG** can reveal **left ventricular hypertrophy**. Fasting glucose or HbA1c flags **diabetes** as a co-risk, which changes treatment targets and urgency.",
+   "say": "Baseline end-organ screening looks for damage and co-risk. A urine albumin to creatinine ratio finds early kidney injury, even when serum creatinine is normal. A twelve-lead ECG can reveal left ventricular hypertrophy. Fasting glucose or HbA1c flags diabetes as a co-risk, which changes treatment targets and urgency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Urine albumin to creatinine ratio",
+      "Detects early kidney injury"
+     ],
+     [
+      "Serum creatinine",
+      "Estimates kidney function"
+     ],
+     [
+      "12-lead ECG",
+      "Looks for left ventricular hypertrophy"
+     ],
+     [
+      "Fasting glucose or HbA1c",
+      "Identifies diabetes as a co-risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compare the two measurement methods. A **clinic reading** is a single snapshot and can be inflated by anxiety, the white coat effect. Home or ambulatory measurements average many readings and reflect the true sustained load. Use the averaged result, not one visit, to decide whether to treat.",
+   "say": "Compare the two measurement methods. A clinic reading is a single snapshot and can be inflated by anxiety, the white coat effect. Home or ambulatory measurements average many readings and reflect the true sustained load. Use the averaged result, not one visit, to decide whether to treat.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinic reading alone",
+     "points": [
+      "Single snapshot",
+      "Affected by anxiety",
+      "Can cause white coat effect"
+     ]
+    },
+    "right": {
+     "title": "Home or ambulatory",
+     "points": [
+      "Averages many readings",
+      "Shows daily and nightly pattern",
+      "Reflects sustained load"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG136: Hypertension in adults: diagnosis and management",
+  "2020 International Society of Hypertension global hypertension practice guidelines"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

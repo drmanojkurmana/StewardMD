@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "ahm-bleeding",
+ "subject": "adult-health-medicine",
+ "title": "Bleeding and clotting disorders: a high-yield approach",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Bleeding disorders split into **primary haemostasis** problems (platelets and von Willebrand factor) and **secondary haemostasis** problems (coagulation factors). Start with a history of mucocutaneous bleeding such as menorrhagia, epistaxis and bleeding after dental extraction, then check platelet count, prothrombin time (PT) and activated partial thromboplastin time (APTT). Normal platelets with prolonged APTT and normal PT point to the intrinsic pathway, including haemophilia A and von Willebrand disease. Family history and lifelong symptoms favour inherited causes.",
+   "say": "Bleeding disorders split into primary haemostasis problems, involving platelets and von Willebrand factor, and secondary haemostasis problems, involving coagulation factors. Start with a history of mucocutaneous bleeding such as heavy periods, nosebleeds and bleeding after dental extraction. Then check platelet count, prothrombin time and activated partial thromboplastin time. Normal platelets with a prolonged APTT and normal PT point to the intrinsic pathway, including haemophilia A and von Willebrand disease. Lifelong symptoms and family history favour inherited causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Likely cause",
+     "Key test"
+    ],
+    "rows": [
+     [
+      "Normal platelets, prolonged APTT, normal PT",
+      "Haemophilia A or von Willebrand disease",
+      "VWF level and factor VIII assay"
+     ],
+     [
+      "Low platelets, normal PT and APTT",
+      "Immune or heparin-related thrombocytopenia",
+      "Platelet antibody or heparin antibody test"
+     ],
+     [
+      "Low platelets, prolonged PT and APTT, low fibrinogen",
+      "Consumptive coagulopathy such as DIC",
+      "D-dimer and film for schistocytes"
+     ],
+     [
+      "Prolonged PT and APTT, normal platelets and fibrinogen",
+      "Vitamin K deficiency or warfarin effect",
+      "Response to vitamin K"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Heparin-induced thrombocytopenia** (HIT) is an immune reaction to complexes of **heparin** and **platelet factor 4**. It usually appears five to ten days after starting heparin, with a **platelet fall** of more than 50 percent. **Thrombosis** can occur even without bleeding, so clinical suspicion matters. Stop all heparin, including low molecular weight heparin, and start a non-heparin anticoagulant. Avoid routine platelet transfusion, as it may worsen clotting.",
+   "say": "Heparin-induced thrombocytopenia is an immune reaction to complexes of heparin and platelet factor 4. It usually appears five to ten days after starting heparin, with a platelet fall of more than fifty percent. Thrombosis can occur even without bleeding, so clinical suspicion matters. Stop all heparin, including low molecular weight heparin, and start a non-heparin anticoagulant. Avoid routine platelet transfusion, as it may worsen clotting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Heparin exposure, usually 5 to 10 days"
+     },
+     {
+      "id": "b",
+      "label": "Platelets fall over 50 percent"
+     },
+     {
+      "id": "c",
+      "label": "Stop all heparin products"
+     },
+     {
+      "id": "d",
+      "label": "Start non-heparin anticoagulant"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Disseminated intravascular coagulation** is usually triggered by sepsis, trauma, obstetric emergencies or malignancy. Infection upregulates tissue factor, generating widespread thrombin. Management is to treat the underlying cause first, then support with products guided by bleeding and laboratory values. Platelets are given for significant bleeding with a low count, and cryoprecipitate or fibrinogen for low levels. Routine heparin and routine tranexamic acid are not used. Plasma exchange is the treatment for TTP, not DIC.",
+   "say": "Disseminated intravascular coagulation is usually triggered by sepsis, trauma, obstetric emergencies or malignancy. Infection raises tissue factor, generating widespread thrombin. Management is to treat the underlying cause first, then support with products guided by bleeding and laboratory values. Platelets are given for significant bleeding with a low count, and cryoprecipitate for low fibrinogen. Routine heparin and routine tranexamic acid are not used. Plasma exchange is the treatment for thrombotic thrombocytopenic purpura, not disseminated intravascular coagulation.",
+   "vis": null
+  },
+  {
+   "tx": "**Warfarin reversal** depends on bleeding severity. Life-threatening bleeding with an elevated INR needs an immediate prothrombin complex concentrate, with intravenous vitamin K given alongside. Vitamin K alone acts slowly because it must restore hepatic factor synthesis. Fresh frozen plasma is a slower and larger-volume alternative. Neonatal vitamin K deficiency bleeding is prevented by a single dose of vitamin K at birth, and in an infant with a prolonged PT and APTT and normal platelets, intravenous vitamin K is the first step.",
+   "say": "Warfarin reversal depends on bleeding severity. Life-threatening bleeding with a raised INR needs an immediate prothrombin complex concentrate, with intravenous vitamin K given alongside. Vitamin K alone acts slowly because it must restore hepatic factor synthesis. Fresh frozen plasma is a slower, larger-volume alternative. In a newborn, vitamin K deficiency bleeding is prevented by a single dose of vitamin K at birth. In an infant with prolonged clotting times and normal platelets, intravenous vitamin K is the first step.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Life-threatening bleed on warfarin"
+     },
+     {
+      "id": "b",
+      "label": "Prothrombin complex concentrate"
+     },
+     {
+      "id": "c",
+      "label": "Intravenous vitamin K"
+     },
+     {
+      "id": "d",
+      "label": "Repeat INR and monitor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Guidelines for the management of heparin-induced thrombocytopenia (British Society for Haematology)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

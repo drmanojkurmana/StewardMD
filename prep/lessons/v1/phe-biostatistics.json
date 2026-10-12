@@ -1,0 +1,116 @@
+{
+ "v": 1,
+ "module": "phe-biostatistics",
+ "subject": "population-health-and-ethics",
+ "title": "Biostatistics: Diagnostic Accuracy, Study Design and Key Measures",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **sensitivity** is the proportion of people with the disease who test positive. A **specificity** is the proportion without the disease who test negative. These are properties of the test itself and do not change with how common the disease is.",
+   "say": "Sensitivity is the proportion of people with the disease who test positive. Specificity is the proportion of people without the disease who test negative. These are properties of the test itself and do not change with how common the disease is in the population.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Calculated from",
+     "Depends on prevalence"
+    ],
+    "rows": [
+     [
+      "Sensitivity",
+      "True positives among diseased",
+      "No"
+     ],
+     [
+      "Specificity",
+      "True negatives among non-diseased",
+      "No"
+     ],
+     [
+      "Positive predictive value",
+      "True positives among all positives",
+      "Yes"
+     ],
+     [
+      "Negative predictive value",
+      "True negatives among all negatives",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **positive predictive value** answers a different question: given a positive result, how likely is disease? It falls when **prevalence** is low, because many disease-free people generate false positives. A test with high specificity can still give mostly false positives in a low-prevalence population.",
+   "say": "The positive predictive value answers a different question: given a positive result, how likely is disease? It falls when prevalence is low, because many disease-free people generate false positives. A test with high specificity can still give mostly false positives in a low-prevalence population.",
+   "vis": null
+  },
+  {
+   "tx": "A **reference interval** usually covers the central 95 percent of values in a healthy reference population. About 5 percent of healthy people fall outside it. When many tests are ordered, some mildly abnormal results occur by chance, so an isolated mild abnormality should be interpreted with caution.",
+   "say": "A reference interval usually covers the central 95 percent of values in a healthy reference population. About 5 percent of healthy people fall outside it. When many tests are ordered, some mildly abnormal results occur by chance, so an isolated mild abnormality should be interpreted with caution.",
+   "vis": null
+  },
+  {
+   "tx": "Choosing a **study design** depends on the aim. A **cross-sectional** survey estimates prevalence at one point in time. A **prospective cohort** follows disease-free people over time to measure **incidence**. Diagnostic accuracy is best estimated by comparing a test with a reference standard in consecutive patients.",
+   "say": "Choosing a study design depends on the aim. A cross-sectional survey estimates prevalence at one point in time. A prospective cohort follows disease-free people over time to measure incidence. Diagnostic accuracy is best estimated by comparing a test with a reference standard in consecutive patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Aim: prevalence"
+     },
+     {
+      "id": "b",
+      "label": "Cross-sectional survey"
+     },
+     {
+      "id": "c",
+      "label": "Aim: incidence"
+     },
+     {
+      "id": "d",
+      "label": "Prospective cohort"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Selection bias** arises when the sample is not representative, for example when only clinic attendees are studied. Number needed to treat uses the **absolute risk reduction**, which is the difference between control and treated event rates. For example, rates of 12 and 8 per 100 give an ARR of 0.04 and an NNT of 25.",
+   "say": "Selection bias arises when the sample is not representative, for example when only clinic attendees are studied. Number needed to treat uses the absolute risk reduction, which is the difference between control and treated event rates. For example, rates of 12 and 8 per 100 give an absolute risk reduction of 0.04 and a number needed to treat of 25.",
+   "vis": null
+  },
+  {
+   "tx": "A **p value** is the probability of results at least this extreme if the **null hypothesis** is true. It is not the probability that the hypothesis is true. A **confidence interval** that includes the null value, such as a relative risk of 1, means the result is not statistically significant at that level.",
+   "say": "A p value is the probability of results at least this extreme if the null hypothesis is true. It is not the probability that the hypothesis is true. A confidence interval that includes the null value, such as a relative risk of 1, means the result is not statistically significant at that level.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "mcc-ac-paediatric",
+ "subject": "mcc-acute-care",
+ "title": "Paediatric emergencies: recognising and acting on the critical child",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Paediatric emergencies require fast recognition of **airway, breathing and circulation** problems. Use the ABCDE approach before any detailed history. A child who is drowsy, pale, mottled or has a weak pulse is in shock until proven otherwise. Children compensate well, so a normal blood pressure does not exclude shock. Early **adrenaline** and fluid resuscitation save lives.",
+   "say": "Paediatric emergencies need fast recognition of airway, breathing and circulation problems. Use the ABCDE approach before any detailed history. A child who is drowsy, pale, mottled or has a weak pulse is in shock until proven otherwise. Children compensate well, so a normal blood pressure does not exclude shock. Early adrenaline and fluid resuscitation save lives.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Suggests",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Stridor at rest, drooling",
+      "Upper airway obstruction",
+      "Secure airway in controlled setting"
+     ],
+     [
+      "Drowsy, weak fast pulse",
+      "Shock",
+      "Fluid bolus and monitor"
+     ],
+     [
+      "Wheeze with urticaria",
+      "Anaphylaxis",
+      "Intramuscular adrenaline"
+     ],
+     [
+      "Capillary refill over 3 s",
+      "Poor perfusion",
+      "Start resuscitation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anaphylaxis** is a life-threatening, multi-system reaction after an allergen exposure. Look for skin changes with airway, breathing or circulatory involvement. **Intramuscular adrenaline** into the anterolateral thigh is the first-line drug. Antihistamines and steroids are adjuncts only and never replace adrenaline. Observe for a biphasic reaction after the episode settles.",
+   "say": "Anaphylaxis is a life-threatening, multi-system reaction after an allergen exposure. Look for skin changes with airway, breathing or circulatory involvement. Intramuscular adrenaline into the anterolateral thigh is the first-line drug. Antihistamines and steroids are adjuncts only and never replace adrenaline. Observe for a biphasic reaction after the episode settles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Allergen exposure"
+     },
+     {
+      "id": "b",
+      "label": "Skin plus airway or circulation"
+     },
+     {
+      "id": "c",
+      "label": "IM adrenaline thigh"
+     },
+     {
+      "id": "d",
+      "label": "Observe for biphasic reaction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diabetic ketoacidosis** presents with vomiting, deep rapid breathing, drowsiness and poor perfusion. Restore circulating volume first with isotonic fluid, then start an **insulin infusion** once fluids are running. Potassium may look high because of acidosis and insulin deficiency, so check it before adding potassium. Do not give routine bicarbonate. Watch for cerebral oedema, especially in young children.",
+   "say": "Diabetic ketoacidosis presents with vomiting, deep rapid breathing, drowsiness and poor perfusion. Restore circulating volume first with isotonic fluid, then start an insulin infusion once fluids are running. Potassium may look high because of acidosis and insulin deficiency, so check it before adding potassium. Do not give routine bicarbonate. Watch for cerebral oedema, especially in young children.",
+   "vis": null
+  },
+  {
+   "tx": "**Child protection** concerns arise when injuries of different ages appear in a non-mobile infant, or when the history changes between visits. Bruises on the back, ear or cheek, patterned burns and multiple fading bruises are red flags. Document the findings accurately and notify child protection services. Do not confront the carer or ask them to repeat the story to fix inconsistencies. Bleeding disorders should be considered, but normal clotting screens do not exclude abuse.",
+   "say": "Child protection concerns arise when injuries of different ages appear in a non-mobile infant, or when the history changes between visits. Bruises on the back, ear or cheek, patterned burns and multiple fading bruises are red flags. Document the findings accurately and notify child protection services. Do not confront the carer or ask them to repeat the story to fix inconsistencies. Bleeding disorders should be considered, but normal clotting screens do not exclude abuse.",
+   "vis": null
+  },
+  {
+   "tx": "**Supraventricular tachycardia** in a stable child presents with a regular narrow-complex rhythm and no visible P waves. Start with a **modified vagal manoeuvre**, then give intravenous adenosine if needed, with cardiac monitoring. Synchronised cardioversion is reserved for unstable children. Haemolytic uraemic syndrome, which follows Shiga toxin enteric infection, is another paediatric emergency with anaemia, thrombocytopenia and acute kidney injury; it needs supportive care with fluid balance and renal monitoring.",
+   "say": "Supraventricular tachycardia in a stable child presents with a regular narrow-complex rhythm and no visible P waves. Start with a modified vagal manoeuvre, then give intravenous adenosine if needed, with cardiac monitoring. Synchronised cardioversion is reserved for unstable children. Haemolytic uraemic syndrome, which follows Shiga toxin enteric infection, is another paediatric emergency with anaemia, thrombocytopenia and acute kidney injury; it needs supportive care with fluid balance and renal monitoring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stable regular narrow complex"
+     },
+     {
+      "id": "b",
+      "label": "Vagal manoeuvre"
+     },
+     {
+      "id": "c",
+      "label": "IV adenosine"
+     },
+     {
+      "id": "d",
+      "label": "Cardiology review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Resuscitation Council UK Paediatric Life Support Guidelines",
+  "NICE Anaphylaxis guideline",
+  "Nelson Textbook of Pediatrics (Kliegman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

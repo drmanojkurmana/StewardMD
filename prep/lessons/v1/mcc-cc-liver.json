@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "mcc-cc-liver",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic liver disease and cirrhosis: key high-yield management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cirrhosis is end-stage fibrosis of the liver, and it marks the point where **portal hypertension** and synthetic failure develop. Decompensation shows as ascites, variceal bleeding, **hepatic encephalopathy** and jaundice. Compensated cirrhosis may be silent, so surveillance matters. Once decompensated, prognosis falls sharply and management becomes a matter of preventing the next complication.",
+   "say": "Cirrhosis is end-stage fibrosis of the liver, and it marks the point where portal hypertension and synthetic failure develop. Decompensation shows as ascites, variceal bleeding, hepatic encephalopathy and jaundice. Compensated cirrhosis may be silent, so surveillance matters. Once decompensated, prognosis falls sharply and management becomes a matter of preventing the next complication.",
+   "vis": null
+  },
+  {
+   "tx": "Ascites with fever and abdominal pain in cirrhosis should be treated as **spontaneous bacterial peritonitis** until proven otherwise. Confirm it by a **raised ascitic neutrophil count** on paracentesis, using the standard guideline threshold. Start an intravenous third-generation cephalosporin such as cefotaxime without delay. Add intravenous albumin, which lowers the risk of renal failure and death, particularly when creatinine is raised.",
+   "say": "Ascites with fever and abdominal pain in cirrhosis should be treated as spontaneous bacterial peritonitis until proven otherwise. Confirm it by a raised ascitic neutrophil count on paracentesis, using the standard guideline threshold. Start an intravenous third-generation cephalosporin such as cefotaxime without delay. Add intravenous albumin, which lowers the risk of renal failure and death, particularly when creatinine is raised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Ascitic neutrophil count",
+      "Diagnostic when raised beyond the guideline threshold"
+     ],
+     [
+      "Antibiotic",
+      "Intravenous third-generation cephalosporin"
+     ],
+     [
+      "Adjunct",
+      "Intravenous albumin when renal function is impaired"
+     ],
+     [
+      "Prophylaxis",
+      "Long-term oral agent after an episode"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute variceal bleeding is an emergency. Start **vasoactive therapy** promptly, before endoscopy, to lower portal pressure. Give **antibiotic prophylaxis** to reduce infection and bacterial complications. Use **restrictive transfusion** aiming for a modest haemoglobin threshold, and avoid routine correction of INR or platelets. **Band ligation** is the endoscopic treatment of choice for oesophageal varices.",
+   "say": "Acute variceal bleeding is an emergency. Start vasoactive therapy promptly, before endoscopy, to lower portal pressure. Give antibiotic prophylaxis to reduce infection and bacterial complications. Use restrictive transfusion aiming for a modest haemoglobin threshold, and avoid routine correction of INR or platelets. Band ligation is the endoscopic treatment of choice for oesophageal varices.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Resuscitate and start vasoactive drug"
+     },
+     {
+      "id": "b",
+      "label": "Antibiotic prophylaxis"
+     },
+     {
+      "id": "c",
+      "label": "Endoscopy after stabilisation"
+     },
+     {
+      "id": "d",
+      "label": "Band ligation of varices"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hepatic encephalopathy is precipitated by bleeding, infection, constipation, diuretics and electrolyte disturbance. **Lactulose** is the first-line treatment for overt episodes and is titrated to two or three soft stools daily. Add **rifaximin** for recurrence despite lactulose. Rifaximin is minimally absorbed and reduces gut bacteria that produce ammonia.",
+   "say": "Hepatic encephalopathy is precipitated by bleeding, infection, constipation, diuretics and electrolyte disturbance. Lactulose is the first-line treatment for overt episodes and is titrated to two or three soft stools daily. Add rifaximin for recurrence despite lactulose. Rifaximin is minimally absorbed and reduces gut bacteria that produce ammonia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lactulose first line",
+     "points": [
+      "Non-absorbable disaccharide",
+      "Acidifies colon and traps ammonia",
+      "Titrate to two or three soft stools"
+     ]
+    },
+    "right": {
+     "title": "Add rifaximin",
+     "points": [
+      "Minimally absorbed antibiotic",
+      "Used for recurrence on lactulose",
+      "Reduces ammonia-producing gut bacteria"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hepatocellular carcinoma is a major risk in cirrhosis, so surveillance uses six-monthly ultrasound with or without alpha-fetoprotein. A new nodule of 1 cm or more needs characterisation. **Multiphase contrast CT or MRI** is the key test, looking for arterial hyperenhancement with washout. This often allows diagnosis without biopsy, so biopsy is avoided in typical cases.",
+   "say": "Hepatocellular carcinoma is a major risk in cirrhosis, so surveillance uses six-monthly ultrasound with or without alpha-fetoprotein. A new nodule of one centimetre or more needs characterisation. Multiphase contrast CT or MRI is the key test, looking for arterial hyperenhancement with washout. This often allows diagnosis without biopsy, so biopsy is avoided in typical cases.",
+   "vis": null
+  },
+  {
+   "tx": "Decision-making in decompensated cirrhosis depends on **capacity**. Hepatic encephalopathy can fluctuate, so capacity is decision-specific and time-specific. Reassess when precipitants are treated. A substitute decision-maker acts only when the patient lacks capacity for that decision. Prior advance statements guide care but do not replace a current assessment.",
+   "say": "Decision-making in decompensated cirrhosis depends on capacity. Hepatic encephalopathy can fluctuate, so capacity is decision-specific and time-specific. Reassess when precipitants are treated. A substitute decision-maker acts only when the patient lacks capacity for that decision. Prior advance statements guide care but do not replace a current assessment.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Baveno VII consensus on portal hypertension and cirrhosis",
+  "NICE guideline on cirrhosis management",
+  "EASL Clinical Practice Guidelines on decompensated cirrhosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "phe-disclosure",
+ "subject": "population-health-and-ethics",
+ "title": "Open disclosure: telling patients about adverse events",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Open disclosure** means openly telling a patient when an adverse event has harmed them, what happened, and what will be done about it. It is an ethical and professional duty, not optional. Disclosure should happen promptly, once the facts are known enough to share honestly. Waiting for a formal review or legal advice does not justify withholding information about the patient's own care.",
+   "say": "Open disclosure means openly telling a patient when an adverse event has harmed them, what happened, and what will be done about it. It is an ethical and professional duty, not optional. Disclosure should happen promptly, once the facts are known enough to share honestly. Waiting for a formal review or legal advice does not justify withholding information about the patient's own care.",
+   "vis": null
+  },
+  {
+   "tx": "Disclosure has several core elements. The clinician explains the **facts** of what happened, gives a sincere **apology**, describes the **harm** and its treatment, and outlines the review and follow-up. Updates should be offered as the investigation progresses. Blame, legal liability and insurance questions must not block honest communication with the patient.",
+   "say": "Disclosure has several core elements. The clinician explains the facts of what happened, gives a sincere apology, describes the harm and its treatment, and outlines the review and follow-up. Updates should be offered as the investigation progresses. Blame, legal liability and insurance questions must not block honest communication with the patient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "What it involves"
+    ],
+    "rows": [
+     [
+      "Facts",
+      "Explain what happened in plain language"
+     ],
+     [
+      "Apology",
+      "Acknowledge the event and express regret"
+     ],
+     [
+      "Harm",
+      "Describe effects and treatment given"
+     ],
+     [
+      "Follow-up",
+      "Outline review, updates and contact point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Who leads the conversation matters. The **senior clinician responsible** for the patient's care should lead, not simply the person who made the error. Family may attend with the patient's consent. A **qualified interpreter** is required when the patient's first language is not English, because a relative is not a neutral or qualified interpreter. A trusted cultural support person can join if the patient agrees.",
+   "say": "Who leads the conversation matters. The senior clinician responsible for the patient's care should lead, not simply the person who made the error. Family may attend with the patient's consent. A qualified interpreter is required when the patient's first language is not English, because a relative is not a neutral or qualified interpreter. A trusted cultural support person can join if the patient agrees.",
+   "vis": null
+  },
+  {
+   "tx": "When harm has occurred, the disclosure should match the patient's questions. If a patient with capacity asks what caused a problem, such as bleeding after a dosing error, the specific error must be named. A vague apology is not enough. Explain that an error occurred, the resulting harm such as a raised **INR** or low haemoglobin, and the treatment plan. Avoid reassurance that no error occurred when one did.",
+   "say": "When harm has occurred, the disclosure should match the patient's questions. If a patient with capacity asks what caused a problem, such as bleeding after a dosing error, the specific error must be named. A vague apology is not enough. Explain that an error occurred, the resulting harm such as a raised INR or low haemoglobin, and the treatment plan. Avoid reassurance that no error occurred when one did.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Error identified"
+     },
+     {
+      "id": "b",
+      "label": "Harm assessed"
+     },
+     {
+      "id": "c",
+      "label": "Patient told promptly"
+     },
+     {
+      "id": "d",
+      "label": "Apology and plan"
+     },
+     {
+      "id": "e",
+      "label": "Updates offered"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Not every adverse outcome is an error. A recognised complication, such as an **anastomotic leak** after bowel surgery, still needs honest explanation of what happened, why treatment was needed, and what comes next. When no error occurred, say so clearly and explain the event rather than refusing to discuss it. Near misses and results that were mislabelled but caused no harm may still warrant informing the patient, depending on the facts.",
+   "say": "Not every adverse outcome is an error. A recognised complication, such as an anastomotic leak after bowel surgery, still needs honest explanation of what happened, why treatment was needed, and what comes next. When no error occurred, say so clearly and explain the event rather than refusing to discuss it. Near misses and results that were mislabelled but caused no harm may still warrant informing the patient, depending on the facts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complication, no error",
+     "points": [
+      "Explain the event openly",
+      "Describe treatment and next steps",
+      "Answer whether anyone was at fault"
+     ]
+    },
+    "right": {
+     "title": "Error causing harm",
+     "points": [
+      "Name the specific error",
+      "Apologise sincerely",
+      "Explain harm and management plan"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "National Patient Safety Foundation, Open disclosure guidance, Australian Commission on Safety and Quality in Health Care"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

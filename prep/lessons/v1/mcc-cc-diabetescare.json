@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "mcc-cc-diabetescare",
+ "subject": "mcc-chronic-care",
+ "title": "Diabetes complications and foot care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An open ulcer in a neuropathic foot needs a structured check. Perform a **probe-to-bone** test and look for signs of **diabetic foot infection**. If infection is present, start antibiotics and arrange urgent surgical review. If not, focus on **offloading** the pressure point, wound care and regular review. Suspect **osteomyelitis** when the probe reaches bone or inflammatory markers stay raised.",
+   "say": "An open ulcer in a neuropathic foot needs a structured check. Perform a probe to bone test and look for signs of diabetic foot infection. If infection is present, start antibiotics and arrange urgent surgical review. If not, focus on offloading the pressure point, wound care and regular review. Suspect osteomyelitis when the probe reaches bone or inflammatory markers stay raised.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Open ulcer found"
+     },
+     {
+      "id": "n2",
+      "label": "Probe to bone and check signs"
+     },
+     {
+      "id": "n3",
+      "label": "Signs of infection?"
+     },
+     {
+      "id": "n4",
+      "label": "Offload and dress wound"
+     },
+     {
+      "id": "n5",
+      "label": "Antibiotics and urgent surgical review"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4",
+      "No"
+     ],
+     [
+      "n3",
+      "n5",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A warm, swollen, red foot after a minor twist in a neuropathic limb suggests acute **Charcot neuroarthropathy** until proven otherwise. Pulses may be normal and there may be no ulcer. Plain X-ray can show fragmentation or subluxation, and MRI helps when films are normal early. Immobilise the limb, keep it non-weight-bearing, and arrange podiatry or orthopaedic review. Monitor temperature difference between the feet to track activity.",
+   "say": "A warm, swollen, red foot after a minor twist in a neuropathic limb suggests acute Charcot neuroarthropathy until proven otherwise. Pulses may be normal and there may be no ulcer. Plain X-ray can show fragmentation or subluxation, and MRI helps when films are normal early. Immobilise the limb, keep it non-weight-bearing, and arrange podiatry or orthopaedic review. Monitor the temperature difference between the feet to track activity.",
+   "vis": null
+  },
+  {
+   "tx": "In diabetic kidney disease, albuminuria and falling eGFR signal progression. Maximise **ACE inhibitor** or ARB therapy if tolerated, and check potassium and creatinine after changes. Add an **SGLT2 inhibitor** for kidney protection, which works even when glucose control is less intensive. Metformin needs dose adjustment by eGFR. Sulfonylureas do not slow kidney decline, so they are not a kidney-protective add-on. Measure urine albumin-creatinine ratio yearly.",
+   "say": "In diabetic kidney disease, albuminuria and falling eGFR signal progression. Maximise ACE inhibitor or ARB therapy if tolerated, and check potassium and creatinine after changes. Add an SGLT2 inhibitor for kidney protection, which works even when glucose control is less intensive. Metformin needs dose adjustment according to eGFR. Sulfonylureas do not slow kidney decline, so they are not a kidney-protective add-on. Measure the urine albumin to creatinine ratio yearly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug class",
+     "Main kidney role",
+     "Practical point"
+    ],
+    "rows": [
+     [
+      "ACE inhibitor or ARB",
+      "Lowers albuminuria and glomerular pressure",
+      "Check potassium and creatinine after starting"
+     ],
+     [
+      "SGLT2 inhibitor",
+      "Slows eGFR decline and reduces albuminuria",
+      "Benefit persists at lower eGFR"
+     ],
+     [
+      "Metformin",
+      "Glucose lowering only",
+      "Reduce dose as eGFR falls"
+     ],
+     [
+      "Sulfonylurea",
+      "No proven kidney protection",
+      "Hypoglycaemia risk with reduced clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dizziness on standing with near-falls in a patient with autonomic neuropathy suggests **orthostatic hypotension**. Measure blood pressure lying and standing, looking for a systolic fall of at least 20 mmHg within three minutes. Review drugs that lower standing pressure, such as **alpha-blockers** and vasodilators, and reduce or stop them first. Then use physical measures and specialist input before adding pressor drugs.",
+   "say": "Dizziness on standing with near-falls in a patient with autonomic neuropathy suggests orthostatic hypotension. Measure blood pressure lying and standing, looking for a systolic fall of at least 20 mmHg within three minutes. Review drugs that lower standing pressure, such as alpha blockers and vasodilators, and reduce or stop them first. Then use physical measures and specialist input before adding pressor drugs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Dizziness on standing"
+     },
+     {
+      "id": "n2",
+      "label": "Lying and standing BP"
+     },
+     {
+      "id": "n3",
+      "label": "Systolic fall of 20 or more?"
+     },
+     {
+      "id": "n4",
+      "label": "Reduce contributing drugs"
+     },
+     {
+      "id": "n5",
+      "label": "Physical measures and specialist input"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4",
+      "Yes"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Limb-threatening decisions, such as amputation, need time and a clear explanation. Patients with capacity have the right to decide, but they may ask for family or community members to attend. Arrange a planning meeting with an interpreter if needed. This is **shared decision making** guided by **cultural safety**. Document the information given, the patient's understanding and who was present.",
+   "say": "Limb-threatening decisions, such as amputation, need time and a clear explanation. Patients with capacity have the right to decide, but they may ask for family or community members to attend. Arrange a planning meeting with an interpreter if needed. This is shared decision making guided by cultural safety. Document the information given, the patient's understanding and who was present.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG19 Diabetic foot problems: prevention and management",
+  "NICE NG28 Type 2 diabetes in adults: management",
+  "International Working Group on the Diabetic Foot guidelines"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

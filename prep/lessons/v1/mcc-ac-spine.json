@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "module": "mcc-ac-spine",
+ "subject": "mcc-acute-care",
+ "title": "C-spine rule and cauda equina",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **Canadian C-spine rule** decides who needs imaging after neck trauma. High-risk factors include age 65 or older, dangerous mechanism such as a fall from a height of one metre or five stairs, and paraesthesia in the limbs. Any high-risk factor mandates imaging, usually CT in the emergency setting. A normal GCS does not exclude a fracture in older patients.",
+   "say": "The Canadian C-spine rule decides who needs imaging after neck trauma. High-risk factors include age 65 or older, a dangerous mechanism such as a fall from a height of one metre or five stairs, and paraesthesia in the limbs. Any high-risk factor mandates imaging, usually CT in the emergency setting. A normal Glasgow Coma Scale score does not exclude a fracture in older patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Rule effect"
+    ],
+    "rows": [
+     [
+      "Age 65 or older",
+      "Imaging required"
+     ],
+     [
+      "Dangerous mechanism",
+      "Imaging required"
+     ],
+     [
+      "Limb paraesthesia",
+      "Imaging required"
+     ],
+     [
+      "Low-risk, rotation preserved",
+      "Imaging may be avoided"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Low-risk features in the **Canadian C-spine rule** include a **low-speed mechanism**, being able to sit or walk at the scene, and delayed onset of neck pain. When none of the **high-risk factors** apply and the patient can actively turn the head **45 degrees** to each side, imaging is generally unnecessary. Use this only in alert patients without other significant injuries.",
+   "say": "Think of the Canadian C-spine rule as a way to avoid unnecessary scans. Low-risk features include a low-speed mechanism, being able to sit or walk at the scene, and neck pain that starts late. If no high-risk factors apply and the patient can actively turn the head 45 degrees to each side, imaging is generally not needed. Apply this only when the patient is alert and has no other significant injury.",
+   "vis": null
+  },
+  {
+   "tx": "**Cauda equina syndrome** is a surgical emergency caused by compression of the lumbosacral nerve roots below the conus. Features include low back pain radiating to both legs, saddle numbness, urinary retention and reduced perianal sensation. Reduced anal tone and a weak ankle reflex also point to it. Urgent MRI and neurosurgical referral should follow without delay.",
+   "say": "Cauda equina syndrome is a surgical emergency caused by compression of the lumbosacral nerve roots below the conus. Features include low back pain radiating to both legs, saddle numbness, urinary retention and reduced perianal sensation. Reduced anal tone and a weak ankle reflex also point to it. Urgent MRI and neurosurgical referral should follow without delay.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Back pain and leg pain"
+     },
+     {
+      "id": "b",
+      "label": "Saddle numbness"
+     },
+     {
+      "id": "c",
+      "label": "Retention or incontinence"
+     },
+     {
+      "id": "d",
+      "label": "Urgent MRI"
+     },
+     {
+      "id": "e",
+      "label": "Neurosurgical decompression"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Spinal epidural abscess** presents with fever, progressive back pain and new neurological deficit, often in patients with diabetes. Raised white cell count and CRP support infection. Staphylococcus aureus is the commonest cause. Empirical intravenous antibiotics cover staphylococci and Gram-negative organisms, such as vancomycin plus ceftriaxone, while blood cultures are pending. MRI with contrast defines the collection.",
+   "say": "Spinal epidural abscess presents with fever, progressive back pain and new neurological deficit, often in patients with diabetes. Raised white cell count and C-reactive protein support infection. Staphylococcus aureus is the commonest cause. Empirical intravenous antibiotics cover staphylococci and Gram-negative organisms, such as vancomycin plus ceftriaxone, while blood cultures are pending. MRI with contrast defines the collection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Practical point"
+    ],
+    "rows": [
+     [
+      "Commonest organism",
+      "Staphylococcus aureus"
+     ],
+     [
+      "Empirical antibiotics",
+      "Intravenous vancomycin plus ceftriaxone"
+     ],
+     [
+      "Imaging",
+      "Contrast MRI of the spine"
+     ],
+     [
+      "Definitive step",
+      "Urgent drainage or decompression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cauda equina syndrome is a **surgical emergency** caused by compression of the lumbosacral nerve roots below the spinal cord tip. Presentations include **saddle anaesthesia**, new **urinary retention** or incontinence, bilateral leg symptoms and reduced anal tone. Suspected cases need urgent MRI and same-day spinal surgery review, because delay risks permanent bladder and bowel dysfunction.",
+   "say": "Cauda equina syndrome is a surgical emergency caused by compression of the lumbosacral nerve roots below the spinal cord tip. Presentations include saddle anaesthesia, new urinary retention or incontinence, bilateral leg symptoms and reduced anal tone. Suspected cases need urgent MRI and same-day spinal surgery review, because delay risks permanent bladder and bowel dysfunction.",
+   "vis": null
+  },
+  {
+   "tx": "In a patient with **cauda equina compression** and retention, emergency decompression is the priority. Anaemia or coagulation results do not delay surgery. Oral steroids, repeat imaging or outpatient review are wrong. Early decompression gives the best chance of bladder, bowel and sexual recovery, so the timing matters more than the exact extent of the lesion.",
+   "say": "In a patient with cauda equina compression and retention, emergency decompression is the priority. Anaemia or coagulation results do not delay surgery. Oral steroids, repeat imaging or outpatient review are wrong. Early decompression gives the best chance of bladder, bowel and sexual recovery, so timing matters more than the exact extent of the lesion.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG232 Spinal injury: assessment and initial management",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

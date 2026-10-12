@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "sca-cath-haemodynamics",
+ "subject": "ss-cardiology",
+ "title": "Cardiac catheterisation and invasive haemodynamics: the essentials for NEET-PG and INI-CET",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Right heart catheterisation (RHC) measures pressures in the right heart and pulmonary circulation. Access is usually through the **internal jugular**, **femoral** or **antecubital** vein, using an introducer sheath. The catheter is advanced about 20 cm to reach the right atrium. Before recording, the transducer is zeroed to atmospheric pressure at the level of the heart, which is the reference point for every reading.",
+   "say": "Right heart catheterisation measures pressures in the right heart and the pulmonary circulation. Access is usually through the internal jugular, femoral or antecubital vein, using an introducer sheath. The catheter is advanced about 20 centimetres to reach the right atrium. Before recording, the transducer is zeroed to atmospheric pressure at the level of the heart, which is the reference point for every reading that follows.",
+   "vis": null
+  },
+  {
+   "tx": "Know the normal pressures. The **right atrial mean pressure** is low, around 2 to 6 mmHg. Right ventricular diastolic pressure should be below 5 mmHg in a healthy heart. The **pulmonary capillary wedge pressure** (PCWP) is taken as a surrogate for left atrial pressure and lies between 4 and 12 mmHg. A PCWP above 15 mmHg with a cardiac index below 2.2 L/min/m squared signals cardiogenic shock.",
+   "say": "Know the normal pressures. The right atrial mean pressure is low, around 2 to 6 mmHg. Right ventricular diastolic pressure should be below 5 mmHg in a healthy heart. The pulmonary capillary wedge pressure, taken as a surrogate for left atrial pressure, lies between 4 and 12 mmHg. A wedge pressure above 15 mmHg together with a cardiac index below 2.2 litres per minute per square metre points towards cardiogenic shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Typical value"
+    ],
+    "rows": [
+     [
+      "Right atrium mean",
+      "2 to 6 mmHg"
+     ],
+     [
+      "Right ventricle diastolic",
+      "Below 5 mmHg"
+     ],
+     [
+      "Pulmonary capillary wedge",
+      "4 to 12 mmHg"
+     ],
+     [
+      "Cardiac index",
+      "2.5 to 4 L/min/m2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Shunts and valves are quantified with formulas. The **Qp/Qs ratio** compares pulmonary flow with systemic flow and is calculated from oxygen saturations taken from the systemic arterial, mixed venous, pulmonary venous and pulmonary arterial samples. When this ratio is clearly above unity, the left-to-right shunt is considered significant and closure is often discussed. The **Gorlin formula** estimates valve area from cardiac output, heart rate, systolic ejection period and the square root of the mean gradient, scaled by an empirical constant.",
+   "say": "Shunts and valves are measured with formulas. The Qp over Qs ratio compares pulmonary flow with systemic flow, worked out from oxygen saturations taken from the systemic arterial, mixed venous, pulmonary venous and pulmonary arterial samples. When that ratio is clearly above unity, the left to right shunt is significant and closure is often discussed. The Gorlin formula estimates valve area from cardiac output, heart rate, systolic ejection period and the square root of the mean gradient, scaled by an empirical constant.",
+   "vis": null
+  },
+  {
+   "tx": "Pressure patterns reveal pericardial disease. In **cardiac tamponade**, diastolic pressures equalise and the y descent is lost. In **constrictive pericarditis**, the **square root sign** and **ventricular interdependence** appear, where right ventricular pressure falls while left ventricular pressure rises during inspiration. Restrictive cardiomyopathy shows concordant pressure changes instead, with ventricular pressures rising and falling together.",
+   "say": "Pressure patterns reveal pericardial disease. In cardiac tamponade, diastolic pressures equalise and the y descent is lost. In constrictive pericarditis, the square root sign and ventricular interdependence appear, where right ventricular pressure falls while left ventricular pressure rises during inspiration. Restrictive cardiomyopathy instead shows concordant pressure changes, with both ventricles moving together.",
+   "vis": null
+  },
+  {
+   "tx": "Coronary physiology guides stenting decisions. **Fractional flow reserve** (FFR) is measured during maximal hyperaemia, and a value below the conventional threshold flags a lesion that limits myocardial blood flow. The **instantaneous wave-free ratio** (iFR) reaches a similar conclusion at rest, avoiding the need for a hyperaemic agent. **Intravascular ultrasound** (IVUS) and **optical coherence tomography** (OCT) image the vessel wall in fine detail. Angiography carries risks such as access bleeding, dissection and stroke.",
+   "say": "Coronary physiology guides stenting decisions. Fractional flow reserve is measured during maximal hyperaemia, and a value below the conventional threshold flags a lesion that limits blood flow to the heart muscle. The instantaneous wave-free ratio reaches a similar conclusion at rest, so no hyperaemic agent is needed. Intravascular ultrasound and optical coherence tomography image the vessel wall in fine detail. Angiography carries risks such as access bleeding, dissection and stroke.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_250f83be08d5",
+  "q_ca91531570be",
+  "q_b7ac18141102"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 29
+ }
+}

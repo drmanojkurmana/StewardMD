@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "mcc-ac-headache",
+ "subject": "mcc-acute-care",
+ "title": "Thunderclap headache: SAH and meningitis",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A thunderclap headache reaches peak intensity within one minute and is often described as the worst ever. **Subarachnoid haemorrhage** (SAH) is the key diagnosis to exclude. Most SAH is caused by a ruptured saccular aneurysm. A normal early non-contrast CT does not exclude SAH if it is done beyond about six hours, so a lumbar puncture or CT angiography is needed when suspicion remains.",
+   "say": "A thunderclap headache reaches peak intensity within one minute and is often described as the worst ever. Subarachnoid haemorrhage, or SAH, is the key diagnosis to exclude. Most SAH is caused by a ruptured saccular aneurysm. A normal early non-contrast CT does not exclude SAH if it is done beyond about six hours, so a lumbar puncture or CT angiography is needed when suspicion remains.",
+   "vis": null
+  },
+  {
+   "tx": "Lumbar puncture helps when CT is normal. Red cells persisting across tubes and **xanthochromia** point to true haemorrhage rather than a traumatic tap. Xanthochromia comes from breakdown products of blood, such as bilirubin, and appears after several hours. Raised red cells in tube 1 and tube 4 favour SAH over a traumatic puncture.",
+   "say": "Lumbar puncture helps when CT is normal. Red cells persisting across tubes and xanthochromia point to true haemorrhage rather than a traumatic tap. Xanthochromia comes from breakdown products of blood, such as bilirubin, and appears after several hours. Raised red cells in tube 1 and tube 4 favour SAH over a traumatic puncture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Suggests"
+    ],
+    "rows": [
+     [
+      "Red cells in all tubes",
+      "True haemorrhage"
+     ],
+     [
+      "Xanthochromia",
+      "Blood breakdown, usually after hours"
+     ],
+     [
+      "Red cells falling tube to tube",
+      "Traumatic tap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once aneurysmal SAH is confirmed, the **ruptured aneurysm** must be secured. Rebleeding risk is highest in the early days after the bleed, so urgent neurosurgical referral is needed even if the patient is alert with a normal examination. Securing is done by surgical clipping or endovascular coiling. Transfer to a neurosurgical centre is required when local services are not available.",
+   "say": "Once aneurysmal SAH is confirmed, the ruptured aneurysm must be secured. Rebleeding risk is highest in the early days after the bleed, so urgent neurosurgical referral is needed even if the patient is alert with a normal examination. Securing is done by surgical clipping or endovascular coiling. Transfer to a neurosurgical centre is required when local services are not available.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgical clipping",
+     "points": [
+      "Open craniotomy",
+      "Clip placed across neck"
+     ]
+    },
+    "right": {
+     "title": "Endovascular coiling",
+     "points": [
+      "Catheter route via femoral artery",
+      "Coil packs the aneurysm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Reversible cerebral vasoconstriction syndrome (RCVS) causes recurrent thunderclap headaches with a normal CT and CSF. Triggers include serotonergic drugs such as **triptans** and SSRIs, and the postpartum state. Multifocal segmental arterial narrowing on angiography is the key sign and usually resolves over weeks once the trigger is removed. Withdrawing the trigger is the main step in management.",
+   "say": "Reversible cerebral vasoconstriction syndrome causes recurrent thunderclap headaches with a normal CT and CSF. Triggers include serotonergic drugs such as triptans and SSRIs, and the postpartum state. Multifocal segmental arterial narrowing on angiography is the key sign and usually resolves over weeks once the trigger is removed. Withdrawing the trigger is the main step in management.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical finding"
+    ],
+    "rows": [
+     [
+      "Headache",
+      "Recurrent thunderclap"
+     ],
+     [
+      "CT and CSF",
+      "Normal"
+     ],
+     [
+      "Angiography",
+      "Segmental narrowing, resolves"
+     ],
+     [
+      "Key step",
+      "Stop the trigger drug"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Kasper et al.)",
+  "NICE Guideline NG127: Suspected acute meningitis and septicaemia",
+  "Bradley's Neurology in Clinical Practice (Grotta et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

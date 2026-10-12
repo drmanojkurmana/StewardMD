@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "mopht-acute-loss",
+ "subject": "mrcp-ophthalmology",
+ "title": "Acute visual loss: GCA and retinal vascular occlusion",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Painless, sudden monocular visual loss in an older adult is a red flag. The two commonest causes to separate are **central retinal artery occlusion** and **central retinal vein occlusion**. Arterial occlusion gives a pale retina with a cherry-red fovea, and is a time-critical emergency. Venous occlusion gives dilated, tortuous veins with widespread flame and dot haemorrhages, and disc swelling. Both are usually painless, so the history alone rarely discriminates.",
+   "say": "Painless sudden loss of vision in one eye in an older adult is a red flag. The two commonest causes to separate are central retinal artery occlusion and central retinal vein occlusion. Arterial occlusion gives a pale retina with a cherry-red fovea, and is a time-critical emergency. Venous occlusion gives dilated, tortuous veins with widespread haemorrhages and disc swelling. Both are usually painless, so the history alone rarely tells them apart.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Artery occlusion",
+     "points": [
+      "Pale, oedematous retina",
+      "Cherry-red fovea",
+      "Attenuated arterioles",
+      "Emergency"
+     ]
+    },
+    "right": {
+     "title": "Vein occlusion",
+     "points": [
+      "Dilated tortuous veins",
+      "Haemorrhages in all quadrants",
+      "Disc swelling",
+      "Risk: hypertension, glaucoma, diabetes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **central retinal artery occlusion**, the inner retina is ischaemic and turns pale. The fovea is thin and lacks inner retinal layers, so the underlying choroid, fed by the separate ciliary circulation, shows through as a red spot. Most emboli come from the ipsilateral carotid or the heart. Visual outcome is poor, so the source must be sought quickly, including carotid and cardiac assessment, and atrial fibrillation should be considered.",
+   "say": "In central retinal artery occlusion, the inner retina becomes ischaemic and pale. The fovea is thin and lacks inner retinal layers, so the underlying choroid, fed by the separate ciliary circulation, shows through as a red spot. Most emboli come from the ipsilateral carotid artery or the heart. Visual outcome is poor, so the source must be sought quickly, including carotid and cardiac assessment and a check for atrial fibrillation.",
+   "vis": null
+  },
+  {
+   "tx": "**Giant cell arteritis** is a granulomatous vasculitis of medium and large arteries in people over 50. It can cause sudden, painless, often permanent blindness through anterior ischaemic optic neuropathy. Warning features include new headache, scalp tenderness, jaw claudication and raised ESR or CRP. Temporal artery biopsy shows transmural inflammation with giant cells, but skip lesions make it falsely negative in some patients.",
+   "say": "Giant cell arteritis is a granulomatous vasculitis of medium and large arteries in people over fifty. It can cause sudden, painless and often permanent blindness through anterior ischaemic optic neuropathy. Warning features include new headache, scalp tenderness, jaw claudication and raised inflammatory markers. Temporal artery biopsy shows transmural inflammation with giant cells, but skip lesions can make it falsely negative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical finding"
+    ],
+    "rows": [
+     [
+      "Visual loss",
+      "Sudden, painless, usually monocular"
+     ],
+     [
+      "Symptoms",
+      "New headache, scalp tenderness, jaw pain"
+     ],
+     [
+      "Blood tests",
+      "Raised ESR and CRP"
+     ],
+     [
+      "Biopsy",
+      "Transmural inflammation, giant cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Giant cell arteritis with visual loss** is an emergency. Start high-dose oral prednisolone immediately, because the fellow eye is at risk and established loss is largely irreversible. Do not wait for the biopsy, which can still be diagnostic for up to about two weeks after steroids begin. Heparin, aspirin alone or MRI should not replace steroids. In UK practice, NICE and the British guidance of the Royal College of Ophthalmologists support this approach.",
+   "say": "Giant cell arteritis with visual loss is an emergency. Start high-dose oral prednisolone immediately, because the fellow eye is at risk and established loss is largely irreversible. Do not wait for the biopsy, which can still be diagnostic for up to about two weeks after steroids begin. Heparin, aspirin alone or imaging should not replace steroids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect GCA"
+     },
+     {
+      "id": "b",
+      "label": "Bloods: ESR, CRP"
+     },
+     {
+      "id": "c",
+      "label": "High-dose prednisolone now"
+     },
+     {
+      "id": "d",
+      "label": "Temporal artery biopsy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Amaurosis fugax** is transient monocular visual loss, lasting minutes and resolving fully. It is a retinal transient ischaemic attack, usually embolic from the ipsilateral internal carotid artery. Carotid duplex ultrasound is the key investigation. Symptomatic stenosis of 50 to 99 percent in suitable patients is treated with antiplatelet therapy, a statin and carotid endarterectomy, ideally within about a week. Cardiac sources such as atrial fibrillation are also sought.",
+   "say": "Amaurosis fugax is transient monocular visual loss, lasting minutes and resolving fully. It is a retinal transient ischaemic attack, usually embolic from the ipsilateral internal carotid artery. Carotid duplex ultrasound is the key investigation. Symptomatic stenosis of fifty to ninety nine percent in suitable patients is treated with antiplatelet therapy, a statin and carotid endarterectomy, ideally within about a week.",
+   "vis": null
+  },
+  {
+   "tx": "**Retinal vein occlusion** causes macular oedema, the usual cause of lost central vision. NICE supports intravitreal anti-VEGF agents or a dexamethasone implant when vision is impaired. Ischaemic occlusion with extensive non-perfusion raises vascular endothelial growth factor and risks neovascular glaucoma, so pressure and the iris need monitoring. Systemic risk factors such as hypertension, diabetes and hyperlipidaemia must be controlled.",
+   "say": "Retinal vein occlusion causes macular oedema, the usual cause of lost central vision. NICE supports intravitreal anti-VEGF agents or a dexamethasone implant when vision is impaired. Ischaemic occlusion risks neovascular glaucoma, so intraocular pressure and the iris need monitoring. Systemic risk factors such as hypertension, diabetes and hyperlipidaemia must be controlled.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guidance on retinal vein occlusion: macular oedema treatment",
+  "Royal College of Ophthalmologists guidance on giant cell arteritis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 20
+ }
+}

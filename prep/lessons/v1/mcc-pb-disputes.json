@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "mcc-pb-disputes",
+ "subject": "mcc-professional-behaviours",
+ "title": "Goals-of-care disputes: resolving conflict at the bedside",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Goals-of-care disputes arise when a patient, family and team disagree about escalation or limits of treatment. The starting point is always the **capacity** of the patient. A capable adult may accept or refuse any treatment, including life-prolonging care, after informed discussion. Family preference does not override a capable refusal. When the patient lacks capacity, the **substitute decision-maker** decides using the patient's known values and prior wishes.",
+   "say": "Goals-of-care disputes arise when a patient, family and team disagree about escalation or limits of treatment. The starting point is always the capacity of the patient. A capable adult may accept or refuse any treatment, including life-prolonging care, after informed discussion. Family preference does not override a capable refusal. When the patient lacks capacity, the substitute decision-maker decides using the patient's known values and prior wishes.",
+   "vis": null
+  },
+  {
+   "tx": "Step one is establishing who decides. A capable patient decides for themselves. An incapable patient needs a **legal surrogate**, such as a person holding enduring power of attorney for personal care or a designated substitute. A relative who is not formally appointed cannot override the patient or the appointed surrogate. Check any written **advance directive** for scope, date and whether it fits the current illness.",
+   "say": "Step one is establishing who decides. A capable patient decides for themselves. An incapable patient needs a legal surrogate, such as a person holding enduring power of attorney for personal care or a designated substitute. A relative who is not formally appointed cannot override the patient or the appointed surrogate. Check any written advance directive for scope, date and whether it fits the current illness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Is patient capable?"
+     },
+     {
+      "id": "b",
+      "label": "Patient decides"
+     },
+     {
+      "id": "c",
+      "label": "Appointed surrogate?"
+     },
+     {
+      "id": "d",
+      "label": "Surrogate applies known wishes"
+     },
+     {
+      "id": "e",
+      "label": "Best interests with team"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "yes"
+     ],
+     [
+      "a",
+      "c",
+      "no"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ],
+     [
+      "c",
+      "e",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prior statements must be interpreted, not applied mechanically. A written refusal of ventilation made while capable may not address a new illness, so the team should clarify what the patient meant and in what context. Surrogates apply the patient's **prior expressed wishes**, not their own preference. Where wishes are unclear, **best-interest** reasoning uses the patient's values, quality of life and likely benefit.",
+   "say": "Prior statements must be interpreted, not applied mechanically. A written refusal of ventilation made while capable may not address a new illness, so the team should clarify what the patient meant and in what context. Surrogates apply the patient's prior expressed wishes, not their own preference. Where wishes are unclear, best-interest reasoning uses the patient's values, quality of life and likely benefit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prior wish applies",
+     "points": [
+      "Stated clearly while capable",
+      "Covers the current situation",
+      "Surrogate must follow it"
+     ]
+    },
+    "right": {
+     "title": "Prior wish unclear",
+     "points": [
+      "Vague or secondhand recollection",
+      "Does not address this illness",
+      "Use best-interest reasoning with team"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Not every decision runs through a surrogate. A **capable patient** who declines **dialysis** or **intubation** keeps that right, and **conservative care** or **palliative care** is a legitimate pathway. A **conscientious objector** may withhold **Medical Assistance in Dying**, yet must never block access. The clinician should tell the patient and arrange a handover to a willing provider. Ask the patient what they want shared before informing anyone else.",
+   "say": "Not every decision runs through a surrogate. A capable patient who declines dialysis or intubation keeps that right, and conservative care or palliative care is a legitimate pathway. A conscientious objector may withhold Medical Assistance in Dying, yet must never block access. The clinician should tell the patient and arrange a handover to a willing provider. Ask the patient what they want shared before informing anyone else.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Right response"
+    ],
+    "rows": [
+     [
+      "Capable refusal of dialysis",
+      "Honour the refusal and offer conservative care"
+     ],
+     [
+      "Objection to MAID",
+      "Inform patient and arrange transfer"
+     ],
+     [
+      "Relative wants treatment",
+      "Relative cannot override a capable patient"
+     ],
+     [
+      "Patient wants family told",
+      "Ask the patient first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Escalation should not be driven by a single voice. Begin by asking the patient who should be present and what information they want shared. Then convene an **interdisciplinary case conference** with the **substitute decision-maker**, and document the **prognosis**, the options, the reasons and the agreed plan. **Ethics committees** and courts are a last resort, reserved for disputes that structured discussion cannot settle.",
+   "say": "Escalation should not be driven by a single voice. Start by asking the patient who should be present and what information they want shared. Then convene an interdisciplinary case conference with the substitute decision-maker, and record the prognosis, the options, the reasons and the agreed plan. Ethics committees and courts are a last resort, reserved for disputes that structured discussion cannot settle.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on shared decision making (NG197)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "ahs-fractures",
+ "subject": "adult-health-surgery",
+ "title": "Fracture principles: classification, urgent recognition and complications",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **fracture** is a break in bone continuity. Fractures are classed as **closed**, where the skin is intact, or **open**, where the fracture communicates with the outside through a wound. Open fractures are graded with the Gustilo-Anderson system, which uses wound size, contamination and soft tissue damage to estimate infection risk. Higher grades need more aggressive antibiotics and debridement. Open fractures are a surgical emergency because contaminated bone can become infected quickly.",
+   "say": "A fracture is a break in bone continuity. Fractures are classed as closed, where the skin is intact, or open, where the fracture communicates with the outside through a wound. Open fractures are graded with the Gustilo-Anderson system, which uses wound size, contamination and soft tissue damage to estimate infection risk. Higher grades need more aggressive antibiotics and debridement. Open fractures are a surgical emergency because contaminated bone can become infected quickly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Closed fracture",
+     "Open fracture"
+    ],
+    "rows": [
+     [
+      "Skin",
+      "Intact",
+      "Broken by wound"
+     ],
+     [
+      "Infection risk",
+      "Low",
+      "High, rises with delay"
+     ],
+     [
+      "Antibiotics",
+      "Not routine",
+      "Needed early"
+     ],
+     [
+      "Grading",
+      "Not applicable",
+      "Gustilo-Anderson grade I to III"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In an open fracture, the immediate priorities are **airway, breathing and circulation**, then limb-specific care. Start **intravenous antibiotics** early, ideally within one hour, and check **tetanus** status, giving a toxoid booster if it is due. Cover the wound with a sterile dressing and splint the limb without pushing protruding bone back. Record pulses, sensation and power before and after splinting. Surgical debridement and washout follow once the patient is stable.",
+   "say": "In an open fracture, the immediate priorities are airway, breathing and circulation, then limb-specific care. Start intravenous antibiotics early, ideally within one hour, and check tetanus status, giving a toxoid booster if it is due. Cover the wound with a sterile dressing and splint the limb without pushing protruding bone back. Record pulses, sensation and power before and after splinting. Surgical debridement and washout follow once the patient is stable.",
+   "vis": null
+  },
+  {
+   "tx": "Fractures cause **systemic and local complications** that differ by timing. **Fat embolism** after long bone fixation typically presents within about a day with hypoxaemia, confusion and petechiae. **Rhabdomyolysis** from crush or prolonged entrapment releases myoglobin and potassium, risking acute kidney injury and hyperkalaemia. Late problems include **nonunion**, **malunion** and **avascular necrosis**, particularly after femoral neck or scaphoid injuries.",
+   "say": "Fractures cause systemic and local complications that differ by timing. Fat embolism after long bone fixation typically presents within about a day with hypoxaemia, confusion and petechiae. Rhabdomyolysis from crush or prolonged entrapment releases myoglobin and potassium, risking acute kidney injury and hyperkalaemia. Late problems include nonunion, malunion and avascular necrosis, particularly after femoral neck or scaphoid injuries.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early (hours to days)",
+     "points": [
+      "Fat embolism",
+      "Rhabdomyolysis and hyperkalaemia",
+      "Acute compartment syndrome"
+     ]
+    },
+    "right": {
+     "title": "Late (weeks to years)",
+     "points": [
+      "Nonunion",
+      "Malunion",
+      "Avascular necrosis",
+      "Post-traumatic osteoarthritis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Low-energy fractures in older adults, such as a neck of femur fracture from standing height, are **fragility fractures** and need bone health review. A low **25-hydroxyvitamin D** with raised **alkaline phosphatase** suggests osteomalacia, so correct the deficiency and check calcium before starting a bisphosphonate. Femoral neck fractures usually need surgical fixation or replacement after anaesthetic review, since displaced fractures threaten the femoral head blood supply.",
+   "say": "Low energy fractures in older adults, such as a neck of femur fracture from standing height, are fragility fractures and need bone health review. A low 25-hydroxyvitamin D with raised alkaline phosphatase suggests osteomalacia, so correct the deficiency and check calcium before starting a bisphosphonate. Femoral neck fractures usually need surgical fixation or replacement after anaesthetic review, since displaced fractures threaten the femoral head blood supply.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Likely meaning",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Low 25-hydroxyvitamin D",
+      "Deficiency",
+      "Correct before bisphosphonate"
+     ],
+     [
+      "Raised alkaline phosphatase",
+      "Possible osteomalacia",
+      "Check calcium and phosphate"
+     ],
+     [
+      "Displaced neck of femur fracture",
+      "Threatened femoral head",
+      "Surgery after anaesthetic review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fracture in a **non-ambulant infant** or a history that does not fit the injury is a **red flag** for non-accidental injury. Examples include a femoral shaft fracture in a baby who cannot yet walk, bruising on the back and a short fall. A **skeletal survey** looks for other fractures at different stages of healing. A **child protection referral** must follow when abuse is suspected, rather than reassurance or routine outpatient follow-up.",
+   "say": "A fracture in a non-ambulant infant, or a history that does not fit the injury, is a red flag for non-accidental injury. Examples include a femoral shaft fracture in a baby who cannot yet walk, bruising on the back and a short fall. A skeletal survey looks for other fractures at different stages of healing. A child protection referral must follow when abuse is suspected, rather than reassurance or routine outpatient follow-up.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fracture in non-walking infant"
+     },
+     {
+      "id": "b",
+      "label": "History does not fit injury"
+     },
+     {
+      "id": "c",
+      "label": "Skeletal survey"
+     },
+     {
+      "id": "d",
+      "label": "Child protection referral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

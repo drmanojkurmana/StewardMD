@@ -1,0 +1,169 @@
+{
+ "v": 1,
+ "module": "mbsci-immunology",
+ "subject": "mrcp-basic-science",
+ "title": "Immunology and inflammation: acute-phase response, inflammatory cells and key immunodeficiencies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Inflammation is the body's local and systemic response to infection, injury or tissue damage. Acute inflammation begins within minutes and is dominated by **neutrophils**, which leave venules after selectin-mediated rolling and integrin-mediated adhesion, guided by chemokines such as IL-8 and complement fragment C5a. They then phagocytose microbes and release enzymes and reactive oxygen species.",
+   "say": "Inflammation is the body's local and systemic response to infection, injury or tissue damage. Acute inflammation begins within minutes and is dominated by neutrophils. These cells leave venules after selectin-mediated rolling and integrin-mediated adhesion, guided by chemokines such as IL-8 and complement fragment C5a. They then phagocytose microbes and release enzymes and reactive oxygen species.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rolling",
+      "sub": "selectins"
+     },
+     {
+      "id": "b",
+      "label": "Adhesion",
+      "sub": "integrins"
+     },
+     {
+      "id": "c",
+      "label": "Migration",
+      "sub": "chemokines"
+     },
+     {
+      "id": "d",
+      "label": "Killing",
+      "sub": "ROS and enzymes"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The acute-phase response is a systemic reaction. Macrophages release **IL-1**, **TNF-alpha** and **IL-6**, and IL-6 is the main signal for hepatocytes to make **CRP**, fibrinogen and serum amyloid A. Albumin falls. CRP rises within hours, so it is a useful early marker of infection or inflammation in clinical practice.",
+   "say": "The acute-phase response is a systemic reaction. Macrophages release IL-1, TNF-alpha and IL-6, and IL-6 is the main signal for hepatocytes to make CRP, fibrinogen and serum amyloid A. Albumin falls. CRP rises within hours, so it is a useful early marker of infection or inflammation in clinical practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mediator",
+     "Source",
+     "Hepatic effect"
+    ],
+    "rows": [
+     [
+      "IL-6",
+      "Macrophages, other cells",
+      "Main driver of CRP"
+     ],
+     [
+      "IL-1",
+      "Macrophages",
+      "Supports cytokine cascade"
+     ],
+     [
+      "TNF-alpha",
+      "Macrophages",
+      "Early inflammatory signal"
+     ],
+     [
+      "Albumin",
+      "Liver",
+      "Falls in acute phase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Type II hypersensitivity involves **IgG** or IgM antibodies against cell-surface or matrix antigens. In Graves disease, IgG binds the **TSH receptor** on thyrocytes and acts as an agonist, driving hormone production. Negative feedback suppresses TSH. Type I hypersensitivity, by contrast, is driven by **IgE** on mast cells and basophils, releasing histamine within minutes.",
+   "say": "Type II hypersensitivity involves IgG or IgM antibodies against cell-surface or matrix antigens. In Graves disease, IgG binds the TSH receptor on thyrocytes and acts as an agonist, driving hormone production. Negative feedback suppresses TSH. Type I hypersensitivity, by contrast, is driven by IgE on mast cells and basophils, releasing histamine within minutes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I (IgE)",
+     "points": [
+      "Mast cell degranulation",
+      "Histamine release within minutes",
+      "Example: peanut allergy"
+     ]
+    },
+    "right": {
+     "title": "Type II (IgG/IgM)",
+     "points": [
+      "Antibody against cell-surface antigen",
+      "Can stimulate or destroy target",
+      "Example: Graves disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hereditary angioedema results from **C1 esterase inhibitor** deficiency, which may be quantitative or functional. Without adequate inhibition, kallikrein cleaves kininogen to release **bradykinin**, which increases vascular permeability. Histamine is not involved, so antihistamines and steroids fail. Low C4 with normal C3 reflects continuous classical pathway consumption.",
+   "say": "Hereditary angioedema results from C1 esterase inhibitor deficiency, which may be quantitative or functional. Without adequate inhibition, kallikrein cleaves kininogen to release bradykinin, which increases vascular permeability. Histamine is not involved, so antihistamines and steroids fail. Low C4 with normal C3 reflects continuous classical pathway consumption.",
+   "vis": null
+  },
+  {
+   "tx": "Primary immunodeficiencies present with a characteristic pattern. **X-linked agammaglobulinaemia** results from **BTK** mutations, blocking early B-cell development, so B cells and all immunoglobulin classes are low while T cells are normal. Leucocyte adhesion deficiency type 1 involves defective CD18 integrin, causing neutrophilia with little pus and delayed umbilical cord separation.",
+   "say": "Primary immunodeficiencies present with a characteristic pattern. X-linked agammaglobulinaemia results from BTK mutations, blocking early B-cell development, so B cells and all immunoglobulin classes are low while T cells are normal. Leucocyte adhesion deficiency type 1 involves defective CD18 integrin, causing neutrophilia with little pus and delayed umbilical cord separation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Defect",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "X-linked agammaglobulinaemia",
+      "BTK",
+      "Low B cells, encapsulated infections"
+     ],
+     [
+      "LAD type 1",
+      "CD18 integrin",
+      "Neutrophilia, little pus"
+     ],
+     [
+      "Chronic granulomatous disease",
+      "NADPH oxidase",
+      "Catalase-positive organisms, normal neutrophil count"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic granulomatous disease is caused by defects in the **NADPH oxidase** complex, which abolishes the respiratory burst that produces superoxide, hydrogen peroxide and hypochlorite. Catalase-positive organisms such as Staphylococcus aureus and Aspergillus survive inside phagocytes. A nitroblue tetrazolium test that fails to change colour confirms the diagnosis.",
+   "say": "Chronic granulomatous disease is caused by defects in the NADPH oxidase complex, which abolishes the respiratory burst that produces superoxide, hydrogen peroxide and hypochlorite. Catalase-positive organisms such as Staphylococcus aureus and Aspergillus survive inside phagocytes. A nitroblue tetrazolium test that fails to change colour confirms the diagnosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Janeway's Immunobiology (Murphy and Weaver)",
+  "Kumar and Clark's Clinical Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

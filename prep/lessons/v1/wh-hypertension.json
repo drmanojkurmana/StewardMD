@@ -1,0 +1,168 @@
+{
+ "v": 1,
+ "module": "wh-hypertension",
+ "subject": "womens-health",
+ "title": "Hypertensive disorders in pregnancy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Hypertensive disorders in pregnancy start with clear definitions. **Gestational hypertension** is new raised blood pressure arising after the midpoint of pregnancy, without proteinuria or organ involvement. **Pre-eclampsia** adds proteinuria or end-organ dysfunction, such as low platelets, raised creatinine or abnormal liver enzymes. Diagnosis rests on repeated readings taken several hours apart, unless blood pressure is severe.",
+   "say": "Hypertensive disorders in pregnancy start with clear definitions. Gestational hypertension is new raised blood pressure that appears after the midpoint of pregnancy, without protein in the urine or signs of organ involvement. Pre-eclampsia adds proteinuria or features of end-organ dysfunction, such as low platelets, raised creatinine or abnormal liver enzymes. Diagnosis rests on repeated readings taken several hours apart, unless blood pressure is severe.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Gestational hypertension",
+     "Pre-eclampsia"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "After mid-pregnancy",
+      "After mid-pregnancy"
+     ],
+     [
+      "Proteinuria",
+      "Absent",
+      "Present, or organ signs"
+     ],
+     [
+      "Platelets and liver",
+      "Normal",
+      "May be abnormal"
+     ],
+     [
+      "Creatinine",
+      "Normal",
+      "May be raised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe features include **severe-range blood pressure** or symptoms such as headache, visual disturbance or **epigastric pain**. Severe hypertension needs **prompt treatment** once confirmed. Intravenous **labetalol** or oral **nifedipine** can be used. Give **magnesium sulfate** to prevent eclampsia in severe pre-eclampsia, and plan delivery once the mother is stable.",
+   "say": "Severe features include severe-range blood pressure or symptoms such as headache, visual disturbance or epigastric pain. Severe hypertension needs prompt treatment once confirmed. Intravenous labetalol or oral nifedipine can be used. Give magnesium sulfate to prevent eclampsia in severe pre-eclampsia, and plan delivery once the mother is stable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Severe-range BP or symptoms"
+     },
+     {
+      "id": "n2",
+      "label": "Prompt treatment"
+     },
+     {
+      "id": "n3",
+      "label": "Labetalol or nifedipine"
+     },
+     {
+      "id": "n4",
+      "label": "Magnesium sulfate"
+     },
+     {
+      "id": "n5",
+      "label": "Deliver once stable"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For chronic hypertension, pick antihypertensives that are safe in pregnancy. **Labetalol** and **nifedipine** are the usual first-line choices. **ACE inhibitors** and **angiotensin receptor blockers** must be stopped, as they carry a risk of fetal renal harm. Review the regimen as soon as pregnancy is confirmed rather than waiting for the next clinic visit.",
+   "say": "For chronic hypertension, pick antihypertensives that are safe in pregnancy. Labetalol and nifedipine are the usual first-line choices. ACE inhibitors and angiotensin receptor blockers must be stopped, as they carry a risk of fetal renal harm. Review the regimen as soon as pregnancy is confirmed rather than waiting for the next clinic visit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Pregnancy role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Labetalol",
+      "First line",
+      "Check for asthma"
+     ],
+     [
+      "Nifedipine",
+      "First line",
+      "Modified release oral form"
+     ],
+     [
+      "ACE inhibitors",
+      "Stop",
+      "Fetal renal toxicity"
+     ],
+     [
+      "Angiotensin receptor blockers",
+      "Stop",
+      "Fetal renal toxicity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pre-eclampsia can present or worsen after birth, so blood pressure must be checked for at least six weeks postpartum. Women with pre-eclampsia have a higher lifetime risk of cardiovascular disease. Advise a GP **cardiovascular risk assessment**, covering blood pressure, lipids, glucose, weight and smoking. Early risk modification reduces future stroke, heart disease and diabetes.",
+   "say": "Pre-eclampsia can present or worsen after birth, so blood pressure must be checked for at least six weeks postpartum. Women with pre-eclampsia have a higher lifetime risk of cardiovascular disease. Advise a GP cardiovascular risk assessment, covering blood pressure, lipids, glucose, weight and smoking. Early risk modification reduces future stroke, heart disease and diabetes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Postpartum care",
+     "points": [
+      "Check blood pressure for six weeks",
+      "Watch for headache or visual change",
+      "Treat severe readings promptly"
+     ]
+    },
+    "right": {
+     "title": "Long-term care",
+     "points": [
+      "Cardiovascular risk assessment",
+      "Review lipids and glucose",
+      "Advise weight and smoking support"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG133 Hypertension in pregnancy: diagnosis and management",
+  "ACOG Practice Bulletin No. 222 Gestational Hypertension and Preeclampsia"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

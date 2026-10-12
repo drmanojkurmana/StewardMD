@@ -1,0 +1,82 @@
+{
+ "v": 1,
+ "module": "mcc-pb-reproductive",
+ "subject": "mcc-professional-behaviours",
+ "title": "Reproductive ethics: consent, autonomy and the limits of clinical choice",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Reproductive ethics rests on **autonomy**, meaning a capable adult may accept or refuse care about their own body. Decision-making **capacity** is the gateway: a patient who understands information, retains it, weighs options and communicates a choice can refuse treatment even when the refusal seems risky. Substitute decision-makers and courts act only when capacity is absent. Informed refusal still requires full counselling, documentation and continued care, not abandonment.",
+   "say": "Reproductive ethics rests on autonomy, meaning a capable adult may accept or refuse care about their own body. Decision-making capacity is the gateway. A patient who understands information, retains it, weighs options and communicates a choice can refuse treatment even when the refusal seems risky. Substitute decision-makers and courts act only when capacity is absent. Informed refusal still requires full counselling, documentation and continued care, not abandonment.",
+   "vis": null
+  },
+  {
+   "tx": "Emergencies and high-risk pregnancy test capacity and autonomy in practice. A competent woman with **placenta previa** and prior caesarean may refuse recommended surgery after counselling; the clinician continues shared decision-making and documents refusal. In haemorrhage, a capacitated woman may refuse blood on religious grounds, so non-blood measures are optimised. Court orders are sought only when capacity is absent or a dispute cannot be resolved lawfully.",
+   "say": "Emergencies and high-risk pregnancy test capacity and autonomy in practice. A competent woman with placenta previa and prior caesarean may refuse recommended surgery after counselling. The clinician continues shared decision-making and documents the refusal. In haemorrhage, a capacitated woman may refuse blood on religious grounds, so non-blood measures are optimised. Court orders are sought only when capacity is absent or a dispute cannot be resolved lawfully.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess capacity"
+     },
+     {
+      "id": "b",
+      "label": "Counsel and document"
+     },
+     {
+      "id": "c",
+      "label": "Optimise non-blood care"
+     },
+     {
+      "id": "d",
+      "label": "Court only if capacity absent"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "if incapacity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conscientious objection lets a clinician decline a procedure such as **medical termination of pregnancy**, but it does not permit abandonment. The duty to inform the patient and to make an effective, timely referral persists. Confidentiality for minors is a related principle: a mature minor who understands risks can consent to contraception and STI testing and treatment, subject to limited exceptions such as serious risk of harm.",
+   "say": "Conscientious objection lets a clinician decline a procedure such as medical termination of pregnancy, but it does not permit abandonment. The duty to inform the patient and to make an effective, timely referral persists. Confidentiality for minors is a related principle. A mature minor who understands risks can consent to contraception and STI testing and treatment, subject to limited exceptions such as serious risk of harm.",
+   "vis": null
+  },
+  {
+   "tx": "Pre-conception care in HIV centres on **viral suppression**. A detectable viral load despite reported adherence signals incomplete suppression and is the main modifiable risk for sexual and perinatal transmission. A preserved CD4 count does not prevent pregnancy planning. Sustained undetectable viral load on antiretroviral therapy markedly reduces transmission to a partner and to the fetus, so counselling and prevention are the appropriate next steps, not advice against pregnancy or public reporting.",
+   "say": "Pre-conception care in HIV centres on viral suppression. A detectable viral load despite reported adherence signals incomplete suppression and is the main modifiable risk for sexual and perinatal transmission. A preserved CD4 count does not prevent pregnancy planning. Sustained undetectable viral load on antiretroviral therapy markedly reduces transmission to a partner and to the fetus, so counselling and prevention are the appropriate next steps.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

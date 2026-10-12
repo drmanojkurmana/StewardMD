@@ -1,0 +1,99 @@
+{
+ "v": 1,
+ "module": "mcc-cc-af",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic atrial fibrillation: rate control, stroke prevention and shared decisions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Chronic atrial fibrillation** means AF that persists long term and is managed rather than cured. The two central goals are controlling the ventricular rate and preventing cardioembolic stroke. Stroke risk is assessed with the CHA2DS2-VASc score, and an **oral anticoagulant** is usually recommended when the score signals meaningful risk in men or women. Bleeding risk is assessed in parallel, but a high bleeding score alone is not a reason to withhold anticoagulation without addressing modifiable factors.",
+   "say": "Chronic atrial fibrillation means atrial fibrillation that persists long term and is managed rather than cured. The two central goals are controlling the ventricular rate and preventing cardioembolic stroke. Stroke risk is assessed with the CHA2DS2-VASc score, and an oral anticoagulant is usually recommended when that score signals meaningful risk. Bleeding risk is assessed in parallel, but a high bleeding score alone is not a reason to withhold anticoagulation without first addressing modifiable factors.",
+   "vis": null
+  },
+  {
+   "tx": "**Rate control** is the default strategy in chronic AF when the patient feels well. Beta blockers or non-dihydropyridine calcium channel blockers slow AV nodal conduction. In reduced ejection fraction, a beta blocker is preferred, and non-dihydropyridine calcium channel blockers and class IC agents should be avoided. Combining two AV nodal blockers can cause dangerous bradycardia, so a patient with dizziness and a very slow ventricular rate needs those drugs held first.",
+   "say": "Rate control is the default strategy in chronic atrial fibrillation when the patient feels well. Beta blockers or non-dihydropyridine calcium channel blockers slow AV nodal conduction. In reduced ejection fraction, a beta blocker is preferred, and non-dihydropyridine calcium channel blockers and class IC agents should be avoided. Combining two AV nodal blockers can cause dangerous bradycardia, so a patient with dizziness and a very slow ventricular rate needs those drugs held first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dizzy, ventricular rate 38"
+     },
+     {
+      "id": "b",
+      "label": "Hold AV nodal blockers"
+     },
+     {
+      "id": "c",
+      "label": "Assess haemodynamics and monitor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rhythm control** is considered when symptoms persist despite rate control, when AF is driving heart failure, or when a patient is young and symptomatic. In chronic AF of several years with a stable, well-controlled rate and mild left atrial enlargement, rhythm control offers limited gain. Failed antiarrhythmic drugs and procedural risks should be weighed. Catheter ablation or cardioversion is considered by specialists when a clear indication exists.",
+   "say": "Rhythm control is considered when symptoms persist despite rate control, when atrial fibrillation is driving heart failure, or when a younger patient remains symptomatic. In chronic atrial fibrillation of several years with a stable, well-controlled rate and only mild left atrial enlargement, rhythm control offers limited gain. Failed antiarrhythmic drugs and procedural risks should be weighed. Catheter ablation or cardioversion is considered by specialists when a clear indication exists.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Consider rhythm control",
+     "points": [
+      "Persistent symptoms on rate control",
+      "AF driving heart failure",
+      "Young and symptomatic"
+     ]
+    },
+    "right": {
+     "title": "Favour rate control",
+     "points": [
+      "Well and asymptomatic",
+      "Stable controlled rate",
+      "Prior drug failures or adverse effects"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients who **lack capacity**, such as those with moderate dementia, the substitute decision-maker decides using the patient's previously expressed wishes and values, and then her best interests. Falls alone are a weak reason to stop anticoagulation. A structured review of risks, benefits, and prior wishes with the decision-maker comes before any change. Unilateral stopping or escalation to ethics committees is not the first step.",
+   "say": "In patients who lack capacity, such as those with moderate dementia, the substitute decision-maker decides using the patient's previously expressed wishes and values, and then her best interests. Falls alone are a weak reason to stop anticoagulation. A structured review of risks, benefits and prior wishes with the decision-maker comes before any change. Unilateral stopping or escalation to an ethics committee is not the first step.",
+   "vis": null
+  },
+  {
+   "tx": "When a patient on an anticoagulant has **stable coronary disease** with a stent placed years earlier, adding antiplatelet therapy increases bleeding without clear ischaemic benefit. Aspirin is usually stopped once the anticoagulant is established beyond the early post-stent period. Combining aspirin with clopidogrel and an anticoagulant should be avoided in this setting. Modest alcohol intake and a low haemoglobin should prompt checks for bleeding sources, but they do not by themselves change the choice.",
+   "say": "When a patient on an anticoagulant has stable coronary disease with a stent placed years earlier, adding antiplatelet therapy increases bleeding without clear ischaemic benefit. Aspirin is usually stopped once the anticoagulant is established beyond the early post-stent period. Combining aspirin with clopidogrel and an anticoagulant should be avoided in this setting. Modest alcohol intake and a low haemoglobin should prompt checks for bleeding sources, but they do not by themselves change the choice.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG196 Atrial fibrillation: diagnosis and management",
+  "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "wh-miscarriage",
+ "subject": "womens-health",
+ "title": "Miscarriage and abortion care: key decisions for the exam",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Miscarriage is loss of a pregnancy before 24 weeks. A **missed miscarriage** has no fetal cardiac activity but the tissue remains in the uterus. An **incomplete miscarriage** means some products are retained. Know which category the patient falls into before choosing management, because the options differ.",
+   "say": "Miscarriage is loss of a pregnancy before twenty four weeks. A missed miscarriage has no fetal cardiac activity but the tissue remains in the uterus. An incomplete miscarriage means some products are retained. Know which category the patient falls into before choosing management, because the options differ.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Key feature",
+     "Typical step"
+    ],
+    "rows": [
+     [
+      "Missed",
+      "No cardiac activity, tissue retained",
+      "Expectant, medical or surgical"
+     ],
+     [
+      "Incomplete",
+      "Some products still in uterus",
+      "Heavy bleeding needs urgent review"
+     ],
+     [
+      "Septic",
+      "Fever, raised markers, open cervix",
+      "IV antibiotics and evacuation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mifepristone** is an antiprogestogen. It blocks progesterone receptors in the decidua, which softens the cervix and sensitises the myometrium. **Misoprostol**, a prostaglandin analogue, then causes uterine contractions and expulsion. Medical abortion needs a confirmed intrauterine pregnancy of known gestation, so ultrasound confirmation comes first.",
+   "say": "Mifepristone is an antiprogestogen. It blocks progesterone receptors in the decidua, which softens the cervix and sensitises the myometrium. Misoprostol, a prostaglandin analogue, then causes uterine contractions and expulsion. Medical abortion needs a confirmed intrauterine pregnancy of known gestation, so ultrasound confirmation comes first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mifepristone"
+     },
+     {
+      "id": "b",
+      "label": "Blocks decidual progesterone"
+     },
+     {
+      "id": "c",
+      "label": "Cervix softens"
+     },
+     {
+      "id": "d",
+      "label": "Misoprostol given"
+     },
+     {
+      "id": "e",
+      "label": "Expulsion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ectopic pregnancy must be excluded before any termination or miscarriage plan. Unilateral pain, light bleeding, an empty uterus, an adnexal mass and free pelvic fluid suggest rupture. Haemodynamic stability does not exclude intraperitoneal bleeding, so **urgent gynaecological review** for surgery is required. Methotrexate is for selected stable cases only.",
+   "say": "Ectopic pregnancy must be excluded before any termination or miscarriage plan. Unilateral pain, light bleeding, an empty uterus, an adnexal mass and free pelvic fluid suggest rupture. Haemodynamic stability does not exclude intraperitoneal bleeding, so urgent gynaecological review for surgery is required. Methotrexate is for selected stable cases only.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stable ectopic",
+     "points": [
+      "Haemodynamically stable",
+      "No free fluid",
+      "Low hCG, selected cases"
+     ]
+    },
+    "right": {
+     "title": "Ruptured or rupturing",
+     "points": [
+      "Free fluid, adnexal mass",
+      "Possible shock",
+      "Urgent surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sepsis after miscarriage or abortion is an emergency. Fever, tachycardia, raised white cell count, raised lactate and an open cervix with visible products suggest septic incomplete miscarriage. Start **IV broad-spectrum antibiotics** and arrange urgent uterine evacuation to remove the infected source. Take blood cultures first, but do not delay antibiotics.",
+   "say": "Sepsis after miscarriage or abortion is an emergency. Fever, tachycardia, raised white cell count, raised lactate and an open cervix with visible products suggest septic incomplete miscarriage. Start IV broad-spectrum antibiotics and arrange urgent uterine evacuation to remove the infected source. Take blood cultures first, but do not delay antibiotics.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG126 Ectopic pregnancy and miscarriage",
+  "Chapter 22 in Williams Obstetrics (Cunningham et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

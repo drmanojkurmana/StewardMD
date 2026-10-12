@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "mcc-ac-pneumothorax",
+ "subject": "mcc-acute-care",
+ "title": "Pneumothorax and pleural emergencies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **pneumothorax** is air in the pleural space. A **tension pneumothorax** occurs when air enters on inspiration but cannot escape, so intrapleural pressure rises, the lung collapses, the mediastinum shifts and venous return falls. It is a clinical diagnosis and must not wait for imaging. Look for absent breath sounds, tracheal deviation away from the affected side, raised neck veins and hypotension.",
+   "say": "A pneumothorax is air in the pleural space. A tension pneumothorax occurs when air enters on inspiration but cannot escape, so pressure rises, the lung collapses, the mediastinum shifts and venous return falls. It is a clinical diagnosis and must not wait for imaging. Look for absent breath sounds, tracheal deviation away from the affected side, raised neck veins and hypotension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Air enters on inspiration"
+     },
+     {
+      "id": "b",
+      "label": "Air cannot escape"
+     },
+     {
+      "id": "c",
+      "label": "Pleural pressure rises"
+     },
+     {
+      "id": "d",
+      "label": "Mediastinal shift"
+     },
+     {
+      "id": "e",
+      "label": "Venous return falls"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In suspected **tension pneumothorax** with shock, do not wait for a chest radiograph. Perform immediate **needle decompression** in the second intercostal space at the mid-clavicular line, or the fifth intercostal space at the anterior axillary line, then insert a formal chest drain. Needle decompression is a bridge, not definitive treatment. Re-examine after the procedure.",
+   "say": "In suspected tension pneumothorax with shock, do not wait for a chest radiograph. Perform immediate needle decompression in the second intercostal space at the mid-clavicular line, or the fifth intercostal space at the anterior axillary line, then insert a formal chest drain. Needle decompression is a bridge, not definitive treatment. Re-examine after the procedure.",
+   "vis": null
+  },
+  {
+   "tx": "Blunt chest trauma can cause a **haemothorax** with massive bleeding. A large initial **chest drain** output, or persistent high drainage over several hours, usually prompts **surgical exploration**. Haemodynamic instability with ongoing loss calls for urgent **thoracotomy**. A normal **INR** argues against coagulopathy as the cause, so vitamin K is not the answer here.",
+   "say": "Blunt chest trauma can cause a haemothorax with massive bleeding. A large initial chest drain output, or persistent high drainage over several hours, usually prompts surgical exploration. Haemodynamic instability with ongoing loss calls for urgent thoracotomy. A normal INR argues against coagulopathy as the cause, so vitamin K is not the answer here.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Implication"
+    ],
+    "rows": [
+     [
+      "Large initial drain output",
+      "Usually needs surgical exploration"
+     ],
+     [
+      "Persistent high drainage",
+      "Consider surgical control"
+     ],
+     [
+      "Shock with ongoing loss",
+      "Urgent thoracotomy"
+     ],
+     [
+      "Normal INR",
+      "Coagulopathy unlikely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An infected pleural collection, or **empyema**, is suspected when fever, raised white count and very high CRP follow pneumonia. Loculation with a thickened pleura means antibiotics alone usually fail. The fluid forms a fibrin peel that traps pus. **Image-guided pleural drainage** evacuates the infected fluid and allows the lung to re-expand. Chest ultrasound helps guide the procedure.",
+   "say": "An infected pleural collection, or empyema, is suspected when fever, raised white count and very high CRP follow pneumonia. Loculation with a thickened pleura means antibiotics alone usually fail. The fluid forms a fibrin peel that traps pus. Image-guided pleural drainage evacuates the infected fluid and allows the lung to re-expand. Chest ultrasound helps guide the procedure.",
+   "vis": null
+  },
+  {
+   "tx": "A **primary spontaneous pneumothorax** in a tall, thin young man is usually caused by ruptured apical subpleural blebs. After a second ipsilateral episode, recurrence risk is high, so definitive treatment is advised. Options include surgical resection of blebs or **pleurodesis**, which seals the pleural surfaces. Observation alone is not adequate after recurrence.",
+   "say": "A primary spontaneous pneumothorax in a tall, thin young man is usually caused by ruptured apical subpleural blebs. After a second ipsilateral episode, recurrence risk is high, so definitive treatment is advised. Options include surgical resection of blebs or pleurodesis, which seals the pleural surfaces. Observation alone is not adequate after recurrence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conservative care",
+     "points": [
+      "Small pneumothorax",
+      "First episode, stable",
+      "Repeat imaging",
+      "Smoking cessation"
+     ]
+    },
+    "right": {
+     "title": "Definitive care",
+     "points": [
+      "Second ipsilateral episode",
+      "Surgical bleb resection",
+      "Pleurodesis",
+      "Lower recurrence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Key exam point: distinguish **tension pneumothorax** from massive haemothorax after trauma. Both cause shock, but tension gives hyperresonance, tracheal shift and raised neck veins, while haemothorax gives dullness and drain output. Treat tension immediately by decompression, and treat massive haemothorax by drainage and surgery. Always reassess after each intervention.",
+   "say": "Key exam point: distinguish tension pneumothorax from massive haemothorax after trauma. Both cause shock, but tension gives hyperresonance, tracheal shift and raised neck veins, while haemothorax gives dullness and drain output. Treat tension immediately by decompression, and treat massive haemothorax by drainage and surgery. Always reassess after each intervention.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "British Thoracic Society Pleural Disease Guideline"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 4
+ }
+}

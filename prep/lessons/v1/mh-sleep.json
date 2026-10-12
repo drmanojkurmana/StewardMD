@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "mh-sleep",
+ "subject": "mental-health",
+ "title": "Sleep disorders: key high-yield patterns for NEET-PG",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Chronic insomnia is difficulty with **sleep onset** or **sleep maintenance** occurring at least three nights a week for three months or more. Perpetuating factors include stress, caffeine, and screen use in bed. A medical cause such as thyroid disease must be excluded first. The **first-line treatment** is **cognitive behavioural therapy for insomnia (CBT-I)**, which works through sleep restriction, stimulus control and cognitive restructuring. Hypnotics are a later option and should be short term only.",
+   "say": "Chronic insomnia means trouble getting off to sleep, called sleep onset, or trouble staying asleep, called sleep maintenance, on at least three nights a week for three months or more. Stress, caffeine and screen use in bed tend to sustain it. Clinicians should rule out a medical problem, such as an underactive thyroid, first. The leading treatment is cognitive behavioural therapy for insomnia, known as CBT-I, which combines sleep restriction, stimulus control and reworking unhelpful beliefs about sleep. Sleeping tablets come later and only for brief periods.",
+   "vis": null
+  },
+  {
+   "tx": "Obstructive sleep apnoea arises when the upper airway repeatedly collapses during sleep, producing **apnoeas**, **intermittent hypoxia** and **arousals**. Patients often snore loudly, are witnessed to stop breathing, and feel sleepy by day. Obesity and **hypertension** are common associations. The **gold standard first-line therapy** is **CPAP**, which holds the airway open with positive pressure.",
+   "say": "Obstructive sleep apnoea arises when the upper airway repeatedly collapses during sleep. This produces apnoeas, intermittent hypoxia and arousals. Loud snoring, witnessed breathing pauses, obesity, morning headaches and daytime sleepiness are typical. Hypertension is a common association. The gold standard first-line therapy is CPAP, which keeps the airway open with positive pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical finding"
+    ],
+    "rows": [
+     [
+      "Sleep pattern",
+      "Loud snoring with pauses"
+     ],
+     [
+      "Daytime effect",
+      "Sleepiness and headache"
+     ],
+     [
+      "Key test",
+      "Polysomnography"
+     ],
+     [
+      "First-line therapy",
+      "CPAP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Restless legs syndrome causes an urge to move the legs at rest, often at night, that improves with walking. **Iron deficiency** is a major reversible cause because **ferritin** supports dopamine synthesis in the basal ganglia. Heavy menstrual bleeding is a common cause in women. Treat the underlying iron deficiency first, and check **haemoglobin**, **MCV** and **ferritin** to guide therapy.",
+   "say": "Restless legs syndrome causes an urge to move the legs at rest, often at night, which improves with walking. Iron deficiency is a major reversible cause, because iron supports dopamine synthesis in the basal ganglia. Heavy menstrual bleeding is a common cause in women. Treat the underlying iron deficiency first, and check haemoglobin, MCV and ferritin to guide therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Night leg urge"
+     },
+     {
+      "id": "b",
+      "label": "Low ferritin"
+     },
+     {
+      "id": "c",
+      "label": "Less dopamine"
+     },
+     {
+      "id": "d",
+      "label": "Replace iron"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Narcolepsy type 1** presents with excessive daytime sleepiness, **cataplexy** triggered by strong emotion such as laughter, and sleep onset REM periods. The underlying problem is loss of **hypocretin (orexin)** neurons in the lateral hypothalamus. Without this signal, wake-promoting and motor systems lose stability. Polysomnography and multiple sleep latency testing support the diagnosis. Treatment is symptom-directed and aims to improve daytime alertness and control cataplexy.",
+   "say": "Narcolepsy type 1 presents with excessive daytime sleepiness, cataplexy triggered by strong emotion such as laughter, and REM periods at sleep onset. The underlying problem is loss of hypocretin, also called orexin, neurons in the lateral hypothalamus. Without this signal, wake-promoting and motor systems lose stability. Polysomnography and multiple sleep latency testing support the diagnosis. Treatment is symptom-directed and aims to improve daytime alertness and control cataplexy.",
+   "vis": null
+  },
+  {
+   "tx": "Insomnia after bereavement or in older adults should be approached with CBT-I rather than long-term hypnotics. Benzodiazepines and sedating antihistamines carry dependence, tolerance and falls risk. **Alcohol** worsens sleep architecture and must not be used to induce sleep. CBT-I has durable benefit after treatment ends, which is why it is preferred in exam answers. Indian practice follows the same principle, with hypnotics kept short term.",
+   "say": "Insomnia after bereavement or in older adults should be treated with CBT-I rather than long-term hypnotics. Benzodiazepines and sedating antihistamines carry dependence, tolerance and falls risk. Alcohol worsens sleep quality and must not be used to induce sleep. CBT-I has lasting benefit after treatment ends, which is why it is preferred in exam answers. Indian practice follows the same principle, keeping hypnotics short term.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Chapter 13 in Kaplan and Sadock's Comprehensive Textbook of Psychiatry (Sadock B, Sadock V, Ruiz P)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

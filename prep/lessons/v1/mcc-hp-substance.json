@@ -1,0 +1,107 @@
+{
+ "v": 1,
+ "module": "mcc-hp-substance",
+ "subject": "mcc-health-promotion",
+ "title": "Alcohol and substance prevention: core principles for India",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Substance prevention works at three levels: **universal** measures for everyone, **selective** measures for people at higher risk, and **indicated** measures for people already using harmfully. Clinicians should screen routinely, give brief advice, and match intensity to risk. Early identification in primary care is the most efficient entry point, because most people with hazardous drinking never reach specialist services.",
+   "say": "Substance prevention works at three levels. Universal measures reach everyone, selective measures target people at higher risk, and indicated measures support people who are already using harmfully. Clinicians should screen routinely, give brief advice, and match the intensity of care to the level of risk. Early identification in primary care is the most efficient entry point, because most people with hazardous drinking never reach specialist services.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Target group",
+     "Example action"
+    ],
+    "rows": [
+     [
+      "Universal",
+      "Whole population",
+      "Policy on availability and pricing"
+     ],
+     [
+      "Selective",
+      "Higher-risk groups",
+      "Targeted school and family programmes"
+     ],
+     [
+      "Indicated",
+      "People already using harmfully",
+      "Brief intervention and referral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening uses a validated tool such as the **AUDIT** questionnaire, which scores hazardous, harmful and dependent drinking. A brief intervention of around five minutes, using motivational interviewing, reduces consumption in hazardous drinkers. Motivational interviewing explores **ambivalence** and supports the patient's own reasons for change rather than imposing a plan.",
+   "say": "Screening uses a validated tool such as the AUDIT questionnaire, which scores hazardous, harmful and dependent drinking. A brief intervention of around five minutes, using motivational interviewing, reduces consumption in hazardous drinkers. Motivational interviewing explores ambivalence and supports the patient's own reasons for change rather than imposing a plan.",
+   "vis": null
+  },
+  {
+   "tx": "Pregnancy needs particular attention. Alcohol crosses the placenta and can cause **fetal alcohol spectrum disorder**. No safe threshold in pregnancy is established, so advice is to abstain. Preconception counselling is the key window, because exposure can occur before pregnancy is recognised. Clinicians should ask about contraception and planned pregnancy in women who drink.",
+   "say": "Pregnancy needs particular attention. Alcohol crosses the placenta and can cause fetal alcohol spectrum disorder. No safe threshold in pregnancy is established, so advice is to abstain. Preconception counselling is the key window, because exposure can occur before pregnancy is recognised. Clinicians should ask about contraception and planned pregnancy in women who drink.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Woman drinks"
+     },
+     {
+      "id": "b",
+      "label": "Pregnancy planned"
+     },
+     {
+      "id": "c",
+      "label": "Advise abstinence"
+     },
+     {
+      "id": "d",
+      "label": "Risk to fetus avoided"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Opioid use disorder is managed with **opioid agonist therapy**, such as methadone or buprenorphine, which reduces cravings, withdrawal and illicit use. Naloxone should be given to every person who uses opioids, with education, because it reverses opioid overdose. Clinicians should check the QT interval when methadone is combined with other QT-prolonging drugs, and monitor electrolytes.",
+   "say": "Opioid use disorder is managed with opioid agonist therapy, such as methadone or buprenorphine, which reduces cravings, withdrawal and illicit use. Naloxone should be given to every person who uses opioids, with education, because it reverses opioid overdose. Clinicians should check the QT interval when methadone is combined with other QT-prolonging drugs, and monitor electrolytes.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "National Institute for Health and Care Excellence. Alcohol-use disorders: diagnosis, assessment and management of harmful drinking and alcohol dependence (CG115)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

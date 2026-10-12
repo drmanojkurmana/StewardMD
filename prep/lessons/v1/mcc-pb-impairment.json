@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "mcc-pb-impairment",
+ "subject": "mcc-professional-behaviours",
+ "title": "Physician impairment: recognition, duty to act and safe return",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Recognising impairment relies on observed **behaviour** rather than a single test. Watch for smell of alcohol, unexplained tremor, frequent lateness, missed sessions and a rise in clinical errors. Colleagues often notice these first. Absence of withdrawal today does not rule out a **substance use** problem. Record specific observations factually and avoid speculating about the cause.",
+   "say": "Recognising impairment relies on observed behaviour rather than a single test. Watch for smell of alcohol, unexplained tremor, frequent lateness, missed sessions and a rise in clinical errors. Colleagues often notice these first. Absence of withdrawal today does not rule out a substance use problem. Record specific observations factually and avoid speculating about the cause.",
+   "vis": null
+  },
+  {
+   "tx": "When concern arises, the usual sequence is a **private conversation**, then a **confidential referral** to a physician health programme or occupational health. A formal **fitness-to-practise assessment** follows, and the outcome shapes a monitored plan. Concerns should be raised even without proof, because patient safety is at stake. The process should be proportionate, timely and documented.",
+   "say": "When concern arises, the usual sequence is a private conversation, then a confidential referral to a physician health programme or occupational health. A formal fitness to practise assessment follows, and the outcome shapes a monitored plan. Concerns should be raised even without proof, because patient safety is at stake. The process should be proportionate, timely and documented.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Concern noticed"
+     },
+     {
+      "id": "n2",
+      "label": "Private talk"
+     },
+     {
+      "id": "n3",
+      "label": "Confidential referral"
+     },
+     {
+      "id": "n4",
+      "label": "Formal assessment"
+     },
+     {
+      "id": "n5",
+      "label": "Monitored plan"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Support is more effective than punishment when a doctor is struggling. **Self-referral** shows insight and allows early, confidential care. Treatment should come first, with fitness reviewed once the condition is understood. Early disclosure usually leads to a better outcome for both the doctor and patients. Punitive responses that bypass assessment can drive concealment and delay care.",
+   "say": "Support is more effective than punishment when a doctor is struggling. Self referral shows insight and allows early, confidential care. Treatment should come first, with fitness reviewed once the condition is understood. Early disclosure usually leads to a better outcome for both the doctor and patients. Punitive responses that bypass assessment can drive concealment and delay care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Supportive route",
+     "points": [
+      "Confidential referral",
+      "Treatment before fitness review",
+      "Monitoring agreed with the doctor"
+     ]
+    },
+    "right": {
+     "title": "Punitive route",
+     "points": [
+      "Discipline before assessment",
+      "Encourages concealment",
+      "Delays recovery and safe care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Return to practice after impairment should be **graduated**, with written conditions agreed with the doctor, the workplace and the treating clinician. Early recovery carries a real **relapse risk**, so supervision and reduced duties come first. Scheduled reviews and objective monitoring, such as drug testing where relevant, guide progression. Full duties are restored only when stability is sustained.",
+   "say": "Return to practice after impairment should be graduated, with written conditions agreed with the doctor, the workplace and the treating clinician. Early recovery carries a real relapse risk, so supervision and reduced duties come first. Scheduled reviews and objective monitoring, such as drug testing where relevant, guide progression. Full duties are restored only when stability is sustained.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Focus"
+    ],
+    "rows": [
+     [
+      "Early",
+      "Reduced duties with supervision"
+     ],
+     [
+      "Middle",
+      "Gradual increase with scheduled checks"
+     ],
+     [
+      "Later",
+      "Full duties once stability is sustained"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Impairment in a doctor is judged by its **effect on patient safety**, not by diagnosis alone. When concerns arise, they must be raised and assessed even if the doctor denies any problem. A **confidential, supportive referral** is generally preferred. Fitness to practise should rest on formal **assessment** rather than assumption. Any **staged return to work** needs written conditions and **monitoring**. Patient safety guides every decision.",
+   "say": "Impairment in a doctor is judged by its effect on patient safety, not by diagnosis alone. When concerns arise, they must be raised and assessed, even if the doctor denies any problem. A confidential, supportive referral is generally preferred. Fitness to practise should rest on formal assessment rather than assumption. Any staged return to work needs written conditions and monitoring. Patient safety guides every decision.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

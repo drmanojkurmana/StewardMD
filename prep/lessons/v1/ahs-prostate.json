@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "ahs-prostate",
+ "subject": "adult-health-surgery",
+ "title": "Prostate disorders: benign enlargement, infection, cancer and complications",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Prostate disorders range from **benign prostatic hyperplasia** to infection and cancer. Benign enlargement causes lower urinary tract symptoms such as hesitancy, a poor stream and nocturia. **Alpha blockers** such as tamsulosin relax smooth muscle and act within days. **Finasteride** inhibits 5 alpha reductase, so less testosterone becomes dihydrotestosterone and the gland shrinks over months. Acute retention needs urethral catheterisation.",
+   "say": "Prostate disorders range from benign enlargement to infection and cancer. Benign prostatic hyperplasia causes lower urinary tract symptoms such as hesitancy, a poor stream and nocturia. Alpha blockers, such as tamsulosin, relax smooth muscle and act within days. Finasteride blocks 5 alpha reductase, so less testosterone becomes dihydrotestosterone, and the gland shrinks over several months. Acute retention needs urethral catheterisation.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute bacterial prostatitis** presents with fever, rigors, perineal pain, dysuria and a tender, boggy prostate. Avoid prostate massage and biopsy during acute infection, as this risks bacteraemia. Send blood and urine cultures, then start intravenous antibiotics with good prostatic penetration. If the patient cannot pass urine, insert a catheter to drain the bladder. Leucocytosis and raised creatinine signal sepsis.",
+   "say": "Acute bacterial prostatitis presents with fever, rigors, perineal pain, painful urination and a tender, boggy prostate. Avoid prostate massage and biopsy during acute infection, as this risks bacteraemia. Send blood and urine cultures, then start intravenous antibiotics with good prostatic penetration. If the patient cannot pass urine, insert a catheter to drain the bladder. A high white cell count and raised creatinine signal sepsis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever and perineal pain"
+     },
+     {
+      "id": "b",
+      "label": "Tender boggy prostate"
+     },
+     {
+      "id": "c",
+      "label": "Cultures then IV antibiotics"
+     },
+     {
+      "id": "d",
+      "label": "Catheter if retention"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Investigation of suspected **prostate cancer** starts with PSA and digital rectal examination. A raised PSA alone does not confirm cancer. **Multiparametric MRI** identifies suspicious lesions, especially in the peripheral zone, where restricted diffusion suggests tumour. A **targeted biopsy** of the MRI lesion gives the best yield. Histology reports the Gleason grade group, which guides staging and treatment.",
+   "say": "Investigation of suspected prostate cancer starts with PSA testing and digital rectal examination. A raised PSA alone does not confirm cancer. Multiparametric MRI identifies suspicious lesions, especially in the peripheral zone, where restricted diffusion suggests tumour. A targeted biopsy of the MRI lesion gives the best yield. Histology reports the Gleason grade group, which guides staging and treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PSA and rectal examination"
+     },
+     {
+      "id": "b",
+      "label": "Multiparametric MRI"
+     },
+     {
+      "id": "c",
+      "label": "MRI-targeted biopsy"
+     },
+     {
+      "id": "d",
+      "label": "Gleason grade group"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management depends on **risk group** and extent of disease. Low-risk localised cancer in older men with limited life expectancy often suits active surveillance with regular PSA and review. Higher-risk localised disease is treated with curative intent by surgery or radiotherapy. Metastatic disease, including bone spread, is treated with **androgen deprivation therapy**, which suppresses testicular androgens. Bone pain and raised alkaline phosphatase suggest skeletal disease.",
+   "say": "Management depends on risk group and extent of disease. Low-risk localised cancer in older men with limited life expectancy often suits active surveillance, with regular PSA testing and review. Higher-risk localised disease is treated with curative intent by surgery or radiotherapy. Metastatic disease, including bone spread, is treated with androgen deprivation therapy, which suppresses testicular androgens. Bone pain and raised alkaline phosphatase suggest skeletal disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk group",
+     "Typical approach",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Low risk localised",
+      "Active surveillance",
+      "Slow growth, avoids treatment harm"
+     ],
+     [
+      "Higher risk localised",
+      "Surgery or radiotherapy",
+      "Curative intent"
+     ],
+     [
+      "Metastatic",
+      "Androgen deprivation therapy",
+      "Androgen dependent growth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In known prostate cancer, persistent back pain with raised alkaline phosphatase suggests **bone metastases**, even when neurology is normal. Do not dismiss these red flags. Treat metastatic disease with **androgen deprivation therapy**. Choose surveillance over treatment when comorbidity limits benefit and the patient prefers to avoid side effects.",
+   "say": "In known prostate cancer, persistent back pain with raised alkaline phosphatase suggests bone metastases, even when neurology is normal. Do not dismiss these red flags. Treat metastatic disease with androgen deprivation therapy. Choose surveillance over treatment when comorbidity limits benefit and the patient prefers to avoid side effects.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG131: Prostate cancer: diagnosis and management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

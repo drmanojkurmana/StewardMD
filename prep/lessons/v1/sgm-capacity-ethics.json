@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "sgm-capacity-ethics",
+ "subject": "ss-general-medicine",
+ "title": "Capacity, consent and clinical ethics",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Decision-making capacity** is the ability to make a specific decision at a specific time. Under the Mental Healthcare Act, every adult is presumed to have capacity until proven otherwise. The clinician checks four abilities: to **understand** the information, to **retain** it, to **weigh** the options, and to **communicate** a choice. Capacity is decision-specific, so a patient may refuse one treatment yet be competent to decide another. Sedation, delirium or intoxication must be excluded before concluding that capacity is impaired.",
+   "say": "Decision-making capacity is the ability to make a specific decision at a specific time. Under the Mental Healthcare Act, every adult is presumed to have capacity until proven otherwise. The clinician checks four abilities: to understand the information, to retain it, to weigh the options, and to communicate a choice. Capacity is decision-specific, so a patient may refuse one treatment yet be competent to decide another. Sedation, delirium or intoxication must be excluded before concluding that capacity is impaired.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ability",
+     "Key question"
+    ],
+    "rows": [
+     [
+      "Understand",
+      "Can the patient restate the diagnosis and options in their own words?"
+     ],
+     [
+      "Retain",
+      "Can the patient remember the information long enough to decide?"
+     ],
+     [
+      "Weigh",
+      "Can the patient compare benefits and harms in light of their values?"
+     ],
+     [
+      "Communicate",
+      "Can the patient express a stable choice consistently?"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A valid **informed consent** needs disclosure of the nature of the procedure, its **material risks** and benefits, the alternatives including no treatment, and the likely outcome. The Supreme Court of India has held that consent must relate to the specific procedure and that material risks must be told to the patient. Consent must be voluntary and recorded. Obtaining it after **sedative premedication** invites challenge, so the conversation belongs before sedation, leaving time for reflection.",
+   "say": "A valid informed consent needs disclosure of the nature of the procedure, its material risks and benefits, the alternatives including no treatment, and the likely outcome. The Supreme Court of India has held that consent must relate to the specific procedure and that material risks must be told to the patient. Consent must be voluntary and recorded. Obtaining it after sedative premedication invites challenge, so the conversation belongs before sedation, leaving time for reflection.",
+   "vis": null
+  },
+  {
+   "tx": "Capacity is judged decision by decision, and two standards guide what information must be shared. The **reasonable patient** standard asks what a typical person would want to hear before agreeing to treatment. The **subjective** standard asks what this particular patient would value. Indian practice should blend both, and **teach-back** confirms that understanding has really occurred. When a patient cannot decide, the Mental Healthcare Act provides for a **nominated representative** and for decisions made in the patient's **best interests**.",
+   "say": "Capacity is judged decision by decision, and two standards guide what information must be shared. The reasonable patient standard asks what a typical person would want to hear before agreeing to treatment. The subjective standard asks what this particular patient would value. Indian practice should blend both, and teach-back confirms that understanding has really occurred. When a patient cannot decide, the Mental Healthcare Act provides for a nominated representative and for decisions made in the patient's best interests.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult with capacity",
+     "points": [
+      "Consents personally",
+      "Presumed competent",
+      "Decision-specific review",
+      "Documents own choice"
+     ]
+    },
+    "right": {
+     "title": "Adult lacking capacity",
+     "points": [
+      "Nominated representative may act",
+      "Best-interests decision",
+      "Advance directive respected if valid",
+      "Review as capacity changes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Breaking bad news follows the **SPIKES** protocol: Setting, Perception, Invitation, Knowledge, Emotions and Strategy. Prepare a private space and ask what the patient already understands. Give information in short, plain sentences, avoiding jargon. Pause after emotional statements and respond with empathy. Finish with a clear plan and follow-up, and confirm that the patient has someone supportive present.",
+   "say": "Breaking bad news follows the SPIKES protocol: Setting, Perception, Invitation, Knowledge, Emotions and Strategy. Prepare a private space and ask what the patient already understands. Give information in short, plain sentences, avoiding jargon. Pause after emotional statements and respond with empathy. Finish with a clear plan and follow-up, and confirm that the patient has someone supportive present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Setting"
+     },
+     {
+      "id": "p",
+      "label": "Perception"
+     },
+     {
+      "id": "i",
+      "label": "Invitation"
+     },
+     {
+      "id": "k",
+      "label": "Knowledge"
+     },
+     {
+      "id": "e",
+      "label": "Emotions"
+     },
+     {
+      "id": "st",
+      "label": "Strategy"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "p"
+     ],
+     [
+      "p",
+      "i"
+     ],
+     [
+      "i",
+      "k"
+     ],
+     [
+      "k",
+      "e"
+     ],
+     [
+      "e",
+      "st"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_54b1ad6359dd",
+  "q_6d08f13a6dff",
+  "q_4760ab624c25"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

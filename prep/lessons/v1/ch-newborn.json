@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "ch-newborn",
+ "subject": "child-health",
+ "title": "Newborn care and resuscitation: high-yield essentials for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Most newborns breathe and cry within seconds of birth. Resuscitation begins with **drying**, warming, stimulation and positioning, then assessment of breathing, heart rate and colour. A baby who is apnoeic, gasping or has a **heart rate below 100 per minute** needs **positive pressure ventilation** (PPV) as the key intervention, because hypoxia is the usual cause of failure to breathe at birth.",
+   "say": "Most newborns breathe and cry within seconds of birth. Resuscitation begins with drying, warming, stimulation and positioning, then assessment of breathing, heart rate and colour. A baby who is apnoeic, gasping or has a heart rate below 100 per minute needs positive pressure ventilation as the key intervention, because hypoxia is the usual cause of failure to breathe at birth.",
+   "vis": null
+  },
+  {
+   "tx": "Reassess at each stage by asking three questions: is the baby **breathing**, what is the **heart rate**, and what is the colour? If the heart rate is below 100 per minute or breathing stays inadequate after initial steps, begin **positive pressure ventilation** and confirm the chest rises with each breath. If the heart rate remains below 60 per minute after 30 seconds of effective ventilation, add **chest compressions** coordinated with breaths, using 100% oxygen.",
+   "say": "Reassess at each stage by asking three questions: is the baby breathing, what is the heart rate, and what is the colour? If the heart rate is below 100 per minute or breathing stays inadequate after initial steps, begin positive pressure ventilation and confirm the chest rises with each breath. If the heart rate remains below 60 per minute after 30 seconds of effective ventilation, add chest compressions coordinated with breaths, using 100 percent oxygen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dry, warm, stimulate"
+     },
+     {
+      "id": "b",
+      "label": "Breathing and HR above 100?"
+     },
+     {
+      "id": "c",
+      "label": "Start PPV, check chest rise"
+     },
+     {
+      "id": "d",
+      "label": "HR below 60 after 30 s?"
+     },
+     {
+      "id": "e",
+      "label": "Compressions with breaths, 100% O2"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "No"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypoglycaemia is common after birth, especially in babies of **diabetic mothers** and small or large for dates infants. Maternal hyperglycaemia causes fetal hyperinsulinaemia, which persists after cord clamping. Symptomatic babies, with jitteriness, floppiness or poor feeding, and those with low glucose despite feeding need prompt **intravenous dextrose**, as neurological injury can follow.",
+   "say": "Hypoglycaemia is common after birth, especially in babies of diabetic mothers and small or large for dates infants. Maternal hyperglycaemia causes fetal hyperinsulinaemia, which persists after cord clamping. Symptomatic babies, with jitteriness, floppiness or poor feeding, and those with low glucose despite feeding need prompt intravenous dextrose, as neurological injury can follow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Practical point"
+    ],
+    "rows": [
+     [
+      "Main risk group",
+      "Diabetic mothers and growth variants"
+     ],
+     [
+      "Symptomatic baby",
+      "Jitteriness, floppiness, poor feeding"
+     ],
+     [
+      "Escalation",
+      "Glucose low despite feeding"
+     ],
+     [
+      "Urgent treatment",
+      "Intravenous dextrose bolus then infusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Developmental dysplasia of the **hip** is linked to breech presentation and female sex. A click with asymmetric thigh folds suggests instability. In infants under about four to six months, **ultrasound** is preferred because the cartilaginous acetabulum is not seen on X-ray. Clicks alone are not always pathological, so examination should be repeated and referral made when signs are persistent.",
+   "say": "Developmental dysplasia of the hip is linked to breech presentation and female sex. A click with asymmetric thigh folds suggests instability. In infants under about four to six months, ultrasound is preferred because the cartilaginous acetabulum is not seen on X-ray. Clicks alone are not always pathological, so examination should be repeated and referral made when signs are persistent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ultrasound",
+     "points": [
+      "Preferred under 4 to 6 months",
+      "Shows cartilage",
+      "Confirms or excludes dysplasia"
+     ]
+    },
+    "right": {
+     "title": "Radiograph",
+     "points": [
+      "Useful after ossification",
+      "Cartilage not visible in young infants"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vitamin K deficiency bleeding results from low stores at birth. Routine **prophylaxis** is offered to all newborns, usually as an intramuscular dose soon after birth. If parents decline, discuss the risks clearly, including late bleeding in breastfed babies, and document informed refusal. Coercion is not appropriate, and the baby should be offered oral alternatives where available.",
+   "say": "Vitamin K deficiency bleeding results from low stores at birth. Routine prophylaxis is offered to all newborns, usually as an intramuscular dose soon after birth. If parents decline, discuss the risks clearly, including late bleeding in breastfed babies, and document informed refusal. Coercion is not appropriate, and the baby should be offered oral alternatives where available.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Resuscitation Council UK Newborn Life Support Provider Manual"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

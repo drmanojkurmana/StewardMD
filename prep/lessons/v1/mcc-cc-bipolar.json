@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "module": "mcc-cc-bipolar",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic bipolar disorder: long-term maintenance and safe prescribing",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Chronic bipolar disorder needs **maintenance therapy** to prevent relapse, not just treatment of the acute episode. Lithium, valproate, lamotrigine and quetiapine are commonly used mood stabilisers. Choice depends on relapse pattern, comorbidity, pregnancy potential and adverse effect profile. Adherence is central, because missed follow-up is a common route to relapse. Stability over time guides whether a drug is continued unchanged.",
+   "say": "Chronic bipolar disorder needs maintenance therapy to prevent relapse, not just treatment of the acute episode. Lithium, valproate, lamotrigine and quetiapine are commonly used mood stabilisers. The choice depends on the relapse pattern, comorbidity, whether pregnancy is possible and the adverse effect profile. Adherence is central, because missed follow-up is a common route to relapse. Long-term stability guides whether a drug should be continued unchanged.",
+   "vis": null
+  },
+  {
+   "tx": "Pregnancy planning changes the choice of mood stabiliser. Valproate carries a high risk of **neural tube defects** and neurodevelopmental harm, so it is avoided in women who may conceive. Lamotrigine is generally preferred for planning pregnancy, with folic acid advised. Stopping stabilisers abruptly before conception raises relapse risk, so any switch should be supervised and planned with preconception counselling.",
+   "say": "Pregnancy planning changes the choice of mood stabiliser. Valproate carries a high risk of neural tube defects and neurodevelopmental harm, so it is avoided in women who may conceive. Lamotrigine is generally preferred when planning pregnancy, and folic acid is advised. Stopping stabilisers abruptly before conception raises relapse risk, so any switch should be supervised and planned with preconception counselling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Plans pregnancy"
+     },
+     {
+      "id": "b",
+      "label": "Avoid valproate"
+     },
+     {
+      "id": "c",
+      "label": "Prefer lamotrigine"
+     },
+     {
+      "id": "d",
+      "label": "Folic acid and planning"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Safe prescribing needs attention to **QT prolongation** with antipsychotics and citalopram. Before treating agitation, check the ECG, potassium and magnesium, and correct any electrolyte deficit. Review QT-prolonging drugs and avoid stacking them where possible. Capacity must be assessed for each treatment decision, and when capacity is lacking, consent passes to a legally designated substitute under the relevant statute.",
+   "say": "Safe prescribing needs attention to QT prolongation with antipsychotics and citalopram. Before treating agitation, check the ECG, potassium and magnesium, and correct any electrolyte deficit. Review QT-prolonging drugs and avoid stacking them where possible. Capacity must be assessed for each treatment decision. When capacity is lacking, consent passes to a legally designated substitute under the relevant statute.",
+   "vis": null
+  },
+  {
+   "tx": "Decisions in severe mania need a **formal capacity assessment** for the specific treatment. Refusal alone does not prove incapacity, but impaired insight in mania can. Where capacity is lacking and no advance directive or proxy exists, a legally designated substitute decision-maker is identified before consent is taken. Family members present do not automatically hold legal authority. Culturally safe engagement, including Indigenous health workers, improves retention after missed visits.",
+   "say": "Decisions in severe mania need a formal capacity assessment for the specific treatment. Refusal alone does not prove incapacity, but impaired insight in mania can. Where capacity is lacking and no advance directive or proxy exists, a legally designated substitute decision-maker is identified before consent is taken. Family members present do not automatically hold legal authority. Culturally safe engagement, including Indigenous health workers, improves retention after missed visits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Capacity present",
+     "points": [
+      "Patient consents for the decision",
+      "Treatment follows her choice",
+      "Refusal respected if capacity is intact"
+     ]
+    },
+    "right": {
+     "title": "Capacity absent",
+     "points": [
+      "Identify legal substitute decision-maker",
+      "Urgent treatment via lawful pathway",
+      "Document the assessment"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Kaplan and Sadock's Comprehensive Textbook of Psychiatry (Sadock, Sadock, Ruiz)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

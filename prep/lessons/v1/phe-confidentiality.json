@@ -1,0 +1,119 @@
+{
+ "v": 1,
+ "module": "phe-confidentiality",
+ "subject": "population-health-and-ethics",
+ "title": "Confidentiality and privacy in clinical practice",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Health information is **confidential** to the patient. Staff may share it only with the patient's consent, or where a recognised legal or professional exception applies. Even confirming that someone is a patient, or that a medication exists, can be a disclosure. Treat every request from a third party as unauthorised until shown otherwise.",
+   "say": "Health information is confidential to the patient. Staff may share it only with the patient's consent, or where a recognised legal or professional exception applies. Even confirming that someone is a patient, or that a medication exists, can be a disclosure. Treat every request from a third party as unauthorised until shown otherwise.",
+   "vis": null
+  },
+  {
+   "tx": "Young people who understand the advice can consent to their own care. This is the **Gillick competence** principle in England and the mature minor concept in Indian practice. Confidentiality can be kept for contraception and sexual health, and only a serious risk, such as abuse or significant harm, justifies breaking it.",
+   "say": "Young people who understand the advice can consent to their own care. This is the Gillick competence principle in England and the mature minor concept in Indian practice. Confidentiality can be kept for contraception and sexual health, and only a serious risk, such as abuse or significant harm, justifies breaking it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Young person asks for confidentiality"
+     },
+     {
+      "id": "b",
+      "label": "Understands advice and risks?"
+     },
+     {
+      "id": "c",
+      "label": "Consents to own care"
+     },
+     {
+      "id": "d",
+      "label": "Serious risk of harm?"
+     },
+     {
+      "id": "e",
+      "label": "Consider disclosure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Child protection is an exception. Where non-accidental injury is suspected, for example a spiral fracture in a young child with an inconsistent history, there is a **mandatory reporting** duty to child protection authorities. This overrides usual confidentiality and consent, because the child's safety is the priority. Abuse disclosure from an adult needs private questioning, away from the alleged perpetrator.",
+   "say": "Child protection is an exception. Where non-accidental injury is suspected, for example a spiral fracture in a young child with an inconsistent history, there is a mandatory reporting duty to child protection authorities. This overrides usual confidentiality and consent, because the child's safety is the priority. Abuse disclosure from an adult needs private questioning, away from the alleged perpetrator.",
+   "vis": null
+  },
+  {
+   "tx": "A **privacy breach** needs prompt containment and notification of the affected person. Misdirected letters, curiosity-driven record access by staff with no role, and disclosure of results to the wrong person all count. Audit findings go through the internal privacy process, and the patient must be told. Deleting audit logs is never acceptable.",
+   "say": "A privacy breach needs prompt containment and notification of the affected person. Misdirected letters, curiosity-driven record access by staff with no role, and disclosure of results to the wrong person all count. Audit findings go through the internal privacy process, and the patient must be told. Deleting audit logs is never acceptable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Immediate action"
+    ],
+    "rows": [
+     [
+      "Letter with another patient's results",
+      "Contain and notify the affected patient"
+     ],
+     [
+      "Staff opened record without reason",
+      "Investigate and inform patient"
+     ],
+     [
+      "Audit log entries found",
+      "Preserve logs and follow process"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confidentiality continues after death. A **personal representative**, someone legally recognised to act for the deceased, may ask for information, but their authority must be verified first. Disclosure should be limited to what is relevant and permitted. Extra care is needed for **sensitive information** such as sexually transmitted infection. Relevant details may be shared, while unrelated sensitive content remains confidential.",
+   "say": "Confidentiality does not end at death. A personal representative, meaning someone legally recognised to act for the deceased, may ask for information, but their authority has to be checked before anything is shared. Disclosure should stay limited to what is relevant and permitted. Sensitive matters such as sexually transmitted infection call for extra caution. Details that bear on the request can be passed on, whereas unrelated sensitive information remains confidential.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "General Medical Council, Confidentiality: good practice in handling patient information",
+  "NHS England, Caldicott Principles"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

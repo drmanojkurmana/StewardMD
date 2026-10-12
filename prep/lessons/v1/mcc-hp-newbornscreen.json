@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "module": "mcc-hp-newbornscreen",
+ "subject": "mcc-health-promotion",
+ "title": "Newborn screening: principles and key conditions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Newborn screening is a **population programme** that tests every infant for treatable conditions before symptoms appear. A positive result is a **screen, not a diagnosis**, so confirmatory testing is always needed. Early detection allows treatment that prevents irreversible harm such as intellectual disability. Screening is most valuable when the condition is treatable and the window for intervention is short.",
+   "say": "Newborn screening is a population programme that tests every infant for treatable conditions before symptoms appear. A positive result is a screen, not a diagnosis, so confirmatory testing is always needed. Early detection allows treatment that prevents irreversible harm such as intellectual disability. Screening is most valuable when the condition is treatable and the window for intervention is short.",
+   "vis": null
+  },
+  {
+   "tx": "Congenital hypothyroidism is the most common treatable screened condition. A raised **TSH** with low **free T4** on repeat testing confirms **primary hypothyroidism**. Treatment with levothyroxine should start without waiting, because thyroid hormone is needed for brain development. Term birth and good feeding do not reduce the urgency.",
+   "say": "Congenital hypothyroidism is the most common treatable screened condition. A raised TSH with low free T4 on repeat testing confirms primary hypothyroidism. Treatment with levothyroxine should start without waiting, because thyroid hormone is needed for brain development. Term birth and good feeding do not reduce the urgency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Interpretation"
+    ],
+    "rows": [
+     [
+      "Raised TSH, low free T4",
+      "Primary hypothyroidism"
+     ],
+     [
+      "Raised TSH, normal free T4",
+      "Subclinical pattern, needs review"
+     ],
+     [
+      "Low TSH, raised free T4",
+      "Think central cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sickle cell disease is detected by haemoglobin electrophoresis showing an **FS pattern**, which means sickling disorder rather than carrier status. Infants have **functional asplenia**, so they are at high risk of invasive pneumococcal infection. Penicillin prophylaxis and early haematology follow-up are started promptly. Parents need teaching about fever as an emergency.",
+   "say": "Sickle cell disease is detected by haemoglobin electrophoresis showing an FS pattern, which means sickling disorder rather than carrier status. Infants have functional asplenia, so they are at high risk of invasive pneumococcal infection. Penicillin prophylaxis and early haematology follow-up are started promptly. Parents need teaching about fever as an emergency.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "FS on screen"
+     },
+     {
+      "id": "b",
+      "label": "Confirm and assess"
+     },
+     {
+      "id": "c",
+      "label": "Penicillin prophylaxis"
+     },
+     {
+      "id": "d",
+      "label": "Haematology follow-up"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Phenylketonuria results from **phenylalanine hydroxylase** deficiency, so phenylalanine accumulates and is neurotoxic. Tyrosine falls because its synthesis is blocked. Treatment is a **phenylalanine-restricted diet** with dietitian input, started without delay. Breastfeeding may often continue with careful monitoring. Metabolic disorders such as fatty acid oxidation defects need prolonged fasting avoided, using regular feeds.",
+   "say": "Phenylketonuria results from phenylalanine hydroxylase deficiency, so phenylalanine accumulates and is neurotoxic. Tyrosine falls because its synthesis is blocked. Treatment is a phenylalanine-restricted diet with dietitian input, started without delay. Breastfeeding may often continue with careful monitoring. Metabolic disorders such as fatty acid oxidation defects need prolonged fasting avoided, using regular feeds.",
+   "vis": null
+  },
+  {
+   "tx": "A positive screen for a time-critical condition demands **culturally safe disclosure** with a trained **interpreter**, and transfer should run in parallel with disclosure. Telephone results or deferred disclosure risk harm. Persistently low pulse oximetry in a well term infant also needs prompt echocardiography, because critical congenital heart disease can be missed when the ductus closes.",
+   "say": "A positive screen for a time-critical condition demands culturally safe disclosure with a trained interpreter, and transfer should run in parallel with disclosure. Telephone results or deferred disclosure risk harm. Persistently low pulse oximetry in a well term infant also needs prompt echocardiography, because critical congenital heart disease can be missed when the ductus closes.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics (Kliegman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

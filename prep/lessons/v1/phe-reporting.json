@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "phe-reporting",
+ "subject": "population-health-and-ethics",
+ "title": "Mandatory reporting: notifiable infections and public health duties",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Mandatory notification** is a legal duty to report specified infectious diseases to the public health authority, regardless of patient consent. Its purpose is to let public health staff trace contacts, investigate sources and stop outbreaks. Notification is confidential and is not disclosure to employers, schools or family. In India, the list of notifiable diseases is set by the state and central authorities, so the local list must be checked.",
+   "say": "Mandatory notification is a legal duty to report specified infectious diseases to the public health authority, regardless of patient consent. Its purpose is to let public health staff trace contacts, investigate sources and stop outbreaks. Notification is confidential and is not disclosure to employers, schools or family. In India, the list of notifiable diseases is set by the state and central authorities, so the local list must be checked.",
+   "vis": null
+  },
+  {
+   "tx": "Many notifiable infections are spread through food, water or close contact. A **food handler** with an enteric infection can contaminate food, so **exclusion from food work** is often needed while public health assesses risk. Clusters of illness linked to one event, such as a shared meal, suggest a **common source outbreak** and should be reported early, even before every stool result is back.",
+   "say": "Many notifiable infections are spread through food, water or close contact. A food handler with an enteric infection can contaminate food, so exclusion from food work is often needed while public health assesses risk. Clusters of illness linked to one event, such as a shared meal, suggest a common source outbreak and should be reported early, even before every stool result is back.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Enteric illness in a cook",
+      "Notify and consider exclusion from food work"
+     ],
+     [
+      "Cluster after a shared event",
+      "Notify possible outbreak now"
+     ],
+     [
+      "Acute hepatitis in a food handler",
+      "Exclude pending public health advice"
+     ],
+     [
+      "Sporadic, mild, no food role",
+      "Follow local notification list"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Some infections need **urgent notification by phone** because they are highly transmissible or dangerous to contacts, for example measles, where public health must act before laboratory confirmation. Pulmonary tuberculosis is also notifiable, and public health runs formal **contact tracing** and screening. Pregnancy adds risk: a reactive syphilis test in a pregnant woman needs prompt treatment and notification because of **congenital syphilis** risk.",
+   "say": "Some infections need urgent notification by phone because they are highly transmissible or dangerous to contacts, for example measles, where public health must act before laboratory confirmation. Pulmonary tuberculosis is also notifiable, and public health runs formal contact tracing and screening. Pregnancy adds risk: a reactive syphilis test in a pregnant woman needs prompt treatment and notification because of congenital syphilis risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected notifiable case"
+     },
+     {
+      "id": "b",
+      "label": "Notify public health"
+     },
+     {
+      "id": "c",
+      "label": "Contact tracing"
+     },
+     {
+      "id": "d",
+      "label": "Exclusion or treatment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patient **confidentiality** is important, but it does not override a statutory notification duty. A clinician should explain to the patient why notification is required and how the information is protected. Refusing a request to share a diagnosis is not the same as refusing to notify. Requests to keep a notifiable diagnosis from the public health unit should be declined politely, with the reasons given and the patient's concerns addressed.",
+   "say": "Patient confidentiality is important, but it does not override a statutory notification duty. A clinician should explain to the patient why notification is required and how the information is protected. Refusing a request to share a diagnosis is not the same as refusing to notify. Requests to keep a notifiable diagnosis from the public health unit should be declined politely, with the reasons given and the patient's concerns addressed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinician should do",
+     "points": [
+      "Explain the legal duty",
+      "Describe how data is protected",
+      "Address employment worries"
+     ]
+    },
+    "right": {
+     "title": "Clinician should not",
+     "points": [
+      "Promise secrecy from public health",
+      "Notify employers",
+      "Delay reporting for consent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A common pattern in exams is a **haemolytic uraemic syndrome** picture after undercooked minced beef, caused by **Shiga toxin-producing E. coli**. The triad of haemolytic anaemia, thrombocytopenia and acute kidney injury should prompt urgent stool testing and notification. Clinicians should not wait for culture results to start public health action when the picture and exposure are suggestive.",
+   "say": "A common exam pattern is haemolytic uraemic syndrome after undercooked minced beef, caused by Shiga toxin-producing E. coli. The triad of haemolytic anaemia, thrombocytopenia and acute kidney injury should prompt urgent stool testing and notification. Clinicians should not wait for culture results to start public health action when the picture and exposure are suggestive.",
+   "vis": null
+  },
+  {
+   "tx": "In summary, notify promptly, exclude food handlers when indicated, act early on clusters, and protect confidentiality within the system. Never agree to withhold a notifiable diagnosis from the public health unit. **Notification** protects the wider community, and it is a legal duty. Check the current notifiable disease list for your state or region, since lists vary across India.",
+   "say": "In summary, notify promptly, exclude food handlers when indicated, act early on clusters, and protect confidentiality within the system. Never agree to withhold a notifiable diagnosis from the public health unit. Notification protects the wider community, and it is a legal duty. Check the current notifiable disease list for your state or region, since lists vary across India.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

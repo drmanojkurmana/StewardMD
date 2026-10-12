@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "mh-drugs",
+ "subject": "mental-health",
+ "title": "Drug use disorders: key high-yield principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Drug use disorders range from harmful use to dependence, and they cause medical complications across many organ systems. Exam questions often test the link between a specific drug and its complication. Injecting drug use carries a particular risk because **skin flora** can enter the bloodstream and seed heart valves. Always consider infection when a person who injects drugs has fever.",
+   "say": "Drug use disorders range from harmful use to dependence, and they cause medical complications across many organ systems. Exam questions often test the link between a specific drug and its complication. Injecting drug use carries a particular risk because skin flora can enter the bloodstream and seed heart valves. Always consider infection when a person who injects drugs has fever.",
+   "vis": null
+  },
+  {
+   "tx": "Infective endocarditis in people who inject drugs classically involves **Staphylococcus aureus**. Fever, rigors, pleuritic pain and a new murmur should prompt **blood cultures** before any empirical antibiotics. Raised white cell count and C-reactive protein support sepsis. Cultures are taken first so that the organism can be identified and treated accurately.",
+   "say": "Infective endocarditis in people who inject drugs classically involves Staphylococcus aureus. Fever, rigors, pleuritic pain and a new murmur should prompt blood cultures before any empirical antibiotics. Raised white cell count and C-reactive protein support sepsis. Cultures are taken first so that the organism can be identified and treated accurately.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Likely meaning"
+    ],
+    "rows": [
+     [
+      "Fever and rigors",
+      "Bacteraemia or sepsis"
+     ],
+     [
+      "New diastolic murmur",
+      "Valve involvement"
+     ],
+     [
+      "Injecting drug use",
+      "Skin flora entry route"
+     ],
+     [
+      "Raised CRP and WCC",
+      "Systemic inflammation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stimulants such as **methamphetamine** release catecholamines, which cause sympathetic overactivity. This can produce coronary vasospasm, tachycardia and hypertension. Chest pain with raised troponin may occur even without fixed coronary stenosis. A normal troponin on arrival does not exclude injury, so **serial troponin** and ECG testing are needed over several hours.",
+   "say": "Stimulants such as methamphetamine release catecholamines, which cause sympathetic overactivity. This can produce coronary vasospasm, tachycardia and hypertension. Chest pain with raised troponin may occur even without fixed coronary stenosis. A normal troponin on arrival does not exclude injury, so serial troponin and ECG testing are needed over several hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Methamphetamine"
+     },
+     {
+      "id": "b",
+      "label": "Catecholamine surge"
+     },
+     {
+      "id": "c",
+      "label": "Coronary spasm and tachycardia"
+     },
+     {
+      "id": "d",
+      "label": "Myocardial injury"
+     },
+     {
+      "id": "e",
+      "label": "Serial troponin and ECG"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Alcohol withdrawal begins within hours of stopping and can progress to **delirium tremens**. Features include tremor, sweating, tachycardia and disorientation. Thiamine should be given before glucose to prevent or treat **Wernicke encephalopathy**. Hypomagnesaemia and hyponatraemia need correction. Benzodiazepines are first line for withdrawal and seizure prevention, ideally using a symptom-triggered regimen.",
+   "say": "Alcohol withdrawal begins within hours of stopping and can progress to delirium tremens. Features include tremor, sweating, tachycardia and disorientation. Thiamine should be given before glucose to prevent or treat Wernicke encephalopathy. Hypomagnesaemia and hyponatraemia need correction. Benzodiazepines are first line for withdrawal and seizure prevention, ideally using a symptom-triggered regimen.",
+   "vis": null
+  },
+  {
+   "tx": "Ketamine use can cause a distinctive **ketamine-induced cystitis** with urinary frequency, urgency and dysuria, despite a negative urine infection screen. Ultrasound may show a thickened bladder wall with reduced capacity and no stones. The mechanism is direct injury to the urothelium by drug metabolites. Stopping use is the key treatment, and the condition is a reason to ask about drug use in urological symptoms.",
+   "say": "Ketamine use can cause a distinctive ketamine-induced cystitis with urinary frequency, urgency and dysuria, despite a negative urine infection screen. Ultrasound may show a thickened bladder wall with reduced capacity and no stones. The mechanism is direct injury to the urothelium by drug metabolites. Stopping use is the key treatment, and the condition is a reason to ask about drug use in urological symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ketamine cystitis",
+     "points": [
+      "Frequency and urgency",
+      "Dysuria without infection",
+      "Thickened bladder wall"
+     ]
+    },
+    "right": {
+     "title": "Bacterial cystitis",
+     "points": [
+      "Positive nitrites or leukocytes",
+      "Often fever",
+      "Infection on urine culture"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Withdrawal from alcohol is treated with **benzodiazepines**, usually given on a symptom-triggered basis guided by a scoring tool. Antipsychotics and beta-blockers do not treat the underlying GABA-A withdrawal and are not first-line alone. Seizures and delirium tremens are the main dangers. Thiamine supplementation remains essential throughout admission.",
+   "say": "Withdrawal from alcohol is treated with benzodiazepines, usually given on a symptom-triggered basis guided by a scoring tool. Antipsychotics and beta-blockers do not treat the underlying GABA-A withdrawal and are not first-line alone. Seizures and delirium tremens are the main dangers. Thiamine supplementation remains essential throughout admission.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Clinical Guideline CG100 Alcohol-use disorders: diagnosis, assessment and management of harmful drinking and alcohol dependence"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 6
+ }
+}

@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "mhaem-lymphoma",
+ "subject": "mrcp-haematology-oncology",
+ "title": "Lymphoma and chronic leukaemias: key diagnoses and first decisions",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Chronic lymphocytic leukaemia is a clonal proliferation of small mature B cells. The **immunophenotype** is the key to diagnosis: cells co-express CD5 and CD23, with dim CD20 and weak surface immunoglobulin. CD38 and ZAP-70 are mainly prognostic rather than diagnostic. Mantle cell lymphoma mimics CLL but usually carries CD5 with cyclin D1 and t(11;14), and it lacks CD23.",
+   "say": "Chronic lymphocytic leukaemia is a clonal proliferation of small mature B cells. The immunophenotype is the key to diagnosis. The cells co-express CD5 and CD23, with dim CD20 and weak surface immunoglobulin. CD38 and ZAP-70 are mainly prognostic rather than diagnostic. Mantle cell lymphoma mimics CLL but usually carries cyclin D1 with the t(11;14) translocation, and it lacks CD23.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "CLL",
+     "Mantle cell lymphoma"
+    ],
+    "rows": [
+     [
+      "CD5",
+      "Positive",
+      "Positive"
+     ],
+     [
+      "CD23",
+      "Positive",
+      "Negative"
+     ],
+     [
+      "Cyclin D1",
+      "Negative",
+      "Positive"
+     ],
+     [
+      "Translocation",
+      "Usually none",
+      "t(11;14)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Richter transformation** is progression of CLL to an aggressive lymphoma, most often diffuse large B-cell lymphoma. Suspect it with rapid nodal growth, B symptoms, raised LDH or a new avid lesion on PET-CT. Biopsy the most FDG-avid or enlarging site, because a non-transformed area can give a falsely reassuring result. Prognosis after transformation is generally poor.",
+   "say": "Richter transformation is progression of chronic lymphocytic leukaemia to an aggressive lymphoma, most often diffuse large B-cell lymphoma. Suspect it with rapid nodal growth, B symptoms, raised LDH or a new avid lesion on PET-CT. Biopsy the most avid or enlarging site, because a non-transformed area can give a falsely reassuring result. Prognosis after transformation is generally poor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CLL with rapid nodal growth"
+     },
+     {
+      "id": "b",
+      "label": "B symptoms or raised LDH"
+     },
+     {
+      "id": "c",
+      "label": "PET-CT avid site"
+     },
+     {
+      "id": "d",
+      "label": "Core or excision biopsy"
+     },
+     {
+      "id": "e",
+      "label": "Confirm DLBCL (Richter)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hodgkin lymphoma** is defined by Reed-Sternberg cells in a reactive background of lymphocytes, eosinophils and histiocytes. Classical Hodgkin cells typically express CD15 and CD30 while losing most B-cell markers, including CD20 and PAX5 at weak levels. Nodular lymphocyte predominant Hodgkin lymphoma is different, with CD20 positive popcorn cells. B symptoms and mediastinal bulk are common in classical disease.",
+   "say": "Hodgkin lymphoma is defined by Reed-Sternberg cells in a reactive background of lymphocytes, eosinophils and histiocytes. Classical Hodgkin cells typically express CD15 and CD30 while losing most B-cell markers, including CD20, and PAX5 is weak. Nodular lymphocyte predominant Hodgkin lymphoma is different, with CD20 positive popcorn cells. B symptoms and mediastinal bulk are common in classical disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classical Hodgkin",
+     "points": [
+      "CD15 and CD30 positive",
+      "CD20 weak or negative",
+      "PAX5 weak",
+      "Reed-Sternberg cells"
+     ]
+    },
+    "right": {
+     "title": "Nodular lymphocyte predominant",
+     "points": [
+      "CD20 positive popcorn cells",
+      "CD15 and CD30 usually negative",
+      "Better prognosis",
+      "Often localised nodal disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Follicular lymphoma** is an indolent B-cell lymphoma from germinal centre cells, with a nodular growth pattern. The t(14;18) translocation places BCL2 beside the immunoglobulin heavy chain locus, blocking apoptosis. Immunophenotype is CD10, CD20 and BCL2 positive, with CD5 and CD23 negative. Many patients are asymptomatic at diagnosis, and management is guided by symptoms, bulk and cytopenias.",
+   "say": "Follicular lymphoma is an indolent B-cell lymphoma arising from germinal centre cells, with a nodular growth pattern. The t(14;18) translocation places BCL2 beside the immunoglobulin heavy chain locus, blocking apoptosis. Immunophenotype is CD10, CD20 and BCL2 positive, with CD5 and CD23 negative. Many patients are asymptomatic at diagnosis, and management is guided by symptoms, bulk and cytopenias.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "t(14;18) BCL2 overexpression"
+     },
+     {
+      "id": "b",
+      "label": "Blocked apoptosis"
+     },
+     {
+      "id": "c",
+      "label": "Indolent nodal growth"
+     },
+     {
+      "id": "d",
+      "label": "Watch and wait if asymptomatic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tumour lysis syndrome** is a key emergency in aggressive lymphomas such as Burkitt lymphoma, where proliferation is very high. It causes hyperuricaemia, hyperkalaemia, hyperphosphataemia and hypocalcaemia, with risk of acute kidney injury. Hyperkalaemia with ECG changes needs urgent treatment, and rasburicase is preferred when urate is high. Fluids and urate lowering should start before chemotherapy.",
+   "say": "Tumour lysis syndrome is a key emergency in aggressive lymphomas such as Burkitt lymphoma, where proliferation is very high. It causes hyperuricaemia, hyperkalaemia, hyperphosphataemia and hypocalcaemia, with risk of acute kidney injury. Hyperkalaemia with ECG changes needs urgent treatment, and rasburicase is preferred when urate is high. Fluids and urate lowering should start before chemotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High tumour burden"
+     },
+     {
+      "id": "b",
+      "label": "Cell lysis"
+     },
+     {
+      "id": "c",
+      "label": "High urate and potassium"
+     },
+     {
+      "id": "d",
+      "label": "IV fluids and rasburicase"
+     },
+     {
+      "id": "e",
+      "label": "Start chemotherapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic myeloid leukaemia** is driven by a reciprocal translocation that joins sections of chromosomes 9 and 22, generating the **BCR-ABL1** oncogene. Its protein product is a permanently switched-on kinase. **Tyrosine kinase inhibitors**, with imatinib as the usual starting drug, now control most chronic-phase disease. Response is tracked by quantifying BCR-ABL1 transcripts over time, and interferon alfa has largely been set aside.",
+   "say": "Chronic myeloid leukaemia is driven by a reciprocal translocation that joins sections of chromosomes 9 and 22, generating the BCR-ABL1 oncogene. Its protein product is a permanently switched-on kinase. Tyrosine kinase inhibitors, with imatinib as the usual starting drug, now control most chronic-phase disease. Response is tracked by quantifying BCR-ABL1 transcripts over time, and interferon alfa has largely been set aside.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

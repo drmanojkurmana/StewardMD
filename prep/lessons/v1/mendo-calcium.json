@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "module": "mendo-calcium",
+ "subject": "mrcp-endocrinology",
+ "title": "Calcium, parathyroid and bone metabolism: investigating and managing primary hyperparathyroidism",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Primary hyperparathyroidism is a **parathyroid hormone** excess causing persistently raised **albumin-adjusted calcium**. Calcium is always interpreted with albumin, because low albumin lowers total calcium and can hide hypercalcaemia. Ionised calcium is not used in this diagnostic pathway. Diagnosis rests on raised calcium with an inappropriately normal or raised PTH.",
+   "say": "Primary hyperparathyroidism is a parathyroid hormone excess that causes persistently raised albumin-adjusted calcium. Calcium is always interpreted with albumin, because low albumin lowers total calcium and can hide hypercalcaemia. Ionised calcium is not used in this diagnostic pathway. Diagnosis rests on raised calcium with an inappropriately normal or raised PTH.",
+   "vis": null
+  },
+  {
+   "tx": "Before treatment, separate **familial hypocalciuric hypercalcaemia** from primary hyperparathyroidism. Familial hypocalciuric hypercalcaemia often runs in families and is benign, and parathyroid surgery does not cure it. Measure urinary calcium excretion using a 24-hour collection or a random calcium to creatinine ratio. Low urinary calcium favours familial hypocalciuric hypercalcaemia.",
+   "say": "Before treatment, separate familial hypocalciuric hypercalcaemia from primary hyperparathyroidism. Familial hypocalciuric hypercalcaemia often runs in families and is benign, and parathyroid surgery does not cure it. Measure urinary calcium excretion using a 24-hour collection or a random calcium to creatinine ratio. Low urinary calcium favours familial hypocalciuric hypercalcaemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary hyperparathyroidism",
+     "points": [
+      "Urinary calcium not low",
+      "Usually no family history",
+      "Surgery is curative"
+     ]
+    },
+    "right": {
+     "title": "Familial hypocalciuric hypercalcaemia",
+     "points": [
+      "Low urinary calcium excretion",
+      "Often a family history",
+      "Surgery does not cure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Parathyroidectomy is the **definitive treatment** once criteria are met, and an **albumin-adjusted calcium** of 2.85 millimoles per litre or above supports referral even without symptoms. Recheck the **albumin-adjusted calcium** three to six months after surgery. A value within the reference range confirms cure, after which yearly monitoring is generally enough. Persistent hypercalcaemia after surgery needs specialist MDT review.",
+   "say": "Parathyroidectomy is the definitive treatment once criteria are met. An albumin-adjusted calcium of 2.85 millimoles per litre or above supports referral, even without symptoms. Recheck the albumin-adjusted calcium three to six months after surgery. If it sits within the reference range, cure is confirmed and yearly monitoring is generally enough. If hypercalcaemia persists after surgery, the patient needs specialist MDT review.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Parathyroidectomy"
+     },
+     {
+      "id": "b",
+      "label": "Calcium at 3 to 6 months"
+     },
+     {
+      "id": "c",
+      "label": "Normal: yearly check"
+     },
+     {
+      "id": "d",
+      "label": "High: MDT review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "in range"
+     ],
+     [
+      "b",
+      "d",
+      "raised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When surgery is unsuccessful, unsuitable or declined, **cinacalcet** may be considered. It lowers PTH by increasing parathyroid sensitivity to calcium. NICE supports use when albumin-adjusted calcium is 2.85 millimoles per litre or above with symptoms, or 3.0 or above regardless. **Bisphosphonates** do not treat the hypercalcaemia itself, so they are not used for this purpose.",
+   "say": "When surgery is unsuccessful, unsuitable or declined, cinacalcet may be considered. It lowers PTH by increasing parathyroid sensitivity to calcium. NICE supports use when albumin-adjusted calcium is 2.85 millimoles per litre or above with symptoms, or 3.0 or above regardless. Bisphosphonates do not treat the hypercalcaemia itself, so they are not used for this purpose.",
+   "vis": null
+  },
+  {
+   "tx": "Post-operative traps are common in exams. Ordering **cinacalcet** or a **bisphosphonate** before the diagnosis is confirmed is an error, as is reading a single raised or falling **PTH** value during or after surgery as treatment failure. A **baseline** calcium and PTH should be recorded before discharge, and outcome is judged on serum calcium at three to six months. Routine **intraoperative PTH monitoring** is not needed for a first-time operation.",
+   "say": "Exam questions often set traps after parathyroid surgery. Starting cinacalcet or a bisphosphonate before the diagnosis is confirmed is a mistake, and so is judging a single PTH level drawn during or just after the operation as a failure. Record baseline calcium and PTH before the patient goes home, then assess success by serum calcium at three to six months. For a first operation, intraoperative PTH monitoring is generally unnecessary.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on primary hyperparathyroidism (NG132)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "mcc-cc-oncology",
+ "subject": "mcc-chronic-care",
+ "title": "Cancer survivorship and follow-up: the essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Cancer survivorship begins at diagnosis and continues for life. Survivors need planned **surveillance** for recurrence, a check for **late effects** of treatment, and attention to psychological and social needs. Care is shared between oncology, primary care and specialists. The aim is to find problems early and prevent avoidable harm.",
+   "say": "Cancer survivorship begins at diagnosis and continues for life. Survivors need planned surveillance for recurrence, a check for late effects of treatment, and attention to psychological and social needs. Care is shared between oncology, primary care and specialists. The aim is to find problems early and prevent avoidable harm.",
+   "vis": null
+  },
+  {
+   "tx": "Late effects depend on the treatment received. Anthracyclines such as **doxorubicin** cause dose-related cardiotoxicity that can appear years later. Neck and mediastinal radiotherapy damages the thyroid, so **hypothyroidism** is common. Aromatase inhibitors reduce bone density. Surveillance should match these known exposures.",
+   "say": "Late effects depend on the treatment received. Anthracyclines such as doxorubicin cause dose-related cardiotoxicity that can appear years later. Neck and mediastinal radiotherapy damages the thyroid, so hypothyroidism is common. Aromatase inhibitors reduce bone density. Surveillance should match these known exposures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Past treatment",
+     "Late effect to watch",
+     "Surveillance"
+    ],
+    "rows": [
+     [
+      "Anthracycline",
+      "Cardiomyopathy",
+      "Echocardiogram and cardiac review"
+     ],
+     [
+      "Neck or mediastinal radiotherapy",
+      "Hypothyroidism",
+      "Periodic TSH and free thyroxine"
+     ],
+     [
+      "Aromatase inhibitor",
+      "Bone loss and fracture",
+      "Baseline and repeat DXA, vitamin D"
+     ],
+     [
+      "Androgen deprivation",
+      "Metabolic and cardiovascular risk",
+      "Lipids, glucose, blood pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrence surveillance for colon cancer follows a schedule of **CEA** and CT imaging, with colonoscopy to detect metachronous cancer. Routine PET-CT in an asymptomatic patient is not recommended, because it adds false positives and cost without improving survival. Patients should be told this clearly to avoid unnecessary scans.",
+   "say": "Recurrence surveillance for colon cancer follows a schedule of CEA and CT imaging, with colonoscopy to detect metachronous cancer. Routine PET-CT in an asymptomatic patient is not recommended, because it adds false positives and cost without improving survival. Patients should be told this clearly to avoid unnecessary scans.",
+   "vis": null
+  },
+  {
+   "tx": "Family history can signal an inherited syndrome. Colorectal cancer in a parent and an aunt before age 50, together with early-onset disease in the patient, suggests **Lynch syndrome**. Refer for **genetic counselling** and germline testing. Relatives may then need tailored colonoscopy surveillance and testing for the same variant.",
+   "say": "Family history can signal an inherited syndrome. Colorectal cancer in a parent and an aunt before age 50, together with early-onset disease in the patient, suggests Lynch syndrome. Refer for genetic counselling and germline testing. Relatives may then need tailored colonoscopy surveillance and testing for the same variant.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Early-onset colorectal cancer"
+     },
+     {
+      "id": "b",
+      "label": "Affected relatives under 50"
+     },
+     {
+      "id": "c",
+      "label": "Genetic counselling"
+     },
+     {
+      "id": "d",
+      "label": "Germline testing"
+     },
+     {
+      "id": "e",
+      "label": "Family surveillance"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Psychological distress is common after cancer. Persistent insomnia, low mood, anhedonia, poor concentration and fear of recurrence should prompt **depression screening** and referral to psychosocial oncology. Fatigue and poor sleep after treatment are often multifactorial. Structured support and, where needed, antidepressant treatment after assessment are appropriate.",
+   "say": "Psychological distress is common after cancer. Persistent insomnia, low mood, loss of interest, poor concentration and fear of recurrence should prompt depression screening and referral to psychosocial oncology. Fatigue and poor sleep after treatment are often multifactorial. Structured support and, where needed, antidepressant treatment after assessment are appropriate.",
+   "vis": null
+  },
+  {
+   "tx": "Metabolic and bone effects need active review. Androgen deprivation therapy worsens insulin resistance, dyslipidaemia and cardiovascular risk. Aromatase inhibitors reduce **bone mineral density**, so a baseline DXA and check of **25-hydroxyvitamin D** are advised. Calcium, vitamin D, exercise and, if indicated, bisphosphonates are used to manage these risks.",
+   "say": "Metabolic and bone effects need active review. Androgen deprivation therapy worsens insulin resistance, dyslipidaemia and cardiovascular risk. Aromatase inhibitors reduce bone mineral density, so a baseline DXA and check of 25-hydroxyvitamin D are advised. Calcium, vitamin D, exercise and, if indicated, bisphosphonates are used to manage these risks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aromatase inhibitor",
+     "points": [
+      "Lowers oestrogen",
+      "Bone loss and fracture risk",
+      "Check DXA and vitamin D"
+     ]
+    },
+    "right": {
+     "title": "Androgen deprivation",
+     "points": [
+      "Lowers testosterone",
+      "Insulin resistance and lipids",
+      "Assess cardiovascular risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cardiac and thyroid surveillance continue for life. Asymptomatic survivors of anthracycline therapy need echocardiography, while raised TSH with low free thyroxine after neck radiotherapy indicates overt **primary hypothyroidism** treated with levothyroxine. Breathlessness and oedema with a reduced ejection fraction call for heart failure therapy such as an ACE inhibitor and beta blocker.",
+   "say": "Cardiac and thyroid surveillance continue for life. Asymptomatic survivors of anthracycline therapy need echocardiography, while raised TSH with low free thyroxine after neck radiotherapy indicates overt primary hypothyroidism treated with levothyroxine. Breathlessness and oedema with a reduced ejection fraction call for heart failure therapy such as an ACE inhibitor and beta blocker.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG12: Suspected cancer: recognition and referral"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

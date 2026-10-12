@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "ahs-venous",
+ "subject": "adult-health-surgery",
+ "title": "Venous Disease: Chronic Venous Insufficiency and Venous Ulcers",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Chronic venous disease spans a spectrum from **telangiectasias** and reticular veins, through varicose veins, to chronic venous insufficiency with oedema, skin changes and ulceration. The core problem is sustained venous hypertension from reflux, obstruction, or calf-muscle pump failure. Raised venous pressure forces fluid and blood elements into the limb tissues, which drives the clinical picture.",
+   "say": "Chronic venous disease spans a spectrum. It starts with telangiectasias and reticular veins, progresses to varicose veins, and ends with chronic venous insufficiency, which brings oedema, skin changes and ulceration. The core problem is sustained venous hypertension. This comes from reflux, obstruction, or failure of the calf muscle pump, or a combination of these. Raised venous pressure pushes fluid and blood elements into the limb tissues, and this drives the whole clinical picture.",
+   "vis": null
+  },
+  {
+   "tx": "Deep-vein disease usually causes the more advanced manifestations. After a **deep vein thrombosis**, valve leaflets thicken and contract, and the vein wall becomes rigid, so retrograde flow is no longer prevented. This is called post-thrombotic syndrome. Superficial disease can cause symptoms, but ulceration usually reflects deep involvement.",
+   "say": "Deep-vein disease usually causes the more advanced manifestations. After a deep vein thrombosis, the valve leaflets thicken and contract, and the vein wall becomes rigid. The valves then lose their ability to stop backward flow. This is called post-thrombotic syndrome. Superficial disease can cause symptoms, but advanced ulceration usually reflects deep involvement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial disease",
+     "points": [
+      "Varicose veins",
+      "Saphenous reflux",
+      "Often symptomatic only",
+      "Can be corrected by ablation"
+     ]
+    },
+    "right": {
+     "title": "Deep disease",
+     "points": [
+      "Post-thrombotic valve damage",
+      "Rigid thick-walled veins",
+      "Usually drives ulceration",
+      "Needs deep-venous assessment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Start with the **CEAP** classification, which grades clinical signs from C0 to C6, where C6 is an active venous ulcer. Core investigation is venous duplex ultrasonography, which maps reflux and obstruction. Before any compression, check the ankle-brachial pressure index to exclude significant arterial disease. Biopsy any atypical or non-healing ulcer to exclude malignancy such as Marjolin ulcer.",
+   "say": "Start with the CEAP classification, which grades clinical signs from C zero to C six, where C six is an active venous ulcer. The key investigation is venous duplex ultrasonography, which maps reflux and obstruction. Before any compression, check the ankle-brachial pressure index to exclude significant arterial disease. Biopsy any atypical or non-healing ulcer to exclude malignancy such as Marjolin ulcer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected venous ulcer"
+     },
+     {
+      "id": "b",
+      "label": "Check ABPI"
+     },
+     {
+      "id": "c",
+      "label": "Venous duplex"
+     },
+     {
+      "id": "d",
+      "label": "Compression if safe"
+     },
+     {
+      "id": "e",
+      "label": "Biopsy if atypical"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "non-healing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrence is common after **surgical stripping**, with up to half of patients developing recurrent varicose veins within five years. **Endovenous thermal ablation** performs better, keeping occlusion above roughly 90 per cent at one and five years. **Sclerotherapy** sits lower, around 81 and 74 per cent. Because **chronic venous disease** relapses without ongoing compression and risk-factor control, long-term review remains essential.",
+   "say": "Recurrence is common after surgical stripping, with up to half of patients developing recurrent varicose veins within five years. Endovenous thermal ablation performs better, keeping occlusion above roughly ninety per cent at one and five years. Sclerotherapy sits lower, at around eighty-one and seventy-four per cent. Because chronic venous disease relapses without ongoing compression and risk-factor control, long-term review remains essential.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment",
+     "1-year occlusion",
+     "5-year occlusion"
+    ],
+    "rows": [
+     [
+      "Endovenous thermal ablation",
+      "above 90%",
+      "above 90%"
+     ],
+     [
+      "Sclerotherapy",
+      "about 81%",
+      "about 74%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam point: always distinguish acute unilateral swelling from **deep vein thrombosis** before diagnosing chronic venous insufficiency. Duration of oedema helps. Also exclude heart failure, hypoalbuminaemia and myxoedema for bilateral swelling. No drugs are approved for chronic venous insufficiency in the US, and evidence for herbal supplements is weak.",
+   "say": "Exam point: always distinguish acute unilateral swelling from deep vein thrombosis before diagnosing chronic venous insufficiency. The duration of oedema helps. For bilateral swelling, exclude heart failure, hypoalbuminaemia and myxoedema. No drugs are approved for chronic venous insufficiency in the United States, and evidence for herbal supplements is weak.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-chronic-venous-disease",
+  "kb-reference-chronic-venous-insufficiency"
+ ],
+ "refs": [
+  "NICE Guideline on Varicose veins in the legs"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 1792,
+  "itemN": 12
+ }
+}

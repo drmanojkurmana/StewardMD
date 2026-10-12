@@ -1,0 +1,185 @@
+{
+ "v": 1,
+ "module": "sgm-genomic-testing",
+ "subject": "ss-general-medicine",
+ "title": "Genomic testing and gene therapy: an exam overview",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Genomic testing reads DNA to find variants that explain disease. A **gene panel** checks a fixed set of genes linked to a known phenotype. **Whole exome sequencing** reads the protein-coding regions, about 1 to 2 percent of the genome, and is used for undiagnosed disorders. **Whole genome sequencing** reads nearly all DNA, including non-coding and structural changes. All three rely on next-generation sequencing, which reads many fragments in parallel and is faster and cheaper than Sanger sequencing.",
+   "say": "Genomic testing reads DNA to find variants that explain disease. A gene panel checks a fixed set of genes linked to a known phenotype. Whole exome sequencing reads the protein-coding regions, about one to two percent of the genome, and is used for undiagnosed disorders. Whole genome sequencing reads nearly all DNA, including non-coding and structural changes. All three rely on next-generation sequencing, which reads many fragments in parallel and is faster and cheaper than Sanger sequencing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Scope",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "Gene panel",
+      "Selected genes",
+      "Known phenotype"
+     ],
+     [
+      "Exome",
+      "Coding regions",
+      "Undiagnosed disorders"
+     ],
+     [
+      "Genome",
+      "Whole genome",
+      "Structural and non-coding variants"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **variant of uncertain significance** is a change in DNA whose link to disease is not yet proven. It must not be used for diagnosis or cascade testing decisions by itself. Variants are classified into five tiers under ACMG-AMP style criteria: pathogenic, likely pathogenic, uncertain, likely benign and benign. Reclassification can happen as new family data and functional studies accumulate, so the laboratory report should be revisited over time. Counselling must explain this uncertainty clearly.",
+   "say": "A variant of uncertain significance is a change in DNA whose link to disease is not yet proven. It must not be used for diagnosis or cascade testing decisions by itself. Variants are classified into five tiers under ACMG-AMP style criteria: pathogenic, likely pathogenic, uncertain, likely benign and benign. Reclassification can happen as new family data and functional studies accumulate, so the laboratory report should be revisited over time. Counselling must explain this uncertainty clearly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Pathogenic",
+      "Established cause of disease"
+     ],
+     [
+      "Likely pathogenic",
+      "Probably causal"
+     ],
+     [
+      "Uncertain",
+      "Evidence insufficient"
+     ],
+     [
+      "Likely benign",
+      "Probably not causal"
+     ],
+     [
+      "Benign",
+      "Not causal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Liquid biopsy** samples blood to detect tumour DNA. **Cell-free DNA** is short fragments released into plasma by dying cells, and the tumour-derived part is called circulating tumour DNA. It supports non-invasive detection of mutations, monitoring of minimal residual disease and tracking of resistance. A **polygenic risk score** instead adds the small effects of many common variants to estimate inherited risk. It gives probability, not a diagnosis, and its accuracy varies across ancestry groups.",
+   "say": "Liquid biopsy samples blood to detect tumour DNA. Cell-free DNA is short fragments released into plasma by dying cells, and the tumour-derived part is called circulating tumour DNA. It supports non-invasive detection of mutations, monitoring of minimal residual disease and tracking of resistance. A polygenic risk score instead adds the small effects of many common variants to estimate inherited risk. It gives probability, not a diagnosis, and its accuracy varies across ancestry groups.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Blood sample"
+     },
+     {
+      "id": "b",
+      "label": "Plasma cfDNA"
+     },
+     {
+      "id": "c",
+      "label": "Sequencing"
+     },
+     {
+      "id": "d",
+      "label": "Tumour variant call"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antisense oligonucleotides** are short single-stranded DNA-like molecules that bind target mRNA and act mainly through RNase H cleavage or by altering splicing. **Small interfering RNA** is double-stranded and is loaded into the RNA-induced silencing complex, where the passenger strand is discarded and the guide strand cleaves matching mRNA. Givosiran, used in acute hepatic porphyria, and lumasiran, used in primary hyperoxaluria type 1, are siRNAs. Their hepatic uptake is aided by GalNAc conjugation to the asialoglycoprotein receptor.",
+   "say": "Antisense oligonucleotides are short single-stranded molecules that bind target mRNA and act mainly through RNase H cleavage or by altering splicing. Small interfering RNA is double-stranded and is loaded into the RNA-induced silencing complex, where the passenger strand is discarded and the guide strand cleaves matching mRNA. Givosiran, used in acute hepatic porphyria, and lumasiran, used in primary hyperoxaluria type 1, are siRNAs. Their hepatic uptake is aided by GalNAc conjugation to the asialoglycoprotein receptor.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antisense oligonucleotide",
+     "points": [
+      "Single-stranded",
+      "RNase H cleavage or splicing change",
+      "Nuclear and cytoplasmic action"
+     ]
+    },
+    "right": {
+     "title": "Small interfering RNA",
+     "points": [
+      "Double-stranded precursor",
+      "Loaded into RISC",
+      "Cytoplasmic mRNA cleavage",
+      "GalNAc aids hepatic uptake"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gene therapy delivers a working copy of a gene using a **viral vector**. **Adeno-associated virus** is the most widely used vector because it is non-pathogenic and supports long-term expression, mostly as episomes in non-dividing cells. Its **packaging capacity** is modest, so large genes are difficult to fit. **Pre-existing neutralising antibodies** can exclude patients, and high doses carry a risk of liver toxicity. By contrast, **CRISPR-Cas9** edits the genome itself at a guide RNA-directed site.",
+   "say": "Gene therapy delivers a working copy of a gene using a viral vector. Adeno-associated virus is the most widely used vector because it is non-pathogenic and supports long-term expression, mostly as episomes in non-dividing cells. Its packaging capacity is modest, so large genes are difficult to fit. Pre-existing neutralising antibodies can exclude patients, and high doses carry a risk of liver toxicity. By contrast, CRISPR-Cas9 edits the genome itself at a guide RNA-directed site.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Capacity",
+      "Modest, limits large genes"
+     ],
+     [
+      "Genome form",
+      "Mainly episomal"
+     ],
+     [
+      "Cell type",
+      "Non-dividing cells"
+     ],
+     [
+      "Limit",
+      "Neutralising antibodies"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_636981e8d291",
+  "q_1782b833aef5",
+  "q_18fd4e2c1693"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 15
+ }
+}

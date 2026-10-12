@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "mcc-pb-driving",
+ "subject": "mcc-professional-behaviours",
+ "title": "Fitness to Drive and Reporting",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Fitness to drive rests on a simple principle: a driver must not drive when a medical condition could cause sudden incapacity, such as loss of consciousness, confusion or sudden sleep. Doctors must **assess the risk** and advise the patient clearly. The patient remains responsible for stopping driving when unfit. Advice must be documented. Many Indian patients drive commercial or two-wheeler vehicles, so the risk is high. Sudden incapacity at the wheel is the central danger to think about.",
+   "say": "Fitness to drive rests on a simple principle. A driver must not drive when a medical condition could cause sudden incapacity, such as loss of consciousness, confusion or sudden sleep. Doctors must assess the risk and advise the patient clearly. The patient remains responsible for stopping driving when unfit. Advice must be documented. Many Indian patients drive commercial or two-wheeler vehicles, so the risk is high. Sudden incapacity at the wheel is the central danger to think about.",
+   "vis": null
+  },
+  {
+   "tx": "Recurrent hypoglycaemia without warning symptoms is a major driving hazard. Repeated lows blunt the **hypoglycaemia awareness** that normally warns a patient to eat. Sudden neuroglycopenia can then occur while driving. Carrying glucose tablets or checking before a drive does not remove this risk. Advice is to stop driving until awareness is restored and the pattern is controlled. Insulin-treated patients who have had severe lows should be counselled at every review.",
+   "say": "Recurrent hypoglycaemia without warning symptoms is a major driving hazard. Repeated lows blunt the hypoglycaemia awareness that normally warns a patient to eat. Sudden neuroglycopenia can then occur while driving. Carrying glucose tablets or checking before a drive does not remove this risk. Advice is to stop driving until awareness is restored and the pattern is controlled. Insulin-treated patients who have had severe lows should be counselled at every review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Driving advice"
+    ],
+    "rows": [
+     [
+      "Recurrent lows, no warning",
+      "Stop driving until awareness restored"
+     ],
+     [
+      "Single mild low, aware",
+      "Driving may continue with care"
+     ],
+     [
+      "Severe low while driving",
+      "Stop and review treatment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Syncope while driving needs careful assessment. A **brief loss of consciousness** without prodrome may come from a dangerous arrhythmia, such as intermittent sinus pauses or second-degree AV block. Recovery within a minute does not make driving safe. Recurrence can occur at any time. Driving should be withheld until the cause is assessed and treated. Seizure and cardiac causes both need evaluation before any licence decision.",
+   "say": "Syncope while driving needs careful assessment. A brief loss of consciousness without prodrome may come from a dangerous arrhythmia, such as intermittent sinus pauses or second-degree AV block. Recovery within a minute does not make driving safe. Recurrence can occur at any time. Driving should be withheld until the cause is assessed and treated. Seizure and cardiac causes both need evaluation before any licence decision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sudden loss of consciousness"
+     },
+     {
+      "id": "b",
+      "label": "Assess cause, ECG, rhythm"
+     },
+     {
+      "id": "c",
+      "label": "Withhold driving until treated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sedating medicines and sleep disorders also affect driving. A **sedative-hypnotic** taken at night can cause next-morning impairment of attention and reaction time, even without feeling drowsy. Patients should not assume they are safe to drive. Untreated **obstructive sleep apnoea** causes daytime sleepiness and microsleeps. Sleepiness at the wheel, or a near miss, means the risk is active and treatment must be reviewed.",
+   "say": "Sedating medicines and sleep disorders also affect driving. A sedative-hypnotic taken at night can cause next-morning impairment of attention and reaction time, even without feeling drowsy. Patients should not assume they are safe to drive. Untreated obstructive sleep apnoea causes daytime sleepiness and microsleeps. Sleepiness at the wheel, or a near miss, means the risk is active and treatment must be reviewed.",
+   "vis": null
+  },
+  {
+   "tx": "Liver and cognitive disorders also threaten driving safety. Overt **hepatic encephalopathy** causes fluctuating confusion, sleep reversal and asterixis. The patient may feel alert yet still be impaired, so self-assessment is unreliable. Driving should stop until encephalopathy has resolved. Doctors should document the advice and the patient's understanding. In India, reporting duties and the licensing authority should be checked against current rules, since these vary by state and vehicle class.",
+   "say": "Liver and cognitive disorders also threaten driving safety. Overt hepatic encephalopathy causes fluctuating confusion, sleep reversal and asterixis. The patient may feel alert yet still be impaired, so self-assessment is unreliable. Driving should stop until encephalopathy has resolved. Doctors should document the advice and the patient's understanding. In India, reporting duties and the licensing authority should be checked against current rules, since these vary by state and vehicle class.",
+   "vis": null
+  },
+  {
+   "tx": "When a patient remains unfit and refuses to stop, doctors must act. The **duty of confidentiality** is not absolute when public safety is at risk. Explain the risk, document the discussion, and follow the reporting requirements of the relevant licensing authority. In India, the Motor Vehicles Act and state rules govern licensing, so the reporting route should be checked locally. Stop-and-reassess is the usual sequence: counsel, document, report if needed.",
+   "say": "When a patient remains unfit and refuses to stop, doctors must act. The duty of confidentiality is not absolute when public safety is at risk. Explain the risk, document the discussion, and follow the reporting requirements of the relevant licensing authority. In India, the Motor Vehicles Act and state rules govern licensing, so the reporting route should be checked locally. Stop and reassess is the usual sequence: counsel, document, report if needed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Counsel patient on risk"
+     },
+     {
+      "id": "b",
+      "label": "Document advice given"
+     },
+     {
+      "id": "c",
+      "label": "Report if unsafe and refusing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Motor Vehicles Act, 1988 (India)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

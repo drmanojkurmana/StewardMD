@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "ch-cardiac",
+ "subject": "child-health",
+ "title": "Congenital heart disease: shunts, cyanosis and key lesions",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Congenital heart disease is a common cause of murmurs and cyanosis in children and adults. Analyse the heart segmentally, asking what drains into what and how chambers connect. **Left-to-right shunts** such as atrial septal defect, ventricular septal defect and patent ductus arteriosus send oxygenated blood back into the pulmonary circulation, causing volume loading. The site of the defect decides which chamber dilates.",
+   "say": "Congenital heart disease is a common cause of murmurs and cyanosis in children and adults. Analyse the heart segmentally, asking what drains into what and how chambers connect. Left-to-right shunts such as atrial septal defect, ventricular septal defect and patent ductus arteriosus send oxygenated blood back into the pulmonary circulation, causing volume loading. The site of the defect decides which chamber dilates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Shunt site",
+     "Chamber affected",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Above tricuspid valve",
+      "Right heart dilation",
+      "Atrial septal defect"
+     ],
+     [
+      "Below tricuspid valve",
+      "Left heart dilation",
+      "Ventricular septal defect"
+     ],
+     [
+      "Great vessel level",
+      "Left heart dilation",
+      "Patent ductus arteriosus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An atrial septal defect classically gives a **wide, fixed splitting** of the second heart sound, with incomplete right bundle branch block on ECG. A patent foramen ovale is a flap-valve opening that is common in adults but does not cause right heart dilation, so do not confuse the two. Ostium primum defects sit low in the septum near the atrioventricular valves.",
+   "say": "An atrial septal defect classically gives a wide, fixed splitting of the second heart sound, with incomplete right bundle branch block on ECG. A patent foramen ovale is a flap-valve opening that is common in adults but does not cause right heart dilation, so do not confuse the two. Ostium primum defects sit low in the septum near the atrioventricular valves.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Secundum ASD",
+     "points": [
+      "Mid septum",
+      "Fixed wide split S2",
+      "Incomplete RBBB"
+     ]
+    },
+    "right": {
+     "title": "Patent foramen ovale",
+     "points": [
+      "Flap-valve opening",
+      "No right heart dilation",
+      "Common in adults"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A ventricular septal defect is the most common congenital anomaly at birth but only about 10 percent of adult cases, because small defects often close spontaneously. The membranous septum is the commonest site. Sustained high-volume shunting can raise pulmonary vascular resistance until the shunt reverses, producing **Eisenmenger physiology** with right-to-left flow and cyanosis.",
+   "say": "A ventricular septal defect is the most common congenital anomaly at birth but only about 10 percent of adult cases, because small defects often close spontaneously. The membranous septum is the commonest site. Sustained high-volume shunting can raise pulmonary vascular resistance until the shunt reverses, producing Eisenmenger physiology with right-to-left flow and cyanosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Large left-to-right shunt"
+     },
+     {
+      "id": "b",
+      "label": "Raised pulmonary pressure"
+     },
+     {
+      "id": "c",
+      "label": "Pressure equals systemic"
+     },
+     {
+      "id": "d",
+      "label": "Shunt reverses, cyanosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tetralogy of Fallot causes right-to-left shunting across the VSD because right ventricular outflow obstruction raises right-sided pressure. In **transposition of the great arteries** the aorta leaves the right ventricle and the pulmonary artery leaves the left, giving parallel circulations that need mixing through an ASD, VSD or PDA. Cyanosis that barely improves with 100 percent oxygen points to a right-to-left shunt.",
+   "say": "Tetralogy of Fallot causes right-to-left shunting across the VSD because right ventricular outflow obstruction raises right-sided pressure. In transposition of the great arteries the aorta leaves the right ventricle and the pulmonary artery leaves the left, giving parallel circulations that need mixing through an ASD, VSD or PDA. Cyanosis that barely improves with 100 percent oxygen points to a right-to-left shunt.",
+   "vis": null
+  },
+  {
+   "tx": "Ductal-dependent lesions present in the first weeks of life when the **ductus arteriosus** closes. Shock, weak femoral pulses, raised lactate and creatinine signal hypoperfusion. Start prostaglandin E1 to keep the duct open and restore systemic or pulmonary flow, then arrange definitive repair. Closing the duct in critical coarctation worsens shock.",
+   "say": "Ductal-dependent lesions present in the first weeks of life when the ductus arteriosus closes. Shock, weak femoral pulses, raised lactate and creatinine signal hypoperfusion. Start prostaglandin E1 to keep the duct open and restore systemic or pulmonary flow, then arrange definitive repair. Closing the duct in critical coarctation worsens shock.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Duct closing"
+     },
+     {
+      "id": "b",
+      "label": "Poor systemic flow"
+     },
+     {
+      "id": "c",
+      "label": "Prostaglandin E1"
+     },
+     {
+      "id": "d",
+      "label": "Duct reopens, perfusion restored"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adults with cyanotic congenital heart disease and unrepaired shunts need **infective endocarditis prophylaxis** before dental procedures involving gingival manipulation. Lifelong follow-up at an adult congenital heart centre is recommended. Selective pulmonary vasodilators such as bosentan or sildenafil help in Eisenmenger syndrome, and lung transplant with defect repair is an option in selected patients.",
+   "say": "Adults with cyanotic congenital heart disease and unrepaired shunts need infective endocarditis prophylaxis before dental procedures involving gingival manipulation. Lifelong follow-up at an adult congenital heart centre is recommended. Selective pulmonary vasodilators such as bosentan or sildenafil help in Eisenmenger syndrome, and lung transplant with defect repair is an option in selected patients.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-congenital-heart-disease",
+  "kb-reference-mckusick-kaufman-syndrome"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 1762,
+  "itemN": 9
+ }
+}

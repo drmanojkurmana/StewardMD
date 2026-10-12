@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "sca-cardio-obstetrics-oncology",
+ "subject": "ss-cardiology",
+ "title": "Peripartum cardiomyopathy: diagnosis and early management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Peripartum cardiomyopathy (PPCM) is heart failure caused by **left ventricular systolic dysfunction** that appears in the last month of pregnancy or within about five months after delivery. The **ejection fraction** must be below 45 percent, and no other cause should be found. **Pre-eclampsia** and viral myocarditis must be excluded before the label is applied.",
+   "say": "Peripartum cardiomyopathy, or PPCM, is heart failure caused by left ventricular systolic dysfunction. It appears in the last month of pregnancy or within about five months after delivery. The ejection fraction must be below 45 percent, and no other cause should be found. Pre-eclampsia and viral myocarditis must be excluded before the label is applied. Typical symptoms include breathlessness on exertion, orthopnoea and leg swelling.",
+   "vis": null
+  },
+  {
+   "tx": "Transthoracic echocardiography is the key test because it measures the **ejection fraction** and chamber size. Other tests are used only when the picture is unclear or the cause is still in doubt. Biopsy is kept for atypical or refractory cases, not for routine confirmation.",
+   "say": "Transthoracic echocardiography is the key test, because it measures the ejection fraction and the size of the heart chambers. Cardiac magnetic resonance is used when the echo result is unclear. Coronary angiography is reserved for patients in whom an ischaemic cause is suspected. Endomyocardial biopsy is kept for atypical or refractory cases rather than routine confirmation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role in PPCM"
+    ],
+    "rows": [
+     [
+      "Echocardiography",
+      "Measures ejection fraction and confirms diagnosis"
+     ],
+     [
+      "Cardiac MRI",
+      "Used when echo is unclear"
+     ],
+     [
+      "Coronary angiography",
+      "Excludes ischaemic cause if suspected"
+     ],
+     [
+      "Endomyocardial biopsy",
+      "Reserved for atypical or refractory cases"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of **heart failure** in pregnancy centres on agents with a reassuring safety profile. Selected **beta-blockers** are often continued, and **loop diuretics** relieve congestion when fluid builds up. **ACE inhibitors** and **angiotensin receptor blockers** are generally stopped before conception or once pregnancy is recognised, because of fetal toxicity. The same caution applies to combined sacubitril-containing products.",
+   "say": "Management of heart failure in pregnancy relies on medicines with a reassuring safety profile. Certain beta-blockers are often continued, and loop diuretics relieve congestion when fluid builds up. ACE inhibitors and angiotensin receptor blockers are generally stopped before conception or as soon as pregnancy is recognised, because they can harm the fetus. The same caution applies to combined sacubitril-containing products.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Generally compatible in pregnancy",
+     "points": [
+      "Selected beta-blockers",
+      "Loop diuretics for congestion"
+     ]
+    },
+    "right": {
+     "title": "Generally avoided in pregnancy",
+     "points": [
+      "ACE inhibitors",
+      "Angiotensin receptor blockers",
+      "Combined sacubitril-containing products"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anticoagulation is considered for pregnant women with markedly impaired **left ventricular systolic function** or a **left ventricular thrombus** on imaging. **Injectable agents** that do not cross the placenta are the usual choice in the first trimester, because certain oral agents carry a risk of **fetal harm**. Specialist **obstetric cardiology** input should guide timing and the peripartum switch plan.",
+   "say": "Anticoagulation is considered for pregnant women with markedly impaired left ventricular systolic function, or when a left ventricular thrombus is seen on imaging. Injectable agents that do not cross the placenta are the usual choice in the first trimester, because certain oral agents carry a risk of fetal harm. Specialist obstetric cardiology input should guide the timing and the plan for switching around delivery.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_968572629f1b",
+  "q_aad0c996d72f",
+  "q_0b01dab61513"
+ ],
+ "src": [],
+ "refs": [
+  "2018 ESC Guidelines for the management of cardiovascular diseases during pregnancy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 13
+ }
+}

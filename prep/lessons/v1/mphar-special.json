@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "module": "mphar-special",
+ "subject": "mrcp-pharmacology",
+ "title": "Prescribing in pregnancy, elderly and organ impairment",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Older people and those with organ impairment often have reduced clearance, so the same dose can produce toxicity. Creatinine production depends on muscle mass, which falls with age and frailty, so a **normal serum creatinine** can hide a significant fall in **glomerular filtration rate**. For renally excreted drugs, estimate clearance with the Cockcroft and Gault equation using actual body weight rather than relying on the laboratory eGFR alone in small or frail patients.",
+   "say": "Older people and those with organ impairment often clear drugs more slowly, so the same dose can become toxic. Creatinine production depends on muscle mass, which falls with age and frailty, so a normal serum creatinine can hide a significant fall in glomerular filtration rate. For renally excreted drugs, estimate clearance with the Cockcroft and Gault equation using actual body weight, rather than relying on the laboratory eGFR alone in small or frail patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Why it matters for dosing"
+    ],
+    "rows": [
+     [
+      "Serum creatinine",
+      "Can look normal despite low muscle mass"
+     ],
+     [
+      "Laboratory eGFR",
+      "Normalised to body surface area, less reliable when small"
+     ],
+     [
+      "Cockcroft and Gault",
+      "Uses age, sex, weight and creatinine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Morphine produces **active metabolites**, morphine-3-glucuronide and morphine-6-glucuronide, which are renally excreted and accumulate in renal impairment. This causes sedation, myoclonus and delirium. Fentanyl and buprenorphine are generally preferred in renal impairment, and codeine and pethidine are best avoided because their metabolites also accumulate. Dose reduction is needed if an opioid is continued.",
+   "say": "Morphine produces active metabolites, morphine-3-glucuronide and morphine-6-glucuronide, which are renally excreted and build up in renal impairment. This causes sedation, myoclonus and delirium. Fentanyl and buprenorphine are generally preferred in renal impairment. Codeine and pethidine are best avoided, because their metabolites also accumulate. Any opioid that is continued needs dose reduction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preferred in renal impairment",
+     "points": [
+      "Fentanyl, hepatically cleared",
+      "Buprenorphine",
+      "Dose reduction if continued"
+     ]
+    },
+    "right": {
+     "title": "Avoid in renal impairment",
+     "points": [
+      "Morphine",
+      "Codeine",
+      "Pethidine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Warfarin is teratogenic, causing **warfarin embryopathy** with nasal hypoplasia and stippled epiphyses when taken between about 6 and 12 weeks. Later exposure carries central nervous system risks. Low molecular weight heparin is large and polar, so it does not cross the placenta and is preferred for venous thromboembolism in pregnancy. Direct oral anticoagulants are not recommended because they cross the placenta and data are limited.",
+   "say": "Warfarin is teratogenic, causing warfarin embryopathy with nasal hypoplasia and stippled epiphyses when taken between about 6 and 12 weeks. Later exposure carries central nervous system risks. Low molecular weight heparin is large and polar, so it does not cross the placenta and is preferred for venous thromboembolism in pregnancy. Direct oral anticoagulants are not recommended because they cross the placenta and data are limited.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pregnant, needs anticoagulation"
+     },
+     {
+      "id": "b",
+      "label": "Avoid warfarin"
+     },
+     {
+      "id": "c",
+      "label": "Use low molecular weight heparin"
+     },
+     {
+      "id": "d",
+      "label": "Avoid direct oral anticoagulants"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "also avoid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sodium valproate carries a **major teratogenic risk**, as exposure in early pregnancy is tied to **neural tube defects** and lower developmental scores in childhood. It is therefore generally avoided in people who could become pregnant unless other options have failed. Stopping an antiseizure drug suddenly can provoke breakthrough fits or **status epilepticus**, so any switch should be gradual and planned. Clinicians also advise **high-dose folic acid** for those on antiseizure drugs who are pregnant or trying to conceive, guided by a specialist epilepsy review.",
+   "say": "Sodium valproate carries a major teratogenic risk, because exposure in early pregnancy is linked to neural tube defects and lower developmental scores in childhood. It is therefore generally avoided in people who could become pregnant, unless other options have failed. Stopping an antiseizure drug suddenly can provoke breakthrough fits or status epilepticus, so any switch should be gradual and planned. Clinicians also advise high-dose folic acid for those on antiseizure drugs who are pregnant or trying to conceive, with the plan guided by a specialist epilepsy review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Issue",
+     "Practical step"
+    ],
+    "rows": [
+     [
+      "Valproate in pregnancy",
+      "Avoid where possible and seek specialist review"
+     ],
+     [
+      "Abrupt withdrawal",
+      "Raises seizure risk, so taper with a plan"
+     ],
+     [
+      "Folic acid",
+      "Offer high-dose supplementation before and during pregnancy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG203 Chronic kidney disease: assessment and management",
+  "NICE NG28 Type 2 diabetes in adults: management",
+  "NICE NG133 Hypertension in pregnancy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 24
+ }
+}

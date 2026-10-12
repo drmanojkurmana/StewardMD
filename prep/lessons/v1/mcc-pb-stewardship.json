@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "mcc-pb-stewardship",
+ "subject": "mcc-professional-behaviours",
+ "title": "Resource stewardship in everyday primary and perioperative care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Resource stewardship** means using tests, drugs and procedures only where they are likely to help the patient. **Low-value care** is common and adds cost, delay and harm, including false positives, **incidental findings** and drug side effects. A good clinician asks what question a test answers and whether the answer will change management. Pressure from patients or habit should not drive ordering.",
+   "say": "Resource stewardship means using tests, drugs and procedures only where they are likely to help the patient. Low-value care is common and adds cost, delay and harm, including false positives, incidental findings and drug side effects. A good clinician asks what question a test answers and whether the answer will change management. Pressure from patients or habit should not drive ordering. This lesson covers low back pain, pre-operative testing, antibiotics for viral infection and deprescribing.",
+   "vis": null
+  },
+  {
+   "tx": "For acute **low back pain**, the key decision is whether **red flags** are present. Red flags include cancer history, fever, weight loss, bladder or bowel dysfunction and progressive neurological deficit. Without them, most cases are mechanical and settle within weeks, so routine imaging adds little. When red flags are present, targeted imaging or urgent referral is appropriate.",
+   "say": "For acute low back pain, the key decision is whether red flags are present. Red flags include cancer history, fever, weight loss, bladder or bowel dysfunction and progressive neurological deficit. Without them, most cases are mechanical and settle within weeks, so routine imaging adds little. When red flags are present, targeted imaging or urgent referral is appropriate. A patient asking for an MRI deserves an explanation of its benefits and harms before any decision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical picture",
+     "Best action"
+    ],
+    "rows": [
+     [
+      "No red flags, normal neurology",
+      "Advise activity, analgesia and review"
+     ],
+     [
+      "Red flags or progressive deficit",
+      "Targeted imaging or urgent referral"
+     ],
+     [
+      "Patient asks for MRI",
+      "Explain benefit and harm, then decide jointly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pre-operative testing** should follow symptoms, surgical risk and functional capacity, not a template. In asymptomatic patients with good capacity having low-risk surgery, routine ECG, echocardiography and stress tests rarely change care. **Coagulation tests** are best guided by bleeding history and anticoagulant use. Targeted assessment is needed when cardiac symptoms or poor capacity are present.",
+   "say": "Pre-operative testing should follow symptoms, surgical risk and functional capacity, not a template. In asymptomatic patients with good capacity having low-risk surgery, routine ECG, echocardiography and stress tests rarely change care. Coagulation tests are best guided by bleeding history and anticoagulant use. Targeted assessment is needed when cardiac symptoms or poor capacity are present.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "Testing approach"
+    ],
+    "rows": [
+     [
+      "Low-risk surgery, no symptoms, good capacity",
+      "No routine cardiac tests"
+     ],
+     [
+      "Cardiac symptoms or poor capacity",
+      "Targeted assessment before surgery"
+     ],
+     [
+      "Template bloods, no bleeding history",
+      "Remove routine coagulation tests"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Deprescribing** asks whether the original indication still exists. A long-term proton pump inhibitor started for dyspepsia after NSAID use needs review once the NSAID has stopped and symptoms are controlled. Long-term acid suppression is linked to micronutrient and magnesium deficiency and enteric infection, so unnecessary therapy causes harm. Taper and stop when the indication has lapsed.",
+   "say": "Deprescribing asks whether the original indication still exists. A long-term proton pump inhibitor started for dyspepsia after NSAID use needs review once the NSAID has stopped and symptoms are controlled. Long-term acid suppression is linked to micronutrient and magnesium deficiency and enteric infection, so unnecessary therapy causes harm. Taper and stop when the indication has lapsed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Review indication"
+     },
+     {
+      "id": "n2",
+      "label": "Still active?"
+     },
+     {
+      "id": "n3",
+      "label": "Continue and set review date"
+     },
+     {
+      "id": "n4",
+      "label": "Taper and stop"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3",
+      "Yes"
+     ],
+     [
+      "n2",
+      "n4",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Apply three checks before ordering: is there a clear indication, will the result change management, and what harm could follow. Avoid template orders, record shared decisions with the patient, and review long-term medicines regularly. Use **NICE** guidance where it covers the point, and **ICMR** treatment guidance for antimicrobial use in Indian practice.",
+   "say": "Apply three checks before ordering. Is there a clear indication, will the result change management, and what harm could follow. Avoid template orders, record shared decisions with the patient, and review long-term medicines regularly. Use NICE guidance where it covers the point, and ICMR treatment guidance for antimicrobial use in Indian practice.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG59: Low back pain and sciatica in over 16s: assessment and management",
+  "ICMR Treatment Guidelines for Antimicrobial Use in Common Syndromes"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "ahs-paeds-surg",
+ "subject": "adult-health-surgery",
+ "title": "Paediatric surgical emergencies: key presentations and first decisions",
+ "minutes": 4,
+ "steps": [
+  {
+   "tx": "Paediatric surgical emergencies often present with **colicky pain**, vomiting or a sudden scrotal or abdominal event. Recognising the pattern quickly decides whether a child needs theatre, reduction or observation. Think of each child as a time-critical problem, where delay risks ischaemia, perforation or loss of an organ.",
+   "say": "Paediatric surgical emergencies often present with colicky pain, vomiting or a sudden scrotal or abdominal event. Recognising the pattern quickly decides whether a child needs theatre, reduction or observation. Think of each child as a time-critical problem, where delay risks ischaemia, perforation or loss of an organ.",
+   "vis": null
+  },
+  {
+   "tx": "**Testicular torsion** presents with sudden severe scrotal pain, nausea, a high-riding horizontal testis and an absent cremasteric reflex. A clear urinalysis and no fever argue against infection. Do not delay for imaging; urgent surgical exploration is needed, as salvage depends on detorsion within hours.",
+   "say": "Testicular torsion presents with sudden severe scrotal pain, nausea, a high-riding horizontal testis and an absent cremasteric reflex. A clear urinalysis and no fever argue against infection. Do not delay for imaging; urgent surgical exploration is needed, as salvage depends on detorsion within hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sudden scrotal pain"
+     },
+     {
+      "id": "b",
+      "label": "Signs of torsion"
+     },
+     {
+      "id": "c",
+      "label": "Urgent exploration"
+     },
+     {
+      "id": "d",
+      "label": "Detorsion and fixation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **incarcerated inguinal hernia** in an infant is irreducible, firm and tender. Absence of vomiting and a soft abdomen suggest the bowel is not yet strangulated. Early reduction under sedation relieves compression of bowel and vessels before ischaemia develops, and elective herniotomy follows later.",
+   "say": "An incarcerated inguinal hernia in an infant is irreducible, firm and tender. Absence of vomiting and a soft abdomen suggest the bowel is not yet strangulated. Early reduction under sedation relieves compression of bowel and vessels before ischaemia develops, and elective herniotomy follows later.",
+   "vis": null
+  },
+  {
+   "tx": "**Blunt splenic injury** in a child may be managed non-operatively when haemodynamically stable. Serial haemoglobin and observation detect delayed bleeding. Ingested **button batteries** lodged in the oesophagus are different: they need urgent endoscopic removal, because alkaline leakage causes rapid mucosal injury.",
+   "say": "Blunt splenic injury in a child may be managed non-operatively when haemodynamically stable. Serial haemoglobin and observation detect delayed bleeding. Ingested button batteries lodged in the oesophagus are different: they need urgent endoscopic removal, because alkaline leakage causes rapid mucosal injury.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Bailey and Love's Short Practice of Surgery (Williams and Dinesh)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 5,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

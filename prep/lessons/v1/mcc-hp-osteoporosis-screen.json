@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "mcc-hp-osteoporosis-screen",
+ "subject": "mcc-health-promotion",
+ "title": "Osteoporosis screening and early assessment",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Osteoporosis screening aims to identify people at high risk of a **fragility fracture** before one happens. Such a fracture follows a low-energy fall, usually from standing height or less. Screening is generally offered to older women and older men, and to younger adults carrying recognised risk factors such as long-term steroid use. Bone density is assessed with **dual-energy X-ray absorptiometry**, typically at the lumbar spine and femoral neck, and the results help guide treatment decisions.",
+   "say": "Osteoporosis screening is designed to spot people at high risk of breaking a bone before a fragility fracture happens. These breaks follow a low-energy fall, usually from standing height or lower. Screening is generally offered to older women and older men, plus younger adults who carry recognised risk factors, such as long-term steroid use. Bone density is checked using dual-energy X-ray absorptiometry, normally at the lumbar spine and femoral neck, and the results help guide whether treatment is needed.",
+   "vis": null
+  },
+  {
+   "tx": "Interpretation uses the **T-score**, which compares bone density with a young adult reference. A value at or below the osteoporosis threshold defines osteoporosis, while values between normal and that threshold indicate **osteopenia**. In premenopausal women and younger men, the **Z-score** is used instead, comparing with age-matched controls, and a low Z-score prompts a search for secondary causes.",
+   "say": "Interpretation uses the T-score, which compares bone density with a young adult reference. A value at or below the osteoporosis threshold defines osteoporosis, while values between normal and that threshold indicate osteopenia. In premenopausal women and younger men, the Z-score is used instead, comparing with age-matched controls, and a low Z-score prompts a search for secondary causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Density measure",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "T-score within the normal range",
+      "Routine review"
+     ],
+     [
+      "Osteopenia",
+      "T-score below normal but above the osteoporosis threshold",
+      "Estimate absolute risk"
+     ],
+     [
+      "Osteoporosis",
+      "T-score at or below the osteoporosis threshold",
+      "Treat after work-up"
+     ],
+     [
+      "Low for age",
+      "Low Z-score for age",
+      "Seek secondary causes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **low-trauma fracture** with low bone mass establishes osteoporosis clinically, even if the T-score is borderline. Before treatment, exclude secondary causes such as glucocorticoid use, hypercalcaemia, renal impairment, thyroid disease and hypogonadism. Check serum calcium, creatinine, phosphate, **25-hydroxyvitamin D** and parathyroid hormone when the picture is unclear.",
+   "say": "A low-trauma fracture with low bone mass establishes osteoporosis clinically, even if the T-score is borderline. Before treatment, exclude secondary causes such as glucocorticoid use, hypercalcaemia, renal impairment, thyroid disease and hypogonadism. Check serum calcium, creatinine, phosphate, 25-hydroxyvitamin D and parathyroid hormone when the picture is unclear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low-trauma fracture"
+     },
+     {
+      "id": "b",
+      "label": "Check calcium and PTH"
+     },
+     {
+      "id": "c",
+      "label": "Check renal and vitamin D"
+     },
+     {
+      "id": "d",
+      "label": "Treat secondary cause"
+     },
+     {
+      "id": "e",
+      "label": "Start bone protection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once calcium and vitamin D are replete and renal function is known, **bisphosphonates** such as alendronate are first-line antiresorptives. Calcium and vitamin D should be corrected before starting any antiresorptive, since deficiency can worsen hypocalcaemia. Bisphosphonates are renally cleared, so significant kidney impairment limits their use. Denosumab can be considered in advanced kidney disease with calcium monitoring.",
+   "say": "Once calcium and vitamin D are replete and renal function is known, bisphosphonates such as alendronate are first-line antiresorptives. Calcium and vitamin D should be corrected before starting any antiresorptive, since deficiency can worsen hypocalcaemia. Bisphosphonates are renally cleared, so significant kidney impairment limits their use. Denosumab can be considered in advanced kidney disease with calcium monitoring.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Standard use",
+     "points": [
+      "Alendronate first line",
+      "Needs normal calcium and vitamin D",
+      "Avoid if kidney function very poor"
+     ]
+    },
+    "right": {
+     "title": "Advanced kidney disease",
+     "points": [
+      "Denosumab with calcium checks",
+      "Hypocalcaemia risk",
+      "Specialist input advised"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "module": "mcc-hp-colorectal",
+ "subject": "mcc-health-promotion",
+ "title": "Colorectal cancer screening: who, how and what next",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A positive FIT must be followed by **diagnostic colonoscopy**, whatever the patient's age or symptoms. Iron deficiency anaemia in an older adult signals bleeding until proven otherwise, so it also warrants urgent colonoscopy rather than a trial of oral iron. Normal creatinine means no renal barrier to investigation.",
+   "say": "A positive faecal immunochemical test must be followed by diagnostic colonoscopy, whatever the patient's age or symptoms. Iron deficiency anaemia in an older adult signals bleeding until proven otherwise, so it also warrants urgent colonoscopy rather than a trial of oral iron.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Positive FIT, any age",
+      "Diagnostic colonoscopy"
+     ],
+     [
+      "Iron deficiency with positive FIT",
+      "Urgent colonoscopy"
+     ],
+     [
+      "Iron deficiency, FIT not done",
+      "Investigate for GI loss"
+     ],
+     [
+      "Normal creatinine, no symptoms",
+      "No renal barrier"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients with a **first-degree relative** diagnosed with colorectal cancer, especially at a young age, have raised lifetime risk. Early-onset disease in relatives raises the chance of a hereditary syndrome such as Lynch syndrome. These people need earlier and more intensive colonoscopic surveillance, plus referral for genetic assessment where a syndrome is suspected.",
+   "say": "Patients with a first-degree relative diagnosed with colorectal cancer, especially at a young age, have raised lifetime risk. Early-onset disease may signal a hereditary syndrome such as Lynch syndrome. These people need earlier and more intensive colonoscopic surveillance, with genetic assessment where a syndrome is suspected.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Average risk",
+     "points": [
+      "Screening from about age 50",
+      "FIT is the usual first test"
+     ]
+    },
+    "right": {
+     "title": "Strong family history",
+     "points": [
+      "Earlier colonoscopy surveillance",
+      "Refer for genetic assessment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Remote residence, travel costs, family concerns and fear of sedation are **barriers to uptake** that must be explored, not reasons to close the screening file. Culturally safe navigation, transport support and clear discussion of sedation options help patients proceed to colonoscopy. Refusal should be documented only after genuine informed discussion.",
+   "say": "Remote residence, travel costs, family concerns and fear of sedation are barriers to uptake that must be explored, not reasons to close the screening file. Culturally safe navigation, transport support and clear discussion of sedation options help patients proceed. Refusal should be documented only after genuine informed discussion.",
+   "vis": null
+  },
+  {
+   "tx": "When colonoscopy finds a **sessile adenoma** without invasive cancer, endoscopic resection is usually the first treatment in a fit patient without bleeding. High-grade dysplasia is a precursor confined to the mucosa, so complete removal can be curative. Surgery such as hemicolectomy is reserved for invasive cancer or lesions that cannot be resected endoscopically.",
+   "say": "When colonoscopy finds a sessile adenoma without invasive cancer, endoscopic resection is usually the first treatment in a fit patient without bleeding. High-grade dysplasia is a precursor confined to the mucosa, so complete removal can be curative. Surgery is reserved for invasive cancer or lesions that cannot be resected endoscopically.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Adenoma found"
+     },
+     {
+      "id": "b",
+      "label": "No invasive cancer"
+     },
+     {
+      "id": "c",
+      "label": "Fit, no bleeding"
+     },
+     {
+      "id": "d",
+      "label": "Endoscopic resection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

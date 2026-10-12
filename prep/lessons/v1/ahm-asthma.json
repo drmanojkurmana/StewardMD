@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "ahm-asthma",
+ "subject": "adult-health-medicine",
+ "title": "Asthma: acute severe attacks and long-term control",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Asthma is chronic airway inflammation with **variable airflow limitation**. Grade an acute attack by speech, respiratory rate, SpO2 and peak expiratory flow (PEF). Features such as a silent chest, drowsiness, exhaustion or a PEF below 33 percent make it **life-threatening** and need ICU or anaesthesia input immediately.",
+   "say": "Asthma is chronic airway inflammation with variable airflow limitation. Grade an acute attack by speech, respiratory rate, oxygen saturation and peak expiratory flow. Features such as a silent chest, drowsiness, exhaustion or a peak flow below 33 percent make it life-threatening, and ICU or anaesthesia input is needed immediately.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity",
+     "Key features",
+     "SpO2 on air"
+    ],
+    "rows": [
+     [
+      "Mild",
+      "Talks in sentences, can lie down",
+      "94% or more"
+     ],
+     [
+      "Moderate",
+      "Talks in phrases, prefers sitting",
+      "92% or more"
+     ],
+     [
+      "Severe",
+      "Cannot speak, drink or lie down",
+      "Below 92%"
+     ],
+     [
+      "Life-threatening",
+      "Drowsy, confused, silent chest",
+      "Below 92% with features"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Give inhaled **salbutamol** early, with **ipratropium** added for moderate or severe attacks. Oxygen is given only if SpO2 is below 92 percent, aiming for 92 to 95 percent. Systemic **prednisolone** 40 to 50 mg should be started within one hour for all but the mildest attacks.",
+   "say": "Give inhaled salbutamol early, with ipratropium added for moderate or severe attacks. Oxygen is given only if saturation is below 92 percent, aiming for 92 to 95 percent. Systemic prednisolone, 40 to 50 mg, should be started within one hour for all but the mildest attacks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Grade severity"
+     },
+     {
+      "id": "b",
+      "label": "Salbutamol plus ipratropium"
+     },
+     {
+      "id": "c",
+      "label": "Oxygen if SpO2 below 92%"
+     },
+     {
+      "id": "d",
+      "label": "Prednisolone within 1 hour"
+     },
+     {
+      "id": "e",
+      "label": "Reassess PEF at 1 hour"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Poor responders need add-on therapy. **IV magnesium sulfate** 2 g over 20 minutes is given once for a severe attack not responding to initial bronchodilators. Watch for **salbutamol toxicity**, which causes tachycardia, tremor, hypokalaemia and lactic acidosis, and can mimic worsening asthma. Aminophylline is reserved for senior review.",
+   "say": "Poor responders need add-on therapy. Intravenous magnesium sulfate, 2 grams over 20 minutes, is given once for a severe attack not responding to initial bronchodilators. Watch for salbutamol toxicity, which causes tachycardia, tremor, low potassium and lactic acidosis, and can mimic worsening asthma. Aminophylline is reserved for senior review.",
+   "vis": null
+  },
+  {
+   "tx": "Control is judged over the past four weeks. Symptoms more than twice a week, any night waking, reliever use more than twice a week or any activity limitation lower control. Treat SABA overuse, poor technique and **non-adherence** as key exacerbation risks. Seek same-day care if more than 12 inhalations are needed in 24 hours.",
+   "say": "Control is judged over the past four weeks. Symptoms more than twice a week, any night waking, reliever use more than twice a week or any activity limitation lower control. Treat reliever overuse, poor technique and non-adherence as key exacerbation risks. Seek same-day care if more than 12 inhalations are needed in 24 hours.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-clinical-protocols-acute-asthma-adult",
+  "kb-clinical-protocols-acute-asthma-child",
+  "kb-clinical-protocols-asthma-long-term-management"
+ ],
+ "refs": [
+  "GINA 2026 (Global Initiative for Asthma)",
+  "SIGN 158 (Scottish Intercollegiate Guidelines Network, British guideline on asthma)",
+  "BTS/NICE/SIGN 2024 asthma guideline"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 2497,
+  "itemN": 9
+ }
+}

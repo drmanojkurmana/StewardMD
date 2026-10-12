@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "mh-aboriginal",
+ "subject": "mental-health",
+ "title": "Indigenous mental health: culturally safe assessment and key clinical pitfalls",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Indigenous mental health in Australia is framed around **social and emotional wellbeing**, which covers grief, loss, cultural identity, family and community. Good assessment asks about these domains alongside symptoms. Trust is central: patients who feel respected engage more, which improves the accuracy of risk assessment. Involve family only with the patient's consent and at their request.",
+   "say": "Indigenous mental health in Australia is framed around social and emotional wellbeing. This covers grief, loss, cultural identity, family and community, and good assessment asks about these domains alongside symptoms. Trust is central. Patients who feel respected engage more, which improves the accuracy of risk assessment. Involve family only with the patient's consent and at their request.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "What to ask about"
+    ],
+    "rows": [
+     [
+      "Grief and loss",
+      "Recent deaths, job or income loss"
+     ],
+     [
+      "Cultural identity",
+      "Connection to land, language and community"
+     ],
+     [
+      "Family and community",
+      "Who supports them and who they trust"
+     ],
+     [
+      "Emotional wellbeing",
+      "Mood, sleep, appetite, shame or stigma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suicide risk must be assessed directly and never assumed away because the patient denies intent. A **specific plan** combined with **access to a lethal means**, such as a family firearm, is high risk. Calm demeanour and absence of intoxication do not lower immediate danger. Means restriction, such as securing firearms, is the most effective immediate step, followed by a collaborative safety plan.",
+   "say": "Suicide risk must be assessed directly, and it should never be assumed away because the patient denies intent. A specific plan combined with access to a lethal means, such as a family firearm, is high risk. Calm demeanour and absence of intoxication do not lower immediate danger. Means restriction, such as securing firearms, is the most effective immediate step, followed by a collaborative safety plan.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suicidal thoughts"
+     },
+     {
+      "id": "b",
+      "label": "Specific plan?"
+     },
+     {
+      "id": "c",
+      "label": "Access to means?"
+     },
+     {
+      "id": "d",
+      "label": "Secure means and same-day review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Substance use and medical causes must be excluded before attributing symptoms to a primary mental disorder. Heavy alcohol use can raise **MCV** and **GGT**, and it worsens mood and sleep. Hypothyroidism causes low mood, fatigue and constipation, and a raised TSH with low free thyroxine confirms it. Cannabis use is linked to psychosis onset and relapse, so it should be recorded and addressed.",
+   "say": "Substance use and medical causes must be excluded before attributing symptoms to a primary mental disorder. Heavy alcohol use can raise MCV and GGT, and it worsens mood and sleep. Hypothyroidism causes low mood, fatigue and constipation, and a raised TSH with low free thyroxine confirms it. Cannabis use is linked to psychosis onset and relapse, so it should be recorded and addressed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Possible meaning"
+    ],
+    "rows": [
+     [
+      "High MCV and raised GGT",
+      "Heavy alcohol use"
+     ],
+     [
+      "Raised TSH, low free T4",
+      "Primary hypothyroidism"
+     ],
+     [
+      "Cannabinoids on urine screen",
+      "Psychosis relapse risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antipsychotics carry important physical risks. Olanzapine can cause weight gain, raised triglycerides, low HDL and raised fasting glucose, which together form a metabolic syndrome picture. Antipsychotics also prolong the QTc interval, and vomiting or poor intake can cause **hypokalaemia** and **hypomagnesaemia**, raising torsades risk. Review electrolytes and QT-prolonging medicines, and do not stop mood-stabilising treatment abruptly without planning.",
+   "say": "Antipsychotics carry important physical risks. Olanzapine can cause weight gain, raised triglycerides, low HDL and raised fasting glucose, which together form a metabolic syndrome picture. Antipsychotics also prolong the QTc interval, and vomiting or poor intake can cause hypokalaemia and hypomagnesaemia, raising torsades risk. Review electrolytes and QT-prolonging medicines, and do not stop mood-stabilising treatment abruptly without planning.",
+   "vis": null
+  },
+  {
+   "tx": "Early intervention teams aim to see a person with a **first episode of psychosis** quickly, ideally soon after symptoms begin. Hearing a voice that comments on behaviour, alongside social withdrawal and daily **cannabis use**, warrants a prompt specialist referral. Involving family and community supports in a culturally safe way builds trust and improves engagement. Once symptoms settle, **fitness to drive** should be reviewed directly rather than presumed, because psychosis, sedation and substance effects can all impair attention.",
+   "say": "Early intervention teams should see a person with a first episode of psychosis quickly, ideally soon after symptoms begin. A voice that comments on what the person is doing, together with withdrawal from others and daily cannabis use, calls for a prompt specialist referral. Involving family and community supports in a culturally safe manner builds trust and helps people stay engaged. Once the person is settled, their fitness to drive should be checked directly rather than presumed, since psychosis, sedation and cannabis can all slow attention and reaction time.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Australian Clinical Guidelines for the Management of Suicidal Behaviour (Australian Government Department of Health)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

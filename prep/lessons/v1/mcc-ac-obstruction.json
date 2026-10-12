@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "module": "mcc-ac-obstruction",
+ "subject": "mcc-acute-care",
+ "title": "Bowel obstruction: recognition, triage and first-line management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Bowel sounds** are a poor guide. Simple obstruction gives high-pitched, hyperactive sounds, but these become weak or absent as the proximal bowel distends. A strangulating obstruction can have normal peristalsis. Restless, thrashing patients suggest obstructive colic, whereas a patient lying very still suggests peritonitis. Do not let normal sounds reassure you.",
+   "say": "Bowel sounds are a poor guide. Simple obstruction gives high-pitched, hyperactive sounds, but these become weak or absent as the proximal bowel distends. A strangulating obstruction can have normal peristalsis. Restless, thrashing patients suggest obstructive colic, whereas a patient lying very still suggests peritonitis. Do not let normal sounds reassure you.",
+   "vis": null
+  },
+  {
+   "tx": "Separate true obstruction from its mimics. **Adynamic ileus** has absent sounds and no mechanical lesion. **Colonic pseudo-obstruction** (Ogilvie's syndrome) gives colonic dilatation without a mechanical block. Other mimics include severe constipation, mesenteric ischaemia, lead colic and diabetic ketoacidosis. Postoperative ileus is a common cause after abdominal surgery.",
+   "say": "Separate true obstruction from its mimics. Adynamic ileus has absent sounds and no mechanical lesion. Colonic pseudo-obstruction, known as Ogilvie's syndrome, gives colonic dilatation without a mechanical block. Other mimics include severe constipation, mesenteric ischaemia, lead colic and diabetic ketoacidosis. Postoperative ileus is a common cause after abdominal surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanical obstruction",
+     "points": [
+      "Colicky pain, rising distension",
+      "Mechanical lesion present",
+      "Hyperactive sounds early"
+     ]
+    },
+    "right": {
+     "title": "Functional mimics",
+     "points": [
+      "No mechanical lesion",
+      "Sounds absent or hypoactive",
+      "Ogilvie and postoperative ileus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Use **CT** as the first-line imaging in most cases, with high sensitivity for high-grade obstruction. Plain erect or supine films show dilated loops, staircasing and air-fluid levels, but have limited value. Avoid oral barium if colonic obstruction is possible, as it can concretion and spoil later imaging. Water-soluble contrast is the safer choice when contrast is needed.",
+   "say": "Use CT as the first line imaging in most cases, with high sensitivity for high grade obstruction. Plain erect or supine films show dilated loops, staircasing and air fluid levels, but have limited value. Avoid oral barium if colonic obstruction is possible, as it can form concretions and spoil later imaging. Water soluble contrast is the safer choice when contrast is needed.",
+   "vis": null
+  },
+  {
+   "tx": "Start with **nasogastric decompression**, bowel rest and intravenous fluid and electrolyte correction. Expect metabolic derangement in high-grade distal obstruction with vomiting, including hypochloraemic, hypokalaemic alkalosis. Choose isotonic saline with potassium replacement where indicated. Operate promptly for strangulation, closed-loop obstruction, peritonitis or sepsis.",
+   "say": "Start with nasogastric decompression, bowel rest and intravenous fluid and electrolyte correction. Expect metabolic derangement in high grade distal obstruction with vomiting, including hypochloraemic, hypokalaemic alkalosis. Choose isotonic saline with potassium replacement where indicated. Operate promptly for strangulation, closed loop obstruction, peritonitis or sepsis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected obstruction"
+     },
+     {
+      "id": "b",
+      "label": "Resuscitate and decompress"
+     },
+     {
+      "id": "c",
+      "label": "CT and labs"
+     },
+     {
+      "id": "d",
+      "label": "Strangulation or closed loop?"
+     },
+     {
+      "id": "e",
+      "label": "Urgent surgery"
+     },
+     {
+      "id": "f",
+      "label": "Conservative trial"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "yes"
+     ],
+     [
+      "d",
+      "f",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recognise the **closed-loop** and **sigmoid volvulus** patterns. Sigmoid volvulus is the commonest volvulus and affects elderly patients with chronic constipation, neuropsychiatric illness or institutional living. Stable patients without peritonitis can often be decompressed endoscopically, while surgery is needed for ischaemia or perforation. Adhesive obstruction without peritoneal signs often settles with a conservative trial.",
+   "say": "Recognise the closed loop and sigmoid volvulus patterns. Sigmoid volvulus is the commonest volvulus and affects elderly patients with chronic constipation, neuropsychiatric illness or institutional living. Stable patients without peritonitis can often be decompressed endoscopically, while surgery is needed for ischaemia or perforation. Adhesive obstruction without peritoneal signs often settles with a conservative trial.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-diseases-bowel-obstruction",
+  "kb-reference-acute-intestinal-obstruction",
+  "kb-reference-gallstone-ileus"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Jameson et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 2500,
+  "itemN": 11
+ }
+}

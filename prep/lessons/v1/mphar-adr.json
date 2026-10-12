@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "mphar-adr",
+ "subject": "mrcp-pharmacology",
+ "title": "Adverse drug reactions and pharmacovigilance",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An **adverse drug reaction** is any harmful, unintended response to a medicine given at normal doses for prophylaxis, diagnosis or treatment. Reactions are classified as **Type A** (augmented, predictable, dose-related, common) or **Type B** (bizarre, unpredictable, not dose-related, often immunological, rare). Type A reactions follow the drug's known pharmacology and usually settle on dose reduction. Type B reactions need the drug stopped and may be serious.",
+   "say": "An adverse drug reaction is any harmful, unintended response to a medicine given at normal doses. Reactions are classified as Type A, which are augmented, predictable, dose-related and common, or Type B, which are bizarre, unpredictable, not dose-related, often immunological and rare. Type A reactions follow the drug's known pharmacology and usually settle on dose reduction. Type B reactions need the drug stopped and may be serious.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Type A",
+     "Type B"
+    ],
+    "rows": [
+     [
+      "Predictability",
+      "Predictable from pharmacology",
+      "Unpredictable"
+     ],
+     [
+      "Dose relation",
+      "Dose-dependent",
+      "Not dose-related"
+     ],
+     [
+      "Frequency",
+      "Common",
+      "Rare"
+     ],
+     [
+      "Typical example",
+      "Hypoglycaemia with gliclazide",
+      "Hypersensitivity or lupus-like reaction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Other reaction types are useful in exams. **Type C** reactions are chronic, cumulative toxicity. **Type D** reactions are delayed, such as carcinogenicity or teratogenicity. **Type E** reactions are end-of-treatment effects, such as withdrawal or rebound. Thiazide-induced hyponatraemia and hypokalaemia are classic Type A reactions, so dose reduction and electrolyte checks are the first response.",
+   "say": "Other reaction types are useful in exams. Type C reactions are chronic, cumulative toxicity. Type D reactions are delayed, such as carcinogenicity or teratogenicity. Type E reactions are end-of-treatment effects, such as withdrawal or rebound. Thiazide-induced hyponatraemia and hypokalaemia are classic Type A reactions, so dose reduction and electrolyte checks are the first response.",
+   "vis": null
+  },
+  {
+   "tx": "Key **ACE inhibitor** reactions are a dry cough and angioedema. The cough is bradykinin mediated, because ACE normally breaks down bradykinin. Switching to an angiotensin II receptor blocker is the usual alternative. Angioedema of the lips, tongue or larynx needs the drug stopped and the airway watched closely. Antihistamines and steroids are not effective, and ACE inhibitors should not be restarted.",
+   "say": "Key ACE inhibitor reactions are a dry cough and angioedema. The cough is bradykinin mediated, because ACE normally breaks down bradykinin. Switching to an angiotensin II receptor blocker is the usual alternative. Angioedema of the lips, tongue or larynx needs the drug stopped and the airway watched closely. Antihistamines and steroids are not effective, and ACE inhibitors should not be restarted.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "ACE inhibitor"
+     },
+     {
+      "id": "b",
+      "label": "Bradykinin rises"
+     },
+     {
+      "id": "c",
+      "label": "Dry cough or angioedema"
+     },
+     {
+      "id": "d",
+      "label": "Stop drug, use ARB"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several reactions depend on interactions. **Clarithromycin** inhibits CYP3A4, raising simvastatin levels and risk of myopathy and rhabdomyolysis. **Trimethoprim** and ACE inhibitors both raise potassium. Drugs that prolong the **QT interval**, such as clarithromycin and citalopram, can cause torsades de pointes, especially with hypokalaemia or hypomagnesaemia. Withdraw the drug and correct electrolytes first.",
+   "say": "Several reactions depend on interactions. Clarithromycin inhibits CYP3A4, raising simvastatin levels and the risk of myopathy and rhabdomyolysis. Trimethoprim and ACE inhibitors both raise potassium. Drugs that prolong the QT interval, such as clarithromycin and citalopram, can cause torsades de pointes, especially with hypokalaemia or hypomagnesaemia. Withdraw the drug and correct electrolytes first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Interaction",
+     "Effect",
+     "First step"
+    ],
+    "rows": [
+     [
+      "Clarithromycin with simvastatin",
+      "Myopathy, rhabdomyolysis",
+      "Stop statin"
+     ],
+     [
+      "Trimethoprim with ACE inhibitor",
+      "Hyperkalaemia",
+      "Stop both, treat potassium"
+     ],
+     [
+      "QT drug with low potassium",
+      "Torsades de pointes",
+      "Stop drug, replace electrolytes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pharmacovigilance is the monitoring of drug safety after licensing. In the UK, suspected reactions are reported through the MHRA **Yellow Card** scheme, and healthcare professionals and patients can both report. Drugs marked with the **black inverted triangle** are under additional monitoring, usually because they are newly authorised. Reporting is encouraged when causality is only suspected, and serious or unexpected reactions should be reported promptly.",
+   "say": "Pharmacovigilance is the monitoring of drug safety after licensing. In the UK, suspected reactions are reported through the MHRA Yellow Card scheme, and healthcare professionals and patients can both report. Drugs marked with the black inverted triangle are under additional monitoring, usually because they are newly authorised. Reporting is encouraged when causality is only suspected, and serious or unexpected reactions should be reported promptly.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Medicines and Healthcare products Regulatory Agency (MHRA) Yellow Card scheme guidance",
+  "British National Formulary (BNF)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

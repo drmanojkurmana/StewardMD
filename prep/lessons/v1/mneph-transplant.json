@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "mneph-transplant",
+ "subject": "mrcp-nephrology",
+ "title": "Renal transplantation and immunosuppression",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Immunosuppression after kidney transplant aims to stop the recipient immune system attacking the graft while avoiding infection and malignancy. Calcineurin inhibitors such as **tacrolimus** and ciclosporin bind immunophilins and block calcineurin, so NFAT stays in the cytoplasm and IL-2 transcription falls. Mycophenolate blocks **inosine monophosphate dehydrogenase**, the rate-limiting enzyme of de novo guanine synthesis, which hits lymphocytes preferentially. Steroids add broad anti-inflammatory action.",
+   "say": "Immunosuppression after a kidney transplant aims to stop the recipient immune system attacking the graft, while avoiding infection and cancer. Calcineurin inhibitors such as tacrolimus and ciclosporin bind immunophilins and block calcineurin. NFAT then stays in the cytoplasm, and interleukin-2 transcription falls. Mycophenolate blocks inosine monophosphate dehydrogenase, the rate-limiting enzyme of de novo guanine synthesis, which affects lymphocytes preferentially. Steroids add broad anti-inflammatory action.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Target",
+     "Main toxicity"
+    ],
+    "rows": [
+     [
+      "Tacrolimus",
+      "Calcineurin",
+      "Nephrotoxicity, tremor, hyperkalaemia"
+     ],
+     [
+      "Mycophenolate",
+      "IMP dehydrogenase",
+      "Marrow suppression, diarrhoea"
+     ],
+     [
+      "Prednisolone",
+      "Glucocorticoid receptor",
+      "Diabetes, hypertension, infection"
+     ],
+     [
+      "Azathioprine",
+      "Purine synthesis",
+      "Myelosuppression, low TPMT activity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Calcineurin inhibitor **nephrotoxicity** is dose related. It causes afferent arteriolar vasoconstriction through raised thromboxane and endothelin and reduced nitric oxide, lowering glomerular filtration. A creatinine rise with a high trough and no proteinuria points to this acute haemodynamic effect. Management is trough checking and dose reduction, not stopping the drug abruptly. Chronic toxicity adds interstitial fibrosis and arteriolar hyalinosis.",
+   "say": "Calcineurin inhibitor nephrotoxicity is dose related. It causes afferent arteriolar vasoconstriction through raised thromboxane and endothelin, and reduced nitric oxide. This lowers glomerular filtration. A creatinine rise with a high trough and no proteinuria points to this acute haemodynamic effect. Management is trough checking and dose reduction, not stopping the drug abruptly. Chronic toxicity adds interstitial fibrosis and arteriolar hyalinosis.",
+   "vis": null
+  },
+  {
+   "tx": "**BK polyomavirus nephropathy** arises from viral replication in tubular epithelium under heavy immunosuppression, and it can mimic rejection. Suspect it with a rising creatinine, plasma viraemia and decoy cells in urine. Biopsy showing viral inclusions and SV40 staining confirms it. The key step is reducing immunosuppression, often mycophenolate first, while monitoring plasma viral load and creatinine. Pulsed steroids and dose increases are inappropriate.",
+   "say": "BK polyomavirus nephropathy arises from viral replication in tubular epithelium under heavy immunosuppression, and it can mimic rejection. Suspect it with a rising creatinine, plasma viraemia and decoy cells in urine. Biopsy showing viral inclusions and SV40 staining confirms it. The key step is reducing immunosuppression, often mycophenolate first, while monitoring plasma viral load and creatinine. Pulsed steroids and dose increases are inappropriate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rising creatinine"
+     },
+     {
+      "id": "b",
+      "label": "Plasma BK PCR positive"
+     },
+     {
+      "id": "c",
+      "label": "Biopsy confirms"
+     },
+     {
+      "id": "d",
+      "label": "Reduce immunosuppression"
+     },
+     {
+      "id": "e",
+      "label": "Monitor viral load"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hyperacute rejection** occurs within minutes to hours of reperfusion. Preformed recipient antibodies against donor ABO or HLA antigens bind endothelium, activate complement and trigger thrombosis, so the graft turns mottled, swollen and anuric. It is prevented by ABO compatibility and a negative crossmatch. Once established it is irreversible and usually needs graft nephrectomy with supportive dialysis.",
+   "say": "Hyperacute rejection occurs within minutes to hours of reperfusion. Preformed recipient antibodies against donor ABO or HLA antigens bind endothelium, activate complement and trigger thrombosis. The graft becomes mottled, swollen and anuric. It is prevented by ABO compatibility and a negative crossmatch. Once established it is irreversible and usually needs graft removal with supportive dialysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperacute",
+     "points": [
+      "Minutes to hours",
+      "Preformed antibodies",
+      "Irreversible"
+     ]
+    },
+    "right": {
+     "title": "Acute cellular",
+     "points": [
+      "Days to weeks",
+      "T cell attack on tubules",
+      "Responds to steroids"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Antibody-mediated rejection** is driven by donor-specific HLA antibodies that injure graft endothelium. Biopsy shows microvascular inflammation and C4d staining in peritubular capillaries, often without tubulitis. Treatment differs from T-cell rejection and is directed by the transplant team. Renal artery stenosis at the anastomosis is a separate, surgically or radiologically treated cause of hypertension and graft dysfunction.",
+   "say": "Antibody-mediated rejection is driven by donor-specific HLA antibodies that injure graft endothelium. Biopsy shows microvascular inflammation and C4d staining in peritubular capillaries, often without tubulitis. Treatment differs from T-cell rejection and is directed by the transplant team. Renal artery stenosis at the anastomosis is a separate cause of hypertension and graft dysfunction, treated by angioplasty with stenting.",
+   "vis": null
+  },
+  {
+   "tx": "**Thiopurine methyltransferase** (TPMT) metabolises azathioprine. Very low or absent activity causes accumulation of cytotoxic thioguanine nucleotides and severe myelosuppression. Stop azathioprine, monitor counts and consider mycophenolate under specialist guidance. Post-transplant lymphoproliferative disorder is EBV-driven, with highest risk in seronegative recipients of seropositive donors, and reducing immunosuppression is the first step.",
+   "say": "Thiopurine methyltransferase metabolises azathioprine. Very low or absent activity causes accumulation of cytotoxic thioguanine nucleotides and severe myelosuppression. Stop azathioprine, monitor counts and consider mycophenolate under specialist guidance. Post-transplant lymphoproliferative disorder is driven by Epstein-Barr virus, with highest risk in seronegative recipients of seropositive donors, and reducing immunosuppression is the first step.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Issue",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "Low TPMT activity",
+      "Stop azathioprine"
+     ],
+     [
+      "Heterozygous TPMT",
+      "Consider dose reduction"
+     ],
+     [
+      "Cytomegalovirus risk, donor positive, recipient negative",
+      "Valganciclovir prophylaxis, renally dosed"
+     ],
+     [
+      "EBV-related lymphoma",
+      "Reduce immunosuppression, consider rituximab"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 25
+ }
+}

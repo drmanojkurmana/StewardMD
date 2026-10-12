@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "mcc-ac-ectopic",
+ "subject": "mcc-acute-care",
+ "title": "Ruptured ectopic pregnancy: recognition and urgent management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A **ruptured ectopic pregnancy** is a pregnancy implanted outside the uterine cavity, most often in the fallopian tube, that has torn through the tubal wall. Trophoblast invades the tube, erodes vessels and bleeds into the peritoneal cavity. Think of it whenever a woman of reproductive age has pain, a missed period and collapse.",
+   "say": "A ruptured ectopic pregnancy is a pregnancy implanted outside the uterine cavity, most often in the fallopian tube, that has torn through the tubal wall. Trophoblast invades the tube, erodes vessels and bleeds into the peritoneal cavity. Think of it whenever a woman of reproductive age has pain, a missed period and collapse.",
+   "vis": null
+  },
+  {
+   "tx": "Classic features include sudden severe lower abdominal pain, a missed period, light vaginal bleeding and a positive urine hCG. Shoulder tip pain suggests **haemoperitoneum** irritating the diaphragm. Look for tachycardia, hypotension, pallor and a falling **haemoglobin**, which signal haemorrhagic shock.",
+   "say": "Classic features include sudden severe lower abdominal pain, a missed period, light vaginal bleeding and a positive urine hCG. Shoulder tip pain suggests haemoperitoneum irritating the diaphragm. Look for tachycardia, hypotension, pallor and a falling haemoglobin, which signal haemorrhagic shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Suggests"
+    ],
+    "rows": [
+     [
+      "Shoulder tip pain",
+      "Blood irritating diaphragm"
+     ],
+     [
+      "Low BP, high pulse",
+      "Hypovolaemic shock"
+     ],
+     [
+      "Free fluid, no intrauterine pregnancy",
+      "Probable rupture"
+     ],
+     [
+      "Low haemoglobin",
+      "Significant blood loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside ultrasound is the key first-line test in an unstable patient. Free fluid in the pouch of Douglas with no intrauterine pregnancy strongly suggests rupture. A stable patient with a pregnancy of unknown location needs serial **serum hCG** and repeat ultrasound, because hCG patterns separate viable intrauterine, failing and ectopic pregnancies.",
+   "say": "Bedside ultrasound is the key first-line test in an unstable patient. Free fluid in the pouch of Douglas with no intrauterine pregnancy strongly suggests rupture. A stable patient with a pregnancy of unknown location needs serial serum hCG and repeat ultrasound, because hCG patterns separate viable intrauterine, failing and ectopic pregnancies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pregnancy confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Bedside ultrasound"
+     },
+     {
+      "id": "c",
+      "label": "Free fluid, no IUP"
+     },
+     {
+      "id": "d",
+      "label": "Unstable: theatre"
+     },
+     {
+      "id": "e",
+      "label": "Stable: serial hCG"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "shock"
+     ],
+     [
+      "c",
+      "e",
+      "no shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management depends on haemodynamic status. A patient in shock needs **resuscitation** with intravenous fluids and blood, then urgent surgery to stop the bleeding, usually laparoscopic salpingectomy. Methotrexate is reserved for stable, unruptured cases with low hCG and no fetal cardiac activity, not for ongoing haemorrhage.",
+   "say": "Management depends on haemodynamic status. A patient in shock needs resuscitation with intravenous fluids and blood, then urgent surgery to stop the bleeding, usually laparoscopic salpingectomy. Methotrexate is reserved for stable, unruptured cases with low hCG and no fetal cardiac activity, not for ongoing haemorrhage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unstable, ruptured",
+     "points": [
+      "Resuscitate first",
+      "Urgent surgery",
+      "Usually salpingectomy",
+      "Stop bleeding"
+     ]
+    },
+    "right": {
+     "title": "Stable, unruptured",
+     "points": [
+      "Serial hCG",
+      "Medical option possible",
+      "Methotrexate if criteria met",
+      "Surgery if it fails"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rh-negative women with a suspected ectopic pregnancy need **anti-D immunoglobulin** to prevent alloimmunisation, since fetal or trophoblastic red cells can enter the maternal circulation. Consent is needed for surgery, but in an emergency where the patient lacks capacity, treatment may proceed under the emergency exception of implied consent.",
+   "say": "Rh-negative women with a suspected ectopic pregnancy need anti-D immunoglobulin to prevent alloimmunisation, since fetal or trophoblastic red cells can enter the maternal circulation. Consent is needed for surgery, but in an emergency where the patient lacks capacity, treatment may proceed under the emergency exception of implied consent.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Williams Obstetrics (Cunningham et al.)",
+  "NICE Ectopic pregnancy and miscarriage guideline"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

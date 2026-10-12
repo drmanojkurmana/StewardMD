@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "mpsyc-pharma",
+ "subject": "mrcp-psychiatry",
+ "title": "Psychopharmacology: lithium, clozapine and antidepressants",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Lithium** causes nephrogenic diabetes insipidus by reducing aquaporin-2 water channels in collecting duct principal cells. Patients pass large volumes of dilute urine, and desmopressin produces little rise in urine osmolality. This distinguishes it from **cranial diabetes insipidus**, which responds to desmopressin. Thiazides and NSAIDs raise lithium levels, so check interactions before prescribing.",
+   "say": "Lithium causes nephrogenic diabetes insipidus by reducing aquaporin-2 water channels in collecting duct principal cells. Patients pass large volumes of dilute urine, and desmopressin produces little rise in urine osmolality. This distinguishes it from cranial diabetes insipidus, which responds to desmopressin. Thiazides and NSAIDs raise lithium levels, so check interactions before prescribing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Nephrogenic DI (lithium)",
+     "Cranial DI"
+    ],
+    "rows": [
+     [
+      "Urine after desmopressin",
+      "Little change",
+      "Concentrates"
+     ],
+     [
+      "Plasma sodium",
+      "Often raised",
+      "Often raised"
+     ],
+     [
+      "Main defect",
+      "Kidney does not respond to ADH",
+      "Low ADH release"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lithium toxicity** is more likely when diuretics, NSAIDs or ACE inhibitors are added, because renal clearance falls. Coarse tremor, vomiting, ataxia and confusion signal significant toxicity. Withhold lithium and the interacting drug, give cautious intravenous saline, and involve nephrology early. **Haemodialysis** is indicated for severe toxicity or renal failure.",
+   "say": "Lithium toxicity is more likely when diuretics, NSAIDs or ACE inhibitors are added, because renal clearance falls. Coarse tremor, vomiting, ataxia and confusion signal significant toxicity. Withhold lithium and the interacting drug, give cautious intravenous saline, and involve nephrology early. Haemodialysis is indicated for severe toxicity or renal failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Interacting drug added"
+     },
+     {
+      "id": "b",
+      "label": "Lithium clearance falls"
+     },
+     {
+      "id": "c",
+      "label": "Levels rise, toxicity"
+     },
+     {
+      "id": "d",
+      "label": "Withhold, fluids, nephrology"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fever with neutropenia** on clozapine is a medical emergency. Stop the drug, admit, and give prompt intravenous broad-spectrum antibiotics after cultures. **Clozapine-induced myocarditis** presents early with fever, tachycardia and raised troponin; stop clozapine and involve cardiology. Rechallenge is avoided after severe reactions.",
+   "say": "Fever with neutropenia on clozapine is a medical emergency. Stop the drug, admit, and give prompt intravenous broad-spectrum antibiotics after cultures. Clozapine-induced myocarditis presents early with fever, tachycardia and raised troponin; stop clozapine and involve cardiology. Rechallenge is avoided after severe reactions.",
+   "vis": null
+  },
+  {
+   "tx": "**Serotonin toxicity** follows combined serotonergic drugs such as an SSRI with tramadol. Clonus, hyperreflexia, tremor, agitation, hyperthermia and autonomic instability are typical. **Neuroleptic malignant syndrome** follows dopamine D2 blockade over days, with rigidity and raised creatine kinase but no clonus. Withdraw the offending drugs and give supportive care.",
+   "say": "Serotonin toxicity follows combined serotonergic drugs such as an SSRI with tramadol. Clonus, hyperreflexia, tremor, agitation, hyperthermia and autonomic instability are typical. Neuroleptic malignant syndrome follows dopamine blockade over days, with rigidity and raised creatine kinase but no clonus. Withdraw the offending drugs and give supportive care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serotonin toxicity",
+     "points": [
+      "Clonus and hyperreflexia",
+      "Rapid onset, often within hours",
+      "Withdraw serotonergic drugs",
+      "Cyproheptadine if moderate to severe"
+     ]
+    },
+    "right": {
+     "title": "Neuroleptic malignant syndrome",
+     "points": [
+      "Rigidity, slow onset over days",
+      "Raised creatine kinase",
+      "Stop the antipsychotic",
+      "Cool, fluids, monitor renal function"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**SSRI-induced SIADH** is most common in older adults and those on diuretics, with sertraline, citalopram and escitalopram implicated. Expect low serum osmolality, euvolaemia, and urine that is inappropriately concentrated with raised sodium. Stop or switch the antidepressant, restrict fluid in mild cases, and correct sodium gradually to avoid **osmotic demyelination**.",
+   "say": "SSRI induced SIADH is most common in older adults and those on diuretics, with sertraline, citalopram and escitalopram implicated. Expect low serum osmolality, euvolaemia, and urine that is inappropriately concentrated with raised sodium. Stop or switch the antidepressant, restrict fluid in mild cases, and correct sodium gradually to avoid osmotic demyelination.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE CG178 Psychosis and schizophrenia in adults",
+  "NICE CG185 Bipolar disorder"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 22
+ }
+}

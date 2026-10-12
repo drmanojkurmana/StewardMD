@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "ch-growth",
+ "subject": "child-health",
+ "title": "Growth and feeding: faltering growth in children",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Faltering growth** means weight or weight-for-age falling across centile lines, or failing to gain weight as expected. Start by asking whether intake, absorption or a systemic cause is responsible. Most cases in infancy and toddlerhood are due to inadequate energy intake rather than disease. Check feeding history, growth chart trajectory and whether height is preserved. Height tracking on the original centile suggests a nutritional cause, while falling height points to a longer-standing problem.",
+   "say": "Faltering growth means weight or weight for age falling across centile lines, or failing to gain weight as expected. Start by asking whether intake, absorption or a systemic cause is responsible. Most cases in infancy and toddlerhood are due to inadequate energy intake rather than disease. Check the feeding history, the growth chart trajectory and whether height is preserved. Height tracking on the original centile suggests a nutritional cause, while falling height points to a longer-standing problem.",
+   "vis": null
+  },
+  {
+   "tx": "In infancy, a **shallow latch** and quick feeds reduce milk transfer even when feeds are frequent. Direct observation of a full breastfeed is the most useful next step, because it identifies the mechanism. Formula supplements or investigations are not first-line until intake is assessed. Wet nappies and alert behaviour reassure that the infant is not systemically unwell.",
+   "say": "In infancy, a shallow latch and quick feeds reduce milk transfer even when feeds are frequent. Direct observation of a full breastfeed is the most useful next step, because it identifies the mechanism. Formula supplements or investigations are not first line until intake has been assessed. Wet nappies and an alert infant reassure that the baby is not systemically unwell.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Frequent feeds"
+     },
+     {
+      "id": "b",
+      "label": "Shallow latch"
+     },
+     {
+      "id": "c",
+      "label": "Low milk transfer"
+     },
+     {
+      "id": "d",
+      "label": "Observe full feed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Excess **cow's milk** in toddlers **displaces solid food** and so lowers energy and iron intake. Milk is poor in iron, so **iron deficiency** with microcytic anaemia can develop. Check haemoglobin, mean cell volume and **ferritin**, then start oral iron and dietary counselling. Reintroduce iron-rich foods such as meat, pulses and fortified cereals while reducing milk volume.",
+   "say": "Excess cow's milk in toddlers displaces solid food and so lowers energy and iron intake. Milk is poor in iron, so iron deficiency with microcytic anaemia can develop. Check haemoglobin, mean cell volume and ferritin, then start oral iron and dietary counselling. Reintroduce iron-rich foods such as meat, pulses and fortified cereals while reducing milk volume.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Likely meaning"
+    ],
+    "rows": [
+     [
+      "Low haemoglobin and mean cell volume",
+      "Microcytic anaemia"
+     ],
+     [
+      "Low ferritin",
+      "Depleted iron stores"
+     ],
+     [
+      "High milk intake",
+      "Reduced solid and iron intake"
+     ],
+     [
+      "Normal CRP",
+      "Ferritin is interpretable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Refeeding syndrome** is a major risk when nutrition restarts after prolonged starvation, as in anorexia nervosa or severe acute malnutrition. Insulin released with carbohydrate drives **phosphate**, potassium and magnesium into cells. Low phosphate, potassium or magnesium before feeding signals high risk. Start feeds at low volume, monitor electrolytes closely and replace deficits. Full-volume feeding should not begin immediately.",
+   "say": "Refeeding syndrome is a major risk when nutrition restarts after prolonged starvation, as in anorexia nervosa or severe acute malnutrition. Insulin released with carbohydrate drives phosphate, potassium and magnesium into cells. Low phosphate, potassium or magnesium before feeding signals high risk. Start feeds at low volume, monitor electrolytes closely and replace deficits. Full-volume feeding should not begin immediately.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prolonged starvation"
+     },
+     {
+      "id": "b",
+      "label": "Low phosphate, potassium, magnesium"
+     },
+     {
+      "id": "c",
+      "label": "Low-volume feeds"
+     },
+     {
+      "id": "d",
+      "label": "Electrolyte monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute gastroenteritis causes **dehydration** that is assessed clinically. In mild dehydration the child is alert, drinks eagerly and has near-normal perfusion. Management is **oral rehydration solution** given in small, frequent volumes. Antidiarrhoeal drugs such as loperamide are not recommended in young children. Fluids are not withheld, and intravenous fluid is reserved for moderate to severe dehydration or failure of oral therapy.",
+   "say": "Acute gastroenteritis causes dehydration that is assessed clinically. In mild dehydration the child is alert, drinks eagerly and has near normal perfusion. Management is oral rehydration solution given in small, frequent volumes. Antidiarrhoeal drugs such as loperamide are not recommended in young children. Fluids are not withheld, and intravenous fluid is reserved for moderate to severe dehydration or failure of oral therapy.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on faltering growth in children",
+  "NICE Clinical Guideline on Cow's milk protein allergy in babies",
+  "NICE guideline on Oral rehydration and gastroenteritis in children"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

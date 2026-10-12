@@ -1,0 +1,168 @@
+{
+ "v": 1,
+ "module": "ahm-gib",
+ "subject": "adult-health-medicine",
+ "title": "GI bleeding: grading, resuscitation and restarting antithrombotics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Every GI bleed starts with **resuscitation**. Classify the bleed as upper (within reach of a gastroscope), colonic, or small bowel, using haematemesis, melaena, haematochezia or a positive nasogastric aspirate. Severe bleeding means persistent bleeding in the first 24 hours, need for transfusion, a haematocrit fall above 20 percent, or rebleeding after 24 hours of stability. Score upper bleeds with the **Glasgow-Blatchford score**. A score of 0 to 1 allows early outpatient endoscopy.",
+   "say": "Every GI bleed starts with resuscitation. Classify the bleed as upper, colonic, or small bowel, using haematemesis, melaena, haematochezia or a positive nasogastric aspirate. Severe bleeding means persistent bleeding in the first 24 hours, need for transfusion, a haematocrit fall above 20 percent, or rebleeding after 24 hours of stability. Score upper bleeds with the Glasgow-Blatchford score. A score of 0 to 1 allows early outpatient endoscopy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Initial step"
+    ],
+    "rows": [
+     [
+      "Haemodynamically unstable",
+      "Resuscitate and treat as major"
+     ],
+     [
+      "Upper source suspected",
+      "Glasgow-Blatchford score"
+     ],
+     [
+      "Stable colonic bleed",
+      "Oakland score"
+     ],
+     [
+      "Shock index above 1",
+      "Urgent CT angiography"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antithrombotic decisions depend on the **thrombotic risk**. For antiplatelets, high risk means acute coronary syndrome, any coronary stent, or stroke or TIA within 6 months. For anticoagulants, high risk includes non-valvular AF with CHA2DS2-VASc above 5, a metallic mitral valve, or VTE within 3 months. Aspirin for primary prevention is stopped. Aspirin for secondary prevention is continued. Platelet transfusion is not routine for antiplatelet-associated bleeding.",
+   "say": "Antithrombotic decisions depend on the thrombotic risk. For antiplatelets, high risk means acute coronary syndrome, any coronary stent, or stroke or TIA within 6 months. For anticoagulants, high risk includes non-valvular atrial fibrillation with CHA2DS2-VASc above 5, a metallic mitral valve, or venous thromboembolism within 3 months. Aspirin for primary prevention is stopped. Aspirin for secondary prevention is continued. Platelet transfusion is not routine for antiplatelet-associated bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stop or hold",
+     "points": [
+      "Aspirin for primary prevention",
+      "Second antiplatelet in DAPT",
+      "Any anticoagulant until controlled",
+      "Routine platelet transfusion"
+     ]
+    },
+    "right": {
+     "title": "Continue or restart",
+     "points": [
+      "Aspirin for secondary prevention",
+      "Restart DAPT within 5 days",
+      "Warfarin at 3 to 7 days",
+      "DOAC about 3 days after haemostasis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Reverse anticoagulation only for severe bleeding. For warfarin, **vitamin K** 2 to 5 mg works over 24 to 48 hours and does not give rapid haemostasis. Four-factor prothrombin complex concentrate is an effective alternative to FFP. FFP is reserved for life-threatening bleeding or INR above 3. Idarucizumab reverses dabigatran, and andexanet alfa acts on factor Xa inhibitors, both for selected life-threatening bleeds. Mechanical clips are preferred over thermal methods in anticoagulated patients.",
+   "say": "Reverse anticoagulation only for severe bleeding. For warfarin, vitamin K 2 to 5 mg works over 24 to 48 hours and does not give rapid haemostasis. Four-factor prothrombin complex concentrate is an effective alternative to fresh frozen plasma. Fresh frozen plasma is reserved for life-threatening bleeding or INR above 3. Idarucizumab reverses dabigatran, and andexanet alfa acts on factor Xa inhibitors, both for selected life-threatening bleeds. Mechanical clips are preferred over thermal methods in anticoagulated patients.",
+   "vis": null
+  },
+  {
+   "tx": "Lower GI bleeding is triaged by **shock index**, heart rate divided by systolic pressure. Above 1 after resuscitation means an unstable bleed, which needs CT angiography then embolisation. Stable patients with an Oakland score of 8 or less can go home with urgent outpatient colonoscopy. Above 8, they are admitted. Urgent colonoscopy within 24 hours has not improved outcomes, so major stable bleeds get inpatient colonoscopy after preparation. Missing an upper source in a shocked patient with haematochezia is a key pitfall.",
+   "say": "Lower GI bleeding is triaged by shock index, heart rate divided by systolic pressure. Above 1 after resuscitation means an unstable bleed, which needs CT angiography then embolisation. Stable patients with an Oakland score of 8 or less can go home with urgent outpatient colonoscopy. Above 8, they are admitted. Urgent colonoscopy within 24 hours has not improved outcomes, so major stable bleeds get inpatient colonoscopy after preparation. Missing an upper source in a shocked patient with haematochezia is a key pitfall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Shock index above 1"
+     },
+     {
+      "id": "b",
+      "label": "CT angiography"
+     },
+     {
+      "id": "c",
+      "label": "Embolise if positive"
+     },
+     {
+      "id": "d",
+      "label": "Stable: Oakland score"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d",
+      "if stable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before any **non-urgent endoscopy**, sort the planned procedure by **bleeding risk**. Low-risk examinations such as gastroscopy and colonoscopy usually go ahead on single or dual antiplatelets. The **DOAC** is held on the day of the procedure, and warfarin needs an **INR** within the therapeutic range. High-risk work, including **polypectomy**, **sphincterotomy** and **variceal ligation**, needs a planned hold. Urgent life-saving endoscopy should not wait for drug washout.",
+   "say": "Before any non-urgent endoscopy, sort the planned procedure by bleeding risk. Low-risk examinations, such as gastroscopy and colonoscopy, usually go ahead on single or dual antiplatelets. Hold the DOAC for the day of the procedure, and check that warfarin gives an INR within the therapeutic range. High-risk work, including polypectomy, sphincterotomy and variceal ligation, needs a planned hold. Warfarin is stopped five days beforehand, with the INR confirmed under 1.5. Urgent life-saving endoscopy should not wait for antithrombotic washout. Anticoagulation is generally resumed after the procedure, not abandoned.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antithrombotic",
+     "Before high-risk procedure",
+     "Restart"
+    ],
+    "rows": [
+     [
+      "Warfarin",
+      "Stop 5 days before; INR under 1.5 on the day",
+      "After the procedure is complete"
+     ],
+     [
+      "DOAC",
+      "Hold 3 days ahead; adjust for renal clearance",
+      "Resume 2 to 3 days later"
+     ],
+     [
+      "Dual antiplatelets",
+      "Defer if possible; otherwise keep aspirin and hold the P2Y12 agent 7 days",
+      "Restart P2Y12 agent 1 to 2 days after"
+     ],
+     [
+      "Aspirin alone",
+      "Continue",
+      "Not needed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-clinical-protocols-antithrombotics-gi-bleeding-endoscopy-india",
+  "kb-clinical-protocols-lower-gi-bleeding",
+  "kb-clinical-protocols-upper-gi-bleeding-nonvariceal"
+ ],
+ "refs": [
+  "Antiplatelets and anticoagulants in GI bleeding and endoscopy (ISG and CSI, India)",
+  "Acute upper GI bleeding (non-variceal) guidance (ESGE 2021)",
+  "Acute lower GI bleeding guidance (ACG 2023; BSG 2019)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 2497,
+  "itemN": 11
+ }
+}

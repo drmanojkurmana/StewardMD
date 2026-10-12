@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "module": "ahm-chest-pain",
+ "subject": "adult-health-medicine",
+ "title": "Chest pain assessment in adults",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Chest pain has many causes, so the first task is to separate **life-threatening** causes from benign ones. Take a careful history of the **character** of the pain, its **radiation**, its **timing**, and any **relieving or aggravating factors**. Check vital signs, **oxygen saturation** and an **electrocardiogram** promptly. Sudden tearing pain spreading to the back raises concern for **aortic dissection**. Central crushing pain with ECG changes suggests **acute coronary syndrome**.",
+   "say": "Chest pain has many causes, so the first job is to separate life-threatening causes from benign ones. Ask about the character of the pain, where it radiates, its timing, and any relieving or aggravating factors. Check vital signs, oxygen saturation and an electrocardiogram promptly. Sudden tearing pain spreading to the back should prompt urgent thought about aortic dissection. Central crushing pain with ECG changes points towards acute coronary syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Suggests",
+     "Think first"
+    ],
+    "rows": [
+     [
+      "Central crushing pain, sweating",
+      "Ischaemia",
+      "Acute coronary syndrome"
+     ],
+     [
+      "Sudden tearing, radiates to back",
+      "Vessel wall injury",
+      "Aortic dissection"
+     ],
+     [
+      "Pleuritic, sudden breathlessness",
+      "Pulmonary vascular problem",
+      "Pulmonary embolism"
+     ],
+     [
+      "Pain worse lying flat, eases sitting forward",
+      "Pericardial inflammation",
+      "Acute pericarditis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute coronary syndrome includes **ST elevation myocardial infarction**, which needs reperfusion within a defined time. Give aspirin promptly unless contraindicated, and arrange urgent transfer if the cardiac centre is far away. Do not wait for troponin before starting treatment when the ECG shows ST elevation. Serial troponin and ECGs are used when the first test is normal but suspicion remains high.",
+   "say": "Acute coronary syndrome includes ST elevation myocardial infarction, which needs reperfusion within a defined time. Give aspirin promptly unless contraindicated, and arrange urgent transfer if the cardiac centre is far away. Do not wait for troponin before starting treatment when the ECG shows ST elevation. Serial troponin and ECGs are used when the first test is normal but suspicion remains high.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chest pain with ECG"
+     },
+     {
+      "id": "b",
+      "label": "ST elevation?"
+     },
+     {
+      "id": "c",
+      "label": "Aspirin and transfer"
+     },
+     {
+      "id": "d",
+      "label": "Serial troponin and ECG"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aortic dissection is a time-critical diagnosis. A **blood pressure difference** between arms, a widened mediastinum and tearing pain raise suspicion. A normal ECG or raised troponin does not exclude it. **CT angiography** of the aorta is the appropriate next investigation when dissection is suspected. Control blood pressure and refer urgently to a cardiothoracic centre.",
+   "say": "Aortic dissection is a time critical diagnosis. A blood pressure difference between the arms, a widened mediastinum and tearing pain raise suspicion. A normal ECG or a raised troponin does not exclude it. CT angiography of the aorta is the appropriate next investigation when dissection is suspected. Control blood pressure and refer urgently to a cardiothoracic centre.",
+   "vis": null
+  },
+  {
+   "tx": "Pericarditis typically causes sharp central chest pain that is **positional**, easing when the patient sits forward and worsening when lying flat. Look for a recent viral illness, low-grade fever and a **pericardial friction rub**. The ECG often shows widespread concave ST elevation with PR depression. A mildly raised troponin suggests myocardial involvement, which needs careful follow up. Management is anti-inflammatory treatment guided by local protocols, with cardiology input where needed.",
+   "say": "Pericarditis typically causes sharp central chest pain that is positional, easing when the patient sits forward and worsening when lying flat. Look for a recent viral illness, low grade fever and a pericardial friction rub. The ECG often shows widespread concave ST elevation with PR depression. A mildly raised troponin suggests myocardial involvement, which needs careful follow up. Management is anti inflammatory treatment guided by local protocols, with cardiology input where needed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Clue in pericarditis"
+    ],
+    "rows": [
+     [
+      "Pain",
+      "Sharp, central, positional"
+     ],
+     [
+      "History",
+      "Recent viral illness"
+     ],
+     [
+      "Examination",
+      "Pericardial friction rub"
+     ],
+     [
+      "ECG",
+      "Widespread concave ST elevation, PR depression"
+     ],
+     [
+      "Troponin",
+      "Mildly raised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-cardiac causes are common once life-threatening causes are excluded. **Musculoskeletal pain** is reproducible by pressing on the chest wall and worsens with movement or breathing. **Oesophageal causes**, such as reflux or spasm, may relate to meals or swallowing. Reassess if pain changes, new ECG changes appear, or the patient becomes unwell.",
+   "say": "Non cardiac causes are common once life threatening causes are excluded. Musculoskeletal pain is reproducible by pressing on the chest wall and worsens with movement or breathing. Oesophageal causes, such as reflux or spasm, may relate to meals or swallowing. Reassess if the pain changes, new ECG changes appear, or the patient becomes unwell.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Chest pain of recent onset: assessment and diagnosis (CG95)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

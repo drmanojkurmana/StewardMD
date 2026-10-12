@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "mbsci-genetics",
+ "subject": "mrcp-basic-science",
+ "title": "Molecular basis of inherited disease: patterns of inheritance and mechanisms",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Most inherited disease follows a **Mendelian pattern**: autosomal dominant, autosomal recessive, or X-linked. Autosomal dominant conditions affect heterozygotes in every generation and often reflect a loss-of-function or gain-of-function protein effect. Autosomal recessive disease needs two defective alleles, so carriers are usually unaffected. X-linked recessive disease affects mostly males, who carry one X chromosome, and it passes from carrier mothers to sons while affected fathers pass it to all daughters.",
+   "say": "Most inherited disease follows a Mendelian pattern: autosomal dominant, autosomal recessive, or X-linked. Autosomal dominant conditions affect heterozygotes in every generation and often reflect a loss-of-function or gain-of-function protein effect. Autosomal recessive disease needs two defective alleles, so carriers are usually unaffected. X-linked recessive disease affects mostly males, who carry one X chromosome. It passes from carrier mothers to sons, while affected fathers pass it to all daughters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Key feature",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Autosomal dominant",
+      "One allele affects, every generation",
+      "Marfan syndrome"
+     ],
+     [
+      "Autosomal recessive",
+      "Two alleles needed, carriers silent",
+      "Cystic fibrosis"
+     ],
+     [
+      "X-linked recessive",
+      "Mostly males, no male to male spread",
+      "Duchenne muscular dystrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mitochondrial DNA is inherited almost entirely from the mother, because the **oocyte** supplies the cytoplasm of the zygote. Affected men cannot pass mtDNA variants to their children, while affected women can pass them to all of their children. Because a cell carries many mitochondria, a mixture of mutant and normal copies, called **heteroplasmy**, explains variable severity within families.",
+   "say": "Mitochondrial DNA is inherited almost entirely from the mother, because the oocyte supplies the cytoplasm of the zygote. Affected men cannot pass mitochondrial variants to their children, while affected women can pass them to all of their children. Because a cell carries many mitochondria, a mixture of mutant and normal copies, called heteroplasmy, explains variable severity within families.",
+   "vis": null
+  },
+  {
+   "tx": "Some disorders are caused by **trinucleotide repeat expansion**, where a short repeat sequence grows across generations. Huntington disease uses a CAG repeat in HTT, and fragile X uses CGG repeats in FMR1. Repeats above threshold are unstable during meiosis, so onset becomes earlier and severity greater in successive generations, which is called **anticipation**.",
+   "say": "Some disorders are caused by trinucleotide repeat expansion, where a short repeat sequence grows across generations. Huntington disease uses a CAG repeat in the HTT gene, and fragile X uses CGG repeats in the FMR1 gene. Repeats above threshold are unstable during meiosis, so onset becomes earlier and severity greater in successive generations. This is called anticipation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Normal repeat"
+     },
+     {
+      "id": "b",
+      "label": "Premutation"
+     },
+     {
+      "id": "c",
+      "label": "Full expansion"
+     },
+     {
+      "id": "d",
+      "label": "Earlier onset"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Genomic imprinting** means only one parental copy of a gene is active. In the 15q11-q13 region, paternal genes drive Prader-Willi syndrome when lost, while loss of maternal **UBE3A** causes Angelman syndrome. Parent-of-origin matters, so the same deletion can produce two different phenotypes depending on which chromosome carries it.",
+   "say": "Genomic imprinting means only one parental copy of a gene is active. In the 15q11-q13 region, loss of paternal genes causes Prader-Willi syndrome, while loss of maternal UBE3A causes Angelman syndrome. Parent of origin matters, so the same deletion can produce two different phenotypes depending on which chromosome carries it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prader-Willi",
+     "points": [
+      "Paternal deletion",
+      "Hypotonia then hyperphagia",
+      "Obesity and learning difficulty"
+     ]
+    },
+    "right": {
+     "title": "Angelman",
+     "points": [
+      "Maternal deletion",
+      "Ataxia and seizures",
+      "Inappropriate happy demeanour"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tumour suppressor disease follows **Knudson's two-hit model**. A germline pathogenic variant in genes such as RB1 or MLH1 is present in every cell, so only one somatic event is needed to inactivate the normal allele. This explains early-onset, bilateral retinoblastoma and the microsatellite instability seen in Lynch syndrome tumours.",
+   "say": "Tumour suppressor disease follows Knudson's two-hit model. A germline pathogenic variant in genes such as RB1 or MLH1 is present in every cell, so only one somatic event is needed to inactivate the normal allele. This explains early-onset, bilateral retinoblastoma and the microsatellite instability seen in Lynch syndrome tumours.",
+   "vis": null
+  },
+  {
+   "tx": "In practical prescribing, **TPMT** testing is done before starting azathioprine in patients with inflammatory bowel disease. Low enzyme activity shunts the drug towards toxic metabolites, risking severe myelosuppression. Genotype or enzyme testing identifies patients who need dose reduction or an alternative drug before treatment begins.",
+   "say": "In practical prescribing, TPMT testing is done before starting azathioprine in patients with inflammatory bowel disease. Low enzyme activity shunts the drug towards toxic metabolites, risking severe myelosuppression. Genotype or enzyme testing identifies patients who need dose reduction or an alternative drug before treatment begins.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Nussbaum RL, McInnes RR, Willard HF. Thompson and Thompson Genetics in Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 18
+ }
+}

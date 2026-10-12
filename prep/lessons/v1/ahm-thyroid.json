@@ -1,0 +1,157 @@
+{
+ "v": 1,
+ "module": "ahm-thyroid",
+ "subject": "adult-health-medicine",
+ "title": "Thyroid disorders: high-yield principles for NEET-PG, INI-CET and FMGE",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Thyrotoxicosis means excess circulating thyroid hormone, whatever the cause. Common causes include **Graves disease**, toxic nodules, and **thyroiditis**. Graves disease is an autoimmune disorder in which **TSH receptor antibodies** stimulate the gland. Clinically, look for a diffuse non-tender goitre, eye signs and a high heart rate. Biochemistry is typically a suppressed TSH with raised free T4.",
+   "say": "Thyrotoxicosis means excess circulating thyroid hormone, whatever the cause. Common causes include Graves disease, toxic nodules, and thyroiditis. Graves disease is an autoimmune disorder in which TSH receptor antibodies stimulate the gland. Clinically, look for a diffuse non-tender goitre, eye signs and a high heart rate. Biochemistry is typically a suppressed TSH with raised free T4.",
+   "vis": null
+  },
+  {
+   "tx": "Distinguish causes by the **radioiodine uptake** scan. Graves disease and toxic nodules show high uptake, with focal uptake in a hyperfunctioning nodule in the latter. **Painful thyroiditis** and amiodarone-induced destructive thyroiditis show low uptake, because preformed hormone is released rather than newly made. Thyrotoxicosis with a low uptake is therefore not treated with antithyroid drugs.",
+   "say": "Distinguish causes by the radioiodine uptake scan. Graves disease and toxic nodules show high uptake, with focal uptake in a hyperfunctioning nodule in the latter. Painful thyroiditis and amiodarone-induced destructive thyroiditis show low uptake, because preformed hormone is released rather than newly made. Thyrotoxicosis with a low uptake is therefore not treated with antithyroid drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Uptake",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Graves disease",
+      "High, diffuse",
+      "Eye signs, TRAb positive"
+     ],
+     [
+      "Toxic nodule",
+      "High, focal",
+      "Solitary or multinodular"
+     ],
+     [
+      "Subacute thyroiditis",
+      "Low",
+      "Painful, raised ESR"
+     ],
+     [
+      "Amiodarone thyroiditis",
+      "Low",
+      "Recent drug exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Start an **antithyroid drug** such as **carbimazole**, which the body converts to **methimazole**. This blocks **thyroid peroxidase**, so iodine cannot be built into hormone, and synthesis falls over several weeks. Add a **beta blocker** such as propranolol for fast relief of palpitations and tremor, as its effect begins within hours. Carbimazole is the usual first choice in India.",
+   "say": "Start an antithyroid drug such as carbimazole, which the body converts to methimazole. This blocks thyroid peroxidase, so iodine cannot be built into hormone, and synthesis falls over several weeks. Add a beta blocker such as propranolol for fast relief of palpitations and tremor, since its effect begins within hours. Carbimazole is the usual first choice in India.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Carbimazole"
+     },
+     {
+      "id": "b",
+      "label": "Methimazole"
+     },
+     {
+      "id": "c",
+      "label": "Blocks TPO"
+     },
+     {
+      "id": "d",
+      "label": "Less hormone"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thyroid storm** is a rare but **life-threatening** decompensation of hyperthyroidism, marked by fever, fast heart rate, agitation and vomiting. Start treatment on clinical suspicion rather than waiting for laboratory confirmation. Block new hormone synthesis first with a **thionamide**, then give iodine so it does not feed fresh hormone production. Add a **beta blocker** to control adrenergic symptoms, and consider corticosteroids to reduce conversion of T4 to T3. Ask about recent omission of antithyroid tablets.",
+   "say": "Thyroid storm is a rare but life-threatening flare of hyperthyroidism. It shows up as fever, a fast heart rate, agitation and vomiting. Start treatment on clinical suspicion rather than waiting for lab confirmation. Give a thionamide first to block new hormone synthesis, then iodine, so it does not feed fresh hormone production. Add a beta blocker to control adrenergic symptoms, and consider corticosteroids to reduce conversion of T4 to T3. Always ask whether the patient has recently stopped their antithyroid tablets, because that is a common trigger.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Suspect storm",
+      "sub": "Clinical diagnosis"
+     },
+     {
+      "id": "n2",
+      "label": "Thionamide first",
+      "sub": "Blocks new hormone"
+     },
+     {
+      "id": "n3",
+      "label": "Iodine next",
+      "sub": "After thionamide"
+     },
+     {
+      "id": "n4",
+      "label": "Beta blocker and steroid",
+      "sub": "Symptom and conversion control"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid nodules need assessment for malignancy. A **firm solitary nodule** with normal TSH and suspicious ultrasound features, such as an irregular margin or **microcalcification**, warrants **ultrasound-guided fine needle aspiration** for cytology. Scintigraphy is used when TSH is suppressed, to check whether a nodule is autonomous. Imaging with contrast CT is not the first-line test for thyroid nodule assessment.",
+   "say": "Thyroid nodules need assessment for malignancy. A firm solitary nodule with normal TSH and suspicious ultrasound features, such as an irregular margin or microcalcification, warrants ultrasound-guided fine needle aspiration for cytology. Scintigraphy is used when TSH is suppressed, to check whether a nodule is autonomous. Imaging with contrast CT is not the first-line test for thyroid nodule assessment.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Davidson's Principles and Practice of Medicine",
+  "NICE guideline NG145 Thyroid disease"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

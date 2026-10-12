@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "mh-child",
+ "subject": "mental-health",
+ "title": "Child and adolescent psychiatry: core high-yield principles",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Child and adolescent psychiatry covers emotional, behavioural and developmental disorders from infancy to late adolescence. Presentations often differ from adults, so **developmental stage** shapes the history and the assessment. Information usually comes from parents, teachers and the child together. Many disorders are first recognised at school or in primary care, so cross-setting information matters.",
+   "say": "Child and adolescent psychiatry covers emotional, behavioural and developmental disorders from infancy to late adolescence. Presentations often differ from adults, so developmental stage shapes the history and the assessment. Information usually comes from parents, teachers and the child together. Many disorders are first recognised at school or in primary care, so information from several settings matters.",
+   "vis": null
+  },
+  {
+   "tx": "Eating disorders in adolescents can be life threatening, and **medical instability** must be checked first. Look for bradycardia, orthostatic dizziness, electrolyte disturbance and rapid weight loss. Low phosphate or potassium signals a risk of **refeeding syndrome** once intake increases. Low mood may be a feature of the illness rather than a separate disorder.",
+   "say": "Eating disorders in adolescents can be life threatening, so medical instability must be checked first. Look for slow heart rate, dizziness on standing, electrolyte disturbance and rapid weight loss. Low phosphate or potassium signals a risk of refeeding syndrome once intake increases. Low mood may be a feature of the illness rather than a separate disorder.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Warning sign",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Bradycardia",
+      "Reduced cardiac output and metabolic slowing"
+     ],
+     [
+      "Low phosphate",
+      "Risk of refeeding syndrome"
+     ],
+     [
+      "Low potassium",
+      "Arrhythmia risk"
+     ],
+     [
+      "Orthostatic dizziness",
+      "Volume depletion and autonomic change"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Some medicines carry specific risks in young people. Citalopram can prolong the **QT interval**, and this risk rises with low **potassium** or **magnesium**, vomiting or syncope. Such a combination calls for stopping the drug, correcting electrolytes and repeating the ECG. Antidepressant prescribing in younger patients also needs close monitoring for **suicidal thoughts**, particularly during early treatment and after dose changes.",
+   "say": "Some medicines carry specific risks in young people. Citalopram can prolong the QT interval, and this risk rises with low potassium or magnesium, vomiting or fainting. Such a combination calls for stopping the drug, correcting electrolytes and repeating the ECG. Antidepressant prescribing in younger patients also needs close monitoring for suicidal thoughts, particularly during early treatment and after dose changes.",
+   "vis": null
+  },
+  {
+   "tx": "When a child discloses abuse, the clinician acts at the point of disclosure. A mandated reporter must pass the concern to the **statutory child protection authority** without waiting for corroboration or parental agreement. Supportive parents do not remove the duty. Investigation belongs to the authority, not to the reporter, and the reporter should document the disclosure in the child's own words.",
+   "say": "When a child discloses abuse, the clinician acts at the point of disclosure. A mandated reporter must pass the concern to the statutory child protection authority without waiting for corroboration or parental agreement. Supportive parents do not remove the duty. Investigation belongs to the authority, not to the reporter, and the reporter should record the disclosure in the child's own words.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Disclosure or suspicion"
+     },
+     {
+      "id": "b",
+      "label": "Report today to authority"
+     },
+     {
+      "id": "c",
+      "label": "Authority investigates"
+     },
+     {
+      "id": "d",
+      "label": "Protection plan"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Self-harm and hopelessness in an adolescent signal raised **suicide risk**, even without a stated plan. Access to lethal means, such as firearms and medicines at home, should be assessed and restricted. When specialist care is far away, urgent assessment and safety planning come first. Routine follow-up alone is not enough in this situation.",
+   "say": "Self-harm and hopelessness in an adolescent signal raised suicide risk, even without a stated plan. Access to lethal means, such as firearms and medicines at home, should be assessed and restricted. When specialist care is far away, urgent assessment and safety planning come first. Routine follow-up alone is not enough in this situation.",
+   "vis": null
+  },
+  {
+   "tx": "Several childhood conditions present with silence or poor speech but differ in cause. **Selective mutism** is an anxiety-related failure to speak in certain settings, while language and cognition are normal. Autism involves social communication deficits across settings and restricted or repetitive behaviours. Global developmental delay affects many domains, and receptive language disorder affects understanding.",
+   "say": "Several childhood conditions present with silence or poor speech but differ in cause. Selective mutism is an anxiety-related failure to speak in certain settings, while language and cognition are normal. Autism involves social communication deficits across settings and restricted or repetitive behaviours. Global developmental delay affects many domains, and receptive language disorder affects understanding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Selective mutism",
+     "points": [
+      "Speaks normally at home",
+      "Silent only in specific settings",
+      "Normal language and cognition",
+      "Anxiety-driven"
+     ]
+    },
+    "right": {
+     "title": "Autism spectrum disorder",
+     "points": [
+      "Social deficits across settings",
+      "Restricted or repetitive behaviours",
+      "Differences in communication style",
+      "Neurodevelopmental onset"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG69: Eating disorders: recognition and treatment",
+  "NICE guideline NG225: Self-harm: assessment, management and preventing recurrence"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

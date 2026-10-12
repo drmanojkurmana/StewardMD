@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "module": "mcc-ac-chole",
+ "subject": "mcc-acute-care",
+ "title": "Cholecystitis and cholangitis: recognising and managing biliary sepsis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Acute cholecystitis is inflammation of the gallbladder, usually caused by a **stone obstructing the cystic duct**. Patients have right upper quadrant pain, fever and a positive Murphy sign. Ultrasound shows gallstones, a thickened wall and pericholecystic fluid. Early laparoscopic cholecystectomy, within seven days of onset, is the definitive treatment for fit patients. Antibiotics are adjuncts, not a substitute for removing the gallbladder.",
+   "say": "Acute cholecystitis is inflammation of the gallbladder, usually caused by a stone obstructing the cystic duct. Patients have right upper quadrant pain, fever and a positive Murphy sign. Ultrasound shows gallstones, a thickened wall and pericholecystic fluid. Early laparoscopic cholecystectomy, within seven days of onset, is the definitive treatment for fit patients. Antibiotics are adjuncts, not a substitute for removing the gallbladder.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Pain",
+      "Constant right upper quadrant pain over hours"
+     ],
+     [
+      "Examination",
+      "Positive Murphy sign and fever"
+     ],
+     [
+      "Ultrasound",
+      "Stones, wall thickening, pericholecystic fluid"
+     ],
+     [
+      "Bile duct",
+      "Usually normal in uncomplicated disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute cholangitis is infection of an **obstructed biliary tree**. The classic triad is fever, jaundice and right upper quadrant pain. Adding confusion and hypotension gives Reynolds pentad, which signals severe disease. Raised intraductal pressure drives bacteraemia. The Tokyo Guidelines grade severity and guide urgency of drainage. Blood cultures and early antibiotics are started before decompression.",
+   "say": "Acute cholangitis is infection of an obstructed biliary tree. The classic triad is fever, jaundice and right upper quadrant pain. Adding confusion and hypotension gives Reynolds pentad, which signals severe disease. Raised intraductal pressure drives bacteraemia. The Tokyo Guidelines grade severity and guide urgency of drainage. Blood cultures and early antibiotics are started before decompression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bile duct obstruction"
+     },
+     {
+      "id": "b",
+      "label": "Raised intraductal pressure"
+     },
+     {
+      "id": "c",
+      "label": "Bacteraemia"
+     },
+     {
+      "id": "d",
+      "label": "Sepsis and shock"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In severe cholangitis with shock, the priority is **urgent biliary decompression**, usually by endoscopic retrograde cholangiopancreatography with stent or stone clearance. Fluids and broad-spectrum antibiotics run alongside. Percutaneous transhepatic drainage is the alternative when endoscopy fails. Cholecystectomy is deferred until the patient recovers. Gallbladder drainage alone does not relieve a blocked common bile duct.",
+   "say": "In severe cholangitis with shock, the priority is urgent biliary decompression, usually by endoscopic retrograde cholangiopancreatography with stent or stone clearance. Fluids and broad-spectrum antibiotics run alongside. Percutaneous transhepatic drainage is the alternative when endoscopy fails. Cholecystectomy is deferred until the patient recovers. Gallbladder drainage alone does not relieve a blocked common bile duct.",
+   "vis": null
+  },
+  {
+   "tx": "In cholecystitis, **empirical antibiotics** should cover Enterobacterales and anaerobes, since biliary infection is usually polymicrobial. Ceftriaxone with metronidazole is a reasonable regimen in a patient without organ failure. Indian practice often uses similar Gram-negative and anaerobic cover, adjusted to local antibiogram. Cultures guide narrowing once results return.",
+   "say": "In cholecystitis, empirical antibiotics should cover Enterobacterales and anaerobes, since biliary infection is usually polymicrobial. Ceftriaxone with metronidazole is a reasonable regimen in a patient without organ failure. Indian practice often uses similar Gram-negative and anaerobic cover, adjusted to local antibiogram. Cultures guide narrowing once results return.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cholecystitis",
+     "points": [
+      "Usually polymicrobial",
+      "Gram-negative and anaerobic cover",
+      "Narrow once cultures return"
+     ]
+    },
+    "right": {
+     "title": "Cholangitis",
+     "points": [
+      "Biliary and blood cultures",
+      "Broad cover with urgent drainage",
+      "Escalate if shock persists"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gallbladder **perforation or septic shock** from an abdominal source is a surgical emergency. Antibiotics cannot sterilise a collection or a perforated viscus. Urgent surgical consultation is needed for source control, either open or laparoscopic surgery or percutaneous drainage if the patient is too unwell. Asymptomatic gallstones with normal wall and no fluid, by contrast, need no urgent action.",
+   "say": "Gallbladder perforation or septic shock from an abdominal source is a surgical emergency. Antibiotics cannot sterilise a collection or a perforated viscus. Urgent surgical consultation is needed for source control, either open or laparoscopic surgery or percutaneous drainage if the patient is too unwell. Asymptomatic gallstones with normal wall and no fluid, by contrast, need no urgent action.",
+   "vis": null
+  },
+  {
+   "tx": "Symptomatic **biliary colic** from gallstones is an indication for elective laparoscopic cholecystectomy. Incidental gallstones in an asymptomatic patient with normal liver tests and a normal duct usually need only reassurance and warning advice. Ultrasound and liver function tests are the first-line investigations, and MRCP is used when duct stones are suspected.",
+   "say": "Symptomatic biliary colic from gallstones is an indication for elective laparoscopic cholecystectomy. Incidental gallstones in an asymptomatic patient with normal liver tests and a normal duct usually need only reassurance and warning advice. Ultrasound and liver function tests are the first-line investigations, and MRCP is used when duct stones are suspected.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Incidental stones, no symptoms",
+      "Reassure and advise"
+     ],
+     [
+      "Recurrent biliary colic",
+      "Elective cholecystectomy"
+     ],
+     [
+      "Suspected duct stone",
+      "MRCP then ERCP if needed"
+     ],
+     [
+      "Cholangitis with shock",
+      "Urgent decompression"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Tokyo Guidelines 2018: diagnostic criteria and severity grading of acute cholangitis and cholecystitis (Kiriyama et al., Journal of Hepato-Biliary-Pancreatic Sciences)",
+  "NICE guideline NG104: Gallstone disease, diagnosis and management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}
