@@ -62,3 +62,6 @@ Lessons: `large-title.js` must retry a failed setup (a screen still animating in
 - `test/run-premium-motion-ui.mjs` - the REAL app via index.html, ~60 checks (round 1 + 2). The Drug Database
   waits on network calls that are slow in some sandboxes: the test polls (`waitFor`), never fixed sleeps. visualViewport is stubbed (no keyboard in headless). Flicks are dispatched
   in-page (CDP round trips are ~70ms, too slow to be a flick).
+
+## Touch targets (audit 2026-10-12)
+The home header icons are 34x36 (redesign-system.css `.rnav-head .rds-icon-btn`, deliberately narrow so five fit) and the legal footer links were 14px tall. Their HIT area now grows with an invisible `::before` (`::before` because the bell dot owns `::after`); visible size and layout unchanged. Adjacent header icons share the gap, so a middle icon is about 37-42pt wide, not a full 44.

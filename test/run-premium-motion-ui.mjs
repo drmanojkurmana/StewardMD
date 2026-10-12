@@ -259,6 +259,13 @@ try {
   ok((await ev("return localStorage.getItem('smd_sound')")) === "1" && (await ev("return document.getElementById('hvSounds').classList.contains('on')")), "the switch turns sounds on");
   await ev("localStorage.removeItem('smd_sound');return 1");
 
+  // 16. Touch targets: the home header icons and legal links are hit beyond their visible box
+  await ev("var sc=document.getElementById('hvScrim');if(sc)sc.click();return 1"); await sleep(900);   // close the Settings sheet from the sound test
+  await ev("document.querySelector('.v3-main').scrollTop=0;return 1"); await sleep(300);
+  ok(await ev(`var b=document.querySelector('#homeV2 .rnav-head .rds-icon-btn'),r=b.getBoundingClientRect(),cy=r.top+r.height/2;
+    return [document.elementFromPoint(r.left-4,cy),document.elementFromPoint(r.left+r.width/2,r.top-3),document.elementFromPoint(r.left+r.width/2,r.bottom+3)].every(function(e){return e&&e.closest('.rds-icon-btn')===b})`), "the first header icon is hit 4px beyond its visible box (touch target >= 44pt)");
+  ok(await ev(`var a=document.querySelector('#homeV2 .v4-legal a');a.scrollIntoView({block:'center'});var r=a.getBoundingClientRect();return document.elementFromPoint(r.left+r.width/2,r.top-12)===a&&document.elementFromPoint(r.left+r.width/2,r.bottom+12)===a`), "legal footer links have a 44pt tall hit area");
+
   // 8. Live Activity bridge (stubbed iOS plugin)
   await ev(`window.__la=[];window.Capacitor={isNativePlatform:function(){return true},getPlatform:function(){return 'ios'},Plugins:{WatchBridge:{
     clinicalActivityUpsert:function(p){__la.push('up:'+p.key+':'+p.title);return Promise.resolve({started:true})},

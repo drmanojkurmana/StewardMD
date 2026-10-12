@@ -1072,3 +1072,12 @@ button:active, [role="button"]:active, .maik-chip:active, .smd-nav-btn:active, .
   button:active, [role="button"]:active, .maik-chip:active, .smd-nav-btn:active, .ot-btn:active { transform: none; }
 }
 .maik-stopped { margin-top: 6px; font: 600 11px/1.4 var(--sans, system-ui); color: var(--slate-soft, #5a7184); letter-spacing: .02em; }
+
+/* Touch targets (2026-10-12 audit): the home header icons are 34x36 and the legal footer links 14px tall,
+   under the 44pt minimum. Grow the HIT area with an invisible ::before; the visible size and layout are
+   unchanged. ::before because the bell's unread dot already owns ::after. Footer links grow vertically
+   only so neighbouring links never overlap. */
+#homeV2.rnav .rnav-head .rds-icon-btn { position: relative; }
+#homeV2.rnav .rnav-head .rds-icon-btn::before { content: ""; position: absolute; inset: -4px -5px; }
+#homeV2 .v4-legal a { position: relative; display: inline-block; }
+#homeV2 .v4-legal a::before { content: ""; position: absolute; inset: -15px 0; }
