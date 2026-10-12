@@ -11723,3 +11723,10 @@ placeholders) instead of editing ~40 modules. Every action goes through the app'
 click, Refresh button, the row's inner buttons, a replayed click), so no second code path can drift.
 Long-press menus never add copy/share (PHI). Live Activities carry counts/tokens/timers only (Lock Screen
 is public). Native Live Activity Swift is uncompiled until the next native build. [[modules/Premium Motion]]
+
+## 2026-10-12 Premium motion round 2: Undo only for local restorable data; sounds off by default; no auto-fire swipes
+Owner: "Do all" (eight more). Choices that were not obvious: (1) Undo replaces a confirm() ONLY where a snapshot can
+restore the data exactly and nothing is on a server (antibiogram "remove from this device"); queue patient removal, unit
+removal, ECG wipes and follow-up deletes keep their confirmation. (2) Swipe actions reveal a row's own buttons and never
+fire one on a full swipe. (3) Sounds are synthesized, whisper-level and OFF until switched on in Settings. (4) The tab
+bar's tabs are launchers, so no "re-tap the active tab" or sliding indicator was built. [[modules/Premium Motion]]

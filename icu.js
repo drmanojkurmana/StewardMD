@@ -5608,6 +5608,7 @@
     var t = null, arr = _grpPtVM.tasks || []; for (var i = 0; i < arr.length; i++) if (arr[i].id === taskId) { t = arr[i]; break; }
     if (!t) return;
     var next = t.status === "pending" ? "progress" : t.status === "progress" ? "done" : "pending";
+    if (next === "done") { try { window.SMD_SOUND && SMD_SOUND.play("success"); } catch (e) {} }
     api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
     // Completing a task self-logs an author-stamped audit event (see the auto-timeline set).
     if (next === "done") { try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "task", title: "Task completed — " + (t.text || "task") }); } catch (e) {} }

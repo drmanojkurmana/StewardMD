@@ -88,3 +88,89 @@ test("live activity payloads are clipped and shaped (Lock Screen backstop)", () 
   assert.ok(p.endsAt > p.startedAt, "an end before the start is corrected");
   assert.equal(LA.sanitize({ key: "opd-queue", startedAt: 0 }).startedAt > 0, true);
 });
+
+// ---- round 2 ----
+const SW = require("../swipe-actions.js");
+const TB = require("../tab-bar.js");
+const AZ = require("../az-scrubber.js");
+const KB = require("../keyboard-aware.js");
+const BU = require("../blur-up.js");
+const LM = require("../launch-morph.js");
+const SN = require("../sound.js");
+const UN = require("../undo.js");
+
+test("swipe actions: only a left swipe opens; width capped; locks on 40% or flick; never fires by itself", () => {
+  assert.equal(SW.intent(-30, 4), "h");
+  assert.equal(SW.intent(30, 4), "v", "a right swipe on a closed row is not ours");
+  assert.equal(SW.intent(-10, 30), "v");
+  assert.equal(SW.intent(3, 3), null);
+  assert.equal(SW.trayWidth(1, 360), 76);
+  assert.equal(SW.trayWidth(3, 360), 223, "capped to 62% of the row");
+  assert.equal(SW.offset(-50, 152), -50);
+  assert.ok(SW.offset(-400, 152) < -152 && SW.offset(-400, 152) > -400, "rubber band past the tray");
+  assert.equal(SW.offset(20, 152), 0);
+  assert.equal(SW.shouldLock(-70, 0, 152), true);
+  assert.equal(SW.shouldLock(-20, 0, 152), false);
+  assert.equal(SW.shouldLock(-20, -900, 152), true);
+  assert.equal(SW.labelOf(" Call ", null, null), "Call");
+  assert.equal(SW.labelOf("", "Remove", null), "Remove");
+});
+
+test("tab bar: hides on a real scroll down, returns on up, always shown near the ends", () => {
+  assert.equal(TB.decide(200, 230, 2000, false), true);
+  assert.equal(TB.decide(230, 220, 2000, true), false);
+  assert.equal(TB.decide(230, 232, 2000, true), true, "jitter keeps the current state");
+  assert.equal(TB.decide(30, 60, 2000, false), false, "near the top it stays");
+  assert.equal(TB.decide(1900, 1980, 2000, true), false, "at the bottom it returns");
+});
+
+test("A-Z scrubber: index mapping and nearest available letter", () => {
+  assert.equal(AZ.indexAt(0, 0, 260, 26), 0);
+  assert.equal(AZ.indexAt(259, 0, 260, 26), 25);
+  assert.equal(AZ.indexAt(135, 0, 260, 26), 13);
+  assert.equal(AZ.indexAt(-50, 0, 260, 26), 0);
+  const have = Array(26).fill(true); have[12] = false;
+  assert.equal(AZ.nearest(12, have), 11);
+  assert.equal(AZ.nearest(5, Array(26).fill(false)), -1);
+});
+
+test("keyboard: overlap, scroll delta, bottom-bar detection", () => {
+  assert.equal(KB.overlap(844, 524, 0), 320);
+  assert.equal(KB.overlap(844, 844, 0), 0);
+  assert.equal(KB.overlap(844, 800, 44), 0);
+  assert.equal(KB.scrollDelta({ top: 100, bottom: 140 }, 0, 524, 12), 0, "already visible");
+  assert.ok(KB.scrollDelta({ top: 600, bottom: 640 }, 0, 524, 12) > 300, "a covered field scrolls up toward the middle");
+  assert.equal(KB.isBottomBar({ bottom: 844, width: 390, height: 64 }, 390, 844), true);
+  assert.equal(KB.isBottomBar({ bottom: 700, width: 390, height: 64 }, 390, 844), false);
+  assert.equal(KB.isBottomBar({ bottom: 844, width: 80, height: 64 }, 390, 844), false, "a FAB is not a bar");
+});
+
+test("blur-up skips icons and thumbnails", () => {
+  assert.equal(BU.shouldAnimate(1375, 900, 300), true);
+  assert.equal(BU.shouldAnimate(32, 32, 20), false);
+  assert.equal(BU.shouldAnimate(800, 600, 40), false);
+});
+
+test("launch morph maps the splash logo onto the header logo", () => {
+  const f = LM.fit({ left: 144, top: 310, width: 102 }, { left: 46, top: 18, width: 25 });
+  assert.equal(f.dx, -98); assert.equal(f.dy, -292);
+  assert.ok(Math.abs(f.s - 25 / 102) < 1e-9);
+});
+
+test("sounds: every sound is a whisper, short, and click-free", () => {
+  for (const [name, parts] of Object.entries(SN.SOUNDS)) {
+    for (const p of parts) {
+      assert.ok(p.g <= 0.07, name + " gain " + p.g);
+      assert.ok(p.d <= 0.4, name + " duration " + p.d);
+      assert.ok(p.f0 >= 150 && p.f0 <= 2000);
+    }
+  }
+  const e = SN.envelope(0.05, 0.1);
+  assert.ok(e.attack >= 0.003 && e.end < e.peak / 100);
+});
+
+test("undo needs both perform and restore, and a message", () => {
+  assert.equal(UN.ok({ message: "x", perform() {}, restore() {} }), true);
+  assert.equal(UN.ok({ message: "x", perform() {} }), false);
+  assert.equal(UN.ok({ perform() {}, restore() {} }), false);
+});

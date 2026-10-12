@@ -648,7 +648,15 @@
     }
     if (a === "view-local") { st.scope = "local"; st.spec = null; persist(); api.setTab("resistance"); return true; }
     if (a === "use-local") { try { if (window.HOSPITAL && window.HOSPITAL.setProfile) window.HOSPITAL.setProfile("LOCAL"); } catch (x) {} api.toast && api.toast("Your hospital is now the active profile"); return true; }
-    if (a === "del-local") { if (window.confirm && !window.confirm("Remove your hospital's antibiogram from this device?")) return true; S().localClear(); if (st.scope === "local") st.scope = null; api.render(); return true; }
+    if (a === "del-local") {
+      // Local-only and exactly restorable: remove now with an Undo card (undo.js) instead of asking first.
+      // Without the card (flag off / not loaded) the original confirmation stays.
+      var snap = S().localGet(), prevScope = st.scope;
+      var gone = function () { S().localClear(); if (st.scope === "local") st.scope = null; api.render(); };
+      if (snap && window.SMD_undo && SMD_undo.run({ message: "Antibiogram removed", detail: "From this device", perform: gone,
+            restore: function () { S().localSave(snap); st.scope = prevScope; api.render(); } })) return true;
+      if (window.confirm && !window.confirm("Remove your hospital's antibiogram from this device?")) return true; gone(); return true;
+    }
     return false;
   }
   function runImport(api) {

@@ -25,6 +25,8 @@ let msgId = 1; const pending = new Map(); let ws, sessionId; const exc = [];
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
+// The Drug Database waits on network calls that are slow or blocked in some environments: poll, never guess.
+const waitFor = async (expr, ms = 9000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(expr)) return true; await sleep(150); } return false; };
 const tab = (re) => ev(`[].slice.call(document.querySelectorAll('.rnav-tab')).filter(function(b){return ${re}.test(b.textContent)})[0].click(); return 1`);
 const sheetItem = (re) => ev(`[].slice.call(document.querySelectorAll('.hv-sheet button, .hv-sheet .hv-mi')).filter(function(b){return ${re}.test(b.textContent)})[0].click(); return 1`);
 const FASTDRAG = `window.__fastDrag=function(x,y0,y1,steps,ms){var t=document.elementFromPoint(x,y0);function T(y){return new Touch({identifier:7,target:t,clientX:x,clientY:y,pageX:x,pageY:y});}
@@ -40,9 +42,22 @@ try {
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
   await call("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
   await call("Page.enable"); await call("Runtime.enable");
+  // A returning user (home is revealed under the splash, no intro poster): the launch morph can run.
+  // A headless browser has no keyboard: stand in for visualViewport (installed before any page script) so the
+  // module's real listeners can be driven. Everything else about the app is untouched.
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: "try{localStorage.setItem('stewardmd_guest_used','1')}catch(e){}" +
+    "try{var f=new EventTarget();f.height=window.innerHeight;f.width=window.innerWidth;f.offsetTop=0;f.offsetLeft=0;f.pageTop=0;f.pageLeft=0;f.scale=1;Object.defineProperty(window,'visualViewport',{value:f,configurable:true});window.__vv=f;}catch(e){}" });
   await call("Page.navigate", { url: BASE });
   for (let i = 0; i < 80; i++) { if (await ev("return !!(window.SMD_SPRING && window.SMD_liveActivity && document.getElementById('homeV2'))")) break; await sleep(200); }
-  await sleep(2500);
+  const morph = { seen: false, hidden: false, endW: 0 };
+  for (let i = 0; i < 160; i++) {
+    const r = JSON.parse(await ev(`var cl=document.querySelector('img[aria-hidden=true][style*="2147483100"]');var h=document.querySelector('#homeV2 .rnav-brand img');return JSON.stringify({clone:!!cl,w:cl?Math.round(cl.getBoundingClientRect().width):0,hv:h?h.style.visibility:''})`));
+    if (r.clone) { morph.seen = true; morph.endW = r.w; }
+    if (r.hv === "hidden") morph.hidden = true;
+    if (morph.seen && !r.clone) break;
+    await sleep(60);
+  }
+  await sleep(300);
   await ev(`["introPoster","splash","accountGate","introOverlay","harrisonQuotePopup"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
   await sleep(600);
   await ev(FASTDRAG);
@@ -66,7 +81,8 @@ try {
   const r = JSON.parse(await ev(`var b=[].slice.call(document.querySelectorAll('.db-comp')).filter(function(b){return /Amiodarone/.test(b.textContent)})[0];var r=b.getBoundingClientRect();return JSON.stringify({x:r.left+r.width/2,y:r.top+r.height/2})`));
   await call("Input.dispatchMouseEvent", { type: "mousePressed", x: r.x, y: r.y, button: "left", clickCount: 1 });
   await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: r.x, y: r.y, button: "left", clickCount: 1 });
-  await sleep(1300);
+  await waitFor("return __vt.indexOf('finished')>0 && !!document.querySelector('.db-gen')");
+  await sleep(200);
   const vt = JSON.parse(await ev("return JSON.stringify(__vt)"));
   ok(vt[0] === "start" && vt.indexOf("finished") > 0, "tapping a row runs a view transition " + JSON.stringify(vt));
   ok(vt.some(s => s === "hero:Amiodarone"), "the row title morphs into the matching screen title");
@@ -75,7 +91,7 @@ try {
 
   // 3. Large title (back to the list)
   await ev("MEDDB.close();return 1"); await sleep(400);
-  await tab("/Drugs/"); await sleep(900); await sheetItem("/Drug Database/"); await sleep(2500);
+  await tab("/Drugs/"); await sleep(900); await sheetItem("/Drug Database/"); await waitFor("return !!document.querySelector('.db-bigt') && document.querySelectorAll('.db-comp').length>3");   // the list must be tall enough to scroll
   await ev("document.getElementById('dbBody').scrollTop=0;return 1"); await sleep(100);
   await ev("document.getElementById('dbBody').scrollTop=40;return 1"); await sleep(250);
   const lt = JSON.parse(await ev("var t=document.querySelector('.db-bigt'),b=document.querySelector('.db-top');return JSON.stringify({op:t?t.style.opacity:'none',tf:t?t.style.transform:'',sh:b?b.style.boxShadow:''})"));
@@ -128,6 +144,120 @@ try {
   await ev("[].filter.call(document.querySelectorAll('[role=menuitem]'),function(b){return b.textContent==='Call'})[0].click();return 1"); await sleep(400);
   ok((await ev("return window.__call||0")) === 1 && !(await ev("return !!document.querySelector('[role=menu]')")), "choosing an action presses the real control and closes");
   await ev("document.getElementById('__lp').remove();return 1");
+
+  // ---- round 2 ----
+  ok(await ev("return !!(window.SMD_SWIPE_SEAM && window.SMD_TABBAR_SEAM && window.SMD_AZ_SEAM && window.SMD_KB_SEAM && window.SMD_BLURUP_SEAM && window.SMD_MORPH_SEAM && window.SMD_SOUND && window.SMD_undo)"), "round 2 modules loaded from index.html");
+  ok(morph.seen && morph.hidden, "launch: the splash logo flies to the header logo (header logo hidden during the flight)");
+  ok(morph.endW > 0 && morph.endW < 60, "launch: it shrinks toward the header size (last seen width " + morph.endW + ")");
+  ok(await ev("return document.querySelector('#homeV2 .rnav-brand img').style.visibility===''"), "launch: the header logo is visible again afterwards");
+
+  // 9. Swipe actions
+  await ev(`window.__hDrag=function(sel,x0,x1,steps,ms){var t=document.querySelector(sel);var r=t.getBoundingClientRect();var y=r.top+20;var tg=document.elementFromPoint(x0,y);function T(x){return new Touch({identifier:9,target:tg,clientX:x,clientY:y,pageX:x,pageY:y});}
+    function fire(type,x){var tt=type==='touchend'?[]:[T(x)];tg.dispatchEvent(new TouchEvent(type,{bubbles:true,cancelable:true,touches:tt,targetTouches:tt,changedTouches:[T(x)]}));}
+    fire('touchstart',x0);var i=0;(function nx(){i++;if(i>steps){fire('touchend',x1);return;}fire('touchmove',x0+(x1-x0)*i/steps);setTimeout(nx,ms);})();};
+    var w=document.createElement('div');w.id='__sw';w.style.cssText='position:fixed;inset:0;z-index:30000;background:#f1f5f9;padding:80px 12px';
+    w.innerHTML='<div id="__r1" style="background:#fff;border-radius:12px;padding:12px 14px" onclick="window.__sopen=(window.__sopen||0)+1"><div style="font-weight:700">Bed 12</div><button onclick="event.stopPropagation();window.__scall=(window.__scall||0)+1">Call</button> <button title="Remove" onclick="event.stopPropagation();window.__srm=(window.__srm||0)+1">x</button></div>';
+    document.body.appendChild(w);return 1`);
+  await sleep(150);
+  await ev("__hDrag('#__r1',330,300,5,12);return 1"); await sleep(700);
+  ok(!(await ev("return !!document.querySelector('[role=toolbar]')")), "a short swipe snaps back, no tray");
+  await ev("__hDrag('#__r1',330,150,6,12);return 1"); await sleep(900);
+  ok((await ev("return [].map.call(document.querySelectorAll('[role=toolbar] button'),function(b){return b.textContent}).join('|')")) === "Call|Remove", "a long left swipe reveals the row's own actions");
+  ok((await ev("return (window.__sopen||0)+'/'+(window.__scall||0)+'/'+(window.__srm||0)")) === "0/0/0", "a swipe fires nothing by itself (no open, no call, no remove)");
+  await ev("[].filter.call(document.querySelectorAll('[role=toolbar] button'),function(b){return b.textContent==='Call'})[0].click();return 1"); await sleep(500);
+  ok((await ev("return window.__scall||0")) === 1 && !(await ev("return !!document.querySelector('[role=toolbar]')")), "tapping an action presses the real control and closes the tray");
+  await ev("document.getElementById('__sw').remove();return 1");
+
+  // 10. Tab bar + status tap
+  const tfv = () => ev("var b=document.querySelector('.rnav-tabbar');return b.style.transform");
+  await ev("document.querySelector('.v3-main').scrollTop=200;return 1"); await sleep(120);
+  await ev("document.querySelector('.v3-main').scrollTop=420;return 1"); await sleep(300);
+  ok(/translateY\(100%\)/.test(await tfv()), "scrolling down slides the tab bar away");
+  await ev("document.querySelector('.v3-main').scrollTop=380;return 1"); await sleep(300);
+  ok((await tfv()) === "", "scrolling up brings it back");
+  await ev("document.querySelector('.v3-main').scrollTop=700;return 1"); await sleep(300);
+  await ev("window.dispatchEvent(new Event('statusTap'));return 1"); await sleep(1000);
+  ok((await ev("return document.querySelector('.v3-main').scrollTop")) === 0, "the status-bar tap scrolls the list to the top");
+
+  // 11. A-Z scrubber (Drug Database)
+  await tab("/Drugs/"); await sleep(900); await sheetItem("/Drug Database/");
+  const STRIP = "var s=document.querySelector('div[aria-hidden=true][style*=\"z-index: 2147482200\"]');return !!s&&s.style.opacity==='1'";
+  await waitFor(STRIP);
+  ok(await ev("var s=document.querySelector('div[aria-hidden=true][style*=\"z-index: 2147482200\"]');return !!s&&s.style.opacity==='1'"), "the A-Z strip appears on the Drug Database");
+  await ev("window.__az=0;window.SMD_HAPTICS=Object.assign({},window.SMD_HAPTICS||{},{selection:function(){__az++}});return 1");
+  const sr = JSON.parse(await ev("var s=document.querySelector('div[aria-hidden=true][style*=\"z-index: 2147482200\"]').getBoundingClientRect();return JSON.stringify({x:s.left+11,top:s.top,h:s.height})"));
+  const ay = (L) => sr.top + 6 + (sr.h - 12) * ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(L) + 0.5) / 26;
+  await call("Input.dispatchMouseEvent", { type: "mousePressed", x: sr.x, y: ay("C"), button: "left", clickCount: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseMoved", x: sr.x, y: ay("M"), button: "left", buttons: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseMoved", x: sr.x, y: ay("M") + 1, button: "left", buttons: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: sr.x, y: ay("M"), button: "left", clickCount: 1 });
+  const gotM = await waitFor("var b=document.querySelector('.db-comp .db-comp-name');return !!b&&/^M/.test(b.textContent)", 12000);
+  ok((await ev("return __az")) >= 2, "sliding ticks a haptic per letter");
+  ok(gotM, "releasing on M shows the M molecules");
+  await ev("MEDDB.close();return 1"); await sleep(1300);
+  ok(await ev("var s=document.querySelector('div[aria-hidden=true][style*=\"z-index: 2147482200\"]');return s.style.opacity==='0'"), "the strip goes away with the screen");
+
+  // 12. Keyboard-aware (visualViewport stubbed above)
+  await ev(`var w=document.createElement('div');w.id='__kbw';w.style.cssText='position:fixed;inset:0;z-index:30000;background:#fff;overflow:auto';
+    w.innerHTML='<div style="height:1400px;position:relative"><input id="__kin" style="position:absolute;top:660px;left:20px;width:300px;height:40px"></div><div id="__kbar" style="position:fixed;left:0;right:0;bottom:0;height:64px;background:#0f766e"><button>Save</button></div>';
+    document.body.appendChild(w);document.getElementById('__kin').focus();return 1`);
+  await ev("__vv.height=innerHeight-320;__vv.dispatchEvent(new Event('resize'));return 1");
+  await sleep(1400);
+  const kb = JSON.parse(await ev("var r=document.getElementById('__kin').getBoundingClientRect();return JSON.stringify({v:document.documentElement.style.getPropertyValue('--smd-kb'),bottom:Math.round(r.bottom),vis:innerHeight-320,bar:document.getElementById('__kbar').style.transform})"));
+  ok(kb.v === "320px", "keyboard: --smd-kb is published (" + kb.v + ")");
+  ok(kb.bottom <= kb.vis - 10 && kb.bottom > 0, "keyboard: the covered field is scrolled into the visible area " + JSON.stringify(kb));
+  ok(/translate3d\(0px, -320px/.test(kb.bar), "keyboard: the pinned bar rides above the keyboard");
+  await ev("__vv.height=innerHeight;__vv.dispatchEvent(new Event('resize'));return 1");
+  await sleep(900);
+  ok((await ev("return document.getElementById('__kbar').style.transform")) === "" && (await ev("return document.documentElement.style.getPropertyValue('--smd-kb')")) === "0px", "keyboard: everything settles back when it closes");
+  await ev("document.getElementById('__kbar').style.transform='translateY(-5px)';__vv.height=innerHeight-320;__vv.dispatchEvent(new Event('resize'));return 1");
+  await sleep(1000);
+  ok((await ev("return document.getElementById('__kbar').style.transform")) === "translateY(-5px)", "keyboard: a bar that moves itself is left alone");
+  await ev("__vv.height=innerHeight;__vv.dispatchEvent(new Event('resize'));document.getElementById('__kbw').remove();return 1");
+
+  // 13. Undo card
+  await ev("window.__did=0;window.__undid=0;SMD_undo.run({message:'Removed',perform:function(){__did++},restore:function(){__undid++}});return 1"); await sleep(900);
+  const up = JSON.parse(await ev("var b=document.querySelector('[data-dn-action]').getBoundingClientRect();return JSON.stringify({x:b.left+b.width/2,y:b.top+b.height/2})"));
+  await call("Input.dispatchMouseEvent", { type: "mousePressed", x: up.x, y: up.y, button: "left", clickCount: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: up.x, y: up.y, button: "left", clickCount: 1 });
+  await sleep(300);
+  ok((await ev("return __did+'/'+__undid")) === "1/1", "Undo: performs now, the Undo button restores it");
+  await ev("localStorage.setItem('smd_undo','0');return 1");
+  ok((await ev("return SMD_undo.run({message:'x',perform:function(){},restore:function(){}})")) === false, "Undo: kill switch returns false so the caller keeps its confirm()");
+  await ev("localStorage.removeItem('smd_undo');return 1");
+
+  // 14. Blur-up
+  await call("Network.enable");
+  await call("Network.emulateNetworkConditions", { offline: false, latency: 700, downloadThroughput: 200000, uploadThroughput: 200000 });
+  await ev("var d=document.createElement('div');d.id='__bu';d.style.cssText='position:fixed;top:80px;left:10px;z-index:30000;background:#fff';document.body.appendChild(d);var i=new Image();i.id='__img';i.style.cssText='width:300px';d.appendChild(i);i.src='/clinix-pallor.jpg?bu='+Date.now();return 1");
+  await sleep(150);
+  ok((await ev("return document.getElementById('__img').style.opacity")) === "0", "an image still loading stays hidden (no half-painted frame)");
+  await sleep(3500);
+  ok((await ev("return document.getElementById('__img').style.opacity")) === "" && (await ev("return document.getElementById('__img').naturalWidth")) > 0, "and is revealed once it has arrived");
+  await call("Network.emulateNetworkConditions", { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+  await ev("document.getElementById('__bu').remove();return 1");
+
+  // 15. Sounds: off by default, silent when off, plays when on, toggle in Settings
+  await ev(`window.__osc=0;(function(){var P=(window.AudioContext||window.webkitAudioContext).prototype,o=P.createOscillator;P.createOscillator=function(){__osc++;return o.apply(this,arguments)}})();return 1`);
+  await call("Input.dispatchMouseEvent", { type: "mousePressed", x: 5, y: 400, button: "left", clickCount: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: 5, y: 400, button: "left", clickCount: 1 });
+  await ev("SMD_SOUND.play('success');return 1"); await sleep(150);
+  ok((await ev("return localStorage.getItem('smd_sound')")) !== "1" && (await ev("return __osc")) === 0, "sounds are off by default and silent");
+  await ev("SMD_SOUND.setEnabled(true);return 1");
+  await call("Input.dispatchMouseEvent", { type: "mousePressed", x: 5, y: 400, button: "left", clickCount: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: 5, y: 400, button: "left", clickCount: 1 });
+  await sleep(100);
+  await ev("SMD_SOUND.play('success');return 1"); await sleep(200);
+  ok((await ev("return __osc")) >= 2, "when enabled, a success plays (2 notes) " + (await ev("return __osc")));
+  await ev("SMD_dynNotify.fromText('Saved to your notes');return 1"); await sleep(300);
+  ok((await ev("return __osc")) >= 4, "a success card plays its note");
+  await ev("SMD_dynNotify.dismiss();SMD_SOUND.setEnabled(false);return 1"); await sleep(900);
+  await tab("/More/"); await sleep(900);
+  await ev("var b=[].slice.call(document.querySelectorAll('.hv-sheet button, .hv-sheet .hv-mi')).filter(function(b){return /Display/.test(b.textContent)})[0]; b&&b.click(); return 1"); await sleep(900);
+  ok(await ev("return !!document.getElementById('hvSounds')"), "Settings > Display & Accessibility has the Sounds switch");
+  await ev("document.getElementById('hvSounds').click();return 1"); await sleep(200);
+  ok((await ev("return localStorage.getItem('smd_sound')")) === "1" && (await ev("return document.getElementById('hvSounds').classList.contains('on')")), "the switch turns sounds on");
+  await ev("localStorage.removeItem('smd_sound');return 1");
 
   // 8. Live Activity bridge (stubbed iOS plugin)
   await ev(`window.__la=[];window.Capacitor={isNativePlatform:function(){return true},getPlatform:function(){return 'ios'},Plugins:{WatchBridge:{

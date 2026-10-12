@@ -64,7 +64,8 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[Push]] — APNs/FCM. Read the "one thing to understand" first: the server can see no further
   than Apple, so "sent but nothing arrived" is the normal shape of a DEVICE-side failure.
 - [[Premium Motion]] — iOS-like layer: draggable sheets + depth, shared-element transitions, large
-  titles, pull to refresh, picker haptics, skeletons, long-press previews, Live Activities. One kill switch each.
+  titles, pull to refresh, picker haptics, skeletons, long-press previews, Live Activities; round 2: swipe
+  actions, tab-bar hide + status-tap, A-Z scrubber, keyboard-aware, Undo cards, blur-up, launch morph, sounds. One kill switch each.
 - [[Dynamic Notifications]] — every in-app notification (toast, foreground push, local) as a
   Dynamic Island card. Flag `smd_dyn_notify` (default on).
 - [[Widgets]] — iOS home-screen and Lock Screen widgets. Ask MaiK ships three surfaces the

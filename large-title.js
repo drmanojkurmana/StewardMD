@@ -58,9 +58,13 @@
   }
 
   function apply(sc) {
-    var s = st.get(sc);
-    if (s === undefined || (s && !s.lt.isConnected)) { s = setup(sc); st.set(sc, s); }
-    if (!s) return;
+    var s = st.get(sc), now = Date.now();
+    // A failed setup (the screen was still animating in, or its title was not rendered yet) is retried
+    // after 400ms rather than remembered forever; a successful one is rebuilt if its title is replaced.
+    if (s === undefined || (s && s.fail && now - s.fail > 400) || (s && s.lt && !s.lt.isConnected)) {
+      s = setup(sc); st.set(sc, s || { fail: now });
+    }
+    if (!s || s.fail) return;
     var top = sc.scrollTop, p = progress(top, s.ltBottom), t = titleStyle(top, p);
     if (!reduced()) s.lt.style.transform = t.s === 1 ? "" : "scale(" + t.s.toFixed(4) + ")";
     s.lt.style.opacity = t.o >= 1 ? "" : t.o.toFixed(3);

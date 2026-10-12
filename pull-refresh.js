@@ -105,7 +105,7 @@
     g.sc.style.transform = "translate3d(0," + g.pull + "px,0)";
     drawSpinner(g.top, g.pull, false);
     var over = triggered(g.pull);
-    if (over && !g.armed) { g.armed = true; try { window.SMD_HAPTICS && SMD_HAPTICS.light(); } catch (x) {} }
+    if (over && !g.armed) { g.armed = true; try { window.SMD_HAPTICS && SMD_HAPTICS.light(); } catch (x) {} try { window.SMD_SOUND && SMD_SOUND.play("tick"); } catch (x) {} }
     else if (!over && g.armed) g.armed = false;
   }
 

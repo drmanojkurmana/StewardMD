@@ -15,7 +15,8 @@
  * (foreground push and SMD_localNotify) call it when enabled. Kill switch: localStorage
  * smd_dyn_notify=0 brings back the old bottom toast and the OS banner.
  *
- * API: SMD_dynNotify({ title, message, symbol, avatar, accent, duration, onPress, haptic })
+ * API: SMD_dynNotify({ title, message, symbol, avatar, accent, duration, onPress, haptic, action })
+ *        action: { label, onPress } a pill button on the card (Undo); tapping it runs onPress and dismisses
  *        symbol: "bell" | "success" | "warning" | "error" | "info" | null
  *        duration: ms, or null to stay until swiped / tapped
  *      SMD_dynNotify.fromText(text)   one string, split into title + message, symbol inferred
@@ -199,8 +200,10 @@
       'display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2">' + esc(o.title) + "</div>" : "";
     var m = o.message ? '<div style="font:400 13.5px/1.35 ' + FONT + ';color:rgba(235,235,245,.66);margin-top:2px;overflow:hidden;' +
       'display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;white-space:pre-line;overflow-wrap:anywhere">' + esc(o.message) + "</div>" : "";
+    var act = o.action ? '<div data-dn-action role="button" tabindex="0" style="flex:none;margin-left:4px;padding:8px 14px;border-radius:999px;' +
+      'background:rgba(255,255,255,.14);color:' + (o.accent || ACCENT.info) + ';font:600 14px/1 ' + FONT + ';letter-spacing:-0.01em">' + esc(o.action.label) + "</div>" : "";
     return '<div style="display:flex;align-items:center;gap:12px;padding:14px 18px 14px 14px;box-sizing:border-box">' +
-      lead + '<div style="min-width:0;flex:1">' + t + m + "</div></div>";
+      lead + '<div style="min-width:0;flex:1">' + t + m + "</div>" + act + "</div>";
   }
   var REVEAL = "cubic-bezier(.2,.8,.2,1)";
   function revealIn(node, delay) {
@@ -229,7 +232,8 @@
       var o = {
         title: opts.title ? String(opts.title) : "", message: opts.message ? String(opts.message) : "",
         symbol: opts.symbol === undefined ? "info" : opts.symbol, avatar: opts.avatar || null, accent: opts.accent || null,
-        onPress: typeof opts.onPress === "function" ? opts.onPress : null
+        onPress: typeof opts.onPress === "function" ? opts.onPress : null,
+        action: opts.action && opts.action.label && typeof opts.action.onPress === "function" ? { label: String(opts.action.label).slice(0, 18), onPress: opts.action.onPress } : null
       };
       if (!o.title && !o.message) return;
       if (!o.title) { o.title = o.message; o.message = ""; }
@@ -270,6 +274,8 @@
       revealIn(node, S.ch > PILL_H + 4 ? 40 : 110);   // morphing from an open card: reveal sooner
       live.textContent = ""; live.textContent = o.title + (o.message ? ". " + o.message : "");
       if (opts.haptic) { try { var H = window.SMD_HAPTICS; if (H && H.light) H.light(); } catch (e) {} }
+      // Sound (soft, off unless the doctor enabled it in Settings): a bell for pushes, a note for outcomes.
+      try { var SS = window.SMD_SOUND, sn = opts.sound || (opts.haptic ? "notify" : (o.symbol === "success" ? "success" : (o.symbol === "error" ? "error" : null))); if (SS && sn) SS.play(sn); } catch (e) {}
       animate(null);
       arm(cur, o.duration);
     } catch (e) {
@@ -326,10 +332,11 @@
 
   /* ---- gestures: swipe up to dismiss (velocity handed to the spring), tap to open ---- */
   function wireGestures() {
-    var id = null, y0 = 0, t0 = 0, lastY = 0, lastT = 0, vy = 0, moved = false, base = 0;
+    var id = null, y0 = 0, t0 = 0, lastY = 0, lastT = 0, vy = 0, moved = false, base = 0, downEl = null;
     layer.addEventListener("pointerdown", function (e) {
       if (id !== null || !cur || phase !== "open") return;
       if (e.pointerType === "mouse" && e.button !== 0) return;
+      downEl = e.target;   // pointer capture retargets later events to the layer, so remember the real target
       id = e.pointerId; y0 = lastY = e.clientY; t0 = lastT = performance.now(); vy = 0; moved = false; base = T.cy;
       cur.dragging = true; sync();
       try { layer.setPointerCapture(id); } catch (x) {}
@@ -353,7 +360,8 @@
       var it = cur, dy = e.clientY - y0, tap = !moved && performance.now() - t0 < 400;
       it.dragging = false;
       if (!cancelled && tap) {
-        var fn = it.opts.onPress;
+        var onAct = it.opts.action && downEl && downEl.closest && downEl.closest("[data-dn-action]");
+        var fn = onAct ? it.opts.action.onPress : it.opts.onPress;
         dismiss();
         if (fn) { try { fn(); } catch (x) {} }
         return;
