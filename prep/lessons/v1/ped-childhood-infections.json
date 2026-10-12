@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "ped-childhood-infections",
+ "subject": "paediatrics",
+ "title": "Common childhood infections: high-yield essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Diphtheria** is caused by toxin-producing Corynebacterium diphtheriae. The grey pseudomembrane on the tonsils and pharynx is the classic sign. The commonest cause of death is **diphtheritic myocarditis**, which appears 2 to 40 days after pharyngitis onset. Myocarditis presents with a thready pulse, indistinct heart sounds and ST-T wave changes on ECG.",
+   "say": "Diphtheria is caused by toxin producing Corynebacterium diphtheriae. The classic sign is a grey pseudomembrane over the tonsils and pharynx. The commonest cause of death is diphtheritic myocarditis, which appears two to forty days after pharyngitis begins. It presents with a thready pulse, indistinct heart sounds and ST-T wave changes on the ECG.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Organism",
+      "Toxin-producing C. diphtheriae"
+     ],
+     [
+      "Sign",
+      "Grey pseudomembrane on tonsils"
+     ],
+     [
+      "Commonest death cause",
+      "Myocarditis"
+     ],
+     [
+      "Onset of myocarditis",
+      "2 to 40 days after pharyngitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pertussis** is caused by Bordetella pertussis and gets its name from the inspiratory whoop. The disease passes through catarrhal, paroxysmal and convalescent stages. The catarrhal stage is the most infectious, while the paroxysmal stage carries most complications. The **sample of choice** is a nasopharyngeal swab, and **azithromycin** is the preferred drug in all ages.",
+   "say": "Pertussis is caused by Bordetella pertussis and gets its name from the inspiratory whoop. The disease has catarrhal, paroxysmal and convalescent stages. The catarrhal stage is the most infectious, while most complications occur in the paroxysmal stage. The sample of choice is a nasopharyngeal swab, and azithromycin is the preferred drug in all age groups.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Incubation",
+      "sub": "1 to 2 weeks"
+     },
+     {
+      "id": "b",
+      "label": "Catarrhal",
+      "sub": "Most infectious"
+     },
+     {
+      "id": "c",
+      "label": "Paroxysmal",
+      "sub": "Most complications"
+     },
+     {
+      "id": "d",
+      "label": "Convalescent",
+      "sub": "Weeks to months"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Poliomyelitis** causes acute flaccid paralysis with intact sensation, typically after a febrile illness. Lower limb muscles are hit most often, with the **quadriceps** the most frequently affected. Acute flaccid paralysis surveillance is used to detect cases, and any child under 15 with acute flaccid paralysis needs to be reported.",
+   "say": "Poliomyelitis causes acute flaccid paralysis with intact sensation, usually after a febrile illness. Lower limb muscles are hit most often, and the quadriceps is the most frequently affected muscle. Acute flaccid paralysis surveillance is used to detect cases, and any child with acute flaccid paralysis should be reported.",
+   "vis": null
+  },
+  {
+   "tx": "**Paediatric HIV** care starts with preventing mother to child transmission. Zidovudine to the mother and infant, and single-dose nevirapine, reduce transmission substantially. Routine HIV ELISA in a newborn is unreliable because maternal IgG antibodies cross the placenta. In developing countries, WHO advises breastfeeding for six months followed by rapid weaning, and **cotrimoxazole prophylaxis** protects against Pneumocystis pneumonia.",
+   "say": "Paediatric HIV care starts with preventing mother to child transmission. Zidovudine given to the mother and infant, and single dose nevirapine, reduce transmission substantially. Routine HIV ELISA in a newborn is unreliable because maternal antibodies cross the placenta. In developing countries, WHO advises breastfeeding for six months followed by rapid weaning, and cotrimoxazole prophylaxis protects against Pneumocystis pneumonia.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "2738db36-4fc1-4d86-b323-b2dfc9810f75",
+  "eb26abb7-9a6b-421f-8814-f23351ab3506",
+  "bbb707fd-232e-4ce3-bd6a-bb261bd05701"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics",
+  "Current Diagnosis and Treatment: Pediatrics",
+  "WHO clinical staging of HIV in children"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 166
+ }
+}

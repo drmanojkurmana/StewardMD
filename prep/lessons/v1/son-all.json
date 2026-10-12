@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "son-all",
+ "subject": "ss-medical-oncology",
+ "title": "Acute lymphoblastic leukaemia: classification, Ph-positive treatment and key toxicities",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **Philadelphia chromosome** t(9;22)(q34;q11.2) creates the BCR::ABL1 fusion. It is detected by karyotype, interphase FISH or RT-PCR. Ph-positive ALL mandates a tyrosine kinase inhibitor (TKI) from induction. Dasatinib 140 mg daily or ponatinib 30 mg daily, with blinatumomab, is preferred for adults under 65 without major comorbidity. Ponatinib is reduced to 15 mg daily once a complete molecular response is reached.",
+   "say": "The Philadelphia chromosome, t(9;22)(q34;q11.2), creates the BCR::ABL1 fusion. It is detected by karyotype, interphase FISH or RT-PCR. Ph-positive ALL mandates a tyrosine kinase inhibitor from induction. Dasatinib 140 mg daily or ponatinib 30 mg daily, with blinatumomab, is preferred for adults under 65 without major comorbidity. Ponatinib is reduced to 15 mg daily once a complete molecular response is reached.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ph-positive B-ALL"
+     },
+     {
+      "id": "b",
+      "label": "TKI from induction"
+     },
+     {
+      "id": "c",
+      "label": "Dasatinib or ponatinib plus blinatumomab"
+     },
+     {
+      "id": "d",
+      "label": "Ponatinib cut to 15 mg at complete molecular response"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chemotherapy backbones differ by age. Adults under 65 without comorbidity may receive **hyper-CVAD** (cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with high-dose methotrexate and cytarabine) plus a TKI. Adults 65 or older, or those with substantial comorbidity, receive dose-attenuated mini-hyper-CVD, or inotuzumab-based therapy. Adolescents and young adults aged 15 to 39 do better with paediatric-style regimens including high-dose asparaginase.",
+   "say": "Chemotherapy backbones differ by age. Adults under 65 without comorbidity may receive hyper-CVAD, which is cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with high-dose methotrexate and cytarabine, plus a TKI. Adults 65 or older, or those with substantial comorbidity, receive dose-attenuated mini-hyper-CVD, or inotuzumab-based therapy. Adolescents and young adults aged 15 to 39 do better with paediatric-style regimens including high-dose asparaginase.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Younger adults and AYA",
+     "points": [
+      "Hyper-CVAD with TKI for adults under 65",
+      "Paediatric-style regimens for ages 15 to 39",
+      "High-dose asparaginase in AYA protocols"
+     ]
+    },
+    "right": {
+     "title": "Older or frail adults",
+     "points": [
+      "Mini-hyper-CVD with TKI",
+      "Inotuzumab-based therapy",
+      "Low-intensity TKI with blinatumomab or steroids"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Minimal residual disease** (MRD) is the strongest prognostic factor. A molecular complete remission after induction predicts disease-free survival near 70 percent, versus under 40 percent if MRD is positive. Blinatumomab, a bispecific T-cell engager given as a continuous infusion over 28 days, improves survival when added to consolidation in MRD-negative patients and converts MRD-positive patients. Monitor for cytokine release syndrome and neurotoxicity.",
+   "say": "Minimal residual disease is the strongest prognostic factor. A molecular complete remission after induction predicts disease-free survival near 70 percent, versus under 40 percent if MRD is positive. Blinatumomab, a bispecific T-cell engager given as a continuous infusion over 28 days, improves survival when added to consolidation in MRD-negative patients and converts MRD-positive patients. Monitor for cytokine release syndrome and neurotoxicity.",
+   "vis": null
+  },
+  {
+   "tx": "For relapsed disease, **CD19** targeting uses blinatumomab or tisagenlecleucel CAR T-cell therapy, while **CD22** targeting uses inotuzumab ozogamicin. Inotuzumab carries a risk of sinusoidal obstruction syndrome, so ursodiol is given and dual-alkylator conditioning is avoided before transplant. Allogeneic transplant is reserved for high-risk or MRD-positive patients. Before any lumbar puncture, check platelets; raise them above 20 x 10^9/L if needed.",
+   "say": "For relapsed disease, CD19 targeting uses blinatumomab or tisagenlecleucel CAR T-cell therapy, while CD22 targeting uses inotuzumab ozogamicin. Inotuzumab carries a risk of sinusoidal obstruction syndrome, so ursodiol is given and dual-alkylator conditioning is avoided before transplant. Allogeneic transplant is reserved for high-risk or MRD-positive patients. Before any lumbar puncture, check platelets and raise them above 20 x 10^9/L if needed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target",
+     "Agent",
+     "Key caution"
+    ],
+    "rows": [
+     [
+      "CD19",
+      "Blinatumomab or tisagenlecleucel",
+      "Cytokine release and neurotoxicity"
+     ],
+     [
+      "CD22",
+      "Inotuzumab ozogamicin",
+      "Sinusoidal obstruction syndrome"
+     ],
+     [
+      "Ph-positive",
+      "Ponatinib with blinatumomab",
+      "Arterial occlusive events"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_01ac4167a672",
+  "q_dacd7e00d226",
+  "q_0dfecdd62983"
+ ],
+ "src": [
+  "kb-oncotree-all",
+  "kb-reference-acute-lymphoid-leukemia",
+  "kb-oncotree-cml",
+  "kb-oncotree-pediatric-all"
+ ],
+ "refs": [
+  "NCCN Guidelines Acute Lymphoblastic Leukemia Version 2.2026"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 2498,
+  "itemN": 42
+ }
+}

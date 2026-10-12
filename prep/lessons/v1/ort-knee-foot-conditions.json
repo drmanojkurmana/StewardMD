@@ -1,0 +1,105 @@
+{
+ "v": 1,
+ "module": "ort-knee-foot-conditions",
+ "subject": "orthopaedics",
+ "title": "Knee and foot conditions: high-yield orthopaedics for NEET-PG",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Knee bursitis is named by occupation. **Prepatellar bursitis** is housemaid's knee, caused by repeated kneeling and friction; the swelling lies in front of the patella and the joint itself is normal. **Infrapatellar bursitis** is clergyman's knee; the swelling sits below the patella, superficial to the patellar ligament. Treatment is firm bandaging, avoiding kneeling and occasional aspiration.",
+   "say": "Knee bursitis is named after occupation. Prepatellar bursitis is housemaid's knee, caused by repeated kneeling and friction. The swelling lies in front of the patella and the joint itself is normal. Infrapatellar bursitis is clergyman's knee, where the swelling sits below the patella, superficial to the patellar ligament. Treatment is firm bandaging, avoiding kneeling and occasional aspiration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Bursa",
+     "Swelling site"
+    ],
+    "rows": [
+     [
+      "Housemaid's knee",
+      "Prepatellar",
+      "In front of patella"
+     ],
+     [
+      "Clergyman's knee",
+      "Infrapatellar",
+      "Below patella"
+     ],
+     [
+      "Student's elbow",
+      "Olecranon",
+      "Point of elbow"
+     ],
+     [
+      "Weaver's bottom",
+      "Ischial",
+      "Buttock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **Baker's cyst** is a swelling in the popliteal fossa caused by synovial herniation through the posterior knee capsule. It is midline, non-tender, fluctuant and more common in older adults with **rheumatoid or osteoarthritis**. It is less prominent on knee flexion. Rupture can mimic deep vein thrombosis, so always consider it in a swollen calf.",
+   "say": "A Baker's cyst is a swelling in the popliteal fossa, caused by synovial herniation through the posterior knee capsule. It is midline, non-tender and fluctuant, and is more common in older adults with rheumatoid or osteoarthritis. It becomes less prominent on knee flexion. Rupture can mimic deep vein thrombosis, so consider it in a swollen calf.",
+   "vis": null
+  },
+  {
+   "tx": "**Patellofemoral pain syndrome**, also called chondromalacia patellae, causes insidious anterior knee pain in adolescent girls and runners. Pain is worse on climbing stairs, going down, and rising after prolonged sitting, the movie-goer's sign. Patients may report pseudo-giving way. Vastus medialis obliquus weakness and a raised Q angle are key contributors; treatment is correcting the muscle imbalance.",
+   "say": "Patellofemoral pain syndrome, also called chondromalacia patellae, causes insidious anterior knee pain in adolescent girls and runners. Pain is worse on climbing stairs, going down, and rising after prolonged sitting, which is the movie-goer's sign. Patients may report pseudo giving way. Vastus medialis obliquus weakness and a raised Q angle contribute, and treatment is correcting the muscle imbalance.",
+   "vis": null
+  },
+  {
+   "tx": "**Genu valgum** (knock knee) occurs when the tibia is abducted relative to the femur, bringing the knees together while the medial malleoli are apart. Physiological valgus peaks near 3 to 4 years and corrects by about 7 years; persistence beyond 8 years is pathological. **Genu varum** (bow leg) is the opposite, with the tibia adducted. Genu recurvatum is knee hyperextension, seen in poliomyelitis, rickets and rheumatoid arthritis.",
+   "say": "Genu valgum, or knock knee, occurs when the tibia is abducted relative to the femur, bringing the knees together while the ankles stay apart. Physiological valgus peaks around three to four years and corrects by about seven years; persistence beyond eight years is pathological. Genu varum, or bow leg, is the opposite, with the tibia adducted. Genu recurvatum is knee hyperextension, seen in poliomyelitis, rickets and rheumatoid arthritis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genu valgum",
+     "points": [
+      "Knees touch, ankles apart",
+      "Tibia abducted",
+      "Physiological until about 7 years"
+     ]
+    },
+    "right": {
+     "title": "Genu varum",
+     "points": [
+      "Ankles touch, knees apart",
+      "Tibia adducted",
+      "Normal in infants"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hallux valgus** is lateral deviation of the great toe with a painful **bunion** over the first metatarsophalangeal joint, caused by subluxation of that joint and shoe pressure. **Claw toe** shows MTP hyperextension with PIP and DIP flexion. **Recurrent patellar dislocation** is prevented mainly by the **vastus medialis obliquus**, the dynamic stabiliser of the patella. Congenital knee dislocation presents with hyperextension.",
+   "say": "Hallux valgus is lateral deviation of the great toe with a painful bunion over the first metatarsophalangeal joint, caused by subluxation of that joint and shoe pressure. Claw toe shows metatarsophalangeal hyperextension with proximal and distal interphalangeal flexion. Recurrent patellar dislocation is prevented mainly by the vastus medialis obliquus, the dynamic stabiliser of the patella. Congenital knee dislocation presents with hyperextension.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0e4d6577-3aef-48f9-84ed-f76cbd0f37f3",
+  "7dbc899a-3900-437d-8726-a003722b326f",
+  "e3493666-aada-4823-9f54-224666dba2da"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 19 in Apley's System of Orthopaedics and Fractures (Solomon L, Warwick D, Nayagam S)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 66
+ }
+}

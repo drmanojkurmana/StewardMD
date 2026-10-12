@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "srh-infection-prophylaxis",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Infection screening and vaccination in immunosuppression",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Before starting immunosuppressive drugs such as anti-TNF agents, screen for **latent tuberculosis infection** (LTBI). LTBI means immune evidence of exposure to Mycobacterium tuberculosis with no symptoms, a normal chest X-ray and negative sputum tests. Active disease must be excluded separately. Screening only makes sense if a positive result will lead to treatment. Interferon-gamma release assays (IGRA) are preferred over the tuberculin skin test (TST) in BCG-vaccinated people, because IGRA antigens are absent from BCG. Indeterminate results and false negatives are more common in immunosuppressed patients.",
+   "say": "Before starting immunosuppressive drugs such as anti-TNF agents, screen for latent tuberculosis infection. This means immune evidence of exposure to Mycobacterium tuberculosis with no symptoms, a normal chest X-ray and negative sputum tests. Active disease must be excluded separately. Screening only makes sense if a positive result will lead to treatment. Interferon-gamma release assays are preferred over the tuberculin skin test in BCG-vaccinated people, because their antigens are absent from BCG. Indeterminate and false negative results are more common in immunosuppressed patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "IGRA",
+     "points": [
+      "Blood test, no return visit",
+      "Antigens absent from BCG",
+      "Preferred in BCG-vaccinated people",
+      "Can be indeterminate"
+     ]
+    },
+    "right": {
+     "title": "TST",
+     "points": [
+      "Intradermal injection, read later",
+      "Cross-reacts with BCG",
+      "Less useful after BCG",
+      "Reading needs a return visit"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Isoniazid preventive therapy (IPT) treats LTBI. Rifapentine plus isoniazid given over 3 months is an accepted short regimen. Rifamycins inhibit bacterial **DNA-dependent RNA polymerase**. Isoniazid causes **drug-induced hepatitis**, so liver function should be monitored, especially in older patients and those on other liver-active drugs. Pyridoxine (vitamin B6) is given with isoniazid to prevent peripheral neuropathy, particularly in diabetes, HIV and malnutrition. Rifamycins interact with many drugs through cytochrome P450, including rivaroxaban, so check interactions before choosing the regimen.",
+   "say": "Isoniazid preventive therapy treats latent infection. Rifapentine plus isoniazid given over 3 months is an accepted short regimen. Rifamycins inhibit bacterial DNA-dependent RNA polymerase. Isoniazid can cause drug-induced hepatitis, so liver function should be monitored, especially in older patients. Pyridoxine is given with isoniazid to prevent peripheral neuropathy, particularly in diabetes, HIV and malnutrition. Rifamycins interact with many drugs through cytochrome P450, including rivaroxaban, so check interactions before choosing the regimen.",
+   "vis": null
+  },
+  {
+   "tx": "The untreated lifetime risk of reactivation from LTBI is about **5 to 10 percent**. Risk is highest in the first two years after infection and is raised by immunosuppression, HIV, solid organ transplant, dialysis and silicosis. Treating LTBI sharply reduces this risk. Repeat IGRA is not used to monitor response to treatment of active TB. Negative results in CNS TB or advanced immunosuppression may be false negatives, so they do not rule out infection.",
+   "say": "The untreated lifetime risk of reactivation from latent infection is about five to ten percent. Risk is highest in the first two years after infection and is raised by immunosuppression, HIV, solid organ transplant, dialysis and silicosis. Treating latent infection sharply reduces this risk. Repeat IGRA is not used to monitor treatment of active tuberculosis. A negative result in central nervous system tuberculosis or advanced immunosuppression may be a false negative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Interpretation"
+    ],
+    "rows": [
+     [
+      "Untreated LTBI",
+      "About 5 to 10 percent lifetime reactivation"
+     ],
+     [
+      "Highest risk window",
+      "First two years after infection"
+     ],
+     [
+      "Negative IGRA in CNS TB",
+      "Possible false negative"
+     ],
+     [
+      "Positive IGRA alone",
+      "Does not exclude active disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients with low **CD4 counts** or marked immunosuppression need prophylaxis against **Pneumocystis jirovecii pneumonia**, using a standard antimicrobial agent chosen for this purpose. **Live vaccines** should be avoided in people on high-dose immunosuppression or **biologic therapy**, as they risk disseminated infection. The **recombinant zoster vaccine** is the preferred option for immunosuppressed adults. Pneumococcal vaccination ideally comes before immunosuppression starts, since **B-cell depleting agents** blunt antibody responses for several months after each dose.",
+   "say": "Patients with low CD4 counts or marked immunosuppression need prophylaxis against Pneumocystis jirovecii pneumonia, using a standard antimicrobial agent chosen for this purpose. Live vaccines should be avoided in people on high-dose immunosuppression or biologic therapy, as they risk disseminated infection. The recombinant zoster vaccine is the preferred option for immunosuppressed adults. Pneumococcal vaccination ideally comes before immunosuppression starts, since B-cell depleting agents blunt antibody responses for several months after each dose.",
+   "vis": null
+  },
+  {
+   "tx": "Before starting any **immunosuppressive therapy**, screen every patient for hepatitis B by testing for **hepatitis B surface antigen** and **core antibody**. Hepatitis B can reactivate during treatment and occasionally causes severe liver injury. A patient who is core antibody positive may still need **antiviral prophylaxis**, particularly when the planned treatment carries a high risk of reactivation. Monitor liver function throughout therapy.",
+   "say": "Before starting immunosuppressive treatment, test every patient for hepatitis B using surface antigen and core antibody. Reactivation can happen during therapy and may cause serious liver damage. If core antibody is positive, antiviral prophylaxis is often considered when the planned treatment carries high risk. Keep checking liver function while the patient is on treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen HBsAg and core antibody"
+     },
+     {
+      "id": "b",
+      "label": "Core antibody positive?"
+     },
+     {
+      "id": "c",
+      "label": "Consider antiviral prophylaxis if high risk"
+     },
+     {
+      "id": "d",
+      "label": "Monitor liver function"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_c79f9861f8bb",
+  "q_d973d057ae86",
+  "q_3a8e5f2dbb38"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline on tuberculosis (NG33)",
+  "National Tuberculosis Elimination Programme guidelines, India"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

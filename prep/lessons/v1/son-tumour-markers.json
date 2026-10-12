@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "son-tumour-markers",
+ "subject": "ss-medical-oncology",
+ "title": "Tumour markers: CA125, CEA, AFP, beta-hCG, PSA and the rest",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **tumour marker** is a substance made by tumour cells or by the body in response to cancer, measured in blood or tissue. Markers help with diagnosis, prognosis, monitoring treatment and detecting recurrence, but none is diagnostic alone. Always interpret a value against the clinical picture and the assay used.",
+   "say": "A tumour marker is a substance made by tumour cells or by the body in response to cancer, measured in blood or tissue. Markers help with diagnosis, prognosis, monitoring treatment and detecting recurrence, but none is diagnostic alone. Always interpret a value against the clinical picture and the assay used.",
+   "vis": null
+  },
+  {
+   "tx": "Several markers track specific tumours. **Calcitonin** signals medullary thyroid carcinoma, while **thyroglobulin** follows differentiated thyroid cancer after surgery. **Chromogranin A** is raised in neuroendocrine tumours, and **LDH** is a non-specific marker of tissue turnover. **PSA** tracks prostate cancer but also rises with benign prostatic enlargement.",
+   "say": "Several markers track specific tumours. Calcitonin signals medullary thyroid carcinoma, while thyroglobulin follows differentiated thyroid cancer after surgery. Chromogranin A is raised in neuroendocrine tumours, and LDH is a non-specific marker of tissue turnover. PSA tracks prostate cancer but also rises with benign prostatic enlargement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Tumour linked",
+     "Clinical point"
+    ],
+    "rows": [
+     [
+      "Calcitonin",
+      "Medullary thyroid carcinoma",
+      "Also raised in C cell hyperplasia"
+     ],
+     [
+      "Thyroglobulin",
+      "Differentiated thyroid cancer",
+      "Used to monitor after thyroidectomy"
+     ],
+     [
+      "Chromogranin A",
+      "Neuroendocrine tumours",
+      "Can be raised by proton pump inhibitors"
+     ],
+     [
+      "LDH",
+      "Many tumours, non-specific",
+      "Reflects general tissue breakdown"
+     ],
+     [
+      "PSA",
+      "Prostate cancer",
+      "Raised in benign prostatic enlargement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Timing matters for **CA125**. Surgery and tissue trauma can cause falsely high values, so a sample is best taken at least two weeks after an operation. Compare post-treatment values with the **pre-treatment baseline**, since a falling trend suggests clearance, and interpret a single early value with caution.",
+   "say": "Timing matters for CA125. Surgery and tissue trauma can cause falsely high values, so a sample is best taken at least two weeks after an operation. Compare post-treatment values with the pre-treatment baseline, since a falling trend suggests clearance, and interpret a single early value with caution.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Surgery"
+     },
+     {
+      "id": "w",
+      "label": "Wait 2 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Draw CA125"
+     },
+     {
+      "id": "c",
+      "label": "Compare baseline"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "w"
+     ],
+     [
+      "w",
+      "d"
+     ],
+     [
+      "d",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**False positive** results have several causes. Benign conditions such as endometriosis, pelvic inflammatory disease and pregnancy raise CA125. Heterophile or **human anti-mouse antibody (HAMA)** interference can create spurious values in immunoassays, and adding non-immune mouse serum to the sample can block this. Confirm unexpected results with a second assay.",
+   "say": "False positive results have several causes. Benign conditions such as endometriosis, pelvic inflammatory disease and pregnancy raise CA125. Heterophile or human anti-mouse antibody interference can create spurious values in immunoassays, and adding non-immune mouse serum to the sample can block this. Confirm unexpected results with a second assay.",
+   "vis": null
+  },
+  {
+   "tx": "Use **CA125** prognostically with care. A **preoperative** level above about 65 U/mL has been linked to a markedly higher risk of death in **ovarian cancer**. Around 10 to 20 percent of advanced tumours do not raise **CA125**, so a normal value does not exclude disease. Recurrence often shows a rise in **CA125** before clinical signs appear.",
+   "say": "Use CA125 prognostically with care. A preoperative level above about 65 units per millilitre has been linked to a markedly higher risk of death in ovarian cancer. Around 10 to 20 percent of advanced tumours do not raise CA125, so a normal value does not exclude disease. Recurrence often shows a rise in CA125 before clinical signs appear.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Raised CA125",
+     "points": [
+      "Higher preoperative risk",
+      "Suggests residual disease",
+      "Rise can precede recurrence"
+     ]
+    },
+    "right": {
+     "title": "Normal CA125",
+     "points": [
+      "Does not exclude cancer",
+      "Common in early stage",
+      "Needs imaging if doubt remains"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Other markers have specific roles. **PSA** guides prostate cancer follow-up, and **LDH** reflects tumour burden in germ cell and lymphoma. **Calcitonin** is the marker of medullary thyroid cancer, while **thyroglobulin** follows differentiated thyroid cancer. **Chromogranin A** supports neuroendocrine tumours, and **beta2 microglobulin** is used in myeloma staging.",
+   "say": "Other markers have specific roles. PSA guides prostate cancer follow-up, and LDH reflects tumour burden in germ cell and lymphoma. Calcitonin is the marker of medullary thyroid cancer, while thyroglobulin follows differentiated thyroid cancer. Chromogranin A supports neuroendocrine tumours, and beta2 microglobulin is used in myeloma staging.",
+   "vis": null
+  },
+  {
+   "tx": "Remember **marker half-life** when following levels. A marker should fall in line with its half-life after complete resection, and a plateau or rise suggests residual or recurrent disease. The **ROMA index** combines CA125 with HE4 to estimate ovarian malignancy risk before surgery, helping triage referral.",
+   "say": "Remember marker half-life when following levels. A marker should fall in line with its half-life after complete resection, and a plateau or rise suggests residual or recurrent disease. The ROMA index combines CA125 with HE4 to estimate ovarian malignancy risk before surgery, helping triage referral.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_52521ba66cd8",
+  "q_b7eeac472996",
+  "q_114bde465c10"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

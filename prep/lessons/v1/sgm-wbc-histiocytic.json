@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "sgm-wbc-histiocytic",
+ "subject": "ss-general-medicine",
+ "title": "Langerhans cell histiocytosis: diagnosis, staging and prognosis",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Langerhans cell histiocytosis** (LCH) is a clonal disorder of **dendritic-type myeloid cells** that infiltrate tissues. It is seen mostly in children and can affect bone, skin, lungs, liver, spleen, bone marrow and pituitary. Its clinical spectrum ranges from single bone lesions to multisystem disease with organ dysfunction. Recognising the pattern is the first exam point.",
+   "say": "Langerhans cell histiocytosis is a clonal disorder of dendritic type myeloid cells that infiltrate tissues. It is seen mostly in children and can affect bone, skin, lungs, liver, spleen, bone marrow and pituitary. Its clinical spectrum ranges from single bone lesions to multisystem disease with organ dysfunction.",
+   "vis": null
+  },
+  {
+   "tx": "Diagnosis needs a **tissue biopsy** of the lesion. Abnormal cells display a grooved, coffee bean nucleus and express the surface marker **CD1a**, with **langerin** staining as a supportive finding. Under electron microscopy, **Birbeck granules** appear as rod-shaped inclusions. Markers such as CD68, CD20 and CD3 lack diagnostic value.",
+   "say": "Diagnosis needs a tissue biopsy of the lesion. The abnormal cells show a grooved, coffee bean nucleus and express CD1a, with langerin staining as a supportive finding. Electron microscopy reveals rod-shaped Birbeck granules. CD1a is the key marker, whereas CD68, CD20 and CD3 are not diagnostic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Role in diagnosis"
+    ],
+    "rows": [
+     [
+      "Grooved coffee bean nuclei",
+      "Morphological clue"
+     ],
+     [
+      "CD1a",
+      "Key immunophenotypic marker"
+     ],
+     [
+      "Langerin",
+      "Supportive marker"
+     ],
+     [
+      "Birbeck granules",
+      "Ultrastructural finding on electron microscopy"
+     ],
+     [
+      "CD68, CD20, CD3",
+      "Not specific for LCH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disease extent is judged by **organ involvement**. Risk organs are liver, spleen and bone marrow. A liver edge more than 3 cm below the right costal margin or a spleen enlarged beyond the left costal margin counts as organ involvement. **Haematopoietic involvement** is documented when two or more cytopenias are present. These markers guide the choice between single-system and multisystem disease.",
+   "say": "Disease extent is judged by organ involvement. The risk organs are liver, spleen and bone marrow. A liver edge more than 3 cm below the right costal margin counts as organ involvement. Haematopoietic involvement is documented when two or more cytopenias are present. These markers guide the choice between single-system and multisystem disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Biopsy confirmed LCH"
+     },
+     {
+      "id": "b",
+      "label": "Assess organ involvement"
+     },
+     {
+      "id": "c",
+      "label": "Single-system disease"
+     },
+     {
+      "id": "d",
+      "label": "Multisystem disease"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "One system"
+     ],
+     [
+      "b",
+      "d",
+      "Two or more systems"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathogenesis in Langerhans cell histiocytosis often involves **BRAF** and other **MAPK pathway** mutations, and some cases arise from clonal myeloid progenitors. Mutation testing for BRAF, MAPK and ERK status is increasingly useful in many patients. These markers can inform prognosis and treatment choices, but they complement rather than replace **tissue biopsy**.",
+   "say": "Pathogenesis in Langerhans cell histiocytosis often involves BRAF and other MAPK pathway mutations, and some cases arise from clonal myeloid progenitors. Mutation testing for BRAF, MAPK and ERK status is increasingly useful in many patients. These markers can inform prognosis and treatment choices, but they complement rather than replace tissue biopsy.",
+   "vis": null
+  },
+  {
+   "tx": "**Single-system LCH** such as a solitary bone lesion has a favourable course. After complete curettage, recurrence is under 20 percent at five years. **Multisystem LCH** with risk organ involvement has a much poorer outlook, with five-year survival at most 77 percent in the cited data. Treatment for multisystem disease includes chemotherapy such as single-agent cytarabine, while smoking cessation is the key intervention in pulmonary LCH.",
+   "say": "Single-system LCH such as a solitary bone lesion has a favourable course. After complete curettage, recurrence is under 20 percent at five years. Multisystem LCH with risk organ involvement has a much poorer outlook, with five-year survival at most 77 percent. Treatment for multisystem disease includes chemotherapy such as single-agent cytarabine, while smoking cessation is key in pulmonary LCH.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Single-system LCH",
+     "points": [
+      "Solitary bone lesion",
+      "Curettage often sufficient",
+      "Recurrence under 20 percent at 5 years"
+     ]
+    },
+    "right": {
+     "title": "Multisystem LCH",
+     "points": [
+      "Risk organ involvement",
+      "Chemotherapy such as cytarabine",
+      "Five-year survival at most 77 percent"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_ef6e59fc3b91",
+  "q_49fe8faf4b06",
+  "q_822d09ba5ded"
+ ],
+ "src": [],
+ "refs": [
+  "Histiocyte Society consensus guidance on Langerhans cell histiocytosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 15
+ }
+}

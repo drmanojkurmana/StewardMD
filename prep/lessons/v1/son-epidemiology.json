@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "son-epidemiology",
+ "subject": "ss-medical-oncology",
+ "title": "Cancer epidemiology, prevention and screening: a high-yield primer",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Cancer epidemiology** describes how often cancers occur and who gets them. Global estimates come from **GLOBOCAN**, which the International Agency for Research on Cancer publishes, while India relies on the **National Cancer Registry Programme** for population-based incidence data. Tobacco remains the single largest preventable cause of cancer, linked to lung, oral, laryngeal, oesophageal, bladder and pancreatic cancers. Know which data source answers which exam question.",
+   "say": "Cancer epidemiology describes how often cancers occur and who gets them. Global estimates come from GLOBOCAN, which the International Agency for Research on Cancer publishes, while India relies on the National Cancer Registry Programme for population based incidence data. Tobacco remains the single largest preventable cause of cancer, linked to lung, oral, laryngeal, oesophageal, bladder and pancreatic cancers. Know which data source answers which exam question.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Data source",
+     "What it gives",
+     "Exam cue"
+    ],
+    "rows": [
+     [
+      "GLOBOCAN",
+      "Worldwide incidence and mortality estimates",
+      "Global comparison"
+     ],
+     [
+      "National Cancer Registry Programme",
+      "Population based registry data for India",
+      "Indian incidence"
+     ],
+     [
+      "Tobacco exposure",
+      "Largest preventable risk factor",
+      "Smoking and smokeless forms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cervical cancer is caused by persistent infection with **high-risk HPV**, which accounts for over 99 percent of cases. The E6 oncoprotein degrades p53, while E7 inactivates retinoblastoma protein, removing key brakes on cell division. HPV types 16 and 18 cause most cancers. Types 6 and 11 are low-risk strains that cause anogenital warts rather than cancer. Squamous cell carcinoma is the commonest histological subtype.",
+   "say": "Cervical cancer is caused by persistent infection with high risk HPV, which accounts for over 99 percent of cases. The E6 oncoprotein degrades p53, while E7 inactivates retinoblastoma protein, removing key brakes on cell division. HPV types 16 and 18 cause most cancers. Types 6 and 11 are low risk strains that cause anogenital warts rather than cancer. Squamous cell carcinoma is the commonest histological subtype.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-risk HPV",
+     "points": [
+      "Types 16 and 18 dominate",
+      "E6 degrades p53",
+      "E7 inactivates pRB",
+      "Causes over 99 percent of cases"
+     ]
+    },
+    "right": {
+     "title": "Low-risk HPV",
+     "points": [
+      "Types 6 and 11",
+      "Causes anogenital warts",
+      "Rarely causes cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cervical screening aims to find **precancerous lesions** before they become invasive. High-risk **HPV DNA testing** is a sensitive primary test where laboratory capacity exists, while **cytology** remains an established option in many high-income settings. The Indian national programme uses a low-cost **visual inspection** approach for women aged 30 to 65, with HPV testing added where available. **HPV vaccination** before sexual debut gives the strongest primary prevention.",
+   "say": "Cervical screening aims to find precancerous lesions before they become invasive. High-risk HPV DNA testing is a sensitive primary test where laboratory capacity exists, while cytology remains an established option in many high-income settings. The Indian national programme uses a low cost visual inspection approach for women aged 30 to 65, with HPV testing added where available. HPV vaccination before sexual debut gives the strongest primary prevention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Setting",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Cytology",
+      "Established in many high-income settings",
+      "Cell-based screening at intervals"
+     ],
+     [
+      "HPV DNA",
+      "Where laboratory capacity exists",
+      "High-risk types, sensitive primary test"
+     ],
+     [
+      "Visual inspection",
+      "Indian national programme",
+      "Low-cost, women aged 30 to 65"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mammography** screens women for breast cancer, and **low-dose CT** screens high-risk smokers for lung cancer. The NLST trial showed that low-dose CT reduced lung cancer mortality compared with chest radiography, and the NELSON trial supported this in Europe. For colorectal cancer, **colonoscopy** is the reference test that also allows polypectomy. **PSA screening** remains controversial because it causes overdiagnosis, so shared decision making is advised.",
+   "say": "Mammography screens women for breast cancer, and low dose CT screens high risk smokers for lung cancer. The NLST trial showed that low dose CT reduced lung cancer mortality compared with chest radiography, and the NELSON trial supported this in Europe. For colorectal cancer, colonoscopy is the reference test that also allows polypectomy. PSA screening remains controversial because it causes overdiagnosis, so shared decision making is advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Screening test",
+     "Target cancer",
+     "Key evidence"
+    ],
+    "rows": [
+     [
+      "Mammography",
+      "Breast",
+      "Reduces breast cancer mortality"
+     ],
+     [
+      "Low-dose CT",
+      "Lung, heavy smokers",
+      "NLST and NELSON trials"
+     ],
+     [
+      "Colonoscopy",
+      "Colorectum",
+      "Allows polypectomy"
+     ],
+     [
+      "PSA",
+      "Prostate",
+      "Overdiagnosis concerns"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention also includes vaccination. **HPV vaccination** prevents infection with the high-risk types that cause most cervical cancers, and is best given before sexual debut. **Hepatitis B vaccination** prevents infection that can progress to **hepatocellular carcinoma**, so vaccinating at-risk groups reduces liver cancer over time. Together with tobacco control, these measures form the core of primary cancer prevention.",
+   "say": "Prevention also includes vaccination. HPV vaccination prevents infection with the high risk types that cause most cervical cancers, and is best given before sexual debut. Hepatitis B vaccination prevents infection that can progress to hepatocellular carcinoma, so vaccinating at risk groups reduces liver cancer over time. Together with tobacco control, these measures form the core of primary cancer prevention.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vaccinate early"
+     },
+     {
+      "id": "b",
+      "label": "Prevent viral infection"
+     },
+     {
+      "id": "c",
+      "label": "Fewer cancers"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_7e3eb709265b",
+  "q_babec8432929",
+  "q_180352f668df"
+ ],
+ "src": [],
+ "refs": [
+  "USPSTF Cervical Cancer Screening Recommendation",
+  "NLST trial, New England Journal of Medicine",
+  "NELSON trial, European lung screening study",
+  "GLOBOCAN, International Agency for Research on Cancer",
+  "National Cancer Registry Programme, India"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}
