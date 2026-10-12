@@ -59,11 +59,28 @@ export function targetModules(root = ROOT, cache = null, bank = null) {
   const topics = (readJ(path.join(root, "prep/bank/topic-links.json")) || {}).modules || {};
   const mapped = new Set(Object.entries(topics).filter(([, e]) => ((e.kb || []).length || (e.pr || []).length)).map(([m]) => m));
   const out = [];
+  const seen = new Set();
+  const push = (mid, sid, title, scope, exams) => {
+    if (!mid || /-mixed$/.test(mid) || seen.has(mid)) return;
+    seen.add(mid);
+    if (hasLesson.has(mid) || mapped.has(mid)) return;
+    out.push({ mid, sid, title: String(title || mid), scope: String(scope || ""), exams: exams || [] });
+  };
   for (const [sid, s] of subs) for (const sec of s.sections || []) for (const m of sec.modules || []) {
-    if (!m || !m.id || /-mixed$/.test(m.id)) continue;
-    if (hasLesson.has(m.id) || mapped.has(m.id)) continue;
-    out.push({ mid: m.id, sid, title: String(m.title || m.id), scope: String(m.scope || ""), exams: s.exams || [] });
+    if (!m || !m.id) continue;
+    push(m.id, sid, m.title || m.id, m.scope || "", s.exams || []);
   }
+  // New-exam subjects live outside prep/taxonomy: same filters over the bank subject indexes
+  // (prep/taxonomy.json branch subjects + prep/bank/<bv>/<sid>/index.json, as the app reads them).
+  try {
+    const tax = readJ(path.join(root, "prep/taxonomy.json")) || {};
+    for (const b of tax.branches || []) for (const s of b.subjects || []) {
+      if (!s || !s.id || subs.has(s.id)) continue;
+      const ix = readJ(path.join(root, "prep/bank", s.bv || "v5", s.id, "index.json")) || {};
+      for (const t of ix.topics || [])
+        push(t.id, s.id, (t.title && t.title.en) || t.title || t.id, t.scope || "", [s.id]);
+    }
+  } catch { /* taxonomy-only tree */ }
   return out;
 }
 /* moduleItems(mid, sids, { bank, cache }) -> { all, bank, ov }: bank + overlay items.

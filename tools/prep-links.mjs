@@ -377,8 +377,18 @@ export function addTopicLinks(links, it, ctx = {}) {
       if (l.k === "kb" && (entry.kb || []).some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = sec; }
       else if (l.k === "pr" && (entry.pr || []).some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = ""; }
     }
-    for (const [id, title] of entry.kb || []) if (count("kb") < MAX.kb && !has.has("kb:" + id)) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
-    for (const [id, title] of entry.pr || []) if (count("pr") < MAX.pr && !has.has("pr:" + id)) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
+    // A verified module topic beats an unshown mention: below-the-bar same-kind links vacate their slots
+    // so the topic tier still lands (shown links are never evicted, and the cap still holds).
+    const room = (k) => {
+      if (links.filter((l) => l.k === k).length < MAX[k]) return true;
+      const i = links.findIndex((l) => l.k === k && l.c < SHOW);
+      if (i < 0) return false;
+      has.delete(links[i].k + ":" + links[i].id);
+      links.splice(i, 1);
+      return true;
+    };
+    for (const [id, title] of entry.kb || []) if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
+    for (const [id, title] of entry.pr || []) if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
   }
   // Specific lesson refinement (at most one besides the module's own): the step showing the item's image wins,
   // then the lesson teaching the item's KB concept, then the book chapter under the concept's heading.

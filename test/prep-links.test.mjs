@@ -160,6 +160,24 @@ test("addTopicLinks: a weak same-topic mention upgrades to the topic tier instea
   assert.ok(other.some((l) => l.k === "kb" && l.id === "cataract" && l.v === "kt" && l.c === 75), "the module topic still fills the slot");
 });
 
+test("addTopicLinks: unshown mentions vacate slots for the verified topic; shown links never move", () => {
+  const topics = { m0: { kb: [["cataract", "Cataract"]], pr: [] } };
+  const ctx = { mid: "m0", sid: "s", topics, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map() };
+  const full = [
+    { k: "kb", id: "glaucoma", title: "Glaucoma", c: 55, v: "e", sec: "" },
+    { k: "kb", id: "blepharitis", title: "Blepharitis", c: 50, v: "e", sec: "" },
+  ];
+  addTopicLinks(full, { q: "What?" }, ctx);
+  assert.ok(full.some((l) => l.k === "kb" && l.id === "cataract" && l.v === "kt" && l.c === 75), "the topic lands");
+  assert.equal(full.filter((l) => l.k === "kb").length, MAX.kb, "the cap still holds");
+  const shown = [
+    { k: "kb", id: "a", title: "A", c: 92, v: "k", sec: "" },
+    { k: "kb", id: "b", title: "B", c: 80, v: "q", sec: "" },
+  ];
+  addTopicLinks(shown, { q: "What?" }, ctx);
+  assert.deepEqual(shown.map((l) => l.id), ["a", "b"], "shown links are never evicted for the topic");
+});
+
 test("stampLinks: kept items arrive with honest concept links and the module lesson, never inflated topics", () => {
   const items = [
     { id: "q_new1", q: "Heart failure with reduced ejection fraction. Drug of choice?", o: ["Lisinopril", "Amlodipine", "Metoprolol", "Digoxin"], a: 0, exp: "The ACE inhibitor lisinopril is first line." },
