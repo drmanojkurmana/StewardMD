@@ -1734,6 +1734,8 @@ body.dark .pn-root .pn-km-sheet .pn-sheet-act .pn-btn { background: var(--pn-km-
 .pn-root .pn-why-wrap { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 8px; }
 .pn-root .pn-why-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .pn-root .pn-why-chip {
+  flex: 0 0 auto;
+  white-space: nowrap;
   min-height: 44px;
   min-width: 44px;
   padding: 0 14px;
@@ -1787,7 +1789,7 @@ body.dark .pn-root .pn-km-sheet .pn-sheet-act .pn-btn { background: var(--pn-km-
   font-size: 14.5px;
   color: var(--pn-why-accent);
 }
-.pn-root .pn-why-head .pn-l {
+.pn-root .pn-why-head .pn-why-l {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1838,5 +1840,8 @@ body.dark .pn-root .pn-km-sheet .pn-sheet-act .pn-btn { background: var(--pn-km-
 .pn-root .pn-why-ask:focus-visible {
   outline: 2px solid var(--pn-why-accent);
   outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pn-why-chip { transition: none; }
 }
 

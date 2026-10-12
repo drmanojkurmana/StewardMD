@@ -261,3 +261,44 @@ test("cache-busting: index.html and prep-loader.js at prep67, sw.js has whychips
   assert.ok(loaderJs.includes('var V = "prep67";'), "prep-loader.js bumped to prep67");
   assert.ok(swJs.includes("whychips1"), "sw.js CACHE contains whychips1");
 });
+
+/* ---------- 10. Isolation: unique prefixed names, no shared-class or global-selector leakage ----------
+ * Regression guard for the Narkē browser failure (EtCO2 trend row width): the Why chips must never
+ * restyle anything outside .pn-root, never reuse generic .pn-chip/.pn-btn classes, and never install
+ * a document-level handler, so Prep styles/handlers cannot shift other modules' layouts. */
+test("isolation: why chips use only pn-why* classes and why-opt/why-ask actions", () => {
+  const it = { id: "q-iso", q: "Q?", o: ["A1", "B1", "C1", "D1"], a: 0, r: ["ra", "rb", "rc", "rd"] };
+  const html = P.whyRowHtml(it, 1, 0);
+  assert.ok(!/class="pn-chip[ "]/.test(html), "chips must not carry the generic pn-chip class");
+  assert.ok(!html.includes("pn-btn"), "chips must not carry the generic pn-btn class");
+  const acts = [...html.matchAll(/data-act="([^"]+)"/g)].map((m) => m[1]);
+  assert.ok(acts.length === 4 && acts.every((a) => a === "why-opt"), "only data-act=why-opt in the row");
+  const classes = [...html.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/));
+  assert.ok(classes.every((c) => c.startsWith("pn-why")), "every class is pn-why* prefixed: " + classes.join(","));
+});
+
+test("isolation: why CSS is fully scoped under .pn-root with pn-why* selectors only", () => {
+  const css = read("prep.css");
+  const block = css.slice(css.indexOf("/* ---- Why option chips"));
+  const selectors = [...block.matchAll(/(^|\n)([^{}\n]+)\{/g)].map((m) => m[2].trim()).filter((s) => s && !s.startsWith("@"));
+  assert.ok(selectors.length >= 10, "why CSS block parsed: " + selectors.length + " rules");
+  for (const s of selectors) {
+    assert.ok(s.startsWith(".pn-root .pn-why"), "selector scoped and prefixed: " + s);
+  }
+  assert.ok(!/(^|\n)\s*button\s*\{/.test(block), "no bare button selector");
+  assert.ok(!block.includes("[data-act]"), "no [data-act] selector");
+  assert.ok(!css.includes(".nkc-") && !css.includes(".nrk-"), "prep.css never styles Narkē classes");
+});
+
+test("isolation: why handling stays inside the Prep root click handler; Narkē files stay untouched", () => {
+  const prepSrc = read("prep.js");
+  assert.ok(prepSrc.includes('root.addEventListener("click", onClick)'), "prep clicks are handled on the prep root");
+  assert.ok(prepSrc.includes('if (a === "why-opt") return onWhyOpt(b);'), "why-opt dispatched inside onClick");
+  assert.ok(prepSrc.includes('if (a === "why-ask") return onWhyAsk(b);'), "why-ask dispatched inside onClick");
+  assert.ok(!/document\.addEventListener\("click"/.test(prepSrc), "no document-level click handler in prep.js");
+  for (const f of ["narke-clinic.css", "narke-clinic.js", "narke.css", "narke.js"]) {
+    assert.ok(!read(f).includes("pn-why"), f + " has no pn-why leakage");
+  }
+  const clinicCss = read("narke-clinic.css");
+  assert.ok(clinicCss.includes(".nrk-root .nkc-mon > .nkc-trend"), "EtCO2 trend row rule intact and Narkē-scoped");
+});

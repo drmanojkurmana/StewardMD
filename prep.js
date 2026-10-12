@@ -472,7 +472,7 @@
       var L = optLetter(k);
       var isKey = k === a;
       var label = isKey ? ("Why " + L + " is right") : ("Why " + L + "?");
-      return '<button type="button" class="pn-chip pn-why-chip' + (isKey ? " pn-why-key" : "") + '" data-act="why-opt" data-opt="' + k + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + ' aria-pressed="false">' + esc(label) + '</button>';
+      return '<button type="button" class="pn-why-chip' + (isKey ? " pn-why-key" : "") + '" data-act="why-opt" data-opt="' + k + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + ' aria-pressed="false">' + esc(label) + '</button>';
     }).join("");
     return '<div class="pn-why-wrap"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + '><div class="pn-why-row" role="group" aria-label="Why each option">' + chips + '</div><div class="pn-why-box" style="display:none;" role="region" aria-live="polite"></div></div>';
   }
@@ -3046,10 +3046,10 @@
     var text = storedForOption(it, opt);
     var L = optLetter(opt), isKey = it && opt === it.a;
     if (text) {
-      box.innerHTML = '<div class="pn-why-card"><div class="pn-why-head"><span class="pn-l">' + esc(L) + '</span> <b>' + esc(isKey ? "Why " + L + " is right" : "Why " + L + " is wrong") + '</b></div><div class="pn-why-body">' + (inlineMd ? inlineMd(text) : esc(text)) + '</div></div>';
+      box.innerHTML = '<div class="pn-why-card"><div class="pn-why-head"><span class="pn-why-l">' + esc(L) + '</span> <b>' + esc(isKey ? "Why " + L + " is right" : "Why " + L + " is wrong") + '</b></div><div class="pn-why-body">' + (inlineMd ? inlineMd(text) : esc(text)) + '</div></div>';
       box.style.display = "";
     } else {
-      box.innerHTML = '<div class="pn-why-card pn-why-empty"><p class="pn-why-none">No stored note for this option</p><button type="button" class="pn-btn pri pn-why-ask" data-act="why-ask" data-opt="' + opt + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + '>Ask MaiK why</button></div>';
+      box.innerHTML = '<div class="pn-why-card pn-why-empty"><p class="pn-why-none">No stored note for this option</p><button type="button" class="pn-why-ask" data-act="why-ask" data-opt="' + opt + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + '>Ask MaiK why</button></div>';
       box.style.display = "";
     }
   }
