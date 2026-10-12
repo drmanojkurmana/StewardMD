@@ -1955,7 +1955,16 @@
 
   /* ── registry ────────────────────────────────────────────────────────────── */
 
+  /* The working cuff: an isometric training arm, cuff, aneroid gauge and bulb that inflates, lets down and plays the
+   * Korotkoff sounds on the beats between systolic and diastolic (iso-fig-bp-cuff.js, drawn with the Anatomy kit,
+   * mounted by iso-figures.js). Empty when the figure runtime is absent or switched off (smd_iso = "0"). */
+  function bpIso() {
+    var I = typeof window !== "undefined" && window.SMD_ISO;
+    return I && I.enabled() ? '<div class="cx-dia cx-dia--iso">' + I.slot("bp-cuff") + "</div>" : "";
+  }
+
   var DIAGRAMS = {
+    "diagram.bpiso":        { title: "Blood pressure: why the let-down rate matters", render: bpIso, interactive: true, iso: "bp-cuff" },
     "diagram.flowvolume":   { title: "Flow-volume loop", render: flowVolume, interactive: true },
     "diagram.airtrapping":  { title: "Air trapping in emphysema", render: airTrapping },
     "diagram.percussion":   { title: "Percussion zones", render: percussionMap, interactive: true },

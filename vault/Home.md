@@ -55,6 +55,8 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[ABDM]] — national health-data exchange (ABHA, HIP/HIU, consent); read the V3 reconciliation first
 
 ## Cross-cutting
+- [[Iso Figures]] - working isometric equipment figures (circle system, vaporizer, capnography line, syringe pump,
+  BP cuff, chest drain, retinoscope) drawn at build time with the MIT Anatomy kit; flag `smd_iso` (default ON)
 - [[Settings]] — grouped settings, search, model disclosures and Display return flow; presentation flag `smd_settings_redesign` defaults ON.
 - [[OTA Updates]] — push-to-devices update system, self-hosted (Cloudflare R2 + admin console).
   PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it
@@ -63,6 +65,10 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
 - [[Push]] — APNs/FCM. Read the "one thing to understand" first: the server can see no further
   than Apple, so "sent but nothing arrived" is the normal shape of a DEVICE-side failure.
+- [[Premium Motion]] — iOS-like layer: draggable sheets + depth, shared-element transitions, large
+  titles, pull to refresh, picker haptics, skeletons, long-press previews, Live Activities. One kill switch each.
+- [[Dynamic Notifications]] — every in-app notification (toast, foreground push, local) as a
+  Dynamic Island card. Flag `smd_dyn_notify` (default on).
 - [[Widgets]] — iOS home-screen and Lock Screen widgets. Ask MaiK ships three surfaces the
   owner picks in Edit Widget; read the `topCritical` contract gotcha before touching the parser.
 - [[Role-Tiers]] - PROPOSED role-based plans (UG Student to Clinician Pro, WardSynQ): who gets what, devices, audit bugs, owner decisions

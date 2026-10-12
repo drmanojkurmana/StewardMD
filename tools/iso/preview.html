@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iso figures preview</title>
+<style>body{margin:0;padding:16px;background:#f2f2ef;font:14px system-ui}body.dark{background:#0b0b0b;color:#ddd}.w{max-width:680px;margin:0 auto}</style>
+</head><body><div class="w" id="w"></div>
+<script>
+// tools/iso/preview.html?ids=a,b&dark=1&t=2.5 : every figure at once, for screenshots (not shipped).
+var q = {}; location.search.slice(1).split("&").forEach(function (p) { var kv = p.split("="); q[kv[0]] = decodeURIComponent(kv[1] || ""); });
+if (q.dark === "1") document.body.classList.add("dark");
+var ids = (q.ids || "circle-system").split(",");
+document.getElementById("w").innerHTML = ids.map(function (id) { return '<div class="smd-iso-slot" data-smd-iso="' + id + '"></div>'; }).join("");
+</script>
+<script src="/iso-figures.js"></script>
+</body></html>

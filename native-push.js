@@ -59,6 +59,14 @@
   var _lnId = 1;
   window.SMD_localNotify = async function (title, body, url) {
     try {
+      // App open and on screen: show it as a Dynamic Island notification instead of an OS banner
+      // (smd_dyn_notify=0 restores the banner). Tap routes like a tapped OS notification.
+      var D = window.SMD_dynNotify;
+      if (D && D.enabled() && document.visibilityState === "visible") {
+        D({ title: title || "StewardMD", message: body || "", symbol: "bell", haptic: true, duration: 5200,
+            onPress: function () { routeUrl(url || "/"); } });
+        return;
+      }
       if (native && C.Plugins && C.Plugins.LocalNotifications) {
         var LN = C.Plugins.LocalNotifications;
         try { var p = await LN.checkPermissions(); if (!p || p.display !== "granted") await LN.requestPermissions(); } catch (e) {}
@@ -277,15 +285,23 @@
           window.SMD_WSQ_ALERT.delivered(d);
           if (window.SMD_WSQ_ALERT.handle(d)) return;
         }
-        if (window.SMD_localNotify) window.SMD_localNotify(title, body, url);
+        var D = window.SMD_dynNotify;
+        if (D && D.enabled() && document.visibilityState === "visible") {
+          D({ title: title, message: body, symbol: "bell", haptic: true, duration: 5200, onPress: function () { routeTap(d); } });
+        } else if (window.SMD_localNotify) window.SMD_localNotify(title, body, url);
         else if (window.SMD_toast) window.SMD_toast(title + " — " + body);
         if (window.SMD_refreshNotifBadge) window.SMD_refreshNotifBadge();
       } catch (x) {}
     });
     // Tap on a delivered notification → route to its url.
     P.addListener("pushNotificationActionPerformed", function (a) {
+      routeTap(a && a.notification && a.notification.data);
+    });
+  }
+
+  // Where a tapped push goes: an OS banner tap and a tap on its in-app Dynamic Island card alike.
+  function routeTap(data) {
       try {
-        var data = a && a.notification && a.notification.data;
         var url = (data && (data.url || data.URL)) || "/";
         // A tap is evidence the alert reached this handset AND that a person opened it. Both are
         // recorded; neither is an acknowledgement, which stays an explicit act in the alert UI.
@@ -316,7 +332,6 @@
         }
         routeUrl(url);
       } catch (x) {}
-    });
   }
 
   /* What this DEVICE can tell us about push, which the server cannot see at all.

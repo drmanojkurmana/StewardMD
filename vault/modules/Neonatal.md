@@ -98,3 +98,5 @@ the engines convert (g/kg, mcg/mg, mg/kg/min <-> g/kg/day).
 - Licences are NOT cleared: see [[Decisions]] 2026-09-30 and the PR description. INTERGROWTH-21st, WHO
   2024 SBI (CC BY-NC-SA IGO), NICE (international reuse needs a licence), ASHP S4S, VON, StatPearls
   (CC BY-NC-ND), BAPM and several CC BY-NC papers are non-commercial or unclear.
+
+- **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.

@@ -60,7 +60,7 @@
     var E = G.SMD_NEO_ENGINE || (G.SMD_NEO && G.SMD_NEO.engine);
     return (drug.concentrations || []).filter(function (c) { return !c.when || !E || E.matches(c.when, E.context(d)).ok !== false; });
   }
-  var S = { id: null, ci: "0", custom: "", mode: "dose", dose: "", rate: "" };
+  var S = { id: null, ci: "0", custom: "", mode: "dose", dose: "", rate: "", iso: false };
   function r3(v) { return v == null ? "" : (Math.round(v * 1000) / 1000).toLocaleString("en-IN", { maximumFractionDigits: 3 }); }
   function r2(v) { return v == null ? "" : (Math.round(v * 100) / 100).toLocaleString("en-IN", { maximumFractionDigits: 2 }); }
 
@@ -84,6 +84,9 @@
       h += '<div class="nh-row"><div class="nh-lbl">The baby is getting</div><div class="nh-val">' + esc(r3(res.dose)) + " " + esc(drug.doseUnit) + '</div><div class="nh-work">' + esc(res.working) + "</div></div>";
       lines.push("Result: " + r3(res.dose) + " " + drug.doseUnit + " at " + num(S.rate) + " mL/h");
     }
+    // The pump at this rate (iso-fig-syringe-pump.js): the plunger speed and the start-up delay a big syringe adds.
+    // It shows the rate worked out above and never changes it. Behind the figure kill switch (smd_iso = "0").
+    var mlh = S.mode === "dose" ? res.mlh : num(S.rate);
     lines.unshift("Set pump: concentration " + r3(res.concPerMl) + " " + U.amt + "/mL (" + (conc.label || "") + "), weight " + wKg + " kg");
     var rg = drug.range, st = inRange(doseVal, rg);
     if (!rg) h += A.note("No newborn dose range on file for " + drug.name + ". Adult ranges are not shown.", "info");
@@ -92,6 +95,11 @@
     else h += '<div class="nh-work">Usual range ' + esc((rg.lo != null ? rg.lo : "") + (rg.hi != null ? " to " + rg.hi : "") + " " + (rg.unit || drug.doseUnit)) + "</div>";
     if (rg) h += A.srcLine(doc, rg);
     if (S.ci !== "custom") h += A.srcLine(doc, conc);
+    // Last, after the range and its source, so the figure never pushes the safety lines down.
+    if (G.SMD_ISO && G.SMD_ISO.enabled() && mlh > 0) {
+      h += '<details class="nh-iso"' + (S.iso ? " open" : "") + '><summary>See the syringe pump at ' + esc(r2(mlh)) + " mL/h</summary>" +
+        G.SMD_ISO.slot("syringe-pump", { state: { rate: mlh }, hide: ["rateI"] }) + "</details>";
+    }
     A.setSheet("inf", { title: drug.name + " infusion", tag: "Neonatal infusion", lines: ["Baby: " + (G.SMD_NEO ? G.SMD_NEO.summary() : "")].concat(lines) });
     return h;
   }
@@ -123,6 +131,7 @@
         S[k] = e.target.value;
         var o = el.querySelector("[data-inf-out]"); if (o && drug) o.innerHTML = out(A, doc, drug);
       };
+      if (!el._isoToggle) { el._isoToggle = 1; el.addEventListener("toggle", function (e) { if (e.target && e.target.className === "nh-iso") S.iso = e.target.open; }, true); }
       el.onclick = function (e) { var b = e.target.closest && e.target.closest("[data-inf-mode]"); if (b) { S.mode = b.getAttribute("data-inf-mode"); screen(el, A); } };
     });
   }

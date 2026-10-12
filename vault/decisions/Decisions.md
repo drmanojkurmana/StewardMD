@@ -5,6 +5,18 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-12 · Isometric equipment figures: the Anatomy kit runs at build time only (owner asked)
+
+**Decision.** Use the MIT Anatomy skill/kit (wheresryan22/anatomy) for working equipment figures, but vendor its kit
+into `tools/iso/` and run it only in Node at build time. The app ships static SVG plus a hand-written ES5 driver per
+figure and a ~16 KB ES5 runtime (`iso-figures.js`); no kit code reaches the WebView. **Why:** the kit is modern ES
+modules (the app is ES5 and buildless), its live pages run 136 KB to 1.6 MB, and its CSS has its own palette. Static
+SVG + projection basis + morph keyframes keeps the motion while staying ES5 and themeable (`body.dark`). **Trade-off:**
+a figure change needs `node tools/iso/build.mjs` and a token bump; the kit's geometry audit is not part of the build.
+Each driver mirrors its module's model (Narke circuit, Ophthalmos retinoscopy) and a test pins them equal. Flag
+`smd_iso` default ON with kill switch; all figures `ai_drafted`. **Status:** branch `claude/determined-hopper-ayuqpd`.
+See [[Iso Figures]].
+
 ## 2026-10-04 · WardSynQ: a return to the supplier reverses input GST with a debit note (owner)
 
 **Decision.** Every supplier return (`stock.js returnToSupplier`) carries a debit note written on the return movement:
@@ -11707,3 +11719,19 @@ default with 3 modules a day, 30 questions a module and a $5 daily breaker for a
 are STAGED on R2 and published with `tools/prep-qgen.mjs publish`, not from the app: overlay registration, immutable
 cache paths and the Share ID index need the tool, and an in-app publish could ship unreviewed text to every phone.
 `PREP_QGEN_OWNERS` narrows the Author tool to the content owner (OWNER_EMAILS has other accounts). [[modules/PrepNucleus]]
+
+## 2026-10-12 Dynamic Island notifications: a port, not the Expo package
+Owner asked for rit3zh/expo-dynamic-notifications on every in-app notification, "same smooth and premium". The package
+is React Native (Skia, Reanimated, Gesture Handler, Expo) and cannot load in the Capacitor WebView, so
+`dynamic-notify.js` reproduces its look (pill on the island, card joined by goo, blur reveal, swipe to dismiss) with an
+SVG metaball filter and rAF springs. toast.js, foreground push and SMD_localNotify all route to it; WardSynQ critical
+alerts keep their full-screen screen. iOS push `presentationOptions` drops `alert` so the OS banner does not double the
+card. Flag `smd_dyn_notify` (default on, "0" = old toast + banner). [[modules/Dynamic Notifications]]
+
+## 2026-10-12 Premium motion layer: generic modules, the app's own controls, one kill switch each
+Owner: "Do all" (eight iOS-style adaptations). Each is a standalone module that recognises its targets
+from the live DOM (sheet geometry, full-width rows with a bold title, a control named "Refresh", "Loading…"
+placeholders) instead of editing ~40 modules. Every action goes through the app's own controls (scrim
+click, Refresh button, the row's inner buttons, a replayed click), so no second code path can drift.
+Long-press menus never add copy/share (PHI). Live Activities carry counts/tokens/timers only (Lock Screen
+is public). Native Live Activity Swift is uncompiled until the next native build. [[modules/Premium Motion]]

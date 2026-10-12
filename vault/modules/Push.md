@@ -34,7 +34,9 @@ failures, not evidence of a server bug. Every past report in this repo has been 
   returns `{ sent, total }`. `total` distinguishes "no device registered" from "all rejected".
 - `native-push.js` — registration, listeners, and `SMD_pushDiagnostics()` (below).
 - `icu.js` `grpTestPush()` — the Settings button, wired to `ICU._testPush` for tests.
-- `capacitor.config.json` — `PushNotifications.presentationOptions: ["badge","sound","alert"]`.
+- `capacitor.config.json` — `PushNotifications.presentationOptions: ["badge","sound"]` (2026-10-12:
+  `alert` removed, a foreground push now shows as an in-app [[Dynamic Notifications]] card; with
+  `smd_dyn_notify=0` it falls back to the LocalNotifications re-raise).
   **This is NATIVE config**: it is baked in at build time by `cap sync`, so changing it costs a
   rebuild + reinstall. Without `alert` in that list, a push that arrives while the app is open shows
   nothing at all.
@@ -61,8 +63,8 @@ non-vacuous: 12 of the 13 fail against the previous implementation.
 
 ## Checklist when a device reports nothing
 1. iOS Settings -> StewardMD -> Notifications: **allowed?** This is the answer most of the time.
-2. Is the app in the foreground while testing? iOS shows no banner for that unless
-   `presentationOptions` includes `alert` AND the installed build was made after that was set.
+2. Is the app in the foreground while testing? Then it shows as an in-app Dynamic Island card,
+   not an OS banner ([[Dynamic Notifications]]).
 3. Focus / Do Not Disturb / Scheduled Summary.
 4. Was the app reinstalled? Every install is a new container (see CLAUDE.md), the device token
    changes, and the old one is only pruned once Apple reports it dead.

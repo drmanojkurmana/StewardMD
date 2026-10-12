@@ -378,6 +378,11 @@
         '<div class="body">' + bandBody(p, b) + "</div></div>";
     });
 
+    // A working model of the equipment the protocol relies on (isometric figure, iso-figures.js; empty when off).
+    if (p.isoFigure && typeof window !== "undefined" && window.SMD_ISO && window.SMD_ISO.enabled()) {
+      body += '<div class="sgx-card sgx-iso"><h4>The equipment, working</h4>' + window.SMD_ISO.slot(p.isoFigure) + "</div>";
+    }
+
     if (p.notes && p.notes.length) {
       body += '<div class="sgx-card"><h4>Clinical notes</h4>' +
         p.notes.map(function (n) { return '<div class="sgx-item"><span class="txt">' + esc(n) + "</span></div>"; }).join("") +

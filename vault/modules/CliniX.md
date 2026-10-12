@@ -333,3 +333,5 @@ station in `skills/obgyn.json` / `systems/obgyn.json` if wanted).
   in `index.html` must be bumped by the integrator, or a cached `clinix.js` keeps loading the old screens file.
 - **NMC:** stations carry an optional `competencies` array (OG8.2, OG8.3, OG35.x, OG16.2, OG19.2, OG12.1, ...), checked against
   the official CBME 2024 list in `origin/feat/tokos2-nmc`. CliniX ignores the field; the Tokos mapping file can read it.
+
+- **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.
