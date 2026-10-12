@@ -1,0 +1,167 @@
+{
+ "v": 1,
+ "module": "mcc-pb-rural",
+ "subject": "mcc-professional-behaviours",
+ "title": "Rural and remote ethics: confidentiality, consent and access to care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Rural practice brings **confidentiality** pressures, because staff and family often know each other. Health information belongs to the patient. A third party, including a spouse or a clinic receptionist, should receive results only when the patient consents or there is a clear clinical need to know. Discuss results with the patient first, in private.",
+   "say": "Rural practice brings confidentiality pressures, because staff and family often know each other. Health information belongs to the patient. A third party, including a spouse or a clinic receptionist, should receive results only when the patient consents or there is a clear clinical need to know. Discuss results with the patient first, in private.",
+   "vis": null
+  },
+  {
+   "tx": "Capacity is **decision-specific**. An adult with capacity may refuse recommended care, including transfer to hospital. Informed refusal requires that the risks were explained and understood, the refusal is documented, and the offer of care and safety-net arrangements stay open. Capacity assessment is not the same as agreeing with the decision.",
+   "say": "Capacity is decision-specific. An adult with capacity may refuse recommended care, including transfer to hospital. Informed refusal requires that the risks were explained and understood, the refusal is documented, and the offer of care and safety-net arrangements stay open. Capacity assessment is not the same as agreeing with the decision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "What it requires"
+    ],
+    "rows": [
+     [
+      "Understanding",
+      "Grasps the risks and options"
+     ],
+     [
+      "Appreciation",
+      "Sees how the risks apply to self"
+     ],
+     [
+      "Reasoning",
+      "Weighs options logically"
+     ],
+     [
+      "Expression",
+      "Communicates a clear choice"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a patient **lacks capacity** and urgent harm is possible, necessary treatment can proceed under emergency or implied consent, in line with provincial or state law. Find the legal surrogate in the statutory order, which varies by region. Known wishes, such as an advance directive or values expressed earlier, guide decisions. Disagreement among relatives does not stop urgent care.",
+   "say": "When a patient lacks capacity and urgent harm is possible, necessary treatment can proceed under emergency or implied consent, in line with provincial or state law. Find the legal surrogate in the statutory order, which varies by region. Known wishes, such as an advance directive or values expressed earlier, guide decisions. Disagreement among relatives does not stop urgent care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lacks capacity"
+     },
+     {
+      "id": "b",
+      "label": "Urgent necessary care"
+     },
+     {
+      "id": "c",
+      "label": "Check advance directive"
+     },
+     {
+      "id": "d",
+      "label": "Identify legal surrogate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conscientious objection lets a physician decline to **personally provide** a service, such as MAID, but it never permits blocking access. The physician must inform the patient of options and make an **effective referral** to a willing provider in good time. In a remote community this duty is harder, so arrangements must be made early. Clinical safety still needs to be maintained during the wait.",
+   "say": "Conscientious objection lets a physician decline to personally provide a service, such as MAID, but it never permits blocking access. The physician must inform the patient of options and make an effective referral to a willing provider in good time. In a remote community this duty is harder, so arrangements must be made early. Clinical safety still needs to be maintained during the wait.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Permitted",
+     "points": [
+      "Declining to personally provide",
+      "Not providing care that conflicts with conscience"
+     ]
+    },
+    "right": {
+     "title": "Required",
+     "points": [
+      "Telling the patient the options",
+      "Making a timely effective referral"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Remote practice means fatigue, isolation and limited backup can threaten safety. Recognising your own **fatigue** and impaired judgement is part of professional duty. Escalate to regional backup, transfer or a colleague rather than relying on personal endurance. Document concerns and the steps taken. Time-critical results, such as marked hyperkalaemia, need immediate action and prompt transfer.",
+   "say": "Remote practice means fatigue, isolation and limited backup can threaten safety. Recognising your own fatigue and impaired judgement is part of professional duty. Escalate to regional backup, transfer or a colleague rather than relying on personal endurance. Document concerns and the steps taken. Time-critical results, such as marked hyperkalaemia, need immediate action and prompt transfer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Recognise limits"
+     },
+     {
+      "id": "b",
+      "label": "Escalate to backup"
+     },
+     {
+      "id": "c",
+      "label": "Arrange safe transfer"
+     },
+     {
+      "id": "d",
+      "label": "Document decisions"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cultural safety means care respects the patient's **values**, language and chosen supports, including Elders, companions and interpreters, provided these are agreed with the patient. Such supports sit alongside, and never replace, evidence-based treatment. Companionship and interpretation can usually be accommodated during urgent transfer, so clinical need and cultural preference are both met.",
+   "say": "Cultural safety means care respects the patient's values, language and chosen supports, including Elders, companions and interpreters, provided these are agreed with the patient. Such supports sit alongside, and never replace, evidence-based treatment. Companionship and interpretation can usually be accommodated during urgent transfer, so clinical need and cultural preference are both met.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Canadian Medical Association Code of Ethics and Professionalism"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

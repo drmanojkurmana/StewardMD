@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "mcc-hp-cvd",
+ "subject": "mcc-health-promotion",
+ "title": "Cardiovascular risk and statins",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Statins are the **first-line** lipid-lowering drugs. They inhibit **HMG-CoA reductase**, the rate-limiting enzyme of hepatic cholesterol synthesis. Lower intracellular cholesterol upregulates LDL receptors, so more LDL is cleared from blood. Their main value is reducing atherosclerotic events, both in secondary prevention after myocardial infarction and in primary prevention when absolute risk is high.",
+   "say": "Statins are the first-line lipid-lowering drugs. They inhibit HMG-CoA reductase, the rate-limiting enzyme of hepatic cholesterol synthesis. Lower intracellular cholesterol upregulates LDL receptors, so more LDL is cleared from the blood. Their main value is reducing atherosclerotic events, both in secondary prevention after myocardial infarction and in primary prevention when absolute risk is high.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Statin"
+     },
+     {
+      "id": "s2",
+      "label": "HMG-CoA reductase"
+     },
+     {
+      "id": "s3",
+      "label": "Less hepatic cholesterol"
+     },
+     {
+      "id": "s4",
+      "label": "More LDL receptors"
+     },
+     {
+      "id": "s5",
+      "label": "Lower LDL"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2",
+      "inhibits"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ],
+     [
+      "s4",
+      "s5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After a **myocardial infarction**, intensify therapy early. Use high-intensity statin, such as atorvastatin 80 mg, and add **ezetimibe** if LDL remains high on maximal statin. Check adherence and liver enzymes. Mild, dose-related aminotransferase rises below three times the upper limit usually need repeat testing, not stopping. Ezetimibe blocks NPC1L1 at the intestinal brush border and is additive to statin action.",
+   "say": "After a myocardial infarction, intensify therapy early. Use a high-intensity statin, such as atorvastatin 80 milligrams, and add ezetimibe if LDL remains high on maximal statin. Check adherence and liver enzymes. Mild, dose-related aminotransferase rises below three times the upper limit usually need repeat testing rather than stopping. Ezetimibe blocks NPC1L1 at the intestinal brush border and works additively with statin action.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Best action"
+    ],
+    "rows": [
+     [
+      "Recent MI with raised LDL",
+      "Start or intensify high-intensity statin"
+     ],
+     [
+      "LDL still high on maximal statin",
+      "Add ezetimibe"
+     ],
+     [
+      "Mild ALT rise under 3 times normal",
+      "Repeat tests, continue"
+     ],
+     [
+      "Symptoms or bilirubin rise",
+      "Review urgently"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Statin muscle symptoms need careful sorting. Myalgia with normal **creatine kinase** is usually **statin-associated muscle symptoms**, managed by changing the regimen, such as lowering dose or switching statin. **Rhabdomyolysis** shows marked CK rise, myoglobinuria and often acute kidney injury. It needs stopping the statin, hydration and admission. Check thyroid function and interacting drugs before blaming the statin.",
+   "say": "Statin muscle symptoms need careful sorting. Myalgia with normal creatine kinase is usually statin-associated muscle symptoms, managed by changing the regimen, such as lowering the dose or switching statin. Rhabdomyolysis shows a marked creatine kinase rise, myoglobinuria and often acute kidney injury. It needs the statin stopped, hydration and admission. Check thyroid function and interacting drugs before blaming the statin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Symptoms only",
+     "Rhabdomyolysis"
+    ],
+    "rows": [
+     [
+      "Creatine kinase",
+      "Normal",
+      "Markedly raised"
+     ],
+     [
+      "Kidney function",
+      "Normal",
+      "Acute kidney injury"
+     ],
+     [
+      "Urine",
+      "Normal",
+      "Dark, myoglobinuria"
+     ],
+     [
+      "Management",
+      "Change regimen",
+      "Stop statin, admit, fluids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clarithromycin is a strong **CYP3A4** inhibitor. Simvastatin is cleared by CYP3A4, so its levels rise and **myopathy** risk increases. Macrolide antibiotics are a key interaction to check when prescribing. Usual practice is to hold simvastatin during a short antibiotic course and restart it afterwards. Primary prevention decisions use a validated **10-year risk** tool, weighed against frailty, life expectancy and personal preferences.",
+   "say": "Clarithromycin is a strong CYP3A4 inhibitor. Simvastatin is cleared by CYP3A4, so its levels rise and myopathy risk increases. Macrolide antibiotics are a key interaction to check when prescribing. Usual practice is to hold simvastatin during a short antibiotic course and restart it afterwards. Primary prevention decisions use a validated 10-year risk tool, weighed against frailty, life expectancy and personal preferences.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary prevention",
+     "points": [
+      "Calculate 10-year risk",
+      "Family history raises risk",
+      "Benefit grows with absolute risk",
+      "Consider frailty and life expectancy"
+     ]
+    },
+    "right": {
+     "title": "Secondary prevention",
+     "points": [
+      "Established disease, very high risk",
+      "Start high-intensity statin",
+      "Add ezetimibe if LDL stays high",
+      "Review adherence and side effects"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG238 Cardiovascular disease: risk assessment and reduction, including lipid modification",
+  "ESC/EAS Guidelines for the management of dyslipaemias"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

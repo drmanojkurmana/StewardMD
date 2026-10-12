@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "srd-gu-kidney",
+ "subject": "ss-radiology",
+ "title": "Renal masses: Bosniak, angiomyolipoma and renal cell carcinoma essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Angiomyolipoma** is a benign renal tumour made of fat, smooth muscle and vessels. Its key discriminator from **renal cell carcinoma** is macroscopic fat with no calcification. Calcification within a solid renal mass points toward malignancy. Large angiomyolipomas can bleed, and they are strongly linked to tuberous sclerosis.",
+   "say": "Angiomyolipoma is a benign renal tumour made of fat, smooth muscle and blood vessels. Its key feature that separates it from renal cell carcinoma is macroscopic fat without calcification. Calcification within a solid renal mass points towards malignancy. Large angiomyolipomas can bleed, and they are strongly linked to tuberous sclerosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Angiomyolipoma",
+     "points": [
+      "Macroscopic fat present",
+      "No internal calcification",
+      "Benign",
+      "Linked to tuberous sclerosis"
+     ]
+    },
+    "right": {
+     "title": "Renal cell carcinoma",
+     "points": [
+      "Fat usually absent",
+      "Calcification may be present",
+      "Malignant",
+      "Solid enhancing mass"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Clear cell renal cell carcinoma** is the commonest renal cell carcinoma and shows avid arterial enhancement with heterogeneous necrosis. Papillary renal cell carcinoma is often hypovascular and T2 dark. The Bosniak system and enhancement pattern guide whether a mass needs biopsy or resection. In the exam, look for arterial-phase hypervascularity first.",
+   "say": "Clear cell renal cell carcinoma is the commonest type and shows avid arterial enhancement with heterogeneous necrosis. Papillary renal cell carcinoma is often hypovascular and appears dark on T2 weighted MRI. The enhancement pattern and the Bosniak system guide whether a mass needs biopsy or resection. In the exam, look for arterial phase hypervascularity first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Solid renal mass"
+     },
+     {
+      "id": "b",
+      "label": "Fat present?"
+     },
+     {
+      "id": "c",
+      "label": "Angiomyolipoma"
+     },
+     {
+      "id": "d",
+      "label": "Arterial enhancement?"
+     },
+     {
+      "id": "e",
+      "label": "Clear cell RCC"
+     },
+     {
+      "id": "f",
+      "label": "Hypovascular, T2 dark: consider papillary RCC"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ],
+     [
+      "d",
+      "e",
+      "yes"
+     ],
+     [
+      "d",
+      "f",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adrenal adenoma** is usually benign and lipid-rich, so it loses signal on out-of-phase MRI and shows rapid contrast washout on delayed CT. **Adrenocortical carcinoma** is larger, more heterogeneous and shows slow washout. **Pheochromocytoma** is a catecholamine-secreting tumour that is bright on T2 and needs biochemical exclusion before any intervention.",
+   "say": "Adrenal adenoma is usually benign and lipid rich, so it loses signal on out of phase MRI and shows rapid contrast washout on delayed CT. Adrenocortical carcinoma is larger, more heterogeneous and shows slow washout. Pheochromocytoma secretes catecholamines and is bright on T2 weighted images, and it must be biochemically excluded before any intervention.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adenoma",
+     "points": [
+      "Lipid rich",
+      "Rapid washout on delayed CT",
+      "Benign",
+      "Small and homogeneous"
+     ]
+    },
+    "right": {
+     "title": "Adrenocortical carcinoma",
+     "points": [
+      "Large and heterogeneous",
+      "Slow or absent washout",
+      "Malignant",
+      "Often invasive"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Emphysematous pyelonephritis** is a life-threatening necrotising infection of the kidney with gas in the parenchyma, most often in diabetic patients. Management is urgent antibiotics with drainage or nephrectomy. **Xanthogranulomatous pyelonephritis** is a chronic granulomatous inflammation with a bear's paw sign, and it is usually managed with nephrectomy.",
+   "say": "Emphysematous pyelonephritis is a life threatening necrotising infection of the kidney with gas in the parenchyma, most often in diabetic patients. Management is urgent antibiotics with drainage or nephrectomy. Xanthogranulomatous pyelonephritis is a chronic granulomatous inflammation that shows a bear's paw sign, and it is usually managed with nephrectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Emphysematous",
+     "Xanthogranulomatous"
+    ],
+    "rows": [
+     [
+      "Gas in parenchyma",
+      "Present",
+      "Absent"
+     ],
+     [
+      "Typical patient",
+      "Diabetic, sepsis",
+      "Chronic infection, stones"
+     ],
+     [
+      "Key sign",
+      "Gas in renal tissue",
+      "Bear's paw sign"
+     ],
+     [
+      "Usual management",
+      "Antibiotics, drainage or nephrectomy",
+      "Nephrectomy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "ct-0ba5a9439ec7",
+  "ct-a079b76f014b",
+  "ct-c271505550c7"
+ ],
+ "src": [],
+ "refs": [
+  "Bosniak classification, 2019 update (Silverman et al.)",
+  "Campbell-Walsh-Wein Urology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 106
+ }
+}

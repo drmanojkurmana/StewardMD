@@ -1,0 +1,129 @@
+{
+ "v": 1,
+ "module": "son-alkylators-platinum",
+ "subject": "ss-medical-oncology",
+ "title": "Alkylating agents and platinum compounds: core high-yield principles",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Alkylating agents** add alkyl groups to DNA, forming cross-links and strand breaks that kill dividing cells. In this lesson the key agents are **cyclophosphamide** and **ifosfamide**, whose metabolite **acrolein** injures the bladder, and the **nitrosoureas**, which cross the blood-brain barrier. Each drug has a signature toxicity, so pairing it with its protective agent is a frequent exam point.",
+   "say": "Alkylating agents add alkyl groups to DNA, forming cross-links and strand breaks that kill dividing cells. In this lesson the key agents are cyclophosphamide and ifosfamide, whose metabolite acrolein injures the bladder, and the nitrosoureas, which cross the blood-brain barrier. Each drug has a signature toxicity, so pairing it with its protective agent is a frequent exam point.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Signature toxicity",
+     "Protective or exam point"
+    ],
+    "rows": [
+     [
+      "Cyclophosphamide",
+      "Haemorrhagic cystitis",
+      "Uroprotection with mesna"
+     ],
+     [
+      "Ifosfamide",
+      "Haemorrhagic cystitis, encephalopathy",
+      "Mesna, renal dose check"
+     ],
+     [
+      "Nitrosoureas",
+      "Delayed myelosuppression, pulmonary fibrosis",
+      "Lipophilic, cross the blood-brain barrier"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mesna** is a thiol that binds and inactivates **acrolein**, the urotoxic metabolite of ifosfamide and cyclophosphamide, within the bladder. It is not a haemostatic agent, so it does not treat bleeding from thrombocytopenia. Oral and IV routes are both used, and the total daily mesna dose is commonly set at 60 percent of the ifosfamide dose, with IV dilution to 20 mg/mL.",
+   "say": "Mesna is a thiol that binds and inactivates acrolein, the urotoxic metabolite of ifosfamide and cyclophosphamide, within the bladder. It is not a haemostatic agent, so it does not treat bleeding from thrombocytopenia. Oral and IV routes are both used, and the total daily mesna dose is commonly set at 60 percent of the ifosfamide dose, with IV dilution to 20 mg per millilitre.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ifosfamide"
+     },
+     {
+      "id": "b",
+      "label": "Acrolein in bladder"
+     },
+     {
+      "id": "c",
+      "label": "Mesna binds acrolein"
+     },
+     {
+      "id": "d",
+      "label": "Inactive complex excreted"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ifosfamide** is largely renally excreted, so creatinine clearance must be assessed before dosing. For a clearance of 31 to 45 mL/min the dose is commonly reduced to 75 percent. Encephalopathy can occur within a day, and **methylene blue** is the agent used for treatment and prevention. Fanconi syndrome, with phosphate wasting and metabolic acidosis, is another ifosfamide hallmark.",
+   "say": "Ifosfamide is largely renally excreted, so creatinine clearance must be assessed before dosing. For a clearance of 31 to 45 millilitres per minute the dose is commonly reduced to 75 percent. Encephalopathy can occur within a day, and methylene blue is the agent used for treatment and prevention. Fanconi syndrome, with phosphate wasting and metabolic acidosis, is another ifosfamide hallmark.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ifosfamide toxicities",
+     "points": [
+      "Haemorrhagic cystitis",
+      "Encephalopathy",
+      "Fanconi syndrome",
+      "Myelosuppression nadir 8 to 13 days"
+     ]
+    },
+    "right": {
+     "title": "Protective steps",
+     "points": [
+      "Mesna co-administration",
+      "Renal dose adjustment",
+      "Methylene blue for neurotoxicity",
+      "Hydration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Oxaliplatin** avoids CYP450 metabolism and is cleared non-enzymatically. Renal impairment matters: for creatinine clearance below 30 mL/min a reduced starting dose of 65 mg/m2 is advised. Calcium and magnesium infusions may reduce neurotoxicity. Extravasation requires stopping the infusion and removing the line without flushing.",
+   "say": "Oxaliplatin avoids CYP450 metabolism and is cleared non-enzymatically. Renal impairment matters: for creatinine clearance below 30 millilitres per minute a reduced starting dose of 65 milligrams per square metre is advised. Calcium and magnesium infusions may reduce neurotoxicity. Extravasation requires stopping the infusion and removing the line without flushing.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_f704c44c8964",
+  "q_1ec6585488e8",
+  "q_5f26bdd8e2ea"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}
