@@ -107,6 +107,68 @@ export async function buildSource(topic) {
 function bankArgs(topic) {
   return (topic.modules || []).map(([s, m]) => "v5/" + s + "/mcq/" + m + ".json").join(",");
 }
+function toks(s) { return String(s || "").toLowerCase().match(/[a-z0-9]+/g) || []; }
+/* Focused repair source: for each still-missing gap (guide gaps excluded: they need
+ * curated guideline sources, not chapter vocabulary), the top-overlap bank items as
+ * vocabulary plus a write-only-these quota. */
+export async function buildRepairSource(topic, missing) {
+  let items = [];
+  for (const [s, m] of topic.modules || []) {
+    try { items = items.concat(await moduleItems(s, m)); }
+    catch (e) {}
+  }
+  const scored = items.map((it) => {
+    const tk = toks([it.q, (it.o || []).join(" "), it.exp].join(" "));
+    return { it, tk };
+  });
+  const secs = [];
+  for (const cid of missing) {
+    const c = (topic.outline || []).find((x) => x.id === cid) || { id: cid, title: cid };
+    const gw = new Set(toks(c.title).filter((w) => w.length > 2));
+    const ranked = scored.map((s) => ({ s, n: s.tk.filter((w) => w.length > 2 && gw.has(w)).length }))
+      .sort((a, b) => b.n - a.n).slice(0, 5);
+    secs.push("## Write 2 new MCQs ONLY on: " + c.title + " [" + cid + "]",
+      "Chapter vocabulary (do not copy these stems):",
+      ...ranked.map((r) => "- " + trimItem(r.s.it, 380)));
+  }
+  const head = ["# " + topic.title + " (Nucleus360 repair; exam: NEET-PG)",
+    "Clinical guideline precedence: where NICE covers a point, NICE wins; India/US guidance must be labelled as such.",
+    "Write single-best-answer clinical MCQs with 4 options, a blind-checkable key, a reasoning-pattern explanation and verified references only.",
+    "Every question must test one of the gap concepts below. Do not write questions on any other concept.",
+    ""].join("\n");
+  const text = (head + "\n" + secs.join("\n")).slice(0, 30000);
+  const f = path.join(SRC, "r2-" + topic.id + ".md");
+  fs.writeFileSync(f, text);
+  return { file: f, chars: text.length, n: missing.length * 2 };
+}
+
+async function cmdRepair() {
+  const gap = JSON.parse(fs.readFileSync("/tmp/n360-gapfill.json", "utf8"));
+  const missByTopic = Object.fromEntries(gap.cov.map((c) => [c.id, c.missing.filter((m) => m !== "guide")]));
+  // Topics whose job yielded nothing at all: all their text gaps are missing.
+  for (const t of topics()) {
+    if (!(t.id in missByTopic)) missByTopic[t.id] = want(t).filter((w) => w.concept.id !== "guide").map((w) => w.concept.id);
+  }
+  const jobs = JSON.parse(fs.readFileSync(JOBS, "utf8"));
+  const cfg = E.qgenConfig({ ANTHROPIC_API_KEY: "x".repeat(20), PREP_QGEN_ON: "1" });
+  let tb = 0;
+  for (const t of topics()) {
+    const missing = missByTopic[t.id] || [];
+    if (!missing.length || jobs[t.id + "#r2"]) continue;
+    const r = await buildRepairSource(t, missing);
+    const est = QGEN.estimateJob(QGEN.plan({ text: fs.readFileSync(r.file, "utf8"), n: r.n, chunkChars: 40000 }), cfg);
+    tb += est.batch;
+    const [s, m] = (t.modules || [])[0] || ["medicine", "med-misc"];
+    const out = runQgen(["--source", r.file, "--topic", "Nucleus360 repair " + t.title, "--count", String(r.n),
+      "--exam", "neet-pg", "--subject", s, "--module", m, "--bank", bankArgs(t),
+      "--env", os.homedir() + "/.config/stewardmd/anthropic.env", "--run"]);
+    say(t.title + " repair " + r.n + " Qs batch $" + est.batch.toFixed(4) + " -> " + out.trim().split("\n").slice(-1));
+    const jm = out.match(/Job (\w+)/);
+    if (jm) jobs[t.id + "#r2"] = { job: jm[1], stage: "gen", genUsage: null, topic: t.id };
+    fs.writeFileSync(JOBS, JSON.stringify(jobs, null, 1));
+  }
+  say("repair batch estimate total: $" + tb.toFixed(4));
+}
 
 async function cmdSources() {
   for (const t of topics()) {
@@ -183,30 +245,43 @@ async function cmdPoll() {
  * the quota per gap; exact-stem duplicates against the bank are dropped. */
 async function cmdCollect() {
   const jobs = JSON.parse(fs.readFileSync(JOBS, "utf8"));
+  const byTopic = {};
+  for (const [key, j] of Object.entries(jobs)) {
+    const tid = j.topic || key;
+    (byTopic[tid] || (byTopic[tid] = [])).push(j);
+  }
   const kept = {}, stats = {};
   for (const t of topics()) {
-    const j = jobs[t.id];
-    if (!j) continue;
-    const f = path.join(WORK, j.job, "items.json");
-    if (!fs.existsSync(f)) { stats[t.id] = "no items.json"; continue; }
-    const jj = JSON.parse(fs.readFileSync(f, "utf8"));
+    const js = byTopic[t.id] || [];
+    if (!js.length) continue;
     const bankStems = new Set();
     for (const [s, m] of t.modules || []) {
       try { for (const it of await moduleItems(s, m)) if (it.q) bankStems.add(E.stemHash(it.q)); } catch (e) {}
     }
-    const passed = (jj.items || []).filter((it) => it && it.q && it.qg && (it.qg.v === "ok" || it.qg.approved) && !bankStems.has(E.stemHash(it.q)));
+    let passed = [];
+    for (const j of js) {
+      const f = path.join(WORK, j.job, "items.json");
+      if (!fs.existsSync(f)) continue;
+      const jj = JSON.parse(fs.readFileSync(f, "utf8"));
+      for (const it of jj.items || []) {
+        if (it && it.q && it.qg && (it.qg.v === "ok" || it.qg.approved) && !bankStems.has(E.stemHash(it.q))) {
+          bankStems.add(E.stemHash(it.q));
+          passed.push(it);
+        }
+      }
+    }
     const matched = N.matchConcepts(t.outline, passed.map((it, i) => ({ id: "g" + i, q: it.q, o: it.o, exp: it.exp, x: it.x })), t.type);
     const quotas = Object.fromEntries(want(t).map((w) => [w.concept.id, w.k]));
     const use = [];
     for (const [cid, ids] of Object.entries(matched.assign)) {
-      if (!quotas[cid]) continue;
-      for (const id of ids.slice(0, quotas[cid])) {
+      const cap = quotas[cid] || 3; // gap quota, else depth extras for covered concepts
+      for (const id of ids.slice(0, cap)) {
         const it = passed[Number(id.slice(1))];
         use.push({ ...it, sid: (t.modules[0] || ["medicine"])[0], t: (t.modules[0] || ["medicine", "med-misc"])[1], concept: cid, n360: t.id });
       }
     }
     kept[t.id] = use;
-    stats[t.id] = "passed:" + passed.length + " kept:" + use.length + "/" + countFor(t);
+    stats[t.id] = "passed:" + passed.length + " kept:" + use.length;
     say(t.title + " " + stats[t.id]);
   }
   fs.writeFileSync("/tmp/n360-kept.json", JSON.stringify(kept, null, 1));
@@ -225,5 +300,6 @@ else if (cmd === "--estimate") await cmdEstimate();
 else if (cmd === "--submit") await cmdSubmit();
 else if (cmd === "--poll") await cmdPoll();
 else if (cmd === "--collect") await cmdCollect();
-else { say("usage: --sources | --estimate | --submit | --poll | --collect"); process.exit(2); }
+else if (cmd === "--repair") await cmdRepair();
+else { say("usage: --sources | --estimate | --submit | --poll | --collect | --repair"); process.exit(2); }
 
