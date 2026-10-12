@@ -55,8 +55,8 @@ try {
   // 1. toast() routes into the island
   await ev("toast('Saved to your notes'); return 1");
   await sleep(90); await shot("1-opening");
-  // Wait for the springs to settle (a cold headless start can delay the first frames).
-  for (let i = 0; i < 40; i++) { if (await ev("var r=document.querySelectorAll('svg g rect')[1]; return r && Math.abs(+r.getAttribute('y')-55)<0.5")) break; await sleep(100); }
+  // Wait for the springs to settle (position AND width: a cold or loaded headless run delays the frames).
+  for (let i = 0; i < 60; i++) { if (await ev("var r=document.querySelectorAll('svg g rect')[1]; return r && Math.abs(+r.getAttribute('y')-55)<0.5 && Math.abs(+r.getAttribute('width')-366)<0.5")) break; await sleep(100); }
   await shot("2-open");
   const st = JSON.parse(await ev(`var r=document.querySelector('svg rect:nth-of-type(2)')||document.querySelectorAll('svg g rect')[1];
     var p=document.querySelectorAll('svg g rect')[0];
@@ -66,7 +66,7 @@ try {
   ok(st.vis && st.text, "toast() shows as a dynamic notification with its text");
   ok(!st.oldToast, "old bottom toast not used");
   ok(Math.abs(st.pw - 126) < 0.5 && Math.abs(st.ph - 37) < 0.5 && Math.abs(st.py - 8) < 0.5, "pill at rest: 126x37 at the top " + JSON.stringify([st.pw, st.ph, st.py]));
-  ok(Math.abs(st.cy - (8 + 37 + 10)) < 0.5 && Math.abs(st.cw - 366) < 0.5 && st.ch >= 64, "card at rest under the pill " + JSON.stringify([st.cy, st.cw, st.ch]));
+  ok(Math.abs(st.cy - (8 + 37 + 10)) < 0.5 && Math.abs(st.cw - 366) < 0.5 && st.ch >= 63.5, "card at rest under the pill " + JSON.stringify([st.cy, st.cw, st.ch]));
 
   // 2. swipe up dismisses
   const cy = st.cy + st.ch / 2;

@@ -27,6 +27,8 @@ const ev = async (e) => { const r = await call("Runtime.evaluate", { expression:
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 // The Drug Database waits on network calls that are slow or blocked in some environments: poll, never guess.
 const waitFor = async (expr, ms = 9000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(expr)) return true; await sleep(150); } return false; };
+// JSON.parse of a page result, naming the expression when the page answered "ERR:..." (a missing element).
+const jp = async (expr) => { const r = await ev(expr); try { return JSON.parse(r); } catch (e) { throw new Error("page result was not JSON (" + String(r).slice(0, 140) + ") for: " + expr.slice(0, 110)); } };
 const tab = (re) => ev(`[].slice.call(document.querySelectorAll('.rnav-tab')).filter(function(b){return ${re}.test(b.textContent)})[0].click(); return 1`);
 const sheetItem = (re) => ev(`[].slice.call(document.querySelectorAll('.hv-sheet button, .hv-sheet .hv-mi')).filter(function(b){return ${re}.test(b.textContent)})[0].click(); return 1`);
 const FASTDRAG = `window.__fastDrag=function(x,y0,y1,steps,ms){var t=document.elementFromPoint(x,y0);function T(y){return new Touch({identifier:7,target:t,clientX:x,clientY:y,pageX:x,pageY:y});}
@@ -51,7 +53,7 @@ try {
   for (let i = 0; i < 80; i++) { if (await ev("return !!(window.SMD_SPRING && window.SMD_liveActivity && document.getElementById('homeV2'))")) break; await sleep(200); }
   const morph = { seen: false, hidden: false, endW: 0 };
   for (let i = 0; i < 160; i++) {
-    const r = JSON.parse(await ev(`var cl=document.querySelector('img[aria-hidden=true][style*="2147483100"]');var h=document.querySelector('#homeV2 .rnav-brand img');return JSON.stringify({clone:!!cl,w:cl?Math.round(cl.getBoundingClientRect().width):0,hv:h?h.style.visibility:''})`));
+    const r = await jp(`var cl=document.querySelector('img[aria-hidden=true][style*="2147483100"]');var h=document.querySelector('#homeV2 .rnav-brand img');return JSON.stringify({clone:!!cl,w:cl?Math.round(cl.getBoundingClientRect().width):0,hv:h?h.style.visibility:''})`);
     if (r.clone) { morph.seen = true; morph.endW = r.w; }
     if (r.hv === "hidden") morph.hidden = true;
     if (morph.seen && !r.clone) break;
@@ -77,13 +79,14 @@ try {
 
   // 2. View transition: drug row -> detail
   await tab("/Drugs/"); await sleep(900); await sheetItem("/Drug Database/"); await sleep(2500);
+  await waitFor("return [].some.call(document.querySelectorAll('.db-comp'),function(b){return /Amiodarone/.test(b.textContent)})", 12000);
   await ev(`window.__vt=[];var o=document.startViewTransition.bind(document);document.startViewTransition=function(cb){var v=o(cb);__vt.push('start');v.updateCallbackDone.then(function(){var n=document.querySelector('[style*=view-transition-name]');__vt.push('hero:'+(n?n.textContent.trim():''))});v.finished.then(function(){__vt.push('finished')},function(){__vt.push('fin-err')});return v};return 1`);
-  const r = JSON.parse(await ev(`var b=[].slice.call(document.querySelectorAll('.db-comp')).filter(function(b){return /Amiodarone/.test(b.textContent)})[0];var r=b.getBoundingClientRect();return JSON.stringify({x:r.left+r.width/2,y:r.top+r.height/2})`));
+  const r = await jp(`var b=[].slice.call(document.querySelectorAll('.db-comp')).filter(function(b){return /Amiodarone/.test(b.textContent)})[0];var r=b.getBoundingClientRect();return JSON.stringify({x:r.left+r.width/2,y:r.top+r.height/2})`);
   await call("Input.dispatchMouseEvent", { type: "mousePressed", x: r.x, y: r.y, button: "left", clickCount: 1 });
   await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: r.x, y: r.y, button: "left", clickCount: 1 });
   await waitFor("return __vt.indexOf('finished')>0 && !!document.querySelector('.db-gen')");
   await sleep(200);
-  const vt = JSON.parse(await ev("return JSON.stringify(__vt)"));
+  const vt = await jp("return JSON.stringify(__vt)");
   ok(vt[0] === "start" && vt.indexOf("finished") > 0, "tapping a row runs a view transition " + JSON.stringify(vt));
   ok(vt.some(s => s === "hero:Amiodarone"), "the row title morphs into the matching screen title");
   ok(await ev("return !!document.querySelector('.db-gen') && /Amiodarone/.test(document.querySelector('.db-gen').textContent)"), "the replayed click still opened the drug");
@@ -94,7 +97,7 @@ try {
   await tab("/Drugs/"); await sleep(900); await sheetItem("/Drug Database/"); await waitFor("return !!document.querySelector('.db-bigt') && document.querySelectorAll('.db-comp').length>3");   // the list must be tall enough to scroll
   await ev("document.getElementById('dbBody').scrollTop=0;return 1"); await sleep(100);
   await ev("document.getElementById('dbBody').scrollTop=40;return 1"); await sleep(250);
-  const lt = JSON.parse(await ev("var t=document.querySelector('.db-bigt'),b=document.querySelector('.db-top');return JSON.stringify({op:t?t.style.opacity:'none',tf:t?t.style.transform:'',sh:b?b.style.boxShadow:''})"));
+  const lt = await jp("var t=document.querySelector('.db-bigt'),b=document.querySelector('.db-top');return JSON.stringify({op:t?t.style.opacity:'none',tf:t?t.style.transform:'',sh:b?b.style.boxShadow:''})");
   ok(lt.op !== "" && Number(lt.op) < 1 && /scale/.test(lt.tf), "the large title shrinks and fades as it scrolls " + JSON.stringify(lt));
   ok(/rgba/.test(lt.sh), "the bar draws its hairline once content is under it");
   await ev("MEDDB.close();return 1"); await sleep(400);
@@ -114,7 +117,7 @@ try {
     var i=document.createElement('input');i.type='range';i.min=0;i.max=10;i.step=1;i.value=5;i.id='__rng';document.body.appendChild(i);
     i.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}));
     [5,6,6,7,10].forEach(function(v){i.value=v;i.dispatchEvent(new Event('input',{bubbles:true}))});return 1`);
-  const hap = JSON.parse(await ev("return JSON.stringify(__hap)"));
+  const hap = await jp("return JSON.stringify(__hap)");
   ok(hap.sel === 2 && hap.light === 1, "a slider ticks once per step, firmer at the end " + JSON.stringify(hap));
 
   // 6. Skeletons
@@ -130,7 +133,7 @@ try {
     w.innerHTML='<div id="__pc" style="background:#fff;border-radius:12px;padding:12px 14px" onclick="window.__open=(window.__open||0)+1"><div style="font-weight:700">Bed 12</div><div>Medicine</div><button onclick="event.stopPropagation();window.__call=(window.__call||0)+1">Call</button></div>';
     document.body.appendChild(w);return 1`);
   await sleep(150);
-  const pc = JSON.parse(await ev("var r=document.getElementById('__pc').getBoundingClientRect();return JSON.stringify({x:r.left+60,y:r.top+16})"));
+  const pc = await jp("var r=document.getElementById('__pc').getBoundingClientRect();return JSON.stringify({x:r.left+60,y:r.top+16})");
   await call("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: pc.x, y: pc.y }] });
   await call("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
   await sleep(1000);   // the tap ran a view transition (a row); input hit-tests to the root until it ends
@@ -185,7 +188,7 @@ try {
   await waitFor(STRIP);
   ok(await ev("var s=document.querySelector('div[aria-hidden=true][style*=\"z-index: 2147482200\"]');return !!s&&s.style.opacity==='1'"), "the A-Z strip appears on the Drug Database");
   await ev("window.__az=0;window.SMD_HAPTICS=Object.assign({},window.SMD_HAPTICS||{},{selection:function(){__az++}});return 1");
-  const sr = JSON.parse(await ev("var s=document.querySelector('div[aria-hidden=true][style*=\"z-index: 2147482200\"]').getBoundingClientRect();return JSON.stringify({x:s.left+11,top:s.top,h:s.height})"));
+  const sr = await jp("var s=document.querySelector('div[aria-hidden=true][style*=\"z-index: 2147482200\"]').getBoundingClientRect();return JSON.stringify({x:s.left+11,top:s.top,h:s.height})");
   const ay = (L) => sr.top + 6 + (sr.h - 12) * ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(L) + 0.5) / 26;
   await call("Input.dispatchMouseEvent", { type: "mousePressed", x: sr.x, y: ay("C"), button: "left", clickCount: 1 });
   await call("Input.dispatchMouseEvent", { type: "mouseMoved", x: sr.x, y: ay("M"), button: "left", buttons: 1 });
@@ -203,7 +206,7 @@ try {
     document.body.appendChild(w);document.getElementById('__kin').focus();return 1`);
   await ev("__vv.height=innerHeight-320;__vv.dispatchEvent(new Event('resize'));return 1");
   await sleep(1400);
-  const kb = JSON.parse(await ev("var r=document.getElementById('__kin').getBoundingClientRect();return JSON.stringify({v:document.documentElement.style.getPropertyValue('--smd-kb'),bottom:Math.round(r.bottom),vis:innerHeight-320,bar:document.getElementById('__kbar').style.transform})"));
+  const kb = await jp("var r=document.getElementById('__kin').getBoundingClientRect();return JSON.stringify({v:document.documentElement.style.getPropertyValue('--smd-kb'),bottom:Math.round(r.bottom),vis:innerHeight-320,bar:document.getElementById('__kbar').style.transform})");
   ok(kb.v === "320px", "keyboard: --smd-kb is published (" + kb.v + ")");
   ok(kb.bottom <= kb.vis - 10 && kb.bottom > 0, "keyboard: the covered field is scrolled into the visible area " + JSON.stringify(kb));
   ok(/translate3d\(0px, -320px/.test(kb.bar), "keyboard: the pinned bar rides above the keyboard");
@@ -217,7 +220,7 @@ try {
 
   // 13. Undo card
   await ev("window.__did=0;window.__undid=0;SMD_undo.run({message:'Removed',perform:function(){__did++},restore:function(){__undid++}});return 1"); await sleep(900);
-  const up = JSON.parse(await ev("var b=document.querySelector('[data-dn-action]').getBoundingClientRect();return JSON.stringify({x:b.left+b.width/2,y:b.top+b.height/2})"));
+  const up = await jp("var b=document.querySelector('[data-dn-action]').getBoundingClientRect();return JSON.stringify({x:b.left+b.width/2,y:b.top+b.height/2})");
   await call("Input.dispatchMouseEvent", { type: "mousePressed", x: up.x, y: up.y, button: "left", clickCount: 1 });
   await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: up.x, y: up.y, button: "left", clickCount: 1 });
   await sleep(300);
