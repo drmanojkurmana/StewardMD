@@ -200,3 +200,10 @@
 - Gates: LP.checkLesson 7/7, kb_validate_v2 7/7, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 7/7. 70 IDs unique. maikbook2 1500 -> 1570, no rebase needed.
 - STATE2/COVERAGE2 updated + mirrors. Next: Miller anesthesia queue.
 
+
+## Wave MIL1 (2026-10-13, muse Wonder): anesthesia gaps 8/8 COMPLETE
+- Branch books2-mil1 from origin/main post-PATH4-merge, PR #1598 open (no merge; squash after browser job). All 8 gaps + 8 KB + 80 MCQs bk2-ane-001..080 (cardiac x2, neuro x2, transplant x2, paediatric x2).
+- New anaesthesia overlay subject dir; test subject loop extended (generator patches loop too).
+- Gates: LP.checkLesson 8/8, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 8/8. 80 IDs unique. maikbook2 1590 -> 1670, no rebase needed.
+- STATE2/COVERAGE2 updated + mirrors. Next: Plastics queue.
+
