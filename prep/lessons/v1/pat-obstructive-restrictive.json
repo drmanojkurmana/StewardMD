@@ -1,0 +1,113 @@
+{
+ "v": 1,
+ "module": "pat-obstructive-restrictive",
+ "subject": "pathology",
+ "title": "Obstructive, restrictive and vascular lung diseases",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Obstructive lung disease** limits expiratory airflow through airway narrowing or loss of elastic recoil, trapping air and raising residual volume. Emphysema destroys alveolar walls, bronchitis plugs airways with mucus and asthma reversibly constricts bronchial smooth muscle. Restrictive disease instead shrinks expandable volume through stiff lungs or weak chest mechanics.",
+   "say": "Obstruction traps air by narrowing airways or destroying recoil. Restriction shrinks volumes through stiff lungs or weak mechanics. Emphysema, bronchitis and asthma obstruct differently.",
+   "vis": null
+  },
+  {
+   "tx": "**Emphysema** destroys alveolar septa and capillaries by protease antiprotease imbalance, driven by smoking and, in pure form, alpha 1 antitrypsin deficiency. Centriacinar disease hits upper lobes in smokers, while panacinar disease hits lower lobes in antitrypsin deficiency. Lost recoil collapses small airways on expiration, the core physiological defect.",
+   "say": "Emphysema digests alveolar walls when proteases beat antiproteases. Smokers lose upper lobes centriacinar; antitrypsin deficiency loses lower lobes panacinar. Recoil loss collapses airways.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chronic bronchitis",
+     "points": [
+      "Clinical cough definition (productive 3 months in 2 years)",
+      "Mucous gland hypertrophy (raised Reid index)",
+      "Airway plugging and infection dominate",
+      "Blue bloater tendency with retained CO2"
+     ]
+    },
+    "right": {
+     "title": "Emphysema",
+     "points": [
+      "Anatomical alveolar wall destruction",
+      "Loss of recoil and air trapping",
+      "Dyspnoea dominates over cough",
+      "Pink puffer tendency with preserved gases until late"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Asthma** is reversible airway hyperreactivity with eosinophilic inflammation, smooth muscle hypertrophy, mucus plugging and basement membrane thickening. Fatal attacks show lungs overinflated with widespread mucus plugs, Charcot Leyden crystals from eosinophils and Curschmann spirals in sputum. Atopy and type 2 cytokines drive most childhood and many adult cases.",
+   "say": "Asthma reversibly narrows hyperreactive airways with eosinophilic inflammation and mucus plugs. Fatal lungs overinflate with plugged airways. Type 2 cytokines drive most cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Restrictive interstitial diseases** scar the interstitium into stiff honeycombed lungs, as in idiopathic pulmonary fibrosis with usual interstitial pneumonia pattern worst at subpleural bases. Sarcoidosis restricts through granulomas with a different, upper lobe and nodal pattern. Physiology shows reduced volumes with preserved or raised flow ratios and impaired gas transfer.",
+   "say": "Fibrosis stiffens lungs into honeycombs shrinking all volumes. Idiopathic fibrosis scars the bases; sarcoid granulomas favour upper lobes and nodes. Transfer factor falls early.",
+   "vis": null
+  },
+  {
+   "tx": "**Pulmonary hypertension** remodels small pulmonary arteries through medial hypertrophy, intimal fibrosis and plexiform lesions in severe idiopathic disease, straining the right ventricle into cor pulmonale. Chronic hypoxia from lung disease constricts vessels reversibly at first, then fixes them structurally. Left heart disease raises pressure passively backward from filled lungs, the commonest overall mechanism.",
+   "say": "Pulmonary hypertension thickens small arteries until the right ventricle fails. Hypoxia constricts then fixes vessels. Left heart disease backs pressure up most commonly overall.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Volumes",
+     "Flow ratio clue",
+     "Transfer factor"
+    ],
+    "rows": [
+     [
+      "Obstructive",
+      "Trapping raises residual volume",
+      "FEV1/FVC reduced",
+      "Low in emphysema, near normal in asthma"
+     ],
+     [
+      "Restrictive lung",
+      "All volumes reduced",
+      "FEV1/FVC normal or raised",
+      "Low in interstitial disease"
+     ],
+     [
+      "Chest wall restriction",
+      "Volumes reduced",
+      "Ratio preserved",
+      "Relatively preserved early"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-151",
+  "bk2-pat-152",
+  "bk2-pat-153",
+  "bk2-pat-154",
+  "bk2-pat-155",
+  "bk2-pat-156",
+  "bk2-pat-157",
+  "bk2-pat-158",
+  "bk2-pat-159",
+  "bk2-pat-160"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
