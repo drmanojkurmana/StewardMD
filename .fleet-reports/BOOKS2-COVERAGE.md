@@ -92,3 +92,8 @@ Wave GUY2 DONE (branch books2-guy2): phy-thyroid, phy-adrenal, phy-calcium, phy-
 
 Wave LON1 DONE (branch books2-lon1): med-cad-stable, med-acs, med-arrhythmias, med-valvular, med-endocarditis, med-cardiomyopathy, med-pericardial, med-hypertension. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-med-001 to 080. Medicine gaps remaining: 92 med-* (LON2: respiratory block).
 
+Wave LON1 DONE (branch books2-lon1): med-cad-stable, med-acs, med-arrhythmias, med-valvular, med-endocarditis, med-cardiomyopathy, med-pericardial, med-hypertension. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-med-001 to 080. Medicine gaps remaining: 92 med-* (LON2: respiratory block).
+
+Wave LON2 DONE (branch books2-lon2): med-asthma, med-copd (KB reused), med-bronchiectasis-cf, med-pneumonia, med-tb, med-ild, med-pe-pulmonary-htn, med-pleural, med-lung-cancer, med-resp-failure. Each: 1 v1 lesson, 1 KB (9 new + 1 reused), 10 MCQs bk2-med-081 to 180. Medicine gaps remaining: 82 med-* (LON3: GI block next).
+
+

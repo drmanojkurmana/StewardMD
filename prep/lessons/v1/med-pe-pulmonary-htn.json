@@ -1,66 +1,60 @@
 {
- "v": 1,
- "module": "med-pe-pulmonary-htn",
- "subject": "medicine",
- "title": "Pulmonary embolism: suspect it, risk-stratify, anticoagulate",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "**Pulmonary embolism** presents with breathlessness, pleuritic pain, tachycardia, haemoptysis or syncope, and it is missed because every one of those has commoner causes. Suspect it after surgery, immobility, cancer, pregnancy or previous clots, and assess **clinical probability** formally rather than by instinct. A negative D-dimer helps only in low-probability patients; imaging confirms the diagnosis (ESC guidance; NICE NG191).",
-   "say": "Suspect embolism with breathlessness or pleuritic pain after surgery, immobility, cancer or pregnancy, and score clinical probability formally.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Suspect PE"
-     },
-     {
-      "id": "b",
-      "label": "Score probability"
-     },
-     {
-      "id": "c",
-      "label": "D-dimer or imaging"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "A patient with embolism and **hypotension or shock** has high-risk disease needing urgent senior, critical-care and reperfusion assessment. Stable patients are **anticoagulated promptly** where suspicion is high and bleeding risk allows, without waiting for every test. Look for right-heart strain, document bleeding risk, and arrange follow-up for clot and cancer screening as guided.",
-   "say": "Hypotension makes embolism high-risk and urgent. Stable patients with high suspicion are anticoagulated promptly when bleeding risk allows.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "State",
-     "Priority"
-    ],
-    "rows": [
-     [
-      "Shocked",
-      "Senior + reperfusion assessment"
-     ],
-     [
-      "Stable, high suspicion",
-      "Prompt anticoagulation"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Leg ultrasound, CT pulmonary angiography and echocardiography each answer different questions, so choose by probability, stability and local protocol. After treatment, explain the clot, the medicine plan and its duration, bleeding precautions and when to seek help, and document the shared decision. Recurrent breathlessness on treatment is a new emergency, not reassurance.",
-   "say": "Choose imaging by probability and stability, and explain the treatment plan, bleeding precautions and return advice.",
-   "vis": null
+  "v": 1,
+  "module": "med-pe-pulmonary-htn",
+  "subject": "medicine",
+  "title": "Pulmonary embolism and pulmonary hypertension",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**PE** (**pleuritic** tachypnoea tachycardia, **Wells** DVT cancer immobile, **DVT** calf Homan swells, **syncope** massive obstructs, **ABG** alkalosis hypoxia, **ECG** S1Q3T3 T inverts, **troponin** RV strains, **D-dimer** rules low) with **viva** (**post-op** immobile flight, **pregnant** prothrombotic) profiles; **PERC** (rules out low) screens. Clots fly.",
+      "say": "Pleuritics tachys Wellses DVTs is PE: syncopes obstruct ABGs blow ECGs strain troponins leak dimers rule PERCs clear flights still pregnancies clot legs swell. Emboli lodge.",
+      "vis": null
+    },
+    {
+      "tx": "**Examination** (**tachypnoea** hurried cyanosed, **pleural** rub catches edge, **DVT** calves measure Homan, **JVP** raised RV fails, **loud P2** palpable heaves, **shock** mottled oliguric, **legs** varicose ulcers, **malignancy** nodes cachexia) with **bedside** (**oximetry** dips walks, **ECG** right strains, **echo** McConnell RV) strains; **Homan** (never alone) cautions. Chests strain.",
+      "say": "Tachypnoeas rubs DVTs JVPs is exam: P2s thump shocks mottle legs ulcer malignancies waste oximetries dip ECGs invert echos stun Homans caution clots search scans confirm. Necks distend.",
+      "vis": null
+    },
+    {
+      "tx": "**Management** (**heparin** LMWH bridges, **DOAC** apixaban bleeds, **lysis** alteplase massive arrests, **embolectomy** surgical catheter selected, **filter** IVC recurrent bleeds, **duration** 3 months provoked, **cancer** LMWH months, **follow** CTEPH breathless) with **traps** (**bleeds** HAS-BLED falls, **HIT** platelets argatroban, **pregnancy** LMWH warfarin traps) closes; **registry** (delays audits) tracks. Clots dissolve.",
+      "say": "Heparins DOACs lyses is Rx: embolectomies suck filters trap durations time cancers thin follows haunt bleeds fall HITs drop pregnancies heparinise warfarins trap delays audit CTEPHs hunt pressures track. Vessels open.",
+      "vis": null
+    },
+    {
+      "tx": "**Pulmonary** (**dyspnoea** exertional syncope, **loud P2** left heave TR, **echo** pressures TR jets, **groups** PAH left lung clot, **sildenafil** PDE5 breathes, **bosentan** liver monthly, **anticoagulate** CTEPH lifelong, **transplant** end-stage refers) with **tests** (**RHC** gold pressures, **walk** 6-minute classes, **BNP** RV fails, **CT** webs bands) classes; **pregnancy** (PAH forbids) warns. Pressures climb.",
+      "say": "Dyspnoeas P2s echos groups is pulmonary: sildenafils breathe bosentans guard anticoagulates thin transplants refer caths gold walks class BNPs rise CTs web pregnancies forbid contraceptions counsel risks stratify. Lungs press.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-141",
+    "bk2-med-142",
+    "bk2-med-143",
+    "bk2-med-144",
+    "bk2-med-145",
+    "bk2-med-146",
+    "bk2-med-147",
+    "bk2-med-148",
+    "bk2-med-149",
+    "bk2-med-150"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }
