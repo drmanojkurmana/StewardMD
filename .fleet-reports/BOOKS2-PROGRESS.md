@@ -150,3 +150,7 @@
 - Branch books2-micro1 from origin/main, PR open (no merge; squash after browser job). 12 lessons + 12 KB + 120 MCQs bk2-mic-001..120 (staph, strep, neisseria, enterobacteriaceae, salmonella, vibrio/campylobacter/h.pylori, non-fermenters, haemophilus/zoonoses, NTM/leprosy, rickettsia/chlamydia/mycoplasma, innate/complement, immunodeficiency/transplant).
 - Gates: LP.checkLesson 12/12, kb_validate_v2 12/12, prep-books-mcqs 2/2, prep-lessons 23/23. 120 IDs unique, no cross-subject overlap. maikbook2 1080 -> 1200.
 - STATE2/COVERAGE2 updated in /tmp/books2-work + fleet mirrors. Next: MICRO2 (5 virology + systemic mycoses + 4 parasitology, Paniker text ready).
+## Wave MICRO2 (2026-10-13, muse Wonder): microbiology complete 22/22 pending merges
+- Branch books2-micro2 from origin/main, PR open (no merge; squash after browser job). 10 lessons + 10 KB + 100 MCQs bk2-mic-121..220 (herpesviruses, picorna/enteric, respiratory RNA viruses, arbo/rabies, hepatitis B-E, systemic mycoses, intestinal protozoa, blood/tissue protozoa, cestodes/trematodes, nematodes).
+- Gates: LP.checkLesson 10/10, kb_validate_v2 10/10, prep-books-mcqs 2/2, prep-lessons 23/23. 100 IDs unique, no cross-subject overlap. maikbook2 1080 -> 1180 (1300 after MICRO1 merges).
+- STATE2/COVERAGE2 updated in /tmp/books2-work + fleet mirrors. Next: pathology 17, pharmacology 28.
