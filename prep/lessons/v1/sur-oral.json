@@ -1,0 +1,192 @@
+{
+ "module": "sur-oral",
+ "subject": "surgery",
+ "title": "Oral cavity cancer, mucosal premalignant lesions, TNM staging, and surgical resection margins",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "AJCC Cancer Staging Manual 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Oral cavity squamous cell **carcinoma** (SCC) accounts for over 90 percent of oral malignancies, strongly correlated with tobacco usage, betel quid chewing, and alcohol abuse. The lateral border of the tongue and floor of the mouth represent the most common anatomical sites. Premalignant lesions include leukoplakia (white plaque that cannot be scraped off) and erythroplakia (velvety red lesion), with erythroplakia harboring dysplasia or invasive carcinoma in up to 90 percent of biopsies.",
+   "say": "Oral squamous cell carcinoma arises predominantly on the lateral tongue and floor of mouth, linked to tobacco, betel quid, and alcohol. Leukoplakia is a non-scrapable white plaque, while velvety erythroplakia carries a 90 percent risk of harboring dysplasia or invasive cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Premalignant lesion",
+     "Gross clinical appearance",
+     "Malignant transformation risk"
+    ],
+    "rows": [
+     [
+      "Leukoplakia",
+      "Hyperkeratotic white plaque that cannot be rubbed off",
+      "3 to 5 percent transformation rate"
+     ],
+     [
+      "Erythroplakia",
+      "Velvety, erythematous, smooth red mucosal patch",
+      "Up to 90 percent harbor severe dysplasia or SCC"
+     ],
+     [
+      "Erythroleukoplakia",
+      "Speckled mixed red and white mucosal plaque",
+      "Intermediate to high risk (20 to 30 percent)"
+     ],
+     [
+      "Oral lichen planus",
+      "Wickham striae, erosive reticular mucosal pattern",
+      "Under 1 percent transformation risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The AJCC 8th edition staging system for oral cancer incorporated depth of **invasion** (DOI) into primary tumor (T) categorization, reflecting the exponential risk of occult cervical lymph node metastases. DOI is measured microscopically from the level of the adjacent normal basement membrane to the deepest point of tumor invasion. Every 5 mm increase in depth of invasion upstages the primary tumor T-category independently of superficial diameter.",
+   "say": "The AJCC eighth edition incorporates depth of invasion into oral cavity T-staging. Depth is measured from the adjacent basement membrane to the deepest tumor margin. Every five millimeters of depth increases the T-stage and elevates nodal metastasis risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Oral cavity squamous carcinoma biopsy"
+     },
+     {
+      "id": "o2",
+      "label": "Measure tumor diameter & microscopic depth of invasion"
+     },
+     {
+      "id": "o3",
+      "label": "DOI under 5 mm: T1 / DOI 5 to 10 mm: T2"
+     },
+     {
+      "id": "o4",
+      "label": "DOI over 10 mm upstages tumor directly to T3"
+     },
+     {
+      "id": "o5",
+      "label": "Selective neck dissection indicated if DOI > 3 to 4 mm"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ],
+     [
+      "o3",
+      "o4"
+     ],
+     [
+      "o4",
+      "o5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical resection of oral cancer demands wide local **excision** with a 1.0 to 1.5 cm macroscopic three-dimensional surgical margin to secure a minimum 5 mm histological clear margin. Close margins (under 5 mm) and positive margins (tumor at ink) are associated with elevated local recurrence. When tumors approximate or invade the alveolar ridge, marginal mandibulectomy is performed if cortical bone alone is uninvolved, whereas segmental mandibulectomy is mandatory for marrow invasion.",
+   "say": "Oral cancer resection requires 1 to 1.5 centimeter gross margins to achieve a 5 millimeter clear microscopic margin. Marginal mandibulectomy preserves mandibular continuity for cortical proximity, while medullary invasion requires segmental bone resection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mandibular status",
+     "Surgical bone procedure",
+     "Reconstruction modality"
+    ],
+    "rows": [
+     [
+      "Cortical bone untouched",
+      "Wide soft-tissue resection alone",
+      "Primary closure or split-thickness graft"
+     ],
+     [
+      "Tumor abuts or invades cortex",
+      "Marginal mandibulectomy (rim resection)",
+      "Local flap or submental island flap"
+     ],
+     [
+      "Gross medullary canal invasion",
+      "Segmental mandibulectomy",
+      "Vascularized free fibula osteocutaneous flap"
+     ],
+     [
+      "Extensive soft-tissue tongue defect",
+      "Subtotal glossectomy",
+      "Anterolateral thigh (ALT) free fasciocutaneous flap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of the cervical lymph nodes is vital, as oral cavity tumors exhibit occult nodal **metastasis** rates exceeding 20 percent even in clinically N0 necks. Elective selective neck dissection encompassing levels I, II, and III (supraomohyoid neck dissection) is standard for clinically node-negative early cancers with DOI greater than 3 to 4 mm. Pathological discovery of extranodal extension (ENE) in resected nodes necessitates postoperative concurrent chemoradiotherapy.",
+   "say": "Clinically node-negative oral cancers have an occult metastasis rate exceeding 20 percent. Elective supraomohyoid neck dissection of levels I through III is standard for tumors deeper than 4 millimeters. Extranodal extension mandates postoperative adjuvant chemoradiotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Clinically N0 oral cancer with DOI > 3 mm"
+     },
+     {
+      "id": "n2",
+      "label": "Elective supraomohyoid neck dissection (levels I, II, III)"
+     },
+     {
+      "id": "n3",
+      "label": "Histological evaluation for extranodal extension"
+     },
+     {
+      "id": "n4",
+      "label": "Negative nodes: observation / Single node: radiotherapy"
+     },
+     {
+      "id": "n5",
+      "label": "Extranodal extension present: adjuvant chemoradiation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "56bc8379-4000-8000-56bc-837912345678",
+  "53bc7ec0-4000-8000-53bc-7ec012345678",
+  "54bc8053-4000-8000-54bc-805312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

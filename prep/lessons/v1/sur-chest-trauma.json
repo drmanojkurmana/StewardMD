@@ -1,0 +1,197 @@
+{
+ "module": "sur-chest-trauma",
+ "subject": "surgery",
+ "title": "Thoracic trauma: tension pneumothorax, massive hemothorax, cardiac tamponade, and flail chest",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "ATLS 10th edition"
+ ],
+ "steps": [
+  {
+   "tx": "Tension **pneumothorax** develops when a one-way parenchymal or chest wall valve permits air entry into the pleural space during inspiration without escape during expiration. Progressive intrapleural pressure collapses the ipsilateral lung, shifts mediastinal structures to the contralateral side, kinks the inferior vena cava, and halts venous return, causing fatal shock. Immediate needle decompression or finger thoracostomy must precede any diagnostic chest radiography.",
+   "say": "Tension pneumothorax is a one-way valve pleural air accumulation causing lung collapse, mediastinal shift, vena cava compression, and fatal obstructive shock. Immediate needle decompression or finger thoracostomy must be executed prior to imaging.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Pleural tear acts as one-way inspiratory valve"
+     },
+     {
+      "id": "t2",
+      "label": "Progressive intrapleural positive pressure rises"
+     },
+     {
+      "id": "t3",
+      "label": "Mediastinal shift kinks vena cava and decreases preload"
+     },
+     {
+      "id": "t4",
+      "label": "Obstructive shock, severe hypoxia, and tracheal deviation"
+     },
+     {
+      "id": "t5",
+      "label": "Immediate needle thoracostomy in 5th intercostal space"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ],
+     [
+      "t4",
+      "t5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive **hemothorax** is defined as rapid intrapleural blood accumulation exceeding 1,500 mL or greater than one-third of the patient circulating blood volume. Clinical findings include dullness to percussion, absent breath sounds, and hemorrhagic shock without tracheal shift. Urgent tube thoracostomy restores pulmonary expansion. Indications for emergency surgical thoracotomy include immediate evacuation of 1,500 mL or ongoing hemorrhage exceeding 200 mL/hour for 2 to 4 consecutive hours.",
+   "say": "Massive hemothorax is defined by accumulation of more than 1500 milliliters of blood in the pleural space. Emergency thoracotomy is indicated if initial drainage exceeds 1500 milliliters or if bleeding continues above 200 milliliters per hour for two to four hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Tension pneumothorax",
+     "Massive hemothorax"
+    ],
+    "rows": [
+     [
+      "Percussion note",
+      "Hyperresonant to percussion",
+      "Stony dull to percussion"
+     ],
+     [
+      "Tracheal position",
+      "Shifted toward contralateral side",
+      "Usually midline / neutral"
+     ],
+     [
+      "Neck veins",
+      "Distended (obstructive outflow)",
+      "Flat / collapsed (hypovolemic shock)"
+     ],
+     [
+      "Immediate therapy",
+      "Decompression needle / finger",
+      "Large-bore chest tube (28-32 Fr)"
+     ],
+     [
+      "Surgical threshold",
+      "Rarely requires emergent thoracotomy",
+      "Thoracotomy if > 1500 mL or > 200 mL/hr ongoing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiac **tamponade** occurs when acute hemopericardium restricts diastolic ventricular filling, most commonly following penetrating precordial trauma. Beck triad characterizes this state: systemic hypotension, distended jugular neck veins, and muffled heart sounds. Pulsus paradoxus (a drop in systolic blood pressure exceeding 10 mmHg during inspiration) is present. Extended Focused Assessment with Sonography for Trauma (**FAST**) rapidly identifies pericardial fluid; emergency operating room subxiphoid pericardial window or thoracotomy is definitive.",
+   "say": "Cardiac tamponade restricts ventricular filling due to pericardial effusion. Beck triad includes hypotension, elevated jugular venous pressure, and muffled heart sounds. Pulsus paradoxus is present. Bedside FAST ultrasound detects pericardial fluid for immediate operative decompression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Penetrating cardiac injury tears myocardium"
+     },
+     {
+      "id": "c2",
+      "label": "Hemopericardium fills non-distensible pericardial sac"
+     },
+     {
+      "id": "c3",
+      "label": "Intrapericardial pressure equalizes with diastolic ventricles"
+     },
+     {
+      "id": "c4",
+      "label": "Beck triad: hypotension, distended neck veins, muffled heart"
+     },
+     {
+      "id": "c5",
+      "label": "Emergency sternotomy or operative pericardial window"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ],
+     [
+      "c4",
+      "c5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Flail **chest** occurs when three or more contiguous ribs are fractured in two or more places, creating a detached, freely mobile thoracic segment. The unstable segment exhibits paradoxical motion: moving inward during inspiration and outward during expiration. Underlying pulmonary contusion, rather than chest wall mechanics, drives profound hypoxemia and respiratory failure. Modern management prioritizes multimodal epidural analgesia, aggressive pulmonary toilet, and selective surgical stabilization of rib fractures.",
+   "say": "Flail chest requires three or more consecutive ribs broken in two places, causing paradoxical chest wall motion during breathing. The primary cause of hypoxia is the underlying pulmonary contusion. Management centers on epidural analgesia, pulmonary toilet, and selective surgical rib fixation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Respiratory phase",
+     "Normal chest wall movement",
+     "Flail segment paradoxical movement"
+    ],
+    "rows": [
+     [
+      "Inspiration (negative intrathoracic pressure)",
+      "Expands outward and anteriorly",
+      "Paradoxically sucked inward toward lung"
+     ],
+     [
+      "Expiration (positive intrathoracic pressure)",
+      "Contracts inward and relaxes",
+      "Paradoxically pushed outward into chest wall"
+     ],
+     [
+      "Underlying contusion effect",
+      "Preserved ventilation-perfusion ratio",
+      "Alveolar hemorrhage, edema, and severe shunt"
+     ],
+     [
+      "Definitive therapy",
+      "Spontaneous unassisted breathing",
+      "Epidural analgesia, CPAP, or surgical rib plating"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "646d5e03-4000-8000-646d-5e0312345678",
+  "656d5f96-4000-8000-656d-5f9612345678",
+  "666d6129-4000-8000-666d-612912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

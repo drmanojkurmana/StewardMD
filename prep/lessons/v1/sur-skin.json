@@ -1,0 +1,202 @@
+{
+ "module": "sur-skin",
+ "subject": "surgery",
+ "title": "Cutaneous malignancies: melanoma staging, excision margins, and non-melanoma skin cancers",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "NCCN Cutaneous Melanoma Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Cutaneous **melanoma** prognosis is dictated primarily by histological tumor thickness measured in millimeters from the granular layer to the deepest tumor cell, termed Breslow thickness. Ulceration and mitotic rate serve as critical secondary microscopic variables. Clinical evaluation utilizes the ABCDE checklist: asymmetry, border irregularity, color variegation, diameter exceeding 6 mm, and evolving lesion characteristics.",
+   "say": "Melanoma prognosis depends primarily on Breslow depth measured from the epidermal granular layer to the deepest tumor margin. Lesions are evaluated using the ABCDE criteria: asymmetry, irregular border, variable color, diameter over 6 millimeters, and evolving features.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Breslow depth",
+     "Recommended excision margin",
+     "Sentinel lymph node biopsy"
+    ],
+    "rows": [
+     [
+      "Melanoma in situ",
+      "0.5 to 1.0 cm clear margin",
+      "Not indicated"
+     ],
+     [
+      "Under 1.0 mm (pT1a)",
+      "1.0 cm clear margin",
+      "Not routinely indicated"
+     ],
+     [
+      "0.8 to 1.0 mm (pT1b)",
+      "1.0 cm clear margin",
+      "Consider / discuss with patient"
+     ],
+     [
+      "1.01 to 2.0 mm (pT2)",
+      "1.0 to 2.0 cm clear margin",
+      "Routinely indicated"
+     ],
+     [
+      "Greater than 2.0 mm (pT3-pT4)",
+      "2.0 cm clear margin",
+      "Routinely indicated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sentinel lymph node biopsy (**SLNB**) maps the initial draining regional lymphatic basin using dual-tracer radiocolloid technetium-99m and vital blue dye or indocyanine green. SLNB is indicated for clinically node-negative melanomas with Breslow thickness greater than 1.0 mm, or 0.8 to 1.0 mm with ulceration or high-risk features. A positive sentinel node prompts molecular BRAF V600 mutation testing and adjuvant systemic targeted or immunotherapy.",
+   "say": "Sentinel node biopsy evaluates regional lymph node basins using technetium-99m and blue dye. It is indicated for melanomas thicker than 1 millimeter or thinner lesions with ulceration. Positive nodes guide systemic targeted therapy or immune checkpoint inhibition.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Primary melanoma wide excision"
+     },
+     {
+      "id": "s2",
+      "label": "Dual tracer intradermal peritumoral injection"
+     },
+     {
+      "id": "s3",
+      "label": "Intraoperative gamma probe & visual localization"
+     },
+     {
+      "id": "s4",
+      "label": "Histopathological serial sectioning & IHC"
+     },
+     {
+      "id": "s5",
+      "label": "Adjuvant PD-1 inhibitor or BRAF-MEK therapy"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ],
+     [
+      "s4",
+      "s5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Basal cell **carcinoma** (BCC) represents the most common human malignancy, arising from pluripotential basal cells of the hair follicle epidermis. Nodular BCC classically presents as a pearly translucent papule with telangiectasias and rolled borders. Squamous cell carcinoma (SCC) originates from keratinocytes, presenting as an indurated, hyperkeratotic plaque or crusted ulcer. SCC carries significant metastatic risk, particularly when arising in chronic burn scars, known as Marjolin ulcers.",
+   "say": "Basal cell carcinoma is the most common skin cancer, presenting as a pearly translucent papule with telangiectasia. Squamous cell carcinoma appears as an indurated keratotic ulcer and carries metastatic potential, especially when arising in burn scars as Marjolin ulcers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Basal cell carcinoma (BCC)",
+     "Squamous cell carcinoma (SCC)"
+    ],
+    "rows": [
+     [
+      "Cell of origin",
+      "Basal cell layer / folliculosebaceous",
+      "Keratinizing stratified squamous epithelium"
+     ],
+     [
+      "Classic appearance",
+      "Pearly papule with arborizing telangiectasias",
+      "Hyperkeratotic, ulcerated, firm nodule"
+     ],
+     [
+      "Metastatic risk",
+      "Extremely rare (under 0.1 percent)",
+      "Moderate (2 to 5 percent; higher in scars)"
+     ],
+     [
+      "Precursor lesion",
+      "None recognized",
+      "Actinic keratosis, Bowen disease"
+     ],
+     [
+      "Histopathology",
+      "Peripheral palisading, retraction artifact",
+      "Keratin pearls, intercellular bridges"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mohs **micrographic** surgery provides the highest cure rate for non-melanoma skin cancers in high-risk anatomical locations, including the central face, eyelids, nose, ears, and perioral region. The technique involves horizontal frozen-section analysis of 100 percent of the surgical peripheral and deep margins while sparing maximum normal tissue. Conventional surgical excision of low-risk BCC requires 4 mm clear margins, whereas low-risk SCC mandates 4 to 6 mm margins.",
+   "say": "Mohs micrographic surgery provides tissue sparing and exhaustive frozen margin evaluation for high-risk facial skin cancers. Low-risk basal cell carcinomas require four millimeter margins, while squamous cell carcinomas need four to six millimeter clear margins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "High-risk facial cutaneous tumor"
+     },
+     {
+      "id": "m2",
+      "label": "Beveled surgical excision of visible tumor"
+     },
+     {
+      "id": "m3",
+      "label": "Color coding and precision mapping of margins"
+     },
+     {
+      "id": "m4",
+      "label": "Complete 100 percent horizontal frozen examination"
+     },
+     {
+      "id": "m5",
+      "label": "Targeted re-excision only where positive margins exist"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "ac1c02ca-4000-8000-ac1c-02ca12345678",
+  "ab1c0137-4000-8000-ab1c-013712345678",
+  "aa1bffa4-4000-8000-aa1b-ffa412345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

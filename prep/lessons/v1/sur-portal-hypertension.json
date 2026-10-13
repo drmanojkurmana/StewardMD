@@ -1,0 +1,192 @@
+{
+ "module": "sur-portal-hypertension",
+ "subject": "surgery",
+ "title": "Portal hypertension, acute variceal hemorrhage, endoscopic therapies, and portosystemic shunts",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "AASLD Portal Hypertension Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Portal **hypertension** is defined hemodynamically as a hepatic venous pressure gradient (HVPG) exceeding 5 mmHg, with clinical complications emerging when HVPG reaches or surpasses 10 to 12 mmHg. Etiologies are stratified into prehepatic (portal vein thrombosis), intrahepatic presinusoidal (schistosomiasis), intrahepatic sinusoidal (cirrhosis), and posthepatic (Budd-Chiari syndrome). Gastroesophageal varices develop at portosystemic collateral anastomoses, particularly the left gastric vein draining into the azygos system.",
+   "say": "Portal hypertension is defined by a hepatic venous pressure gradient over 5 millimeters of mercury, with variceal bleeding occurring at gradients above 12. Causes are categorized as prehepatic, intrahepatic sinusoidal cirrhosis, or posthepatic Budd-Chiari syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological category",
+     "Representative disease",
+     "HVPG pattern (wedge vs free)"
+    ],
+    "rows": [
+     [
+      "Prehepatic",
+      "Portal vein thrombosis, splenic vein thrombosis",
+      "Normal wedged pressure, normal gradient"
+     ],
+     [
+      "Intrahepatic presinusoidal",
+      "Schistosomiasis, congenital hepatic fibrosis",
+      "Normal wedged pressure, elevated portal pressure"
+     ],
+     [
+      "Intrahepatic sinusoidal",
+      "Cirrhosis (alcoholic, viral, NASH)",
+      "Elevated wedged pressure, elevated HVPG"
+     ],
+     [
+      "Posthepatic",
+      "Budd-Chiari, right heart failure, IVC web",
+      "Elevated wedged and free hepatic venous pressures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute **variceal** hemorrhage constitutes a medical and surgical emergency carrying a 20 percent 6-week mortality. Resuscitation mandates restrictive blood transfusion targeting a hemoglobin of 7 to 8 g/dL; over-transfusion spikes portal pressures and triggers rebleeding. Immediate intravenous somatostatin or octreotide infusion selectively induces splanchnic vasoconstriction. Early administration of prophylactic ceftriaxone significantly reduces secondary bacterial infections and improves survival. Diagnostic and therapeutic endoscopy must occur within 12 hours.",
+   "say": "Acute variceal bleeding requires restrictive blood transfusion targeting hemoglobin around 7 to 8 grams per deciliter to avoid rebound portal hypertension. Octreotide induces splanchnic vasoconstriction, and prophylactic ceftriaxone reduces mortality. Endoscopy is performed within 12 hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Acute hematemesis from bleeding esophageal varices"
+     },
+     {
+      "id": "v2",
+      "label": "Restrictive PRBC transfusion targeting hemoglobin 7-8 g/dL"
+     },
+     {
+      "id": "v3",
+      "label": "Intravenous octreotide infusion & ceftriaxone prophylaxis"
+     },
+     {
+      "id": "v4",
+      "label": "Emergency esophagogastroduodenoscopy within 12 hours"
+     },
+     {
+      "id": "v5",
+      "label": "Endoscopic variceal ligation (EVL) of active bleeding columns"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v3",
+      "v4"
+     ],
+     [
+      "v4",
+      "v5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When acute variceal bleeding is refractory to endoscopic ligation, temporary **balloon** tamponade with a Sengstaken-Blakemore or Minnesota tube provides a life-saving bridge to definitive decompression. The gastric balloon is inflated with 250 mL of air and positioned with gentle traction against the gastroesophageal junction; the esophageal balloon is inflated to 30 to 45 mmHg only if bleeding continues. Tamponade should not exceed 24 hours to avoid esophageal ulceration and transmural necrosis.",
+   "say": "Refractory variceal bleeding is bridged using a Sengstaken-Blakemore tube. The gastric balloon is inflated with 250 milliliters of air and seated against the cardia. The esophageal balloon is kept under 45 millimeters of mercury and deflated within 24 hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Endoscopic failure to control torrential variceal bleeding"
+     },
+     {
+      "id": "b2",
+      "label": "Endotracheal intubation for airway protection"
+     },
+     {
+      "id": "b3",
+      "label": "Placement of Sengstaken-Blakemore tube into stomach"
+     },
+     {
+      "id": "b4",
+      "label": "Gastric balloon inflated with 250 mL air and traction applied"
+     },
+     {
+      "id": "b5",
+      "label": "Urgent bridge to transjugular intrahepatic portosystemic shunt"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ],
+     [
+      "b4",
+      "b5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transjugular intrahepatic **portosystemic** shunt (TIPS) is the definitive rescue intervention for refractory variceal bleeding and intractable ascites. An expandable PTFE-covered stent is deployed between an intrahepatic branch of the portal vein and a hepatic vein under fluoroscopic guidance, creating a low-resistance portosystemic fistula. TIPS reduces HVPG below 12 mmHg. The primary complication is hepatic encephalopathy due to diversion of unfiltered portal blood into systemic circulation.",
+   "say": "TIPS creates an expandable metal stent connecting an intrahepatic portal vein branch directly to a hepatic vein. This decompresses portal hypertension below 12 millimeters of mercury. The major adverse effect is hepatic encephalopathy due to bypassed portal detox.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Decompression modality",
+     "Mechanism / surgical anatomy",
+     "Primary clinical utility"
+    ],
+    "rows": [
+     [
+      "TIPS",
+      "Transjugular fluoroscopic intrahepatic stent graft",
+      "Refractory variceal bleed; refractory ascites; bridge to OLT"
+     ],
+     [
+      "Warren shunt (selective)",
+      "Distal splenorenal shunt; preserves portal flow",
+      "Preserves liver perfusion; lower encephalopathy rate"
+     ],
+     [
+      "Portacaval shunt (total)",
+      "Direct anastomosis of portal vein to IVC",
+      "Historic emergency decompression; high encephalopathy"
+     ],
+     [
+      "Sugiura procedure",
+      "Extensive thoracic/abdominal devascularization + transection",
+      "Used when no shuntable veins exist (thrombosis)"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "e778703e-4000-8000-e778-703e12345678",
+  "e6786eab-4000-8000-e678-6eab12345678",
+  "e5786d18-4000-8000-e578-6d1812345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

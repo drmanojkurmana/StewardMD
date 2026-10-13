@@ -1,0 +1,197 @@
+{
+ "module": "sur-spleen",
+ "subject": "surgery",
+ "title": "Splenic trauma, non-operative management, surgical splenectomy, and overwhelming post-splenectomy infection",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "AAST Spleen Injury Scale"
+ ],
+ "steps": [
+  {
+   "tx": "The spleen is the most frequently injured solid organ in blunt abdominal **trauma**, usually resulting from motor vehicle collisions or direct left lower rib fractures. Kehr sign denotes referred left shoulder tip pain caused by diaphragmatic irritation from subcapsular or free intraperitoneal blood. Splenic injury is graded from I to V by the American Association for the Surgery of Trauma (AAST) classification on contrast-enhanced CT scan.",
+   "say": "The spleen is the solid organ most commonly injured in blunt trauma. Kehr sign denotes referred left shoulder pain from diaphragmatic irritation. Splenic trauma is graded from one to five based on capsular tear depth, hematoma size, and vascular injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AAST spleen grade",
+     "Subcapsular hematoma",
+     "Parenchymal laceration depth"
+    ],
+    "rows": [
+     [
+      "Grade I",
+      "Under 10 percent surface area",
+      "Subcapsular tear under 1 cm depth"
+     ],
+     [
+      "Grade II",
+      "10 to 50 percent surface area",
+      "1 to 3 cm depth, trabecular vessels intact"
+     ],
+     [
+      "Grade III",
+      "Greater than 50 percent surface or expanding",
+      "Exceeding 3 cm depth or trabecular involvement"
+     ],
+     [
+      "Grade IV",
+      "Ruptured hematoma with active bleed",
+      "Laceration involving segmental or hilar vessels (> 25% devascularized)"
+     ],
+     [
+      "Grade V",
+      "Completely shattered spleen",
+      "Total hilar avulsion devascularizing entire spleen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-operative **management** (NOM) is the standard of care for hemodynamically stable blunt splenic injury, succeeding in over 90 percent of patients. Management entails ICU monitoring, serial hemoglobin assessments, and strict bed rest. Contrast-enhanced CT demonstrating a vascular contrast blush (pseudoaneurysm or arteriovenous fistula) represents an indication for catheter splenic artery embolization, which preserves functional splenic immune parenchyma while halting active hemorrhage.",
+   "say": "Non-operative management is standard for hemodynamically stable splenic trauma. Monitoring, serial hemoglobin checks, and bed rest are required. Finding a vascular contrast blush on CT mandates transcatheter arterial embolization to preserve splenic tissue.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Blunt abdominal trauma with CT-proven splenic injury"
+     },
+     {
+      "id": "s2",
+      "label": "Hemodynamic stability confirmed (responder to fluids)"
+     },
+     {
+      "id": "s3",
+      "label": "Vascular contrast blush identified on arterial phase"
+     },
+     {
+      "id": "s4",
+      "label": "Urgent angioembolization of splenic artery branch"
+     },
+     {
+      "id": "s5",
+      "label": "Preservation of reticuloendothelial phagocytic immune function"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ],
+     [
+      "s4",
+      "s5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency **splenectomy** is mandated when splenic trauma induces persistent hemodynamic instability refractory to resuscitation, or when peritonitis coexists. Surgical access is achieved via midline laparotomy. Immediate mobilization requires division of the splenocolic, phrenicosplenic, and splenorenal ligaments to deliver the spleen into the wound. The short gastric vessels in the gastrosplenic ligament must be ligated with extreme caution to prevent ischemic necrosis of the gastric fundus or pancreatic tail injury.",
+   "say": "Immediate splenectomy is indicated for hemodynamic instability or peritonitis. The spleen is mobilized by dividing the splenocolic and splenorenal ligaments. The short gastric vessels must be carefully ligated to avoid damaging the gastric fundus or pancreatic tail.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Persistent shock from ruptured spleen"
+     },
+     {
+      "id": "m2",
+      "label": "Midline laparotomy & manual left upper quadrant packing"
+     },
+     {
+      "id": "m3",
+      "label": "Division of splenocolic & lateral splenorenal ligaments"
+     },
+     {
+      "id": "m4",
+      "label": "Careful ligation of short gastric vessels away from stomach"
+     },
+     {
+      "id": "m5",
+      "label": "Individual ligation of splenic artery & vein at hilum"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Overwhelming post-splenectomy **infection** (OPSI) is a catastrophic complication carrying a mortality exceeding 50 percent, driven by loss of splenic macrophage phagocytosis of encapsulated bacteria. Primary pathogens include Streptococcus pneumoniae (60%), Neisseria meningitidis, and Haemophilus influenzae type b. To prevent OPSI, mandatory immunization with 20-valent pneumococcal conjugate, quadrivalent meningococcal conjugate, and Hib vaccines should be administered at least 14 days post-splenectomy.",
+   "say": "Overwhelming post-splenectomy infection is a fulminant septic shock caused by encapsulated bacteria, primarily Streptococcus pneumoniae, meningococcus, and Haemophilus influenzae. Patients must receive vaccinations at least 14 days following emergency splenectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Encapsulated pathogen",
+     "Percentage of OPSI cases",
+     "Preventive vaccine protocol"
+    ],
+    "rows": [
+     [
+      "Streptococcus pneumoniae",
+      "50 to 60 percent of infections",
+      "PCV20 followed by PPSV23 vaccine booster"
+     ],
+     [
+      "Neisseria meningitidis",
+      "15 to 25 percent of infections",
+      "MenACWY conjugate vaccine plus MenB series"
+     ],
+     [
+      "Haemophilus influenzae type b",
+      "5 to 10 percent of infections",
+      "Single dose Hib conjugate vaccination"
+     ],
+     [
+      "Babesia microti / malaria",
+      "Parasitic red cell infections",
+      "Severe hemolysis; avoid tick / endemic areas"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "4bf8abb8-4000-8000-4bf8-abb812345678",
+  "4ef8b071-4000-8000-4ef8-b07112345678",
+  "4df8aede-4000-8000-4df8-aede12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

@@ -1,0 +1,197 @@
+{
+ "module": "sur-burns",
+ "subject": "surgery",
+ "title": "Burn resuscitation, inhalation injury, escharotomy indications, and topical wound care",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "American Burn Association Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Burn **depth** governs physiological recovery and surgical intervention. Superficial first-degree burns affect only the epidermis, presenting with erythema without blister formation. Partial-thickness second-degree burns involve the dermis; superficial partial burns are blistered and exquisitely painful, whereas deep partial burns are mottled and hypoesthetic. Full-thickness third-degree burns destroy all epidermal and dermal elements, presenting as leathery, painless, thrombosed, translucent eschar.",
+   "say": "Burns are classified by depth. First-degree burns affect the epidermis. Second-degree partial-thickness burns involve the dermis with blisters. Third-degree full-thickness burns destroy all skin appendages, appearing leathery, white, and completely insensate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Burn degree",
+     "Depth of tissue injury",
+     "Sensory examination",
+     "Healing time"
+    ],
+    "rows": [
+     [
+      "First degree",
+      "Epidermis only",
+      "Painful, hyperesthetic",
+      "3 to 5 days without scar"
+     ],
+     [
+      "Superficial partial",
+      "Upper papillary dermis",
+      "Intensely painful, blistered",
+      "10 to 14 days, minimal scar"
+     ],
+     [
+      "Deep partial",
+      "Reticular dermis reached",
+      "Reduced pinprick sensation",
+      "3 to 6 weeks, hypertrophic scar"
+     ],
+     [
+      "Full thickness",
+      "Entire dermis into subcutaneous fat",
+      "Completely anesthetic",
+      "Requires surgical excision & graft"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fluid **resuscitation** in major burns exceeding 20 percent total body surface area (TBSA) utilizes balanced crystalloids, traditionally calculated via the Parkland formula: 4 mL of lactated Ringer solution per kilogram body weight multiplied by percent TBSA burned. Half the total volume is infused during the first 8 hours post-injury, and the remainder over the subsequent 16 hours. Resuscitation titration is guided by target adult urine output of 0.5 mL/kg/h.",
+   "say": "Resuscitation for burns over 20 percent total body surface area uses the Parkland formula: 4 milliliters times weight in kilograms times percent burn of lactated Ringer. Half is given in the first 8 hours. Fluid titration targets urine output of 0.5 milliliters per kilogram per hour.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "TBSA estimation via Rule of Nines"
+     },
+     {
+      "id": "b2",
+      "label": "Parkland calculation (4 mL x kg x %TBSA)"
+     },
+     {
+      "id": "b3",
+      "label": "Infuse 50 percent total volume in initial 8 hours"
+     },
+     {
+      "id": "b4",
+      "label": "Infuse remaining 50 percent over subsequent 16 hours"
+     },
+     {
+      "id": "b5",
+      "label": "Titrate to target adult urine output 0.5 mL/kg/hr"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ],
+     [
+      "b4",
+      "b5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Circumferential full-thickness burns produce unyielding, rigid eschars that constrict underlying neurovascular structures or restrict thoracic excursion during mechanical ventilation. Urgent bedside **escharotomy** is indicated when distal limb perfusion is compromised, evidenced by loss of arterial Doppler signals or compartmental pressures exceeding 30 mmHg. Thoracic escharotomies require bilateral mid-axillary incisions joined across the upper chest and subcostal margin.",
+   "say": "Circumferential full-thickness burns act like a constricting band. Urgent bedside escharotomy is required when Doppler signals disappear or compartment pressure exceeds 30 millimeters of mercury. Chest escharotomy relieves ventilatory restriction using mid-axillary and transverse cuts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Circumferential full-thickness limb or chest burn"
+     },
+     {
+      "id": "e2",
+      "label": " progressive third-space tissue edema beneath rigid eschar"
+     },
+     {
+      "id": "e3",
+      "label": "Compartment pressure exceeds capillary perfusion pressure"
+     },
+     {
+      "id": "e4",
+      "label": "Loss of Doppler signals, pallor, or respiratory restriction"
+     },
+     {
+      "id": "e5",
+      "label": "Immediate bedside escharotomy through full depth of eschar"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ],
+     [
+      "e4",
+      "e5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smoke **inhalation** injury dramatically increases mortality in burned individuals. Clinical signs mandate proactive endotracheal intubation before progressive laryngeal edema obliterates the airway. Supraglottic thermal injury causes immediate airway obstruction, while subglottic chemical injury triggers mucosal sloughing, bronchospasm, and acute respiratory distress syndrome. Carbon monoxide poisoning shifts the oxyhemoglobin dissociation curve leftward and is managed with 100 percent normobaric or hyperbaric oxygen.",
+   "say": "Smoke inhalation injury worsens burn outcomes. Stridor, facial burns, and singed nasal hairs necessitate early intubation before laryngeal swelling occludes the airway. Carbon monoxide toxicity causes cellular hypoxia and is treated with 100 percent oxygen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Injury component",
+     "Pathophysiological mechanism",
+     "Clinical management"
+    ],
+    "rows": [
+     [
+      "Supraglottic injury",
+      "Direct thermal heat transfer and laryngeal edema",
+      "Early proactive endotracheal intubation"
+     ],
+     [
+      "Subglottic chemical",
+      "Toxics (acrolein, aldehydes) denude epithelium",
+      "Nebulized heparin and N-acetylcysteine"
+     ],
+     [
+      "Carbon monoxide",
+      "Carboxyhemoglobin impairs mitochondrial oxygen use",
+      "100 percent high-flow oxygen until COHb under 5%"
+     ],
+     [
+      "Hydrogen cyanide",
+      "Inhibits cytochrome c oxidase in complex IV",
+      "Hydroxocobalamin intravenous infusion"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "197e870f-4000-8000-197e-870f12345678",
+  "1a7e88a2-4000-8000-1a7e-88a212345678",
+  "1b7e8a35-4000-8000-1b7e-8a3512345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

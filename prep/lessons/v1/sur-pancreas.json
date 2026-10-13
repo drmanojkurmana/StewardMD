@@ -1,0 +1,187 @@
+{
+ "module": "sur-pancreas",
+ "subject": "surgery",
+ "title": "Pancreatic disease: acute pancreatitis, necrotizing step-up approach, and Whipple resection",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "IAP/APA Acute Pancreatitis Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Acute **pancreatitis** diagnosis requires at least two of three criteria: characteristic epigastric abdominal pain radiating to the back, serum lipase or amylase elevated at least three times the upper limit of normal, and characteristic cross-sectional imaging findings. Gallstones and alcohol abuse account for 80 percent of cases. The revised Atlanta classification stratifies severity into mild (no organ failure), moderately severe (transient organ failure under 48 hours), and severe (persistent organ failure exceeding 48 hours).",
+   "say": "Acute pancreatitis diagnosis requires two of three criteria: epigastric pain radiating to the back, threefold lipase elevation, and imaging confirmation. The revised Atlanta classification defines severe pancreatitis by persistent organ failure exceeding 48 hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Atlanta severity",
+     "Organ failure definition",
+     "Local pancreatic complications"
+    ],
+    "rows": [
+     [
+      "Mild acute pancreatitis",
+      "No organ failure",
+      "No local complications; resolves rapidly"
+     ],
+     [
+      "Moderately severe",
+      "Transient organ failure (resolves < 48 hours)",
+      "Acute peripancreatic fluid collection / necrosis"
+     ],
+     [
+      "Severe acute pancreatitis",
+      "Persistent organ failure (exceeds 48 hours)",
+      "Infected necrosis, walled-off pancreatic necrosis (WOPN)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Necrotizing pancreatitis manifests as non-enhancing pancreatic parenchyma on contrast-enhanced CT. Sterile necrosis is managed non-operatively with enteral nutrition. When secondary bacterial infection occurs, evidenced by retroperitoneal extraluminal gas or clinical deterioration, intervention is mandatory. Modern surgical standard mandates the **step-up** approach: delaying intervention for 4 weeks until walled-off pancreatic necrosis (WOPN) encapsulates, beginning with percutaneous or endoscopic transgastric drainage, escalating only if clinical sepsis persists.",
+   "say": "Infected pancreatic necrosis is treated via the minimally invasive step-up approach. Intervention is delayed for four weeks to allow encapsulation into walled-off necrosis. Percutaneous or endoscopic cystogastrostomy drainage is performed first, reserving necrosectomy for failures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Infected necrotizing pancreatitis confirmed"
+     },
+     {
+      "id": "p2",
+      "label": "Supportive ICU care until walling-off occurs (4 weeks)"
+     },
+     {
+      "id": "p3",
+      "label": "Step 1: Percutaneous retroperitoneal or endoscopic drainage"
+     },
+     {
+      "id": "p4",
+      "label": "Step 2: Video-assisted retroperitoneal debridement (VARD)"
+     },
+     {
+      "id": "p5",
+      "label": "Open necrosectomy reserved only for failure of drainage"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pancreatic ductal **adenocarcinoma** (PDAC) carries a dismal 5-year survival under 10 percent, arising primarily in the pancreatic head. Patients present with painless obstructive jaundice, dark urine, acholic stools, and Courvoisier sign (a palpable, non-tender gallbladder in the presence of jaundice). Diagnostic workup requires pancreatic-protocol triphasic contrast CT to determine vascular resectability by assessing contact with the celiac axis, superior mesenteric artery (SMA), and superior mesenteric vein (SMV).",
+   "say": "Pancreatic head adenocarcinoma presents with painless jaundice and a palpable gallbladder, known as Courvoisier sign. Resectability is evaluated on pancreatic-protocol CT by checking tumor contact with the superior mesenteric artery, vein, and celiac axis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Resectability category",
+     "Arterial contact (SMA / Celiac / Hepatic)",
+     "Venous contact (SMV / Portal vein)"
+    ],
+    "rows": [
+     [
+      "Resectable",
+      "No arterial abutment (0 degrees)",
+      "No contact or under 180 degrees without contour irregularity"
+     ],
+     [
+      "Borderline resectable",
+      "Arterial contact under 180 degrees",
+      "Abutment > 180 degrees or occlusion with reconstructable vein"
+     ],
+     [
+      "Locally advanced unresectable",
+      "Arterial encasement exceeding 180 degrees",
+      "Unreconstructable SMV or portal vein occlusion"
+     ],
+     [
+      "Metastatic",
+      "Distant visceral or peritoneal metastases",
+      "Systemic chemotherapy (FOLFIRINOX / Gem-Nab-paclitaxel)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pancreaticoduodenectomy (**Whipple** procedure) constitutes the definitive oncologic resection for pancreatic head malignancies. The operation resects the pancreatic head, duodenum, proximal jejunum, gallbladder, common bile duct, and distal stomach (or preserves the pylorus in PPPD). Reconstruction requires three sequential anastomoses: end-to-side pancreaticojejunostomy (or duct-to-mucosa), hepaticojejunostomy, and gastrojejunostomy. Postoperative pancreatic fistula (POPF) is the primary driver of major morbidity.",
+   "say": "The Whipple procedure resects the pancreatic head, duodenum, gallbladder, bile duct, and distal stomach. Reconstruction requires pancreaticojejunostomy, hepaticojejunostomy, and gastrojejunostomy. Postoperative pancreatic fistula remains the most critical complication.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Extensive en bloc resection of pancreatic head & duodenum"
+     },
+     {
+      "id": "w2",
+      "label": "Pancreaticojejunostomy (duct-to-mucosa reconstruction)"
+     },
+     {
+      "id": "w3",
+      "label": "Hepaticojejunostomy placed 10 cm downstream on jejunum"
+     },
+     {
+      "id": "w4",
+      "label": "Gastrojejunostomy placed 40 to 50 cm downstream"
+     },
+     {
+      "id": "w5",
+      "label": "Closed suction drain surveillance for amylase leak on post-op day 3"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2"
+     ],
+     [
+      "w2",
+      "w3"
+     ],
+     [
+      "w3",
+      "w4"
+     ],
+     [
+      "w4",
+      "w5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "dc40c776-4000-8000-dc40-c77612345678",
+  "db40c5e3-4000-8000-db40-c5e312345678",
+  "da40c450-4000-8000-da40-c45012345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

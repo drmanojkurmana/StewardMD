@@ -1,0 +1,192 @@
+{
+ "module": "sur-oesophagus",
+ "subject": "surgery",
+ "title": "Esophageal motility disorders, antireflux surgery, Barrett esophagus, and esophagectomy",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "SAGES Antireflux Surgery Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Achalasia is a primary neurodegenerative esophageal **motility** disorder characterized by loss of nitric oxide-producing inhibitory ganglion cells in the myenteric Auerbach plexus. Pathophysiological consequences include absent peristalsis in the esophageal body and incomplete relaxation of the hypertensive lower esophageal sphincter (LES). Patients present with progressive dysphagia to both solids and liquids. High-resolution manometry is diagnostic; barium swallow reveals bird-beak tapering at the gastroesophageal junction.",
+   "say": "Achalasia results from loss of myenteric inhibitory ganglion cells, causing absent peristalsis and failure of lower esophageal sphincter relaxation. Patients present with dysphagia to solids and liquids. Barium swallow shows bird-beak tapering, and manometry confirms diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Autoimmune loss of myenteric inhibitory ganglion cells"
+     },
+     {
+      "id": "a2",
+      "label": "Loss of nitric oxide & VIP produces aperistalsis"
+     },
+     {
+      "id": "a3",
+      "label": "Failure of lower esophageal sphincter relaxation"
+     },
+     {
+      "id": "a4",
+      "label": "Progressive esophageal dilation & stasis"
+     },
+     {
+      "id": "a5",
+      "label": "Laparoscopic Heller myotomy with partial Dor fundoplication"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ],
+     [
+      "a4",
+      "a5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical management of achalasia is centered on laparoscopic **Heller** myotomy with partial anterior fundoplication (Dor) or posterior fundoplication (Toupet). The longitudinal and circular muscular layers of the lower esophagus are divided down to intact mucosal herniation, extending 2 cm onto the gastric cardia. A partial fundoplication is mandatory to prevent severe post-myotomy acid reflux while avoiding the postoperative dysphagia associated with complete 360-degree Nissen wraps.",
+   "say": "Laparoscopic Heller myotomy divides esophageal muscle down to bulging mucosa, extending two centimeters onto the stomach. A partial Dor or Toupet fundoplication is added to prevent acid reflux without causing the dysphagia of a complete 360-degree Nissen wrap.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedure",
+     "Mechanism of action",
+     "Key advantage / limitation"
+    ],
+    "rows": [
+     [
+      "Laparoscopic Heller myotomy",
+      "Surgical division of circular and longitudinal LES muscle",
+      "Gold standard; durable relief; requires partial wrap"
+     ],
+     [
+      "POEM (Peroral endoscopic myotomy)",
+      "Submucosal endoscopic tunnel and inner circular myotomy",
+      "No incisions; higher post-op reflux rate without wrap"
+     ],
+     [
+      "Pneumatic balloon dilation",
+      "Forceful disruption of LES circular fibers by radial air",
+      "Effective; carries 2 to 3 percent esophageal perforation risk"
+     ],
+     [
+      "Botulinum toxin injection",
+      "Inhibits acetylcholine release at motor endplates",
+      "Temporary (6-12 months); reserved for frail elderly patients"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gastroesophageal **reflux** disease (GERD) refractory to medical proton-pump inhibitor therapy is managed with laparoscopic Nissen fundoplication. Preoperative workup mandates 24-hour ambulatory esophageal pH monitoring and manometry to rule out motility disorders. The procedure involves crural hiatal hernia repair, complete mobilization of the gastric fundus with division of short gastric vessels, and construction of a loose, floppy 360-degree 2 cm wrap over a 56 to 60 French bougie.",
+   "say": "Refractory gastroesophageal reflux disease is treated with laparoscopic Nissen fundoplication. Preoperative evaluation requires 24-hour pH monitoring and manometry. The surgery repairs the hiatus, divides short gastric vessels, and constructs a loose 360-degree wrap over a large bougie.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Confirmation of abnormal acid exposure on 24-hr pH study"
+     },
+     {
+      "id": "r2",
+      "label": "Manometry confirms normal peristalsis prior to wrap"
+     },
+     {
+      "id": "r3",
+      "label": "Crural closure with non-absorbable interrupted sutures"
+     },
+     {
+      "id": "r4",
+      "label": "Division of short gastric vessels for tension-free wrap"
+     },
+     {
+      "id": "r5",
+      "label": "Construct 2 cm loose 360-degree Nissen fundoplication"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ],
+     [
+      "r4",
+      "r5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Esophageal **carcinoma** is divided into squamous cell carcinoma (upper and mid-esophagus, associated with alcohol and tobacco) and adenocarcinoma (distal esophagus and GE junction, arising from Barrett metaplasia). For locally advanced resectable disease (cT2-T4a or N+), neoadjuvant chemoradiation (CROSS regimen) precedes transthoracic esophagectomy. Ivor Lewis esophagectomy consists of laparotomy with gastric conduit creation and right thoracotomy with intrathoracic esophagogastric anastomosis.",
+   "say": "Esophageal adenocarcinoma arises in distal Barrett esophagus, while squamous cell carcinoma affects the upper esophagus. Locally advanced disease receives neoadjuvant chemoradiation prior to surgery. Ivor Lewis esophagectomy combines laparotomy and right thoracotomy with intrathoracic anastomosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Esophagectomy approach",
+     "Incisions used",
+     "Anastomotic location & complications"
+    ],
+    "rows": [
+     [
+      "Ivor Lewis (two-stage)",
+      "Laparotomy and right thoracotomy",
+      "Intrathoracic; lower leak rate, higher mediastinitis risk"
+     ],
+     [
+      "McKeown (three-hole)",
+      "Right thoracotomy, laparotomy, left neck",
+      "Cervical anastomosis; easier leak management, more nerve injury"
+     ],
+     [
+      "Transhiatal",
+      "Laparotomy and left neck incision",
+      "Cervical; avoids thoracotomy; lower lymph node yield"
+     ],
+     [
+      "Minimally invasive (MIE)",
+      "Thoracoscopy and laparoscopy",
+      "Decreased pulmonary complications; equivalent oncologic clearance"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "11f07faf-4000-8000-11f0-7faf12345678",
+  "12f08142-4000-8000-12f0-814212345678",
+  "13f082d5-4000-8000-13f0-82d512345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

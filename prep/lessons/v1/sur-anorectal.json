@@ -1,0 +1,179 @@
+{
+ "module": "sur-anorectal",
+ "subject": "surgery",
+ "title": "Anorectal disorders: hemorrhoids, anal fissure, fistula-in-ano, and Goodsall rule",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "ASCRS Anorectal Disease Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Internal **hemorrhoids** represent symptomatic downward displacement and engorgement of the normal vascular anal cushions located in the left lateral, right anterior, and right posterior positions. They are classified into four Goligher grades. Grade I bleeds without prolapse; Grade II prolapses with spontaneous reduction; Grade III requires manual digital reduction; Grade IV is permanently prolapsed and irreducible. External hemorrhoids arise distal to the dentate line covered by sensitive anoderm.",
+   "say": "Internal hemorrhoids involve downward displacement of anal vascular cushions at 3, 7, and 11 o'clock positions. Goligher grades range from grade one with bleeding alone to grade four with permanent irreducible prolapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Goligher grade",
+     "Clinical prolapse characteristics",
+     "First-line management"
+    ],
+    "rows": [
+     [
+      "Grade I",
+      "Bleeding without prolapse",
+      "Dietary fiber, fluid optimization"
+     ],
+     [
+      "Grade II",
+      "Prolapses during defecation; spontaneous reduction",
+      "Rubber band ligation / sclerotherapy"
+     ],
+     [
+      "Grade III",
+      "Prolapses; requires manual digital reduction",
+      "Rubber band ligation or excisional hemorrhoidectomy"
+     ],
+     [
+      "Grade IV",
+      "Permanently prolapsed; irreducible / strangulated",
+      "Formal excisional hemorrhoidectomy (Milligan-Morgan)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anal **fissure** is a painful longitudinal tear in the distal squamous anoderm extending from the dentate line to the anal verge, over 90 percent located in the posterior midline where tissue ischemia is maximal. Chronic fissures exhibit a classic triad: an indurated ulcer with exposed internal sphincter fibers, a hypertrophied anal papilla proximally, and an external sentinel skin tag. First-line therapy utilizes topical calcium channel blockers or nitrates; refractory fissures require lateral internal sphincterotomy.",
+   "say": "Anal fissures are tears in the distal anoderm, most commonly in the ischemic posterior midline. Chronic fissures feature an ulcer with exposed muscle, hypertrophied papilla, and sentinel tag. Refractory fissures undergo lateral internal sphincterotomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Passage of hard stool tears posterior anoderm"
+     },
+     {
+      "id": "f2",
+      "label": "Severe tearing pain triggers internal sphincter spasm"
+     },
+     {
+      "id": "f3",
+      "label": "Hypertonicity compromises microvascular posterior perfusion"
+     },
+     {
+      "id": "f4",
+      "label": "Chronic non-healing ulcer with sentinel tag formation"
+     },
+     {
+      "id": "f5",
+      "label": "Topical diltiazem or partial lateral internal sphincterotomy"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ],
+     [
+      "f4",
+      "f5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anorectal **abscess** originates from bacterial infection of the cryptoglandular anal glands situated at the dentate line within the intersphincteric space. Perianal abscess is the most common subtype, presenting with acute throbbing rectal pain and fluctuance. All anorectal abscesses mandate prompt surgical incision and drainage without awaiting antibiotic trial. Up to 50 percent of patients subsequently develop a chronic fistula-in-ano connecting the infected crypt to external perineal skin.",
+   "say": "Anorectal abscesses arise from infected anal crypt glands in the intersphincteric space. Prompt surgical drainage is mandatory. Approximately half of drained abscesses progress to a persistent fistula-in-ano.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Abscess space",
+     "Anatomical boundaries",
+     "Surgical drainage approach"
+    ],
+    "rows": [
+     [
+      "Perianal",
+      "Subcutaneous tissues adjacent to anal verge",
+      "Cruciate skin incision close to anal verge"
+     ],
+     [
+      "Ischiorectal",
+      "Ischioanal fossa beneath levator ani",
+      "Wide drainage through ischiorectal fossa skin"
+     ],
+     [
+      "Intersphincteric",
+      "Between internal and external sphincters",
+      "Internal transanal sphincterotomy drainage"
+     ],
+     [
+      "Supralevator",
+      "Above levator ani, below pelvic peritoneum",
+      "Transrectal or transischiorectal drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fistula-in-ano management is governed by the **Goodsall** rule, which predicts the course of the primary internal opening based on external opening location. An external opening anterior to a transverse anal line tracks radially in a direct line into the anal canal. An external opening posterior to the transverse line follows a curved tract entering the posterior midline crypt. Park classification stratifies fistulas into intersphincteric, transsphincteric, suprasphincteric, and extrasphincteric.",
+   "say": "Goodsall rule predicts fistula tracts: anterior external openings track radially, while posterior openings follow a curved path to the posterior midline. Park classification categorizes fistulas by sphincter relation: intersphincteric, transsphincteric, suprasphincteric, and extrasphincteric.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "External opening location",
+     "Predicted internal tract course (Goodsall rule)",
+     "Surgical modality"
+    ],
+    "rows": [
+     [
+      "Anterior (< 3 cm from verge)",
+      "Direct radial tract to adjacent crypt",
+      "Fistulotomy (if low sphincter involvement)"
+     ],
+     [
+      "Posterior (any distance)",
+      "Curved tract to posterior midline crypt at 6 o'clock",
+      "Seton placement / LIFT procedure"
+     ],
+     [
+      "Anterior (> 3 cm from verge)",
+      "Exception: curves to posterior midline crypt",
+      "Non-cutting draining seton or LIFT"
+     ],
+     [
+      "High transsphincteric (> 30% muscle)",
+      "Traverses significant external sphincter",
+      "Ligation of intersphincteric fistula tract (LIFT)"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "a00a1e80-4000-8000-a00a-1e8012345678",
+  "a30a2339-4000-8000-a30a-233912345678",
+  "a20a21a6-4000-8000-a20a-21a612345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

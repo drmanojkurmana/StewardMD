@@ -1,0 +1,189 @@
+{
+ "module": "sur-neck",
+ "subject": "surgery",
+ "title": "Congenital and acquired neck masses: branchial anomalies, thyroglossal duct cysts, and nodal metastases",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Cummings Otolaryngology 7th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Differential diagnosis of a cervical **mass** is governed by age and anatomical triangles. In children, over 85 percent of masses are inflammatory or congenital anomalies. In adults older than 40 years, an asymptomatic lateral neck mass represents metastatic squamous cell carcinoma from an occult upper aerodigestive tract mucosal primary until proven otherwise. Initial diagnostic evaluation requires fine-needle aspiration biopsy (FNAB) and panendoscopy; open incisional biopsy is strictly contraindicated.",
+   "say": "Neck masses vary by age. In children, 85 percent are benign or congenital. In adults over 40, a persistent lateral neck mass is considered metastatic squamous cell carcinoma until proven otherwise. Evaluation requires fine-needle aspiration and endoscopy; incisional biopsy is contraindicated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient age",
+     "Predominant pathology",
+     "Diagnostic priority"
+    ],
+    "rows": [
+     [
+      "Pediatric (under 15 yr)",
+      "Inflammatory lymphadenopathy (85%), congenital cysts",
+      "Observation, antibiotic trial, ultrasound"
+     ],
+     [
+      "Young adult (16 to 40 yr)",
+      "Inflammatory, thyroid, lymphoma, congenital branchial",
+      "Ultrasound, serology, FNAB for persistent masses"
+     ],
+     [
+      "Adult (over 40 yr)",
+      "Malignancy (80% rule: metastatic head/neck SCC)",
+      "Urgent FNAB, CT neck/chest, mucosal panendoscopy"
+     ],
+     [
+      "Any age with midline mass",
+      "Thyroglossal duct cyst, dermoid cyst, delphian node",
+      "Confirm normal thyroid location before excision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroglossal **duct** cyst (TGDC) arises from failure of obliteration of the embryonic thyroid descent pathway from the foramen cecum of the tongue base to the inferior neck. It presents as a painless, smooth, cystic midline mass located below the hyoid bone that elevates with tongue protrusion and swallowing. Definitive cure requires the Sistrunk procedure: en bloc resection of the cyst, the central body of the hyoid bone, and a core of tongue base tissue.",
+   "say": "Thyroglossal duct cysts result from incomplete obliteration of the thyroid descent tract. They present as midline masses that elevate with tongue protrusion. Surgical cure requires the Sistrunk procedure, which resects the cyst, central hyoid bone, and a tongue base tissue core.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Thyroid descends from foramen cecum through hyoid"
+     },
+     {
+      "id": "t2",
+      "label": "Epithelial tract persists and fills with mucoid fluid"
+     },
+     {
+      "id": "t3",
+      "label": "Midline neck cyst moves upward on tongue protrusion"
+     },
+     {
+      "id": "t4",
+      "label": "Thyroid ultrasound confirms orthotopic thyroid gland"
+     },
+     {
+      "id": "t5",
+      "label": "Sistrunk en bloc excision of cyst, hyoid body, and tract"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ],
+     [
+      "t4",
+      "t5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Branchial **cleft** anomalies arise from incomplete involution of embryonic pharyngeal arches. Second branchial cleft anomalies represent 95 percent of cases, typically manifesting as a smooth, fluctuant mass along the anterior border of the sternocleidomastoid muscle at the junction of its upper and middle thirds. The fistulous tract ascends between internal and external carotid arteries and terminates in the tonsillar fossa. First branchial anomalies relate to the parotid gland and external auditory canal.",
+   "say": "Second branchial cleft cysts account for 95 percent of branchial anomalies, presenting along the anterior border of the sternocleidomastoid muscle. The tract passes between the internal and external carotid arteries to the tonsillar fossa. Surgical excision requires complete tract removal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cleft anomaly",
+     "Anatomical location",
+     "Internal tract course & opening"
+    ],
+    "rows": [
+     [
+      "First branchial cleft",
+      "Parotid area, angle of mandible, submandibular",
+      "Ascends toward external auditory canal / facial nerve"
+     ],
+     [
+      "Second branchial cleft",
+      "Anterior border of SCM, upper-middle third",
+      "Passes between carotids, enters tonsillar fossa"
+     ],
+     [
+      "Third branchial cleft",
+      "Lower anterior neck, posterior to carotid sheath",
+      "Passes above hypoglossal nerve, enters pyriform sinus"
+     ],
+     [
+      "Fourth branchial cleft",
+      "Low left neck, recurrent thyroiditis / abscess",
+      "Loops under aortic arch / subclavian, pyriform apex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neck **dissection** classifications standardize regional oncological lymphadenectomy across cervical levels I through VI. Radical neck dissection (RND) removes all nodal levels I-V along with the sternocleidomastoid muscle, internal jugular vein, and spinal accessory nerve. Modified radical neck dissection (MRND) preserves one or more of these non-lymphatic structures. Selective neck dissection resects only nodal levels at greatest risk of occult metastases based on primary tumor location.",
+   "say": "Cervical lymph node dissections are categorized from levels I through VI. Radical neck dissection removes levels I through V plus the spinal accessory nerve, internal jugular vein, and sternocleidomastoid. Modified radical dissections preserve non-lymphatic structures, while selective dissections target specific levels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cervical level",
+     "Anatomical boundaries",
+     "Primary tumor drainage sites"
+    ],
+    "rows": [
+     [
+      "Level I (submental / submandibular)",
+      "Mandible to hyoid, anterior/posterior digastric",
+      "Lip, oral cavity, floor of mouth, anterior tongue"
+     ],
+     [
+      "Level II (upper jugular)",
+      "Skull base to carotid bifurcation (hyoid bone)",
+      "Oral cavity, oropharynx, nasopharynx, parotid"
+     ],
+     [
+      "Level III (middle jugular)",
+      "Carotid bifurcation down to cricoid cartilage",
+      "Oropharynx, hypopharynx, larynx, thyroid"
+     ],
+     [
+      "Level IV (lower jugular)",
+      "Cricoid cartilage to clavicle",
+      "Hypopharynx, larynx, thyroid, cervical esophagus"
+     ],
+     [
+      "Level V (posterior triangle)",
+      "SCM to trapezius, clavicle inferiorly",
+      "Nasopharynx, posterior scalp, cutaneous neck"
+     ],
+     [
+      "Level VI (anterior / central)",
+      "Hyoid to sternal notch, between carotid sheaths",
+      "Thyroid, parathyroid, subglottic larynx"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "8bf4e3a8-4000-8000-8bf4-e3a812345678",
+  "8ef4e861-4000-8000-8ef4-e86112345678",
+  "8df4e6ce-4000-8000-8df4-e6ce12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

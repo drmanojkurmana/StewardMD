@@ -1,0 +1,192 @@
+{
+ "module": "sur-peritoneum",
+ "subject": "surgery",
+ "title": "Acute peritonitis, damage control laparotomy, temporary abdominal closure, and abdominal compartment syndrome",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "World Society of the Abdominal Compartment Syndrome"
+ ],
+ "steps": [
+  {
+   "tx": "Acute **peritonitis** is classified into primary, secondary, and tertiary forms. Primary peritonitis (spontaneous bacterial peritonitis, SBP) occurs in cirrhotic ascites without an intra-abdominal source, characterized by monomicrobial infection (E. coli, Klebsiella) and managed with intravenous antibiotics. Secondary peritonitis arises from visceral perforation, ischemia, or anastomotic disruption, featuring polymicrobial enteric flora with purulent or feculent exudate that demands emergency operative source control.",
+   "say": "Primary peritonitis is monomicrobial infection of cirrhotic ascites treated medically with antibiotics. Secondary peritonitis results from visceral perforation or anastomotic breakdown, featuring polymicrobial contamination requiring emergency operative source control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peritonitis type",
+     "Underlying pathophysiology",
+     "Microbiology & primary therapy"
+    ],
+    "rows": [
+     [
+      "Primary (SBP)",
+      "Translocation into cirrhotic ascites without hole",
+      "Monomicrobial (E. coli); cephalosporin therapy"
+     ],
+     [
+      "Secondary peritonitis",
+      "Direct visceral perforation (perforated ulcer, colon)",
+      "Polymicrobial (aerobes + anaerobes); emergency surgery"
+     ],
+     [
+      "Tertiary peritonitis",
+      "Persistent or recurrent peritonitis post-op",
+      "Resistant hospital flora (Enterococcus, Candida)"
+     ],
+     [
+      "Chemical peritonitis",
+      "Sterile gastric acid or bile leakage",
+      "Non-bacterial initially; rapidly superinfected"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Damage control **surgery** (DCS) prioritizes rapid abbreviation of initial laparotomy in severely injured patients manifesting the lethal trauma triad: hypothermia (under 35 C), severe metabolic acidosis (pH under 7.2, base deficit > 8), and coagulopathy. Phase 1 focuses exclusively on rapid hemorrhage arrest via packing or shunting and contamination control via staple closure without anastomosis. The abdomen is left open with temporary vacuum closure for ICU physiologic restoration.",
+   "say": "Damage control laparotomy stops operations early in patients exhibiting the lethal triad of hypothermia, acidosis, and coagulopathy. Phase one arrests hemorrhage and controls contamination. The abdomen is packed and left open for ICU resuscitation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Severe trauma with lethal triad (hypothermia, acidosis, coagulopathy)"
+     },
+     {
+      "id": "d2",
+      "label": "Phase 1: Rapid laparotomy for packing & contamination control"
+     },
+     {
+      "id": "d3",
+      "label": "Temporary negative-pressure abdominal dressing (ABThera)"
+     },
+     {
+      "id": "d4",
+      "label": "Phase 2: ICU resuscitation, warming, & correction of coagulopathy"
+     },
+     {
+      "id": "d5",
+      "label": "Phase 3: Planned re-exploration, pack removal, & reconstruction"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ],
+     [
+      "d4",
+      "d5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intra-abdominal **hypertension** (IAH) is defined as sustained intra-abdominal pressure (IAP) of 12 mmHg or greater, monitored via transvesical urinary bladder catheter manometry. Abdominal compartment syndrome (ACS) occurs when sustained IAP exceeds 20 mmHg associated with new-onset organ dysfunction (oliguria, decreased cardiac output, elevated peak airway pressures). Medical decompression utilizes sedation, paralysis, and fluid evacuation; refractory ACS mandates immediate surgical decompression.",
+   "say": "Intra-abdominal hypertension is an intra-abdominal pressure of 12 millimeters of mercury or higher, measured via bladder catheter. Abdominal compartment syndrome occurs when pressure exceeds 20 with new organ failure. Refractory compartment syndrome requires surgical decompression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "IAP grade",
+     "Bladder pressure (mmHg)",
+     "Clinical intervention"
+    ],
+    "rows": [
+     [
+      "Normal resting IAP",
+      "0 to 5 mmHg (up to 7 in ICU)",
+      "Standard monitoring"
+     ],
+     [
+      "Grade I IAH",
+      "12 to 15 mmHg",
+      "Optimize fluid resuscitation, NG decompression"
+     ],
+     [
+      "Grade II IAH",
+      "16 to 20 mmHg",
+      "Sedation, neuromuscular blockade, evac intra-abd fluid"
+     ],
+     [
+      "Grade III/IV (ACS)",
+      "Greater than 20 mmHg with organ failure",
+      "Immediate surgical decompressive laparotomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Temporary **abdominal** closure (TAC) techniques protect visceral contents, remove peritoneal third-space fluid, and preserve fascial integrity to facilitate delayed primary fascial closure. Negative pressure wound therapy (NPWT) using dedicated commercial vacuum packs prevents lateral fascial retraction. Planned re-exploration is conducted at 48 to 72 hours following hemodynamic and metabolic stabilization, aiming for tension-free primary closure or component separation.",
+   "say": "Temporary abdominal closure protects viscera and collects peritoneal fluid following damage control surgery. Negative-pressure dressings prevent fascial retraction. Re-exploration occurs at 48 hours for definitive abdominal wall closure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Open abdomen following damage control laparotomy"
+     },
+     {
+      "id": "t2",
+      "label": "Application of visceral non-adherent fenestrated silicone drape"
+     },
+     {
+      "id": "t3",
+      "label": "Continuous negative pressure (125 mmHg) fluid aspiration"
+     },
+     {
+      "id": "t4",
+      "label": "ICU fluid normalization & reduction of visceral bowel edema"
+     },
+     {
+      "id": "t5",
+      "label": "Sequential fascial re-approximation & delayed primary closure"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ],
+     [
+      "t4",
+      "t5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "10181c39-4000-8000-1018-1c3912345678",
+  "0d181780-4000-8000-0d18-178012345678",
+  "0e181913-4000-8000-0e18-191312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
