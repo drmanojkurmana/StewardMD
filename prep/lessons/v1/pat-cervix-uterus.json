@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-cervix-uterus",
+ "subject": "pathology",
+ "title": "Cervical and uterine pathology: HPV, carcinoma and leiomyoma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**HPV** (16 and 18 high risk, **E6 degrading p53 with E7 binding Rb**) drives cervical carcinogenesis through **CIN** grades; **Bethesda reporting** sorts smears (ASCUS, LSIL favouring observation, HSIL colposcoping with biopsy). Screening runs Pap plus **HPV DNA** (primary over 30, cotesting intervals) with VIA in low resource settings; **HPV vaccine** (L1 virus like particles, pre exposure adolescents, Gardasil 9 covering 16 and 18 plus warts) prevents. Smoking and immunosuppression persist lesions; condoms halve transmission.",
+   "say": "E6 kills p53, E7 blocks Rb: HPV 16 and 18 transform. HSIL colposcopes; vaccine pre exposure prevents.",
+   "vis": null
+  },
+  {
+   "tx": "**Cervical carcinoma** (squamous commonest, adenocarcinoma rising, postcoital bleeding with foul discharge) is staged **clinically by FIGO** (exam under anaesthesia with cystoscopy and proctoscopy, nodes by imaging); microinvasive IA1 cones while IB1 to IIA operate (**radical hysterectomy** with node dissection) and IIB onward gets **concurrent chemoradiation** (cisplatin). Parametrial involvement vetoes surgery; fistulas complicate advanced disease. Follow up vault smears catch recurrence.",
+   "say": "Postcoital bleeding is cervical until colposcopy rules out. FIGO stages clinically: early operates, late radiates with cisplatin.",
+   "vis": null
+  },
+  {
+   "tx": "**Endometrial hyperplasia** (unopposed estrogen: obesity, PCOS, tamoxifen; atypical hyperplasia premalignant needing hysterectomy) precedes **endometrioid carcinoma** (PTEN loss, postmenopausal bleeding, early stage cured by hysterectomy with node mapping). **Serous carcinoma** (p53, atrophic background, peritoneal spread like ovarian) behaves worse; clear cell and carcinosarcoma follow. Workup is transvaginal thickness with **pipelle biopsy**; Lynch families screen young. Progestins temporise poor surgical candidates.",
+   "say": "Postmenopausal bleed is endometrial until pipelle rules out. Atypical hyperplasia hysterectomises; serous p53 spreads.",
+   "vis": null
+  },
+  {
+   "tx": "**Leiomyoma** (benign smooth muscle whorls, reproductive age, menorrhagia with pressure, malignant transformation vanishingly rare) is managed by GnRH analogues, myomectomy (fertility) or hysterectomy; **leiomyosarcoma** (rapid growth postmenopause, necrosis with atypia and mitoses) needs hysterectomy with staging. **Adenomyosis** (endometrium in myometrium, boggy tender uterus with dysmenorrhoea) differs from **endometriosis** (ectopic glands with stroma, **chocolate cysts**, infertility, laparoscopy with hormonal suppression). Fibroids spare LDH while sarcomas raise it.",
+   "say": "Boggy tender dysmenorrhoeic uterus is adenomyosis. Chocolate cysts with infertility are endometriosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Uterus",
+     "Lesion",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Cervix HSIL",
+      "HPV transform",
+      "Excise"
+     ],
+     [
+      "Endometrium",
+      "Postmeno bleed",
+      "Hysterectomy"
+     ],
+     [
+      "Fibroid",
+      "Benign whorls",
+      "Myomectomy"
+     ],
+     [
+      "Sarcoma",
+      "Necrosis mitoses",
+      "Hysterectomy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-451",
+  "bk2-pat-452",
+  "bk2-pat-453",
+  "bk2-pat-454",
+  "bk2-pat-455",
+  "bk2-pat-456",
+  "bk2-pat-457",
+  "bk2-pat-458",
+  "bk2-pat-459",
+  "bk2-pat-460"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

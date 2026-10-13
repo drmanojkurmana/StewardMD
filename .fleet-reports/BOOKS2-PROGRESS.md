@@ -158,3 +158,7 @@
 - Branch books2-path4 from origin/main, PR open (no merge; squash after browser job). 9 lessons + 9 KB + 90 MCQs bk2-pat-361..450 (nonclassic-inheritance, marrow-failure, myocardial-pericardial, intestine, metabolic-liver, gallbladder-pancreas, tubulointerstitial-cystic, renal-urinary-tumours, male-genital).
 - Gates: LP.checkLesson 9/9, kb_validate_v2 9/9, prep-books-mcqs 2/2, prep-lessons 23/23. 90 IDs unique, no dups. maikbook2 1080 -> 1170.
 - Robbins Ch 6/10/11/13-17 extracted to /tmp/books2-work/robbins/ (2.4MB). STATE2/COVERAGE2 updated + mirrors. Next: PATH5 (8 modules).
+## Wave PATH5 (2026-10-13, muse Wonder): pathology complete 17/17 (53/53 THIN topics pending merges)
+- Branch books2-path5 from origin/main, PR #1590 open (no merge; squash after browser job). 8 lessons + 8 KB + 80 MCQs bk2-pat-451..530 (cervix-uterus, ovary, pituitary-adrenal, bone, joints-soft-tissue, cns-non-neoplastic, nerve-muscle, skin).
+- Gates: LP.checkLesson 8/8, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23. 80 IDs unique, no dups. maikbook2 1080 -> 1160 (1250 after PATH4 #1589 merges; rebase then).
+- STATE2/COVERAGE2 updated + mirrors. Next: pharmacology 28.
