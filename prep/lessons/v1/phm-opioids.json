@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "phm-opioids",
+ "subject": "pharmacology",
+ "title": "Opioid safety: benefit, dependence and the naloxone rescue",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Opioids** relieve severe pain but sedate, depress breathing, constipate and create dependence. Prescribe the **lowest effective dose for the shortest necessary time**, review benefit and harm at every step, and co-prescribe laxatives and anti-emetics as needed rather than waiting for misery. Avoid combining opioids with other sedatives where possible, and warn about driving and safe storage away from children (BNF opioid guidance).",
+   "say": "Use the lowest effective opioid dose for the shortest time, review often, and prevent constipation from the start.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lowest dose, shortest time"
+     },
+     {
+      "id": "b",
+      "label": "Review benefit + harm"
+     },
+     {
+      "id": "c",
+      "label": "Taper and stop plan"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Opioid toxicity** shows pinpoint pupils, slow or shallow breathing and reduced consciousness. Support airway and ventilation first and give **naloxone per protocol**, titrated to breathing, knowing its effect may wear off before a long-acting opioid does, so observation and repeat dosing or infusion may be needed under senior care. Partial reversal in dependent patients can precipitate withdrawal, so titration and monitoring both matter (BNF).",
+   "say": "Pinpoint pupils and slow breathing mean support ventilation and give protocol naloxone, then observe because it can wear off first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Slow breathing, pinpoint pupils",
+      "Ventilate + naloxone protocol"
+     ],
+     [
+      "Dependent patient",
+      "Titrate, watch withdrawal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-term opioids need a documented **trial, goals, review date and taper plan**. Escalating dose without functional gain is failure, not compassion. Counsel that tolerance and dependence are physiological, that abrupt stopping causes withdrawal, and that unused opioids are returned, not shared or hoarded. Exact milligram conversions between opioids follow current BNF tables with specialist advice and are flagged, never estimated.",
+   "say": "Long-term opioids need goals, review and a taper plan, and conversions follow BNF tables with specialist advice.",
+   "vis": null
+  }
+ ]
+}

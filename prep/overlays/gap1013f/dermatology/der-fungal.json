@@ -1,0 +1,814 @@
+{
+ "topic": "der-fungal",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1101",
+   "q": "A 24-year-old gym enthusiast presents with an itchy, annular erythematous rash on his upper arm that has expanded over three weeks. Examination reveals a well-demarcated circular plaque with central clearing and a raised, scaly advancing edge. What is the most likely diagnosis?",
+   "o": [
+    "Tinea corporis (ringworm)",
+    "Pityriasis rosea",
+    "Granuloma annulare",
+    "Nummular eczema"
+   ],
+   "a": 0,
+   "exp": "Tinea corporis presents with an expanding annular erythematous plaque featuring central clearing and a scaly, active advancing border. Pityriasis rosea shows collarette scale along cleavage lines; granuloma annulare has a smooth, non-scaly dermal border; nummular eczema forms coin-shaped plaques without central clearing.",
+   "r": [
+    "Correct: An annular plaque with central clearing and scaly active border is tinea corporis.",
+    "Pityriasis rosea presents with a herald patch and multiple secondary oval plaques without active fungal borders.",
+    "Granuloma annulare is non-scaly with a dermal beaded ring.",
+    "Nummular eczema produces discoid exudative plaques that lack central clearing."
+   ],
+   "kp": "Tinea corporis presents as an annular scaly plaque with central clearing and an active advancing border.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "fungal",
+    "tinea-corporis"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Fungal skin infections - body and groin",
+   "x": {
+    "key": "Annular scaly plaque with central clearing defines tinea corporis.",
+    "others": {
+     "B": "Pityriasis rosea has collarette scale along rib lines.",
+     "C": "Granuloma annulare is non-scaly.",
+     "D": "Nummular eczema lacks central clearing."
+    },
+    "pearl": "Applying topical corticosteroids blunts the raised border, transforming the lesion into tinea incognito.",
+    "clues": "Young adult, gym user, annular plaque, central clearing, active scaly edge.",
+    "ddx": "Erythema annulare centrifugum, subacute cutaneous lupus, psoriasis.",
+    "mech": "Dermatophyte hyphae colonise stratum corneum keratin, inciting centrifugal cell-mediated inflammatory clearance in the centre.",
+    "lo": "Recognise the clinical morphology of tinea corporis.",
+    "rev": "Tinea corporis presents with central clearing and an active scaly border.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review dermatophyte infections and topical antifungals."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Fungal infections",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "terbinafine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1102",
+   "q": "A 7-year-old boy presents with a circular patch of hair loss on his crown. Examination reveals localized scaling, mild erythema, broken hair shafts resembling 'black dots', and cervical lymphadenopathy. What is the treatment of choice?",
+   "o": [
+    "Oral systemic antifungal therapy (such as griseofulvin or terbinafine)",
+    "Topical clotrimazole cream monotherapy",
+    "Topical potent corticosteroid ointment",
+    "Oral amoxicillin for 7 days"
+   ],
+   "a": 0,
+   "exp": "Tinea capitis involves fungal invasion of the hair follicle and shaft (endothrix/ectothrix). Topical antifungals cannot penetrate the hair follicle; oral systemic antifungal therapy (such as griseofulvin or terbinafine for 4-8 weeks) is mandatory to cure the infection and prevent scarring alopecia.",
+   "r": [
+    "Correct: Systemic oral antifungal therapy is required to eradicate tinea capitis from hair follicles.",
+    "Topical antifungals are ineffective for tinea capitis because they do not penetrate the hair shaft.",
+    "Topical steroids worsen fungal infections and promote tinea incognito.",
+    "Antibiotics have no activity against dermatophyte fungal infections."
+   ],
+   "kp": "Tinea capitis requires oral systemic antifungal therapy; topical agents are ineffective.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "tinea-capitis",
+    "antifungals",
+    "paediatrics"
+   ],
+   "source": "British Association of Dermatologists guidelines for the management of tinea capitis",
+   "x": {
+    "key": "Oral systemic antifungal therapy is mandatory for tinea capitis.",
+    "others": {
+     "B": "Topical therapy fails to reach the pilar follicle.",
+     "C": "Steroids exacerbate fungal growth.",
+     "D": "Antibiotics are ineffective."
+    },
+    "pearl": "A severe boggy, pustular, painful mass on the scalp represents a kerion, an intense cell-mediated hypersensitivity reaction to tinea capitis.",
+    "clues": "Child, scalp scaly alopecia, broken hairs (black dots), lymphadenopathy.",
+    "ddx": "Alopecia areata, trichotillomania, seborrheic dermatitis, bacterial folliculitis.",
+    "mech": "Dermatophyte arthroconidia invade the cortex of growing hair shafts, weakening the hair structure and causing breakage at the scalp surface.",
+    "lo": "Select the appropriate treatment for tinea capitis.",
+    "rev": "Systemic oral antifungals are mandatory for tinea capitis.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review BAD guidelines on tinea capitis."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Tinea capitis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "griseofulvin",
+      "terbinafine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1103",
+   "q": "A 52-year-old man presents with thickening, yellowish-brown discolouration, and crumbling of his right great toenail for six months. In accordance with clinical guidelines, what must be performed prior to initiating oral terbinafine?",
+   "o": [
+    "Microscopy and fungal culture of subungual nail clippings",
+    "Routine chest radiography",
+    "Serum ACE level measurement",
+    "Patch testing"
+   ],
+   "a": 0,
+   "exp": "Oral antifungal therapy for onychomycosis requires prolonged courses (6-12 weeks) with potential hepatic and drug interaction risks. Because dystrophic nails can be caused by psoriasis, lichen planus, or trauma, guidelines mandate confirmation of dermatophyte infection by microscopy (KOH) and fungal culture before starting systemic treatment.",
+   "r": [
+    "Correct: Nail clippings for microscopy and culture are mandatory before systemic antifungal therapy.",
+    "Chest radiography is unindicated for nail dystrophy.",
+    "Serum ACE assesses sarcoidosis, not fungal nail disease.",
+    "Patch testing investigates allergic contact dermatitis."
+   ],
+   "kp": "Confirm onychomycosis with nail clipping microscopy and culture before starting oral antifungal therapy.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "onychomycosis",
+    "nail-clippings",
+    "terbinafine"
+   ],
+   "source": "British Association of Dermatologists guidelines for the management of onychomycosis",
+   "x": {
+    "key": "Confirm dermatophyte presence by microscopy/culture prior to oral terbinafine.",
+    "others": {
+     "B": "Chest X-ray is unindicated.",
+     "C": "Serum ACE is for sarcoidosis.",
+     "D": "Patch test is for contact dermatitis."
+    },
+    "pearl": "Only about 50% of dystrophic nails are fungal; non-fungal nail dystrophies will not respond to terbinafine.",
+    "clues": "Great toenail yellow crumbling dystrophy, pre-treatment requirement.",
+    "ddx": "Nail psoriasis, lichen planus, traumatic nail dystrophy, onychogryphosis.",
+    "mech": "Trichophyton rubrum invades the subungual nail bed and ventral nail plate, producing hyperkeratosis and dystrophic separation.",
+    "lo": "State the pre-treatment diagnostic confirmation required for onychomycosis.",
+    "rev": "Confirm fungal infection with nail clippings before starting oral terbinafine.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review onychomycosis management and diagnostics."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Onychomycosis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "terbinafine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1104",
+   "q": "A 28-year-old woman returns from a Mediterranean holiday and notices multiple hypopigmented, finely scaly oval macules across her upper back and chest that did not tan in the sun. Gentle scraping produces fine scale. Wood lamp examination shows pale yellow-green fluorescence. What is the diagnosis?",
+   "o": [
+    "Pityriasis versicolor",
+    "Vitiligo",
+    "Pityriasis alba",
+    "Post-inflammatory hypopigmentation"
+   ],
+   "a": 0,
+   "exp": "Pityriasis versicolor (tinea versicolor) is caused by Malassezia furfur. It presents with hypo- or hyperpigmented macules with fine scale on the upper trunk that fail to tan. Wood lamp shows yellow-green fluorescence, and microscopy of scales reveals the classic 'spaghetti and meatballs' appearance (short hyphae and round yeast cells).",
+   "r": [
+    "Correct: Hypopigmented scaly macules failing to tan on upper trunk represent pityriasis versicolor.",
+    "Vitiligo causes complete depigmentation (chalky white) without surface scale.",
+    "Pityriasis alba occurs on the face in atopic children.",
+    "Post-inflammatory hypopigmentation follows an antecedent inflammatory dermatosis without fine scale."
+   ],
+   "kp": "Pityriasis versicolor causes trunk macules with fine scale that fail to tan, showing yellow-green Wood lamp fluorescence.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "pityriasis-versicolor",
+    "malassezia",
+    "wood-lamp"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Pityriasis versicolor",
+   "x": {
+    "key": "Pityriasis versicolor presents with hypopigmented macules with fine scale that fail to tan.",
+    "others": {
+     "B": "Vitiligo features complete depigmentation without scale.",
+     "C": "Pityriasis alba affects cheeks in children.",
+     "D": "Post-inflammatory hypopigmentation lacks active scale."
+    },
+    "pearl": "Malassezia produces azelaic acid, which competitively inhibits tyrosinase in melanocytes, preventing melanin synthesis.",
+    "clues": "Sun holiday, hypopigmented macules failing to tan, fine scale, yellow-green fluorescence.",
+    "ddx": "Vitiligo, leprosy, pityriasis rosea, secondary syphilis.",
+    "mech": "Malassezia converts from commensal yeast to mycelial form, producing dicarboxylic acids that inhibit melanogenesis.",
+    "lo": "Recognise pityriasis versicolor from clinical presentation and Wood lamp findings.",
+    "rev": "Pityriasis versicolor produces scaly trunk macules that fail to tan and fluoresce under Wood lamp.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review superficial yeast infections."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Pityriasis versicolor",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "ketoconazole"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1105",
+   "q": "A 40-year-old woman is diagnosed with mild pityriasis versicolor affecting her upper back. What is the recommended first-line topical treatment?",
+   "o": [
+    "Topical ketoconazole shampoo (or selenium sulfide shampoo)",
+    "Oral terbinafine tablets for 3 months",
+    "Potent topical betamethasone ointment",
+    "Oral aciclovir"
+   ],
+   "a": 0,
+   "exp": "First-line therapy for localized pityriasis versicolor is topical antifungal shampoo, such as ketoconazole 2% shampoo or selenium sulfide, applied to affected areas and left on for several minutes before washing off, used daily or several times weekly for 2-4 weeks. Oral terbinafine is ineffective for Malassezia.",
+   "r": [
+    "Correct: Topical ketoconazole or selenium sulfide shampoo is first-line for pityriasis versicolor.",
+    "Oral terbinafine does not reach therapeutic concentrations in sebum and is ineffective against Malassezia.",
+    "Topical steroids promote yeast growth and worsen fungal infections.",
+    "Aciclovir is an antiviral for herpesviruses and has no antifungal activity."
+   ],
+   "kp": "Topical ketoconazole or selenium sulfide shampoo is first-line for pityriasis versicolor; oral terbinafine is ineffective.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "pityriasis-versicolor",
+    "ketoconazole",
+    "treatment"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Pityriasis versicolor",
+   "x": {
+    "key": "Topical ketoconazole shampoo is first-line for pityriasis versicolor.",
+    "others": {
+     "B": "Oral terbinafine is ineffective against Malassezia.",
+     "C": "Steroids exacerbate yeast proliferation.",
+     "D": "Aciclovir is an antiviral."
+    },
+    "pearl": "Patients should be reassured that pigmentation changes can take several months to normalise even after successful eradication.",
+    "clues": "Mild pityriasis versicolor, first-line topical treatment.",
+    "ddx": "Seborrheic dermatitis, tinea corporis, erythrasma.",
+    "mech": "Azoles inhibit fungal lanosterol 14-alpha demethylase, depleting ergosterol in the fungal membrane.",
+    "lo": "Select the first-line topical treatment for pityriasis versicolor.",
+    "rev": "Ketoconazole shampoo is first-line for pityriasis versicolor.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review antifungal prescribing rules."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Pityriasis versicolor",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "ketoconazole"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1106",
+   "q": "A 58-year-old obese woman with type 2 diabetes presents with a bright red, macerated, painful rash in the inframammary folds. Examination reveals fiery red erythema with small pustules and papules scattered outside the main border ('satellite lesions'). What is the diagnosis?",
+   "o": [
+    "Candidal intertrigo",
+    "Inverse psoriasis",
+    "Erythrasma",
+    "Contact dermatitis"
+   ],
+   "a": 0,
+   "exp": "Candidal intertrigo is an opportunistic fungal infection occurring in warm, moist skin folds. It presents with macerated, erythematous plaques bordered by characteristic small red satellite pustules and papules. Inverse psoriasis lacks satellite pustules; erythrasma displays coral-red Wood lamp fluorescence.",
+   "r": [
+    "Correct: Intertrigo with satellite pustules and papules is pathognomonic of Candida albicans.",
+    "Inverse psoriasis causes smooth, well-demarcated plaques without satellite lesions.",
+    "Erythrasma is caused by Corynebacterium minutissimum and shows coral-red fluorescence.",
+    "Contact dermatitis lacks satellite pustules."
+   ],
+   "kp": "Candidal intertrigo is characterized by flexural maceration, fiery erythema and satellite pustules.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "candida",
+    "intertrigo",
+    "satellite-lesions"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Candida - skin",
+   "x": {
+    "key": "Satellite pustules in skin folds characterize candidal intertrigo.",
+    "others": {
+     "B": "Inverse psoriasis lacks satellite pustules.",
+     "C": "Erythrasma fluoresces coral red.",
+     "D": "Contact dermatitis lacks satellite pustules."
+    },
+    "pearl": "Optimising glycaemic control, keeping the skin fold clean and dry, and topical imidazole/clotrimazole are key.",
+    "clues": "Obese female, diabetes, inframammary fold, satellite lesions.",
+    "ddx": "Inverse psoriasis, tinea cruris, erythrasma, Hailey-Hailey disease.",
+    "mech": "Candida yeast morphs into pseudohyphal invasive form under warm, moist, hyperglycaemic microenvironments.",
+    "lo": "Recognise candidal intertrigo and its distinguishing satellite lesions.",
+    "rev": "Candidal intertrigo presents with flexural erythema and peripheral satellite pustules.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review candidal skin infections."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Candida",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "clotrimazole"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1107",
+   "q": "A 35-year-old gardener presents with an indolent, painless nodular lesion on his right index finger that developed into an ulcerated nodule after a rose thorn injury, followed by a linear chain of secondary subcutaneous nodules extending up his forearm along lymphatic channels. What is the diagnosis?",
+   "o": [
+    "Sporotrichosis (Sporothrix schenckii)",
+    "Tinea manuum",
+    "Cutaneous anthrax",
+    "Mycobacterium marinum infection"
+   ],
+   "a": 0,
+   "exp": "Sporotrichosis ('rose gardener disease') is caused by the dimorphic fungus Sporothrix schenckii, inoculated via traumatic vegetation puncture. It classically presents with nodular lymphangitis: a primary inoculation papulonodule followed by proximal ascending subcutaneous nodules along draining lymphatic channels.",
+   "r": [
+    "Correct: Rose thorn puncture followed by nodular lymphangitis is classic sporotrichosis.",
+    "Tinea manuum causes scaly palmar erythema, not ascending subcutaneous nodules.",
+    "Cutaneous anthrax produces a painless black eschar with marked surrounding oedema.",
+    "Mycobacterium marinum produces similar 'fish tank granuloma' sporotrichoid spread but links to aquatic/marine exposure."
+   ],
+   "kp": "Sporotrichosis causes ascending nodular lymphangitis following traumatic plant inoculation.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "sporotrichosis",
+    "deep-fungal",
+    "lymphangitis"
+   ],
+   "source": "Oxford Textbook of Medicine: Subcutaneous and deep mycoses",
+   "x": {
+    "key": "Ascending nodular lymphangitis after rose thorn injury defines sporotrichosis.",
+    "others": {
+     "B": "Tinea manuum is a superficial scaly infection.",
+     "C": "Anthrax causes a black eschar.",
+     "D": "M. marinum links to aquatic exposure."
+    },
+    "pearl": "Itraconazole is the oral antifungal treatment of choice for cutaneous and lymphocutaneous sporotrichosis.",
+    "clues": "Rose gardener, primary finger ulcer, ascending chain of subcutaneous nodules.",
+    "ddx": "Mycobacterium marinum, Leishmania braziliensis, Nocardia brasiliensis.",
+    "mech": "Thermal dimorphism allows thermal conversion from environmental mould to tissue yeast phase in subcutaneous tissue.",
+    "lo": "Recognise sporotrichosis and its characteristic sporotrichoid lymphatic spread.",
+    "rev": "Sporotrichosis causes ascending nodular lymphangitis after vegetation trauma.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review deep and subcutaneous mycoses."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Medicine",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "itraconazole"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against standard criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1108",
+   "q": "A 22-year-old athlete presents with itchy, peeling, macerated skin between his toes, particularly in the fourth interdigital web space. Examination reveals white macerated fissured epidermis. What is the diagnosis and appropriate initial treatment?",
+   "o": [
+    "Tinea pedis (athlete's foot); treated with topical terbinafine 1% cream",
+    "Eczema; treated with oral prednisolone",
+    "Contact dermatitis; treated with topical calcineurin inhibitors",
+    "Pitted keratolysis; treated with topical erythromycin"
+   ],
+   "a": 0,
+   "exp": "Tinea pedis (athlete's foot) is the most common dermatophyte infection, commonly presenting with interdigital scaling, maceration and pruritus in the 4th web space. First-line therapy is a topical antifungal cream (e.g. topical terbinafine 1% applied once or twice daily for 1-2 weeks).",
+   "r": [
+    "Correct: Interdigital maceration is tinea pedis, treated first-line with topical terbinafine.",
+    "Oral steroids are contraindicated for fungal infections and cause severe exacerbation.",
+    "Contact dermatitis does not present with isolated macerated toe web fissures.",
+    "Pitted keratolysis produces punch-out pits and malodour, driven by bacterial infection."
+   ],
+   "kp": "Interdigital tinea pedis presents with toe web maceration, treated with topical antifungal cream.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "tinea-pedis",
+    "athletes-foot",
+    "terbinafine"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Fungal skin infections - foot",
+   "x": {
+    "key": "Tinea pedis causes interdigital maceration, treated with topical terbinafine.",
+    "others": {
+     "B": "Oral steroids worsen fungal infections.",
+     "C": "Contact dermatitis is less localized.",
+     "D": "Pitted keratolysis features discrete pits."
+    },
+    "pearl": "Untreated tinea pedis is a major portal of entry for group A streptococcal and staphylococcal lower limb cellulitis.",
+    "clues": "Athlete, fourth toe web space, macerated peeling skin, pruritus.",
+    "ddx": "Interdigital erythrasma, candidal intertrigo, soft corn, pitted keratolysis.",
+    "mech": "Trichophyton interdigitale or rubrum produces keratinases that break down stratum corneum in occluded, moist toe spaces.",
+    "lo": "Recognise tinea pedis and prescribe first-line topical therapy.",
+    "rev": "Tinea pedis presents with interdigital toe web maceration, responsive to topical terbinafine.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review NICE guidelines on fungal foot infections."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Tinea pedis",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "terbinafine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1109",
+   "q": "A patient with an annular rash on his face was mistakenly prescribed topical clobetasol propionate for six weeks by an alternative practitioner. The rash has lost its raised scaly border, has developed prominent telangiectasias and pustules, and flares intensely whenever the cream is stopped. What is this phenomenon termed?",
+   "o": [
+    "Tinea incognito",
+    "Lupus erythematosus",
+    "Rosacea fulminans",
+    "Discoid eczema"
+   ],
+   "a": 0,
+   "exp": "Tinea incognito is a dermatophyte infection whose classical clinical appearance (active annular scaly border) has been masked, modified and blunted by the inappropriate application of topical corticosteroids or calcineurin inhibitors, leading to atypical widespread erythema, pustules and rebound flares.",
+   "r": [
+    "Correct: Steroid-modified fungal infection is termed tinea incognito.",
+    "Lupus erythematosus features photosensitive malar or discoid plaques with follicular plugging.",
+    "Rosacea fulminans is an acute conglobate eruption with sinus tracts.",
+    "Discoid eczema produces coin-shaped itchy plaques that respond favourably to topical steroids."
+   ],
+   "kp": "Tinea incognito is a dermatophyte infection modified and masked by topical corticosteroids.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "tinea-incognito",
+    "steroids",
+    "misdiagnosis"
+   ],
+   "source": "Oxford Textbook of Dermatology: Fungal infections",
+   "x": {
+    "key": "Tinea incognito refers to fungal infection modified by topical steroids.",
+    "others": {
+     "B": "Lupus shows follicular plugging and scarring.",
+     "C": "Rosacea fulminans features sinus tracts.",
+     "D": "Eczema improves on steroids."
+    },
+    "pearl": "Diagnostic scrapings for KOH microscopy from suspected tinea incognito often reveal abundant fungal hyphae.",
+    "clues": "Annular facial rash, prolonged potent steroid application, lost border, pustules.",
+    "ddx": "Steroid rosacea, perioral dermatitis, cutaneous lupus, contact dermatitis.",
+    "mech": "Corticosteroids suppress local T-cell cell-mediated immunity and erythema, allowing exuberant fungal proliferation.",
+    "lo": "Recognise tinea incognito resulting from inappropriate topical steroid use.",
+    "rev": "Tinea incognito is dermatophyte infection masked by topical corticosteroids.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review steroid misuse and tinea incognito."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Dermatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against dermatology reference."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1110",
+   "q": "A 30-year-old male athlete presents with bilateral groin itch and well-demarcated scaly erythematous plaques on the upper inner thighs, with sparing of the scrotum and penis. What is the diagnosis?",
+   "o": [
+    "Tinea cruris (jock itch)",
+    "Candidal intertrigo",
+    "Erythrasma",
+    "Inverse psoriasis"
+   ],
+   "a": 0,
+   "exp": "Tinea cruris presents with sharply demarcated annular erythematous scaly plaques on the inner thighs with an active advancing edge, characteristically sparing the scrotum and penis. Candidal intertrigo, by contrast, frequently involves the scrotum with prominent satellite lesions.",
+   "r": [
+    "Correct: Tinea cruris produces demarcated scaly plaques on the thighs with scrotal sparing.",
+    "Candida typically involves the scrotum and produces satellite pustules.",
+    "Erythrasma produces brown-red plaques with coral-red Wood lamp fluorescence.",
+    "Inverse psoriasis lacks scaly advancing edges and affects multiple flexures."
+   ],
+   "kp": "Tinea cruris typically spares the scrotum and penis, distinguishing it from candidal infection.",
+   "t": "der-fungal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "tinea-cruris",
+    "jock-itch"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Fungal skin infections - body and groin",
+   "x": {
+    "key": "Tinea cruris spares the scrotum, distinguishing it from candidiasis.",
+    "others": {
+     "B": "Candida involves the scrotum.",
+     "C": "Erythrasma fluoresces coral red.",
+     "D": "Psoriasis lacks advancing scaly borders."
+    },
+    "pearl": "Coexisting tinea pedis is the usual reservoir; the patient transmits the fungus when pulling underwear over infected feet.",
+    "clues": "Groin itch, inner thigh scaly plaques, scrotal sparing.",
+    "ddx": "Candidiasis, erythrasma, inverse psoriasis, Hailey-Hailey disease.",
+    "mech": "Trichophyton rubrum infection of the crural skin folds driven by sweating and occlusion.",
+    "lo": "Differentiate tinea cruris from candidal intertrigo.",
+    "rev": "Tinea cruris causes scaly groin plaques with scrotal sparing.",
+    "next": {
+     "concept": "der-fungal",
+     "action": "review",
+     "text": "Review groin dermatoses."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Tinea cruris",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "dermatophytosis"
+     ],
+     "drug_ids": [
+      "clotrimazole"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-fungal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  }
+ ]
+}

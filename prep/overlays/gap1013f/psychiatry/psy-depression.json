@@ -1,0 +1,826 @@
+{
+ "topic": "psy-depression",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1171",
+   "q": "A 58-year-old man who sustained an acute ST-elevation myocardial infarction (STEMI) six weeks ago presents to the outpatient clinic with moderate major depression. He has severe anhedonia, low mood, and early morning awakening. In accordance with NICE guideline NG222, which antidepressant is recommended as the first-line drug of choice in patients with recent myocardial infarction or unstable angina?",
+   "o": [
+    "Sertraline",
+    "Citalopram",
+    "Amitriptyline",
+    "Venlafaxine"
+   ],
+   "a": 0,
+   "exp": "NICE guideline NG222 recommends sertraline as the preferred antidepressant of choice in patients with coronary heart disease or recent myocardial infarction, based on robust evidence from the SADHART trial demonstrating cardiovascular safety and lack of adverse arrhythmogenic effects.",
+   "r": [
+    "Correct: Sertraline is the preferred first-line antidepressant in patients with cardiovascular disease or recent MI.",
+    "Citalopram causes dose-dependent QT prolongation and carries higher arrhythmogenic risk.",
+    "Amitriptyline is a tricyclic antidepressant with cardiotoxic, anticholinergic, and arrhythmogenic risks contraindicated post-MI.",
+    "Venlafaxine can cause dose-dependent hypertension and carries higher cardiotoxicity than SSRIs."
+   ],
+   "kp": "Sertraline is the first-line antidepressant of choice in patients with coronary heart disease or recent myocardial infarction.",
+   "t": "psy-depression",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "depression",
+    "sertraline",
+    "myocardial-infarction",
+    "cardiovascular-safety"
+   ],
+   "source": "NICE guideline NG222: Depression in adults: treatment and management",
+   "x": {
+    "key": "Sertraline is the antidepressant of choice following myocardial infarction per NICE NG222.",
+    "others": {
+     "B": "Citalopram prolongs QT.",
+     "C": "Amitriptyline is cardiotoxic and arrhythmogenic.",
+     "D": "Venlafaxine causes hypertension."
+    },
+    "pearl": "The SADHART trial confirmed sertraline does not adversely alter left ventricular ejection fraction, ventricular arrhythmias, or QT intervals in post-infarction patients.",
+    "clues": "6 weeks post-STEMI, moderate depression, drug of choice.",
+    "ddx": "Cardiac neurosis, adjustment disorder, hypopituitarism.",
+    "mech": "Sertraline inhibits 5-HT reuptake without blocking sodium channels or prolonging cardiac repolarization.",
+    "lo": "Select the safest first-line antidepressant for patients with ischaemic heart disease.",
+    "rev": "Sertraline is the preferred antidepressant for patients with recent myocardial infarction.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review NICE NG222 prescribing in physical illness."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG222",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [
+      "sertraline"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG222."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1172",
+   "q": "A 72-year-old woman with major depression is prescribed citalopram. Her baseline ECG is normal. Why does the Medicines and Healthcare products Regulatory Agency (MHRA) strictly restrict the maximum daily dose of citalopram to 20 mg in adults aged over 65 or those with hepatic impairment?",
+   "o": [
+    "Dose-dependent QT interval prolongation and risk of fatal torsades de pointes",
+    "High risk of acute angle-closure glaucoma",
+    "Severe hepatotoxicity requiring emergency liver transplantation",
+    "Rapid acceleration of bone mineral density loss"
+   ],
+   "a": 0,
+   "exp": "The MHRA and EMA issued safety warnings restricting citalopram to a maximum of 20 mg daily in adults over 65 years or those with hepatic impairment because citalopram causes dose-dependent QT interval prolongation, which substantially elevates the risk of torsades de pointes and fatal ventricular arrhythmias.",
+   "r": [
+    "Correct: Citalopram causes dose-dependent QT prolongation and torsades de pointes, capping the dose at 20 mg in the elderly.",
+    "Citalopram does not cause acute angle-closure glaucoma.",
+    "Citalopram does not cause acute fulminant hepatotoxicity.",
+    "Citalopram does not cause rapid catastrophic bone loss."
+   ],
+   "kp": "Citalopram is capped at 20 mg daily in adults over 65 due to dose-dependent QT prolongation and risk of torsades de pointes.",
+   "t": "psy-depression",
+   "d": 2,
+   "cog": "safety",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "citalopram",
+    "qt-prolongation",
+    "mhra-warning",
+    "elderly-safety"
+   ],
+   "source": "MHRA Drug Safety Update / BNF: Citalopram",
+   "x": {
+    "key": "Citalopram is restricted to 20 mg in patients over 65 due to QT prolongation risk.",
+    "others": {
+     "B": "Not linked to glaucoma.",
+     "C": "Does not cause fulminant hepatic failure.",
+     "D": "Not linked to catastrophic bone loss."
+    },
+    "pearl": "Escitalopram carries the same warning and is capped at 10 mg daily in patients aged over 65.",
+    "clues": "Elderly woman, citalopram 20 mg dose cap, MHRA warning rationale.",
+    "ddx": "Tricyclic cardiotoxicity, antipsychotic hyperprolactinaemia.",
+    "mech": "Concentration-dependent blockade of the hERG potassium channel delays cardiac ventricular repolarization.",
+    "lo": "Explain the MHRA dose restriction of citalopram in older adults.",
+    "rev": "Citalopram is capped at 20 mg daily in adults >65 to prevent QT prolongation and torsades de pointes.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review MHRA safety warnings on SSRI cardiotoxicity."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "MHRA Drug Safety Update",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [
+      "citalopram"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against MHRA."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1173",
+   "q": "A 21-year-old university student is initiated on oral fluoxetine 20 mg daily for moderate major depressive disorder. In accordance with NICE guideline NG222, when should he be scheduled for his first follow-up review, and what specific risk must be proactively evaluated?",
+   "o": [
+    "Review within 1 week; proactively assess for emergent suicidal ideation and agitation",
+    "Review in 6 months to check for symptom resolution",
+    "Review in 12 weeks to perform routine liver biopsy",
+    "No routine review is necessary unless the patient requests it"
+   ],
+   "a": 0,
+   "exp": "NICE guideline NG222 recommends that when an antidepressant is initiated in individuals under 30 years of age (or anyone considered to have increased suicide risk), the patient should be reviewed within 1 week, and regularly thereafter, because of an established transient increase in suicidal thoughts, self-harm, and agitation during early treatment initiation.",
+   "r": [
+    "Correct: Young adults starting an antidepressant must be reviewed within 1 week to assess suicide risk and agitation.",
+    "A 6-month delay is dangerously late and neglects early suicide risk.",
+    "12-week review is inappropriate, and liver biopsy is not indicated.",
+    "Active safety follow-up is mandatory, not left to patient request."
+   ],
+   "kp": "Patients under 30 starting an antidepressant must be reviewed within 1 week to monitor for emergent suicidal thoughts and agitation.",
+   "t": "psy-depression",
+   "d": 2,
+   "cog": "safety",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "antidepressant-initiation",
+    "suicide-monitoring",
+    "young-adults",
+    "nice"
+   ],
+   "source": "NICE guideline NG222: Depression in adults: treatment and management",
+   "x": {
+    "key": "Review young adults within 1 week of starting an antidepressant to monitor suicide risk.",
+    "others": {
+     "B": "6 months is dangerously negligent.",
+     "C": "12 weeks is too late.",
+     "D": "Routine review is mandatory."
+    },
+    "pearl": "Patients aged 30 and older without elevated suicide risk should be reviewed after 2 weeks, then at 2-4 week intervals.",
+    "clues": "21-year-old student, starting fluoxetine, NICE follow-up interval and safety check.",
+    "ddx": "Bipolar manic switch, akathisia, panic disorder flare.",
+    "mech": "Early reversal of psychomotor retardation may precede emotional recovery, granting energy to act on preexisting suicidal impulses.",
+    "lo": "Apply NICE monitoring recommendations when initiating antidepressants in young adults.",
+    "rev": "Review patients under 30 within 1 week of starting an antidepressant to assess for emergent suicidal thoughts.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review NICE NG222 monitoring schedule."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG222",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [
+      "fluoxetine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG222."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1174",
+   "q": "A 42-year-old woman with a first episode of major depressive disorder achieves complete clinical remission after 3 months of treatment with oral sertraline 100 mg daily. In accordance with NICE guideline NG222, how long should she continue taking sertraline at this effective therapeutic dose before considering discontinuation?",
+   "o": [
+    "For at least 6 months after full remission is achieved",
+    "Discontinue immediately upon reaching remission",
+    "Taper off over 1 week following remission",
+    "Continue indefinitely for the rest of her life"
+   ],
+   "a": 0,
+   "exp": "NICE guideline NG222 recommends that patients who respond successfully to antidepressant therapy for a first depressive episode should continue treatment at the effective therapeutic dose for at least 6 months after full remission is achieved. For patients with a history of recurrent depression, continuation for at least 2 years is advised.",
+   "r": [
+    "Correct: Antidepressants should be continued for at least 6 months after remission in a first episode.",
+    "Immediate discontinuation results in high rates of early depressive relapse.",
+    "A 1-week taper immediately after remission leads to rapid relapse.",
+    "Indefinite lifelong treatment is not indicated for an uncomplicated first depressive episode."
+   ],
+   "kp": "Continue antidepressant therapy for at least 6 months after achieving full remission in a first depressive episode.",
+   "t": "psy-depression",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "depression",
+    "maintenance-duration",
+    "relapse-prevention",
+    "nice"
+   ],
+   "source": "NICE guideline NG222: Depression in adults: treatment and management",
+   "x": {
+    "key": "Continue antidepressants for at least 6 months post-remission in a first depressive episode.",
+    "others": {
+     "B": "Stopping immediately causes relapse.",
+     "C": "1-week taper is premature.",
+     "D": "Lifelong therapy is unneeded for a first episode."
+    },
+    "pearl": "When stopping, the antidepressant should be tapered gradually over at least 4 weeks to minimize discontinuation symptoms.",
+    "clues": "First episode depression in complete remission, recommended duration of continuation therapy.",
+    "ddx": "Recurrent depression (at least 2 years maintenance), bipolar disorder (long-term maintenance).",
+    "mech": "Continued neurotrophic signaling (BDNF) and synaptic remodeling stabilize hippocampal dendritic arborization, preventing early relapse.",
+    "lo": "State the duration of continuation antidepressant therapy required after achieving remission.",
+    "rev": "Maintain antidepressant therapy for at least 6 months after remission in a first depressive episode.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review NICE NG222 continuation guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG222",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [
+      "sertraline"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG222."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1175",
+   "q": "A 36-year-old woman treated with paroxetine 30 mg daily for 8 months runs out of medication while traveling and misses three doses. Over the next 48 hours, she develops dizziness, electric shock-like sensations in her head ('brain zaps'), nausea, insomnia, sweating, and vivid nightmares. What is the diagnosis?",
+   "o": [
+    "Antidepressant discontinuation syndrome",
+    "Acute relapse of major depression",
+    "Serotonin syndrome",
+    "Neuroleptic malignant syndrome"
+   ],
+   "a": 0,
+   "exp": "Antidepressant discontinuation syndrome occurs following abrupt cessation or rapid dose reduction of an antidepressant (most commonly with agents with short half-lives like paroxetine or venlafaxine). Classical symptoms include 'FINISH': Flu-like symptoms, Insomnia, Nausea, Imbalance/dizziness, Sensory disturbances ('electric shock' sensations or brain zaps), and Hyperarousal.",
+   "r": [
+    "Correct: Electric shock sensations, dizziness, and nausea after missing paroxetine define antidepressant discontinuation syndrome.",
+    "Depressive relapse takes weeks to emerge, not acute somatic symptoms within 48 hours.",
+    "Serotonin syndrome is caused by excess serotonergic stimulation (hyperreflexia, clonus, fever), not drug withdrawal.",
+    "Neuroleptic malignant syndrome is caused by dopamine antagonism and features 'lead-pipe' rigidity, high fever, and elevated CK."
+   ],
+   "kp": "Antidepressant discontinuation syndrome presents with dizziness, electric shock-like sensations ('brain zaps'), nausea, and insomnia.",
+   "t": "psy-depression",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "paroxetine",
+    "discontinuation-syndrome",
+    "brain-zaps",
+    "ssri"
+   ],
+   "source": "NICE guideline NG222 / BNF: Antidepressant discontinuation",
+   "x": {
+    "key": "Abrupt paroxetine withdrawal causing brain zaps and dizziness is discontinuation syndrome.",
+    "others": {
+     "B": "Depressive relapse takes weeks.",
+     "C": "Serotonin syndrome is toxicity, not withdrawal.",
+     "D": "NMS is dopamine antagonism."
+    },
+    "pearl": "Fluoxetine has a very long half-life (and active metabolite norfluoxetine, half-life 7-15 days), making discontinuation syndrome much rarer.",
+    "clues": "Missed paroxetine doses, electric shock sensations in head, dizziness, nausea, vivid dreams.",
+    "ddx": "Serotonin syndrome, benign paroxysmal positional vertigo, acute viral labyrinthitis, panic attack.",
+    "mech": "Abrupt withdrawal causes sudden plunge in synaptic serotonin availability and temporary cholinergic rebound.",
+    "lo": "Recognise the clinical presentation of antidepressant discontinuation syndrome.",
+    "rev": "Abrupt SSRI cessation causes discontinuation syndrome with electric shock sensations and dizziness.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review tapering protocols for antidepressants."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG222",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [
+      "paroxetine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG222."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1176",
+   "q": "A 40-year-old woman taking citalopram 40 mg daily for depression is prescribed tramadol for acute back pain and takes sumatriptan for a migraine. Twenty-four hours later, she presents to the emergency department agitated, confused, and diaphoretic. Physical examination reveals a temperature of 38.9 C, blood pressure 160/95 mmHg, hyperreflexia, and sustained bilateral ankle clonus. What life-threatening condition is this?",
+   "o": [
+    "Serotonin syndrome (serotonin toxicity)",
+    "Neuroleptic malignant syndrome",
+    "Anticholinergic toxidrome",
+    "Malignant hyperthermia"
+   ],
+   "a": 0,
+   "exp": "Serotonin syndrome is a life-threatening toxidrome resulting from excessive serotonergic agonism across central and peripheral nervous systems, precipitated by combining serotonergic agents (SSRI + tramadol + triptan). Under the Hunter Serotonin Toxicity Criteria, spontaneous clonus, inducible clonus with agitation/diaphoresis, or ocular clonus with hyperreflexia and hyperthermia confirm the diagnosis.",
+   "r": [
+    "Correct: Combination of SSRI, tramadol, and triptan presenting with hyperreflexia, clonus, and fever is serotonin syndrome.",
+    "Neuroleptic malignant syndrome features 'lead-pipe' rigidity and hyporeflexia following antipsychotics, not hyperreflexia and clonus.",
+    "Anticholinergic toxidrome features dry flushed skin, absent bowel sounds, and urinary retention ('dry as a bone').",
+    "Malignant hyperthermia is triggered by volatile inhaled anaesthetics or suxamethonium."
+   ],
+   "kp": "Serotonin syndrome is characterized by neuromuscular hyperactivity (clonus, hyperreflexia), autonomic instability, and altered mental status.",
+   "t": "psy-depression",
+   "d": 2,
+   "cog": "safety",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "serotonin-syndrome",
+    "hunter-criteria",
+    "clonus",
+    "drug-interaction"
+   ],
+   "source": "Hunter Serotonin Toxicity Criteria / BNF / NICE guidelines",
+   "x": {
+    "key": "Neuromuscular excitation with clonus, hyperreflexia, and fever confirms serotonin syndrome.",
+    "others": {
+     "B": "NMS features lead-pipe rigidity.",
+     "C": "Anticholinergic causes dry skin.",
+     "D": "Malignant hyperthermia follows volatile anaesthetics."
+    },
+    "pearl": "Clonus (spontaneous, inducible, or ocular) is the single most specific diagnostic finding distinguishing serotonin syndrome from other toxidromes.",
+    "clues": "SSRI + tramadol + sumatriptan, fever, agitation, hyperreflexia, sustained ankle clonus.",
+    "ddx": "Neuroleptic malignant syndrome, sympathomimetic toxidrome, anticholinergic toxicity, sepsis.",
+    "mech": "Overstimulation of 5-HT1A and 5-HT2A receptors in the brainstem and spinal cord produces neuromuscular excitability and autonomic instability.",
+    "lo": "Apply the Hunter Serotonin Toxicity Criteria to diagnose serotonin syndrome.",
+    "rev": "Serotonin syndrome features clonus, hyperreflexia, autonomic instability, and hyperthermia.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review Hunter criteria for serotonin toxicity."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Hunter Criteria",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [
+      "citalopram",
+      "tramadol",
+      "sumatriptan"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against Hunter criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1177",
+   "q": "A 34-year-old teacher presents with low mood and fatigue for 3 weeks following a difficult school inspection. She scores 8 on the Patient Health Questionnaire-9 (PHQ-9), indicating mild depression. She is functioning well at work, has no psychotic features, and has no thoughts of self-harm. In accordance with NICE guideline NG222, what is the recommended initial management approach?",
+   "o": [
+    "Active monitoring, sleep hygiene, and low-intensity psychological interventions (guided self-help or digital CBT)",
+    "Immediate initiation of an oral tricyclic antidepressant",
+    "Immediate high-dose SSRI therapy combined with mirtazapine",
+    "Immediate referral for electroconvulsive therapy"
+   ],
+   "a": 0,
+   "exp": "NICE guideline NG222 recommends that clinicians should not routinely offer antidepressant medications as first-line treatment for mild depression, unless the patient has a history of moderate/severe depression or symptoms have persisted for >2 months. Initial management consists of active monitoring, sleep hygiene, group exercise, or low-intensity psychological interventions (digital CBT or guided self-help).",
+   "r": [
+    "Correct: Mild depression is managed with active monitoring and low-intensity psychological interventions, not routine antidepressants.",
+    "Tricyclic antidepressants are toxic and reserved for severe refractory depression.",
+    "High-dose combination antidepressants are inappropriate and potentially harmful for mild depression.",
+    "ECT is reserved for life-threatening severe or psychotic depression."
+   ],
+   "kp": "Do not routinely prescribe antidepressants for mild depression; offer active monitoring and low-intensity psychological interventions.",
+   "t": "psy-depression",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "mild-depression",
+    "stepped-care",
+    "phq9",
+    "nice"
+   ],
+   "source": "NICE guideline NG222: Depression in adults: treatment and management",
+   "x": {
+    "key": "Mild depression is managed with active monitoring and low-intensity psychological therapies.",
+    "others": {
+     "B": "TCAs are toxic and inappropriate.",
+     "C": "Combination therapy is inappropriate for mild depression.",
+     "D": "ECT is for life-threatening illness."
+    },
+    "pearl": "The risk-benefit ratio of antidepressants is unfavorable in mild depression because placebo response rates are high (up to 50%) and medication adverse effects occur.",
+    "clues": "PHQ-9 score 8, 3 weeks duration, intact functioning, no suicide risk, initial NICE step.",
+    "ddx": "Moderate depression, adjustment disorder, normal bereavement, burnout.",
+    "mech": "Psychological resilience strategies and problem-solving enhance self-efficacy without pharmacological exposure.",
+    "lo": "Select the appropriate stepped-care management for mild depressive disorder per NICE guidelines.",
+    "rev": "Antidepressants are not routinely offered for mild depression; utilize active monitoring and low-intensity CBT.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review NICE NG222 stepped care model."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG222",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG222."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1178",
+   "q": "A 46-year-old woman with severe unipolar depression has shown no clinical improvement despite completing an 8-week course of sertraline 200 mg daily followed by an 8-week course of venlafaxine 225 mg daily, with confirmed treatment adherence. How is treatment-resistant depression defined in clinical guidelines?",
+   "o": [
+    "Failure to achieve clinical response after at least two adequate trials of different antidepressants from distinct pharmacological classes",
+    "Failure to respond to a single antidepressant taken for 2 weeks",
+    "Failure to respond to outpatient psychotherapy alone",
+    "Persistent depression requiring intensive care admission"
+   ],
+   "a": 0,
+   "exp": "Treatment-resistant depression (TRD) is standardly defined as the failure to achieve clinical remission or response despite at least two consecutive, adequate trials (adequate dose and minimum 6-8 weeks duration) of two different antidepressant medications from distinct pharmacological classes, with verified patient adherence.",
+   "r": [
+    "Correct: Failure of at least two adequate trials of antidepressants from distinct classes defines treatment-resistant depression.",
+    "A 2-week trial is insufficient to evaluate antidepressant efficacy and cannot define resistance.",
+    "Psychotherapy failure alone does not define pharmacological treatment resistance.",
+    "Intensive care admission reflects medical crisis or overdose, not the diagnostic definition of TRD."
+   ],
+   "kp": "Treatment-resistant depression is defined as failure to respond to at least two adequate trials of different antidepressants from distinct classes.",
+   "t": "psy-depression",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "treatment-resistant-depression",
+    "trd",
+    "definition",
+    "nice"
+   ],
+   "source": "NICE guideline NG222: Depression in adults: treatment and management",
+   "x": {
+    "key": "TRD is failure to respond to two adequate trials of antidepressants from different classes.",
+    "others": {
+     "B": "2 weeks is inadequate.",
+     "C": "Psychotherapy alone does not define TRD.",
+     "D": "ICU admission is not the criterion."
+    },
+    "pearl": "Before diagnosing TRD, always rule out pseudo-resistance: verify medication adherence, rule out occult bipolar disorder, and screen for untreated hypothyroidism or substance misuse.",
+    "clues": "Failed 8 weeks sertraline and 8 weeks venlafaxine at full doses, clinical definition.",
+    "ddx": "Bipolar depression, pseudo-resistance from non-adherence, organic depression (hypothyroidism).",
+    "mech": "Complex dysregulation of the HPA axis, neuroinflammation, and altered neuroplasticity refractory to standard monoaminergic reuptake blockade.",
+    "lo": "State the clinical definition of treatment-resistant depression.",
+    "rev": "Treatment-resistant depression is defined by failure of two adequate trials of antidepressants from different classes.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review management of treatment-resistant depression."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG222",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [
+      "sertraline",
+      "venlafaxine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG222."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1179",
+   "q": "A 78-year-old woman is admitted to the psychiatric hospital with severe psychotic depression. She is completely mutistic, refuses all food and liquids, is severely dehydrated with renal impairment, and believes her intestines have completely rotted away (Cotard delusion). In accordance with NICE guideline NG222, what is the rapid, definitive life-saving intervention indicated for this patient?",
+   "o": [
+    "Electroconvulsive therapy (ECT)",
+    "Oral fluoxetine monotherapy",
+    "Outpatient psychodynamic psychotherapy",
+    "Wait-and-see supportive observation alone"
+   ],
+   "a": 0,
+   "exp": "NICE guideline NG222 recommends electroconvulsive therapy (ECT) as a rapid, life-saving treatment for severe depression that is life-threatening (e.g. severe dehydration/starvation from refusal to eat or drink), when rapid response is required, or where depression is accompanied by severe psychotic symptoms or intractable catatonia.",
+   "r": [
+    "Correct: ECT is the rapid, life-saving intervention for life-threatening severe psychotic depression with starvation.",
+    "Oral fluoxetine takes weeks to work and cannot be taken orally in a patient refusing all oral intake.",
+    "Psychotherapy cannot be engaged by a stuporous, mutistic patient refusing fluids.",
+    "Supportive observation alone leads to fatal dehydration and multi-organ failure."
+   ],
+   "kp": "Electroconvulsive therapy (ECT) is the rapid, life-saving intervention for life-threatening severe depression with food/fluid refusal.",
+   "t": "psy-depression",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "ect",
+    "electroconvulsive-therapy",
+    "cotard-delusion",
+    "emergency"
+   ],
+   "source": "NICE guideline NG222: Depression in adults: treatment and management",
+   "x": {
+    "key": "ECT is the definitive life-saving intervention for severe depression with food refusal.",
+    "others": {
+     "B": "Fluoxetine is too slow and requires swallowing.",
+     "C": "Psychotherapy cannot be engaged.",
+     "D": "Observation leads to death."
+    },
+    "pearl": "Cotard delusion (walking corpse syndrome) is a nihilistic delusion where the patient believes they are dead, putrefying, or have lost internal organs, classically seen in severe psychotic depression.",
+    "clues": "Severe depression, refusal to eat or drink, dehydration, Cotard delusion, urgent life-saving treatment.",
+    "ddx": "Catatonic schizophrenia, neuroleptic malignant syndrome, acute delirium.",
+    "mech": "Electrically induced generalized seizure triggers massive release of BDNF, monoamines, and restores fronto-limbic functional connectivity.",
+    "lo": "Identify the clinical indications for urgent electroconvulsive therapy in severe depression.",
+    "rev": "ECT is the life-saving intervention of choice for severe depression with refusal of nutrition and hydration.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review NICE NG222 guidance on ECT."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG222",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG222."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1180",
+   "q": "A 48-year-old man with major depression presents with profound insomnia and severe weight loss. His psychiatrist considers prescribing oral mirtazapine at bedtime. What is the pharmacological mechanism of mirtazapine, and which characteristic adverse effects should the patient be warned about?",
+   "o": [
+    "Central presynaptic alpha-2 adrenergic and 5-HT2/5-HT3 antagonist; sedation and increased appetite/weight gain",
+    "Dopamine D2 receptor blocker; extrapyramidal symptoms and hyperprolactinaemia",
+    "Selective serotonin reuptake inhibitor; sexual dysfunction and diarrhoea",
+    "Monoamine oxidase type A inhibitor; hypertensive crisis with dietary tyramine"
+   ],
+   "a": 0,
+   "exp": "Mirtazapine is a Noradrenergic and Specific Serotonergic Antidepressant (NaSSA). It blocks central presynaptic alpha-2 auto- and hetero-receptors (enhancing noradrenaline and serotonin release) and antagonizes post-synaptic 5-HT2 and 5-HT3 receptors. Its potent H1 histamine receptor antagonism produces prominent sedation and stimulated appetite/weight gain, which can be therapeutically advantageous in depressed patients with severe insomnia and weight loss.",
+   "r": [
+    "Correct: Alpha-2 adrenergic antagonist and 5-HT2/3 antagonist; causes sedation and weight gain.",
+    "Dopamine D2 blockade characterizes typical antipsychotics, not mirtazapine.",
+    "SSRI mechanism and sexual dysfunction characterize drugs like paroxetine or sertraline.",
+    "MAOI mechanism and tyramine interaction characterize phenelzine and moclobemide."
+   ],
+   "kp": "Mirtazapine is a presynaptic alpha-2 adrenergic antagonist that commonly causes sedation and increased appetite/weight gain.",
+   "t": "psy-depression",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "mirtazapine",
+    "nassa",
+    "sedation",
+    "weight-gain"
+   ],
+   "source": "British National Formulary / NICE guideline NG222",
+   "x": {
+    "key": "Mirtazapine is an alpha-2 antagonist that causes sedation and weight gain.",
+    "others": {
+     "B": "D2 blockers are antipsychotics.",
+     "C": "SSRIs cause sexual dysfunction.",
+     "D": "MAOIs interact with tyramine."
+    },
+    "pearl": "Paradoxically, mirtazapine is often more sedating at lower doses (15 mg) due to potent H1 antihistamine effects; higher doses (30-45 mg) recruit greater noradrenergic transmission.",
+    "clues": "Antidepressant for insomnia and weight loss, alpha-2 antagonist, sedative and weight-gaining side effects.",
+    "ddx": "Trazodone, agomelatine, tricyclic antidepressants.",
+    "mech": "Alpha-2 blockade disinhibits noradrenaline and serotonin release; H1 antagonism drives sedation and orexigenic appetite stimulation.",
+    "lo": "Describe the mechanism of action and primary adverse effects of mirtazapine.",
+    "rev": "Mirtazapine is an alpha-2 adrenergic antagonist causing sedation and increased appetite.",
+    "next": {
+     "concept": "psy-depression",
+     "action": "review",
+     "text": "Review pharmacology of atypical antidepressants in the BNF."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF / NICE NG222",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "major_depressive_disorder"
+     ],
+     "drug_ids": [
+      "mirtazapine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-depression"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BNF."
+     }
+    }
+   }
+  }
+ ]
+}

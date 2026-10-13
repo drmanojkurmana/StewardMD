@@ -1,0 +1,171 @@
+{
+ "module": "bio-enzymes-kinetics",
+ "subject": "biochemistry",
+ "title": "Enzyme kinetics: Michaelis-Menten mechanics, Lineweaver-Burk analysis and reversible inhibition",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Enzymes catalyze metabolic transformations by lowering activation **energy** without altering reaction equilibrium. Michaelis-Menten kinetics describe single-substrate hyperbolic velocity curves. The Michaelis constant, Km, represents the substrate concentration at which reaction velocity reaches half of maximal velocity. A small Km reflects high enzyme-substrate affinity, whereas a large Km indicates that higher substrate concentrations are required for effective catalysis.",
+   "say": "Enzymes lower activation energy barriers without altering equilibrium. Michaelis-Menten kinetics generate a hyperbolic saturation curve. The Km parameter indicates the substrate concentration needed for half-maximal velocity. Low Km signifies high affinity, while high Km indicates lower affinity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Kinetic parameter",
+     "Physiological definition",
+     "Units",
+     "Clinical relevance"
+    ],
+    "rows": [
+     [
+      "Vmax",
+      "Maximum catalytic rate at saturating substrate",
+      "Micromoles per minute",
+      "Reflects active enzyme concentration"
+     ],
+     [
+      "Km",
+      "Substrate concentration at half-maximal Vmax",
+      "Millimoles per liter",
+      "Glucokinase vs hexokinase glucose sensing"
+     ],
+     [
+      "Kcat (turnover)",
+      "Number of substrate conversions per active site",
+      "Per second",
+      "Catalytic efficiency metric (Kcat/Km)"
+     ],
+     [
+      "Half-life (t1/2)",
+      "Time for half of enzyme activity to decay",
+      "Hours or days",
+      "Cardiac biomarker clearance in plasma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hexokinase and glucokinase illustrate how divergent **Km** values dictate tissue-specific metabolic functions. Hexokinase I, expressed ubiquitously in extrahepatic tissues, possesses a low Km for glucose below zero-point-one millimolar, enabling near-maximal glucose phosphorylation even during profound fasting hypoglycemia. Liver glucokinase has a high Km around ten millimolar and lacks product inhibition by glucose-6-phosphate, acting as a postprandial glucose sensor.",
+   "say": "Hexokinase and glucokinase exemplify physiological adaptation through enzyme kinetics. Ubiquitous hexokinase has a low Km, ensuring glucose phosphorylation during fasting. Hepatic glucokinase possesses a high Km and lacks product inhibition, functioning as a postprandial glucose sensor and insulin gatekeeper.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hexokinase (types I to III)",
+     "points": [
+      "Ubiquitously distributed in tissues",
+      "Low Km (high glucose affinity <0.1 mM)",
+      "Inhibited by product glucose-6-phosphate",
+      "Saturated under fasting conditions"
+     ]
+    },
+    "right": {
+     "title": "Glucokinase (type IV)",
+     "points": [
+      "Restricted to hepatocytes and beta-cells",
+      "High Km (low glucose affinity ~10 mM)",
+      "Not inhibited by glucose-6-phosphate",
+      "Sequestered in nucleus by regulatory protein"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Linear transformation via the **Lineweaver-Burk** double-reciprocal plot permits precise graphical determination of kinetic parameters. Plotting inverse initial velocity against inverse substrate concentration produces a straight line. The y-intercept represents the reciprocal of Vmax, while the x-intercept corresponds to the negative reciprocal of Km. Slope of the line equals Km divided by Vmax, simplifying mathematical differentiation of enzyme inhibitors.",
+   "say": "The Lineweaver-Burk double-reciprocal plot graphs inverse velocity against inverse substrate concentration. The y-intercept yields the inverse of Vmax, while the x-intercept reveals negative inverse Km. The slope equals Km divided by Vmax, facilitating inhibitor analysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Plot coordinate",
+     "Mathematical value",
+     "Inhibitor behavior"
+    ],
+    "rows": [
+     [
+      "Y-intercept",
+      "1 / Vmax",
+      "Unchanged in competitive; elevated in noncompetitive"
+     ],
+     [
+      "X-intercept",
+      "-1 / Km",
+      "Shifts toward origin in competitive; unchanged in noncompetitive"
+     ],
+     [
+      "Slope",
+      "Km / Vmax",
+      "Increased by both competitive and noncompetitive inhibitors"
+     ],
+     [
+      "Parallel lines",
+      "Slope unchanged",
+      "Hallmark of uncompetitive inhibition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Enzyme **inhibition** is categorized by its structural and kinetic characteristics. Competitive inhibitors resemble the substrate and reversibly bind the active site, increasing apparent Km while leaving Vmax unchanged at saturating substrate concentrations. Noncompetitive inhibitors bind an allosteric site regardless of substrate binding, reducing Vmax without altering Km. Irreversible suicide inhibitors covalently inactivate the catalytic active site.",
+   "say": "Enzyme inhibitors are classified by kinetic behavior. Competitive inhibitors bind the active site, raising apparent Km without altering Vmax. Noncompetitive inhibitors bind allosteric sites, lowering Vmax while maintaining normal Km. Irreversible suicide inhibitors permanently inactivate the enzyme.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pharmacological inhibitor examples",
+    "nodes": [
+     {
+      "id": "inh",
+      "label": "Clinical enzyme inhibitors"
+     },
+     {
+      "id": "comp",
+      "label": "Competitive: Statins (HMG-CoA Reductase)"
+     },
+     {
+      "id": "non",
+      "label": "Noncompetitive: Lead (Ferrochelatase)"
+     },
+     {
+      "id": "irr",
+      "label": "Irreversible: Aspirin (Cyclooxygenase-1)"
+     }
+    ],
+    "edges": [
+     [
+      "inh",
+      "comp",
+      "Reversible active site"
+     ],
+     [
+      "inh",
+      "non",
+      "Allosteric site binding"
+     ],
+     [
+      "inh",
+      "irr",
+      "Covalent bond formation"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "d7c1c4c9-4000-8000-d7c1-c4c912345678",
+  "d4c1c010-4000-8000-d4c1-c01012345678",
+  "d5c1c1a3-4000-8000-d5c1-c1a312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

@@ -41,26 +41,25 @@
     { id: "mrcs-part-a", tab: "mrcs", profile: "mrcs-part-a", label: "MRCS Part A", sub: "Intercollegiate MRCS Part A, 300 questions" }
   ];
   /* NEET-SS papers are set per specialty group (NBEMS NEET-SS bulletin: one 150-question paper per group; the 2025
-     groups below, each with its feeder broad specialty). subjects = the bank's ss-* subjects in that group: the
-     question bank covers the Medical group (plus the single-group subjects named), so every other group lists no
-     subjects yet and its students see the honest empty state until its bank exists. */
+     groups below, each with its feeder broad specialty). subjects = the bank's ss-* subjects in that group. The
+     group sheet offers only groups whose subjects hold questions; a group with no bank subjects is not offered. */
   var SS_GROUPS = [
     { id: "medical", label: "Medical group", feeder: "MD or DNB General Medicine",
       subjects: ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology",
         "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology",
         "ss-infectious-diseases", "ss-biostatistics"] },
-    { id: "surgical", label: "Surgical group", feeder: "MS or DNB General Surgery", subjects: [] },
-    { id: "anaesthesiology", label: "Anaesthesiology group", feeder: "MD or DNB Anaesthesiology", subjects: [] },
+    { id: "surgical", label: "Surgical group", feeder: "MS or DNB General Surgery", subjects: ["ss-general-surgery", "ss-urology", "ss-neurosurgery", "ss-surgical-oncology", "ss-ctvs", "ss-paediatric-surgery", "ss-plastic-surgery", "ss-vascular-surgery"] },
+    { id: "anaesthesiology", label: "Anaesthesiology group", feeder: "MD or DNB Anaesthesiology", subjects: ["ss-cardiac-anaesthesia", "ss-neuroanaesthesia", "ss-transplant-anaesthesia", "ss-paediatric-anaesthesia"] },
     { id: "critical-care", label: "Critical Care group", feeder: "MD or DNB Anaesthesiology, Medicine or equivalent", subjects: ["ss-critical-care", "ss-pulmonology"] },
-    { id: "ent", label: "ENT group", feeder: "MS or DNB ENT", subjects: [] },
+    { id: "ent", label: "ENT group", feeder: "MS or DNB ENT", subjects: ["ss-head-neck-surgery"] },
     { id: "medical-oncology", label: "Medical Oncology group", feeder: "MD or DNB General Medicine or equivalent", subjects: ["ss-medical-oncology"] },
-    { id: "microbiology", label: "Microbiology group", feeder: "MD or DNB Microbiology", subjects: [] },
-    { id: "obs-gynae", label: "Obstetrics and Gynaecology group", feeder: "MS or DNB Obstetrics and Gynaecology", subjects: [] },
-    { id: "orthopaedics", label: "Orthopaedics group", feeder: "MS or DNB Orthopaedics", subjects: [] },
-    { id: "paediatric", label: "Paediatric group", feeder: "MD or DNB Paediatrics", subjects: [] },
-    { id: "pathology", label: "Pathology group", feeder: "MD or DNB Pathology", subjects: [] },
-    { id: "pharmacology", label: "Pharmacology group", feeder: "MD or DNB Pharmacology", subjects: [] },
-    { id: "psychiatry", label: "Psychiatry group", feeder: "MD or DNB Psychiatry", subjects: [] },
+    { id: "microbiology", label: "Microbiology group", feeder: "MD or DNB Microbiology", subjects: ["ss-virology"] },
+    { id: "obs-gynae", label: "Obstetrics and Gynaecology group", feeder: "MS or DNB Obstetrics and Gynaecology", subjects: ["ss-gynaecological-oncology", "ss-reproductive-medicine"] },
+    { id: "orthopaedics", label: "Orthopaedics group", feeder: "MS or DNB Orthopaedics", subjects: ["ss-hand-surgery", "ss-paediatric-orthopaedics"] },
+    { id: "paediatric", label: "Paediatric group", feeder: "MD or DNB Paediatrics", subjects: ["ss-neonatology", "ss-paediatric-cardiology", "ss-paediatric-neurology", "ss-paediatric-gastroenterology", "ss-paediatric-nephrology", "ss-paediatric-hepatology", "ss-paediatric-oncology", "ss-paediatric-critical-care"] },
+    { id: "pathology", label: "Pathology group", feeder: "MD or DNB Pathology", subjects: ["ss-onco-pathology"] },
+    { id: "pharmacology", label: "Pharmacology group", feeder: "MD or DNB Pharmacology", subjects: ["ss-clinical-pharmacology"] },
+    { id: "psychiatry", label: "Psychiatry group", feeder: "MD or DNB Psychiatry", subjects: ["ss-geriatric-mental-health", "ss-child-adolescent-psychiatry"] },
     { id: "radio-diagnosis", label: "Radio-diagnosis group", feeder: "MD or DNB Radio-diagnosis", subjects: ["ss-radiology"] },
     { id: "respiratory", label: "Respiratory Medicine group", feeder: "MD or DNB Respiratory Medicine or equivalent", subjects: ["ss-pulmonology", "ss-critical-care"] }
   ];
@@ -566,9 +565,10 @@
   function examSubHtml(c) {
     if (!c) return "";
     if (c.exam === "neet-ss") {
-      return '<div class="pl-subq" role="radiogroup" aria-label="NEET-SS group"><p class="pn-mut pn-small">Your group: one paper per group.</p><div class="pl-opts">' + SS_GROUPS.map(function (g) {
-        var on = (c.group || defaultSsGroup()) === g.id, noq = !g.subjects.length;
-        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder + (noq ? ". No questions in the bank yet" : "")) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
+      var offered = SS_GROUPS.filter(function (g) { return g.subjects.length; });
+      return '<div class="pl-subq" role="radiogroup" aria-label="NEET-SS group"><p class="pn-mut pn-small">Your group: one paper per group.</p><div class="pl-opts">' + offered.map(function (g) {
+        var on = (c.group || defaultSsGroup()) === g.id;
+        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
       }).join("") + "</div></div>";
     }
     if (c.exam === "ini-ss") {

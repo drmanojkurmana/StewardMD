@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-acute-leukaemias",
+ "subject": "pathology",
+ "title": "Acute leukaemias: classification and emergencies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Acute leukaemias** are clonal marrow malignancies where blast cells accumulate and suppress normal blood production, causing anaemia, infection and bleeding within weeks. Diagnosis needs a high blast proportion in blood or marrow, traditionally twenty percent or more with defining genetic lesions allowing diagnosis at lower counts. Immunophenotyping separates myeloid from lymphoid lineage and directs therapy.",
+   "say": "Acute leukaemia fills marrow with blasts and suppresses normal blood within weeks. Blast percentage and genetics define it. Flow cytometry separates myeloid from lymphoid lineage and guides treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Auer rods** are pink needle like cytoplasmic inclusions of myeloperoxidase crystals that prove myeloid lineage, most dramatic in acute promyelocytic leukaemia where faggot cells pack multiple rods. Myeloblasts express myeloperoxidase and CD33 and CD117, while lymphoblasts express terminal deoxynucleotidyl transferase with lineage markers. Cytochemistry is now largely replaced by flow cytometry.",
+   "say": "Pink needle Auer rods prove myeloid blasts. Promyelocytic leukaemia packs cells with multiple rods. Flow cytometry now classifies lineage faster than old cytochemistry.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Acute myeloid leukaemia",
+     "Acute lymphoblastic leukaemia"
+    ],
+    "rows": [
+     [
+      "Typical age peak",
+      "Older adults",
+      "Children (commonest childhood cancer)"
+     ],
+     [
+      "Signature inclusion",
+      "Auer rods",
+      "Absent; TdT positive blasts"
+     ],
+     [
+      "Common presentation clues",
+      "Gum hypertrophy in monocytic types",
+      "Lymphadenopathy, mediastinal mass in T type"
+     ],
+     [
+      "Key genetics",
+      "t(15;17) PML RARA in promyelocytic type",
+      "Hyperdiploidy favourable; hypodiploidy adverse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute promyelocytic leukaemia** is a medical emergency because abnormal promyelocytes trigger disseminated intravascular coagulation and catastrophic bleeding at presentation. Its translocation fuses PML with the retinoic acid receptor, so all trans retinoic acid forces differentiation and transformed outcomes. Any suspicion demands immediate ATRA before genetic confirmation returns, alongside aggressive coagulation support.",
+   "say": "Promyelocytic leukaemia bleeds through DIC at presentation. Its PML RARA fusion responds to retinoic acid differentiation. Start ATRA on suspicion without waiting for genetics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Favourable genetics",
+     "points": [
+      "t(15;17) treated with ATRA based therapy",
+      "Core binding factor translocations",
+      "NPM1 mutation without adverse partners",
+      "Childhood hyperdiploid ALL"
+     ]
+    },
+    "right": {
+     "title": "Adverse genetics",
+     "points": [
+      "Complex karyotype and TP53 loss",
+      "KMT2A rearrangements in infants",
+      "Hypodiploid ALL",
+      "Secondary leukaemia after prior chemotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tumour lysis syndrome** follows rapid malignant cell destruction, spontaneous or after chemotherapy, releasing potassium, phosphate and uric acid while calcium falls. Acute kidney injury from uric acid and calcium phosphate deposition is the danger. Prevention uses vigorous hydration and allopurinol, with rasburicase for high burden disease that converts uric acid to soluble allantoin.",
+   "say": "Rapid cell death releases potassium, phosphate and uric acid while calcium falls. Kidneys fail from crystal deposition. Hydration and urate lowering prevent it. Rasburicase suits high burden disease.",
+   "vis": null
+  },
+  {
+   "tx": "Children with **acute lymphoblastic leukaemia** most often present with marrow failure plus lymphadenopathy, hepatosplenomegaly and sometimes a mediastinal mass in T lineage disease. Leucocyte count extremes, genetics and early treatment response stratify risk more than morphology alone. Central nervous system prophylaxis is essential because the meninges shelter blasts from systemic therapy.",
+   "say": "Childhood ALL presents with marrow failure, nodes and organ enlargement. Genetics and early response set risk. Meningeal prophylaxis is essential because the nervous system shelters blasts.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-091",
+  "bk2-pat-092",
+  "bk2-pat-093",
+  "bk2-pat-094",
+  "bk2-pat-095",
+  "bk2-pat-096",
+  "bk2-pat-097",
+  "bk2-pat-098",
+  "bk2-pat-099",
+  "bk2-pat-100"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

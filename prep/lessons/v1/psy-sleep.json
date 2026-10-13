@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "module": "psy-sleep",
+ "subject": "plab-psychiatry",
+ "title": "Sleep disorders: insomnia, CBT-I, obstructive sleep apnoea, and narcolepsy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Chronic insomnia disorder** is defined by persistent difficulty initiating sleep, maintaining sleep, or early morning awakening with inability to return to sleep, occurring at least three nights per week for at least three months, accompanied by daytime impairment. First-line management according to NICE guidelines is cognitive behavioural therapy for insomnia (CBT-I), incorporating stimulus control, sleep restriction, cognitive restructuring, and sleep hygiene education.",
+   "say": "Chronic insomnia lasts at least three months. Cognitive behavioural therapy for insomnia is the first-line treatment of choice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Conditioned bedroom arousal"
+     },
+     {
+      "id": "b",
+      "label": "Cognitive rumination and anxiety"
+     },
+     {
+      "id": "c",
+      "label": "Maladaptive sleep behaviors"
+     },
+     {
+      "id": "d",
+      "label": "Chronic conditioned insomnia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pharmacotherapy in insomnia** is strictly limited to short-term, acute relief. Hypnotics, including Z-drugs (zopiclone, zolpidem) and short-acting benzodiazepines, carry significant risks of tolerance, dependence, rebound insomnia, nocturnal confusion, and motor vehicle accidents. NICE guidelines recommend restricting hypnotic prescriptions to severe, disabling insomnia, prescribing the lowest effective dose for a maximum duration of two weeks, with planned discontinuation.",
+   "say": "Restrict Z-drugs and benzodiazepines to severe acute insomnia for a maximum of two weeks to avoid dependence and falls.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug class",
+     "Representative agents",
+     "Key prescribing risk"
+    ],
+    "rows": [
+     [
+      "Z-drugs (non-benzodiazepine)",
+      "Zopiclone, zolpidem",
+      "Tolerance, dependency, next-day somnolence, falls"
+     ],
+     [
+      "Short-acting benzodiazepines",
+      "Temazepam, lormetazepam",
+      "Anterograde amnesia, dependence, rebound insomnia"
+     ],
+     [
+      "Dual orexin receptor antagonists",
+      "Daridorexant",
+      "Licensed for chronic insomnia; monitored discontinuation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Obstructive sleep apnoea** (OSA) is characterized by repetitive collapse of the upper pharyngeal airway during sleep, producing recurrent apnoeas, oxygen desaturations, and micro-arousals. Common features include loud habitual snoring, witnessed gasping or choking episodes, and excessive daytime somnolence quantified by the Epworth Sleepiness Scale. Risk factors include obesity, male sex, large neck circumference, and retrognathia.",
+   "say": "Obstructive sleep apnoea features pharyngeal airway collapse, snoring, witnessed apnoeas, and daytime sleepiness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obstructive sleep apnoea",
+     "points": [
+      "Pharyngeal airway collapse",
+      "Witnessed apnoea and loud snoring",
+      "CPAP pneumatic splinting"
+     ]
+    },
+    "right": {
+     "title": "Narcolepsy type 1",
+     "points": [
+      "Hypocretin / orexin deficiency",
+      "Sleep attacks and cataplexy",
+      "Modafinil and wake promoters"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diagnosis and treatment of OSA** requires objective overnight sleep investigation, either via home respiratory polygraphy or in-laboratory polysomnography, measuring the Apnoea-Hypopnoea Index (AHI). For moderate to severe obstructive sleep apnoea with daytime symptoms, continuous positive airway pressure (CPAP) during sleep is the gold-standard treatment, pneumatically splinting the airway, restoring daytime alertness, and lowering cardiovascular morbidity.",
+   "say": "Polysomnography measures the Apnoea-Hypopnoea Index. Continuous positive airway pressure is the gold-standard treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Narcolepsy** is a neurological disorder of sleep-wake cycle regulation, classically caused by autoimmune destruction of orexin (hypocretin)-producing neurons in the posterolateral hypothalamus. Tetrad features include excessive daytime sleepiness with irresistible 'sleep attacks', cataplexy (sudden bilateral loss of muscle tone triggered by strong emotions such as laughter), hypnagogic hallucinations, and sleep paralysis. First-line wake-promoting pharmacotherapy is modafinil or pitolisant.",
+   "say": "Narcolepsy results from loss of orexin neurons, causing sleep attacks, cataplexy triggered by laughter, and sleep paralysis. Treat with modafinil.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1191",
+  "mk-gap1193",
+  "mk-gap1195"
+ ],
+ "src": [
+  "kb-reference-insomnia_disorder",
+  "kb-reference-obstructive_sleep_apnoea",
+  "kb-reference-narcolepsy"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

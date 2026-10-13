@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "mrheu-spa",
+ "subject": "mrcp-rheumatology",
+ "title": "Spondyloarthritis: axial disease, psoriatic features, biologics",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Axial spondyloarthritis** presents with chronic inflammatory back pain starting before the age of forty. Pain develops insidiously, worsens during prolonged rest, awakens the patient in the second half of the night, and improves with physical exercise rather than rest. Alternating buttock pain and enthesitis at the Achilles insertion or plantar fascia support the clinical diagnosis.",
+   "say": "Axial spondyloarthritis causes inflammatory back pain starting before age forty, improving with exercise and waking patients at night.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inflammatory back pain"
+     },
+     {
+      "id": "b",
+      "label": "MRI sacroiliac joints"
+     },
+     {
+      "id": "c",
+      "label": "NSAID then biologic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diagnostic imaging** prioritises magnetic resonance imaging of the sacroiliac joints using short tau inversion recovery sequences. STIR imaging reveals active subchondral bone marrow oedema years before conventional radiographs demonstrate bilateral sacroiliitis, syndesmophytes or fusion into a bamboo spine. Normal plain radiographs never exclude non-radiographic axial spondyloarthritis.",
+   "say": "MRI STIR sequences detect active bone marrow oedema years before plain radiographs reveal permanent structural fusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MRI STIR sequence",
+     "points": [
+      "Detects active bone marrow oedema",
+      "Identifies early non-radiographic disease",
+      "Monitors treatment response"
+     ]
+    },
+    "right": {
+     "title": "Plain radiograph",
+     "points": [
+      "Shows irreversible sclerosis",
+      "Detects late syndesmophytes",
+      "May be normal in early disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Systemic manifestations** frequently involve the eye, gut and skin. Acute anterior uveitis is the commonest extra-articular feature, presenting with acute painful red eye, photophobia, blurred vision and irregular pupil. Asymptomatic microscopic terminal ileal inflammation and overt Crohn disease or ulcerative colitis occur, alongside apical pulmonary fibrosis and aortic valve regurgitation.",
+   "say": "Acute anterior uveitis is the commonest extra-articular manifestation. Vigilance is required for inflammatory bowel disease and aortic regurgitation.",
+   "vis": null
+  },
+  {
+   "tx": "**Psoriatic arthritis** demonstrates diverse clinical phenotypes including asymmetric oligoarthritis, symmetric polyarthritis mimicking rheumatoid disease, distal interphalangeal joint predominance, spondylitis, and severe osteolytic arthritis mutilans. Dactylitis producing diffuse sausage digits and psoriatic nail dystrophy with pitting, onycholysis and hyperkeratosis strongly reinforce diagnostic suspicion.",
+   "say": "Psoriatic arthritis presents with dactylitis, DIP involvement, nail pitting and asymmetric oligoarthritis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Presentation",
+     "Clinical marker"
+    ],
+    "rows": [
+     [
+      "Dactylitis",
+      "Sausage digit",
+      "Diffuse tendon and soft tissue inflammation"
+     ],
+     [
+      "Nails",
+      "Pitting, onycholysis",
+      "Correlates strongly with DIP arthritis"
+     ],
+     [
+      "Serology",
+      "RF and anti-CCP negative",
+      "Classified as seronegative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First-line medical therapy** mandates continuous full-dose non-steroidal anti-inflammatory drugs taken regularly for at least two to four weeks. Patients with severe active axial disease refractory to two successive NSAIDs qualify for biological therapy with TNF inhibitors or interleukin-17 antagonists like secukinumab, which halt progressive spinal stiffness.",
+   "say": "Start continuous full-dose NSAIDs first-line. Escalate to TNF or IL-17 inhibitors if active axial symptoms persist despite NSAIDs.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1051",
+  "mk-gap1053",
+  "mk-gap1055"
+ ],
+ "src": [
+  "kb-reference-ankylosing_spondylitis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

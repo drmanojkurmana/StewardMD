@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "module": "med-acs",
+ "subject": "medicine",
+ "title": "ACS and STEMI: aspirin, ECG fast, reperfuse the occluded artery",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Acute coronary syndrome** spans STEMI, NSTEMI and unstable angina. Central crushing chest pain with sweating, nausea or breathlessness needs an **ECG within minutes** and continuous monitoring, because ventricular fibrillation kills early. Give **aspirin promptly** unless truly allergic, and treat pain and breathlessness (NICE NG185; ESC guidance).",
+   "say": "Acute coronary syndrome needs an ECG within minutes and continuous monitoring. Give aspirin promptly unless truly allergic.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chest pain"
+     },
+     {
+      "id": "b",
+      "label": "ECG in minutes"
+     },
+     {
+      "id": "c",
+      "label": "STEMI? Reperfuse"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**STEMI** with ST elevation needs immediate reperfusion: **primary angioplasty** where timely, otherwise **thrombolysis** without delay. NSTEMI is risk-scored with troponin trends for timed angiography. Add guideline antiplatelet, anticoagulant and statin therapy per protocol, and watch for arrhythmia, heart failure and mechanical complications in the first days.",
+   "say": "STEMI needs immediate reperfusion by angioplasty or thrombolysis. NSTEMI is risk-scored with troponin for timed angiography.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "STEMI",
+     "NSTEMI"
+    ],
+    "rows": [
+     [
+      "Reperfuse now",
+      "Risk-score, timed angiography"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Troponin rises and falls in many conditions (sepsis, renal failure, PE), so interpret it with the story and ECG, never alone. A normal first troponin does not exclude infarction early. After ACS, secondary prevention (antiplatelet, statin, beta-blocker and ACE inhibitor where indicated, smoking cessation, rehab) prevents the next event.",
+   "say": "Interpret troponin with the story and ECG, never alone. A normal first troponin does not exclude early infarction."
+  }
+ ]
+}

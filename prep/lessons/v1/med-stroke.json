@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "module": "med-stroke",
+ "subject": "medicine",
+ "title": "Acute stroke: time is brain, thrombolyse and thrombectomise fast",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Suspect **stroke** with sudden face, arm or leg weakness, speech disturbance or visual loss. Record **exact onset time**, because reperfusion windows run from when the patient was last well. Send for immediate brain imaging to separate infarct from haemorrhage; no antiplatelet, anticoagulant or thrombolytic is safe until bleeding is excluded (NICE NG236).",
+   "say": "Suspect stroke with sudden focal weakness or speech loss. Record exact onset time and image the brain at once; nothing that thins blood is safe until bleeding is excluded.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "FAST positive"
+     },
+     {
+      "id": "b",
+      "label": "Onset time"
+     },
+     {
+      "id": "c",
+      "label": "Urgent brain imaging"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For ischaemic stroke inside the window, give **thrombolysis** where eligible and refer **large-vessel occlusion for thrombectomy** without delay; every minute loses brain. Control glucose, temperature and swallowing (nil by mouth until screened), and start secondary prevention once haemorrhage is excluded. Haemorrhagic stroke needs pressure control, reversal of anticoagulation and neurosurgical advice.",
+   "say": "For ischaemic stroke inside the window, thrombolyse where eligible and refer large-vessel occlusion for thrombectomy without delay. Haemorrhage needs pressure control and reversal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infarct",
+     "Haemorrhage"
+    ],
+    "rows": [
+     [
+      "Thrombolysis / thrombectomy window",
+      "Pressure control, reversal, neurosurgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mimics include hypoglycaemia, migraine, seizure after-effects and functional weakness, so check **capillary glucose in every suspected stroke**. Transient symptoms (TIA) still need same-day specialist assessment, because early stroke risk is high. Rehabilitation and secondary prevention start on day one, not at discharge.",
+   "say": "Check capillary glucose in every suspected stroke. Even transient symptoms need same-day assessment, because early stroke risk is high."
+  }
+ ]
+}

@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "mrheu-pmr",
+ "subject": "mrcp-rheumatology",
+ "title": "Polymyalgia rheumatica: girdle pain, steroid response, taper rules",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Polymyalgia rheumatica** presents exclusively in individuals aged fifty or older with bilateral aching and profound morning stiffness affecting the shoulder and pelvic girdles. Morning stiffness lasts longer than forty-five minutes, making dressing and rising from bed arduous. Systemic symptoms including low-grade fever, anorexia, weight loss and depressed mood frequently accompany proximal girdle discomfort.",
+   "say": "Polymyalgia rheumatica causes bilateral shoulder and hip girdle aching with prolonged morning stiffness in adults over fifty.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bilateral girdle stiffness"
+     },
+     {
+      "id": "b",
+      "label": "Exclude mimic pathology"
+     },
+     {
+      "id": "c",
+      "label": "Rapid steroid response"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Laboratory findings** demonstrate markedly elevated erythrocyte sedimentation rate and C-reactive protein in the majority of cases. Crucially, serum creatine kinase and muscle enzymes are strictly normal, which provides a vital biochemical distinction from inflammatory polymyositis. Mild normocytic normochromic anaemia and reactive thrombocytosis frequently accompany acute systemic inflammation.",
+   "say": "ESR and CRP are markedly elevated while creatine kinase remains normal, distinguishing PMR from inflammatory muscle diseases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "PMR",
+     "Polymyositis"
+    ],
+    "rows": [
+     [
+      "Primary symptom",
+      "Aching and stiffness",
+      "Painless proximal weakness"
+     ],
+     [
+      "Creatine kinase",
+      "Strictly normal",
+      "Markedly elevated"
+     ],
+     [
+      "ESR / CRP",
+      "Markedly elevated",
+      "Normal or mildly elevated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diagnostic steroid trial** evaluates the symptomatic response to moderate-dose oral prednisolone, typically fifteen milligrams daily. Patients experience dramatic, seventy percent or greater symptomatic relief within three to seven days. Failure to achieve rapid subjective improvement strongly challenges the diagnosis and necessitates rigorous search for occult malignancy, myeloma, or chronic infection.",
+   "say": "Expect dramatic symptomatic improvement within one week on moderate-dose prednisolone. Lack of response mandates reconsideration of the diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Association with giant cell arteritis** occurs in fifteen to twenty percent of patients with polymyalgia rheumatica. Clinicians must actively question patients at every consultation regarding new localized temporal headache, scalp tenderness, visual blurring, diplopia, or jaw claudication during chewing, which indicate large vessel cranial arteritis demanding immediate high-dose steroid escalation.",
+   "say": "Screen every PMR patient for giant cell arteritis symptoms including temporal headache, jaw claudication and visual disturbance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uncomplicated PMR",
+     "points": [
+      "Bilateral girdle stiffness",
+      "Prednisolone 15 mg daily",
+      "No cranial ischaemic symptoms"
+     ]
+    },
+    "right": {
+     "title": "Coexistent GCA",
+     "points": [
+      "New temporal headache",
+      "Jaw claudication on eating",
+      "Urgent prednisolone 40-60 mg daily"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Long-term glucocorticoid taper** proceeds gradually over one to two years following complete symptom remission and normalisation of inflammatory markers. Rapid tapering precipitates clinical relapse. Concomitant bone protection with oral bisphosphonate, calcium and vitamin D is mandatory for all elderly individuals commencing prolonged corticosteroid therapy.",
+   "say": "Taper prednisolone slowly over one to two years to prevent relapse. Co-prescribe bone protection for all patients.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1081",
+  "mk-gap1083",
+  "mk-gap1085"
+ ],
+ "src": [
+  "kb-clinical-protocols-polymyalgia-rheumatica"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

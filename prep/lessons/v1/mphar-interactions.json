@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "mphar-interactions",
+ "subject": "mrcp-pharmacology",
+ "title": "Drug interactions: enzyme, additive and absorption traps",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Interactions** harm by three broad routes: one drug changing another's **metabolism** (enzyme induction lowering levels, inhibition raising them), **additive effects** (bleeding, sedation, potassium, QT prolongation) and **absorption or excretion** changes. The clinical question is always consequence: loss of effect can mean pregnancy, transplant rejection or stroke, while excess can mean bleeding, falls or arrhythmia. Check every new prescription against the full list, including over-the-counter and herbal products (BNF interactions).",
+   "say": "Ask what the interaction does: lowers a level, adds an effect, or blocks absorption or excretion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "New prescription"
+     },
+     {
+      "id": "b",
+      "label": "Check full list incl. OTC/herbal"
+     },
+     {
+      "id": "c",
+      "label": "Consequence? Adjust + monitor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High-stakes pairs recur in exams and wards: anticoagulants with antiplatelets or NSAIDs (bleeding), enzyme inhibitors with statins or immunosuppressants (toxicity), inducers with contraceptives or antiepileptics (failure), and multiple QT-prolonging drugs (arrhythmia). The safe response is to **anticipate, substitute, adjust and monitor** as the BNF directs, and to re-check when any drug is started, stopped or dose-changed, because induction and inhibition come and go with the culprit (BNF).",
+   "say": "Anticipate classic high-stakes pairs, substitute or monitor as directed, and re-check whenever a drug starts or stops.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Risk"
+    ],
+    "rows": [
+     [
+      "Inhibitor added",
+      "Toxicity from raised levels"
+     ],
+     [
+      "Inducer added",
+      "Failure from lowered levels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients leave with interaction counselling in plain words: what not to buy over the counter, which symptoms to report, and which monitoring (blood level, INR, potassium, ECG) to attend. Herbal products such as St John's Wort are real enzyme inducers and belong in every medication history. Exact pair-by-pair actions follow the current BNF and are flagged here as look-up territory, not memory territory (BNF).",
+   "say": "Take a herbal and over-the-counter history, counsel in plain words, and look up pair actions in the current BNF.",
+   "vis": null
+  }
+ ]
+}

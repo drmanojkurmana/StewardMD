@@ -1,0 +1,113 @@
+{
+ "v": 1,
+ "module": "mrheu-myositis",
+ "subject": "mrcp-rheumatology",
+ "title": "Autoimmune myositis, systemic sclerosis, Sjogren syndrome",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Idiopathic inflammatory myopathies** encompass polymyositis and dermatomyositis, characterized by progressive, symmetric proximal muscle weakness affecting shoulder and pelvic girdles. Patients report difficulty rising from low chairs, climbing stairs and lifting arms above head height. Serum creatine kinase is markedly elevated, accompanied by high transaminases reflecting ongoing striated muscle necrosis.",
+   "say": "Inflammatory myopathies cause symmetric proximal weakness and elevated creatine kinase. Patients struggle to stand from low chairs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Proximal muscle weakness"
+     },
+     {
+      "id": "b",
+      "label": "Creatine kinase and autoantibodies"
+     },
+     {
+      "id": "c",
+      "label": "Malignancy and lung screen"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cutaneous hallmarks of dermatomyositis** include Gottron papules, which are violaceous scaly papules overlying the dorsal metacarpophalangeal and interphalangeal joints, and the heliotrope rash manifesting as violaceous periorbital erythema with oedema. Newly diagnosed adult dermatomyositis carries a substantial risk of occult internal malignancy, mandating age-appropriate neoplastic screening.",
+   "say": "Gottron papules and heliotrope rash characterize dermatomyositis. Adult presentation mandates comprehensive screening for occult malignancy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dermatomyositis signs",
+     "points": [
+      "Gottron papules over knuckles",
+      "Heliotrope rash with eyelid oedema",
+      "Shawl and V-neck sign"
+     ]
+    },
+    "right": {
+     "title": "Malignancy screening",
+     "points": [
+      "CT chest, abdomen and pelvis",
+      "Mammography and pelvic ultrasound",
+      "Age-appropriate colonoscopy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Antisynthetase syndrome** is defined by autoantibodies directed against aminoacyl-tRNA synthetases, most frequently anti-Jo-1. Patients present with inflammatory myositis, rapidly progressive fibrosing interstitial lung disease, Raynaud phenomenon, non-erosive inflammatory polyarthritis, and hyperkeratotic fissuring of the palmar and lateral finger pads termed mechanic's hands.",
+   "say": "Anti-Jo-1 antibody defines antisynthetase syndrome, linking myositis with interstitial lung disease and mechanic's hands.",
+   "vis": null
+  },
+  {
+   "tx": "**Systemic sclerosis** divides into limited cutaneous systemic sclerosis, characterized by anti-centromere antibodies, calcinosis cutis, Raynaud phenomenon, esophageal dysmotility, sclerodactyly and telangiectasia, and diffuse cutaneous disease, marked by anti-topoisomerase I antibodies and rapid proximal skin thickening. Scleroderma renal crisis causes malignant hypertension and demands immediate angiotensin-converting enzyme inhibitors.",
+   "say": "Limited disease features anti-centromere antibodies and CREST signs. Diffuse disease features anti-topoisomerase I, lung fibrosis and renal crisis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Serology",
+     "Key risks"
+    ],
+    "rows": [
+     [
+      "Limited (CREST)",
+      "Anti-centromere",
+      "Isolated pulmonary arterial hypertension"
+     ],
+     [
+      "Diffuse systemic sclerosis",
+      "Anti-topoisomerase I (Scl-70)",
+      "Interstitial lung fibrosis, renal crisis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sjogren syndrome** is chronic autoimmune exocrinopathy leading to lymphocytic destruction of lacrimal and salivary glands. Hallmark symptoms are keratoconjunctivitis sicca causing gritty dry eyes and xerostomia causing dry mouth. Serology demonstrates anti-Ro and anti-La antibodies. Patients carry an elevated lifetime risk of developing B-cell non-Hodgkin lymphoma.",
+   "say": "Sjogren syndrome causes dry eyes and dry mouth with anti-Ro and anti-La antibodies. Monitor for B-cell lymphoma development.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1071",
+  "mk-gap1073",
+  "mk-gap1075"
+ ],
+ "src": [
+  "kb-reference-dermatomyositis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

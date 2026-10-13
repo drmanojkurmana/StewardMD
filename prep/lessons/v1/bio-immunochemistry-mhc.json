@@ -1,0 +1,192 @@
+{
+ "module": "bio-immunochemistry-mhc",
+ "subject": "biochemistry",
+ "title": "Immunochemistry: V(D)J recombination, MHC antigen processing, and complement cascades",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Antibody diversity is generated during lymphocyte development by somatic **V(D)J recombination**. The recombination activating gene products RAG-1 and RAG-2 introduce double-strand DNA breaks at recombination signal sequences flanking variable, diversity, and joining gene segments. Non-homologous end joining repairs the breaks, during which terminal deoxynucleotidyl transferase (**TdT**) randomly inserts template-independent N-nucleotides, creating immense junctional diversity within complementarity-determining regions.",
+   "say": "Antibody diversity arises through somatic V(D)J recombination driven by RAG-1 and RAG-2. Terminal deoxynucleotidyl transferase inserts random nucleotides at junctions, creating billions of unique antigen receptor combinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diversity mechanism",
+     "Enzyme / Molecular process",
+     "Diversity contribution"
+    ],
+    "rows": [
+     [
+      "Combinatorial diversity",
+      "RAG-1 and RAG-2 segment joining",
+      "Random assembly of V, D, and J germline segments"
+     ],
+     [
+      "Junctional diversity",
+      "Terminal deoxynucleotidyl transferase (TdT)",
+      "Random N-nucleotide insertion at segment joints"
+     ],
+     [
+      "Somatic hypermutation",
+      "Activation-induced cytidine deaminase (AID)",
+      "Point mutations in germinal centers driving affinity maturation"
+     ],
+     [
+      "Isotype class switching",
+      "AID-dependent switch region recombination",
+      "Shifts IgM/IgD to IgG, IgA, or IgE constant regions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antigen presentation is mediated by two distinct classes of major histocompatibility complex (**MHC**) proteins. MHC Class I molecules, expressed on all nucleated cells, present endogenous cytoplasmic peptides to CD8+ cytotoxic T-lymphocytes. Endogenous proteins are degraded by the proteasome and transported into the endoplasmic reticulum via **TAP** (transporter associated with antigen processing). MHC Class II molecules, restricted to professional antigen-presenting cells, present exogenous endocytosed antigens to CD4+ helper T-cells.",
+   "say": "MHC Class I displays endogenous cytosolic antigens processed by proteasomes and loaded via TAP to CD8 cytotoxic T-cells. MHC Class II on dendritic cells and macrophages presents endocytosed exogenous peptides to CD4 helper T-cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Cytosolic viral protein synthesized"
+     },
+     {
+      "id": "m2",
+      "label": "26S Proteasome cleaves into 8-10 aa peptides"
+     },
+     {
+      "id": "m3",
+      "label": "TAP transporter pumps peptides into ER"
+     },
+     {
+      "id": "m4",
+      "label": "Peptide loaded onto MHC Class I with Beta-2M"
+     },
+     {
+      "id": "m5",
+      "label": "Surface display & recognition by CD8+ T-cells"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **complement** system comprises three converging cascades: classical, lectin, and alternative pathways. The classical pathway is triggered when C1q binds antigen-antibody complexes (IgM or IgG). The lectin pathway activates via mannose-binding lectin binding microbial carbohydrates. The alternative pathway spontaneously hydrolyzes C3 (tick-over). All pathways converge to generate **C3 convertase**, which cleaves C3 into anaphylatoxin C3a and opsonin C3b. C3b initiates C5 convertase to assemble the membrane attack complex (C5b-9).",
+   "say": "Complement activates through classical, lectin, and alternative pathways. All pathways converge on C3 convertase to generate opsonin C3b and anaphylatoxin C3a. C5 convertase then launches the membrane attack complex C5b-9 to lyse targets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complement pathway",
+     "Initiating stimulus",
+     "C3 Convertase composition"
+    ],
+    "rows": [
+     [
+      "Classical pathway",
+      "IgM or IgG bound to antigen (C1qrs)",
+      "C4b2a (cleaves C3 to C3a + C3b)"
+     ],
+     [
+      "Lectin pathway",
+      "Mannose-binding lectin bound to pathogen mannose",
+      "C4b2a (identical to classical convertase)"
+     ],
+     [
+      "Alternative pathway",
+      "Spontaneous C3 tick-over on microbial surface",
+      "C3bBb (stabilized by properdin)"
+     ],
+     [
+      "Terminal pathway",
+      "C5 convertase cleaves C5 into C5a + C5b",
+      "C5b-6-7-8-9 Membrane Attack Complex (MAC)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Regulatory complement proteins prevent host bystander lysis. Decay-accelerating factor (CD55) and CD59 (protectin) are anchored to host erythrocyte membranes via **GPI** anchors. CD55 accelerates convertase decay, while CD59 blocks membrane attack complex assembly. In paroxysmal nocturnal hemoglobinuria, acquired PIGA mutations prevent GPI anchor synthesis, leaving red cells vulnerable to complement-mediated intravascular hemolysis, thrombosis, and dark morning hemoglobinuria.",
+   "say": "Host cells express GPI-anchored CD55 and CD59 to inhibit complement attack. Acquired PIGA mutations cause paroxysmal nocturnal hemoglobinuria, lacking CD55 and CD59, causing episodic complement-mediated hemolytic anemia and thrombosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Acquired somatic PIGA mutation in HSC"
+     },
+     {
+      "id": "p2",
+      "label": "Absence of GPI anchor biosynthesis"
+     },
+     {
+      "id": "p3",
+      "label": "Erythrocytes lack CD55 (DAF) and CD59 (Protectin)"
+     },
+     {
+      "id": "p4",
+      "label": "Nocturnal alternative complement activation"
+     },
+     {
+      "id": "p5",
+      "label": "Intravascular hemolysis, hemoglobinuria & thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "a21c8fd4-4000-8000-a21c-8fd412345678",
+  "e5a66f43-4000-8000-e5a6-6f4312345678",
+  "c38aa522-4000-8000-c38a-a52212345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

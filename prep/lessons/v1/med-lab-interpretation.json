@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "med-lab-interpretation",
+ "subject": "medicine",
+ "title": "Lab interpretation: count, chemistry, gas in context",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **full blood count** is read as one instrument. Haemoglobin with MCV and red cell numbers separates iron deficiency from thalassaemia trait and chronic disease, while white cells, platelets and film add marrow and systemic truth. Macrocytosis warns of B12, folate, alcohol, thyroid and drug causes before anaemia or neurology declares itself. Artefact, especially false low platelets, is excluded before alarm.",
+   "say": "Read haemoglobin, indices, white cells and platelets together. Exclude artefact and find the cause before labelling anaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Indices and lines"
+     },
+     {
+      "id": "b",
+      "label": "Film and studies"
+     },
+     {
+      "id": "c",
+      "label": "Cause and action"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**White cells and platelets** support, never replace, the patient story. Neutrophilia with left shift fits bacterial or severe inflammatory stress beside cultures and source hunting, while well appearance excludes nothing. True thrombocytopenia is confirmed by film and repeat sampling before transfusion or marrow workup consumes the patient and the blood bank together.",
+   "say": "White cell patterns support the story beside cultures. Confirm true low platelets by film and repeat before acting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Result",
+     "Next step"
+    ],
+    "rows": [
+     [
+      "Left shift",
+      "Cultures, source hunt"
+     ],
+     [
+      "Low platelets",
+      "Film, repeat sample"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chemistry patterns** localise injury. Transaminases towering over alkaline phosphatase mark hepatocellular harm, refined by bilirubin, albumin and clotting for severity. Kidney injury speaks through falling urine as fluently as lagging creatinine, which muscle mass and fluids distort. Troponin signals myocardial injury whose mechanism story, ECG and trend must name before infarction is declared.",
+   "say": "Read liver enzymes by pattern with synthetic markers. Trust urine output beside creatinine and seek troponin mechanism.",
+   "vis": null
+  },
+  {
+   "tx": "The **arterial gas** is solved in order: pH names acidosis or alkalosis, bicarbonate and carbon dioxide assign metabolic or respiratory origin, compensation is checked for appropriateness, and anion gap plus clinical cause assign danger. Compensation never overcorrects, and a second disorder hides where compensation disobeys its expected range. Numbers come from the patient chart, interpreted fresh each time.",
+   "say": "Solve gases in order: pH, primary disorder, compensation, gap and cause. Compensation never overcorrects the pH.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Metabolic acidosis",
+     "points": [
+      "Low pH, low bicarbonate",
+      "Breathing compensates"
+     ]
+    },
+    "right": {
+     "title": "Respiratory disorder",
+     "points": [
+      "Carbon dioxide leads",
+      "Kidneys compensate slowly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Clotting and context** close the discipline. A prolonged screen is repeated and read with platelets, medicines, liver function and bleeding history, with haematology advice where meaning stays unclear. Plasma without indication, transfusion on one stable number and certainty from one isolated result all harm. Panels advise; patients, examined and heard, decide what results mean.",
+   "say": "Interpret clotting with history, medicines and liver function. Isolated numbers never decide transfusion or surgery alone.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1011",
+  "mk-gap1012",
+  "mk-gap1015"
+ ],
+ "src": [
+  "kb-clinical-protocols-lab-interpretation"
+ ],
+ "refs": [
+  "Standard laboratory medicine teaching",
+  "NICE guidance (UK) and KDIGO principles (labelled)"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}

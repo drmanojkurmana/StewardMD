@@ -1,0 +1,197 @@
+{
+ "module": "bio-plasma-proteins",
+ "subject": "biochemistry",
+ "title": "Plasma proteins: albumin oncotic pressure, alpha-1 antitrypsin, and Wilson disease",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Serum **protein electrophoresis** separates plasma proteins into five major fractions: albumin, alpha-1, alpha-2, beta, and gamma globulins. Albumin is synthesized exclusively by hepatocytes and accounts for 55 to 60 percent of total plasma protein. It generates 80 percent of intravascular colloid oncotic pressure, preventing interstitial edema. Albumin also serves as an indispensable non-specific carrier for unconjugated bilirubin, free fatty acids, calcium, thyroid hormones, and hydrophobic drugs like warfarin.",
+   "say": "Protein electrophoresis separates plasma proteins into albumin and alpha, beta, and gamma globulins. Albumin generates eighty percent of plasma oncotic pressure and transports bilirubin, fatty acids, calcium, and lipophilic medications.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Electrophoretic band",
+     "Key constituent proteins",
+     "Clinical diagnostic changes"
+    ],
+    "rows": [
+     [
+      "Albumin",
+      "Serum albumin (3.5 - 5.0 g/dL)",
+      "Decreased in cirrhosis, nephrotic syndrome, burns"
+     ],
+     [
+      "Alpha-1 globulins",
+      "Alpha-1 antitrypsin, alpha-1 acid glycoprotein",
+      "Decreased in AAT deficiency; elevated in inflammation"
+     ],
+     [
+      "Alpha-2 globulins",
+      "Haptoglobin, alpha-2 macroglobulin, ceruloplasmin",
+      "Massive rise in nephrotic syndrome (macroglobulin retained)"
+     ],
+     [
+      "Beta globulins",
+      "Transferrin, beta-lipoprotein (LDL), complement C3",
+      "Beta-gamma bridging in alcoholic cirrhosis (high IgA)"
+     ],
+     [
+      "Gamma globulins",
+      "Immunoglobulins (IgG, IgM, IgA)",
+      "Monoclonal M-spike in multiple myeloma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Alpha-1 **antitrypsin** (AAT) is a serine protease inhibitor (serpin) that neutralizes neutrophil elastase in pulmonary alveoli. In autosomal codominant AAT deficiency, the mutant Z allele (Glu342Lys) causes abnormal protein misfolding and polymerization within the endoplasmic reticulum of hepatocytes. Trapped polymers cannot be secreted, causing neonatal cholestasis and adult cirrhosis. In the lungs, unchecked neutrophil elastase destroys elastin fibers in alveolar septa, precipitating severe **panacinar** emphysema in young adults.",
+   "say": "Alpha-1 antitrypsin inhibits neutrophil elastase. The mutant Z allele causes misfolded polymers to accumulate in hepatocytes, causing cirrhosis, while absent serum antitrypsin allows neutrophil elastase to destroy lung elastin, causing panacinar emphysema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "PiZZ mutation in SERPINA1 gene"
+     },
+     {
+      "id": "a2",
+      "label": "Protein misfolding in hepatocyte ER"
+     },
+     {
+      "id": "a3",
+      "label": "Periodic acid-Schiff positive diastase-resistant globules"
+     },
+     {
+      "id": "a4",
+      "label": "Hepatic cirrhosis from trapped polymers"
+     },
+     {
+      "id": "a5",
+      "label": "Unchecked neutrophil elastase causes Panacinar Emphysema"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ],
+     [
+      "a2",
+      "a5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ceruloplasmin** is an alpha-2 globulin containing six copper atoms that functions as a ferroxidase, oxidizing toxic Fe2+ into Fe3+ to enable transferrin binding. In **Wilson disease** (hepatolenticular degeneration), autosomal recessive mutations in ATP7B impair copper incorporation into ceruloplasmin and block biliary copper excretion. Toxic free copper accumulates in hepatocytes, spills into blood, and deposits in the basal ganglia (choreoathetosis, parkinsonism), cornea (Kayser-Fleischer rings), and renal tubules.",
+   "say": "Ceruloplasmin is a copper-binding ferroxidase. Wilson disease results from ATP7B mutations preventing copper excretion and ceruloplasmin synthesis. Toxic copper deposits in liver, basal ganglia, and cornea, forming Kayser-Fleischer rings.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic test",
+     "Wilson disease finding",
+     "Pathophysiological rationale"
+    ],
+    "rows": [
+     [
+      "Serum ceruloplasmin",
+      "Markedly decreased (<20 mg/dL)",
+      "Apo-ceruloplasmin without copper is rapidly degraded"
+     ],
+     [
+      "24-Hour urinary copper",
+      "Significantly elevated (>100 ug/day)",
+      "Increased non-ceruloplasmin bound free copper filtering"
+     ],
+     [
+      "Slit-lamp examination",
+      "Kayser-Fleischer rings present",
+      "Copper deposition in corneal Descemet membrane"
+     ],
+     [
+      "Hepatic copper content",
+      "Markedly elevated (>250 ug/g dry wt)",
+      "Gold standard diagnostic threshold on liver biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During acute systemic inflammation, cytokines (IL-6, IL-1, TNF-alpha) dramatically reshape hepatic protein synthesis. Positive **acute-phase** reactants surge: C-reactive protein activates complement, fibrinogen elevates the erythrocyte sedimentation rate (ESR), haptoglobin binds free hemoglobin to sequester iron from microbes, and ferritin stores iron. Concurrently, negative acute-phase reactants decline: albumin, transferrin, and transthyretin synthesis drops to conserve amino acids for immune protein production.",
+   "say": "Inflammatory cytokines IL-6 and TNF stimulate hepatic acute-phase reactants. C-reactive protein, fibrinogen, and ferritin rise sharply, while negative acute-phase proteins like albumin and transferrin decline to divert amino acids to immune defenses.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "i1",
+      "label": "Infection, tissue necrosis, or trauma"
+     },
+     {
+      "id": "i2",
+      "label": "Macrophage release of IL-6 and TNF-alpha"
+     },
+     {
+      "id": "i3",
+      "label": "Hepatic reprogramming of gene expression"
+     },
+     {
+      "id": "i4",
+      "label": "Surge in CRP, Fibrinogen (elevated ESR), Ferritin"
+     },
+     {
+      "id": "i5",
+      "label": "Decline in Albumin, Transferrin (negative reactants)"
+     }
+    ],
+    "edges": [
+     [
+      "i1",
+      "i2"
+     ],
+     [
+      "i2",
+      "i3"
+     ],
+     [
+      "i3",
+      "i4"
+     ],
+     [
+      "i3",
+      "i5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "e3fda4fd-4000-8000-e3fd-a4fd12345678",
+  "2677fccd-4000-8000-2677-fccd12345678",
+  "5c3bd80d-4000-8000-5c3b-d80d12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

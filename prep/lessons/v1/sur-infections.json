@@ -1,0 +1,197 @@
+{
+ "module": "sur-infections",
+ "subject": "surgery",
+ "title": "Surgical site infections, necrotizing soft-tissue infections, and antimicrobial prophylaxis",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "CDC Surgical Site Infection Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Surgical **infections** are stratified into superficial incisional, deep incisional, and organ/space infections by CDC criteria. Superficial infections involve only subcutaneous tissue within 30 days of operation. Deep infections involve fascial and muscular layers. Organ space infections involve anatomical cavities manipulated during surgery. Preoperative antimicrobial prophylaxis must be administered within 60 minutes prior to surgical incision to achieve peak tissue bactericidal levels.",
+   "say": "Surgical site infections are classified into superficial incisional, deep incisional, and organ space categories. Prophylactic antibiotics should be infused within 60 minutes prior to surgical incision to guarantee bactericidal tissue levels during tissue division.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infection classification",
+     "Anatomical depth",
+     "Timeframe post-op"
+    ],
+    "rows": [
+     [
+      "Superficial incisional",
+      "Skin and subcutaneous tissue only",
+      "Within 30 days"
+     ],
+     [
+      "Deep incisional",
+      "Deep fascial and muscular layers",
+      "Within 30 to 90 days"
+     ],
+     [
+      "Organ or space",
+      "Any anatomical cavity opened or manipulated",
+      "Within 30 to 90 days"
+     ],
+     [
+      "Necrotizing fasciitis",
+      "Subcutaneous necrosis extending along deep fascia",
+      "Rapidly progressive (hours)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Necrotizing **fasciitis** represents a life-threatening surgical emergency characterized by widespread subcutaneous and fascial necrosis with relative sparing of underlying muscle. Type I is polymicrobial involving anaerobes and enterobacteriaceae; Type II is monomicrobial driven by group A Streptococcus. Clinical hallmarks include pain out of proportion to physical exam findings, dusky skin dishwater pus, wooden hard subcutaneous edema, and cutaneous bullae.",
+   "say": "Necrotizing fasciitis causes extensive subcutaneous necrosis. Type one is polymicrobial with anaerobes, while type two is caused by group A Streptococcus. Clinical features include pain out of proportion to physical signs, dishwater exudate, and tense wooden edema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Subcutaneous bacterial invasion"
+     },
+     {
+      "id": "n2",
+      "label": "Microvascular thrombosis & ischemia"
+     },
+     {
+      "id": "n3",
+      "label": "Liquefactive necrosis of deep fascia"
+     },
+     {
+      "id": "n4",
+      "label": "Systemic toxic shock & multiorgan failure"
+     },
+     {
+      "id": "n5",
+      "label": "Immediate radical surgical debridement"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Laboratory Risk Indicator for Necrotizing Fasciitis (**LRINEC**) score facilitates early distinction of necrotizing infections from simple cellulitis. The score evaluates six routine serum biomarkers: C-reactive protein, total white blood cell count, hemoglobin, sodium, creatinine, and fasting glucose. A score of 6 or greater raises high suspicion, while a score of 8 or greater carries a positive predictive value exceeding 90 percent.",
+   "say": "The LRINEC score differentiates necrotizing infections from simple cellulitis using six parameters: C-reactive protein, white blood cell count, hemoglobin, sodium, creatinine, and glucose. A score of six or more warrants urgent surgical evaluation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "LRINEC parameter",
+     "Scoring criteria threshold",
+     "Assigned points"
+    ],
+    "rows": [
+     [
+      "C-reactive protein",
+      "Greater than or equal to 150 mg/L",
+      "4 points"
+     ],
+     [
+      "White cell count",
+      "15 to 25 / greater than 25 x10^9/L",
+      "1 to 2 points"
+     ],
+     [
+      "Hemoglobin",
+      "11 to 13.5 / under 11 g/dL",
+      "1 to 2 points"
+     ],
+     [
+      "Serum sodium",
+      "Less than 135 mmol/L",
+      "2 points"
+     ],
+     [
+      "Serum creatinine",
+      "Greater than 1.6 mg/dL (141 umol/L)",
+      "2 points"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive management of necrotizing soft tissue infections hinges on emergency **surgical** debridement down to viable bleeding tissue without awaiting imaging results. Broad-spectrum empiric parenteral antimicrobial coverage with vancomycin, piperacillin-tazobactam, and clindamycin must be initiated immediately. Clindamycin functions as a ribosomal protein synthesis inhibitor that suppresses staphylococcal and streptococcal toxin production. Planned second-look debridement is mandatory within 24 hours.",
+   "say": "Management of necrotizing fasciitis requires immediate surgical debridement down to healthy bleeding tissue. Empiric antibiotics must include vancomycin, piperacillin tazobactam, and clindamycin to halt bacterial toxin synthesis. Mandatory re-exploration occurs within 24 hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Clinical suspicion of necrotizing infection"
+     },
+     {
+      "id": "d2",
+      "label": "Immediate aggressive crystalloid resuscitation"
+     },
+     {
+      "id": "d3",
+      "label": "Empiric antibiotics with antitoxin clindamycin"
+     },
+     {
+      "id": "d4",
+      "label": "Emergency radical debridement of dead tissue"
+     },
+     {
+      "id": "d5",
+      "label": "Mandatory planned 24-hour second-look operation"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ],
+     [
+      "d4",
+      "d5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "4a292ed7-4000-8000-4a29-2ed712345678",
+  "4b29306a-4000-8000-4b29-306a12345678",
+  "4c2931fd-4000-8000-4c29-31fd12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

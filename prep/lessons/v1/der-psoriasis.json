@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "der-psoriasis",
+ "subject": "plab-dermatology",
+ "title": "Psoriasis: immunopathogenesis, phenotypes, stepped therapy, systemic risk",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Plaque psoriasis** is an immune-mediated chronic inflammatory dermatosis driven by the interleukin-23 and interleukin-17 cytokine signaling axis. Keratinocyte hyperproliferation produces well-demarcated, erythematous plaques covered by thick silvery-white scales, with predilection for extensor surfaces such as elbows, knees, and the scalp. Removal of scale reveals pinpoint capillary bleeding, termed the Auspitz sign.",
+   "say": "Plaque psoriasis is driven by the interleukin-23 and 17 axis, creating silvery scaly plaques on extensor joints and Auspitz sign.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dendritic cell activation"
+     },
+     {
+      "id": "b",
+      "label": "IL-23 secretion"
+     },
+     {
+      "id": "c",
+      "label": "Th17 differentiation"
+     },
+     {
+      "id": "d",
+      "label": "IL-17 drives epidermal hyperplasia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First-line topical therapy** for localized plaque psoriasis, according to NICE guideline CG153, combines a potent topical corticosteroid with a topical vitamin D analogue such as calcipotriol applied once daily for up to four weeks. If target control is achieved, maintenance regimens utilize once-daily vitamin D analogues or intermittent weekend topical steroids to minimize cutaneous atrophy while preventing relapses.",
+   "say": "First-line topical treatment combines potent topical steroid with calcipotriol once daily for up to four weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy tier",
+     "Regimen agent",
+     "Key safety consideration"
+    ],
+    "rows": [
+     [
+      "First-line topical",
+      "Potent steroid plus calcipotriol",
+      "Limit potent steroid to 4-8 weeks to avoid atrophy"
+     ],
+     [
+      "Second-line topical",
+      "Vitamin D analogue alone twice daily",
+      "Monitor calcium in extensive application"
+     ],
+     [
+      "Systemic therapy",
+      "Methotrexate or biologics",
+      "Specialist initiation; monitor liver, lung, infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Guttate psoriasis** presents as an acute eruption of small, droplet-shaped, scaly papules distributed widely across the trunk and proximal limbs, characteristically occurring two to three weeks following a streptococcal pharyngitis or tonsillitis. The condition frequently responds to emollients and topical vitamin D analogues, with persistent cases resolving under narrow-band ultraviolet B phototherapy.",
+   "say": "Guttate psoriasis erupts as droplet-like scaly papules following streptococcal pharyngitis and responds well to phototherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Plaque psoriasis",
+     "points": [
+      "Large thick silvery plaques",
+      "Extensor surfaces and scalp",
+      "Chronic relapsing course"
+     ]
+    },
+    "right": {
+     "title": "Guttate psoriasis",
+     "points": [
+      "Teardrop-shaped small papules",
+      "Widespread trunk distribution",
+      "Preceded by streptococcal pharyngitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Erythrodermic and pustular psoriasis** represent medical emergencies with failure of skin barrier function, thermoregulation, and fluid balance. Severe generalized pustular psoriasis features widespread sterile pustules on fiery erythematous skin, accompanied by high fevers and systemic leukocytosis. Abrupt cessation of systemic corticosteroids is a major recognized trigger and should be strictly avoided in all psoriasis patients.",
+   "say": "Generalized pustular and erythrodermic psoriasis are emergencies. Abrupt withdrawal of oral steroids is a classic cause of generalized pustular flares.",
+   "vis": null
+  },
+  {
+   "tx": "**Systemic comorbidities** must be proactively screened in every patient with psoriasis. Up to thirty percent develop inflammatory psoriatic arthritis, characterized by enthesitis, dactylitis, and asymmetric oligoarthritis or distal interphalangeal involvement. Furthermore, chronic vascular inflammation substantially elevates the long-term risk of metabolic syndrome, premature cardiovascular disease, and non-alcoholic fatty liver disease.",
+   "say": "Screen all psoriasis patients for psoriatic arthritis, dactylitis, enthesitis, and elevated cardiovascular metabolic risk.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1131",
+  "mk-gap1133",
+  "mk-gap1135"
+ ],
+ "src": [
+  "kb-reference-psoriasis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

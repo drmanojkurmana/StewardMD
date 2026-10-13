@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "cm-tuberculosis",
+ "subject": "community-medicine",
+ "title": "Tuberculosis and NTEP: notify, confirm, cure, prevent",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Presumptive tuberculosis** means cough, fever, weight loss or night sweats that need microbiological answers, not guessing. Notify every confirmed patient, record care on the national platform and start programme treatment without delay. Household contacts are evaluated, children and close contacts are screened, and diabetes and HIV are sought in every patient because they change outcome.",
+   "say": "Presumptive tuberculosis needs microbiological answers. Notify every patient, record care nationally, start treatment promptly, evaluate contacts and screen for diabetes and HIV.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect"
+     },
+     {
+      "id": "b",
+      "label": "Test and notify"
+     },
+     {
+      "id": "c",
+      "label": "Treat and follow"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Molecular tests and microscopy **confirm** disease and reveal resistance early, while imaging supports the story. Universal drug susceptibility testing guides an effective regimen from the start. Treatment begins on initial results, with further results refining care. Waiting for every extended report before any treatment harms stable patients and spreads infection in the community.",
+   "say": "Confirm with microbiology, find resistance early and start effective treatment promptly. Imaging supports the decision and further results refine the regimen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test role",
+     "What it gives"
+    ],
+    "rows": [
+     [
+      "Microbiology",
+      "Confirmation and resistance"
+     ],
+     [
+      "Imaging",
+      "Extent and complications"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Retention** cures tuberculosis as surely as medicines do. Teams trace missed visits quickly, remove barriers such as travel cost, side effects and stigma, and support adherence by the method the patient can sustain. Outcomes are recorded honestly. A patient who vanishes is a programme failure to fix, not a statistic to delete quietly.",
+   "say": "Retention cures as surely as medicines. Trace missed visits, remove barriers, support adherence and record honest outcomes for every patient.",
+   "vis": null
+  },
+  {
+   "tx": "**Contacts and prevention** stop the next case. Evaluate household contacts for disease, test where indicated and offer preventive treatment once active disease is excluded. Children merit special urgency. Infection control at home and clinic, ventilation and cough etiquette protect families and staff while treatment renders the patient non infectious over time.",
+   "say": "Evaluate household contacts, exclude active disease and offer prevention to those eligible. Ventilation and cough etiquette protect everyone meanwhile.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active disease found",
+     "points": [
+      "Treat fully",
+      "Notify and follow"
+     ]
+    },
+    "right": {
+     "title": "No active disease",
+     "points": [
+      "Assess prevention",
+      "Follow up symptoms"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Jaundice, visual change, severe rash or vomiting on treatment need **prompt review**, not blind continuation. Programme specialists advise on interruption and rechallenges while the liver and the cure are both protected. Success is measured by cure and completion with low loss to follow up and falling incidence, never by treatment starts alone.",
+   "say": "New jaundice or visual change on treatment needs prompt specialist review. Judge the programme by cures, retention and falling incidence.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap891",
+  "mk-gap892",
+  "mk-gap895"
+ ],
+ "src": [],
+ "refs": [
+  "National TB Elimination Programme (NTEP), India",
+  "ICMR tuberculosis guidance"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "figure": "pearl-heart-shunts.svg",
+ "credit": "StewardMD illustration",
+ "view": "anterior schematic",
+ "structures": [
+  "right and left atria above ventricles",
+  "atrial septum with secundum (upper) and primum (lower) ASD sites",
+  "ventricular septum with membranous VSD site",
+  "ductus arteriosus between aorta and pulmonary artery (PDA)",
+  "RA/LA/RV/LV labels on correct sides (viewer left = patient right)"
+ ],
+ "counts": "3 defect sites",
+ "refs": [
+  "Langman's Medical Embryology (cardiac septa)",
+  "Moore Clinically Oriented Anatomy (heart)"
+ ],
+ "verify": {
+  "checklistComplete": true,
+  "secondPassErrorsOnly": [],
+  "ticks": [
+   "Right and left atria above ventricles: ok - RA and LA sit above RV and LV, separated by a horizontal AV line. The atria are oversized and the apex is not tilted left, which are schematic simplifications, not factual errors.",
+   "Atrial septum with secundum (upper) and primum (lower) ASD sites: ok - the secundum ring is mid-septum (fossa ovalis region) and the primum ring is low, just above the AV line. Each leader ends on its own ring.",
+   "Ventricular septum with membranous VSD site: ok - the ring is on the upper ventricular septum just below the AV line, and the leader ends on it.",
+   "Ductus arteriosus (PDA) between aorta and pulmonary artery: ok - a red link joins the Aorta and Pulmonary a. boxes, and the PDA leader ends on the link. The aorta is on viewer left (patient right) and the pulmonary artery on viewer right, which is the correct relation in an anterior view. The vessels are detached from the heart, which is a schematic simplification.",
+   "RA/LA/RV/LV labels on correct sides: ok - RA and RV are on viewer left (patient right), and LA and LV are on viewer right (patient left).",
+   "Count of 3 defect sites: ok - three red rings (secundum ASD, primum ASD, membranous VSD), with the PDA shown separately as a vessel link.",
+   "Spelling and labels: ok - ASD, VSD, PDA, secundum, primum, membranous, Aorta and Pulmonary a. are spelled correctly. The 'Aorta Pulmonary a.' text overlapping the subtitle is a layout issue only. No label points to the wrong structure and there is no impossible anatomy."
+  ],
+  "verdict": "pass",
+  "models": {
+   "author": "muse-wonder-1.0 (checklist-drawn SVG)",
+   "verifier": "claude-sonnet-5-5 vision"
+  }
+ }
+}

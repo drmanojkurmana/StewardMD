@@ -1,0 +1,52 @@
+{
+ "topic": "phy-cardiac-electro",
+ "set": "maikbook1",
+ "v": 1,
+ "items": [
+  {
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "d": 2,
+   "cog": "recall",
+   "imgPlace": "stem",
+   "credit": "StewardMD illustration",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "id": "bk-phy-003",
+   "q": "In the cardiac conduction infographic, which ion current is primarily responsible for the spontaneous phase 4 diastolic depolarization of sinoatrial nodal pacemaker cells?",
+   "o": [
+    "Fast inward sodium current (INa)",
+    "Funny pacemaker current (If) carried through HCN channels",
+    "Inward rectifier potassium current (IK1)",
+    "Delayed rectifier potassium current (IKr)"
+   ],
+   "a": 1,
+   "exp": "The funny current (If), conducted by hyperpolarization-activated cyclic nucleotide-gated (HCN) channels, carries a slow inward mixed Na+/K+ flux activated during repolarization. This slowly depolarizes the sinoatrial node membrane from -60 mV toward threshold (-40 mV), initiating the next pacemaker action potential.",
+   "r": [
+    "Incorrect. Fast inward sodium current is absent or negligible in SA nodal tissue.",
+    "Correct. The funny current (If) carries spontaneous phase 4 depolarization in pacemaker cells.",
+    "Incorrect. IK1 is absent in pacemaker cells, allowing spontaneous depolarization.",
+    "Incorrect. IKr repolarizes the membrane (phase 3), but does not drive phase 4 depolarization."
+   ],
+   "kp": "Phase 4 pacemaker depolarization is driven by the inward funny current (If) via HCN channels.",
+   "t": "phy-cardiac-electro",
+   "img": [
+    "ap-heart-conduction-cycle.png"
+   ],
+   "x": {
+    "key": "Phase 4 pacemaker depolarization is driven by the inward funny current (If) via HCN channels.",
+    "pearl": "Phase 4 pacemaker depolarization is driven by the inward funny current (If) via HCN channels."
+   }
+  }
+ ]
+}

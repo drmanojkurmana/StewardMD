@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-lung-tumours",
+ "subject": "pathology",
+ "title": "Lung tumours: types, paraneoplastic syndromes and spread",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Lung cancers** divide into small cell and non small cell groups because biology and treatment diverge sharply. Adenocarcinoma, now commonest overall and in non smokers, arises peripherally often with targetable mutations. Squamous carcinoma arises centrally in smokers with keratinisation. Small cell carcinoma grows fastest, metastasises earliest and secretes hormones.",
+   "say": "Lung cancer splits into small cell and non small cell types. Adenocarcinoma is peripheral and commonest. Squamous is central in smokers. Small cell grows fastest and secretes hormones.",
+   "vis": null
+  },
+  {
+   "tx": "Central tumours obstruct bronchi causing cough, haemoptysis, recurrent pneumonia and lobar collapse, while peripheral tumours stay silent until pleura or chest wall pain appears. **Pancoast tumours** at the apex invade ribs, sympathetic chain and brachial plexus causing shoulder pain, Horner syndrome and hand muscle wasting. Clubbing and hypertrophic osteoarthropathy accompany many types.",
+   "say": "Central cancers cough, bleed and collapse lobes. Peripheral cancers hide until pain. Apex Pancoast cancers cause shoulder pain, Horner syndrome and wasted hand muscles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Typical site",
+     "Signature features"
+    ],
+    "rows": [
+     [
+      "Adenocarcinoma",
+      "Peripheral",
+      "Commonest in women and non smokers; EGFR and ALK targets"
+     ],
+     [
+      "Squamous cell",
+      "Central bronchus",
+      "Keratin pearls, cavitation, PTHrP hypercalcaemia"
+     ],
+     [
+      "Small cell",
+      "Central with bulky nodes",
+      "SIADH, Cushing syndrome, Lambert Eaton, early metastases"
+     ],
+     [
+      "Large cell",
+      "Peripheral large mass",
+      "Poorly differentiated, aggressive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Paraneoplastic syndromes reveal tumour secretions far from the chest and are favourite exam pairings. Squamous tumours secrete **parathyroid hormone related protein** causing hypercalcaemia, while small cell tumours secrete ADH causing hyponatraemia and ACTH causing Cushing syndrome. Lambert Eaton syndrome from small cell cancer antibodies improves strength briefly with activity, unlike myasthenia.",
+   "say": "Squamous cancer raises calcium through PTHrP. Small cell cancer causes SIADH hyponatraemia, Cushing syndrome and Lambert Eaton weakness. Hormone pairings are exam favourites.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Small cell carcinoma",
+     "points": [
+      "Very early metastases, bulky mediastinal nodes",
+      "Neuroendocrine markers, hormone syndromes",
+      "Surgery rarely useful; chemo responsive then relapses",
+      "Strongest smoking link with squamous type"
+     ]
+    },
+    "right": {
+     "title": "Adenocarcinoma",
+     "points": [
+      "Peripheral mass, pleural involvement",
+      "Gland formation, mucin, TTF1 often positive",
+      "Driver mutations guide targeted therapy",
+      "Commonest in non smokers with cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Spread follows lymphatics to hilar and mediastinal nodes, blood to brain, bone, liver and adrenals, and pleural seeding causing malignant effusion. **Staging by TNM** with PET CT and brain imaging decides resectability, and mediastinal node sampling protects patients from futile surgery. Superior vena cava obstruction from mediastinal mass causes facial swelling worse lying flat.",
+   "say": "Cancer spreads to nodes, brain, bone, liver and adrenals. PET staging and node sampling decide surgery. Mediastinal masses can block the vena cava causing facial swelling.",
+   "vis": null
+  },
+  {
+   "tx": "**Molecular profiling** now directs therapy more than histology alone in non small cell disease. EGFR, ALK, ROS1 and KRAS alterations predict targeted drug benefit, while PD L1 expression guides immunotherapy. Small cell cancer instead relies on chemotherapy with immunotherapy additions and prophylactic cranial irradiation in selected responders.",
+   "say": "Gene profiling directs lung cancer drugs: EGFR and ALK targets, PD L1 for immunotherapy. Small cell cancer uses chemotherapy based regimens. Molecular results change first line choices.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-161",
+  "bk2-pat-162",
+  "bk2-pat-163",
+  "bk2-pat-164",
+  "bk2-pat-165",
+  "bk2-pat-166",
+  "bk2-pat-167",
+  "bk2-pat-168",
+  "bk2-pat-169",
+  "bk2-pat-170"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-glomerular",
+ "subject": "pathology",
+ "title": "Glomerular diseases: nephritic and nephrotic patterns",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Glomerular disease** declares itself as nephritic or nephrotic syndromes, the fork every exam stem tests. Nephritic disease inflames glomeruli causing haematuria with dysmorphic red cells and casts, hypertension and falling filtration. Nephrotic disease leaks massive protein causing oedema, hypoalbuminaemia and thrombosis risk. Biopsy patterns then name the specific disease.",
+   "say": "Nephritic glomeruli bleed and inflame with hypertension. Nephrotic glomeruli leak heavy protein causing oedema and clots. Syndrome first, biopsy name second.",
+   "vis": null
+  },
+  {
+   "tx": "**Post streptococcal glomerulonephritis** follows skin or throat infection by one to three weeks with smoky urine, periorbital oedema and low C3 that recovers within about eight weeks. Biopsy shows enlarged hypercellular glomeruli with subepithelial humps of immune deposits. Children usually recover fully, unlike adults where prognosis is guarded.",
+   "say": "After strep infection, smoky urine with low C3 that recovers means post streptococcal disease. Subepithelial humps sit on biopsy. Children recover; adults less reliably.",
+   "vis": null
+  },
+  {
+   "tx": "**IgA nephropathy** is the commonest primary glomerulonephritis worldwide, presenting with visible haematuria within a day or two of an upper respiratory infection, called synpharyngitic bleeding. Mesangial IgA deposits dominate immunofluorescence with normal complement levels. Slow progression to renal failure over decades in a substantial minority demands blood pressure and proteinuria control.",
+   "say": "IgA nephropathy bleeds visibly during sore throats within days. Mesangial IgA deposits with normal complement confirm it. Blood pressure and protein control slow decades of decline.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nephritic pattern",
+     "points": [
+      "Dysmorphic haematuria and red cell casts",
+      "Hypertension and oliguria",
+      "Modest proteinuria",
+      "Examples: post streptococcal, IgA, lupus class IV"
+     ]
+    },
+    "right": {
+     "title": "Nephrotic pattern",
+     "points": [
+      "Proteinuria over 3.5 g daily",
+      "Hypoalbuminaemia and oedema",
+      "Hyperlipidaemia and thrombosis risk",
+      "Examples: minimal change, membranous, focal segmental"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Minimal change disease** causes abrupt nephrotic syndrome in children with normal light microscopy but effaced podocyte foot processes on electron microscopy, responding dramatically to steroids. Membranous nephropathy instead thickens capillary walls with subepithelial spikes in adults, linked to PLA2R antibodies and malignancy screening. Focal segmental sclerosis scars parts of some glomeruli and often resists steroids.",
+   "say": "Children with sudden nephrotic syndrome usually have minimal change disease responding to steroids. Adult membranous walls spike with PLA2R antibodies. Segmental scars resist treatment more.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Microscopy signature",
+     "Classic patient"
+    ],
+    "rows": [
+     [
+      "Minimal change",
+      "Foot process effacement only (EM)",
+      "Child with abrupt nephrotic syndrome, steroid responsive"
+     ],
+     [
+      "Membranous",
+      "Subepithelial deposits and spikes",
+      "Adult nephrotic; PLA2R or malignancy associated"
+     ],
+     [
+      "Focal segmental",
+      "Segmental scars, podocyte injury",
+      "Steroid resistant nephrotic; HIV and obesity links"
+     ],
+     [
+      "Membranoproliferative",
+      "Tram track double contours",
+      "Nephritic nephrotic mix, low complement patterns"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapidly progressive disease with **crescents** filling Bowman space is a renal emergency splitting into anti GBM, immune complex and pauci immune ANCA types. Goodpasture syndrome pairs lung haemorrhage with linear anti basement membrane staining. ANCA vasculitis shows little immune deposit (pauci immune) with PR3 or MPO antibodies guiding immunosuppression alongside urgent biopsy.",
+   "say": "Crescents mean a renal emergency in three immune flavours. Goodpasture bleeds lungs with linear staining. ANCA disease deposits almost nothing. Urgent biopsy directs rescue therapy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-181",
+  "bk2-pat-182",
+  "bk2-pat-183",
+  "bk2-pat-184",
+  "bk2-pat-185",
+  "bk2-pat-186",
+  "bk2-pat-187",
+  "bk2-pat-188",
+  "bk2-pat-189",
+  "bk2-pat-190"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

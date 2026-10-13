@@ -1,0 +1,809 @@
+{
+ "topic": "mrheu-bone",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1091",
+   "q": "A 68-year-old postmenopausal woman sustains a Colles fracture of the distal radius following a slip on ice. Dual-energy X-ray absorptiometry (DEXA) is performed. What T-score at the femoral neck or lumbar spine defines osteoporosis according to World Health Organization criteria?",
+   "o": [
+    "T-score of -2.5 or lower",
+    "T-score between -1.0 and -2.5",
+    "T-score above -1.0",
+    "Z-score of 0.0"
+   ],
+   "a": 0,
+   "exp": "WHO criteria define osteoporosis as a bone mineral density T-score of -2.5 standard deviations or below compared to young healthy adult reference mean. Osteopenia is defined as a T-score between -1.0 and -2.5.",
+   "r": [
+    "Correct: T-score <= -2.5 defines osteoporosis.",
+    "T-score between -1.0 and -2.5 defines osteopenia.",
+    "T-score above -1.0 is normal bone mineral density.",
+    "Z-score compares to age-matched controls, not the young adult reference mean."
+   ],
+   "kp": "A DEXA T-score of -2.5 standard deviations or lower defines osteoporosis.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "osteoporosis",
+    "dexa",
+    "t-score"
+   ],
+   "source": "WHO criteria / National Osteoporosis Guideline Group (NOGG)",
+   "x": {
+    "key": "T-score of -2.5 or lower defines osteoporosis on DEXA.",
+    "others": {
+     "B": "T-score between -1.0 and -2.5 defines osteopenia.",
+     "C": "T-score > -1.0 is normal.",
+     "D": "Z-score is age-matched."
+    },
+    "pearl": "The T-score compares BMD to young adult peak bone mass; the Z-score compares to age- and sex-matched peers.",
+    "clues": "Postmenopausal woman, fragility wrist fracture, WHO diagnostic threshold.",
+    "ddx": "Osteopenia, osteomalacia, normal bone density.",
+    "mech": "Imbalance between osteoclastic bone resorption and osteoblastic formation produces porous, mechanically fragile trabecular bone.",
+    "lo": "State the WHO bone mineral density definition of osteoporosis.",
+    "rev": "A T-score of <= -2.5 SD defines osteoporosis on DEXA imaging.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review NOGG osteoporosis guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NOGG guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against WHO criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1092",
+   "q": "A 70-year-old woman is prescribed once-weekly oral alendronic acid for osteoporosis following a vertebral compression fracture. What instructions regarding administration are essential to prevent severe chemical oesophagitis?",
+   "o": [
+    "Swallow whole with a full glass of plain water upon waking, and remain fully upright for at least 30 minutes before eating or drinking",
+    "Take with milk immediately before lying down to sleep",
+    "Crush the tablet and mix with orange juice at lunch",
+    "Take with food to improve gastrointestinal absorption"
+   ],
+   "a": 0,
+   "exp": "Oral bisphosphonates are poorly absorbed (<1% bioavailability) and can cause severe chemical oesophagitis and ulceration. They must be taken first thing in the morning with a full glass of plain water, swallowed whole, on an empty stomach, remaining upright for at least 30 minutes before any food or other medications.",
+   "r": [
+    "Correct: Take fasting with plain water and remain upright for 30 minutes to prevent oesophageal injury.",
+    "Taking with milk or lying down immediately guarantees severe oesophageal ulceration.",
+    "Crushing tablets causes oral and pharyngeal ulceration.",
+    "Food dramatically prevents absorption of bisphosphonates."
+   ],
+   "kp": "Take oral bisphosphonates fasting with plain water and remain upright for at least 30 minutes.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "osteoporosis",
+    "alendronic-acid",
+    "drug-safety"
+   ],
+   "source": "British National Formulary: Alendronic acid prescribing safety",
+   "x": {
+    "key": "Oral bisphosphonates require fasting plain water and upright posture for 30 minutes.",
+    "others": {
+     "B": "Lying down causes severe reflux oesophagitis.",
+     "C": "Crushing causes mucosal burns.",
+     "D": "Food blocks absorption entirely."
+    },
+    "pearl": "Calcium and food bind oral bisphosphonates in the gut lumen, completely abolishing systemic bioavailability.",
+    "clues": "Alendronic acid initiation, administration technique.",
+    "ddx": "Pill-induced oesophagitis, gastro-oesophageal reflux, Barrett oesophagus.",
+    "mech": "Topical irritant contact of the bisphosphonate tablet with oesophageal squamous mucosa causes erosive mucosal ulceration.",
+    "lo": "Explain the essential administration rules for oral bisphosphonates.",
+    "rev": "Take oral bisphosphonates fasting with water and stay upright for 30 minutes.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review bisphosphonate counselling and safety."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF Alendronic acid guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [
+      "alendronic_acid"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BNF."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1093",
+   "q": "A 62-year-old South Asian woman presents with diffuse, dull aching pain across her pelvis, ribs and thighs, accompanied by proximal muscle weakness making climbing stairs difficult. Blood tests show serum calcium 2.05 mmol/L (low), phosphate 0.65 mmol/L (low), alkaline phosphatase 380 IU/L (elevated), and PTH 14.5 pmol/L (elevated). Pelvic radiograph shows bilateral symmetrical radiolucent bands perpendicular to the cortex of the pubic rami (Looser zones). What is the diagnosis?",
+   "o": [
+    "Osteomalacia",
+    "Osteoporosis",
+    "Paget disease of bone",
+    "Primary hyperparathyroidism"
+   ],
+   "a": 0,
+   "exp": "Osteomalacia (defective mineralisation of osteoid matrix due to severe vitamin D deficiency) classically presents with bone pain, proximal myopathy, low/low-normal calcium, low phosphate, elevated alkaline phosphatase, secondary hyperparathyroidism, and Looser zones (pseudofractures on radiographs). Osteoporosis has normal calcium, phosphate, and ALP.",
+   "r": [
+    "Correct: Bone pain, low calcium/phosphate, high ALP, high PTH and Looser zones define osteomalacia.",
+    "Osteoporosis has normal calcium, phosphate, ALP and PTH.",
+    "Paget disease features isolated elevated ALP with normal calcium and phosphate.",
+    "Primary hyperparathyroidism causes hypercalcaemia with hypophosphataemia."
+   ],
+   "kp": "Osteomalacia features low calcium and phosphate, high ALP, secondary hyperparathyroidism and Looser zones.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "osteomalacia",
+    "vitamin-d",
+    "looser-zones"
+   ],
+   "source": "Oxford Textbook of Endocrinology and Diabetes: Metabolic bone disease",
+   "x": {
+    "key": "Low calcium/phosphate, high ALP and Looser zones define osteomalacia.",
+    "others": {
+     "B": "Osteoporosis has normal serum biochemistry.",
+     "C": "Paget disease has normal calcium and phosphate.",
+     "D": "Primary hyperparathyroidism causes hypercalcaemia."
+    },
+    "pearl": "Looser zones are cortical pseudofractures of unmineralised osteoid occurring at stress points (pubic rami, femoral neck, scapula).",
+    "clues": "Bone ache, proximal myopathy, low Ca, low PO4, high ALP, Looser zones.",
+    "ddx": "Osteoporosis, Paget disease, metastatic bone disease, multiple myeloma.",
+    "mech": "Vitamin D deficiency impairs intestinal calcium and phosphate absorption, preventing hydroxyapatite crystallization on osteoid.",
+    "lo": "Recognise the clinical, biochemical and radiological features of osteomalacia.",
+    "rev": "Osteomalacia presents with low calcium, low phosphate, high ALP, high PTH and Looser zones.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review vitamin D deficiency and osteomalacia."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Endocrinology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against metabolic bone reference."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1094",
+   "q": "A 72-year-old man presents with deep, boring pain in his left tibia, progressive hearing loss, and a sensation that his hats are becoming too tight for his head. Serum calcium is 2.35 mmol/L (normal), phosphate is 1.10 mmol/L (normal), but alkaline phosphatase is markedly elevated at 820 IU/L. Radiographs show tibial cortical thickening with anterior bowing, and a 'cotton wool' appearance of the skull vault. What is the diagnosis?",
+   "o": [
+    "Paget disease of bone",
+    "Osteomalacia",
+    "Fibrous dysplasia",
+    "Osteolytic multiple myeloma"
+   ],
+   "a": 0,
+   "exp": "Paget disease of bone is characterized by disordered bone remodelling leading to bone enlargement, cortical thickening, deformity (tibial bowing), skull expansion with cranial nerve compression (deafness), and isolated marked elevation of alkaline phosphatase with normal serum calcium and phosphate.",
+   "r": [
+    "Correct: Skull expansion, deafness, bowing, normal calcium/phosphate and high ALP define Paget disease.",
+    "Osteomalacia causes hypocalcaemia and hypophosphataemia.",
+    "Fibrous dysplasia presents in young individuals and typically causes ground-glass bone lesions.",
+    "Multiple myeloma produces osteolytic 'punched-out' bone lesions without osteoblastic cortical thickening."
+   ],
+   "kp": "Paget disease of bone features marked isolated ALP elevation with normal calcium and phosphate.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "paget-disease",
+    "alp",
+    "bone-remodelling"
+   ],
+   "source": "The Paget Association / NICE Clinical Knowledge Summaries: Paget disease of bone",
+   "x": {
+    "key": "Isolated elevated ALP with skull expansion and deafness characterizes Paget disease.",
+    "others": {
+     "B": "Osteomalacia has low calcium and phosphate.",
+     "C": "Fibrous dysplasia affects young adults with ground glass lesions.",
+     "D": "Myeloma produces punched-out lesions."
+    },
+    "pearl": "Sensorineural hearing loss in Paget disease arises from temporal bone involvement and compression of the eighth cranial nerve.",
+    "clues": "Tight hats, deafness, bowed tibia, normal calcium/phosphate, isolated high ALP.",
+    "ddx": "Osteoblastic bone metastases (prostate), osteomalacia, fibrous dysplasia, osteomyelitis.",
+    "mech": "Abnormal hyperactive osteoclasts initiate massive resorption followed by disorganized, hypervascular lamellar bone deposition.",
+    "lo": "Recognise Paget disease of bone from clinical, biochemical and radiological features.",
+    "rev": "Paget disease features isolated high ALP, normal calcium/phosphate, and cortical expansion.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review Paget disease of bone guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Paget Association guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against Paget Association criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1095",
+   "q": "A 70-year-old man with symptomatic Paget disease of bone affecting the pelvis and femur presents with severe bone pain unresponsive to paracetamol. What is the first-line medical treatment of choice to induce sustained remission?",
+   "o": [
+    "A single intravenous infusion of zoledronic acid (5 mg)",
+    "Oral calcium carbonate supplements alone",
+    "High-dose oral prednisolone",
+    "Subcutaneous teriparatide daily"
+   ],
+   "a": 0,
+   "exp": "A single intravenous infusion of zoledronic acid (5 mg) is the treatment of choice for Paget disease of bone, demonstrating superior efficacy and longer duration of biochemical remission compared to oral bisphosphonates in randomized trials.",
+   "r": [
+    "Correct: Intravenous zoledronic acid 5 mg is the first-line medical therapy for active Paget disease.",
+    "Calcium alone has no anti-osteoclastic disease-modifying action.",
+    "Prednisolone is ineffective and contraindicated as it causes severe osteoporosis.",
+    "Teriparatide is an anabolic PTH analogue that is strictly contraindicated in Paget disease due to osteosarcoma risk."
+   ],
+   "kp": "Intravenous zoledronic acid (single 5 mg infusion) is the first-line treatment for active Paget disease of bone.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "paget-disease",
+    "zoledronic-acid",
+    "bisphosphonates"
+   ],
+   "source": "Guideline on the management of Paget disease of bone (Endocrine Society / Paget Association)",
+   "x": {
+    "key": "Intravenous zoledronic acid 5 mg is first-line for Paget disease of bone.",
+    "others": {
+     "B": "Calcium has no anti-resorptive effect.",
+     "C": "Prednisolone is contraindicated.",
+     "D": "Teriparatide is strictly contraindicated in Paget disease."
+    },
+    "pearl": "Teriparatide carries a black-box contraindication in Paget disease of bone due to increased risk of osteosarcoma.",
+    "clues": "Symptomatic Paget disease, bone pain, first-line medical choice.",
+    "ddx": "Osteoarthritis pain, secondary osteosarcoma, metastatic bone disease.",
+    "mech": "Zoledronate localises to active remodelling sites, inhibiting osteoclast farnesyl pyrophosphate synthase and inducing osteoclast apoptosis.",
+    "lo": "Select the first-line medical therapy for active Paget disease of bone.",
+    "rev": "Intravenous zoledronic acid is the treatment of choice for Paget disease of bone.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review bisphosphonate therapy in Paget disease."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Endocrine Society Paget guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [
+      "zoledronic_acid"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against Endocrine Society guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1096",
+   "q": "A 75-year-old woman with severe osteoporosis has been receiving subcutaneous denosumab 60 mg every six months for four years. She wishes to discontinue the injections because she feels well. What critical risk must be explained if denosumab is stopped without switching to an alternative anti-resorptive agent?",
+   "o": [
+    "Rebound bone turnover and multiple spontaneous vertebral fractures",
+    "Rapid development of osteosarcoma",
+    "Hypercalcaemic crisis within 48 hours",
+    "Permanent loss of renal function"
+   ],
+   "a": 0,
+   "exp": "Unlike bisphosphonates, denosumab does not incorporate into bone matrix. When denosumab is discontinued, osteoclast activity rebounds sharply, leading to rapid loss of bone mineral density and a surge in multiple spontaneous vertebral fractures. Transitioning to a bisphosphonate (e.g. zoledronic acid) is mandatory if denosumab is ceased.",
+   "r": [
+    "Correct: Stopping denosumab without bridging anti-resorptive therapy causes rebound vertebral fractures.",
+    "Denosumab discontinuation does not cause osteosarcoma.",
+    "Hypercalcaemia does not occur; hypocalcaemia is the risk during initiation.",
+    "Denosumab cessation does not cause renal failure."
+   ],
+   "kp": "Discontinuing denosumab causes rebound bone turnover and multiple vertebral fractures unless followed by bisphosphonates.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "osteoporosis",
+    "denosumab",
+    "rebound-fracture"
+   ],
+   "source": "MHRA Drug Safety Update: Denosumab: risk of multiple vertebral fractures after treatment discontinuation",
+   "x": {
+    "key": "Stopping denosumab triggers rebound bone loss and multiple vertebral fractures.",
+    "others": {
+     "B": "Osteosarcoma is not induced.",
+     "C": "Hypercalcaemic crisis is incorrect.",
+     "D": "Renal failure does not occur."
+    },
+    "pearl": "Never introduce a 'drug holiday' for denosumab; drug holidays apply exclusively to bisphosphonates.",
+    "clues": "Long-standing denosumab, discontinuing therapy, rebound hazard.",
+    "ddx": "Vertebral collapse, malignant cord compression, myeloma.",
+    "mech": "Removal of RANKL inhibition unleashes synchronized maturation of dormant osteoclasts, causing massive trabecular bone resorption.",
+    "lo": "Recognise the rebound fracture hazard following denosumab discontinuation.",
+    "rev": "Denosumab discontinuation causes rebound vertebral fractures; transition to bisphosphonates is mandatory.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review denosumab discontinuation protocols."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "MHRA Drug Safety Update",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [
+      "denosumab"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against MHRA safety alert."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1097",
+   "q": "A 65-year-old postmenopausal woman with severe osteoporosis (T-score -3.8 at lumbar spine) sustains two vertebral compression fractures while taking oral alendronic acid. What subcutaneous anabolic bone-forming agent is recommended by NICE for severe osteoporosis at very high fracture risk?",
+   "o": [
+    "Teriparatide (recombinant human PTH 1-34)",
+    "Calcitonin nasal spray",
+    "Strontium ranelate",
+    "Raloxifene"
+   ],
+   "a": 0,
+   "exp": "Teriparatide (recombinant PTH 1-34 fragment) is an anabolic agent that stimulates new bone formation by osteoblasts when administered as a daily subcutaneous injection. NICE recommends teriparatide as an alternative for severe osteoporosis in patients at very high risk who fracture despite anti-resorptive therapy.",
+   "r": [
+    "Correct: Teriparatide stimulates active bone formation and is indicated for severe osteoporosis at high fracture risk.",
+    "Calcitonin is obsolete due to weak efficacy and malignancy risks.",
+    "Strontium ranelate is rarely used due to cardiovascular thromboembolic risks.",
+    "Raloxifene is an anti-resorptive SERM, not an anabolic bone-forming agent."
+   ],
+   "kp": "Teriparatide is an anabolic bone-forming agent for severe osteoporosis at very high fracture risk.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "osteoporosis",
+    "teriparatide",
+    "anabolic"
+   ],
+   "source": "NICE Technology Appraisal TA161: Teriparatide for the secondary prevention of osteoporotic fragility fractures",
+   "x": {
+    "key": "Teriparatide stimulates osteoblastic bone formation in severe osteoporosis.",
+    "others": {
+     "B": "Calcitonin is obsolete.",
+     "C": "Strontium has cardiovascular risks.",
+     "D": "Raloxifene is anti-resorptive, not anabolic."
+    },
+    "pearl": "Teriparatide is limited to a maximum lifetime course of 24 months, after which an anti-resorptive is given to consolidate bone gains.",
+    "clues": "Severe osteoporosis, fracturing on alendronate, anabolic therapy.",
+    "ddx": "Treatment failure, secondary osteoporosis, multiple myeloma.",
+    "mech": "Intermittent daily pulsatile PTH receptor activation preferentially stimulates osteoblasts over osteoclasts, increasing trabecular bone volume.",
+    "lo": "Identify teriparatide as the anabolic agent for severe refractory osteoporosis.",
+    "rev": "Teriparatide is an anabolic PTH analogue for severe osteoporosis at very high fracture risk.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review anabolic bone therapies."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE TA161",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [
+      "teriparatide"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE TA161."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1098",
+   "q": "A 70-year-old woman taking weekly oral alendronic acid for seven years presents with a two-month history of dull, aching pain in her right mid-thigh on walking. Plain radiograph of the right femur reveals focal lateral cortical thickening with a transverse fracture line ('dreaded black line') in the subtrochanteric region. What rare complication has developed?",
+   "o": [
+    "Atypical femoral fracture",
+    "Pathological fracture secondary to metastatic breast cancer",
+    "Stress fracture of the tibial plateau",
+    "Osteonecrosis of the femoral head"
+   ],
+   "a": 0,
+   "exp": "Atypical femoral fractures are rare adverse events associated with prolonged anti-resorptive therapy (bisphosphonates or denosumab, usually >5 years). They are characterized by prodromal thigh or groin ache, subtrochanteric or diaphyseal location, transverse fracture orientation with lateral cortical beaking, and minimal trauma.",
+   "r": [
+    "Correct: Atypical femoral fracture presents with prodromal thigh pain and lateral cortical beaking after prolonged bisphosphonates.",
+    "Metastatic fracture features osteolytic bone destruction, not focal transverse cortical beaking.",
+    "Tibial stress fractures affect the tibia, not the subtrochanteric femur.",
+    "Osteonecrosis of the femoral head causes hip groin pain without subtrochanteric shaft fracture."
+   ],
+   "kp": "Atypical femoral fractures present with prodromal thigh pain and lateral cortical beaking after prolonged bisphosphonate use.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "osteoporosis",
+    "atypical-femur-fracture",
+    "bisphosphonates"
+   ],
+   "source": "MHRA Drug Safety Update: Bisphosphonates: atypical femoral fractures",
+   "x": {
+    "key": "Atypical femoral fracture presents with prodromal thigh pain and lateral cortical beaking.",
+    "others": {
+     "B": "Metastatic lesions show bone destruction.",
+     "C": "Tibial fractures affect the leg, not femur.",
+     "D": "AVN affects the femoral head."
+    },
+    "pearl": "Always X-ray the contralateral femur, as atypical femoral fractures are bilateral in over 30% of cases.",
+    "clues": "Long-term alendronate (>5 years), prodromal mid-thigh pain, transverse subtrochanteric fracture with cortical thickening.",
+    "ddx": "Typical osteoporotic hip fracture, metastatic bone disease, stress fracture.",
+    "mech": "Prolonged over-suppression of bone remodelling impairs microdamage repair, leading to cortical fatigue crack propagation.",
+    "lo": "Recognise the clinical and radiological features of atypical femoral fractures.",
+    "rev": "Atypical femoral fractures cause prodromal thigh pain and transverse subtrochanteric cortical thickening on long-term bisphosphonates.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review long-term bisphosphonate safety and drug holidays."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "MHRA Drug Safety Update",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [
+      "alendronic_acid"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against MHRA safety alert."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1099",
+   "q": "A 68-year-old man on intravenous bisphosphonates for bone metastases develops exposed, non-healing necrotic bone in his mandible following dental tooth extraction eight weeks ago. He has local tenderness and foul-smelling discharge. What is the diagnosis?",
+   "o": [
+    "Medication-related osteonecrosis of the jaw (MRONJ)",
+    "Oral squamous cell carcinoma",
+    "Dry socket (alveolar osteitis)",
+    "Ludwig angina"
+   ],
+   "a": 0,
+   "exp": "Medication-related osteonecrosis of the jaw (MRONJ) is defined as exposed necrotic bone in the maxillofacial region persisting for more than 8 weeks in a patient treated with anti-resorptive (bisphosphonate, denosumab) or anti-angiogenic agents, without prior craniofacial radiotherapy.",
+   "r": [
+    "Correct: Exposed necrotic maxillofacial bone persisting for >8 weeks in patients on anti-resorptive drugs is MRONJ.",
+    "Squamous cell carcinoma is a mucosal neoplasm with ulceration, not primary exposed necrotic bone post-extraction.",
+    "Dry socket is localized post-extraction pain resolving within 1-2 weeks without persistent bone necrosis.",
+    "Ludwig angina is a life-threatening cellulitis of the submandibular and sublingual spaces."
+   ],
+   "kp": "MRONJ is defined by exposed necrotic jaw bone persisting >8 weeks in patients receiving anti-resorptive therapy.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "osteoporosis",
+    "mronj",
+    "jaw-necrosis"
+   ],
+   "source": "SDCEP: Oral Health Management of Patients at Risk of Medication-related Osteonecrosis of the Jaw",
+   "x": {
+    "key": "Exposed necrotic jaw bone persisting >8 weeks after anti-resorptive therapy defines MRONJ.",
+    "others": {
+     "B": "Squamous cell carcinoma features malignant biopsy.",
+     "C": "Dry socket resolves within 2 weeks.",
+     "D": "Ludwig angina is submandibular cellulitis."
+    },
+    "pearl": "Routine preventive dental screening and completing necessary invasive extractions prior to starting potent anti-resorptive therapy dramatically reduces MRONJ incidence.",
+    "clues": "IV bisphosphonates, tooth extraction, exposed bone for 8 weeks.",
+    "ddx": "Osteoradionecrosis, alveolar osteitis, chronic osteomyelitis, gingival carcinoma.",
+    "mech": "Suppression of jaw bone remodelling combined with microvascular anti-angiogenic effects and oral bacterial colonization.",
+    "lo": "Recognise medication-related osteonecrosis of the jaw and its risk factors.",
+    "rev": "MRONJ presents with exposed necrotic jaw bone persisting over 8 weeks after anti-resorptive therapy.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review dental guidelines for patients on anti-resorptive drugs."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "SDCEP MRONJ guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [
+      "zoledronic_acid"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against SDCEP guidance."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1100",
+   "q": "A 78-year-old man with long-standing Paget disease of bone affecting his right pelvis presents with a rapid increase in deep bone pain over four weeks that is now refractory to analgesia, accompanied by a new, warm, expanding soft tissue mass over the right ilium. Radiographs show aggressive cortical destruction and soft tissue extension. What dreaded neoplastic transformation must be suspected?",
+   "o": [
+    "Secondary osteosarcoma",
+    "Multiple myeloma",
+    "Chondrosarcoma",
+    "Benign osteochondroma"
+   ],
+   "a": 0,
+   "exp": "Secondary osteosarcoma is the most feared complication of Paget disease of bone, occurring in approximately 0.5-1% of patients with long-standing polyostotic disease. It presents with rapidly worsening bone pain, swelling, pathological fracture, or a new soft tissue mass.",
+   "r": [
+    "Correct: Secondary osteosarcoma is the classic malignant transformation complicating Paget disease.",
+    "Multiple myeloma is a primary plasma cell malignancy, not a pagetic sarcomatous transformation.",
+    "Chondrosarcoma is less common than osteosarcoma in pagetic transformation.",
+    "Osteochondroma is a benign developmental outgrowth, not an aggressive destructive mass."
+   ],
+   "kp": "Rapidly worsening pain or expanding soft tissue mass in Paget disease suggests secondary osteosarcoma.",
+   "t": "mrheu-bone",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "paget-disease",
+    "osteosarcoma",
+    "malignancy"
+   ],
+   "source": "Oxford Textbook of Oncology: Sarcomas complicating Paget disease of bone",
+   "x": {
+    "key": "Secondary osteosarcoma is the malignant transformation complicating Paget disease.",
+    "others": {
+     "B": "Myeloma is a primary plasma cell dyscrasia.",
+     "C": "Chondrosarcoma is less frequent.",
+     "D": "Osteochondroma is a benign outgrowth."
+    },
+    "pearl": "Secondary osteosarcoma in Paget disease carries a poor prognosis, with 5-year survival rates under 10%.",
+    "clues": "Long-standing Paget disease, acute worsening pain, new expanding warm soft tissue mass, cortical destruction.",
+    "ddx": "Osteosarcoma, fibrosarcoma, giant cell tumour, metastatic carcinoma.",
+    "mech": "Decades of intense osteoblastic proliferation and chaotic DNA replication promote somatic oncogenic mutations (e.g. TP53, RB1).",
+    "lo": "Recognise secondary osteosarcoma as a malignant complication of Paget disease.",
+    "rev": "Rapidly worsening bone pain and an expanding mass in Paget disease indicate secondary osteosarcoma.",
+    "next": {
+     "concept": "mrheu-bone",
+     "action": "review",
+     "text": "Review malignant transformations of metabolic bone disease."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Oncology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "osteoporosis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-bone"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against oncology reference."
+     }
+    }
+   }
+  }
+ ]
+}

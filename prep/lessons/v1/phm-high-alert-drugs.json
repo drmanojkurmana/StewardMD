@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "phm-high-alert-drugs",
+ "subject": "pharmacology",
+ "title": "High alert medicines: engineer the error out",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **high alert** medicine harms gravely when one slip occurs. Insulin, anticoagulants, concentrated electrolytes, opioids and chemotherapy share this property across wards and homes. Safety therefore lives in systems: standard concentrations, restricted stock, clear charts and targeted double checks. Blaming careful people after a trap fires leaves the trap armed for the next shift.",
+   "say": "High alert means grave harm from one slip. Build safety into stock, charts and checks instead of blaming people afterwards.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Name the risk"
+     },
+     {
+      "id": "b",
+      "label": "Standardise"
+     },
+     {
+      "id": "c",
+      "label": "Check and monitor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Concentrated potassium** and similar ampoules kill when selected in haste. Removing concentrated stock from general wards and issuing premixed infusions under pharmacy control deletes the fatal step entirely. Look alike names and ampoules are separated, tall man lettering highlights differences, and interruptions during prescribing are protected against because fractured attention writes wrong orders.",
+   "say": "Remove concentrated stock from wards and use premixed infusions. Separate look alikes and protect prescribing from interruption.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "System fix"
+    ],
+    "rows": [
+     [
+      "Concentrated ampoule",
+      "Premixed infusion"
+     ],
+     [
+      "Look alike name",
+      "Tall man lettering"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Insulin** punishes abbreviation. Units are written in full, preparation and device are named, timing is explicit and hypoglycaemia watch is planned. Weekly methotrexate for non cancer care names its day, counsels the patient and triggers dispensing safeguards, because daily substitution has killed. Dose amounts always come from the patient chart and current formulary, never memory.",
+   "say": "Write insulin in full with device and timing. Name the day for weekly methotrexate and counsel the patient every time.",
+   "vis": null
+  },
+  {
+   "tx": "**Anticoagulants and opioids** need complete orders. Agent, last dose timing, kidney function and procedural plans travel together for bleeding medicines, while bowel care, sedation watch, review triggers and protocol reversal access travel with pain medicines. A prescription that names only a drug and a dose leaves the predictable harms unmanaged for the night team.",
+   "say": "Complete the order: timing and kidney function for anticoagulants, bowel and sedation plans for opioids, review for both.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anticoagulant order",
+     "points": [
+      "Agent and timing",
+      "Bleed and clot plan"
+     ]
+    },
+    "right": {
+     "title": "Opioid order",
+     "points": [
+      "Bowel and sedation plan",
+      "Review and reversal access"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Chemotherapy** is prescribed only inside specialist protocols with pharmacy verification and toxicity monitoring, because cycle, body size and organ change rewrite every dose. Independent double checks are targeted where harm is greatest, including weight based and infusion medicines, rather than spread thinly over every low risk tablet until attention itself fails.",
+   "say": "Keep chemotherapy inside protocol and pharmacy check. Target double checks at high alert, calculated and infusion medicines.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap951",
+  "mk-gap952",
+  "mk-gap955"
+ ],
+ "src": [],
+ "refs": [
+  "ISMP high-alert medication guidance",
+  "BNF (UK) safe prescribing"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}

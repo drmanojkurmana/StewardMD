@@ -1,0 +1,99 @@
+{
+ "v": 1,
+ "module": "pat-cns-tumours",
+ "subject": "pathology",
+ "title": "CNS tumours: grading, types and locations",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**CNS tumours** present by location through seizures, focal deficits, raised pressure headaches or endocrine failure rather than by systemic cancer behaviour. Adult tumours favour supratentorial compartments while childhood tumours favour the posterior fossa, a first fork in every stem. Metastases outnumber primary tumours in adults and sit at grey white junctions with oedema.",
+   "say": "Brain tumours declare by location: seizures, deficits, pressure or hormones. Adults grow them above the tentorium, children below. Adult brain masses are metastases first.",
+   "vis": null
+  },
+  {
+   "tx": "**Glioblastoma** is the commonest malignant primary adult tumour, crossing the corpus callosum as a butterfly lesion with ring enhancement, central necrosis and vasogenic oedema. Histology shows pseudopalisading necrosis and microvascular proliferation defining grade 4 behaviour. IDH mutation status now splits glioma biology, with IDH wildtype glioblastoma behaving worst.",
+   "say": "Glioblastoma crosses hemispheres as a ring enhancing butterfly mass. Pseudopalisading necrosis and new vessels make it grade four. IDH wildtype behaves worst.",
+   "vis": null
+  },
+  {
+   "tx": "**Meningioma** grows slowly from arachnoid cap cells attached to dura, compressing rather than invading brain, with whorls and psammoma bodies and progesterone receptor expression. Most are benign grade 1 cured by excision, though atypical types recur. Dural tail enhancement and hyperostosis of overlying bone are imaging signatures examiners pair with histology.",
+   "say": "Meningioma grows slowly off the dura compressing brain, with whorls and psammoma bodies. Dural tail and thickened bone signpost it. Most are benign and curable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour",
+     "Typical patient or site",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "Pilocytic astrocytoma",
+      "Child, cerebellum",
+      "Cyst with mural nodule, Rosenthal fibres, curable often"
+     ],
+     [
+      "Medulloblastoma",
+      "Child, cerebellar vermis",
+      "Small blue cells, Homer Wright rosettes, CSF spread"
+     ],
+     [
+      "Ependymoma",
+      "Child fourth ventricle; adult spine",
+      "Perivascular pseudorosettes"
+     ],
+     [
+      "Schwannoma",
+      "Cerebellopontine angle (CN VIII)",
+      "Antoni A and B areas, hearing loss"
+     ],
+     [
+      "Craniopharyngioma",
+      "Child suprasellar",
+      "Calcified cyst, wet keratin, visual and endocrine failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Childhood **medulloblastoma** fills the cerebellar vermis with small blue embryonal cells forming Homer Wright rosettes, obstructing the fourth ventricle and seeding the neuraxis through spinal fluid, so staging scans the whole spine. Pilocytic astrocytoma instead forms a cyst with enhancing mural nodule and Rosenthal fibres, often cured by excision alone.",
+   "say": "Medulloblastoma seeds spinal fluid from the vermis in children and needs whole spine staging. Pilocytic tumours form cyst plus nodule and often cure by surgery.",
+   "vis": null
+  },
+  {
+   "tx": "**Pituitary adenomas** are now classified by hormone lineage transcription factors, presenting with hormone excess (prolactin, growth hormone, ACTH) or mass effect compressing optic chiasm into bitemporal hemianopia. Haemorrhage into a tumour (apoplexy) causes thunderclap headache with visual collapse needing urgent steroids and surgical opinion. Metastasis to brain favours lung, breast and melanoma primaries.",
+   "say": "Pituitary tumours over secrete hormones or compress the chiasm cutting temporal fields. Bleeding into one is apoplexy, an emergency. Lung, breast and melanoma seed brain most.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-221",
+  "bk2-pat-222",
+  "bk2-pat-223",
+  "bk2-pat-224",
+  "bk2-pat-225",
+  "bk2-pat-226",
+  "bk2-pat-227",
+  "bk2-pat-228",
+  "bk2-pat-229",
+  "bk2-pat-230"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

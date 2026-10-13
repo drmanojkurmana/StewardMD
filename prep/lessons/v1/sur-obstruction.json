@@ -1,0 +1,191 @@
+{
+ "module": "sur-obstruction",
+ "subject": "surgery",
+ "title": "Intestinal obstruction: small bowel strangulation, adhesive bands, and colonic volvulus",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "World Society of Emergency Surgery Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Small bowel **obstruction** (SBO) is characterized by failure of aboral transit of luminal contents. Intra-abdominal adhesions from prior surgery account for 75 percent of cases, followed by incarcerated hernias and neoplasms. Patients present with crampy abdominal pain, obstipation, vomiting, and abdominal distension. Plain radiographs demonstrate dilated central small bowel loops exceeding 3 cm, air-fluid levels in a stepladder pattern, and absent distal colonic gas.",
+   "say": "Small bowel obstruction results from adhesions in 75 percent of cases, followed by hernias and malignancies. Patients present with colic, distension, vomiting, and obstipation. Plain radiographs show dilated loops over three centimeters with air-fluid levels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological category",
+     "Relative frequency",
+     "Clinical characteristics & mechanism"
+    ],
+    "rows": [
+     [
+      "Postoperative adhesions",
+      "65 to 75 percent",
+      "Fibrous peritoneal bands from previous laparotomy"
+     ],
+     [
+      "Incarcerated hernias",
+      "10 to 15 percent",
+      "Inguinal, femoral, umbilical, or incisional defects"
+     ],
+     [
+      "Intestinal neoplasms",
+      "5 to 10 percent",
+      "Adenocarcinoma, carcinoid, lymphoma, metastases"
+     ],
+     [
+      "Gallstone ileus",
+      "1 to 2 percent (25% in elderly)",
+      "Fistula to duodenum; stone impacts at ileocecal valve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing simple obstruction from **strangulated** obstruction is paramount, as strangulation produces bowel wall ischemia, transmural necrosis, and fatal perforation. Classic markers of strangulation include continuous severe pain, fever, tachycardia, localized peritoneal signs, leukocytosis with left shift, and metabolic lactic acidosis. A closed-loop obstruction (e.g., volvulus or bowel occluded at two points by a single band) rapidly progresses to strangulation without proximal decompression.",
+   "say": "Strangulation causes vascular compromise and bowel necrosis. Clinical signs include fever, tachycardia, localized peritonitis, leukocytosis, and lactic acidosis. Closed-loop obstructions progress rapidly to strangulation and mandate emergency laparotomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Loop of bowel occluded at two points (closed loop)"
+     },
+     {
+      "id": "o2",
+      "label": "Luminal pressure exceeds capillary and venous pressure"
+     },
+     {
+      "id": "o3",
+      "label": "Venous thrombosis, arterial ischemia, & bacterial translocation"
+     },
+     {
+      "id": "o4",
+      "label": "Lactic acidosis, peritoneal guarding, & pneumatosis intestinalis"
+     },
+     {
+      "id": "o5",
+      "label": "Immediate emergency exploratory laparotomy and bowel resection"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ],
+     [
+      "o3",
+      "o4"
+     ],
+     [
+      "o4",
+      "o5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conservative management of non-strangulated **adhesive** small bowel obstruction succeeds in up to 80 percent of patients. Standard conservative measures comprise nasogastric tube decompression, intravenous isotonic fluid resuscitation, and electrolyte correction. Administration of water-soluble oral contrast (Gastrografin) is both diagnostic and therapeutic; appearance of contrast in the colon on abdominal radiograph within 24 hours predicts successful non-operative resolution with 95 percent accuracy.",
+   "say": "Conservative treatment of adhesive obstruction resolves 80 percent of uncomplicated cases using nasogastric decompression and intravenous fluids. Gastrografin water-soluble contrast is diagnostic and therapeutic: transit to the colon within 24 hours confirms resolution.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Adhesive SBO without clinical signs of strangulation"
+     },
+     {
+      "id": "g2",
+      "label": "Nasogastric tube decompression & IV fluid resuscitation"
+     },
+     {
+      "id": "g3",
+      "label": "Administer 100 mL water-soluble Gastrografin contrast"
+     },
+     {
+      "id": "g4",
+      "label": "Abdominal radiograph at 8 and 24 hours post-contrast"
+     },
+     {
+      "id": "g5",
+      "label": "Contrast reaches colon: feed / Contrast fails: surgery"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g3"
+     ],
+     [
+      "g3",
+      "g4"
+     ],
+     [
+      "g4",
+      "g5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sigmoid **volvulus** occurs when the redundant sigmoid colon twists on its narrow mesenteric axis, creating a closed-loop large bowel obstruction. It classically affects elderly, institutionalized, or neuropsychiatric patients with chronic constipation. Radiographs display the pathognomonic coffee-bean sign pointing toward the right upper quadrant. Emergent sigmoidoscopy with rectal tube placement decompresses viable bowel in 80 percent of cases, followed by elective semi-urgent sigmoid resection.",
+   "say": "Sigmoid volvulus results from twisting of redundant sigmoid colon on its mesentery. Radiographs reveal a coffee-bean sign pointing to the right upper quadrant. Rigid sigmoidoscopy and rectal tube insertion decompress viable bowel, followed by elective sigmoidectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Volvulus type",
+     "Anatomical axis",
+     "Imaging hallmark",
+     "Primary definitive management"
+    ],
+    "rows": [
+     [
+      "Sigmoid volvulus",
+      "Twisting around sigmoid mesocolon",
+      "Coffee-bean sign pointing to RUQ",
+      "Endoscopic decompression then elective resection"
+     ],
+     [
+      "Cecal volvulus",
+      "Incomplete cecal retroperitoneal fixation",
+      "Kidney-bean / comma loop in LUQ",
+      "Immediate ileocecectomy or right hemicolectomy"
+     ],
+     [
+      "Gastric volvulus",
+      "Organoaxial (59%) vs mesenteroaxial",
+      "Borchardt triad (retching, pain, NG failure)",
+      "Emergency laparotomy & gastropexy"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "06e10d93-4000-8000-06e1-0d9312345678",
+  "07e10f26-4000-8000-07e1-0f2612345678",
+  "08e110b9-4000-8000-08e1-10b912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

@@ -1,0 +1,428 @@
+{
+ "topic": "bio-enzymes-kinetics",
+ "set": "maikbook1",
+ "v": 1,
+ "subject": "biochemistry",
+ "items": [
+  {
+   "id": "bk-bio-091",
+   "q": "In Michaelis-Menten enzyme kinetics, what does the parameter Km represent?",
+   "o": [
+    "The substrate concentration at which the reaction velocity is half of Vmax",
+    "The maximum velocity achievable at infinite substrate concentration",
+    "The turnover number of substrate molecules per active site per second",
+    "The equilibrium constant for the forward chemical reaction"
+   ],
+   "a": 0,
+   "exp": "Km (the Michaelis constant) is mathematically defined as the substrate concentration [S] at which the initial velocity v0 equals Vmax/2. It serves as an inverse measure of enzyme-substrate affinity.",
+   "r": [
+    "Correct. Km is the substrate concentration at half-maximal velocity.",
+    "Incorrect. Vmax is the velocity at saturating substrate.",
+    "Incorrect. Kcat is the turnover number.",
+    "Incorrect. Keq is the thermodynamic equilibrium constant."
+   ],
+   "kp": "Km is the substrate concentration required to achieve half-maximal velocity (Vmax/2); a lower Km indicates higher enzyme-substrate affinity.",
+   "img": [],
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Km is the substrate concentration required to achieve half-maximal velocity (Vmax/2); a lower Km indicates higher enzyme-substrate affinity.",
+    "pearl": "Km is the substrate concentration required to achieve half-maximal velocity (Vmax/2); a lower Km indicates higher enzyme-substrate affinity."
+   }
+  },
+  {
+   "id": "bk-bio-092",
+   "q": "How does a reversible competitive inhibitor alter the kinetic parameters of an enzyme on a Lineweaver-Burk double-reciprocal plot?",
+   "o": [
+    "Increases apparent Km (x-intercept shifts closer to origin) while Vmax remains unchanged (y-intercept unchanged)",
+    "Decreases Vmax (y-intercept shifts upward) while Km remains unchanged",
+    "Decreases both Km and Vmax with parallel lines",
+    "Decreases Km while increasing Vmax"
+   ],
+   "a": 0,
+   "exp": "Competitive inhibitors compete with substrate for the active site. Saturating substrate concentrations displace the inhibitor, reaching normal Vmax (1/Vmax unchanged). However, higher substrate is needed, raising apparent Km (-1/Km shifts toward 0).",
+   "r": [
+    "Correct. Competitive inhibitors increase apparent Km while leaving Vmax unchanged.",
+    "Incorrect. Lowering Vmax with unchanged Km describes noncompetitive inhibition.",
+    "Incorrect. Decreasing both Km and Vmax describes uncompetitive inhibition.",
+    "Incorrect. This combination does not occur in simple reversible inhibition."
+   ],
+   "kp": "Competitive inhibitors increase apparent Km without changing Vmax; on Lineweaver-Burk plots, lines intersect on the y-axis at 1/Vmax.",
+   "img": [],
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Competitive inhibitors increase apparent Km without changing Vmax; on Lineweaver-Burk plots, lines intersect on the y-axis at 1/Vmax.",
+    "pearl": "Competitive inhibitors increase apparent Km without changing Vmax; on Lineweaver-Burk plots, lines intersect on the y-axis at 1/Vmax."
+   }
+  },
+  {
+   "id": "bk-bio-093",
+   "q": "Statins (e.g., atorvastatin) reduce plasma LDL cholesterol by acting as which kinetic class of inhibitor against HMG-CoA reductase?",
+   "o": [
+    "Reversible competitive inhibitor",
+    "Irreversible suicide inhibitor",
+    "Pure noncompetitive inhibitor",
+    "Uncompetitive inhibitor"
+   ],
+   "a": 0,
+   "exp": "Statins possess a bulky hydrophobic group and a dihydroxyheptanoic acid moiety structurally mimicking the HMG intermediate of HMG-CoA, competitively binding the catalytic active site of HMG-CoA reductase.",
+   "r": [
+    "Correct. Statins are structural analogues that competitively inhibit HMG-CoA reductase.",
+    "Incorrect. Suicide inhibitors covalently inactivate enzymes irreversibly (e.g., aspirin on COX-1).",
+    "Incorrect. Noncompetitive inhibitors bind allosteric sites.",
+    "Incorrect. Uncompetitive inhibitors bind only the ES complex."
+   ],
+   "kp": "Statins are competitive reversible inhibitors of HMG-CoA reductase, structurally mimicking the 3-hydroxy-3-methylglutaryl substrate.",
+   "img": [],
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Statins are competitive reversible inhibitors of HMG-CoA reductase, structurally mimicking the 3-hydroxy-3-methylglutaryl substrate.",
+    "pearl": "Statins are competitive reversible inhibitors of HMG-CoA reductase, structurally mimicking the 3-hydroxy-3-methylglutaryl substrate."
+   }
+  },
+  {
+   "id": "bk-bio-094",
+   "q": "How does a noncompetitive (allosteric) inhibitor alter the kinetic parameters of an enzyme?",
+   "o": [
+    "Decreases Vmax without altering Km",
+    "Increases Km without altering Vmax",
+    "Decreases both Km and Vmax proportionally",
+    "Increases both Km and Vmax"
+   ],
+   "a": 0,
+   "exp": "Noncompetitive inhibitors bind an allosteric site on both free enzyme and enzyme-substrate complex with equal affinity. Because they do not compete with substrate, Km is unchanged; however, they impair catalysis, lowering Vmax.",
+   "r": [
+    "Correct. Pure noncompetitive inhibitors decrease Vmax while keeping Km constant.",
+    "Incorrect. Increasing Km with unchanged Vmax is competitive inhibition.",
+    "Incorrect. Decreasing both proportionally is uncompetitive inhibition.",
+    "Incorrect. This is not observed in noncompetitive inhibition."
+   ],
+   "kp": "Noncompetitive inhibitors decrease Vmax without changing Km; on Lineweaver-Burk plots, lines intersect on the x-axis at -1/Km.",
+   "img": [],
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Noncompetitive inhibitors decrease Vmax without changing Km; on Lineweaver-Burk plots, lines intersect on the x-axis at -1/Km.",
+    "pearl": "Noncompetitive inhibitors decrease Vmax without changing Km; on Lineweaver-Burk plots, lines intersect on the x-axis at -1/Km."
+   }
+  },
+  {
+   "id": "bk-bio-095",
+   "q": "Aspirin exerts its antiplatelet effect for the entire 7 to 10 day lifespan of circulating platelets through which mechanism?",
+   "o": [
+    "Irreversible covalent acetylation of a serine residue (Ser-529) in the active site of cyclooxygenase-1 (COX-1)",
+    "Reversible competitive inhibition of COX-2",
+    "Allosteric noncompetitive inhibition of thromboxane synthase",
+    "Inhibition of phosphodiesterase-3"
+   ],
+   "a": 0,
+   "exp": "Aspirin transfers its acetyl group to Ser-529 in platelet COX-1, permanently blocking arachidonic acid access. Because anucleate platelets cannot synthesize new protein, COX-1 remains inactivated for the platelet's lifespan.",
+   "r": [
+    "Correct. Aspirin covalently acetylates Ser-529 in COX-1 irreversibly.",
+    "Incorrect. Aspirin's antiplatelet action is irreversible and primarily targets COX-1.",
+    "Incorrect. It does not inhibit thromboxane synthase directly.",
+    "Incorrect. Cilostazol inhibits PDE-3, not aspirin."
+   ],
+   "kp": "Aspirin irreversibly acetylates Ser-529 in platelet COX-1, permanently abolishing thromboxane A2 production for the 7-10 day lifespan of the platelet.",
+   "img": [],
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Aspirin irreversibly acetylates Ser-529 in platelet COX-1, permanently abolishing thromboxane A2 production for the 7-10 day lifespan of the platelet.",
+    "pearl": "Aspirin irreversibly acetylates Ser-529 in platelet COX-1, permanently abolishing thromboxane A2 production for the 7-10 day lifespan of the platelet."
+   }
+  },
+  {
+   "id": "bk-bio-096",
+   "q": "Why does hepatic glucokinase (hexokinase IV) possess a high Km (~10 mM) compared to extrahepatic hexokinase I (Km <0.1 mM)?",
+   "o": [
+    "Enables the liver to clear glucose and synthesize glycogen only when portal blood glucose is high after meals",
+    "Ensures the liver traps all glucose during fasting hypoglycemia",
+    "Prevents the liver from synthesizing fatty acids",
+    "Allows hepatocytes to export glucose-6-phosphate directly into blood"
+   ],
+   "a": 0,
+   "exp": "Glucokinase has a high Km (~10 mM) corresponding to postprandial portal glucose concentrations. It is not inhibited by glucose-6-phosphate, allowing hepatocytes to remove large glucose loads after meals without saturating.",
+   "r": [
+    "Correct. High Km ensures glucokinase phosphorylates glucose primarily during postprandial hyperglycemia.",
+    "Incorrect. Extrahepatic hexokinase has low Km to trap glucose during fasting.",
+    "Incorrect. Glucokinase promotes fatty acid synthesis from excess glucose.",
+    "Incorrect. G6P must be hydrolyzed by G6Pase to exit hepatocytes."
+   ],
+   "kp": "Hepatic glucokinase has a high Km (~10 mM) and lacks product inhibition, functioning as a postprandial glucose sensor and gatekeeper for glycogen and lipid synthesis.",
+   "img": [],
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Hepatic glucokinase has a high Km (~10 mM) and lacks product inhibition, functioning as a postprandial glucose sensor and gatekeeper for glycogen and lipid synthesis.",
+    "pearl": "Hepatic glucokinase has a high Km (~10 mM) and lacks product inhibition, functioning as a postprandial glucose sensor and gatekeeper for glycogen and lipid synthesis."
+   }
+  },
+  {
+   "id": "bk-bio-097",
+   "q": "In an uncompetitive inhibition model, the inhibitor binds exclusively to which species, causing parallel lines on a Lineweaver-Burk plot?",
+   "o": [
+    "The enzyme-substrate (ES) complex only",
+    "The free enzyme (E) only",
+    "Both free enzyme and ES complex with equal affinity",
+    "The product-enzyme complex"
+   ],
+   "a": 0,
+   "exp": "Uncompetitive inhibitors bind only to the enzyme-substrate complex. This shifts the equilibrium to favor substrate binding (decreasing apparent Km) while inactivating the complex (decreasing Vmax) by the same ratio, producing parallel lines.",
+   "r": [
+    "Correct. Uncompetitive inhibitors bind exclusively to the ES complex, reducing both Km and Vmax.",
+    "Incorrect. Binding free enzyme only is competitive inhibition.",
+    "Incorrect. Binding both equally is pure noncompetitive inhibition.",
+    "Incorrect. Product inhibition is distinct."
+   ],
+   "kp": "Uncompetitive inhibitors bind exclusively to the enzyme-substrate (ES) complex, decreasing both Km and Vmax proportionally and yielding parallel Lineweaver-Burk lines.",
+   "img": [],
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Uncompetitive inhibitors bind exclusively to the enzyme-substrate (ES) complex, decreasing both Km and Vmax proportionally and yielding parallel Lineweaver-Burk lines.",
+    "pearl": "Uncompetitive inhibitors bind exclusively to the enzyme-substrate (ES) complex, decreasing both Km and Vmax proportionally and yielding parallel Lineweaver-Burk lines."
+   }
+  },
+  {
+   "id": "bk-bio-098",
+   "q": "What kinetic term represents the catalytic efficiency of an enzyme, accounting for both substrate affinity and catalytic turnover?",
+   "o": [
+    "Kcat / Km",
+    "Vmax / Km",
+    "1 / Km",
+    "Km / Kcat"
+   ],
+   "a": 0,
+   "exp": "The specificity constant, defined as Kcat / Km, reflects catalytic efficiency at low substrate concentrations, measuring both how rapidly the enzyme turns over substrate (Kcat) and how well it binds (1/Km).",
+   "r": [
+    "Correct. Kcat/Km is the specificity constant defining overall catalytic efficiency.",
+    "Incorrect. Vmax/Km reflects initial slope but depends on enzyme concentration.",
+    "Incorrect. 1/Km reflects only affinity.",
+    "Incorrect. Km/Kcat is the reciprocal."
+   ],
+   "kp": "Catalytic efficiency is measured by the specificity constant Kcat/Km, representing the rate of catalytic turnover relative to substrate affinity.",
+   "img": [],
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Catalytic efficiency is measured by the specificity constant Kcat/Km, representing the rate of catalytic turnover relative to substrate affinity.",
+    "pearl": "Catalytic efficiency is measured by the specificity constant Kcat/Km, representing the rate of catalytic turnover relative to substrate affinity."
+   }
+  },
+  {
+   "id": "bk-bio-099",
+   "q": "Allosteric enzymes typically display which type of velocity-versus-substrate curve, reflecting cooperative subunit interactions rather than simple Michaelis-Menten kinetics?",
+   "o": [
+    "Sigmoidal (S-shaped) curve",
+    "Hyperbolic curve",
+    "Linear straight line",
+    "Exponential logarithmic curve"
+   ],
+   "a": 0,
+   "exp": "Allosteric enzymes with multiple interacting catalytic subunits (e.g., PFK-1, aspartate transcarbamoylase) exhibit sigmoidal (S-shaped) saturation curves due to positive or negative cooperativity.",
+   "r": [
+    "Correct. Allosteric enzymes display sigmoidal velocity curves due to cooperativity.",
+    "Incorrect. Hyperbolic curves characterize non-cooperative Michaelis-Menten enzymes.",
+    "Incorrect. Linear curves indicate zero-order or simple first-order ranges.",
+    "Incorrect. Logarithmic curves do not represent raw velocity plots."
+   ],
+   "kp": "Allosteric enzymes display sigmoidal (S-shaped) substrate saturation curves reflecting cooperative transitions between tense and relaxed states.",
+   "img": [],
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "Allosteric enzymes display sigmoidal (S-shaped) substrate saturation curves reflecting cooperative transitions between tense and relaxed states.",
+    "pearl": "Allosteric enzymes display sigmoidal (S-shaped) substrate saturation curves reflecting cooperative transitions between tense and relaxed states."
+   }
+  },
+  {
+   "id": "bk-bio-100",
+   "q": "A Lineweaver-Burk plot of an enzymatic reaction reveals an x-intercept of -0.2 mM^-1 and a y-intercept of 0.05 (micromol/min)^-1. What are the Km and Vmax of this enzyme?",
+   "o": [
+    "Km = 5.0 mM, Vmax = 20 micromol/min",
+    "Km = 0.2 mM, Vmax = 0.05 micromol/min",
+    "Km = 2.0 mM, Vmax = 10 micromol/min",
+    "Km = 5.0 mM, Vmax = 0.05 micromol/min"
+   ],
+   "a": 0,
+   "exp": "x-intercept = -1/Km = -0.2 mM^-1 -> Km = 1 / 0.2 = 5.0 mM. y-intercept = 1/Vmax = 0.05 -> Vmax = 1 / 0.05 = 20 micromol/min.",
+   "r": [
+    "Correct. Km = -1/(-0.2) = 5.0 mM; Vmax = 1/0.05 = 20 micromol/min.",
+    "Incorrect. These are the un-inverted raw intercept values.",
+    "Incorrect. Mathematical calculation error.",
+    "Incorrect. Vmax was not inverted."
+   ],
+   "kp": "On Lineweaver-Burk plots, Km equals -1 divided by the x-intercept, and Vmax equals 1 divided by the y-intercept.",
+   "img": [],
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "credit": "StewardMD Medical Learning Team",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "t": "bio-enzymes-kinetics",
+   "x": {
+    "key": "On Lineweaver-Burk plots, Km equals -1 divided by the x-intercept, and Vmax equals 1 divided by the y-intercept.",
+    "pearl": "On Lineweaver-Burk plots, Km equals -1 divided by the x-intercept, and Vmax equals 1 divided by the y-intercept."
+   }
+  }
+ ]
+}

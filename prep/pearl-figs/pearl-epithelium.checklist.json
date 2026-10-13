@@ -1,0 +1,44 @@
+{
+ "figure": "pearl-epithelium.svg",
+ "credit": "StewardMD illustration",
+ "view": "schematic cell icons",
+ "structures": [
+  "Simple squamous",
+  "Simple cuboidal",
+  "Simple columnar",
+  "Pseudostratified ciliated",
+  "Stratified squamous",
+  "Keratinised stratified",
+  "Transitional (urothelium)",
+  "basement membrane under every type",
+  "cilia only on pseudostratified",
+  "keratin layer only on keratinised"
+ ],
+ "counts": "7 types",
+ "refs": [
+  "Junqueira's Basic Histology (epithelial tissue)",
+  "Ross Histology (epithelia)"
+ ],
+ "verify": {
+  "checklistComplete": true,
+  "secondPassErrorsOnly": [],
+  "ticks": [
+   "Simple squamous: ok - one flat cell layer on the basement membrane; alveoli and endothelium are correct. No nucleus is drawn, a minor schematic omission.",
+   "Simple cuboidal: ok - one layer of cube-shaped cells with central round nuclei; thyroid follicles is correct.",
+   "Simple columnar: ok - one layer of tall cells with basal oval nuclei; stomach and intestine are correct.",
+   "Pseudostratified ciliated: ok - all four cells touch the basement membrane, nuclei sit at different heights, and only the two tall cells reach the surface and carry cilia. Trachea and bronchi are correct. The 'cilia' label overlaps one cilium, which is cosmetic and still points to the right structure.",
+   "Stratified squamous: ok - several layers with no keratin layer (non-keratinised); oesophagus and vagina are correct. The plain bands without nuclei or cell-shape gradation are a schematic simplification.",
+   "Keratinised stratified: ok - several cell layers with a separate grey 'keratin (dead)' layer on top; epidermis (skin) is correct.",
+   "Transitional (urothelium): ok - multilayered, with a domed superficial (umbrella) cell layer on top; ureter and bladder are correct.",
+   "Basement membrane under every type: ok - a teal line sits under all 7 icons and the footnote explains it.",
+   "Cilia only on pseudostratified: ok - cilia appear only on that type.",
+   "Keratin layer only on keratinised: ok - the keratin layer appears only on the keratinised stratified icon.",
+   "Count/spelling: ok - exactly 7 types, all labels spelled correctly."
+  ],
+  "verdict": "pass",
+  "models": {
+   "author": "muse-wonder-1.0 (checklist-drawn SVG)",
+   "verifier": "claude-sonnet-5-5 vision"
+  }
+ }
+}

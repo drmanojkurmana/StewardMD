@@ -1,0 +1,99 @@
+{
+ "module": "ana-urinary-male-genital",
+ "subject": "anatomy",
+ "title": "Lower urinary tract and male reproductive anatomy: ureter, bladder and prostate",
+ "minutes": 6,
+ "refs": [
+  "ALGrawany Anatomy & Physiology Made Easy 2026",
+  "Campbell-Walsh-Wein Urology"
+ ],
+ "steps": [
+  {
+   "tx": "The **ureters** are muscular retroperitoneal tubes approximately twenty-five centimeters long that propel urine from renal pelvis to bladder by peristalsis. They cross over the pelvic brim anterior to the bifurcation of the common iliac artery. The ureter has three physiological constrictions where calculi frequently lodge: the pelviureteric junction, the pelvic brim crossing, and the vesicoureteric junction.",
+   "say": "The ureters are retroperitoneal muscular tubes transporting urine via peristalsis. They cross the pelvic brim over the iliac artery bifurcation. Ureteric calculi lodge at three sites: pelviureteric junction, pelvic brim crossing, and intramural entry at the vesicoureteric junction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Constriction site",
+     "Anatomical relationship",
+     "Stone impaction risk"
+    ],
+    "rows": [
+     [
+      "Pelviureteric junction (PUJ)",
+      "Transition from renal pelvis to tubular ureter",
+      "Common in congenital hydronephrosis"
+     ],
+     [
+      "Pelvic brim crossing",
+      "Crosses over common/external iliac artery",
+      "Middle ureteric obstruction"
+     ],
+     [
+      "Vesicoureteric junction (VUJ)",
+      "Intramural oblique tunnel through detrusor",
+      "Narrowest site; most frequent calculus impaction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **urinary bladder** is a hollow muscular organ lined by transitional epithelium (urothelium). Its muscular wall is the detrusor muscle, innervated by parasympathetic pelvic splanchnic nerves (S2-S4). The trigone is a smooth triangular mucosal area on the posterior wall bounded by the two ureteric orifices and the internal urethral orifice, derived embryologically from mesoderm.",
+   "say": "The urinary bladder is lined by distensible urothelium and enclosed by the detrusor muscle, innervated by parasympathetics from S2 to S4. The bladder trigone is a smooth triangular floor between both ureteric orifices and the urethral orifice, originating embryologically from mesoderm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bladder body & dome",
+     "points": [
+      "Detrusor smooth muscle arranged in meshwork",
+      "Distensible folded mucosa lined by urothelium",
+      "Parasympathetic stimulation induces contraction",
+      "Extraperitoneal anteriorly; covered by peritoneum superiorly"
+     ]
+    },
+    "right": {
+     "title": "Bladder trigone",
+     "points": [
+      "Smooth non-folding triangular mucous floor",
+      "Fixed dimensions between ureteric and urethral orifices",
+      "Embryological mesodermal origin from mesonephric ducts",
+      "High density of sensory innervation and pain fibers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **prostate gland** surrounds the prostatic urethra immediately inferior to the bladder neck. McNeal described three distinct glandular zones: the peripheral zone (70% of tissue; origin of 75% of prostate carcinomas), the transition zone (surrounds urethra; site of benign prostatic hyperplasia), and the central zone (surrounds ejaculatory ducts). The prostate is palpated through the anterior rectal wall.",
+   "say": "The prostate surrounds the urethra below the bladder neck. McNeal divided it into three zones: the peripheral zone where most adenocarcinomas arise, the transition zone where benign prostatic hyperplasia originates, and the central zone surrounding ejaculatory ducts.",
+   "vis": null
+  },
+  {
+   "tx": "The **testis** develops retroperitoneally in the posterior abdominal wall and descends through the inguinal canal into the scrotum. It is enveloped by the fibrous tunica albuginea and the double-layered serous tunica vaginalis (remnant of processus vaginalis). The epididymis caps the posterior testis, storing and maturing spermatozoa before conveying them into the ductus deferens.",
+   "say": "The testis descends retroperitoneally into the scrotum, enclosed by the fibrous tunica albuginea and serous tunica vaginalis. The epididymis caps the posterior testis, maturing and storing spermatozoa before they enter the ductus deferens.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-male-reproductive-gross.png",
+    "alt": "Male reproductive and lower urinary structures",
+    "caption": "Anatomy of the prostate, seminal vesicles, ductus deferens and testicular compartments."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "bb4d2d00-4000-8000-bb4d-2d0012345678",
+  "be4d31b9-4000-8000-be4d-31b912345678",
+  "bd4d3026-4000-8000-bd4d-302612345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

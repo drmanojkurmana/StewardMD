@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "med-sepsis",
+ "subject": "medicine",
+ "title": "Sepsis and septic shock: recognise early, treat the bundle first",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Sepsis** is life-threatening organ dysfunction caused by a dysregulated host response to infection. Suspect it in any infected patient who looks unwell: fast breathing, low blood pressure, confusion, mottled skin, low urine output or a rising lactate. Do not wait for fever. Older adults, people with diabetes, and immunosuppressed patients may have sepsis without fever.",
+   "say": "Sepsis is life-threatening organ dysfunction caused by a dysregulated response to infection. Suspect it in any infected patient who looks unwell, with fast breathing, low blood pressure, confusion, mottled skin, low urine output or a rising lactate. Do not wait for fever, because older adults and immunosuppressed patients may have sepsis without it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect infection"
+     },
+     {
+      "id": "b",
+      "label": "Organ dysfunction?"
+     },
+     {
+      "id": "c",
+      "label": "Sepsis: start bundle"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first hour matters most (Surviving Sepsis Campaign). Take **blood cultures before antibiotics** if this does not delay them, measure **lactate**, start **broad-spectrum antibiotics promptly**, begin **crystalloid fluids** for hypotension or high lactate, and add a **vasopressor** if blood pressure stays low. Keep reassessing: perfusion, urine output, mentation and lactate trend.",
+   "say": "The first hour matters most. Take blood cultures before antibiotics if this does not delay them, measure lactate, start broad-spectrum antibiotics promptly, begin crystalloid fluids for hypotension or high lactate, and add a vasopressor if blood pressure stays low. Keep reassessing perfusion, urine output, mentation and the lactate trend.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cultures + lactate"
+     },
+     {
+      "id": "b",
+      "label": "Antibiotics"
+     },
+     {
+      "id": "c",
+      "label": "Fluids"
+     },
+     {
+      "id": "d",
+      "label": "Vasopressor if still hypotensive"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Septic shock** is sepsis with persistent hypotension needing vasopressors and a raised lactate despite fluids. Find and control the **source**: drain abscesses, remove infected lines, relieve obstruction. Antibiotics alone fail without source control. Escalate early to critical care; delays cost lives.",
+   "say": "Septic shock is sepsis with persistent hypotension needing vasopressors and a raised lactate despite fluids. Find and control the source: drain abscesses, remove infected lines, relieve obstruction. Antibiotics alone fail without source control. Escalate early to critical care, because delays cost lives.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sepsis",
+     "Septic shock"
+    ],
+    "rows": [
+     [
+      "Infection plus organ dysfunction",
+      "Plus vasopressor need and raised lactate despite fluids"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "mk-gap001",
+  "mk-gap002",
+  "mk-gap009"
+ ],
+ "src": [
+  "kb-diseases-sepsis"
+ ],
+ "refs": [
+  "Surviving Sepsis Campaign 2021",
+  "NICE guideline NG51: Sepsis recognition, diagnosis and early management"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013 re-read 2026-10-13"
+ }
+}

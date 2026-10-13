@@ -1,0 +1,175 @@
+{
+ "module": "bio-carb-lipid-basics",
+ "subject": "biochemistry",
+ "title": "Carbohydrate and lipid chemistry: isomerism, glycosidic bonds and lipid classifications",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Monosaccharides exhibit structural and stereochemical **isomerism** that dictates biological recognition. D- and L-isomers are designated by the asymmetric carbon farthest from the carbonyl group. Epimers differ in configuration around a single chiral carbon; D-glucose and D-galactose are C-4 epimers, whereas D-glucose and D-mannose are C-2 epimers. In solution, open-chain aldoses cyclize into alpha- and beta-anomers via hemiacetal formation.",
+   "say": "Monosaccharides display stereoisomerism critical for enzyme recognition. D- and L-designations reflect the chiral carbon furthest from the carbonyl. Epimers differ at a single carbon: glucose and galactose are C-4 epimers, while glucose and mannose are C-2 epimers. Ring closure produces alpha and beta anomers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Isomer relationship",
+     "Definition",
+     "Clinical biochemical example"
+    ],
+    "rows": [
+     [
+      "D- and L-enantiomers",
+      "Non-superimposable mirror images",
+      "Human enzymes exclusively utilize D-sugars"
+     ],
+     [
+      "C-4 epimers",
+      "Inversion at fourth carbon atom",
+      "Glucose and galactose interconversion in liver"
+     ],
+     [
+      "C-2 epimers",
+      "Inversion at second carbon atom",
+      "Glucose and mannose metabolic utilization"
+     ],
+     [
+      "Anomers",
+      "Stereocenters formed upon cyclization",
+      "Alpha vs beta linkages in glycogen vs cellulose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disaccharides and polysaccharides are formed through **glycosidic** bonds joining an anomeric hydroxyl to another alcohol. Maltose possesses an alpha-1,4 linkage, whereas lactose has a beta-1,4 linkage hydrolyzed by intestinal brush border lactase. Sucrose links glucose and fructose via an alpha-1,beta-2 bond, locking both anomeric carbons and eliminating reducing sugar properties. Glycogen contains alpha-1,4 chains with alpha-1,6 branches.",
+   "say": "Glycosidic bonds join an anomeric carbon to another sugar alcohol. Maltose has an alpha-1,4 bond, while lactose features a beta-1,4 bond broken by lactase. Sucrose connects both anomeric carbons in an alpha-1, beta-2 linkage, making it non-reducing. Glycogen has alpha-1,4 backbones and alpha-1,6 branches.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reducing disaccharides",
+     "points": [
+      "Free anomeric hemiacetal group present",
+      "Maltose: glucose alpha-1,4 glucose",
+      "Lactose: galactose beta-1,4 glucose",
+      "Positive Benedict and Fehling tests"
+     ]
+    },
+    "right": {
+     "title": "Non-reducing disaccharides",
+     "points": [
+      "Both anomeric carbons tied in bond",
+      "Sucrose: glucose alpha-1, beta-2 fructose",
+      "Trehalose: glucose alpha-1, alpha-1 glucose",
+      "Negative copper-reduction tests"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fatty acids are amphipathic carboxylic acids classified by **saturation** and hydrocarbon chain length. Saturated fatty acids like palmitate and stearate pack densely into rigid membranes. Unsaturated fatty acids contain cis-double bonds that introduce rigid kinks, increasing membrane fluidity and lowering melting points. Essential fatty acids, linoleic acid and alpha-linolenic acid, cannot be synthesized because human desaturases cannot introduce double bonds beyond carbon nine.",
+   "say": "Fatty acids are classified by chain length and saturation. Saturated fatty acids pack tightly to increase rigidity. Cis-unsaturated double bonds introduce kinks that boost membrane fluidity. Linoleic and alpha-linolenic acids are essential because humans cannot desaturate beyond carbon nine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fatty acid class",
+     "Double bond structure",
+     "Key biological roles"
+    ],
+    "rows": [
+     [
+      "Saturated",
+      "Zero double bonds (e.g., palmitic 16:0)",
+      "Fuel storage, membrane stability"
+     ],
+     [
+      "Monounsaturated",
+      "Single cis-bond (e.g., oleic 18:1)",
+      "Fluidity maintenance, cardioprotective"
+     ],
+     [
+      "Omega-6 polyunsaturated",
+      "Linoleic (18:2), arachidonic (20:4)",
+      "Pro-inflammatory eicosanoid precursors"
+     ],
+     [
+      "Omega-3 polyunsaturated",
+      "Alpha-linolenic (18:3), EPA, DHA",
+      "Anti-inflammatory resolvins, neural retina"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Triacylglycerols function as the primary **reservoir** of metabolic energy in mammals. Three fatty acid molecules are esterified to a glycerol backbone, forming completely uncharged neutral lipids. Stored anhydrously within white adipocyte lipid droplets, triacylglycerols yield thirty-seven kilojoules per gram upon complete combustion, over twice the caloric density of glycogen, while requiring zero hydration weight for storage.",
+   "say": "Triacylglycerols serve as the body's chief fuel reservoir. Three fatty acids esterify to glycerol, forming neutral uncharged lipids. Stored anhydrously in adipocytes, they yield thirty-seven kilojoules per gram on oxidation, more than twice the energy density of hydrated glycogen.",
+   "vis": {
+    "kind": "flow",
+    "title": "Adipose triacylglycerol mobilization",
+    "nodes": [
+     {
+      "id": "atg",
+      "label": "Adipocyte lipid droplet"
+     },
+     {
+      "id": "atgl",
+      "label": "Adipose triglyceride lipase"
+     },
+     {
+      "id": "hsl",
+      "label": "Hormone-sensitive lipase"
+     },
+     {
+      "id": "magl",
+      "label": "Monoacylglycerol lipase"
+     },
+     {
+      "id": "bld",
+      "label": "Free fatty acids into blood"
+     }
+    ],
+    "edges": [
+     [
+      "atg",
+      "atgl",
+      "Epi & glucagon stimulate"
+     ],
+     [
+      "atgl",
+      "hsl",
+      "Forms diacylglycerol"
+     ],
+     [
+      "hsl",
+      "magl",
+      "Phosphorylated by PKA"
+     ],
+     [
+      "magl",
+      "bld",
+      "Bound to serum albumin"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "0deadf8c-4000-8000-0dea-df8c12345678",
+  "10eae445-4000-8000-10ea-e44512345678",
+  "0feae2b2-4000-8000-0fea-e2b212345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

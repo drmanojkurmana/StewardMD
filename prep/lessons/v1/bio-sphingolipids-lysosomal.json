@@ -1,0 +1,180 @@
+{
+ "module": "bio-sphingolipids-lysosomal",
+ "subject": "biochemistry",
+ "title": "Sphingolipids and lysosomal storage disorders: Gaucher, Tay-Sachs, Niemann-Pick and Fabry diseases",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Sphingolipids are structural components of eukaryotic membranes built upon the long-chain amino alcohol **sphingosine**. Condensation of palmitoyl-CoA with serine yields sphinganine, which is acylated by a fatty acid to form ceramide, the central parent intermediate. Addition of phosphocholine yields sphingomyelin, an abundant constituent of myelin sheaths. Addition of neutral or acidic sugars produces cerebrosides, globosides, and sialic acid-containing gangliosides.",
+   "say": "Sphingolipids are membrane structural lipids based on sphingosine. Palmitoyl-CoA and serine condense to form sphinganine, which is acylated to ceramide. Attaching phosphocholine generates myelin sphingomyelin. Adding sugars yields cerebrosides and sialic acid-bearing gangliosides.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sphingolipid class",
+     "Headgroup attached to ceramide",
+     "Primary physiological location"
+    ],
+    "rows": [
+     [
+      "Ceramide",
+      "Hydroxyl group (-OH)",
+      "Precursor, lipid signaling, apoptosis induction"
+     ],
+     [
+      "Sphingomyelin",
+      "Phosphocholine",
+      "Myelin sheaths around peripheral nerves and CNS"
+     ],
+     [
+      "Cerebroside",
+      "Single glucose or galactose",
+      "Galactosylceramide in brain white matter; glucosyl in systemic"
+     ],
+     [
+      "Ganglioside",
+      "Oligosaccharide with sialic acid (NANA)",
+      "Neuronal outer membrane surface, GM1, GM2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lysosomal **storage** diseases result from genetic deficiencies of acid hydrolases that degrade sphingolipids. Gaucher disease, the most common sphingolipidosis, is caused by glucocerebrosidase deficiency, causing glucosylceramide accumulation in macrophages. These engorged Gaucher cells exhibit characteristic 'crinkled paper' cytoplasm under light microscopy, infiltrating bone marrow, spleen, and liver to cause painful avascular necrosis, hepatosplenomegaly, and pancytopenia.",
+   "say": "Lysosomal storage diseases result from deficiencies of acid hydrolases that degrade sphingolipids. Gaucher disease, the most prevalent form, stems from glucocerebrosidase deficiency. Glucosylceramide accumulates in macrophages, creating crinkled paper Gaucher cells that infiltrate spleen and marrow, causing pancytopenia and bone crises.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gaucher disease (Type 1)",
+     "points": [
+      "Beta-glucocerebrosidase deficiency",
+      "Glucosylceramide accumulation",
+      "Crinkled tissue paper macrophage histology",
+      "Avascular necrosis of femoral head, Erlenmeyer flask deformity"
+     ]
+    },
+    "right": {
+     "title": "Niemann-Pick disease (Type A/B)",
+     "points": [
+      "Acid sphingomyelinase deficiency",
+      "Sphingomyelin accumulation",
+      "Foamy lipid-laden histiocytes",
+      "Hepatosplenomegaly and neurodegeneration with cherry-red macula"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tay-Sachs disease and Niemann-Pick disease both present with a pathognomonic **cherry-red** macular spot on fundoscopy. Tay-Sachs disease results from hexosaminidase A deficiency, causing GM2 ganglioside accumulation in neuronal lysosomes, leading to progressive neurodegeneration, hyperacusis, and blindness without hepatosplenomegaly. In contrast, Niemann-Pick disease type A features acid sphingomyelinase deficiency, displaying both cherry-red macula and prominent hepatosplenomegaly.",
+   "say": "Tay-Sachs and Niemann-Pick both cause cherry-red macular spots on ophthalmoscopy. Tay-Sachs stems from hexosaminidase A deficiency with GM2 ganglioside storage, producing progressive neurodegeneration without organomegaly. Niemann-Pick features sphingomyelinase deficiency, displaying both macular red spots and marked hepatosplenomegaly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical feature",
+     "Tay-Sachs disease",
+     "Niemann-Pick disease (Type A)"
+    ],
+    "rows": [
+     [
+      "Enzyme defect",
+      "Hexosaminidase A",
+      "Acid sphingomyelinase"
+     ],
+     [
+      "Accumulated lipid",
+      "GM2 ganglioside",
+      "Sphingomyelin"
+     ],
+     [
+      "Hepatosplenomegaly",
+      "Absent (normal liver and spleen)",
+      "Present (massive hepatosplenomegaly)"
+     ],
+     [
+      "Histopathology",
+      "Onion skin lysosomal inclusions",
+      "Foamy histiocytes in reticuloendothelial system"
+     ],
+     [
+      "Macular appearance",
+      "Cherry-red spot with pale halo",
+      "Cherry-red spot with pale halo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fabry disease is unique among the classic sphingolipidoses due to its **X-linked** recessive inheritance pattern. Alpha-galactosidase A deficiency leads to systemic globotriaosylceramide accumulation within vascular endothelial and smooth muscle cells. Affected boys develop severe episodic acroparesthesias, angiokeratomas on lower trunk and bathing-trunk distribution, hypohidrosis, and corneal verticillata, succumbing in adulthood to premature renal failure and cardiac hypertrophy.",
+   "say": "Fabry disease is distinguished by X-linked inheritance. Alpha-galactosidase A deficiency causes globotriaosylceramide accumulation in vascular endothelium. Patients experience burning neuropathic limb pain, angiokeratomas, hypohidrosis, and corneal whorls, progressing to renal and heart failure.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fabry disease vascular pathology",
+    "nodes": [
+     {
+      "id": "gen",
+      "label": "GLA gene mutation (X-linked)"
+     },
+     {
+      "id": "enz",
+      "label": "Alpha-galactosidase A absence"
+     },
+     {
+      "id": "sub",
+      "label": "Gb3 (ceramide trihexoside) buildup"
+     },
+     {
+      "id": "end",
+      "label": "Vascular endothelial occlusion"
+     },
+     {
+      "id": "org",
+      "label": "Nephropathy, stroke, cardiomyopathy"
+     }
+    ],
+    "edges": [
+     [
+      "gen",
+      "enz",
+      "Loss of function"
+     ],
+     [
+      "enz",
+      "sub",
+      "Lysosomal accumulation"
+     ],
+     [
+      "sub",
+      "end",
+      "Cellular hypertrophy"
+     ],
+     [
+      "end",
+      "org",
+      "Ischemic end-organ failure"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "ec889a6c-4000-8000-ec88-9a6c12345678",
+  "ef889f25-4000-8000-ef88-9f2512345678",
+  "ee889d92-4000-8000-ee88-9d9212345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

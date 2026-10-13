@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "module": "med-epilepsy",
+ "subject": "medicine",
+ "title": "Status epilepticus: benzodiazepine early, escalate without delay",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Status epilepticus** is a seizure that will not stop, or repeated seizures without recovery between them. Prolonged convulsing injures the brain and body through hypoxia, acidosis, hyperthermia and muscle breakdown. Protect the airway, give oxygen, check glucose, and time the seizure from onset (NICE NG217).",
+   "say": "Status epilepticus is a seizure that will not stop. Protect the airway, give oxygen, check glucose, and time the seizure from onset.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Airway + oxygen + glucose"
+     },
+     {
+      "id": "b",
+      "label": "Benzodiazepine"
+     },
+     {
+      "id": "c",
+      "label": "Second-line infusion"
+     },
+     {
+      "id": "d",
+      "label": "Critical care"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Give a **benzodiazepine immediately** (buccal, intranasal, rectal or intravenous per local protocol), repeat once if convulsing continues, then move without delay to a **second-line intravenous infusion** and critical care with anaesthetic support if seizures persist. Do not queue multiple benzodiazepine doses while the brain seizes. Treat hypoglycaemia at once when present; it both causes and mimics seizures.",
+   "say": "Give a benzodiazepine immediately, repeat once if convulsing continues, then move without delay to a second-line infusion and critical care. Treat hypoglycaemia at once when present.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Action"
+    ],
+    "rows": [
+     [
+      "First",
+      "Benzodiazepine, repeat once"
+     ],
+     [
+      "Next",
+      "Second-line infusion, critical care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After convulsions stop, find the cause: missed medicines, infection, electrolytes, alcohol withdrawal, stroke or eclampsia (give magnesium in pregnancy). Non-convulsive status hides as prolonged confusion after a seizure, so consider EEG when recovery stalls. Document times, drugs and response precisely.",
+   "say": "After convulsions stop, find the cause. Non-convulsive status hides as prolonged confusion, so consider EEG when recovery stalls."
+  }
+ ]
+}

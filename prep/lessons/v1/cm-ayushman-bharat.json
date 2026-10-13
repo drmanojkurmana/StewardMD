@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "cm-ayushman-bharat",
+ "subject": "community-medicine",
+ "title": "Ayushman Bharat: primary care close, hospital care without ruin",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Two arms** carry one promise. Health and Wellness Centres bring comprehensive primary care near home: prevention, screening, maternal and child care and chronic follow up. Pradhan Mantri Jan Arogya Yojana protects eligible families when hospitalisation strikes, with cashless cover of five lakh rupees per family per year for defined packages in empanelled hospitals.",
+   "say": "Wellness centres bring primary care near home. PM JAY gives eligible families five lakh rupees yearly cashless hospital cover.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Primary care"
+     },
+     {
+      "id": "b",
+      "label": "Referral"
+     },
+     {
+      "id": "c",
+      "label": "Cashless hospital care"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eligibility** follows national deprivation and occupational lists, verified when the card is made. Beneficiaries pay no premium for covered care. Frontline teams help families enrol, understand entitlement and reach empanelled hospitals, because paper cover without navigation fails the migrant worker, the elderly couple and the family that fears wage loss more than illness.",
+   "say": "Eligibility follows national lists with verification and no beneficiary premium. Help families enrol and navigate to empanelled care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Verify eligibility",
+      "Card and entitlement"
+     ],
+     [
+      "Empanelled care",
+      "Cashless packages"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pre authorisation** aligns the hospital package with payment for planned care, while emergency pathways move fast so treatment never waits for paperwork. Covered packages attract no extra charge to the family. Refusal of cashless care triggers helpdesk and grievance action. Portability lets a family working far from home use entitlement where illness finds them.",
+   "say": "Authorise planned packages promptly and use fast emergency pathways. Covered care is cashless and portable across empanelled hospitals.",
+   "vis": null
+  },
+  {
+   "tx": "**Screening** only helps when the loop closes. A raised blood pressure found at a wellness centre is confirmed on repeat checks, registered, treated by protocol and followed over years, with referral when thresholds or complications demand. The same loop serves diabetes, common cancers and maternal risk. One unrecorded reading changes nothing for the patient in front of you.",
+   "say": "Close every screening loop: confirm, register, treat, follow and refer. Single unrecorded readings help nobody.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Screen positive",
+     "points": [
+      "Confirm and register",
+      "Treat and follow"
+     ]
+    },
+    "right": {
+     "title": "Screen negative",
+     "points": [
+      "Advise prevention",
+      "Rescreen on schedule"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Trust** is protected by audit. Defined packages, claim review, medical audit and grievance systems with penalties keep funds flowing to honest care. Teams explain entitlement freely and never charge for facilitation. When families believe the card will work, they come early, and early care is cheaper, kinder and far more often curative.",
+   "say": "Audit and grievances protect honest care. Explain entitlement freely and bring families early, when care cures most.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap931",
+  "mk-gap932",
+  "mk-gap935"
+ ],
+ "src": [],
+ "refs": [
+  "Ayushman Bharat and PM-JAY, National Health Authority, India"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}

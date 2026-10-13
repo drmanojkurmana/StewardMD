@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-diabetes-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "Gestational diabetes mellitus: diagnostic criteria, glycemic targets and maternal thyroid dysfunction",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Gestational diabetes mellitus** represents carbohydrate intolerance resulting in hyperglycemia with onset or first recognition during pregnancy. The underlying pathophysiology involves physiological insulin resistance driven by placental secretion of human placental lactogen, maternal cortisol, progesterone, and placental growth hormone. Resistance peaks between twenty-four and twenty-eight weeks gestation, overwhelming inadequate maternal pancreatic beta-cell reserve.",
+   "say": "Gestational diabetes is carbohydrate intolerance first identified during pregnancy. Placental hormones like human placental lactogen and cortisol drive physiological insulin resistance that peaks between twenty-four and twenty-eight weeks, overcoming pancreatic beta-cell capacity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endocrine parameter",
+     "Non-pregnant state",
+     "Normal pregnancy",
+     "Gestational diabetes"
+    ],
+    "rows": [
+     [
+      "Peripheral insulin sensitivity",
+      "Baseline normal",
+      "Decreased by 50-60% in third trimester",
+      "Severely impaired / Uncompensated"
+     ],
+     [
+      "Maternal beta-cell response",
+      "Normal secretion",
+      "2- to 3-fold compensatory hypertrophy",
+      "Blunted inadequate insulin secretion"
+     ],
+     [
+      "Fetal glucose delivery",
+      "Not applicable",
+      "Facilitated GLUT1 carrier diffusion",
+      "Excessive transplacental flux"
+     ],
+     [
+      "Fetal insulin production",
+      "Not applicable",
+      "Normal physiological growth",
+      "Severe fetal hyperinsulinemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Universal screening for GDM occurs between twenty-four and twenty-eight weeks gestation. The **DIPSI criteria** utilize a practical single-step test administering seventy-five grams of oral glucose regardless of last meal timing, diagnosing GDM if two-hour venous plasma glucose reaches or exceeds one hundred and forty milligrams per deciliter. Alternative IADPSG criteria require fasting levels with three distinct diagnostic thresholds.",
+   "say": "Screening occurs between twenty-four and twenty-eight weeks. The DIPSI single-step test gives seventy-five grams of oral glucose regardless of meals, diagnosing GDM if the two-hour level is one hundred and forty or higher. IADPSG criteria use fasting and post-load thresholds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "IADPSG / WHO 2013 Criteria (Fasting 75g)",
+     "points": [
+      "Fasting plasma glucose >= 92 mg/dL (5.1 mmol/L)",
+      "1-hour plasma glucose >= 180 mg/dL (10.0 mmol/L)",
+      "2-hour plasma glucose >= 153 mg/dL (8.5 mmol/L)",
+      "Any single abnormal value confirms GDM"
+     ]
+    },
+    "right": {
+     "title": "Target Glycemic Control",
+     "points": [
+      "Fasting blood glucose < 95 mg/dL (5.3 mmol/L)",
+      "1-hour postprandial glucose < 140 mg/dL (7.8 mmol/L)",
+      "2-hour postprandial glucose < 120 mg/dL (6.7 mmol/L)",
+      "HbA1c target < 6.0% without severe hypoglycemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Uncontrolled maternal hyperglycemia generates profound neonatal and obstetric complications. Elevated maternal glucose crosses the placenta freely, stimulating fetal pancreatic hypertrophy and massive hyperinsulinemia (the Pedersen hypothesis). This causes **fetal macrosomia** with disproportionate shoulder adiposity predisposing to shoulder dystocia. Neonatal complications include acute hypoglycemia from hyperinsulinemia, hypocalcemia, polycythemia, hyperbilirubinemia, and respiratory distress syndrome.",
+   "say": "Maternal hyperglycemia causes severe fetal risks. Excessive glucose stimulates fetal insulin production, producing macrosomia and shoulder dystocia. Newborns face risks of hypoglycemia, low calcium, high bilirubin, and respiratory distress because insulin inhibits surfactant.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neonatal complication",
+     "Pathophysiological mechanism",
+     "Clinical presentation",
+     "Management protocol"
+    ],
+    "rows": [
+     [
+      "Neonatal hypoglycemia",
+      "Hyperplastic fetal islets / abrupt glucose cutoff",
+      "Jitteriness, lethargy, poor feeding < 40 mg/dL",
+      "Early breastfeeding / IV 10% dextrose"
+     ],
+     [
+      "Respiratory distress (RDS)",
+      "Hyperinsulinemia blocks cortisol surfactant signal",
+      "Tachypnea, grunting, retractions at birth",
+      "CPAP / Exogenous surfactant"
+     ],
+     [
+      "Polycythemia",
+      "Fetal hypoxia drives erythropoietin secretion",
+      "Plethoric appearance, venous hematocrit > 65%",
+      "Partial exchange transfusion"
+     ],
+     [
+      "Hyperbilirubinemia",
+      "Hemolysis of polycythemic red cell mass",
+      "Jaundice within first 24-48 hours",
+      "Intensive phototherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maternal **thyroid dysfunction** during pregnancy profoundly influences obstetric outcomes and fetal neurocognitive development. Overt maternal hypothyroidism increases miscarriage, preeclampsia, and low birthweight risks. Because the fetus relies entirely on transplacental maternal thyroxine until twelve to fourteen weeks gestation, pre-existing levothyroxine requirements increase by thirty to fifty percent immediately following conception, targeting first-trimester TSH below 2.5 mIU/L.",
+   "say": "Thyroid disorders affect obstetric health and fetal brain development. The fetus depends on maternal thyroxine in early pregnancy, so women taking levothyroxine require a thirty to fifty percent dose increase once pregnant, targeting a first-trimester TSH below 2.5.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-obg-121",
+  "bk2-obg-122",
+  "bk2-obg-123",
+  "bk2-obg-124",
+  "bk2-obg-125",
+  "bk2-obg-126",
+  "bk2-obg-127",
+  "bk2-obg-128",
+  "bk2-obg-129",
+  "bk2-obg-130"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

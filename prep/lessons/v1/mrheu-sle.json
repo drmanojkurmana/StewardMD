@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "mrheu-sle",
+ "subject": "mrcp-rheumatology",
+ "title": "Systemic lupus erythematosus: clinical diagnosis, serology, organ monitoring",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Systemic lupus erythematosus** is a chronic multisystem autoimmune disease predominantly affecting young women. Autoantibodies directed against nuclear components provoke immune complex formation and widespread tissue damage. Presentation spans fatigue, malar rash, photosensitivity, non-erosive arthritis, serositis and haematological cytopenias. Early recognition and baseline organ screening prevent progressive renal and neuropsychiatric morbidity.",
+   "say": "Systemic lupus erythematosus causes multiorgan immune complex inflammation in young women. Screen early for renal, haematological and serosal damage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Multisystem symptoms"
+     },
+     {
+      "id": "b",
+      "label": "Serology and urine dip"
+     },
+     {
+      "id": "c",
+      "label": "Organ-targeted therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diagnostic serology** starts with antinuclear antibody as the obligatory entry criterion, demonstrating sensitivity above ninety-five percent. High-specificity confirmatory markers include anti-double-stranded DNA and anti-Smith antibodies. Anti-dsDNA titres fluctuate with clinical disease activity and predict active lupus nephritis, whereas anti-Smith antibodies remain stable over time.",
+   "say": "Antinuclear antibody is the sensitive entry test. Anti-dsDNA and anti-Smith offer high specificity, with anti-dsDNA reflecting active nephritis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antibody",
+     "Sensitivity",
+     "Clinical role"
+    ],
+    "rows": [
+     [
+      "ANA",
+      "Very high (>95%)",
+      "Screening entry criterion"
+     ],
+     [
+      "Anti-dsDNA",
+      "Moderate (60%)",
+      "High specificity, tracks nephritis flares"
+     ],
+     [
+      "Anti-Smith",
+      "Low (25%)",
+      "Very high specificity, diagnostic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Renal surveillance** requires blood pressure measurement, urine dipstick for protein and blood, and urine protein-to-creatinine ratio at every clinic consultation. Asymptomatic proteinuria or active sediment with red cell casts warrants urgent renal biopsy to classify the histological grade and guide immunosuppressive induction before irreversible glomerulosclerosis develops.",
+   "say": "Check urine protein and sediment at every visit. Active proteinuria requires prompt renal biopsy to classify lupus nephritis.",
+   "vis": null
+  },
+  {
+   "tx": "**Baseline pharmacotherapy** establishes hydroxychloroquine for all patients with systemic lupus unless absolute contraindications exist. Hydroxychloroquine reduces disease flares, protects against thrombotic events, diminishes organ damage accretion and improves overall survival. Annual retinal screening is indicated after five years of continuous exposure to detect early maculopathy.",
+   "say": "Hydroxychloroquine is the cornerstone for all lupus patients, reducing flares and improving survival. Arrange annual retinal screening after five years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benefits",
+     "points": [
+      "Reduced flare frequency",
+      "Lower thrombotic risk",
+      "Improved long-term survival"
+     ]
+    },
+    "right": {
+     "title": "Monitoring",
+     "points": [
+      "Baseline visual acuity check",
+      "Annual retinal screening after 5 years",
+      "Dose capped by actual body weight"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Severe flare management** with proliferative glomerulonephritis or central nervous system involvement necessitates pulse intravenous methylprednisolone combined with mycophenolate mofetil or intravenous cyclophosphamide. Target organ protection requires vigilance for secondary antiphospholipid syndrome and accelerated atherosclerotic cardiovascular disease, which drive late mortality.",
+   "say": "Treat severe proliferative nephritis with pulsed corticosteroids plus mycophenolate or cyclophosphamide. Manage cardiovascular risks aggressively.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1031",
+  "mk-gap1033",
+  "mk-gap1035"
+ ],
+ "src": [
+  "kb-reference-systemic_lupus_erythematosus"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

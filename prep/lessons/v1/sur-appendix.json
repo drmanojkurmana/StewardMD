@@ -1,0 +1,212 @@
+{
+ "module": "sur-appendix",
+ "subject": "surgery",
+ "title": "Acute appendicitis: Alvarado scoring, appendiceal neoplasms, and laparoscopic appendectomy",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "World Society of Emergency Surgery Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Acute **appendicitis** is initiated by luminal obstruction of the vermiform appendix, primarily by a fecalith in adults or lymphoid hyperplasia in children. Ongoing mucosal secretion produces luminal distension, bacterial proliferation, venous engorgement, and ischemic gangrene. Visceral periumbilical pain mediated by T10 sympathetic fibers shifts after 12 to 24 hours to somatic right lower quadrant pain at McBurney point when the inflamed parietal peritoneum is irritated.",
+   "say": "Acute appendicitis begins with appendiceal luminal obstruction by a fecalith or lymphoid tissue. Luminal distension leads to ischemia and bacterial invasion. Pain shifts from visceral periumbilical discomfort to localized right lower quadrant pain at McBurney point.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Appendiceal luminal obstruction by fecalith"
+     },
+     {
+      "id": "a2",
+      "label": "Intraluminal pressure exceeds capillary perfusion"
+     },
+     {
+      "id": "a3",
+      "label": "Bacterial invasion & transmural inflammation"
+     },
+     {
+      "id": "a4",
+      "label": "Parietal peritoneal irritation (McBurney tenderness)"
+     },
+     {
+      "id": "a5",
+      "label": "Ischemic perforation with abscess or generalized peritonitis"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ],
+     [
+      "a4",
+      "a5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Alvarado** score stratifies suspected appendicitis using eight clinical parameters (MANTRELS: Migration of pain, Anorexia, Nausea, Tenderness in RLQ, Rebound tenderness, Elevated temperature, Leukocytosis, and Shift to the left). A score of 7 or greater indicates high probability for surgery. Contrast-enhanced CT scan exhibits a sensitivity exceeding 95 percent, demonstrating an appendiceal diameter greater than 6 mm, circumferential wall thickening, and periappendiceal fat stranding.",
+   "say": "The Alvarado score evaluates migration of pain, anorexia, nausea, RLQ tenderness, rebound, fever, leukocytosis, and left shift. A score of seven or higher warrants surgical intervention. CT confirms appendicitis with diameter over six millimeters and fat stranding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Alvarado parameter (MANTRELS)",
+     "Clinical feature",
+     "Assigned score value"
+    ],
+    "rows": [
+     [
+      "Migration of pain",
+      "Periumbilical to right lower quadrant",
+      "1 point"
+     ],
+     [
+      "Anorexia",
+      "Loss of appetite",
+      "1 point"
+     ],
+     [
+      "Nausea or vomiting",
+      "Gastrointestinal upset",
+      "1 point"
+     ],
+     [
+      "Tenderness in RLQ",
+      "Maximal point tenderness at McBurney",
+      "2 points (double weight)"
+     ],
+     [
+      "Rebound tenderness",
+      "Peritoneal irritation in RLQ",
+      "1 point"
+     ],
+     [
+      "Elevated temperature",
+      "Oral temperature >= 37.3 C (99.1 F)",
+      "1 point"
+     ],
+     [
+      "Leukocytosis",
+      "White blood cells > 10,000 / uL",
+      "2 points (double weight)"
+     ],
+     [
+      "Shift to the left",
+      "Neutrophils exceeding 75 percent",
+      "1 point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laparoscopic **appendectomy** is the gold standard surgical intervention for acute appendicitis, offering lower surgical site infection rates, decreased postoperative pain, and faster recovery compared to open laparotomy. Three-port technique establishes pneumoperitoneum. The mesoappendix containing the appendicular artery (a branch of the ileocolic artery) is divided with bipolar energy, harmonic scalpel, or clips. The appendiceal base is securely ligated with Endoloops or an endostapler flush with the cecum.",
+   "say": "Laparoscopic appendectomy is the gold standard for acute appendicitis. Three ports are placed, the mesoappendix containing the appendicular artery is divided, and the base is ligated with endoloops or stapled flush with the cecal wall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Establish umbilical pneumoperitoneum & port placement"
+     },
+     {
+      "id": "p2",
+      "label": "Retract cecum cephalad to expose retrocecal appendix"
+     },
+     {
+      "id": "p3",
+      "label": "Skeletonize and divide mesoappendix containing artery"
+     },
+     {
+      "id": "p4",
+      "label": "Ligate appendiceal base flush with cecum with Endoloop"
+     },
+     {
+      "id": "p5",
+      "label": "Extract specimen in retrieval bag to avoid wound infection"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Appendiceal **neoplasms** are discovered in approximately 1 percent of appendectomy specimens. Neuroendocrine tumors (carcinoids) are the most common, classically located at the appendiceal tip. Simple appendectomy is curative for carcinoids under 1 cm. Right hemicolectomy is mandatory for carcinoids exceeding 2 cm, tumors involving the appendiceal base, or high-grade neuroendocrine carcinomas. Low-grade appendiceal mucinous neoplasms (LAMN) require meticulous atraumatic excision to prevent pseudomyxoma peritonei.",
+   "say": "Appendiceal neuroendocrine carcinoids under one centimeter are cured by simple appendectomy. Tumors larger than two centimeters or those involving the base mandate oncologic right hemicolectomy. Mucinous neoplasms require gentle handling to prevent pseudomyxoma peritonei.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Appendiceal tumor",
+     "Size and location criteria",
+     "Definitive surgical therapy"
+    ],
+    "rows": [
+     [
+      "Neuroendocrine (carcinoid)",
+      "Under 1.0 cm at the tip or body",
+      "Appendectomy alone is curative"
+     ],
+     [
+      "Neuroendocrine (carcinoid)",
+      "Greater than 2.0 cm or base involvement",
+      "Oncologic right hemicolectomy"
+     ],
+     [
+      "Adenocarcinoma",
+      "Any invasive appendiceal adenocarcinoma",
+      "Formal oncologic right hemicolectomy"
+     ],
+     [
+      "Mucinous neoplasm (LAMN)",
+      "Mucocele without peritoneal rupture",
+      "Appendectomy with clear margin; avoid rupture"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "6d1bfb22-4000-8000-6d1b-fb2212345678",
+  "6c1bf98f-4000-8000-6c1b-f98f12345678",
+  "6b1bf7fc-4000-8000-6b1b-f7fc12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

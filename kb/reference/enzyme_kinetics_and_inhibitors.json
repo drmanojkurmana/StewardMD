@@ -1,0 +1,41 @@
+{
+  "id": "enzyme_kinetics_and_inhibitors",
+  "name": "Enzyme Kinetics, Michaelis-Menten Analysis and Reversible Inhibition",
+  "aliases": [
+    "Michaelis-Menten kinetics",
+    "Lineweaver-Burk plot",
+    "Competitive inhibition",
+    "Glucokinase vs hexokinase"
+  ],
+  "class": "non_infective",
+  "system": "Enzymology / Clinical Pharmacology",
+  "specialty": "Biochemistry / Pharmacology / Laboratory Medicine",
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "reference": {
+    "source": "Harper's Illustrated Biochemistry / Medical Biochemistry 5th ed",
+    "sourceEdition": "current",
+    "clinicalPearls": [
+      "Km represents substrate concentration at half-maximal velocity (Vmax/2); small Km indicates high enzyme-substrate affinity",
+      "Hexokinase has low Km (<0.1 mM) and is inhibited by G6P; glucokinase has high Km (~10 mM), acts as a glucose sensor and lacks G6P inhibition",
+      "On Lineweaver-Burk plots, y-intercept equals 1/Vmax, x-intercept equals -1/Km, and slope equals Km/Vmax",
+      "Competitive inhibitors increase apparent Km without changing Vmax; overcome by high substrate concentrations",
+      "Noncompetitive inhibitors decrease Vmax without changing Km; cannot be overcome by excess substrate"
+    ],
+    "pathophysiology": "Enzymes stabilize reaction transition states to accelerate reaction rates by many orders of magnitude. Saturation kinetics reflect finite catalytic site availability. Reversible inhibitors alter apparent affinity or catalytic turnover, forming the basis of targeted pharmacotherapy (e.g., statins competing for HMG-CoA reductase). Allosteric effectors induce cooperative sigmoidal kinetics.",
+    "additionalDifferentials": [
+      "Competitive vs noncompetitive vs uncompetitive pharmacological inhibition",
+      "Glucokinase deficiency (MODY2 mild fasting hyperglycemia) vs hyperinsulinemic hypoglycemia",
+      "Organophosphate pesticide poisoning (irreversible acetylcholinesterase inhibition)",
+      "Heavy metal toxicity (lead noncompetitive inhibition of ferrochelatase and ALA dehydratase)"
+    ],
+    "additionalInvestigations": [
+      "Serum enzyme activity assays (CK, ALT, AST, ALP, amylase, lipase)",
+      "Therapeutic drug monitoring of enzyme-inhibiting medications",
+      "In vitro enzyme kinetic profiling (Km and Vmax determination)",
+      "Maturity-onset diabetes of the young type 2 (MODY2) GCK gene sequencing"
+    ]
+  }
+}

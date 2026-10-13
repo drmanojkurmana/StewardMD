@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "sur-shock-transfusion",
+ "subject": "surgery",
+ "title": "Massive haemorrhage and transfusion: stop bleeding, replace blood, keep warm",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "In **massive haemorrhage**, survival depends on three parallel actions: **stop the bleeding**, **restore circulating volume with blood products**, and **activate the major haemorrhage protocol** early so the laboratory and blood bank move with you. Permissive hypotension before surgical control, where protocol allows, avoids dislodging clots. Warm the patient and every fluid; cold blood does not clot (ATLS).",
+   "say": "Stop the bleeding, replace with blood products and activate the major haemorrhage protocol early, keeping patient and fluids warm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stop bleeding"
+     },
+     {
+      "id": "b",
+      "label": "Activate protocol"
+     },
+     {
+      "id": "c",
+      "label": "Blood products + warmth"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Give blood components in balanced proportions per protocol, guided by repeated clotting and blood tests where available, rather than litres of clear fluid. **Tranexamic acid is given early** in bleeding trauma and obstetric haemorrhage where indicated. Recheck calcium, potassium, temperature and acid-base state, because transfusion itself disturbs all four. The endpoint is controlled bleeding and restored perfusion, not a number alone.",
+   "say": "Use balanced blood components guided by clotting tests, give tranexamic acid early where indicated, and recheck calcium, potassium and temperature.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Watch",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Temperature",
+      "Cold blood does not clot"
+     ],
+     [
+      "Calcium + potassium",
+      "Transfusion disturbs both"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Transfusion reactions** range from febrile shivering to life-threatening haemolysis and lung injury. New fever, flank pain, hypotension or breathlessness during a transfusion means **stop the transfusion**, keep the line open with saline, recheck identity, and call senior help and the laboratory at once. Never restart a unit that has triggered a serious reaction, and return it for investigation.",
+   "say": "Stop the transfusion for new fever, flank pain, low pressure or breathlessness, recheck identity and call senior help and the laboratory.",
+   "vis": null
+  }
+ ]
+}

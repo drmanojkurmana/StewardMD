@@ -1,0 +1,757 @@
+{
+ "topic": "ans-difficult-airway",
+ "set": "gap1013a",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap401",
+   "q": "During anaesthesia, intubation fails twice despite optimisation. The next priority in the DAS sequence is:",
+   "o": [
+    "Maintain oxygenation: face-mask ventilation, then a supraglottic airway if needed, while calling for help",
+    "Keep repeating the same laryngoscopy unchanged",
+    "Give more muscle relaxant and stop ventilating",
+    "Proceed to surgery without an airway plan"
+   ],
+   "a": 0,
+   "exp": "The difficult airway sequence prioritises oxygenation over repeated identical attempts. Call for help, optimise mask ventilation, and move to a supraglottic airway plan.",
+   "r": [
+    "Correct: oxygenate and move to the next plan; call for help.",
+    "Repeating the same failed attempt worsens trauma and hypoxia.",
+    "Relaxant without ventilation deepens desaturation.",
+    "Surgery cannot proceed without oxygenation."
+   ],
+   "kp": "Oxygenate first; do not repeat the same failed attempt.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "difficult-airway"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "Oxygenate first; do not repeat the same failed attempt.",
+    "others": {
+     "C": "Repeating the same failed attempt worsens trauma and hypoxia.",
+     "D": "Relaxant without ventilation deepens desaturation.",
+     "E": "Surgery cannot proceed without oxygenation."
+    },
+    "pearl": "Oxygenate first; do not repeat the same failed attempt.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "The difficult airway sequence prioritises oxygenation over repeated identical attempts. Call for help, optimise mask ventilation, and move to a supraglottic airway plan.",
+    "lo": "Follow oxygenation-first difficult airway sequence.",
+    "rev": "The difficult airway sequence prioritises oxygenation over repeated identical attempts. Call for help, optimise mask ventilation, and move to a supraglottic airway plan.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap402",
+   "q": "Cannot intubate, cannot oxygenate (CICO) despite supraglottic airway and mask efforts. The required action is:",
+   "o": [
+    "Emergency front-of-neck access (scalpel cricothyroidotomy) without further delay",
+    "More attempts at oral intubation",
+    "Wait for spontaneous recovery while hypoxic",
+    "Nasal intubation attempts for 20 minutes"
+   ],
+   "a": 0,
+   "exp": "Once CICO is declared, emergency front-of-neck access is the definitive step. Further upper-airway attempts delay oxygenation.",
+   "r": [
+    "Correct: declare CICO and perform front-of-neck access.",
+    "More oral attempts delay rescue.",
+    "Waiting while hypoxic causes brain injury.",
+    "Prolonged nasal attempts delay rescue."
+   ],
+   "kp": "In CICO, go to emergency front-of-neck access.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "cico"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "In CICO, go to emergency front-of-neck access.",
+    "others": {
+     "C": "More oral attempts delay rescue.",
+     "D": "Waiting while hypoxic causes brain injury.",
+     "E": "Prolonged nasal attempts delay rescue."
+    },
+    "pearl": "In CICO, go to emergency front-of-neck access.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Once CICO is declared, emergency front-of-neck access is the definitive step. Further upper-airway attempts delay oxygenation.",
+    "lo": "Act on CICO with front-of-neck access.",
+    "rev": "Once CICO is declared, emergency front-of-neck access is the definitive step. Further upper-airway attempts delay oxygenation.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap403",
+   "q": "Which action most reduces harm during an unanticipated difficult intubation?",
+   "o": [
+    "Call for help early and limit laryngoscopy attempts, optimising position and oxygenation between attempts",
+    "One operator persisting silently for many attempts",
+    "Remove supplemental oxygen to test the patient",
+    "Skip suction and external laryngeal manipulation"
+   ],
+   "a": 0,
+   "exp": "Early help, limited attempts and optimisation between attempts reduce hypoxia and airway trauma.",
+   "r": [
+    "Correct: early help and limited, optimised attempts.",
+    "Silent persistence increases harm.",
+    "Removing oxygen worsens desaturation.",
+    "Suction and manipulation often rescue the view."
+   ],
+   "kp": "Call for help early; limit and optimise each attempt.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "human-factors"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "Call for help early; limit and optimise each attempt.",
+    "others": {
+     "C": "Silent persistence increases harm.",
+     "D": "Removing oxygen worsens desaturation.",
+     "E": "Suction and manipulation often rescue the view."
+    },
+    "pearl": "Call for help early; limit and optimise each attempt.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Early help, limited attempts and optimisation between attempts reduce hypoxia and airway trauma.",
+    "lo": "Use early help and limited attempts.",
+    "rev": "Early help, limited attempts and optimisation between attempts reduce hypoxia and airway trauma.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap404",
+   "q": "A supraglottic airway in the failed intubation pathway is used to:",
+   "o": [
+    "Restore oxygenation and provide a bridge (ventilate, wake, or intubate through it as planned)",
+    "Guarantee protection from aspiration equal to a tracheal tube",
+    "Replace the need to declare difficulty",
+    "Allow unlimited further laryngoscopy"
+   ],
+   "a": 0,
+   "exp": "A supraglottic airway restores oxygenation and buys time for the next plan. It does not protect like a cuffed tracheal tube.",
+   "r": [
+    "Correct: it oxygenates and bridges to the next plan.",
+    "Aspiration protection is not equivalent.",
+    "Difficulty must still be declared and planned.",
+    "It is not a licence for unlimited attempts."
+   ],
+   "kp": "Supraglottic airway equals oxygenation bridge, not a cuffed tube.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "supraglottic"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "Supraglottic airway equals oxygenation bridge, not a cuffed tube.",
+    "others": {
+     "C": "Aspiration protection is not equivalent.",
+     "D": "Difficulty must still be declared and planned.",
+     "E": "It is not a licence for unlimited attempts."
+    },
+    "pearl": "Supraglottic airway equals oxygenation bridge, not a cuffed tube.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "A supraglottic airway restores oxygenation and buys time for the next plan. It does not protect like a cuffed tracheal tube.",
+    "lo": "Use supraglottic airway as an oxygenation bridge.",
+    "rev": "A supraglottic airway restores oxygenation and buys time for the next plan. It does not protect like a cuffed tracheal tube.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap405",
+   "q": "After failed intubation but successful oxygenation with a supraglottic airway in elective surgery, the safest default is usually:",
+   "o": [
+    "Wake the patient up when feasible and replan, rather than persisting",
+    "Proceed with major surgery regardless",
+    "Remove the supraglottic airway at once",
+    "Give long-acting relaxant and hope"
+   ],
+   "a": 0,
+   "exp": "With oxygenation secured in elective care, waking the patient and replanning is usually safest. Persisting converts a controlled situation into CICO.",
+   "r": [
+    "Correct: wake and replan when feasible.",
+    "Major surgery on a rescue airway without thought is unsafe.",
+    "Removing the working airway loses oxygenation.",
+    "Long-acting relaxant removes the wake-up option."
+   ],
+   "kp": "Oxygenation secured electively: wake and replan.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "wake-up"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "Oxygenation secured electively: wake and replan.",
+    "others": {
+     "C": "Major surgery on a rescue airway without thought is unsafe.",
+     "D": "Removing the working airway loses oxygenation.",
+     "E": "Long-acting relaxant removes the wake-up option."
+    },
+    "pearl": "Oxygenation secured electively: wake and replan.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "With oxygenation secured in elective care, waking the patient and replanning is usually safest. Persisting converts a controlled situation into CICO.",
+    "lo": "Wake the patient when oxygenation is secured electively.",
+    "rev": "With oxygenation secured in elective care, waking the patient and replanning is usually safest. Persisting converts a controlled situation into CICO.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap406",
+   "q": "Capnography in airway management is essential because it:",
+   "o": [
+    "Confirms tracheal tube placement and ongoing ventilation; absent trace means assume oesophageal until proved otherwise",
+    "Replaces clinical examination entirely",
+    "Measures oxygen saturation",
+    "Diagnoses the cause of difficult laryngoscopy"
+   ],
+   "a": 0,
+   "exp": "Sustained exhaled carbon dioxide confirms ventilation. No trace after intubation must be treated as oesophageal placement until excluded.",
+   "r": [
+    "Correct: absent capnography trace means assume oesophageal.",
+    "Clinical checks remain necessary.",
+    "Saturation is pulse oximetry.",
+    "It does not diagnose anatomy."
+   ],
+   "kp": "No capnography trace: assume oesophageal until proved otherwise.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "capnography"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "No capnography trace: assume oesophageal until proved otherwise.",
+    "others": {
+     "C": "Clinical checks remain necessary.",
+     "D": "Saturation is pulse oximetry.",
+     "E": "It does not diagnose anatomy."
+    },
+    "pearl": "No capnography trace: assume oesophageal until proved otherwise.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Sustained exhaled carbon dioxide confirms ventilation. No trace after intubation must be treated as oesophageal placement until excluded.",
+    "lo": "Confirm tube placement with capnography.",
+    "rev": "Sustained exhaled carbon dioxide confirms ventilation. No trace after intubation must be treated as oesophageal placement until excluded.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap407",
+   "q": "Before induction in a predicted difficult airway, the plan must include:",
+   "o": [
+    "A primary plan plus explicit backup plans, skilled help, and front-of-neck kit immediately available",
+    "Only plan A, discussed after induction",
+    "Front-of-neck kit locked elsewhere",
+    "No discussion to avoid anxiety"
+   ],
+   "a": 0,
+   "exp": "Predicted difficulty needs shared plans A to D, help present, and rescue kit at hand before induction.",
+   "r": [
+    "Correct: backup plans, help and kit ready before induction.",
+    "Backups are decided before, not after.",
+    "Rescue kit must be immediate.",
+    "The team must share the plan."
+   ],
+   "kp": "Plan A to D, help and rescue kit before induction.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "planning"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "Plan A to D, help and rescue kit before induction.",
+    "others": {
+     "C": "Backups are decided before, not after.",
+     "D": "Rescue kit must be immediate.",
+     "E": "The team must share the plan."
+    },
+    "pearl": "Plan A to D, help and rescue kit before induction.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Predicted difficulty needs shared plans A to D, help present, and rescue kit at hand before induction.",
+    "lo": "Prepare backup plans before induction.",
+    "rev": "Predicted difficulty needs shared plans A to D, help present, and rescue kit at hand before induction.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap408",
+   "q": "Human factors that worsen difficult airway outcomes include:",
+   "o": [
+    "Fixation on intubation (task focus) while saturation falls",
+    "Announcing the airway plan aloud",
+    "Assigning a person to watch saturation",
+    "Limiting attempts"
+   ],
+   "a": 0,
+   "exp": "Fixation error delays oxygenation. Announcing plans, monitoring roles and attempt limits are protective.",
+   "r": [
+    "Correct: fixation on the tube while hypoxic kills.",
+    "Announcing the plan protects the patient.",
+    "A saturation watcher protects the patient.",
+    "Limiting attempts protects the patient."
+   ],
+   "kp": "Fixation on intubation while saturation falls is the trap.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "human-factors"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "Fixation on intubation while saturation falls is the trap.",
+    "others": {
+     "C": "Announcing the plan protects the patient.",
+     "D": "A saturation watcher protects the patient.",
+     "E": "Limiting attempts protects the patient."
+    },
+    "pearl": "Fixation on intubation while saturation falls is the trap.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Fixation error delays oxygenation. Announcing plans, monitoring roles and attempt limits are protective.",
+    "lo": "Avoid fixation error in airway crises.",
+    "rev": "Fixation error delays oxygenation. Announcing plans, monitoring roles and attempt limits are protective.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap409",
+   "q": "In the emergency department, a hypoxic patient with a soiled airway fails first intubation. The best next step is:",
+   "o": [
+    "Suction, reoxygenate with mask or supraglottic airway, optimise, then a single improved attempt or rescue plan",
+    "Immediate second identical attempt without oxygenation",
+    "Blind nasal intubation",
+    "Stop oxygen to obtain a blood gas"
+   ],
+   "a": 0,
+   "exp": "Reoxygenation and optimisation between attempts are mandatory. Identical rushed attempts worsen hypoxia and trauma.",
+   "r": [
+    "Correct: suction, reoxygenate, optimise, then improved or rescue attempt.",
+    "Identical attempts without oxygen harm.",
+    "Blind nasal attempts are slow and traumatic here.",
+    "Oxygen is never stopped for a gas in a hypoxic patient."
+   ],
+   "kp": "Reoxygenate and optimise between every attempt.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "emergency"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "Reoxygenate and optimise between every attempt.",
+    "others": {
+     "C": "Identical attempts without oxygen harm.",
+     "D": "Blind nasal attempts are slow and traumatic here.",
+     "E": "Oxygen is never stopped for a gas in a hypoxic patient."
+    },
+    "pearl": "Reoxygenate and optimise between every attempt.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Reoxygenation and optimisation between attempts are mandatory. Identical rushed attempts worsen hypoxia and trauma.",
+    "lo": "Reoxygenate between emergency attempts.",
+    "rev": "Reoxygenation and optimisation between attempts are mandatory. Identical rushed attempts worsen hypoxia and trauma.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap410",
+   "q": "After an emergency front-of-neck airway, the immediate confirmations are:",
+   "o": [
+    "Capnography trace, chest movement and oxygenation, then secure the airway and arrange definitive care",
+    "Remove it to retry oral intubation at once",
+    "No confirmation is needed",
+    "Extubate when the patient is still hypoxic"
+   ],
+   "a": 0,
+   "exp": "Rescue airways still need capnographic and clinical confirmation, securing, and a definitive airway plan.",
+   "r": [
+    "Correct: confirm, secure, arrange definitive care.",
+    "It is not removed to retry at once.",
+    "Confirmation is always needed.",
+    "Hypoxia is not a reason to remove the rescue airway."
+   ],
+   "kp": "Confirm and secure every rescue airway with capnography.",
+   "t": "ans-difficult-airway",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "airway",
+    "cico"
+   ],
+   "source": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+   "x": {
+    "key": "Confirm and secure every rescue airway with capnography.",
+    "others": {
+     "C": "It is not removed to retry at once.",
+     "D": "Confirmation is always needed.",
+     "E": "Hypoxia is not a reason to remove the rescue airway."
+    },
+    "pearl": "Confirm and secure every rescue airway with capnography.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Rescue airways still need capnographic and clinical confirmation, securing, and a definitive airway plan.",
+    "lo": "Confirm rescue front-of-neck airway.",
+    "rev": "Rescue airways still need capnographic and clinical confirmation, securing, and a definitive airway plan.",
+    "next": {
+     "concept": "ans-difficult-airway",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Difficult Airway Society / Association of Anaesthetists guidelines for management of unanticipated difficult intubation in adults",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ans-difficult-airway"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

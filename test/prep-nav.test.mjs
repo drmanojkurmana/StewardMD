@@ -99,7 +99,7 @@ test("CSS: one backdrop-filter layer, url() only under .pnv-lens, fallbacks for 
 
 test("wiring: loader lists prep-nav (optional), prep.js attaches, syncs after every paint, detaches, exposes the tab roots", () => {
   const loader = fs.readFileSync(join(ROOT, "prep-loader.js"), "utf8"), prep = fs.readFileSync(join(ROOT, "prep.js"), "utf8");
-  assert.match(loader, /"prep-nav\.css"\]/);
+  assert.match(loader, /"prep-nav\.css"/);
   assert.match(loader, /"prep-tide\.js", "prep-nav\.js"/);
   assert.match(loader, /"prep-nav\.js": 1/);
   assert.match(prep, /G\.PREP_NAV\.attach\(root, HOST\)/);

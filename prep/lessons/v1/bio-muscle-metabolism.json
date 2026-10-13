@@ -1,0 +1,192 @@
+{
+ "module": "bio-muscle-metabolism",
+ "subject": "biochemistry",
+ "title": "Muscle bioenergetics: creatine phosphate shuttle, glycogenolysis, and rhabdomyolysis",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Lehninger Principles of Biochemistry 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Skeletal muscle utilizes distinct energetic pathways tailored to exercise duration and intensity. During the initial four to six seconds of maximal sprint, cytosolic **ATP** and phosphocreatine provide immediate high-energy phosphate transfer via creatine kinase without requiring oxygen. Creatine is synthesized from arginine, glycine, and SAM in the kidneys and liver, then transported to muscle. Phosphocreatine regenerates ATP rapidly, buffering cellular ATP concentrations during sudden contraction onset.",
+   "say": "Muscle contraction relies on immediate ATP and phosphocreatine buffering via creatine kinase during the initial seconds of exercise. Creatine is synthesized in kidneys and liver from arginine and glycine, then phosphorylated in muscle to form high-energy phosphocreatine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Energy system",
+     "Substrate utilized",
+     "Duration of maximal power"
+    ],
+    "rows": [
+     [
+      "Phosphagen system",
+      "Phosphocreatine + ADP -> ATP + Creatine",
+      "0 to 10 seconds (maximal explosive burst)"
+     ],
+     [
+      "Anaerobic glycolysis",
+      "Muscle glycogen to lactate",
+      "10 seconds to 2 minutes (high intensity)"
+     ],
+     [
+      "Aerobic oxidation",
+      "Glycogen, glucose, fatty acid beta-oxidation",
+      ">2 minutes to hours (endurance exercise)"
+     ],
+     [
+      "Creatinine excretion",
+      "Spontaneous non-enzymatic cyclization",
+      "Constant daily urinary excretion proportional to muscle mass"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During vigorous anaerobic contraction, muscle **glycogenolysis** supplies glucose-6-phosphate for rapid glycolytic ATP generation. Epinephrine stimulates protein kinase A, which activates phosphorylase kinase to convert inactive glycogen phosphorylase b into active phosphorylase a. In exercising muscle, allosteric activation by AMP and calcium-calmodulin activates phosphorylase b directly, ensuring glycogen breakdown occurs synchronously with cross-bridge cycling even before hormonal signaling arrives.",
+   "say": "Anaerobic exercise activates muscle glycogenolysis. Epinephrine drives phosphorylation to activate glycogen phosphorylase. Intracellular AMP and calcium-calmodulin directly allosterically activate phosphorylase b, coupling contraction immediately to energy release.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Muscle contraction & action potential"
+     },
+     {
+      "id": "m2",
+      "label": "Sarcoplasmic reticulum calcium release"
+     },
+     {
+      "id": "m3",
+      "label": "Elevated intracellular AMP from adenylate kinase"
+     },
+     {
+      "id": "m4",
+      "label": "Allosteric activation of glycogen phosphorylase"
+     },
+     {
+      "id": "m5",
+      "label": "Rapid anaerobic glycolysis yielding ATP + lactate"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m4"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited metabolic myopathies impair muscle fuel utilization. McArdle disease (Glycogen storage disease Type V) is an autosomal recessive deficiency of **muscle glycogen phosphorylase** (myophosphorylase). Patients develop painful muscle cramps and fatigue during initial strenuous exercise. With continued rest or low-intensity exercise, a characteristic **second-wind** phenomenon occurs as increased blood flow delivers circulating free fatty acids and hepatic glucose to exercising muscle.",
+   "say": "McArdle disease is muscle glycogen phosphorylase deficiency, causing painful exercise-induced cramps and myoglobinuria. Patients demonstrate a second-wind phenomenon as circulating fatty acids bypass the glycogen block.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic myopathy",
+     "Enzymatic defect",
+     "Key diagnostic features"
+    ],
+    "rows": [
+     [
+      "McArdle disease (GSD V)",
+      "Muscle glycogen phosphorylase",
+      "Exercise cramps, second wind, flat lactate curve on forearm test"
+     ],
+     [
+      "Tarui disease (GSD VII)",
+      "Phosphofructokinase-1 (muscle M-isoform)",
+      "Exercise intolerance, cramps, mild hemolytic anemia"
+     ],
+     [
+      "Carnitine palmitoyltransferase II",
+      "CPT-II mitochondrial fatty acid transport",
+      "Prolonged exercise or fasting myoglobinuria, normal forearm lactate"
+     ],
+     [
+      "Mitochondrial myopathy (MELAS)",
+      "Mitochondrial tRNA-Leu mutation",
+      "Lactic acidosis, ragged-red fibers on Gomori trichrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe muscle breakdown causes life-threatening **rhabdomyolysis**. Massive myocyte necrosis releases intracellular contents into circulation, elevating serum creatine kinase above 5 to 50 times normal. Released **myoglobin** filters freely through glomeruli, precipitating with Tamm-Horsfall protein within distal tubules and generating toxic free radicals via ferrous iron, causing acute tubular necrosis. Aggressive intravenous isotonic saline hydration is required to maintain high urine output and prevent renal failure.",
+   "say": "Rhabdomyolysis releases massive amounts of creatine kinase and myoglobin into circulation. Myoglobin causes acute tubular necrosis through cast obstruction and heme iron cytotoxicity. Treatment mandates vigorous saline resuscitation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Trauma, crush injury, or prolonged ischemia"
+     },
+     {
+      "id": "r2",
+      "label": "Sarcolemmal rupture & calcium influx"
+     },
+     {
+      "id": "r3",
+      "label": "Massive CK, K+, and myoglobin release"
+     },
+     {
+      "id": "r4",
+      "label": "Myoglobin casts obstruct renal tubules"
+     },
+     {
+      "id": "r5",
+      "label": "Pigment nephropathy & acute kidney injury"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ],
+     [
+      "r4",
+      "r5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "45f6c315-4000-8000-45f6-c31512345678",
+  "22f5eb2c-4000-8000-22f5-eb2c12345678",
+  "e8774643-4000-8000-e877-464312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

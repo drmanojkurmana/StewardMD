@@ -1,0 +1,197 @@
+{
+ "module": "sur-head-injury",
+ "subject": "surgery",
+ "title": "Traumatic brain injury, intracranial hematomas, intracranial pressure monitoring, and herniation",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Brain Trauma Foundation TBI Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Epidural **hematoma** (EDH) typically results from traumatic skull fracture through the pterion, tearing the middle meningeal artery. Patients classic demonstrate a lucid interval: brief loss of consciousness, temporary lucidity, followed by rapid neurological deterioration with ipsilateral pupillary dilation and contralateral hemiparesis. Non-contrast cranial CT reveals a pathognomonic hyperdense biconvex, lenticular collection that does not cross cranial suture lines.",
+   "say": "Epidural hematoma classically arises from pterion fractures tearing the middle meningeal artery. Patients present with a lucid interval followed by rapid coma and pupillary dilation. Non-contrast CT demonstrates a biconvex lenticular hyperdensity that respects suture lines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Epidural hematoma (EDH)",
+     "Subdural hematoma (SDH)"
+    ],
+    "rows": [
+     [
+      "Vascular source",
+      "Middle meningeal artery / vein",
+      "Bridging cortical veins"
+     ],
+     [
+      "CT appearance",
+      "Biconvex / lenticular, hyperdense",
+      "Crescentic / concavo-convex collection"
+     ],
+     [
+      "Crosses sutures",
+      "No (limited by cranial periosteum)",
+      "Yes (spreads over hemisphere)"
+     ],
+     [
+      "Lucid interval",
+      "Classic presentation (up to 50%)",
+      "Rarely observed"
+     ],
+     [
+      "Emergency surgery",
+      "Craniotomy if volume over 30 mL or midline shift",
+      "Craniotomy if thickness over 10 mm or shift > 5 mm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Subdural **hematoma** (SDH) originates from deceleration shearing of bridging cortical veins bridging the cerebral cortex and dural venous sinuses. Acute SDH manifests within 72 hours of major trauma as a crescentic, concavo-convex hyperdense collection that crosses suture lines but is bounded by the falx and tentorium. Chronic SDH is common in elderly and alcoholic patients with cerebral atrophy, presenting with insidious cognitive decline.",
+   "say": "Subdural hematoma results from tearing of cortical bridging veins. Acute subdural hematomas appear on CT as crescentic collections crossing sutures, accompanied by underlying parenchymal contusion. Chronic hematomas occur in elderly patients following minor trauma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Rotational deceleration traumatic head injury"
+     },
+     {
+      "id": "h2",
+      "label": "Shearing and tear of cortical bridging veins"
+     },
+     {
+      "id": "h3",
+      "label": "Blood accumulates in potential subdural space"
+     },
+     {
+      "id": "h4",
+      "label": "Mass effect, midline shift, and tentorial herniation"
+     },
+     {
+      "id": "h5",
+      "label": "Urgent craniotomy evacuation and clot decompression"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ],
+     [
+      "h3",
+      "h4"
+     ],
+     [
+      "h4",
+      "h5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Monro-Kellie **doctrine** dictates that the rigid cranial vault holds a fixed total volume composed of brain parenchyma (80%), cerebrospinal fluid (10%), and blood (10%). An expanding mass lesion initially displaces CSF into the spinal subarachnoid space and shunts venous blood out of the skull. Once compensatory buffers are exhausted, small increments in mass volume produce exponential spikes in intracranial pressure (ICP), compromising cerebral perfusion pressure.",
+   "say": "The Monro-Kellie doctrine states the intracranial volume of brain, blood, and CSF is constant. Expansion of an intracranial mass initially displaces CSF and venous blood. Once spatial compensation is exhausted, intracranial pressure rises exponentially.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "Intracranial mass lesion expands"
+     },
+     {
+      "id": "k2",
+      "label": "CSF displaced into spinal canal & venous blood shunted"
+     },
+     {
+      "id": "k3",
+      "label": "Compensatory spatial reserve exhausted"
+     },
+     {
+      "id": "k4",
+      "label": "Exponential rise in intracranial pressure (ICP > 22 mmHg)"
+     },
+     {
+      "id": "k5",
+      "label": "Cerebral perfusion pressure falls below 60 mmHg"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2"
+     ],
+     [
+      "k2",
+      "k3"
+     ],
+     [
+      "k3",
+      "k4"
+     ],
+     [
+      "k4",
+      "k5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uncal **herniation** occurs when the medial temporal lobe uncus is forced across the rigid tentorial incisura. Compression of the adjacent third cranial nerve produces ipsilateral pupillary dilation and loss of light reflex. Compression of the ipsilateral cerebral peduncle generates contralateral hemiparesis. Paradoxical ipsilateral hemiparesis occurs when the contralateral peduncle is compressed against the opposite tentorial edge, an anatomical phenomenon termed Kernohan notch phenomenon.",
+   "say": "Uncal herniation forces the temporal uncus over the tentorial notch. Compression of the third cranial nerve causes ipsilateral pupil dilation, while cerebral peduncle compression causes contralateral hemiparesis. Kernohan notch compression causes false localizing ipsilateral motor weakness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Herniation syndrome",
+     "Displaced structure",
+     "Key clinical manifestation"
+    ],
+    "rows": [
+     [
+      "Uncal (transtentorial)",
+      "Medial temporal lobe uncus",
+      "Ipsilateral blown pupil, contralateral hemiparesis"
+     ],
+     [
+      "Central tentorial",
+      "Diencephalon and midbrain",
+      "Bilateral pinpoint pupils, Cheyne-Stokes breathing"
+     ],
+     [
+      "Subfalcine (cingulate)",
+      "Cingulate gyrus under falx",
+      "ACA compression with contralateral leg weakness"
+     ],
+     [
+      "Tonsillar",
+      "Cerebellar tonsils into foramen magnum",
+      "Medullary respiratory arrest and flaccid quadriplegia"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "92253e43-4000-8000-9225-3e4312345678",
+  "93253fd6-4000-8000-9325-3fd612345678",
+  "94254169-4000-8000-9425-416912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

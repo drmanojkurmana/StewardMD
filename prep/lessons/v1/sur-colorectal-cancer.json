@@ -1,0 +1,192 @@
+{
+ "module": "sur-colorectal-cancer",
+ "subject": "surgery",
+ "title": "Colorectal cancer: staging, total mesorectal excision, genetic syndromes, and multimodality therapy",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "NCCN Colorectal Cancer Guidelines"
+ ],
+ "steps": [
+  {
+   "tx": "Colorectal cancer (CRC) evolves primarily through the adenoma-carcinoma **sequence** driven by sequential genomic mutations: APC loss of function (chromosome 5q), activating KRAS mutations, DCC loss (18q), and p53 tumor suppressor inactivation (17p). Hereditary non-polyposis colorectal cancer (Lynch syndrome) arises from germline DNA mismatch repair gene defects (MLH1, MSH2, MSH6, PMS2) leading to microsatellite instability (MSI-high) and predominantly right-sided colon cancers.",
+   "say": "Colorectal carcinoma arises through the adenoma-carcinoma sequence involving APC, KRAS, and p53 mutations. Lynch syndrome results from DNA mismatch repair defects with microsatellite instability, producing predominantly right-sided colon cancers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Normal colonic mucosa with germline APC loss"
+     },
+     {
+      "id": "c2",
+      "label": "Hyperproliferative epithelium & early adenoma (K-ras)"
+     },
+     {
+      "id": "c3",
+      "label": "Intermediate adenoma with loss of 18q DCC"
+     },
+     {
+      "id": "c4",
+      "label": "Invasive carcinoma through p53 mutation & 17p loss"
+     },
+     {
+      "id": "c5",
+      "label": "Metastatic dissemination to regional nodes & liver"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ],
+     [
+      "c4",
+      "c5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical resection of colon cancer demands anatomical en bloc **hemicolectomy** with high vascular ligation of the feeding mesenteric vessels to ensure comprehensive lymphadenectomy. The American College of Surgeons mandates harvesting a minimum of 12 regional lymph nodes for accurate pathological nodal staging. Right hemicolectomy ligates the ileocolic and right colic vessels; left hemicolectomy ligates the left colic branch; sigmoid colectomy ligates the inferior mesenteric artery.",
+   "say": "Oncologic colon resection requires anatomical colectomy with high vascular ligation of feeding vessels. A minimum of 12 lymph nodes must be retrieved for accurate staging. Right hemicolectomy ligates the ileocolic vessels; left colectomy ligates the inferior mesenteric branches.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumor anatomical site",
+     "Standard surgical procedure",
+     "Vascular pedicles divided"
+    ],
+    "rows": [
+     [
+      "Cecum & ascending colon",
+      "Right hemicolectomy",
+      "Ileocolic, right colic, right branch of middle colic"
+     ],
+     [
+      "Hepatic flexure & transverse",
+      "Extended right hemicolectomy",
+      "Ileocolic, right colic, middle colic at origin"
+     ],
+     [
+      "Descending colon",
+      "Left hemicolectomy",
+      "Left colic artery, first sigmoid branches"
+     ],
+     [
+      "Sigmoid colon",
+      "Sigmoid colectomy",
+      "Inferior mesenteric artery or sigmoid branches"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rectal cancer surgical management is dictated by the principle of total **mesorectal** excision (TME). TME involves sharp dissection along the embryological holy plane between the visceral mesorectal fascia and the parietal presacral fascia, preserving pelvic autonomic nerves (hypogastric and splanchnic). Achieving an intact mesorectal envelope with negative circumferential resection margins (CRM > 1 mm) reduces local recurrence from 30 percent down to under 5 percent.",
+   "say": "Total mesorectal excision is the gold standard for rectal cancer surgery. Sharp dissection in the holy plane between visceral and parietal fascia yields an intact mesorectal envelope while sparing autonomic pelvic nerves and keeping circumferential margins clear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Identification of the avascular holy plane"
+     },
+     {
+      "id": "t2",
+      "label": "Sharp dissection between visceral & parietal presacral fascia"
+     },
+     {
+      "id": "t3",
+      "label": "Preservation of superior hypogastric & pelvic splanchnic nerves"
+     },
+     {
+      "id": "t4",
+      "label": "Complete excision of mesorectum 5 cm distal to tumor"
+     },
+     {
+      "id": "t5",
+      "label": "Confirm intact mesorectal fascia with CRM > 1 mm"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ],
+     [
+      "t4",
+      "t5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Locally advanced rectal cancer (cT3-T4 or node-positive) receives neoadjuvant **chemoradiation** or total neoadjuvant therapy (TNT) prior to surgical resection. Tumors located in the upper and middle rectum are treated with low anterior resection (LAR) with colorectal or coloanal anastomosis. For distal tumors directly invading the levator ani or anal sphincter complex, abdominoperineal resection (APR) is mandatory, removing the entire rectum, mesorectum, anal sphincter, and perineal skin with permanent colostomy.",
+   "say": "Locally advanced rectal cancer receives neoadjuvant chemoradiation before surgery. Middle and upper tumors undergo low anterior resection. Tumors invading the external anal sphincter require abdominoperineal resection with permanent end colostomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rectal procedure",
+     "Distal margin from dentate line",
+     "Sphincter preservation status"
+    ],
+    "rows": [
+     [
+      "Low anterior resection (LAR)",
+      "Greater than 1 to 2 cm above sphincters",
+      "Sphincter-preserving; coloanal anastomosis"
+     ],
+     [
+      "Abdominoperineal resection (APR)",
+      "Invades levator ani / external sphincter",
+      "Non-sphincter preserving; permanent end colostomy"
+     ],
+     [
+      "Hartmann procedure",
+      "Emergency setting / peritonitis / frail patient",
+      "Rectal stump closed, proximal end colostomy"
+     ],
+     [
+      "Transanal local excision (TEM)",
+      "pT1 low-risk tumors < 3 cm without nodal disease",
+      "Sphincter-preserving; organ-sparing approach"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "9b7626c8-4000-8000-9b76-26c812345678",
+  "9e762b81-4000-8000-9e76-2b8112345678",
+  "9d7629ee-4000-8000-9d76-29ee12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

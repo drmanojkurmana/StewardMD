@@ -1,0 +1,99 @@
+{
+ "module": "ana-liver-biliary",
+ "subject": "anatomy",
+ "title": "Hepatic lobular architecture, Couinaud segmentation and biliary drainage",
+ "minutes": 6,
+ "refs": [
+  "ALGrawany Anatomy & Physiology Made Easy 2026",
+  "Blumgart's Surgery of the Liver"
+ ],
+ "steps": [
+  {
+   "tx": "The **liver** is the largest internal organ and metabolic powerhouse, occupying the right hypochondrium and epigastrium. Functionally, it is partitioned according to the Couinaud classification into eight independent functional segments. Each Couinaud segment possesses its own dedicated portal triad branch (portal vein, hepatic artery, bile duct) and is drained by tributaries of the hepatic veins.",
+   "say": "The liver is partitioned into eight functional Couinaud segments. Each segment has its own portal triad pedicle containing an independent branch of the portal vein, hepatic artery and bile duct, allowing resections along anatomic boundaries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Couinaud segment",
+     "Functional division",
+     "Surgical landmark / boundary"
+    ],
+    "rows": [
+     [
+      "Segment I",
+      "Caudate lobe",
+      "Receives blood from both triads; drains directly into IVC"
+     ],
+     [
+      "Segments II, III, IV",
+      "Left functional liver",
+      "Divided by falciform ligament and left hepatic vein"
+     ],
+     [
+      "Segments V, VI, VII, VIII",
+      "Right functional liver",
+      "Divided into anterior and posterior sectors by right hepatic vein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the microscopic level, the **hepatic lobule** consists of cords of hepatocytes radiating from a central vein. At the periphery, portal triads situated within portal tracts contain a hepatic arteriole (delivering oxygenated blood), a portal venule (delivering nutrient-rich venous blood from the intestines), and a bile ductule. Blood mixes in fenestrated hepatic sinusoids lined by phagocytic Kupffer cells.",
+   "say": "Microscopically, hepatic lobules consist of hepatocyte cords radiating from a central vein. Portal triads at the periphery deliver arterial and portal venous blood into fenestrated sinusoids lined by resident Kupffer macrophages before draining into central veins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic lobule",
+     "points": [
+      "Hexagonal unit centered on central vein",
+      "Emphasizes endocrine and vascular drainage",
+      "Sinusoidal blood flows centripetally to central vein",
+      "Bile flows centrifugally toward portal triads"
+     ]
+    },
+    "right": {
+     "title": "Hepatic acinus (Rappaport)",
+     "points": [
+      "Diamond shaped unit centered on portal tract",
+      "Emphasizes oxygenation and metabolic gradients",
+      "Zone 1 (periportal) best oxygenated; resists ischemia",
+      "Zone 3 (centrilobular) most vulnerable to toxic/ischemic injury"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The space of Disse lies between sinusoidal endothelial cells and hepatocytes, housing **hepatic stellate cells** (Ito cells). Stellate cells store vitamin A in physiological states. In chronic hepatic injury and inflammation, stellate cells transdifferentiate into contractile myofibroblasts, synthesizing abundant collagen type I and III, which drives liver fibrosis and portal hypertension.",
+   "say": "The space of Disse separates endothelial cells from hepatocytes, containing hepatic stellate cells. Stellate cells store vitamin A, but in chronic liver inflammation they transform into myofibroblasts, secreting collagen that drives progressive hepatic cirrhosis.",
+   "vis": null
+  },
+  {
+   "tx": "Bile is synthesized by hepatocytes and secreted into intercellular bile canaliculi, draining into intrahepatic bile ductules. These join to form right and left hepatic ducts, uniting at the porta hepatis into the **common hepatic duct**. The cystic duct from the gallbladder joins the common hepatic duct to form the common bile duct, which traverses the hepatoduodenal ligament.",
+   "say": "Bile drains from canaliculi into right and left hepatic ducts, forming the common hepatic duct at the liver hilum. The cystic duct joins the common hepatic duct to form the common bile duct, descending within the hepatoduodenal ligament to the duodenum.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-liver-gross.png",
+    "alt": "Hepatic architecture and biliary branching",
+    "caption": "Hepatic surface contours and biliary branching patterns displaying portal triad entry and inferior vena cava."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "76f643d6-4000-8000-76f6-43d612345678",
+  "75f64243-4000-8000-75f6-424312345678",
+  "74f640b0-4000-8000-74f6-40b012345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-valvular-heart",
+ "subject": "pathology",
+ "title": "Rheumatic, valvular heart disease and endocarditis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Rheumatic fever** follows group A streptococcal pharyngitis in susceptible hosts when cross reactive immunity injures heart, joints, skin and brain weeks later. Carditis with Aschoff bodies is its pathological signature, and repeated attacks scar valves into chronic rheumatic heart disease. Jones criteria organise the clinical diagnosis while echocardiography reveals subclinical carditis.",
+   "say": "Rheumatic fever follows strep throat by weeks through cross reactive immunity. Aschoff bodies mark carditis. Repeated attacks scar valves permanently. Jones criteria organise diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "The **Aschoff body** is a perivascular granulomatous focus with T cells, plasma cells and distinctive Anitschkov macrophages whose chromatin resembles a caterpillar, plus occasional multinucleate giant cells. Acute valvulitis warps leaflets with small vegetations along closure lines without destruction. Chronic healing fuses commissures, thickens chordae and narrows the mitral orifice into a fish mouth shape.",
+   "say": "Aschoff bodies contain caterpillar chromatin macrophages near vessels. Acute vegetations sit on closure lines without destroying valves. Chronic fusion narrows the mitral valve into a fish mouth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Valve lesion",
+     "Dominant chronic effect",
+     "Classic clue"
+    ],
+    "rows": [
+     [
+      "Mitral stenosis",
+      "Left atrial pressure overload",
+      "Opening snap, diastolic rumble, atrial fibrillation"
+     ],
+     [
+      "Mitral regurgitation",
+      "Left sided volume overload",
+      "Pansystolic murmur to axilla"
+     ],
+     [
+      "Aortic stenosis (degenerative)",
+      "Pressure overload hypertrophy",
+      "Slow rising pulse, exertional syncope in elderly"
+     ],
+     [
+      "Aortic regurgitation",
+      "Volume overload, wide pulse pressure",
+      "Early diastolic murmur, collapsing pulse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mitral stenosis** from rheumatic fusion raises left atrial pressure, causing pulmonary congestion, atrial fibrillation with left atrial thrombus and pulmonary hypertension that burdens the right ventricle. Haemoptysis, hoarseness from recurrent laryngeal compression and emboli complete the syndrome. Balloon valvuloplasty suits pliable non calcified valves without regurgitation or thrombus.",
+   "say": "Fused mitral leaflets trap pressure in the left atrium, flooding lungs and triggering atrial fibrillation and clots. Lungs, rhythm and right heart fail in sequence. Pliable valves suit balloon opening.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rheumatic vegetations",
+     "points": [
+      "Tiny, along closure lines",
+      "Non destructive, sterile",
+      "In acute rheumatic valvulitis",
+      "Rarely embolise significantly"
+     ]
+    },
+    "right": {
+     "title": "Infective vegetations",
+     "points": [
+      "Large, friable, destructive",
+      "Infected with organisms",
+      "Destroy leaflets and embolise",
+      "Need prolonged antibiotics, sometimes surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Infective endocarditis** seeds damaged or prosthetic valves with bacteraemia, forming friable vegetations of fibrin, platelets and organisms that destroy tissue and embolise. Virulent Staphylococcus aureus attacks even normal valves acutely, while viridans streptococci smoulder subacutely on damaged valves. Duke criteria combine cultures, echocardiography and clinical phenomena for diagnosis.",
+   "say": "Bacteria seed valves and build friable vegetations that destroy and embolise. Staph aureus is acute and virulent; viridans is subacute on damaged valves. Duke criteria structure diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "Calcific **aortic stenosis** of ageing wears and calcifies trileaflet or congenital bicuspid valves, obstructing outflow until angina, syncope and failure herald risk. Myxomatous mitral prolapse instead balloons redundant leaflets into the atrium, mostly benign but predisposing to regurgitation and endocarditis in severe forms. Carcinoid and drug induced valvulopathies remind that valves mirror systemic disease.",
+   "say": "Ageing calcifies aortic valves until angina, syncope and failure appear. Bicuspid valves calcify earlier. Mitral prolapse balloons leaflets backward. Valves reflect systemic disease patterns.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-141",
+  "bk2-pat-142",
+  "bk2-pat-143",
+  "bk2-pat-144",
+  "bk2-pat-145",
+  "bk2-pat-146",
+  "bk2-pat-147",
+  "bk2-pat-148",
+  "bk2-pat-149",
+  "bk2-pat-150"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

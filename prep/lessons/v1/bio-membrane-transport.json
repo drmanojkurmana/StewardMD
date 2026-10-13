@@ -1,0 +1,175 @@
+{
+ "module": "bio-membrane-transport",
+ "subject": "biochemistry",
+ "title": "Biological membranes: fluid mosaic model, lipid rafts and solute transport mechanisms",
+ "minutes": 6,
+ "refs": [
+  "Lehninger Principles of Biochemistry 8th ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "The **fluid mosaic** model describes biological membranes as dynamic two-dimensional lipid bilayers studded with integral and peripheral proteins. Phospholipids display rapid lateral diffusion within their monolayer but rarely flip-flop spontaneously between leaflets. Asymmetry is actively preserved by ATP-dependent flippases, floppases, and calcium-activated scramblases. Phosphatidylserine is normally restricted to the inner leaflet; its exteriorization serves as a macrophage phagocytosis signal.",
+   "say": "Biological membranes are dynamic bilayers with integral and peripheral proteins. Phospholipids diffuse laterally within leaflets but rarely flip-flop spontaneously. Flippases and floppases maintain leaflet asymmetry. Phosphatidylserine stays on the inner leaflet; external exposure signals macrophage clearance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Translocase enzyme",
+     "Direction of lipid movement",
+     "Energy requirement"
+    ],
+    "rows": [
+     [
+      "Flippase (P-type ATPase)",
+      "Outer leaflet to inner leaflet",
+      "ATP hydrolysis required"
+     ],
+     [
+      "Floppase (ABC transporter)",
+      "Inner leaflet to outer leaflet",
+      "ATP hydrolysis required"
+     ],
+     [
+      "Scramblase",
+      "Bidirectional non-specific scrambling",
+      "Calcium-activated, ATP-independent"
+     ],
+     [
+      "Cholesterol flip-flop",
+      "Rapid spontaneous equilibration",
+      "Unassisted, rapid diffusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Specialized microdomains called **lipid rafts** float within the liquid-disordered membrane matrix. Enriched in cholesterol, sphingomyelin, and glycosphingolipids, rafts exist in a tightly packed liquid-ordered phase. They serve as platforms that concentrate signal transduction complexes, GPI-anchored proteins, and receptor tyrosine kinases. Rafts also facilitate endocytosis and mediate entry pathways for pathogens including human immunodeficiency virus and cholera toxin.",
+   "say": "Lipid rafts are ordered microdomains enriched in cholesterol, sphingomyelin, and glycolipids. They float within fluid membranes, clustering signaling complexes, GPI-anchored proteins, and receptor kinases. Rafts organize transmembrane signaling and mediate entry of cholera toxin and HIV.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lipid raft composition",
+     "points": [
+      "High cholesterol content",
+      "Saturated sphingolipids and gangliosides",
+      "GPI-anchored surface proteins",
+      "Caveolins and flotillin scaffold markers"
+     ]
+    },
+    "right": {
+     "title": "Surrounding bulk bilayer",
+     "points": [
+      "Kinked unsaturated glycerophospholipids",
+      "Liquid-disordered fluid phase",
+      "Lower cholesterol packing density",
+      "High lateral solute mobility"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Solute movement across membranes occurs via **active** or passive mechanisms. Primary active transport directly hydrolyzes ATP to move solutes against electrochemical gradients, exemplified by the sodium-potassium ATPase, which exports three sodium ions and imports two potassium ions per ATP cycle. Secondary active transport couples downhill solute movement to drive uphill transport of another, as seen in intestinal sodium-glucose cotransporters.",
+   "say": "Solute transport is active or passive. Primary active transport uses ATP directly, as in the sodium-potassium pump moving three sodium out and two potassium in. Secondary active transport harnesses existing ion gradients to drive co-transport, seen in intestinal sodium-glucose transporters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Transport category",
+     "Energy mechanism",
+     "Prototypic physiological example"
+    ],
+    "rows": [
+     [
+      "Simple diffusion",
+      "Passive thermal gradient",
+      "Oxygen, carbon dioxide, ethanol, steroid hormones"
+     ],
+     [
+      "Facilitated diffusion",
+      "Passive carrier or channel",
+      "GLUT1 in RBCs, GLUT4 in muscle, aquaporins"
+     ],
+     [
+      "Primary active transport",
+      "Direct ATP hydrolysis",
+      "Na+/K+-ATPase, SERCA Ca2+-ATPase, H+/K+-ATPase"
+     ],
+     [
+      "Secondary active transport",
+      "Electrochemical ion gradient",
+      "SGLT1 Na+/glucose, NCX Na+/Ca2+ antiporter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Genetic defects in membrane channels and transporters produce devastating **channelopathies**. Cystic fibrosis arises from mutations in the CFTR gene, an ATP-binding cassette chloride channel regulating epithelial secretions. Loss of CFTR causes dehydrated thick mucus across respiratory and gastrointestinal tracts. Other channelopathies include hypokalemic periodic paralysis from calcium channel defects and long QT syndromes from cardiac potassium channel mutations.",
+   "say": "Transporter and channel mutations cause channelopathies. Cystic fibrosis results from CFTR gene defects, impairing chloride and bicarbonate secretion to cause thick mucosal obstructions. Cardiac channelopathies like long QT syndrome cause lethal arrhythmias from potassium or sodium channel defects.",
+   "vis": {
+    "kind": "flow",
+    "title": "CFTR pathophysiology cascade",
+    "nodes": [
+     {
+      "id": "mut",
+      "label": "CFTR F508del mutation"
+     },
+     {
+      "id": "er",
+      "label": "Misfolding & ERAD degradation"
+     },
+     {
+      "id": "chl",
+      "label": "Absent apical chloride flux"
+     },
+     {
+      "id": "h2o",
+      "label": "Dehydrated luminal mucus"
+     },
+     {
+      "id": "org",
+      "label": "Bronchiectasis & pancreatic failure"
+     }
+    ],
+    "edges": [
+     [
+      "mut",
+      "er",
+      "Class II processing defect"
+     ],
+     [
+      "er",
+      "chl",
+      "No surface channel"
+     ],
+     [
+      "chl",
+      "h2o",
+      "Hyperabsorption of Na+"
+     ],
+     [
+      "h2o",
+      "org",
+      "Bacterial colonization"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "0a552412-4000-8000-0a55-241212345678",
+  "0955227f-4000-8000-0955-227f12345678",
+  "085520ec-4000-8000-0855-20ec12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

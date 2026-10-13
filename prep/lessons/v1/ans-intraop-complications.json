@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "ans-intraop-complications",
+ "subject": "anaesthesia",
+ "title": "Malignant hyperthermia: stop triggers, cool, dantrolene, critical care",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Malignant hyperthermia** is a rare, inherited muscle reaction to triggering anaesthetic agents, presenting with rising carbon dioxide, rapid heart rate, muscle rigidity, soaring temperature and acidosis. The first actions are to **stop the trigger, call for help, hyperventilate with oxygen and give dantrolene per protocol**, starting active cooling and critical-care support (Malignant Hyperthermia Association guidance).",
+   "say": "Rising carbon dioxide, rigidity and soaring temperature under anaesthesia mean stop the trigger, call for help and give protocol dantrolene.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rising CO2 + rigidity"
+     },
+     {
+      "id": "b",
+      "label": "Stop trigger + call help"
+     },
+     {
+      "id": "c",
+      "label": "Dantrolene + cooling + ICU"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Temperature in malignant hyperthermia can climb extremely fast, so cooling, cold fluids as directed, and repeated blood gases, potassium and clotting checks run alongside dantrolene. Hyperkalaemia and muscle breakdown threaten heart and kidneys. The episode is documented, the patient and family are referred for specialist testing and counselling, and the trigger is recorded prominently so it is never repeated.",
+   "say": "Cool actively, recheck gases, potassium and clotting, and refer patient and family for specialist testing with the trigger recorded prominently.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parallel track",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Cooling + gases",
+      "Limit organ injury"
+     ],
+     [
+      "Family referral",
+      "Inherited risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A personal or family history of anaesthetic catastrophe, unexplained theatre death or muscle disease must surface at pre-operative assessment and change the anaesthetic plan. Suspected episodes are never re-challenged to confirm them. Exact dantrolene dosing follows the current protocol chart at the machine, not memory, and is flagged here rather than guessed.",
+   "say": "Anaesthetic catastrophe in the family changes the plan. Dosing follows the protocol chart, never memory.",
+   "vis": null
+  }
+ ]
+}

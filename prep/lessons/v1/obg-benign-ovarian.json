@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-benign-ovarian",
+ "subject": "obstetrics-gynaecology",
+ "title": "Benign ovarian masses, mature cystic teratoma and adnexal torsion emergency",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Adnexal masses in reproductive-age women are predominantly benign and require differentiation between physiological and neoplastic processes. **Functional ovarian cysts** arise from disruptions of normal follicular maturation. Follicular cysts develop when a mature dominant follicle fails to rupture, whereas corpus luteum cysts result from failure of involution following normal ovulation, frequently presenting with localized pelvic pain or delayed menses.",
+   "say": "Adnexal masses in reproductive-age women are mostly benign. Functional cysts include follicular cysts from unruptured follicles, and corpus luteum cysts from failed involution. Most functional cysts regress spontaneously within two to three months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cyst type",
+     "Histological origin",
+     "Ultrasound appearance",
+     "Natural history & management"
+    ],
+    "rows": [
+     [
+      "Follicular cyst",
+      "Unruptured Graafian follicle",
+      "Thin-walled, unilocular, anechoic (< 8 cm)",
+      "Spontaneous regression in 6-8 weeks"
+     ],
+     [
+      "Corpus luteum cyst",
+      "Persistent vascular corpus luteum",
+      "Thick wall with circumferential 'ring of fire' Doppler",
+      "Resolves spontaneously; watch for rupture"
+     ],
+     [
+      "Theca lutein cyst",
+      "Ovarian hyperstimulation by hCG",
+      "Bilateral, multiloculated, large ovaries",
+      "Regresses after evacuation of molar pregnancy"
+     ],
+     [
+      "Endometrioma",
+      "Ectopic ovarian endometrium",
+      "Homogenous low-level 'ground-glass' echogenicity",
+      "Medical suppression or laparoscopic cystectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common benign ovarian neoplasm in women under thirty is the **mature cystic teratoma**, commonly termed a dermoid cyst. Originating from totipotent primordial germ cells, it contains mature tissues from all three embryonic germ layers: ectoderm (hair, sebaceous glands, teeth), mesoderm (bone, cartilage, fat), and endoderm (thyroid, respiratory epithelium). Ultrasound classically reveals acoustic shadowing from an echogenic Rokitansky protuberance and fat-fluid levels.",
+   "say": "The most common benign ovarian tumor in young women is the mature cystic teratoma, or dermoid cyst. It contains mature tissues from all three germ cell layers, such as hair, teeth, and fat. Ultrasound classically shows an echogenic Rokitansky nodule with acoustic shadowing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mature cystic teratoma (Dermoid)",
+     "points": [
+      "Germ cell origin, accounts for 70% of benign ovarian tumors < 30 years",
+      "Ten to fifteen percent are bilateral",
+      "Rokitansky protuberance with hair, sebaceous fluid and teeth",
+      "Malignant transformation in 1-2% (squamous cell carcinoma)"
+     ]
+    },
+    "right": {
+     "title": "Serous / Mucinous cystadenoma",
+     "points": [
+      "Surface epithelial-stromal origin, common in perimenopause",
+      "Serous: unilocular, thin watery fluid, psammoma bodies",
+      "Mucinous: multilocular, thick gelatinous fluid, can reach huge size",
+      "Risk of pseudomyxoma peritonei if mucinous cyst ruptures"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Adnexal torsion** constitutes a true gynaecological emergency characterized by twisting of the ovary and fallopian tube on their infundibulopelvic ligament vascular axis. Torsion occurs preferentially in moderately enlarged, mobile benign masses between five and ten centimeters. The twisting selectively compresses low-pressure venous and lymphatic drainage first, inducing massive ovarian congestion, edema, and parenchymal hemorrhage before arterial thrombosis terminates perfusion.",
+   "say": "Adnexal torsion is an acute surgical emergency where the ovary twists on its vascular pedicle. It occurs in mobile cysts between five and ten centimeters. Twisting blocks venous outflow first, causing severe edema and hemorrhage before arterial perfusion stops.",
+   "vis": null
+  },
+  {
+   "tx": "Emergency management of adnexal torsion requires immediate **diagnostic laparoscopy and conservative detorsion**. Even when the ovary appears bluish-black and severely congested, surgical untwisting with cystectomy or cyst aspiration preserves viable follicular function in over ninety percent of patients. Historical fears that detorsion releases fatal pulmonary thromboemboli have been thoroughly disproven, and routine oophorectomy is strictly contraindicated in reproductive-age women.",
+   "say": "Emergency treatment of torsion is prompt laparoscopy and detorsion. Even a dark, congested ovary often recovers follicular function after untwisting. Fears of blood clots traveling to the lungs have been disproven, making conservative detorsion standard.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Surgical maneuver",
+     "Underlying clinical rationale",
+     "Outcome objective"
+    ],
+    "rows": [
+     [
+      "1. Assessment",
+      "Laparoscopic inspection of adnexa",
+      "Confirm number of twists and tissue viable margin",
+      "Exclude malignancy or necrosis"
+     ],
+     [
+      "2. Detorsion",
+      "Careful untwisting of ovarian pedicle",
+      "Restores venous drainage and arterial inflow",
+      "Follicular salvage in > 90%"
+     ],
+     [
+      "3. Viability wait",
+      "Observe ovary for 10-15 minutes",
+      "Reperfusion pink blush often appears",
+      "Document vascular recovery"
+     ],
+     [
+      "4. Cystectomy",
+      "Elective cystectomy at index or interval surgery",
+      "Removes underlying mass predisposing to torsion",
+      "Prevents recurrence"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-obg-061",
+  "bk2-obg-062",
+  "bk2-obg-063",
+  "bk2-obg-064",
+  "bk2-obg-065",
+  "bk2-obg-066",
+  "bk2-obg-067",
+  "bk2-obg-068",
+  "bk2-obg-069",
+  "bk2-obg-070"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-atherosclerosis-aneurysm",
+ "subject": "pathology",
+ "title": "Atherosclerosis, hypertension and aneurysms",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Atherosclerosis** is a chronic inflammatory fibroproliferative response of large and medium arteries to endothelial injury, lipids and immune activation. The mature atheroma has a fibrous cap over a necrotic lipid core with cholesterol clefts, foamy macrophages and calcification. Lesions begin as fatty streaks in youth and complicate decades later by rupture, erosion, aneurysm or stenosis.",
+   "say": "Atherosclerosis is a slow inflammatory arterial disease forming plaques with fibrous caps over lipid cores. Fatty streaks start young. Rupture, erosion and stenosis cause events decades later.",
+   "vis": null
+  },
+  {
+   "tx": "Endothelial dysfunction from hypertension, smoking, diabetes and hyperlipidaemia permits **LDL entry and oxidation** in the intima. Monocytes follow, become macrophages and gorge on oxidised lipid as foam cells, while T cells amplify inflammation. Smooth muscle cells migrate and lay down the fibrous cap, so plaque stability depends on cap strength versus core inflammation.",
+   "say": "Injured endothelium lets LDL enter and oxidise. Macrophages become foam cells. Smooth muscle builds the fibrous cap. Stable plaques have thick caps; unstable ones are inflamed and thin capped.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stable plaque",
+     "points": [
+      "Thick fibrous cap",
+      "Small lipid core",
+      "Causes chronic stenosis and angina",
+      "Less inflammation"
+     ]
+    },
+    "right": {
+     "title": "Vulnerable plaque",
+     "points": [
+      "Thin cap, large necrotic core",
+      "Dense macrophage inflammation",
+      "Ruptures causing acute thrombosis",
+      "Often only moderately stenotic before events"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Plaque rupture exposes collagen and tissue factor, triggering platelet thrombosis that occludes the artery within minutes. **Plaque erosion** over proteoglycan rich lesions causes thrombosis without frank rupture, more often in younger women and smokers. Healed ruptures layer new tissue onto plaques, explaining stepwise stenosis growth between silent events.",
+   "say": "Rupture exposes thrombogenic core and clots the artery in minutes. Erosion clots without rupture, often in younger smokers. Healed silent ruptures grow stenosis stepwise.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypertension** injures vessels through pressure and angiotensin driven remodelling, producing hyaline arteriolosclerosis in benign disease and hyperplastic onion skin change with fibrinoid necrosis in malignant hypertension. Sustained pressure hypertrophies the left ventricle, then dilates and fails it. Retinal, renal and cerebral small vessel damage define its target organ signature in exam stems.",
+   "say": "Hypertension thickens small arteries and hypertrophies the left ventricle. Malignant disease adds fibrinoid necrosis and onion skin change. Eyes, kidneys and brain show target organ damage.",
+   "vis": null
+  },
+  {
+   "tx": "An **aneurysm** is a permanent localised arterial dilation from wall weakening, atherosclerotic in most abdominal aortic cases below the renal arteries. Rupture risk rises steeply with diameter, and leaking aneurysms cause pain with hypotension demanding emergency repair. Aortic dissection instead splits the media with an intimal tear, creating a false lumen classically in Marfan or hypertensive aortas.",
+   "say": "Aneurysms are weakened dilations rupturing more as diameter grows. Abdominal aortic aneurysm sits below renal arteries. Dissection splits the media through an intimal tear, a different emergency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Wall problem",
+     "Classic site or cause"
+    ],
+    "rows": [
+     [
+      "True aneurysm",
+      "All wall layers dilated but intact",
+      "Infrarenal aorta, atherosclerosis"
+     ],
+     [
+      "False aneurysm",
+      "Wall breach contained by haematoma",
+      "After trauma or arterial puncture"
+     ],
+     [
+      "Dissection",
+      "Blood splits the media",
+      "Ascending aorta tear; Marfan, hypertension"
+     ],
+     [
+      "Berry aneurysm",
+      "Focal saccular outpouching",
+      "Circle of Willis bifurcations; subarachnoid bleed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-121",
+  "bk2-pat-122",
+  "bk2-pat-123",
+  "bk2-pat-124",
+  "bk2-pat-125",
+  "bk2-pat-126",
+  "bk2-pat-127",
+  "bk2-pat-128",
+  "bk2-pat-129",
+  "bk2-pat-130"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

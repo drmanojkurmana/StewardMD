@@ -1,0 +1,757 @@
+{
+ "topic": "med-cns-infections",
+ "set": "gap1013c",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap801",
+   "q": "An unwell febrile teenager has headache, neck stiffness and a non-blanching rash. First treatment priority?",
+   "o": [
+    "Protocol antibiotics without letting lumbar puncture or imaging delay them",
+    "Lumbar puncture before any antibiotic",
+    "Discharge with painkillers",
+    "Waiting for culture results"
+   ],
+   "a": 0,
+   "exp": "Suspected meningitis gets antibiotics fast; tests must not delay them (NICE NG240).",
+   "r": [
+    "Correct: Antibiotics first.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Antibiotics first.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "antibiotics"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Antibiotics first.",
+    "others": {
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Antibiotics do not wait for the needle.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Antibiotics first.",
+    "rev": "Suspected meningitis gets antibiotics fast; tests must not delay them (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap802",
+   "q": "Lumbar puncture is deferred with which feature?",
+   "o": [
+    "A mild headache alone in a well patient",
+    "Reduced consciousness, seizures, focal signs or shock, per senior assessment",
+    "A normal temperature",
+    "An early rash alone"
+   ],
+   "a": 1,
+   "exp": "Low consciousness, seizures, focal signs or shock defer puncture (NICE NG240).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: LP deferral.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "LP deferral.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "lp"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "LP deferral.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Sick brain, deferred needle.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "LP deferral.",
+    "rev": "Low consciousness, seizures, focal signs or shock defer puncture (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap803",
+   "q": "A baby with fever feeds poorly, is irritable and has a bulging fontanelle. This suggests what?",
+   "o": [
+    "Normal teething",
+    "Simple colic",
+    "Meningitis in infancy, needing urgent assessment",
+    "Hunger only"
+   ],
+   "a": 2,
+   "exp": "Infant meningitis shows feeding, irritability and fontanelle signs (NICE NG240).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Infant meningitis.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Infant meningitis.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "infant"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Infant meningitis.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Babies show it differently.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Infant meningitis.",
+    "rev": "Infant meningitis shows feeding, irritability and fontanelle signs (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap804",
+   "q": "A spreading purpuric rash with a shocked child is managed how?",
+   "o": [
+    "Photography and routine review",
+    "Discharge after fluids by mouth",
+    "Waiting for blood cultures before acting",
+    "Resuscitation first, alongside antibiotics and senior help"
+   ],
+   "a": 3,
+   "exp": "Meningococcal shock is resuscitation first (NICE NG240).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Meningococcal shock."
+   ],
+   "kp": "Meningococcal shock.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "shock"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Meningococcal shock.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Purpura plus shock means resuscitate.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Meningococcal shock.",
+    "rev": "Meningococcal shock is resuscitation first (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap805",
+   "q": "Close contacts of meningococcal disease are handled how?",
+   "o": [
+    "By ignoring them",
+    "Through public-health advice on preventive treatment",
+    "With universal hospital admission",
+    "By the family alone without advice"
+   ],
+   "a": 1,
+   "exp": "Contact prophylaxis follows public-health advice (NICE NG240).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Contact management.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Contact management.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "contacts"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Contact management.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Contacts via public health.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Contact management.",
+    "rev": "Contact prophylaxis follows public-health advice (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap806",
+   "q": "What is documented precisely in meningitis care?",
+   "o": [
+    "Antibiotic times, alongside observations and response",
+    "Only the rash description",
+    "Only the ward",
+    "Meal times"
+   ],
+   "a": 0,
+   "exp": "Antibiotic timing is documented because delay drives outcome (NICE NG240).",
+   "r": [
+    "Correct: Meningitis documentation.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Meningitis documentation.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "documentation"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Meningitis documentation.",
+    "others": {
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Time the antibiotics.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Meningitis documentation.",
+    "rev": "Antibiotic timing is documented because delay drives outcome (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap807",
+   "q": "Older adults with meningitis may present mainly with what?",
+   "o": [
+    "Neck stiffness in all cases",
+    "A rash in all cases",
+    "Photophobia alone",
+    "Confusion, with few classic signs"
+   ],
+   "a": 3,
+   "exp": "Older adults often show confusion without classic signs (NICE NG240).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Atypical meningitis."
+   ],
+   "kp": "Atypical meningitis.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "elderly"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Atypical meningitis.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Confusion can be the meningitis.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Atypical meningitis.",
+    "rev": "Older adults often show confusion without classic signs (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap808",
+   "q": "Dexamethasone in bacterial meningitis is used how?",
+   "o": [
+    "Instead of antibiotics",
+    "For all viral illness",
+    "Where indicated, per current protocol alongside antibiotics",
+    "Without senior input"
+   ],
+   "a": 2,
+   "exp": "Steroids accompany antibiotics only where protocol indicates (NICE NG240).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Dexamethasone use.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Dexamethasone use.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "steroids"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Dexamethasone use.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Steroids by protocol, not instead.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Dexamethasone use.",
+    "rev": "Steroids accompany antibiotics only where protocol indicates (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap809",
+   "q": "Meningitis notification and isolation follow what?",
+   "o": [
+    "Family preference",
+    "Local and public-health requirements, arranged promptly",
+    "No notification ever",
+    "Discharge paperwork only"
+   ],
+   "a": 1,
+   "exp": "Notification and isolation are prompt public-health duties (NICE NG240).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Notification.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Notification.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "public-health"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Notification.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Notify and isolate as required.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Notification.",
+    "rev": "Notification and isolation are prompt public-health duties (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap810",
+   "q": "Recovery follow-up after meningitis checks what?",
+   "o": [
+    "Hearing only in adults",
+    "Nothing routinely",
+    "Hearing, learning and limb complications",
+    "Vision alone"
+   ],
+   "a": 2,
+   "exp": "Follow-up covers hearing, learning and limb sequelae (NICE NG240).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Meningitis follow-up.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Meningitis follow-up.",
+   "t": "med-cns-infections",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "meningitis",
+    "followup"
+   ],
+   "source": "NICE NG240 meningitis and meningococcal disease",
+   "x": {
+    "key": "Meningitis follow-up.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Follow up what meningitis damages.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Meningitis follow-up.",
+    "rev": "Follow-up covers hearing, learning and limb sequelae (NICE NG240).",
+    "next": {
+     "concept": "med-cns-infections",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG240 meningitis and meningococcal disease",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-cns-infections"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

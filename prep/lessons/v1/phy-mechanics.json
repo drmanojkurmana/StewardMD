@@ -1,0 +1,106 @@
+{
+  "module": "phy-mechanics",
+  "subject": "physiology",
+  "title": "Mechanics of breathing, lung compliance and airway resistance",
+  "minutes": 6,
+  "refs": [
+    "Guyton and Hall Textbook of Medical Physiology",
+    "West's Respiratory Physiology"
+  ],
+  "steps": [
+    {
+      "tx": "During quiet **inspiration**, contraction of the dome-shaped diaphragm expands the vertical thoracic dimension, while external intercostal muscles elevate the rib cage. This expansion lowers intrapleural pressure from approximately negative five to negative eight centimeters of water. The resulting alveolar subatmospheric pressure pulls air into the lungs. In contrast, quiet **expiration** is an entirely passive mechanical process driven by elastic recoil of lung parenchyma.",
+      "say": "During quiet inspiration, contraction of the diaphragm expands the vertical thorax, while external intercostals elevate ribs. This expansion lowers intrapleural pressure from negative five to negative eight centimeters of water. The resulting subatmospheric pressure pulls air inward. Quiet expiration is passive, driven by elastic recoil of lung parenchyma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Respiratory phase",
+          "Primary muscles",
+          "Intrapleural pressure change"
+        ],
+        "rows": [
+          [
+            "Quiet inspiration",
+            "Diaphragm and external intercostals",
+            "Drops to -8 cm H2O"
+          ],
+          [
+            "Forced inspiration",
+            "Scalenes and sternocleidomastoids",
+            "Drops below -12 cm H2O"
+          ],
+          [
+            "Quiet expiration",
+            "None (passive elastic recoil)",
+            "Returns to -5 cm H2O"
+          ],
+          [
+            "Forced expiration",
+            "Rectus abdominis and internal intercostals",
+            "Becomes positive (+10 cm H2O)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lung **compliance** reflects the change in pulmonary volume per unit change in distending transpulmonary pressure. High compliance means the lungs expand easily, as in pulmonary emphysema where alveolar septal elastin destruction eliminates recoil. Low compliance means stiff lungs requiring high distending pressures, characteristic of neonatal respiratory distress syndrome and acute idiopathic pulmonary fibrosis. Surfactant production by alveolar type two cells maintains normal compliance.",
+      "say": "Lung compliance reflects pulmonary volume change per unit change in distending pressure. High compliance means the lungs expand easily, as in pulmonary emphysema where elastin destruction eliminates recoil. Low compliance means stiff lungs requiring high distending pressures, characteristic of respiratory distress syndrome and pulmonary fibrosis. Surfactant maintains normal compliance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High lung compliance",
+          "points": [
+            "Seen in pulmonary emphysema",
+            "Destruction of alveolar elastin fibres",
+            "Loss of elastic recoil pressure",
+            "Air trapping and barrel chest deformity"
+          ]
+        },
+        "right": {
+          "title": "Low lung compliance",
+          "points": [
+            "Seen in acute respiratory distress and fibrosis",
+            "Deficiency of pulmonary surfactant",
+            "Stiff lungs with increased work of breathing",
+            "Rapid shallow tachypneic breathing pattern"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pulmonary **surfactant** is a complex mixture of dipalmitoylphosphatidylcholine and surfactant proteins secreted by alveolar type two pneumocytes. By law of Laplace, collapsing pressure equals two times surface tension divided by radius. Without surfactant, small alveoli generate higher collapsing pressure than large alveoli, emptying into them and collapsing. Surfactant molecules concentrate more densely in shrinking alveoli, decreasing surface tension proportionally and preventing diffuse atelectasis.",
+      "say": "Pulmonary surfactant is a complex mixture of dipalmitoylphosphatidylcholine and specific proteins secreted by type two pneumocytes. By Laplace law, collapsing pressure equals twice the surface tension divided by radius. Without surfactant, small alveoli generate higher collapsing pressures and collapse. Surfactant concentrates in smaller alveoli, lowering surface tension and preventing atelectasis.",
+      "vis": null
+    },
+    {
+      "tx": "Airway **resistance** is greatest in medium-sized bronchi between generations four and eight, rather than in peripheral terminal bronchioles. Although individual terminal bronchioles are narrow, their massive total cross-sectional area arranged in parallel reduces overall resistance to negligible values. Parasympathetic vagal discharge releases acetylcholine onto muscarinic M3 receptors, inducing bronchoconstriction, whereas circulating epinephrine stimulates beta-two adrenergic receptors to promote smooth muscle bronchodilation.",
+      "say": "Airway resistance is greatest in medium-sized bronchi between generations four and eight, rather than in terminal bronchioles. Although individual terminal bronchioles are narrow, their massive parallel cross-sectional area reduces resistance. Parasympathetic vagal discharge induces bronchoconstriction, whereas beta-two adrenergic stimulation promotes smooth muscle bronchodilation.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-lung-alveoli-gas-exchange.png",
+        "alt": "Pulmonary mechanics and surfactant dynamics",
+        "caption": "Cross-section of terminal respiratory units illustrating alveolar surface tension forces, surfactant distribution and airway resistance profiles."
+      }
+    }
+  ],
+  "v": 1,
+  "gen": "AI",
+  "run": "books-pipeline",
+  "model": "gemini-3.8-flash-high",
+  "quiz": [
+    "1c577c3b-4000-8000-1c57-7c3b12345678",
+    "1d577dce-4000-8000-1d57-7dce12345678",
+    "1e577f61-4000-8000-1e57-7f6112345678"
+  ],
+  "src": [
+    "kb-reference-pulmonary-mechanics-and-surfactant"
+  ],
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

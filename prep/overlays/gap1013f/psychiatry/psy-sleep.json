@@ -1,0 +1,821 @@
+{
+ "topic": "psy-sleep",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1191",
+   "q": "A 44-year-old accountant presents with a 6-month history of taking over two hours to fall asleep at least four nights per week, accompanied by significant daytime fatigue, poor concentration, and irritability. She has already implemented standard sleep hygiene measures (avoiding caffeine after noon, keeping a dark quiet bedroom) without improvement. According to NICE guidelines, what is the recommended first-line intervention for chronic insomnia?",
+   "o": [
+    "Cognitive behavioural therapy for insomnia (CBT-I)",
+    "Continuous long-term zopiclone 7.5 mg nightly",
+    "Oral amitriptyline 50 mg nightly",
+    "Continuous oral temazepam 20 mg nightly"
+   ],
+   "a": 0,
+   "exp": "NICE guideline guidance recommends Cognitive Behavioural Therapy for Insomnia (CBT-I) as the first-line treatment for chronic insomnia disorder across all age groups. CBT-I addresses conditioned cognitive and behavioural mechanisms maintaining insomnia through stimulus control, sleep restriction, cognitive restructuring, and relaxation training, producing durable long-term benefit without drug dependence.",
+   "r": [
+    "Correct: Cognitive behavioural therapy for insomnia (CBT-I) is the first-line treatment for chronic insomnia.",
+    "Long-term zopiclone is inappropriate and leads to tolerance, dependence, and daytime somnolence.",
+    "Tricyclic antidepressants like amitriptyline are not recommended as routine first-line therapy for chronic primary insomnia.",
+    "Benzodiazepines like temazepam are contraindicated for long-term insomnia management due to rapid dependence."
+   ],
+   "kp": "Cognitive behavioural therapy for insomnia (CBT-I) is the first-line treatment of choice for chronic insomnia.",
+   "t": "psy-sleep",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "insomnia",
+    "cbt-i",
+    "sleep-hygiene",
+    "first-line",
+    "nice"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Insomnia",
+   "x": {
+    "key": "CBT-I is the first-line evidence-based therapy for chronic insomnia.",
+    "others": {
+     "B": "Zopiclone causes dependence.",
+     "C": "Amitriptyline is not first-line.",
+     "D": "Temazepam causes rapid addiction."
+    },
+    "pearl": "Stimulus control therapy in CBT-I instructs the patient to leave the bed if unable to fall asleep within 20 minutes, returning only when sleepy, breaking the conditioned association between bed and wakefulness.",
+    "clues": "6 months insomnia, sleep hygiene failed, evidence-based first-line therapy.",
+    "ddx": "Obstructive sleep apnoea, major depressive disorder, restless legs syndrome.",
+    "mech": "Extinguishes conditioned cortical hyperarousal and strengthens the homeostatic sleep drive through mild sleep restriction.",
+    "lo": "Identify CBT-I as the first-line intervention for chronic insomnia.",
+    "rev": "CBT-I is the recommended first-line treatment for chronic insomnia per NICE guidance.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review components of CBT-I."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Insomnia",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "insomnia_disorder"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1192",
+   "q": "A 56-year-old man presents with acute, severe insomnia and emotional exhaustion for four nights following the unexpected death of his partner. The general practitioner decides that a short course of a hypnotic (such as zopiclone) is justified to provide acute relief. In accordance with NICE guidelines and the British National Formulary, what is the maximum recommended duration of hypnotic prescribing for acute insomnia?",
+   "o": [
+    "Up to 2 weeks (prescribed as the lowest effective dose for the shortest duration)",
+    "Continuous treatment for 6 months",
+    "Continuous treatment for 12 weeks",
+    "Continuous treatment for at least 1 year"
+   ],
+   "a": 0,
+   "exp": "NICE guidelines and the BNF strictly recommend that hypnotic drugs (such as Z-drugs or short-acting benzodiazepines) should only be prescribed for severe, disabling acute insomnia, at the lowest effective dose, and for a strict maximum duration of up to 2 weeks (preferably intermittent or for a few days). Longer use rapidly induces pharmacological tolerance, psychological and physical dependence, and rebound insomnia upon cessation.",
+   "r": [
+    "Correct: Hypnotics should be limited to a maximum of 2 weeks for acute severe insomnia.",
+    "6 months of hypnotic use results in severe physical dependence and tolerance.",
+    "12 weeks is far too long and violates prescribing safety guidelines.",
+    "1 year of continuous hypnotic use causes severe chronic dependency and elevated fall/fracture risk."
+   ],
+   "kp": "Hypnotic medications for acute insomnia should be restricted to a maximum duration of 2 weeks to prevent tolerance and dependence.",
+   "t": "psy-sleep",
+   "d": 2,
+   "cog": "safety",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "z-drugs",
+    "hypnotics",
+    "zopiclone",
+    "prescribing-limits",
+    "bnf"
+   ],
+   "source": "British National Formulary / NICE Clinical Knowledge Summaries: Insomnia",
+   "x": {
+    "key": "Limit hypnotics to a maximum of 2 weeks to prevent tolerance and dependence.",
+    "others": {
+     "B": "6 months causes dependency.",
+     "C": "12 weeks is excessive.",
+     "D": "1 year causes severe addiction."
+    },
+    "pearl": "Patients should be warned before receiving the prescription that the medication is for short-term emergency use only and will not be routinely repeated.",
+    "clues": "Acute bereavement insomnia, zopiclone prescription, maximum recommended duration.",
+    "ddx": "Complicated grief, acute stress reaction, major depression.",
+    "mech": "Downregulation of GABA-A receptor alpha-1 subunits occurs within 7-14 days of continuous exposure, driving rapid tachyphylaxis.",
+    "lo": "State the recommended prescribing restrictions and duration limits for hypnotic medications.",
+    "rev": "Hypnotics for acute insomnia are restricted to a maximum of 2 weeks to avert dependence.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review BNF hypnotic prescribing guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF / NICE CKS",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "insomnia_disorder"
+     ],
+     "drug_ids": [
+      "zopiclone"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BNF."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1193",
+   "q": "A 52-year-old lorry driver (BMI 36 kg/m2) presents with severe daytime sleepiness, frequently nodding off at red traffic lights and during meetings. His bed partner reports loud, disruptive snoring punctuated by periods of silence where he appears to stop breathing, followed by loud snorts and choking sounds. His Epworth Sleepiness Scale score is 17/24. What is the gold-standard diagnostic investigation required to confirm obstructive sleep apnoea?",
+   "o": [
+    "Overnight polysomnography (or multi-channel home respiratory polygraphy)",
+    "Overnight pulse oximetry alone without respiratory channels",
+    "Electroencephalography (EEG) with sleep deprivation",
+    "Awake flexible nasendoscopy without sleep monitoring"
+   ],
+   "a": 0,
+   "exp": "NICE guideline NG202 recommends overnight multi-channel respiratory polygraphy (home sleep study) or formal in-laboratory polysomnography as the definitive diagnostic investigation for obstructive sleep apnoea/hypopnoea syndrome (OSAHS). Polysomnography measures airflow, respiratory effort, oxygen saturation, and body position to calculate the Apnoea-Hypopnoea Index (AHI).",
+   "r": [
+    "Correct: Overnight polysomnography or multi-channel respiratory polygraphy is the gold standard diagnostic test.",
+    "Single-channel oximetry alone can detect desaturations but cannot distinguish central from obstructive events or calculate true AHI.",
+    "Sleep-deprived EEG investigates epilepsy, not respiratory airway collapse.",
+    "Awake nasendoscopy assesses anatomical patency during wakefulness, not dynamic pharyngeal collapse during sleep."
+   ],
+   "kp": "Overnight polysomnography or respiratory polygraphy is the gold standard diagnostic test for obstructive sleep apnoea.",
+   "t": "psy-sleep",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "osa",
+    "polysomnography",
+    "ahi",
+    "sleep-study",
+    "nice"
+   ],
+   "source": "NICE guideline NG202: Obstructive sleep apnoea/hypopnoea syndrome",
+   "x": {
+    "key": "Overnight polysomnography is gold standard to calculate the Apnoea-Hypopnoea Index.",
+    "others": {
+     "B": "Oximetry alone cannot distinguish obstructive from central events.",
+     "C": "EEG is for epilepsy.",
+     "D": "Awake endoscopy misses dynamic sleep collapse."
+    },
+    "pearl": "An Apnoea-Hypopnoea Index (AHI) >=15 events/hour (or >=5 with daytime sleepiness) establishes the diagnosis of obstructive sleep apnoea.",
+    "clues": "Obese commercial driver, snoring, witnessed apnoeas, high Epworth score, definitive investigation.",
+    "ddx": "Central sleep apnoea, obesity hypoventilation syndrome, narcolepsy, chronic insomnia.",
+    "mech": "Loss of pharyngeal dilator muscle tone during sleep allows negative inspiratory intraluminal pressure to collapse redundant pharyngeal soft tissues.",
+    "lo": "Identify overnight polysomnography as the gold-standard diagnostic tool for obstructive sleep apnoea.",
+    "rev": "Overnight polysomnography is the gold-standard diagnostic investigation for obstructive sleep apnoea.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review NICE NG202 diagnostic pathways."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG202",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "obstructive_sleep_apnoea"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG202."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1194",
+   "q": "A 50-year-old bus driver is diagnosed with severe obstructive sleep apnoea (AHI 35 events per hour) and marked daytime sleepiness (Epworth score 16). In accordance with NICE guideline NG202 and driving licensing authority (DVLA / GMC) regulations, what is the first-line treatment of choice, and what immediate advice must the clinician provide?",
+   "o": [
+    "Continuous positive airway pressure (CPAP) therapy; must immediately cease driving and notify the licensing authority",
+    "Mandatory immediate uvulopalatopharyngoplasty surgery; may continue driving without notification",
+    "Oral theophylline therapy; no driving restrictions apply",
+    "Mandatory mandibular advancement splint; driving allowed without restriction"
+   ],
+   "a": 0,
+   "exp": "NICE guideline NG202 establishes continuous positive airway pressure (CPAP) as the gold-standard first-line treatment for moderate-to-severe OSA with excessive daytime sleepiness. Because excessive daytime sleepiness substantially elevates motor vehicle crash risk, drivers (especially commercial drivers) have a legal obligation to stop driving immediately and notify the driving licensing authority (e.g. DVLA in the UK). Driving may only resume once CPAP therapy confirms objective symptom control.",
+   "r": [
+    "Correct: CPAP is the gold-standard treatment; the patient must stop driving immediately and notify the licensing authority.",
+    "Uvulopalatopharyngoplasty is a surgical option rarely used first-line and does not remove driving reporting obligations.",
+    "Theophylline is not effective for OSA.",
+    "Mandibular advancement splints are for mild OSA or CPAP intolerance, and reporting is still mandatory if daytime sleepiness exists."
+   ],
+   "kp": "CPAP is the first-line treatment for moderate-to-severe OSA; commercial and private drivers must cease driving and notify the licensing authority.",
+   "t": "psy-sleep",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "osa",
+    "cpap",
+    "dvla",
+    "driving-safety",
+    "medico-legal"
+   ],
+   "source": "NICE guideline NG202 / DVLA: Assessing fitness to drive",
+   "x": {
+    "key": "CPAP is first-line for moderate/severe OSA; cessation of driving and notification are mandatory.",
+    "others": {
+     "B": "Surgery is not first-line and notification is still required.",
+     "C": "Theophylline is ineffective.",
+     "D": "Splints are for mild OSA."
+    },
+    "pearl": "CPAP acts as a pneumatic splint, delivering pressurized ambient air through a mask to keep the upper pharyngeal airway patent throughout inspiration.",
+    "clues": "Bus driver with severe OSA and daytime sleepiness, first-line therapy and medico-legal driving duty.",
+    "ddx": "Narcolepsy, idiopathic hypersomnia, shift work disorder.",
+    "mech": "Positive intraluminal airway pressure counteracts negative transmural collapsing pressure, preventing pharyngeal occlusion and oxygen desaturation.",
+    "lo": "Select first-line CPAP therapy for severe OSA and explain driving safety regulations.",
+    "rev": "CPAP is the gold standard for severe OSA; patients must cease driving and notify licensing authorities.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review DVLA guidance on sleep apnoea and driving fitness."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG202 / DVLA",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "obstructive_sleep_apnoea"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against DVLA."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1195",
+   "q": "A 21-year-old university student presents with irresistible daytime sleep attacks, often falling asleep involuntarily during lectures and while conversing with friends. Furthermore, whenever she experiences strong emotions, such as laughing hysterically at a joke, her knees buckle and she collapses to the floor, remaining fully conscious throughout. What is the diagnosis?",
+   "o": [
+    "Narcolepsy type 1 with cataplexy",
+    "Narcolepsy type 2 without cataplexy",
+    "Vasovagal syncope",
+    "Atonic epileptic seizures"
+   ],
+   "a": 0,
+   "exp": "Narcolepsy type 1 is characterized by excessive daytime sleepiness accompanied by cataplexy (sudden, transient, bilateral loss of voluntary muscle tone triggered by strong emotions, typically laughter, joking, or anger, with complete preservation of consciousness).",
+   "r": [
+    "Correct: Sleep attacks plus emotion-triggered muscle weakness with preserved consciousness define narcolepsy type 1 with cataplexy.",
+    "Narcolepsy type 2 features daytime sleepiness but strictly lacks cataplexy and has normal CSF hypocretin levels.",
+    "Vasovagal syncope involves transient loss of consciousness preceded by prodromal pallor, diaphoresis, and nausea.",
+    "Atonic seizures cause sudden loss of postural tone but are typically associated with loss of consciousness and abnormal ictal EEG spikes."
+   ],
+   "kp": "Narcolepsy type 1 presents with irresistible sleep attacks and cataplexy (emotion-triggered muscle collapse with preserved consciousness).",
+   "t": "psy-sleep",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "narcolepsy",
+    "cataplexy",
+    "sleep-attacks",
+    "laughter"
+   ],
+   "source": "International Classification of Sleep Disorders (ICSD-3) / NICE guidelines",
+   "x": {
+    "key": "Daytime sleep attacks with emotion-triggered cataplexy define narcolepsy type 1.",
+    "others": {
+     "B": "Type 2 lacks cataplexy.",
+     "C": "Vasovagal syncope involves loss of consciousness.",
+     "D": "Atonic seizures involve loss of consciousness."
+    },
+    "pearl": "Cataplexy is pathognomonic of narcolepsy type 1 and represents an intrusion of REM sleep motor atonia into wakefulness.",
+    "clues": "Student, daytime sleep attacks, knee buckling triggered by laughing, fully conscious.",
+    "ddx": "Cataplexy, cataplexy-like syncope, transient ischaemic attack, conversion disorder.",
+    "mech": "Emotional stimuli activate the amygdala, which aberrantly triggers the sublaterodorsal tegmental nucleus, inducing spinal motor inhibition.",
+    "lo": "Recognise the classic clinical features of narcolepsy type 1 with cataplexy.",
+    "rev": "Narcolepsy type 1 is characterized by daytime sleep attacks and emotion-triggered cataplexy.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review ICSD-3 diagnostic criteria for narcolepsy."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "ICSD-3",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "narcolepsy"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against ICSD-3."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1196",
+   "q": "A lumbar puncture is performed in a patient with suspected narcolepsy type 1. What neurochemical finding in cerebrospinal fluid (CSF) is diagnostic for narcolepsy type 1?",
+   "o": [
+    "Undetectable or profoundly low CSF hypocretin-1 (orexin-A) concentration (<=110 pg/mL)",
+    "Markedly elevated CSF 14-3-3 protein",
+    "Elevated CSF oligoclonal bands matching serum",
+    "Severely reduced CSF 5-HIAA concentration alone"
+   ],
+   "a": 0,
+   "exp": "Profound deficiency of CSF hypocretin-1 (orexin-A) with concentrations <=110 pg/mL (or less than one-third of mean normal control values) is the definitive diagnostic biomarker for narcolepsy type 1. It reflects autoimmune destruction of approximately 70,000 hypocretin-producing neurons in the posterolateral hypothalamus.",
+   "r": [
+    "Correct: Low or undetectable CSF hypocretin-1 (orexin-A) <=110 pg/mL confirms narcolepsy type 1.",
+    "CSF 14-3-3 protein is a marker of rapid neuronal destruction seen in Creutzfeldt-Jakob disease.",
+    "Oligoclonal bands in CSF are typical of multiple sclerosis.",
+    "Isolated reduction in 5-HIAA is non-specific and does not define narcolepsy."
+   ],
+   "kp": "Profoundly low CSF hypocretin-1 (orexin-A) <=110 pg/mL is the definitive diagnostic biomarker for narcolepsy type 1.",
+   "t": "psy-sleep",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "narcolepsy",
+    "hypocretin",
+    "orexin",
+    "csf-biomarker"
+   ],
+   "source": "International Classification of Sleep Disorders (ICSD-3)",
+   "x": {
+    "key": "CSF hypocretin-1 <=110 pg/mL confirms narcolepsy type 1.",
+    "others": {
+     "B": "14-3-3 protein is seen in CJD.",
+     "C": "Oligoclonal bands are in MS.",
+     "D": "5-HIAA does not define narcolepsy."
+    },
+    "pearl": "Over 98% of patients with narcolepsy type 1 carry the human leukocyte antigen allele HLA-DQB1*06:02.",
+    "clues": "CSF biomarker diagnostic for narcolepsy type 1.",
+    "ddx": "Narcolepsy type 2 (normal hypocretin), idiopathic hypersomnia, Kleine-Levin syndrome.",
+    "mech": "CD4+ and CD8+ T-cells selectively target and destroy hypocretin-producing neurons, destabilizing the thalamocortical sleep-wake switch.",
+    "lo": "Identify low CSF hypocretin-1 as the diagnostic hallmark of narcolepsy type 1.",
+    "rev": "CSF hypocretin-1 <=110 pg/mL confirms narcolepsy type 1.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review neurobiology of hypocretin and sleep regulation."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "ICSD-3",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "narcolepsy"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against ICSD-3."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1197",
+   "q": "A 24-year-old woman describes terrifying episodes upon waking in the morning: she opens her eyes and is completely conscious of her bedroom environment, but is entirely unable to move her limbs, turn her head, or speak for 60 to 90 seconds. She also perceives a dark shadowy presence standing beside her bed. What are these classic phenomena called?",
+   "o": [
+    "Sleep paralysis and hypnopompic hallucinations",
+    "Somnambulism and night terrors",
+    "Cataplexy and daytime daydreaming",
+    "Atonic seizure and post-ictal amnesia"
+   ],
+   "a": 0,
+   "exp": "Sleep paralysis is a brief, transient inability to perform voluntary movements upon falling asleep (hypnagogic) or awakening (hypnopompic), despite full conscious awareness. It is caused by persistent REM sleep motor atonia. Hallucinations occurring upon waking are termed hypnopompic hallucinations (while those occurring while falling asleep are hypnagogic).",
+   "r": [
+    "Correct: Inability to move upon waking with vivid perceptual experiences represents sleep paralysis and hypnopompic hallucinations.",
+    "Somnambulism (sleepwalking) and night terrors are NREM parasomnias occurring during deep slow-wave sleep without conscious recall.",
+    "Cataplexy is daytime muscle weakness triggered by emotion, not immobility upon awakening.",
+    "Atonic seizures cause sudden postural falls with loss of consciousness and do not involve preserved conscious awareness upon awakening."
+   ],
+   "kp": "Sleep paralysis and hypnopompic hallucinations occur upon waking due to persistence of REM sleep atonia into conscious awareness.",
+   "t": "psy-sleep",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "sleep-paralysis",
+    "hypnopompic",
+    "rem-atonia",
+    "narcolepsy-tetrad"
+   ],
+   "source": "International Classification of Sleep Disorders (ICSD-3)",
+   "x": {
+    "key": "Immobility upon awakening with preserved consciousness represents sleep paralysis.",
+    "others": {
+     "B": "Sleepwalking and night terrors lack conscious recall.",
+     "C": "Cataplexy is emotion-triggered.",
+     "D": "Atonic seizures cause unconsciousness."
+    },
+    "pearl": "The mnemonic 'HAPS' summarizes the narcolepsy tetrad: Hypnagogic/hypnopompic hallucinations, Atonia (cataplexy), Paralysis (sleep paralysis), and Somnolence (daytime sleepiness).",
+    "clues": "Conscious but unable to move upon waking, shadowy figure hallucination, duration 1-2 minutes.",
+    "ddx": "Isolated sleep paralysis, nocturnal panic attack, focal motor seizure, hypokalaemic periodic paralysis.",
+    "mech": "Glycinergic and GABAergic inhibition of spinal alpha-motor neurons by the locus coeruleus and peri-locus coeruleus persists after cortical arousal.",
+    "lo": "Differentiate sleep paralysis and hypnopompic hallucinations from other sleep-related phenomena.",
+    "rev": "Sleep paralysis is the inability to move upon waking due to persistence of REM sleep motor atonia.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review narcolepsy tetrad symptoms."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "ICSD-3",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "narcolepsy"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against ICSD-3."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1198",
+   "q": "A 23-year-old woman with newly confirmed narcolepsy requires first-line wake-promoting medication to manage severe, disabling daytime somnolence and sleep attacks. In accordance with clinical guidelines, which wake-promoting agent is recommended as the first-line pharmacological treatment of choice?",
+   "o": [
+    "Modafinil",
+    "Oral diazepam",
+    "Oral zolpidem",
+    "Oral amitriptyline"
+   ],
+   "a": 0,
+   "exp": "Modafinil (or its R-enantiomer armodafinil) is the established first-line wake-promoting pharmacotherapy for excessive daytime sleepiness in narcolepsy. It provides effective alertness promotion with low abuse potential and fewer sympathomimetic side effects than classic amphetamines. Pitolisant (a histamine H3 receptor inverse agonist) is another licensed first-line option.",
+   "r": [
+    "Correct: Modafinil is the first-line wake-promoting medication for excessive daytime sleepiness in narcolepsy.",
+    "Diazepam is a sedative benzodiazepine that exacerbates daytime somnolence.",
+    "Zolpidem is a hypnotic that induces sleep.",
+    "Amitriptyline is a sedating tricyclic antidepressant that promotes drowsiness, not daytime wakefulness."
+   ],
+   "kp": "Modafinil is the first-line wake-promoting pharmacological treatment for daytime sleepiness in narcolepsy.",
+   "t": "psy-sleep",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "modafinil",
+    "narcolepsy",
+    "wake-promoting",
+    "first-line"
+   ],
+   "source": "European Guideline on Narcolepsy / British National Formulary",
+   "x": {
+    "key": "Modafinil is the first-line wake-promoting agent for narcolepsy.",
+    "others": {
+     "B": "Diazepam causes sedation.",
+     "C": "Zolpidem is a sleeping pill.",
+     "D": "Amitriptyline is sedating."
+    },
+    "pearl": "Women of childbearing potential taking modafinil must be warned that it induces hepatic CYP3A4, reducing the efficacy of combined oral contraceptive pills; non-hormonal contraception or IUD is required.",
+    "clues": "Narcolepsy daytime sleep attacks, first-line wake-promoting drug.",
+    "ddx": "Methylphenidate, pitolisant, solriamfetol, sodium oxybate.",
+    "mech": "Inhibits dopamine reuptake via the dopamine transporter (DAT) and stimulates hypothalamic orexinergic/histaminergic wakefulness circuits.",
+    "lo": "Select the first-line pharmacological treatment for excessive daytime sleepiness in narcolepsy.",
+    "rev": "Modafinil is the first-line wake-promoting agent for excessive daytime sleepiness in narcolepsy.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review pharmacology of wake-promoting drugs in the BNF."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF / European Narcolepsy Guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "narcolepsy"
+     ],
+     "drug_ids": [
+      "modafinil"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BNF."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1199",
+   "q": "A 68-year-old man is brought to the clinic by his spouse, who reports that over the past two years he has been violently acting out vivid nightmares in his sleep, punching the air, kicking, and shouting obscenities, causing bruises to both himself and his wife. Polysomnography demonstrates complete loss of normal motor atonia during REM sleep. What parasomnia is this, and which group of neurodegenerative diseases does it strongly predict?",
+   "o": [
+    "REM sleep behaviour disorder (RBD); strongly predicts alpha-synucleinopathies (Parkinson disease, dementia with Lewy bodies, MSA)",
+    "NREM sleepwalking; strongly predicts Alzheimer disease",
+    "Night terror disorder; strongly predicts Huntington disease",
+    "Sleep-related groaning (catathrenia); strongly predicts motor neurone disease"
+   ],
+   "a": 0,
+   "exp": "REM sleep behaviour disorder (RBD) is characterized by dream-enacting behaviours (punching, kicking, flailing) resulting from loss of the normal physiological motor atonia that characterizes REM sleep. Over 80% of patients with idiopathic RBD convert to an alpha-synucleinopathy (Parkinson disease, dementia with Lewy bodies, or multiple system atrophy) within 10 to 15 years.",
+   "r": [
+    "Correct: REM sleep behaviour disorder is characterized by dream enactment without REM atonia and strongly predicts alpha-synucleinopathies.",
+    "Sleepwalking occurs during NREM slow-wave sleep and does not predict Alzheimer disease.",
+    "Night terrors are NREM parasomnias occurring in deep sleep and do not predict Huntington disease.",
+    "Catathrenia is benign nocturnal groaning with no link to MND."
+   ],
+   "kp": "REM sleep behaviour disorder involves dream-enacting behaviors due to loss of REM atonia and is a major prodromal marker for alpha-synucleinopathies.",
+   "t": "psy-sleep",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "rbd",
+    "rem-sleep-behaviour-disorder",
+    "alpha-synucleinopathy",
+    "parkinson-prodrome"
+   ],
+   "source": "International Classification of Sleep Disorders (ICSD-3) / Movement Disorders Consensus",
+   "x": {
+    "key": "RBD features loss of REM atonia and dream enactment, strongly predicting alpha-synucleinopathies.",
+    "others": {
+     "B": "Sleepwalking is NREM.",
+     "C": "Night terrors are NREM.",
+     "D": "Catathrenia is benign groaning."
+    },
+    "pearl": "Clonazepam (or high-dose melatonin) is the first-line pharmacological treatment to suppress violent dream enactment and prevent sleep-related injury.",
+    "clues": "Violent nightmare enactment, loss of REM atonia on polysomnography, neurodegenerative predictor.",
+    "ddx": "NREM parasomnia, sleep-related hypermotor epilepsy, obstructive sleep apnoea with confusional arousals.",
+    "mech": "Neurodegeneration of pontine subcoeruleus and magnocellular reticular nuclei disrupts descending inhibitory pathways to spinal motor neurons during REM sleep.",
+    "lo": "Recognise REM sleep behaviour disorder and identify its strong association with alpha-synucleinopathies.",
+    "rev": "REM sleep behaviour disorder features dream enactment without REM atonia and strongly predicts alpha-synucleinopathies.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review prodromal markers of Parkinsonian disorders."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "ICSD-3",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "rem_sleep_behavior_disorder"
+     ],
+     "drug_ids": [
+      "clonazepam",
+      "melatonin"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against ICSD-3."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1200",
+   "q": "A 38-year-old woman complains of an irresistible urge to move her legs in the evenings while resting in bed reading, described as an intensely uncomfortable 'crawling, creeping, tingling' sensation deep within her calves. The sensations are temporarily relieved by getting up and walking around. Blood tests show: haemoglobin 12.1 g/dL, serum ferritin 18 ug/L (normal 20-200). What is the diagnosis, and what is the essential initial management?",
+   "o": [
+    "Restless legs syndrome (Willis-Ekbom disease); initiate oral iron replacement therapy",
+    "Diabetic peripheral neuropathy; initiate high-dose pregabalin immediately",
+    "Peripheral arterial disease; arrange urgent femoral-popliteal bypass",
+    "Deep vein thrombosis; administer therapeutic low-molecular-weight heparin"
+   ],
+   "a": 0,
+   "exp": "Restless legs syndrome (RLS / Willis-Ekbom disease) is characterized by the URGE criteria: (1) Urge to move legs usually accompanied by unpleasant sensations, (2) Rest precipitates symptoms, (3) Getting up/movement relieves symptoms, and (4) Evening or nighttime worsening. Brain iron deficiency impairs central dopamine synthesis; guidelines recommend checking serum ferritin and treating with oral iron replacement if ferritin is <75 ug/L, even in the absence of overt anaemia.",
+   "r": [
+    "Correct: Urge to move legs relieved by walking with low ferritin defines RLS; treat with oral iron replacement.",
+    "Diabetic neuropathy produces continuous burning numbness that is NOT relieved by walking or movement.",
+    "Intermittent claudication from arterial disease occurs during exertion and walking, and is relieved by rest (the exact opposite).",
+    "DVT causes acute unilateral leg swelling, calf erythema, and tenderness, not bilateral evening urges."
+   ],
+   "kp": "Restless legs syndrome presents with an evening urge to move the legs relieved by walking; treat iron deficiency (ferritin <75 ug/L) first-line.",
+   "t": "psy-sleep",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "psychiatry",
+    "restless-legs-syndrome",
+    "rls",
+    "ferritin",
+    "iron-supplementation",
+    "nice"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Restless legs syndrome",
+   "x": {
+    "key": "Evening urge to move legs relieved by walking indicates RLS; treat low ferritin (<75 ug/L) with iron.",
+    "others": {
+     "B": "Neuropathy is not relieved by walking.",
+     "C": "Arterial claudication worsens with walking.",
+     "D": "DVT causes unilateral swelling."
+    },
+    "pearl": "While dopamine agonists (pramipexole, ropinirole) relieve RLS, long-term use can cause 'augmentation' (worsening of symptoms earlier in the day); iron replacement is foundational.",
+    "clues": "Evening crawling sensations in calves relieved by walking, serum ferritin 18 ug/L.",
+    "ddx": "Nocturnal leg cramps, akathisia, peripheral neuropathy, venous insufficiency.",
+    "mech": "Intracellular iron deficiency in the substantia nigra impairs tyrosine hydroxylase function, reducing central dopaminergic transmission.",
+    "lo": "Apply the diagnostic criteria for restless legs syndrome and recognise the role of iron supplementation.",
+    "rev": "Restless legs syndrome causes an evening urge to move legs relieved by walking; treat low ferritin with iron.",
+    "next": {
+     "concept": "psy-sleep",
+     "action": "review",
+     "text": "Review NICE CKS on restless legs syndrome."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Restless legs syndrome",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "sleep_related_leg_cramps"
+     ],
+     "drug_ids": [
+      "ferrous_fumarate"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "psy-sleep"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  }
+ ]
+}

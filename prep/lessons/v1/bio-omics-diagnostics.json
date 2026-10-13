@@ -1,0 +1,192 @@
+{
+ "module": "bio-omics-diagnostics",
+ "subject": "biochemistry",
+ "title": "Clinical genomics, mass spectrometry proteomics, and pharmacogenomic diagnostics",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Modern molecular pathology relies on high-throughput **genomic** technologies. Next-generation sequencing utilizes massively parallel clonal amplification to interrogate whole exomes or targeted gene panels simultaneously. Genomic hybridization microarrays detect copy number variations across chromosomes, diagnosing submicroscopic deletions and duplications. Polymerase chain reaction amplifies specific target loci, whereas digital droplet PCR enables absolute quantification of low-frequency circulating tumor DNA in liquid biopsies.",
+   "say": "High-throughput genomics has transformed molecular diagnostics. Next-generation sequencing performs massively parallel exome or panel sequencing. Microarrays detect submicroscopic copy number variants, while digital droplet PCR quantifies circulating tumor DNA from liquid biopsies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genomic platform",
+     "Diagnostic target",
+     "Clinical utility"
+    ],
+    "rows": [
+     [
+      "Next-generation sequencing",
+      "Point mutations, small indels, fusions",
+      "Oncology panels, rare Mendelian diseases"
+     ],
+     [
+      "Chromosomal microarray",
+      "Copy number variations (>50-100 kb)",
+      "Unexplained developmental delay, autism"
+     ],
+     [
+      "Digital droplet PCR",
+      "Absolute copy number / rare variants",
+      "Minimal residual disease, cell-free liquid biopsy"
+     ],
+     [
+      "Sanger sequencing",
+      "Targeted single amplicon read (500-800 bp)",
+      "Gold standard variant confirmation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Proteomics investigates the complete protein complement of biological samples using **mass spectrometry**. Matrix-assisted laser desorption/ionization time-of-flight (MALDI-TOF) mass spectrometry analyzes intact bacterial and fungal proteins, identifying infectious pathogens within minutes of positive blood culture. Liquid chromatography tandem mass spectrometry (LC-MS/MS) separates and fragments peptides, enabling multiplexed newborn screening for dozens of inborn errors of amino acid and fatty acid metabolism from a single blood spot.",
+   "say": "Mass spectrometry drives clinical proteomics. MALDI-TOF identifies positive microbiological cultures in minutes by spectral fingerprinting. Tandem mass spectrometry enables universal newborn screening of amino acid and acylcarnitine disorders from dried blood spots.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Dried newborn blood spot elution"
+     },
+     {
+      "id": "p2",
+      "label": "Electrospray ionization (ESI)"
+     },
+     {
+      "id": "p3",
+      "label": "MS1 precursor ion mass filter"
+     },
+     {
+      "id": "p4",
+      "label": "Collision cell fragmentation"
+     },
+     {
+      "id": "p5",
+      "label": "MS2 diagnostic acylcarnitine readout"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pharmacogenomics evaluates how genetic variation influences drug response and **toxicity**. Cytochrome P450 2D6 polymorphisms govern the bioactivation of codeine into morphine; ultrarapid metabolizers experience fatal opioid intoxication at therapeutic doses, while poor metabolizers obtain no analgesia. Thiopurine methyltransferase (TPMT) deficiency prevents 6-mercaptopurine degradation, triggering life-threatening myelosuppression unless the dose is reduced by 90 percent. Dihydropyrimidine dehydrogenase deficiency produces lethal 5-fluorouracil neurotoxicity and pancytopenia.",
+   "say": "Pharmacogenomics predicts therapeutic efficacy and toxicity. CYP2D6 ultrarapid metabolizers risk opioid toxicity from codeine. TPMT deficiency prevents 6-mercaptopurine breakdown causing fatal bone marrow suppression, while DPD deficiency makes 5-FU lethal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene / Enzyme",
+     "Substrate medication",
+     "Adverse outcome if deficient / altered"
+    ],
+    "rows": [
+     [
+      "CYP2D6",
+      "Codeine, tamoxifen",
+      "Ultra: opioid overdose; Poor: lack of prodrug activation"
+     ],
+     [
+      "TPMT / NUDT15",
+      "6-Mercaptopurine, azathioprine",
+      "Severe pancytopenia, fatal myelosuppression"
+     ],
+     [
+      "DPYD (DPD)",
+      "5-Fluorouracil, capecitabine",
+      "Severe mucositis, neutropenia, neurotoxicity"
+     ],
+     [
+      "HLA-B*57:01",
+      "Abacavir (antiretroviral)",
+      "Severe hypersensitivity reaction (fatal if rechallenged)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pre-therapeutic genetic screening prevents preventable adverse drug reactions. The **HLA-B-5701** allele is tested prior to initiating abacavir; carrier status mandates absolute contraindication to prevent fatal multiorgan hypersensitivity. Similarly, HLA-B*15:02 screening in Asian populations prevents carbamazepine-induced Stevens-Johnson syndrome and toxic epidermal necrolysis. VKORC1 and CYP2C9 testing guides warfarin dosing, preventing major hemorrhage during anticoagulation initiation.",
+   "say": "Mandatory pharmacogenetic tests protect patients: HLA-B-5701 screening prevents fatal abacavir hypersensitivity, HLA-B-1502 prevents carbamazepine-induced Stevens-Johnson syndrome, and VKORC1/CYP2C9 testing prevents warfarin-induced hemorrhage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Patient scheduled for pharmacotherapy"
+     },
+     {
+      "id": "s2",
+      "label": "Genotype allele screening"
+     },
+     {
+      "id": "s3",
+      "label": "High-risk variant identified"
+     },
+     {
+      "id": "s4",
+      "label": "Select alternative safe agent"
+     },
+     {
+      "id": "s5",
+      "label": "Complete prevention of severe reaction"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ],
+     [
+      "s4",
+      "s5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "07063781-4000-8000-0706-378112345678",
+  "5e1e8ed7-4000-8000-5e1e-8ed712345678",
+  "c2c6baf1-4000-8000-c2c6-baf112345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

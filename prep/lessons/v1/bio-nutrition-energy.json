@@ -1,0 +1,197 @@
+{
+ "module": "bio-nutrition-energy",
+ "subject": "biochemistry",
+ "title": "Nutritional bioenergetics: energy expenditure, nitrogen balance, and protein-energy malnutrition",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Total daily energy expenditure comprises basal metabolic rate, the thermic effect of food, and physical activity. **Basal** metabolic rate accounts for 60 to 75 percent of daily expenditure, representing the obligatory energy expended to maintain resting membrane gradients, protein turnover, and cardiac-respiratory function. The respiratory quotient (RQ), defined as CO2 produced divided by O2 consumed, reflects fuel oxidation: pure carbohydrate yields an RQ of 1.0, protein yields 0.8, and pure fat yields 0.7.",
+   "say": "Daily energy expenditure divides into basal metabolic rate, food thermogenesis, and physical activity. Basal metabolic rate accounts for roughly seventy percent of expenditure. The respiratory quotient reflects substrate use: 1.0 for carbohydrates, 0.8 for protein, and 0.7 for fat.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Oxidized substrate",
+     "Energy yield (kcal/g)",
+     "Respiratory quotient (RQ)"
+    ],
+    "rows": [
+     [
+      "Carbohydrate",
+      "4.0 kcal / g",
+      "1.00 (equal CO2 produced to O2 consumed)"
+     ],
+     [
+      "Fat (Triacylglycerol)",
+      "9.0 kcal / g",
+      "0.71 (highly reduced carbon backbone)"
+     ],
+     [
+      "Protein",
+      "4.0 kcal / g",
+      "0.82 (incomplete urea oxidation)"
+     ],
+     [
+      "Ethanol",
+      "7.0 kcal / g",
+      "0.67 (rapidly oxidized in liver)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nitrogen** balance quantifies protein metabolism by comparing dietary nitrogen intake against total excreted nitrogen (primarily urinary urea, plus fecal and cutaneous losses). Healthy adults maintain zero nitrogen balance, where intake precisely equals excretion. Positive nitrogen balance occurs during growth, pregnancy, and recovery from illness. Negative nitrogen balance reflects accelerated catabolism during trauma, severe burns, sepsis, or prolonged starvation, where muscle proteolysis exceeds dietary protein intake.",
+   "say": "Nitrogen balance compares dietary protein nitrogen against urinary urea excretion. Positive balance occurs during childhood growth and tissue repair. Negative balance marks severe catabolism during burns, trauma, sepsis, or fasting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Dietary protein intake (g protein / 6.25)"
+     },
+     {
+      "id": "n2",
+      "label": "Total nitrogen intake"
+     },
+     {
+      "id": "n3",
+      "label": "Urinary urea nitrogen + 4g unmeasured loss"
+     },
+     {
+      "id": "n4",
+      "label": "Nitrogen balance calculation"
+     },
+     {
+      "id": "n5",
+      "label": "Catabolic negative vs anabolic positive state"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Protein-energy malnutrition manifests as two distinct clinical syndromes. **Kwashiorkor** results from selective dietary protein deficiency despite adequate caloric intake, typically when a child is weaned onto a carbohydrate-rich starch gruel. Hypoalbuminemia precipitates severe peripheral pitting edema and ascites, while reduced apolipoprotein B-100 synthesis prevents hepatic VLDL export, causing dramatic hepatomegaly with fatty liver. Patients exhibit flaky-paint dermatitis, flag-sign dyspigmented hair, and profound apathy.",
+   "say": "Kwashiorkor stems from selective protein lack despite adequate calories. Severe hypoalbuminemia produces widespread edema, while impaired apolipoprotein synthesis causes fatty liver and hepatomegaly, accompanied by dermatitis and flag-sign hair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical feature",
+     "Kwashiorkor (Protein deficiency)",
+     "Marasmus (Caloric starvation)"
+    ],
+    "rows": [
+     [
+      "Primary dietary deficit",
+      "Protein deficiency with normal carbohydrate",
+      "Total caloric and protein deficiency"
+     ],
+     [
+      "Edema / Ascites",
+      "Present (pitting edema, hypoalbuminemia)",
+      "Absent (no edema)"
+     ],
+     [
+      "Subcutaneous fat & muscle",
+      "Subcutaneous fat preserved; muscle wasted",
+      "Severe loss of both fat and muscle"
+     ],
+     [
+      "Liver pathology",
+      "Enlarged fatty liver (impaired VLDL export)",
+      "No fatty liver"
+     ],
+     [
+      "Skin & hair changes",
+      "Flaky-paint dermatosis, flag-sign hair",
+      "Dry, wrinkled skin, alert elderly facies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, **marasmus** results from global caloric starvation with deficiency of both protein and energy. Patients exhibit severe wasting of somatic muscle and subcutaneous adipose tissue, resulting in a broomstick-limb appearance, sunken eyes, and an alert, anxious, elderly facies without edema. Treatment of severe malnutrition requires cautious nutritional rehabilitation: rapid refeeding triggers **refeeding** syndrome, where carbohydrate-driven insulin surges drive phosphate, potassium, and magnesium into cells, precipitating fatal cardiac arrhythmias and cardiopulmonary collapse.",
+   "say": "Marasmus is severe caloric emaciation with loss of all muscle and fat, presenting with an elderly facies and no edema. Refeeding must be gradual to prevent refeeding syndrome, where insulin drives phosphate intracellularly, causing fatal cardiac arrest.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Starved state with depleted intracellular minerals"
+     },
+     {
+      "id": "r2",
+      "label": "Rapid carbohydrate administration"
+     },
+     {
+      "id": "r3",
+      "label": "Surge in insulin secretion"
+     },
+     {
+      "id": "r4",
+      "label": "Massive cellular uptake of PO4, K+, Mg2+"
+     },
+     {
+      "id": "r5",
+      "label": "Severe hypophosphatemia, arrhythmias & heart failure"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ],
+     [
+      "r4",
+      "r5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "f4c34c87-4000-8000-f4c3-4c8712345678",
+  "0f94d05a-4000-8000-0f94-d05a12345678",
+  "064254af-4000-8000-0642-54af12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

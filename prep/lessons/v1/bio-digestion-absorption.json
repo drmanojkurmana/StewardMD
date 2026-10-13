@@ -1,0 +1,192 @@
+{
+ "module": "bio-digestion-absorption",
+ "subject": "biochemistry",
+ "title": "Nutrient assimilation: luminal digestion, enterocyte transporters, and malabsorption",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Carbohydrate **digestion** begins with salivary and pancreatic alpha-amylases, which cleave internal alpha-1,4-glycosidic bonds in starch, yielding maltose, maltotriose, and alpha-limit dextrins. Brush-border disaccharidases in the duodenal and jejunal microvilli complete digestion: lactase splits lactose into glucose and galactose, sucrase hydrolyzes sucrose into glucose and fructose, and maltase cleaves maltose into two glucose units. Free monosaccharides are then transported across the apical enterocyte membrane.",
+   "say": "Carbohydrate breakdown utilizes luminal alpha-amylase followed by brush border disaccharidases: lactase, sucrase, and maltase. These hydrolyze disaccharides into glucose, galactose, and fructose ready for enterocyte transport.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme",
+     "Substrate cleaved",
+     "Products absorbed"
+    ],
+    "rows": [
+     [
+      "Pancreatic amylase",
+      "Amylose and amylopectin (starch)",
+      "Maltose, maltotriose, alpha-limit dextrins"
+     ],
+     [
+      "Lactase-phlorizin",
+      "Lactose (galactose-beta-1,4-glucose)",
+      "D-Glucose + D-Galactose"
+     ],
+     [
+      "Sucrase-isomaltase",
+      "Sucrose (alpha-1,2) and isomaltose (alpha-1,6)",
+      "D-Glucose + D-Fructose"
+     ],
+     [
+      "Maltase-glucoamylase",
+      "Maltose and maltotriose (alpha-1,4)",
+      "D-Glucose units"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Monosaccharide absorption relies on specialized **transporters** in enterocytes. Glucose and galactose are actively transported across the apical microvillar membrane via the sodium-glucose cotransporter 1 (SGLT1), driven by the secondary active sodium gradient maintained by basolateral Na+/K+-ATPase. Fructose is absorbed independently through facilitated diffusion mediated by GLUT5. All three monosaccharides exit the basolateral membrane into mesenteric capillaries via facilitated diffusion through **GLUT2**.",
+   "say": "Glucose and galactose enter enterocytes via sodium-coupled SGLT1 secondary active transport. Fructose enters by facilitated diffusion via GLUT5. All three hexoses exit basolaterally into the portal circulation via GLUT2.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Luminal Glucose/Galactose + 2 Na+"
+     },
+     {
+      "id": "g2",
+      "label": "Apical SGLT1 active symport"
+     },
+     {
+      "id": "g3",
+      "label": "Apical GLUT5 facilitated Fructose transport"
+     },
+     {
+      "id": "g4",
+      "label": "Basolateral GLUT2 exit into portal blood"
+     },
+     {
+      "id": "g5",
+      "label": "Basolateral Na+/K+-ATPase energizes gradient"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g4"
+     ],
+     [
+      "g3",
+      "g4"
+     ],
+     [
+      "g4",
+      "g5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lipid assimilation requires **micellar** solubilization by bile salts. Pancreatic lipase, assisted by colipase, hydrolyzes triacylglycerols into 2-monoacylglycerol and free fatty acids. These hydrophobic products associate with conjugated bile salts and phospholipids to form mixed micelles that diffuse across the unstirred water layer to the enterocyte membrane. Inside enterocytes, fatty acids are re-esterified into triacylglycerols and packaged with apolipoprotein B-48 into **chylomicrons** for lymphatic exocytosis.",
+   "say": "Dietary lipids undergo emulsification and cleavage by pancreatic lipase and colipase. Mixed bile salt micelles deliver monoacylglycerols and fatty acids to enterocytes, where they are re-synthesized into triacylglycerols and exported in chylomicrons.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lipid digestive step",
+     "Enzyme / Factor",
+     "Enterocyte handling"
+    ],
+    "rows": [
+     [
+      "Triglyceride lipolysis",
+      "Pancreatic lipase + colipase",
+      "2-Monoacylglycerol + 2 free fatty acids"
+     ],
+     [
+      "Phospholipid cleavage",
+      "Phospholipase A2 (proenzyme)",
+      "Lysophospholipid + free fatty acid"
+     ],
+     [
+      "Cholesterol ester cleavage",
+      "Cholesterol esterase",
+      "Unesterified free cholesterol"
+     ],
+     [
+      "Chylomicron export",
+      "Microsomal triglyceride transfer protein",
+      "Apo B-48 packaging into lacteals"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malabsorption syndromes arise from mucosal, digestive, or transport defects. Celiac disease is an immune-mediated enteropathy triggered by dietary **gluten** (gliadin peptides), causing intraepithelial lymphocytosis, crypt hyperplasia, and blunting of duodenal villi with secondary iron deficiency and steatorrhea. Abetalipoproteinemia is an autosomal recessive deficiency of microsomal triglyceride transfer protein (MTTP); enterocytes cannot assemble Apo B-48 chylomicrons, resulting in lipid-laden enterocytes, acanthocytosis, ataxia, and fat-soluble vitamin deficiency.",
+   "say": "Celiac disease causes gluten-induced villous blunting and malabsorption with anti-tTG antibodies. Abetalipoproteinemia results from MTTP mutation, preventing chylomicron assembly and causing lipid-stuffed enterocytes, thorny acanthocytes, and ataxia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Dietary gluten ingestion"
+     },
+     {
+      "id": "m2",
+      "label": "Tissue transglutaminase deamidates gliadin"
+     },
+     {
+      "id": "m3",
+      "label": "HLA-DQ2/DQ8 CD4 T-cell activation"
+     },
+     {
+      "id": "m4",
+      "label": "Villous atrophy & crypt hyperplasia"
+     },
+     {
+      "id": "m5",
+      "label": "Pan-malabsorption: anemia, osteopenia, diarrhea"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "66c3de4c-4000-8000-66c3-de4c12345678",
+  "45da5b46-4000-8000-45da-5b4612345678",
+  "21e799ae-4000-8000-21e7-99ae12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

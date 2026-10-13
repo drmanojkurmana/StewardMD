@@ -1,0 +1,180 @@
+{
+ "module": "bio-vitamins-minerals",
+ "subject": "biochemistry",
+ "title": "Vitamins and trace minerals: coenzyme mechanisms, antioxidant defenses and deficiency syndromes",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Water-soluble B-complex vitamins serve as indispensable **coenzymes** in central intermediary metabolism. Thiamine pyrophosphate acts as cofactor for pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase. Riboflavin generates flavin adenine dinucleotide for electron transport, while niacin synthesizes nicotinamide adenine dinucleotide. Pyridoxal phosphate is required for transaminations and decarboxylations. Biotin facilitates carboxylation reactions, and cobalamin coordinates methyl transfer with folate.",
+   "say": "Water-soluble B vitamins serve as essential metabolic coenzymes. Thiamine enables oxidative decarboxylations. Riboflavin and niacin yield FAD and NAD for bioenergetics. Pyridoxal phosphate drives transamination. Biotin directs carboxylations, and cobalamin assists methyl transfer with folate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vitamin",
+     "Active coenzyme",
+     "Key metabolic reactions",
+     "Deficiency syndrome"
+    ],
+    "rows": [
+     [
+      "B1 (Thiamine)",
+      "Thiamine pyrophosphate (TPP)",
+      "PDH, alpha-KGDH, transketolase",
+      "Beriberi, Wernicke-Korsakoff"
+     ],
+     [
+      "B2 (Riboflavin)",
+      "FAD, FMN",
+      "Succinate DH, Complex I",
+      "Cheilosis, corneal vascularization"
+     ],
+     [
+      "B3 (Niacin)",
+      "NAD+, NADP+",
+      "Dehydrogenase redox reactions",
+      "Pellagra (diarrhea, dermatitis, dementia)"
+     ],
+     [
+      "B6 (Pyridoxine)",
+      "Pyridoxal phosphate (PLP)",
+      "Transamination, ALA synthase",
+      "Sideroblastic anemia, peripheral neuropathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fat-soluble vitamins (A, D, E, K) require biliary micelle formation and **chylomicron** transport for intestinal absorption. Vitamin A supports retinal phototransduction and cellular differentiation. Vitamin D undergoes hepatic and renal hydroxylation to calcitriol, regulating calcium homeostasis. Vitamin E acts as an antioxidant protecting membrane polyunsaturated lipids from peroxidation. Vitamin K is essential for gamma-glutamyl carboxylation of clotting factors II, VII, IX, and X.",
+   "say": "Fat-soluble vitamins require bile micelles and chylomicrons for absorption. Vitamin A supports vision and epithelial differentiation. Vitamin D is converted to calcitriol for calcium balance. Vitamin E protects membranes from lipid peroxidation. Vitamin K activates clotting factors via gamma-carboxylation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vitamins A and D",
+     "points": [
+      "Act via nuclear receptor gene transcription",
+      "Retinoic acid maintains epithelial barriers",
+      "Calcitriol increases enterocyte calbindin",
+      "Toxicity causes hypercalcemia and teratogenicity"
+     ]
+    },
+    "right": {
+     "title": "Vitamins E and K",
+     "points": [
+      "Vitamin E alpha-tocopherol stops free radical chain reactions",
+      "Vitamin K acts as cofactor for gamma-glutamyl carboxylase",
+      "Warfarin inhibits vitamin K epoxide reductase (VKORC1)",
+      "Deficiency prolongs prothrombin time"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Trace minerals function as vital structural and catalytic **cofactors** for metalloenzymes. Zinc coordinates fingers in nuclear transcription factors and stabilizes carbonic anhydrase and alcohol dehydrogenase. Copper participates in cytochrome c oxidase and lysyl oxidase for collagen crosslinking. Selenium is incorporated as selenocysteine into glutathione peroxidase, while iron orchestrates oxygen transport and mitochondrial electron transfer.",
+   "say": "Trace minerals serve as catalytic cofactors in metalloenzymes. Zinc structures zinc fingers and stabilizes carbonic anhydrase. Copper activates cytochrome c oxidase and lysyl oxidase. Selenium forms selenocysteine in glutathione peroxidase, and iron mediates oxygen and electron transport.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mineral",
+     "Key metalloenzymes",
+     "Clinical deficiency manifestations"
+    ],
+    "rows": [
+     [
+      "Zinc",
+      "Carbonic anhydrase, alkaline phosphatase",
+      "Acrodermatitis enteropathica, impaired wound healing"
+     ],
+     [
+      "Copper",
+      "Cytochrome oxidase, lysyl oxidase, ceruloplasmin",
+      "Menkes kinky-hair disease, microcytic anemia"
+     ],
+     [
+      "Iron",
+      "Hemoglobin, myoglobin, cytochromes",
+      "Microcytic hypochromic anemia, koilonychia"
+     ],
+     [
+      "Selenium",
+      "Glutathione peroxidase, iodothyronine deiodinase",
+      "Keshan cardiomyopathy, myopathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **folate-cobalamin** metabolic intersection explains megaloblastic anemia and subacute combined degeneration. Folate enters cells as N5-methyl-tetrahydrofolate and transfers its methyl group to homocysteine via cobalamin-dependent methionine synthase, generating tetrahydrofolate and methionine. Cobalamin deficiency traps folate in the unusable methyl form, starving thymidylate synthesis and impairing DNA replication in rapidly dividing hematopoietic precursors.",
+   "say": "The folate trap explains megaloblastic anemia in vitamin B12 deficiency. Vitamin B12 receives a methyl group from N5-methyl-THF to produce methionine. Without B12, folate becomes trapped as methyl-THF, halting purine and thymidylate synthesis and impairing DNA replication.",
+   "vis": {
+    "kind": "flow",
+    "title": "Methionine synthase and folate trap",
+    "nodes": [
+     {
+      "id": "mth",
+      "label": "N5-methyl-THF"
+     },
+     {
+      "id": "b12",
+      "label": "Cobalamin cofactor"
+     },
+     {
+      "id": "met",
+      "label": "Methionine synthase"
+     },
+     {
+      "id": "thf",
+      "label": "Free active THF pool"
+     },
+     {
+      "id": "dna",
+      "label": "Thymidylate synthesis & DNA"
+     }
+    ],
+    "edges": [
+     [
+      "mth",
+      "b12",
+      "Transfers methyl group"
+     ],
+     [
+      "b12",
+      "met",
+      "Methylcobalamin intermediate"
+     ],
+     [
+      "met",
+      "thf",
+      "Homocysteine to methionine"
+     ],
+     [
+      "thf",
+      "dna",
+      "10-formyl & methylene THF"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "d3338e3e-4000-8000-d333-8e3e12345678",
+  "d2338cab-4000-8000-d233-8cab12345678",
+  "d1338b18-4000-8000-d133-8b1812345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

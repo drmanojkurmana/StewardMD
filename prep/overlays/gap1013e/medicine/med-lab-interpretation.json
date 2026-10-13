@@ -1,0 +1,757 @@
+{
+ "topic": "med-lab-interpretation",
+ "set": "gap1013e",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1011",
+   "q": "A full blood count shows low haemoglobin with low MCV. First interpretive step is which?",
+   "o": [
+    "Read haemoglobin, MCV, red cell indices, white cells and platelets together with iron studies and the clinical picture before naming the cause",
+    "Diagnose iron deficiency from haemoglobin alone",
+    "Transfuse on the haemoglobin number alone in a stable patient",
+    "Ignore white cells and platelets entirely"
+   ],
+   "a": 0,
+   "exp": "Anaemia interpretation starts with indices and the other cell lines, then iron, B12, folate, blood loss and chronic disease assessment (standard laboratory teaching; NICE, UK). Transfusion follows symptoms and cause, not one number in stable patients.",
+   "r": [
+    "Correct: Interpret anaemia fully.",
+    "Haemoglobin alone cannot name the cause.",
+    "Stable anaemia needs cause before transfusion.",
+    "Other lines reveal marrow and systemic disease."
+   ],
+   "kp": "Interpret anaemia fully.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "cbc"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Interpret anaemia fully.",
+    "others": {
+     "B": "Haemoglobin alone cannot name the cause.",
+     "C": "Stable anaemia needs cause before transfusion.",
+     "D": "Other lines reveal marrow and systemic disease."
+    },
+    "pearl": "Read the whole count, then the cause.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Anaemia interpretation starts with indices and the other cell lines, then iron, B12, folate, blood loss and chronic disease assessment (standard laboratory teaching; NICE, UK). Transfusion follows symptoms and cause, not one number in stable patients.",
+    "lo": "Interpret anaemia fully.",
+    "rev": "Anaemia interpretation starts with indices and the other cell lines, then iron, B12, folate, blood loss and chronic disease assessment (standard laboratory teaching; NICE, UK). Transfusion follows symptoms and cause, not one number in stable patients.",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1012",
+   "q": "Microcytic anaemia with high red cell count and normal iron studies suggests what pattern?",
+   "o": [
+    "Thalassaemia trait enters the differential alongside iron deficiency and chronic disease",
+    "Iron deficiency is proven",
+    "Anaemia of chronic disease is excluded",
+    "No further testing is ever needed"
+   ],
+   "a": 0,
+   "exp": "Preserved red cell numbers with small cells point toward trait, while iron deficiency usually lowers production. Haemoglobin analysis follows where indicated (standard laboratory teaching).",
+   "r": [
+    "Correct: Separate microcytic causes.",
+    "Normal iron argues against deficiency.",
+    "Chronic disease remains possible clinically.",
+    "Trait confirmation needs specific testing."
+   ],
+   "kp": "Separate microcytic causes.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "microcytic"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Separate microcytic causes.",
+    "others": {
+     "B": "Normal iron argues against deficiency.",
+     "C": "Chronic disease remains possible clinically.",
+     "D": "Trait confirmation needs specific testing."
+    },
+    "pearl": "Small cells, many cells: think trait.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Preserved red cell numbers with small cells point toward trait, while iron deficiency usually lowers production. Haemoglobin analysis follows where indicated (standard laboratory teaching).",
+    "lo": "Separate microcytic causes.",
+    "rev": "Preserved red cell numbers with small cells point toward trait, while iron deficiency usually lowers production. Haemoglobin analysis follows where indicated (standard laboratory teaching).",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1013",
+   "q": "Macrocytosis without anaemia still matters because it may signal what?",
+   "o": [
+    "B12 or folate deficiency, alcohol, thyroid or liver disease and medicine effects needing review before anaemia or neurology develops",
+    "Nothing, if haemoglobin is normal",
+    "Only laboratory error in all cases",
+    "An automatic need for transfusion"
+   ],
+   "a": 0,
+   "exp": "Large cells warn early. Finding the cause prevents anaemia and irreversible neurology (standard laboratory teaching).",
+   "r": [
+    "Correct: Investigate macrocytosis early.",
+    "Normal haemoglobin hides early deficiency.",
+    "Error is checked, not assumed.",
+    "Transfusion treats anaemia, not indices."
+   ],
+   "kp": "Investigate macrocytosis early.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "macrocytic"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Investigate macrocytosis early.",
+    "others": {
+     "B": "Normal haemoglobin hides early deficiency.",
+     "C": "Error is checked, not assumed.",
+     "D": "Transfusion treats anaemia, not indices."
+    },
+    "pearl": "Macrocytosis is an early warning.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Large cells warn early. Finding the cause prevents anaemia and irreversible neurology (standard laboratory teaching).",
+    "lo": "Investigate macrocytosis early.",
+    "rev": "Large cells warn early. Finding the cause prevents anaemia and irreversible neurology (standard laboratory teaching).",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1014",
+   "q": "A white cell count is high with left shift and toxic granulation in a febrile patient. Interpretation?",
+   "o": [
+    "Supports acute bacterial infection or severe inflammation in context, while culture and source hunt decide treatment",
+    "Proves viral infection",
+    "Excludes sepsis if the patient looks well",
+    "Replaces the need for cultures"
+   ],
+   "a": 0,
+   "exp": "Neutrophilia with left shift fits bacterial or severe inflammatory stress but never replaces microbiology and source control (standard laboratory teaching).",
+   "r": [
+    "Correct: Interpret white cells in context.",
+    "Viral patterns usually differ, with exceptions.",
+    "Well appearance does not exclude sepsis.",
+    "Cultures guide targeted therapy."
+   ],
+   "kp": "Interpret white cells in context.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "wbc"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Interpret white cells in context.",
+    "others": {
+     "B": "Viral patterns usually differ, with exceptions.",
+     "C": "Well appearance does not exclude sepsis.",
+     "D": "Cultures guide targeted therapy."
+    },
+    "pearl": "Counts support, cultures decide.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Neutrophilia with left shift fits bacterial or severe inflammatory stress but never replaces microbiology and source control (standard laboratory teaching).",
+    "lo": "Interpret white cells in context.",
+    "rev": "Neutrophilia with left shift fits bacterial or severe inflammatory stress but never replaces microbiology and source control (standard laboratory teaching).",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1015",
+   "q": "Thrombocytopenia on a count must first exclude which artefact?",
+   "o": [
+    "Clotted or EDTA affected sample pseudothrombocytopenia, checked by film and repeat in citrate where advised",
+    "True marrow failure in every case",
+    "An immediate need for platelet transfusion without assessment",
+    "Laboratory fraud"
+   ],
+   "a": 0,
+   "exp": "Spurious low platelets waste transfusions and terrify patients. Film review and repeat sampling confirm true thrombocytopenia before invasive workup (standard laboratory teaching).",
+   "r": [
+    "Correct: Confirm true thrombocytopenia.",
+    "Marrow failure is one cause among many.",
+    "Transfusion follows true count and bleeding.",
+    "Artefact is common and checked first."
+   ],
+   "kp": "Confirm true thrombocytopenia.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "platelets"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Confirm true thrombocytopenia.",
+    "others": {
+     "B": "Marrow failure is one cause among many.",
+     "C": "Transfusion follows true count and bleeding.",
+     "D": "Artefact is common and checked first."
+    },
+    "pearl": "Exclude artefact before alarm.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Spurious low platelets waste transfusions and terrify patients. Film review and repeat sampling confirm true thrombocytopenia before invasive workup (standard laboratory teaching).",
+    "lo": "Confirm true thrombocytopenia.",
+    "rev": "Spurious low platelets waste transfusions and terrify patients. Film review and repeat sampling confirm true thrombocytopenia before invasive workup (standard laboratory teaching).",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1016",
+   "q": "Liver tests show transaminases far above alkaline phosphatase. The pattern is called what, and next?",
+   "o": [
+    "Hepatocellular pattern, prompting viral, drug, alcohol, metabolic and ischaemic review with severity markers",
+    "Cholestatic pattern needing only bile duct imaging",
+    "Normal variation needing no review",
+    "A pattern that albumin and INR cannot refine"
+   ],
+   "a": 0,
+   "exp": "Enzyme ratios separate hepatocellular from cholestatic injury. Albumin, bilirubin and clotting show true liver function and urgency (standard laboratory teaching; NICE, UK).",
+   "r": [
+    "Correct: Interpret liver tests by pattern.",
+    "Cholestasis reverses the enzyme emphasis.",
+    "Marked rises always need explanation.",
+    "Synthetic markers grade severity."
+   ],
+   "kp": "Interpret liver tests by pattern.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "lft"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Interpret liver tests by pattern.",
+    "others": {
+     "B": "Cholestasis reverses the enzyme emphasis.",
+     "C": "Marked rises always need explanation.",
+     "D": "Synthetic markers grade severity."
+    },
+    "pearl": "Pattern first, cause and severity next.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Enzyme ratios separate hepatocellular from cholestatic injury. Albumin, bilirubin and clotting show true liver function and urgency (standard laboratory teaching; NICE, UK).",
+    "lo": "Interpret liver tests by pattern.",
+    "rev": "Enzyme ratios separate hepatocellular from cholestatic injury. Albumin, bilirubin and clotting show true liver function and urgency (standard laboratory teaching; NICE, UK).",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1017",
+   "q": "Creatinine rises modestly but urine output falls sharply. Why trust the urine?",
+   "o": [
+    "Kidney injury declares itself by output as well as creatinine, which lags and depends on muscle mass and fluids",
+    "Creatinine alone defines all kidney injury",
+    "Urine output never matters if bloods lag",
+    "Small creatinine rises are always harmless"
+   ],
+   "a": 0,
+   "exp": "Creatinine lags injury and varies with muscle and dilution. Oliguria is an early, independent alarm needing same day action (KDIGO principles). Threshold staging follows the current chart.",
+   "r": [
+    "Correct: Detect kidney injury early.",
+    "Output criteria stand beside creatinine.",
+    "Falling output demands assessment.",
+    "Lagging markers hide early injury."
+   ],
+   "kp": "Detect kidney injury early.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "aki-labs"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Detect kidney injury early.",
+    "others": {
+     "B": "Output criteria stand beside creatinine.",
+     "C": "Falling output demands assessment.",
+     "D": "Lagging markers hide early injury."
+    },
+    "pearl": "Watch urine as well as creatinine.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Creatinine lags injury and varies with muscle and dilution. Oliguria is an early, independent alarm needing same day action (KDIGO principles). Threshold staging follows the current chart.",
+    "lo": "Detect kidney injury early.",
+    "rev": "Creatinine lags injury and varies with muscle and dilution. Oliguria is an early, independent alarm needing same day action (KDIGO principles). Threshold staging follows the current chart.",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1018",
+   "q": "An arterial gas shows low pH, low bicarbonate and low carbon dioxide. The primary disorder is?",
+   "o": [
+    "Metabolic acidosis with respiratory compensation, then anion gap and cause hunt complete interpretation",
+    "Primary respiratory alkalosis",
+    "Normal gas needing no thought",
+    "Compensation that proves the lungs failed first"
+   ],
+   "a": 0,
+   "exp": "Acid pH with low bicarbonate is metabolic acidosis. Low carbon dioxide is expected compensation. Gap and clinical cause decide danger and treatment (standard ABG teaching). Values are read from the patient chart; no numbers are memorised here.",
+   "r": [
+    "Correct: Interpret ABGs in steps.",
+    "Respiratory alkalosis raises pH instead.",
+    "Acidosis is never a normal gas.",
+    "Compensation is appropriate lung response."
+   ],
+   "kp": "Interpret ABGs in steps.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "abg"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Interpret ABGs in steps.",
+    "others": {
+     "B": "Respiratory alkalosis raises pH instead.",
+     "C": "Acidosis is never a normal gas.",
+     "D": "Compensation is appropriate lung response."
+    },
+    "pearl": "pH, bicarbonate, compensation, gap, cause.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Acid pH with low bicarbonate is metabolic acidosis. Low carbon dioxide is expected compensation. Gap and clinical cause decide danger and treatment (standard ABG teaching). Values are read from the patient chart; no numbers are memorised here.",
+    "lo": "Interpret ABGs in steps.",
+    "rev": "Acid pH with low bicarbonate is metabolic acidosis. Low carbon dioxide is expected compensation. Gap and clinical cause decide danger and treatment (standard ABG teaching). Values are read from the patient chart; no numbers are memorised here.",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1019",
+   "q": "Raised troponin in a patient with sepsis and kidney failure means what?",
+   "o": [
+    "Myocardial injury needing ECG, story and trend interpretation, not automatic type one infarction labelling",
+    "Definite plaque rupture in every case",
+    "A laboratory error to ignore",
+    "No cardiac risk at all"
+   ],
+   "a": 0,
+   "exp": "Troponin marks injury, not mechanism. Supply demand, renal clearance and true coronary events are separated by story, ECG and delta change (standard laboratory teaching; ESC principles).",
+   "r": [
+    "Correct: Interpret troponin in context.",
+    "Mechanisms beyond plaque rupture raise troponin.",
+    "Ignoring injury misses real risk.",
+    "Injury still predicts outcome."
+   ],
+   "kp": "Interpret troponin in context.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "troponin"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Interpret troponin in context.",
+    "others": {
+     "B": "Mechanisms beyond plaque rupture raise troponin.",
+     "C": "Ignoring injury misses real risk.",
+     "D": "Injury still predicts outcome."
+    },
+    "pearl": "Troponin means injury, seek mechanism.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Troponin marks injury, not mechanism. Supply demand, renal clearance and true coronary events are separated by story, ECG and delta change (standard laboratory teaching; ESC principles).",
+    "lo": "Interpret troponin in context.",
+    "rev": "Troponin marks injury, not mechanism. Supply demand, renal clearance and true coronary events are separated by story, ECG and delta change (standard laboratory teaching; ESC principles).",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1020",
+   "q": "Coagulation screen is prolonged before surgery. Safest interpretive habit is which?",
+   "o": [
+    "Repeat and review with platelet count, medicines, liver function, bleeding history and haematology advice where unclear",
+    "Proceed because screens never matter",
+    "Cancel all surgery permanently",
+    "Give plasma to every prolonged result without advice"
+   ],
+   "a": 0,
+   "exp": "Screens mislead when isolated. History, medicines and synthetic function decide bleeding risk and correction (standard laboratory teaching). Plasma without indication harms.",
+   "r": [
+    "Correct: Interpret coagulation fully.",
+    "Some prolongations signal real risk.",
+    "Permanent cancellation denies needed care.",
+    "Unadvised plasma adds harm without benefit."
+   ],
+   "kp": "Interpret coagulation fully.",
+   "t": "med-lab-interpretation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "skills",
+    "coagulation"
+   ],
+   "source": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+   "x": {
+    "key": "Interpret coagulation fully.",
+    "others": {
+     "B": "Some prolongations signal real risk.",
+     "C": "Permanent cancellation denies needed care.",
+     "D": "Unadvised plasma adds harm without benefit."
+    },
+    "pearl": "Interpret clotting with the patient.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Screens mislead when isolated. History, medicines and synthetic function decide bleeding risk and correction (standard laboratory teaching). Plasma without indication harms.",
+    "lo": "Interpret coagulation fully.",
+    "rev": "Screens mislead when isolated. History, medicines and synthetic function decide bleeding risk and correction (standard laboratory teaching). Plasma without indication harms.",
+    "next": {
+     "concept": "med-lab-interpretation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Clinical skills and OSCE principles; GMC and NMC CBME practical competencies, India and UK labelled",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-lab-interpretation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

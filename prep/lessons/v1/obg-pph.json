@@ -1,0 +1,65 @@
+{
+ "v": 1,
+ "module": "obg-pph",
+ "subject": "obstetrics-gynaecology",
+ "title": "Postpartum haemorrhage: call, compress, contract, resuscitate",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Postpartum haemorrhage** is underestimated because blood hides in drapes and clots. Call for help early, quantify loss, and start resuscitation alongside cause control. The four causes are **Tone** (atony, commonest), **Trauma**, **Tissue** (retained placenta) and **Thrombin** (clotting failure) (RCOG Green-top guidance).",
+   "say": "Postpartum haemorrhage is underestimated. Call for help early, quantify loss, and resuscitate while controlling the cause: Tone, Trauma, Tissue, Thrombin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Call + quantify"
+     },
+     {
+      "id": "b",
+      "label": "Uterine massage + oxytocic"
+     },
+     {
+      "id": "c",
+      "label": "Find the 4 Ts"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For atony, rub up a contraction and give **oxytocic** therapy per protocol, empty the bladder, and escalate through further uterotonics, tranexamic acid early where indicated, balloon tamponade and theatre if bleeding continues. Give blood products guided by loss and clotting, and keep the patient warm. Retained tissue needs theatre; trauma needs repair; clotting failure needs haematology-guided replacement.",
+   "say": "For atony, rub up a contraction and give oxytocic therapy. Escalate through uterotonics, early tranexamic acid, balloon and theatre, with blood products as indicated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "First fix"
+    ],
+    "rows": [
+     [
+      "Tone",
+      "Massage plus oxytocic"
+     ],
+     [
+      "Tissue",
+      "Theatre for retained tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention is active management of the third stage and vigilance in the first hours, when atony declares itself. Document estimated loss honestly, debrief the woman, and check haemoglobin and iron afterwards. A rising pulse with falling pressure in a pale postpartum woman is bleeding until proved otherwise, even with a firm uterus (think trauma or clots).",
+   "say": "Prevention is active third-stage management and vigilance. A rising pulse in a pale postpartum woman is bleeding until proved otherwise."
+  }
+ ]
+}

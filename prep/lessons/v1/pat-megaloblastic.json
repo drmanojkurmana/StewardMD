@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "pat-megaloblastic",
+ "subject": "pathology",
+ "title": "Megaloblastic and macrocytic anaemias",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Macrocytic anaemia** with megaloblastic marrow change results from impaired DNA synthesis, most often vitamin B12 or folate deficiency. Red cell precursors grow cytoplasm without dividing nuclei on time, producing macroovalocytes and hypersegmented neutrophils in blood. Non megaloblastic macrocytosis from alcohol, liver disease, hypothyroidism or drugs lacks hypersegmentation and marrow megaloblasts, a key distinction.",
+   "say": "Large red cells with hypersegmented neutrophils mean megaloblastic change from B12 or folate lack. Alcohol and liver disease enlarge cells without hypersegmentation. Morphology separates the two groups.",
+   "vis": null
+  },
+  {
+   "tx": "**Vitamin B12** absorption needs gastric intrinsic factor and an intact terminal ileum, so pernicious anaemia from autoimmune gastritis and ileal disease or resection are classic causes. Folate absorbs in the jejunum and depletes within months, while liver B12 stores last years. This timing difference helps date deficiency after surgery or dietary change in exam stems.",
+   "say": "B12 needs intrinsic factor and terminal ileum and stores last years. Folate absorbs in jejunum and depletes in months. Pernicious anaemia destroys intrinsic factor production. Timing helps locate the cause.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vitamin B12 deficiency",
+     "points": [
+      "Stores last years",
+      "Neurological injury may be permanent",
+      "Pernicious anaemia and ileal disease classic",
+      "Methylmalonic acid raised"
+     ]
+    },
+    "right": {
+     "title": "Folate deficiency",
+     "points": [
+      "Stores last months",
+      "No primary neurological injury",
+      "Diet, pregnancy demand, jejunal disease classic",
+      "Methylmalonic acid normal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Only B12 deficiency injures the nervous system, through **subacute combined degeneration** of dorsal and lateral spinal cord columns. Vibration and proprioception fail first with brisk reflexes and extensor plantars from combined cord lesions, plus glossitis and anaemia. Treatment urgency matters because delayed replacement leaves permanent cord damage even as blood recovers.",
+   "say": "Only B12 lack damages the cord, hitting vibration and position sense with mixed reflex signs. Blood recovery does not guarantee nerve recovery. Treat urgently when neurology appears.",
+   "vis": null
+  },
+  {
+   "tx": "**Pernicious anaemia** is autoimmune destruction of gastric parietal cells causing achlorhydria and intrinsic factor failure, associated with other autoimmune diseases and increased gastric cancer risk. Antibodies to intrinsic factor are specific, while parietal cell antibodies are sensitive but less specific. Schilling test is historical now, replaced by antibody and vitamin level assessment.",
+   "say": "Pernicious anaemia is autoimmune gastritis destroying parietal cells. Intrinsic factor antibody is specific. Associated autoimmunity and gastric cancer risk follow. Modern testing uses levels and antibodies.",
+   "vis": null
+  },
+  {
+   "tx": "Folate deficiency in early pregnancy causes **neural tube defects**, so periconception supplementation is preventive rather than therapeutic after closure. Methotrexate and other antifolates reproduce megaloblastic change pharmacologically, rescued by folinic acid. Always measure both vitamins before treating, because folate alone can correct blood counts while B12 cord injury silently progresses.",
+   "say": "Folate lack around conception causes neural tube defects, so prevention precedes pregnancy recognition. Never give folate alone before checking B12. Masking blood signs lets cord damage advance.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-071",
+  "bk2-pat-072",
+  "bk2-pat-073",
+  "bk2-pat-074",
+  "bk2-pat-075",
+  "bk2-pat-076",
+  "bk2-pat-077",
+  "bk2-pat-078",
+  "bk2-pat-079",
+  "bk2-pat-080"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

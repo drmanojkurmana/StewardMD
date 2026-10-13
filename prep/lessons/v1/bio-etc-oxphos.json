@@ -1,0 +1,180 @@
+{
+ "module": "bio-etc-oxphos",
+ "subject": "biochemistry",
+ "title": "Mitochondrial bioenergetics: electron transport chain complexes, proton gradient and uncoupling",
+ "minutes": 6,
+ "refs": [
+  "Lehninger Principles of Biochemistry 8th ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Mitochondrial **oxidative** phosphorylation couples exergonic electron transfer to endergonic ATP synthesis. High-energy electrons donated by NADH and FADH2 traverse four multi-protein complexes embedded in the inner mitochondrial membrane. Complexes I, III, and IV pump protons outward from matrix into the intermembrane space, generating a steep electrochemical potential gradient composed of both electrical voltage and chemical proton concentration differences.",
+   "say": "Oxidative phosphorylation couples electron transfer to ATP generation. Electrons from NADH and FADH2 move through four inner membrane complexes. Complexes I, III, and IV pump protons into the intermembrane space, building a steep electrochemical gradient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ETC complex",
+     "Prosthetic groups",
+     "Protons pumped per electron pair",
+     "Specific chemical inhibitor"
+    ],
+    "rows": [
+     [
+      "Complex I (NADH DH)",
+      "FMN, iron-sulfur centers",
+      "4 protons pumped",
+      "Rotenone, piericidin A"
+     ],
+     [
+      "Complex II (Succinate DH)",
+      "FAD, iron-sulfur, heme b",
+      "0 protons pumped",
+      "Malonate competitive inhibitor"
+     ],
+     [
+      "Complex III (bc1 complex)",
+      "Cytochromes b, c1, Fe-S (Rieske)",
+      "4 protons pumped",
+      "Antimycin A"
+     ],
+     [
+      "Complex IV (Cytochrome c oxidase)",
+      "Hemes a, a3, CuA, CuB centers",
+      "2 protons pumped",
+      "Cyanide, carbon monoxide, azide"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "ATP synthase, designated **Complex V**, functions as a rotary molecular motor driven by proton re-entry into the matrix. The hydrophobic F0 subunit forms a transmembrane proton channel across the inner membrane, whereas the hydrophilic F1 headpiece extends into the matrix and contains three catalytic alpha-beta pairs. Proton flow through F0 spins the c-ring rotor and central gamma-shaft, inducing conformational changes that synthesize ATP.",
+   "say": "Complex V ATP synthase acts as a rotary motor powered by proton flow back into the matrix. The hydrophobic F0 domain forms the proton channel, while the F1 domain in the matrix synthesizes ATP. Proton transit spins the c-ring and gamma stalk, driving cyclic ATP synthesis.",
+   "vis": {
+    "kind": "flow",
+    "title": "ATP synthase mechanical rotation",
+    "nodes": [
+     {
+      "id": "ims",
+      "label": "Proton in intermembrane space"
+     },
+     {
+      "id": "f0",
+      "label": "F0 c-subunit aspartate binding"
+     },
+     {
+      "id": "rot",
+      "label": "360-degree rotor rotation"
+     },
+     {
+      "id": "gam",
+      "label": "Asymmetric gamma stalk turning"
+     },
+     {
+      "id": "f1",
+      "label": "F1 beta-subunit catalytic cycle"
+     }
+    ],
+    "edges": [
+     [
+      "ims",
+      "f0",
+      "Enters half-channel"
+     ],
+     [
+      "f0",
+      "rot",
+      "Neutralizes negative charge"
+     ],
+     [
+      "rot",
+      "gam",
+      "Drives central axle"
+     ],
+     [
+      "gam",
+      "f1",
+      "Open -> Loose -> Tight"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chemical **uncouplers** dissipate the mitochondrial proton gradient without inhibiting electron transport chain complexes. Compounds like 2,4-dinitrophenol and high-dose aspirin act as lipophilic protonophores, picking up protons in the intermembrane space and freely diffusing across the inner membrane into the matrix. This collapses the proton-motive force, abolishing ATP synthesis while accelerating oxygen consumption and converting electron transfer energy entirely into heat.",
+   "say": "Uncouplers collapse the proton gradient without blocking electron transport. Lipophilic compounds like 2,4-dinitrophenol and toxic aspirin doses shuttle protons across the inner membrane into the matrix. This abolishes ATP synthesis while maximizing oxygen use and releasing energy as heat.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ETC inhibitors (Cyanide, CO)",
+     "points": [
+      "Directly block electron flow at Complex IV",
+      "Arrest proton pumping",
+      "Inhibit cellular oxygen consumption",
+      "Cause severe cellular hypoxia and lactic acidosis"
+     ]
+    },
+    "right": {
+     "title": "Proton uncouplers (DNP, Thermogenin)",
+     "points": [
+      "Collapse electrochemical proton gradient",
+      "Electron transport proceeds unconstrained",
+      "Stimulate maximal oxygen consumption",
+      "Generate intense systemic hyperthermia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Brown adipose tissue utilizes physiological uncoupling mediated by **thermogenin**, also known as uncoupling protein 1, for non-shivering thermogenesis. In response to cold exposure, norepinephrine stimulates beta-3 adrenergic receptors, elevating intracellular cyclic AMP and activating protein kinase A. This promotes lipolysis, releasing free fatty acids that activate thermogenin channels, dissipating the proton gradient and generating vital heat to protect newborns from hypothermia.",
+   "say": "Brown adipose tissue uses uncoupling protein 1, thermogenin, for non-shivering thermogenesis. Cold stimulates beta-3 adrenergic receptors to raise cyclic AMP and activate lipase. Liberated fatty acids open thermogenin, collapsing the proton gradient to produce heat in newborns.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tissue/Compound",
+     "Uncoupling mechanism",
+     "Physiological consequence"
+    ],
+    "rows": [
+     [
+      "UCP1 (Thermogenin)",
+      "Endogenous brown fat proton channel",
+      "Non-shivering thermogenesis in neonates"
+     ],
+     [
+      "UCP2 and UCP3",
+      "Expressed in muscle and white adipose",
+      "Regulation of mitochondrial reactive oxygen species"
+     ],
+     [
+      "2,4-Dinitrophenol (DNP)",
+      "Synthetic lipophilic weak acid",
+      "Lethal hyperpyrexia, diaphoresis, tachycardia"
+     ],
+     [
+      "Aspirin overdose",
+      "Weak acid uncoupling at high doses",
+      "Fever, tachypnea, mixed respiratory/metabolic acidosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "f03d2705-4000-8000-f03d-270512345678",
+  "ed3d224c-4000-8000-ed3d-224c12345678",
+  "ee3d23df-4000-8000-ee3d-23df12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

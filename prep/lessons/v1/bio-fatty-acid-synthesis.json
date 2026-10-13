@@ -1,0 +1,198 @@
+{
+ "module": "bio-fatty-acid-synthesis",
+ "subject": "biochemistry",
+ "title": "Lipogenesis: citrate shuttle, fatty acid synthase complex and triacylglycerol packaging",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "De novo fatty acid synthesis occurs in the **cytosol** under conditions of caloric and carbohydrate excess. Acetyl-CoA generated inside mitochondria cannot penetrate the inner mitochondrial membrane. The **citrate shuttle** resolves this barrier: mitochondrial citrate synthase combines acetyl-CoA with oxaloacetate to form citrate, which exits into the cytosol via the tricarboxylate carrier. Cytosolic ATP-citrate lyase then cleaves citrate back into acetyl-CoA and oxaloacetate.",
+   "say": "De novo fatty acid synthesis occurs in the cytosol when calories are abundant. Mitochondrial acetyl-CoA cannot cross the inner membrane directly. The citrate shuttle exports mitochondrial citrate to cytosol, where ATP-citrate lyase cleaves it into cytosolic acetyl-CoA and oxaloacetate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Citrate shuttle for cytosolic lipogenesis",
+    "nodes": [
+     {
+      "id": "pyr",
+      "label": "Pyruvate entry to matrix"
+     },
+     {
+      "id": "cit",
+      "label": "Mitochondrial citrate synthesis"
+     },
+     {
+      "id": "car",
+      "label": "Tricarboxylate carrier export"
+     },
+     {
+      "id": "acl",
+      "label": "Cytosolic ATP-citrate lyase"
+     },
+     {
+      "id": "aco",
+      "label": "Cytosolic acetyl-CoA pool"
+     }
+    ],
+    "edges": [
+     [
+      "pyr",
+      "cit",
+      "PDH + Pyruvate carboxylase"
+     ],
+     [
+      "cit",
+      "car",
+      "High energy state"
+     ],
+     [
+      "car",
+      "acl",
+      "Reaches cytosol"
+     ],
+     [
+      "acl",
+      "aco",
+      "Requires ATP hydrolysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The rate-limiting commitment step is catalyzed by **acetyl-CoA** carboxylase, a biotin-dependent cytosolic enzyme. The enzyme adds a carboxyl group to acetyl-CoA, forming malonyl-CoA at the expense of one ATP molecule. Acetyl-CoA carboxylase is allosterically activated by citrate, which induces polymerization of inactive protomers into active filaments. It is allosterically inhibited by palmitoyl-CoA and phosphorylated into an inactive state by AMP-activated protein kinase.",
+   "say": "Acetyl-CoA carboxylase catalyzes the rate-limiting step of lipogenesis, converting acetyl-CoA to malonyl-CoA using biotin and ATP. Citrate allosterically polymerizes and activates the enzyme. Palmitoyl-CoA and AMP-activated protein kinase phosphorylate and inhibit it during energetic stress.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Activators of ACC",
+     "points": [
+      "Citrate: allosteric polymerization",
+      "Insulin: activates protein phosphatase-2A",
+      "Dephosphorylation promotes active conformation",
+      "High-carbohydrate feeding increases transcription"
+     ]
+    },
+    "right": {
+     "title": "Inhibitors of ACC",
+     "points": [
+      "Palmitoyl-CoA: feedback depolymerization",
+      "Glucagon and epinephrine: activate PKA",
+      "AMPK: phosphorylates enzyme during low ATP",
+      "Malonyl-CoA inhibits CPT-1 to block beta-oxidation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Palmitate is elongated by **fatty acid** synthase, a homodimeric multi-enzyme complex bearing seven catalytic activities and an acyl carrier protein domain. Synthesis begins with acetyl and malonyl priming, followed by cyclic four-step elongation: condensation, reduction, dehydration, and second reduction using NADPH. Each cycle adds two carbons derived from malonyl-CoA. After seven rounds, thioesterase hydrolyzes the completed sixteen-carbon palmitate from the acyl carrier protein.",
+   "say": "Fatty acid synthase is a multifunctional dimer with seven catalytic domains and an acyl carrier protein. Elongation proceeds through repeated cycles of condensation, reduction, dehydration, and reduction driven by NADPH. After seven rounds, thioesterase releases the sixteen-carbon palmitate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Reaction step",
+     "Catalytic domain",
+     "Cofactor consumed",
+     "Chemical transformation"
+    ],
+    "rows": [
+     [
+      "Condensation",
+      "Beta-ketoacyl-ACP synthase",
+      "Releases CO2",
+      "Combines acyl chain with malonyl group"
+     ],
+     [
+      "First reduction",
+      "Beta-ketoacyl-ACP reductase",
+      "Consumes 1 NADPH",
+      "Keto group reduced to D-hydroxy group"
+     ],
+     [
+      "Dehydration",
+      "Beta-hydroxyacyl-ACP dehydratase",
+      "Releases H2O",
+      "Introduces trans-double bond"
+     ],
+     [
+      "Second reduction",
+      "Enoyl-ACP reductase",
+      "Consumes 1 NADPH",
+      "Saturates double bond to single bond"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Palmitate undergoes esterification into **triacylglycerols** for storage or transport. In liver and adipose tissue, glycerol-3-phosphate is sequentially acylated by two fatty acyl-CoAs to produce phosphatidic acid. Phosphatidate phosphatase removes the phosphate to yield diacylglycerol, which undergoes a third acylation by DGAT to form triacylglycerol. Hepatocytes package triacylglycerols into very low-density lipoproteins for secretion into plasma, preventing hepatic steatosis.",
+   "say": "Palmitate is esterified into triacylglycerols for storage or secretion. Glycerol-3-phosphate is acylated twice to form phosphatidic acid. Phosphatidate phosphatase removes the phosphate, and diacylglycerol acyltransferase adds a third fatty acid to generate triacylglycerol for VLDL packaging.",
+   "vis": {
+    "kind": "flow",
+    "title": "Triacylglycerol synthesis and packaging",
+    "nodes": [
+     {
+      "id": "g3p",
+      "label": "Glycerol-3-phosphate"
+     },
+     {
+      "id": "pa",
+      "label": "Phosphatidic acid"
+     },
+     {
+      "id": "dag",
+      "label": "1,2-diacylglycerol"
+     },
+     {
+      "id": "tag",
+      "label": "Triacylglycerol"
+     },
+     {
+      "id": "vldl",
+      "label": "VLDL assembly with ApoB-100"
+     }
+    ],
+    "edges": [
+     [
+      "g3p",
+      "pa",
+      "2 acyl-CoA additions"
+     ],
+     [
+      "pa",
+      "dag",
+      "Lipin-1 phosphatase"
+     ],
+     [
+      "dag",
+      "tag",
+      "DGAT reaction"
+     ],
+     [
+      "tag",
+      "vldl",
+      "MTP-assisted packaging"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "defaf74e-4000-8000-defa-f74e12345678",
+  "ddfaf5bb-4000-8000-ddfa-f5bb12345678",
+  "dcfaf428-4000-8000-dcfa-f42812345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
