@@ -1,0 +1,757 @@
+{
+ "topic": "med-overdose",
+ "set": "gap1013c",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap771",
+   "q": "A patient took a paracetamol overdose six hours ago and feels completely well. What is correct?",
+   "o": [
+    "He still needs timed levels and toxicology-guided assessment; feeling well does not exclude liver injury",
+    "Discharge without tests",
+    "Reassurance based on symptoms alone",
+    "Waiting for jaundice before testing"
+   ],
+   "a": 0,
+   "exp": "Paracetamol injures silently; timed levels and toxicology advice decide care (NPIS TOXBASE).",
+   "r": [
+    "Correct: Silent liver injury.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Silent liver injury.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "paracetamol",
+    "assessment"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Silent liver injury.",
+    "others": {
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Well does not mean safe in paracetamol overdose.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Silent liver injury.",
+    "rev": "Paracetamol injures silently; timed levels and toxicology advice decide care (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap772",
+   "q": "Which detail most changes paracetamol risk assessment?",
+   "o": [
+    "The brand name alone",
+    "Whether the dose was staggered over days, with exact times and amounts",
+    "The colour of tablets",
+    "Whether it rained"
+   ],
+   "a": 1,
+   "exp": "Staggered overdoses risk injury at lower apparent doses; times and amounts drive decisions (NPIS TOXBASE).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Staggered overdose.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Staggered overdose.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "paracetamol",
+    "history"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Staggered overdose.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Ask staggered, always.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Staggered overdose.",
+    "rev": "Staggered overdoses risk injury at lower apparent doses; times and amounts drive decisions (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap773",
+   "q": "Who guides acetylcysteine decisions alongside timed levels?",
+   "o": [
+    "The patient alone",
+    "Guesswork from memory",
+    "Toxicology advice, through NPIS TOXBASE in the UK",
+    "A routine outpatient review next month"
+   ],
+   "a": 2,
+   "exp": "Antidote decisions are protocol and toxicology guided, never guessed (NPIS TOXBASE).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Antidote decision.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Antidote decision.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "paracetamol",
+    "antidote"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Antidote decision.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Levels plus toxicology advice.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Antidote decision.",
+    "rev": "Antidote decisions are protocol and toxicology guided, never guessed (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap774",
+   "q": "Three days after an untreated overdose a patient has right-upper-quadrant pain and jaundice. This signals what?",
+   "o": [
+    "Normal recovery",
+    "Simple gastritis",
+    "A gallstone in all cases",
+    "Established liver injury needing urgent senior and possibly transplant-centre input"
+   ],
+   "a": 3,
+   "exp": "Late pain and jaundice mean established liver injury (NPIS TOXBASE).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Late presentation."
+   ],
+   "kp": "Late presentation.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "paracetamol",
+    "liver"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Late presentation.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Late signs mean liver injury.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Late presentation.",
+    "rev": "Late pain and jaundice mean established liver injury (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap775",
+   "q": "Activated charcoal in paracetamol overdose is considered how?",
+   "o": [
+    "At any time for a week",
+    "Only very early, where protocol and airway allow",
+    "Instead of levels and advice",
+    "Without airway assessment"
+   ],
+   "a": 1,
+   "exp": "Charcoal is an early, protocol and airway-conditional option only (NPIS TOXBASE).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Charcoal timing.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Charcoal timing.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "paracetamol",
+    "charcoal"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Charcoal timing.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Charcoal is early or not at all.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Charcoal timing.",
+    "rev": "Charcoal is an early, protocol and airway-conditional option only (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap776",
+   "q": "After medical stabilisation of a deliberate overdose, what assessment follows?",
+   "o": [
+    "Mental-health assessment, collateral history and safeguarding",
+    "None, discharge immediately",
+    "Only a repeat prescription",
+    "A routine dental review"
+   ],
+   "a": 0,
+   "exp": "Every deliberate overdose gets mental-health and safeguarding assessment after stabilisation (NPIS TOXBASE practice).",
+   "r": [
+    "Correct: Whole-person assessment.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Whole-person assessment.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "overdose",
+    "safeguarding"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Whole-person assessment.",
+    "others": {
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Treat the person, not only the poison.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Whole-person assessment.",
+    "rev": "Every deliberate overdose gets mental-health and safeguarding assessment after stabilisation (NPIS TOXBASE practice).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap777",
+   "q": "Documentation in poisoning must record what precisely?",
+   "o": [
+    "Only the date of admission",
+    "Only the ward",
+    "Visitors' names",
+    "Ingestion times, amounts, co-ingestants and alcohol"
+   ],
+   "a": 3,
+   "exp": "In poisoning the clock is an investigation result; times are recorded exactly (NPIS TOXBASE).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Poisoning documentation."
+   ],
+   "kp": "Poisoning documentation.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "overdose",
+    "documentation"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Poisoning documentation.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Times are results in poisoning.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Poisoning documentation.",
+    "rev": "In poisoning the clock is an investigation result; times are recorded exactly (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap778",
+   "q": "A staggered overdose is presented as low risk by the patient. What is done?",
+   "o": [
+    "Discharge on the patient's assurance",
+    "No blood tests",
+    "Toxicology input is taken before any low-risk discharge decision",
+    "Routine review in a year"
+   ],
+   "a": 2,
+   "exp": "Staggered overdoses are never cleared without toxicology input (NPIS TOXBASE).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Staggered caution.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Staggered caution.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "paracetamol",
+    "safety"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Staggered caution.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Never clear staggered without advice.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Staggered caution.",
+    "rev": "Staggered overdoses are never cleared without toxicology input (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap779",
+   "q": "Baseline bloods in paracetamol poisoning include what and why?",
+   "o": [
+    "Hearing tests",
+    "Liver tests and clotting alongside the timed paracetamol level",
+    "Vision charts",
+    "Lung volumes"
+   ],
+   "a": 1,
+   "exp": "Liver tests and clotting track the organ paracetamol injures (NPIS TOXBASE).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Baseline bloods.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Baseline bloods.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "paracetamol",
+    "bloods"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Baseline bloods.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Test the liver it injures.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Baseline bloods.",
+    "rev": "Liver tests and clotting track the organ paracetamol injures (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap780",
+   "q": "The paracetamol treatment line is applied how?",
+   "o": [
+    "From memory of a fixed number for all",
+    "Ignoring ingestion time",
+    "With the timed level and toxicology advice, per current protocol",
+    "Only if symptoms appear"
+   ],
+   "a": 2,
+   "exp": "Timed level, treatment line and toxicology advice combine per protocol (NPIS TOXBASE).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Treatment line use.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Treatment line use.",
+   "t": "med-overdose",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013c",
+   "tg": [
+    "paracetamol",
+    "protocol"
+   ],
+   "source": "NPIS TOXBASE paracetamol guidance",
+   "x": {
+    "key": "Treatment line use.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Time, level, line, advice.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Treatment line use.",
+    "rev": "Timed level, treatment line and toxicology advice combine per protocol (NPIS TOXBASE).",
+    "next": {
+     "concept": "med-overdose",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NPIS TOXBASE paracetamol guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-overdose"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013c"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

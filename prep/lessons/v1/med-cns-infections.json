@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "med-cns-infections",
+ "subject": "medicine",
+ "title": "Meningitis: antibiotics fast, do not let tests delay them",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Meningitis** kills and disables through delay. Suspect it with fever, headache, neck stiffness, photophobia, vomiting, confusion or a non-blanching rash, remembering that babies show poor feeding, irritability or a bulging fontanelle and older adults may show mainly confusion. Take bloods and cultures, but **do not let lumbar puncture or imaging delay antibiotics** when meningitis is suspected (NICE NG240).",
+   "say": "Suspect meningitis with fever, headache, stiff neck or a non-blanching rash, and never let puncture or imaging delay antibiotics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect meningitis"
+     },
+     {
+      "id": "b",
+      "label": "Bloods + cultures"
+     },
+     {
+      "id": "c",
+      "label": "Antibiotics without delay"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lumbar puncture** is deferred or avoided with reduced consciousness, seizures, focal signs, shock, breathing compromise or clotting problems, following senior and guideline assessment. Give protocol antibiotics and dexamethasone where indicated, support airway, breathing and circulation, and isolate and notify as required. Close contacts may need preventive treatment as public-health teams advise.",
+   "say": "Defer lumbar puncture with low consciousness, seizures, focal signs or shock. Contacts are managed through public-health advice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Defer LP",
+     "Still do"
+    ],
+    "rows": [
+     [
+      "Low consciousness, focal signs",
+      "Antibiotics, support, notify"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Meningococcal disease can crash from rash to shock in hours, so a spreading purpuric rash with an unwell patient is resuscitation first. Document antibiotic times precisely. Recovery needs follow-up for hearing, learning and limb complications, and the family needs clear explanations of what happened and why speed mattered.",
+   "say": "A spreading purpuric rash with an unwell patient means resuscitate first, document antibiotic times, and arrange recovery follow-up.",
+   "vis": null
+  }
+ ]
+}

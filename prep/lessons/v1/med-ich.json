@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "med-ich",
+ "subject": "medicine",
+ "title": "Raised intracranial pressure and intracranial bleeding: protect the brain",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The skull is a rigid box, so bleeding, swelling or obstruction inside it raises **intracranial pressure** and threatens brain perfusion. Warning signs are falling consciousness, severe or worsening headache, vomiting, unequal or unreactive pupils, posturing and the late Cushing response of rising pressure with slowing pulse. Any of these after stroke, bleeding or head injury is a **neurosurgical and critical-care emergency** (NICE NG236; NICE head injury guidance).",
+   "say": "Falling consciousness, worsening headache, vomiting or pupil change means raised pressure until proved otherwise, needing neurosurgical and critical-care help.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Headache / bleed / injury"
+     },
+     {
+      "id": "b",
+      "label": "Falling consciousness or pupils"
+     },
+     {
+      "id": "c",
+      "label": "Neurosurgical emergency"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First measures are simple and immediate: **head-up positioning as advised, oxygenation, avoiding hypotension and fever, treating seizures and pain**, urgent imaging and immediate neurosurgical discussion. Specific pressure-lowering medicines and hyperosmolar therapy are senior-directed. Do not give sedatives that mask consciousness without senior instruction, and never delay imaging or referral for routine observations.",
+   "say": "Head up as advised, protect oxygen and pressure, image urgently and discuss with neurosurgery at once.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Do now",
+     "Avoid"
+    ],
+    "rows": [
+     [
+      "Oxygen, pressure, image, refer",
+      "Masking sedation without senior advice"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In intracerebral haemorrhage, control blood pressure as guided, reverse anticoagulation and correct clotting while neurosurgical advice is sought. Reassess consciousness and pupils on a charted schedule; a one-point fall is escalation, not a footnote. Families need honest, early communication about severity and uncertainty.",
+   "say": "In brain bleeding, control pressure as guided, reverse anticoagulation, chart consciousness and pupils, and communicate honestly and early.",
+   "vis": null
+  }
+ ]
+}

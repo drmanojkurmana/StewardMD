@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "med-overdose",
+ "subject": "medicine",
+ "title": "Paracetamol poisoning: time, levels, antidote by toxicology advice",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Paracetamol** in overdose silently injures the liver, so the patient may look well while damage begins. Record the **exact time and amount ingested**, other drugs and alcohol taken, and whether the dose was staggered over days, because staggered overdoses carry risk at lower apparent doses. Involve **toxicology advice (NPIS TOXBASE in the UK)** early; management is protocol-driven, never guessed.",
+   "say": "Record time, amount and whether the overdose was staggered, and take toxicology advice early. A well-looking patient can still be injured.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Time + amount + staggered?"
+     },
+     {
+      "id": "b",
+      "label": "Toxicology advice"
+     },
+     {
+      "id": "c",
+      "label": "Level + antidote decision"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **timed blood paracetamol level**, liver tests, clotting and other baseline bloods guide whether the antidote **acetylcysteine** is needed, judged against the treatment line and toxicology advice. Activated charcoal is considered only very early and only where protocol and airway allow. Vomiting, abdominal pain or jaundice appearing days later signals established liver injury and possible transplant-centre referral.",
+   "say": "Timed levels and liver tests, judged with toxicology advice, decide acetylcysteine. Late pain or jaundice means liver injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Early",
+     "Late"
+    ],
+    "rows": [
+     [
+      "Timed level + advice",
+      "Pain, jaundice: liver injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Assess the person, not only the poison: mental-health assessment, collateral history and safeguarding follow medical stabilisation in every deliberate overdose. Never discharge a staggered overdose as low risk without toxicology input. Document times honestly; in poisoning, the clock is an investigation result.",
+   "say": "After stabilisation, assess mental health and safeguarding, and never clear a staggered overdose without toxicology input.",
+   "vis": null
+  }
+ ]
+}

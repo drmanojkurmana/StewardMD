@@ -143,13 +143,13 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.deepEqual(P.oldOverlays("medcov2"), ["medcov"]);
   assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
   assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
-  assert.match(read("prep.js"), /medicine: \["medcov4", "maik1", "maiktopic1", "ck2", "gap1013a", "gap1013b"\], anaesthesia: \["gap1013a"\], pathology: \["maik1", "maiktopic1"\], pharmacology: \["maik1", "maiktopic1"\], "ss-pulmonology": \["medcov4", "maik29", "maikfill4", "maikfill7"\], "ss-cardiology": \["maik29", "maikfill1"\], "ss-critical-care": \["maik29", "maikfill2"\], "ss-endocrinology": \["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9"\], "ss-nephrology": \["maik29", "maikfill2"\]/, "maikfill0-9 join the SS subjects (maik29/maik30 intact)");
+  assert.match(read("prep.js"), /medicine: \["medcov4", "maik1", "maiktopic1", "ck2", "gap1013a", "gap1013b", "gap1013c"\], anaesthesia: \["gap1013a", "gap1013c"\], pathology: \["maik1", "maiktopic1"\], pharmacology: \["maik1", "maiktopic1"\], "ss-pulmonology": \["medcov4", "maik29", "maikfill4", "maikfill7"\], "ss-cardiology": \["maik29", "maikfill1"\], "ss-critical-care": \["maik29", "maikfill2"\], "ss-endocrinology": \["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9"\], "ss-nephrology": \["maik29", "maikfill2"\]/, "maikfill0-9 join the SS subjects (maik29/maik30 intact)");
   assert.match(read("prep.js"), /"ss-endocrinology": \["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9"\]/, "maik30 wires sen-monogenic-diabetes (maikfill4/8/9 join)");
   assert.match(read("prep.js"), /"ss-infectious-diseases": \["maiktopic1", "maik26", "maikfill0", "maikfill2"\]/, "maikfill0 wires the pilot modules");
   assert.match(read("prep.js"), /"mcc-chronic-care": \["maik23", "maik24", "maik27", "maikfill1", "maikfill7"\]/, "maikfill1/maikfill7 wire mcc-chronic-care");
   assert.match(read("prep.js"), /"plab-biochemistry": \["maikfill1"\], "plab-dermatology": \["maikfill1", "maikfill7"\]/, "maikfill sets wire the new plab subjects");
   assert.match(read("prep.js"), /"ss-neurology": \["maikfill6"\]/, "maikfill6 wires ss-neurology");
-  assert.match(read("prep.js"), /paediatrics: \["maiktopic1", "ck2"\], surgery: \["maiktopic1", "ck2"\]/, "step2ck subjects read the ck1 overlay");
+  assert.match(read("prep.js"), /paediatrics: \["maiktopic1", "ck2", "gap1013c"\], surgery: \["maiktopic1", "ck2", "gap1013c"\]/, "step2ck subjects read the ck1 overlay");
   assert.deepEqual(P.oldOverlays("radmax7"), ["radmax", "radmax2", "radmax3", "radmax4", "radmax5", "radmax6"], "radmax7 replaces cached radmax to radmax6 copies");
   assert.deepEqual(P.oldOverlays("radmax5"), ["radmax", "radmax2", "radmax3", "radmax4"], "radmax5 replaces cached radmax to radmax4 copies");
   assert.deepEqual(P.oldOverlays("radnotes3"), ["radnotes", "radnotes2"], "radnotes3 replaces cached radnotes and radnotes2 copies");
