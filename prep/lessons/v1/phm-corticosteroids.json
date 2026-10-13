@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "phm-corticosteroids",
+ "subject": "pharmacology",
+ "title": "Corticosteroid safety: benefit today, adrenal and bone harm tomorrow",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Corticosteroids** suppress inflammation powerfully and harm quietly: raised glucose and pressure, infection masking, mood and sleep disturbance, bone loss, muscle weakness and adrenal suppression. Use the **lowest effective dose for the shortest time**, record indication and review date, and monitor glucose, pressure, mood and infection. Patients on longer courses carry steroid information and know not to stop suddenly (BNF corticosteroid safety).",
+   "say": "Lowest dose, shortest time, with a recorded indication, review date and monitoring plan.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lowest dose, shortest time"
+     },
+     {
+      "id": "b",
+      "label": "Monitor glucose, pressure, infection"
+     },
+     {
+      "id": "c",
+      "label": "Never stop suddenly"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prolonged steroids suppress the adrenal axis, so sudden stopping or intercurrent illness can provoke **adrenal crisis**: vomiting, abdominal pain, weakness, low pressure and collapse. Treatment is urgent protocol hydrocortisone and fluids with senior help, while steroids are tapered as guided during recovery. Sick-day steroid advice is agreed in advance for at-risk patients, not invented during the crisis (BNF; adrenal insufficiency guidance).",
+   "say": "Sudden stopping or illness on long-term steroids can cause adrenal crisis, needing urgent protocol treatment and senior help.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trigger",
+     "Danger"
+    ],
+    "rows": [
+     [
+      "Sudden stop / illness",
+      "Adrenal crisis"
+     ],
+     [
+      "Recovery",
+      "Guided taper"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bone, eye, growth and vaccine cautions travel with steroids: bone protection is considered for longer courses, live vaccines are avoided during significant immunosuppression as guided, and children need growth monitoring. Document cumulative burden when courses repeat. Exact taper schedules and crisis doses follow current protocols and are flagged here rather than generalised.",
+   "say": "Consider bone protection, vaccine cautions and growth checks, and take exact tapers from current protocols.",
+   "vis": null
+  }
+ ]
+}

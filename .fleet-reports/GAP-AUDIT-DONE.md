@@ -1,24 +1,22 @@
 # GAP-AUDIT-DONE: remaining gaps and owner questions
 
-Date: 2026-10-13. Branches gap-audit-1013 (wave 1), gap-audit-1013b (wave 2), gap-audit-1013c (wave 3). Full checklist: GAP-AUDIT.md. No Claude API spend.
+Date: 2026-10-13. Waves: gap1013a (#1542), gap1013b (#1544), gap1013c (#1545), gap1013d (this branch). Full checklist: GAP-AUDIT.md. No Claude API spend.
 
 ## Done
-Wave 1 (gap1013a, PR #1542): audit of 2,435 modules; lessons + 60 MCQs (sepsis, anaphylaxis, organophosphate, snake bite, difficult airway, hyperkalaemia).
-Wave 2 (gap1013b, PR #1544): lessons + 60 MCQs (ACS, DKA/HHS, status epilepticus, stroke, eclampsia, PPH).
-Wave 3 (gap1013c, this branch): lessons + 140 MCQs (mk-gap701-840) for ACLS/BLS, neonatal resuscitation, ATLS, PE, tension pneumothorax, massive haemorrhage, ectopic, paracetamol, hyponatraemia, raised ICP, meningitis, malignant hyperthermia, LAST, paediatric dehydration. All 26 life-critical audit lines now have lesson + 10+ depth MCQs.
+Waves 1-3: all 26 life-critical lines have lesson + 10+ depth MCQs (260 items, 26 lessons).
+Wave 4 (drug safety): lessons + 50 MCQs (mk-gap841-890) for insulin, opioids, corticosteroids, antidotes/chelators and drug interactions.
 
 ## Independent check (Step 3)
-Second re-read of all 140 wave-3 items against the guideline named in each source field. Dose scan: no item or lesson states a numeric dose, correction rate or rehydration volume. Flagged omissions (teach sequence, defer number to protocol chart): dantrolene dose, local-anaesthetic maximum doses, sodium correction limits, paediatric millilitre-per-kilogramme volumes, paracetamol treatment-line values. Held list for doctor sign-off: empty (0 items).
+Second re-read of all 50 wave-4 items against BNF/NICE/TOXBASE sources named per item. Dose scan: no numeric dose, conversion ratio, taper schedule or antidote rate stated anywhere. Flagged omissions: insulin unit doses/correction factors (individual prescription), opioid milligram conversions (BNF tables), steroid tapers and adrenal-crisis doses (protocol), antidote doses/infusions (TOXBASE). Held list for doctor sign-off: empty (0 items).
 
 ## Remaining gaps (rank order)
-1. Drug safety lessons: insulin, opioids, corticosteroids, antidotes, interactions (mphar-interactions 24 MCQs). No dedicated modules for high-alert drugs, paediatric dose calculation, pregnancy/lactation safety.
-2. Indian programmes: NTEP, NACO, NVBDCP lessons; Ayushman Bharat has no module. Difficult airway still needs a KB article.
-3. Skills with no taxonomy home: examination steps, OSCE procedures, CBC/lab interpretation.
-4. Exam-weight thin blocks: medicine/pathology/surgery/pharmacology lessons, dermatology, ENT, ophthalmology.
-5. NEET-SS: 474 shell topics with v1 index total 0; live SS items sit outside these indexes.
+1. Indian programmes: NTEP, NACO, NVBDCP lessons; Ayushman Bharat has no module. Difficult airway still needs a KB article.
+2. Skills with no taxonomy home: examination steps, OSCE procedures, CBC/lab interpretation.
+3. Exam-weight thin blocks: medicine/pathology/surgery/pharmacology lessons, dermatology, ENT, ophthalmology.
+4. NEET-SS: 474 shell topics with v1 index total 0; live SS items sit outside these indexes.
 
-## Owner questions
-1. NEET-SS shells: fill, retire, or point at the live SS bank?
-2. Skills modules: new taxonomy modules or inside existing disease modules?
-3. Dose-specific items: confirm primary sources for atropine/pralidoxime, antivenom vials, dantrolene, sodium limits and paediatric volumes so numbers can be added safely.
+## Owner questions (unchanged, still blocking the items noted)
+1. NEET-SS shells: fill, retire, or point at the live SS bank? (Not filled.)
+2. Skills and new drug-safety modules (high-alert drugs, paediatric dose calculation, pregnancy/lactation safety): create new taxonomy modules, or teach inside existing modules? (Not created.)
+3. Dose-specific items: confirm primary sources for atropine/pralidoxime, antivenom vials, dantrolene, sodium limits, paediatric volumes and antidote doses. (No disputed milligram doses added.)
 4. KB article for difficult airway: approve creating it?
