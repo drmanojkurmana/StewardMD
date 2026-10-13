@@ -120,3 +120,8 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 
 - 398 hand-written MCQs ($0 API), blind-verified 398/400 (dropped maikss61[10], maikss62[2]), keys rotated, R2 live: ss-ctvs 48->148 (maikss57/58), ss-virology 15->115 (maikss59/60), ss-onco-pathology 30->128 (maikss61 49, maikss62 49), ss-head-neck-surgery 30->130 (maikss63/64).
 - Cumulative this VOLUME run: 1,489 verified items (batches 3-6). Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`. Remainder ~6,770 to 300/subject.
+
+## VOLUME phase batch 7 (2026-10-13): Anaesthesia, OBG, Orthopaedics first modules +50
+
+- 399 verified ($0 API, 399/400 blind-agree, dropped maikss72[1]), R2 live: cardiac anaesthesia 30->80, neuroanaesthesia 30->80, transplant anaesthesia 30->80, paediatric anaesthesia 15->65, gynae-oncology 30->80, reproductive medicine 30->80, hand surgery 30->80, paediatric orthopaedics 30->79.
+- Cumulative VOLUME run: 1,888 items. Pending lead: `node tools/prep-ids.mjs publish --yes`. Remainder ~6,370.
