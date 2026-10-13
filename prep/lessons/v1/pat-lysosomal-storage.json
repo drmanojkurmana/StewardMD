@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-lysosomal-storage",
+ "subject": "pathology",
+ "title": "Lysosomal and glycogen storage disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Lysosomal storage disorders** result from inherited enzyme deficiencies that let undegraded substrates accumulate inside lysosomes, progressively enlarging liver, spleen, brain or muscle depending on the stored material. Most inherit recessively, so carrier parents are healthy. Enzyme replacement, substrate reduction and stem cell therapy now modify several types when started before irreversible damage.",
+   "say": "Missing lysosomal enzymes store undegraded material in organs. Recessive inheritance hides carriers. Early enzyme replacement prevents permanent damage in several types.",
+   "vis": null
+  },
+  {
+   "tx": "**Gaucher disease** lacks glucocerebrosidase, storing glucocerebroside in macrophages that become crumpled tissue paper Gaucher cells packing spleen, liver and marrow. Massive splenomegaly, cytopenias, bone pain and Erlenmeyer flask femur deformity follow, usually without neuron damage in type 1. Enzyme replacement reverses visceral and blood features dramatically.",
+   "say": "Gaucher macrophages look like crumpled tissue paper and fill spleen and marrow. Bones deform into flask shapes. Enzyme replacement reverses blood and organ disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gaucher disease (type 1)",
+     "points": [
+      "Glucocerebrosidase deficiency",
+      "Huge spleen, cytopenias, bone disease",
+      "No primary neuron loss",
+      "Enzyme replacement highly effective"
+     ]
+    },
+    "right": {
+     "title": "Tay Sachs disease",
+     "points": [
+      "Hexosaminidase A deficiency",
+      "GM2 ganglioside in neurons",
+      "Cherry red spot, developmental regression, no organomegaly",
+      "No effective enzyme therapy yet"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tay Sachs disease** lacks hexosaminidase A, storing GM2 ganglioside in neurons so infants regress developmentally with exaggerated startle, blindness from a cherry red macular spot and death in childhood, notably without enlarged liver or spleen. Niemann Pick disease instead stores sphingomyelin with organomegaly plus neurodegeneration, separating the two at the bedside.",
+   "say": "Tay Sachs stores ganglioside only in neurons: regression, startle and cherry red spot without big organs. Niemann Pick adds organ enlargement. Organ size separates them.",
+   "vis": null
+  },
+  {
+   "tx": "**Mucopolysaccharidoses** store glycosaminoglycans causing coarse facies, stiff joints, corneal clouding, dysostosis and intellectual decline in Hurler syndrome from alpha L iduronidase deficiency. Hunter syndrome is X linked with clear corneas, a favourite distinguishing pair. Enzyme replacement and transplant help somatic features more than established brain injury.",
+   "say": "Hurler syndrome clouds corneas with coarse features from stored glycosaminoglycans. Hunter is X linked with clear corneas. Early treatment protects body better than brain.",
+   "vis": null
+  },
+  {
+   "tx": "**Glycogen storage diseases** block glycogen breakdown: von Gierke disease (glucose 6 phosphatase) causes fasting hypoglycaemia with huge liver in infants, Pompe disease (acid maltase, a lysosomal enzyme) causes hypertrophic cardiomyopathy and weak muscles, and McArdle disease (muscle phosphorylase) causes exercise intolerance with a second wind phenomenon and myoglobinuria.",
+   "say": "Von Gierke babies cannot release glucose and enlarge livers. Pompe weakens heart and muscle as a lysosomal disease. McArdle muscles cramp then find a second wind.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Missing enzyme",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "Gaucher",
+      "Glucocerebrosidase",
+      "Crumpled paper macrophages, flask femur"
+     ],
+     [
+      "Pompe",
+      "Acid alpha glucosidase",
+      "Infant cardiomyopathy and hypotonia"
+     ],
+     [
+      "Von Gierke",
+      "Glucose 6 phosphatase",
+      "Fasting hypoglycaemia, huge liver, lactic acidosis"
+     ],
+     [
+      "McArdle",
+      "Muscle phosphorylase",
+      "Exercise cramps, second wind, myoglobinuria"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-241",
+  "bk2-pat-242",
+  "bk2-pat-243",
+  "bk2-pat-244",
+  "bk2-pat-245",
+  "bk2-pat-246",
+  "bk2-pat-247",
+  "bk2-pat-248",
+  "bk2-pat-249",
+  "bk2-pat-250"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

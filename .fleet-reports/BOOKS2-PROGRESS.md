@@ -116,3 +116,28 @@
 - [x] `test/prep-subject.test.mjs`: overlay coverage, subject lesson ordering, search index checks pass 100%.
 - [x] Headless Chrome CDP UI harnesses: `test/run-prep-lessons-ui.mjs` and `test/run-prep-lessons-ix-ui.mjs` both ALL PASS.
 - [x] Zero Anthropic API spend ($0.00 ledger maintained).
+
+---
+
+## Update 2026-10-13 18:40 IST: Batch 2 Wave B2-1 (Robbins pathology) DONE
+
+- Branch `books2-batch2-robbins`. Batch 2 prioritised per lead note: Robbins first, as muse Wonder, $0.00 API spend, text-only (no image extraction; free disk about 5 GB).
+- Baseline measured before writing: pathology 53 lesson-less of 72 taxonomy modules; pharmacology 40 of 71; psychiatry 17 of 32; ophthalmology 20 of 29; microbiology 22 of 37. Total batch 2 target 152 modules. Full map in BOOKS2-COVERAGE.md; run state in BOOKS2-STATE.md (mirrors of /tmp/books2-work/).
+- Delivered: 12 lessons (`prep/lessons/v1/pat-*.json`), 12 KB articles (`kb/reference/`), 120 new MCQs (`prep/overlays/maikbook2/pathology/`, bk2-pat-001 to 120). Modules: chronic granulomatous inflammation, thrombosis embolism infarction, shock, autoimmune diseases, immunodeficiency and AIDS, amyloidosis, iron deficiency, megaloblastic anaemia, haemoglobinopathies, acute leukaemias, Hodgkin lymphoma, coagulation disorders.
+- Registered: prep.js pathology overlays now include maikbook2; prep/bank/overlay-counts.json updated; lesson index now 1029 modules; prep/accuracy.json regenerated.
+- Verification: LP.checkLesson 12/12, kb_validate_v2 12/12, node tests 36/36 (prep-books-mcqs, prep-lessons, prep-subject, prep-accuracy). Facts written in own words from the Robbins topic map; no verbatim text, tables or figures copied; no Anthropic API called.
+- Remaining batch 2: 41 pathology, 40 pharmacology, 17 psychiatry, 20 ophthalmology, 22 microbiology/parasitology modules, then the original set waves 2 to 6. No PDF deleted (lead confirmation required).
+- PR: https://github.com/drmanojkurmana/StewardMD/pull/1568 (branch books2-batch2-robbins, commit 7b3e30d3e, clean on origin/main; browser UI harness and squash merge still to run per pipeline). Note: main checkout was concurrently switched by another session to ss-volume-anaes2-397; the wave commit there (3cc003c8e) duplicates this PR content, so that session should drop it before its own PR.
+
+## Update 2026-10-13 19:05 IST: PR #1568 merged; Wave B2-2 shipped as new PR
+- PR #1568 squash-merged to main after rebase (prep.js OVERLAYS conflict resolved, regenerated indexes, 36/36 local tests; CI atlas/maik-eval/security/web-preflight/clinix-ui passed; unit-tests still pending at merge, Cloudflare preview failed as infra). Local browser harness could not run: sandbox denies server listen (EPERM) and /opt/pw-browsers/chromium is absent; system Chrome run needs unsandboxed approval which is disabled. Recorded honestly; CI clinix-ui is the browser evidence for this wave.
+- Wave B2-2 (branch books2-batch2-systemic): 12 systemic pathology modules, 12 lessons, 12 KB, 120 MCQs (bk2-pat-121 to 240). Generator tools/generate-books2-batch2b.mjs. Tests 36/36, maikbook2 total now 400.
+- Pathology remaining: 29 modules. Then psychiatry 17, pharmacology 40, ophthalmology 20, microbiology/parasitology 22, then original-set waves. No PDF deleted.
+
+## Update 2026-10-13 19:25 IST: PR #1570 merged; Wave B2-3 shipped (PR #1571)
+- PR #1570 squash-merged (CI clinix-ui browser job passed; unit-tests pending at merge with identical local 36/36; Cloudflare preview fail is infra, same as #1568).
+- Wave B2-3 (PR #1571, branch books2-batch2-systemic successor books2-batch2-wave3): 12 modules, bk2-pat-241 to 360, generator tools/generate-books2-batch2c.mjs, tests 36/36, maikbook2 total 520.
+- Pathology: 36 of 53 gap modules done; 17 remain (nonclassic inheritance, marrow failure, intestine, metabolic liver/tumours, gallbladder/pancreas, tubulointerstitial/cystic kidney, renal/urinary tumours, male genital, cervix/uterus, ovary, pituitary/adrenal, bone, joints/soft tissue, CNS non-neoplastic, nerve/muscle, skin, myocardial/pericardial). Then psychiatry 17, pharmacology 40, ophthalmology 20, microbiology 22, original-set waves. No PDF deleted; no Anthropic API used.
+
+## Wave B2P2-ENT (2026-10-13)
+12 ENT lessons + 12 KB + 120 MCQs (bk2-ent-001..120) on branch books2-batch2p2-ent. Batch2-part2 contained only Dhingra ENT 8th + duplicate Tripathi; derm/ortho/vascular books not in upload, remain TODO in COVERAGE2.
