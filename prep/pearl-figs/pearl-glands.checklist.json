@@ -1,0 +1,43 @@
+{
+ "figure": "pearl-glands.svg",
+ "credit": "StewardMD illustration",
+ "view": "schematic gland icons",
+ "structures": [
+  "Goblet cell",
+  "Simple tubular",
+  "Simple coiled",
+  "Simple acinar",
+  "Compound tubular",
+  "Compound acinar",
+  "Merocrine",
+  "Apocrine",
+  "Holocrine"
+ ],
+ "counts": "9 icons",
+ "refs": [
+  "Junqueira's Basic Histology (glands)",
+  "Ross Histology (gland classification)"
+ ],
+ "verify": {
+  "checklistComplete": true,
+  "secondPassErrorsOnly": [],
+  "ticks": [
+   "Goblet cell: ok - a single flask-shaped cell sits in the epithelial band, and 'Unicellular' is correct.",
+   "Simple tubular: ok - one unbranched straight tube with a single duct, labelled 'Straight tube'.",
+   "Simple coiled: ok - an unbranched coiled tube labelled 'Sweat gland', the standard example. The missing duct and epithelium is a schematic omission, not a factual error.",
+   "Simple acinar: ok - one round sac with a single unbranched duct, labelled 'Round sac'.",
+   "Compound tubular: ok - a branched duct leads to three elongated tubular units, labelled 'Branched tubes'.",
+   "Compound acinar: ok - a branched duct leads to three round acinar units, labelled 'Branched sacs'.",
+   "Merocrine: ok - secretory granules sit above an intact epithelial surface, labelled 'Cell stays intact'.",
+   "Apocrine: ok - an apical dome with a pinched-off bleb above it, labelled 'Apex pinched off'.",
+   "Holocrine: ok - a whole cell is shed above the epithelium, labelled 'Whole cell shed'. The small dark dots are acceptable as nuclear debris, though they sit on the cell edge rather than inside it.",
+   "Footer rule: ok - 'Duct branched = compound. Secretory part tubular (long) or acinar (round)' is correct.",
+   "Counts/labels: ok - all 9 icons are present, all labels are spelled correctly, and each label sits under its own icon."
+  ],
+  "verdict": "pass",
+  "models": {
+   "author": "muse-wonder-1.0 (checklist-drawn SVG)",
+   "verifier": "claude-sonnet-5-5 vision"
+  }
+ }
+}

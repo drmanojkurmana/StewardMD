@@ -1,0 +1,37 @@
+{
+ "figure": "pearl-interatrial-septum.svg",
+ "credit": "StewardMD illustration",
+ "view": "right-atrial side, 4 stages",
+ "structures": [
+  "septum primum",
+  "foramen primum",
+  "foramen secundum",
+  "septum secundum",
+  "foramen ovale with septum primum flap",
+  "postnatal closure"
+ ],
+ "counts": "4 stages in order",
+ "refs": [
+  "Langman's Medical Embryology (atrial septation)",
+  "Moore Developing Human (heart)"
+ ],
+ "verify": {
+  "checklistComplete": true,
+  "secondPassErrorsOnly": [],
+  "ticks": [
+   "septum primum: ok - teal, grows down from the roof in stage 1; leader line lands on the teal septum; becomes the flap in stage 3",
+   "foramen primum: ok - open gap below the free edge in stage 1, labelled 'foramen primum (gap)' and closed below in stage 2 ('primum shut below')",
+   "foramen secundum: ok - perforations in the upper septum primum in stage 2, labelled 'foramen secundum (holes)', and still shown in stage 3",
+   "septum secundum: ok - black, on the right-atrial side of the primum, incomplete inferiorly; leader line lands on the black septum. The line crosses part of the label text, which is cosmetic only",
+   "foramen ovale with septum primum flap: ok - the red circle is at the gap below the secundum edge, labelled 'foramen ovale'. 'channel past flap' and 'primum = flap' identify the flap, though the flap itself has no direct label",
+   "postnatal closure: ok - stage 4 shows primum and secundum fused, labelled 'fused wall' and 'fossa ovalis'. The note that LA pressure shuts the flap after birth and RA pressure holds it open before birth is correct",
+   "stage count and order: ok - 4 stages in the correct sequence (primum, secundum holes, foramen ovale, after birth)",
+   "view and spelling: ok - 'from RA' view and all label spellings are correct; no impossible anatomy found"
+  ],
+  "verdict": "pass",
+  "models": {
+   "author": "muse-wonder-1.0 (checklist-drawn SVG)",
+   "verifier": "claude-sonnet-5-5 vision"
+  }
+ }
+}

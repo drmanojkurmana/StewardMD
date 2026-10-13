@@ -1,0 +1,41 @@
+{
+ "figure": "pearl-brain-divisions.svg",
+ "credit": "StewardMD illustration",
+ "view": "flow schematic",
+ "structures": [
+  "Prosencephalon",
+  "Mesencephalon",
+  "Rhombencephalon",
+  "telencephalon",
+  "diencephalon",
+  "metencephalon",
+  "myelencephalon",
+  "cerebellum from metencephalon"
+ ],
+ "counts": "3 primary to 5 secondary vesicles",
+ "refs": [
+  "Langman's Medical Embryology (brain vesicles)",
+  "Gray's Anatomy (developing brain)"
+ ],
+ "verify": {
+  "checklistComplete": true,
+  "secondPassErrorsOnly": [],
+  "ticks": [
+   "Prosencephalon: ok - spelled correctly; correctly gives rise to telencephalon + diencephalon",
+   "Mesencephalon: ok - shown as the primary vesicle and as the unchanged secondary vesicle; adult derivative is the midbrain",
+   "Rhombencephalon: ok - spelled correctly; correctly gives rise to metencephalon + myelencephalon",
+   "Telencephalon: ok - derived from prosencephalon; adult derivative is the cerebral hemispheres",
+   "Diencephalon: ok - derived from prosencephalon; adult derivatives are the thalamus/hypothalamus",
+   "Metencephalon: ok - derived from rhombencephalon; adult derivatives are the pons + cerebellum",
+   "Myelencephalon: ok - derived from rhombencephalon; adult derivative is the medulla oblongata",
+   "Cerebellum from metencephalon: ok - cerebellum is listed with the pons as a metencephalon derivative, and the medulla is kept separate under the myelencephalon",
+   "Counts (3 primary to 5 secondary vesicles): ok - the caption is correct, and the five secondary vesicles are telencephalon, diencephalon, mesencephalon, metencephalon and myelencephalon",
+   "Relations/arrows: ok - each row maps correctly with no mislabelled pointers or impossible anatomy. The first-row arrow touching the adult-parts text is a layout issue only, not a factual error"
+  ],
+  "verdict": "pass",
+  "models": {
+   "author": "muse-wonder-1.0 (checklist-drawn SVG)",
+   "verifier": "claude-sonnet-5-5 vision"
+  }
+ }
+}
