@@ -1,0 +1,104 @@
+{
+ "module": "ana-brainstem",
+ "subject": "anatomy",
+ "title": "Brainstem anatomy: midbrain, pons and medulla oblongata",
+ "minutes": 6,
+ "refs": [
+  "Gray's Anatomy for Students",
+  "Snell's Clinical Neuroanatomy"
+ ],
+ "steps": [
+  {
+   "tx": "The **brainstem** connects the cerebral hemispheres with the spinal cord, comprising the midbrain, pons and medulla oblongata. It houses ascending sensory tracts, descending motor tracts and nuclei of cranial nerves three through twelve. It integrates vital autonomic centers controlling respiration, cardiovascular tone and consciousness through the reticular activating system. The fourth ventricle lies posterior to the pons and upper medulla.",
+   "say": "The brainstem connects the cerebral hemispheres with the spinal cord, comprising the midbrain, pons and medulla oblongata. It houses ascending sensory tracts, descending motor tracts and cranial nerve nuclei. It integrates vital autonomic centers controlling respiration, cardiovascular tone and consciousness through the reticular activating system. The fourth ventricle lies posterior to the pons and upper medulla.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Ventral landmarks",
+     "Dorsal landmarks"
+    ],
+    "rows": [
+     [
+      "Midbrain",
+      "Cerebral peduncles and interpeduncular fossa",
+      "Superior and inferior colliculi"
+     ],
+     [
+      "Pons",
+      "Transverse pontine fibres and basilar groove",
+      "Facial colliculus in fourth ventricle floor"
+     ],
+     [
+      "Open medulla",
+      "Pyramids and olives",
+      "Hypoglossal and vagal trigones"
+     ],
+     [
+      "Closed medulla",
+      "Pyramidal decussation",
+      "Gracile and cuneate tubercles"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **pyramidal decussation** marks the junction between the closed medulla oblongata and the cervical spinal cord. Approximately eighty-five percent of descending corticospinal fibres cross the anterior median fissure to form the lateral corticospinal tract. The remaining uncrossed fibres continue as the anterior corticospinal tract. This anatomical crossover explains why a unilateral cerebral motor cortex lesion produces contralateral hemiparesis below the neck.",
+   "say": "The pyramidal decussation marks the junction between the closed medulla oblongata and the cervical spinal cord. Approximately eighty-five percent of descending corticospinal fibres cross the anterior median fissure to form the lateral corticospinal tract. The remaining uncrossed fibres continue as the anterior tract. This crossover explains why a cerebral cortex lesion produces contralateral hemiparesis.",
+   "vis": null
+  },
+  {
+   "tx": "Brainstem vascular syndromes produce pathognomonic alternating neurological deficits. **Wallenberg syndrome** or lateral medullary syndrome results from occlusion of the posterior inferior cerebellar artery or vertebral artery. It damages the nucleus ambiguus, producing dysphagia and hoarseness; the spinal trigeminal nucleus, causing ipsilateral facial pain and temperature loss; the spinothalamic tract, causing contralateral body sensory loss; and sympathetic descending fibres, causing Horner syndrome.",
+   "say": "Brainstem vascular syndromes produce pathognomonic alternating neurological deficits. Wallenberg syndrome results from occlusion of the posterior inferior cerebellar artery. It damages the nucleus ambiguus causing dysphagia and hoarseness, the spinal trigeminal nucleus causing ipsilateral facial numbness, the spinothalamic tract causing contralateral sensory loss, and sympathetic fibres causing Horner syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lateral medullary syndrome",
+     "points": [
+      "Posterior inferior cerebellar artery occlusion",
+      "Nucleus ambiguus damage causes dysphagia",
+      "Ipsilateral facial and contralateral body sensory loss",
+      "Ipsilateral Horner syndrome and ataxia"
+     ]
+    },
+    "right": {
+     "title": "Medial medullary syndrome",
+     "points": [
+      "Anterior spinal artery occlusion",
+      "Hypoglossal nerve damage deviates tongue to lesion",
+      "Pyramid damage produces contralateral hemiparesis",
+      "Medial lemniscus damage loses vibration sense"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **midbrain** surrounds the cerebral aqueduct of Sylvius. Dorsally, the superior colliculi coordinate visual reflexes, while the inferior colliculi relay auditory signals to the medial geniculate body. Ventrally, the substantia nigra contains dopaminergic neurons projecting to the striatum, which degenerate in Parkinson disease. The red nucleus gives origin to the rubrospinal tract, coordinating flexor tone.",
+   "say": "The midbrain surrounds the cerebral aqueduct of Sylvius. Dorsally, the superior colliculi coordinate visual reflexes, while the inferior colliculi relay auditory signals. Ventrally, the substantia nigra contains dopaminergic neurons projecting to the striatum, which degenerate in Parkinson disease. The red nucleus gives origin to the rubrospinal tract, coordinating flexor tone.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.png",
+    "alt": "Brainstem and cerebral peduncles anatomy",
+    "caption": "Mid-sagittal and cross-sectional representations of midbrain, pontine and medullary architecture."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-pipeline",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "4ceb2996-4000-8000-4ceb-299612345678",
+  "4beb2803-4000-8000-4beb-280312345678",
+  "4aeb2670-4000-8000-4aeb-267012345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

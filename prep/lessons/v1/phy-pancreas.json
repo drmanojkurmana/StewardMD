@@ -1,0 +1,104 @@
+{
+ "module": "phy-pancreas",
+ "subject": "physiology",
+ "title": "Pancreatic exocrine and endocrine physiology and glucose homeostasis",
+ "minutes": 6,
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Ganong's Review of Medical Physiology"
+ ],
+ "steps": [
+  {
+   "tx": "The **exocrine pancreas** secretes approximately one point five liters of enzyme-rich and bicarbonate-rich fluid daily into the duodenum. Acinar cells synthesize digestive proenzymes stored within zymogen granules, including trypsinogen, chymotrypsinogen, pancreatic lipase and amylase. Duodenal enterokinase cleaves trypsinogen into active trypsin, which subsequently cleaves and activates all other pancreatic proteases. Pancreatic secretory trypsin inhibitor prevents premature intrapancreatic autodigestion.",
+   "say": "The exocrine pancreas secretes one point five liters of enzyme-rich and bicarbonate-rich fluid daily into the duodenum. Acinar cells synthesize digestive proenzymes stored within zymogen granules, including trypsinogen, lipase and amylase. Duodenal enterokinase activates trypsinogen to trypsin, which activates all other proteases. Premature activation is prevented by trypsin inhibitors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pancreatic cell type",
+     "Primary regulatory hormone",
+     "Main secretory product"
+    ],
+    "rows": [
+     [
+      "Acinar cells",
+      "Cholecystokinin (CCK)",
+      "Digestive zymogens (trypsinogen, lipase)"
+     ],
+     [
+      "Ductal cells",
+      "Secretin",
+      "Aqueous sodium bicarbonate (pH 8.0)"
+     ],
+     [
+      "Islet beta cells",
+      "Elevated blood glucose",
+      "Insulin and amylin"
+     ],
+     [
+      "Islet alpha cells",
+      "Hypoglycemia and amino acids",
+      "Glucagon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pancreatic **ductal secretion** is stimulated by secretin from duodenal S cells in response to acidic chyme. Secretin elevates cyclic AMP, opening apical CFTR chloride channels. Apical chloride-bicarbonate exchangers export bicarbonate into the lumen while recycling chloride back into ductal cells. In cystic fibrosis, CFTR mutations disrupt ductal hydration and alkalinization, causing thick protein plugs, ductal obstruction, chronic exocrine pancreatic insufficiency and malabsorption.",
+   "say": "Pancreatic ductal secretion is stimulated by secretin from duodenal S cells in response to acidic chyme. Secretin elevates cyclic AMP, opening apical CFTR chloride channels. Chloride-bicarbonate exchangers export bicarbonate into the lumen. In cystic fibrosis, CFTR mutations disrupt ductal hydration, causing protein plugs and exocrine pancreatic insufficiency.",
+   "vis": null
+  },
+  {
+   "tx": "The endocrine **islets of Langerhans** contain beta cells that secrete insulin via a glucose-sensing metabolic cascade. Glucose enters beta cells via GLUT2 transporters and undergoes glycolysis, increasing intracellular ATP-to-ADP ratio. This closes ATP-sensitive potassium channels, depolarizing the plasma membrane. Voltage-gated calcium channels open, inducing calcium influx that triggers exocytosis of insulin granules. Sulfonylureas close ATP-sensitive potassium channels directly.",
+   "say": "The endocrine islets of Langerhans contain beta cells that secrete insulin via a glucose-sensing cascade. Glucose enters via GLUT2 and undergoes glycolysis, raising ATP. This closes ATP-sensitive potassium channels, depolarizing the membrane. Voltage-gated calcium channels open, triggering insulin granule exocytosis. Sulfonylureas close these potassium channels directly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Insulin physiologic effects",
+     "points": [
+      "Stimulates GLUT4 translocation in muscle and fat",
+      "Promotes glycogenesis and lipogenesis",
+      "Inhibits gluconeogenesis and lipolysis",
+      "Drives cellular uptake of potassium and phosphate"
+     ]
+    },
+    "right": {
+     "title": "Glucagon physiologic effects",
+     "points": [
+      "Stimulates glycogenolysis in hepatocytes",
+      "Enhances hepatic gluconeogenesis",
+      "Promotes ketogenesis during fasting",
+      "No effect on skeletal muscle glucose uptake"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The counter-regulatory peptide **glucagon** from islet alpha cells maintains plasma glucose during fasting. Binding hepatic GPCRs, glucagon activates adenylyl cyclase, raising cyclic AMP and protein kinase A. This phosphorylates and activates glycogen phosphorylase while inactivating glycogen synthase, rapidly releasing glucose into the systemic circulation. Glucagon also stimulates hepatic uptake of gluconeogenic amino acids and drives beta-oxidation of fatty acids into ketone bodies.",
+   "say": "The counter-regulatory peptide glucagon from islet alpha cells maintains plasma glucose during fasting. Binding hepatic receptors, glucagon raises cyclic AMP and activates glycogen phosphorylase while inactivating glycogen synthase, releasing glucose into circulation. Glucagon also stimulates hepatic gluconeogenesis and ketone body synthesis.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-pancreas-gross.png",
+    "alt": "Pancreatic acinar and islet histology",
+    "caption": "Histological schematic comparing exocrine acinar ductal units with endocrine islets of Langerhans, highlighting insulin secretion cascades."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-pipeline",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "02b744e3-4000-8000-02b7-44e312345678",
+  "03b74676-4000-8000-03b7-467612345678",
+  "04b74809-4000-8000-04b7-480912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "module": "phy-tubular",
+ "subject": "physiology",
+ "title": "Renal tubular transport, reabsorption and secretion mechanisms",
+ "minutes": 6,
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Vander's Renal Physiology"
+ ],
+ "steps": [
+  {
+   "tx": "The **proximal convoluted tubule** performs isosmotic bulk reabsorption of sixty-five percent of filtered sodium, water, chloride and potassium, along with virtually all filtered glucose and amino acids. Secondary active transport via apical sodium-glucose cotransporters SGLT2 and SGLT1 couples luminal glucose uptake to favorable intracellular sodium electrochemical gradients created by basolateral sodium-potassium ATPase pumps. Carbonic anhydrase enables massive bicarbonate recovery.",
+   "say": "The proximal convoluted tubule performs isosmotic bulk reabsorption of sixty-five percent of filtered sodium, water, chloride and potassium, along with virtually all glucose and amino acids. Secondary active transport via apical SGLT2 couples glucose uptake to intracellular sodium gradients maintained by basolateral sodium-potassium ATPase. Carbonic anhydrase enables massive bicarbonate recovery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tubular segment",
+     "Key apical transporter",
+     "Major diuretic target"
+    ],
+    "rows": [
+     [
+      "Proximal tubule",
+      "SGLT2 and Na+/H+ exchanger NHE3",
+      "Acetazolamide and SGLT2 inhibitors"
+     ],
+     [
+      "Thick ascending limb",
+      "Na+-K+-2Cl- cotransporter NKCC2",
+      "Loop diuretics (furosemide)"
+     ],
+     [
+      "Early distal tubule",
+      "Na+-Cl- cotransporter NCCT",
+      "Thiazide diuretics"
+     ],
+     [
+      "Late distal and collecting",
+      "Epithelial sodium channel ENaC",
+      "Potassium-sparing diuretics (amiloride)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The thick ascending limb of the loop of Henle is completely impermeable to water but actively transports solute via the **NKCC2 cotransporter**. This electroneutral cotransporter reabsorbs one sodium, one potassium and two chloride ions. Back-leak of potassium through apical ROMK channels creates a lumen-positive transepithelial potential of plus eight millivolts, which drives paracellular reabsorption of divalent cations calcium and magnesium. Furosemide inhibits NKCC2.",
+   "say": "The thick ascending limb of Henle is impermeable to water but actively transports solute via the NKCC2 cotransporter. This cotransporter reabsorbs one sodium, one potassium and two chloride ions. Potassium back-leak creates a lumen-positive potential that drives paracellular reabsorption of calcium and magnesium. Furosemide inhibits NKCC2.",
+   "vis": null
+  },
+  {
+   "tx": "The early distal convoluted tubule reabsorbs five percent of filtered sodium via the electroneutral **NCCT cotransporter**, which is selectively blocked by thiazide diuretics. This segment dilutes tubular fluid further because it is impermeable to water. Basolateral calcium extrusion via sodium-calcium exchangers is stimulated by parathyroid hormone. In Gitelman syndrome, loss-of-function NCCT mutations produce hypokalemic metabolic alkalosis, hypomagnesemia and hypocalciuria.",
+   "say": "The early distal convoluted tubule reabsorbs five percent of filtered sodium via the NCCT cotransporter, blocked by thiazide diuretics. This segment dilutes tubular fluid because it is impermeable to water. Basolateral calcium extrusion is stimulated by parathyroid hormone. In Gitelman syndrome, NCCT mutations cause hypokalemic alkalosis with hypocalciuria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Loop diuretic effect (NKCC2)",
+     "points": [
+      "Inhibits Na-K-2Cl cotransporter",
+      "Abolishes medullary osmotic gradient",
+      "Causes hypercalciuria (inhibits Ca2+ reabsorption)",
+      "Risk of hypocalcemia and profound volume depletion"
+     ]
+    },
+    "right": {
+     "title": "Thiazide diuretic effect (NCCT)",
+     "points": [
+      "Inhibits Na-Cl cotransporter in distal tubule",
+      "Preserves medullary concentration gradient",
+      "Causes hypocalciuria (enhances Ca2+ reabsorption)",
+      "Protects against calcium nephrolithiasis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The cortical collecting duct comprises two distinct cell populations regulating electrolyte and acid-base homeostasis. **Principal cells** reabsorb sodium through apical epithelial sodium channels ENaC under aldosterone control, generating a negative lumen that drives potassium secretion via ROMK and MAXI-K channels. Intercalated alpha cells secrete protons via apical proton ATPases for systemic acid elimination, whereas beta cells secrete bicarbonate in alkalosis.",
+   "say": "The cortical collecting duct comprises two distinct cell populations regulating electrolyte and acid-base homeostasis. Principal cells reabsorb sodium through epithelial sodium channels under aldosterone control, driving potassium secretion. Intercalated alpha cells secrete protons via apical proton ATPases for acid elimination, whereas beta cells secrete bicarbonate.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-nephron-filtration.png",
+    "alt": "Nephron tubular transport and ion channels",
+    "caption": "Cellular schematics detailing cotransporter, exchanger and ion channel distributions along proximal, loop and collecting duct epithelia."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-pipeline",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "687cf229-4000-8000-687c-f22912345678",
+  "657ced70-4000-8000-657c-ed7012345678",
+  "667cef03-4000-8000-667c-ef0312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
