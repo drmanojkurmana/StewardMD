@@ -220,3 +220,9 @@
 - STATE2/COVERAGE2 updated + mirrors. Next: Sastry microbiology queue.
 
 
+
+## Wave SAS1 (2026-10-13, muse Wonder): microbiology 40/40 COMPLETE
+- Branch books2-sas1 from origin/main post-PHARMA3-merge, PR #1601 open (no merge; squash after browser job). Final 2 gaps + 2 KB + 20 MCQs bk2-mic-221..240.
+- Gates: LP.checkLesson 2/2, kb_validate_v2 2/2, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 2/2. 20 IDs unique. maikbook2 1870 -> 1890, no rebase needed.
+- STATE2/COVERAGE2 updated + mirrors. Next: Gray's/Atlas anatomy queue.
+
