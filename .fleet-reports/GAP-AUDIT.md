@@ -114,3 +114,7 @@ UIP (cm-uip 85, lesson) and RMNCH+A proxy (cm-nutrition-programmes 102, lesson) 
 ## Fill log (this branch)
 
 First fill set gap1013a targets rank 1 to 3: lessons plus 10 new MCQs each for med-sepsis, med-allergy-immunology (anaphylaxis), med-pesticides, med-envenomation, ans-difficult-airway and med-potassium. New MCQs only; no existing explanation rewritten. Every dose or threshold names its primary guideline in the item source field; unsure numbers are omitted and flagged. Status after fill is recorded in GAP-AUDIT-DONE.md.
+
+## Fill result (gap1013a, this branch)
+
+Six THIN lines moved toward OK: med-sepsis, med-allergy-immunology (anaphylaxis), med-pesticides (organophosphate, was 24 MCQs), med-envenomation (snake bite, was 43), ans-difficult-airway, med-potassium (hyperkalaemia). Each now has a structured lesson (prep/lessons/v1/<module>.json, indexed) plus 10 new vignette MCQs in overlay gap1013a (60 items, mk-gap001 to mk-gap510) with reasoning explanations and Know-more lesson links. KB articles already existed for sepsis, anaphylaxis, organophosphate, snake bite and hyperkalaemia, so no new KB article was needed; difficult airway still has no KB article (flagged in DONE report). After fill each line meets lesson + KB (except airway KB) + 10 or more MCQs. Remaining life-critical THIN lines and all other ranks are listed in GAP-AUDIT-DONE.md.

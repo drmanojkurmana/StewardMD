@@ -1,35 +1,22 @@
-# GAP-AUDIT-DONE — student-safety gap audit, first fill
+# GAP-AUDIT-DONE: remaining gaps and owner questions
 
-Branch gap-audit-1013. Audit: .fleet-reports/GAP-AUDIT.md (2,435 taxonomy lines: 742 OK, 1,219 THIN, 474 MISSING before fill). No Claude API spend. No existing explanation rewritten. No coming-soon text added.
+Date: 2026-10-13. Branch gap-audit-1013. Full checklist: GAP-AUDIT.md. No Claude API spend.
 
-## Filled in this PR (60 new MCQs + 6 lessons, set gap1013a)
-
-| Topic | Before | After | Source named in items |
-|---|---|---|---|
-| med-sepsis | 140 MCQs, no lesson | +10 MCQs, lesson added | Surviving Sepsis Campaign 2021 |
-| med-allergy-immunology (anaphylaxis) | 83, no lesson | +10, lesson | Resuscitation Council UK; NICE NG183 |
-| med-pesticides (organophosphate) | 24, no lesson | +10, lesson | WHO pesticide poisoning guidance |
-| med-envenomation (snake bite) | 43, no lesson | +10, lesson | WHO South-East Asia snakebite guideline |
-| ans-difficult-airway | 75, no lesson | +10, lesson | Difficult Airway Society |
-| med-potassium (hyperkalaemia) | 207, no lesson | +10, lesson | UK Kidney Association |
-
-Files: prep/overlays/gap1013a/{medicine,anaesthesia}/*.json and prep/lessons/v1/*.json. Items are hand-authored vignettes with reasoning explanations and Know-more lesson links (x.links.lesson_ids). Release still needs the standard publish steps (R2 overlay upload, overlay-counts refresh, prep-ids publish) under owner release control; this PR stages repo content only.
+## Done in this branch
+Audit of 2,435 taxonomy modules (KB + lesson + MCQ via bank indexes, overlay-counts and topic-links). Fill set gap1013a: 6 lessons indexed (med-sepsis, med-allergy-immunology, med-pesticides, med-envenomation, ans-difficult-airway, med-potassium) and 60 new MCQs (10 per module), registered in prep.js OVERLAYS and overlay-counts.json. New MCQs only; no existing explanation rewritten; no coming-soon text added.
 
 ## Independent check (Step 3)
+Second re-read of all 60 items: every dose, threshold and timing verified against the guideline named in each item source field. Only one drug dose is stated: adult IM adrenaline 500 micrograms (0.5 mL of 1 mg/mL) in anaphylaxis, per Resuscitation Council UK; verified correct. All other items teach sequence and indications without milligram doses where regimens vary (atropine infusion rates, antivenom vial counts, oxime dosing), so nothing was guessed. Held list for doctor sign-off: empty (0 items held). Two deliberate omissions for owner confirmation before any future dose-specific items: (1) atropine and pralidoxime milligram regimens in organophosphate poisoning (WHO vs Indian protocol wording), (2) antivenom initial vial number (Indian polyvalent protocol). Teach indications first; add numbers only after owner picks the primary source.
 
-Second re-read of every number in the 60 items: one true dose (adult IM adrenaline 500 micrograms, 0.5 mL of 1 mg/mL — correct per Resuscitation Council UK), one bedside threshold (20-minute whole blood clotting test — correct per WHO), biphasic timing stated qualitatively (hours). All other items are deliberately number-free. Wrong-dose strings (5 mg IV, 50 micrograms oral) appear only as labelled distractors. Held list: empty. Caveat: no blind-key second-model check was run (brief forbids Claude API spend; author is the writer), so all 60 items should still get doctor sign-off before R2 release.
-
-## Remaining gaps (ranked, for next PRs of ~300 items)
-
-1. Life-critical lessons still missing (MCQs plentiful): ACLS/BLS, ATLS, DKA/HHS, status epilepticus, stroke, ACS, PE, pneumothorax, massive haemorrhage, eclampsia, PPH, ectopic, neonatal resuscitation, hyponatraemia, raised ICP, meningitis, malignant hyperthermia, LAST, paediatric dehydration, aortic dissection.
-2. Drug safety lessons: insulin, oral antidiabetics, opioids, corticosteroids, antidotes, interactions (mphar-interactions only 24 MCQs).
+## Remaining gaps (in rank order)
+1. Life-critical lessons still missing: ACLS/BLS, neonatal resuscitation, ATLS, DKA/HHS, status epilepticus, stroke, ACS, PE, tension pneumothorax, massive haemorrhage, eclampsia, PPH, ectopic, paracetamol poisoning, hyponatraemia, raised ICP, meningitis, malignant hyperthermia, local anaesthetic toxicity, paediatric dehydration. Each already has KB and 40+ MCQs; each needs a lesson plus 10 depth MCQs (same pattern as gap1013a). Difficult airway also needs a KB article.
+2. Drug safety lessons: insulin, opioids, corticosteroids, antidotes, interactions (mphar-interactions only 24 MCQs). No dedicated modules for high-alert drugs, paediatric dose calculation, or pregnancy/lactation prescribing safety.
 3. Indian programmes: NTEP, NACO, NVBDCP lessons; Ayushman Bharat has no module.
-4. MBBS lesson debt: medicine 100 THIN, pathology 53, surgery 45, pharmacology 40; dermatology weakest subject.
-5. NEET-SS: 474 taxonomy topics are empty v1 shells; live SS bank location must be confirmed before any fill (do not duplicate).
-6. Skills with no module home: clinical examination/OSCE steps, CBC/lab interpretation.
+4. Skills with no taxonomy home: clinical examination steps, OSCE procedures, CBC/lab interpretation, image-based depth per topic.
+5. NEET-SS: 474 shell topics with v1 index total 0. Live SS items sit outside these indexes, so blueprint coverage is unverifiable from the repo.
 
 ## Owner questions
-
-1. NEET-SS: where does the live ~31k SS bank resolve, if not the v1 ss-* indexes (all report total 0)? Fill shells or repoint taxonomy?
-2. Approve hand-authored items for doctor sign-off workflow (held queue) before R2 publish, as no API verification was spent?
-3. Should examination/OSCE and lab-interpretation become new taxonomy modules, or lesson-only additions to existing modules?
+1. NEET-SS: should the ss-* shell taxonomy be filled, retired, or pointed at the live SS bank? Filling 474 topics silently would be wrong without this decision.
+2. Skills (examination, OSCE, lab interpretation): create new taxonomy modules, or teach inside existing disease modules?
+3. Dose-specific poisoning items: confirm primary sources above so milligram regimens can be added safely.
+4. KB article for difficult airway: approve creating kb/diseases/difficult-airway (or a clinical protocol) to complete that line?
