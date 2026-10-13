@@ -44,7 +44,7 @@ test("maikbook1 overlay items well formed across all subjects", () => {
     }
   }
 
-  assert.equal(totalItems, 975, "Expected 148 high-yield verified MCQs in maikbook1");
+  assert.equal(totalItems, 1095, "Expected 148 high-yield verified MCQs in maikbook1");
 });
 
 test("maikbook2 overlay items well formed across all subjects", () => {
