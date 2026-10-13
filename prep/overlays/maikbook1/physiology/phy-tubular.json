@@ -1,0 +1,52 @@
+{
+ "topic": "phy-tubular",
+ "set": "maikbook1",
+ "v": 1,
+ "items": [
+  {
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "maikbook1",
+   "d": 2,
+   "cog": "analysis",
+   "imgPlace": "stem",
+   "credit": "StewardMD illustration",
+   "licence": "CC BY 4.0 (StewardMD original)",
+   "licenceStandard": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored and verified against standard references"
+     }
+    }
+   },
+   "id": "bk-phy-002",
+   "q": "In the nephron transport schematic, which transporter in the thick ascending limb of Henle establishes the lumen-positive potential that drives paracellular calcium and magnesium reabsorption?",
+   "o": [
+    "SGLT2 sodium-glucose cotransporter",
+    "NKCC2 Na+-K+-2Cl- cotransporter with ROMK potassium recycling",
+    "NCCT sodium-chloride cotransporter",
+    "Epithelial sodium channel (ENaC)"
+   ],
+   "a": 1,
+   "exp": "The NKCC2 cotransporter reabsorbs 1 Na+, 1 K+ and 2 Cl- electroneutrally. However, back-leakage of K+ into the tubular lumen via apical ROMK channels creates an lumen-positive transepithelial potential of approximately +8 mV, which repels and drives paracellular reabsorption of divalent cations Ca2+ and Mg2+. Loop diuretics inhibit NKCC2, abolishing this potential and causing hypercalciuria.",
+   "r": [
+    "Incorrect. SGLT2 is located in the proximal tubule.",
+    "Correct. NKCC2 combined with ROMK potassium back-leak generates the lumen-positive driving potential.",
+    "Incorrect. NCCT is electroneutral and located in the distal convoluted tubule.",
+    "Incorrect. ENaC creates a lumen-negative potential in collecting ducts."
+   ],
+   "kp": "ROMK potassium back-leak in the thick ascending limb generates a lumen-positive potential driving Ca2+ and Mg2+ reabsorption.",
+   "t": "phy-tubular",
+   "img": [
+    "ap-nephron-filtration.png"
+   ],
+   "x": {
+    "key": "ROMK potassium back-leak in the thick ascending limb generates a lumen-positive potential driving Ca2+ and Mg2+ reabsorption.",
+    "pearl": "ROMK potassium back-leak in the thick ascending limb generates a lumen-positive potential driving Ca2+ and Mg2+ reabsorption."
+   }
+  }
+ ]
+}

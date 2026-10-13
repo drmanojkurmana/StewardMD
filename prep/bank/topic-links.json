@@ -1,6 +1,6 @@
 {
  "v": 1,
- "gen": "2026-10-12",
+ "gen": "2026-10-13",
  "src": {
   "kb": "dd526cbd26ca",
   "pr": "dac105a6c6c1",
@@ -445,14 +445,15 @@
    "s": "physiology",
    "t": "Blood groups and transfusion",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "blood-transfusion",
      "Blood transfusion: thresholds, components and acute reactions",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "phy-cardiac-cycle": {
    "s": "physiology",
@@ -891,30 +892,38 @@
   "phm-asthma-cough": {
    "s": "pharmacology",
    "t": "Drugs for bronchial asthma, COPD and cough",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "chronic_obstructive_pulmonary_disease",
      "Chronic Obstructive Pulmonary Disease",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "pr",
      "copd-stable-management",
-     "COPD stable management (GOLD ABE)"
+     "COPD stable management (GOLD ABE)",
+     "acr"
     ],
     [
+     "kb",
      "asthma_exac",
-     "Asthma exacerbation"
+     "Asthma exacerbation",
+     "fuzzy"
     ],
     [
+     "kb",
      "bronchial_atresia",
-     "bronchial atresia"
+     "bronchial atresia",
+     "fuzzy"
     ],
     [
+     "kb",
      "occupational_asthma",
-     "Occupational asthma"
+     "Occupational asthma",
+     "fuzzy"
     ]
    ]
   },
@@ -1180,36 +1189,40 @@
   "fmt-firearm": {
    "s": "forensic-medicine",
    "t": "Firearm and blast injuries",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "blast_injury",
      "Blast injury",
-     "fold+haiku"
+     "fold"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "fmt-regional-injuries": {
    "s": "forensic-medicine",
    "t": "Head injuries and road traffic injuries",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "concussion_and_other_traumatic_brain",
      "Concussion and Other Traumatic Brain Injuries",
-     "fold+alias+haiku"
+     "fold+alias"
     ],
     [
+     "kb",
      "traumatic_brain_injury",
      "Traumatic brain injury",
-     "fold+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "fold+alias"
+    ],
     [
+     "pr",
      "traumatic-brain-injury",
-     "Traumatic brain injury (adult): acute management"
+     "Traumatic brain injury (adult): acute management",
+     "fold+alias"
     ]
    ]
   },
@@ -1370,27 +1383,32 @@
   "cm-hiv-sti": {
    "s": "community-medicine",
    "t": "HIV/AIDS and sexually transmitted infections",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "hiv_aids",
      "HIV/AIDS",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
      "sexually_transmitted_infections_overview_a",
      "Sexually Transmitted Infections: Overview and Clinical Approach",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "sexually-transmitted-infections",
-     "Sexually transmitted infections: treatment and partner management (adult)"
+     "fuzzy"
     ],
     [
+     "pr",
+     "sexually-transmitted-infections",
+     "Sexually transmitted infections: treatment and partner management (adult)",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "acinetobacter_infections",
-     "Acinetobacter Infections"
+     "Acinetobacter Infections",
+     "fuzzy"
     ]
    ]
   },
@@ -1446,35 +1464,44 @@
   "cm-malnutrition-anaemia": {
    "s": "community-medicine",
    "t": "Protein energy malnutrition, anaemia and iodine deficiency",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "malnutrition_and_nutritional_assessment",
      "Malnutrition and Nutritional Assessment",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
+     "severe_acute_malnutrition",
+     "Severe acute malnutrition",
+     "name+alias"
+    ],
+    [
+     "kb",
      "iodine_deficiency",
      "Iodine deficiency",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "severe_acute_malnutrition",
-     "Severe acute malnutrition"
+     "name"
     ],
     [
+     "kb",
      "anemia_of_chronic_disease",
-     "Anaemia of chronic disease"
+     "Anaemia of chronic disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "anemia_sympt",
-     "Symptomatic anaemia"
+     "Symptomatic anaemia",
+     "fuzzy"
     ],
     [
+     "kb",
      "aplastic_anemia",
-     "Aplastic anaemia"
+     "Aplastic anaemia",
+     "fuzzy"
     ]
    ]
   },
@@ -1705,33 +1732,36 @@
   "oph-posterior-uveitis": {
    "s": "plab-ophthalmology",
    "t": "Posterior uveitis, panuveitis and endophthalmitis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "posterior_uveitis",
      "Posterior uveitis",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "endophthalmitis",
      "Endophthalmitis",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "oph-cataract": {
    "s": "plab-ophthalmology",
    "t": "Lens and cataract",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "cataract",
      "Cataract",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "oph-visual-pathway": {
    "s": "ophthalmology",
@@ -1787,22 +1817,30 @@
    "t": "Assessment of vestibular function and vertigo",
    "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "pr",
      "bppv-vertigo",
-     "Benign paroxysmal positional vertigo (BPPV)"
+     "Benign paroxysmal positional vertigo (BPPV)",
+     "name+alias"
     ],
     [
+     "kb",
      "vestibular_migraine",
-     "vestibular migraine"
+     "vestibular migraine",
+     "fuzzy"
     ],
     [
+     "kb",
      "vestibular_neuritis",
-     "Vestibular neuritis"
+     "Vestibular neuritis",
+     "fuzzy"
     ],
     [
+     "kb",
      "vestibular_paroxysmia",
-     "vestibular paroxysmia"
+     "vestibular paroxysmia",
+     "fuzzy"
     ]
    ]
   },
@@ -1816,15 +1854,16 @@
   "ent-facial-trauma": {
    "s": "ent",
    "t": "Maxillofacial fractures and CSF rhinorrhoea",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "facial_fractures",
      "Facial fractures",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "ent-pharynx-anatomy": {
    "s": "ent",
@@ -1836,22 +1875,26 @@
   "ent-dysphagia": {
    "s": "ent",
    "t": "Dysphagia and the oesophagus",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "dysphagia",
      "Dysphagia",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "feline_oesophagus",
-     "feline oesophagus"
+     "name"
     ],
     [
+     "kb",
+     "feline_oesophagus",
+     "feline oesophagus",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "jackhammer_oesophagus",
-     "jackhammer oesophagus"
+     "jackhammer oesophagus",
+     "fuzzy"
     ]
    ]
   },
@@ -1872,15 +1915,16 @@
   "ent-airway": {
    "s": "mrcs-ent",
    "t": "Tracheostomy and airway foreign bodies",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "foreign_body_aspiration",
      "Foreign Body Aspiration",
-     "fold+alias+haiku"
+     "fold+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "ent-instruments-radiology": {
    "s": "ent",
@@ -1913,18 +1957,20 @@
   "med-acid-base": {
    "s": "mrcs-medicine",
    "t": "Acid-base disorders and renal tubular acidosis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "renal_tubular_acidosis",
      "Renal tubular acidosis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "tubulointerstitial_disease",
-     "Tubulointerstitial Kidney Disease"
+     "Tubulointerstitial Kidney Disease",
+     "name+alias"
     ]
    ]
   },
@@ -1945,50 +1991,58 @@
   "med-epilepsy": {
    "s": "medicine",
    "t": "Seizures and epilepsy",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "seizures_and_epilepsy",
      "Seizures and Epilepsy",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "epilepsy-long-term-management",
-     "Epilepsy: long-term management (adult)"
+     "Epilepsy: long-term management (adult)",
+     "name+alias"
     ],
     [
+     "kb",
      "neonatal_seizures",
-     "Neonatal Seizures"
+     "Neonatal Seizures",
+     "fuzzy"
     ],
     [
+     "pr",
      "febrile-seizure",
-     "Febrile seizures"
+     "Febrile seizures",
+     "fuzzy"
     ]
    ]
   },
   "med-dementia": {
    "s": "medicine",
    "t": "Dementia and delirium",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "delirium",
-     "Delirium",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "dementia",
      "Dementia: assessment and management",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "delirium",
-     "Delirium (adult)"
+     "Delirium",
+     "name"
+    ],
+    [
+     "pr",
+     "delirium",
+     "Delirium (adult)",
+     "name+alias"
     ]
    ]
   },
@@ -2044,27 +2098,32 @@
   "sur-oral": {
    "s": "surgery",
    "t": "Oral cavity and oral cancer",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "oral_cancer",
      "Oral cancer",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "oral_squamous_cell_carcinoma",
      "Oral squamous cell carcinoma",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "oral_candidiasis",
-     "Oral candidiasis"
+     "name+alias"
     ],
     [
+     "kb",
+     "oral_candidiasis",
+     "Oral candidiasis",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "oral_leukoplakia",
-     "Oral leukoplakia"
+     "Oral leukoplakia",
+     "fuzzy"
     ]
    ]
   },
@@ -2092,15 +2151,16 @@
   "sur-peritoneum": {
    "s": "surgery",
    "t": "Acute abdomen, peritoneum and retroperitoneum",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "acute_abdomen",
      "Acute abdomen",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "sur-onc-principles": {
    "s": "surgery",
@@ -2127,25 +2187,31 @@
    "s": "plab-obstetrics-gynaecology",
    "t": "Diagnosis of pregnancy and antenatal care",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "routine-antenatal-care",
      "Routine antenatal care (uncomplicated pregnancy)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "ectopic_pregnancy",
-     "Ectopic pregnancy"
+     "Ectopic pregnancy",
+     "fuzzy"
     ],
     [
+     "kb",
      "prurigo_of_pregnancy",
-     "prurigo of pregnancy"
+     "prurigo of pregnancy",
+     "fuzzy"
     ],
     [
+     "pr",
      "ectopic-pregnancy",
-     "Ectopic pregnancy (tubal): diagnosis and management"
+     "Ectopic pregnancy (tubal): diagnosis and management",
+     "fuzzy"
     ]
    ]
   },
@@ -2180,15 +2246,16 @@
   "obg-fetal-growth-surveillance": {
    "s": "obstetrics-gynaecology",
    "t": "Fetal growth restriction and fetal surveillance",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "intrauterine_growth_restriction",
      "Intrauterine Growth Restriction",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "obg-heart-disease-pregnancy": {
    "s": "obstetrics-gynaecology",
@@ -2235,31 +2302,38 @@
   "obg-prolapse-urogynaecology": {
    "s": "obstetrics-gynaecology",
    "t": "Genital prolapse, incontinence and fistula",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "uterine_prolapse",
      "Uterine Prolapse",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
      "urinary_incontinence",
      "Urinary incontinence",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "fuzzy"
+    ],
     [
+     "kb",
      "fistula_in_ano",
-     "Fistula-in-ano"
+     "Fistula-in-ano",
+     "fuzzy"
     ],
     [
+     "kb",
      "anal_fistula",
-     "Anal fistula"
+     "Anal fistula",
+     "fuzzy"
     ],
     [
+     "kb",
      "arteriovenous_fistula",
-     "Arteriovenous fistula"
+     "Arteriovenous fistula",
+     "fuzzy"
     ]
    ]
   },
@@ -2482,25 +2556,31 @@
    "s": "plab-dermatology",
    "t": "Eczema and dermatitis",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "atopic-dermatitis",
      "Atopic dermatitis (atopic eczema)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "atopic_dermatitis",
-     "Atopic dermatitis"
+     "Atopic dermatitis",
+     "fuzzy"
     ],
     [
+     "kb",
      "cement_dermatitis",
-     "cement dermatitis"
+     "cement dermatitis",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_actinic_dermatitis",
-     "Chronic actinic dermatitis"
+     "Chronic actinic dermatitis",
+     "fuzzy"
     ]
    ]
   },
@@ -2675,22 +2755,26 @@
   "ans-recovery": {
    "s": "anaesthesia",
    "t": "Recovery, PONV and postoperative care",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "post_operative_nausea_vomiting",
      "Postoperative nausea and vomiting",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "delirium_postoperative",
-     "Postoperative delirium"
+     "acr"
     ],
     [
+     "kb",
+     "delirium_postoperative",
+     "Postoperative delirium",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "end_of_life_care",
-     "End-of-life care"
+     "End-of-life care",
+     "fuzzy"
     ]
    ]
   },
@@ -2893,14 +2977,18 @@
    "t": "Nuclear medicine scans and PET",
    "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "patulous_eustachian_tube",
-     "Patulous eustachian tube"
+     "Patulous eustachian tube",
+     "acr"
     ],
     [
+     "kb",
      "preeclampsia",
-     "Pre-eclampsia"
+     "Pre-eclampsia",
+     "acr"
     ]
    ]
   },
@@ -3033,31 +3121,38 @@
   "sgm-obesity": {
    "s": "ss-general-medicine",
    "t": "Obesity and metabolic syndrome",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "obesity",
      "Obesity",
-     "name+haiku"
+     "name"
     ],
     [
+     "pr",
+     "obesity-management",
+     "Obesity management (adult)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "the_metabolic_syndrome",
      "The Metabolic Syndrome",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "obesity-management",
-     "Obesity management (adult)"
+     "fuzzy"
     ],
     [
+     "kb",
      "metabolic_enceph",
-     "Metabolic encephalopathy"
+     "Metabolic encephalopathy",
+     "fuzzy"
     ],
     [
+     "kb",
      "metabolic_alkalosis",
-     "Metabolic alkalosis"
+     "Metabolic alkalosis",
+     "fuzzy"
     ]
    ]
   },
@@ -3099,31 +3194,38 @@
   "sgm-osteoarthritis-soft-tissue": {
    "s": "ss-general-medicine",
    "t": "Osteoarthritis, fibromyalgia and regional pain syndromes",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
+     "osteoarthritis",
+     "Osteoarthritis",
+     "name"
+    ],
+    [
+     "kb",
      "fibromyalgia",
      "Fibromyalgia",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "complex_regional_pain_syndrome",
      "Complex regional pain syndrome",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "osteoarthritis",
-     "Osteoarthritis"
+     "fuzzy"
     ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "bladder_pain_syndrome",
-     "Bladder pain syndrome"
+     "Bladder pain syndrome",
+     "fuzzy"
     ]
    ]
   },
@@ -3144,28 +3246,32 @@
   "sgm-epilepsy": {
    "s": "ss-general-medicine",
    "t": "Epilepsy and seizures",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "seizures_and_epilepsy",
      "Seizures and Epilepsy",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [
-    [
-     "epilepsy-long-term-management",
-     "Epilepsy: long-term management (adult)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "neonatal_seizures",
-     "Neonatal Seizures"
+     "name+alias"
     ],
     [
+     "pr",
+     "epilepsy-long-term-management",
+     "Epilepsy: long-term management (adult)",
+     "name+alias"
+    ],
+    [
+     "kb",
+     "neonatal_seizures",
+     "Neonatal Seizures",
+     "fuzzy"
+    ],
+    [
+     "pr",
      "febrile-seizure",
-     "Febrile seizures"
+     "Febrile seizures",
+     "fuzzy"
     ]
    ]
   },
@@ -3208,14 +3314,15 @@
    "s": "ss-general-medicine",
    "t": "Cardiac arrest and resuscitation",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "adult-cardiac-arrest",
      "Adult cardiac arrest (ALS/ACLS)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "sgm-geriatric-syndromes": {
    "s": "ss-general-medicine",
@@ -3325,27 +3432,32 @@
   "sca-rheumatic-mitral": {
    "s": "ss-cardiology",
    "t": "Rheumatic heart disease and mitral valve disease",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "rheumatic_heart_disease",
      "Rheumatic heart disease",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "cleft_mitral_valve",
+     "cleft mitral valve",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "mitral_valve_arcade",
+     "mitral valve arcade",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "mitral_valve_prolapse",
      "Mitral Valve Prolapse",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "cleft_mitral_valve",
-     "cleft mitral valve"
-    ],
-    [
-     "mitral_valve_arcade",
-     "mitral valve arcade"
+     "fuzzy"
     ]
    ]
   },
@@ -3437,57 +3549,65 @@
    "s": "ss-neurology",
    "t": "Drug-resistant epilepsy and surgery",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "epilepsy-long-term-management",
      "Epilepsy: long-term management (adult)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "sne-ataxias": {
    "s": "ss-neurology",
    "t": "Cerebellar ataxias",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
+     "ataxic_disorders",
+     "Ataxic Disorders",
+     "fold+alias"
+    ],
+    [
+     "kb",
      "cerebellar_ataxia",
      "Cerebellar ataxia",
-     "fold+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "ataxic_disorders",
-     "Ataxic Disorders"
+     "fold"
     ]
    ]
   },
   "sne-tics-myoclonus-drug-induced": {
    "s": "ss-neurology",
    "t": "Tics, myoclonus and drug-induced movement disorders",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "myoclonus",
      "Myoclonus",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "drug_induced_chorea",
+     "drug induced chorea",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "drug_induced_parkinsonism",
      "drug induced parkinsonism",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "drug_induced_chorea",
-     "drug induced chorea"
+     "fuzzy"
     ],
     [
+     "kb",
      "drug_induced_pemphigus",
-     "Drug-induced pemphigus"
+     "Drug-induced pemphigus",
+     "fuzzy"
     ]
    ]
   },
@@ -3515,23 +3635,26 @@
   "sne-tuberculous-meningitis": {
    "s": "ss-neurology",
    "t": "Tuberculous meningitis and CNS tuberculosis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "tuberculous_meningitis",
      "Tuberculous meningitis",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "CNS_TB",
      "CNS Tuberculosis (TB Meningitis)",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "fuzzy"
+    ],
     [
+     "kb",
      "PULMONARY_TB",
-     "Pulmonary Tuberculosis"
+     "Pulmonary Tuberculosis",
+     "fuzzy"
     ]
    ]
   },
@@ -3608,22 +3731,26 @@
   "snp-acute-tubular-injury": {
    "s": "ss-nephrology",
    "t": "Acute tubular necrosis and rhabdomyolysis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "rhabdo",
      "Rhabdomyolysis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "acute_retinal_necrosis",
-     "Acute retinal necrosis"
+     "name"
     ],
     [
+     "kb",
+     "acute_retinal_necrosis",
+     "Acute retinal necrosis",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "fat_necrosis_breast",
-     "Fat necrosis of the breast"
+     "Fat necrosis of the breast",
+     "fuzzy"
     ]
    ]
   },
@@ -3637,18 +3764,20 @@
   "snp-cardiorenal-hepatorenal": {
    "s": "ss-nephrology",
    "t": "Cardiorenal and hepatorenal syndromes",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "HEPATORENAL_SYNDROME",
      "Hepatorenal syndrome",
-     "fold+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "fold"
+    ],
     [
+     "pr",
      "ascites-and-sbp",
-     "Ascites, SBP and hepatorenal syndrome in cirrhosis"
+     "Ascites, SBP and hepatorenal syndrome in cirrhosis",
+     "fold+alias"
     ]
    ]
   },
@@ -3669,23 +3798,26 @@
   "snp-iga-nephropathy": {
    "s": "ss-nephrology",
    "t": "IgA nephropathy and IgA vasculitis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "IGA_NEPHROPATHY",
      "IgA nephropathy",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "glomerular_diseases",
+     "Glomerular Diseases (Spectrum)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "henoch_schonlein_purpura",
      "Henoch-Schonlein purpura (IgA vasculitis)",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "glomerular_diseases",
-     "Glomerular Diseases (Spectrum)"
+     "name+alias"
     ]
    ]
   },
@@ -3714,17 +3846,19 @@
    "s": "ss-nephrology",
    "t": "Hypertension and cardiovascular disease in CKD",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "hypertension-management",
      "Hypertension: diagnosis and outpatient management",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "hypertension-management-india",
-     "Hypertension: diagnosis and outpatient management (India, InSH)"
+     "Hypertension: diagnosis and outpatient management (India, InSH)",
+     "name+alias"
     ]
    ]
   },
@@ -3850,100 +3984,122 @@
   "sgi-sibo-tropical-sprue": {
    "s": "ss-gastroenterology",
    "t": "SIBO, tropical sprue and enteric infections",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "tropical_sprue",
      "Tropical sprue",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "blind_loop_syndrome",
+     "Blind loop syndrome (small intestinal bacterial overgrowth)",
+     "acr"
+    ],
+    [
+     "kb",
      "small_intestinal_bacterial_overgrowth",
      "Small intestinal bacterial overgrowth",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "blind_loop_syndrome",
-     "Blind loop syndrome (small intestinal bacterial overgrowth)"
+     "acr"
     ],
     [
+     "kb",
      "acinetobacter_infections",
-     "Acinetobacter Infections"
+     "Acinetobacter Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "chlamydial_infection",
-     "Chlamydial Infections"
+     "Chlamydial Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "enteric_anendocrinosis",
-     "Enteric Anendocrinosis"
+     "Enteric Anendocrinosis",
+     "fuzzy"
     ]
    ]
   },
   "sgi-ibd-therapeutics": {
    "s": "ss-gastroenterology",
    "t": "Advanced therapies and monitoring in IBD",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "inflammatory_bowel_disease",
      "Inflammatory Bowel Disease",
-     "acr+haiku"
+     "acr"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "sgi-intestinal-tuberculosis": {
    "s": "ss-gastroenterology",
    "t": "Intestinal tuberculosis and IBD mimics",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "inflammatory_bowel_disease",
      "Inflammatory Bowel Disease",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "CNS_TB",
-     "CNS Tuberculosis (TB Meningitis)"
+     "CNS Tuberculosis (TB Meningitis)",
+     "fuzzy"
     ],
     [
+     "kb",
      "PULMONARY_TB",
-     "Pulmonary Tuberculosis"
+     "Pulmonary Tuberculosis",
+     "fuzzy"
     ],
     [
+     "kb",
      "acute_intestinal_obstruction",
-     "Acute Intestinal Obstruction"
+     "Acute Intestinal Obstruction",
+     "fuzzy"
     ]
    ]
   },
   "sgi-pancreatic-neoplasms": {
    "s": "ss-gastroenterology",
    "t": "Pancreatic cancer and cystic neoplasms",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pancreatic_cancer",
      "Pancreatic Cancer",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "cystic_adventitial_disease",
-     "Cystic adventitial disease"
+     "Cystic adventitial disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "cystic_fibrosis",
-     "Cystic Fibrosis"
+     "Cystic Fibrosis",
+     "fuzzy"
     ],
     [
+     "kb",
      "cystic_hygroma",
-     "Cystic hygroma"
+     "Cystic hygroma",
+     "fuzzy"
     ]
    ]
   },
@@ -3985,15 +4141,16 @@
   "shp-psc-cholangiopathies": {
    "s": "ss-hepatology",
    "t": "Primary sclerosing cholangitis and other cholangiopathies",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "PRIMARY_SCLEROSING_CHOLANGITIS",
      "Primary sclerosing cholangitis",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "shp-aclf": {
    "s": "ss-hepatology",
@@ -4094,49 +4251,58 @@
   "shm-marrow-failure-pnh": {
    "s": "ss-haematology",
    "t": "Bone marrow failure and PNH",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "bone_marrow_failure_syndromes_including",
      "Bone Marrow Failure Syndromes Including Aplastic Anemia and Myelodysplasia",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
      "PNH",
      "Paroxysmal nocturnal haemoglobinuria",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "progressive_nodular_histiocytosis",
-     "Progressive nodular histiocytosis"
+     "Progressive nodular histiocytosis",
+     "acr"
     ]
    ]
   },
   "shm-acute-myeloid-leukaemia": {
    "s": "ss-haematology",
    "t": "Acute myeloid leukaemia and APL",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
+     "acquired_partial_lipodystrophy",
+     "Acquired partial lipodystrophy (Barraquer-Simons)",
+     "acr"
+    ],
+    [
+     "kb",
+     "atypical_chronic_myeloid_leukaemia",
+     "Atypical chronic myeloid leukaemia",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "acute_leukemia",
      "Acute leukaemia",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "acquired_partial_lipodystrophy",
-     "Acquired partial lipodystrophy (Barraquer-Simons)"
+     "fuzzy"
     ],
     [
-     "atypical_chronic_myeloid_leukaemia",
-     "Atypical chronic myeloid leukaemia"
-    ],
-    [
+     "kb",
      "acute_megakaryoblastic_leukaemia",
-     "Acute megakaryoblastic leukaemia"
+     "Acute megakaryoblastic leukaemia",
+     "fuzzy"
     ]
    ]
   },
@@ -4164,50 +4330,58 @@
   "shm-inherited-bleeding-disorders": {
    "s": "ss-haematology",
    "t": "Haemophilia and von Willebrand disease",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "haemophilia",
      "Haemophilia",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "coagulation_disorders",
+     "Coagulation Disorders",
+     "name+alias"
+    ],
+    [
+     "kb",
      "von_willebrand_disease",
      "Von Willebrand disease",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "coagulation_disorders",
-     "Coagulation Disorders"
+     "name"
     ]
    ]
   },
   "shm-acquired-coagulopathies": {
    "s": "ss-haematology",
    "t": "DIC and acquired coagulopathies",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "dic",
      "Disseminated intravascular coagulation",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
      "acquired_haemophilia",
      "Acquired Haemophilia A",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "acquired_ichthyosis",
-     "acquired ichthyosis"
+     "fuzzy"
     ],
     [
+     "kb",
+     "acquired_ichthyosis",
+     "acquired ichthyosis",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "acquired_methemoglobinemia",
-     "Acquired methaemoglobinaemia"
+     "Acquired methaemoglobinaemia",
+     "fuzzy"
     ]
    ]
   },
@@ -4354,26 +4528,32 @@
   "son-mesothelioma-thymic": {
    "s": "ss-medical-oncology",
    "t": "Mesothelioma and thymic tumours",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
+     "disorders_of_the_pleura",
+     "Disorders of the Pleura",
+     "name+alias"
+    ],
+    [
+     "kb",
      "mesothelioma",
      "Mesothelioma",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "disorders_of_the_pleura",
-     "Disorders of the Pleura"
+     "name"
     ],
     [
+     "kb",
      "thymic_carcinoma",
-     "Thymic carcinoma"
+     "Thymic carcinoma",
+     "fuzzy"
     ],
     [
+     "kb",
      "thymic_cyst",
-     "Thymic cyst"
+     "Thymic cyst",
+     "fuzzy"
     ]
    ]
   },
@@ -4408,41 +4588,48 @@
   "son-esophagus-gastric": {
    "s": "ss-medical-oncology",
    "t": "Oesophageal and gastric cancer",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "upper_gastrointestinal_tract_cancers",
      "Upper Gastrointestinal Tract Cancers",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "oesophageal_web",
-     "oesophageal web"
+     "oesophageal web",
+     "fuzzy"
     ],
     [
+     "kb",
      "oesophageal_hypomotility",
-     "oesophageal hypomotility"
+     "oesophageal hypomotility",
+     "fuzzy"
     ],
     [
+     "kb",
      "esophageal_atresia",
-     "Oesophageal atresia / tracheo-oesophageal fistula"
+     "Oesophageal atresia / tracheo-oesophageal fistula",
+     "fuzzy"
     ]
    ]
   },
   "son-crc-early": {
    "s": "ss-medical-oncology",
    "t": "Localized colon and rectal cancer",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "colorectal_cancer",
      "Colorectal Cancer",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "son-anal-sb": {
    "s": "ss-medical-oncology",
@@ -4580,26 +4767,32 @@
   "son-effusions-nutrition": {
    "s": "ss-medical-oncology",
    "t": "Malignant effusions, cachexia and nutrition",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "cancer_cachexia",
      "Cancer cachexia",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "malignant_glaucoma",
-     "Malignant glaucoma"
+     "Malignant glaucoma",
+     "fuzzy"
     ],
     [
+     "kb",
      "malignant_hyperthermia",
-     "Malignant hyperthermia"
+     "Malignant hyperthermia",
+     "fuzzy"
     ],
     [
+     "kb",
      "neuroleptic_malignant_syndrome",
-     "Neuroleptic malignant syndrome"
+     "Neuroleptic malignant syndrome",
+     "fuzzy"
     ]
    ]
   },
@@ -4648,18 +4841,20 @@
   "srh-psa": {
    "s": "ss-rheumatology-immunology",
    "t": "Psoriatic arthritis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "psoriatic_arthritis",
      "Psoriatic arthritis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "spondyloarthritis",
-     "Spondyloarthritis"
+     "Spondyloarthritis",
+     "name+alias"
     ]
    ]
   },
@@ -4673,44 +4868,52 @@
   "srh-sle-pathogenesis": {
    "s": "ss-rheumatology-immunology",
    "t": "SLE pathogenesis and classification",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "systemic_lupus_erythematosus",
      "Systemic Lupus Erythematosus",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "classification_of_cardiomyopathy",
-     "Classification of Cardiomyopathy"
+     "Classification of Cardiomyopathy",
+     "fuzzy"
     ]
    ]
   },
   "srh-sle-management": {
    "s": "ss-rheumatology-immunology",
    "t": "Management of SLE",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "systemic_lupus_erythematosus",
      "Systemic Lupus Erythematosus",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_pain_management",
-     "Chronic pain management"
+     "Chronic pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "spasticity_management",
-     "Spasticity management"
+     "Spasticity management",
+     "fuzzy"
     ]
    ]
   },
@@ -4738,88 +4941,104 @@
   "srh-single-organ": {
    "s": "ss-rheumatology-immunology",
    "t": "Cogan syndrome and single organ vasculitis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "cogan_syndrome",
      "Cogan syndrome",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "single_organ_vasculitis",
      "Single-organ vasculitis",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "srh-polychondritis": {
    "s": "ss-rheumatology-immunology",
    "t": "Relapsing polychondritis and VEXAS syndrome",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "relapsing_polychondritis",
      "Relapsing Polychondritis",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "vexas_syndrome",
      "VEXAS syndrome",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "srh-viral-postinfectious": {
    "s": "ss-rheumatology-immunology",
    "t": "Viral and post-infectious arthritis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "REACTIVE_ARTHRITIS",
      "Reactive arthritis",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "VIRAL_HEPATITIS",
-     "Acute Viral Hepatitis"
+     "Acute Viral Hepatitis",
+     "fuzzy"
     ],
     [
+     "kb",
      "viral_gastroenteritis",
-     "Viral Gastroenteritis"
+     "Viral Gastroenteritis",
+     "fuzzy"
     ],
     [
+     "kb",
      "viral_warts",
-     "Viral Warts"
+     "Viral Warts",
+     "fuzzy"
     ]
    ]
   },
   "srh-fibromyalgia": {
    "s": "ss-rheumatology-immunology",
    "t": "Fibromyalgia and chronic widespread pain",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "fibromyalgia",
      "Fibromyalgia",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "bladder_pain_syndrome",
-     "Bladder pain syndrome"
+     "Bladder pain syndrome",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_pain_management",
-     "Chronic pain management"
+     "Chronic pain management",
+     "fuzzy"
     ]
    ]
   },
@@ -4861,15 +5080,16 @@
   "srh-pediatric-rheum": {
    "s": "ss-rheumatology-immunology",
    "t": "Pediatric rheumatology beyond JIA",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "juvenile_idiopathic_arthritis",
      "Juvenile Idiopathic Arthritis",
-     "acr+haiku"
+     "acr"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "srh-malignancy-rheum": {
    "s": "ss-rheumatology-immunology",
@@ -4951,35 +5171,44 @@
   "spu-abpa-eosinophilic": {
    "s": "ss-pulmonology",
    "t": "ABPA and eosinophilic lung diseases",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "allergic_bronchopulmonary_aspergillosis",
      "Allergic bronchopulmonary aspergillosis",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
+     "aspergillosis",
+     "Aspergillosis",
+     "acr"
+    ],
+    [
+     "kb",
      "hypersensitivity_pneumonitis",
      "Hypersensitivity Pneumonitis & Eosinophilic Lung Disease",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "aspergillosis",
-     "Aspergillosis"
+     "acr"
     ],
     [
+     "kb",
      "LUNG_ABSCESS",
-     "Lung Abscess"
+     "Lung Abscess",
+     "fuzzy"
     ],
     [
+     "kb",
      "ild",
-     "Interstitial lung disease"
+     "Interstitial lung disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "lung_cancer",
-     "Lung cancer"
+     "Lung cancer",
+     "fuzzy"
     ]
    ]
   },
@@ -5000,23 +5229,26 @@
   "spu-resp-failure": {
    "s": "ss-pulmonology",
    "t": "Respiratory failure and non-invasive ventilation",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "acute_respiratory_failure",
      "Acute respiratory failure",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
      "disorders_of_ventilation",
      "Disorders of Ventilation",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "fuzzy"
+    ],
     [
+     "kb",
      "fusariosis",
-     "Invasive fusariosis"
+     "Invasive fusariosis",
+     "fuzzy"
     ]
    ]
   },
@@ -5121,20 +5353,22 @@
   "sid-strep-entero": {
    "s": "ss-infectious-diseases",
    "t": "Streptococcal and enterococcal infections",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "enterococcal_infections",
      "Enterococcal Infections",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "streptococcal_infections",
      "Streptococcal Infections",
-     "fuzzy+haiku"
+     "fuzzy"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "sid-gp-other": {
    "s": "ss-infectious-diseases",
@@ -5195,15 +5429,16 @@
   "sid-cmv-ebv": {
    "s": "ss-infectious-diseases",
    "t": "CMV, EBV and other herpesviruses",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "cytomegalovirus_infection",
      "Cytomegalovirus (CMV) Infection",
-     "acr+haiku"
+     "acr"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "sid-protozoa-other": {
    "s": "ss-infectious-diseases",
@@ -5229,26 +5464,32 @@
   "sid-hsct-id": {
    "s": "ss-infectious-diseases",
    "t": "Infections in HSCT and cellular therapy",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "hematopoietic_cell_transplantation",
      "Hematopoietic Cell Transplantation",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "acinetobacter_infections",
-     "Acinetobacter Infections"
+     "Acinetobacter Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "chlamydial_infection",
-     "Chlamydial Infections"
+     "Chlamydial Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "enterococcal_infections",
-     "Enterococcal Infections"
+     "Enterococcal Infections",
+     "fuzzy"
     ]
    ]
   },
@@ -5347,14 +5588,15 @@
    "s": "ss-critical-care",
    "t": "Lung-protective ventilation and VILI",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "ards-lung-protective-ventilation",
      "ARDS: lung-protective ventilation (adult)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "scc-weaning": {
    "s": "ss-critical-care",
@@ -5373,30 +5615,38 @@
   "scc-ards-management": {
    "s": "ss-critical-care",
    "t": "ARDS management",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "ards",
      "Acute Respiratory Distress Syndrome (ARDS)",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "pr",
      "ards-lung-protective-ventilation",
-     "ARDS: lung-protective ventilation (adult)"
+     "ARDS: lung-protective ventilation (adult)",
+     "acr"
     ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_pain_management",
-     "Chronic pain management"
+     "Chronic pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "spasticity_management",
-     "Spasticity management"
+     "Spasticity management",
+     "fuzzy"
     ]
    ]
   },
@@ -5411,30 +5661,33 @@
    "s": "ss-critical-care",
    "t": "Acute hypoxaemic and hypercapnic respiratory failure",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "acute-respiratory-failure-niv-hfnc",
      "Acute respiratory failure: NIV and high-flow nasal oxygen (adult)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "scc-severe-pneumonia": {
    "s": "ss-critical-care",
    "t": "Severe pneumonia and VAP",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "pr",
+     "childhood-pneumonia",
+     "Community-acquired pneumonia (child)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "VAP",
      "Ventilator Associated Pneumonia",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "childhood-pneumonia",
-     "Community-acquired pneumonia (child)"
+     "acr"
     ]
    ]
   },
@@ -5455,18 +5708,20 @@
   "scc-cardiogenic-shock": {
    "s": "ss-critical-care",
    "t": "Cardiogenic shock and mechanical circulatory support",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "cardiogenic_shock",
      "Cardiogenic shock",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "cardiac_transplantation_and_prolonged_assi",
-     "Cardiac Transplantation and Prolonged Assisted Circulation"
+     "Cardiac Transplantation and Prolonged Assisted Circulation",
+     "name+alias"
     ]
    ]
   },
@@ -5599,15 +5854,16 @@
   "scc-ethics": {
    "s": "ss-critical-care",
    "t": "Ethics, end of life care and communication",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "end_of_life_care",
      "End-of-life care",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "scc-quality-icu": {
    "s": "ss-critical-care",
@@ -5676,25 +5932,31 @@
    "s": "ss-radiology",
    "t": "Stroke, haemorrhage and cerebrovascular disease",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "acute-ischaemic-stroke",
      "Acute ischaemic stroke: thrombolysis and thrombectomy",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "adrenal_haemorrhage",
-     "adrenal haemorrhage"
+     "adrenal haemorrhage",
+     "fuzzy"
     ],
     [
+     "kb",
      "postpartum_haemorrhage",
-     "Postpartum haemorrhage"
+     "Postpartum haemorrhage",
+     "fuzzy"
     ],
     [
+     "kb",
      "subconjunctival_hemorrhage",
-     "Subconjunctival haemorrhage"
+     "Subconjunctival haemorrhage",
+     "fuzzy"
     ]
    ]
   },
@@ -5773,14 +6035,18 @@
    "t": "Nuclear medicine and PET",
    "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "patulous_eustachian_tube",
-     "Patulous eustachian tube"
+     "Patulous eustachian tube",
+     "acr"
     ],
     [
+     "kb",
      "preeclampsia",
-     "Pre-eclampsia"
+     "Pre-eclampsia",
+     "acr"
     ]
    ]
   },
@@ -5800,45 +6066,51 @@
    "s": "adult-health-medicine",
    "t": "Heart failure",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "chronic-heart-failure-hfref",
      "Chronic heart failure with reduced ejection fraction (HFrEF)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "chronic-heart-failure-hfref-india",
-     "Chronic heart failure with reduced ejection fraction (India, HFAI)"
+     "Chronic heart failure with reduced ejection fraction (India, HFAI)",
+     "name+alias"
     ]
    ]
   },
   "ahm-af": {
    "s": "adult-health-medicine",
    "t": "Atrial fibrillation and stroke prevention",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "ischemic_stroke",
-     "Acute ischemic stroke",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "atrial-fibrillation",
      "Atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "heat_stroke",
-     "Heat stroke"
+     "name+alias"
     ],
     [
+     "kb",
+     "ischemic_stroke",
+     "Acute ischemic stroke",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "heat_stroke",
+     "Heat stroke",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "stroke_rehabilitation",
-     "Stroke rehabilitation"
+     "Stroke rehabilitation",
+     "fuzzy"
     ]
    ]
   },
@@ -5846,17 +6118,19 @@
    "s": "adult-health-medicine",
    "t": "Hypertension",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "hypertension-management",
      "Hypertension: diagnosis and outpatient management",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "hypertension-management-india",
-     "Hypertension: diagnosis and outpatient management (India, InSH)"
+     "Hypertension: diagnosis and outpatient management (India, InSH)",
+     "name+alias"
     ]
    ]
   },
@@ -5871,14 +6145,15 @@
    "s": "adult-health-medicine",
    "t": "Arrhythmias and syncope",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "syncope-evaluation",
      "Syncope: initial evaluation and risk stratification",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "ahm-chest-pain": {
    "s": "adult-health-medicine",
@@ -5902,21 +6177,22 @@
   "ahm-copd": {
    "s": "adult-health-medicine",
    "t": "COPD",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "chronic_obstructive_pulmonary_disease",
      "Chronic Obstructive Pulmonary Disease",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [
+     "acr"
+    ],
     [
+     "pr",
      "copd-stable-management",
      "COPD stable management (GOLD ABE)",
-     "acr+haiku"
+     "acr"
     ]
-   ],
-   "x": []
+   ]
   },
   "ahm-asthma": {
    "s": "adult-health-medicine",
@@ -5940,57 +6216,62 @@
   "ahm-pe": {
    "s": "adult-health-medicine",
    "t": "Pulmonary embolism",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pe",
      "Pulmonary embolism",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
+     "name"
+    ],
     [
+     "kb",
+     "deep_venous_thrombosis_and_pulmonary",
+     "Deep-Venous Thrombosis and Pulmonary Thromboembolism",
+     "name+alias"
+    ],
+    [
+     "pr",
      "pulmonary-embolism",
      "Acute pulmonary embolism: risk stratification and treatment",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "deep_venous_thrombosis_and_pulmonary",
-     "Deep-Venous Thrombosis and Pulmonary Thromboembolism"
+     "name+alias"
     ]
    ]
   },
   "ahm-ild": {
    "s": "adult-health-medicine",
    "t": "Interstitial lung disease",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "ild",
      "Interstitial lung disease",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "pulmonary_fibrosis",
-     "Pulmonary fibrosis"
+     "Pulmonary fibrosis",
+     "name+alias"
     ]
    ]
   },
   "ahm-abg": {
    "s": "adult-health-medicine",
    "t": "Respiratory failure and ABG",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "acute_respiratory_failure",
      "Acute respiratory failure",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "ahm-gib": {
    "s": "adult-health-medicine",
@@ -6040,23 +6321,26 @@
   "ahm-dyspepsia": {
    "s": "adult-health-medicine",
    "t": "Dyspepsia and H pylori",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "helicobacter_pylori_infection",
      "Helicobacter pylori Infection",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "pr",
+     "helicobacter-pylori",
+     "Helicobacter pylori infection (adult)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "functional_dyspepsia",
      "Functional dyspepsia",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "helicobacter-pylori",
-     "Helicobacter pylori infection (adult)"
+     "fuzzy"
     ]
    ]
   },
@@ -6103,31 +6387,38 @@
   "ahm-obesity": {
    "s": "adult-health-medicine",
    "t": "Obesity and metabolic syndrome",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "obesity",
      "Obesity",
-     "name+haiku"
+     "name"
     ],
     [
+     "pr",
+     "obesity-management",
+     "Obesity management (adult)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "the_metabolic_syndrome",
      "The Metabolic Syndrome",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "obesity-management",
-     "Obesity management (adult)"
+     "fuzzy"
     ],
     [
+     "kb",
      "metabolic_enceph",
-     "Metabolic encephalopathy"
+     "Metabolic encephalopathy",
+     "fuzzy"
     ],
     [
+     "kb",
      "metabolic_alkalosis",
-     "Metabolic alkalosis"
+     "Metabolic alkalosis",
+     "fuzzy"
     ]
    ]
   },
@@ -6173,40 +6464,45 @@
    "s": "adult-health-medicine",
    "t": "Stroke and TIA",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "acute-ischaemic-stroke",
      "Acute ischaemic stroke: thrombolysis and thrombectomy",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "ahm-epilepsy": {
    "s": "adult-health-medicine",
    "t": "Seizures and epilepsy",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "seizures_and_epilepsy",
      "Seizures and Epilepsy",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [
-    [
-     "epilepsy-long-term-management",
-     "Epilepsy: long-term management (adult)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "neonatal_seizures",
-     "Neonatal Seizures"
+     "name+alias"
     ],
     [
+     "pr",
+     "epilepsy-long-term-management",
+     "Epilepsy: long-term management (adult)",
+     "name+alias"
+    ],
+    [
+     "kb",
+     "neonatal_seizures",
+     "Neonatal Seizures",
+     "fuzzy"
+    ],
+    [
+     "pr",
      "febrile-seizure",
-     "Febrile seizures"
+     "Febrile seizures",
+     "fuzzy"
     ]
    ]
   },
@@ -6220,24 +6516,26 @@
   "ahm-dementia": {
    "s": "adult-health-medicine",
    "t": "Dementia and delirium",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "delirium",
-     "Delirium",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "dementia",
      "Dementia: assessment and management",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "delirium",
-     "Delirium (adult)"
+     "Delirium",
+     "name"
+    ],
+    [
+     "pr",
+     "delirium",
+     "Delirium (adult)",
+     "name+alias"
     ]
    ]
   },
@@ -6271,60 +6569,75 @@
    "s": "adult-health-medicine",
    "t": "Tuberculosis",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
+     "pulmonary-tuberculosis",
+     "Pulmonary tuberculosis, drug-susceptible (adult, NTEP)",
+     "name+alias"
+    ],
+    [
+     "pr",
      "pulmonary-tuberculosis-international",
      "Pulmonary tuberculosis, drug-susceptible (WHO)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "pulmonary-tuberculosis",
-     "Pulmonary tuberculosis, drug-susceptible (adult, NTEP)"
+     "name+alias"
     ]
    ]
   },
   "ahm-aus-infections": {
    "s": "adult-health-medicine",
    "t": "Australian infections: Q fever, Ross River, melioidosis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "q_fever",
      "Q fever",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "rickettsial_diseases",
+     "Rickettsial Diseases",
+     "name+alias"
+    ],
+    [
+     "kb",
      "MELIOIDOSIS",
      "Melioidosis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "rickettsial_diseases",
-     "Rickettsial Diseases"
+     "name"
     ],
     [
+     "kb",
      "infections_due_to_pseudomonas_burkholderia",
-     "Infections Due to Pseudomonas, Burkholderia, and Stenotrophomonas Species"
+     "Infections Due to Pseudomonas, Burkholderia, and Stenotrophomonas Species",
+     "name+alias"
     ],
     [
+     "kb",
      "acinetobacter_infections",
-     "Acinetobacter Infections"
+     "Acinetobacter Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "chlamydial_infection",
-     "Chlamydial Infections"
+     "Chlamydial Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "enterococcal_infections",
-     "Enterococcal Infections"
+     "Enterococcal Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "ross_syndrome",
-     "Ross syndrome"
+     "Ross syndrome",
+     "fuzzy"
     ]
    ]
   },
@@ -6345,18 +6658,20 @@
   "ahm-vte": {
    "s": "adult-health-medicine",
    "t": "VTE and anticoagulation",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
+     "arterial_and_venous_thrombosis",
+     "Arterial and Venous Thrombosis",
+     "acr"
+    ],
+    [
+     "kb",
      "deep_venous_thrombosis_and_pulmonary",
      "Deep-Venous Thrombosis and Pulmonary Thromboembolism",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "arterial_and_venous_thrombosis",
-     "Arterial and Venous Thrombosis"
+     "acr"
     ]
    ]
   },
@@ -6382,26 +6697,32 @@
   "ahm-vasculitis": {
    "s": "adult-health-medicine",
    "t": "Vasculitis and connective tissue disease",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "the_vasculitis_syndromes",
      "The Vasculitis Syndromes",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "MCTD",
-     "Mixed connective tissue disease"
+     "Mixed connective tissue disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "heritable_disorders_of_connective_tissue",
-     "Heritable Disorders of Connective Tissue"
+     "Heritable Disorders of Connective Tissue",
+     "fuzzy"
     ],
     [
+     "kb",
      "undifferentiated_connective_tissue_disease",
-     "Undifferentiated connective tissue disease"
+     "Undifferentiated connective tissue disease",
+     "fuzzy"
     ]
    ]
   },
@@ -6423,48 +6744,57 @@
    "s": "adult-health-medicine",
    "t": "Poisoning and overdose",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
+     "poisoning-general-approach",
+     "Acute poisoning: general approach (adult, India)",
+     "name+alias"
+    ],
+    [
+     "pr",
      "poisoning-general-approach-international",
      "Acute poisoning: general approach (international)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "poisoning-general-approach",
-     "Acute poisoning: general approach (adult, India)"
+     "name+alias"
     ],
     [
+     "kb",
      "opioid_od",
-     "Opioid overdose"
+     "Opioid overdose",
+     "fuzzy"
     ],
     [
+     "kb",
      "benzodiazepine_overdose",
-     "Benzodiazepine overdose"
+     "Benzodiazepine overdose",
+     "fuzzy"
     ]
    ]
   },
   "ahm-aged-care": {
    "s": "adult-health-medicine",
    "t": "Aged care: falls and frailty",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "frailty_syndrome",
      "Frailty syndrome",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
+     "end_of_life_care",
+     "End-of-life care",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "falls_in_elderly",
      "Falls in the elderly",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "end_of_life_care",
-     "End-of-life care"
+     "fuzzy"
     ]
    ]
   },
@@ -6497,20 +6827,22 @@
   "ahs-obstruction": {
    "s": "adult-health-surgery",
    "t": "Bowel obstruction",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "bowel_obstruction",
      "Bowel obstruction",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "acute_intestinal_obstruction",
      "Acute Intestinal Obstruction",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "ahs-colorectal": {
    "s": "adult-health-surgery",
@@ -6569,22 +6901,26 @@
   "ahs-head-injury": {
    "s": "adult-health-surgery",
    "t": "Head injury",
-   "kb": [
-    [
-     "traumatic_brain_injury",
-     "Traumatic brain injury",
-     "name+alias+haiku"
-    ]
-   ],
+   "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "concussion_and_other_traumatic_brain",
-     "Concussion and Other Traumatic Brain Injuries"
+     "Concussion and Other Traumatic Brain Injuries",
+     "name+alias"
     ],
     [
+     "kb",
+     "traumatic_brain_injury",
+     "Traumatic brain injury",
+     "name+alias"
+    ],
+    [
+     "pr",
      "traumatic-brain-injury",
-     "Traumatic brain injury (adult): acute management"
+     "Traumatic brain injury (adult): acute management",
+     "name+alias"
     ]
    ]
   },
@@ -6617,46 +6953,52 @@
   "ahs-shock": {
    "s": "adult-health-surgery",
    "t": "Surgical shock and transfusion",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "SEPTIC_SHOCK",
-     "Septic Shock",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "blood-transfusion",
      "Blood transfusion: thresholds, components and acute reactions",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "cardiogenic_shock",
-     "Cardiogenic shock"
+     "name+alias"
     ],
     [
+     "kb",
+     "SEPTIC_SHOCK",
+     "Septic Shock",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "cardiogenic_shock",
+     "Cardiogenic shock",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "TOXIC_SHOCK_SYNDROME",
-     "Toxic shock syndrome"
+     "Toxic shock syndrome",
+     "fuzzy"
     ]
    ]
   },
   "ahs-aortic": {
    "s": "adult-health-surgery",
    "t": "Aortic aneurysm and dissection",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "diseases_of_the_aorta",
      "Diseases of the Aorta",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "aortic_dissection",
-     "Aortic dissection"
+     "Aortic dissection",
+     "fuzzy"
     ]
    ]
   },
@@ -6743,48 +7085,58 @@
   "ahs-bone-infection": {
    "s": "adult-health-surgery",
    "t": "Bone and joint infection",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "infectious_arthritis",
      "Infectious Arthritis",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "autoinflammatory_bone",
-     "Autoinflammatory bone disease"
+     "Autoinflammatory bone disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "bone_island",
-     "Bone island"
+     "Bone island",
+     "fuzzy"
     ],
     [
+     "kb",
      "hungry_bone_syndrome",
-     "Hungry bone syndrome"
+     "Hungry bone syndrome",
+     "fuzzy"
     ]
    ]
   },
   "ahs-skin": {
    "s": "adult-health-surgery",
    "t": "Skin lesions and melanoma",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "skin_cancer",
      "Skin Cancer",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "anal_skin_tag",
-     "Anal skin tag"
+     "name+alias"
     ],
     [
+     "kb",
+     "anal_skin_tag",
+     "Anal skin tag",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "peeling_skin_syndrome",
-     "Peeling skin syndrome"
+     "Peeling skin syndrome",
+     "fuzzy"
     ]
    ]
   },
@@ -6813,14 +7165,15 @@
    "s": "womens-health",
    "t": "Antenatal care and screening",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "routine-antenatal-care",
      "Routine antenatal care (uncomplicated pregnancy)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "wh-hypertension": {
    "s": "womens-health",
@@ -6833,19 +7186,21 @@
    "s": "womens-health",
    "t": "Diabetes in pregnancy",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "gestational-diabetes-international",
      "Gestational diabetes (ADA, NICE and WHO)",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "pr",
      "gestational-diabetes",
      "Gestational diabetes mellitus (GDM): India DIPSI pathway",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "wh-labour": {
    "s": "womens-health",
@@ -6888,26 +7243,32 @@
   "wh-preterm": {
    "s": "womens-health",
    "t": "Multiple pregnancy and preterm labour",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "preterm_labour",
      "Preterm labour",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "myeloma",
-     "Multiple myeloma"
+     "Multiple myeloma",
+     "fuzzy"
     ],
     [
+     "kb",
      "ectopic_pregnancy",
-     "Ectopic pregnancy"
+     "Ectopic pregnancy",
+     "fuzzy"
     ],
     [
+     "kb",
      "prurigo_of_pregnancy",
-     "prurigo of pregnancy"
+     "prurigo of pregnancy",
+     "fuzzy"
     ]
    ]
   },
@@ -6959,21 +7320,22 @@
   "wh-pcos": {
    "s": "womens-health",
    "t": "PCOS",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "polycystic_ovary_syndrome",
      "Polycystic ovary syndrome",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [
+     "acr"
+    ],
     [
+     "pr",
      "polycystic-ovary-syndrome",
      "Polycystic ovary syndrome (PCOS)",
-     "acr+haiku"
+     "acr"
     ]
-   ],
-   "x": []
+   ]
   },
   "wh-endometriosis": {
    "s": "womens-health",
@@ -7004,18 +7366,20 @@
   "wh-pid": {
    "s": "womens-health",
    "t": "PID and STIs",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pelvic_inflammatory_disease",
      "Pelvic inflammatory disease",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "primary_immunodeficiency",
-     "Primary Immunodeficiency"
+     "Primary Immunodeficiency",
+     "acr"
     ]
    ]
   },
@@ -7097,36 +7461,44 @@
   "ch-resp-lower": {
    "s": "child-health",
    "t": "Asthma, pneumonia and bronchiolitis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "pr",
+     "community-acquired-pneumonia",
+     "Community-acquired pneumonia (adult)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "bronchiolitis",
      "Bronchiolitis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
+     "name"
+    ],
     [
+     "pr",
+     "bronchiolitis",
+     "Bronchiolitis",
+     "name"
+    ],
+    [
+     "kb",
+     "asthma_exac",
+     "Asthma exacerbation",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "occupational_asthma",
+     "Occupational asthma",
+     "fuzzy"
+    ],
+    [
+     "pr",
      "acute-asthma-child",
      "Acute asthma in children",
-     "fuzzy+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "community-acquired-pneumonia",
-     "Community-acquired pneumonia (adult)"
-    ],
-    [
-     "bronchiolitis",
-     "Bronchiolitis"
-    ],
-    [
-     "asthma_exac",
-     "Asthma exacerbation"
-    ],
-    [
-     "occupational_asthma",
-     "Occupational asthma"
+     "fuzzy"
     ]
    ]
   },
@@ -7140,15 +7512,16 @@
   "ch-exanthems": {
    "s": "child-health",
    "t": "Rashes and Kawasaki disease",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "KAWASAKI_DISEASE",
      "Kawasaki disease",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "ch-cardiac": {
    "s": "child-health",
@@ -7167,61 +7540,76 @@
   "ch-renal": {
    "s": "child-health",
    "t": "UTI and nephrotic syndrome",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "nephrotic",
      "Nephrotic syndrome",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "urinary_tract_infections_cystitis_prostati",
      "Urinary Tract Infections: Cystitis, Prostatitis, and Pyelonephritis",
-     "acr+haiku"
+     "acr"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "ch-haem": {
    "s": "child-health",
    "t": "Anaemia, ITP and leukaemia",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "immune_thrombocytopenia",
      "immune thrombocytopenia",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
+     "platelet_disorders",
+     "Platelet Disorders (Thrombocytopenia)",
+     "acr"
+    ],
+    [
+     "kb",
+     "anemia_of_chronic_disease",
+     "Anaemia of chronic disease",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "anemia_sympt",
+     "Symptomatic anaemia",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "aplastic_anemia",
+     "Aplastic anaemia",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "acute_leukemia",
      "Acute leukaemia",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "platelet_disorders",
-     "Platelet Disorders (Thrombocytopenia)"
+     "fuzzy"
     ],
     [
-     "anemia_of_chronic_disease",
-     "Anaemia of chronic disease"
-    ],
-    [
-     "anemia_sympt",
-     "Symptomatic anaemia"
-    ],
-    [
-     "aplastic_anemia",
-     "Aplastic anaemia"
-    ],
-    [
+     "kb",
      "acute_megakaryoblastic_leukaemia",
-     "Acute megakaryoblastic leukaemia"
+     "Acute megakaryoblastic leukaemia",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_myelomonocytic_leukaemia",
-     "Chronic myelomonocytic leukaemia"
+     "Chronic myelomonocytic leukaemia",
+     "fuzzy"
     ]
    ]
   },
@@ -7236,29 +7624,37 @@
    "s": "child-health",
    "t": "Poisoning and injury prevention",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
+     "poisoning-general-approach",
+     "Acute poisoning: general approach (adult, India)",
+     "name+alias"
+    ],
+    [
+     "pr",
      "poisoning-general-approach-international",
      "Acute poisoning: general approach (international)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "poisoning-general-approach",
-     "Acute poisoning: general approach (adult, India)"
+     "name+alias"
     ],
     [
+     "kb",
      "aki",
-     "Acute kidney injury"
+     "Acute kidney injury",
+     "fuzzy"
     ],
     [
+     "kb",
      "blast_injury",
-     "Blast injury"
+     "Blast injury",
+     "fuzzy"
     ],
     [
+     "kb",
      "chemical_eye_injury",
-     "Chemical eye injury"
+     "Chemical eye injury",
+     "fuzzy"
     ]
    ]
   },
@@ -7272,22 +7668,26 @@
   "ch-indigenous": {
    "s": "child-health",
    "t": "Aboriginal child health and rheumatic fever",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "rheumatic_fever",
      "rheumatic fever",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "acute_glomerulonephritis_child",
-     "Acute Glomerulonephritis (Child)"
+     "name"
     ],
     [
+     "kb",
+     "acute_glomerulonephritis_child",
+     "Acute Glomerulonephritis (Child)",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "child_syndrome",
-     "CHILD syndrome"
+     "CHILD syndrome",
+     "fuzzy"
     ]
    ]
   },
@@ -7313,18 +7713,20 @@
   "mh-bipolar": {
    "s": "mental-health",
    "t": "Bipolar disorder",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "bipolar_disorder",
      "Bipolar disorder",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "psychiatric_disorders",
-     "Psychiatric Disorders"
+     "Psychiatric Disorders",
+     "name+alias"
     ]
    ]
   },
@@ -7343,65 +7745,78 @@
   "mh-psychosis": {
    "s": "mental-health",
    "t": "Psychosis and schizophrenia",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "schizophrenia",
      "Schizophrenia",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mh-ocd": {
    "s": "mental-health",
    "t": "OCD and related disorders",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "obsessive_compulsive_disorder",
      "Obsessive-compulsive disorder",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "osteochondritis_dissecans",
-     "Osteochondritis dissecans"
+     "Osteochondritis dissecans",
+     "acr"
     ],
     [
+     "kb",
      "grin2a_related_disorder",
-     "GRIN2A-related disorder"
+     "GRIN2A-related disorder",
+     "fuzzy"
     ],
     [
+     "kb",
      "igg4_related_disease",
-     "IgG4-Related Disease"
+     "IgG4-Related Disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "myh9_related_disorder",
-     "MYH9-related disorder"
+     "MYH9-related disorder",
+     "fuzzy"
     ]
    ]
   },
   "mh-ptsd": {
    "s": "mental-health",
    "t": "Trauma and PTSD",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "ptsd",
      "Post-traumatic stress disorder",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "cardiac_trauma",
-     "Cardiac Trauma"
+     "acr"
     ],
     [
+     "kb",
+     "cardiac_trauma",
+     "Cardiac Trauma",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "dental_trauma",
-     "Dental trauma"
+     "Dental trauma",
+     "fuzzy"
     ]
    ]
   },
@@ -7638,15 +8053,16 @@
   "phe-endoflife": {
    "s": "population-health-and-ethics",
    "t": "End-of-life care and advance directives",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "end_of_life_care",
      "End-of-life care",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "phe-ebm": {
    "s": "population-health-and-ethics",
@@ -7710,24 +8126,26 @@
   "mcc-ac-aortic": {
    "s": "mcc-acute-care",
    "t": "Aortic dissection",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "aortic_dissection",
      "Aortic dissection",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
+     "name"
+    ],
     [
+     "kb",
+     "diseases_of_the_aorta",
+     "Diseases of the Aorta",
+     "name+alias"
+    ],
+    [
+     "pr",
      "acute-aortic-syndrome",
      "Acute aortic syndrome and aortic dissection",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "diseases_of_the_aorta",
-     "Diseases of the Aorta"
+     "name+alias"
     ]
    ]
   },
@@ -7735,14 +8153,15 @@
    "s": "mcc-acute-care",
    "t": "Cardiac arrest and resuscitation",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "adult-cardiac-arrest",
      "Adult cardiac arrest (ALS/ACLS)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "mcc-ac-dyspnoea": {
    "s": "mcc-acute-care",
@@ -7761,87 +8180,100 @@
   "mcc-ac-pe": {
    "s": "mcc-acute-care",
    "t": "Pulmonary embolism",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pe",
      "Pulmonary embolism",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
+     "name"
+    ],
     [
+     "kb",
+     "deep_venous_thrombosis_and_pulmonary",
+     "Deep-Venous Thrombosis and Pulmonary Thromboembolism",
+     "name+alias"
+    ],
+    [
+     "pr",
      "pulmonary-embolism",
      "Acute pulmonary embolism: risk stratification and treatment",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "deep_venous_thrombosis_and_pulmonary",
-     "Deep-Venous Thrombosis and Pulmonary Thromboembolism"
+     "name+alias"
     ]
    ]
   },
   "mcc-ac-pneumothorax": {
    "s": "mcc-acute-care",
    "t": "Pneumothorax and pleural emergencies",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pneumothorax",
      "Pneumothorax",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "pr",
      "spontaneous-pneumothorax",
-     "Spontaneous pneumothorax (adult)"
+     "Spontaneous pneumothorax (adult)",
+     "name+alias"
     ],
     [
+     "kb",
      "pleural_effusion",
-     "Pleural effusion"
+     "Pleural effusion",
+     "fuzzy"
     ],
     [
+     "kb",
      "oncologic_emergencies",
-     "Oncologic Emergencies"
+     "Oncologic Emergencies",
+     "fuzzy"
     ],
     [
+     "kb",
      "pleural_empyema",
-     "Pleural empyema"
+     "Pleural empyema",
+     "fuzzy"
     ]
    ]
   },
   "mcc-ac-respfail": {
    "s": "mcc-acute-care",
    "t": "Respiratory failure and ventilation",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "acute_respiratory_failure",
      "Acute respiratory failure",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
      "disorders_of_ventilation",
      "Disorders of Ventilation",
-     "fuzzy+haiku"
+     "fuzzy"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-ac-stroke": {
    "s": "mcc-acute-care",
    "t": "Stroke and TIA",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "acute-ischaemic-stroke",
      "Acute ischaemic stroke: thrombolysis and thrombectomy",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "mcc-ac-headache": {
    "s": "mcc-acute-care",
@@ -7873,51 +8305,55 @@
    "s": "mcc-acute-care",
    "t": "Syncope and collapse",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "syncope-evaluation",
      "Syncope: initial evaluation and risk stratification",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "mcc-ac-headinjury": {
    "s": "mcc-acute-care",
    "t": "Head injury",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
+     "concussion_and_other_traumatic_brain",
+     "Concussion and Other Traumatic Brain Injuries",
+     "name+alias"
+    ],
+    [
+     "kb",
      "traumatic_brain_injury",
      "Traumatic brain injury",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [
+     "name+alias"
+    ],
     [
+     "pr",
      "traumatic-brain-injury",
      "Traumatic brain injury (adult): acute management",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "concussion_and_other_traumatic_brain",
-     "Concussion and Other Traumatic Brain Injuries"
+     "name+alias"
     ]
    ]
   },
   "mcc-ac-polytrauma": {
    "s": "mcc-acute-care",
    "t": "Polytrauma and ATLS",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "polytrauma",
      "Polytrauma",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-ac-spine": {
    "s": "mcc-acute-care",
@@ -7929,43 +8365,46 @@
   "mcc-ac-burns": {
    "s": "mcc-acute-care",
    "t": "Burns and wounds",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "thermal_burns",
      "Thermal burns",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [
+     "name+alias"
+    ],
     [
+     "pr",
      "burns-initial-management",
      "Burns: initial assessment and fluid resuscitation",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "mcc-ac-ortho": {
    "s": "mcc-acute-care",
    "t": "Orthopaedic emergencies and compartment syndrome",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "compartment_syndrome",
      "Acute compartment syndrome",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [
+     "name+alias"
+    ],
     [
+     "pr",
      "acute-compartment-syndrome",
      "Acute compartment syndrome of the limb",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "oncologic_emergencies",
-     "Oncologic Emergencies"
+     "Oncologic Emergencies",
+     "fuzzy"
     ]
    ]
   },
@@ -8004,17 +8443,19 @@
    "s": "mcc-acute-care",
    "t": "Cholecystitis and cholangitis",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "acute-cholecystitis-cholangitis",
      "Acute cholecystitis and acute cholangitis",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "CHOLANGITIS",
-     "Acute Cholangitis"
+     "Acute Cholangitis",
+     "fuzzy"
     ]
    ]
   },
@@ -8033,20 +8474,22 @@
   "mcc-ac-obstruction": {
    "s": "mcc-acute-care",
    "t": "Bowel obstruction",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "bowel_obstruction",
      "Bowel obstruction",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "acute_intestinal_obstruction",
      "Acute Intestinal Obstruction",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-ac-ectopic": {
    "s": "mcc-acute-care",
@@ -8070,15 +8513,16 @@
   "mcc-ac-pyelonephritis": {
    "s": "mcc-acute-care",
    "t": "Pyelonephritis and urosepsis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "urinary_tract_infections_cystitis_prostati",
      "Urinary Tract Infections: Cystitis, Prostatitis, and Pyelonephritis",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-ac-colic": {
    "s": "mcc-acute-care",
@@ -8095,18 +8539,20 @@
   "mcc-ac-dka": {
    "s": "mcc-acute-care",
    "t": "DKA and HHS",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "diabetes_mellitus_management_and_therapies",
      "Diabetes Mellitus: Management and Therapies",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "hoyeraal_hreidarsson_syndrome",
-     "Hoyeraal-Hreidarsson syndrome (severe dyskeratosis congenita)"
+     "Hoyeraal-Hreidarsson syndrome (severe dyskeratosis congenita)",
+     "acr"
     ]
    ]
   },
@@ -8120,34 +8566,36 @@
   "mcc-ac-potassium": {
    "s": "mcc-acute-care",
    "t": "Hyperkalaemia and electrolytes",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "hyperkalemia",
      "Hyperkalaemia",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-ac-sepsis": {
    "s": "mcc-acute-care",
    "t": "Septic shock and 1-hour bundle",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "SEPTIC_SHOCK",
      "Septic Shock",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
+     "name"
+    ],
     [
+     "pr",
      "sepsis-septic-shock",
      "Sepsis and septic shock: initial management",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "mcc-ac-meningitis": {
    "s": "mcc-acute-care",
@@ -8164,32 +8612,38 @@
   "mcc-ac-skin": {
    "s": "mcc-acute-care",
    "t": "Necrotising infections and cellulitis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "CELLULITIS",
      "Cellulitis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
+     "name"
+    ],
     [
+     "pr",
      "cellulitis-skin-soft-tissue",
      "Cellulitis, erysipelas and skin abscess (adult)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
      "acinetobacter_infections",
-     "Acinetobacter Infections"
+     "Acinetobacter Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "chlamydial_infection",
-     "Chlamydial Infections"
+     "Chlamydial Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "enterococcal_infections",
-     "Enterococcal Infections"
+     "Enterococcal Infections",
+     "fuzzy"
     ]
    ]
   },
@@ -8209,25 +8663,31 @@
    "s": "mcc-acute-care",
    "t": "Poisoning and overdose",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
+     "poisoning-general-approach",
+     "Acute poisoning: general approach (adult, India)",
+     "name+alias"
+    ],
+    [
+     "pr",
      "poisoning-general-approach-international",
      "Acute poisoning: general approach (international)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "poisoning-general-approach",
-     "Acute poisoning: general approach (adult, India)"
+     "name+alias"
     ],
     [
+     "kb",
      "opioid_od",
-     "Opioid overdose"
+     "Opioid overdose",
+     "fuzzy"
     ],
     [
+     "kb",
      "benzodiazepine_overdose",
-     "Benzodiazepine overdose"
+     "Benzodiazepine overdose",
+     "fuzzy"
     ]
    ]
   },
@@ -8279,24 +8739,26 @@
   "mcc-ac-dvt": {
    "s": "mcc-acute-care",
    "t": "Deep vein thrombosis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "dvt",
      "Deep vein thrombosis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
+     "name"
+    ],
     [
+     "kb",
+     "deep_venous_thrombosis_and_pulmonary",
+     "Deep-Venous Thrombosis and Pulmonary Thromboembolism",
+     "name+alias"
+    ],
+    [
+     "pr",
      "deep-vein-thrombosis",
      "Deep vein thrombosis of the leg: diagnosis and treatment",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "deep_venous_thrombosis_and_pulmonary",
-     "Deep-Venous Thrombosis and Pulmonary Thromboembolism"
+     "name+alias"
     ]
    ]
   },
@@ -8324,18 +8786,24 @@
    "t": "Airway, epistaxis and ENT emergencies",
    "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "epistaxis",
-     "Epistaxis"
+     "Epistaxis",
+     "name"
     ],
     [
+     "kb",
      "difficult_airway",
-     "Difficult airway"
+     "Difficult airway",
+     "fuzzy"
     ],
     [
+     "kb",
      "oncologic_emergencies",
-     "Oncologic Emergencies"
+     "Oncologic Emergencies",
+     "fuzzy"
     ]
    ]
   },
@@ -8344,10 +8812,12 @@
    "t": "Blistering rashes and SJS",
    "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "schwartz_jampel_syndrome",
-     "Schwartz-Jampel syndrome"
+     "Schwartz-Jampel syndrome",
+     "acr"
     ]
    ]
   },
@@ -8355,17 +8825,19 @@
    "s": "mcc-chronic-care",
    "t": "Hypertension",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "hypertension-management",
      "Hypertension: diagnosis and outpatient management",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "hypertension-management-india",
-     "Hypertension: diagnosis and outpatient management (India, InSH)"
+     "Hypertension: diagnosis and outpatient management (India, InSH)",
+     "name+alias"
     ]
    ]
   },
@@ -8460,18 +8932,20 @@
   "mcc-cc-copd": {
    "s": "mcc-chronic-care",
    "t": "COPD",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "chronic_obstructive_pulmonary_disease",
      "Chronic Obstructive Pulmonary Disease",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "pr",
      "copd-stable-management",
-     "COPD stable management (GOLD ABE)"
+     "COPD stable management (GOLD ABE)",
+     "acr"
     ]
    ]
   },
@@ -8523,22 +8997,26 @@
   "mcc-cc-uti": {
    "s": "mcc-chronic-care",
    "t": "Recurrent UTI and stones",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "urinary_tract_infections_cystitis_prostati",
      "Urinary Tract Infections: Cystitis, Prostatitis, and Pyelonephritis",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "chronic_and_recurrent_meningitis",
-     "Chronic and Recurrent Meningitis"
+     "acr"
     ],
     [
+     "kb",
+     "chronic_and_recurrent_meningitis",
+     "Chronic and Recurrent Meningitis",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "recurrent_pericarditis",
-     "Recurrent pericarditis"
+     "Recurrent pericarditis",
+     "fuzzy"
     ]
    ]
   },
@@ -8564,23 +9042,26 @@
   "mcc-cc-gerd": {
    "s": "mcc-chronic-care",
    "t": "GERD and dyspepsia",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "gastroesophageal_reflux_disease",
-     "Gastro-oesophageal reflux disease",
-     "acr+haiku"
+     "kb",
+     "diseases_of_esophagus",
+     "Diseases of the Esophagus",
+     "acr"
     ],
     [
+     "kb",
+     "gastroesophageal_reflux_disease",
+     "Gastro-oesophageal reflux disease",
+     "acr"
+    ],
+    [
+     "kb",
      "functional_dyspepsia",
      "Functional dyspepsia",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "diseases_of_esophagus",
-     "Diseases of the Esophagus"
+     "fuzzy"
     ]
    ]
   },
@@ -8594,48 +9075,58 @@
   "mcc-cc-malabsorption": {
    "s": "mcc-chronic-care",
    "t": "Coeliac disease and malabsorption",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "CELIAC_DISEASE",
      "Coeliac disease",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "disorders_of_absorption",
      "Malabsorption (Disorders of Absorption)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-cc-migraine": {
    "s": "mcc-chronic-care",
    "t": "Migraine and chronic headache",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "migraine",
      "Migraine",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "pr",
      "acute-migraine",
-     "Acute migraine attack (adult)"
+     "Acute migraine attack (adult)",
+     "name+alias"
     ],
     [
+     "kb",
      "cervicogenic_headache",
-     "Cervicogenic headache"
+     "Cervicogenic headache",
+     "fuzzy"
     ],
     [
+     "kb",
      "cluster_headache",
-     "Cluster headache"
+     "Cluster headache",
+     "fuzzy"
     ],
     [
+     "kb",
      "hypnic_headache",
-     "Hypnic headache"
+     "Hypnic headache",
+     "fuzzy"
     ]
    ]
   },
@@ -8716,65 +9207,82 @@
   "mcc-cc-gout": {
    "s": "mcc-chronic-care",
    "t": "Gout and crystal arthritis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
+     "gout",
+     "Gout",
+     "name"
+    ],
+    [
+     "kb",
      "gout_and_other_crystal_associated",
      "Gout and Other Crystal-Associated Arthropathies",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "pr",
+     "acute-gout",
+     "Gout: acute flare and urate-lowering therapy",
+     "name+alias"
+    ],
+    [
+     "kb",
+     "pseudogout",
+     "Pseudogout (acute CPP crystal arthritis)",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "crystal_arthritis",
      "Crystal arthritis (gout / pseudogout)",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "gout",
-     "Gout"
+     "fuzzy"
     ],
     [
-     "acute-gout",
-     "Gout: acute flare and urate-lowering therapy"
-    ],
-    [
-     "pseudogout",
-     "Pseudogout (acute CPP crystal arthritis)"
-    ],
-    [
+     "kb",
      "rheumatoid",
-     "Rheumatoid arthritis"
+     "Rheumatoid arthritis",
+     "fuzzy"
     ]
    ]
   },
   "mcc-cc-lupus": {
    "s": "mcc-chronic-care",
    "t": "Lupus and connective tissue disease",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "systemic_lupus_erythematosus",
      "Systemic Lupus Erythematosus",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "systemic-lupus-erythematosus",
-     "Systemic lupus erythematosus (SLE): diagnosis and treatment"
+     "Systemic lupus erythematosus (SLE): diagnosis and treatment",
+     "name+alias"
     ],
     [
+     "kb",
      "MCTD",
-     "Mixed connective tissue disease"
+     "Mixed connective tissue disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "heritable_disorders_of_connective_tissue",
-     "Heritable Disorders of Connective Tissue"
+     "Heritable Disorders of Connective Tissue",
+     "fuzzy"
     ],
     [
+     "kb",
      "undifferentiated_connective_tissue_disease",
-     "Undifferentiated connective tissue disease"
+     "Undifferentiated connective tissue disease",
+     "fuzzy"
     ]
    ]
   },
@@ -8882,36 +9390,40 @@
   "mcc-cc-menopause": {
    "s": "mcc-chronic-care",
    "t": "Menopause and HRT",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "menopause_and_postmenopausal_hormone_thera",
      "Menopause and Postmenopausal Hormone Therapy",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-cc-prostate": {
    "s": "mcc-chronic-care",
    "t": "BPH and prostate care",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "benign_prostatic_hyperplasia",
      "Benign prostatic hyperplasia",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
      "prostate_cancer",
      "Prostate Disease (BPH & Cancer)",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "end_of_life_care",
-     "End-of-life care"
+     "End-of-life care",
+     "fuzzy"
     ]
    ]
   },
@@ -8925,28 +9437,30 @@
   "mcc-cc-geriatrics": {
    "s": "mcc-chronic-care",
    "t": "Frailty and geriatric assessment",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "frailty_syndrome",
      "Frailty syndrome",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-cc-polypharmacy": {
    "s": "mcc-chronic-care",
    "t": "Multimorbidity and polypharmacy",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "polypharmacy",
      "Polypharmacy",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-hp-childimm": {
    "s": "mcc-health-promotion",
@@ -8972,18 +9486,20 @@
   "mcc-hp-respviruses": {
    "s": "mcc-health-promotion",
    "t": "Influenza, COVID and RSV vaccines",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "influenza",
      "Influenza",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "pr",
      "covid-19",
-     "COVID-19 (adult): severity-based treatment"
+     "COVID-19 (adult): severity-based treatment",
+     "acr"
     ]
    ]
   },
@@ -9100,21 +9616,22 @@
   "mcc-hp-familyplan": {
    "s": "mcc-health-promotion",
    "t": "Family planning and contraception",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "infertility_and_contraception",
      "Infertility and Contraception",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [
+     "name+alias"
+    ],
     [
+     "pr",
      "contraception",
      "Contraception: method choice, medical eligibility and emergency contraception",
-     "fuzzy+haiku"
+     "fuzzy"
     ]
-   ],
-   "x": []
+   ]
   },
   "mcc-hp-sti": {
    "s": "mcc-health-promotion",
@@ -9140,24 +9657,26 @@
   "mcc-hp-mental-screen": {
    "s": "mcc-health-promotion",
    "t": "Depression and anxiety screening",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "generalized_anxiety_disorder",
-     "Generalized anxiety disorder",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "depression-adult",
      "Depression in adults",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "kb",
+     "generalized_anxiety_disorder",
+     "Generalized anxiety disorder",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "social_anxiety_disorder",
-     "Social anxiety disorder"
+     "Social anxiety disorder",
+     "fuzzy"
     ]
    ]
   },
@@ -9250,10 +9769,12 @@
    "t": "Error disclosure and CMPA",
    "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "cows_milk_protein_allergy",
-     "Cow's Milk Protein Allergy"
+     "Cow's Milk Protein Allergy",
+     "acr"
     ]
    ]
   },
@@ -9267,15 +9788,16 @@
   "mcc-pb-endoflife": {
    "s": "mcc-professional-behaviours",
    "t": "End-of-life care and goals",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "end_of_life_care",
      "End-of-life care",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcc-pb-badnews": {
    "s": "mcc-professional-behaviours",
@@ -9439,63 +9961,76 @@
   "mcard-heart-failure": {
    "s": "mrcp-cardiology",
    "t": "Heart failure: diagnosis, classification and management",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "classification_of_cardiomyopathy",
-     "Classification of Cardiomyopathy",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "chronic-heart-failure-hfref",
      "Chronic heart failure with reduced ejection fraction (HFrEF)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "chronic-heart-failure-hfref-india",
-     "Chronic heart failure with reduced ejection fraction (India, HFAI)"
+     "Chronic heart failure with reduced ejection fraction (India, HFAI)",
+     "name+alias"
     ],
     [
+     "kb",
+     "classification_of_cardiomyopathy",
+     "Classification of Cardiomyopathy",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_pain_management",
-     "Chronic pain management"
+     "Chronic pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "spasticity_management",
-     "Spasticity management"
+     "Spasticity management",
+     "fuzzy"
     ]
    ]
   },
   "mcard-cardiomyopathy": {
    "s": "mrcp-cardiology",
    "t": "Cardiomyopathies and inherited cardiac conditions",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "dilated_cardiomyopathy",
      "Dilated Cardiomyopathy",
-     "fold+alias+haiku"
+     "fold+alias"
     ],
     [
+     "kb",
+     "tamponade",
+     "Cardiac tamponade",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "cardiac_amyloidosis",
      "Cardiac amyloidosis",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "tamponade",
-     "Cardiac tamponade"
+     "fuzzy"
     ],
     [
+     "kb",
      "cardiac_haemochromatosis",
-     "cardiac haemochromatosis"
+     "cardiac haemochromatosis",
+     "fuzzy"
     ]
    ]
   },
@@ -9509,114 +10044,130 @@
   "mcard-pericardial": {
    "s": "mrcp-cardiology",
    "t": "Pericardial disease and myocarditis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pericardial_disease",
      "Pericardial Disease",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "acute_and_chronic_myocarditis",
      "Acute and Chronic Myocarditis",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mcard-acs": {
    "s": "mrcp-cardiology",
    "t": "Acute coronary syndromes and stable angina",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "acs",
      "Acute coronary syndrome",
-     "fold+haiku"
-    ]
-   ],
-   "pr": [
+     "fold"
+    ],
     [
+     "pr",
      "chronic-coronary-syndrome",
      "Chronic coronary syndrome (stable angina)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "mcard-arrhythmia": {
    "s": "mrcp-cardiology",
    "t": "Atrial fibrillation and supraventricular arrhythmias",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "supraventricular_tachycardia",
-     "Supraventricular tachycardia",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "atrial-fibrillation",
      "Atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation",
-     "name+alias+haiku"
+     "name+alias"
+    ],
+    [
+     "kb",
+     "supraventricular_tachycardia",
+     "Supraventricular tachycardia",
+     "fuzzy"
     ]
-   ],
-   "x": []
+   ]
   },
   "mcard-hypertension": {
    "s": "mrcp-cardiology",
    "t": "Hypertension: diagnosis and management",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "hypertension-management",
      "Hypertension: diagnosis and outpatient management",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "hypertension-management-india",
-     "Hypertension: diagnosis and outpatient management (India, InSH)"
+     "Hypertension: diagnosis and outpatient management (India, InSH)",
+     "name+alias"
     ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_pain_management",
-     "Chronic pain management"
+     "Chronic pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "spasticity_management",
-     "Spasticity management"
+     "Spasticity management",
+     "fuzzy"
     ]
    ]
   },
   "mcard-aortic-congenital": {
    "s": "mrcp-cardiology",
    "t": "Aortic disease and adult congenital heart disease",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "congenital_heart_disease",
      "Adult Congenital Heart Disease",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
-    [
-     "acute-aortic-syndrome",
-     "Acute aortic syndrome and aortic dissection",
-     "fuzzy+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "aortic_dissection",
-     "Aortic dissection"
+     "name"
     ],
     [
+     "pr",
+     "acute-aortic-syndrome",
+     "Acute aortic syndrome and aortic dissection",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "aortic_dissection",
+     "Aortic dissection",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "aortic_regurgitation",
-     "Aortic Regurgitation"
+     "Aortic Regurgitation",
+     "fuzzy"
     ]
    ]
   },
@@ -9630,47 +10181,54 @@
   "mresp-copd": {
    "s": "mrcp-respiratory",
    "t": "COPD: diagnosis and management",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "chronic_obstructive_pulmonary_disease",
      "Chronic Obstructive Pulmonary Disease",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [
+     "acr"
+    ],
     [
+     "pr",
      "copd-stable-management",
      "COPD stable management (GOLD ABE)",
-     "acr+haiku"
-    ]
-   ],
-   "x": [
+     "acr"
+    ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_pain_management",
-     "Chronic pain management"
+     "Chronic pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "spasticity_management",
-     "Spasticity management"
+     "Spasticity management",
+     "fuzzy"
     ]
    ]
   },
   "mresp-failure": {
    "s": "mrcp-respiratory",
    "t": "Respiratory failure, ABG interpretation and NIV",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "acute_respiratory_failure",
      "Acute respiratory failure",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mresp-tb": {
    "s": "mrcp-respiratory",
@@ -9689,143 +10247,172 @@
   "mresp-ild": {
    "s": "mrcp-respiratory",
    "t": "Interstitial lung disease and sarcoidosis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "ild",
      "Interstitial lung disease",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "pulmonary_fibrosis",
+     "Pulmonary fibrosis",
+     "name+alias"
+    ],
+    [
+     "kb",
      "sarcoidosis",
      "Sarcoidosis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "pulmonary_fibrosis",
-     "Pulmonary fibrosis"
+     "name"
     ],
     [
+     "kb",
      "sarcoidosis_lung",
-     "Pulmonary sarcoidosis"
+     "Pulmonary sarcoidosis",
+     "name+alias"
     ]
    ]
   },
   "mresp-pleural-cancer": {
    "s": "mrcp-respiratory",
    "t": "Pleural disease and lung cancer",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "lung_cancer",
      "Lung cancer",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "neoplasms_of_the_lung",
+     "Neoplasms of the Lung",
+     "name+alias"
+    ],
+    [
+     "kb",
      "pleural_effusion",
      "Pleural effusion",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "neoplasms_of_the_lung",
-     "Neoplasms of the Lung"
+     "fuzzy"
     ],
     [
+     "kb",
      "pleural_empyema",
-     "Pleural empyema"
+     "Pleural empyema",
+     "fuzzy"
     ],
     [
+     "kb",
      "pleural_plaques",
-     "pleural plaques"
+     "pleural plaques",
+     "fuzzy"
     ]
    ]
   },
   "mresp-pe": {
    "s": "mrcp-respiratory",
    "t": "Pulmonary embolism and pulmonary hypertension",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pe",
      "Pulmonary embolism",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "deep_venous_thrombosis_and_pulmonary",
+     "Deep-Venous Thrombosis and Pulmonary Thromboembolism",
+     "name+alias"
+    ],
+    [
+     "pr",
+     "pulmonary-embolism",
+     "Acute pulmonary embolism: risk stratification and treatment",
+     "name+alias"
+    ],
+    [
+     "kb",
      "pulmonary_hypertension",
      "Pulmonary Hypertension",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "deep_venous_thrombosis_and_pulmonary",
-     "Deep-Venous Thrombosis and Pulmonary Thromboembolism"
-    ],
-    [
-     "pulmonary-embolism",
-     "Acute pulmonary embolism: risk stratification and treatment"
+     "name"
     ]
    ]
   },
   "mgas-cirrhosis": {
    "s": "mrcp-gastroenterology",
    "t": "Cirrhosis, portal hypertension and complications",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "portal_hypertension",
      "Portal hypertension",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "decomp_cirrhosis",
+     "Decompensated cirrhosis",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "cirrhosis_and_its_complications",
      "Cirrhosis and Its Complications",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "decomp_cirrhosis",
-     "Decompensated cirrhosis"
+     "fuzzy"
     ],
     [
+     "kb",
      "sedation_complications",
-     "Sedation complications"
+     "Sedation complications",
+     "fuzzy"
     ]
    ]
   },
   "mgas-hepatitis": {
    "s": "mrcp-gastroenterology",
    "t": "Viral and autoimmune hepatitis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "AUTOIMMUNE_HEPATITIS",
      "Autoimmune hepatitis",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "chronic_hepatitis",
+     "Chronic Hepatitis",
+     "name+alias"
+    ],
+    [
+     "kb",
      "VIRAL_HEPATITIS",
      "Acute Viral Hepatitis",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "chronic_hepatitis",
-     "Chronic Hepatitis"
+     "fuzzy"
     ],
     [
+     "kb",
      "viral_gastroenteritis",
-     "Viral Gastroenteritis"
+     "Viral Gastroenteritis",
+     "fuzzy"
     ],
     [
+     "kb",
      "viral_warts",
-     "Viral Warts"
+     "Viral Warts",
+     "fuzzy"
     ]
    ]
   },
@@ -9870,49 +10457,58 @@
   "mgas-malabsorption": {
    "s": "mrcp-gastroenterology",
    "t": "Coeliac disease and malabsorption",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "CELIAC_DISEASE",
      "Coeliac disease",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "disorders_of_absorption",
      "Malabsorption (Disorders of Absorption)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mgas-functional": {
    "s": "mrcp-gastroenterology",
    "t": "IBS and functional gut disorders",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "ibs",
      "Irritable bowel syndrome",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
+     "ichthyosis_bullosa_of_siemens",
+     "Ichthyosis bullosa of Siemens",
+     "acr"
+    ],
+    [
+     "kb",
      "functional_constipation",
      "Functional constipation",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "ichthyosis_bullosa_of_siemens",
-     "Ichthyosis bullosa of Siemens"
+     "fuzzy"
     ],
     [
+     "kb",
      "functional_diarrhea",
-     "Functional diarrhoea"
+     "Functional diarrhoea",
+     "fuzzy"
     ],
     [
+     "kb",
      "functional_dyspepsia",
-     "Functional dyspepsia"
+     "Functional dyspepsia",
+     "fuzzy"
     ]
    ]
   },
@@ -9964,15 +10560,16 @@
   "mneph-nephrotic": {
    "s": "mrcp-nephrology",
    "t": "Nephrotic syndrome and proteinuria",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "nephrotic",
      "Nephrotic syndrome",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mneph-electrolytes": {
    "s": "mrcp-nephrology",
@@ -9991,148 +10588,184 @@
   "mneur-stroke": {
    "s": "mrcp-neurology",
    "t": "Stroke and transient ischaemic attack",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "tia",
-     "Transient ischaemic attack",
-     "name+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "acute-ischaemic-stroke",
      "Acute ischaemic stroke: thrombolysis and thrombectomy",
-     "name+alias+haiku"
+     "name+alias"
+    ],
+    [
+     "kb",
+     "tia",
+     "Transient ischaemic attack",
+     "name"
     ]
-   ],
-   "x": []
+   ]
   },
   "mneur-epilepsy": {
    "s": "mrcp-neurology",
    "t": "Epilepsy and seizures",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "seizures_and_epilepsy",
      "Seizures and Epilepsy",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "epilepsy-long-term-management",
-     "Epilepsy: long-term management (adult)"
+     "Epilepsy: long-term management (adult)",
+     "name+alias"
     ],
     [
+     "kb",
      "neonatal_seizures",
-     "Neonatal Seizures"
+     "Neonatal Seizures",
+     "fuzzy"
     ],
     [
+     "pr",
      "febrile-seizure",
-     "Febrile seizures"
+     "Febrile seizures",
+     "fuzzy"
     ]
    ]
   },
   "mneur-headache": {
    "s": "mrcp-neurology",
    "t": "Headache, migraine and facial pain",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "migraine",
      "Migraine",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "pr",
      "acute-migraine",
-     "Acute migraine attack (adult)"
+     "Acute migraine attack (adult)",
+     "name+alias"
     ],
     [
+     "kb",
      "cervicogenic_headache",
-     "Cervicogenic headache"
+     "Cervicogenic headache",
+     "fuzzy"
     ],
     [
+     "kb",
      "cluster_headache",
-     "Cluster headache"
+     "Cluster headache",
+     "fuzzy"
     ],
     [
+     "kb",
      "hypnic_headache",
-     "Hypnic headache"
+     "Hypnic headache",
+     "fuzzy"
     ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "bladder_pain_syndrome",
-     "Bladder pain syndrome"
+     "Bladder pain syndrome",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_pain_management",
-     "Chronic pain management"
+     "Chronic pain management",
+     "fuzzy"
     ]
    ]
   },
   "mneur-cns-infection": {
    "s": "mrcp-neurology",
    "t": "Meningitis, encephalitis and CNS infections",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "ENCEPHALITIS",
      "Encephalitis",
-     "name+haiku"
+     "name"
     ],
     [
+     "pr",
+     "acute-encephalitis-international",
+     "Acute encephalitis (IDSA and BIA/ABN)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "acute_meningitis",
      "Acute Meningitis",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "acute-encephalitis-international",
-     "Acute encephalitis (IDSA and BIA/ABN)"
+     "fuzzy"
     ],
     [
+     "kb",
      "CNS_TB",
-     "CNS Tuberculosis (TB Meningitis)"
+     "CNS Tuberculosis (TB Meningitis)",
+     "fuzzy"
     ],
     [
+     "kb",
      "MENINGITIS",
-     "Acute Bacterial Meningitis"
+     "Acute Bacterial Meningitis",
+     "fuzzy"
     ],
     [
+     "kb",
      "acinetobacter_infections",
-     "Acinetobacter Infections"
+     "Acinetobacter Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "chlamydial_infection",
-     "Chlamydial Infections"
+     "Chlamydial Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "enterococcal_infections",
-     "Enterococcal Infections"
+     "Enterococcal Infections",
+     "fuzzy"
     ]
    ]
   },
   "mneur-parkinson": {
    "s": "mrcp-neurology",
    "t": "Parkinson's disease and movement disorders",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "parkinsons_disease",
      "Parkinson's Disease",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "functional_movement_disorder",
-     "Functional movement disorder"
+     "Functional movement disorder",
+     "fuzzy"
     ]
    ]
   },
@@ -10154,108 +10787,133 @@
    "s": "mrcp-neurology",
    "t": "Dementia and cognitive disorders",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "dementia",
      "Dementia: assessment and management",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "mendo-diabetes": {
    "s": "mrcp-endocrinology",
    "t": "Diabetes mellitus: diagnosis and management",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "diabetes_mellitus",
      "Diabetes Mellitus",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "pr",
      "type-2-diabetes-management-india",
-     "Type 2 diabetes: outpatient management (India, RSSDI)"
+     "Type 2 diabetes: outpatient management (India, RSSDI)",
+     "name+alias"
     ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_pain_management",
-     "Chronic pain management"
+     "Chronic pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "spasticity_management",
-     "Spasticity management"
+     "Spasticity management",
+     "fuzzy"
     ]
    ]
   },
   "mendo-diab-emerg": {
    "s": "mrcp-endocrinology",
    "t": "Diabetic emergencies: DKA, HHS and hypoglycaemia",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "diabetes_mellitus_management_and_therapies",
      "Diabetes Mellitus: Management and Therapies",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
+     "hoyeraal_hreidarsson_syndrome",
+     "Hoyeraal-Hreidarsson syndrome (severe dyskeratosis congenita)",
+     "acr"
+    ],
+    [
+     "kb",
      "dka",
      "Diabetic ketoacidosis",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "hoyeraal_hreidarsson_syndrome",
-     "Hoyeraal-Hreidarsson syndrome (severe dyskeratosis congenita)"
+     "fuzzy"
     ],
     [
+     "kb",
      "diabetic_kidney_disease",
-     "Diabetic kidney disease"
+     "Diabetic kidney disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "diabetic_nephropathy",
-     "Diabetic nephropathy"
+     "Diabetic nephropathy",
+     "fuzzy"
     ],
     [
+     "kb",
      "neonatal_hypoglycemia",
-     "Neonatal Hypoglycaemia"
+     "Neonatal Hypoglycaemia",
+     "fuzzy"
     ]
    ]
   },
   "mendo-obesity-lipid": {
    "s": "mrcp-endocrinology",
    "t": "Obesity, lipids and metabolic syndrome",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "obesity",
      "Obesity",
-     "name+haiku"
+     "name"
     ],
     [
+     "pr",
+     "obesity-management",
+     "Obesity management (adult)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "the_metabolic_syndrome",
      "The Metabolic Syndrome",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "obesity-management",
-     "Obesity management (adult)"
+     "fuzzy"
     ],
     [
+     "kb",
      "metabolic_enceph",
-     "Metabolic encephalopathy"
+     "Metabolic encephalopathy",
+     "fuzzy"
     ],
     [
+     "kb",
      "metabolic_alkalosis",
-     "Metabolic alkalosis"
+     "Metabolic alkalosis",
+     "fuzzy"
     ]
    ]
   },
@@ -10283,27 +10941,32 @@
   "mendo-adrenal": {
    "s": "mrcp-endocrinology",
    "t": "Adrenal disorders: Addison's, Cushing's, phaeochromocytoma",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pheochromocytoma_paraganglioma",
      "Pheochromocytoma and paraganglioma",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
+     "adrenal_crisis",
+     "Adrenal crisis",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "adrenal_cyst",
+     "Adrenal cyst",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "adrenal_disorders",
      "Adrenal Cortical Disorders",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "adrenal_crisis",
-     "Adrenal crisis"
-    ],
-    [
-     "adrenal_cyst",
-     "Adrenal cyst"
+     "fuzzy"
     ]
    ]
   },
@@ -10329,27 +10992,32 @@
   "mrheu-sle": {
    "s": "mrcp-rheumatology",
    "t": "SLE and connective tissue diseases",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "systemic_lupus_erythematosus",
      "Systemic Lupus Erythematosus",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
      "MCTD",
      "Mixed connective tissue disease",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "heritable_disorders_of_connective_tissue",
-     "Heritable Disorders of Connective Tissue"
+     "fuzzy"
     ],
     [
+     "kb",
+     "heritable_disorders_of_connective_tissue",
+     "Heritable Disorders of Connective Tissue",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "undifferentiated_connective_tissue_disease",
-     "Undifferentiated connective tissue disease"
+     "Undifferentiated connective tissue disease",
+     "fuzzy"
     ]
    ]
   },
@@ -10363,138 +11031,166 @@
   "mrheu-spa": {
    "s": "mrcp-rheumatology",
    "t": "Axial spondyloarthritis and psoriatic arthritis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "axial_spondyloarthritis",
      "Axial spondyloarthritis",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "spondyloarthritis",
+     "Spondyloarthritis",
+     "name+alias"
+    ],
+    [
+     "kb",
      "psoriatic_arthritis",
      "Psoriatic arthritis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "spondyloarthritis",
-     "Spondyloarthritis"
+     "name"
     ]
    ]
   },
   "mrheu-crystal": {
    "s": "mrcp-rheumatology",
    "t": "Gout and calcium crystal disease",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "gout",
      "Gout",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
      "gout_and_other_crystal_associated",
      "Gout and Other Crystal-Associated Arthropathies",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "acute-gout",
-     "Gout: acute flare and urate-lowering therapy"
+     "Gout: acute flare and urate-lowering therapy",
+     "name+alias"
     ],
     [
+     "kb",
      "parathyroid_calcium_disorders",
-     "Parathyroid & Calcium Disorders"
+     "Parathyroid & Calcium Disorders",
+     "fuzzy"
     ],
     [
+     "kb",
      "basic_calcium_phosphate_arthropathy",
-     "Basic calcium phosphate crystal arthropathy"
+     "Basic calcium phosphate crystal arthropathy",
+     "fuzzy"
     ]
    ]
   },
   "mrheu-myositis": {
    "s": "mrcp-rheumatology",
    "t": "Myositis, scleroderma and Sjogren's",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "systemic_sclerosis",
      "Systemic Sclerosis (Scleroderma)",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
+     "orbital_myositis",
+     "Orbital myositis",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "overlap_myositis",
+     "overlap myositis",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "sj_gren_s_disease",
      "Sjögren’s Disease",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "orbital_myositis",
-     "Orbital myositis"
-    ],
-    [
-     "overlap_myositis",
-     "overlap myositis"
+     "fuzzy"
     ]
    ]
   },
   "mrheu-pmr": {
    "s": "mrcp-rheumatology",
    "t": "Polymyalgia rheumatica and giant cell arteritis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pmr",
      "Polymyalgia rheumatica",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "the_vasculitis_syndromes",
+     "The Vasculitis Syndromes",
+     "name+alias"
+    ],
+    [
+     "kb",
      "temporal_arteritis",
      "Giant cell (temporal) arteritis",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "the_vasculitis_syndromes",
-     "The Vasculitis Syndromes"
+     "fuzzy"
     ],
     [
+     "kb",
      "giant_cell_fibroblastoma",
-     "Giant cell fibroblastoma"
+     "Giant cell fibroblastoma",
+     "fuzzy"
     ],
     [
+     "kb",
      "central_giant_cell_granuloma",
-     "Central giant cell granuloma of the jaw"
+     "Central giant cell granuloma of the jaw",
+     "fuzzy"
     ]
    ]
   },
   "mrheu-bone": {
    "s": "mrcp-rheumatology",
    "t": "Metabolic bone disease and osteoporosis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "osteoporosis",
      "Osteoporosis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "metabolic_enceph",
-     "Metabolic encephalopathy"
+     "Metabolic encephalopathy",
+     "fuzzy"
     ],
     [
+     "kb",
      "autoinflammatory_bone",
-     "Autoinflammatory bone disease"
+     "Autoinflammatory bone disease",
+     "fuzzy"
     ],
     [
+     "kb",
      "bone_island",
-     "Bone island"
+     "Bone island",
+     "fuzzy"
     ]
    ]
   },
@@ -10515,32 +11211,38 @@
   "minf-tb": {
    "s": "mrcp-infectious-diseases",
    "t": "Tuberculosis: pulmonary and extrapulmonary",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "PULMONARY_TB",
-     "Pulmonary Tuberculosis",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "pulmonary-tuberculosis",
      "Pulmonary tuberculosis, drug-susceptible (adult, NTEP)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
+     "name+alias"
+    ],
     [
+     "pr",
      "pulmonary-tuberculosis-international",
-     "Pulmonary tuberculosis, drug-susceptible (WHO)"
+     "Pulmonary tuberculosis, drug-susceptible (WHO)",
+     "name+alias"
     ],
     [
+     "kb",
+     "PULMONARY_TB",
+     "Pulmonary Tuberculosis",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "pe",
-     "Pulmonary embolism"
+     "Pulmonary embolism",
+     "fuzzy"
     ],
     [
+     "kb",
      "chronic_obstructive_pulmonary_disease",
-     "Chronic Obstructive Pulmonary Disease"
+     "Chronic Obstructive Pulmonary Disease",
+     "fuzzy"
     ]
    ]
   },
@@ -10566,47 +11268,54 @@
   "minf-travel": {
    "s": "mrcp-infectious-diseases",
    "t": "Malaria and travel-related infections",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "MALARIA",
      "Malaria",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "infections_due_to_campylobacter_and",
-     "Infections Due to Campylobacter and Related Organisms"
+     "Infections Due to Campylobacter and Related Organisms",
+     "fuzzy"
     ],
     [
+     "kb",
      "acinetobacter_infections",
-     "Acinetobacter Infections"
+     "Acinetobacter Infections",
+     "fuzzy"
     ],
     [
+     "kb",
      "chlamydial_infection",
-     "Chlamydial Infections"
+     "Chlamydial Infections",
+     "fuzzy"
     ]
    ]
   },
   "minf-nosocomial": {
    "s": "mrcp-infectious-diseases",
    "t": "Hospital-acquired infections and C. difficile",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "infections_acquired_in_health_care",
      "Infections Acquired in Health Care Facilities",
-     "name+alias+haiku"
-    ]
-   ],
-   "pr": [
+     "name+alias"
+    ],
     [
+     "pr",
      "clostridioides-difficile-infection",
      "Clostridioides difficile infection (adult)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "minf-antimicrobial": {
    "s": "mrcp-infectious-diseases",
@@ -10627,71 +11336,88 @@
    "t": "Haemolysis, thalassaemia and haemoglobinopathies",
    "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "delta_beta_thalassaemia",
-     "Delta-beta thalassaemia"
+     "Delta-beta thalassaemia",
+     "name+alias"
     ]
    ]
   },
   "mhaem-platelet": {
    "s": "mrcp-haematology-oncology",
    "t": "Platelet disorders: ITP, TTP and HIT",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
+     "immune_thrombocytopenia",
+     "immune thrombocytopenia",
+     "acr"
+    ],
+    [
+     "kb",
      "platelet_disorders",
      "Platelet Disorders (Thrombocytopenia)",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "immune_thrombocytopenia",
-     "immune thrombocytopenia"
+     "acr"
     ],
     [
+     "kb",
      "thrombotic_thrombocytopenic_purpura",
-     "thrombotic thrombocytopenic purpura"
+     "thrombotic thrombocytopenic purpura",
+     "acr"
     ],
     [
+     "kb",
      "heparin_induced_thrombocytopenia",
-     "Heparin-induced thrombocytopenia"
+     "Heparin-induced thrombocytopenia",
+     "acr"
     ],
     [
+     "kb",
      "gray_platelet_syndrome",
-     "Gray platelet syndrome"
+     "Gray platelet syndrome",
+     "fuzzy"
     ],
     [
+     "kb",
      "grey_platelet_syndrome",
-     "Grey Platelet Syndrome"
+     "Grey Platelet Syndrome",
+     "fuzzy"
     ],
     [
+     "kb",
      "quebec_platelet_disorder",
-     "Quebec platelet disorder"
+     "Quebec platelet disorder",
+     "fuzzy"
     ]
    ]
   },
   "mhaem-coagulation": {
    "s": "mrcp-haematology-oncology",
    "t": "Coagulation disorders, DIC and thrombophilia",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "coagulation_disorders",
      "Coagulation Disorders",
-     "name+haiku"
+     "name"
     ],
     [
+     "kb",
+     "thrombophilia",
+     "Thrombophilia",
+     "name"
+    ],
+    [
+     "kb",
      "dic",
      "Disseminated intravascular coagulation",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "thrombophilia",
-     "Thrombophilia"
+     "acr"
     ]
    ]
   },
@@ -10712,20 +11438,22 @@
   "mhaem-acute-leuk": {
    "s": "mrcp-haematology-oncology",
    "t": "Acute leukaemias and myelodysplasia",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "acute_leukemia",
      "Acute leukaemia",
-     "fold+haiku"
+     "fold"
     ],
     [
+     "kb",
      "myelodysplastic_syndrome",
      "Myelodysplastic syndrome",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mhaem-oncology": {
    "s": "mrcp-haematology-oncology",
@@ -10787,57 +11515,69 @@
    "s": "mrcp-pharmacology",
    "t": "Poisoning and overdose management",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
+     "poisoning-general-approach",
+     "Acute poisoning: general approach (adult, India)",
+     "name+alias"
+    ],
+    [
+     "pr",
      "poisoning-general-approach-international",
      "Acute poisoning: general approach (international)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "poisoning-general-approach",
-     "Acute poisoning: general approach (adult, India)"
+     "name+alias"
     ],
     [
+     "kb",
      "opioid_od",
-     "Opioid overdose"
+     "Opioid overdose",
+     "fuzzy"
     ],
     [
+     "kb",
      "acute_pain_management",
-     "Acute pain management"
+     "Acute pain management",
+     "fuzzy"
     ],
     [
+     "kb",
      "benzodiazepine_overdose",
-     "Benzodiazepine overdose"
+     "Benzodiazepine overdose",
+     "fuzzy"
     ]
    ]
   },
   "mderm-eczema": {
    "s": "mrcp-dermatology",
    "t": "Eczema and dermatitis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
-     "atopic_dermatitis",
-     "Atopic dermatitis",
-     "fuzzy+haiku"
-    ]
-   ],
-   "pr": [
-    [
+     "pr",
      "atopic-dermatitis",
      "Atopic dermatitis (atopic eczema)",
-     "name+alias+haiku"
-    ]
-   ],
-   "x": [
-    [
-     "cement_dermatitis",
-     "cement dermatitis"
+     "name+alias"
     ],
     [
+     "kb",
+     "atopic_dermatitis",
+     "Atopic dermatitis",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "cement_dermatitis",
+     "cement dermatitis",
+     "fuzzy"
+    ],
+    [
+     "kb",
      "chronic_actinic_dermatitis",
-     "Chronic actinic dermatitis"
+     "Chronic actinic dermatitis",
+     "fuzzy"
     ]
    ]
   },
@@ -10856,45 +11596,52 @@
   "mderm-blistering": {
    "s": "mrcp-dermatology",
    "t": "Blistering diseases: pemphigus, pemphigoid",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "pemphigus_vulgaris",
      "Pemphigus vulgaris",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
      "bullous_pemphigoid",
      "Bullous pemphigoid",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mderm-acne": {
    "s": "mrcp-dermatology",
    "t": "Acne, rosacea and hidradenitis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "acne_vulgaris",
      "Acne vulgaris",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "pr",
+     "acne-vulgaris",
+     "Acne vulgaris",
+     "name+alias"
+    ],
+    [
+     "kb",
      "rosacea",
      "Rosacea",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "acne-vulgaris",
-     "Acne vulgaris"
+     "name"
     ],
     [
+     "kb",
      "hidradenitis_suppurativa",
-     "Hidradenitis suppurativa"
+     "Hidradenitis suppurativa",
+     "fuzzy"
     ]
    ]
   },
@@ -10922,109 +11669,134 @@
   "mderm-emergency": {
    "s": "mrcp-dermatology",
    "t": "Dermatological emergencies: SJS/TEN, erythroderma",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "erythroderma",
      "Erythroderma",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "exfoliative_dermatitis",
-     "Exfoliative dermatitis (erythroderma workup)"
+     "Exfoliative dermatitis (erythroderma workup)",
+     "name+alias"
     ],
     [
+     "kb",
      "schwartz_jampel_syndrome",
-     "Schwartz-Jampel syndrome"
+     "Schwartz-Jampel syndrome",
+     "acr"
     ],
     [
+     "kb",
      "oncologic_emergencies",
-     "Oncologic Emergencies"
+     "Oncologic Emergencies",
+     "fuzzy"
     ]
    ]
   },
   "mopht-red-eye": {
    "s": "mrcp-ophthalmology",
    "t": "The red eye: conjunctivitis, uveitis, scleritis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "conjunctivitis",
      "Conjunctivitis",
-     "name+haiku"
+     "name"
     ],
     [
+     "pr",
+     "acute-conjunctivitis",
+     "Acute conjunctivitis",
+     "name+alias"
+    ],
+    [
+     "kb",
      "scleritis",
      "Scleritis",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "acute-conjunctivitis",
-     "Acute conjunctivitis"
+     "name"
     ],
     [
+     "kb",
      "anterior_uveitis",
-     "Anterior uveitis"
+     "Anterior uveitis",
+     "fuzzy"
     ],
     [
+     "kb",
      "intermediate_uveitis",
-     "Intermediate uveitis"
+     "Intermediate uveitis",
+     "fuzzy"
     ],
     [
+     "kb",
      "posterior_uveitis",
-     "Posterior uveitis"
+     "Posterior uveitis",
+     "fuzzy"
     ]
    ]
   },
   "mopht-glaucoma": {
    "s": "mrcp-ophthalmology",
    "t": "Glaucoma and cataract",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "cataract",
      "Cataract",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "congenital_glaucoma",
-     "Primary congenital glaucoma"
+     "Primary congenital glaucoma",
+     "fuzzy"
     ],
     [
+     "kb",
      "malignant_glaucoma",
-     "Malignant glaucoma"
+     "Malignant glaucoma",
+     "fuzzy"
     ],
     [
+     "kb",
      "neovascular_glaucoma",
-     "Neovascular glaucoma"
+     "Neovascular glaucoma",
+     "fuzzy"
     ]
    ]
   },
   "mopht-diabetic": {
    "s": "mrcp-ophthalmology",
    "t": "Diabetic retinopathy and maculopathy",
-   "kb": [
-    [
-     "diabetic_retinopathy",
-     "Diabetic retinopathy",
-     "name+haiku"
-    ]
-   ],
+   "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "diabetes_mellitus_complications",
-     "Diabetes Mellitus: Complications"
+     "Diabetes Mellitus: Complications",
+     "name+alias"
     ],
     [
+     "kb",
+     "diabetic_retinopathy",
+     "Diabetic retinopathy",
+     "name"
+    ],
+    [
+     "kb",
      "myopic_maculopathy",
-     "Myopic maculopathy"
+     "Myopic maculopathy",
+     "fuzzy"
     ]
    ]
   },
@@ -11045,15 +11817,16 @@
   "mopht-neuro": {
    "s": "mrcp-ophthalmology",
    "t": "Neuro-ophthalmology: optic neuritis, palsies, fields",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "optic_neuritis",
      "Optic neuritis",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mopht-amd": {
    "s": "mrcp-ophthalmology",
@@ -11077,48 +11850,58 @@
   "mgeri-frailty": {
    "s": "mrcp-geriatrics",
    "t": "Frailty, falls and comprehensive geriatric assessment",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "frailty_syndrome",
      "Frailty syndrome",
-     "name+alias+haiku"
+     "name+alias"
     ],
     [
+     "kb",
      "falls_in_elderly",
      "Falls in the elderly",
-     "fuzzy+haiku"
+     "fuzzy"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mgeri-delirium": {
    "s": "mrcp-geriatrics",
    "t": "Delirium and dementia in older people",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "delirium",
      "Delirium",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "pr",
      "delirium",
-     "Delirium (adult)"
+     "Delirium (adult)",
+     "name+alias"
     ],
     [
+     "kb",
      "frontotemporal_dementia",
-     "Frontotemporal Dementia"
+     "Frontotemporal Dementia",
+     "fuzzy"
     ],
     [
+     "kb",
      "semantic_dementia",
-     "Semantic dementia"
+     "Semantic dementia",
+     "fuzzy"
     ],
     [
+     "kb",
      "vascular_dementia",
-     "Vascular Dementia"
+     "Vascular Dementia",
+     "fuzzy"
     ]
    ]
   },
@@ -11139,39 +11922,46 @@
   "mgeri-polypharmacy": {
    "s": "mrcp-geriatrics",
    "t": "Polypharmacy and deprescribing",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "polypharmacy",
      "Polypharmacy",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mgeri-rehab": {
    "s": "mrcp-geriatrics",
    "t": "Stroke rehabilitation and intermediate care",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "stroke_rehabilitation",
      "Stroke rehabilitation",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "dominant_intermediate_cmt",
-     "Dominant intermediate CMT"
+     "Dominant intermediate CMT",
+     "fuzzy"
     ],
     [
+     "kb",
      "end_of_life_care",
-     "End-of-life care"
+     "End-of-life care",
+     "fuzzy"
     ],
     [
+     "kb",
      "intermediate_uveitis",
-     "Intermediate uveitis"
+     "Intermediate uveitis",
+     "fuzzy"
     ]
    ]
   },
@@ -11209,71 +11999,80 @@
   "mpsyc-bipolar": {
    "s": "mrcp-psychiatry",
    "t": "Bipolar disorder and mania",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "bipolar_disorder",
      "Bipolar disorder",
-     "name+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
+     "name"
+    ],
     [
+     "kb",
      "psychiatric_disorders",
-     "Psychiatric Disorders"
+     "Psychiatric Disorders",
+     "name+alias"
     ]
    ]
   },
   "mpsyc-psychosis": {
    "s": "mrcp-psychiatry",
    "t": "Schizophrenia and psychosis",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "kb",
      "schizophrenia",
      "Schizophrenia",
-     "name+haiku"
+     "name"
     ]
-   ],
-   "pr": [],
-   "x": []
+   ]
   },
   "mpsyc-suicide": {
    "s": "mrcp-psychiatry",
    "t": "Suicide risk and deliberate self-harm",
    "kb": [],
-   "pr": [
+   "pr": [],
+   "q": [
     [
+     "pr",
      "self-harm-and-suicide-risk",
      "Self-harm and suicide risk (adult)",
-     "name+alias+haiku"
+     "name+alias"
     ]
-   ],
-   "x": []
+   ]
   },
   "mpsyc-anxiety": {
    "s": "mrcp-psychiatry",
    "t": "Anxiety, OCD and PTSD",
-   "kb": [
+   "kb": [],
+   "pr": [],
+   "q": [
     [
+     "pr",
+     "generalised-anxiety-disorder",
+     "Generalised anxiety disorder (adult)",
+     "name+alias"
+    ],
+    [
+     "kb",
      "obsessive_compulsive_disorder",
      "Obsessive-compulsive disorder",
-     "acr+haiku"
+     "acr"
     ],
     [
+     "kb",
+     "osteochondritis_dissecans",
+     "Osteochondritis dissecans",
+     "acr"
+    ],
+    [
+     "kb",
      "ptsd",
      "Post-traumatic stress disorder",
-     "acr+haiku"
-    ]
-   ],
-   "pr": [],
-   "x": [
-    [
-     "generalised-anxiety-disorder",
-     "Generalised anxiety disorder (adult)"
-    ],
-    [
-     "osteochondritis_dissecans",
-     "Osteochondritis dissecans"
+     "acr"
     ]
    ]
   },
@@ -11322,10 +12121,12 @@
    "t": "Risk, NNT/NNH and likelihood ratios",
    "kb": [],
    "pr": [],
-   "x": [
+   "q": [
     [
+     "kb",
      "navajo_neurohepatopathy",
-     "Navajo neurohepatopathy"
+     "Navajo neurohepatopathy",
+     "acr"
     ]
    ]
   },
@@ -11420,17 +12221,279 @@
    "pr": [],
    "note": "no candidate"
   },
-  "med-heart-failure": {
-   "s": "medicine",
-   "t": "Heart failure",
-   "kb": [
-    [
-     "heart_failure",
-     "Acute heart failure / pulmonary edema"
-    ]
-   ],
+  "sgs-gi": {
+   "s": "ss-general-surgery",
+   "t": "Gastrointestinal surgery",
+   "kb": [],
    "pr": [],
-   "note": "manual module topic (own lesson also present): next action reviews the topic article"
+   "note": "no candidate"
+  },
+  "sgs-trauma": {
+   "s": "ss-general-surgery",
+   "t": "Trauma and emergency surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sgs-breast-endocrine": {
+   "s": "ss-general-surgery",
+   "t": "Breast and endocrine surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sgs-colorectal": {
+   "s": "ss-general-surgery",
+   "t": "Colorectal surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sgs-vascular-transplant": {
+   "s": "ss-general-surgery",
+   "t": "Vascular surgery and transplantation",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sgs-oncology-principles": {
+   "s": "ss-general-surgery",
+   "t": "Surgical oncology principles",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sur-stones": {
+   "s": "ss-urology",
+   "t": "Urinary stones and obstruction",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sur-bph-prostate": {
+   "s": "ss-urology",
+   "t": "Prostate and bladder outlet",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sur-oncology": {
+   "s": "ss-urology",
+   "t": "Uro-oncology",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sur-andrology-infertility": {
+   "s": "ss-urology",
+   "t": "Andrology and male infertility",
+   "kb": [],
+   "pr": [],
+   "q": [
+    [
+     "kb",
+     "infertility_and_contraception",
+     "Infertility and Contraception",
+     "name+alias"
+    ],
+    [
+     "kb",
+     "male_infertility",
+     "Male infertility",
+     "name"
+    ]
+   ]
+  },
+  "sur-paediatric-reconstructive": {
+   "s": "ss-urology",
+   "t": "Paediatric and reconstructive urology",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sns-trauma": {
+   "s": "ss-neurosurgery",
+   "t": "Neurotrauma and raised ICP",
+   "kb": [],
+   "pr": [],
+   "q": [
+    [
+     "kb",
+     "intrahepatic_cholestasis_of_pregnancy",
+     "Intrahepatic cholestasis of pregnancy",
+     "acr"
+    ],
+    [
+     "kb",
+     "obstetric_cholestasis",
+     "Obstetric Cholestasis",
+     "acr"
+    ]
+   ]
+  },
+  "sns-vascular": {
+   "s": "ss-neurosurgery",
+   "t": "Vascular neurosurgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sns-tumours": {
+   "s": "ss-neurosurgery",
+   "t": "Neuro-oncology",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sns-spine": {
+   "s": "ss-neurosurgery",
+   "t": "Spine surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sns-functional-paediatric": {
+   "s": "ss-neurosurgery",
+   "t": "Functional and paediatric neurosurgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sso-breast": {
+   "s": "ss-surgical-oncology",
+   "t": "Breast oncology surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sso-gi": {
+   "s": "ss-surgical-oncology",
+   "t": "GI and HPB oncology surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sso-headneck-thoracic": {
+   "s": "ss-surgical-oncology",
+   "t": "Head neck and thoracic oncology",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sso-gynae-peritoneal": {
+   "s": "ss-surgical-oncology",
+   "t": "Gynae oncology and peritoneal disease",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sct-coronary-valve": {
+   "s": "ss-ctvs",
+   "t": "Coronary and valvular surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sct-aorta-congenital": {
+   "s": "ss-ctvs",
+   "t": "Aortic and congenital cardiac surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sct-thoracic": {
+   "s": "ss-ctvs",
+   "t": "Thoracic surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sps-neonatal": {
+   "s": "ss-paediatric-surgery",
+   "t": "Neonatal surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sps-gi-thoracic": {
+   "s": "ss-paediatric-surgery",
+   "t": "Paediatric GI and thoracic surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sps-oncology-urology": {
+   "s": "ss-paediatric-surgery",
+   "t": "Paediatric oncology and urology",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "spl-reconstructive": {
+   "s": "ss-plastic-surgery",
+   "t": "Reconstructive surgery and flaps",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "spl-burns-hand": {
+   "s": "ss-plastic-surgery",
+   "t": "Burns and hand surgery",
+   "kb": [],
+   "pr": [],
+   "q": [
+    [
+     "kb",
+     "thermal_burns",
+     "Thermal burns",
+     "name+alias"
+    ],
+    [
+     "pr",
+     "burns-initial-management",
+     "Burns: initial assessment and fluid resuscitation",
+     "name+alias"
+    ],
+    [
+     "kb",
+     "alien_hand_syndrome",
+     "Alien hand syndrome",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "hand_arm_vibration",
+     "Hand-arm vibration syndrome",
+     "fuzzy"
+    ],
+    [
+     "kb",
+     "hand_infections",
+     "Hand infections",
+     "fuzzy"
+    ]
+   ]
+  },
+  "spl-craniofacial-aesthetic": {
+   "s": "ss-plastic-surgery",
+   "t": "Craniofacial and aesthetic surgery",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sva-arterial": {
+   "s": "ss-vascular-surgery",
+   "t": "Arterial disease and aneurysms",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
+  },
+  "sva-venous-access": {
+   "s": "ss-vascular-surgery",
+   "t": "Venous disease and vascular access",
+   "kb": [],
+   "pr": [],
+   "note": "no candidate"
   }
  },
  "images": {}
