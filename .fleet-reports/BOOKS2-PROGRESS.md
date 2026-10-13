@@ -182,3 +182,8 @@
 - Sources: Sakshi Arora Obs E9 (1.6M chars) + Ten Teachers Gynae 21st (0.8M chars) in /tmp/books2-work/obg/. New v1 format throughout.
 - Gates: LP.checkLesson 10/10, kb_validate_v2 9/9, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 10/10. 100 IDs unique, no dups. maikbook2 1280 -> 1380, no rebase needed.
 - STATE2/COVERAGE2 updated + mirrors. Next: OBG2 (remaining 9 gaps).
+
+## Wave OBG2 (2026-10-13, muse Wonder): OBG gaps 19/19 COMPLETE
+- Branch books2-obg2 from origin/main post-MICRO1-merge, PR #1595 open (no merge; squash after browser job). Final 9 gaps + 8 KB + 90 MCQs bk2-obg-261..350 (diagnosis-antenatal-care, amniotic-fluid, menstrual-physiology, amenorrhoea, vaginitis-sti, vulval-vaginal, contraception reuses infertility_and_contraception KB, 2 SS gyn-oncology at NEET-SS depth).
+- Gates: LP.checkLesson 9/9, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 9/9. 90 IDs unique, no dups. maikbook2 1400 -> 1490, no rebase needed.
+- STATE2/COVERAGE2 updated + mirrors. Next: Nelson pediatrics queue.
