@@ -153,7 +153,6 @@
     sph: { en: "{v} D sphere", hi: "{v} D sphere" }, cylAx: { en: "{v} D cylinder, axis {a}°", hi: "{v} D cylinder, axis {a}°" },
     add: { en: "reading add {v} D", hi: "पढ़ने के लिए add {v} D" }, lensWork: { en: "The lens is focusing by {v} D (accommodation).", hi: "लेंस {v} D ज़्यादा फ़ोकस कर रहा है (accommodation)।" },
     notScale: { en: "Side view of the eye. Focus shifts drawn larger than life.", hi: "आँख का बगल से चित्र। फ़ोकस का खिसकना असल से बड़ा दिखाया है।" },
-    isoH: { en: "The same eye under a retinoscope", hi: "यही आँख retinoscope के नीचे" },
     solidDashed: { en: "Solid: up-down rays. Dashed: side-to-side rays.", hi: "ठोस रेखा: ऊपर-नीचे की किरणें। टूटी रेखा: दाएँ-बाएँ की किरणें।" },
     kClear: { en: "The light meets exactly on the retina, so the retinal image is sharp.", hi: "रोशनी ठीक रेटिना पर मिलती है, इसलिए रेटिना पर बनी छवि (retinal image) साफ़ है।" },
     kClearGl: { en: "With the glasses the light meets on the retina again: the retinal image is sharp.", hi: "चश्मे से रोशनी फिर रेटिना पर मिलती है: रेटिना पर बनी छवि (retinal image) साफ़ है।" },
@@ -548,12 +547,6 @@
       '<input type="range" data-k="' + k + '" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '" aria-valuetext="' + esc(out.replace(/<[^>]+>/g, "")) + '"></label>';
   }
   function cylOut(v) { return s("dpt", { v: v ? MINUS + Math.abs(v).toFixed(2) : "0.00" }); }
-  // The retinoscopy bench (iso-fig-retinoscope.js) set to this eye's spherical equivalent, rounded to 0.5 D.
-  function isoBench() {
-    var I = G.SMD_ISO; if (!I || !I.enabled()) return "";
-    var rx = foCalc().f0.rx, se = Math.max(-6, Math.min(6, Math.round((rx.s + rx.c / 2) * 2) / 2));
-    return '<section class="ex-iso"><h2 class="ex-h3">' + s("isoH") + "</h2>" + I.slot("retinoscope", { state: { rx: se, lens: 0 } }) + "</section>";
-  }
   function focusView(focusSel) {
     var o = foState();
     paint("focus", '<div class="ex-grid"><div class="ex-stage">' +
@@ -572,7 +565,7 @@
       '<div class="ex-ctlrow"><span class="oph-small">' + s("look") + "</span>" + seg(raw("look"), "exnear", o.near ? 1 : 0, [[0, s("far")], [1, s("near")]]) + "</div>" +
       '<div class="ex-ctlrow"><span class="oph-small">' + s("show") + "</span>" + seg(raw("show"), "exshow", o.show, [["chart", s("chart")], ["scene", s("scene")], ["fundus", s("fundus")]]) + "</div>" +
       '<button class="oph-btn ' + (o.wear ? "pri" : "sec") + ' oph-wide ex-wear" data-act="exwear" aria-pressed="' + o.wear + '">' + ico("check") + " " + s("wear") + "</button>" +
-      '<p class="ex-explain" id="exExplain" aria-live="polite"></p></div></div>' + isoBench(), focusSel);
+      '<p class="ex-explain" id="exExplain" aria-live="polite"></p></div></div>', focusSel);
     drawFocus(true);
   }
   var liveT = 0;

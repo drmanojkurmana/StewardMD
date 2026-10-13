@@ -62,7 +62,8 @@ try {
   ok(await ev(`!(MEDCALC._calcs||[]).some(c=>c.cat==='Neonatology')`), 'OFF: no neonatal calculators');
   await ev(`localStorage.removeItem('smd_neo');1`);
 
-  // 1) Back to the default (ON)
+  // 1) Back to the default (ON). Neonatal is pinned to Home: Home starts with a role starter set (tool-groups.js).
+  await ev(`localStorage.setItem('smd_home_tools',JSON.stringify({neo:true}));1`);
   await call('Page.navigate', { url: `http://localhost:${PORT}/` });
   ok(await until('!!window.SMD_NEO_HUB && !!window.SMD_NEO && !!window.SMD_NEO_DOSE && !!window.SMD_NEO_TDM && !!window.SMD_openRoute', 30000), 'default ON: the layer loads');
   ok(await until(`!!document.querySelector('.rnav-tile[data-act=neo] .rnav-tile-beta')`, 10000), 'Neonatal home tile shows the BETA label');

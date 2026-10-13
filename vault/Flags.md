@@ -54,6 +54,7 @@ regulatory-pending, and the in-module wording that says so must stay. Set `def:f
 
 | Flag | State | What it does |
 |---|---|---|
+| `smd_tool_groups` | **ON** (no flag set) | All tools sheet grouped by role (own role first), one-line descriptions, Recently used (`smd_tools_recent`, ids only), and a 6 to 8 tool Home starter set by role and specialty until the user pins or hides a tool. `"0"` or `?toolgroups=0` restores the flat list and the old Home defaults. [[Home Tools]] |
 | `smd_iso` | **ON** (no flag set) | Shows the isometric equipment figures in Narke, Neonatal infusions, CliniX (BP), SURGX (chest trauma) and Ophthalmos (focus). `"0"` in localStorage or `?iso=0` turns every one off; the hosts then render as before. Content is `ai_drafted`. [[Iso Figures]] |
 
 ## WardSynQ — three flags, all OFF, added 2026-09-05

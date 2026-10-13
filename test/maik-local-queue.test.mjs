@@ -62,7 +62,10 @@ function load({ genMs = 5, hang = false } = {}) {
     const t = setTimeout(fn, ms);
     return {
       _t: t,
-      unref() { if (t && t.unref) t.unref(); },
+      // The queue unrefs its job timeout so the real three-minute one never holds a host open. A test that shortens it
+      // (setJobTimeoutMs(40)) is WAITING on that timer, and an unref'd timer as the only pending work lets the event
+      // loop drain: node then cancels this test and every one after it. Long timers stay unref'd, short ones do not.
+      unref() { if (ms >= 1000 && t && t.unref) t.unref(); },
       ref() { if (t && t.ref) t.ref(); }
     };
   };

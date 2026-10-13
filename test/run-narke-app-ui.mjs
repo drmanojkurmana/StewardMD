@@ -54,7 +54,9 @@ try {
 
 
   await call("Page.navigate", { url: BASE }); await until(`return !!(window.NARKE && window.SMD_showHome);`, 30000);
-  await ev(`try{localStorage.removeItem("smd_narke"); localStorage.removeItem("smd_narke_prefs"); localStorage.removeItem("smd_narke_v1");}catch(e){} return 1;`);
+  // Anaesthesia specialty: the Home starter set (tool-groups.js) puts the anaesthesia pack first, so the Narké
+  // tile renders with no pins and without Add Tool, as before the starter set.
+  await ev(`try{localStorage.removeItem("smd_narke"); localStorage.removeItem("smd_narke_prefs"); localStorage.removeItem("smd_narke_v1"); localStorage.setItem("smd_my_specialty","anaesthesia");}catch(e){} return 1;`);
   reqs.length = 0;
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|narke\.(js|css)|narke-models\/)/;
