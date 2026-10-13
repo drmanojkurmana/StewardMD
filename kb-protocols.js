@@ -31,6 +31,14 @@
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function plural(n, w) { return n + " " + w + (n === 1 ? "" : "s"); }
+  // Source-status placeholders never reach the reader: a cell that only said "needs-source" is blank,
+  // and a footnote sentence about missing sources is dropped.
+  function kbpCellText(t) { return String(t || "").replace(/needs-source/gi, "").replace(/\s*thresholds\s*$/i, "").replace(/;\s*$/, "").trim(); }
+  function kbpFootText(t) {
+    return (String(t || "").match(/[^.]+(\.+|$)\s*/g) || []).filter(function (s) {
+      return !/needs-source|Source states no numeric thresholds|not stated in the sources opened|not available on the pages opened/i.test(s);
+    }).join(" ").trim();
+  }
   // Spelling variants (haem/hem, oedema/edema, tumour/tumor) collapse via kb-search.js when it is loaded;
   // the same function runs on the query and on the catalogue, so both sides agree either way.
   function norm(s) {
@@ -345,15 +353,14 @@
         var trs = (vt.rows || []).map(function (r) {
           var unit = r.unit ? '<span class="kbp-unit">' + esc(r.unit) + '</span>' : '';
           var cells = (r.cells || []).map(function (c) {
-            var pending = String(c.text || '').indexOf('needs-source') >= 0 ? ' class="kbp-pending"' : '';
-            return '<td' + pending + '>' + window.KBHy.html(c.text || '') + '</td>';
+            return '<td>' + window.KBHy.html(kbpCellText(c.text)) + '</td>';
           }).join('');
           return '<tr><th scope="row">' + esc(r.parameter || '') + unit + '</th>' + cells +
             '</tr>';
         }).join('');
         return '<section class="kbp-sec kbp-sec-tbl" id="' + pre + 'VTbl' + i + '"><h2><span class="kbp-kind">Value table</span>' + esc(vt.title || vt.id) + '</h2>' +
           '<div class="kbp-table-wrap"><table class="kbp-tbl"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table></div>' +
-          (vt.footnote ? '<p class="kbp-caption">' + window.KBHy.html(vt.footnote) + '</p>' : '') + '</section>';
+          (kbpFootText(vt.footnote) ? '<p class="kbp-caption">' + window.KBHy.html(kbpFootText(vt.footnote)) + '</p>' : '') + '</section>';
       }).join("");
     }
     if (p.tables && p.tables.length) {

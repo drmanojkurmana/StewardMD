@@ -52,6 +52,16 @@
   function flowHTML(fc, titled) {
     return '<section class="kbv2-sec"><h4 class="kbv2-h">' + (titled ? "Flowchart: " : "") + esc(fc.title || "") + "</h4>" + window.KBFlowchart.render(fc) + "</section>";
   }
+  // Source-status placeholders never reach the reader: a cell that only said "needs-source" is blank,
+  // and a footnote sentence about missing sources is dropped.
+  function cellText(t) {
+    return String(t || "").replace(/needs-source/gi, "").replace(/\s*thresholds\s*$/i, "").replace(/;\s*$/, "").trim();
+  }
+  function footText(t) {
+    return (String(t || "").match(/[^.]+(\.+|$)\s*/g) || []).filter(function (s) {
+      return !/needs-source|Source states no numeric thresholds|not stated in the sources opened|not available on the pages opened/i.test(s);
+    }).join(" ").trim();
+  }
   function tableHTML(vt, cites, titled) {
     var cols = (vt.columns || []).slice();
     if (cols.length && String(cols[0]).toLowerCase() === "parameter") cols = cols.slice(1);
@@ -61,14 +71,13 @@
     var rows = (vt.rows || []).map(function (r) {
       return '<tr><th scope="row">' + esc(r.parameter || "") + (r.unit ? '<span class="kbv2-unit">' + esc(r.unit) + "</span>" : "") + "</th>" +
         (r.cells || []).map(function (c) {
-          var pend = String(c.text || "").indexOf("needs-source") >= 0 ? ' class="kbv2-pending"' : "";
-          return "<td" + pend + ">" + hy(c.text) + "</td>";
+          return "<td>" + hy(cellText(c.text)) + "</td>";
         }).join("") + "</tr>";
     }).join("");
     var label = (titled ? esc(KIND[vt.kind] || "Table") + ": " : "") + esc(vt.title || "");
     return '<section class="kbv2-sec"><h4 class="kbv2-h">' + label + "</h4>" +
       '<div class="kbv2-scroll" tabindex="0" role="region" aria-label="' + esc(vt.title || "Table") + '"><table class="kbv2-tbl"' + floor + "><thead><tr>" + head + "</tr></thead><tbody>" + rows + "</tbody></table></div>" +
-      (vt.footnote ? '<p class="kbv2-foot">' + hy(vt.footnote) + "</p>" : "") + "</section>";
+      (footText(vt.footnote) ? '<p class="kbv2-foot">' + hy(footText(vt.footnote)) + "</p>" : "") + "</section>";
   }
   /* kind (data-kbv2-kind on the slot) picks what this slot shows, so the reader can place each kind
    * in its own section: diagnostic | ddx | treatment (valueTables), flowchart | flowchart-dx, foot
