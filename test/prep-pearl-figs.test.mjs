@@ -1,0 +1,3 @@
+import { test } from "node:test"; import assert from "node:assert"; import fs from "node:fs";
+test("7 original figs labelled StewardMD", () => { const f = fs.readdirSync("prep/pearl-figs").filter(x => x.endsWith(".svg")); assert.equal(f.length, 7); for (const n of f) assert.match(fs.readFileSync("prep/pearl-figs/" + n, "utf8"), /StewardMD illustration/); });
+test("maikpearl1 items well formed", () => { let n = 0; for (const f of fs.readdirSync("prep/overlays/maikpearl1/anatomy")) { const d = JSON.parse(fs.readFileSync("prep/overlays/maikpearl1/anatomy/" + f, "utf8")); for (const it of d.items) { n++; assert.equal(it.o.length, 4); assert.ok(it.a >= 0 && it.a < 4); assert.match(it.credit, /StewardMD/); } } assert.equal(n, 7); });
