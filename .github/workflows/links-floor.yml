@@ -14,9 +14,8 @@ on:
 jobs:
   gaps:
     runs-on: ubuntu-latest
-    # Informational until every usable item has a target (LINKS-100-DONE.md tracks the remainder):
-    # the gaps step itself FAILS while unlinked > 0, but does not block the PR yet. Flip to blocking at 100%.
-    continue-on-error: true
+    # Blocking: every usable item has a Know-more target (LINKS-LESSONS-DONE.md).
+    # The gaps step FAILS while unlinked > 0 and blocks the PR.
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

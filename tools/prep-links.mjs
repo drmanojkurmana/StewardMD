@@ -709,16 +709,16 @@ function lessonKbMap(cache, byKey) {
   return m;
 }
 /* build({ cache, bank }) -> { files: [{ rel, body }], pointer, sidecar: [records], report } */
-export function build({ cache, bank, confirmed = null, rematch = null, floor = null, log = () => {} }) {
+export function build({ cache, bank, confirmed = null, rematch = null, floor = null, lessons = null, log = () => {} }) {
   const D = dictionaries();
   const lessonKb = lessonKbMap(cache, D.byKey);
   // Lessons: the bank index plus the bundled pilot lessons, merged the way the app merges them
   // (prep-lessons.js mergeIx: bank wins, except a hand-written bundled file wins for its module), so a
   // bundled-only lesson links its module too and future bundled lessons never need a retro-fix.
+  // Tests pass lessons: explicitly to freeze the universe (repo lessons otherwise leak into fixtures).
   const bankLes = (readJ(path.join(cache, "lessons-index.json")) || {}).modules || {};
   const appLes = (readJ(path.join(ROOT, "prep/lessons/v1/index.json")) || {}).modules || {};
-  const les = { ...bankLes };
-  for (const [k, e] of Object.entries(appLes)) if (!les[k] || e.gen === "hand") les[k] = e;
+  const les = lessons || (() => { const m = { ...bankLes }; for (const [k, e] of Object.entries(appLes)) if (!m[k] || e.gen === "hand") m[k] = e; return m; })();
   const cards = (readJ(path.join(cache, "cards-index.json")) || {}).modules || {};
   const lessonsOf = new Map();
   for (const [k, e] of Object.entries(les)) {

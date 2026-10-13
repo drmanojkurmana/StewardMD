@@ -160,7 +160,8 @@ test("build: the floor rides mod.n360, and floored modules with zero links still
     fs.writeFileSync(path.join(dir, rel), JSON.stringify({ topic: "ana-bones-ossification", items: [
       { id: "plk-1", q: "Synthetic: beaded mid renal artery in a young woman. Cause?", o: ["Atheroma", "Fibromuscular dysplasia", "Arteritis", "Embolism"], a: 1, exp: "Beaded mid artery is fibromuscular dysplasia." },
     ] }));
-    // ana-mixed is link-proof by construction: mixed modules never get own lessons or topic maps.
+    // Link-proof by construction: the nonsense item names nothing, and lessons: {} freezes the
+    // lesson universe so repo lessons cannot leak into the fixture.
     const rel2 = "v5/anatomy/mcq/ana-mixed.json";
     fs.writeFileSync(path.join(dir, rel2), JSON.stringify({ topic: "ana-mixed", items: [
       { id: "plk-9", q: "Synthetic: zzzqqq blorpt with no medical names at all?", o: ["Zza", "Zzb", "Zzc", "Zzd"], a: 0, exp: "" },
@@ -169,7 +170,7 @@ test("build: the floor rides mod.n360, and floored modules with zero links still
     fs.writeFileSync(path.join(dir, "cards-index.json"), JSON.stringify({ modules: {} }));
     fs.writeFileSync(path.join(dir, "lesson-src.json"), JSON.stringify({}));
     const floor = { "ana-bones-ossification": { id: "t1", title: "Topic One" }, "ana-mixed": { id: "t1", title: "Topic One" } };
-    const b = build({ cache: dir, bank: null, floor, log: () => {} });
+    const b = build({ cache: dir, bank: null, floor, lessons: {}, log: () => {} });
     assert.equal(b.report.linked, 1, "the unlinked module adds no coverage");
     const f1 = b.files.find((x) => x.rel.startsWith("m/ana-bones-ossification-"));
     assert.deepEqual(JSON.parse(f1.body).mod.n360, { id: "t1", title: "Topic One" }, "linked modules carry the floor too");
