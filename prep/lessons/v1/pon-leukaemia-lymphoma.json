@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "pon-leukaemia-lymphoma",
+  "subject": "paediatrics",
+  "title": "Leukaemias and lymphomas: ALL, AML and Hodgkin staging",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**ALL** (**commonest** 2 to 5 years, **pallor fever bone pain**, **lymphoblasts** TdT CD10, **hyperdiploidy TEL-AML** good, **BCR-ABL Ph** TKI, **infant KMT2A** poor; **prednisone day 8** response, **MRD** flow guides, **CNS** intrathecal methotrexate) with **Down** (DS-ALL higher relapse, **methotrexate** toxicity, reduced intensity) treats; **tumour lysis** (rasburicase hydrate) prevents. Marrows blast.",
+      "say": "Pale febrile achy blasts TdT hyperdiploid good Ph TKI is ALL: day 8 steroids MRD intrathecals. Down reduced.",
+      "vis": null
+    },
+    {
+      "tx": "**AML** (**Auer rods**, **DIC** promyelocytic ATRA arsenic, **Down TAM** resolves, **monosomy 7** poor, **anthracycline** daunorubicin hearts, **transplant** high risk MRD) with **CML** (**BCR-ABL** imatinib, **leukostasis** apheresis) and **JMML** (Noonan NF1 monocytosis, **transplant** only) myeloid; **chloroma** (orbital, ATRA) spots. Rods differentiate.",
+      "say": "Rods DIC ATRA arsenic TAM resolves is AML: anthracycline hearts transplants high. Imatinib chronic.",
+      "vis": null
+    },
+    {
+      "tx": "**Hodgkin** (**Reed-Sternberg CD15 CD30**, **nodular sclerosis** mediastinal teens, **B symptoms** fever night sweats weight, **ABVD** doxorubicin bleomycin lungs, **radiation** selected, **relapse** transplant brentuximab) with **NHL** (**Burkitt** jaw starry jaw tumour lysis, **lymphoblastic** T mediastinal, **anaplastic large** ALK, **R-CHOP**-like BFM) nodes; **staging** (Ann Arbor PET) scans. Sternbergs stare.",
+      "say": "Bimodal itchy mediastinal Sternberg CD30 is Hodgkin: ABVD lungs radiation selected transplants relapse. Burkitts jaw lyse.",
+      "vis": null
+    },
+    {
+      "tx": "**Support** (**febrile neutropenia** cultures cefepime, **transfuse** thresholds irradiated, **nausea** ondansetron, **mucositis** mouth care, **fertility** cryopreserve, **late** anthracycline hearts second cancers) with **palliative** (refractory comfort, **hospice** home) and **survivor** (growth thyroid neurocognitive, **vaccines** revaccinate, **school** plans) follows; **trials** (CAR-T relapsed B-ALL) enrol. Counts nadir.",
+      "say": "Fever neutropenic cultures cefepime transfuse irradiate vomits ondansetron mouths cryopreserve late hearts: survivors revaccinate school. Trials CAR.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Blood cancer",
+          "Pearl",
+          "Act"
+        ],
+        "rows": [
+          [
+            "ALL",
+            "Blasts MRD",
+            "Day8 IT"
+          ],
+          [
+            "AML",
+            "Rods ATRA",
+            "Hearts Tx"
+          ],
+          [
+            "Lymphoma",
+            "Sternberg Burkitt",
+            "ABVD"
+          ],
+          [
+            "Support",
+            "Fever cefepime",
+            "Survivors"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-paed-141",
+    "bk2-paed-142",
+    "bk2-paed-143",
+    "bk2-paed-144",
+    "bk2-paed-145",
+    "bk2-paed-146",
+    "bk2-paed-147",
+    "bk2-paed-148",
+    "bk2-paed-149",
+    "bk2-paed-150"
+  ],
+  "src": [],
+  "refs": [
+    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-nel2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

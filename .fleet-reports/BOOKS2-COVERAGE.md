@@ -65,3 +65,5 @@ Wave OBG2 DONE (branch books2-obg2): obg-diagnosis-antenatal-care, obg-amniotic-
 
 Wave NEL1 DONE (branch books2-nel1): neo-resuscitation, neo-respiratory, neo-infections-jaundice, pcd-congenital, pcd-acquired-rhythm, pnr-epilepsy, pnr-neuromuscular-development, pnp-glomerular, pnp-aki-ckd, pcc-shock-sepsis. Each: 1 v1 lesson in prep/lessons/v1/, 1 KB article in kb/reference/, 10 MCQs in prep/overlays/maikbook2/paediatrics/ (bk2-paed-001 to 100). Paeds gaps remaining: pgt-liver, pgt-gi-nutrition, php-cholestasis, php-failure-metabolic, pon-leukaemia-lymphoma, pon-solid-tumours, pcc-ventilation-sedation (NEL2).
 
+Wave NEL2 DONE (branch books2-nel2): pgt-liver (scoped: chronic portal hypertension/varices/ascites/encephalopathy/GI bleed), pgt-gi-nutrition, php-cholestasis, php-failure-metabolic, pon-leukaemia-lymphoma, pon-solid-tumours, pcc-ventilation-sedation. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-paed-101 to 170. Paeds 17/17 COMPLETE pending merges.
+
