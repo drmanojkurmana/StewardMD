@@ -187,3 +187,10 @@
 - Branch books2-obg2 from origin/main post-MICRO1-merge, PR #1595 open (no merge; squash after browser job). Final 9 gaps + 8 KB + 90 MCQs bk2-obg-261..350 (diagnosis-antenatal-care, amniotic-fluid, menstrual-physiology, amenorrhoea, vaginitis-sti, vulval-vaginal, contraception reuses infertility_and_contraception KB, 2 SS gyn-oncology at NEET-SS depth).
 - Gates: LP.checkLesson 9/9, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 9/9. 90 IDs unique, no dups. maikbook2 1400 -> 1490, no rebase needed.
 - STATE2/COVERAGE2 updated + mirrors. Next: Nelson pediatrics queue.
+
+## Wave NEL1 (2026-10-13, muse Wonder): paeds gaps 10/17
+- Branch books2-nel1 from origin/main (post-MICRO1, pre-MICRO2-merge), PR #1596 open (no merge; squash after browser job + rebase 1500->1600). 10 lessons + 10 KB + 100 MCQs bk2-paed-001..100 (neo x3, pcd x2, pnr x2, pnp x2, pcc-shock-sepsis).
+- New paediatrics overlay subject dir; test subject loop extended (generator patches loop too).
+- Gates: LP.checkLesson 10/10, kb_validate_v2 10/10, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 10/10. 100 IDs unique. maikbook2 1400 -> 1500.
+- STATE2/COVERAGE2 updated + mirrors. Next: NEL2 (remaining 7 gaps).
+

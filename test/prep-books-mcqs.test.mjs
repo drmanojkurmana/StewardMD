@@ -52,7 +52,7 @@ test("maikbook2 overlay items well formed across all subjects", () => {
   assert.ok(fs.existsSync(base), "maikbook2 directory exists");
 
   let totalItems = 0;
-  for (const subj of ["obstetrics-gynaecology", "pathology", "pharmacology", "ent", "psychiatry", "ophthalmology", "microbiology"]) {
+  for (const subj of ["obstetrics-gynaecology", "pathology", "pharmacology", "ent", "psychiatry", "ophthalmology", "microbiology", "paediatrics"]) {
     const subjDir = path.join(base, subj);
     assert.ok(fs.existsSync(subjDir), `${subj} overlay directory exists`);
 
@@ -88,5 +88,5 @@ test("maikbook2 overlay items well formed across all subjects", () => {
     }
   }
 
-  assert.equal(totalItems, 2140, "Expected 2140 high-yield verified MCQs in maikbook2 (350 OBG + 530 pathology batch 2 + 400 pharmacology batch 2 + 270 ENT + 170 psychiatry + 200 ophthalmology + 220 microbiology)");
+  assert.equal(totalItems, 2240, "Expected 2240 high-yield verified MCQs in maikbook2 (350 OBG + 530 pathology batch 2 + 400 pharmacology batch 2 + 270 ENT + 170 psychiatry + 200 ophthalmology + 220 microbiology + 100 paediatrics)");
 });

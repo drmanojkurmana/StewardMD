@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "pcc-shock-sepsis",
+  "subject": "paediatrics",
+  "title": "Shock, sepsis and fluids: paediatric resuscitation and inotropes",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Shock** (**cold clammy**, **capillary over 3 seconds**, **weak thready**, **tachycardia hypotension late**, **oliguria**, **acidotic**; **compensated** pressure maintained, **hypotensive** decompensated) with **types** (**hypovolaemic** diarrhoea bleed, **cardiogenic** gallop hepatomegaly, **distributive** warm bounding sepsis anaphylaxis, **obstructive** tamponade tension) sorts; **oxygen** monitors access. Pressures late crash.",
+      "say": "Cold clammy delayed weak racing is compensated: types bleed pump vasodilate obstruct sort. Late pressures crash.",
+      "vis": null
+    },
+    {
+      "tx": "**Fluids** (**20 ml per kg isotonic** bolus, **reassess** lungs liver after each, **40 to 60** first hour septic, **blood** haemorrhagic, **DNS** maintenance, **Holliday-Segar 100 50 20**, **hypotonic** dangerous) with **sepsis** (**blood cultures** first, **ceftriaxone vancomycin** hour, **source** drains, **lactate** clears) bundles; **malnutrition** (ReSoMal cautious, **cardiac** small aliquots) restricts. Boluses reassess.",
+      "say": "Twenties reassess lungs liver blood bleeds hormones maintain: cultures antibiotics hour sources drain. Malnourished cautious.",
+      "vis": null
+    },
+    {
+      "tx": "**Inotropes** (**adrenaline cold** 0.05 to 0.3, **noradrenaline warm** distributive, **dobutamine** cardiogenic, **milrinone** PPHN, **dopamine** selected, **central** access, **titrate** perfusion) with **steroids** (**adrenal** purpura, **thyroxine** sick) and **calcium** (ionised low, **blood** citrate) adjuncts; **ventilation** (early intubate GCS, **lung protective**) supports. Perfusion titrates.",
+      "say": "Cold adrenaline warm norad pump dobutamine milrinone lungs is shock: access central perfusion titrate. Early tubes.",
+      "vis": null
+    },
+    {
+      "tx": "**Anaphylaxis** (**IM adrenaline 0.01 mg kg** thigh, **antihistamine steroids** adjuncts, ** fluids** leg raised, **biphasic** observes 6 hours, **auto-injector** trains) with **DKA** (**fluids** deficit, **insulin** 0.05 to 0.1 after hour, **potassium** falls, **cerebral edema** mannitol) and **status asthmaticus** (**oxygen steroids magnesium**, **BiPAP** selected) crises; **poisoning** (charcoal lavage antidotes) decontaminates. Thighs jab.",
+      "say": "Swollen stridor thigh hundredths observes hours is anaphylaxis: DKA fluids insulin potassium brains watch. Jabs train.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Shock",
+          "Pearl",
+          "Act"
+        ],
+        "rows": [
+          [
+            "Sort",
+            "Cold types",
+            "Oxygen access"
+          ],
+          [
+            "Fluids",
+            "20 reassess",
+            "Cultures hour"
+          ],
+          [
+            "Pressors",
+            "Cold Ad warm NA",
+            "Central"
+          ],
+          [
+            "Crises",
+            "Thigh DKA asthma",
+            "Jab"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-paed-091",
+    "bk2-paed-092",
+    "bk2-paed-093",
+    "bk2-paed-094",
+    "bk2-paed-095",
+    "bk2-paed-096",
+    "bk2-paed-097",
+    "bk2-paed-098",
+    "bk2-paed-099",
+    "bk2-paed-100"
+  ],
+  "src": [],
+  "refs": [
+    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-nel1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}
