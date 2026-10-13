@@ -130,3 +130,8 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 
 - 397 verified ($0 API, 397/400), R2 live: cardiac anaes 80->130, neuroanaes 80->129, transplant anaes 80->130, paediatric anaes 65->115, gynae-onc 80->129, reproductive med 80->130, hand surgery 80->129, paediatric ortho 79->129.
 - Cumulative VOLUME run: 2,285 items in batches 3-8 (6 PRs). All Paediatric subjects >=115, Anaesthesia/OBG/Ortho subjects >=115, ENT/Path/Micro >=115, CTVS 148, Pharmacology 139, Psychiatry 127-130. Remainder ~5,970 to 300/subject. Pending lead: `node tools/prep-ids.mjs publish --yes`.
+
+## VOLUME phase batch 9 (2026-10-13): Surgical top-ups
+
+- 399 verified ($0 API, 399/400, dropped maikss84[8]), R2 live: vascular 60->160, plastic 70->169, paediatric surgery 70->170, CTVS 148->198, surgical oncology 136->186.
+- Cumulative VOLUME run: 2,684 items in batches 3-9 (7 PRs). Every ss-* subject seeded this job now >=115; most 120-198. Remainder ~5,570 to 300/subject. Pending lead: `node tools/prep-ids.mjs publish --yes`. Disk 3.4G (other jobs' worktrees hold 13G, not touched).
