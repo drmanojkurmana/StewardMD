@@ -225,4 +225,6 @@
 - Branch books2-sas1 from origin/main post-PHARMA3-merge, PR #1601 open (no merge; squash after browser job). Final 2 gaps + 2 KB + 20 MCQs bk2-mic-221..240.
 - Gates: LP.checkLesson 2/2, kb_validate_v2 2/2, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 2/2. 20 IDs unique. maikbook2 1870 -> 1890, no rebase needed.
 - STATE2/COVERAGE2 updated + mirrors. Next: Gray's/Atlas anatomy queue.
+- Wave GUY1 DONE (branch books2-guy1): 8 physiology lessons + 8 KB + 80 MCQs bk2-phy-001 to 080. Gates: LP.checkLesson 8/8, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 8/8. maikbook2 1870 -> 1950, no rebase needed. Next: GUY2 (7 modules).
+
 

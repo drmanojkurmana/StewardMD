@@ -78,3 +78,10 @@ Wave URO1 DONE (branch books2-uro1): sur-stones, sur-bph-prostate, sur-oncology,
 
 Wave SAS1 DONE (branch books2-sas1): vir-diagnosis (lab methods: culture/CPE, serology windows, molecular, inclusions), vir-hiv-emerging (fourth-gen HIV + Ebola/Nipah/arbo/outbreak). Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-mic-221 to 240. Microbiology 40/40 COMPLETE pending merges.
 
+Wave SAS1 DONE (branch books2-sas1): vir-diagnosis (lab methods: culture/CPE, serology windows, molecular, inclusions), vir-hiv-emerging (fourth-gen HIV + Ebola/Nipah/arbo/outbreak). Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-mic-221 to 240. Microbiology 40/40 COMPLETE pending merges.
+
+Wave ANA-SKIP (branch books2-ana1): anatomy inventory vs main index: 0 lesson-less (all ana-* HAVE). Gray's/Atlas skipped, no gaps.
+
+Wave GUY1 DONE (branch books2-ana1, rename books2-guy1): phy-nmj, phy-wbc-immunity, phy-haemostasis, phy-blood-groups, phy-hypoxia-environment, phy-motility, phy-digestion-absorption, phy-growth. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-phy-001 to 080. Physiology gaps remaining: phy-thyroid, phy-adrenal, phy-calcium, phy-male, phy-female, phy-cerebellum-basal-ganglia, phy-autonomic (GUY2).
+
+
