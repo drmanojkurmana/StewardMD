@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "mcc-ac-psychiatric",
+ "subject": "mcc-acute-care",
+ "title": "Psychiatric emergencies: recognising and acting fast",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Psychiatric emergencies are presentations where a patient is a danger to self or others, or has a medical or drug-induced condition that threatens life. Many look like psychiatry but are medical, so always check vital signs, glucose and drug exposure. A **toxidrome** or **drug reaction** should be considered first. Assessment must be quick, structured and documented.",
+   "say": "Psychiatric emergencies are presentations where a patient is a danger to self or others, or has a medical or drug-induced condition that threatens life. Many look like psychiatry but are medical, so always check vital signs, glucose and drug exposure. A toxidrome or drug reaction should be considered first. Assessment must be quick, structured and documented.",
+   "vis": null
+  },
+  {
+   "tx": "Drug-induced syndromes need rapid recognition. **Neuroleptic malignant syndrome** presents with fever, rigidity, reduced consciousness and raised creatine kinase, usually days after starting or raising an antipsychotic. **Serotonin toxicity** presents with clonus, agitation and hyperthermia, often within hours to days of adding a second serotonergic drug. Both need the offending drug stopped and supportive care.",
+   "say": "Drug-induced syndromes need rapid recognition. Neuroleptic malignant syndrome presents with fever, rigidity, reduced consciousness and raised creatine kinase, usually days after starting or raising an antipsychotic. Serotonin toxicity presents with clonus, agitation and hyperthermia, often within hours to days of adding a second serotonergic drug. Both need the offending drug stopped and supportive care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Neuroleptic malignant syndrome",
+     "Serotonin toxicity"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Days after antipsychotic start or dose rise",
+      "Hours to days after adding a serotonergic drug"
+     ],
+     [
+      "Rigidity",
+      "Prominent",
+      "Usually absent"
+     ],
+     [
+      "Clonus",
+      "Absent",
+      "Inducible or ocular clonus"
+     ],
+     [
+      "Creatine kinase",
+      "Markedly raised",
+      "Usually normal or mildly raised"
+     ],
+     [
+      "First step",
+      "Stop antipsychotic, supportive care",
+      "Stop serotonergic drugs, supportive care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute dystonia occurs within hours of a dopamine blocker such as intramuscular haloperidol. It causes sustained neck torsion or fixed gaze, and it is not dangerous to life. **Anticholinergic** drugs such as benztropine relieve it quickly. Lithium toxicity is different: coarse tremor, vomiting and confusion in a patient on lithium with a thiazide or volume loss need urgent serum lithium, renal function and IV saline.",
+   "say": "Acute dystonia occurs within hours of a dopamine blocker such as intramuscular haloperidol. It causes sustained neck torsion or fixed gaze, and it is not dangerous to life. Anticholinergic drugs such as benztropine relieve it quickly. Lithium toxicity is different: coarse tremor, vomiting and confusion in a patient on lithium with a thiazide or volume loss need urgent serum lithium, renal function and IV saline.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute dystonia",
+     "points": [
+      "Onset within hours of dopamine blocker",
+      "Sustained torsion or fixed gaze",
+      "Treat with benztropine IV or IM",
+      "Usually normal creatine kinase"
+     ]
+    },
+    "right": {
+     "title": "Lithium toxicity",
+     "points": [
+      "Coarse tremor, vomiting, confusion",
+      "Raised level with low sodium or high creatinine",
+      "Stop lithium and give IV saline",
+      "Dialysis when severe or renal failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Drug-induced QT prolongation and **torsades de pointes** can be fatal. Antipsychotics, macrolides, citalopram and other agents block cardiac potassium channels. Check ECG, potassium and magnesium, and remove offending drugs. Continuous cardiac monitoring is needed when QT is prolonged or after significant overdose. Acetaminophen overdose needs N-acetylcysteine without waiting for a level when ingestion time is unknown.",
+   "say": "Drug-induced QT prolongation and torsades de pointes can be fatal. Antipsychotics, macrolides, citalopram and other agents block cardiac potassium channels. Check ECG, potassium and magnesium, and remove offending drugs. Continuous cardiac monitoring is needed when QT is prolonged or after significant overdose. Acetaminophen overdose needs N-acetylcysteine without waiting for a level when ingestion time is unknown.",
+   "vis": null
+  },
+  {
+   "tx": "Capacity and risk decide the pathway. Assess whether the patient can understand, retain, weigh and communicate a decision. A relative is not a legal substitute decision-maker in every case. Involuntary care is allowed only when the criteria in the provincial mental health legislation are met. A patient with a specific plan to die, a recent self-harm act or firearm access is high risk and needs **continuous observation** and urgent psychiatric assessment.",
+   "say": "Capacity and risk decide the pathway. Assess whether the patient can understand, retain, weigh and communicate a decision. A relative is not a legal substitute decision-maker in every case. Involuntary care is allowed only when the criteria in the provincial mental health legislation are met. A patient with a specific plan to die, a recent self-harm act or firearm access is high risk and needs continuous observation and urgent psychiatric assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Presentation"
+     },
+     {
+      "id": "b",
+      "label": "Medical cause excluded?"
+     },
+     {
+      "id": "c",
+      "label": "Capacity assessed"
+     },
+     {
+      "id": "d",
+      "label": "Risk to self or others"
+     },
+     {
+      "id": "e",
+      "label": "Least restrictive care or involuntary criteria"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Across these scenarios, start by excluding a **medical cause**, such as delirium, intoxication or hypoglycaemia. Next, secure **safety** and complete a structured **risk assessment**. Patients with low risk and intact **capacity** may be discharged with a written safety plan and early follow-up. Those at high risk need observation and **psychiatry review** before any move. Document your reasoning, and repeat vital signs and drug levels as the picture changes.",
+   "say": "In every one of these scenarios, begin by ruling out a medical cause, for example delirium, intoxication or low blood sugar. Then make sure the patient is safe and carry out a structured risk assessment. Patients who are low risk and have intact capacity may go home with a written safety plan and early follow-up. Those at high risk need observation and a psychiatry review before any move. Record your reasoning clearly, and repeat vital signs and drug levels as the clinical picture changes.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

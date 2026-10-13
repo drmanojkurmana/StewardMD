@@ -1,0 +1,201 @@
+{
+ "v": 1,
+ "module": "mcc-hp-occupational",
+ "subject": "mcc-health-promotion",
+ "title": "Workplace and occupational health",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Occupational health starts with prevention. The **hierarchy of control** ranks measures from most to least effective: elimination, substitution, engineering controls, administrative controls and **personal protective equipment**. Personal protective equipment is the least reliable because it depends on correct and consistent use. Indian workplaces fall under the Factories Act, which places duties on employers to protect workers, and the same logic guides clinicians when they advise patients.",
+   "say": "Occupational health starts with prevention. The hierarchy of control ranks measures from most to least effective: elimination, substitution, engineering controls, administrative controls and personal protective equipment. Personal protective equipment is the least reliable, because it depends on correct and consistent use. Indian workplaces fall under the Factories Act, which places duties on employers to protect workers, and the same logic guides clinicians when they advise patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Elimination",
+      "Remove the hazardous task"
+     ],
+     [
+      "Substitution",
+      "Use a less toxic material"
+     ],
+     [
+      "Engineering",
+      "Local exhaust ventilation or enclosure"
+     ],
+     [
+      "Administrative",
+      "Job rotation, training, exposure limits"
+     ],
+     [
+      "Personal protective equipment",
+      "Respirator, ear defenders, gloves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lead exposure in workers causes **anaemia**, colicky abdominal pain, constipation, a gingival blue line and peripheral neuropathy. Lead inhibits haem synthesis and affects the enteric nervous system. The first priority is removal from the source, because toxicity persists while exposure continues. Chelation is considered for severe or symptomatic cases, guided by toxicology advice. Notify occupational health and the employer so that workplace exposure is controlled.",
+   "say": "Lead exposure in workers causes anaemia, colicky abdominal pain, constipation, a gingival blue line and peripheral neuropathy. Lead inhibits haem synthesis and affects the enteric nervous system. The first priority is removal from the source, because toxicity persists while exposure continues. Chelation is considered for severe or symptomatic cases, guided by toxicology advice. Notify occupational health and the employer so that workplace exposure is controlled.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect lead"
+     },
+     {
+      "id": "b",
+      "label": "Measure blood lead"
+     },
+     {
+      "id": "c",
+      "label": "Remove from source"
+     },
+     {
+      "id": "d",
+      "label": "Chelate if severe"
+     },
+     {
+      "id": "e",
+      "label": "Monitor and notify"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several occupational hazards have a typical picture. **Hand-arm vibration** causes blanching and numbness in the cold. Chronic occupational noise produces a bilateral notch near 4 kHz. Silica dust leads to upper-zone nodules and a raised risk of **tuberculosis**. Each exposure needs a specific first action, which is usually to reduce the exposure, start a conservation programme or screen for infection before treatment.",
+   "say": "Several occupational hazards have a typical picture. Hand-arm vibration causes blanching and numbness in the cold. Chronic occupational noise produces a bilateral notch near 4 kHz on audiometry. Silica dust leads to upper-zone nodules and a raised risk of tuberculosis. Each exposure needs a specific first action, which is usually to reduce the exposure, start a hearing conservation programme or screen for infection before treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exposure",
+     "Typical feature",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "Hand-arm vibration",
+      "Blanching, numbness in cold",
+      "Reduce exposure, refer"
+     ],
+     [
+      "Occupational noise",
+      "Bilateral 4 kHz notch",
+      "Hearing conservation programme"
+     ],
+     [
+      "Silica dust",
+      "Upper-zone nodules, TB risk",
+      "Screen with IGRA"
+     ],
+     [
+      "Lead",
+      "Anaemia, colic, blue gum line",
+      "Remove from source"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A sharps injury needs rapid action. Wash the wound thoroughly, record the **source** and assess the **exposure risk**. **HIV post-exposure prophylaxis** should begin as early as possible, since its benefit falls with delay, and it must not wait for source test results. Local occupational health guidance sets the timing. **Hepatitis B and C** status then guides follow-up testing.",
+   "say": "A sharps injury needs rapid action. Wash the wound thoroughly, record the source and assess the exposure risk. HIV post-exposure prophylaxis should begin as early as possible, since its benefit falls with delay, and it must not wait for source test results. Local occupational health guidance sets the timing. Hepatitis B and C status then guides follow-up testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sharps injury"
+     },
+     {
+      "id": "b",
+      "label": "Wash wound"
+     },
+     {
+      "id": "c",
+      "label": "Assess source and exposure risk"
+     },
+     {
+      "id": "d",
+      "label": "Start HIV PEP early"
+     },
+     {
+      "id": "e",
+      "label": "Test and follow up"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Silicosis raises the risk of reactivating latent tuberculosis. A positive **interferon-gamma release assay** indicates latent infection, not active disease. Before treating latent infection, active tuberculosis must be excluded using sputum studies, cultures if needed and clinical review. Treating active disease with a single drug is inappropriate. The Indian National TB Elimination Programme guides the treatment pathway.",
+   "say": "Silicosis raises the risk of reactivating latent tuberculosis. A positive interferon-gamma release assay indicates latent infection, not active disease. Before treating latent infection, active tuberculosis must be excluded using sputum studies, cultures if needed and clinical review. Treating active disease with a single drug is inappropriate. The Indian National TB Elimination Programme guides the treatment pathway.",
+   "vis": null
+  },
+  {
+   "tx": "Most workers with non-specific low back pain should keep active. Bed rest and prolonged inactivity cause deconditioning and delay recovery. **Modified duties** with sensible lifting limits allow the worker to keep earning while recovering. Reassurance and a graded return to usual activity reduce fear and anxiety about the job. Red flags or new neurological signs need urgent review rather than routine workplace advice.",
+   "say": "Most workers with non-specific low back pain should keep active. Bed rest and prolonged inactivity cause deconditioning and delay recovery. Modified duties with sensible lifting limits allow the worker to keep earning while recovering. Reassurance and a graded return to usual activity reduce fear and anxiety about the job. Red flags or new neurological signs need urgent review rather than routine workplace advice.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG59: Low back pain and sciatica in over 16s: assessment and management",
+  "National Guidelines for HIV Care and Treatment (NACO, India)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

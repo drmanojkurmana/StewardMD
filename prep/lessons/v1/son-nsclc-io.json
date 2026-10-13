@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "son-nsclc-io",
+ "subject": "ss-medical-oncology",
+ "title": "Immunotherapy-based therapy in advanced NSCLC",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Immunotherapy in advanced non-small cell lung cancer is chosen largely by **PD-L1 tumour proportion score** (TPS). Pembrolizumab alone is the first-line choice when TPS is high and no targetable driver mutation is present. When PD-L1 expression is lower, **pembrolizumab added to platinum doublet chemotherapy** is preferred, including for squamous disease. **Nivolumab with ipilimumab** plus chemotherapy is another option for selected patients.",
+   "say": "Immunotherapy in advanced non-small cell lung cancer is chosen largely by PD-L1 tumour proportion score. Pembrolizumab alone is the first-line choice when the score is high and no targetable driver mutation is present. When PD-L1 expression is lower, pembrolizumab added to platinum doublet chemotherapy is preferred, including for squamous disease. Nivolumab with ipilimumab plus chemotherapy is another option for selected patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Preferred option",
+     "Pivotal evidence"
+    ],
+    "rows": [
+     [
+      "High PD-L1 TPS, no driver mutation",
+      "Pembrolizumab alone",
+      "Pivotal monotherapy study"
+     ],
+     [
+      "Lower PD-L1, non-squamous",
+      "Pembrolizumab with platinum and pemetrexed",
+      "Pivotal chemotherapy combination study"
+     ],
+     [
+      "Squamous histology",
+      "Pembrolizumab with carboplatin and paclitaxel",
+      "Pivotal squamous study"
+     ],
+     [
+      "Chemotherapy add-on, dual checkpoint",
+      "Nivolumab with ipilimumab and chemotherapy",
+      "Dual checkpoint study"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pembrolizumab in the platinum-based regimens is given as induction for **four cycles**, each every 21 days, followed by maintenance. Maintenance pembrolizumab is continued for up to **35 cycles** in total, which is roughly two years of treatment. Pemetrexed maintenance is started after a non-progressing induction with a non-squamous regimen, and bevacizumab can be added to platinum doublets in selected patients without squamous histology. Indian practice follows these schedules in line with the same trial protocols.",
+   "say": "Pembrolizumab in the platinum-based regimens is given as induction for four cycles, each every 21 days, followed by maintenance. Maintenance pembrolizumab continues for up to 35 cycles in total, which is roughly two years of treatment. Pemetrexed maintenance starts after a non-progressing induction with a non-squamous regimen, and bevacizumab can be added to platinum doublets in selected patients without squamous histology. Indian practice follows these schedules in line with the same trial protocols.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Induction",
+      "sub": "4 cycles, every 21 days"
+     },
+     {
+      "id": "b",
+      "label": "Non-progression"
+     },
+     {
+      "id": "c",
+      "label": "Maintenance",
+      "sub": "Up to 35 cycles total"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immune-related adverse events are managed by grade. Grade 2 or higher events usually need the checkpoint inhibitor **held** and systemic **corticosteroids** started, with a slow taper. Grade 3 or 4 pneumonitis, myocarditis, hepatitis or colitis usually leads to **permanent discontinuation**. Myocarditis is especially dangerous and needs permanent stopping even at lower grades in many protocols. Rechallenge is generally avoided after severe events. Pneumonitis involving a large lung fraction, such as 60 percent, is treated as grade 3 or 4.",
+   "say": "Immune-related adverse events are managed by grade. Grade 2 or higher events usually need the checkpoint inhibitor held and systemic corticosteroids started, with a slow taper. Grade 3 or 4 pneumonitis, myocarditis, hepatitis or colitis usually leads to permanent discontinuation. Myocarditis is especially dangerous and needs permanent stopping in many protocols. Rechallenge is generally avoided after severe events. Pneumonitis involving a large lung fraction is treated as grade 3 or 4.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Immunotherapy action",
+     "Steroid use"
+    ],
+    "rows": [
+     [
+      "Grade 1",
+      "Continue and monitor",
+      "Not usually needed"
+     ],
+     [
+      "Grade 2",
+      "Hold the drug",
+      "Start steroids and taper slowly"
+     ],
+     [
+      "Grade 3 or 4",
+      "Stop permanently",
+      "Start high-dose steroids"
+     ],
+     [
+      "Myocarditis, any severe grade",
+      "Stop permanently",
+      "Urgent specialist input"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Atezolizumab is given intravenously, with the first infusion over **60 minutes** for safety monitoring. Where it is given with chemotherapy on the same day, the atezolizumab infusion comes first, before chemotherapy and bevacizumab, which is the sequence used in the IMpower and IMbrave trials. A subcutaneous formulation combines atezolizumab with hyaluronidase and is given in the thigh over about **7 minutes** every 3 weeks. Infusion reactions are managed by interrupting, slowing or stopping the infusion depending on severity.",
+   "say": "Atezolizumab is given intravenously, with the first infusion over 60 minutes for safety monitoring. Where it is given with chemotherapy on the same day, the atezolizumab infusion comes first, before chemotherapy and bevacizumab, as used in the IMpower and IMbrave trials. A subcutaneous formulation combines atezolizumab with hyaluronidase and is given in the thigh over about 7 minutes every 3 weeks. Infusion reactions are managed by interrupting, slowing or stopping the infusion depending on severity.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_0321d22aa64a",
+  "q_3481db19247c",
+  "q_408a31873b13"
+ ],
+ "src": [],
+ "refs": [
+  "KEYNOTE-024 trial (Reck M et al., New England Journal of Medicine, 2016)",
+  "KEYNOTE-189 trial (Gandhi L et al., New England Journal of Medicine, 2018)",
+  "KEYNOTE-407 trial (Paz-Ares L et al., New England Journal of Medicine, 2018)",
+  "CheckMate 9LA trial (Paz-Ares L et al., Lancet, 2021)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

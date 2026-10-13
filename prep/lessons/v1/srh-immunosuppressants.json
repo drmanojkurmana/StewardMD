@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "srh-immunosuppressants",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Cytotoxic and immunosuppressive agents: key choices and safety checks",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Cyclophosphamide** is an alkylating agent used in lupus nephritis and other autoimmune disease. Two regimens are standard. The **NIH regimen** uses monthly intravenous pulses of 0.5 to 1 g/m2 over an induction period. The **Euro-Lupus regimen** uses a fixed low dose given intravenously every two weeks over a shorter total course, with comparable renal outcomes and less gonadal toxicity. Choice depends on disease severity and fertility goals.",
+   "say": "Cyclophosphamide is an alkylating agent used in lupus nephritis and other autoimmune disease. Two regimens are standard. The NIH regimen gives monthly intravenous pulses of 0.5 to 1 gram per square metre over an induction period. The Euro-Lupus regimen gives a fixed low dose intravenously every two weeks over a shorter total course, with comparable kidney outcomes and less gonadal toxicity. The choice depends on disease severity and fertility goals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "NIH regimen",
+     "Euro-Lupus"
+    ],
+    "rows": [
+     [
+      "Dose",
+      "0.5 to 1 g/m2",
+      "Fixed low dose"
+     ],
+     [
+      "Schedule",
+      "Monthly IV",
+      "Every 2 weeks IV"
+     ],
+     [
+      "Course",
+      "Monthly pulses for induction",
+      "Shorter fixed course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Haemorrhagic cystitis is caused by **acrolein**, a urotoxic metabolite of cyclophosphamide and ifosfamide. **Mesna** carries a free thiol group that binds acrolein in the bladder and neutralises it. Oral mesna is partly oxidised to inactive **dimesna** in the blood, then reduced back to active mesna in the kidney and bladder. Prophylaxis is usually dosed at about 60 percent of the ifosfamide dose, alongside hydration.",
+   "say": "Haemorrhagic cystitis is caused by acrolein, a urotoxic metabolite of cyclophosphamide and ifosfamide. Mesna carries a free thiol group that binds acrolein in the bladder and neutralises it. Oral mesna is partly oxidised to inactive dimesna in the blood, then reduced back to active mesna in the kidney and bladder. Prophylaxis is usually dosed at about 60 percent of the ifosfamide dose, alongside hydration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cy",
+      "label": "Cyclophosphamide or ifosfamide"
+     },
+     {
+      "id": "ac",
+      "label": "Acrolein in bladder"
+     },
+     {
+      "id": "ms",
+      "label": "Mesna thiol"
+     },
+     {
+      "id": "nt",
+      "label": "Acrolein neutralised"
+     },
+     {
+      "id": "ht",
+      "label": "Less cystitis"
+     }
+    ],
+    "edges": [
+     [
+      "cy",
+      "ac"
+     ],
+     [
+      "ac",
+      "nt"
+     ],
+     [
+      "ms",
+      "nt"
+     ],
+     [
+      "nt",
+      "ht"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Calcineurin inhibitors** block the enzyme calcineurin, which stops **NFAT** from entering the nucleus, so **IL-2** transcription drops and T cell activation is curbed. **Cyclosporine** is the older agent, needing trough level checks and carrying nephrotoxic and hypertensive risk. **Voclosporin** is a newer cyclosporine analogue licensed for lupus nephritis, taken twice daily on an empty stomach, with eGFR checks every two weeks during the first month and avoidance when eGFR is 45 or below.",
+   "say": "Calcineurin inhibitors stop calcineurin from letting NFAT reach the nucleus, so interleukin-2 production falls and T cell activity is dampened. Cyclosporine is the older option, requiring trough level checks and carrying kidney and blood pressure risks. Voclosporin is a newer cyclosporine analogue for lupus nephritis, dosed twice daily on an empty stomach, with eGFR monitoring every fortnight in the first month and no use when eGFR is 45 or lower.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cyclosporine",
+     "points": [
+      "Trough level monitoring",
+      "Nephrotoxic and hypertensive risk",
+      "Older agent"
+     ]
+    },
+    "right": {
+     "title": "Voclosporin",
+     "points": [
+      "23.7 mg twice daily",
+      "Empty stomach dosing",
+      "eGFR checks every 2 weeks",
+      "Avoid if eGFR 45 or below"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cyclophosphamide is gonadotoxic, and the risk rises with cumulative dose and age. Premenopausal women should receive a **GnRH agonist** such as leuprolide to suppress ovarian function during treatment, and fertility preservation such as oocyte cryopreservation should be discussed early. Men may bank sperm before therapy. The low cumulative dose of the Euro-Lupus regimen markedly reduces this risk.",
+   "say": "Cyclophosphamide is gonadotoxic, and the risk rises with cumulative dose and age. Premenopausal women should receive a GnRH agonist such as leuprolide to suppress ovarian function during treatment, and fertility preservation such as oocyte cryopreservation should be discussed early. Men may bank sperm before therapy. The low cumulative dose of the Euro-Lupus regimen markedly reduces this risk.",
+   "vis": null
+  },
+  {
+   "tx": "**Intravenous immunoglobulin** and **therapeutic plasma exchange** are rescue options in severe or refractory autoimmune disease, used when standard immunosuppression fails. IVIG is given as a high-dose course, while plasma exchange removes circulating antibodies and immune complexes through apheresis. Both are costly and need specialist supervision, so they are reserved for life-threatening disease such as refractory vasculitis or thrombotic microangiopathy.",
+   "say": "Intravenous immunoglobulin and therapeutic plasma exchange are rescue options in severe or refractory autoimmune disease, used when standard immunosuppression fails. IVIG is given as a high-dose course, while plasma exchange removes circulating antibodies and immune complexes through apheresis. Both are costly and need specialist supervision, so they are reserved for life-threatening disease such as refractory vasculitis or thrombotic microangiopathy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_a8751b76ea22",
+  "q_08a4833ed063",
+  "q_1a997efb908d"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO 2024 Clinical Practice Guideline for the Management of Lupus Nephritis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 30
+ }
+}

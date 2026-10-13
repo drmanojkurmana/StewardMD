@@ -1,0 +1,156 @@
+{
+ "v": 1,
+ "module": "mbsci-micro",
+ "subject": "mrcp-basic-science",
+ "title": "Microbiology principles and resistance",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Bacteria are sorted first by Gram stain. **Gram-positive** organisms have a thick peptidoglycan layer that retains the crystal violet-iodine complex after alcohol decolourisation, so they stay purple. **Gram-negative** organisms have a thin peptidoglycan layer inside an outer membrane, lose the dye, and take up the safranin counterstain. The outer membrane is also a permeability barrier that excludes large molecules such as vancomycin.",
+   "say": "Bacteria are first sorted by Gram stain. Gram-positive organisms have a thick peptidoglycan layer that retains the crystal violet iodine complex after alcohol decolourisation, so they stay purple. Gram-negative organisms have a thin peptidoglycan layer inside an outer membrane, lose the dye, and take up the safranin counterstain. The outer membrane is also a permeability barrier that excludes large molecules such as vancomycin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gram-positive",
+     "points": [
+      "Thick peptidoglycan",
+      "Retains crystal violet",
+      "Lacks outer membrane",
+      "Susceptible to vancomycin"
+     ]
+    },
+    "right": {
+     "title": "Gram-negative",
+     "points": [
+      "Thin peptidoglycan",
+      "Loses crystal violet",
+      "Outer membrane barrier",
+      "Vancomycin intrinsically inactive"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Resistance genes spread by **horizontal gene transfer** through three routes. **Conjugation** moves plasmids through a pilus and needs direct cell contact. **Transformation** takes up free naked DNA from the environment. **Transduction** uses a bacteriophage that accidentally packages bacterial DNA and injects it into a new host. Plasmids and transposons often carry the resistance genes that move by these routes.",
+   "say": "Resistance genes spread by horizontal gene transfer through three routes. Conjugation moves plasmids through a pilus and needs direct cell contact. Transformation takes up free naked DNA from the environment. Transduction uses a bacteriophage that accidentally packages bacterial DNA and injects it into a new host. Plasmids and transposons often carry the resistance genes that move by these routes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Vehicle",
+     "Cell contact needed"
+    ],
+    "rows": [
+     [
+      "Conjugation",
+      "Plasmid through pilus",
+      "Yes"
+     ],
+     [
+      "Transformation",
+      "Free environmental DNA",
+      "No"
+     ],
+     [
+      "Transduction",
+      "Bacteriophage",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Beta-lactam resistance in **MRSA** comes from the mecA gene, which encodes **PBP2a**. This penicillin-binding protein has low affinity for beta-lactams, so it keeps cross-linking peptidoglycan when the native proteins are blocked. Resistance extends to flucloxacillin and most other beta-lactams. Cefoxitin screening detects mecA-mediated resistance. Penicillinase is a separate mechanism that mainly affects benzylpenicillin.",
+   "say": "Beta-lactam resistance in MRSA comes from the mecA gene, which encodes PBP2a. This penicillin-binding protein has low affinity for beta-lactams, so it keeps cross-linking peptidoglycan when the native proteins are blocked. Resistance extends to flucloxacillin and most other beta-lactams. Cefoxitin screening detects mecA-mediated resistance. Penicillinase is a separate mechanism that mainly affects benzylpenicillin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Beta-lactam binds native PBPs"
+     },
+     {
+      "id": "b",
+      "label": "mecA produces PBP2a"
+     },
+     {
+      "id": "c",
+      "label": "PBP2a keeps cross-linking"
+     },
+     {
+      "id": "d",
+      "label": "Cefoxitin screen positive"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Glycopeptides such as **vancomycin** bind the terminal D-alanyl-D-alanine of peptidoglycan precursors and block transpeptidation. In vanA and vanB enterococci, the organism builds precursors ending in D-alanyl-D-lactate instead, which binds vancomycin far less strongly. vanA confers high-level resistance to both vancomycin and teicoplanin, whereas vanB leaves teicoplanin susceptible. Linezolid or daptomycin may be options.",
+   "say": "Glycopeptides such as vancomycin bind the terminal D-alanyl-D-alanine of peptidoglycan precursors and block transpeptidation. In vanA and vanB enterococci, the organism builds precursors ending in D-alanyl-D-lactate instead, which binds vancomycin far less strongly. vanA confers high-level resistance to both vancomycin and teicoplanin, whereas vanB leaves teicoplanin susceptible. Linezolid or daptomycin may be options.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene",
+     "Vancomycin",
+     "Teicoplanin"
+    ],
+    "rows": [
+     [
+      "vanA",
+      "Resistant",
+      "Resistant"
+     ],
+     [
+      "vanB",
+      "Resistant",
+      "Susceptible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lipopolysaccharide is the **endotoxin** of Gram-negative bacteria. Its lipid A portion binds LBP, CD14 and MD-2, then signals through **TLR4** on macrophages. This triggers release of TNF, IL-1 and IL-6, causing vasodilation, capillary leak and septic shock. Gram-positive bacteria signal mainly through TLR2 with lipoteichoic acid. Mycoplasma lacks a cell wall altogether and is intrinsically resistant to beta-lactams.",
+   "say": "Lipopolysaccharide is the endotoxin of Gram-negative bacteria. Its lipid A portion binds LBP, CD14 and MD-2, then signals through TLR4 on macrophages. This triggers release of TNF, IL-1 and IL-6, causing vasodilation, capillary leak and septic shock. Gram-positive bacteria signal mainly through TLR2 with lipoteichoic acid. Mycoplasma lacks a cell wall altogether and is intrinsically resistant to beta-lactams.",
+   "vis": null
+  },
+  {
+   "tx": "**Fluoroquinolones** inhibit type II topoisomerases. DNA gyrase is the main target in most Gram-negative bacteria, while topoisomerase IV, made of ParC and ParE, is the main target in Gram-positive organisms such as pneumococci. A parC mutation without a gyrA change gives resistance that may extend to several fluoroquinolones. Carbapenem resistance in Pseudomonas often reflects loss of the OprD porin, while carbapenemases such as KPC, NDM and OXA-48 are plasmid-borne and need infection control notification.",
+   "say": "Fluoroquinolones inhibit type II topoisomerases. DNA gyrase is the main target in most Gram-negative bacteria, while topoisomerase IV, made of ParC and ParE, is the main target in Gram-positive organisms such as pneumococci. A parC mutation without a gyrA change gives resistance that may extend to several fluoroquinolones. Carbapenem resistance in Pseudomonas often reflects loss of the OprD porin, while carbapenemases such as KPC, NDM and OXA-48 are plasmid-borne and need infection control notification.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Murray PR et al. Medical Microbiology (Elsevier)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

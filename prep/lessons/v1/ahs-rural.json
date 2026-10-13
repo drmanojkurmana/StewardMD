@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "ahs-rural",
+ "subject": "adult-health-surgery",
+ "title": "Rural surgery and retrieval",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Rural surgical care starts with a structured **primary survey** using the ABCDE approach. Airway and cervical spine come first, then breathing, circulation, disability and exposure. Life threats are treated as they are found, not after a full history. Repeat the survey whenever the patient changes. A **secondary survey** follows only once life threats are controlled. Request **retrieval** early, in parallel with resuscitation.",
+   "say": "Rural surgical care starts with a structured primary survey using the ABCDE approach. Airway and cervical spine come first, then breathing, circulation, disability and exposure. Life threats are treated as they are found, not after a full history. Repeat the survey whenever the patient changes. A secondary survey follows only once life threats are controlled. Request retrieval early, in parallel with resuscitation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "A",
+      "label": "Airway and neck"
+     },
+     {
+      "id": "B",
+      "label": "Breathing"
+     },
+     {
+      "id": "C",
+      "label": "Circulation"
+     },
+     {
+      "id": "D",
+      "label": "Disability"
+     },
+     {
+      "id": "E",
+      "label": "Exposure"
+     }
+    ],
+    "edges": [
+     [
+      "A",
+      "B"
+     ],
+     [
+      "B",
+      "C"
+     ],
+     [
+      "C",
+      "D"
+     ],
+     [
+      "D",
+      "E"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **haemorrhagic shock**, such as a bleeding abdominal aneurysm or intra-abdominal trauma, large crystalloid volumes worsen clotting. Give small crystalloid boluses only and move to early **blood products**. Where massive transfusion is needed, a 1:1:1 ratio of red cells, plasma and platelets is commonly used. In uncontrolled bleeding, accept a **permissive hypotension** target of systolic 80 to 90 mmHg, unless head injury is present. Track lactate and urine output.",
+   "say": "In haemorrhagic shock, such as a bleeding abdominal aneurysm or intra-abdominal trauma, large crystalloid volumes worsen clotting. Give small crystalloid boluses only and move to early blood products. Where massive transfusion is needed, a 1:1:1 ratio of red cells, plasma and platelets is commonly used. In uncontrolled bleeding, accept a permissive hypotension target of systolic 80 to 90 mmHg, unless head injury is present. Track lactate and urine output.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Bleeding suspected"
+     },
+     {
+      "id": "n2",
+      "label": "Small crystalloid bolus"
+     },
+     {
+      "id": "n3",
+      "label": "Early blood products"
+     },
+     {
+      "id": "n4",
+      "label": "Urgent transfer"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Decide early that the patient needs care beyond the site. Call the retrieval service and give a clear **SBAR** handover covering situation, background, assessment and recommendation. Send written records of intravenous access, fluids given, blood products and analgesia. Keep the patient warm, monitor during transport and secure oxygen and drains. Transfer time is part of treatment, so do not delay for a perfect workup.",
+   "say": "Decide early that the patient needs care beyond the site. Call the retrieval service and give a clear SBAR handover covering situation, background, assessment and recommendation. Send written records of intravenous access, fluids given, blood products and analgesia. Keep the patient warm, monitor during transport and secure oxygen and drains. Transfer time is part of treatment, so do not delay for a perfect workup.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Call retrieval"
+     },
+     {
+      "id": "s2",
+      "label": "SBAR handover"
+     },
+     {
+      "id": "s3",
+      "label": "Stabilise and record"
+     },
+     {
+      "id": "s4",
+      "label": "Transfer en route"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When harm occurs, **open disclosure** means telling the patient and family what happened, what is known so far and what will be done next. It is an ongoing process and does not depend on a complaint. Record facts in the notes, file an incident report and avoid speculation. Apologise where appropriate and agree a named contact for follow-up. Never describe an unexpected event as an expected complication.",
+   "say": "When harm occurs, open disclosure means telling the patient and family what happened, what is known so far and what will be done next. It is an ongoing process and does not depend on a complaint. Record facts in the notes, file an incident report and avoid speculation. Apologise where appropriate and agree a named contact for follow-up. Never describe an unexpected event as an expected complication.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Advanced Trauma Life Support (American College of Surgeons)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

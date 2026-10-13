@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "mcc-hp-diabetes-screen",
+ "subject": "mcc-health-promotion",
+ "title": "Diabetes screening: who to test, how, and what the results mean",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Screening aims to detect **type 2 diabetes** and **prediabetes** before complications develop. Routine testing is usually offered to adults with risk factors such as obesity, family history, inactivity and ethnic background. Common tests include **HbA1c** and **fasting plasma glucose**, while an **oral glucose tolerance test** is reserved for selected cases. Pregnancy brings its own screening point in mid-pregnancy, when **gestational diabetes** is usually sought.",
+   "say": "Screening aims to pick up type 2 diabetes and prediabetes before complications appear. Routine testing is usually offered to adults with risk factors such as obesity, a family history, inactivity and ethnic background. Common tests are HbA1c and fasting plasma glucose, while an oral glucose tolerance test is kept for selected cases. Pregnancy brings its own screening point in mid-pregnancy, when gestational diabetes is usually looked for.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Main use",
+     "Practical point"
+    ],
+    "rows": [
+     [
+      "HbA1c",
+      "Screening and diagnosis",
+      "No fasting needed"
+     ],
+     [
+      "Fasting plasma glucose",
+      "Screening and diagnosis",
+      "Needs an overnight fast"
+     ],
+     [
+      "Oral glucose tolerance test",
+      "Gestational and borderline cases",
+      "Measures glucose after a load"
+     ],
+     [
+      "Random plasma glucose",
+      "Symptomatic patients",
+      "Diagnostic with classic symptoms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis of diabetes rests on laboratory thresholds rather than a single reading alone. A **random plasma glucose** reading that is clearly raised, in someone with classic symptoms of **hyperglycaemia** such as thirst and passing urine often, can settle the diagnosis by itself. Without such symptoms, clinicians look for confirmation, either a second abnormal result from the same sample or repeat abnormal results on a different day. Glycated haemoglobin and fasting glucose are also used, and borderline results signal **prediabetes** that warrants lifestyle advice and follow up.",
+   "say": "Diagnosis of diabetes rests on laboratory thresholds rather than a single reading alone. A random plasma glucose reading that is clearly raised, in someone with classic symptoms of hyperglycaemia such as thirst and passing urine often, can settle the diagnosis by itself. Without such symptoms, clinicians look for confirmation, either a second abnormal result from the same sample or repeat abnormal results on a different day. Glycated haemoglobin and fasting glucose are also used, and borderline results signal prediabetes that warrants lifestyle advice and follow up.",
+   "vis": null
+  },
+  {
+   "tx": "A person with **prediabetes** has raised risk but has not crossed the diabetic threshold. The first-line approach is structured **lifestyle modification**, focusing on modest weight loss and regular physical activity. Metformin may be considered in high-risk individuals, but lifestyle change comes first. Family involvement and repeated follow-up improve adherence. Retesting is arranged at regular intervals.",
+   "say": "A person with prediabetes has raised risk but has not crossed the diabetic threshold. The first-line approach is structured lifestyle modification, focusing on modest weight loss and regular physical activity. Metformin may be considered in high-risk individuals, but lifestyle change comes first. Family involvement and repeated follow-up improve adherence. Retesting is arranged at regular intervals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prediabetes found"
+     },
+     {
+      "id": "b",
+      "label": "Lifestyle change"
+     },
+     {
+      "id": "c",
+      "label": "Weight loss and activity"
+     },
+     {
+      "id": "d",
+      "label": "Periodic retest"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once a person is diagnosed with **type 2 diabetes**, complication screening starts immediately. A **dilated retinal examination** is essential, because retinopathy is often already present at diagnosis even without visual symptoms. Foot examination, kidney function and urine albumin testing and lipid review are also arranged. In remote areas, telemedicine retinal imaging or optometry screening is a practical option.",
+   "say": "Once a person is diagnosed with type 2 diabetes, complication screening starts immediately. A dilated retinal examination is essential, because retinopathy is often already present at diagnosis even without visual symptoms. Foot examination, kidney function and urine albumin testing and lipid review are also arranged. In remote areas, telemedicine retinal imaging or optometry screening is a practical option.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Screening test",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Retinopathy",
+      "Dilated eye examination",
+      "At diagnosis"
+     ],
+     [
+      "Nephropathy",
+      "Urine albumin and eGFR",
+      "At diagnosis then yearly"
+     ],
+     [
+      "Neuropathy",
+      "Foot examination",
+      "At diagnosis then yearly"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG28 Type 2 diabetes in adults: management",
+  "NICE NG3 Diabetes in pregnancy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

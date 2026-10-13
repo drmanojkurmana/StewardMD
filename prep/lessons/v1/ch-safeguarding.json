@@ -1,0 +1,104 @@
+{
+ "v": 1,
+ "module": "ch-safeguarding",
+ "subject": "child-health",
+ "title": "Child safeguarding: recognising and responding to abuse",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Child safeguarding means protecting children from abuse, neglect and harm. Every clinician has a **duty to report** when there is reasonable suspicion of abuse. Parental consent is not needed before a report is made, and the child's immediate safety comes first. Notification triggers an authority-led assessment and planning.",
+   "say": "Child safeguarding means protecting children from abuse, neglect and harm. Every clinician has a duty to report when there is reasonable suspicion of abuse. Parental consent is not needed before a report is made, and the child's immediate safety comes first. Notification triggers an authority-led assessment and planning.",
+   "vis": null
+  },
+  {
+   "tx": "Scald patterns help identify forced immersion. A **stocking-glove distribution** with sharp margins over the buttocks and legs, and no splash marks on the arms or chest, suggests the child was held in hot water. Accidental bath scalds usually show splash injuries and irregular edges. Calm behaviour and normal observations do not rule out abuse.",
+   "say": "Scald patterns help identify forced immersion. A stocking-glove distribution with sharp margins over the buttocks and legs, and no splash marks on the arms or chest, suggests the child was held in hot water. Accidental bath scalds usually show splash injuries and irregular edges. Calm behaviour and normal observations do not rule out abuse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Accidental scald",
+     "points": [
+      "Splash marks on arms, chest, face",
+      "Irregular margins",
+      "Child typically falls or slips"
+     ]
+    },
+    "right": {
+     "title": "Suspicious scald",
+     "points": [
+      "Sharp, symmetrical demarcation",
+      "Buttocks and backs of legs",
+      "No splash injuries above waist"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When a child discloses **sexual abuse**, act urgently. Ensure immediate safety, especially if the alleged abuser has ongoing access. Make a mandatory report to child protection, and do not wait for parental consent. A positive STI test in a child is a strong indicator of sexual abuse and needs forensic assessment. Do not confront the alleged abuser or ask the child for a formal statement.",
+   "say": "When a child discloses sexual abuse, act urgently. Ensure immediate safety, especially if the alleged abuser has ongoing access. Make a mandatory report to child protection, and do not wait for parental consent. A positive STI test in a child is a strong indicator of sexual abuse and needs forensic assessment. Do not confront the alleged abuser or ask the child for a formal statement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Disclosure"
+     },
+     {
+      "id": "b",
+      "label": "Ensure safety now"
+     },
+     {
+      "id": "c",
+      "label": "Mandatory report"
+     },
+     {
+      "id": "d",
+      "label": "Forensic assessment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Where one child is injured, **assess all siblings** in the household. Siblings may share the same risk, even if they show no injury. Speak with a child alone when family violence or abuse is suspected, because the presence of a parent can block disclosure. Use private time with the child, and be alert to a parent answering for the child.",
+   "say": "Where one child is injured, assess all siblings in the household. Siblings may share the same risk, even if they show no injury. Speak with a child alone when family violence or abuse is suspected, because the presence of a parent can block disclosure. Use private time with the child, and be alert to a parent answering for the child.",
+   "vis": null
+  },
+  {
+   "tx": "When you suspect **child abuse**, your duty is to report concern, not to prove it. Act first on the child's **immediate safety**, record objectively what the child and carers said, using their own words, and refer to the **designated safeguarding lead** or the **statutory child protection service**. Do not question the alleged abuser or warn them, as this can compromise evidence and endanger the child.",
+   "say": "When you suspect child abuse, your duty is to report concern, not to prove it. Act first on the child's immediate safety, record objectively what the child and carers said, using their own words, and refer to the designated safeguarding lead or the statutory child protection service. Do not question the alleged abuser or warn them, as this can compromise evidence and endanger the child.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

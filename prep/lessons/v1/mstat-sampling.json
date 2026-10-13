@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "mstat-sampling",
+ "subject": "mrcp-statistics",
+ "title": "Sampling, sample size and power",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Power** is the probability that a study will detect a true difference of a specified size as statistically significant. Conventionally, studies are planned for 80 to 90 percent power at a two-sided **alpha** of 0.05. Underpowered trials can miss real effects and produce false negative results. Power depends on four things: alpha, the true effect size, the outcome standard deviation and the sample size.",
+   "say": "Power is the probability that a study will detect a true difference of a specified size as statistically significant. Conventionally, studies are planned for 80 to 90 percent power at a two-sided alpha of 0.05. Underpowered trials can miss real effects and produce false negative results. Power depends on four things: alpha, the true effect size, the outcome standard deviation and the sample size.",
+   "vis": null
+  },
+  {
+   "tx": "When comparing two **means**, the sample size in each group depends on the **variance** divided by the square of the **detectable difference**. Halving the difference therefore multiplies the required size by four, and doubling the standard deviation has the same effect. Because the effect is squared, very small differences demand very large trials, so the target should be clinically meaningful rather than arbitrarily small.",
+   "say": "When comparing two means, the sample size in each group depends on the variance divided by the square of the detectable difference. Halving the difference therefore multiplies the required size by four, and doubling the standard deviation has the same effect. Because the effect is squared, very small differences demand very large trials, so the target should be clinically meaningful rather than arbitrarily small.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Change",
+     "Effect on sample size"
+    ],
+    "rows": [
+     [
+      "Halve the target difference",
+      "About four times larger"
+     ],
+     [
+      "Double the standard deviation",
+      "About four times larger"
+     ],
+     [
+      "Raise the desired power",
+      "Larger sample needed"
+     ],
+     [
+      "Loosen the significance threshold",
+      "Smaller sample needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clustered designs need a larger sample. Patients treated within the same practice tend to resemble one another, so each adds less independent information. The **design effect** corrects for this. It equals 1 plus (m minus 1) multiplied by the **intracluster correlation coefficient**, where m is the cluster size. The individually randomised sample size is then multiplied by this factor to give the total required.",
+   "say": "Clustered designs need a larger sample. Patients seen within the same practice tend to be alike, so each one contributes less independent information. The design effect corrects for this. It is calculated as one plus the cluster size minus one, multiplied by the intracluster correlation coefficient. The sample size calculated for individual randomisation is then multiplied by this factor to reach the total required.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Individually randomised sample size"
+     },
+     {
+      "id": "b",
+      "label": "Multiply by design effect"
+     },
+     {
+      "id": "c",
+      "label": "Total sample required"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sampling methods differ in how they select participants. **Simple random sampling** gives every member an equal chance. **Stratified sampling** divides the population into subgroups and samples randomly within each, often proportionally, which improves representation and precision. **Convenience sampling** recruits whoever is easiest to reach and is prone to selection bias. **Systematic sampling** picks every nth unit after a random start.",
+   "say": "Sampling methods differ in how they select participants. Simple random sampling gives every member an equal chance. Stratified sampling divides the population into subgroups and samples randomly within each, often proportionally, which improves representation and precision. Convenience sampling recruits whoever is easiest to reach and is prone to selection bias. Systematic sampling picks every nth unit after a random start.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Simple random",
+      "Equal chance for all members"
+     ],
+     [
+      "Stratified",
+      "Random within subgroups"
+     ],
+     [
+      "Convenience",
+      "Easiest to reach, biased"
+     ],
+     [
+      "Systematic",
+      "Every nth after random start"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **non-significant result** does not prove that no effect exists. A trial with low power may simply have been unable to detect a real difference. The **confidence interval** shows the range of effects compatible with the data. A wide interval that includes clinically important benefit or harm means the study is inconclusive. Judge both the point estimate and the precision against a prespecified minimal important difference.",
+   "say": "A non-significant result does not prove that no effect exists. A trial with low power may simply have been unable to detect a real difference. The confidence interval shows the range of effects compatible with the data. A wide interval that includes clinically important benefit or harm means the study is inconclusive. Judge both the point estimate and the precision against a prespecified minimal important difference.",
+   "vis": null
+  },
+  {
+   "tx": "Dropouts and refusals can undermine a study's **internal validity**. To offset anticipated losses, inflate the recruitment goal: divide the number of analysable participants required by the proportion expected to remain, then round upwards. Suppose 200 completers are needed and 15 percent will be lost; roughly 236 people should be approached. When non-participants seem different from participants, compare what is known about each group, such as age or baseline severity, to estimate the **selection bias** likely to follow.",
+   "say": "Dropouts and refusals can undermine a study's internal validity. To offset anticipated losses, inflate the recruitment goal: divide the number of analysable participants required by the proportion expected to remain, then round upwards. Suppose 200 completers are needed and 15 percent will be lost; roughly 236 people should be approached. When non-participants seem different from participants, compare what is known about each group, such as age or baseline severity, to estimate the selection bias likely to follow.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Altman DG, Bland JM. Statistics notes: Absence of evidence is not evidence of absence. BMJ 1995",
+  "Campbell MJ, Walters SJ. How to Design, Analyse and Report Cluster Randomised Trials in Medicine and Health Related Research (Wiley)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "module": "mcc-cc-anticoag",
+ "subject": "mcc-chronic-care",
+ "title": "Long-term anticoagulation: choosing, monitoring and managing bleeding",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Long-term anticoagulation is indicated for **atrial fibrillation** with a raised stroke risk, for **unprovoked venous thromboembolism** where recurrence risk stays high, and for **mechanical heart valves**. Stroke risk in atrial fibrillation is estimated with the CHA2DS2-VASc score, and anticoagulation is offered when the score is raised. Treatment continues while its benefit outweighs bleeding risk, and it is reviewed regularly.",
+   "say": "Long-term anticoagulation is indicated for atrial fibrillation with a raised stroke risk, for unprovoked venous thromboembolism where recurrence risk stays high, and for mechanical heart valves. Stroke risk in atrial fibrillation is estimated with the CHA2DS2-VASc score, and anticoagulation is offered when the score is raised. Treatment continues while its benefit outweighs bleeding risk, and it is reviewed regularly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Usual agent"
+    ],
+    "rows": [
+     [
+      "Atrial fibrillation, non-valvular",
+      "DOAC preferred"
+     ],
+     [
+      "Mechanical valve or rheumatic mitral stenosis",
+      "Warfarin"
+     ],
+     [
+      "Unprovoked venous thromboembolism",
+      "DOAC or warfarin, extended with review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Direct oral anticoagulants, or **DOACs**, are preferred in non-valvular atrial fibrillation because they need no routine INR checks. They are not suitable for **mechanical heart valves** or **rheumatic moderate to severe mitral stenosis**. In these groups **warfarin** remains the agent, with regular INR monitoring to keep the level in the target range.",
+   "say": "Direct oral anticoagulants, known as DOACs, are preferred in non-valvular atrial fibrillation because they need no routine INR checks. They are not suitable for mechanical heart valves or rheumatic moderate to severe mitral stenosis. In these groups warfarin remains the agent, with regular INR monitoring to keep the level in the target range.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DOACs",
+     "points": [
+      "Fixed dosing, no routine INR",
+      "Preferred in non-valvular AF",
+      "Lower intracranial bleeding than warfarin"
+     ]
+    },
+    "right": {
+     "title": "Warfarin",
+     "points": [
+      "Needed for mechanical valves",
+      "Needed for rheumatic mitral stenosis",
+      "INR monitoring required",
+      "Interacts with many drugs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Major bleeding on an anticoagulant needs **specific reversal** alongside resuscitation. Idarucizumab reverses dabigatran, and andexanet alfa reverses factor Xa inhibitors such as apixaban and rivaroxaban. Warfarin is corrected with vitamin K and prothrombin complex concentrate, while protamine sulfate reverses heparin. Reversal is chosen by the drug taken, not by the bleeding site.",
+   "say": "Major bleeding on an anticoagulant needs specific reversal alongside resuscitation. Idarucizumab reverses dabigatran, and andexanet alfa reverses factor Xa inhibitors such as apixaban and rivaroxaban. Warfarin is corrected with vitamin K and prothrombin complex concentrate, while protamine sulfate reverses heparin. Reversal is chosen by the drug taken, not by the bleeding site.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anticoagulant",
+     "Reversal approach"
+    ],
+    "rows": [
+     [
+      "Dabigatran",
+      "Idarucizumab 5 g IV in two doses"
+     ],
+     [
+      "Apixaban or rivaroxaban",
+      "Andexanet alfa IV"
+     ],
+     [
+      "Warfarin",
+      "Vitamin K with prothrombin complex concentrate"
+     ],
+     [
+      "Heparin",
+      "Protamine sulfate IV"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Review **renal function** and **haemoglobin** at least yearly, and more often when frail or unwell, because reduced kidney clearance raises DOAC levels and bleeding risk. Check drug interactions at every prescription. Trimethoprim-sulfamethoxazole can potentiate warfarin, so check the INR within a few days of starting it.",
+   "say": "Review renal function and haemoglobin at least yearly, and more often when frail or unwell, because reduced kidney clearance raises DOAC levels and bleeding risk. Check drug interactions at every prescription. Trimethoprim-sulfamethoxazole can potentiate warfarin, so check the INR within a few days of starting it.",
+   "vis": null
+  },
+  {
+   "tx": "If anticoagulation is refused or unsafe, the clinician documents an **informed refusal** and revisits safer alternatives. A capable adult may decline treatment after proper discussion. In atrial fibrillation, referral for **left atrial appendage occlusion** assessment can reduce cardioembolic risk without systemic anticoagulation.",
+   "say": "If anticoagulation is refused or unsafe, the clinician documents an informed refusal and revisits safer alternatives. A capable adult may decline treatment after proper discussion. In atrial fibrillation, referral for left atrial appendage occlusion assessment can reduce cardioembolic risk without systemic anticoagulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High stroke risk"
+     },
+     {
+      "id": "b",
+      "label": "Anticoagulant unsafe or refused"
+     },
+     {
+      "id": "c",
+      "label": "Document informed refusal"
+     },
+     {
+      "id": "d",
+      "label": "Refer for appendage occlusion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG196: Atrial fibrillation: diagnosis and management",
+  "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

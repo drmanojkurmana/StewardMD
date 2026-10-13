@@ -1,0 +1,196 @@
+{
+ "v": 1,
+ "module": "ahs-periop",
+ "subject": "adult-health-surgery",
+ "title": "Perioperative care: principles for the exam",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Perioperative care spans the period before, during and after surgery. Its aim is to find and treat **risk factors** early, so that complications such as acute kidney injury, venous thromboembolism and delirium are prevented rather than chased. Students should think in three phases: preoperative assessment, intraoperative safety and postoperative monitoring. Each phase has its own high-yield complications that recur in NEET-PG and INI-CET questions.",
+   "say": "Perioperative care spans the period before, during and after surgery. Its aim is to find and treat risk factors early, so that complications such as acute kidney injury, venous thromboembolism and delirium are prevented rather than chased. Students should think in three phases: preoperative assessment, intraoperative safety and postoperative monitoring. Each phase has its own high-yield complications that recur in entrance examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Main focus",
+     "Typical question"
+    ],
+    "rows": [
+     [
+      "Preoperative",
+      "Risk and fitness",
+      "Is the patient fit, and what needs investigating?"
+     ],
+     [
+      "Intraoperative",
+      "Anaesthetic safety",
+      "Which drug or event is the trigger?"
+     ],
+     [
+      "Postoperative",
+      "Early complications",
+      "What is the most likely complication now?"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postoperative **acute kidney injury** is often prerenal. Hypovolaemia, blood loss and poor intake reduce renal perfusion, so urine output falls and creatinine rises. The first step is usually to restore circulating volume with a crystalloid bolus, then reassess urine output, creatinine and potassium. Potassium should be monitored because hyperkalaemia can accompany renal impairment. Nephrotoxic drugs should be reviewed at the same time.",
+   "say": "Postoperative acute kidney injury is often prerenal. Hypovolaemia, blood loss and poor intake reduce renal perfusion, so urine output falls and creatinine rises. The first step is usually to restore circulating volume with a crystalloid bolus, then reassess urine output, creatinine and potassium. Potassium should be monitored because hyperkalaemia can accompany renal impairment. Nephrotoxic drugs should be reviewed at the same time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low urine output and rising creatinine"
+     },
+     {
+      "id": "b",
+      "label": "Assess volume status"
+     },
+     {
+      "id": "c",
+      "label": "Crystalloid bolus and reassess"
+     },
+     {
+      "id": "d",
+      "label": "Monitor potassium and stop nephrotoxins"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Venous thromboembolism** risk rises with surgery, immobility, age, obesity and previous clots. Pulmonary embolism presents with sudden breathlessness, pleuritic pain, tachycardia and hypoxia, and can occur even on prophylaxis. Risk assessment decides the strategy. Low-risk patients, such as younger people having short laparoscopic surgery, usually need early mobilisation and mechanical measures. Higher-risk patients need pharmacological prophylaxis, such as low molecular weight heparin.",
+   "say": "Venous thromboembolism risk rises with surgery, immobility, age, obesity and previous clots. Pulmonary embolism presents with sudden breathlessness, pleuritic pain, tachycardia and hypoxia, and can occur even on prophylaxis. Risk assessment decides the strategy. Low-risk patients, such as younger people having short laparoscopic surgery, usually need early mobilisation and mechanical measures. Higher-risk patients need pharmacological prophylaxis, such as low molecular weight heparin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low risk",
+     "points": [
+      "Short procedure",
+      "Early mobilisation",
+      "Mechanical measures",
+      "No pharmacological need"
+     ]
+    },
+    "right": {
+     "title": "Higher risk",
+     "points": [
+      "Hip or knee surgery",
+      "Age and immobility",
+      "Low molecular weight heparin",
+      "Review if clot suspected"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Malignant hyperthermia** is a pharmacogenetic emergency triggered by volatile anaesthetics and suxamethonium. A ryanodine receptor defect causes uncontrolled calcium release, leading to rising end-tidal carbon dioxide, tachycardia, rigidity and temperature. Treatment is to stop the trigger, give **dantrolene** and support the patient while cooling and correcting acidosis and potassium. Non-depolarising agents are preferred in susceptible patients.",
+   "say": "Malignant hyperthermia is a pharmacogenetic emergency triggered by volatile anaesthetics and suxamethonium. A ryanodine receptor defect causes uncontrolled calcium release, leading to rising end-tidal carbon dioxide, tachycardia, rigidity and temperature. Treatment is to stop the trigger, give dantrolene and support the patient while cooling and correcting acidosis and potassium. Non-depolarising agents are preferred in susceptible patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Trigger stopped"
+     },
+     {
+      "id": "b",
+      "label": "Give dantrolene"
+     },
+     {
+      "id": "c",
+      "label": "Cool and correct acidosis"
+     },
+     {
+      "id": "d",
+      "label": "Monitor potassium and temperature"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Opioid-induced respiratory depression** shows drowsiness, slow breathing and pinpoint pupils, often on a patient-controlled analgesia pump. It is treated by stopping the opioid and giving **naloxone**, a competitive antagonist, while monitoring oxygenation. Reduced effective circulating volume, anaemia and surgical bleeding are separate causes of postoperative problems. Iron deficiency in a pre-admission patient needs source evaluation before elective surgery.",
+   "say": "Opioid-induced respiratory depression shows drowsiness, slow breathing and pinpoint pupils, often on a patient-controlled analgesia pump. It is treated by stopping the opioid and giving naloxone, a competitive antagonist, while monitoring oxygenation. Reduced effective circulating volume, anaemia and surgical bleeding are separate causes of postoperative problems. Iron deficiency in a pre-admission patient needs source evaluation before elective surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Opioid toxicity",
+     "Other cause"
+    ],
+    "rows": [
+     [
+      "Pupils",
+      "Pinpoint",
+      "Usually normal or dilated"
+     ],
+     [
+      "Breathing",
+      "Slow, shallow",
+      "Variable"
+     ],
+     [
+      "Antidote",
+      "Naloxone",
+      "Treat cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Postoperative delirium** is common in older adults and presents as fluctuating attention and disorientation. Reversible precipitants include urinary retention, infection, pain, sedating drugs, dehydration and sleep disruption. The first step is to identify and correct these causes rather than sedate. Antipsychotics are reserved for distress or danger after non-drug measures. Focal signs or a persistent fall in consciousness need urgent imaging.",
+   "say": "Postoperative delirium is common in older adults and presents as fluctuating attention and disorientation. Reversible precipitants include urinary retention, infection, pain, sedating drugs, dehydration and sleep disruption. The first step is to identify and correct these causes rather than sedate. Antipsychotics are reserved for distress or danger after non-drug measures. Focal signs or a persistent fall in consciousness need urgent imaging.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG89: Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism",
+  "NICE guideline CG174: Intravenous fluid therapy in adults in hospital"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

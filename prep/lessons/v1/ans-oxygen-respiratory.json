@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "ans-oxygen-respiratory",
+ "subject": "anaesthesia",
+ "title": "Oxygen therapy: devices, fixed versus variable performance, and high-flow support",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **Venturi mask** uses the Venturi principle, with colour-coded adapters. The gas flow must exceed the patient's peak inspiratory flow, usually about three to four times the minute volume. Its **controlled oxygen** concentration is key in patients at risk of hypercapnia, where SpO2 should be kept at 88 to 92%. Typical settings are 24 to 28% for this group.",
+   "say": "The Venturi mask uses the Venturi principle, with colour-coded adapters. The gas flow must exceed the patient's peak inspiratory flow. It delivers controlled oxygen, which is the right choice for patients at risk of hypercapnia, where the oxygen target is a saturation of 88 to 92 percent, typically with a Venturi mask set at 24 to 28 percent.",
+   "vis": null
+  },
+  {
+   "tx": "The **nasal cannula** is a low flow device, usually limited to 5 or 6 L/min because higher flows cause discomfort, drying and epistaxis. Delivered FiO2 is roughly 21% plus 4% per litre, reaching about 44% at 6 L/min. In children, the common estimate is 21% plus 3% per litre, at flows of 2 L/min or less in infants.",
+   "say": "The nasal cannula is a low flow device, usually limited to five or six litres per minute because higher flows cause discomfort, drying and nosebleeds. The delivered concentration is roughly 21 percent plus about 4 percent for each litre, reaching about 44 percent at six litres. In children, a common estimate uses 3 percent per litre.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "1 L/min: about 24%"
+     },
+     {
+      "id": "b",
+      "label": "3 L/min: about 32%"
+     },
+     {
+      "id": "c",
+      "label": "5 L/min: about 40%"
+     },
+     {
+      "id": "d",
+      "label": "Above 6 L/min: no further gain"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-flow nasal oxygen (HFNO)** is a practical option when a patient has low blood oxygen without a hypercapnic picture. Clinicians usually start at a high flow and adjust the **FiO2** until saturations sit within target. Early response is judged with the **ROX index**, where a value of 4.88 or higher at 2, 6 or 12 hours suggests the patient is likely to succeed without intubation.",
+   "say": "High-flow nasal oxygen is a practical option when a patient has low blood oxygen without a raised carbon dioxide picture. Staff usually begin at a high flow and adjust the inspired oxygen fraction until saturations reach the target. Early response is judged with the ROX index. A value of 4.88 or higher at 2, 6 or 12 hours suggests success without intubation.",
+   "vis": null
+  },
+  {
+   "tx": "**Oxygen toxicity** has pulmonary and CNS forms. Prolonged high inspired oxygen damages the lungs through increased capillary endothelial permeability, depressed mucociliary transport, inhibited alveolar macrophage phagocytosis and altered surfactant. Absorption atelectasis, reduced vital capacity and worsened compliance may follow. CNS toxicity, with twitching, tinnitus and seizure, follows short exposure to high partial pressures.",
+   "say": "Oxygen toxicity has pulmonary and central nervous system forms. Prolonged high inspired oxygen causes lung injury through increased capillary permeability, depressed mucociliary transport, impaired macrophage phagocytosis and altered surfactant. It may cause absorption atelectasis and reduced vital capacity. Central toxicity, with twitching, tinnitus and seizures, follows short exposure to high oxygen partial pressures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pulmonary toxicity",
+     "points": [
+      "Prolonged exposure needed",
+      "Endothelial permeability rises",
+      "Mucociliary transport falls",
+      "Absorption atelectasis"
+     ]
+    },
+    "right": {
+     "title": "CNS toxicity",
+     "points": [
+      "Short high-pressure exposure",
+      "Twitching and tinnitus",
+      "Visual change and seizure",
+      "Can occur without warning"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "cba257f3-6931-475d-9334-58d01164bf27",
+  "49d94986-c502-4c57-aa8e-5602085c54d0",
+  "6008ea37-a68f-423f-8e8c-26fc2685a6db"
+ ],
+ "src": [
+  "kb-clinical-protocols-acute-respiratory-failure-niv-hfnc"
+ ],
+ "refs": [
+  "BTS guideline for non-invasive ventilation in acute respiratory failure (2016)",
+  "ERS/ATS guideline on non-invasive ventilation for acute respiratory failure (2017)",
+  "Anesthesia (Janes and Duke, 3rd edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 899,
+  "itemN": 46
+ }
+}

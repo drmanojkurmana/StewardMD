@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "ahs-scrotal",
+ "subject": "adult-health-surgery",
+ "title": "Scrotal emergencies: torsion, appendix torsion, epididymitis and Fournier gangrene",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Acute scrotal pain is a time-critical presentation. The first task is to decide whether the testis is at risk. **Testicular torsion** is the key emergency: twisting of the spermatic cord cuts venous and then arterial flow. Testicular salvage depends on prompt detorsion, and viability falls within hours. Never delay a scrotal assessment to wait for imaging if torsion is suspected clinically.",
+   "say": "Acute scrotal pain is a time-critical presentation. The first task is to decide whether the testis is at risk. Testicular torsion is the key emergency. Twisting of the spermatic cord cuts venous and then arterial flow. Testicular salvage depends on prompt detorsion, and viability falls within hours. Never delay assessment for imaging if torsion is suspected clinically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Torsion",
+     "Epididymitis"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Sudden, severe",
+      "Gradual, over days"
+     ],
+     [
+      "Testis lie",
+      "High, horizontal",
+      "Normal"
+     ],
+     [
+      "Cremasteric reflex",
+      "Absent",
+      "Present"
+     ],
+     [
+      "Systemic upset",
+      "Nausea, vomiting",
+      "Fever, dysuria possible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Torsion typically affects adolescents and presents with a **high-riding, horizontally lying testis**, exquisite tenderness and an **absent cremasteric reflex**. Nausea and vomiting are common. A clear urinalysis and modest inflammatory markers do not exclude it. Urgent surgical scrotal exploration is required, and an ultrasound should not delay theatre.",
+   "say": "Torsion typically affects adolescents. It presents with a high-riding, horizontally lying testis, exquisite tenderness and an absent cremasteric reflex. Nausea and vomiting are common. A clear urinalysis and modest inflammatory markers do not exclude it. Urgent surgical scrotal exploration is required, and an ultrasound should not delay theatre.",
+   "vis": null
+  },
+  {
+   "tx": "Children with **appendix testis torsion** typically present with gradual scrotal pain that eases with rest, most often during the primary school years. A small **blue dot** at the upper pole of the testis may show through the scrotal skin. The testis sits in a normal position, the cremasteric reflex is preserved, and Doppler flow is intact. Management is supportive analgesia, since the discomfort resolves as the infarcted appendage shrinks.",
+   "say": "Children with appendix testis torsion typically present with gradual scrotal pain that eases with rest, most often during the primary school years. A small blue dot at the upper pole of the testis may show through the scrotal skin. The testis sits in a normal position, the cremasteric reflex is preserved, and Doppler flow is intact. Management is supportive analgesia, since the discomfort resolves as the infarcted appendage shrinks.",
+   "vis": null
+  },
+  {
+   "tx": "**Epididymitis** in a sexually active young man is usually chlamydial or gonococcal, and is treated as an infection. Look for urethral discharge, dysuria, a tender enlarged epididymis, a normal testicular lie and a reactive hydrocele. Raised white cell count and CRP support the diagnosis. Treat with ceftriaxone plus doxycycline and test for sexually transmitted infections in both partners.",
+   "say": "Epididymitis in a sexually active young man is usually chlamydial or gonococcal, and is treated as an infection. Look for urethral discharge, dysuria, a tender enlarged epididymis, a normal testicular lie and a reactive hydrocele. Raised white cell count and CRP support the diagnosis. Treat with ceftriaxone plus doxycycline and test for sexually transmitted infections in both partners.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Scrotal pain, normal lie"
+     },
+     {
+      "id": "b",
+      "label": "Raised WCC and CRP"
+     },
+     {
+      "id": "c",
+      "label": "Ceftriaxone plus doxycycline"
+     },
+     {
+      "id": "d",
+      "label": "STI testing both partners"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fournier gangrene** is a necrotising infection of the perineum and scrotum, most often in diabetic or immunocompromised men. Warning signs include crepitus, dusky skin, foul smell, fever, tachycardia, hypotension and acute kidney injury. Treatment is urgent surgical debridement with broad-spectrum antibiotics and sepsis resuscitation. Delay raises mortality sharply.",
+   "say": "Fournier gangrene is a necrotising infection of the perineum and scrotum, most often in diabetic or immunocompromised men. Warning signs include crepitus, dusky skin, foul smell, fever, tachycardia, hypotension and acute kidney injury. Treatment is urgent surgical debridement with broad-spectrum antibiotics and sepsis resuscitation. Delay raises mortality sharply.",
+   "vis": null
+  },
+  {
+   "tx": "An **irreducible, tense, tender groin lump** that extends into the scrotum, with vomiting and failure to pass wind, signals a strangulated inguinal hernia. Bowel trapped in the sac is at risk of ischaemia. Urgent general surgical review for emergency repair is needed. Manual reduction or outpatient care is not appropriate. A painless, firm, non-tender testicular mass is different and needs urgent ultrasound and urology referral for suspected germ cell tumour.",
+   "say": "An irreducible, tense, tender groin lump that extends into the scrotum, with vomiting and failure to pass wind, signals a strangulated inguinal hernia. Bowel trapped in the sac is at risk of ischaemia. Urgent general surgical review for emergency repair is needed. Manual reduction or outpatient care is not appropriate. A painless, firm, non-tender testicular mass is different and needs urgent ultrasound and urology referral for suspected germ cell tumour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strangulated hernia",
+     "points": [
+      "Irreducible, tense groin lump",
+      "Vomiting, no flatus",
+      "Urgent general surgery"
+     ]
+    },
+    "right": {
+     "title": "Testicular mass",
+     "points": [
+      "Painless, firm, non-tender",
+      "Not transilluminating",
+      "Urgent ultrasound and urology"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE CKS: Testicular torsion",
+  "NICE CKS: Epididymitis and orchitis",
+  "Bailey and Love's Short Practice of Surgery (Williams and Chanson, 2018 edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

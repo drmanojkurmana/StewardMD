@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "module": "mcc-pb-consent",
+ "subject": "mcc-professional-behaviours",
+ "title": "Informed consent: capacity, disclosure and voluntariness",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Valid **informed consent** rests on four elements: capacity, voluntariness, adequate information and understanding. A patient is presumed to have capacity, and an adult with capacity may refuse any treatment, even life-saving treatment, for any reason. Capacity is decision specific and tested through understanding, retention, weighing and communicating a choice, plus **appreciation** of how the information applies to oneself. Orientation alone does not establish capacity.",
+   "say": "Valid informed consent rests on four elements: capacity, voluntariness, adequate information and understanding. A patient is presumed to have capacity, and an adult with capacity may refuse any treatment, even life-saving treatment, for any reason. Capacity is decision specific and tested through understanding, retention, weighing and communicating a choice, plus appreciation of how the information applies to oneself. Orientation alone does not establish capacity.",
+   "vis": null
+  },
+  {
+   "tx": "Disclosure should cover the **material risks**, meaning those a reasonable person in the patient's position would want to know. Rare but severe risks may be material when they matter to the patient's life, such as a driver's job or a serious outcome like bile duct injury. Rarity alone does not justify omitting a risk. Tailor the discussion to the individual rather than listing only the common complications.",
+   "say": "Disclosure should cover the material risks, meaning those a reasonable person in the patient's position would want to know. Rare but severe risks may be material when they matter to the patient's life, such as a driver's job or a serious outcome like bile duct injury. Rarity alone does not justify omitting a risk. Tailor the discussion to the individual rather than listing only the common complications.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Consent point"
+    ],
+    "rows": [
+     [
+      "Rare severe risk",
+      "Disclose if relevant to the patient"
+     ],
+     [
+      "Patient asks about risks",
+      "Answer fully and honestly"
+     ],
+     [
+      "Known adverse event",
+      "Open disclosure and management plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Voluntariness** matters most in sensitive decisions such as medical assistance in dying. Explore palliative options, pain control and hospice care before any such assessment. Assess the patient privately, because family pressure can distort the choice. Consistency of a request does not by itself prove it is voluntary or informed.",
+   "say": "Voluntariness matters most in sensitive decisions such as medical assistance in dying. Explore palliative options, pain control and hospice care before any such assessment. Assess the patient privately, because family pressure can distort the choice. Consistency of a request does not by itself prove it is voluntary or informed.",
+   "vis": null
+  },
+  {
+   "tx": "Language and culture affect comprehension. A patient with limited English needs a **qualified medical interpreter** rather than a family member, who may omit or filter information. Confirm understanding in the patient's language before signing. A capable patient may also choose who attends the discussion, such as a spouse or elder, and this is part of shared decision making.",
+   "say": "Language and culture affect comprehension. A patient with limited English needs a qualified medical interpreter rather than a family member, who may omit or filter information. Confirm understanding in the patient's language before signing. A capable patient may also choose who attends the discussion, such as a spouse or elder, and this is part of shared decision making.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Limited English"
+     },
+     {
+      "id": "b",
+      "label": "Qualified interpreter"
+     },
+     {
+      "id": "c",
+      "label": "Understanding confirmed"
+     },
+     {
+      "id": "d",
+      "label": "Consent signed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adolescents and emergencies need separate rules. A mature minor who understands a proposed treatment can consent, and confidentiality is kept within legal limits with safety screening. When a patient lacks capacity and no surrogate or advance directive is available, an **emergency exception** allows treatment in the patient's best interests when delay would cause serious harm. Document the rationale and keep seeking a surrogate.",
+   "say": "Adolescents and emergencies need separate rules. A mature minor who understands a proposed treatment can consent, and confidentiality is kept within legal limits with safety screening. When a patient lacks capacity and no surrogate or advance directive is available, an emergency exception allows treatment in the patient's best interests when delay would cause serious harm. Document the rationale and keep seeking a surrogate.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Chapter 1 in Medical Ethics Manual (World Medical Association)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

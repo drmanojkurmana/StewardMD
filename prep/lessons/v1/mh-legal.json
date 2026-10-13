@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "mh-legal",
+ "subject": "mental-health",
+ "title": "Mental Health Act and involuntary treatment",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Capacity is **decision-specific**, so a person may refuse one treatment while managing other decisions. Assess four abilities: understanding the information, retaining it, **weighing** the options, and communicating a clear choice. A diagnosis such as an eating disorder, psychosis or mania does not remove capacity on its own. Impaired insight or weighing can, however, and this must be **documented** before any change in legal status. Repeat the assessment when the clinical state changes.",
+   "say": "Capacity is decision-specific, so a person may refuse one treatment while still managing other decisions. Assess four abilities: understanding the information, retaining it, weighing the options, and communicating a clear choice. A diagnosis such as an eating disorder, psychosis or mania does not remove capacity on its own. Impaired insight or weighing can, however, and this must be documented before any change in legal status. Repeat the assessment whenever the clinical state changes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ability",
+     "Key question"
+    ],
+    "rows": [
+     [
+      "Understand",
+      "Can they explain the information in their own words?"
+     ],
+     [
+      "Retain",
+      "Can they hold the facts long enough to decide?"
+     ],
+     [
+      "Weigh",
+      "Can they compare the risks and benefits?"
+     ],
+     [
+      "Communicate",
+      "Can they state a clear and consistent choice?"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compulsory admission usually depends on three conditions being met together. The first is a **diagnosable mental disorder** that has been clearly identified. The second is a **substantial risk** of harm to the patient or to others if care is withheld. The third is the absence of a **least restrictive alternative**, such as community crisis support or informed voluntary admission, that could safely contain that risk. The reasons must be documented and explained to the person concerned, and the detention needs periodic **statutory review**.",
+   "say": "Compulsory admission usually depends on three conditions being met together. The first is a diagnosable mental disorder that has been clearly identified. The second is a substantial risk of harm to the patient or to others if care is withheld. The third is the absence of a least restrictive alternative, such as community crisis support or informed voluntary admission, that could safely contain that risk. The reasons must be documented and explained to the person concerned, and the detention needs periodic statutory review.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Mental disorder found"
+     },
+     {
+      "id": "n2",
+      "label": "Serious risk if untreated"
+     },
+     {
+      "id": "n3",
+      "label": "Less restrictive option?"
+     },
+     {
+      "id": "n4",
+      "label": "Involuntary admission with review"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2",
+      "yes"
+     ],
+     [
+      "n2",
+      "n3",
+      "yes"
+     ],
+     [
+      "n3",
+      "n4",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Detained people have the right to be told why they are held and what their rights are, using language they can follow. They may request independent scrutiny through a **Review Board** and ask for a legal representative to act on their behalf. Recent reforms also allow a person to appoint a **nominated representative** and to record an **advance directive** setting out their treatment wishes. Teams must respect these safeguards even when they judge detention to be necessary.",
+   "say": "Detained people have the right to be told why they are held and what their rights are, using language they can follow. They may request independent scrutiny through a Review Board and ask for a legal representative to act on their behalf. Recent reforms also allow a person to appoint a nominated representative and to record an advance directive setting out their treatment wishes. Teams must respect these safeguards even when they judge detention to be necessary.",
+   "vis": null
+  },
+  {
+   "tx": "Emergency treatment is justified only when there is **imminent risk** of serious harm and the person cannot be managed safely another way. Use the **smallest effective** intervention, with clear drug, dose and route, and avoid restraint beyond what is needed. Record the reason, the drug, the dose and the time, then review promptly. Covert medication given without the person's knowledge is not acceptable as routine practice.",
+   "say": "Emergency treatment is justified only when there is imminent risk of serious harm and the person cannot be managed safely another way. Use the smallest effective intervention, with clear drug, dose and route, and avoid restraint beyond what is needed. Record the reason, the drug, the dose and the time, then review promptly. Covert medication given without the person's knowledge is not acceptable as routine practice.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Mental Healthcare Act 2017, India",
+  "Kaplan and Sadock's Synopsis of Psychiatry"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

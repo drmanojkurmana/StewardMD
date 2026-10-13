@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "scc-trials-icu",
+ "subject": "ss-critical-care",
+ "title": "Landmark trials in critical care: trial methodology and key findings",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Placebo use must be ethically justified. A **placebo** is acceptable when no proven effective treatment exists, or when the placebo does not expose participants to serious or irreversible harm. Participants may also report symptoms such as nausea or dizziness after an inert tablet, which is called the **nocebo effect**. Investigators should record and interpret such symptoms in the context of the control arm.",
+   "say": "Placebo use must be ethically justified. A placebo is acceptable when no proven effective treatment exists, or when it does not expose participants to serious or irreversible harm. Participants may also report symptoms such as nausea or dizziness after taking an inert tablet. This is called the nocebo effect, and investigators should record and interpret such symptoms in the context of the control arm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical situation",
+     "Placebo acceptable?"
+    ],
+    "rows": [
+     [
+      "No proven standard treatment",
+      "Generally acceptable"
+     ],
+     [
+      "Effective standard treatment exists",
+      "Only as add-on or if harm is not serious"
+     ],
+     [
+      "Risk of serious irreversible harm",
+      "Not acceptable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blinding reduces bias in outcome measurement. In a **triple-blind** study, the participant, investigator, outcome assessor and analyst are all unaware of allocation. **Unblinding** is permitted only for emergencies or serious safety concerns, not because of poor response or convenience. Each unblinding should be documented so that the integrity of the remaining trial is protected.",
+   "say": "Blinding reduces bias in outcome measurement. In a triple-blind study, the participant, investigator, outcome assessor and analyst are all unaware of allocation. Unblinding is permitted only for emergencies or serious safety concerns, not because of poor response or convenience. Each unblinding should be documented to protect the integrity of the remaining trial.",
+   "vis": null
+  },
+  {
+   "tx": "In a **cluster randomised trial**, whole units such as wards or hospitals are allocated, not individual patients. Patients within one cluster resemble each other, so outcomes are correlated. Analysis must account for this **intra-cluster correlation**, otherwise the sample is overstated and type I errors rise, leading to falsely significant results and adoption of ineffective interventions.",
+   "say": "In a cluster randomised trial, whole units such as wards or hospitals are allocated, not individual patients. Patients within one cluster resemble each other, so their outcomes are correlated. Analysis must account for this intra-cluster correlation. Otherwise the effective sample size is overstated, type I errors rise, and ineffective interventions may be wrongly adopted.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Randomise clusters"
+     },
+     {
+      "id": "b",
+      "label": "Allocate whole wards"
+     },
+     {
+      "id": "c",
+      "label": "Correlated patient outcomes"
+     },
+     {
+      "id": "d",
+      "label": "Adjust for correlation"
+     },
+     {
+      "id": "e",
+      "label": "Valid conclusion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **surrogate endpoint**, such as a fall in LDL-cholesterol or blood pressure, is a laboratory or physiological marker standing in for a outcome that matters. A **clinical endpoint** measures what patients feel, survive or suffer. A surrogate change does not guarantee fewer major events, so phase III trials should ideally confirm clinical benefit.",
+   "say": "A surrogate endpoint is a laboratory or physiological marker standing in for an outcome that matters, such as a fall in LDL cholesterol. A clinical endpoint measures what patients feel, survive or suffer. A surrogate change does not guarantee fewer major events, so trials should ideally confirm clinical benefit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surrogate endpoint",
+     "points": [
+      "Lab or physiological marker",
+      "Faster and cheaper to measure",
+      "May not predict hard outcomes"
+     ]
+    },
+    "right": {
+     "title": "Clinical endpoint",
+     "points": [
+      "Mortality, events, symptoms",
+      "Directly meaningful to patients",
+      "Needs larger or longer trials"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **pragmatic trial** tests effectiveness in routine care, with broad eligibility and flexible delivery. An **explanatory trial** tests efficacy under tightly controlled conditions with strict inclusion criteria. Explanatory designs answer whether an intervention can work; pragmatic designs answer whether it does work in real clinical settings.",
+   "say": "A pragmatic trial tests effectiveness in routine care, with broad eligibility and flexible delivery. An explanatory trial tests efficacy under tightly controlled conditions with strict inclusion criteria. Explanatory designs ask whether an intervention can work, while pragmatic designs ask whether it does work in real clinical settings.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pragmatic trial",
+     "points": [
+      "Real-world setting",
+      "Broad eligibility",
+      "Measures effectiveness"
+     ]
+    },
+    "right": {
+     "title": "Explanatory trial",
+     "points": [
+      "Controlled setting",
+      "Strict eligibility",
+      "Measures efficacy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_38ca7db4cb02",
+  "q_a914fde7fda4",
+  "q_cc33368f706c"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

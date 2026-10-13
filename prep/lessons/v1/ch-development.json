@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "module": "ch-development",
+ "subject": "child-health",
+ "title": "Development and behaviour: red flags and early assessment in child health",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Developmental and behavioural concerns in children are common in Indian practice. Start by checking whether the problem is a **developmental delay**, a **behavioural disorder**, or a sign of an underlying medical condition. Many presentations have a treatable physical cause, such as iron deficiency, hypothyroidism or sleep-disordered breathing, so screen for these first before labelling a neurodevelopmental disorder.",
+   "say": "Developmental and behavioural concerns in children are common in Indian practice. Start by checking whether the problem is a developmental delay, a behavioural disorder, or a sign of an underlying medical condition. Many presentations have a treatable physical cause, such as iron deficiency, hypothyroidism or sleep-disordered breathing, so screen for these first before labelling a neurodevelopmental disorder.",
+   "vis": null
+  },
+  {
+   "tx": "Iron deficiency and hypothyroidism are classic medical causes. Iron deficiency presents with pallor, pica, poor appetite and microcytosis, with **low ferritin** confirming depleted stores. Hypothyroidism presents with slow language, constipation, dry skin and short stature, with a **raised TSH** and low free T4. Treat the cause early, because delay can cause lasting harm to neurodevelopment.",
+   "say": "Iron deficiency and hypothyroidism are classic medical causes. Iron deficiency presents with pallor, pica, poor appetite and microcytosis, with low ferritin confirming depleted stores. Hypothyroidism presents with slow language, constipation, dry skin and short stature, with a raised TSH and low free T4. Treat the cause early, because delay can cause lasting harm to neurodevelopment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Iron deficiency",
+     "Hypothyroidism"
+    ],
+    "rows": [
+     [
+      "Key clue",
+      "Pica, pallor, poor appetite",
+      "Slow speech, constipation, dry skin"
+     ],
+     [
+      "Core test",
+      "Low ferritin, microcytosis",
+      "High TSH, low free T4"
+     ],
+     [
+      "Growth effect",
+      "Mild if treated early",
+      "Short stature if untreated"
+     ],
+     [
+      "First step",
+      "Oral iron and diet review",
+      "Start thyroxine and recheck"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autism spectrum disorder and ADHD are neurodevelopmental conditions that need structured assessment. Autism shows reduced **joint attention**, poor eye contact, solitary play and limited speech by 18 months or earlier. ADHD is a clinical diagnosis requiring inattention, impulsivity or both across settings, confirmed by parent and teacher rating scales. Normal hearing, vision and growth do not exclude either condition.",
+   "say": "Autism spectrum disorder and ADHD are neurodevelopmental conditions that need structured assessment. Autism shows reduced joint attention, poor eye contact, solitary play and limited speech by 18 months or earlier. ADHD is a clinical diagnosis requiring inattention, impulsivity or both across settings, confirmed by parent and teacher rating scales. Normal hearing, vision and growth do not exclude either condition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autism spectrum disorder",
+     "points": [
+      "Poor joint attention and pointing",
+      "Limited eye contact and social reciprocity",
+      "Solitary play and hand flapping",
+      "Delayed or absent meaningful speech"
+     ]
+    },
+    "right": {
+     "title": "ADHD",
+     "points": [
+      "Inattention, impulsivity or both",
+      "Symptoms in two or more settings",
+      "Confirm with parent and teacher scales",
+      "Rule out sleep and hearing problems first"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Some presentations with inattention have a sleep cause. Loud snoring, witnessed **breathing pauses** and daytime mouth breathing suggest obstructive sleep-disordered breathing, often from enlarged tonsils. Intermittent hypoxia and fragmented sleep impair attention. Refer to ENT, because adenotonsillectomy often improves daytime behaviour. Thyroid function and EEG are not the next step when the history points to airway obstruction.",
+   "say": "Some presentations with inattention have a sleep cause. Loud snoring, witnessed breathing pauses and daytime mouth breathing suggest obstructive sleep-disordered breathing, often from enlarged tonsils. Intermittent hypoxia and fragmented sleep impair attention. Refer to ENT, because adenotonsillectomy often improves daytime behaviour. Thyroid function and EEG are not the next step when the history points to airway obstruction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Snoring and breathing pauses"
+     },
+     {
+      "id": "b",
+      "label": "Enlarged tonsils"
+     },
+     {
+      "id": "c",
+      "label": "Fragmented sleep"
+     },
+     {
+      "id": "d",
+      "label": "Inattention and restlessness"
+     },
+     {
+      "id": "e",
+      "label": "ENT referral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "Assess airway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Child protection and adolescent safety need prompt, private action. Bruising to the ears and cheek in a non-mobile toddler, bruises of **different ages** and a changing history indicate possible non-accidental injury, so report to the child protection authority. For an adolescent with suicidal thoughts, assess risk privately, explain confidentiality limits and involve parents only as safety needs dictate.",
+   "say": "Child protection and adolescent safety need prompt, private action. Bruising to the ears and cheek in a non-mobile toddler, bruises of different ages and a changing history indicate possible non-accidental injury, so report to the child protection authority. For an adolescent with suicidal thoughts, assess risk privately, explain confidentiality limits and involve parents only as safety needs dictate.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Chapter 3 in Nelson Textbook of Pediatrics (Kliegman et al.)",
+  "Chapter 14 in Nelson Textbook of Pediatrics (Kliegman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

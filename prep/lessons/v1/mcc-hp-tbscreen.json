@@ -1,0 +1,162 @@
+{
+ "v": 1,
+ "module": "mcc-hp-tbscreen",
+ "subject": "mcc-health-promotion",
+ "title": "TB screening in risk groups",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Screening for **latent tuberculosis infection** (LTBI) targets people who are at high risk of progressing to active disease, not the general population. Key groups include recent immigrants from high-incidence countries, people with HIV, those about to start immunosuppressive drugs such as TNF-alpha inhibitors, close contacts of sputum-positive cases, and residents or staff of congregate settings. LTBI is asymptomatic, non-infectious and diagnosed by an immune test.",
+   "say": "Screening for latent tuberculosis infection targets people who are at high risk of progressing to active disease, not the general population. Key groups include recent immigrants from high-incidence countries, people with HIV, those about to start immunosuppressive drugs such as TNF-alpha inhibitors, close contacts of sputum-positive cases, and residents or staff of congregate settings. Latent infection is asymptomatic, not infectious, and diagnosed with an immune test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk group",
+     "Why screen",
+     "Typical action"
+    ],
+    "rows": [
+     [
+      "Recent immigrant from high-incidence country",
+      "Past exposure may be dormant",
+      "Immune test and chest film"
+     ],
+     [
+      "HIV infection",
+      "Weakened T cell control",
+      "Test before antiretrovirals"
+     ],
+     [
+      "Planned biologic therapy",
+      "Blocking TNF permits reactivation",
+      "Screen before first dose"
+     ],
+     [
+      "Recent household contact",
+      "Recent transmission risk",
+      "Test after an interval"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **interferon-gamma release assay** (IGRA) is the preferred blood test in most adults, particularly after BCG vaccination, because it does not react to BCG antigens. A positive IGRA shows infection but cannot separate latent from active disease. Active disease must be excluded by symptom review and a chest radiograph before latent treatment starts. Sputum testing is reserved for suspected active cases.",
+   "say": "An interferon-gamma release assay is the preferred blood test in most adults, particularly after BCG vaccination, because it does not react to BCG antigens. A positive result shows infection but cannot separate latent from active disease. Active disease must be excluded by symptom review and a chest radiograph before latent treatment starts. Sputum testing is reserved for suspected active cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "IGRA",
+     "points": [
+      "Blood test",
+      "Not affected by BCG",
+      "Preferred after BCG",
+      "Cannot separate latent from active"
+     ]
+    },
+    "right": {
+     "title": "Tuberculin skin test",
+     "points": [
+      "Injected intradermal test",
+      "BCG can cause false positives",
+      "Read at 48 to 72 hours",
+      "Cut-off depends on risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Some presentations need urgent action rather than screening. Cough for more than three weeks, night sweats, weight loss and an upper lobe cavity suggest active **pulmonary tuberculosis**. Patients should be placed in airborne isolation, sputum should be sent for acid-fast bacilli smear and nucleic acid amplification testing, and public health should be notified. Older adults may present with confusion or weight loss rather than fever or cough.",
+   "say": "Some presentations need urgent action rather than screening. A cough for more than three weeks, night sweats, weight loss and an upper lobe cavity suggest active pulmonary tuberculosis. Patients should be placed in airborne isolation, sputum should be sent for acid-fast bacilli smear and nucleic acid amplification testing, and public health should be notified. Older adults may present with confusion or weight loss rather than fever or cough.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected active TB"
+     },
+     {
+      "id": "b",
+      "label": "Airborne isolation"
+     },
+     {
+      "id": "c",
+      "label": "Sputum smear and NAAT"
+     },
+     {
+      "id": "d",
+      "label": "Notify public health"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once active disease is excluded, treat latent infection to prevent reactivation. Isoniazid for nine months is a standard regimen, and rifampin for four months is an alternative where interactions allow. Rifamycins are potent enzyme inducers and reduce warfarin and direct oral anticoagulant levels, so check the INR or avoid them. Baseline liver tests and warning-symptom teaching reduce isoniazid **hepatotoxicity**, and pyridoxine is added for patients with diabetes, kidney failure or malnutrition.",
+   "say": "Once active disease is excluded, treat latent infection to prevent reactivation. Isoniazid for nine months is a standard regimen, and rifampin for four months is an alternative where interactions allow. Rifamycins are potent enzyme inducers and reduce warfarin and direct oral anticoagulant levels, so check the INR or avoid them. Baseline liver tests and warning-symptom teaching reduce isoniazid hepatotoxicity, and pyridoxine is added for patients with diabetes, kidney failure or malnutrition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Key point",
+     "Caution"
+    ],
+    "rows": [
+     [
+      "Isoniazid nine months",
+      "Standard option",
+      "Monitor liver; add pyridoxine when at risk"
+     ],
+     [
+      "Rifampin four months",
+      "Shorter course",
+      "Strong warfarin and DOAC interactions"
+     ],
+     [
+      "Rifapentine with isoniazid",
+      "Weekly dosing",
+      "Interaction checks needed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "mk-26cfdf095f08",
+  "mk-2a44c23590a5",
+  "mk-2d179c9349d0"
+ ],
+ "src": [],
+ "refs": [
+  "Canadian Tuberculosis Standards, 8th edition (Public Health Agency of Canada)",
+  "National Tuberculosis Elimination Programme (NTEP) guidelines, India",
+  "NICE NG33: Tuberculosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

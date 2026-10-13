@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "sid-biologics-asplenia",
+ "subject": "ss-infectious-diseases",
+ "title": "Infections with biologics, asplenia and immunosuppression",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Before a biologic begins, screen for **latent tuberculosis**. If it is present, start antitubercular therapy first. Per the cited timing, the biologic may follow about one month after the nine-month regimen begins, once the patient is clinically stable. Give any **live vaccines** at least four weeks before the first biologic dose, because these agents blunt responses to live vaccines. Inactivated vaccines can still be given during therapy.",
+   "say": "Before a biologic begins, screen for latent tuberculosis. If it is present, start antitubercular therapy first. Per the cited timing, the biologic may follow about one month after the nine-month regimen begins, once the patient is clinically stable. Give any live vaccines at least four weeks before the first biologic dose, because these agents blunt responses to live vaccines. Inactivated vaccines can still be given during therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Latent TB found"
+     },
+     {
+      "id": "b",
+      "label": "Start TB therapy"
+     },
+     {
+      "id": "c",
+      "label": "Wait about one month"
+     },
+     {
+      "id": "d",
+      "label": "Start biologic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Asplenia may be **surgical** after splenectomy, or **functional** from disease such as coeliac disease or sickle cell disease. Radiation to the spleen at 40 Gy or more also causes hyposplenism. A peripheral smear showing pitted red cells in more than 80 percent of cells, or Howell-Jolly bodies, points to a hypo- or asplenic state. Technetium-99m radiocolloid scintigraphy confirms it by showing absent splenic uptake.",
+   "say": "Asplenia may be surgical after splenectomy, or functional from disease such as coeliac disease or sickle cell disease. Radiation to the spleen at 40 Gy or more also causes hyposplenism. A peripheral smear showing pitted red cells in more than 80 percent of cells, or Howell-Jolly bodies, points to a hypo- or asplenic state. Technetium-99m radiocolloid scintigraphy confirms it by showing absent splenic uptake.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Splenectomy",
+      "Surgical removal"
+     ],
+     [
+      "Splenic irradiation",
+      "Dose of 40 Gy or more"
+     ],
+     [
+      "Coeliac, sickle cell disease",
+      "Gradual functional loss"
+     ],
+     [
+      "Ivemark syndrome",
+      "Congenital hypoplasia with heart defects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After splenectomy, the highest risk of serious infection lies in the **first two postoperative years**. Vaccinate against pneumococcus, meningococcus and Haemophilus influenzae type b, ideally at least two weeks before elective surgery, but do not delay urgent surgery for vaccines. Routine lifelong penicillin is not needed in adults. In children with asplenia, prophylactic **penicillin** is continued up to around age five.",
+   "say": "After splenectomy, the highest risk of serious infection lies in the first two postoperative years. Vaccinate against pneumococcus, meningococcus and Haemophilus influenzae type b, ideally at least two weeks before elective surgery, but do not delay urgent surgery for vaccines. Routine lifelong penicillin is not needed in adults. In children with asplenia, prophylactic penicillin is continued up to around age five.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vaccines before surgery",
+     "points": [
+      "Pneumococcal, meningococcal, Hib",
+      "Ideally two weeks before surgery",
+      "Never delay urgent surgery"
+     ]
+    },
+    "right": {
+     "title": "Penicillin prophylaxis",
+     "points": [
+      "Children up to about age five",
+      "Adults: not routine lifelong",
+      "Individualise by risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Overwhelming post-splenectomy infection, or OPSI, is a fulminant sepsis that can kill within hours. Any fever in an asplenic patient is a **medical emergency**. Draw blood cultures, then give empiric broad-spectrum antibiotics within **one hour** of presentation. Mortality remains high, around 40 to 50 percent, even with good care, so early treatment is the single most important lever.",
+   "say": "Overwhelming post-splenectomy infection is a fulminant sepsis that can kill within hours. Any fever in an asplenic patient is a medical emergency. Draw blood cultures, then give empiric broad-spectrum antibiotics within one hour of presentation. Mortality remains high, around 40 to 50 percent, even with good care, so early treatment is the single most important lever.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever in asplenia"
+     },
+     {
+      "id": "b",
+      "label": "Blood cultures"
+     },
+     {
+      "id": "c",
+      "label": "Antibiotics within 1 hour"
+     },
+     {
+      "id": "d",
+      "label": "ICU support"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biologics and other immunosuppressants also need perioperative planning. For **elective surgery**, hold the biologic about two half-lives before the operation and restart after wound healing, usually one to two weeks later. Diabetes, cirrhosis, chronic kidney disease and old age each add to infection risk and should prompt closer monitoring. Think of immunosuppression as a combined risk, not a single drug effect.",
+   "say": "Biologics and other immunosuppressants also need perioperative planning. For elective surgery, hold the biologic about two half-lives before the operation and restart after wound healing, usually one to two weeks later. Diabetes, cirrhosis, chronic kidney disease and old age each add to infection risk and should prompt closer monitoring. Think of immunosuppression as a combined risk, not a single drug effect.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_848e29d8c6fd",
+  "q_e5a25c6a6de8",
+  "q_e975ac602eb8"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 30
+ }
+}

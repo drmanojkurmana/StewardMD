@@ -1,0 +1,110 @@
+{
+ "v": 1,
+ "module": "minf-sepsis",
+ "subject": "mrcp-infectious-diseases",
+ "title": "Suspected sepsis in adults: recognition and management",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Sepsis is life-threatening organ dysfunction caused by a dysregulated host response to infection. Recognition relies on a **structured set of observations** rather than any single value. NICE recommends that clinicians stratify risk using observations, history and clinical judgement together. Normal or low temperature does not exclude sepsis, and heart rate may not rise in older people or those taking beta-blockers.",
+   "say": "Sepsis is life-threatening organ dysfunction caused by a dysregulated host response to infection. Recognition relies on a structured set of observations rather than any single value. NICE recommends that clinicians stratify risk using observations, history and clinical judgement together. A normal or low temperature does not exclude sepsis, and heart rate may not rise in older people or those taking beta-blockers.",
+   "vis": null
+  },
+  {
+   "tx": "Use **NEWS2** as the structured early warning score for adults aged 16 or over with suspected sepsis in acute hospital, acute mental health and ambulance settings. Record respiratory rate, oxygen saturation, temperature, blood pressure, heart rate and consciousness. Community and custodial settings should consider an early warning score. Women who are pregnant or recently pregnant follow a different obstetric tool.",
+   "say": "Use NEWS2 as the structured early warning score for adults aged 16 or over with suspected sepsis in acute hospital, acute mental health and ambulance settings. Record respiratory rate, oxygen saturation, temperature, blood pressure, heart rate and consciousness. Community and custodial settings should consider an early warning score. Women who are pregnant or recently pregnant follow a different obstetric tool.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "Acute hospital",
+      "NEWS2"
+     ],
+     [
+      "Acute mental health",
+      "NEWS2"
+     ],
+     [
+      "Ambulance",
+      "NEWS2"
+     ],
+     [
+      "Community or custodial",
+      "Consider an early warning score"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Avoid relying on **temperature** to rule sepsis in or out. Frail or elderly adults, people receiving **chemotherapy**, those who are critically unwell, and people with a spinal cord injury may not develop a fever, and some may even run a low temperature. **Beta-blockers** can mask a rapid heart rate. A **pulse oximeter** that fails to obtain a reading may point to poor peripheral perfusion from shock, which warrants prompt review.",
+   "say": "Avoid relying on temperature when deciding whether sepsis is present or absent. Frail and older adults, people undergoing chemotherapy, those who are critically unwell, and people with a spinal cord injury often fail to develop a fever, and some may even become cold. Beta-blockers can hide a racing pulse. If a pulse oximeter cannot obtain a reading, poor peripheral circulation from shock could be the cause, so the patient needs urgent review.",
+   "vis": null
+  },
+  {
+   "tx": "Ask the person, family or carers how often they have urinated in the past 18 hours, and treat **reduced urine output** and any change from the person's usual mental state as significant. Carers are especially valuable for frail, cognitively impaired or learning disabled people who cannot describe symptoms. Behaviour change such as irritability may be the only sign of sepsis.",
+   "say": "Ask the person, family or carers how often they have urinated in the past 18 hours, and treat reduced urine output and any change from the person's usual mental state as significant. Carers are especially valuable for frail, cognitively impaired or learning disabled people who cannot describe symptoms. Behaviour change such as irritability may be the only sign of sepsis.",
+   "vis": null
+  },
+  {
+   "tx": "Anyone who is unwell after **systemic anticancer treatment** within the last 30 days, or who takes immunosuppressants for non-cancer reasons, should be suspected of neutropenic sepsis. Refer them immediately to secondary or tertiary care without waiting for the neutrophil count. Management then follows the separate NICE neutropenic sepsis guidance.",
+   "say": "Anyone who is unwell after systemic anticancer treatment within the last 30 days, or who takes immunosuppressants for non-cancer reasons, should be suspected of neutropenic sepsis. Refer them immediately to secondary or tertiary care without waiting for the neutrophil count. Management then follows the separate NICE neutropenic sepsis guidance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Unwell after anticancer treatment or immunosuppressants"
+     },
+     {
+      "id": "b",
+      "label": "Suspect neutropenic sepsis"
+     },
+     {
+      "id": "c",
+      "label": "Refer immediately, do not await counts"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interpret every observation against the person's **baseline**. Compare heart rate and blood pressure with usual values, and remember that a normal-looking value does not exclude sepsis in a beta-blocked or frail patient. Combine the NEWS2 score, mental state, urine output and history into one clinical picture, and escalate for urgent face-to-face assessment when sepsis is suspected.",
+   "say": "Interpret every observation against the person's baseline. Compare heart rate and blood pressure with usual values, and remember that a normal-looking value does not exclude sepsis in a beta-blocked or frail patient. Combine the NEWS2 score, mental state, urine output and history into one clinical picture, and escalate for urgent face-to-face assessment when sepsis is suspected.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG51: Sepsis: recognition, diagnosis and early management",
+  "NICE guideline NG228: Suspected neutropenic sepsis: recognition, diagnosis and early management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

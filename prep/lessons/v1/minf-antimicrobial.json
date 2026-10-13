@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "minf-antimicrobial",
+ "subject": "mrcp-infectious-diseases",
+ "title": "Antimicrobial stewardship and prescribing",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Antimicrobial stewardship** means using antibiotics in the way that gives the best outcome for the patient while limiting harm and **antimicrobial resistance**. Its core aims are the right drug, right dose, right route and the shortest effective course. Stewardship applies in primary care, hospitals and the community, not only on wards. Teams monitor prescribing and feed information back to individual prescribers so variation can be explained and addressed.",
+   "say": "Antimicrobial stewardship means using antibiotics in the way that gives the best outcome for the patient while limiting harm and antimicrobial resistance. Its core aims are the right drug, right dose, right route and the shortest effective course. Stewardship applies in primary care, hospitals and the community, not only on wards. Teams monitor prescribing and feed information back to individual prescribers so variation can be explained and addressed.",
+   "vis": null
+  },
+  {
+   "tx": "Many common infections, such as sore throat, mild cough and coryza, are **self-limiting** and mostly viral. An immediate antibiotic prescription adds risk of adverse effects and resistance without clear benefit. NICE advises against immediate prescribing for likely self-limiting conditions. Instead, offer self-care with over-the-counter medicines, safety-netting advice, or a **back-up (delayed) prescription** if concerns persist or symptoms worsen.",
+   "say": "Many common infections, such as sore throat, mild cough and runny nose, are self-limiting and mostly viral. An immediate antibiotic prescription adds risk of adverse effects and resistance without clear benefit. NICE advises against immediate prescribing for likely self-limiting conditions. Instead, offer self-care with over-the-counter medicines, safety-netting advice, or a back-up delayed prescription if concerns persist or symptoms worsen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immediate prescribing",
+     "points": [
+      "Adds adverse effect risk",
+      "Drives resistance",
+      "Little benefit for self-limiting illness"
+     ]
+    },
+    "right": {
+     "title": "Alternatives offered",
+     "points": [
+      "Self-care advice",
+      "Safety-netting",
+      "Back-up delayed prescription"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In hospital, take **microbiological samples before the first antimicrobial dose** for suspected infection, where this does not delay urgent treatment. Then review the prescription once results are available, so the drug can be narrowed, stopped or continued. Clinical urgency still matters: a septic or deteriorating patient must receive antibiotics without delay. Sampling is also advised for recurrent or persistent infection in primary care.",
+   "say": "In hospital, take microbiological samples before the first antimicrobial dose for suspected infection, where this does not delay urgent treatment. Then review the prescription once results are available, so the drug can be narrowed, stopped or continued. Clinical urgency still matters: a septic or deteriorating patient must receive antibiotics without delay. Sampling is also advised for recurrent or persistent infection in primary care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected infection"
+     },
+     {
+      "id": "b",
+      "label": "Samples taken"
+     },
+     {
+      "id": "c",
+      "label": "Antibiotic started"
+     },
+     {
+      "id": "d",
+      "label": "Review on results"
+     },
+     {
+      "id": "e",
+      "label": "Narrow, stop or continue"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antimicrobial stewardship teams** should have defined core members. NICE names an antimicrobial pharmacist and a medical microbiologist as core members. Other professionals, such as infection prevention staff or clinicians from relevant specialties, are co-opted according to the care setting and the antimicrobial issue. Teams support prescribing review, education, formulary advice and feedback to prescribers across all settings.",
+   "say": "Antimicrobial stewardship teams should have defined core members. NICE names an antimicrobial pharmacist and a medical microbiologist as core members. Other professionals are co-opted according to the care setting and the antimicrobial issue. Teams support prescribing review, education, formulary advice and feedback to prescribers across all settings.",
+   "vis": null
+  },
+  {
+   "tx": "**Transfer of care** is a common point where antimicrobial plans are lost. When a patient moves between settings, record current or recent antimicrobial use, the date the course should be reviewed, and who the patient or clinician should contact with concerns. Clear documentation of the diagnosis, reason for prescribing, agreed plan and planned duration also supports later review and the shortest effective course.",
+   "say": "Transfer of care is a common point where antimicrobial plans are lost. When a patient moves between settings, record current or recent antimicrobial use, the date the course should be reviewed, and who the patient or clinician should contact with concerns. Clear documentation of the diagnosis, reason for prescribing, agreed plan and planned duration also supports later review and the shortest effective course.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Information",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Current antimicrobial use",
+      "Avoids omission or duplication"
+     ],
+     [
+      "Review date",
+      "Prompts stopping or narrowing"
+     ],
+     [
+      "Contact for concerns",
+      "Speeds escalation"
+     ],
+     [
+      "Diagnosis and duration",
+      "Supports later review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stewardship also covers **pack sizes and supply**. Supply antibiotics in pack sizes matching local and national guideline course lengths to reduce surplus stock and waste. Prescribers should choose the narrowest effective agent, use the correct dose and route, and switch oral once the patient is improving. Always document the reasoning behind a decision, including when no antibiotic is prescribed.",
+   "say": "Stewardship also covers pack sizes and supply. Supply antibiotics in pack sizes matching local and national guideline course lengths to reduce surplus stock and waste. Prescribers should choose the narrowest effective agent, use the correct dose and route, and switch oral once the patient is improving. Always document the reasoning behind a decision, including when no antibiotic is prescribed.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG15: Antimicrobial stewardship: changing risk-related behaviours in the context of an infection and antibiotic prescribing"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 32
+ }
+}

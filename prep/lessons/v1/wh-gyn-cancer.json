@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "wh-gyn-cancer",
+ "subject": "womens-health",
+ "title": "Gynaecological cancers: red flags, staging pathways and genetic link",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Postmenopausal **vaginal bleeding** is the key red flag for endometrial cancer and must always be investigated. Transvaginal ultrasound showing a thickened endometrium needs **endometrial tissue sampling** to separate hyperplasia from carcinoma. Obesity and type 2 diabetes raise oestrogen exposure and increase risk. Imaging alone cannot exclude malignancy, so histology is the decisive test. Outpatient sampling is usually the right first step when the patient is stable.",
+   "say": "Postmenopausal vaginal bleeding is the key red flag for endometrial cancer and must always be investigated. When transvaginal ultrasound shows a thickened endometrium, endometrial tissue sampling is needed to separate hyperplasia from carcinoma. Obesity and type 2 diabetes raise oestrogen exposure and increase the risk. Imaging alone cannot exclude malignancy, so histology is the decisive test. Outpatient sampling is usually the right first step when the patient is stable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Symptom or finding",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Postmenopausal bleeding",
+      "Urgent investigation"
+     ],
+     [
+      "Thick endometrium on scan",
+      "Tissue sampling"
+     ],
+     [
+      "Obesity or diabetes",
+      "Higher suspicion"
+     ],
+     [
+      "Stable patient",
+      "Outpatient sampling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suspected **ovarian cancer** typically presents with bloating, early satiety, a fixed pelvic mass and ascites. Raised **CA-125** supports the diagnosis but is not specific. Ovarian carcinoma spreads across the peritoneal cavity, producing omental nodules and malignant ascites. Any woman with these features needs prompt referral to a gynaecological oncology service for staging and surgery. Empirical antibiotics or repeat tests delay care.",
+   "say": "Suspected ovarian cancer typically presents with bloating, early satiety, a fixed pelvic mass and ascites. A raised CA-125 supports the diagnosis but is not specific. Ovarian carcinoma spreads across the peritoneal cavity, producing omental nodules and malignant ascites. Any woman with these features needs prompt referral to a gynaecological oncology service for staging and surgery. Empirical antibiotics or repeat tests only delay care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bloating and early satiety"
+     },
+     {
+      "id": "b",
+      "label": "Fixed pelvic mass and ascites"
+     },
+     {
+      "id": "c",
+      "label": "Raised CA-125 and imaging"
+     },
+     {
+      "id": "d",
+      "label": "Gynae oncology referral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endometrioid endometrial cancer with loss of **MLH1 and PMS2** on immunohistochemistry indicates **mismatch repair deficiency**. An early-onset bowel cancer in a first-degree relative raises suspicion of **Lynch syndrome**, an inherited germline condition. Affected individuals face lifelong risks of endometrial, colorectal and other cancers. Refer for genetic counselling and germline testing, and offer cascade testing and surveillance to relatives.",
+   "say": "Endometrioid endometrial cancer with loss of MLH1 and PMS2 on immunohistochemistry indicates mismatch repair deficiency. An early-onset bowel cancer in a first-degree relative raises suspicion of Lynch syndrome, an inherited germline condition. Affected individuals face lifelong risks of endometrial, colorectal and other cancers. Refer for genetic counselling and germline testing, and offer cascade testing and surveillance to relatives.",
+   "vis": null
+  },
+  {
+   "tx": "Bilateral ureteric obstruction from a pelvic tumour causes hydronephrosis, flank pain, reduced urine output and rising creatinine. This is a **urological emergency** because prolonged pressure destroys nephrons. Urgent decompression with **ureteric stents** or **percutaneous nephrostomy** protects renal function. Definitive cancer treatment, such as radical surgery or chemoradiation, follows once the kidneys are safe. Nephrectomy and delayed surgery are inappropriate here.",
+   "say": "Bilateral ureteric obstruction from a pelvic tumour causes hydronephrosis, flank pain, reduced urine output and rising creatinine. This is a urological emergency because prolonged pressure destroys nephrons. Urgent decompression with ureteric stents or percutaneous nephrostomy protects renal function. Definitive cancer treatment, such as radical surgery or chemoradiation, follows once the kidneys are safe. Nephrectomy and delayed surgery are inappropriate here.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urgent drainage",
+     "points": [
+      "Stents or nephrostomy",
+      "Protects renal function",
+      "Done before cancer therapy"
+     ]
+    },
+    "right": {
+     "title": "Inappropriate options",
+     "points": [
+      "Nephrectomy",
+      "Oral antibiotics alone",
+      "Elective surgery first"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG12: Suspected cancer: recognition and referral",
+  "NICE Guidance on Ovarian, Fallopian Tube and Primary Peritoneal Cancer"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

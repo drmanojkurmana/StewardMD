@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "mendo-gonadal",
+ "subject": "mrcp-endocrinology",
+ "title": "Gonadal and reproductive endocrinology: hypogonadism, PCOS mimics and sex chromosome disorders",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Gonadal failure splits into **primary hypogonadism**, where the gonad fails and gonadotrophins rise, and **secondary (hypogonadotrophic) hypogonadism**, where the hypothalamus or pituitary fails and gonadotrophins are low or inappropriately normal. The key first step is measuring LH and FSH alongside testosterone or oestradiol. This single split directs almost every workup in the exam.",
+   "say": "Gonadal failure splits into two main types. In primary hypogonadism the gonad itself fails, so LH and FSH rise. In secondary or hypogonadotrophic hypogonadism the hypothalamus or pituitary fails, so LH and FSH are low or inappropriately normal. Measuring LH and FSH alongside testosterone or oestradiol is the first step, and this split directs almost every workup in the exam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Primary",
+     "Secondary"
+    ],
+    "rows": [
+     [
+      "Gonadotrophins",
+      "Raised",
+      "Low or inappropriately normal"
+     ],
+     [
+      "Typical cause",
+      "Klinefelter, mumps orchitis",
+      "Kallmann, pituitary tumour"
+     ],
+     [
+      "Gonad size",
+      "Often small and firm",
+      "Usually normal or small"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Klinefelter syndrome** (47,XXY) is the commonest sex chromosome disorder causing male hypogonadism. Typical features are tall stature, small firm testes, gynaecomastia and azoospermia, with low testosterone and raised FSH and LH. Diagnosis is by **karyotype**, which should be sent in any man with azoospermia and small testes. Testosterone replacement and fertility counselling, including sperm retrieval, follow.",
+   "say": "Klinefelter syndrome, with a 47,XXY karyotype, is the commonest sex chromosome disorder causing male hypogonadism. Typical features are tall stature, small firm testes, gynaecomastia and azoospermia. Testosterone is low while FSH and LH are raised. Diagnosis is made by karyotype, which should be sent in any man with azoospermia and small testes. Testosterone replacement and fertility counselling, including sperm retrieval, then follow.",
+   "vis": null
+  },
+  {
+   "tx": "**Kallmann syndrome** is congenital hypogonadotrophic hypogonadism caused by failure of GnRH neurones to migrate from the olfactory placode. It presents with absent puberty and **anosmia** or hyposmia, with low LH, FSH and testosterone. Pituitary MRI is normal. Treatment with gonadotrophins or pulsatile GnRH can induce puberty and fertility. Contrast this with constitutional delay, where the picture is normal once puberty begins.",
+   "say": "Kallmann syndrome is a congenital form of hypogonadotrophic hypogonadism. It results from failure of GnRH neurones to migrate from the olfactory placode during development. It presents with absent puberty and anosmia or hyposmia, with low LH, FSH and testosterone. Pituitary MRI is normal. Treatment with gonadotrophins or pulsatile GnRH can induce puberty and fertility.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Olfactory placode"
+     },
+     {
+      "id": "b",
+      "label": "GnRH neurones fail to migrate"
+     },
+     {
+      "id": "c",
+      "label": "Low LH and FSH"
+     },
+     {
+      "id": "d",
+      "label": "Absent puberty and anosmia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **PCOS**, the diagnosis is one of exclusion. Rotterdam criteria need two of oligo or anovulation, hyperandrogenism and polycystic ovarian morphology. Mimics must be excluded first, especially **non-classical congenital adrenal hyperplasia** from 21-hydroxylase deficiency. The best screen is an early follicular phase 17-hydroxyprogesterone, since midcycle values are unreliable. Thyroid disease and hyperprolactinaemia are also excluded.",
+   "say": "Polycystic ovary syndrome is a diagnosis of exclusion. Rotterdam criteria need two of oligo or anovulation, hyperandrogenism and polycystic ovarian morphology. Mimics must be excluded first, especially non-classical congenital adrenal hyperplasia from 21-hydroxylase deficiency. The best screen is an early follicular phase 17-hydroxyprogesterone, because midcycle values are unreliable. Thyroid disease and hyperprolactinaemia are also excluded.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rotterdam features",
+     "points": [
+      "Oligo or anovulation",
+      "Clinical or biochemical hyperandrogenism",
+      "Polycystic ovarian morphology"
+     ]
+    },
+    "right": {
+     "title": "Mimics to exclude",
+     "points": [
+      "Non-classical CAH",
+      "Thyroid disease",
+      "Hyperprolactinaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Complete androgen insensitivity syndrome** is an X-linked androgen receptor defect in a 46,XY individual. Testes make testosterone and anti-Müllerian hormone, so Müllerian structures regress, but the receptor cannot respond, so the external genitalia are female. Patients present with primary amenorrhoea and a blind vagina, with raised LH and male-range testosterone. Gonadectomy after puberty is advised because of germ cell tumour risk, followed by oestrogen replacement.",
+   "say": "Complete androgen insensitivity syndrome is an X-linked androgen receptor defect in a 46,XY individual. The testes make testosterone and anti-Müllerian hormone, so Müllerian structures regress. However, the receptor cannot respond, so external genitalia are female. Patients present with primary amenorrhoea and a blind vagina, with raised LH and male-range testosterone. Gonadectomy after puberty is advised because of germ cell tumour risk, followed by oestrogen replacement.",
+   "vis": null
+  },
+  {
+   "tx": "Hypopituitarism from **Sheehan syndrome** follows severe postpartum haemorrhage with hypotension, causing pituitary necrosis. Failure of lactation and amenorrhoea are typical, and a low sodium may reflect cortisol deficiency. Assess **early morning cortisol** with ACTH, thyroid and gonadal function. Also consider a prolactinoma or pituitary macroadenoma, where headache and visual field loss point to mass effect, and confirm with pituitary MRI.",
+   "say": "Hypopituitarism after Sheehan syndrome follows severe postpartum haemorrhage with hypotension, which causes pituitary necrosis. Failure of lactation and amenorrhoea are typical, and a low sodium may reflect cortisol deficiency. Assess early morning cortisol with ACTH, along with thyroid and gonadal function. A pituitary macroadenoma or prolactinoma is also considered, where headache and visual loss suggest mass effect, and pituitary MRI confirms the diagnosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 19
+ }
+}

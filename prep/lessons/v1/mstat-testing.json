@@ -1,0 +1,116 @@
+{
+ "v": 1,
+ "module": "mstat-testing",
+ "subject": "mrcp-statistics",
+ "title": "Hypothesis testing, p values and confidence intervals",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **p value** is the probability of observing data at least as extreme as those obtained, assuming the **null hypothesis** is true. It measures how surprising the data would be if there were truly no effect. It is not the probability that the null hypothesis is true, and it says nothing about the size or importance of an effect. The significance threshold, alpha, is set in advance, usually at 0.05, and is the maximum accepted risk of a **type I error**, which is a false positive.",
+   "say": "A p value is the probability of observing data at least as extreme as those obtained, assuming the null hypothesis is true. It measures how surprising the data would be if there were truly no effect. It is not the probability that the null hypothesis is true, and it says nothing about the size or importance of an effect. The significance threshold, alpha, is set in advance, usually at 0.05, and is the maximum accepted risk of a type I error, which is a false positive.",
+   "vis": null
+  },
+  {
+   "tx": "A **type II error** occurs when a real effect is missed, and its probability is beta. **Power** is one minus beta, usually targeted at 80 percent or more. Power depends on the significance level, the true effect size, outcome variability and sample size. Increasing the number of participants is the main practical lever. Lowering alpha to 0.01 would reduce power, not increase it.",
+   "say": "A type II error occurs when a real effect is missed, and its probability is beta. Power is one minus beta, usually targeted at 80 percent or more. Power depends on the significance level, the true effect size, outcome variability and sample size. Increasing the number of participants is the main practical lever. Lowering alpha to 0.01 would reduce power, not increase it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect on power"
+    ],
+    "rows": [
+     [
+      "Larger sample size",
+      "Increases"
+     ],
+     [
+      "Larger true effect",
+      "Increases"
+     ],
+     [
+      "Greater outcome variability",
+      "Decreases"
+     ],
+     [
+      "Stricter alpha (0.01)",
+      "Decreases"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **95% confidence interval** gives the range of effect sizes compatible with the data. For a ratio measure such as a risk ratio or odds ratio, the null value is 1. For a difference, it is 0. If the interval includes the null value, the result is not significant at the 5 percent level for a two-sided test. Wide intervals signal imprecision, usually from small samples or few events. An interval is not a 95 percent probability statement about the true value.",
+   "say": "A 95 percent confidence interval gives the range of effect sizes compatible with the data. For a ratio measure such as a risk ratio or odds ratio, the null value is 1. For a difference, it is 0. If the interval includes the null value, the result is not significant at the 5 percent level for a two-sided test. Wide intervals signal imprecision, usually from small samples or few events. An interval is not a 95 percent probability statement about the true value.",
+   "vis": null
+  },
+  {
+   "tx": "A **non-significant result** does not prove that no effect exists. It means the data are compatible with no effect, but also possibly with a clinically important benefit or harm. Check whether the interval spans clinically important values. Small trials are often underpowered, so a p value of 0.08 with a wide interval is inconclusive rather than negative. Report the point estimate and interval, not just the p value.",
+   "say": "A non-significant result does not prove that no effect exists. It means the data are compatible with no effect, but also possibly with a clinically important benefit or harm. Check whether the interval spans clinically important values. Small trials are often underpowered, so a p value of 0.08 with a wide interval is inconclusive rather than negative. Report the point estimate and interval, not just the p value.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Significant (p below 0.05)",
+     "points": [
+      "Interval excludes null value",
+      "Data unlikely if no effect",
+      "Still check effect size"
+     ]
+    },
+    "right": {
+     "title": "Non-significant (p above 0.05)",
+     "points": [
+      "Interval includes null value",
+      "Not proof of no effect",
+      "Check power and precision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Testing many outcomes inflates the **familywise error rate**, the probability of at least one false positive across all tests. With 20 independent tests at alpha 0.05, the chance of at least one spurious result is roughly 1 minus 0.95 to the power of 20, about 64 percent. The **Bonferroni correction** divides alpha by the number of tests, so 20 tests need a threshold of 0.0025. Treat subgroup and secondary findings as hypothesis-generating until they are confirmed.",
+   "say": "Testing many outcomes inflates the familywise error rate, the probability of at least one false positive across all tests. With 20 independent tests at alpha 0.05, the chance of at least one spurious result is roughly 64 percent. The Bonferroni correction divides alpha by the number of tests, so 20 tests need a threshold of 0.0025. Treat subgroup and secondary findings as hypothesis-generating until they are confirmed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Number of tests",
+     "Familywise error rate",
+     "Bonferroni alpha"
+    ],
+    "rows": [
+     [
+      "1",
+      "5%",
+      "0.05"
+     ],
+     [
+      "20",
+      "64%",
+      "0.0025"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Altman DG, Bland JM. Statistics Notes: Absence of evidence is not evidence of absence. BMJ 1995",
+  "Altman DG et al. Statistics with Confidence (2nd edition). BMJ Books"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

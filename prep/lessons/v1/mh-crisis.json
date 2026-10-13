@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "mh-crisis",
+ "subject": "mental-health",
+ "title": "Crisis assessment in mental health",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **crisis assessment** aims to find the immediate risk of harm to self or others and decide the safest level of care. It is done before any long-term diagnosis. The assessor asks about **suicidal intent**, plan, access to means, recent self-harm, intoxication and protective factors. Stable vital signs do not rule out high risk, because intent and plan matter more than observations.",
+   "say": "A crisis assessment aims to find the immediate risk of harm to self or others and decide the safest level of care. It is done before any long-term diagnosis. The assessor asks about suicidal intent, plan, access to means, recent self-harm, intoxication and protective factors. Stable vital signs do not rule out high risk, because intent and plan matter more than observations.",
+   "vis": null
+  },
+  {
+   "tx": "Risk is formulated by combining **intent**, **plan** and **access to means**, then weighing protective factors. Acute intoxication, hopelessness and recent self-harm each raise immediate risk. A specific plan with a lethal method and a stated intent to act is high risk and needs urgent psychiatric review and continuous observation, even when the patient appears calm.",
+   "say": "Risk is formulated by combining intent, plan and access to means, then weighing protective factors. Acute intoxication, hopelessness and recent self-harm each raise immediate risk. A specific plan with a lethal method and a stated intent to act is high risk and needs urgent psychiatric review and continuous observation, even when the patient appears calm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect on immediate risk"
+    ],
+    "rows": [
+     [
+      "Specific plan with lethal method",
+      "Raises risk sharply"
+     ],
+     [
+      "Access to firearms",
+      "Raises lethality of attempt"
+     ],
+     [
+      "Intoxication",
+      "Lowers impulse control"
+     ],
+     [
+      "Recent self-harm",
+      "Raises risk of repetition"
+     ],
+     [
+      "Supportive family or future goals",
+      "Lowers risk, but does not exclude it"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Decision-specific capacity** is assessed separately for each decision, such as refusing admission. The assessor checks **understanding**, **appreciation**, **reasoning** and the ability to express a choice. Limited insight alone does not mean lack of capacity. Where capacity is impaired and legal criteria are met, admission or treatment may follow under mental health law, with the findings documented.",
+   "say": "Decision-specific capacity is assessed separately for each decision, such as refusing admission. The assessor checks understanding, appreciation, reasoning and the ability to express a choice. Limited insight alone does not mean lack of capacity. Where capacity is impaired and legal criteria are met, admission or treatment may follow under mental health law, with the findings documented.",
+   "vis": null
+  },
+  {
+   "tx": "In young people, a **confidential interview** is essential when self-harm or suicidal thoughts are present. Adolescents may under-report intent when a parent is present. The clinician should interview the young person alone, then involve family with consent as appropriate. Safety planning, supervision and retrieval decisions follow from this private risk formulation.",
+   "say": "In young people, a confidential interview is essential when self-harm or suicidal thoughts are present. Adolescents may under-report intent when a parent is present. The clinician should interview the young person alone, then involve family with consent as appropriate. Safety planning, supervision and retrieval decisions follow from this private risk formulation.",
+   "vis": null
+  },
+  {
+   "tx": "**Delirium** is an acute, fluctuating disturbance of attention and consciousness, often with agitation and hallucinations. In older adults, look for medical causes first, such as **hyponatraemia**, dehydration, renal impairment, anaemia and drug effects. Diuretics and poor oral intake are common triggers. A psychiatric label should not be applied before medical causes are excluded.",
+   "say": "Delirium is an acute, fluctuating disturbance of attention and consciousness, often with agitation and hallucinations. In older adults, look for medical causes first, such as hyponatraemia, dehydration, renal impairment, anaemia and drug effects. Diuretics and poor oral intake are common triggers. A psychiatric label should not be applied before medical causes are excluded.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute agitation or confusion"
+     },
+     {
+      "id": "b",
+      "label": "Check electrolytes, renal function, drugs"
+     },
+     {
+      "id": "c",
+      "label": "Treat medical cause"
+     },
+     {
+      "id": "d",
+      "label": "Reassess mental state"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before giving a further **intramuscular antipsychotic**, check the ECG for **QTc prolongation** and measure potassium and magnesium. Prolonged QTc raises the risk of **torsades de pointes**. Correct low electrolytes and review other QT-prolonging drugs first. Lithium toxicity is a separate emergency: a raised lithium level with neurological signs needs urgent poisons advice and toxicology review.",
+   "say": "Before giving a further intramuscular antipsychotic, check the ECG for QTc prolongation and measure potassium and magnesium. Prolonged QTc raises the risk of torsades de pointes. Correct low electrolytes and review other QT-prolonging drugs first. Lithium toxicity is a separate emergency: a raised lithium level with neurological signs needs urgent poisons advice and toxicology review.",
+   "vis": null
+  },
+  {
+   "tx": "For **firearm access** in a patient with suicidal thoughts, the priority is to remove or secure the means, which lowers the chance of an impulsive act being carried out. Document the risk, safety plan and follow-up. Reassurance or discharge without means restriction is inadequate. Urgent review is needed when intent is active, while routine review suits low, stable risk.",
+   "say": "For firearm access in a patient with suicidal thoughts, the priority is to remove or secure the means, which lowers the chance of an impulsive act being carried out. Document the risk, safety plan and follow-up. Reassurance or discharge without means restriction is inadequate. Urgent review is needed when intent is active, while routine review suits low, stable risk.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG225: Self-harm: assessment, management and preventing recurrence"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

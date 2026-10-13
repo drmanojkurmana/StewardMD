@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "module": "mneur-neuropathy",
+ "subject": "mrcp-neurology",
+ "title": "Neuropathies, myopathies and neuromuscular junction disorders: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Guillain-Barre syndrome** is an acute immune-mediated polyradiculoneuropathy, often following Campylobacter jejuni infection. Weakness ascends symmetrically with reduced reflexes. CSF protein rises in the first weeks while the white cell count stays normal, called **albuminocytological dissociation**. Treat with IVIG or plasma exchange, and monitor vital capacity closely.",
+   "say": "Guillain-Barre syndrome is an acute immune-mediated polyradiculoneuropathy, often following Campylobacter jejuni infection. Weakness ascends symmetrically with reduced reflexes. CSF protein rises in the first weeks while the white cell count stays normal, called albuminocytological dissociation. Treat with intravenous immunoglobulin or plasma exchange, and monitor vital capacity closely.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Infection"
+     },
+     {
+      "id": "b",
+      "label": "Ascending weakness"
+     },
+     {
+      "id": "c",
+      "label": "CSF protein rises"
+     },
+     {
+      "id": "d",
+      "label": "IVIG or plasma exchange"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Multifocal motor neuropathy** is a predominantly motor, asymmetric neuropathy with conduction block at non-entrapment sites, often with anti-GM1 IgM antibodies. Sensation is spared. Corticosteroids can worsen weakness, so long-term **intravenous immunoglobulin** is the mainstay. **Anti-MAG neuropathy** is a distinct chronic demyelinating disorder with IgM paraprotein and distal sensory ataxia.",
+   "say": "Multifocal motor neuropathy is a predominantly motor, asymmetric neuropathy with conduction block at non-entrapment sites, often with anti-GM1 IgM antibodies. Sensation is spared. Corticosteroids can worsen weakness, so long-term intravenous immunoglobulin is the mainstay. Anti-MAG neuropathy is a distinct chronic demyelinating disorder with IgM paraprotein and distal sensory ataxia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Multifocal motor neuropathy",
+     "points": [
+      "Motor only, asymmetric",
+      "Conduction block away from entrapment",
+      "Anti-GM1 IgM often positive",
+      "Long-term IVIG"
+     ]
+    },
+    "right": {
+     "title": "Anti-MAG neuropathy",
+     "points": [
+      "Slow distal sensory ataxia",
+      "IgM paraprotein",
+      "Demyelinating conduction slowing",
+      "Response to rituximab often limited"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Myasthenia gravis** is a postsynaptic disorder with antibodies against acetylcholine receptors, causing fatigable weakness that often begins with ocular symptoms. Test for AChR antibodies and image the chest, since **thymoma** is associated. Thymectomy is indicated for thymoma and often considered in generalised disease. Pyridostigmine gives symptomatic relief.",
+   "say": "Myasthenia gravis is a postsynaptic disorder with antibodies against acetylcholine receptors, causing fatigable weakness that often begins with ocular symptoms. Test for acetylcholine receptor antibodies and image the chest, since thymoma is associated. Thymectomy is indicated for thymoma and often considered in generalised disease. Pyridostigmine gives symptomatic relief.",
+   "vis": null
+  },
+  {
+   "tx": "**Lambert-Eaton myasthenic syndrome** is a presynaptic disorder with antibodies against P/Q-type calcium channels. Proximal weakness and areflexia improve with brief effort, and high-frequency stimulation shows an increment. Dry mouth and constipation are common. Most adult cases are paraneoplastic, usually with small cell lung cancer, so malignancy screening is essential. Amifampridine treats persistent symptoms.",
+   "say": "Lambert-Eaton myasthenic syndrome is a presynaptic disorder with antibodies against P/Q-type calcium channels. Proximal weakness and areflexia improve with brief effort, and high-frequency stimulation shows an increment. Dry mouth and constipation are common. Most adult cases are paraneoplastic, usually with small cell lung cancer, so malignancy screening is essential. Amifampridine treats persistent symptoms.",
+   "vis": null
+  },
+  {
+   "tx": "**Statin myopathy** ranges from myalgia to rhabdomyolysis. Stop the statin and check CK, renal function and thyroid function, giving IV fluids if myoglobinuria is present. Persistent weakness or raised CK after withdrawal suggests **anti-HMGCR antibody** myopathy, which needs specialist review and immunosuppression. **Inclusion body myositis** is an older-age myopathy with rimmed vacuoles that responds poorly to immunosuppression, so rehabilitation is central.",
+   "say": "Statin myopathy ranges from myalgia to rhabdomyolysis. Stop the statin and check creatine kinase, renal function and thyroid function, giving intravenous fluids if myoglobinuria is present. Persistent weakness or raised creatine kinase after withdrawal suggests anti-HMGCR antibody myopathy, which needs specialist review and immunosuppression. Inclusion body myositis is an older-age myopathy with rimmed vacuoles that responds poorly to immunosuppression, so rehabilitation is central.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "mstat-ebm",
+ "subject": "mrcp-statistics",
+ "title": "Systematic reviews, meta-analysis and critical appraisal",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **systematic review** collects all studies answering a focused question using a pre-specified, reproducible search and appraisal. A **meta-analysis** is the statistical pooling of those studies into a single estimate. Pooling is only sensible when studies are similar enough in population, intervention and outcome. Reporting should follow the PRISMA guideline, which includes a flow diagram of records identified, screened, excluded and included.",
+   "say": "A systematic review collects all studies that answer a focused question, using a pre-specified and reproducible search and appraisal. A meta-analysis is the statistical pooling of those studies into a single estimate. Pooling is only sensible when studies are similar enough in population, intervention and outcome. Reporting should follow the PRISMA guideline, which includes a flow diagram showing records identified, screened, excluded and included.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Search"
+     },
+     {
+      "id": "s2",
+      "label": "Screen"
+     },
+     {
+      "id": "s3",
+      "label": "Appraise"
+     },
+     {
+      "id": "s4",
+      "label": "Pool"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **random-effects model** assumes the true effect varies between studies around an overall mean. It adds a **between-study variance** term to each study's variance, giving wider confidence intervals. A **fixed-effect model** assumes one common true effect. When heterogeneity is substantial, a random-effects model is usually preferred. Subgroup analysis and meta-regression can explore sources of variation.",
+   "say": "A random-effects model assumes the true effect varies between studies around an overall mean. It adds a between-study variance term to each study's variance, giving wider confidence intervals. A fixed-effect model assumes one common true effect. When heterogeneity is substantial, a random-effects model is usually preferred. Subgroup analysis and meta-regression can explore the sources of variation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fixed effect",
+     "points": [
+      "One common true effect",
+      "Narrower intervals",
+      "Ignores between-study variation"
+     ]
+    },
+    "right": {
+     "title": "Random effects",
+     "points": [
+      "True effects vary around a mean",
+      "Wider intervals",
+      "Preferred when heterogeneity is high"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Publication bias** arises when small studies with null or negative results remain unpublished. A **funnel plot** graphs each study's effect against its precision; without bias it looks like a symmetrical inverted funnel. Asymmetry suggests small-study effects. **Egger's test** supports visual inspection, but asymmetry is a warning rather than proof. Searching trial registries and grey literature helps reduce this bias.",
+   "say": "Publication bias arises when small studies with null or negative results remain unpublished. A funnel plot graphs each study's effect against its precision. Without bias it looks like a symmetrical inverted funnel. Asymmetry suggests small study effects. Egger's test supports visual inspection, but asymmetry is a warning rather than proof. Searching trial registries and grey literature helps reduce this bias.",
+   "vis": null
+  },
+  {
+   "tx": "**Risk of bias** must be judged for each included study before synthesis. The **RoB 2** tool suits randomised trials, while **ROBINS-I** suits non-randomised studies of interventions, where confounding by indication is a major concern. **QUADAS-2** is used for diagnostic accuracy studies. **GRADE** then rates the certainty of evidence per outcome, starting randomised trials at high and observational studies at low.",
+   "say": "Risk of bias must be judged for each included study before synthesis. The RoB 2 tool suits randomised trials, while ROBINS-I suits non-randomised studies of interventions, where confounding by indication is a major concern. QUADAS-2 is used for diagnostic accuracy studies. GRADE then rates the certainty of evidence for each outcome, starting randomised trials at high and observational studies at low.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Design"
+    ],
+    "rows": [
+     [
+      "RoB 2",
+      "Randomised trials"
+     ],
+     [
+      "ROBINS-I",
+      "Non-randomised interventions"
+     ],
+     [
+      "QUADAS-2",
+      "Diagnostic accuracy studies"
+     ],
+     [
+      "GRADE",
+      "Certainty per outcome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Critical appraisal also covers bias in individual studies. **Lead-time bias** occurs when screening advances diagnosis without delaying death, so survival from diagnosis looks longer. Mortality rates are the right outcome to judge screening. Measures of effect such as the **number needed to treat** equal one divided by the absolute risk reduction, the difference between control and treated event rates.",
+   "say": "Critical appraisal also covers bias in individual studies. Lead-time bias occurs when screening advances diagnosis without delaying death, so survival from diagnosis looks longer. Mortality rates are the right outcome to judge screening. The number needed to treat equals one divided by the absolute risk reduction, the difference between control and treated event rates.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "PRISMA statement (Page and colleagues, BMJ 2021)",
+  "Cochrane Handbook for Systematic Reviews of Interventions",
+  "GRADE Working Group guidance",
+  "RoB 2 and ROBINS-I tool guidance (Sterne and colleagues)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "mcc-hp-falls",
+ "subject": "mcc-health-promotion",
+ "title": "Falls and older adult assessment",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Falls in older adults are common and often have **multifactorial** causes. A structured assessment looks at gait and balance, medications, cardiovascular causes, cognition, vision, continence and the home environment. Identifying a reversible cause is the priority, because treating it can prevent recurrence. Ask about the circumstances of each fall, including whether there was loss of consciousness, a prodrome, or a fall on standing.",
+   "say": "Falls in older adults are common and often have multifactorial causes. A structured assessment looks at gait and balance, medications, cardiovascular causes, cognition, vision, continence and the home environment. Identifying a reversible cause is the priority, because treating it can prevent recurrence. Ask about the circumstances of each fall, including whether there was loss of consciousness, a prodrome, or a fall on standing.",
+   "vis": null
+  },
+  {
+   "tx": "**Orthostatic hypotension** is a drop in blood pressure when a person moves from lying or sitting to standing, and it is a frequent contributor to falls in older people. Clinicians should record lying and standing readings in any older patient who has fallen, so that a postural drop can be detected. Many cases are linked to medicines, so reviewing the prescription list should come first.",
+   "say": "Orthostatic hypotension is a drop in blood pressure when a person moves from lying or sitting to standing, and it is a frequent contributor to falls in older people. Clinicians should record lying and standing readings in any older patient who has fallen, so that a postural drop can be detected. Many cases are linked to medicines, so reviewing the prescription list should come first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug class",
+     "Mechanism of falls risk",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Alpha blockers",
+      "Reduce peripheral vascular tone",
+      "Tamsulosin"
+     ],
+     [
+      "Diuretics",
+      "Volume loss and electrolyte shifts",
+      "Hydrochlorothiazide"
+     ],
+     [
+      "Hypnotics",
+      "Sedation and impaired balance",
+      "Zopiclone"
+     ],
+     [
+      "Beta blockers",
+      "Slower heart rate and lower output",
+      "Metoprolol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Syncope on standing or with a slow pulse needs a cardiac cause considered. **Sinus node disease** and **bradyarrhythmia** cause pauses, which produce **transient hypoperfusion** and collapse. **Beta blockers** and **cholinesterase inhibitors** can worsen this. A resting heart rate that is slow, together with pauses on the ECG, should prompt **ambulatory monitoring** and cardiology referral rather than reassurance alone.",
+   "say": "Syncope on standing or with a slow pulse needs a cardiac cause considered. Sinus node disease and bradyarrhythmia cause pauses, which produce transient hypoperfusion and collapse. Beta blockers and cholinesterase inhibitors can worsen this. A resting heart rate that is slow, together with pauses on the ECG, should prompt ambulatory monitoring and cardiology referral rather than reassurance alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fall or collapse"
+     },
+     {
+      "id": "b",
+      "label": "Check pulse and ECG"
+     },
+     {
+      "id": "c",
+      "label": "Pauses or slow rate?"
+     },
+     {
+      "id": "d",
+      "label": "Ambulatory monitoring"
+     },
+     {
+      "id": "e",
+      "label": "Cardiology review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In recurrent falls with dementia, the plan must balance safety with the person's wishes. Where the patient has limited capacity, a **substitute decision-maker** joins a shared decision, and the patient is included as far as she can take part. Falls risk is reduced by treating modifiable factors such as home hazards, mobility and help with bathing. Sedatives and restriction are not preferred because they add falls risk.",
+   "say": "In recurrent falls with dementia, the plan must balance safety with the person's wishes. Where the patient has limited capacity, a substitute decision-maker joins a shared decision, and the patient is included as far as she can take part. Falls risk is reduced by treating modifiable factors such as home hazards, mobility and help with bathing. Sedatives and restriction are not preferred because they add falls risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reduces risk",
+     "points": [
+      "Home safety assessment",
+      "Gait and mobility support",
+      "Bathing help",
+      "Review of sedating drugs"
+     ]
+    },
+    "right": {
+     "title": "Adds risk",
+     "points": [
+      "Night sedatives",
+      "Restricting movement",
+      "Admission without discussion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sensory causes of falls are important in diabetes. A **length-dependent peripheral neuropathy** damages large myelinated fibres, so proprioception from the feet is lost. A positive Romberg sign, reduced vibration sense and absent ankle reflexes support this. Worse balance in the dark or on carpet fits loss of proprioceptive input. Cerebellar and vestibular causes are excluded when finger-nose testing is normal and there is no nystagmus.",
+   "say": "Sensory causes of falls are important in diabetes. A length-dependent peripheral neuropathy damages large myelinated fibres, so proprioception from the feet is lost. A positive Romberg sign, reduced vibration sense and absent ankle reflexes support this. Worse balance in the dark or on carpet fits loss of proprioceptive input. Cerebellar and vestibular causes are excluded when finger-nose testing is normal and there is no nystagmus.",
+   "vis": null
+  },
+  {
+   "tx": "Hyponatraemia from a thiazide is a common, treatable cause of falls in older adults. Thiazides block sodium chloride reabsorption in the distal tubule, causing **sodium and potassium loss**. Older people may also retain water, giving low sodium. The first step is to stop the diuretic and recheck electrolytes, rather than adding treatment that does not address the cause. Serious or symptomatic hyponatraemia needs urgent review.",
+   "say": "Hyponatraemia from a thiazide is a common, treatable cause of falls in older adults. Thiazides block sodium chloride reabsorption in the distal tubule, causing sodium and potassium loss. Older people may also retain water, giving low sodium. The first step is to stop the diuretic and recheck electrolytes, rather than adding treatment that does not address the cause. Serious or symptomatic hyponatraemia needs urgent review.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thiazide use"
+     },
+     {
+      "id": "b",
+      "label": "Sodium and potassium loss"
+     },
+     {
+      "id": "c",
+      "label": "Low sodium and orthostasis"
+     },
+     {
+      "id": "d",
+      "label": "Stop drug and recheck"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Clinical Guideline CG161: Falls: assessment and prevention in older people and prevention of fall-related injury"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

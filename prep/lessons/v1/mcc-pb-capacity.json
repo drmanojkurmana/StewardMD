@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "mcc-pb-capacity",
+ "subject": "mcc-professional-behaviours",
+ "title": "Decision-making capacity",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Decision-making capacity** is the ability to understand information, appreciate its consequences for oneself, reason about options and communicate a stable choice. It is assessed for each specific decision, not for the person as a whole. A patient can be capable for one decision and not another. Capacity is presumed in adults unless shown otherwise.",
+   "say": "Decision-making capacity is the ability to understand information, appreciate what it means for yourself, reason about the options and communicate a stable choice. It is assessed for each specific decision, not for the person as a whole. A patient can have capacity for one decision and lack it for another. Capacity is presumed in adults unless shown otherwise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Question to ask"
+    ],
+    "rows": [
+     [
+      "Understanding",
+      "Can they repeat the key information?"
+     ],
+     [
+      "Appreciation",
+      "Do they see how it applies to them?"
+     ],
+     [
+      "Reasoning",
+      "Can they weigh options logically?"
+     ],
+     [
+      "Communication",
+      "Can they express a consistent choice?"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Capacity is **decision-specific** and can change over time. Delirium, infection, electrolyte disturbance, acute kidney injury, hypoglycaemia and pain can all impair it, often reversibly. The clinician should treat the cause and reassess before concluding that capacity is lost. A clear baseline and a sudden change in cognition are key clues.",
+   "say": "Capacity is decision-specific and can change over time. Delirium, infection, electrolyte disturbance, acute kidney injury, low blood sugar and pain can all impair it, often in a reversible way. The clinician should treat the cause and reassess before concluding that capacity is lost. A clear baseline and a sudden change in cognition are key clues.",
+   "vis": null
+  },
+  {
+   "tx": "When a patient lacks capacity, a **substitute decision-maker** acts. The first standard is the patient's known wishes, a method called substituted judgment. If wishes are unknown, the decision is made in the patient's **best interests**. A valid, written **advance directive** made while capable remains binding for the situation it describes, even if the patient cannot speak.",
+   "say": "When a patient lacks capacity, a substitute decision-maker acts. The first standard is the patient's known wishes, called substituted judgment. If wishes are unknown, the decision is made in the patient's best interests. A valid written advance directive made while capable remains binding for the situation it describes, even when the patient cannot speak.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lacks capacity"
+     },
+     {
+      "id": "b",
+      "label": "Valid advance directive?"
+     },
+     {
+      "id": "c",
+      "label": "Follow directive"
+     },
+     {
+      "id": "d",
+      "label": "Known wishes?"
+     },
+     {
+      "id": "e",
+      "label": "Substituted judgment"
+     },
+     {
+      "id": "f",
+      "label": "Best interests"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ],
+     [
+      "d",
+      "e",
+      "yes"
+     ],
+     [
+      "d",
+      "f",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A capable adult may **refuse treatment**, even life-saving treatment, if the refusal is informed and consistent. Refusal should be documented and alternatives offered. Non-blood measures can reduce the need for transfusion, for example iron, erythropoietin and endoscopic haemostasis. Unusual beliefs alone do not show incapacity, and a distressed relative does not change the assessment.",
+   "say": "A capable adult may refuse treatment, even life-saving treatment, if the refusal is informed and consistent. The refusal should be documented and alternatives offered. Non-blood measures can reduce the need for transfusion, for example iron, erythropoietin and endoscopic haemostasis. Unusual beliefs alone do not show incapacity, and a distressed relative does not change the assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Respect refusal",
+     "points": [
+      "Capacity confirmed",
+      "Informed and consistent",
+      "Documented",
+      "Alternatives offered"
+     ]
+    },
+    "right": {
+     "title": "Override refusal",
+     "points": [
+      "Capacity doubtful",
+      "Refusal not informed",
+      "Court or legal route",
+      "Rarely appropriate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anorexia nervosa and dementia can distort **appreciation** of illness, even when understanding and a stated choice look intact. Medical instability, such as bradycardia, prolonged QTc or low potassium, needs urgent action. Refeeding carries a risk of electrolyte shifts and should be supervised. Capacity must be assessed with particular attention to appreciation of risk, not only to what the patient says.",
+   "say": "Anorexia nervosa and dementia can distort appreciation of illness, even when understanding and a stated choice look intact. Medical instability, such as bradycardia, prolonged QTc or low potassium, needs urgent action. Refeeding carries a risk of electrolyte shifts and should be supervised. Capacity must be assessed with particular attention to appreciation of risk, not only to what the patient says.",
+   "vis": null
+  },
+  {
+   "tx": "Confidentiality and information sharing belong to the **capacitated patient**. Before sharing results with family, ask the patient what they want shared and with whom. Preferences may be clarified without assuming incapacity. In India, the NMC Code of Ethics emphasises patient autonomy, informed consent and confidentiality, and these principles guide the same approach in practice.",
+   "say": "Confidentiality and information sharing belong to the capacitated patient. Before sharing results with family, ask the patient what they want shared and with whom. Preferences can be clarified without assuming incapacity. In India, the NMC Code of Ethics emphasises patient autonomy, informed consent and confidentiality, and these principles guide the same approach in practice.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on Decision-making and mental capacity (NG108)",
+  "Mental Capacity Act 2005 (England and Wales)",
+  "NMC Code of Ethics for Registered Medical Practitioners (India)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

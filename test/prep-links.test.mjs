@@ -7,7 +7,7 @@ import os from "node:os";
 import path from "node:path";
 import { norm, leadIn, leadSec, normKbId, kbDocs, phrases, drugPhrases, matcher, scan, linkItem, expText, dictionaries,
   confirmRequests, build, reportText, SHOW, MAX, CONFIRM_SCHEMA, kbBridge, pickKbLesson, matchChapter, sigWords,
-  addTopicLinks, stampLinks, gapsReport, topicKbForModule, LINKS_VER, linkRelevant } from "../tools/prep-links.mjs";
+  addTopicLinks, stampLinks, gapsReport, topicKbForModule, LINKS_VER, linkRelevant, floorEntries } from "../tools/prep-links.mjs";
 import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const D = dictionaries();
@@ -141,6 +141,44 @@ test("build: one synthetic module links, reports and shards without question tex
     assert.ok(!f.body.includes("beaded mid renal"), "no question text is published");
     assert.ok(b.sidecar.length === 2 && b.sidecar[0].provenance && b.sidecar[0].links.kb_ids.length, "the sidecar keeps every candidate");
     assert.match(reportText(b.report), /2 of 2 usable items/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("floorEntries: only topics present in topics.json survive, everything else is inert", () => {
+  const n360 = { topics: [{ id: "t1", title: "Topic One" }] };
+  assert.deepEqual(floorEntries({ map: { m1: "t1", m2: "missing", m3: ["t1"] } }, n360),
+    { m1: { id: "t1", title: "Topic One" } }, "missing topics and non-string targets drop out");
+  assert.deepEqual(floorEntries(null, n360), {});
+  assert.deepEqual(floorEntries({ map: { m1: "t1" } }, null), {});
+});
+
+test("build: the floor rides mod.n360, and floored modules with zero links still get a shard", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "plk-"));
+  try {
+    const rel = "v5/anatomy/mcq/ana-bones-ossification.json";
+    fs.mkdirSync(path.join(dir, path.dirname(rel)), { recursive: true });
+    fs.writeFileSync(path.join(dir, rel), JSON.stringify({ topic: "ana-bones-ossification", items: [
+      { id: "plk-1", q: "Synthetic: beaded mid renal artery in a young woman. Cause?", o: ["Atheroma", "Fibromuscular dysplasia", "Arteritis", "Embolism"], a: 1, exp: "Beaded mid artery is fibromuscular dysplasia." },
+    ] }));
+    // Link-proof by construction: the nonsense item names nothing, and lessons: {} freezes the
+    // lesson universe so repo lessons cannot leak into the fixture.
+    const rel2 = "v5/anatomy/mcq/ana-mixed.json";
+    fs.writeFileSync(path.join(dir, rel2), JSON.stringify({ topic: "ana-mixed", items: [
+      { id: "plk-9", q: "Synthetic: zzzqqq blorpt with no medical names at all?", o: ["Zza", "Zzb", "Zzc", "Zzd"], a: 0, exp: "" },
+    ] }));
+    fs.writeFileSync(path.join(dir, "lessons-index.json"), JSON.stringify({ modules: {} }));
+    fs.writeFileSync(path.join(dir, "cards-index.json"), JSON.stringify({ modules: {} }));
+    fs.writeFileSync(path.join(dir, "lesson-src.json"), JSON.stringify({}));
+    const floor = { "ana-bones-ossification": { id: "t1", title: "Topic One" }, "ana-mixed": { id: "t1", title: "Topic One" } };
+    const b = build({ cache: dir, bank: null, floor, lessons: {}, log: () => {} });
+    assert.equal(b.report.linked, 1, "the unlinked module adds no coverage");
+    const f1 = b.files.find((x) => x.rel.startsWith("m/ana-bones-ossification-"));
+    assert.deepEqual(JSON.parse(f1.body).mod.n360, { id: "t1", title: "Topic One" }, "linked modules carry the floor too");
+    const f2 = b.files.find((x) => x.rel.startsWith("m/ana-mixed-"));
+    assert.ok(f2, "a floored module with zero links still gets a shard");
+    assert.deepEqual(JSON.parse(f2.body).mod, { n360: { id: "t1", title: "Topic One" } }, "mod-only record");
+    assert.deepEqual(JSON.parse(f2.body).e, {}, "no entries, so gaps counts nothing");
+    assert.ok(b.pointer.m["ana-mixed"], "the pointer names the floor shard");
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 

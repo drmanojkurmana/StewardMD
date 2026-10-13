@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "mic-mixed",
+ "subject": "microbiology",
+ "title": "Microbiology mixed rapid review",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "This review covers high-yield microbiology facts that recur in NEET-PG and INI-CET style questions. Start with **host classification**: the definitive host harbours the adult or sexual stage of a parasite, while an **intermediate host** carries the larval or asexual stage. A transport host keeps the agent alive without any development. Remember that the definitive host is where maturity is reached.",
+   "say": "This review covers high-yield microbiology facts that recur in NEET-PG and INI-CET style questions. Start with host classification. The definitive host harbours the adult or sexual stage of a parasite, while an intermediate host carries the larval or asexual stage. A transport host keeps the agent alive without any development. Remember that the definitive host is where maturity is reached.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Host type",
+     "Stage harboured",
+     "Example role"
+    ],
+    "rows": [
+     [
+      "Definitive",
+      "Adult or sexual form",
+      "Final site of maturity"
+     ],
+     [
+      "Intermediate",
+      "Larval or asexual form",
+      "Carries immature stage"
+     ],
+     [
+      "Transport",
+      "Alive, no development",
+      "Carrier only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Next, know the **superantigen** concept. These bacterial toxins bind outside the peptide cleft of MHC class II and contact the lateral aspect of the T cell receptor, activating a very large fraction of T cells regardless of specificity. The result is massive cytokine release and toxic shock. Staphylococcus aureus and Streptococcus pyogenes are the classic producers.",
+   "say": "Next, know the superantigen concept. These bacterial toxins bind outside the peptide cleft of MHC class II and contact the lateral aspect of the T cell receptor, activating a very large fraction of T cells regardless of specificity. The result is massive cytokine release and toxic shock. Staphylococcus aureus and Streptococcus pyogenes are the classic producers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superantigen",
+     "points": [
+      "Bypasses antigen processing",
+      "Binds outside the peptide cleft",
+      "Activates many T cells",
+      "Causes cytokine storm"
+     ]
+    },
+    "right": {
+     "title": "Conventional antigen",
+     "points": [
+      "Needs processing",
+      "Binds inside the groove",
+      "Activates specific clones",
+      "Limited cytokine release"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Several infections have **characteristic signs**. Koplik spots on the buccal mucosa precede the rash of rubeola. Strawberry tongue with swollen, hyperaemic fungiform papillae is seen in scarlet fever. Mulberry molars and Hutchinson triad point to **congenital syphilis**, which includes interstitial keratitis, Hutchinson incisors and eighth nerve deafness. Snail track ulcers and mucous patches are secondary syphilis lesions, whereas the Hutchinson wart is not an oral feature of secondary disease.",
+   "say": "Several infections have characteristic signs. Koplik spots on the buccal mucosa precede the rash of rubeola. Strawberry tongue with swollen, hyperaemic fungiform papillae is seen in scarlet fever. Mulberry molars and Hutchinson triad point to congenital syphilis, which includes interstitial keratitis, Hutchinson incisors and eighth nerve deafness. Snail track ulcers and mucous patches are secondary syphilis lesions, whereas the Hutchinson wart is not an oral feature of secondary disease.",
+   "vis": null
+  },
+  {
+   "tx": "Work through **Legionella and Campylobacter** together. Legionella pneumophila proliferates in cooling towers and water systems, causing bronchopneumonia with diarrhoea, confusion and high fever. Campylobacter gastroenteritis is usually self-limited; treatment is reserved for severe disease, with a fluoroquinolone or azithromycin preferred. Erythromycin is no longer first line because of CYP3A4 interactions and cardiac toxicity.",
+   "say": "Work through Legionella and Campylobacter together. Legionella pneumophila proliferates in cooling towers and water systems, causing bronchopneumonia with diarrhoea, confusion and high fever. Campylobacter gastroenteritis is usually self-limited; treatment is reserved for severe disease, with a fluoroquinolone or azithromycin preferred. Erythromycin is no longer first line because of CYP3A4 interactions and cardiac toxicity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cooling tower"
+     },
+     {
+      "id": "b",
+      "label": "Inhaled aerosol"
+     },
+     {
+      "id": "c",
+      "label": "Alveolar macrophage"
+     },
+     {
+      "id": "d",
+      "label": "Pneumonia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Finally, the **significant bacteriuria** threshold is 10 to the power 5 colony forming units per millilitre, the Kass criterion. Counts below this are usually contamination, except in pregnancy, or when a patient is on antibiotics where low counts of Staphylococcus aureus can still matter. Urease-producing organisms such as Proteus make urine alkaline and favour calculi. Green nail syndrome from Pseudomonas aeruginosa follows prolonged water immersion.",
+   "say": "Finally, the significant bacteriuria threshold is 10 to the power 5 colony forming units per millilitre, the Kass criterion. Counts below this are usually contamination, except in pregnancy, or when a patient is on antibiotics where low counts of Staphylococcus aureus can still matter. Urease-producing organisms such as Proteus make urine alkaline and favour calculi. Green nail syndrome from Pseudomonas aeruginosa follows prolonged water immersion.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "f9b17911-51d6-4476-9fda-d00fa535d86a",
+  "0c62d424-14ad-454c-bb66-f58dee48a5da",
+  "3000b468-0de0-46dc-bc9d-bce6d5995e5c"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K Park, 23rd edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 279
+ }
+}

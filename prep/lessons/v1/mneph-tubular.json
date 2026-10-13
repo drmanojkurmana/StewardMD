@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "mneph-tubular",
+ "subject": "mrcp-nephrology",
+ "title": "Tubulointerstitial and renal tubular disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Renal tubular disorders arise when the **tubule** cannot reabsorb or secrete solutes correctly. The proximal tubule reabsorbs most filtered glucose, phosphate, bicarbonate and amino acids. The distal nephron and collecting duct fine-tune acid, potassium and water handling. Recognising the pattern of losses in blood and urine points to the site of the defect.",
+   "say": "Renal tubular disorders arise when the tubule cannot reabsorb or secrete solutes correctly. The proximal tubule reabsorbs most filtered glucose, phosphate, bicarbonate and amino acids. The distal nephron and collecting duct fine-tune acid, potassium and water handling. Recognising the pattern of losses in blood and urine points to the site of the defect.",
+   "vis": null
+  },
+  {
+   "tx": "Renal tubular acidosis is a **normal anion gap** metabolic acidosis. In **distal (type 1) RTA** the collecting duct cannot secrete hydrogen ions, so urine pH stays above 5.5 despite acidaemia. Expect hypokalaemia, hypercalciuria, nephrocalcinosis and calcium phosphate stones. Autoimmune disease, notably primary Sjogren's syndrome, is a classic association.",
+   "say": "Renal tubular acidosis is a normal anion gap metabolic acidosis. In distal type 1 RTA the collecting duct cannot secrete hydrogen ions, so urine pH stays above 5.5 despite acidaemia. Expect hypokalaemia, hypercalciuria, nephrocalcinosis and calcium phosphate stones. Autoimmune disease, notably primary Sjogren's syndrome, is a classic association.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Distal (type 1)",
+     "Proximal (type 2)",
+     "Type 4"
+    ],
+    "rows": [
+     [
+      "Site",
+      "Collecting duct",
+      "Proximal tubule",
+      "Aldosterone effect"
+     ],
+     [
+      "Urine pH",
+      "Above 5.5",
+      "Below 5.5 once bicarbonate low",
+      "Below 5.5"
+     ],
+     [
+      "Potassium",
+      "Low",
+      "Low",
+      "High"
+     ],
+     [
+      "Stones",
+      "Yes, calcium phosphate",
+      "Rare",
+      "Rare"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gitelman syndrome and Bartter syndrome both cause **salt wasting** with hypokalaemic metabolic alkalosis. Gitelman affects the thiazide-sensitive transporter in the distal convoluted tubule, causing low urinary calcium and hypomagnesaemia. Blood pressure is normal. Liddle syndrome causes hypertension with suppressed aldosterone. Replace potassium and magnesium in Gitelman syndrome.",
+   "say": "Gitelman syndrome and Bartter syndrome both cause salt wasting with hypokalaemic metabolic alkalosis. Gitelman affects the thiazide sensitive transporter in the distal convoluted tubule, causing low urinary calcium and hypomagnesaemia. Blood pressure is normal. Liddle syndrome causes hypertension with suppressed aldosterone. Replace potassium and magnesium in Gitelman syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gitelman syndrome",
+     "points": [
+      "Distal convoluted tubule defect",
+      "Low urinary calcium",
+      "Hypomagnesaemia",
+      "Normal blood pressure"
+     ]
+    },
+    "right": {
+     "title": "Liddle syndrome",
+     "points": [
+      "Epithelial sodium channel gain",
+      "Hypertension",
+      "Low aldosterone",
+      "Hypokalaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lithium causes **nephrogenic diabetes insipidus** by reducing aquaporin-2 expression in the collecting duct. Patients pass six litres of dilute urine daily with raised plasma osmolality. The key test is the response to desmopressin, which produces little change in nephrogenic DI. Central DI responds. Manage with adequate fluid intake, a thiazide or amiloride, and review of lithium.",
+   "say": "Lithium causes nephrogenic diabetes insipidus by reducing aquaporin-2 expression in the collecting duct. Patients pass six litres of dilute urine daily with raised plasma osmolality. The key test is the response to desmopressin, which produces little change in nephrogenic DI. Central DI responds. Manage with adequate fluid intake, a thiazide or amiloride, and review of lithium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lithium enters principal cells"
+     },
+     {
+      "id": "b",
+      "label": "Aquaporin-2 falls"
+     },
+     {
+      "id": "c",
+      "label": "Vasopressin fails to concentrate urine"
+     },
+     {
+      "id": "d",
+      "label": "Polyuria, no response to desmopressin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute **drug-induced interstitial nephritis** is an immune-mediated inflammation of the renal interstitium, usually a hypersensitivity reaction to a medicine taken days to weeks earlier. The classic triad of fever, rash and eosinophilia appears in only a minority of patients, so its absence should not reassure. Look for **sterile pyuria**, **white cell casts** and mild proteinuria. Stopping the offending agent is the cornerstone of management, with corticosteroids considered in selected patients with significant renal impairment.",
+   "say": "Acute drug-induced interstitial nephritis is an immune-mediated inflammation of the kidney's interstitium, usually a hypersensitivity reaction to a medicine taken days to weeks earlier. The classic triad of fever, rash and eosinophilia appears in only a minority of patients, so its absence should not reassure you. Look for sterile pyuria, white cell casts and mild proteinuria in the urine. Stopping the offending agent is the cornerstone of management, with corticosteroids considered in selected patients with significant renal impairment.",
+   "vis": null
+  },
+  {
+   "tx": "Cystinuria is an inherited defect of **dibasic amino acid** transport in the proximal tubule. Cystine is poorly soluble at urinary pH, forming recurrent stones. Hexagonal crystals and a positive cyanide-nitroprusside test support the diagnosis. Manage with high fluid intake, urinary alkalinisation and, where needed, thiol-based chelation.",
+   "say": "Cystinuria is an inherited defect of dibasic amino acid transport in the proximal tubule. Cystine is poorly soluble at urinary pH, forming recurrent stones. Hexagonal crystals and a positive cyanide-nitroprusside test support the diagnosis. Manage with high fluid intake, urinary alkalinisation and, where needed, thiol-based chelation.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Oxford Handbook of Clinical Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 19
+ }
+}

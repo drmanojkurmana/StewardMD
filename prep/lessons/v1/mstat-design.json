@@ -1,0 +1,104 @@
+{
+ "v": 1,
+ "module": "mstat-design",
+ "subject": "mrcp-statistics",
+ "title": "Study design, bias and confounding",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A **confounder** is a factor linked to both the exposure and the outcome, which is not an intermediate step on the causal path. Confounding makes a crude association misleading. It can be handled by **randomisation**, restriction, matching, stratification or multivariable adjustment, but only for measured variables. Residual confounding persists when measurement is imperfect.",
+   "say": "A confounder is a factor linked to both the exposure and the outcome, which is not an intermediate step on the causal path. Confounding makes a crude association misleading. It can be handled by randomisation, restriction, matching, stratification or multivariable adjustment, but only for measured variables. Residual confounding persists when measurement is imperfect.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e",
+      "label": "Exposure"
+     },
+     {
+      "id": "c",
+      "label": "Confounder"
+     },
+     {
+      "id": "o",
+      "label": "Outcome"
+     }
+    ],
+    "edges": [
+     [
+      "e",
+      "o",
+      "apparent link"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "c",
+      "o"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Immortal time bias** occurs when follow-up time during which the outcome cannot occur is wrongly credited to the exposed group. Classifying people as exposed only after a later event, such as a first prescription, makes the drug look protective. The fix is a **time-dependent exposure** analysis, counting pre-exposure person-time as unexposed.",
+   "say": "Immortal time bias occurs when follow-up time during which the outcome cannot occur is wrongly credited to the exposed group. Classifying people as exposed only after a later event, such as a first prescription, makes the drug look protective. The fix is a time-dependent exposure analysis, counting pre-exposure person-time as unexposed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wrong approach",
+     "points": [
+      "Exposed from later event",
+      "Pre-exposure deaths unexposed",
+      "Drug appears protective"
+     ]
+    },
+    "right": {
+     "title": "Correct approach",
+     "points": [
+      "Time-dependent exposure",
+      "Pre-exposure time unexposed",
+      "Benefit usually disappears"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lead-time bias** arises when screening or testing diagnoses disease earlier, so survival measured from diagnosis looks longer even though the date of death is unchanged. **Length-time bias** is a separate problem, where screening preferentially detects slowly progressive cases. Mortality or incidence outcomes are the fairer test of screening.",
+   "say": "Lead-time bias arises when screening or testing diagnoses disease earlier, so survival measured from diagnosis looks longer even though the date of death is unchanged. Length-time bias is a separate problem, where screening preferentially detects slowly progressive cases. Mortality or incidence outcomes are the fairer test of screening.",
+   "vis": null
+  },
+  {
+   "tx": "**Regression to the mean** explains why an extreme first measurement, such as a single high blood pressure reading, tends to fall on repeat testing without treatment. **Berkson bias** is selection bias from hospital-based samples, where admission depends on both exposure and disease, producing spurious associations. Population-based controls reduce it.",
+   "say": "Regression to the mean explains why an extreme first measurement, such as a single high blood pressure reading, tends to fall on repeat testing without treatment. Berkson bias is selection bias from hospital-based samples, where admission depends on both exposure and disease, producing spurious associations. Population-based controls reduce it.",
+   "vis": null
+  },
+  {
+   "tx": "**Non-differential misclassification** of exposure, where errors are equal across outcome groups, usually biases an association towards the null. Differential misclassification can push results in either direction. **Neyman bias** (prevalence-incidence bias) occurs when prevalent users are sampled, so early withdrawals are missed and mislabelled as unexposed.",
+   "say": "Non-differential misclassification of exposure, where errors are equal across outcome groups, usually biases an association towards the null. Differential misclassification can push results in either direction. Neyman bias, also called prevalence-incidence bias, occurs when prevalent users are sampled, so early withdrawals are missed and mislabelled as unexposed.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Rothman KJ, Greenland S, Lash TL. Modern Epidemiology (3rd edition)",
+  "Hernan MA, Robins JM. Causal Inference: What If"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

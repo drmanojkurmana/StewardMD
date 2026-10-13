@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "phe-indigenous",
+ "subject": "population-health-and-ethics",
+ "title": "Aboriginal and Torres Strait Islander health",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Aboriginal and Torres Strait Islander peoples** are the First Nations peoples of Australia, with distinct cultures, languages and histories. Across the country they experience a substantial gap in health and life expectancy compared with other Australians. Their outcomes are shaped by **social determinants** such as housing, education, income and access to services, rather than by individual choice alone. For Indian exams, the parallel is tribal and marginalised groups, where similar determinants apply.",
+   "say": "Aboriginal and Torres Strait Islander peoples are the First Nations peoples of Australia. They have distinct cultures, languages and histories. Across the country they experience a substantial gap in health and life expectancy compared with other Australians. Their outcomes are shaped by social determinants such as housing, education, income and access to services, rather than by individual choice alone. For Indian exams, the parallel is tribal and marginalised groups, where similar determinants apply.",
+   "vis": null
+  },
+  {
+   "tx": "Several **social determinants** link directly to disease in these communities. Overcrowded housing favours the spread of respiratory and skin infections, including tuberculosis. Low income and limited access to fresh food increase nutritional problems such as iron deficiency. Remote location delays diagnosis and specialist care. Recognising these pathways helps clinicians look beyond the individual when planning management and prevention.",
+   "say": "Several social determinants link directly to disease in these communities. Overcrowded housing favours the spread of respiratory and skin infections, including tuberculosis. Low income and limited access to fresh food increase nutritional problems such as iron deficiency. Remote location delays diagnosis and specialist care. Recognising these pathways helps clinicians look beyond the individual when planning management and prevention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Determinant",
+     "Health pathway"
+    ],
+    "rows": [
+     [
+      "Housing",
+      "Overcrowding spreads infection"
+     ],
+     [
+      "Income and food",
+      "Limited fresh food causes deficiency"
+     ],
+     [
+      "Education",
+      "Lower health literacy affects understanding"
+     ],
+     [
+      "Remoteness",
+      "Distance delays diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Certain conditions occur more often in these populations and are high yield. **Rheumatic heart disease** follows untreated group A streptococcal infection, while **chronic suppurative otitis media** can cause lasting hearing loss in children. Diabetic kidney disease, tuberculosis and iron deficiency anaemia also carry a higher burden. Recognising this pattern prompts earlier screening and a lower threshold for investigation.",
+   "say": "Certain conditions occur more often in these populations and are high yield. Rheumatic heart disease follows untreated group A streptococcal infection, while chronic suppurative otitis media can cause lasting hearing loss in children. Diabetic kidney disease, tuberculosis and iron deficiency anaemia also carry a higher burden. Recognising this pattern prompts earlier screening and a lower threshold for investigation.",
+   "vis": null
+  },
+  {
+   "tx": "**Cultural safety** means care is shaped by the patient's own experience and identity, and it is judged by the people receiving it. Practices that respect kinship, family roles and community knowledge build trust and improve engagement with follow-up. Clinicians should use an **Aboriginal Health Worker** where available to support communication. The contrast below shows what to aim for and what to avoid.",
+   "say": "Cultural safety means care is shaped by the patient's own experience and identity, and it is judged by the people receiving it. Practices that respect kinship, family roles and community knowledge build trust and improve engagement with follow-up. Clinicians should use an Aboriginal Health Worker where available to support communication. The contrast below shows what to aim for and what to avoid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Culturally safe care",
+     "points": [
+      "Partners with community and families",
+      "Uses Aboriginal Health Workers",
+      "Explains plans in plain language",
+      "Respects kinship and decision making"
+     ]
+    },
+    "right": {
+     "title": "Unsafe care",
+     "points": [
+      "Assumes one standard approach",
+      "Limits family involvement",
+      "Relies on jargon",
+      "Ignores community context"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Good communication underpins safe care. Clinicians should explain diagnoses and adverse events openly, using plain language and allowing time for questions. Involving family, where the patient wishes, supports understanding. An **Aboriginal Health Worker** or interpreter can bridge cultural and language gaps. **Open disclosure** is an ongoing duty, so the conversation continues as facts change.",
+   "say": "Good communication underpins safe care. Clinicians should explain diagnoses and adverse events openly, using plain language and allowing time for questions. Involving family, where the patient wishes, supports understanding. An Aboriginal Health Worker or interpreter can bridge cultural and language gaps. Open disclosure is an ongoing duty, so the conversation continues as facts change.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Open conversation"
+     },
+     {
+      "id": "n2",
+      "label": "Include family"
+     },
+     {
+      "id": "n3",
+      "label": "Use health worker"
+     },
+     {
+      "id": "n4",
+      "label": "Explain clearly"
+     },
+     {
+      "id": "n5",
+      "label": "Agree plan"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam focus: revise the **social determinants** of health, the leading **disease burdens**, and the principles of **culturally safe care** and **community partnership**. Trace each condition back to its social cause, such as housing, income or access to services. Prevention and early detection remain central. In exam questions, favour the option that respects culture, involves the community and tackles underlying determinants, not one that overlooks context.",
+   "say": "For the exam, revise the social determinants of health, the main disease burdens, and the principles of culturally safe care and community partnership. Link each condition to its social cause, such as housing, income or access to services. Prevention and early detection remain central themes. When you answer a question, favour the option that respects culture, involves the community and tackles underlying determinants, rather than one that overlooks context.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

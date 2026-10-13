@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "module": "mneph-electrolytes",
+ "subject": "mrcp-nephrology",
+ "title": "Sodium, potassium and acid-base disorders: a high-yield lesson",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Acid-base interpretation starts with the **pH**, then the primary disturbance, then compensation. The **anion gap** is sodium minus chloride and bicarbonate. A normal gap is roughly 4 to 12 mmol/L. A raised gap points to unmeasured anions such as ketones, lactate or urate. A normal gap acidosis with high chloride suggests bicarbonate loss, as in diarrhoea or renal tubular acidosis.",
+   "say": "Acid-base interpretation starts with the pH, then the primary disturbance, then compensation. The anion gap is sodium minus chloride and bicarbonate. A normal gap is roughly 4 to 12 millimoles per litre. A raised gap points to unmeasured anions such as ketones, lactate or urate. A normal gap acidosis with high chloride suggests bicarbonate loss, as in diarrhoea or renal tubular acidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Typical cause",
+     "Gap"
+    ],
+    "rows": [
+     [
+      "Diabetic ketoacidosis",
+      "Insulin deficiency with ketones",
+      "Raised"
+     ],
+     [
+      "Diarrhoeal bicarbonate loss",
+      "Gut loses bicarbonate",
+      "Normal"
+     ],
+     [
+      "Vomiting",
+      "Loss of gastric acid",
+      "Alkalosis"
+     ],
+     [
+      "Lactic acidosis",
+      "Hypoperfusion or metformin",
+      "Raised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vomiting and diuretics cause **metabolic alkalosis** with hypochloraemia. A **urine chloride** below 20 mmol/L suggests chloride responsiveness, so the kidney is conserving chloride. Treat with isotonic sodium chloride and potassium replacement. Hypokalaemia impairs renal bicarbonate excretion, so it must be corrected alongside volume. High urine chloride suggests a chloride-resistant cause such as mineralocorticoid excess.",
+   "say": "Vomiting and diuretics cause metabolic alkalosis with low chloride. A urine chloride below 20 millimoles per litre suggests chloride responsiveness, so the kidney is conserving chloride. Treat with isotonic sodium chloride and potassium replacement. Low potassium impairs renal bicarbonate excretion, so it must be corrected alongside volume. High urine chloride suggests a chloride-resistant cause such as mineralocorticoid excess.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Metabolic alkalosis"
+     },
+     {
+      "id": "b",
+      "label": "Urine chloride below 20"
+     },
+     {
+      "id": "c",
+      "label": "Isotonic saline and potassium"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Chloride responsive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hyponatraemia is first judged by **serum osmolality** and volume status. In the **syndrome of inappropriate antidiuresis**, excess antidiuretic hormone retains free water, so urine is concentrated despite low plasma osmolality. Urinary sodium is usually raised while the patient is euvolaemic. Thyroid and adrenal function must be checked first. Drug causes, especially thiazides, are a common alternative.",
+   "say": "Hyponatraemia is first judged by serum osmolality and volume status. In the syndrome of inappropriate antidiuresis, excess antidiuretic hormone retains free water, so urine is concentrated despite low plasma osmolality. Urinary sodium is usually raised while the patient is euvolaemic. Thyroid and adrenal function must be checked first. Drug causes, especially thiazides, are a common alternative.",
+   "vis": null
+  },
+  {
+   "tx": "Chronic hyponatraemia carries a risk of **osmotic demyelination** if corrected too fast. In high-risk patients, such as those with alcohol use, malnutrition, liver disease or hypokalaemia, the rise should be limited to 8 mmol/L in 24 hours. Correction must be monitored with frequent sodium checks, and the rate should be checked if it overshoots.",
+   "say": "Chronic hyponatraemia carries a risk of osmotic demyelination if corrected too fast. In high-risk patients, such as those with alcohol use, malnutrition, liver disease or low potassium, the rise should be limited to 8 millimoles per litre in 24 hours. Correction must be monitored with frequent sodium checks, and the rate should be checked if it overshoots.",
+   "vis": null
+  },
+  {
+   "tx": "Hyperkalaemia with ECG changes is a **medical emergency**. Early changes are tall, tented T waves. Then the PR interval lengthens, the QRS widens and P waves disappear. **Intravenous calcium gluconate** stabilises the myocardium within minutes but does not lower potassium. Insulin with glucose, salbutamol and bicarbonate shift potassium into cells, and potassium binders or dialysis remove it.",
+   "say": "Hyperkalaemia with ECG changes is a medical emergency. Early changes are tall, tented T waves. Then the PR interval lengthens, the QRS widens and P waves disappear. Intravenous calcium gluconate stabilises the myocardium within minutes but does not lower potassium. Insulin with glucose, salbutamol and bicarbonate shift potassium into cells, and potassium binders or dialysis remove it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tall tented T waves"
+     },
+     {
+      "id": "b",
+      "label": "PR prolonged, QRS widens"
+     },
+     {
+      "id": "c",
+      "label": "Calcium gluconate IV"
+     },
+     {
+      "id": "d",
+      "label": "Shift then remove potassium"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **diabetic ketoacidosis**, insulin deficiency and ketones give a high anion gap acidosis with hyperglycaemia. Total body potassium is depleted even when serum potassium is normal or raised. Insulin drives potassium into cells, so levels can fall fast. If potassium is low, replace it before starting the insulin infusion, with cardiac monitoring and frequent checks.",
+   "say": "In diabetic ketoacidosis, insulin deficiency and ketones give a high anion gap acidosis with high glucose. Total body potassium is depleted even when serum potassium is normal or raised. Insulin drives potassium into cells, so levels can fall fast. If potassium is low, replace it before starting the insulin infusion, with cardiac monitoring and frequent checks.",
+   "vis": null
+  },
+  {
+   "tx": "Mixed disorders are detected by comparing the **delta ratio**, the rise in anion gap divided by the fall in bicarbonate. A ratio below 1 suggests an added normal gap acidosis, and above 2 suggests concurrent metabolic alkalosis. **Winter's formula** gives expected pCO2 as 1.5 times bicarbonate plus 8, plus or minus 2. Always check compensation against clinical context.",
+   "say": "Mixed disorders are detected by comparing the delta ratio, the rise in anion gap divided by the fall in bicarbonate. A ratio below 1 suggests an added normal gap acidosis, and above 2 suggests concurrent metabolic alkalosis. Winter's formula gives expected pCO2 as 1.5 times bicarbonate plus 8, plus or minus 2. Always check compensation against clinical context.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Kidney Disease: Improving Global Outcomes (KDIGO) Clinical Practice Guideline for Electrolyte and Acid-Base Disorders"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 19
+ }
+}

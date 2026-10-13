@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phe-outbreak",
+ "subject": "population-health-and-ethics",
+ "title": "Outbreaks and surveillance: detecting, investigating and controlling clusters",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "An **outbreak** is more cases of a disease than expected in a given place and time. Clinicians are often first to notice a cluster, so they should recognise patterns: several patients with similar illness and a shared exposure. **Surveillance** is the continuous collection and analysis of disease data to guide action. Early notification to the public health unit is the key clinical duty when a cluster is suspected, before results return.",
+   "say": "An outbreak is more cases of a disease than expected in a given place and time. Clinicians are often the first to notice a cluster, so they should recognise patterns, such as several patients with similar illness and a shared exposure. Surveillance is the continuous collection and analysis of disease data to guide action. Early notification to the public health unit is the key clinical duty when a cluster is suspected, without waiting for results.",
+   "vis": null
+  },
+  {
+   "tx": "Two key measures describe risk. The **attack rate** is new cases among those exposed divided by all those exposed, and it is useful in food-borne outbreaks. Comparing attack rates between exposed and unexposed people supports a suspected vehicle. The **secondary attack rate** looks at cases among contacts of an index case. Investigators use these to link a food or event to illness.",
+   "say": "Two key measures describe risk. The attack rate is new cases among those exposed divided by all those exposed, and it is useful in food-borne outbreaks. Comparing attack rates between exposed and unexposed people supports a suspected vehicle. The secondary attack rate looks at cases among contacts of an index case. Investigators use these measures to link a food or event to illness.",
+   "vis": null
+  },
+  {
+   "tx": "Surveillance can be passive, where clinicians notify cases, or active, where staff seek out cases. **Syndromic surveillance** tracks routinely recorded symptoms, such as influenza-like illness, and gives early signals without waiting for laboratory confirmation. Limited testing and slow results favour syndromic systems. Interpret rising notifications carefully: new testing policies can increase detected cases without any real rise in transmission.",
+   "say": "Surveillance can be passive, where clinicians notify cases, or active, where staff seek out cases. Syndromic surveillance tracks routinely recorded symptoms, such as influenza-like illness, and gives early signals without waiting for laboratory confirmation. Limited testing and slow results favour syndromic systems. Interpret rising notifications carefully, because new testing policies can increase detected cases without any real rise in transmission.",
+   "vis": null
+  },
+  {
+   "tx": "Specific organisms have characteristic sources. **Legionella** grows in warm water systems such as cooling towers and spa pools, and is found in cases after a shared hotel or conference exposure. **Shiga toxin-producing E. coli** causes bloody diarrhoea and can progress to haemolytic uraemic syndrome, with anaemia, thrombocytopenia and raised creatinine. Molecular subtyping of isolates shows whether cases share a strain, which confirms a common source.",
+   "say": "Specific organisms have characteristic sources. Legionella grows in warm water systems such as cooling towers and spa pools, and appears in cases after a shared hotel or conference exposure. Shiga toxin-producing E. coli causes bloody diarrhoea and can progress to haemolytic uraemic syndrome, with anaemia, low platelets and raised creatinine. Molecular subtyping of isolates shows whether cases share a strain, which confirms a common source.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected cluster"
+     },
+     {
+      "id": "b",
+      "label": "Notify public health"
+     },
+     {
+      "id": "c",
+      "label": "Find source"
+     },
+     {
+      "id": "d",
+      "label": "Subtype isolates"
+     },
+     {
+      "id": "e",
+      "label": "Control source"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "mh-medications",
+ "subject": "mental-health",
+ "title": "Psychotropic medications: high-yield toxicities and interactions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Psychotropic drugs carry predictable **adverse effects** that often appear through interactions. Serotonergic drugs can combine to cause **serotonin toxicity**, presenting with agitation, clonus, hyperreflexia, sweating and hyperthermia within about a day of the new drug. Rigidity is typically absent, which helps separate it from neuroleptic malignant syndrome.",
+   "say": "Psychotropic drugs carry predictable adverse effects that often appear through interactions. Serotonergic drugs can combine to cause serotonin toxicity, presenting with agitation, clonus, hyperreflexia, sweating and hyperthermia within about a day of the new drug. Rigidity is typically absent, which helps separate it from neuroleptic malignant syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Serotonin toxicity",
+     "Neuroleptic malignant syndrome"
+    ],
+    "rows": [
+     [
+      "Typical trigger",
+      "Added serotonergic drug",
+      "Dopamine antagonist"
+     ],
+     [
+      "Muscle tone",
+      "Clonus, hyperreflexia",
+      "Lead-pipe rigidity"
+     ],
+     [
+      "Onset",
+      "Hours to a day",
+      "Days"
+     ],
+     [
+      "Key sign",
+      "Inducible clonus",
+      "Rigidity with raised CK"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lithium has a narrow therapeutic index and is renally cleared. **Diuretics**, ACE inhibitors and dehydration reduce lithium clearance and can cause toxicity. Coarse tremor, vomiting and confusion signal serious toxicity. The immediate step is to hold lithium and restore volume with sodium-containing intravenous fluids, while monitoring levels and renal function.",
+   "say": "Lithium has a narrow therapeutic index and is renally cleared. Diuretics, ACE inhibitors and dehydration reduce lithium clearance and can cause toxicity. Coarse tremor, vomiting and confusion signal serious toxicity. The immediate step is to hold lithium and restore volume with sodium-containing intravenous fluids, while monitoring levels and renal function.",
+   "vis": null
+  },
+  {
+   "tx": "Clozapine can cause **agranulocytosis**, so neutrophil counts are monitored. Fever, sore throat and a low neutrophil count require the drug to be stopped immediately and the patient reviewed urgently, because sepsis can develop quickly. Clozapine is the antipsychotic with this specific marrow risk, and it must not be restarted without expert haematology and psychiatry input.",
+   "say": "Clozapine can cause agranulocytosis, so neutrophil counts are monitored. Fever, sore throat and a low neutrophil count require the drug to be stopped immediately and the patient reviewed urgently, because sepsis can develop quickly. Clozapine is the antipsychotic with this specific marrow risk, and it must not be restarted without expert haematology and psychiatry input.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever and sore throat"
+     },
+     {
+      "id": "b",
+      "label": "Low neutrophils"
+     },
+     {
+      "id": "c",
+      "label": "Stop clozapine"
+     },
+     {
+      "id": "d",
+      "label": "Urgent review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several psychotropics prolong the **QTc interval**, including citalopram and ondansetron. Hypokalaemia and hypomagnesaemia greatly raise the risk of torsades de pointes. The safe approach is to review QT-prolonging drugs, correct potassium and magnesium, and repeat the ECG. Sudden arrhythmic death is the main concern, so the risk is treated as an emergency when QTc is markedly prolonged.",
+   "say": "Several psychotropics prolong the QTc interval, including citalopram and ondansetron. Hypokalaemia and hypomagnesaemia greatly raise the risk of torsades de pointes. The safe approach is to review QT-prolonging drugs, correct potassium and magnesium, and repeat the ECG. Sudden arrhythmic death is the main concern, so the risk is treated as an emergency when QTc is markedly prolonged.",
+   "vis": null
+  },
+  {
+   "tx": "Valproate is **teratogenic**, associated with neural tube defects and neurodevelopmental harm when taken in early pregnancy. Women of reproductive age need effective contraception and pre-conception planning. Any switch to a safer mood stabiliser should be made in discussion with the patient and psychiatry, not by abrupt withdrawal, which risks relapse.",
+   "say": "Valproate is teratogenic, associated with neural tube defects and neurodevelopmental harm when taken in early pregnancy. Women of reproductive age need effective contraception and pre-conception planning. Any switch to a safer mood stabiliser should be made in discussion with the patient and psychiatry, not by abrupt withdrawal, which risks relapse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Valproate in women",
+     "points": [
+      "Teratogenic risk",
+      "Neural tube defects",
+      "Needs contraception"
+     ]
+    },
+    "right": {
+     "title": "Planned approach",
+     "points": [
+      "Discuss options",
+      "Pre-conception planning",
+      "Avoid abrupt stop"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute dystonia is a **dystonic reaction** to dopamine blockade, often within a day of starting an antipsychotic such as haloperidol. Sustained neck twisting or upward eye deviation is treated with an anticholinergic such as intramuscular benztropine. Lithium-induced nephrogenic diabetes insipidus is a separate problem, seen with polyuria and high sodium, and needs renal review.",
+   "say": "Acute dystonia is a dystonic reaction to dopamine blockade, often within a day of starting an antipsychotic such as haloperidol. Sustained neck twisting or upward eye deviation is treated with an anticholinergic such as intramuscular benztropine. Lithium-induced nephrogenic diabetes insipidus is a separate problem, seen with polyuria and high sodium, and needs renal review.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on bipolar disorder",
+  "NICE guideline on psychosis and schizophrenia in adults",
+  "Stahl's Essential Psychopharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

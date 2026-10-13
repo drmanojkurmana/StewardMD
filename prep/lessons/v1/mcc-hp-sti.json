@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "module": "mcc-hp-sti",
+ "subject": "mcc-health-promotion",
+ "title": "STI screening: who to test, where, and what to do with results",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Routine **STI screening** aims to find infections early, often before symptoms, so that treatment and partner notification can prevent complications and onward spread. Screening is driven by sexual behaviour, such as new or multiple partners and inconsistent condom use, and by pregnancy status. Testing should be offered confidentially and without judgement to every sexually active person.",
+   "say": "Routine STI screening aims to find infections early, often before symptoms appear, so that treatment and partner notification can prevent complications and stop onward spread. Screening is driven by sexual behaviour, such as new or multiple partners and inconsistent condom use, and by pregnancy status. Testing should be offered confidentially and without judgement to every sexually active person.",
+   "vis": null
+  },
+  {
+   "tx": "For **syphilis**, a reactive nontreponemal test such as RPR must be confirmed with a treponemal-specific antibody test before treatment. A high-titre result in an asymptomatic person still needs confirmation. Treponemal tests usually stay positive after infection, so they distinguish true infection from false positives. Consider lumbar puncture only when neurological or ocular features are present.",
+   "say": "For syphilis, a reactive nontreponemal test such as RPR must be confirmed with a treponemal-specific antibody test before treatment. A high-titre result in an asymptomatic person still needs confirmation. Treponemal tests usually stay positive after infection, so they distinguish true infection from false positives. Consider lumbar puncture only when neurological or ocular features are present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "RPR reactive"
+     },
+     {
+      "id": "b",
+      "label": "Treponemal test"
+     },
+     {
+      "id": "c",
+      "label": "Positive: treat"
+     },
+     {
+      "id": "d",
+      "label": "Negative: likely false positive"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "reactive"
+     ],
+     [
+      "b",
+      "d",
+      "non-reactive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pre-exposure prophylaxis** (PrEP) is daily oral emtricitabine-tenofovir for people at ongoing risk of HIV. Before starting, confirm HIV-negative status and check that creatinine and renal function are normal. Review for interacting medicines. Continue regular HIV testing and renal monitoring afterwards. **Post-exposure prophylaxis** (PEP) is a short course started as early as possible, ideally within 72 hours of a single exposure.",
+   "say": "Pre-exposure prophylaxis, or PrEP, is daily oral emtricitabine-tenofovir for people at ongoing risk of HIV. Before starting, confirm HIV-negative status and check that creatinine and renal function are normal. Review for interacting medicines. Continue regular HIV testing and renal monitoring afterwards. Post-exposure prophylaxis, or PEP, is a short course started as early as possible, ideally within 72 hours of a single exposure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PrEP",
+     "points": [
+      "Daily for ongoing risk",
+      "Start before exposure",
+      "Check HIV negative first",
+      "Monitor renal function"
+     ]
+    },
+    "right": {
+     "title": "PEP",
+     "points": [
+      "Short course after exposure",
+      "Start within 72 hours",
+      "Start as early as possible",
+      "Needs prompt assessment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **chlamydia** infection, treatment depends on pregnancy and allergy status. Pregnant women are given azithromycin, because tetracyclines and fluoroquinolones are avoided in pregnancy. Non-pregnant adults without allergy can receive a recommended oral antibiotic even if asymptomatic. Treat partners and retest after a few months because reinfection is common. Negative syphilis serology means no syphilis treatment is needed.",
+   "say": "In chlamydia infection, treatment depends on pregnancy and allergy status. Pregnant women are given azithromycin, because tetracyclines and fluoroquinolones are avoided in pregnancy. Non-pregnant adults without allergy can receive a recommended oral antibiotic even if asymptomatic. Treat partners and retest after a few months because reinfection is common. A negative syphilis serology means no syphilis treatment is needed.",
+   "vis": null
+  },
+  {
+   "tx": "In pregnancy, screen for **hepatitis B surface antigen**, which shows current infection, whether acute or chronic. Detecting it allows planning to prevent perinatal transmission. Syphilis and HIV screens are also done at the first antenatal visit. In men, a positive chlamydia NAAT at any site must be treated, and extragenital sites should be tested when exposure is present.",
+   "say": "In pregnancy, screen for hepatitis B surface antigen, which shows current infection, whether acute or chronic. Detecting it allows planning to prevent perinatal transmission. Syphilis and HIV screens are also done at the first antenatal visit. In men, a positive chlamydia test at any site must be treated, and extragenital sites should be tested when exposure is present.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

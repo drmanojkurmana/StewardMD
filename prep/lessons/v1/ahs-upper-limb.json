@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "ahs-upper-limb",
+ "subject": "adult-health-surgery",
+ "title": "Shoulder, arm and hand injuries: key emergency patterns",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Shoulder, arm and hand injuries are common in trauma and sports. Start with the **neurovascular check**, because it decides urgency. Test the radial or ulnar pulse, capillary refill, and sensation over the key nerve areas before and after any reduction or splint. A deficit recorded before treatment gives a clear baseline for later review.",
+   "say": "Shoulder, arm and hand injuries are common in trauma and sports. Start with the neurovascular check, because it decides urgency. Test the radial or ulnar pulse, capillary refill, and sensation over the key nerve areas before and after any reduction or splint. A deficit recorded before treatment gives a clear baseline for later review.",
+   "vis": null
+  },
+  {
+   "tx": "Anterior shoulder dislocation can injure the **axillary nerve**, which supplies deltoid and skin over the regimental badge area. Numbness there after dislocation suggests nerve injury. Most cases are neurapraxias that recover over weeks to months. A normal radial pulse shows the arterial supply is intact, so this is a nerve problem rather than a vascular emergency.",
+   "say": "Anterior shoulder dislocation can injure the axillary nerve, which supplies deltoid and skin over the regimental badge area. Numbness there after dislocation suggests nerve injury. Most cases are neurapraxias that recover over weeks to months. A normal radial pulse shows the arterial supply is intact, so this is a nerve problem rather than a vascular emergency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Likely meaning"
+    ],
+    "rows": [
+     [
+      "Regimental badge numbness",
+      "Axillary nerve involved"
+     ],
+     [
+      "Normal radial pulse",
+      "Arterial supply intact"
+     ],
+     [
+      "Reduced joint on X-ray",
+      "Deficit not from ongoing dislocation"
+     ],
+     [
+      "Recovery over weeks",
+      "Typical of neurapraxia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A deep hand infection can track along the tendon. A **flexor sheath infection** shows a flexed finger, fusiform swelling and pain on passive extension. Fever and a raised white count and CRP indicate spread. The closed sheath traps pus, which compresses tendon blood supply. Urgent surgical drainage with intravenous antibiotics is needed to prevent tendon necrosis.",
+   "say": "A deep hand infection can track along the tendon. A flexor sheath infection shows a flexed finger, fusiform swelling and pain on passive extension. Fever and a raised white count and CRP indicate spread. The closed sheath traps pus, which compresses tendon blood supply. Urgent surgical drainage with intravenous antibiotics is needed to prevent tendon necrosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Puncture wound"
+     },
+     {
+      "id": "b",
+      "label": "Pus in flexor sheath"
+     },
+     {
+      "id": "c",
+      "label": "Tendon compressed"
+     },
+     {
+      "id": "d",
+      "label": "Urgent drainage and IV antibiotics"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fall on the outstretched hand with **snuffbox tenderness** points to scaphoid fracture, even when early wrist X-rays look normal. Pain on longitudinal thumb compression supports the diagnosis. Immobilise in a thumb spica splint and repeat imaging after about two weeks, or use MRI or CT when available. Early immobilisation reduces the risk of nonunion.",
+   "say": "A fall on the outstretched hand with snuffbox tenderness points to scaphoid fracture, even when early wrist X-rays look normal. Pain on longitudinal thumb compression supports the diagnosis. Immobilise in a thumb spica splint and repeat imaging after about two weeks, or use MRI or CT when available. Early immobilisation reduces the risk of nonunion.",
+   "vis": null
+  },
+  {
+   "tx": "Crush injury with dark urine, very high **creatine kinase** and hyperkalaemia suggests rhabdomyolysis. Muscle necrosis releases myoglobin, which injures renal tubules and causes acute kidney injury. Treatment is early intravenous fluids and close potassium monitoring. Tense swelling after a crush or fracture also needs compartment assessment, since the two problems often coexist.",
+   "say": "Crush injury with dark urine, very high creatine kinase and hyperkalaemia suggests rhabdomyolysis. Muscle necrosis releases myoglobin, which injures renal tubules and causes acute kidney injury. Treatment is early intravenous fluids and close potassium monitoring. Tense swelling after a crush or fracture also needs compartment assessment, since the two problems often coexist.",
+   "vis": null
+  },
+  {
+   "tx": "**Compartment syndrome** is a surgical emergency. Warning signs are pain out of proportion, pain on passive finger stretch, a tense compartment and rising analgesic need. A present pulse does not exclude it. Rising pressure reduces perfusion until muscle and nerve damage becomes irreversible. Urgent fasciotomy is the definitive treatment, not elevation or repeated observation.",
+   "say": "Compartment syndrome is a surgical emergency. Warning signs are pain out of proportion, pain on passive finger stretch, a tense compartment and rising analgesic need. A present pulse does not exclude it. Rising pressure reduces perfusion until muscle and nerve damage becomes irreversible. Urgent fasciotomy is the definitive treatment, not elevation or repeated observation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warning signs",
+     "points": [
+      "Pain out of proportion",
+      "Pain on passive stretch",
+      "Tense compartment",
+      "Poor response to opioids"
+     ]
+    },
+    "right": {
+     "title": "Reassuring but misleading",
+     "points": [
+      "Present radial pulse",
+      "Normal pulse does not exclude",
+      "Elevation alone is not treatment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **mallet finger** follows a fingertip blow that tears the extensor tendon from the distal phalanx. The distal joint droops and cannot be extended. If there is no subluxation, treat with a continuous splint holding the distal joint straight for about six to eight weeks. Active flexion of the fingertip must be avoided, because it separates the repair.",
+   "say": "A mallet finger follows a fingertip blow that tears the extensor tendon from the distal phalanx. The distal joint droops and cannot be extended. If there is no subluxation, treat with a continuous splint holding the distal joint straight for about six to eight weeks. Active flexion of the fingertip must be avoided, because it separates the repair.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Chapter 9 in Apley's System of Orthopaedics and Fractures (Apley and Solomon)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

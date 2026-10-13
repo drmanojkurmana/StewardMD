@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "mcc-hp-cervical",
+ "subject": "mcc-health-promotion",
+ "title": "Cervical cancer screening: key decisions in primary care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A woman with **HPV 16** needs direct evaluation even when cytology is normal. HPV 16 is strongly linked to high-grade lesions. Viral oncoproteins E6 and E7 inactivate p53 and Rb, driving progressive dysplasia. Cytology samples surface cells and can miss lesions, so a normal smear does not exclude CIN2 or CIN3. Colposcopy with biopsy is the appropriate next step.",
+   "say": "A woman with HPV 16 needs direct evaluation even when her cytology is normal. HPV 16 is strongly linked to high grade lesions. Viral oncoproteins E6 and E7 inactivate p53 and Rb, driving progressive dysplasia. Cytology samples surface cells and can miss lesions, so a normal smear does not exclude CIN2 or CIN3. Colposcopy with biopsy is the appropriate next step.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HPV 16 positive"
+     },
+     {
+      "id": "b",
+      "label": "Cytology normal"
+     },
+     {
+      "id": "c",
+      "label": "Colposcopy"
+     },
+     {
+      "id": "d",
+      "label": "Biopsy if abnormal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening is only indicated while the cervix is present and the woman is within the screening age range. A **total hysterectomy** performed for benign disease, with no history of CIN2 or higher and no cervical cancer, removes the target organ. Routine screening can therefore stop. Women with prior high-grade disease or cancer need continued follow-up, so the history must be checked first.",
+   "say": "Screening is only indicated while the cervix is present and the woman is within the screening age range. A total hysterectomy performed for benign disease, with no history of CIN2 or higher and no cervical cancer, removes the target organ. Routine screening can therefore stop. Women with prior high grade disease or cancer need continued follow up, so the history must be checked first.",
+   "vis": null
+  },
+  {
+   "tx": "Pregnancy changes the timing of treatment. Biopsy-confirmed **CIN2 or CIN3** without suspicion of invasion is usually managed by surveillance during pregnancy, because excision carries risks of bleeding and preterm birth. Suspected invasion needs urgent imaging and specialist input. Treatment is generally deferred to the postpartum period, with colposcopic surveillance in between.",
+   "say": "Pregnancy changes the timing of treatment. Biopsy confirmed CIN2 or CIN3 without suspicion of invasion is usually managed by surveillance during pregnancy, because excision carries risks of bleeding and preterm birth. Suspected invasion needs urgent imaging and specialist input. Treatment is generally deferred to the postpartum period, with colposcopic surveillance in between.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CIN2 or CIN3 in pregnancy"
+     },
+     {
+      "id": "b",
+      "label": "Invasion suspected?"
+     },
+     {
+      "id": "c",
+      "label": "Urgent imaging and specialist review"
+     },
+     {
+      "id": "d",
+      "label": "Surveillance, treat postpartum"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Overdue women can be reached with **self-collected HPV testing**, which performs comparably to clinician-collected samples. Fear of speculum examination and transport barriers are addressed by this approach, supported by navigation help. Concurrent anaemia needs its own work-up and should not delay screening. Vaccination lowers risk but does not replace screening, because vaccine types do not cover all oncogenic HPV.",
+   "say": "Overdue women can be reached with self collected HPV testing, which performs comparably to clinician collected samples. Fear of speculum examination and transport barriers are addressed by this approach, supported by navigation help. Concurrent anaemia needs its own work up and should not delay screening. Vaccination lowers risk but does not replace screening, because vaccine types do not cover all oncogenic HPV.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Barrier",
+     "Practical response"
+    ],
+    "rows": [
+     [
+      "Fear of speculum",
+      "Self-collected HPV sample"
+     ],
+     [
+      "Limited transport",
+      "Navigation support and remote sampling"
+     ],
+     [
+      "Vaccinated woman",
+      "Continue age-appropriate screening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biopsy-confirmed **CIN2** at the transformation zone in a woman who has completed her family is best treated by excision. The **loop electrosurgical excision procedure** removes the transformation zone and allows histological assessment of margins. Observation with follow-up is reserved for selected cases, and hysterectomy is not first line. HIV and hepatitis C results do not change this choice.",
+   "say": "Biopsy confirmed CIN2 at the transformation zone in a woman who has completed her family is best treated by excision. The loop electrosurgical excision procedure removes the transformation zone and allows histological assessment of margins. Observation with follow up is reserved for selected cases, and hysterectomy is not first line. HIV and hepatitis C results do not change this choice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Option",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Loop electrosurgical excision",
+      "First-line definitive treatment"
+     ],
+     [
+      "Observation with follow-up",
+      "Selected cases only"
+     ],
+     [
+      "Hysterectomy",
+      "Not first line"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "World Health Organization. WHO guideline for screening and treatment of cervical pre-cancer lesions for cervical cancer prevention (2021)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "phe-screening",
+ "subject": "population-health-and-ethics",
+ "title": "Screening and prevention: acting on a screen-positive result",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **screening test** is applied to people without symptoms to find disease early. A positive result is not a diagnosis. It means the person needs further testing to confirm or exclude disease. The **positive predictive value** of most screening tests is modest, so many screen-positive people will not have the condition. Good practice is to match the next step to the test and the clinical picture.",
+   "say": "A screening test is applied to people without symptoms to find disease early. A positive result is not a diagnosis. It means the person needs further testing to confirm or exclude disease. The positive predictive value of most screening tests is modest, so many screen-positive people will not have the condition. Good practice is to match the next step to the test and the clinical picture.",
+   "vis": null
+  },
+  {
+   "tx": "Faecal immunochemical testing detects **human haemoglobin** in stool. A positive result signals bleeding somewhere in the gut, which may come from colorectal cancer or adenomas. Absence of symptoms, a normal abdominal examination and a normal full blood count do not exclude neoplasia. The next step is **colonoscopy**, which views the whole colon and allows biopsy or polypectomy at the same sitting.",
+   "say": "Faecal immunochemical testing detects human haemoglobin in stool. A positive result signals bleeding somewhere in the gut, which may come from colorectal cancer or adenomas. Absence of symptoms, a normal abdominal examination and a normal full blood count do not exclude neoplasia. The next step is colonoscopy, which views the whole colon and allows biopsy or polypectomy at the same sitting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "FIT positive"
+     },
+     {
+      "id": "b",
+      "label": "No symptoms or normal bloods"
+     },
+     {
+      "id": "c",
+      "label": "Colonoscopy of whole colon"
+     },
+     {
+      "id": "d",
+      "label": "Biopsy or polypectomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "c",
+      "still needs"
+     ],
+     [
+      "b",
+      "c",
+      "does not exclude"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screen-detected **rheumatic heart disease** in a child with no symptoms still warrants **secondary prophylaxis** against recurrent infection. The condition follows **group A streptococcal** infection, with the immune system mistakenly attacking heart tissue through molecular mimicry. Each new bout risks another episode of rheumatic fever and further valve damage. Long-term preventive antibiotic cover is therefore indicated, and feeling well does not remove the need for it.",
+   "say": "A child whose screening has detected rheumatic heart disease still needs secondary prophylaxis to prevent recurrent infection, even with no symptoms. This condition follows group A streptococcal infection, because the immune system mistakenly attacks heart tissue through molecular mimicry. Every new bout carries a risk of another episode of rheumatic fever and further valve damage. Long-term preventive antibiotic cover is therefore indicated, and feeling well does not remove that need.",
+   "vis": null
+  },
+  {
+   "tx": "Pregnancy is a time for **inactivated vaccines**, which do not replicate and are safe for the mother and foetus. Adult pertussis booster in the third trimester gives maternal antibodies that cross the placenta and protect the newborn before infant vaccination begins. Live vaccines such as measles, mumps and rubella are contraindicated in pregnancy.",
+   "say": "Pregnancy is a time for inactivated vaccines, which do not replicate and are safe for the mother and foetus. Adult pertussis booster in the third trimester gives maternal antibodies that cross the placenta and protect the newborn before infant vaccination begins. Live vaccines such as measles, mumps and rubella are contraindicated in pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaccine type",
+     "Safe in pregnancy?",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Inactivated",
+      "Yes",
+      "Combined diphtheria, tetanus and pertussis"
+     ],
+     [
+      "Live attenuated",
+      "No",
+      "Measles, mumps and rubella"
+     ],
+     [
+      "Live attenuated",
+      "No",
+      "Varicella zoster"
+     ],
+     [
+      "Live attenuated",
+      "Avoid unless essential",
+      "Yellow fever"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Iron deficiency in pregnancy often presents as **microcytic anaemia** with low **ferritin**. Pregnancy expands plasma volume and raises iron demand, so stores are depleted. In an afebrile, stable woman without bleeding, the first step is **oral iron supplementation** and investigation of the cause. Transfusion is reserved for severe or symptomatic anaemia with instability.",
+   "say": "Iron deficiency in pregnancy often presents as microcytic anaemia with low ferritin. Pregnancy expands plasma volume and raises iron demand, so stores are depleted. In an afebrile, stable woman without bleeding, the first step is oral iron supplementation and investigation of the cause. Transfusion is reserved for severe or symptomatic anaemia with instability.",
+   "vis": null
+  },
+  {
+   "tx": "Raised transferrin saturation and ferritin, together with arthropathy, bronzed skin and hepatomegaly, point towards **haemochromatosis**. The confirmatory step is **HFE gene testing**, looking for the common variant in the HFE gene. The mutation reduces hepcidin signalling, so intestinal iron absorption rises and iron builds up in the liver, pancreas, joints and skin. Venesection should follow confirmation, not precede it.",
+   "say": "High transferrin saturation and ferritin, plus joint pain, bronzed skin and an enlarged liver, suggest haemochromatosis. Next, genetic testing of the HFE gene confirms the diagnosis, focusing on the common variant. This change weakens hepcidin signalling, so the gut absorbs more iron, which then accumulates in the liver, pancreas, joints and skin. Only after confirmation should venesection begin.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG12: Suspected cancer: recognition and referral"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

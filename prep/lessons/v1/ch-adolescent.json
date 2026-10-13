@@ -1,0 +1,107 @@
+{
+ "v": 1,
+ "module": "ch-adolescent",
+ "subject": "child-health",
+ "title": "Adolescent health: key clinical principles for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Adolescence is the transition between childhood and adulthood, marked by rapid growth, puberty and psychological change. Health problems in young people often present as **somatic complaints** such as headaches or abdominal pain, or as changes in behaviour, rather than as classic disease. Clinicians should spend part of every consultation seeing the young person alone, so they can raise sensitive issues. **Confidentiality** is the default and is breached only when there is a serious risk of harm.",
+   "say": "Adolescence is the transition between childhood and adulthood, marked by rapid growth, puberty and psychological change. Health problems in young people often show up as somatic complaints, such as headaches or tummy pain, or as changes in behaviour, rather than as classic disease. Clinicians should spend part of every consultation seeing the young person alone, so they can raise sensitive issues. Confidentiality is the default and is breached only when there is a serious risk of harm.",
+   "vis": null
+  },
+  {
+   "tx": "Consent in a young person depends on **competence** rather than age alone. Under the mature minor principle, a young person who understands the risks, benefits and alternatives can consent to treatment, including contraception, without a parent. Competence is assessed for each decision. Where the young person lacks competence, or there is a safeguarding concern, parents or the appropriate authority must be involved.",
+   "say": "Consent in a young person depends on competence rather than age alone. Under the mature minor principle, a young person who understands the risks, benefits and alternatives can consent to treatment, including contraception, without a parent. Competence is assessed for each decision. Where the young person lacks competence, or there is a safeguarding concern, parents or the appropriate authority must be involved.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Can consent alone",
+     "points": [
+      "Understands risks and benefits",
+      "Shows stable decision making",
+      "No coercion or abuse concern"
+     ]
+    },
+    "right": {
+     "title": "Needs guardian or authority",
+     "points": [
+      "Lacks understanding of the decision",
+      "Suspected abuse or coercion",
+      "Serious risk to life requiring action"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Depression and suicidal thinking are common in adolescents and must be asked about directly. Asking about **suicidal ideation**, plans and intent does not increase risk, and it gives the information needed to assess severity. Withdrawal, poor sleep and a remark about not wanting to be around are warning signs. Routine referral alone is insufficient when risk is possible, and reassurance without assessment is unsafe.",
+   "say": "Depression and suicidal thinking are common in adolescents and must be asked about directly. Asking about suicidal ideation, plans and intent does not increase risk, and it gives the information needed to assess severity. Withdrawal, poor sleep and a remark about not wanting to be around are warning signs. Routine referral alone is insufficient when risk is possible, and reassurance without assessment is unsafe.",
+   "vis": null
+  },
+  {
+   "tx": "Slipped upper femoral epiphysis is a key adolescent hip disorder. It affects overweight boys around puberty and presents as knee or thigh pain with reduced internal rotation of the hip and a limp. The **femoral capital epiphysis** displaces posteriorly through the growth plate. Diagnosis is confirmed on radiographs, and urgent orthopaedic referral with non-weight bearing is needed to limit avascular necrosis.",
+   "say": "Slipped upper femoral epiphysis is a key adolescent hip disorder. It affects overweight boys around puberty and presents as knee or thigh pain with reduced internal rotation of the hip and a limp. The femoral capital epiphysis displaces posteriorly through the growth plate. Diagnosis is confirmed on radiographs, and urgent orthopaedic referral with non-weight bearing is needed to limit avascular necrosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Knee pain with limp"
+     },
+     {
+      "id": "b",
+      "label": "Reduced hip rotation"
+     },
+     {
+      "id": "c",
+      "label": "Radiograph confirms slip"
+     },
+     {
+      "id": "d",
+      "label": "Urgent orthopaedic referral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sudden collapse during exertion in a young person needs cardiac evaluation, especially with a family history of sudden death. **Hypertrophic cardiomyopathy** is a leading cause of exercise related sudden death in young athletes. An abnormal resting ECG with marked left ventricular voltage and lateral T wave inversion points towards it. Transthoracic echocardiography is the next investigation, as it measures wall thickness and outflow obstruction. Diabetic ketoacidosis is a separate emergency managed with fluids and insulin.",
+   "say": "Sudden collapse during exertion in a young person needs cardiac evaluation, especially with a family history of sudden death. Hypertrophic cardiomyopathy is a leading cause of exercise related sudden death in young athletes. An abnormal resting ECG with marked left ventricular voltage and lateral T wave inversion points towards it. Transthoracic echocardiography is the next investigation, as it measures wall thickness and outflow obstruction. Diabetic ketoacidosis is a separate emergency managed with fluids and insulin.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG128 Eating disorders: recognition and treatment",
+  "Gillick v West Norfolk and Wisbech AHA (House of Lords, 1985)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

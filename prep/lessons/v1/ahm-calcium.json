@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "ahm-calcium",
+ "subject": "adult-health-medicine",
+ "title": "Calcium and bone disorders: recognising and managing the key patterns",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Primary hyperparathyroidism** is usually caused by a single parathyroid adenoma. Patients may have renal colic, fatigue, constipation or bone pain. Low phosphate with high PTH supports the diagnosis. Surgical removal of the adenoma is the only definitive cure, and referral for parathyroidectomy assessment is indicated when symptoms such as stones or fatigue are present.",
+   "say": "Primary hyperparathyroidism is usually caused by a single parathyroid adenoma. Patients may have renal colic, fatigue, constipation or bone pain. Low phosphate with high PTH supports the diagnosis. Surgical removal of the adenoma is the only definitive cure, and referral for parathyroidectomy assessment is indicated when symptoms such as stones or fatigue are present.",
+   "vis": null
+  },
+  {
+   "tx": "**Post-thyroidectomy hypocalcaemia** follows parathyroid injury or devascularisation. Early signs include perioral tingling, fingertip cramps and a positive Chvostek sign. Prolonged QT on ECG signals cardiac risk. Severe symptomatic cases need urgent intravenous calcium gluconate with cardiac monitoring, followed by oral calcium and active vitamin D once stable.",
+   "say": "Post-thyroidectomy hypocalcaemia follows parathyroid injury or devascularisation. Early signs include perioral tingling, fingertip cramps and a positive Chvostek sign. Prolonged QT on ECG signals cardiac risk. Severe symptomatic cases need urgent intravenous calcium gluconate with cardiac monitoring, followed by oral calcium and active vitamin D once stable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thyroidectomy"
+     },
+     {
+      "id": "b",
+      "label": "Low PTH"
+     },
+     {
+      "id": "c",
+      "label": "Low calcium"
+     },
+     {
+      "id": "d",
+      "label": "IV calcium gluconate"
+     },
+     {
+      "id": "e",
+      "label": "Oral calcium and vitamin D"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "symptomatic"
+     ],
+     [
+      "d",
+      "e",
+      "stable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Malignancy-associated hypercalcaemia** is usually PTH-independent. Squamous cell lung carcinoma and similar tumours can secrete **PTH-related peptide**, which acts on the PTH receptor in bone and kidney. Expect low phosphate and suppressed intact PTH. Imaging of the parathyroids is typically normal, so the search should focus on the tumour and the hypercalcaemia treatment.",
+   "say": "Malignancy-associated hypercalcaemia is usually PTH-independent. Squamous cell lung carcinoma and similar tumours can secrete PTH-related peptide, which acts on the PTH receptor in bone and kidney. Expect low phosphate and suppressed intact PTH. Imaging of the parathyroids is typically normal, so the search should focus on the tumour and the hypercalcaemia treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Osteomalacia** after bariatric surgery reflects **malabsorption** of vitamin D and calcium. Proximal weakness, bone pain, low phosphate and raised alkaline phosphatase are typical. PTH rises to defend calcium. Treatment is replacement of vitamin D and calcium. Paget disease, by contrast, gives a focal raised alkaline phosphatase with normal calcium, and whole body bone scintigraphy defines its extent.",
+   "say": "Osteomalacia after bariatric surgery reflects malabsorption of vitamin D and calcium. Proximal weakness, bone pain, low phosphate and raised alkaline phosphatase are typical. PTH rises to defend calcium. Treatment is replacement of vitamin D and calcium. Paget disease, by contrast, gives a focal raised alkaline phosphatase with normal calcium, and whole body bone scintigraphy defines its extent.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)",
+  "Davidson's Principles and Practice of Medicine (Ralston et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

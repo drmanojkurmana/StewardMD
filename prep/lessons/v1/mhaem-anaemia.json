@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "mhaem-anaemia",
+ "subject": "mrcp-haematology-oncology",
+ "title": "Anaemia: iron, B12, folate and workup",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Anaemia is sorted by red cell size, measured as the **mean corpuscular volume** (MCV). A small-cell pattern, judged against the laboratory reference range, most often reflects **iron deficiency**. A normal-sized pattern has many causes, including anaemia of chronic disease. A large-cell pattern suggests **vitamin B12** or **folate** deficiency, alcohol, liver disease, or certain drugs. Use the MCV first, then refine the diagnosis with the blood film and iron studies.",
+   "say": "Anaemia is sorted by red cell size, measured as the mean corpuscular volume, known as the MCV. A small-cell pattern, judged against the laboratory reference range, most often reflects iron deficiency. A normal-sized pattern has many causes, including anaemia of chronic disease. A large-cell pattern suggests vitamin B12 or folate deficiency, alcohol, liver disease, or certain drugs. Use the MCV first, then refine the diagnosis with the blood film and iron studies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MCV band",
+     "Typical causes",
+     "First clue"
+    ],
+    "rows": [
+     [
+      "Below reference range",
+      "Iron deficiency, thalassaemia",
+      "Low ferritin"
+     ],
+     [
+      "Within reference range",
+      "Chronic disease, blood loss, renal disease",
+      "Ferritin often normal or raised"
+     ],
+     [
+      "Above reference range",
+      "B12 or folate deficiency, alcohol",
+      "Hypersegmented neutrophils"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **iron deficiency**, ferritin is the best test of stores, and it falls before the haemoglobin does. Ferritin is an acute phase reactant, so inflammation can falsely raise it. In **anaemia of chronic disease**, raised interleukin-6 increases **hepcidin**, which traps iron in macrophages and lowers gut absorption. Serum iron and transferrin are low, but ferritin is normal or raised.",
+   "say": "In iron deficiency, ferritin is the best test of iron stores, and it falls before the haemoglobin does. Ferritin is an acute phase reactant, so inflammation can falsely raise it. In anaemia of chronic disease, raised interleukin-6 increases hepcidin, which traps iron in macrophages and lowers gut absorption. Serum iron and transferrin are low, but ferritin is normal or raised.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Iron deficiency",
+     "points": [
+      "Ferritin low",
+      "Transferrin raised",
+      "Microcytic, hypochromic",
+      "Heavy loss or poor intake"
+     ]
+    },
+    "right": {
+     "title": "Chronic disease",
+     "points": [
+      "Ferritin normal or high",
+      "Transferrin low",
+      "Hepcidin raised",
+      "Inflammatory cause present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Iron deficiency needs a search for the **source of loss**. In a premenopausal woman, heavy menstruation is common, but a man or postmenopausal woman needs gastrointestinal evaluation, including coeliac serology and endoscopy. Oral iron is first line when tolerated, given once daily. Intravenous iron is used for intolerance, malabsorption, or heart failure with iron deficiency, where it improves symptoms.",
+   "say": "Iron deficiency needs a search for the source of loss. In a premenopausal woman, heavy menstruation is common, but a man or postmenopausal woman needs gastrointestinal evaluation, including coeliac serology and endoscopy. Oral iron is first line when tolerated, given once daily. Intravenous iron is used for intolerance, malabsorption, or heart failure with iron deficiency, where it improves symptoms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low ferritin"
+     },
+     {
+      "id": "b",
+      "label": "Find blood loss"
+     },
+     {
+      "id": "c",
+      "label": "Oral iron"
+     },
+     {
+      "id": "d",
+      "label": "IV iron if oral fails"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vitamin B12** is absorbed in a multistep process. Gastric acid and pepsin release B12 from food, then **intrinsic factor** from parietal cells binds it. The complex is absorbed by receptor-mediated uptake in the terminal ileum. Pernicious anaemia is autoimmune atrophic gastritis that destroys parietal cells. Anti-intrinsic factor antibodies are highly specific, while anti-parietal cell antibodies are more sensitive but less specific.",
+   "say": "Vitamin B12 is absorbed in a multistep process. Gastric acid and pepsin release B12 from food, then intrinsic factor from parietal cells binds it. The complex is absorbed by receptor-mediated uptake in the terminal ileum. Pernicious anaemia is autoimmune atrophic gastritis that destroys parietal cells. Anti-intrinsic factor antibodies are highly specific, while anti-parietal cell antibodies are more sensitive but less specific.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Release from food"
+     },
+     {
+      "id": "b",
+      "label": "Binds intrinsic factor"
+     },
+     {
+      "id": "c",
+      "label": "Ileal uptake"
+     },
+     {
+      "id": "d",
+      "label": "Stored and used"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Folate** deficiency also causes megaloblastic anaemia, but it does not cause neurological damage. Giving folic acid alone to a patient with B12 deficiency can correct the blood count while **subacute combined degeneration** of the spinal cord progresses. Check B12 and red cell folate before treating. In suspected B12 deficiency with neurological features, give intramuscular hydroxocobalamin promptly, as a loading course, and do not delay for antibody results.",
+   "say": "Folate deficiency also causes megaloblastic anaemia, but it does not cause neurological damage. Giving folic acid alone to a patient with B12 deficiency can correct the blood count while subacute combined degeneration of the spinal cord progresses. Check B12 and red cell folate before treating. In suspected B12 deficiency with neurological features, give intramuscular hydroxocobalamin promptly, as a loading course, and do not delay for antibody results.",
+   "vis": null
+  },
+  {
+   "tx": "Early **neurological signs** of B12 deficiency include reduced vibration sense, a positive Romberg sign, and paraesthesia in the feet. Neurological damage can be irreversible if treatment is delayed. Replacement is usually lifelong after pernicious anaemia or extensive ileal resection. In UK practice, NICE guidance covers the investigation and treatment of B12 and folate deficiency, and it takes precedence where it applies. Indian and US practice follow similar principles.",
+   "say": "Early neurological signs of B12 deficiency include reduced vibration sense, a positive Romberg sign, and paraesthesia in the feet. Neurological damage can be irreversible if treatment is delayed. Replacement is usually lifelong after pernicious anaemia or extensive ileal resection. In UK practice, NICE guidance covers the investigation and treatment of B12 and folate deficiency, and it takes precedence where it applies. Indian and US practice follow similar principles.",
+   "vis": null
+  },
+  {
+   "tx": "In **heart failure with reduced ejection fraction**, iron deficiency is judged mainly by **ferritin** and **transferrin saturation** rather than by haemoglobin alone, since anaemia can be absent while stores are depleted. **Intravenous iron** relieves symptoms and improves exercise capacity, whereas **oral iron** has little benefit. In men and postmenopausal women, look for a **gastrointestinal source** of blood loss before assigning the deficiency to heart failure.",
+   "say": "In heart failure with reduced ejection fraction, iron deficiency is judged mainly by ferritin and transferrin saturation, not by haemoglobin alone, because anaemia can be absent while the body's iron stores are already depleted. Intravenous iron relieves symptoms and improves exercise capacity, whereas oral iron offers little benefit. In men and postmenopausal women, look for a gastrointestinal source of blood loss before assigning the deficiency to heart failure.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on Anaemia: investigation and management of B12 and folate deficiency"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "ahs-neck",
+ "subject": "adult-health-surgery",
+ "title": "Neck lumps and thyroid surgery",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Neck lumps are classified by position and age. A midline lump in a young adult is often a **thyroglossal duct cyst**, arising from the tract between the foramen caecum and the thyroid. A lateral lump in a young adult is usually a **branchial cyst**. A firm lump in an adult should raise concern for malignancy or lymphadenopathy, so examine the thyroid and ask about swallowing and tongue movement.",
+   "say": "Neck lumps are classified by their position and the patient's age. A midline lump in a young adult is often a thyroglossal duct cyst, arising from the tract that runs from the foramen caecum to the thyroid. A lateral lump in a young adult is usually a branchial cyst. A firm lump in an adult should raise concern for malignancy or lymphadenopathy, so examine the thyroid and ask about swallowing and tongue movement.",
+   "vis": null
+  },
+  {
+   "tx": "A thyroglossal duct cyst is **midline** and moves upwards when the patient protrudes the tongue, because the tract is attached to the hyoid bone. It can become infected and tender. Treatment is excision of the cyst, the tract and the central part of the hyoid bone, known as the Sistrunk procedure, which reduces recurrence. Dermoid cysts are also midline but do not move with tongue protrusion.",
+   "say": "A thyroglossal duct cyst sits in the midline and moves upwards when the patient protrudes the tongue, because its tract is attached to the hyoid bone. It can become infected and tender. Treatment is excision of the cyst, the tract and the central part of the hyoid bone, known as the Sistrunk procedure, which reduces recurrence. Dermoid cysts are also midline but do not move with tongue protrusion.",
+   "vis": null
+  },
+  {
+   "tx": "A solitary thyroid nodule with a normal TSH needs ultrasound and **fine needle aspiration cytology**. Ultrasound features such as **irregular margins** and microcalcification raise suspicion. Follicular neoplasms cannot be classified on cytology, because capsular or vascular invasion needs excised tissue, so diagnostic lobectomy is usually the next step.",
+   "say": "A solitary thyroid nodule with a normal TSH needs ultrasound and fine needle aspiration cytology. Ultrasound features such as irregular margins and microcalcification raise suspicion. Follicular neoplasms cannot be classified on cytology, because capsular or vascular invasion needs excised tissue, so diagnostic lobectomy is usually the next step.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cytology result",
+     "Usual next step"
+    ],
+    "rows": [
+     [
+      "Benign",
+      "Clinical review and surveillance"
+     ],
+     [
+      "Indeterminate follicular",
+      "Diagnostic lobectomy with histology"
+     ],
+     [
+      "Suspicious or malignant",
+      "Surgery guided by histology and staging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early complications of thyroidectomy need fast recognition. A **neck haematoma** with rising swelling, stridor or falling saturation is a surgical emergency: the wound is opened at the bedside and the airway team is called. Post-operative **hypocalcaemia** from parathyroid injury causes perioral tingling and carpopedal spasm, and is treated with intravenous calcium gluconate when symptomatic.",
+   "say": "Early complications of thyroidectomy need fast recognition. A neck haematoma with rising swelling, stridor or falling saturation is a surgical emergency. The wound is opened at the bedside and the airway team is called. Post-operative hypocalcaemia from parathyroid injury causes perioral tingling and carpopedal spasm, and is treated with intravenous calcium gluconate when symptomatic.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tense swelling with stridor"
+     },
+     {
+      "id": "b",
+      "label": "Open wound at bedside"
+     },
+     {
+      "id": "c",
+      "label": "Call airway team"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Graves disease must be controlled before elective thyroidectomy to lower the risk of **thyroid storm** under anaesthesia. **Carbimazole** blocks new hormone synthesis, while a **beta blocker** eases palpitations and tremor. Surgery waits until the patient is biochemically euthyroid, and iodine may be given briefly beforehand to reduce gland vascularity.",
+   "say": "Graves disease must be controlled before elective thyroidectomy to lower the risk of thyroid storm under anaesthesia. Carbimazole blocks new hormone synthesis, while a beta blocker eases palpitations and tremor. Surgery waits until the patient is biochemically euthyroid, and iodine may be given briefly beforehand to reduce gland vascularity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Carbimazole",
+      "Blocks hormone synthesis"
+     ],
+     [
+      "Beta blocker",
+      "Controls adrenergic symptoms"
+     ],
+     [
+      "Surgery timing",
+      "Only once biochemically euthyroid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A painless, firm, mobile neck node with night sweats, weight loss and raised ESR suggests **tuberculous lymphadenitis**, especially in an endemic setting. Diagnosis needs tissue: an **excision biopsy** typically shows caseating granulomas, and culture or PCR identifies the organism. Lymphoma must also be excluded histologically, so biopsy rather than empirical treatment is the next step.",
+   "say": "A painless, firm, mobile neck node with night sweats, weight loss and raised ESR suggests tuberculous lymphadenitis, especially in an endemic setting. Diagnosis needs tissue. An excision biopsy typically shows caseating granulomas, and culture or PCR identifies the organism. Lymphoma must also be excluded histologically, so biopsy rather than empirical treatment is the next step.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Bailey and Love's Short Practice of Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

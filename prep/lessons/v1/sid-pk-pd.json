@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "module": "sid-pk-pd",
+ "subject": "ss-infectious-diseases",
+ "title": "Antimicrobial Pharmacokinetics and Pharmacodynamics: Matching Dosing to Killing",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Antibiotic effect depends on how drug levels relate to the **MIC**, the minimum inhibitory concentration of the target organism. Agents fall into three killing patterns. **Time-dependent** agents, such as beta-lactams, work best when levels stay above the MIC for most of the dosing interval, so the key index is **T above MIC**. **Concentration-dependent** agents, such as aminoglycosides, kill faster as peak levels rise, judged by **Cmax/MIC**. Glycopeptides such as vancomycin are guided by the **AUC/MIC** ratio, the total exposure over time relative to the MIC.",
+   "say": "Think of three patterns when judging how a drug kills. Beta-lactams depend on how long levels stay above the threshold concentration for the organism. Aminoglycosides depend on how high the peak climbs. Vancomycin depends on total drug exposure over time, relative to the organism's threshold.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Killing pattern",
+     "Key index",
+     "Typical examples"
+    ],
+    "rows": [
+     [
+      "Time-dependent",
+      "T above MIC",
+      "Beta-lactams"
+     ],
+     [
+      "Concentration-dependent",
+      "Cmax/MIC",
+      "Aminoglycosides, fluoroquinolones"
+     ],
+     [
+      "Exposure-based",
+      "AUC/MIC",
+      "Vancomycin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For **beta-lactams**, the goal is keeping free drug above the MIC for a large share of the dosing interval, a **T above MIC** target. Standard intermittent bolus dosing often falls short in critically ill patients, whose volume of distribution and clearance can shift considerably. **Extended infusion**, where each dose runs over several hours, lengthens time above MIC without increasing the total daily dose. Many ICU protocols use this approach for several beta-lactams.",
+   "say": "For beta-lactams, the goal is keeping free drug above the MIC for a large share of the dosing interval, a time above MIC target. Standard intermittent bolus dosing often falls short in critically ill patients, whose volume of distribution and clearance can shift considerably. Extended infusion, where each dose runs over several hours, lengthens time above MIC without increasing the total daily dose. Many intensive care protocols use this approach for several beta-lactams.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intermittent bolus",
+     "points": [
+      "Short infusion over minutes",
+      "Levels peak then fall quickly",
+      "Time above MIC often falls short in sepsis"
+     ]
+    },
+    "right": {
+     "title": "Extended infusion",
+     "points": [
+      "Infusion over about three to four hours",
+      "Levels stay above MIC longer",
+      "Same daily dose, better time above MIC"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Aminoglycosides** show **concentration-dependent killing** with a **post-antibiotic effect**, meaning bacterial growth stays suppressed after levels drop. The key target is the **peak concentration to MIC ratio**, so a single larger daily dose outperforms divided dosing. Once-daily regimens also reduce **nephrotoxicity** and **ototoxicity** because troughs fall low between doses. Renal function still governs dosing, so follow local protocols and check levels.",
+   "say": "Aminoglycosides show concentration-dependent killing with a post-antibiotic effect, so bacterial growth stays suppressed even after levels drop. The key target is the peak concentration to MIC ratio, which means one larger daily dose works better than divided doses. Once-daily regimens also reduce nephrotoxicity and ototoxicity, because troughs fall low between doses. Renal function still governs dosing, so follow local protocols and check levels.",
+   "vis": null
+  },
+  {
+   "tx": "A **loading dose** fills the drug's volume of distribution quickly, so target levels are reached at once. It is usually based on body weight and is not reduced for renal impairment. In **augmented renal clearance**, seen in young trauma or septic patients, kidneys clear drugs faster than expected, so standard doses may underdose beta-lactams and vancomycin. Measuring levels or using higher doses helps avoid early treatment failure.",
+   "say": "A loading dose fills the drug's volume of distribution quickly, so target levels are reached at once. It is usually based on body weight and is not reduced for renal impairment. In augmented renal clearance, seen in young trauma or septic patients, kidneys clear drugs faster than expected, so standard doses may underdose beta-lactams and vancomycin. Measuring levels or using higher doses helps avoid early treatment failure.",
+   "vis": null
+  },
+  {
+   "tx": "In **continuous renal replacement therapy**, drug clearance depends on the filter, blood flow and effluent rate, so standard renal doses can be wrong in either direction. Highly protein-bound or large drugs may be poorly removed. Dosing should be reviewed at the start of therapy and whenever the circuit or effluent rate changes. Therapeutic drug monitoring and clinical pharmacist input are key, and the exact adjustment should follow local CRRT dosing references.",
+   "say": "In continuous renal replacement therapy, drug clearance depends on the filter, blood flow and effluent rate, so standard renal doses can be wrong in either direction. Highly protein-bound or large drugs may be poorly removed. Dosing should be reviewed at the start of therapy and whenever the circuit or effluent rate changes. Therapeutic drug monitoring and clinical pharmacist input are key, and the exact adjustment should follow local CRRT dosing references.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_2a87732bc5e6",
+  "q_0ea38215264e",
+  "q_2c77c1de7561"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

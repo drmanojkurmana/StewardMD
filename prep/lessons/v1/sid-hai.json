@@ -1,0 +1,123 @@
+{
+ "v": 1,
+ "module": "sid-hai",
+ "subject": "ss-infectious-diseases",
+ "title": "Healthcare Associated Infections: Device Days, Bundles and Surveillance",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **healthcare-associated infection** (HAI) is an infection acquired during care in a hospital or other facility, not present on admission. Most HAIs in Indian and global ICUs are **device-associated**, so the risk tracks how many days a patient carries a device. Exam questions often test which device goes with which infection and how rates are calculated.",
+   "say": "A healthcare-associated infection, or HAI, is an infection acquired during care in a hospital or other facility and not present on admission. Most HAIs in ICUs are device-associated, so the risk tracks how many days a patient carries a device. Exam questions often test which device goes with which infection, and how rates are calculated.",
+   "vis": null
+  },
+  {
+   "tx": "The four device and procedure linked HAIs deserve close attention: **CLABSI**, **CAUTI**, **VAP** and **surgical site infection**. Each is tied to one main exposure, so the most effective control is usually to remove or cut back that exposure. Pair each infection with its matching prevention lever, as shown in the table below.",
+   "say": "The four device and procedure linked healthcare associated infections to know are CLABSI, CAUTI, VAP and surgical site infection. CLABSI, meaning central line associated bloodstream infection, arises from central venous catheters, while CAUTI, meaning catheter associated urinary tract infection, arises from urinary catheters. VAP follows mechanical ventilation and surgical site infection follows operative incisions. Because each infection hangs off one device or exposure, removing or reducing that exposure is usually the strongest step.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infection",
+     "Main exposure",
+     "Core prevention lever"
+    ],
+    "rows": [
+     [
+      "CLABSI",
+      "Central venous catheter",
+      "Hand hygiene, aseptic insertion, daily review"
+     ],
+     [
+      "CAUTI",
+      "Urinary catheter",
+      "Remove early, closed drainage"
+     ],
+     [
+      "VAP",
+      "Mechanical ventilation",
+      "Head elevation, oral care, daily sedation review"
+     ],
+     [
+      "SSI",
+      "Operative incision",
+      "Timed antibiotic prophylaxis, skin antisepsis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infection rates in healthcare are expressed per **device days** rather than per patient, because exposure to a device is what drives risk. For **central line associated bloodstream infection**, the denominator is the number of **central line days** logged across the unit in a period. Dividing the count of infections by those exposure days gives a rate that allows fair comparison between wards of different size and case mix.",
+   "say": "Infection rates are expressed per device day, not per patient, because exposure to the device is what drives risk. For central line associated bloodstream infection, the denominator is the number of central line days recorded on the unit over a set period. Dividing the number of infections by those exposure days gives a rate. That rate lets you compare wards of different size and case mix fairly, which a simple patient count never allows.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Count infections in period"
+     },
+     {
+      "id": "n2",
+      "label": "Count central line days in period"
+     },
+     {
+      "id": "n3",
+      "label": "Divide infections by line days"
+     },
+     {
+      "id": "n4",
+      "label": "Compare rate across wards"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two core bundle elements are **routine antiseptic bathing** for intensive care patients and a structured **catheter insertion checklist**. Bathing with an antiseptic agent lowers skin flora and so reduces bloodstream infection risk. The insertion checklist confirms **hand hygiene**, full **sterile barrier precautions**, an appropriate **skin antisepsis** step and avoidance of the femoral site where practical.",
+   "say": "Two core bundle elements are routine antiseptic bathing for intensive care patients and a structured catheter insertion checklist. Bathing with an antiseptic agent lowers skin flora and so reduces the risk of bloodstream infection. The insertion checklist confirms hand hygiene, full sterile barrier precautions, an appropriate skin antisepsis step and avoidance of the femoral site where practical.",
+   "vis": null
+  },
+  {
+   "tx": "Surveillance uses standard definitions. In the United States, the **NHSN** protocols from the CDC define each HAI, and they are the reference for benchmarking. In India, the **ICMR** HAI surveillance network collects similar data, and local protocols should be followed for reporting. Always check which definition the question uses before calculating.",
+   "say": "Surveillance uses standard definitions. In the United States, the NHSN protocols from the CDC define each healthcare-associated infection and serve as the benchmark. In India, the ICMR surveillance network collects similar data, and local protocols should be followed for reporting. Always check which definition the question uses before calculating.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_081fb91d3ac6",
+  "q_114386971c94",
+  "q_12f19e55141b"
+ ],
+ "src": [],
+ "refs": [
+  "CDC/HICPAC Guidelines for the Prevention of Intravascular Catheter-related Infections (2011)",
+  "NHSN Patient Safety Component Manual (CDC)",
+  "SHEA/IDSA Compendium of Strategies to Prevent Ventilator-Associated Pneumonia (2008)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 43
+ }
+}

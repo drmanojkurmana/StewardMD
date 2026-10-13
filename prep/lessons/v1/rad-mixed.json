@@ -1,0 +1,190 @@
+{
+ "v": 1,
+ "module": "rad-mixed",
+ "subject": "radiology",
+ "title": "Radiology mixed rapid review",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Mammography is the most sensitive and specific investigation for **carcinoma breast** in screening and diagnosis. Findings are graded with the **BIRADS** system, from category 1 to category 6. Category 1 means the assessment is incomplete and more imaging is needed. Category 2 is negative, with routine mammography after one year. Category 4 is suspicious and biopsy should be considered. Category 5 is highly suggestive of malignancy, and category 6 is biopsy proven malignancy.",
+   "say": "Mammography is the most sensitive and specific investigation for carcinoma of the breast. Findings are graded with the BIRADS system, from category 1 to category 6. Category 1 means the assessment is incomplete and more imaging is needed. Category 2 is negative, with routine mammography after one year. Category 3 is probably benign, with short term follow up. Category 4 is suspicious, and biopsy should be considered. Category 5 is highly suggestive of malignancy. Category 6 is biopsy proven malignancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "1",
+      "Incomplete, needs more imaging"
+     ],
+     [
+      "2",
+      "Negative, yearly routine check"
+     ],
+     [
+      "3",
+      "Probably benign, short follow up"
+     ],
+     [
+      "4",
+      "Suspicious, consider biopsy"
+     ],
+     [
+      "5",
+      "Highly suggestive of malignancy"
+     ],
+     [
+      "6",
+      "Biopsy proven malignancy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In acute head injury the **non-contrast CT head**, or NCCT, is the investigation of choice because it is fast and detects bleeds, fractures and mass effect. An **extradural haemorrhage** is a hyperdense, biconvex collection between skull and dura, usually from a torn middle meningeal artery, and it may show a lucid interval. A **subdural haemorrhage** is concavo-convex or sickle shaped, arising from torn bridging veins.",
+   "say": "In acute head injury the non contrast CT head, or NCCT, is the investigation of choice because it is fast and detects bleeds, fractures and mass effect. An extradural haemorrhage appears as a hyperdense, biconvex collection between the skull and dura. It usually comes from a torn middle meningeal artery and may show a lucid interval. A subdural haemorrhage is concavo-convex or sickle shaped and arises from torn bridging veins. Extradural bleeds usually need urgent burr hole surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Extradural",
+     "points": [
+      "Hyperdense biconvex shape",
+      "Middle meningeal artery origin",
+      "Possible lucid interval",
+      "Burr hole surgery"
+     ]
+    },
+    "right": {
+     "title": "Subdural",
+     "points": [
+      "Concavo-convex or sickle shape",
+      "Bridging vein origin",
+      "Hyperdense crescent collection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In acute pancreatitis the **CT severity index**, or CTSI, grades severity by adding the **Balthazar grade** score to the necrosis score, giving a maximum of 10. Scores 0 to 3 carry about 3 per cent mortality and 8 per cent morbidity. Scores 4 to 6 carry 6 per cent mortality and 35 per cent morbidity. Scores 7 to 10 carry 17 per cent mortality and 92 per cent morbidity.",
+   "say": "In acute pancreatitis the CT severity index, or CTSI, grades severity by adding the Balthazar grade score to the necrosis score, giving a maximum of 10. Scores 0 to 3 carry about 3 per cent mortality and 8 per cent morbidity. Scores 4 to 6 carry 6 per cent mortality and 35 per cent morbidity. Scores 7 to 10 carry 17 per cent mortality and 92 per cent morbidity. Remember the maximum score and these bands, since they are high yield for exams.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CTSI score",
+     "Mortality",
+     "Morbidity"
+    ],
+    "rows": [
+     [
+      "0 to 3",
+      "3 per cent",
+      "8 per cent"
+     ],
+     [
+      "4 to 6",
+      "6 per cent",
+      "35 per cent"
+     ],
+     [
+      "7 to 10",
+      "17 per cent",
+      "92 per cent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **yolk sac** is the first anatomic structure seen within the gestational sac, visible by transvaginal scan from about 5.5 weeks. Gestational age is estimated by different markers in each period. Between 8 and 12 weeks the **crown rump length** is used. In the second trimester the **biparietal diameter** most accurately reflects gestational age, with a variation of 7 to 10 days. In the third trimester, **femur length** is used.",
+   "say": "The yolk sac is the first anatomic structure seen within the gestational sac, visible by transvaginal scan from about 5.5 weeks. Gestational age is estimated by different markers in each period. Between 8 and 12 weeks the crown rump length is used. In the second trimester the biparietal diameter most accurately reflects gestational age, with a variation of 7 to 10 days. In the third trimester femur length is used.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Period",
+     "Best marker"
+    ],
+    "rows": [
+     [
+      "8 to 12 weeks",
+      "Crown rump length"
+     ],
+     [
+      "Second trimester",
+      "Biparietal diameter and head circumference"
+     ],
+     [
+      "Third trimester",
+      "Femur length"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Obstructive jaundice occurs when bile flow into the intestine is blocked. The first investigation is **ultrasonography** of the liver and bile ducts, which shows dilated ducts and helps locate the cause. A **CT scan** or **MRCP** is then used to define the level and cause of the obstruction. Treatment may be **ERCP** or **percutaneous transhepatic cholangiography** with biliary drainage, depending on the site of blockage.",
+   "say": "Obstructive jaundice occurs when bile flow into the intestine is blocked. The first investigation is ultrasonography of the liver and bile ducts, which shows dilated ducts and helps locate the cause. A CT scan or MRCP is then used to define the level and cause of the obstruction. Treatment may be ERCP or percutaneous transhepatic cholangiography with biliary drainage, depending on the site of blockage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Obstructive jaundice"
+     },
+     {
+      "id": "n2",
+      "label": "USG liver and ducts"
+     },
+     {
+      "id": "n3",
+      "label": "CT or MRCP"
+     },
+     {
+      "id": "n4",
+      "label": "ERCP or PTC drainage"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **banana sign** on fetal ultrasound is the posterior cerebellum being flattened and wrapped around the brainstem, with obliteration of the cisterna magna. It is seen in open spina bifida, especially myelomeningocele, because of **Chiari II malformation** from downward traction of the spinal cord. Its companion, the **lemon sign**, is a concave frontal contour abnormality. The banana sign points towards spina bifida rather than renal agenesis or encephalocele.",
+   "say": "A banana sign on fetal ultrasound is the posterior cerebellum being flattened and wrapped around the brainstem, with obliteration of the cisterna magna. It is seen in open spina bifida, especially myelomeningocele, because of Chiari II malformation from downward traction of the spinal cord. Its companion, the lemon sign, is a concave frontal contour abnormality. The banana sign points towards spina bifida rather than renal agenesis or encephalocele.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "a7a9bac9-fad2-4838-9741-7d399ee30d6c",
+  "0d21fa74-5827-422a-951f-0040cf30538e",
+  "11d82495-33e1-4663-9e35-de7d16bc214f"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 157
+ }
+}

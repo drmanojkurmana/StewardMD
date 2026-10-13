@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "module": "mcc-pb-maid",
+ "subject": "mcc-professional-behaviours",
+ "title": "Medical Assistance in Dying: Eligibility, Capacity and Safeguards",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Medical assistance in dying** (MAID) means a physician or nurse practitioner provides or prescribes a substance at the request of a patient so that the patient can end their own life. It is a tightly regulated exception, not a routine treatment option. The request must be voluntary, informed and made by a person with **decision-making capacity**. Every step should protect the patient's own, current, free choice.",
+   "say": "Medical assistance in dying, or MAID, means a physician or nurse practitioner provides or prescribes a substance at the patient's request so that the patient can end their own life. It is a tightly regulated exception, not a routine treatment. The request must be voluntary, informed and made by a person with decision-making capacity. Every step should protect the patient's own, current, free choice.",
+   "vis": null
+  },
+  {
+   "tx": "**Decision-making capacity** is decision specific and state dependent. A patient with delirium, hyponatraemia or uraemia may lose the ability to weigh information, even if they were capable earlier. A substitute decision-maker can make treatment choices for an incapable patient, but cannot request MAID on their behalf. A previous verbal wish or advance statement does not create a present request, so the patient must make a fresh, current request.",
+   "say": "Decision-making capacity is decision specific and can change over time. A patient with delirium, low sodium or raised creatinine may lose the ability to weigh information, even if they were capable earlier. A substitute decision-maker can make treatment choices for an incapable patient, but cannot request MAID on their behalf. An earlier verbal wish does not create a present request, so a fresh current request is needed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute confusion"
+     },
+     {
+      "id": "b",
+      "label": "Treat reversible causes"
+     },
+     {
+      "id": "c",
+      "label": "Reassess capacity"
+     },
+     {
+      "id": "d",
+      "label": "Proceed only if capable"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Voluntariness** means the request is free from pressure, coercion or undue influence. Grief, isolation, depression and family pressure can shape a request, so the clinician should explore these with the patient privately. Hesitation on the day of the procedure is a warning sign. Consent must be ongoing and can be withdrawn at any point, so the request must be reconfirmed by the patient, not by relatives.",
+   "say": "Voluntariness means the request is free from pressure, coercion or undue influence. Grief, isolation, depression and family pressure can all shape a request, so the clinician should explore these with the patient privately. Hesitation on the day is a warning sign. Consent must be ongoing and can be withdrawn at any point, so the patient, not relatives, must reconfirm the request.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Voluntary request",
+     "points": [
+      "Freely made by patient",
+      "Explored privately",
+      "Reconfirmed on the day",
+      "Withdrawable at any time"
+     ]
+    },
+    "right": {
+     "title": "Warning signs",
+     "points": [
+      "Pressure from relatives",
+      "Recent bereavement or isolation",
+      "Hesitation at scheduled time",
+      "Unexplored depression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Culturally safe care respects the patient's identity, language and chosen supports. A patient may ask that a sister, a community Elder or an interpreter attend discussions. The patient remains the decision-maker even when supports are present. Physicians with a **conscientious objection** may decline to provide MAID personally, but must still inform the patient that it is available and refer them promptly, so the objection does not become a barrier to care.",
+   "say": "Culturally safe care respects the patient's identity, language and chosen supports. A patient may ask that a sister, a community Elder or an interpreter attend discussions, and the patient remains the decision-maker. A physician with a conscientious objection may decline to provide MAID personally, but must still inform the patient that it is available and refer them promptly.",
+   "vis": null
+  },
+  {
+   "tx": "Indian practice is different: **MAID** is not legal in India. The Supreme Court permits only **passive euthanasia** and withdrawal of treatment in narrow circumstances, with advance directives guiding decisions. For NEET-PG and similar exams, do not confuse this with MAID as practised in Canada or other jurisdictions. Palliative care, pain relief and psychological support remain the **core response to suffering**. Where MAID is legal, frameworks stress capacity, voluntariness and independent assessment.",
+   "say": "Indian practice is different. MAID is not legal in India. The Supreme Court permits only passive euthanasia and withdrawal of treatment in narrow circumstances, with advance directives guiding decisions. For exams, do not confuse this with MAID as practised in Canada or other jurisdictions. Palliative care, pain relief and psychological support remain the core response to suffering.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Supreme Court of India, Common Cause v Union of India (2018)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

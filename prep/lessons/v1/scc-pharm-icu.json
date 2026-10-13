@@ -1,0 +1,129 @@
+{
+ "v": 1,
+ "module": "scc-pharm-icu",
+ "subject": "ss-critical-care",
+ "title": "Pharmacology in critical illness: altered drug handling",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Critical illness changes the **volume of distribution** because capillary leak, fluid resuscitation and oedema expand body water. Hydrophilic drugs such as aminoglycosides and beta-lactams spread into this larger space, so early loading doses are often needed and should not be reduced. Low albumin, or **hypoalbuminaemia**, raises the free fraction of highly protein-bound drugs such as phenytoin, so total levels can look low while effect and toxicity rise.",
+   "say": "Critical illness changes the volume of distribution because capillary leak, fluid resuscitation and oedema expand body water. Hydrophilic drugs such as aminoglycosides and beta-lactams spread into this larger space, so early loading doses are often needed and should not be reduced. Low albumin, known as hypoalbuminaemia, raises the free fraction of highly protein-bound drugs such as phenytoin. Total levels can then look low while effect and toxicity rise. Remember the free drug is the active part.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Change",
+     "Effect on drug",
+     "Practical implication"
+    ],
+    "rows": [
+     [
+      "Fluid shifts",
+      "Larger volume of distribution",
+      "Give full loading dose"
+     ],
+     [
+      "Hypoalbuminaemia",
+      "More free drug fraction",
+      "Interpret total levels cautiously"
+     ],
+     [
+      "Lipophilic drugs",
+      "Stored in fat and tissue",
+      "Effect may last longer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Augmented renal clearance** occurs in young trauma or septic patients with high cardiac output, so renally excreted drugs such as beta-lactams are cleared faster and may fall below target. By contrast, **acute kidney injury** lowers clearance and drug accumulation follows. Give full loading doses in both settings, then tailor maintenance doses to the estimated glomerular filtration rate and review them daily.",
+   "say": "Augmented renal clearance occurs in young trauma or septic patients with high cardiac output. Renally excreted drugs such as beta-lactams are cleared faster and may fall below target. By contrast, acute kidney injury lowers clearance, so drugs accumulate. Give full loading doses in both settings. Then tailor maintenance doses to the estimated glomerular filtration rate, and review them daily as kidney function changes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Augmented clearance",
+     "points": [
+      "Young trauma or sepsis",
+      "High cardiac output",
+      "Risk of underdosing",
+      "Consider higher or extended dosing"
+     ]
+    },
+    "right": {
+     "title": "Reduced clearance",
+     "points": [
+      "Acute kidney injury",
+      "Drug accumulation",
+      "Risk of toxicity",
+      "Reduce maintenance dose"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hepatic clearance** falls in shock, liver dysfunction and reduced hepatic blood flow, particularly for drugs with a high **extraction ratio**, where clearance depends heavily on liver blood flow rather than enzyme capacity. **ECMO sequestration** adds a further problem, because lipophilic drugs bind to circuit tubing and oxygenator membranes, lowering plasma concentrations. Dose cautiously and check levels early after starting extracorporeal support or changing the circuit.",
+   "say": "Hepatic clearance falls in shock, liver dysfunction and reduced hepatic blood flow. This is most important for drugs whose clearance depends heavily on liver blood flow, which is what an extraction ratio describes. ECMO sequestration adds a further problem. Lipophilic drugs bind to circuit tubing and oxygenator membranes, so plasma concentrations fall. Dose cautiously, and check levels early after starting extracorporeal support or changing the circuit.",
+   "vis": null
+  },
+  {
+   "tx": "**Therapeutic drug monitoring** guides dosing of narrow therapeutic index drugs such as vancomycin, aminoglycosides and phenytoin, using trough or peak levels adjusted for albumin and kidney function. **Drug interactions** in ICU patients are common, for example azole antifungals or macrolides inhibiting CYP3A4 and raising levels of drugs such as midazolam or amiodarone. Review the full medication list at every prescribing round.",
+   "say": "Therapeutic drug monitoring guides dosing of narrow therapeutic index drugs such as vancomycin, aminoglycosides and phenytoin. Use trough or peak levels, adjusted for albumin and kidney function. Drug interactions in ICU patients are common. For example, azole antifungals or macrolides inhibit CYP3A4 and raise levels of midazolam or amiodarone. Review the full medication list at every prescribing round.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Azole or macrolide started"
+     },
+     {
+      "id": "b",
+      "label": "CYP3A4 inhibited"
+     },
+     {
+      "id": "c",
+      "label": "Midazolam levels rise"
+     },
+     {
+      "id": "d",
+      "label": "Reduce dose and monitor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_1037f0ef757c",
+  "q_1ef727ac09ce",
+  "q_3548a5a7241c"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 21
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "mgas-bleed",
+ "subject": "mrcp-gastroenterology",
+ "title": "Upper GI bleeding and dyspepsia: risk, acid suppression and antiplatelets",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Upper GI bleeding is bleeding proximal to the ligament of Treitz. Formal risk assessment uses two scores at different times. The **Blatchford score** is calculated at first assessment, before endoscopy, from clinical and blood results. A score of 0 identifies very low risk patients who may be considered for **early discharge** with safety-netting. The **full Rockall score** needs endoscopic findings, so it is applied after endoscopy to estimate rebleeding and mortality.",
+   "say": "Upper GI bleeding is bleeding proximal to the ligament of Treitz. Formal risk assessment uses two scores at different times. The Blatchford score is calculated at first assessment, before endoscopy, from clinical and blood results. A score of 0 identifies very low risk patients who may be considered for early discharge with safety-netting. The full Rockall score needs endoscopic findings, so it is applied after endoscopy to estimate rebleeding and mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Score",
+     "When applied",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Blatchford",
+      "First assessment",
+      "Need for intervention, early discharge"
+     ],
+     [
+      "Full Rockall",
+      "After endoscopy",
+      "Rebleeding and mortality risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acid suppression before endoscopy does not improve outcomes in suspected non-variceal bleeding, so NICE advises against giving it. Endoscopy should usually happen within 24 hours of admission. After endoscopy, a **proton pump inhibitor** is offered to patients with **stigmata of recent haemorrhage** to reduce rebleeding. Terlipressin is reserved for suspected variceal bleeding, not for non-variceal causes.",
+   "say": "Acid suppression before endoscopy does not improve outcomes in suspected non-variceal bleeding, so NICE advises against giving it. Endoscopy should usually happen within 24 hours of admission. After endoscopy, a proton pump inhibitor is offered to patients with stigmata of recent haemorrhage to reduce rebleeding. Terlipressin is reserved for suspected variceal bleeding, not for non-variceal causes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected non-variceal bleed"
+     },
+     {
+      "id": "b",
+      "label": "No acid suppression pre-endoscopy"
+     },
+     {
+      "id": "c",
+      "label": "Endoscopy within 24 hours"
+     },
+     {
+      "id": "d",
+      "label": "Stigmata seen?"
+     },
+     {
+      "id": "e",
+      "label": "Proton pump inhibitor offered"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Variceal bleeding from portal hypertension carries high mortality. At presentation, **terlipressin** is offered, along with **prophylactic antibiotics**, before definitive endoscopic control. For oesophageal varices, **band ligation** is the endoscopic treatment. Gastric varices are treated first with endoscopic injection of **N-butyl-2-cyanoacrylate**. If bleeding persists despite these measures, **TIPS** is offered.",
+   "say": "Variceal bleeding from portal hypertension carries high mortality. At presentation, terlipressin is offered, along with prophylactic antibiotics, before definitive endoscopic control. For oesophageal varices, band ligation is the endoscopic treatment. Gastric varices are treated first with endoscopic injection of N-butyl-2-cyanoacrylate. If bleeding persists despite these measures, transjugular intrahepatic portosystemic shunt is offered.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Varix type",
+     "First endoscopic step",
+     "If uncontrolled"
+    ],
+    "rows": [
+     [
+      "Oesophageal",
+      "Band ligation",
+      "TIPS"
+     ],
+     [
+      "Gastric",
+      "N-butyl-2-cyanoacrylate injection",
+      "TIPS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Platelet transfusion is reserved for patients who are actively bleeding and have a low count, typically below 50 x 10^9/litre. Stable, non-bleeding patients are not offered platelets. Fresh frozen plasma corrects prolonged clotting times, and **cryoprecipitate** is added when fibrinogen stays low despite plasma. Warfarin-related bleeding is reversed with **prothrombin complex concentrate**, while recombinant factor VIIa is a last resort.",
+   "say": "Platelet transfusion is reserved for patients who are actively bleeding and have a low count, typically below 50 x 10^9 per litre. Stable, non-bleeding patients are not offered platelets. Fresh frozen plasma corrects prolonged clotting times, and cryoprecipitate is added when fibrinogen stays low despite plasma. Warfarin-related bleeding is reversed with prothrombin complex concentrate, while recombinant factor VIIa is a last resort.",
+   "vis": null
+  },
+  {
+   "tx": "Low-dose **aspirin** is usually continued for secondary prevention once haemostasis is achieved, because stopping it raises vascular risk. Other NSAIDs, including COX-2 inhibitors, are stopped during the acute phase. Decisions about **clopidogrel**, particularly after a recent coronary stent, need a shared discussion with the relevant specialist and the patient. Adrenaline should be combined with a mechanical or thermal method rather than used alone.",
+   "say": "Low dose aspirin is usually continued for secondary prevention once haemostasis is achieved, because stopping it raises vascular risk. Other NSAIDs, including COX-2 inhibitors, are stopped during the acute phase. Decisions about clopidogrel, particularly after a recent coronary stent, need a shared discussion with the relevant specialist and the patient. Adrenaline should be combined with a mechanical or thermal method rather than used alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continue",
+     "points": [
+      "Low-dose aspirin for secondary prevention",
+      "Proton pump inhibitor after stigmata seen"
+     ]
+    },
+    "right": {
+     "title": "Stop or review",
+     "points": [
+      "NSAIDs and COX-2 inhibitors in acute phase",
+      "Clopidogrel decision with specialist"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Dyspepsia and upper GI pathology can be confused on histology. Barrett's oesophagus is intestinal metaplasia replacing distal squamous lining, usually driven by chronic reflux, and is confirmed by biopsies showing goblet cells. Gastric involvement in systemic **AL amyloidosis** shows Congo red positive deposits, while **pancreatic lipomatosis** is a benign fatty replacement linked to obesity and type 2 diabetes. Surveillance for Barrett's follows BSG guidance.",
+   "say": "Dyspepsia and upper GI pathology can be confused on histology. Barrett's oesophagus is intestinal metaplasia replacing distal squamous lining, usually driven by chronic reflux, and is confirmed by biopsies showing goblet cells. Gastric involvement in systemic AL amyloidosis shows Congo red positive deposits, while pancreatic lipomatosis is a benign fatty replacement linked to obesity and type 2 diabetes. Surveillance for Barrett's follows British Society of Gastroenterology guidance.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Clinical Guideline CG141: Acute upper gastrointestinal bleeding in over 16s",
+  "NICE Clinical Guideline CG184: Dyspepsia and gastro-oesophageal reflux disease",
+  "British Society of Gastroenterology guidelines on Barrett's oesophagus"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

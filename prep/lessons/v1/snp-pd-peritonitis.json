@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "snp-pd-peritonitis",
+ "subject": "ss-nephrology",
+ "title": "Peritoneal Dialysis Peritonitis and Catheter Infections",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Peritonitis is diagnosed when **two of three criteria** are met: cloudy effluent or abdominal pain, a dialysate white cell count above 100 cells per microlitre with over 50 percent neutrophils after a dwell of at least 2 hours, or a positive culture. Always send effluent for cell count, Gram stain and culture before starting antibiotics. Culture-negative peritonitis needs a repeat look at sampling technique and the possibility of prior antibiotic exposure.",
+   "say": "Peritonitis is diagnosed when two of three criteria are met. The first is cloudy effluent or abdominal pain. The second is a dialysate white cell count above 100 cells per microlitre with over 50 percent neutrophils, after a dwell of at least 2 hours. The third is a positive culture. Always send effluent for cell count, Gram stain and culture before starting antibiotics. Culture-negative peritonitis needs a review of sampling technique and of any recent antibiotic exposure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Criterion",
+     "Threshold"
+    ],
+    "rows": [
+     [
+      "Symptoms",
+      "Cloudy effluent or abdominal pain"
+     ],
+     [
+      "Cell count",
+      "Above 100 per microlitre, over 50 percent neutrophils"
+     ],
+     [
+      "Culture",
+      "Organism grown from effluent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once **effluent** has been sent for culture, begin **empirical intraperitoneal antibiotics** without delay. Guidance from the **ISPD** generally supports cover for Gram-positive organisms, often with a first-generation cephalosporin or intraperitoneal vancomycin, plus agents active against Gram-negative bacteria and **Pseudomonas**. Reassess early and tailor therapy once the organism and its sensitivities are reported. Intravenous treatment is kept for severe illness or spread to the exit site.",
+   "say": "Begin empirical intraperitoneal antibiotics straight away, once the effluent sample has gone for culture, rather than waiting for results. ISPD guidance generally supports Gram-positive cover, often with a first-generation cephalosporin or intraperitoneal vancomycin, alongside agents that act against Gram-negative bacteria and Pseudomonas. Reassess early and tailor the regimen when the organism and its sensitivities are known. Reserve intravenous treatment for severe illness or spread to the exit site.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Send effluent for culture"
+     },
+     {
+      "id": "b",
+      "label": "Empirical IP antibiotics"
+     },
+     {
+      "id": "c",
+      "label": "Early clinical review"
+     },
+     {
+      "id": "d",
+      "label": "Tailor to organism and sensitivities"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classify recurrent episodes correctly. **Relapsing peritonitis** is a recurrence with the same organism within 4 weeks of finishing antibiotics. **Refractory peritonitis** means no improvement in effluent or cell count after 5 days of appropriate therapy. Recurrence with a different organism after 4 weeks is classed as a new episode. Relapses and refractory cases usually prompt catheter review.",
+   "say": "Classify recurrent episodes correctly. Relapsing peritonitis is a recurrence with the same organism within 4 weeks of finishing antibiotics. Refractory peritonitis means no improvement in the effluent or cell count after 5 days of appropriate therapy. A recurrence with a different organism after 4 weeks is classed as a new episode. Relapses and refractory cases usually prompt a review of the catheter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Relapsing",
+      "Same organism within 4 weeks"
+     ],
+     [
+      "Refractory",
+      "No response by day 5"
+     ],
+     [
+      "New episode",
+      "Different organism or after 4 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fungal peritonitis** is a serious complication, often linked to prior antibiotic exposure, and usually requires prompt catheter removal along with antifungal therapy. Catheter removal is also advised for **sclerosing peritonitis** and for refractory or relapsing bacterial infection that fails medical treatment. Sclerosing peritonitis carries high morbidity and is not reversed by antibiotics.",
+   "say": "Fungal peritonitis is a serious complication, often linked to prior antibiotic exposure, and usually requires prompt catheter removal along with antifungal therapy. Catheter removal is also advised for sclerosing peritonitis and for refractory or relapsing bacterial infection that fails medical treatment. Sclerosing peritonitis carries high morbidity and is not reversed by antibiotics.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_4be845e6f149",
+  "q_b9ade82fe8f6",
+  "q_5a2591952e36"
+ ],
+ "src": [],
+ "refs": [
+  "ISPD Guidelines for the Diagnosis, Treatment and Prevention of Peritoneal Dialysis-Related Infections: 2022 update"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 30
+ }
+}

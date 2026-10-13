@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "module": "pat-mixed",
+ "subject": "pathology",
+ "title": "Mixed pathology rapid review: high-yield pairings",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "This lesson revisits several pathology pairings that appear often in NEET-PG and USMLE style questions. Think of each item as a **marker**, a **mechanism** or a **classic association** that you should recall instantly. Work through the steps in order and note which facts you already know.",
+   "say": "This lesson revisits several pathology pairings that appear often in NEET-PG and USMLE style questions. Think of each item as a marker, a mechanism or a classic association that you should recall instantly. Work through the steps in order and note which facts you already know.",
+   "vis": null
+  },
+  {
+   "tx": "Classic tumour markers and gene links are high yield. Papillary thyroid carcinoma shows **BRAF** mutation as the most common genetic alteration, while **RET** is linked to medullary carcinoma in MEN type 2. Small round blue cell tumours of bone are classically linked to a **t(11;22)** translocation in Ewing sarcoma, and HER2 (erbB-2) predicts response to targeted therapy.",
+   "say": "Classic tumour markers and gene links are high yield. Papillary thyroid carcinoma shows BRAF mutation as the most common genetic alteration, while RET is linked to medullary carcinoma in MEN type 2. Small round blue cell tumours of bone are classically linked to a t(11;22) translocation in Ewing sarcoma, and HER2 predicts response to targeted therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Key marker or gene",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Papillary thyroid carcinoma",
+      "BRAF mutation",
+      "Commonest genetic change"
+     ],
+     [
+      "Medullary thyroid carcinoma",
+      "RET",
+      "Seen in MEN type 2"
+     ],
+     [
+      "Ewing sarcoma",
+      "t(11;22)",
+      "Small round cell tumour"
+     ],
+     [
+      "Breast cancer",
+      "HER2 amplification",
+      "Predicts therapy response"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autoimmune and hypersensitivity links are frequently tested in mixed revision. Myasthenia gravis is a **type II** hypersensitivity in which **antibodies** target postsynaptic receptors at the neuromuscular junction, impairing transmission and causing fatigable weakness. Granulomatosis with polyangiitis is linked to **ANCA**, which are found in many small-vessel vasculitides. Coeliac disease is best screened with **IgA anti-tissue transglutaminase** antibodies, alongside total IgA levels.",
+   "say": "Autoimmune and hypersensitivity links come up often in mixed revision. Myasthenia gravis is a type II hypersensitivity. Antibodies attack postsynaptic receptors at the neuromuscular junction, so signalling fails and muscles tire with repeated use. Granulomatosis with polyangiitis is linked to ANCA, which turn up in many small-vessel vasculitides. For coeliac disease, the best first screen is IgA antibodies against tissue transglutaminase, and checking total IgA makes sure a deficiency does not give a false reassurance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Mechanism or marker",
+     "Hypersensitivity type"
+    ],
+    "rows": [
+     [
+      "Myasthenia gravis",
+      "Antibody to postsynaptic receptor at neuromuscular junction",
+      "Type II"
+     ],
+     [
+      "Granulomatosis with polyangiitis",
+      "ANCA",
+      "Vasculitis"
+     ],
+     [
+      "Coeliac disease",
+      "IgA anti-tissue transglutaminase",
+      "Autoimmune"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several **enzyme defects** in the adrenal steroid pathway cause distinct paediatric pictures. In **11-beta-hydroxylase** deficiency, deoxycorticosterone builds up, so patients have **hypertension** and **virilisation**, often with precocious puberty in girls. **17-hydroxylase** deficiency also raises blood pressure but fails to produce virilisation, typically causing delayed sexual development. By contrast, **21-hydroxylase** deficiency, the commonest form, causes **salt wasting** without hypertension.",
+   "say": "Several enzyme defects in the adrenal steroid pathway cause distinct paediatric pictures. In 11-beta-hydroxylase deficiency, deoxycorticosterone builds up, so patients have hypertension and virilisation, often with precocious puberty in girls. 17-hydroxylase deficiency also raises blood pressure but does not cause virilisation, and typically leads to delayed sexual development. By contrast, 21-hydroxylase deficiency, the commonest form, causes salt wasting without hypertension.",
+   "vis": null
+  },
+  {
+   "tx": "Coagulation tests give a quick localisation. Prolonged **prothrombin time** points to the extrinsic pathway, prolonged **aPTT** to the intrinsic pathway, and prolonged both suggests a common pathway defect. A prolonged bleeding time instead indicates a platelet function defect. Inherited thrombophilias include factor V Leiden and the prothrombin G20210A variant, which are common.",
+   "say": "Coagulation tests give a quick localisation. Prolonged prothrombin time points to the extrinsic pathway, prolonged aPTT to the intrinsic pathway, and prolonged both suggests a common pathway defect. A prolonged bleeding time instead indicates a platelet function defect. Inherited thrombophilias include factor V Leiden and the prothrombin G20210A variant, which are common.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prolonged PT"
+     },
+     {
+      "id": "b",
+      "label": "Extrinsic defect"
+     },
+     {
+      "id": "c",
+      "label": "Prolonged aPTT"
+     },
+     {
+      "id": "d",
+      "label": "Intrinsic defect"
+     },
+     {
+      "id": "e",
+      "label": "Both prolonged"
+     },
+     {
+      "id": "f",
+      "label": "Common pathway"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurological and radiation pathology complete the review. Duret haemorrhage is a small bleed in the ventral paramedian midbrain and pons caused by downward brainstem herniation, usually a fatal sign. Radiation causes haematopoietic syndrome after whole-body doses above **200 rad**. General paresis is a late complication of **tertiary syphilis**, and hemorrhagic infarction is classically seen with venous thrombosis.",
+   "say": "Neurological and radiation pathology complete the review. Duret haemorrhage is a small bleed in the ventral paramedian midbrain and pons caused by downward brainstem herniation, usually a fatal sign. Radiation causes haematopoietic syndrome after whole-body doses above 200 rad. General paresis is a late complication of tertiary syphilis, and hemorrhagic infarction is classically seen with venous thrombosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "540c9113-75e9-43d7-a867-597eca1b828d",
+  "f6381ae2-7c94-4b57-bafd-9a071df08807",
+  "01499cfa-1659-4c75-8bde-3b14b130b0f2"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease",
+  "Wintrobe's Clinical Hematology",
+  "Williams Hematology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 569
+ }
+}

@@ -1,0 +1,187 @@
+{
+ "v": 1,
+ "module": "sid-newer-agents",
+ "subject": "ss-infectious-diseases",
+ "title": "Newer antibacterials and the pipeline",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Newer antibacterials are mostly designed to beat one specific resistance mechanism, and the exam often asks which mechanism an agent overcomes. Many are licensed for a narrow indication, so the **indication** matters as much as the spectrum. Most of these drugs reach India through limited import or trial access, so check **CDSCO** approval status before prescribing. This lesson covers each agent in your syllabus and how to match it to a resistant organism.",
+   "say": "Newer antibacterials are mostly designed to beat one specific resistance mechanism, and the exam often asks which mechanism an agent overcomes. Many are licensed for a narrow indication, so the indication matters as much as the spectrum. Most of these drugs reach India through limited import or trial access, so check CDSCO approval status before prescribing. This lesson covers each agent in your syllabus and how to match it to a resistant organism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Class",
+     "Key feature",
+     "Licensed use"
+    ],
+    "rows": [
+     [
+      "Omadacycline",
+      "Aminomethylcycline",
+      "Evades efflux and ribosomal protection",
+      "Pneumonia and skin infection"
+     ],
+     [
+      "Eravacycline",
+      "Fluorocycline",
+      "Intravenous, multidrug-resistant Gram-negatives",
+      "Intra-abdominal infection"
+     ],
+     [
+      "Lefamulin",
+      "Pleuromutilin",
+      "Binds 50S peptidyl transferase site",
+      "Community pneumonia"
+     ],
+     [
+      "Sulbactam-durlobactam",
+      "Beta-lactam with inhibitor",
+      "Protects sulbactam from OXA enzymes",
+      "Acinetobacter pneumonia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tetracycline resistance mainly works through **efflux pumps** and **ribosomal protection proteins**, such as tet(M). Omadacycline carries a side chain at position C9 that lets it bind the ribosome despite these mechanisms. It is given orally or intravenously for community pneumonia and skin infection. Eravacycline is a fluorocycline given only intravenously, approved for complicated intra-abdominal infection, and active against many multidrug-resistant Gram-negative bacilli. Neither covers Pseudomonas reliably.",
+   "say": "Tetracycline resistance mainly works through efflux pumps and ribosomal protection proteins, such as tet M. Omadacycline carries a side chain at position C nine that lets it bind the ribosome despite these mechanisms. It is given orally or intravenously for community pneumonia and skin infection. Eravacycline is a fluorocycline given only intravenously. It is approved for complicated intra-abdominal infection and covers many multidrug-resistant Gram-negative bacilli. Neither reliably covers Pseudomonas aeruginosa, and neither is used for urinary infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Omadacycline",
+     "points": [
+      "Side chain at C9",
+      "Beats efflux and protection",
+      "Oral and intravenous",
+      "Pneumonia and skin"
+     ]
+    },
+    "right": {
+     "title": "Eravacycline",
+     "points": [
+      "Fluorocycline class",
+      "Intravenous only",
+      "Intra-abdominal infection",
+      "No reliable Pseudomonas cover"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lefamulin** is a **pleuromutilin**, a protein synthesis inhibitor that binds the peptidyl transferase centre of the 50S ribosomal subunit. Because this site differs from the binding sites of macrolides and tetracyclines, cross-resistance with those classes is uncommon. It is licensed for adults with community-acquired bacterial pneumonia, in oral and intravenous forms, and it covers typical and atypical pathogens. It has no useful activity against Gram-negative bacilli such as Pseudomonas, so it is not a hospital pneumonia drug.",
+   "say": "Lefamulin is a pleuromutilin, a protein synthesis inhibitor that binds the peptidyl transferase centre of the 50S ribosomal subunit. Because this site differs from the binding sites of macrolides and tetracyclines, cross-resistance with those classes is uncommon. It is licensed for adults with community-acquired bacterial pneumonia, in oral and intravenous forms, and it covers typical and atypical pathogens. It has no useful activity against Gram-negative bacilli such as Pseudomonas, so it is not a hospital pneumonia drug.",
+   "vis": null
+  },
+  {
+   "tx": "Acinetobacter baumannii often resists carbapenems through OXA-type serine carbapenemases. **Sulbactam** has intrinsic activity through penicillin-binding protein 3, but OXA enzymes destroy it. **Durlobactam**, a diazabicyclooctane, inhibits class A, C and D enzymes, including OXA-23, restoring sulbactam activity. Sulbactam-durlobactam is licensed for hospital-acquired and ventilator-associated pneumonia caused by susceptible isolates, with renal dose adjustment. Durlobactam does not inhibit NDM, so enzyme testing comes first.",
+   "say": "Acinetobacter baumannii often resists carbapenems through OXA type serine carbapenemases. Sulbactam has intrinsic activity through penicillin-binding protein 3, but OXA enzymes destroy it. Durlobactam, a diazabicyclooctane, inhibits class A, C and D enzymes, including OXA-23, which restores sulbactam activity. Sulbactam-durlobactam is licensed for hospital-acquired and ventilator-associated pneumonia caused by susceptible isolates, with renal dose adjustment. Durlobactam does not inhibit NDM, so enzyme testing should come first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sulbactam alone"
+     },
+     {
+      "id": "b",
+      "label": "OXA-23 destroys it"
+     },
+     {
+      "id": "c",
+      "label": "Add durlobactam"
+     },
+     {
+      "id": "d",
+      "label": "Sulbactam works again"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Metallo-beta-lactamases such as **NDM** use zinc and are not inhibited by clavulanate, tazobactam, avibactam or vaborbactam. **Cefepime-taniborbactam** pairs cefepime with a cyclic boronate that inhibits both serine and metallo enzymes, making it the pipeline option for NDM producers, though its regulatory status must be checked. **Cefepime-enmetazobactam** pairs cefepime with a class A inhibitor for ESBL producers but does not cover carbapenemases. Choose by enzyme type, not by brand name.",
+   "say": "Metallo beta lactamases such as NDM use zinc and are not inhibited by clavulanate, tazobactam, avibactam or vaborbactam. Cefepime with taniborbactam pairs cefepime with a cyclic boronate that inhibits both serine and metallo enzymes, making it the pipeline option for NDM producers, though its regulatory status must be checked. Cefepime with enmetazobactam pairs cefepime with a class A inhibitor for ESBL producers but does not cover carbapenemases. Choose by enzyme type, not by brand name.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cefepime-taniborbactam",
+     "points": [
+      "Cyclic boronate inhibitor",
+      "Serine and metallo enzymes",
+      "Check approval status"
+     ]
+    },
+    "right": {
+     "title": "Cefepime-enmetazobactam",
+     "points": [
+      "Class A inhibitor",
+      "Targets ESBL producers",
+      "No carbapenemase cover"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Several other agents deserve a place in your notes. **Gepotidacin** is an oral triazaacenaphthylene that blocks **DNA gyrase** and **topoisomerase IV** at binding sites different from those used by fluoroquinolones, and it is licensed for uncomplicated urinary infection in women. **Zoliflodacin** is a single oral dose for gonorrhoea. **Bacteriophage therapy** uses viruses that destroy bacteria and remains experimental for most indications.",
+   "say": "Several other agents deserve a place in your notes. Gepotidacin is an oral triazaacenaphthylene that blocks DNA gyrase and topoisomerase IV at binding sites different from those used by fluoroquinolones, and it is licensed for uncomplicated urinary infection in women. Zoliflodacin is a single oral dose for gonorrhoea. Bacteriophage therapy uses viruses that destroy bacteria and remains experimental for most indications.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Gepotidacin",
+      "Oral, new gyrase binding, uncomplicated cystitis in women"
+     ],
+     [
+      "Zoliflodacin",
+      "Single oral dose for gonorrhoea"
+     ],
+     [
+      "Bacteriophage",
+      "Experimental, mainly for compassionate use"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "mk-35feb2ec7bac",
+  "mk-9d380da27bc2",
+  "mk-ac8aa6c8af21"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

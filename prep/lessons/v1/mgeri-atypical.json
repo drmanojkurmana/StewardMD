@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "mgeri-atypical",
+ "subject": "mrcp-geriatrics",
+ "title": "Atypical presentations of disease in old age",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Older people often present with **atypical features** rather than classic symptoms. Pain may be absent, fever may be blunted, and the main complaint may be confusion, falls, reduced intake or breathlessness. Recognising this pattern is central to safe geriatric practice. Always ask what has changed from the person's usual function, not only what symptoms they report.",
+   "say": "Older people often present with atypical features rather than classic symptoms. Pain may be absent, fever may be blunted, and the main complaint may be confusion, falls, reduced intake or breathlessness. Recognising this pattern is central to safe geriatric practice. Always ask what has changed from the person's usual function, not only what symptoms they report.",
+   "vis": null
+  },
+  {
+   "tx": "Infection is the classic hidden cause. A **blunted febrile response** means a patient may be afebrile or even hypothermic while septic. New confusion, reduced oral intake, falls or hypotension can be the only signs. Look for a source, such as chest, urine or skin, and act promptly, because deterioration can be rapid.",
+   "say": "Infection is the classic hidden cause. A blunted febrile response means a patient may be afebrile or even hypothermic while septic. New confusion, reduced oral intake, falls or hypotension can be the only signs. Look for a source, such as chest, urine or skin, and act promptly, because deterioration can be rapid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Presenting clue",
+     "Possible cause"
+    ],
+    "rows": [
+     [
+      "Confusion with low temperature",
+      "Sepsis despite no fever"
+     ],
+     [
+      "Tachypnoea and low oxygen",
+      "Pneumonia"
+     ],
+     [
+      "Reduced intake and hypotension",
+      "Urinary or chest source"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiac and vascular disease also hide behind vague symptoms. **Atypical myocardial infarction** can present with breathlessness, fatigue, nausea or confusion, especially in diabetes. Mesenteric ischaemia may cause pain out of proportion to the examination, often from atrial fibrillation emboli. Rising troponin and raised lactate should trigger urgent review.",
+   "say": "Cardiac and vascular disease also hide behind vague symptoms. Atypical myocardial infarction can present with breathlessness, fatigue, nausea or confusion, especially in diabetes. Mesenteric ischaemia may cause pain out of proportion to the examination, often from atrial fibrillation emboli. Rising troponin and raised lactate should trigger urgent review.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vague symptom"
+     },
+     {
+      "id": "b",
+      "label": "ECG and troponin"
+     },
+     {
+      "id": "c",
+      "label": "Rising troponin"
+     },
+     {
+      "id": "d",
+      "label": "Urgent cardiology review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hip fracture is a classic trap. An older person with **knee or groin pain** after a fall, who cannot weight bear, may have a hip fracture despite normal plain films. Persisting pain on hip movement needs further imaging, with MRI as the usual next test. Do not delay treatment while waiting for results. Acute urinary retention, by contrast, needs immediate bladder decompression.",
+   "say": "Hip fracture is a classic trap. An older person with knee or groin pain after a fall, who cannot weight bear, may have a hip fracture despite normal plain films. Persisting pain on hip movement needs further imaging, with MRI as the usual next test. Do not delay treatment while waiting for results. Acute urinary retention, by contrast, needs immediate bladder decompression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hip fracture clues",
+     "points": [
+      "Knee or groin pain after fall",
+      "Cannot weight bear",
+      "Normal plain X-ray"
+     ]
+    },
+    "right": {
+     "title": "Urgent actions",
+     "points": [
+      "Image the hip further",
+      "Consider MRI",
+      "Do not delay management"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Other conditions also present in unusual ways. **Polymyalgia rheumatica** causes proximal girdle pain and morning stiffness after age 50, with raised inflammatory markers and normal creatine kinase. Apathetic thyrotoxicosis causes weight loss and atrial fibrillation without tremor. Check thyroid function and exclude giant cell arteritis before starting steroids.",
+   "say": "Other conditions also present in unusual ways. Polymyalgia rheumatica causes proximal girdle pain and morning stiffness after age 50, with raised inflammatory markers and normal creatine kinase. Apathetic thyrotoxicosis causes weight loss and atrial fibrillation without tremor. Check thyroid function and exclude giant cell arteritis before starting steroids.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Atypical feature"
+    ],
+    "rows": [
+     [
+      "Polymyalgia rheumatica",
+      "Girdle pain and stiffness"
+     ],
+     [
+      "Apathetic thyrotoxicosis",
+      "Weight loss, low drive"
+     ],
+     [
+      "Chronic subdural haematoma",
+      "Drowsiness after a fall"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG232 Falls: assessment and prevention in older people and in those at increased risk of falls",
+  "NICE NG15 Hip fracture: management",
+  "Oxford Handbook of Geriatric Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 13
+ }
+}

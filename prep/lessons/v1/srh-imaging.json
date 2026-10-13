@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "srh-imaging",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Imaging in rheumatology: key high-yield patterns",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Sacroiliitis is best assessed by **MRI**, which shows **bone marrow edema** in the subchondral bone before radiographic changes appear. Radiographs are insensitive early. Plain films later show erosions, sclerosis and joint space narrowing. The **syndesmophytes** are bony bridges across the spine that develop in ankylosing spondylitis and represent late structural damage. Bone marrow edema on MRI is the earliest reliable sign of active sacroiliitis.",
+   "say": "Sacroiliitis is best assessed by MRI, which shows bone marrow edema in the subchondral bone before radiographic changes appear. Radiographs are insensitive early. Plain films later show erosions, sclerosis and joint space narrowing. The syndesmophytes are bony bridges across the spine that develop in ankylosing spondylitis and represent late structural damage. Bone marrow edema on MRI is the earliest reliable sign of active sacroiliitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "MRI bone marrow edema"
+     },
+     {
+      "id": "b",
+      "label": "Radiographic erosions"
+     },
+     {
+      "id": "c",
+      "label": "Sclerosis and narrowing"
+     },
+     {
+      "id": "d",
+      "label": "Ankylosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Large vessel vasculitis such as giant cell arteritis and Takayasu arteritis can be imaged with **PET-CT**, which detects vascular FDG uptake in the aortic wall and its major branches. Ultrasound of the temporal arteries can show a halo sign, a hypoechoic wall thickening. MRA is preferred for Takayasu arteritis. Imaging supports, but does not replace, temporal artery biopsy in giant cell arteritis.",
+   "say": "Large vessel vasculitis such as giant cell arteritis and Takayasu arteritis can be imaged with PET-CT, which detects vascular FDG uptake in the aortic wall and its major branches. Ultrasound of the temporal arteries can show a halo sign, a hypoechoic wall thickening. MRA is preferred for Takayasu arteritis. Imaging supports, but does not replace, temporal artery biopsy in giant cell arteritis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Imaging strengths",
+     "points": [
+      "PET-CT shows vascular FDG uptake",
+      "Temporal ultrasound shows halo sign",
+      "MRA suits Takayasu arteritis"
+     ]
+    },
+    "right": {
+     "title": "Limits",
+     "points": [
+      "Imaging supports but does not replace biopsy",
+      "Gold standard for GCA is biopsy",
+      "Ultrasound depends on operator skill"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dual energy CT** distinguishes urate from calcium deposits by differences in X-ray attenuation at two energy levels, which is useful in gout. Plain radiographs of gout show punched-out erosions with overhanging edges and preserved joint space until late. Nailfold capillaroscopy examines the capillary loops at the nailfold and shows giant capillaries, microhaemorrhages and avascular areas in systemic sclerosis and dermatomyositis.",
+   "say": "Dual energy CT distinguishes urate from calcium deposits by differences in X-ray attenuation at two energy levels, which is useful in gout. Plain radiographs of gout show punched-out erosions with overhanging edges and preserved joint space until late. Nailfold capillaroscopy examines the capillary loops at the nailfold and shows giant capillaries, microhaemorrhages and avascular areas in systemic sclerosis and dermatomyositis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Best use",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Dual energy CT",
+      "Detects urate crystals",
+      "Separates urate from calcium"
+     ],
+     [
+      "Plain radiograph",
+      "Gout erosions",
+      "Overhanging edges"
+     ],
+     [
+      "Nailfold capillaroscopy",
+      "Connective tissue disease",
+      "Giant capillaries and avascular areas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In an acute septic sacroiliitis, begin **broad-spectrum intravenous antibiotics** before targeted therapy. Pyogenic infection is the leading cause of acute sacroiliitis. Biopsy is performed with ultrasound or CT guidance, which are less invasive than open surgical biopsy. Pregnancy-related SI pain is managed non-operatively. Indian exam tip: remember that TNF inhibitors suit axial spondyloarthritis with active inflammation on imaging, after NSAIDs.",
+   "say": "In an acute septic sacroiliitis, begin broad-spectrum intravenous antibiotics before targeted therapy. Pyogenic infection is the leading cause of acute sacroiliitis. Biopsy is performed with ultrasound or CT guidance, which are less invasive than open surgical biopsy. Pregnancy-related SI pain is managed non-operatively. Indian exam tip: remember that TNF inhibitors suit axial spondyloarthritis with active inflammation on imaging, after NSAIDs.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_74eec3eaf68c",
+  "q_f1a938533ff8",
+  "q_ff0eae12edcc"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 64
+ }
+}

@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "sbs-diagnostic-tests",
+ "subject": "ss-biostatistics",
+ "title": "Diagnostic test evaluation: accuracy, predictive values, likelihood ratios and screening bias",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Every test is judged against a reference standard, which produces a 2x2 table of true positives, false positives, false negatives and true negatives. **Sensitivity** is the share of diseased people who test positive, and **specificity** is the share of healthy people who test negative. Both are intrinsic properties of the test and do not change with how common the disease is in the population studied.",
+   "say": "Every test is judged against a reference standard, which produces a two by two table of true positives, false positives, false negatives and true negatives. Sensitivity is the share of diseased people who test positive, and specificity is the share of healthy people who test negative. Both are intrinsic properties of the test and do not change with how common the disease is in the population studied.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Formula",
+     "Answers"
+    ],
+    "rows": [
+     [
+      "Sensitivity",
+      "TP/(TP+FN)",
+      "Diseased who test positive"
+     ],
+     [
+      "Specificity",
+      "TN/(TN+FP)",
+      "Healthy who test negative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Positive predictive value** is the chance that a positive result is truly disease, and **negative predictive value** is the chance that a negative result is truly healthy. Unlike sensitivity and specificity, these shift with prevalence. As prevalence falls, PPV drops and NPV rises, so screening a rare condition in the general population yields many false positives.",
+   "say": "Positive predictive value is the chance that a positive result is truly disease, and negative predictive value is the chance that a negative result is truly healthy. Unlike sensitivity and specificity, these shift with prevalence. As prevalence falls, positive predictive value drops and negative predictive value rises, so screening a rare condition in the general population yields many false positives.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prevalence",
+     "PPV",
+     "NPV"
+    ],
+    "rows": [
+     [
+      "Low",
+      "Falls",
+      "Rises"
+     ],
+     [
+      "High",
+      "Rises",
+      "Falls"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Likelihood ratios** condense sensitivity and specificity into a single figure that stays the same regardless of how common the condition is in the population. The **positive likelihood ratio** is sensitivity divided by one minus specificity, whereas the **negative likelihood ratio** is one minus sensitivity divided by specificity. Values above one push the odds of disease upwards, while values below one pull them downwards. Multiplying **pretest odds** by the ratio gives **posttest odds**.",
+   "say": "Think of likelihood ratios as a way of packaging sensitivity and specificity into one figure that does not shift with how common the disease is. For a positive result, divide sensitivity by the false positive fraction, which is one minus specificity. For a negative result, divide the false negative fraction, one minus sensitivity, by specificity. A ratio above one nudges the odds of disease upwards, and a ratio below one nudges them downwards. You never apply these to probabilities directly; you multiply pretest odds by the ratio to reach posttest odds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "LR positive",
+     "points": [
+      "Above one raises the odds",
+      "The further above one, the stronger the rule in"
+     ]
+    },
+    "right": {
+     "title": "LR negative",
+     "points": [
+      "Below one lowers the odds",
+      "The further below one, the stronger the rule out"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bayes theorem** updates the **pretest probability** using a likelihood ratio. Convert pretest probability to pretest odds, multiply by the LR, then convert back to a probability. The **Fagan nomogram** does this graphically. Example: a pretest probability of 20 percent with LR positive 5 gives a post-test probability of about 56 percent.",
+   "say": "Bayes theorem updates the pretest probability using a likelihood ratio. Convert pretest probability to pretest odds, multiply by the likelihood ratio, then convert back to a probability. The Fagan nomogram does this graphically. For example, a pretest probability of 20 percent with a positive likelihood ratio of 5 gives a post-test probability of about 56 percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Pretest 20%"
+     },
+     {
+      "id": "p2",
+      "label": "Pretest odds 0.25"
+     },
+     {
+      "id": "p3",
+      "label": "Times LR+ 5"
+     },
+     {
+      "id": "p4",
+      "label": "Post-test odds 1.25"
+     },
+     {
+      "id": "p5",
+      "label": "Post-test about 56%"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **ROC curve** plots sensitivity against one minus specificity across every possible cutoff, so each point shows a trade-off between missed disease and false alarms. The **area under the curve** summarises overall discrimination: a value near one half means the test performs little better than chance, while a value near one indicates near-perfect separation of diseased and healthy people. Moving to a lower cutoff raises sensitivity but costs specificity. Choose the working cutoff by weighing the harm of missing disease against the burden of unnecessary follow-up.",
+   "say": "A ROC curve plots sensitivity against one minus specificity for every possible cutoff, so each point reflects a balance between missed disease and false alarms. The area under the curve tells you how well the test separates diseased from healthy people. An area near one half is little better than chance, while an area near one is almost perfect. Lowering the cutoff boosts sensitivity but reduces specificity. Pick your cutoff by weighing the cost of missing disease against the cost of unnecessary follow-up.",
+   "vis": null
+  },
+  {
+   "tx": "Screening can appear beneficial without truly helping. **Lead time bias** occurs when detection moves earlier, so survival looks longer even though the timing of death is unchanged. **Length time bias** arises because slowly progressing cases are more likely to be caught on screening, over-representing indolent disease. Randomised trials are needed to exclude both.",
+   "say": "Screening can appear beneficial without truly helping. Lead time bias occurs when detection moves earlier, so survival looks longer even though the timing of death is unchanged. Length time bias arises because slowly progressing cases are more likely to be caught on screening, over-representing indolent disease. Randomised trials are needed to exclude both.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bias",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Lead time",
+      "Earlier diagnosis inflates apparent survival"
+     ],
+     [
+      "Length time",
+      "Slow cases are over-sampled by screening"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_ed4f2e6912e9",
+  "q_3e22b090df8f",
+  "mk-b0c24f880af3"
+ ],
+ "src": [
+  "kb-diseases-diabetic-foot"
+ ],
+ "refs": [
+  "Fagan TJ. Nomogram for Bayes theorem. N Engl J Med 1975"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 400,
+  "itemN": 15
+ }
+}

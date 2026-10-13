@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "sca-antiarrhythmic-drugs",
+ "subject": "ss-cardiology",
+ "title": "Antiarrhythmic Drugs: Classification, Class III Agents and Torsades",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Antiarrhythmic drugs are classified by the **Vaughan Williams** scheme, which sorts agents by their main electrophysiological effect. Class I drugs block sodium channels, class II drugs block beta receptors, class III drugs block potassium channels and prolong repolarisation, and class IV drugs block calcium channels. Class III agents carry the greatest risk of **torsades de pointes**, so QT interval monitoring matters.",
+   "say": "Antiarrhythmic drugs are classified by the Vaughan Williams scheme, which sorts agents by their main electrophysiological effect. Class I drugs block sodium channels, class II drugs block beta receptors, class III drugs block potassium channels and prolong repolarisation, and class IV drugs block calcium channels. Class III agents carry the greatest risk of torsades de pointes, so QT interval monitoring matters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Typical agents",
+     "Main action"
+    ],
+    "rows": [
+     [
+      "I",
+      "Flecainide, propafenone",
+      "Block sodium channels"
+     ],
+     [
+      "II",
+      "Metoprolol",
+      "Block beta receptors"
+     ],
+     [
+      "III",
+      "Dofetilide, sotalol, amiodarone",
+      "Block potassium channels"
+     ],
+     [
+      "IV",
+      "Verapamil",
+      "Block calcium channels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acquired QT prolongation with **torsades de pointes** is managed step by step. Start with intravenous magnesium sulfate, usually 2 grams. If the rhythm persists or the heart rate is low, use overdrive pacing or isoproterenol to raise the rate and shorten the QT interval. Defibrillate if the patient is unstable, and stop the offending drug.",
+   "say": "Acquired QT prolongation with torsades de pointes is managed step by step. Start with intravenous magnesium sulfate, usually 2 grams. If the rhythm persists or the heart rate is low, use overdrive pacing or isoproterenol to raise the rate and shorten the QT interval. Defibrillate if the patient is unstable, and stop the offending drug.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Torsades"
+     },
+     {
+      "id": "b",
+      "label": "IV magnesium 2 g"
+     },
+     {
+      "id": "c",
+      "label": "Persists or slow rate?"
+     },
+     {
+      "id": "d",
+      "label": "Overdrive pacing or isoproterenol"
+     },
+     {
+      "id": "e",
+      "label": "Defibrillate if unstable"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ibutilide** is a class III agent given intravenously to convert recent atrial fibrillation or flutter to sinus rhythm. It prolongs the action potential by slowing the late inward sodium current and blocking IKr. Structural heart disease is a contraindication. Monitor the ECG for 4 hours after infusion. No specific antidote exists, so treat toxicity with magnesium and supportive resuscitation.",
+   "say": "Ibutilide is a class III agent given intravenously to convert recent atrial fibrillation or flutter to sinus rhythm. It prolongs the action potential by slowing the late inward sodium current and blocking IKr. Structural heart disease is a contraindication. Monitor the ECG for 4 hours after infusion. No specific antidote exists, so treat toxicity with magnesium and supportive resuscitation.",
+   "vis": null
+  },
+  {
+   "tx": "**Use dependence** means a drug blocks channels more at faster heart rates, which is typical of class I agents such as flecainide. **Reverse use dependence** is the opposite: block increases at slow rates. This explains why bradycardia raises the risk of torsades with class III drugs such as sotalol and dofetilide, so sotalol is started in hospital with QT checks.",
+   "say": "Use dependence means a drug blocks channels more at faster heart rates, which is typical of class I agents such as flecainide. Reverse use dependence is the opposite: block increases at slow rates. This explains why bradycardia raises the risk of torsades with class III drugs such as sotalol and dofetilide, so sotalol is started in hospital with QT checks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Use dependence",
+     "points": [
+      "Block grows at faster rates",
+      "Typical of class I agents",
+      "Suits tachycardia control"
+     ]
+    },
+    "right": {
+     "title": "Reverse use dependence",
+     "points": [
+      "Block grows at slow rates",
+      "Typical of class III agents",
+      "Raises torsades risk in bradycardia"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_999bcdb2ab00",
+  "q_03714a7eb45e",
+  "q_126f1ca79054"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung's Basic and Clinical Pharmacology (Katzung BG, Trevor AJ)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 24
+ }
+}

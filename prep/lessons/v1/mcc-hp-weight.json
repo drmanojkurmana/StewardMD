@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "mcc-hp-weight",
+ "subject": "mcc-health-promotion",
+ "title": "Healthy weight, diet and exercise",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Weight management rests on a **sustained energy deficit** rather than quick fixes. Lasting change depends on **diet**, **physical activity** and **behaviour support** working together. Clinicians usually agree a **modest, gradual weight loss** target and review progress regularly, because steady, small changes are more likely to be maintained than rapid losses.",
+   "say": "Weight management rests on a sustained energy deficit rather than quick fixes. Lasting change depends on diet, physical activity and behaviour support working together. Clinicians usually agree a modest, gradual weight loss target and review progress regularly. Steady, small changes are more likely to be maintained than rapid losses, so patients are encouraged to build habits they can keep over the long term.",
+   "vis": null
+  },
+  {
+   "tx": "Crash diets, very low-calorie regimens and fad eliminations often produce early loss followed by **weight regain**. Unsupervised very low-calorie diets risk electrolyte disturbance, gallstones and muscle loss. A structured programme with a dietitian, regular review and a moderate calorie deficit is the preferred route for most adults with obesity and metabolic risk.",
+   "say": "Crash diets, very low-calorie regimens and fad eliminations often produce early loss followed by weight regain. Unsupervised very low-calorie diets risk electrolyte disturbance, gallstones and muscle loss. A structured programme with a dietitian, regular review and a moderate calorie deficit is the preferred route for most adults with obesity and metabolic risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Avoid",
+     "points": [
+      "Crash or fasting cycles",
+      "Unsupervised very low calorie diet",
+      "Fad elimination plans"
+     ]
+    },
+    "right": {
+     "title": "Prefer",
+     "points": [
+      "Dietitian-led structured plan",
+      "Moderate sustained calorie deficit",
+      "Regular review and follow-up"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Physical activity is a core pillar of weight management. Adults should aim for at least **150 minutes of moderate aerobic activity** each week, spread across most days, along with muscle-strengthening work on two or more days. Previously inactive people should start at a comfortable level and build up gradually, which reduces injury and cardiac strain.",
+   "say": "Physical activity is a core pillar of weight management. Adults should aim for at least 150 minutes of moderate aerobic activity each week, spread across most days. Muscle-strengthening work on two or more days is also advised. Previously inactive people should start at a comfortable level and build up gradually, which reduces injury and cardiac strain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start low"
+     },
+     {
+      "id": "b",
+      "label": "Brisk walking"
+     },
+     {
+      "id": "c",
+      "label": "Build duration"
+     },
+     {
+      "id": "d",
+      "label": "150 min weekly"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before a **sedentary** adult with **known risk factors** starts **vigorous exercise**, screen for warning symptoms such as chest pain or breathlessness on exertion, and review the **resting ECG**. If he is symptom free with a normal ECG, **moderate activity** can usually begin without **maximal exercise testing**. Existing **hypertension** still needs regular review, but drugs should not be started simply to allow exercise.",
+   "say": "Before a sedentary adult with known risk factors starts vigorous exercise, screen for warning symptoms such as chest pain or breathlessness on exertion, and review the resting ECG. If he has no symptoms and the ECG is normal, moderate activity can usually begin without maximal exercise testing. Existing hypertension still needs regular review, but drugs should not be started simply to allow exercise.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Symptom screen"
+     },
+     {
+      "id": "b",
+      "label": "Resting ECG"
+     },
+     {
+      "id": "c",
+      "label": "Start moderate activity"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diet quality matters as much as calorie count. Emphasise **vegetables**, **fruit**, **whole grains**, **pulses** and **unsaturated fats**, and limit **refined carbohydrates**, **sugary drinks** and **ultra-processed food**. In India, reducing excess salt and oil intake also helps blood pressure and lipids, and portion-controlled home-cooked meals are an effective, affordable strategy.",
+   "say": "Diet quality matters as much as calorie count. Emphasise vegetables, fruit, whole grains, pulses and unsaturated fats. Limit refined carbohydrates, sugary drinks and ultra-processed food. In India, reducing excess salt and oil intake also helps blood pressure and lipids. Portion-controlled home-cooked meals are an effective and affordable strategy.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 2
+ }
+}

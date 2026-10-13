@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "mcc-hp-lowvalue",
+ "subject": "mcc-health-promotion",
+ "title": "Avoiding low-value screening: Choosing Wisely",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Choosing Wisely is a campaign that asks clinicians to question tests and treatments that add little value. **Low-value screening** means testing healthy people who have no symptoms, no risk factors and no validated benefit from the test. Screening only helps when the test finds disease early enough to change outcomes in the target group. A normal result is common, but a false positive can trigger invasive follow-up and harm.",
+   "say": "Choosing Wisely is a campaign that asks clinicians to question tests and treatments that add little value. Low-value screening means testing healthy people who have no symptoms, no risk factors and no validated benefit from the test. Screening only helps when the test finds disease early enough to change outcomes in the target group. A normal result is common, but a false positive can trigger invasive follow-up and harm.",
+   "vis": null
+  },
+  {
+   "tx": "Before ordering any screening test, ask whether the person is asymptomatic, whether there is a validated indication, and whether the result will change management. A **pre-test probability** that is low makes false positives more likely. Patient requests driven by a friend's experience or anxiety are not clinical indications. Shared decision-making is the right approach when benefit is uncertain.",
+   "say": "Before ordering any screening test, ask whether the person is asymptomatic, whether there is a validated indication, and whether the result will change management. A pre-test probability that is low makes false positives more likely. Patient requests driven by a friend's experience or anxiety are not clinical indications. Shared decision-making is the right approach when benefit is uncertain.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Appropriate testing",
+     "points": [
+      "Symptoms or red flags present",
+      "Validated benefit in target group",
+      "Result changes management"
+     ]
+    },
+    "right": {
+     "title": "Low-value testing",
+     "points": [
+      "Asymptomatic and low risk",
+      "Requested because of a friend or anxiety",
+      "Normal result adds no action"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "PSA testing in asymptomatic men is a classic example of a **preference-sensitive** decision. PSA detects some cancers that would never cause harm, leading to **overdiagnosis** and treatment complications such as incontinence and erectile dysfunction. Benefit in mortality is modest and uncertain. The clinician should explain these trade-offs and let the man decide, rather than ordering the test automatically.",
+   "say": "PSA testing in asymptomatic men is a classic example of a preference-sensitive decision. PSA detects some cancers that would never cause harm, leading to overdiagnosis and treatment complications such as incontinence and erectile dysfunction. Benefit in mortality is modest and uncertain. The clinician should explain these trade-offs and let the man decide, rather than ordering the test automatically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Issue",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Benefit",
+      "Modest, uncertain mortality gain"
+     ],
+     [
+      "Overdiagnosis",
+      "Detects indolent cancers"
+     ],
+     [
+      "Treatment harm",
+      "Incontinence and sexual dysfunction"
+     ],
+     [
+      "Action",
+      "Shared decision-making"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Routine imaging and blood tests for common complaints often add little value. For acute **low back pain** without red flags such as leg weakness, bladder or bowel change, fever, weight loss or cancer history, imaging does not improve outcomes. Imaging findings such as disc degeneration are common in people without pain. Reassurance, activity and review are the preferred approach, with imaging reserved for red flags.",
+   "say": "Routine imaging and blood tests for common complaints often add little value. For acute low back pain without red flags such as leg weakness, bladder or bowel change, fever, weight loss or cancer history, imaging does not improve outcomes. Imaging findings such as disc degeneration are common in people without pain. Reassurance, activity and review are the preferred approach, with imaging reserved for red flags.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low back pain"
+     },
+     {
+      "id": "b",
+      "label": "Red flags?"
+     },
+     {
+      "id": "c",
+      "label": "No: reassure, stay active"
+     },
+     {
+      "id": "d",
+      "label": "Yes: targeted imaging"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "No"
+     ],
+     [
+      "b",
+      "d",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The exam point is simple. Identify whether the patient is symptomatic or high risk, check for a validated benefit, and weigh **overdiagnosis** and false positives. For a healthy asymptomatic patient who asks for a test, explain the harms, document shared decision-making, and decline routine low-value tests. Reserve testing for clear indications and red flags.",
+   "say": "The exam point is simple. Identify whether the patient is symptomatic or high risk, check for a validated benefit, and weigh overdiagnosis and false positives. For a healthy asymptomatic patient who asks for a test, explain the harms, document shared decision-making, and decline routine low-value tests. Reserve testing for clear indications and red flags.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Choosing Wisely Canada and American Choosing Wisely campaigns"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

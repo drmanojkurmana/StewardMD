@@ -51,7 +51,7 @@ function taxSubjects(root = ROOT) {
 }
 /* targetModules(root, cache, bank) -> [{ mid, sid, title, scope, exams }] for modules with no lesson anywhere
    (bank lessons index from cache + bundled repo index) and no KB/pr topic, excluding mixed modules. */
-export function targetModules(root = ROOT, cache = null, bank = null) {
+export function targetModules(root = ROOT, cache = null, bank = null, force = null) {
   const subs = taxSubjects(root);
   const bankLes = (cache && readJ(path.join(cache, "lessons-index.json")) || {}).modules || {};
   const appLes = (readJ(path.join(root, "prep/lessons/v1/index.json")) || {}).modules || {};
@@ -61,9 +61,12 @@ export function targetModules(root = ROOT, cache = null, bank = null) {
   const out = [];
   const seen = new Set();
   const push = (mid, sid, title, scope, exams) => {
-    if (!mid || /-mixed$/.test(mid) || seen.has(mid)) return;
+    if (!mid || seen.has(mid)) return;
     seen.add(mid);
-    if (hasLesson.has(mid) || mapped.has(mid)) return;
+    if (hasLesson.has(mid)) return;
+    // Explicitly requested modules (mixed grab-bags, mapped-but-unlinked) are still taught: the caller
+    // asked for them by name, and every item of the module reads its chapter at topic tier.
+    if (!force?.has(mid) && (/-mixed$/.test(mid) || mapped.has(mid))) return;
     out.push({ mid, sid, title: String(title || mid), scope: String(scope || ""), exams: exams || [] });
   };
   for (const [sid, s] of subs) for (const sec of s.sections || []) for (const m of sec.modules || []) {
@@ -81,6 +84,26 @@ export function targetModules(root = ROOT, cache = null, bank = null) {
         push(t.id, s.id, (t.title && t.title.en) || t.title || t.id, t.scope || "", [s.id]);
     }
   } catch { /* taxonomy-only tree */ }
+  if (force) {
+    // Explicitly requested modules missing from every taxonomy (bank-side groupings such as *-mixed
+    // "Mixed practice"): resolve them through the bank subject indexes, as the app reads them.
+    for (const mid of force) {
+      if (!mid || seen.has(mid)) continue;
+      for (const [sid, s] of subs) {
+        let t = null;
+        for (const bv of [...new Set([s.bv || "v5", "v16", "v5"])]) {
+          const ix = readJ(path.join(root, "prep/bank", bv, sid, "index.json")) || {};
+          t = (ix.topics || []).find((x) => x && x.id === mid);
+          if (t) break;
+        }
+        if (t) {
+          const st = (s.title && s.title.en) || s.title || sid;
+          push(mid, sid, (t.title && t.title.en) || t.title || mid, t.scope || `${st} mixed rapid review`, s.exams || []);
+          break;
+        }
+      }
+    }
+  }
   return out;
 }
 /* moduleItems(mid, sids, { bank, cache }) -> { all, bank, ov }: bank + overlay items.
@@ -197,7 +220,7 @@ export function draftBody(mod, ground) {
   ];
   const user = `<module>${mod.title} (${mod.sid})</module>\n<scope>${ground.scope}</scope>\n<source>\n${ground.kbText}\n</source>\n<items>\n${ground.itemText}\n</items>\nReply with the lesson JSON: title, steps (tx, say, kind + visual fields), refs.`;
   return {
-    model: DRAFT, max_tokens: 3000,
+    model: DRAFT, max_tokens: 16000,
     system: [{ type: "text", text: DRAFT_SYSTEM + "\nRULES:\n- " + rules.join("\n- ") }],
     messages: [{ role: "user", content: [{ type: "text", text: user, cache_control: { type: "ephemeral" } }] }],
     output_config: { effort: "low", format: { type: "json_schema", schema: DRAFT_SCHEMA } },
@@ -360,10 +383,10 @@ async function main(argv = process.argv.slice(2)) {
   const want = arg("--modules", "all");
   const gaps = readJ("/tmp/gap-full.json");
   const sidsOf = new Map((gaps ? gaps.rows : []).map((r) => [r.mid, r.sids.split(",")]));
-  let mods = targetModules(ROOT, cache, bank);
-  if (want !== "all") {
+  const order = want !== "all" ? new Map(want.split(",").map((x) => x.trim()).filter(Boolean).map((m, i) => [m, i])) : null;
+  let mods = targetModules(ROOT, cache, bank, order ? new Set(order.keys()) : null);
+  if (order) {
     // Explicit list keeps caller order.
-    const order = new Map(want.split(",").map((x) => x.trim()).filter(Boolean).map((m, i) => [m, i]));
     mods = mods.filter((m) => order.has(m.mid)).sort((a, b) => order.get(a.mid) - order.get(b.mid));
   } else if (gaps) {
     // Prioritise by unlinked items (gap-full order).
@@ -372,6 +395,14 @@ async function main(argv = process.argv.slice(2)) {
   }
   const batchSize = Number(arg("--batch-size", "60"));
   mods = mods.slice(0, batchSize);
+  // --scopes <jsonfile>: { mid: scope } for modules whose bank scope is null and whose title
+  // misdescribes the items (verified by reading the stems). The draft teaches the scope; without
+  // this the draft follows a wrong title and item-grounded verification rightly fails.
+  const scf = arg("--scopes", null);
+  if (scf) {
+    const ov = readJ(path.resolve(scf)) || {};
+    mods = mods.map((m) => (ov[m.mid] ? { ...m, scope: String(ov[m.mid]) } : m));
+  }
   console.log(`modules: ${mods.length} (cap $${cap}, spent $${ledgerSum(ledger).toFixed(4)})`);
   const kb = loadKb(ROOT);
   const grounds = new Map();

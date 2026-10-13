@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "spu-neuromuscular",
+ "subject": "ss-pulmonology",
+ "title": "Neuromuscular and Chest Wall Disorders: Respiratory Assessment and Support",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Neuromuscular disease weakens the **diaphragm** and intercostal muscles, so ventilation fails before oxygenation does. The earliest signs are poor sleep, morning headache and daytime sleepiness from **nocturnal hypoventilation**. Hypercapnia appears late, when the patient is already tiring. Monitoring vital capacity and inspiratory strength lets you act before crisis. Assess respiratory function at every clinic visit in these patients.",
+   "say": "Neuromuscular disease weakens the diaphragm and the intercostal muscles, so ventilation fails before oxygenation does. The earliest signs are poor sleep, morning headache and daytime sleepiness, caused by nocturnal hypoventilation. Hypercapnia appears late, when the patient is already tiring. Monitoring vital capacity and inspiratory strength lets you act before a crisis. Assess respiratory function at every clinic visit in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "Three bedside measures guide decisions about ventilatory support. **Forced vital capacity** tends to fall as weakness progresses. **Maximal inspiratory pressure** gauges the strength of the inspiratory muscles. A marked drop in forced vital capacity when lying flat points towards **diaphragm weakness**. Support is considered when forced vital capacity is clearly reduced, particularly during a **myasthenic crisis**.",
+   "say": "Three bedside measures guide decisions about breathing support. Forced vital capacity tends to fall as weakness progresses. Maximal inspiratory pressure shows how strong the inspiratory muscles are. A marked drop in forced vital capacity when the patient lies flat points towards diaphragm weakness. Support is considered when forced vital capacity is clearly reduced, especially during a myasthenic crisis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Forced vital capacity",
+      "Progressively reduced",
+      "Consider noninvasive support"
+     ],
+     [
+      "Supine fall in forced vital capacity",
+      "Marked drop when lying flat",
+      "Diaphragm weakness likely"
+     ],
+     [
+      "Maximal inspiratory pressure",
+      "Reduced",
+      "Significant inspiratory muscle weakness"
+     ],
+     [
+      "Vital capacity in myasthenic crisis",
+      "Clearly low",
+      "Risk of ventilatory failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Myasthenic crisis** is acute respiratory failure caused by weakness at the **neuromuscular junction**. Assess bulbar function, **vital capacity** and **maximal inspiratory pressure** without delay. Where these are falling or the patient is tiring, arrange **ventilatory support**, often intubation. Treat the trigger with **intravenous immunoglobulin** or plasma exchange, and stop drugs that impair transmission.",
+   "say": "Myasthenic crisis is acute respiratory failure caused by weakness at the neuromuscular junction. Assess bulbar function, vital capacity and maximal inspiratory pressure without delay. If these are falling or the patient is tiring, arrange ventilatory support, often intubation. Treat the trigger with intravenous immunoglobulin or plasma exchange, and stop drugs that impair transmission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected myasthenic crisis"
+     },
+     {
+      "id": "b",
+      "label": "Assess vital capacity and inspiratory pressure"
+     },
+     {
+      "id": "c",
+      "label": "Falling or tiring?"
+     },
+     {
+      "id": "d",
+      "label": "Ventilatory support"
+     },
+     {
+      "id": "e",
+      "label": "IVIG or plasma exchange"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "Yes"
+     ],
+     [
+      "c",
+      "e",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In practice, measure FVC and maximal inspiratory pressure regularly in neuromuscular patients. Start **nocturnal noninvasive ventilation** when hypercapnia or nocturnal hypoventilation appears, and manage crisis with immunoglobulin or plasma exchange. Use the cough assist when peak cough flow is low. Remember that respiratory failure, not limb weakness, usually causes death in Duchenne patients.",
+   "say": "In practice, measure vital capacity and maximal inspiratory pressure regularly in neuromuscular patients. Start nocturnal noninvasive ventilation when hypercapnia or nocturnal hypoventilation appears, and manage crisis with immunoglobulin or plasma exchange. Use the cough assist when peak cough flow is low. Remember that respiratory failure, not limb weakness, usually causes death in Duchenne patients.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_b5dbbe768e00",
+  "q_299e916334e3",
+  "q_c5de9c9e1608"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

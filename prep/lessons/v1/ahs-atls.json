@@ -1,0 +1,175 @@
+{
+ "v": 1,
+ "module": "ahs-atls",
+ "subject": "adult-health-surgery",
+ "title": "ATLS and resuscitation: primary survey and early shock management",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **primary survey** follows the ABCDE sequence: airway with cervical spine protection, breathing, circulation, disability and exposure. Treat life threats as they are found, before any detailed examination. The **Glasgow Coma Scale** is part of disability, and a score of 8 or less usually means the airway must be secured. Reassess after every intervention rather than moving on once the first problem looks solved.",
+   "say": "The primary survey follows the ABCDE sequence: airway with cervical spine protection, breathing, circulation, disability and exposure. Treat life threats as they are found, before any detailed examination. The Glasgow Coma Scale is part of disability, and a score of 8 or less usually means the airway must be secured. Reassess after every intervention rather than moving on once the first problem looks solved.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Key question",
+     "Typical action"
+    ],
+    "rows": [
+     [
+      "Airway",
+      "Is it patent and protected?",
+      "Clear, protect cervical spine, secure if needed"
+     ],
+     [
+      "Breathing",
+      "Is ventilation adequate?",
+      "Expose chest, decompress if pneumothorax"
+     ],
+     [
+      "Circulation",
+      "Is there shock?",
+      "Control bleeding, give blood early"
+     ],
+     [
+      "Disability",
+      "What is the neurological state?",
+      "Check GCS and pupils"
+     ],
+     [
+      "Exposure",
+      "Any hidden injury?",
+      "Undress, prevent hypothermia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **tension pneumothorax** is a clinical diagnosis made without waiting for imaging. Features include absent breath sounds, tracheal deviation away from the injured side, distended neck veins and hypotension. Immediate **needle decompression** at the second intercostal space in the midclavicular line, or the fifth intercostal space in the anterior axillary line, is followed by a definitive chest drain. Indian practice follows the same ATLS sequence as international guidance.",
+   "say": "A tension pneumothorax is a clinical diagnosis made without waiting for imaging. Features include absent breath sounds, tracheal deviation away from the injured side, distended neck veins and hypotension. Immediate needle decompression at the second intercostal space in the midclavicular line, or the fifth intercostal space in the anterior axillary line, is followed by a definitive chest drain. Indian practice follows the same ATLS sequence as international guidance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect tension"
+     },
+     {
+      "id": "b",
+      "label": "Needle decompression"
+     },
+     {
+      "id": "c",
+      "label": "Chest drain"
+     },
+     {
+      "id": "d",
+      "label": "Reassess"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **haemorrhagic shock**, the early goal is controlled haemorrhage with timely blood products. ATLS advises a small crystalloid bolus of around 1 litre in adults, with blood given early when shock persists. Large volumes of crystalloid dilute clotting factors and platelets, worsening the **lethal triad** of hypothermia, acidosis and coagulopathy. Lactate and base deficit track the severity of shock and guide resuscitation.",
+   "say": "In haemorrhagic shock, the early goal is controlled haemorrhage with timely blood products. ATLS advises a small crystalloid bolus of around 1 litre in adults, with blood given early when shock persists. Large volumes of crystalloid dilute clotting factors and platelets, worsening the lethal triad of hypothermia, acidosis and coagulopathy. Lactate and base deficit track the severity of shock and guide resuscitation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Suggests",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Lactate raised",
+      "Tissue hypoperfusion",
+      "Expedite haemorrhage control"
+     ],
+     [
+      "Base deficit high",
+      "Ongoing shock",
+      "Give red cells and plasma"
+     ],
+     [
+      "INR raised",
+      "Coagulopathy",
+      "Replace clotting factors"
+     ],
+     [
+      "Haemoglobin low",
+      "Blood loss",
+      "Balanced transfusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cardiac tamponade** after penetrating chest injury produces shock with raised jugular venous pressure and muffled heart sounds. Breath sounds stay equal and the trachea is central, which separates it from pneumothorax. Beck's triad describes hypotension, raised venous pressure and quiet heart sounds. Electrical alternans and low QRS voltage on the ECG support the diagnosis, and definitive treatment is surgical pericardial drainage in an unstable patient.",
+   "say": "Cardiac tamponade after penetrating chest injury produces shock with raised jugular venous pressure and muffled heart sounds. Breath sounds stay equal and the trachea is central, which separates it from pneumothorax. Beck's triad describes hypotension, raised venous pressure and quiet heart sounds. Electrical alternans and low QRS voltage on the ECG support the diagnosis, and definitive treatment is surgical pericardial drainage in an unstable patient.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tension pneumothorax",
+     "points": [
+      "Absent breath sounds",
+      "Trachea deviated away",
+      "Hyperresonant chest"
+     ]
+    },
+    "right": {
+     "title": "Cardiac tamponade",
+     "points": [
+      "Breath sounds equal",
+      "Trachea central",
+      "Muffled heart sounds"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Airway injury is a priority when a patient cannot protect the airway. A **GCS of 8 or less** or a hypoxic patient with snoring respirations needs tracheal intubation. Inhalational injury with facial burns, soot and stridor needs early intubation before oedema progresses. Hypoxia and hypercapnia cause secondary brain injury, so delay is harmful. Cervical spine protection is maintained during any airway manoeuvre.",
+   "say": "Airway injury is a priority when a patient cannot protect the airway. A GCS of 8 or less or a hypoxic patient with snoring respirations needs tracheal intubation. Inhalational injury with facial burns, soot and stridor needs early intubation before oedema progresses. Hypoxia and hypercapnia cause secondary brain injury, so delay is harmful. Cervical spine protection is maintained during any airway manoeuvre.",
+   "vis": null
+  },
+  {
+   "tx": "An **expanding intracranial haematoma** may follow a lucid interval after head injury. Drowsiness, a dilated unreactive pupil, bradycardia and rising blood pressure form a Cushing response. Prompt neurosurgical referral and airway control are needed, with avoidance of hypotension and hypoxia. In pregnancy after trauma, left lateral tilt relieves aortocaval compression, and the mother's resuscitation takes priority for the fetus.",
+   "say": "An expanding intracranial haematoma may follow a lucid interval after head injury. Drowsiness, a dilated unreactive pupil, bradycardia and rising blood pressure form a Cushing response. Prompt neurosurgical referral and airway control are needed, with avoidance of hypotension and hypoxia. In pregnancy after trauma, left lateral tilt relieves aortocaval compression, and the mother's resuscitation takes priority for the fetus.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Advanced Trauma Life Support (ATLS) Student Course Manual, American College of Surgeons",
+  "Bailey and Love's Short Practice of Surgery (Williams, N.S. et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

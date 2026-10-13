@@ -422,6 +422,17 @@ export function topicKbForModule({ title, lessonTitle, cited, kb }) {
   }
   return null;
 }
+/* floorEntries(floorDoc, n360Doc) -> { mid: { id, title } }: the guarantee floor (any item still without a
+   target gets its module's Nucleus360 walkthrough). Only topics present in topics.json survive, so the button
+   never opens a missing topic. */
+export function floorEntries(floorDoc, n360Doc) {
+  const titles = new Map((((n360Doc && n360Doc.topics) || [])).map((t) => [t && t.id, (t && t.title) || (t && t.id)]));
+  const out = {};
+  for (const [mid, tid] of Object.entries((floorDoc && floorDoc.map) || {})) {
+    if (typeof tid === "string" && titles.has(tid)) out[mid] = { id: tid, title: titles.get(tid) };
+  }
+  return out;
+}
 /* addTopicLinks(links, it, ctx) -> links (mutated). ctx: { mid, sid, topics, lessons, bridge, midSid, images }.
    lessons: Map(mid -> [{ key, title, own }]). images: Map(basename -> { l, step }). */
 export function addTopicLinks(links, it, ctx = {}) {
@@ -500,11 +511,17 @@ export function addTopicLinks(links, it, ctx = {}) {
 export function applyRematch(links, entries) {
   if (!entries || !entries.length) return links;
   const has = new Set(links.map((l) => l.k + ":" + l.id));
-  const count = (k) => links.filter((l) => l.k === k).length;
+  // A verified rematch target beats an unshown mention: below-the-bar same-kind links vacate their slots
+  // (shown links are never evicted, and the cap still holds).
   for (const e of entries) {
     if (!e || !e.k || !e.id || !MAX[e.k]) continue;
     if (has.has(e.k + ":" + e.id)) continue;
-    if (count(e.k) >= MAX[e.k]) continue;
+    if (links.filter((l) => l.k === e.k).length >= MAX[e.k]) {
+      const i = links.findIndex((l) => l.k === e.k && l.c < SHOW);
+      if (i < 0) continue;
+      has.delete(links[i].k + ":" + links[i].id);
+      links.splice(i, 1);
+    }
     links.push({ k: e.k, id: e.id, title: e.title || e.id, c: Math.min(Number(e.c) || SHOW, 80), v: "rm", sec: "" });
     has.add(e.k + ":" + e.id);
   }
@@ -692,16 +709,16 @@ function lessonKbMap(cache, byKey) {
   return m;
 }
 /* build({ cache, bank }) -> { files: [{ rel, body }], pointer, sidecar: [records], report } */
-export function build({ cache, bank, confirmed = null, rematch = null, log = () => {} }) {
+export function build({ cache, bank, confirmed = null, rematch = null, floor = null, lessons = null, log = () => {} }) {
   const D = dictionaries();
   const lessonKb = lessonKbMap(cache, D.byKey);
   // Lessons: the bank index plus the bundled pilot lessons, merged the way the app merges them
   // (prep-lessons.js mergeIx: bank wins, except a hand-written bundled file wins for its module), so a
   // bundled-only lesson links its module too and future bundled lessons never need a retro-fix.
+  // Tests pass lessons: explicitly to freeze the universe (repo lessons otherwise leak into fixtures).
   const bankLes = (readJ(path.join(cache, "lessons-index.json")) || {}).modules || {};
   const appLes = (readJ(path.join(ROOT, "prep/lessons/v1/index.json")) || {}).modules || {};
-  const les = { ...bankLes };
-  for (const [k, e] of Object.entries(appLes)) if (!les[k] || e.gen === "hand") les[k] = e;
+  const les = lessons || (() => { const m = { ...bankLes }; for (const [k, e] of Object.entries(appLes)) if (!m[k] || e.gen === "hand") m[k] = e; return m; })();
   const cards = (readJ(path.join(cache, "cards-index.json")) || {}).modules || {};
   const lessonsOf = new Map();
   for (const [k, e] of Object.entries(les)) {
@@ -728,6 +745,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, log = () 
     }
     return topicKbMemo.get(mid);
   };
+  if (!floor) floor = floorEntries(readJ(path.join(ROOT, "prep/nucleus360/floor-map.json")), readJ(path.join(ROOT, "prep/nucleus360/topics.json")));
   // Pass 1: how many stems name each phrase (background names are discounted).
   const df = new Map(); let n = 0;
   const midSid = new Map();
@@ -791,10 +809,20 @@ export function build({ cache, bank, confirmed = null, rematch = null, log = () 
       cur.n += m.e.filter(([, ls]) => ls.some((l) => l.k + ":" + l.id === k)).length; cur.mods.add(mid); cs.set(ck, cur);
     }
     const mod = {}; if (lessonsOf.get(mid)) mod.ls = lessonsOf.get(mid).map((l) => l.key); if (cards[mid]) mod.cd = 1;
+    if (floor[mid]) mod.n360 = floor[mid];
     const body = JSON.stringify({ v: 1, m: mid, s: m.sid, ver, T, e, x, mod });
     const h = createHash("sha256").update(body).digest("hex").slice(0, 8);
     files.push({ rel: `m/${mid}-${h}.json`, body });
     ptrM[mid] = (m.sid || "") + "/" + h;
+  }
+  // The floor needs a shard even where nothing linked: a mod-only record carrying the walkthrough.
+  for (const mid of Object.keys(floor).sort()) {
+    if (ptrM[mid]) continue;
+    const sid = midSid.get(mid) || "";
+    const body = JSON.stringify({ v: 1, m: mid, s: sid, ver, T: [], e: {}, x: {}, mod: { n360: floor[mid] } });
+    const h = createHash("sha256").update(body).digest("hex").slice(0, 8);
+    files.push({ rel: `m/${mid}-${h}.json`, body });
+    ptrM[mid] = (sid || "") + "/" + h;
   }
   const ptrC = {};
   for (const [sid, cs] of Array.from(concepts.entries()).sort((a, b) => (String(a[0]) < String(b[0]) ? -1 : 1))) {

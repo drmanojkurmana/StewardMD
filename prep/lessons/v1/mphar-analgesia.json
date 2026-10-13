@@ -1,0 +1,200 @@
+{
+ "v": 1,
+ "module": "mphar-analgesia",
+ "subject": "mrcp-pharmacology",
+ "title": "Starting and maintaining strong opioids in palliative care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Start with **regular oral morphine** for advanced, progressive disease that needs a strong opioid. Oral morphine is easy to titrate and widely available. For people without renal or hepatic comorbidity, a typical total starting dose is **20 to 30 mg oral morphine daily**. Doses are then titrated against pain relief and side effects, with rescue doses for breakthrough pain and regular review.",
+   "say": "Start with regular oral morphine for advanced, progressive disease that needs a strong opioid. Oral morphine is easy to titrate and widely available. For people without renal or hepatic comorbidity, a typical total starting dose is 20 to 30 mg oral morphine daily. Doses are then titrated against pain relief and side effects, with rescue doses for breakthrough pain and regular review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Formulation",
+     "Role",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "Sustained-release morphine",
+      "Background pain",
+      "Maintenance, usually twice daily"
+     ],
+     [
+      "Immediate-release morphine",
+      "Breakthrough pain",
+      "Rapid-onset rescue doses"
+     ],
+     [
+      "Transdermal fentanyl",
+      "Maintenance alternative",
+      "Only when oral route is unsuitable and needs are stable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Renal and hepatic impairment** can slow the clearance of strong opioids, so toxicity risk rises. Check kidney and liver function before choosing a dose. Without moderate to severe impairment, the standard starting range applies. With moderate to severe impairment, seek **specialist advice** before prescribing, and choose a safer agent and dose.",
+   "say": "Renal and hepatic impairment can slow the clearance of strong opioids, so toxicity risk rises. Check kidney and liver function before choosing a dose. Without moderate to severe impairment, the standard starting range applies. With moderate to severe impairment, seek specialist advice before prescribing, and choose a safer agent and dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Check kidney and liver function"
+     },
+     {
+      "id": "n2",
+      "label": "No significant impairment"
+     },
+     {
+      "id": "n3",
+      "label": "Standard starting range"
+     },
+     {
+      "id": "n4",
+      "label": "Moderate to severe impairment"
+     },
+     {
+      "id": "n5",
+      "label": "Seek specialist advice"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maintenance and rescue use different formulations. **Sustained-release morphine** covers background pain at fixed intervals and is the usual first-line maintenance choice. **Immediate-release morphine** acts quickly and is used for breakthrough pain on top of stable background control. Using it as a substitute for regular background dosing leads to poor control.",
+   "say": "Maintenance and rescue use different formulations. Sustained-release morphine covers background pain at fixed intervals and is the usual first-line maintenance choice. Immediate-release morphine acts quickly and is used for breakthrough pain on top of stable background control. Using it as a substitute for regular background dosing leads to poor control.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sustained-release",
+     "points": [
+      "Covers background pain",
+      "Given at fixed intervals",
+      "Usually twice daily",
+      "First-line maintenance"
+     ]
+    },
+    "right": {
+     "title": "Immediate-release",
+     "points": [
+      "Rapid onset",
+      "Used for breakthrough pain",
+      "Given as needed",
+      "Not for background control"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Constipation affects nearly all patients on strong opioids, so a **regular laxative** at an effective dose should start with the opioid. Drowsiness is often early and transient. Persistent sedation with well-controlled pain is a reason to reduce the dose and review. Tell patients that laxatives take time to work and that adherence matters.",
+   "say": "Constipation affects nearly all patients on strong opioids, so a regular laxative at an effective dose should start with the opioid. Drowsiness is often early and transient. Persistent sedation with well-controlled pain is a reason to reduce the dose and review. Tell patients that laxatives take time to work and that adherence matters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Side effect",
+     "Expected course",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Constipation",
+      "Near universal",
+      "Regular laxative from the start"
+     ],
+     [
+      "Early drowsiness",
+      "Often transient",
+      "Reassess after dose changes"
+     ],
+     [
+      "Persistent drowsiness",
+      "Not settling",
+      "Reduce dose if pain is controlled"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When sedation persists, decide between dose reduction and switching using pain control. If pain stays controlled, **reduce the dose** and review sedation and pain closely. If pain becomes uncontrolled, consider a **switch to another opioid**. Advise patients about driving and manual tasks while sedation is being managed.",
+   "say": "When sedation persists, decide between dose reduction and switching using pain control. If pain stays controlled, reduce the dose and review sedation and pain closely. If pain becomes uncontrolled, consider a switch to another opioid. Advise patients about driving and manual tasks while sedation is being managed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Persistent sedation"
+     },
+     {
+      "id": "n2",
+      "label": "Is pain controlled?"
+     },
+     {
+      "id": "n3",
+      "label": "Reduce dose and review"
+     },
+     {
+      "id": "n4",
+      "label": "Consider switching opioid"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3",
+      "Yes"
+     ],
+     [
+      "n2",
+      "n4",
+      "No"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Clinical Guideline CG140: Opioids in palliative care"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

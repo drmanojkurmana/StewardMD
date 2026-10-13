@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "mcc-hp-smoking",
+ "subject": "mcc-health-promotion",
+ "title": "Smoking cessation: assessing readiness and choosing treatment",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Smoking cessation starts with a brief, respectful assessment of **tobacco dependence** and the patient's readiness to change. Ask about daily use, time to first cigarette and past quit attempts. In Indian practice, ask also about smokeless and traditional tobacco, since these need the same attention. Record pack-years and any co-morbidity such as diabetes, heart disease or COPD, because these raise the urgency of quitting.",
+   "say": "Smoking cessation starts with a brief, respectful assessment of tobacco dependence and the patient's readiness to change. Ask about daily use, time to first cigarette and past quit attempts. In Indian practice, ask also about smokeless and traditional tobacco, since these need the same attention. Record pack-years and any co-morbidity such as diabetes, heart disease or COPD, because these raise the urgency of quitting.",
+   "vis": null
+  },
+  {
+   "tx": "Use the **stages of change** to match your advice to the patient. Precontemplators have not thought about quitting and benefit from information. Contemplators are ambivalent, so reflect both sides of their concerns with open questions. Those in preparation are ready to set a quit date. Motivational interviewing builds confidence, and pressure from others tends to reduce engagement rather than increase it.",
+   "say": "Use the stages of change to match your advice to the patient. Precontemplators have not thought about quitting and benefit from information. Contemplators are ambivalent, so reflect both sides of their concerns with open questions. Those in preparation are ready to set a quit date. Motivational interviewing builds confidence, and pressure from others tends to reduce engagement rather than increase it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Typical approach"
+    ],
+    "rows": [
+     [
+      "Precontemplation",
+      "Brief advice and information"
+     ],
+     [
+      "Contemplation",
+      "Explore ambivalence, reflect concerns"
+     ],
+     [
+      "Preparation",
+      "Set a quit date and plan support"
+     ],
+     [
+      "Action",
+      "Pharmacotherapy and follow-up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Offer **pharmacotherapy** combined with behavioural support, since together they roughly double quit rates. First-line options in India and the US include nicotine replacement therapy, varenicline and bupropion. Varenicline is a partial agonist at nicotinic receptors. Use combination NRT, a patch plus a short-acting form, when cravings break through a single patch. Check contraindications before prescribing, and avoid bupropion in seizure disorders.",
+   "say": "Offer pharmacotherapy combined with behavioural support, since together they roughly double quit rates. First-line options in India and the US include nicotine replacement therapy, varenicline and bupropion. Varenicline is a partial agonist at nicotinic receptors. Use combination NRT, a patch plus a short-acting form, when cravings break through a single patch. Check contraindications before prescribing, and avoid bupropion in seizure disorders.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess dependence"
+     },
+     {
+      "id": "b",
+      "label": "Choose drug"
+     },
+     {
+      "id": "c",
+      "label": "Add counselling"
+     },
+     {
+      "id": "d",
+      "label": "Follow up"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Certain patients need individualised plans. During **pregnancy**, begin with behavioural support, as drug treatment is typically limited, and any quit attempt still benefits the foetus. After a **myocardial infarction**, raise cessation before discharge, since stopping lowers the chance of another cardiac event. Smoking acts as an **enzyme inducer** of CYP1A2, so quitting can raise **clozapine** levels and calls for monitoring.",
+   "say": "Certain patients need individualised plans. During pregnancy, begin with behavioural support, as drug treatment is typically limited, and any quit attempt still benefits the foetus. After a myocardial infarction, raise cessation before discharge, since stopping lowers the chance of another cardiac event. Smoking acts as an enzyme inducer of CYP1A2, so quitting can raise clozapine levels and calls for monitoring.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pregnancy",
+     "points": [
+      "Behavioural support first",
+      "Quitting at any stage helps",
+      "Drug treatment typically limited"
+     ]
+    },
+    "right": {
+     "title": "Clozapine users",
+     "points": [
+      "Smoking induces CYP1A2",
+      "Quitting raises levels",
+      "Check levels and monitor"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG209 Tobacco: preventing uptake, promoting quitting and treating dependence",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

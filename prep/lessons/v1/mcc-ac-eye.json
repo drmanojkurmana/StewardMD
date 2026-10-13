@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "mcc-ac-eye",
+ "subject": "mcc-acute-care",
+ "title": "Eye emergencies: recognising sight-threatening presentations",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Eye emergencies often threaten sight within hours, so recognition matters. Acute angle closure glaucoma presents with **severe eye pain**, headache, nausea, halos around lights and a red hard eye with a mid-dilated, poorly reactive pupil. Raised **intraocular pressure** damages the optic nerve, so it needs urgent treatment. Giant cell arteritis is the key mimic in older patients and needs same-day action.",
+   "say": "Eye emergencies often threaten sight within hours, so recognition matters. Acute angle closure glaucoma presents with severe eye pain, headache, nausea, halos around lights and a red hard eye with a mid-dilated, poorly reactive pupil. Raised intraocular pressure damages the optic nerve, so it needs urgent treatment. Giant cell arteritis is the key mimic in older patients and needs same-day action.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Presentation",
+     "Likely diagnosis",
+     "Immediate step"
+    ],
+    "rows": [
+     [
+      "Painful red hard eye, halos, mid-dilated pupil",
+      "Acute angle closure",
+      "Lower pressure urgently, ophthalmology"
+     ],
+     [
+      "Older patient, jaw pain, painless vision loss",
+      "Giant cell arteritis",
+      "Start high-dose steroids now"
+     ],
+     [
+      "Central ulcer in lens wearer",
+      "Corneal infection",
+      "Urgent topical antibiotics, ophthalmology"
+     ],
+     [
+      "Chemical splash",
+      "Alkali or acid burn",
+      "Immediate continuous irrigation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Giant cell arteritis causes **sudden painless vision loss** in one eye, and the fellow eye can be lost within hours. Patients over 50 with new temporal headache, jaw claudication, scalp tenderness and raised ESR or CRP need **high-dose corticosteroids** started immediately. Temporal artery biopsy should not delay treatment, and it can still be useful within about two weeks of starting steroids.",
+   "say": "Giant cell arteritis causes sudden painless vision loss in one eye, and the fellow eye can be lost within hours. Patients over 50 with new temporal headache, jaw claudication, scalp tenderness and raised ESR or CRP need high dose corticosteroids started immediately. Temporal artery biopsy should not delay treatment, and it can still be useful within about two weeks of starting steroids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect GCA"
+     },
+     {
+      "id": "b",
+      "label": "Start high-dose steroids"
+     },
+     {
+      "id": "c",
+      "label": "Biopsy within two weeks"
+     },
+     {
+      "id": "d",
+      "label": "Ophthalmology review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Orbital cellulitis in children is a red-flag emergency. Fever, swollen red eyelid, pain on eye movement, proptosis and reduced upward gaze suggest **orbital infection**, usually spreading from the **ethmoid sinuses**. Preserved vision does not exclude danger. Subperiosteal abscess on CT needs admission, intravenous antibiotics and urgent surgical review, because infection can spread intracranially.",
+   "say": "Orbital cellulitis in children is a red flag emergency. Fever, swollen red eyelid, pain on eye movement, proptosis and reduced upward gaze suggest orbital infection, usually spreading from the ethmoid sinuses. Preserved vision does not exclude danger. A subperiosteal abscess on CT needs admission, intravenous antibiotics and urgent surgical review, because infection can spread intracranially.",
+   "vis": null
+  },
+  {
+   "tx": "Open globe injury is suspected when a **full-thickness scleral wound** is seen, often with uveal tissue, after a metal or high-velocity injury. Do not press on the eye. Apply a **rigid eye shield**, avoid oral intake because general anaesthesia may be needed, and refer urgently to ophthalmology. Alkali burns are different: they need **immediate continuous irrigation** with water or saline, started before anything else, and the pH should be checked.",
+   "say": "Open globe injury is suspected when a full thickness scleral wound is seen, often with uveal tissue, after a metal or high velocity injury. Do not press on the eye. Apply a rigid eye shield, avoid oral intake because general anaesthesia may be needed, and refer urgently to ophthalmology. Alkali burns are different. They need immediate continuous irrigation with water or saline, started before anything else, and the pH should be checked.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Open globe injury",
+     "points": [
+      "Rigid shield, no pressure",
+      "Nil by mouth for surgery",
+      "Urgent ophthalmology"
+     ]
+    },
+    "right": {
+     "title": "Alkali chemical burn",
+     "points": [
+      "Irrigate immediately and continuously",
+      "Check pH of the eye",
+      "Then specialist review"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lens-related **corneal ulcers** are sight-threatening infections until proven otherwise, and Pseudomonas is a classic organism. A central ulcer with hypopyon in an extended-wear lens user needs urgent topical antibiotics and same-day ophthalmology review. Herpes zoster ophthalmicus is another urgent cause: a forehead rash extending to the tip of the nose suggests nasociliary involvement, and antiviral therapy with same-day eye review is required. Central retinal artery occlusion is treated as a time-critical stroke equivalent, with urgent carotid and cardiac assessment.",
+   "say": "Lens related corneal ulcers are sight threatening infections until proven otherwise, and Pseudomonas is a classic organism. A central ulcer with hypopyon in an extended wear lens user needs urgent topical antibiotics and same day ophthalmology review. Herpes zoster ophthalmicus is another urgent cause. A forehead rash extending to the tip of the nose suggests nasociliary involvement, and antiviral therapy with same day eye review is required. Central retinal artery occlusion is a time critical emergency, with urgent carotid and cardiac assessment.",
+   "vis": null
+  },
+  {
+   "tx": "Central retinal artery occlusion presents with **sudden painless monocular vision loss**, a pale retina and a cherry-red macular spot. A relative afferent pupillary defect supports the diagnosis. Vascular risk factors such as hypertension and smoking point to an embolic source, so urgent carotid imaging and cardiovascular risk assessment are needed. Anti-VEGF injection is not the immediate step. Remember the **ophthalmic artery** and the fellow eye as the key points in every suspected case.",
+   "say": "Central retinal artery occlusion presents with sudden painless monocular vision loss, a pale retina and a cherry red macular spot. A relative afferent pupillary defect supports the diagnosis. Vascular risk factors such as hypertension and smoking point to an embolic source, so urgent carotid imaging and cardiovascular risk assessment are needed. Anti VEGF injection is not the immediate step. Remember the ophthalmic artery and the fellow eye as the key points in every suspected case.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on giant cell arteritis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

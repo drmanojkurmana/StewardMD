@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "module": "srh-cardiac-rheum",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Cardiac involvement in rheumatic disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cardiac involvement is common in **systemic lupus erythematosus** and can affect every layer of the heart. **Libman-Sacks endocarditis** is the classic valve lesion: sterile vegetations, most often on the mitral valve, not caused by bacteria. Pericarditis is the most frequent clinical cardiac manifestation. Knowing which lesion is present guides work-up and treatment.",
+   "say": "Cardiac involvement is common in systemic lupus erythematosus and can affect every layer of the heart. Libman-Sacks endocarditis is the classic valve lesion. These are sterile vegetations, most often on the mitral valve, and they are not caused by bacteria. Pericarditis is the most frequent clinical cardiac manifestation. Knowing which lesion is present guides both work-up and treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Libman-Sacks endocarditis",
+     "points": [
+      "Sterile vegetations",
+      "Mitral valve most often",
+      "Often silent clinically",
+      "Can cause emboli"
+     ]
+    },
+    "right": {
+     "title": "Infective endocarditis",
+     "points": [
+      "Bacterial infection",
+      "Fever and bacteraemia",
+      "Needs prolonged antibiotics",
+      "Valve destruction common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Libman-Sacks lesions form when **immune complexes** deposit on valve surfaces. The deposits injure the endothelium, which exposes subendothelial material. **Fibrin and platelets** then accumulate, producing small warty vegetations. These fragments can embolise or cause valve dysfunction, even though no organism is present.",
+   "say": "Libman-Sacks lesions form when immune complexes deposit on valve surfaces. The deposits injure the endothelium, which exposes underlying material. Fibrin and platelets then accumulate, producing small warty vegetations. These fragments can embolise or cause valve dysfunction, even though no organism is present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Immune complexes"
+     },
+     {
+      "id": "n2",
+      "label": "Endothelial injury"
+     },
+     {
+      "id": "n3",
+      "label": "Fibrin and platelet deposits"
+     },
+     {
+      "id": "n4",
+      "label": "Sterile vegetation"
+     },
+     {
+      "id": "n5",
+      "label": "Embolism or regurgitation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis rests on imaging and exclusion of infection. **Transoesophageal echocardiography** is more sensitive than transthoracic echo for small vegetations, but neither can reliably separate sterile from infected lesions. **Blood cultures** are mandatory before labelling a lesion as Libman-Sacks. No single laboratory test confirms the diagnosis.",
+   "say": "Diagnosis rests on imaging and on excluding infection. Transoesophageal echocardiography is more sensitive than transthoracic echo for small vegetations. However, neither test can reliably separate sterile from infected lesions. Blood cultures are mandatory before labelling a lesion as Libman-Sacks. No single laboratory test confirms the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Investigation",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Transthoracic echo",
+      "First-line screen, may miss small lesions"
+     ],
+     [
+      "Transoesophageal echo",
+      "More sensitive for vegetations"
+     ],
+     [
+      "Blood cultures",
+      "Mandatory to exclude infection"
+     ],
+     [
+      "Antibody profile",
+      "Supports lupus activity only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of Libman-Sacks disease differs from infective endocarditis. Complete tissue resection is not required, so **valve preservation** is often feasible. Surgery is reserved for severe regurgitation, obstruction or recurrent emboli. Treat the underlying lupus with immunosuppression. Anticoagulation is considered when antiphospholipid antibodies are present.",
+   "say": "Management of Libman-Sacks disease differs from infective endocarditis. Complete tissue resection is not required, so valve preservation is often feasible. Surgery is reserved for severe regurgitation, obstruction, or recurrent emboli. The underlying lupus should be treated with immunosuppression. Anticoagulation is considered when antiphospholipid antibodies are present.",
+   "vis": null
+  },
+  {
+   "tx": "Lupus can also affect the pericardium and myocardium. Pericarditis is usually self-limiting and responds to anti-inflammatory therapy. **Lupus myocarditis** can cause arrhythmias or heart failure and needs urgent steroid-based immunosuppression. Accelerated **atherosclerosis** is also a recognised cardiovascular complication, so risk factors need active control.",
+   "say": "Lupus can also affect the pericardium and myocardium. Pericarditis is usually self-limiting and responds to anti-inflammatory therapy. Lupus myocarditis can cause arrhythmias or heart failure and needs urgent steroid-based immunosuppression. Accelerated atherosclerosis is also a recognised cardiovascular complication, so risk factors need active control.",
+   "vis": null
+  },
+  {
+   "tx": "Maternal **anti-Ro (SSA)** antibodies can cross the placenta and injure the fetal conduction system, leading to **congenital heart block**. Monitoring pregnancies with these antibodies is therefore important. In **systemic sclerosis**, **cardiac MRI** with late gadolinium enhancement can reveal patchy **myocardial fibrosis**. In **ankylosing spondylitis**, long-standing **aortitis** may lead to progressive **aortic regurgitation**.",
+   "say": "Anti-Ro, also written as SSA, is a maternal antibody that can cross the placenta and injure the fetal conduction system, leading to congenital heart block. Monitoring pregnancies with these antibodies is therefore important. In systemic sclerosis, cardiac MRI with late gadolinium enhancement can reveal patchy myocardial fibrosis. In ankylosing spondylitis, long-standing aortitis may lead to progressive aortic regurgitation.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_05d29bd19205",
+  "q_0575bac0e5e6",
+  "q_a9b8706f3418"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Kelley and Firestein's Textbook of Rheumatology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

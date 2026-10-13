@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "mcc-cc-sensory",
+ "subject": "mcc-chronic-care",
+ "title": "Hearing and vision loss: key high-yield principles",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Sudden or subacute painless central vision loss in an older adult needs fast assessment. **Wet age-related macular degeneration** is driven by choroidal neovascularisation, which leaks fluid and blood under the macula. Dry changes in the fellow eye suggest underlying macular degeneration. Intravitreal **anti-VEGF** injection is the first-line treatment, and OCT guides repeat dosing. Early treatment protects central vision better than delay.",
+   "say": "Sudden or subacute painless central vision loss in an older adult needs fast assessment. Wet age-related macular degeneration is driven by choroidal neovascularisation, which leaks fluid and blood under the macula. Dry changes in the fellow eye suggest underlying macular degeneration. Intravitreal anti-VEGF injection is the first-line treatment, and OCT guides repeat dosing. Early treatment protects central vision better than delay.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Wet AMD",
+     "Dry AMD"
+    ],
+    "rows": [
+     [
+      "Mechanism",
+      "Choroidal neovascularisation",
+      "Drusen and atrophy"
+     ],
+     [
+      "Vision loss",
+      "Rapid, central",
+      "Gradual"
+     ],
+     [
+      "First-line care",
+      "Intravitreal anti-VEGF",
+      "Nutritional advice and monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute angle-closure glaucoma** is an ophthalmic emergency. Severe eye pain, headache, nausea, halos, a mid-dilated unreactive pupil and a hazy cornea suggest sharply raised intraocular pressure. The drainage angle is blocked, so pressure damages the optic nerve. Urgent pressure-lowering treatment and **ophthalmology referral** must happen without delay. Definitive laser iridotomy follows once pressure is controlled.",
+   "say": "Acute angle-closure glaucoma is an ophthalmic emergency. Severe eye pain, headache, nausea, halos, a mid-dilated unreactive pupil and a hazy cornea suggest sharply raised intraocular pressure. The drainage angle is blocked, so pressure damages the optic nerve. Urgent pressure-lowering treatment and ophthalmology referral must happen without delay. Definitive laser iridotomy follows once pressure is controlled.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pain, halos, hazy cornea"
+     },
+     {
+      "id": "b",
+      "label": "Raised IOP"
+     },
+     {
+      "id": "c",
+      "label": "Urgent IOP lowering"
+     },
+     {
+      "id": "d",
+      "label": "Ophthalmology referral"
+     },
+     {
+      "id": "e",
+      "label": "Laser iridotomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diabetic eye disease ranges from background retinopathy to macular oedema. Severe non-proliferative retinopathy, with haemorrhages, hard exudates and cotton wool spots, carries a high risk of progression. **Diabetic macular oedema** causes blurred central vision, and **intravitreal anti-VEGF** injections are usually preferred for it. Poor glycaemic control and renal impairment raise urgency. Prompt ophthalmology referral is needed when retinopathy is severe.",
+   "say": "Diabetic eye disease ranges from background retinopathy to macular oedema. Severe non-proliferative retinopathy, with haemorrhages, hard exudates and cotton wool spots, carries a high risk of progression. Diabetic macular oedema causes blurred central vision, and intravitreal anti-VEGF injections are usually preferred for it. Poor glycaemic control and renal impairment raise urgency. Prompt ophthalmology referral is needed when retinopathy is severe.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Severe non-proliferative",
+     "points": [
+      "Haemorrhages and cotton wool spots",
+      "No new vessels",
+      "Prompt ophthalmology referral"
+     ]
+    },
+    "right": {
+     "title": "Diabetic macular oedema",
+     "points": [
+      "Blurred central vision",
+      "Retinal leakage from VEGF",
+      "Intravitreal anti-VEGF first line"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hearing loss with tinnitus and unsteadiness during treatment suggests **ototoxicity**. Aminoglycosides such as gentamicin, and cisplatin, damage inner ear hair cells. Rising creatinine also signals **nephrotoxicity**, so the drug should be stopped and an alternative chosen. Cisplatin mainly affects high frequencies first. Low magnesium can worsen the risk. Audiometry and dose review should happen early.",
+   "say": "Hearing loss with tinnitus and unsteadiness during treatment suggests ototoxicity. Aminoglycosides such as gentamicin, and cisplatin, damage inner ear hair cells. Rising creatinine also signals nephrotoxicity, so the drug should be stopped and an alternative chosen. Cisplatin mainly affects high frequencies first. Low magnesium can worsen the risk. Audiometry and dose review should happen early.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Main hearing effect",
+     "Other key risk"
+    ],
+    "rows": [
+     [
+      "Gentamicin",
+      "Bilateral vestibulocochlear damage",
+      "Nephrotoxicity"
+     ],
+     [
+      "Cisplatin",
+      "Bilateral high-frequency loss",
+      "Hypomagnesaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Asymmetric progressive sensorineural hearing loss with tinnitus and imbalance points to a **retrocochlear lesion**, most often a vestibular schwannoma. Normal otoscopy excludes a conductive cause. **Contrast MRI of the internal auditory canals** is the investigation of choice because it images the nerve and any mass directly. Routine audiometry alone is not enough. Weber and Rinne tests help separate conductive from sensorineural loss at the bedside.",
+   "say": "Asymmetric progressive sensorineural hearing loss with tinnitus and imbalance points to a retrocochlear lesion, most often a vestibular schwannoma. Normal otoscopy excludes a conductive cause. Contrast MRI of the internal auditory canals is the investigation of choice because it images the nerve and any mass directly. Routine audiometry alone is not enough. Weber and Rinne tests help separate conductive from sensorineural loss at the bedside.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conductive loss",
+     "points": [
+      "Weber lateralises to affected ear",
+      "Bone conduction exceeds air conduction there",
+      "Often cerumen or effusion"
+     ]
+    },
+    "right": {
+     "title": "Sensorineural loss",
+     "points": [
+      "Weber lateralises to healthier ear",
+      "Asymmetric loss may need MRI",
+      "Cochlear or retrocochlear cause"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gradual bilateral hearing loss in older adults is usually **presbycusis**, a symmetric sensorineural loss. Normal canals and tympanic membranes with functional difficulty need **formal audiometry** and audiology referral to define type and degree. Hearing aids are often the next step. Surgery and steroids are not indicated here. Meniere disease, by contrast, causes episodic vertigo with fluctuating low-frequency loss, and first-line care is dietary sodium restriction with a diuretic.",
+   "say": "Gradual bilateral hearing loss in older adults is usually presbycusis, a symmetric sensorineural loss. Normal canals and tympanic membranes with functional difficulty need formal audiometry and audiology referral to define type and degree. Hearing aids are often the next step. Surgery and steroids are not indicated here. Meniere disease, by contrast, causes episodic vertigo with fluctuating low-frequency loss, and first-line care is dietary sodium restriction with a diuretic.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-4b32a7038c9e",
+  "mk-9c6e0d8d339c",
+  "mk-c0ca6f0b133b"
+ ],
+ "src": [],
+ "refs": [
+  "Kumar P, Clark M. Clinical Medicine (Elsevier)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

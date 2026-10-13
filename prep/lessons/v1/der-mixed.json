@@ -1,0 +1,179 @@
+{
+ "v": 1,
+ "module": "der-mixed",
+ "subject": "dermatology",
+ "title": "Dermatology mixed rapid review: lesions, Wood's lamp and common skin conditions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Skin lesions are described by **morphology**, the first step in most dermatology questions. A **macule** is a flat, non-palpable colour change, while a **papule** is a small solid elevation under 1 cm. A **plaque** is a larger, flat-topped elevation over 1 cm, and a **vesicle** is a fluid-filled blister under 1 cm. Learn these four definitions well, because they recur in exams.",
+   "say": "Skin lesions are described by their morphology, which is the first step in most dermatology questions. A macule is a flat, non-palpable change in colour. A papule is a small solid elevation under one centimetre. A plaque is a larger, flat-topped elevation over one centimetre. A vesicle is a fluid-filled blister under one centimetre. Learn these four definitions well, because they recur in exams.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Key feature",
+     "Size"
+    ],
+    "rows": [
+     [
+      "Macule",
+      "Flat colour change, not palpable",
+      "Not elevated"
+     ],
+     [
+      "Papule",
+      "Solid elevation",
+      "Under 1 cm"
+     ],
+     [
+      "Plaque",
+      "Flat-topped elevation",
+      "Over 1 cm"
+     ],
+     [
+      "Vesicle",
+      "Fluid-filled blister",
+      "Under 1 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **Wood's lamp** emits ultraviolet light at about 360 nm and helps separate look-alike lesions by their fluorescence. Erythrasma glows **coral red** because of Corynebacterium minutissimum. Pseudomonas-colonised wounds glow pale blue, and tinea capitis caused by Microsporum species shows yellow fluorescence. Vitiligo looks totally white, whereas post-inflammatory hyperpigmentation fades under the lamp.",
+   "say": "A Wood's lamp emits ultraviolet light at about 360 nanometres and helps separate look-alike lesions by their fluorescence. Erythrasma glows coral red because of Corynebacterium minutissimum. Pseudomonas-colonised wounds glow pale blue. Tinea capitis caused by Microsporum species shows yellow fluorescence. Vitiligo looks totally white, whereas post-inflammatory hyperpigmentation fades under the lamp.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Fluorescence under Wood's lamp"
+    ],
+    "rows": [
+     [
+      "Erythrasma",
+      "Coral red"
+     ],
+     [
+      "Pseudomonas wound",
+      "Pale blue"
+     ],
+     [
+      "Tinea capitis (Microsporum)",
+      "Yellow"
+     ],
+     [
+      "Vitiligo",
+      "Totally white"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Erythrasma** is a superficial intertriginous infection caused by **Corynebacterium minutissimum**, producing reddish-brown, scaly, pruritic macules in the groin and armpits. Treatment is topical, with erythromycin, clarithromycin, clindamycin or fusidic acid. Severe cases may need an oral macrolide. It must be distinguished from dermatophyte infections of the same area.",
+   "say": "Erythrasma is a superficial infection of skin folds caused by Corynebacterium minutissimum. It produces reddish-brown, scaly, itchy macules in the groin and armpits. Treatment is topical, with erythromycin, clarithromycin, clindamycin or fusidic acid. Severe cases may need an oral macrolide. It must be distinguished from dermatophyte infections of the same area.",
+   "vis": null
+  },
+  {
+   "tx": "Topical antifungal choice depends on where the infection sits. **Tolnaftate** suits skin folds and smooth skin, such as groin and trunk infections, often clearing within a week or two. Its poor **keratin penetration** means it fails on thick plantar skin, the scalp and nails. These sites usually need a **systemic agent** such as **griseofulvin**.",
+   "say": "Topical antifungal choice depends on where the infection sits. Tolnaftate suits skin folds and smooth skin, such as groin and trunk infections, often clearing within a week or two. Its poor keratin penetration means it fails on thick plantar skin, the scalp and nails. These sites usually need a systemic agent such as griseofulvin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Tolnaftate response"
+    ],
+    "rows": [
+     [
+      "Groin (tinea cruris)",
+      "Effective"
+     ],
+     [
+      "Trunk (tinea corporis)",
+      "Effective"
+     ],
+     [
+      "Thick plantar skin",
+      "Poor"
+     ],
+     [
+      "Scalp",
+      "Ineffective"
+     ],
+     [
+      "Nails",
+      "Ineffective"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Seborrhoeic dermatitis** presents as greasy scale over erythematous patches on the scalp, eyebrows, glabella, nasolabial folds and central chest. It is worse in Parkinson disease, in AIDS and in winter. First-line therapy is topical **ketoconazole** or low-potency hydrocortisone 1 per cent. High-potency steroids on the face cause irreversible atrophy, and oral fluconazole is reserved for refractory Candida infection.",
+   "say": "Seborrhoeic dermatitis presents as greasy scale over reddened patches on the scalp, eyebrows, glabella, nasolabial folds and central chest. It is worse in Parkinson disease, in AIDS and in winter. First-line therapy is topical ketoconazole or low-potency hydrocortisone one per cent. High-potency steroids on the face cause atrophy, and oral fluconazole is reserved for refractory Candida infection.",
+   "vis": null
+  },
+  {
+   "tx": "**Ainhum** is a painful constriction at the base of the **fifth toe**, usually in males who walked barefoot in childhood. A fissure forms, becomes a fibrous band and eventually causes spontaneous autoamputation. It is also called dactylolysis spontanea. Remember that the toes, not the fingers, are the classic site.",
+   "say": "Ainhum is a painful constriction at the base of the fifth toe, usually in males who walked barefoot in childhood. A fissure forms, becomes a fibrous band and eventually causes spontaneous autoamputation. It is also called dactylolysis spontanea. Remember that the toes, not the fingers, are the classic site.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Barefoot childhood"
+     },
+     {
+      "id": "b",
+      "label": "Fissure at fifth toe"
+     },
+     {
+      "id": "c",
+      "label": "Fibrous band"
+     },
+     {
+      "id": "d",
+      "label": "Autoamputation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "9252bbd0-9b65-49d6-958f-9e2f9d50573b",
+  "0873a9af-0a3b-41d8-a3bb-196fde307e04",
+  "072ae1ab-6c1b-4fa2-bef9-7e718d403de6"
+ ],
+ "src": [],
+ "refs": [
+  "Rook's Textbook of Dermatology (Burns, Breathnach, Cox, Griffiths)",
+  "Dermatology (Rapini, Bolognia, Jorizzo)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 66
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "ch-immunisation",
+ "subject": "child-health",
+ "title": "Immunisation in Child Health: Schedules, Safety and Catch-Up",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Immunisation builds **active immunity**, where the child's own immune system responds to an antigen, and also relies on **passive immunity**, where ready-made antibodies such as maternal IgG cross the placenta. Vaccines are either **live attenuated**, such as BCG, measles-rubella and yellow fever, or inactivated and toxoid-based, such as hepatitis B, DPT and IPV. Live vaccines replicate in the host, so they are avoided in pregnancy and in significant immunosuppression.",
+   "say": "Immunisation builds active immunity, where the child's own immune system responds to an antigen. It also relies on passive immunity, where ready-made antibodies such as maternal IgG cross the placenta. Vaccines are either live attenuated, such as BCG, measles-rubella and yellow fever, or inactivated and toxoid-based, such as hepatitis B, DPT and IPV. Live vaccines replicate in the host, so they are avoided in pregnancy and in significant immunosuppression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Examples",
+     "Key exam point"
+    ],
+    "rows": [
+     [
+      "Live attenuated",
+      "BCG, MR, yellow fever",
+      "Avoid in pregnancy and severe immunosuppression"
+     ],
+     [
+      "Inactivated",
+      "Hepatitis B, IPV, typhoid conjugate",
+      "Generally safe in pregnancy"
+     ],
+     [
+      "Toxoid",
+      "Tetanus, diphtheria",
+      "Induces antitoxin antibody"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "India's **Universal Immunisation Programme** starts with BCG and the hepatitis B birth dose at birth. A **pentavalent** combination is then given at successive infant visits, alongside oral vaccine and **rotavirus** doses. An inactivated vaccine is added during late infancy. **Measles-rubella** vaccine comes in the first year, with a second dose in the second year, when booster doses of DPT are also due. **Japanese encephalitis** vaccine is limited to endemic districts.",
+   "say": "India's Universal Immunisation Programme starts with BCG and the hepatitis B birth dose at birth. A pentavalent combination is then given at successive infant visits, alongside oral vaccine and rotavirus doses. An inactivated vaccine is added during late infancy. Measles-rubella vaccine comes in the first year, with a second dose in the second year, when booster doses of DPT are also due. Japanese encephalitis vaccine is limited to endemic districts. Always check the current state schedule before answering.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Vaccines due"
+    ],
+    "rows": [
+     [
+      "At birth",
+      "BCG, hepatitis B birth dose"
+     ],
+     [
+      "Early infancy",
+      "Pentavalent and rotavirus doses at each visit, oral vaccine"
+     ],
+     [
+      "Late infancy",
+      "Inactivated vaccine added, measles-rubella first dose"
+     ],
+     [
+      "Second year of life",
+      "Measles-rubella second dose, DPT booster"
+     ],
+     [
+      "Endemic districts only",
+      "Japanese encephalitis vaccine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inactivated vaccines and toxoids are generally safe in **pregnancy**, including **tetanus**-containing and **pertussis**-containing products, which protect the newborn through transplacental antibody. **Live vaccines** such as MMR, varicella and yellow fever are withheld in pregnancy. Significant immunosuppression, for example high-dose prednisolone or methotrexate, usually defers live vaccines. Always check for a prior **vaccine allergy** before any dose.",
+   "say": "Inactivated vaccines and toxoids are generally safe in pregnancy, including tetanus-containing and pertussis-containing products, which protect the newborn through antibody passed across the placenta. Live vaccines such as MMR, varicella and yellow fever are withheld in pregnancy. Significant immunosuppression, for example high-dose prednisolone or methotrexate, usually means live vaccines are deferred. Always check for a prior vaccine allergy before any dose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Live vaccines",
+     "points": [
+      "Withhold in pregnancy",
+      "Defer in severe immunosuppression",
+      "Yellow fever needs case-by-case travel advice"
+     ]
+    },
+    "right": {
+     "title": "Inactivated and toxoid",
+     "points": [
+      "Safe in pregnancy",
+      "Usually safe in immunosuppression",
+      "Check for prior vaccine allergy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anaphylaxis after a vaccine needs **intramuscular adrenaline** without delay, injected into the anterolateral thigh and dosed by body weight with an adult maximum. The patient is laid flat with legs raised and given **high-flow oxygen**. A further dose may be required if symptoms persist. The patient is then referred to an **allergy service** before any repeat dose of that vaccine. Antihistamines and steroids never replace adrenaline.",
+   "say": "Anaphylaxis after a vaccine needs intramuscular adrenaline without delay, injected into the anterolateral thigh and dosed by body weight with an adult maximum. The patient is laid flat with legs raised and given high-flow oxygen. A further dose may be required if symptoms persist. The patient is then referred to an allergy service before any repeat dose of that vaccine. Antihistamines and steroids never replace adrenaline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Recognise anaphylaxis"
+     },
+     {
+      "id": "b",
+      "label": "IM adrenaline thigh"
+     },
+     {
+      "id": "c",
+      "label": "Lie flat, oxygen"
+     },
+     {
+      "id": "d",
+      "label": "Repeat adrenaline if needed"
+     },
+     {
+      "id": "e",
+      "label": "Refer to allergy service"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a catch-up schedule, **valid prior doses count** and the schedule is not restarted. Give all due doses now, at the minimum intervals, when no contraindication exists. Repeating completed doses adds reactions without benefit. Antibody titres are not needed before routine catch-up in children. Missed doses are given as soon as possible, not deferred to the next routine visit.",
+   "say": "In a catch-up schedule, valid prior doses count and the schedule is not restarted. Give all due doses now, at the minimum intervals, when no contraindication exists. Repeating completed doses adds reactions without benefit. Antibody titres are not needed before routine catch-up in children. Missed doses are given as soon as possible, not deferred to the next routine visit.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Universal Immunization Programme, Ministry of Health and Family Welfare, Government of India"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

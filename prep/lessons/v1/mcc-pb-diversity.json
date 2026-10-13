@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "module": "mcc-pb-diversity",
+ "subject": "mcc-professional-behaviours",
+ "title": "2SLGBTQ+ and gender-affirming care: respectful, safe practice",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Gender-affirming care aims to support a person's identity and wellbeing. Use the name and pronouns the person asks for, and record **gender identity** separately from **sex assigned at birth**. Avoid assumptions about anatomy, sexual behaviour or relationships. Respectful language builds trust, which improves attendance and honest disclosure.",
+   "say": "Gender-affirming care aims to support a person's identity and wellbeing. Use the name and pronouns the person asks for, and record gender identity separately from sex assigned at birth. Avoid assumptions about anatomy, sexual behaviour or relationships. Respectful language builds trust, which improves attendance and honest disclosure.",
+   "vis": null
+  },
+  {
+   "tx": "Adults with capacity consent to their own hormone therapy and surgery after a clear explanation of benefits and risks. If a person lacks capacity, first check for a valid advance directive or an appointed **substitute decision-maker**. A same-sex partner or relationship status does not automatically confer legal authority, so follow local law and the person's known wishes.",
+   "say": "Adults with capacity consent to their own hormone therapy and surgery after a clear explanation of benefits and risks. If a person lacks capacity, first check for a valid advance directive or an appointed substitute decision-maker. A same-sex partner or relationship status does not automatically confer legal authority, so follow local law and the person's known wishes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lacks capacity"
+     },
+     {
+      "id": "b",
+      "label": "Check written directive"
+     },
+     {
+      "id": "c",
+      "label": "Appointed substitute"
+     },
+     {
+      "id": "d",
+      "label": "Local legal surrogate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "if none"
+     ],
+     [
+      "c",
+      "d",
+      "if none"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Young people with gender incongruence who also have low mood need private time with the clinician. Ask directly about mood, sleep and any **suicidal thoughts** while a parent is out of the room. Passive thoughts still need a formal risk assessment, even without a plan or access to means. Explain the **limits of confidentiality** before disclosure.",
+   "say": "Young people with gender incongruence who also have low mood need private time with the clinician. Ask directly about mood, sleep and any suicidal thoughts while a parent is out of the room. Passive thoughts still need a formal risk assessment, even without a plan or access to means. Explain the limits of confidentiality before disclosure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Mood and sleep",
+      "Signals possible depression"
+     ],
+     [
+      "Passive thoughts",
+      "Needs direct risk review"
+     ],
+     [
+      "Plan and means",
+      "Sets urgency of response"
+     ],
+     [
+      "Confidentiality",
+      "Explain limits up front"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gender-affirming hormones need planned blood and clinical checks. **Testosterone** can raise haemoglobin and haematocrit, so repeat counts guide dose changes. **Oestrogen-based therapy** raises venous thrombosis risk and can affect blood pressure, so clot risk and pressure are reviewed at each visit. **Spironolactone** blocks potassium excretion, so serum potassium and renal function must be checked, and urgent high levels with ECG changes need immediate action.",
+   "say": "Gender-affirming hormones need planned blood and clinical checks. Testosterone can raise haemoglobin and haematocrit, so repeat counts guide dose changes. Oestrogen-based therapy raises venous thrombosis risk and can affect blood pressure, so clot risk and pressure are reviewed at each visit. Spironolactone blocks potassium excretion, so serum potassium and renal function must be checked, and urgent high levels with ECG changes need immediate action.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Key risk",
+     "Monitoring"
+    ],
+    "rows": [
+     [
+      "Testosterone",
+      "Erythrocytosis",
+      "Haemoglobin and haematocrit"
+     ],
+     [
+      "Oestrogen-based therapy",
+      "Venous thrombosis",
+      "Blood pressure and clot risk"
+     ],
+     [
+      "Spironolactone",
+      "Hyperkalaemia",
+      "Potassium and renal function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Testosterone does not reliably prevent pregnancy, and amenorrhoea does not confirm infertility. People with a uterus and ovaries who wish to avoid pregnancy still need **effective contraception**. A retained cervix still needs **cervical screening** by age and local programme rules, because androgens do not remove HPV-related risk. Offer STI testing and PrEP where exposure is ongoing.",
+   "say": "Testosterone does not reliably prevent pregnancy, and amenorrhoea does not confirm infertility. People with a uterus and ovaries who wish to avoid pregnancy still need effective contraception. A retained cervix still needs cervical screening by age and local programme rules, because androgens do not remove HPV-related risk. Offer STI testing and PrEP where exposure is ongoing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Contraception",
+     "points": [
+      "Still needed on testosterone",
+      "Amenorrhoea is not reliable"
+     ]
+    },
+    "right": {
+     "title": "Cervical screening",
+     "points": [
+      "Keep while a cervix remains",
+      "Driven by age and HPV risk"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

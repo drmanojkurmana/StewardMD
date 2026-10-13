@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "mcc-ac-delirium",
+ "subject": "mcc-acute-care",
+ "title": "Acute delirium: recognition, causes and first-line management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Delirium** is an acute fluctuation in attention and awareness that develops over hours to days, with disorganised thinking. It usually has a identifiable cause. Its three main subtypes are hyperactive, hypoactive and mixed, and hypoactive delirium is often missed. Recognise it early, because it carries high mortality and prolonged hospital stay in older patients after surgery.",
+   "say": "Delirium is an acute fluctuation in attention and awareness that develops over hours to days, with disorganised thinking. It usually has an identifiable cause. Its three main subtypes are hyperactive, hypoactive and mixed, and hypoactive delirium is often missed. Recognise it early, because it carries high mortality and prolonged hospital stay in older patients after surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Typical features",
+     "Risk"
+    ],
+    "rows": [
+     [
+      "Hyperactive",
+      "Agitation, pulling at lines, hallucinations",
+      "Injury to self and staff"
+     ],
+     [
+      "Hypoactive",
+      "Drowsiness, withdrawal, slowed movement",
+      "Often missed"
+     ],
+     [
+      "Mixed",
+      "Alternating agitation and drowsiness",
+      "Fluctuating course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Delirium arises when **vulnerability** meets **precipitants**. Vulnerability includes dementia, sensory loss, sleep disruption and frailty. Precipitants include infection, electrolyte and renal derangement, anaemia, hypoxia, surgery and sedative or anticholinergic drugs. Look for reversible causes systematically, including magnesium, sodium, urea, creatinine and haemoglobin.",
+   "say": "Delirium arises when vulnerability meets precipitants. Vulnerability includes dementia, sensory loss, sleep disruption and frailty. Precipitants include infection, electrolyte and renal derangement, anaemia, hypoxia, surgery and sedative or anticholinergic drugs. Look for reversible causes systematically, including magnesium, sodium, urea, creatinine and haemoglobin.",
+   "vis": null
+  },
+  {
+   "tx": "Prevention matters most. Use a **multicomponent non-drug strategy**: reorientation, sleep hygiene, glasses and hearing aids, early mobilisation, hydration and avoiding deliriogenic drugs. Routine antipsychotics or benzodiazepines for prevention are not recommended. Non-drug measures should be tried first for hyperactive delirium too, with pharmacological treatment reserved for dangerous agitation.",
+   "say": "Prevention matters most. Use a multicomponent non-drug strategy: reorientation, sleep hygiene, glasses and hearing aids, early mobilisation, hydration and avoiding deliriogenic drugs. Routine antipsychotics or benzodiazepines for prevention are not recommended. Non-drug measures should be tried first for hyperactive delirium too, with pharmacological treatment reserved for dangerous agitation.",
+   "vis": null
+  },
+  {
+   "tx": "For alcohol withdrawal, give a **symptom-triggered benzodiazepine** and **thiamine** before glucose. Low-dose antipsychotics such as haloperidol may be used for dangerous agitation that is not controlled by other means, with less sedation than benzodiazepines. Check the QTc before and during antipsychotic use, and correct potassium and magnesium, because haloperidol and ondansetron prolong repolarisation.",
+   "say": "For alcohol withdrawal, give a symptom-triggered benzodiazepine and thiamine before glucose. Low-dose antipsychotics such as haloperidol may be used for dangerous agitation that is not controlled by other means, with less sedation than benzodiazepines. Check the QTc before and during antipsychotic use, and correct potassium and magnesium, because haloperidol and ondansetron prolong repolarisation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Agitation"
+     },
+     {
+      "id": "b",
+      "label": "Non-drug measures"
+     },
+     {
+      "id": "c",
+      "label": "Check QTc and electrolytes"
+     },
+     {
+      "id": "d",
+      "label": "Low-dose antipsychotic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **Parkinson disease**, avoid **dopamine blockers** such as haloperidol, as they can worsen **parkinsonism**. Prefer **quetiapine** or other low-dose agents with weak D2 affinity. Never stop **levodopa** abruptly. With delirium plus focal deficit, anticoagulation or head injury, arrange an urgent **non-contrast CT head**. Remember that **capacity** is decision-specific and fluctuates, so reassess it before acting on consent.",
+   "say": "In Parkinson disease, avoid dopamine blockers such as haloperidol, as they can worsen parkinsonism. Prefer quetiapine or other low-dose agents with weak D2 affinity. Never stop levodopa abruptly. With delirium plus focal deficit, anticoagulation or head injury, arrange an urgent non-contrast CT head. Remember that capacity is decision-specific and fluctuates, so reassess it before acting on consent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Use with caution",
+     "points": [
+      "Haloperidol in Parkinson disease",
+      "Anticholinergic drugs"
+     ]
+    },
+    "right": {
+     "title": "Preferred",
+     "points": [
+      "Low-dose quetiapine",
+      "Withdraw offending sedatives"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

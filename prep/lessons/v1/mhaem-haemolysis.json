@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "mhaem-haemolysis",
+ "subject": "mrcp-haematology-oncology",
+ "title": "Haemolysis, thalassaemia and haemoglobinopathies: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Hereditary spherocytosis** results from defects in membrane proteins such as spectrin, ankyrin or band 3. Loss of surface area makes cells rigid and spherical, so they are trapped and removed in the spleen. It is usually autosomal dominant, with raised MCHC, spherocytes and a negative DAT. Splenectomy often helps once gallstones and anaemia are established.",
+   "say": "Hereditary spherocytosis results from defects in membrane proteins such as spectrin, ankyrin or band 3. Loss of surface area makes cells rigid and spherical, so they are trapped and removed in the spleen. It is usually autosomal dominant, with raised MCHC, spherocytes and a negative DAT. Splenectomy often helps once gallstones and anaemia are established.",
+   "vis": null
+  },
+  {
+   "tx": "**G6PD deficiency** is an X-linked enzyme defect that reduces NADPH production, so red cells suffer oxidant damage. Heinz bodies form and the spleen removes damaged cells, leaving bite cells. Triggers include fava beans, infection, primaquine, dapsone and sulfonamides. Haemolysis is usually self-limiting once the trigger is stopped, so supportive care is the mainstay.",
+   "say": "G6PD deficiency is an X-linked enzyme defect that reduces NADPH production, so red cells suffer oxidant damage. Heinz bodies form and the spleen removes damaged cells, leaving bite cells. Triggers include fava beans, infection, primaquine, dapsone and sulfonamides. Haemolysis is usually self-limiting once the trigger is stopped, so supportive care is the mainstay.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low NADPH"
+     },
+     {
+      "id": "b",
+      "label": "Oxidant stress"
+     },
+     {
+      "id": "c",
+      "label": "Heinz bodies"
+     },
+     {
+      "id": "d",
+      "label": "Splenic removal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sickle cell disease** arises from a glutamic acid to valine change at position 6 of the beta-globin chain. Carriers have sickle trait and are usually well. Homozygous children lose splenic function from repeated infarction, so they need early **penicillin prophylaxis** and pneumococcal vaccination. Fever in these children needs urgent assessment.",
+   "say": "Sickle cell disease arises from a glutamic acid to valine change at position 6 of the beta-globin chain. Carriers have sickle trait and are usually well. Homozygous children lose splenic function from repeated infarction, so they need early penicillin prophylaxis and pneumococcal vaccination. Fever in these children needs urgent assessment.",
+   "vis": null
+  },
+  {
+   "tx": "**Thalassaemia** reduces globin chain synthesis. Alpha thalassaemia arises from deletion of up to four alpha genes, and HbH disease with three deletions causes microcytosis and inclusion bodies. Beta thalassaemia trait shows raised HbA2 above 3.5 percent and needs no treatment. Major disease needs lifelong transfusion, and iron **chelation** is needed to prevent organ damage from iron loading.",
+   "say": "Thalassaemia reduces globin chain synthesis. Alpha thalassaemia arises from deletion of up to four alpha genes, and HbH disease with three deletions causes microcytosis and inclusion bodies. Beta thalassaemia trait shows raised HbA2 above 3.5 percent and needs no treatment. Major disease needs lifelong transfusion, and iron chelation is needed to prevent organ damage from iron loading.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key feature",
+     "Management"
+    ],
+    "rows": [
+     [
+      "Beta trait",
+      "Raised HbA2",
+      "Reassure, counsel"
+     ],
+     [
+      "HbH disease",
+      "Inclusion bodies",
+      "Monitor, transfuse if needed"
+     ],
+     [
+      "Beta major",
+      "Transfusion dependent",
+      "Chelation, transfusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Warm autoimmune haemolytic anaemia** is caused by IgG autoantibodies active at body temperature, with a positive DAT. First-line treatment is glucocorticoids such as prednisolone. Refractory or relapsing cases may need rituximab or splenectomy. **Thrombotic thrombocytopenic purpura** is different, causing schistocytes, low platelets and neurological features, and needs immediate plasma exchange with steroids.",
+   "say": "Warm autoimmune haemolytic anaemia is caused by IgG autoantibodies active at body temperature, with a positive DAT. First-line treatment is glucocorticoids such as prednisolone. Refractory or relapsing cases may need rituximab or splenectomy. Thrombotic thrombocytopenic purpura is different, causing schistocytes, low platelets and neurological features, and needs immediate plasma exchange with steroids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warm autoimmune",
+     "points": [
+      "IgG antibodies",
+      "Positive DAT",
+      "Prednisolone first line",
+      "Rituximab if refractory"
+     ]
+    },
+    "right": {
+     "title": "TTP",
+     "points": [
+      "Schistocytes",
+      "Low platelets",
+      "Plasma exchange at once",
+      "Avoid platelet transfusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acute chest syndrome** in sickle cell disease presents with a new lung infiltrate, fever, chest pain or hypoxia. Treat with antibiotics, oxygen, adequate analgesia and incentive spirometry. Transfusion or exchange is reserved for deterioration, and fluids must be given cautiously. In cold agglutinin disease, IgM antibodies cause complement-mediated haemolysis, so avoiding cold is key.",
+   "say": "Acute chest syndrome in sickle cell disease presents with a new lung infiltrate, fever, chest pain or hypoxia. Treat with antibiotics, oxygen, adequate analgesia and incentive spirometry. Transfusion or exchange is reserved for deterioration, and fluids must be given cautiously. In cold agglutinin disease, IgM antibodies cause complement-mediated haemolysis, so avoiding cold is key.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "British Society for Haematology guidelines on the diagnosis and management of sickle cell disease"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 15
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "mstat-risk",
+ "subject": "mrcp-statistics",
+ "title": "Risk, NNT/NNH and likelihood ratios",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Absolute risk** is the proportion of people who develop an outcome in a group over a set time. The **absolute risk reduction** (ARR) is the control event rate minus the treated event rate. The **number needed to treat** (NNT) is 1 divided by the ARR, giving the number of patients treated to prevent one event. Always calculate it from absolute rates, never from relative reduction alone, and report the time frame with it.",
+   "say": "Absolute risk is the proportion of people who develop an outcome in a group over a set time. The absolute risk reduction is the control event rate minus the treated event rate. The number needed to treat is one divided by the absolute risk reduction, giving the number of patients treated to prevent one event. Always calculate it from absolute rates, never from relative reduction alone, and report the time frame with it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Formula",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "ARR",
+      "Control rate minus treated rate",
+      "Absolute benefit"
+     ],
+     [
+      "NNT",
+      "1 divided by ARR",
+      "Patients treated to prevent one event"
+     ],
+     [
+      "RRR",
+      "ARR divided by control rate",
+      "Proportional benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **number needed to harm** (NNH) mirrors NNT. It equals 1 divided by the **absolute risk increase** (ARI), the excess adverse event rate in the treated group over control. For example, serious bleeding in 3% versus 1% gives an ARI of 2%, so NNH is 50. Compare NNT with NNH to judge net benefit, remembering that severity matters as much as frequency.",
+   "say": "The number needed to harm mirrors the number needed to treat. It equals one divided by the absolute risk increase, the excess adverse event rate in the treated group over control. For example, serious bleeding in 3 percent versus 1 percent gives an absolute risk increase of 2 percent, so the number needed to harm is 50. Compare the number needed to treat with the number needed to harm to judge net benefit, remembering that severity matters as much as frequency.",
+   "vis": null
+  },
+  {
+   "tx": "A **likelihood ratio** tells you how far a test result moves the odds of disease, expressed as a multiple. The **positive LR** equals sensitivity divided by the false positive fraction, which is one minus specificity. The **negative LR** equals the false negative fraction divided by specificity. Large positive ratios strengthen a diagnosis, while small negative ratios weaken it. Because these ratios are built from the test characteristics themselves, they stay constant whatever the pre-test probability.",
+   "say": "A likelihood ratio tells you how far a test result changes the odds of disease, expressed as a multiple. The positive ratio is sensitivity divided by the false positive fraction, one minus specificity. The negative ratio is the false negative fraction, one minus sensitivity, divided by specificity. A large positive ratio strengthens a diagnosis, whereas a small negative ratio weakens it. Because they are built from sensitivity and specificity, these ratios stay the same whatever the prevalence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive LR",
+     "points": [
+      "Sensitivity divided by one minus specificity",
+      "Large values strengthen a diagnosis",
+      "Raises post-test odds"
+     ]
+    },
+    "right": {
+     "title": "Negative LR",
+     "points": [
+      "One minus sensitivity divided by specificity",
+      "Small values weaken a diagnosis",
+      "Lowers post-test odds"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bayes theorem** works on odds, not probabilities. Convert the **pre-test probability** p to odds as p divided by (1 minus p). Multiply by the likelihood ratio to get post-test odds, then convert back as odds divided by (1 plus odds). For a 20% pre-test probability and LR of 5, pre-test odds are 0.25, post-test odds are 1.25, giving a post-test probability of about 56%.",
+   "say": "Bayes theorem works on odds, not probabilities. Convert the pre-test probability p to odds as p divided by one minus p. Multiply by the likelihood ratio to get post-test odds, then convert back as odds divided by one plus odds. For a twenty percent pre-test probability and a likelihood ratio of 5, pre-test odds are 0.25, post-test odds are 1.25, giving a post-test probability of about 56 percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pre-test p 20%"
+     },
+     {
+      "id": "b",
+      "label": "Odds 0.25"
+     },
+     {
+      "id": "c",
+      "label": "Times LR 5"
+     },
+     {
+      "id": "d",
+      "label": "Post-test odds 1.25"
+     },
+     {
+      "id": "e",
+      "label": "Post-test about 56%"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a **case-control** study, participants are sampled by outcome, so incidence and risk cannot be measured directly. The **odds ratio** (OR) compares exposure odds in cases and controls. When the outcome is rare, OR closely approximates relative risk. When the outcome is common, OR overstates the association for a risk-increasing exposure, so use relative risk in cohorts where possible.",
+   "say": "In a case-control study, participants are sampled by outcome, so incidence and risk cannot be measured directly. The odds ratio compares exposure odds in cases and controls. When the outcome is rare, it closely approximates relative risk. When the outcome is common, it overstates the association for a risk-increasing exposure, so relative risk is preferred in cohorts where possible.",
+   "vis": null
+  },
+  {
+   "tx": "For **sequential tests**, multiply the pre-test odds by each likelihood ratio in turn, assuming conditional independence. A **sensitive** test with a negative result helps rule disease out (SnNout), while a **specific** test with a positive result helps rule it in (SpPin). Always interpret NNT with its confidence interval. If the interval crosses no effect, the benefit is uncertain.",
+   "say": "For sequential tests, multiply the pre-test odds by each likelihood ratio in turn, assuming conditional independence. A sensitive test with a negative result helps rule disease out, remembered as SnNout, while a specific test with a positive result helps rule it in, remembered as SpPin. Always interpret the number needed to treat with its confidence interval. If the interval crosses no effect, the benefit is uncertain.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 29
+ }
+}

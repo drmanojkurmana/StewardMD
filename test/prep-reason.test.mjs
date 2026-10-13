@@ -329,7 +329,25 @@ test("knowMoreHtml: 2 targets render side-by-side duo buttons under the header",
   assert.equal((hSame.match(/<button /g) || []).length, 2);
 });
 
-test("knowMoreHtml: 3 or more show the top two plus More (N) opening the sheet", () => {
+test("kmTargets: the Nucleus360 floor fires only when nothing else exists", () => {
+  const n360 = { id: "pancreatic-adenocarcinoma", title: "Pancreatic adenocarcinoma" };
+  const lone = R.kmTargets({ links: [], okLessons: [], lesson: null, cards: false, itemCards: false, sid: "surgery", mid: "sur-pancreas", n360 });
+  assert.equal(lone.rowTargets.length, 1, "one floor target");
+  assert.deepEqual([lone.rowTargets[0].k, lone.rowTargets[0].act], ["n360", "n360-topic"]);
+  assert.match(lone.rowTargets[0].attrs, /data-t="pancreatic-adenocarcinoma"/);
+  assert.equal(R.kmKindLabel(lone.rowTargets[0]), "Nucleus360");
+  assert.equal(R.kmTargetLabel(lone.rowTargets[0]), "Cover this topic with Nucleus360");
+  const hFloor = R.knowMoreHtml({ targets: lone.rowTargets });
+  assert.match(hFloor, /data-act="n360-topic"/);
+  assert.match(hFloor, /Cover this topic with Nucleus360/);
+  const withKb = R.kmTargets({ links: [{ k: "kb", id: "x", title: "X" }], okLessons: [], lesson: null, cards: false, itemCards: false, sid: "s", mid: "m", n360 });
+  assert.ok(withKb.rowTargets.every((t) => t.k !== "n360"), "real targets suppress the floor");
+  const bare = R.kmTargets({ links: [], okLessons: [], lesson: null, cards: false, itemCards: false, sid: "s", mid: "m" });
+  assert.deepEqual(bare.rowTargets, [], "no floor without a mapped walkthrough");
+});
+
+test("knowMoreHtml: >2 targets or several of one kind render single Know more button opening sheet", () => {
+  // >2 targets
   const targets3 = [
     { k: "kb", id: "heart_failure", title: "Heart failure", act: "r-kb", attrs: ' data-id="heart_failure"' },
     { k: "ls", key: "hf", title: "Heart failure", tier: "topic", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf"' },

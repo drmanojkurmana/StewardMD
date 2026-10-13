@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "mh-older",
+ "subject": "mental-health",
+ "title": "Late-life mental health: core high-yield principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Late-life psychiatric presentations often have a **medical cause** that must be found first. Acute confusion with fluctuating attention is **delirium** until proven otherwise. Common triggers include infection, hyponatraemia, renal impairment, anaemia and medicines such as thiazides, SSRIs and mirtazapine. Treat the cause, and reassess cognition once the underlying problem is corrected.",
+   "say": "Late life psychiatric presentations often have a medical cause that must be found first. Acute confusion with fluctuating attention is delirium until proven otherwise. Common triggers include infection, low sodium, kidney impairment, anaemia and medicines such as thiazides, SSRIs and mirtazapine. Treat the cause, then reassess cognition once the underlying problem is corrected.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Presentation",
+     "Likely medical or drug cause"
+    ],
+    "rows": [
+     [
+      "Confusion with low sodium",
+      "Thiazide or SSRI induced hyponatraemia"
+     ],
+     [
+      "Low mood with macrocytosis",
+      "Vitamin B12 deficiency"
+     ],
+     [
+      "Low mood, cold, constipation",
+      "Primary hypothyroidism"
+     ],
+     [
+      "Acute confusion with fever",
+      "Infection driven delirium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hyponatraemia from a **thiazide diuretic** or an **SSRI** can cause confusion, drowsiness and disorientation without fever. Normal potassium and creatinine point to a drug-related cause rather than renal failure. Stop the offending drug, correct volume status and monitor sodium closely. Do not reach for sedation first.",
+   "say": "Hyponatraemia from a thiazide diuretic or an SSRI can cause confusion, drowsiness and disorientation without fever. Normal potassium and creatinine point to a drug related cause rather than kidney failure. Stop the offending drug, correct volume status and monitor sodium closely. Do not reach for sedation first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Confusion with low sodium"
+     },
+     {
+      "id": "b",
+      "label": "Review thiazide and SSRI"
+     },
+     {
+      "id": "c",
+      "label": "Stop offending drug"
+     },
+     {
+      "id": "d",
+      "label": "Correct fluid status"
+     },
+     {
+      "id": "e",
+      "label": "Monitor sodium"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Citalopram causes dose related **QT prolongation** by blocking cardiac potassium channels. Risk rises with low potassium, low magnesium, diuretic use, older age and high doses. Check the ECG, correct electrolytes and review QT prolonging medicines before any dose change. Torsades de pointes is the feared complication.",
+   "say": "Citalopram causes dose related QT prolongation by blocking cardiac potassium channels. Risk rises with low potassium, low magnesium, diuretic use, older age and high doses. Check the ECG, correct electrolytes and review QT prolonging medicines before any dose change. Torsades de pointes is the feared complication.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Raises QT risk",
+     "points": [
+      "Low potassium",
+      "Low magnesium",
+      "Diuretic use",
+      "Older age",
+      "High citalopram dose"
+     ]
+    },
+    "right": {
+     "title": "Action before dose change",
+     "points": [
+      "Repeat ECG",
+      "Correct electrolytes",
+      "Review other QT drugs",
+      "Consider alternative antidepressant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vascular depression in older adults is linked to **small vessel disease** and subcortical infarcts. Features include apathy, psychomotor slowing, executive dysfunction and gait disturbance. MRI showing white matter hyperintensities without cortical atrophy supports this. Control vascular risk factors such as hypertension and treat the depression.",
+   "say": "Vascular depression in older adults is linked to small vessel disease and subcortical infarcts. Features include apathy, psychomotor slowing, executive dysfunction and gait disturbance. MRI showing white matter changes without cortical atrophy supports this. Control vascular risk factors such as hypertension and treat the depression.",
+   "vis": null
+  },
+  {
+   "tx": "Suicide risk in late life is high, especially in widowed, bereaved, chronically ill or socially isolated older men. Ask directly about suicidal thoughts and **access to lethal means** such as firearms and stockpiled tablets. Limiting means and making a collaborative safety plan reduce risk fastest. Alcohol increases impulsivity.",
+   "say": "Suicide risk in late life is high, especially in widowed, bereaved, chronically ill or socially isolated older men. Ask directly about suicidal thoughts and access to lethal means such as firearms and stockpiled tablets. Limiting means and making a collaborative safety plan reduce risk fastest. Alcohol increases impulsivity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ask directly about suicide"
+     },
+     {
+      "id": "b",
+      "label": "Assess access to means"
+     },
+     {
+      "id": "c",
+      "label": "Remove or secure means"
+     },
+     {
+      "id": "d",
+      "label": "Collaborative safety plan"
+     },
+     {
+      "id": "e",
+      "label": "Follow up early"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dementia with Lewy bodies is marked by **fluctuating cognition**, recurrent well-formed visual hallucinations, parkinsonism and REM sleep behaviour disorder. Hippocampal atrophy is often relatively preserved on MRI. Alzheimer disease is the commonest dementia but lacks these early features. Driving in dementia needs formal objective fitness assessment rather than assumption.",
+   "say": "Dementia with Lewy bodies is marked by fluctuating cognition, recurrent well formed visual hallucinations, parkinsonism and REM sleep behaviour disorder. Hippocampal atrophy is often relatively preserved on MRI. Alzheimer disease is the commonest dementia but lacks these early features. Driving in dementia needs formal objective fitness assessment rather than assumption.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Dementia with Lewy bodies",
+     "Alzheimer disease"
+    ],
+    "rows": [
+     [
+      "Cognition",
+      "Fluctuates markedly",
+      "Steady progression"
+     ],
+     [
+      "Hallucinations",
+      "Well formed visual",
+      "Uncommon early"
+     ],
+     [
+      "Motor",
+      "Parkinsonism",
+      "Usually absent early"
+     ],
+     [
+      "Sleep",
+      "REM sleep behaviour disorder",
+      "Not typical"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline CG103 Delirium: prevention, diagnosis and management",
+  "NICE guideline NG97 Dementia: assessment, management and support for people living with dementia and their carers"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

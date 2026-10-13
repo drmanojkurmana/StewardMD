@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "mgeri-capacity",
+ "subject": "mrcp-geriatrics",
+ "title": "Capacity, consent and safeguarding in older adults",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Capacity is **decision-specific** and assumed in every adult until shown otherwise. Under the Mental Capacity Act 2005, the two-stage test asks whether there is an impairment of the mind or brain, and whether that impairment stops the person understanding, retaining, using or weighing information, and communicating a choice. Both stages must be present to conclude lack of capacity. An unwise decision alone never proves incapacity, and a diagnosis such as dementia never removes capacity automatically.",
+   "say": "Capacity is decision specific, and every adult is presumed to have it until shown otherwise. Under the Mental Capacity Act 2005, the two-stage test asks whether there is an impairment of the mind or brain, and whether that impairment stops the person understanding, retaining, using or weighing information, and communicating a choice. Both stages must be present to conclude lack of capacity. An unwise decision alone never proves incapacity, and a diagnosis such as dementia never removes capacity automatically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Key question"
+    ],
+    "rows": [
+     [
+      "Understand",
+      "Can they grasp the main facts in their own words?"
+     ],
+     [
+      "Retain",
+      "Can they hold the information long enough to decide?"
+     ],
+     [
+      "Use or weigh",
+      "Can they apply it to their own situation?"
+     ],
+     [
+      "Communicate",
+      "Can they express a consistent choice?"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Capacity can fluctuate, and delirium is a common reversible cause of **impaired capacity**. Before concluding that a person lacks capacity, clinicians should treat reversible factors such as infection, pain, urinary retention and dehydration, then reassess. Decisions must be made for the specific question at the time, not for the person in general. Documenting the reasoning used is essential for any exam scenario and for medicolegal protection.",
+   "say": "Capacity can fluctuate, and delirium is a common reversible cause of impaired capacity. Before concluding that a person lacks capacity, clinicians should treat reversible factors such as infection, pain, urinary retention and dehydration, then reassess. Decisions must be made for the specific question at the time, not for the person in general. Documenting the reasoning used is essential for any exam scenario and for medicolegal protection.",
+   "vis": null
+  },
+  {
+   "tx": "When a person lacks capacity, decisions are made in their **best interests** under section 4 of the Mental Capacity Act 2005. The decision-maker must consider past and present wishes, beliefs and values, and the views of those close to the person, but next of kin have no automatic legal authority. A **lasting power of attorney** for health and welfare can decide only within the powers it grants, and refusing life-sustaining treatment needs express authority in the document.",
+   "say": "When a person lacks capacity, decisions are made in their best interests under section 4 of the Mental Capacity Act 2005. The decision-maker must consider past and present wishes, beliefs and values, and the views of those close to the person, but next of kin have no automatic legal authority. A lasting power of attorney for health and welfare can decide only within the powers it grants, and refusing life-sustaining treatment needs express authority in the document.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Best interests",
+     "points": [
+      "Considers past and present wishes",
+      "Weighs views of those close to them",
+      "Consults relatives without giving automatic authority"
+     ]
+    },
+    "right": {
+     "title": "Lasting power of attorney",
+     "points": [
+      "Acts only within the granted powers",
+      "Refusing life-sustaining care needs express wording",
+      "Applies once donor lacks capacity for that decision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **prior refusal document** written by someone who had mental capacity carries weight once that person can no longer decide for themselves, but only where it covers the situation at hand. Refusing **life-sustaining treatment** demands stricter formalities: a signed written statement, an independent witness, and explicit wording confirming it holds even if death is the likely outcome. Clinicians should verify that the person has not revoked it. If the paperwork falls short or does not fit the circumstances, the team turns to **best interests** reasoning instead.",
+   "say": "A prior refusal document written by someone with mental capacity carries weight once that person can no longer decide for themselves, but only where it covers the situation at hand. Refusing life-sustaining treatment needs stricter formalities: a signed written statement, an independent witness, and wording confirming it holds even if death is the likely outcome. Clinicians should check it has not been revoked. If the paperwork falls short or does not fit, the team turns to best interests reasoning instead.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Signed written statement"
+     },
+     {
+      "id": "b",
+      "label": "Independent witness"
+     },
+     {
+      "id": "c",
+      "label": "Explicit life-risk wording"
+     },
+     {
+      "id": "d",
+      "label": "Not revoked and applicable"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Under the **Care Act 2014**, councils have a duty to look into situations where an adult with **care and support needs** may be **harmed** or **neglected** and is unable to safeguard themselves. **Financial exploitation**, **physical injury** and **neglect** all qualify. Clinicians should escalate worries early to the council's **safeguarding team**, even if the patient is unable to speak up, and seek the person's views throughout. A police referral is a separate route and is not a precondition.",
+   "say": "Under the Care Act 2014, councils have a duty to look into situations where an adult with care and support needs may be harmed or neglected and is unable to safeguard themselves. Financial exploitation, physical injury and neglect all qualify. Clinicians should escalate worries early to the council's safeguarding team, even if the patient is unable to speak up, and seek the person's views throughout. A police referral is a separate route and is not a precondition.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Concern identified"
+     },
+     {
+      "id": "b",
+      "label": "Referral to council safeguarding"
+     },
+     {
+      "id": "c",
+      "label": "Section 42 duty triggered"
+     },
+     {
+      "id": "d",
+      "label": "Outcome and plan agreed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Mental Capacity Act 2005 (UK legislation)",
+  "Care Act 2014 (UK legislation)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 32
+ }
+}

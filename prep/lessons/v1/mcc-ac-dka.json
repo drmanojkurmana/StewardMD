@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "mcc-ac-dka",
+ "subject": "mcc-acute-care",
+ "title": "DKA and HHS: Recognition and Initial Management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Diabetic ketoacidosis** (DKA) is defined by hyperglycaemia, ketosis and metabolic acidosis, usually in type 1 diabetes. **Hyperosmolar hyperglycaemic state** (HHS) shows marked hyperglycaemia and high effective osmolality with little or no ketoacidosis, typically in older type 2 patients. Both are emergencies driven by relative insulin deficiency with raised counter-regulatory hormones. Recognising which one you face decides the fluids and insulin plan.",
+   "say": "Diabetic ketoacidosis, or DKA, is defined by high blood glucose, ketones in the blood or urine, and metabolic acidosis, and it usually occurs in type 1 diabetes. Hyperosmolar hyperglycaemic state, or HHS, shows marked hyperglycaemia and high effective osmolality with little or no ketoacidosis, and it typically affects older people with type 2 diabetes. Both are emergencies caused by relative insulin deficiency together with raised counter-regulatory hormones. Recognising which one you face decides the fluids and insulin plan.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "DKA",
+     "HHS"
+    ],
+    "rows": [
+     [
+      "Typical patient",
+      "Type 1, younger",
+      "Type 2, older"
+     ],
+     [
+      "Glucose",
+      "Usually high, can be near normal",
+      "Very high, often above 30 mmol/L"
+     ],
+     [
+      "Venous pH",
+      "Low",
+      "Normal or near normal"
+     ],
+     [
+      "Ketones",
+      "Strongly positive",
+      "Trace or absent"
+     ],
+     [
+      "Consciousness",
+      "Can be altered in severe cases",
+      "Often drowsy or confused"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In DKA, **bicarbonate** falls and the **anion gap** widens because **ketoacids** accumulate. Severity is graded by the **arterial pH** and the **serum bicarbonate**, with reduced consciousness marking the most serious end of the spectrum. Check **serum potassium** before starting insulin, because total body potassium is depleted even when the measured level appears normal.",
+   "say": "In diabetic ketoacidosis, bicarbonate drops and the anion gap gets wider, since ketoacids build up in the blood. Severity is judged from arterial pH and serum bicarbonate together, and a reduced level of consciousness signals the most serious end of the spectrum. Before insulin is started, serum potassium needs checking. Total body potassium is depleted even when the measured level looks normal, so insulin can drive it dangerously low if this is missed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Confirm hyperglycaemia and ketones"
+     },
+     {
+      "id": "b",
+      "label": "Grade severity by pH and bicarbonate"
+     },
+     {
+      "id": "c",
+      "label": "Check potassium before insulin"
+     },
+     {
+      "id": "d",
+      "label": "Start fluids and insulin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Euglycaemic DKA occurs with **SGLT2 inhibitors** such as empagliflozin, especially with poor intake, vomiting or surgery. Glucose may be only 11 mmol/L despite high ketones and acidosis. Treatment still needs fluids and insulin, but **dextrose** must run alongside insulin to prevent hypoglycaemia while ketogenesis is suppressed. Stop the SGLT2 inhibitor and check for precipitating causes such as sepsis or infection.",
+   "say": "Euglycaemic DKA occurs with SGLT2 inhibitors such as empagliflozin, especially with poor intake, vomiting or surgery. Glucose may be only 11 millimoles per litre despite high ketones and acidosis. Treatment still needs fluids and insulin, but dextrose must run alongside insulin to prevent hypoglycaemia while ketogenesis is suppressed. Stop the SGLT2 inhibitor and look for precipitating causes such as sepsis or infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Typical DKA",
+     "points": [
+      "Glucose usually high",
+      "Insulin alone usually adequate",
+      "Glucose falls with treatment"
+     ]
+    },
+    "right": {
+     "title": "Euglycaemic DKA",
+     "points": [
+      "Glucose may be near normal",
+      "Add dextrose with insulin",
+      "Stop SGLT2 inhibitor"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In HHS, the **effective serum osmolality** is high, and altered consciousness is common. Free water deficit is corrected gradually after initial isotonic saline, because rapid lowering of osmolality risks cerebral oedema. Watch sodium and glucose closely. Metformin-associated risk is relevant if the patient is on metformin with dehydration or renal impairment, and metformin should be withheld during acute illness.",
+   "say": "In HHS, the effective serum osmolality is high, and altered consciousness is common. Free water deficit is corrected gradually after initial isotonic saline, because rapid lowering of osmolality risks cerebral oedema. Watch sodium and glucose closely. Metformin raises risk if the patient is dehydrated or has renal impairment, so it should be withheld during acute illness.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Joint British Diabetes Societies guideline for the management of diabetic ketoacidosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

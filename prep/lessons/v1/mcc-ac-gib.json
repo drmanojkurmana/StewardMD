@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "mcc-ac-gib",
+ "subject": "mcc-acute-care",
+ "title": "Acute GI bleeding: triage, resuscitation and targeted treatment",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Acute GI bleeding is classified by its site relative to the **ligament of Treitz**. Upper sources lie above it and usually cause melaena or haematemesis. Lower sources lie below it and usually cause haematochezia. Upper GI bleeding is the commoner presentation and the one most often tested. Start with resuscitation, two large-bore cannulae and crystalloid or blood as needed, before any diagnostic test. Check haemodynamics, haemoglobin and urea, since a raised urea to creatinine ratio supports an upper source.",
+   "say": "Acute GI bleeding is classified by its site relative to the ligament of Treitz. Upper sources lie above it and usually cause melaena or haematemesis. Lower sources lie below it and usually cause haematochezia. Upper GI bleeding is the commoner presentation and the one most often tested. Start with resuscitation, two large-bore cannulae and crystalloid or blood as needed, before any diagnostic test. Check haemodynamics, haemoglobin and urea, since a raised urea to creatinine ratio supports an upper source.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Upper source",
+     "Lower source"
+    ],
+    "rows": [
+     [
+      "Typical stool",
+      "Melaena",
+      "Red or maroon blood"
+     ],
+     [
+      "Common causes",
+      "Peptic ulcer, varices",
+      "Diverticula, angiodysplasia"
+     ],
+     [
+      "First test",
+      "Urgent endoscopy",
+      "Colonoscopy after resuscitation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Triage comes first in acute upper GI haemorrhage. The **Glasgow-Blatchford score** combines urea, haemoglobin, blood pressure, pulse, presentation with black stools or faintness, liver disease and heart failure. A result of zero signals minimal risk, so outpatient follow-up can be considered. Elevated totals point towards admission and timely endoscopy. Clinical instinct still prevails: a deteriorating patient needs hospital care whatever the figure.",
+   "say": "Triage comes first in acute upper GI haemorrhage. The Glasgow-Blatchford score combines urea, haemoglobin, blood pressure, pulse, presentation with black stools or faintness, liver disease and heart failure. A result of zero signals minimal risk, so outpatient follow-up can be considered. Elevated totals point towards admission and timely endoscopy. Clinical instinct still prevails: a deteriorating patient needs hospital care whatever the figure.",
+   "vis": null
+  },
+  {
+   "tx": "Upper endoscopy is both diagnostic and therapeutic, and it should follow resuscitation within 24 hours. Endoscopic haemostasis, such as clips, adrenaline injection or thermal coagulation, is used for high risk stigmata. **High-dose intravenous proton pump inhibitor** therapy after haemostasis lowers rebleeding risk from peptic ulcers. Erythromycin given 30 to 120 minutes before endoscopy can clear blood from the stomach and improve the view, but it does not replace resuscitation.",
+   "say": "Upper endoscopy is both diagnostic and therapeutic, and it should follow resuscitation within 24 hours. Endoscopic haemostasis, such as clips, adrenaline injection or thermal coagulation, is used for high risk stigmata. High-dose intravenous proton pump inhibitor therapy after haemostasis lowers rebleeding risk from peptic ulcers. Erythromycin given 30 to 120 minutes before endoscopy can clear blood from the stomach and improve the view, but it does not replace resuscitation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Resuscitate"
+     },
+     {
+      "id": "b",
+      "label": "Risk score"
+     },
+     {
+      "id": "c",
+      "label": "Endoscopy"
+     },
+     {
+      "id": "d",
+      "label": "Haemostasis"
+     },
+     {
+      "id": "e",
+      "label": "High-dose PPI"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anticoagulant reversal depends on the drug. For **dabigatran**, **idarucizumab** is the specific reversal agent. For **warfarin** with major bleeding, **four-factor prothrombin complex concentrate** restores clotting factors quickly, and intravenous **vitamin K** sustains the effect. **Tranexamic acid** is an antifibrinolytic and does not reverse anticoagulants. Restart anticoagulation later, once bleeding is controlled.",
+   "say": "Anticoagulant reversal depends on the drug. For dabigatran, idarucizumab is the specific reversal agent. For warfarin with major bleeding, four-factor prothrombin complex concentrate restores clotting factors quickly, and intravenous vitamin K sustains the effect. Tranexamic acid is an antifibrinolytic and does not reverse anticoagulants. Restart anticoagulation later, once bleeding is controlled.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anticoagulant",
+     "Reversal agent"
+    ],
+    "rows": [
+     [
+      "Dabigatran",
+      "Idarucizumab"
+     ],
+     [
+      "Warfarin",
+      "Four-factor PCC plus IV vitamin K"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "mk-1f9cb5129ae1",
+  "mk-290f10d70176",
+  "mk-9e7041d16ef8"
+ ],
+ "src": [],
+ "refs": [
+  "Laine L et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. American Journal of Gastroenterology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

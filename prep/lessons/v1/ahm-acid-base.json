@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "ahm-acid-base",
+ "subject": "adult-health-medicine",
+ "title": "Acid-base disorders: a practical approach",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Start every blood gas by checking the **pH**, which tells you whether the blood is acidic or alkaline. Blood that is too acidic is called acidaemia, and blood that is too alkaline is called alkalaemia. Next, decide whether the primary problem is **respiratory** or **metabolic** by seeing which of **PaCO2** or **bicarbonate** moves in the same direction as the pH. The body compensates, but it does not fully restore the pH, so an abnormal pH points to a primary disorder.",
+   "say": "Start every blood gas by checking the pH, which tells you whether the blood is acidic or alkaline. Blood that is too acidic is called acidaemia, and blood that is too alkaline is called alkalaemia. Next, decide whether the primary problem is respiratory or metabolic by seeing which of PaCO2 or bicarbonate moves in the same direction as the pH. The body compensates, but it does not fully restore the pH, so an abnormal pH points to a primary disorder.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Primary disorder",
+     "pH",
+     "PaCO2",
+     "Bicarbonate"
+    ],
+    "rows": [
+     [
+      "Respiratory acidosis",
+      "Low",
+      "High",
+      "High (compensation)"
+     ],
+     [
+      "Respiratory alkalosis",
+      "High",
+      "Low",
+      "Low (compensation)"
+     ],
+     [
+      "Metabolic acidosis",
+      "Low",
+      "Low (compensation)",
+      "Low"
+     ],
+     [
+      "Metabolic alkalosis",
+      "High",
+      "High (compensation)",
+      "High"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a metabolic acidosis, calculate the **anion gap** as sodium minus the sum of chloride and bicarbonate. A raised gap means an unmeasured anion is present, such as **lactate**, ketoacids, salicylate or toxins. A normal gap with high chloride suggests a hyperchloraemic acidosis, often from large volumes of saline. Ketones and lactate should be tested when the gap is raised, because they guide treatment.",
+   "say": "In a metabolic acidosis, calculate the anion gap as sodium minus the sum of chloride and bicarbonate. A raised gap means an unmeasured anion is present, such as lactate, ketoacids, salicylate or toxins. A normal gap with high chloride suggests a hyperchloraemic acidosis, often from large volumes of saline. Ketones and lactate should be tested when the gap is raised, because they guide treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Metabolic acidosis"
+     },
+     {
+      "id": "b",
+      "label": "Calculate anion gap"
+     },
+     {
+      "id": "c",
+      "label": "Gap raised"
+     },
+     {
+      "id": "d",
+      "label": "Gap normal"
+     },
+     {
+      "id": "e",
+      "label": "Lactate, ketones, toxins"
+     },
+     {
+      "id": "f",
+      "label": "Check chloride, GI or renal loss"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diabetic ketoacidosis and alcoholic ketoacidosis both raise the gap. In **diabetic ketoacidosis**, insulin deficiency drives lipolysis and ketone production, and glucose is high. In **alcoholic ketoacidosis**, glucose is usually only mildly raised, and vomiting and poor intake are common. Measure **beta-hydroxybutyrate** in blood, since urine dipsticks detect acetoacetate and can miss the main ketone. Treatment of DKA is intravenous fluids and insulin, with potassium monitored closely.",
+   "say": "Diabetic ketoacidosis and alcoholic ketoacidosis both raise the gap. In diabetic ketoacidosis, insulin deficiency drives lipolysis and ketone production, and glucose is high. In alcoholic ketoacidosis, glucose is usually only mildly raised, and vomiting and poor intake are common. Measure beta-hydroxybutyrate in blood, since urine dipsticks detect acetoacetate and can miss the main ketone. Treatment of DKA is intravenous fluids and insulin, with potassium monitored closely.",
+   "vis": null
+  },
+  {
+   "tx": "Vomiting causes a **hypochloraemic, hypokalaemic metabolic alkalosis**. Loss of gastric acid removes chloride and hydrogen ions, and volume depletion with aldosterone drives potassium and hydrogen loss in urine. Treat with **isotonic saline with potassium** to restore chloride and volume, which lets the kidney excrete excess bicarbonate. Acetazolamide and bicarbonate are not appropriate first choices. Potassium replacement should be cautious if renal function is impaired.",
+   "say": "Vomiting causes a hypochloraemic, hypokalaemic metabolic alkalosis. Loss of gastric acid removes chloride and hydrogen ions, and volume depletion with aldosterone drives potassium and hydrogen loss in urine. Treat with isotonic saline with potassium to restore chloride and volume, which lets the kidney excrete excess bicarbonate. Acetazolamide and bicarbonate are not appropriate first choices. Potassium replacement should be cautious if renal function is impaired.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chloride-responsive",
+     "points": [
+      "Vomiting or diuretic use",
+      "Low urinary chloride",
+      "Responds to saline",
+      "Volume depletion"
+     ]
+    },
+    "right": {
+     "title": "Chloride-resistant",
+     "points": [
+      "Mineralocorticoid excess",
+      "High urinary chloride",
+      "Does not respond to saline",
+      "Hypertension may be present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **hypercapnic respiratory acidosis**, the PaCO2 rises and pH falls, as seen in a drowsy patient with severe COPD. If the patient is cooperative and the airway is protected, **non-invasive ventilation** delivered with **controlled oxygen** is preferred. Oxygen should be titrated conservatively in known CO2 retainers, because excess oxygen can worsen hypercapnia. **Intubation** is reserved for failure of non-invasive support or deterioration. A raised bicarbonate with near-normal pH points to a chronic compensated state.",
+   "say": "In hypercapnic respiratory acidosis, the PaCO2 rises and pH falls, as seen in a drowsy patient with severe COPD. If the patient is cooperative and the airway is protected, non-invasive ventilation delivered with controlled oxygen is preferred. Oxygen should be titrated conservatively in known CO2 retainers, because excess oxygen can worsen hypercapnia. Intubation is reserved for failure of non-invasive support or deterioration. A raised bicarbonate with near-normal pH points to a chronic compensated state.",
+   "vis": null
+  },
+  {
+   "tx": "Large volumes of **0.9% sodium chloride** can cause a **hyperchloraemic normal anion gap acidosis**. Chloride is high, the gap is normal, and lactate is normal. In children with diarrhoea and vomiting, **isotonic crystalloid** boluses with reassessment restore perfusion first. Balanced crystalloids are an alternative in adults where chloride load is a concern, following local protocols. Always compare the gap, chloride and lactate before attributing acidosis to a single cause.",
+   "say": "Large volumes of 0.9% sodium chloride can cause a hyperchloraemic normal anion gap acidosis. Chloride is high, the gap is normal, and lactate is normal. In children with diarrhoea and vomiting, isotonic crystalloid boluses with reassessment restore perfusion first. Balanced crystalloids are an alternative in adults where chloride load is a concern, following local protocols. Always compare the gap, chloride and lactate before attributing acidosis to a single cause.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

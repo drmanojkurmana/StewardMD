@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "mresp-asthma",
+ "subject": "mrcp-respiratory",
+ "title": "Asthma: diagnosis and stepwise management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Asthma is a chronic inflammatory airway disease, and diagnosis rests on a **suggestive history** plus an **objective test** showing variable airflow limitation. Symptoms alone never confirm asthma in adults. Clinicians should record the basis of diagnosis in the notes, because suspected asthma is coded until confirmed. Objective testing is done before starting long-term treatment where possible, and tests are interpreted with current medicines in mind.",
+   "say": "Asthma is a chronic inflammatory airway disease. Diagnosis rests on a suggestive history plus an objective test showing variable airflow limitation. Symptoms alone never confirm asthma in adults. Record the basis of the diagnosis in the notes, because suspected asthma is coded until it is confirmed. Tests should be interpreted with current medicines in mind.",
+   "vis": null
+  },
+  {
+   "tx": "In adults, the first objective tests are the **blood eosinophil count** and **fractional exhaled nitric oxide (FeNO)**. A FeNO of 50 ppb or more, or a raised eosinophil count, supports the diagnosis. In children aged 5 to 16, a FeNO of 35 ppb or more is used, so adult and paediatric thresholds must not be mixed. Results that are not diagnostic move the clinician to the next test.",
+   "say": "In adults, the first objective tests are the blood eosinophil count and fractional exhaled nitric oxide, known as FeNO. A FeNO of 50 ppb or more, or a raised eosinophil count, supports the diagnosis. In children aged 5 to 16, a FeNO of 35 ppb or more is used instead, so adult and paediatric thresholds must not be mixed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Adult threshold",
+     "Child 5 to 16 threshold"
+    ],
+    "rows": [
+     [
+      "FeNO",
+      "50 ppb or more",
+      "35 ppb or more"
+     ],
+     [
+      "Blood eosinophils",
+      "Raised above reference",
+      "Raised above reference"
+     ],
+     [
+      "Action if not diagnostic",
+      "Go to reversibility",
+      "Go to reversibility"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stepwise management starts with **reliever** and **preventer** treatment. Short-acting beta-2 agonists must never be prescribed alone, so a regular **inhaled corticosteroid** is added even when reliever use is infrequent. Children under 5 with suspected asthma are treated with inhaled corticosteroids and reviewed regularly, and objective tests are attempted once they reach 5. Adults with poor control move up steps, usually adding a long-acting beta-2 agonist.",
+   "say": "Stepwise management starts with reliever and preventer treatment. Short-acting beta-2 agonists must never be prescribed alone, so a regular inhaled corticosteroid is added even when reliever use is infrequent. Children under 5 with suspected asthma are treated with inhaled corticosteroids and reviewed regularly, and objective tests are attempted once they reach 5. Adults with poor control usually move up steps by adding a long-acting beta-2 agonist.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adults with poor control",
+     "points": [
+      "Confirm adherence and technique first",
+      "Add a long-acting beta-2 agonist",
+      "Review after 8 to 12 weeks"
+     ]
+    },
+    "right": {
+     "title": "Children under 5",
+     "points": [
+      "Suspected asthma treated with inhaled corticosteroids",
+      "Regular review",
+      "Objective tests once aged 5"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When asthma is uncontrolled, check **adherence**, **inhaler technique**, **smoking** and occupational exposure before changing medicines. A raised FeNO in a person on treatment often means poor adherence or the need for a higher inhaled corticosteroid dose. Any new or adjusted treatment should be reviewed after 8 to 12 weeks. Specialist referral is considered for persistent poor control or suspected occupational asthma.",
+   "say": "When asthma is uncontrolled, check adherence, inhaler technique, smoking and occupational exposure before changing medicines. A raised FeNO in a person on treatment often means poor adherence or the need for a higher inhaled corticosteroid dose. Review any new or adjusted treatment after 8 to 12 weeks. Refer to a specialist for persistent poor control or suspected occupational asthma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Uncontrolled asthma"
+     },
+     {
+      "id": "b",
+      "label": "Check adherence and technique"
+     },
+     {
+      "id": "c",
+      "label": "Address smoking and exposure"
+     },
+     {
+      "id": "d",
+      "label": "Adjust treatment"
+     },
+     {
+      "id": "e",
+      "label": "Review at 8 to 12 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Test results only make sense in context. **Inhaled corticosteroids** can normalise **spirometry** and **fractional exhaled nitric oxide (FeNO)**, so a normal result does not rule out asthma when the history points towards it. Conversely, **reversibility**, **smoking history** and clinical features help separate asthma from **COPD**. Always weigh history, examination and objective results together before reaching a final diagnosis.",
+   "say": "Test results only make sense in context. Inhaled corticosteroids can normalise spirometry and fractional exhaled nitric oxide, so a normal result does not rule out asthma when the history points towards it. Conversely, reversibility, smoking history and clinical features help separate asthma from COPD. Always weigh history, examination and objective results together before reaching a final diagnosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG80: Asthma: diagnosis, monitoring and chronic asthma management",
+  "British Thoracic Society and SIGN: BTS/SIGN British guideline on the management of asthma"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 22
+ }
+}

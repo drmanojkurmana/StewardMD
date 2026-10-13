@@ -1,0 +1,123 @@
+{
+ "v": 1,
+ "module": "mcc-hp-indigenous",
+ "subject": "mcc-health-promotion",
+ "title": "Indigenous prevention and cultural safety",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Indigenous prevention rests on **cultural safety**, a standard judged by the person receiving care rather than the intent of the clinician. Care that feels disrespectful, judgemental or dismissive is unsafe, even when the treatment itself is correct. Many First Nations, Inuit and Métis patients have experienced harm from health systems, so **trust** must be earned before any intervention. Exam questions often reward the response that restores trust first. Cultural safety also includes the **community** context, such as remote living and family structures.",
+   "say": "Indigenous prevention rests on cultural safety. This is a standard judged by the person receiving care, not by the intent of the clinician. Care that feels disrespectful, judgemental or dismissive is unsafe, even when the treatment itself is correct. Many First Nations, Inuit and Métis patients have experienced harm from health systems, so trust must be earned before any intervention. Exam questions often reward the response that restores trust first. Cultural safety also includes the community context, such as remote living and family structures.",
+   "vis": null
+  },
+  {
+   "tx": "Many patients miss follow-up because of **structural barriers** rather than unwillingness. Long travel distances, **transport costs**, lack of a vehicle and caring duties for children can all stop a person attending. A missed appointment should prompt a search for these obstacles, not a label of poor **adherence**. Removing the barrier and then reviewing the patient's condition is the safer route.",
+   "say": "Many patients miss follow-up because of structural barriers rather than unwillingness. Long travel distances, transport costs, lack of a vehicle and caring duties can all stop a person attending. A missed appointment should prompt a search for these obstacles, not a label of poor adherence. Removing the barrier and then reviewing the patient's condition is the safer route.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Barrier",
+     "Practical response"
+    ],
+    "rows": [
+     [
+      "Transport cost",
+      "Ride or fuel support"
+     ],
+     [
+      "No reliable vehicle",
+      "Outreach or mobile clinic visits"
+     ],
+     [
+      "Caring duties",
+      "Flexible or community based timing"
+     ],
+     [
+      "Long distance",
+      "Telehealth or nearer local sessions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First check whether the patient has **capacity** to decide. A capable patient decides for themselves and may choose family or an Elder to attend. If the patient lacks capacity, a legally recognised **substitute decision-maker** decides, guided by the patient's known wishes and best interests. Family disagreement is handled through structured discussion, not by one relative deciding alone.",
+   "say": "First check whether the patient has capacity to decide. A capable patient decides for themselves and may choose family or an Elder to attend. If the patient lacks capacity, a legally recognised substitute decision-maker decides, guided by the patient's known wishes and best interests. Family disagreement is handled through structured discussion, not by one relative deciding alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess capacity"
+     },
+     {
+      "id": "b",
+      "label": "Has capacity"
+     },
+     {
+      "id": "c",
+      "label": "Patient chooses supports"
+     },
+     {
+      "id": "d",
+      "label": "Lacks capacity"
+     },
+     {
+      "id": "e",
+      "label": "Legal substitute"
+     },
+     {
+      "id": "f",
+      "label": "Best interests and known wishes"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stigma from past judgemental questioning makes people avoid services. Ask open, non-judgemental questions about alcohol and drug use, and explain why you are asking. Avoid assumptions about a patient's habits. After an opioid overdose, offer **opioid agonist therapy** and a **naloxone** kit, and arrange services actively where local addiction care is limited.",
+   "say": "Stigma from past judgemental questioning makes people avoid services. Ask open, non-judgemental questions about alcohol and drug use, and explain why you are asking. Avoid assumptions about a patient's habits. After an opioid overdose, offer opioid agonist therapy and a naloxone kit, and arrange services actively where local addiction care is limited.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Choosing Wisely Canada"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

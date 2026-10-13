@@ -1,0 +1,104 @@
+{
+ "v": 1,
+ "module": "ch-neuro",
+ "subject": "child-health",
+ "title": "Seizures and headache: key principles for the child-health and adult exam",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Seizures with hypoglycaemia or hyponatraemia are **provoked** and need metabolic correction first. A glucose of 2.1 mmol/L in an insulin-treated patient calls for intravenous glucose with a repeat check. A sodium of 118 mmol/L with vomiting and heavy alcohol use calls for controlled correction with hypertonic saline. Overly rapid sodium correction risks central pontine myelinolysis, so monitor closely.",
+   "say": "Seizures with hypoglycaemia or hyponatraemia are provoked and need metabolic correction first. A glucose of 2.1 mmol/L in an insulin-treated patient calls for intravenous glucose with a repeat check. A sodium of 118 mmol/L with vomiting and heavy alcohol use calls for controlled correction with hypertonic saline. Overly rapid sodium correction risks central pontine myelinolysis, so monitor closely.",
+   "vis": null
+  },
+  {
+   "tx": "Status epilepticus is a **prolonged seizure** or repeated seizures without full recovery between them. **Benzodiazepines** are first line, acting on **GABA-A** receptors to terminate seizure activity quickly. If no intravenous access is available, **intramuscular midazolam** is a valid alternative. Do not delay treatment while seeking access. Should seizures persist, a second-line antiseizure drug such as levetiracetam or phenytoin is added.",
+   "say": "Status epilepticus is a prolonged seizure or repeated seizures without full recovery between them. Benzodiazepines are first line, acting on GABA-A receptors to terminate seizure activity quickly. If no intravenous access is available, intramuscular midazolam is a valid alternative. Do not delay treatment while seeking access. Should seizures persist, a second-line antiseizure drug such as levetiracetam or phenytoin is added.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prolonged or recurrent seizures"
+     },
+     {
+      "id": "b",
+      "label": "Benzodiazepine first line"
+     },
+     {
+      "id": "c",
+      "label": "No IV access: intramuscular midazolam"
+     },
+     {
+      "id": "d",
+      "label": "Still seizing: second-line drug"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "no IV access"
+     ],
+     [
+      "b",
+      "d",
+      "seizures persist"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Women of reproductive age with epilepsy need planning before any pregnancy. **Sodium valproate** carries major teratogenic risk, including neural tube defects and neurodevelopmental harm, so it should be avoided in women who could become pregnant. Review treatment with neurology early, aiming for a safer agent before conception. Never stop **antiseizure medication** abruptly, as this can provoke seizures.",
+   "say": "Women of reproductive age with epilepsy need planning before any pregnancy. Sodium valproate carries major teratogenic risk, including neural tube defects and neurodevelopmental harm, so it should be avoided in women who could become pregnant. Review treatment with neurology early, aiming for a safer agent before conception. Never stop antiseizure medication abruptly, as this can provoke seizures.",
+   "vis": null
+  },
+  {
+   "tx": "Focal seizures with impaired awareness often arise from the **mesial temporal lobe**. An epigastric aura followed by staring, unresponsiveness and post-ictal confusion fits this pattern. Hippocampal sclerosis, shown by volume loss and raised T2 signal on MRI, is the commonest substrate. Chronic daily headache from frequent analgesic use is **medication-overuse headache**, which improves when the overused medicine is withdrawn.",
+   "say": "Focal seizures with impaired awareness often arise from the mesial temporal lobe. An epigastric aura followed by staring, unresponsiveness and post-ictal confusion fits this pattern. Hippocampal sclerosis, shown by volume loss and raised T2 signal on MRI, is the commonest substrate. Chronic daily headache from frequent analgesic use is medication-overuse headache, which improves when the overused medicine is withdrawn.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Focal seizure",
+     "points": [
+      "Aura then staring",
+      "Post-ictal confusion",
+      "Hippocampal sclerosis on MRI"
+     ]
+    },
+    "right": {
+     "title": "Medication-overuse headache",
+     "points": [
+      "Daily headache for months",
+      "Frequent combination analgesics",
+      "Improves on withdrawal"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG217 Epilepsies in children, young people and adults",
+  "NICE Guideline NG128 Headaches in over 12s: diagnosis and management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

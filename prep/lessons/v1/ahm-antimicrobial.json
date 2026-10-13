@@ -1,0 +1,163 @@
+{
+ "v": 1,
+ "module": "ahm-antimicrobial",
+ "subject": "adult-health-medicine",
+ "title": "Antimicrobial stewardship: principles for everyday prescribing",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Antimicrobial stewardship means using the **right drug**, at the **right dose**, for the **right duration**, by the right route. The aim is to treat real infection effectively while limiting resistance, toxicity and cost. Every antibiotic decision should be reviewed against the diagnosis, the local resistance pattern and the patient's response. This applies to hospital and community prescribing alike.",
+   "say": "Antimicrobial stewardship means using the right drug, at the right dose, for the right duration, by the right route. The aim is to treat real infection effectively while limiting resistance, toxicity and cost. Every antibiotic decision should be reviewed against the diagnosis, the local resistance pattern and how the patient responds. This applies to hospital and community prescribing alike.",
+   "vis": null
+  },
+  {
+   "tx": "Good practice starts before the first dose. Take **cultures** from blood, urine, sputum or other relevant sites before antibiotics, where this is safe. Start **empirical therapy** quickly in sepsis, then **review at 48 to 72 hours**. Use the results to narrow the spectrum, switch intravenous to oral when the patient is stable and absorbing, or stop when infection is not confirmed.",
+   "say": "Good practice starts before the first dose. Take cultures from blood, urine, sputum or other relevant sites before antibiotics, where this is safe. Start empirical therapy quickly in sepsis, then review at 48 to 72 hours. Use the results to narrow the spectrum, switch intravenous to oral when the patient is stable and absorbing, or stop when infection is not confirmed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Cultures sent"
+     },
+     {
+      "id": "c2",
+      "label": "Empirical start"
+     },
+     {
+      "id": "c3",
+      "label": "Review 48 to 72 h"
+     },
+     {
+      "id": "c4",
+      "label": "Narrow or stop"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For mild community-acquired pneumonia in an adult without penicillin allergy or recent antibiotic exposure, oral **amoxicillin** covers the usual pathogen, Streptococcus pneumoniae. Broader agents such as piperacillin with tazobactam or vancomycin add resistance and toxicity without benefit when risk factors are absent. Severity assessment and the local antibiogram guide any escalation.",
+   "say": "For mild community-acquired pneumonia in an adult without penicillin allergy or recent antibiotic exposure, oral amoxicillin covers the usual pathogen, Streptococcus pneumoniae. Broader agents such as piperacillin with tazobactam or vancomycin add resistance and toxicity without benefit when risk factors are absent. Severity assessment and the local antibiogram guide any escalation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "Stewardship approach"
+    ],
+    "rows": [
+     [
+      "Mild pneumonia, no risk factors",
+      "Oral amoxicillin"
+     ],
+     [
+      "Severe or hospital-acquired pneumonia",
+      "Broader empirical cover"
+     ],
+     [
+      "Sore throat with viral features",
+      "No antibiotic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A positive urine culture in a catheterised older adult is often **colonisation** rather than infection. Without fever, new pain, rigors or change in mental state, antibiotics are not indicated. Treating asymptomatic **bacteriuria** selects resistant organisms and causes harm. Test and treat only when symptoms or signs point to infection.",
+   "say": "A positive urine culture in a catheterised older adult is often colonisation rather than infection. Without fever, new pain, rigors or change in mental state, antibiotics are not indicated. Treating asymptomatic bacteriuria selects resistant organisms and causes harm. Test and treat only when symptoms or signs point to infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True infection",
+     "points": [
+      "Fever or rigors",
+      "New confusion or pain",
+      "Systemic upset"
+     ]
+    },
+    "right": {
+     "title": "Colonisation",
+     "points": [
+      "Positive culture alone",
+      "No systemic change",
+      "Well and settled"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diarrhoea within days of antibiotics, especially clindamycin, cephalosporins or fluoroquinolones, should prompt **C difficile testing** of unformed stool. If confirmed, stop or narrow the inciting antibiotic where possible. For a non-severe first episode, oral **vancomycin** is a standard choice. Avoid antimotility drugs such as loperamide, which can worsen toxin retention.",
+   "say": "Diarrhoea within days of antibiotics, especially clindamycin, cephalosporins or fluoroquinolones, should prompt C difficile testing of unformed stool. If confirmed, stop or narrow the inciting antibiotic where possible. For a non-severe first episode, oral vancomycin is a standard choice. Avoid antimotility drugs such as loperamide, which can worsen toxin retention.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Diarrhoea after antibiotics"
+     },
+     {
+      "id": "d2",
+      "label": "Test unformed stool"
+     },
+     {
+      "id": "d3",
+      "label": "Toxin positive"
+     },
+     {
+      "id": "d4",
+      "label": "Stop drug, oral vancomycin"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Many penicillin allergy labels are inaccurate. A careful history of timing, reaction type and severity separates low-risk childhood rashes from true immediate reactions. Patients with low-risk histories can often receive a **penicillin** or beta-lactam after the history is taken. Removing unnecessary labels reduces reliance on broader and less effective alternatives such as **fluoroquinolones**.",
+   "say": "Many penicillin allergy labels are inaccurate. A careful history of timing, reaction type and severity separates low-risk childhood rashes from true immediate reactions. Patients with low-risk histories can often receive a penicillin or beta-lactam after the history is taken. Removing unnecessary labels reduces reliance on broader and less effective alternatives such as fluoroquinolones.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

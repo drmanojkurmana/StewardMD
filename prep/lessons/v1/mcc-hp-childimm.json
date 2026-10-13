@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "mcc-hp-childimm",
+ "subject": "mcc-health-promotion",
+ "title": "Childhood immunisation: live vaccines, asplenia, hepatitis B and catch-up",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Childhood immunisation rests on two vaccine types. **Live attenuated** vaccines, such as measles-containing vaccine, BCG and oral polio, use weakened organisms and need an intact immune system. **Inactivated** vaccines, such as DTP, Hib and hepatitis B, contain no live organism and are generally safe in immunocompromised children. Knowing which type a child is receiving resolves most contraindication questions in the exam.",
+   "say": "Childhood immunisation rests on two vaccine types. Live attenuated vaccines, such as measles-containing vaccine, BCG and oral polio, use weakened organisms and need an intact immune system. Inactivated vaccines, such as DTP, Hib and hepatitis B, contain no live organism and are generally safe in immunocompromised children. Knowing which type a child is receiving resolves most contraindication questions in the exam.",
+   "vis": null
+  },
+  {
+   "tx": "Functional **asplenia**, as in sickle cell disease, removes a key defence against encapsulated bacteria such as **pneumococcus**, **Haemophilus influenzae** type b and meningococcus. These children need pneumococcal conjugate, Hib and meningococcal vaccines on time, plus yearly influenza vaccination, alongside routine doses. Antibiotic prophylaxis and fever action plans usually start too. A stable clinic visit is not a reason to defer.",
+   "say": "Functional asplenia, as in sickle cell disease, removes a key defence against encapsulated bacteria such as pneumococcus, Haemophilus influenzae type b and meningococcus. These children need pneumococcal conjugate, Hib and meningococcal vaccines on time, plus yearly influenza vaccination, alongside routine doses. Antibiotic prophylaxis and fever action plans usually start too. A stable clinic visit is not a reason to defer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Asplenia"
+     },
+     {
+      "id": "b",
+      "label": "Encapsulated bacteria risk"
+     },
+     {
+      "id": "c",
+      "label": "Pneumococcal, Hib, meningococcal"
+     },
+     {
+      "id": "d",
+      "label": "Keep up to date"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Missed doses should be given as soon as possible without restarting the schedule, because earlier valid doses still count. Before vaccinating, confirm **informed consent** from the legal guardian and check the record. Ask what worries the parent, such as the number of needles, and offer **combined vaccines** to reduce injections. Culturally safe, trusting care improves return for later visits.",
+   "say": "Missed doses should be given as soon as possible without restarting the schedule, because earlier valid doses still count. Before vaccinating, confirm informed consent from the legal guardian and check the record. Ask what worries the parent, such as the number of needles, and offer combined vaccines to reduce injections. Culturally safe, trusting care improves return for later visits.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Check record"
+     },
+     {
+      "id": "b",
+      "label": "Confirm guardian consent"
+     },
+     {
+      "id": "c",
+      "label": "Explore concerns"
+     },
+     {
+      "id": "d",
+      "label": "Give missed doses today"
+     },
+     {
+      "id": "e",
+      "label": "Book next dose"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most reactions after vaccination are minor, such as local soreness or a mild temperature. A **simple febrile seizure** is brief, generalised and fully recovered, is provoked by fever and does not prevent later doses. Advise fever-reducing care and seizure first aid. Withhold future doses only for **severe allergic reactions**, such as anaphylaxis to a previous dose or a vaccine component, after specialist review.",
+   "say": "Most reactions after vaccination are minor, such as local soreness or a mild temperature. A simple febrile seizure is brief, generalised and fully recovered, is provoked by fever and does not prevent later doses. Advise fever-reducing care and seizure first aid. Withhold future doses only for severe allergic reactions, such as anaphylaxis to a previous dose or a vaccine component, after specialist review.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continue schedule",
+     "points": [
+      "Simple febrile seizure",
+      "Fever-reducing care at home",
+      "Routine doses on time"
+     ]
+    },
+    "right": {
+     "title": "Review before next dose",
+     "points": [
+      "Anaphylaxis to a prior dose",
+      "Severe reaction to a component",
+      "Specialist input if unclear"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

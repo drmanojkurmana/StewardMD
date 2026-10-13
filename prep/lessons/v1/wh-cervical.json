@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "wh-cervical",
+ "subject": "womens-health",
+ "title": "Cervical screening: HPV, transformation zone and follow-up",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Cervical cancer arises from the **transformation zone**, where columnar epithelium meets squamous epithelium and where HPV can infect immature cells. Almost all cases follow persistent **high-risk HPV** infection. Screening targets **precancerous change**, graded as CIN grade two or above, so lesions can be treated before invasion develops. National programmes differ in method: some rely on visual inspection, while many current guidelines prefer HPV testing as the primary tool.",
+   "say": "Cervical cancer arises from the transformation zone, where columnar epithelium meets squamous epithelium and where HPV can infect immature cells. Almost all cases follow persistent high-risk HPV infection. Screening targets precancerous change, graded as CIN grade two or above, so lesions can be treated before invasion develops. National programmes differ in method: some rely on visual inspection, while many current guidelines prefer HPV testing as the primary tool.",
+   "vis": null
+  },
+  {
+   "tx": "A positive **high-risk HPV** test starts the next stage rather than ending the pathway. **Genotyping** picks out the **highest-risk types**, and women with these should go straight to **colposcopy** with biopsy, even when cytology looks normal. Other high-risk types usually undergo **cytology triage**, and abnormal cytology also leads to colposcopy. Cytology alone can miss **high-grade lesions**.",
+   "say": "A positive high-risk HPV result is where the pathway begins, not where it ends. Genotyping picks out the highest-risk types, and those women should be sent directly for colposcopy with biopsy, even if their cytology appears normal. Other high-risk types generally go through cytology triage, and any abnormal cytology also leads to colposcopy. Relying on cytology by itself can miss high-grade lesions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "HPV positive"
+     },
+     {
+      "id": "n2",
+      "label": "Highest-risk genotype"
+     },
+     {
+      "id": "n3",
+      "label": "Other high-risk type"
+     },
+     {
+      "id": "n4",
+      "label": "Cytology triage"
+     },
+     {
+      "id": "n5",
+      "label": "Colposcopy with biopsy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2",
+      "genotype"
+     ],
+     [
+      "n1",
+      "n3",
+      "genotype"
+     ],
+     [
+      "n2",
+      "n5"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5",
+      "if abnormal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After **total hysterectomy** for benign disease, the cervix and its transformation zone have been removed, so there is nothing left to screen. The exception is a history of cervical cancer or high-grade precancer, where vaginal vault follow-up is needed. Always check the histology report and the original indication before reassuring the patient.",
+   "say": "After total hysterectomy for benign disease, the cervix and its transformation zone have been removed, so there is nothing left to screen. The exception is a history of cervical cancer or high-grade precancer, where vaginal vault follow-up is needed. Always check the histology report and the original indication before reassuring the patient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Screening advice"
+    ],
+    "rows": [
+     [
+      "Benign hysterectomy, no CIN2 history",
+      "No routine screening"
+     ],
+     [
+      "Hysterectomy for cancer or CIN2 or higher",
+      "Vault follow-up as specialist advises"
+     ],
+     [
+      "Cervix still present",
+      "Routine screening by age"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Self-collected vaginal samples** can be tested for **high-risk HPV** and perform well compared with clinician-collected cervical samples. They suit under-screened women, those who are anxious, and those who decline a speculum examination. A negative self-sample gives reassurance, but local programme rules should be checked. A positive result still needs a clinician-led pathway.",
+   "say": "Self-collected vaginal samples can be tested for high-risk HPV and perform well compared with clinician-collected cervical samples. They suit under-screened women, those who are anxious, and those who decline a speculum examination. A negative self-sample gives reassurance, but local programme rules should be checked. A positive result still needs a clinician-led pathway.",
+   "vis": null
+  },
+  {
+   "tx": "High-risk HPV drives progression mainly through two **oncoproteins**, E6 and E7. E6 promotes degradation of p53, removing a key guardian of DNA damage repair and apoptosis. E7 binds and inactivates Rb, releasing E2F and forcing cells to keep dividing. Together they let further genetic damage accumulate, moving lesions from low grade towards invasive cancer.",
+   "say": "High-risk HPV drives progression mainly through two oncoproteins, E6 and E7. E6 promotes degradation of p53, removing a key guardian of DNA damage repair and apoptosis. E7 binds and inactivates Rb, releasing E2F and forcing cells to keep dividing. Together they let further genetic damage accumulate, moving lesions from low grade towards invasive cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High-risk HPV"
+     },
+     {
+      "id": "b",
+      "label": "E6 oncoprotein"
+     },
+     {
+      "id": "c",
+      "label": "E7 oncoprotein"
+     },
+     {
+      "id": "d",
+      "label": "p53 lost"
+     },
+     {
+      "id": "e",
+      "label": "Rb inactivated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once invasive squamous carcinoma is confirmed, **MRI of the pelvis** is the preferred test for local staging, because it shows tumour size and spread into the parametrium, vagina and pelvic sidewall. Anaemia and low albumin reflect general health and do not change the local stage. Wider staging is then completed according to FIGO criteria and local practice.",
+   "say": "Once invasive squamous carcinoma is confirmed, MRI of the pelvis is the preferred test for local staging, because it shows tumour size and spread into the parametrium, vagina and pelvic sidewall. Anaemia and low albumin reflect general health and do not change the local stage. Wider staging is then completed according to FIGO criteria and local practice.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Cervical screening programme, NHS England"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

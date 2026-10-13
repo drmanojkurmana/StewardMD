@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "mcc-hp-travel",
+ "subject": "mcc-health-promotion",
+ "title": "Travel medicine: malaria prophylaxis, rabies exposure, and altitude illness",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Travel medicine starts with **pre-travel risk assessment**. Check destination, duration, season, activities, and personal factors such as pregnancy, chronic illness, and psychiatric history. Malaria chemoprophylaxis choice depends on the parasite species and local drug resistance. Plasmodium falciparum is the most dangerous species and is widespread in sub-Saharan Africa. Chloroquine resistance is common there, so chloroquine is unsuitable for those destinations.",
+   "say": "Travel medicine starts with pre-travel risk assessment. Check the destination, duration, season, activities, and personal factors such as pregnancy, chronic illness, and psychiatric history. Malaria chemoprophylaxis choice depends on the parasite species and local drug resistance. Plasmodium falciparum is the most dangerous species and is widespread in sub-Saharan Africa. Chloroquine resistance is common there, so chloroquine is unsuitable for those destinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Key point for exam"
+    ],
+    "rows": [
+     [
+      "Atovaquone-proguanil",
+      "Daily; effective in chloroquine-resistant areas; fewer mood effects"
+     ],
+     [
+      "Doxycycline",
+      "Daily; cheaper; photosensitivity and oesophagitis"
+     ],
+     [
+      "Mefloquine",
+      "Weekly; neuropsychiatric effects; avoid in depression or anxiety"
+     ],
+     [
+      "Chloroquine",
+      "Only where P falciparum is still sensitive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A woman with **depression** on sertraline needs malaria prophylaxis for rural Tanzania or Ghana. Mefloquine is weekly and effective, but it causes **neuropsychiatric adverse effects** such as vivid dreams, anxiety and depression. Atovaquone-proguanil is daily, effective against chloroquine-resistant falciparum malaria, and has a milder neuropsychiatric profile. It is the usual choice here, with the patient taking it from before travel until after return.",
+   "say": "A woman with depression on sertraline needs malaria prophylaxis for rural Tanzania or Ghana. Mefloquine is weekly and effective, but it causes neuropsychiatric adverse effects such as vivid dreams, anxiety and depression. Atovaquone-proguanil is taken daily, is effective against chloroquine-resistant falciparum malaria, and has a milder neuropsychiatric profile. It is the usual choice here, started before travel and continued after return.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mefloquine",
+     "points": [
+      "Weekly dosing",
+      "Vivid dreams and mood effects",
+      "Avoid in psychiatric illness"
+     ]
+    },
+    "right": {
+     "title": "Atovaquone-proguanil",
+     "points": [
+      "Daily dosing",
+      "Effective in resistant areas",
+      "Milder mood profile"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A febrile traveller returning from West Africa without prophylaxis, with jaundice, splenomegaly, anaemia, thrombocytopenia and raised creatinine, has **severe malaria until proven otherwise**. Send **urgent thick and thin blood films** and repeat as needed. Plasmodium falciparum multiplies in red cells and causes haemolysis and organ dysfunction. Severe disease can progress within hours, so admit and start treatment without waiting for the result of a repeat test.",
+   "say": "A febrile traveller returning from West Africa without prophylaxis, with jaundice, splenomegaly, anaemia, thrombocytopenia and raised creatinine, has severe malaria until proven otherwise. Send urgent thick and thin blood films and repeat as needed. Plasmodium falciparum multiplies in red cells and causes haemolysis and organ dysfunction. Severe disease can progress within hours, so admit and start treatment without waiting for the result of a repeat test.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Febrile returning traveller"
+     },
+     {
+      "id": "b",
+      "label": "Urgent thick and thin films"
+     },
+     {
+      "id": "c",
+      "label": "Positive for P falciparum"
+     },
+     {
+      "id": "d",
+      "label": "Admit and treat as severe"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **dog bite** from a stray animal in a rabies-endemic country needs careful handling. If the dog cannot be tested or observed, treat the exposure as possibly rabid. Wash the wound thoroughly with soap and water, which reduces viral load. Start **rabies post-exposure prophylaxis**, using vaccine and, where indicated, rabies immunoglobulin. Delay of a day or two does not remove the indication. Tetanus status should also be checked.",
+   "say": "A dog bite from a stray animal in a rabies-endemic country needs careful handling. If the dog cannot be tested or observed, treat the exposure as possibly rabid. Wash the wound thoroughly with soap and water, which reduces the viral load. Start rabies post-exposure prophylaxis, using vaccine and, where indicated, rabies immunoglobulin. A delay of a day or two does not remove the indication. Tetanus status should also be checked.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dog bite, dog not testable"
+     },
+     {
+      "id": "b",
+      "label": "Wash wound thoroughly"
+     },
+     {
+      "id": "c",
+      "label": "Rabies vaccine and immunoglobulin"
+     },
+     {
+      "id": "d",
+      "label": "Check tetanus status"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute mountain sickness** develops after rapid ascent to altitude, and it is common. Headache with nausea, poor sleep and fatigue defines it. For a patient who has had symptoms during previous rapid ascent, **acetazolamide** is the pharmacological option. It promotes renal bicarbonate excretion, which drives ventilation and can speed acclimatisation. Gradual ascent remains the cornerstone of prevention, with drug therapy as an adjunct.",
+   "say": "Acute mountain sickness develops after rapid ascent to altitude, and it is common. Headache with nausea, poor sleep and fatigue defines it. For a patient who has had symptoms during previous rapid ascent, acetazolamide is the pharmacological option. It promotes renal bicarbonate excretion, which drives ventilation and can speed acclimatisation. Gradual ascent remains the cornerstone of prevention, with drug therapy as an adjunct.",
+   "vis": null
+  },
+  {
+   "tx": "**Ataxia** on heel-to-toe walking separates **high altitude cerebral oedema** from simple acute mountain sickness. Hypoxia dilates cerebral vessels and raises capillary leakage, so the brain swells. Lower oxygen saturation worsens the picture. The definitive measure is **descent** to lower altitude, with supplemental oxygen as a helpful adjunct. Never continue ascent in such a patient.",
+   "say": "Ataxia on heel-to-toe walking separates high altitude cerebral oedema from simple acute mountain sickness. Hypoxia dilates cerebral vessels and raises capillary leakage, so the brain swells. Lower oxygen saturation worsens the picture. The definitive measure is descent to lower altitude, with supplemental oxygen as a helpful adjunct. Never continue ascent in such a patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Headache, ataxia, low saturation"
+     },
+     {
+      "id": "b",
+      "label": "Stop ascent"
+     },
+     {
+      "id": "c",
+      "label": "Descend to lower altitude"
+     },
+     {
+      "id": "d",
+      "label": "Add supplemental oxygen"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Centers for Disease Control and Prevention Yellow Book: Travelers' Health",
+  "Harrison's Principles of Internal Medicine (Fauci et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "ahs-breast",
+ "subject": "adult-health-surgery",
+ "title": "Breast lumps and cancer: triage, triple assessment and management essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Every new breast lump in an adult needs **triple assessment**: clinical examination, imaging and tissue diagnosis. Age, lump character and imaging features decide how urgently the lump is worked up. A firm, painless, fixed lump with a spiculated mass in a woman in her fifties is suspicious for malignancy and needs a **core needle biopsy** before any treatment. Reassurance, repeat imaging or hormone therapy are wrong choices here because they delay a tissue diagnosis.",
+   "say": "Every new breast lump in an adult needs triple assessment. This means clinical examination, imaging and tissue diagnosis. Age, the character of the lump and the imaging features decide how urgently it is worked up. A firm, painless, fixed lump with a spiculated mass in a woman in her fifties is suspicious for malignancy and needs a core needle biopsy before any treatment. Reassurance, repeat imaging or hormone therapy are wrong here, because they delay a tissue diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Suggests benign",
+     "Suggests malignant"
+    ],
+    "rows": [
+     [
+      "Edge",
+      "Smooth, well-defined",
+      "Irregular, spiculated"
+     ],
+     [
+      "Mobility",
+      "Moves freely",
+      "Fixed to chest wall"
+     ],
+     [
+      "Ultrasound",
+      "Oval, solid, well-circumscribed",
+      "Irregular, solid, hypoechoic"
+     ],
+     [
+      "Action",
+      "Follow or excise",
+      "Core needle biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **fibroadenoma** is the commonest benign solid lump in young women. It is a biphasic growth of stromal and epithelial tissue with a well-defined capsule, so it feels smooth, rubbery and mobile. Its hormonal sensitivity can make it change size, including with an oral contraceptive. On ultrasound it is an oval, solid, well-circumscribed mass, and a benign appearance with no axillary nodes supports a fibroadenoma diagnosis.",
+   "say": "A fibroadenoma is the commonest benign solid lump in young women. It is a biphasic growth of stromal and epithelial tissue with a well-defined capsule. This makes it feel smooth, rubbery and mobile. Its hormonal sensitivity can make it change size, including with an oral contraceptive. On ultrasound it appears as an oval, solid, well-circumscribed mass. A benign look with no axillary nodes supports the diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "Breast cancer can cause **hypercalcaemia of malignancy**, usually through tumour-secreted **parathyroid hormone-related peptide** or osteoclast activation from bone metastases. Symptoms include fatigue, constipation, polyuria and dehydration. A corrected calcium above 3 mmol/L is a medical emergency. Management starts with intravenous fluids to restore volume and promote calcium excretion, followed by an intravenous bisphosphonate. Oral supplements and delayed review are unsafe.",
+   "say": "Breast cancer can cause hypercalcaemia of malignancy. This is usually due to tumour-secreted parathyroid hormone-related peptide, or to osteoclast activation from bone metastases. Symptoms include fatigue, constipation, polyuria and dehydration. A corrected calcium above 3 mmol/L is a medical emergency. Management starts with intravenous fluids to restore volume and promote calcium excretion, followed by an intravenous bisphosphonate. Oral supplements and delayed review are unsafe.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tumour PTHrP or osteoclast activation"
+     },
+     {
+      "id": "b",
+      "label": "Calcium released from bone"
+     },
+     {
+      "id": "c",
+      "label": "Polyuria and dehydration"
+     },
+     {
+      "id": "d",
+      "label": "Reduced GFR, less calcium excreted"
+     },
+     {
+      "id": "e",
+      "label": "IV fluids then IV bisphosphonate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A missed or delayed diagnosis is a patient safety event that must be disclosed. **Open disclosure** means telling the patient promptly and honestly what happened, what effect it may have had, what is being done and offering an apology. The patient has a right to accurate information so she can take part in decisions about her care. Quietly correcting records, waiting for a complaint or telling only relatives breaches transparency and candour.",
+   "say": "A missed or delayed diagnosis is a patient safety event that must be disclosed. Open disclosure means telling the patient promptly and honestly what happened, what effect it may have had, what is being done, and offering an apology. The patient has a right to accurate information so she can take part in decisions about her care. Quietly correcting records, waiting for a complaint, or telling only relatives breaches transparency and candour.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG12: Suspected cancer: recognition and referral",
+  "NICE Guideline NG101: Early and locally advanced breast cancer: diagnosis and management",
+  "Bailey and Love's Short Practice of Surgery (Williams NS, Bulstrode CJK, O'Connell PR)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

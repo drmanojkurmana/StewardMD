@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "son-hormonal",
+ "subject": "ss-medical-oncology",
+ "title": "Endocrine therapy in breast cancer: classes, mechanisms and safety",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Endocrine therapy targets **oestrogen receptor** signalling or oestrogen production in hormone receptor-positive breast cancer. **Selective oestrogen receptor modulators** such as tamoxifen block the receptor in breast tissue while acting as partial agonists in other tissues. **Pure oestrogen receptor degraders** such as fulvestrant reduce receptor levels inside the cell. **Aromatase inhibitors** lower oestrogen synthesis and are classed as steroidal or nonsteroidal agents.",
+   "say": "Endocrine therapy aims to block oestrogen receptor signalling or cut oestrogen production in hormone receptor-positive breast cancer. Selective oestrogen receptor modulators, such as tamoxifen, block the receptor in breast tissue but act as partial agonists elsewhere. Pure oestrogen receptor degraders, such as fulvestrant, lower receptor levels inside the cell. Aromatase inhibitors reduce oestrogen synthesis, and they come in steroidal and nonsteroidal forms with different binding behaviour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Example agents",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Selective oestrogen receptor modulator",
+      "Tamoxifen",
+      "Blocks receptor in breast tissue, partial agonist elsewhere"
+     ],
+     [
+      "Pure oestrogen receptor degrader",
+      "Fulvestrant",
+      "Promotes receptor breakdown inside the cell"
+     ],
+     [
+      "Steroidal aromatase inhibitor",
+      "Exemestane",
+      "Irreversibly inactivates aromatase"
+     ],
+     [
+      "Nonsteroidal aromatase inhibitors",
+      "Anastrozole, letrozole",
+      "Reversibly inhibit aromatase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tamoxifen is a **partial agonist** in the endometrium, so women need review for any abnormal uterine bleeding. It increases venous thromboembolism risk and can cause retinopathy. Aromatase inhibitors spare the endometrium but cause **arthralgia** and accelerated **bone loss**. Check bone density before starting an aromatase inhibitor, and consider calcium, vitamin D and bisphosphonates in high-risk patients.",
+   "say": "Tamoxifen is a partial agonist in the endometrium, so women need review for any abnormal uterine bleeding. It increases venous thromboembolism risk and can cause retinopathy. Aromatase inhibitors spare the endometrium but cause arthralgia and accelerated bone loss. Check bone density before starting an aromatase inhibitor, and consider calcium, vitamin D and bisphosphonates in high-risk patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tamoxifen",
+     "points": [
+      "Endometrial growth risk",
+      "Venous thromboembolism",
+      "Retinopathy",
+      "Hot flushes and vaginal dryness"
+     ]
+    },
+    "right": {
+     "title": "Aromatase inhibitors",
+     "points": [
+      "Arthralgia and myalgia",
+      "Bone loss and fractures",
+      "Baseline bone density scan",
+      "Raised cholesterol"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Interactions matter most with tamoxifen, because it needs **CYP2D6** to form the active metabolite **endoxifen**. Strong CYP2D6 inhibitors, such as **paroxetine**, reduce endoxifen levels, so an alternative agent is usually preferred after specialist advice. **Enzyme inducers** speed tamoxifen breakdown and lower its exposure. Combining tamoxifen with an **aromatase inhibitor** offers no added benefit and is avoided.",
+   "say": "Interactions matter most with tamoxifen, because it needs CYP2D6 to form the active metabolite endoxifen. Strong CYP2D6 inhibitors, such as paroxetine, reduce endoxifen levels, so an alternative agent is usually preferred after specialist advice. Enzyme inducers speed tamoxifen breakdown and lower its exposure. Combining tamoxifen with an aromatase inhibitor offers no added benefit and is avoided.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Co-medication",
+     "Effect",
+     "Practical step"
+    ],
+    "rows": [
+     [
+      "Paroxetine",
+      "Blocks CYP2D6, lowers endoxifen",
+      "Choose an alternative antidepressant"
+     ],
+     [
+      "Strong enzyme inducers",
+      "Speed tamoxifen breakdown",
+      "Review and avoid where possible"
+     ],
+     [
+      "Tamoxifen plus aromatase inhibitor",
+      "Overlapping action, no added benefit",
+      "Avoid routine use"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adjuvant endocrine therapy usually lasts about **five years**. Postmenopausal women may receive two to three years of tamoxifen, then switch to an aromatase inhibitor such as exemestane, for five years in total. Extended therapy is considered in higher-risk node-positive disease, and some guidance allows up to ten years of treatment. Breastfeeding is avoided during treatment and for a period afterwards.",
+   "say": "Adjuvant endocrine therapy usually lasts about five years. Postmenopausal women may receive two to three years of tamoxifen, then switch to an aromatase inhibitor such as exemestane, for five years in total. Extended therapy is considered in higher-risk node-positive disease, and some guidance allows up to ten years of treatment. Breastfeeding is avoided during treatment and for a period afterwards.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_254d08ebbb3c",
+  "q_35506f78dad4",
+  "q_6de65989d91b"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

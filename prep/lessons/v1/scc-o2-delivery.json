@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "scc-o2-delivery",
+ "subject": "ss-critical-care",
+ "title": "Oxygen delivery and tissue oxygenation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Tissues depend on a continuous supply of oxygen, and the circulation normally keeps delivery well ahead of what cells use. **Arterial oxygen content** (CaO2) is the total oxygen carried in arterial blood. It has two parts: oxygen bound to **haemoglobin** and a small **dissolved fraction** that rises with arterial partial pressure. **Oxygen delivery** (DO2) is **cardiac output** multiplied by CaO2, so anything that lowers either haemoglobin, saturation or output reduces the oxygen reaching tissues.",
+   "say": "Tissues depend on a continuous supply of oxygen, and the circulation normally keeps delivery well ahead of what cells use. Arterial oxygen content, or CaO2, is the total oxygen carried in arterial blood. It has two parts: oxygen bound to haemoglobin, and a small dissolved fraction that rises with arterial partial pressure. Oxygen delivery, or DO2, is cardiac output multiplied by CaO2. So anything that lowers haemoglobin, saturation or output reduces the oxygen reaching tissues.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Formula or value",
+     "Role"
+    ],
+    "rows": [
+     [
+      "CaO2",
+      "1.34 x Hb x SaO2 + 0.003 x PaO2",
+      "Oxygen content of arterial blood"
+     ],
+     [
+      "Bound fraction",
+      "1.34 x Hb x SaO2",
+      "Most oxygen, carried by haemoglobin"
+     ],
+     [
+      "Dissolved fraction",
+      "0.003 x PaO2",
+      "Small share, rises with PaO2"
+     ],
+     [
+      "DO2",
+      "CO x CaO2 (x10 for units)",
+      "Oxygen delivered per minute"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oxygen use is judged by **oxygen consumption** (VO2), the amount tissues actually take up each minute. The share of delivered oxygen that tissues extract is the **oxygen extraction ratio** (O2ER). At rest the body keeps this ratio modest, leaving a reserve. While delivery stays adequate, consumption tracks demand. Once delivery drops past a **critical threshold**, extraction can no longer compensate and consumption begins to fall with delivery.",
+   "say": "Oxygen use is judged by oxygen consumption, usually written VO2, which is the amount tissues actually take up each minute. The share of delivered oxygen that tissues extract is the oxygen extraction ratio. At rest the body keeps that ratio modest, which leaves a reserve. While delivery stays adequate, consumption tracks demand. Once delivery falls past a critical threshold, extraction can no longer make up the difference, and consumption begins to fall along with delivery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Reduced oxygen delivery"
+     },
+     {
+      "id": "b",
+      "label": "Tissues extract a larger share"
+     },
+     {
+      "id": "c",
+      "label": "O2ER rises"
+     },
+     {
+      "id": "d",
+      "label": "Critical delivery threshold reached"
+     },
+     {
+      "id": "e",
+      "label": "Consumption falls with delivery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Venous blood reveals how much oxygen tissues left behind after extraction. **Mixed venous saturation** (SvO2) is sampled from the pulmonary artery and reflects global balance between supply and demand. **Central venous saturation** (ScvO2) comes from the superior vena cava and typically reads somewhat lower. A falling value points towards poor delivery or rising extraction, making ScvO2 the practical bedside surrogate.",
+   "say": "Venous blood reveals how much oxygen tissues left behind after extraction. Mixed venous saturation, SvO2, is sampled from the pulmonary artery and reflects global balance between supply and demand. Central venous saturation, ScvO2, comes from the superior vena cava and typically reads somewhat lower. A falling value points towards poor delivery or rising extraction, making ScvO2 the practical bedside surrogate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SvO2",
+     "points": [
+      "Sampled from the pulmonary artery",
+      "Reflects global oxygen balance",
+      "Reference measure for whole body"
+     ]
+    },
+    "right": {
+     "title": "ScvO2",
+     "points": [
+      "Sampled from the superior vena cava",
+      "Usually reads somewhat lower",
+      "Practical bedside surrogate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dysoxia** means tissues are unable to use oxygen even when delivery looks adequate. Causes include cyanide poisoning, which blocks cytochrome oxidase, and severe sepsis with mitochondrial dysfunction. Carbon monoxide is a separate problem, because it binds haemoglobin and makes pulse oximetry read falsely normal. In dysoxia, lactate may rise while DO2 and ScvO2 look normal or high.",
+   "say": "Dysoxia means tissues cannot use oxygen even when delivery looks adequate. Causes include cyanide poisoning, which blocks cytochrome oxidase, and severe sepsis with mitochondrial dysfunction. Carbon monoxide is a separate problem, because it binds haemoglobin and can make pulse oximetry read falsely normal. In dysoxia, lactate may rise while ScvO2 looks normal or high.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Oxygen delivered"
+     },
+     {
+      "id": "b",
+      "label": "Cell cannot use it"
+     },
+     {
+      "id": "c",
+      "label": "Lactate rises"
+     },
+     {
+      "id": "d",
+      "label": "ScvO2 normal or high"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_cb8f84912f6e",
+  "q_77b1b6f9df6d",
+  "q_04e00ede5c6a"
+ ],
+ "src": [],
+ "refs": [
+  "AABB Clinical Practice Guidelines for Red Blood Cell Transfusion (2016)",
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

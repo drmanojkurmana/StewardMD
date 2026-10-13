@@ -1,0 +1,179 @@
+{
+ "v": 1,
+ "module": "son-radiation-principles",
+ "subject": "ss-medical-oncology",
+ "title": "Radiation oncology essentials for the medical oncologist",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Radiotherapy works mainly by causing **double strand DNA breaks**, and the total dose is split into **fractions**. Conventional fractionation delivers about 2 Gy per fraction, once daily on weekdays, so normal tissue can repair between doses more effectively than tumour. The **4Rs** of radiobiology (repair, redistribution, repopulation and reoxygenation) explain why fractionation works and why treatment breaks can reduce control.",
+   "say": "Radiotherapy works mainly by causing double strand DNA breaks, and the total dose is split into fractions. Conventional fractionation delivers about 2 Gy per fraction, once daily on weekdays, so normal tissue can repair between doses more effectively than tumour. The 4Rs of radiobiology, which are repair, redistribution, repopulation and reoxygenation, explain why fractionation works and why treatment breaks can reduce control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Process",
+     "Effect on response"
+    ],
+    "rows": [
+     [
+      "Repair",
+      "Normal tissue recovers between fractions"
+     ],
+     [
+      "Redistribution",
+      "Cells move into more sensitive phases"
+     ],
+     [
+      "Repopulation",
+      "Tumour cells may regrow during treatment"
+     ],
+     [
+      "Reoxygenation",
+      "Hypoxic cells gain oxygen over time"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **linear quadratic model** predicts cell survival from dose using an alpha term for single hit killing and a beta term for two hit killing. The **alpha to beta ratio** describes how a tissue responds to fraction size. Most tumours have a high ratio near 10 Gy, so fraction size matters less, whereas late responding normal tissues such as spinal cord and lung have a ratio near 3 Gy and are more sensitive to large fractions.",
+   "say": "The linear quadratic model predicts cell survival from dose using an alpha term for single hit killing and a beta term for two hit killing. The alpha to beta ratio describes how a tissue responds to fraction size. Most tumours have a high ratio near 10 Gy, so fraction size matters less, whereas late responding normal tissues such as spinal cord and lung have a ratio near 3 Gy and are more sensitive to large fractions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tissue type",
+     "Typical alpha to beta",
+     "Response to large fractions"
+    ],
+    "rows": [
+     [
+      "Most tumours",
+      "About 10 Gy",
+      "Smaller penalty for hypofractionation"
+     ],
+     [
+      "Late responding normal tissue",
+      "About 3 Gy",
+      "Greater risk of late injury"
+     ],
+     [
+      "Early responding tissue",
+      "About 10 Gy",
+      "Behaves similarly to tumour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Concurrent chemoradiation** gives a systemic **radiosensitising agent** alongside radiotherapy, aiming for better **local control** in head and neck, cervical and lung cancers. The schedule should follow the trial evidence for each tumour type. Expect additive **mucositis**, **nephrotoxicity** and **myelosuppression**, and adjust treatment to the patient's fitness and renal function.",
+   "say": "Concurrent chemoradiation gives a systemic radiosensitising agent alongside radiotherapy, aiming for better local control in head and neck, cervical and lung cancers. The schedule should follow the trial evidence for each tumour type. Expect additive mucositis, nephrotoxicity and myelosuppression, and adjust treatment to the patient's fitness and renal function.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Radiotherapy alone"
+     },
+     {
+      "id": "b",
+      "label": "Add radiosensitising agent"
+     },
+     {
+      "id": "c",
+      "label": "Better local control"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stereotactic body radiotherapy** delivers very high doses per fraction in one to five sessions, using image guidance and steep dose fall off. It is established for early lung cancer and selected metastases. In **oligometastatic disease**, a small number of metastases treated ablatively alongside systemic therapy may prolong control. The **abscopal effect**, regression of untreated distant lesions, is rare and should not be assumed in planning.",
+   "say": "Stereotactic body radiotherapy delivers very high doses per fraction in one to five sessions, using image guidance and steep dose fall off. It is established for early lung cancer and selected metastases. In oligometastatic disease, a small number of metastases treated ablatively alongside systemic therapy may prolong control. The abscopal effect, regression of untreated distant lesions, is rare and should not be assumed in planning.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conventional radiotherapy",
+     "points": [
+      "Many small fractions",
+      "Several weeks of treatment",
+      "Broader treatment fields"
+     ]
+    },
+    "right": {
+     "title": "Stereotactic body radiotherapy",
+     "points": [
+      "One to five large fractions",
+      "Image guided and precise",
+      "Suited to small lesions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Radiation pneumonitis** is a dose dependent lung injury that usually appears within the first few months after thoracic radiotherapy, and its risk rises with concurrent chemotherapy and pre existing lung disease. **Radiation recall** is an inflammatory reaction confined to previously irradiated tissue, triggered by a newly introduced systemic agent, and it can appear weeks after that drug is started. Corticosteroids are the usual treatment for both, and the offending agent should be reconsidered before rechallenge.",
+   "say": "Think of radiation pneumonitis as lung injury that depends on dose and usually shows up in the first few months after treatment, with more risk when chemotherapy is given at the same time or when the lungs were already diseased. Radiation recall is also inflammatory, but it only affects tissue that was irradiated earlier, and it is set off by a new systemic drug, often weeks after that drug is started. Steroids are the mainstay for both, and the new agent should be reviewed before it is given again.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Radiation pneumonitis",
+     "Radiation recall"
+    ],
+    "rows": [
+     [
+      "Site",
+      "Irradiated lung",
+      "Previously irradiated tissue"
+     ],
+     [
+      "Timing",
+      "First few months after radiotherapy",
+      "Weeks after a new systemic agent"
+     ],
+     [
+      "Trigger",
+      "Radiation dose, concurrent chemotherapy, lung disease",
+      "A newly introduced systemic agent"
+     ],
+     [
+      "Treatment",
+      "Corticosteroids",
+      "Corticosteroids, reconsider the agent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_05e404c10bab",
+  "q_3abd4fbc1ca8",
+  "q_826bc49b5366"
+ ],
+ "src": [],
+ "refs": [
+  "Radiobiology for the Radiologist (Hall EJ, Giaccia AJ)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

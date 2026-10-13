@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "mcc-cc-palliative",
+ "subject": "mcc-chronic-care",
+ "title": "Palliative symptom control: opioid toxicity, breathlessness, constipation, hypercalcaemia and MAID enquiries",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Opioids are the mainstay of **cancer pain** control. Morphine is metabolised in the liver and its active metabolites, **morphine-3-glucuronide** and **morphine-6-glucuronide**, are cleared by the kidneys. When renal function falls, these metabolites accumulate. Accumulation causes sedation, confusion and myoclonus, which look like disease progression but are drug toxicity. Switching to a safer opioid such as hydromorphone, with a reduced starting dose, is the usual step.",
+   "say": "Opioids are the mainstay of cancer pain control. Morphine is broken down in the liver, and its active metabolites, morphine three glucuronide and morphine six glucuronide, are cleared by the kidneys. When kidney function falls, these metabolites build up. The build up causes sedation, confusion and myoclonus, which can look like disease progression but is drug toxicity. The usual step is to switch to a safer opioid such as hydromorphone, at a reduced starting dose.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Likely cause",
+     "Practical response"
+    ],
+    "rows": [
+     [
+      "Drowsiness and confusion",
+      "Metabolite accumulation",
+      "Reduce or rotate opioid"
+     ],
+     [
+      "New myoclonus",
+      "Neuroexcitation from metabolites",
+      "Rotate to hydromorphone"
+     ],
+     [
+      "Rising creatinine",
+      "Reduced glomerular filtration",
+      "Avoid morphine, dose carefully"
+     ],
+     [
+      "Persistent pain",
+      "Undertreated pain",
+      "Keep analgesia, do not stop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Breathlessness at rest in advanced disease is common and distressing. Opioids reduce the **central perception** of breathlessness and blunt the respiratory drive response to it, even when lung disease cannot be reversed. Low-dose oral opioid is the usual first-line drug when there is no further disease-directed therapy. Anxiety often coexists, so reassurance and simple measures such as a fan to the face are useful. Oxygen is reserved for patients who are hypoxaemic.",
+   "say": "Breathlessness at rest in advanced disease is common and distressing. Opioids reduce the central perception of breathlessness and blunt the respiratory drive response to it, even when the lung disease cannot be reversed. A low dose oral opioid is the usual first line drug when no further disease directed treatment is planned. Anxiety often coexists, so reassurance and a fan to the face help. Oxygen is kept for patients who are hypoxaemic.",
+   "vis": null
+  },
+  {
+   "tx": "Opioid-induced constipation is almost universal with regular opioids and should be prevented, not waited for. A **stimulant laxative** such as senna, combined with an **osmotic laxative** such as polyethylene glycol, restores colonic motility and stool passage. Opioids act on mu receptors in the enteric nervous system. A stool-filled colon on CT without obstruction means the bowel needs laxatives rather than surgery. Loperamide is avoided because it worsens constipation and can cause ileus.",
+   "say": "Opioid induced constipation is almost universal with regular opioids and should be prevented rather than waited for. A stimulant laxative such as senna, combined with an osmotic laxative such as polyethylene glycol, restores bowel movement. Opioids act on receptors in the gut, reducing movement and fluid secretion. A stool filled colon without obstruction on CT means the bowel needs laxatives rather than surgery. Loperamide should be avoided, since it worsens constipation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Regular opioid"
+     },
+     {
+      "id": "b",
+      "label": "Reduced gut motility"
+     },
+     {
+      "id": "c",
+      "label": "Stool loading"
+     },
+     {
+      "id": "d",
+      "label": "Scheduled laxatives"
+     },
+     {
+      "id": "e",
+      "label": "Bowel movement"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypercalcaemia of malignancy** presents with constipation, polyuria, nausea, confusion and dehydration. Corrected calcium must be measured and the creatinine checked, since volume depletion and reduced renal clearance worsen calcium retention. Immediate management is **intravenous isotonic saline** to restore volume and increase renal calcium excretion. Bisphosphonates or denosumab are added once volume status is corrected. Loop diuretics are given only after rehydration, to avoid worsening volume loss.",
+   "say": "Hypercalcaemia of malignancy presents with constipation, polyuria, nausea, confusion and dehydration. Corrected calcium should be measured and creatinine checked, because volume depletion and reduced renal clearance worsen calcium retention. The immediate step is intravenous isotonic saline to restore volume and increase renal calcium excretion. Bisphosphonates or denosumab follow once volume status is corrected. Loop diuretics are given only after rehydration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immediate step",
+     "points": [
+      "Intravenous isotonic saline",
+      "Restore circulating volume",
+      "Increase renal calcium loss"
+     ]
+    },
+    "right": {
+     "title": "Later step",
+     "points": [
+      "Bisphosphonate or denosumab",
+      "Lower bone-driven calcium",
+      "Given after rehydration"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "WHO Guidelines for Palliative Care",
+  "Oxford Textbook of Palliative Medicine (Bennett, Hardy, Lloyd)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

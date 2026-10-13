@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "son-breast-metastatic-hr",
+ "subject": "ss-medical-oncology",
+ "title": "Metastatic hormone receptor positive breast cancer: targeted and endocrine options",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "In **hormone receptor positive** metastatic disease, the usual first line approach pairs an **endocrine agent** with a **CDK4/6 inhibitor** such as palbociclib, unless the patient has life threatening visceral involvement needing faster control. The endocrine partner is selected according to menopausal state and previous treatment. Premenopausal women also need **ovarian function suppression** so that the endocrine drug acts effectively.",
+   "say": "In hormone receptor positive metastatic disease, the usual first line approach pairs an endocrine agent with a CDK4/6 inhibitor such as palbociclib, unless the patient has life threatening visceral involvement needing faster control. The endocrine partner is selected according to menopausal state and previous treatment. Premenopausal women also need ovarian function suppression so that the endocrine drug acts effectively.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Strategy",
+     "Typical agents",
+     "Setting"
+    ],
+    "rows": [
+     [
+      "Endocrine backbone",
+      "Aromatase inhibitor or fulvestrant",
+      "Postmenopausal, or premenopausal with ovarian suppression"
+     ],
+     [
+      "Cell cycle brake",
+      "Palbociclib",
+      "Added to endocrine therapy"
+     ],
+     [
+      "Visceral crisis",
+      "Chemotherapy first",
+      "Rapid symptomatic progression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fulvestrant** is a **selective estrogen receptor degrader**, acting as a pure antagonist with no agonist activity. It binds the receptor and marks it for breakdown, lowering nuclear ER alpha levels. The standard dose is 500 mg by intramuscular injection on days 1, 15 and 29, then monthly. Injection site pain and hot flushes are common, and platelet counts matter because the injection is intramuscular.",
+   "say": "Fulvestrant is a selective estrogen receptor degrader, acting as a pure antagonist with no agonist activity. It binds the receptor and marks it for breakdown, lowering nuclear ER alpha levels. The standard dose is 500 mg by intramuscular injection on days 1, 15 and 29, then monthly. Injection site pain and hot flushes are common, and platelet counts matter because the injection is intramuscular.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Binds ER alpha"
+     },
+     {
+      "id": "n2",
+      "label": "Receptor marked for breakdown"
+     },
+     {
+      "id": "n3",
+      "label": "Less estrogen signalling"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CDK4 and CDK6 inhibitors** added to endocrine therapy improve progression free survival in first line disease. **Palbociclib** is given at 125 mg daily for three weeks, then one week off. Other agents in this class follow their own schedules, so check the product information. **Neutropenia** is the main limiting toxicity, so counts are monitored and doses are held or reduced when needed. Diarrhoea and fatigue also occur.",
+   "say": "CDK4 and CDK6 inhibitors added to endocrine therapy improve progression free survival in first line disease. Palbociclib is given at 125 mg daily for three weeks, then one week off. Other agents in this class follow their own schedules, so check the product information. Neutropenia is the main limiting toxicity, so counts are monitored and doses are held or reduced when needed. Diarrhoea and fatigue also occur.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Schedule",
+     "Key toxicity"
+    ],
+    "rows": [
+     [
+      "Palbociclib",
+      "125 mg daily, 3 weeks on, 1 week off",
+      "Neutropenia"
+     ],
+     [
+      "Other CDK4/6 inhibitors",
+      "Per product information",
+      "Neutropenia, diarrhoea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Resistance to endocrine therapy often arises through **ESR1 mutations**, which can be detected on **circulating tumour DNA**. After endocrine and CDK4/6 failure, an **oral SERD** is an option for ESR1 mutated disease. **PI3K pathway** alterations can be targeted by a **PI3K inhibitor** given with fulvestrant. **Capivasertib** with fulvestrant covers PIK3CA, AKT1 or PTEN alterations. Both PI3K and AKT drugs cause **hyperglycaemia**, so glucose is monitored.",
+   "say": "Resistance to endocrine therapy often arises through ESR1 mutations, which can be detected on circulating tumour DNA. After endocrine and CDK4/6 failure, an oral SERD is an option for ESR1 mutated disease. PI3K pathway alterations can be targeted by a PI3K inhibitor given with fulvestrant. Capivasertib with fulvestrant covers PIK3CA, AKT1 or PTEN alterations. Both PI3K and AKT drugs cause hyperglycaemia, so glucose is monitored.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ESR1 mutated",
+     "points": [
+      "Oral SERD after endocrine and CDK4/6 failure",
+      "Detected on circulating tumour DNA"
+     ]
+    },
+    "right": {
+     "title": "PI3K or AKT altered",
+     "points": [
+      "PI3K inhibitor with fulvestrant for PIK3CA",
+      "Capivasertib with fulvestrant for PIK3CA, AKT1 or PTEN",
+      "Monitor glucose for hyperglycaemia"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_fe2a2b185b29",
+  "q_760a23d6b7d9",
+  "q_84e45c05307d"
+ ],
+ "src": [],
+ "refs": [
+  "NCCN Clinical Practice Guidelines in Oncology: Breast Cancer"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 46
+ }
+}

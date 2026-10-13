@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "phe-driving",
+ "subject": "population-health-and-ethics",
+ "title": "Fitness to drive: Austroads",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The core question is whether a condition causes **sudden incapacitation** or **gradual impairment**. Sudden events such as loss of consciousness, seizures and hypoglycaemia with impaired awareness carry a high risk of a crash without warning. Gradual conditions, such as dementia or sleep disorders, impair judgement and alertness over time. Both categories call for a clear restriction period. The doctor should ask whether the risk is acute, recurrent or progressive, because that determines the advice given.",
+   "say": "The core question is whether a condition causes sudden incapacitation or gradual impairment. Sudden events, such as loss of consciousness, seizures and hypoglycaemia with impaired awareness, carry a high risk of a crash without warning. Gradual conditions, such as dementia or sleep disorders, impair judgement and alertness over time. Both need a clear restriction period, and the doctor should ask whether the risk is acute, recurrent or progressive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk pattern",
+     "Typical example",
+     "Driving response"
+    ],
+    "rows": [
+     [
+      "Sudden incapacitation",
+      "Syncope, seizure",
+      "Stop until assessed and cleared"
+     ],
+     [
+      "Impaired awareness",
+      "Recurrent severe hypoglycaemia",
+      "Stop until awareness improves"
+     ],
+     [
+      "Gradual impairment",
+      "Moderate dementia",
+      "Formal assessment, consider cessation"
+     ],
+     [
+      "Sleep-related",
+      "Obstructive sleep apnoea with sleepiness",
+      "Stop until treated and reviewed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unprovoked **seizures** and **syncope** need careful handling. A first unprovoked seizure usually leads to a driving restriction until a defined seizure-free period is confirmed. Sudden collapse without prodrome, especially with an abnormal ECG such as a prolonged PR interval or a family history of sudden death, requires cardiac and arrhythmic assessment before driving resumes. Recovery within a minute does not make the risk safe. Until the cause is known, the advice is usually not to drive.",
+   "say": "Unprovoked seizures and syncope need careful handling. A first unprovoked seizure usually leads to a driving restriction until a defined seizure-free period is confirmed. Sudden collapse without warning, especially with an abnormal ECG or a family history of sudden death, requires cardiac and arrhythmic assessment before driving resumes. Quick recovery does not make the risk safe, and until the cause is known, the usual advice is not to drive.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Collapse or seizure"
+     },
+     {
+      "id": "b",
+      "label": "Stop driving"
+     },
+     {
+      "id": "c",
+      "label": "Investigate cause"
+     },
+     {
+      "id": "d",
+      "label": "Specialist review"
+     },
+     {
+      "id": "e",
+      "label": "Restriction period set"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Obstructive sleep apnoea** with excessive daytime sleepiness is a key driving hazard, particularly for commercial drivers. Near-dozing or microsleeps at the wheel are a direct safety concern, and the Epworth Sleepiness Scale helps grade daytime sleepiness. Treatment with CPAP is effective, but the driver should not resume driving until sleepiness is adequately controlled and reviewed. Recurrent sleep-related episodes at the wheel usually mean the driver must stop until treatment has taken effect.",
+   "say": "Obstructive sleep apnoea with excessive daytime sleepiness is a key driving hazard, particularly for commercial drivers. Near-dozing or microsleeps at the wheel are a direct safety concern, and the Epworth Sleepiness Scale helps grade daytime sleepiness. CPAP is effective, but driving should not resume until sleepiness is adequately controlled and reviewed. Recurrent episodes at the wheel usually mean the driver must stop until treatment has taken effect.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypoglycaemia** and **electrolyte disturbance** both impair driving. In insulin-treated diabetes, recurrent severe hypoglycaemia without warning symptoms, known as impaired awareness, usually means the driver should stop until awareness recovers. Low sodium from thiazide diuretics causes confusion, drowsiness and poor attention, and driving should wait until sodium is corrected. Symptoms that are present now, rather than chronic stable findings, usually decide the immediate advice.",
+   "say": "Hypoglycaemia and electrolyte disturbance both impair driving. In insulin-treated diabetes, recurrent severe hypoglycaemia without warning symptoms, known as impaired awareness, usually means the driver should stop until awareness recovers. Low sodium from thiazide diuretics causes confusion, drowsiness and poor attention, so driving should wait until sodium is corrected. Symptoms present now usually decide the immediate advice.",
+   "vis": null
+  },
+  {
+   "tx": "**Dementia** affects driving through executive function, spatial orientation and judgement, and patients often lack insight. When collisions, near misses or getting lost occur, the clinician should arrange formal driving assessment and discuss cessation. Family reports matter, but the patient's own opinion should not decide safety. Documentation of the risk and the advice given is essential, and the clinician may notify the licensing authority under the rules that apply locally.",
+   "say": "Dementia affects driving through executive function, spatial orientation and judgement, and patients often lack insight. When collisions, near misses or getting lost occur, the clinician should arrange formal driving assessment and discuss stopping. Family reports matter, but the patient's own view should not decide safety. Documenting the risk and the advice given is essential, and the clinician may notify the licensing authority under the local rules.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Austroads. Assessing Fitness to Drive"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

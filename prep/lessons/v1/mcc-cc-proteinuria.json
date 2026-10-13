@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "mcc-cc-proteinuria",
+ "subject": "mcc-chronic-care",
+ "title": "Proteinuria and glomerular disease",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Proteinuria** is classified by amount. Non-nephrotic proteinuria lies between 0.15 and 3.5 g per day, while the **nephrotic range** is above 3.5 g per day in adults. Nephrotic syndrome also needs low serum albumin, oedema and hyperlipidaemia. A spot urine protein to creatinine ratio correlates well with the 24-hour value and is practical for screening.",
+   "say": "Proteinuria is classified by amount. Non-nephrotic proteinuria lies between 0.15 and 3.5 grams per day, while the nephrotic range is above 3.5 grams per day in adults. Nephrotic syndrome also needs low serum albumin, oedema and high cholesterol. A spot urine protein to creatinine ratio correlates well with the 24-hour value and is practical for screening.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Urinary protein",
+     "Typical features"
+    ],
+    "rows": [
+     [
+      "Non-nephrotic",
+      "0.15 to 3.5 g/day",
+      "Tubular or mild glomerular injury"
+     ],
+     [
+      "Nephrotic range",
+      "Above 3.5 g/day",
+      "Low albumin, oedema, hyperlipidaemia"
+     ],
+     [
+      "Screening",
+      "Spot UPCR",
+      "Correlates with 24-hour value"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Glomerular and tubular proteinuria differ. **Glomerular** proteinuria results from albumin leaking across a damaged capillary wall, often with haematuria, dysmorphic red cells or casts. **Tubular** proteinuria reflects failed reabsorption of small proteins such as beta-2 microglobulin and is usually modest in amount. Sediment findings guide the workup.",
+   "say": "Glomerular and tubular proteinuria differ. Glomerular proteinuria results from albumin leaking across a damaged capillary wall, often with blood in the urine, dysmorphic red cells or casts. Tubular proteinuria reflects failed reabsorption of small proteins such as beta-2 microglobulin and is usually modest in amount. The sediment findings guide the workup.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glomerular",
+     "points": [
+      "Albumin predominant",
+      "Red cell casts",
+      "Dysmorphic red cells",
+      "Often large amounts"
+     ]
+    },
+    "right": {
+     "title": "Tubular",
+     "points": [
+      "Small proteins predominant",
+      "Beta-2 microglobulin raised",
+      "Usually modest amounts",
+      "Glycosuria may coexist"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Primary nephrotic syndrome in adults often needs a biopsy, but the pattern guides treatment. **Minimal change disease** shows normal light microscopy with diffuse foot process effacement on electron microscopy and is steroid responsive. **Membranous nephropathy** shows subepithelial deposits and is linked to anti-PLA2R antibodies. Secondary causes, including NSAIDs and malignancy, must be considered in older adults.",
+   "say": "Primary nephrotic syndrome in adults often needs a biopsy, but the pattern guides treatment. Minimal change disease shows normal light microscopy with diffuse foot process effacement on electron microscopy and is steroid responsive. Membranous nephropathy shows subepithelial deposits and is linked to anti-PLA2R antibodies. Secondary causes, including NSAIDs and malignancy, must be considered in older adults.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Key finding",
+     "Initial approach"
+    ],
+    "rows": [
+     [
+      "Minimal change",
+      "Normal light microscopy, foot process effacement",
+      "Corticosteroids first line"
+     ],
+     [
+      "Membranous",
+      "Subepithelial deposits, anti-PLA2R positive",
+      "Supportive care, check for malignancy"
+     ],
+     [
+      "Secondary causes",
+      "NSAIDs, lymphoma, hepatitis B",
+      "Treat the underlying cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **membranous nephropathy**, the likelihood of a **venous thrombosis** climbs as plasma albumin drops, partly because urinary protein loss promotes a hypercoagulable state. Clinicians may weigh anticoagulation when albumin is markedly low, but only after judging the bleeding hazard. **Low molecular weight heparin** is a frequent choice. Anticoagulants complement, rather than substitute for, **RAS blockade** in limiting proteinuria.",
+   "say": "In membranous nephropathy, the likelihood of a venous thrombosis climbs as plasma albumin drops, partly because urinary protein loss promotes a hypercoagulable state. Clinicians may weigh anticoagulation when albumin is markedly low, but only after judging the bleeding hazard. Low molecular weight heparin is a frequent choice. Anticoagulants complement, rather than substitute for, RAS blockade in limiting proteinuria.",
+   "vis": null
+  },
+  {
+   "tx": "Diabetic and hypertensive kidney disease with persistent **albuminuria** needs RAS blockade. An ACE inhibitor or ARB reduces intraglomerular pressure. A creatinine rise up to about 30 percent after starting or increasing these drugs is usually haemodynamic. During vomiting or diarrhoea, hold the drug to avoid acute kidney injury. Adding an SGLT2 inhibitor further slows progression in diabetes, while a second RAS blocker adds harm.",
+   "say": "Diabetic and hypertensive kidney disease with persistent albuminuria needs RAS blockade. An ACE inhibitor or ARB reduces intraglomerular pressure. A creatinine rise up to about 30 percent after starting or increasing these drugs is usually haemodynamic. During vomiting or diarrhoea, hold the drug to avoid acute kidney injury. Adding an SGLT2 inhibitor further slows progression in diabetes, while a second RAS blocker adds harm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Albuminuria"
+     },
+     {
+      "id": "b",
+      "label": "ACE inhibitor or ARB"
+     },
+     {
+      "id": "c",
+      "label": "Creatinine rise under 30%?"
+     },
+     {
+      "id": "d",
+      "label": "Continue and recheck"
+     },
+     {
+      "id": "e",
+      "label": "Reduce dose, assess cause"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "Yes"
+     ],
+     [
+      "c",
+      "e",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute nephritic presentations need prompt recognition. **Post-streptococcal glomerulonephritis** follows pharyngitis or skin infection after one to three weeks, with low C3 that usually normalises within about eight weeks. Supportive care and blood pressure control are the mainstay. Persistently low C3 or worsening function prompts biopsy. In myeloma, dipsticks miss light chains, so serum free light chains and urine immunofixation are needed.",
+   "say": "Acute nephritic presentations need prompt recognition. Post-streptococcal glomerulonephritis follows pharyngitis or skin infection after one to three weeks, with low C3 that usually normalises within about eight weeks. Supportive care and blood pressure control are the mainstay. Persistently low C3 or worsening function prompts biopsy. In myeloma, dipsticks miss light chains, so serum free light chains and urine immunofixation are needed.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-1bde50259df8",
+  "mk-307f799fb655",
+  "mk-6d79fd443e8a"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of CKD",
+  "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases",
+  "NICE Chronic kidney disease in adults: assessment and management (NG203)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

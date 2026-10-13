@@ -1,0 +1,200 @@
+{
+ "v": 1,
+ "module": "mcc-cc-skin",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic skin disease: key management principles for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Chronic skin disease is **relapsing** and needs long-term planning rather than one-off treatment. The core conditions for NEET-PG and INI-CET are psoriasis, hidradenitis suppurativa, atopic dermatitis, autoimmune blistering disease and acne. Modifiable triggers such as smoking, obesity, alcohol and drug exposure come first in every plan. Where NICE guidance covers a point it takes precedence; Indian practice follows ICMR and NMC norms, and US references such as the AAD guidance may differ on drug licensing and dosing.",
+   "say": "Chronic skin disease is relapsing, so it needs long-term planning rather than one-off treatment. The core conditions for exams are psoriasis, hidradenitis suppurativa, atopic dermatitis, autoimmune blistering disease and acne. Modifiable triggers such as smoking, obesity, alcohol and drug exposure come first in every plan. Where NICE guidance covers a point, it takes precedence. Indian practice follows ICMR and NMC norms, and US references may differ on drug licensing and dosing.",
+   "vis": null
+  },
+  {
+   "tx": "Hidradenitis suppurativa is a **follicular inflammatory disease** of the axillae, groin and inframammary areas. Smoking and obesity worsen flares and scarring, so stopping smoking and weight reduction are first-line supports. Disease is staged by the Hurley classification, which guides treatment escalation from topical and antibiotic therapy to biologics and surgical excision of tunnels.",
+   "say": "Hidradenitis suppurativa is a follicular inflammatory disease of the axillae, groin and under the breasts. Smoking and obesity worsen flares and scarring, so stopping smoking and weight reduction are first-line supports. The disease is staged by the Hurley classification, which guides escalation from topical and antibiotic therapy to biologics and surgical excision of tunnels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hurley stage",
+     "Key features",
+     "Usual approach"
+    ],
+    "rows": [
+     [
+      "Stage I",
+      "Abscesses without sinus tracts or scarring",
+      "Lifestyle measures, topical or short antibiotic courses"
+     ],
+     [
+      "Stage II",
+      "Recurrent abscesses with tunnels and scarring",
+      "Antibiotics, intralesional steroid, consider biologic"
+     ],
+     [
+      "Stage III",
+      "Diffuse involvement with interconnected tracts",
+      "Biologic therapy and surgical referral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In atopic dermatitis, the **skin barrier** is defective and type 2 inflammation drives itch. The best long-term plan is regular emollients for the whole body, plus a proactive **topical corticosteroid** applied to flare-prone sites, such as the flexures, twice weekly. Topical steroid potency is matched to age and site, and calcineurin inhibitors are an alternative on the face and folds. Systemic antibiotics are reserved for clear secondary infection.",
+   "say": "In atopic dermatitis, the skin barrier is defective and type 2 inflammation drives itch. The best long-term plan is regular emollients for the whole body, plus proactive topical corticosteroid applied to flare-prone sites such as the flexures, typically twice weekly. Steroid potency is matched to age and site, and topical calcineurin inhibitors are an alternative on the face and folds. Systemic antibiotics are reserved for clear secondary infection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Daily emollient"
+     },
+     {
+      "id": "n2",
+      "label": "Flare develops"
+     },
+     {
+      "id": "n3",
+      "label": "Topical steroid to site"
+     },
+     {
+      "id": "n4",
+      "label": "Step down when settled"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Methotrexate suppresses the **bone marrow** and can cause **hepatotoxicity**, so FBC and liver function are checked during therapy. A low white cell count or a raised ALT is a signal to hold the drug and recheck. Alcohol intake adds to liver injury and should be reduced or stopped. Restarting depends on whether bloods normalise and the cause is clarified.",
+   "say": "Methotrexate suppresses the bone marrow and can cause hepatotoxicity, so full blood count and liver function are checked during therapy. A low white cell count or a raised ALT is a signal to hold the drug and recheck. Alcohol intake adds to liver injury and should be reduced or stopped. Restarting depends on whether the bloods normalise and the cause is clarified.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding on monitoring",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Low white cell count with no infection",
+      "Hold drug and repeat counts"
+     ],
+     [
+      "Raised ALT on treatment",
+      "Hold drug, cut alcohol, recheck enzymes"
+     ],
+     [
+      "Normal counts and enzymes",
+      "Continue with scheduled monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bullous pemphigoid and pemphigus vulgaris are both **autoimmune blistering diseases**, but they differ in target and site. Bullous pemphigoid targets hemidesmosome proteins at the dermoepidermal junction, causing tense blisters in older patients with oral mucosa often spared. Pemphigus vulgaris targets desmogleins and causes flaccid blisters with mucosal erosions. **Direct immunofluorescence** of a perilesional biopsy separates them.",
+   "say": "Bullous pemphigoid and pemphigus vulgaris are both autoimmune blistering diseases, but they differ in target and site. Bullous pemphigoid targets hemidesmosome proteins at the dermoepidermal junction, causing tense blisters in older patients, with the oral mucosa often spared. Pemphigus vulgaris targets desmogleins and causes flaccid blisters with mucosal erosions. Direct immunofluorescence of a perilesional biopsy helps separate them.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bullous pemphigoid",
+     "points": [
+      "Hemidesmosome target",
+      "Tense blisters in the elderly",
+      "Oral mucosa often spared",
+      "Linear IgG and C3 at basement membrane"
+     ]
+    },
+    "right": {
+     "title": "Pemphigus vulgaris",
+     "points": [
+      "Desmoglein target",
+      "Flaccid blisters and erosions",
+      "Oral mucosa commonly involved",
+      "Intercellular IgG in epidermis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Isotretinoin is **teratogenic**, so pregnancy prevention must be in place before the first dose. Counsel the patient, arrange reliable contraception and document the discussion. A negative pregnancy test is a baseline only and must be repeated during treatment. Baseline lipids and liver function are checked, and mood should be reviewed because of depression risk. The US iPLEDGE programme is an example of a formal system, and Indian practice follows local regulatory rules.",
+   "say": "Isotretinoin is teratogenic, so pregnancy prevention must be in place before the first dose. Counsel the patient, arrange reliable contraception and document the discussion. A negative pregnancy test is only a baseline and must be repeated during treatment. Baseline lipids and liver function are checked, and mood should be reviewed because of depression risk. The US iPLEDGE programme is one formal system, and Indian practice follows local regulatory rules.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Counsel patient"
+     },
+     {
+      "id": "n2",
+      "label": "Reliable contraception"
+     },
+     {
+      "id": "n3",
+      "label": "Baseline bloods and pregnancy test"
+     },
+     {
+      "id": "n4",
+      "label": "Start isotretinoin"
+     },
+     {
+      "id": "n5",
+      "label": "Repeat tests and review"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG150 Hidradenitis suppurativa",
+  "Fitzpatrick's Dermatology in General Medicine (Wolff K and others, editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

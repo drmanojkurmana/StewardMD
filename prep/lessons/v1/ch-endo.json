@@ -1,0 +1,167 @@
+{
+ "v": 1,
+ "module": "ch-endo",
+ "subject": "child-health",
+ "title": "Diabetes and growth disorders: key exam points for child health",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Diabetic ketoacidosis is an emergency caused by **insulin deficiency** alongside **counter-regulatory hormone** excess. It leads to raised blood glucose, **ketone** build-up, acidosis and fluid loss. Patients often vomit, have abdominal pain, breathe deeply and may become drowsy. Potassium is commonly low at presentation, because insulin drives it into cells and osmotic diuresis removes it. Management is hospital based, starting with intravenous fluids and followed by an insulin infusion once the circulation improves.",
+   "say": "Diabetic ketoacidosis is an emergency caused by insulin deficiency alongside excess counter-regulatory hormones. It leads to raised blood glucose, ketone build-up, acidosis and fluid loss. Patients often vomit, have abdominal pain, breathe deeply and may become drowsy. Potassium is commonly low when they present, because insulin drives it into cells and osmotic diuresis removes it. Management takes place in hospital, starting with intravenous fluids and followed by an insulin infusion once the circulation has improved.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical finding in DKA",
+     "Practical implication"
+    ],
+    "rows": [
+     [
+      "Blood glucose",
+      "Raised",
+      "Can be only modestly raised with SGLT2 inhibitor use"
+     ],
+     [
+      "Venous pH",
+      "Reduced",
+      "Helps grade severity"
+     ],
+     [
+      "Bicarbonate",
+      "Reduced",
+      "Reflects the acid load"
+     ],
+     [
+      "Potassium",
+      "Often low at presentation",
+      "Replace before starting insulin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Start with **fluid resuscitation** using isotonic saline, because restoring circulating volume improves perfusion and clearance of glucose and ketones. Insulin is then given as an infusion, not as a bolus. Potassium must be checked and replaced early, since insulin lowers levels further. Routine intravenous bicarbonate is not recommended. Giving subcutaneous insulin alone or discharging a patient with ketosis is unsafe.",
+   "say": "Start with fluid resuscitation using isotonic saline, because restoring circulating volume improves perfusion and clearance of glucose and ketones. Insulin is then given as an infusion, not as a bolus. Potassium must be checked and replaced early, since insulin lowers levels further. Routine intravenous bicarbonate is not recommended. Giving subcutaneous insulin alone, or discharging a patient with ketosis, is unsafe.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess pH, ketones, potassium"
+     },
+     {
+      "id": "b",
+      "label": "IV isotonic saline"
+     },
+     {
+      "id": "c",
+      "label": "Replace potassium"
+     },
+     {
+      "id": "d",
+      "label": "IV insulin infusion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrent **severe hypoglycaemia** with impaired awareness is a major safety issue for drivers. Warning symptoms may be absent after repeated lows, so a sudden fall can cause collapse at the wheel. Advice is to stop driving until specialist review confirms that awareness has recovered. Commercial drivers face stricter rules. Continuous glucose monitoring or glucagon kits do not remove the risk alone.",
+   "say": "Recurrent severe hypoglycaemia with impaired awareness is a major safety issue for drivers. Warning symptoms may be absent after repeated lows, so a sudden fall can cause collapse at the wheel. The advice is to stop driving until specialist review confirms that awareness has recovered. Commercial drivers face stricter rules. Continuous glucose monitoring or glucagon kits do not remove the risk alone.",
+   "vis": null
+  },
+  {
+   "tx": "Short stature with a falling height centile needs a structured approach. Check **thyroid function** and **coeliac serology** first to exclude common causes. A low IGF-1 is supportive but not diagnostic, since nutrition and constitutional delay also lower it. Growth hormone stimulation testing then shows whether the pituitary can release growth hormone when provoked. Delayed bone age relative to chronological age points to a growth-axis or constitutional cause.",
+   "say": "Short stature with a falling height centile needs a structured approach. Check thyroid function and coeliac serology first to exclude common causes. A low IGF-1 is supportive but not diagnostic, since nutrition and constitutional delay also lower it. Growth hormone stimulation testing then shows whether the pituitary can release growth hormone when provoked. Delayed bone age relative to chronological age points to a growth-axis or constitutional cause.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Growth hormone deficiency",
+     "points": [
+      "Falling height velocity",
+      "Delayed bone age",
+      "Low IGF-1 supports diagnosis",
+      "Confirm by stimulation testing"
+     ]
+    },
+    "right": {
+     "title": "Constitutional delay",
+     "points": [
+      "Late puberty in family",
+      "Normal height velocity at onset",
+      "Bone age matches delay",
+      "Often resolves spontaneously"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Turner syndrome should be considered in girls with short stature, a webbed neck, widely spaced nipples and a low posterior hairline. **Primary amenorrhoea** with delayed puberty and raised FSH and LH with low oestradiol indicate ovarian failure. Karyotyping is the key next test, since it detects 45,X and mosaic forms. Brain imaging is not the priority when gonadotropins are high, because that pattern points to a gonadal rather than a central cause.",
+   "say": "Turner syndrome should be considered in girls with short stature, a webbed neck, widely spaced nipples and a low posterior hairline. Primary amenorrhoea with delayed puberty, together with raised FSH and LH and low oestradiol, indicates ovarian failure. Karyotyping is the key next test, since it detects 45,X and mosaic forms. Brain imaging is not the priority when gonadotropins are high, because that pattern points to a gonadal rather than a central cause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Central cause",
+     "Gonadal cause (Turner)"
+    ],
+    "rows": [
+     [
+      "FSH and LH",
+      "Low or normal",
+      "High"
+     ],
+     [
+      "Oestradiol",
+      "Low",
+      "Low"
+     ],
+     [
+      "Next test",
+      "Pituitary imaging",
+      "Karyotype"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Consider **SGLT2 inhibitor associated ketoacidosis** in adults with type 2 diabetes who become unwell with vomiting or poor intake. Glucose may be only mildly raised, so the diagnosis is easily missed. Glycosuria lowers insulin relative to glucagon and promotes ketogenesis. Management is admission for intravenous fluids and insulin, with the SGLT2 inhibitor stopped and not increased. Stopping the drug in the sick day setting is a key safety step.",
+   "say": "Consider SGLT2 inhibitor associated ketoacidosis in adults with type 2 diabetes who become unwell with vomiting or poor intake. Glucose may be only mildly raised, so the diagnosis is easily missed. Glycosuria lowers insulin relative to glucagon and promotes ketogenesis. Management is admission for intravenous fluids and insulin, with the SGLT2 inhibitor stopped and not increased. Stopping the drug in the sick day setting is a key safety step.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Joint British Diabetes Societies guideline on the management of diabetic ketoacidosis in adults",
+  "DVLA guidance on driving and diabetes"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

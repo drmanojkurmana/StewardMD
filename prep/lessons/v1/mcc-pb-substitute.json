@@ -1,0 +1,100 @@
+{
+ "v": 1,
+ "module": "mcc-pb-substitute",
+ "subject": "mcc-professional-behaviours",
+ "title": "Substitute decision-makers",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A **substitute decision-maker** is a person who decides for an adult who has lost capacity for a specific decision. The core duty is to follow the patient's known wishes, expressed while capable, rather than the substitute's own values. Only when wishes are unknown should the decision turn on the patient's best interests.",
+   "say": "A substitute decision-maker is a person who decides for an adult who has lost capacity for a specific decision. The core duty is to follow the patient's known wishes, expressed while capable, rather than the substitute's own values. Only when wishes are unknown should the decision turn on the patient's best interests.",
+   "vis": null
+  },
+  {
+   "tx": "**Capacity** is decision-specific. A patient must understand the information, appreciate how it applies to them, reason about the options and express a choice. Dementia, stroke or a psychiatric diagnosis does not automatically remove capacity for every decision. A patient with schizophrenia may still refuse treatment capably, and a patient with mild cognitive impairment may still consent to surgery.",
+   "say": "Capacity is decision-specific. A patient must understand the information, appreciate how it applies to them, reason about the options and express a choice. Dementia, stroke or a psychiatric diagnosis does not automatically remove capacity for every decision. A patient with schizophrenia may still refuse treatment capably, and a patient with mild cognitive impairment may still consent to surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Question to ask"
+    ],
+    "rows": [
+     [
+      "Understand",
+      "Can they grasp the key facts?"
+     ],
+     [
+      "Appreciate",
+      "Do they see how it applies to themselves?"
+     ],
+     [
+      "Reason",
+      "Can they weigh the options?"
+     ],
+     [
+      "Express",
+      "Can they communicate a stable choice?"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Where a valid **advance directive** or **enduring power of attorney for personal care** exists, it governs. A capable refusal stands even after later incapacity, provided it is valid and covers the situation at hand. The attorney or substitute must apply the stated wishes, and they are not overridden by family pressure or the team's preference for treatment.",
+   "say": "Where a valid advance directive or enduring power of attorney for personal care exists, it governs. A capable refusal stands even after later incapacity, provided it is valid and covers the situation at hand. The attorney or substitute must apply the stated wishes, and they are not overridden by family pressure or the team's preference for treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Valid written wish or attorney"
+     },
+     {
+      "id": "b",
+      "label": "Apply known capable wishes"
+     },
+     {
+      "id": "c",
+      "label": "Ongoing treatment still given"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In an emergency, treatment may proceed without consent when the patient is incapable, delay would cause serious harm or death, and no substitute can be reached. Assess whether a refusal was previously made. In **medical assistance in dying**, the eligible person must make the request personally. A substitute decision-maker cannot start the process for them, even with a power of attorney.",
+   "say": "In an emergency, treatment may proceed without consent when the patient is incapable, delay would cause serious harm or death, and no substitute can be reached. Assess whether a refusal was previously made. In medical assistance in dying, the eligible person must make the request personally. A substitute decision-maker cannot start the process for them, even with a power of attorney.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Health Care Consent Act, Ontario (Canada)",
+  "Medical Assistance in Dying legislation, Canada"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

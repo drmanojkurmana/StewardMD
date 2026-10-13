@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "mbsci-pathology",
+ "subject": "mrcp-basic-science",
+ "title": "Cellular pathology and neoplasia: cell injury, adaptation and tumour biology",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Cells respond to stress through **adaptation** and, when stress is too great, **cell injury** and death. Adaptations include hypertrophy, hyperplasia, atrophy and metaplasia. Metaplasia is the replacement of one mature cell type by another that tolerates chronic irritation better, as in Barrett oesophagus, where squamous lining becomes intestinal-type columnar epithelium. Metaplasia is reversible and not itself cancer, but it raises the risk of dysplasia and adenocarcinoma.",
+   "say": "Cells respond to stress through adaptation and, when stress is too great, cell injury and death. Adaptations include hypertrophy, hyperplasia, atrophy and metaplasia. Metaplasia is the replacement of one mature cell type by another that tolerates chronic irritation better, as in Barrett oesophagus, where squamous lining becomes intestinal-type columnar epithelium. Metaplasia is reversible and not itself cancer, but it raises the risk of dysplasia and adenocarcinoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Change",
+     "Meaning",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Hyperplasia",
+      "More cells in response to stimulus",
+      "Endometrial thickening with oestrogen"
+     ],
+     [
+      "Metaplasia",
+      "One mature cell type replaced by another",
+      "Barrett oesophagus"
+     ],
+     [
+      "Dysplasia",
+      "Disordered maturation, premalignant",
+      "Atypia within metaplastic mucosa"
+     ],
+     [
+      "Anaplasia",
+      "Loss of differentiation, malignant",
+      "High-grade carcinoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cell death occurs by **necrosis** or **apoptosis**. Apoptosis is energy-dependent and programmed, with cell shrinkage, chromatin condensation and fragmentation into apoptotic bodies that are cleared without inflammation. The intrinsic pathway is governed by BCL-2 family proteins, which control release of cytochrome c from mitochondria to activate caspases. Necrosis is pathological death of tissue, usually with inflammation.",
+   "say": "Cell death occurs by necrosis or apoptosis. Apoptosis is energy-dependent and programmed, with cell shrinkage, chromatin condensation and fragmentation into apoptotic bodies that are cleared without inflammation. The intrinsic pathway is governed by BCL-2 family proteins, which control release of cytochrome c from mitochondria to activate caspases. Necrosis is pathological death of tissue, usually with inflammation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stress or DNA damage"
+     },
+     {
+      "id": "b",
+      "label": "BCL-2 family balance"
+     },
+     {
+      "id": "c",
+      "label": "Cytochrome c release"
+     },
+     {
+      "id": "d",
+      "label": "Caspase activation"
+     },
+     {
+      "id": "e",
+      "label": "Apoptosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Caseous necrosis is a **cheese-like** amorphous change in which cell outlines are lost. It is the hallmark of tuberculous granulomas, surrounded by epithelioid histiocytes and Langhans giant cells, and also occurs in some fungal infections. Coagulative necrosis, by contrast, preserves tissue outline for a short time and is typical of infarction in solid organs. Liquefactive necrosis is typical of the brain and abscesses.",
+   "say": "Caseous necrosis is a cheese-like amorphous change in which cell outlines are lost. It is the hallmark of tuberculous granulomas, surrounded by epithelioid histiocytes and Langhans giant cells, and also occurs in some fungal infections. Coagulative necrosis, by contrast, preserves tissue outline for a short time and is typical of infarction in solid organs. Liquefactive necrosis is typical of the brain and abscesses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Caseous necrosis",
+     "points": [
+      "Cheese-like, amorphous",
+      "Granulomas",
+      "Tuberculosis and some fungi"
+     ]
+    },
+    "right": {
+     "title": "Coagulative necrosis",
+     "points": [
+      "Preserved tissue outline",
+      "Solid organ infarcts",
+      "Short-term architecture"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tumours arise from disruption of regulatory genes. **Tumour suppressor genes** need both alleles inactivated, as in Knudson's two-hit model. In hereditary retinoblastoma, a germline RB1 mutation is present in every cell, so one somatic second hit in a retinal cell is enough, explaining early and bilateral disease. Sporadic unilateral tumours need two somatic hits in the same cell, which is less likely and occurs later.",
+   "say": "Tumours arise from disruption of regulatory genes. Tumour suppressor genes need both alleles inactivated, as in Knudson's two-hit model. In hereditary retinoblastoma, a germline RB1 mutation is present in every cell, so one somatic second hit in a retinal cell is enough, explaining early and bilateral disease. Sporadic unilateral tumours need two somatic hits in the same cell, which is less likely and occurs later.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Hereditary",
+     "Sporadic"
+    ],
+    "rows": [
+     [
+      "Germline mutation",
+      "Present in every cell",
+      "Absent"
+     ],
+     [
+      "Somatic hits needed",
+      "One",
+      "Two"
+     ],
+     [
+      "Typical pattern",
+      "Early, bilateral",
+      "Later, unilateral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Follicular lymphoma is driven by t(14;18), which places **BCL2** beside the immunoglobulin heavy chain enhancer. BCL2 overexpression blocks the mitochondrial intrinsic apoptotic pathway, so B cells survive when they should die. The tumour accumulates slowly rather than proliferating rapidly. Other oncogenic routes, such as MYC activation or CDKN2A loss, do not explain this lesion.",
+   "say": "Follicular lymphoma is driven by t(14;18), which places BCL2 beside the immunoglobulin heavy chain enhancer. BCL2 overexpression blocks the mitochondrial intrinsic apoptotic pathway, so B cells survive when they should die. The tumour accumulates slowly rather than proliferating rapidly. Other oncogenic routes, such as MYC activation or CDKN2A loss, do not explain this lesion.",
+   "vis": null
+  },
+  {
+   "tx": "Cancer cells often rely on **aerobic glycolysis** even with ample oxygen, known as the Warburg effect. This yields rapid ATP and diverts carbon into nucleotide, lipid and amino acid synthesis. Hypoxia-inducible factor and PI3K-Akt signalling raise glucose transporter and glycolytic enzyme levels. Ectopic hormone secretion, such as SIADH from small cell lung cancer, and PTHrP-mediated hypercalcaemia are classic paraneoplastic effects to recall alongside these tumour biology points.",
+   "say": "Cancer cells often rely on aerobic glycolysis even with ample oxygen, known as the Warburg effect. This yields rapid ATP and diverts carbon into nucleotide, lipid and amino acid synthesis. Hypoxia-inducible factor and PI3K-Akt signalling raise glucose transporter and glycolytic enzyme levels. Ectopic hormone secretion, such as SIADH from small cell lung cancer, and PTHrP-mediated hypercalcaemia are classic paraneoplastic effects to recall alongside these tumour biology points.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease (Kumar V, Abbas AK, Aster JC)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

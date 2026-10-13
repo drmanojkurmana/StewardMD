@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "mcc-hp-development",
+ "subject": "mcc-health-promotion",
+ "title": "Developmental screening: surveillance, positive screens and avoiding misdiagnosis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Developmental surveillance** is a continuous process at every well-child visit, combining parental concern, clinical observation and milestone review. It is not a one-off test. Normal growth does not exclude a developmental problem, so growth alone must never end the discussion.",
+   "say": "Developmental surveillance is a continuous process at every well-child visit. It combines parental concern, clinical observation and milestone review, and it is not a one-off test. Normal growth does not exclude a developmental problem, so growth alone must never end the discussion.",
+   "vis": null
+  },
+  {
+   "tx": "**Standardised validated screening tools** give reproducible results across clinicians and detect delay more reliably than unstructured impression. Screening identifies risk; it does not make a diagnosis. A positive screen is therefore followed by formal diagnostic assessment, never by treatment or reassurance alone.",
+   "say": "Standardised validated screening tools give reproducible results across clinicians and detect delay more reliably than unstructured impression. Screening identifies risk; it does not make a diagnosis. A positive screen is followed by formal diagnostic assessment, not by treatment or reassurance alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Validated screen"
+     },
+     {
+      "id": "b",
+      "label": "Positive result"
+     },
+     {
+      "id": "c",
+      "label": "Formal diagnostic assessment"
+     },
+     {
+      "id": "d",
+      "label": "Diagnosis and plan"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Autism screening** in toddlers uses a structured questionnaire completed by parents or carers. A high-risk result should lead to prompt **referral for formal diagnostic assessment**, without waiting. Medication such as risperidone does not treat the core social and communication difficulties, and brain imaging is not a routine first investigation when the birth history is normal.",
+   "say": "Autism screening in toddlers uses a structured questionnaire completed by parents or carers. A high-risk result should lead to prompt referral for formal diagnostic assessment, without waiting. Medication such as risperidone does not treat the core social and communication difficulties, and brain imaging is not a routine first investigation when the birth history is normal.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypothyroidism** can blunt development, so it belongs in any screen for delayed milestones. Look for constipation, dry skin, **hypotonia** and a large tongue. A raised **TSH** with low free thyroxine points to primary disease. Start **levothyroxine** promptly, since thyroid hormone drives early brain growth and myelination.",
+   "say": "Hypothyroidism can blunt development, so it belongs in any screen for delayed milestones. Look for constipation, dry skin, hypotonia and a large tongue. A raised TSH with low free thyroxine points to primary disease. Start levothyroxine promptly, since thyroid hormone drives early brain growth and myelination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Interpretation"
+    ],
+    "rows": [
+     [
+      "High TSH, low free T4",
+      "Primary hypothyroidism"
+     ],
+     [
+      "Delayed milestones",
+      "Neurodevelopmental risk"
+     ],
+     [
+      "Coarse face, large tongue",
+      "Classic clinical clue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Language and cultural difference** can mimic disorder. A child who speaks another language at home may score low on English tests while hearing, vision and social skills are normal. Assessment should use a **qualified interpreter** and culturally appropriate tools, so that true language and cognitive ability are measured rather than exposure to English.",
+   "say": "Language and cultural difference can mimic disorder. A child who speaks another language at home may score low on English tests while hearing, vision and social skills are normal. Assessment should use a qualified interpreter and culturally appropriate tools, so that true ability is measured.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Language difference",
+     "points": [
+      "Low English vocabulary",
+      "Normal hearing and vision",
+      "Typical social play"
+     ]
+    },
+    "right": {
+     "title": "Possible disorder",
+     "points": [
+      "Delay in home language too",
+      "Social or communication gaps",
+      "Persisting across settings"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Iron deficiency** can present with language delay, pallor and microcytosis. Excess cow's milk displaces iron-rich foods and can cause occult gastrointestinal blood loss. Treat the **iron deficiency anaemia** with oral iron, reduce milk intake, and refer separately for speech and developmental assessment, since both problems need action.",
+   "say": "Iron deficiency can present with language delay, pallor and microcytosis. Excess cow's milk displaces iron-rich foods and can cause occult gastrointestinal blood loss. Treat the iron deficiency anaemia with oral iron, reduce milk intake, and refer separately for speech and developmental assessment.",
+   "vis": null
+  },
+  {
+   "tx": "**Summary for exams**: screen with a validated tool, act on a positive result with formal diagnostic assessment, check thyroid and iron status when milestones lag, and use an interpreter when language is not English. Never treat a screen as a diagnosis.",
+   "say": "Summary for exams: screen with a validated tool, act on a positive result with formal diagnostic assessment, check thyroid and iron status when milestones lag, and use an interpreter when language is not English. Never treat a screen as a diagnosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on autism spectrum disorder in under 19s: recognition, referral and diagnosis",
+  "Nelson Textbook of Pediatrics (Kliegman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 6
+ }
+}

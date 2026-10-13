@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "mh-perinatal",
+ "subject": "mental-health",
+ "title": "Perinatal mental health: recognising and responding to common and urgent presentations",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Perinatal mental health covers mood, anxiety and psychotic disorders from pregnancy to the first postnatal year. **Postnatal depression** is common and often underrecognised. Screening tools such as the **Edinburgh Postnatal Depression Scale** flag possible depression, but they do not measure safety. Any disclosed suicidal thought needs direct clinical assessment on the same day, regardless of how supportive the partner is.",
+   "say": "Perinatal mental health covers mood, anxiety and psychotic disorders from pregnancy to the first postnatal year. Postnatal depression is common and often underrecognised. Screening tools such as the Edinburgh Postnatal Depression Scale flag possible depression, but they do not measure safety. Any disclosed suicidal thought needs direct clinical assessment on the same day, regardless of how supportive the partner is.",
+   "vis": null
+  },
+  {
+   "tx": "**Postpartum psychosis** is a psychiatric emergency that tends to appear soon after birth. Warning signs include marked sleep loss, pressured speech, grandiose or mystical beliefs, suspiciousness and confusion. Mood can shift rapidly. Women need prompt specialist perinatal psychiatric review, and **admission** is frequently necessary to protect both mother and baby.",
+   "say": "Postpartum psychosis is a psychiatric emergency that tends to appear soon after birth. Warning signs include marked sleep loss, pressured speech, grandiose or mystical beliefs, suspiciousness and confusion. Mood can shift rapidly. Women need prompt specialist perinatal psychiatric review, and admission is frequently necessary to protect both mother and baby.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Postpartum blues",
+     "Postpartum psychosis"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Early after birth, usually self-limiting",
+      "Rapid, soon after birth"
+     ],
+     [
+      "Psychotic features",
+      "Absent",
+      "Present"
+     ],
+     [
+      "Sleep loss",
+      "Variable",
+      "Marked and early"
+     ],
+     [
+      "Management",
+      "Support and reassurance",
+      "Urgent specialist admission"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Many **physical causes** mimic perinatal mood disorders and must be excluded. **Iron deficiency anaemia** after a postpartum haemorrhage or heavy periods causes fatigue, poor concentration and dizziness. **Postpartum thyroiditis** can produce a transient thyrotoxic phase with palpitations and restlessness, and the low TSH with raised free T4 points to this. Check haemoglobin, ferritin and thyroid function before labelling a mood disorder.",
+   "say": "Many physical causes mimic perinatal mood disorders and must be excluded. Iron deficiency anaemia after a postpartum haemorrhage or heavy periods causes fatigue, poor concentration and dizziness. Postpartum thyroiditis can produce a transient thyrotoxic phase with palpitations and restlessness, and a low TSH with raised free T4 points to this. Check haemoglobin, ferritin and thyroid function before labelling a mood disorder.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low mood or fatigue"
+     },
+     {
+      "id": "b",
+      "label": "Check Hb, ferritin, TFTs"
+     },
+     {
+      "id": "c",
+      "label": "Treat cause"
+     },
+     {
+      "id": "d",
+      "label": "Reassess mood"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intimate partner violence** in pregnancy is a serious safety concern. If a woman discloses being pushed or threatened, enquire privately, away from the partner, and never share the disclosure without her consent unless there is a safeguarding duty. Carry out a risk assessment and build a collaborative **safety plan** with her, including a safe place to go and contact details for support services. Follow local safeguarding procedures.",
+   "say": "Intimate partner violence in pregnancy is a serious safety concern. If a woman discloses being pushed or threatened, enquire privately, away from the partner, and never share the disclosure without her consent unless there is a safeguarding duty. Carry out a risk assessment and build a collaborative safety plan with her, including a safe place to go and contact details for support services. Follow local safeguarding procedures.",
+   "vis": null
+  },
+  {
+   "tx": "**Suicidal thoughts** after childbirth need same-day assessment. Ask directly about intent, plan, past self-harm and access to means, even when the woman says she has no plan. Hopelessness, insomnia and rural isolation all raise risk. Safety planning and means restriction, alongside starting treatment and arranging close review, reduce the chance of harm. Postnatal depression is linked to higher suicide risk in the first year.",
+   "say": "Suicidal thoughts after childbirth need same-day assessment. Ask directly about intent, plan, past self-harm and access to means, even when the woman says she has no plan. Hopelessness, insomnia and rural isolation all raise risk. Safety planning and means restriction, alongside starting treatment and arranging close review, reduce the chance of harm. Postnatal depression is linked to higher suicide risk in the first year.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG192: Antenatal and postnatal mental health"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

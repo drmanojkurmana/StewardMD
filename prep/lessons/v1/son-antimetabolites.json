@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "son-antimetabolites",
+ "subject": "ss-medical-oncology",
+ "title": "Antimetabolites: Rescue, Toxicity and Key Interactions",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Leucovorin is a reduced folate, and it **potentiates fluorouracil** by stabilising the ternary complex formed by **thymidylate synthase**, FdUMP and the folate cofactor. This prolongs enzyme inhibition and blocks DNA thymidine synthesis. **Levoleucovorin** is the active L-isomer, so its dose is roughly half that of racemic leucovorin, for example 50 mg for 100 mg racemic. Oral leucovorin absorption saturates at higher doses, so intravenous dosing is preferred when vomiting is present.",
+   "say": "Leucovorin is a reduced folate that potentiates fluorouracil. It stabilises the ternary complex formed by thymidylate synthase, FdUMP and the folate cofactor, which prolongs enzyme inhibition and blocks thymidine synthesis. Levoleucovorin is the active L-isomer, so its dose is roughly half that of racemic leucovorin. For example, 100 mg of racemic leucovorin corresponds to about 50 mg of levoleucovorin. Oral absorption saturates at higher doses, so intravenous dosing is preferred when a patient is vomiting.",
+   "vis": null
+  },
+  {
+   "tx": "In high-dose **methotrexate** therapy, leucovorin rescues normal cells from toxicity. Delayed clearance with renal impairment requires **glucarpidase**, which rapidly hydrolyses methotrexate. Leucovorin is itself a glucarpidase substrate, so it must be withheld for at least 2 hours after the enzyme dose. Only then should rescue resume. Serial methotrexate levels guide how long rescue must continue.",
+   "say": "In high-dose methotrexate therapy, leucovorin rescues normal cells from toxicity. When clearance is delayed and renal function is impaired, glucarpidase is given to rapidly break down methotrexate. Leucovorin is itself a substrate of this enzyme, so it must be withheld for at least two hours after the glucarpidase dose. Only then should leucovorin rescue be restarted. Serial methotrexate levels guide how long rescue must continue.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High-dose methotrexate"
+     },
+     {
+      "id": "b",
+      "label": "Delayed clearance or renal injury"
+     },
+     {
+      "id": "c",
+      "label": "Glucarpidase given"
+     },
+     {
+      "id": "d",
+      "label": "Wait at least 2 hours"
+     },
+     {
+      "id": "e",
+      "label": "Resume leucovorin rescue"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cytarabine** toxicities are dose dependent and predictable. **Cytarabine syndrome** causes fever, rash and myalgia within hours of infusion and responds to corticosteroids. High-dose regimens cause **corneal toxicity**, so steroid eye drops are used for prophylaxis. **Cerebellar toxicity** presents as ataxia, dysarthria and sometimes seizures, and it requires stopping the drug and reviewing renal function.",
+   "say": "Cytarabine toxicities are dose dependent and predictable. Cytarabine syndrome causes fever, rash and myalgia within hours of infusion and responds to corticosteroids. High-dose regimens cause corneal toxicity, so steroid eye drops are used for prophylaxis. Cerebellar toxicity presents as ataxia, slurred speech and sometimes seizures. It requires stopping the drug and reviewing renal function before any further dosing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Toxicity",
+     "Clinical clue",
+     "Practical response"
+    ],
+    "rows": [
+     [
+      "Cytarabine syndrome",
+      "Fever, rash, myalgia within hours",
+      "Corticosteroids"
+     ],
+     [
+      "Corneal toxicity",
+      "Irritation, punctate keratitis",
+      "Steroid eye drops"
+     ],
+     [
+      "Cerebellar toxicity",
+      "Ataxia, dysarthria, seizures",
+      "Stop drug, review renal function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fluorouracil** toxicity is largely determined by **dihydropyrimidine dehydrogenase** (DPD) activity. Patients with DPD deficiency need genotype or phenotype testing before treatment, and full dosing can be fatal. Severe diarrhoea requires withholding until it resolves, then dose reduction. Hand-foot syndrome is managed by grade, with dose reduction after recovery. Regular blood counts are mandatory during treatment.",
+   "say": "Fluorouracil toxicity is largely determined by dihydropyrimidine dehydrogenase activity. Patients with DPD deficiency should be tested before treatment, because full dosing can be fatal. Severe diarrhoea requires withholding fluorouracil until it resolves, followed by dose reduction. Hand-foot syndrome is managed by grade, with dose reduction after recovery. Regular blood counts are mandatory throughout treatment to detect myelosuppression early.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_03861a8f5549",
+  "q_07b53c75e075",
+  "q_353c657c0624"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "sid-beta-lactams",
+ "subject": "ss-infectious-diseases",
+ "title": "Beta-lactams and beta-lactamase inhibitors: choosing therapy against resistant gram-negatives",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Beta-lactams kill bacteria by binding penicillin-binding proteins and blocking cell wall cross-linking. Their main threat is **beta-lactamase**, an enzyme that opens the beta-lactam ring. **Beta-lactamase inhibitors** protect the antibiotic by binding the enzyme, so the partner drug survives. Classic inhibitors such as clavulanate, sulbactam and tazobactam act as suicide inhibitors. Newer agents, avibactam, vaborbactam and relebactam, block carbapenemases and some class A and C enzymes.",
+   "say": "Beta-lactams kill bacteria by binding penicillin-binding proteins and blocking cell wall cross-linking. Their main threat is beta-lactamase, an enzyme that opens the beta-lactam ring. Beta-lactamase inhibitors protect the antibiotic by binding the enzyme, so the partner drug survives. Classic inhibitors such as clavulanate, sulbactam and tazobactam act as suicide inhibitors. Newer agents, avibactam, vaborbactam and relebactam, block carbapenemases and some class A and C enzymes.",
+   "vis": null
+  },
+  {
+   "tx": "Stratify the infection first. **Localised** disease, such as uncomplicated cystitis, is different from **systemic** disease, such as urosepsis, pneumonia, bacteraemia or septic shock. Resistance is graded as multidrug-resistant, extensively drug-resistant or pandrug-resistant. Choose therapy by the resistance mechanism: ESBL producers usually need a carbapenem, while carbapenemase producers need a newer combination.",
+   "say": "Stratify the infection first. Localised disease, such as uncomplicated cystitis, is different from systemic disease, such as urosepsis, pneumonia, bacteraemia or septic shock. Resistance is graded as multidrug-resistant, extensively drug-resistant or pandrug-resistant. Choose therapy by the resistance mechanism. ESBL producers usually need a carbapenem, while carbapenemase producers need a newer combination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Typical first choice",
+     "Notes"
+    ],
+    "rows": [
+     [
+      "ESBL producer",
+      "Ertapenem, meropenem or imipenem",
+      "Avoid ceftriaxone and piperacillin-tazobactam for serious disease"
+     ],
+     [
+      "AmpC producer",
+      "Carbapenem preferred",
+      "Third-generation cephalosporins may fail during therapy"
+     ],
+     [
+      "KPC producer",
+      "Meropenem-vaborbactam, ceftazidime-avibactam or imipenem-relebactam",
+      "Meropenem-vaborbactam is slightly favoured"
+     ],
+     [
+      "NDM producer",
+      "Aztreonam-avibactam or cefiderocol",
+      "Ceftazidime-avibactam plus aztreonam if aztreonam-avibactam unavailable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Know the intrinsic gaps. **Proteus**, **Morganella** and **Providencia** are less susceptible to imipenem, so a carbapenem does not cover every Enterobacterales. Tetracyclines and polymyxins are poorly active against the Proteeae and Serratia, and may not reach adequate urine or blood levels. Avoid relying on third-generation cephalosporins for AmpC producers such as Enterobacter cloacae and Citrobacter freundii, because resistance can emerge during treatment.",
+   "say": "Know the intrinsic gaps. Proteus, Morganella and Providencia are less susceptible to imipenem, so a carbapenem does not cover every Enterobacterales. Tetracyclines and polymyxins are poorly active against the Proteeae and Serratia, and may not reach adequate urine or blood levels. Avoid relying on third-generation cephalosporins for AmpC producers such as Enterobacter cloacae and Citrobacter freundii, because resistance can emerge during treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Penicillin allergy is labelled far more often than it is real. Around **8 to 10 percent** of United States patients report it. A structured score such as **PEN-FAST** helps risk-stratify. A score above 3 signals higher probability of true IgE-mediated allergy. Diagnosis uses history, skin testing and graded challenge where appropriate. Cross-reactivity depends mainly on the R side chain rather than the beta-lactam ring, so dissimilar side chains are safer.",
+   "say": "Penicillin allergy is labelled far more often than it is real. Around 8 to 10 percent of United States patients report it. A structured score such as PEN-FAST helps risk-stratify. A score above 3 signals higher probability of true IgE-mediated allergy. Diagnosis uses history, skin testing and graded challenge where appropriate. Cross-reactivity depends mainly on the R side chain rather than the beta-lactam ring, so dissimilar side chains are safer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-risk features",
+     "points": [
+      "PEN-FAST above 3",
+      "Recent IgE-type reaction",
+      "Anaphylaxis history"
+     ]
+    },
+    "right": {
+     "title": "Low-risk or absolute avoid",
+     "points": [
+      "Isolated remote hives may allow delabelling",
+      "Stevens-Johnson or DRESS: never rechallenge",
+      "Aztreonam has little cross-reactivity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recognise anaphylaxis early. Give intramuscular **epinephrine 0.3 mg** into the mid-anterolateral thigh without waiting for a serum tryptase. Repeat every 5 minutes if hypotension persists. Isolated hives, without systemic features, are treated with an oral H1 antihistamine such as cetirizine. Biphasic reactions and mortality are linked to delayed epinephrine, so timing matters.",
+   "say": "Recognise anaphylaxis early. Give intramuscular epinephrine 0.3 mg into the mid-anterolateral thigh without waiting for a serum tryptase. Repeat every 5 minutes if hypotension persists. Isolated hives, without systemic features, are treated with an oral H1 antihistamine such as cetirizine. Biphasic reactions and mortality are linked to delayed epinephrine, so timing matters.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anaphylaxis suspected"
+     },
+     {
+      "id": "b",
+      "label": "IM epinephrine 0.3 mg"
+     },
+     {
+      "id": "c",
+      "label": "Still hypotensive?"
+     },
+     {
+      "id": "d",
+      "label": "Repeat epinephrine every 5 min"
+     },
+     {
+      "id": "e",
+      "label": "Isolated hives: oral cetirizine"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ],
+     [
+      "a",
+      "e",
+      "hives only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Watch for neurotoxicity and organ toxicity. High-dose penicillin in **renal impairment** can cause myoclonus, altered mental status and seizures. The first step is stopping the drug. Prolonged therapy needs renal, hepatic and haematological monitoring. Piperacillin-tazobactam can cause thrombocytopenia, which matters in patients on warfarin. Severe cutaneous reactions such as Stevens-Johnson syndrome or DRESS are a lifelong reason to avoid the class.",
+   "say": "Watch for neurotoxicity and organ toxicity. High-dose penicillin in renal impairment can cause myoclonus, altered mental status and seizures. The first step is stopping the drug. Prolonged therapy needs renal, hepatic and haematological monitoring. Piperacillin-tazobactam can cause thrombocytopenia, which matters in patients on warfarin. Severe cutaneous reactions such as Stevens-Johnson syndrome or DRESS are a lifelong reason to avoid the class.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_b175368ef215",
+  "q_e42e1bca4b11",
+  "q_e0401e6262f3"
+ ],
+ "src": [
+  "kb-reference-diseases-caused-by-gram-negative"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Sanford Guide to Antimicrobial Therapy",
+  "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 231,
+  "itemN": 47
+ }
+}

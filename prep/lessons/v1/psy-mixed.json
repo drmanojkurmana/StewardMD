@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "psy-mixed",
+ "subject": "psychiatry",
+ "title": "Psychiatry mixed rapid review: high-yield concepts for NEET-PG and USMLE",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Psychiatry exam questions often test **phobias**, **dementia** and **psychosurgery** in quick succession. A phobia is a persistent, irrational fear of a specific object or situation. Know the Greek-root names: **acrophobia** is fear of high places, **xenophobia** is fear of strangers, and **hapnophobia** is fear of touch. Blood-injection-phobia is the one phobia linked to vasovagal falls.",
+   "say": "Psychiatry exam questions often test phobias, dementia and psychosurgery in quick succession. A phobia is a persistent, irrational fear of a specific object or situation. Know the Greek-root names. Acrophobia is fear of high places, xenophobia is fear of strangers, and hapnophobia is fear of touch. Blood-injection-phobia is the one phobia linked to vasovagal falls.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fear",
+     "Term"
+    ],
+    "rows": [
+     [
+      "High places",
+      "Acrophobia"
+     ],
+     [
+      "Strangers",
+      "Xenophobia"
+     ],
+     [
+      "Touch",
+      "Hapnophobia"
+     ],
+     [
+      "Needles",
+      "Needle phobia"
+     ],
+     [
+      "Animals",
+      "Zoophobia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In dementia questions, separate **reversible** from irreversible causes. The mnemonic DEMENTIA lists drugs with anticholinergic activity, emotional causes such as depression, metabolic causes like hypothyroidism, and normal pressure hydrocephalus. Vitamin B12 and folate deficiency are also reversible. Depression is the most common reversible cause in older adults, and Alzheimer's disease is not caused by multiple small strokes.",
+   "say": "In dementia questions, separate reversible from irreversible causes. The mnemonic DEMENTIA lists drugs with anticholinergic activity, emotional causes such as depression, metabolic causes like hypothyroidism, and normal pressure hydrocephalus. Vitamin B12 and folate deficiency are also reversible. Depression is the most common reversible cause in older adults, and Alzheimer's disease is not caused by multiple small strokes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d",
+      "label": "Dementia work-up"
+     },
+     {
+      "id": "r",
+      "label": "Reversible causes"
+     },
+     {
+      "id": "i",
+      "label": "Irreversible causes"
+     },
+     {
+      "id": "x",
+      "label": "Depression, NPH, drugs, B12"
+     },
+     {
+      "id": "y",
+      "label": "Alzheimer, vascular"
+     }
+    ],
+    "edges": [
+     [
+      "d",
+      "r"
+     ],
+     [
+      "d",
+      "i"
+     ],
+     [
+      "r",
+      "x"
+     ],
+     [
+      "i",
+      "y"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Psychosurgery and its history are frequent one-liners. **Egas Moniz** received the Nobel Prize for leucotomy, the prefrontal procedure. Jacobsen's work on lobotomy in chimpanzees led to the idea. Subcaudate tractotomy and limbic leukotomy were used for obsessive-compulsive disorder and depression. Remember that these procedures are now rarely used.",
+   "say": "Psychosurgery and its history are frequent one-liners. Egas Moniz received the Nobel Prize for leucotomy, the prefrontal procedure. Jacobsen's work on lobotomy in chimpanzees led to the idea. Subcaudate tractotomy and limbic leukotomy were used for obsessive-compulsive disorder and depression. Remember that these procedures are now rarely used.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Procedure",
+     "points": [
+      "Prefrontal leucotomy",
+      "Subcaudate tractotomy",
+      "Limbic leukotomy",
+      "Anterior cingulotomy"
+     ]
+    },
+    "right": {
+     "title": "Used for",
+     "points": [
+      "Historical psychosurgery",
+      "OCD",
+      "OCD and depression",
+      "Refractory conditions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Movement and drug-induced problems are high-yield. **Akathisia** is an inner restlessness from antipsychotics and is treated first with propranolol in most exam keys, while anticholinergics such as benzhexol are second line. **Tourette's syndrome** predominantly affects males and features motor and vocal tics, but ataxia is not a feature. **Pseudocyesis** is a false belief of pregnancy with no fetal heart sounds.",
+   "say": "Movement and drug-induced problems are high-yield. Akathisia is an inner restlessness from antipsychotics and is treated first with propranolol in most exam keys, while anticholinergics such as benzhexol are second line. Tourette's syndrome predominantly affects males and features motor and vocal tics, but ataxia is not a feature. Pseudocyesis is a false belief of pregnancy with no fetal heart sounds.",
+   "vis": null
+  },
+  {
+   "tx": "Some features discriminate **nonorganic seizures** from epilepsy. Pseudoseizures often lack postictal sleep, incontinence and tongue biting, and the EEG shows no organised seizure activity. Also recall that **Kluver-Bucy syndrome** follows bilateral medial temporal lobe lesions and produces hyperorality, hypersexuality and visual agnosia, not seizures. Antipsychotics also lower the seizure threshold, especially chlorpromazine.",
+   "say": "Some features discriminate nonorganic seizures from epilepsy. Pseudoseizures often lack postictal sleep, incontinence and tongue biting, and the EEG shows no organised seizure activity. Also recall that Kluver-Bucy syndrome follows bilateral medial temporal lobe lesions and produces hyperorality, hypersexuality and visual agnosia, not seizures. Antipsychotics also lower the seizure threshold, especially chlorpromazine.",
+   "vis": null
+  },
+  {
+   "tx": "Finally, know the **drug and substance** facts. **Scopolamine** and barbiturates such as thiopentone are used for narcoanalysis. The most frequent emergency with LSD is the panic episode called the bad trip. Oniomania means compulsive buying, and **pyromania** is an irresistible urge to set fires. Delirium is the commonest postoperative psychiatric problem.",
+   "say": "Finally, know the drug and substance facts. Scopolamine and barbiturates such as thiopentone are used for narcoanalysis. The most frequent emergency with LSD is the panic episode called the bad trip. Oniomania means compulsive buying, and pyromania is an irresistible urge to set fires. Delirium is the commonest postoperative psychiatric problem.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "f7c59866-e324-40ef-807a-96e202cfcc36",
+  "0b636b42-5089-431e-934f-38059e97085e",
+  "10809eb6-5dca-4c63-b4a3-769ceea45698"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 53
+ }
+}

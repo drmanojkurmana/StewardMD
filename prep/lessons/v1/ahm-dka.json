@@ -1,0 +1,192 @@
+{
+ "v": 1,
+ "module": "ahm-dka",
+ "subject": "adult-health-medicine",
+ "title": "Diabetic emergencies: DKA, HHS, hypoglycaemia and hyperkalaemia traps",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Diabetic ketoacidosis** (DKA) is defined by hyperglycaemia, ketosis and acidosis. Typical features include vomiting, abdominal pain, deep rapid Kussmaul breathing and drowsiness. Confirmation rests on venous blood gas and blood ketone measurement. Severity is graded by the degree of acidosis and bicarbonate depletion, with the most severe cases carrying the highest risk. Osmotic diuresis causes major fluid and electrolyte loss, so the order of treatment matters.",
+   "say": "Diabetic ketoacidosis, or DKA, is defined by high blood glucose, ketones and acidosis. Typical features include vomiting, abdominal pain, deep rapid Kussmaul breathing and drowsiness. Confirmation rests on a venous blood gas and a blood ketone measurement. Severity is graded by how marked the acidosis and bicarbonate depletion are, and the most severe cases carry the highest risk. Osmotic diuresis causes major fluid and electrolyte loss, so the order of treatment matters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity",
+     "Acidosis",
+     "Bicarbonate depletion"
+    ],
+    "rows": [
+     [
+      "Mild",
+      "Mildly reduced pH",
+      "Mild reduction"
+     ],
+     [
+      "Moderate",
+      "Intermediate pH fall",
+      "Moderate reduction"
+     ],
+     [
+      "Severe",
+      "Markedly reduced pH",
+      "Marked reduction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Start with **intravenous isotonic saline** to restore circulating volume, because dehydration is usually profound. Insulin should follow once potassium is known. Fluid resuscitation improves perfusion and renal clearance of ketoacids, and it lowers the hyperglycaemic drive. Subcutaneous insulin alone, or rapid bolus insulin without fluids, is not appropriate in DKA. The treatment is a **fluid, potassium, insulin** sequence.",
+   "say": "Start with intravenous isotonic saline to restore circulating volume, because dehydration is usually profound. Insulin should follow once potassium is known. Fluid resuscitation improves perfusion and renal clearance of ketoacids, and it lowers the hyperglycaemic drive. Subcutaneous insulin alone, or a rapid bolus of insulin without fluids, is not appropriate in DKA. The treatment is a fluid, potassium, insulin sequence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "IV saline"
+     },
+     {
+      "id": "b",
+      "label": "Check potassium"
+     },
+     {
+      "id": "c",
+      "label": "Replace K if low"
+     },
+     {
+      "id": "d",
+      "label": "Start insulin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Potassium is a critical **safety check** in DKA. Total body **potassium** is depleted even when the serum level looks normal or high. Insulin and correction of **acidosis** drive potassium back into cells, so serum levels can fall quickly. If serum potassium is low, replacement must start before insulin, because insulin can trigger dangerous hypokalaemia and arrhythmia. Once levels are normal, potassium is added to the fluids. When levels are high, potassium is withheld until they fall.",
+   "say": "Potassium is a critical safety check in DKA. Total body potassium is depleted even when the serum level looks normal or high. Insulin and correction of acidosis drive potassium back into cells, so serum levels can fall quickly. If serum potassium is low, replacement must start before insulin, because insulin can trigger dangerous hypokalaemia and arrhythmia. Once levels are normal, potassium is added to the fluids. When levels are high, potassium is withheld until they fall.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serum potassium",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Low",
+      "Replace before starting insulin"
+     ],
+     [
+      "Normal",
+      "Add potassium to the fluids"
+     ],
+     [
+      "High",
+      "Withhold until levels fall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hyperosmolar hyperglycaemic state** (HHS) occurs in older adults with type 2 diabetes, often after weeks of poor intake. Glucose is typically very high, serum osmolality is markedly raised and confusion is common. Venous pH and bicarbonate are normal and ketones are absent or minimal, because enough insulin is present to block ketogenesis. Severe dehydration and hyperosmolality explain the altered mental state. Management uses fluids and insulin, with careful correction of sodium and glucose to avoid cerebral oedema.",
+   "say": "Hyperosmolar hyperglycaemic state, or HHS, occurs in older adults with type 2 diabetes, often after weeks of poor intake. Glucose is typically very high, serum osmolality is markedly raised and confusion is common. Venous pH and bicarbonate are normal, and ketones are absent or minimal, because enough insulin is present to block ketogenesis. Severe dehydration and hyperosmolality explain the altered mental state. Management uses fluids and insulin, with careful correction of sodium and glucose to avoid cerebral oedema.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DKA",
+     "points": [
+      "Type 1 or insulin deficient",
+      "Acidosis present",
+      "Ketones strongly raised",
+      "Vomiting and abdominal pain"
+     ]
+    },
+    "right": {
+     "title": "HHS",
+     "points": [
+      "Type 2, older adults",
+      "Normal pH and bicarbonate",
+      "Ketones absent or minimal",
+      "Very high osmolality, confusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypoglycaemia** in an unresponsive patient with insulin-treated diabetes needs rapid treatment. A fingerprick glucose of 2.1 mmol/L with no intravenous access and no safe swallow calls for **intramuscular glucagon**. Glucagon stimulates hepatic glycogenolysis and raises blood glucose reliably without IV access. Oral glucose is unsafe if the patient cannot swallow. Once conscious and able to swallow, oral carbohydrate and a meal are given, and the patient is observed because glucagon effects are short-lived.",
+   "say": "Hypoglycaemia in an unresponsive patient with insulin-treated diabetes needs rapid treatment. A fingerprick glucose of 2.1 mmol/L, with no intravenous access and no safe swallow, calls for intramuscular glucagon. Glucagon stimulates hepatic glycogenolysis and raises blood glucose reliably without IV access. Oral glucose is unsafe if the patient cannot swallow. Once conscious and able to swallow, oral carbohydrate and a meal are given, and the patient is observed because the effect of glucagon is short-lived.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Unresponsive, glucose low"
+     },
+     {
+      "id": "b",
+      "label": "No IV, cannot swallow"
+     },
+     {
+      "id": "c",
+      "label": "IM glucagon"
+     },
+     {
+      "id": "d",
+      "label": "Oral carbohydrate when awake"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remote settings and SGLT2 inhibitors add risk. Stable DKA in a remote clinic still needs intravenous fluids and insulin, with urgent transfer to a unit with close laboratory monitoring. **Euglycaemic DKA** occurs with SGLT2 inhibitors when glucose is near normal despite ketoacidosis. Check ketones even when glucose looks modest. Treatment includes insulin with glucose-containing fluid to clear ketones, and the SGLT2 inhibitor is stopped. Consider **lactic acidosis** from metformin when the anion gap is raised.",
+   "say": "Remote settings and SGLT2 inhibitors add risk. Stable DKA in a remote clinic still needs intravenous fluids and insulin, with urgent transfer to a unit that can monitor bloods closely. Euglycaemic DKA happens with SGLT2 inhibitors when glucose is near normal despite ketoacidosis. Check ketones even when glucose looks modest. Treatment includes insulin with glucose-containing fluid to clear ketones, and the SGLT2 inhibitor is stopped. Consider lactic acidosis from metformin when the anion gap is raised.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Joint British Diabetes Societies guideline for the management of diabetic ketoacidosis in adults",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}
