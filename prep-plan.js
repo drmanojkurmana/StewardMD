@@ -41,15 +41,14 @@
     { id: "mrcs-part-a", tab: "mrcs", profile: "mrcs-part-a", label: "MRCS Part A", sub: "Intercollegiate MRCS Part A, 300 questions" }
   ];
   /* NEET-SS papers are set per specialty group (NBEMS NEET-SS bulletin: one 150-question paper per group; the 2025
-     groups below, each with its feeder broad specialty). subjects = the bank's ss-* subjects in that group: the
-     question bank covers the Medical group (plus the single-group subjects named), so every other group lists no
-     subjects yet and its students see the honest empty state until its bank exists. */
+     groups below, each with its feeder broad specialty). subjects = the bank's ss-* subjects in that group. The
+     group sheet offers only groups whose subjects hold questions; a group with no bank subjects is not offered. */
   var SS_GROUPS = [
     { id: "medical", label: "Medical group", feeder: "MD or DNB General Medicine",
       subjects: ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology",
         "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology",
         "ss-infectious-diseases", "ss-biostatistics"] },
-    { id: "surgical", label: "Surgical group", feeder: "MS or DNB General Surgery", subjects: [] },
+    { id: "surgical", label: "Surgical group", feeder: "MS or DNB General Surgery", subjects: ["ss-general-surgery", "ss-urology", "ss-neurosurgery", "ss-surgical-oncology", "ss-ctvs", "ss-paediatric-surgery", "ss-plastic-surgery", "ss-vascular-surgery"] },
     { id: "anaesthesiology", label: "Anaesthesiology group", feeder: "MD or DNB Anaesthesiology", subjects: [] },
     { id: "critical-care", label: "Critical Care group", feeder: "MD or DNB Anaesthesiology, Medicine or equivalent", subjects: ["ss-critical-care", "ss-pulmonology"] },
     { id: "ent", label: "ENT group", feeder: "MS or DNB ENT", subjects: [] },
@@ -566,9 +565,10 @@
   function examSubHtml(c) {
     if (!c) return "";
     if (c.exam === "neet-ss") {
-      return '<div class="pl-subq" role="radiogroup" aria-label="NEET-SS group"><p class="pn-mut pn-small">Your group: one paper per group.</p><div class="pl-opts">' + SS_GROUPS.map(function (g) {
-        var on = (c.group || defaultSsGroup()) === g.id, noq = !g.subjects.length;
-        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder + (noq ? ". No questions in the bank yet" : "")) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
+      var offered = SS_GROUPS.filter(function (g) { return g.subjects.length; });
+      return '<div class="pl-subq" role="radiogroup" aria-label="NEET-SS group"><p class="pn-mut pn-small">Your group: one paper per group.</p><div class="pl-opts">' + offered.map(function (g) {
+        var on = (c.group || defaultSsGroup()) === g.id;
+        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
       }).join("") + "</div></div>";
     }
     if (c.exam === "ini-ss") {
