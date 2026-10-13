@@ -1,0 +1,116 @@
+# GAP-AUDIT — student-safety content gap audit (PrepNucleus)
+
+Date: 2026-10-13. Branch: gap-audit-1013 off origin/main 12c194c1f. Method: taxonomy.json (2,435 modules) measured against base bank v1 indexes (usable counts), overlay-counts.json (64 sets, 31,669 items), lessons v1 (875 files), topic-links.json (1,128 modules, gen 2026-10-12) and KB disease docs (5,055 in kb/dist). Status rule from brief: OK = 5 or more MCQs and a lesson; THIN = fewer than 5 MCQs or no lesson; MISSING = no MCQs and no lesson. Life-critical depth needs lesson + KB link + 10 or more MCQs. Graph: graphify-out/graph.json queried first (40,746 nodes). No Claude API spend; author is the writer. NICE wins where it covers a point; India (NACO/ICMR/NMC) and US (CDC) labelled in items.
+
+## Headline counts (before fill)
+
+| Measure | Count |
+|---|---|
+| Taxonomy modules checked | 2,435 |
+| OK | 742 |
+| THIN | 1,219 |
+| MISSING | 474 |
+| Base bank usable MCQs (v1, 19 MBBS subjects) | 130,791 |
+| Overlay MCQs | 31,669 across 1,471 topics |
+| Lessons present | 875 of 2,435 modules (1,490 without a lesson) |
+| Modules with zero MCQs | 663 |
+| Topic-links modules with a KB link | 229 of 1,128 |
+
+The dominant gap is not MCQ volume. Most MBBS life-critical topics already have 80 to 270 base MCQs but no structured lesson and no KB link, so they read THIN. The true MISSING block is NEET-SS: all 14 ss-* v1 subject indexes report total 0 (shell taxonomy: ss-general-medicine alone lists 222 topics with no bank). SS coverage today comes only from small overlay sets (for example maik26/maik29, a few hundred items). That needs an owner decision (see DONE report), not silent filling.
+
+## 1. NMC CBME subjects (MBBS, 19 subjects)
+
+| Subject | OK | THIN | MISSING | Note |
+|---|---|---|---|---|
+| anatomy | 55 | 12 | 0 | Strong |
+| physiology | 25 | 22 | 0 | Lesson gaps |
+| biochemistry | 12 | 18 | 0 | Lesson gaps |
+| pathology | 19 | 53 | 0 | Largest THIN block in MBBS |
+| pharmacology | 30 | 40 | 0 | Drug-safety lessons missing |
+| microbiology | 15 | 22 | 0 | Infection-control OK |
+| forensic-medicine | 14 | 9 | 0 | Consent and medico-legal OK |
+| community-medicine | 50 | 19 | 0 | Programmes thin (below) |
+| ophthalmology | 9 | 20 | 0 | Thin |
+| ent | 9 | 27 | 0 | Thin |
+| medicine | 9 | 100 | 0 | 100 THIN, almost all lesson-less |
+| surgery | 12 | 45 | 0 | ATLS and shock lesson-less |
+| obstetrics-gynaecology | 14 | 33 | 0 | Eclampsia/PPH lesson-less |
+| paediatrics | 11 | 27 | 0 | Neonatal resus lesson-less |
+| orthopaedics | 15 | 17 | 0 | Moderate |
+| dermatology | 4 | 18 | 0 | Weakest MBBS subject |
+| psychiatry | 10 | 22 | 0 | Thin |
+| anaesthesia | 16 | 9 | 0 | Airway lesson-less |
+| radiology | 22 | 0 | 0 | Fully OK |
+
+## 2. NEET-PG / INI-CET / FMGE high-yield
+
+Same 19 subjects above feed all three. Highest-yield thin lines (exam weight high, safety high): medicine 100 THIN, pathology 53, surgery 45, pharmacology 40. FMGE shares the MBBS bank; no separate FMGE bank gap beyond these.
+
+## 3. NEET-SS blueprint
+
+All ss-* v1 indexes are empty shells (474 MISSING taxonomy topics, concentrated in ss-general-medicine 168 MISSING, ss-neurology 51, ss-rheumatology-immunology 40, ss-medical-oncology 37, ss-infectious-diseases 34, ss-critical-care 24, ss-endocrinology 24, ss-nephrology 21). Live NEET-SS items (~31k per AUDIT.md) are not in these v1 indexes, so blueprint coverage cannot be verified from the repo. Ranked below exam-only gaps; owner question in DONE report.
+
+## 4. International (USMLE Step 1/2 CK, PLAB 1, AMC, MCCQE, MRCP, MRCS)
+
+Intl and UK branches are lesson-rich by design and mostly OK or THIN-by-lesson only: mcc-professional-behaviours 29 OK of 31, mcc-health-promotion 26 of 30, population-health-and-ethics 18 of 20, mrcp-statistics 8 of 8. Weakest: mrcp-rheumatology 0 OK of 8, plab-dermatology 0 of 5, plab-psychiatry 0 of 5. These are exam-weight gaps, not safety gaps.
+
+## 5. Life-critical checklist (must be lesson + KB + 10 or more MCQs)
+
+MCQ = base usable + overlay. KB = topic-links has a KB article. Almost every line fails on lesson, not on MCQs.
+
+| Topic | Module | MCQs | Lesson | KB | Status |
+|---|---|---|---|---|---|
+| ACLS/BLS | ans-cpr | 107 | No | No | THIN |
+| PALS | ans-paediatric | 66 | Yes | No | OK* |
+| Neonatal resuscitation | ped-newborn-care | 225 | No | No | THIN |
+| ATLS | sur-atls | 193 | No | No | THIN |
+| Sepsis | med-sepsis | 140 | No | No | THIN |
+| Anaphylaxis | med-allergy-immunology | 83 | No | No | THIN |
+| DKA/HHS | med-diabetes | 197 | No | No | THIN |
+| Status epilepticus | med-epilepsy | 144 | No | Yes | THIN |
+| Acute stroke | med-stroke | 140 | No | No | THIN |
+| ACS/STEMI | med-acs | 219 | No | No | THIN |
+| Pulmonary embolism | med-pe-pulmonary-htn | 181 | No | No | THIN |
+| Aortic dissection | mcc-ac-aortic | 12 | No | Yes | THIN |
+| Tension pneumothorax | med-pleural | 137 | No | No | THIN |
+| Massive haemorrhage | sur-shock-transfusion | 245 | No | No | THIN |
+| Eclampsia | obg-hypertensive-disorders | 176 | No | No | THIN |
+| PPH | obg-pph | 186 | No | No | THIN |
+| Ectopic | obg-ectopic | 205 | No | No | THIN |
+| Organophosphate | med-pesticides | 24 | No | No | THIN (thinnest MCQ) |
+| Paracetamol/overdose | med-overdose | 79 | No | No | THIN |
+| Snake bite | med-envenomation | 43 | No | No | THIN |
+| Hyperkalaemia | med-potassium | 207 | No | No | THIN |
+| Hyponatraemia | med-sodium | 130 | No | No | THIN |
+| Raised ICP | med-ich | 221 | No | No | THIN |
+| Difficult airway | ans-difficult-airway | 75 | No | No | THIN |
+| Acute abdomen | sur-peritoneum | 129 | No | Yes | THIN |
+| Meningitis | med-cns-infections | 191 | No | No | THIN |
+| Malignant hyperthermia | ans-intraop-complications | 183 | No | No | THIN |
+| Local anaesthetic toxicity | ans-local-anaesthetics | 273 | No | No | THIN |
+| Paediatric dehydration | ped-diarrhoea | 114 | No | No | THIN |
+
+OK* PALS has a lesson but no KB link, so it still fails the full depth rule. Drug safety: phm-adverse-reactions OK (183, lesson), obg-teratogens OK, pat-transfusion OK; but phm-insulin (93), phm-oral-antidiabetics (203), phm-opioids (237), phm-corticosteroids (163), phm-chelators-antidotes (111) and mphar-interactions (24) are all lesson-less THIN. Consent, medico-legal (India), infection control: OK.
+
+## 6. Skills
+
+ECG (med-ecg 115, lesson), chest X-ray (rad-chest 535, lesson), CT (rad-ct-mri 281, lesson), ABG (med-pft-abg 103, lesson) and prescription writing (phm-drug-development 138, lesson) are OK. Gaps: clinical examination steps and OSCE procedures have no dedicated taxonomy modules (only sgm-cardiac-examination, itself MISSING in SS), CBC/lab interpretation has no module, and case/image-based depth sits in maikimg sets rather than per-topic skills modules. Flagged as checklist lines with no home; owner question in DONE report.
+
+## 7. Indian public health
+
+UIP (cm-uip 85, lesson) and RMNCH+A proxy (cm-nutrition-programmes 102, lesson) are OK. NTEP (cm-tuberculosis 218, no lesson), NACO (cm-hiv-sti 103, KB only) and NVBDCP (cm-arboviral 163, no lesson) are THIN. Ayushman Bharat has no dedicated module (nearest cm-healthcare-delivery). Epidemiology and biostatistics are split across cm-* and sbs-*/mstat-*; mrcp-statistics is fully OK, MBBS biostatistics is lesson-thin.
+
+## Ranking (safety severity, then exam weight)
+
+1. Poisoning with thin MCQs and no lesson: organophosphate (24), snake bite (43), paracetamol (79).
+2. Airway and breathing kills: difficult airway (75), tension pneumothorax, anaphylaxis (83).
+3. Time-critical medical emergencies without lessons: sepsis, DKA/HHS, status epilepticus, stroke, ACS, PE, hyperkalaemia, meningitis, raised ICP.
+4. Obstetric and neonatal kills without lessons: eclampsia, PPH, ectopic, neonatal resuscitation.
+5. Drug safety without lessons: insulin, opioids, corticosteroids, antidotes, interactions (24).
+6. Indian programmes without lessons: NTEP, NACO, NVBDCP, Ayushman Bharat (no module).
+7. Exam-weight thin blocks: medicine/pathology/surgery/pharmacology lessons; dermatology, ENT, ophthalmology.
+8. NEET-SS shell taxonomy (474 MISSING): needs owner scoping before any fill.
+
+## Fill log (this branch)
+
+First fill set gap1013a targets rank 1 to 3: lessons plus 10 new MCQs each for med-sepsis, med-allergy-immunology (anaphylaxis), med-pesticides, med-envenomation, ans-difficult-airway and med-potassium. New MCQs only; no existing explanation rewritten. Every dose or threshold names its primary guideline in the item source field; unsure numbers are omitted and flagged. Status after fill is recorded in GAP-AUDIT-DONE.md.
