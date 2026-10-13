@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "phm-immunosuppressants",
+  "subject": "pharmacology",
+  "title": "Immunosuppressants: calcineurin, antimetabolites, biologics and JAK",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Ciclosporin** (calcineurin IL2, **hirsutism with gum hyperplasia**, hypertension, **nephrotoxicity**, gout, **grapefruit**; levels trough) with **tacrolimus** (**tremor, diabetes**, less cosmetic, alopecia, **topical eczema** steroid sparing) anchors transplant; magnesium wasting seizes while infection and PTLD watch. CYP3A4 macrolides and azoles magnify; levels dose.",
+      "say": "Hairy gums hypertensive kidneys is ciclosporin levels trough; trembling diabetic tacrolimus topicals eczema. Grapefruit magnifies.",
+      "vis": null
+    },
+    {
+      "tx": "**Sirolimus and everolimus** (mTOR, **mouth ulcers**, hyperlipids, **pneumonitis**, **poor wound healing** surgery held, proteinuria) with **MMF** (**teratogenic** two contraceptions, GI diarrhoea, **BK virus** nephropathy, leucopenia) and **azathioprine** (**TPMT** screened, hepatotoxic, pancreatitis, **NMSC** sun) antimetabolise; allopurinol magnifies azathioprine quartering. Vaccines live banned; skin cancers screen.",
+      "say": "Ulcers pneumonitis wounds is sirolimus held surgery; MMF teratogenic BK diarrhoeas. TPMT screens azathioprine.",
+      "vis": null
+    },
+    {
+      "tx": "**Steroids** (rejection pulses, diabetes, bones, infection) with **basiliximab** (IL2R induction, gentle) and **ATG** (**cytokine release** fevers, **serum sickness** weeks, PTLD, platelets) induct; **belatacept** (costimulation, **PTLD EBV naive banned**, nephron sparing) converts. Pretransplant EBV serology gates belatacept; rabbit premedication steroids tame.",
+      "say": "Pulsing steroids rejection; ATG fevers serum sickens weeks. EBV naive bans belatacept PTLD.",
+      "vis": null
+    },
+    {
+      "tx": "**JAK** (**tofacitinib**: **clots with zoster**, lipids, diverticular perforation) with **anti-TNF** (**infliximab**: **TB reactivation screened**, infusion reactions, **demyelination with heart failure banned**, psoriasis paradoxical) and **rituximab** (**HBV reactivation screened**, **PML** rare, infusion cytokine, hypogammaglobulinaemia) biologics; **abatacept, tocilizumab** (lipids, bowel perforation) options. Chest X-ray with quantiferon precedes anti-TNF; HBV prophylaxis rituximab.",
+      "say": "Clotting shingles is tofacitinib; TB screens infliximab failing hearts demyelinated banned. HBV screens rituximab PML.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Immunosuppressant",
+          "Pearl",
+          "Watch"
+        ],
+        "rows": [
+          [
+            "Ciclosporin",
+            "Hairy gums",
+            "Levels"
+          ],
+          [
+            "Tacrolimus",
+            "Tremor DM",
+            "Topical"
+          ],
+          [
+            "MMF",
+            "Teratogenic BK",
+            "GI"
+          ],
+          [
+            "Infliximab",
+            "TB screen",
+            "No HF"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-phm-371",
+    "bk2-phm-372",
+    "bk2-phm-373",
+    "bk2-phm-374",
+    "bk2-phm-375",
+    "bk2-phm-376",
+    "bk2-phm-377",
+    "bk2-phm-378",
+    "bk2-phm-379",
+    "bk2-phm-380"
+  ],
+  "src": [],
+  "refs": [
+    "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-pharma4",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}
