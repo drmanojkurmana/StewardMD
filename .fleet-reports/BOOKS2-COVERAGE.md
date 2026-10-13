@@ -71,4 +71,6 @@ Wave MIL1 DONE (branch books2-mil1): can-cpb-bypass, can-valve-tee, nan-icp-brai
 
 Wave PLAS1 DONE (branch books2-plas1): spl-reconstructive, spl-burns-hand, spl-craniofacial-aesthetic. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-pla-001 to 030. Plastics 3/3 COMPLETE; vascular sva-arterial + sva-venous-access BLOCKED (no vascular/CTVS book yet).
 
+Wave URO1 DONE (branch books2-uro1): sur-stones, sur-bph-prostate, sur-oncology, sur-andrology-infertility, sur-paediatric-reconstructive. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-uro-001 to 050. Urology 5/5 COMPLETE pending merges.
+
 
