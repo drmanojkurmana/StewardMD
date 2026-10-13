@@ -115,3 +115,8 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 
 - 296 hand-written MCQs ($0 API), blind-verified 296/300 (dropped maikss51[7], maikss56[16,28,48]), keys rotated, R2 live: ss-clinical-pharmacology 40->139 (maikss51 49, maikss52 50), ss-geriatric-mental-health 30->130 (maikss53/54), ss-child-adolescent-psychiatry 30->127 (maikss55 50, maikss56 47). Pharmacology group 139, Psychiatry group 257.
 - Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`. Remainder ~7,170.
+
+## VOLUME phase batch 6 (2026-10-13): CTVS, Microbiology, Pathology, ENT +100/subject
+
+- 398 hand-written MCQs ($0 API), blind-verified 398/400 (dropped maikss61[10], maikss62[2]), keys rotated, R2 live: ss-ctvs 48->148 (maikss57/58), ss-virology 15->115 (maikss59/60), ss-onco-pathology 30->128 (maikss61 49, maikss62 49), ss-head-neck-surgery 30->130 (maikss63/64).
+- Cumulative this VOLUME run: 1,489 verified items (batches 3-6). Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`. Remainder ~6,770 to 300/subject.
