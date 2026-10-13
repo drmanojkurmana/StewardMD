@@ -1,0 +1,757 @@
+{
+ "topic": "cm-tuberculosis",
+ "set": "gap1013e",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap891",
+   "q": "A sputum positive pulmonary tuberculosis patient is started on treatment under the national programme. Which programme platform records notification, treatment and outcome for this patient?",
+   "o": [
+    "Nikshay, the national tuberculosis information system",
+    "A paper register kept only at the clinic",
+    "The immunisation register",
+    "A private pharmacy log"
+   ],
+   "a": 0,
+   "exp": "Every diagnosed tuberculosis patient is notified and followed on Nikshay, which links diagnosis, drug supply, adherence support and outcome recording under NTEP.",
+   "r": [
+    "Correct: Notify tuberculosis and track care on Nikshay.",
+    "A local paper register alone loses national follow up and drug supply linkage.",
+    "The immunisation register tracks vaccines, not tuberculosis treatment.",
+    "Private logs do not replace statutory notification and programme follow up."
+   ],
+   "kp": "Notify tuberculosis and track care on Nikshay.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "notification"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Notify tuberculosis and track care on Nikshay.",
+    "others": {
+     "B": "A local paper register alone loses national follow up and drug supply linkage.",
+     "C": "The immunisation register tracks vaccines, not tuberculosis treatment.",
+     "D": "Private logs do not replace statutory notification and programme follow up."
+    },
+    "pearl": "Notify and follow every tuberculosis patient on Nikshay.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Every diagnosed tuberculosis patient is notified and followed on Nikshay, which links diagnosis, drug supply, adherence support and outcome recording under NTEP.",
+    "lo": "Notify tuberculosis and track care on Nikshay.",
+    "rev": "Every diagnosed tuberculosis patient is notified and followed on Nikshay, which links diagnosis, drug supply, adherence support and outcome recording under NTEP.",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap892",
+   "q": "A patient with cough for more than two weeks attends a primary care clinic in India. What is the programme recommended first diagnostic approach?",
+   "o": [
+    "Microbiological testing with a rapid molecular test or microscopy as per programme access, with chest imaging as an adjunct",
+    "Empirical antibiotics for two weeks before any test",
+    "Chest imaging alone without microbiology",
+    "Treatment without testing in all cases"
+   ],
+   "a": 0,
+   "exp": "Presumptive tuberculosis needs microbiological confirmation. Rapid molecular testing is preferred where available, microscopy is used per programme access, and imaging supports but does not replace microbiology (NTEP, India).",
+   "r": [
+    "Correct: Confirm presumptive tuberculosis microbiologically.",
+    "Empirical antibiotics delay diagnosis and risk resistance.",
+    "Imaging alone cannot confirm tuberculosis or drug resistance.",
+    "Untested treatment misses resistance and notification."
+   ],
+   "kp": "Confirm presumptive tuberculosis microbiologically.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "diagnosis"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Confirm presumptive tuberculosis microbiologically.",
+    "others": {
+     "B": "Empirical antibiotics delay diagnosis and risk resistance.",
+     "C": "Imaging alone cannot confirm tuberculosis or drug resistance.",
+     "D": "Untested treatment misses resistance and notification."
+    },
+    "pearl": "Test presumptive tuberculosis microbiologically first.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Presumptive tuberculosis needs microbiological confirmation. Rapid molecular testing is preferred where available, microscopy is used per programme access, and imaging supports but does not replace microbiology (NTEP, India).",
+    "lo": "Confirm presumptive tuberculosis microbiologically.",
+    "rev": "Presumptive tuberculosis needs microbiological confirmation. Rapid molecular testing is preferred where available, microscopy is used per programme access, and imaging supports but does not replace microbiology (NTEP, India).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap893",
+   "q": "Why does the national programme stress universal drug susceptibility testing in tuberculosis?",
+   "o": [
+    "To detect rifampicin and other resistance early and choose an effective regimen",
+    "To delay treatment until all results return in every stable patient",
+    "To replace clinical assessment",
+    "To avoid notification"
+   ],
+   "a": 0,
+   "exp": "Early resistance detection lets the programme choose an effective regimen and prevent amplification of resistance. Treatment starts promptly on initial results while further testing proceeds (NTEP, India).",
+   "r": [
+    "Correct: Use universal drug susceptibility testing in tuberculosis.",
+    "Stable patients are not left untreated while every extended result is awaited.",
+    "Drug testing supports, and never replaces, clinical assessment.",
+    "Testing and notification go together in programme care."
+   ],
+   "kp": "Use universal drug susceptibility testing in tuberculosis.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "resistance"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Use universal drug susceptibility testing in tuberculosis.",
+    "others": {
+     "B": "Stable patients are not left untreated while every extended result is awaited.",
+     "C": "Drug testing supports, and never replaces, clinical assessment.",
+     "D": "Testing and notification go together in programme care."
+    },
+    "pearl": "Find resistance early, treat effectively.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Early resistance detection lets the programme choose an effective regimen and prevent amplification of resistance. Treatment starts promptly on initial results while further testing proceeds (NTEP, India).",
+    "lo": "Use universal drug susceptibility testing in tuberculosis.",
+    "rev": "Early resistance detection lets the programme choose an effective regimen and prevent amplification of resistance. Treatment starts promptly on initial results while further testing proceeds (NTEP, India).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap894",
+   "q": "A tuberculosis patient stops attending and misses doses. What is the programme centred response?",
+   "o": [
+    "Trace the patient, address barriers, support adherence and document the outcome",
+    "Stop all follow up once doses are missed",
+    "Restart the full course automatically without assessment",
+    "Transfer the patient off the register without tracing"
+   ],
+   "a": 0,
+   "exp": "Retention in care is a programme duty. Teams trace the patient, resolve barriers such as travel, side effects or stigma, support adherence and record a true outcome (NTEP, India).",
+   "r": [
+    "Correct: Trace and support patients who miss tuberculosis treatment.",
+    "Abandoning follow up loses cure and transmission control.",
+    "Restart decisions need clinical and programme assessment first.",
+    "Removal without tracing falsifies outcomes and endangers contacts."
+   ],
+   "kp": "Trace and support patients who miss tuberculosis treatment.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "adherence"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Trace and support patients who miss tuberculosis treatment.",
+    "others": {
+     "B": "Abandoning follow up loses cure and transmission control.",
+     "C": "Restart decisions need clinical and programme assessment first.",
+     "D": "Removal without tracing falsifies outcomes and endangers contacts."
+    },
+    "pearl": "Trace, support, then decide.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Retention in care is a programme duty. Teams trace the patient, resolve barriers such as travel, side effects or stigma, support adherence and record a true outcome (NTEP, India).",
+    "lo": "Trace and support patients who miss tuberculosis treatment.",
+    "rev": "Retention in care is a programme duty. Teams trace the patient, resolve barriers such as travel, side effects or stigma, support adherence and record a true outcome (NTEP, India).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap895",
+   "q": "Household contacts of a sputum positive tuberculosis patient should receive which programme action?",
+   "o": [
+    "Contact evaluation, symptom screening, testing where indicated and preventive treatment for those eligible",
+    "No action unless contacts develop chronic cough for a year",
+    "Antibiotics for every contact without evaluation",
+    "Isolation of the patient away from all services"
+   ],
+   "a": 0,
+   "exp": "Household contact evaluation finds co prevalent disease and identifies people eligible for tuberculosis preventive treatment after active disease is excluded (NTEP and WHO guidance).",
+   "r": [
+    "Correct: Evaluate household contacts of tuberculosis.",
+    "Waiting a year misses early disease and prevention.",
+    "Preventive treatment follows evaluation, not blanket antibiotics.",
+    "Care is brought to the family, not withheld from the patient."
+   ],
+   "kp": "Evaluate household contacts of tuberculosis.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "contacts"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Evaluate household contacts of tuberculosis.",
+    "others": {
+     "B": "Waiting a year misses early disease and prevention.",
+     "C": "Preventive treatment follows evaluation, not blanket antibiotics.",
+     "D": "Care is brought to the family, not withheld from the patient."
+    },
+    "pearl": "Evaluate contacts, prevent where eligible.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Household contact evaluation finds co prevalent disease and identifies people eligible for tuberculosis preventive treatment after active disease is excluded (NTEP and WHO guidance).",
+    "lo": "Evaluate household contacts of tuberculosis.",
+    "rev": "Household contact evaluation finds co prevalent disease and identifies people eligible for tuberculosis preventive treatment after active disease is excluded (NTEP and WHO guidance).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap896",
+   "q": "Which co morbidities does the national programme actively screen for in tuberculosis patients?",
+   "o": [
+    "Diabetes and HIV, with linkage to their care pathways",
+    "Only hypertension",
+    "No screening is needed",
+    "Only anaemia in children"
+   ],
+   "a": 0,
+   "exp": "Diabetes and HIV change tuberculosis presentation, treatment and outcome. Programme care screens for both and links the patient to the respective national pathways (NTEP with NACO and NPCDCS linkage, India).",
+   "r": [
+    "Correct: Screen for diabetes and HIV in tuberculosis.",
+    "Hypertension care matters but is not the named tuberculosis co screening pair.",
+    "Skipping screening misses drivers of poor outcome.",
+    "Anaemia assessment is part of general care, not the programme pair here."
+   ],
+   "kp": "Screen for diabetes and HIV in tuberculosis.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "comorbidity"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Screen for diabetes and HIV in tuberculosis.",
+    "others": {
+     "B": "Hypertension care matters but is not the named tuberculosis co screening pair.",
+     "C": "Skipping screening misses drivers of poor outcome.",
+     "D": "Anaemia assessment is part of general care, not the programme pair here."
+    },
+    "pearl": "Screen tuberculosis patients for diabetes and HIV.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Diabetes and HIV change tuberculosis presentation, treatment and outcome. Programme care screens for both and links the patient to the respective national pathways (NTEP with NACO and NPCDCS linkage, India).",
+    "lo": "Screen for diabetes and HIV in tuberculosis.",
+    "rev": "Diabetes and HIV change tuberculosis presentation, treatment and outcome. Programme care screens for both and links the patient to the respective national pathways (NTEP with NACO and NPCDCS linkage, India).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap897",
+   "q": "A district reports many tuberculosis patients diagnosed in private clinics who never enter programme care. What closes this gap?",
+   "o": [
+    "Mandatory notification with private sector engagement and Nikshay linkage",
+    "Asking private clinics to keep separate unlinked records",
+    "Restricting diagnosis to public clinics only",
+    "Removing notification to reduce workload"
+   ],
+   "a": 0,
+   "exp": "Private sector engagement with mandatory notification brings privately diagnosed patients into drug supply, adherence support and outcome recording (NTEP, India).",
+   "r": [
+    "Correct: Engage the private sector with notification.",
+    "Unlinked records keep patients invisible to the programme.",
+    "Banning private diagnosis reduces access and delays care.",
+    "Less notification means more loss to follow up."
+   ],
+   "kp": "Engage the private sector with notification.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "private-sector"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Engage the private sector with notification.",
+    "others": {
+     "B": "Unlinked records keep patients invisible to the programme.",
+     "C": "Banning private diagnosis reduces access and delays care.",
+     "D": "Less notification means more loss to follow up."
+    },
+    "pearl": "Notify private diagnoses into the programme.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Private sector engagement with mandatory notification brings privately diagnosed patients into drug supply, adherence support and outcome recording (NTEP, India).",
+    "lo": "Engage the private sector with notification.",
+    "rev": "Private sector engagement with mandatory notification brings privately diagnosed patients into drug supply, adherence support and outcome recording (NTEP, India).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap898",
+   "q": "What is the role of directly observed and digitally supported adherence in current programme care?",
+   "o": [
+    "To support completion and early action on missed doses, using the method that suits the patient",
+    "To punish patients who miss a dose",
+    "To replace drug supply and clinical review",
+    "To observe only the first dose"
+   ],
+   "a": 0,
+   "exp": "Adherence support, including digital methods where suitable, aims at completion and rapid response to missed doses. It complements assured drug supply and clinical review (NTEP, India).",
+   "r": [
+    "Correct: Support adherence across the full tuberculosis course.",
+    "Support is enabling, not punitive.",
+    "Observation never replaces medicines or review.",
+    "The full course needs support, not one dose."
+   ],
+   "kp": "Support adherence across the full tuberculosis course.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "adherence"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Support adherence across the full tuberculosis course.",
+    "others": {
+     "B": "Support is enabling, not punitive.",
+     "C": "Observation never replaces medicines or review.",
+     "D": "The full course needs support, not one dose."
+    },
+    "pearl": "Support the full course to completion.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Adherence support, including digital methods where suitable, aims at completion and rapid response to missed doses. It complements assured drug supply and clinical review (NTEP, India).",
+    "lo": "Support adherence across the full tuberculosis course.",
+    "rev": "Adherence support, including digital methods where suitable, aims at completion and rapid response to missed doses. It complements assured drug supply and clinical review (NTEP, India).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap899",
+   "q": "A patient on tuberculosis treatment develops jaundice. What is the safest programme consistent step?",
+   "o": [
+    "Stop, assess promptly for drug induced liver injury and seek specialist programme advice before continuing",
+    "Continue all drugs unchanged without assessment",
+    "Add herbal liver tonics and continue",
+    "Stop treatment permanently without evaluation"
+   ],
+   "a": 0,
+   "exp": "Jaundice on treatment may signal drug induced liver injury. Prompt assessment and specialist programme advice protect the liver and the cure (NTEP, India).",
+   "r": [
+    "Correct: Assess jaundice on tuberculosis treatment promptly.",
+    "Continuing blindly risks severe liver failure.",
+    "Unproven tonics do not assess liver injury.",
+    "Permanent stop without evaluation loses cure unnecessarily."
+   ],
+   "kp": "Assess jaundice on tuberculosis treatment promptly.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "safety"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Assess jaundice on tuberculosis treatment promptly.",
+    "others": {
+     "B": "Continuing blindly risks severe liver failure.",
+     "C": "Unproven tonics do not assess liver injury.",
+     "D": "Permanent stop without evaluation loses cure unnecessarily."
+    },
+    "pearl": "Assess jaundice promptly, do not push through.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Jaundice on treatment may signal drug induced liver injury. Prompt assessment and specialist programme advice protect the liver and the cure (NTEP, India).",
+    "lo": "Assess jaundice on tuberculosis treatment promptly.",
+    "rev": "Jaundice on treatment may signal drug induced liver injury. Prompt assessment and specialist programme advice protect the liver and the cure (NTEP, India).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap900",
+   "q": "Which outcome best shows a tuberculosis programme is working at population level?",
+   "o": [
+    "High treatment success with low loss to follow up and falling incidence over time",
+    "Many patients started, whatever their outcome",
+    "More chest films taken each month",
+    "Fewer contacts evaluated"
+   ],
+   "a": 0,
+   "exp": "Starting treatment is not success. Cure and completion, retention in care and falling transmission together show programme effect (NTEP, India).",
+   "r": [
+    "Correct: Judge tuberculosis control by success and retention.",
+    "Starts without outcomes hide failure and resistance.",
+    "Film counts measure activity, not control.",
+    "Fewer contact evaluations weaken control."
+   ],
+   "kp": "Judge tuberculosis control by success and retention.",
+   "t": "cm-tuberculosis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "ntep",
+    "outcomes"
+   ],
+   "source": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+   "x": {
+    "key": "Judge tuberculosis control by success and retention.",
+    "others": {
+     "B": "Starts without outcomes hide failure and resistance.",
+     "C": "Film counts measure activity, not control.",
+     "D": "Fewer contact evaluations weaken control."
+    },
+    "pearl": "Count cures and retention, not starts alone.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Starting treatment is not success. Cure and completion, retention in care and falling transmission together show programme effect (NTEP, India).",
+    "lo": "Judge tuberculosis control by success and retention.",
+    "rev": "Starting treatment is not success. Cure and completion, retention in care and falling transmission together show programme effect (NTEP, India).",
+    "next": {
+     "concept": "cm-tuberculosis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "National TB Elimination Programme (NTEP), India; ICMR and NTEP guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "cm-tuberculosis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

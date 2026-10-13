@@ -1,0 +1,757 @@
+{
+ "topic": "ped-dose-calculation",
+ "set": "gap1013e",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap961",
+   "q": "What is the first datum for almost every paediatric dose calculation?",
+   "o": [
+    "An accurate current weight, measured and recorded, with the unit stated",
+    "The child age in years alone in every case",
+    "The mother estimated weight without checking",
+    "The adult dose halved by habit"
+   ],
+   "a": 0,
+   "exp": "Weight based prescribing starts with a measured current weight in kilograms. Age only methods and guesses misdose small children (BNF for Children, UK). Weigh, record and state the unit before calculating.",
+   "r": [
+    "Correct: Weigh the child before calculating.",
+    "Age bands help only where the formulary allows them.",
+    "Estimates fail small and large children alike.",
+    "Halving adult doses ignores weight and maturation."
+   ],
+   "kp": "Weigh the child before calculating.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "weight"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Weigh the child before calculating.",
+    "others": {
+     "B": "Age bands help only where the formulary allows them.",
+     "C": "Estimates fail small and large children alike.",
+     "D": "Halving adult doses ignores weight and maturation."
+    },
+    "pearl": "Weigh first, in kilograms.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Weight based prescribing starts with a measured current weight in kilograms. Age only methods and guesses misdose small children (BNF for Children, UK). Weigh, record and state the unit before calculating.",
+    "lo": "Weigh the child before calculating.",
+    "rev": "Weight based prescribing starts with a measured current weight in kilograms. Age only methods and guesses misdose small children (BNF for Children, UK). Weigh, record and state the unit before calculating.",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap962",
+   "q": "A calculated dose exceeds the adult maximum for that medicine. What does the prescriber do?",
+   "o": [
+    "Cap at the adult maximum and seek formulary or specialist advice, never exceed by weight alone",
+    "Give the full calculated amount regardless",
+    "Double the adult maximum for large children",
+    "Ignore maximums in children"
+   ],
+   "a": 0,
+   "exp": "Weight calculations are capped by the adult maximum unless a specialist protocol states otherwise. Exceeding it needs expert advice (BNF for Children, UK).",
+   "r": [
+    "Correct: Cap paediatric doses at the adult maximum.",
+    "Uncapped weight dosing overdoses large children.",
+    "Doubling the cap compounds the error.",
+    "Maximums protect every age group."
+   ],
+   "kp": "Cap paediatric doses at the adult maximum.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "maximum"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Cap paediatric doses at the adult maximum.",
+    "others": {
+     "B": "Uncapped weight dosing overdoses large children.",
+     "C": "Doubling the cap compounds the error.",
+     "D": "Maximums protect every age group."
+    },
+    "pearl": "Never silently exceed the adult cap.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Weight calculations are capped by the adult maximum unless a specialist protocol states otherwise. Exceeding it needs expert advice (BNF for Children, UK).",
+    "lo": "Cap paediatric doses at the adult maximum.",
+    "rev": "Weight calculations are capped by the adult maximum unless a specialist protocol states otherwise. Exceeding it needs expert advice (BNF for Children, UK).",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap963",
+   "q": "Why must the indication and route be fixed before the dose is looked up?",
+   "o": [
+    "The same medicine has different doses by indication, route and severity, so the formulary entry must match the case",
+    "One dose fits every indication",
+    "Route never changes the dose",
+    "Severity is irrelevant to dosing"
+   ],
+   "a": 0,
+   "exp": "Formulary doses are indication and route specific. Choosing the number before fixing the clinical question invites the classic wrong row error (BNF for Children, UK).",
+   "r": [
+    "Correct: Match the formulary row to the case.",
+    "Indications change dose and duration.",
+    "Route changes bioavailability and dose.",
+    "Severity often sets the regimen."
+   ],
+   "kp": "Match the formulary row to the case.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "indication"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Match the formulary row to the case.",
+    "others": {
+     "B": "Indications change dose and duration.",
+     "C": "Route changes bioavailability and dose.",
+     "D": "Severity often sets the regimen."
+    },
+    "pearl": "Fix indication and route, then look up.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Formulary doses are indication and route specific. Choosing the number before fixing the clinical question invites the classic wrong row error (BNF for Children, UK).",
+    "lo": "Match the formulary row to the case.",
+    "rev": "Formulary doses are indication and route specific. Choosing the number before fixing the clinical question invites the classic wrong row error (BNF for Children, UK).",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap964",
+   "q": "A dose volume works out to a fraction that cannot be measured with the available syringe. What is safe?",
+   "o": [
+    "Recheck the calculation, choose a measurable volume or formulation per formulary and get an independent check",
+    "Round freely to the nearest spoonful",
+    "Ask the parent to estimate at home",
+    "Give the nearest whole vial"
+   ],
+   "a": 0,
+   "exp": "Unmeasurable doses signal a wrong calculation or wrong formulation. Recheck, select a measurable preparation and verify independently (BNF for Children, UK). Household spoons never measure medicines.",
+   "r": [
+    "Correct: Ensure doses are measurable.",
+    "Spoon rounding misdoses potent medicines.",
+    "Home estimation transfers risk to parents.",
+    "Whole vials ignore the child weight entirely."
+   ],
+   "kp": "Ensure doses are measurable.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "volume"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Ensure doses are measurable.",
+    "others": {
+     "B": "Spoon rounding misdoses potent medicines.",
+     "C": "Home estimation transfers risk to parents.",
+     "D": "Whole vials ignore the child weight entirely."
+    },
+    "pearl": "Make the dose measurable, then verify.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Unmeasurable doses signal a wrong calculation or wrong formulation. Recheck, select a measurable preparation and verify independently (BNF for Children, UK). Household spoons never measure medicines.",
+    "lo": "Ensure doses are measurable.",
+    "rev": "Unmeasurable doses signal a wrong calculation or wrong formulation. Recheck, select a measurable preparation and verify independently (BNF for Children, UK). Household spoons never measure medicines.",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap965",
+   "q": "Neonates need extra caution beyond weight. Why?",
+   "o": [
+    "Immature liver and kidney clearance and different body water change drug handling, so neonatal references and specialist advice govern",
+    "Neonates are small adults for dosing",
+    "Weight alone fully predicts neonatal clearance",
+    "No monitoring is needed after the first dose"
+   ],
+   "a": 0,
+   "exp": "Organ maturation transforms clearance in the first weeks of life. Neonatal dosing uses dedicated references and monitoring, not scaled adult rules (BNF for Children, UK).",
+   "r": [
+    "Correct: Use neonatal references for neonates.",
+    "Small adult logic overdoses neonates.",
+    "Weight misses maturation entirely.",
+    "Early doses need close observation."
+   ],
+   "kp": "Use neonatal references for neonates.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "neonate"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Use neonatal references for neonates.",
+    "others": {
+     "B": "Small adult logic overdoses neonates.",
+     "C": "Weight misses maturation entirely.",
+     "D": "Early doses need close observation."
+    },
+    "pearl": "Neonates are not small adults.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Organ maturation transforms clearance in the first weeks of life. Neonatal dosing uses dedicated references and monitoring, not scaled adult rules (BNF for Children, UK).",
+    "lo": "Use neonatal references for neonates.",
+    "rev": "Organ maturation transforms clearance in the first weeks of life. Neonatal dosing uses dedicated references and monitoring, not scaled adult rules (BNF for Children, UK).",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap966",
+   "q": "A prescription shows a trailing zero after a decimal point and no leading zero before it. What is the risk?",
+   "o": [
+    "Tenfold dosing error from misreading, so write with a leading zero and never a trailing zero",
+    "It makes the dose stronger by chemistry",
+    "It only affects handwriting beauty",
+    "Decimal points are banned in all prescribing"
+   ],
+   "a": 0,
+   "exp": "Decimal misreading is a classic tenfold killer. Leading zeros clarify, trailing zeros obscure, and independent calculation checks catch the rest (ISMP; BNF for Children, UK). No specific medicine dose is needed to learn this rule.",
+   "r": [
+    "Correct: Write decimal doses safely.",
+    "Chemistry does not change with notation.",
+    "Legibility is a safety property.",
+    "Decimals are allowed when written safely."
+   ],
+   "kp": "Write decimal doses safely.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "decimals"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Write decimal doses safely.",
+    "others": {
+     "B": "Chemistry does not change with notation.",
+     "C": "Legibility is a safety property.",
+     "D": "Decimals are allowed when written safely."
+    },
+    "pearl": "Leading zero yes, trailing zero no.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Decimal misreading is a classic tenfold killer. Leading zeros clarify, trailing zeros obscure, and independent calculation checks catch the rest (ISMP; BNF for Children, UK). No specific medicine dose is needed to learn this rule.",
+    "lo": "Write decimal doses safely.",
+    "rev": "Decimal misreading is a classic tenfold killer. Leading zeros clarify, trailing zeros obscure, and independent calculation checks catch the rest (ISMP; BNF for Children, UK). No specific medicine dose is needed to learn this rule.",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap967",
+   "q": "Before discharge, parents must give a liquid medicine at home. What completes safe prescribing?",
+   "o": [
+    "A labelled oral syringe, demonstration, written dose in millilitres and teach back by the parent",
+    "Telling them to use a kitchen teaspoon",
+    "Only verbal instructions without demonstration",
+    "Writing the dose in teaspoonfuls"
+   ],
+   "a": 0,
+   "exp": "Teach back with the actual syringe in millilitres prevents home misdosing. Teaspoons vary and confuse (BNF for Children, UK).",
+   "r": [
+    "Correct: Teach home liquid dosing safely.",
+    "Kitchen spoons vary by millilitres that matter.",
+    "Words without demonstration leave gaps.",
+    "Teaspoon units invite conversion error."
+   ],
+   "kp": "Teach home liquid dosing safely.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "home"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Teach home liquid dosing safely.",
+    "others": {
+     "B": "Kitchen spoons vary by millilitres that matter.",
+     "C": "Words without demonstration leave gaps.",
+     "D": "Teaspoon units invite conversion error."
+    },
+    "pearl": "Syringe, millilitres, teach back.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Teach back with the actual syringe in millilitres prevents home misdosing. Teaspoons vary and confuse (BNF for Children, UK).",
+    "lo": "Teach home liquid dosing safely.",
+    "rev": "Teach back with the actual syringe in millilitres prevents home misdosing. Teaspoons vary and confuse (BNF for Children, UK).",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap968",
+   "q": "An obese child needs a weight based medicine whose distribution is mainly in lean tissue. What should the prescriber do?",
+   "o": [
+    "Check whether the formulary specifies actual, ideal or adjusted weight for that medicine and seek advice if unclear",
+    "Always use actual weight for every medicine",
+    "Always use the age based dose",
+    "Refuse to treat obesity related illness"
+   ],
+   "a": 0,
+   "exp": "The right weight scalar is medicine specific. Formulary guidance decides, and guessing harms in both directions (BNF for Children, UK).",
+   "r": [
+    "Correct: Choose the correct weight scalar.",
+    "Actual weight overdoses lean distributed drugs.",
+    "Age bands ignore the obesity problem.",
+    "Refusal denies needed care."
+   ],
+   "kp": "Choose the correct weight scalar.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "obesity"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Choose the correct weight scalar.",
+    "others": {
+     "B": "Actual weight overdoses lean distributed drugs.",
+     "C": "Age bands ignore the obesity problem.",
+     "D": "Refusal denies needed care."
+    },
+    "pearl": "Use the weight the formulary names.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "The right weight scalar is medicine specific. Formulary guidance decides, and guessing harms in both directions (BNF for Children, UK).",
+    "lo": "Choose the correct weight scalar.",
+    "rev": "The right weight scalar is medicine specific. Formulary guidance decides, and guessing harms in both directions (BNF for Children, UK).",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap969",
+   "q": "Two staff calculate different doses for the same child. What happens next?",
+   "o": [
+    "Both recalculate from weight and formulary together and resolve the difference before anything is prepared",
+    "Give the larger dose to be safe",
+    "Give the smaller dose to be safe",
+    "Average the two numbers"
+   ],
+   "a": 0,
+   "exp": "Discordant calculations are a free error trap. Joint recalculation from source data resolves it before preparation (ISMP; BNF for Children, UK).",
+   "r": [
+    "Correct: Resolve discordant calculations jointly.",
+    "Larger is not safer with potent medicines.",
+    "Smaller may fail treatment and still harm.",
+    "Averaging invents a third wrong dose."
+   ],
+   "kp": "Resolve discordant calculations jointly.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "check"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Resolve discordant calculations jointly.",
+    "others": {
+     "B": "Larger is not safer with potent medicines.",
+     "C": "Smaller may fail treatment and still harm.",
+     "D": "Averaging invents a third wrong dose."
+    },
+    "pearl": "Resolve the difference at the source.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Discordant calculations are a free error trap. Joint recalculation from source data resolves it before preparation (ISMP; BNF for Children, UK).",
+    "lo": "Resolve discordant calculations jointly.",
+    "rev": "Discordant calculations are a free error trap. Joint recalculation from source data resolves it before preparation (ISMP; BNF for Children, UK).",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap970",
+   "q": "Why is the allergy and prior reaction history part of dose safety, not a separate chore?",
+   "o": [
+    "A correct dose of the wrong medicine still harms, so allergy, interactions and organ function are checked with the calculation",
+    "Allergies never affect children",
+    "History matters only for the first prescription ever",
+    "Organ function never changes paediatric doses"
+   ],
+   "a": 0,
+   "exp": "Dose safety bundles the right patient, medicine, weight, indication, allergy, interaction and organ checks into one act (BNF for Children, UK).",
+   "r": [
+    "Correct: Bundle allergy and organ checks.",
+    "Children suffer drug allergy like adults.",
+    "Every prescription rechecks the history.",
+    "Kidney and liver function set many doses."
+   ],
+   "kp": "Bundle allergy and organ checks.",
+   "t": "ped-dose-calculation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "paed-dose",
+    "holistic"
+   ],
+   "source": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+   "x": {
+    "key": "Bundle allergy and organ checks.",
+    "others": {
+     "B": "Children suffer drug allergy like adults.",
+     "C": "Every prescription rechecks the history.",
+     "D": "Kidney and liver function set many doses."
+    },
+    "pearl": "Right dose needs the whole check.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Dose safety bundles the right patient, medicine, weight, indication, allergy, interaction and organ checks into one act (BNF for Children, UK).",
+    "lo": "Bundle allergy and organ checks.",
+    "rev": "Dose safety bundles the right patient, medicine, weight, indication, allergy, interaction and organ checks into one act (BNF for Children, UK).",
+    "next": {
+     "concept": "ped-dose-calculation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF for Children (UK) and WHO paediatric prescribing principles; local formulary governs every dose",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "ped-dose-calculation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

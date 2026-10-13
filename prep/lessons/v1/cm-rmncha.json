@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "cm-rmncha",
+ "subject": "community-medicine",
+ "title": "RMNCH plus A: one continuum from adolescence to childhood",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **continuum** links what registers often separate. Adolescent health flows into reproductive choice, safe pregnancy, skilled delivery, newborn survival and child development. A break anywhere, anaemic adolescence, missed antenatal risk, unattended postnatal days, faltering growth, taxes the next stage. Teams therefore track the same woman and child across time, not as isolated visits.",
+   "say": "Link adolescence, pregnancy, delivery, newborn and child care as one tracked continuum. Breaks anywhere tax the next stage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Adolescent"
+     },
+     {
+      "id": "b",
+      "label": "Pregnancy and birth"
+     },
+     {
+      "id": "c",
+      "label": "Newborn and child"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adolescents** are the added strength of the strategy. Anaemia screening and treatment, nutrition, menstrual health, education support and delay of early pregnancy prevent tomorrows low birth weight and maternal danger. Iron regimens follow the current programme chart. Services respect privacy, because adolescents who fear exposure simply do not return for care that protects two generations.",
+   "say": "Screen and treat adolescent anaemia, support nutrition and delay early pregnancy. Private, respectful services keep adolescents returning.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adolescent need",
+     "Continuum gain"
+    ],
+    "rows": [
+     [
+      "Anaemia treated",
+      "Safer pregnancy"
+     ],
+     [
+      "Pregnancy delayed",
+      "Healthier newborn"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Birth and the first days** carry the steepest risk. Skilled delivery, immediate warmth, feeding support and infection watch protect the newborn, while postnatal contacts guard the mother against bleeding and infection. Small or poorly feeding babies are assessed the same day. Families leave knowing danger signs for mother and baby and exactly where to go at night.",
+   "say": "Guard birth and the first days. Assess small or poorly feeding babies today and teach danger signs before discharge.",
+   "vis": null
+  },
+  {
+   "tx": "**Childhood** converts survival into development. Immunisation, feeding and growth surveillance, developmental screening and prompt community care of diarrhoea and pneumonia work together. Home visits find illness early and complete referrals instead of merely advising them. Growth faltering caught on a chart is malnutrition prevented, not malnutrition recorded after harm is done.",
+   "say": "Link vaccines, feeding, growth and early illness care. Home visits find illness early and complete the referral.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Well child",
+     "points": [
+      "Vaccinate and monitor",
+      "Feeding counsel"
+     ]
+    },
+    "right": {
+     "title": "Sick child",
+     "points": [
+      "Assess today",
+      "Complete referral"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Choice and records** hold the chain together. Postpartum family planning offers voluntary spacing before fertility returns unprotected, in methods families choose freely. Longitudinal records reveal missed vaccines, untreated anaemia and missed visits while action still helps. Punishing families for gaps breaks trust; removing the barrier restores the continuum for the next visit.",
+   "say": "Offer voluntary postpartum spacing and track pairs over time. Remove barriers instead of punishing missed visits.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap941",
+  "mk-gap942",
+  "mk-gap945"
+ ],
+ "src": [],
+ "refs": [
+  "RMNCH+A strategy, Ministry of Health and Family Welfare, India (National Health Mission)"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}

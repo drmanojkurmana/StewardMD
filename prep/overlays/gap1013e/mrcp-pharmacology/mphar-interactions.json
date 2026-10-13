@@ -1,0 +1,757 @@
+{
+ "topic": "mphar-interactions",
+ "set": "gap1013e",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap981",
+   "q": "A strong enzyme inducer is added to a stable regimen. Weeks later the original medicine fails. Why?",
+   "o": [
+    "Induction increases clearance over days to weeks, lowering exposure until doses or agents are reassessed",
+    "Induction acts within minutes",
+    "Failure proves non adherence in every case",
+    "Enzymes never change after the first dose"
+   ],
+   "a": 0,
+   "exp": "Induction needs new enzyme synthesis, so failure creeps in over weeks. Review exposure, adherence and interaction together before judging the patient (BNF, UK).",
+   "r": [
+    "Correct: Anticipate induction interactions.",
+    "Minutes describes inhibition onset better.",
+    "Adherence is checked, not assumed.",
+    "Enzyme mass changes with inducer exposure."
+   ],
+   "kp": "Anticipate induction interactions.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "induction"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Anticipate induction interactions.",
+    "others": {
+     "B": "Minutes describes inhibition onset better.",
+     "C": "Adherence is checked, not assumed.",
+     "D": "Enzyme mass changes with inducer exposure."
+    },
+    "pearl": "Induction fails medicines slowly.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Induction needs new enzyme synthesis, so failure creeps in over weeks. Review exposure, adherence and interaction together before judging the patient (BNF, UK).",
+    "lo": "Anticipate induction interactions.",
+    "rev": "Induction needs new enzyme synthesis, so failure creeps in over weeks. Review exposure, adherence and interaction together before judging the patient (BNF, UK).",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap982",
+   "q": "An enzyme inhibitor is stopped abruptly. What happens to the victim medicine level?",
+   "o": [
+    "It falls as inhibition lifts, risking loss of effect unless doses are readjusted",
+    "It rises higher forever",
+    "Nothing ever changes on stopping",
+    "Levels change only with food"
+   ],
+   "a": 0,
+   "exp": "Stopping the perpetrator reverses the interaction. Victim doses set during inhibition become excessive or insufficient as clearance normalises (BNF, UK). Planned readjustment prevents relapse.",
+   "r": [
+    "Correct: Plan for perpetrator withdrawal.",
+    "Falling clearance reversal lowers, not raises, levels.",
+    "Changes on stopping are clinically important.",
+    "Food is one of many interaction routes."
+   ],
+   "kp": "Plan for perpetrator withdrawal.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "withdrawal"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Plan for perpetrator withdrawal.",
+    "others": {
+     "B": "Falling clearance reversal lowers, not raises, levels.",
+     "C": "Changes on stopping are clinically important.",
+     "D": "Food is one of many interaction routes."
+    },
+    "pearl": "Stopping interacts too.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Stopping the perpetrator reverses the interaction. Victim doses set during inhibition become excessive or insufficient as clearance normalises (BNF, UK). Planned readjustment prevents relapse.",
+    "lo": "Plan for perpetrator withdrawal.",
+    "rev": "Stopping the perpetrator reverses the interaction. Victim doses set during inhibition become excessive or insufficient as clearance normalises (BNF, UK). Planned readjustment prevents relapse.",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap983",
+   "q": "Why does grapefruit juice matter for some oral medicines?",
+   "o": [
+    "Intestinal enzyme inhibition raises absorption and blood levels of susceptible medicines",
+    "It dilutes every medicine harmlessly",
+    "It affects only intravenous drugs",
+    "It matters only because of acidity"
+   ],
+   "a": 0,
+   "exp": "Grapefruit blocks gut wall metabolism for susceptible oral substrates, raising exposure for a day or more after intake (FDA, US, labelled; BNF, UK).",
+   "r": [
+    "Correct: Respect food enzyme interactions.",
+    "Raised levels can poison, not dilute.",
+    "Intravenous drugs bypass the gut wall step.",
+    "Acidity is not the main mechanism here."
+   ],
+   "kp": "Respect food enzyme interactions.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "food"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Respect food enzyme interactions.",
+    "others": {
+     "B": "Raised levels can poison, not dilute.",
+     "C": "Intravenous drugs bypass the gut wall step.",
+     "D": "Acidity is not the main mechanism here."
+    },
+    "pearl": "Grapefruit raises susceptible levels.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Grapefruit blocks gut wall metabolism for susceptible oral substrates, raising exposure for a day or more after intake (FDA, US, labelled; BNF, UK).",
+    "lo": "Respect food enzyme interactions.",
+    "rev": "Grapefruit blocks gut wall metabolism for susceptible oral substrates, raising exposure for a day or more after intake (FDA, US, labelled; BNF, UK).",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap984",
+   "q": "Two medicines that prolong cardiac repolarisation are combined. What is the added danger?",
+   "o": [
+    "Additive QT prolongation with torsades risk, needing ECG, electrolytes and alternative review",
+    "No danger if each alone is licensed",
+    "Only skin rash is expected",
+    "The combination shortens repolarisation"
+   ],
+   "a": 0,
+   "exp": "Pharmacodynamic addition can tip repolarisation into arrhythmia. Correct potassium and magnesium, review the ECG and substitute where possible (BNF, UK). No doses are taught here.",
+   "r": [
+    "Correct: Avoid additive QT combinations.",
+    "Licensed alone does not mean safe combined.",
+    "Rash misses the cardiac mechanism.",
+    "Addition prolongs, not shortens, repolarisation."
+   ],
+   "kp": "Avoid additive QT combinations.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "qt"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Avoid additive QT combinations.",
+    "others": {
+     "B": "Licensed alone does not mean safe combined.",
+     "C": "Rash misses the cardiac mechanism.",
+     "D": "Addition prolongs, not shortens, repolarisation."
+    },
+    "pearl": "QT effects add together.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Pharmacodynamic addition can tip repolarisation into arrhythmia. Correct potassium and magnesium, review the ECG and substitute where possible (BNF, UK). No doses are taught here.",
+    "lo": "Avoid additive QT combinations.",
+    "rev": "Pharmacodynamic addition can tip repolarisation into arrhythmia. Correct potassium and magnesium, review the ECG and substitute where possible (BNF, UK). No doses are taught here.",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap985",
+   "q": "A patient on a monoamine oxidase inhibitor eats aged cheese and develops a hypertensive crisis. This is which interaction type?",
+   "o": [
+    "Pharmacodynamic and metabolic food interaction raising pressor amine effect",
+    "A purely allergic reaction",
+    "An interaction that needs months to develop",
+    "A sign the inhibitor has stopped working"
+   ],
+   "a": 0,
+   "exp": "Tyramine escapes breakdown when monoamine oxidase is inhibited and releases pressor amines. Dietary counselling prevents the crisis (BNF, UK).",
+   "r": [
+    "Correct: Counsel on tyramine interactions.",
+    "Allergy does not explain pressor crisis.",
+    "Food exposure acts on the same day.",
+    "Crisis proves potent inhibition, not failure."
+   ],
+   "kp": "Counsel on tyramine interactions.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "maoi"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Counsel on tyramine interactions.",
+    "others": {
+     "B": "Allergy does not explain pressor crisis.",
+     "C": "Food exposure acts on the same day.",
+     "D": "Crisis proves potent inhibition, not failure."
+    },
+    "pearl": "Tyramine plus MAO inhibition crises.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Tyramine escapes breakdown when monoamine oxidase is inhibited and releases pressor amines. Dietary counselling prevents the crisis (BNF, UK).",
+    "lo": "Counsel on tyramine interactions.",
+    "rev": "Tyramine escapes breakdown when monoamine oxidase is inhibited and releases pressor amines. Dietary counselling prevents the crisis (BNF, UK).",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap986",
+   "q": "Protein binding displacement is often feared. When does it usually matter most?",
+   "o": [
+    "With highly bound, narrow index medicines and low albumin, as a transient effect before clearance compensates",
+    "For every medicine equally",
+    "Never in any patient",
+    "Only in healthy young adults"
+   ],
+   "a": 0,
+   "exp": "Displacement spikes free drug briefly. Sustained harm needs narrow index, high binding and impaired clearance or low albumin together (BNF, UK principles).",
+   "r": [
+    "Correct: Judge protein binding in context.",
+    "Most displacements are clinically minor.",
+    "Selected patients do face real risk.",
+    "Ill, low albumin patients matter most."
+   ],
+   "kp": "Judge protein binding in context.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "binding"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Judge protein binding in context.",
+    "others": {
+     "B": "Most displacements are clinically minor.",
+     "C": "Selected patients do face real risk.",
+     "D": "Ill, low albumin patients matter most."
+    },
+    "pearl": "Displacement matters in narrow settings.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Displacement spikes free drug briefly. Sustained harm needs narrow index, high binding and impaired clearance or low albumin together (BNF, UK principles).",
+    "lo": "Judge protein binding in context.",
+    "rev": "Displacement spikes free drug briefly. Sustained harm needs narrow index, high binding and impaired clearance or low albumin together (BNF, UK principles).",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap987",
+   "q": "A herbal product is revealed after a transplant medicine level collapses. What is the lesson?",
+   "o": [
+    "Herbals such as enzyme inducing products are medicines for interaction purposes and belong in every history",
+    "Herbals never interact",
+    "Transplant levels never need monitoring",
+    "Stopping the transplant medicine is the fix"
+   ],
+   "a": 0,
+   "exp": "St Johns wort type induction can reject a graft by clearing immunosuppression. A complete history includes herbals and supplements (BNF, UK; FDA, US, labelled).",
+   "r": [
+    "Correct: Ask about herbals always.",
+    "Potent herbals interact like drugs.",
+    "Levels guide survival of the graft.",
+    "Stopping sacrifices the transplant."
+   ],
+   "kp": "Ask about herbals always.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "herbal"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Ask about herbals always.",
+    "others": {
+     "B": "Potent herbals interact like drugs.",
+     "C": "Levels guide survival of the graft.",
+     "D": "Stopping sacrifices the transplant."
+    },
+    "pearl": "Herbals count in the drug history.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "St Johns wort type induction can reject a graft by clearing immunosuppression. A complete history includes herbals and supplements (BNF, UK; FDA, US, labelled).",
+    "lo": "Ask about herbals always.",
+    "rev": "St Johns wort type induction can reject a graft by clearing immunosuppression. A complete history includes herbals and supplements (BNF, UK; FDA, US, labelled).",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap988",
+   "q": "Renal impairment plus a potassium raising combination produces danger by which route?",
+   "o": [
+    "Reduced excretion adds to pharmacodynamic potassium retention, so monitoring and review are mandatory",
+    "Kidney function never affects interactions",
+    "Potassium rises only from diet",
+    "Combinations are safe if each dose is small"
+   ],
+   "a": 0,
+   "exp": "Organ impairment amplifies interactions. Potassium sparing combinations with kidney failure need levels, ECG awareness and prompt review (BNF, UK; NICE, UK). Threshold actions follow local charts.",
+   "r": [
+    "Correct: Monitor potassium combinations closely.",
+    "Excretion failure is a core amplifier.",
+    "Diet adds, but retention drives risk.",
+    "Small doses still add in failure."
+   ],
+   "kp": "Monitor potassium combinations closely.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "renal"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Monitor potassium combinations closely.",
+    "others": {
+     "B": "Excretion failure is a core amplifier.",
+     "C": "Diet adds, but retention drives risk.",
+     "D": "Small doses still add in failure."
+    },
+    "pearl": "Failing kidneys amplify interactions.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Organ impairment amplifies interactions. Potassium sparing combinations with kidney failure need levels, ECG awareness and prompt review (BNF, UK; NICE, UK). Threshold actions follow local charts.",
+    "lo": "Monitor potassium combinations closely.",
+    "rev": "Organ impairment amplifies interactions. Potassium sparing combinations with kidney failure need levels, ECG awareness and prompt review (BNF, UK; NICE, UK). Threshold actions follow local charts.",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap989",
+   "q": "What is the safest response when an interaction checker flags a severe pair?",
+   "o": [
+    "Assess the patient, check timing and levels, seek pharmacy or specialist advice and choose a monitored alternative",
+    "Ignore all flags as noise",
+    "Stop every medicine at once",
+    "Double the victim dose blindly"
+   ],
+   "a": 0,
+   "exp": "Flags start expert review, not reflex acts. Patient factors, timing and monitoring decide between substitution, spacing, dose change or watchful care (BNF, UK).",
+   "r": [
+    "Correct: Manage severe interaction flags expertly.",
+    "Severe flags ignored cause preventable harm.",
+    "Stopping everything creates new harm.",
+    "Blind doubling can poison the patient."
+   ],
+   "kp": "Manage severe interaction flags expertly.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "alerts"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Manage severe interaction flags expertly.",
+    "others": {
+     "B": "Severe flags ignored cause preventable harm.",
+     "C": "Stopping everything creates new harm.",
+     "D": "Blind doubling can poison the patient."
+    },
+    "pearl": "Review, do not reflex stop.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Flags start expert review, not reflex acts. Patient factors, timing and monitoring decide between substitution, spacing, dose change or watchful care (BNF, UK).",
+    "lo": "Manage severe interaction flags expertly.",
+    "rev": "Flags start expert review, not reflex acts. Patient factors, timing and monitoring decide between substitution, spacing, dose change or watchful care (BNF, UK).",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap990",
+   "q": "Absorption interaction by chelation is best prevented how?",
+   "o": [
+    "Separating administration times as the formulary directs for the specific pair",
+    "Giving both together with milk in all cases",
+    "Crushing every tablet together",
+    "Ignoring timing because dose is high"
+   ],
+   "a": 0,
+   "exp": "Divalent and trivalent ions bind susceptible medicines in the gut. Timed separation per formulary restores absorption (BNF, UK). Intervals are pair specific and read from the current chart.",
+   "r": [
+    "Correct: Separate absorption interactions.",
+    "Milk adds chelating ions and worsens binding.",
+    "Crushing together maximises contact.",
+    "High doses do not reliably overcome binding."
+   ],
+   "kp": "Separate absorption interactions.",
+   "t": "mphar-interactions",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013e",
+   "tg": [
+    "interactions",
+    "absorption"
+   ],
+   "source": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+   "x": {
+    "key": "Separate absorption interactions.",
+    "others": {
+     "B": "Milk adds chelating ions and worsens binding.",
+     "C": "Crushing together maximises contact.",
+     "D": "High doses do not reliably overcome binding."
+    },
+    "pearl": "Separate chelating pairs in time.",
+    "clues": "The stem gives the discriminating clue for this step.",
+    "ddx": "Each distractor tests a nearby but wrong step.",
+    "mech": "Divalent and trivalent ions bind susceptible medicines in the gut. Timed separation per formulary restores absorption (BNF, UK). Intervals are pair specific and read from the current chart.",
+    "lo": "Separate absorption interactions.",
+    "rev": "Divalent and trivalent ions bind susceptible medicines in the gut. Timed separation per formulary restores absorption (BNF, UK). Intervals are pair specific and read from the current chart.",
+    "next": {
+     "concept": "mphar-interactions",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BNF (UK) interaction principles; FDA and CDC labelled where US guidance is cited",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mphar-interactions"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013e"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand authored; no API spend; numbers checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

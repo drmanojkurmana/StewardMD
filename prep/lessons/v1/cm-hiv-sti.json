@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "cm-hiv-sti",
+ "subject": "community-medicine",
+ "title": "HIV and NACO: test with consent, treat all, retain for life",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Testing** begins with consent and counselling in a private space. A positive result is the start of care, not its end: baseline assessment, partner services, prevention advice and immediate linkage decide whether testing changes a life. Records stay confidential. Stigma in clinics is a safety hazard that trained, respectful teams remove by design.",
+   "say": "Test with consent and counselling in private. Link every positive result at once to assessment, partner services and treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Consent and test"
+     },
+     {
+      "id": "b",
+      "label": "Counsel result"
+     },
+     {
+      "id": "c",
+      "label": "Link to care"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The programme **treats all** people living with HIV, without waiting for symptoms or advanced disease. Early treatment preserves immunity, prevents illness and blocks transmission when suppression is sustained. Adherence counselling, refill systems and viral load monitoring travel with the prescription. Missed refills trigger respectful tracing and barrier removal, never abandonment or blame.",
+   "say": "Treat all, early and with adherence support. Monitor viral load, trace missed refills respectfully and remove barriers to retention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Care element",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Treatment for all",
+      "Health and prevention"
+     ],
+     [
+      "Viral load",
+      "Confirm suppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vertical transmission** is preventable. A positive pregnant woman links at once to treatment, delivery planning and infant prophylaxis with early infant diagnosis. Feeding is counselled on evidence, partners are offered testing, and mother and baby stay in follow up together. Delay at any link, booking, delivery or infancy, reopens a preventable infection.",
+   "say": "Link positive pregnant women at once. Plan delivery, infant prophylaxis and early diagnosis, and keep mother and baby in follow up.",
+   "vis": null
+  },
+  {
+   "tx": "**Exposure** has a clock. Needle stick injuries are washed, reported and risk assessed at once, with prophylaxis started promptly where indicated and follow up testing completed. Key populations receive combined prevention without judgement: condoms, regular testing, harm reduction where relevant and rapid treatment linkage. Services that humiliate people drive the epidemic underground.",
+   "say": "Wash, report and assess exposures at once and prophylax promptly where indicated. Offer combined prevention without judgement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Health worker exposure",
+     "points": [
+      "Wash and report",
+      "Assess and prophylax"
+     ]
+    },
+    "right": {
+     "title": "Community prevention",
+     "points": [
+      "Combined package",
+      "Regular follow up"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Suppression** is the shared goal. Viral load confirms it, adherence support restores it and failure assessment protects future options. Herbal and private unregulated combinations endanger it and belong in every history. When clinics measure retention and suppression honestly, they find and fix the broken link before resistance and illness do it for them.",
+   "say": "Aim for sustained suppression. Monitor load, support adherence, record herbals and fix retention gaps before failure widens.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap901",
+  "mk-gap902",
+  "mk-gap905"
+ ],
+ "src": [],
+ "refs": [
+  "National AIDS Control Organisation (NACO), India",
+  "CDC HIV testing and treatment guidance (US, labelled)"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}
