@@ -1,0 +1,175 @@
+{
+ "module": "bio-protein-folding",
+ "subject": "biochemistry",
+ "title": "Protein folding, molecular chaperones, amyloidosis and prion conformational disorders",
+ "minutes": 6,
+ "refs": [
+  "Lehninger Principles of Biochemistry 8th ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Polypeptide folding into native tertiary conformation is guided by the **thermodynamic** minimization of free energy. Hydrophobic amino acid side chains collapse into the protein interior away from water, while hydrophilic residues orient towards the aqueous surface. Molecular chaperones, including heat shock protein 70 and heat shock protein 60 chaperonins, bind exposed hydrophobic patches to prevent aberrant aggregation during synthesis.",
+   "say": "Protein folding minimizes Gibbs free energy by burying hydrophobic residues inside and exposing hydrophilic groups to water. Chaperones such as heat shock protein 70 and heat shock protein 60 bind exposed hydrophobic patches to prevent abnormal aggregation during translation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Folding factor",
+     "Molecular mechanism",
+     "Biological role"
+    ],
+    "rows": [
+     [
+      "Hydrophobic collapse",
+      "Buries nonpolar residues internally",
+      "Primary thermodynamic driving force"
+     ],
+     [
+      "Hsp70 family",
+      "ATP-dependent peptide clamp",
+      "Prevents nascent chain misfolding"
+     ],
+     [
+      "Hsp60 chaperonins",
+      "Barrel-shaped isolation chamber",
+      "Permits folding undisturbed by crowding"
+     ],
+     [
+      "Protein disulfide isomerase",
+      "Thiol-disulfide exchange",
+      "Corrects non-native disulfide bonds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathological **amyloidosis** develops when soluble globular proteins undergo conformational transition into insoluble cross-beta sheet fibrillar aggregates. These amyloid fibrils deposit in extracellular tissues, resisting normal proteolytic degradation and producing organ enlargement and functional failure. Under polarized light microscopy, Congo red-stained amyloid deposits exhibit diagnostic apple-green birefringence.",
+   "say": "Amyloidosis occurs when soluble proteins transition into insoluble cross-beta sheet fibrillar polymers. These fibrils resist proteolysis, depositing in extracellular spaces and causing organ failure. Under polarized light, Congo red-stained amyloid reveals diagnostic apple-green birefringence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Systemic amyloid types",
+     "points": [
+      "AL amyloid: monoclonal immunoglobulin light chains",
+      "AA amyloid: serum amyloid A in chronic inflammation",
+      "ATTR amyloid: transthyretin in familial or senile cardiac",
+      "Beta-2 microglobulin: long-term hemodialysis patients"
+     ]
+    },
+    "right": {
+     "title": "Organ manifestations",
+     "points": [
+      "Kidneys: nephrotic syndrome and proteinuria",
+      "Heart: restrictive cardiomyopathy and low voltage ECG",
+      "Tongue: macroglossia pathognomonic for AL",
+      "Nerves: peripheral sensory and autonomic neuropathy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prion diseases represent transmissible **conformational** neurodegenerations mediated by infectious proteinaceous particles lacking nucleic acids. The normal cellular prion protein, rich in alpha-helices, undergoes spontaneous or template-driven refolding into the disease-causing scrapie prion isoform rich in beta-sheets. The abnormal conformer catalyses further conversion of normal proteins, causing rapid neurodegeneration and classic spongiform encephalopathy.",
+   "say": "Prion disorders are transmissible neurodegenerations caused by misfolded protein conformers. The normal alpha-helical prion protein refolds into the beta-sheet rich scrapie form. This abnormal isoform templates further refolding, causing rapid neuronal death and spongiform change.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Cellular prion (PrPC)",
+     "Infectious scrapie (PrPSc)"
+    ],
+    "rows": [
+     [
+      "Secondary structure",
+      "Predominantly alpha-helices (42%)",
+      "Predominantly beta-sheets (43%)"
+     ],
+     [
+      "Solubility",
+      "Soluble in non-denaturing detergents",
+      "Insoluble fibrillar aggregates"
+     ],
+     [
+      "Protease sensitivity",
+      "Completely degraded by proteinase K",
+      "Protease-resistant core remains"
+     ],
+     [
+      "Clinical disease",
+      "Normal physiologic neuronal protein",
+      "Creutzfeldt-Jakob, Kuru, fatal insomnia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endoplasmic reticulum quality control eliminates misfolded proteins via **ERAD**, the endoplasmic reticulum-associated degradation pathway. Chaperones detect misfolded glycoproteins, retrotranslocate them across the membrane into the cytosol, and attach polyubiquitin chains. Cytosolic 26S proteasomes then degrade the ubiquitinated substrate. Severe ER stress activates the unfolded protein response, inducing apoptosis if homeostasis cannot be restored.",
+   "say": "Endoplasmic reticulum quality control identifies misfolded polypeptides and routes them through ERAD. Proteins are retrotranslocated to cytosol, polyubiquitinated, and degraded by 26S proteasomes. Unresolved ER stress triggers the unfolded protein response, initiating apoptosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "ERAD quality control pathway",
+    "nodes": [
+     {
+      "id": "mis",
+      "label": "Misfolded luminal protein"
+     },
+     {
+      "id": "rec",
+      "label": "BiP & calreticulin detection"
+     },
+     {
+      "id": "ret",
+      "label": "Retrotranslocon pore exit"
+     },
+     {
+      "id": "ubi",
+      "label": "Cytosolic polyubiquitination"
+     },
+     {
+      "id": "pro",
+      "label": "26S proteasome degradation"
+     }
+    ],
+    "edges": [
+     [
+      "mis",
+      "rec",
+      "Recognized as abnormal"
+     ],
+     [
+      "rec",
+      "ret",
+      "Chaperone handoff"
+     ],
+     [
+      "ret",
+      "ubi",
+      "E3 ubiquitin ligase"
+     ],
+     [
+      "ubi",
+      "pro",
+      "Recycled to amino acids"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "bbfcfb04-4000-8000-bbfc-fb0412345678",
+  "befcffbd-4000-8000-befc-ffbd12345678",
+  "bdfcfe2a-4000-8000-bdfc-fe2a12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

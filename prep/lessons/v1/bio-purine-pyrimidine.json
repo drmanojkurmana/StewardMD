@@ -1,0 +1,193 @@
+{
+ "module": "bio-purine-pyrimidine",
+ "subject": "biochemistry",
+ "title": "Nucleotide metabolism: de novo purine and pyrimidine pathways, salvage enzymes and clinical gout",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Purine nucleotides are synthesized **de novo** upon an activated ribose-5-phosphate scaffold. PRPP synthetase activates ribose-5-phosphate using ATP to form PRPP. The committed rate-limiting step is catalyzed by glutamine-PRPP amidotransferase, which transfers an amino group from glutamine to form 5-phosphoribosylamine. The pathway incorporates glycine, aspartate, glutamine, carbon dioxide, and N10-formyl-THF to generate the parent purine nucleotide inosine monophosphate.",
+   "say": "Purine de novo synthesis builds the purine ring directly onto an activated ribose scaffold. PRPP synthetase activates ribose-5-phosphate using ATP. Glutamine-PRPP amidotransferase catalyzes the committed step. Using amino acids, carbon dioxide, and folate donors, the pathway synthesizes inosine monophosphate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Purine de novo biosynthetic ring assembly",
+    "nodes": [
+     {
+      "id": "r5p",
+      "label": "Ribose-5-phosphate"
+     },
+     {
+      "id": "prp",
+      "label": "PRPP (via PRPP synthetase)"
+     },
+     {
+      "id": "pra",
+      "label": "5-Phosphoribosylamine (amidotransferase)"
+     },
+     {
+      "id": "imp",
+      "label": "Inosine monophosphate (IMP)"
+     },
+     {
+      "id": "amp",
+      "label": "AMP & GMP branch points"
+     }
+    ],
+    "edges": [
+     [
+      "r5p",
+      "prp",
+      "Consumes ATP"
+     ],
+     [
+      "prp",
+      "pra",
+      "Committed step, glutamine donor"
+     ],
+     [
+      "pra",
+      "imp",
+      "Glycine, aspartate, folate donors"
+     ],
+     [
+      "imp",
+      "amp",
+      "Feedback inhibited by AMP and GMP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast to purines, **pyrimidine** rings are synthesized as a free orotate ring before attachment to PRPP. The rate-limiting cytosolic enzyme carbamoyl phosphate synthetase II utilizes glutamine, carbon dioxide, and two ATP molecules to generate carbamoyl phosphate. Aspartate transcarbamoylase then adds aspartate. Following ring closure and oxidation, orotate phosphoribosyltransferase attaches PRPP, and OMP decarboxylase generates UMP. Deficiencies in these bifunctional domains cause orotic aciduria.",
+   "say": "Pyrimidines are assembled as a free ring before attachment to PRPP. Cytosolic carbamoyl phosphate synthetase II utilizes glutamine and ATP to synthesize carbamoyl phosphate. The ring condenses with aspartate to yield orotate, which combines with PRPP to form UMP. Enzyme defects cause orotic aciduria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CPS-I (Urea Cycle)",
+     "points": [
+      "Located in mitochondrial matrix",
+      "Substrate is free ammonium ion",
+      "Obligately activated by N-acetylglutamate",
+      "Participates in ammonia detoxification"
+     ]
+    },
+    "right": {
+     "title": "CPS-II (Pyrimidine Synthesis)",
+     "points": [
+      "Located in soluble cytosol",
+      "Substrate is glutamine amide nitrogen",
+      "Inhibited by UTP, activated by PRPP",
+      "Participates in de novo pyrimidine synthesis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The purine **salvage** pathway recycles preformed dietary and turnover bases, conserving cellular high-energy phosphates. Hypoxanthine-guanine phosphoribosyltransferase (HGPRT) converts hypoxanthine to IMP and guanine to GMP using PRPP. Adenine phosphoribosyltransferase recycles adenine to AMP. Complete genetic deficiency of HGPRT causes X-linked Lesch-Nyhan syndrome, characterized by massive uric acid overproduction, severe dystonia, choreoathetosis, cognitive impairment, and compulsive self-mutilation.",
+   "say": "The purine salvage pathway recycles preformed bases using PRPP. HGPRT salvages hypoxanthine to IMP and guanine to GMP. Complete HGPRT deficiency causes X-linked Lesch-Nyhan syndrome, marked by hyperuricemia, gout, choreoathetosis, developmental delay, and compulsive self-mutilation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme deficiency",
+     "Metabolic disruption",
+     "Clinical syndrome"
+    ],
+    "rows": [
+     [
+      "HGPRT deficiency (complete)",
+      "Inability to salvage guanine/hypoxanthine, PRPP accumulation",
+      "Lesch-Nyhan syndrome: self-mutilation, chorea, gout"
+     ],
+     [
+      "Adenosine deaminase (ADA)",
+      "Accumulation of toxic dATP, arrests ribonucleotide reductase",
+      "Severe combined immunodeficiency (SCID) with T/B lymphopenia"
+     ],
+     [
+      "Purine nucleoside phosphorylase",
+      "Impaired purine turnover, dGTP accumulation",
+      "T-cell immunodeficiency with preserved B-cell function"
+     ],
+     [
+      "Xanthine oxidase deficiency",
+      "Accumulation of hypoxanthine and xanthine",
+      "Hereditary xanthinuria, radiolucent xanthine renal calculi"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Purine catabolism terminates in **uric acid** production catalyzed by molybdenum-containing xanthine oxidase. Uric acid is poorly soluble at physiological pH and body temperature. When serum uric acid exceeds its solubility limit of six-point-eight milligrams per deciliter, monosodium urate crystals precipitate within synovial fluid and periarticular tissues, triggering acute gouty arthritis. Allopurinol and febuxostat inhibit xanthine oxidase, lowering systemic uric acid levels.",
+   "say": "Purine catabolism culminates in uric acid generation by xanthine oxidase. Uric acid has limited solubility. Serum concentrations above six-point-eight milligrams per deciliter cause monosodium urate crystal precipitation in joints, precipitating gout. Allopurinol and febuxostat inhibit xanthine oxidase to prevent attacks.",
+   "vis": {
+    "kind": "flow",
+    "title": "Uric acid generation and gout pharmacology",
+    "nodes": [
+     {
+      "id": "pur",
+      "label": "Hypoxanthine & Guanine"
+     },
+     {
+      "id": "xan",
+      "label": "Xanthine intermediate"
+     },
+     {
+      "id": "uri",
+      "label": "Uric acid end product"
+     },
+     {
+      "id": "cry",
+      "label": "Monosodium urate crystal deposition"
+     },
+     {
+      "id": "inf",
+      "label": "NLRP3 inflammasome neutrophil arthritis"
+     }
+    ],
+    "edges": [
+     [
+      "pur",
+      "xan",
+      "Xanthine oxidase / Guanase"
+     ],
+     [
+      "xan",
+      "uri",
+      "Inhibited by Allopurinol & Febuxostat"
+     ],
+     [
+      "uri",
+      "cry",
+      "Hyperuricemia >6.8 mg/dL"
+     ],
+     [
+      "cry",
+      "inf",
+      "Needle-shaped negative birefringent crystals"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "74662731-4000-8000-7466-273112345678",
+  "71662278-4000-8000-7166-227812345678",
+  "7266240b-4000-8000-7266-240b12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

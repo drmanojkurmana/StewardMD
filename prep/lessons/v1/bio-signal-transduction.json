@@ -1,0 +1,192 @@
+{
+ "module": "bio-signal-transduction",
+ "subject": "biochemistry",
+ "title": "G-protein coupled receptors, second messengers, and receptor tyrosine kinase signaling",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Lehninger Principles of Biochemistry 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Transmembrane signaling translates extracellular endocrine cues into intracellular **responses**. G-protein coupled receptors contain seven membrane-spanning alpha helices coupled to heterotrimeric G-proteins (alpha, beta, gamma). Agonist binding induces GDP-GTP exchange on the G-alpha subunit, triggering dissociation from beta-gamma dimers. G-alpha-s activates adenylyl cyclase to generate cyclic AMP, which stimulates protein kinase A. G-alpha-i inhibits adenylyl cyclase, lowering cyclic AMP levels.",
+   "say": "GPCRs possess seven transmembrane helices coupled to heterotrimeric G-proteins. Agonist binding drives GTP loading onto G-alpha subunits. G-alpha-s activates adenylyl cyclase to generate cAMP and stimulate PKA, whereas G-alpha-i inhibits cAMP production.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "G-alpha subunit",
+     "Primary effector",
+     "Second messenger / downstream kinase"
+    ],
+    "rows": [
+     [
+      "G-alpha-s",
+      "Adenylyl cyclase activation",
+      "Elevates cAMP -> activates Protein Kinase A"
+     ],
+     [
+      "G-alpha-i",
+      "Adenylyl cyclase inhibition",
+      "Decreases cAMP -> inhibits Protein Kinase A"
+     ],
+     [
+      "G-alpha-q",
+      "Phospholipase C-beta activation",
+      "Cleaves PIP2 to IP3 (Ca2+ release) and DAG (PKC)"
+     ],
+     [
+      "G-alpha-12/13",
+      "Rho guanine nucleotide exchange",
+      "Cytoskeletal remodeling and cell motility"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **phospholipase C** pathway mediates hormones signaling via G-alpha-q, such as angiotensin II, vasopressin (V1 receptor), and alpha-1 adrenergic agonists. Active G-alpha-q activates phospholipase C-beta, which hydrolyzes membrane phosphatidylinositol 4,5-bisphosphate into inositol 1,4,5-trisphosphate (IP3) and diacylglycerol (DAG). Soluble IP3 diffuses to endoplasmic reticulum IP3-gated channels, releasing calcium into the cytosol. Elevated calcium and membrane DAG synergistically activate **protein kinase C**.",
+   "say": "The G-alpha-q pathway couples angiotensin II and alpha-1 receptors to phospholipase C, cleaving PIP2 into IP3 and DAG. IP3 triggers endoplasmic reticulum calcium release, while DAG and calcium activate protein kinase C.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "q1",
+      "label": "Hormone binds G-alpha-q receptor"
+     },
+     {
+      "id": "q2",
+      "label": "Phospholipase C-beta activation"
+     },
+     {
+      "id": "q3",
+      "label": "PIP2 cleaved to IP3 + DAG"
+     },
+     {
+      "id": "q4",
+      "label": "IP3 opens ER calcium channels"
+     },
+     {
+      "id": "q5",
+      "label": "Calcium + DAG stimulate Protein Kinase C"
+     }
+    ],
+    "edges": [
+     [
+      "q1",
+      "q2"
+     ],
+     [
+      "q2",
+      "q3"
+     ],
+     [
+      "q3",
+      "q4"
+     ],
+     [
+      "q4",
+      "q5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Receptor **tyrosine kinases** mediate responses to growth factors like insulin, epidermal growth factor, and VEGF. Ligand binding triggers receptor dimerization and autophosphorylation of intracellular tyrosine residues. Phosphotyrosines recruit SH2-domain adaptors like Grb2 and SOS, which stimulate membrane-bound Ras to exchange GDP for GTP. Active Ras initiates the sequential Raf-MEK-ERK kinase cascade, driving nuclear transcription factors that promote cell cycle entry and proliferation.",
+   "say": "Receptor tyrosine kinases dimerize and autophosphorylate on tyrosine residues upon growth factor binding. Phosphotyrosines recruit Grb2-SOS to activate Ras-GTP, launching the Raf-MEK-ERK mitogen-activated protein kinase cascade to drive cell proliferation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway component",
+     "Molecular function",
+     "Oncogenic mutation / targeted drug"
+    ],
+    "rows": [
+     [
+      "EGFR / HER2",
+      "Receptor tyrosine kinase",
+      "Trastuzumab (HER2 mAb), Osimertinib (EGFR TKI)"
+     ],
+     [
+      "Ras (K-Ras, N-Ras)",
+      "Small GTPase molecular switch",
+      "G12D/C mutations lock in GTP state; Sotorasib"
+     ],
+     [
+      "B-Raf",
+      "Serine/threonine kinase",
+      "V600E mutation in melanoma; Vemurafenib"
+     ],
+     [
+      "PI3K / Akt / mTOR",
+      "Survival and growth signaling",
+      "Everolimus, Alpelisib (PI3K inhibitor)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mutations disrupting signaling cascades underlie human **endocrinopathies**. Albright hereditary osteodystrophy (pseudohypoparathyroidism type 1A) results from inactivating mutations in the GNAS1 gene encoding G-alpha-s; target tissues fail to respond to parathyroid hormone, TSH, and gonadotropins despite elevated circulating hormone levels. Activating somatic GNAS1 mutations during embryogenesis cause McCune-Albright syndrome, characterized by polyostotic fibrous dysplasia, cafe-au-lait macules, and precocious puberty.",
+   "say": "Inactivating GNAS mutations encoding G-alpha-s cause pseudohypoparathyroidism with end-organ hormone resistance. Somatic activating GNAS mutations produce McCune-Albright syndrome with fibrous dysplasia, cafe-au-lait spots, and precocious puberty.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "GNAS gene mutation"
+     },
+     {
+      "id": "g2",
+      "label": "Altered G-alpha-s subunit activity"
+     },
+     {
+      "id": "g3",
+      "label": "Constitutive cAMP vs lack of cAMP"
+     },
+     {
+      "id": "g4",
+      "label": "Endocrine hyperfunction vs resistance"
+     },
+     {
+      "id": "g5",
+      "label": "McCune-Albright vs Albright osteodystrophy"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g3"
+     ],
+     [
+      "g3",
+      "g4"
+     ],
+     [
+      "g4",
+      "g5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "90f500f9-4000-8000-90f5-00f912345678",
+  "095dca56-4000-8000-095d-ca5612345678",
+  "111f7d35-4000-8000-111f-7d3512345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

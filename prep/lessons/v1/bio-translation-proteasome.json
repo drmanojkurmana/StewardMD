@@ -1,0 +1,192 @@
+{
+ "module": "bio-translation-proteasome",
+ "subject": "biochemistry",
+ "title": "Ribosomal translation, genetic code fidelity, and the ubiquitin-proteasome system",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Lehninger Principles of Biochemistry 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Eukaryotic **translation** translates messenger RNA codons into polypeptide sequences on 80S ribosomes composed of 40S and 60S subunits. Aminoacyl-tRNA synthetases guarantee fidelity by charging specific amino acids onto matching tRNAs using ATP hydrolysis; these enzymes possess hydrolytic proofreading sites that destroy misactivated amino acids. The genetic code is universal, degenerate, and non-overlapping, with AUG serving as the near-universal initiator codon encoding methionine.",
+   "say": "Translation occurs on 80S cytoplasmic ribosomes. Aminoacyl-tRNA synthetases ensure genetic fidelity by coupling amino acids to cognate tRNAs with proofreading capability. The triplet code is degenerate and unambiguous, initiating at AUG codons encoding methionine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Translational step",
+     "Required factors",
+     "Energy consumer"
+    ],
+    "rows": [
+     [
+      "Initiation",
+      "eIF2, eIF4F cap-binding complex",
+      "GTP hydrolysis (eIF2-GTP)"
+     ],
+     [
+      "Elongation",
+      "eEF1A (tRNA delivery), eEF2 (translocation)",
+      "GTP per incoming tRNA and translocation"
+     ],
+     [
+      "Termination",
+      "eRF1, eRF3 (recognize UAA, UAG, UGA)",
+      "GTP hydrolysis releasing peptide"
+     ],
+     [
+      "tRNA charging",
+      "Aminoacyl-tRNA synthetase",
+      "ATP cleaved to AMP and pyrophosphate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ribosomal elongation proceeds through three sequential tRNA binding sites: the **aminoacyl** (A) site, the **peptidyl** (P) site, and the exit (E) site. Peptidyl transferase, an intrinsic 28S ribosomal RNA ribozyme within the large 60S subunit, catalyzes peptide bond formation without external protein enzymes. Eukaryotic elongation factor 2 then drives ribosome translocation along the mRNA by exactly three nucleotides, utilizing GTP hydrolysis.",
+   "say": "Elongation cycles through A, P, and E ribosomal sites. Peptidyl transferase ribozyme activity in the large subunit forms the peptide bond, while elongation factor 2 consumes GTP to translocate the ribosome by three nucleotides.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Aminoacyl-tRNA binds A site"
+     },
+     {
+      "id": "e2",
+      "label": "Peptidyl transferase peptide bond"
+     },
+     {
+      "id": "e3",
+      "label": "eEF2-GTP driven translocation"
+     },
+     {
+      "id": "e4",
+      "label": "Deacylated tRNA exits E site"
+     },
+     {
+      "id": "e5",
+      "label": "Empty A site accepts next codon"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ],
+     [
+      "e4",
+      "e5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bacterial and bacterial-derived toxins exploit ribosomal vulnerability. Diphtheria toxin and Pseudomonas exotoxin A transfer ADP-ribose from NAD+ onto elongation factor 2, inactivating it and completely shutting down host protein synthesis. Ricin toxin catalytic subunit depurinates a specific adenine residue in the 28S rRNA ribozyme, irreversibly destroying peptidyl transferase capacity. In contrast, aminoglycosides, macrolides, and tetracyclines selectively bind prokaryotic **70S** ribosomes.",
+   "say": "Diphtheria toxin and Pseudomonas exotoxin inactivate eEF2 by ADP-ribosylation, halting host translation. Ricin depurinates 28S rRNA, killing ribozyme function. Clinical antibiotics selectively target bacterial 70S ribosomes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inhibitor / Toxin",
+     "Molecular target",
+     "Mechanism of arrest"
+    ],
+    "rows": [
+     [
+      "Diphtheria toxin",
+      "eEF2 (diphthamide residue)",
+      "ADP-ribosylation halts translocation"
+     ],
+     [
+      "Exotoxin A (Pseudomonas)",
+      "eEF2",
+      "Identical ADP-ribosylation of eEF2"
+     ],
+     [
+      "Ricin (Ricinus communis)",
+      "28S rRNA (adenine 4324)",
+      "Depurination destroys peptidyl transferase"
+     ],
+     [
+      "Cycloheximide",
+      "60S ribosomal subunit",
+      "Inhibits eukaryotic peptidyl transferase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Short-lived, regulatory, and misfolded proteins undergo targeted degradation via the **ubiquitin-proteasome** system. Ubiquitin is covalently linked to target lysine residues through sequential E1 activating, E2 conjugating, and E3 ligase enzymes. Polyubiquitin chains of four or more ubiquitin units target the substrate to the 26S proteasome for ATP-dependent unfolding and peptide cleavage. Proteasome inhibitors like bortezomib induce apoptotic death in malignant plasma cells in multiple myeloma.",
+   "say": "The ubiquitin-proteasome pathway regulates cellular proteostasis. E1, E2, and E3 ligases polyubiquitinate target proteins, directing them to the 26S proteasome for degradation. Bortezomib inhibits proteasomal degradation, treating multiple myeloma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "u1",
+      "label": "E1 enzyme activates ubiquitin"
+     },
+     {
+      "id": "u2",
+      "label": "E2 transfers ubiquitin moiety"
+     },
+     {
+      "id": "u3",
+      "label": "E3 ligase confers substrate specificity"
+     },
+     {
+      "id": "u4",
+      "label": "Polyubiquitinated substrate to 26S"
+     },
+     {
+      "id": "u5",
+      "label": "Proteasomal cleavage to oligopeptides"
+     }
+    ],
+    "edges": [
+     [
+      "u1",
+      "u2"
+     ],
+     [
+      "u2",
+      "u3"
+     ],
+     [
+      "u3",
+      "u4"
+     ],
+     [
+      "u4",
+      "u5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "8f2d791f-4000-8000-8f2d-791f12345678",
+  "97ad1a80-4000-8000-97ad-1a8012345678",
+  "b3c0c529-4000-8000-b3c0-c52912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

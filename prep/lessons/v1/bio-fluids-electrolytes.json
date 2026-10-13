@@ -1,0 +1,192 @@
+{
+ "module": "bio-fluids-electrolytes",
+ "subject": "biochemistry",
+ "title": "Fluid compartments, plasma osmolality, Starling forces, and hyponatremia",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Total body water constitutes approximately 60 percent of lean body mass, partitioned between intracellular fluid (two-thirds) and extracellular fluid (one-third). The extracellular fluid further divides into interstitial fluid (three-quarters) and intravascular plasma volume (one-quarter). Plasma **osmolality** is tightly maintained between 275 and 295 mOsm/kg, calculated primarily by sodium, glucose, and urea. Free water shifts rapidly across cell membranes through aquaporin channels to equalize intracellular and extracellular osmolality.",
+   "say": "Total body water comprises sixty percent of mass, divided into intracellular and extracellular compartments. Normal plasma osmolality ranges from 275 to 295 milliosmoles per kilogram, determined by sodium, glucose, and urea, with water shifting via aquaporins to maintain equilibrium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fluid compartment",
+     "Fraction of body water",
+     "Dominant ions"
+    ],
+    "rows": [
+     [
+      "Intracellular fluid (ICF)",
+      "2/3 (~28 L in 70kg)",
+      "Potassium (K+), Magnesium (Mg2+), Phosphates"
+     ],
+     [
+      "Extracellular fluid (ECF)",
+      "1/3 (~14 L in 70kg)",
+      "Sodium (Na+), Chloride (Cl-), Bicarbonate (HCO3-)"
+     ],
+     [
+      "Interstitial space",
+      "3/4 of ECF (~10.5 L)",
+      "Identical to plasma, low protein content"
+     ],
+     [
+      "Intravascular plasma",
+      "1/4 of ECF (~3.5 L)",
+      "High albumin, colloid oncotic pressure 25 mmHg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microvascular fluid exchange across capillaries is governed by **Starling** forces: capillary hydrostatic pressure, interstitial hydrostatic pressure, plasma colloid oncotic pressure, and interstitial oncotic pressure. Capillary hydrostatic pressure promotes filtration of water into the interstitium, opposed by plasma oncotic pressure exerted predominantly by serum albumin. Derangements in these forces precipitate peripheral pitting edema or pulmonary edema when lymphatic clearance capacity is exceeded.",
+   "say": "Starling forces govern capillary fluid filtration. Hydrostatic pressure drives water out of capillaries, while albumin colloid oncotic pressure retains intravascular fluid. Imbalances or lymphatic obstruction lead directly to clinical edema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Capillary hydrostatic pressure pushes outward"
+     },
+     {
+      "id": "s2",
+      "label": "Plasma oncotic pressure (albumin) pulls inward"
+     },
+     {
+      "id": "s3",
+      "label": "Net filtration exceeds venous reabsorption"
+     },
+     {
+      "id": "s4",
+      "label": "Lymphatic vessels clear excess fluid"
+     },
+     {
+      "id": "s5",
+      "label": "High hydrostatic or low oncotic pressure causes Edema"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s3"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ],
+     [
+      "s3",
+      "s5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disorders of water balance manifest as hypo- or hypernatremia. **Hyponatremia** represents an excess of water relative to sodium. Hypotonic hyponatremia is categorized by extracellular volume status: hypovolemic (vomiting, diuretics), euvolemic (SIADH, psychogenic polydipsia), and hypervolemic (heart failure, cirrhosis, nephrotic syndrome). The syndrome of inappropriate ADH secretion (SIADH) features concentrated urine (osmolality >100 mOsm/kg, sodium >20-40 mEq/L) despite plasma hypo-osmolality.",
+   "say": "Hyponatremia reflects relative water excess. Hypotonic hyponatremia divides into hypovolemic, euvolemic, and hypervolemic states. SIADH presents with euvolemic hyponatremia, concentrated urine, and inappropriately high urinary sodium excretion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Volume state",
+     "Clinical etiologies",
+     "Urine sodium diagnostic finding"
+    ],
+    "rows": [
+     [
+      "Hypovolemic",
+      "Dehydration, GI loss, thiazides",
+      "Urine Na+ <20 (extrarenal) vs >20 (renal loss)"
+     ],
+     [
+      "Euvolemic",
+      "SIADH, hypothyroidism, adrenal crisis",
+      "Urine Na+ >20-40 mEq/L, high urine osmolality"
+     ],
+     [
+      "Hypervolemic",
+      "Heart failure, cirrhosis, nephrotic",
+      "Urine Na+ <20 mEq/L (avid renal retention)"
+     ],
+     [
+      "Pseudohyponatremia",
+      "Severe hyperlipidemia, paraproteinemia",
+      "Normal measured plasma osmolality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid correction of chronic hyponatremia carries lethal neurological danger. Raising serum sodium faster than 8 to 10 mEq/L in 24 hours draws free water out of brain cells, precipitating **osmotic demyelination** syndrome (central pontine myelinolysis), presenting with spastic quadriplegia, pseudobulbar palsy, and locked-in syndrome. Conversely, overly rapid correction of severe hypernatremia causes acute cerebral edema and herniation from excessive water influx into brain cells.",
+   "say": "Correcting chronic hyponatremia too rapidly causes osmotic demyelination syndrome with spastic quadriplegia and locked-in state. Sodium correction must never exceed 8 to 10 milliequivalents per liter in twenty-four hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Chronic hyponatremia: brain expels idiogenic osmolytes"
+     },
+     {
+      "id": "c2",
+      "label": "Overly rapid hypertonic saline infusion"
+     },
+     {
+      "id": "c3",
+      "label": "Acute rise in extracellular osmolality"
+     },
+     {
+      "id": "c4",
+      "label": "Rapid cellular water efflux from pontine glial cells"
+     },
+     {
+      "id": "c5",
+      "label": "Osmotic demyelination syndrome (Locked-in state)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ],
+     [
+      "c4",
+      "c5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "8c80fa35-4000-8000-8c80-fa3512345678",
+  "341846b6-4000-8000-3418-46b612345678",
+  "a840305c-4000-8000-a840-305c12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

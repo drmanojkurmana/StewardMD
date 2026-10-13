@@ -1,0 +1,192 @@
+{
+ "module": "bio-aging-cellular-senescence",
+ "subject": "biochemistry",
+ "title": "Biochemical aging: telomere dynamics, sirtuins, and cellular senescence",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Replicative **aging** in somatic cells is bounded by the Hayflick limit, governed by progressive telomere attrition. Telomeres consist of tandem hexanucleotide repeats (TTAGGG) capped by the shelterin protein complex. Because conventional DNA polymerases cannot replicate the extreme 5-prime ends of lagging strands (the end-replication problem), telomeres shorten by 50 to 100 base pairs per cell cycle, eventually unmasking bare DNA ends that trigger permanent growth arrest.",
+   "say": "Replicative senescence is enforced by progressive telomere erosion. Telomeres contain TTAGGG repeats capped by shelterin. The lagging strand end-replication problem causes telomeres to shorten with every mitosis, ultimately unmasking DNA ends that halt division.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Telomere feature",
+     "Molecular structure / Enzyme",
+     "Biological significance"
+    ],
+    "rows": [
+     [
+      "Tandem repeats",
+      "5'-TTAGGG-3' sequence (thousands of copies)",
+      "Protective buffer against coding loss"
+     ],
+     [
+      "Shelterin complex",
+      "TRF1, TRF2, POT1, TIN2, TPP1, RAP1",
+      "Forms t-loop to hide double-strand ends"
+     ],
+     [
+      "Telomerase (TERT/TERC)",
+      "Reverse transcriptase with RNA template",
+      "Active in germ, stem, and 90% cancer cells"
+     ],
+     [
+      "Critical shortening",
+      "Telomere length below threshold (<3-5 kb)",
+      "Triggers p53-mediated replicative senescence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Telomerase is a specialized ribonucleoprotein **reverse transcriptase** containing catalytic telomerase reverse transcriptase (hTERT) and an internal RNA template (hTERC). Telomerase elongates the 3-prime G-rich overhang of telomeres de novo. While repressed in mature differentiated somatic cells, telomerase is constitutively active in embryonic stem cells, adult germline tissues, and over 85 to 90 percent of human malignancies, conferring infinite proliferative immortality.",
+   "say": "Telomerase maintains telomere length using an intrinsic RNA template and reverse transcriptase. Absent in adult somatic tissues, telomerase reactivation occurs in over 85% of human cancers, bestowing limitless proliferative potential.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Telomerase hTERC anneals telomere 3-prime end"
+     },
+     {
+      "id": "t2",
+      "label": "hTERT reverse transcribes TTAGGG repeat"
+     },
+     {
+      "id": "t3",
+      "label": "Translocation of telomerase enzyme"
+     },
+     {
+      "id": "t4",
+      "label": "Repeat synthesis extends overhang"
+     },
+     {
+      "id": "t5",
+      "label": "DNA polymerase alpha-primase fills lagging strand"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ],
+     [
+      "t4",
+      "t5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cellular **senescence** represents a stable, irreversible exit from the cell cycle accompanied by the senescence-associated secretory phenotype (SASP). Senescent cells secrete pro-inflammatory cytokines (IL-6, IL-1beta), chemokines, and matrix metalloproteinases that degrade extracellular matrices and promote paracrine tissue dysfunction. Sirtuins (SIRT1-7) are NAD-dependent deacetylases that oppose senescence by deacetylating p53, histones, and PGC-1alpha, promoting mitochondrial biogenesis and longevity during caloric restriction.",
+   "say": "Senescence permanently halts replication while producing the senescence-associated secretory phenotype. Senescent cells release IL-6 and matrix proteases, accelerating tissue aging. NAD-dependent sirtuins oppose aging by deacetylating histones and promoting mitochondrial health.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aging regulator",
+     "Biochemical mechanism",
+     "Physiological impact"
+    ],
+    "rows": [
+     [
+      "p16-INK4a (CDKN2A)",
+      "Inhibits CDK4/6, sustaining hypophosphorylated Rb",
+      "Primary biomarker of cellular senescence"
+     ],
+     [
+      "SASP secretome",
+      "IL-6, IL-8, MMP-1, MMP-3 secretion",
+      "Chronic sterile tissue inflammation and fibrosis"
+     ],
+     [
+      "SIRT1 deacetylase",
+      "NAD+-dependent deacetylation of p53 and NF-kB",
+      "Suppresses inflammation and promotes repair"
+     ],
+     [
+      "Mitochondrial ROS",
+      "Complex I/III electron leakage oxidizes mtDNA",
+      "Vicious cycle of energetic failure and senescence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited defects in telomere maintenance cause premature **aging** syndromes termed telomeropathies. Dyskeratosis congenita arises from mutations in DKC1 (dyskerin), TERT, or TERC, presenting with the clinical triad of reticular skin pigmentation, oral leukoplakia, and nail dystrophy, complicated by bone marrow failure and idiopathic pulmonary fibrosis. Werner syndrome, caused by mutations in the WRN RecQ DNA helicase, causes rapid accelerated aging, bilateral cataracts, atherosclerosis, and osteoporosis starting in adolescence.",
+   "say": "Telomeropathies cause premature aging syndromes. Dyskeratosis congenita manifests with oral leukoplakia, nail dystrophy, and fatal bone marrow failure. Werner syndrome, a RecQ helicase defect, produces rapid adult-onset progeria and premature atherosclerosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Inherited telomere / helicase mutation"
+     },
+     {
+      "id": "w2",
+      "label": "Premature telomere collapse & DNA breaks"
+     },
+     {
+      "id": "w3",
+      "label": "Accelerated stem cell senescence"
+     },
+     {
+      "id": "w4",
+      "label": "Bone marrow failure & tissue atrophy"
+     },
+     {
+      "id": "w5",
+      "label": "Premature multisystem morbidity"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2"
+     ],
+     [
+      "w2",
+      "w3"
+     ],
+     [
+      "w3",
+      "w4"
+     ],
+     [
+      "w4",
+      "w5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "b7cf8a5d-4000-8000-b7cf-8a5d12345678",
+  "4eafc03c-4000-8000-4eaf-c03c12345678",
+  "1820f903-4000-8000-1820-f90312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

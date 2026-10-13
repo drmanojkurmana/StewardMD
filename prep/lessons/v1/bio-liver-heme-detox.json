@@ -1,0 +1,197 @@
+{
+ "module": "bio-liver-heme-detox",
+ "subject": "biochemistry",
+ "title": "Heme biosynthesis, porphyrias, bilirubin metabolism, and xenobiotic detoxification",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Heme **biosynthesis** initiates in mitochondria and requires glycine and succinyl-CoA. The rate-limiting enzyme aminolevulinic acid (ALA) synthase condenses glycine with succinyl-CoA to form delta-ALA, requiring pyridoxal phosphate (vitamin B6). Heme exerts negative feedback allosteric inhibition and transcriptional repression on hepatic ALA synthase-1. In contrast, erythroid ALA synthase-2 is regulated by iron response elements and unaffected by heme, but defective in X-linked sideroblastic anemia.",
+   "say": "Heme synthesis begins in mitochondria with ALA synthase, condensing glycine and succinyl-CoA with vitamin B6. Hepatic ALA synthase-1 is feedback-inhibited by heme, whereas erythroid ALA synthase-2 is iron-regulated, deficient in X-linked sideroblastic anemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme",
+     "Cellular compartment",
+     "Pathology when deficient / poisoned"
+    ],
+    "rows": [
+     [
+      "ALA synthase-2",
+      "Mitochondrial matrix",
+      "X-linked sideroblastic anemia (ringed sideroblasts)"
+     ],
+     [
+      "ALA dehydratase",
+      "Cytosol",
+      "Inhibited by Lead poisoning (elevates ALA)"
+     ],
+     [
+      "Porphobilinogen deaminase",
+      "Cytosol",
+      "Acute Intermittent Porphyria (neurovisceral attacks)"
+     ],
+     [
+      "Uroporphyrinogen decarboxylase",
+      "Cytosol",
+      "Porphyria Cutanea Tarda (blistering photosensitivity)"
+     ],
+     [
+      "Ferrochelatase",
+      "Inner mitochondrial membrane",
+      "Inhibited by Lead; elevated free erythrocyte protoporphyrin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited defects in heme synthetic enzymes cause **porphyrias**. Acute intermittent porphyria results from autosomal dominant porphobilinogen deaminase deficiency. Accumulation of neurotoxic ALA and PBG triggers episodic severe abdominal pain, peripheral motor neuropathy, red-wine urine upon light exposure, and psychosis without cutaneous photosensitivity. Attacks are precipitated by CYP450 inducers (barbiturates, antiepileptics), fasting, or alcohol, which deplete heme and derepress ALA synthase-1. Intravenous **hemin** treats attacks by restoring feedback inhibition.",
+   "say": "Acute intermittent porphyria is caused by porphobilinogen deaminase deficiency. Toxic accumulation of ALA and PBG causes severe abdominal pain, motor neuropathy, port-wine urine, and psychosis without photosensitivity. Hemin infusions abort attacks by repressing ALA synthase.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Porphobilinogen deaminase deficiency"
+     },
+     {
+      "id": "p2",
+      "label": "CYP450 inducer triggers heme depletion"
+     },
+     {
+      "id": "p3",
+      "label": "Massive derepression of ALA synthase-1"
+     },
+     {
+      "id": "p4",
+      "label": "Accumulation of neurotoxic ALA and PBG"
+     },
+     {
+      "id": "p5",
+      "label": "Abdominal pain, motor neuropathy, psychiatric crisis"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Senescent erythrocyte hemoglobin degrades in splenic reticuloendothelial macrophages. Heme oxygenase cleaves heme into biliverdin, releasing iron and carbon monoxide; biliverdin reductase reduces biliverdin to insoluble unconjugated bilirubin. Bound to albumin, unconjugated bilirubin travels to hepatocytes, where uridine diphosphate-glucuronosyltransferase (UGT1A1) conjugates it with two glucuronic acid molecules. Water-soluble **conjugated** bilirubin is actively excreted into bile by the MRP2 canalicular transporter, the rate-limiting step in clearance.",
+   "say": "Heme catabolizes to biliverdin and unconjugated bilirubin in macrophages. Albumin-bound bilirubin enters hepatocytes, where UGT1A1 conjugates it with glucuronic acid. MRP2 actively secretes conjugated bilirubin into bile, representing the rate-limiting step.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder of bilirubin handling",
+     "Enzymatic / Transport defect",
+     "Bilirubin profile"
+    ],
+    "rows": [
+     [
+      "Gilbert syndrome",
+      "UGT1A1 promoter mutation (decreased ~70%)",
+      "Mild unconjugated hyperbilirubinemia in fasting/stress"
+     ],
+     [
+      "Crigler-Najjar Type I",
+      "Total absence of UGT1A1 activity",
+      "Severe unconjugated jaundice, fatal kernicterus"
+     ],
+     [
+      "Dubin-Johnson syndrome",
+      "Mutated MRP2 canalicular transporter",
+      "Conjugated hyperbilirubinemia, black pigmented liver"
+     ],
+     [
+      "Rotor syndrome",
+      "Mutated OATP1B1/1B3 organic anion uptake",
+      "Conjugated hyperbilirubinemia, normal histology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hepatic **xenobiotic** detoxification converts lipophilic toxins and pharmaceuticals into excretable polar metabolites. Phase I reactions (oxidation, reduction, hydrolysis) are catalyzed by microsomal Cytochrome P450 monooxygenases in the smooth endoplasmic reticulum, creating reactive functional groups. Phase II reactions conjugate these intermediates with glucuronic acid, glutathione, sulfate, or acetate. In acetaminophen toxicity, CYP2E1 generates toxic **NAPQI**, which depletes hepatic glutathione; N-acetylcysteine restores glutathione pools to prevent fatal hepatic necrosis.",
+   "say": "Hepatic biotransformation uses Phase I CYP450 oxidation followed by Phase II conjugation with glucuronide or glutathione. In acetaminophen overdose, toxic NAPQI exhausts glutathione; early N-acetylcysteine restores glutathione to prevent liver failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "x1",
+      "label": "Acetaminophen overdose"
+     },
+     {
+      "id": "x2",
+      "label": "CYP2E1 generates toxic NAPQI"
+     },
+     {
+      "id": "x3",
+      "label": "Hepatic glutathione stores exhausted"
+     },
+     {
+      "id": "x4",
+      "label": "NAPQI binds hepatocyte macromolecules"
+     },
+     {
+      "id": "x5",
+      "label": "Centrilobular hepatic necrosis (prevented by NAC)"
+     }
+    ],
+    "edges": [
+     [
+      "x1",
+      "x2"
+     ],
+     [
+      "x2",
+      "x3"
+     ],
+     [
+      "x3",
+      "x4"
+     ],
+     [
+      "x4",
+      "x5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "8e5ce5c1-4000-8000-8e5c-e5c112345678",
+  "80c43dcf-4000-8000-80c4-3dcf12345678",
+  "53a7eaa5-4000-8000-53a7-eaa512345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

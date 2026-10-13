@@ -1,0 +1,192 @@
+{
+ "module": "bio-endocrine-biochemistry",
+ "subject": "biochemistry",
+ "title": "Biochemical endocrinology: hormone receptors, feedback loops, and steroidogenesis defects",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Endocrine signaling coordinates systemic homeostasis through chemical messengers categorized by biochemical **solubility**. Hydrophilic peptide hormones and catecholamines circulate freely in plasma, binding cell-surface receptors to initiate rapid second messenger cascades. Lipophilic steroid hormones and thyroid hormones travel bound to specific carrier proteins like thyroid-binding globulin and albumin. Upon cellular entry, lipophilic hormones bind intracellular nuclear receptors that act as ligand-activated transcription factors.",
+   "say": "Hormones divide into hydrophilic peptides and lipophilic steroids. Hydrophilic messengers bind cell surface receptors to activate rapid second messenger cascades. Lipophilic steroids enter cells to bind intracellular nuclear receptors that directly modulate gene transcription.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hormone class",
+     "Plasma transport",
+     "Receptor localization & mechanism"
+    ],
+    "rows": [
+     [
+      "Peptides (Insulin, PTH)",
+      "Free dissolved in plasma",
+      "Plasma membrane receptors (GPCR, RTK)"
+     ],
+     [
+      "Catecholamines",
+      "Free in plasma",
+      "Surface GPCRs (alpha and beta adrenergic)"
+     ],
+     [
+      "Steroids (Cortisol, Estrogen)",
+      "Bound to CBG, SHBG, albumin",
+      "Cytosolic / nuclear receptors with zinc fingers"
+     ],
+     [
+      "Thyroid hormones (T3, T4)",
+      "Bound to TBG, transthyretin",
+      "Nuclear receptors bound to thyroid response elements"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Steroidogenesis takes place within the adrenal cortex and gonads, converting cholesterol into mineralocorticoids, glucocorticoids, and sex steroids. Inborn errors of adrenal steroidogenesis cause congenital adrenal **hyperplasia**. 21-Hydroxylase deficiency accounts for over 90 percent of cases, blocking cortisol and aldosterone synthesis. Accumulated 17-hydroxyprogesterone shunts into adrenal androgens, causing ambiguous genitalia in female newborns, salt-wasting crisis, hyperkalemia, and hypotension.",
+   "say": "Congenital adrenal hyperplasia results from defective steroidogenesis enzymes. 21-Hydroxylase deficiency blocks cortisol and aldosterone production, shunting precursors into androgens to produce virilization, salt wasting, hypotension, and hyperkalemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Cholesterol to Pregnenolone"
+     },
+     {
+      "id": "s2",
+      "label": "21-Hydroxylase block"
+     },
+     {
+      "id": "s3",
+      "label": "Failure of Cortisol & Aldosterone"
+     },
+     {
+      "id": "s4",
+      "label": "Compensatory ACTH surge"
+     },
+     {
+      "id": "s5",
+      "label": "Shunt to Androgens: Virilization & Salt-wasting"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ],
+     [
+      "s4",
+      "s5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Different enzyme blocks in steroidogenesis produce distinct biochemical and clinical profiles. In 11-beta-hydroxylase deficiency, absent cortisol causes ACTH excess, but accumulation of **11-deoxycorticosterone** (a potent mineralocorticoid) produces severe hypertension and hypokalemia despite virilization. In contrast, 17-alpha-hydroxylase deficiency prevents sex steroid and cortisol synthesis, resulting in primary amenorrhea, female external genitalia in XY individuals, hypertension, and hypokalemia.",
+   "say": "11-Beta-hydroxylase deficiency causes virilization with hypertension due to 11-deoxycorticosterone mineralocorticoid accumulation. In 17-alpha-hydroxylase deficiency, sex steroids are absent while mineralocorticoids predominate, yielding hypertension with sexual infantilism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme deficiency",
+     "Blood pressure / Mineralocorticoids",
+     "Virilization / Androgens"
+    ],
+    "rows": [
+     [
+      "21-Hydroxylase",
+      "Low BP, salt-wasting, high K+",
+      "Elevated (virilization in XX)"
+     ],
+     [
+      "11-Beta-hydroxylase",
+      "High BP (elevated DOC), low K+",
+      "Elevated (virilization in XX)"
+     ],
+     [
+      "17-Alpha-hydroxylase",
+      "High BP (elevated corticosterone), low K+",
+      "Decreased (XY pseudohermaphroditism)"
+     ],
+     [
+      "3-Beta-HSD",
+      "Low BP, severe salt wasting",
+      "Decreased overall; mild DHEA elevation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Multiple endocrine neoplasia (MEN) syndromes represent autosomal dominant disorders of coordinated endocrine **hyperplasia**. MEN1 involves tumors of the parathyroids, pancreatic islets, and pituitary gland due to menin gene mutations. MEN2A causes medullary thyroid carcinoma, phaeochromocytoma, and parathyroid hyperplasia via activating RET proto-oncogene mutations. MEN2B combines medullary thyroid carcinoma and phaeochromocytoma with mucosal neuromas and marfanoid habitus, managed by prophylactic thyroidectomy.",
+   "say": "MEN syndromes cause familial endocrine tumors. MEN1 involves parathyroid, pancreas, and pituitary lesions. MEN2 is caused by RET proto-oncogene mutations, manifesting with medullary thyroid cancer and phaeochromocytoma, requiring early prophylactic thyroidectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Germline RET mutation identified"
+     },
+     {
+      "id": "m2",
+      "label": "Calcitonin surveillance & ultrasound"
+     },
+     {
+      "id": "m3",
+      "label": "Rule out phaeochromocytoma first"
+     },
+     {
+      "id": "m4",
+      "label": "Alpha-blockade before neck surgery if positive"
+     },
+     {
+      "id": "m5",
+      "label": "Total thyroidectomy & central neck dissection"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "f946c788-4000-8000-f946-c78812345678",
+  "da9879a4-4000-8000-da98-79a412345678",
+  "7efb1a11-4000-8000-7efb-1a1112345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

@@ -1,0 +1,192 @@
+{
+ "module": "bio-gene-regulation",
+ "subject": "biochemistry",
+ "title": "Epigenetic mechanisms, chromatin remodeling, and transcriptional regulation",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Lehninger Principles of Biochemistry 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Gene expression in multicellular organisms is fundamentally governed by **chromatin** structure. Genomic DNA wraps around octamers of core histones (H2A, H2B, H3, H4) to form nucleosomes. Dense, transcriptionally silent heterochromatin resists transcription factor access, whereas relaxed, open euchromatin facilitates gene activation. Histone acetyltransferases add acetyl groups to basic lysine tails, neutralizing positive charges and loosening histone-DNA electrostatic interactions.",
+   "say": "Chromatin structure regulates genomic accessibility. DNA wraps around histone octamers forming nucleosomes. Condensed heterochromatin is transcriptionally inert, whereas open euchromatin permits transcription factor binding. Histone acetyltransferases neutralize lysine charges to relax chromatin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Chromatin state",
+     "Histone modification",
+     "Transcriptional consequence"
+    ],
+    "rows": [
+     [
+      "Euchromatin",
+      "High acetylation, H3K4 methylation",
+      "Open, active transcription"
+     ],
+     [
+      "Heterochromatin",
+      "Deacetylation, H3K9/H3K27 methylation",
+      "Condensed, transcriptionally repressed"
+     ],
+     [
+      "CpG methylation",
+      "DNA methyltransferase (DNMT)",
+      "Gene silencing, genomic imprinting"
+     ],
+     [
+      "SWI/SNF complex",
+      "ATP-dependent chromatin remodeling",
+      "Nucleosome sliding exposes promoters"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "DNA **methylation** constitutes a stable, heritable epigenetic mark. DNA methyltransferases transfer methyl groups from S-adenosylmethionine onto cytosine bases within CpG dinucleotide islands located in gene promoters. Methylated CpG motifs recruit methyl-CpG-binding domain proteins (MeCP2) that recruit histone deacetylases, cementing transcriptional silencing. Rett syndrome is caused by loss-of-function mutations in MeCP2, causing progressive neurodevelopmental regression in young girls.",
+   "say": "DNA methyltransferases transfer methyl groups to promoter CpG islands, recruiting MeCP2 and histone deacetylases to maintain gene silencing. Mutations in MeCP2 cause Rett syndrome, characterized by neurodevelopmental regression and hand-wringing stereotypic movements.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "SAM donates methyl to CpG cytosine"
+     },
+     {
+      "id": "m2",
+      "label": "DNA methyltransferase 1 maintains mark"
+     },
+     {
+      "id": "m3",
+      "label": "MeCP2 binds methylated CpG islands"
+     },
+     {
+      "id": "m4",
+      "label": "Recruitment of histone deacetylases"
+     },
+     {
+      "id": "m5",
+      "label": "Chromatin compaction & gene silencing"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Genomic **imprinting** represents parent-of-origin specific gene expression mediated by differential DNA methylation. In Prader-Willi syndrome, deletion or maternal uniparental disomy of the paternal 15q11-q13 region deprives the patient of paternally expressed genes, resulting in neonatal hypotonia and compulsive hyperphagia. Conversely, deletion or paternal uniparental disomy of the maternal 15q11-q13 locus (inactivating the maternal UBE3A ubiquitin ligase) produces Angelman syndrome, manifesting with paroxysmal laughter and ataxia.",
+   "say": "Genomic imprinting selectively silences maternal or paternal alleles via methylation. Loss of paternal 15q11-q13 produces Prader-Willi syndrome with hyperphagia, while loss of maternal 15q11-q13 UBE3A yields Angelman syndrome with ataxia and inappropriate laughter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Chromosomal defect",
+     "Key clinical phenotype"
+    ],
+    "rows": [
+     [
+      "Prader-Willi",
+      "Paternal 15q11-q13 deletion or maternal UPD",
+      "Hypotonia, hyperphagia, obesity, hypogonadism"
+     ],
+     [
+      "Angelman",
+      "Maternal 15q11-q13 deletion (UBE3A) or paternal UPD",
+      "Severe intellectual deficit, ataxia, puppet gait, laughter"
+     ],
+     [
+      "Beckwith-Wiedemann",
+      "11p15 imprinting defect (IGF2 overexpression)",
+      "Macrosomia, omphalocele, Wilms tumor risk"
+     ],
+     [
+      "Russell-Silver",
+      "11p15 loss of methylation or maternal UPD 7",
+      "Intrauterine growth restriction, triangular face"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Epigenetic therapies provide potent **antineoplastic** tools. DNA hypomethylating agents like 5-azacitidine and decitabine incorporate into DNA, trapping DNA methyltransferases and re-activating silenced tumor suppressor genes in myelodysplastic syndromes. Histone deacetylase inhibitors like vorinostat and romidepsin promote hyperacetylation of histone lysines, forcing chromatin relaxation and inducing cell cycle arrest in cutaneous T-cell lymphomas.",
+   "say": "Hypomethylating agents azacitidine and decitabine trap DNA methyltransferases to reactivate silenced tumor suppressors in myelodysplastic syndromes. Histone deacetylase inhibitors like vorinostat enforce hyperacetylation, treating cutaneous T-cell lymphoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Azacitidine incorporates into DNA"
+     },
+     {
+      "id": "e2",
+      "label": "Covalent trapping of DNMT1 enzyme"
+     },
+     {
+      "id": "e3",
+      "label": "Passive hypomethylation across replication"
+     },
+     {
+      "id": "e4",
+      "label": "Tumor suppressor promoter re-opening"
+     },
+     {
+      "id": "e5",
+      "label": "Cell differentiation & apoptosis"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ],
+     [
+      "e4",
+      "e5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "952d880a-4000-8000-952d-880a12345678",
+  "e447a030-4000-8000-e447-a03012345678",
+  "1db6ad8d-4000-8000-1db6-ad8d12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

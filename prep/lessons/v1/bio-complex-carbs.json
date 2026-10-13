@@ -1,0 +1,180 @@
+{
+ "module": "bio-complex-carbs",
+ "subject": "biochemistry",
+ "title": "Glycosaminoglycans, proteoglycans and the mucopolysaccharidoses: Hurler and Hunter syndromes",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Glycosaminoglycans are unbranched heteropolysaccharide **chains** composed of repeating disaccharide units: an amino sugar (glucosamine or galactosamine) and an acidic uronic acid (glucuronic acid or iduronic acid). Due to abundant sulfate and carboxyl groups, glycosaminoglycans carry dense negative charges that attract sodium ions and water molecules, creating hydrated gel matrices capable of resisting massive mechanical compressive forces in articular cartilage.",
+   "say": "Glycosaminoglycans are unbranched polysaccharide chains of repeating amino sugars and uronic acids. Heavily sulfated and carboxylated, they carry dense negative charges that bind water, forming hydrated gel cushions that absorb mechanical compression in cartilage and joints.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Glycosaminoglycan",
+     "Disaccharide repeating components",
+     "Primary tissue distribution"
+    ],
+    "rows": [
+     [
+      "Hyaluronic acid",
+      "D-glucuronic acid + N-acetylglucosamine",
+      "Synovial fluid, vitreous humor, umbilical cord (non-sulfated)"
+     ],
+     [
+      "Chondroitin sulfate",
+      "D-glucuronic acid + GalNAc-sulfate",
+      "Cartilage, bone, heart valves (most abundant GAG)"
+     ],
+     [
+      "Keratan sulfate",
+      "D-galactose + GlcNAc-sulfate",
+      "Cornea transparency, intervertebral discs"
+     ],
+     [
+      "Heparan sulfate",
+      "Glucuronic / iduronic acid + GlcNAc",
+      "Basement membranes, cell surfaces, syndecans"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Proteoglycan monomers consist of multiple glycosaminoglycan chains covalently attached to a core **protein** through a specific trisaccharide-serine linker (xylose-galactose-galactose). In articular cartilage, hundreds of aggrecan monomers non-covalently associate with a central hyaluronic acid filament via link proteins, creating colossal supramolecular proteoglycan aggregates with molecular weights exceeding millions of Daltons, essential for joint lubrication and shock absorption.",
+   "say": "Proteoglycans consist of glycosaminoglycan chains attached to a core protein through a xylose-galactose-galactose linker. In cartilage, aggrecan monomers bind hyaluronic acid backbones via link proteins, forming giant supramolecular aggregates that provide joint elasticity and lubrication.",
+   "vis": {
+    "kind": "flow",
+    "title": "Proteoglycan aggregate architecture",
+    "nodes": [
+     {
+      "id": "ser",
+      "label": "Core protein serine residue"
+     },
+     {
+      "id": "lin",
+      "label": "Xylose-Gal-Gal linker trisaccharide"
+     },
+     {
+      "id": "gag",
+      "label": "Sulfated GAG chains (Chondroitin sulfate)"
+     },
+     {
+      "id": "agg",
+      "label": "Aggrecan core monomer"
+     },
+     {
+      "id": "hya",
+      "label": "Hyaluronic acid central backbone filament"
+     }
+    ],
+    "edges": [
+     [
+      "ser",
+      "lin",
+      "O-linked glycosylation in Golgi"
+     ],
+     [
+      "lin",
+      "gag",
+      "Sulfotransferase elongation"
+     ],
+     [
+      "gag",
+      "agg",
+      "Radiating bottle-brush layout"
+     ],
+     [
+      "agg",
+      "hya",
+      "Stabilized by link protein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Degradation of glycosaminoglycans occurs inside lysosomes via sequential cleavage by acid **hydrolases**. Inherited deficiencies in specific lysosomal enzymes result in the mucopolysaccharidoses, characterized by progressive intracellular accumulation of undegraded dermatan sulfate and heparan sulfate. Cells become distended with storage vacuoles, leading to coarse facial features, skeletal dysostosis multiplex, hepatosplenomegaly, valvular heart disease, and progressive neurocognitive decline.",
+   "say": "Glycosaminoglycans are broken down in lysosomes by sequential acid hydrolases. Genetic deficiencies cause mucopolysaccharidoses, where undegraded dermatan and heparan sulfate accumulate. This causes coarse facial features, skeletal dysostosis multiplex, organomegaly, and neurological decline.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hurler syndrome (MPS I)",
+     "points": [
+      "Autosomal recessive inheritance",
+      "Alpha-L-iduronidase enzyme deficiency",
+      "Corneal clouding appears in infancy",
+      "Severe intellectual disability and early death"
+     ]
+    },
+    "right": {
+     "title": "Hunter syndrome (MPS II)",
+     "points": [
+      "X-linked recessive inheritance",
+      "Iduronate-2-sulfatase enzyme deficiency",
+      "Absence of corneal clouding (clear corneas)",
+      "Aggressive behavioral changes and retinal degeneration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sanfilippo syndrome represents **mucopolysaccharidosis** type III, caused by impaired catabolism of heparan sulfate alone. In contrast to Hurler syndrome, children with Sanfilippo syndrome exhibit relatively mild somatic manifestations and minimal dysostosis multiplex. However, accumulation of heparan sulfate within the central nervous system triggers severe, devastating neurodegeneration, profound sleep cycle disruption, intractable behavioral hyperactivity, and eventual loss of motor and language milestones.",
+   "say": "Sanfilippo syndrome, MPS type III, involves selective failure of heparan sulfate breakdown. Unlike Hurler syndrome, skeletal and facial changes are mild. However, heparan sulfate accumulation in the brain causes severe behavioral hyperactivity, sleep disturbances, dementia, and fatal neurodegeneration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Enzyme defect",
+     "Accumulated substrates",
+     "Distinguishing clinical hallmark"
+    ],
+    "rows": [
+     [
+      "MPS I (Hurler)",
+      "Alpha-L-iduronidase",
+      "Dermatan sulfate, heparan sulfate",
+      "Corneal clouding, coarse facies, dysostosis"
+     ],
+     [
+      "MPS II (Hunter)",
+      "Iduronate sulfatase",
+      "Dermatan sulfate, heparan sulfate",
+      "X-linked, clear corneas, behavioral aggression"
+     ],
+     [
+      "MPS III (Sanfilippo)",
+      "Heparan sulfamidase / others",
+      "Heparan sulfate exclusively",
+      "Severe progressive childhood dementia, mild somatic signs"
+     ],
+     [
+      "MPS IV (Morquio)",
+      "Galactosamine-6-sulfatase",
+      "Keratan sulfate, chondroitin sulfate",
+      "Severe skeletal dysplasia, odontoid hypoplasia, normal intellect"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "eefa77ad-4000-8000-eefa-77ad12345678",
+  "ebfa72f4-4000-8000-ebfa-72f412345678",
+  "ecfa7487-4000-8000-ecfa-748712345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

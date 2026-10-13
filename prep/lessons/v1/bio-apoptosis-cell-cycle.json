@@ -1,0 +1,192 @@
+{
+ "module": "bio-apoptosis-cell-cycle",
+ "subject": "biochemistry",
+ "title": "Cellular homeostasis: apoptosis cascades, caspases, and cell cycle checkpoints",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Lehninger Principles of Biochemistry 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Programmed cell death, or **apoptosis**, maintains tissue homeostasis and eliminates damaged or neoplastic cells without inducing inflammatory necrosis. The process is executed by cysteine-dependent aspartate-directed proteases called **caspases**. Initiator caspases (caspase-8 and caspase-9) possess specialized protein interaction domains that respond to apoptotic triggers, cleaving and activating downstream executioner caspases (caspase-3, caspase-6, caspase-7) to degrade cytoskeletal and nuclear substrates.",
+   "say": "Apoptosis is orderly programmed cell death executed by caspases without provoking inflammation. Initiator caspases 8 and 9 activate executioner caspases 3, 6, and 7 to cleave cellular substrates, fragment DNA, and orchestrate apoptotic body formation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Caspase category",
+     "Key caspase members",
+     "Primary activation mechanism"
+    ],
+    "rows": [
+     [
+      "Extrinsic initiator",
+      "Caspase-8, Caspase-10",
+      "Fas / TNF death receptor DISC complex"
+     ],
+     [
+      "Intrinsic initiator",
+      "Caspase-9",
+      "Cytochrome c release + Apaf-1 apoptosome"
+     ],
+     [
+      "Executioner caspases",
+      "Caspase-3, Caspase-6, Caspase-7",
+      "Cleavage of ICAD, lamin, and actin"
+     ],
+     [
+      "Inflammatory caspases",
+      "Caspase-1, Caspase-4, Caspase-5",
+      "NLRP3 inflammasome activation (pyroptosis)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The intrinsic **mitochondrial** pathway is regulated by the balance between pro-apoptotic and anti-apoptotic Bcl-2 family proteins. Intracellular stresses like DNA damage or growth factor deprivation activate BH3-only sensors (Bim, Bid, Puma), which inhibit anti-apoptotic Bcl-2 and Bcl-xL while activating Bax and Bak. Bax and Bak oligomerize within the outer mitochondrial membrane, creating permeability pores that release **cytochrome** c into the cytoplasm to assemble the apoptosome with Apaf-1.",
+   "say": "The intrinsic apoptotic pathway hinges on mitochondrial outer membrane permeability. Stress-induced BH3-only proteins neutralize Bcl-2, allowing Bax and Bak to pore the outer mitochondrial membrane. Released cytochrome c binds Apaf-1 and procaspase-9 to form the apoptosome.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "i1",
+      "label": "DNA damage or oxidative stress"
+     },
+     {
+      "id": "i2",
+      "label": "Bax and Bak pore formation"
+     },
+     {
+      "id": "i3",
+      "label": "Cytochrome c release into cytosol"
+     },
+     {
+      "id": "i4",
+      "label": "Apaf-1 + dATP apoptosome assembly"
+     },
+     {
+      "id": "i5",
+      "label": "Procaspase-9 cleavage to Caspase-3 activation"
+     }
+    ],
+    "edges": [
+     [
+      "i1",
+      "i2"
+     ],
+     [
+      "i2",
+      "i3"
+     ],
+     [
+      "i3",
+      "i4"
+     ],
+     [
+      "i4",
+      "i5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The extrinsic pathway is triggered by cell-surface **death receptors** of the tumor necrosis factor receptor superfamily, such as Fas (CD95) and TNFR1. Ligand binding by FasL induces receptor trimerization and recruitment of the adaptor FADD via death domains, forming the death-inducing signaling complex (DISC). Procaspase-8 molecules undergo autocatalytic activation at the DISC. Active caspase-8 directly cleaves executioner caspase-3, or cleaves Bid into tBid to cross-activate the intrinsic mitochondrial pathway.",
+   "say": "Extrinsic apoptosis activates via Fas and TNF death receptors. Ligand engagement forms the DISC with FADD, autoactivating caspase-8. Caspase-8 directly activates caspase-3 or cleaves Bid to engage mitochondrial amplification.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway step",
+     "Extrinsic pathway",
+     "Intrinsic pathway"
+    ],
+    "rows": [
+     [
+      "Initial trigger",
+      "FasL, TNF-alpha binding death receptors",
+      "DNA damage, ROS, oncogene activation"
+     ],
+     [
+      "Sensor / Adaptor",
+      "FADD death domain adaptor",
+      "BH3-only proteins (Puma, Noxa, Bim)"
+     ],
+     [
+      "Initiator caspase",
+      "Caspase-8",
+      "Caspase-9"
+     ],
+     [
+      "Convergence point",
+      "Active Caspase-3 cleaves ICAD",
+      "Active Caspase-3 cleaves ICAD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cell cycle progression is guarded by cyclin-dependent kinases (CDKs) and checkpoint tumor suppressors. Retinoblastoma protein (pRb) binds and sequesters E2F transcription factors. Cyclin D-CDK4/6 complexes phosphorylate pRb, releasing E2F to transcribe genes necessary for S-phase entry. In response to DNA breaks, the **p53** tumor suppressor upregulates p21 (CDKN1A), which potently inhibits CDK complexes, arresting cells at the G1/S boundary to allow repair or provoke apoptosis.",
+   "say": "Cell cycle checkpoints prevent aberrant division. Cyclin D-CDK4/6 phosphorylates Rb to release E2F for S-phase transition. DNA damage stabilizes p53, which induces p21 to halt CDKs at the G1/S checkpoint.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "DNA double-strand breaks"
+     },
+     {
+      "id": "k2",
+      "label": "ATM/ATR kinase phosphorylates p53"
+     },
+     {
+      "id": "k3",
+      "label": "p53 transactivates p21 (CDKN1A)"
+     },
+     {
+      "id": "k4",
+      "label": "p21 arrests Cyclin D-CDK4/6"
+     },
+     {
+      "id": "k5",
+      "label": "Unphosphorylated Rb blocks E2F (G1 arrest)"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2"
+     ],
+     [
+      "k2",
+      "k3"
+     ],
+     [
+      "k3",
+      "k4"
+     ],
+     [
+      "k4",
+      "k5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "e58b4c51-4000-8000-e58b-4c5112345678",
+  "ff09e27e-4000-8000-ff09-e27e12345678",
+  "66ef9add-4000-8000-66ef-9add12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

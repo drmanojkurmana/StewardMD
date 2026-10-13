@@ -1,0 +1,192 @@
+{
+ "module": "bio-acid-base-balance",
+ "subject": "biochemistry",
+ "title": "Acid-base homeostasis: Henderson-Hasselbalch, the anion gap, and renal compensation",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Physiological arterial blood pH is tightly defended between 7.35 and 7.45 by chemical buffers, respiratory ventilation, and renal tubular transport. The primary extracellular buffer is the **bicarbonate-carbonic** acid system, governed by the Henderson-Hasselbalch equation: pH equals 6.1 plus the logarithm of bicarbonate divided by 0.03 times PaCO2. Alveolar ventilation alters PaCO2 within minutes, whereas renal tubular bicarbonate reabsorption and net acid excretion (titratable acid and ammonium) require several days for full compensation.",
+   "say": "Blood pH is strictly maintained between 7.35 and 7.45. The bicarbonate-carbonic acid buffer governs extracellular pH. Respiratory compensation adjusts PaCO2 within minutes, while renal reclamation of bicarbonate and ammonium excretion takes several days.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Primary disorder",
+     "Initial chemical disturbance",
+     "Compensatory physiological response"
+    ],
+    "rows": [
+     [
+      "Metabolic acidosis",
+      "Decreased HCO3- (<22 mEq/L)",
+      "Hyperventilation lowers PaCO2 (Winter formula)"
+     ],
+     [
+      "Metabolic alkalosis",
+      "Elevated HCO3- (>26 mEq/L)",
+      "Hypoventilation raises PaCO2 (0.7 mmHg per 1 mEq/L)"
+     ],
+     [
+      "Respiratory acidosis",
+      "Elevated PaCO2 (>45 mmHg)",
+      "Renal retention of HCO3- (1 acute, 3.5 chronic per 10)"
+     ],
+     [
+      "Respiratory alkalosis",
+      "Decreased PaCO2 (<35 mmHg)",
+      "Renal excretion of HCO3- (2 acute, 5 chronic per 10)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Metabolic acidosis is classified according to the serum **anion gap**, calculated as serum sodium minus the sum of chloride and bicarbonate (normal range 8 to 12 mEq/L). An elevated anion gap indicates the presence of unmeasured organic anions that titrate away plasma bicarbonate. Classic causes are remembered by the mnemonic **MUDPILES**: methanol, uremia, diabetic ketoacidosis, propylene glycol, isoniazid/iron, lactic acidosis, ethylene glycol, and salicylates.",
+   "say": "Metabolic acidosis divides into high anion gap and normal anion gap types. An elevated anion gap indicates unmeasured anions like ketoacids, lactate, or toxins titrating bicarbonate. Common etiologies include DKA, lactic acidosis, and toxic alcohols.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Patient with metabolic acidosis (low HCO3-)"
+     },
+     {
+      "id": "a2",
+      "label": "Calculate serum Anion Gap = Na - (Cl + HCO3)"
+     },
+     {
+      "id": "a3",
+      "label": "Anion gap > 12: High Anion Gap Acidosis (MUDPILES)"
+     },
+     {
+      "id": "a4",
+      "label": "Anion gap 8-12: Normal Anion Gap / Hyperchloremic"
+     },
+     {
+      "id": "a5",
+      "label": "Calculate urine anion gap to distinguish RTA vs diarrhea"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a2",
+      "a4"
+     ],
+     [
+      "a4",
+      "a5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normal anion gap (hyperchloremic) metabolic acidosis arises from either gastrointestinal bicarbonate loss (severe diarrhea) or renal tubular acidosis (RTA). In Type 1 (distal) RTA, intercalated cells fail to excrete hydrogen ions, causing nephrocalcinosis, hypokalemia, and urine pH above 5.5. In Type 2 (proximal) RTA, impaired proximal bicarbonate reabsorption causes Fanconi syndrome with hypokalemia. In Type 4 RTA, **hypoaldosteronism** or aldosterone resistance impairs distal potassium and proton excretion, producing hyperkalemia.",
+   "say": "Normal anion gap acidosis results from GI bicarbonate wasting or renal tubular acidosis. Type 1 distal RTA features urine pH above 5.5 and stones. Type 2 proximal RTA impairs bicarbonate salvage. Type 4 RTA is marked by hyperkalemia due to aldosterone deficiency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RTA Subtype",
+     "Tubular site & defect",
+     "Serum K+ & Urine pH"
+    ],
+    "rows": [
+     [
+      "Type 1 (Distal RTA)",
+      "Alpha-intercalated cell H+-ATPase failure",
+      "Hypokalemia; Urine pH > 5.5 (nephrolithiasis)"
+     ],
+     [
+      "Type 2 (Proximal RTA)",
+      "Defective proximal HCO3- reabsorption",
+      "Hypokalemia; Urine pH < 5.5 variable"
+     ],
+     [
+      "Type 4 (Hyperkalemic RTA)",
+      "Aldosterone deficiency or resistance",
+      "Hyperkalemia; Urine pH < 5.5 (diabetic nephropathy)"
+     ],
+     [
+      "Severe diarrhea",
+      "GI bicarbonate wasting with normal kidneys",
+      "Hypokalemia; negative urine anion gap (NH4+ present)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Toxic alcohol ingestion generates distinctive **osmolal** and anion gaps. Ethylene glycol is metabolized by alcohol dehydrogenase into glycolic and oxalic acids, precipitating envelope-shaped calcium oxalate crystals that cause acute tubular necrosis and renal failure. Methanol oxidizes into formic acid, causing optic disc hyperemia and permanent blindness. Treatment requires immediate competitive inhibition of alcohol dehydrogenase with fomepizole or ethanol, coupled with hemodialysis.",
+   "say": "Ethylene glycol and methanol generate severe anion gap acidosis and high osmolal gaps. Ethylene glycol forms oxalic acid causing renal failure with oxalate crystals, while methanol yields formic acid causing blindness. Fomepizole blocks alcohol dehydrogenase.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Toxic alcohol ingestion"
+     },
+     {
+      "id": "t2",
+      "label": "Alcohol dehydrogenase bioactivation"
+     },
+     {
+      "id": "t3",
+      "label": "Formic acid (Methanol) or Oxalic acid (Ethylene glycol)"
+     },
+     {
+      "id": "t4",
+      "label": "High anion gap & high osmolal gap"
+     },
+     {
+      "id": "t5",
+      "label": "Fomepizole blockade + Emergent hemodialysis"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ],
+     [
+      "t4",
+      "t5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "36feb3a0-4000-8000-36fe-b3a012345678",
+  "8e7ff3c5-4000-8000-8e7f-f3c512345678",
+  "c3e7f2f9-4000-8000-c3e7-f2f912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

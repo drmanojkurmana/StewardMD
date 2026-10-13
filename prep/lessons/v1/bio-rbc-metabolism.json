@@ -1,0 +1,180 @@
+{
+ "module": "bio-rbc-metabolism",
+ "subject": "biochemistry",
+ "title": "Erythrocyte metabolism: anaerobic glycolysis, Rapoport-Luebering shunt and G6PD antioxidant defenses",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Mature erythrocytes lack mitochondria and nuclei, depending entirely upon **anaerobic** glycolysis for adenosine triphosphate generation. Red cells convert glucose to lactate, generating a net of two ATP molecules per glucose consumed. Erythrocyte ATP is required to fuel the sodium-potassium ATPase, maintain membrane biconcavity and deformability, and energize flippases that preserve phospholipid asymmetry during transit through narrow splenic sinusoids.",
+   "say": "Mature erythrocytes lack mitochondria, relying exclusively on anaerobic glycolysis for ATP. Red cells convert glucose to lactate, producing two ATP molecules. This ATP powers the sodium-potassium pump, maintains membrane deformability, and supports splenic microcirculation passage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Erythrocyte pathway",
+     "Key enzyme",
+     "Primary metabolic product",
+     "Essential erythrocyte role"
+    ],
+    "rows": [
+     [
+      "Embden-Meyerhof pathway",
+      "Pyruvate kinase, PFK-1",
+      "Lactate, 2 net ATP",
+      "Powers Na+/K+-ATPase and deformability"
+     ],
+     [
+      "Hexose monophosphate shunt",
+      "G6PD",
+      "NADPH",
+      "Maintains reduced glutathione (GSH)"
+     ],
+     [
+      "Rapoport-Luebering shunt",
+      "Bisphosphoglycerate mutase",
+      "2,3-bisphosphoglycerate",
+      "Optimizes hemoglobin oxygen unloading"
+     ],
+     [
+      "Methemoglobin reductase",
+      "NADH-cytochrome b5 reductase",
+      "Reduces Fe3+ back to Fe2+",
+      "Preserves functional oxygen binding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **hexose** monophosphate shunt metabolizes ten percent of erythrocyte glucose to generate NADPH. Glucose-6-phosphate dehydrogenase catalyzes the rate-limiting oxidation of glucose-6-phosphate to 6-phosphoglucono-delta-lactone, reducing NADP+ to NADPH. Because red blood cells lack alternative NADPH sources, G6PD activity represents the sole defensive mechanism against oxidative damage caused by endogenous peroxides and exogenous xenobiotics.",
+   "say": "The hexose monophosphate shunt processes ten percent of red cell glucose to supply NADPH. Glucose-6-phosphate dehydrogenase catalyzes the rate-limiting first step. Lacking mitochondria, red cells depend solely on G6PD to maintain antioxidant defenses against oxidative peroxides.",
+   "vis": {
+    "kind": "flow",
+    "title": "Glutathione antioxidant redox cycle",
+    "nodes": [
+     {
+      "id": "g6p",
+      "label": "Glucose-6-phosphate"
+     },
+     {
+      "id": "gpd",
+      "label": "G6PD + NADP+ -> NADPH"
+     },
+     {
+      "id": "grx",
+      "label": "Glutathione reductase"
+     },
+     {
+      "id": "gsh",
+      "label": "Reduced glutathione (GSH)"
+     },
+     {
+      "id": "gpx",
+      "label": "Glutathione peroxidase (H2O2 -> H2O)"
+     }
+    ],
+    "edges": [
+     [
+      "g6p",
+      "gpd",
+      "Oxidative shunt phase"
+     ],
+     [
+      "gpd",
+      "grx",
+      "Supplies reducing equivalents"
+     ],
+     [
+      "grx",
+      "gsh",
+      "Converts GSSG to 2 GSH"
+     ],
+     [
+      "gsh",
+      "gpx",
+      "Neutralizes reactive peroxides"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In G6PD **deficiency**, oxidative stress depletes reduced glutathione, leading to extensive sulfhydryl crosslinking and denaturation of hemoglobin. Insoluble globin precipitates form aggregates called Heinz bodies, which adhere to the inner erythrocyte membrane. As these rigid cells transit the splenic cords, macrophages excise the inclusion bodies, generating characteristic bite cells and trigger intravascular and extravascular hemolytic anemia.",
+   "say": "In G6PD deficiency, oxidative stress exhausts reduced glutathione, causing hemoglobin denaturation and precipitation into Heinz bodies. Splenic macrophages pluck out these precipitates, creating bite cells and causing acute intravascular and extravascular hemolysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Triggers of oxidative hemolysis",
+     "points": [
+      "Infections (pneumonia, viral hepatitis)",
+      "Fava beans (vicine and convicine glucosides)",
+      "Antimalarials (primaquine, tafenoquine)",
+      "Antibiotics (sulfonamides, dapsone, nitrofurantoin)"
+     ]
+    },
+    "right": {
+     "title": "Peripheral blood findings",
+     "points": [
+      "Heinz bodies visible on supravital crystal violet stain",
+      "Bite cells (degmacytes) from splenic pitting",
+      "Polychromasia reflecting compensatory reticulocytosis",
+      "Unconjugated hyperbilirubinemia and elevated LDH"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pyruvate **kinase** deficiency is the second most frequent cause of hereditary non-spherocytic hemolytic anemia. Inherited in an autosomal recessive manner, this glycolytic defect cripples adenosine triphosphate generation. Inability to maintain cation pump activity causes potassium and water leakage, cellular dehydration, membrane rigidification, and premature phagocytosis by splenic reticuloendothelial macrophages. 2,3-BPG levels paradoxically rise, improving oxygen delivery to peripheral tissues.",
+   "say": "Pyruvate kinase deficiency is an autosomal recessive enzymopathy causing chronic non-spherocytic hemolytic anemia. Reduced ATP impairs ion pump function, leading to cellular dehydration and splenic destruction. Paradoxically elevated 2,3-BPG enhances tissue oxygen delivery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic parameter",
+     "G6PD deficiency",
+     "Pyruvate kinase deficiency"
+    ],
+    "rows": [
+     [
+      "Inheritance pattern",
+      "X-linked recessive",
+      "Autosomal recessive"
+     ],
+     [
+      "Hemolysis pattern",
+      "Episodic, triggered by oxidative stress",
+      "Chronic ongoing extravascular hemolysis"
+     ],
+     [
+      "2,3-BPG levels",
+      "Normal",
+      "Markedly elevated (shifts curve right)"
+     ],
+     [
+      "Diagnostic confirmation",
+      "Enzyme activity assay after acute crisis",
+      "Direct erythrocyte PK enzyme activity measurement"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "c344e03a-4000-8000-c344-e03a12345678",
+  "c244dea7-4000-8000-c244-dea712345678",
+  "c144dd14-4000-8000-c144-dd1412345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

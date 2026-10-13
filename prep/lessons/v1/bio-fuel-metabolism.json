@@ -1,0 +1,192 @@
+{
+ "module": "bio-fuel-metabolism",
+ "subject": "biochemistry",
+ "title": "Fuel homeostasis: the feed-fast cycle, hormonal counter-regulation, and ketoacidosis",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Lehninger Principles of Biochemistry 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Fuel metabolism in humans is dynamically coordinated through the **feed-fast** cycle to maintain plasma glucose within tight physiological limits (70 to 100 mg/dL). In the well-fed state, postprandial glucose stimulates pancreatic beta-cell insulin secretion while suppressing glucagon. Insulin promotes glucose uptake into skeletal muscle and adipose tissue via GLUT4 translocation, stimulates hepatic glycogenesis, activates glycolysis, and stimulates de novo lipogenesis while suppressing hormone-sensitive lipase.",
+   "say": "The feed-fast cycle maintains blood glucose between 70 and 100 mg per deciliter. Following a meal, insulin drives GLUT4-mediated glucose entry into muscle and fat, promotes hepatic glycogen and lipid synthesis, and shuts off lipolysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic state",
+     "Primary hormone",
+     "Dominant metabolic pathways"
+    ],
+    "rows": [
+     [
+      "Well-fed (absorptive)",
+      "High Insulin, Low Glucagon",
+      "Glycogenesis, glycolysis, lipogenesis, protein synthesis"
+     ],
+     [
+      "Early fasting (12-24 h)",
+      "Low Insulin, High Glucagon",
+      "Hepatic glycogenolysis, gluconeogenesis, lipolysis"
+     ],
+     [
+      "Prolonged fasting (>48 h)",
+      "Low Insulin, High Glucagon, Cortisol",
+      "Adipose lipolysis, hepatic ketogenesis, muscle proteolysis"
+     ],
+     [
+      "Starvation (>1-2 wk)",
+      "Suppressed thyroid / metabolic rate",
+      "Brain ketone oxidation, reduced muscle wasting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During fasting, declining insulin and elevated glucagon activate hepatic glycogen phosphorylase to release glucose via **glycogenolysis**. Hepatic glycogen stores deplete within 18 to 24 hours, after which gluconeogenesis becomes the exclusive endogenous glucose source. Gluconeogenesis utilizes lactate from erythrocytes, glycerol from adipose lipolysis, and glucogenic amino acids (predominantly alanine and glutamine) mobilized from skeletal muscle proteolysis.",
+   "say": "Fasting triggers hepatic glycogenolysis, which exhausts within 24 hours. Gluconeogenesis then supplies all circulating glucose, consuming lactate, glycerol from fat breakdown, and alanine from muscle proteolysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Insulin drops & Glucagon rises"
+     },
+     {
+      "id": "f2",
+      "label": "Hepatic glycogenolysis sustains first 24h"
+     },
+     {
+      "id": "f3",
+      "label": "Adipose HSL releases free fatty acids & glycerol"
+     },
+     {
+      "id": "f4",
+      "label": "Muscle releases alanine & lactate"
+     },
+     {
+      "id": "f5",
+      "label": "Hepatic gluconeogenesis becomes essential"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ],
+     [
+      "f4",
+      "f5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prolonged fasting and uncontrolled type 1 diabetes drive unrestrained **ketogenesis**. Accelerated adipose lipolysis floods the liver with free fatty acids. Hepatic beta-oxidation generates copious acetyl-CoA, which allosterically inhibits pyruvate dehydrogenase while stimulating pyruvate carboxylase to drive gluconeogenesis. Depletion of oxaloacetate for gluconeogenesis diverts surplus acetyl-CoA into acetoacetate and beta-hydroxybutyrate. After several days of starvation, the brain adapts to utilize **ketone bodies** for up to two-thirds of its energy requirements.",
+   "say": "Starvation stimulates hepatic ketogenesis. Massive fatty acid beta-oxidation creates excess acetyl-CoA, which diverts into acetoacetate and beta-hydroxybutyrate as oxaloacetate is consumed for gluconeogenesis. Brain tissue adapts to oxidize ketones, sparing muscle protein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ",
+     "Well-fed fuel source",
+     "Prolonged starvation fuel adaptation"
+    ],
+    "rows": [
+     [
+      "Brain",
+      "Glucose exclusively",
+      "Acetoacetate and beta-hydroxybutyrate (60-70%)"
+     ],
+     [
+      "Skeletal muscle",
+      "Glucose (postprandial)",
+      "Fatty acids (ketone sparing for brain)"
+     ],
+     [
+      "Cardiac muscle",
+      "Fatty acids (60-80%)",
+      "Fatty acids and ketone bodies"
+     ],
+     [
+      "Red blood cells",
+      "Glucose (anaerobic only)",
+      "Glucose exclusively (lack mitochondria)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Absolute insulin deficiency produces life-threatening diabetic **ketoacidosis** (DKA). Unchecked glucagon, epinephrine, and cortisol stimulate massive lipolysis and uninhibited hepatic ketogenesis. Accumulating acetoacetic and beta-hydroxybutyric acids exhaust plasma bicarbonate buffers, generating a high anion gap metabolic acidosis with compensatory Kussmaul respirations. Severe hyperglycemia creates profound osmotic diuresis, precipitating dehydration, hypovolemic shock, and total body potassium depletion.",
+   "say": "Diabetic ketoacidosis stems from absolute insulin lack. Unopposed counter-regulatory hormones unleash lipolysis and ketogenesis, creating a severe high anion gap acidosis. Osmotic diuresis induces dehydration and severe total-body potassium deficit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Absolute insulin deficiency + counter-regulatory surge"
+     },
+     {
+      "id": "d2",
+      "label": "Massive lipolysis & uninhibited ketogenesis"
+     },
+     {
+      "id": "d3",
+      "label": "Acetoacetate + Beta-hydroxybutyrate acidosis"
+     },
+     {
+      "id": "d4",
+      "label": "Severe hyperglycemia & osmotic diuresis"
+     },
+     {
+      "id": "d5",
+      "label": "High anion gap acidosis, shock, K+ depletion"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ],
+     [
+      "d4",
+      "d5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "7f34c9e6-4000-8000-7f34-c9e612345678",
+  "0b316afe-4000-8000-0b31-6afe12345678",
+  "28243503-4000-8000-2824-350312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
