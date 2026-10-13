@@ -174,12 +174,8 @@ try {
   await ev("document.getElementById('__sw').remove();return 1");
 
   // 10. Tab bar + status tap
-  const tfv = () => ev("var b=document.querySelector('.rnav-tabbar');return b.style.transform");
-  await ev("document.querySelector('.v3-main').scrollTop=200;return 1"); await sleep(120);
-  await ev("document.querySelector('.v3-main').scrollTop=420;return 1"); await sleep(300);
-  ok(/translateY\(100%\)/.test(await tfv()), "scrolling down slides the tab bar away");
-  await ev("document.querySelector('.v3-main').scrollTop=380;return 1"); await sleep(300);
-  ok((await tfv()) === "", "scrolling up brings it back");
+  await ev("document.querySelector('.v3-main').scrollTop=420;return 1"); await sleep(400);
+  ok((await ev("return document.querySelector('.rnav-tabbar').style.transform")) === "", "scrolling down no longer hides the tab bar");
   await ev("document.querySelector('.v3-main').scrollTop=700;return 1"); await sleep(300);
   await ev("window.dispatchEvent(new Event('statusTap'));return 1"); await sleep(1000);
   ok((await ev("return document.querySelector('.v3-main').scrollTop")) === 0, "the status-bar tap scrolls the list to the top");

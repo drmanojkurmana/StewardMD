@@ -1,55 +1,21 @@
-/* StewardMD — tab bar that gets out of the way, and tap-the-top-to-scroll-up (tab-bar.js).
+/* StewardMD — tab bar indicator, re-tap to top, and status-bar tap to top (tab-bar.js).
  *
- * 1. Home's bottom tab bar slides away as you scroll down the page and returns the moment you
- *    scroll up (or reach the top / bottom), like Safari and Music: more room for content.
- *    Also: a small indicator slides under the tab you last opened (the tabs are launchers, so "selected"
+ * 1. The tab bar always stays put (hide-on-scroll was removed at the owner's request). A small indicator slides under the tab you last opened (the tabs are launchers, so "selected"
  *    means "last opened this session"), and tapping that same tab again while home is scrolled down
  *    scrolls home to the top instead of reopening it (the iOS re-tap convention).
  * 2. Tap the status bar (iOS sends Capacitor's `statusTap` event; a tap in the top 20px of the web
  *    view is treated the same) and the topmost scrolling list smooth-scrolls to its top, the way
  *    every native iOS list does.
  *
- * transform only; never changes the bar's layout box. Kill switches: localStorage smd_tabbar_hide=0,
- * smd_status_top=0, smd_tab_indicator=0. */
+ * transform only; never changes the bar's layout box. Kill switches: localStorage smd_status_top=0, smd_tab_indicator=0. */
 (function () {
   "use strict";
-  // Direction decision with hysteresis: ignore jitter, always show near the top and the bottom.
-  function decide(prevTop, top, maxTop, hidden) {
-    var d = top - prevTop;
-    if (top <= 80 || (maxTop > 0 && top >= maxTop - 40)) return false;
-    if (d > 10) return true;
-    if (d < -8) return false;
-    return hidden;
-  }
-  var seam = { decide: decide };
+  var seam = {};
   if (typeof module !== "undefined" && module.exports) module.exports = seam;
   if (typeof window === "undefined") return;
   function off(k) { try { return localStorage.getItem(k) === "0"; } catch (e) { return false; } }
   function reduced() { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   window.SMD_TABBAR_SEAM = seam;
-
-  /* ---- 1. hide on scroll ---- */
-  if (!off("smd_tabbar_hide")) {
-    var last = new WeakMap(), hidden = false, bar = null;
-    var getBar = function () { return bar && bar.isConnected ? bar : (bar = document.querySelector(".rnav-tabbar")); };
-    var setHidden = function (h) {
-      var b = getBar(); if (!b || h === hidden) return;
-      hidden = h;
-      b.style.transition = reduced() ? "opacity .2s linear" : "transform .34s cubic-bezier(.32,.72,0,1)";
-      if (reduced()) b.style.opacity = h ? "0" : ""; else b.style.transform = h ? "translateY(100%)" : "";
-      b.style.pointerEvents = h ? "none" : "";
-    };
-    document.addEventListener("scroll", function (e) {
-      var sc = e.target;
-      if (!sc || sc.nodeType !== 1 || !sc.classList || !sc.classList.contains("v3-main")) return;
-      var top = sc.scrollTop, prev = last.has(sc) ? last.get(sc) : top;
-      last.set(sc, top);
-      setHidden(decide(prev, top, sc.scrollHeight - sc.clientHeight, hidden));
-    }, { capture: true, passive: true });
-    // Anything that opens over home (sheet, overlay) or a tab press brings the bar back.
-    document.addEventListener("click", function (e) { if (e.target && e.target.closest && e.target.closest(".rnav-tab")) setHidden(false); }, true);
-    seam.setHidden = setHidden;
-  }
 
   /* ---- 1b. sliding indicator + re-tap scrolls home to the top ---- */
   if (!off("smd_tab_indicator")) {
