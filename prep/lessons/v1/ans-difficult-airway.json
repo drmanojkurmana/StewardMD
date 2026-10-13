@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "ans-difficult-airway",
+ "subject": "anaesthesia",
+ "title": "Difficult airway: call for help early, oxygenate, follow the plan",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Predict difficulty from history, mouth opening, neck movement, dentition and previous records, but expect the **unanticipated** difficult airway. The priority is always **oxygenation**, not intubation at any cost. Call for help early, optimise position, preoxygenate well, and have suction, adjuncts and a supraglottic airway ready before induction (Difficult Airway Society guidance).",
+   "say": "Predict difficulty from history and examination, but expect the unanticipated difficult airway. The priority is always oxygenation, not intubation at any cost. Call for help early, optimise position, preoxygenate well, and have adjuncts ready before induction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Preoxygenate + position"
+     },
+     {
+      "id": "b",
+      "label": "Call for help early"
+     },
+     {
+      "id": "c",
+      "label": "Oxygenate first"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Work through a declared sequence: optimised laryngoscopy, then a **supraglottic airway** to oxygenate, then face-mask ventilation, waking the patient if safe. Limit attempts; repeated trauma closes the airway. If you cannot intubate and cannot oxygenate, proceed without delay to **emergency front-of-neck access** while continuing oxygenation attempts.",
+   "say": "Work through a declared sequence: optimised laryngoscopy, then a supraglottic airway, then face-mask ventilation, waking the patient if safe. Limit attempts. If you cannot intubate and cannot oxygenate, proceed without delay to emergency front-of-neck access.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Plan A: laryngoscopy"
+     },
+     {
+      "id": "b",
+      "label": "Plan B: supraglottic airway"
+     },
+     {
+      "id": "c",
+      "label": "Plan C: mask / wake"
+     },
+     {
+      "id": "d",
+      "label": "CICO: front-of-neck access"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confirm every tube with **waveform capnography**; no trace means assume oesophageal placement until proved otherwise. After a difficult airway, document what worked, inform the patient, and arrange follow-up. Team communication ('we are in Plan B') prevents fixation error, the commonest human-factor harm.",
+   "say": "Confirm every tube with waveform capnography. After a difficult airway, document what worked and inform the patient. Team communication prevents fixation error, the commonest human-factor harm."
+  }
+ ]
+}

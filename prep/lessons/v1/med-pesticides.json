@@ -1,0 +1,65 @@
+{
+ "v": 1,
+ "module": "med-pesticides",
+ "subject": "medicine",
+ "title": "Organophosphate poisoning: atropine for the wet patient, pralidoxime early",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Organophosphate poisoning** follows pesticide exposure. Excess acetylcholine causes a wet cholinergic picture: pinpoint pupils, salivation, sweating, bronchorrhoea, wheeze, bradycardia, vomiting, diarrhoea and confusion, sometimes with seizures or weakness. Ask about farm work, spray exposure and access to pesticides in any undifferentiated cholinergic patient.",
+   "say": "Organophosphate poisoning follows pesticide exposure. Excess acetylcholine causes a wet cholinergic picture: pinpoint pupils, salivation, sweating, bronchorrhoea, wheeze, slow pulse, vomiting, diarrhoea and confusion, sometimes with seizures or weakness. Ask about farm work and spray exposure in any cholinergic patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pesticide exposure"
+     },
+     {
+      "id": "b",
+      "label": "Wet cholinergic signs"
+     },
+     {
+      "id": "c",
+      "label": "Atropine first"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Protect staff, remove contaminated clothing and wash skin. Give **atropine** in escalating intravenous doses until secretions dry, the chest clears and heart rate and blood pressure recover (WHO pesticide guidance). Atropine treats muscarinic signs; it does not reverse weakness. Add **pralidoxime** as early as possible for nicotinic weakness, alongside atropine, and treat seizures with a benzodiazepine.",
+   "say": "Protect staff, remove contaminated clothing and wash skin. Give atropine in escalating intravenous doses until secretions dry, the chest clears and pulse and blood pressure recover. Atropine treats muscarinic signs; it does not reverse weakness. Add pralidoxime as early as possible for nicotinic weakness, and treat seizures with a benzodiazepine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Target"
+    ],
+    "rows": [
+     [
+      "Atropine",
+      "Dry secretions, clear chest, restore pulse and pressure"
+     ],
+     [
+      "Pralidoxime",
+      "Nicotinic weakness (early)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Avoid succinylcholine, which is broken down by the same blocked enzyme and can prolong paralysis. Watch for the **intermediate syndrome** (proximal and respiratory weakness days later) and for relapse as fat-stored pesticide re-enters the blood. Ventilatory support saves lives while antidotes work.",
+   "say": "Avoid succinylcholine, which is broken down by the blocked enzyme and can prolong paralysis. Watch for the intermediate syndrome, with proximal and respiratory weakness days later, and for relapse. Ventilatory support saves lives while antidotes work."
+  }
+ ]
+}

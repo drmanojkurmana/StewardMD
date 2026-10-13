@@ -1,0 +1,757 @@
+{
+ "topic": "med-envenomation",
+ "set": "gap1013a",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap301",
+   "q": "First aid for snake bite is:",
+   "o": [
+    "Immobilise the limb, reassure, transport rapidly",
+    "Apply a tight tourniquet",
+    "Cut and suck the wound",
+    "Apply herbal paste"
+   ],
+   "a": 0,
+   "exp": "Immobilisation, reassurance and rapid transport are first aid (WHO SE Asia). Tourniquets, cutting and herbs worsen injury.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Tourniquets cause ischaemia and worse injury.",
+    "Cutting and sucking harm and delay.",
+    "Herbs delay effective care."
+   ],
+   "kp": "Immobilise and transport.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "first-aid"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Immobilise and transport.",
+    "others": {
+     "B": "Tourniquets cause ischaemia and worse injury.",
+     "C": "Cutting and sucking harm and delay.",
+     "D": "Herbs delay effective care."
+    },
+    "pearl": "Still limb, fast transport.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Apply snakebite first aid.",
+    "rev": "Immobilisation, reassurance and rapid transport are first aid (WHO SE Asia). Tourniquets, cutting and herbs worsen injury.",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap302",
+   "q": "Antivenom is indicated for:",
+   "o": [
+    "Spontaneous bleeding with incoagulable blood",
+    "Mild local pain alone",
+    "Every bite regardless of signs",
+    "A dead snake with no bite marks"
+   ],
+   "a": 0,
+   "exp": "Systemic envenoming such as bleeding or incoagulable blood warrants antivenom (WHO SE Asia).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Mild pain alone is observed, not treated with antivenom.",
+    "Most bites need no antivenom.",
+    "No envenoming, no antivenom."
+   ],
+   "kp": "Antivenom for systemic or severe local signs only.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "antivenom"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Antivenom for systemic or severe local signs only.",
+    "others": {
+     "B": "Mild pain alone is observed, not treated with antivenom.",
+     "C": "Most bites need no antivenom.",
+     "D": "No envenoming, no antivenom."
+    },
+    "pearl": "No signs, no antivenom.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Select patients for antivenom.",
+    "rev": "Systemic envenoming such as bleeding or incoagulable blood warrants antivenom (WHO SE Asia).",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap303",
+   "q": "Where labs are limited, clotting after a viper bite is tested with:",
+   "o": [
+    "20-minute whole blood clotting test",
+    "Tourniquet test",
+    "Bleeding time alone",
+    "No test is ever needed"
+   ],
+   "a": 0,
+   "exp": "The 20-minute whole blood clotting test detects incoagulable blood at the bedside (WHO SE Asia).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "That tests capillary fragility, not clotting here.",
+    "Bleeding time is not the field test.",
+    "Clotting guides antivenom."
+   ],
+   "kp": "20 minutes, whole blood, glass tube.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "clotting"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "20 minutes, whole blood, glass tube.",
+    "others": {
+     "B": "That tests capillary fragility, not clotting here.",
+     "C": "Bleeding time is not the field test.",
+     "D": "Clotting guides antivenom."
+    },
+    "pearl": "Bedside clotting guides antivenom.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Use the 20-minute clotting test.",
+    "rev": "The 20-minute whole blood clotting test detects incoagulable blood at the bedside (WHO SE Asia).",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap304",
+   "q": "Ptosis progressing to breathing difficulty after a bite suggests:",
+   "o": [
+    "Neurotoxic envenoming needing airway support",
+    "Local infection only",
+    "Allergy to bandages",
+    "Hypoglycaemia"
+   ],
+   "a": 0,
+   "exp": "Descending paralysis with ptosis first is neurotoxic envenoming; support airway and ventilation early.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Infection evolves over days, not this pattern.",
+    "Bandage allergy lacks paralysis.",
+    "Hypoglycaemia lacks this sequence."
+   ],
+   "kp": "Ptosis first, breathing next.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "neurotoxic"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Ptosis first, breathing next.",
+    "others": {
+     "B": "Infection evolves over days, not this pattern.",
+     "C": "Bandage allergy lacks paralysis.",
+     "D": "Hypoglycaemia lacks this sequence."
+    },
+    "pearl": "Ptosis warns of respiratory failure.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Recognise neurotoxic bite.",
+    "rev": "Descending paralysis with ptosis first is neurotoxic envenoming; support airway and ventilation early.",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap305",
+   "q": "A reaction during antivenom infusion is treated by:",
+   "o": [
+    "Pausing infusion and giving IM adrenaline",
+    "Speeding the infusion",
+    "Antihistamine alone and continuing",
+    "Removing all monitoring"
+   ],
+   "a": 0,
+   "exp": "Pause antivenom and give IM adrenaline for reactions (WHO SE Asia).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Faster worsens the reaction.",
+    "Antihistamine alone under-treats.",
+    "Monitoring must increase."
+   ],
+   "kp": "Pause, adrenaline, reassess.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "reaction"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Pause, adrenaline, reassess.",
+    "others": {
+     "B": "Faster worsens the reaction.",
+     "C": "Antihistamine alone under-treats.",
+     "D": "Monitoring must increase."
+    },
+    "pearl": "React: pause and adrenaline.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Manage antivenom reaction.",
+    "rev": "Pause antivenom and give IM adrenaline for reactions (WHO SE Asia).",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap306",
+   "q": "Which local sign pushes toward antivenom?",
+   "o": [
+    "Rapidly progressive swelling of the bitten limb",
+    "Mild itch at the bite site",
+    "A single fang mark with no symptoms",
+    "Old scar"
+   ],
+   "a": 0,
+   "exp": "Severe local envenoming includes rapidly progressive swelling (WHO SE Asia).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Itch alone is observed.",
+    "Marks without signs need observation.",
+    "Scars are historical."
+   ],
+   "kp": "Rapid swelling can justify antivenom.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "local"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Rapid swelling can justify antivenom.",
+    "others": {
+     "B": "Itch alone is observed.",
+     "C": "Marks without signs need observation.",
+     "D": "Scars are historical."
+    },
+    "pearl": "Watch the swelling rate.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Recognise severe local envenoming.",
+    "rev": "Severe local envenoming includes rapidly progressive swelling (WHO SE Asia).",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap307",
+   "q": "Haemotoxic bite follow-up must monitor:",
+   "o": [
+    "Urine output, clotting and renal function",
+    "Vision only",
+    "Hearing only",
+    "Hair growth"
+   ],
+   "a": 0,
+   "exp": "Bleeding bites injure kidneys; monitor urine, clotting and renal function.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Vision is not the priority axis.",
+    "Hearing is unrelated.",
+    "Irrelevant to envenoming."
+   ],
+   "kp": "Bleeding bite: watch kidneys and clotting.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "renal"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Bleeding bite: watch kidneys and clotting.",
+    "others": {
+     "B": "Vision is not the priority axis.",
+     "C": "Hearing is unrelated.",
+     "D": "Irrelevant to envenoming."
+    },
+    "pearl": "Monitor kidneys after haemotoxic bites.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Monitor renal function in snake bite.",
+    "rev": "Bleeding bites injure kidneys; monitor urine, clotting and renal function.",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap308",
+   "q": "Pressure immobilisation is taught mainly for:",
+   "o": [
+    "Neurotoxic elapid bites where protocols teach it",
+    "Every bite with a tight tourniquet",
+    "Bleeding viper bites with arterial occlusion",
+    "Fractures"
+   ],
+   "a": 0,
+   "exp": "Pressure immobilisation suits neurotoxic elapid protocols; tight tourniquets are harmful (WHO SE Asia).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Tourniquets are harmful substitutes.",
+    "Arterial occlusion worsens injury.",
+    "Fracture care differs."
+   ],
+   "kp": "Pressure bandage for elapids, never a tourniquet.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "pressure"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Pressure bandage for elapids, never a tourniquet.",
+    "others": {
+     "B": "Tourniquets are harmful substitutes.",
+     "C": "Arterial occlusion worsens injury.",
+     "D": "Fracture care differs."
+    },
+    "pearl": "Firm bandage is not a tourniquet.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Use pressure immobilisation correctly.",
+    "rev": "Pressure immobilisation suits neurotoxic elapid protocols; tight tourniquets are harmful (WHO SE Asia).",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap309",
+   "q": "The most harmful traditional practice to stop is:",
+   "o": [
+    "Tight tourniquet left for hours",
+    "Immobilisation",
+    "Rapid transport",
+    "Removing rings"
+   ],
+   "a": 0,
+   "exp": "Prolonged tight tourniquets cause ischaemia, gangrene and worse outcomes.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Immobilisation is recommended.",
+    "Transport is recommended.",
+    "Removing rings prevents constriction harm."
+   ],
+   "kp": "Tourniquets maim; immobilisation saves.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "harm"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Tourniquets maim; immobilisation saves.",
+    "others": {
+     "B": "Immobilisation is recommended.",
+     "C": "Transport is recommended.",
+     "D": "Removing rings prevents constriction harm."
+    },
+    "pearl": "Undo the tourniquet, keep the splint.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Stop harmful first aid.",
+    "rev": "Prolonged tight tourniquets cause ischaemia, gangrene and worse outcomes.",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap310",
+   "q": "After a bite with no symptoms, the safe plan is:",
+   "o": [
+    "Observe with serial examination and clotting checks",
+    "Discharge in five minutes",
+    "Give antivenom just in case",
+    "Apply a tourniquet overnight"
+   ],
+   "a": 0,
+   "exp": "Asymptomatic bites need observation with serial checks, because envenoming can evolve (WHO SE Asia).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Early discharge misses evolving signs.",
+    "Antivenom without signs risks reactions needlessly.",
+    "Tourniquets harm."
+   ],
+   "kp": "Observe; envenoming evolves.",
+   "t": "med-envenomation",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "snake",
+    "observe"
+   ],
+   "source": "WHO South-East Asia snakebite management guideline",
+   "x": {
+    "key": "Observe; envenoming evolves.",
+    "others": {
+     "B": "Early discharge misses evolving signs.",
+     "C": "Antivenom without signs risks reactions needlessly.",
+     "D": "Tourniquets harm."
+    },
+    "pearl": "No signs now still means observe.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Observe asymptomatic bites.",
+    "rev": "Asymptomatic bites need observation with serial checks, because envenoming can evolve (WHO SE Asia).",
+    "next": {
+     "concept": "med-envenomation",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO South-East Asia snakebite management guideline",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-envenomation"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,757 @@
+{
+ "topic": "med-potassium",
+ "set": "gap1013a",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap501",
+   "q": "Peaked T waves with widened QRS and high potassium: first treatment limb is:",
+   "o": [
+    "Intravenous calcium to protect the myocardium",
+    "Insulin alone",
+    "Oral binder alone",
+    "Discharge"
+   ],
+   "a": 0,
+   "exp": "ECG changes need immediate myocardial protection with IV calcium; it stabilises without lowering potassium (UK Kidney Association).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Insulin shifts but does not protect instantly.",
+    "Binders remove slowly.",
+    "ECG changes are an emergency."
+   ],
+   "kp": "Protect first with calcium.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hyperk",
+    "calcium"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Protect first with calcium.",
+    "others": {
+     "B": "Insulin shifts but does not protect instantly.",
+     "C": "Binders remove slowly.",
+     "D": "ECG changes are an emergency."
+    },
+    "pearl": "Protect, shift, remove: in that order.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Protect the heart in hyperkalaemia.",
+    "rev": "ECG changes need immediate myocardial protection with IV calcium; it stabilises without lowering potassium (UK Kidney Association).",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap502",
+   "q": "Insulin with glucose in hyperkalaemia works by:",
+   "o": [
+    "Shifting potassium into cells temporarily",
+    "Removing potassium permanently",
+    "Protecting the myocardium directly",
+    "Replacing calcium"
+   ],
+   "a": 0,
+   "exp": "Insulin-glucose shifts potassium intracellularly; removal needs binders, diuretics or dialysis (UKKA).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Removal is a separate limb.",
+    "Protection is calcium's role.",
+    "It does not replace calcium."
+   ],
+   "kp": "Shift is temporary; removal must follow.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hyperk",
+    "shift"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Shift is temporary; removal must follow.",
+    "others": {
+     "B": "Removal is a separate limb.",
+     "C": "Protection is calcium's role.",
+     "D": "It does not replace calcium."
+    },
+    "pearl": "Shift buys time, removal cures.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Shift potassium with insulin-glucose.",
+    "rev": "Insulin-glucose shifts potassium intracellularly; removal needs binders, diuretics or dialysis (UKKA).",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap503",
+   "q": "After shifting treatment, potassium must be:",
+   "o": [
+    "Rechecked, because rebound occurs as shifting wears off",
+    "Never rechecked",
+    "Assumed cured",
+    "Treated with calcium alone forever"
+   ],
+   "a": 0,
+   "exp": "Shifting wears off and potassium rebounds; recheck and complete removal (UKKA).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Without recheck, rebound is missed.",
+    "Shift alone does not cure.",
+    "Calcium protects, it does not remove."
+   ],
+   "kp": "Recheck: rebound is expected.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hyperk",
+    "recheck"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Recheck: rebound is expected.",
+    "others": {
+     "B": "Without recheck, rebound is missed.",
+     "C": "Shift alone does not cure.",
+     "D": "Calcium protects, it does not remove."
+    },
+    "pearl": "Shift, remove, recheck.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Recheck potassium after treatment.",
+    "rev": "Shifting wears off and potassium rebounds; recheck and complete removal (UKKA).",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap504",
+   "q": "A haemolysed sample reports high potassium in a well patient with normal ECG. Best step is:",
+   "o": [
+    "Repeat a non-haemolysed sample urgently while assessing risk",
+    "Start dialysis at once",
+    "Ignore all future results",
+    "Give calcium blindly without assessment"
+   ],
+   "a": 0,
+   "exp": "Exclude pseudohyperkalaemia from haemolysis with an urgent repeat sample and clinical assessment (UKKA).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Dialysis needs true, severe indications.",
+    "Future results still matter.",
+    "Blind treatment without assessment is unsafe."
+   ],
+   "kp": "Haemolysis fakes hyperkalaemia: repeat it.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hyperk",
+    "haemolysis"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Haemolysis fakes hyperkalaemia: repeat it.",
+    "others": {
+     "B": "Dialysis needs true, severe indications.",
+     "C": "Future results still matter.",
+     "D": "Blind treatment without assessment is unsafe."
+    },
+    "pearl": "Well patient, normal ECG: verify the sample.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Exclude pseudohyperkalaemia.",
+    "rev": "Exclude pseudohyperkalaemia from haemolysis with an urgent repeat sample and clinical assessment (UKKA).",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap505",
+   "q": "In DKA, insulin must wait until:",
+   "o": [
+    "Potassium is known and replaced if low",
+    "Fluids are finished for a day",
+    "Ketones disappear",
+    "Discharge"
+   ],
+   "a": 0,
+   "exp": "Insulin drives potassium into cells; check and replace potassium first if low to avoid collapse (UKKA/DKA practice).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Fluids and insulin overlap once potassium is safe.",
+    "Insulin continues while ketones clear with monitoring.",
+    "Emergency care precedes discharge."
+   ],
+   "kp": "Potassium before insulin in DKA.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hyperk",
+    "dka"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Potassium before insulin in DKA.",
+    "others": {
+     "B": "Fluids and insulin overlap once potassium is safe.",
+     "C": "Insulin continues while ketones clear with monitoring.",
+     "D": "Emergency care precedes discharge."
+    },
+    "pearl": "Check potassium before insulin.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Check potassium before DKA insulin.",
+    "rev": "Insulin drives potassium into cells; check and replace potassium first if low to avoid collapse (UKKA/DKA practice).",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap506",
+   "q": "Which drug class should be stopped in acute hyperkalaemia?",
+   "o": [
+    "Potassium-sparing diuretics and potassium supplements",
+    "All antibiotics",
+    "Oxygen",
+    "Insulin"
+   ],
+   "a": 0,
+   "exp": "Stop potassium sources including supplements and potassium-sparing diuretics (UKKA).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Antibiotics treat infection, not potassium.",
+    "Oxygen supports the patient.",
+    "Insulin-glucose treats hyperkalaemia."
+   ],
+   "kp": "Stop potassium in, then treat.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hyperk",
+    "stop"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Stop potassium in, then treat.",
+    "others": {
+     "B": "Antibiotics treat infection, not potassium.",
+     "C": "Oxygen supports the patient.",
+     "D": "Insulin-glucose treats hyperkalaemia."
+    },
+    "pearl": "Stop the source.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Stop potassium-raising drugs.",
+    "rev": "Stop potassium sources including supplements and potassium-sparing diuretics (UKKA).",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap507",
+   "q": "Definitive potassium removal in refractory hyperkalaemia with kidney failure is:",
+   "o": [
+    "Dialysis",
+    "Calcium alone",
+    "Glucose alone",
+    "Observation"
+   ],
+   "a": 0,
+   "exp": "Dialysis removes potassium when binders and diuretics cannot (UKKA).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Calcium only protects.",
+    "Glucose only shifts with insulin.",
+    "Observation risks arrhythmia."
+   ],
+   "kp": "Refractory plus kidney failure means dialysis.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hyperk",
+    "dialysis"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Refractory plus kidney failure means dialysis.",
+    "others": {
+     "B": "Calcium only protects.",
+     "C": "Glucose only shifts with insulin.",
+     "D": "Observation risks arrhythmia."
+    },
+    "pearl": "Remove definitively with dialysis.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Use dialysis for refractory hyperkalaemia.",
+    "rev": "Dialysis removes potassium when binders and diuretics cannot (UKKA).",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap508",
+   "q": "Hypokalaemia most dangerously interacts with:",
+   "o": [
+    "Digoxin, increasing arrhythmia risk",
+    "Paracetamol",
+    "Oxygen",
+    "Saline"
+   ],
+   "a": 0,
+   "exp": "Low potassium potentiates digoxin arrhythmias; replace potassium and magnesium carefully.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "No such interaction dominates.",
+    "Oxygen is supportive.",
+    "Saline does not create this risk."
+   ],
+   "kp": "Low potassium plus digoxin is dangerous.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hypok",
+    "digoxin"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Low potassium plus digoxin is dangerous.",
+    "others": {
+     "B": "No such interaction dominates.",
+     "C": "Oxygen is supportive.",
+     "D": "Saline does not create this risk."
+    },
+    "pearl": "Check potassium in every digoxin patient.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Avoid hypokalaemia with digoxin.",
+    "rev": "Low potassium potentiates digoxin arrhythmias; replace potassium and magnesium carefully.",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap509",
+   "q": "Rapid intravenous push of concentrated potassium is:",
+   "o": [
+    "Never acceptable; use rate-limited replacement",
+    "Standard care",
+    "Safe if ECG is normal",
+    "Required in hypokalaemia"
+   ],
+   "a": 0,
+   "exp": "Concentrated potassium is a high-alert drug given only rate-limited with monitoring.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Push dosing can arrest the heart.",
+    "Normal ECG does not make it safe.",
+    "Replacement is infused, not pushed."
+   ],
+   "kp": "Rate-limited, never pushed.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hypok",
+    "safety"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Rate-limited, never pushed.",
+    "others": {
+     "B": "Push dosing can arrest the heart.",
+     "C": "Normal ECG does not make it safe.",
+     "D": "Replacement is infused, not pushed."
+    },
+    "pearl": "High-alert: slow and monitored.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Replace potassium safely.",
+    "rev": "Concentrated potassium is a high-alert drug given only rate-limited with monitoring.",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap510",
+   "q": "Normal ECG in confirmed severe hyperkalaemia means:",
+   "o": [
+    "Treat on level and risk; normal ECG does not exclude danger",
+    "No treatment ever",
+    "Discharge is safe",
+    "Calcium is mandatory in all cases"
+   ],
+   "a": 0,
+   "exp": "ECG can be normal in severe hyperkalaemia; treat by level and context, with calcium reserved for ECG changes (UKKA).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Severe levels need treatment.",
+    "Discharge is unsafe.",
+    "Calcium follows ECG changes."
+   ],
+   "kp": "Normal ECG does not clear severe hyperkalaemia.",
+   "t": "med-potassium",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "hyperk",
+    "ecg"
+   ],
+   "source": "UK Kidney Association hyperkalaemia guidance",
+   "x": {
+    "key": "Normal ECG does not clear severe hyperkalaemia.",
+    "others": {
+     "B": "Severe levels need treatment.",
+     "C": "Discharge is unsafe.",
+     "D": "Calcium follows ECG changes."
+    },
+    "pearl": "Numbers plus patient, not ECG alone.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Treat severe hyperkalaemia despite normal ECG.",
+    "rev": "ECG can be normal in severe hyperkalaemia; treat by level and context, with calcium reserved for ECG changes (UKKA).",
+    "next": {
+     "concept": "med-potassium",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "UK Kidney Association hyperkalaemia guidance",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-potassium"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

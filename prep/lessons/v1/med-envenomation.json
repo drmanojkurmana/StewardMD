@@ -1,0 +1,61 @@
+{
+ "v": 1,
+ "module": "med-envenomation",
+ "subject": "medicine",
+ "title": "Snake bite: immobilise, reassure, antivenom for systemic or severe local signs",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Most snake bites do **not** need antivenom. First aid is reassurance, **immobilisation** of the bitten limb at heart level, removal of rings, and rapid transport (WHO South-East Asia snakebite guideline). Do not apply tourniquets, cut, suck or apply herbs; they worsen injury. Record bite time, snake description if safe, and evolving swelling.",
+   "say": "Most snake bites do not need antivenom. First aid is reassurance, immobilisation of the bitten limb at heart level, removal of rings, and rapid transport. Do not apply tourniquets, cut, suck or apply herbs. Record bite time and evolving swelling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Immobilise limb"
+     },
+     {
+      "id": "b",
+      "label": "Rapid transport"
+     },
+     {
+      "id": "c",
+      "label": "Assess for antivenom"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Give **antivenom** only for systemic envenoming (spontaneous bleeding, incoagulable blood, neurotoxicity, shock, kidney injury) or severe local envenoming (rapidly progressive swelling). Test clotting with the 20-minute whole blood clotting test where labs are limited. Have adrenaline ready: antivenom reactions are treated by pausing the infusion and giving intramuscular adrenaline.",
+   "say": "Give antivenom only for systemic envenoming or severe local envenoming. Test clotting with the 20-minute whole blood clotting test where labs are limited. Have adrenaline ready, because antivenom reactions are treated by pausing the infusion and giving intramuscular adrenaline.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Give antivenom",
+     "Do not give yet"
+    ],
+    "rows": [
+     [
+      "Bleeding, incoagulable blood, paralysis, shock",
+      "Local pain and mild swelling alone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurotoxic bites cause descending paralysis: ptosis first, then breathing failure. Support the airway and ventilation; antivenom works best early. Haemotoxic bites cause bleeding and kidney injury, so monitor urine, clotting and renal function. Antibiotics and tetanus cover are secondary; pressure immobilisation is for neurotoxic elapid bites where taught.",
+   "say": "Neurotoxic bites cause descending paralysis, ptosis first, then breathing failure. Support airway and ventilation. Haemotoxic bites cause bleeding and kidney injury, so monitor urine, clotting and renal function."
+  }
+ ]
+}

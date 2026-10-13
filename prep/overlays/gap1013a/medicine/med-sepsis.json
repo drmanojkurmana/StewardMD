@@ -1,0 +1,757 @@
+{
+ "topic": "med-sepsis",
+ "set": "gap1013a",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap001",
+   "q": "A 68-year-old man with pneumonia is confused, breathing fast, with blood pressure 88/54 despite initial fluids. Lactate is raised. Blood cultures were taken and broad-spectrum antibiotics started. What is the next priority?",
+   "o": [
+    "Start a vasopressor for persistent hypotension",
+    "Give an antihistamine",
+    "Wait 6 hours to judge antibiotics",
+    "Give oral fluids only"
+   ],
+   "a": 0,
+   "exp": "Persistent hypotension with raised lactate after fluids is septic shock. A vasopressor is started without delay while source control and reassessment continue (SSC 2021).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Antihistamines have no role in septic shock.",
+    "Waiting delays perfusion support and worsens outcome.",
+    "Oral fluids cannot treat shock."
+   ],
+   "kp": "Vasopressor support restores perfusion when fluids alone fail in septic shock.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "shock"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Vasopressor support restores perfusion when fluids alone fail in septic shock.",
+    "others": {
+     "B": "Antihistamines have no role in septic shock.",
+     "C": "Waiting delays perfusion support and worsens outcome.",
+     "D": "Oral fluids cannot treat shock."
+    },
+    "pearl": "In shock, perfuse first: fluids, then vasopressor, while antibiotics and source control proceed.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Start vasopressor in fluid-refractory septic shock.",
+    "rev": "Persistent hypotension with raised lactate after fluids is septic shock. A vasopressor is started without delay while source control and reassessment continue (SSC 2021).",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap002",
+   "q": "In suspected sepsis, when should blood cultures be taken?",
+   "o": [
+    "Before antibiotics, if this does not delay them",
+    "Only after antibiotics finish",
+    "Only if fever is present",
+    "Only in intensive care"
+   ],
+   "a": 0,
+   "exp": "Cultures before antibiotics improve organism recovery, but antibiotics must not be delayed to obtain them (SSC 2021).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Post-antibiotic cultures lose yield.",
+    "Sepsis occurs without fever.",
+    "Cultures are a ward and emergency task too."
+   ],
+   "kp": "Cultures first only when antibiotics are not delayed.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "cultures"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Cultures first only when antibiotics are not delayed.",
+    "others": {
+     "B": "Post-antibiotic cultures lose yield.",
+     "C": "Sepsis occurs without fever.",
+     "D": "Cultures are a ward and emergency task too."
+    },
+    "pearl": "Never delay antibiotics for cultures.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Take cultures without delaying antibiotics in sepsis.",
+    "rev": "Cultures before antibiotics improve organism recovery, but antibiotics must not be delayed to obtain them (SSC 2021).",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap003",
+   "q": "A woman with a urinary infection, low blood pressure and mottling has a raised lactate. Antibiotics and fluids are running. What else most improves survival?",
+   "o": [
+    "Find and control the source of infection",
+    "Give steroids to every patient",
+    "Stop fluids at once",
+    "Avoid all monitoring"
+   ],
+   "a": 0,
+   "exp": "Source control (drainage, line removal, relieving obstruction) is essential; antibiotics alone fail with an uncontrolled source (SSC 2021).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Steroids are selective, not universal first-line.",
+    "Hypotension needs guided fluids, not cessation.",
+    "Monitoring guides resuscitation."
+   ],
+   "kp": "Uncontrolled source defeats antibiotics.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "source-control"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Uncontrolled source defeats antibiotics.",
+    "others": {
+     "B": "Steroids are selective, not universal first-line.",
+     "C": "Hypotension needs guided fluids, not cessation.",
+     "D": "Monitoring guides resuscitation."
+    },
+    "pearl": "Antibiotics plus source control, not antibiotics alone.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Prioritise source control in sepsis.",
+    "rev": "Source control (drainage, line removal, relieving obstruction) is essential; antibiotics alone fail with an uncontrolled source (SSC 2021).",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap004",
+   "q": "Which finding best supports organ dysfunction in sepsis?",
+   "o": [
+    "New confusion with fast breathing and low urine output",
+    "Isolated mild headache",
+    "Single low-grade temperature",
+    "Chronic stable eczema"
+   ],
+   "a": 0,
+   "exp": "New confusion, tachypnoea and oliguria signal organ dysfunction from infection, the core of sepsis.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Headache alone is not organ dysfunction.",
+    "Temperature alone does not define sepsis.",
+    "Stable skin disease is unrelated."
+   ],
+   "kp": "Sepsis is infection plus new organ dysfunction.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "recognition"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Sepsis is infection plus new organ dysfunction.",
+    "others": {
+     "B": "Headache alone is not organ dysfunction.",
+     "C": "Temperature alone does not define sepsis.",
+     "D": "Stable skin disease is unrelated."
+    },
+    "pearl": "Look for organ dysfunction, not fever alone.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Recognise organ dysfunction in sepsis.",
+    "rev": "New confusion, tachypnoea and oliguria signal organ dysfunction from infection, the core of sepsis.",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap005",
+   "q": "A patient in septic shock remains hypotensive. Where should vasopressor support be escalated?",
+   "o": [
+    "Critical care, without delay",
+    "Routine ward review next day",
+    "Only after discharge planning",
+    "Only if afebrile"
+   ],
+   "a": 0,
+   "exp": "Septic shock needs critical-care escalation; delays in perfusion support increase mortality (SSC 2021).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Next-day review is unsafe in shock.",
+    "Discharge planning is inappropriate.",
+    "Fever absence does not exclude shock."
+   ],
+   "kp": "Escalate septic shock early.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "escalation"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Escalate septic shock early.",
+    "others": {
+     "B": "Next-day review is unsafe in shock.",
+     "C": "Discharge planning is inappropriate.",
+     "D": "Fever absence does not exclude shock."
+    },
+    "pearl": "Shock escalates now, not tomorrow.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Escalate septic shock to critical care.",
+    "rev": "Septic shock needs critical-care escalation; delays in perfusion support increase mortality (SSC 2021).",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap006",
+   "q": "What is the role of lactate in sepsis?",
+   "o": [
+    "A marker of tissue hypoperfusion that should be trended",
+    "A substitute for blood cultures",
+    "Proof that antibiotics can wait",
+    "A reason to stop fluids"
+   ],
+   "a": 0,
+   "exp": "Lactate reflects hypoperfusion and guides resuscitation when trended with perfusion signs (SSC 2021).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Cultures remain necessary.",
+    "Raised lactate urges faster treatment.",
+    "Lactate guides, not stops, fluids."
+   ],
+   "kp": "Trend lactate with perfusion, never alone.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "lactate"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Trend lactate with perfusion, never alone.",
+    "others": {
+     "B": "Cultures remain necessary.",
+     "C": "Raised lactate urges faster treatment.",
+     "D": "Lactate guides, not stops, fluids."
+    },
+    "pearl": "Lactate is a perfusion signal to trend.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Use lactate to guide sepsis resuscitation.",
+    "rev": "Lactate reflects hypoperfusion and guides resuscitation when trended with perfusion signs (SSC 2021).",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap007",
+   "q": "A man with sepsis improves: pressure rises, urine returns, confusion clears. What does this show?",
+   "o": [
+    "Resuscitation is restoring organ perfusion",
+    "Antibiotics can be stopped at once",
+    "Source control is never needed",
+    "Lactate need not be rechecked"
+   ],
+   "a": 0,
+   "exp": "Improving perfusion signs show resuscitation is working; antibiotics and source control continue to plan.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Complete the antibiotic course as directed.",
+    "Source control remains essential.",
+    "Recheck lactate to confirm trend."
+   ],
+   "kp": "Reassess perfusion continuously in sepsis.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "reassessment"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Reassess perfusion continuously in sepsis.",
+    "others": {
+     "B": "Complete the antibiotic course as directed.",
+     "C": "Source control remains essential.",
+     "D": "Recheck lactate to confirm trend."
+    },
+    "pearl": "Reassess, do not relax, as perfusion returns.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Reassess response in sepsis care.",
+    "rev": "Improving perfusion signs show resuscitation is working; antibiotics and source control continue to plan.",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap008",
+   "q": "Which patient should trigger a sepsis screen even without fever?",
+   "o": [
+    "An immunosuppressed patient with infection signs and new breathlessness",
+    "A well patient with chronic back pain",
+    "A patient with stable hay fever",
+    "An athlete after exercise"
+   ],
+   "a": 0,
+   "exp": "Immunosuppressed patients may lack fever; infection with new breathlessness needs a sepsis screen.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "No infection or dysfunction described.",
+    "Allergy without infection signs.",
+    "Exercise explains transient breathlessness."
+   ],
+   "kp": "Absence of fever never excludes sepsis.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "screening"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Absence of fever never excludes sepsis.",
+    "others": {
+     "B": "No infection or dysfunction described.",
+     "C": "Allergy without infection signs.",
+     "D": "Exercise explains transient breathlessness."
+    },
+    "pearl": "No fever does not mean no sepsis.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Screen afebrile at-risk patients for sepsis.",
+    "rev": "Immunosuppressed patients may lack fever; infection with new breathlessness needs a sepsis screen.",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap009",
+   "q": "In septic shock, antibiotics should be:",
+   "o": [
+    "Broad-spectrum and prompt after cultures",
+    "Delayed until imaging completes",
+    "Oral in all cases",
+    "Stopped if lactate rises"
+   ],
+   "a": 0,
+   "exp": "Prompt broad-spectrum antibiotics follow cultures; imaging must not delay them (SSC 2021).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Imaging delay harms.",
+    "Shock needs intravenous therapy.",
+    "Rising lactate urges escalation, not cessation."
+   ],
+   "kp": "Prompt antibiotics after cultures.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "antibiotics"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Prompt antibiotics after cultures.",
+    "others": {
+     "B": "Imaging delay harms.",
+     "C": "Shock needs intravenous therapy.",
+     "D": "Rising lactate urges escalation, not cessation."
+    },
+    "pearl": "Cultures, then antibiotics without delay.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Give prompt broad-spectrum antibiotics in septic shock.",
+    "rev": "Prompt broad-spectrum antibiotics follow cultures; imaging must not delay them (SSC 2021).",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap010",
+   "q": "A drainable abscess is found in a patient with sepsis. The best plan is:",
+   "o": [
+    "Drain it promptly alongside antibiotics and resuscitation",
+    "Antibiotics alone for weeks first",
+    "Ignore it if pressure improves briefly",
+    "Discharge for outpatient review"
+   ],
+   "a": 0,
+   "exp": "A drainable focus needs prompt source control alongside antibiotics and resuscitation (SSC 2021).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Antibiotics penetrate abscesses poorly.",
+    "Brief improvement does not remove the focus.",
+    "Sepsis with a focus needs inpatient control."
+   ],
+   "kp": "Drain the focus; do not defer source control.",
+   "t": "med-sepsis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "sepsis",
+    "source-control"
+   ],
+   "source": "Surviving Sepsis Campaign 2021",
+   "x": {
+    "key": "Drain the focus; do not defer source control.",
+    "others": {
+     "B": "Antibiotics penetrate abscesses poorly.",
+     "C": "Brief improvement does not remove the focus.",
+     "D": "Sepsis with a focus needs inpatient control."
+    },
+    "pearl": "Find it, drain it, treat it.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Achieve source control in sepsis.",
+    "rev": "A drainable focus needs prompt source control alongside antibiotics and resuscitation (SSC 2021).",
+    "next": {
+     "concept": "med-sepsis",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Surviving Sepsis Campaign 2021",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-sepsis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

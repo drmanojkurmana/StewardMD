@@ -1,0 +1,757 @@
+{
+ "topic": "med-pesticides",
+ "set": "gap1013a",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap201",
+   "q": "A farm worker is brought in drooling, wheezing, with pinpoint pupils, slow pulse and diarrhoea after spraying pesticides. First antidote is:",
+   "o": [
+    "Atropine until secretions dry and chest clears",
+    "Pralidoxime alone",
+    "Succinylcholine",
+    "Flumazenil"
+   ],
+   "a": 0,
+   "exp": "The wet muscarinic picture needs atropine titrated until secretions dry, chest clears and pulse and pressure recover (WHO).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Pralidoxime helps weakness; it does not replace atropine.",
+    "Succinylcholine is dangerous here.",
+    "Flumazenil treats benzodiazepine overdose."
+   ],
+   "kp": "Atropine dries the wet cholinergic patient.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "atropine"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Atropine dries the wet cholinergic patient.",
+    "others": {
+     "B": "Pralidoxime helps weakness; it does not replace atropine.",
+     "C": "Succinylcholine is dangerous here.",
+     "D": "Flumazenil treats benzodiazepine overdose."
+    },
+    "pearl": "Wet patient: atropine first.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Give atropine in organophosphate poisoning.",
+    "rev": "The wet muscarinic picture needs atropine titrated until secretions dry, chest clears and pulse and pressure recover (WHO).",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap202",
+   "q": "Muscle weakness and ptosis persist despite atropine drying secretions. What does this show?",
+   "o": [
+    "Nicotinic weakness that atropine does not reverse; pralidoxime early helps",
+    "Atropine failure needing more atropine only",
+    "A need for succinylcholine",
+    "That poisoning is excluded"
+   ],
+   "a": 0,
+   "exp": "Atropine treats muscarinic signs only. Nicotinic weakness needs early pralidoxime plus ventilatory support (WHO).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "More atropine will not restore strength.",
+    "Succinylcholine worsens paralysis.",
+    "Weakness confirms nicotinic poisoning."
+   ],
+   "kp": "Atropine dries; pralidoxime strengthens.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "pralidoxime"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Atropine dries; pralidoxime strengthens.",
+    "others": {
+     "B": "More atropine will not restore strength.",
+     "C": "Succinylcholine worsens paralysis.",
+     "D": "Weakness confirms nicotinic poisoning."
+    },
+    "pearl": "Dry but weak still needs pralidoxime.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Add pralidoxime for nicotinic weakness.",
+    "rev": "Atropine treats muscarinic signs only. Nicotinic weakness needs early pralidoxime plus ventilatory support (WHO).",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap203",
+   "q": "Why must succinylcholine be avoided in organophosphate poisoning?",
+   "o": [
+    "Its breakdown enzyme is blocked, prolonging paralysis",
+    "It neutralises atropine",
+    "It causes hyperkalaemia in all patients",
+    "It is an antidote"
+   ],
+   "a": 0,
+   "exp": "Plasma cholinesterase is inhibited, so succinylcholine paralysis is greatly prolonged (WHO).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Atropine action is not neutralised.",
+    "Hyperkalaemia is not the stated mechanism.",
+    "It is a hazard, not an antidote."
+   ],
+   "kp": "Blocked enzyme, prolonged block.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "sux"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Blocked enzyme, prolonged block.",
+    "others": {
+     "B": "Atropine action is not neutralised.",
+     "C": "Hyperkalaemia is not the stated mechanism.",
+     "D": "It is a hazard, not an antidote."
+    },
+    "pearl": "Never sux in organophosphate poisoning.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Avoid succinylcholine in OP poisoning.",
+    "rev": "Plasma cholinesterase is inhibited, so succinylcholine paralysis is greatly prolonged (WHO).",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap204",
+   "q": "Seizures in organophosphate poisoning are treated with:",
+   "o": [
+    "A benzodiazepine",
+    "Phenytoin loading alone",
+    "Atropine bolus only",
+    "Physostigmine"
+   ],
+   "a": 0,
+   "exp": "Benzodiazepines control poisoning seizures and reduce agitation (WHO guidance).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Phenytoin is ineffective for these seizures.",
+    "Atropine does not stop seizures.",
+    "Physostigmine would worsen cholinergic excess."
+   ],
+   "kp": "Benzodiazepine for OP seizures.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "seizures"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Benzodiazepine for OP seizures.",
+    "others": {
+     "B": "Phenytoin is ineffective for these seizures.",
+     "C": "Atropine does not stop seizures.",
+     "D": "Physostigmine would worsen cholinergic excess."
+    },
+    "pearl": "Seizure in poisoning: benzodiazepine.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Treat OP seizures with benzodiazepine.",
+    "rev": "Benzodiazepines control poisoning seizures and reduce agitation (WHO guidance).",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap205",
+   "q": "Staff caring for a contaminated patient should first:",
+   "o": [
+    "Remove contaminated clothing, wash skin, protect themselves",
+    "Give pralidoxime to staff",
+    "Apply a tourniquet",
+    "Delay care for snake identification"
+   ],
+   "a": 0,
+   "exp": "Decontamination protects staff and stops ongoing absorption (WHO).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Staff prophylaxis is not indicated.",
+    "Tourniquets have no role here.",
+    "Identification never delays care."
+   ],
+   "kp": "Decontaminate patient and protect staff.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "decon"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Decontaminate patient and protect staff.",
+    "others": {
+     "B": "Staff prophylaxis is not indicated.",
+     "C": "Tourniquets have no role here.",
+     "D": "Identification never delays care."
+    },
+    "pearl": "Protect staff, strip and wash.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Decontaminate in pesticide poisoning.",
+    "rev": "Decontamination protects staff and stops ongoing absorption (WHO).",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap206",
+   "q": "Days after apparent recovery, a patient develops proximal weakness and breathing difficulty. This is:",
+   "o": [
+    "Intermediate syndrome needing ventilatory support",
+    "Full recovery",
+    "A new stroke only",
+    "Atropine allergy"
+   ],
+   "a": 0,
+   "exp": "Intermediate syndrome causes proximal and respiratory weakness days later and needs ventilatory support.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Recovery was apparent, not complete.",
+    "Pattern and timing fit intermediate syndrome.",
+    "Timing and weakness pattern differ."
+   ],
+   "kp": "Weak days later: intermediate syndrome.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "intermediate"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Weak days later: intermediate syndrome.",
+    "others": {
+     "B": "Recovery was apparent, not complete.",
+     "C": "Pattern and timing fit intermediate syndrome.",
+     "D": "Timing and weakness pattern differ."
+    },
+    "pearl": "Watch breathing for days after OP poisoning.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Recognise intermediate syndrome.",
+    "rev": "Intermediate syndrome causes proximal and respiratory weakness days later and needs ventilatory support.",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap207",
+   "q": "Bradycardia with bronchorrhoea and miosis after pesticide exposure points to:",
+   "o": [
+    "Muscarinic excess",
+    "Anticholinergic poisoning",
+    "Opioid overdose alone",
+    "Hypoglycaemia only"
+   ],
+   "a": 0,
+   "exp": "Wet signs with miosis and bradycardia are muscarinic cholinergic excess.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Anticholinergic is dry with dilated pupils.",
+    "Opioids lack the wet secretions.",
+    "Hypoglycaemia lacks this toxidrome."
+   ],
+   "kp": "Wet, slow and pinpoint means cholinergic excess.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "toxidrome"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Wet, slow and pinpoint means cholinergic excess.",
+    "others": {
+     "B": "Anticholinergic is dry with dilated pupils.",
+     "C": "Opioids lack the wet secretions.",
+     "D": "Hypoglycaemia lacks this toxidrome."
+    },
+    "pearl": "Read the toxidrome before treating.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Recognise muscarinic toxidrome.",
+    "rev": "Wet signs with miosis and bradycardia are muscarinic cholinergic excess.",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap208",
+   "q": "Endpoint for atropine titration is:",
+   "o": [
+    "Dried secretions, clear chest, recovered pulse and pressure",
+    "Dilated pupils alone",
+    "Complete paralysis",
+    "Sleep"
+   ],
+   "a": 0,
+   "exp": "Titrate atropine to drying secretions, clear chest and restored pulse and pressure, not pupil size (WHO).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Pupils lag and mislead.",
+    "Paralysis is harm, not an endpoint.",
+    "Sedation is not the target."
+   ],
+   "kp": "Titrate to chest and circulation, not pupils.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "endpoint"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Titrate to chest and circulation, not pupils.",
+    "others": {
+     "B": "Pupils lag and mislead.",
+     "C": "Paralysis is harm, not an endpoint.",
+     "D": "Sedation is not the target."
+    },
+    "pearl": "Dry chest, steady pulse: atropine endpoint.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Titrate atropine to effect.",
+    "rev": "Titrate atropine to drying secretions, clear chest and restored pulse and pressure, not pupil size (WHO).",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap209",
+   "q": "A poisoned patient needs intubation. The safest approach is:",
+   "o": [
+    "Ventilatory support with a non-succinylcholine plan",
+    "Succinylcholine as usual",
+    "Avoid ventilation",
+    "Oral atropine only"
+   ],
+   "a": 0,
+   "exp": "Support ventilation and avoid succinylcholine because its metabolism is blocked (WHO).",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Succinylcholine paralysis will be prolonged.",
+    "Ventilation saves lives in weakness.",
+    "Oral route is too slow in severe poisoning."
+   ],
+   "kp": "Ventilate without succinylcholine.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "airway"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Ventilate without succinylcholine.",
+    "others": {
+     "B": "Succinylcholine paralysis will be prolonged.",
+     "C": "Ventilation saves lives in weakness.",
+     "D": "Oral route is too slow in severe poisoning."
+    },
+    "pearl": "Airway first, sux never.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Secure airway safely in OP poisoning.",
+    "rev": "Support ventilation and avoid succinylcholine because its metabolism is blocked (WHO).",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap210",
+   "q": "Relapse a day after improvement in OP poisoning is explained by:",
+   "o": [
+    "Fat-stored pesticide re-entering the blood",
+    "Atropine curing too fast",
+    "Pralidoxime toxicity alone",
+    "Dehydration only"
+   ],
+   "a": 0,
+   "exp": "Lipophilic pesticides leach from fat stores and cause relapse; prolonged observation is needed.",
+   "r": [
+    "Incorrect for the reason given in the explanation.",
+    "Atropine does not cause relapse.",
+    "Relapse timing fits redistribution.",
+    "Dehydration does not explain toxidrome return."
+   ],
+   "kp": "Fat stores cause relapse.",
+   "t": "med-pesticides",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013a",
+   "tg": [
+    "op",
+    "relapse"
+   ],
+   "source": "WHO clinical management of pesticide poisoning",
+   "x": {
+    "key": "Fat stores cause relapse.",
+    "others": {
+     "B": "Atropine does not cause relapse.",
+     "C": "Relapse timing fits redistribution.",
+     "D": "Dehydration does not explain toxidrome return."
+    },
+    "pearl": "Observe: fat stores relapse.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Anticipate relapse in OP poisoning.",
+    "rev": "Lipophilic pesticides leach from fat stores and cause relapse; prolonged observation is needed.",
+    "next": {
+     "concept": "med-pesticides",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "WHO clinical management of pesticide poisoning",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-pesticides"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013a"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}
