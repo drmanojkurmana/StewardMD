@@ -75,3 +75,9 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 - Fixed papers still blocked by the known tools/prep-fixed-tests.mjs live 404 (v5/mrcs-anaesthesia/index.json).
 - Next in brief order: Anaesthesia group (4 subjects: cardiac, neuro, organ transplant, paediatric & neonatal anaesthesia; taxonomy + 300-target each), then ENT (Head & Neck Surgery), Pathology (Onco-Pathology), Microbiology (Virology), then per-subject top-ups to 300 and group floors of 1,000 (Surgical top-ups 1,279; Paediatric 2,310 incl. seeds now at 20-30 each; OBG 540; Orthopaedics 540). Groups now offered with live questions: Medical, Surgical, Critical Care, Medical Oncology, Paediatric, OBG, Orthopaedics, Radio-diagnosis, Respiratory. Still hidden (empty, never shown with any "no questions" text): Anaesthesiology, ENT, Microbiology, Pathology, Pharmacology, Psychiatry.
 - Disk: 4.2 GB free after regenerable-cache cleanup (cleanup.sh --apply; APFS clones freed little). Worktrees in ~/Developer/StewardMD/.claude/worktrees (13 GB) were not touched.
+
+## NO-API continuation 7 (2026-10-13): Anaesthesiology group opened
+
+- Taxonomy branch ss-anaesthesiology: ss-cardiac-anaesthesia (maikss21, 30), ss-neuroanaesthesia (maikss22, 30), ss-transplant-anaesthesia incl. ICU content (maikss23, 30), ss-paediatric-anaesthesia (maikss24, 15). prep-plan anaesthesiology subjects wired; group live at 105 items, remainder 1,095 to the 300-per-subject target (group floor 1,000 needs 895 more).
+- All hand-written ($0 API), blind-verified 105/105 fresh-context, keys rotated, dedupe 0, overlays live on R2, scope tests pass.
+- Next: ENT (ss-head-neck-surgery), Pathology (ss-onco-pathology), Microbiology (ss-virology); then top-ups. Outside-sandbox IDs command unchanged: `node tools/prep-ids.mjs publish --yes`. Fixed papers still blocked by the known live 404.

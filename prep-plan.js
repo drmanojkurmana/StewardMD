@@ -49,7 +49,7 @@
         "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology",
         "ss-infectious-diseases", "ss-biostatistics"] },
     { id: "surgical", label: "Surgical group", feeder: "MS or DNB General Surgery", subjects: ["ss-general-surgery", "ss-urology", "ss-neurosurgery", "ss-surgical-oncology", "ss-ctvs", "ss-paediatric-surgery", "ss-plastic-surgery", "ss-vascular-surgery"] },
-    { id: "anaesthesiology", label: "Anaesthesiology group", feeder: "MD or DNB Anaesthesiology", subjects: [] },
+    { id: "anaesthesiology", label: "Anaesthesiology group", feeder: "MD or DNB Anaesthesiology", subjects: ["ss-cardiac-anaesthesia", "ss-neuroanaesthesia", "ss-transplant-anaesthesia", "ss-paediatric-anaesthesia"] },
     { id: "critical-care", label: "Critical Care group", feeder: "MD or DNB Anaesthesiology, Medicine or equivalent", subjects: ["ss-critical-care", "ss-pulmonology"] },
     { id: "ent", label: "ENT group", feeder: "MS or DNB ENT", subjects: [] },
     { id: "medical-oncology", label: "Medical Oncology group", feeder: "MD or DNB General Medicine or equivalent", subjects: ["ss-medical-oncology"] },
