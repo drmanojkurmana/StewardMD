@@ -84,4 +84,6 @@ Wave ANA-SKIP (branch books2-ana1): anatomy inventory vs main index: 0 lesson-le
 
 Wave GUY1 DONE (branch books2-ana1, rename books2-guy1): phy-nmj, phy-wbc-immunity, phy-haemostasis, phy-blood-groups, phy-hypoxia-environment, phy-motility, phy-digestion-absorption, phy-growth. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-phy-001 to 080. Physiology gaps remaining: phy-thyroid, phy-adrenal, phy-calcium, phy-male, phy-female, phy-cerebellum-basal-ganglia, phy-autonomic (GUY2).
 
+Wave GUY2 DONE (branch books2-guy2): phy-thyroid, phy-adrenal, phy-calcium, phy-male, phy-female, phy-cerebellum-basal-ganglia, phy-autonomic. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-phy-081 to 150. Physiology 15/15 COMPLETE pending merges.
+
 
