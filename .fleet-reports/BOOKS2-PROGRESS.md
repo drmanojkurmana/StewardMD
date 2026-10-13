@@ -207,3 +207,10 @@
 - Gates: LP.checkLesson 8/8, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 8/8. 80 IDs unique. maikbook2 1590 -> 1670, no rebase needed.
 - STATE2/COVERAGE2 updated + mirrors. Next: Plastics queue.
 
+
+## Wave PLAS1 (2026-10-13, muse Wonder): plastics 3/3 COMPLETE
+- Branch books2-plas1 from origin/main post-PHARMA2-merge, PR #1599 open (no merge; squash after browser job). 3 lessons + 3 KB + 30 MCQs bk2-pla-001..030.
+- New surgery overlay subject dir; test subject loop extended (generator patches loop too).
+- Gates: LP.checkLesson 3/3, kb_validate_v2 3/3, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 3/3. 30 IDs unique. maikbook2 1770 -> 1800, no rebase needed.
+- STATE2/COVERAGE2 updated + mirrors. Vascular BLOCKED on books. Next: Campbell-Walsh urology queue.
+

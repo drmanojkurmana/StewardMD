@@ -69,3 +69,6 @@ Wave NEL2 DONE (branch books2-nel2): pgt-liver (scoped: chronic portal hypertens
 
 Wave MIL1 DONE (branch books2-mil1): can-cpb-bypass, can-valve-tee, nan-icp-brain, nan-spine-awake, tan-liver, tan-renal-crit, pan-neonatal, pan-paediatric. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-ane-001 to 080. Anesthesia 8/8 COMPLETE pending merges.
 
+Wave PLAS1 DONE (branch books2-plas1): spl-reconstructive, spl-burns-hand, spl-craniofacial-aesthetic. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-pla-001 to 030. Plastics 3/3 COMPLETE; vascular sva-arterial + sva-venous-access BLOCKED (no vascular/CTVS book yet).
+
+
