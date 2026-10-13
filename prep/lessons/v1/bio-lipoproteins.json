@@ -1,104 +1,106 @@
 {
- "module": "bio-lipoproteins",
- "subject": "biochemistry",
- "title": "Lipoprotein metabolism, apolipoproteins and hyperlipidemias",
- "minutes": 6,
- "refs": [
-  "Harper's Illustrated Biochemistry",
-  "Lippincott Illustrated Reviews: Biochemistry"
- ],
- "steps": [
-  {
-   "tx": "Plasma **lipoproteins** are macromolecular spherical complexes that transport hydrophobic cholesterol esters and triglycerides within an amphipathic shell of phospholipids, free cholesterol and apolipoproteins. They are classified by buoyant ultracentrifugal density into chylomicrons, very low-density lipoproteins, intermediate-density lipoproteins, low-density lipoproteins and high-density lipoproteins. Density is inversely related to lipid content and directly related to protein percentage.",
-   "say": "Plasma lipoproteins are macromolecular complexes that transport hydrophobic cholesterol esters and triglycerides within an amphipathic shell of phospholipids and apolipoproteins. They are classified into chylomicrons, VLDL, IDL, LDL and HDL. Density is inversely related to lipid content and directly related to protein percentage.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Lipoprotein",
-     "Origin",
-     "Major core lipid",
-     "Signature apolipoprotein"
-    ],
-    "rows": [
-     [
-      "Chylomicron",
-      "Intestinal enterocytes",
-      "Dietary triglycerides",
-      "ApoB-48, ApoC-II, ApoE"
-     ],
-     [
-      "VLDL",
-      "Hepatocytes (liver)",
-      "Endogenous triglycerides",
-      "ApoB-100, ApoC-II, ApoE"
-     ],
-     [
-      "LDL",
-      "Intravascular VLDL catabolism",
-      "Cholesterol esters",
-      "ApoB-100 only"
-     ],
-     [
-      "HDL",
-      "Liver and intestine",
-      "Cholesterol esters (reverse transport)",
-      "ApoA-I (activates LCAT)"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Signature **apolipoproteins** mediate structural assembly, enzyme activation and receptor recognition across lipoprotein classes. Apolipoprotein B-48 is produced in enterocytes via RNA editing of the ApoB mRNA by cytidine deaminase, which introduces a premature stop codon. Apolipoprotein B-100 is the full-length hepatic variant present on VLDL and LDL. Apolipoprotein C-two activates endothelial lipoprotein lipase, while apolipoprotein E mediates hepatic remnant clearance.",
-   "say": "Signature apolipoproteins mediate structural assembly, enzyme activation and receptor recognition. Apolipoprotein B-48 is produced in enterocytes via RNA editing of ApoB mRNA. Apolipoprotein B-100 is the full-length hepatic variant on VLDL and LDL. Apolipoprotein C-two activates lipoprotein lipase, while apolipoprotein E mediates clearance.",
-   "vis": null
-  },
-  {
-   "tx": "Familial hypercholesterolemia or Fredrickson type two a is caused by autosomal dominant mutations in the **LDL receptor** gene or PCSK9 gain-of-function. Defective clearance of LDL particles from the bloodstream elevates circulating plasma LDL-cholesterol above three hundred milligrams per deciliter in heterozygotes. Patients present with tendon xanthomas, corneal arcus, xanthelasma and accelerated coronary atherosclerosis causing premature myocardial infarction in early adulthood.",
-   "say": "Familial hypercholesterolemia is caused by autosomal dominant mutations in the LDL receptor gene or PCSK9 gain-of-function. Defective clearance of LDL elevates plasma LDL-cholesterol. Patients present with tendon xanthomas, corneal arcus, xanthelasma and premature coronary atherosclerosis causing early myocardial infarction.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Type I hyperchylomicronemia",
-     "points": [
-      "Lipoprotein lipase or ApoC-II deficiency",
-      "Massive chylomicron elevation in fasting plasma",
-      "Milky plasma with creamy top layer on refrigeration",
-      "Eruptive xanthomas, acute pancreatitis, hepatosplenomegaly"
-     ]
+  "module": "bio-lipoproteins",
+  "subject": "biochemistry",
+  "title": "Lipoprotein metabolism, apolipoproteins and hyperlipidemias",
+  "minutes": 6,
+  "refs": [
+    "Harper's Illustrated Biochemistry",
+    "Lippincott Illustrated Reviews: Biochemistry"
+  ],
+  "steps": [
+    {
+      "tx": "Plasma **lipoproteins** are macromolecular spherical complexes that transport hydrophobic cholesterol esters and triglycerides within an amphipathic shell of phospholipids, free cholesterol and apolipoproteins. They are classified by buoyant ultracentrifugal density into chylomicrons, very low-density lipoproteins, intermediate-density lipoproteins, low-density lipoproteins and high-density lipoproteins. Density is inversely related to lipid content and directly related to protein percentage.",
+      "say": "Plasma lipoproteins are macromolecular complexes that transport hydrophobic cholesterol esters and triglycerides within an amphipathic shell of phospholipids and apolipoproteins. They are classified into chylomicrons, VLDL, IDL, LDL and HDL. Density is inversely related to lipid content and directly related to protein percentage.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Lipoprotein",
+          "Origin",
+          "Major core lipid",
+          "Signature apolipoprotein"
+        ],
+        "rows": [
+          [
+            "Chylomicron",
+            "Intestinal enterocytes",
+            "Dietary triglycerides",
+            "ApoB-48, ApoC-II, ApoE"
+          ],
+          [
+            "VLDL",
+            "Hepatocytes (liver)",
+            "Endogenous triglycerides",
+            "ApoB-100, ApoC-II, ApoE"
+          ],
+          [
+            "LDL",
+            "Intravascular VLDL catabolism",
+            "Cholesterol esters",
+            "ApoB-100 only"
+          ],
+          [
+            "HDL",
+            "Liver and intestine",
+            "Cholesterol esters (reverse transport)",
+            "ApoA-I (activates LCAT)"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Type IIa familial hypercholesterolemia",
-     "points": [
-      "Defective LDL receptor or ApoB-100 binding",
-      "Isolated elevation of low-density lipoproteins",
-      "Clear plasma with severe hypercholesterolemia",
-      "Tendon xanthomas (Achilles) and early coronary artery disease"
-     ]
+    {
+      "tx": "Signature **apolipoproteins** mediate structural assembly, enzyme activation and receptor recognition across lipoprotein classes. Apolipoprotein B-48 is produced in enterocytes via RNA editing of the ApoB mRNA by cytidine deaminase, which introduces a premature stop codon. Apolipoprotein B-100 is the full-length hepatic variant present on VLDL and LDL. Apolipoprotein C-two activates endothelial lipoprotein lipase, while apolipoprotein E mediates hepatic remnant clearance.",
+      "say": "Signature apolipoproteins mediate structural assembly, enzyme activation and receptor recognition. Apolipoprotein B-48 is produced in enterocytes via RNA editing of ApoB mRNA. Apolipoprotein B-100 is the full-length hepatic variant on VLDL and LDL. Apolipoprotein C-two activates lipoprotein lipase, while apolipoprotein E mediates clearance.",
+      "vis": null
+    },
+    {
+      "tx": "Familial hypercholesterolemia or Fredrickson type two a is caused by autosomal dominant mutations in the **LDL receptor** gene or PCSK9 gain-of-function. Defective clearance of LDL particles from the bloodstream elevates circulating plasma LDL-cholesterol above three hundred milligrams per deciliter in heterozygotes. Patients present with tendon xanthomas, corneal arcus, xanthelasma and accelerated coronary atherosclerosis causing premature myocardial infarction in early adulthood.",
+      "say": "Familial hypercholesterolemia is caused by autosomal dominant mutations in the LDL receptor gene or PCSK9 gain-of-function. Defective clearance of LDL elevates plasma LDL-cholesterol. Patients present with tendon xanthomas, corneal arcus, xanthelasma and premature coronary atherosclerosis causing early myocardial infarction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type I hyperchylomicronemia",
+          "points": [
+            "Lipoprotein lipase or ApoC-II deficiency",
+            "Massive chylomicron elevation in fasting plasma",
+            "Milky plasma with creamy top layer on refrigeration",
+            "Eruptive xanthomas, acute pancreatitis, hepatosplenomegaly"
+          ]
+        },
+        "right": {
+          "title": "Type IIa familial hypercholesterolemia",
+          "points": [
+            "Defective LDL receptor or ApoB-100 binding",
+            "Isolated elevation of low-density lipoproteins",
+            "Clear plasma with severe hypercholesterolemia",
+            "Tendon xanthomas (Achilles) and early coronary artery disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "High-density lipoprotein performs **reverse cholesterol transport**, scavenging excess unesterified cholesterol from peripheral tissues and foam cells for delivery back to the liver. Apolipoprotein A-one activates lecithin-cholesterol acyltransferase (LCAT), esterifying cholesterol into hydrophobic cholesterol esters that pack into the HDL core. Cholesterol ester transfer protein exchanges HDL cholesterol esters for VLDL triglycerides, while hepatic scavenger receptor SR-B1 mediates final cholesterol uptake.",
+      "say": "High-density lipoprotein performs reverse cholesterol transport, scavenging cholesterol from peripheral tissues for return to the liver. Apolipoprotein A-one activates lecithin-cholesterol acyltransferase, packing cholesterol esters into the HDL core. CETP exchanges HDL cholesterol for VLDL triglycerides, and scavenger receptor SR-B1 mediates uptake.",
+      "vis": null
     }
-   }
-  },
-  {
-   "tx": "High-density lipoprotein performs **reverse cholesterol transport**, scavenging excess unesterified cholesterol from peripheral tissues and foam cells for delivery back to the liver. Apolipoprotein A-one activates lecithin-cholesterol acyltransferase (LCAT), esterifying cholesterol into hydrophobic cholesterol esters that pack into the HDL core. Cholesterol ester transfer protein exchanges HDL cholesterol esters for VLDL triglycerides, while hepatic scavenger receptor SR-B1 mediates final cholesterol uptake.",
-   "say": "High-density lipoprotein performs reverse cholesterol transport, scavenging cholesterol from peripheral tissues for return to the liver. Apolipoprotein A-one activates lecithin-cholesterol acyltransferase, packing cholesterol esters into the HDL core. CETP exchanges HDL cholesterol for VLDL triglycerides, and scavenger receptor SR-B1 mediates uptake.",
-   "vis": null
+  ],
+  "v": 1,
+  "gen": "AI",
+  "run": "books-pipeline",
+  "model": "gemini-3.8-flash-high",
+  "quiz": [
+    "cba996bb-4000-8000-cba9-96bb12345678",
+    "cca9984e-4000-8000-cca9-984e12345678",
+    "cda999e1-4000-8000-cda9-99e112345678"
+  ],
+  "src": [
+    "kb-reference-lipoprotein-metabolism-and-hyperlipidemias"
+  ],
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "v": 1,
- "gen": "AI",
- "run": "books-pipeline",
- "model": "gemini-3.8-flash-high",
- "quiz": [
-  "cba996bb-4000-8000-cba9-96bb12345678",
-  "cca9984e-4000-8000-cca9-984e12345678",
-  "cda999e1-4000-8000-cda9-99e112345678"
- ],
- "src": [],
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true
- }
 }

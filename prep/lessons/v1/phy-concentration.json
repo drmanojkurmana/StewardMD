@@ -1,103 +1,105 @@
 {
- "module": "phy-concentration",
- "subject": "physiology",
- "title": "Countercurrent mechanism, medullary gradient and ADH regulation",
- "minutes": 6,
- "refs": [
-  "Guyton and Hall Textbook of Medical Physiology",
-  "Vander's Renal Physiology"
- ],
- "steps": [
-  {
-   "tx": "The **countercurrent multiplier** in juxtamedullary nephron loops of Henle generates an hyperosmotic renal medullary interstitium reaching twelve hundred milliosmoles per kilogram at the papillary tip. The descending thin limb is water-permeable via aquaporin-1 but solute-impermeable, concentrating fluid as water leaves into the hypertonic interstitium. In contrast, the ascending limb actively extrudes sodium and chloride without water, creating a longitudinal osmotic gradient.",
-   "say": "The countercurrent multiplier in juxtamedullary loops of Henle generates an hyperosmotic renal medullary interstitium reaching twelve hundred milliosmoles per kilogram at the papillary tip. The descending limb is water-permeable, concentrating fluid as water exits. The ascending limb actively extrudes sodium and chloride without water, generating the medullary gradient.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Segment",
-     "Water permeability",
-     "Solute permeability",
-     "Osmolality change"
-    ],
-    "rows": [
-     [
-      "Descending thin limb",
-      "High (aquaporin-1)",
-      "Impermeable to NaCl",
-      "Rises from 300 to 1200 mOsm/kg"
-     ],
-     [
-      "Ascending thick limb",
-      "Impermeable to water",
-      "Active NKCC2 transport",
-      "Falls from 1200 to 100 mOsm/kg"
-     ],
-     [
-      "Medullary collecting duct",
-      "Variable (ADH-dependent)",
-      "Urea permeable (UT-A1)",
-      "Rises up to 1200 mOsm/kg with ADH"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **vasa recta** act as countercurrent exchangers, preserving the hyperosmotic medullary gradient without washing it out. These hairpin capillary loops arise from efferent arterioles of juxtamedullary glomeruli. As blood descends into the hypertonic inner medulla, water exits into the interstitium while solutes enter. As blood ascends back toward the cortex, solute diffuses out and water re-enters, maintaining slow medullary perfusion while sustaining the gradient.",
-   "say": "The vasa recta act as countercurrent exchangers, preserving the hyperosmotic medullary gradient without washing it out. These capillary loops arise from juxtamedullary arterioles. As blood descends, water exits and solute enters. As blood ascends, solute diffuses out and water re-enters, maintaining low blood flow while sustaining the gradient.",
-   "vis": null
-  },
-  {
-   "tx": "Medullary **urea recycling** contributes forty to fifty percent of the maximal inner medullary interstitial hyperosmolality. Antidiuretic hormone activates inner medullary urea transporters UT-A1 and UT-A3, allowing concentrated luminal urea to diffuse down its concentration gradient into the deep interstitium. This recycled urea supplies osmotic force drawing water out of adjacent descending thin limbs, amplifying countercurrent multiplication and facilitating maximal urine concentration.",
-   "say": "Medullary urea recycling contributes forty to fifty percent of the maximal inner medullary interstitial hyperosmolality. Antidiuretic hormone activates inner medullary urea transporters, allowing luminal urea to diffuse into the deep interstitium. This recycled urea supplies osmotic force drawing water out of descending thin limbs, facilitating maximal urine concentration.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Hydropenia (high ADH)",
-     "points": [
-      "High hypothalamic osmoreceptor firing",
-      "Aquaporin-2 inserted into collecting ducts",
-      "High urea transporter UT-A1 activation",
-      "Oliguric concentrated urine up to 1200 mOsm/kg"
-     ]
+  "module": "phy-concentration",
+  "subject": "physiology",
+  "title": "Countercurrent mechanism, medullary gradient and ADH regulation",
+  "minutes": 6,
+  "refs": [
+    "Guyton and Hall Textbook of Medical Physiology",
+    "Vander's Renal Physiology"
+  ],
+  "steps": [
+    {
+      "tx": "The **countercurrent multiplier** in juxtamedullary nephron loops of Henle generates an hyperosmotic renal medullary interstitium reaching twelve hundred milliosmoles per kilogram at the papillary tip. The descending thin limb is water-permeable via aquaporin-1 but solute-impermeable, concentrating fluid as water leaves into the hypertonic interstitium. In contrast, the ascending limb actively extrudes sodium and chloride without water, creating a longitudinal osmotic gradient.",
+      "say": "The countercurrent multiplier in juxtamedullary loops of Henle generates an hyperosmotic renal medullary interstitium reaching twelve hundred milliosmoles per kilogram at the papillary tip. The descending limb is water-permeable, concentrating fluid as water exits. The ascending limb actively extrudes sodium and chloride without water, generating the medullary gradient.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Segment",
+          "Water permeability",
+          "Solute permeability",
+          "Osmolality change"
+        ],
+        "rows": [
+          [
+            "Descending thin limb",
+            "High (aquaporin-1)",
+            "Impermeable to NaCl",
+            "Rises from 300 to 1200 mOsm/kg"
+          ],
+          [
+            "Ascending thick limb",
+            "Impermeable to water",
+            "Active NKCC2 transport",
+            "Falls from 1200 to 100 mOsm/kg"
+          ],
+          [
+            "Medullary collecting duct",
+            "Variable (ADH-dependent)",
+            "Urea permeable (UT-A1)",
+            "Rises up to 1200 mOsm/kg with ADH"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Water diuresis (suppressed ADH)",
-     "points": [
-      "Low plasma osmolality suppresses ADH release",
-      "Collecting ducts remain water-impermeable",
-      "Minimal medullary urea reabsorption",
-      "Copious dilute urine down to 50 mOsm/kg"
-     ]
+    {
+      "tx": "The **vasa recta** act as countercurrent exchangers, preserving the hyperosmotic medullary gradient without washing it out. These hairpin capillary loops arise from efferent arterioles of juxtamedullary glomeruli. As blood descends into the hypertonic inner medulla, water exits into the interstitium while solutes enter. As blood ascends back toward the cortex, solute diffuses out and water re-enters, maintaining slow medullary perfusion while sustaining the gradient.",
+      "say": "The vasa recta act as countercurrent exchangers, preserving the hyperosmotic medullary gradient without washing it out. These capillary loops arise from juxtamedullary arterioles. As blood descends, water exits and solute enters. As blood ascends, solute diffuses out and water re-enters, maintaining low blood flow while sustaining the gradient.",
+      "vis": null
+    },
+    {
+      "tx": "Medullary **urea recycling** contributes forty to fifty percent of the maximal inner medullary interstitial hyperosmolality. Antidiuretic hormone activates inner medullary urea transporters UT-A1 and UT-A3, allowing concentrated luminal urea to diffuse down its concentration gradient into the deep interstitium. This recycled urea supplies osmotic force drawing water out of adjacent descending thin limbs, amplifying countercurrent multiplication and facilitating maximal urine concentration.",
+      "say": "Medullary urea recycling contributes forty to fifty percent of the maximal inner medullary interstitial hyperosmolality. Antidiuretic hormone activates inner medullary urea transporters, allowing luminal urea to diffuse into the deep interstitium. This recycled urea supplies osmotic force drawing water out of descending thin limbs, facilitating maximal urine concentration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hydropenia (high ADH)",
+          "points": [
+            "High hypothalamic osmoreceptor firing",
+            "Aquaporin-2 inserted into collecting ducts",
+            "High urea transporter UT-A1 activation",
+            "Oliguric concentrated urine up to 1200 mOsm/kg"
+          ]
+        },
+        "right": {
+          "title": "Water diuresis (suppressed ADH)",
+          "points": [
+            "Low plasma osmolality suppresses ADH release",
+            "Collecting ducts remain water-impermeable",
+            "Minimal medullary urea reabsorption",
+            "Copious dilute urine down to 50 mOsm/kg"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The peptide hormone **antidiuretic hormone** or arginine vasopressin regulates final urine volume by binding basolateral V2 receptors on principal cells. Receptor activation stimulates adenylyl cyclase, raising cyclic AMP and protein kinase A, which phosphorylates and triggers exocytic insertion of aquaporin-2 water channels into the apical membrane. Water flows down the medullary osmotic gradient into capillaries, concentrating urine and restoring systemic plasma osmolality.",
+      "say": "The hormone antidiuretic hormone regulates final urine volume by binding basolateral V2 receptors on principal cells. Receptor activation stimulates adenylyl cyclase, raising cyclic AMP and triggering insertion of aquaporin-2 water channels into the apical membrane. Water flows into hypertonic interstitium, concentrating urine and restoring systemic osmolality.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-kidney-gross.png",
+        "alt": "Renal medullary countercurrent multiplier schematic",
+        "caption": "Longitudinal cross-section of renal cortex and medulla illustrating loop of Henle countercurrent multiplier, vasa recta exchanger and ADH water reabsorption."
+      }
     }
-   }
-  },
-  {
-   "tx": "The peptide hormone **antidiuretic hormone** or arginine vasopressin regulates final urine volume by binding basolateral V2 receptors on principal cells. Receptor activation stimulates adenylyl cyclase, raising cyclic AMP and protein kinase A, which phosphorylates and triggers exocytic insertion of aquaporin-2 water channels into the apical membrane. Water flows down the medullary osmotic gradient into capillaries, concentrating urine and restoring systemic plasma osmolality.",
-   "say": "The hormone antidiuretic hormone regulates final urine volume by binding basolateral V2 receptors on principal cells. Receptor activation stimulates adenylyl cyclase, raising cyclic AMP and triggering insertion of aquaporin-2 water channels into the apical membrane. Water flows into hypertonic interstitium, concentrating urine and restoring systemic osmolality.",
-   "vis": {
-    "kind": "image",
-    "src": "prep/lessons/media/ap-kidney-gross.png",
-    "alt": "Renal medullary countercurrent multiplier schematic",
-    "caption": "Longitudinal cross-section of renal cortex and medulla illustrating loop of Henle countercurrent multiplier, vasa recta exchanger and ADH water reabsorption."
-   }
+  ],
+  "v": 1,
+  "gen": "AI",
+  "run": "books-pipeline",
+  "model": "gemini-3.8-flash-high",
+  "quiz": [
+    "58743091-4000-8000-5874-309112345678",
+    "55742bd8-4000-8000-5574-2bd812345678",
+    "56742d6b-4000-8000-5674-2d6b12345678"
+  ],
+  "src": [
+    "kb-reference-renal-countercurrent-multiplier-and-adh"
+  ],
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "v": 1,
- "gen": "AI",
- "run": "books-pipeline",
- "model": "gemini-3.8-flash-high",
- "quiz": [
-  "58743091-4000-8000-5874-309112345678",
-  "55742bd8-4000-8000-5574-2bd812345678",
-  "56742d6b-4000-8000-5674-2d6b12345678"
- ],
- "src": [],
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true
- }
 }

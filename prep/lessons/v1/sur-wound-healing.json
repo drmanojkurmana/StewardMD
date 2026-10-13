@@ -1,99 +1,101 @@
 {
- "module": "sur-wound-healing",
- "subject": "surgery",
- "title": "Surgical wound healing: phases, collagen dynamics and complications",
- "minutes": 6,
- "refs": [
-  "Sabiston Textbook of Surgery 22nd ed",
-  "Schwartz's Principles of Surgery"
- ],
- "steps": [
-  {
-   "tx": "Normal surgical **wound healing** is a coordinated biological cascade comprising four overlapping chronological phases: hemostasis, inflammation, proliferation and remodeling. Hemostasis initiates immediately with platelet plug formation and fibrin deposition, releasing platelet-derived growth factor and transforming growth factor-beta. The inflammatory phase peaks at forty-eight hours with neutrophil infiltration followed by macrophages, which orchestrate subsequent tissue debridement and angiogenesis.",
-   "say": "Normal surgical wound healing is a biological cascade comprising four overlapping chronological phases: hemostasis, inflammation, proliferation and remodeling. Hemostasis initiates immediately with platelet plugging and fibrin deposition, releasing growth factors. The inflammatory phase peaks at forty-eight hours with neutrophils and macrophages orchestrating debridement.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Phase",
-     "Dominant cell type",
-     "Key biochemical event"
-    ],
-    "rows": [
-     [
-      "Hemostasis (0 to hours)",
-      "Platelets",
-      "Fibrin meshwork and PDGF/TGF-beta release"
-     ],
-     [
-      "Inflammation (1 to 4 days)",
-      "Neutrophils then macrophages",
-      "Debridement and cytokine orchestration"
-     ],
-     [
-      "Proliferation (4 to 21 days)",
-      "Fibroblasts and endothelial cells",
-      "Granulation tissue, angiogenesis, type III collagen"
-     ],
-     [
-      "Remodeling (3 weeks to 1 year)",
-      "Myofibroblasts and fibroblasts",
-      "Type I collagen replacement and wound contraction"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The proliferative phase is characterized by granulation tissue formation, driven by fibroblasts synthesizing **type three collagen** and proteoglycans alongside vascular endothelial growth factor-mediated angiogenesis. In the remodeling phase, matrix metalloproteinases degrade immature type three collagen, replacing it with stronger, organized type one collagen bundles cross-linked by lysyl oxidase. Wound tensile strength reaches only twenty percent at three weeks and plateaus at eighty percent of unwounded skin.",
-   "say": "The proliferative phase is characterized by granulation tissue formation, driven by fibroblasts synthesizing type three collagen alongside angiogenesis. In remodeling, matrix metalloproteinases replace immature type three collagen with organized type one collagen cross-linked by lysyl oxidase. Tensile strength plateaus at eighty percent of normal.",
-   "vis": null
-  },
-  {
-   "tx": "Pathological scarring results from excessive fibroblast proliferation and collagen synthesis. A **hypertrophic scar** remains confined within the boundaries of the original surgical incision and often regresses spontaneously over twelve to eighteen months. In contrast, a **keloid** grows aggressively beyond the original margins, lacks spontaneous regression, exhibits thick disorganized collagen bundles, and occurs predominantly in darkly pigmented individuals, having high recurrence after simple excision.",
-   "say": "Pathological scarring results from excessive collagen synthesis. A hypertrophic scar remains confined within original surgical margins and often regresses over months. In contrast, a keloid grows aggressively beyond original margins, does not regress, exhibits thick collagen bundles, and has high recurrence after simple excision.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Hypertrophic scar",
-     "points": [
-      "Confined within original wound incision",
-      "Arises in areas of high wound tension",
-      "Contains parallel type III collagen bundles",
-      "Often regresses spontaneously over time"
-     ]
+  "module": "sur-wound-healing",
+  "subject": "surgery",
+  "title": "Surgical wound healing: phases, collagen dynamics and complications",
+  "minutes": 6,
+  "refs": [
+    "Sabiston Textbook of Surgery 22nd ed",
+    "Schwartz's Principles of Surgery"
+  ],
+  "steps": [
+    {
+      "tx": "Normal surgical **wound healing** is a coordinated biological cascade comprising four overlapping chronological phases: hemostasis, inflammation, proliferation and remodeling. Hemostasis initiates immediately with platelet plug formation and fibrin deposition, releasing platelet-derived growth factor and transforming growth factor-beta. The inflammatory phase peaks at forty-eight hours with neutrophil infiltration followed by macrophages, which orchestrate subsequent tissue debridement and angiogenesis.",
+      "say": "Normal surgical wound healing is a biological cascade comprising four overlapping chronological phases: hemostasis, inflammation, proliferation and remodeling. Hemostasis initiates immediately with platelet plugging and fibrin deposition, releasing growth factors. The inflammatory phase peaks at forty-eight hours with neutrophils and macrophages orchestrating debridement.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phase",
+          "Dominant cell type",
+          "Key biochemical event"
+        ],
+        "rows": [
+          [
+            "Hemostasis (0 to hours)",
+            "Platelets",
+            "Fibrin meshwork and PDGF/TGF-beta release"
+          ],
+          [
+            "Inflammation (1 to 4 days)",
+            "Neutrophils then macrophages",
+            "Debridement and cytokine orchestration"
+          ],
+          [
+            "Proliferation (4 to 21 days)",
+            "Fibroblasts and endothelial cells",
+            "Granulation tissue, angiogenesis, type III collagen"
+          ],
+          [
+            "Remodeling (3 weeks to 1 year)",
+            "Myofibroblasts and fibroblasts",
+            "Type I collagen replacement and wound contraction"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Keloid scar",
-     "points": [
-      "Extends beyond original incision margins",
-      "Predilection for earlobes, deltoid and sternum",
-      "Contains thick, disorganized type I and III collagen",
-      "High recurrence rate after simple excision"
-     ]
+    {
+      "tx": "The proliferative phase is characterized by granulation tissue formation, driven by fibroblasts synthesizing **type three collagen** and proteoglycans alongside vascular endothelial growth factor-mediated angiogenesis. In the remodeling phase, matrix metalloproteinases degrade immature type three collagen, replacing it with stronger, organized type one collagen bundles cross-linked by lysyl oxidase. Wound tensile strength reaches only twenty percent at three weeks and plateaus at eighty percent of unwounded skin.",
+      "say": "The proliferative phase is characterized by granulation tissue formation, driven by fibroblasts synthesizing type three collagen alongside angiogenesis. In remodeling, matrix metalloproteinases replace immature type three collagen with organized type one collagen cross-linked by lysyl oxidase. Tensile strength plateaus at eighty percent of normal.",
+      "vis": null
+    },
+    {
+      "tx": "Pathological scarring results from excessive fibroblast proliferation and collagen synthesis. A **hypertrophic scar** remains confined within the boundaries of the original surgical incision and often regresses spontaneously over twelve to eighteen months. In contrast, a **keloid** grows aggressively beyond the original margins, lacks spontaneous regression, exhibits thick disorganized collagen bundles, and occurs predominantly in darkly pigmented individuals, having high recurrence after simple excision.",
+      "say": "Pathological scarring results from excessive collagen synthesis. A hypertrophic scar remains confined within original surgical margins and often regresses over months. In contrast, a keloid grows aggressively beyond original margins, does not regress, exhibits thick collagen bundles, and has high recurrence after simple excision.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypertrophic scar",
+          "points": [
+            "Confined within original wound incision",
+            "Arises in areas of high wound tension",
+            "Contains parallel type III collagen bundles",
+            "Often regresses spontaneously over time"
+          ]
+        },
+        "right": {
+          "title": "Keloid scar",
+          "points": [
+            "Extends beyond original incision margins",
+            "Predilection for earlobes, deltoid and sternum",
+            "Contains thick, disorganized type I and III collagen",
+            "High recurrence rate after simple excision"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Acute abdominal **wound dehiscence** or burst abdomen typically manifests between postoperative days five and eight with a sudden serosanguinous pink discharge soaking the dressing. It reflects failure of the deep fascial closure, provoked by increased intra-abdominal pressure, obesity, malnutrition or technical suture breakage. When evisceration occurs, immediate management requires covering exposed bowel with sterile saline-soaked dressings and urgent return to the operating room.",
+      "say": "Acute abdominal wound dehiscence manifests between postoperative days five and eight with sudden serosanguinous pink discharge soaking the dressing. It reflects fascial closure failure provoked by increased abdominal pressure, obesity, or suture error. Evisceration requires covering bowel with sterile saline packs and urgent surgical repair.",
+      "vis": null
     }
-   }
-  },
-  {
-   "tx": "Acute abdominal **wound dehiscence** or burst abdomen typically manifests between postoperative days five and eight with a sudden serosanguinous pink discharge soaking the dressing. It reflects failure of the deep fascial closure, provoked by increased intra-abdominal pressure, obesity, malnutrition or technical suture breakage. When evisceration occurs, immediate management requires covering exposed bowel with sterile saline-soaked dressings and urgent return to the operating room.",
-   "say": "Acute abdominal wound dehiscence manifests between postoperative days five and eight with sudden serosanguinous pink discharge soaking the dressing. It reflects fascial closure failure provoked by increased abdominal pressure, obesity, or suture error. Evisceration requires covering bowel with sterile saline packs and urgent surgical repair.",
-   "vis": null
+  ],
+  "v": 1,
+  "gen": "AI",
+  "run": "books-pipeline",
+  "model": "gemini-3.8-flash-high",
+  "quiz": [
+    "7c753f15-4000-8000-7c75-3f1512345678",
+    "79753a5c-4000-8000-7975-3a5c12345678",
+    "7a753bef-4000-8000-7a75-3bef12345678"
+  ],
+  "src": [
+    "kb-reference-surgical-wound-healing-and-scarring"
+  ],
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "v": 1,
- "gen": "AI",
- "run": "books-pipeline",
- "model": "gemini-3.8-flash-high",
- "quiz": [
-  "7c753f15-4000-8000-7c75-3f1512345678",
-  "79753a5c-4000-8000-7975-3a5c12345678",
-  "7a753bef-4000-8000-7a75-3bef12345678"
- ],
- "src": [],
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true
- }
 }
