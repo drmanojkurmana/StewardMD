@@ -1,0 +1,16 @@
+/* Pearl card: flat surfaces, one accent (#42CDB5), no glows. Palette #071318 / #0D1D23. */
+.pn-pearl { background: var(--pn-card, #0D1D23); color: var(--pn-ink, #EAF4F1); border: 1px solid rgba(66,205,181,.25); border-radius: 10px; padding: 16px; margin: 0 0 14px; }
+.pn-pearl-crumb { font-size: 12px; line-height: 1.45; color: #42CDB5; margin: 0 0 6px; overflow-wrap: anywhere; }
+.pn-pearl-title { font-size: 20px; line-height: 1.25; margin: 0 0 10px; }
+.pn-pearl-fig { background: #fff; border-radius: 8px; padding: 10px; margin: 0 0 10px; }
+.pn-pearl-fig img, .pn-pearl-fig svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.pn-pearl-credit { background: none; border: 0; color: #42CDB5; font-size: 12px; padding: 6px 0; cursor: pointer; text-decoration: underline; }
+.pn-pearl-tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; }
+.pn-pearl-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.pn-pearl-table th, .pn-pearl-table td { border: 1px solid rgba(66,205,181,.3); padding: 7px 8px; text-align: left; vertical-align: top; }
+.pn-pearl-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; border-top: 1px solid rgba(66,205,181,.25); padding-top: 10px; font-size: 13px; }
+.pn-pearl-foot button { min-height: 40px; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(66,205,181,.4); background: transparent; color: inherit; cursor: pointer; }
+.pn-pearl-foot button:focus-visible, .pn-pearl-credit:focus-visible { outline: 2px solid #42CDB5; outline-offset: 2px; }
+@media (prefers-color-scheme: light) { .pn-pearl { background: #fff; color: #071318; } }
+@media (min-width: 700px) { .pn-pearl { padding: 22px; } .pn-pearl-title { font-size: 24px; } }
+@media (prefers-reduced-motion: reduce) { .pn-pearl * { transition: none !important; animation: none !important; } }

@@ -632,8 +632,12 @@
     var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
     var anim = L.dir ? (L.dir > 0 ? " fwd" : " rev") : "";
-    var body = step ? '<article class="pn-lsn-step' + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
-        '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + (step.qc ? qcHtml(step.qc, p) : "") + "</article>"
+    var PEARL = G.PREP_PEARL, isP = !!(PEARL && PEARL.isPearl(les));
+    var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
+        (isP && L.i === 0 ? PEARL.headerHtml(les) : "") +
+        '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + (step.qc ? qcHtml(step.qc, p) : "") +
+        (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
+        (isP && L.i === n - 1 ? PEARL.footerHtml(les) : "") + "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
     // Share IDs (prep-ids.js): share in the bar, the lesson's ID at the foot of the page (tap copies).
     var IDS = G.PREP_IDS, lid = IDS ? IDS.ofLesson(L.key) : null, shareB = lid ? IDS.shareBtn(lid, "Share this lesson") : "";
