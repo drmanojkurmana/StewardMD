@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "neo-respiratory",
+  "subject": "paediatrics",
+  "title": "Neonatal respiratory disorders: RDS, TTN, MAS and air leaks",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**RDS** (**preterm surfactant deficiency**, **ground glass with air bronchograms**, grunting flaring retracting, **steroids** antenatal, **CPAP** early, **surfactant** poractant **INSURE LISA** thin catheter, **caffeine** apnoea) with **BPD** (**oxygen 28 days**, steroids selected, **retinopathy** screening, home oxygen) complicates chronic; **lecithin sphingomyelin** maturity tests. Gentle ventilation spares lungs.",
+      "say": "Tiny grunting glassy grounds is RDS: antenatal steroids early CPAP thin surfactant. Gentle spares BPD.",
+      "vis": null
+    },
+    {
+      "tx": "**TTN** (**term section**, **fluid retained**, **fissure fluid**, tachypnoea hours resolving 24 to 72, **CPAP** selected, **antibiotics** until sepsis out) versus **pneumonia** (maternal fever, infiltrates, cultures) versus **MAS** (**post-term meconium**, **suction mouth nose** head, **no routine tracheal** vigorous, **PPHN** nitric oxide ECMO) splits; **air leaks** (pneumothorax transilluminates, needle drains) decompress. Courses time.",
+      "say": "Section fast wet fissures hours is TTN: stained post-term suctions PPHN nitric. Transilluminated drains.",
+      "vis": null
+    },
+    {
+      "tx": "**PPHN** (**right to left** PDA foramen, **labile hypoxaemia**, **pre post ductal gap** over 10, **nitric oxide** selective, **sildenafil** bosentan, **ECMO** oxygenation index 40) with **diaphragmatic hernia** (**scaphoid**, bowel chest, **avoid bag mask**, **NG** decompresses, **surgery delayed** stable ECMO) and **choanal atresia** (cyclical cyanosis feeding, **oral airway** stent, **CHARGE**) manages obstructions; **laryngomalacia** (inspiratory stridor feeds, supraglottic, most resolve) reassures. Ductal gaps point.",
+      "say": "Gaping pre post sats shunting right is PPHN: nitric ECMO bridges. Scaphoid bellies NG decompress delay.",
+      "vis": null
+    },
+    {
+      "tx": "**Apnoea** (**preterm central**, **caffeine** loading maintenance, **CPAP** splints, **transfusion** anaemia, **sepsis** cultures) with **monitoring** (**saturation targets** 90 to 95 preterm, **retinopathy** exams, **hearing** screens, **growth** fortified feeds) follows; **GER** (prone upright feeds thickened, **apnoea BRUE** workup) mimics. Spells charted mature.",
+      "say": "Preterm pauses caffeine splints transfuses cultures: 90 95 targets eyes ears growth watch. Spells mature.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Breathe",
+          "Pearl",
+          "Act"
+        ],
+        "rows": [
+          [
+            "RDS",
+            "Glass preterm",
+            "Thin surfactant"
+          ],
+          [
+            "TTN MAS",
+            "Hours meconium",
+            "Suction nitric"
+          ],
+          [
+            "PPHN",
+            "Gap 10",
+            "NO ECMO"
+          ],
+          [
+            "Apnoea",
+            "Caffeine",
+            "90 95"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-paed-011",
+    "bk2-paed-012",
+    "bk2-paed-013",
+    "bk2-paed-014",
+    "bk2-paed-015",
+    "bk2-paed-016",
+    "bk2-paed-017",
+    "bk2-paed-018",
+    "bk2-paed-019",
+    "bk2-paed-020"
+  ],
+  "src": [],
+  "refs": [
+    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-nel1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}
