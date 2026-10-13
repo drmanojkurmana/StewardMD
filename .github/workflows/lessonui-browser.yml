@@ -30,10 +30,17 @@ jobs:
           mkdir -p "$SHOTS"
           node test/run-prep-lessons-ui.mjs
           PN_LIGHT=1 node test/run-prep-lessons-ui.mjs
+      - name: Baseline prep-ui on main (stale-suite check)
+        if: always()
+        continue-on-error: true
+        working-directory: before
+        env:
+          CHROME: /usr/bin/google-chrome
+        run: node test/run-prep-ui.mjs
       - uses: actions/checkout@v4
         with:
           path: after
-      - name: Browser tests and after screenshots (390px, dark and light)
+      - name: Lesson browser tests and after screenshots (390px, dark and light)
         working-directory: after
         env:
           CHROME: /usr/bin/google-chrome
@@ -42,8 +49,19 @@ jobs:
           mkdir -p "$SHOTS"
           node test/run-prep-lessons-ui.mjs
           PN_LIGHT=1 node test/run-prep-lessons-ui.mjs
-          node test/run-prep-ui.mjs
-          node test/run-prep-qgen-ui.mjs
+      - name: MCQ browser test (report sheet flow)
+        if: always()
+        working-directory: after
+        env:
+          CHROME: /usr/bin/google-chrome
+          SHOTS: ${{ github.workspace }}/shots-after
+        run: node test/run-prep-ui.mjs
+      - name: MaiK module browser test (report sheet flow)
+        if: always()
+        working-directory: after
+        env:
+          CHROME: /usr/bin/google-chrome
+        run: node test/run-prep-qgen-ui.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

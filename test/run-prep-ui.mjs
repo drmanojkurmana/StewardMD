@@ -169,6 +169,7 @@ try {
       ok(await until(`return !!document.querySelector(".pn-rpt-sheet .pn-rpt-ok");`, 3000), "the sheet confirms the report was received");
       await click(".pn-rpt-sheet [data-rpt-close]");
       ok(await until(`return !document.querySelector(".pn-rpt-sheet") && !!document.querySelector("#smdPrep .pn-fb");`, 3000), "after reporting, back on the answered question");
+      await shot("after-report");
       ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return Object.keys(s.rep).length===1 && s.rep[Object.keys(s.rep)[0]]==="unclear";`) === true, "the report is kept on the device");
     }
     if (i === 3) {
