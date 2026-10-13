@@ -194,3 +194,9 @@
 - Gates: LP.checkLesson 10/10, kb_validate_v2 10/10, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 10/10. 100 IDs unique. maikbook2 1400 -> 1500.
 - STATE2/COVERAGE2 updated + mirrors. Next: NEL2 (remaining 7 gaps).
 
+
+## Wave NEL2 (2026-10-13, muse Wonder): paeds gaps 17/17 COMPLETE
+- Branch books2-nel2 from origin/main post-MICRO2-merge, PR #1597 open (no merge; squash after browser job). Final 7 gaps + 7 KB + 70 MCQs bk2-paed-101..170 (pgt-liver scoped portal/GI, pgt-gi-nutrition, php-cholestasis, php-failure-metabolic, pon-leukaemia-lymphoma, pon-solid-tumours, pcc-ventilation-sedation).
+- Gates: LP.checkLesson 7/7, kb_validate_v2 7/7, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 7/7. 70 IDs unique. maikbook2 1500 -> 1570, no rebase needed.
+- STATE2/COVERAGE2 updated + mirrors. Next: Miller anesthesia queue.
+
