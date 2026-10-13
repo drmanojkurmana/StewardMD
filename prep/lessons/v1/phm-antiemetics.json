@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "phm-antiemetics",
+ "subject": "pharmacology",
+ "title": "Antiemetics and prokinetic drugs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Vomiting** is orchestrated by a medullary network integrating the chemoreceptor trigger zone outside the blood brain barrier, vestibular input, vagal gut signals and cortical anticipation. Each input speaks a different transmitter: dopamine and serotonin at the trigger zone, histamine and acetylcholine in vestibular paths, serotonin from gut enterochromaffin cells, and substance P in delayed chemotherapy vomiting. Matching the antiemetic to the circuit is the whole prescribing skill.",
+   "say": "Vomiting circuits use different transmitters by source: dopamine and serotonin centrally, histamine in motion sickness, serotonin from the gut, substance P in delayed chemotherapy vomiting. Match drug to circuit.",
+   "vis": null
+  },
+  {
+   "tx": "**Ondansetron** blocks 5HT3 receptors in gut vagal afferents and the trigger zone, excelling in chemotherapy, radiotherapy and postoperative vomiting with headache and constipation as modest costs and QT prolongation at high intravenous doses. Granisetron and palonosetron share the class, palonosetron lasting longest. Serotonin blockade does little for motion sickness, where vestibular histamine and muscarinic pathways dominate instead and demand different drugs entirely.",
+   "say": "Ondansetron blocks serotonin receptors for chemotherapy and postoperative vomiting. It barely helps motion sickness, which needs antihistamine or anticholinergic drugs instead. Watch the QT interval at high doses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug class",
+     "Receptor",
+     "Best indication"
+    ],
+    "rows": [
+     [
+      "Ondansetron",
+      "5HT3 blocker",
+      "Chemotherapy, postoperative"
+     ],
+     [
+      "Metoclopramide",
+      "D2 blocker + prokinetic",
+      "Gastroparesis, migraine nausea"
+     ],
+     [
+      "Cyclizine / promethazine",
+      "H1 blocker",
+      "Motion sickness, vestibular"
+     ],
+     [
+      "Hyoscine",
+      "Muscarinic blocker",
+      "Motion sickness patches"
+     ],
+     [
+      "Aprepitant",
+      "NK1 blocker",
+      "Delayed chemotherapy vomiting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Metoclopramide** blocks dopamine receptors antiemetically and stimulates upper gut motility prokinetically, helping gastroparesis and migraine nausea, but crosses into brain causing acute dystonia, akathisia and tardive dyskinesia with prolonged use, so courses stay short especially in the young. Domperidone shares gut dopamine blockade while largely sparing the brain, trading movement disorders for QT prolongation and sudden cardiac cautions that restrict dose and duration.",
+   "say": "Metoclopramide stops vomiting and moves the stomach but can cause dystonia and tardive dyskinesia, so keep courses short. Domperidone spares the brain more but prolongs QT.",
+   "vis": null
+  },
+  {
+   "tx": "**Aprepitant** blocks neurokinin 1 substance P receptors and completes modern chemotherapy prophylaxis triplets with a 5HT3 blocker and dexamethasone, specifically conquering delayed vomiting days after cisplatin. Dexamethasone itself is a potent adjunct antiemetic by incompletely mapped central actions. Olanzapine's broad receptor blockade rescues refractory and breakthrough nausea in palliative and chemotherapy settings at the price of sedation and metabolic effects needing supervision.",
+   "say": "Aprepitant blocks substance P to prevent delayed chemotherapy vomiting, completing triplet prophylaxis with ondansetron and dexamethasone. Olanzapine rescues stubborn nausea but sedates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Motion sickness",
+     "points": [
+      "Vestibular H1 and muscarinic pathways",
+      "Hyoscine patch or cyclizine",
+      "Ondansetron largely ineffective"
+     ]
+    },
+    "right": {
+     "title": "Chemotherapy vomiting",
+     "points": [
+      "Serotonin acute, substance P delayed",
+      "5HT3 blocker plus NK1 plus steroid",
+      "Anticipatory vomiting needs behavioural care and lorazepam"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anticipatory vomiting** before chemotherapy is a conditioned cortical response needing prevention of early cycle vomiting, behavioural therapy and short anxiolytics rather than escalating receptor blockers. In pregnancy, pyridoxine and doxylamine lead, with metoclopramide and ondansetron reserved stepwise, while hyperemesis demands fluids, thiamine and electrolytes before drugs. Every chronic antiemetic prescription deserves a stop review because dopamine blockers accumulate movement and cardiac harms silently over months.",
+   "say": "Vomiting expected before chemotherapy is learned, needing prevention and behavioural care. Pregnancy starts with pyridoxine based options. Review long term dopamine blockers for movement and heart harms.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-phm-061",
+  "bk2-phm-062",
+  "bk2-phm-063",
+  "bk2-phm-064",
+  "bk2-phm-065",
+  "bk2-phm-066",
+  "bk2-phm-067",
+  "bk2-phm-068",
+  "bk2-phm-069",
+  "bk2-phm-070"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

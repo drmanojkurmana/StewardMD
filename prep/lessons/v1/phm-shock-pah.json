@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "phm-shock-pah",
+ "subject": "pharmacology",
+ "title": "Drugs for shock and pulmonary arterial hypertension",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Shock pharmacotherapy** first classifies the failure: vasodilatory (septic, anaphylactic) needing vasoconstrictors, cardiogenic needing inotropes with pressure support, hypovolaemic needing volume before drugs, and obstructive needing mechanical relief that no infusion replaces. Receptor targeted agents from the sympathomimetic family are then layered with source control, fluids guided by responsiveness, and perfusion endpoints such as lactate clearance, urine output, capillary refill and mentation rather than pressure numbers alone guiding success.",
+   "say": "Classify shock before choosing drugs: squeeze vessels in septic, strengthen pump in cardiogenic, fill volume in bleeding, relieve obstruction mechanically. Judge success by perfusion, not numbers alone.",
+   "vis": null
+  },
+  {
+   "tx": "**Vasopressin** constricts V1 receptors as a catecholamine sparing second pressor in septic shock and may reduce atrial fibrillation versus pure adrenergic escalation, while terlipressin serves variceal bleeding and hepatorenal physiology. Milrinone, a phosphodiesterase 3 inhibitor, increases contractility and vasodilates (inodilator) for low output failure with pulmonary hypertension, at the cost of hypotension and arrhythmias and kidney dependent accumulation. Levosimendan calcium sensitisation follows similar inodilator logic in specialist hands.",
+   "say": "Vasopressin squeezes vessels without adrenergic receptors as second septic pressor. Milrinone strengthens and dilates for low output with high lung pressures but drops pressure and lingers in kidney failure.",
+   "vis": null
+  },
+  {
+   "tx": "**Pulmonary arterial hypertension** is precapillary pulmonary vascular disease where three pathways are druggable: endothelin (bosentan, macitentan antagonists), nitric oxide cyclic GMP (sildenafil, riociguat), and prostacyclin (epoprostenol infusion, treprostinil, selexipag). Combination therapy upfront improves outcomes in most risk strata, while calcium blockers suit only the minority with acute vasoreactivity. Anticoagulation, diuretics for right failure, oxygen and supervised rehabilitation complete the scaffold.",
+   "say": "Pulmonary arterial hypertension drugs block endothelin, boost nitric oxide signalling, or replace prostacyclin, usually combined early. Only vasoreactive patients suit calcium blockers. Support the failing right ventricle alongside.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PAH pathway",
+     "Drug examples",
+     "Pearl"
+    ],
+    "rows": [
+     [
+      "Endothelin block",
+      "Bosentan, macitentan",
+      "Liver checks (bosentan), teratogenic"
+     ],
+     [
+      "NO cGMP boost",
+      "Sildenafil, riociguat",
+      "Never combine riociguat with PDE5 inhibitor"
+     ],
+     [
+      "Prostacyclin",
+      "Epoprostenol, selexipag",
+      "Infusion interruption can rebound fatally"
+     ],
+     [
+      "Calcium channel",
+      "High dose diltiazem (selected)",
+      "Only acute vasoreactive minority"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Right ventricular failure** physiology inverts left sided instincts: the thin right ventricle needs adequate coronary perfusion pressure (so systemic pressure support protects it), careful preload (overfilling worsens septal shift), and afterload reduction through pulmonary vasodilators, oxygen and correction of hypoxia, hypercapnia and acidosis that constrict pulmonary vessels. Inhaled nitric oxide and prostacyclins selectively unload the pulmonary circuit in critical care without systemic collapse, bridging to definitive therapy or recovery.",
+   "say": "The failing right ventricle needs systemic pressure for its own coronary flow, gentle preload, and pulmonary afterload cut by oxygen and inhaled vasodilators. Overfilling bows the septum and strangles the left heart.",
+   "vis": null
+  },
+  {
+   "tx": "In **cardiogenic shock** complicating infarction, revascularisation is the definitive drug sparing therapy, with noradrenaline for pressure, dobutamine or milrinone for flow, and mechanical support escalation in selected centres. Pressor choice errors populate exam traps: pure phenylephrine burdens a failing pump, dopamine arrhythmias harm, and vasodilators alone collapse pressure. Shock teaching always pairs the infusion chart with the cause treatment: antibiotics and source control, reperfusion, volume, or obstruction relief decide survival more than any vasoactive label.",
+   "say": "Infusions buy time; cause treatment saves life. Reperfuse infarctions, drain obstructions, fill bleeding, control septic sources. Pick pressors that do not fight the failing physiology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Septic (vasodilatory)",
+     "points": [
+      "Noradrenaline first, vasopressin second",
+      "Warm peripheries, wide pulse pressure early",
+      "Source control and antibiotics decisive"
+     ]
+    },
+    "right": {
+     "title": "Cardiogenic (pump)",
+     "points": [
+      "Noradrenaline pressure plus dobutamine flow",
+      "Cold clammy, narrow pulse pressure",
+      "Revascularisation decisive in infarction"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-111",
+  "bk2-phm-112",
+  "bk2-phm-113",
+  "bk2-phm-114",
+  "bk2-phm-115",
+  "bk2-phm-116",
+  "bk2-phm-117",
+  "bk2-phm-118",
+  "bk2-phm-119",
+  "bk2-phm-120"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

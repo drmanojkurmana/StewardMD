@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "phm-antihypertensives",
+ "subject": "pharmacology",
+ "title": "Antihypertensive drugs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Antihypertensive classes** lower pressure by reducing volume, vascular resistance, cardiac output or renin signalling, and first line choices (thiazide like diuretics, ACE inhibitors or ARBs, and calcium channel blockers, with beta blockers for compelling cardiac indications) all prevent stroke and heart failure when pressure falls. The achieved blood pressure matters more than the brand, so combination therapy in single pills drives modern control rates and adherence far better than sequential monotherapy maximalism.",
+   "say": "First line pressure drugs are thiazide type diuretics, ACE inhibitors or ARBs, and calcium blockers. Combinations in one pill control most patients. The pressure achieved matters more than the label.",
+   "vis": null
+  },
+  {
+   "tx": "**ACE inhibitors** block angiotensin II formation and bradykinin breakdown, protecting diabetic kidneys and failing hearts, at the cost of dry cough from bradykinin, rare angioedema, teratogenicity forbidding pregnancy use, and potassium plus creatinine rises needing blood checks after starting. ARBs block the receptor instead, sparing cough but sharing fetal and potassium cautions, and combining both classes harms more than it helps in trials.",
+   "say": "ACE inhibitors protect kidneys and hearts but cause cough, rare angioedema, high potassium and fetal harm. ARBs spare the cough. Never combine ACE inhibitor with ARB routinely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Signature benefit",
+     "Signature harm"
+    ],
+    "rows": [
+     [
+      "ACE inhibitor",
+      "Kidney and heart protection",
+      "Cough, angioedema, teratogen"
+     ],
+     [
+      "ARB",
+      "Same protection, no cough",
+      "Potassium rise, teratogen"
+     ],
+     [
+      "Calcium blocker",
+      "Stroke prevention, elderly",
+      "Ankle swelling, gum overgrowth"
+     ],
+     [
+      "Thiazide like",
+      "Outcome proven, cheap",
+      "Sodium and potassium falls, gout"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Calcium channel blockers** split into dihydropyridines such as amlodipine that dilate arteries (ankle oedema, flushing, gum hypertrophy) and rate limiting verapamil and diltiazem that slow conduction and contractility for rate control, never combined casually with beta blockers. Beta blockers themselves now serve hypertension mainly with coronary disease, heart failure or rate needs, because stroke prevention in uncomplicated elderly hypertension trailed rivals, while their bronchospasm, masking of hypoglycaemia and fatigue costs remain real.",
+   "say": "Amlodipine dilates vessels and swells ankles. Verapamil slows the heart and must be paired cautiously with beta blockers. Beta blockers treat pressure best when the heart also needs them.",
+   "vis": null
+  },
+  {
+   "tx": "**Resistant hypertension** means pressure uncontrolled on three drugs including a diuretic, and spironolactone is the proven fourth agent before hunting secondary causes such as primary aldosteronism, renal artery stenosis, sleep apnoea, thyroid disease and drug culprits (NSAIDs, steroids, contraceptives, liquorice). Pregnancy hypertension uses methyldopa, labetalol and nifedipine, while ACE inhibitors, ARBs and direct renin blockers are fetotoxic and stopped before conception wherever possible.",
+   "say": "Uncontrolled on three drugs including a diuretic means resistant hypertension: add spironolactone fourth and hunt secondary causes. Pregnancy safe choices are methyldopa, labetalol and nifedipine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary hypertension",
+     "points": [
+      "No single cause, gradual onset",
+      "Lifestyle plus first line classes",
+      "Most patients, combination pills"
+     ]
+    },
+    "right": {
+     "title": "Secondary clues",
+     "points": [
+      "Young, resistant, bruits, low potassium, snoring",
+      "Aldosteronism, stenosis, apnoea, drugs",
+      "Targeted tests and cause therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypertensive emergencies** with organ damage (encephalopathy, dissection, pulmonary oedema) need controlled intravenous reduction, while severe asymptomatic hypertension needs oral titration and follow up rather than precipitous drops that ischaemically injure adapted organs. Alpha methyldopa's positive Coombs tests, clonidine's rebound, hydralazine's lupus like syndrome and minoxidil's fluid retention with hirsutism populate the older drug pearls examiners still favour. Every regimen ends with home readings, adherence review and electrolyte plus kidney surveillance.",
+   "say": "Organ damage needs careful intravenous control; numbers alone need steady oral care. Dropping pressure too fast starves adapted organs. Confirm with home readings and recheck bloods.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-phm-091",
+  "bk2-phm-092",
+  "bk2-phm-093",
+  "bk2-phm-094",
+  "bk2-phm-095",
+  "bk2-phm-096",
+  "bk2-phm-097",
+  "bk2-phm-098",
+  "bk2-phm-099",
+  "bk2-phm-100"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
