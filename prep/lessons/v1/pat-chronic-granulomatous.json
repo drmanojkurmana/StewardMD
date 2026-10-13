@@ -1,0 +1,109 @@
+{
+ "v": 1,
+ "module": "pat-chronic-granulomatous",
+ "subject": "pathology",
+ "title": "Chronic and granulomatous inflammation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Chronic inflammation** is a prolonged tissue response in which active inflammation, tissue injury and attempted repair proceed together for weeks to months. It follows unresolved acute inflammation, persistent infection, prolonged exposure to injurious agents or autoimmune reactions. The dominant cells are macrophages, lymphocytes and plasma cells rather than neutrophils, and fibrosis often replaces lost tissue.",
+   "say": "Chronic inflammation is a prolonged response where injury and repair happen together over weeks to months. It follows unresolved acute inflammation, persistent infection, toxic exposure or autoimmunity. Macrophages, lymphocytes and plasma cells dominate, and fibrosis often replaces lost tissue.",
+   "vis": null
+  },
+  {
+   "tx": "The **macrophage** is the central cell of chronic inflammation and arrives as a blood monocyte that transforms after reaching tissue. Classically activated macrophages, driven by interferon gamma, kill microbes and clear debris but also damage tissue. Alternatively activated macrophages, driven by interleukin 4 and 13, promote repair and fibrosis. The balance between these states decides healing versus destruction.",
+   "say": "The macrophage is the central cell of chronic inflammation. Classical activation by interferon gamma kills microbes but damages tissue. Alternative activation by interleukin 4 and 13 promotes repair and fibrosis. The balance decides healing versus destruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classical activation (M1)",
+     "points": [
+      "Induced by interferon gamma and microbial products",
+      "Produces nitric oxide and reactive oxygen species",
+      "Strong microbicidal activity",
+      "Associated with tissue injury"
+     ]
+    },
+    "right": {
+     "title": "Alternative activation (M2)",
+     "points": [
+      "Induced by interleukin 4 and interleukin 13",
+      "Produces growth factors for repair",
+      "Promotes angiogenesis and fibrosis",
+      "Associated with healing and scarring"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **granuloma** is an organised collection of activated macrophages, often transformed into epithelioid cells, surrounded by a rim of lymphocytes. Macrophages may fuse into multinucleate giant cells. Langhans giant cells arrange nuclei at the periphery, while foreign body giant cells scatter nuclei randomly. Granulomas wall off agents that are difficult to eliminate, such as mycobacteria and fungi.",
+   "say": "A granuloma is an organised collection of activated macrophages, often epithelioid, ringed by lymphocytes. Fused macrophages form giant cells. Langhans cells place nuclei at the periphery while foreign body cells scatter them. Granulomas wall off hard to eliminate agents like mycobacteria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Caseating granuloma",
+     "Non-caseating granuloma"
+    ],
+    "rows": [
+     [
+      "Centre",
+      "Amorphous necrotic debris",
+      "No central necrosis"
+     ],
+     [
+      "Typical cause",
+      "Tuberculosis, some fungal infections",
+      "Sarcoidosis, Crohn disease, foreign bodies"
+     ],
+     [
+      "Giant cells",
+      "Often Langhans type",
+      "May contain inclusions such as Schaumann bodies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Caseous necrosis** gives tuberculosis its classic cheese-like gross appearance and reflects extensive tissue destruction within the granuloma centre. In contrast, sarcoidosis produces tight non-caseating granulomas along lymphatic routes, often in lungs and hilar nodes, with elevated angiotensin converting enzyme in many patients. Histology alone rarely proves cause, so culture, stains and molecular tests remain essential.",
+   "say": "Caseous necrosis gives tuberculosis its cheese-like centre and reflects heavy tissue destruction. Sarcoidosis instead forms tight non-caseating granulomas in lungs and hilar nodes. Histology alone rarely proves the cause, so stains, culture and molecular tests are essential.",
+   "vis": null
+  },
+  {
+   "tx": "Chronic inflammation heals by **fibrosis** when tissue loss is substantial or the injurious stimulus persists. Fibroblasts deposit collagen under transforming growth factor beta signalling, while new vessels form through angiogenesis. Granulation tissue, with plump fibroblasts, new capillaries and loose matrix, is the early repair tissue and should not be confused with a granuloma despite the similar names.",
+   "say": "Chronic inflammation heals by fibrosis when tissue loss is large or injury persists. Fibroblasts lay down collagen under transforming growth factor beta, and new vessels form. Granulation tissue is early repair tissue and differs from a granuloma despite the similar name.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-001",
+  "bk2-pat-002",
+  "bk2-pat-003",
+  "bk2-pat-004",
+  "bk2-pat-005",
+  "bk2-pat-006",
+  "bk2-pat-007",
+  "bk2-pat-008",
+  "bk2-pat-009",
+  "bk2-pat-010"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

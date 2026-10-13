@@ -52,7 +52,7 @@ test("maikbook2 overlay items well formed across all subjects", () => {
   assert.ok(fs.existsSync(base), "maikbook2 directory exists");
 
   let totalItems = 0;
-  for (const subj of ["obstetrics-gynaecology"]) {
+  for (const subj of ["obstetrics-gynaecology", "pathology"]) {
     const subjDir = path.join(base, subj);
     assert.ok(fs.existsSync(subjDir), `${subj} overlay directory exists`);
 
@@ -88,5 +88,5 @@ test("maikbook2 overlay items well formed across all subjects", () => {
     }
   }
 
-  assert.equal(totalItems, 160, "Expected 160 high-yield verified MCQs in maikbook2");
+  assert.equal(totalItems, 280, "Expected 280 high-yield verified MCQs in maikbook2 (160 OBG + 120 pathology batch 2)");
 });

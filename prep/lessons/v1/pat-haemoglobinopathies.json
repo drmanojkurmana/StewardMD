@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-haemoglobinopathies",
+ "subject": "pathology",
+ "title": "Sickle cell disease and thalassaemias",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sickle cell disease** follows a point mutation replacing glutamate with valine at position six of beta globin, producing haemoglobin S. Deoxygenated HbS polymerises into rigid fibres that deform red cells into sickles, causing haemolysis and vaso occlusion. Fetal haemoglobin inhibits polymerisation, which explains protection in early infancy and benefit from hydroxycarbamide therapy.",
+   "say": "One valine substitution creates haemoglobin S that polymerises without oxygen and sickles red cells. Haemolysis and blocked vessels follow. Fetal haemoglobin blocks polymerisation and protects infants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Sickle cell disease",
+     "Beta thalassaemia major"
+    ],
+    "rows": [
+     [
+      "Core defect",
+      "Abnormal beta chain (HbS)",
+      "Absent beta chain production"
+     ],
+     [
+      "Main problem",
+      "Sickling, haemolysis, vaso occlusion",
+      "Ineffective erythropoiesis, severe anaemia"
+     ],
+     [
+      "Key film finding",
+      "Sickle cells, target cells",
+      "Microcytosis, target cells, nucleated red cells"
+     ],
+     [
+      "Major long term risk",
+      "Stroke, acute chest, splenic loss",
+      "Iron overload from transfusions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vaso occlusive crises cause the painful episodes, dactylitis in toddlers and **acute chest syndrome**, the leading cause of death with fever, chest pain and new lung infiltrate. Splenic sequestration drops haemoglobin rapidly in young children, while repeated infarction produces autosplenectomy and Howell Jolly bodies. Stroke screening by transcranial Doppler identifies children needing preventive transfusion.",
+   "say": "Blocked vessels cause pain crises, swollen toddler fingers and acute chest syndrome, the main killer. The spleen first traps blood dangerously, then infarcts away. Doppler screening prevents childhood stroke.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sickle trait",
+     "points": [
+      "One HbS copy, usually asymptomatic",
+      "Normal life expectancy",
+      "Haematuria and altitude splenic infarct possible",
+      "Genetic counselling relevance"
+     ]
+    },
+    "right": {
+     "title": "Sickle cell disease",
+     "points": [
+      "Two abnormal copies or compound state",
+      "Chronic haemolysis and crises",
+      "Autosplenectomy and Howell Jolly bodies",
+      "Stroke and acute chest risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Beta thalassaemia major** presents after six months as fetal haemoglobin falls, with severe microcytic anaemia, ineffective erythropoiesis, marrow expansion causing crew haircut skull changes and hepatosplenomegaly. Unbalanced alpha chains precipitate and destroy precursors. Regular transfusion sustains growth but loads iron into heart, liver and endocrine organs without chelation.",
+   "say": "Beta thalassaemia major appears as fetal haemoglobin falls, with severe anaemia and expanded marrow deforming bones. Transfusions sustain life but overload iron. Chelation protects heart and glands.",
+   "vis": null
+  },
+  {
+   "tx": "**Alpha thalassaemia** severity counts deleted alpha genes from one to four. Silent carriers and trait cause mild microcytosis with normal electrophoresis, haemoglobin H disease causes moderate haemolysis with HbH inclusions, and four gene deletion causes hydrops fetalis with haemoglobin Bart, usually fatal without intrauterine transfusion. Gene counting predicts phenotype precisely in exams.",
+   "say": "Alpha thalassaemia worsens with each deleted gene. One or two deletions mimic trait with normal electrophoresis. Three cause HbH disease. Four cause fatal hydrops with haemoglobin Bart.",
+   "vis": null
+  },
+  {
+   "tx": "Diagnosis combines blood film, **haemoglobin electrophoresis or HPLC** and genetics. Beta trait raises HbA2, sickle disease shows predominant HbS without HbA when homozygous, and iron deficiency must be excluded before labelling trait. Newborn screening enables penicillin prophylaxis and vaccination that transformed childhood survival in sickle disease.",
+   "say": "Electrophoresis separates the haemoglobinopathies. Beta trait raises HbA2. Sickle disease shows dominant HbS. Newborn screening allows protective penicillin and vaccines from infancy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-081",
+  "bk2-pat-082",
+  "bk2-pat-083",
+  "bk2-pat-084",
+  "bk2-pat-085",
+  "bk2-pat-086",
+  "bk2-pat-087",
+  "bk2-pat-088",
+  "bk2-pat-089",
+  "bk2-pat-090"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

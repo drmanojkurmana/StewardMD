@@ -1,0 +1,109 @@
+{
+ "v": 1,
+ "module": "pat-thrombosis-embolism",
+ "subject": "pathology",
+ "title": "Thrombosis, embolism and infarction",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Thrombosis** is the formation of a solid mass from blood constituents inside a living vessel or heart chamber. Virchow triad organises its causes into endothelial injury, abnormal blood flow and hypercoagulability. Endothelial injury dominates arterial thrombosis over atherosclerotic plaques, while stasis dominates venous thrombosis in immobile limbs. Inherited hypercoagulable states include factor V Leiden and protein C deficiency.",
+   "say": "Thrombosis forms a solid blood mass inside a living vessel. Virchow triad groups causes as endothelial injury, abnormal flow and hypercoagulability. Injury drives arterial thrombus while stasis drives venous thrombus. Factor V Leiden is a classic inherited cause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virchow component",
+     "Arterial example",
+     "Venous example"
+    ],
+    "rows": [
+     [
+      "Endothelial injury",
+      "Ruptured atherosclerotic plaque",
+      "Less dominant"
+     ],
+     [
+      "Abnormal flow",
+      "Turbulence at bifurcations",
+      "Stasis in immobile calf veins"
+     ],
+     [
+      "Hypercoagulability",
+      "Antiphospholipid syndrome",
+      "Factor V Leiden, malignancy, pregnancy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A thrombus must be distinguished from a postmortem clot at autopsy and in exam stems. Thrombi are firm, attached to the wall and show **lines of Zahn**, alternating pale platelet and fibrin layers with darker red cell layers, proving formation in flowing blood. Postmortem clots are rubbery, unattached and form a dependent dark layer with a pale chicken fat supernatant.",
+   "say": "Thrombi are firm and attached and show lines of Zahn, alternating pale and dark layers formed in flowing blood. Postmortem clots are rubbery and unattached with a chicken fat upper layer. This distinction is a frequent exam trap.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antemortem thrombus",
+     "points": [
+      "Firm and attached to vessel wall",
+      "Lines of Zahn present",
+      "Formed in flowing blood",
+      "May organise or embolise"
+     ]
+    },
+    "right": {
+     "title": "Postmortem clot",
+     "points": [
+      "Rubbery and unattached",
+      "No lines of Zahn",
+      "Chicken fat supernatant",
+      "No organisation or embolisation risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Thrombi have four possible fates that determine clinical outcome. They may propagate and enlarge, embolise to distant vessels, dissolve by fibrinolysis, or undergo **organisation** with ingrowth of capillaries and fibroblasts, sometimes recanalising flow. Fresh thrombi respond best to fibrinolytic and anticoagulant therapy, while organised thrombi become fibrotic and resistant. Embolisation is the most dangerous immediate fate.",
+   "say": "Thrombi can propagate, embolise, dissolve or organise. Organisation grows capillaries and fibroblasts into the clot and may recanalise flow. Fresh thrombi respond best to therapy. Embolisation is the most dangerous fate.",
+   "vis": null
+  },
+  {
+   "tx": "**Embolism** is intravascular material carried by blood to a distant site where it lodges. Most pulmonary emboli arise from deep veins of the leg and may cause sudden death, infarction or chronic pulmonary hypertension depending on size. Systemic emboli usually arise from the heart in atrial fibrillation or after myocardial infarction and lodge in brain, limbs, gut or kidneys.",
+   "say": "An embolus travels in blood and lodges distantly. Most pulmonary emboli come from leg deep veins. Systemic emboli usually come from the heart in atrial fibrillation or after infarction and lodge in brain, limbs, gut or kidneys.",
+   "vis": null
+  },
+  {
+   "tx": "An **infarct** is an area of ischaemic necrosis from arterial occlusion or venous outflow block. Red infarcts occur in loose tissues, dual circulation organs and after venous occlusion, while white infarcts occur in solid organs with end arterial supply such as heart, spleen and kidney. Brain infarction is liquefactive, unlike the coagulative pattern elsewhere.",
+   "say": "An infarct is ischaemic necrosis from blocked arterial inflow or venous outflow. Red infarcts occur in loose or dual supply tissues. White infarcts occur in solid end arterial organs. Brain infarcts liquefy unlike most other tissues.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-011",
+  "bk2-pat-012",
+  "bk2-pat-013",
+  "bk2-pat-014",
+  "bk2-pat-015",
+  "bk2-pat-016",
+  "bk2-pat-017",
+  "bk2-pat-018",
+  "bk2-pat-019",
+  "bk2-pat-020"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

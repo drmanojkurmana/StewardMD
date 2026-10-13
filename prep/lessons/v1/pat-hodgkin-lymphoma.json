@@ -1,0 +1,99 @@
+{
+ "v": 1,
+ "module": "pat-hodgkin-lymphoma",
+ "subject": "pathology",
+ "title": "Hodgkin lymphoma: Reed Sternberg cells and staging",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Hodgkin lymphoma** is a lymphoid malignancy where rare large Reed Sternberg cells hide within a rich reactive background of lymphocytes, eosinophils and plasma cells. The malignant cells are scarce, often under one percent of the tumour, yet orchestrate the mass through cytokine secretion. This scarcity distinguishes Hodgkin histology from most non Hodgkin lymphomas packed with tumour cells.",
+   "say": "Hodgkin tumours contain rare malignant Reed Sternberg cells in a sea of reactive cells. Cytokines from few tumour cells build the mass. Scarcity itself is a diagnostic clue.",
+   "vis": null
+  },
+  {
+   "tx": "The classic **Reed Sternberg cell** is large with two nuclei or a bilobed nucleus, prominent owl eye nucleoli and abundant cytoplasm. It derives from germinal centre B cells that lost normal B cell programme, expressing CD30 and CD15 while usually lacking CD20. Lacunar, popcorn and mummified variants characterise the Hodgkin subtypes examiners rotate through stems.",
+   "say": "Owl eye binucleate cells expressing CD30 and CD15 define classic Hodgkin disease. They are crippled germinal centre B cells. Variants mark the subtypes. CD20 is usually absent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Signature cell or feature",
+     "Behaviour note"
+    ],
+    "rows": [
+     [
+      "Nodular sclerosis",
+      "Lacunar cells with collagen bands",
+      "Commonest; mediastinal mass in young women"
+     ],
+     [
+      "Mixed cellularity",
+      "Classic Reed Sternberg in mixed background",
+      "Associated with Epstein Barr virus more often"
+     ],
+     [
+      "Lymphocyte rich",
+      "Scattered classic cells in lymphocyte sea",
+      "Good prognosis"
+     ],
+     [
+      "Lymphocyte depleted",
+      "Many malignant cells, few reactive",
+      "Worst prognosis, HIV association"
+     ],
+     [
+      "Nodular lymphocyte predominant",
+      "Popcorn (LP) cells, CD20 positive",
+      "Separate entity; behaves indolently"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**B symptoms** of unexplained fever, drenching night sweats and weight loss over ten percent in six months upstage prognosis and enter Ann Arbor staging notation. Disease spreads contiguously to neighbouring node groups, unlike non Hodgkin spread, so a painless cervical node with mediastinal mass in a young adult is classic. Alcohol induced node pain is a curious historical clue.",
+   "say": "Fever, sweats and major weight loss are B symptoms worsening stage prognosis. Spread moves contiguously between node groups. Young adult neck and mediastinal nodes are classic.",
+   "vis": null
+  },
+  {
+   "tx": "Staging uses **Ann Arbor** groups from single node region to disseminated extranodal disease, guiding chemotherapy with or without radiotherapy. Bulky mediastinal disease and B symptoms push toward systemic treatment even at low stage. ABVD based chemotherapy cures most patients, while brentuximab and checkpoint inhibitors exploit CD30 expression and immune evasion in relapse.",
+   "say": "Ann Arbor stage counts node regions and extranodal spread. Bulk and B symptoms favour systemic therapy. CD30 targeting drugs exploit the marker in relapse. Most patients are cured.",
+   "vis": null
+  },
+  {
+   "tx": "**Epstein Barr virus** genomes hide in Reed Sternberg cells in many mixed cellularity and HIV associated cases, linking infection to pathogenesis. Survivors need long term surveillance for second cancers, cardiac and lung toxicity from treatment, hypothyroidism after neck radiation and infertility risks discussed before gonadotoxic therapy. Cure without follow up planning is incomplete care.",
+   "say": "Epstein Barr virus hides in many Hodgkin tumour cells. Survivors need surveillance for second cancers, heart and lung injury and infertility. Cure requires lifelong follow up planning.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-101",
+  "bk2-pat-102",
+  "bk2-pat-103",
+  "bk2-pat-104",
+  "bk2-pat-105",
+  "bk2-pat-106",
+  "bk2-pat-107",
+  "bk2-pat-108",
+  "bk2-pat-109",
+  "bk2-pat-110"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "v": 1,
+ "module": "pat-coagulation-disorders",
+ "subject": "pathology",
+ "title": "Coagulation disorders: haemophilia, DIC and liver disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Coagulation disorders** divide into factor deficiencies causing deep bleeding and platelet or vessel defects causing mucocutaneous bleeding, a bedside split examiners use constantly. Haemophilias bleed into joints and muscles hours after injury, while von Willebrand disease and platelet defects ooze immediately from gums, nose and skin. Laboratory patterns then confirm which arm has failed.",
+   "say": "Deep joint and muscle bleeding means factor deficiency. Immediate gum, nose and skin oozing means platelet or von Willebrand failure. Bleeding style localises the defect before labs return.",
+   "vis": null
+  },
+  {
+   "tx": "**Haemophilia A** lacks factor VIII and haemophilia B lacks factor IX, both X linked recessive so males suffer while females carry and transmit. Activated partial thromboplastin time prolongs with normal prothrombin time, platelet count and bleeding time. Recurrent haemarthrosis destroys joints without prophylaxis, now prevented by regular factor replacement or emicizumab for haemophilia A.",
+   "say": "Haemophilia A lacks factor eight, B lacks factor nine, both X linked in males. APTT prolongs alone. Repeated joint bleeds destroy joints without prophylaxis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Haemophilia A",
+     "Haemophilia B",
+     "Von Willebrand disease"
+    ],
+    "rows": [
+     [
+      "Missing factor",
+      "Factor VIII",
+      "Factor IX",
+      "Von Willebrand factor (carries VIII)"
+     ],
+     [
+      "Inheritance",
+      "X linked recessive",
+      "X linked recessive",
+      "Usually autosomal dominant"
+     ],
+     [
+      "Screening pattern",
+      "APTT prolonged only",
+      "APTT prolonged only",
+      "Bleeding time prolonged; APTT may prolong"
+     ],
+     [
+      "Typical bleeding",
+      "Joints and muscles",
+      "Joints and muscles",
+      "Mucocutaneous"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Von Willebrand disease** is the commonest inherited bleeding disorder, impairing platelet adhesion and factor VIII carriage together. Mucocutaneous bleeding, menorrhagia and post extraction oozing dominate, with prolonged bleeding time and variably prolonged APTT. Desmopressin releases stored factor in mild type 1 disease, the most testable treatment fact in this group.",
+   "say": "Von Willebrand disease is commonest, causing mucosal bleeding and heavy periods. It impairs platelet adhesion and factor eight carriage. Mild type one responds to desmopressin release.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Factor deficiency bleeding",
+     "points": [
+      "Deep joints and muscles",
+      "Delayed hours after injury",
+      "APTT prolonged, bleeding time normal",
+      "Haemophilia pattern"
+     ]
+    },
+    "right": {
+     "title": "Platelet and vWF bleeding",
+     "points": [
+      "Skin, gums, nose and periods",
+      "Immediate oozing after injury",
+      "Bleeding time prolonged",
+      "Von Willebrand and platelet pattern"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Disseminated intravascular coagulation** consumes platelets and factors in systemic microthrombosis while secondary fibrinolysis bleeds, so patients clot and haemorrhage simultaneously. Platelets and fibrinogen fall, both clotting times prolong and D dimer soars with schistocytes. Sepsis, obstetric catastrophes, promyelocytic leukaemia and trauma are triggers, and treating the cause outranks any product transfusion.",
+   "say": "DIC clots microvessels while consuming factors until bleeding follows. Platelets and fibrinogen fall, D dimer soars. Sepsis and obstetric disasters trigger it. Treat the cause first.",
+   "vis": null
+  },
+  {
+   "tx": "Liver disease mixes bleeding and clotting because the failing liver underproduces procoagulant and anticoagulant factors while portal hypertension sequesters platelets. **Vitamin K deficiency** selectively lowers factors II, VII, IX and X plus proteins C and S, corrected by vitamin K when deficiency rather than hepatocellular failure is the cause. Test interpretation must respect this rebalanced haemostasis concept.",
+   "say": "Liver failure lowers both clotting and anticlotting factors in a fragile rebalance. Vitamin K deficiency drops factors two, seven, nine and ten. Vitamin K corrects deficiency, not dead hepatocytes.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-111",
+  "bk2-pat-112",
+  "bk2-pat-113",
+  "bk2-pat-114",
+  "bk2-pat-115",
+  "bk2-pat-116",
+  "bk2-pat-117",
+  "bk2-pat-118",
+  "bk2-pat-119",
+  "bk2-pat-120"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
