@@ -1,0 +1,192 @@
+{
+ "module": "sur-salivary",
+ "subject": "surgery",
+ "title": "Salivary gland neoplasms: parotidectomy, facial nerve preservation, and malignant tumors",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas"
+ ],
+ "steps": [
+  {
+   "tx": "Salivary gland **tumors** adhere to the clinical rule of eighty: 80 percent occur in the parotid gland, 80 percent of parotid tumors are benign, and 80 percent of benign parotid tumors are pleomorphic adenomas. In contrast, tumors of the minor salivary glands carry an 80 percent malignancy rate. Pleomorphic adenoma presents as a firm, painless, slow-growing preauricular lump with pseudopodia that mandate formal parotidectomy rather than simple enucleation to avoid recurrences.",
+   "say": "Salivary neoplasms follow the rule of 80: 80 percent arise in the parotid, 80 percent are benign, and 80 percent are pleomorphic adenomas. Minor salivary gland tumors are 80 percent malignant. Pleomorphic adenomas require parotidectomy rather than enucleation to prevent recurrence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Salivary gland",
+     "Proportion of all neoplasms",
+     "Malignancy likelihood"
+    ],
+    "rows": [
+     [
+      "Parotid gland",
+      "80 percent of all tumors",
+      "20 to 25 percent malignant"
+     ],
+     [
+      "Submandibular gland",
+      "10 to 15 percent of all tumors",
+      "40 to 50 percent malignant"
+     ],
+     [
+      "Sublingual gland",
+      "1 percent of all tumors",
+      "70 to 80 percent malignant"
+     ],
+     [
+      "Minor salivary glands",
+      "5 to 10 percent of all tumors",
+      "80 to 85 percent malignant (predominantly adenoid cystic)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Superficial **parotidectomy** with facial nerve dissection constitutes the standard operation for benign tumors located lateral to the facial nerve plane. Enucleation is condemned due to capsular disruption and tumor seeding. The facial nerve exits the stylomastoid foramen and divides at the pes anserinus into temporofacial and cervicofacial trunks. Key anatomical landmarks used to locate the main trunk include the tragal pointer, tympanomastoid suture line, and posterior belly of the digastric.",
+   "say": "Superficial parotidectomy with facial nerve dissection is standard for tumors lateral to the nerve. Enucleation causes recurrence and is avoided. Landmarks to locate the facial nerve trunk include the tragal pointer, tympanomastoid suture line, and posterior belly of digastric.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Skin incision & elevation of Blair parotid flap"
+     },
+     {
+      "id": "p2",
+      "label": "Dissection of tragal pointer & posterior digastric"
+     },
+     {
+      "id": "p3",
+      "label": "Identification of main facial nerve trunk at stylomastoid"
+     },
+     {
+      "id": "p4",
+      "label": "Meticulous neurolysis of five peripheral branches"
+     },
+     {
+      "id": "p5",
+      "label": "En bloc resection of superficial parotid lobe with tumor"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mucoepidermoid **carcinoma** is the most common malignant salivary neoplasm across adult and pediatric populations, composed of mucous, intermediate, and epidermoid squamoid cells. Low-grade tumors behave indolently and are cured by wide resection with nerve sparing. Adenoid cystic carcinoma is characterized by indolent relentless growth, pathognomonic perineural invasion along cranial nerves causing facial pain, and late hematogenous metastases to the lungs that can manifest decades following primary resection.",
+   "say": "Mucoepidermoid carcinoma is the most common salivary cancer, composed of mucous and squamoid cells. Adenoid cystic carcinoma features extensive perineural invasion causing facial pain, high recurrence rates, and late hematogenous lung metastases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Malignancy",
+     "Histological hallmark",
+     "Clinical behavior and spread"
+    ],
+    "rows": [
+     [
+      "Mucoepidermoid carcinoma",
+      "Mixed mucin-secreting and squamous cells",
+      "Most common salivary cancer; grade dictates prognosis"
+     ],
+     [
+      "Adenoid cystic carcinoma",
+      "Cribriform Swiss-cheese pattern, basaloid cells",
+      "Relentless perineural invasion, late pulmonary metastases"
+     ],
+     [
+      "Acinic cell carcinoma",
+      "Serous acinar cells with zymogen granules",
+      "Second most common pediatric parotid cancer; low grade"
+     ],
+     [
+      "Carcinoma ex pleomorphic",
+      "Malignant transformation within benign adenoma",
+      "Aggressive, high-grade; carries poor 5-year survival"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Frey **syndrome** (gustatory sweating) represents a common long-term sequela of parotidectomy. Postoperative regeneration of transected parasympathetic secretomotor fibers from the auriculotemporal nerve aberrantly cross-innervate sympathetically denervated sweat glands and cutaneous capillaries of the overlying skin. Mastication or gustatory stimulation triggers facial sweating and erythema. Diagnosis is confirmed via Minor starch-iodine test; topical antiperspirants or intradermal botulinum toxin injections provide symptomatic relief.",
+   "say": "Frey syndrome causes gustatory sweating following parotidectomy. Transected parasympathetic secretomotor fibers aberrantly regenerate to reinnervate cutaneous sweat glands. Chewing triggers facial flushing and sweating, diagnosed by starch-iodine testing and treated with botulinum toxin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Parotidectomy transects auriculotemporal nerve fibers"
+     },
+     {
+      "id": "f2",
+      "label": "Parasympathetic secretomotor axons regenerate aberrantly"
+     },
+     {
+      "id": "f3",
+      "label": "Axons misroute into subdermal sweat glands & arterioles"
+     },
+     {
+      "id": "f4",
+      "label": "Gustatory stimulus induces localized facial sweating"
+     },
+     {
+      "id": "f5",
+      "label": "Minor starch-iodine confirmation & botulinum therapy"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ],
+     [
+      "f4",
+      "f5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "969b22dc-4000-8000-969b-22dc12345678",
+  "999b2795-4000-8000-999b-279512345678",
+  "989b2602-4000-8000-989b-260212345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

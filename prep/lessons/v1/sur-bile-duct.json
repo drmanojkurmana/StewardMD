@@ -1,0 +1,192 @@
+{
+ "module": "sur-bile-duct",
+ "subject": "surgery",
+ "title": "Biliary tract pathology: choledocholithiasis, cholangiocarcinoma, and bile duct injury repair",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Strasberg Bile Duct Injury Classification"
+ ],
+ "steps": [
+  {
+   "tx": "Choledocholithiasis refers to the presence of **calculi** within the common bile duct, arising secondarily from the gallbladder or primarily in the bile ducts during stasis. Patients present with biliary colic, fluctuating obstructive jaundice, and elevated alkaline phosphatase and conjugated bilirubin. Endoscopic retrograde cholangiopancreatography (**ERCP**) with sphincterotomy and stone extraction is the first-line therapeutic modality, followed by interval laparoscopic cholecystectomy.",
+   "say": "Choledocholithiasis presents with biliary colic, obstructive jaundice, and elevated conjugated bilirubin. Endoscopic retrograde cholangiopancreatography with sphincterotomy and stone clearance is first line, followed by laparoscopic cholecystectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Gallstones migrate into common bile duct"
+     },
+     {
+      "id": "c2",
+      "label": "Biliary ductal obstruction & proximal dilation"
+     },
+     {
+      "id": "c3",
+      "label": "MRCP confirms filling defect in common bile duct"
+     },
+     {
+      "id": "c4",
+      "label": "ERCP with biliary sphincterotomy & basket stone extraction"
+     },
+     {
+      "id": "c5",
+      "label": "Elective laparoscopic cholecystectomy during same admission"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ],
+     [
+      "c4",
+      "c5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute **cholangitis** is a life-threatening infection of the biliary tree resulting from bacterial superinfection proximal to biliary obstruction. Charcot triad characterizes classic cholangitis: fever, right upper quadrant pain, and jaundice. Progression to Reynolds pentad adds septic shock and altered mental status, indicating suppurative ascending infection requiring emergency biliary decompression via ERCP or percutaneous transhepatic biliary drainage (**PTBD**) within hours of admission.",
+   "say": "Acute cholangitis results from biliary obstruction combined with bacterial infection. Charcot triad includes fever, right upper quadrant pain, and jaundice. Reynolds pentad adds shock and confusion. Immediate emergent biliary decompression is life-saving.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical syndrome",
+     "Diagnostic criteria components",
+     "Emergency management"
+    ],
+    "rows": [
+     [
+      "Charcot triad",
+      "RUQ pain, fever with rigors, obstructive jaundice",
+      "IV fluids, empiric broad-spectrum antibiotics, urgent ERCP"
+     ],
+     [
+      "Reynolds pentad",
+      "Charcot triad + septic shock + altered mental status",
+      "Immediate ICU resuscitation & emergency emergent biliary decompression"
+     ],
+     [
+      "Mild cholangitis (Tokyo I)",
+      "Response to IV antibiotics within 24 hours",
+      "Elective or semi-urgent stone clearance"
+     ],
+     [
+      "Severe cholangitis (Tokyo III)",
+      "Organ dysfunction (cardiovascular, renal, neuro)",
+      "Immediate bedside or fluoroscopic decompression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Iatrogenic bile **duct** injury during laparoscopic cholecystectomy is categorized using the Strasberg classification. The classic major injury (Strasberg type E) results from misidentifying the common bile duct as the cystic duct, clipping and dividing it. Type E injuries are subdivided based on distance from the hepatic bifurcation (Bismuth levels E1 through E5). Definitive repair mandates tension-free, end-to-side Roux-en-Y hepaticojejunostomy performed by an experienced hepatobiliary surgeon.",
+   "say": "Bile duct injury during cholecystectomy is classified by the Strasberg system. Complete transection of the common bile duct represents a type E injury. Definitive repair requires an experienced hepatobiliary team performing a Roux-en-Y hepaticojejunostomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Strasberg type",
+     "Anatomical description of injury",
+     "Correct surgical management"
+    ],
+    "rows": [
+     [
+      "Type A",
+      "Cystic duct leak or small duct of Luschka leak",
+      "Endoscopic biliary stent placement via ERCP"
+     ],
+     [
+      "Type B / C",
+      "Occlusion or transection of aberrant right hepatic duct",
+      "Hepaticojejunostomy or segment VI/VII resection"
+     ],
+     [
+      "Type D",
+      "Lateral partial laceration of major bile duct",
+      "T-tube placement or primary repair over stent"
+     ],
+     [
+      "Type E (E1-E5)",
+      "Complete circumferential transection / occlusion of CBD",
+      "Roux-en-Y hepaticojejunostomy to healthy mucosa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cholangiocarcinoma is classified anatomically into intrahepatic, perihilar (**Klatskin** tumors), and distal subtypes. Perihilar tumors account for 60 percent of cases and are categorized by the Bismuth-Corlette classification. Type I tumors involve the common hepatic duct distal to bifurcation; Type II involves the bifurcation; Type III involves the bifurcation extending into the right (IIIa) or left (IIIb) hepatic duct; Type IV involves bilateral secondary hepatic ducts. Resection requires en bloc hepatectomy with biliary reconstruction.",
+   "say": "Perihilar cholangiocarcinoma, or Klatskin tumor, is staged by the Bismuth-Corlette classification. Type one is below the confluence, type two involves the confluence, type three extends into unilateral branches, and type four involves bilateral ducts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "Obstructive jaundice with painless dilated biliary tree"
+     },
+     {
+      "id": "k2",
+      "label": "Triphasic CT & MRCP define ductal tumor extent"
+     },
+     {
+      "id": "k3",
+      "label": "Bismuth-Corlette staging determines biliary branch involvement"
+     },
+     {
+      "id": "k4",
+      "label": "Preoperative portal vein embolization for future liver remnant"
+     },
+     {
+      "id": "k5",
+      "label": "En bloc partial hepatectomy, caudatectomy, & hepaticojejunostomy"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2"
+     ],
+     [
+      "k2",
+      "k3"
+     ],
+     [
+      "k3",
+      "k4"
+     ],
+     [
+      "k4",
+      "k5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "ae2f47fe-4000-8000-ae2f-47fe12345678",
+  "ad2f466b-4000-8000-ad2f-466b12345678",
+  "ac2f44d8-4000-8000-ac2f-44d812345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

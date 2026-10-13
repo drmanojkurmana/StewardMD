@@ -1,0 +1,197 @@
+{
+ "module": "sur-liver",
+ "subject": "surgery",
+ "title": "Hepatic anatomy, benign liver lesions, hepatocellular carcinoma, and hepatic resection",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas"
+ ],
+ "steps": [
+  {
+   "tx": "Hepatic **segmental** anatomy is defined by the Couinaud classification, which divides the liver into eight functionally independent segments. Each segment possesses an autonomous triad of portal vein, hepatic artery, and biliary drainage, bounded peripherally by the three main hepatic veins. The Cantlie line, extending from the gallbladder fossa to the inferior vena cava, divides the liver into functional right and left hemilivers, distinct from the anatomical falciform ligament.",
+   "say": "Couinaud segmental anatomy divides the liver into eight independent segments, each supplied by an autonomous portal triad. The Cantlie line runs from the gallbladder fossa to the inferior vena cava, marking the true functional division between right and left hemilivers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Couinaud segment",
+     "Anatomical location",
+     "Vascular territory & drainage"
+    ],
+    "rows": [
+     [
+      "Segment I (caudate lobe)",
+      "Posterior liver, wraps around IVC",
+      "Direct independent drainage into IVC"
+     ],
+     [
+      "Segments II and III",
+      "Left lateral sector",
+      "Left hepatic vein drainage"
+     ],
+     [
+      "Segment IV (quadrate)",
+      "Left medial sector (IVa superior, IVb inferior)",
+      "Middle hepatic vein drainage"
+     ],
+     [
+      "Segments V and VIII",
+      "Right anterior sector",
+      "Middle and right hepatic vein drainage"
+     ],
+     [
+      "Segments VI and VII",
+      "Right posterior sector",
+      "Right hepatic vein drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Benign **hepatic** neoplasms require precise cross-sectional characterization to guide surgical resection versus observation. Cavernous hemangioma is the most common benign liver tumor, demonstrating peripheral nodular puddling on arterial phase with centripetal fill-in on delayed contrast CT. Focal nodular hyperplasia (FNH) is a hyperplastic polyclonal response to vascular malformation, displaying a pathognomonic central stellate scar that enhances on delayed imaging; FNH carries zero malignant potential and requires no resection.",
+   "say": "Benign liver lesions are differentiated by contrast enhancement. Hemangiomas show peripheral nodular puddling with delayed fill-in. Focal nodular hyperplasia displays a central stellate scar without malignant potential, managed conservatively without resection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Benign tumor",
+     "Contrast CT/MRI hallmark",
+     "Natural history & management"
+    ],
+    "rows": [
+     [
+      "Cavernous hemangioma",
+      "Peripheral nodular puddling with centripetal fill-in",
+      "Benign; observe unless symptomatic / giant"
+     ],
+     [
+      "Focal nodular hyperplasia",
+      "Central stellate scar with delayed enhancement",
+      "Polyclonal, no malignant risk; observation"
+     ],
+     [
+      "Hepatic adenoma",
+      "Early arterial enhancement, washes out to isodense",
+      "Rupture & malignant risk; resect if > 5 cm or male"
+     ],
+     [
+      "Simple biliary cyst",
+      "Thin-walled, water density, non-enhancing",
+      "Benign; aspirate / fenestrate only if symptomatic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hepatic **adenoma** is strongly associated with oral contraceptive pills and anabolic steroid usage. Unlike FNH, adenomas harbor significant risks of spontaneous catastrophic intraperitoneal rupture and malignant transformation into hepatocellular carcinoma. Surgical resection is indicated for all adenomas in males, lesions larger than 5 cm in females, beta-catenin mutated subtypes, or lesions failing to regress following contraceptive cessation. Contrast-enhanced MRI is the diagnostic imaging modality of choice.",
+   "say": "Hepatic adenomas are linked to estrogen and steroid exposure, carrying risks of life-threatening rupture and malignant transformation. Surgical resection is indicated for tumors in men, lesions over five centimeters, beta-catenin mutations, or persistent adenomas.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Identification of solid hepatic adenoma"
+     },
+     {
+      "id": "l2",
+      "label": "Cessation of oral contraceptives or anabolic steroids"
+     },
+     {
+      "id": "l3",
+      "label": "MRI reassessment: size over 5 cm, male, or beta-catenin"
+     },
+     {
+      "id": "l4",
+      "label": "Risk of fatal hemorrhagic rupture or malignant progression"
+     },
+     {
+      "id": "l5",
+      "label": "Complete anatomical surgical resection or radiofrequency ablation"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2"
+     ],
+     [
+      "l2",
+      "l3"
+     ],
+     [
+      "l3",
+      "l4"
+     ],
+     [
+      "l4",
+      "l5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hepatocellular **carcinoma** (HCC) staging determines eligibility for surgical resection versus liver transplantation using the Milan criteria. For cirrhotic patients without macroscopic vascular invasion or extrahepatic spread, orthotopic liver transplantation achieves superior disease-free survival if within Milan limits: a single lesion up to 5 cm or up to three lesions none exceeding 3 cm. Non-cirrhotic patients or Child-Pugh A cirrhotics without portal hypertension are candidates for partial hepatectomy.",
+   "say": "Hepatocellular carcinoma in cirrhosis is triaged by the Milan criteria for liver transplantation: one tumor up to five centimeters or up to three tumors each under three centimeters. Non-cirrhotic patients with preserved liver function are candidates for anatomical hepatectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Diagnosis of HCC in cirrhotic liver"
+     },
+     {
+      "id": "h2",
+      "label": "Evaluate Child-Pugh class & hepatic venous pressure gradient"
+     },
+     {
+      "id": "h3",
+      "label": "Assess Milan criteria: 1 lesion <= 5 cm or <= 3 lesions <= 3 cm"
+     },
+     {
+      "id": "h4",
+      "label": "Within Milan: prioritize orthotopic liver transplantation"
+     },
+     {
+      "id": "h5",
+      "label": "Outside Milan / Child A without portal HTN: surgical resection"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ],
+     [
+      "h3",
+      "h4"
+     ],
+     [
+      "h4",
+      "h5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "bdbb1371-4000-8000-bdbb-137112345678",
+  "babb0eb8-4000-8000-babb-0eb812345678",
+  "bbbb104b-4000-8000-bbbb-104b12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

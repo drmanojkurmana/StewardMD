@@ -1,0 +1,197 @@
+{
+ "module": "sur-parathyroid-adrenal",
+ "subject": "surgery",
+ "title": "Surgical endocrinopathies: primary hyperparathyroidism, pheochromocytoma, and adrenalectomy",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "AAES Guidelines for Primary Hyperparathyroidism"
+ ],
+ "steps": [
+  {
+   "tx": "Primary **hyperparathyroidism** (PHPT) is characterized by autonomous, uninhibited secretion of parathyroid hormone (PTH) producing hypercalcemia and hypophosphatemia. A single benign parathyroid adenoma accounts for 85 percent of cases, primary chief cell hyperplasia for 15 percent, and parathyroid carcinoma for under 1 percent. Classic clinical manifestations encompass painful bones, renal stones, abdominal groans, and psychic moans, though most modern patients present with asymptomatic hypercalcemia on routine screening.",
+   "say": "Primary hyperparathyroidism causes autonomous parathyroid hormone secretion, elevating serum calcium and lowering phosphate. A single adenoma accounts for 85 percent of cases, and four-gland hyperplasia for 15 percent. Symptoms include nephrolithiasis, bone disease, abdominal pain, and depression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathology",
+     "Frequency",
+     "Glandular involvement",
+     "Surgical approach"
+    ],
+    "rows": [
+     [
+      "Single adenoma",
+      "80 to 85 percent",
+      "One abnormal enlarged gland",
+      "Minimally invasive parathyroidectomy (MIP)"
+     ],
+     [
+      "Four-gland hyperplasia",
+      "10 to 15 percent",
+      "All four glands diffusely enlarged",
+      "Subtotal (3.5 gland) resection or total + auto-transplant"
+     ],
+     [
+      "Double adenoma",
+      "2 to 5 percent",
+      "Two distinct enlarged glands",
+      "Bilateral neck exploration & excision of both"
+     ],
+     [
+      "Parathyroid carcinoma",
+      "Under 1 percent",
+      "Hard, adherent, local invasion",
+      "En bloc resection with ipsilateral thyroid lobectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preoperative parathyroid **localization** utilizes sestamibi scintigraphy with single-photon emission CT (SPECT) and high-resolution cervical ultrasound. When concordant, these imaging modalities enable minimally invasive parathyroidectomy (MIP). Intraoperative parathyroid hormone (IOPTH) monitoring confirms complete resection via the Miami criterion: a drop in serum PTH of 50 percent or greater from baseline 10 minutes following adenoma excision, which carries a 98 percent cure rate.",
+   "say": "Parathyroid adenomas are localized preoperatively with ultrasound and sestamibi SPECT scans. Concordant imaging allows minimally invasive parathyroidectomy. Complete excision is confirmed intraoperatively by the Miami criterion: a 50 percent or greater PTH drop 10 minutes post-excision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Biochemical confirmation of primary hyperparathyroidism"
+     },
+     {
+      "id": "p2",
+      "label": "Concordant localization with ultrasound and sestamibi SPECT"
+     },
+     {
+      "id": "p3",
+      "label": "Targeted minimally invasive parathyroidectomy (MIP)"
+     },
+     {
+      "id": "p4",
+      "label": "Intraoperative PTH draw at baseline and 10 minutes post-excision"
+     },
+     {
+      "id": "p5",
+      "label": "Confirm > 50 percent PTH drop indicating operative cure"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pheochromocytoma is a catecholamine-secreting **chromaffin** tumor arising from the adrenal medulla. Diagnosis is established by 24-hour urinary fractionated metanephrines or plasma free metanephrines. Preoperative pharmacological preparation is non-negotiable to avert lethal intraoperative hypertensive crisis. Alpha-adrenergic blockade (phenoxybenzamine) must be initiated 10 to 14 days prior to surgery; beta-adrenergic blockers are added ONLY after adequate alpha blockade to avoid unopposed alpha vasoconstriction.",
+   "say": "Pheochromocytoma arises from the adrenal medulla, secreting catecholamines. Diagnosis is confirmed by elevated metanephrines. Preoperative alpha-blockade with phenoxybenzamine is mandatory for 10 to 14 days; beta-blockers are added only after alpha blockade to prevent hypertensive crisis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Elevated plasma and urinary metanephrines"
+     },
+     {
+      "id": "c2",
+      "label": "Initiate non-competitive alpha blockade (phenoxybenzamine)"
+     },
+     {
+      "id": "c3",
+      "label": " liberal salt and fluid intake to expand contracted intravascular volume"
+     },
+     {
+      "id": "c4",
+      "label": "Add beta-blocker (propranolol) only after full alpha blockade"
+     },
+     {
+      "id": "c5",
+      "label": "Laparoscopic adrenalectomy with early adrenal vein ligation"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ],
+     [
+      "c4",
+      "c5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laparoscopic transperitoneal or retroperitoneal **adrenalectomy** is the procedure of choice for benign functional adrenal tumors under 6 cm, including aldosteronomas (Conn syndrome), Cushing adenomas, and pheochromocytomas. Open adrenalectomy is mandated for suspected adrenal cortical carcinoma (ACC) or tumors exceeding 6 to 8 cm to achieve negative margins without capsular violation. Early ligation of the main adrenal vein is critical during pheochromocytoma resection to prevent hemodynamic instability.",
+   "say": "Laparoscopic adrenalectomy is the gold standard for benign functional tumors under 6 centimeters. Open adrenalectomy is indicated for suspected adrenocortical carcinoma or lesions larger than 6 centimeters. Early adrenal vein ligation prevents intraoperative catecholamine surges.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adrenal lesion",
+     "Key biochemical diagnostic test",
+     "First-line surgical indication"
+    ],
+    "rows": [
+     [
+      "Aldosteronoma (Conn syndrome)",
+      "Elevated aldosterone-to-renin ratio (ARR > 20)",
+      "Laparoscopic unilateral adrenalectomy"
+     ],
+     [
+      "Cushing adenoma",
+      "24-hr urinary free cortisol, late-night salivary",
+      "Laparoscopic unilateral adrenalectomy"
+     ],
+     [
+      "Pheochromocytoma",
+      "Plasma / 24-hr urinary metanephrines",
+      "Laparoscopic adrenalectomy post alpha-blockade"
+     ],
+     [
+      "Adrenocortical carcinoma",
+      "Mixed hormone excess, large irregular mass > 6 cm",
+      "Open transabdominal radical en bloc adrenalectomy"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "dbbf5092-4000-8000-dbbf-509212345678",
+  "dabf4eff-4000-8000-dabf-4eff12345678",
+  "d9bf4d6c-4000-8000-d9bf-4d6c12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
