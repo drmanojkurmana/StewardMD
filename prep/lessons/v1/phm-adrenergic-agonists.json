@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "phm-adrenergic-agonists",
+ "subject": "pharmacology",
+ "title": "Adrenergic transmission and sympathomimetics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sympathomimetics** mimic sympathetic activation either directly at alpha and beta receptors or indirectly by releasing noradrenaline and blocking its reuptake. Receptor geography predicts every effect: alpha 1 constricts vessels and raises pressure, beta 1 drives heart rate and contractility, beta 2 dilates bronchi and vessels, and dopamine receptors perfuse kidney and gut at low doses. Choosing a pressor is choosing a receptor profile, never a brand habit.",
+   "say": "These drugs copy sympathetic signals directly or by releasing noradrenaline. Alpha one squeezes vessels, beta one drives the heart, beta two opens airways. Pick the receptor profile the patient needs.",
+   "vis": null
+  },
+  {
+   "tx": "**Adrenaline** stimulates all receptors: beta 1 cardiac drive, alpha vasoconstriction at higher doses and beta 2 bronchodilation, making it the drug for anaphylaxis and cardiac arrest. Noradrenaline is mainly alpha with beta 1 support, raising pressure with less tachycardia in septic shock. Phenylephrine is pure alpha, raising pressure while reflexly slowing the heart, useful when tachycardia must be avoided.",
+   "say": "Adrenaline does everything and saves anaphylaxis and arrest. Noradrenaline squeezes vessels for septic shock. Phenylephrine is pure squeeze with reflex slowing, kind when tachycardia is dangerous.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dominant receptors",
+     "Classic use"
+    ],
+    "rows": [
+     [
+      "Adrenaline",
+      "Alpha + beta 1 + beta 2",
+      "Anaphylaxis, cardiac arrest"
+     ],
+     [
+      "Noradrenaline",
+      "Alpha 1 + beta 1",
+      "First line septic shock pressor"
+     ],
+     [
+      "Phenylephrine",
+      "Alpha 1 only",
+      "Hypotension with tachycardia to avoid"
+     ],
+     [
+      "Dobutamine",
+      "Beta 1 dominant",
+      "Cardiogenic shock with low output"
+     ],
+     [
+      "Salbutamol",
+      "Beta 2 selective",
+      "Bronchospasm and hyperkalaemia shift"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dobutamine** beta 1 inotropy raises cardiac output in cardiogenic shock but can drop pressure through beta 2 vasodilation, so it often partners noradrenaline. Dopamine's dose folklore is unreliable because receptor effects overlap and arrhythmias exceed noradrenaline harm in shock trials. Indirect agents such as ephedrine release stored noradrenaline and fade with repeated dosing as stores empty, called tachyphylaxis.",
+   "say": "Dobutamine strengthens the pump but may lower pressure, so pair it carefully. Dopamine causes more arrhythmias than noradrenaline. Ephedrine empties noradrenaline stores and fades with repetition.",
+   "vis": null
+  },
+  {
+   "tx": "Beta 2 agonists such as **salbutamol** relax bronchi, drive potassium into cells for hyperkalaemia rescue, and delay preterm labour, at the cost of tremor, tachycardia and lactic acidosis at high doses. Alpha agonist decongestants constrict nasal vessels but oral pseudoephedrine raises pressure. Clonidine's central alpha 2 action lowers sympathetic outflow yet rebound hypertension follows abrupt withdrawal after chronic use.",
+   "say": "Salbutamol opens airways and shifts potassium inward. Tremor and racing heart are its price. Clonidine lowers sympathetic outflow centrally, but stopping it suddenly rebounds pressure upward.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Direct agonists",
+     "points": [
+      "Bind receptors themselves: adrenaline, phenylephrine",
+      "Work even when nerve stores are empty",
+      "Predictable receptor based effects"
+     ]
+    },
+    "right": {
+     "title": "Indirect agonists",
+     "points": [
+      "Release noradrenaline: ephedrine, amphetamine",
+      "Fail after store depletion (tachyphylaxis)",
+      "Blocked by reuptake inhibitors interactions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **anaphylaxis**, intramuscular adrenaline into the thigh is the only treatment that reverses airway oedema, bronchospasm and vasodilatory shock together, and delay kills more surely than the drug harms. Antihistamines and steroids are adjuncts that never substitute. In arrest, intravenous adrenaline each cycle supports coronary perfusion pressure, while in septic shock noradrenaline started early, even peripherally for a short bridge, restores organ perfusion pressure safely.",
+   "say": "Anaphylaxis means intramuscular adrenaline in the thigh immediately; antihistamines never substitute. Arrest cycles use intravenous adrenaline. Septic shock starts noradrenaline early to restore perfusion pressure.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-phm-021",
+  "bk2-phm-022",
+  "bk2-phm-023",
+  "bk2-phm-024",
+  "bk2-phm-025",
+  "bk2-phm-026",
+  "bk2-phm-027",
+  "bk2-phm-028",
+  "bk2-phm-029",
+  "bk2-phm-030"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

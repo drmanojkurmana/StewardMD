@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "phm-neuromuscular-blockers",
+ "subject": "pharmacology",
+ "title": "Skeletal muscle relaxants and ganglion blockers",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Neuromuscular blockers** paralyse skeletal muscle at nicotinic junction receptors without touching consciousness or pain, so anaesthesia must always accompany them. Depolarising succinylcholine mimics acetylcholine, opening channels with fasciculations before blockade, while nondepolarising agents such as rocuronium and vecuronium compete silently for the receptor. Choice balances onset speed, duration, organ clearance and reversal options in each airway plan.",
+   "say": "Blockers paralyse muscle only, never awareness or pain. Succinylcholine fires the junction briefly then blocks it. Rocuronium type drugs compete quietly. Pick by speed, duration, clearance and reversal.",
+   "vis": null
+  },
+  {
+   "tx": "**Succinylcholine** works within a minute for rapid sequence intubation but is hydrolysed by plasma pseudocholinesterase, so enzyme deficiency prolongs apnoea for hours. It raises potassium, triggers malignant hyperthermia in susceptible muscle, and causes bradycardia and muscle pains. Rocuronium at high dose rivals its onset and can be instantly reversed by sugammadex encapsulation, reshaping modern emergency airway practice.",
+   "say": "Succinylcholine is fastest but raises potassium, can trigger malignant hyperthermia, and lasts hours if pseudocholinesterase is missing. High dose rocuronium plus sugammadex now rivals it with an instant exit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Depolarising (succinylcholine)",
+     "points": [
+      "Fasciculations before block",
+      "No reversal agent; wait for hydrolysis",
+      "Hyperkalaemia and hyperthermia trigger"
+     ]
+    },
+    "right": {
+     "title": "Nondepolarising (rocuronium)",
+     "points": [
+      "No fasciculations, competitive block",
+      "Reversed by sugammadex or neostigmine",
+      "Organ dependent clearance varies by agent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Malignant hyperthermia** is uncontrolled calcium release from defective ryanodine receptors triggered by succinylcholine or volatile anaesthetics, causing rigidity, soaring carbon dioxide, hyperthermia and acidosis. Dantrolene blocks calcium release and is the specific antidote alongside cooling and trigger removal. Families need screening because inheritance is autosomal dominant and future anaesthetics must avoid triggers entirely.",
+   "say": "Defective muscle calcium channels flood the cell when triggered, causing rigidity, rising carbon dioxide and fever. Dantrolene is the antidote. Stop triggers, cool actively, and screen the family.",
+   "vis": null
+  },
+  {
+   "tx": "Reversal depth decides the agent: **sugammadex** encapsulates rocuronium and vecuronium even from deep blockade, while neostigmine only helps once some recovery has returned and adds muscarinic effects needing glycopyrrolate. Residual paralysis in recovery causes hypoventilation and aspiration, so quantitative twitch monitoring guides extubation. Train of four ratio above 0.9 is the accepted safe threshold before tube removal.",
+   "say": "Sugammadex wraps up rocuronium even from deep block. Neostigmine needs partial recovery first and needs glycopyrrolate cover. Measure train of four above 0.9 before extubation to avoid residual paralysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Class",
+     "Pearl"
+    ],
+    "rows": [
+     [
+      "Succinylcholine",
+      "Depolarising",
+      "Fastest onset; hyperkalaemia risk"
+     ],
+     [
+      "Rocuronium",
+      "Nondepolarising",
+      "High dose for rapid sequence; sugammadex reverses"
+     ],
+     [
+      "Atracurium",
+      "Nondepolarising",
+      "Hofmann elimination; histamine and laudanosine"
+     ],
+     [
+      "Dantrolene",
+      "Ryanodine blocker",
+      "Antidote for malignant hyperthermia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Centrally acting **spasmolytics** differ completely: baclofen agonises GABA B receptors for spasticity, tizanidine stimulates alpha 2 receptors, and dantrolene acts peripherally on muscle calcium in chronic spasm as well as hyperthermia. Ganglion blockers such as trimethaphan are historical because blocking both autonomic limbs causes unpredictable pressure, ileus and urinary retention. Exam stems separate junction blockers used for surgery from spasticity drugs used in neurology clinics.",
+   "say": "Spasticity drugs act in cord or muscle: baclofen, tizanidine, dantrolene. They are not surgical paralysers. Ganglion blockers are obsolete because blocking both autonomic limbs is chaotic.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-phm-011",
+  "bk2-phm-012",
+  "bk2-phm-013",
+  "bk2-phm-014",
+  "bk2-phm-015",
+  "bk2-phm-016",
+  "bk2-phm-017",
+  "bk2-phm-018",
+  "bk2-phm-019",
+  "bk2-phm-020"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

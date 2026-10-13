@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "phm-anticholinesterases",
+ "subject": "pharmacology",
+ "title": "Anticholinesterases and myasthenia gravis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Anticholinesterases** block acetylcholinesterase so acetylcholine accumulates at muscarinic, nicotinic and central synapses, intensifying cholinergic transmission everywhere. Reversible carbamates such as neostigmine and physostigmine carbamylate the enzyme for hours, while organophosphates phosphorylate it almost irreversibly until ageing makes reactivation impossible. The same mechanism heals myasthenia and poisons in insecticide exposure.",
+   "say": "These drugs stop acetylcholine breakdown so the transmitter piles up at every cholinergic synapse. Carbamates block for hours. Organophosphates block almost permanently. Benefit in myasthenia and poisoning by insecticides share one mechanism.",
+   "vis": null
+  },
+  {
+   "tx": "**Physostigmine** is a tertiary amine that crosses into the brain and reverses central anticholinergic delirium, whereas quaternary neostigmine and pyridostigmine stay peripheral and suit myasthenia gravis and reversal of muscle blockade. Edrophonium acts for minutes and was the classic diagnostic test. Lipid soluble donepezil instead serves Alzheimer disease by raising central cholinergic tone modestly.",
+   "say": "Physostigmine enters the brain and reverses anticholinergic delirium. Neostigmine and pyridostigmine stay outside the brain for myasthenia and blockade reversal. Edrophonium lasts minutes. Donepezil serves Alzheimer disease centrally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peripheral agents",
+     "points": [
+      "Neostigmine and pyridostigmine: quaternary, no brain entry",
+      "Myasthenia gravis and blockade reversal",
+      "Oral pyridostigmine gives longer smoother action"
+     ]
+    },
+    "right": {
+     "title": "Central agents",
+     "points": [
+      "Physostigmine and donepezil cross blood brain barrier",
+      "Antidote for anticholinergic delirium; dementia therapy",
+      "Higher risk of central cholinergic toxicity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **myasthenia gravis**, antibodies against postsynaptic acetylcholine receptors cause fatigable weakness worst in evenings, with ptosis, diplopia and bulbar failure threatening respiration in crisis. Pyridostigmine relieves symptoms without changing immunity, so thymectomy, steroids and immunotherapy modify disease. Excess drug instead causes cholinergic crisis with fasciculations, salivation and weakness, the mirror trap of under treatment.",
+   "say": "Myasthenia antibodies destroy acetylcholine receptors causing fatigable evening weakness and ptosis. Pyridostigmine relieves symptoms only. Too much drug causes cholinergic crisis with salivation and fasciculations, mimicking worsening disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Organophosphate poisoning** floods every synapse: muscarinic salivation, lacrimation, miosis, bronchospasm and diarrhoea, nicotinic fasciculations then paralysis, and central seizures. Atropine blocks muscarinic effects and saves life at high titrated doses, while pralidoxime reactivates enzyme before ageing and helps nicotinic weakness. Decontamination protects rescuers because the poison persists on skin and clothing.",
+   "say": "Organophosphates flood all synapses causing pinpoint pupils, salivation, bronchospasm, fasciculations and seizures. Atropine blocks muscarinic danger. Oximes reactivate enzyme before ageing. Remove contaminated clothing to protect staff.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Myasthenic crisis",
+     "Cholinergic crisis"
+    ],
+    "rows": [
+     [
+      "Cause",
+      "Too little drug or worsening disease",
+      "Too much anticholinesterase"
+     ],
+     [
+      "Secretions",
+      "Dry or normal",
+      "Profuse salivation and lacrimation"
+     ],
+     [
+      "Pupils",
+      "Normal",
+      "Constricted (miosis)"
+     ],
+     [
+      "Muscle signs",
+      "Weakness without fasciculations",
+      "Fasciculations then weakness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Atropine plus oxime timing decides organophosphate outcomes, and ageing within hours closes the oxime window for many compounds. **Carbamate poisoning** from physostigmine like insecticides is shorter and oximes are usually unnecessary. In anaesthesia, neostigmine reversal needs a muscarinic blocker partner such as glycopyrrolate to prevent bradycardia and salivation while nicotinic blockade lifts at the neuromuscular junction.",
+   "say": "Give atropine fast and oximes before ageing closes their window. Carbamate poisoning is briefer. Neostigmine reversal pairs with glycopyrrolate so the heart and glands are shielded while muscle strength returns.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-phm-001",
+  "bk2-phm-002",
+  "bk2-phm-003",
+  "bk2-phm-004",
+  "bk2-phm-005",
+  "bk2-phm-006",
+  "bk2-phm-007",
+  "bk2-phm-008",
+  "bk2-phm-009",
+  "bk2-phm-010"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
