@@ -1,0 +1,104 @@
+{
+ "module": "ana-cerebral-circulation",
+ "subject": "anatomy",
+ "title": "Cerebral circulation, Circle of Willis and neurovascular stroke syndromes",
+ "minutes": 6,
+ "refs": [
+  "Clinical Neuroanatomy Made Ridiculously Simple",
+  "Snell's Clinical Neuroanatomy"
+ ],
+ "steps": [
+  {
+   "tx": "The **Circle of Willis** is an arterial polygon located at the base of the brain around the optic chiasm and pituitary stalk. It anastomoses the anterior circulation (internal carotid arteries) with the posterior circulation (vertebrobasilar system). It is formed by the anterior communicating artery, paired anterior cerebral arteries, internal carotids, posterior communicating arteries, and the proximal segments of the posterior cerebral arteries.",
+   "say": "The Circle of Willis is an arterial anastomotic ring at the base of the brain around the optic chiasm. It connects the internal carotid arteries with the posterior vertebrobasilar circulation. It includes the anterior communicating, anterior cerebral, internal carotid, posterior communicating, and posterior cerebral arteries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arterial component",
+     "Circulation origin",
+     "Anastomotic function"
+    ],
+    "rows": [
+     [
+      "Anterior communicating",
+      "Anterior circulation",
+      "Connects bilateral anterior cerebral arteries"
+     ],
+     [
+      "Internal carotid artery",
+      "Anterior circulation",
+      "Supplies anterior and middle cerebral arteries"
+     ],
+     [
+      "Posterior communicating",
+      "Collateral link",
+      "Connects internal carotid to posterior cerebral"
+     ],
+     [
+      "Basilar bifurcation",
+      "Posterior circulation",
+      "Terminates into paired posterior cerebral arteries"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Occlusion of the **middle cerebral artery** is the most common cause of ischemic stroke. Because the cortical branches supply the lateral convexity of the cerebral hemisphere, infarction causes contralateral hemiparesis and hemisensory loss affecting predominantly the face and upper extremity. Dominant left hemisphere involvement produces global or Broca aphasia, whereas non-dominant right hemisphere infarction results in profound spatial hemineglect.",
+   "say": "Middle cerebral artery occlusion is the most common ischemic stroke. Supplying the lateral cerebral convexity, it causes contralateral hemiparesis and hemisensory loss predominantly affecting the face and arm. Left sided involvement produces aphasia, while right sided infarction causes spatial hemineglect.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Middle cerebral artery stroke",
+     "points": [
+      "Supplies lateral hemispheric convexity",
+      "Contralateral face and arm weakness",
+      "Aphasia if dominant left hemisphere",
+      "Spatial hemineglect if non-dominant right"
+     ]
+    },
+    "right": {
+     "title": "Anterior cerebral artery stroke",
+     "points": [
+      "Supplies medial hemispheric surface",
+      "Contralateral leg and foot weakness",
+      "Urinary incontinence due to paracentral lobule",
+      "Abulia and frontal executive dysfunction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **anterior cerebral artery** courses along the longitudinal fissure and curves around the genu of the corpus callosum. It supplies the medial surface of the frontal and parietal lobes, corresponding to the lower extremity region of the sensory and motor homunculus. Stroke presents with contralateral leg and foot weakness, sensory loss, urinary urge incontinence, and frontal release signs.",
+   "say": "The anterior cerebral artery arches around the corpus callosum to supply the medial frontal and parietal cortex. This corresponds to the leg and foot territory of the motor homunculus. Stroke presents with contralateral leg weakness, sensory impairment, and urinary incontinence.",
+   "vis": null
+  },
+  {
+   "tx": "Saccular **berry aneurysms** arise most frequently at bifurcation junctions within the Circle of Willis due to congenital internal elastic lamina defects. The anterior communicating artery junction accounts for thirty-five percent of cases, followed by the posterior communicating artery junction. Rupture discharges arterial blood under pressure directly into the subarachnoid space, producing a sudden thunderclap headache.",
+   "say": "Berry aneurysms develop at arterial bifurcations within the Circle of Willis due to internal elastic lamina defects. The anterior communicating artery is the most frequent site, followed by the posterior communicating artery. Rupture leads to subarachnoid hemorrhage with sudden thunderclap headache.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.png",
+    "alt": "Circle of Willis and cerebral blood supply",
+    "caption": "Basal arterial polygon showing relationships between internal carotid, basilar, anterior and posterior cerebral arteries."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "2c3a0b63-4000-8000-2c3a-0b6312345678",
+  "2d3a0cf6-4000-8000-2d3a-0cf612345678",
+  "2e3a0e89-4000-8000-2e3a-0e8912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

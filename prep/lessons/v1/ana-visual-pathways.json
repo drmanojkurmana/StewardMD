@@ -1,0 +1,97 @@
+{
+ "module": "ana-visual-pathways",
+ "subject": "anatomy",
+ "title": "Visual pathways, retinogeniculate projections and field defects",
+ "minutes": 6,
+ "refs": [
+  "Clinical Neuroanatomy Made Ridiculously Simple",
+  "Snell's Clinical Neuroanatomy"
+ ],
+ "steps": [
+  {
+   "tx": "Visual information captured by retinal photoreceptors is transferred through bipolar cells to ganglion cells whose axons form the **optic nerve**. At the optic chiasm, axons originating from the nasal hemiretinas decussate across the midline, whereas axons from temporal hemiretinas continue uncrossed ipsilaterally. Consequently, the left optic tract carries visual information representing the entire right hemifield of both eyes.",
+   "say": "Visual information passes from photoreceptors through retinal ganglion cells to form the optic nerve. At the optic chiasm, nasal retinal axons cross the midline, while temporal axons stay ipsilateral. Therefore, the left optic tract carries visual data representing the complete right visual hemifield.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Retinal origin",
+     "Decussation at chiasm",
+     "Visual field represented",
+     "Pathway destination"
+    ],
+    "rows": [
+     [
+      "Nasal hemiretina",
+      "Crosses midline completely",
+      "Temporal visual field",
+      "Contralateral optic tract"
+     ],
+     [
+      "Temporal hemiretina",
+      "Remains uncrossed",
+      "Nasal visual field",
+      "Ipsilateral optic tract"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "From the optic chiasm, axons traverse the optic tract to synapse within the **lateral geniculate nucleus** of the thalamus. Third-order neurons project as the optic radiations (geniculocalcarine tract) towards the primary visual cortex in the calcarine sulcus of the occipital lobe. A distinct ventral bundle known as Meyer loop sweeps anteriorly around the temporal horn of the lateral ventricle before proceeding posteriorly.",
+   "say": "Axons in the optic tract synapse in the lateral geniculate nucleus of the thalamus. Third order neurons project via the optic radiations to the calcarine cortex. A ventral bundle called Meyer loop loops through the temporal lobe around the inferior horn of the lateral ventricle.",
+   "vis": null
+  },
+  {
+   "tx": "Pathology at specific anatomical checkpoints produces diagnostic **visual field defects**. Compression of the central optic chiasm by a pituitary adenoma or craniopharyngioma damages crossing nasal retinal fibres, causing bitemporal hemianopia. Lesions of Meyer loop in the temporal lobe produce a contralateral superior quadrantanopia, commonly remembered by clinicians as pie in the sky defect.",
+   "say": "Lesions at specific points produce distinct visual field defects. Pituitary adenoma compressing the central chiasm damages crossing nasal fibres, causing bitemporal hemianopia. Temporal lobe lesions damaging Meyer loop cause a contralateral superior quadrantanopia, known as pie in the sky.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chiasmal compression",
+     "points": [
+      "Pituitary macroadenoma or craniopharyngioma",
+      "Damage to decussating nasal retinal fibres",
+      "Loss of peripheral temporal vision bilaterally",
+      "Classic bitemporal hemianopia"
+     ]
+    },
+    "right": {
+     "title": "Meyer loop lesion",
+     "points": [
+      "Temporal lobe resection or infarction",
+      "Damage to inferior optic radiation fibres",
+      "Loss of contralateral upper visual quadrant",
+      "Pie in the sky superior quadrantanopia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Posterior cerebral artery stroke infarctions of the primary calcarine cortex produce contralateral **homonymous hemianopia**. Crucially, central foveal vision is frequently preserved, a clinical phenomenon termed macular sparing. Macular sparing occurs because the occipital pole receives dual collateral arterial perfusion from terminal middle cerebral artery branches, and the macular representation occupies an expansive cortical area.",
+   "say": "Posterior cerebral artery infarction of the calcarine cortex causes contralateral homonymous hemianopia. Central vision is often preserved, termed macular sparing. This occurs because the occipital pole receives dual collateral supply from the middle cerebral artery.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.png",
+    "alt": "Ocular apparatus and visual sensory projections",
+    "caption": "Structure of the ocular globe and retinal architecture projecting central sensory axons to intracranial visual pathways."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "dc89aad1-4000-8000-dc89-aad112345678",
+  "d989a618-4000-8000-d989-a61812345678",
+  "da89a7ab-4000-8000-da89-a7ab12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "module": "ana-cerebral-cortex",
+ "subject": "anatomy",
+ "title": "Cerebral cortex functional localization, Brodmann areas and higher cognitive syndromes",
+ "minutes": 6,
+ "refs": [
+  "Clinical Neuroanatomy Made Ridiculously Simple",
+  "Snell's Clinical Neuroanatomy"
+ ],
+ "steps": [
+  {
+   "tx": "The human **cerebral cortex** is divided into specialized structural regions classically mapped as Brodmann areas. The primary motor cortex (Brodmann area 4) occupies the precentral gyrus of the frontal lobe, executing voluntary motor commands. Directly across the central sulcus, the primary somatosensory cortex (Brodmann areas 3, 1, 2) resides in the postcentral gyrus, processing touch, pain and proprioception.",
+   "say": "The cerebral cortex contains distinct functional zones mapped as Brodmann areas. The primary motor cortex occupies the precentral gyrus of the frontal lobe, executing movement. Directly posterior across the central sulcus, the primary somatosensory cortex occupies the postcentral gyrus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cortical region",
+     "Brodmann area",
+     "Anatomical landmark",
+     "Primary function"
+    ],
+    "rows": [
+     [
+      "Primary motor cortex",
+      "Area 4",
+      "Precentral gyrus (frontal lobe)",
+      "Voluntary motor control"
+     ],
+     [
+      "Primary somatosensory",
+      "Areas 3, 1, 2",
+      "Postcentral gyrus (parietal lobe)",
+      "Tactile and proprioceptive sensation"
+     ],
+     [
+      "Primary visual cortex",
+      "Area 17",
+      "Calcarine sulcus (occipital lobe)",
+      "Visual processing"
+     ],
+     [
+      "Primary auditory cortex",
+      "Areas 41, 42",
+      "Heschl transverse gyri (temporal lobe)",
+      "Auditory perception"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Language processing is lateralized to the dominant cerebral hemisphere, which is the left hemisphere in over ninety-five percent of right-handed individuals. **Broca area** (Brodmann areas 44 and 45) in the inferior frontal gyrus coordinates expressive speech motor programming. Patients with Broca aphasia exhibit halting, non-fluent speech, telegraphic phrasing and intense frustration, but retain preserved auditory comprehension.",
+   "say": "Language is specialized in the dominant left hemisphere. Broca area in the inferior frontal gyrus governs expressive speech production. Patients with Broca aphasia have non-fluent, halting speech and telegraphic phrasing, but their comprehension remains intact.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Broca expressive aphasia",
+     "points": [
+      "Lesion in inferior frontal gyrus (areas 44, 45)",
+      "Effortful, non-fluent, halting speech",
+      "Repetition severely impaired",
+      "Auditory comprehension intact with insight"
+     ]
+    },
+    "right": {
+     "title": "Wernicke receptive aphasia",
+     "points": [
+      "Lesion in posterior superior temporal gyrus (area 22)",
+      "Fluent, effortless speech with neologisms",
+      "Repetition severely impaired",
+      "Auditory comprehension absent without insight"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Wernicke area** (Brodmann area 22) resides in the posterior superior temporal gyrus, responsible for receptive language comprehension. Lesions produce Wernicke aphasia, characterized by effortless, grammatically fluent speech devoid of meaning (word salad), frequent paraphasias, impaired repetition, and inability to comprehend spoken or written commands. Patients typically lack awareness of their deficit.",
+   "say": "Wernicke area in the posterior superior temporal gyrus processes receptive language comprehension. Lesions produce fluent speech devoid of meaning, full of neologisms and paraphasias, with impaired repetition and absent comprehension. Patients lack awareness of their deficit.",
+   "vis": null
+  },
+  {
+   "tx": "The arcuate fasciculus is a subcortical white matter association tract that connects Wernicke area directly to Broca area. Selective damage produces **conduction aphasia**, characterized by fluent spontaneous speech, intact comprehension, but markedly impaired repetition. In contrast, lesions of the dominant angular gyrus produce Gerstmann syndrome: agraphia, acalculia, finger agnosia, and right-left disorientation.",
+   "say": "The arcuate fasciculus connects Wernicke area to Broca area. Disruption causes conduction aphasia, where speech is fluent and comprehension is intact, but repetition is markedly impaired. Lesions of the dominant angular gyrus produce Gerstmann syndrome with agraphia, acalculia and finger agnosia.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.png",
+    "alt": "Cerebral cortex functional regions and lateral convexity",
+    "caption": "Lateral surface of the cerebral hemisphere illustrating frontal expressive, temporal receptive, and parietal association regions."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "dca47547-4000-8000-dca4-754712345678",
+  "dda476da-4000-8000-dda4-76da12345678",
+  "dea4786d-4000-8000-dea4-786d12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
