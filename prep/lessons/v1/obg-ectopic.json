@@ -1,66 +1,89 @@
 {
- "v": 1,
- "module": "obg-ectopic",
- "subject": "obstetrics-gynaecology",
- "title": "Ectopic pregnancy: pain, bleeding, collapse; scan and resuscitate",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "An **ectopic pregnancy** implants outside the womb, usually in a tube, and kills by rupture and internal bleeding. Suspect it in any pregnant patient with **abdominal pain, vaginal bleeding, shoulder-tip pain, dizziness or collapse**. A positive pregnancy test with pain is an ectopic until imaging proves otherwise, however early the pregnancy (NICE NG126).",
-   "say": "Pain, bleeding, shoulder-tip pain or collapse in pregnancy means ectopic until imaging proves otherwise.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Pregnancy + pain"
-     },
-     {
-      "id": "b",
-      "label": "Resuscitate + assess"
-     },
-     {
-      "id": "c",
-      "label": "Urgent scan"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "A collapsed or shocked pregnant patient is resuscitated with access, bloods including group and save or crossmatch, and urgent senior and theatre involvement, without waiting for perfect imaging. Stable patients get an urgent **transvaginal scan**: an empty uterus with a positive test is a pregnancy of unknown location needing close follow-up, not discharge and forget. Document safety-netting precisely.",
-   "say": "Resuscitate the shocked patient and involve theatre early. An empty uterus on scan is a pregnancy of unknown location needing close follow-up.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "State",
-     "Priority"
-    ],
-    "rows": [
-     [
-      "Collapsed",
-      "Resuscitate + theatre"
-     ],
-     [
-      "Stable",
-      "Urgent scan + follow-up"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Treatment is surgical, medical with methotrexate in selected stable cases per protocol, or expectant in a few, decided by senior clinicians on scan, blood results and symptoms. Anti-D is considered for Rh-negative patients as guided. Every discharged patient with a pregnancy of unknown location leaves with clear return advice and a booked review.",
-   "say": "Senior clinicians choose surgery, methotrexate or expectant care by protocol, with clear return advice for every discharged patient.",
-   "vis": null
+  "v": 1,
+  "module": "obg-ectopic",
+  "subject": "obstetrics-gynaecology",
+  "title": "Ectopic pregnancy: diagnosis and methotrexate versus surgery",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Ectopic pregnancy** (98 percent tubal, **ampullary** commonest; PID, prior ectopic, IUCD, tubal surgery, ART) presents with **amenorrhoea, pain and bleeding**; **rupture** (syncope, shoulder tip diaphragmatic blood, shock, cervical motion tenderness with adnexal mass) resuscitates with transfusion. Heterotopic with ART twins tricks; interstitial and cornual rupture late catastrophically. Culdocentesis historic; FAST and laparoscopy decide.",
+      "say": "Missed period pain bleeding with faint shoulder tip is ruptured ectopic: transfuse operate. Ampullary ruptures commonest.",
+      "vis": null
+    },
+    {
+      "tx": "**Diagnosis** (**transvaginal scan**: empty uterus with adnexal mass, free fluid; **discriminatory zone** hCG 1500 to 2000 with no intrauterine sac; **doubling** 48 hours suboptimal rise warns, progesterone low) with **laparoscopy** gold confirms; pregnancy of unknown location follows hCG and scan serially. Pseudogestational sac mimics; corpus luteum confuses. Rh anti-D after all ectopics protects.",
+      "say": "Empty uterus hCG above 1500 no sac is ectopic until proven: scan serial hCG. Doubling stalls warn.",
+      "vis": null
+    },
+    {
+      "tx": "**Methotrexate** (**single dose** 50 mg per metre square with day 4 and 7 hCG 15 percent fall, **multi dose** with leucovorin; haemodynamically stable, unruptured, sac under 3.5 cm, no significant haemoperitoneum, hCG under 5000, reliable follow up; **no breastfeeding, immunodeficiency, liver, renal, ulcer, active pulmonary TB**) with folinic rescue avoids surgery; rupture, breastfeeding and heterotopic contraindicate. hCG weekly to zero tails.",
+      "say": "Stable small unruptured low hCG reliable is methotrexate single dose: day 4 7 falls 15 percent. Breastfeeding bans.",
+      "vis": null
+    },
+    {
+      "tx": "**Surgery** (**laparoscopic salpingostomy** fertility preserving with hCG follow up for persistent trophoblast, **salpingectomy** ruptured, recurrent same tube, completed family, uncontrolled bleeding) with **salpingotomy** linear conserves; **expectant** (falling hCG, asymptomatic, reliable) watches selected. Anti-D, counsel future ectopic risk (10 to 15 percent), smoking cessation advises.",
+      "say": "Ruptured recurrent or bleeding is salpingectomy; fertility keeps salpingostomy hCG watched. Future risk counselled.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ectopic",
+          "Pearl",
+          "Watch"
+        ],
+        "rows": [
+          [
+            "Ampullary",
+            "Commonest rupture",
+            "Shock"
+          ],
+          [
+            "Zone 1500",
+            "No sac",
+            "Serial"
+          ],
+          [
+            "MTX single",
+            "Stable small",
+            "hCG zero"
+          ],
+          [
+            "Salpingectomy",
+            "Ruptured",
+            "Anti-D"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-obg-161",
+    "bk2-obg-162",
+    "bk2-obg-163",
+    "bk2-obg-164",
+    "bk2-obg-165",
+    "bk2-obg-166",
+    "bk2-obg-167",
+    "bk2-obg-168",
+    "bk2-obg-169",
+    "bk2-obg-170"
+  ],
+  "src": [],
+  "refs": [
+    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-obg1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }
