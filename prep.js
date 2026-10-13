@@ -64,7 +64,7 @@
     if (q.rubric) for (var k in q.rubric) if (q.rubric[k] === "fail") return true;
     return false;
   }
-  function usable(it, hidden, qual) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]) && !qualBlocked(qual && qual[it.id]); }
+  function usable(it, hidden, qual) { return !!it && !it.hold && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]) && !qualBlocked(qual && qual[it.id]); }
   /* An item whose recommendation changed with the guideline (tools/prep-item-edits.mjs --outdated, seeded from
      student outdated reports). The question stays in the pool; its explanation carries a visible note. */
   function isOutdated(it) { return !!(it && it.outdated); }
