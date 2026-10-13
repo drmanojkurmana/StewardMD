@@ -1,0 +1,113 @@
+{
+ "v": 1,
+ "module": "mrheu-ra",
+ "subject": "mrcp-rheumatology",
+ "title": "Rheumatoid arthritis: recognition, serology, DMARD hierarchy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Rheumatoid arthritis** presents as symmetric inflammatory polyarthritis affecting the small joints of the hands and feet, particularly MCP and PIP joints, with sparing of the distal interphalangeal joints. Prolonged morning joint stiffness exceeding thirty to sixty minutes reflects synovial inflammation. Early urgent referral within three working days of persistent synovitis prevents irreversible cartilage loss and bony erosions.",
+   "say": "Rheumatoid arthritis causes symmetric small joint inflammation sparing DIP joints with prolonged morning stiffness. Refer urgently to prevent irreversible joint erosion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect persistent synovitis"
+     },
+     {
+      "id": "b",
+      "label": "Urgent rheumatology referral"
+     },
+     {
+      "id": "c",
+      "label": "Early csDMARD initiation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Serological evaluation** pairs rheumatoid factor with anti-cyclic citrullinated peptide antibody. Anti-CCP confers superior specificity exceeding ninety-five percent and predicts erosive radiological progression. Plain radiographs of the hands and feet reveal periarticular osteopenia, soft tissue swelling and marginal cortical erosions, but normal early radiographs never exclude active disease.",
+   "say": "Anti-CCP antibody offers high specificity and predicts erosive progression. Normal early plain radiographs do not exclude rheumatoid disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Sensitivity",
+     "Significance"
+    ],
+    "rows": [
+     [
+      "Anti-CCP",
+      "Moderate",
+      "High specificity, erosive risk"
+     ],
+     [
+      "Rheumatoid factor",
+      "Moderate",
+      "Also positive in SLE, Sjogren, infections"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First-line disease modification** requires prompt conventional synthetic DMARD monotherapy, with oral methotrexate as the preferred anchor agent, combined with short-course bridging corticosteroids to control symptoms while DMARD efficacy establishes. Co-prescribing oral folic acid reduces methotrexate gastrointestinal and mucosal toxicity, taken on a separate non-methotrexate day.",
+   "say": "Start methotrexate monotherapy rapidly with short-term bridging corticosteroid. Folic acid on a different weekday mitigates toxicity.",
+   "vis": null
+  },
+  {
+   "tx": "**Pre-treatment safety checks** for methotrexate mandate baseline full blood count, liver transaminases and renal function. Methotrexate is teratogenic, demanding effective contraception in all patients of childbearing potential. Patients must report dry cough or progressive dyspnoea immediately, signaling drug-induced pneumonitis requiring drug cessation and urgent specialist evaluation.",
+   "say": "Check baseline bloods, liver and renal function before methotrexate. Warn about teratogenicity and prompt reporting of dry cough or breathlessness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Routine monitoring",
+     "points": [
+      "Full blood count and platelets",
+      "Liver transaminases",
+      "Serum creatinine and eGFR"
+     ]
+    },
+    "right": {
+     "title": "Urgent alerts",
+     "points": [
+      "Unexplained dry cough and dyspnoea",
+      "Severe sore throat or oral ulceration",
+      "Unexplained bruising or bleeding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Targeted biologic therapy** with TNF inhibitors is indicated when active disease persists despite two conventional synthetic DMARDs including methotrexate. Pre-biologic screening mandates latent tuberculosis testing with interferon-gamma release assay and chest radiography, alongside viral hepatitis serology, to prevent fatal reactivation during immune blockade.",
+   "say": "Escalate to TNF inhibitors after failure of two conventional DMARDs. Screen for latent tuberculosis and viral hepatitis prior to commencing biologics.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1021",
+  "mk-gap1023",
+  "mk-gap1025"
+ ],
+ "src": [
+  "kb-clinical-protocols-rheumatoid-arthritis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

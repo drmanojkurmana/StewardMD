@@ -1,0 +1,806 @@
+{
+ "topic": "mrheu-crystal",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1061",
+   "q": "A 58-year-old man presents with acute, excruciating pain, erythema and swelling of his right first metatarsophalangeal joint. Diagnostic arthrocentesis is performed. Polarised light microscopy reveals intracellular crystals. What optical characteristics confirm monosodium urate crystals?",
+   "o": [
+    "Needle-shaped crystals with strong negative birefringence (yellow when parallel to the slow axis)",
+    "Rhomboid crystals with weak positive birefringence (blue when parallel to the slow axis)",
+    "Envelope-shaped crystals with no birefringence",
+    "Bipyramidal crystals with variable birefringence"
+   ],
+   "a": 0,
+   "exp": "Monosodium urate crystals are needle-shaped and demonstrate strong negative birefringence under polarised light microscopy with a red compensator, appearing bright yellow when aligned parallel to the slow axis and blue when perpendicular.",
+   "r": [
+    "Correct: Monosodium urate crystals are needle-shaped and strongly negatively birefringent.",
+    "Rhomboid crystals with weak positive birefringence define calcium pyrophosphate dihydrate (CPPD).",
+    "Envelope-shaped crystals are calcium oxalate.",
+    "Bipyramidal crystals do not represent urate arthropathy."
+   ],
+   "kp": "Monosodium urate crystals are needle-shaped and strongly negatively birefringent.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gout",
+    "synovial-fluid",
+    "microscopy"
+   ],
+   "source": "EULAR evidence-based recommendations for the diagnosis of gout",
+   "x": {
+    "key": "Needle-shaped negatively birefringent crystals confirm gout.",
+    "others": {
+     "B": "Rhomboid positively birefringent crystals indicate CPPD.",
+     "C": "Envelope crystals are oxalate.",
+     "D": "Bipyramidal crystals are non-urate."
+    },
+    "pearl": "Polarised light microscopy of aspirated synovial fluid remains the diagnostic gold standard for crystal arthropathy.",
+    "clues": "First MTP acute pain, erythema, polarised microscopy findings.",
+    "ddx": "Septic arthritis, pseudogout, cellulitis, reactive arthritis.",
+    "mech": "Supersaturation of monosodium urate leads to crystal precipitation that triggers NLRP3 inflammasome activation in macrophages.",
+    "lo": "Identify the optical microscopy characteristics of monosodium urate crystals.",
+    "rev": "Urate crystals are needle-shaped and strongly negatively birefringent.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review crystal arthropathy microscopy and pathophysiology."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR Gout recommendations",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1062",
+   "q": "A 64-year-old man with established chronic tophaceous gout has been stable on allopurinol 300 mg daily for two years. He presents with an acute gout flare in his left knee after dietary indiscretion. What is the correct management regarding his allopurinol therapy?",
+   "o": [
+    "Continue allopurinol at the current dose and initiate acute anti-inflammatory therapy (colchicine or NSAID)",
+    "Stop allopurinol immediately until the acute flare completely resolves",
+    "Double the dose of allopurinol immediately today",
+    "Replace allopurinol with febuxostat immediately"
+   ],
+   "a": 0,
+   "exp": "NICE NG167 and BSR guidelines emphasize that ongoing urate-lowering therapy (allopurinol) must be continued without interruption during an acute gout flare. Stopping or rapidly altering ULT causes fluctuations in serum urate, precipitating further crystal dissolution and prolonging inflammation.",
+   "r": [
+    "Correct: Continue ongoing allopurinol at the same dose and add an acute anti-inflammatory agent.",
+    "Stopping allopurinol causes urate fluctuation and prolongs the flare.",
+    "Increasing the allopurinol dose during an acute attack can worsen the flare.",
+    "Switching xanthine oxidase inhibitors during an acute flare is inappropriate."
+   ],
+   "kp": "Do not stop or alter ongoing urate-lowering therapy during an acute gout flare.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gout",
+    "allopurinol",
+    "acute-flare"
+   ],
+   "source": "NICE guideline NG167: Gout: diagnosis and management",
+   "x": {
+    "key": "Continue established allopurinol unchanged and treat the acute flare.",
+    "others": {
+     "B": "Stopping allopurinol worsens crystal instability.",
+     "C": "Dose escalation during a flare exacerbates synovitis.",
+     "D": "Switching drugs is unindicated."
+    },
+    "pearl": "Abrupt reductions in serum urate dissolve crystal surfaces, releasing inflammatory microcrystals into the joint space.",
+    "clues": "Established allopurinol therapy, acute knee gout flare.",
+    "ddx": "Septic arthritis, pseudogout flare, acute trauma.",
+    "mech": "Stable serum urate levels prevent dynamic crystal surface remodelling while anti-inflammatory agents block IL-1beta signaling.",
+    "lo": "Manage urate-lowering therapy safely during an acute gout flare.",
+    "rev": "Never interrupt ongoing allopurinol during an acute gout attack.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review NICE guidelines on acute gout management."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG167",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [
+      "allopurinol",
+      "colchicine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG167."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1063",
+   "q": "A 52-year-old man with recurrent gout attacks is commenced on allopurinol for long-term urate lowering. In accordance with NICE NG167, what is the target serum urate concentration to achieve in standard gout without tophi?",
+   "o": [
+    "Below 360 micromol/L (<6 mg/dL)",
+    "Below 500 micromol/L",
+    "Below 100 micromol/L",
+    "Below 450 micromol/L"
+   ],
+   "a": 0,
+   "exp": "NICE NG167 recommends a treat-to-target approach: titrate allopurinol to maintain a serum urate level below 360 micromol/L (6 mg/dL). For patients with tophi, chronic gouty arthropathy or frequent flares, a lower target of below 300 micromol/L (5 mg/dL) is recommended to accelerate crystal dissolution.",
+   "r": [
+    "Correct: Target serum urate is below 360 micromol/L in standard gout.",
+    "500 micromol/L is above the physiological saturation threshold (around 400 micromol/L).",
+    "100 micromol/L is unnecessarily low and difficult to achieve.",
+    "450 micromol/L permits ongoing crystal deposition."
+   ],
+   "kp": "NICE target serum urate is below 360 micromol/L, or below 300 micromol/L for tophaceous disease.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gout",
+    "urate-target",
+    "nice"
+   ],
+   "source": "NICE guideline NG167: Gout: diagnosis and management",
+   "x": {
+    "key": "Target serum urate is below 360 umol/L in standard gout.",
+    "others": {
+     "B": "500 umol/L permits crystal deposition.",
+     "C": "100 umol/L is excessively low.",
+     "D": "450 umol/L exceeds the saturation point."
+    },
+    "pearl": "The saturation threshold for monosodium urate is approximately 408 umol/L at physiological core temperature.",
+    "clues": "Recurrent gout, commencing allopurinol, treat-to-target threshold.",
+    "ddx": "Asymptomatic hyperuricaemia, renal urate under-excretion.",
+    "mech": "Maintaining serum urate below saturation drives thermodynamic dissolution of existing monosodium urate crystals.",
+    "lo": "State the recommended serum urate target for gout maintenance therapy.",
+    "rev": "Target serum urate is below 360 umol/L (or below 300 umol/L with tophi).",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review treat-to-target strategies in gout."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG167",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [
+      "allopurinol"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG167."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1064",
+   "q": "When initiating allopurinol in a patient with recurrent gout, which co-prescribed prophylactic strategy is recommended by NICE to prevent paradoxical mobilisation flares during the initial titration phase?",
+   "o": [
+    "Co-prescribe low-dose colchicine (or low-dose NSAID with PPI) for at least 3 to 6 months",
+    "Prescribe high-dose oral prednisolone 40 mg daily for 6 months",
+    "Administer intramuscular gold injections",
+    "Co-prescribe daily methotrexate"
+   ],
+   "a": 0,
+   "exp": "Initiating urate-lowering therapy mobilises crystal stores and paradoxically precipitates acute flares. NICE NG167 recommends co-prescribing flare prophylaxis (colchicine 500 micrograms once or twice daily, or a low-dose NSAID with PPI) for at least 3 to 6 months during dose titration.",
+   "r": [
+    "Correct: Co-prescribe colchicine or low-dose NSAID with PPI for 3-6 months as flare prophylaxis.",
+    "High-dose steroid for 6 months causes severe metabolic and bone toxicity.",
+    "Gold injections are obsolete and have no role in crystal disease.",
+    "Methotrexate is an immunosuppressive DMARD for RA, not gout prophylaxis."
+   ],
+   "kp": "Co-prescribe colchicine or NSAID prophylaxis for 3 to 6 months when initiating allopurinol.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gout",
+    "colchicine",
+    "prophylaxis"
+   ],
+   "source": "NICE guideline NG167: Gout: diagnosis and management",
+   "x": {
+    "key": "Colchicine or NSAID prophylaxis for 3-6 months prevents mobilization flares.",
+    "others": {
+     "B": "High-dose steroid causes excessive morbidity.",
+     "C": "Gold is obsolete.",
+     "D": "Methotrexate is ineffective for gout."
+    },
+    "pearl": "Explain clearly to patients that allopurinol prevents future attacks but requires short-term cover to prevent initial flares.",
+    "clues": "Initiating allopurinol, preventing paradoxical flares.",
+    "ddx": "Paradoxical gout flare, septic arthritis, allopurinol hypersensitivity.",
+    "mech": "Colchicine binds tubulin dimers to inhibit microtubule assembly, blocking neutrophil chemotaxis and degranulation.",
+    "lo": "Select the recommended prophylactic regimen when initiating urate-lowering therapy.",
+    "rev": "Co-prescribe colchicine or low-dose NSAID for 3 to 6 months with allopurinol initiation.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review gout prophylaxis protocols."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG167",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [
+      "allopurinol",
+      "colchicine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG167."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1065",
+   "q": "A 74-year-old woman presents with acute pain, warmth and effusion of her left knee. Knee radiograph reveals linear, punctate calcification along the articular cartilage and menisci (chondrocalcinosis). Arthrocentesis yields cloudy fluid. What crystal type is responsible?",
+   "o": [
+    "Calcium pyrophosphate dihydrate (CPPD)",
+    "Monosodium urate",
+    "Basic calcium phosphate (hydroxyapatite)",
+    "Cholesterol crystals"
+   ],
+   "a": 0,
+   "exp": "Chondrocalcinosis (calcification of hyaline or fibrocartilage on radiographs) paired with acute knee monoarthritis ('pseudogout') is caused by calcium pyrophosphate dihydrate (CPPD) crystal deposition.",
+   "r": [
+    "Correct: CPPD causes chondrocalcinosis and acute pseudogout, commonly in the knee.",
+    "Monosodium urate causes gout and does not cause linear cartilage calcification.",
+    "Basic calcium phosphate causes calcific periarthritis and Milwaukee shoulder, not classic chondrocalcinosis.",
+    "Cholesterol crystals occur in chronic rheumatoic bursitis or chronic pleural effusions."
+   ],
+   "kp": "Calcium pyrophosphate dihydrate (CPPD) causes cartilage chondrocalcinosis and acute pseudogout.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "cppd",
+    "pseudogout",
+    "chondrocalcinosis"
+   ],
+   "source": "EULAR recommendations for calcium pyrophosphate deposition (CPPD)",
+   "x": {
+    "key": "CPPD crystal deposition causes chondrocalcinosis and pseudogout.",
+    "others": {
+     "B": "Urate causes gout without chondrocalcinosis.",
+     "C": "Hydroxyapatite causes Milwaukee shoulder.",
+     "D": "Cholesterol crystals do not cause acute monoarthritis."
+    },
+    "pearl": "The fibrocartilage menisci of the knee and triangular fibrocartilage complex of the wrist are classic sites for chondrocalcinosis.",
+    "clues": "Elderly female, acute knee monoarthritis, linear cartilage calcification on X-ray.",
+    "ddx": "Septic arthritis, acute gout, osteonecrosis of the knee.",
+    "mech": "Excess extracellular inorganic pyrophosphate generated by ectonucleotidases precipitates with calcium in the cartilage matrix.",
+    "lo": "Recognise the clinical and radiological features of CPPD arthropathy.",
+    "rev": "CPPD crystals cause chondrocalcinosis on radiographs and acute pseudogout monoarthritis.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review CPPD and pseudogout clinical guidance."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR CPPD recommendations",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1066",
+   "q": "A 46-year-old man presents with recurrent pseudogout attacks affecting both wrists and knees. Radiographs confirm extensive chondrocalcinosis. He also complains of skin hyperpigmentation, fatigue, and new-onset erectile dysfunction. Which underlying metabolic condition should be screened for?",
+   "o": [
+    "Hereditary haemochromatosis (transferrin saturation and ferritin)",
+    "Wilson disease",
+    "Type 1 Gaucher disease",
+    "Familial hypercholesterolaemia"
+   ],
+   "a": 0,
+   "exp": "Early-onset or severe CPPD / pseudogout, especially involving the 2nd and 3rd metacarpophalangeal joints, strongly warrants screening for secondary metabolic causes: hereditary haemochromatosis ('bronze diabetes'), primary hyperparathyroidism, and hypomagnesaemia.",
+   "r": [
+    "Correct: Hereditary haemochromatosis is a classic secondary cause of early-onset CPPD arthropathy.",
+    "Wilson disease causes copper accumulation with basal ganglia and liver disease, not typical CPPD.",
+    "Gaucher disease causes Erlenmeyer flask deformity and bone marrow infiltration.",
+    "Familial hypercholesterolaemia causes tendon xanthomas, not chondrocalcinosis."
+   ],
+   "kp": "Screen for hereditary haemochromatosis and hyperparathyroidism in young or severe CPPD arthropathy.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "cppd",
+    "haemochromatosis",
+    "metabolic"
+   ],
+   "source": "EULAR recommendations for calcium pyrophosphate deposition (CPPD)",
+   "x": {
+    "key": "Haemochromatosis is an established metabolic trigger for CPPD.",
+    "others": {
+     "B": "Wilson disease accumulates copper.",
+     "C": "Gaucher features lipid-laden macrophages.",
+     "D": "Hypercholesterolaemia causes xanthomas."
+    },
+    "pearl": "MCP joint arthropathy with hook-like osteophytes and chondrocalcinosis is characteristic of haemochromatosis arthropathy.",
+    "clues": "Young-onset pseudogout, bronzed skin, fatigue, erectile dysfunction.",
+    "ddx": "Primary hyperparathyroidism, hypomagnesaemia, hypophosphatasia.",
+    "mech": "Iron inhibits cartilage pyrophosphatase activity, promoting local pyrophosphate accumulation and calcium precipitation.",
+    "lo": "Identify secondary metabolic causes of calcium pyrophosphate deposition disease.",
+    "rev": "Screen for haemochromatosis and hyperparathyroidism in patients presenting with CPPD.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review metabolic arthropathies."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR CPPD recommendations",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR guidance."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1067",
+   "q": "A 62-year-old man with severe gout and chronic kidney disease stage 4 (eGFR 22 mL/min) cannot tolerate allopurinol due to severe allopurinol-induced rash and transaminitis. What alternative oral xanthine oxidase inhibitor can be considered?",
+   "o": [
+    "Febuxostat",
+    "Sulfasalazine",
+    "Probenecid",
+    "Leflunomide"
+   ],
+   "a": 0,
+   "exp": "Febuxostat is a non-purine selective xanthine oxidase inhibitor indicated for patients who cannot tolerate allopurinol or who fail to achieve target serum urate. Unlike probenecid (which is ineffective in moderate-to-severe renal impairment), febuxostat is metabolised predominantly by the liver and is suitable in mild-to-moderate CKD.",
+   "r": [
+    "Correct: Febuxostat is the alternative xanthine oxidase inhibitor for allopurinol-intolerant patients.",
+    "Sulfasalazine is a DMARD for inflammatory polyarthritis, not a urate-lowering agent.",
+    "Probenecid is a uricosuric that is ineffective when eGFR is below 30 mL/min.",
+    "Leflunomide is an immunomodulator for RA and psoriatic arthritis."
+   ],
+   "kp": "Febuxostat is the second-line xanthine oxidase inhibitor for patients intolerant of allopurinol.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gout",
+    "febuxostat",
+    "ckd"
+   ],
+   "source": "NICE Technology Appraisal TA126: Febuxostat for the management of hyperuricaemia in people with gout",
+   "x": {
+    "key": "Febuxostat is the non-purine xanthine oxidase inhibitor for allopurinol intolerance.",
+    "others": {
+     "B": "Sulfasalazine has no urate-lowering action.",
+     "C": "Probenecid fails in severe renal impairment.",
+     "D": "Leflunomide does not lower urate."
+    },
+    "pearl": "Febuxostat does not carry cross-reactivity with allopurinol hypersensitivity syndrome.",
+    "clues": "Severe gout, allopurinol intolerance, renal impairment.",
+    "ddx": "Allopurinol hypersensitivity syndrome, renal uricosuric failure.",
+    "mech": "Competitively blocks the molybdenum pterin active site of xanthine oxidase, suppressing purine conversion to urate.",
+    "lo": "Identify febuxostat as second-line urate-lowering therapy in allopurinol intolerance.",
+    "rev": "Febuxostat is recommended for chronic hyperuricaemia when allopurinol is not tolerated.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review NICE appraisal of febuxostat."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE TA126",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [
+      "febuxostat"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE TA126."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1068",
+   "q": "A 56-year-old man with hypertension, type 2 diabetes and chronic kidney disease presents with painless, chalky-white nodular swellings on his ear helices, olecranon bursae, and distal interphalangeal joints. One nodule has ulcerated and discharges white paste. What is the diagnosis?",
+   "o": [
+    "Tophaceous gout",
+    "Rheumatoid nodules",
+    "Calcinosis cutis in systemic sclerosis",
+    "Xanthoma tendinosum"
+   ],
+   "a": 0,
+   "exp": "Tophi are large, solid aggregates of monosodium urate crystals surrounded by foreign-body giant-cell granulomatous inflammation. Characteristic sites include the helix of the ear, olecranon bursae, Achilles tendons, and interphalangeal joints. Discharge of chalky, pasty urate material confirms the diagnosis.",
+   "r": [
+    "Correct: Chalky white nodular swellings discharging white paste on ear helices and extensor bursae are tophi.",
+    "Rheumatoid nodules are firm, fleshy subcutaneous lumps that do not discharge chalky white paste.",
+    "Calcinosis cutis in CREST features hard calcium hydroxyapatite deposits on fingertips, not chalky ear nodules.",
+    "Xanthomas are yellow lipid deposits on tendons (Achilles) associated with familial hypercholesterolaemia."
+   ],
+   "kp": "Tophi are solid deposits of monosodium urate that can ulcerate and extrude chalky white paste.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gout",
+    "tophi"
+   ],
+   "source": "Oxford Textbook of Rheumatology: Crystal deposition disorders",
+   "x": {
+    "key": "Chalky white nodules discharging pasty material represent tophaceous gout.",
+    "others": {
+     "B": "Rheumatoid nodules are non-chalky.",
+     "C": "Calcinosis cutis affects fingertips.",
+     "D": "Xanthomas are yellow lipid deposits."
+    },
+    "pearl": "Subcutaneous tophi develop after an average of 10-12 years of unmanaged hyperuricaemia.",
+    "clues": "Chalky white nodules on ear helix and olecranon, discharging white paste.",
+    "ddx": "Rheumatoid nodules, heberden nodes, calcinosis cutis, amyloid nodules.",
+    "mech": "Chronic tissue crystallization of urate triggers macrophage engulfment, IL-1beta release, and granuloma formation.",
+    "lo": "Recognise the clinical presentation of chronic tophaceous gout.",
+    "rev": "Tophi are nodular subcutaneous monosodium urate deposits in chronic gout.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review chronic tophaceous gout management."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Rheumatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against standard criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1069",
+   "q": "A 65-year-old man presents with an acute right knee effusion. Synovial fluid aspiration is performed. Gram stain shows no bacteria, and polarised microscopy reveals intracellular needle-shaped crystals with strong negative birefringence. White cell count in the fluid is 45,000/mm^3 with 85% neutrophils. Why must joint fluid culture still be sent?",
+   "o": [
+    "Coexistent septic arthritis and gout can occur in the same joint",
+    "Crystals will degrade if culture is omitted",
+    "To assess for mycobacterial infection only",
+    "Gout cannot be formally coded without negative microbiology"
+   ],
+   "a": 0,
+   "exp": "The presence of crystals in synovial fluid does not completely exclude concurrent septic arthritis. Crystal arthropathy and bacterial septic arthritis can coexist in up to 1-5% of cases; microbiological gram stain and culture are mandatory for all acute effusions.",
+   "r": [
+    "Correct: Coexistent septic arthritis and crystal arthropathy can occur simultaneously.",
+    "Crystal stability is unaffected by bacterial culture.",
+    "Culture checks primarily for common pyogenic pathogens (Staphylococcus aureus), not just mycobacteria.",
+    "Coding is secondary to clinical exclusion of life-threatening septic arthritis."
+   ],
+   "kp": "Crystals in joint fluid do not exclude concurrent septic arthritis; always send microbiological cultures.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gout",
+    "septic-arthritis",
+    "synovial-fluid"
+   ],
+   "source": "British Society for Rheumatology: Hot swollen joint guidelines",
+   "x": {
+    "key": "Gout and septic arthritis can coexist in the same joint.",
+    "others": {
+     "B": "Crystals do not degrade without culture.",
+     "C": "Staphylococcus is the main threat.",
+     "D": "Coding is not the clinical rationale."
+    },
+    "pearl": "High synovial white cell counts (>50,000/mm^3) occur in both septic arthritis and severe acute crystal flares.",
+    "clues": "Acute monoarthritis, crystals found, synovial fluid sent for culture.",
+    "ddx": "Septic arthritis, acute gout, reactive arthritis, haemarthrosis.",
+    "mech": "Inflamed synovial vascularity in crystal arthritis provides a fertile bed for haematogenous bacterial seeding.",
+    "lo": "Recognise the risk of coexistent septic arthritis in crystal disease.",
+    "rev": "Always send synovial fluid for culture even when crystal arthropathy is confirmed.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review hot swollen joint guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR Hot swollen joint guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1070",
+   "q": "A 58-year-old woman presents with rapid, destructive osteolysis of her right shoulder with massive blood-stained joint effusion and rotator cuff destruction. Synovial fluid is negative for urate and CPPD, but alizarin red staining reveals globular aggregates of basic calcium phosphate. What is the diagnosis?",
+   "o": [
+    "Milwaukee shoulder syndrome (basic calcium phosphate arthropathy)",
+    "Frozen shoulder (adhesive capsulitis)",
+    "Rheumatoid arthritis",
+    "Charcot neuropathic joint"
+   ],
+   "a": 0,
+   "exp": "Milwaukee shoulder syndrome is an advanced destructive arthropathy predominantly affecting elderly females, driven by intra-articular basic calcium phosphate (hydroxyapatite) crystal deposition leading to massive rotator cuff tearing and large non-inflammatory effusions.",
+   "r": [
+    "Correct: Milwaukee shoulder is a destructive arthropathy driven by basic calcium phosphate crystals.",
+    "Frozen shoulder causes restricted active and passive movement without joint destruction or massive effusions.",
+    "Rheumatoid arthritis causes symmetric erosions and positive serology.",
+    "Charcot joint results from loss of proprioception (e.g. syringomyelia, tabes dorsalis) with disorganized bony debris."
+   ],
+   "kp": "Milwaukee shoulder is an aggressive destructive arthropathy caused by basic calcium phosphate crystal deposition.",
+   "t": "mrheu-crystal",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "milwaukee-shoulder",
+    "hydroxyapatite",
+    "bcp"
+   ],
+   "source": "Oxford Textbook of Rheumatology: Basic calcium phosphate crystal deposition",
+   "x": {
+    "key": "Milwaukee shoulder is destructive arthropathy driven by basic calcium phosphate.",
+    "others": {
+     "B": "Frozen shoulder lacks bone destruction.",
+     "C": "RA features symmetric synovitis.",
+     "D": "Charcot joint requires sensory neuropathy."
+    },
+    "pearl": "Basic calcium phosphate crystals are too small to be seen with standard light microscopy; alizarin red stain or electron microscopy is required.",
+    "clues": "Elderly female, destructive shoulder arthropathy, massive bloody effusion, basic calcium phosphate.",
+    "ddx": "Rotator cuff tear arthropathy, septic arthritis, tumour, Charcot shoulder.",
+    "mech": "Phagocytosis of basic calcium phosphate crystals triggers massive release of collagenase and matrix metalloproteinases.",
+    "lo": "Identify Milwaukee shoulder syndrome as a basic calcium phosphate crystal disorder.",
+    "rev": "Milwaukee shoulder is a destructive arthropathy linked to basic calcium phosphate deposition.",
+    "next": {
+     "concept": "mrheu-crystal",
+     "action": "review",
+     "text": "Review non-urate crystal syndromes."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Rheumatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "gout"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-crystal"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against standard criteria."
+     }
+    }
+   }
+  }
+ ]
+}

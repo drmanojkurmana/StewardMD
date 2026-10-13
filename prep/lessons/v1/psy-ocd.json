@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "psy-ocd",
+ "subject": "plab-psychiatry",
+ "title": "Obsessive-compulsive disorder: obsessions, compulsions, stepped CBT and SSRI therapy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Obsessive-compulsive disorder** (OCD) is characterized by persistent, intrusive, distressing thoughts, images, or urges (obsessions) that the individual recognizes as products of their own mind, coupled with repetitive mental or physical acts (compulsions) performed to neutralize the associated anxiety. Core dimensions include contamination fears, symmetry and ordering, pathological doubt, and distressing taboo or aggressive thoughts.",
+   "say": "OCD features distressing intrusive thoughts and repetitive neutralizing rituals recognized as originating from the patient's own mind.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Intrusive thought (obsession)"
+     },
+     {
+      "id": "b",
+      "label": "Severe distress and anxiety"
+     },
+     {
+      "id": "c",
+      "label": "Compulsive neutralizing ritual"
+     },
+     {
+      "id": "d",
+      "label": "Transient anxiety relief"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stepped-care psychological therapy** forms the primary evidence-based foundation of OCD management. For mild to moderate functional impairment, NICE guideline CG31 recommends cognitive behavioural therapy (CBT) incorporating exposure and response prevention (ERP). ERP involves systematically confronting anxiety-provoking triggers while actively resisting performing compensatory compulsions, promoting long-term habituation and cognitive restructuring of catastrophic appraisal.",
+   "say": "Cognitive behavioural therapy with exposure and response prevention is the first-line psychological intervention for OCD.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Impairment level",
+     "First-line intervention",
+     "Step-up strategy"
+    ],
+    "rows": [
+     [
+      "Mild functional impairment",
+      "CBT including ERP (guided self-help or up to 10 sessions)",
+      "Full individual CBT with ERP"
+     ],
+     [
+      "Moderate impairment",
+      "Choice of CBT with ERP or oral SSRI",
+      "Combined CBT with ERP plus SSRI"
+     ],
+     [
+      "Severe impairment",
+      "Combined CBT with ERP and SSRI",
+      "Specialist review, high-dose SSRI or add clomipramine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pharmacotherapy in OCD** utilizes selective serotonin reuptake inhibitors (SSRIs), with sertraline, fluoxetine, or paroxetine commonly selected. Treatment response in OCD requires substantially higher daily doses and a longer evaluation window than major depression, often requiring twelve full weeks of therapy before declaring lack of efficacy. Clomipramine, a potent serotonergic tricyclic antidepressant, is reserved for refractory cases.",
+   "say": "SSRIs require higher doses and at least twelve weeks of continuous therapy to evaluate response in OCD.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Major depression",
+     "points": [
+      "Standard starting SSRI dose",
+      "Efficacy evaluable at 4-6 weeks",
+      "High spontaneous remission rate"
+     ]
+    },
+    "right": {
+     "title": "Obsessive-compulsive disorder",
+     "points": [
+      "Maximum licensed SSRI doses needed",
+      "Requires 12 weeks for adequate trial",
+      "Chronic course requiring extended maintenance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Paediatric OCD** requires careful developmental assessment and routine family involvement. When treating children and young people, NICE guidelines mandate CBT with ERP as the primary first-line intervention. If medication is necessary due to severe impairment or poor response, the SSRI must always be co-prescribed with concurrent CBT, with close monitoring for emerging agitation or suicidal ideation.",
+   "say": "In children and adolescents, CBT with ERP is first-line. SSRIs must always be combined with concurrent psychological therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Differential diagnosis and PANDAS** must be considered in acute presentations. OCD must be distinguished from generalized anxiety disorder, where worries focus on real-life concerns, and psychotic disorders, where delusions lack insight. In prepubertal children, sudden explosive-onset OCD or tics following a Group A streptococcal infection suggests Paediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal Infections (PANDAS).",
+   "say": "Distinguish OCD from real-life worries in generalized anxiety. Abrupt explosive onset in children following strep suggests PANDAS.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1151",
+  "mk-gap1153",
+  "mk-gap1155"
+ ],
+ "src": [
+  "kb-reference-obsessive_compulsive_disorder"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "mrheu-crystal",
+ "subject": "mrcp-rheumatology",
+ "title": "Crystal arthropathies: crystal optics, acute flares, urate lowering",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Gout** is an intensely painful inflammatory arthritis provoked by monosodium urate crystal deposition in synovial joints and periarticular tissues. The first metatarsophalangeal joint is the classical initial site of involvement, termed podagra. Hyperuricaemia drives crystal nucleation, but serum urate levels paradoxically drop during acute attacks due to systemic cortisol release.",
+   "say": "Gout causes severe joint pain from monosodium urate crystal deposition. Serum urate may be normal during acute attacks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute crystal flare"
+     },
+     {
+      "id": "b",
+      "label": "Anti-inflammatory control"
+     },
+     {
+      "id": "c",
+      "label": "Titrated urate-lowering"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Polarised light microscopy** of synovial fluid provides definitive differentiation between crystal species. Monosodium urate crystals appear as needle-shaped structures displaying strong negative birefringence, glowing bright yellow when aligned parallel to the compensator axis. Calcium pyrophosphate dihydrate crystals are rhomboid and exhibit weak positive birefringence, appearing blue when parallel.",
+   "say": "Urate crystals are needle-shaped and negatively birefringent. Calcium pyrophosphate crystals are rhomboid and positively birefringent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Gout",
+     "Pseudogout (CPPD)"
+    ],
+    "rows": [
+     [
+      "Crystal composition",
+      "Monosodium urate",
+      "Calcium pyrophosphate"
+     ],
+     [
+      "Shape",
+      "Needle-shaped",
+      "Rhomboid / brick-shaped"
+     ],
+     [
+      "Birefringence",
+      "Strongly negative (yellow parallel)",
+      "Weakly positive (blue parallel)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute flare management** prioritises rapid symptom control using first-line non-steroidal anti-inflammatory drugs combined with proton pump inhibitors, oral colchicine at modest doses, or short-course oral corticosteroids. Ongoing urate-lowering therapy must never be interrupted during an acute attack, as abrupt urate fluctuations prolong and destabilise joint inflammation.",
+   "say": "Treat acute gout with NSAIDs, colchicine or oral steroids. Never stop ongoing urate-lowering therapy during an acute flare.",
+   "vis": null
+  },
+  {
+   "tx": "**Long-term urate lowering** with allopurinol, a xanthine oxidase inhibitor, is indicated for recurrent flares, tophi, renal impairment or nephrolithiasis. Therapy starts at low dose and is carefully uptitrated to achieve a serum urate target below 360 micromoles per litre, or below 300 for tophaceous disease. Flare prophylaxis with colchicine prevents paradoxical mobilization flares.",
+   "say": "Titrate allopurinol to target urate below 360 micromoles per litre. Co-prescribe colchicine prophylaxis during dose titration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Standard target",
+     "points": [
+      "Serum urate <360 umol/L",
+      "Recurrent simple attacks",
+      "Prevent new crystal formation"
+     ]
+    },
+    "right": {
+     "title": "Tophaceous target",
+     "points": [
+      "Serum urate <300 umol/L",
+      "Visible subcutaneous tophi",
+      "Accelerates tophus dissolution"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Calcium pyrophosphate deposition** predominantly affects older adults, presenting as acute pseudogout in large joints such as the knee or wrist. Plain radiographs reveal chondrocalcinosis as punctate or linear fibrocartilage calcification. Underlying metabolic triggers demand screening, including primary hyperparathyroidism, hereditary haemochromatosis and severe hypomagnesaemia.",
+   "say": "Pseudogout affects knees and wrists, showing chondrocalcinosis on X-ray. Screen for hyperparathyroidism, haemochromatosis and hypomagnesaemia.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1061",
+  "mk-gap1063",
+  "mk-gap1065"
+ ],
+ "src": [
+  "kb-reference-gout"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

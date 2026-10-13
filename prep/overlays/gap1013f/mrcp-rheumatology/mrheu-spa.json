@@ -1,0 +1,800 @@
+{
+ "topic": "mrheu-spa",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1051",
+   "q": "A 28-year-old man presents with an eight-month history of lower back pain and morning stiffness lasting over an hour that improves as he walks and exercises throughout the day. He frequently wakes at 3 AM due to backache. Plain radiographs of the lumbar spine and pelvis are normal. What is the most sensitive next investigation to confirm early axial spondyloarthritis?",
+   "o": [
+    "MRI of the sacroiliac joints (STIR sequence)",
+    "Radionuclide bone scintigraphy",
+    "CT scan of the lumbar spine",
+    "HLA-B27 testing alone without imaging"
+   ],
+   "a": 0,
+   "exp": "MRI of the sacroiliac joints using STIR (short tau inversion recovery) sequences is the gold standard for detecting active bone marrow oedema (sacroiliitis) in early non-radiographic axial spondyloarthritis, often years before plain radiographic changes become visible.",
+   "r": [
+    "Correct: MRI STIR sequences detect active bone marrow oedema defining non-radiographic axSpA.",
+    "Bone scintigraphy lacks spatial resolution and specificity compared to MRI.",
+    "CT demonstrates bony erosions and sclerosis but cannot detect active inflammatory bone marrow oedema.",
+    "HLA-B27 is a genetic susceptibility marker present in 8% of the normal population and cannot diagnose axSpA alone."
+   ],
+   "kp": "MRI STIR of sacroiliac joints is the most sensitive investigation for early axial spondyloarthritis.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "spondyloarthritis",
+    "mri",
+    "sacroiliitis"
+   ],
+   "source": "ASAS consensus criteria for axial spondyloarthritis / NICE NG65",
+   "x": {
+    "key": "MRI STIR of sacroiliac joints detects early inflammatory marrow oedema.",
+    "others": {
+     "B": "Bone scan lacks sensitivity.",
+     "C": "CT only shows late structural bony changes.",
+     "D": "HLA-B27 alone is non-diagnostic."
+    },
+    "pearl": "Normal plain radiographs never exclude axial spondyloarthritis in patients with typical inflammatory back pain.",
+    "clues": "Young male, inflammatory back pain, night waking, normal plain X-ray.",
+    "ddx": "Mechanical back pain, lumbar disc prolapse, diffuse idiopathic skeletal hyperostosis (DISH).",
+    "mech": "Enthesitis and osteitis at the sacroiliac fibrocartilaginous junction cause bone marrow oedema detectable by water-sensitive MRI.",
+    "lo": "Select the most sensitive imaging modality for early axial spondyloarthritis.",
+    "rev": "MRI of sacroiliac joints with STIR sequence identifies early sacroiliitis before plain X-ray changes.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review axial spondyloarthritis diagnosis and classification."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG65 / ASAS criteria",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG65."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1052",
+   "q": "A 32-year-old man with ankylosing spondylitis presents to eye casualty with a 24-hour history of acute left eye pain, redness, photophobia and blurred vision. Examination reveals ciliary injection, cells in the anterior chamber and an irregular pupil. What is the diagnosis?",
+   "o": [
+    "Acute anterior uveitis (iritis)",
+    "Bacterial keratitis",
+    "Acute angle-closure glaucoma",
+    "Episcleritis"
+   ],
+   "a": 0,
+   "exp": "Acute anterior uveitis (iritis) is the most frequent extra-articular manifestation of axial spondyloarthritis, occurring in 25-40% of patients. It presents acutely with unilateral eye pain, redness, photophobia, ciliary flush and miosis. Urgent treatment with topical corticosteroids and mydriatics is required to prevent posterior synechiae.",
+   "r": [
+    "Correct: Acute anterior uveitis causes unilateral painful red eye with photophobia and anterior chamber cells.",
+    "Bacterial keratitis features a visible corneal infiltrate and epithelial defect on fluorescein staining.",
+    "Acute angle-closure glaucoma causes a fixed mid-dilated pupil, corneal haziness and marked intraocular pressure rise.",
+    "Episcleritis is mildly painful, causes localized sectorial injection, and lacks anterior chamber cells."
+   ],
+   "kp": "Acute anterior uveitis is the commonest extra-articular complication of ankylosing spondylitis.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "ankylosing-spondylitis",
+    "uveitis",
+    "ophthalmology"
+   ],
+   "source": "British Society for Rheumatology: Spondyloarthritis guidelines",
+   "x": {
+    "key": "Acute anterior uveitis is the most common extra-articular manifestation of axSpA.",
+    "others": {
+     "B": "Keratitis shows a corneal ulcer.",
+     "C": "Glaucoma features a mid-dilated unreactive pupil.",
+     "D": "Episcleritis lacks anterior chamber cells."
+    },
+    "pearl": "Prompt mydriatic eye drops (e.g. cyclopentolate) prevent the inflamed iris from adhering to the anterior lens capsule (posterior synechiae).",
+    "clues": "Known ankylosing spondylitis, acute painful red eye, photophobia, ciliary injection, miosis.",
+    "ddx": "Acute angle-closure glaucoma, episcleritis, scleritis, infective keratitis.",
+    "mech": "HLA-B27 associated immune-mediated lymphocytic infiltration of the iris and ciliary body.",
+    "lo": "Recognise acute anterior uveitis in patients with seronegative spondyloarthritis.",
+    "rev": "Acute anterior uveitis presents with unilateral ocular pain, photophobia and ciliary flush in axSpA.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review extra-articular spondyloarthritis manifestations."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR Spondyloarthritis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1053",
+   "q": "A 34-year-old man with active ankylosing spondylitis continues to experience severe spinal pain and stiffness despite taking maximum tolerated doses of naproxen and subsequently ibuprofen for three months. His BASDAI score is 5.8. What is the recommended next step?",
+   "o": [
+    "Initiate biological therapy with a TNF-alpha inhibitor (e.g. adalimumab) or IL-17 inhibitor (e.g. secukinumab)",
+    "Start oral methotrexate monotherapy for his axial disease",
+    "Perform lumbar spinal fusion surgery",
+    "Prescribe long-term oral prednisolone 30 mg daily"
+   ],
+   "a": 0,
+   "exp": "NICE NG65 recommends biological therapy (TNF inhibitors or IL-17 inhibitors) for severe active axial spondyloarthritis (BASDAI >=4 and spinal pain VAS >=4) that has responded inadequately to two or more NSAIDs taken at maximum doses. Conventional synthetic DMARDs such as methotrexate are ineffective for axial disease.",
+   "r": [
+    "Correct: Biologics (TNF or IL-17 inhibitors) are indicated for active axial disease refractory to NSAIDs.",
+    "Conventional DMARDs like methotrexate are ineffective for isolated axial spinal disease.",
+    "Spinal surgery is reserved for severe fixed kyphotic deformity or unstable fractures, not medical management.",
+    "Long-term high-dose oral corticosteroids are ineffective and contraindicated for axial spondyloarthritis."
+   ],
+   "kp": "TNF or IL-17 inhibitors are first-line biologics for severe axial spondyloarthritis failing NSAIDs; conventional DMARDs are ineffective for axial disease.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "spondyloarthritis",
+    "biologics",
+    "nice"
+   ],
+   "source": "NICE guideline NG65: Spondyloarthritis in over 16s: diagnosis and management",
+   "x": {
+    "key": "Biologics are indicated for active axial spondyloarthritis refractory to NSAIDs.",
+    "others": {
+     "B": "Methotrexate is ineffective for axial spine disease.",
+     "C": "Surgery is not a medical option.",
+     "D": "Oral steroids are not recommended for axSpA."
+    },
+    "pearl": "While conventional DMARDs help peripheral joint synovitis in SpA, they have zero proven efficacy for axial spine inflammation.",
+    "clues": "Severe active axSpA, failed two NSAIDs, high BASDAI.",
+    "ddx": "Secondary fibromyalgia, degenerative disc disease.",
+    "mech": "Targeted blockade of TNF-alpha or IL-17A interrupts the key osteoproliferative and inflammatory cascade in enthesial tissue.",
+    "lo": "Select the appropriate disease-modifying therapy for NSAID-refractory axial spondyloarthritis.",
+    "rev": "TNF and IL-17 inhibitors are effective for active axial spondyloarthritis refractory to NSAIDs.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review biologic selection in spondyloarthritis."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG65",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [
+      "adalimumab",
+      "secukinumab"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE NG65."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1054",
+   "q": "A 44-year-old woman presents with severe swelling of the entire right third toe, which resembles a sausage. She has scalp psoriasis and multiple small pits on her fingernails. Rheumatoid factor and anti-CCP are negative. What is the clinical term for this toe swelling?",
+   "o": [
+    "Dactylitis",
+    "Enthesitis",
+    "Tophaceous gout",
+    "Bouchard node"
+   ],
+   "a": 0,
+   "exp": "Dactylitis ('sausage digit') is diffuse, uniform swelling of an entire digit resulting from concurrent synovitis of flexor tendon sheaths and interphalangeal joints. It is a hallmark clinical feature of psoriatic arthritis and reactive arthritis.",
+   "r": [
+    "Correct: Dactylitis represents diffuse uniform swelling of an entire digit.",
+    "Enthesitis refers to focal inflammation at the insertion of tendons or ligaments into bone.",
+    "Tophaceous gout produces nodular, chalky monosodium urate deposits rather than diffuse uniform digit swelling.",
+    "Bouchard nodes are bony osteophytes at the PIP joints in nodal osteoarthritis."
+   ],
+   "kp": "Dactylitis (sausage digit) represents diffuse inflammation of an entire digit and is a hallmark of psoriatic arthritis.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "psoriatic-arthritis",
+    "dactylitis"
+   ],
+   "source": "CASPAR criteria for psoriatic arthritis / NICE NG65",
+   "x": {
+    "key": "Dactylitis refers to sausage digit swelling in psoriatic arthritis.",
+    "others": {
+     "B": "Enthesitis is focal tendon insertion pain.",
+     "C": "Tophi are nodular urate deposits.",
+     "D": "Bouchard nodes are osteoarthritic bony swellings."
+    },
+    "pearl": "Dactylitis and nail pitting correlate strongly with the presence and severity of psoriatic arthritis.",
+    "clues": "Sausage toe, psoriasis, nail pitting, seronegative.",
+    "ddx": "Cellulitis, flexor tenosynovitis, gout, sarcoidosis.",
+    "mech": "Concomitant tenosynovitis, capsulitis, enthesitis and soft tissue oedema involving the whole digit.",
+    "lo": "Recognise dactylitis as a diagnostic hallmark of psoriatic arthritis.",
+    "rev": "Dactylitis is diffuse swelling of an entire digit characteristic of psoriatic arthritis.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review psoriatic arthritis features and classification."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "CASPAR criteria",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against CASPAR criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1055",
+   "q": "A 38-year-old woman with severe psoriatic arthritis affecting both peripheral joints and the axial spine is evaluated for biologic therapy. She also has active moderate-to-severe plaque psoriasis. Which biologic mechanism of action provides licensed, highly effective dual therapy for both psoriasis and psoriatic arthritis?",
+   "o": [
+    "Interleukin-17A inhibition (e.g. secukinumab)",
+    "CD20 B-cell depletion (rituximab)",
+    "IL-6 receptor antagonism (tocilizumab)",
+    "B-cell activating factor inhibition (belimumab)"
+   ],
+   "a": 0,
+   "exp": "Interleukin-17A inhibitors (such as secukinumab and ixekizumab) are highly effective and licensed for both active plaque psoriasis and psoriatic arthritis (including peripheral and axial involvement). Rituximab, tocilizumab and belimumab are not standard or licensed therapies for psoriatic arthritis.",
+   "r": [
+    "Correct: IL-17A inhibition (secukinumab) provides excellent joint and skin efficacy in psoriatic disease.",
+    "Rituximab is not effective or licensed for psoriatic arthritis.",
+    "Tocilizumab lacks proven efficacy in psoriatic arthritis and psoriasis.",
+    "Belimumab is licensed for systemic lupus erythematosus, not psoriatic arthritis."
+   ],
+   "kp": "IL-17A inhibitors like secukinumab provide dual joint and skin clearance in psoriatic arthritis.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "psoriatic-arthritis",
+    "secukinumab",
+    "il-17"
+   ],
+   "source": "GRAPPA and EULAR recommendations for the management of psoriatic arthritis",
+   "x": {
+    "key": "IL-17A inhibition treats both skin plaques and joint disease in psoriatic arthritis.",
+    "others": {
+     "B": "Rituximab is ineffective in PsA.",
+     "C": "Tocilizumab is ineffective in PsA.",
+     "D": "Belimumab is for SLE."
+    },
+    "pearl": "IL-17A inhibitors achieve high rates of PASI 90 skin clearance alongside ACR 50 joint responses.",
+    "clues": "Severe psoriatic arthritis with plaque psoriasis, selecting targeted biologic.",
+    "ddx": "Rheumatoid arthritis, reactive arthritis, ankylosing spondylitis.",
+    "mech": "Neutralisation of IL-17A prevents keratinocyte hyperproliferation and downregulates osteoclastogenic cytokine release.",
+    "lo": "Select the appropriate biologic class for dual cutaneous and articular psoriatic disease.",
+    "rev": "IL-17A inhibitors effectively treat active psoriatic arthritis and plaque psoriasis.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review biologic mechanisms in spondyloarthritis."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR PsA recommendations",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [
+      "secukinumab"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1056",
+   "q": "A 22-year-old man presents with painful asymmetric arthritis of his right knee and left ankle, followed by burning on micturition and bilateral conjunctival injection, three weeks after an acute episode of diarrhoeal gastroenteritis. What is the diagnosis?",
+   "o": [
+    "Reactive arthritis",
+    "Gonococcal septic arthritis",
+    "Acute rheumatic fever",
+    "Gout"
+   ],
+   "a": 0,
+   "exp": "Reactive arthritis is an aseptic inflammatory arthritis developing 1-4 weeks after a gastrointestinal (Campylobacter, Salmonella, Shigella, Yersinia) or genitourinary (Chlamydia trachomatis) infection. It presents as an asymmetric oligoarthritis, often with the classical triad of urethritis, conjunctivitis and arthritis.",
+   "r": [
+    "Correct: Asymmetric oligoarthritis, conjunctivitis and urethritis following gastroenteritis define reactive arthritis.",
+    "Gonococcal arthritis presents with tenosynovitis, pustular skin lesions and positive joint fluid cultures.",
+    "Rheumatic fever follows streptococcal pharyngitis and features migratory polyarthritis and carditis.",
+    "Gout typically presents with acute first MTP podagra, not post-dysenteric triad."
+   ],
+   "kp": "Reactive arthritis causes asymmetric oligoarthritis, urethritis and conjunctivitis post-infection.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "reactive-arthritis",
+    "spondyloarthritis"
+   ],
+   "source": "British Society for Rheumatology guidelines on spondyloarthritis",
+   "x": {
+    "key": "Triad of arthritis, urethritis and conjunctivitis following infection is reactive arthritis.",
+    "others": {
+     "B": "Gonococcal arthritis has septic cultures.",
+     "C": "Rheumatic fever is post-streptococcal.",
+     "D": "Gout is crystal-induced."
+    },
+    "pearl": "Keratoderma blennorrhagica (vesiculopustular waxy lesions on palms/soles) and circinate balanitis are classic cutaneous signs.",
+    "clues": "Asymmetric knee/ankle arthritis, conjunctivitis, dysuria, post-infectious.",
+    "ddx": "Disseminated gonococcal infection, septic arthritis, psoriatic arthritis.",
+    "mech": "Immune cross-reactivity and molecular mimicry between microbial antigens and synovial tissue in HLA-B27 positive individuals.",
+    "lo": "Recognise reactive arthritis following enteric or genital infection.",
+    "rev": "Reactive arthritis follows enteric or chlamydial infection with aseptic asymmetric oligoarthritis.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review reactive arthritis workup."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR Spondyloarthritis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against standard criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1057",
+   "q": "A 40-year-old man with ankylosing spondylitis has advanced spinal disease. Plain radiographs of the thoracic and lumbar spine reveal thin, vertical, continuous ossifications bridging the intervertebral discs. What are these radiographic features called?",
+   "o": [
+    "Marginal syndesmophytes",
+    "Coarse non-marginal osteophytes",
+    "Flowing ossification of anterior longitudinal ligament (DISH)",
+    "Looser zones"
+   ],
+   "a": 0,
+   "exp": "Marginal syndesmophytes in ankylosing spondylitis are thin, vertically oriented bony bridges extending from the margins of adjacent vertebral bodies, resulting from ossification of the outer fibres of the annulus fibrosus, ultimately producing the classic 'bamboo spine'.",
+   "r": [
+    "Correct: Marginal syndesmophytes are vertical bony bridges characteristic of ankylosing spondylitis.",
+    "Coarse osteophytes are thick, horizontal spurs characteristic of degenerative disc disease.",
+    "Flowing anterior longitudinal ossification sparing disc spaces characterizes DISH.",
+    "Looser zones are cortical pseudofractures pathognomonic of osteomalacia."
+   ],
+   "kp": "Marginal syndesmophytes are vertically oriented bony bridges characteristic of ankylosing spondylitis.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "ankylosing-spondylitis",
+    "radiology",
+    "syndesmophytes"
+   ],
+   "source": "Oxford Textbook of Rheumatology: Imaging in Spondyloarthritis",
+   "x": {
+    "key": "Syndesmophytes are thin vertical bony bridges characteristic of axSpA.",
+    "others": {
+     "B": "Osteophytes are horizontal degenerative spurs.",
+     "C": "DISH features thick flowing ossification.",
+     "D": "Looser zones indicate osteomalacia."
+    },
+    "pearl": "Syndesmophytes represent end-stage structural progression following chronic enthesitis at the vertebral corners (shiny corners or Romanus lesions).",
+    "clues": "Long-standing ankylosing spondylitis, vertical bridging bony spurs on X-ray.",
+    "ddx": "Diffuse idiopathic skeletal hyperostosis, osteoarthritis, osteomalacia.",
+    "mech": "Chronic inflammation at the enthesis of the annulus fibrosus is replaced by cartilage and endochondral ossification.",
+    "lo": "Distinguish syndesmophytes from degenerative osteophytes on spinal radiographs.",
+    "rev": "Marginal syndesmophytes are vertical ossifications producing bamboo spine in axSpA.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review radiological features of spondyloarthritis."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Rheumatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against radiology reference."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1058",
+   "q": "A 55-year-old man with ankylosing spondylitis presents with progressive dyspnoea on exertion and a high-pitched early diastolic murmur heard best at the left sternal edge on expiration. Echocardiography shows severe aortic regurgitation with aortic root dilation. What is the pathological mechanism?",
+   "o": [
+    "Aortitis and root dilation associated with ankylosing spondylitis",
+    "Infective endocarditis with leaflet perforation",
+    "Rheumatic mitral valve disease",
+    "Calcific aortic stenosis"
+   ],
+   "a": 0,
+   "exp": "Aortitis and fibrous thickening of the aortic root and valve cusps occur in up to 5-10% of patients with chronic ankylosing spondylitis, resulting in aortic root dilatation, cusp retraction and progressive aortic regurgitation.",
+   "r": [
+    "Correct: Aortitis with root dilatation and cusp retraction causes aortic regurgitation in ankylosing spondylitis.",
+    "Infective endocarditis features fever, positive blood cultures and mobile vegetations.",
+    "Rheumatic disease causes cusp fusion and mitral stenosis.",
+    "Calcific aortic stenosis produces a systolic ejection murmur, not diastolic regurgitation."
+   ],
+   "kp": "Aortic root dilatation and aortic regurgitation are recognized cardiac complications of chronic ankylosing spondylitis.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "ankylosing-spondylitis",
+    "aortic-regurgitation",
+    "cardiology"
+   ],
+   "source": "Oxford Textbook of Rheumatology: Cardiac manifestations of spondyloarthritis",
+   "x": {
+    "key": "Aortitis and root dilation cause aortic regurgitation in chronic axSpA.",
+    "others": {
+     "B": "Blood cultures are negative and leaflets are retracted.",
+     "C": "Rheumatic fever affects the mitral valve.",
+     "D": "Stenosis produces an ejection systolic murmur."
+    },
+    "pearl": "Subaortic fibrous proliferation in axSpA can also extend into the atrioventricular node, causing complete heart block.",
+    "clues": "Known ankylosing spondylitis, early diastolic murmur, aortic root dilation.",
+    "ddx": "Bicuspid aortic valve, Marfan syndrome, syphilitic aortitis.",
+    "mech": "Chronic adventitial inflammation and fibroblastic proliferation of the aortic root and valve cusp bases.",
+    "lo": "Recognise aortic regurgitation and conduction disease as cardiovascular complications of axSpA.",
+    "rev": "Aortitis leading to aortic regurgitation and AV block can complicate chronic ankylosing spondylitis.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review cardiovascular complications of spondyloarthritis."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Rheumatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against cardiology reference."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1059",
+   "q": "A 62-year-old man with rigid 'bamboo spine' from advanced ankylosing spondylitis sustains a low-energy fall from a standing position. He complains of acute neck pain. Neurological examination is currently intact. What is the mandatory immediate radiological investigation?",
+   "o": [
+    "Whole-spine CT scan",
+    "Reassurance and discharge with analgesia",
+    "Plain cervical spine radiograph only",
+    "Standing flexion-extension views"
+   ],
+   "a": 0,
+   "exp": "A rigid, fused spine acts as a long bone; minor low-energy trauma can cause unstable 'chalk-stick' fractures with high risk of spinal cord transection and epidural haematoma. Plain X-rays miss up to 50% of fractures in fused spines; whole-spine CT is the mandatory emergency investigation of choice.",
+   "r": [
+    "Correct: Whole-spine CT is mandatory to detect unstable fractures in a fused spine after trauma.",
+    "Discharging without CT risks delayed displacement and catastrophic quadriplegia.",
+    "Plain radiographs miss many fractures due to osteopenia and distorted anatomy.",
+    "Flexion-extension views are dangerous and strictly contraindicated in acute trauma."
+   ],
+   "kp": "Low-energy falls in ankylosing spondylitis require urgent CT imaging to exclude unstable chalk-stick fractures.",
+   "t": "mrheu-spa",
+   "d": 3,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "trauma",
+    "bamboo-spine",
+    "fracture"
+   ],
+   "source": "British Association of Spine Surgeons: Trauma in ankylosing spondylitis guidelines",
+   "x": {
+    "key": "Urgent CT of the spine detects unstable fractures in ankylosing spondylitis.",
+    "others": {
+     "B": "Discharge risks fatal spinal cord injury.",
+     "C": "Plain X-rays have high false-negative rates.",
+     "D": "Flexion-extension views are dangerous."
+    },
+    "pearl": "Any new or changed back or neck pain following trauma in ankylosing spondylitis must be assumed to be a fracture until proven otherwise by CT.",
+    "clues": "Bamboo spine, low-energy fall, new neck pain.",
+    "ddx": "Chalk-stick fracture, epidural haematoma, muscular sprain.",
+    "mech": "Biomechanical rigidity and concurrent osteopenia concentrate mechanical stress across fused vertebral segments, causing transvertebral fractures.",
+    "lo": "Manage suspected spinal trauma in patients with ankylosing spondylitis.",
+    "rev": "Mandatory urgent CT imaging is required for suspected spinal fractures in ankylosing spondylitis.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review emergency spine complications in rheumatology."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BASS guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BASS guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1060",
+   "q": "A 46-year-old woman with psoriatic arthritis presents with severe shortening and 'telescoping' of her fingers. Radiographs show extensive osteolysis of phalanges with pencilling of the proximal phalanx slipping into a widened cup of the distal phalanx. What is this severe radiological pattern called?",
+   "o": [
+    "Pencil-in-cup deformity (arthritis mutilans)",
+    "Bouchard node deformity",
+    "Swan-neck deformity",
+    "Heberden node deformity"
+   ],
+   "a": 0,
+   "exp": "Arthritis mutilans is the most severe, destructive form of psoriatic arthritis, characterized by osteolysis of the phalangeal heads and metatarsals, producing the classic 'pencil-in-cup' deformity and telescoping (opera-glass hand / main en lorgnette).",
+   "r": [
+    "Correct: Pencil-in-cup deformity and phalangeal osteolysis define arthritis mutilans.",
+    "Bouchard nodes are bony osteophytes at PIP joints in osteoarthritis.",
+    "Swan-neck deformity is seen in rheumatoid arthritis (PIP hyperextension, DIP flexion).",
+    "Heberden nodes are osteoarthritic spurs at DIP joints."
+   ],
+   "kp": "Pencil-in-cup deformity resulting from osteolysis is characteristic of psoriatic arthritis mutilans.",
+   "t": "mrheu-spa",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "psoriatic-arthritis",
+    "arthritis-mutilans",
+    "radiology"
+   ],
+   "source": "Oxford Textbook of Rheumatology: Psoriatic arthritis",
+   "x": {
+    "key": "Pencil-in-cup deformity represents severe osteolysis in arthritis mutilans.",
+    "others": {
+     "B": "Bouchard nodes are osteoarthritic.",
+     "C": "Swan-neck deformity is typical of RA.",
+     "D": "Heberden nodes are DIP osteophytes."
+    },
+    "pearl": "Aggressive early biologic therapy halts progression of osteolytic bone resorption in psoriatic arthritis.",
+    "clues": "Shortening and telescoping of fingers, pencil-in-cup on X-ray, psoriatic arthritis.",
+    "ddx": "Advanced rheumatoid arthritis, multicentric reticulohistiocytosis, severe tophaceous gout.",
+    "mech": "Unchecked osteoclast activation mediated by TNF-alpha and RANKL leads to severe resorption of periarticular bone.",
+    "lo": "Identify pencil-in-cup deformity on radiographs of psoriatic arthritis.",
+    "rev": "Pencil-in-cup deformity indicates osteolytic arthritis mutilans in psoriatic disease.",
+    "next": {
+     "concept": "mrheu-spa",
+     "action": "review",
+     "text": "Review destructive arthropathies."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Rheumatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "ankylosing_spondylitis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-spa"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against rheumatology reference."
+     }
+    }
+   }
+  }
+ ]
+}

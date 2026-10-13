@@ -1,0 +1,119 @@
+{
+ "v": 1,
+ "module": "mrheu-vasculitis",
+ "subject": "mrcp-rheumatology",
+ "title": "Systemic vasculitis: vessel size, ANCA syndromes, emergency management",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Systemic vasculitis** is categorized by vessel calibre into large, medium and small vessel diseases. Large vessel vasculitis comprises giant cell arteritis and Takayasu arteritis. Small vessel vasculitis includes ANCA-associated vasculitides and immune-complex-mediated diseases. Pathological hallmark is vessel wall inflammation causing lumen narrowing, ischaemic tissue infarction, and aneurysm formation.",
+   "say": "Systemic vasculitis is classified by vessel size. Inflammation narrows the lumen, causing tissue ischaemia, infarction and aneurysms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Calibre classification"
+     },
+     {
+      "id": "b",
+      "label": "ANCA and biopsy staging"
+     },
+     {
+      "id": "c",
+      "label": "Induction immunosuppression"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ANCA-associated vasculitis** encompasses granulomatosis with polyangiitis, microscopic polyangiitis, and eosinophilic granulomatosis with polyangiitis. GPA exhibits PR3-ANCA, necrotising granulomatous inflammation of the upper and lower respiratory tracts, and rapidly progressive glomerulonephritis. MPA presents with MPO-ANCA and non-granulomatous pulmonary-renal syndrome. EGPA combines adult-onset asthma, peripheral eosinophilia, transient pulmonary infiltrates, and peripheral mononeuritis multiplex.",
+   "say": "GPA causes necrotising granulomas with PR3-ANCA. MPA causes pulmonary-renal syndrome with MPO-ANCA. EGPA links asthma and eosinophilia with mononeuritis multiplex.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Serology",
+     "Key features"
+    ],
+    "rows": [
+     [
+      "GPA",
+      "c-ANCA (PR3)",
+      "Sinonasal destruction, lung cavities, glomerulonephritis"
+     ],
+     [
+      "MPA",
+      "p-ANCA (MPO)",
+      "Pulmonary haemorrhage, rapidly progressive glomerulonephritis"
+     ],
+     [
+      "EGPA",
+      "p-ANCA (40%)",
+      "Late-onset asthma, peripheral eosinophilia, neuropathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Organ-threatening induction** for severe ANCA vasculitis with rapidly rising creatinine or alveolar haemorrhage requires prompt high-dose intravenous pulsed methylprednisolone combined with either rituximab or cyclophosphamide. Delay in instituting aggressive cytotoxic therapy risks end-stage renal failure or fatal asphyxiation from pulmonary capillaritis.",
+   "say": "Induce remission in severe ANCA vasculitis with pulse corticosteroids plus rituximab or cyclophosphamide. Avoid therapeutic delays.",
+   "vis": null
+  },
+  {
+   "tx": "**Giant cell arteritis** affects individuals aged over fifty, presenting with new-onset localized headache, temporal artery tenderness, jaw claudication on mastication, and markedly elevated inflammatory markers. Visual symptoms such as amaurosis fugax signify imminent irreversible anterior ischaemic optic neuropathy, demanding immediate high-dose systemic corticosteroid therapy prior to biopsy.",
+   "say": "Giant cell arteritis presents with headache, jaw claudication and elevated ESR. Start high-dose corticosteroids immediately to prevent irreversible blindness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical hallmarks",
+     "points": [
+      "Age over fifty years",
+      "Jaw claudication on chewing",
+      "Scalp and temporal tenderness",
+      "ESR typically >50 mm/h"
+     ]
+    },
+    "right": {
+     "title": "Emergency actions",
+     "points": [
+      "Start high-dose prednisolone immediately",
+      "Arrange urgent temporal artery biopsy",
+      "Do not delay steroids for histology"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diagnostic confirmation** in giant cell arteritis relies on temporal artery biopsy demonstrating transmural granulomatous inflammation with multinucleated giant cells, or colour Doppler ultrasound showing the non-compressible vascular wall halo sign. Biopsy yield remains valid up to two weeks after commencing corticosteroids.",
+   "say": "Confirm giant cell arteritis with temporal artery biopsy or Doppler ultrasound. Steroid therapy does not compromise early biopsy yield.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1041",
+  "mk-gap1043",
+  "mk-gap1045"
+ ],
+ "src": [
+  "kb-reference-giant_cell_arteritis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

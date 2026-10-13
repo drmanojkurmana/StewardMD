@@ -1,0 +1,806 @@
+{
+ "topic": "mrheu-vasculitis",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1041",
+   "q": "A 48-year-old man presents with recurrent epistaxis, chronic sinusitis, saddle nose deformity, cough with haemoptysis, and rapidly rising serum creatinine. Urinalysis reveals 3+ blood and red cell casts. Which autoantibody is most characteristic of this condition?",
+   "o": [
+    "c-ANCA directed against proteinase 3 (PR3)",
+    "p-ANCA directed against myeloperoxidase (MPO)",
+    "Anti-glomerular basement membrane (anti-GBM) antibody",
+    "Anti-centromere antibody"
+   ],
+   "a": 0,
+   "exp": "Granulomatosis with polyangiitis (GPA) classically presents with upper airway destruction (recurrent sinusitis, saddle nose), pulmonary involvement (nodules, haemoptysis) and glomerulonephritis, strongly associated with c-ANCA (anti-PR3) antibodies (>90% of active cases).",
+   "r": [
+    "Correct: c-ANCA (anti-PR3) is the diagnostic hallmark of granulomatosis with polyangiitis.",
+    "p-ANCA (anti-MPO) is characteristic of microscopic polyangiitis and EGPA.",
+    "Anti-GBM antibody causes Goodpasture disease (pulmonary-renal syndrome without upper respiratory tract disease).",
+    "Anti-centromere antibody is specific for limited cutaneous systemic sclerosis."
+   ],
+   "kp": "c-ANCA (anti-PR3) is the serological hallmark of granulomatosis with polyangiitis (GPA).",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "vasculitis",
+    "gpa",
+    "anca"
+   ],
+   "source": "EULAR recommendations for the management of ANCA-associated vasculitis",
+   "x": {
+    "key": "c-ANCA (anti-PR3) is characteristic of granulomatosis with polyangiitis.",
+    "others": {
+     "B": "p-ANCA characterizes MPA and EGPA.",
+     "C": "Anti-GBM causes Goodpasture syndrome without ENT disease.",
+     "D": "Anti-centromere indicates limited scleroderma."
+    },
+    "pearl": "The combination of upper airway, lower airway, and renal involvement strongly distinguishes GPA from other vasculitides.",
+    "clues": "Recurrent sinusitis, saddle nose, haemoptysis, active urinary sediment, renal impairment.",
+    "ddx": "Microscopic polyangiitis, Goodpasture disease, invasive fungal sinusitis, cocaine-induced midline destructive lesion.",
+    "mech": "Neutrophil priming triggers translocation of PR3 to cell surfaces; anti-PR3 antibodies activate neutrophils, releasing cytotoxic enzymes and NETs.",
+    "lo": "Identify the autoantibody diagnostic of granulomatosis with polyangiitis.",
+    "rev": "c-ANCA directed against PR3 is highly sensitive and specific for active GPA.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review ANCA vasculitis classification and serology."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR ANCA guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1042",
+   "q": "A 52-year-old woman presents with severe alveolar haemorrhage and rapidly progressive glomerulonephritis secondary to newly diagnosed GPA. What is the evidence-based first-line remission-induction regimen recommended by international guidelines?",
+   "o": [
+    "High-dose pulsed intravenous corticosteroids plus either rituximab or cyclophosphamide",
+    "Oral methotrexate monotherapy without corticosteroids",
+    "Azathioprine monotherapy",
+    "Intravenous immunoglobulin monotherapy"
+   ],
+   "a": 0,
+   "exp": "For life- or organ-threatening ANCA-associated vasculitis, EULAR guidelines mandate remission induction with high-dose intravenous glucocorticoids combined with either rituximab or cyclophosphamide, followed by structured glucocorticoid tapering.",
+   "r": [
+    "Correct: High-dose pulsed steroids plus rituximab or cyclophosphamide is the standard induction regimen.",
+    "Methotrexate monotherapy is inadequate for life-threatening organ disease.",
+    "Azathioprine is a maintenance agent, not an induction therapy for severe disease.",
+    "IVIG is reserved as adjunctive therapy in refractory cases, not first-line induction."
+   ],
+   "kp": "Induce remission in severe organ-threatening ANCA vasculitis with pulsed steroids plus rituximab or cyclophosphamide.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "vasculitis",
+    "induction",
+    "rituximab"
+   ],
+   "source": "EULAR recommendations for the management of ANCA-associated vasculitis",
+   "x": {
+    "key": "Pulse steroids plus rituximab or cyclophosphamide induces remission in severe AAV.",
+    "others": {
+     "B": "Methotrexate is for mild non-organ-threatening disease.",
+     "C": "Azathioprine is for maintenance.",
+     "D": "IVIG is adjunctive only."
+    },
+    "pearl": "The RAVE trial demonstrated non-inferiority of rituximab to cyclophosphamide for induction in severe AAV.",
+    "clues": "Severe alveolar haemorrhage, rapidly progressive glomerulonephritis, new GPA.",
+    "ddx": "Pulmonary renal syndrome, Goodpasture syndrome, catastrophic antiphospholipid syndrome.",
+    "mech": "B-cell depletion with rituximab or alkylating DNA damage with cyclophosphamide halts pathogenic autoantibody production.",
+    "lo": "State the first-line remission-induction regimen for organ-threatening ANCA vasculitis.",
+    "rev": "Induce remission with high-dose steroids plus rituximab or cyclophosphamide in severe AAV.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review immunosuppressive induction protocols."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR AAV guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "rituximab",
+      "cyclophosphamide"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1043",
+   "q": "A 71-year-old woman presents to the acute medical unit with a severe right-sided temporal headache, scalp tenderness when brushing her hair, and jaw claudication when eating tough food. ESR is 88 mm/h. What is the most critical immediate step in management?",
+   "o": [
+    "Commence immediate high-dose oral prednisolone before scheduling temporal artery biopsy",
+    "Wait for temporal artery biopsy results before starting corticosteroids",
+    "Order a non-contrast CT brain and discharge with analgesia",
+    "Start low-dose aspirin and arrange outpatient rheumatology review in two weeks"
+   ],
+   "a": 0,
+   "exp": "Suspected giant cell arteritis requires immediate commencement of high-dose corticosteroids (e.g. prednisolone 40-60 mg daily, or IV methylprednisolone if visual symptoms are present) to prevent irreversible visual loss from anterior ischaemic optic neuropathy. Histology on temporal artery biopsy remains positive for up to 1-2 weeks after steroid initiation.",
+   "r": [
+    "Correct: Immediate high-dose corticosteroid therapy is mandatory to avert irreversible visual loss.",
+    "Never delay corticosteroids for biopsy; unrecognised GCA causes sudden permanent blindness.",
+    "CT brain will not detect temporal arteritis and delaying steroids is dangerous.",
+    "Aspirin alone provides no protection against optic nerve infarction in active GCA."
+   ],
+   "kp": "Start high-dose steroids immediately in suspected giant cell arteritis without waiting for biopsy.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gca",
+    "emergency",
+    "steroids"
+   ],
+   "source": "British Society for Rheumatology guideline on diagnosis and treatment of giant cell arteritis",
+   "x": {
+    "key": "Immediate high-dose steroids prevent permanent blindness in GCA.",
+    "others": {
+     "B": "Waiting for biopsy risks irreversible blindness.",
+     "C": "CT brain does not detect arteritis.",
+     "D": "Aspirin is not disease-modifying."
+    },
+    "pearl": "Jaw claudication carries the highest specificity of all individual clinical symptoms for giant cell arteritis.",
+    "clues": "Age >50, temporal headache, scalp tenderness, jaw claudication, ESR >50.",
+    "ddx": "Migraine, trigeminal neuralgia, temporomandibular joint dysfunction, acute angle-closure glaucoma.",
+    "mech": "Granulomatous vasculitis of medium and large branches of the ophthalmic and ciliary arteries causes ischaemic optic neuropathy.",
+    "lo": "Recognise the urgent emergency management of suspected giant cell arteritis.",
+    "rev": "Immediately initiate high-dose corticosteroids in suspected giant cell arteritis.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review giant cell arteritis guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR GCA guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1044",
+   "q": "A 42-year-old man with severe, poorly controlled adult-onset asthma presents with bilateral foot drop (mononeuritis multiplex), palpable purpura, and marked peripheral blood eosinophilia (eosinophil count 4.8 x 10^9/L). Which vasculitic disorder is most likely?",
+   "o": [
+    "Eosinophilic granulomatosis with polyangiitis (EGPA / Churg-Strauss)",
+    "Granulomatosis with polyangiitis (GPA)",
+    "Henoch-Schonlein purpura (IgA vasculitis)",
+    "Polyarteritis nodosa (PAN)"
+   ],
+   "a": 0,
+   "exp": "The triad of adult-onset asthma, marked peripheral eosinophilia (>1.5 x 10^9/L), and systemic vasculitis presenting as mononeuritis multiplex and palpable purpura is pathognomonic of eosinophilic granulomatosis with polyangiitis (EGPA). p-ANCA is positive in approximately 40-50% of cases.",
+   "r": [
+    "Correct: Asthma, peripheral eosinophilia and mononeuritis multiplex characterize EGPA.",
+    "GPA features sinonasal bone erosion and c-ANCA without marked peripheral eosinophilia or asthma.",
+    "IgA vasculitis presents with abdominal pain, arthritis, purpura and IgA nephropathy, not asthma.",
+    "Classical PAN causes medium-vessel aneurysms and is not associated with asthma or eosinophilia."
+   ],
+   "kp": "EGPA presents with severe asthma, peripheral eosinophilia, and systemic vasculitis / mononeuritis multiplex.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "egpa",
+    "churg-strauss",
+    "eosinophilia"
+   ],
+   "source": "EULAR recommendations for the management of ANCA-associated vasculitis: EGPA consensus",
+   "x": {
+    "key": "Asthma, eosinophilia and mononeuritis multiplex define EGPA.",
+    "others": {
+     "B": "GPA lacks prominent peripheral eosinophilia.",
+     "C": "IgA vasculitis features palpable purpura without asthma.",
+     "D": "PAN lacks asthma and eosinophilia."
+    },
+    "pearl": "Cardiac involvement (eosinophilic myocarditis) is the leading cause of mortality in EGPA.",
+    "clues": "Adult-onset asthma, foot drop, palpable purpura, eosinophilia >1.5.",
+    "ddx": "Hypereosinophilic syndrome, allergic bronchopulmonary aspergillosis, parasitic infection.",
+    "mech": "Eosinophil-mediated cytotoxic tissue damage combined with necrotising small-vessel vasculitis.",
+    "lo": "Identify the clinical triad of eosinophilic granulomatosis with polyangiitis.",
+    "rev": "EGPA combines asthma, peripheral eosinophilia, and necrotising small-vessel vasculitis.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review eosinophilic lung diseases and vasculitis."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR EGPA consensus",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1045",
+   "q": "A 24-year-old Asian woman presents with malaise, arm claudication during exertion, light-headedness, and unequal upper limb blood pressures (right arm 148/86 mmHg, left arm 92/58 mmHg). Radial pulse is absent on the left. What is the diagnosis?",
+   "o": [
+    "Takayasu arteritis",
+    "Giant cell arteritis",
+    "Kawasaki disease",
+    "Coarctation of the aorta"
+   ],
+   "a": 0,
+   "exp": "Takayasu arteritis is a chronic granulomatous large-vessel vasculitis predominantly affecting the aorta and its major primary branches in young females (<40 years old). It causes vessel stenosis, absent peripheral pulses ('pulseless disease'), limb claudication, and blood pressure discrepancy between limbs.",
+   "r": [
+    "Correct: Takayasu arteritis causes aortic branch stenosis, absent pulses and limb claudication in young females.",
+    "Giant cell arteritis typically affects patients older than 50 years.",
+    "Kawasaki disease is an acute medium-vessel vasculitis of young children affecting coronary arteries.",
+    "Coarctation causes upper-versus-lower limb blood pressure discrepancy, not asymmetrical upper limb discrepancy."
+   ],
+   "kp": "Takayasu arteritis presents with absent peripheral pulses and limb claudication in young women.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "takayasu",
+    "large-vessel"
+   ],
+   "source": "EULAR recommendations for the management of large vessel vasculitis",
+   "x": {
+    "key": "Takayasu arteritis causes pulseless disease and branch stenosis in young women.",
+    "others": {
+     "B": "GCA occurs in patients older than 50.",
+     "C": "Kawasaki disease is a paediatric disorder.",
+     "D": "Coarctation causes radio-femoral delay."
+    },
+    "pearl": "CT angiography or MR angiography is the diagnostic modality of choice to visualize aortic arch vessel stenosis.",
+    "clues": "Young female, arm claudication, unequal arm BP, absent radial pulse.",
+    "ddx": "Atherosclerotic subclavian stenosis, thoracic outlet syndrome, aortic dissection.",
+    "mech": "Cell-mediated granulomatous inflammation of the aortic adventitia and media leading to fibrous lumen obliteration.",
+    "lo": "Recognise the presentation of Takayasu arteritis in young females.",
+    "rev": "Takayasu arteritis is a large-vessel vasculitis causing pulse loss and claudication in young adults.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review large vessel vasculitides."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR Large Vessel guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1046",
+   "q": "A 55-year-old man with a history of chronic hepatitis B infection presents with severe abdominal pain following meals, hypertension, livedo reticularis, testicular pain, and bilateral foot drop. ANCA testing is negative. Mesenteric angiography shows multiple microaneurysms. What is the diagnosis?",
+   "o": [
+    "Polyarteritis nodosa (PAN)",
+    "Microscopic polyangiitis (MPA)",
+    "Granulomatosis with polyangiitis (GPA)",
+    "Henoch-Schonlein purpura"
+   ],
+   "a": 0,
+   "exp": "Classical polyarteritis nodosa (PAN) is a necrotising vasculitis of medium-sized arteries, classically associated with hepatitis B virus infection. It spares the pulmonary circulation and glomeruli, presenting with mesenteric ischaemia, renovascular hypertension, mononeuritis multiplex, and visceral microaneurysms on angiography.",
+   "r": [
+    "Correct: PAN causes medium-vessel necrotising arteritis, microaneurysms, and is linked to hepatitis B.",
+    "MPA is an ANCA-associated small-vessel vasculitis causing glomerulonephritis.",
+    "GPA is ANCA-positive and involves the respiratory tract.",
+    "Henoch-Schonlein purpura is an IgA-mediated small-vessel vasculitis in children and young adults."
+   ],
+   "kp": "Polyarteritis nodosa is a medium-vessel vasculitis associated with hepatitis B, microaneurysms and sparing of the lungs.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pan",
+    "hepatitis-b",
+    "microaneurysms"
+   ],
+   "source": "Oxford Textbook of Rheumatology: Polyarteritis nodosa",
+   "x": {
+    "key": "PAN involves medium arteries, microaneurysms and links to hepatitis B.",
+    "others": {
+     "B": "MPA is small vessel and ANCA positive.",
+     "C": "GPA involves the lungs and c-ANCA.",
+     "D": "Henoch-Schonlein features IgA deposition."
+    },
+    "pearl": "PAN characteristically spares the pulmonary vascular bed, distinguishing it from ANCA-associated vasculitides.",
+    "clues": "Hepatitis B, postprandial abdominal pain, livedo reticularis, mononeuritis multiplex, negative ANCA.",
+    "ddx": "Cholesterol atheroembolism, cryoglobulinaemic vasculitis, microscopic polyangiitis.",
+    "mech": "Transmural fibrinoid necrosis of muscular arteries leading to luminal thrombosis and weakening of vessel walls into microaneurysms.",
+    "lo": "Differentiate classical polyarteritis nodosa from small-vessel vasculitides.",
+    "rev": "Classical PAN is an ANCA-negative medium-vessel vasculitis linked to hepatitis B with visceral microaneurysms.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review medium-vessel vasculitis."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Rheumatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against standard criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1047",
+   "q": "A 50-year-old woman with chronic hepatitis C infection presents with palpable purpura on her lower legs, arthralgias, peripheral neuropathy and membranoproliferative glomerulonephritis. Complement C4 is profoundly low (<0.05 g/L). What is the underlying vasculitic mechanism?",
+   "o": [
+    "Mixed cryoglobulinaemic vasculitis mediated by immune complexes",
+    "c-ANCA autoantibody cytotoxicity",
+    "Direct viral lysis of endothelial cells",
+    "Anti-GBM antibody deposition"
+   ],
+   "a": 0,
+   "exp": "Mixed cryoglobulinaemia (Type II and III) is strongly associated with hepatitis C infection. Monoclonal or polyclonal IgM rheumatoid factor complexes with polyclonal IgG against HCV antigens, precipitating at cold temperatures. It manifests as Meltzer triad (purpura, arthralgia, weakness), low C4 complement, and glomerulonephritis.",
+   "r": [
+    "Correct: Mixed cryoglobulinaemia is driven by cold-precipitable immune complexes and complement consumption in hepatitis C.",
+    "c-ANCA is responsible for GPA, not hepatitis C-associated vasculitis.",
+    "Pathology is driven by immune-complex vasculitis, not direct viral cytolysis.",
+    "Anti-GBM antibodies cause Goodpasture disease."
+   ],
+   "kp": "Mixed cryoglobulinaemia features palpable purpura, hepatitis C association and profoundly low C4 complement.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "cryoglobulinaemia",
+    "hepatitis-c",
+    "purpura"
+   ],
+   "source": "EULAR recommendations for the management of cryoglobulinaemic vasculitis",
+   "x": {
+    "key": "Mixed cryoglobulinaemia causes low C4, palpable purpura and links to HCV.",
+    "others": {
+     "B": "c-ANCA is for GPA.",
+     "C": "Damage is immune complex-mediated.",
+     "D": "Anti-GBM causes Goodpasture syndrome."
+    },
+    "pearl": "Profoundly low serum C4 with normal or mildly low C3 is the classical complement signature of cryoglobulinaemia.",
+    "clues": "Hepatitis C, palpable purpura, low C4, glomerulonephritis.",
+    "ddx": "IgA vasculitis, lupus nephritis, post-streptococcal glomerulonephritis.",
+    "mech": "Immune complexes containing IgM rheumatoid factor, IgG, and HCV RNA deposit in post-capillary venules and activate classical complement.",
+    "lo": "Describe the clinical and immunological features of cryoglobulinaemic vasculitis.",
+    "rev": "Mixed cryoglobulinaemia is an immune-complex vasculitis linked to hepatitis C with low C4.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review immune-complex vasculitides."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR Cryoglobulinaemia guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR guidance."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1048",
+   "q": "A 68-year-old man treated for biopsy-proven giant cell arteritis with prednisolone experiences recurrent headaches and jaw claudication whenever the daily steroid dose is tapered below 15 mg. Which biologic agent is licensed and recommended by NICE as steroid-sparing therapy?",
+   "o": [
+    "Tocilizumab (IL-6 receptor antagonist)",
+    "Infliximab (TNF-alpha inhibitor)",
+    "Rituximab (anti-CD20 monoclonal antibody)",
+    "Anakinra (IL-1 receptor antagonist)"
+   ],
+   "a": 0,
+   "exp": "Tocilizumab, an IL-6 receptor antagonist, is licensed and recommended by NICE (TA518) in combination with a tapering course of glucocorticoids for relapsing or refractory giant cell arteritis, substantially reducing cumulative steroid exposure.",
+   "r": [
+    "Correct: Tocilizumab (IL-6 inhibitor) is licensed for relapsing or refractory giant cell arteritis.",
+    "TNF inhibitors like infliximab have proven ineffective in clinical trials for giant cell arteritis.",
+    "Rituximab is indicated in ANCA-associated vasculitis, not giant cell arteritis.",
+    "Anakinra is not standard therapy for giant cell arteritis."
+   ],
+   "kp": "Tocilizumab is the licensed steroid-sparing biologic for relapsing giant cell arteritis.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gca",
+    "tocilizumab",
+    "biologics"
+   ],
+   "source": "NICE Technology Appraisal TA518: Tocilizumab for giant cell arteritis",
+   "x": {
+    "key": "Tocilizumab is the licensed biologic for relapsing or refractory GCA.",
+    "others": {
+     "B": "TNF inhibitors failed in GCA trials.",
+     "C": "Rituximab is for ANCA vasculitis.",
+     "D": "Anakinra is for autoinflammatory syndromes."
+    },
+    "pearl": "IL-6 drives the systemic acute phase response in GCA; blocking it rapidly normalises ESR and CRP.",
+    "clues": "Biopsy-proven GCA, steroid-dependent relapses upon tapering.",
+    "ddx": "Steroid resistance, large-vessel aortic involvement, polymyalgia relapse.",
+    "mech": "Binds soluble and membrane-bound IL-6 receptors, inhibiting downstream inflammatory signaling in vascular walls.",
+    "lo": "Identify the licensed steroid-sparing biologic for giant cell arteritis.",
+    "rev": "Tocilizumab is recommended by NICE for relapsing giant cell arteritis.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review biologic therapies in vasculitis."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE TA518",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "tocilizumab"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE TA518."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1049",
+   "q": "A 70-year-old woman is referred with a suspected diagnosis of giant cell arteritis. Before temporal artery biopsy can be scheduled, colour Doppler ultrasound of the temporal arteries is performed. What finding on ultrasound is characteristic of active vascular inflammation?",
+   "o": [
+    "A non-compressible hypoechoic halo sign around the vessel lumen",
+    "Extensive calcification of the arterial intima",
+    "High-velocity turbulent flow with aneurysmal dilation",
+    "Total absence of the vessel on B-mode imaging"
+   ],
+   "a": 0,
+   "exp": "On colour Doppler ultrasound, active giant cell arteritis shows the 'halo sign': a non-compressible, homogeneous hypoechoic ring surrounding the arterial lumen representing transmural arterial wall oedema.",
+   "r": [
+    "Correct: The halo sign (hypoechoic non-compressible wall oedema) is characteristic on Doppler ultrasound.",
+    "Calcification reflects chronic atherosclerosis, not acute vasculitis.",
+    "Aneurysmal dilation is not the hallmark of acute temporal arteritis.",
+    "Absence of vessel imaging suggests anatomical variation or technical failure."
+   ],
+   "kp": "The halo sign (non-compressible hypoechoic vessel wall oedema) on Doppler ultrasound confirms GCA.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "gca",
+    "ultrasound",
+    "halo-sign"
+   ],
+   "source": "EULAR recommendations for the use of imaging in large vessel vasculitis",
+   "x": {
+    "key": "Halo sign on temporal Doppler ultrasound indicates acute GCA.",
+    "others": {
+     "B": "Calcification indicates atherosclerosis.",
+     "C": "Aneurysms do not define GCA.",
+     "D": "Absence is technical."
+    },
+    "pearl": "Bilateral temporal and axillary artery ultrasound can achieve diagnostic accuracy comparable to temporal artery biopsy in experienced centres.",
+    "clues": "Suspected GCA, Doppler ultrasound of temporal arteries.",
+    "ddx": "Atherosclerotic occlusion, superficial thrombophlebitis.",
+    "mech": "Intense transmural infiltration of lymphocytes and macrophages causes concentric arterial wall swelling.",
+    "lo": "Recognise the ultrasound halo sign in the diagnosis of giant cell arteritis.",
+    "rev": "The hypoechoic halo sign on temporal ultrasound indicates active giant cell arteritis.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review imaging in large vessel vasculitis."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR Imaging guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1050",
+   "q": "A 56-year-old man achieves complete clinical and biochemical remission of GPA following induction with rituximab and glucocorticoids. What is the recommended first-line maintenance therapy to prevent relapse?",
+   "o": [
+    "Scheduled low-dose rituximab infusions or oral azathioprine for at least 24 to 48 months",
+    "Observation with no maintenance medication",
+    "Continuous daily cyclophosphamide indefinitely",
+    "High-dose oral prednisolone monotherapy"
+   ],
+   "a": 0,
+   "exp": "EULAR guidelines recommend maintenance therapy with scheduled low-dose rituximab infusions (e.g. every 6 months) or oral azathioprine/methotrexate, continued for at least 24 to 48 months following remission induction, to prevent vasculitic relapse.",
+   "r": [
+    "Correct: Scheduled rituximab or azathioprine maintenance for 24-48 months prevents relapse.",
+    "Stopping therapy leads to relapse rates exceeding 50% in ANCA vasculitis.",
+    "Indefinite cyclophosphamide causes unacceptable cumulative bladder and myeloid toxicity.",
+    "High-dose steroid monotherapy carries severe long-term toxicity without superior efficacy."
+   ],
+   "kp": "Maintain AAV remission with scheduled rituximab or azathioprine for at least 24 to 48 months.",
+   "t": "mrheu-vasculitis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "vasculitis",
+    "maintenance",
+    "relapse"
+   ],
+   "source": "EULAR recommendations for the management of ANCA-associated vasculitis",
+   "x": {
+    "key": "Rituximab or azathioprine maintenance for 24-48 months prevents AAV relapse.",
+    "others": {
+     "B": "Observation leads to high relapse rates.",
+     "C": "Continuous cyclophosphamide causes bladder cancer.",
+     "D": "High-dose steroid causes osteoporosis and diabetes."
+    },
+    "pearl": "PR3-ANCA positivity confers a significantly higher risk of relapse compared to MPO-ANCA.",
+    "clues": "Remission achieved in GPA, deciding maintenance strategy.",
+    "ddx": "Vasculitic relapse, drug-induced cytopenia, secondary infection.",
+    "mech": "Suppression of memory B-cell expansion and plasma cell differentiation maintains immunological tolerance.",
+    "lo": "State the maintenance duration and drug options for ANCA-associated vasculitis.",
+    "rev": "Maintain AAV remission with rituximab or azathioprine for at least 24 to 48 months.",
+    "next": {
+     "concept": "mrheu-vasculitis",
+     "action": "review",
+     "text": "Review long-term vasculitis management."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR AAV guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "rituximab",
+      "azathioprine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-vasculitis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR guidelines."
+     }
+    }
+   }
+  }
+ ]
+}

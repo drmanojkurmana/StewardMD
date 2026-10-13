@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "der-viral-parasitic",
+ "subject": "plab-dermatology",
+ "title": "Viral dermatoses and ectoparasitic infestations: herpes, scabies, molluscum",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Herpes zoster** results from reactivation of latent varicella-zoster virus within sensory dorsal root or cranial nerve ganglia. Patients present with dermatomal prodromal burning pain, followed by grouped erythematous vesicles in a unilateral, non-crossing dermatomal distribution. Commencing oral aciclovir or valaciclovir within seventy-two hours of rash onset accelerates healing and reduces postherpetic neuralgia.",
+   "say": "Herpes zoster causes unilateral dermatomal vesicular eruption. Start oral antivirals within seventy-two hours to reduce postherpetic neuralgia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dermatomal prodrome"
+     },
+     {
+      "id": "b",
+      "label": "Grouped vesicles emerge"
+     },
+     {
+      "id": "c",
+      "label": "Early oral antiviral within 72h"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Herpes zoster ophthalmicus** involves the ophthalmic division of the trigeminal nerve. The presence of vesicles on the nasal tip, known as Hutchinson sign, signifies involvement of the nasociliary branch and carries high risk of sight-threatening corneal ulceration, anterior uveitis, and secondary glaucoma. Urgent same-day ophthalmological evaluation and prompt systemic antiviral therapy are mandatory.",
+   "say": "Hutchinson sign on the nose tip indicates nasociliary involvement in herpes zoster ophthalmicus, requiring urgent ophthalmology assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hutchinson sign positive",
+     "points": [
+      "Vesicles on nasal tip or side",
+      "Nasociliary branch involved",
+      "High risk of corneal ulceration"
+     ]
+    },
+    "right": {
+     "title": "Urgent actions",
+     "points": [
+      "Same-day slit-lamp examination",
+      "Immediate systemic antiviral",
+      "Mydriatic and topical steroid if uveitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Eczema herpeticum** is a severe dermatological emergency arising from widespread herpes simplex virus dissemination across compromised skin in atopic eczema. Patients present with high fever, systemic toxicity, and a sudden outbreak of monomorphic, punched-out umbilicated vesicles and erosions. Immediate systemic aciclovir therapy is lifesaving to avert fatal systemic viremia.",
+   "say": "Eczema herpeticum presents with punched-out umbilicated vesicles and fever in atopic eczema. Start immediate systemic aciclovir.",
+   "vis": null
+  },
+  {
+   "tx": "**Scabies infestation** is caused by the mite Sarcoptes scabiei var. hominis. Patients suffer intense nocturnal pruritus and linear burrows in the finger web spaces, flexor wrists, axillae and genitalia. Diagnosis requires clinical recognition of burrows or dermoscopic identification of the delta-wing jet sign. Treating all household and sexual contacts simultaneously is essential to prevent reinfestation.",
+   "say": "Scabies causes intense nocturnal itch and web-space burrows. Treat all household contacts simultaneously with permethrin cream.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Hallmark lesion",
+     "First-line therapy"
+    ],
+    "rows": [
+     [
+      "Scabies",
+      "Linear burrows, delta sign",
+      "Permethrin 5% cream (repeat at 7 days)"
+     ],
+     [
+      "Herpes zoster",
+      "Unilateral dermatomal vesicles",
+      "Oral aciclovir within 72 hours"
+     ],
+     [
+      "Molluscum contagiosum",
+      "Umbilicated pearly papules",
+      "Reassurance, self-limiting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Management of scabies** requires five percent permethrin dermal cream applied thoroughly to the entire body from the neck down, including the scalp and face in infants and elderly individuals. The cream is left on for eight to twelve hours before washing off, and the entire application is repeated after seven days to eradicate newly hatched nymphs.",
+   "say": "Apply permethrin 5% cream from neck down for eight to twelve hours, repeating after seven days. Wash bed linen at high temperatures.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1111",
+  "mk-gap1113",
+  "mk-gap1115"
+ ],
+ "src": [
+  "kb-reference-scabies"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

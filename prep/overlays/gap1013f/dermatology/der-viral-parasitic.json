@@ -1,0 +1,812 @@
+{
+ "topic": "der-viral-parasitic",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1111",
+   "q": "A 64-year-old man presents with two days of intense burning pain on the right side of his chest, followed today by a crop of grouped vesicles on an erythematous base strictly limited to the right T4 dermatome. What is the most appropriate management according to NICE guidelines?",
+   "o": [
+    "Start oral aciclovir within 72 hours of rash onset",
+    "Reassure that no antiviral therapy is ever indicated after rash appears",
+    "Prescribe topical hydrocortisone cream",
+    "Administer intravenous immunoglobulin immediately"
+   ],
+   "a": 0,
+   "exp": "NICE guidelines recommend oral antiviral therapy (such as aciclovir, valaciclovir, or famciclovir) started within 72 hours of rash onset in patients aged >=50, those with moderate/severe pain, or those with non-truncal/ophthalmic involvement, to accelerate healing and reduce the severity and duration of postherpetic neuralgia.",
+   "r": [
+    "Correct: Start oral aciclovir within 72 hours to accelerate resolution and reduce postherpetic neuralgia.",
+    "Antiviral therapy within 72 hours is strongly indicated for adults over 50.",
+    "Topical steroids are contraindicated and worsen viral cutaneous proliferation.",
+    "IVIG is not indicated for uncomplicated herpes zoster."
+   ],
+   "kp": "Start oral antivirals within 72 hours of herpes zoster rash onset in patients aged 50 or over.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "herpes-zoster",
+    "shingles",
+    "aciclovir"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Shingles (herpes zoster)",
+   "x": {
+    "key": "Oral aciclovir within 72 hours accelerates healing and reduces pain in zoster.",
+    "others": {
+     "B": "Antivirals are indicated within 72 hours.",
+     "C": "Steroids exacerbate viral replication.",
+     "D": "IVIG is unindicated."
+    },
+    "pearl": "Postherpetic neuralgia is defined as dermatomal pain persisting for more than 90 days after rash onset.",
+    "clues": "Unilateral dermatomal burning pain, grouped vesicles, T4 dermatome, 2 days duration.",
+    "ddx": "Herpes simplex, contact dermatitis, bullous pemphigoid, erysipelas.",
+    "mech": "Varicella zoster virus reactivates in the dorsal root ganglion, travels antidromically along sensory axons to the epidermis.",
+    "lo": "State the indications and timing for oral antiviral therapy in herpes zoster.",
+    "rev": "Initiate oral antivirals within 72 hours of rash onset for herpes zoster in patients >=50.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review NICE CKS on shingles."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Shingles",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [
+      "aciclovir"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1112",
+   "q": "A 68-year-old woman presents with painful vesicles on her right forehead and upper eyelid. On examination, there is a vesicle on the tip of her nose. What does this physical sign indicate?",
+   "o": [
+    "Hutchinson sign, indicating nasociliary nerve involvement and high risk of ocular complications",
+    "Nikolsky sign, indicating toxic epidermal necrolysis",
+    "Auspitz sign, indicating plaque psoriasis",
+    "Asboe-Hansen sign, indicating pemphigus vulgaris"
+   ],
+   "a": 0,
+   "exp": "Hutchinson sign in herpes zoster ophthalmicus refers to vesicles on the tip, side or root of the nose, indicating involvement of the external nasal branch of the nasociliary nerve (a branch of the ophthalmic V1 nerve). The nasociliary nerve also innervates the cornea and globe; its involvement predicts a high risk of ocular complications, requiring urgent same-day ophthalmological slit-lamp examination.",
+   "r": [
+    "Correct: Hutchinson sign signifies nasociliary involvement and high risk of ocular complications.",
+    "Nikolsky sign refers to epidermal shearing on lateral pressure in blistering disorders.",
+    "Auspitz sign refers to pinpoint bleeding on removing psoriasis scale.",
+    "Asboe-Hansen sign is lateral bulla extension on pressure in pemphigus."
+   ],
+   "kp": "Hutchinson sign (vesicles on nasal tip) indicates nasociliary involvement in herpes zoster ophthalmicus.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "herpes-zoster-ophthalmicus",
+    "hutchinson-sign"
+   ],
+   "source": "Royal College of Ophthalmologists / NICE CKS: Shingles",
+   "x": {
+    "key": "Hutchinson sign indicates nasociliary involvement in herpes zoster.",
+    "others": {
+     "B": "Nikolsky sign indicates blistering skin sloughing.",
+     "C": "Auspitz sign is in psoriasis.",
+     "D": "Asboe-Hansen is in pemphigus."
+    },
+    "pearl": "Even in the absence of Hutchinson sign, eye involvement can still occur in herpes zoster ophthalmicus.",
+    "clues": "Right forehead vesicles, upper eyelid vesicles, vesicle on nasal tip.",
+    "ddx": "Cellulitis, contact dermatitis, erysipelas, impetigo.",
+    "mech": "VZV reactivation in the trigeminal ganglion extends down the nasociliary branch of the ophthalmic division.",
+    "lo": "Recognise Hutchinson sign and its prognostic significance in herpes zoster ophthalmicus.",
+    "rev": "Hutchinson sign predicts ocular complications in herpes zoster ophthalmicus.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review herpes zoster ophthalmicus emergency pathways."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "RCOphth Shingles guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [
+      "aciclovir"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against RCOphth guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1113",
+   "q": "A 4-year-old child with severe atopic eczema presents with high fever, lethargy, and a sudden eruption of widespread, clustered, punched-out umbilicated vesicles and erosions over his face and neck. What is the diagnosis and urgent treatment?",
+   "o": [
+    "Eczema herpeticum; treat urgently with systemic aciclovir",
+    "Impetigo; treat with oral flucloxacillin only",
+    "Chickenpox; treat with calamine lotion only",
+    "Eczema flare; apply potent topical steroids liberally"
+   ],
+   "a": 0,
+   "exp": "Eczema herpeticum (Kaposi varicelliform eruption) is a dermatological emergency caused by HSV infection supervening on atopic eczema. It presents with fever, lymphadenopathy, and clusters of monomorphic, punched-out umbilicated vesicles that ulcerate into erosions. Immediate systemic antiviral therapy (oral or IV aciclovir) is lifesaving to prevent disseminated viremia and ocular complications.",
+   "r": [
+    "Correct: Eczema herpeticum is a dermatological emergency requiring immediate systemic aciclovir.",
+    "Impetigo features honey-coloured crusted lesions without monomorphic punched-out umbilicated vesicles.",
+    "Chickenpox produces generalized pleomorphic lesions at different stages, not monomorphic eruption localized to eczema.",
+    "Topical steroids are strictly contraindicated in active viral infections and can cause fatal dissemination."
+   ],
+   "kp": "Eczema herpeticum presents with fever and punched-out vesicles in atopic eczema; treat urgently with systemic aciclovir.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "eczema-herpeticum",
+    "emergency",
+    "aciclovir"
+   ],
+   "source": "NICE guideline CG57: Atopic eczema in under 12s: diagnosis and management",
+   "x": {
+    "key": "Eczema herpeticum requires immediate systemic aciclovir.",
+    "others": {
+     "B": "Impetigo has honey-coloured crusts.",
+     "C": "Chickenpox has generalized pleomorphic lesions.",
+     "D": "Potent steroids exacerbate viral dissemination."
+    },
+    "pearl": "Secondary bacterial superinfection with Staphylococcus aureus is common, but antiviral therapy takes absolute priority.",
+    "clues": "Atopic child, sudden fever, punched-out umbilicated vesicles and erosions.",
+    "ddx": "Bacterial impetigo, primary varicella, hand-foot-and-mouth disease.",
+    "mech": "Impaired stratum corneum barrier and depleted antimicrobial peptides in atopic skin permit rapid intraepidermal HSV dissemination.",
+    "lo": "Recognise eczema herpeticum as a medical emergency requiring prompt antiviral therapy.",
+    "rev": "Eczema herpeticum demands urgent systemic aciclovir.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review NICE guidelines on paediatric atopic eczema emergencies."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CG57",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [
+      "aciclovir"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CG57."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1114",
+   "q": "A 21-year-old university student presents with intense itching that is severely worse at night. Examination reveals erythematous excoriated papules on the wrists, ankles, and penis, along with thin, greyish, thread-like linear tracks in the interdigital web spaces of his fingers. What is the diagnosis?",
+   "o": [
+    "Scabies",
+    "Atopic eczema",
+    "Flea bites",
+    "Pediculosis corporis"
+   ],
+   "a": 0,
+   "exp": "Scabies (Sarcoptes scabiei infestation) is characterized by intense nocturnal pruritus, inflammatory papules in predilection sites (finger webs, wrists, axillae, buttocks, male genitalia), and pathognomonic intraepidermal linear burrows.",
+   "r": [
+    "Correct: Intense nocturnal pruritus and finger web burrows are pathognomonic of scabies.",
+    "Atopic eczema produces ill-defined plaques in flexural folds without linear burrows.",
+    "Flea bites cause grouped intensely pruritic papules on the lower legs without burrows.",
+    "Pediculosis corporis affects homeless individuals with lice residing in clothing seams."
+   ],
+   "kp": "Linear burrows in the finger webs with intense nocturnal itching are pathognomonic of scabies.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "scabies",
+    "infestation",
+    "burrows"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Scabies",
+   "x": {
+    "key": "Linear burrows in finger webs with nocturnal itch confirm scabies.",
+    "others": {
+     "B": "Eczema lacks linear burrows.",
+     "C": "Flea bites lack web burrows.",
+     "D": "Body lice reside in clothing seams."
+    },
+    "pearl": "The 'delta-wing jet sign' on dermoscopy shows the triangular head and anterior legs of the female mite at the burrow terminus.",
+    "clues": "Young adult, nocturnal itching, genital papules, finger web linear burrows.",
+    "ddx": "Atopic dermatitis, papular urticaria, dermatitis herpetiformis, syphilis.",
+    "mech": "Female Sarcoptes mites burrow into the stratum corneum, depositing eggs and faeces that incite a Type IV hypersensitivity reaction.",
+    "lo": "Recognise the clinical hallmarks of scabies infestation.",
+    "rev": "Scabies presents with nocturnal pruritus and linear burrows in finger webs.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review scabies diagnosis and contact tracing."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Scabies",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [
+      "permethrin"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1115",
+   "q": "A patient is diagnosed with classic scabies. What is the recommended first-line treatment regimen according to NICE guidelines?",
+   "o": [
+    "Permethrin 5% dermal cream applied to the whole body from neck down, left for 8-12 hours, repeated after 7 days, with simultaneous treatment of all household contacts",
+    "Oral ivermectin single dose with no contact tracing",
+    "Topical hydrocortisone cream applied to itchy spots for 5 days",
+    "Permethrin 5% cream applied for 30 minutes once only"
+   ],
+   "a": 0,
+   "exp": "NICE CKS recommends permethrin 5% dermal cream as first-line therapy. It must be applied to the entire body (from the neck down; including head and neck in infants, elderly or immunocompromised), left on for 8-12 hours before washing off, and repeated after 7 days to kill mites hatched from eggs. All household and sexual contacts must be treated simultaneously regardless of symptoms.",
+   "r": [
+    "Correct: Permethrin 5% cream applied for 8-12 hours, repeated at 7 days, with simultaneous contact treatment.",
+    "Contact tracing is mandatory to prevent cyclical reinfection.",
+    "Hydrocortisone suppresses itch without killing mites, worsening infestation.",
+    "Applying for only 30 minutes is subtherapeutic and fails to eradicate mites."
+   ],
+   "kp": "Treat scabies with permethrin 5% cream for 8-12 hours, repeat in 7 days, and treat all contacts simultaneously.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "scabies",
+    "permethrin",
+    "contact-tracing"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Scabies",
+   "x": {
+    "key": "Permethrin 5% cream repeated in 7 days with simultaneous contact treatment is first-line.",
+    "others": {
+     "B": "Contact treatment is essential.",
+     "C": "Hydrocortisone promotes mite growth.",
+     "D": "30 minutes application is ineffective."
+    },
+    "pearl": "Post-scabetic itch can persist for up to 2-4 weeks after successful mite eradication due to residual hypersensitivity to mite antigens.",
+    "clues": "Classic scabies, first-line eradication protocol.",
+    "ddx": "Re-infestation, treatment failure, post-scabetic itch, delusion of parasitosis.",
+    "mech": "Permethrin disrupts voltage-gated sodium channels in the mite nervous system, inducing paralysis and death.",
+    "lo": "State the treatment protocol and contact management for scabies.",
+    "rev": "Apply permethrin 5% cream, repeat at 7 days, and treat all close contacts simultaneously.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review NICE CKS on scabies management."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Scabies",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [
+      "permethrin"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1116",
+   "q": "An elderly resident in a nursing home presents with widespread, thick, hyperkeratotic, warty crusted plaques over his hands, elbows and feet with nail dystrophy. He complains of minimal itching. Skin scraping reveals millions of live mites. What form of scabies is this?",
+   "o": [
+    "Crusted (Norwegian) scabies",
+    "Nodular scabies",
+    "Classic scabies",
+    "Bullous scabies"
+   ],
+   "a": 0,
+   "exp": "Crusted (Norwegian) scabies occurs in elderly, debilitated or immunocompromised individuals with impaired cell-mediated immunity. Inability to mount a normal pruritic response permits uncontrolled mite proliferation (millions of mites). It presents with thick, hyperkeratotic, warty plaques and is highly contagious.",
+   "r": [
+    "Correct: Thick hyperkeratotic crusts with millions of mites and minimal itch represent crusted scabies.",
+    "Nodular scabies causes persistent pruritic reddish-brown nodules on the scrotum and axillae.",
+    "Classic scabies features modest numbers of mites (~10-15) and intense itch.",
+    "Bullous scabies mimics bullous pemphigoid in the elderly."
+   ],
+   "kp": "Crusted (Norwegian) scabies presents with thick hyperkeratotic plaques and millions of mites, with minimal itch.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "crusted-scabies",
+    "norwegian-scabies"
+   ],
+   "source": "British Association of Dermatologists: Guidelines on the management of scabies",
+   "x": {
+    "key": "Crusted scabies causes hyperkeratotic plaques with millions of mites and low itch.",
+    "others": {
+     "B": "Nodular scabies features discrete genital nodules.",
+     "C": "Classic scabies has ~15 mites.",
+     "D": "Bullous scabies features tense blisters."
+    },
+    "pearl": "Crusted scabies often requires combined therapy with multiple topical applications and oral ivermectin.",
+    "clues": "Nursing home resident, thick warty crusted plaques, minimal itch, millions of mites.",
+    "ddx": "Psoriasis, Darier disease, pityriasis rubra pilaris, hyperkeratotic eczema.",
+    "mech": "Impaired CD4+ T-cell cell-mediated immunity fails to restrain mite reproduction, leading to massive hyperinfestation.",
+    "lo": "Recognise crusted (Norwegian) scabies and its high transmissibility.",
+    "rev": "Crusted scabies features thick hyperkeratotic plaques with millions of mites in immunocompromised hosts.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review management of crusted scabies outbreaks."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Scabies guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [
+      "permethrin",
+      "ivermectin"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1117",
+   "q": "A 5-year-old child presents with multiple firm, smooth, dome-shaped, pearly-white papules on his trunk and axillae, each featuring a central punctum (umbilication). The lesions are asymptomatic. What is the diagnosis?",
+   "o": [
+    "Molluscum contagiosum",
+    "Viral warts (verruca vulgaris)",
+    "Chickenpox",
+    "Milia"
+   ],
+   "a": 0,
+   "exp": "Molluscum contagiosum is a cutaneous poxvirus infection (molluscum contagiosum virus) common in children. It produces characteristic discrete, firm, smooth, dome-shaped pearly papules with central umbilication. It is self-limiting and typically resolves spontaneously over 12-18 months.",
+   "r": [
+    "Correct: Dome-shaped pearly papules with central umbilication represent molluscum contagiosum.",
+    "Viral warts are rough, hyperkeratotic exophytic papules caused by HPV.",
+    "Chickenpox features pleomorphic crops of pruritic vesicles on an erythematous base.",
+    "Milia are small superficial epidermal keratin cysts on the face without central umbilication."
+   ],
+   "kp": "Molluscum contagiosum presents with smooth, dome-shaped, pearly papules with central umbilication.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "molluscum-contagiosum",
+    "poxvirus",
+    "paediatrics"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Molluscum contagiosum",
+   "x": {
+    "key": "Pearly dome-shaped papules with central umbilication define molluscum contagiosum.",
+    "others": {
+     "B": "Warts are rough and hyperkeratotic.",
+     "C": "Chickenpox has itchy vesicles.",
+     "D": "Milia are tiny facial keratin cysts."
+    },
+    "pearl": "Reassurance is the mainstay of management; avoiding active trauma prevents secondary scarring and autoinoculation.",
+    "clues": "Child, asymptomatic dome-shaped pearly papules with central umbilication.",
+    "ddx": "Verruca vulgaris, cryptococcosis (in HIV), closed comedones, syringoma.",
+    "mech": "Poxvirus replication within keratinocyte cytoplasm produces large eosinophilic intracytoplasmic inclusion bodies (Henderson-Paterson bodies).",
+    "lo": "Recognise molluscum contagiosum and its self-limiting natural history.",
+    "rev": "Molluscum contagiosum features umbilicated pearly papules that resolve spontaneously.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review paediatric viral dermatoses."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Molluscum",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1118",
+   "q": "A mother brings her 7-year-old daughter to the GP following a school outbreak of head lice. Examination confirms live lice on wet combing. What is the recommended first-line chemical-free physical or physical-insecticide approach in the UK?",
+   "o": [
+    "Dimeticone 4% lotion (or wet combing with fine-toothed nit comb)",
+    "Oral ivermectin",
+    "Shaving the entire scalp",
+    "Permethrin shampoo applied for 2 minutes"
+   ],
+   "a": 0,
+   "exp": "NICE CKS recommends dimeticone 4% lotion (a physical agent that coats and suffocates lice, to which resistance cannot develop) or systematic wet combing ('bug busting') with a fine-toothed detector comb on wet, conditioned hair. Malathion or dimeticone is applied twice, 7 days apart.",
+   "r": [
+    "Correct: Dimeticone 4% lotion or wet combing is first-line for head lice.",
+    "Oral ivermectin is reserved for treatment-resistant outbreaks under specialist advice.",
+    "Shaving the scalp causes psychological distress and is unnecessary.",
+    "Short-contact permethrin shampoos have high resistance rates and are no longer first-line."
+   ],
+   "kp": "Dimeticone 4% lotion or regular wet combing is first-line management for head lice.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "head-lice",
+    "dimeticone",
+    "pediculosis"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Head lice",
+   "x": {
+    "key": "Dimeticone 4% lotion or wet combing is first-line for head lice.",
+    "others": {
+     "B": "Oral ivermectin is for refractory cases.",
+     "C": "Shaving the scalp is unnecessary.",
+     "D": "Permethrin shampoo has widespread resistance."
+    },
+    "pearl": "Detection of empty egg shells (nits) alone does not indicate active infestation; only the finding of live moving lice warrants treatment.",
+    "clues": "Child, school head lice outbreak, live lice on wet combing.",
+    "ddx": "Seborrheic dermatitis flakes, hair casts, dandruff.",
+    "mech": "Dimeticone physically coats lice, blocks respiratory spiracles, and disrupts osmotic water regulation.",
+    "lo": "Select the recommended first-line treatment for head lice.",
+    "rev": "Dimeticone 4% lotion or wet combing is first-line for head lice.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review head lice management guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Head lice",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [
+      "dimeticone"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1119",
+   "q": "A 30-year-old man presents with a painful cluster of vesicles on an erythematous base on his upper lip that recur at the exact same location following sun exposure or emotional stress. Tzanck smear reveals multinucleated giant cells. What is the causative pathogen?",
+   "o": [
+    "Herpes simplex virus type 1 (HSV-1)",
+    "Human papillomavirus type 1 (HPV-1)",
+    "Poxvirus",
+    "Coxsackievirus A16"
+   ],
+   "a": 0,
+   "exp": "Recurrent herpes labialis ('cold sores') is caused by herpes simplex virus type 1 (HSV-1). After primary infection, the virus remains latent in the trigeminal sensory ganglion. Reactivation is triggered by ultraviolet light, fever, trauma, or stress. Tzanck smear demonstrates multinucleated epidermal giant cells.",
+   "r": [
+    "Correct: HSV-1 causes recurrent herpes labialis on the lip.",
+    "HPV-1 causes plantar warts (verruca plantaris).",
+    "Poxvirus causes molluscum contagiosum and orf.",
+    "Coxsackievirus A16 causes hand, foot and mouth disease."
+   ],
+   "kp": "HSV-1 causes recurrent herpes labialis, remaining latent in the trigeminal ganglion.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "hsv-1",
+    "herpes-labialis",
+    "cold-sores"
+   ],
+   "source": "NICE Clinical Knowledge Summaries: Herpes simplex - oral",
+   "x": {
+    "key": "HSV-1 causes recurrent cold sores with trigeminal ganglion latency.",
+    "others": {
+     "B": "HPV-1 causes warts.",
+     "C": "Poxvirus causes molluscum.",
+     "D": "Coxsackie causes hand, foot and mouth disease."
+    },
+    "pearl": "Topical aciclovir 5% cream applied during the tingling prodromal phase can reduce lesion duration and severity.",
+    "clues": "Recurrent clustered vesicles on upper lip, sun trigger, multinucleated giant cells.",
+    "ddx": "Aphthous ulcer, impetigo, angular cheilitis, contact dermatitis.",
+    "mech": "HSV-1 undergoes retrograde axonal transport to sensory ganglia during latency and anterograde transport to mucosa during reactivation.",
+    "lo": "Identify the pathogen and clinical features of recurrent herpes labialis.",
+    "rev": "HSV-1 causes recurrent herpes labialis, reactivating from the trigeminal ganglion.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review herpes simplex clinical presentations."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CKS Herpes simplex",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [
+      "aciclovir"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CKS."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1120",
+   "q": "A sheep farmer presents with a solitary, painless, firm, dark red-purple nodule on his right index finger. Over two weeks it has developed a central crust and grey-white halo. He is systemically well and has no lymphadenopathy. What viral zoonosis is this?",
+   "o": [
+    "Orf (contagious pustular dermatitis)",
+    "Cutaneous anthrax",
+    "Herpetic whitlow",
+    "Cowpox"
+   ],
+   "a": 0,
+   "exp": "Orf is a parapoxvirus zoonosis transmitted through direct occupational contact with infected sheep or goats. It presents as a solitary, firm, red-purple nodule on the hand or finger that develops an umbilicated pustular centre, grey-white halo and crust. It is self-limiting and resolves spontaneously over 6-8 weeks without antiviral therapy.",
+   "r": [
+    "Correct: Orf is a self-limiting parapoxvirus nodule contracted from sheep contact.",
+    "Cutaneous anthrax produces marked gelatinous oedema and an expanding black necrotic eschar.",
+    "Herpetic whitlow causes intensely painful clustered vesicles on a red base.",
+    "Cowpox causes ulcerated lesions from domestic cats or rodents."
+   ],
+   "kp": "Orf is a self-limiting parapoxvirus nodule of the hands contracted from contact with sheep.",
+   "t": "der-viral-parasitic",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "orf",
+    "parapoxvirus",
+    "zoonosis"
+   ],
+   "source": "Oxford Textbook of Dermatology: Zoonotic viral infections",
+   "x": {
+    "key": "Orf is a parapoxvirus nodule acquired from sheep that resolves spontaneously.",
+    "others": {
+     "B": "Anthrax causes black eschar with marked oedema.",
+     "C": "Herpetic whitlow is intensely painful.",
+     "D": "Cowpox links to cats and rodents."
+    },
+    "pearl": "Secondary bacterial superinfection can occur, but uncomplicated orf requires only reassurance and clean dry dressing.",
+    "clues": "Sheep farmer, solitary finger red-purple nodule with grey-white halo.",
+    "ddx": "Cutaneous anthrax, herpetic whitlow, pyogenic granuloma, atypical mycobacteria.",
+    "mech": "Parapoxvirus replicates in epidermal keratinocytes, inducing marked epidermal hyperplasia and vascular proliferation.",
+    "lo": "Recognise orf and its clinical management in agricultural workers.",
+    "rev": "Orf causes a self-limiting hand nodule following occupational sheep exposure.",
+    "next": {
+     "concept": "der-viral-parasitic",
+     "action": "review",
+     "text": "Review viral zoonoses in dermatology."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Dermatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "scabies"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-viral-parasitic"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against dermatology reference."
+     }
+    }
+   }
+  }
+ ]
+}
