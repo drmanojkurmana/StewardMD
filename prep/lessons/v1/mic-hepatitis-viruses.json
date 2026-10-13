@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "mic-hepatitis-viruses",
+ "subject": "microbiology",
+ "title": "Hepatitis B, C, D and E: serology, phases and cure",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Five hepatitides** sort by route and chronicity: **A** (faeco oral, never chronic), **B** (blood, sex, vertical, **Dane particle** with surface, core and e antigens, chronicity 90 percent neonates versus 5 percent adults), **C** (blood,IVDU, chronicity 85 percent, no vaccine), **D** (defective, needs B), **E** (water, pregnancy fulminance). **Fulminant** hepatitis (encephalopathy with coagulopathy within weeks) transplants urgently; all others rest with monitoring. Needlestick HBV gets immunoglobulin plus vaccine; HCV gets early PCR.",
+   "say": "Blood, sex, birth: B chronifies babies. Blood alone: C chronifies adults. Water: A and E never chronic.",
+   "vis": null
+  },
+  {
+   "tx": "**HBV serology** reads like clockwork: **HBsAg** (infection), **anti HBs** (immunity), **anti HBc IgM** (acute window), **HBeAg** (replication with infectivity), anti HBe (seroconversion calming). **Window period** (HBsAg gone, anti HBs not yet, lone anti HBc IgM) marks acute clearance; isolated anti HBc means window, occult infection or false positive. Phases run immune tolerant (high DNA, normal ALT), immune active (flares with fibrosis), inactive carrier (low DNA, normal ALT) and reactivation (immunosuppression, pre empt with entecavir). **Tenofovir or entecavir** suppresses; pegylated interferon suits selected young.",
+   "say": "Lone anti HBc IgM is the window. e antigen means replicating and infectious: suppress with tenofovir.",
+   "vis": null
+  },
+  {
+   "tx": "**Hepatitis C** (flavivirus, genotypes 1 and 3 dominating India, **no vaccine** as envelope hypervaries) is now curable: **direct acting antivirals** (**sofosbuvir** with velpatasvir or daclatasvir, 12 weeks, SVR over 95 percent) replaced interferon. Extrahepatic flags (**cryoglobulinaemia** with purpura, porphyria cutanea tarda, lichen planus, NHL) resolve with cure; screen IVDU, transfused before 2002, dialysis and HIV cohorts. Fibroscan stages; cirrhotics need **6 monthly HCC ultrasound with AFP** lifelong even after SVR. Reinfection counsels harm reduction.",
+   "say": "C never vaccinates but now cures in 12 weeks: sofosbuvir based. Cured cirrhosis still watches for cancer.",
+   "vis": null
+  },
+  {
+   "tx": "**HDV** (defective RNA needing HBsAg cloak) worsens B as coinfection (mild together) or **superinfection** (severe flare on chronic B, rapid cirrhosis); pegylated interferon with bulevirtide debates treat while HBV suppression helps indirectly. **HEV** (pregnancy fulminance, ribavirin in chronic transplant cases) was covered in enteric wave. **HCC surveillance** (6 monthly ultrasound with AFP for cirrhosis, chronic B with family history, HDV) catches curable lesions; alcohol with aflatoxin multiplies risk.",
+   "say": "D worsens B worst as superinfection. Every cirrhotic liver images twice yearly for cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Chronic",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "A",
+      "Never",
+      "Support, vaccine"
+     ],
+     [
+      "B",
+      "Babies mostly",
+      "Tenofovir"
+     ],
+     [
+      "C",
+      "Adults mostly",
+      "DAAs cure"
+     ],
+     [
+      "D",
+      "With B",
+      "Interferon"
+     ],
+     [
+      "E",
+      "Transplant only",
+      "Support, deliver"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-161",
+  "bk2-mic-162",
+  "bk2-mic-163",
+  "bk2-mic-164",
+  "bk2-mic-165",
+  "bk2-mic-166",
+  "bk2-mic-167",
+  "bk2-mic-168",
+  "bk2-mic-169",
+  "bk2-mic-170"
+ ],
+ "src": [],
+ "refs": [
+  "Paniker's Textbook of Medical Parasitology 8th Ed + Ananthanarayan and Paniker's Textbook of Microbiology (topic maps; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

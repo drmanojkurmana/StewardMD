@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-cestodes-trematodes",
+ "subject": "microbiology",
+ "title": "Cestodes and trematodes: taenia, hydatid, schistosoma and flukes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Taenia solium** (pork, armed rostellum with hooklets, gravid segments with fewer branches) causes intestinal **taeniasis** (undercooked pork, niclosamide or praziquantel) and, via eggs, **cysticercosis** with **neurocysticercosis** (seizures from parenchymal ring lesions, ocular and subcutaneous nodules, stool carrier in household). Treatment is **albendazole with steroids** (cysticidal inflammation swells fatally without cover) plus antiepileptics; ventricular or ocular disease needs surgery. **T. saginata** (beef, unarmed, motile segments) stays intestinal; **Hymenolepis nana** (dwarf, autoinfection in children, niclosamide) needs family hygiene.",
+   "say": "Pork tapeworm eggs seed brain rings: albendazole under steroid cover. Beef segments wander motile but stay gut.",
+   "vis": null
+  },
+  {
+   "tx": "**Echinococcus granulosus** (dog sheep cycle, eggs in canine faeces) forms **hydatid cysts** (liver commonest, **eggshell calcification**, daughter cysts with hydatid sand, anaphylaxis on leak) diagnosed by ultrasound WHO staging with arc 5 serology; treatment is **albendazole** with **PAIR** (puncture, aspirate, inject scolicidal, reaspirate) or surgery with scolicidal packing, never blind biopsy spilling. **E. multilocularis** (foxes, alveolar infiltrative, mimics malignancy, prolonged albendazole) invades like cancer. Deworm dogs with offal control.",
+   "say": "Liver cyst with eggshell rim is hydatid: albendazole plus PAIR, never blind needle. Spill causes anaphylaxis.",
+   "vis": null
+  },
+  {
+   "tx": "**Schistosoma** (snail, fork tailed cercariae penetrating skin, **Katayama fever** with eosinophilia weeks after exposure) species sort by eggs and veins: **haematobium** (terminal spine, vesical plexus, painless **terminal haematuria**, **squamous bladder cancer**, praziquantel), **mansoni** (lateral spine, mesenteric, **pipe stem fibrosis** with haematemesis), **japonicum** (small knob, zoonotic, cerebral seizures). Chronic inflammation fibroses; **praziquantel** kills adults (repeat for maturing worms) with steroids in neuroschistosomiasis. Stool or urine filtration with serology diagnoses.",
+   "say": "Terminal bloody urine with terminal spined eggs is haematobium: praziquantel. Pipe stem liver with lateral spines is mansoni.",
+   "vis": null
+  },
+  {
+   "tx": "**Liver flukes** (**Fasciola hepatica** sheep watercress, acute hepatitis with eosinophilia then cholangitis, **triclabendazole**; **Clonorchis and Opisthorchis** raw fish, recurrent pyogenic cholangitis with **cholangiocarcinoma**, praziquantel) ascend bile ducts. **Paragonimus** (crab crayfish, **haemoptysis mimicking TB** with ring shadows, praziquantel) expectorates eggs; **Fasciolopsis** (giant intestinal, water chestnut) stays luminal. Cook fish and crabs; snail control with sanitation breaks cycles.",
+   "say": "Raw fish cholangitis turning malignant is Clonorchis: praziquantel. Crab haemoptysis mimicking TB is Paragonimus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Worm",
+     "Egg",
+     "Drug"
+    ],
+    "rows": [
+     [
+      "Solium",
+      "Armed pork",
+      "Albendazole plus steroids"
+     ],
+     [
+      "Hydatid",
+      "Dog faeces",
+      "Albendazole plus PAIR"
+     ],
+     [
+      "Haematobium",
+      "Terminal spine",
+      "Praziquantel"
+     ],
+     [
+      "Clonorchis",
+      "Raw fish",
+      "Praziquantel"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-201",
+  "bk2-mic-202",
+  "bk2-mic-203",
+  "bk2-mic-204",
+  "bk2-mic-205",
+  "bk2-mic-206",
+  "bk2-mic-207",
+  "bk2-mic-208",
+  "bk2-mic-209",
+  "bk2-mic-210"
+ ],
+ "src": [],
+ "refs": [
+  "Paniker's Textbook of Medical Parasitology 8th Ed + Ananthanarayan and Paniker's Textbook of Microbiology (topic maps; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
