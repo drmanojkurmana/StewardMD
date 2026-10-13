@@ -244,5 +244,8 @@
 ## 2026-10-14 LON6 neuro DONE (branch books2-lon6, PR #1609 open)
 
 10 modules (headache, epilepsy-overwrite, stroke-overwrite, dementia, movement, MS, neuropathy, neuromuscular, spinal-cord, cns-infections-overwrite), 10 lessons + 10 KB + 100 MCQs bk2-med-461-560. Gates: LP 10/10, suites 54/54, similarity 0 hits, answers 26/25/24/25, app 32/33 (pre-existing). Next: push + PR, then LON7 haematology block.
+## 2026-10-14 LON7 haematology DONE (branch books2-lon7, PR to open)
+11 modules, 11 lessons + 11 KB + 110 MCQs bk2-med-561-670. Gates: LP 11/11, suites 54/54, similarity 0 hits, answers 28/27/27/28, app 32/33 (pre-existing). Next: push + PR, then LON8 rheumatology block.
+
 
 
