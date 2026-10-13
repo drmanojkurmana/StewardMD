@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "ent-nasopharynx",
+ "subject": "ent",
+ "title": "Nasopharyngeal tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Nasopharyngeal carcinoma** (NPC) arises most in fossa of Rosenmuller behind Eustachian orifice, strongly EBV associated, endemic in southern Chinese and Southeast Asian populations with genetic and salted fish nitrosamine links. It spreads early to retropharyngeal and level II or V nodes, often presenting as painless neck mass while primary stays silent. Histologies include non keratinising (EBV driven) and keratinising (smoking alcohol linked) types.",
+   "say": "Silent primary, loud neck nodes: NPC hides behind the Eustachian tube. EBV drives endemic type.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Symptoms map anatomy: unilateral serous otitis media from tube block (adult red flag), epistaxis or blood stained postnasal discharge, nasal obstruction, and cranial neuropathies when skull base invades (VI first causing diplopia, V pain or numbness, then IX to XII in jugular foramen extensions). Trotter triad historically: conductive deafness, trigeminal neuralgia type pain, palatal immobility ipsilateral. Examination needs nasendoscopy with biopsy of fossa lesions.",
+   "say": "One blocked ear, bloody postnasal drip, sixth nerve palsy: scope the nasopharynx. Trotter triad is exam heritage.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Workup: MRI nasopharynx and skull base (best soft tissue and perineural), CT bone base, EBV DNA plasma (screening and prognostic monitoring in endemic programmes), audiometry, staging PET CT for advanced nodes. Radiotherapy is primary treatment (nasopharynx surgically inaccessible), with concurrent chemotherapy for locoregionally advanced disease; intensity modulated techniques spare parotids and brain. Endemic screening with EBV serology or DNA shifts stage earlier.",
+   "say": "Radiation cures what surgery cannot reach. Plasma EBV DNA tracks this cancer.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Benign nasopharyngeal lesions include adenoid hypertrophy (children, rarely adults needing HIV or lymphoma exclusion when regrown), Thornwaldt cyst (midline nasopharyngeal cyst from notochord remnant, incidental or halitosis and discharge when infected), juvenile angiofibroma extension, and inverted papilloma or lymphoma mimics. Any adult nasopharyngeal mass with nodes gets malignancy pathway until histology, and unilateral effusion without mass still needs scope and imaging follow up.",
+   "say": "Adult adenoids regrown need a reason: lymphoma and immune deficiency enter list.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "NPC presentation clues",
+     "points": [
+      "Neck mass first from early lymphatic spread",
+      "Unilateral adult glue ear from tube block",
+      "Abducens palsy from skull base invasion"
+     ]
+    },
+    "right": {
+     "title": "Why it matters",
+     "points": [
+      "Primary stays silent while nodes declare",
+      "Scope before any grommet in adults",
+      "EBV DNA tracks tumour burden"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-171",
+  "bk2-ent-172",
+  "bk2-ent-173",
+  "bk2-ent-174",
+  "bk2-ent-175",
+  "bk2-ent-176",
+  "bk2-ent-177",
+  "bk2-ent-178",
+  "bk2-ent-179",
+  "bk2-ent-180"
+ ],
+ "src": [],
+ "refs": [
+  "Dhingra Diseases of ENT 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2p2-ent",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
