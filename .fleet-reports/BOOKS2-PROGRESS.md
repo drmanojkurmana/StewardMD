@@ -213,4 +213,10 @@
 - New surgery overlay subject dir; test subject loop extended (generator patches loop too).
 - Gates: LP.checkLesson 3/3, kb_validate_v2 3/3, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 3/3. 30 IDs unique. maikbook2 1770 -> 1800, no rebase needed.
 - STATE2/COVERAGE2 updated + mirrors. Vascular BLOCKED on books. Next: Campbell-Walsh urology queue.
+## Wave URO1 (2026-10-13, muse Wonder): urology gaps 5/5 COMPLETE
+- Branch books2-uro1 from origin/main post-PHARMA2-merge, PR #1600 open (no merge; squash after browser job). All 5 gaps + 5 KB + 50 MCQs bk2-uro-001..050.
+- Shares surgery overlay subject with PLAS1; test subject loop extended (generator patches loop too).
+- Gates: LP.checkLesson 5/5, kb_validate_v2 5/5, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 5/5. 50 IDs unique. maikbook2 1770 -> 1820, no rebase needed.
+- STATE2/COVERAGE2 updated + mirrors. Next: Sastry microbiology queue.
+
 
