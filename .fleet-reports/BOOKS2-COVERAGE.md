@@ -79,6 +79,7 @@ Wave URO1 DONE (branch books2-uro1): sur-stones, sur-bph-prostate, sur-oncology,
 Wave SAS1 DONE (branch books2-sas1): vir-diagnosis (lab methods: culture/CPE, serology windows, molecular, inclusions), vir-hiv-emerging (fourth-gen HIV + Ebola/Nipah/arbo/outbreak). Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-mic-221 to 240. Microbiology 40/40 COMPLETE pending merges.
 
 
+
 Wave SAS1 DONE (branch books2-sas1): vir-diagnosis (lab methods: culture/CPE, serology windows, molecular, inclusions), vir-hiv-emerging (fourth-gen HIV + Ebola/Nipah/arbo/outbreak). Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-mic-221 to 240. Microbiology 40/40 COMPLETE pending merges.
 
 Wave ANA-SKIP (branch books2-ana1): anatomy inventory vs main index: 0 lesson-less (all ana-* HAVE). Gray's/Atlas skipped, no gaps.
@@ -95,5 +96,7 @@ Wave LON1 DONE (branch books2-lon1): med-cad-stable, med-acs, med-arrhythmias, m
 Wave LON1 DONE (branch books2-lon1): med-cad-stable, med-acs, med-arrhythmias, med-valvular, med-endocarditis, med-cardiomyopathy, med-pericardial, med-hypertension. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-med-001 to 080. Medicine gaps remaining: 92 med-* (LON2: respiratory block).
 
 Wave LON2 DONE (branch books2-lon2): med-asthma, med-copd (KB reused), med-bronchiectasis-cf, med-pneumonia, med-tb, med-ild, med-pe-pulmonary-htn, med-pleural, med-lung-cancer, med-resp-failure. Each: 1 v1 lesson, 1 KB (9 new + 1 reused), 10 MCQs bk2-med-081 to 180. Medicine gaps remaining: 82 med-* (LON3: GI block next).
+
+Wave LON3 DONE (branch books2-lon3): med-oesophagus, med-peptic-gi-bleed, med-malabsorption, med-ibd (KB reused), med-pancreatitis (KB reused), med-jaundice, med-viral-hepatitis, med-fatty-liver, med-cirrhosis, med-autoimmune-metabolic-liver. Each: 1 v1 lesson, 1 KB (8 new + 2 reused), 10 MCQs bk2-med-181 to 280. Medicine gaps remaining: 72 med-* (LON4: renal block next).
 
 
