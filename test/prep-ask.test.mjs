@@ -94,12 +94,12 @@ test("device table: unique ids, the chip rule, unverified marked, conservative r
 
 /* ---------- MaiK lines ---------- */
 const FORBID = /\b(AI|rank|AIR|top|topper|crack|clear the exam|guarantee\w*|selection|seat|percentile|score|pass|you did well|mastered|real strength|competition|rivals?|beat)\b|[!—–]/i;
-test("MaiK lines: every taxonomy subject has 3, every line passes the writing rules (108 in all)", () => {
+test("MaiK lines: every taxonomy subject has 3, every line passes the writing rules (285 in all)", () => {
   const subs = []; TAX.branches.forEach((b) => b.subjects.forEach((s) => subs.push(s.id)));
   let n = 0;
   subs.forEach((id) => { assert.equal((LINES.subject[id] || []).length, 3, id); n += 3; });
   Object.keys(LINES.branch).forEach((b) => { assert.equal(LINES.branch[b].length, 3); n += 3; });
-  assert.equal(n, 108);
+  assert.equal(n, 285);
   const all = [].concat(...Object.values(LINES.subject), ...Object.values(LINES.branch));
   all.forEach((l) => {
     const w = l.trim().split(/\s+/).length;

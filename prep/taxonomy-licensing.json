@@ -1,0 +1,6845 @@
+{
+ "_note": "The licensing branches (PLAB 1, MRCS Part A, AMC, MCCQE Part I, MRCP Parts 1 and 2) as the app draws them. Their subjects reuse MBBS modules, so they cannot be prep/taxonomy/ sources (module ids are unique there); tools/prep-build-bank.mjs taxonomyForApp appends them after the generated branches. Added by #1519 to #1526; kept here so a bank rebuild does not drop them.",
+ "branches": [
+  {
+   "id": "uk",
+   "name": {
+    "en": "UK Licensing"
+   },
+   "subjects": [
+    {
+     "id": "plab-anaesthesia",
+     "code": "uk-ans",
+     "name": {
+      "en": "Anaesthesia"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-anaesthesia-ans-airway",
+       "name": {
+        "en": "Airway management"
+       },
+       "modules": [
+        {
+         "id": "ans-intubation",
+         "name": {
+          "en": "Airway management and tracheal intubation"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-anaesthesia-ans-basics",
+       "name": {
+        "en": "Preoperative assessment and equipment"
+       },
+       "modules": [
+        {
+         "id": "ans-monitoring",
+         "name": {
+          "en": "Monitoring in anaesthesia"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ans-preop",
+         "name": {
+          "en": "Preoperative assessment and premedication"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-anaesthesia-ans-complications",
+       "name": {
+        "en": "Complications and recovery"
+       },
+       "modules": [
+        {
+         "id": "ans-intraop-complications",
+         "name": {
+          "en": "Intraoperative complications"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-anaesthesia-ans-critical-care",
+       "name": {
+        "en": "Resuscitation, critical care and pain"
+       },
+       "modules": [
+        {
+         "id": "ans-cpr",
+         "name": {
+          "en": "Cardiopulmonary resuscitation"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-anatomy",
+     "code": "uk-ana",
+     "name": {
+      "en": "Anatomy"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-anatomy-ana-embryology",
+       "name": {
+        "en": "Embryology"
+       },
+       "modules": [
+        {
+         "id": "ana-heart-vessels",
+         "name": {
+          "en": "Development of heart and vessels"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ana-gut-diaphragm",
+         "name": {
+          "en": "Development of gut, body cavities and diaphragm"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-anatomy-ana-head-neck",
+       "name": {
+        "en": "Head and neck"
+       },
+       "modules": [
+        {
+         "id": "ana-skull-cranial-cavity",
+         "name": {
+          "en": "Skull, cranial fossae and dural venous sinuses"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ana-orbit",
+         "name": {
+          "en": "Orbit and eyeball"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-anatomy-ana-upper-limb",
+       "name": {
+        "en": "Upper limb"
+       },
+       "modules": [
+        {
+         "id": "ana-nerve-injuries",
+         "name": {
+          "en": "Nerve lesions of upper limb"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-biochemistry",
+     "code": "uk-bio",
+     "name": {
+      "en": "Biochemistry"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-biochemistry-bio-biomolecules",
+       "name": {
+        "en": "Cell and biomolecules"
+       },
+       "modules": [
+        {
+         "id": "bio-protein-structure",
+         "name": {
+          "en": "Amino acids and protein structure"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-biochemistry-bio-molecular-biology",
+       "name": {
+        "en": "Molecular biology and genetics"
+       },
+       "modules": [
+        {
+         "id": "bio-dna-replication-repair",
+         "name": {
+          "en": "DNA structure, replication and repair"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-biochemistry-bio-nutrition",
+       "name": {
+        "en": "Vitamins, minerals and nutrition"
+       },
+       "modules": [
+        {
+         "id": "bio-water-soluble-vitamins",
+         "name": {
+          "en": "Water-soluble vitamins"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-biochemistry-bio-protein-metabolism",
+       "name": {
+        "en": "Amino acid metabolism"
+       },
+       "modules": [
+        {
+         "id": "bio-amino-acid-disorders",
+         "name": {
+          "en": "Inborn errors of amino acid metabolism"
+         },
+         "size": "m"
+        },
+        {
+         "id": "bio-specialised-products",
+         "name": {
+          "en": "Specialised products of amino acids"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-community-medicine",
+     "code": "uk-cm",
+     "name": {
+      "en": "Community Medicine"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-community-medicine-cm-biostatistics",
+       "name": {
+        "en": "Biostatistics"
+       },
+       "modules": [
+        {
+         "id": "cm-central-tendency",
+         "name": {
+          "en": "Measures of central tendency, dispersion and normal distribution"
+         },
+         "size": "m"
+        },
+        {
+         "id": "cm-data-presentation",
+         "name": {
+          "en": "Types of data and data presentation"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-community-medicine-cm-concepts",
+       "name": {
+        "en": "Concepts of health and disease"
+       },
+       "modules": [
+        {
+         "id": "cm-health-indicators",
+         "name": {
+          "en": "Concept of health and health indicators"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-community-medicine-cm-epidemiology",
+       "name": {
+        "en": "Principles of epidemiology"
+       },
+       "modules": [
+        {
+         "id": "cm-screening",
+         "name": {
+          "en": "Screening and evaluation of diagnostic tests"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-community-medicine-cm-nutrition",
+       "name": {
+        "en": "Nutrition and health"
+       },
+       "modules": [
+        {
+         "id": "cm-nutrition-programmes",
+         "name": {
+          "en": "Nutritional assessment and nutrition programmes"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-dermatology",
+     "code": "uk-der",
+     "name": {
+      "en": "Dermatology"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-dermatology-der-infections",
+       "name": {
+        "en": "Infections and infestations"
+       },
+       "modules": [
+        {
+         "id": "der-fungal",
+         "name": {
+          "en": "Superficial and deep fungal infections"
+         },
+         "size": "m"
+        },
+        {
+         "id": "der-viral-parasitic",
+         "name": {
+          "en": "Viral infections and infestations"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-dermatology-der-papulosquamous-eczema",
+       "name": {
+        "en": "Papulosquamous disorders and eczema"
+       },
+       "modules": [
+        {
+         "id": "der-eczema",
+         "name": {
+          "en": "Eczema and dermatitis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "der-psoriasis",
+         "name": {
+          "en": "Psoriasis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "der-other-papulosquamous",
+         "name": {
+          "en": "Lichen planus and other papulosquamous disorders"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-ent",
+     "code": "uk-ent",
+     "name": {
+      "en": "ENT (Otorhinolaryngology)"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-ent-ent-ear",
+       "name": {
+        "en": "Ear"
+       },
+       "modules": [
+        {
+         "id": "ent-ear-anatomy",
+         "name": {
+          "en": "Anatomy of the ear"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-ent-ent-larynx",
+       "name": {
+        "en": "Larynx and airway"
+       },
+       "modules": [
+        {
+         "id": "ent-airway",
+         "name": {
+          "en": "Tracheostomy and airway foreign bodies"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-ent-ent-nose",
+       "name": {
+        "en": "Nose and paranasal sinuses"
+       },
+       "modules": [
+        {
+         "id": "ent-rhinitis-polyps",
+         "name": {
+          "en": "Rhinitis and nasal polyps"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ent-epistaxis",
+         "name": {
+          "en": "Epistaxis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-ent-ent-pharynx",
+       "name": {
+        "en": "Oral cavity, pharynx and salivary glands"
+       },
+       "modules": [
+        {
+         "id": "ent-nasopharynx",
+         "name": {
+          "en": "Nasopharyngeal tumours"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-forensic-medicine",
+     "code": "uk-fmt",
+     "name": {
+      "en": "Forensic Medicine"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-forensic-medicine-fmt-identity-science",
+       "name": {
+        "en": "Identification and forensic science"
+       },
+       "modules": [
+        {
+         "id": "fmt-identification",
+         "name": {
+          "en": "Identification and age estimation"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-forensic-medicine-fmt-sexual-jurisprudence",
+       "name": {
+        "en": "Sexual jurisprudence"
+       },
+       "modules": [
+        {
+         "id": "fmt-sexual-offences",
+         "name": {
+          "en": "Sexual offences and POCSO"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-forensic-medicine-fmt-thanatology",
+       "name": {
+        "en": "Thanatology and autopsy"
+       },
+       "modules": [
+        {
+         "id": "fmt-late-changes",
+         "name": {
+          "en": "Decomposition and late postmortem changes"
+         },
+         "size": "m"
+        },
+        {
+         "id": "fmt-early-changes",
+         "name": {
+          "en": "Death and early postmortem changes"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-forensic-medicine-fmt-toxicology",
+       "name": {
+        "en": "Toxicology"
+       },
+       "modules": [
+        {
+         "id": "fmt-corrosive-metallic",
+         "name": {
+          "en": "Corrosive and metallic poisons"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-medicine",
+     "code": "uk-med",
+     "name": {
+      "en": "Medicine"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-medicine-med-cardiology",
+       "name": {
+        "en": "Cardiology"
+       },
+       "modules": [
+        {
+         "id": "med-arrhythmias",
+         "name": {
+          "en": "Arrhythmias and conduction disorders"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-medicine-med-fluids-electrolytes",
+       "name": {
+        "en": "Fluids, electrolytes and acid-base"
+       },
+       "modules": [
+        {
+         "id": "med-acid-base",
+         "name": {
+          "en": "Acid-base disorders and renal tubular acidosis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-medicine-med-gastro-hepatology",
+       "name": {
+        "en": "Gastroenterology and hepatology"
+       },
+       "modules": [
+        {
+         "id": "med-cirrhosis",
+         "name": {
+          "en": "Cirrhosis and portal hypertension"
+         },
+         "size": "m"
+        },
+        {
+         "id": "med-ibd",
+         "name": {
+          "en": "Inflammatory bowel disease"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-medicine-med-infectious",
+       "name": {
+        "en": "Infectious diseases"
+       },
+       "modules": [
+        {
+         "id": "med-hiv",
+         "name": {
+          "en": "HIV infection and opportunistic infections"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-microbiology",
+     "code": "uk-mic",
+     "name": {
+      "en": "Microbiology"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-microbiology-mic-immunology",
+       "name": {
+        "en": "Immunology"
+       },
+       "modules": [
+        {
+         "id": "mic-ag-ab-reactions",
+         "name": {
+          "en": "Antigen-antibody reactions and serological tests"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mic-innate-antigens",
+         "name": {
+          "en": "Immunity, antigens and cells of the immune system"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mic-antibodies-complement",
+         "name": {
+          "en": "Immunoglobulins and complement"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-microbiology-mic-mycology",
+       "name": {
+        "en": "Mycology"
+       },
+       "modules": [
+        {
+         "id": "mic-systemic-opportunistic-mycoses",
+         "name": {
+          "en": "Systemic and opportunistic mycoses"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-microbiology-mic-virology",
+       "name": {
+        "en": "Virology"
+       },
+       "modules": [
+        {
+         "id": "mic-herpesviruses",
+         "name": {
+          "en": "Herpesviruses"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-obstetrics-gynaecology",
+     "code": "uk-obg",
+     "name": {
+      "en": "Obstetrics and Gynaecology"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-obstetrics-gynaecology-obg-basic-obstetrics",
+       "name": {
+        "en": "Basic obstetrics and antenatal care"
+       },
+       "modules": [
+        {
+         "id": "obg-diagnosis-antenatal-care",
+         "name": {
+          "en": "Diagnosis of pregnancy and antenatal care"
+         },
+         "size": "m"
+        },
+        {
+         "id": "obg-placenta-fetus",
+         "name": {
+          "en": "Placenta, fetal development and fetal circulation"
+         },
+         "size": "m"
+        },
+        {
+         "id": "obg-maternal-physiology",
+         "name": {
+          "en": "Maternal physiological changes in pregnancy"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-obstetrics-gynaecology-obg-gyn-basics",
+       "name": {
+        "en": "Gynaecological anatomy and reproductive physiology"
+       },
+       "modules": [
+        {
+         "id": "obg-anatomy-development",
+         "name": {
+          "en": "Genital tract anatomy and congenital anomalies"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-obstetrics-gynaecology-obg-gyn-oncology",
+       "name": {
+        "en": "Gynaecological oncology"
+       },
+       "modules": [
+        {
+         "id": "obg-cervical-cancer",
+         "name": {
+          "en": "Premalignant and malignant lesions of the cervix"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-ophthalmology",
+     "code": "uk-oph",
+     "name": {
+      "en": "Ophthalmology"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-ophthalmology-oph-anterior-segment",
+       "name": {
+        "en": "Conjunctiva, cornea and sclera"
+       },
+       "modules": [
+        {
+         "id": "oph-conjunctiva",
+         "name": {
+          "en": "Diseases of the conjunctiva"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-ophthalmology-oph-basics",
+       "name": {
+        "en": "Anatomy, physiology and optics"
+       },
+       "modules": [
+        {
+         "id": "oph-refraction",
+         "name": {
+          "en": "Optics and errors of refraction"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-ophthalmology-oph-uvea-lens-glaucoma",
+       "name": {
+        "en": "Uvea, lens and glaucoma"
+       },
+       "modules": [
+        {
+         "id": "oph-posterior-uveitis",
+         "name": {
+          "en": "Posterior uveitis, panuveitis and endophthalmitis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "oph-cataract",
+         "name": {
+          "en": "Lens and cataract"
+         },
+         "size": "m"
+        },
+        {
+         "id": "oph-anterior-uveitis",
+         "name": {
+          "en": "Anterior uveitis"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-orthopaedics",
+     "code": "uk-ort",
+     "name": {
+      "en": "Orthopaedics"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-orthopaedics-ort-metabolic-degenerative",
+       "name": {
+        "en": "Metabolic, avascular and degenerative disorders"
+       },
+       "modules": [
+        {
+         "id": "ort-metabolic-bone",
+         "name": {
+          "en": "Metabolic bone disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ort-arthritis",
+         "name": {
+          "en": "Arthritis and joint replacement"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-orthopaedics-ort-upper-limb",
+       "name": {
+        "en": "Upper limb trauma"
+       },
+       "modules": [
+        {
+         "id": "ort-elbow-injuries",
+         "name": {
+          "en": "Injuries around the elbow"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ort-forearm-wrist-injuries",
+         "name": {
+          "en": "Forearm and wrist injuries"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ort-shoulder-arm-injuries",
+         "name": {
+          "en": "Injuries of the shoulder girdle and arm"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-paediatrics",
+     "code": "uk-ped",
+     "name": {
+      "en": "Paediatrics"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-paediatrics-ped-gastroenterology",
+       "name": {
+        "en": "Gastroenterology and hepatology"
+       },
+       "modules": [
+        {
+         "id": "ped-gi-disorders",
+         "name": {
+          "en": "Gastrointestinal disorders"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-paediatrics-ped-neonatology",
+       "name": {
+        "en": "Neonatology"
+       },
+       "modules": [
+        {
+         "id": "ped-neonatal-infections",
+         "name": {
+          "en": "Neonatal sepsis and congenital infections"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ped-neonatal-respiratory",
+         "name": {
+          "en": "Neonatal respiratory distress"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ped-neonatal-jaundice",
+         "name": {
+          "en": "Neonatal jaundice"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-paediatrics-ped-respiratory",
+       "name": {
+        "en": "Respiratory system"
+       },
+       "modules": [
+        {
+         "id": "ped-chronic-respiratory",
+         "name": {
+          "en": "Chronic respiratory disorders"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-pathology",
+     "code": "uk-pat",
+     "name": {
+      "en": "Pathology"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-pathology-pat-haem-wbc",
+       "name": {
+        "en": "Haematopathology: white cell and lymphoid disorders"
+       },
+       "modules": [
+        {
+         "id": "pat-non-hodgkin-lymphoma",
+         "name": {
+          "en": "Non-Hodgkin lymphomas and chronic lymphoid leukaemias"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-pathology-pat-inflammation",
+       "name": {
+        "en": "Inflammation and repair"
+       },
+       "modules": [
+        {
+         "id": "pat-mediators",
+         "name": {
+          "en": "Chemical mediators of inflammation"
+         },
+         "size": "m"
+        },
+        {
+         "id": "pat-chronic-granulomatous",
+         "name": {
+          "en": "Chronic and granulomatous inflammation"
+         },
+         "size": "m"
+        },
+        {
+         "id": "pat-acute-inflammation",
+         "name": {
+          "en": "Acute inflammation and leukocyte events"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-pathology-pat-renal-genitourinary",
+       "name": {
+        "en": "Renal and genitourinary pathology"
+       },
+       "modules": [
+        {
+         "id": "pat-glomerular",
+         "name": {
+          "en": "Glomerular diseases"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-pharmacology",
+     "code": "uk-phm",
+     "name": {
+      "en": "Pharmacology"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-pharmacology-phm-anticancer-immuno",
+       "name": {
+        "en": "Anticancer and immunomodulator drugs"
+       },
+       "modules": [
+        {
+         "id": "phm-cytotoxic-anticancer",
+         "name": {
+          "en": "Cytotoxic anticancer drugs"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-pharmacology-phm-blood",
+       "name": {
+        "en": "Drugs affecting blood"
+       },
+       "modules": [
+        {
+         "id": "phm-anticoagulants",
+         "name": {
+          "en": "Anticoagulants and coagulants"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-pharmacology-phm-cvs-renal",
+       "name": {
+        "en": "Cardiovascular and renal pharmacology"
+       },
+       "modules": [
+        {
+         "id": "phm-heart-failure",
+         "name": {
+          "en": "Drugs for heart failure"
+         },
+         "size": "m"
+        },
+        {
+         "id": "phm-antihypertensives",
+         "name": {
+          "en": "Antihypertensive drugs"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-pharmacology-phm-general",
+       "name": {
+        "en": "General pharmacology"
+       },
+       "modules": [
+        {
+         "id": "phm-pharmacokinetics",
+         "name": {
+          "en": "Distribution and pharmacokinetic parameters"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-physiology",
+     "code": "uk-phy",
+     "name": {
+      "en": "Physiology"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-physiology-phy-general",
+       "name": {
+        "en": "General physiology"
+       },
+       "modules": [
+        {
+         "id": "phy-body-fluids",
+         "name": {
+          "en": "Body fluid compartments and homeostasis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "phy-membrane-potentials",
+         "name": {
+          "en": "Resting membrane potential and action potential"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-physiology-phy-gi",
+       "name": {
+        "en": "Gastrointestinal physiology"
+       },
+       "modules": [
+        {
+         "id": "phy-digestion-absorption",
+         "name": {
+          "en": "Digestion and absorption"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-physiology-phy-renal",
+       "name": {
+        "en": "Renal physiology and acid-base"
+       },
+       "modules": [
+        {
+         "id": "phy-gfr",
+         "name": {
+          "en": "Renal blood flow and glomerular filtration"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-physiology-phy-respiratory",
+       "name": {
+        "en": "Respiratory system"
+       },
+       "modules": [
+        {
+         "id": "phy-hypoxia-environment",
+         "name": {
+          "en": "Hypoxia and environmental physiology"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-psychiatry",
+     "code": "uk-psy",
+     "name": {
+      "en": "Psychiatry"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-psychiatry-psy-anxiety-stress",
+       "name": {
+        "en": "Anxiety, obsessive-compulsive and stress-related disorders"
+       },
+       "modules": [
+        {
+         "id": "psy-ocd",
+         "name": {
+          "en": "Obsessive-compulsive and related disorders"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-psychiatry-psy-mood",
+       "name": {
+        "en": "Mood disorders and suicide"
+       },
+       "modules": [
+        {
+         "id": "psy-bipolar",
+         "name": {
+          "en": "Bipolar and related disorders"
+         },
+         "size": "m"
+        },
+        {
+         "id": "psy-depression",
+         "name": {
+          "en": "Depressive disorders"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-psychiatry-psy-neurocognitive",
+       "name": {
+        "en": "Neurocognitive disorders"
+       },
+       "modules": [
+        {
+         "id": "psy-dementia",
+         "name": {
+          "en": "Dementia"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-psychiatry-psy-personality-behavioural",
+       "name": {
+        "en": "Personality, sleep, sexual and eating disorders"
+       },
+       "modules": [
+        {
+         "id": "psy-sleep",
+         "name": {
+          "en": "Sleep disorders"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-radiology",
+     "code": "uk-rad",
+     "name": {
+      "en": "Radiology"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-radiology-rad-diagnostic",
+       "name": {
+        "en": "Systemic diagnostic radiology"
+       },
+       "modules": [
+        {
+         "id": "rad-musculoskeletal",
+         "name": {
+          "en": "Musculoskeletal radiology and bone tumours"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-gi",
+         "name": {
+          "en": "Gastrointestinal radiology"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-neuroradiology",
+         "name": {
+          "en": "Neuroradiology"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-radiology-rad-radiotherapy",
+       "name": {
+        "en": "Radiotherapy"
+       },
+       "modules": [
+        {
+         "id": "rad-teletherapy",
+         "name": {
+          "en": "External beam radiotherapy techniques"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-radiobiology",
+         "name": {
+          "en": "Radiobiology and fractionation"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "plab-surgery",
+     "code": "uk-sur",
+     "name": {
+      "en": "Surgery"
+     },
+     "ex": [
+      "plab-1"
+     ],
+     "sections": [
+      {
+       "id": "plab-surgery-sur-breast",
+       "name": {
+        "en": "Breast"
+       },
+       "modules": [
+        {
+         "id": "sur-breast-cancer",
+         "name": {
+          "en": "Breast cancer"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-surgery-sur-principles",
+       "name": {
+        "en": "General surgical principles"
+       },
+       "modules": [
+        {
+         "id": "sur-wound-healing",
+         "name": {
+          "en": "Wound healing, scars and sutures"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-surgery-sur-trauma",
+       "name": {
+        "en": "Trauma"
+       },
+       "modules": [
+        {
+         "id": "sur-head-injury",
+         "name": {
+          "en": "Head injury"
+         },
+         "size": "m"
+        },
+        {
+         "id": "sur-atls",
+         "name": {
+          "en": "Trauma assessment and ATLS"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "plab-surgery-sur-vascular",
+       "name": {
+        "en": "Vascular surgery"
+       },
+       "modules": [
+        {
+         "id": "sur-arterial",
+         "name": {
+          "en": "Peripheral arterial disease and acute limb ischaemia"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-anaesthesia",
+     "code": "uk-ans",
+     "name": {
+      "en": "Anaesthesia"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-anaesthesia-ans-airway",
+       "name": {
+        "en": "Airway management"
+       },
+       "modules": [
+        {
+         "id": "ans-intubation",
+         "name": {
+          "en": "Airway management and tracheal intubation"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-anaesthesia-ans-basics",
+       "name": {
+        "en": "Preoperative assessment and equipment"
+       },
+       "modules": [
+        {
+         "id": "ans-monitoring",
+         "name": {
+          "en": "Monitoring in anaesthesia"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ans-preop",
+         "name": {
+          "en": "Preoperative assessment and premedication"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ans-machine",
+         "name": {
+          "en": "Anaesthesia workstation and breathing systems"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-anaesthesia-ans-complications",
+       "name": {
+        "en": "Complications and recovery"
+       },
+       "modules": [
+        {
+         "id": "ans-intraop-complications",
+         "name": {
+          "en": "Intraoperative complications"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-anaesthesia-ans-critical-care",
+       "name": {
+        "en": "Resuscitation, critical care and pain"
+       },
+       "modules": [
+        {
+         "id": "ans-cpr",
+         "name": {
+          "en": "Cardiopulmonary resuscitation"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-anaesthesia-ans-pharmacology",
+       "name": {
+        "en": "Anaesthetic pharmacology"
+       },
+       "modules": [
+        {
+         "id": "ans-nmb",
+         "name": {
+          "en": "Neuromuscular blocking agents and reversal"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ans-local-anaesthetics",
+         "name": {
+          "en": "Local anaesthetics"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-anatomy",
+     "code": "uk-ana",
+     "name": {
+      "en": "Anatomy"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-anatomy-ana-embryology",
+       "name": {
+        "en": "Embryology"
+       },
+       "modules": [
+        {
+         "id": "ana-heart-vessels",
+         "name": {
+          "en": "Development of heart and vessels"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ana-gut-diaphragm",
+         "name": {
+          "en": "Development of gut, body cavities and diaphragm"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-anatomy-ana-head-neck",
+       "name": {
+        "en": "Head and neck"
+       },
+       "modules": [
+        {
+         "id": "ana-skull-cranial-cavity",
+         "name": {
+          "en": "Skull, cranial fossae and dural venous sinuses"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ana-orbit",
+         "name": {
+          "en": "Orbit and eyeball"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-anatomy-ana-histology",
+       "name": {
+        "en": "Histology"
+       },
+       "modules": [
+        {
+         "id": "ana-epithelium",
+         "name": {
+          "en": "Epithelium, cell junctions and glands"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ana-connective-cartilage-bone",
+         "name": {
+          "en": "Connective tissue, cartilage and bone histology"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-anatomy-ana-lower-limb",
+       "name": {
+        "en": "Lower limb"
+       },
+       "modules": [
+        {
+         "id": "ana-thigh",
+         "name": {
+          "en": "Front, medial and back of thigh"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-anatomy-ana-upper-limb",
+       "name": {
+        "en": "Upper limb"
+       },
+       "modules": [
+        {
+         "id": "ana-nerve-injuries",
+         "name": {
+          "en": "Nerve lesions of upper limb"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-ent",
+     "code": "uk-ent",
+     "name": {
+      "en": "ENT (Otorhinolaryngology)"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-ent-ent-ear",
+       "name": {
+        "en": "Ear"
+       },
+       "modules": [
+        {
+         "id": "ent-ear-anatomy",
+         "name": {
+          "en": "Anatomy of the ear"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ent-otosclerosis",
+         "name": {
+          "en": "Otosclerosis and conductive deafness"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ent-facial-nerve",
+         "name": {
+          "en": "Facial nerve and its disorders"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-ent-ent-larynx",
+       "name": {
+        "en": "Larynx and airway"
+       },
+       "modules": [
+        {
+         "id": "ent-airway",
+         "name": {
+          "en": "Tracheostomy and airway foreign bodies"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-ent-ent-nose",
+       "name": {
+        "en": "Nose and paranasal sinuses"
+       },
+       "modules": [
+        {
+         "id": "ent-rhinitis-polyps",
+         "name": {
+          "en": "Rhinitis and nasal polyps"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ent-epistaxis",
+         "name": {
+          "en": "Epistaxis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-ent-ent-pharynx",
+       "name": {
+        "en": "Oral cavity, pharynx and salivary glands"
+       },
+       "modules": [
+        {
+         "id": "ent-nasopharynx",
+         "name": {
+          "en": "Nasopharyngeal tumours"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ent-tonsils-adenoids",
+         "name": {
+          "en": "Tonsils and adenoids"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-medicine",
+     "code": "uk-med",
+     "name": {
+      "en": "Medicine"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-medicine-med-cardiology",
+       "name": {
+        "en": "Cardiology"
+       },
+       "modules": [
+        {
+         "id": "med-arrhythmias",
+         "name": {
+          "en": "Arrhythmias and conduction disorders"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-medicine-med-fluids-electrolytes",
+       "name": {
+        "en": "Fluids, electrolytes and acid-base"
+       },
+       "modules": [
+        {
+         "id": "med-acid-base",
+         "name": {
+          "en": "Acid-base disorders and renal tubular acidosis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-medicine-med-gastro-hepatology",
+       "name": {
+        "en": "Gastroenterology and hepatology"
+       },
+       "modules": [
+        {
+         "id": "med-cirrhosis",
+         "name": {
+          "en": "Cirrhosis and portal hypertension"
+         },
+         "size": "m"
+        },
+        {
+         "id": "med-ibd",
+         "name": {
+          "en": "Inflammatory bowel disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "med-peptic-gi-bleed",
+         "name": {
+          "en": "Peptic ulcer disease and gastrointestinal bleeding"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-medicine-med-infectious",
+       "name": {
+        "en": "Infectious diseases"
+       },
+       "modules": [
+        {
+         "id": "med-hiv",
+         "name": {
+          "en": "HIV infection and opportunistic infections"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-medicine-med-rheumatology",
+       "name": {
+        "en": "Rheumatology and clinical immunology"
+       },
+       "modules": [
+        {
+         "id": "med-vasculitis-large",
+         "name": {
+          "en": "Large and medium vessel vasculitis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "med-vasculitis-small",
+         "name": {
+          "en": "ANCA-associated and small vessel vasculitis"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-microbiology",
+     "code": "uk-mic",
+     "name": {
+      "en": "Microbiology"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-microbiology-mic-immunology",
+       "name": {
+        "en": "Immunology"
+       },
+       "modules": [
+        {
+         "id": "mic-ag-ab-reactions",
+         "name": {
+          "en": "Antigen-antibody reactions and serological tests"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mic-innate-antigens",
+         "name": {
+          "en": "Immunity, antigens and cells of the immune system"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mic-antibodies-complement",
+         "name": {
+          "en": "Immunoglobulins and complement"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-microbiology-mic-mycology",
+       "name": {
+        "en": "Mycology"
+       },
+       "modules": [
+        {
+         "id": "mic-systemic-opportunistic-mycoses",
+         "name": {
+          "en": "Systemic and opportunistic mycoses"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mic-superficial-subcutaneous-mycoses",
+         "name": {
+          "en": "General mycology, superficial and subcutaneous mycoses"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-microbiology-mic-parasitology",
+       "name": {
+        "en": "Parasitology"
+       },
+       "modules": [
+        {
+         "id": "mic-nematodes",
+         "name": {
+          "en": "Nematodes"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mic-blood-tissue-protozoa",
+         "name": {
+          "en": "Malaria and blood and tissue protozoa"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-microbiology-mic-virology",
+       "name": {
+        "en": "Virology"
+       },
+       "modules": [
+        {
+         "id": "mic-herpesviruses",
+         "name": {
+          "en": "Herpesviruses"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-orthopaedics",
+     "code": "uk-ort",
+     "name": {
+      "en": "Orthopaedics"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-orthopaedics-ort-general",
+       "name": {
+        "en": "General principles of fractures and injuries"
+       },
+       "modules": [
+        {
+         "id": "ort-fracture-complications",
+         "name": {
+          "en": "Complications of fractures"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-orthopaedics-ort-lower-limb",
+       "name": {
+        "en": "Pelvis and lower limb trauma"
+       },
+       "modules": [
+        {
+         "id": "ort-hip-injuries",
+         "name": {
+          "en": "Hip dislocation and proximal femur fractures"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-orthopaedics-ort-metabolic-degenerative",
+       "name": {
+        "en": "Metabolic, avascular and degenerative disorders"
+       },
+       "modules": [
+        {
+         "id": "ort-metabolic-bone",
+         "name": {
+          "en": "Metabolic bone disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ort-arthritis",
+         "name": {
+          "en": "Arthritis and joint replacement"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-orthopaedics-ort-tumours",
+       "name": {
+        "en": "Bone tumours"
+       },
+       "modules": [
+        {
+         "id": "ort-benign-bone-tumours",
+         "name": {
+          "en": "Benign and tumour-like bone lesions"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-orthopaedics-ort-upper-limb",
+       "name": {
+        "en": "Upper limb trauma"
+       },
+       "modules": [
+        {
+         "id": "ort-elbow-injuries",
+         "name": {
+          "en": "Injuries around the elbow"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ort-forearm-wrist-injuries",
+         "name": {
+          "en": "Forearm and wrist injuries"
+         },
+         "size": "m"
+        },
+        {
+         "id": "ort-shoulder-arm-injuries",
+         "name": {
+          "en": "Injuries of the shoulder girdle and arm"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-pathology",
+     "code": "uk-pat",
+     "name": {
+      "en": "Pathology"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-pathology-pat-cell-injury",
+       "name": {
+        "en": "Cell injury, adaptation and cell death"
+       },
+       "modules": [
+        {
+         "id": "pat-apoptosis",
+         "name": {
+          "en": "Apoptosis and other cell death pathways"
+         },
+         "size": "m"
+        },
+        {
+         "id": "pat-adaptations-accumulations",
+         "name": {
+          "en": "Cellular adaptations, accumulations, pigments and calcification"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-pathology-pat-haem-wbc",
+       "name": {
+        "en": "Haematopathology: white cell and lymphoid disorders"
+       },
+       "modules": [
+        {
+         "id": "pat-non-hodgkin-lymphoma",
+         "name": {
+          "en": "Non-Hodgkin lymphomas and chronic lymphoid leukaemias"
+         },
+         "size": "m"
+        },
+        {
+         "id": "pat-plasma-cell-histiocytic",
+         "name": {
+          "en": "Plasma cell neoplasms, histiocytic disorders and spleen"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-pathology-pat-inflammation",
+       "name": {
+        "en": "Inflammation and repair"
+       },
+       "modules": [
+        {
+         "id": "pat-mediators",
+         "name": {
+          "en": "Chemical mediators of inflammation"
+         },
+         "size": "m"
+        },
+        {
+         "id": "pat-chronic-granulomatous",
+         "name": {
+          "en": "Chronic and granulomatous inflammation"
+         },
+         "size": "m"
+        },
+        {
+         "id": "pat-acute-inflammation",
+         "name": {
+          "en": "Acute inflammation and leukocyte events"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-pathology-pat-renal-genitourinary",
+       "name": {
+        "en": "Renal and genitourinary pathology"
+       },
+       "modules": [
+        {
+         "id": "pat-glomerular",
+         "name": {
+          "en": "Glomerular diseases"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-pharmacology",
+     "code": "uk-phm",
+     "name": {
+      "en": "Pharmacology"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-pharmacology-phm-anticancer-immuno",
+       "name": {
+        "en": "Anticancer and immunomodulator drugs"
+       },
+       "modules": [
+        {
+         "id": "phm-cytotoxic-anticancer",
+         "name": {
+          "en": "Cytotoxic anticancer drugs"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-pharmacology-phm-blood",
+       "name": {
+        "en": "Drugs affecting blood"
+       },
+       "modules": [
+        {
+         "id": "phm-anticoagulants",
+         "name": {
+          "en": "Anticoagulants and coagulants"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-pharmacology-phm-chemotherapy",
+       "name": {
+        "en": "Antimicrobial chemotherapy"
+       },
+       "modules": [
+        {
+         "id": "phm-antifungals",
+         "name": {
+          "en": "Antifungal drugs"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-pharmacology-phm-cns",
+       "name": {
+        "en": "Central nervous system pharmacology"
+       },
+       "modules": [
+        {
+         "id": "phm-antiepileptics",
+         "name": {
+          "en": "Antiepileptic drugs"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-pharmacology-phm-cvs-renal",
+       "name": {
+        "en": "Cardiovascular and renal pharmacology"
+       },
+       "modules": [
+        {
+         "id": "phm-heart-failure",
+         "name": {
+          "en": "Drugs for heart failure"
+         },
+         "size": "m"
+        },
+        {
+         "id": "phm-antihypertensives",
+         "name": {
+          "en": "Antihypertensive drugs"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-pharmacology-phm-general",
+       "name": {
+        "en": "General pharmacology"
+       },
+       "modules": [
+        {
+         "id": "phm-pharmacokinetics",
+         "name": {
+          "en": "Distribution and pharmacokinetic parameters"
+         },
+         "size": "m"
+        },
+        {
+         "id": "phm-pharmacodynamics",
+         "name": {
+          "en": "Receptors and pharmacodynamics"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-physiology",
+     "code": "uk-phy",
+     "name": {
+      "en": "Physiology"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-physiology-phy-cns",
+       "name": {
+        "en": "Central nervous system"
+       },
+       "modules": [
+        {
+         "id": "phy-sensory",
+         "name": {
+          "en": "Sensory receptors and somatosensory pathways"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-physiology-phy-general",
+       "name": {
+        "en": "General physiology"
+       },
+       "modules": [
+        {
+         "id": "phy-body-fluids",
+         "name": {
+          "en": "Body fluid compartments and homeostasis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "phy-membrane-potentials",
+         "name": {
+          "en": "Resting membrane potential and action potential"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-physiology-phy-gi",
+       "name": {
+        "en": "Gastrointestinal physiology"
+       },
+       "modules": [
+        {
+         "id": "phy-digestion-absorption",
+         "name": {
+          "en": "Digestion and absorption"
+         },
+         "size": "m"
+        },
+        {
+         "id": "phy-motility",
+         "name": {
+          "en": "Gastrointestinal motility"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-physiology-phy-renal",
+       "name": {
+        "en": "Renal physiology and acid-base"
+       },
+       "modules": [
+        {
+         "id": "phy-gfr",
+         "name": {
+          "en": "Renal blood flow and glomerular filtration"
+         },
+         "size": "m"
+        },
+        {
+         "id": "phy-tubular",
+         "name": {
+          "en": "Tubular transport and clearance"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-physiology-phy-respiratory",
+       "name": {
+        "en": "Respiratory system"
+       },
+       "modules": [
+        {
+         "id": "phy-hypoxia-environment",
+         "name": {
+          "en": "Hypoxia and environmental physiology"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-radiology",
+     "code": "uk-rad",
+     "name": {
+      "en": "Radiology"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-radiology-rad-diagnostic",
+       "name": {
+        "en": "Systemic diagnostic radiology"
+       },
+       "modules": [
+        {
+         "id": "rad-musculoskeletal",
+         "name": {
+          "en": "Musculoskeletal radiology and bone tumours"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-gi",
+         "name": {
+          "en": "Gastrointestinal radiology"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-neuroradiology",
+         "name": {
+          "en": "Neuroradiology"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-genitourinary",
+         "name": {
+          "en": "Genitourinary radiology"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-chest",
+         "name": {
+          "en": "Chest radiology"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-radiology-rad-radiotherapy",
+       "name": {
+        "en": "Radiotherapy"
+       },
+       "modules": [
+        {
+         "id": "rad-teletherapy",
+         "name": {
+          "en": "External beam radiotherapy techniques"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-radiobiology",
+         "name": {
+          "en": "Radiobiology and fractionation"
+         },
+         "size": "m"
+        },
+        {
+         "id": "rad-brachytherapy",
+         "name": {
+          "en": "Brachytherapy and therapeutic radioisotopes"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcs-surgery",
+     "code": "uk-sur",
+     "name": {
+      "en": "Surgery"
+     },
+     "ex": [
+      "mrcs-part-a"
+     ],
+     "sections": [
+      {
+       "id": "mrcs-surgery-sur-breast",
+       "name": {
+        "en": "Breast"
+       },
+       "modules": [
+        {
+         "id": "sur-breast-cancer",
+         "name": {
+          "en": "Breast cancer"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-surgery-sur-head-neck-endocrine",
+       "name": {
+        "en": "Head and neck and endocrine surgery"
+       },
+       "modules": [
+        {
+         "id": "sur-thyroid",
+         "name": {
+          "en": "Thyroid surgery and thyroid cancer"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-surgery-sur-hpb",
+       "name": {
+        "en": "Hepatobiliary, pancreatic and splenic surgery"
+       },
+       "modules": [
+        {
+         "id": "sur-pancreas",
+         "name": {
+          "en": "Pancreas"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-surgery-sur-principles",
+       "name": {
+        "en": "General surgical principles"
+       },
+       "modules": [
+        {
+         "id": "sur-wound-healing",
+         "name": {
+          "en": "Wound healing, scars and sutures"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-surgery-sur-trauma",
+       "name": {
+        "en": "Trauma"
+       },
+       "modules": [
+        {
+         "id": "sur-head-injury",
+         "name": {
+          "en": "Head injury"
+         },
+         "size": "m"
+        },
+        {
+         "id": "sur-atls",
+         "name": {
+          "en": "Trauma assessment and ATLS"
+         },
+         "size": "m"
+        },
+        {
+         "id": "sur-chest-trauma",
+         "name": {
+          "en": "Thoracic trauma"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrcs-surgery-sur-vascular",
+       "name": {
+        "en": "Vascular surgery"
+       },
+       "modules": [
+        {
+         "id": "sur-arterial",
+         "name": {
+          "en": "Peripheral arterial disease and acute limb ischaemia"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intl",
+   "name": {
+    "en": "International licensing"
+   },
+   "subjects": [
+    {
+     "id": "adult-health-medicine",
+     "code": "ahm",
+     "name": {
+      "en": "Adult Health: Medicine"
+     },
+     "ex": [
+      "amc-mcq"
+     ],
+     "sections": [
+      {
+       "id": "ahm-cardio",
+       "name": {
+        "en": "Cardiology"
+       },
+       "modules": [
+        {
+         "id": "ahm-acs",
+         "name": {
+          "en": "Acute coronary syndromes"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-heart-failure",
+         "name": {
+          "en": "Heart failure"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-af",
+         "name": {
+          "en": "Atrial fibrillation and stroke prevention"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-hypertension",
+         "name": {
+          "en": "Hypertension"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-valvular-endo",
+         "name": {
+          "en": "Valvular disease and endocarditis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-arrhythmia",
+         "name": {
+          "en": "Arrhythmias and syncope"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-chest-pain",
+         "name": {
+          "en": "Chest pain assessment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-pericardial",
+         "name": {
+          "en": "Pericardial disease"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-resp",
+       "name": {
+        "en": "Respiratory"
+       },
+       "modules": [
+        {
+         "id": "ahm-copd",
+         "name": {
+          "en": "COPD"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-asthma",
+         "name": {
+          "en": "Asthma"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-pneumonia",
+         "name": {
+          "en": "Pneumonia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-pe",
+         "name": {
+          "en": "Pulmonary embolism"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-ild",
+         "name": {
+          "en": "Interstitial lung disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-abg",
+         "name": {
+          "en": "Respiratory failure and ABG"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-gastro",
+       "name": {
+        "en": "Gastroenterology"
+       },
+       "modules": [
+        {
+         "id": "ahm-gib",
+         "name": {
+          "en": "GI bleeding"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-cirrhosis",
+         "name": {
+          "en": "Cirrhosis and complications"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-ibd",
+         "name": {
+          "en": "Inflammatory bowel disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-pancreatitis",
+         "name": {
+          "en": "Pancreatitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-liver",
+         "name": {
+          "en": "Jaundice and liver disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-dyspepsia",
+         "name": {
+          "en": "Dyspepsia and H pylori"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-endo",
+       "name": {
+        "en": "Endocrinology"
+       },
+       "modules": [
+        {
+         "id": "ahm-diabetes",
+         "name": {
+          "en": "Type 2 diabetes"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-dka",
+         "name": {
+          "en": "Diabetic emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-thyroid",
+         "name": {
+          "en": "Thyroid disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-calcium",
+         "name": {
+          "en": "Calcium and bone disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-adrenal",
+         "name": {
+          "en": "Adrenal and pituitary disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-obesity",
+         "name": {
+          "en": "Obesity and metabolic syndrome"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-renal",
+       "name": {
+        "en": "Renal"
+       },
+       "modules": [
+        {
+         "id": "ahm-aki",
+         "name": {
+          "en": "Acute kidney injury"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-ckd",
+         "name": {
+          "en": "Chronic kidney disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-electrolytes",
+         "name": {
+          "en": "Sodium and potassium disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-acid-base",
+         "name": {
+          "en": "Acid-base disorders"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-neuro",
+       "name": {
+        "en": "Neurology"
+       },
+       "modules": [
+        {
+         "id": "ahm-stroke",
+         "name": {
+          "en": "Stroke and TIA"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-epilepsy",
+         "name": {
+          "en": "Seizures and epilepsy"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-headache",
+         "name": {
+          "en": "Headache"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-dementia",
+         "name": {
+          "en": "Dementia and delirium"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-neuropathy",
+         "name": {
+          "en": "Neuropathy and weakness"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-id",
+       "name": {
+        "en": "Infectious diseases"
+       },
+       "modules": [
+        {
+         "id": "ahm-sepsis",
+         "name": {
+          "en": "Sepsis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-hiv",
+         "name": {
+          "en": "HIV and opportunistic infections"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-tb",
+         "name": {
+          "en": "Tuberculosis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-aus-infections",
+         "name": {
+          "en": "Australian infections: Q fever, Ross River, melioidosis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-antimicrobial",
+         "name": {
+          "en": "Antimicrobial stewardship"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-haem",
+       "name": {
+        "en": "Haematology"
+       },
+       "modules": [
+        {
+         "id": "ahm-anaemia",
+         "name": {
+          "en": "Anaemia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-vte",
+         "name": {
+          "en": "VTE and anticoagulation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-bleeding",
+         "name": {
+          "en": "Bleeding and clotting disorders"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-rheum",
+       "name": {
+        "en": "Rheumatology"
+       },
+       "modules": [
+        {
+         "id": "ahm-arthritis",
+         "name": {
+          "en": "Inflammatory arthritis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-vasculitis",
+         "name": {
+          "en": "Vasculitis and connective tissue disease"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-onc",
+       "name": {
+        "en": "Oncology and palliative"
+       },
+       "modules": [
+        {
+         "id": "ahm-oncology",
+         "name": {
+          "en": "Oncology emergencies and complications"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-palliative",
+         "name": {
+          "en": "Palliative care"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahm-misc",
+       "name": {
+        "en": "Toxicology and aged care"
+       },
+       "modules": [
+        {
+         "id": "ahm-toxicology",
+         "name": {
+          "en": "Poisoning and overdose"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahm-aged-care",
+         "name": {
+          "en": "Aged care: falls and frailty"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "adult-health-surgery",
+     "code": "ahs",
+     "name": {
+      "en": "Adult Health: Surgery"
+     },
+     "ex": [
+      "amc-mcq"
+     ],
+     "sections": [
+      {
+       "id": "ahs-general",
+       "name": {
+        "en": "General surgery"
+       },
+       "modules": [
+        {
+         "id": "ahs-appendicitis",
+         "name": {
+          "en": "Appendicitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-gallbladder",
+         "name": {
+          "en": "Gallbladder disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-hernia",
+         "name": {
+          "en": "Hernias"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-obstruction",
+         "name": {
+          "en": "Bowel obstruction"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-colorectal",
+         "name": {
+          "en": "Colorectal cancer"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-anorectal",
+         "name": {
+          "en": "Anorectal disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-hpb",
+         "name": {
+          "en": "Liver, pancreas and spleen surgery"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-breast",
+         "name": {
+          "en": "Breast lumps and cancer"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-neck",
+         "name": {
+          "en": "Neck lumps and thyroid surgery"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-periop",
+         "name": {
+          "en": "Perioperative care"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahs-trauma",
+       "name": {
+        "en": "Trauma and emergency"
+       },
+       "modules": [
+        {
+         "id": "ahs-atls",
+         "name": {
+          "en": "ATLS and resuscitation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-head-injury",
+         "name": {
+          "en": "Head injury"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-chest-trauma",
+         "name": {
+          "en": "Chest trauma"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-abdominal-trauma",
+         "name": {
+          "en": "Abdominal trauma"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-burns",
+         "name": {
+          "en": "Burns"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-shock",
+         "name": {
+          "en": "Surgical shock and transfusion"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahs-vascular",
+       "name": {
+        "en": "Vascular"
+       },
+       "modules": [
+        {
+         "id": "ahs-aortic",
+         "name": {
+          "en": "Aortic aneurysm and dissection"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-limb-ischaemia",
+         "name": {
+          "en": "Acute and chronic limb ischaemia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-venous",
+         "name": {
+          "en": "Venous disease"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahs-urology",
+       "name": {
+        "en": "Urology"
+       },
+       "modules": [
+        {
+         "id": "ahs-stones",
+         "name": {
+          "en": "Urolithiasis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-prostate",
+         "name": {
+          "en": "Prostate disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-bladder",
+         "name": {
+          "en": "Bladder and haematuria"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-scrotal",
+         "name": {
+          "en": "Scrotal emergencies"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahs-ortho",
+       "name": {
+        "en": "Orthopaedics"
+       },
+       "modules": [
+        {
+         "id": "ahs-fractures",
+         "name": {
+          "en": "Fracture principles"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-lower-limb",
+         "name": {
+          "en": "Hip, femur and knee injuries"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-upper-limb",
+         "name": {
+          "en": "Shoulder, arm and hand injuries"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-back-pain",
+         "name": {
+          "en": "Back pain and spinal injury"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-bone-infection",
+         "name": {
+          "en": "Bone and joint infection"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ahs-misc",
+       "name": {
+        "en": "Skin, paediatric and rural"
+       },
+       "modules": [
+        {
+         "id": "ahs-skin",
+         "name": {
+          "en": "Skin lesions and melanoma"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-paeds-surg",
+         "name": {
+          "en": "Paediatric surgical emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-postop",
+         "name": {
+          "en": "Postoperative complications"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ahs-rural",
+         "name": {
+          "en": "Rural surgery and retrieval"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "womens-health",
+     "code": "wh",
+     "name": {
+      "en": "Womens Health"
+     },
+     "ex": [
+      "amc-mcq"
+     ],
+     "sections": [
+      {
+       "id": "wh-obstetrics",
+       "name": {
+        "en": "Obstetrics"
+       },
+       "modules": [
+        {
+         "id": "wh-antenatal",
+         "name": {
+          "en": "Antenatal care and screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-hypertension",
+         "name": {
+          "en": "Hypertensive disorders in pregnancy"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-diabetes",
+         "name": {
+          "en": "Diabetes in pregnancy"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-labour",
+         "name": {
+          "en": "Normal and abnormal labour"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-pph",
+         "name": {
+          "en": "Postpartum haemorrhage"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-ectopic",
+         "name": {
+          "en": "Ectopic pregnancy"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-miscarriage",
+         "name": {
+          "en": "Miscarriage and abortion care"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-preterm",
+         "name": {
+          "en": "Multiple pregnancy and preterm labour"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-infections",
+         "name": {
+          "en": "Infections in pregnancy"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-postnatal",
+         "name": {
+          "en": "Postnatal care and breastfeeding"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "wh-gynae",
+       "name": {
+        "en": "Gynaecology"
+       },
+       "modules": [
+        {
+         "id": "wh-contraception",
+         "name": {
+          "en": "Contraception"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-menstrual",
+         "name": {
+          "en": "Menstrual disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-menopause",
+         "name": {
+          "en": "Menopause"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-pcos",
+         "name": {
+          "en": "PCOS"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-endometriosis",
+         "name": {
+          "en": "Endometriosis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-cervical",
+         "name": {
+          "en": "Cervical screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-gyn-cancer",
+         "name": {
+          "en": "Gynaecological cancers"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-pid",
+         "name": {
+          "en": "PID and STIs"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-urogyn",
+         "name": {
+          "en": "Prolapse and incontinence"
+         },
+         "size": "s"
+        },
+        {
+         "id": "wh-fertility",
+         "name": {
+          "en": "Infertility"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "child-health",
+     "code": "ch",
+     "name": {
+      "en": "Child Health"
+     },
+     "ex": [
+      "amc-mcq"
+     ],
+     "sections": [
+      {
+       "id": "ch-neonatal",
+       "name": {
+        "en": "Neonatal"
+       },
+       "modules": [
+        {
+         "id": "ch-newborn",
+         "name": {
+          "en": "Newborn care and resuscitation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-jaundice",
+         "name": {
+          "en": "Neonatal jaundice"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-neonatal-emergencies",
+         "name": {
+          "en": "Neonatal emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-growth",
+         "name": {
+          "en": "Growth and feeding"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ch-general",
+       "name": {
+        "en": "General paediatrics"
+       },
+       "modules": [
+        {
+         "id": "ch-development",
+         "name": {
+          "en": "Development and behaviour"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-immunisation",
+         "name": {
+          "en": "Immunisation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-fever",
+         "name": {
+          "en": "Fever and sepsis in children"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-resp-upper",
+         "name": {
+          "en": "Croup, otitis and upper respiratory"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-resp-lower",
+         "name": {
+          "en": "Asthma, pneumonia and bronchiolitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-gastro",
+         "name": {
+          "en": "Vomiting, diarrhoea and abdominal pain"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-exanthems",
+         "name": {
+          "en": "Rashes and Kawasaki disease"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "ch-specialty",
+       "name": {
+        "en": "Specialty paediatrics"
+       },
+       "modules": [
+        {
+         "id": "ch-cardiac",
+         "name": {
+          "en": "Congenital heart disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-neuro",
+         "name": {
+          "en": "Seizures and headache"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-renal",
+         "name": {
+          "en": "UTI and nephrotic syndrome"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-haem",
+         "name": {
+          "en": "Anaemia, ITP and leukaemia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-endo",
+         "name": {
+          "en": "Diabetes and growth disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-safety",
+         "name": {
+          "en": "Poisoning and injury prevention"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-adolescent",
+         "name": {
+          "en": "Adolescent health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-indigenous",
+         "name": {
+          "en": "Aboriginal child health and rheumatic fever"
+         },
+         "size": "s"
+        },
+        {
+         "id": "ch-safeguarding",
+         "name": {
+          "en": "Child safeguarding"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mental-health",
+     "code": "mh",
+     "name": {
+      "en": "Mental Health"
+     },
+     "ex": [
+      "amc-mcq"
+     ],
+     "sections": [
+      {
+       "id": "mh-adult",
+       "name": {
+        "en": "Adult disorders"
+       },
+       "modules": [
+        {
+         "id": "mh-depression",
+         "name": {
+          "en": "Depression"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-bipolar",
+         "name": {
+          "en": "Bipolar disorder"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-anxiety",
+         "name": {
+          "en": "Anxiety disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-psychosis",
+         "name": {
+          "en": "Psychosis and schizophrenia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-ocd",
+         "name": {
+          "en": "OCD and related disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-ptsd",
+         "name": {
+          "en": "Trauma and PTSD"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-eating",
+         "name": {
+          "en": "Eating disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-personality",
+         "name": {
+          "en": "Personality disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-sleep",
+         "name": {
+          "en": "Sleep disorders"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mh-substance",
+       "name": {
+        "en": "Substance use"
+       },
+       "modules": [
+        {
+         "id": "mh-alcohol",
+         "name": {
+          "en": "Alcohol use disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-drugs",
+         "name": {
+          "en": "Drug use disorders"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mh-special",
+       "name": {
+        "en": "Special groups and practice"
+       },
+       "modules": [
+        {
+         "id": "mh-older",
+         "name": {
+          "en": "Late-life mental health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-suicide",
+         "name": {
+          "en": "Suicide risk assessment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-child",
+         "name": {
+          "en": "Child and adolescent psychiatry"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-perinatal",
+         "name": {
+          "en": "Perinatal mental health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-medications",
+         "name": {
+          "en": "Psychotropic medications"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-legal",
+         "name": {
+          "en": "Mental Health Act and involuntary treatment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-aboriginal",
+         "name": {
+          "en": "Indigenous mental health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-crisis",
+         "name": {
+          "en": "Crisis assessment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mh-rural",
+         "name": {
+          "en": "Rural mental health"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "population-health-and-ethics",
+     "code": "phe",
+     "name": {
+      "en": "Population Health and Ethics"
+     },
+     "ex": [
+      "amc-mcq"
+     ],
+     "sections": [
+      {
+       "id": "phe-epi",
+       "name": {
+        "en": "Epidemiology and prevention"
+       },
+       "modules": [
+        {
+         "id": "phe-epidemiology",
+         "name": {
+          "en": "Epidemiology: measures and study design"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-biostatistics",
+         "name": {
+          "en": "Biostatistics"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-screening",
+         "name": {
+          "en": "Screening and prevention"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-nip",
+         "name": {
+          "en": "National Immunisation Program"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-lifestyle",
+         "name": {
+          "en": "Smoking, alcohol and lifestyle prevention"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-addiction",
+         "name": {
+          "en": "Population approaches to addiction"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "phe-groups",
+       "name": {
+        "en": "Priority populations"
+       },
+       "modules": [
+        {
+         "id": "phe-indigenous",
+         "name": {
+          "en": "Aboriginal and Torres Strait Islander health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-rural",
+         "name": {
+          "en": "Rural and remote health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-refugee",
+         "name": {
+          "en": "Refugee and migrant health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-environmental",
+         "name": {
+          "en": "Environmental and occupational health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-outbreak",
+         "name": {
+          "en": "Outbreaks and surveillance"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "phe-ethics",
+       "name": {
+        "en": "Ethics and law"
+       },
+       "modules": [
+        {
+         "id": "phe-consent",
+         "name": {
+          "en": "Consent and capacity"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-confidentiality",
+         "name": {
+          "en": "Confidentiality and privacy"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-disclosure",
+         "name": {
+          "en": "Open disclosure"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-reporting",
+         "name": {
+          "en": "Mandatory reporting"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-driving",
+         "name": {
+          "en": "Fitness to drive: Austroads"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-endoflife",
+         "name": {
+          "en": "End-of-life care and advance directives"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-ebm",
+         "name": {
+          "en": "Evidence-based medicine and guidelines"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-system",
+         "name": {
+          "en": "Australian health system: Medicare and PBS"
+         },
+         "size": "s"
+        },
+        {
+         "id": "phe-cultural",
+         "name": {
+          "en": "Cultural safety and communication"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mcc-acute-care",
+     "code": "mcc-ac",
+     "name": {
+      "en": "Acute Care"
+     },
+     "ex": [
+      "mccqe-1"
+     ],
+     "sections": [
+      {
+       "id": "mcc-ac-cardiac",
+       "name": {
+        "en": "Cardiac emergencies"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-chest-pain",
+         "name": {
+          "en": "Chest pain assessment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-acs",
+         "name": {
+          "en": "Acute coronary syndromes"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-hf",
+         "name": {
+          "en": "Acute decompensated heart failure"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-arrhythmia",
+         "name": {
+          "en": "Arrhythmia emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-aortic",
+         "name": {
+          "en": "Aortic dissection"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-resus",
+         "name": {
+          "en": "Cardiac arrest and resuscitation"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-resp",
+       "name": {
+        "en": "Respiratory emergencies"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-dyspnoea",
+         "name": {
+          "en": "Acute dyspnoea"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-asthma",
+         "name": {
+          "en": "Severe asthma"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-pe",
+         "name": {
+          "en": "Pulmonary embolism"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-pneumothorax",
+         "name": {
+          "en": "Pneumothorax and pleural emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-respfail",
+         "name": {
+          "en": "Respiratory failure and ventilation"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-neuro",
+       "name": {
+        "en": "Neurological emergencies"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-stroke",
+         "name": {
+          "en": "Stroke and TIA"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-headache",
+         "name": {
+          "en": "Thunderclap headache: SAH and meningitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-status",
+         "name": {
+          "en": "Status epilepticus"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-delirium",
+         "name": {
+          "en": "Acute delirium"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-syncope",
+         "name": {
+          "en": "Syncope and collapse"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-headinjury",
+         "name": {
+          "en": "Head injury"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-trauma",
+       "name": {
+        "en": "Trauma"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-polytrauma",
+         "name": {
+          "en": "Polytrauma and ATLS"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-spine",
+         "name": {
+          "en": "C-spine rule and cauda equina"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-burns",
+         "name": {
+          "en": "Burns and wounds"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-ortho",
+         "name": {
+          "en": "Orthopaedic emergencies and compartment syndrome"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-abdo",
+       "name": {
+        "en": "Acute abdomen"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-abdopain",
+         "name": {
+          "en": "Acute abdominal pain"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-appendicitis",
+         "name": {
+          "en": "Appendicitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-gib",
+         "name": {
+          "en": "Acute GI bleeding"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-chole",
+         "name": {
+          "en": "Cholecystitis and cholangitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-pancreatitis",
+         "name": {
+          "en": "Acute pancreatitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-obstruction",
+         "name": {
+          "en": "Bowel obstruction"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-ectopic",
+         "name": {
+          "en": "Ruptured ectopic pregnancy"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-renal",
+       "name": {
+        "en": "Renal and GU emergencies"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-aki",
+         "name": {
+          "en": "Acute kidney injury"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-pyelonephritis",
+         "name": {
+          "en": "Pyelonephritis and urosepsis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-colic",
+         "name": {
+          "en": "Renal colic"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-metabolic",
+       "name": {
+        "en": "Metabolic emergencies"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-dka",
+         "name": {
+          "en": "DKA and HHS"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-glucose",
+         "name": {
+          "en": "Hypoglycaemia and glucose emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-potassium",
+         "name": {
+          "en": "Hyperkalaemia and electrolytes"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-id",
+       "name": {
+        "en": "Severe infections"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-sepsis",
+         "name": {
+          "en": "Septic shock and 1-hour bundle"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-meningitis",
+         "name": {
+          "en": "Bacterial meningitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-skin",
+         "name": {
+          "en": "Necrotising infections and cellulitis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-neutropenia",
+         "name": {
+          "en": "Febrile neutropenia"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-tox",
+       "name": {
+        "en": "Toxicology and allergy"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-poisoning",
+         "name": {
+          "en": "Poisoning and overdose"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-anaphylaxis",
+         "name": {
+          "en": "Anaphylaxis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-withdrawal",
+         "name": {
+          "en": "Alcohol withdrawal"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-ac-special",
+       "name": {
+        "en": "Obstetric, paediatric and other"
+       },
+       "modules": [
+        {
+         "id": "mcc-ac-obstetric",
+         "name": {
+          "en": "Obstetric emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-paediatric",
+         "name": {
+          "en": "Paediatric emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-psychiatric",
+         "name": {
+          "en": "Psychiatric emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-dvt",
+         "name": {
+          "en": "Deep vein thrombosis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-limb",
+         "name": {
+          "en": "Acute limb ischaemia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-eye",
+         "name": {
+          "en": "Eye emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-ent",
+         "name": {
+          "en": "Airway, epistaxis and ENT emergencies"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-ac-rash",
+         "name": {
+          "en": "Blistering rashes and SJS"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mcc-chronic-care",
+     "code": "mcc-cc",
+     "name": {
+      "en": "Chronic Care"
+     },
+     "ex": [
+      "mccqe-1"
+     ],
+     "sections": [
+      {
+       "id": "mcc-cc-cardio",
+       "name": {
+        "en": "Cardiometabolic"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-hypertension",
+         "name": {
+          "en": "Hypertension"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-lipids",
+         "name": {
+          "en": "Dyslipidaemia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-angina",
+         "name": {
+          "en": "Stable angina"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-hf",
+         "name": {
+          "en": "Chronic heart failure"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-af",
+         "name": {
+          "en": "Chronic atrial fibrillation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-diabetes",
+         "name": {
+          "en": "Type 2 diabetes"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-diabetescare",
+         "name": {
+          "en": "Diabetes complications and foot care"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-obesity",
+         "name": {
+          "en": "Obesity"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-thyroid",
+         "name": {
+          "en": "Thyroid disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-osteoporosis",
+         "name": {
+          "en": "Osteoporosis treatment"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-resp",
+       "name": {
+        "en": "Respiratory"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-copd",
+         "name": {
+          "en": "COPD"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-asthma",
+         "name": {
+          "en": "Chronic asthma"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-lung",
+         "name": {
+          "en": "Chronic lung disease and ILD"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-sleep",
+         "name": {
+          "en": "Sleep apnoea and sleep disorders"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-renal",
+       "name": {
+        "en": "Renal"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-ckd",
+         "name": {
+          "en": "Chronic kidney disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-proteinuria",
+         "name": {
+          "en": "Proteinuria and glomerular disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-uti",
+         "name": {
+          "en": "Recurrent UTI and stones"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-gi",
+       "name": {
+        "en": "GI and liver"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-ibd",
+         "name": {
+          "en": "Inflammatory bowel disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-liver",
+         "name": {
+          "en": "Chronic liver disease and cirrhosis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-gerd",
+         "name": {
+          "en": "GERD and dyspepsia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-bowel",
+         "name": {
+          "en": "Bowel habit change and constipation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-malabsorption",
+         "name": {
+          "en": "Coeliac disease and malabsorption"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-neuro",
+       "name": {
+        "en": "Neurology and pain"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-migraine",
+         "name": {
+          "en": "Migraine and chronic headache"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-epilepsy",
+         "name": {
+          "en": "Chronic epilepsy"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-parkinsons",
+         "name": {
+          "en": "Parkinson disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-dementia",
+         "name": {
+          "en": "Dementia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-ms",
+         "name": {
+          "en": "Multiple sclerosis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-pain",
+         "name": {
+          "en": "Chronic and neuropathic pain"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-rheum",
+       "name": {
+        "en": "Rheumatology"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-ra",
+         "name": {
+          "en": "Rheumatoid arthritis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-oa",
+         "name": {
+          "en": "Osteoarthritis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-gout",
+         "name": {
+          "en": "Gout and crystal arthritis"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-lupus",
+         "name": {
+          "en": "Lupus and connective tissue disease"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-haem",
+       "name": {
+        "en": "Haematology and oncology"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-anaemia",
+         "name": {
+          "en": "Chronic anaemia"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-anticoag",
+         "name": {
+          "en": "Long-term anticoagulation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-oncology",
+         "name": {
+          "en": "Cancer survivorship and follow-up"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-palliative",
+         "name": {
+          "en": "Palliative symptom control"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-psych",
+       "name": {
+        "en": "Chronic mental health"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-depression",
+         "name": {
+          "en": "Chronic depression"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-bipolar",
+         "name": {
+          "en": "Chronic bipolar disorder"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-anxiety",
+         "name": {
+          "en": "Chronic anxiety"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-psychosis",
+         "name": {
+          "en": "Chronic psychotic disorders"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-addiction",
+         "name": {
+          "en": "Chronic addiction care"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-id",
+       "name": {
+        "en": "Chronic infections"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-hiv",
+         "name": {
+          "en": "Chronic HIV care"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-tb",
+         "name": {
+          "en": "Latent and active TB"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-cc-misc",
+       "name": {
+        "en": "Skin, senses, urology and geriatrics"
+       },
+       "modules": [
+        {
+         "id": "mcc-cc-skin",
+         "name": {
+          "en": "Chronic skin disease"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-sensory",
+         "name": {
+          "en": "Hearing and vision loss"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-menopause",
+         "name": {
+          "en": "Menopause and HRT"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-prostate",
+         "name": {
+          "en": "BPH and prostate care"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-bladder",
+         "name": {
+          "en": "Incontinence and bladder care"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-geriatrics",
+         "name": {
+          "en": "Frailty and geriatric assessment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-cc-polypharmacy",
+         "name": {
+          "en": "Multimorbidity and polypharmacy"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mcc-health-promotion",
+     "code": "mcc-hp",
+     "name": {
+      "en": "Health Promotion"
+     },
+     "ex": [
+      "mccqe-1"
+     ],
+     "sections": [
+      {
+       "id": "mcc-hp-immun",
+       "name": {
+        "en": "Immunisation and travel"
+       },
+       "modules": [
+        {
+         "id": "mcc-hp-childimm",
+         "name": {
+          "en": "Childhood immunisation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-adultimm",
+         "name": {
+          "en": "Adult immunisation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-travel",
+         "name": {
+          "en": "Travel medicine"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-respviruses",
+         "name": {
+          "en": "Influenza, COVID and RSV vaccines"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-hp-child",
+       "name": {
+        "en": "Child and adolescent"
+       },
+       "modules": [
+        {
+         "id": "mcc-hp-wellbaby",
+         "name": {
+          "en": "Well-baby assessment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-development",
+         "name": {
+          "en": "Developmental screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-newbornscreen",
+         "name": {
+          "en": "Newborn screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-adolescent",
+         "name": {
+          "en": "Adolescent health and risk behaviours"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-hp-cancer",
+       "name": {
+        "en": "Cancer screening"
+       },
+       "modules": [
+        {
+         "id": "mcc-hp-breast",
+         "name": {
+          "en": "Breast cancer screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-colorectal",
+         "name": {
+          "en": "Colorectal cancer screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-cervical",
+         "name": {
+          "en": "Cervical cancer screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-otherscreen",
+         "name": {
+          "en": "Lung and prostate screening decisions"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-hp-cardio",
+       "name": {
+        "en": "Cardiometabolic prevention"
+       },
+       "modules": [
+        {
+         "id": "mcc-hp-diabetes-screen",
+         "name": {
+          "en": "Diabetes screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-cvd",
+         "name": {
+          "en": "Cardiovascular risk and statins"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-hypertension-screen",
+         "name": {
+          "en": "Hypertension screening"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-hp-lifestyle",
+       "name": {
+        "en": "Lifestyle"
+       },
+       "modules": [
+        {
+         "id": "mcc-hp-smoking",
+         "name": {
+          "en": "Smoking cessation"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-substance",
+         "name": {
+          "en": "Alcohol and substance prevention"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-weight",
+         "name": {
+          "en": "Healthy weight, diet and exercise"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-hp-repro",
+       "name": {
+        "en": "Reproductive"
+       },
+       "modules": [
+        {
+         "id": "mcc-hp-prenatal",
+         "name": {
+          "en": "Prenatal care"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-familyplan",
+         "name": {
+          "en": "Family planning and contraception"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-sti",
+         "name": {
+          "en": "STI screening"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-hp-adult",
+       "name": {
+        "en": "Adult and older adult"
+       },
+       "modules": [
+        {
+         "id": "mcc-hp-osteoporosis-screen",
+         "name": {
+          "en": "Osteoporosis screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-falls",
+         "name": {
+          "en": "Falls and older adult assessment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-mental-screen",
+         "name": {
+          "en": "Depression and anxiety screening"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-hivprep",
+         "name": {
+          "en": "HIV prevention: PrEP and PEP"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-tbscreen",
+         "name": {
+          "en": "TB screening in risk groups"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-hp-pop",
+       "name": {
+        "en": "Populations and value"
+       },
+       "modules": [
+        {
+         "id": "mcc-hp-indigenous",
+         "name": {
+          "en": "Indigenous prevention and cultural safety"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-newcomers",
+         "name": {
+          "en": "Newcomer and refugee health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-occupational",
+         "name": {
+          "en": "Workplace and occupational health"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-hp-lowvalue",
+         "name": {
+          "en": "Avoiding low-value screening: Choosing Wisely"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mcc-professional-behaviours",
+     "code": "mcc-pb",
+     "name": {
+      "en": "Professional Behaviours"
+     },
+     "ex": [
+      "mccqe-1"
+     ],
+     "sections": [
+      {
+       "id": "mcc-pb-decision",
+       "name": {
+        "en": "Decision-making"
+       },
+       "modules": [
+        {
+         "id": "mcc-pb-capacity",
+         "name": {
+          "en": "Decision-making capacity"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-consent",
+         "name": {
+          "en": "Informed consent"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-substitute",
+         "name": {
+          "en": "Substitute decision-makers"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-maid",
+         "name": {
+          "en": "Medical Assistance in Dying"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-pb-privacy",
+       "name": {
+        "en": "Privacy and safety"
+       },
+       "modules": [
+        {
+         "id": "mcc-pb-confidentiality",
+         "name": {
+          "en": "Confidentiality"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-adolescent",
+         "name": {
+          "en": "Mature minors and adolescent consent"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-disclosure",
+         "name": {
+          "en": "Error disclosure and CMPA"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-safety",
+         "name": {
+          "en": "Patient safety and reporting"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-pb-endoflife",
+       "name": {
+        "en": "End of life and communication"
+       },
+       "modules": [
+        {
+         "id": "mcc-pb-endoflife",
+         "name": {
+          "en": "End-of-life care and goals"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-badnews",
+         "name": {
+          "en": "Breaking bad news"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-disputes",
+         "name": {
+          "en": "Goals-of-care disputes"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-grief",
+         "name": {
+          "en": "Grief and bereavement"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-pb-equity",
+       "name": {
+        "en": "Equity and cultural safety"
+       },
+       "modules": [
+        {
+         "id": "mcc-pb-indigenous",
+         "name": {
+          "en": "Indigenous cultural safety"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-interpreters",
+         "name": {
+          "en": "Language barriers and interpreters"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-diversity",
+         "name": {
+          "en": "2SLGBTQ+ and gender-affirming care"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-rural",
+         "name": {
+          "en": "Rural and remote ethics"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-pb-violence",
+       "name": {
+        "en": "Violence and vulnerability"
+       },
+       "modules": [
+        {
+         "id": "mcc-pb-ipv",
+         "name": {
+          "en": "Intimate partner violence"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-child",
+         "name": {
+          "en": "Child maltreatment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-elder",
+         "name": {
+          "en": "Elder abuse"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-warn",
+         "name": {
+          "en": "Duty to warn and protect"
+         },
+         "size": "s"
+        }
+       ]
+      },
+      {
+       "id": "mcc-pb-practice",
+       "name": {
+        "en": "Practice and professionalism"
+       },
+       "modules": [
+        {
+         "id": "mcc-pb-driving",
+         "name": {
+          "en": "Fitness to drive and reporting"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-boundaries",
+         "name": {
+          "en": "Professional boundaries"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-impairment",
+         "name": {
+          "en": "Physician impairment"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-stewardship",
+         "name": {
+          "en": "Resource stewardship"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-virtual",
+         "name": {
+          "en": "Virtual care ethics"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-team",
+         "name": {
+          "en": "Collaboration and handover"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-records",
+         "name": {
+          "en": "Documentation and records"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-reproductive",
+         "name": {
+          "en": "Reproductive ethics"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-transfusion",
+         "name": {
+          "en": "Transfusion refusal"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-organ",
+         "name": {
+          "en": "Organ donation and death determination"
+         },
+         "size": "s"
+        },
+        {
+         "id": "mcc-pb-mentalhealthlaw",
+         "name": {
+          "en": "Mental health law"
+         },
+         "size": "s"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mrcp",
+   "name": {
+    "en": "MRCP(UK)"
+   },
+   "subjects": [
+    {
+     "id": "mrcp-cardiology",
+     "code": "mcr",
+     "name": {
+      "en": "Cardiology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mcard-failure-valve",
+       "name": {
+        "en": "Heart failure, valve and pericardial disease"
+       },
+       "modules": [
+        {
+         "id": "mcard-heart-failure",
+         "name": {
+          "en": "Heart failure: diagnosis, classification and management"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mcard-cardiomyopathy",
+         "name": {
+          "en": "Cardiomyopathies and inherited cardiac conditions"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mcard-valvular",
+         "name": {
+          "en": "Valvular heart disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mcard-pericardial",
+         "name": {
+          "en": "Pericardial disease and myocarditis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mcard-coronary-rhythm",
+       "name": {
+        "en": "Coronary, rhythm and vascular disease"
+       },
+       "modules": [
+        {
+         "id": "mcard-acs",
+         "name": {
+          "en": "Acute coronary syndromes and stable angina"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mcard-arrhythmia",
+         "name": {
+          "en": "Atrial fibrillation and supraventricular arrhythmias"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mcard-hypertension",
+         "name": {
+          "en": "Hypertension: diagnosis and management"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mcard-aortic-congenital",
+         "name": {
+          "en": "Aortic disease and adult congenital heart disease"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-respiratory",
+     "code": "mrs",
+     "name": {
+      "en": "Respiratory Medicine"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mresp-airways",
+       "name": {
+        "en": "Airways disease and failure"
+       },
+       "modules": [
+        {
+         "id": "mresp-asthma",
+         "name": {
+          "en": "Asthma: diagnosis and stepwise management"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mresp-copd",
+         "name": {
+          "en": "COPD: diagnosis and management"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mresp-failure",
+         "name": {
+          "en": "Respiratory failure, ABG interpretation and NIV"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mresp-tb",
+         "name": {
+          "en": "Respiratory tuberculosis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mresp-parenchymal",
+       "name": {
+        "en": "Parenchymal, pleural and vascular disease"
+       },
+       "modules": [
+        {
+         "id": "mresp-pneumonia",
+         "name": {
+          "en": "Pneumonia in adults: diagnosis and management"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mresp-ild",
+         "name": {
+          "en": "Interstitial lung disease and sarcoidosis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mresp-pleural-cancer",
+         "name": {
+          "en": "Pleural disease and lung cancer"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mresp-pe",
+         "name": {
+          "en": "Pulmonary embolism and pulmonary hypertension"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-gastroenterology",
+     "code": "mge",
+     "name": {
+      "en": "Gastroenterology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mgas-liver-pancreas",
+       "name": {
+        "en": "Liver, biliary and pancreatic disease"
+       },
+       "modules": [
+        {
+         "id": "mgas-cirrhosis",
+         "name": {
+          "en": "Cirrhosis, portal hypertension and complications"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgas-hepatitis",
+         "name": {
+          "en": "Viral and autoimmune hepatitis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgas-biliary",
+         "name": {
+          "en": "Gallbladder and biliary disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgas-pancreatitis",
+         "name": {
+          "en": "Acute and chronic pancreatitis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mgas-lumen",
+       "name": {
+        "en": "Luminal gastroenterology"
+       },
+       "modules": [
+        {
+         "id": "mgas-ibd",
+         "name": {
+          "en": "Inflammatory bowel disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgas-bleed",
+         "name": {
+          "en": "Upper GI bleeding and dyspepsia"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgas-malabsorption",
+         "name": {
+          "en": "Coeliac disease and malabsorption"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgas-functional",
+         "name": {
+          "en": "IBS and functional gut disorders"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-nephrology",
+     "code": "mnp",
+     "name": {
+      "en": "Nephrology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mneph-failure",
+       "name": {
+        "en": "Kidney failure and replacement"
+       },
+       "modules": [
+        {
+         "id": "mneph-aki",
+         "name": {
+          "en": "Acute kidney injury"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneph-ckd",
+         "name": {
+          "en": "Chronic kidney disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneph-dialysis",
+         "name": {
+          "en": "Dialysis: indications, complications and management"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneph-transplant",
+         "name": {
+          "en": "Renal transplantation and immunosuppression"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mneph-glomerular-fluids",
+       "name": {
+        "en": "Glomerular disease and fluids"
+       },
+       "modules": [
+        {
+         "id": "mneph-glomerular",
+         "name": {
+          "en": "Glomerulonephritis and nephritic syndromes"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneph-nephrotic",
+         "name": {
+          "en": "Nephrotic syndrome and proteinuria"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneph-electrolytes",
+         "name": {
+          "en": "Sodium, potassium and acid-base disorders"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneph-tubular",
+         "name": {
+          "en": "Tubulointerstitial and renal tubular disorders"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-neurology",
+     "code": "mnr",
+     "name": {
+      "en": "Neurology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mneur-central",
+       "name": {
+        "en": "Stroke, epilepsy, headache and CNS infection"
+       },
+       "modules": [
+        {
+         "id": "mneur-stroke",
+         "name": {
+          "en": "Stroke and transient ischaemic attack"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneur-epilepsy",
+         "name": {
+          "en": "Epilepsy and seizures"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneur-headache",
+         "name": {
+          "en": "Headache, migraine and facial pain"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneur-cns-infection",
+         "name": {
+          "en": "Meningitis, encephalitis and CNS infections"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mneur-movement-cognitive",
+       "name": {
+        "en": "Movement, nerves, muscle and cognition"
+       },
+       "modules": [
+        {
+         "id": "mneur-parkinson",
+         "name": {
+          "en": "Parkinson's disease and movement disorders"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneur-ms",
+         "name": {
+          "en": "Multiple sclerosis and neuroinflammatory disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneur-neuropathy",
+         "name": {
+          "en": "Neuropathies, myopathies and NMJ disorders"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mneur-dementia",
+         "name": {
+          "en": "Dementia and cognitive disorders"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-endocrinology",
+     "code": "men",
+     "name": {
+      "en": "Endocrinology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mendo-pancreas-metabolic",
+       "name": {
+        "en": "Diabetes and metabolic disease"
+       },
+       "modules": [
+        {
+         "id": "mendo-diabetes",
+         "name": {
+          "en": "Diabetes mellitus: diagnosis and management"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mendo-diab-emerg",
+         "name": {
+          "en": "Diabetic emergencies: DKA, HHS and hypoglycaemia"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mendo-obesity-lipid",
+         "name": {
+          "en": "Obesity, lipids and metabolic syndrome"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mendo-calcium",
+         "name": {
+          "en": "Calcium, parathyroid and bone metabolism"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mendo-glandular",
+       "name": {
+        "en": "Thyroid, pituitary, adrenal and gonadal"
+       },
+       "modules": [
+        {
+         "id": "mendo-thyroid",
+         "name": {
+          "en": "Thyroid disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mendo-pituitary",
+         "name": {
+          "en": "Pituitary disorders"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mendo-adrenal",
+         "name": {
+          "en": "Adrenal disorders: Addison's, Cushing's, phaeochromocytoma"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mendo-gonadal",
+         "name": {
+          "en": "Gonadal and reproductive endocrinology"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-rheumatology",
+     "code": "mru",
+     "name": {
+      "en": "Rheumatology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mrheu-inflammatory",
+       "name": {
+        "en": "Inflammatory arthritis and vasculitis"
+       },
+       "modules": [
+        {
+         "id": "mrheu-ra",
+         "name": {
+          "en": "Rheumatoid arthritis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mrheu-sle",
+         "name": {
+          "en": "SLE and connective tissue diseases"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mrheu-vasculitis",
+         "name": {
+          "en": "Vasculitis including GCA and ANCA disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mrheu-spa",
+         "name": {
+          "en": "Axial spondyloarthritis and psoriatic arthritis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mrheu-crystal-bone",
+       "name": {
+        "en": "Crystal, muscle and bone disease"
+       },
+       "modules": [
+        {
+         "id": "mrheu-crystal",
+         "name": {
+          "en": "Gout and calcium crystal disease"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mrheu-myositis",
+         "name": {
+          "en": "Myositis, scleroderma and Sjogren's"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mrheu-pmr",
+         "name": {
+          "en": "Polymyalgia rheumatica and giant cell arteritis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mrheu-bone",
+         "name": {
+          "en": "Metabolic bone disease and osteoporosis"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-infectious-diseases",
+     "code": "mid",
+     "name": {
+      "en": "Infectious Diseases"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "minf-systemic",
+       "name": {
+        "en": "Systemic infections"
+       },
+       "modules": [
+        {
+         "id": "minf-sepsis",
+         "name": {
+          "en": "Suspected sepsis in adults: recognition and management"
+         },
+         "size": "m"
+        },
+        {
+         "id": "minf-hiv",
+         "name": {
+          "en": "HIV and opportunistic infections"
+         },
+         "size": "m"
+        },
+        {
+         "id": "minf-tb",
+         "name": {
+          "en": "Tuberculosis: pulmonary and extrapulmonary"
+         },
+         "size": "m"
+        },
+        {
+         "id": "minf-endocarditis",
+         "name": {
+          "en": "Infective endocarditis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "minf-focal-stewardship",
+       "name": {
+        "en": "Focal infections and stewardship"
+       },
+       "modules": [
+        {
+         "id": "minf-uti",
+         "name": {
+          "en": "Urinary tract infections"
+         },
+         "size": "m"
+        },
+        {
+         "id": "minf-travel",
+         "name": {
+          "en": "Malaria and travel-related infections"
+         },
+         "size": "m"
+        },
+        {
+         "id": "minf-nosocomial",
+         "name": {
+          "en": "Hospital-acquired infections and C. difficile"
+         },
+         "size": "m"
+        },
+        {
+         "id": "minf-antimicrobial",
+         "name": {
+          "en": "Antimicrobial stewardship and prescribing"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-haematology-oncology",
+     "code": "mho",
+     "name": {
+      "en": "Clinical Haematology and Oncology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mhaem-benign",
+       "name": {
+        "en": "Benign haematology"
+       },
+       "modules": [
+        {
+         "id": "mhaem-anaemia",
+         "name": {
+          "en": "Anaemia: iron, B12, folate and workup"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mhaem-haemolysis",
+         "name": {
+          "en": "Haemolysis, thalassaemia and haemoglobinopathies"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mhaem-platelet",
+         "name": {
+          "en": "Platelet disorders: ITP, TTP and HIT"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mhaem-coagulation",
+         "name": {
+          "en": "Coagulation disorders, DIC and thrombophilia"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mhaem-malignant",
+       "name": {
+        "en": "Haemato-oncology"
+       },
+       "modules": [
+        {
+         "id": "mhaem-lymphoma",
+         "name": {
+          "en": "Lymphoma and chronic leukaemias"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mhaem-myeloma",
+         "name": {
+          "en": "Myeloma and plasma cell disorders"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mhaem-acute-leuk",
+         "name": {
+          "en": "Acute leukaemias and myelodysplasia"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mhaem-oncology",
+         "name": {
+          "en": "Suspected cancer: recognition and referral"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-pharmacology",
+     "code": "mph",
+     "name": {
+      "en": "Clinical Pharmacology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mphar-principles",
+       "name": {
+        "en": "Principles and safety"
+       },
+       "modules": [
+        {
+         "id": "mphar-adr",
+         "name": {
+          "en": "Adverse drug reactions and pharmacovigilance"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mphar-interactions",
+         "name": {
+          "en": "Drug interactions and clinical pharmacokinetics"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mphar-special",
+         "name": {
+          "en": "Prescribing in pregnancy, elderly and organ impairment"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mphar-biologics",
+         "name": {
+          "en": "Biologics, immunosuppressants and DMARD monitoring"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mphar-therapeutics",
+       "name": {
+        "en": "Therapeutics and toxicology"
+       },
+       "modules": [
+        {
+         "id": "mphar-anticoag",
+         "name": {
+          "en": "Anticoagulant and antiplatelet therapy"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mphar-antimicrobial",
+         "name": {
+          "en": "Antimicrobial prescribing and stewardship"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mphar-analgesia",
+         "name": {
+          "en": "Analgesia, opioids and palliative prescribing"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mphar-toxicology",
+         "name": {
+          "en": "Poisoning and overdose management"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-dermatology",
+     "code": "mdm",
+     "name": {
+      "en": "Dermatology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mderm-inflammatory",
+       "name": {
+        "en": "Inflammatory skin disease"
+       },
+       "modules": [
+        {
+         "id": "mderm-eczema",
+         "name": {
+          "en": "Eczema and dermatitis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mderm-psoriasis",
+         "name": {
+          "en": "Psoriasis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mderm-blistering",
+         "name": {
+          "en": "Blistering diseases: pemphigus, pemphigoid"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mderm-acne",
+         "name": {
+          "en": "Acne, rosacea and hidradenitis"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mderm-infection-emergency",
+       "name": {
+        "en": "Infection, appendages and emergencies"
+       },
+       "modules": [
+        {
+         "id": "mderm-infection",
+         "name": {
+          "en": "Skin infections and infestations"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mderm-vasculitis",
+         "name": {
+          "en": "Cutaneous vasculitis and panniculitis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mderm-hair-nail",
+         "name": {
+          "en": "Hair, nail and pigmentation disorders"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mderm-emergency",
+         "name": {
+          "en": "Dermatological emergencies: SJS/TEN, erythroderma"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-ophthalmology",
+     "code": "mop",
+     "name": {
+      "en": "Ophthalmology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mopht-medical",
+       "name": {
+        "en": "Medical ophthalmology"
+       },
+       "modules": [
+        {
+         "id": "mopht-red-eye",
+         "name": {
+          "en": "The red eye: conjunctivitis, uveitis, scleritis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mopht-glaucoma",
+         "name": {
+          "en": "Glaucoma and cataract"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mopht-diabetic",
+         "name": {
+          "en": "Diabetic retinopathy and maculopathy"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mopht-systemic",
+         "name": {
+          "en": "Systemic disease and the eye"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mopht-neuro-urgent",
+       "name": {
+        "en": "Neuro-ophthalmology and urgent loss"
+       },
+       "modules": [
+        {
+         "id": "mopht-acute-loss",
+         "name": {
+          "en": "Acute visual loss: GCA, retinal vascular occlusion"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mopht-neuro",
+         "name": {
+          "en": "Neuro-ophthalmology: optic neuritis, palsies, fields"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mopht-amd",
+         "name": {
+          "en": "Age-related macular degeneration"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mopht-orbital",
+         "name": {
+          "en": "Orbital and periorbital disease"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-geriatrics",
+     "code": "mgr",
+     "name": {
+      "en": "Geriatrics"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mgeri-syndromes",
+       "name": {
+        "en": "Geriatric syndromes"
+       },
+       "modules": [
+        {
+         "id": "mgeri-frailty",
+         "name": {
+          "en": "Frailty, falls and comprehensive geriatric assessment"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgeri-delirium",
+         "name": {
+          "en": "Delirium and dementia in older people"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgeri-continence",
+         "name": {
+          "en": "Continence, nutrition and pressure care"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgeri-atypical",
+         "name": {
+          "en": "Atypical presentations of disease in old age"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mgeri-care",
+       "name": {
+        "en": "Medicines, rehab and end of life care"
+       },
+       "modules": [
+        {
+         "id": "mgeri-polypharmacy",
+         "name": {
+          "en": "Polypharmacy and deprescribing"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgeri-rehab",
+         "name": {
+          "en": "Stroke rehabilitation and intermediate care"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgeri-eol",
+         "name": {
+          "en": "End of life care"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mgeri-capacity",
+         "name": {
+          "en": "Capacity, consent and safeguarding"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-psychiatry",
+     "code": "mps",
+     "name": {
+      "en": "Psychiatry"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mpsyc-affective-psychotic",
+       "name": {
+        "en": "Affective and psychotic disorders"
+       },
+       "modules": [
+        {
+         "id": "mpsyc-depression",
+         "name": {
+          "en": "Depression"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mpsyc-bipolar",
+         "name": {
+          "en": "Bipolar disorder and mania"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mpsyc-psychosis",
+         "name": {
+          "en": "Schizophrenia and psychosis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mpsyc-suicide",
+         "name": {
+          "en": "Suicide risk and deliberate self-harm"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mpsyc-other",
+       "name": {
+        "en": "Anxiety, substances, eating and drugs"
+       },
+       "modules": [
+        {
+         "id": "mpsyc-anxiety",
+         "name": {
+          "en": "Anxiety, OCD and PTSD"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mpsyc-alcohol",
+         "name": {
+          "en": "Alcohol and substance misuse"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mpsyc-eating",
+         "name": {
+          "en": "Eating disorders"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mpsyc-pharma",
+         "name": {
+          "en": "Psychopharmacology: lithium, clozapine, antidepressants"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-statistics",
+     "code": "mst",
+     "name": {
+      "en": "Statistics and Epidemiology"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mstat-methods",
+       "name": {
+        "en": "Methods and accuracy"
+       },
+       "modules": [
+        {
+         "id": "mstat-design",
+         "name": {
+          "en": "Study design, bias and confounding"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mstat-accuracy",
+         "name": {
+          "en": "Sensitivity, specificity and screening"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mstat-risk",
+         "name": {
+          "en": "Risk, NNT/NNH and likelihood ratios"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mstat-testing",
+         "name": {
+          "en": "Hypothesis testing, p values and confidence intervals"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mstat-advanced",
+       "name": {
+        "en": "Analysis, appraisal and audit"
+       },
+       "modules": [
+        {
+         "id": "mstat-regression",
+         "name": {
+          "en": "Regression, correlation and survival analysis"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mstat-ebm",
+         "name": {
+          "en": "Systematic reviews, meta-analysis and critical appraisal"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mstat-audit",
+         "name": {
+          "en": "Clinical audit, governance and quality improvement"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mstat-sampling",
+         "name": {
+          "en": "Sampling, sample size and power"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "mrcp-basic-science",
+     "code": "mbs",
+     "name": {
+      "en": "Basic Science"
+     },
+     "ex": [
+      "mrcp",
+      "mrcp-part1",
+      "mrcp-part2-written"
+     ],
+     "medmcqa": null,
+     "sections": [
+      {
+       "id": "mbsci-molecular",
+       "name": {
+        "en": "Molecules, genes and microbes"
+       },
+       "modules": [
+        {
+         "id": "mbsci-genetics",
+         "name": {
+          "en": "Molecular biology, genetics and inheritance"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mbsci-immunology",
+         "name": {
+          "en": "Immunology and inflammation"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mbsci-biochem",
+         "name": {
+          "en": "Biochemistry and intermediary metabolism"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mbsci-micro",
+         "name": {
+          "en": "Microbiology principles and resistance"
+         },
+         "size": "m"
+        }
+       ]
+      },
+      {
+       "id": "mbsci-systems",
+       "name": {
+        "en": "Systems and structure"
+       },
+       "modules": [
+        {
+         "id": "mbsci-physiology",
+         "name": {
+          "en": "Cardiovascular and respiratory physiology"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mbsci-renal-phys",
+         "name": {
+          "en": "Renal physiology, fluids and electrolytes"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mbsci-anatomy",
+         "name": {
+          "en": "Clinical anatomy"
+         },
+         "size": "m"
+        },
+        {
+         "id": "mbsci-pathology",
+         "name": {
+          "en": "Cellular pathology and neoplasia"
+         },
+         "size": "m"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -23,7 +23,9 @@ test("cycle id is deterministic and doc-id-safe (mirrors memberId sanitize)", ()
 test("rchop.json validates against protocol.schema.json (validator wired for protocols/)", () => {
   // Run the real validator; capture stdout even if OTHER kb dirs fail, then assert protocols passed.
   let out;
-  try { out = execFileSync("node", [join(ROOT, "kb/tools/validate-content.mjs")], { cwd: ROOT, encoding: "utf8" }); }
+  // The validator prints every finding across kb/ (over 3 MB today, mostly diseases/ schema drift); execFileSync's
+  // 1 MB default buffer truncated it before the protocols summary and failed this test for an unrelated directory.
+  try { out = execFileSync("node", [join(ROOT, "kb/tools/validate-content.mjs")], { cwd: ROOT, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 }); }
   catch (e) { out = (e.stdout || "") + (e.stderr || ""); }
   // no per-file protocol error lines, and the summary marks the dir clean
   assert.ok(!/✗ protocols\//.test(out), "a protocols/*.json file failed schema validation:\n" + out);
