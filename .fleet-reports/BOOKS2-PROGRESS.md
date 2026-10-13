@@ -162,3 +162,8 @@
 - Branch books2-path5 from origin/main, PR #1590 open (no merge; squash after browser job). 8 lessons + 8 KB + 80 MCQs bk2-pat-451..530 (cervix-uterus, ovary, pituitary-adrenal, bone, joints-soft-tissue, cns-non-neoplastic, nerve-muscle, skin).
 - Gates: LP.checkLesson 8/8, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23. 80 IDs unique, no dups. maikbook2 1080 -> 1160 (1250 after PATH4 #1589 merges; rebase then).
 - STATE2/COVERAGE2 updated + mirrors. Next: pharmacology 28.
+## Wave PHARMA2 (2026-10-13, muse Wonder): pharmacology 10/28
+- Branch books2-pharma2 from origin/main, PR #1591 open (no merge; squash after browser job). 10 lessons + 10 KB + 100 MCQs bk2-phm-121..220 (sedative-hypnotics, general/local-anaesthetics, opioids, antidepressants, antipsychotics, antiepileptics, cns-stimulants, corticosteroids, insulin).
+- Gates: LP.checkLesson 10/10, kb_validate_v2 10/10, prep-books-mcqs 2/2, prep-lessons 23/23. 100 IDs unique, no dups. maikbook2 1080 -> 1180.
+- Note: phm-opioids/corticosteroids/insulin had minimal unindexed stub files on main; wave overwrote them with full lessons (139 replaced lines). Untracked tools/generate-books2-pharma2.mjs is an unrelated 2-module stub, left untouched.
+- STATE2/COVERAGE2 updated + mirrors. Next: PHARMA3 (10 modules).
