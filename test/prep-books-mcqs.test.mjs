@@ -88,5 +88,5 @@ test("maikbook2 overlay items well formed across all subjects", () => {
     }
   }
 
-  assert.equal(totalItems, 2920, "Expected 2920 high-yield verified MCQs in maikbook2 (350 OBG + 530 pathology batch 2 + 400 pharmacology batch 2 + 270 ENT + 170 psychiatry + 200 ophthalmology + 240 microbiology + 170 paediatrics + 80 anaesthesia + 80 surgery + 150 physiology + 280 medicine)");
+  assert.equal(totalItems, 3010, "Expected 3010 high-yield verified MCQs in maikbook2 (350 OBG + 530 pathology batch 2 + 400 pharmacology batch 2 + 270 ENT + 170 psychiatry + 200 ophthalmology + 240 microbiology + 170 paediatrics + 80 anaesthesia + 80 surgery + 150 physiology + 370 medicine)");
 });
