@@ -55,7 +55,7 @@
     { id: "medical-oncology", label: "Medical Oncology group", feeder: "MD or DNB General Medicine or equivalent", subjects: ["ss-medical-oncology"] },
     { id: "microbiology", label: "Microbiology group", feeder: "MD or DNB Microbiology", subjects: [] },
     { id: "obs-gynae", label: "Obstetrics and Gynaecology group", feeder: "MS or DNB Obstetrics and Gynaecology", subjects: ["ss-gynaecological-oncology", "ss-reproductive-medicine"] },
-    { id: "orthopaedics", label: "Orthopaedics group", feeder: "MS or DNB Orthopaedics", subjects: [] },
+    { id: "orthopaedics", label: "Orthopaedics group", feeder: "MS or DNB Orthopaedics", subjects: ["ss-hand-surgery", "ss-paediatric-orthopaedics"] },
     { id: "paediatric", label: "Paediatric group", feeder: "MD or DNB Paediatrics", subjects: ["ss-neonatology", "ss-paediatric-cardiology", "ss-paediatric-neurology", "ss-paediatric-gastroenterology", "ss-paediatric-nephrology", "ss-paediatric-hepatology", "ss-paediatric-oncology", "ss-paediatric-critical-care"] },
     { id: "pathology", label: "Pathology group", feeder: "MD or DNB Pathology", subjects: [] },
     { id: "pharmacology", label: "Pharmacology group", feeder: "MD or DNB Pharmacology", subjects: [] },
