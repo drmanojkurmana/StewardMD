@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "psy-eating",
+ "subject": "psychiatry",
+ "title": "Eating disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Anorexia nervosa** combines restriction leading to significantly low weight, intense fear of gaining weight and body image disturbance (weight or shape overvalued, or persistent behaviour interfering with gain plus lack of recognition of seriousness). Subtypes restrict or binge purge. Medical sequelae span bradycardia, hypotension, hypothermia, amenorrhoea and low T3, lanugo, osteoporosis, electrolyte and cardiac death risk; mortality is among highest in psychiatry, largely medical and suicide. BMI grades severity in adults but children use expected body weight trajectories.",
+   "say": "Low weight plus terror of fat plus distorted image is anorexia. It kills medically and by suicide more than most psychiatry.",
+   "vis": null
+  },
+  {
+   "tx": "**Bulimia nervosa** cycles binge eating (large amount with loss of control) with compensatory vomiting, laxatives, fasting or exercise at least weekly for three months at normal or above weight, with dental erosion, parotid swelling, hypokalaemic alkalosis and Russell sign (knuckle callus). **Binge eating disorder** binges without compensation, associated obesity and shame. Pica, rumination and avoidant restrictive (ARFID, fear or sensory based without body image drive, common in children and autism) complete the chapter patterns.",
+   "say": "Normal weight binges with vomiting is bulimia: teeth, parotids and potassium betray it. ARFID fears food without body image drive.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Refeeding syndrome is the lethal trap of renutrition: insulin surge drives phosphate, potassium and magnesium intracellularly causing cardiac failure, arrhythmia and death in first days, so high risk patients (very low BMI, minimal intake over ten days, low baseline electrolytes, alcohol comorbidity) start low calories with thiamine, vitamins and daily electrolyte replacement and monitoring per local (NICE style) protocol. Weight restoration in anorexia is usually inpatient when medical instability, rapid loss or failed outpatient gain threatens life.",
+   "say": "Feed too fast and phosphate crashes kill. Start low, replace electrolytes daily, give thiamine.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Treatment is multidisciplinary: medical monitoring, dietetic weight restoration and psychotherapy (CBT E enhanced, family based treatment first line in adolescents, MANTRA or specialist supportive therapy in adults). Fluoxetine helps bulimia relapse prevention at higher dose patterns; no drug treats anorexia core (olanzapine modest weight adjunct evidence only). Osteoporosis needs weight restoration above oestrogen pills alone, with DEXA monitoring. Compulsory feeding under mental health law is last resort life saving frame.",
+   "say": "Family therapy feeds adolescents back. CBT E leads bulimia and adult care. No pill cures anorexia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Weight",
+     "Compensation",
+     "Signature clue"
+    ],
+    "rows": [
+     [
+      "Anorexia",
+      "Significantly low",
+      "Restriction with or without purge",
+      "Bradycardia, lanugo, amenorrhoea"
+     ],
+     [
+      "Bulimia",
+      "Normal or high",
+      "Weekly purge behaviours",
+      "Dental erosion, low potassium alkalosis"
+     ],
+     [
+      "Binge eating",
+      "Often high",
+      "None",
+      "Loss of control with shame"
+     ],
+     [
+      "ARFID",
+      "Low or normal",
+      "Avoidance by fear or senses",
+      "No body image drive"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-131",
+  "bk2-psy-132",
+  "bk2-psy-133",
+  "bk2-psy-134",
+  "bk2-psy-135",
+  "bk2-psy-136",
+  "bk2-psy-137",
+  "bk2-psy-138",
+  "bk2-psy-139",
+  "bk2-psy-140"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
