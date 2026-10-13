@@ -58,8 +58,8 @@
     { id: "orthopaedics", label: "Orthopaedics group", feeder: "MS or DNB Orthopaedics", subjects: ["ss-hand-surgery", "ss-paediatric-orthopaedics"] },
     { id: "paediatric", label: "Paediatric group", feeder: "MD or DNB Paediatrics", subjects: ["ss-neonatology", "ss-paediatric-cardiology", "ss-paediatric-neurology", "ss-paediatric-gastroenterology", "ss-paediatric-nephrology", "ss-paediatric-hepatology", "ss-paediatric-oncology", "ss-paediatric-critical-care"] },
     { id: "pathology", label: "Pathology group", feeder: "MD or DNB Pathology", subjects: ["ss-onco-pathology"] },
-    { id: "pharmacology", label: "Pharmacology group", feeder: "MD or DNB Pharmacology", subjects: [] },
-    { id: "psychiatry", label: "Psychiatry group", feeder: "MD or DNB Psychiatry", subjects: [] },
+    { id: "pharmacology", label: "Pharmacology group", feeder: "MD or DNB Pharmacology", subjects: ["ss-clinical-pharmacology"] },
+    { id: "psychiatry", label: "Psychiatry group", feeder: "MD or DNB Psychiatry", subjects: ["ss-geriatric-mental-health", "ss-child-adolescent-psychiatry"] },
     { id: "radio-diagnosis", label: "Radio-diagnosis group", feeder: "MD or DNB Radio-diagnosis", subjects: ["ss-radiology"] },
     { id: "respiratory", label: "Respiratory Medicine group", feeder: "MD or DNB Respiratory Medicine or equivalent", subjects: ["ss-pulmonology", "ss-critical-care"] }
   ];
