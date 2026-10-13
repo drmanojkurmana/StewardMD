@@ -184,6 +184,28 @@ try {
   await ev("window.dispatchEvent(new Event('statusTap'));return 1"); await sleep(1000);
   ok((await ev("return document.querySelector('.v3-main').scrollTop")) === 0, "the status-bar tap scrolls the list to the top");
 
+  // 10b. Tab indicator + re-tap to top
+  const IND = "var i=document.querySelector('.rnav-tab-ind'),t=document.querySelector('.rnav-tab[aria-current]');if(!i)return JSON.stringify({none:1});var m=new DOMMatrix(getComputedStyle(i).transform);return JSON.stringify({op:i.style.opacity,cx:Math.round(m.m41+10),tx:Math.round(t.offsetLeft+t.offsetWidth/2),lbl:t.textContent})";
+  await ev("var i=document.querySelector('.rnav-tab-ind');if(i)i.remove();return 1");
+  await tab("/More/"); await sleep(900);
+  let ti = await jp(IND);
+  ok(ti.op === "1" && /More/.test(ti.lbl) && Math.abs(ti.cx - ti.tx) <= 2, "the indicator sits under the tab just opened " + JSON.stringify(ti));
+  await ev("var sc=document.getElementById('hvScrim');if(sc)sc.click();return 1"); await sleep(700);
+  await tab("/Hospital/"); await sleep(120);
+  const mid = await jp(IND); await sleep(700);
+  ti = await jp(IND);
+  ok(/Hospital/.test(ti.lbl) && Math.abs(ti.cx - ti.tx) <= 2, "it slides to the next tab " + JSON.stringify(ti));
+  ok(await ev("return !!document.querySelector('.rnav-tab[aria-current]')&&document.querySelectorAll('.rnav-tab[aria-current]').length===1"), "exactly one tab is marked aria-current");
+  await ev("var o=document.querySelectorAll('[data-hv-overlay],.hv-ov');return 1");
+  // Re-tap with home scrolled: scrolls to top and does NOT reopen.
+  await ev("window.__reopen=0;var b=[].filter.call(document.querySelectorAll('.rnav-tab'),function(x){return /Hospital/.test(x.textContent)})[0];b.addEventListener('click',function(){__reopen++});return 1");
+  await ev("var m=document.querySelector('#homeV2 .v3-main');m.scrollTop=500;return 1"); await sleep(300);
+  await ev("var b=document.querySelector('.rnav-tab[aria-current]');b.click();return 1"); await sleep(1100);
+  ok((await ev("return document.querySelector('#homeV2 .v3-main').scrollTop")) === 0, "re-tapping the selected tab scrolls home to the top");
+  ok((await ev("return window.__reopen")) === 0, "and does not reopen the destination");
+  await ev("var b=document.querySelector('.rnav-tab[aria-current]');b.click();return 1"); await sleep(400);
+  ok((await ev("return window.__reopen")) === 1, "re-tapping at the top opens it as before");
+
   // 11. A-Z scrubber (Drug Database)
   await tab("/Drugs/"); await sleep(900); await sheetItem("/Drug Database/");
   const STRIP = "var s=document.querySelector('div[aria-hidden=true][style*=\"z-index: 2147482200\"]');return !!s&&s.style.opacity==='1'";
