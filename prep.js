@@ -143,12 +143,14 @@
   function levelOf(it) { return it.vh === true || it.d === 4 ? 4 : it.d === 1 || it.d === 3 ? it.d : 2; }
   function markLevels(items) { (items || []).forEach(function (it) { if (it && it.vh === true) it.d = 4; }); return items; }
   function shuffle(a, rnd) { rnd = rnd || Math.random; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
-  // Custom module: n questions from the given items, optionally one difficulty, spread across modules.
+  // Custom module: n questions from the given items, optionally one difficulty, spread across modules and,
+  // since topic-diverse selection, across concepts too: each module pool is concept-ordered first, then round-robin
+  // across modules as before, then the take is interleaved so consecutive questions rarely share a concept.
   function customDraw(lists, n, d, rnd) {
-    var pools = lists.map(function (l) { return shuffle(l.filter(function (it) { return !d || levelOf(it) === d; }).slice(), rnd); }).filter(function (p) { return p.length; });
+    var pools = lists.map(function (l) { return diverseOrder(l.filter(function (it) { return !d || levelOf(it) === d; }), rnd); }).filter(function (p) { return p.length; });
     var out = [], i = 0;
     while (out.length < n && pools.some(function (p) { return p.length; })) { var p = pools[i % pools.length]; if (p.length) out.push(p.pop()); i++; }
-    return shuffle(out, rnd);
+    return diverseOrder(out, rnd);
   }
   /* ---- Phase 4: adapt ---- */
   // Target difficulty from the share right: 90% and over after 10 attempts -> very hard (4), 80% and over -> hard (3),
@@ -159,6 +161,150 @@
     var fresh = shuffle(pool.filter(function (it) { return !cards[dk + ":" + it.id]; }), rnd);
     fresh.sort(function (a, b) { return Math.abs(levelOf(a) - target) - Math.abs(levelOf(b) - target); });
     return fresh.slice(0, n);
+  }
+  /* ---- Topic-diverse selection (owner 2026-10-13): a session of N questions covers as many DISTINCT concepts
+     of the module as possible, never 10 questions on one concept while others get none. Pure, deterministic given
+     a seed (seed or rnd), ES5. Two items with the same concept key are the same concept. ---- */
+  // Glue words and near-universal clinical words: never concept-bearing on their own.
+  var DIV_STOP = { a: 1, an: 1, the: 1, and: 1, or: 1, of: 1, to: 1, in: 1, on: 1, for: 1, with: 1, without: 1, from: 1, into: 1,
+    by: 1, at: 1, as: 1, is: 1, are: 1, was: 1, were: 1, be: 1, been: 1, has: 1, have: 1, had: 1, can: 1, may: 1, should: 1,
+    would: 1, could: 1, not: 1, all: 1, any: 1, each: 1, such: 1, more: 1, most: 1, one: 1, two: 1, also: 1, than: 1, then: 1,
+    that: 1, this: 1, these: 1, those: 1, which: 1, what: 1, when: 1, where: 1, who: 1, how: 1, why: 1, but: 1, its: 1, his: 1,
+    her: 1, their: 1, they: 1, them: 1, she: 1, you: 1, your: 1, patient: 1, patients: 1, following: 1, among: 1,
+    between: 1, during: 1, after: 1, before: 1, over: 1, under: 1, common: 1, commonly: 1, cause: 1, causes: 1, caused: 1,
+    due: 1, associated: 1, present: 1, presents: 1, presented: 1, presentation: 1, diagnosis: 1, diagnosed: 1, treatment: 1,
+    management: 1, clinical: 1, acute: 1, chronic: 1, disease: 1, condition: 1, syndrome: 1, seen: 1, shows: 1,
+    shown: 1, used: 1, use: 1, given: 1, year: 1, years: 1, old: 1, day: 1, days: 1, case: 1, question: 1, best: 1 };
+  function divNorm(s) { return String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/ +/g, " ").replace(/^ | $/g, ""); }
+  function divHash(s) { s = String(s); var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function divRng(seed) { var a = divHash(seed); return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function divRndOf(seedOrRnd) { return typeof seedOrRnd === "function" ? seedOrRnd : seedOrRnd != null ? divRng(seedOrRnd) : Math.random; }
+  // First KB/drug/protocol/lesson link target of an item, in pipeline confidence order (prep-reason.js linksOf order).
+  // Accepts the caller's links map ({ itemId: targetId }, e.g. from a cached v2 links shard) first, then x.links.
+  function divLinkKey(it, links) {
+    var t;
+    if (links && it && it.id != null && links[it.id] != null) { t = divNorm(links[it.id]).replace(/ /g, "_"); if (t) return "kb:" + t; }
+    if (it && it._ck) return it._ck;
+    var x = it && it.x, L = x && typeof x === "object" && x.links && typeof x.links === "object" ? x.links : null, found = null;
+    function grab(v) {
+      if (found || v == null) return;
+      var arr = Object.prototype.toString.call(v) === "[object Array]" ? v : [v];
+      for (var i = 0; i < arr.length; i++) { if (arr[i] != null && String(arr[i]).replace(/^\s+|\s+$/g, "")) { found = arr[i]; return; } }
+    }
+    if (L) {
+      var kinds = [["kb", ["kb_ids", "kb"]], ["dr", ["drug_ids", "drug"]], ["pr", ["protocol_ids", "protocol", "proto"]], ["ls", ["lesson_ids", "lesson"]]];
+      for (var k = 0; k < kinds.length && !found; k++) {
+        for (var f = 0; f < kinds[k][1].length && !found; f++) grab(L[kinds[k][1][f]]);
+        if (found) { t = divNorm(found).replace(/ /g, "_"); if (t) { found = kinds[k][0] + ":" + t; } else found = null; }
+        if (found) { if (it) it._ck = found; return found; }
+      }
+      var flats = [["kb", x.kb], ["dr", x.drug], ["pr", x.protocol], ["ls", x.lesson]];
+      for (var q = 0; q < flats.length && !found; q++) grab(flats[q][1]);
+      if (found) { t = divNorm(found).replace(/ /g, "_"); if (t) { found = flats[q - 1][0] + ":" + t; if (it) it._ck = found; return found; } }
+    }
+    return null;
+  }
+  // Memoised per item (items live in memory for the session, like the cached _s/_m/_k marks): the answer head
+  // (first 2 content words of the correct option: "Metformin 500 mg BD" and "Metformin" share "metformin") and the
+  // stem's content words. Pure numbers never count in the stem (ages, doses, vitals are instance details, not
+  // concepts) but stay in the answer head ("t 15 17" is the APL entity). Rarity is pool-relative, counted per call.
+  function divContent(s) {
+    var out = [];
+    divNorm(s).split(" ").forEach(function (w) { if (w.length >= 3 && !DIV_STOP[w] && /[a-z]/.test(w) && !/^[0-9]+$/.test(w)) out.push(w); });
+    return out;
+  }
+  function divTokens(it) {
+    if (it._ckw) return it._ckw;
+    var ans = "", o = it.o;
+    if (o && typeof o.length === "number" && it.a >= 0 && it.a < o.length) {
+      var aw = divNorm(o[it.a]).split(" "), head = [], i;
+      for (i = 0; i < aw.length && head.length < 2; i++) {
+        var w = aw[i];
+        if ((w.length >= 3 && !DIV_STOP[w] && /[a-z]/.test(w)) || (/^[0-9]+$/.test(w) && w.length >= 2)) head.push(w);
+      }
+      ans = head.join(" ");
+    }
+    var seen = {}, words = [];
+    divContent(it.q).forEach(function (w) { if (!seen[w]) { seen[w] = 1; words.push(w); } });
+    it._ckw = { ans: ans, words: words };
+    return it._ckw;
+  }
+  // Document frequency of each content word across the pool's stems (the "rarest" is pool-local, no network).
+  function divDf(pool) {
+    var df = {};
+    (pool || []).forEach(function (it) { if (!it) return; divTokens(it).words.forEach(function (w) { df[w] = (df[w] || 0) + 1; }); });
+    return df;
+  }
+  /* conceptKeyOf(it, df, links) -> the concept key. Prefer data we already have: x.links (or the caller's links map
+     from a cached Know-more v2 shard); fallback for items with no usable key: the answer head (first 2 content words
+     of the correct option) plus the 2-3 rarest content words of the stem. Without a df map every word counts 0 and
+     the first 3 alphabetically win (deterministic, pool-independent). */
+  function conceptKeyOf(it, df, links) {
+    if (!it) return "t:?";
+    var lk = divLinkKey(it, links);
+    if (lk) return lk;
+    var tw = divTokens(it), words = tw.words.slice().sort(function (a, b) { return ((df || {})[a] || 0) - ((df || {})[b] || 0) || (a < b ? -1 : 1); }).slice(0, 3);
+    return "t:" + (tw.ans || "?") + "|" + words.join("+");
+  }
+  // conceptKeys(pool, links) -> keys aligned with the pool (one df count, token memos cached on the items).
+  function conceptKeys(pool, links) {
+    var df = divDf(pool);
+    return (pool || []).map(function (it) { return conceptKeyOf(it, df, links); });
+  }
+  /* diversePick(pool, n, opts) -> up to n items covering as many distinct concepts as possible. Group by concept;
+     round-robin across concepts (at most one per concept per round, so repeats stay as even as possible when concepts
+     < n); concept order is weight-desc (opts.weights, e.g. blueprint/PYQ frequency) with a seeded draw inside equal
+     weights, deterministic per seed. Within a concept: unseen first, then previously wrong, then oldest-seen (needs
+     opts.cards/dk/today/mt; without history a seeded draw); then closest to opts.target difficulty (the adaptive
+     behaviour module sessions already had; without a target a seeded draw, the old random behaviour). The round-robin
+     output is already interleaved: consecutive items never share a concept unless the pool holds only one. Items are
+     never repeated (deduped by id). */
+  function diversePick(pool, n, opts) {
+    opts = opts || {};
+    var rnd = opts.rnd || (opts.seed != null ? divRng(opts.seed) : Math.random), out = [], seenId = {}, list = [], i, it;
+    if (!pool || n <= 0) return out;
+    for (i = 0; i < pool.length; i++) { it = pool[i]; if (it && it.id != null && !seenId[it.id]) { seenId[it.id] = 1; list.push(it); } }
+    if (!list.length) return out;
+    n = Math.min(n, list.length);
+    var df = divDf(list), cards = opts.cards, dk = opts.dk, today = opts.today, mt = opts.mt;
+    var hasHist = !!(cards && dk), links = opts.links || null, weights = opts.weights || null;
+    var target = opts.target === 1 || opts.target === 2 || opts.target === 3 || opts.target === 4 ? opts.target : null;
+    var dec = list.map(function (x) {
+      var hr = 0, age = 0;
+      if (hasHist) { var c = cards[dk + ":" + x.id]; if (c) { if ((mt && mt[x.id]) || c[5] > 0 || c[3] - c[2] === 1) hr = 1; else { hr = 2; age = (today != null ? today : 0) - (c[2] || 0); } } }
+      return { it: x, key: conceptKeyOf(x, df, links), hr: hr, age: age, dd: target == null ? 0 : Math.abs(levelOf(x) - target), r: rnd() };
+    });
+    var groups = {}, order = [];
+    dec.forEach(function (e) {
+      if (!groups[e.key]) { groups[e.key] = { key: e.key, items: [], w: weights ? (+weights[e.key] || 0) : 0, r: rnd() }; order.push(groups[e.key]); }
+      groups[e.key].items.push(e);
+    });
+    order.forEach(function (g) { g.items.sort(function (a, b) { return (a.hr - b.hr) || (b.age - a.age) || (a.dd - b.dd) || (a.r - b.r); }); });
+    order.sort(function (a, b) { return (b.w - a.w) || (a.r - b.r); });
+    for (var round = 0; out.length < n; round++) {
+      var moved = false;
+      for (var k = 0; k < order.length && out.length < n; k++) { if (order[k].items[round]) { out.push(order[k].items[round].it); moved = true; } }
+      if (!moved) break;
+    }
+    return out;
+  }
+  /* diverseOrder(items, seedOrRnd) -> the same items reordered so consecutive items rarely share a concept (greedy:
+     always the largest remaining concept that differs from the last, seeded draws inside). For fixed-composition lists
+     where quotas must stay exactly as picked (blueprint takes, setup Mix quotas). Deterministic per seed. */
+  function diverseOrder(items, seedOrRnd) {
+    var rnd = divRndOf(seedOrRnd), list = (items || []).slice(), out = [], last = null, i, g, best;
+    if (list.length < 3) return list;
+    var df = divDf(list), groups = {};
+    list.forEach(function (it) { var k = conceptKeyOf(it, df, null); if (!groups[k]) groups[k] = { key: k, q: [], r: rnd() }; groups[k].q.push(it); });
+    var order = Object.keys(groups).map(function (k) { shuffle(groups[k].q, rnd); return groups[k]; });
+    while (out.length < list.length) {
+      best = null;
+      for (i = 0; i < order.length; i++) { g = order[i]; if (!g.q.length || g.key === last) continue; if (!best || g.q.length > best.q.length || (g.q.length === best.q.length && g.r < best.r)) best = g; }
+      if (!best) { for (i = 0; i < order.length; i++) if (order[i].q.length) { best = order[i]; break; } }
+      if (!best) break;
+      out.push(best.q.pop()); last = best.key;
+    }
+    return out;
   }
   // Modules with at least 5 attempts and under 60% right, weakest first.
   function weakModules(store, max) {
@@ -540,7 +686,8 @@
   }
   var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, qualBlocked: qualBlocked, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
-    targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
+    targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, conceptKeyOf: conceptKeyOf, conceptKeys: conceptKeys, diversePick: diversePick, diverseOrder: diverseOrder,
+    weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh,
     optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml };
@@ -1699,14 +1846,19 @@
     loadModule(sid, mid).then(function (items) {
       var pool = poolFor(items, s.exam, hidden()), dk = deckKey(mid), td = today(), list;
       if (kind === "due") list = pool.filter(function (it) { var c = s.cards[C.key(dk, it.id)]; return c && c[3] <= td; }).slice(0, size);
-      // A timed test is a fresh random draw. Practice: FSRS due reviews first, then unseen questions nearest the
-      // difficulty the student's share right calls for (adaptive); once every question is seen and none is due, a
-      // random set from the whole module.
-      else if (kind === "exam") list = shuffle(pool.slice()).slice(0, size);
+      // A timed test is a fresh draw across as many concepts as possible (seeded random inside each concept).
+      // Practice: FSRS due reviews first (their order is the memory schedule), then topic-diverse new questions:
+      // round-robin across concepts, unseen first, then previously wrong, then oldest-seen, nearest the difficulty
+      // the student's share right calls for; once every question is seen and none is due, the same diverse draw over
+      // the whole module (wrong and oldest first) instead of a random set.
+      else if (kind === "exam") list = diversePick(pool, size, {});
       else {
         list = C.buildSession({ id: dk, items: pool }, s, td, { size: size, newCap: 0 });
-        list = list.concat(adaptiveNew(pool, s.cards, dk, targetDifficulty(s.mod[mid]), size - list.length));
-        if (!list.length) list = shuffle(pool.slice()).slice(0, size);
+        var have = {};
+        list.forEach(function (it) { if (it) have[it.id] = 1; });
+        var rest = pool.filter(function (it) { return it && !have[it.id]; });
+        list = list.concat(diversePick(rest, size - list.length, { cards: s.cards, dk: dk, today: td, mt: s.mt, target: targetDifficulty(s.mod[mid]) }));
+        if (!list.length) list = diversePick(pool, size, { cards: s.cards, dk: dk, today: td, mt: s.mt, target: targetDifficulty(s.mod[mid]) });
       }
       if (!list.length) { toast("Nothing to practise here right now."); return rerender(); }
       runQuestions(list, kind === "exam" ? "exam" : "study", tx(topicOf(sid, mid).title));

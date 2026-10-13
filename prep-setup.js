@@ -221,7 +221,51 @@
     dim.keys.forEach(function (k) { out = out.concat(pick(groups[k], q[k], rest, ctx, rnd)); });
     return out;
   }
-  /* draw(lists, sel, ctx, rnd) -> up to sel.n items: lists are the pool per module (so customDraw can spread them). */
+  /* bucketOf(it, ctx) -> the quota bucket an item fills (type, repeat state, difficulty). */
+  function bucketOf(it, ctx) { return typeOf(it) + "|" + seenOf(it, ctx) + "|" + dOf(it); }
+  /* diversifySwap(take, pool, ctx, rnd) -> the same number of items covering more distinct concepts: every repeat
+     (a second or later item of its concept) is swapped for an unused pool item of an unused concept from the SAME
+     quota bucket, so the type/seen/difficulty shares stay exactly as picked. Deterministic per rnd; at most the take
+     length is ever returned, never an item twice. */
+  function diversifySwap(take, pool, ctx, rnd) {
+    take = (take || []).slice();
+    if (take.length < 2) return take;
+    rnd = rnd || Math.random;
+    var C = core(), keys = C.conceptKeys(pool), keyOf = {}, i, it;
+    pool.forEach(function (x, k) { if (x) keyOf[x.id] = keys[k]; });
+    var inTake = {}, counts = {};
+    take.forEach(function (x) { if (x) { inTake[x.id] = 1; var k = keyOf[x.id]; counts[k] = (counts[k] || 0) + 1; } });
+    var free = pool.filter(function (x) { return x && !inTake[x.id]; });
+    free = free.map(function (x) { return { it: x, r: rnd() }; });
+    var byBucket = {};
+    free.forEach(function (f) { var b = bucketOf(f.it, ctx); (byBucket[b] || (byBucket[b] = [])).push(f); });
+    Object.keys(byBucket).forEach(function (b) { byBucket[b].sort(function (a, c) { return a.r - c.r; }); });
+    for (var pass = 0; pass < 3; pass++) {
+      var moved = false;
+      for (i = 0; i < take.length; i++) {
+        it = take[i];
+        if (!it || (counts[keyOf[it.id]] || 0) < 2) continue;
+        var cands = byBucket[bucketOf(it, ctx)] || [], pick = null;
+        for (var j = 0; j < cands.length; j++) {
+          if (!inTake[cands[j].it.id]) {
+            if (!counts[keyOf[cands[j].it.id]]) { pick = cands[j]; break; }
+            if (!pick) pick = cands[j];
+          }
+        }
+        if (!pick) continue;
+        inTake[it.id] = 0; inTake[pick.it.id] = 1;
+        counts[keyOf[it.id]]--;
+        counts[keyOf[pick.it.id]] = (counts[keyOf[pick.it.id]] || 0) + 1;
+        take[i] = pick.it; moved = true;
+      }
+      if (!moved) break;
+    }
+    return take;
+  }
+  /* draw(lists, sel, ctx, rnd) -> up to sel.n items: lists are the pool per module (so customDraw can spread them).
+     The quotas (type/seen/difficulty shares) stay exactly as picked; repeats are swapped for unused concepts inside
+     the same bucket, then the take is interleaved so consecutive questions rarely share a concept (Quick practice
+     covers the scope's topic map, owner 2026-10-13). */
   function draw(lists, sel, ctx, rnd) {
     sel = normSel(sel);
     var L = (lists || []).map(function (l) { return (l || []).filter(function (it) { return keep(it, sel, ctx); }); }).filter(function (l) { return l.length; });
@@ -229,7 +273,9 @@
     if (sel.seen === "mix") dims.push("seen");
     if (sel.type === "mix") dims.push("type");
     if (sel.d === "mix") dims.push("d");
-    return core().shuffle(pick(L, sel.n, dims, ctx, rnd), rnd);
+    var flat = [];
+    L.forEach(function (l) { flat = flat.concat(l); });
+    return core().diverseOrder(diversifySwap(pick(L, sel.n, dims, ctx, rnd), flat, ctx, rnd), rnd);
   }
   var LABEL = { type: { img: "image-based", "case": "clinical scenario", line: "one-liner" }, seen: { "new": "new", wrong: "incorrect before", bm: "bookmarked", due: "due for review" }, d: { 1: "easy", 2: "moderate", 3: "hard", 4: "very hard" } };
   var RELAX = { type: "Question type: All", seen: "New or repeat: All", d: "Difficulty: Mix" };
@@ -289,7 +335,7 @@
   function hasLast(map, kind, id) { map = map || {}; return !!((id && map[kind + ":" + id]) || map[kind]); }
 
   var PURE = { CASE_MIN: CASE_MIN, LONG_WORDS: LONG_WORDS, MID_WORDS: MID_WORDS, stemScore: stemScore, stemKind: stemKind, kindOf: kindOf, hasImg: hasImg, typeOf: typeOf, dOf: dOf,
-    wrongBefore: wrongBefore, seenOf: seenOf, seenMatch: seenMatch, normSel: normSel, keep: keep, counts: counts, allocate: allocate, draw: draw, relaxHint: relaxHint, fit: fit,
+    wrongBefore: wrongBefore, seenOf: seenOf, seenMatch: seenMatch, normSel: normSel, keep: keep, counts: counts, allocate: allocate, draw: draw, bucketOf: bucketOf, diversifySwap: diversifySwap, relaxHint: relaxHint, fit: fit,
     remember: remember, recall: recall, hasLast: hasLast, migrate: migrate, snapQs: snapQs, stepQs: stepQs, lowAt: lowAt, timerOf: timerOf, runOpts: runOpts, summary: summary, TIMERS: TIMERS, QSECS: QSECS, QS_DEF: QS_DEF, QS_MAX: QS_MAX, LOW: LOW, TYPES: TYPES, SEENS: SEENS, DIFFS: DIFFS, COUNTS: COUNTS, N_MAX: N_MAX, DEFAULTS: DEFAULTS };
   if (isNode) { module.exports = PURE; return; }
 
