@@ -67,3 +67,5 @@ Wave NEL1 DONE (branch books2-nel1): neo-resuscitation, neo-respiratory, neo-inf
 
 Wave NEL2 DONE (branch books2-nel2): pgt-liver (scoped: chronic portal hypertension/varices/ascites/encephalopathy/GI bleed), pgt-gi-nutrition, php-cholestasis, php-failure-metabolic, pon-leukaemia-lymphoma, pon-solid-tumours, pcc-ventilation-sedation. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-paed-101 to 170. Paeds 17/17 COMPLETE pending merges.
 
+Wave MIL1 DONE (branch books2-mil1): can-cpb-bypass, can-valve-tee, nan-icp-brain, nan-spine-awake, tan-liver, tan-renal-crit, pan-neonatal, pan-paediatric. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-ane-001 to 080. Anesthesia 8/8 COMPLETE pending merges.
+
