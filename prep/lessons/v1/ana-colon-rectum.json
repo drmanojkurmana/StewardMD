@@ -1,0 +1,109 @@
+{
+ "module": "ana-colon-rectum",
+ "subject": "anatomy",
+ "title": "Colorectal anatomy: teniae coli, pelvic splanchnics and anal canal sphincters",
+ "minutes": 6,
+ "refs": [
+  "ALGrawany Anatomy & Physiology Made Easy 2026",
+  "Sabiston Textbook of Surgery 22nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "The **large intestine** extends from the ileocecal valve to the anus, comprising the cecum, appendix, colon, rectum, and anal canal. It is distinguished externally from small intestine by three unique anatomical features: three longitudinal smooth muscle bands termed teniae coli, segmental sacculations called haustra, and small fat-filled peritoneal projections known as appendices epiploicae.",
+   "say": "The large intestine extends from the ileocecal junction to the anus. It is distinguished from small bowel by three hallmarks: longitudinal muscle bands called teniae coli, sacculations termed haustra, and fat-filled peritoneal tags called appendices epiploicae.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Colonic segment",
+     "Peritoneal status",
+     "Arterial supply",
+     "Venous drainage"
+    ],
+    "rows": [
+     [
+      "Cecum & Appendix",
+      "Intraperitoneal with mesoappendix",
+      "Ileocolic artery (SMA)",
+      "Superior mesenteric vein"
+     ],
+     [
+      "Ascending colon",
+      "Retroperitoneal (Toldt fascia)",
+      "Right colic and ileocolic (SMA)",
+      "Superior mesenteric vein"
+     ],
+     [
+      "Transverse colon",
+      "Intraperitoneal (mesocolon)",
+      "Middle colic artery (SMA)",
+      "Superior mesenteric vein"
+     ],
+     [
+      "Descending colon",
+      "Retroperitoneal",
+      "Left colic artery (IMA)",
+      "Inferior mesenteric vein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **cecal appendix** is a narrow, blind-ended muscular pouch arising from the posteromedial wall of the cecum approximately two centimeters below the ileocecal valve. Crucially, all three teniae coli (tenia libera, mesocolica, and omentalis) converge at the base of the appendix, serving as an infallible surgical landmark to identify the appendix during emergency appendectomy.",
+   "say": "The vermiform appendix arises from the posteromedial cecal wall below the ileocecal valve. All three teniae coli converge precisely at the appendiceal base, providing an infallible surgical landmark during appendectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Midgut colon (SMA)",
+     "points": [
+      "Cecum, appendix, ascending colon, proximal 2/3 transverse",
+      "Arterial supply via superior mesenteric artery",
+      "Parasympathetic innervation via vagus nerve (CN X)",
+      "Drains into portal vein via superior mesenteric vein"
+     ]
+    },
+    "right": {
+     "title": "Hindgut colon (IMA)",
+     "points": [
+      "Distal 1/3 transverse colon, descending, sigmoid, rectum",
+      "Arterial supply via inferior mesenteric artery",
+      "Parasympathetic innervation via pelvic splanchnics (S2-S4)",
+      "Drains into splenic vein via inferior mesenteric vein"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **rectum** begins at the level of the third sacral vertebra (S3) where teniae coli coalesce into a continuous outer longitudinal muscular layer. It lacks haustra and appendices epiploicae. The rectum features three lateral curves marked internally by mucosal folds known as the valves of Houston. The peritoneal reflection forms the rectovesical pouch in males and rectouterine pouch of Douglas in females.",
+   "say": "The rectum begins at S3 where teniae coli fuse into a continuous longitudinal muscle layer. It lacks haustra and epiploic appendages. Internally, three mucosal folds form the valves of Houston, leading to the extraperitoneal lower rectum.",
+   "vis": null
+  },
+  {
+   "tx": "The **anal canal** is divided at the pectinate (dentate) line. Above the dentate line, the canal is derived from endoderm, lined by columnar epithelium, supplied by the superior rectal vessels, innervated by autonomic nerves (insensitive to sharp pain), and drains into portal venous circulation. Below the line, it is derived from ectoderm, lined by stratified squamous epithelium, innervated by somatic pudendal branches (highly sensitive), and drains systemically.",
+   "say": "The anal canal is divided by the pectinate line. Above the line, tissue is endodermal, supplied by superior rectal vessels, and insensitive to somatic pain. Below the line, tissue is ectodermal, supplied by inferior rectal vessels, and highly sensitive to sharp pain via pudendal nerves.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-large-intestine-gross.png",
+    "alt": "Large intestine and colorectal morphology",
+    "caption": "Large bowel contours displaying cecum, appendix base, teniae coli, haustra and rectal flexures."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "7e67e5e3-4000-8000-7e67-e5e312345678",
+  "7f67e776-4000-8000-7f67-e77612345678",
+  "8067e909-4000-8000-8067-e90912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

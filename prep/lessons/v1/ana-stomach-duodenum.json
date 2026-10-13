@@ -1,0 +1,109 @@
+{
+ "module": "ana-stomach-duodenum",
+ "subject": "anatomy",
+ "title": "Stomach and duodenal anatomy: mucosal architecture, blood supply and peptic pathology",
+ "minutes": 6,
+ "refs": [
+  "ALGrawany Anatomy & Physiology Made Easy 2026",
+  "Gray's Anatomy for Students"
+ ],
+ "steps": [
+  {
+   "tx": "The **stomach** is divided into five anatomical regions: cardia, fundus, body, antrum and pylorus. The muscular wall comprises three distinct layers: an outer longitudinal, middle circular, and inner oblique layer. The mucosa displays prominent longitudinal folds termed rugae that flatten as the stomach distends with food. The pyloric sphincter marks the gastroduodenal junction.",
+   "say": "The stomach has five anatomical regions: cardia, fundus, body, antrum and pylorus. Its muscular wall contains three layers: outer longitudinal, middle circular, and inner oblique. The mucosa shows prominent folds called rugae that flatten with distension, leading to the muscular pyloric sphincter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gastric region",
+     "Key histology",
+     "Primary secretions",
+     "Clinical relevance"
+    ],
+    "rows": [
+     [
+      "Cardia",
+      "Cardio-esophageal junction",
+      "Mucus and bicarbonate",
+      "Site of Mallory-Weiss tears"
+     ],
+     [
+      "Fundus & Body",
+      "Parietal and chief cells",
+      "HCl, intrinsic factor, pepsinogen",
+      "Autoimmune gastritis targets parietal cells"
+     ],
+     [
+      "Antrum",
+      "Mucous cells and G cells",
+      "Gastrin peptide hormone",
+      "Site of Helicobacter pylori colonization"
+     ],
+     [
+      "Pylorus",
+      "Thickened circular smooth muscle",
+      "Regulates chyme delivery",
+      "Infantile hypertrophic pyloric stenosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **arterial supply** of the stomach derives entirely from the celiac trunk. The lesser curvature is supplied by the left gastric artery (from celiac) and right gastric artery (from proper hepatic). The greater curvature is perfused by the left gastroepiploic artery (from splenic) and right gastroepiploic artery (from gastroduodenal). The fundus receives short gastric arteries from the splenic artery.",
+   "say": "Gastric arterial perfusion derives from the celiac trunk. The lesser curvature is fed by the left and right gastric arteries. The greater curvature receives blood from the left and right gastroepiploic arteries. The gastric fundus is supplied by short gastric arteries from the splenic artery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lesser curvature vessels",
+     "points": [
+      "Left gastric artery directly from celiac trunk",
+      "Right gastric artery from hepatic artery proper",
+      "Vulnerable to erosion by lesser curve peptic ulcers",
+      "Drains into the main portal vein"
+     ]
+    },
+    "right": {
+     "title": "Greater curvature vessels",
+     "points": [
+      "Left gastroepiploic artery from splenic artery",
+      "Right gastroepiploic from gastroduodenal artery",
+      "Short gastric arteries supply the fundus",
+      "Forms extensive vascular arcade along gastrocolic omentum"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **duodenum** forms a C-shaped loop encircling the pancreatic head, divided into four parts. The first part (D1) is the duodenal bulb, the most common site of peptic ulcer disease. Posterior duodenal bulb ulcers erode into the gastroduodenal artery, causing massive gastrointestinal hemorrhage. Anterior ulcers perforate freely into the peritoneal cavity, producing pneumoperitoneum.",
+   "say": "The duodenum is a C-shaped loop encircling the pancreatic head. The first part, the duodenal bulb, is the commonest site of peptic ulcers. Posterior ulcers erode the gastroduodenal artery, causing severe bleeding. Anterior ulcers perforate, causing acute peritonitis and pneumoperitoneum.",
+   "vis": null
+  },
+  {
+   "tx": "The second part of the duodenum (D2) receives the common bile duct and main pancreatic duct at the **major duodenal papilla** (ampulla of Vater), guarded by the sphincter of Oddi. The third part (D3) crosses horizontally across the vertebral column, wedged between the abdominal aorta posteriorly and the superior mesenteric artery anteriorly, predisposing to vascular compression.",
+   "say": "The second part of the duodenum receives the common bile duct and pancreatic duct at the ampulla of Vater. The third part runs horizontally between the abdominal aorta posteriorly and superior mesenteric artery anteriorly, vulnerable to compression in superior mesenteric artery syndrome.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-stomach-gross.png",
+    "alt": "Gastric and duodenal gross anatomy",
+    "caption": "Gastroduodenal architecture illustrating gastric curvatures, pylorus, and C-loop duodenal relationships."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "de4bd1f2-4000-8000-de4b-d1f212345678",
+  "dd4bd05f-4000-8000-dd4b-d05f12345678",
+  "dc4bcecc-4000-8000-dc4b-cecc12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

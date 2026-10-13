@@ -1,0 +1,104 @@
+{
+ "module": "ana-trachea-bronchi",
+ "subject": "anatomy",
+ "title": "Tracheobronchial tree, carina and bronchopulmonary segmental anatomy",
+ "minutes": 6,
+ "refs": [
+  "ALGrawany Anatomy & Physiology Made Easy 2026",
+  "Gray's Anatomy for Students"
+ ],
+ "steps": [
+  {
+   "tx": "The **trachea** is a fibrocartilaginous tube extending from the lower border of the cricoid cartilage at C6 down to the sternal angle of Louis at T4-T5. It measures approximately ten to twelve centimeters in length. Its framework consists of sixteen to twenty C-shaped hyaline cartilage rings that maintain patency against negative intrathoracic inspiratory pressures.",
+   "say": "The trachea extends from the cricoid cartilage at C6 to the sternal angle at T4-T5, measuring ten to twelve centimeters. It is supported by sixteen to twenty C-shaped hyaline cartilage rings that keep the airway patent during inspiration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Airway segment",
+     "Vertebral level",
+     "Key anatomical features"
+    ],
+    "rows": [
+     [
+      "Cricoid origin",
+      "C6 vertebral level",
+      "Only complete circular ring of the airway"
+     ],
+     [
+      "Cervical trachea",
+      "C6 to T1",
+      "Crossed anteriorly by the thyroid isthmus at rings 2-4"
+     ],
+     [
+      "Thoracic trachea",
+      "T1 to T4-T5",
+      "Descends in superior mediastinum, anterior to esophagus"
+     ],
+     [
+      "Carina bifurcation",
+      "T4-T5 (sternal angle)",
+      "Internal ridge dividing into main bronchi"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Posteriorly, the gap between tracheal cartilage ends is spanned by smooth muscle known as the **trachealis muscle** and fibroelastic tissue directly adjacent to the anterior esophageal wall. Contraction of the trachealis under sympathetic stimulation narrows the airway lumen, dramatically accelerating linear airflow velocity during cough to expel mucus and foreign particles.",
+   "say": "The posterior tracheal wall contains the smooth trachealis muscle abutting the anterior esophagus. Contraction of the trachealis narrows tracheal diameter, boosting linear airflow velocity during explosive coughing to clear foreign materials.",
+   "vis": null
+  },
+  {
+   "tx": "At the T4-T5 level, an internal mucosal ridge termed the **carina** marks tracheal bifurcation into right and left primary bronchi. The right main bronchus is wider, shorter (2.5 cm), and runs more vertically than the left main bronchus (5 cm). Consequently, aspirated foreign bodies, liquids, and endotracheal tubes accidentally advanced too far preferentially enter the right bronchial tree.",
+   "say": "At the sternal angle, the carina divides the trachea into right and left main bronchi. The right main bronchus is wider, shorter and more vertical than the left. As a result, aspirated foreign bodies and secretions lodge preferentially in the right bronchus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right main bronchus",
+     "points": [
+      "Shorter length (approximately 2.5 cm)",
+      "Wider luminal caliber",
+      "More vertical orientation (25 degree angle)",
+      "Aspirated foreign objects lodge here preferentially"
+     ]
+    },
+    "right": {
+     "title": "Left main bronchus",
+     "points": [
+      "Longer length (approximately 5 cm)",
+      "Narrower luminal caliber",
+      "More horizontal orientation (45 degree angle)",
+      "Crosses inferior to aortic arch and anterior to esophagus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Primary bronchi branch into lobar and then segmental bronchi, supplying ten distinct **bronchopulmonary segments** in each lung. Each segment is a pyramidal structural and functional unit with its apex directed toward the lung hilum. Each segment possesses an independent tertiary segmental bronchus and pulmonary arterial branch, but intersegmental pulmonary veins run in intersegmental connective tissue septa.",
+   "say": "Segmental bronchi supply ten bronchopulmonary segments in each lung. Each segment is a surgical anatomical unit with an independent tertiary bronchus and pulmonary arterial branch. In contrast, pulmonary veins course through intersegmental connective tissue borders.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-trachea-bronchi-gross.png",
+    "alt": "Tracheobronchial branching and carina architecture",
+    "caption": "Tracheobronchial framework depicting cartilage rings, carina bifurcating into primary and lobar bronchi."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "caf95c15-4000-8000-caf9-5c1512345678",
+  "c7f9575c-4000-8000-c7f9-575c12345678",
+  "c8f958ef-4000-8000-c8f9-58ef12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

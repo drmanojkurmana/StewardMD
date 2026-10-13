@@ -1,0 +1,104 @@
+{
+ "module": "ss-neurology-localization",
+ "subject": "anatomy",
+ "title": "Clinical neuro-localization: upper vs lower motor neuron and brainstem lesion rules",
+ "minutes": 6,
+ "refs": [
+  "Clinical Neuroanatomy Made Ridiculously Simple",
+  "Brazis Localization in Clinical Neurology"
+ ],
+ "steps": [
+  {
+   "tx": "Distinguishing **upper motor neuron** from lower motor neuron lesions represents the bedrock of clinical neurological localization. Upper motor neuron lesions disrupt corticospinal fibers descending from cerebral cortex through internal capsule and brainstem. This disinhibits spinal reflex arcs, producing spasticity with clasp-knife tone, hyperreflexia, clonus, and an extensor plantar response (positive Babinski sign).",
+   "say": "Differentiating upper motor neuron from lower motor neuron lesions is foundational in clinical neurology. Upper motor neuron lesions disrupt corticospinal fibers, disinhibiting spinal reflexes. This produces spasticity, clasp-knife tone, hyperreflexia, clonus and an extensor Babinski sign.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical feature",
+     "Upper motor neuron lesion",
+     "Lower motor neuron lesion"
+    ],
+    "rows": [
+     [
+      "Muscle tone",
+      "Spasticity with clasp-knife rigidity",
+      "Flaccid hypotonia"
+     ],
+     [
+      "Deep tendon reflexes",
+      "Hyperreflexia with clonus",
+      "Hyporeflexia or absent reflexes"
+     ],
+     [
+      "Plantar response",
+      "Extensor (positive Babinski sign)",
+      "Flexor (normal down-going)"
+     ],
+     [
+      "Muscle bulk & twitching",
+      "Disuse atrophy only; no fasciculations",
+      "Severe denervation atrophy with fasciculations"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, **lower motor neuron** lesions damage alpha motor neurons in the anterior horn of the spinal cord or cranial nerve motor nuclei, or their peripheral axonal projections. Denervation deprives muscle fibers of trophic input, causing flaccid paralysis, hypotonia, profound muscle atrophy, absent tendon reflexes, and visible muscle twitching known as fasciculations.",
+   "say": "Lower motor neuron lesions damage anterior horn cells or peripheral nerves. Denervation causes flaccid paralysis, hypotonia, profound muscle atrophy, absent deep tendon reflexes, and visible fasciculations. Amyotrophic lateral sclerosis uniquely combines both upper and lower motor neuron signs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "UMN signs (Spastic)",
+     "points": [
+      "Increased muscle tone (spasticity)",
+      "Brisk deep tendon reflexes",
+      "Sustained ankle clonus",
+      "Positive Babinski sign (extensor)"
+     ]
+    },
+    "right": {
+     "title": "LMN signs (Flaccid)",
+     "points": [
+      "Decreased muscle tone (flaccidity)",
+      "Diminished or absent reflexes",
+      "Visible spontaneous fasciculations",
+      "Rapid, pronounced neurogenic muscle wasting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Brainstem lesions are reliably localized using the rule of four: four cranial nerves in the medulla (CN IX, X, XI, XII), four in the pons (CN V, VI, VII, VIII), and four in the midbrain and above (CN I, II, III, IV). Midline medial structures include the **corticospinal tract**, medial lemniscus, and medial longitudinal fasciculus. Lateral structures include the spinothalamic tract and descending sympathics.",
+   "say": "Brainstem lesions are localized using the rule of four: four nerves in the medulla, four in the pons, and four in the midbrain. Medial structures are the corticospinal tract, medial lemniscus, and medial longitudinal fasciculus. Lateral structures include spinothalamic tract and descending sympathetics.",
+   "vis": null
+  },
+  {
+   "tx": "Alternating hemiplegias feature ipsilateral cranial nerve palsy with contralateral long-tract motor or sensory loss. **Weber syndrome** in the midbrain involves the exiting fascicles of the oculomotor nerve and adjacent cerebral peduncle, causing ipsilateral CN III palsy with contralateral hemiplegia. In the lateral medulla, Wallenberg syndrome affects PICA territory, causing dysphagia, hoarseness, Horner syndrome, and crossed sensory loss.",
+   "say": "Alternating hemiplegias feature ipsilateral cranial nerve signs with contralateral body deficits. Weber syndrome in the midbrain causes ipsilateral third nerve palsy with contralateral hemiplegia. Wallenberg syndrome in the lateral medulla causes dysphagia, Horner syndrome, ataxia, and crossed sensory loss.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.png",
+    "alt": "Brainstem cross-sections and long tract topography",
+    "caption": "Midbrain, pons and medulla cross-sections showing cranial nerve nuclei and intersecting corticospinal pathways."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "5bfa9343-4000-8000-5bfa-934312345678",
+  "5cfa94d6-4000-8000-5cfa-94d612345678",
+  "5dfa9669-4000-8000-5dfa-966912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
