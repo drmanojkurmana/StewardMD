@@ -1548,6 +1548,15 @@
       ".hv-mi.hv-at-row{padding:0;gap:0;align-items:stretch}.hv-at-open{flex:1;min-width:0;display:flex;align-items:center;gap:13px;text-align:left;background:transparent;border:none;padding:12px 8px;color:var(--hink);cursor:pointer;font:inherit}.hv-at-open .ml{font:700 14.5px var(--hfont);min-width:0}.hv-at-open .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:2px}",
       ".hv-at-pin{flex:0 0 46px;border:none;background:transparent;color:var(--hmut);cursor:pointer;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--hbd)}.hv-at-pin .rds-icon{font-size:20px;color:inherit;width:auto;transform:rotate(30deg);font-variation-settings:'FILL' 0}.hv-at-pin.on{color:var(--hp)}.hv-at-pin.on .rds-icon{transform:none;font-variation-settings:'FILL' 1}",
       ".hv-at-none{font:600 13.5px var(--hfont);color:var(--hmut);text-align:center;padding:26px 0}",
+      // All tools sections (tool-groups.js): a plain header row per role with a count and a chevron, rows unchanged.
+      ".hv-at-h{font:700 12px var(--hfont);letter-spacing:.06em;text-transform:uppercase;color:var(--hmut);margin:14px 2px 2px}",
+      ".hv-at-recent{margin:0 0 4px;border-bottom:1px solid var(--hbd);padding-bottom:4px}",
+      ".hv-at-sec{border-bottom:1px solid var(--hbd)}.hv-at-sec[hidden]{display:none}",
+      ".hv-at-sum{list-style:none;display:flex;align-items:center;gap:8px;min-height:48px;padding:6px 2px;cursor:pointer;color:var(--hink)}.hv-at-sum::-webkit-details-marker{display:none}",
+      ".hv-at-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.hv-at-st{font:800 15px var(--hfont);display:flex;align-items:center;gap:8px}.hv-at-ss{font:500 12.5px var(--hfont);color:var(--hmut)}",
+      ".hv-at-you{font:700 10.5px var(--hfont);letter-spacing:.04em;text-transform:uppercase;color:var(--hp);border:1px solid currentColor;border-radius:999px;padding:2px 7px}",
+      ".hv-at-n{font:700 12px var(--hfont);color:var(--hmut);min-width:20px;text-align:right}.hv-at-sum .rds-icon{font-size:22px;color:var(--hmut);width:auto;transition:transform .2s}.hv-at-sec[open]>.hv-at-sum .rds-icon{transform:rotate(180deg)}",
+      "@media (prefers-reduced-motion:reduce){.hv-at-sum .rds-icon{transition:none}}",
       // The Home tile's sphere at list size, holding the tool's own icon (listIcon). The sheet lives
       // outside #homeV2, so the tile rules in redesign-system.css do not reach it: sized here.
       ".hv-tbadge{flex:0 0 40px;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;color:#fff;background:radial-gradient(circle at 34% 26%,#2f9184 0%,#12564a 52%,#06231e 100%);box-shadow:inset 0 2px 5px rgba(255,255,255,.26),inset 0 -5px 9px rgba(0,0,0,.4),0 4px 9px -4px rgba(8,40,35,.55)}",
@@ -2314,7 +2323,26 @@
     });
   }
   function homeToolPrefs() { try { return JSON.parse(localStorage.getItem("smd_home_tools") || "{}") || {}; } catch (e) { return {}; } }
-  function homeToolVisible(t) { var p = homeToolPrefs(); return Object.prototype.hasOwnProperty.call(p, t.act) ? !!p[t.act] : (t.defOn !== false); }
+  /* Starter set (tool-groups.js, owner 2026-10-13): until the user pins or hides a tool, Home shows 6 to 8 tools picked
+   * from their role and specialty instead of every default. The first pin or hide saves what Home shows at that moment
+   * (homeToolPrefsForWrite), so nothing the user saw disappears; from then on their own choice wins, as before. */
+  function toolGroups() { try { var g = window.SMD_TOOL_GROUPS; return g && g.on() ? g : null; } catch (e) { return null; } }
+  function homeStarter() {
+    var g = toolGroups(), p = homeToolPrefs(); for (var k in p) if (Object.prototype.hasOwnProperty.call(p, k)) return null;
+    if (!g) return null;
+    try { return g.starter(undefined, undefined, function (a) { var t = homeToolByAct(a); return !!(t && homeToolEligible(t) && !roleLocked(a)); }); } catch (e) { return null; }
+  }
+  function homeToolVisible(t, starter) {
+    var p = homeToolPrefs(); if (Object.prototype.hasOwnProperty.call(p, t.act)) return !!p[t.act];
+    var st = starter === undefined ? homeStarter() : starter;
+    return st ? st.indexOf(t.act) >= 0 : (t.defOn !== false);
+  }
+  function homeToolPrefsForWrite() {
+    var p = homeToolPrefs(), st = homeStarter();
+    if (st) HOME_TOOLS.forEach(function (t) { p[t.act] = homeToolVisible(t, st); });
+    return p;
+  }
+  function noteToolOpened(a) { try { var g = toolGroups(); if (g && homeToolByAct(a)) g.pushRecent(homeToolByAct(a).act); } catch (e) {} }
   function homeToolEligible(t) { if (!t.eligible) return true; try { return !!t.eligible(); } catch (e) { return false; } }
   // Live animated icons for the AI tiles (dark badge). CSS in redesign-system.css animates these
   // (eye blink · ECG sweep · lesion pulse · X-ray beam); reduced-motion disables the motion.
@@ -2439,10 +2467,10 @@
       '<span class="rnav-tile-tt">' + (t.act === "askai" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label(t.tt) : t.tt) + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
-    var html = "", TOOLS = orderedHomeTools();
+    var html = "", TOOLS = orderedHomeTools(), st = homeStarter();
     var lockedHtml = "";
     for (var i = 0; i < TOOLS.length; i++) {
-      var t = TOOLS[i]; if (!(homeToolEligible(t) && homeToolVisible(t))) continue;
+      var t = TOOLS[i]; if (!(homeToolEligible(t) && homeToolVisible(t, st))) continue;
       if (roleLocked(t.act)) lockedHtml += homeToolTile(t, true); else html += homeToolTile(t);
     }
     html += lockedHtml;
@@ -2471,7 +2499,7 @@
       b.addEventListener("click", function (e) {
         if (e.target.closest(".hv-drag")) return;   // reorder handle, not the visibility toggle
         var t = homeToolByAct(b.getAttribute("data-tool")); if (!t) return;
-        var now = !homeToolVisible(t), p = homeToolPrefs(); p[t.act] = now;
+        var now = !homeToolVisible(t), p = homeToolPrefsForWrite(); p[t.act] = now;
         try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e2) {}
         var tg = b.querySelector(".hv-tog"); if (tg) tg.classList.toggle("on", now);
         var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
@@ -2484,44 +2512,79 @@
    * day while the rest are one tap away. Filter box for a long list; "Customize" opens the existing
    * reorder sheet. Role-locked tools are listed too, and explain themselves on tap (openRoleLock). */
   function openAllTools() {
-    var TOOLS = orderedHomeTools().filter(homeToolEligible), rows = "";
-    for (var i = 0; i < TOOLS.length; i++) {
-      var t = TOOLS[i], locked = roleLocked(t.act), on = homeToolVisible(t);
-      rows += '<div class="hv-mi hv-at-row" data-at="' + t.act + '" data-q="' + smdEsc((t.tt + " " + t.sub).toLowerCase()) + '">' +
+    var TOOLS = orderedHomeTools().filter(homeToolEligible), g = toolGroups(), st = homeStarter();
+    function row(t, extra) {
+      var locked = roleLocked(t.act), on = homeToolVisible(t, st), d = g ? g.desc(t.act) : "";
+      return '<div class="hv-mi hv-at-row"' + (extra || "") + ' data-at="' + t.act + '" data-q="' + smdEsc((t.tt + " " + t.sub + " " + d).toLowerCase()) + '">' +
         '<button type="button" class="hv-at-open" data-at-open="' + t.act + '"' + (locked ? ' aria-label="' + smdEsc(t.tt) + ', locked for your role"' : '') + '>' + listIcon(t, locked) +
-          '<div class="ml">' + smdEsc(t.tt) + '<div class="mc">' + smdEsc(t.sub) + '</div></div></button>' +
-        '<button type="button" class="hv-at-pin' + (on ? " on" : "") + '" data-at-pin="' + t.act + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove from Home" : "Add to Home") + '" title="' + (on ? "On Home" : "Add to Home") + '">' + ric(on ? "push_pin" : "push_pin") + '</button></div>';
+          '<div class="ml">' + smdEsc(t.tt) + '<div class="mc">' + smdEsc(d || t.sub) + '</div></div></button>' +
+        '<button type="button" class="hv-at-pin' + (on ? " on" : "") + '" data-at-pin="' + t.act + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove " + smdEsc(t.tt) + " from Home" : "Add " + smdEsc(t.tt) + " to Home") + '" title="' + (on ? "On Home" : "Add to Home") + '">' + ric("push_pin") + '</button></div>';
+    }
+    var body = "";
+    if (!g) {
+      // Flag off (smd_tool_groups=0): the flat list, as before 2026-10-13.
+      for (var i = 0; i < TOOLS.length; i++) body += row(TOOLS[i]);
+    } else {
+      // Recently used (ids only), then one section per role, the user's own first and open. Every tool sits in one
+      // section; with no role set, every section is open.
+      var rec = g.recent().map(homeToolByAct).filter(function (t) { return t && homeToolEligible(t); });
+      if (rec.length) body += '<section class="hv-at-recent" aria-label="Recently used"><div class="hv-at-h">Recently used</div>' +
+        rec.map(function (t) { return row(t, ' data-at-recent="1"'); }).join("") + '</section>';
+      var r = g.role();
+      g.sections(TOOLS, r).forEach(function (sec) {
+        var open = !r || sec.mine;
+        body += '<details class="hv-at-sec"' + (open ? ' open data-open="1"' : '') + ' data-role="' + smdEsc(sec.role) + '">' +
+          '<summary class="hv-at-sum"><span class="hv-at-tx"><span class="hv-at-st">' + smdEsc(sec.tt) + (sec.mine ? ' <span class="hv-at-you">Your role</span>' : '') + '</span>' +
+          (sec.sub ? '<span class="hv-at-ss">' + smdEsc(sec.sub) + '</span>' : '') + '</span>' +
+          '<span class="hv-at-n">' + sec.tools.length + '</span>' + ric("expand_more") + '</summary>' +
+          sec.tools.map(function (t) { return row(t); }).join("") + '</details>';
+      });
     }
     openSheet('<div class="hv-sh-t">All tools</div>' +
-      '<div class="hv-sub2">Tap a tool to open it. Pin ' + ric("push_pin") + ' the ones you use every day to keep them on Home.</div>' +
+      '<div class="hv-sub2">' + (g ? 'Grouped by who uses them most. ' : '') + 'Tap a tool to open it. Pin ' + ric("push_pin") + ' the ones you use every day to keep them on Home.</div>' +
       '<div class="hv-at-bar"><input type="search" id="hvAtQ" class="hv-at-q" placeholder="Find a tool" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Find a tool">' +
       '<button type="button" class="hv-at-cust" data-at-cust="1">' + ric("tune") + ' Customize</button></div>' +
-      '<div class="hv-at-list">' + rows + '</div><div class="hv-at-none" hidden>No tool matches.</div>');
+      '<div class="hv-at-list">' + body + '</div><div class="hv-at-none" hidden>No tool matches.</div>');
     var sh = sheetEl();
     sh.querySelectorAll("[data-at-open]").forEach(function (b) {
       b.addEventListener("click", function () {
         var a = b.getAttribute("data-at-open");
         closeSheet();
         if (roleLocked(a)) { openRoleLock(a); return; }
+        noteToolOpened(a);
         setTimeout(function () { try { if (ACT[a]) ACT[a](); } catch (e) {} }, 60);
       });
     });
     sh.querySelectorAll("[data-at-pin]").forEach(function (b) {
       b.addEventListener("click", function () {
         var t = homeToolByAct(b.getAttribute("data-at-pin")); if (!t) return;
-        var now = !homeToolVisible(t), p = homeToolPrefs(); p[t.act] = now;
+        var now = !homeToolVisible(t), p = homeToolPrefsForWrite(); p[t.act] = now;
         try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e2) {}
-        b.classList.toggle("on", now); b.setAttribute("aria-pressed", String(now)); b.setAttribute("aria-label", now ? "Remove from Home" : "Add to Home");
-        var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
+        // The same tool can be listed twice (Recently used and its section): keep both pins in step.
+        sh.querySelectorAll('[data-at-pin="' + t.act + '"]').forEach(function (x) {
+          x.classList.toggle("on", now); x.setAttribute("aria-pressed", String(now)); x.setAttribute("aria-label", (now ? "Remove " + t.tt + " from Home" : "Add " + t.tt + " to Home")); x.title = now ? "On Home" : "Add to Home";
+        });
+        var gr = document.getElementById("rnavToolsGrid"); if (gr) gr.innerHTML = renderHomeToolsGrid();
         toast(now ? t.tt + " added to Home" : t.tt + " removed from Home");
       });
     });
     var cust = sh.querySelector("[data-at-cust]"); if (cust) cust.addEventListener("click", function () { openToolsCustomize(); });
     var q = sh.querySelector("#hvAtQ");
     if (q) q.addEventListener("input", function () {
-      var v = q.value.trim().toLowerCase(), n = 0;
-      sh.querySelectorAll(".hv-at-row").forEach(function (r) { var hit = !v || r.getAttribute("data-q").indexOf(v) >= 0; r.hidden = !hit; if (hit) n++; });
+      // Every word must appear, in any order ("nmc logbook" finds "NMC eLOGBook").
+      var v = q.value.trim().toLowerCase(), words = v ? v.split(/\s+/) : [], n = 0;
+      sh.querySelectorAll(".hv-at-row:not([data-at-recent])").forEach(function (r) { var dq = r.getAttribute("data-q"), hit = words.every(function (w) { return dq.indexOf(w) >= 0; }); r.hidden = !hit; if (hit) n++; });
+      // While searching: every section opens, empty ones and Recently used hide. Cleared: back as they were.
+      var rs = sh.querySelector(".hv-at-recent"); if (rs) rs.hidden = !!v;
+      sh.querySelectorAll(".hv-at-sec").forEach(function (d) {
+        d.hidden = !!v && !d.querySelector(".hv-at-row:not([hidden])");
+        d.open = v ? true : d.hasAttribute("data-open");
+      });
       var none = sh.querySelector(".hv-at-none"); if (none) none.hidden = n > 0;
+    });
+    // Remember which sections the user opened or closed while not searching, for when the search is cleared.
+    sh.querySelectorAll(".hv-at-sec").forEach(function (d) {
+      d.addEventListener("toggle", function () { if (q && q.value.trim()) return; if (d.open) d.setAttribute("data-open", "1"); else d.removeAttribute("data-open"); });
     });
   }
 
@@ -2817,7 +2880,7 @@
       if (a === "more") return openMore();
       if (a === "home") { window.scrollTo(0, 0); var m = root.querySelector(".v3-main"); if (m) m.scrollTo({ top: 0, behavior: "smooth" }); return; }
       if (ACT[a] && roleLocked(a)) return openRoleLock(a);
-      if (ACT[a]) ACT[a]();
+      if (ACT[a]) { noteToolOpened(a); ACT[a](); }
     });
   }
 
