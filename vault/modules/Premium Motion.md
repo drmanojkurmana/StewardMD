@@ -1,7 +1,7 @@
 ---
 tags: [module, ui, native, motion]
 status: BUILT, browser-tested on the real app (headless Chromium, touch emulation). Not yet seen on a handset. The Live Activity Swift (plugin + widget) is written but NOT compiled in this session (no toolchain in the cloud container) - needs a native rebuild.
-flag: one kill switch per module, all default ON except sounds - localStorage smd_sheet_drag, smd_sheet_depth, smd_view_tx, smd_large_title, smd_pull_refresh, smd_picker_haptics, smd_skeletons, smd_peek, smd_live_activity, smd_swipe_actions, smd_tabbar_hide, smd_tab_indicator, smd_status_top, smd_az_scrub, smd_kb_aware, smd_undo, smd_blur_up, smd_launch_morph, smd_sound_module = "0". Sounds are OFF until `smd_sound=1` (Settings > Display & Accessibility > Sounds)
+flag: one kill switch per module, all default ON except sounds - localStorage smd_sheet_drag, smd_sheet_depth, smd_view_tx, smd_large_title, smd_pull_refresh, smd_picker_haptics, smd_skeletons, smd_peek, smd_live_activity, smd_swipe_actions, smd_tab_indicator, smd_status_top, smd_az_scrub, smd_kb_aware, smd_undo, smd_blur_up, smd_launch_morph, smd_sound_module = "0". Sounds are OFF until `smd_sound=1` (Settings > Display & Accessibility > Sounds)
 ---
 # Premium Motion (iOS-like interaction layer)
 
@@ -25,7 +25,7 @@ module edits), each with its own kill switch, loaded by index.html right after s
 | Module | What the doctor feels | Notes |
 | --- | --- | --- |
 | `swipe-actions.js` | swipe a row left: its own buttons (up to 3) slide out, haptic when it locks; tap one to press the real control | **A swipe never fires an action by itself** (a stray swipe must not discharge or delete anyone). Skips the left 28px (edge back), h-scrolling lists, home grid. Destructive labels (remove/delete/cancel...) are red |
-| `tab-bar.js` | home tab bar slides away scrolling down, returns scrolling up; tap the status bar to scroll the topmost list to the top | The tabs are LAUNCHERS, so "selected" = last opened this session (sessionStorage `smd_tab_sel`): a 20x3 pill slides (spring) under it, `aria-current` set; re-tapping it while home is scrolled >60px scrolls home to the top and swallows the launch (at the top it launches as before). Positioned by layout offsets, not rects (sheet-depth scale skews rects). Status tap = Capacitor's `statusTap` event (+ a tap in the top 20px). **statusTap is unverified on a handset** |
+| `tab-bar.js` | tab bar indicator + re-tap to top; tap the status bar to scroll the topmost list to the top | The tabs are LAUNCHERS, so "selected" = last opened this session (sessionStorage `smd_tab_sel`): a 20x3 pill slides (spring) under it, `aria-current` set; re-tapping it while home is scrolled >60px scrolls home to the top and swallows the launch (at the top it launches as before). Positioned by layout offsets, not rects (sheet-depth scale skews rects). Status tap = Capacitor's `statusTap` event (+ a tap in the top 20px). **statusTap is unverified on a handset** |
 | `az-scrubber.js` | a letter strip on the Drug Database: slide to jump, tick + big letter bubble | Presses the app's own `.db-az` chips. The Drug Database IGNORES a chip press while loading the previous letter, so the press waits for a 220ms rest or the release and retries until it takes |
 | `keyboard-aware.js` | the focused field glides into view; a bar pinned to the bottom rides above the keyboard; `--smd-kb` published | Acts only on what is STILL covered 450ms after the keyboard appears, so onboarding / PrepNucleus / phone-verify / profile-setup / reasoning (which handle it themselves) are untouched; a bar that already has a transform or `data-kb-managed` is left alone. Needs `visualViewport`; no-op if the web view itself resizes. **Not verified with a real iOS keyboard** (tested with a stubbed visualViewport) |
 | `undo.js` + card action | destructive local action runs, a Dynamic Island card offers **Undo** for 6s | `SMD_undo.run({message, perform, restore})` returns false when unavailable and the caller keeps its confirm(). **Only used for local, exactly-restorable data**: today only the antibiogram "Remove from this device". Queue patient removal, unit removal, ECG wipes, follow-up deletes stay as confirmations on purpose (server records / PHI / irreversible) |
@@ -65,3 +65,6 @@ Lessons: `large-title.js` must retry a failed setup (a screen still animating in
 
 ## Touch targets (audit 2026-10-12)
 The home header icons are 34x36 (redesign-system.css `.rnav-head .rds-icon-btn`, deliberately narrow so five fit) and the legal footer links were 14px tall. Their HIT area now grows with an invisible `::before` (`::before` because the bell dot owns `::after`); visible size and layout unchanged. Adjacent header icons share the gap, so a middle icon is about 37-42pt wide, not a full 44.
+
+
+- 2026-10-13: hide-on-scroll for the home tab bar REMOVED at the owner's request (the bar always stays). Do not re-add.

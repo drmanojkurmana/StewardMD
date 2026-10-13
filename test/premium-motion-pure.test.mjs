@@ -116,14 +116,6 @@ test("swipe actions: only a left swipe opens; width capped; locks on 40% or flic
   assert.equal(SW.labelOf("", "Remove", null), "Remove");
 });
 
-test("tab bar: hides on a real scroll down, returns on up, always shown near the ends", () => {
-  assert.equal(TB.decide(200, 230, 2000, false), true);
-  assert.equal(TB.decide(230, 220, 2000, true), false);
-  assert.equal(TB.decide(230, 232, 2000, true), true, "jitter keeps the current state");
-  assert.equal(TB.decide(30, 60, 2000, false), false, "near the top it stays");
-  assert.equal(TB.decide(1900, 1980, 2000, true), false, "at the bottom it returns");
-});
-
 test("A-Z scrubber: index mapping and nearest available letter", () => {
   assert.equal(AZ.indexAt(0, 0, 260, 26), 0);
   assert.equal(AZ.indexAt(259, 0, 260, 26), 25);
