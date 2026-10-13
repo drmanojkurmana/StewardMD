@@ -1,0 +1,103 @@
+{
+ "module": "ana-pharynx-tonsils",
+ "subject": "anatomy",
+ "title": "Pharyngeal spaces, constrictor musculature and Waldeyer tonsillar ring",
+ "minutes": 6,
+ "refs": [
+  "ALGrawany Anatomy & Physiology Made Easy 2026",
+  "Scott-Brown's Otorhinolaryngology"
+ ],
+ "steps": [
+  {
+   "tx": "The **pharynx** is a muscular tube extending from the cranial base to the inferior border of the cricoid cartilage at C6, where it continues as the esophagus. It is divided anatomically into three regions: the nasopharynx (posterior to nasal choanae), the oropharynx (posterior to oral cavity from soft palate to epiglottis), and the laryngopharynx (posterior to larynx down to C6).",
+   "say": "The pharynx is a muscular conduit from the base of the skull to C6, continuing as the esophagus. It comprises three compartments: the nasopharynx posterior to nasal cavities, oropharynx posterior to the mouth, and laryngopharynx posterior to the larynx.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharyngeal division",
+     "Boundaries",
+     "Lining epithelium",
+     "Key structures"
+    ],
+    "rows": [
+     [
+      "Nasopharynx",
+      "Skull base to soft palate",
+      "Pseudostratified ciliated columnar",
+      "Eustachian tube orifice, pharyngeal tonsil (adenoid)"
+     ],
+     [
+      "Oropharynx",
+      "Soft palate to epiglottis",
+      "Non-keratinized stratified squamous",
+      "Palatine tonsils, tonsillar pillars, base of tongue"
+     ],
+     [
+      "Laryngopharynx",
+      "Epiglottis to C6 cricoid border",
+      "Non-keratinized stratified squamous",
+      "Piriform fossae, postcricoid area"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The muscular wall consists of an outer circular layer of three overlapping **pharyngeal constrictors** (superior, middle, and inferior) and an inner longitudinal layer (stylopharyngeus, salpingopharyngeus, and palatopharyngeus). All pharyngeal muscles are innervated by the pharyngeal plexus via the vagus nerve (CN X), except the stylopharyngeus, which is supplied exclusively by the glossopharyngeal nerve (CN IX).",
+   "say": "The pharyngeal wall contains three overlapping circular constrictors and three longitudinal muscles. All pharyngeal muscles are innervated by the vagus nerve via the pharyngeal plexus, with the sole exception of stylopharyngeus, which is innervated by the glossopharyngeal nerve.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Circular constrictor muscles",
+     "points": [
+      "Superior, middle and inferior constrictors",
+      "Overlap each other like stacked flowerpots",
+      "Propel food bolus sequentially into esophagus",
+      "Innervated by pharyngeal branch of vagus (CN X)"
+     ]
+    },
+    "right": {
+     "title": "Longitudinal pharyngeal muscles",
+     "points": [
+      "Stylopharyngeus, salpingopharyngeus, palatopharyngeus",
+      "Elevate the larynx and pharynx during swallowing",
+      "Stylopharyngeus supplied by CN IX (glossopharyngeal)",
+      "Salpingopharyngeus opens the auditory tube during deglutition"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The inferior constrictor muscle features two distinct components: the thyropharyngeus with oblique fibers and the cricopharyngeus with horizontal fibers. Between these two muscle components lies a triangular zone of weakness known as **Killian dehiscence**. Elevated intraluminal pressure forces mucosa to herniate posteriorly through Killian dehiscence, forming a Zenker diverticulum.",
+   "say": "Between the oblique thyropharyngeus and horizontal cricopharyngeus lies a muscular weakness called Killian dehiscence. Increased hypopharyngeal pressure forces mucosa through this defect, creating a Zenker diverticulum with regurgitation and halitosis.",
+   "vis": null
+  },
+  {
+   "tx": "The entrance of the aerodigestive tract is guarded by **Waldeyer tonsillar ring**, a circular band of mucosa-associated lymphoid tissue. The ring comprises the nasopharyngeal tonsil (adenoid) superiorly, paired tubal tonsils near eustachian orifices, paired palatine tonsils laterally between palatoglossal and palatopharyngeal arches, and the lingual tonsil on the posterior third of the tongue.",
+   "say": "Waldeyer tonsillar ring guards the aerodigestive portal. It consists of the superior adenoid tonsil, bilateral tubal tonsils, lateral palatine tonsils between faucial pillars, and the lingual tonsil at the tongue base, providing first line immune defense.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-throat-pharynx-gross.png",
+    "alt": "Pharyngeal spaces and tonsillar ring topography",
+    "caption": "Pharyngeal mucosal landscape depicting nasopharynx, palatine tonsillar fossa and laryngopharyngeal junctions."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "e6ced9f2-4000-8000-e6ce-d9f212345678",
+  "e5ced85f-4000-8000-e5ce-d85f12345678",
+  "e4ced6cc-4000-8000-e4ce-d6cc12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

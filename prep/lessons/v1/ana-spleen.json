@@ -1,0 +1,104 @@
+{
+ "module": "ana-spleen",
+ "subject": "anatomy",
+ "title": "Splenic microarchitecture, pulp compartments and postsplenectomy sepsis",
+ "minutes": 6,
+ "refs": [
+  "ALGrawany Anatomy & Physiology Made Easy 2026",
+  "Gray's Anatomy for Students"
+ ],
+ "steps": [
+  {
+   "tx": "The **spleen** is the largest secondary lymphoid organ in the human body, situated in the left hypochondrium under diaphragmatic ribs nine, ten and eleven. It is suspended by the gastrosplenic ligament containing the short gastric vessels and the splenorenal ligament containing the splenic artery, splenic vein, and the delicate pancreatic tail.",
+   "say": "The spleen is the largest lymphoid organ, located in the left upper quadrant protected by ribs nine, ten and eleven. It is attached by the gastrosplenic ligament carrying short gastric vessels and the splenorenal ligament containing the splenic vessels and pancreatic tail.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Compartment",
+     "Histological component",
+     "Primary immune / filter function"
+    ],
+    "rows": [
+     [
+      "White pulp",
+      "Periarteriolar lymphoid sheaths (PALS)",
+      "T-cell zone surrounding central arterioles"
+     ],
+     [
+      "White pulp follicles",
+      "Germinal centres and mantle zones",
+      "B-cell maturation and opsonizing antibody production"
+     ],
+     [
+      "Red pulp cords",
+      "Cords of Billroth and reticular meshwork",
+      "Macrophage clearance of aged RBCs and pitted inclusions"
+     ],
+     [
+      "Red pulp sinuses",
+      "Endothelial barrel stave clefts",
+      "Physical deformability test for circulating erythrocytes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histologically, the splenic parenchyma comprises **white pulp** and red pulp. The white pulp mediates immune surveillance: T lymphocytes surround central arterioles as the periarteriolar lymphoid sheath, while B lymphocytes organize into follicles that synthesize immunoglobulin M and opsonizing antibodies against encapsulated bacterial polysaccharides. Marginal zone macrophages clear antigen-antibody complexes.",
+   "say": "Splenic parenchyma consists of white pulp and red pulp. White pulp handles immune surveillance: T-cells form periarteriolar sheaths around central arterioles, while B-cells form follicles that produce opsonizing antibodies against encapsulated bacteria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "White pulp function",
+     "points": [
+      "Composed of lymphoid aggregates",
+      "PALS surrounds central arterioles (T-cells)",
+      "Splenic follicles house mature B-cells",
+      "Synthesizes opsonins and IgM antibodies"
+     ]
+    },
+    "right": {
+     "title": "Red pulp function",
+     "points": [
+      "Composed of cords of Billroth and sinuses",
+      "Splenic macrophages remove senescent erythrocytes",
+      "Filters Howell-Jolly bodies and Heinz bodies",
+      "Reservoir for platelets and mobilizable monocytes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **red pulp** serves as a specialized mechanical filter. Blood exits open-ended arterioles into the cords of Billroth, where macrophages inspect erythrocytes. To re-enter circulation, red cells must deform through narrow two-micrometer slits between endothelial barrel staves lining splenic sinusoids. Stiff spherocytes or rigid sickled cells fail this passage and are promptly phagocytosed.",
+   "say": "The red pulp functions as a mechanical vascular filter. Erythrocytes enter cords of Billroth and must squeeze through two-micrometer endothelial slits into venous sinuses. Inflexible red blood cells such as spherocytes fail this test and are engulfed by macrophages.",
+   "vis": null
+  },
+  {
+   "tx": "Splenectomy causes loss of polysaccharide antibody synthesis, predisposing to **overwhelming postsplenectomy infection** (OPSI) by encapsulated organisms: Streptococcus pneumoniae, Neisseria meningitidis and Haemophilus influenzae. Peripheral blood smears demonstrate Howell-Jolly bodies (nuclear DNA remnants), Heinz bodies, and target cells. Prophylactic vaccination and prompt antibiotic administration are critical lifelong safeguards.",
+   "say": "Splenectomy impairs clearance of encapsulated bacteria, creating risk of overwhelming postsplenectomy sepsis from Streptococcus pneumoniae and Neisseria meningitidis. Blood smears demonstrate Howell-Jolly bodies, Heinz bodies and target cells, requiring lifelong vaccination protocols.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-spleen-gross.png",
+    "alt": "Splenic gross anatomy and vascular hilum",
+    "caption": "Gross anatomy of the spleen displaying visceral impressions, fibrous capsule, and branching hilar vessels."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "e0ee94d8-4000-8000-e0ee-94d812345678",
+  "e3ee9991-4000-8000-e3ee-999112345678",
+  "e2ee97fe-4000-8000-e2ee-97fe12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "module": "phy-autonomic-nervous-system",
+ "subject": "physiology",
+ "title": "Autonomic nervous system, hypothalamic nuclei and pupillary reflexes",
+ "minutes": 6,
+ "refs": [
+  "Clinical Neuroanatomy Made Ridiculously Simple",
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "steps": [
+  {
+   "tx": "The **autonomic nervous system** comprises sympathetic and parasympathetic divisions operating in dynamic equilibrium. Sympathetic preganglionic neurons arise from the intermediolateral cell column of thoracic and upper lumbar spinal segments between T1 and L2. In contrast, parasympathetic preganglionic outflows originate from cranial nerve nuclei (CN III, VII, IX, X) and sacral cord segments between S2 and S4.",
+   "say": "The autonomic nervous system consists of sympathetic and parasympathetic divisions. Sympathetic preganglionics originate from the intermediolateral cell column from T1 to L2. Parasympathetic preganglionics arise from cranial nerves three, seven, nine, ten and sacral spinal cord segments S2 to S4.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Division",
+     "Anatomical outflow",
+     "Preganglionic transmitter",
+     "Postganglionic transmitter"
+    ],
+    "rows": [
+     [
+      "Sympathetic",
+      "Thoracolumbar (T1-L2)",
+      "Acetylcholine (Nicotinic)",
+      "Norepinephrine (except sweat glands)"
+     ],
+     [
+      "Parasympathetic",
+      "Craniosacral (CN III, VII, IX, X, S2-S4)",
+      "Acetylcholine (Nicotinic)",
+      "Acetylcholine (Muscarinic)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **hypothalamus** serves as the principal central coordinating centre for autonomic regulation, endocrine balance and homeostatic drives. Specialized nuclei execute distinct physiologic tasks: the lateral hypothalamic area promotes feeding (stimulated by ghrelin), the ventromedial nucleus signals satiety (stimulated by leptin), the supraoptic and paraventricular nuclei synthesize ADH and oxytocin, and the suprachiasmatic nucleus orchestrates circadian rhythms.",
+   "say": "The hypothalamus coordinates autonomic function, endocrine balance and homeostasis. The lateral nucleus stimulates hunger, the ventromedial nucleus promotes satiety, supraoptic and paraventricular nuclei produce ADH and oxytocin, and the suprachiasmatic nucleus controls circadian rhythms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypothalamic hunger & satiety",
+     "points": [
+      "Lateral nucleus stimulates hunger",
+      "Destruction causes aphagia and starvation",
+      "Ventromedial nucleus promotes satiety",
+      "Destruction causes hyperphagia and obesity"
+     ]
+    },
+    "right": {
+     "title": "Hypothalamic temperature control",
+     "points": [
+      "Anterior nucleus detects heat and induces sweating",
+      "Posterior nucleus senses cold and triggers shivering",
+      "Regulated by warm-sensitive preoptic neurons",
+      "Pyrogens shift the core hypothalamic set point"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **sympathetic pupillary pathway** is a three-neuron chain. First-order neurons descend from the posterior hypothalamus through the brainstem to the ciliospinal center of Budge at C8-T2. Second-order preganglionic fibers ascend across the apical pleura to synapse in the superior cervical ganglion. Third-order postganglionic fibers travel along the internal and external carotid arteries to reach the pupillary dilator muscle.",
+   "say": "The sympathetic pupillary pathway is a three neuron chain. First order neurons descend from the hypothalamus to the ciliospinal center at C8 to T2. Second order fibers travel over the lung apex to the superior cervical ganglion. Third order fibers follow carotid arteries to the pupillary dilator.",
+   "vis": null
+  },
+  {
+   "tx": "Interruption of the oculosympathetic chain causes **Horner syndrome**, clinically defined by the triad of ptosis, miosis and anhidrosis. Ptosis results from denervation of superior tarsal muscle, miosis stems from unopposed parasympathetic sphincter pupillae action, and anhidrosis reflects loss of sudomotor tone. Apical lung Pancoast tumors invading the inferior cervical and first thoracic ganglia frequently cause this disorder.",
+   "say": "Disruption of the sympathetic pathway causes Horner syndrome, presenting with ptosis, miosis and anhidrosis. Ptosis stems from superior tarsal muscle weakness, miosis from unopposed sphincter pupillae action, and anhidrosis from loss of sudomotor tone, commonly seen in Pancoast apical lung tumours.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.png",
+    "alt": "Pupillary control pathways and autonomic innervation",
+    "caption": "Autonomic regulation of iris musculature showing sympathetic dilation and parasympathetic constrictor loops."
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "ba7aba2a-4000-8000-ba7a-ba2a12345678",
+  "b97ab897-4000-8000-b97a-b89712345678",
+  "b87ab704-4000-8000-b87a-b70412345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

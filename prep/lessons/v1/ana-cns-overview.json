@@ -1,0 +1,117 @@
+{
+ "module": "ana-cns-overview",
+ "subject": "anatomy",
+ "title": "Central nervous system organization: planes, neuraxis and gross architecture",
+ "minutes": 6,
+ "refs": [
+  "Clinical Neuroanatomy Made Ridiculously Simple",
+  "Snell's Clinical Neuroanatomy"
+ ],
+ "steps": [
+  {
+   "tx": "The **neuraxis** bends dramatically at the cephalic flexure between the brainstem and diencephalon. Consequently, anatomical terms of direction shift ninety degrees. In the cerebrum, rostral means anterior towards the frontal pole, while caudal means posterior towards the occipital pole. Below the midbrain within the spinal cord, rostral signifies superior towards the head, and caudal denotes inferior towards the coccyx.",
+   "say": "The neuraxis bends ninety degrees at the cephalic flexure between the brainstem and diencephalon. In the cerebrum, rostral means anterior towards the frontal pole, and caudal means posterior. Below the midbrain, rostral signifies superior towards the head, while caudal denotes inferior towards the coccyx.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neuraxis region",
+     "Rostral direction",
+     "Caudal direction",
+     "Dorsal direction"
+    ],
+    "rows": [
+     [
+      "Cerebrum / Forebrain",
+      "Anterior (frontal pole)",
+      "Posterior (occipital pole)",
+      "Superior (vertex)"
+     ],
+     [
+      "Brainstem & Spinal cord",
+      "Superior (towards brain)",
+      "Inferior (towards coccyx)",
+      "Posterior (towards back)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Embryologically, the primitive neural tube develops into three primary vesicles: the **prosencephalon**, mesencephalon and rhombencephalon. By five weeks, the prosencephalon divides into the telencephalon (cerebral hemispheres) and diencephalon (thalamus, hypothalamus). The mesencephalon persists as the midbrain, while the rhombencephalon subdivides into the metencephalon (pons and cerebellum) and myelencephalon (medulla oblongata).",
+   "say": "Embryologically, the neural tube develops into three primary brain vesicles: prosencephalon, mesencephalon and rhombencephalon. The prosencephalon subdivides into telencephalon and diencephalon. The mesencephalon remains the midbrain, while the rhombencephalon splits into metencephalon and myelencephalon.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary vesicles",
+     "points": [
+      "Prosencephalon (forebrain)",
+      "Mesencephalon (midbrain)",
+      "Rhombencephalon (hindbrain)",
+      "Caudal neural tube (spinal cord)"
+     ]
+    },
+    "right": {
+     "title": "Secondary adult derivatives",
+     "points": [
+      "Telencephalon and diencephalon",
+      "Midbrain and cerebral aqueduct",
+      "Pons, cerebellum and medulla",
+      "Adult spinal cord and central canal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The central nervous system is enveloped by three protective **meningeal layers**: the dura mater, arachnoid mater and pia mater. The tough outer dura forms protective dural reflections, including the falx cerebri in the longitudinal fissure and the tentorium cerebelli separating the occipital lobes from the cerebellum. The subarachnoid space between arachnoid and pia contains circulating cerebrospinal fluid and major cerebral vessels.",
+   "say": "The central nervous system is enclosed by three meninges: dura mater, arachnoid mater and pia mater. The tough dura forms reflections including the falx cerebri and tentorium cerebelli. The subarachnoid space between arachnoid and pia carries cerebrospinal fluid and major cerebral vessels.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.png",
+    "alt": "Gross brain architecture and meningeal relationships",
+    "caption": "Overview of cerebral hemispheres, brainstem, cerebellar structures and intracranial compartments."
+   }
+  },
+  {
+   "tx": "Intracranial **hemorrhages** correlate strictly with distinct meningeal spaces. Epidural hematoma occurs in the potential space between the skull and periosteal dura, typically caused by pterion fracture lacerating the middle meningeal artery, producing a biconvex lentiform collection. Subdural hematoma results from shearing of fragile bridging veins traversing the subdural plane, causing a crescent-shaped hematoma that freely crosses cranial suture lines.",
+   "say": "Intracranial hemorrhages occupy distinct meningeal compartments. Epidural hematoma occurs between skull and dura, caused by middle meningeal artery rupture, yielding a lentiform mass. Subdural hematoma results from ruptured bridging veins, creating a crescentic collection that crosses cranial sutures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epidural hematoma",
+     "points": [
+      "Laceration of middle meningeal artery",
+      "Biconvex lentiform shape on CT",
+      "Limited by cranial suture lines",
+      "Classic lucid interval before deterioration"
+     ]
+    },
+    "right": {
+     "title": "Subdural hematoma",
+     "points": [
+      "Tearing of parasagittal bridging veins",
+      "Crescent shaped crescentic collection",
+      "Freely crosses cranial suture lines",
+      "Common in elderly and cerebral atrophy"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave2",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "b0e6c247-4000-8000-b0e6-c24712345678",
+  "b1e6c3da-4000-8000-b1e6-c3da12345678",
+  "b2e6c56d-4000-8000-b2e6-c56d12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
