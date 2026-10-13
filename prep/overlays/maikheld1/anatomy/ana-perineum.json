@@ -5,34 +5,20 @@
  "items": [
   {
    "id": "mk-held0001",
-   "q": "[STAGED - rights hold] Sample staged image item for a held-pool figure. Which structure is shown?",
-   "o": [
-    "Option A",
-    "Option B",
-    "Option C",
-    "Option D"
-   ],
+   "q": "Held-pool staging item (radiology scan figure, rights hold). This item stays hidden until its image is cleared with tools/prep-clearance.mjs.",
+   "o": ["Held option A", "Held option B", "Held option C", "Held option D"],
    "a": 0,
-   "exp": "Staged only. Not for students until the image is cleared.",
-   "r": [
-    "Staged.",
-    "Staged.",
-    "Staged.",
-    "Staged."
-   ],
-   "kp": "Staged.",
+   "exp": "Staged only under hold:\"rights\". Diagram topics from held pools are redrawn as StewardMD originals and published live in maikpearl1 instead; scans are never redrawn.",
+   "r": ["Staged.", "Staged.", "Staged.", "Staged."],
+   "kp": "Staged held item; not for students until cleared.",
    "t": "ana-perineum",
-   "img": [
-    "rb-ctc-sample.webp"
-   ],
+   "img": ["rb-ctc-p0003-1.webp"],
    "imgPlace": "stem",
    "hold": "rights",
    "prov": "held",
    "gen": "hand",
    "set": "maikheld1",
-   "quality": {
-    "status": "requires_review"
-   }
+   "quality": { "status": "requires_review" }
   }
  ]
 }
