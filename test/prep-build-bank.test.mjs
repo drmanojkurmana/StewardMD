@@ -57,9 +57,9 @@ test("taxonomyForApp: branches, subjects, sections, modules; no scope text shipp
   assert.deepEqual(s.sections[0].modules[0], { id: "ana-brachial-plexus", name: { en: "Brachial plexus" }, size: "l" });
   assert.ok(!JSON.stringify(t).includes("Klumpke"), "scope stays in the build");
   assert.deepEqual(t.branches[1].subjects, []);
-  // by default the licensing branches (prep/taxonomy-licensing.json) follow the generated ones, so a rebuild keeps them
+  // by default the drawn branches (prep/taxonomy-extra.json) follow the generated ones, so a rebuild keeps them
   const full = B.taxonomyForApp([SUBJ]);
-  assert.deepEqual(full.branches.map((b) => b.id), ["mbbs", "ss-medicine", "uk", "intl", "mrcp"]);
+  assert.deepEqual(full.branches.map((b) => b.id), ["mbbs", "ss-medicine", "uk", "intl", "mrcp", "ss-surgery"]);
 });
 
 test("scrubRefs removes references and locators, keeps gene names and prose", () => {

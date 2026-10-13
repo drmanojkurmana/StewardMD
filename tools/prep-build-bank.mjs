@@ -105,15 +105,15 @@ export function modulesOf(s) {
   return out;
 }
 // The tree the app draws (bundled). Scope terms stay in the build: they are for classification only.
-// The licensing branches (PLAB 1, MRCS Part A, AMC, MCCQE Part I, MRCP): their subjects reuse MBBS modules, so they are
-// kept as drawn in prep/taxonomy-licensing.json rather than as prep/taxonomy/ sources, and appended here so a rebuild of
-// prep/taxonomy.json keeps them.
-export const LICENSING_FILE = path.join(ROOT, "prep", "taxonomy-licensing.json");
-export function licensingBranches(file = LICENSING_FILE) {
+// Branches drawn but not generated (prep/taxonomy-extra.json): the licensing branches (PLAB 1, MRCS Part A, AMC,
+// MCCQE Part I, MRCP) reuse MBBS modules, and the NEET-SS surgical branch has no module scopes, so neither can be a
+// prep/taxonomy/ source. They are appended here so a rebuild of prep/taxonomy.json keeps them.
+export const EXTRA_FILE = path.join(ROOT, "prep", "taxonomy-extra.json");
+export function extraBranches(file = EXTRA_FILE) {
   if (!fs.existsSync(file)) return [];
   return JSON.parse(fs.readFileSync(file, "utf8")).branches || [];
 }
-export function taxonomyForApp(subjects, extra = licensingBranches()) {
+export function taxonomyForApp(subjects, extra = extraBranches()) {
   return {
     v: 1,
     branches: BRANCHES.map((b) => ({

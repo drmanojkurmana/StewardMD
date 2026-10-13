@@ -94,12 +94,14 @@ test("device table: unique ids, the chip rule, unverified marked, conservative r
 
 /* ---------- MaiK lines ---------- */
 const FORBID = /\b(AI|rank|AIR|top|topper|crack|clear the exam|guarantee\w*|selection|seat|percentile|score|pass|you did well|mastered|real strength|competition|rivals?|beat)\b|[!—–]/i;
-test("MaiK lines: every taxonomy subject has 3, every line passes the writing rules (285 in all)", () => {
+test("MaiK lines: every taxonomy subject and branch has 3, every line passes the writing rules", () => {
+  // Counted from the taxonomy rather than pinned: a fixed total broke each time a bank added subjects, and naming
+  // the subject or branch that has no lines is the useful failure.
   const subs = []; TAX.branches.forEach((b) => b.subjects.forEach((s) => subs.push(s.id)));
-  let n = 0;
-  subs.forEach((id) => { assert.equal((LINES.subject[id] || []).length, 3, id); n += 3; });
-  Object.keys(LINES.branch).forEach((b) => { assert.equal(LINES.branch[b].length, 3); n += 3; });
-  assert.equal(n, 285);
+  subs.forEach((id) => assert.equal((LINES.subject[id] || []).length, 3, "subject " + id));
+  TAX.branches.forEach((b) => assert.equal((LINES.branch[b.id] || []).length, 3, "branch " + b.id));
+  Object.keys(LINES.branch).forEach((b) => assert.equal(LINES.branch[b].length, 3, "branch " + b));
+  assert.ok(subs.length >= 98, "taxonomy subjects: " + subs.length);
   const all = [].concat(...Object.values(LINES.subject), ...Object.values(LINES.branch));
   all.forEach((l) => {
     const w = l.trim().split(/\s+/).length;
