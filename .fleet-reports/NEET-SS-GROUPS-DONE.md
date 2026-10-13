@@ -105,3 +105,8 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 - 400 hand-written MCQs ($0 Anthropic API), workflow blind-verified 396/400 (dropped maikss38[0], maikss42[1,2,31]), keys rotated A-D, dedupe 0, R2 live: ss-paediatric-critical-care 15->115 (maikss35 pcc-shock-sepsis 50, maikss36 pcc-ventilation-sedation 50), ss-paediatric-cardiology 20->119 (maikss37 50, maikss38 49), ss-paediatric-neurology 20->120 (maikss39 50, maikss40 50), ss-paediatric-nephrology 20->117 (maikss41 50, maikss42 47).
 - Exact outside-sandbox command still pending (lead): `node tools/prep-ids.mjs publish --yes`
 - Remainder to 300/subject about 7,860. Next: ss-paediatric-gastroenterology/hepatology/oncology (20 each), ss-neonatology (30), Pharmacology/Psychiatry top-ups, Surgical.
+
+## VOLUME phase batch 4 (2026-10-13): Paediatric gastro/hepatology/oncology + neonatology
+
+- 399 hand-written MCQs ($0 API), blind-verified 399/400 (dropped maikss49[6]), keys rotated, R2 live: gastroenterology 20->120 (maikss43/44), hepatology 20->120 (maikss45/46), oncology 20->120 (maikss47/48), neonatology 30->129 (maikss49 49, maikss50 50). All 8 Paediatric subjects now >=115. Paediatric group total ~941.
+- Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`. Remainder ~7,460.
