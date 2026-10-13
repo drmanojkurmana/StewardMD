@@ -1,0 +1,757 @@
+{
+ "topic": "med-acs",
+ "set": "gap1013b",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap601",
+   "q": "A 62-year-old man has central crushing chest pain with sweating and nausea for 40 minutes. He is pale and clammy. What is the first investigation priority?",
+   "o": [
+    "ECG within minutes with continuous cardiac monitoring",
+    "Wait for troponin before doing an ECG",
+    "Send him for a chest X-ray first",
+    "Exercise tolerance test"
+   ],
+   "a": 0,
+   "exp": "Suspected ACS needs an ECG within minutes and monitoring, because early ventricular fibrillation is the main killer and STEMI needs immediate reperfusion (NICE NG185).",
+   "r": [
+    "Correct: ECG and monitor first in suspected ACS.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "ECG and monitor first in suspected ACS.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "acs",
+    "chest-pain"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "ECG and monitor first in suspected ACS.",
+    "others": {
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "In chest pain, the ECG comes first; troponin never delays it.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "ECG and monitor first in suspected ACS.",
+    "rev": "Suspected ACS needs an ECG within minutes and monitoring, because early ventricular fibrillation is the main killer and STEMI needs immediate reperfusion (NICE NG185).",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap602",
+   "q": "A 58-year-old woman's ECG shows ST elevation with ongoing chest pain. Primary angioplasty cannot be delivered promptly at this hospital. What should happen?",
+   "o": [
+    "Wait until morning for angiography",
+    "Give thrombolysis without delay where eligible, per protocol",
+    "Give oral fluids and observe",
+    "Start antibiotics"
+   ],
+   "a": 1,
+   "exp": "STEMI needs immediate reperfusion: primary angioplasty where timely, otherwise thrombolysis without delay (NICE NG185; ESC guidance).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Reperfuse STEMI by fastest route.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Reperfuse STEMI by fastest route.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stemi",
+    "reperfusion"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Reperfuse STEMI by fastest route.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "An occluded artery needs reperfusion now, by the fastest available route.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Reperfuse STEMI by fastest route.",
+    "rev": "STEMI needs immediate reperfusion: primary angioplasty where timely, otherwise thrombolysis without delay (NICE NG185; ESC guidance).",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap603",
+   "q": "A 70-year-old man has chest discomfort, a raised troponin that is rising on repeat testing, and no ST elevation. What is the correct approach?",
+   "o": [
+    "Discharge because there is no ST elevation",
+    "Give thrombolysis immediately",
+    "Treat as NSTEMI: risk-score and arrange timed angiography per protocol",
+    "Ignore troponin as a false positive"
+   ],
+   "a": 2,
+   "exp": "NSTEMI is managed with risk scoring and troponin trends to time angiography; thrombolysis is not used without ST elevation (NICE NG185).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Risk-score NSTEMI for timed angiography.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Risk-score NSTEMI for timed angiography.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "nstemi",
+    "troponin"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Risk-score NSTEMI for timed angiography.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "No ST elevation does not mean no infarction.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Risk-score NSTEMI for timed angiography.",
+    "rev": "NSTEMI is managed with risk scoring and troponin trends to time angiography; thrombolysis is not used without ST elevation (NICE NG185).",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap604",
+   "q": "A patient with sepsis and renal failure has a modestly raised troponin but no chest pain and a normal ECG. How should this be interpreted?",
+   "o": [
+    "As proof of STEMI needing thrombolysis",
+    "As a laboratory error to ignore",
+    "As an indication for discharge",
+    "With the clinical story and ECG; troponin rises in many non-coronary conditions"
+   ],
+   "a": 3,
+   "exp": "Troponin rises and falls in sepsis, renal failure and PE as well as infarction, so it must be read with the story and ECG, never alone.",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Interpret troponin in context."
+   ],
+   "kp": "Interpret troponin in context.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "troponin",
+    "acs"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Interpret troponin in context.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Troponin is a marker of myocardial injury, not a stand-alone diagnosis.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Interpret troponin in context.",
+    "rev": "Troponin rises and falls in sepsis, renal failure and PE as well as infarction, so it must be read with the story and ECG, never alone.",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap605",
+   "q": "A 55-year-old man took aspirin promptly for suspected ACS and is truly allergic to it, with prior anaphylaxis. What is the principle?",
+   "o": [
+    "Give aspirin anyway at a lower dose",
+    "Withhold aspirin and seek senior and protocol-guided alternative antiplatelet cover",
+    "Give an antihistamine and then aspirin",
+    "Ignore the allergy history"
+   ],
+   "a": 1,
+   "exp": "Aspirin is given promptly in ACS unless truly allergic; true allergy needs senior, protocol-guided alternative antiplatelet cover rather than forced dosing (NICE NG185).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Respect true aspirin allergy in ACS.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Respect true aspirin allergy in ACS.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "acs",
+    "aspirin"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Respect true aspirin allergy in ACS.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Prompt aspirin for all except the truly allergic.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Respect true aspirin allergy in ACS.",
+    "rev": "Aspirin is given promptly in ACS unless truly allergic; true allergy needs senior, protocol-guided alternative antiplatelet cover rather than forced dosing (NICE NG185).",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap606",
+   "q": "Three days after an MI, a patient develops sudden breathlessness, a new harsh murmur and pulmonary oedema. What must be suspected?",
+   "o": [
+    "A mechanical complication of infarction needing urgent senior and surgical assessment",
+    "Simple anxiety",
+    "A chest infection only",
+    "Normal recovery"
+   ],
+   "a": 0,
+   "exp": "New murmur with pulmonary oedema days after MI suggests a mechanical complication such as papillary muscle rupture; it needs urgent senior and surgical assessment.",
+   "r": [
+    "Correct: Suspect mechanical complication after MI.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Suspect mechanical complication after MI.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "acs",
+    "complications"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Suspect mechanical complication after MI.",
+    "others": {
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "A new murmur after MI is a mechanical complication until proved otherwise.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Suspect mechanical complication after MI.",
+    "rev": "New murmur with pulmonary oedema days after MI suggests a mechanical complication such as papillary muscle rupture; it needs urgent senior and surgical assessment.",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap607",
+   "q": "A 66-year-old woman with diabetes has nausea, breathlessness and sweating but denies chest pain. ECG shows ischaemic changes. What is the lesson?",
+   "o": [
+    "ACS is excluded without chest pain",
+    "Breathlessness cannot be cardiac",
+    "Diabetes protects against MI",
+    "ACS may present without chest pain, especially in diabetes and older adults; treat the ECG seriously"
+   ],
+   "a": 3,
+   "exp": "ACS can present atypically with breathlessness, nausea or sweating alone, particularly in diabetes and older age; ischaemic ECG changes must be acted on.",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Recognise atypical ACS presentations."
+   ],
+   "kp": "Recognise atypical ACS presentations.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "acs",
+    "atypical"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Recognise atypical ACS presentations.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Absence of chest pain does not exclude ACS.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Recognise atypical ACS presentations.",
+    "rev": "ACS can present atypically with breathlessness, nausea or sweating alone, particularly in diabetes and older age; ischaemic ECG changes must be acted on.",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap608",
+   "q": "A first troponin taken very soon after pain onset is normal in a patient with a convincing ACS story. What is correct?",
+   "o": [
+    "Infarction is excluded",
+    "Discharge immediately",
+    "It does not exclude infarction; repeat testing and monitoring are needed",
+    "Cancel the ECG"
+   ],
+   "a": 2,
+   "exp": "An early normal troponin does not exclude infarction because troponin takes time to rise; serial testing and monitoring are required (NICE NG185).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Repeat troponin when taken early.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Repeat troponin when taken early.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "troponin",
+    "acs"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Repeat troponin when taken early.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Too-early troponin can be falsely reassuring.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Repeat troponin when taken early.",
+    "rev": "An early normal troponin does not exclude infarction because troponin takes time to rise; serial testing and monitoring are required (NICE NG185).",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap609",
+   "q": "After ACS, which package prevents the next event?",
+   "o": [
+    "No follow-up treatment is needed",
+    "Guideline antiplatelet, statin and other indicated secondary prevention, smoking cessation and rehabilitation",
+    "Antibiotics for a month",
+    "Bed rest for six weeks"
+   ],
+   "a": 1,
+   "exp": "Secondary prevention after ACS (antiplatelet, statin, beta-blocker and ACE inhibitor where indicated, smoking cessation and rehab) prevents recurrence.",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Start secondary prevention after ACS.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Start secondary prevention after ACS.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "acs",
+    "prevention"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Start secondary prevention after ACS.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Surviving the infarct is the start, not the end, of treatment.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Start secondary prevention after ACS.",
+    "rev": "Secondary prevention after ACS (antiplatelet, statin, beta-blocker and ACE inhibitor where indicated, smoking cessation and rehab) prevents recurrence.",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap610",
+   "q": "A monitored ACS patient suddenly collapses pulseless with ventricular fibrillation on the monitor. What is the immediate action?",
+   "o": [
+    "Take a full history first",
+    "Wait for troponin",
+    "Defibrillate promptly and start resuscitation",
+    "Give oral aspirin and observe"
+   ],
+   "a": 2,
+   "exp": "Ventricular fibrillation is the early killer in ACS; prompt defibrillation and resuscitation take priority over every other step (NICE NG185).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Defibrillate VF immediately.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Defibrillate VF immediately.",
+   "t": "med-acs",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "acs",
+    "vf"
+   ],
+   "source": "NICE NG185 acute coronary syndromes",
+   "x": {
+    "key": "Defibrillate VF immediately.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "In VF, shock first, investigate later.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Defibrillate VF immediately.",
+    "rev": "Ventricular fibrillation is the early killer in ACS; prompt defibrillation and resuscitation take priority over every other step (NICE NG185).",
+    "next": {
+     "concept": "med-acs",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG185 acute coronary syndromes",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-acs"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}
