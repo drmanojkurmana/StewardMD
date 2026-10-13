@@ -118,7 +118,14 @@
           }
         }
       }
-    }
+    },
+    "algorithms": { "type": "array", "items": { "type": "object" } },
+    "tables": { "type": "array", "items": { "type": "object" } },
+    "diagrams": { "type": "array", "items": { "type": "object" } },
+    "citations": { "type": "array", "items": { "type": "object" } },
+    "valueTables": { "type": "array", "items": { "type": "object" } },
+    "flowcharts": { "type": "array", "items": { "type": "object" } },
+    "figures": { "type": "array", "items": { "type": "object" } }
   },
   "$defs": {
     "rule": {

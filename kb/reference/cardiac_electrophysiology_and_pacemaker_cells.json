@@ -1,0 +1,40 @@
+{
+  "id": "cardiac_electrophysiology_and_pacemaker_cells",
+  "name": "Cardiac Electrophysiology and Pacemaker Automatism",
+  "aliases": [
+    "Cardiac action potential",
+    "Funny current",
+    "Refractory period",
+    "Arrhythmogenesis"
+  ],
+  "class": "non_infective",
+  "system": "Cardiovascular System / Electrophysiology",
+  "specialty": "Physiology / Cardiology",
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "reference": {
+    "source": "Guyton and Hall Textbook of Medical Physiology / Katz's Physiology of the Heart",
+    "sourceEdition": "current",
+    "clinicalPearls": [
+      "Ventricular action potential: Phase 0 (inward Na+ via Nav1.5), Phase 1 (transient outward K+), Phase 2 (plateau: inward Ca2+ balanced by outward K+), Phase 3 (repolarization: IKr, IKs), Phase 4 (IK1, resting -90 mV)",
+      "Pacemaker cells (SA/AV node) exhibit spontaneous Phase 4 depolarization driven by the funny current (If) via HCN channels and T-type Ca2+ channels",
+      "Sympathetic beta-1 stimulation raises cAMP, steepening Phase 4 slope (positive chronotropy); vagal M2 stimulation opens IKACh, hyperpolarizing node (bradycardia)",
+      "Effective refractory period spans phases 0, 1, 2, and early 3, preventing tetanic contraction and ensuring rhythmic chamber filling",
+      "Early afterdepolarizations (EADs) occur during phase 2/3 in prolonged QT intervals, triggering polymorphic ventricular tachycardia (Torsades de pointes)"
+    ],
+    "pathophysiology": "Congenital long QT syndrome arises from loss-of-function potassium channel mutations (LQT1 KCNQ1, LQT2 KCNH2) or gain-of-function sodium channel mutations (LQT3 SCN5A). Delayed ventricular repolarization permits reactivation of L-type calcium channels, triggering early afterdepolarizations that provoke Torsades de pointes and sudden cardiac death.",
+    "additionalDifferentials": [
+      "Congenital long QT syndromes (Romano-Ward, Jervell and Lange-Nielsen)",
+      "Brugada syndrome (SCN5A ST elevation V1-V3)",
+      "Catecholaminergic polymorphic ventricular tachycardia (CPVT)",
+      "Wolff-Parkinson-White syndrome"
+    ],
+    "additionalInvestigations": [
+      "12-lead electrocardiogram calculating corrected QT interval (QTc = QT / sqrt(RR))",
+      "24-hour ambulatory Holter ECG monitoring for transient arrhythmias",
+      "Electrophysiological study (EPS) with programmed electrical stimulation"
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "module": "bio-urea-cycle",
+  "subject": "biochemistry",
+  "title": "Urea cycle, nitrogen disposal and hyperammonemia",
+  "minutes": 6,
+  "refs": [
+    "Harper's Illustrated Biochemistry",
+    "Lippincott Illustrated Reviews: Biochemistry"
+  ],
+  "steps": [
+    {
+      "tx": "The **urea cycle** takes place exclusively in hepatocytes, converting neurotoxic free ammonia into non-toxic water-soluble urea for renal excretion. The cycle is partitioned across two subcellular compartments: the initial two reactions occur in the mitochondrial matrix, while the remaining three reactions take place in the cytosol. A helpful mnemonic for the cyclical intermediates is 'Ordinarily, Careless Crappers Are Also Frivolous Ulcers': Ornithine, Carbamoyl phosphate, Citrulline, Aspartate, Argininosuccinate, Fumarate, Arginine, Urea.",
+      "say": "The urea cycle takes place exclusively in hepatocytes, converting neurotoxic ammonia into water-soluble urea. The cycle is partitioned between the mitochondrial matrix and cytosol. A mnemonic for intermediates is Ordinarily Careless Crappers Are Also Frivolous: Ornithine, Carbamoyl phosphate, Citrulline, Aspartate, Argininosuccinate, Fumarate, Arginine, Urea.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Enzyme",
+          "Subcellular compartment",
+          "Substrates and products"
+        ],
+        "rows": [
+          [
+            "Carbamoyl phosphate synthetase I",
+            "Mitochondrial matrix",
+            "NH4+ and HCO3- to carbamoyl phosphate (needs N-acetylglutamate)"
+          ],
+          [
+            "Ornithine transcarbamylase",
+            "Mitochondrial matrix",
+            "Carbamoyl phosphate + ornithine to citrulline"
+          ],
+          [
+            "Argininosuccinate synthetase",
+            "Cytosol",
+            "Citrulline + aspartate to argininosuccinate"
+          ],
+          [
+            "Argininosuccinase (lyase)",
+            "Cytosol",
+            "Argininosuccinate to arginine + fumarate"
+          ],
+          [
+            "Arginase",
+            "Cytosol",
+            "Arginine to urea + ornithine (regenerates ornithine)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The rate-limiting commitment step is catalyzed by mitochondrial **carbamoyl phosphate synthetase-one**, requiring two ATP molecules. This enzyme has an absolute obligate allosteric requirement for N-acetylglutamate, synthesized by N-acetylglutamate synthase from acetyl-CoA and glutamate. Arginine stimulates N-acetylglutamate synthase, so a protein-rich meal inherently activates carbamoyl phosphate synthetase-one, coordinating urea synthesis with amino acid catabolic flux.",
+      "say": "The rate-limiting step is catalyzed by carbamoyl phosphate synthetase-one, consuming two ATP. The enzyme requires N-acetylglutamate, synthesized from acetyl-CoA and glutamate. Arginine stimulates N-acetylglutamate synthase, ensuring that a protein-rich meal activates urea synthesis alongside amino acid breakdown.",
+      "vis": null
+    },
+    {
+      "tx": "The most common inherited urea cycle defect is X-linked recessive **ornithine transcarbamylase deficiency**. Carbamoyl phosphate accumulates in mitochondria and leaks into the cytoplasm, entering the pyrimidine synthesis pathway via carbamoyl phosphate synthetase-two to produce massive elevations of urinary orotic acid. Male neonates present with severe lethargy, vomiting, hyperammonemia, respiratory alkalosis and cerebral edema within forty-eight hours of starting feeds.",
+      "say": "The most common urea cycle defect is X-linked recessive ornithine transcarbamylase deficiency. Carbamoyl phosphate accumulates in mitochondria and spills into cytosol, entering pyrimidine synthesis to produce massive urinary orotic acid. Male neonates present with severe hyperammonemia, vomiting and cerebral edema.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ornithine transcarbamylase deficiency",
+          "points": [
+            "X-linked recessive inheritance",
+            "Severe hyperammonemia with low citrulline",
+            "Elevated urinary orotic acid levels",
+            "Normal serum uracil and hematocrit"
+          ]
+        },
+        "right": {
+          "title": "Hereditary orotic aciduria",
+          "points": [
+            "Autosomal recessive UMP synthase deficiency",
+            "Normal blood ammonia levels",
+            "Elevated urinary orotic acid levels",
+            "Megaloblastic anemia unresponsive to B12/folate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Severe **hyperammonemia** exerts profound neurotoxicity by shifting glutamate dehydrogenase equilibrium toward glutamate synthesis, depleting mitochondrial alpha-ketoglutarate and inhibiting the tricarboxylic acid cycle. Astrocyte glutamine synthetase converts excess ammonia and glutamate into glutamine, acting as an intracellular osmolyte that induces astrocyte swelling and cerebral edema. Treatment incorporates protein restriction, dialysis and ammonia scavengers sodium phenylbutyrate and sodium benzoate.",
+      "say": "Severe hyperammonemia exerts neurotoxicity by driving glutamate dehydrogenase toward glutamate, depleting alpha-ketoglutarate and inhibiting the Krebs cycle. Astrocytes convert excess ammonia to glutamine, acting as an osmolyte that causes brain edema. Treatment includes protein restriction and nitrogen scavengers like sodium phenylbutyrate.",
+      "vis": null
+    }
+  ],
+  "v": 1,
+  "gen": "AI",
+  "run": "books-pipeline",
+  "model": "gemini-3.8-flash-high",
+  "quiz": [
+    "5332d68f-4000-8000-5332-d68f12345678",
+    "5432d822-4000-8000-5432-d82212345678",
+    "5532d9b5-4000-8000-5532-d9b512345678"
+  ],
+  "src": [
+    "kb-reference-urea-cycle-and-hyperammonemia"
+  ],
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

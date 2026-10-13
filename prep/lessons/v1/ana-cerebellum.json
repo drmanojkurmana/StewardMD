@@ -1,0 +1,101 @@
+{
+  "module": "ana-cerebellum",
+  "subject": "anatomy",
+  "title": "Cerebellar anatomy, deep nuclei and functional circuits",
+  "minutes": 6,
+  "refs": [
+    "Gray's Anatomy for Students",
+    "Snell's Clinical Neuroanatomy"
+  ],
+  "steps": [
+    {
+      "tx": "The **cerebellum** occupies the posterior cranial fossa beneath the tentorium cerebelli. It comprises two lateral hemispheres joined by the midline vermis. It coordinates voluntary motor activity, maintains equilibrium and regulates muscle tone without initiating movement. Three cerebellar peduncles connect it to the brainstem: the superior peduncle connects to the midbrain, the middle peduncle connects to the pons, and the inferior peduncle connects to the medulla.",
+      "say": "The cerebellum occupies the posterior cranial fossa beneath the tentorium cerebelli. It comprises two lateral hemispheres joined by the midline vermis. It coordinates voluntary motor activity, maintains equilibrium and regulates muscle tone without initiating movement. Three cerebellar peduncles connect it to the brainstem: superior to midbrain, middle to pons, and inferior to medulla.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Peduncle",
+          "Connected brainstem part",
+          "Major tract transmitted"
+        ],
+        "rows": [
+          [
+            "Superior",
+            "Midbrain",
+            "Dentatorubral and dentatothalamic fibres"
+          ],
+          [
+            "Middle",
+            "Pons",
+            "Pontocerebellar afferents from cerebral cortex"
+          ],
+          [
+            "Inferior",
+            "Medulla oblongata",
+            "Dorsal spinocerebellar and olivocerebellar"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Four pairs of **deep cerebellar nuclei** embed within the white matter from lateral to medial: dentate, emboliform, globose and fastigial. A useful mnemonic is 'Don't Eat Greasy Food'. The large, folded dentate nucleus receives input from the lateral hemispheres and projects via the superior cerebellar peduncle to the ventrolateral nucleus of the thalamus and red nucleus to modulate motor planning.",
+      "say": "Four pairs of deep cerebellar nuclei embed within the white matter from lateral to medial: dentate, emboliform, globose and fastigial. A useful mnemonic is Don't Eat Greasy Food. The large, folded dentate nucleus receives input from the lateral hemispheres and projects via the superior peduncle to the thalamus to modulate motor planning.",
+      "vis": null
+    },
+    {
+      "tx": "The cerebellar cortex features three distinct layers. The outer **molecular layer** contains basket cells, stellate cells and parallel fibres. The middle **Purkinje layer** contains large Purkinje neurons, which provide the sole inhibitory GABAergic output of the cerebellar cortex to the deep nuclei. The inner **granular layer** contains millions of densely packed granule cells receiving excitatory mossy fibre input and projecting parallel fibres.",
+      "say": "The cerebellar cortex features three distinct layers. The outer molecular layer contains basket cells, stellate cells and parallel fibres. The middle Purkinje layer contains large Purkinje neurons, which provide the sole inhibitory GABAergic output to the deep nuclei. The inner granular layer contains millions of granule cells receiving mossy fibres.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mossy fibres",
+          "points": [
+            "Arise from spinal cord and pontine nuclei",
+            "Synapse on granule cells in glomeruli",
+            "Excitatory glutamatergic transmission",
+            "Influence many Purkinje cells via parallel fibres"
+          ]
+        },
+        "right": {
+          "title": "Climbing fibres",
+          "points": [
+            "Arise exclusively from inferior olivary nucleus",
+            "Wind directly around Purkinje cell dendrites",
+            "Produce powerful complex spikes",
+            "Essential for motor learning and error signaling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cerebellar lesions manifest with **ipsilateral ataxia** because cerebellar pathways to and from the cerebral cortex double-cross. Lesions of the midline vermis produce truncal ataxia, titubation and gait unsteadiness, commonly observed in alcoholic cerebellar degeneration. Hemispheric cerebellar lesions produce appendicular ataxia, intention tremor, dysmetria, dysdiadochokinesia and scanning speech on the same side of the body.",
+      "say": "Cerebellar lesions manifest with ipsilateral ataxia because cerebellar pathways double-cross. Lesions of the midline vermis produce truncal ataxia and unsteady gait, commonly seen in alcoholic degeneration. Hemispheric lesions produce appendicular ataxia, intention tremor, dysmetria, dysdiadochokinesia and scanning speech on the same side.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-brain-gross.png",
+        "alt": "Cerebellar architecture and peduncles",
+        "caption": "Posterior fossa anatomy showing cerebellar hemisphere divisions, folia, and cerebellar peduncle attachments to brainstem."
+      }
+    }
+  ],
+  "v": 1,
+  "gen": "AI",
+  "run": "books-pipeline",
+  "model": "gemini-3.8-flash-high",
+  "quiz": [
+    "a130a243-4000-8000-a130-a24312345678",
+    "a230a3d6-4000-8000-a230-a3d612345678",
+    "a330a569-4000-8000-a330-a56912345678"
+  ],
+  "src": [
+    "kb-reference-cerebellar-circuits-and-ataxia"
+  ],
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
