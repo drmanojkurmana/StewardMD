@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-metabolic-liver-tumours",
+ "subject": "pathology",
+ "title": "Metabolic liver disease and hepatic tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Non alcoholic fatty liver** (insulin resistance, ballooning with lobular inflammation grading NASH activity) and **alcoholic liver disease** (central **Mallory hyaline** with neutrophilic satellitosis, chicken wire fibrosis, AST double ALT) both march steatosis to cirrhosis; abstinence with weight loss reverses early stages. **Hereditary haemochromatosis** (**C282Y** HFE, **bronze diabetes** with arthropathy of second and third MCPs, hypogonadism, cardiomyopathy, ferritin with high transferrin saturation, hepatic iron index) is treated with **phlebotomy**; secondary overload (thalassaemia transfusions) needs chelation. Fibroscan stages all.",
+   "say": "AST double ALT with Mallory is alcoholic. Bronze skin with diabetes and MCP pain is haemochromatosis: bleed it.",
+   "vis": null
+  },
+  {
+   "tx": "**Wilson disease** (ATP7B copper excretion failure, **Kayser-Fleischer rings**, low ceruloplasmin, high urinary copper, Coombs negative haemolysis with parkinsonism and dysarthria in youth) is treated with **penicillamine or trientine** (zinc blocks absorption, transplant fulminant); siblings screen. **Alpha 1 antitrypsin deficiency** (PiZZ, **PAS diastase resistant globules**, neonatal cholestasis, early panacinar emphysema, panniculitis) is managed supportively with augmentation debates. **Primary biliary cholangitis** (middle aged women, **anti mitochondrial M2**, pruritus with xanthelasma, ursodiol) differs from PSC (men, IBD, beading, cholangiocarcinoma risk).",
+   "say": "Young parkinsonism with brown corneal rings is Wilson: chelate copper. PASD globules with early emphysema are A1AT.",
+   "vis": null
+  },
+  {
+   "tx": "**Hepatocellular carcinoma** (HBV, HCV cirrhosis, alcohol, aflatoxin, **rising AFP**) is diagnosed radiologically: **arterial enhancement with portal venous washout** on triple phase CT or MRI (LI-RADS) with threshold growth; biopsy reserved for atypical lesions. **Milan criteria** (single under 5 cm or three under 3 cm, no vascular invasion or spread) gate transplant; resection suits noncirrhotic or preserved function, ablation bridges small lesions, **sorafenib or lenvatinib** with immunotherapy palliates advanced. Six monthly ultrasound with AFP surveils cirrhosis.",
+   "say": "Arterial blush washing out venously is HCC: Milan gates transplant. Cirrhosis images twice yearly.",
+   "vis": null
+  },
+  {
+   "tx": "**Cholangiocarcinoma** (PSC, **Clonorchis**, choledochal cysts, Thorotrast history, **CA19-9** with painless progressive jaundice and pruritus) is staged by Bismuth-Corlette hilar extent; resection with Roux-en-Y or transplant protocols suit selected hilar disease while stenting palliates. **Benign lesions** (haemangioma with peripheral nodular enhancement, **FNH** with central scar, adenoma with bleeding risk in OCP users needing resection) spare surgery mostly. Klatskin hilar tumours obstruct early; intrahepatic masses mimic HCC without washout.",
+   "say": "Painless progressive jaundice with CA19-9 is cholangiocarcinoma. Central scar is FNH: observe.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Liver",
+     "Marker",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Haemochromatosis",
+      "C282Y, iron",
+      "Phlebotomy"
+     ],
+     [
+      "Wilson",
+      "Low ceruloplasmin",
+      "Penicillamine"
+     ],
+     [
+      "HCC",
+      "AFP, washout",
+      "Milan transplant"
+     ],
+     [
+      "Cholangio",
+      "CA19-9",
+      "Resect or stent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-401",
+  "bk2-pat-402",
+  "bk2-pat-403",
+  "bk2-pat-404",
+  "bk2-pat-405",
+  "bk2-pat-406",
+  "bk2-pat-407",
+  "bk2-pat-408",
+  "bk2-pat-409",
+  "bk2-pat-410"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

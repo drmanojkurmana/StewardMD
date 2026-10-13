@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-gallbladder-pancreas",
+ "subject": "pathology",
+ "title": "Gallbladder, biliary and pancreatic pathology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Gallstones** sort by chemistry: **cholesterol stones** (obesity, OCP, rapid weight loss, clofibrate; supersaturated bile) versus **black pigment** (haemolysis, cirrhosis, sterile) versus **brown pigment** (infected, stasis with E. coli and Ascaris, primary ductal). **Acute cholecystitis** (cystic duct stone, **Murphy sign** arresting inspiration, fever with leukocytosis, ultrasound wall thickening with pericholecystic fluid) gets early **laparoscopic cholecystectomy** with antibiotics; **Charcot triad** (pain, fever, jaundice) marks cholangitis while **Reynolds pentad** adds shock with confusion, and **Courvoisier law** (palpable gallbladder with jaundice is malignant, not stone) redirects.",
+   "say": "Fatty forty female OCP stones are cholesterol. Murphy arresting breath is cholecystitis: operate early.",
+   "vis": null
+  },
+  {
+   "tx": "**Gallbladder cancer** (elderly women, large stones, **porcelain gallbladder** calcification, anomalous pancreaticobiliary junction) presents late with jaundice and weight loss; cholecystectomy cures incidental T1 while advanced needs extended resection with palliation. **Biliary emergencies** sort by triads: cholangitis (Charcot, ERCP drainage with antibiotics), gallstone ileus (Rigler triad: obstruction with pneumobilia and ectopic stone, enterolithotomy), Mirizzi (impacted cystic stone compressing hepatic duct), emphysematous cholecystitis (diabetics, gas, urgent surgery). Porcelain prophylactically resects debated.",
+   "say": "Palpable gallbladder with jaundice is cancer until proven: Courvoisier. Porcelain calcified sac threatens malignancy.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute pancreatitis** (gallstones, alcohol, hypertriglyceridaemia over 1000, hypercalcaemia, drugs like azathioprine, ERCP, mumps) autodigests with epigastric pain radiating to back relieved leaning forward; **lipase** (specific, longer than amylase) with contrast CT (**BISAP** severity, Atlanta classification) stages. Management is aggressive fluids, analgesia, antiemetics, early enteral feeding, ERCP only in cholangitis or persistent obstruction; **infected necrosis** (gas, procalcitonin, FNA) needs step up drainage with necrosectomy debated, sterile necrosis observes. Pseudocysts maturing over 4 weeks drain if symptomatic.",
+   "say": "Back boring pain with high lipase is pancreatitis: fluids, feed early, ERCP only if cholangitic. Gas in necrosis infects: drain up.",
+   "vis": null
+  },
+  {
+   "tx": "**Chronic pancreatitis** (alcohol, smoking, PRSS1 hereditary, autoimmune IgG4 sausage pancreas with steroids, pancreas divisum) calcifies with ductal stones, **steatorrhoea** (lipase lost first), diabetes and pseudocysts; **faecal elastase** diagnoses insufficiency treated with enzyme replacement. **Cystic tumours** sort malignant risk: **serous** (central scar, benign, observe), **mucinous MCN** (ovarian stroma, body tail women, resect), **IPMN** (main duct dilates, mural nodules, Whipple or surveillance by Sendai), **PDAC** (**double duct sign**, desmoplasia, CA19-9, painless jaundice with Courvoisier, Whipple if resectable, FOLFIRINOX palliates).",
+   "say": "Calcified pancreas with greasy stools is chronic: replace enzymes. Double duct elderly jaundice is PDAC: stage for Whipple.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Biliary",
+     "Sign",
+     "Knife"
+    ],
+    "rows": [
+     [
+      "Cholecystitis",
+      "Murphy",
+      "Lap chole"
+     ],
+     [
+      "Cholangitis",
+      "Charcot",
+      "ERCP drain"
+     ],
+     [
+      "PDAC",
+      "Double duct",
+      "Whipple"
+     ],
+     [
+      "Serous cyst",
+      "Central scar",
+      "Observe"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-411",
+  "bk2-pat-412",
+  "bk2-pat-413",
+  "bk2-pat-414",
+  "bk2-pat-415",
+  "bk2-pat-416",
+  "bk2-pat-417",
+  "bk2-pat-418",
+  "bk2-pat-419",
+  "bk2-pat-420"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

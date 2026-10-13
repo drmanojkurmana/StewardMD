@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-haematopoiesis-marrow-failure",
+ "subject": "pathology",
+ "title": "Bone marrow failure: aplastic anaemia, red cell aplasia and pancytopenia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Aplastic anaemia** empties multipotent myeloid stem cells (fatty hypocellular marrow with pancytopenia and reticulocytopenia) after benzene, chloramphenicol, hepatitis, pregnancy or autoimmunity; severity grades by neutrophils, platelets and reticulocytes. Young patients with donors get **bone marrow transplant** (curative), others get **antithymocyte globulin with ciclosporin** (and eltrombopag debates); androgens bridge historically. Transfuse sparingly (alloimmunisation) with iron watched; MDS and PNH clones lurk in survivors.",
+   "say": "Empty fatty marrow with pancytopenia is aplastic: transplant the young, immune suppress the rest. Benzene and chloramphenicol warn.",
+   "vis": null
+  },
+  {
+   "tx": "**Inherited failures** declare early: **Fanconi anaemia** (DNA repair defect, cafe au lait with thumb and radial anomalies, microcephaly, chromosome breakage with DEB testing, leukaemia risk, BMT before malignancy), dyskeratosis congenita (nail dystrophy with leukoplakia, telomere short), Shwachman-Diamond (pancreatic insufficiency with neutropenia). **Paroxysmal nocturnal haemoglobinuria** (PIGA somatic clone, GPI anchor loss, morning haemoglobinuria with thrombosis and aplasia overlap, **eculizumab**, FLAER testing) bridges acquired and inherited; small PNH clones complicate half of aplastic cases.",
+   "say": "Thumb anomalies with marrow failure are Fanconi: breakage testing. Morning dark urine with clots is PNH: eculizumab.",
+   "vis": null
+  },
+  {
+   "tx": "**Pure red cell aplasia** (reticulocytopenia with absent erythroblasts, normal white cells and platelets) splits into **Diamond-Blackfan** (ribosomal, congenital with thumb and craniofacial anomalies, steroids then BMT) and acquired (thymoma resected, parvovirus B19 in haemolytics, anti EPO antibodies). **Parvovirus B19** (slapped cheek fifth disease, **aplastic crisis** in sickle and spherocytosis as giant pronormoblasts halt red cells, hydrops in pregnancy) is diagnosed by IgM or PCR; IVIG treats chronic infection in immunodeficiency. Myelophthisis (fibrosis, granulomas, metastases with teardrop cells) crowds out last.",
+   "say": "No reticulocytes with empty red precursors is red cell aplasia. Slapped cheek then sickle crisis is parvovirus B19.",
+   "vis": null
+  },
+  {
+   "tx": "**Pancytopenia differentials** organise by marrow: hypocellular (aplastic, Fanconi, PNH, hypoplastic MDS), hypercellular with ineffective production (megaloblastic B12 and folate, MDS with blasts and dysplasia, AML), infiltrative (myelofibrosis with tear drops and massive spleen, tuberculosis, lymphoma, metastatic prostate), peripheral destruction (hypersplenism, sepsis, SLE). **Reticulocyte count** first separates production failure (low) from destruction or loss (high); marrow biopsy with cytogenetics then stages. B12 and folate correct before marrow blamed.",
+   "say": "Pancytopenia with low reticulocytes is production failure: biopsy the marrow. High reticulocytes mean destruction or bleed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Failure",
+     "Marrow",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Aplastic",
+      "Empty fatty",
+      "BMT or ATG"
+     ],
+     [
+      "Fanconi",
+      "Breakage",
+      "BMT early"
+     ],
+     [
+      "PNH",
+      "Clone GPI lost",
+      "Eculizumab"
+     ],
+     [
+      "PRCA",
+      "Red absent",
+      "Steroids or IVIG"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-371",
+  "bk2-pat-372",
+  "bk2-pat-373",
+  "bk2-pat-374",
+  "bk2-pat-375",
+  "bk2-pat-376",
+  "bk2-pat-377",
+  "bk2-pat-378",
+  "bk2-pat-379",
+  "bk2-pat-380"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
