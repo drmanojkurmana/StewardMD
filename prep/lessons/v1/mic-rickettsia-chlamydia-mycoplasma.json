@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "mic-rickettsia-chlamydia-mycoplasma",
+ "subject": "microbiology",
+ "title": "Rickettsia, Chlamydia and Mycoplasma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Rickettsiae** (obligate intracellular, Weil-Felix cross reaction with **Proteus OX19, OX2 and OXK** strains) ride arthropods: epidemic typhus (Pediculus lice, Brill-Zinsser recrudescence years later), murine typhus (flea OX19), Rocky Mountain spotted fever (Dermacentor tick, rash from **wrists and ankles inward including palms and soles**), with **doxycycline** treating all (even children under 8 in RMSF, benefit outweighs staining). Rash with fever after tick exposure in forests demands doxy before confirmation; chloramphenicol is second line.",
+   "say": "Tick bite fever with wrist to trunk rash is spotted fever: doxy now. OXK points to scrub.",
+   "vis": null
+  },
+  {
+   "tx": "**Scrub typhus** (Orientia tsutsugamushi, chigger mite, **eschar** cigarette burn ulcer with regional nodes, forest and scrub exposure across the tsutsugamushi triangle) causes fever with hepatitis-like transaminases, pneumonitis and meningoencephalitis; **Q fever** (Coxiella burnetii, parturition products and dust, no vector, phase I virulent) causes atypical pneumonia with granulomatous hepatitis and **culture negative endocarditis**. Doxycycline cures both; Q fever endocarditis needs doxy plus hydroxychloroquine for 18 months with phase I titres followed.",
+   "say": "Cigarette burn eschar with forest fever is scrub typhus. Abattoir dust pneumonia with high phase I is Q fever.",
+   "vis": null
+  },
+  {
+   "tx": "**Chlamydia** (obligate intracellular, **elementary body** infectious extracellular versus **reticulate body** replicating intracellular) types by disease: **trachomatis A to C** (trachoma,SAFE strategy: surgery, antibiotics, face washing, environment), **D to K** (inclusion conjunctivitis, NGU, cervicitis, PID), **L1 to L3** (**LGV**, groove sign with inguinal and femoral nodes, rectal strictures). **Psittaci** (birds, atypical pneumonia) and **pneumoniae** (walking pneumonia, TWAR) complete the set. **NAAT** diagnoses genital disease; single dose **azithromycin** or doxycycline treats with partner therapy.",
+   "say": "Groove sign nodes with rectal stricture is LGV. SAFE fights trachoma; NAAT names genital chlamydia.",
+   "vis": null
+  },
+  {
+   "tx": "**Mycoplasma pneumoniae** (no cell wall, no Gram stain, beta lactam resistant, **fried egg colonies** needing sterols, Eaton agent) causes **walking pneumonia** in schoolchildren (dry cough, patchy infiltrates, **bullous myringitis**, **cold agglutinins** with haemolysis, Stevens-Johnson, transverse myelitis) treated with **macrolides or doxycycline**. **M. genitalium** (NGU, azithromycin with moxifloxacin backup as resistance spreads) and **Ureaplasma** (neonatal, urease splitting) need NAAT as culture is too slow. Wall less forms (L forms) persist after beta lactams.",
+   "say": "Schoolchild walking pneumonia with ear bullae and cold agglutinins is Mycoplasma: macrolide, never beta lactam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Atypical",
+     "Wall",
+     "Drug"
+    ],
+    "rows": [
+     [
+      "Rickettsia",
+      "Present",
+      "Doxycycline"
+     ],
+     [
+      "Chlamydia",
+      "Present",
+      "Azithromycin"
+     ],
+     [
+      "Mycoplasma",
+      "Absent",
+      "Macrolide or doxy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-091",
+  "bk2-mic-092",
+  "bk2-mic-093",
+  "bk2-mic-094",
+  "bk2-mic-095",
+  "bk2-mic-096",
+  "bk2-mic-097",
+  "bk2-mic-098",
+  "bk2-mic-099",
+  "bk2-mic-100"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

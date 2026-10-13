@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-haemophilus-zoonotic",
+ "subject": "microbiology",
+ "title": "Haemophilus, Bordetella and zoonotic bacilli",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Haemophilus influenzae** (tiny coccobacilli needing **X factor hemin and V factor NAD** on chocolate agar, satellites around Staph streaks) splits into **type b Hib** (capsular, epiglottitis with **thumbprint sign**, meningitis under five, septic arthritis) and non typable strains (otitis media, COPD exacerbations, conjunctivitis). **Hib conjugate vaccine** (PRP-T, infants) collapsed invasive disease; treatment is **ceftriaxone** with rifampicin prophylaxis for household contacts. H. ducreyi (chancroid, school of fish, painful soft chancre with bubo) differs genitally.",
+   "say": "Chocolate agar satellites needing X and V are Haemophilus. Thumbprint airway in a toddler is Hib epiglottitis.",
+   "vis": null
+  },
+  {
+   "tx": "**Bordetella pertussis** (strict aerobe, Bordet-Gengou with mercury drop colonies, pertussis toxin ADP ribosylating Gi with **lymphocytosis**) coughs in three acts: **catarrhal** (coryza, most infectious), **paroxysmal** (whooping inspiratory gasp with posttussive vomiting, 100 day cough), **convalescent**. Infants apnoeic without whoop die fastest; **azithromycin** treats with **cocooning** (vaccinating contacts) protecting neonates. **Acellular DTaP** replaced whole cell DPT for safety; parapertussis runs milder without vaccine cover.",
+   "say": "Whoop with vomit after cough bursts is pertussis. Lymphocytosis plus 100 days seals it.",
+   "vis": null
+  },
+  {
+   "tx": "**Brucella** (small Gram negative coccobacilli, **undulant fever** rising and falling, farm and abattoir exposure to cattle, goats and pigs, unpasteurised milk) hides intracellularly causing night sweats, arthralgia, hepatosplenomegaly and sacroiliitis; **doxycycline plus rifampicin or gentamicin** for six weeks prevents relapse. Diagnosis is **standard agglutination with 2 mercaptoethanol** (IgG) and blood or bone marrow culture (Castaneda). B. abortus (cattle), melitensis (goats, commonest and severest) and suis (pigs) sort by host; RB51 vaccinates cattle.",
+   "say": "Wavy fever with animal contact is brucellosis: doxy plus rifampicin for weeks. Raw milk warns.",
+   "vis": null
+  },
+  {
+   "tx": "**Yersinia pestis** (bipolar safety pin, Wayson stain, rat flea **Xenopsylla cheopis**) causes **bubonic plague** (painful bubo with blackened skin), septicaemic and **pneumonic plague** (person to person, haemoptysis, prophylaxis for contacts). Treatment is **gentamicin or streptomycin plus doxycycline**. **Francisella tularensis** (rabbit fever, ulceroglandular with tick or fly bite) and **Pasteurella multocida** (cat or dog bite rapid cellulitis, penicillin sensitive) complete bite patterns; **Moraxella catarrhalis** (otitis, COPD, beta lactamase positive, butterscotch colonies) rounds respiratory triads.",
+   "say": "Painful bubo after rat fleas is plague: aminoglycoside fast. Cat bite cellulitis in hours is Pasteurella.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Zoonosis",
+     "Source",
+     "Drug"
+    ],
+    "rows": [
+     [
+      "Brucella",
+      "Livestock, milk",
+      "Doxy plus rifampicin"
+     ],
+     [
+      "Plague",
+      "Rat flea",
+      "Gentamicin plus doxy"
+     ],
+     [
+      "Tularaemia",
+      "Rabbits, ticks",
+      "Streptomycin"
+     ],
+     [
+      "Pasteurella",
+      "Cat/dog bite",
+      "Penicillin"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-071",
+  "bk2-mic-072",
+  "bk2-mic-073",
+  "bk2-mic-074",
+  "bk2-mic-075",
+  "bk2-mic-076",
+  "bk2-mic-077",
+  "bk2-mic-078",
+  "bk2-mic-079",
+  "bk2-mic-080"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

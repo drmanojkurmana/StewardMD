@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-non-fermenters",
+ "subject": "microbiology",
+ "title": "Pseudomonas, Acinetobacter and Burkholderia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Pseudomonas aeruginosa** announces itself as an oxidase positive non fermenter with **blue green pyocyanin** (plus fluorescent pyoverdine), fruity grape like odour and growth at 42C. It loves moisture (ventilators, sinks, contact lens fluid) and burned or neutropenic tissue, causing **ecthyma gangrenosum** (necrotic eschar with erythematous halo in neutropenia), malignant otitis externa in diabetics, hot tub folliculitis and green nail (chloronychia). **Alginate biofilm** (mucoid colonies) shields it in cystic fibrosis lungs. Intrinsic resistance (AmpC, efflux, porin loss) demands antipseudomonal beta lactams.",
+   "say": "Blue green fruity oxidase positive rods are Pseudomonas. Black eschar in neutropenia is ecthyma gangrenosum.",
+   "vis": null
+  },
+  {
+   "tx": "**Pseudomonal disease** splits by host: ventilator associated and hospital acquired pneumonia (late onset, prior antibiotics), burn wound sepsis (blue green dressings, graft loss), **cystic fibrosis** early infection eradicated with inhaled tobramycin while chronic mucoid colonisation gets suppressive azithromycin with DNase, urinary catheters, and contact lens keratitis (rapid ring ulcer). Treatment pairs **piperacillin tazobactam, ceftazidime, cefepime or meropenem** with an aminoglycoside for serious disease; ceftolozane tazobactam and ceftazidime avibactam rescue MDR strains. Combination with source removal cures device infections.",
+   "say": "Ventilator pneumonia with blue dressings is Pseudomonas: pair a beta lactam with aminoglycoside. CF mucoid colonisation suppresses, early infection eradicates.",
+   "vis": null
+  },
+  {
+   "tx": "**Acinetobacter baumannii** (coccobacillary, oxidase negative, ICU survivor on fomites) causes ventilator pneumonia, wound and bloodstream infections in ventilated patients; carbapenem resistance forces **colistin or tigecycline** combinations with bundle prevention. **Stenotrophomonas maltophilia** (previous antibiotics, neutropenia) is intrinsically carbapenem resistant via metallo beta lactamase yet stays **cotrimoxazole sensitive**, the therapeutic paradox examiners love. Both demand hand hygiene with environmental cleaning over cephalosporin escalation.",
+   "say": "Carbapenem resistant but cotrimoxazole sensitive is Stenotrophomonas. ICU coccobacilli surviving disinfectants are Acinetobacter.",
+   "vis": null
+  },
+  {
+   "tx": "**Burkholderia cepacia complex** colonises cystic fibrosis lungs (intrinsically polymyxin resistant, cepacia syndrome necrotising pneumonia) and spreads patient to patient, cohorted strictly. **B. pseudomallei** causes **melioidosis** (rice farmers, diabetics, safety pin bipolar staining, Ashdown selective agar): pneumonia mimicking TB, visceral abscesses and septicaemia in monsoon seasons. Intensive **ceftazidime or meropenem** then eradication **cotrimoxazole** for months prevents relapse. **B. mallei** (glanders, equines) is a laboratory hazard.",
+   "say": "Rice farmer diabetic with TB like illness unresponsive to ATT is melioidosis: ceftazidime then months of cotrimoxazole.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Non fermenter",
+     "Oxidase",
+     "Weapon"
+    ],
+    "rows": [
+     [
+      "Pseudomonas",
+      "Positive",
+      "Pyocyanin, biofilm"
+     ],
+     [
+      "Acinetobacter",
+      "Negative",
+      "ICU survival"
+     ],
+     [
+      "Stenotrophomonas",
+      "Negative",
+      "TMP-SMX paradox"
+     ],
+     [
+      "Pseudomallei",
+      "Positive",
+      "Melioidosis relapse"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-061",
+  "bk2-mic-062",
+  "bk2-mic-063",
+  "bk2-mic-064",
+  "bk2-mic-065",
+  "bk2-mic-066",
+  "bk2-mic-067",
+  "bk2-mic-068",
+  "bk2-mic-069",
+  "bk2-mic-070"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
