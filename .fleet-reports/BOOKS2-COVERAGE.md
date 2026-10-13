@@ -1,0 +1,37 @@
+# BOOKS-2 COVERAGE2: chapter -> lessons -> KB -> MCQs
+
+Format matches COVERAGE.md of the first books job. Status per taxonomy module: DONE (lesson + KB + 10 MCQs), TODO (lesson-less, queued). Existing lessons not created by this job are marked PRE-EXISTING and are never duplicated.
+
+## Batch 2 section (added 2026-10-13, owner batch 2 part 1)
+
+### Robbins Basic Pathology 9th (24 chapters) -> pathology subject (72 modules, 53 lesson-less)
+
+Chapter map: Ch1 cell injury (covered by PRE-EXISTING pat-cell-injury-necrosis, pat-apoptosis, pat-adaptations-accumulations); Ch2 inflammation and repair (pat-chronic-granulomatous TODO); Ch3 haemodynamic disorders (pat-thrombosis-embolism, pat-shock TODO); Ch4 immune system (pat-autoimmune, pat-immunodeficiency, pat-amyloidosis TODO); Ch5 neoplasia (PRE-EXISTING); Ch6 genetic and paediatric (pat-lysosomal-storage, pat-nonclassic-inheritance, pat-paediatric-diseases TODO); Ch7 environmental and nutritional (pat-environmental-nutritional TODO); Ch8 infectious diseases (PRE-EXISTING pat-infectious-pathology); Ch9 to Ch24 systemic pathology (41 modules TODO, see STATE2.md counts).
+
+Wave B2-1 DONE and MERGED (PR #1568, 12 modules): pat-chronic-granulomatous, pat-thrombosis-embolism, pat-shock, pat-autoimmune, pat-immunodeficiency, pat-amyloidosis, pat-iron-deficiency, pat-megaloblastic, pat-haemoglobinopathies, pat-acute-leukaemias, pat-hodgkin-lymphoma, pat-coagulation-disorders. Each: 1 lesson in prep/lessons/v1/, 1 KB article in kb/reference/, 10 MCQs in prep/overlays/maikbook2/pathology/.
+
+Remaining pathology TODO (41): pat-nonclassic-inheritance, pat-paediatric-diseases, pat-lysosomal-storage, pat-environmental-nutritional, pat-haematopoiesis-marrow-failure, pat-haemolytic-hereditary, pat-haemolytic-acquired, pat-mpn-mds, pat-plasma-cell-histiocytic, pat-platelet-disorders, pat-vasculitis-vascular-tumours, pat-myocardial-pericardial, pat-pneumoconiosis, pat-oral-salivary, pat-oesophagus-stomach, pat-intestine, pat-metabolic-liver-tumours, pat-gallbladder-pancreas, pat-tubulointerstitial-cystic, pat-renal-urinary-tumours, pat-male-genital, pat-cervix-uterus, pat-ovary, pat-pituitary-adrenal, pat-bone, pat-joints-soft-tissue, pat-cns-non-neoplastic, pat-nerve-muscle, pat-skin.
+
+### Psychiatry (Marrow e6, topic reference only) -> psychiatry (32 modules, 17 lesson-less)
+TODO: psy-psychopathology, psy-schizophrenia, psy-other-psychoses, psy-suicide, psy-anxiety, psy-stress-trauma, psy-dissociative-somatic, psy-alcohol, psy-opioids, psy-other-substances, psy-delirium, psy-personality, psy-sexual-gender, psy-eating, psy-neurodevelopmental, psy-antipsychotics, psy-antidepressants-mood-stabilisers.
+
+### Pharmacology (Tripathi 8th, Kaplan, Made Incredibly Easy 3rd) -> pharmacology (71 modules, 40 lesson-less)
+TODO: phm-anticholinesterases, phm-neuromuscular-blockers, phm-adrenergic-agonists, phm-alpha-blockers, phm-nsaids, phm-asthma-cough, phm-antiemetics, phm-laxatives-ibd, phm-diuretics, phm-antihypertensives, phm-antiarrhythmics, phm-shock-pah, phm-haematinics, phm-antiplatelets-fibrinolytics, phm-sedative-hypnotics, phm-general-anaesthetics, phm-local-anaesthetics, phm-antiepileptics, phm-antipsychotics, phm-antidepressants, phm-opioids, phm-cns-stimulants, phm-pituitary, phm-thyroid, phm-insulin, phm-oral-antidiabetics, phm-corticosteroids, phm-contraceptives-uterine, phm-bone-calcium, phm-beta-lactams, phm-protein-synthesis-inhibitors, phm-other-antibacterials, phm-antifungals, phm-antivirals, phm-antiretrovirals, phm-antimalarials, phm-targeted-anticancer, phm-immunosuppressants, phm-chelators-antidotes, phm-vitamins-dermatology. Note: phm-insulin, phm-opioids, phm-corticosteroids and phm-chelators-antidotes already have gap1013d lessons in another branch lineage; re-check index before writing (they show lesson-less on current main, so they stay TODO here until merged).
+
+### Parson Diseases of the Eye 23rd -> ophthalmology (29 modules, 20 lesson-less)
+TODO: oph-lids, oph-orbit, oph-conjunctiva, oph-cornea, oph-corneal-degenerations, oph-sclera, oph-anterior-uveitis, oph-posterior-uveitis, oph-cataract, oph-glaucoma, oph-secondary-glaucoma, oph-vitreous, oph-retinal-vascular, oph-retinal-detachment, oph-macula, oph-tumours, oph-optic-nerve, oph-pupil, oph-strabismus, oph-trauma.
+
+### Ananthanarayan and Paniker + Paniker Parasitology (+ Sastry overlap check) -> microbiology (37 modules, 22 lesson-less)
+TODO: mic-innate-antigens, mic-immunodeficiency-transplant, mic-staphylococcus, mic-streptococcus, mic-neisseria, mic-enterobacteriaceae, mic-salmonella, mic-vibrio-campylobacter, mic-non-fermenters, mic-haemophilus-zoonotic, mic-ntm-leprosy, mic-rickettsia-chlamydia-mycoplasma, mic-herpesviruses, mic-picorna-enteric, mic-respiratory-rna-viruses, mic-arbo-rabies, mic-hepatitis-viruses, mic-systemic-opportunistic-mycoses, mic-intestinal-protozoa, mic-blood-tissue-protozoa, mic-cestodes-trematodes, mic-nematodes.
+
+## Original 15-book set (from job brief, priority order)
+Wave 1 OBG DONE (16 modules, see BOOKS2-PROGRESS.md). Queued: Nelson Pediatrics Vol 1-2, Miller Anesthesia 10th, Plastic Surgery 5E, Campbell-Walsh Urology 12th, Sastry Microbiology review, Gray Anatomy for Students 4th + Color Atlas, Guyton Physiology 15th, Long Cases in Clinical Medicine. Batch 2 part 2 (derm, ENT, ortho, vascular) expected at incoming/batch2-part2.
+
+Wave B2-2 DONE (branch books2-batch2-systemic, 12 modules): pat-colorectal-tumours. Each: lesson + KB + 10 MCQs (bk2-pat-121 to 240).
+
+### Batch 2 Part 2 (added 2026-10-13 18:40, listed 2026-10-13 this run)
+Folder incoming/batch2-part2/Part 2/ contains only: Dhingra ENT 8th Edition.pdf (576 pp) and kd_tripathi_essentials_of_medical.pdf (duplicate of batch2-part1 Tripathi, no new coverage). No dermatology, orthopaedics or vascular/CTVS books arrived in this upload; those subjects remain TODO below pending books. Priority fit by subject applied: ENT first (thinnest: 27 lesson-less), then dermatology (13), orthopaedics (17), surgery vascular subset (sur-arterial, sur-aneurysm, sur-venous, sur-lymphatic, sur-thoracic, sur-cardiac) when source books arrive.
+
+Wave B2P2-ENT DONE (branch books2-batch2p2-ent): 12 modules (ent-external-ear, ent-aom-ome, ent-csom, ent-om-complications, ent-otosclerosis, ent-snhl-inner-ear, ent-facial-nerve, ent-hearing-rehab, ent-ear-tumours, ent-septum-external-nose, ent-epistaxis, ent-rhinitis-polyps), 12 lessons, 12 KB, 120 MCQs bk2-ent-001 to 120. LP.checkLesson 12/12, kb_validate_v2 12/12 ok, prep-lessons + prep-books-mcqs tests pass. Remaining ENT TODO (15): ent-sinusitis, ent-sinonasal-tumours, ent-facial-trauma, ent-tonsils-adenoids, ent-neck-spaces, ent-nasopharynx, ent-oral-hypopharynx-cancer, ent-dysphagia, ent-salivary, ent-stridor-paediatric, ent-vocal-cord-palsy, ent-laryngeal-cancer, ent-airway, ent-neck-masses, ent-sleep-apnoea.
+Dermatology TODO (13, no book yet): der-bacterial, der-leprosy, der-sti, der-vesiculobullous, der-drug-reactions, der-urticaria-vasculitis, der-pigmentary, der-acne-rosacea, der-hair-nail, der-connective-tissue, der-photodermatoses, der-skin-malignancy, der-drugs-procedures.
+Orthopaedics TODO (17, no book yet): ort-fracture-complications, ort-nerve-injuries, ort-hand-injuries, ort-spinal-injuries, ort-scoliosis-kyphosis, ort-low-back-pain, ort-osteomyelitis, ort-septic-arthritis-joint-tb, ort-benign-bone-tumours, ort-malignant-bone-tumours, ort-ddh, ort-ctev, ort-perthes-scfe, ort-skeletal-dysplasia, ort-metabolic-bone, ort-shoulder-elbow-conditions, ort-hand-wrist-conditions.
