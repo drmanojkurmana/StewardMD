@@ -1,0 +1,42 @@
+{
+ "figure": "pearl-perineal-body.svg",
+ "credit": "StewardMD illustration",
+ "view": "inferior view",
+ "structures": [
+  "perineal body midline at anal/urogenital triangle junction",
+  "bulbospongiosus paired",
+  "superficial transverse perinei paired",
+  "deep transverse perinei (listed)",
+  "levator ani paired",
+  "external anal sphincter unpaired fibres",
+  "longitudinal coat of anal canal (listed)",
+  "anus posterior to perineal body",
+  "urethra anterior"
+ ],
+ "counts": "ten muscles converge: 2 unpaired + 4 paired",
+ "refs": [
+  "Gray's Anatomy (perineal body)",
+  "Moore Clinically Oriented Anatomy (perineum)"
+ ],
+ "verify": {
+  "checklistComplete": true,
+  "secondPassErrorsOnly": [],
+  "ticks": [
+   "perineal body midline at anal/urogenital triangle junction: ok - the green node is midline, directly behind the superficial transverse perinei bar and in front of the anus. The leader crosses the bar, which is cosmetic only.",
+   "bulbospongiosus paired: ok - labelled paired and drawn anterior to the perineal body around the urethra. Drawing it as one fused shape is acceptable in a schematic.",
+   "superficial transverse perinei paired: ok - labelled paired. The bar lies at the triangle junction, just anterior to the perineal body, and the leader ends on the bar.",
+   "deep transverse perinei (listed): ok - spelled correctly and drawn anterior to the superficial transverse perinei, and the leader ends on it. It has no 'paired' tag although the caption counts it among the four paired muscles. This is a minor labelling gap, not an anatomical error.",
+   "levator ani paired: ok - two lateral bands, one per side, with the leader on a band. They end at the anus rather than the perineal body, which is a schematic simplification.",
+   "external anal sphincter unpaired fibres: ok - labelled unpaired, and the leader ends on the ring around the anus.",
+   "longitudinal coat of anal canal (listed): ok - labelled unpaired, and the leader ends in the anal canal region near the sphincter leader. It does not point to the wrong structure.",
+   "anus posterior to perineal body: ok - the anus is drawn posterior (lower on the page) to the perineal body, as expected in an inferior view.",
+   "urethra anterior: ok - the urethra (and vagina in the female) lies anteriorly in the urogenital triangle, and the leader ends on the correct circle.",
+   "counts (ten muscles, 2 unpaired + 4 paired): ok - four paired muscles give 8, and the two unpaired ones (external anal sphincter, longitudinal coat) bring the total to 10, matching the caption and the checklist."
+  ],
+  "verdict": "pass",
+  "models": {
+   "author": "muse-wonder-1.0 (checklist-drawn SVG)",
+   "verifier": "claude-sonnet-5-5 vision"
+  }
+ }
+}
