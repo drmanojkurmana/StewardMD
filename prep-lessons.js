@@ -632,8 +632,13 @@
     var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
     var anim = L.dir ? (L.dir > 0 ? " fwd" : " rev") : "";
-    var body = step ? '<article class="pn-lsn-step' + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
-        '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + (step.qc ? qcHtml(step.qc, p) : "") + "</article>"
+    var PEARL = G.PREP_PEARL, isP = !!(PEARL && PEARL.isPearl(les));
+    var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null, bm0 = !!(s.lpbm && s.lpbm[L.key]);
+    var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
+        (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
+        '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + (step.qc ? qcHtml(step.qc, p) : "") +
+        (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
+        (isP && L.i === n - 1 ? PEARL.footerHtml(les, lid0, bm0) : "") + "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
     // Share IDs (prep-ids.js): share in the bar, the lesson's ID at the foot of the page (tap copies).
     var IDS = G.PREP_IDS, lid = IDS ? IDS.ofLesson(L.key) : null, shareB = lid ? IDS.shareBtn(lid, "Share this lesson") : "";
@@ -957,6 +962,14 @@
     e.preventDefault(); setPlaying(!L.playing);
   }
   if (G.document && G.document.addEventListener) G.document.addEventListener("keydown", onKey);
+  /* Pearl footer bridge: Bookmark and Report persist in the lesson store; Share without PREP_IDS copies the Pearl ID. */
+  if (G.document && G.document.addEventListener) G.document.addEventListener("pn-pearl", function (e) {
+    if (!host || !L.les) return;
+    var a = e.detail && e.detail.action, s = store();
+    if (a === "bookmark") { if (!s.lpbm) s.lpbm = {}; if (s.lpbm[L.key]) delete s.lpbm[L.key]; else s.lpbm[L.key] = 1; host.save(); host.toast(s.lpbm[L.key] ? "Pearl bookmarked." : "Bookmark removed."); }
+    if (a === "report") { if (!s.lprep) s.lprep = {}; s.lprep[L.key] = Date.now(); host.save(); host.toast("Thank you. This Pearl has been reported."); }
+    if (a === "share") { var P = G.PREP_PEARL, id = P ? P.pearlId(L.les.module, G.PREP_IDS ? G.PREP_IDS.ofLesson(L.key) : null) : ""; host.toast(id ? "Pearl ID " + id + ". Use Share in the bar to send the lesson link." : "Use Share in the bar to send this lesson."); }
+  });
 
   G.PREP_LESSONS = { mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);
