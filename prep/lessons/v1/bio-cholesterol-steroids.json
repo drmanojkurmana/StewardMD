@@ -1,0 +1,183 @@
+{
+ "module": "bio-cholesterol-steroids",
+ "subject": "biochemistry",
+ "title": "Cholesterol and steroidogenesis: HMG-CoA reductase, statins, bile acids and adrenocortical pathways",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "All twenty-seven carbons of **cholesterol** originate from cytosolic acetyl-CoA. Two acetyl-CoAs condense to acetoacetyl-CoA, followed by condensation with a third acetyl-CoA by cytosolic HMG-CoA synthase. The rate-limiting committed step is catalyzed by HMG-CoA reductase in the endoplasmic reticulum membrane, reducing HMG-CoA to mevalonate using two NADPH molecules. Statins are competitive structural analogues that potently inhibit HMG-CoA reductase, upregulating hepatic LDL receptors.",
+   "say": "All twenty-seven carbons of cholesterol derive from acetyl-CoA. Cytosolic HMG-CoA synthase generates HMG-CoA. The rate-limiting step is HMG-CoA reductase, which reduces HMG-CoA to mevalonate using two NADPH. Statins competitively inhibit this enzyme, lowering intracellular cholesterol and upregulating hepatic LDL receptors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway stage",
+     "Key intermediates",
+     "Enzyme catalyst",
+     "Pharmacological target"
+    ],
+    "rows": [
+     [
+      "Committed step",
+      "HMG-CoA to mevalonate",
+      "HMG-CoA reductase",
+      "Competitively inhibited by statins"
+     ],
+     [
+      "Isoprenoid synthesis",
+      "Mevalonate to IPP & DMAPP",
+      "Mevalonate kinase",
+      "Prenylation of Ras and Rho proteins"
+     ],
+     [
+      "Squalene assembly",
+      "FPP condensation to squalene",
+      "Squalene synthase",
+      "Branch point for ubiquinone synthesis"
+     ],
+     [
+      "Cyclization",
+      "Squalene epoxide to lanosterol",
+      "Oxidosqualene cyclase",
+      "Requires molecular oxygen and NADPH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cholesterol homeostasis is governed by **SREBP-2**, the sterol regulatory element-binding protein. In sterol-replete cells, SREBP-2 is retained in the endoplasmic reticulum bound to SCAP and Insig. When intracellular sterol concentrations decline, Insig dissociates, allowing SCAP to chaperone SREBP-2 to the Golgi apparatus. Two site-specific proteases cleave the active basic helix-loop-helix transcription factor, which translocates to the nucleus to induce transcription of LDL receptors.",
+   "say": "SREBP-2 regulates cholesterol synthesis and uptake. When cholesterol is plentiful, SREBP-2 is anchored in the ER by SCAP and Insig. When cholesterol drops, SCAP shuttles SREBP-2 to the Golgi for proteolytic release. The active domain enters the nucleus to induce LDL receptor and reductase genes.",
+   "vis": {
+    "kind": "flow",
+    "title": "SREBP-2 sterol sensing pathway",
+    "nodes": [
+     {
+      "id": "er",
+      "label": "ER: SREBP-2 bound to SCAP & Insig"
+     },
+     {
+      "id": "ste",
+      "label": "Low intracellular sterols"
+     },
+     {
+      "id": "gol",
+      "label": "Golgi transport via COPII vesicles"
+     },
+     {
+      "id": "pro",
+      "label": "S1P and S2P proteolytic cleavages"
+     },
+     {
+      "id": "nuc",
+      "label": "Nuclear induction of LDLR & HMGCR"
+     }
+    ],
+    "edges": [
+     [
+      "er",
+      "ste",
+      "Membrane cholesterol sensor"
+     ],
+     [
+      "ste",
+      "gol",
+      "Insig dissociation"
+     ],
+     [
+      "gol",
+      "pro",
+      "Sequential luminal & intramembrane cuts"
+     ],
+     [
+      "pro",
+      "nuc",
+      "Translocates to sterol regulatory elements"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hepatic conversion into **bile acids** represents the primary quantitative pathway for cholesterol elimination. Cholesterol 7-alpha-hydroxylase catalyzes the rate-limiting initial hydroxylation, forming primary bile acids: cholic acid and chenodeoxycholic acid. These are conjugated with glycine or taurine to form amphipathic bile salts. Intestinal bacteria deconjugate and 7-dehydroxylate them into secondary bile acids (deoxycholic acid and lithocholic acid), ninety-five percent of which are reabsorbed via the terminal ileum.",
+   "say": "Converting cholesterol into bile acids provides the primary route for cholesterol excretion. Cholesterol 7-alpha-hydroxylase catalyzes the rate-limiting step, producing primary bile acids. Conjugation with glycine or taurine forms bile salts. Intestinal bacteria generate secondary bile acids, ninety-five percent recycled by the terminal ileum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary bile acids (Hepatic)",
+     "points": [
+      "Synthesized directly by hepatocytes",
+      "Cholic acid and chenodeoxycholic acid",
+      "Conjugated with glycine or taurine (bile salts)",
+      "Act as emulsifiers for dietary lipid digestion"
+     ]
+    },
+    "right": {
+     "title": "Secondary bile acids (Colonic)",
+     "points": [
+      "Modified by colonic bacterial flora",
+      "Deoxycholic acid and lithocholic acid",
+      "Microbial 7-alpha-dehydroxylation",
+      "Excreted in stool or returned by enterohepatic loop"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Steroidogenesis in the adrenal cortex and gonads begins with **StAR**-mediated cholesterol import into the mitochondrial matrix. Desmolase (CYP11A1) cleaves the side chain to yield pregnenolone, the universal steroid precursor. Congenital adrenal hyperplasia most commonly results from twenty-one-hydroxylase deficiency, which blocks cortisol and aldosterone synthesis. This shunts accumulated precursors into adrenal androgens, causing virilization and life-threatening salt wasting.",
+   "say": "Steroidogenesis begins with StAR protein transporting cholesterol into mitochondrial matrix, where CYP11A1 cleaves it to pregnenolone. The most common form of congenital adrenal hyperplasia is 21-hydroxylase deficiency, blocking cortisol and aldosterone, shunting precursors to androgens and causing ambiguous genitalia and salt wasting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme deficiency",
+     "Mineralocorticoids",
+     "Glucocorticoids",
+     "Adrenal androgens",
+     "Clinical phenotype"
+    ],
+    "rows": [
+     [
+      "21-Hydroxylase (CYP21A2)",
+      "Decreased (salt-wasting)",
+      "Decreased",
+      "Markedly elevated",
+      "Ambiguous genitalia in females, salt loss"
+     ],
+     [
+      "11-Beta-hydroxylase (CYP11B1)",
+      "Elevated 11-DOC (causes HTN)",
+      "Decreased",
+      "Markedly elevated",
+      "Virilization with hypertension"
+     ],
+     [
+      "17-Alpha-hydroxylase (CYP17A1)",
+      "Elevated aldosterone",
+      "Decreased cortisol",
+      "Decreased",
+      "Hypertension, hypokalemia, female external genitalia"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "05104a6f-4000-8000-0510-4a6f12345678",
+  "06104c02-4000-8000-0610-4c0212345678",
+  "07104d95-4000-8000-0710-4d9512345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

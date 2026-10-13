@@ -1,0 +1,185 @@
+{
+ "module": "bio-dna-repair",
+ "subject": "biochemistry",
+ "title": "DNA replication fidelity and genome surveillance: replication fork enzymes and repair pathways",
+ "minutes": 6,
+ "refs": [
+  "Lehninger Principles of Biochemistry 8th ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Eukaryotic DNA replication proceeds bidirectionally from multiple **replication** origins with high speed and fidelity. Helicase unwinds the double helix, while single-stranded DNA-binding proteins prevent re-annealing and hairpin formation. DNA topoisomerases relieve positive supercoiling ahead of the fork by nicking phosphodiester bonds. DNA polymerase alpha synthesizes RNA primers, which are subsequently extended by DNA polymerase delta on the lagging strand and epsilon on the leading strand.",
+   "say": "Eukaryotic replication occurs bidirectionally from multiple origins. Helicase unwinds the duplex, and single-stranded binding proteins stabilize open strands. Topoisomerases relieve supercoiling ahead of the fork. Polymerase alpha synthesizes RNA primers, extended by delta and epsilon polymerases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Replication enzyme",
+     "Biochemical activity",
+     "Prokaryotic equivalent",
+     "Pharmacological inhibitor"
+    ],
+    "rows": [
+     [
+      "DNA helicase",
+      "ATP-driven unwinding of duplex",
+      "DnaB helicase",
+      "Experimental anti-helicase drugs"
+     ],
+     [
+      "Topoisomerase I / II",
+      "Transient strand nicking relieves tension",
+      "DNA gyrase (GyrA/GyrB)",
+      "Fluoroquinolones (bacteria), Etoposide (human)"
+     ],
+     [
+      "DNA polymerase delta/epsilon",
+      "Processive 5' to 3' synthesis, 3' proofreading",
+      "DNA polymerase III",
+      "Chain terminators (Acyclovir, Zidovudine)"
+     ],
+     [
+      "DNA ligase",
+      "Seals Okazaki phosphodiester nicks",
+      "DNA ligase (NAD+ in bacteria)",
+      "ATP-dependent in eukaryotes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Replication high fidelity is guaranteed by intrinsic **proofreading** and post-replicative mismatch repair. High-fidelity replicative polymerases possess three-prime to five-prime exonuclease activity that recognizes mispaired bases, pauses replication, excises the incorrect nucleotide, and resumes synthesis. Mismatch repair enzymes, including MSH2 and MLH1, scan newly synthesized DNA to correct remaining errors. Inherited mutations in mismatch repair genes cause Lynch syndrome and hereditary colorectal cancer.",
+   "say": "High replication fidelity relies on three-prime to five-prime exonuclease proofreading and mismatch repair. Exonucleases excise mispaired nucleotides immediately. Post-replicative mismatch repair enzymes, MSH2 and MLH1, correct remaining errors. Mismatch repair defects cause Lynch syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Polymerase proofreading",
+     "points": [
+      "Intrinsic 3' to 5' exonuclease activity",
+      "Operates concurrently during active replication",
+      "Detects physical distortion in catalytic pocket",
+      "Reduces error rate by two orders of magnitude"
+     ]
+    },
+    "right": {
+     "title": "Mismatch repair (MMR)",
+     "points": [
+      "Operates immediately post-replication",
+      "MSH2/6 recognizes mismatch; MLH1/PMS2 nicks strand",
+      "Excision and resynthesis of daughter strand",
+      "Defects cause microsatellite instability (MSI-H)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exogenous ultraviolet radiation damages DNA by generating covalent **cyclobutane** pyrimidine dimers between adjacent thymine bases. Nucleotide excision repair detects this bulky helix-distorting lesion. An excinuclease complex nicks the damaged phosphodiester backbone on both sides of the dimer, removing an oligonucleotide fragment of twenty-four to thirty nucleotides. DNA polymerase fills the resulting single-strand gap, and DNA ligase seals the nick.",
+   "say": "Ultraviolet radiation produces thymine dimers that distort the double helix. Nucleotide excision repair recognizes this bulky lesion. An endonuclease complex cleaves the damaged strand on both sides, removing an oligonucleotide fragment. DNA polymerase fills the gap, and ligase seals it.",
+   "vis": {
+    "kind": "flow",
+    "title": "Nucleotide excision repair cascade",
+    "nodes": [
+     {
+      "id": "uv",
+      "label": "UV-induced thymine dimer"
+     },
+     {
+      "id": "xpc",
+      "label": "XPC/XPA damage recognition"
+     },
+     {
+      "id": "tfb",
+      "label": "TFIIH helicase local unwinding"
+     },
+     {
+      "id": "end",
+      "label": "Dual incision by XPF and XPG"
+     },
+     {
+      "id": "lig",
+      "label": "Polymerase delta/epsilon & Ligase"
+     }
+    ],
+    "edges": [
+     [
+      "uv",
+      "xpc",
+      "Helix distortion sensing"
+     ],
+     [
+      "xpc",
+      "tfb",
+      "Recruits repair complex"
+     ],
+     [
+      "tfb",
+      "end",
+      "Excision of 24-30 nt fragment"
+     ],
+     [
+      "end",
+      "lig",
+      "Resynthesis and ligation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Defects in nucleotide excision repair cause **xeroderma** pigmentosum, an autosomal recessive condition marked by extreme cutaneous photosensitivity, early severe actinic damage, and a thousand-fold increased incidence of non-melanoma skin cancers and melanomas. In contrast, base excision repair corrects small non-helix-distorting base modifications like cytosine deamination to uracil, utilizing specific DNA glycosylases to generate apurinic or apyrimidinic sites for AP endonuclease cleavage.",
+   "say": "Nucleotide excision repair failure causes xeroderma pigmentosum, marked by extreme sun sensitivity and a thousand-fold rise in skin cancers. Base excision repair corrects small base modifications like cytosine deamination using DNA glycosylases and AP endonuclease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Repair pathway",
+     "Target lesion type",
+     "Key initiating enzymes",
+     "Clinical human disease"
+    ],
+    "rows": [
+     [
+      "Nucleotide excision repair (NER)",
+      "Bulky adducts, UV pyrimidine dimers",
+      "XP proteins (XPA through XPG)",
+      "Xeroderma pigmentosum, Cockayne syndrome"
+     ],
+     [
+      "Base excision repair (BER)",
+      "Deaminated, alkylated, oxidized bases",
+      "Uracil DNA glycosylase, AP endonuclease",
+      "MUTYH-associated polyposis"
+     ],
+     [
+      "Mismatch repair (MMR)",
+      "Post-replication base mismatches & indels",
+      "MSH2, MSH6, MLH1, PMS2",
+      "Lynch syndrome (HNPCC)"
+     ],
+     [
+      "Homologous recombination (HR)",
+      "Double-strand DNA breaks",
+      "BRCA1, BRCA2, RAD51",
+      "Hereditary breast and ovarian cancer"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "f3365fea-4000-8000-f336-5fea12345678",
+  "f2365e57-4000-8000-f236-5e5712345678",
+  "f1365cc4-4000-8000-f136-5cc412345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

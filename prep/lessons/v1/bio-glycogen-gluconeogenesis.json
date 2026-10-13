@@ -1,0 +1,185 @@
+{
+ "module": "bio-glycogen-gluconeogenesis",
+ "subject": "biochemistry",
+ "title": "Carbohydrate synthesis and storage: gluconeogenesis, glycogen metabolism and storage diseases",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Gluconeogenesis synthesizes glucose from non-carbohydrate precursors, primarily lactate, glycerol, and **glucogenic** amino acids during fasting. Because three glycolytic reactions are irreversible, gluconeogenesis employs four bypass enzymes: pyruvate carboxylase and phosphoenolpyruvate carboxykinase bypass pyruvate kinase, fructose-1,6-bisphosphatase bypasses phosphofructokinase-1, and glucose-6-phosphatase hydrolyzes glucose-6-phosphate to release free glucose into the systemic circulation.",
+   "say": "Gluconeogenesis generates glucose from lactate, glycerol, and glucogenic amino acids during fasting. Four bypass enzymes overcome irreversible glycolytic steps: pyruvate carboxylase, PEP carboxykinase, fructose-1,6-bisphosphatase, and hepatic glucose-6-phosphatase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Glycolytic step bypassed",
+     "Gluconeogenic bypass enzyme",
+     "Cofactor / Energy",
+     "Allosteric regulation"
+    ],
+    "rows": [
+     [
+      "Pyruvate kinase step 1",
+      "Pyruvate carboxylase",
+      "Biotin, ATP",
+      "Allosterically activated by acetyl-CoA"
+     ],
+     [
+      "Pyruvate kinase step 2",
+      "Phosphoenolpyruvate carboxykinase",
+      "GTP",
+      "Induced transcriptionally by glucagon"
+     ],
+     [
+      "PFK-1 step",
+      "Fructose-1,6-bisphosphatase",
+      "Magnesium",
+      "Inhibited by AMP and fructose-2,6-bisphosphate"
+     ],
+     [
+      "Hexokinase step",
+      "Glucose-6-phosphatase",
+      "ER luminal enzyme",
+      "Present in liver and renal cortex, absent in muscle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The bifunctional **enzyme** PFK-2/FBPase-2 regulates reciprocal flux between glycolysis and gluconeogenesis via fructose-2,6-bisphosphate. Glucagon phosphorylates the enzyme via protein kinase A, activating the phosphatase domain and degrading fructose-2,6-bisphosphate. Relieved of allosteric inhibition, fructose-1,6-bisphosphatase stimulates gluconeogenesis. Insulin promotes dephosphorylation, activating the kinase domain, elevating fructose-2,6-bisphosphate, and strongly stimulating phosphofructokinase-1.",
+   "say": "The bifunctional enzyme PFK-2/FBPase-2 controls glycolysis and gluconeogenesis via fructose-2,6-bisphosphate. Glucagon phosphorylates the enzyme, activating phosphatase activity to degrade fructose-2,6-bisphosphate and drive gluconeogenesis. Insulin dephosphorylates the enzyme to activate kinase activity and promote glycolysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fasted state (Glucagon dominance)",
+     "points": [
+      "Elevated cyclic AMP and active protein kinase A",
+      "Phosphorylated PFK-2 is inactivated",
+      "Phosphorylated FBPase-2 is activated",
+      "Fructose-2,6-bisphosphate drops, favoring gluconeogenesis"
+     ]
+    },
+    "right": {
+     "title": "Fed state (Insulin dominance)",
+     "points": [
+      "Active protein phosphatase-1 dephosphorylates enzyme",
+      "Dephosphorylated PFK-2 is active",
+      "Dephosphorylated FBPase-2 is inactive",
+      "Fructose-2,6-bisphosphate rises, stimulating PFK-1"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Glycogen synthesis and degradation are coordinated by reciprocal **phosphorylation** cascades. Glycogen synthase elongates alpha-1,4 chains using UDP-glucose, active when dephosphorylated by insulin-stimulated phosphatase. Glycogen phosphorylase cleaves terminal residues to glucose-1-phosphate, activated when phosphorylated by phosphorylase kinase. Debranching enzyme transfers three residues and cleaves the alpha-1,6 branch point, releasing one free glucose molecule per branch point.",
+   "say": "Glycogen synthesis and breakdown depend on opposing phosphorylation states. Glycogen synthase elongates chains using UDP-glucose, activated when dephosphorylated by insulin. Glycogen phosphorylase cleaves glucose-1-phosphate, activated by phosphorylation. Debranching enzyme removes alpha-1,6 branch points.",
+   "vis": {
+    "kind": "flow",
+    "title": "Glycogenolysis enzymatic sequence",
+    "nodes": [
+     {
+      "id": "gly",
+      "label": "Branched glycogen polymer"
+     },
+     {
+      "id": "pho",
+      "label": "Glycogen phosphorylase (cleaves alpha-1,4)"
+     },
+     {
+      "id": "lim",
+      "label": "Limit dextrin (4 residues to branch)"
+     },
+     {
+      "id": "tra",
+      "label": "Debranching transferase (moves 3 residues)"
+     },
+     {
+      "id": "glu",
+      "label": "Alpha-1,6-glucosidase (releases free glucose)"
+     }
+    ],
+    "edges": [
+     [
+      "gly",
+      "pho",
+      "Releases glucose-1-P"
+     ],
+     [
+      "pho",
+      "lim",
+      "Halts 4 residues before branch"
+     ],
+     [
+      "lim",
+      "tra",
+      "Exposes alpha-1,6 link"
+     ],
+     [
+      "tra",
+      "glu",
+      "Hydrolyzes branch glucose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inborn errors of glycogen metabolism manifest as distinct **storage** diseases. Type I (von Gierke disease) arises from glucose-6-phosphatase deficiency, causing severe fasting hypoglycemia, hepatomegaly, lactic acidosis, and hyperuricemia. Type II (Pompe disease) is a lysosomal acid maltase deficiency causing hypertrophic cardiomyopathy. Type V (McArdle disease) impairs skeletal muscle phosphorylase, producing exercise-induced painful cramping, myoglobinuria, and absent post-exercise venous lactate elevation.",
+   "say": "Glycogen storage diseases result from specific enzyme mutations. Von Gierke disease impairs glucose-6-phosphatase, causing severe fasting hypoglycemia, lactic acidosis, and hepatomegaly. Pompe disease impairs lysosomal acid maltase, causing fatal cardiomyopathy. McArdle disease lacks muscle phosphorylase, causing exercise cramps and myoglobinuria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Deficient enzyme",
+     "Primary organs affected",
+     "Clinical hallmark"
+    ],
+    "rows": [
+     [
+      "Type I (von Gierke)",
+      "Glucose-6-phosphatase",
+      "Liver and kidney",
+      "Profound hypoglycemia, lactic acidosis, gout"
+     ],
+     [
+      "Type II (Pompe)",
+      "Lysosomal alpha-1,4-glucosidase",
+      "Heart, muscle, systemic",
+      "Hypertrophic cardiomyopathy, early infant death"
+     ],
+     [
+      "Type III (Cori)",
+      "Debranching enzyme",
+      "Liver and skeletal muscle",
+      "Hepatomegaly, normal blood lactate, limit dextrins"
+     ],
+     [
+      "Type V (McArdle)",
+      "Skeletal muscle phosphorylase",
+      "Skeletal muscle",
+      "Exercise cramps, myoglobinuria, second wind"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "2e01e4fc-4000-8000-2e01-e4fc12345678",
+  "3101e9b5-4000-8000-3101-e9b512345678",
+  "3001e822-4000-8000-3001-e82212345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

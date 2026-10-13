@@ -1,0 +1,180 @@
+{
+ "module": "bio-extracellular-matrix",
+ "subject": "biochemistry",
+ "title": "Extracellular matrix biochemistry: collagen biosynthesis, lysyl oxidase and connective tissue disorders",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Medical Biochemistry 5th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Collagen is the most abundant protein in the human body, characterized by a **triple-helix** quaternary structure composed of three polypeptide alpha chains. The primary sequence contains a strict Glycine-X-Y repeating motif, where glycine occurs every third residue. Because glycine is the smallest amino acid with only a single hydrogen atom side chain, it fits neatly into the restricted central axis of the tightly coiled triple helix.",
+   "say": "Collagen is the body's most abundant protein, featuring a triple helix of three alpha chains. It has a strict Glycine-X-Y repeating sequence where glycine occupies every third position. Because glycine is the smallest amino acid, it fits inside the crowded central axis of the triple helix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Collagen type",
+     "Primary tissue locations",
+     "Associated genetic disease"
+    ],
+    "rows": [
+     [
+      "Type I (90% of total)",
+      "Bone, skin, tendon, dentin, fascia",
+      "Osteogenesis imperfecta, classic Ehlers-Danlos"
+     ],
+     [
+      "Type II",
+      "Cartilage, vitreous humor, nucleus pulposus",
+      "Stickler syndrome, achondrogenesis type II"
+     ],
+     [
+      "Type III (Reticulin)",
+      "Blood vessels, uterus, fetal skin, granulation",
+      "Vascular Ehlers-Danlos syndrome (arterial rupture)"
+     ],
+     [
+      "Type IV",
+      "Basement membranes, lens capsule",
+      "Alport syndrome (nephritis, sensorineural hearing loss)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intracellular collagen processing begins in the rough endoplasmic reticulum with signal peptide cleavage. Prolyl and lysyl **hydroxylases** hydroxylate specific proline and lysine residues, requiring vitamin C (ascorbate), molecular oxygen, ferrous iron, and alpha-ketoglutarate as cofactors. Selected hydroxylysine residues undergo glycosylation with glucose and galactose. Triple-helix assembly initiates at the carboxy-terminus, stabilized by interchain disulfide bonds to form soluble procollagen.",
+   "say": "Intracellular collagen assembly starts in the rough endoplasmic reticulum. Prolyl and lysyl hydroxylases modify residues using vitamin C, iron, and oxygen. Hydroxylysines undergo glycosylation. Disulfide bonds at the carboxy-terminus initiate triple-helix winding to create procollagen.",
+   "vis": {
+    "kind": "flow",
+    "title": "Intracellular collagen synthesis steps",
+    "nodes": [
+     {
+      "id": "trn",
+      "label": "Pre-procollagen translation (RER)"
+     },
+     {
+      "id": "hyd",
+      "label": "Hydroxylation (Vitamin C dependent)"
+     },
+     {
+      "id": "gly",
+      "label": "Glycosylation with galactose & glucose"
+     },
+     {
+      "id": "tri",
+      "label": "Triple helix assembly of procollagen"
+     },
+     {
+      "id": "sec",
+      "label": "Secretory vesicle export to ECM"
+     }
+    ],
+    "edges": [
+     [
+      "trn",
+      "hyd",
+      "Signal peptide cleaved"
+     ],
+     [
+      "hyd",
+      "gly",
+      "Prolyl and lysyl hydroxylases"
+     ],
+     [
+      "gly",
+      "tri",
+      "C-terminal disulfide bonds align"
+     ],
+     [
+      "tri",
+      "sec",
+      "Transits Golgi apparatus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extracellularly, procollagen peptidases cleave non-helical **terminal** propeptides, converting soluble procollagen into insoluble tropocollagen. Tropocollagen molecules self-assemble into staggered parallel fibrils. The copper-dependent extracellular enzyme lysyl oxidase oxidatively deaminates lysine and hydroxylysine residues into reactive allysine aldehydes. Spontaneous aldol condensations between adjacent aldehydes create covalent crosslinks, conferring immense tensile strength to the mature collagen fibril.",
+   "say": "Extracellular procollagen peptidases cleave terminal propeptides, yielding insoluble tropocollagen that self-assembles into fibrils. The copper-dependent enzyme lysyl oxidase deaminates lysine into allysine aldehydes. These form covalent crosslinks, conferring tensile strength to mature collagen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Scurvy (Vitamin C deficiency)",
+     "points": [
+      "Failure of prolyl and lysyl hydroxylation",
+      "Unstable triple-helix degrades at body temperature",
+      "Fragile capillaries, perifollicular hemorrhages",
+      "Gingival bleeding, hemarthrosis, impaired wound healing"
+     ]
+    },
+    "right": {
+     "title": "Menkes disease (Copper deficiency)",
+     "points": [
+      "ATP7A mutation impairs intestinal copper transport",
+      "Inactive copper-dependent lysyl oxidase",
+      "Defective covalent fibril crosslinking",
+      "Arterial aneurysms, kinky hair, developmental delay"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Genetic disorders of the extracellular matrix compromise tissue **integrity**. Osteogenesis imperfecta results from COL1A1 or COL1A2 mutations that replace invariant glycine with bulky amino acids, causing dominant-negative disruption of type I collagen triple helices, manifesting as bone fractures and blue sclerae. Marfan syndrome is caused by FBN1 mutations in fibrillin-1, an extracellular glycoprotein microfibril that forms a scaffold for elastin, causing aortic root aneurysm.",
+   "say": "Matrix gene mutations produce severe clinical syndromes. Osteogenesis imperfecta results from type I collagen glycine substitutions, causing multiple bone fractures and blue sclerae. Marfan syndrome stems from fibrillin-1 mutations, disrupting elastin microfibrils and predisposing to aortic dissection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Mutated gene / protein",
+     "Structural defect",
+     "Clinical hallmarks"
+    ],
+    "rows": [
+     [
+      "Osteogenesis imperfecta (Type I)",
+      "COL1A1 / COL1A2 (null allele)",
+      "Decreased synthesis of normal Type I",
+      "Multiple fractures, blue sclerae, hearing loss"
+     ],
+     [
+      "Osteogenesis imperfecta (Type II)",
+      "COL1A1 glycine substitution",
+      "Abnormal dominant-negative triple helix",
+      "Lethal in perinatal period, crumpling fractures"
+     ],
+     [
+      "Vascular Ehlers-Danlos",
+      "COL3A1 (Type III collagen)",
+      "Fragile vascular reticular meshwork",
+      "Spontaneous aortic, uterine, and bowel rupture"
+     ],
+     [
+      "Marfan syndrome",
+      "FBN1 (Fibrillin-1 scaffold)",
+      "Excess TGF-beta signaling, defective elastin",
+      "Arachnodactyly, ectopia lentis, aortic root dissection"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "54a6560b-4000-8000-54a6-560b12345678",
+  "55a6579e-4000-8000-55a6-579e12345678",
+  "56a65931-4000-8000-56a6-593112345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

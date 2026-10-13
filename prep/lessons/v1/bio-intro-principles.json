@@ -1,0 +1,175 @@
+{
+ "module": "bio-intro-principles",
+ "subject": "biochemistry",
+ "title": "Biochemical basis of disease: cellular compartmentalization and molecular pathology",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry 32nd ed",
+  "Lehninger Principles of Biochemistry 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Cellular life relies on strict **compartmentalization** of metabolic pathways within specialized organelles. Glycolysis, fatty acid biosynthesis, and the pentose phosphate pathway occur exclusively within the cytosol. In contrast, the citric acid cycle, beta-oxidation of fatty acids, and oxidative phosphorylation are strictly housed within mitochondria. This spatial segregation prevents futile metabolic cycling and enables independent regulation by local substrates.",
+   "say": "Cellular metabolism requires strict compartmentalization across organelles. Cytosol hosts glycolysis, fatty acid synthesis, and the pentose phosphate pathway. Mitochondria house the citric acid cycle, beta-oxidation, and oxidative phosphorylation. This spatial separation prevents futile cycles and permits localized regulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organelle",
+     "Major pathways housed",
+     "Permeability barrier"
+    ],
+    "rows": [
+     [
+      "Cytosol",
+      "Glycolysis, fatty acid synthesis, PPP",
+      "Plasma membrane outer boundary"
+     ],
+     [
+      "Mitochondrial matrix",
+      "TCA cycle, beta-oxidation, urea start",
+      "Inner membrane impermeable to ions"
+     ],
+     [
+      "Endoplasmic reticulum",
+      "Translation, lipid synthesis, P450",
+      "Lipid bilayer with translocons"
+     ],
+     [
+      "Lysosomes",
+      "Acid hydrolase macromolecule degradation",
+      "Proton-ATPase maintained pH 4.5 to 5.0"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biochemical **pathology** arises when specific molecular processes malfunction. Diseases are classified into inborn errors of metabolism, toxic xenobiotic exposures, nutritional deficiencies, and endocrine dysregulations. Enzyme deficiencies typically produce dual consequences: upstream accumulation of toxic precursor metabolites and downstream depletion of critical physiological end products. Recognizing this reciprocal relationship is vital for interpreting diagnostic clinical tests.",
+   "say": "Molecular pathology results from enzyme deficiencies, toxic xenobiotics, nutritional deficits, or endocrine failure. Enzyme defects cause upstream accumulation of toxic precursors and downstream deficiency of essential end products. This reciprocal relationship forms the foundation for metabolic screening.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Substrate accumulation effects",
+     "points": [
+      "Upstream toxic metabolite buildup",
+      "Alternative aberrant pathway shunting",
+      "Cellular swelling and organomegaly",
+      "Diagnostic urine and plasma markers"
+     ]
+    },
+    "right": {
+     "title": "Product depletion effects",
+     "points": [
+      "Failure of vital downstream synthesis",
+      "Loss of essential energetic molecules",
+      "Loss of physiological feedback control",
+      "Clinical failure to thrive and fatigue"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Mitochondria contain a specialized **double membrane** architecture critical for bioenergetics. The outer membrane is freely permeable to small molecules via voltage-dependent anion channels called porins. The inner mitochondrial membrane is uniquely rich in cardiolipin and impermeable to most ions and polar solutes, establishing the steep electrochemical proton gradient required for adenosine triphosphate generation by ATP synthase.",
+   "say": "Mitochondria possess a double membrane system. The outer membrane has porins permeable to small molecules. The inner membrane contains cardiolipin and lacks permeability to ions, which maintains the electrochemical proton gradient driving ATP synthesis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mitochondrial transport compartments",
+    "nodes": [
+     {
+      "id": "cyt",
+      "label": "Cytosol"
+     },
+     {
+      "id": "om",
+      "label": "Outer membrane porin"
+     },
+     {
+      "id": "ims",
+      "label": "Intermembrane space"
+     },
+     {
+      "id": "imm",
+      "label": "Inner membrane carriers"
+     },
+     {
+      "id": "mat",
+      "label": "Matrix enzymes"
+     }
+    ],
+    "edges": [
+     [
+      "cyt",
+      "om",
+      "Passes <5 kDa"
+     ],
+     [
+      "om",
+      "ims",
+      "Protons accumulate"
+     ],
+     [
+      "ims",
+      "imm",
+      "Specific antiporters"
+     ],
+     [
+      "imm",
+      "mat",
+      "TCA & beta-oxidation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peroxisomes serve essential **oxidative** functions distinct from mitochondria. They initiate beta-oxidation of very long-chain fatty acids containing twenty-two or more carbons and synthesize ether phospholipids called plasmalogens for neural myelin. Peroxisomal oxidation generates hydrogen peroxide, which is promptly decomposed into water and molecular oxygen by catalase. Peroxisomal assembly defects cause severe Zellweger syndrome.",
+   "say": "Peroxisomes perform specialized oxidation of very long-chain fatty acids and synthesize myelin plasmalogens. Their oxidation produces hydrogen peroxide, rapidly degraded by catalase. Peroxisome assembly failure causes Zellweger syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peroxisomal function",
+     "Substrates involved",
+     "Clinical deficiency state"
+    ],
+    "rows": [
+     [
+      "VLCFA beta-oxidation",
+      "Fatty acids 22 to 26 carbons",
+      "X-linked adrenoleukodystrophy"
+     ],
+     [
+      "Plasmalogen synthesis",
+      "Ether glycerophospholipids",
+      "Rhizomelic chondrodysplasia punctata"
+     ],
+     [
+      "Peroxisome biogenesis",
+      "PEX gene peroxin proteins",
+      "Zellweger syndrome spectrum"
+     ],
+     [
+      "Phytanic acid alpha-oxidation",
+      "Branched-chain dietary phytanate",
+      "Refsum disease neurological ataxia"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "781fadd9-4000-8000-781f-add912345678",
+  "751fa920-4000-8000-751f-a92012345678",
+  "761faab3-4000-8000-761f-aab312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
