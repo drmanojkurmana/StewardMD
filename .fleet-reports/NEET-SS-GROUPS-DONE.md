@@ -145,3 +145,8 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 
 - 399 verified ($0 API, 399/400, dropped maikss104[0]), R2 live: paediatric anaesthesia 115->165, virology 115->165, onco-pathology 128->178, head-neck 130->180, clinical pharmacology 139->189, geriatric MH 130->180, child-adolescent psych 127->177, CTVS 198->247.
 - Cumulative VOLUME run: 3,482 verified items in batches 3-11 (9 PRs). Remainder ~4,770 to 300/subject. Pending lead: `node tools/prep-ids.mjs publish --yes`.
+
+## VOLUME phase batch 12 (2026-10-13): Pharmacology + Psychiatry to near/over 300
+
+- 396 verified ($0 API, blind fresh-context, dropped 4 disagreements: maikss111[35], maikss112[37,41,49]), keys rotated, dedupe 0 in batch, R2 live maikss105-112: ss-clinical-pharmacology 189->339, ss-geriatric-mental-health 180->330, ss-child-adolescent-psychiatry 177->273.
+- Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`. Remainder: child-adolescent psychiatry 27; then Paediatric subjects (~120 each), Surgical (vascular 140, plastic 131, paediatric surgery 130, surgical oncology 114, CTVS 53, neurosurgery 15, urology 8), OBG/Ortho/Anaesthesia (~170 each).
