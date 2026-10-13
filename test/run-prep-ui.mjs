@@ -163,9 +163,12 @@ try {
         ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")), k=Object.keys(s.mt); return k.length===1 && s.mt[k[0]][2]==="misread";`) === true, "a wrong answer joins My mistakes and takes its tag");
       } else ok(await ev(`return !document.querySelector("#smdPrep [data-act=mtag]");`) === true, "a right answer offers no mistake tags");
       await click("#smdPrep [data-act=report]");
-      ok(await until(`return document.querySelectorAll("#smdPrep [data-act=sendreport]").length === 5;`, 3000), "Report lists the five reasons");
-      await click('#smdPrep [data-act=sendreport][data-v=unclear]');
-      ok(await until(`return !!document.querySelector("#smdPrep .pn-fb");`, 3000), "after reporting, back on the answered question");
+      ok(await until(`return document.querySelectorAll(".pn-rpt-sheet input[name=pn-rpt-reason]").length === 7;`, 3000), "Report sheet lists the seven reasons");
+      await ev(`document.querySelector('.pn-rpt-sheet input[value="unclear"]').click(); return 1;`);
+      await click(".pn-rpt-sheet .pn-rpt-send");
+      ok(await until(`return !!document.querySelector(".pn-rpt-sheet .pn-rpt-ok");`, 3000), "the sheet confirms the report was received");
+      await click(".pn-rpt-sheet [data-rpt-close]");
+      ok(await until(`return !document.querySelector(".pn-rpt-sheet") && !!document.querySelector("#smdPrep .pn-fb");`, 3000), "after reporting, back on the answered question");
       ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return Object.keys(s.rep).length===1 && s.rep[Object.keys(s.rep)[0]]==="unclear";`) === true, "the report is kept on the device");
     }
     if (i === 3) {

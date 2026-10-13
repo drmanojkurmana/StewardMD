@@ -37,7 +37,13 @@
   {
    "tx": "**Outliers** are unusually high or low values. They pull the mean towards them. In the presence of outliers, the **median** is the preferred measure of central tendency because it is not affected by extreme values. The range is a measure of dispersion, not central tendency, so it is never the answer here.",
    "say": "Outliers are unusually high or low values. They pull the mean towards them. In the presence of outliers, the median is the preferred measure of central tendency because it is not affected by extreme values. The range is a measure of dispersion, not central tendency, so it is never the answer here.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-skew.svg",
+    "alt": "Three distributions: symmetric with mode, median and mean together; positively skewed with mode, then median, then mean; negatively skewed in reverse order.",
+    "caption": "Skew moves the mean toward the tail. Report the median for skewed data.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "**Dispersion** describes how spread out values are around the central value. The **range** is the difference between the largest and smallest value. The **standard deviation** is the root-mean-square deviation from the mean, and it is the square root of the variance. A larger standard deviation means greater spread. The **coefficient of variation** is the ratio of standard deviation to mean, expressed as a percentage, and it is used to compare data sets with different units.",
@@ -96,12 +102,24 @@
   {
    "tx": "The **standard error of the mean** measures how far a sample mean is likely to be from the true population mean. It equals the standard deviation divided by the square root of the sample size. It is a measure of chance variation, not a mistake. It falls as sample size rises. In a sample of 25 children with SD 2, the standard error is 2 divided by 5, which is 0.4.",
    "say": "The standard error of the mean measures how far a sample mean is likely to be from the true population mean. It equals the standard deviation divided by the square root of the sample size. It is a measure of chance variation, not a mistake. It falls as sample size rises. In a sample of 25 children with SD 2, the standard error is 2 divided by 5, which is 0.4.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-sd-se.svg",
+    "alt": "Standard deviation fixed at 10 while the standard error falls from 5.0 at n equals 4 to 2.0 at n equals 25 and 1.0 at n equals 100.",
+    "caption": "SD describes the patients and never shrinks. SE describes the mean and shrinks as n grows.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "**Percentiles** divide data into 100 equal parts, so there are 99 percentiles. The median is the 50th percentile and the second quartile. Quartiles split data into four parts. The **interquartile range** is the difference between the third and first quartiles and holds the middle 50 percent of values. **Skewness** shows asymmetry: in positive skew, mean exceeds median.",
    "say": "Percentiles divide data into 100 equal parts, so there are 99 percentiles. The median is the 50th percentile and the second quartile. Quartiles split data into four parts. The interquartile range is the difference between the third and first quartiles and holds the middle 50 percent of values. Skewness shows asymmetry: in positive skew, mean exceeds median.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-boxplot.svg",
+    "alt": "Box plot of systolic blood pressure: minimum 48, first quartile 62, median 71, third quartile 80, maximum 94 and an outlier at 104; the interquartile range is 18.",
+    "caption": "The box holds the middle half of the data. Its width is the interquartile range.",
+    "ar": 1.5384615384615385
+   }
   }
  ],
  "quiz": [

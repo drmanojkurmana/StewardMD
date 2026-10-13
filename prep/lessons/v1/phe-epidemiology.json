@@ -43,25 +43,11 @@
    "tx": "Study designs form a hierarchy by how well they control bias. A **randomised controlled trial** allocates exposure by chance and gives the strongest causal evidence. **Cohort** studies follow exposed and unexposed groups forward over time. **Case-control** studies select people by outcome and look back at exposure, suiting rare diseases. A **cross-sectional** survey measures exposure and outcome at one moment, giving prevalence but not temporality.",
    "say": "Study designs form a hierarchy by how well they control bias. A randomised controlled trial allocates exposure by chance and gives the strongest causal evidence. Cohort studies follow exposed and unexposed groups forward over time. Case-control studies select people by outcome and look back at exposure, suiting rare diseases. A cross-sectional survey measures exposure and outcome at one moment, giving prevalence but not temporality.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Analytical designs",
-     "points": [
-      "Follow people over time",
-      "Cohort gives relative risk",
-      "Case-control gives odds ratio",
-      "Case-control suits rare outcomes"
-     ]
-    },
-    "right": {
-     "title": "Descriptive or allocative",
-     "points": [
-      "Cross-sectional gives prevalence",
-      "Trials allocate by chance",
-      "Trials give strongest causation",
-      "Case series describes only"
-     ]
-    }
+    "kind": "image",
+    "src": "prep/lessons/media/stats-pyramid.svg",
+    "alt": "Evidence pyramid: systematic reviews at the top, then randomised trials, cohort studies, case-control studies, case series, and expert opinion at the base.",
+    "caption": "Higher designs resist bias better. Appraisal still beats ranking alone.",
+    "ar": 1.5384615384615385
    }
   },
   {
@@ -120,7 +106,13 @@
   {
    "tx": "Measures of association depend on design. A **relative risk** compares incidence in exposed and unexposed groups in cohort studies. An **odds ratio** is used in case-control studies, and approximates relative risk when the outcome is rare. Interrupted time series analysis evaluates a population-wide intervention using repeated measures before and after. Choose the design and measure that match the question, and read the study's limitations critically.",
    "say": "Measures of association depend on design. A relative risk compares incidence in exposed and unexposed groups in cohort studies. An odds ratio is used in case-control studies, and approximates relative risk when the outcome is rare. Interrupted time series analysis evaluates a population-wide intervention using repeated measures before and after. Choose the design and measure that match the question, and read the study's limitations critically.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-designs.svg",
+    "alt": "Three design flows: randomised trial from randomisation to intervention to outcome, cohort from exposure to follow-up to outcome, and case-control looking back from cases and controls to past exposure.",
+    "caption": "Name the design by its starting point: exposure, intervention, or outcome.",
+    "ar": 1.5384615384615385
+   }
   }
  ],
  "quiz": [],

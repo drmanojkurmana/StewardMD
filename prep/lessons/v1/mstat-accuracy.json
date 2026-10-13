@@ -9,34 +9,11 @@
    "tx": "**Sensitivity** is the proportion of people with the disease who test positive. **Specificity** is the proportion without the disease who test negative. Both are properties of the test itself and do not change with how common the disease is. A highly sensitive test has few false negatives, so a negative result helps rule disease out, summarised by SnNout. A highly specific test has few false positives, so a positive result helps rule disease in, summarised by SpPIn.",
    "say": "Sensitivity is the proportion of people with the disease who test positive. Specificity is the proportion without the disease who test negative. Both belong to the test itself and do not change with how common the disease is. A highly sensitive test has few false negatives, so a negative result helps rule disease out, summarised by SnNout. A highly specific test has few false positives, so a positive result helps rule disease in, summarised by SpPIn.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Property",
-     "Measures",
-     "Best use"
-    ],
-    "rows": [
-     [
-      "Sensitivity",
-      "Diseased people testing positive",
-      "Ruling out, SnNout"
-     ],
-     [
-      "Specificity",
-      "Healthy people testing negative",
-      "Ruling in, SpPIn"
-     ],
-     [
-      "Positive predictive value",
-      "Positives who truly have disease",
-      "Depends on prevalence"
-     ],
-     [
-      "Negative predictive value",
-      "Negatives who truly lack disease",
-      "Depends on prevalence"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/stats-2x2.svg",
+    "alt": "Two by two table with 80 true positives, 20 false negatives, 10 false positives and 90 true negatives, giving sensitivity 80 percent, specificity 90 percent, positive predictive value 88.9 percent and negative predictive value 81.8 percent.",
+    "caption": "Read sensitivity down the diseased column. Read predictive value across the test row.",
+    "ar": 1.5384615384615385
    }
   },
   {

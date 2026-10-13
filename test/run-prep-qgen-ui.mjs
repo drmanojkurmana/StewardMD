@@ -209,11 +209,12 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep .qg-prov");`, 5000), "after answering: the honest line (Created with MaiK, not from the library)");
   ok(await hasRow("report"), "a MaiK question can be reported");
   await click('#smdPrep [data-act="report"]');
-  await until(`return !!document.querySelector('#smdPrep [data-act="sendreport"]');`, 3000);
-  await click('#smdPrep [data-act="sendreport"][data-v="wrong-key"]');
+  await until(`return document.querySelectorAll('.pn-rpt-sheet input[name=pn-rpt-reason]').length === 7;`, 3000);
+  await ev(`document.querySelector('.pn-rpt-sheet input[value="wrong-answer"]').click(); return 1;`);
+  await click(".pn-rpt-sheet .pn-rpt-send");
   await sleep(500);
   const rep = qgCalls("report");
-  ok(rep.length === 1 && rep[0].body.why === "wrong-key" && /^q_[0-9a-f]{12}$/.test(rep[0].body.id) && /^gen_[0-9a-f]{12}$/.test(rep[0].body.mod) && !rep[0].body.q, "report: op report with ids and the reason only");
+  ok(rep.length === 1 && rep[0].body.why === "wrong-answer" && /^q_[0-9a-f]{12}$/.test(rep[0].body.id) && /^gen_[0-9a-f]{12}$/.test(rep[0].body.mod) && !rep[0].body.q, "report: op report with ids and the reason only");
   // offline reopen: the module from Your decks, practised with no connection
   await reopen(); await ev(signIn);
   await call("Network.enable", {}); await call("Network.emulateNetworkConditions", { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });

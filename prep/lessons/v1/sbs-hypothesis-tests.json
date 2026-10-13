@@ -42,7 +42,13 @@
   {
    "tx": "**Type I error** is a false positive, controlled by alpha. **Type II error** is a false negative, controlled by beta. **Power** equals one minus beta and rises with larger samples, greater effect size, less outcome variability and a higher alpha. Sample size must be calculated before the trial starts, and halving the detectable difference roughly quadruples the sample needed.",
    "say": "Type I error is a false positive, controlled by alpha. Type II error is a false negative, controlled by beta. Power equals one minus beta and rises with larger samples, greater effect size, less outcome variability and a higher alpha. Sample size must be calculated before the trial starts, and halving the detectable difference roughly quadruples the sample needed.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-errors.svg",
+    "alt": "Two overlapping curves for no effect and a real effect with a significance cut-off: alpha is the type I error tail, beta the missed-effect area, and the rest is power.",
+    "caption": "Alpha is the false-positive risk you set. Beta is the miss rate. Power is 1 minus beta.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "Choose the test by data type, number of groups, pairing and distribution. Use the **unpaired t test** for two independent normal groups, the **paired t test** for before and after data, and the **Mann-Whitney** or **Wilcoxon signed rank** test when data are non-normal. For three or more normal groups use **ANOVA**, and **Kruskal-Wallis** for non-normal groups. Categorical proportions use chi-square, or **Fisher exact** when an expected cell count is below 5.",
@@ -92,7 +98,13 @@
   {
    "tx": "A **confidence interval** gives a plausible range for an effect size and shows how precise the estimate is. Narrow intervals signal greater **precision**, while wide ones suggest uncertainty. If the interval crosses the **null value**, such as zero difference or a ratio of one, the finding is not statistically significant at the chosen level. Read the interval alongside the **p value**, and ask whether the magnitude is clinically meaningful.",
    "say": "A confidence interval gives a range of plausible values for an effect and tells you how precise the estimate is. A narrow range means good precision, whereas a broad range signals uncertainty. When the interval contains the null value, for example a difference of zero or a ratio of one, the result does not reach significance at that threshold. Consider this alongside the p value, and ask whether the size of the effect would actually change care for patients.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-ci-forest.svg",
+    "alt": "Forest plot of risk ratios: Study A 1.40 (1.10 to 1.80), Study B 0.90 (0.60 to 1.30) crossing the null at 1, Study C 1.20 (1.00 to 1.50), pooled 1.25 (1.08 to 1.45).",
+    "caption": "An interval crossing the null line is compatible with no effect. Width is precision.",
+    "ar": 1.5384615384615385
+   }
   }
  ],
  "quiz": [

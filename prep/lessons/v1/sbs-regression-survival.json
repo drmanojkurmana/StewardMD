@@ -43,41 +43,11 @@
    "tx": "Survival data include **censored** observations, patients who are lost to follow-up or still event-free when the study ends. They are kept in the analysis up to their last contact, not excluded and not counted as events. The **Kaplan-Meier** method estimates survival step by step at each event time and needs no pre-fixed intervals, unlike actuarial life tables. Its median survival is most reliable when most patients have reached the endpoint.",
    "say": "Survival data include censored observations, patients who are lost to follow-up or still event-free when the study ends. They are kept in the analysis up to their last contact, not excluded and not counted as events. The Kaplan-Meier method estimates survival step by step at each event time and needs no pre-fixed intervals, unlike actuarial life tables. Its median survival is most reliable when most patients have reached the endpoint.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Patient enrolled"
-     },
-     {
-      "id": "b",
-      "label": "Event or censored"
-     },
-     {
-      "id": "c",
-      "label": "Step drop at event"
-     },
-     {
-      "id": "d",
-      "label": "Tick at censoring"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c",
-      "event"
-     ],
-     [
-      "b",
-      "d",
-      "censored"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/stats-km.svg",
+    "alt": "Two Kaplan-Meier step-down curves, treatment above control, with censoring ticks and a 50 percent line for median survival.",
+    "caption": "Steps drop at events. Ticks are censored patients, still counted until last seen.",
+    "ar": 1.5384615384615385
    }
   },
   {
