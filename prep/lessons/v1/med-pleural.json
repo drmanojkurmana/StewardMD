@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "med-pleural",
+ "subject": "medicine",
+ "title": "Tension pneumothorax and pleural emergencies: decompress, drain, reassess",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **tension pneumothorax** traps air under pressure, collapsing the lung and obstructing venous return. Suspect it with severe breathlessness, falling blood pressure, distended neck veins, tracheal deviation and absent breath sounds on one side, especially after trauma, ventilation or a pleural procedure. It is a **clinical diagnosis**: do not wait for imaging when the picture fits (ATLS; BTS guidance).",
+   "say": "Tension pneumothorax is a clinical diagnosis. Severe breathlessness, low pressure and one silent chest after trauma mean act now, not image first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect tension"
+     },
+     {
+      "id": "b",
+      "label": "Immediate decompression"
+     },
+     {
+      "id": "c",
+      "label": "Chest drain + reassess"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediate **needle or finger decompression per protocol** is followed by a formal chest drain, because decompression alone is temporary. A simple pneumothorax in a stable patient is managed by size, symptoms and protocol, ranging from observation to aspiration or drainage. Every pleural intervention ends with reassessment of breathing, pressure and drain swing and a check film as guided.",
+   "say": "Decompression is temporary and is followed by a chest drain. Stable simple pneumothorax is managed by size, symptoms and protocol.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "Definitive step"
+    ],
+    "rows": [
+     [
+      "Tension",
+      "Drain after decompression"
+     ],
+     [
+      "Stable simple",
+      "Protocol: observe, aspirate or drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A large pleural effusion causing breathlessness needs ultrasound-guided drainage by trained hands, with fluid sent for analysis. Sudden deterioration after any chest procedure is tension until proved otherwise. Document side, site, consent and complications honestly for every pleural procedure.",
+   "say": "Drain large effusions under ultrasound guidance, and treat sudden deterioration after any chest procedure as tension until proved otherwise.",
+   "vis": null
+  }
+ ]
+}

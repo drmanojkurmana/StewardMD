@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "ans-cpr",
+ "subject": "anaesthesia",
+ "title": "CPR, BLS and ALS: compressions first, defibrillate shockable rhythms",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Cardiac arrest** care starts with recognition, a call for help and **high-quality chest compressions** with minimal interruption. Attach a defibrillator and monitor as soon as possible, because the rhythm decides the pathway: shockable rhythms need early defibrillation, non-shockable rhythms need compressions and adrenaline per protocol (Resuscitation Council UK).",
+   "say": "Recognise arrest, call for help and start high-quality compressions with minimal interruption. Attach the defibrillator early, because the rhythm decides the pathway.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Recognise + call"
+     },
+     {
+      "id": "b",
+      "label": "Compressions"
+     },
+     {
+      "id": "c",
+      "label": "Defibrillator: shockable?"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **ventricular fibrillation or pulseless ventricular tachycardia**, defibrillate promptly and resume compressions immediately after each shock. In **asystole or pulseless electrical activity**, continue compressions and give protocol drugs while hunting reversible causes. Rotate compressors, use capnography where available, and keep interruptions to seconds, not minutes.",
+   "say": "Shockable rhythms are defibrillated promptly with compressions resumed at once. Non-shockable rhythms need compressions, protocol drugs and a hunt for reversible causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rhythm",
+     "Priority"
+    ],
+    "rows": [
+     [
+      "VF / pulseless VT",
+      "Defibrillate + compressions"
+     ],
+     [
+      "Asystole / PEA",
+      "Compressions + cause hunt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The reversible causes are the **four Hs and four Ts**: hypoxia, hypovolaemia, hypo- or hyperkalaemia and metabolic upset, hypothermia; tension pneumothorax, tamponade, toxins and thrombus. Treat the cause you find, involve critical care early, and after return of circulation move to structured post-resuscitation care rather than stopping at a pulse.",
+   "say": "Treat reversible causes, the four Hs and four Ts, and move to structured post-resuscitation care once circulation returns.",
+   "vis": null
+  }
+ ]
+}

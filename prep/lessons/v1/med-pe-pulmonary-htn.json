@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "med-pe-pulmonary-htn",
+ "subject": "medicine",
+ "title": "Pulmonary embolism: suspect it, risk-stratify, anticoagulate",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Pulmonary embolism** presents with breathlessness, pleuritic pain, tachycardia, haemoptysis or syncope, and it is missed because every one of those has commoner causes. Suspect it after surgery, immobility, cancer, pregnancy or previous clots, and assess **clinical probability** formally rather than by instinct. A negative D-dimer helps only in low-probability patients; imaging confirms the diagnosis (ESC guidance; NICE NG191).",
+   "say": "Suspect embolism with breathlessness or pleuritic pain after surgery, immobility, cancer or pregnancy, and score clinical probability formally.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect PE"
+     },
+     {
+      "id": "b",
+      "label": "Score probability"
+     },
+     {
+      "id": "c",
+      "label": "D-dimer or imaging"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A patient with embolism and **hypotension or shock** has high-risk disease needing urgent senior, critical-care and reperfusion assessment. Stable patients are **anticoagulated promptly** where suspicion is high and bleeding risk allows, without waiting for every test. Look for right-heart strain, document bleeding risk, and arrange follow-up for clot and cancer screening as guided.",
+   "say": "Hypotension makes embolism high-risk and urgent. Stable patients with high suspicion are anticoagulated promptly when bleeding risk allows.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "State",
+     "Priority"
+    ],
+    "rows": [
+     [
+      "Shocked",
+      "Senior + reperfusion assessment"
+     ],
+     [
+      "Stable, high suspicion",
+      "Prompt anticoagulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Leg ultrasound, CT pulmonary angiography and echocardiography each answer different questions, so choose by probability, stability and local protocol. After treatment, explain the clot, the medicine plan and its duration, bleeding precautions and when to seek help, and document the shared decision. Recurrent breathlessness on treatment is a new emergency, not reassurance.",
+   "say": "Choose imaging by probability and stability, and explain the treatment plan, bleeding precautions and return advice.",
+   "vis": null
+  }
+ ]
+}

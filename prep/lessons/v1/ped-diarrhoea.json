@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "ped-diarrhoea",
+ "subject": "paediatrics",
+ "title": "Paediatric dehydration: assess, rehydrate orally first, recheck",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Dehydration** in children is graded by thirst, eyes, tears, skin pinch, urine output, alertness and perfusion, because weight-based guesses mislead. Most dehydrated children are rehydrated with **oral rehydration solution in small frequent amounts**, continuing breastfeeding and feeds as advised. Shock (cold peripheries, weak pulse, reduced consciousness) needs urgent intravenous resuscitation and senior help (NICE NG84; WHO guidance).",
+   "say": "Grade dehydration by eyes, tears, skin pinch, urine and alertness. Oral rehydration first; shock needs urgent intravenous care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess dehydration"
+     },
+     {
+      "id": "b",
+      "label": "ORS small + frequent"
+     },
+     {
+      "id": "c",
+      "label": "Shock? IV + senior help"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vomiting is managed with small, frequent sips rather than large drinks, and anti-diarrhoeal drugs have no routine place in children. **Blood in stool, bile-stained vomiting, severe pain or a very young infant** changes the pathway and needs senior assessment. Reassess hydration after every rehydration phase; the plan changes with the child, not the clock alone.",
+   "say": "Small frequent sips beat large drinks. Blood, bile, severe pain or a young infant means senior assessment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Continue ORS",
+     "Escalate"
+    ],
+    "rows": [
+     [
+      "Improving, drinking",
+      "Blood, bile, severe pain, shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parents are taught the volumes, the pace and the danger signs (fewer wet nappies, sunken eyes, unusual sleepiness, blood in stool) before discharge, with written advice. Exact millilitre-per-kilogramme calculations follow current NICE and WHO charts at the bedside and are flagged here rather than approximated.",
+   "say": "Teach parents volumes, pace and danger signs in writing. Exact calculations follow bedside charts, not approximation.",
+   "vis": null
+  }
+ ]
+}

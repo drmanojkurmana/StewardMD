@@ -1,0 +1,82 @@
+{
+ "v": 1,
+ "module": "sur-atls",
+ "subject": "surgery",
+ "title": "ATLS primary survey: airway, breathing, circulation, disability, exposure",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**ATLS** assesses the injured patient in a fixed order because the fastest killers are treated first: **Airway** with cervical spine protection, **Breathing**, **Circulation** with haemorrhage control, **Disability** and **Exposure** with temperature control. A problem found at any step is treated before moving on, and the survey is repeated after every intervention or deterioration (ATLS).",
+   "say": "Assess airway, breathing, circulation, disability and exposure in that order, treating each problem before moving on.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Airway + C-spine"
+     },
+     {
+      "id": "b",
+      "label": "Breathing"
+     },
+     {
+      "id": "c",
+      "label": "Circulation"
+     },
+     {
+      "id": "d",
+      "label": "Disability"
+     },
+     {
+      "id": "e",
+      "label": "Exposure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "External bleeding is controlled with **direct pressure, packing, tourniquets and pelvic binders** as appropriate, alongside large-bore access, blood samples and early blood products where indicated. A silent chest, tracheal deviation or collapsing blood pressure after chest injury demands immediate action for tension pneumothorax. Analgesia, antibiotics and tetanus cover follow the primary survey, never before it.",
+   "say": "Control external bleeding directly, get access and bloods, and act at once on tension pneumothorax signs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "First action"
+    ],
+    "rows": [
+     [
+      "External bleeding",
+      "Pressure, pack, tourniquet"
+     ],
+     [
+      "Tension signs",
+      "Immediate decompression per protocol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **secondary survey** is a head-to-toe examination with history, imaging and reassessment, and it happens only once the primary survey is stable. Reassess relentlessly: trauma patients deteriorate, occult bleeding hides in chest, abdomen, pelvis and long bones, and a falling conscious level after head injury is a neurosurgical emergency until proved otherwise.",
+   "say": "The head-to-toe secondary survey follows only a stable primary survey, with relentless reassessment for occult bleeding.",
+   "vis": null
+  }
+ ]
+}

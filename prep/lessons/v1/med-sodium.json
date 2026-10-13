@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "med-sodium",
+ "subject": "medicine",
+ "title": "Hyponatraemia: find the cause, correct slowly, watch the brain",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Hyponatraemia** is usually a water problem, not a salt shortage: excess water intake, SIADH from drugs or illness, vomiting, diuretics, heart or liver failure and adrenal failure all feature. Assess **volume state, medicines, urine and blood osmolality and thyroid and adrenal clues**, and grade symptoms, because confusion, seizures and coma mark severe disease needing senior help (European hyponatraemia guidance).",
+   "say": "Hyponatraemia is usually excess water. Assess volume, medicines and osmolality, and grade symptoms, because confusion and seizures mean severe disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low sodium"
+     },
+     {
+      "id": "b",
+      "label": "Volume + medicines + osmolality"
+     },
+     {
+      "id": "c",
+      "label": "Severe symptoms? Senior help"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Correction must be **slow and within guideline limits**: a rapid rise can cause osmotic demyelination and permanent brain injury, a risk highest in chronic, malnourished and alcohol-related cases. Hypertonic saline is reserved for severe symptoms under senior supervision with frequent sodium checks. Treat the cause (stop the culprit drug, replace true losses) and recheck sodium on schedule, not by feel.",
+   "say": "Correct slowly within guideline limits. Too-rapid correction can permanently injure the brain; hypertonic saline is for severe symptoms under senior care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Guard"
+    ],
+    "rows": [
+     [
+      "Rapid rise",
+      "Osmotic demyelination"
+     ],
+     [
+      "Severe symptoms",
+      "Senior-led hypertonic care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Never guess a correction rate from memory: use the current guideline and local protocol, document the plan and the recheck times, and hand over the latest sodium and trend. New confusion in a hyponatraemic patient is deterioration until proved otherwise. Exact limits are protocol territory and are flagged, not improvised, in this lesson.",
+   "say": "Use guideline limits and local protocol, document recheck times, and treat new confusion as deterioration.",
+   "vis": null
+  }
+ ]
+}

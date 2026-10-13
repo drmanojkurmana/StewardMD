@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "obg-ectopic",
+ "subject": "obstetrics-gynaecology",
+ "title": "Ectopic pregnancy: pain, bleeding, collapse; scan and resuscitate",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "An **ectopic pregnancy** implants outside the womb, usually in a tube, and kills by rupture and internal bleeding. Suspect it in any pregnant patient with **abdominal pain, vaginal bleeding, shoulder-tip pain, dizziness or collapse**. A positive pregnancy test with pain is an ectopic until imaging proves otherwise, however early the pregnancy (NICE NG126).",
+   "say": "Pain, bleeding, shoulder-tip pain or collapse in pregnancy means ectopic until imaging proves otherwise.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pregnancy + pain"
+     },
+     {
+      "id": "b",
+      "label": "Resuscitate + assess"
+     },
+     {
+      "id": "c",
+      "label": "Urgent scan"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A collapsed or shocked pregnant patient is resuscitated with access, bloods including group and save or crossmatch, and urgent senior and theatre involvement, without waiting for perfect imaging. Stable patients get an urgent **transvaginal scan**: an empty uterus with a positive test is a pregnancy of unknown location needing close follow-up, not discharge and forget. Document safety-netting precisely.",
+   "say": "Resuscitate the shocked patient and involve theatre early. An empty uterus on scan is a pregnancy of unknown location needing close follow-up.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "State",
+     "Priority"
+    ],
+    "rows": [
+     [
+      "Collapsed",
+      "Resuscitate + theatre"
+     ],
+     [
+      "Stable",
+      "Urgent scan + follow-up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment is surgical, medical with methotrexate in selected stable cases per protocol, or expectant in a few, decided by senior clinicians on scan, blood results and symptoms. Anti-D is considered for Rh-negative patients as guided. Every discharged patient with a pregnancy of unknown location leaves with clear return advice and a booked review.",
+   "say": "Senior clinicians choose surgery, methotrexate or expectant care by protocol, with clear return advice for every discharged patient.",
+   "vis": null
+  }
+ ]
+}

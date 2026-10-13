@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "ans-local-anaesthetics",
+ "subject": "anaesthesia",
+ "title": "Local anaesthetic toxicity: stop, lipid emulsion, prolonged resuscitation",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Local anaesthetic systemic toxicity** follows accidental intravascular injection or overdose, presenting with tingling, tinnitus, agitation or seizures, then cardiovascular collapse and arrhythmia. **Stop injecting at once**, call for help, support airway, breathing and circulation, and give **intravenous lipid emulsion per protocol** while resuscitation continues, which may need to be prolonged (Association of Anaesthetists guidance).",
+   "say": "Tingling, tinnitus or seizures after local anaesthetic mean stop injecting, call for help and give protocol lipid emulsion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stop injecting"
+     },
+     {
+      "id": "b",
+      "label": "Call + ABC support"
+     },
+     {
+      "id": "c",
+      "label": "Lipid emulsion per protocol"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention is dose discipline: calculate the maximum dose for the patient and drug, aspirate and inject incrementally, use ultrasound where trained, and watch the patient after every block. Lipid emulsion must be immediately available wherever local anaesthetics are given in significant doses. Seizures are controlled as guided while lipid and resuscitation proceed.",
+   "say": "Prevent toxicity by dose calculation, aspiration and incremental injection, with lipid emulsion always to hand.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prevent",
+     "Prepare"
+    ],
+    "rows": [
+     [
+      "Calculate, aspirate, increment",
+      "Lipid emulsion available"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiovascular collapse from toxicity can be resistant and prolonged, so resuscitation is not abandoned early and critical care is involved from the start. Document drug, concentration, volume, site and times exactly. Maximum-dose numbers follow current BNF and local charts, and are flagged here rather than memorised loosely.",
+   "say": "Resuscitation may be prolonged; document drug, volume, site and times exactly, and involve critical care early.",
+   "vis": null
+  }
+ ]
+}
