@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-haematinics",
+ "subject": "pharmacology",
+ "title": "Haematinics, growth factors and chelators",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Oral iron** (ferrous sulphate, fumarate; **empty stomach with vitamin C**, tea, antacids and calcium blocking, black stools expected, constipation managed) corrects deficiency with **Hb rising 2 g in 4 weeks**; failure reviews bleeding, compliance and malabsorption (hookworm, piles, menorrhagia, PPI). **IV iron** (ferric carboxymaltose, iron sucrose; intolerance, malabsorption, ongoing loss, CKD, pregnancy beyond first trimester; **hypophosphataemia** with FCM, anaphylaxis watched) replenishes fast. Ferritin with transferrin saturation diagnoses; thalassaemia trait (normal RDW, HbA2 high) never irons.",
+   "say": "Black stools expected on iron: empty stomach vitamin C helps. Hb up 2 in 4 weeks or hunt bleeders.",
+   "vis": null
+  },
+  {
+   "tx": "**B12** (pernicious anti intrinsic factor, vegan, ileal disease; **high dose oral rivals IM** except neuro deficit which injects urgently, lifelong pernicious) with **folate** (pregnancy **4 mg high risk** neural tube, haemolysis demand, methotrexate rescue by **leucovorin**, B12 first as folate alone worsens cords) corrects megaloblastosis; reticulocytosis confirms. **Leucovorin** rescues methotrexate toxicity and 5FU boosts; **levoleucovorin** purifies. Homocysteine with methylmalonic sorts combined lack.",
+   "say": "Folate alone worsens B12 cords: replace B12 first. High risk pregnancy folate 4 mg; methotrexate needs leucovorin rescue.",
+   "vis": null
+  },
+  {
+   "tx": "**Erythropoietin** (CKD anaemia, chemo anaemia; **Hb target under 11.5** as higher clots and strokes, hypertension watched, iron replete first, **darbepoetin** longer) with **G-CSF** (**filgrastim** neutropenia, bone pain, leukapheresis mobilisation; **pegfilgrastim** single shot) and **GM-CSF** (macrophage, capillary leak) support marrow; **TPO mimetics** (**eltrombopag**, romiplostim: ITP second line, liver watched, rebound thrombocytopenia) raise platelets. Pure red cell aplasia (anti EPO antibodies) stops drug.",
+   "say": "EPO Hb capped under 11.5 or clots: iron first. Filgrastim aches bones mobilising stem cells.",
+   "vis": null
+  },
+  {
+   "tx": "**Hydroxyurea** (sickle cell raising **HbF**, crises with chest and priapism down, myelosuppression with leg ulcers watched) with **iron chelators** (**deferoxamine** infusion with ocular and auditory toxicity, growth delay; **deferiprone** oral with **agranulocytosis** weekly ANC; **deferasirox** oral with renal Fanconi watched) manages overload (thalassaemia major, ferritin with cardiac T2 star guiding). Luspatercept (thalassaemia, MDS ring sideroblasts) adjuncts; transfusion thresholds individualise.",
+   "say": "Sickle crises fall as HbF rises on hydroxyurea. Chelate overload: deferoxamine infuses, deferiprone watches counts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blood drug",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Iron oral",
+      "Empty C",
+      "Hb 2 in 4wk"
+     ],
+     [
+      "B12",
+      "IM neuro",
+      "Folate second"
+     ],
+     [
+      "EPO",
+      "Hb under 11.5",
+      "Clots"
+     ],
+     [
+      "Deferiprone",
+      "Oral chelator",
+      "ANC weekly"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-271",
+  "bk2-phm-272",
+  "bk2-phm-273",
+  "bk2-phm-274",
+  "bk2-phm-275",
+  "bk2-phm-276",
+  "bk2-phm-277",
+  "bk2-phm-278",
+  "bk2-phm-279",
+  "bk2-phm-280"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-thyroid",
+ "subject": "pharmacology",
+ "title": "Thyroid drugs: levothyroxine, antithyroids, storm and coma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Levothyroxine** (T4 prohormone, narrow therapeutic index, **morning empty stomach** 30 to 60 minutes before food, **iron, calcium and PPI spacing** 4 hours, dose by weight with elderly and cardiac starting low) treats hypothyroidism to TSH normalisation; overreplacement fibrillates atria and thins bones. Amiodarone (iodine load, type I hyperthyroid versus type II destructive, beta blockade with steroids), lithium and TKIs disturb function requiring TSH watched. Myxoedema coma (hypothermia with bradycardia) loads IV.",
+   "say": "Empty stomach dawn thyroxine, minerals hours apart. Overreplace and atria fibrillate, bones thin.",
+   "vis": null
+  },
+  {
+   "tx": "**Antithyroids** (carbimazole or methimazole: **agranulocytosis** with sore throat warning and CBC, hepatotoxicity, teratogenic switching to **PTU first trimester**; PTU hepatotoxic second line) block synthesis (weeks to euthyroid, stores deplete slowly); **radioiodine** (definitive Graves, **pregnancy and breastfeeding banned**, ophthalmopathy worsening with steroids covered, lifelong hypothyroidism expected) and surgery (large goitre, cancer, second trimester pregnancy) complete. Beta blockers (propranolol) bridge symptoms and storm.",
+   "say": "Sore throat on carbimazole is agranulocytosis: CBC now. First trimester hyperthyroid is PTU; radioiodine never pregnant.",
+   "vis": null
+  },
+  {
+   "tx": "**Thyroid storm** (fever with agitation, tachycardia, heart failure, Burch-Wartofsky scoring) is cocktail treated: **PTU load** (blocks new synthesis plus T4 to T3 conversion), **iodine** (Lugol or SSKI an hour later blocking release), **steroids** (conversion blockade with adrenal support), **propranolol** (adrenergic storm), **cholestyramine** (enterohepatic recycling), cooling with fluids. ICU with trigger (infection, DKA, surgery) hunted; plasmapheresis refractory.",
+   "say": "Storm cooks agitated tachycardic: PTU, then iodine an hour later, steroids, propranolol. Iodine first traps hormone.",
+   "vis": null
+  },
+  {
+   "tx": "**Myxoedema coma** (hypothermia, bradycardia, hypoventilation with hyponatraemia, precipitated by infection, sedatives, cold) is loaded IV thyroxine (**steroids before** covering adrenal insufficiency) with ventilation and warming (blankets, not aggressive); hyponatraemia fluids restrict. **Subclinical hypothyroidism** (TSH high, T4 normal) treats when over 10, pregnant, antibody positive or symptomatic; subclinical hyperthyroidism (low TSH) watches cardiac and bone. Amiodarone hypothyroidism replaces through.",
+   "say": "Cold slow comatose hypothyroid is myxoedema: steroids then IV thyroxine, warm gently. TSH over 10 treats.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Thyroid drug",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Levothyroxine",
+      "Empty dawn",
+      "Spacing minerals"
+     ],
+     [
+      "Carbimazole",
+      "Blocks synthesis",
+      "Agranulocytosis"
+     ],
+     [
+      "PTU",
+      "First trimester",
+      "Liver"
+     ],
+     [
+      "Radioiodine",
+      "Definitive Graves",
+      "Never pregnant"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-231",
+  "bk2-phm-232",
+  "bk2-phm-233",
+  "bk2-phm-234",
+  "bk2-phm-235",
+  "bk2-phm-236",
+  "bk2-phm-237",
+  "bk2-phm-238",
+  "bk2-phm-239",
+  "bk2-phm-240"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
