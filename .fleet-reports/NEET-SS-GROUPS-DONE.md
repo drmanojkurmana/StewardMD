@@ -140,3 +140,8 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 
 - 399 verified ($0 API, 399/400, dropped maikss93[30]), R2 live: critical care 115->165, cardiology 119->169, neurology 120->170, nephrology 117->167, gastroenterology 120->169, hepatology 120->170, oncology 120->170, neonatology 129->179. Paediatric group total ~1,340 (floor 1,000 passed).
 - Cumulative VOLUME run: 3,083 verified items in batches 3-10 (8 PRs). Remainder ~5,170 to 300/subject. Pending lead: `node tools/prep-ids.mjs publish --yes`.
+
+## VOLUME phase batch 11 (2026-10-13): lowest subjects +50
+
+- 399 verified ($0 API, 399/400, dropped maikss104[0]), R2 live: paediatric anaesthesia 115->165, virology 115->165, onco-pathology 128->178, head-neck 130->180, clinical pharmacology 139->189, geriatric MH 130->180, child-adolescent psych 127->177, CTVS 198->247.
+- Cumulative VOLUME run: 3,482 verified items in batches 3-11 (9 PRs). Remainder ~4,770 to 300/subject. Pending lead: `node tools/prep-ids.mjs publish --yes`.
