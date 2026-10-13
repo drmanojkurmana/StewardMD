@@ -171,3 +171,8 @@
 - Branch books2-pharma3 from origin/main post-OPH1-merge, PR #1592 open (no merge; squash after browser job). 10 lessons + 10 KB + 100 MCQs bk2-phm-221..320 (oral-antidiabetics, thyroid, pituitary, contraceptives-uterine, bone-calcium, haematinics, antiplatelets-fibrinolytics, beta-lactams, protein-synthesis-inhibitors, other-antibacterials).
 - Gates: LP.checkLesson 10/10, kb_validate_v2 10/10, prep-books-mcqs 2/2, prep-lessons 23/23. 100 IDs unique, no dups. maikbook2 1180 -> 1280, no rebase needed.
 - STATE2/COVERAGE2 updated + mirrors. Next: PHARMA4 (8 modules).
+## Wave PHARMA4 (2026-10-13, muse Wonder): pharmacology 28/28 COMPLETE
+- Branch books2-pharma4 from origin/main (post-OPH1, pre-OPH2-merge), PR #1593 open (no merge; squash after browser job + rebase 1260->1360). Final 8 modules + 8 KB + 80 MCQs bk2-phm-321..400 (antifungals, antivirals, antiretrovirals, antimalarials, targeted-anticancer, immunosuppressants, chelators-antidotes, vitamins-dermatology).
+- FIRST WAVE IN NEW v1 FORMAT (post-#1575): lessons {v,module,quiz,gen,run,model,checks}, KB {name,aliases,system,specialty,referenceOnly,review,reference}, overlays {topic,set,v,items+licence meta}, index modules dict, counts sets.maikbook2.pharmacology.
+- Gates: LP.checkLesson 8/8, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay match 8/8. 80 IDs unique, no dups. maikbook2 1180 -> 1260.
+- STATE2/COVERAGE2 updated + mirrors. Tripathi chunks done (delete /tmp/books2-work/tripathi/ on lead confirm). Next: original-15 queue or batch2-part2 gaps; derm/ortho/vascular blocked on books.
