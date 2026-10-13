@@ -1,90 +1,60 @@
 {
- "v": 1,
- "module": "med-potassium",
- "subject": "medicine",
- "title": "Hyperkalaemia: protect the heart, shift potassium, then remove it",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "**Hyperkalaemia** threatens the heart. ECG changes progress from peaked T waves to widened QRS and sine-wave patterns, but a normal ECG does not exclude danger. Confirm the result is not haemolysed, stop potassium sources and potassium-sparing drugs, and treat urgently when there are ECG changes or very high levels (UK Kidney Association guidance).",
-   "say": "Hyperkalaemia threatens the heart. ECG changes progress from peaked T waves to a widened QRS, but a normal ECG does not exclude danger. Exclude haemolysis, stop potassium sources, and treat urgently with ECG changes or very high levels.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Confirm + ECG"
-     },
-     {
-      "id": "b",
-      "label": "Protect heart"
-     },
-     {
-      "id": "c",
-      "label": "Shift, then remove"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Treatment has three limbs in order. **Protect**: intravenous calcium stabilises the myocardium when ECG changes are present; it does not lower potassium. **Shift**: insulin with glucose (and a beta-agonist where used) moves potassium into cells temporarily. **Remove**: potassium binders, diuretics or dialysis remove potassium from the body. Recheck levels, because shifting wears off and potassium rebounds.",
-   "say": "Treatment has three limbs. Protect: intravenous calcium stabilises the heart when ECG changes are present. Shift: insulin with glucose moves potassium into cells temporarily. Remove: binders, diuretics or dialysis remove potassium. Recheck levels, because shifting wears off.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Limb",
-     "Action"
-    ],
-    "rows": [
-     [
-      "Protect",
-      "IV calcium (ECG changes)"
-     ],
-     [
-      "Shift",
-      "Insulin with glucose"
-     ],
-     [
-      "Remove",
-      "Binder, diuretic or dialysis"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Hypokalaemia kills too, through arrhythmia, ileus and weakness, and it worsens digoxin toxicity. Replace with rate limits, recheck magnesium, and never give rapid intravenous pushes of concentrated potassium. In DKA, check potassium before insulin: insulin drives potassium into cells and can precipitate collapse if levels are already low.",
-   "say": "Hypokalaemia kills too, through arrhythmia and weakness, and it worsens digoxin toxicity. Replace with rate limits and recheck magnesium. In DKA, check potassium before insulin, because insulin can precipitate collapse if levels are already low."
+  "v": 1,
+  "module": "med-potassium",
+  "subject": "medicine",
+  "title": "Potassium, magnesium and phosphate emergencies",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**History** (**weakness** ascending paralysis arrhythmia, **cramps** tetany perioral CKD diuretics, **losses** vomiting diarrhoea laxatives, **DKA** insulin shifts intracellular, **refeeding** phosphate crash starved, **alcohol** Mg wasting seizures, **drugs** ACE trimethoprim heparin, **oliguria** AKI retains) with **viva** (**hyperkalaemic** peaked arrest, **hypocalcaemic** Trousseau seizer) profiles; **diet** (supplements salt substitutes) asks. Electrolytes swing.",
+      "say": "Weaknesses cramps losses DKAs is history: refeedings crash alcohols waste drugs raise oligurias retain diets ask hyperkalaemics peak hypocalcaemics seize shifts run. Salts swing.",
+      "vis": null
+    },
+    {
+      "tx": "**Examination** (**ECG** peaked T flattened P wide QRS sine, **Chvostek** Trousseau tetany taps, **reflexes** hypo Mg hypoactive, **vitals** arrest bradycardia, **muscle** weakness grips, **seizures** eclampsia guards, **oedema** CKD overload) with **bedside** (**ABG** acidosis shifts, **ionised** calcium Mg phosphate, **repeat** haemolysed platelets) gases; **torsades** (Mg low warns) watches. Hearts peak.",
+      "say": "ECGs Chvosteks reflexes vitals is exam: muscles weaken seizures guard oedemas pit gases shift ionised measure repeats rule torsades warn magnesiums guard rhythms watch. Traces spike.",
+      "vis": null
+    },
+    {
+      "tx": "**Investigations** (**potassium** trends haemolysis rules, **Mg** phosphate calcium panels, **ABG** pH shifts intracellular, **ECG** monitoring continuous, **creatinine** CKD AKI retains, **glucose** insulin drives) with **differentials** (**pseudo** haemolysed platelets, **shift** alkalotic insulin, **depleted** diarrhoeal diuretic, **retained** oliguric ACE) sorts; **critical** (calcium now decides) meets. Ions shift.",
+      "say": "Potassiums Mgs ABGs ECGs is Ix: creatinines retain glucoses drive pseudos rule shifts move depleted drain retained block criticals meet calciums guard dialyses plan. Levels swing.",
+      "vis": null
+    },
+    {
+      "tx": "**Management** (**calcium** protects membranes ECG, **shift** insulin-glucose salbutamol bicarbonate, **remove** patiromer dialysis binds, **Mg** torsades seizures replaces, **phosphate** refeeding replaces watches, **stop** ACE trimethoprim) with **traps** (**arrest** unmonitored kills, **rebound** glucose watches, **refeeding** slow thiamine) closes; **follow** (ions ECG kidneys) tracks. Ions steady.",
+      "say": "Calciums shifts removes Mgs is Rx: phosphates replace stops cease arrests guard rebounds watch refeedings slow follows track rhythms ease wishes respect. Hearts settle.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-361",
+    "bk2-med-362",
+    "bk2-med-363",
+    "bk2-med-364",
+    "bk2-med-365",
+    "bk2-med-366",
+    "bk2-med-367",
+    "bk2-med-368",
+    "bk2-med-369",
+    "bk2-med-370"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon4",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ],
- "quiz": [
-  "mk-gap501",
-  "mk-gap502",
-  "mk-gap504"
- ],
- "src": [
-  "kb-diseases-hyperkalemia"
- ],
- "refs": [
-  "UK Kidney Association clinical practice guideline: treatment of acute hyperkalaemia in adults"
- ],
- "gen": "hand",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "second_pass": "gap-audit-1013 re-read 2026-10-13"
- }
 }
