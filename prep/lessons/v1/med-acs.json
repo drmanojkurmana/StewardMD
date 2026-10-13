@@ -1,61 +1,60 @@
 {
- "v": 1,
- "module": "med-acs",
- "subject": "medicine",
- "title": "ACS and STEMI: aspirin, ECG fast, reperfuse the occluded artery",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "**Acute coronary syndrome** spans STEMI, NSTEMI and unstable angina. Central crushing chest pain with sweating, nausea or breathlessness needs an **ECG within minutes** and continuous monitoring, because ventricular fibrillation kills early. Give **aspirin promptly** unless truly allergic, and treat pain and breathlessness (NICE NG185; ESC guidance).",
-   "say": "Acute coronary syndrome needs an ECG within minutes and continuous monitoring. Give aspirin promptly unless truly allergic.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Chest pain"
-     },
-     {
-      "id": "b",
-      "label": "ECG in minutes"
-     },
-     {
-      "id": "c",
-      "label": "STEMI? Reperfuse"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**STEMI** with ST elevation needs immediate reperfusion: **primary angioplasty** where timely, otherwise **thrombolysis** without delay. NSTEMI is risk-scored with troponin trends for timed angiography. Add guideline antiplatelet, anticoagulant and statin therapy per protocol, and watch for arrhythmia, heart failure and mechanical complications in the first days.",
-   "say": "STEMI needs immediate reperfusion by angioplasty or thrombolysis. NSTEMI is risk-scored with troponin for timed angiography.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "STEMI",
-     "NSTEMI"
-    ],
-    "rows": [
-     [
-      "Reperfuse now",
-      "Risk-score, timed angiography"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Troponin rises and falls in many conditions (sepsis, renal failure, PE), so interpret it with the story and ECG, never alone. A normal first troponin does not exclude infarction early. After ACS, secondary prevention (antiplatelet, statin, beta-blocker and ACE inhibitor where indicated, smoking cessation, rehab) prevents the next event.",
-   "say": "Interpret troponin with the story and ECG, never alone. A normal first troponin does not exclude early infarction."
+  "v": 1,
+  "module": "med-acs",
+  "subject": "medicine",
+  "title": "Acute coronary syndromes",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**History** (**crushing** 20 minutes retrosternal, **radiation** arm neck jaw epigastric, **sweats** nausea vomiting dyspnoea, **onset** exertion rest nocturnal, **relief** GTN partial unstable, **risks** prior angina diabetes sudden family, **cocaine** young dissects, **aortic** tearing migrates back) with **triage** (**pain** now scores, **vitals** shock killip, **ECG** 10-minute rule) races; **troponin** (rise fall deltas) defines. Pains race.",
+      "say": "Crushings radiations sweats onsets reliefs risks cocaines aortics is history: pains score vitals shock ECGs race troponins delta failures kill. Chests crush.",
+      "vis": null
+    },
+    {
+      "tx": "**Examination** (**pale** clammy hypotensive, **pulse** thready arrhythmic, **JVP** raised RV fails, **crackles** Killip grades failure, **murmurs** VSR MR acute, **pericardial** rub Dressler late, **neuro** gaze speech strokes, **bleeds** access DAPT) with **bedside** (**ECG** ST elevations reciprocal, **monitor** VT VF blocks, **echo** wall shock) scans; **shock** (cold mottled oliguric) flags. Bodies scan.",
+      "say": "Pales pulses JVPs crackles murmurs rubs neuros bleeds is exam: ECGs elevate monitors alarm echos stun shocks mottle failures grade. Hands shock.",
+      "vis": null
+    },
+    {
+      "tx": "**Management** (**MONA** morphine oxygen nitrates aspirin, **ticagrelor** prasugrel clopidogrel bleeds, **heparin** fondaparinux lines, **PCI** door-balloon 90 lysis 30, **CABG** shock multivessel, **statin** ACE beta early, **complications** rupture shock blocks) with **windows** (**lyse** 12 hours no PCI, **rescue** failed lysis, **facilitated** never routine) times; **DAPT** (12 months stents) duals. Clocks time.",
+      "say": "MONAs ticagrelors heparins PCIs CABGs statins is Rx: twelves lyse rescues fail facilitated bans DAPTs dual stents guard shocks support. Arteries open.",
+      "vis": null
+    },
+    {
+      "tx": "**Counsel** (**smoking** quits halves, **rehab** monitored exercise, **driving** 1 month rules, **sex** stairs counsel, **depression** screens treats, **diabetes** tight lipids LDL, **follow** echo EF devices) with **traps** (**Dressler** weeks rub steroids, **aneurysm** LV clots anticoagulate, **VSR** harsh shock operates, **no NSAIDs** rupture risks) closes; **registry** (audits delays) tracks. Lives counsel.",
+      "say": "Quits rehabs drives sexes depressions diabetics is counsel: Dresslers weeks aneurysms clot VSRs harsh NSAIDs rupture registries audit delays track stents watch. Futures guard.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-011",
+    "bk2-med-012",
+    "bk2-med-013",
+    "bk2-med-014",
+    "bk2-med-015",
+    "bk2-med-016",
+    "bk2-med-017",
+    "bk2-med-018",
+    "bk2-med-019",
+    "bk2-med-020"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }
