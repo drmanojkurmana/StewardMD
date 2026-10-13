@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "psy-schizophrenia",
+ "subject": "psychiatry",
+ "title": "Schizophrenia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Schizophrenia** is a psychotic disorder of perception, belief, thought form, motivation and cognition typically beginning in late adolescence or early adulthood, with men earlier than women. Diagnosis needs characteristic psychotic symptoms with functional decline over at least six months (DSM pattern) after excluding mood psychosis, substances and medical causes. No single symptom is pathognomonic; Schneider first rank symptoms occur but are not exclusive.",
+   "say": "Schizophrenia starts young, lasts months, impairs function. No single symptom proves it; exclude mood, drugs and disease first.",
+   "vis": null
+  },
+  {
+   "tx": "**Positive symptoms** (delusions, hallucinations, disorganisation) reflect excess or distortion of normal function and respond best to dopamine blockade. **Negative symptoms** (flattening, alogia, avolition, anhedonia, asociality) reflect lost function, dominate long term disability and respond poorly. Cognitive impairment in memory, executive function and processing speed is core and present from first episode, driving educational failure.",
+   "say": "Positive symptoms add distortions and treat well. Negative and cognitive deficits disable and treat poorly.",
+   "vis": null
+  },
+  {
+   "tx": "The **dopamine hypothesis** in modern form proposes presynaptic striatal dopamine excess driving positive symptoms (aberrant salience), with cortical dopamine and glutamate NMDA hypofunction contributing negative and cognitive features. All effective antipsychotics block D2 receptors; clozapine's superior efficacy in resistance remains partly unexplained. Neurodevelopmental origins (obstetric complications, adolescent synaptic pruning, cannabis and stress interaction) precede symptoms by years with prodromal social withdrawal.",
+   "say": "Too much striatal dopamine drives positive symptoms. Antipsychotics block D2. Development goes off track years before psychosis.",
+   "vis": null
+  },
+  {
+   "tx": "Antipsychotics are first line, chosen by side effect profile (local formulary), continued at least one to two years after first episode to prevent relapse, and switched after adequate failed trials. **Clozapine** is mandatory after two failed antipsychotics (treatment resistance) with blood monitoring for agranulocytosis. Long acting injections aid covert nonadherence. Psychosocial care (family intervention, supported employment, CBT for psychosis) halves relapse beyond drugs alone, and physical health monitoring counters the 15 to 20 year mortality gap.",
+   "say": "Keep antipsychotics years after first episode. Two failures earn clozapine. Family and work support halve relapses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Features",
+     "Drug response"
+    ],
+    "rows": [
+     [
+      "Positive",
+      "Delusions, hallucinations, disorganisation",
+      "Good D2 blockade response"
+     ],
+     [
+      "Negative",
+      "Avolition, alogia, flattening, anhedonia",
+      "Poor; rehabilitation focus"
+     ],
+     [
+      "Cognitive",
+      "Memory, executive, speed deficits",
+      "Poor; remediation research"
+     ],
+     [
+      "Affective",
+      "Depression, suicide risk about 5 percent lifetime",
+      "Treat comorbidity directly"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-011",
+  "bk2-psy-012",
+  "bk2-psy-013",
+  "bk2-psy-014",
+  "bk2-psy-015",
+  "bk2-psy-016",
+  "bk2-psy-017",
+  "bk2-psy-018",
+  "bk2-psy-019",
+  "bk2-psy-020"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

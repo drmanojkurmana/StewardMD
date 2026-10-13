@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "psy-psychopathology",
+ "subject": "psychiatry",
+ "title": "Psychopathology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Psychopathology** is the precise description of abnormal mental experience, behaviour and cognition, recorded without premature diagnosis. Form (how a symptom is structured) matters more than content (its theme): a belief is classified by fixity and plausibility, not by whether its topic is persecution or jealousy. Accurate description drives reliable diagnosis across clinicians.",
+   "say": "Describe symptoms by form, not theme. Fixity and plausibility classify a belief, not its topic.",
+   "vis": null
+  },
+  {
+   "tx": "**Delusions** are fixed false beliefs held with absolute conviction despite contradictory evidence and not shared by the person's culture. Primary delusions arrive fully formed (delusional percept attaches delusional meaning to a normal perception), while secondary delusions elaborate from mood or hallucinations. Delusional mood, misidentification (Capgras: familiar person replaced by impostor; Fregoli: stranger is familiar person in disguise) and somatic, grandiose, persecutory and referential themes recur in examinations.",
+   "say": "Fixed, unshakeable, culturally alien beliefs are delusions. Capgras says impostor; Fregoli says disguised familiar.",
+   "vis": null
+  },
+  {
+   "tx": "**Hallucinations** are perceptions without external stimulus, experienced as real and in external space, distinguished from illusions (misinterpretation of a real stimulus), pseudohallucinations (recognised as internal, in inner space) and hypnagogic or hypnopompic phenomena on sleep borders which are normal. Auditory hallucinations dominate psychosis; visual hallucinations suggest organic disease; tactile formication suggests stimulant or alcohol related states.",
+   "say": "Perception without stimulus is hallucination. Visual hallucinations point organic; misread real stimuli are illusions.",
+   "vis": null
+  },
+  {
+   "tx": "**Formal thought disorder** shows in speech structure: loosening of associations, tangentiality, circumstantiality, word salad, neologisms, clang associations, perseveration and thought block. Schneider first rank symptoms (thought insertion, withdrawal, broadcasting, third person and running commentary hallucinations, delusional perception, passivity) historically flagged schizophrenia but occur in other psychoses and no longer carry diagnostic primacy. Negative symptoms (affective flattening, alogia, avolition, anhedonia) predict function better than positive ones.",
+   "say": "Disordered speech form reveals thought disorder. First rank symptoms occur beyond schizophrenia. Negative symptoms drive disability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phenomenon",
+     "Stimulus",
+     "Insight and space"
+    ],
+    "rows": [
+     [
+      "Hallucination",
+      "Absent",
+      "Real, external space, no insight"
+     ],
+     [
+      "Illusion",
+      "Present but misread",
+      "Corrects with attention"
+     ],
+     [
+      "Pseudohallucination",
+      "Absent",
+      "Recognised internal, inner space"
+     ],
+     [
+      "Hypnagogic imagery",
+      "Sleep onset",
+      "Normal phenomenon"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-001",
+  "bk2-psy-002",
+  "bk2-psy-003",
+  "bk2-psy-004",
+  "bk2-psy-005",
+  "bk2-psy-006",
+  "bk2-psy-007",
+  "bk2-psy-008",
+  "bk2-psy-009",
+  "bk2-psy-010"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

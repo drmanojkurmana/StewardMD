@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "psy-opioids",
+ "subject": "psychiatry",
+ "title": "Opioid use disorder",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Opioid use disorder** is compulsive opioid use despite harm driven by mu receptor reward, tolerance and a withdrawal syndrome of dysphoria, lacrimation, rhinorrhoea, piloerection, mydriasis, diarrhoea, cramps and insomnia that is miserable but rarely medically dangerous in healthy adults (unlike alcohol withdrawal). Overdose kills by respiratory depression with miosis and reduced consciousness, reversed by **naloxone** titrated to ventilation, remembering its short half life against long acting opioids needs infusion or observation.",
+   "say": "Opioid withdrawal tortures but rarely kills; overdose kills by stopped breathing. Naloxone wears off before long opioids do.",
+   "vis": null
+  },
+  {
+   "tx": "Opioid substitution therapy with **methadone** (full agonist, supervised daily dosing initially, QT prolongation and accumulation cautions) or **buprenorphine** (partial agonist with ceiling on respiratory depression, sublingual, can precipitate withdrawal if started while full agonist occupies receptors) halves mortality, crime and HIV transmission. Treatment retention matters more than dose purity debates; psychosocial support and take home phases follow stability criteria in local programmes.",
+   "say": "Methadone full agonist supervised; buprenorphine partial with safety ceiling but can precipitate withdrawal if mistimed. Staying in treatment halves deaths.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Prescribing safety threads through all care: avoid co prescribed benzodiazepines and alcohol (overdose synergy), rotate and taper chronic pain opioids by function goals, supply take home naloxone to patients and families, and treat neonatal opioid withdrawal in exposed infants supportively with scoring guided therapy. Needle exchange, HIV and hepatitis testing and vaccination, wound and endocarditis vigilance form harm reduction core.",
+   "say": "Never stack opioids with benzodiazepines casually. Hand out naloxone. Harm reduction keeps people alive until recovery.",
+   "vis": null
+  },
+  {
+   "tx": "Detoxification alone without maintenance has high relapse and **lost tolerance overdose** risk, so maintenance is default for moderate severe disorder. Naltrexone (oral or depot) suits highly motivated abstinent patients (detoxified at least a week) such as professionals in monitoring programmes. Pain in maintained patients still deserves analgesia: continue substitution, add multimodal and titrated short acting opioids with specialist input rather than withholding.",
+   "say": "Detox alone relapses and lost tolerance kills. Maintained patients still deserve real pain relief.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Receptor action",
+     "Signature caution"
+    ],
+    "rows": [
+     [
+      "Methadone",
+      "Full mu agonist",
+      "QT prolongation, accumulation, supervised start"
+     ],
+     [
+      "Buprenorphine",
+      "Partial mu agonist",
+      "Precipitated withdrawal if induced early"
+     ],
+     [
+      "Naloxone",
+      "Mu antagonist rescue",
+      "Short half life: re sedation risk"
+     ],
+     [
+      "Naltrexone",
+      "Mu antagonist maintenance",
+      "Needs opioid free week, blocks analgesia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-081",
+  "bk2-psy-082",
+  "bk2-psy-083",
+  "bk2-psy-084",
+  "bk2-psy-085",
+  "bk2-psy-086",
+  "bk2-psy-087",
+  "bk2-psy-088",
+  "bk2-psy-089",
+  "bk2-psy-090"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
