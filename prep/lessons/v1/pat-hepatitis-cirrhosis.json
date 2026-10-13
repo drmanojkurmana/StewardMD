@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-hepatitis-cirrhosis",
+ "subject": "pathology",
+ "title": "Hepatitis, cirrhosis and liver failure",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Hepatitis** is hepatocyte injury with inflammation from viruses, alcohol, drugs, autoimmunity or ischaemia, ranging from silent enzyme rises to fulminant failure. Necrosis patterns matter: spotty lobular necrosis in acute viral disease, bridging necrosis linking vascular structures in severe attacks and interface hepatitis at limiting plates in chronic active disease. Recovery, chronicity or fulminant collapse depends on cause and host immunity.",
+   "say": "Hepatitis injures hepatocytes from viruses, alcohol, drugs or autoimmunity. Bridging necrosis means severe disease. Interface hepatitis marks chronic activity. Outcome depends on cause and immunity.",
+   "vis": null
+  },
+  {
+   "tx": "Viral serology decodes stage better than any single test, and examiners rotate these patterns. **HBsAg** marks hepatitis B infection, anti HBs marks immunity, IgM anti HBc marks acute infection and HBeAg marks high replication. Hepatitis C antibody needs RNA confirmation, while hepatitis A and E are faecal oral and usually acute except E in pregnancy and immunosuppression.",
+   "say": "Hepatitis B surface antigen means infection; surface antibody means immunity. IgM core antibody means acute disease. Hepatitis C needs RNA proof. A and E spread faecal orally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Meaning",
+     "Trap"
+    ],
+    "rows": [
+     [
+      "HBsAg positive",
+      "Current hepatitis B infection",
+      "Does not distinguish acute from chronic alone"
+     ],
+     [
+      "Anti HBs positive alone",
+      "Vaccine immunity",
+      "With anti HBc means past natural infection"
+     ],
+     [
+      "IgM anti HBc",
+      "Acute or recent hepatitis B",
+      "Window period may show this alone"
+     ],
+     [
+      "Anti HCV plus RNA",
+      "Active hepatitis C",
+      "Antibody alone may be cleared infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cirrhosis** is diffuse fibrosis with regenerative nodules destroying architecture from any chronic liver injury, irreversible once established though its cause may be treatable. Portal hypertension follows from increased intrahepatic resistance plus splanchnic vasodilation, producing ascites, splenorenal shunts with varices and splenomegaly. Synthetic failure lowers albumin and clotting factors while encephalopathy reflects gut derived neurotoxins bypassing detoxification.",
+   "say": "Cirrhosis scars the whole liver into nodules. Portal pressure rises causing ascites, varices and big spleen. Failed synthesis and detox cause clotting failure and encephalopathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compensated cirrhosis",
+     "points": [
+      "No ascites, variceal bleed, jaundice or encephalopathy yet",
+      "May be clinically silent with firm liver or splenomegaly",
+      "Treating cause prevents decompensation",
+      "Surveillance for varices and liver cancer"
+     ]
+    },
+    "right": {
+     "title": "Decompensated cirrhosis",
+     "points": [
+      "Ascites, bleeding, jaundice or encephalopathy present",
+      "Infections and kidney failure precipitate decline",
+      "Transplant assessment becomes urgent",
+      "Hepatocellular carcinoma risk persists"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Alcohol related hepatitis** adds steatosis, ballooned hepatocytes with Mallory Denk bodies and neutrophil rich inflammation, while metabolic dysfunction steatohepatitis mirrors it in obesity and diabetes without alcohol. Mallory bodies also appear in Wilson disease and drug injury, so they suggest rather than prove alcohol. Abstinence and metabolic control remain the disease modifying treatments.",
+   "say": "Alcohol hepatitis shows fat, ballooned cells, Mallory bodies and neutrophils. Metabolic steatohepatitis looks similar in obesity and diabetes. Mallory bodies suggest but do not prove alcohol.",
+   "vis": null
+  },
+  {
+   "tx": "Fulminant **acute liver failure** combines coagulopathy with encephalopathy in a liver without prior cirrhosis, classically from paracetamol overdose or viral hepatitis depending on region. Cerebral oedema kills early, so head positioning, infection surveillance and transplant referral cannot wait. Chronic failure instead declares itself through decompensation events and hepatorenal physiology.",
+   "say": "Acute liver failure means clotting failure plus encephalopathy without prior cirrhosis. Brain swelling kills early. Refer for transplant immediately while treating the cause.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-171",
+  "bk2-pat-172",
+  "bk2-pat-173",
+  "bk2-pat-174",
+  "bk2-pat-175",
+  "bk2-pat-176",
+  "bk2-pat-177",
+  "bk2-pat-178",
+  "bk2-pat-179",
+  "bk2-pat-180"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "pat-thyroid-parathyroid",
+ "subject": "pathology",
+ "title": "Thyroid and parathyroid disorders: goitre, cancer and calcium",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Thyroid enlargement** splits into diffuse goitre, multinodular goitre and solitary nodules whose cancer risk depends on age, radiation history, growth and ultrasound features rather than size alone. Iodine deficiency drives endemic goitre through chronic TSH stimulation. Fine needle aspiration triages nodules by Bethesda cytology categories guiding surgery or surveillance.",
+   "say": "Goitre may be diffuse, multinodular or a single nodule. Cancer risk follows ultrasound and history, not size alone. Needle aspiration triages nodules into action categories.",
+   "vis": null
+  },
+  {
+   "tx": "**Hashimoto thyroiditis** destroys the gland through lymphocytic infiltration with germinal centres and Hurthle cell change, causing painless goitre drifting into hypothyroidism with high anti TPO antibodies. Graves disease instead stimulates the TSH receptor with antibodies causing diffuse goitre, hyperthyroidism, eye disease and pretibial myxoedema. Riedel thyroiditis woody fibrosis is rare and invasive mimicking cancer.",
+   "say": "Hashimoto destroys thyroid with lymphocytes toward hypothyroidism. Graves stimulates it toward hyperthyroidism with eye disease. Antibodies and function separate destruction from stimulation.",
+   "vis": null
+  },
+  {
+   "tx": "**Papillary carcinoma** is commonest, arising often after radiation, spreading to neck nodes yet carrying excellent prognosis with orphan Annie eye nuclei, grooves and psammoma bodies. Follicular carcinoma invades capsule and vessels spreading by blood to bone and lung, diagnosed only on histological invasion since cytology cannot separate adenoma. Medullary carcinoma secretes calcitonin from C cells with amyloid stroma and MEN associations.",
+   "say": "Papillary cancer spreads to nodes with orphan Annie nuclei and psammoma bodies. Follicular cancer spreads by blood and needs invasion to diagnose. Medullary secretes calcitonin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cancer",
+     "Spread route",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "Papillary",
+      "Lymph nodes first",
+      "Orphan Annie nuclei, psammoma bodies, excellent prognosis"
+     ],
+     [
+      "Follicular",
+      "Blood to bone and lung",
+      "Capsular and vascular invasion defines cancer"
+     ],
+     [
+      "Medullary",
+      "Nodes and blood",
+      "Calcitonin, amyloid stroma, MEN2 link"
+     ],
+     [
+      "Anaplastic",
+      "Local invasion, rapid",
+      "Elderly, undifferentiated, poor prognosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Primary hyperparathyroidism** from a single parathyroid adenoma most often raises calcium with inappropriately high PTH causing stones, bones, abdominal groans and psychiatric moans. Secondary disease compensates for renal failure with gland hyperplasia, while tertiary disease becomes autonomous after long stimulation. Malignant hypercalcaemia from PTHrP suppresses PTH, separating cancer from parathyroid causes at once.",
+   "say": "One parathyroid adenoma usually causes primary hyperparathyroidism: stones, bones, groans and moans. Cancer hypercalcaemia suppresses PTH through PTHrP. PTH level splits the causes.",
+   "vis": null
+  },
+  {
+   "tx": "Parathyroid hormone raises calcium by bone resorption, renal calcium retention and vitamin D activation increasing gut absorption. **Hypoparathyroidism** after thyroid surgery causes tingling, Chvostek and Trousseau signs and prolonged QT from low calcium, while pseudohypoparathyroidism resists hormone action with high PTH and short metacarpals. Calcium, phosphate, PTH and vitamin D together decode every stem.",
+   "say": "PTH raises calcium from bone, kidney and gut. Surgical gland loss causes tingling and spasms. Resistant glands raise PTH with low calcium. Four tests decode calcium stems.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-201",
+  "bk2-pat-202",
+  "bk2-pat-203",
+  "bk2-pat-204",
+  "bk2-pat-205",
+  "bk2-pat-206",
+  "bk2-pat-207",
+  "bk2-pat-208",
+  "bk2-pat-209",
+  "bk2-pat-210"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

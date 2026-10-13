@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "pat-breast",
+ "subject": "pathology",
+ "title": "Breast pathology: benign lesions, carcinoma types and receptors",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Benign breast lumps follow age patterns examiners use as first filters. **Fibroadenoma** is a rubbery mobile biphasic tumour of young women that may grow in pregnancy, phyllodes tumours grow faster in older women with leaf like clefts and stromal overgrowth, while fibrocystic change causes cyclical bilateral lumpiness with cysts and apocrine metaplasia without true neoplasia.",
+   "say": "Young mobile rubbery lump means fibroadenoma. Fast growing older lump suggests phyllodes. Cyclical bilateral lumpiness is fibrocystic change. Age plus feel triages breast lumps.",
+   "vis": null
+  },
+  {
+   "tx": "**Ductal carcinoma in situ** is malignant epithelium confined inside ducts by myoepithelium, detected as mammographic calcifications, with comedo types showing central necrosis and higher grade. Paget disease of the nipple is in situ or invasive cancer spreading within nipple skin causing eczema like change that never heals as dermatitis should.",
+   "say": "In situ cancer stays inside ducts and calcifies on mammograms. Comedo types necrose centrally. Nipple eczema that never heals means Paget disease until proven otherwise.",
+   "vis": null
+  },
+  {
+   "tx": "**Invasive ductal carcinoma** not otherwise specified forms hard gritty desmoplastic masses graded by tubules, pleomorphism and mitoses. Invasive lobular carcinoma instead loses E cadherin, infiltrating in single Indian file lines that mammograms miss and spreading to peritoneum and meninges unusually. Tubular and mucinous special types carry better prognoses.",
+   "say": "Invasive ductal cancer makes hard desmoplastic lumps. Lobular cancer loses E cadherin, files singly, hides on imaging and spreads to odd serosal sites. Special types behave better.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour",
+     "Architecture clue",
+     "Behaviour"
+    ],
+    "rows": [
+     [
+      "Fibroadenoma",
+      "Biphasic glands and stroma, mobile",
+      "Benign; young women"
+     ],
+     [
+      "Phyllodes",
+      "Leaf like clefts, stromal overgrowth",
+      "Usually benign, can recur or rarely metastasise"
+     ],
+     [
+      "Invasive lobular",
+      "Indian file single cells, E cadherin lost",
+      "Occult imaging; serosal spread"
+     ],
+     [
+      "Medullary pattern",
+      "Syncytial sheets, lymphoid stroma",
+      "BRCA1 associated, paradoxically better outcome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Receptor profiling directs all modern breast therapy: **oestrogen and progesterone receptors** predict endocrine benefit, HER2 amplification predicts anti HER2 benefit, and triple negative cancers rely on chemotherapy with immunotherapy in selected cases. Prognosis combines stage, grade, receptors and nodal burden into treatment algorithms rather than histology alone.",
+   "say": "Receptors choose breast cancer drugs: hormone receptors for endocrine therapy, HER2 for targeted antibodies, triple negative for chemotherapy pathways. Stage plus biology decides treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Male breast cancer is uncommon, usually ductal and receptor positive, presenting late as a hard subareolar mass needing the same staging respect as female disease. **Inflammatory carcinoma** blocks dermal lymphatics causing red swollen peau d orange breast without a discrete lump, staged as advanced regardless of size. Axillary nodes remain the key prognostic station sampled by sentinel biopsy.",
+   "say": "Male subareolar hard masses need cancer workup. Red swollen peau d orange breast means inflammatory cancer blocking skin lymphatics. Sentinel nodes stage the axilla.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-191",
+  "bk2-pat-192",
+  "bk2-pat-193",
+  "bk2-pat-194",
+  "bk2-pat-195",
+  "bk2-pat-196",
+  "bk2-pat-197",
+  "bk2-pat-198",
+  "bk2-pat-199",
+  "bk2-pat-200"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

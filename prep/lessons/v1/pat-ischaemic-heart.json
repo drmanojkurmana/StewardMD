@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-ischaemic-heart",
+ "subject": "pathology",
+ "title": "Ischaemic heart disease: infarction patterns and complications",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Ischaemic heart disease** results when coronary supply fails myocardial demand, most often from atherosclerotic plaque disruption with thrombosis. Stable narrowing causes exertional angina, while unstable plaque events cause the acute coronary syndromes. Transmural infarction follows prolonged total occlusion, whereas subendocardial infarction follows partial or brief occlusion with global demand stress.",
+   "say": "Ischaemic heart disease is supply failing demand. Stable plaque causes exertional angina. Disrupted plaque causes acute syndromes. Total lasting occlusion infarcts the full wall; partial occlusion injures the subendocardium.",
+   "vis": null
+  },
+  {
+   "tx": "Infarct evolution follows a wavefront from **subendocardium outward**, because the inner wall faces highest pressure and poorest perfusion. Irreversible injury begins after about twenty to forty minutes and completes over hours without reperfusion, defining the salvage window. Coagulative necrosis with wavy fibres appears first, then neutrophils, macrophages and granulation tissue in sequence.",
+   "say": "Necrosis spreads outward from subendocardium over hours, so early reperfusion salvages outer wall. Wavy fibres come first, then neutrophils and macrophages. Timing questions follow this sequence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Time after occlusion",
+     "Microscopy",
+     "Exam clue"
+    ],
+    "rows": [
+     [
+      "Under 12 hours",
+      "Wavy fibres, early coagulative necrosis",
+      "Contraction bands with reperfusion"
+     ],
+     [
+      "1 to 3 days",
+      "Dense neutrophil infiltrate",
+      "Peak inflammation; soft yellow centre"
+     ],
+     [
+      "3 to 7 days",
+      "Macrophages clear debris",
+      "Wall weakest; rupture risk peaks"
+     ],
+     [
+      "Weeks",
+      "Granulation then collagen scar",
+      "Firm white scar; aneurysm may form"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mechanical complications cluster when necrotic wall is weakest several days after transmural infarction. **Free wall rupture** causes tamponade, papillary muscle rupture causes torrential mitral regurgitation and ventricular septal rupture causes a new shunt murmur. True aneurysm forms later from thinned scar that balloons paradoxically, while pseudoaneurysm is a contained rupture needing urgent surgery.",
+   "say": "Days three to seven the wall is weakest and ruptures: free wall tamponades, papillary muscle floods the lungs, septum shunts. Late scar balloons into true aneurysm. Contained rupture is surgical.",
+   "vis": null
+  },
+  {
+   "tx": "**Reperfusion** salvages muscle but itself injures through calcium overload, oxidative burst and microvascular obstruction, producing contraction band necrosis histologically. Arrhythmias follow reperfusion and scar formation, and sudden death is often the first presentation of coronary disease. Stunned myocardium recovers function over days despite restored flow after brief ischaemia.",
+   "say": "Reperfusion saves muscle yet causes contraction bands and arrhythmias. Sudden death may be the first symptom of coronary disease. Stunned muscle recovers slowly after brief ischaemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transmural infarction",
+     "points": [
+      "Prolonged total occlusion (STEMI pattern)",
+      "Full thickness necrosis in one territory",
+      "Q waves and regional wall failure evolve",
+      "Rupture complications in that territory"
+     ]
+    },
+    "right": {
+     "title": "Subendocardial infarction",
+     "points": [
+      "Partial occlusion or demand stress (NSTEMI pattern)",
+      "Inner wall necrosis, may be circumferential",
+      "No single territory Q wave pattern",
+      "Follows hypotension, tachycardia or severe anaemia too"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic ischaemic disease remodels the heart through hibernating myocardium, interstitial fibrosis and chamber dilation toward ischaemic cardiomyopathy. **Troponin** release marks myocyte necrosis whatever the mechanism, so type 2 infarction from supply demand mismatch must be separated from plaque disruption. Pathology stems reward naming the territory: left anterior descending artery supplies anterior wall and septum.",
+   "say": "Chronic ischaemia dilates and scars the heart into failure. Troponin marks necrosis from any cause, so demand infarction differs from plaque rupture. LAD supplies anterior wall and septum.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-131",
+  "bk2-pat-132",
+  "bk2-pat-133",
+  "bk2-pat-134",
+  "bk2-pat-135",
+  "bk2-pat-136",
+  "bk2-pat-137",
+  "bk2-pat-138",
+  "bk2-pat-139",
+  "bk2-pat-140"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

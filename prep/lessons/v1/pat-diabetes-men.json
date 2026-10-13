@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-diabetes-men",
+ "subject": "pathology",
+ "title": "Diabetes mellitus, pancreatic endocrine tumours and MEN syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Diabetes mellitus** is chronic hyperglycaemia from insulin deficiency, resistance or both, diagnosed by glucose or HbA1c thresholds and classified chiefly as autoimmune type 1, insulin resistant type 2 and pancreatic or drug induced forms. Acute decompensation differs: ketoacidosis dominates type 1 while hyperosmolar states dominate type 2 in the elderly.",
+   "say": "Diabetes is chronic high glucose from too little insulin action. Type 1 autoimmunity ketoacidoses; type 2 resistance hyperosmolarises in the elderly. Threshold tests confirm it.",
+   "vis": null
+  },
+  {
+   "tx": "Chronic hyperglycaemia damages vessels through glycation, oxidative stress and protein kinase pathways producing the classic triad of **retinopathy, nephropathy and neuropathy** plus accelerated atherosclerosis. Non enzymatic glycation thickens basement membranes while sorbitol accumulates in lens and nerves. Pathology stems map each complication to its microvascular bed.",
+   "say": "Years of high glucose glycates and thickens small vessels causing eye, kidney and nerve damage plus faster atherosclerosis. Each complication names its microvascular bed.",
+   "vis": null
+  },
+  {
+   "tx": "**Diabetic nephropathy** progresses from hyperfiltration through microalbuminuria to overt proteinuria with nodular glomerulosclerosis, while retinopathy advances from microaneurysms and hard exudates to proliferative new vessels that bleed and detach retina. Peripheral neuropathy stockings the feet toward painless ulcers, and autonomic failure silences angina and gastroparesis alike.",
+   "say": "Diabetic kidneys leak albumin stepwise into nodules and failure. Eyes grow fragile new vessels. Feet lose feeling into ulcers. Silent hearts hide infarction pain.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 diabetes",
+     "points": [
+      "Autoimmune beta cell destruction, islet antibodies",
+      "Lean, young, ketosis prone, absolute insulin need",
+      "Associated autoimmune diseases cluster",
+      "No insulin resistance features"
+     ]
+    },
+    "right": {
+     "title": "Type 2 diabetes",
+     "points": [
+      "Insulin resistance with relative beta cell failure",
+      "Obesity, acanthosis, gradual onset",
+      "Metabolic syndrome cluster",
+      "Ketoacidosis uncommon; hyperosmolar risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Insulinoma** causes Whipple triad of fasting hypoglycaemia symptoms relieved by glucose with inappropriately high insulin and C peptide, distinguishing endogenous overproduction from injected insulin where C peptide is suppressed. Most are benign solitary pancreatic tumours, but MEN1 association mandates calcium screening. Gastrinoma instead floods acid causing refractory ulcers in Zollinger Ellison syndrome.",
+   "say": "Fasting lows with high insulin and C peptide mean insulinoma. Injected insulin suppresses C peptide. Gastrinoma floods acid into refractory ulcers. Screen MEN1 calcium.",
+   "vis": null
+  },
+  {
+   "tx": "**MEN1** (Wermer) unites parathyroid hyperplasia, pituitary adenomas and pancreatic neuroendocrine tumours (the three Ps) from menin tumour suppressor loss. MEN2 instead drives medullary thyroid cancer and phaeochromocytoma through RET activation. Inheritance is autosomal dominant in both, so cascade family screening is part of pathology informed care.",
+   "say": "MEN1 is parathyroid, pituitary and pancreas from menin loss. MEN2 is medullary thyroid and phaeochromocytoma from RET. Both dominant: screen families.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Gene",
+     "Core tumours"
+    ],
+    "rows": [
+     [
+      "MEN1",
+      "MEN1 (menin)",
+      "Parathyroid, pituitary, pancreatic NET"
+     ],
+     [
+      "MEN2A",
+      "RET",
+      "Medullary thyroid, phaeochromocytoma, parathyroid"
+     ],
+     [
+      "MEN2B",
+      "RET",
+      "Medullary thyroid, phaeochromocytoma, mucosal neuromas"
+     ],
+     [
+      "Type 1 diabetes",
+      "Autoimmune (HLA linked)",
+      "Islet beta cell destruction, not a tumour syndrome"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-211",
+  "bk2-pat-212",
+  "bk2-pat-213",
+  "bk2-pat-214",
+  "bk2-pat-215",
+  "bk2-pat-216",
+  "bk2-pat-217",
+  "bk2-pat-218",
+  "bk2-pat-219",
+  "bk2-pat-220"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

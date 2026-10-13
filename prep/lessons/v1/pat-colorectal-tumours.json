@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "pat-colorectal-tumours",
+ "subject": "pathology",
+ "title": "Colorectal polyps and carcinoma: pathways and screening",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Most **colorectal cancers** arise from adenomatous polyps through the adenoma carcinoma sequence where APC loss initiates a small adenoma, KRAS activation grows it and TP53 loss completes malignancy over years. This dwell time makes colonoscopic polypectomy genuinely preventive, unlike most cancer screening that only detects early. Villous architecture, large size and high grade dysplasia raise malignant risk.",
+   "say": "Colon cancer usually grows from adenomas over years through APC, KRAS then TP53 steps. Removing polyps prevents cancer outright. Villous large polyps risk most.",
+   "vis": null
+  },
+  {
+   "tx": "**Familial adenomatous polyposis** from germline APC mutation carpets the colon with hundreds of adenomas by adolescence, guaranteeing cancer without prophylactic colectomy, plus duodenal tumours and desmoid disease. Gardner associations add osteomas and soft tissue tumours. Attenuated forms grow fewer polyps later, while MUTYH associated polyposis inherits recessively.",
+   "say": "Germline APC failure carpets young colons with hundreds of polyps guaranteeing cancer without colectomy. Duodenal and desmoid tumours follow. Family screening starts in adolescence.",
+   "vis": null
+  },
+  {
+   "tx": "**Lynch syndrome** instead mutates mismatch repair genes causing microsatellite unstable cancers in few polyps but fast progression, with endometrial, ovarian, gastric and urinary cancers in families. Amsterdam and Bethesda clues trigger tumour testing for repair protein loss. Right sided colon cancers with tumour infiltrating lymphocytes and medullary features hint the syndrome under the microscope.",
+   "say": "Lynch syndrome breaks DNA mismatch repair causing few polyps but fast cancers across colon, endometrium and other organs. Tumour repair testing confirms families at risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adenoma carcinoma pathway",
+     "points": [
+      "APC then KRAS then TP53 over years",
+      "Many polyps precede cancer",
+      "Microsatellite stable usually",
+      "Left sided cancers common"
+     ]
+    },
+    "right": {
+     "title": "Mismatch repair (Lynch) pathway",
+     "points": [
+      "Repair gene loss, microsatellite instability",
+      "Few polyps, rapid progression",
+      "Right sided, lymphocyte rich tumours",
+      "Extracolonic family cancers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Right sided cancers bleed occultly into iron deficiency anaemia and vague mass, while left sided cancers obstruct with altered habit and visible bleeding from narrower calibre and formed stool. **Carcinoembryonic antigen** monitors recurrence rather than screening healthy people. Dukes and TNM staging by wall depth, nodes and metastases still anchor prognosis and adjuvant decisions.",
+   "say": "Right colon cancers hide as anaemia; left cancers obstruct and bleed visibly. CEA monitors known cancer, never screens. Depth and nodes stage prognosis.",
+   "vis": null
+  },
+  {
+   "tx": "Screening by stool blood testing, sigmoidoscopy or colonoscopy with polypectomy lowers both incidence and mortality, starting earlier with family history. **Peutz Jeghers** hamartomas with mucocutaneous pigmentation and serrated polyps through BRAF pathways remind that not all polyps are adenomas. Surveillance intervals follow polyp number, size and histology at clearing colonoscopy.",
+   "say": "Screening plus polypectomy cuts colon cancer deaths and cases. Pigmented lips with hamartomas mean Peutz Jeghers. Sessile serrated lesions form a second cancer pathway.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-231",
+  "bk2-pat-232",
+  "bk2-pat-233",
+  "bk2-pat-234",
+  "bk2-pat-235",
+  "bk2-pat-236",
+  "bk2-pat-237",
+  "bk2-pat-238",
+  "bk2-pat-239",
+  "bk2-pat-240"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
