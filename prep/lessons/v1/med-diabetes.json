@@ -1,0 +1,77 @@
+{
+ "v": 1,
+ "module": "med-diabetes",
+ "subject": "medicine",
+ "title": "DKA and HHS: fluids, potassium, insulin in that order",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Diabetic ketoacidosis** combines hyperglycaemia, ketosis and acidosis, usually with vomiting, abdominal pain, deep breathing and drowsiness. **Hyperosmolar hyperglycaemic state** brings profound dehydration and confusion without major ketosis. Both kill through dehydration, potassium shifts and the precipitating illness, so find the trigger (infection, missed insulin, new diabetes) while resuscitating (JBDS-IP DKA guidance).",
+   "say": "DKA combines high glucose, ketones and acidosis. HHS brings profound dehydration and confusion without major ketosis. Both kill through dehydration and potassium shifts, so find the trigger while resuscitating.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Confirm ketones + gas"
+     },
+     {
+      "id": "b",
+      "label": "Fluids"
+     },
+     {
+      "id": "c",
+      "label": "Potassium check"
+     },
+     {
+      "id": "d",
+      "label": "Insulin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sequence saves lives: **isotonic fluids first**, check **potassium before insulin** (insulin drives potassium into cells), then a fixed-rate insulin infusion with glucose added as levels fall so insulin can continue until ketones clear. Replace potassium in fluids when normal, withhold and replace first when low, and recheck gases, ketones, glucose and potassium on schedule.",
+   "say": "Sequence saves lives: isotonic fluids first, check potassium before insulin, then insulin with glucose added as levels fall so insulin can continue until ketones clear. Recheck on schedule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Fluids first",
+      "Restore circulation and renal clearance"
+     ],
+     [
+      "Potassium before insulin",
+      "Insulin drops serum potassium"
+     ],
+     [
+      "Glucose with insulin later",
+      "Lets insulin clear ketones safely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Beware **cerebral oedema** in children (headache, falling pulse, rising pressure, drowsiness) and hypokalaemia or hypoglycaemia from treatment itself. HHS needs slower, careful rehydration and clot prevention. Never stop insulin because glucose normalised while ketones persist; the acid, not the sugar, is the disease.",
+   "say": "Beware cerebral oedema in children and treatment complications. Never stop insulin because glucose normalised while ketones persist; the acid, not the sugar, is the disease."
+  }
+ ]
+}

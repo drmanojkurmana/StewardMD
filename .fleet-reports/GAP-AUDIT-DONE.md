@@ -1,22 +1,23 @@
 # GAP-AUDIT-DONE: remaining gaps and owner questions
 
-Date: 2026-10-13. Branch gap-audit-1013. Full checklist: GAP-AUDIT.md. No Claude API spend.
+Date: 2026-10-13. Branch gap-audit-1013b. Full checklist: GAP-AUDIT.md. No Claude API spend.
 
-## Done in this branch
-Audit of 2,435 taxonomy modules (KB + lesson + MCQ via bank indexes, overlay-counts and topic-links). Fill set gap1013a: 6 lessons indexed (med-sepsis, med-allergy-immunology, med-pesticides, med-envenomation, ans-difficult-airway, med-potassium) and 60 new MCQs (10 per module), registered in prep.js OVERLAYS and overlay-counts.json. New MCQs only; no existing explanation rewritten; no coming-soon text added.
+## Done
+Wave 1 (gap1013a, PR #1542, merged): audit of 2,435 modules; lessons + 60 MCQs for sepsis, anaphylaxis, organophosphate, snake bite, difficult airway, hyperkalaemia.
+Wave 2 (gap1013b, this branch): lessons + 60 MCQs (mk-gap601-660) for ACS/STEMI, DKA/HHS, status epilepticus, stroke, eclampsia, PPH; registered in prep.js and overlay-counts.json; stale prep-app overlay test fixed.
 
 ## Independent check (Step 3)
-Second re-read of all 60 items: every dose, threshold and timing verified against the guideline named in each item source field. Only one drug dose is stated: adult IM adrenaline 500 micrograms (0.5 mL of 1 mg/mL) in anaphylaxis, per Resuscitation Council UK; verified correct. All other items teach sequence and indications without milligram doses where regimens vary (atropine infusion rates, antivenom vial counts, oxime dosing), so nothing was guessed. Held list for doctor sign-off: empty (0 items held). Two deliberate omissions for owner confirmation before any future dose-specific items: (1) atropine and pralidoxime milligram regimens in organophosphate poisoning (WHO vs Indian protocol wording), (2) antivenom initial vial number (Indian polyvalent protocol). Teach indications first; add numbers only after owner picks the primary source.
+Second re-read of all 60 wave-2 items against the guideline named in each source field (NICE NG185/NG217/NG236/NG133, JBDS-IP, RCOG). No item states a milligram dose or a treatment time-window; the only numbers are vignette durations (chest pain 40 minutes, TIA 20 minutes). Held list for doctor sign-off: empty (0 items).
 
-## Remaining gaps (in rank order)
-1. Life-critical lessons still missing: ACLS/BLS, neonatal resuscitation, ATLS, DKA/HHS, status epilepticus, stroke, ACS, PE, tension pneumothorax, massive haemorrhage, eclampsia, PPH, ectopic, paracetamol poisoning, hyponatraemia, raised ICP, meningitis, malignant hyperthermia, local anaesthetic toxicity, paediatric dehydration. Each already has KB and 40+ MCQs; each needs a lesson plus 10 depth MCQs (same pattern as gap1013a). Difficult airway also needs a KB article.
-2. Drug safety lessons: insulin, opioids, corticosteroids, antidotes, interactions (mphar-interactions only 24 MCQs). No dedicated modules for high-alert drugs, paediatric dose calculation, or pregnancy/lactation prescribing safety.
-3. Indian programmes: NTEP, NACO, NVBDCP lessons; Ayushman Bharat has no module.
-4. Skills with no taxonomy home: clinical examination steps, OSCE procedures, CBC/lab interpretation, image-based depth per topic.
-5. NEET-SS: 474 shell topics with v1 index total 0. Live SS items sit outside these indexes, so blueprint coverage is unverifiable from the repo.
+## Remaining gaps (rank order)
+1. Life-critical lessons still missing: ACLS/BLS, neonatal resuscitation, ATLS, PE, tension pneumothorax, massive haemorrhage, ectopic, paracetamol poisoning, hyponatraemia, raised ICP, meningitis, malignant hyperthermia, local anaesthetic toxicity, paediatric dehydration. Each has KB + 40+ MCQs; each needs lesson + 10 depth MCQs (same pattern).
+2. Drug safety: insulin, opioids, corticosteroids, antidotes, interactions lessons. No dedicated modules for high-alert drugs, paediatric dose calculation, pregnancy/lactation safety.
+3. Indian programmes: NTEP, NACO, NVBDCP lessons; Ayushman Bharat has no module. Difficult airway still needs a KB article.
+4. Skills with no taxonomy home: examination steps, OSCE procedures, CBC/lab interpretation.
+5. NEET-SS: 474 shell topics with v1 index total 0; live SS items sit outside these indexes.
 
 ## Owner questions
-1. NEET-SS: should the ss-* shell taxonomy be filled, retired, or pointed at the live SS bank? Filling 474 topics silently would be wrong without this decision.
-2. Skills (examination, OSCE, lab interpretation): create new taxonomy modules, or teach inside existing disease modules?
-3. Dose-specific poisoning items: confirm primary sources above so milligram regimens can be added safely.
-4. KB article for difficult airway: approve creating kb/diseases/difficult-airway (or a clinical protocol) to complete that line?
+1. NEET-SS shells: fill, retire, or point at the live SS bank?
+2. Skills modules: new taxonomy modules or inside existing disease modules?
+3. Dose-specific poisoning items: confirm WHO vs Indian primary source for atropine/pralidoxime and antivenom vial counts.
+4. KB article for difficult airway: approve creating it?

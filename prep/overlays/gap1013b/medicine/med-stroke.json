@@ -1,0 +1,757 @@
+{
+ "topic": "med-stroke",
+ "set": "gap1013b",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap631",
+   "q": "A 74-year-old develops sudden face and arm weakness with slurred speech. What single fact drives reperfusion decisions?",
+   "o": [
+    "The exact time the patient was last well (onset time)",
+    "The time of the next meal",
+    "The ward round time",
+    "The family's arrival time"
+   ],
+   "a": 0,
+   "exp": "Reperfusion windows run from when the patient was last well, so exact onset time is recorded immediately in suspected stroke (NICE NG236).",
+   "r": [
+    "Correct: Record onset time in stroke.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Record onset time in stroke.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "onset"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Record onset time in stroke.",
+    "others": {
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Last-well time starts the stroke clock.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Record onset time in stroke.",
+    "rev": "Reperfusion windows run from when the patient was last well, so exact onset time is recorded immediately in suspected stroke (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap632",
+   "q": "Before any antiplatelet, anticoagulant or thrombolytic is given in suspected stroke, what is essential?",
+   "o": [
+    "A full meal",
+    "Urgent brain imaging to exclude haemorrhage",
+    "An exercise test",
+    "A routine outpatient scan next week"
+   ],
+   "a": 1,
+   "exp": "No blood-thinning or clot-busting treatment is safe until brain imaging excludes haemorrhage (NICE NG236).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Exclude bleed before thrombolysis.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Exclude bleed before thrombolysis.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "imaging"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Exclude bleed before thrombolysis.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Image first; thin blood later.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Exclude bleed before thrombolysis.",
+    "rev": "No blood-thinning or clot-busting treatment is safe until brain imaging excludes haemorrhage (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap633",
+   "q": "Imaging shows an ischaemic stroke inside the treatment window with no exclusion. What is offered?",
+   "o": [
+    "Anticoagulation before imaging",
+    "Discharge home",
+    "Thrombolysis where eligible, without delay",
+    "Oral fluids only"
+   ],
+   "a": 2,
+   "exp": "Eligible ischaemic stroke inside the window is thrombolysed without delay; every minute loses brain (NICE NG236).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Thrombolyse eligible ischaemic stroke.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Thrombolyse eligible ischaemic stroke.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "thrombolysis"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Thrombolyse eligible ischaemic stroke.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Time is brain: thrombolyse the eligible.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Thrombolyse eligible ischaemic stroke.",
+    "rev": "Eligible ischaemic stroke inside the window is thrombolysed without delay; every minute loses brain (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap634",
+   "q": "CT shows a large-vessel occlusion in an eligible patient. What referral is urgent?",
+   "o": [
+    "Routine neurology clinic",
+    "Physiotherapy only",
+    "Discharge with aspirin alone",
+    "Thrombectomy assessment without delay"
+   ],
+   "a": 3,
+   "exp": "Large-vessel occlusion is referred for thrombectomy without delay in eligible patients (NICE NG236).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Refer large-vessel occlusion fast."
+   ],
+   "kp": "Refer large-vessel occlusion fast.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "thrombectomy"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Refer large-vessel occlusion fast.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Big clot, fast thrombectomy referral.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Refer large-vessel occlusion fast.",
+    "rev": "Large-vessel occlusion is referred for thrombectomy without delay in eligible patients (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap635",
+   "q": "A suspected stroke patient's capillary glucose is very low with weakness that resolves as glucose corrects. What was this?",
+   "o": [
+    "Proof that imaging is never needed",
+    "Hypoglycaemia mimicking stroke; glucose is checked in every suspected stroke",
+    "A haemorrhage",
+    "A seizure disorder only"
+   ],
+   "a": 1,
+   "exp": "Hypoglycaemia mimics stroke, so capillary glucose is checked in every suspected stroke before conclusions are drawn (NICE NG236).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Check glucose in suspected stroke.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Check glucose in suspected stroke.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "mimic"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Check glucose in suspected stroke.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Glucose first in every FAST-positive patient.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Check glucose in suspected stroke.",
+    "rev": "Hypoglycaemia mimics stroke, so capillary glucose is checked in every suspected stroke before conclusions are drawn (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap636",
+   "q": "Imaging shows intracerebral haemorrhage in a patient taking an anticoagulant. What principles apply?",
+   "o": [
+    "Blood-pressure control, reversal of anticoagulation and neurosurgical advice",
+    "Thrombolysis",
+    "Heparin infusion",
+    "Discharge home"
+   ],
+   "a": 0,
+   "exp": "Haemorrhagic stroke needs pressure control, anticoagulant reversal and neurosurgical advice, never thrombolysis (NICE NG236).",
+   "r": [
+    "Correct: Manage haemorrhagic stroke.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Manage haemorrhagic stroke.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "haemorrhage"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Manage haemorrhagic stroke.",
+    "others": {
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Bleed: control pressure, reverse, refer.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Manage haemorrhagic stroke.",
+    "rev": "Haemorrhagic stroke needs pressure control, anticoagulant reversal and neurosurgical advice, never thrombolysis (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap637",
+   "q": "Until swallowing is screened after stroke, what is the rule?",
+   "o": [
+    "Full diet immediately",
+    "Thick fluids only without screening",
+    "Oral medicines as usual",
+    "Nil by mouth"
+   ],
+   "a": 3,
+   "exp": "Patients stay nil by mouth until swallowing is screened, to prevent aspiration after stroke (NICE NG236).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Nil by mouth until screened."
+   ],
+   "kp": "Nil by mouth until screened.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "swallow"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Nil by mouth until screened.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "No swallow screen, no mouth intake.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Nil by mouth until screened.",
+    "rev": "Patients stay nil by mouth until swallowing is screened, to prevent aspiration after stroke (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap638",
+   "q": "Weakness and speech loss lasted 20 minutes and fully resolved. What is still required?",
+   "o": [
+    "Reassurance with no follow-up",
+    "Routine review in a year",
+    "Same-day specialist assessment, because early stroke risk after TIA is high",
+    "Discharge with no advice"
+   ],
+   "a": 2,
+   "exp": "Transient symptoms are a TIA needing same-day specialist assessment because early stroke risk is high (NICE NG236).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Same-day TIA assessment.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Same-day TIA assessment.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "tia"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Same-day TIA assessment.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Resolved does not mean safe in TIA.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Same-day TIA assessment.",
+    "rev": "Transient symptoms are a TIA needing same-day specialist assessment because early stroke risk is high (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap639",
+   "q": "Which is a recognised stroke mimic besides hypoglycaemia?",
+   "o": [
+    "A fractured ankle",
+    "Migraine, seizure after-effects or functional weakness",
+    "Hair loss",
+    "A skin rash alone"
+   ],
+   "a": 1,
+   "exp": "Migraine, post-seizure states and functional weakness mimic stroke, which is why glucose, story and imaging all matter (NICE NG236).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Recognise stroke mimics.",
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Recognise stroke mimics.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "mimic"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Recognise stroke mimics.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "C": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Know the mimics before the lytics.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Recognise stroke mimics.",
+    "rev": "Migraine, post-seizure states and functional weakness mimic stroke, which is why glucose, story and imaging all matter (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap640",
+   "q": "When do rehabilitation and secondary prevention begin after stroke?",
+   "o": [
+    "Only at discharge",
+    "After six months",
+    "From day one, alongside acute treatment",
+    "Never in older adults"
+   ],
+   "a": 2,
+   "exp": "Rehabilitation and secondary prevention start on day one after stroke, not at discharge (NICE NG236).",
+   "r": [
+    "Incorrect: does not address the priority in this stem.",
+    "Incorrect: does not address the priority in this stem.",
+    "Correct: Early rehab and prevention.",
+    "Incorrect: does not address the priority in this stem."
+   ],
+   "kp": "Early rehab and prevention.",
+   "t": "med-stroke",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013b",
+   "tg": [
+    "stroke",
+    "rehab"
+   ],
+   "source": "NICE NG236 stroke and transient ischaemic attack",
+   "x": {
+    "key": "Early rehab and prevention.",
+    "others": {
+     "A": "Incorrect: does not address the priority in this stem.",
+     "B": "Incorrect: does not address the priority in this stem.",
+     "D": "Incorrect: does not address the priority in this stem."
+    },
+    "pearl": "Recovery starts on day one.",
+    "clues": "See key reasoning in the explanation.",
+    "ddx": "Options test the discriminating step in the stem.",
+    "mech": "See explanation.",
+    "lo": "Early rehab and prevention.",
+    "rev": "Rehabilitation and secondary prevention start on day one after stroke, not at discharge (NICE NG236).",
+    "next": {
+     "concept": "med-stroke",
+     "action": "review",
+     "text": "Review the linked lesson for this topic, then practise more questions in this module."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE NG236 stroke and transient ischaemic attack",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "med-stroke"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013b"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Hand-authored; no API spend; dose checked against source named in item."
+     }
+    }
+   }
+  }
+ ]
+}

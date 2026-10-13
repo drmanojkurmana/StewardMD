@@ -1,0 +1,65 @@
+{
+ "v": 1,
+ "module": "obg-hypertensive-disorders",
+ "subject": "obstetrics-gynaecology",
+ "title": "Pre-eclampsia and eclampsia: magnesium prevents and treats seizures",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Pre-eclampsia** is hypertension after mid-pregnancy with organ dysfunction (proteinuria, rising creatinine, liver upset, low platelets, headache, visual change or epigastric pain). Severe features or an eclamptic seizure can kill mother and fetus quickly. Measure pressure correctly, test urine and bloods, and assess fetal wellbeing (NICE NG133).",
+   "say": "Pre-eclampsia is hypertension after mid-pregnancy with organ dysfunction. Measure pressure correctly, test urine and bloods, and assess the fetus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High pressure in pregnancy"
+     },
+     {
+      "id": "b",
+      "label": "Organ dysfunction?"
+     },
+     {
+      "id": "c",
+      "label": "Severe? Treat + plan delivery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Magnesium sulphate** prevents seizures in severe pre-eclampsia and treats eclampsia; it is not primarily a pressure drug, so control severe hypertension separately with pregnancy-safe agents per protocol. The definitive treatment is **delivery**, timed by maternal and fetal condition. Watch magnesium toxicity (lost reflexes, respiratory depression) and keep its antidote, calcium gluconate, available.",
+   "say": "Magnesium prevents and treats eclamptic seizures; control severe pressure separately. The definitive treatment is delivery. Keep calcium gluconate available for magnesium toxicity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Job"
+    ],
+    "rows": [
+     [
+      "Magnesium sulphate",
+      "Prevent and treat seizures"
+     ],
+     [
+      "Antihypertensive (protocol)",
+      "Control severe pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Eclampsia care is airway, oxygen, left lateral position, magnesium, pressure control and delivery planning, in that order, without delaying magnesium for imaging. HELLP (haemolysis, raised liver enzymes, low platelets) can occur even with modest pressure rises, so symptoms outrank numbers. Postpartum seizures still occur, so vigilance continues after birth.",
+   "say": "Eclampsia care is airway, oxygen, left lateral, magnesium, pressure control and delivery planning. Vigilance continues after birth."
+  }
+ ]
+}
