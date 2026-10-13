@@ -157,7 +157,7 @@ test("NEET-SS groups: 15 groups, medical default, empty groups are not offered",
   ["ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology",
     "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-pulmonology",
     "ss-infectious-diseases", "ss-rheumatology-immunology"].forEach((id) => assert.ok(med.includes(id), "medical holds " + id));
-  assert.deepEqual(PLAN.ssGroupSubjects("surgical"), []);
+  assert.ok(PLAN.ssGroupSubjects("surgical").includes("ss-general-surgery"), "surgical holds its bank subjects");
   assert.deepEqual(PLAN.normalizePlan({ exam: "neet-pg", group: "medical", subject: "ss-cardiology" }), { exam: "neet-pg" });
 });
 
