@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-autoimmune",
+ "subject": "pathology",
+ "title": "Autoimmune diseases: tolerance failure and systemic patterns",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Autoimmunity** arises when central and peripheral tolerance to self antigens fail, allowing autoreactive lymphocytes to injure tissue. Central tolerance deletes strongly self reactive cells in thymus and marrow, while peripheral mechanisms include anergy, regulatory T cells and deletion. Genetic susceptibility, especially certain HLA types, combines with environmental triggers such as infection and ultraviolet light.",
+   "say": "Autoimmunity follows failure of tolerance to self antigens. Central tolerance deletes strongly reactive cells early. Peripheral controls include anergy and regulatory T cells. Genes and triggers like infection and sunlight combine to break tolerance.",
+   "vis": null
+  },
+  {
+   "tx": "**Systemic lupus erythematosus** is the prototype multisystem autoimmune disease, typically affecting young women with relapsing course. Antinuclear antibodies are sensitive but not specific, while antibodies to double stranded DNA and Smith antigen are more specific and track renal disease. Immune complex deposition with complement activation injures skin, joints, kidney, serosa and blood cells.",
+   "say": "Lupus mainly affects young women in relapses. Antinuclear antibody is sensitive while anti double stranded DNA and anti Smith are more specific. Immune complexes with complement injure skin, joints, kidney and blood cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Behaviour in lupus",
+     "Exam use"
+    ],
+    "rows": [
+     [
+      "Antinuclear antibody",
+      "Very sensitive, less specific",
+      "Best screening test; negative makes lupus unlikely"
+     ],
+     [
+      "Anti double stranded DNA",
+      "Specific, fluctuates with activity",
+      "Tracks nephritis and disease flares"
+     ],
+     [
+      "Anti Smith",
+      "Highly specific, less sensitive",
+      "Confirms lupus when present"
+     ],
+     [
+      "Low complement C3 and C4",
+      "Consumed in active disease",
+      "Supports active immune complex injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lupus nephritis illustrates why histology changes management more than serology alone. Diffuse proliferative disease with **wire loop deposits** from subendothelial immune complexes is severe and needs aggressive immunosuppression. Membranous lupus nephritis shows subepithelial deposits with nephrotic syndrome. A full house immunofluorescence pattern staining for multiple immunoglobulins and complement strongly supports lupus in renal biopsies.",
+   "say": "Lupus nephritis histology guides treatment. Wire loop subendothelial deposits mark severe proliferative disease. Membranous disease causes nephrotic syndrome. Full house staining strongly supports lupus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proliferative lupus nephritis",
+     "points": [
+      "Subendothelial wire loop deposits",
+      "Nephritic features with active urine",
+      "Low complement common",
+      "Needs aggressive immunosuppression"
+     ]
+    },
+    "right": {
+     "title": "Membranous lupus nephritis",
+     "points": [
+      "Subepithelial deposits",
+      "Nephrotic syndrome dominant",
+      "Less proliferative change",
+      "Different treatment intensity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sjogren syndrome** destroys lacrimal and salivary glands through lymphocytic infiltration, causing dry eyes and dry mouth with dental caries and parotid swelling. Antibodies to Ro and La antigens are characteristic, and patients carry increased lymphoma risk. Secondary disease accompanies rheumatoid arthritis or lupus, while primary disease occurs alone with systemic features.",
+   "say": "Sjogren syndrome destroys tear and salivary glands causing dry eyes and mouth. Anti Ro and anti La are characteristic. Lymphoma risk is increased. It may occur alone or with other autoimmune disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Systemic sclerosis** combines autoimmunity with vasculopathy and fibrosis of skin and internal organs. Limited disease with CREST features associates with anticentromere antibody, while diffuse disease with lung and renal risk associates with anti topoisomerase antibody, also called anti Scl 70. Raynaud phenomenon is usually the earliest clue, preceding skin thickening by months or years.",
+   "say": "Systemic sclerosis mixes autoimmunity, vessel injury and fibrosis. Limited CREST disease links to anticentromere antibody. Diffuse disease links to anti Scl 70. Raynaud phenomenon is usually earliest.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-031",
+  "bk2-pat-032",
+  "bk2-pat-033",
+  "bk2-pat-034",
+  "bk2-pat-035",
+  "bk2-pat-036",
+  "bk2-pat-037",
+  "bk2-pat-038",
+  "bk2-pat-039",
+  "bk2-pat-040"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

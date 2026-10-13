@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-immunodeficiency",
+ "subject": "pathology",
+ "title": "Immunodeficiency diseases and AIDS",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Primary immunodeficiencies** reveal which immune arm protects against which microbe, a logic examiners test repeatedly. Antibody defects cause recurrent sinopulmonary infection with encapsulated bacteria. T cell defects cause severe viral, fungal and opportunistic infection. Phagocyte defects cause abscesses and granulomas, while complement defects predispose to Neisseria and encapsulated organisms.",
+   "say": "Each immune arm guards against distinct microbes. Antibody defects cause bacterial sinopulmonary infections. T cell defects cause viral and fungal opportunists. Phagocyte defects cause abscesses. Complement defects favour Neisseria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Defective arm",
+     "Typical infections",
+     "Classic example"
+    ],
+    "rows": [
+     [
+      "Antibody",
+      "Encapsulated bacteria, sinopulmonary",
+      "Bruton agammaglobulinaemia"
+     ],
+     [
+      "T cell",
+      "Viruses, fungi, Pneumocystis",
+      "DiGeorge syndrome, SCID"
+     ],
+     [
+      "Phagocyte",
+      "Abscesses, catalase positive organisms",
+      "Chronic granulomatous disease"
+     ],
+     [
+      "Complement",
+      "Neisseria, encapsulated bacteria",
+      "Terminal complement deficiency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**X linked agammaglobulinaemia** from Bruton tyrosine kinase mutation arrests B cell development, so boys present after maternal antibody wanes with recurrent bacterial infections and absent tonsils. Immunoglobulins of all classes are very low and B cells are nearly absent, while T cell function remains intact. Live vaccines are dangerous and immunoglobulin replacement is life sustaining.",
+   "say": "Bruton disease blocks B cell development in boys. Infections start after maternal antibody fades, tonsils are absent and immunoglobulins are very low. T cells work normally. Replacement immunoglobulin sustains life.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bruton agammaglobulinaemia",
+     "points": [
+      "B cells nearly absent",
+      "All immunoglobulins very low",
+      "Recurrent bacterial infections in boys",
+      "Tonsils absent or tiny"
+     ]
+    },
+    "right": {
+     "title": "Common variable immunodeficiency",
+     "points": [
+      "B cells present but dysfunctional",
+      "Low IgG with low IgA or IgM",
+      "Presents in older children and adults",
+      "Autoimmunity and granulomas may occur"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Severe combined immunodeficiency** combines T cell failure with B cell dysfunction and presents in early infancy with fatal opportunistic infection unless stem cell transplant intervenes. Adenosine deaminase deficiency poisons lymphocytes with metabolite accumulation. Absent thymic shadow, lymphopenia and failure to thrive are bedside clues, and live vaccines such as BCG can disseminate.",
+   "say": "Combined deficiency cripples T cells and B cell help in early infancy. Babies fail to thrive with opportunistic infections and no thymic shadow. Stem cell transplant saves life. Live vaccines can disseminate.",
+   "vis": null
+  },
+  {
+   "tx": "**DiGeorge syndrome** from 22q11 deletion impairs thymic development, reducing T cells, and associates with conotruncal heart defects, hypocalcaemia from parathyroid hypoplasia and characteristic facies. Chronic granulomatous disease instead impairs phagocyte NADPH oxidase, so catalase positive organisms survive and granulomas form. The nitroblue tetrazolium or dihydrorhodamine test demonstrates the burst defect.",
+   "say": "DiGeorge deletion reduces T cells with heart defects and low calcium. Granulomatous disease breaks the phagocyte burst so catalase positive organisms survive. Flow based burst testing proves the defect.",
+   "vis": null
+  },
+  {
+   "tx": "**HIV** depletes CD4 T cells through direct killing and chronic activation, progressing to AIDS when opportunistic infections or cancers supervene. Pneumocystis pneumonia, cryptococcal meningitis, toxoplasmosis, Kaposi sarcoma and lymphoma mark advanced disease. Sustained antiretroviral suppression prevents progression, while falling CD4 counts predict which opportunist appears next in exam stems.",
+   "say": "HIV depletes CD4 cells until opportunists and cancers appear. Pneumocystis, cryptococcus, toxoplasma and Kaposi sarcoma mark advanced disease. Suppressive therapy prevents progression. CD4 level predicts the opportunist.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-041",
+  "bk2-pat-042",
+  "bk2-pat-043",
+  "bk2-pat-044",
+  "bk2-pat-045",
+  "bk2-pat-046",
+  "bk2-pat-047",
+  "bk2-pat-048",
+  "bk2-pat-049",
+  "bk2-pat-050"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

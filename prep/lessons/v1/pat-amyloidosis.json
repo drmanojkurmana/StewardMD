@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "pat-amyloidosis",
+ "subject": "pathology",
+ "title": "Amyloidosis: types, staining and organ patterns",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Amyloid** is misfolded protein deposited extracellularly as beta pleated sheets that resist proteolysis and distort tissue architecture. Deposits stain with Congo red and show apple green birefringence under polarised light, the single most tested identification feature. Mass spectrometry now types the precursor protein precisely, which matters because treatment differs completely by type.",
+   "say": "Amyloid is misfolded beta pleated protein deposited outside cells. Congo red with apple green birefringence identifies it. Typing the precursor protein is essential because treatment differs by type.",
+   "vis": null
+  },
+  {
+   "tx": "**AL amyloidosis** derives from immunoglobulin light chains produced by a clonal plasma cell population and associates with multiple myeloma in a minority. It favours heart, kidney, liver, gut and nerves, causing restrictive cardiomyopathy, nephrotic syndrome and macroglossia. Serum free light chains and marrow examination detect the clone, and therapy targets plasma cells.",
+   "say": "AL amyloid comes from clonal light chains favouring heart, kidney and nerves. It causes restrictive heart disease, nephrotic syndrome and large tongue. Finding the plasma cell clone directs therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "AL amyloidosis",
+     "points": [
+      "Light chain precursor from plasma cell clone",
+      "Heart, kidney, nerve and gut dominant",
+      "Macroglossia is a clue",
+      "Treat the clone"
+     ]
+    },
+    "right": {
+     "title": "AA amyloidosis",
+     "points": [
+      "Serum amyloid A precursor from chronic inflammation",
+      "Kidney dominant with nephrotic syndrome",
+      "Follows rheumatoid arthritis, tuberculosis, bronchiectasis",
+      "Treat the underlying inflammation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**AA amyloidosis** derives from serum amyloid A, an acute phase reactant raised in chronic inflammation such as rheumatoid arthritis, inflammatory bowel disease, chronic infection and familial Mediterranean fever. Renal involvement dominates with proteinuria progressing to renal failure, while cardiac involvement is less prominent than in AL disease. Controlling the underlying inflammation lowers precursor production and slows progression.",
+   "say": "AA amyloid follows years of chronic inflammation and mainly hits the kidney with heavy proteinuria. Heart disease is less prominent than in AL type. Controlling inflammation slows it.",
+   "vis": null
+  },
+  {
+   "tx": "Organs announce amyloid through recognisable patterns that examiners combine into stems. Cardiac disease shows **low voltage on ECG despite thick walls on echocardiography**, a voltage mass mismatch. Renal disease shows nephrotic range proteinuria without active sediment. Autonomic and peripheral neuropathy, hepatomegaly and periorbital purpura from vessel fragility complete the clinical picture.",
+   "say": "Cardiac amyloid shows thick walls but low ECG voltage. Renal amyloid causes nephrotic proteinuria. Neuropathy, large liver and periorbital bruising complete the picture. Voltage mass mismatch is the key clue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ",
+     "Amyloid clue",
+     "Contrast"
+    ],
+    "rows": [
+     [
+      "Heart",
+      "Thick wall with low ECG voltage",
+      "Hypertrophy alone raises voltage"
+     ],
+     [
+      "Kidney",
+      "Nephrotic proteinuria, bland sediment",
+      "Glomerulonephritis shows active sediment"
+     ],
+     [
+      "Nerves",
+      "Painful neuropathy plus autonomic failure",
+      "Diabetic neuropathy is slower and length dependent"
+     ],
+     [
+      "Tongue",
+      "Macroglossia, mainly AL type",
+      "Rare in AA type"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Transthyretin amyloidosis** affects older adults, especially with carpal tunnel syndrome preceding cardiac disease by years, and may be hereditary or wild type. Dialysis related amyloid from beta 2 microglobulin is now less common with modern membranes. Abdominal fat pad aspiration offers a minimally invasive biopsy site, with rectal and organ biopsy as alternatives.",
+   "say": "Transthyretin amyloid affects older hearts often after carpal tunnel years earlier. Fat pad aspiration is a low risk biopsy site. Dialysis amyloid from beta 2 microglobulin is now uncommon.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-051",
+  "bk2-pat-052",
+  "bk2-pat-053",
+  "bk2-pat-054",
+  "bk2-pat-055",
+  "bk2-pat-056",
+  "bk2-pat-057",
+  "bk2-pat-058",
+  "bk2-pat-059",
+  "bk2-pat-060"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
