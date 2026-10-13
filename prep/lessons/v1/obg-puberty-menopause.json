@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-puberty-menopause",
+ "subject": "obstetrics-gynaecology",
+ "title": "Menopause physiology, climacteric manifestations and hormone replacement therapy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Natural **menopause** represents the permanent cessation of menses resulting from loss of ovarian follicular activity. In clinical practice, it is diagnosed retrospectively following twelve consecutive months of amenorrhoea in women aged forty-five and older without other pathological etiology. The average age of onset is fifty-one years, preceded by a variable perimenopausal transition characterized by irregular cycles and fluctuating hormonal levels.",
+   "say": "Menopause is the permanent cessation of menstruation due to ovarian follicular depletion. It is diagnosed after twelve consecutive months of amenorrhoea in women aged forty-five and older. The average age is fifty-one, preceded by perimenopausal hormonal fluctuations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endocrine parameter",
+     "Reproductive stage",
+     "Menopausal transition",
+     "Postmenopause"
+    ],
+    "rows": [
+     [
+      "Serum FSH",
+      "3-10 IU/L (follicular)",
+      "Fluctuating (10-30 IU/L)",
+      "Persistently elevated (> 30-40 IU/L)"
+     ],
+     [
+      "Serum Estradiol (E2)",
+      "50-350 pg/mL",
+      "Unpredictable spikes/drops",
+      "Markedly decreased (< 20 pg/mL)"
+     ],
+     [
+      "Inhibin B",
+      "Normal cyclical release",
+      "Progressive decline",
+      "Undetectable"
+     ],
+     [
+      "Anti-M\u00fcllerian Hormone",
+      "1.0-4.0 ng/mL",
+      "Less than 0.5 ng/mL",
+      "Undetectable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Estrogen deprivation induces multisystem symptoms that significantly compromise quality of life. Acute manifestations include **vasomotor symptoms** such as hot flushes and night sweats, mediated by narrowed hypothalamic thermoneutral zones. Intermediate changes encompass the genitourinary syndrome of menopause, marked by vaginal atrophy, dyspareunia, and recurrent urinary tract infections, while long-term consequences feature accelerated osteoclastic bone loss and cardiovascular morbidity.",
+   "say": "Estrogen deficiency causes symptoms across multiple body systems. Acute symptoms are hot flushes and night sweats from hypothalamic instability. Intermediate changes include vaginal dryness and urinary discomfort, while long-term risks include osteoporosis and cardiovascular disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vasomotor climacteric symptoms",
+     "points": [
+      "Sudden intense sensation of heat on chest and face",
+      "Dilation of cutaneous capillaries and profuse sweating",
+      "Mediated by neurokinin B and KNDy hypothalamic neurons",
+      "Responds promptly to systemic estrogen replacement"
+     ]
+    },
+    "right": {
+     "title": "Genitourinary syndrome (GSM)",
+     "points": [
+      "Loss of vaginal rugae and thinning of squamous epithelium",
+      "Reduced lactobacilli, elevated vaginal pH (> 5.0)",
+      "Severe dyspareunia, introital burning, and dysuria",
+      "Effectively managed with low-dose local topical estrogen"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The core principle of systemic **hormone replacement therapy** requires protecting the endometrium against unopposed estrogenic stimulation. While women who have undergone hysterectomy receive estrogen-only therapy, all women with an intact uterus require combined estrogen and progestogen to prevent endometrial hyperplasia and adenocarcinoma. Continuous combined regimens produce amenorrhoea, whereas sequential cyclical regimens preserve scheduled withdrawal bleeds.",
+   "say": "The central principle of hormone replacement therapy is protecting the endometrium. Women with an intact uterus must take progestogen alongside estrogen to prevent endometrial hyperplasia and cancer. Women after hysterectomy receive estrogen alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Uterine status",
+     "HRT regimen",
+     "Components",
+     "Menstrual bleeding pattern"
+    ],
+    "rows": [
+     [
+      "Intact uterus (Perimenopause)",
+      "Sequential combined",
+      "Continuous estrogen + 12-14 days progestin",
+      "Regular monthly withdrawal bleeds"
+     ],
+     [
+      "Intact uterus (Postmenopause)",
+      "Continuous combined",
+      "Daily continuous estrogen and progestin",
+      "Amenorrhoea (no withdrawal bleeding)"
+     ],
+     [
+      "Prior hysterectomy",
+      "Estrogen-only therapy",
+      "Daily continuous oral or transdermal estrogen",
+      "No bleeding"
+     ],
+     [
+      "Genitourinary symptoms only",
+      "Local topical estrogen",
+      "Vaginal cream, ring or low-dose tablet",
+      "No systemic absorption / No progestin needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Route of administration profoundly alters the safety profile of estrogen replacement. Transdermal **17-beta estradiol patches or gels** bypass first-pass hepatic metabolism, avoiding stimulation of hepatic clotting factor synthesis, C-reactive protein, and sex hormone-binding globulin. Consequently, transdermal estrogen does not increase the baseline risk of venous thromboembolism or ischemic stroke, making it the preferred formulation in women with obesity or elevated cardiovascular risk.",
+   "say": "The route of estrogen administration affects safety. Transdermal estradiol patches bypass the liver, avoiding the stimulation of clotting factors. Therefore, transdermal estrogen does not increase the risk of blood clots or stroke, making it ideal for higher-risk women.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-obg-031",
+  "bk2-obg-032",
+  "bk2-obg-033",
+  "bk2-obg-034",
+  "bk2-obg-035",
+  "bk2-obg-036",
+  "bk2-obg-037",
+  "bk2-obg-038",
+  "bk2-obg-039",
+  "bk2-obg-040"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

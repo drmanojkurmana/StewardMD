@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "obg-gtd",
+ "subject": "obstetrics-gynaecology",
+ "title": "Gestational trophoblastic disease: hydatidiform mole, choriocarcinoma and WHO scoring",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Gestational trophoblastic disease** encompasses a spectrum of proliferative disorders derived from placental trophoblast. Benign forms comprise complete and partial hydatidiform moles, while malignant gestational trophoblastic neoplasia includes invasive mole, choriocarcinoma, placental site trophoblastic tumor, and epithelioid trophoblastic tumor. Marked autonomous production of beta-hCG serves as both a sensitive clinical biomarker and monitoring tool.",
+   "say": "Gestational trophoblastic disease includes benign complete and partial moles, and malignant forms like choriocarcinoma and invasive mole. These tumors produce high levels of beta-hCG, which serves as a sensitive diagnostic and monitoring biomarker.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Complete hydatidiform mole",
+     "Partial hydatidiform mole"
+    ],
+    "rows": [
+     [
+      "Karyotype & origin",
+      "46,XX (90%) or 46,XY; Paternal androgenetic",
+      "69,XXY (70%) or 69,XXX; Diandric triploid"
+     ],
+     [
+      "Embryo / Fetal tissue",
+      "Completely absent",
+      "Present (often malformed, non-viable)"
+     ],
+     [
+      "Villus morphology",
+      "Diffuse hydropic swelling ('bunch of grapes')",
+      "Focal swelling with irregular scalloped villi"
+     ],
+     [
+      "Trophoblast hyperplasia",
+      "Diffuse, circumferential, marked",
+      "Focal, mild, patchy"
+     ],
+     [
+      "p57 (KIP2) expression",
+      "Negative (maternal gene not expressed)",
+      "Positive (maternal allele present)"
+     ],
+     [
+      "Malignant GTN risk",
+      "15% to 20% post-molar progression",
+      "< 1% to 5% post-molar progression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical presentation classically features painless first-trimester vaginal bleeding (often described as dark prune-juice discharge), uterine size greater than gestational dates, hyperemesis gravidarum, and early preeclampsia occurring before twenty weeks. Ultrasound demonstrates an enlarged uterine cavity filled with heterogenous echogenic material and diffuse vesicular cystic spaces, described classically as a **snowstorm pattern**.",
+   "say": "Molar pregnancy presents with vaginal bleeding, uterine enlargement beyond gestational dates, hyperemesis, and early preeclampsia before twenty weeks. Ultrasound classically shows a characteristic snowstorm appearance without a gestational sac.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Molar clinical hallmarks",
+     "points": [
+      "Vaginal bleeding with expelled grape-like vesicles",
+      "Uterine size significantly larger than dates (50%)",
+      "Bilateral large theca lutein ovarian cysts (25%)",
+      "Markedly elevated serum beta-hCG (> 100,000 mIU/mL)"
+     ]
+    },
+    "right": {
+     "title": "Unusual early complications",
+     "points": [
+      "Preeclampsia presenting before 20 weeks gestation",
+      "Hyperthyroidism from hCG stimulation of TSH receptors",
+      "Hyperemesis gravidarum from massive hCG surge",
+      "Trophoblastic embolization causing acute respiratory distress"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive management for hydatidiform mole is prompt **suction curettage** under simultaneous intravenous oxytocin infusion. Following evacuation, rigorous post-molar surveillance is mandatory to detect malignant gestational trophoblastic neoplasia. Quantitative serum beta-hCG levels must be monitored weekly until three consecutive weekly values are normal, followed by monthly determinations for six months while maintaining reliable contraception.",
+   "say": "Treatment for molar pregnancy is suction curettage under oxytocin infusion. Following evacuation, weekly beta-hCG levels are monitored until normal for three weeks, then monthly for six months while the patient uses reliable contraception.",
+   "vis": null
+  },
+  {
+   "tx": "Progression to post-molar **gestational trophoblastic neoplasia** is diagnosed when beta-hCG levels plateau across four measurements over three weeks, rise across three measurements over two weeks, or when histological choriocarcinoma is identified. GTN is stratified using the FIGO/WHO prognostic scoring system into low-risk (score 0-6, treated with single-agent methotrexate) and high-risk (score 7 or greater, treated with multi-agent EMA-CO chemotherapy).",
+   "say": "Malignant GTN is diagnosed if beta-hCG plateaus or rises after molar evacuation. Patients are stratified by the WHO prognostic score into low-risk, treated with single-agent methotrexate, or high-risk, requiring multi-agent EMA-CO chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "WHO Prognostic score",
+     "Risk category",
+     "First-line chemotherapy",
+     "Primary cure rate"
+    ],
+    "rows": [
+     [
+      "Score <= 6",
+      "Low-risk GTN",
+      "Single-agent Methotrexate with Folinic acid",
+      "> 98-100% cure rate"
+     ],
+     [
+      "Score >= 7",
+      "High-risk GTN",
+      "Multi-agent EMA-CO regimen",
+      "85-95% cure rate"
+     ],
+     [
+      "PSTT / ETT",
+      "Placental site trophoblastic",
+      "Chemoresistant / Surgical hysterectomy",
+      "Stage-dependent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-obg-101",
+  "bk2-obg-102",
+  "bk2-obg-103",
+  "bk2-obg-104",
+  "bk2-obg-105",
+  "bk2-obg-106",
+  "bk2-obg-107",
+  "bk2-obg-108",
+  "bk2-obg-109",
+  "bk2-obg-110"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

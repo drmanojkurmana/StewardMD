@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-rh-isoimmunisation",
+ "subject": "obstetrics-gynaecology",
+ "title": "Rh isoimmunization: pathogenesis, MCA Doppler velocity and intrauterine transfusion",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Rh isoimmunization** develops when an RhD-negative woman is exposed to RhD-positive fetal red blood cells, stimulating maternal production of anti-D antibodies. While initial exposure produces a slow IgM response that does not cross the placenta, immunological memory yields high-affinity maternal anti-D IgG antibodies. In subsequent pregnancies with an RhD-positive fetus, these IgG antibodies cross the placenta, causing progressive fetal extravascular hemolysis.",
+   "say": "Rh isoimmunization occurs when an Rh-negative mother is exposed to Rh-positive fetal red blood cells. Maternal anti-D IgG antibodies cross the placenta in subsequent pregnancies, causing extravascular destruction of fetal erythrocytes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Alloantibody class",
+     "Immunoglobulin isotype",
+     "Placental transfer",
+     "Clinical fetal impact"
+    ],
+    "rows": [
+     [
+      "Primary maternal response",
+      "IgM pentamer",
+      "Cannot cross placenta",
+      "No fetal harm in index pregnancy"
+     ],
+     [
+      "Secondary amnestic response",
+      "IgG monomer",
+      "Active FcRn receptor transfer",
+      "Severe fetal erythroblastosis"
+     ],
+     [
+      "Anti-D (Rhesus)",
+      "IgG1 / IgG3",
+      "Efficient placental transfer",
+      "Severe extravascular splenic hemolysis"
+     ],
+     [
+      "Anti-Kell",
+      "IgG",
+      "Efficient placental transfer",
+      "Suppresses bone marrow erythroid precursors"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unchecked fetal hemolysis leads to severe anemia, high-output cardiac failure, and extramedullary hematopoiesis in the fetal liver and spleen. Disruption of hepatic architecture causes portal hypertension and hypoalbuminemia, culminating in **hydrops fetalis**, defined by pathological fluid accumulation in two or more fetal compartments (ascites, pleural effusion, pericardial effusion, and generalized skin edema).",
+   "say": "Severe fetal anemia causes high-output heart failure and liver enlargement. Reduced albumin production and portal hypertension cause hydrops fetalis, marked by fluid accumulation in two or more fetal body cavities, such as ascites and pleural effusions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Maternal Antibody Titration",
+     "points": [
+      "Serial indirect Coombs test (ICT) monitoring",
+      "Critical titer threshold typically 1:16 to 1:32",
+      "Below threshold: recheck titer every 2 to 4 weeks",
+      "Above threshold: titers no longer correlate; start Doppler"
+     ]
+    },
+    "right": {
+     "title": "MCA Doppler Velocimetry",
+     "points": [
+      "Middle cerebral artery peak systolic velocity (MCA PSV)",
+      "Hyperdynamic circulation and reduced viscosity increase speed",
+      "MCA PSV > 1.5 multiples of the median (MoM) = severe anemia",
+      "Non-invasive gold standard replacing invasive amniocentesis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Non-invasive assessment of fetal anemia relies on Doppler measurement of **middle cerebral artery peak systolic velocity**. As fetal hematocrit falls, blood viscosity decreases and compensatory cardiac output accelerates cerebral flow velocity. An MCA peak systolic velocity exceeding 1.5 multiples of the median for gestational age predicts moderate-to-severe fetal anemia with over ninety-five percent sensitivity, serving as the definitive trigger for fetal intervention.",
+   "say": "Doppler measurement of middle cerebral artery peak systolic velocity provides non-invasive assessment of fetal anemia. Decreased blood viscosity increases blood speed. A velocity over 1.5 multiples of the median predicts severe anemia, triggering intervention.",
+   "vis": null
+  },
+  {
+   "tx": "Definitive management for severe fetal anemia before thirty-four weeks gestation is **intrauterine blood transfusion**. Under continuous ultrasound guidance, a needle is inserted into the umbilical vein at the placental cord insertion (cordocentesis). Fresh, O-negative, CMV-negative, leukodepleted, irradiated packed red blood cells cross-matched against maternal serum are transfused to restore fetal hematocrit to forty to forty-five percent.",
+   "say": "Definitive therapy for severe fetal anemia is intrauterine blood transfusion. Under ultrasound guidance, packed red blood cells are transfused into the umbilical vein, raising fetal hematocrit to forty percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention",
+     "Gestational timing",
+     "Procedural details",
+     "Target endpoint"
+    ],
+    "rows": [
+     [
+      "Routine anti-D prophylaxis",
+      "28 weeks gestation & < 72h postpartum",
+      "300 mcg (1500 IU) IM",
+      "Neutralizes up to 30 mL fetal blood"
+     ],
+     [
+      "Sensitizing event coverage",
+      "Amniocentesis, trauma, APH, miscarriage",
+      "Anti-D within 72h (Kleihauer-guided)",
+      "Prevents primary maternal sensitization"
+     ],
+     [
+      "Intrauterine transfusion (IUT)",
+      "20 to 34 weeks for severe anemia",
+      "Umbilical vein cordocentesis",
+      "Fetal hematocrit 40-45%"
+     ],
+     [
+      "Expedited delivery",
+      "After 34-35 weeks gestation",
+      "Deliver if mature / nursery support",
+      "Avoid repeated late cordocentesis risk"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-obg-131",
+  "bk2-obg-132",
+  "bk2-obg-133",
+  "bk2-obg-134",
+  "bk2-obg-135",
+  "bk2-obg-136",
+  "bk2-obg-137",
+  "bk2-obg-138",
+  "bk2-obg-139",
+  "bk2-obg-140"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

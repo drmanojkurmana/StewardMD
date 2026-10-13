@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "obg-aub",
+ "subject": "obstetrics-gynaecology",
+ "title": "Abnormal uterine bleeding: FIGO PALM-COEIN classification and management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The International Federation of Gynecology and Obstetrics classifies abnormal uterine bleeding using the **FIGO PALM-COEIN system**. This universally recognized framework categorizes etiologies into structural causes measurable by imaging or histology (Polyp, Adenomyosis, Leiomyoma, Malignancy and hyperplasia) and non-structural causes (Coagulopathy, Ovulatory dysfunction, Endometrial primary defects, Iatrogenic interventions, and Not otherwise classified).",
+   "say": "FIGO categorizes abnormal uterine bleeding using the PALM-COEIN system. Structural causes are Polyp, Adenomyosis, Leiomyoma, and Malignancy. Non-structural causes comprise Coagulopathy, Ovulatory dysfunction, Endometrial defects, Iatrogenic causes, and Not otherwise classified.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Acronym component",
+     "Diagnostic methodology",
+     "Core pathophysiology"
+    ],
+    "rows": [
+     [
+      "Structural (PALM)",
+      "Polyp (AUB-P)",
+      "Ultrasound / Hysteroscopy",
+      "Focal endometrial stromal outgrowth"
+     ],
+     [
+      "Structural (PALM)",
+      "Adenomyosis (AUB-A)",
+      "Pelvic MRI / Ultrasound",
+      "Myometrial glandular invagination"
+     ],
+     [
+      "Structural (PALM)",
+      "Leiomyoma (AUB-L)",
+      "Ultrasound (FIGO 0-8)",
+      "Monoclonal smooth muscle expansion"
+     ],
+     [
+      "Structural (PALM)",
+      "Malignancy (AUB-M)",
+      "Endometrial biopsy",
+      "Malignancy or atypical hyperplasia"
+     ],
+     [
+      "Non-structural",
+      "Coagulopathy (AUB-C)",
+      "Coagulation profile / vWF",
+      "Systemic hemostatic disorder"
+     ],
+     [
+      "Non-structural",
+      "Ovulatory (AUB-O)",
+      "Progesterone / Menstrual diary",
+      "Unopposed estrogen stimulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The initial evaluation of abnormal uterine bleeding mandates distinguishing acute hemorrhage from chronic irregularities. In non-pregnant reproductive-age women, pregnancy must always be excluded with **serum quantitative beta-hCG**. Detailed history determines bleeding volume, cyclicity, and systemic coagulation markers. Transvaginal ultrasonography reliably measures endometrial thickness and detects architectural distortion within the endometrial-myometrial junction.",
+   "say": "Evaluation starts with excluding pregnancy using beta-hCG. History assesses volume, frequency, and bleeding disorders. Transvaginal ultrasound measures endometrial thickness and identifies anatomical distortions like polyps and fibroids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ovulatory AUB (AUB-O)",
+     "points": [
+      "Irregular, unpredictable, variable bleeding intervals",
+      "Absent premenstrual molimina symptoms",
+      "Unopposed estrogen causing endometrial breakdown",
+      "Common at extremes of reproductive life (PCOS, perimenopause)"
+     ]
+    },
+    "right": {
+     "title": "Endometrial / Structural AUB (AUB-E / L)",
+     "points": [
+      "Regular, predictable monthly cycles",
+      "Presents with heavy prolonged bleeding (menorrhagia)",
+      "Impaired local endometrial prostaglandin vasoconstriction",
+      "Structural distortion by polyps, fibroids or adenomyosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sampling the endometrium via outpatient biopsy is critical to rule out premalignant and malignant lesions. An **endometrial biopsy** is strongly indicated for any woman aged forty-five and older with abnormal uterine bleeding. In patients under forty-five, biopsy is mandatory if high-risk factors exist, including obesity with chronic unopposed estrogen, polycystic ovary syndrome, Lynch syndrome, or persistent bleeding despite medical therapy.",
+   "say": "Endometrial biopsy rules out hyperplasia and malignancy. It is mandatory for women aged forty-five and older with abnormal bleeding, and in younger women with risk factors like obesity, PCOS, Lynch syndrome, or medical therapy failure.",
+   "vis": null
+  },
+  {
+   "tx": "First-line medical therapy for heavy menstrual bleeding without structural pathology is the **levonorgestrel intrauterine system**. The 52-milligram LNG-IUS reduces menstrual blood loss by over ninety percent while providing highly effective contraception. Alternative non-hormonal options include tranexamic acid, an antifibrinolytic administered only during menses, and oral nonsteroidal anti-inflammatory drugs that correct local prostaglandin imbalance.",
+   "say": "First-line medical therapy for heavy menstrual bleeding is the levonorgestrel intrauterine system, reducing blood loss by over ninety percent. Non-hormonal alternatives include tranexamic acid taken during bleeding days, and oral anti-inflammatory drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological agent",
+     "Mechanism of action",
+     "Efficacy in blood loss",
+     "Dosing regimen"
+    ],
+    "rows": [
+     [
+      "52 mg LNG-IUS",
+      "Direct local endometrial atrophy",
+      "70-95% reduction at 6 months",
+      "Continuous release 5-8 years"
+     ],
+     [
+      "Tranexamic acid",
+      "Inhibits plasminogen activation",
+      "40-55% reduction",
+      "1 g orally three times daily during menses"
+     ],
+     [
+      "Oral mefenamic acid",
+      "Inhibits cyclooxygenase enzymes",
+      "25-35% reduction",
+      "500 mg orally three times daily during menses"
+     ],
+     [
+      "Combined oral pills",
+      "Suppresses HPO axis / stabilizes endometrium",
+      "40-50% reduction",
+      "Daily cyclic or continuous intake"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-obg-011",
+  "bk2-obg-012",
+  "bk2-obg-013",
+  "bk2-obg-014",
+  "bk2-obg-015",
+  "bk2-obg-016",
+  "bk2-obg-017",
+  "bk2-obg-018",
+  "bk2-obg-019",
+  "bk2-obg-020"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

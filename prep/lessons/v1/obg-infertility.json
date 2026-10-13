@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-infertility",
+ "subject": "obstetrics-gynaecology",
+ "title": "Subfertility evaluation, ovulation induction and assisted reproductive technology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Clinical evaluation of **subfertility** commences after twelve months of regular unprotected sexual intercourse in women under thirty-five, or after six months in women aged thirty-five and older. Primary investigation simultaneously assesses three physiological pillars: male semen parameters, female ovulatory status, and tubal-pelvic anatomical patency. Identifying the underlying etiology guides stepwise escalation from ovulation induction to advanced assisted reproductive technology.",
+   "say": "Subfertility investigation begins after twelve months of unprotected intercourse, or six months if maternal age is thirty-five or older. Initial evaluation assesses three pillars: semen analysis, ovulatory status, and tubal patency, guiding treatment from medication to assisted reproduction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic pillar",
+     "Primary test",
+     "Normal reference threshold",
+     "Pathological significance"
+    ],
+    "rows": [
+     [
+      "Male factor",
+      "Semen analysis (WHO 2021)",
+      "Volume >= 1.4 mL, conc >= 16 M/mL, motility >= 42%",
+      "Oligozoospermia / Asthenozoospermia"
+     ],
+     [
+      "Ovulatory factor",
+      "Mid-luteal progesterone (Day 21)",
+      "> 30 nmol/L (> 10 ng/mL)",
+      "Anovulation in PCOS / LPD"
+     ],
+     [
+      "Ovarian reserve",
+      "Serum AMH / Antral follicle count",
+      "AMH > 1.0 ng/mL, AFC > 5-7 per ovary",
+      "Diminished ovarian reserve"
+     ],
+     [
+      "Tubal factor",
+      "Hysterosalpingography (HSG)",
+      "Bilateral free peritoneal spill",
+      "Hydrosalpinx / Tubal blockage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Assessment of **ovarian reserve** estimates the remaining primordial follicle pool to predict response to controlled ovarian stimulation. Serum anti-M\u00fcllerian hormone (AMH), synthesized by granulosa cells of preantral and small antral follicles, provides a stable biomarker uninfluenced by menstrual cycle phase. Combined with transvaginal ultrasound antral follicle count, AMH identifies patients at risk of poor ovarian response or ovarian hyperstimulation syndrome.",
+   "say": "Ovarian reserve testing predicts response to fertility medications. Serum anti-M\u00fcllerian hormone remains stable throughout the menstrual cycle. Combined with ultrasound antral follicle counts, it identifies patients at risk for poor response or ovarian hyperstimulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diminished ovarian reserve",
+     "points": [
+      "Serum AMH less than 0.5 to 1.0 ng/mL",
+      "Antral follicle count under 5 to 7 total",
+      "Elevated baseline day 3 FSH (> 10-12 IU/L)",
+      "High risk of poor stimulation and cycle cancellation"
+     ]
+    },
+    "right": {
+     "title": "High ovarian reserve (PCOS)",
+     "points": [
+      "Serum AMH greater than 3.5 to 4.0 ng/mL",
+      "Antral follicle count exceeding 20-25 total",
+      "Low or normal baseline FSH with elevated LH",
+      "Substantial risk of ovarian hyperstimulation syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For anovulatory subfertility secondary to polycystic ovary syndrome, **letrozole** represents the first-line oral ovulation induction agent. As a third-generation aromatase inhibitor, letrozole blocks estrogen synthesis, relieving hypothalamic negative feedback and releasing endogenous follicle-stimulating hormone without anti-estrogenic endometrial thinning. Clomiphene citrate serves as an alternative, while exogenous gonadotropins require rigorous ultrasound monitoring to mitigate multiple gestation risks.",
+   "say": "Letrozole is the first-line oral ovulation induction medication for polycystic ovary syndrome. By inhibiting aromatase, it increases pituitary FSH release without thinning the endometrium. Clomiphene citrate is an alternative, while gonadotropins require close monitoring to prevent multiple gestations.",
+   "vis": null
+  },
+  {
+   "tx": "When tubal obstruction, severe male subfertility, or failed simple interventions occur, **assisted reproductive technology** offers definitive treatment pathways. Intrauterine insemination places washed motile spermatozoa into the uterine cavity around ovulation. In vitro fertilization bypasses diseased fallopian tubes entirely, while intracytoplasmic sperm injection directly introduces a single chosen spermatozoon into the oocyte cytoplasm, overcoming severe oligoasthenoteratozoospermia and prior fertilization failure.",
+   "say": "Assisted reproductive technology provides definitive pathways when basic treatments fail. Intrauterine insemination places motile sperm directly into the uterus. In vitro fertilization bypasses blocked fallopian tubes, while ICSI injects a single sperm into an egg for severe male infertility.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Modality",
+     "Clinical indication",
+     "Procedural technique",
+     "Success determinants"
+    ],
+    "rows": [
+     [
+      "Intrauterine insemination (IUI)",
+      "Mild male factor / Unexplained",
+      "Washed sperm injected into uterine cavity",
+      "Tubal patency mandatory"
+     ],
+     [
+      "In vitro fertilization (IVF)",
+      "Bilateral tubal block / Endometriosis",
+      "Oocytes retrieved and incubated with sperm",
+      "Embryo morphology / Receptive endometrium"
+     ],
+     [
+      "Intracytoplasmic sperm injection",
+      "Severe male factor / Surgical sperm",
+      "Single spermatozoon injected into oocyte",
+      "Sperm viability / Normal fertilization"
+     ],
+     [
+      "Preimplantation genetic testing",
+      "Monogenic diseases / Aneuploidy risk",
+      "Trophectoderm biopsy of blastocyst",
+      "Euploid embryo transfer"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-obg-021",
+  "bk2-obg-022",
+  "bk2-obg-023",
+  "bk2-obg-024",
+  "bk2-obg-025",
+  "bk2-obg-026",
+  "bk2-obg-027",
+  "bk2-obg-028",
+  "bk2-obg-029",
+  "bk2-obg-030"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
