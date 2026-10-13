@@ -1,82 +1,167 @@
 {
- "v": 1,
  "module": "sur-atls",
  "subject": "surgery",
- "title": "ATLS primary survey: airway, breathing, circulation, disability, exposure",
- "minutes": 8,
+ "title": "Advanced Trauma Life Support, primary survey, definitive airway, and lethal triad",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "ATLS Advanced Trauma Life Support 10th ed"
+ ],
  "steps": [
   {
-   "tx": "**ATLS** assesses the injured patient in a fixed order because the fastest killers are treated first: **Airway** with cervical spine protection, **Breathing**, **Circulation** with haemorrhage control, **Disability** and **Exposure** with temperature control. A problem found at any step is treated before moving on, and the survey is repeated after every intervention or deterioration (ATLS).",
-   "say": "Assess airway, breathing, circulation, disability and exposure in that order, treating each problem before moving on.",
+   "tx": "The Advanced Trauma Life Support primary survey organizes resuscitation into an orderly sequence designed to rapidly identify and treat immediately life-threatening **injuries**. The survey follows the ABCDE mnemonic: airway with cervical spine motion restriction, breathing and ventilation, circulation with hemorrhage control, disability and neurological status, and exposure with environmental hypothermia prevention. Resuscitative interventions occur concurrently with assessment, and deterioration at any stage mandates immediate reversion to airway re-evaluation.",
+   "say": "The ATLS primary survey follows the ABCDE sequence: airway with cervical protection, breathing, circulation with hemorrhage control, neurological disability, and environmental exposure. Deterioration mandates immediate return to airway re-evaluation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Primary survey step",
+     "Clinical assessment target",
+     "Immediate life-saving intervention"
+    ],
+    "rows": [
+     [
+      "Airway with C-spine",
+      "Vocal responsiveness & airway patency",
+      "Chin lift, jaw thrust, endotracheal tube"
+     ],
+     [
+      "Breathing",
+      "Tension pneumothorax, open chest wound",
+      "Needle thoracostomy, chest tube, 3-sided dressing"
+     ],
+     [
+      "Circulation",
+      "External exsanguination & internal shock",
+      "Direct pressure, pelvic binder, 1:1:1 blood"
+     ],
+     [
+      "Disability",
+      "Glasgow Coma Scale & pupillary light",
+      "Correct hypoxia, hypotension, herniation"
+     ],
+     [
+      "Exposure",
+      "Complete body inspection & hypothermia",
+      "Warm blankets, fluid warmers, room control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Establishing a definitive airway is indicated for apnea, severe neurological depression with Glasgow Coma Scale score of eight or **less**, impending airway compromise from inhalation burns, severe maxillofacial fractures, or inability to maintain oxygenation. Endotracheal intubation with rapid sequence induction and in-line manual cervical stabilization represents the primary approach. When endotracheal intubation fails or is anatomically impossible, surgical cricothyroidotomy through the cricothyroid membrane provides emergency surgical access in adults, whereas needle cricothyroidotomy is preferred in children under twelve.",
+   "say": "Definitive airway placement is indicated for coma with GCS eight or less, apnea, or severe facial trauma. Endotracheal intubation with manual in-line cervical stabilization is first-line, followed by surgical cricothyroidotomy if intubation fails.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Airway + C-spine"
+      "id": "n1",
+      "label": "Severe trauma with airway compromise"
      },
      {
-      "id": "b",
-      "label": "Breathing"
+      "id": "n2",
+      "label": "Rapid sequence intubation with C-spine control"
      },
      {
-      "id": "c",
-      "label": "Circulation"
+      "id": "n3",
+      "label": "Failed intubation / cannot oxygenate"
      },
      {
-      "id": "d",
-      "label": "Disability"
-     },
-     {
-      "id": "e",
-      "label": "Exposure"
+      "id": "n4",
+      "label": "Emergency surgical cricothyroidotomy"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "n1",
+      "n2"
      ],
      [
-      "b",
-      "c"
+      "n2",
+      "n3"
      ],
      [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
+      "n3",
+      "n4"
      ]
     ]
    }
   },
   {
-   "tx": "External bleeding is controlled with **direct pressure, packing, tourniquets and pelvic binders** as appropriate, alongside large-bore access, blood samples and early blood products where indicated. A silent chest, tracheal deviation or collapsing blood pressure after chest injury demands immediate action for tension pneumothorax. Analgesia, antibiotics and tetanus cover follow the primary survey, never before it.",
-   "say": "Control external bleeding directly, get access and bloods, and act at once on tension pneumothorax signs.",
+   "tx": "Hemorrhagic shock is the leading preventable cause of early post-injury death. The five anatomical compartments capable of hiding major internal **bleeding** are the chest, abdomen, pelvis, retroperitoneum with long-bone fractures, and the external scene floor. Hemostatic resuscitation avoids excessive crystalloid infusion, employing early balanced blood component therapy utilizing packed red blood cells, fresh frozen plasma, and platelets in an equal one-to-one-to-one ratio alongside intravenous tranexamic acid administered within three hours of injury.",
+   "say": "Hemorrhagic shock is assessed across five major compartments: chest, abdomen, pelvis, retroperitoneum, and floor. Resuscitation avoids crystalloids, prioritizing balanced one-to-one-to-one blood components and tranexamic acid within three hours.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Finding",
-     "First action"
+     "Major bleeding compartment",
+     "Bedside physical / radiological sign",
+     "Emergency hemostatic control"
     ],
     "rows": [
      [
-      "External bleeding",
-      "Pressure, pack, tourniquet"
+      "Thoracic cavity",
+      "Dullness to percussion / hemothorax on X-ray",
+      "Tube thoracostomy (thoracotomy if > 1500 mL)"
      ],
      [
-      "Tension signs",
-      "Immediate decompression per protocol"
+      "Peritoneal cavity",
+      "Abdominal distension / fluid on FAST scan",
+      "Emergency exploratory laparotomy"
+     ],
+     [
+      "Pelvic ring fracture",
+      "Mechanically unstable open-book pelvis",
+      "Immediate pelvic circumferential binder"
+     ],
+     [
+      "Femoral / long bones",
+      "Deformity, tense swelling, shortening",
+      "Traction splinting & compartment monitoring"
      ]
     ]
    }
   },
   {
-   "tx": "The **secondary survey** is a head-to-toe examination with history, imaging and reassessment, and it happens only once the primary survey is stable. Reassess relentlessly: trauma patients deteriorate, occult bleeding hides in chest, abdomen, pelvis and long bones, and a falling conscious level after head injury is a neurosurgical emergency until proved otherwise.",
-   "say": "The head-to-toe secondary survey follows only a stable primary survey, with relentless reassessment for occult bleeding.",
-   "vis": null
+   "tx": "The lethal triad of trauma comprises hypothermia, metabolic acidosis, and coagulopathy, creating a self-reinforcing vicious physiological **cycle** that drives cellular shock and microvascular failure. Resuscitation room hypothermia impairs platelet aggregation and enzymatic clotting cascades, worsening hemorrhage and hypoperfusion. Damage control surgery interrupts this lethal spiral by prioritizing rapid operative control of active exsanguination and enteric contamination, temporary abdominal wall closure, and transfer to the intensive care unit for physiological correction.",
+   "say": "The lethal triad of hypothermia, acidosis, and coagulopathy drives mortality in severe trauma. Damage control surgery interrupts this cycle by rapidly controlling bleeding and contamination, delaying definitive reconstruction until physiological stabilization.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lethal Triad Cycle",
+     "points": [
+      "Hypothermia inhibits coagulation enzymes",
+      "Acidosis reduces clotting factor activity",
+      "Coagulopathy perpetuates exsanguinating hemorrhage",
+      "Drive end-organ ischemia and death"
+     ]
+    },
+    "right": {
+     "title": "Damage Control Surgery",
+     "points": [
+      "Abbreviated laparotomy (< 60 minutes)",
+      "Pack bleeding liver & staple hollow viscera",
+      "Temporary abdominal closure with negative pressure",
+      "ICU resuscitation of warmth & pH prior to re-exploration"
+     ]
+    }
+   }
   }
- ]
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "99250ce9-4000-8000-9925-0ce912345678",
+  "96250830-4000-8000-9625-083012345678",
+  "972509c3-4000-8000-9725-09c312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
 }

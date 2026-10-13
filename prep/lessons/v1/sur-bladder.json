@@ -1,0 +1,160 @@
+{
+ "module": "sur-bladder",
+ "subject": "surgery",
+ "title": "Urothelial carcinoma of the bladder, TURBT, staging, and radical cystectomy",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Campbell-Walsh Urology 12th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Urothelial transitional cell carcinoma accounts for more than ninety percent of primary urinary bladder **neoplasms** in Western countries. Cigarette smoking constitutes the single most important modifiable risk factor, increasing disease probability threefold through aromatic amine exposure. Occupational exposures to industrial dye intermediates, benzidine, and rubber compounds also strongly predispose to urothelial carcinogenesis. Squamous cell carcinoma occurs predominantly in regions with endemic Schistosoma haematobium bilharzial infection, where chronic irritation produces extensive squamous metaplasia.",
+   "say": "Urothelial carcinoma accounts for ninety percent of bladder tumors, with cigarette smoking and aromatic amine exposures serving as primary causative factors. Squamous cell carcinoma is associated with chronic Schistosoma haematobium infection and recurrent irritation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological tumor type",
+     "Epidemiological proportion",
+     "Primary etiological factors"
+    ],
+    "rows": [
+     [
+      "Urothelial (transitional)",
+      "Over 90 percent of cases",
+      "Tobacco smoking & aromatic amines"
+     ],
+     [
+      "Squamous cell carcinoma",
+      "Approximately 5 percent",
+      "Schistosoma & long-term catheters"
+     ],
+     [
+      "Adenocarcinoma",
+      "Under 2 percent",
+      "Urachal remnants at bladder dome"
+     ],
+     [
+      "Small cell neuroendocrine",
+      "Under 1 percent",
+      "Aggressive systemic metastasis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painless gross hematuria throughout the urinary stream represents the cardinal clinical **presentation** of bladder cancer until proven otherwise. Irritative lower urinary tract voiding symptoms including frequency, urgency, and dysuria without demonstrable bacterial infection frequently accompany carcinoma in situ. Diagnostic workup mandates office flexible cystoscopy and voiding urine cytology, followed by examination under anesthesia and transurethral resection of bladder tumor to achieve definitive histological diagnosis and pathological depth staging.",
+   "say": "Painless gross hematuria is the cardinal presenting sign of bladder cancer. Irritative voiding symptoms often signify carcinoma in situ. Diagnostic evaluation requires flexible cystoscopy, urine cytology, and complete transurethral resection of the bladder tumor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Painless gross visible hematuria"
+     },
+     {
+      "id": "n2",
+      "label": "Flexible cystoscopy & cytology"
+     },
+     {
+      "id": "n3",
+      "label": "Complete transurethral resection (TURBT)"
+     },
+     {
+      "id": "n4",
+      "label": "Assess detrusor muscle invasion"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathological staging hinges critically upon the histological presence of detrusor muscularis **propria** within the resected tissue specimen. Non-muscle-invasive bladder cancer encompasses stage Ta non-invasive papillary tumors, T1 tumors invading the subepithelial lamina propria, and Tis flat carcinoma in situ. Muscle-invasive disease encompasses stage T2 tumors invading the detrusor muscle, stage T3 invading perivesical fat, and stage T4 invading adjacent pelvic visceral structures such as the prostate, uterus, or pelvic sidewalls.",
+   "say": "Pathological staging requires detrusor muscle in the resection specimen. Non-muscle-invasive cancer includes stages Ta, T1, and flat carcinoma in situ. Muscle-invasive cancer involves stage T2 detrusor invasion or deeper perivesical and pelvic organ spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathological T stage",
+     "Microscopic depth of invasion",
+     "Clinical category"
+    ],
+    "rows": [
+     [
+      "Stage Ta",
+      "Non-invasive papillary urothelium",
+      "Non-muscle-invasive"
+     ],
+     [
+      "Stage Tis",
+      "Flat high-grade carcinoma in situ",
+      "Non-muscle-invasive (high risk)"
+     ],
+     [
+      "Stage T1",
+      "Subepithelial lamina propria connective tissue",
+      "Non-muscle-invasive"
+     ],
+     [
+      "Stage T2",
+      "Detrusor muscularis propria invasion",
+      "Muscle-invasive disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-muscle-invasive bladder cancer is managed by complete transurethral **resection** followed by intravesical chemotherapy instillation and maintenance Bacillus Calmette-Guerin immunotherapy for intermediate- and high-risk cases. Muscle-invasive disease mandates neoadjuvant cisplatin-based combination chemotherapy followed by radical cystectomy with bilateral pelvic lymphadenectomy. In men, radical cystectomy removes the bladder, prostate, and seminal vesicles, while in women it entails anterior pelvic exenteration. Urinary diversion utilizes an ileal conduit or orthotopic neobladder.",
+   "say": "Non-muscle-invasive disease receives transurethral resection followed by intravesical Bacillus Calmette-Guerin therapy. Muscle-invasive bladder cancer requires neoadjuvant cisplatin chemotherapy followed by radical cystectomy, pelvic lymph node dissection, and urinary diversion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Muscle-Invasive (NMIBC)",
+     "points": [
+      "Transurethral resection of tumor",
+      "Adjuvant intravesical BCG immunotherapy",
+      "Routine surveillance cystoscopy"
+     ]
+    },
+    "right": {
+     "title": "Muscle-Invasive (MIBC)",
+     "points": [
+      "Neoadjuvant cisplatin chemotherapy",
+      "Radical cystoprostatectomy / exenteration",
+      "Urinary diversion via ileal conduit / neobladder"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "2f05ace3-4000-8000-2f05-ace312345678",
+  "3005ae76-4000-8000-3005-ae7612345678",
+  "3105b009-4000-8000-3105-b00912345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

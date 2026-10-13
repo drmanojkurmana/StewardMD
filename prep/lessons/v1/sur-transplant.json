@@ -1,0 +1,160 @@
+{
+ "module": "sur-transplant",
+ "subject": "surgery",
+ "title": "Organ transplantation, allorecognition, rejection mechanisms, and renal allografting",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Danovitch Handbook of Kidney Transplantation 6th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Allogeneic organ transplantation requires matching of human leukocyte **antigens** encoded within the major histocompatibility complex on chromosome 6. Class I molecules including HLA-A, B, and C are expressed on all nucleated cells and present endogenous antigens to CD8 cytotoxic T lymphocytes. Class II molecules including HLA-DR, DP, and DQ are restricted to antigen-presenting cells and present exogenous antigens to CD4 helper T lymphocytes. Direct allorecognition occurs when recipient T cells recognize intact intact donor MHC molecules directly.",
+   "say": "Organ transplantation relies on matching HLA class I and class II antigens. Class I antigens present to CD8 cytotoxic T cells, while class II molecules present to CD4 helper cells. Direct allorecognition drives acute allograft rejection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MHC / HLA category",
+     "Tissue expression pattern",
+     "Target T lymphocyte subset"
+    ],
+    "rows": [
+     [
+      "Class I (HLA-A, B, C)",
+      "All nucleated somatic cells",
+      "CD8+ cytotoxic T lymphocytes"
+     ],
+     [
+      "Class II (HLA-DR, DP, DQ)",
+      "Dendritic cells, macrophages, B cells",
+      "CD4+ helper T lymphocytes"
+     ],
+     [
+      "Direct allorecognition",
+      "Recipient T cells bind donor intact MHC",
+      "Drives early acute cellular rejection"
+     ],
+     [
+      "Indirect allorecognition",
+      "Recipient APCs process donor peptides",
+      "Drives chronic antibody-mediated rejection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Allograft rejection is categorized into hyperacute, acute cellular, acute **antibody-mediated**, and chronic rejection. Hyperacute rejection occurs within minutes to hours, driven by pre-existing circulating anti-donor antibodies that activate complement, producing microvascular thrombosis, graft cyanosis, and cortical necrosis; it is prevented by complement-dependent cytotoxicity crossmatching. Acute cellular rejection develops within weeks to months, featuring T-lymphocyte tubulitis and interstitial infiltrate that responds to pulsed methylprednisolone. Chronic rejection manifests with progressive obliterative graft vasculopathy and interstitial fibrosis.",
+   "say": "Hyperacute rejection occurs within minutes from preformed antibodies and is prevented by crossmatching. Acute cellular rejection manifests as T-cell tubulitis responsive to intravenous corticosteroids, while chronic rejection causes irreversible graft fibrosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Donor-recipient HLA typing & crossmatch"
+     },
+     {
+      "id": "n2",
+      "label": "Negative crossmatch confirms suitability"
+     },
+     {
+      "id": "n3",
+      "label": "Induction therapy with basiliximab / ATG"
+     },
+     {
+      "id": "n4",
+      "label": "Maintenance triple immunosuppression"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maintenance immunosuppression typically incorporates a triple-drug **regimen** consisting of a calcineurin inhibitor, an antimetabolite, and a corticosteroid. Tacrolimus binds FK-binding protein 12 to inhibit calcineurin phosphatase, blocking interleukin-2 transcription; therapeutic monitoring of trough blood levels is mandatory to prevent nephrotoxicity and neurotoxicity. Mycophenolate mofetil reversibly inhibits inosine monophosphate dehydrogenase, blocking de novo purine synthesis in proliferating lymphocytes. Basiliximab or anti-thymocyte globulin provides biological induction therapy during the perioperative implantation window.",
+   "say": "Triple maintenance immunosuppression includes tacrolimus, mycophenolate mofetil, and prednisone. Tacrolimus blocks interleukin-2 transcription, requiring trough monitoring to avoid nephrotoxicity. Mycophenolate inhibits de novo purine synthesis in lymphocytes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Immunosuppressive agent",
+     "Molecular pharmacological target",
+     "Primary clinical adverse effect"
+    ],
+    "rows": [
+     [
+      "Tacrolimus (CNI)",
+      "Inhibits calcineurin phosphatase / IL-2",
+      "Nephrotoxicity, tremor, new-onset diabetes"
+     ],
+     [
+      "Cyclosporine (CNI)",
+      "Binds cyclophilin / blocks calcineurin",
+      "Nephrotoxicity, gingival hyperplasia, hirsutism"
+     ],
+     [
+      "Mycophenolate mofetil",
+      "Inhibits IMPDH / blocks purine synthesis",
+      "Gastrointestinal diarrhea, leukopenia"
+     ],
+     [
+      "Corticosteroids",
+      "Inhibits NF-kB & cytokine transcription",
+      "Hypertension, hyperglycemia, osteoporosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal transplantation involves heterotopic placement of the donor **allograft** within the recipient iliac fossa extraperitoneally. Vascular reconstruction anastomoses the donor renal vein end-to-side to the external iliac vein, and the donor renal artery end-to-side to the external iliac artery. Urinary continuity is re-established via an extravesical Lich-Gregoir ureteroneocystostomy over an internal double-J stent. Early postoperative oliguria warrants immediate Doppler ultrasonography to rule out renal artery thrombosis, renal vein kinking, or perigraft fluid collections such as urinoma or lymphocele.",
+   "say": "Renal transplantation places the kidney extraperitoneally in the iliac fossa. Vascular anastomoses connect to the external iliac vessels, and the ureter is implanted into the bladder. Postoperative oliguria mandates Doppler ultrasound to exclude vascular thrombosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Renal Vascular Anastomosis",
+     "points": [
+      "Donor renal vein to external iliac vein",
+      "Donor renal artery to external iliac artery",
+      "Meticulous de-airing prior to clamp release"
+     ]
+    },
+    "right": {
+     "title": "Ureteral Reimplantation",
+     "points": [
+      "Extravesical Lich-Gregoir ureteroneocystostomy",
+      "Submucosal anti-reflux tunneling into bladder",
+      "Protected by internal double-J ureteral stent"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "37eaa534-4000-8000-37ea-a53412345678",
+  "3aeaa9ed-4000-8000-3aea-a9ed12345678",
+  "39eaa85a-4000-8000-39ea-a85a12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
