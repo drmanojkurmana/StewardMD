@@ -145,7 +145,7 @@ test("plan choices resolve to exam profiles; legacy usmle reads Step 1", () => {
   assert.equal(PLAN.choiceOf("mccqe-1").tab, "mccqe");
 });
 
-test("NEET-SS groups: 15 groups, medical default, surgical has no bank subjects", () => {
+test("NEET-SS groups: 15 groups, medical default, empty groups are not offered", () => {
   assert.equal(PLAN.SS_GROUPS.length, 15);
   assert.ok(PLAN.SS_GROUPS.every((g) => g.id && g.label && g.feeder && Array.isArray(g.subjects)));
   assert.equal(PLAN.defaultSsGroup(), "medical");
@@ -157,7 +157,7 @@ test("NEET-SS groups: 15 groups, medical default, surgical has no bank subjects"
   ["ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology",
     "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-pulmonology",
     "ss-infectious-diseases", "ss-rheumatology-immunology"].forEach((id) => assert.ok(med.includes(id), "medical holds " + id));
-  assert.deepEqual(PLAN.ssGroupSubjects("surgical"), []);
+  assert.ok(PLAN.ssGroupSubjects("surgical").includes("ss-general-surgery"), "surgical holds its bank subjects");
   assert.deepEqual(PLAN.normalizePlan({ exam: "neet-pg", group: "medical", subject: "ss-cardiology" }), { exam: "neet-pg" });
 });
 
@@ -234,6 +234,14 @@ test("surgical NEET-SS plan: one short empty state for the group", () => {
   const html = T2.testsHtml(H);
   assert.ok(html.includes("No questions for the Surgical group in the bank yet."), "rare state, clearly worded");
   assert.ok(!html.includes('data-p="neet-ss"'), "no empty exam section");
+});
+
+test("group sheet offers only groups with bank subjects and never says no questions", () => {
+  const src = fs.readFileSync(path.join(ROOT, "prep-plan.js"), "utf8");
+  assert.ok(!src.includes("No questions in the bank yet"), "the owner-removed line is gone");
+  const offered = PLAN.SS_GROUPS.filter((g) => g.subjects.length);
+  assert.ok(offered.length >= 5, "groups with subjects stay offered");
+  assert.ok(offered.every((g) => g.subjects.length > 0), "no offered group is empty");
 });
 
 test("empty bank (Step 2 CK, PLAB): one short state, format behind an info row", () => {
