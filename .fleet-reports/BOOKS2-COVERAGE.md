@@ -74,3 +74,7 @@ Wave PLAS1 DONE (branch books2-plas1): spl-reconstructive, spl-burns-hand, spl-c
 Wave URO1 DONE (branch books2-uro1): sur-stones, sur-bph-prostate, sur-oncology, sur-andrology-infertility, sur-paediatric-reconstructive. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-uro-001 to 050. Urology 5/5 COMPLETE pending merges.
 
 
+Wave URO1 DONE (branch books2-uro1): sur-stones, sur-bph-prostate, sur-oncology, sur-andrology-infertility, sur-paediatric-reconstructive. Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-uro-001 to 050. Urology 5/5 COMPLETE pending merges.
+
+Wave SAS1 DONE (branch books2-sas1): vir-diagnosis (lab methods: culture/CPE, serology windows, molecular, inclusions), vir-hiv-emerging (fourth-gen HIV + Ebola/Nipah/arbo/outbreak). Each: 1 v1 lesson, 1 KB, 10 MCQs bk2-mic-221 to 240. Microbiology 40/40 COMPLETE pending merges.
+
