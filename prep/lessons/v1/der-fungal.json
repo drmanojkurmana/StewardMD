@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "der-fungal",
+ "subject": "plab-dermatology",
+ "title": "Superficial fungal infections: dermatophytes, candida, pityriasis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Superficial fungal infections** are caused predominantly by dermatophytes belonging to Trichophyton, Microsporum and Epidermophyton genera, which invade keratinised tissues of the epidermis, hair and nails. Clinical manifestations depend upon the anatomical site involved, including tinea corporis on the trunk, tinea cruris in the groin, tinea pedis on the feet, and tinea capitis on the scalp.",
+   "say": "Dermatophytes invade keratinised skin, hair and nails, producing distinct clinical patterns across anatomical sites.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inspect scaly lesion"
+     },
+     {
+      "id": "b",
+      "label": "Skin scraping or nail clip"
+     },
+     {
+      "id": "c",
+      "label": "Topical or systemic antifungal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tinea corporis** presents classically as an expanding erythematous annular scaly plaque with central clearing and an active, raised vesicular or pustular advancing border. In contrast, tinea incognito arises when topical corticosteroids are mistakenly applied to a fungal lesion, altering its classical morphology, suppressing local erythema, and permitting unchecked mycelial invasion.",
+   "say": "Tinea corporis shows an active annular scaly edge with central clearing. Misapplied topical corticosteroids create tinea incognito.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tinea corporis",
+     "points": [
+      "Annular scaly plaque",
+      "Central clearing",
+      "Active advancing border"
+     ]
+    },
+    "right": {
+     "title": "Tinea incognito",
+     "points": [
+      "Blunted border",
+      "Diminished scale",
+      "Steroid-driven fungal flare"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tinea capitis** affects children predominantly, producing scaly scalp alopecia with broken hairs appearing as black dots, or boggy inflammatory kerion masses. Topical antifungals fail to penetrate the hair shaft and pilar follicle; systemic oral antifungal therapy, such as oral griseofulvin or terbinafine, is mandatory to eradicate fungal elements and prevent permanent cicatricial scarring.",
+   "say": "Tinea capitis causes scalp alopecia and broken hairs, demanding oral systemic antifungal therapy to penetrate the hair follicle.",
+   "vis": null
+  },
+  {
+   "tx": "**Onychomycosis** produces progressive distal subungual hyperkeratosis, yellowish-brown nail plate discolouration, and crumbly nail dystrophy. Diagnostic confirmation through fungal microscopy and culture of subungual scrapings and nail clippings is essential prior to starting prolonged courses of oral terbinafine, which mandate monitoring of hepatic transaminases.",
+   "say": "Confirm onychomycosis with nail scrapings and microscopy before starting oral terbinafine. Monitor liver function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infection",
+     "Clinical sign",
+     "Treatment of choice"
+    ],
+    "rows": [
+     [
+      "Tinea corporis / pedis",
+      "Annular scaly plaque",
+      "Topical terbinafine or clotrimazole"
+     ],
+     [
+      "Tinea capitis",
+      "Broken hair black dots",
+      "Systemic oral griseofulvin or terbinafine"
+     ],
+     [
+      "Onychomycosis",
+      "Subungual hyperkeratosis",
+      "Oral terbinafine after culture confirmation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pityriasis versicolor** is caused by the lipophilic yeast Malassezia furfur, manifesting as hyperpigmented or hypopigmented finely scaly macules over the upper trunk and shoulders. Lesions fail to tan following sun exposure and show pale yellow-green fluorescence under Wood lamp. First-line management utilizes topical ketoconazole shampoo or selenium sulfide.",
+   "say": "Pityriasis versicolor causes trunk macules that fail to tan. First-line treatment is topical ketoconazole shampoo.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1101",
+  "mk-gap1103",
+  "mk-gap1105"
+ ],
+ "src": [
+  "kb-reference-dermatophytosis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

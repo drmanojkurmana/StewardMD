@@ -1,0 +1,836 @@
+{
+ "topic": "mrheu-pmr",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1081",
+   "q": "A 68-year-old woman presents with a four-week history of severe bilateral shoulder and hip girdle ache and stiffness that lasts for over an hour each morning. She has difficulty rolling over in bed and putting on her coat. ESR is 74 mm/h, CRP is 48 mg/L, and creatine kinase is 82 IU/L (normal). What is the most likely diagnosis?",
+   "o": [
+    "Polymyalgia rheumatica (PMR)",
+    "Polymyositis",
+    "Fibromyalgia",
+    "Cervical spondylotic myelopathy"
+   ],
+   "a": 0,
+   "exp": "Bilateral shoulder and pelvic girdle aching, morning stiffness >45 minutes, age >=50, elevated ESR/CRP, and strictly normal creatine kinase are classic criteria for polymyalgia rheumatica. Polymyositis causes weakness with markedly elevated CK; fibromyalgia features normal inflammatory markers.",
+   "r": [
+    "Correct: Bilateral girdle stiffness in an older adult with high ESR/CRP and normal CK is PMR.",
+    "Polymyositis causes muscle weakness and elevated creatine kinase.",
+    "Fibromyalgia features normal inflammatory markers and widespread tender points.",
+    "Cervical myelopathy causes upper motor neuron signs, hyperreflexia and sensory level."
+   ],
+   "kp": "Polymyalgia rheumatica presents with bilateral girdle stiffness, elevated ESR/CRP and normal creatine kinase.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "stiffness",
+    "esr"
+   ],
+   "source": "British Society for Rheumatology guideline on the diagnosis and treatment of polymyalgia rheumatica",
+   "x": {
+    "key": "Bilateral shoulder/hip stiffness with elevated ESR and normal CK defines PMR.",
+    "others": {
+     "B": "Polymyositis elevates CK.",
+     "C": "Fibromyalgia has normal ESR.",
+     "D": "Myelopathy produces UMN signs."
+    },
+    "pearl": "Normal creatine kinase is an essential diagnostic feature to exclude inflammatory myopathy in suspected PMR.",
+    "clues": "Age 68, bilateral shoulder/hip girdle ache, morning stiffness >60 mins, high ESR, normal CK.",
+    "ddx": "Polymyositis, late-onset rheumatoid arthritis, rotator cuff arthropathy, multiple myeloma.",
+    "mech": "Subacromial and subdeltoid bursitis, bicipital tenosynovitis, and trochanteric bursitis driven by cell-mediated inflammation.",
+    "lo": "Recognise the clinical and laboratory features of polymyalgia rheumatica.",
+    "rev": "PMR presents with bilateral girdle stiffness, elevated inflammatory markers and normal CK.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review BSR polymyalgia rheumatica guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR PMR guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1082",
+   "q": "A 72-year-old man is diagnosed with uncomplicated polymyalgia rheumatica without symptoms of giant cell arteritis. What is the recommended initial oral prednisolone starting dose according to British Society for Rheumatology guidelines?",
+   "o": [
+    "Prednisolone 15 mg once daily (range 12.5 mg to 20 mg daily)",
+    "Prednisolone 60 mg once daily",
+    "Prednisolone 5 mg once daily",
+    "Pulsed intravenous methylprednisolone 1 g daily for three days"
+   ],
+   "a": 0,
+   "exp": "BSR guidelines recommend an initial oral prednisolone dose of 15 mg daily (acceptable range 12.5-20 mg daily depending on patient body weight). Doses of 40-60 mg are reserved for giant cell arteritis with cranial symptoms.",
+   "r": [
+    "Correct: BSR guidelines recommend oral prednisolone 15 mg daily (range 12.5-20 mg) for uncomplicated PMR.",
+    "60 mg daily is the starting dose for giant cell arteritis, unnecessarily high for PMR.",
+    "5 mg daily is subtherapeutic for initial induction in PMR.",
+    "Intravenous pulse steroids are indicated for visual complications in GCA, not uncomplicated PMR."
+   ],
+   "kp": "Initial treatment for uncomplicated PMR is oral prednisolone 15 mg once daily.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "prednisolone",
+    "dose"
+   ],
+   "source": "British Society for Rheumatology guideline on the diagnosis and treatment of polymyalgia rheumatica",
+   "x": {
+    "key": "Prednisolone 15 mg daily is standard initial therapy for PMR.",
+    "others": {
+     "B": "60 mg is for giant cell arteritis.",
+     "C": "5 mg is subtherapeutic.",
+     "D": "Pulse IV steroids are for acute visual loss in GCA."
+    },
+    "pearl": "Failure to respond by >70% within one week of prednisolone 15 mg strongly challenges the diagnosis of PMR.",
+    "clues": "Uncomplicated PMR, initial steroid regimen.",
+    "ddx": "Giant cell arteritis, steroid-refractory inflammatory arthritis, occult neoplasm.",
+    "mech": "Systemic glucocorticoid receptor agonism suppresses macrophage IL-6 release in periarticular bursae.",
+    "lo": "State the recommended starting dose of prednisolone for polymyalgia rheumatica.",
+    "rev": "Start prednisolone at 15 mg daily for uncomplicated polymyalgia rheumatica.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review PMR treatment initiation protocols."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR PMR guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1083",
+   "q": "A 70-year-old woman with known polymyalgia rheumatica on prednisolone 10 mg daily develops a new, throbbing right temporal headache and pain in her jaw muscles when chewing meat. What emergency action is required?",
+   "o": [
+    "Immediately increase oral prednisolone to 40-60 mg daily and arrange urgent specialist assessment",
+    "Order non-urgent temporal artery biopsy and await the result before changing medication",
+    "Prescribe paracetamol and review in four weeks",
+    "Arrange urgent temporomandibular joint injection"
+   ],
+   "a": 0,
+   "exp": "Jaw claudication on mastication and new temporal headache in a patient with PMR strongly signify progression to giant cell arteritis (GCA). This is an ophthalmic emergency; prednisolone must be escalated immediately to 40-60 mg daily to prevent irreversible anterior ischaemic optic neuropathy and blindness.",
+   "r": [
+    "Correct: Immediately escalate prednisolone to 40-60 mg daily for suspected GCA.",
+    "Waiting for biopsy risks irreversible blindness.",
+    "Simple analgesia is negligent in suspected cranial arteritis.",
+    "TMJ injection does not address sight-threatening systemic vasculitis."
+   ],
+   "kp": "Jaw claudication in PMR indicates giant cell arteritis; escalate prednisolone to 40-60 mg immediately.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "gca",
+    "jaw-claudication"
+   ],
+   "source": "British Society for Rheumatology guideline on the diagnosis and treatment of giant cell arteritis",
+   "x": {
+    "key": "Immediately escalate steroids to 40-60 mg for suspected GCA in PMR.",
+    "others": {
+     "B": "Waiting for biopsy risks permanent blindness.",
+     "C": "Paracetamol does not treat vasculitis.",
+     "D": "TMJ injection is inappropriate."
+    },
+    "pearl": "Approximately 15-20% of patients with polymyalgia rheumatica develop giant cell arteritis during their clinical course.",
+    "clues": "Known PMR, new temporal headache, jaw claudication.",
+    "ddx": "Giant cell arteritis, TMJ dysfunction, dental sepsis, tension headache.",
+    "mech": "Granulomatous inflammation of the maxillary and temporal arteries reduces blood flow to the masseter muscle during chewing.",
+    "lo": "Recognise giant cell arteritis developing in a patient with polymyalgia rheumatica.",
+    "rev": "Escalate prednisolone to 40-60 mg immediately if GCA symptoms develop in PMR.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review GCA overlap in polymyalgia rheumatica."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR GCA guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1084",
+   "q": "A 74-year-old woman is commenced on prednisolone 15 mg daily for newly diagnosed PMR. She is expected to require at least one to two years of corticosteroid therapy. What co-prescribed bone protection strategy is indicated from the outset?",
+   "o": [
+    "Oral bisphosphonate (such as alendronic acid weekly) combined with calcium and vitamin D supplementation",
+    "Calcium carbonate alone without a bisphosphonate",
+    "Yearly follow-up DEXA scan without initiating medication",
+    "High-dose vitamin C"
+   ],
+   "a": 0,
+   "exp": "NOGG and BSR guidelines mandate primary fracture prevention with an oral bisphosphonate (e.g. weekly alendronic acid or risedronate) alongside calcium and vitamin D supplementation in women aged >=70 commencing systemic corticosteroids, as corticosteroid-induced bone loss is most rapid in the first 3-6 months.",
+   "r": [
+    "Correct: Bisphosphonate with calcium and vitamin D is indicated from the outset in elderly patients on steroids.",
+    "Calcium alone is insufficient to prevent glucocorticoid-induced trabecular bone loss.",
+    "Waiting for annual DEXA risks preventable fragility fractures during peak bone loss.",
+    "Vitamin C provides no protection against glucocorticoid osteoporosis."
+   ],
+   "kp": "Co-prescribe a bisphosphonate with calcium and vitamin D from day one of prolonged steroid therapy in the elderly.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "steroids",
+    "osteoporosis",
+    "bone-protection"
+   ],
+   "source": "National Osteoporosis Guideline Group (NOGG): Glucocorticoid-induced osteoporosis",
+   "x": {
+    "key": "Bisphosphonate plus calcium/vitamin D protects against steroid-induced bone loss.",
+    "others": {
+     "B": "Calcium alone fails to prevent rapid trabecular resorption.",
+     "C": "Waiting for DEXA risks early vertebral fracture.",
+     "D": "Vitamin C has no anti-resorptive efficacy."
+    },
+    "pearl": "Glucocorticoids suppress osteoblast differentiation and increase osteoclast survival, producing peak bone loss within 90 days.",
+    "clues": "Age 74, starting long-term prednisolone for PMR.",
+    "ddx": "Glucocorticoid-induced osteoporosis, vertebral fragility fracture, osteomalacia.",
+    "mech": "Bisphosphonates bind hydroxyapatite crystals and inhibit osteoclast farnesyl pyrophosphate synthase, arresting bone resorption.",
+    "lo": "Prescribe appropriate bone protection in glucocorticoid-treated patients.",
+    "rev": "Initiate bisphosphonate and calcium/vitamin D concurrently with prolonged glucocorticoids.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review NOGG glucocorticoid osteoporosis guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NOGG Glucocorticoid guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "alendronic_acid",
+      "prednisolone"
+     ],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NOGG guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1085",
+   "q": "A 66-year-old man with PMR achieves complete symptom resolution on prednisolone 15 mg daily for four weeks. His ESR and CRP have normalised. Over what timeframe should his prednisolone be gradually tapered down and discontinued, assuming no relapses occur?",
+   "o": [
+    "Gradually over 1 to 2 years",
+    "Abruptly stop over 2 weeks",
+    "Maintain 15 mg daily indefinitely for life",
+    "Reduce by 5 mg every 3 days"
+   ],
+   "a": 0,
+   "exp": "BSR guidelines recommend a structured, gradual prednisolone taper over 12 to 24 months (e.g. 15 mg for 3 weeks, then 12.5 mg for 3 weeks, 10 mg for 4-6 weeks, and then reducing by 1 mg every 4-8 weeks) to prevent disease relapse and allow hypothalamic-pituitary-adrenal axis recovery.",
+   "r": [
+    "Correct: Prednisolone should be tapered gradually over 1 to 2 years.",
+    "Rapid withdrawal over 2 weeks causes immediate disease relapse and acute adrenal crisis.",
+    "Indefinite lifelong therapy causes avoidable cataracts, diabetes, fracture and infection.",
+    "Reducing by 5 mg every 3 days is dangerously rapid."
+   ],
+   "kp": "Prednisolone in PMR should be tapered gradually over 1 to 2 years to prevent disease relapse.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "prednisolone",
+    "taper"
+   ],
+   "source": "British Society for Rheumatology guideline on the diagnosis and treatment of polymyalgia rheumatica",
+   "x": {
+    "key": "Taper prednisolone gradually over 1 to 2 years in PMR.",
+    "others": {
+     "B": "Rapid taper causes relapse and adrenal crisis.",
+     "C": "Lifelong therapy causes excessive toxicity.",
+     "D": "Fast reduction causes flare."
+    },
+    "pearl": "Most relapses occur when the daily prednisolone dose falls below 10 mg.",
+    "clues": "PMR in remission, deciding duration of steroid taper.",
+    "ddx": "PMR relapse, secondary adrenal insufficiency, steroid withdrawal syndrome.",
+    "mech": "Slow tapering allows recovery of suppressed adrenocortical cortisol synthesis and suppresses persistent low-grade synovitis.",
+    "lo": "State the standard duration and principles of steroid tapering in PMR.",
+    "rev": "Taper prednisolone slowly over 12 to 24 months in polymyalgia rheumatica.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review steroid tapering schedules in PMR."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR PMR guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1086",
+   "q": "A 71-year-old woman treated with prednisolone for PMR for five months experiences recurrence of bilateral shoulder stiffness whenever her dose is lowered to 8 mg daily. She has now developed steroid-induced impaired glucose tolerance and a vertebral compression fracture. Which steroid-sparing agent is recommended by BSR guidelines for relapsing PMR?",
+   "o": [
+    "Methotrexate",
+    "Infliximab",
+    "Cyclophosphamide",
+    "Hydrocortisone"
+   ],
+   "a": 0,
+   "exp": "BSR guidelines recommend oral methotrexate (typically 10-15 mg weekly with folic acid) as an adjunctive steroid-sparing agent in patients with polymyalgia rheumatica who experience multiple relapses, prolonged therapy, or severe glucocorticoid-related adverse effects.",
+   "r": [
+    "Correct: Methotrexate is the evidence-based steroid-sparing agent for relapsing PMR.",
+    "TNF inhibitors like infliximab have proven ineffective in clinical trials for PMR.",
+    "Cyclophosphamide is too toxic and is reserved for life-threatening vasculitis, not PMR.",
+    "Hydrocortisone is a physiological replacement steroid and does not provide steroid-sparing immunosuppression."
+   ],
+   "kp": "Methotrexate is the recommended steroid-sparing agent for recurrently relapsing PMR.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "methotrexate",
+    "steroid-sparing"
+   ],
+   "source": "British Society for Rheumatology guideline on the diagnosis and treatment of polymyalgia rheumatica",
+   "x": {
+    "key": "Methotrexate is the recommended steroid-sparing agent for relapsing PMR.",
+    "others": {
+     "B": "TNF inhibitors failed in PMR trials.",
+     "C": "Cyclophosphamide is excessively toxic.",
+     "D": "Hydrocortisone is not steroid-sparing."
+    },
+    "pearl": "IL-6 receptor antagonism with tocilizumab has also shown efficacy in clinical trials for refractory PMR.",
+    "clues": "PMR with recurrent relapses below 10 mg, steroid toxicity (fracture, glucose intolerance).",
+    "ddx": "Steroid dependence, late-onset rheumatoid arthritis, polymyositis.",
+    "mech": "Methotrexate downregulates persistent synovial macrophage activation and permits lower glucocorticoid exposure.",
+    "lo": "Select the appropriate steroid-sparing DMARD for relapsing polymyalgia rheumatica.",
+    "rev": "Methotrexate is recommended as an adjunctive steroid-sparing agent in relapsing PMR.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review steroid-sparing options in PMR."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR PMR guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "methotrexate",
+      "prednisolone"
+     ],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1087",
+   "q": "A 62-year-old woman presents with bilateral shoulder aching, stiffness, fatigue, and an ESR of 82 mm/h. She is started on prednisolone 15 mg daily for suspected PMR. After two weeks of continuous therapy, she reports zero improvement in symptoms. What is the most appropriate next step?",
+   "o": [
+    "Re-evaluate the diagnosis and investigate for alternative causes such as occult malignancy, myeloma, or inflammatory arthritis",
+    "Increase prednisolone to 60 mg daily for another month",
+    "Continue 15 mg daily for an additional six months",
+    "Stop all investigations and reassure her that response takes three months"
+   ],
+   "a": 0,
+   "exp": "A rapid, marked response (>70% global symptom reduction) within 7 days is a hallmark of PMR. Complete lack of response to prednisolone 15 mg daily after 1-2 weeks strongly argues against PMR and mandates comprehensive reinvestigation for mimics including multiple myeloma, occult solid tumour, chronic infection, or seronegative rheumatoid arthritis.",
+   "r": [
+    "Correct: Complete lack of response to 15 mg prednisolone warrants urgent re-evaluation for mimics.",
+    "Increasing to 60 mg daily without evidence risks masking malignancy while causing severe toxicity.",
+    "Continuing an ineffective regimen delays correct diagnosis.",
+    "PMR responds within 3-7 days, not 3 months."
+   ],
+   "kp": "Failure to respond rapidly to prednisolone 15 mg challenges the diagnosis of PMR; search for mimics.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "steroid-response",
+    "mimics"
+   ],
+   "source": "British Society for Rheumatology guideline on the diagnosis and treatment of polymyalgia rheumatica",
+   "x": {
+    "key": "Lack of rapid steroid response demands urgent diagnostic re-evaluation.",
+    "others": {
+     "B": "Escalating to 60 mg risks harm and delays correct diagnosis.",
+     "C": "Continuing ineffective therapy is erroneous.",
+     "D": "PMR response occurs within 7 days."
+    },
+    "pearl": "Send serum protein electrophoresis, urine Bence Jones protein, and chest radiography to exclude myeloma and lung cancer.",
+    "clues": "Suspected PMR, zero response to prednisolone 15 mg after 2 weeks.",
+    "ddx": "Multiple myeloma, occult malignancy, seronegative RA, infective endocarditis.",
+    "mech": "Failure of bursal macrophage suppression indicates that non-glucocorticoid-responsive pathology drives symptoms.",
+    "lo": "Recognise the significance of steroid non-responsiveness in suspected PMR.",
+    "rev": "Zero improvement on prednisolone 15 mg after 1-2 weeks indicates that PMR is unlikely.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review diagnostic mimics of polymyalgia rheumatica."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR PMR guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1088",
+   "q": "A 75-year-old woman presents with bilateral shoulder stiffness and aching, with an ESR of 68 mm/h. In distinguishing polymyalgia rheumatica from late-onset rheumatoid arthritis, which clinical feature points most specifically toward rheumatoid arthritis?",
+   "o": [
+    "Active synovitis with swelling of the wrists, metacarpophalangeal and proximal interphalangeal joints",
+    "Morning stiffness exceeding 45 minutes",
+    "Marked elevation of C-reactive protein",
+    "Dramatic symptom relief with oral corticosteroids"
+   ],
+   "a": 0,
+   "exp": "While PMR can cause mild peripheral pitting oedema or transient knee/wrist effusions, persistent peripheral inflammatory synovitis (MCP and PIP swelling) and positive anti-CCP or rheumatoid factor strongly indicate late-onset rheumatoid arthritis (LORA) rather than pure PMR.",
+   "r": [
+    "Correct: Small joint symmetric synovitis of wrists, MCP and PIP joints indicates rheumatoid arthritis.",
+    "Morning stiffness >45 minutes occurs in both PMR and RA.",
+    "Elevated CRP occurs prominently in both conditions.",
+    "Corticosteroids produce symptomatic improvement in both PMR and RA."
+   ],
+   "kp": "Persistent peripheral small joint synovitis (MCP/PIP joints) indicates late-onset rheumatoid arthritis rather than PMR.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "rheumatoid-arthritis",
+    "differential"
+   ],
+   "source": "British Society for Rheumatology guidelines on polymyalgia rheumatica",
+   "x": {
+    "key": "Persistent small joint synovitis (MCP/PIP) indicates rheumatoid arthritis.",
+    "others": {
+     "B": "Morning stiffness occurs in both.",
+     "C": "Elevated CRP occurs in both.",
+     "D": "Steroid response occurs in both."
+    },
+    "pearl": "Late-onset rheumatoid arthritis often presents with proximal girdle onset, mimicking PMR before peripheral synovitis becomes overt.",
+    "clues": "Elderly female, girdle stiffness, peripheral small joint swelling.",
+    "ddx": "Late-onset rheumatoid arthritis, polymyalgia rheumatica, calcium pyrophosphate disease.",
+    "mech": "In PMR, pathology is primarily extra-articular synovial bursitis; in RA, primary proliferative synovial pannus destroys articular cartilage.",
+    "lo": "Differentiate polymyalgia rheumatica from late-onset rheumatoid arthritis.",
+    "rev": "Symmetric MCP and PIP synovitis confirms rheumatoid arthritis rather than PMR.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review differential diagnosis of proximal girdle stiffness."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR PMR guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1089",
+   "q": "A 69-year-old man presents with pelvic and shoulder girdle aching and morning stiffness. A clinical diagnosis of polymyalgia rheumatica is suspected. Which baseline investigation is essential before starting corticosteroids to ensure that severe latent bone disease or myelopathy is not missed?",
+   "o": [
+    "Serum protein electrophoresis and serum free light chains",
+    "Brain MRI with contrast",
+    "Diagnostic muscle biopsy",
+    "Uric acid 24-hour urine collection"
+   ],
+   "a": 0,
+   "exp": "BSR guidelines recommend a core set of baseline investigations before starting steroids in suspected PMR: FBC, ESR/CRP, renal and liver function, bone profile (calcium, phosphate, ALP), thyroid function, and serum protein electrophoresis / free light chains to exclude multiple myeloma.",
+   "r": [
+    "Correct: Serum protein electrophoresis and free light chains exclude multiple myeloma, a critical PMR mimic.",
+    "Brain MRI is unindicated without intracranial neurological signs.",
+    "Muscle biopsy is for inflammatory myopathies where CK is elevated, not PMR.",
+    "24-hour urine uric acid is for nephrolithiasis, not PMR workup."
+   ],
+   "kp": "Serum protein electrophoresis and free light chains are essential baseline tests to exclude myeloma in suspected PMR.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "myeloma",
+    "screening"
+   ],
+   "source": "British Society for Rheumatology guideline on the diagnosis and treatment of polymyalgia rheumatica",
+   "x": {
+    "key": "Electrophoresis excludes multiple myeloma as a PMR mimic.",
+    "others": {
+     "B": "Brain MRI is unnecessary.",
+     "C": "Muscle biopsy is for myositis.",
+     "D": "Urine uric acid is for nephrolithiasis."
+    },
+    "pearl": "Multiple myeloma often presents in older adults with girdle bone pain, anaemia and high ESR, closely masquerading as PMR.",
+    "clues": "Suspected PMR, essential baseline mimic exclusion.",
+    "ddx": "Multiple myeloma, metastatic bone disease, primary hyperparathyroidism, osteomalacia.",
+    "mech": "Monoclonal plasma cell expansion in bone marrow produces paraprotein, osteolytic bone lesions, and marked ESR elevation.",
+    "lo": "State the mandatory baseline investigations to exclude mimics before treating PMR.",
+    "rev": "Serum protein electrophoresis is mandatory to rule out myeloma before treating PMR.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review pre-treatment workup in PMR."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR PMR guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1090",
+   "q": "A 70-year-old woman with PMR on tapering prednisolone (currently 7 mg daily) presents with nausea, profound fatigue, dizziness on standing, and postural hypotension (systolic drop of 28 mmHg). Morning serum cortisol is 60 nmol/L (low). What complication has developed?",
+   "o": [
+    "Secondary adrenal insufficiency due to hypothalamic-pituitary-adrenal axis suppression",
+    "Acute polymyalgia rheumatica relapse",
+    "Addison disease due to primary autoimmune adrenalitis",
+    "Phaeochromocytoma"
+   ],
+   "a": 0,
+   "exp": "Prolonged exogenous glucocorticoid therapy suppresses the hypothalamic-pituitary-adrenal (HPA) axis. As the dose is tapered below physiological replacement (~5-7.5 mg prednisolone equivalent), patients can develop secondary adrenal insufficiency (hypotension, fatigue, low cortisol) requiring temporary dose increase and endocrinology assessment.",
+   "r": [
+    "Correct: Chronic steroid taper can unmask secondary adrenal insufficiency from HPA axis suppression.",
+    "PMR relapse presents with return of inflammatory girdle stiffness and elevated ESR/CRP, not postural collapse.",
+    "Primary Addison disease features high ACTH and hyperpigmentation, whereas secondary is central suppression.",
+    "Phaeochromocytoma causes paroxysmal hypertension and palpitations."
+   ],
+   "kp": "Steroid tapering below physiological doses can unmask secondary adrenal insufficiency.",
+   "t": "mrheu-pmr",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pmr",
+    "steroids",
+    "adrenal-insufficiency"
+   ],
+   "source": "Endocrine Society Clinical Practice Guideline: Management of adrenal insufficiency",
+   "x": {
+    "key": "Secondary adrenal insufficiency arises from HPA axis suppression during steroid taper.",
+    "others": {
+     "B": "PMR relapse causes girdle stiffness, not postural hypotension.",
+     "C": "Addison is primary autoimmune failure.",
+     "D": "Phaeochromocytoma causes hypertension."
+    },
+    "pearl": "Patients on prolonged steroids must carry a steroid alert card and understand sick-day rules for doubling oral doses during acute illness.",
+    "clues": "Steroid taper at 7 mg, nausea, fatigue, postural hypotension, morning cortisol 60 nmol/L.",
+    "ddx": "Secondary adrenal insufficiency, PMR relapse, sepsis, dehydration.",
+    "mech": "Exogenous glucocorticoids exert negative feedback on hypothalamic CRH and pituitary ACTH, causing adrenocortical atrophy.",
+    "lo": "Recognise and manage secondary adrenal insufficiency during glucocorticoid tapering.",
+    "rev": "Secondary adrenal insufficiency can complicate glucocorticoid tapering in PMR.",
+    "next": {
+     "concept": "mrheu-pmr",
+     "action": "review",
+     "text": "Review steroid tapering and adrenal axis recovery."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "Endocrine Society guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "giant_cell_arteritis"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [
+      "polymyalgia-rheumatica"
+     ],
+     "lesson_ids": [
+      "mrheu-pmr"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against endocrine guidance."
+     }
+    }
+   }
+  }
+ ]
+}

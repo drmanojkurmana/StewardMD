@@ -1,0 +1,809 @@
+{
+ "topic": "der-psoriasis",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1131",
+   "q": "A 34-year-old man presents with chronic, thick, well-demarcated erythematous plaques covered in silvery-white scales on both elbows and knees, covering approximately 4% of his total body surface area. According to NICE guideline CG153, what is the recommended first-line topical therapy for adult plaque psoriasis?",
+   "o": [
+    "Potent topical corticosteroid combined with a topical vitamin D analogue (e.g. calcipotriol) applied once daily for up to 4 weeks",
+    "Oral systemic methotrexate 15 mg weekly with folic acid",
+    "Continuous application of very potent topical steroid (clobetasol) twice daily indefinitely",
+    "Coal tar solution alone applied twice weekly with no other therapy"
+   ],
+   "a": 0,
+   "exp": "NICE guideline CG153 recommends offering a potent topical corticosteroid plus a topical vitamin D analogue applied once daily for up to 4 weeks as first-line treatment for adults with trunk or limb plaque psoriasis.",
+   "r": [
+    "Correct: A potent topical corticosteroid plus vitamin D analogue once daily for up to 4 weeks is first-line per NICE CG153.",
+    "Systemic methotrexate is indicated for extensive disease (PASI >=10), failure of topicals, or severe psoriatic arthritis, not mild localized plaque psoriasis.",
+    "Continuous indefinite very potent steroids cause severe skin atrophy, striae, tachyphylaxis, and rebound flares.",
+    "Coal tar alone is less effective than combination steroid/vitamin D regimens and has poor cosmetic acceptability."
+   ],
+   "kp": "First-line topical treatment for adult plaque psoriasis is a potent corticosteroid plus vitamin D analogue once daily for up to 4 weeks.",
+   "t": "der-psoriasis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "psoriasis",
+    "topical-therapy",
+    "calcipotriol",
+    "nice"
+   ],
+   "source": "NICE guideline CG153: Psoriasis: assessment and management",
+   "x": {
+    "key": "Potent topical steroid plus vitamin D analogue once daily for 4 weeks is first-line for plaque psoriasis.",
+    "others": {
+     "B": "Methotrexate is for extensive disease or arthritis.",
+     "C": "Continuous clobetasol causes atrophy and rebound.",
+     "D": "Coal tar alone is not first-line."
+    },
+    "pearl": "Combining a topical corticosteroid with calcipotriol enhances efficacy while reducing local corticosteroid-induced skin atrophy.",
+    "clues": "Adult, 4% BSA plaque psoriasis on elbows/knees, first-line topical regimen.",
+    "ddx": "Nummular eczema, lichen planus, tinea corporis, cutaneous lupus.",
+    "mech": "Calcipotriol binds vitamin D receptors to normalize keratinocyte differentiation; corticosteroids suppress Th17 cytokine transcription.",
+    "lo": "Select the first-line topical therapy for plaque psoriasis according to NICE guidelines.",
+    "rev": "First-line plaque psoriasis therapy is a potent corticosteroid plus vitamin D analogue once daily for up to 4 weeks.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review NICE CG153 topical algorithm."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CG153",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [
+      "calcipotriol",
+      "betamethasone"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CG153."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1132",
+   "q": "A 19-year-old university student presents with an acute eruption of dozens of small (0.5 to 1 cm), droplet-shaped, pink scaly papules distributed across her chest, abdomen, and back. Two weeks ago, she had an acute sore throat with fever that resolved spontaneously. Throat culture previously identified Lancefield Group A beta-haemolytic streptococci. What is the diagnosis?",
+   "o": [
+    "Guttate psoriasis",
+    "Plaque psoriasis",
+    "Pityriasis versicolor",
+    "Secondary syphilis"
+   ],
+   "a": 0,
+   "exp": "Guttate psoriasis classically presents as an acute shower of small, teardrop-shaped scaly papules across the trunk and proximal limbs, developing 2-3 weeks after a streptococcal upper respiratory tract infection (tonsillitis/pharyngitis).",
+   "r": [
+    "Correct: Teardrop-shaped scaly papules following streptococcal pharyngitis define guttate psoriasis.",
+    "Plaque psoriasis presents with large, thick, localized plaques on extensor joints and scalp, not acute raindrop papules.",
+    "Pityriasis versicolor causes hypopigmented or hyperpigmented fine scaly macules caused by Malassezia, unrelated to streptococci.",
+    "Secondary syphilis produces copper-coloured maculopapules prominent on palms and soles with constitutional symptoms."
+   ],
+   "kp": "Guttate psoriasis presents as small raindrop scaly papules following streptococcal pharyngitis.",
+   "t": "der-psoriasis",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "guttate-psoriasis",
+    "streptococcus",
+    "throat-infection"
+   ],
+   "source": "British Association of Dermatologists: Guidelines for the management of psoriasis",
+   "x": {
+    "key": "Teardrop scaly papules 2 weeks after streptococcal sore throat indicate guttate psoriasis.",
+    "others": {
+     "B": "Plaque psoriasis forms large thick extensor plaques.",
+     "C": "Pityriasis versicolor is fungal.",
+     "D": "Secondary syphilis affects palms/soles."
+    },
+    "pearl": "Many cases of guttate psoriasis resolve spontaneously over 3-4 months, but up to one-third develop chronic plaque psoriasis later in life.",
+    "clues": "Young adult, teardrop papules on trunk, prior strep pharyngitis.",
+    "ddx": "Pityriasis rosea, secondary syphilis, pityriasis lichenoides, viral exanthem.",
+    "mech": "Streptococcal pyrogenic exotoxins act as superantigens, triggering clonal expansion of skin-homing CLA+ T-lymphocytes.",
+    "lo": "Recognise guttate psoriasis and its association with streptococcal infections.",
+    "rev": "Guttate psoriasis presents with teardrop scaly lesions following streptococcal pharyngitis.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review post-streptococcal dermatoses."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Psoriasis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1133",
+   "q": "A 44-year-old woman with extensive plaque psoriasis was given a short course of oral prednisolone by an urgent care clinic for a severe flare. Four days after finishing the oral steroids, she presents acutely unwell with high fevers, rigors, generalized bright red skin, and sheets of sterile pustules coalescing into 'lakes of pus' across her trunk. What life-threatening condition has developed?",
+   "o": [
+    "Generalized pustular psoriasis (von Zumbusch)",
+    "Toxic epidermal necrolysis",
+    "Staphylococcal scalded skin syndrome",
+    "Acute generalized exanthematous pustulosis"
+   ],
+   "a": 0,
+   "exp": "Generalized pustular psoriasis (von Zumbusch) is a dermatological emergency characterized by acute development of widespread sterile pustules on fiery red skin with high fever and leukocytosis. Abrupt cessation of systemic corticosteroids is a notorious recognized trigger and systemic steroids should generally be avoided in psoriasis.",
+   "r": [
+    "Correct: Generalized pustular psoriasis triggered by oral steroid withdrawal presents with fever and sheets of sterile pustules.",
+    "Toxic epidermal necrolysis causes widespread full-thickness epidermal detachment and mucosal necrosis, not sheets of superficial pustules.",
+    "Staphylococcal scalded skin syndrome occurs predominantly in neonates/young children and is mediated by exfoliative toxins.",
+    "AGEP occurs within 24-48 hours of drug ingestion (e.g. aminopenicillins) and clears quickly upon withdrawal."
+   ],
+   "kp": "Generalized pustular psoriasis is a dermatological emergency classically triggered by abrupt withdrawal of systemic corticosteroids.",
+   "t": "der-psoriasis",
+   "d": 3,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "pustular-psoriasis",
+    "steroid-withdrawal",
+    "emergency"
+   ],
+   "source": "British Association of Dermatologists: Guidelines for generalized pustular psoriasis",
+   "x": {
+    "key": "Generalized pustular psoriasis is triggered by abrupt systemic corticosteroid withdrawal.",
+    "others": {
+     "B": "TEN causes mucosal necrosis and sloughing.",
+     "C": "SSSS affects young infants.",
+     "D": "AGEP is typically antibiotic-induced."
+    },
+    "pearl": "Systemic corticosteroids should almost never be prescribed for psoriasis due to the extreme risk of severe rebound pustular flares.",
+    "clues": "Psoriasis flare after oral steroid withdrawal, high fever, sheets of sterile pustules.",
+    "ddx": "AGEP, subcorneal pustular dermatosis, septic shock with pustular vasculitis.",
+    "mech": "Sudden withdrawal of glucocorticoid immunosuppression leads to explosive IL-36-driven neutrophil influx into the epidermis (Kogoj pustules).",
+    "lo": "Recognise generalized pustular psoriasis and identify oral steroid withdrawal as a primary trigger.",
+    "rev": "Abrupt withdrawal of systemic corticosteroids triggers life-threatening generalized pustular psoriasis.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review emergencies in dermatology: pustular psoriasis."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Pustular psoriasis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1134",
+   "q": "A 38-year-old man with plaque psoriasis presents with painful swelling of the distal interphalangeal (DIP) joints of his hands and whole-digit swelling ('sausage digit'). Inspection of his fingernails shows punctate pitting, subungual hyperkeratosis, and yellow-brown 'salmon patch' oil drop discoloration. What is the diagnosis?",
+   "o": [
+    "Psoriatic arthritis with nail psoriasis",
+    "Rheumatoid arthritis",
+    "Osteoarthritis",
+    "Gouty arthritis"
+   ],
+   "a": 0,
+   "exp": "Nail changes (pitting, oil drop discoloration, onycholysis, subungual hyperkeratosis) occur in up to 80% of patients with psoriatic arthritis and correlate closely with distal interphalangeal (DIP) joint inflammation and dactylitis ('sausage digit').",
+   "r": [
+    "Correct: Nail pitting, salmon patches, DIP arthritis, and dactylitis define psoriatic arthritis.",
+    "Rheumatoid arthritis classically spares DIP joints, does not cause salmon oil-drop nail patches, and is symmetric.",
+    "Osteoarthritis causes Heberden nodes without dactylitis, silvery skin plaques, or salmon oil patches.",
+    "Gout typically causes acute monoarthritis of the first MTP joint with urate crystal deposition."
+   ],
+   "kp": "Psoriatic nail changes (pitting, salmon patches) are strongly associated with psoriatic arthritis and DIP involvement.",
+   "t": "der-psoriasis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "psoriatic-arthritis",
+    "nail-psoriasis",
+    "dactylitis"
+   ],
+   "source": "NICE guideline CG153: Psoriasis: assessment and management",
+   "x": {
+    "key": "Nail pitting, oil drop sign, DIP joint arthritis, and dactylitis characterize psoriatic arthritis.",
+    "others": {
+     "B": "RA spares the DIP joints.",
+     "C": "OA lacks dactylitis and nail oil spots.",
+     "D": "Gout is crystal-proven and usually monoarticular."
+    },
+    "pearl": "The anatomical link between the extensor tendon enthesis and the nail bed matrix explains why nail psoriasis strongly predicts psoriatic arthritis.",
+    "clues": "Psoriasis, nail pitting, salmon patches, DIP arthritis, sausage digits.",
+    "ddx": "Rheumatoid arthritis, reactive arthritis, ankylosing spondylitis, erosive osteoarthritis.",
+    "mech": "Enthesitis at the insertion of the extensor tendon into the distal phalanx propagates inflammation directly to the nail matrix.",
+    "lo": "Identify the clinical manifestations of psoriatic arthritis and nail psoriasis.",
+    "rev": "Nail psoriasis (pitting, salmon patches) strongly correlates with psoriatic arthritis and DIP arthritis.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review psoriatic arthritis diagnosis and screening."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CG153",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CG153."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1135",
+   "q": "During physical examination of a patient with psoriasis, the clinician uses a wooden spatula to scrape off the silvery adherent scale from an erythematous plaque. As the scale detaches, multiple tiny pinpoint bleeding spots appear from the exposed glistening red surface. What is this clinical sign?",
+   "o": [
+    "Auspitz sign",
+    "Nikolsky sign",
+    "Asboe-Hansen sign",
+    "Darier sign"
+   ],
+   "a": 0,
+   "exp": "Auspitz sign is the appearance of punctate pinpoint bleeding spots when silvery psoriasis scales are scraped off. It is caused by thinning of the suprapapillary epidermis overlying dilated, tortuous dermal capillaries within elongated dermal papillae.",
+   "r": [
+    "Correct: Pinpoint bleeding upon scraping psoriasis scale is the Auspitz sign.",
+    "Nikolsky sign refers to epidermal shearing and blister extension with gentle lateral finger pressure in pemphigus or TEN.",
+    "Asboe-Hansen sign is the lateral extension of a blister under direct vertical pressure.",
+    "Darier sign is wheal and flare formation following mechanical stroking of a mastocytoma."
+   ],
+   "kp": "Auspitz sign is pinpoint capillary bleeding produced by scraping silvery scales off a psoriasis plaque.",
+   "t": "der-psoriasis",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "auspitz-sign",
+    "psoriasis-signs",
+    "pathology"
+   ],
+   "source": "British Association of Dermatologists: Guidelines for psoriasis",
+   "x": {
+    "key": "Auspitz sign is pinpoint bleeding after scraping silvery scales off psoriasis plaques.",
+    "others": {
+     "B": "Nikolsky sign is epidermal detachment in pemphigus.",
+     "C": "Asboe-Hansen sign is bulla spread.",
+     "D": "Darier sign is urtication in mastocytosis."
+    },
+    "pearl": "The histopathological basis of Auspitz sign is papillomatosis and marked thinning of the suprapapillary epidermal plates.",
+    "clues": "Silvery scale scraped off plaque, pinpoint capillary bleeding.",
+    "ddx": "Lichen planus, secondary syphilis, eczema, Bowen disease.",
+    "mech": "Marked elongation of dermal papillae brings engorged capillaries very close to the surface beneath a thinned suprapapillary stratum spinosum.",
+    "lo": "Describe the Auspitz sign and its histopathological mechanism.",
+    "rev": "Auspitz sign is pinpoint capillary bleeding upon scraping off psoriasis scales.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review physical examination signs in dermatology."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Psoriasis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1136",
+   "q": "A 52-year-old man with severe extensive plaque psoriasis (PASI 14) that has failed topical regimens and phototherapy is initiated on oral methotrexate 15 mg once weekly. Which co-prescribed medication is essential to reduce methotrexate toxicity, and when should it be taken?",
+   "o": [
+    "Folic acid 5 mg weekly, taken on a different day from methotrexate",
+    "Folic acid 5 mg daily, taken simultaneously with methotrexate",
+    "Oral vitamin B12 monthly injections",
+    "Daily oral ascorbic acid (vitamin C)"
+   ],
+   "a": 0,
+   "exp": "Co-prescription of folic acid (typically 5 mg once weekly, taken on a different day from methotrexate, or 1 mg daily skipping the methotrexate day) is mandatory to reduce haematological toxicity, mucosal ulceration, nausea, and transaminase elevation.",
+   "r": [
+    "Correct: Folic acid 5 mg weekly on a separate day from methotrexate is required to reduce toxicity.",
+    "Taking high-dose folic acid simultaneously on the same day as methotrexate can competitively reduce methotrexate therapeutic efficacy.",
+    "Vitamin B12 does not protect against dihydrofolate reductase inhibition by methotrexate.",
+    "Ascorbic acid provides no protection against antifolate cytotoxicity."
+   ],
+   "kp": "Co-prescribed folic acid taken on a different day reduces methotrexate gastrointestinal, mucosal, and haematological toxicity.",
+   "t": "der-psoriasis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "methotrexate",
+    "folic-acid",
+    "drug-safety"
+   ],
+   "source": "British Association of Dermatologists: Guidelines for the safe use of methotrexate",
+   "x": {
+    "key": "Folic acid on a different day reduces methotrexate toxicity while preserving efficacy.",
+    "others": {
+     "B": "Same-day dosing can reduce methotrexate efficacy.",
+     "C": "B12 does not rescue antifolate effects.",
+     "D": "Vitamin C is unindicated."
+    },
+    "pearl": "Methotrexate is dosed strictly ONCE WEEKLY; daily dosing is a catastrophic prescribing error that causes fatal bone marrow suppression.",
+    "clues": "Methotrexate weekly, co-prescribed medication to reduce toxicity.",
+    "ddx": "Ciclosporin toxicity, acitretin toxicity, biologic infection risk.",
+    "mech": "Methotrexate inhibits dihydrofolate reductase; supplementary folate replenishes intracellular folate pools in healthy mucosal and bone marrow cells.",
+    "lo": "Select the correct co-prescription of folic acid for patients on weekly methotrexate.",
+    "rev": "Folic acid taken on a separate day reduces methotrexate toxicity without blunting efficacy.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review BAD guidelines on methotrexate safety."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Methotrexate guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [
+      "methotrexate",
+      "folic_acid"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1137",
+   "q": "A 32-year-old woman with well-controlled plaque psoriasis undergoes an uncomplicated laparoscopic cholecystectomy. Three weeks postoperatively, she notes new linear, scaly erythematous plaques appearing strictly along her surgical trocar incisions and an accidental scratch on her forearm. What is this phenomenon called?",
+   "o": [
+    "Koebner phenomenon (isomorphic response)",
+    "Auspitz phenomenon",
+    "Arthus reaction",
+    "Erythema multiforme"
+   ],
+   "a": 0,
+   "exp": "The Koebner phenomenon (isomorphic response) is the development of characteristic isomorphic lesions of a preexisting skin condition (most classically psoriasis, lichen planus, and vitiligo) at the site of cutaneous trauma or mechanical injury.",
+   "r": [
+    "Correct: Development of isomorphic lesions at sites of skin trauma is the Koebner phenomenon.",
+    "Auspitz sign is pinpoint bleeding after scraping scales off a psoriasis plaque.",
+    "Arthus reaction is a localized Type III immune complex-mediated vasculitis after antigen injection.",
+    "Erythema multiforme produces target lesions driven by cell-mediated hypersensitivity to HSV or drugs."
+   ],
+   "kp": "Koebner phenomenon (isomorphic response) is the appearance of new lesions at sites of skin injury or trauma.",
+   "t": "der-psoriasis",
+   "d": 1,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "koebner-phenomenon",
+    "isomorphic-response",
+    "trauma"
+   ],
+   "source": "British Association of Dermatologists: Guidelines for psoriasis",
+   "x": {
+    "key": "Koebner phenomenon is the emergence of new psoriasis plaques along lines of physical trauma.",
+    "others": {
+     "B": "Auspitz is pinpoint bleeding.",
+     "C": "Arthus is Type III vasculitis.",
+     "D": "Erythema multiforme is target lesions."
+    },
+    "pearl": "The Koebner phenomenon is also famously seen in lichen planus, vitiligo, and viral warts.",
+    "clues": "Psoriasis plaques along surgical incision scars and scratch mark.",
+    "ddx": "Hypertrophic scar, stitch abscess, contact dermatitis to surgical tape.",
+    "mech": "Mechanical injury triggers keratinocyte necrosis, releasing antimicrobial peptides (LL-37) and activating plasmacytoid dendritic cells.",
+    "lo": "Recognise the Koebner phenomenon and list dermatoses in which it occurs.",
+    "rev": "Koebner phenomenon refers to new disease lesions appearing at sites of skin trauma.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review physical dermatological signs."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Psoriasis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1138",
+   "q": "A 46-year-old man with widespread plaque psoriasis refractory to first-line potent topical steroids plus calcipotriol is evaluated in dermatology clinic. His PASI score is 11 and his DLQI score is 13. He has no personal or family history of skin cancer. In accordance with NICE guideline CG153, which second-line physical treatment modality should be considered next before systemic biologics?",
+   "o": [
+    "Narrowband ultraviolet B (NB-UVB) phototherapy",
+    "Broadband UVA phototherapy alone without psoralen",
+    "Grenz ray radiotherapy",
+    "Total skin electron beam therapy"
+   ],
+   "a": 0,
+   "exp": "NICE guideline CG153 recommends offering narrowband UVB (NB-UVB) phototherapy as second-line treatment for adults with extensive plaque psoriasis that cannot be controlled with topical treatments, or where psoriasis has significant impact on physical, psychological, or social wellbeing.",
+   "r": [
+    "Correct: Narrowband UVB phototherapy is the recommended second-line treatment for extensive psoriasis before systemic biologics.",
+    "Broadband UVA without psoralen is ineffective for psoriasis because UVA lacks adequate erythemal/immunosuppressive potency without psoralen.",
+    "Grenz rays are ultra-soft X-rays rarely used in modern practice due to carcinogenic risk.",
+    "Total skin electron beam therapy is reserved for cutaneous T-cell lymphoma (mycosis fungoides), not psoriasis."
+   ],
+   "kp": "Narrowband UVB phototherapy is the recommended second-line modality for extensive plaque psoriasis.",
+   "t": "der-psoriasis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "phototherapy",
+    "narrowband-uvb",
+    "nice"
+   ],
+   "source": "NICE guideline CG153: Psoriasis: assessment and management",
+   "x": {
+    "key": "Narrowband UVB phototherapy is second-line for psoriasis unresponsive to topicals.",
+    "others": {
+     "B": "UVA alone is ineffective.",
+     "C": "Grenz rays carry ionizing radiation risks.",
+     "D": "Electron beam is for mycosis fungoides."
+    },
+    "pearl": "Narrowband UVB emits radiation at 311-313 nm, maximizing therapeutic immunomodulation while minimizing skin carcinogenesis compared to PUVA.",
+    "clues": "Extensive psoriasis failing topicals, PASI >10, candidate for second-line physical therapy.",
+    "ddx": "Systemic methotrexate, PUVA photochemotherapy, biologics.",
+    "mech": "UVB induces T-lymphocyte apoptosis in the dermis and suppresses the Th17/IL-23 inflammatory axis.",
+    "lo": "Identify narrowband UVB phototherapy as the second-line therapy for extensive psoriasis.",
+    "rev": "Narrowband UVB phototherapy is recommended second-line for extensive psoriasis before biologics.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review NICE CG153 phototherapy guidance."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CG153",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CG153."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1139",
+   "q": "A 27-year-old married woman with severe recalcitrant plaque psoriasis is being evaluated for systemic therapies. She is planning to conceive a child within the next two years. Which oral antipsoriatic agent is strictly contraindicated due to severe teratogenicity and persistence in adipose stores for up to 3 years following treatment cessation?",
+   "o": [
+    "Acitretin (oral retinoid)",
+    "Ciclosporin",
+    "Narrowband UVB phototherapy",
+    "Topical calcipotriol"
+   ],
+   "a": 0,
+   "exp": "Acitretin is an oral aromatic retinoid that is profoundly teratogenic. In the presence of alcohol, it transesterifies into etretinate, which is stored in adipose tissue for years. Effective contraception is mandatory during treatment and for a minimum of 3 years following treatment cessation, making it contraindicated in women planning pregnancy within that window.",
+   "r": [
+    "Correct: Acitretin is severely teratogenic and requires contraception for 3 years after cessation.",
+    "Ciclosporin can be considered during pregnancy under specialist monitoring when benefits outweigh risks.",
+    "Narrowband UVB phototherapy is safe and considered the treatment of choice for extensive psoriasis during pregnancy.",
+    "Topical calcipotriol can be used in limited quantities without systemic teratogenic accumulation."
+   ],
+   "kp": "Acitretin is highly teratogenic; effective contraception is mandatory during treatment and for 3 years post-cessation.",
+   "t": "der-psoriasis",
+   "d": 2,
+   "cog": "safety",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "acitretin",
+    "teratogenicity",
+    "pregnancy-safety",
+    "drug-safety"
+   ],
+   "source": "British Association of Dermatologists: Guidelines on oral retinoids in psoriasis",
+   "x": {
+    "key": "Acitretin is severely teratogenic and persists in adipose tissue for 3 years post-cessation.",
+    "others": {
+     "B": "Ciclosporin does not carry 3-year teratogenic persistence.",
+     "C": "Phototherapy is safe in pregnancy.",
+     "D": "Calcipotriol is topical."
+    },
+    "pearl": "Narrowband UVB is the safest second-line intervention for pregnant women or women actively planning pregnancy.",
+    "clues": "Woman of childbearing potential planning pregnancy, oral drug contraindicated for 3 years post-cessation.",
+    "ddx": "Methotrexate (contraception required for 6 months post-cessation for both sexes).",
+    "mech": "Retinoids disrupt homeobox gene transcription during embryogenesis, causing severe craniofacial, cardiac, and central nervous system malformations.",
+    "lo": "Explain the teratogenic risk and mandatory 3-year post-treatment contraception window for acitretin.",
+    "rev": "Acitretin is contraindicated in women planning pregnancy within 3 years due to persistent teratogenicity.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review teratogenic drugs and pregnancy safety windows."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BAD Retinoid guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [
+      "acitretin"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BAD guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1140",
+   "q": "A 56-year-old man with chronic plaque psoriasis attends his annual primary care review. In addition to inspecting his skin and nails, which routine screening assessment is recommended by NICE guideline CG153 to reduce long-term mortality in patients with psoriasis?",
+   "o": [
+    "Cardiovascular risk assessment (lipid profile, blood pressure, glucose, QRISK calculation) at least every 5 years",
+    "Annual screening colonoscopy",
+    "Annual chest computed tomography for pulmonary fibrosis",
+    "Routine screening for human papillomavirus antibodies"
+   ],
+   "a": 0,
+   "exp": "NICE guideline CG153 emphasizes that psoriasis is a systemic inflammatory disease associated with significantly increased risk of cardiovascular disease, metabolic syndrome, diabetes, and hypertension. Clinicians should offer formal cardiovascular risk assessment (including lipids, blood pressure, fasting glucose or HbA1c) at least every 5 years.",
+   "r": [
+    "Correct: Cardiovascular risk assessment at least every 5 years is recommended by NICE CG153.",
+    "Colonoscopy is not routinely indicated for psoriasis.",
+    "Chest CT is not indicated for uncomplicated psoriasis.",
+    "HPV antibody screening has no role in routine psoriasis management."
+   ],
+   "kp": "Psoriasis is associated with elevated cardiovascular risk; NICE recommends formal cardiovascular assessment at least every 5 years.",
+   "t": "der-psoriasis",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "dermatology",
+    "cardiovascular-risk",
+    "comorbidities",
+    "nice"
+   ],
+   "source": "NICE guideline CG153: Psoriasis: assessment and management",
+   "x": {
+    "key": "NICE CG153 recommends formal cardiovascular risk screening every 5 years in psoriasis.",
+    "others": {
+     "B": "Colonoscopy is unindicated.",
+     "C": "Chest CT is unindicated.",
+     "D": "HPV testing is unindicated."
+    },
+    "pearl": "Severe psoriasis confers an independent cardiovascular risk comparable to type 2 diabetes mellitus.",
+    "clues": "Psoriasis annual review, routine comorbidity screening recommended by NICE.",
+    "ddx": "Psoriatic arthritis screening (PEST tool), depression screening.",
+    "mech": "Systemic upregulation of circulating TNF-alpha, IL-17, and IL-6 accelerates vascular endothelial dysfunction and atherogenesis.",
+    "lo": "Recognise cardiovascular disease as a major comorbidity of psoriasis requiring routine screening.",
+    "rev": "Cardiovascular risk screening every 5 years is recommended for psoriasis patients per NICE CG153.",
+    "next": {
+     "concept": "der-psoriasis",
+     "action": "review",
+     "text": "Review NICE CG153 comorbidity assessment."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "NICE CG153",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "psoriasis"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "der-psoriasis"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against NICE CG153."
+     }
+    }
+   }
+  }
+ ]
+}

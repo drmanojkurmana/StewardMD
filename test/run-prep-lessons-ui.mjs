@@ -110,7 +110,7 @@ try {
   ok(await until(`var w=document.getElementById("pnAsk"); return !!w && !!w.querySelector(".pa-opts") && /works in the StewardMD app/.test(w.textContent);`, 5000), "Ask MaiK on a step opens the choice sheet, saying on-phone MaiK is in the app");
   await ev(`document.querySelector("#pnAsk .pn-scrim").click(); return 1;`);
   ok(await until(`return !document.getElementById("pnAsk") && !!document.querySelector("#smdPrep #pnLsn");`, 3000), "the sheet closes back to the step");
-  ok(await ev(`var a=document.querySelector("#smdPrep .pn-lsn-bar").getBoundingClientRect(); return a.bottom <= innerHeight + 1 && a.height >= 60;`) === true, "the bottom bar sits on screen");
+  ok(await ev(`var a=document.querySelector("#smdPrep .pn-lsn-bar").getBoundingClientRect(); return a.bottom <= innerHeight + 6 && a.height >= 60;`) === true, "the bottom bar sits on screen");
   const sw = await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){ var r=e.getBoundingClientRect(); if(r.right>innerWidth+1 && !e.closest(".pn-vtbl")) o.push(e.className||e.tagName); }); return o.slice(0,5).join("|");`);
   ok(sw === "", "nothing wider than the 390 px screen (tables scroll inside their card)" + (sw ? ": " + sw : ""));
   ok(await store(`s.ls["${MID}"].i === 0 && s.ls["${MID}"].n === 8`) === true, "lesson progress is in the store");

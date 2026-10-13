@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "psy-bipolar",
+ "subject": "plab-psychiatry",
+ "title": "Bipolar affective disorder: mania, hypomania, acute stabilization, and lithium prophylaxis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Bipolar affective disorder** is a chronic episodic mood disorder characterized by recurrent fluctuations between mania or hypomania and depressive episodes. Bipolar I disorder requires at least one definitive manic episode lasting at least one week or requiring hospital admission, with severe functional disruption or psychotic symptoms. Bipolar II disorder involves recurrent major depressive episodes with at least one hypomanic episode lasting four days.",
+   "say": "Bipolar I requires at least one manic episode with severe functional disruption. Bipolar II requires hypomania and major depression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Euthymia baseline"
+     },
+     {
+      "id": "b",
+      "label": "Manic or hypomanic episode"
+     },
+     {
+      "id": "c",
+      "label": "Depressive phase"
+     },
+     {
+      "id": "d",
+      "label": "Recurrent episodic mood course"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute mania presentation** features elevated, irritable, or expansive mood, grandiosity, decreased need for sleep, pressurized speech, flight of ideas, distractibility, and high-risk impulsive behaviors such as reckless spending. Psychotic symptoms, when present, typically manifest as mood-congruent grandiose or persecutory delusions. First-line medical management of acute mania utilizes oral atypical antipsychotics such as olanzapine, quetiapine, risperidone, or haloperidol.",
+   "say": "Acute mania features elevated mood, decreased sleep need, and pressured speech. Treat first-line with an oral atypical antipsychotic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical feature",
+     "Hypomania (Bipolar II)",
+     "Mania (Bipolar I)"
+    ],
+    "rows": [
+     [
+      "Duration threshold",
+      "At least 4 consecutive days",
+      "At least 7 consecutive days (or hospitalisation)"
+     ],
+     [
+      "Functional disruption",
+      "Noticeable change, no severe social/work breakdown",
+      "Severe disruption of social and occupational functioning"
+     ],
+     [
+      "Psychotic features",
+      "Strictly absent by definition",
+      "May be present (delusions, hallucinations)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Long-term mood stabilization** relies on lithium carbonate as the undisputed first-line maintenance therapy, proven to reduce both manic and depressive relapses while uniquely lowering suicide mortality. Due to a narrow therapeutic index, 12-hour trough serum lithium concentrations must be maintained between 0.6 and 0.8 mmol/L (or 0.8 to 1.0 mmol/L for acute treatment or relapse prevention).",
+   "say": "Lithium is the first-line maintenance mood stabilizer, uniquely reducing suicide. Maintain serum levels between point six and point eight.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lithium carbonate",
+     "points": [
+      "First-line long-term stabilizer",
+      "Proven suicide risk reduction",
+      "Narrow therapeutic window (0.6-0.8 mmol/L)"
+     ]
+    },
+    "right": {
+     "title": "Sodium valproate",
+     "points": [
+      "Alternative for mania prophylaxis",
+      "Strictly avoided in females of childbearing potential",
+      "Teratogenic and endocrine risks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lithium toxicity and safety** requires rigorous baseline and ongoing clinical monitoring. Prior to initiation, clinicians must verify renal function (eGFR/creatinine), electrolytes, thyroid function (TSH), and perform an ECG. Early signs of lithium toxicity (coarse tremor, ataxia, dysarthria, nausea, vomiting, diarrhoea) occur above 1.5 mmol/L, with life-threatening seizures and coma developing above 2.0 mmol/L.",
+   "say": "Monitor renal and thyroid function on lithium. Coarse tremor, vomiting, and ataxia herald toxic levels above one point five.",
+   "vis": null
+  },
+  {
+   "tx": "**Teratogenicity and valproate safety** represent critical prescribing invariants. Sodium valproate carries severe risk of congenital neural tube defects and long-term neurodevelopmental delay (up to 40% of exposed children). Valproate is strictly contraindicated in women of childbearing potential unless the Pregnancy Prevention Programme is fulfilled. Lithium during the first trimester carries an increased risk of Ebstein anomaly.",
+   "say": "Valproate is strictly avoided in women of childbearing potential due to high neurodevelopmental risk. Lithium is linked to Ebstein anomaly.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1161",
+  "mk-gap1163",
+  "mk-gap1165"
+ ],
+ "src": [
+  "kb-reference-bipolar_disorder"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

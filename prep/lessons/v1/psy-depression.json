@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "psy-depression",
+ "subject": "plab-psychiatry",
+ "title": "Major depressive disorder: severity stratification, stepped therapy, SSRI safety, and treatment resistance",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Major depressive disorder** is characterized by persistent low mood, pervasive anhedonia, and profound fatigue or lack of energy for at least two consecutive weeks. Associated biological features include marked insomnia (especially early morning awakening) or hypersomnia, appetite loss with unintentional weight change, psychomotor agitation or retardation, pathological guilt, and recurrent suicidal thoughts.",
+   "say": "Depression requires low mood, anhedonia, and fatigue for two weeks, accompanied by biological and cognitive symptoms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Persistent depressed mood"
+     },
+     {
+      "id": "b",
+      "label": "Loss of interest and pleasure"
+     },
+     {
+      "id": "c",
+      "label": "Impaired neurovegetative functions"
+     },
+     {
+      "id": "d",
+      "label": "Functional disruption and suicide risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stepped-care management** stratifies treatment by episode severity according to NICE guideline NG222. Mild depression should not routinely be treated with antidepressants as first-line therapy; initial management focuses on active monitoring, group exercise, digital cognitive behavioural therapy, or guided self-help. Moderate to severe depression warrants evidence-based psychological therapy, an antidepressant (typically an SSRI), or combined therapy.",
+   "say": "Mild depression is managed with guided self-help and psychological therapy. Moderate to severe depression warrants SSRIs or combination treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Depression severity",
+     "First-line intervention",
+     "Follow-up schedule"
+    ],
+    "rows": [
+     [
+      "Mild depression",
+      "Active monitoring, guided self-help, group CBT",
+      "Review in 2 weeks"
+     ],
+     [
+      "Moderate depression",
+      "Individual CBT or oral SSRI (e.g. sertraline)",
+      "Review in 1-2 weeks"
+     ],
+     [
+      "Severe / psychotic depression",
+      "Combined CBT plus antidepressant, crisis team, consider ECT",
+      "Urgent specialist review, close monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First-line antidepressants** are selective serotonin reuptake inhibitors, with sertraline, citalopram, or fluoxetine commonly chosen. Sertraline has an advantageous cardiovascular safety profile, making it the antidepressant of choice following acute myocardial infarction. Clinicians must warn patients that symptomatic improvement typically takes two to four weeks, and transient increases in anxiety or agitation may occur during early initiation.",
+   "say": "SSRIs are first-line antidepressants. Sertraline is preferred in cardiovascular disease. Inform patients about the two to four week onset.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sertraline",
+     "points": [
+      "First-line for post-MI patients",
+      "Balanced efficacy and safety",
+      "Low hepatic enzyme inhibition"
+     ]
+    },
+    "right": {
+     "title": "Citalopram",
+     "points": [
+      "Dose-dependent QT prolongation",
+      "Max 20 mg in elderly or hepatic impairment",
+      "Avoid with other QT-prolonging drugs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Safety monitoring and continuation** are crucial to clinical success. Young adults under thirty require weekly review initially due to a transiently heightened risk of suicidal ideation upon starting an SSRI. Once remission is achieved, antidepressant therapy must be continued at the effective therapeutic dose for at least six months (or two years for recurrent depression) to prevent relapse.",
+   "say": "Monitor young adults closely for emergent suicidal ideation. Continue effective treatment for six months after remission.",
+   "vis": null
+  },
+  {
+   "tx": "**Treatment-resistant depression** is defined as failure to respond to two consecutive adequate trials of distinct antidepressant classes. Specialist management strategies include checking medication adherence, augmenting with an atypical antipsychotic (quetiapine or aripiprazole) or lithium, or switching to dual-action agents such as venlafaxine or mirtazapine. Severe life-threatening psychotic depression with refusal to eat responds dramatically to electroconvulsive therapy.",
+   "say": "Treatment-resistant depression warrants checking adherence, switching classes, augmenting with lithium or quetiapine, or electroconvulsive therapy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1171",
+  "mk-gap1173",
+  "mk-gap1175"
+ ],
+ "src": [
+  "kb-reference-major_depressive_disorder"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

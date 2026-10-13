@@ -1,0 +1,797 @@
+{
+ "topic": "mrheu-sle",
+ "set": "gap1013f",
+ "v": 1,
+ "items": [
+  {
+   "id": "mk-gap1031",
+   "q": "A 26-year-old woman presents with facial rash worsening after sun exposure, fatigue, and pain in her wrists and knees. Her ANA is positive at 1:640. Which antibody test has the highest specificity for systemic lupus erythematosus and tracks with renal disease activity?",
+   "o": [
+    "Anti-double-stranded DNA (anti-dsDNA)",
+    "Anti-Ro (SSA)",
+    "Anti-centromere antibody",
+    "Anti-Jo-1 antibody"
+   ],
+   "a": 0,
+   "exp": "Anti-dsDNA antibodies are highly specific for SLE and correlate closely with disease activity, particularly lupus nephritis and complement consumption. Anti-Ro is seen in Sjogren syndrome and subacute cutaneous lupus; anti-centromere in limited systemic sclerosis; anti-Jo-1 in antisynthetase syndrome.",
+   "r": [
+    "Correct: Anti-dsDNA is specific for SLE and tracks disease activity and nephritis.",
+    "Anti-Ro is associated with subacute cutaneous lupus and Sjogren syndrome, but does not track nephritis.",
+    "Anti-centromere antibody is specific for limited cutaneous systemic sclerosis.",
+    "Anti-Jo-1 is specific for inflammatory myositis and interstitial lung disease."
+   ],
+   "kp": "Anti-dsDNA has high specificity for SLE and its titre correlates with lupus nephritis activity.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "sle",
+    "serology"
+   ],
+   "source": "EULAR/ACR 2019 classification criteria for systemic lupus erythematosus",
+   "x": {
+    "key": "Anti-dsDNA tracks lupus nephritis and disease activity.",
+    "others": {
+     "B": "Anti-Ro does not track nephritis flares.",
+     "C": "Anti-centromere is seen in scleroderma.",
+     "D": "Anti-Jo-1 is myositis-specific."
+    },
+    "pearl": "Rising anti-dsDNA titres paired with falling C3 and C4 complement levels herald an impending renal flare.",
+    "clues": "Young female, malar rash, photosensitivity, arthralgia, positive ANA.",
+    "ddx": "Rosacea, dermatomyositis, mixed connective tissue disease.",
+    "mech": "Circulating anti-dsDNA autoantibodies bind glomerular basement membrane antigens or pre-formed nuclear complexes, fixing complement.",
+    "lo": "Identify the autoantibody that correlates with lupus nephritis activity.",
+    "rev": "Anti-dsDNA antibodies are specific for SLE and track renal disease activity.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review SLE diagnostic criteria and serology."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR/ACR criteria",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR criteria."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1032",
+   "q": "In a patient newly diagnosed with mild-to-moderate systemic lupus erythematosus without organ-threatening involvement, which disease-modifying agent is recommended as foundational therapy for all patients?",
+   "o": [
+    "Hydroxychloroquine",
+    "Cyclophosphamide",
+    "Intravenous rituximab",
+    "Etanercept"
+   ],
+   "a": 0,
+   "exp": "EULAR and British Society for Rheumatology guidelines recommend hydroxychloroquine for all patients with systemic lupus erythematosus unless contraindicated, as it reduces disease flares, thrombotic events, organ damage and mortality.",
+   "r": [
+    "Correct: Hydroxychloroquine is foundational baseline therapy for all SLE patients.",
+    "Cyclophosphamide is reserved for life-threatening or organ-threatening disease such as proliferative nephritis.",
+    "Rituximab is second-line for refractory severe disease.",
+    "Etanercept (TNF inhibitor) is generally avoided in SLE as it can induce lupus-like autoantibodies."
+   ],
+   "kp": "Hydroxychloroquine is recommended for all SLE patients to reduce flares and mortality.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "sle",
+    "hydroxychloroquine"
+   ],
+   "source": "EULAR recommendations for the management of systemic lupus erythematosus",
+   "x": {
+    "key": "Hydroxychloroquine is baseline therapy for all SLE patients.",
+    "others": {
+     "B": "Cyclophosphamide is for severe organ-threatening disease.",
+     "C": "Rituximab is second-line refractory.",
+     "D": "TNF blockers may worsen lupus."
+    },
+    "pearl": "Hydroxychloroquine protects against thrombosis even in the presence of antiphospholipid antibodies.",
+    "clues": "Newly diagnosed mild-to-moderate SLE.",
+    "ddx": "Fibromyalgia, undifferentiated connective tissue disease.",
+    "mech": "Inhibits endosomal Toll-like receptor signaling (TLR7 and TLR9), reducing type I interferon production.",
+    "lo": "Select the foundational disease-modifying therapy for systemic lupus erythematosus.",
+    "rev": "Hydroxychloroquine should be prescribed to all patients with SLE unless contraindicated.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review antimalarial mechanisms and guidelines."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR SLE guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [
+      "hydroxychloroquine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1033",
+   "q": "A 28-year-old woman with known SLE presents for routine clinic follow-up. She feels well, but clinic urinalysis reveals 3+ protein and 2+ blood. Urine microscopy shows dysmorphic red cells and red cell casts. What is the most definitive next investigation?",
+   "o": [
+    "Renal biopsy",
+    "Repeat urine dipstick in three months",
+    "CT kidneys, ureters and bladder",
+    "Serum protein electrophoresis"
+   ],
+   "a": 0,
+   "exp": "New proteinuria with active sediment (dysmorphic red cells, red cell casts) signifies active glomerulonephritis (lupus nephritis). Urgent renal biopsy is essential to define the histological class (Class I to VI) and activity/chronicity index to guide immunosuppressive therapy.",
+   "r": [
+    "Correct: Renal biopsy is essential to classify lupus nephritis and direct immunosuppression.",
+    "Delaying evaluation for three months risks irreversible glomerulosclerosis and chronic kidney disease.",
+    "CT KUB detects calculi and obstruction, not glomerular pathology.",
+    "Serum protein electrophoresis evaluates paraproteinaemias, not lupus glomerulonephritis."
+   ],
+   "kp": "Renal biopsy is the definitive test to classify and guide therapy in active lupus nephritis.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "lupus-nephritis",
+    "renal-biopsy"
+   ],
+   "source": "KDIGO Clinical Practice Guideline for the Management of Glomerular Diseases: Lupus Nephritis",
+   "x": {
+    "key": "Renal biopsy classifies lupus nephritis to guide induction therapy.",
+    "others": {
+     "B": "Delaying risks permanent renal damage.",
+     "C": "CT does not show glomerular lesions.",
+     "D": "Electrophoresis does not stage nephritis."
+    },
+    "pearl": "Class III (focal) and Class IV (diffuse proliferative) nephritis require aggressive induction with mycophenolate or cyclophosphamide.",
+    "clues": "Known SLE, asymptomatic, 3+ protein, red cell casts on microscopy.",
+    "ddx": "IgA nephropathy, post-infectious glomerulonephritis, membranous nephropathy.",
+    "mech": "Subendothelial and subepithelial immune complex deposition triggers complement activation and endocapillary proliferation.",
+    "lo": "Recognise the indication for renal biopsy in suspected lupus nephritis.",
+    "rev": "Renal biopsy is required to classify active lupus nephritis and determine immunosuppressive therapy.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review lupus nephritis classification and management."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "KDIGO Glomerulonephritis guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against KDIGO guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1034",
+   "q": "A pregnant woman with systemic lupus erythematosus tests strongly positive for anti-Ro (SSA) and anti-La (SSB) antibodies. Which fetal complication is her infant at specific risk of developing?",
+   "o": [
+    "Congenital complete heart block",
+    "Neural tube defect",
+    "Duodenal atresia",
+    "Tracheo-oesophageal fistula"
+   ],
+   "a": 0,
+   "exp": "Maternal anti-Ro/SSA and anti-La/SSB IgG antibodies cross the placenta and bind fetal cardiac conduction tissue, leading to autoimmune myocarditis, fibrosis of the atrioventricular node, and congenital complete heart block, which is irreversible once established.",
+   "r": [
+    "Correct: Transplacental anti-Ro and anti-La antibodies cause fetal congenital heart block.",
+    "Neural tube defects relate to folate deficiency or valproate, not anti-Ro antibodies.",
+    "Duodenal atresia is associated with Trisomy 21.",
+    "Tracheo-oesophageal fistula is a structural embryological defect not linked to maternal autoantibodies."
+   ],
+   "kp": "Maternal anti-Ro/SSA antibodies cross the placenta and cause congenital complete heart block.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "pregnancy",
+    "anti-ro"
+   ],
+   "source": "British Society for Rheumatology guidelines on pregnancy in systemic lupus erythematosus",
+   "x": {
+    "key": "Anti-Ro antibodies cause fetal congenital complete heart block.",
+    "others": {
+     "B": "Neural tube defects relate to folate.",
+     "C": "Duodenal atresia is linked to Down syndrome.",
+     "D": "Tracheo-oesophageal fistula is non-immune."
+    },
+    "pearl": "Serial fetal echocardiography from 16 to 26 weeks monitors for PR prolongation and heart block in anti-Ro positive mothers.",
+    "clues": "Pregnant woman with SLE, positive anti-Ro and anti-La antibodies.",
+    "ddx": "Neonatal lupus rash, congenital structural heart disease.",
+    "mech": "Transplacental IgG antibodies trigger inflammation and fibrosis of the fetal AV node and conduction system.",
+    "lo": "Identify the fetal cardiac complication linked to maternal anti-Ro antibodies.",
+    "rev": "Anti-Ro and anti-La antibodies confer risk of neonatal lupus and congenital heart block.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review neonatal lupus and obstetric rheumatology."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSR Pregnancy guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1035",
+   "q": "A 32-year-old woman with SLE and two previous first-trimester miscarriages presents with an unprovoked right iliofemoral deep vein thrombosis. Screening reveals persistently positive lupus anticoagulant and anticardiolipin antibodies. What long-term management is indicated?",
+   "o": [
+    "Long-term oral anticoagulation with warfarin (target INR 2.0 to 3.0)",
+    "Aspirin 75 mg daily monotherapy without anticoagulation",
+    "Intermittent subcutaneous heparin only during flights",
+    "Cessation of hydroxychloroquine"
+   ],
+   "a": 0,
+   "exp": "The combination of vascular thrombosis, pregnancy loss and persistent antiphospholipid antibodies defines secondary antiphospholipid syndrome. For secondary venous thrombosis, long-term anticoagulation with a vitamin K antagonist (warfarin, target INR 2.5, range 2.0-3.0) is standard. Direct oral anticoagulants (DOACs) are associated with higher recurrent thrombotic risk in high-risk triple-positive antiphospholipid syndrome.",
+   "r": [
+    "Correct: Secondary antiphospholipid syndrome with venous thrombosis requires long-term warfarin (INR 2.0-3.0).",
+    "Aspirin alone is inadequate for secondary prevention following an established venous thrombosis.",
+    "Intermittent prophylaxis fails to protect against recurrent unprovoked venous thrombosis.",
+    "Hydroxychloroquine should be continued as it provides complementary antithrombotic benefit."
+   ],
+   "kp": "Secondary antiphospholipid syndrome with venous thrombosis requires long-term warfarin (target INR 2.0-3.0).",
+   "t": "mrheu-sle",
+   "d": 3,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "antiphospholipid-syndrome",
+    "anticoagulation"
+   ],
+   "source": "British Society for Haematology: Antiphospholipid syndrome guidelines",
+   "x": {
+    "key": "Warfarin with target INR 2.0-3.0 is standard for venous thrombosis in APS.",
+    "others": {
+     "B": "Aspirin monotherapy is inadequate for secondary prevention.",
+     "C": "Intermittent therapy leaves high risk of recurrence.",
+     "D": "Hydroxychloroquine should be retained."
+    },
+    "pearl": "DOACs are avoided in high-risk triple-positive antiphospholipid syndrome due to excess arterial thromboembolism.",
+    "clues": "SLE, recurrent pregnancy loss, unprovoked DVT, positive lupus anticoagulant.",
+    "ddx": "Inherited thrombophilia (Factor V Leiden), nephrotic syndrome thrombosis.",
+    "mech": "Antiphospholipid antibodies activate endothelial cells, platelets and complement, promoting hypercoagulability.",
+    "lo": "Select the recommended long-term antithrombotic management for secondary antiphospholipid syndrome.",
+    "rev": "Antiphospholipid syndrome with venous thrombosis requires long-term warfarin anticoagulation.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review antiphospholipid syndrome management."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSH APS guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [
+      "warfarin"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSH guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1036",
+   "q": "A patient on long-standing hydroxychloroquine for systemic lupus erythematosus requires monitoring for retinal toxicity. According to the Royal College of Ophthalmologists, after how many years of treatment should annual retinal screening commence for individuals without additional risk factors?",
+   "o": [
+    "After 5 years of treatment",
+    "After 6 months of treatment",
+    "After 15 years of treatment",
+    "Only if symptomatic visual blur occurs"
+   ],
+   "a": 0,
+   "exp": "The Royal College of Ophthalmologists recommends baseline examination within the first year, followed by annual screening for hydroxychloroquine retinopathy after 5 years of therapy in patients without additional risk factors. Concomitant tamoxifen use, renal impairment (eGFR <60), or daily dose >5 mg/kg actual weight warrant earlier annual screening.",
+   "r": [
+    "Correct: Annual retinal screening starts after 5 years of treatment for standard-risk patients.",
+    "Six months is too early for routine screening without high-risk features.",
+    "Fifteen years is inappropriately delayed; irreversible bull's eye maculopathy may develop.",
+    "Waiting for symptoms is dangerous because early hydroxychloroquine toxicity is asymptomatic and irreversible."
+   ],
+   "kp": "Annual retinal screening for hydroxychloroquine starts after 5 years in standard-risk patients.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "hydroxychloroquine",
+    "retinopathy"
+   ],
+   "source": "Royal College of Ophthalmologists: Hydroxychloroquine and chloroquine retinopathy: recommendations on screening",
+   "x": {
+    "key": "Annual retinal screening commences after 5 years of hydroxychloroquine exposure.",
+    "others": {
+     "B": "Six months is unnecessary without risk factors.",
+     "C": "Fifteen years risks advanced maculopathy.",
+     "D": "Screening must occur before visual symptoms appear."
+    },
+    "pearl": "Screening utilises optical coherence tomography (OCT) and widefield fundus autofluorescence to detect pre-clinical photoreceptor thinning.",
+    "clues": "Long-standing hydroxychloroquine, standard risk, timing of annual retinal screening.",
+    "ddx": "Age-related macular degeneration, toxic maculopathy, optic neuropathy.",
+    "mech": "Hydroxychloroquine binds retinal pigment epithelial melanin, causing metabolic dysfunction and photoreceptor outer-segment loss.",
+    "lo": "State the recommended timeline for hydroxychloroquine retinal screening.",
+    "rev": "Annual retinal screening is recommended after 5 years of hydroxychloroquine therapy.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review drug monitoring protocols in rheumatology."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "RCOphth Retinopathy guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [
+      "hydroxychloroquine"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against RCOphth guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1037",
+   "q": "A 24-year-old woman with SLE presents with progressive confusion, visual hallucinations and tonic-clonic seizures. CSF examination reveals mild lymphocytic pleocytosis and elevated protein, with negative microbial cultures and PCR. MRI brain shows diffuse hyperintensities. What is the diagnosis?",
+   "o": [
+    "Neuropsychiatric systemic lupus erythematosus (NPSLE)",
+    "Herpes simplex encephalitis",
+    "Multiple sclerosis",
+    "Hashimoto encephalopathy"
+   ],
+   "a": 0,
+   "exp": "Central nervous system involvement in SLE (NPSLE) manifests as acute confusional states, psychosis, seizures, cognitive dysfunction or cranial neuropathies. Once intracranial infection is excluded, active NPSLE is managed with high-dose intravenous pulsed corticosteroids and cyclophosphamide.",
+   "r": [
+    "Correct: Acute encephalopathy, seizures and hallucinations with negative microbiology in SLE represent NPSLE.",
+    "Negative HSV PCR and absence of temporal lobe haemorrhagic necrosis argue against herpes encephalitis.",
+    "Multiple sclerosis does not present with acute psychosis, seizures and high systemic lupus activity.",
+    "Hashimoto encephalopathy is accompanied by high anti-TPO antibodies and euthyroid or hypothyroid state."
+   ],
+   "kp": "Neuropsychiatric SLE presents with seizures, psychosis and confusion, requiring aggressive immunosuppression.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "npsle",
+    "neurology"
+   ],
+   "source": "EULAR recommendations for the management of systemic lupus erythematosus with neuropsychiatric manifestations",
+   "x": {
+    "key": "NPSLE presents with acute confusional state, psychosis and seizures.",
+    "others": {
+     "B": "HSV PCR is negative.",
+     "C": "MS does not explain acute encephalopathy.",
+     "D": "Hashimoto features thyroid antibodies."
+    },
+    "pearl": "Distinguishing NPSLE from steroid-induced psychosis and CNS infection is a crucial clinical challenge.",
+    "clues": "Known SLE, seizures, psychosis, negative CSF infection workup.",
+    "ddx": "Lupus cerebritis, viral encephalitis, corticosteroid-induced psychosis, posterior reversible encephalopathy syndrome (PRES).",
+    "mech": "Autoantibodies (anti-neuronal, anti-ribosomal P), vasculopathy and blood-brain barrier disruption induce neuronal injury.",
+    "lo": "Recognise neuropsychiatric manifestations of systemic lupus erythematosus.",
+    "rev": "NPSLE manifests as encephalopathy, psychosis and seizures in active lupus.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review severe lupus manifestations."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "EULAR NPSLE recommendations",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against EULAR guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1038",
+   "q": "A 30-year-old woman with systemic lupus erythematosus presents with fever, pleuritic chest pain and breathlessness. Echocardiography reveals sterile, non-infective verrucous vegetations on the ventricular surface of the mitral valve. What is this cardiac manifestation termed?",
+   "o": [
+    "Libman-Sacks endocarditis",
+    "Infective bacterial endocarditis",
+    "Marantic non-bacterial thrombotic endocarditis",
+    "Rheumatic carditis"
+   ],
+   "a": 0,
+   "exp": "Libman-Sacks endocarditis is a non-bacterial verrucous endocarditis characterized by immune complex deposition and sterile vegetations on the mitral and aortic valves in patients with SLE and antiphospholipid syndrome.",
+   "r": [
+    "Correct: Sterile verrucous vegetations on valve leaflets in SLE are Libman-Sacks endocarditis.",
+    "Infective endocarditis features positive blood cultures and bacterial vegetations.",
+    "Marantic endocarditis typically occurs in mucin-secreting adenocarcinomas and advanced malignancy.",
+    "Rheumatic carditis follows group A streptococcal pharyngitis and leads to mitral stenosis."
+   ],
+   "kp": "Libman-Sacks endocarditis presents with sterile verrucous valve vegetations in SLE.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "cardiology",
+    "libman-sacks"
+   ],
+   "source": "Oxford Textbook of Rheumatology: Cardiovascular manifestations of SLE",
+   "x": {
+    "key": "Libman-Sacks endocarditis causes sterile verrucous vegetations in SLE.",
+    "others": {
+     "B": "Blood cultures are negative.",
+     "C": "Marantic endocarditis occurs in cancer.",
+     "D": "Rheumatic carditis is post-streptococcal."
+    },
+    "pearl": "Libman-Sacks vegetations carry high risk of embolisation, secondary bacterial seeding and progressive valvular regurgitation.",
+    "clues": "SLE, sterile mitral vegetations, pleuritic chest pain.",
+    "ddx": "Culture-negative infective endocarditis, non-bacterial thrombotic endocarditis, fibroelastoma.",
+    "mech": "Immune complex and complement deposition in the subendothelial valvular connective tissue followed by fibrin thrombus organisation.",
+    "lo": "Identify Libman-Sacks endocarditis as the cardiac valvular manifestation of SLE.",
+    "rev": "Libman-Sacks endocarditis produces sterile valvular vegetations in SLE and APS.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review cardiac manifestations of connective tissue disease."
+    },
+    "refs": [
+     {
+      "type": "textbook",
+      "title": "Oxford Textbook of Rheumatology",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against rheumatology reference."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1039",
+   "q": "A 22-year-old woman with active SLE develops haemolytic anaemia. Direct antiglobulin test (Coombs test) is strongly positive with anti-IgG. What is the mechanism of this haematological complication?",
+   "o": [
+    "Warm autoimmune haemolytic anaemia mediated by IgG autoantibodies",
+    "Cold agglutinin disease mediated by IgM autoantibodies",
+    "Microangiopathic haemolytic anaemia due to mechanical shearing",
+    "G6PD deficiency triggered by oxidative stress"
+   ],
+   "a": 0,
+   "exp": "Haematological involvement in SLE commonly includes warm autoimmune haemolytic anaemia, driven by polyclonal IgG autoantibodies directed against red blood cell membrane antigens, triggering extravascular phagocytosis in the spleen.",
+   "r": [
+    "Correct: Warm AIHA in SLE is mediated by warm-reactive IgG autoantibodies causing extravascular haemolysis.",
+    "Cold agglutinin disease is mediated by IgM antibodies that bind at cooler peripheral temperatures.",
+    "Microangiopathic haemolysis features schistocytes from thrombotic microangiopathy.",
+    "G6PD deficiency is an inherited enzymopathy, not an autoimmune feature."
+   ],
+   "kp": "Warm AIHA in SLE is mediated by IgG autoantibodies causing extravascular splenic clearance.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "recall",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "haematology",
+    "aiha"
+   ],
+   "source": "British Society for Haematology: Guidelines on the management of autoimmune haemolytic anaemia",
+   "x": {
+    "key": "Warm IgG autoantibodies cause autoimmune haemolytic anaemia in SLE.",
+    "others": {
+     "B": "Cold agglutinins are IgM-mediated.",
+     "C": "MAHA produces schistocytes and microthrombi.",
+     "D": "G6PD deficiency is an inherited metabolic defect."
+    },
+    "pearl": "Initial treatment for warm AIHA in SLE is oral corticosteroids (prednisolone), with rituximab reserved for steroid-resistant cases.",
+    "clues": "SLE, haemolytic anaemia, positive Direct Coombs test for IgG.",
+    "ddx": "Evans syndrome, thrombotic thrombocytopenic purpura, drug-induced haemolysis.",
+    "mech": "IgG opsonises red cells, leading to Fc-receptor-mediated phagocytosis by splenic reticuloendothelial macrophages.",
+    "lo": "Describe the immunological mechanism of haemolytic anaemia in SLE.",
+    "rev": "Warm IgG antibodies drive extravascular autoimmune haemolysis in SLE.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review haematological cytopenias in SLE."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "BSH AIHA guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [
+      "prednisolone"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against BSH guidelines."
+     }
+    }
+   }
+  },
+  {
+   "id": "mk-gap1040",
+   "q": "A 45-year-old woman with severe Class IV lupus nephritis achieves complete renal remission following six months of induction therapy with mycophenolate mofetil and oral corticosteroids. What is the recommended long-term maintenance strategy?",
+   "o": [
+    "Continue maintenance mycophenolate mofetil for at least 3 to 5 years",
+    "Stop all immunosuppressive therapy immediately",
+    "Switch to high-dose intravenous cyclophosphamide every month",
+    "Switch to daily NSAID therapy alone"
+   ],
+   "a": 0,
+   "exp": "KDIGO and EULAR guidelines recommend continuing maintenance immunosuppression (low-dose mycophenolate mofetil or azathioprine, alongside low-dose steroid and hydroxychloroquine) for at least 3 to 5 years following complete remission to prevent renal relapse.",
+   "r": [
+    "Correct: Mycophenolate maintenance should continue for at least 3-5 years after achieving remission.",
+    "Stopping immunosuppression leads to high rates of renal flare and irreversible nephron loss.",
+    "Cyclophosphamide is for induction, not long-term maintenance, due to cumulative toxicity.",
+    "NSAIDs provide no immunosuppressive protection and cause renal impairment."
+   ],
+   "kp": "Maintain immunosuppression with mycophenolate for at least 3 to 5 years after lupus nephritis remission.",
+   "t": "mrheu-sle",
+   "d": 2,
+   "cog": "application",
+   "prov": "SMD",
+   "gen": "hand",
+   "set": "gap1013f",
+   "tg": [
+    "rheumatology",
+    "lupus-nephritis",
+    "maintenance"
+   ],
+   "source": "KDIGO Clinical Practice Guideline for the Management of Glomerular Diseases",
+   "x": {
+    "key": "Maintain mycophenolate for 3 to 5 years after lupus nephritis remission.",
+    "others": {
+     "B": "Discontinuing risks severe relapse.",
+     "C": "Cyclophosphamide maintenance causes cumulative toxicity.",
+     "D": "NSAIDs do not suppress glomerulonephritis."
+    },
+    "pearl": "Premature withdrawal of maintenance therapy in lupus nephritis is the strongest predictor of progressive renal failure.",
+    "clues": "Class IV lupus nephritis, remission achieved, maintenance duration question.",
+    "ddx": "Renal relapse, medication non-adherence, chronic allograft nephropathy.",
+    "mech": "Long-term lymphocyte suppression prevents re-emergence of nephritogenic anti-dsDNA clones.",
+    "lo": "State the maintenance duration for proliferative lupus nephritis.",
+    "rev": "Continue maintenance mycophenolate for at least 3 to 5 years after remission.",
+    "next": {
+     "concept": "mrheu-sle",
+     "action": "review",
+     "text": "Review lupus nephritis maintenance therapy."
+    },
+    "refs": [
+     {
+      "type": "guideline",
+      "title": "KDIGO Glomerular guidelines",
+      "via": "gap-audit-1013"
+     }
+    ],
+    "links": {
+     "kb_ids": [
+      "systemic_lupus_erythematosus"
+     ],
+     "drug_ids": [
+      "mycophenolate_mofetil"
+     ],
+     "protocol_ids": [],
+     "lesson_ids": [
+      "mrheu-sle"
+     ],
+     "card_ids": [],
+     "via": "gap-audit-1013",
+     "ver": "gap1013f"
+    }
+   },
+   "quality": {
+    "status": "automated_checks_passed",
+    "gates": {
+     "author_self_check": {
+      "note": "Verified against KDIGO guidelines."
+     }
+    }
+   }
+  }
+ ]
+}

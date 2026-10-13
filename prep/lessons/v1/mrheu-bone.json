@@ -1,0 +1,120 @@
+{
+ "v": 1,
+ "module": "mrheu-bone",
+ "subject": "mrcp-rheumatology",
+ "title": "Metabolic bone disease: osteoporosis, osteomalacia, Paget disease",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Osteoporosis** is characterized by low bone mineral density and microarchitectural deterioration leading to increased bone fragility and susceptibility to low-trauma fractures. Dual-energy X-ray absorptiometry measures bone mineral density at the lumbar spine and femoral neck. A T-score of minus two point five standard deviations or below establishes the diagnosis of osteoporosis.",
+   "say": "Osteoporosis is defined by a DEXA T-score of minus two point five or below, predisposing to fragility fractures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fracture risk assessment"
+     },
+     {
+      "id": "b",
+      "label": "DEXA scan measurement"
+     },
+     {
+      "id": "c",
+      "label": "Anti-resorptive therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First-line pharmacotherapy** establishes oral bisphosphonates, such as once-weekly alendronic acid or risedronate. Oral bisphosphonates must be swallowed whole on an empty stomach with a full glass of plain water upon waking, remaining fully upright for thirty minutes without food or other medications to prevent severe pill-induced chemical oesophagitis.",
+   "say": "Oral bisphosphonates are taken weekly on an empty stomach with water, remaining upright for thirty minutes to prevent oesophagitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medication",
+     "Class",
+     "Administration rule"
+    ],
+    "rows": [
+     [
+      "Alendronic acid",
+      "Oral bisphosphonate",
+      "Weekly, fasting, upright for 30 minutes"
+     ],
+     [
+      "Zoledronic acid",
+      "Intravenous bisphosphonate",
+      "Annual infusion, ensure adequate hydration"
+     ],
+     [
+      "Denosumab",
+      "RANKL inhibitor",
+      "Subcutaneous 6-monthly, do not discontinue abruptly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Osteomalacia** in adults and rickets in children result from defective mineralisation of newly formed osteoid, most commonly driven by severe vitamin D deficiency. Patients report diffuse, unremitting aching bone pain and proximal myopathy causing a waddling gait. Biochemistry reveals low or low-normal serum calcium, low phosphate, elevated alkaline phosphatase, and compensatory secondary hyperparathyroidism.",
+   "say": "Osteomalacia causes defective osteoid mineralisation from vitamin D deficiency, featuring low phosphate, high ALP and pseudofractures.",
+   "vis": null
+  },
+  {
+   "tx": "**Paget disease of bone** is characterized by focal, disordered bone remodelling with accelerated osteoclastic resorption followed by chaotic, hypervascular osteoblastic deposition. Biochemistry shows marked isolated elevation of serum alkaline phosphatase with normal serum calcium and phosphate. Complications include progressive skull enlargement, sensorineural hearing loss, bowing of long bones, and osteosarcoma.",
+   "say": "Paget disease causes isolated high alkaline phosphatase with normal calcium. Intravenous zoledronic acid is the treatment of choice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Osteomalacia",
+     "points": [
+      "Low or normal calcium",
+      "Low serum phosphate",
+      "Elevated PTH and ALP",
+      "Looser zones on X-ray"
+     ]
+    },
+    "right": {
+     "title": "Paget disease",
+     "points": [
+      "Normal serum calcium",
+      "Normal serum phosphate",
+      "Markedly elevated ALP",
+      "Cortical expansion on X-ray"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Treatment of Paget disease** is indicated for bone pain, involvement of weight-bearing bones, skull lesions risking cranial nerve compression, or hypercalcaemia. A single intravenous infusion of zoledronic acid is the first-line therapy of choice, inducing rapid, sustained biochemical remission and suppressing accelerated bone turnover.",
+   "say": "Intravenous zoledronic acid induces long-term remission in Paget disease of bone, relieving bone pain and halting deformity.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1091",
+  "mk-gap1093",
+  "mk-gap1095"
+ ],
+ "src": [
+  "kb-reference-osteoporosis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

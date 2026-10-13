@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "module": "psy-dementia",
+ "subject": "plab-psychiatry",
+ "title": "Dementia syndromes: Alzheimer disease, vascular, Lewy body, and cholinesterase inhibitors",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Alzheimer disease** is the most prevalent neurodegenerative dementia, characterized by progressive, insidious decline in episodic short-term memory, followed by visuospatial impairment, dysphasia, and executive dysfunction. The underlying neuropathology features extracellular beta-amyloid plaques derived from amyloid precursor protein and intracellular neurofibrillary tangles composed of hyperphosphorylated tau protein, causing widespread cortical and hippocampal atrophy.",
+   "say": "Alzheimer disease causes insidious loss of short-term memory driven by extracellular amyloid plaques and intracellular tau tangles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Beta-amyloid peptide accumulation"
+     },
+     {
+      "id": "b",
+      "label": "Hyperphosphorylated tau tangles"
+     },
+     {
+      "id": "c",
+      "label": "Synaptic and neuronal degeneration"
+     },
+     {
+      "id": "d",
+      "label": "Progressive episodic memory loss"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vascular dementia** results from cerebrovascular ischaemia, presenting either with sudden post-stroke cognitive deterioration or a stepwise, fluctuating progression following cumulative subcortical lacunar infarcts. Clinical findings commonly reveal early executive impairment, psychomotor slowing, pseudobulbar affect, and focal neurological signs such as focal weakness, brisk reflexes, or extensor plantar responses, correlated with extensive white matter hyperintensities on magnetic resonance imaging.",
+   "say": "Vascular dementia presents with stepwise decline, focal neurological deficits, and early executive dysfunction on a background of cardiovascular risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alzheimer disease",
+     "points": [
+      "Insidious gradual progression",
+      "Predominant early episodic memory loss",
+      "Medial temporal lobe atrophy on MRI"
+     ]
+    },
+    "right": {
+     "title": "Vascular dementia",
+     "points": [
+      "Stepwise or fluctuating decline",
+      "Predominant early executive slowing",
+      "Focal neurological signs and white matter lesions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dementia with Lewy bodies** (DLB) is characterized by the clinical triad of fluctuating cognitive performance, recurrent detailed visual hallucinations, and spontaneous motor features of Parkinsonism. Central to pathology is the intraneuronal accumulation of alpha-synuclein aggregates (Lewy bodies) in cortical and subcortical neurons. Patients exhibit extreme, life-threatening neuroleptic sensitivity; first-generation antipsychotics like haloperidol are strictly contraindicated.",
+   "say": "Lewy body dementia causes fluctuating cognition, visual hallucinations, and parkinsonism. Antipsychotics cause life-threatening neuroleptic sensitivity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic criterion",
+     "Clinical presentation",
+     "Clinical caveat"
+    ],
+    "rows": [
+     [
+      "Core: Fluctuating cognition",
+      "Spontaneous waxing and waning attention",
+      "Can be mistaken for delirium"
+     ],
+     [
+      "Core: Visual hallucinations",
+      "Well-formed, vivid, detailed people or animals",
+      "Usually retained insight initially"
+     ],
+     [
+      "Core: Spontaneous Parkinsonism",
+      "Bradykinesia, rigidity, postural instability",
+      "Neuroleptic sensitivity: severe motor deterioration with haloperidol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pharmacotherapy of Alzheimer disease** employs acetylcholinesterase inhibitors (donepezil, rivastigmine, galantamine) for mild-to-moderate disease according to NICE guideline NG97. By inhibiting synaptic degradation of acetylcholine, these agents modestly improve cognitive function and activities of daily living. Memantine, a non-competitive NMDA receptor antagonist that protects against glutamate excitotoxicity, is licensed for moderate Alzheimer disease intolerant of cholinesterase inhibitors, or for severe disease.",
+   "say": "Cholinesterase inhibitors treat mild-to-moderate Alzheimer disease. Memantine is an NMDA antagonist for severe disease or intolerance.",
+   "vis": null
+  },
+  {
+   "tx": "**Behavioural and psychological symptoms of dementia** (BPSD), such as agitation, aggression, and wandering, must first be managed with non-pharmacological approaches: identifying unmet physical needs, pain, constipation, urinary infection, or sensory deficits. Antipsychotics should be restricted to patients at imminent risk of severe harm to themselves or others, because they carry substantial excess risks of stroke, accelerated cognitive decline, and all-cause mortality.",
+   "say": "Manage agitation in dementia non-pharmacologically first. Antipsychotics substantially increase the risk of stroke and mortality.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1181",
+  "mk-gap1183",
+  "mk-gap1185"
+ ],
+ "src": [
+  "kb-reference-alzheimers_disease",
+  "kb-reference-dementia_with_lewy_bodies",
+  "kb-reference-vascular_dementia"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

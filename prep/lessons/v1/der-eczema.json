@@ -1,0 +1,120 @@
+{
+ "v": 1,
+ "module": "der-eczema",
+ "subject": "plab-dermatology",
+ "title": "Eczema and dermatitis: barrier defect, stepped topical therapy, allergy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Atopic eczema** is a chronic relapsing inflammatory dermatosis characterized by severe pruritus and impaired epidermal barrier function, frequently linked to loss-of-function filaggrin gene mutations. Lesions show age-dependent distributions: facial and extensor surfaces in infants, shifting to flexural folds such as antecubital and popliteal fossae in older children and adults.",
+   "say": "Atopic eczema causes intense pruritus and barrier breakdown, affecting flexural creases in older children and adults.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Skin barrier breakdown"
+     },
+     {
+      "id": "b",
+      "label": "Emollient maintenance"
+     },
+     {
+      "id": "c",
+      "label": "Stepped topical steroids for flares"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Emollient therapy** forms the indispensable foundation of all atopic eczema management. Liberal, frequent application of greasy leave-on emollients restores stratum corneum hydration and reinforces defective lipid lamellae. Emollients should be applied smoothly in the direction of hair growth several times daily, continuing faithfully even during complete disease quiescence.",
+   "say": "Liberal, frequent emollients form the mandatory foundation, applied along hair growth to rebuild stratum corneum hydration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Application role",
+     "Guideline principle"
+    ],
+    "rows": [
+     [
+      "Emollients",
+      "Continuous daily barrier repair",
+      "Liberal use, continue when clear"
+     ],
+     [
+      "Topical corticosteroids",
+      "Acute inflammatory flare control",
+      "Stepped potency, match to anatomical site"
+     ],
+     [
+      "Calcineurin inhibitors",
+      "Steroid-sparing on delicate sites",
+      "Face and flexures, avoids skin atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Topical corticosteroids** are stepped in potency according to flare severity and anatomical vulnerability. Mild formulations such as hydrocortisone are reserved for delicate facial and intertriginous skin to avert telangiectasia and dermal atrophy. Moderate to potent preparations are utilized for thickened lichenified plaques on limbs and trunk.",
+   "say": "Use mild steroids on the face and flexures to prevent atrophy. Reserve potent steroids for lichenified trunk and limb plaques.",
+   "vis": null
+  },
+  {
+   "tx": "**Contact dermatitis** divides into irritant and allergic subtypes. Irritant contact dermatitis is a non-immunological physical or chemical disruption affecting anyone exposed to sufficient wet work, detergents or solvents. Allergic contact dermatitis represents a Type IV delayed hypersensitivity reaction to specific haptens like nickel, fragrance, or chromate, requiring diagnostic patch testing.",
+   "say": "Irritant dermatitis results from direct chemical barrier damage. Allergic dermatitis is Type IV hypersensitivity, confirmed by patch testing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Irritant dermatitis",
+     "points": [
+      "Non-immunological disruption",
+      "Affects hands in wet work",
+      "Dose- and duration-dependent",
+      "Negative patch test"
+     ]
+    },
+    "right": {
+     "title": "Allergic dermatitis",
+     "points": [
+      "Type IV delayed hypersensitivity",
+      "Specific hapten trigger (nickel)",
+      "Spreads beyond contact area",
+      "Positive patch test"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Venous stasis eczema** affects the gaiter region of the lower legs secondary to chronic venous hypertension and valvular incompetence. Progressive extravasation of red blood cells causes haemosiderin pigmentation and chronic subcutaneous fibrosis termed lipodermatosclerosis. Graduated compression hosiery is curative, provided peripheral arterial disease is excluded with an ankle-brachial pressure index.",
+   "say": "Venous stasis eczema affects the gaiter area with haemosiderin and lipodermatosclerosis. Compression requires an ABPI above point eight.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1121",
+  "mk-gap1123",
+  "mk-gap1125"
+ ],
+ "src": [
+  "kb-reference-atopic_dermatitis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

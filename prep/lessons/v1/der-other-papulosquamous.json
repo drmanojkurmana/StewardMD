@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "der-other-papulosquamous",
+ "subject": "plab-dermatology",
+ "title": "Papulosquamous disorders: lichen planus, pityriasis rosea, and pityriasis rubra pilaris",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Lichen planus** is a cell-mediated autoimmune dermatosis directed against basal epidermal keratinocytes. Classically defined by the six Ps (pruritic, planar, polygonal, purple, papules, and plaques), it shows strong predilection for the flexor wrists, forearms, ankles, and genitalia. Close inspection demonstrates fine reticulated lacy white lines termed Wickham striae on lesion surfaces and buccal mucosa.",
+   "say": "Lichen planus presents with pruritic polygonal purple papules on flexor wrists and white Wickham striae on oral mucosa.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Autoreactive CD8+ T-cells"
+     },
+     {
+      "id": "b",
+      "label": "Basal layer interface dermatitis"
+     },
+     {
+      "id": "c",
+      "label": "Keratinocyte apoptosis (Civatte bodies)"
+     },
+     {
+      "id": "d",
+      "label": "Pruritic polygonal purple papules"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mucosal and follicular involvement** in lichen planus can produce chronic morbidity. Reticular or erosive oral lichen planus presents with painful buccal ulcerations and lacy white gingival plaques, carrying a small potential risk of malignant transformation to squamous cell carcinoma. Lichen planopilaris causes follicular inflammation and permanent cicatricial scarring alopecia on the scalp.",
+   "say": "Oral lichen planus causes painful erosions and lacy buccal streaks. Scalp involvement causes scarring alopecia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Key clinical feature",
+     "Diagnostic risk / outcome"
+    ],
+    "rows": [
+     [
+      "Cutaneous lichen planus",
+      "Polygonal purple papules on flexor wrists",
+      "Self-limiting over 12-18 months; post-inflammatory pigmentation"
+     ],
+     [
+      "Oral lichen planus",
+      "Lacy white Wickham striae or painful erosions",
+      "Chronic relapsing; monitor for malignant transformation"
+     ],
+     [
+      "Lichen planopilaris",
+      "Perifollicular erythema and spines on scalp",
+      "Irreversible scarring cicatricial alopecia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pityriasis rosea** is an acute, self-limiting benign papulosquamous eruption predominantly affecting adolescents and young adults, linked to human herpesvirus six and seven reactivation. The eruption classically begins with a solitary, oval, salmon-pink herald patch displaying an inward-facing collarette of scale on the trunk, preceding the generalized rash by several days to two weeks.",
+   "say": "Pityriasis rosea begins with a solitary herald patch before spreading in a Christmas tree distribution along skin cleavage lines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Herald patch",
+     "points": [
+      "Solitary primary plaque (2-5 cm)",
+      "Collarette of fine inner scale",
+      "Precedes rash by 1-2 weeks"
+     ]
+    },
+    "right": {
+     "title": "Secondary eruption",
+     "points": [
+      "Multiple oval salmon-pink macules",
+      "Follows Langer cleavage lines",
+      "Christmas tree trunk pattern"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Clinical course of pityriasis rosea** is characterized by secondary eruption of smaller oval maculopapules aligned parallel to Langer skin cleavage lines, producing the classic 'Christmas tree' distribution across the back. The rash is self-limiting and resolves spontaneously within six to eight weeks without scarring. Management is reassurance, gentle emollients, and mild topical steroids or antihistamines for itch.",
+   "say": "Pityriasis rosea follows a Christmas tree distribution and resolves spontaneously in six to eight weeks. Management is reassurance.",
+   "vis": null
+  },
+  {
+   "tx": "**Pityriasis rubra pilaris** is a rare chronic dermatosis characterized by reddish-orange keratotic follicular papules, palmoplantar waxy keratoderma ('PRP sandal'), and thickened scaly plaques that characteristically spare discrete islands of normal skin. It must be differentiated from psoriasis, as PRP responds poorly to conventional topical therapy and typically requires systemic retinoids under dermatological supervision.",
+   "say": "Pityriasis rubra pilaris features orange-red plaques with islands of normal skin and waxy orange palmoplantar keratoderma.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1141",
+  "mk-gap1143",
+  "mk-gap1145"
+ ],
+ "src": [
+  "kb-reference-lichen_planus",
+  "kb-reference-pityriasis_rosea"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}
