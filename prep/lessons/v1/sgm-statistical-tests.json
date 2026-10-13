@@ -33,7 +33,13 @@
   {
    "tx": "A **confidence interval** gives a range of plausible values for the true effect, usually at 95 percent. For ratio measures such as hazard ratio, odds ratio and relative risk, the null value is 1; an interval including 1 means no significance at the 5 percent level. For differences, the null value is 0. A narrow interval signals precision, which grows with a larger **sample size**.",
    "say": "A confidence interval gives a range of plausible values for the true effect, usually at 95 percent. For ratio measures such as hazard ratio, odds ratio and relative risk, the null value is 1, so an interval that includes 1 is not significant at the 5 percent level. For differences, the null value is 0. A narrow interval signals precision, which grows with a larger sample size.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-ci-forest.svg",
+    "alt": "Forest plot of risk ratios: Study A 1.40 (1.10 to 1.80), Study B 0.90 (0.60 to 1.30) crossing the null at 1, Study C 1.20 (1.00 to 1.50), pooled 1.25 (1.08 to 1.45).",
+    "caption": "An interval crossing the null line is compatible with no effect. Width is precision.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "**Type I error** is rejecting a true null hypothesis, a false positive, and its probability equals alpha. **Type II error** is failing to reject a false null hypothesis, with probability beta. **Power** equals 1 minus beta and is the chance of detecting a real effect. Power rises with larger sample size, larger effect size, lower variability and higher alpha. A small negative trial may reflect type II error rather than proof of no effect.",

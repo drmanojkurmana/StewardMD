@@ -106,30 +106,23 @@
   {
    "tx": "A **confidence interval** gives a range that likely contains the true population value. A 95% interval is roughly the mean plus or minus 2 SD. A narrow interval is preferred, and it becomes narrower with a larger sample or a smaller standard deviation. For relative risk, the null value is 1, so an interval that includes 1 is not significant.",
    "say": "A confidence interval gives a range that likely contains the true population value. A 95 percent interval is roughly the mean plus or minus 2 standard deviations. A narrow interval is preferred, and it becomes narrower with a larger sample or a smaller standard deviation. For relative risk, the null value is 1, so an interval that includes 1 is not significant.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-ci-forest.svg",
+    "alt": "Forest plot of risk ratios: Study A 1.40 (1.10 to 1.80), Study B 0.90 (0.60 to 1.30) crossing the null at 1, Study C 1.20 (1.00 to 1.50), pooled 1.25 (1.08 to 1.45).",
+    "caption": "An interval crossing the null line is compatible with no effect. Width is precision.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "**Correlation** measures the strength and direction of a linear relationship between two quantitative variables, using the coefficient r which lies between minus 1 and plus 1. A value near zero means no association, and a value near plus or minus 1 means a strong relationship. Correlation does not prove causation and does not measure risk. For survival outcomes, **Cox regression** is the appropriate model, and several binary risk factors call for multiple logistic regression.",
    "say": "Correlation measures the strength and direction of a linear relationship between two quantitative variables, using the coefficient r, which lies between minus 1 and plus 1. A value near zero means no association, and a value near plus or minus 1 means a strong relationship. Correlation does not prove causation. For survival outcomes, Cox regression is the appropriate model.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Correlation coefficient r",
-     "points": [
-      "Between minus 1 and plus 1",
-      "Near zero: no association",
-      "Near plus or minus 1: strong",
-      "Does not prove causation"
-     ]
-    },
-    "right": {
-     "title": "Regression models",
-     "points": [
-      "Cox: time-to-event data",
-      "Multiple logistic: binary outcome",
-      "Multiple linear: continuous outcome"
-     ]
-    }
+    "kind": "image",
+    "src": "prep/lessons/media/stats-scatter.svg",
+    "alt": "Three scatter plots: points on a rising line for r equals plus 1, a shapeless cloud for r equals 0, and points on a falling line for r equals minus 1.",
+    "caption": "r runs from -1 to +1 and measures straight-line association only.",
+    "ar": 1.5384615384615385
    }
   }
  ],

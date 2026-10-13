@@ -1,0 +1,72 @@
+name: lessonui-browser
+
+# Manual browser gate for the lesson UI change: runs the PrepNucleus browser
+# tests in headless Chrome at 390px (dark and light) on the PR branch, plus
+# the same lesson screenshots on main for before/after comparison.
+on:
+  workflow_dispatch:
+  push:
+    branches: [lessonui-browser-run]
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Before screenshots (main)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: before
+      - name: Capture before (390px, dark and light)
+        working-directory: before
+        env:
+          CHROME: /usr/bin/google-chrome
+          SHOTS: ${{ github.workspace }}/shots-before
+        run: |
+          mkdir -p "$SHOTS"
+          node test/run-prep-lessons-ui.mjs
+          PN_LIGHT=1 node test/run-prep-lessons-ui.mjs
+      - name: Baseline prep-ui on main (stale-suite check)
+        if: always()
+        continue-on-error: true
+        working-directory: before
+        env:
+          CHROME: /usr/bin/google-chrome
+        run: node test/run-prep-ui.mjs
+      - uses: actions/checkout@v4
+        with:
+          path: after
+      - name: Lesson browser tests and after screenshots (390px, dark and light)
+        working-directory: after
+        env:
+          CHROME: /usr/bin/google-chrome
+          SHOTS: ${{ github.workspace }}/shots-after
+        run: |
+          mkdir -p "$SHOTS"
+          node test/run-prep-lessons-ui.mjs
+          PN_LIGHT=1 node test/run-prep-lessons-ui.mjs
+      - name: MCQ browser test (report sheet flow)
+        if: always()
+        working-directory: after
+        env:
+          CHROME: /usr/bin/google-chrome
+          SHOTS: ${{ github.workspace }}/shots-after
+        run: node test/run-prep-ui.mjs
+      - name: MaiK module browser test (report sheet flow)
+        if: always()
+        working-directory: after
+        env:
+          CHROME: /usr/bin/google-chrome
+        run: node test/run-prep-qgen-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lessonui-shots
+          path: |
+            shots-before
+            shots-after
+          if-no-files-found: warn

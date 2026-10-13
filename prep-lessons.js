@@ -628,6 +628,13 @@
       '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div></div>";
   }
   function drawBar() { var r = host.root && host.root(), el = r && r.querySelector("#pnLsnBar"); if (el) el.outerHTML = barHtml(); }
+  /* Foot row for lessons that are not Pearls (Pearls carry the same row inside their card):
+   * the shared filled pills (prep-action-row.js) + the lesson ID chip as one quiet metadata line. */
+  function footHtml(lid, isP) {
+    var A = G.PREP_ACTION; if (!A || !A.actionRowHtml || isP) return "";
+    var s = store();
+    return A.actionRowHtml({ shareId: lid || undefined, bookmarked: !!(s.lpbm && s.lpbm[L.key]) });
+  }
   function readerHtml() {
     var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
@@ -647,7 +654,7 @@
       pg.map(function (x, k) { var ix = typeof x !== "number" || interactive(les.steps[x]); return "<i" + (k <= L.i || ix ? ' class="' + (k <= L.i ? "on" : "") + (k === L.i ? " cur" : "") + (ix ? " ix" : "") + '"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pn-lsn" id="pnLsn">' + body +
       (L.i === 0 && canSpeak() ? '<p class="pn-note">Narration uses this device\'s own voice.</p>' : "") +
-      (lid ? IDS.chip(lid) : "") + "</div>" + barHtml();
+      footHtml(lid, isP) + (lid ? IDS.chip(lid) : "") + "</div>" + barHtml();
   }
   function finishHtml() {
     var les = L.les, s = store(), total = 0;
@@ -967,9 +974,39 @@
     if (!host || !L.les) return;
     var a = e.detail && e.detail.action, s = store();
     if (a === "bookmark") { if (!s.lpbm) s.lpbm = {}; if (s.lpbm[L.key]) delete s.lpbm[L.key]; else s.lpbm[L.key] = 1; host.save(); host.toast(s.lpbm[L.key] ? "Pearl bookmarked." : "Bookmark removed."); }
-    if (a === "report") { if (!s.lprep) s.lprep = {}; s.lprep[L.key] = Date.now(); host.save(); host.toast("Thank you. This Pearl has been reported."); }
+    if (a === "report") {
+      var A = G.PREP_ACTION;
+      if (A && A.openSheet) {
+        A.openSheet(G.document, { itemId: L.key, itemType: "lesson", subject: L.les.subject || L.sid || "", module: L.les.module || L.key }, function (payload) {
+          if (!s.lprep) s.lprep = {}; s.lprep[L.key] = Date.now(); host.save();
+          host.toast(payload ? "Thank you. Report received." : "Thank you. This Pearl has been reported.");
+        });
+      } else { if (!s.lprep) s.lprep = {}; s.lprep[L.key] = Date.now(); host.save(); host.toast("Thank you. This Pearl has been reported."); }
+    }
     if (a === "share") { var P = G.PREP_PEARL, id = P ? P.pearlId(L.les.module, G.PREP_IDS ? G.PREP_IDS.ofLesson(L.key) : null) : ""; host.toast(id ? "Pearl ID " + id + ". Use Share in the bar to send the lesson link." : "Use Share in the bar to send this lesson."); }
   });
+  /* Shared-row bridge for plain lessons (prep-action-row.js bind() dispatches these): Report opens
+   * the reason sheet, Bookmark persists in the same lpbm store Pearls use. Only the lesson foot
+   * renders these buttons, so the #pnLsn guard keeps other surfaces' events out. */
+  if (G.document && G.document.addEventListener) {
+    G.document.addEventListener("pn-report-open", function (e) {
+      var tr = e.detail && e.detail.trigger; if (!host || !L.les || !tr || !tr.closest || !tr.closest("#pnLsn")) return;
+      var A = G.PREP_ACTION, s = store(); if (!A || !A.openSheet) return;
+      A.openSheet(G.document, { itemId: L.key, itemType: "lesson", subject: L.les.subject || L.sid || "", module: L.les.module || L.key }, function () {
+        if (!s.lprep) s.lprep = {}; s.lprep[L.key] = Date.now(); host.save(); host.toast("Thank you. Report received.");
+      });
+    });
+    G.document.addEventListener("pn-action-bookmark", function (e) {
+      var tr = e.detail && e.detail.trigger; if (!host || !L.les || !tr || !tr.closest || !tr.closest("#pnLsn")) return;
+      var s = store(); if (!s.lpbm) s.lpbm = {};
+      if (e.detail.bookmarked) s.lpbm[L.key] = 1; else delete s.lpbm[L.key];
+      host.save(); host.toast(e.detail.bookmarked ? "Lesson bookmarked." : "Bookmark removed.");
+    });
+    G.document.addEventListener("pn-action-share", function (e) {
+      var tr = e.detail && e.detail.trigger; if (!host || !L.les || !tr || !tr.closest || !tr.closest("#pnLsn")) return;
+      host.toast("Use Share in the bar to send this lesson.");
+    });
+  }
 
   G.PREP_LESSONS = { mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);

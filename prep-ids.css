@@ -22,11 +22,11 @@
 .pn-root .pi-sb svg { transform: translateY(-1px); }
 
 /* The ID under a question or lesson: small, quiet, one tap copies it. 44 px tall for the finger. */
-.pn-root .pi-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: 14px 0 4px; padding: 0 12px; border: 0; border-radius: var(--pn-r-pill); background: transparent;
+.pn-root .pi-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: 14px 0 4px; padding: 0 12px; border: 0; border-radius: var(--pn-r-pill); background: var(--pn-s1);
   color: var(--pn-mut); font: inherit; font-size: 13.5px; -webkit-user-select: none; user-select: none; touch-action: manipulation;
   transition: background-color var(--pn-d-press) ease, transform var(--pn-d-press) var(--pn-ease); }
-.pn-root .pi-chip:active { transform: scale(.97); background: var(--pn-s1); }
-@media (hover: hover) and (pointer: fine) { .pn-root .pi-chip:hover { background: var(--pn-s1); } }
+.pn-root .pi-chip:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) { .pn-root .pi-chip:hover { background: var(--pn-s2); } }
 .pn-root .pi-chip:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
 .pn-root .pi-chip-k { font-size: 11px; font-weight: 700; letter-spacing: .08em; }
 .pn-root .pi-chip-v { font-family: var(--pn-num); font-weight: 600; letter-spacing: .04em; font-variant-numeric: tabular-nums; color: var(--pn-text); }

@@ -37,7 +37,13 @@
   {
    "tx": "The **number needed to harm** (NNH) mirrors NNT. It equals 1 divided by the **absolute risk increase** (ARI), the excess adverse event rate in the treated group over control. For example, serious bleeding in 3% versus 1% gives an ARI of 2%, so NNH is 50. Compare NNT with NNH to judge net benefit, remembering that severity matters as much as frequency.",
    "say": "The number needed to harm mirrors the number needed to treat. It equals one divided by the absolute risk increase, the excess adverse event rate in the treated group over control. For example, serious bleeding in 3 percent versus 1 percent gives an absolute risk increase of 2 percent, so the number needed to harm is 50. Compare the number needed to treat with the number needed to harm to judge net benefit, remembering that severity matters as much as frequency.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-risk.svg",
+    "alt": "Control event rate 20 percent versus treatment 15 percent: relative risk 0.75, absolute risk reduction 5 percent, number needed to treat 20.",
+    "caption": "Quote the absolute difference and the NNT, not the relative risk alone.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "A **likelihood ratio** tells you how far a test result moves the odds of disease, expressed as a multiple. The **positive LR** equals sensitivity divided by the false positive fraction, which is one minus specificity. The **negative LR** equals the false negative fraction divided by specificity. Large positive ratios strengthen a diagnosis, while small negative ratios weaken it. Because these ratios are built from the test characteristics themselves, they stay constant whatever the pre-test probability.",

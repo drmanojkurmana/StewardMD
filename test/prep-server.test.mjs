@@ -206,6 +206,19 @@ test("flag: one count per user per item; the record holds reasons, no text", asy
   assert.ok(!JSON.stringify(rec).includes("a@example.com"));
 });
 
+test("flag: sheet fields are accepted, capped and sanitised; old payloads unchanged", async () => {
+  const env = { UPDATES_KV: kv() };
+  const full = { ...GOOD, reason: "wrong-fact", itemType: "lesson", text: "  The <b>mean</b> is wrong\u0007 here. ", appVersion: "1.2.3" };
+  assert.deepEqual(await (await post(full, "tok-a", env)).json(), { ok: true, counted: true, n: 1 });
+  const rec = JSON.parse(env.UPDATES_KV.m.get("prep:flag:" + GOOD.itemId));
+  assert.equal(rec.itemType, "lesson");
+  assert.equal(rec.lastNote, "The  b mean /b  is wrong  here.");
+  assert.equal(rec.lastApp, "1.2.3");
+  assert.equal((await post({ ...GOOD, itemId: "item-other-1", reason: "other", text: "   " }, "tok-a", env)).status, 400, "Other needs a note when a note field is sent");
+  assert.equal((await post({ ...GOOD, itemId: "item-other-2", reason: "other" }, "tok-a", env)).status, 200, "legacy Other without a note field still works");
+  assert.equal((await post({ ...GOOD, itemId: "item-other-3", itemType: "nonsense" }, "tok-a", env)).status, 200, "unknown types are dropped, not fatal");
+});
+
 test("flag: daily cap per user", async () => {
   const env = { UPDATES_KV: kv() };
   for (let i = 0; i < 60; i++) assert.equal((await post({ ...GOOD, itemId: "item-" + String(i).padStart(4, "0") }, "tok-a", env)).status, 200);

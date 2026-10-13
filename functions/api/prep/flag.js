@@ -11,14 +11,17 @@
  *   KV prep:hidden = { <itemId>: <ts> }. The app fetches it at most every 6 hours and leaves those items out.
  * DELETE { itemId }   owners only: restore an item (drops it from prep:hidden and clears its report record).
  *
- * No question text and no free-text comment is accepted: the item id and a reason code are enough to find the
- * question, and nothing a student types is stored. KV binding: UPDATES_KV (falls back to MAIK_KV).
+ * No question text is accepted. The Report-reason sheet may add a short note (at most 500 chars,
+ * control characters stripped) plus the item type and app version; only the latest note is kept
+ * on the record for the Review Desk. Older clients send none of them. KV binding: UPDATES_KV
+ * (falls back to MAIK_KV).
  */
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { bump } from "../../_counters.js";
 
-export const REASONS = ["wrong-key", "unclear", "outdated", "typo", "other"];
+export const REASONS = ["wrong-key", "unclear", "outdated", "typo", "other", "wrong-fact", "wrong-answer", "image-problem", "offensive"];
+const TYPES = ["question", "lesson", "pearl", "kb", "card"];
 const ID_RE = /^[a-z0-9-]{4,80}$/i;
 const SLUG_RE = /^[a-z0-9-]{2,80}$/;
 const DAILY_CAP = 60;
@@ -37,6 +40,13 @@ export async function onRequestPost({ request, env }) {
   let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
   const itemId = String(b.itemId || ""), subject = String(b.subject || ""), mod = String(b.module || ""), reason = String(b.reason || "");
   if (!ID_RE.test(itemId) || !SLUG_RE.test(subject) || !SLUG_RE.test(mod) || REASONS.indexOf(reason) < 0) return json({ error: "bad-request" }, 400);
+  /* Optional fields from the Report-reason sheet (older clients send none of them and work as
+   * before): the item type, a short note (500 chars, control characters stripped) kept only on
+   * the latest report for the Review Desk, and the app version that sent it. */
+  const itemType = TYPES.indexOf(String(b.itemType || "")) >= 0 ? String(b.itemType) : "";
+  const note = String(b.text || "").replace(/[<>\u0000-\u001f\u007f]/g, " ").trim().slice(0, 500);
+  if (reason === "other" && b.text != null && !note) return json({ error: "bad-request" }, 400);
+  const appVersion = String(b.appVersion || "").replace(/[<>\u0000-\u001f\u007f]/g, "").trim().slice(0, 40);
 
   const now = Date.now(), day = istDay(now);
   const capKey = `prep:flagcap:${who}:${day}`;
@@ -51,6 +61,9 @@ export async function onRequestPost({ request, env }) {
   rec.n = (rec.n || 0) + 1;
   rec.reasons[reason] = (rec.reasons[reason] || 0) + 1;
   rec.last = now;
+  if (itemType) rec.itemType = itemType;
+  if (note) rec.lastNote = note;
+  if (appVersion) rec.lastApp = appVersion;
   await Promise.all([
     kv.put(key, JSON.stringify(rec), { expirationTtl: KEEP_S }),
     kv.put(mine, "1", { expirationTtl: KEEP_S }),
