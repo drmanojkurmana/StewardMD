@@ -375,6 +375,9 @@ test("bank route serves maik overlays, never the staging prefix", async () => {
   const MAIK = eval(re);
   assert.ok(MAIK.test("overlay/maik1/medicine/med-dka.json"));
   assert.ok(!MAIK.test("overlay/maik0/medicine/med-dka.json"));
+  assert.ok(MAIK.test("overlay/maikfill0/ss-infectious-diseases/sid-hsct-id.json"));
+  assert.ok(MAIK.test("overlay/maikfill9/adult-health-surgery/ahs-breast.json"));
+  assert.ok(!MAIK.test("overlay/maikfill10/x/y.json"));
   assert.ok(!MAIK.test("prep-qgen/staging/s20261010-abc.json"));
 });
 test("client pure helpers: rounds, error words, review approvals", async () => {
