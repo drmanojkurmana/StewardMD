@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "module": "phm-insulin",
+ "subject": "pharmacology",
+ "title": "Insulin safety: the right insulin, patient and time; treat hypos early",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Insulin** errors harm because products differ in onset and duration and names sound alike. Prescribe and check the **exact product, device, dose units, timing and injection site**, and confirm the patient identifier before every dose. Never abbreviate units, never draw insulin with a non-insulin syringe, and rotate sites to avoid lipohypertrophy and erratic absorption (BNF insulin safety).",
+   "say": "Check product, device, units, timing and site before every insulin dose, and rotate injection sites.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Right product + device"
+     },
+     {
+      "id": "b",
+      "label": "Right patient + time"
+     },
+     {
+      "id": "c",
+      "label": "Rotate sites"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypoglycaemia** is insulin's emergency: sweating, tremor, hunger, confusion or reduced consciousness. A conscious patient who can swallow takes **fast-acting oral glucose by mouth protocol** and is rechecked; an unconscious or unsafe-swallow patient gets parenteral treatment and senior help per protocol. Recheck after treatment, find why it happened (missed meal, dose, illness, alcohol or interaction) and adjust the plan, not just the episode (NICE NG28; BNF).",
+   "say": "Treat hypos early by mouth if swallowing is safe, parenterally if not, then recheck and find the cause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "State",
+     "Route"
+    ],
+    "rows": [
+     [
+      "Conscious, safe swallow",
+      "Oral fast-acting glucose protocol"
+     ],
+     [
+      "Unconscious / unsafe",
+      "Parenteral protocol + senior help"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sick days change everything: illness usually raises glucose and ketone risk even when the patient eats less, so insulin is generally **continued with closer monitoring** and sick-day advice, never stopped by default in type 1 diabetes. Document glucose and ketone checks, driving and hypo-awareness counselling, and sharps safety. Exact units and correction factors are individually prescribed and are never improvised in teaching items.",
+   "say": "In illness, insulin is continued with closer monitoring and sick-day advice, and exact units stay individually prescribed.",
+   "vis": null
+  }
+ ]
+}

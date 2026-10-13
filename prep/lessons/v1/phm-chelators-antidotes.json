@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "phm-chelators-antidotes",
+ "subject": "pharmacology",
+ "title": "Antidotes and chelators: specific rescues, toxicology-guided",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "An **antidote** helps only when the poison, timing and patient fit, so antidotes are given on **toxicology advice**, never by reflex. Examples of the principle include acetylcysteine for paracetamol, naloxone for opioids, and chelators that bind heavy metals such as lead, iron or copper in confirmed poisoning. Supportive airway, breathing and circulation care always comes first and often matters more than the antidote (NPIS TOXBASE).",
+   "say": "Antidotes are toxicology-guided and specific; supportive care always comes first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Support ABC"
+     },
+     {
+      "id": "b",
+      "label": "Identify poison + timing"
+     },
+     {
+      "id": "c",
+      "label": "Antidote on tox advice"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chelators** bind metal ions for excretion and are reserved for confirmed or strongly suspected significant poisoning, because they can also bind essential metals and injure kidneys. Choice and route depend on the metal, severity and organ state, decided with toxicology and specialist teams. Blood levels, exposure history and source removal (workplace, remedies, environment) complete the treatment; treating the number without removing the source fails (NPIS TOXBASE).",
+   "say": "Chelators are for confirmed significant metal poisoning, decided with toxicology, and the exposure source must be removed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Use chelation",
+     "Also essential"
+    ],
+    "rows": [
+     [
+      "Confirmed significant poisoning",
+      "Remove the source"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Document poison, amount, timing, co-ingestants and every antidote time exactly, and observe for rebound toxicity when an antidote wears off before the poison. Never give an antidote as a diagnostic test in an undifferentiated collapse. Exact antidote doses and infusion rates follow current TOXBASE entries and are flagged here, not recalled loosely (NPIS TOXBASE).",
+   "say": "Document poison and antidote times exactly, watch for rebound, and take doses from current TOXBASE entries.",
+   "vis": null
+  }
+ ]
+}
