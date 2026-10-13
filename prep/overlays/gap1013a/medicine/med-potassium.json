@@ -5,22 +5,22 @@
  "items": [
   {
    "id": "mk-gap501",
-   "q": "Peaked T waves with widened QRS and high potassium: first treatment limb is:",
+   "q": "A blood result shows potassium well above normal with ECG changes of hyperkalaemia (tall tented T waves, widened QRS). The first drug treatment is:",
    "o": [
-    "Intravenous calcium to protect the myocardium",
-    "Insulin alone",
-    "Oral binder alone",
-    "Discharge"
+    "Intravenous calcium salt to stabilise the myocardium, while shift therapy is prepared",
+    "Insulin alone, then wait an hour",
+    "Oral calcium resonium as the sole urgent treatment",
+    "Discharge with dietary advice"
    ],
    "a": 0,
-   "exp": "ECG changes need immediate myocardial protection with IV calcium; it stabilises without lowering potassium (UK Kidney Association).",
+   "exp": "With ECG changes, membrane stabilisation with IV calcium comes first. Insulin-glucose then shifts potassium into cells; removal therapies follow.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Insulin shifts but does not protect instantly.",
-    "Binders remove slowly.",
-    "ECG changes are an emergency."
+    "Correct: IV calcium first when ECG changes are present.",
+    "Insulin shifts but does not stabilise the membrane.",
+    "Oral binders are far too slow alone.",
+    "Discharge with ECG changes is dangerous."
    ],
-   "kp": "Protect first with calcium.",
+   "kp": "ECG changes in hyperkalaemia: IV calcium first.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -28,23 +28,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hyperk",
-    "calcium"
+    "hyperkalaemia",
+    "ecg"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Protect first with calcium.",
+    "key": "ECG changes in hyperkalaemia: IV calcium first.",
     "others": {
-     "B": "Insulin shifts but does not protect instantly.",
-     "C": "Binders remove slowly.",
-     "D": "ECG changes are an emergency."
+     "C": "Insulin shifts but does not stabilise the membrane.",
+     "D": "Oral binders are far too slow alone.",
+     "E": "Discharge with ECG changes is dangerous."
     },
-    "pearl": "Protect, shift, remove: in that order.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Protect the heart in hyperkalaemia.",
-    "rev": "ECG changes need immediate myocardial protection with IV calcium; it stabilises without lowering potassium (UK Kidney Association).",
+    "pearl": "ECG changes in hyperkalaemia: IV calcium first.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "With ECG changes, membrane stabilisation with IV calcium comes first. Insulin-glucose then shifts potassium into cells; removal therapies follow.",
+    "lo": "Stabilise the myocardium first when ECG changes present.",
+    "rev": "With ECG changes, membrane stabilisation with IV calcium comes first. Insulin-glucose then shifts potassium into cells; removal therapies follow.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -53,7 +53,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -80,22 +80,22 @@
   },
   {
    "id": "mk-gap502",
-   "q": "Insulin with glucose in hyperkalaemia works by:",
+   "q": "Insulin with glucose in acute hyperkalaemia works by:",
    "o": [
-    "Shifting potassium into cells temporarily",
-    "Removing potassium permanently",
-    "Protecting the myocardium directly",
+    "Shifting potassium into cells temporarily; it does not remove potassium from the body",
+    "Excreting potassium in urine at once",
+    "Binding potassium in the gut",
     "Replacing calcium"
    ],
    "a": 0,
-   "exp": "Insulin-glucose shifts potassium intracellularly; removal needs binders, diuretics or dialysis (UKKA).",
+   "exp": "Insulin (with glucose to prevent hypoglycaemia) drives potassium intracellularly for a few hours. Dialysis or other removal is still needed when load is high.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Removal is a separate limb.",
-    "Protection is calcium's role.",
+    "Correct: temporary intracellular shift only.",
+    "It does not excrete potassium.",
+    "Gut binding is a binder action.",
     "It does not replace calcium."
    ],
-   "kp": "Shift is temporary; removal must follow.",
+   "kp": "Insulin-glucose shifts, it does not remove.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -103,23 +103,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hyperk",
-    "shift"
+    "hyperkalaemia",
+    "insulin"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Shift is temporary; removal must follow.",
+    "key": "Insulin-glucose shifts, it does not remove.",
     "others": {
-     "B": "Removal is a separate limb.",
-     "C": "Protection is calcium's role.",
-     "D": "It does not replace calcium."
+     "C": "It does not excrete potassium.",
+     "D": "Gut binding is a binder action.",
+     "E": "It does not replace calcium."
     },
-    "pearl": "Shift buys time, removal cures.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Shift potassium with insulin-glucose.",
-    "rev": "Insulin-glucose shifts potassium intracellularly; removal needs binders, diuretics or dialysis (UKKA).",
+    "pearl": "Insulin-glucose shifts, it does not remove.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Insulin (with glucose to prevent hypoglycaemia) drives potassium intracellularly for a few hours. Dialysis or other removal is still needed when load is high.",
+    "lo": "Explain insulin-glucose as shift therapy.",
+    "rev": "Insulin (with glucose to prevent hypoglycaemia) drives potassium intracellularly for a few hours. Dialysis or other removal is still needed when load is high.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -128,7 +128,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -155,22 +155,22 @@
   },
   {
    "id": "mk-gap503",
-   "q": "After shifting treatment, potassium must be:",
+   "q": "Which ECG sequence best fits worsening hyperkalaemia?",
    "o": [
-    "Rechecked, because rebound occurs as shifting wears off",
-    "Never rechecked",
-    "Assumed cured",
-    "Treated with calcium alone forever"
+    "Tall tented T waves, flattened P waves, widened QRS, then sine-wave pattern",
+    "ST elevation in one lead only",
+    "Long QT with torsades as the classic first sign",
+    "Bradycardia with no QRS change ever"
    ],
    "a": 0,
-   "exp": "Shifting wears off and potassium rebounds; recheck and complete removal (UKKA).",
+   "exp": "Progressive hyperkalaemia gives peaked T waves, P flattening, QRS widening and eventually a sine-wave pre-arrest pattern.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Without recheck, rebound is missed.",
-    "Shift alone does not cure.",
-    "Calcium protects, it does not remove."
+    "Correct: peaked T, flat P, wide QRS, sine wave.",
+    "Single-lead ST elevation suggests infarction.",
+    "Torsades is classic for hypomagnesaemia and long QT, not hyperkalaemia.",
+    "QRS widening is part of progression."
    ],
-   "kp": "Recheck: rebound is expected.",
+   "kp": "Peaked T, flat P, wide QRS: worsening hyperkalaemia.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -178,23 +178,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hyperk",
-    "recheck"
+    "hyperkalaemia",
+    "ecg"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Recheck: rebound is expected.",
+    "key": "Peaked T, flat P, wide QRS: worsening hyperkalaemia.",
     "others": {
-     "B": "Without recheck, rebound is missed.",
-     "C": "Shift alone does not cure.",
-     "D": "Calcium protects, it does not remove."
+     "C": "Single-lead ST elevation suggests infarction.",
+     "D": "Torsades is classic for hypomagnesaemia and long QT, not hyperkalaemia.",
+     "E": "QRS widening is part of progression."
     },
-    "pearl": "Shift, remove, recheck.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Recheck potassium after treatment.",
-    "rev": "Shifting wears off and potassium rebounds; recheck and complete removal (UKKA).",
+    "pearl": "Peaked T, flat P, wide QRS: worsening hyperkalaemia.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Progressive hyperkalaemia gives peaked T waves, P flattening, QRS widening and eventually a sine-wave pre-arrest pattern.",
+    "lo": "Recognise progressive hyperkalaemic ECG changes.",
+    "rev": "Progressive hyperkalaemia gives peaked T waves, P flattening, QRS widening and eventually a sine-wave pre-arrest pattern.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -203,7 +203,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -230,22 +230,22 @@
   },
   {
    "id": "mk-gap504",
-   "q": "A haemolysed sample reports high potassium in a well patient with normal ECG. Best step is:",
+   "q": "After calcium and insulin-glucose, potassium remains dangerously high with oliguric renal failure. Definitive removal is by:",
    "o": [
-    "Repeat a non-haemolysed sample urgently while assessing risk",
-    "Start dialysis at once",
-    "Ignore all future results",
-    "Give calcium blindly without assessment"
+    "Haemodialysis (urgent nephrology and critical care referral)",
+    "More oral fluids alone",
+    "Reassurance and repeat bloods next week",
+    "Stopping all monitoring"
    ],
    "a": 0,
-   "exp": "Exclude pseudohyperkalaemia from haemolysis with an urgent repeat sample and clinical assessment (UKKA).",
+   "exp": "Dialysis removes potassium definitively in oliguric renal failure with refractory hyperkalaemia. Shift therapy only buys time.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Dialysis needs true, severe indications.",
-    "Future results still matter.",
-    "Blind treatment without assessment is unsafe."
+    "Correct: dialysis removes potassium definitively.",
+    "Fluids alone will not clear it in oliguria.",
+    "Delay risks arrest.",
+    "Monitoring must intensify, not stop."
    ],
-   "kp": "Haemolysis fakes hyperkalaemia: repeat it.",
+   "kp": "Refractory hyperkalaemia with oliguria needs dialysis.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -253,23 +253,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hyperk",
-    "haemolysis"
+    "hyperkalaemia",
+    "dialysis"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Haemolysis fakes hyperkalaemia: repeat it.",
+    "key": "Refractory hyperkalaemia with oliguria needs dialysis.",
     "others": {
-     "B": "Dialysis needs true, severe indications.",
-     "C": "Future results still matter.",
-     "D": "Blind treatment without assessment is unsafe."
+     "C": "Fluids alone will not clear it in oliguria.",
+     "D": "Delay risks arrest.",
+     "E": "Monitoring must intensify, not stop."
     },
-    "pearl": "Well patient, normal ECG: verify the sample.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Exclude pseudohyperkalaemia.",
-    "rev": "Exclude pseudohyperkalaemia from haemolysis with an urgent repeat sample and clinical assessment (UKKA).",
+    "pearl": "Refractory hyperkalaemia with oliguria needs dialysis.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Dialysis removes potassium definitively in oliguric renal failure with refractory hyperkalaemia. Shift therapy only buys time.",
+    "lo": "Use dialysis for refractory hyperkalaemia.",
+    "rev": "Dialysis removes potassium definitively in oliguric renal failure with refractory hyperkalaemia. Shift therapy only buys time.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -278,7 +278,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -305,22 +305,22 @@
   },
   {
    "id": "mk-gap505",
-   "q": "In DKA, insulin must wait until:",
+   "q": "Nebulised salbutamol in hyperkalaemia is:",
    "o": [
-    "Potassium is known and replaced if low",
-    "Fluids are finished for a day",
-    "Ketones disappear",
-    "Discharge"
+    "An adjunct that shifts potassium into cells, not a substitute for calcium or removal therapy",
+    "The only treatment needed with ECG changes",
+    "A potassium-removing treatment",
+    "Contraindicated in every patient"
    ],
    "a": 0,
-   "exp": "Insulin drives potassium into cells; check and replace potassium first if low to avoid collapse (UKKA/DKA practice).",
+   "exp": "Beta-2 agonists shift potassium intracellularly as an adjunct. They never replace membrane stabilisation or removal.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Fluids and insulin overlap once potassium is safe.",
-    "Insulin continues while ketones clear with monitoring.",
-    "Emergency care precedes discharge."
+    "Correct: adjunct shift therapy only.",
+    "ECG changes still need calcium first.",
+    "It removes nothing from the body.",
+    "It is a recognised adjunct, with tachycardia caution."
    ],
-   "kp": "Potassium before insulin in DKA.",
+   "kp": "Salbutamol shifts as an adjunct; it never replaces calcium.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -328,23 +328,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hyperk",
-    "dka"
+    "hyperkalaemia",
+    "salbutamol"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Potassium before insulin in DKA.",
+    "key": "Salbutamol shifts as an adjunct; it never replaces calcium.",
     "others": {
-     "B": "Fluids and insulin overlap once potassium is safe.",
-     "C": "Insulin continues while ketones clear with monitoring.",
-     "D": "Emergency care precedes discharge."
+     "C": "ECG changes still need calcium first.",
+     "D": "It removes nothing from the body.",
+     "E": "It is a recognised adjunct, with tachycardia caution."
     },
-    "pearl": "Check potassium before insulin.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Check potassium before DKA insulin.",
-    "rev": "Insulin drives potassium into cells; check and replace potassium first if low to avoid collapse (UKKA/DKA practice).",
+    "pearl": "Salbutamol shifts as an adjunct; it never replaces calcium.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Beta-2 agonists shift potassium intracellularly as an adjunct. They never replace membrane stabilisation or removal.",
+    "lo": "Use salbutamol only as adjunct shift therapy.",
+    "rev": "Beta-2 agonists shift potassium intracellularly as an adjunct. They never replace membrane stabilisation or removal.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -353,7 +353,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -380,22 +380,22 @@
   },
   {
    "id": "mk-gap506",
-   "q": "Which drug class should be stopped in acute hyperkalaemia?",
+   "q": "A haemolysed sample reports very high potassium in a well patient with a normal ECG. Best action is:",
    "o": [
-    "Potassium-sparing diuretics and potassium supplements",
-    "All antibiotics",
-    "Oxygen",
-    "Insulin"
+    "Repeat a careful non-haemolysed sample urgently while assessing clinically; do not ignore or blindly treat",
+    "Give dialysis at once",
+    "Give calcium without any repeat",
+    "Ignore the result entirely"
    ],
    "a": 0,
-   "exp": "Stop potassium sources including supplements and potassium-sparing diuretics (UKKA).",
+   "exp": "Haemolysis falsely raises potassium (pseudohyperkalaemia). A prompt careful repeat with clinical and ECG assessment avoids both harm paths.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Antibiotics treat infection, not potassium.",
-    "Oxygen supports the patient.",
-    "Insulin-glucose treats hyperkalaemia."
+    "Correct: urgent careful repeat with assessment.",
+    "Dialysis on a spurious result harms.",
+    "Calcium without confirmation is inappropriate here.",
+    "Ignoring without repeat is unsafe."
    ],
-   "kp": "Stop potassium in, then treat.",
+   "kp": "Suspected haemolysis: repeat carefully, assess, do not ignore.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -403,23 +403,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hyperk",
-    "stop"
+    "hyperkalaemia",
+    "pseudohyperkalaemia"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Stop potassium in, then treat.",
+    "key": "Suspected haemolysis: repeat carefully, assess, do not ignore.",
     "others": {
-     "B": "Antibiotics treat infection, not potassium.",
-     "C": "Oxygen supports the patient.",
-     "D": "Insulin-glucose treats hyperkalaemia."
+     "C": "Dialysis on a spurious result harms.",
+     "D": "Calcium without confirmation is inappropriate here.",
+     "E": "Ignoring without repeat is unsafe."
     },
-    "pearl": "Stop the source.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Stop potassium-raising drugs.",
-    "rev": "Stop potassium sources including supplements and potassium-sparing diuretics (UKKA).",
+    "pearl": "Suspected haemolysis: repeat carefully, assess, do not ignore.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Haemolysis falsely raises potassium (pseudohyperkalaemia). A prompt careful repeat with clinical and ECG assessment avoids both harm paths.",
+    "lo": "Check for pseudohyperkalaemia from haemolysis.",
+    "rev": "Haemolysis falsely raises potassium (pseudohyperkalaemia). A prompt careful repeat with clinical and ECG assessment avoids both harm paths.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -428,7 +428,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -455,22 +455,22 @@
   },
   {
    "id": "mk-gap507",
-   "q": "Definitive potassium removal in refractory hyperkalaemia with kidney failure is:",
+   "q": "Which drug history most commonly contributes to hyperkalaemia in chronic kidney disease?",
    "o": [
-    "Dialysis",
-    "Calcium alone",
-    "Glucose alone",
-    "Observation"
+    "ACE inhibitor or angiotensin receptor blocker, potassium-sparing diuretic, trimethoprim, and NSAIDs (any of these)",
+    "Penicillin allergy",
+    "Inhaled salbutamol PRN only",
+    "Paracetamol at standard dose"
    ],
    "a": 0,
-   "exp": "Dialysis removes potassium when binders and diuretics cannot (UKKA).",
+   "exp": "Renin-angiotensin blockers, potassium-sparing agents, trimethoprim and NSAIDs all raise potassium, especially with CKD. A drug review is part of treatment.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Calcium only protects.",
-    "Glucose only shifts with insulin.",
-    "Observation risks arrhythmia."
+    "Correct: RAAS blockers, K-sparing drugs, trimethoprim, NSAIDs.",
+    "Allergy alone does not raise potassium.",
+    "Inhaled salbutamol lowers measured potassium by shift.",
+    "Standard paracetamol is not a cause."
    ],
-   "kp": "Refractory plus kidney failure means dialysis.",
+   "kp": "Review RAAS, K-sparing, trimethoprim and NSAID use in CKD.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -478,23 +478,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hyperk",
-    "dialysis"
+    "hyperkalaemia",
+    "drugs"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Refractory plus kidney failure means dialysis.",
+    "key": "Review RAAS, K-sparing, trimethoprim and NSAID use in CKD.",
     "others": {
-     "B": "Calcium only protects.",
-     "C": "Glucose only shifts with insulin.",
-     "D": "Observation risks arrhythmia."
+     "C": "Allergy alone does not raise potassium.",
+     "D": "Inhaled salbutamol lowers measured potassium by shift.",
+     "E": "Standard paracetamol is not a cause."
     },
-    "pearl": "Remove definitively with dialysis.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Use dialysis for refractory hyperkalaemia.",
-    "rev": "Dialysis removes potassium when binders and diuretics cannot (UKKA).",
+    "pearl": "Review RAAS, K-sparing, trimethoprim and NSAID use in CKD.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Renin-angiotensin blockers, potassium-sparing agents, trimethoprim and NSAIDs all raise potassium, especially with CKD. A drug review is part of treatment.",
+    "lo": "Review potassium-raising drugs.",
+    "rev": "Renin-angiotensin blockers, potassium-sparing agents, trimethoprim and NSAIDs all raise potassium, especially with CKD. A drug review is part of treatment.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -503,7 +503,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -530,22 +530,22 @@
   },
   {
    "id": "mk-gap508",
-   "q": "Hypokalaemia most dangerously interacts with:",
+   "q": "Why is glucose given with insulin in hyperkalaemia treatment (in a non-diabetic patient)?",
    "o": [
-    "Digoxin, increasing arrhythmia risk",
-    "Paracetamol",
-    "Oxygen",
-    "Saline"
+    "To prevent hypoglycaemia from the insulin",
+    "To bind potassium in the gut",
+    "To stabilise the myocardium",
+    "Glucose is never needed"
    ],
    "a": 0,
-   "exp": "Low potassium potentiates digoxin arrhythmias; replace potassium and magnesium carefully.",
+   "exp": "Insulin lowers blood glucose as it shifts potassium. Co-administered glucose, with glucose monitoring, prevents hypoglycaemia.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "No such interaction dominates.",
-    "Oxygen is supportive.",
-    "Saline does not create this risk."
+    "Correct: glucose prevents insulin-induced hypoglycaemia.",
+    "Binding is not the glucose role.",
+    "Stabilisation is the calcium role.",
+    "Glucose with monitoring is standard."
    ],
-   "kp": "Low potassium plus digoxin is dangerous.",
+   "kp": "Glucose with insulin prevents hypoglycaemia; monitor after.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -553,23 +553,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hypok",
-    "digoxin"
+    "hyperkalaemia",
+    "insulin"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Low potassium plus digoxin is dangerous.",
+    "key": "Glucose with insulin prevents hypoglycaemia; monitor after.",
     "others": {
-     "B": "No such interaction dominates.",
-     "C": "Oxygen is supportive.",
-     "D": "Saline does not create this risk."
+     "C": "Binding is not the glucose role.",
+     "D": "Stabilisation is the calcium role.",
+     "E": "Glucose with monitoring is standard."
     },
-    "pearl": "Check potassium in every digoxin patient.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Avoid hypokalaemia with digoxin.",
-    "rev": "Low potassium potentiates digoxin arrhythmias; replace potassium and magnesium carefully.",
+    "pearl": "Glucose with insulin prevents hypoglycaemia; monitor after.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Insulin lowers blood glucose as it shifts potassium. Co-administered glucose, with glucose monitoring, prevents hypoglycaemia.",
+    "lo": "Prevent hypoglycaemia with insulin therapy.",
+    "rev": "Insulin lowers blood glucose as it shifts potassium. Co-administered glucose, with glucose monitoring, prevents hypoglycaemia.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -578,7 +578,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -605,22 +605,22 @@
   },
   {
    "id": "mk-gap509",
-   "q": "Rapid intravenous push of concentrated potassium is:",
+   "q": "Sodium bicarbonate in hyperkalaemia is best described as:",
    "o": [
-    "Never acceptable; use rate-limited replacement",
-    "Standard care",
-    "Safe if ECG is normal",
-    "Required in hypokalaemia"
+    "Not routine; considered only in selected severe acidosis under specialist advice",
+    "First-line for every high potassium",
+    "A substitute for calcium with ECG changes",
+    "Effective gut binding"
    ],
    "a": 0,
-   "exp": "Concentrated potassium is a high-alert drug given only rate-limited with monitoring.",
+   "exp": "Bicarbonate is not routine hyperkalaemia therapy. It may be considered with severe metabolic acidosis and specialist input.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Push dosing can arrest the heart.",
-    "Normal ECG does not make it safe.",
-    "Replacement is infused, not pushed."
+    "Correct: selected acidosis only, specialist-led.",
+    "It is not first-line for all.",
+    "It never replaces calcium with ECG changes.",
+    "It does not bind gut potassium."
    ],
-   "kp": "Rate-limited, never pushed.",
+   "kp": "Bicarbonate is not routine in hyperkalaemia.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -628,23 +628,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hypok",
-    "safety"
+    "hyperkalaemia",
+    "bicarbonate"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Rate-limited, never pushed.",
+    "key": "Bicarbonate is not routine in hyperkalaemia.",
     "others": {
-     "B": "Push dosing can arrest the heart.",
-     "C": "Normal ECG does not make it safe.",
-     "D": "Replacement is infused, not pushed."
+     "C": "It is not first-line for all.",
+     "D": "It never replaces calcium with ECG changes.",
+     "E": "It does not bind gut potassium."
     },
-    "pearl": "High-alert: slow and monitored.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Replace potassium safely.",
-    "rev": "Concentrated potassium is a high-alert drug given only rate-limited with monitoring.",
+    "pearl": "Bicarbonate is not routine in hyperkalaemia.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Bicarbonate is not routine hyperkalaemia therapy. It may be considered with severe metabolic acidosis and specialist input.",
+    "lo": "Restrict bicarbonate to selected acidosis.",
+    "rev": "Bicarbonate is not routine hyperkalaemia therapy. It may be considered with severe metabolic acidosis and specialist input.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -653,7 +653,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],
@@ -680,22 +680,22 @@
   },
   {
    "id": "mk-gap510",
-   "q": "Normal ECG in confirmed severe hyperkalaemia means:",
+   "q": "After successful shift therapy for hyperkalaemia, the essential safety step is:",
    "o": [
-    "Treat on level and risk; normal ECG does not exclude danger",
-    "No treatment ever",
-    "Discharge is safe",
-    "Calcium is mandatory in all cases"
+    "Serial potassium and glucose rechecks, ECG monitoring, and treating the underlying cause (rebound is expected as shift wears off)",
+    "Stop all monitoring once one value falls",
+    "No cause needs to be sought",
+    "Repeat calcium every hour regardless"
    ],
    "a": 0,
-   "exp": "ECG can be normal in severe hyperkalaemia; treat by level and context, with calcium reserved for ECG changes (UKKA).",
+   "exp": "Shift therapy is temporary, so rebound hyperkalaemia and late hypoglycaemia both occur. Serial bloods, ECG monitoring and cause treatment are mandatory.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Severe levels need treatment.",
-    "Discharge is unsafe.",
-    "Calcium follows ECG changes."
+    "Correct: recheck potassium and glucose, monitor ECG, treat cause.",
+    "Rebound and hypoglycaemia make stopping unsafe.",
+    "The cause (kidneys, drugs, acidosis) must be treated.",
+    "Calcium is repeated for ECG indications, not by clock."
    ],
-   "kp": "Normal ECG does not clear severe hyperkalaemia.",
+   "kp": "After shifting, recheck: rebound and hypoglycaemia both happen.",
    "t": "med-potassium",
    "d": 2,
    "cog": "application",
@@ -703,23 +703,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "hyperk",
-    "ecg"
+    "hyperkalaemia",
+    "monitoring"
    ],
-   "source": "UK Kidney Association hyperkalaemia guidance",
+   "source": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
    "x": {
-    "key": "Normal ECG does not clear severe hyperkalaemia.",
+    "key": "After shifting, recheck: rebound and hypoglycaemia both happen.",
     "others": {
-     "B": "Severe levels need treatment.",
-     "C": "Discharge is unsafe.",
-     "D": "Calcium follows ECG changes."
+     "C": "Rebound and hypoglycaemia make stopping unsafe.",
+     "D": "The cause (kidneys, drugs, acidosis) must be treated.",
+     "E": "Calcium is repeated for ECG indications, not by clock."
     },
-    "pearl": "Numbers plus patient, not ECG alone.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Treat severe hyperkalaemia despite normal ECG.",
-    "rev": "ECG can be normal in severe hyperkalaemia; treat by level and context, with calcium reserved for ECG changes (UKKA).",
+    "pearl": "After shifting, recheck: rebound and hypoglycaemia both happen.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Shift therapy is temporary, so rebound hyperkalaemia and late hypoglycaemia both occur. Serial bloods, ECG monitoring and cause treatment are mandatory.",
+    "lo": "Monitor for rebound and hypoglycaemia after shift.",
+    "rev": "Shift therapy is temporary, so rebound hyperkalaemia and late hypoglycaemia both occur. Serial bloods, ECG monitoring and cause treatment are mandatory.",
     "next": {
      "concept": "med-potassium",
      "action": "review",
@@ -728,7 +728,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "UK Kidney Association hyperkalaemia guidance",
+      "title": "UK Kidney Association Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults; NICE NG185 (AKI) supportive care principles",
       "via": "gap-audit-1013"
      }
     ],

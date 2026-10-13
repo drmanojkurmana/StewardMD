@@ -8,17 +8,103 @@
   {
    "tx": "**Anaphylaxis** is a severe, rapid allergic reaction with airway, breathing or circulation compromise. Clues are sudden urticaria or flushing with wheeze, stridor, tongue or lip swelling, or hypotension, usually within minutes of a trigger such as a drug, food or sting. Skin signs may be absent in severe cases, so hypotension after a likely trigger still counts.",
    "say": "Anaphylaxis is a severe, rapid allergic reaction with airway, breathing or circulation problems. Look for sudden urticaria or flushing with wheeze, stridor, tongue or lip swelling, or low blood pressure, usually within minutes of a drug, food or sting. Skin signs may be absent in severe cases, so low blood pressure after a likely trigger still counts.",
-   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Trigger exposure"}, {"id": "b", "label": "Airway / breathing / circulation signs"}, {"id": "c", "label": "Treat as anaphylaxis"}], "edges": [["a", "b"], ["b", "c"]]}
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Trigger exposure"
+     },
+     {
+      "id": "b",
+      "label": "Airway / breathing / circulation signs"
+     },
+     {
+      "id": "c",
+      "label": "Treat as anaphylaxis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
   },
   {
    "tx": "Give **intramuscular adrenaline into the mid-outer thigh immediately** (Resuscitation Council UK; NICE NG183). Do not delay for antihistamines, steroids or inhalers; they do not treat the life threat. Lay the patient flat with legs raised (left lateral if pregnant or vomiting), give high-flow oxygen, and repeat intramuscular adrenaline if there is no improvement. Never sit or stand a hypotensive patient upright suddenly.",
    "say": "Give intramuscular adrenaline into the mid-outer thigh immediately. Do not delay for antihistamines, steroids or inhalers, because they do not treat the life threat. Lay the patient flat with legs raised, on the left side if pregnant or vomiting, give high-flow oxygen, and repeat intramuscular adrenaline if there is no improvement. Never sit or stand a hypotensive patient upright suddenly.",
-   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "IM adrenaline (thigh)"}, {"id": "b", "label": "Flat, legs raised, oxygen"}, {"id": "c", "label": "Repeat IM adrenaline if no better"}], "edges": [["a", "b"], ["b", "c"]]}
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "IM adrenaline (thigh)"
+     },
+     {
+      "id": "b",
+      "label": "Flat, legs raised, oxygen"
+     },
+     {
+      "id": "c",
+      "label": "Repeat IM adrenaline if no better"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
   },
   {
    "tx": "After adrenaline, treat what remains: fluids for persistent hypotension, bronchodilator for wheeze. Observe for a **biphasic reaction** (symptoms returning hours later) and arrange allergy follow-up. Document the trigger precisely and teach avoidance. Intravenous adrenaline boluses are for peri-arrest in expert hands only; the intramuscular route is the safe default.",
    "say": "After adrenaline, treat what remains: fluids for persistent low blood pressure and a bronchodilator for wheeze. Observe for a biphasic reaction, where symptoms return hours later, and arrange allergy follow-up. Document the trigger precisely and teach avoidance. Intravenous adrenaline boluses are for peri-arrest in expert hands only; the intramuscular route is the safe default.",
-   "vis": {"kind": "table", "cols": ["First", "Never first"], "rows": [["IM adrenaline", "Antihistamine or steroid alone"]]}
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "First",
+     "Never first"
+    ],
+    "rows": [
+     [
+      "IM adrenaline",
+      "Antihistamine or steroid alone"
+     ]
+    ]
+   }
   }
- ]
+ ],
+ "quiz": [
+  "mk-gap101",
+  "mk-gap102",
+  "mk-gap107"
+ ],
+ "src": [
+  "kb-diseases-anaphylaxis"
+ ],
+ "refs": [
+  "Resuscitation Council UK guideline: emergency treatment of anaphylaxis",
+  "NICE clinical guideline CG134: Anaphylaxis assessment and referral (supporting)"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013 re-read 2026-10-13"
+ }
 }

@@ -5,22 +5,22 @@
  "items": [
   {
    "id": "mk-gap301",
-   "q": "First aid for snake bite is:",
+   "q": "First aid after a suspected venomous snake bite in India should be:",
    "o": [
-    "Immobilise the limb, reassure, transport rapidly",
-    "Apply a tight tourniquet",
+    "Reassure, immobilise the limb, remove rings, and transfer promptly to hospital",
     "Cut and suck the wound",
-    "Apply herbal paste"
+    "Apply a tight arterial tourniquet for hours",
+    "Apply herbs and wait at home"
    ],
    "a": 0,
-   "exp": "Immobilisation, reassurance and rapid transport are first aid (WHO SE Asia). Tourniquets, cutting and herbs worsen injury.",
+   "exp": "Immobilisation slows venom spread. Incision, suction, prolonged tight tourniquets and traditional remedies increase harm and delay antivenom assessment.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Tourniquets cause ischaemia and worse injury.",
-    "Cutting and sucking harm and delay.",
-    "Herbs delay effective care."
+    "Correct: immobilise and transfer promptly.",
+    "Cutting and sucking harm tissue and do not remove venom.",
+    "A prolonged tight tourniquet causes ischaemia.",
+    "Herbs and waiting delay care."
    ],
-   "kp": "Immobilise and transport.",
+   "kp": "Immobilise, reassure and transfer; do not cut, suck or tourniquet.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -28,23 +28,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
+    "snakebite",
     "first-aid"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Immobilise and transport.",
+    "key": "Immobilise, reassure and transfer; do not cut, suck or tourniquet.",
     "others": {
-     "B": "Tourniquets cause ischaemia and worse injury.",
-     "C": "Cutting and sucking harm and delay.",
-     "D": "Herbs delay effective care."
+     "C": "Cutting and sucking harm tissue and do not remove venom.",
+     "D": "A prolonged tight tourniquet causes ischaemia.",
+     "E": "Herbs and waiting delay care."
     },
-    "pearl": "Still limb, fast transport.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Apply snakebite first aid.",
-    "rev": "Immobilisation, reassurance and rapid transport are first aid (WHO SE Asia). Tourniquets, cutting and herbs worsen injury.",
+    "pearl": "Immobilise, reassure and transfer; do not cut, suck or tourniquet.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Immobilisation slows venom spread. Incision, suction, prolonged tight tourniquets and traditional remedies increase harm and delay antivenom assessment.",
+    "lo": "Apply correct snakebite first aid.",
+    "rev": "Immobilisation slows venom spread. Incision, suction, prolonged tight tourniquets and traditional remedies increase harm and delay antivenom assessment.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -53,7 +53,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -80,22 +80,22 @@
   },
   {
    "id": "mk-gap302",
-   "q": "Antivenom is indicated for:",
+   "q": "Which is an indication for antivenom in snake bite?",
    "o": [
-    "Spontaneous bleeding with incoagulable blood",
-    "Mild local pain alone",
-    "Every bite regardless of signs",
-    "A dead snake with no bite marks"
+    "Systemic envenoming: neuroparalysis, coagulopathy, or significant spreading local swelling with systemic features",
+    "A snake was merely seen nearby",
+    "Dry bite with no symptoms and normal clotting after observation",
+    "Fear alone without any envenoming sign"
    ],
    "a": 0,
-   "exp": "Systemic envenoming such as bleeding or incoagulable blood warrants antivenom (WHO SE Asia).",
+   "exp": "Antivenom is for systemic envenoming or severe local envenoming, not for dry bites or sightings. It carries reaction risk, so indications matter.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Mild pain alone is observed, not treated with antivenom.",
-    "Most bites need no antivenom.",
-    "No envenoming, no antivenom."
+    "Correct: systemic or severe local envenoming needs antivenom.",
+    "Seeing a snake is not envenoming.",
+    "A dry bite needs observation, not antivenom.",
+    "Fear alone is not an indication."
    ],
-   "kp": "Antivenom for systemic or severe local signs only.",
+   "kp": "Give antivenom for systemic or severe local envenoming only.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -103,23 +103,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
+    "snakebite",
     "antivenom"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Antivenom for systemic or severe local signs only.",
+    "key": "Give antivenom for systemic or severe local envenoming only.",
     "others": {
-     "B": "Mild pain alone is observed, not treated with antivenom.",
-     "C": "Most bites need no antivenom.",
-     "D": "No envenoming, no antivenom."
+     "C": "Seeing a snake is not envenoming.",
+     "D": "A dry bite needs observation, not antivenom.",
+     "E": "Fear alone is not an indication."
     },
-    "pearl": "No signs, no antivenom.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Select patients for antivenom.",
-    "rev": "Systemic envenoming such as bleeding or incoagulable blood warrants antivenom (WHO SE Asia).",
+    "pearl": "Give antivenom for systemic or severe local envenoming only.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Antivenom is for systemic envenoming or severe local envenoming, not for dry bites or sightings. It carries reaction risk, so indications matter.",
+    "lo": "State antivenom indications.",
+    "rev": "Antivenom is for systemic envenoming or severe local envenoming, not for dry bites or sightings. It carries reaction risk, so indications matter.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -128,7 +128,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -155,22 +155,22 @@
   },
   {
    "id": "mk-gap303",
-   "q": "Where labs are limited, clotting after a viper bite is tested with:",
+   "q": "A bite victim has ptosis, dysphagia and shallow breathing with normal clotting. The immediate priority is:",
    "o": [
-    "20-minute whole blood clotting test",
-    "Tourniquet test",
-    "Bleeding time alone",
-    "No test is ever needed"
+    "Airway and ventilatory support; antivenom assessment proceeds alongside",
+    "Oral fluids and reassurance alone",
+    "Tight tourniquet to the neck",
+    "Withhold ventilation until antivenom finishes"
    ],
    "a": 0,
-   "exp": "The 20-minute whole blood clotting test detects incoagulable blood at the bedside (WHO SE Asia).",
+   "exp": "Neurotoxic paralysis kills by respiratory failure. Airway and ventilation come first while antivenom is arranged.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "That tests capillary fragility, not clotting here.",
-    "Bleeding time is not the field test.",
-    "Clotting guides antivenom."
+    "Correct: support airway and ventilation at once.",
+    "Oral fluids risk aspiration in bulbar weakness.",
+    "A neck tourniquet is dangerous nonsense.",
+    "Ventilation must not wait for antivenom."
    ],
-   "kp": "20 minutes, whole blood, glass tube.",
+   "kp": "Ventilate neuroparalysis first; antivenom alongside.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -178,23 +178,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
-    "clotting"
+    "snakebite",
+    "airway"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "20 minutes, whole blood, glass tube.",
+    "key": "Ventilate neuroparalysis first; antivenom alongside.",
     "others": {
-     "B": "That tests capillary fragility, not clotting here.",
-     "C": "Bleeding time is not the field test.",
-     "D": "Clotting guides antivenom."
+     "C": "Oral fluids risk aspiration in bulbar weakness.",
+     "D": "A neck tourniquet is dangerous nonsense.",
+     "E": "Ventilation must not wait for antivenom."
     },
-    "pearl": "Bedside clotting guides antivenom.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Use the 20-minute clotting test.",
-    "rev": "The 20-minute whole blood clotting test detects incoagulable blood at the bedside (WHO SE Asia).",
+    "pearl": "Ventilate neuroparalysis first; antivenom alongside.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Neurotoxic paralysis kills by respiratory failure. Airway and ventilation come first while antivenom is arranged.",
+    "lo": "Prioritise ventilation in neurotoxic bite.",
+    "rev": "Neurotoxic paralysis kills by respiratory failure. Airway and ventilation come first while antivenom is arranged.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -203,7 +203,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -230,22 +230,22 @@
   },
   {
    "id": "mk-gap304",
-   "q": "Ptosis progressing to breathing difficulty after a bite suggests:",
+   "q": "The 20-minute whole blood clotting test at the bedside helps to:",
    "o": [
-    "Neurotoxic envenoming needing airway support",
-    "Local infection only",
-    "Allergy to bandages",
-    "Hypoglycaemia"
+    "Detect venom-induced consumption coagulopathy in viper bites",
+    "Diagnose neurotoxicity",
+    "Measure antivenom dose precisely",
+    "Exclude every snake bite"
    ],
    "a": 0,
-   "exp": "Descending paralysis with ptosis first is neurotoxic envenoming; support airway and ventilation early.",
+   "exp": "Non-clotting blood after 20 minutes suggests consumption coagulopathy, typical of viper envenoming. It does not assess neurotoxicity or give an exact dose.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Infection evolves over days, not this pattern.",
-    "Bandage allergy lacks paralysis.",
-    "Hypoglycaemia lacks this sequence."
+    "Correct: non-clotting supports viper coagulopathy.",
+    "Neurotoxicity is clinical.",
+    "Dose is by clinical protocol, not this test.",
+    "No single test excludes all bites."
    ],
-   "kp": "Ptosis first, breathing next.",
+   "kp": "Use the 20-minute clotting test for viper coagulopathy.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -253,23 +253,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
-    "neurotoxic"
+    "snakebite",
+    "coagulopathy"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Ptosis first, breathing next.",
+    "key": "Use the 20-minute clotting test for viper coagulopathy.",
     "others": {
-     "B": "Infection evolves over days, not this pattern.",
-     "C": "Bandage allergy lacks paralysis.",
-     "D": "Hypoglycaemia lacks this sequence."
+     "C": "Neurotoxicity is clinical.",
+     "D": "Dose is by clinical protocol, not this test.",
+     "E": "No single test excludes all bites."
     },
-    "pearl": "Ptosis warns of respiratory failure.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Recognise neurotoxic bite.",
-    "rev": "Descending paralysis with ptosis first is neurotoxic envenoming; support airway and ventilation early.",
+    "pearl": "Use the 20-minute clotting test for viper coagulopathy.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Non-clotting blood after 20 minutes suggests consumption coagulopathy, typical of viper envenoming. It does not assess neurotoxicity or give an exact dose.",
+    "lo": "Interpret the 20-minute whole blood clotting test.",
+    "rev": "Non-clotting blood after 20 minutes suggests consumption coagulopathy, typical of viper envenoming. It does not assess neurotoxicity or give an exact dose.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -278,7 +278,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -305,22 +305,22 @@
   },
   {
    "id": "mk-gap305",
-   "q": "A reaction during antivenom infusion is treated by:",
+   "q": "During antivenom infusion the patient develops urticaria, wheeze and hypotension. Next step is:",
    "o": [
-    "Pausing infusion and giving IM adrenaline",
-    "Speeding the infusion",
-    "Antihistamine alone and continuing",
-    "Removing all monitoring"
+    "Stop the infusion, give intramuscular adrenaline, then restart slower once settled",
+    "Speed up the antivenom",
+    "Give oral antihistamine and continue at the same rate",
+    "Abandon all treatment"
    ],
    "a": 0,
-   "exp": "Pause antivenom and give IM adrenaline for reactions (WHO SE Asia).",
+   "exp": "Early antivenom reactions can progress to anaphylaxis. Stop, give IM adrenaline, stabilise, then restart more slowly per protocol.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Faster worsens the reaction.",
-    "Antihistamine alone under-treats.",
-    "Monitoring must increase."
+    "Correct: stop, IM adrenaline, restart slower when settled.",
+    "Speeding up worsens the reaction.",
+    "Oral treatment is too slow for hypotension and wheeze.",
+    "Treatment is resumed cautiously, not abandoned outright."
    ],
-   "kp": "Pause, adrenaline, reassess.",
+   "kp": "Stop antivenom, IM adrenaline, restart slower.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -328,23 +328,24 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
-    "reaction"
+    "snakebite",
+    "antivenom",
+    "anaphylaxis"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Pause, adrenaline, reassess.",
+    "key": "Stop antivenom, IM adrenaline, restart slower.",
     "others": {
-     "B": "Faster worsens the reaction.",
-     "C": "Antihistamine alone under-treats.",
-     "D": "Monitoring must increase."
+     "C": "Speeding up worsens the reaction.",
+     "D": "Oral treatment is too slow for hypotension and wheeze.",
+     "E": "Treatment is resumed cautiously, not abandoned outright."
     },
-    "pearl": "React: pause and adrenaline.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Manage antivenom reaction.",
-    "rev": "Pause antivenom and give IM adrenaline for reactions (WHO SE Asia).",
+    "pearl": "Stop antivenom, IM adrenaline, restart slower.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Early antivenom reactions can progress to anaphylaxis. Stop, give IM adrenaline, stabilise, then restart more slowly per protocol.",
+    "lo": "Manage an early antivenom reaction.",
+    "rev": "Early antivenom reactions can progress to anaphylaxis. Stop, give IM adrenaline, stabilise, then restart more slowly per protocol.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -353,7 +354,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -380,22 +381,22 @@
   },
   {
    "id": "mk-gap306",
-   "q": "Which local sign pushes toward antivenom?",
+   "q": "Neostigmine with atropine cover in snake bite is considered for:",
    "o": [
-    "Rapidly progressive swelling of the bitten limb",
-    "Mild itch at the bite site",
-    "A single fang mark with no symptoms",
-    "Old scar"
+    "Postsynaptic neurotoxic paralysis (for example cobra), after antivenom, with objective reassessment",
+    "Russell viper coagulopathy",
+    "Local swelling alone",
+    "Renal failure"
    ],
    "a": 0,
-   "exp": "Severe local envenoming includes rapidly progressive swelling (WHO SE Asia).",
+   "exp": "Neostigmine can help postsynaptic blockade such as cobra bite. It does not treat coagulopathy, swelling or renal failure.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Itch alone is observed.",
-    "Marks without signs need observation.",
-    "Scars are historical."
+    "Correct: postsynaptic neurotoxicity may respond to neostigmine with atropine.",
+    "Coagulopathy needs antivenom and support.",
+    "Swelling alone is not an indication.",
+    "Renal failure needs fluids and dialysis assessment."
    ],
-   "kp": "Rapid swelling can justify antivenom.",
+   "kp": "Neostigmine (with atropine) is for postsynaptic neuroparalysis.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -403,23 +404,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
-    "local"
+    "snakebite",
+    "neurotoxic"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Rapid swelling can justify antivenom.",
+    "key": "Neostigmine (with atropine) is for postsynaptic neuroparalysis.",
     "others": {
-     "B": "Itch alone is observed.",
-     "C": "Marks without signs need observation.",
-     "D": "Scars are historical."
+     "C": "Coagulopathy needs antivenom and support.",
+     "D": "Swelling alone is not an indication.",
+     "E": "Renal failure needs fluids and dialysis assessment."
     },
-    "pearl": "Watch the swelling rate.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Recognise severe local envenoming.",
-    "rev": "Severe local envenoming includes rapidly progressive swelling (WHO SE Asia).",
+    "pearl": "Neostigmine (with atropine) is for postsynaptic neuroparalysis.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Neostigmine can help postsynaptic blockade such as cobra bite. It does not treat coagulopathy, swelling or renal failure.",
+    "lo": "Use neostigmine only for postsynaptic paralysis.",
+    "rev": "Neostigmine can help postsynaptic blockade such as cobra bite. It does not treat coagulopathy, swelling or renal failure.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -428,7 +429,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -455,22 +456,22 @@
   },
   {
    "id": "mk-gap307",
-   "q": "Haemotoxic bite follow-up must monitor:",
+   "q": "A viper bite victim has gum bleeding, non-clotting blood and falling haemoglobin. Beyond antivenom, care includes:",
    "o": [
-    "Urine output, clotting and renal function",
-    "Vision only",
-    "Hearing only",
-    "Hair growth"
+    "Blood grouping, cross-match readiness, and monitoring for bleeding and renal injury",
+    "Routine heparin",
+    "Immediate discharge",
+    "Tourniquet release without monitoring"
    ],
    "a": 0,
-   "exp": "Bleeding bites injure kidneys; monitor urine, clotting and renal function.",
+   "exp": "Viper coagulopathy can cause major bleeding and acute kidney injury. Group and hold blood, monitor urine, kidneys and bleeding.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Vision is not the priority axis.",
-    "Hearing is unrelated.",
-    "Irrelevant to envenoming."
+    "Correct: prepare blood and monitor bleeding and kidneys.",
+    "Heparin worsens bleeding risk.",
+    "Discharge with coagulopathy is unsafe.",
+    "Reperfusion after tourniquet needs observation."
    ],
-   "kp": "Bleeding bite: watch kidneys and clotting.",
+   "kp": "In viper coagulopathy, prepare blood and watch kidneys.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -478,23 +479,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
-    "renal"
+    "snakebite",
+    "coagulopathy"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Bleeding bite: watch kidneys and clotting.",
+    "key": "In viper coagulopathy, prepare blood and watch kidneys.",
     "others": {
-     "B": "Vision is not the priority axis.",
-     "C": "Hearing is unrelated.",
-     "D": "Irrelevant to envenoming."
+     "C": "Heparin worsens bleeding risk.",
+     "D": "Discharge with coagulopathy is unsafe.",
+     "E": "Reperfusion after tourniquet needs observation."
     },
-    "pearl": "Monitor kidneys after haemotoxic bites.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Monitor renal function in snake bite.",
-    "rev": "Bleeding bites injure kidneys; monitor urine, clotting and renal function.",
+    "pearl": "In viper coagulopathy, prepare blood and watch kidneys.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Viper coagulopathy can cause major bleeding and acute kidney injury. Group and hold blood, monitor urine, kidneys and bleeding.",
+    "lo": "Support viper coagulopathy beyond antivenom.",
+    "rev": "Viper coagulopathy can cause major bleeding and acute kidney injury. Group and hold blood, monitor urine, kidneys and bleeding.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -503,7 +504,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -530,22 +531,22 @@
   },
   {
    "id": "mk-gap308",
-   "q": "Pressure immobilisation is taught mainly for:",
+   "q": "Why are incision and suction discouraged in snake bite?",
    "o": [
-    "Neurotoxic elapid bites where protocols teach it",
-    "Every bite with a tight tourniquet",
-    "Bleeding viper bites with arterial occlusion",
-    "Fractures"
+    "They damage tissue, increase infection and bleeding, and remove negligible venom",
+    "They work better than antivenom",
+    "They prevent neurotoxicity",
+    "WHO recommends them routinely"
    ],
    "a": 0,
-   "exp": "Pressure immobilisation suits neurotoxic elapid protocols; tight tourniquets are harmful (WHO SE Asia).",
+   "exp": "Incision and suction cause harm with negligible venom removal. Immobilisation and hospital care are recommended instead.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Tourniquets are harmful substitutes.",
-    "Arterial occlusion worsens injury.",
-    "Fracture care differs."
+    "Correct: harm without meaningful venom removal.",
+    "They do not outperform antivenom.",
+    "They do not prevent paralysis.",
+    "They are not routinely recommended."
    ],
-   "kp": "Pressure bandage for elapids, never a tourniquet.",
+   "kp": "Never cut or suck a snake bite.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -553,23 +554,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
-    "pressure"
+    "snakebite",
+    "first-aid"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Pressure bandage for elapids, never a tourniquet.",
+    "key": "Never cut or suck a snake bite.",
     "others": {
-     "B": "Tourniquets are harmful substitutes.",
-     "C": "Arterial occlusion worsens injury.",
-     "D": "Fracture care differs."
+     "C": "They do not outperform antivenom.",
+     "D": "They do not prevent paralysis.",
+     "E": "They are not routinely recommended."
     },
-    "pearl": "Firm bandage is not a tourniquet.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Use pressure immobilisation correctly.",
-    "rev": "Pressure immobilisation suits neurotoxic elapid protocols; tight tourniquets are harmful (WHO SE Asia).",
+    "pearl": "Never cut or suck a snake bite.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Incision and suction cause harm with negligible venom removal. Immobilisation and hospital care are recommended instead.",
+    "lo": "Explain why incision and suction harm.",
+    "rev": "Incision and suction cause harm with negligible venom removal. Immobilisation and hospital care are recommended instead.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -578,7 +579,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -605,22 +606,22 @@
   },
   {
    "id": "mk-gap309",
-   "q": "The most harmful traditional practice to stop is:",
+   "q": "A patient bitten 6 hours ago is asymptomatic with normal clotting and no swelling. Best action is:",
    "o": [
-    "Tight tourniquet left for hours",
-    "Immobilisation",
-    "Rapid transport",
-    "Removing rings"
+    "Observe with serial examination and repeat clotting; antivenom only if envenoming appears",
+    "Give antivenom at once to every bite",
+    "Discharge immediately without observation",
+    "Give neostigmine routinely"
    ],
    "a": 0,
-   "exp": "Prolonged tight tourniquets cause ischaemia, gangrene and worse outcomes.",
+   "exp": "Many bites are dry or non-venomous. Observation with serial checks avoids antivenom reactions while catching delayed envenoming.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Immobilisation is recommended.",
-    "Transport is recommended.",
-    "Removing rings prevents constriction harm."
+    "Correct: observe and treat only if envenoming develops.",
+    "Antivenom for every bite wastes supply and risks reactions.",
+    "Immediate discharge misses delayed signs.",
+    "Neostigmine needs neurotoxic signs."
    ],
-   "kp": "Tourniquets maim; immobilisation saves.",
+   "kp": "Observe the asymptomatic bite; treat envenoming, not the story.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -628,23 +629,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
-    "harm"
+    "snakebite",
+    "observation"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Tourniquets maim; immobilisation saves.",
+    "key": "Observe the asymptomatic bite; treat envenoming, not the story.",
     "others": {
-     "B": "Immobilisation is recommended.",
-     "C": "Transport is recommended.",
-     "D": "Removing rings prevents constriction harm."
+     "C": "Antivenom for every bite wastes supply and risks reactions.",
+     "D": "Immediate discharge misses delayed signs.",
+     "E": "Neostigmine needs neurotoxic signs."
     },
-    "pearl": "Undo the tourniquet, keep the splint.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Stop harmful first aid.",
-    "rev": "Prolonged tight tourniquets cause ischaemia, gangrene and worse outcomes.",
+    "pearl": "Observe the asymptomatic bite; treat envenoming, not the story.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Many bites are dry or non-venomous. Observation with serial checks avoids antivenom reactions while catching delayed envenoming.",
+    "lo": "Observe asymptomatic bites without routine antivenom.",
+    "rev": "Many bites are dry or non-venomous. Observation with serial checks avoids antivenom reactions while catching delayed envenoming.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -653,7 +654,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
@@ -680,22 +681,22 @@
   },
   {
    "id": "mk-gap310",
-   "q": "After a bite with no symptoms, the safe plan is:",
+   "q": "Pressure immobilisation bandaging (firm bandage with splint) is most emphasised for:",
    "o": [
-    "Observe with serial examination and clotting checks",
-    "Discharge in five minutes",
-    "Give antivenom just in case",
-    "Apply a tourniquet overnight"
+    "Neurotoxic elapid bites where it can delay venom spread without a tight arterial tourniquet",
+    "Every viper bite with severe swelling",
+    "Replacing hospital transfer",
+    "Application over a wound that has been cut"
    ],
    "a": 0,
-   "exp": "Asymptomatic bites need observation with serial checks, because envenoming can evolve (WHO SE Asia).",
+   "exp": "Firm pressure immobilisation with splinting can delay lymphatic spread in neurotoxic bites. It must not become an arterial tourniquet and never replaces transfer.",
    "r": [
-    "Incorrect for the reason given in the explanation.",
-    "Early discharge misses evolving signs.",
-    "Antivenom without signs risks reactions needlessly.",
-    "Tourniquets harm."
+    "Correct: firm immobilisation helps neurotoxic bites.",
+    "Severe viper swelling needs hospital care, not tight bandaging alone.",
+    "It never replaces transfer.",
+    "It is not applied over incised wounds as treatment."
    ],
-   "kp": "Observe; envenoming evolves.",
+   "kp": "Immobilise firmly with a splint; never delay transfer.",
    "t": "med-envenomation",
    "d": 2,
    "cog": "application",
@@ -703,23 +704,23 @@
    "gen": "hand",
    "set": "gap1013a",
    "tg": [
-    "snake",
-    "observe"
+    "snakebite",
+    "first-aid"
    ],
-   "source": "WHO South-East Asia snakebite management guideline",
+   "source": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
    "x": {
-    "key": "Observe; envenoming evolves.",
+    "key": "Immobilise firmly with a splint; never delay transfer.",
     "others": {
-     "B": "Early discharge misses evolving signs.",
-     "C": "Antivenom without signs risks reactions needlessly.",
-     "D": "Tourniquets harm."
+     "C": "Severe viper swelling needs hospital care, not tight bandaging alone.",
+     "D": "It never replaces transfer.",
+     "E": "It is not applied over incised wounds as treatment."
     },
-    "pearl": "No signs now still means observe.",
-    "clues": "See key reasoning in the explanation.",
-    "ddx": "Options test the discriminating step in the stem.",
-    "mech": "See explanation.",
-    "lo": "Observe asymptomatic bites.",
-    "rev": "Asymptomatic bites need observation with serial checks, because envenoming can evolve (WHO SE Asia).",
+    "pearl": "Immobilise firmly with a splint; never delay transfer.",
+    "clues": "The stem gives the discriminating clinical features; the key is the guideline-recommended next step.",
+    "ddx": "Each distractor is a plausible but incorrect action for this stage of care.",
+    "mech": "Firm pressure immobilisation with splinting can delay lymphatic spread in neurotoxic bites. It must not become an arterial tourniquet and never replaces transfer.",
+    "lo": "Apply pressure immobilisation correctly.",
+    "rev": "Firm pressure immobilisation with splinting can delay lymphatic spread in neurotoxic bites. It must not become an arterial tourniquet and never replaces transfer.",
     "next": {
      "concept": "med-envenomation",
      "action": "review",
@@ -728,7 +729,7 @@
     "refs": [
      {
       "type": "guideline",
-      "title": "WHO South-East Asia snakebite management guideline",
+      "title": "WHO Regional Office for South-East Asia guidelines for management of snakebites; Indian National Snakebite Management Protocol",
       "via": "gap-audit-1013"
      }
     ],
