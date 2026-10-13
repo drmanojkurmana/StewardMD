@@ -5,6 +5,8 @@ name: lessonui-browser
 # the same lesson screenshots on main for before/after comparison.
 on:
   workflow_dispatch:
+  push:
+    branches: [lessonui-browser-run]
 
 jobs:
   browser:
