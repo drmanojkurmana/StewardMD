@@ -1,0 +1,192 @@
+{
+ "module": "bio-neurotransmitters",
+ "subject": "biochemistry",
+ "title": "Neurotransmitter biosynthesis, catecholamine metabolism, and phaeochromocytoma",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Catecholamine **biosynthesis** originates from the essential amino acid tyrosine. Tyrosine hydroxylase catalyzes the rate-limiting conversion of tyrosine to L-DOPA, requiring tetrahydrobiopterin (BH4) and molecular oxygen as essential cofactors. DOPA decarboxylase converts L-DOPA to dopamine utilizing pyridoxal phosphate (vitamin B6). Dopamine beta-hydroxylase oxidizes dopamine to norepinephrine within chromaffin vesicles using ascorbic acid. Finally, phenylethanolamine N-methyltransferase in the adrenal medulla methylates norepinephrine to epinephrine using S-adenosylmethionine, stimulated by cortisol.",
+   "say": "Catecholamine synthesis begins with tyrosine hydroxylase, the rate-limiting enzyme requiring tetrahydrobiopterin to produce L-DOPA. DOPA decarboxylase forms dopamine, dopamine beta-hydroxylase generates norepinephrine using vitamin C, and PNMT converts norepinephrine to epinephrine under cortisol stimulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Tyrosine"
+     },
+     {
+      "id": "c2",
+      "label": "L-DOPA (via Tyrosine hydroxylase + BH4)"
+     },
+     {
+      "id": "c3",
+      "label": "Dopamine (via DOPA decarboxylase + B6)"
+     },
+     {
+      "id": "c4",
+      "label": "Norepinephrine (via DBH + Vitamin C)"
+     },
+     {
+      "id": "c5",
+      "label": "Epinephrine (via PNMT + SAM)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ],
+     [
+      "c4",
+      "c5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Degradation of catecholamines occurs through two major enzymes: monoamine oxidase (MAO) and catechol-O-methyltransferase (COMT). Monoamine oxidase oxidatively deaminates catecholamines within outer mitochondrial membranes, while COMT transfers methyl groups from SAM in the cytosol. Epinephrine and norepinephrine are sequentially degraded into **vanillylmandelic** acid (VMA), whereas dopamine is converted into homovanillic acid (HVA). Elevated urinary free metanephrines and VMA serve as diagnostic clinical cornerstones for neuroendocrine tumors.",
+   "say": "Catecholamine catabolism involves monoamine oxidase and catechol-O-methyltransferase. Epinephrine and norepinephrine degrade into metanephrines and vanillylmandelic acid, whereas dopamine catabolizes to homovanillic acid. Elevated urinary metanephrines confirm neuroendocrine tumors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neurotransmitter",
+     "Degradation pathway",
+     "Primary excreted metabolite"
+    ],
+    "rows": [
+     [
+      "Norepinephrine",
+      "MAO-A + COMT deamination & methylation",
+      "Vanillylmandelic acid (VMA) + Normetanephrine"
+     ],
+     [
+      "Epinephrine",
+      "COMT methylation followed by MAO",
+      "Vanillylmandelic acid (VMA) + Metanephrine"
+     ],
+     [
+      "Dopamine",
+      "Sequential MAO-B + COMT action",
+      "Homovanillic acid (HVA)"
+     ],
+     [
+      "Serotonin (5-HT)",
+      "MAO-A oxidative deamination",
+      "5-Hydroxyindoleacetic acid (5-HIAA)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Excessive, episodic catecholamine secretion characterizes **phaeochromocytoma** and paraganglioma, which arise from chromaffin tissue of the adrenal medulla or sympathetic chains. Patients present with the classic triad of paroxysmal severe headaches, diaphoresis, and tachycardic palpitations accompanied by malignant hypertension. Carcinoid tumors arising from enterochromaffin cells overproduce serotonin from tryptophan, yielding elevated urinary **5-HIAA**, cutaneous flushing, watery diarrhea, and right-sided valvular cardiac fibrosis.",
+   "say": "Phaeochromocytomas hypersecrete catecholamines, producing paroxysmal headaches, sweating, and severe hypertension. Carcinoid tumors overproduce serotonin from tryptophan, causing flushing, diarrhea, and right heart fibrotic lesions with elevated urinary 5-HIAA.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumor entity",
+     "Secreted molecule",
+     "Diagnostic laboratory test"
+    ],
+    "rows": [
+     [
+      "Phaeochromocytoma",
+      "Norepinephrine, epinephrine",
+      "Plasma free metanephrines, 24-hour urine VMA"
+     ],
+     [
+      "Neuroblastoma",
+      "Dopamine, norepinephrine",
+      "Urinary HVA and VMA in young children"
+     ],
+     [
+      "Carcinoid tumor",
+      "Serotonin (5-HT)",
+      "24-Hour urinary 5-HIAA excretion"
+     ],
+     [
+      "Medullary thyroid ca",
+      "Calcitonin",
+      "Serum calcitonin and CEA levels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pharmacological blockade is strictly sequenced before surgical resection in phaeochromocytoma. Irreversible non-selective alpha-adrenergic **blockade** with phenoxybenzamine or selective alpha-1 blockade must be established for at least 10 to 14 days prior to surgery to expand contracted intravascular volume. Beta-blockers like propranolol should never be administered alone before alpha-blockade, as unopposed alpha-1 stimulation causes catastrophic hypertensive crisis and acute pulmonary edema.",
+   "say": "Preoperative management of phaeochromocytoma requires strict sequence: alpha-blockade with phenoxybenzamine must precede beta-blockers by at least ten days. Beta-blockers given without prior alpha-blockade cause fatal hypertensive crisis from unopposed alpha-receptor vasoconstriction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rx1",
+      "label": "Diagnosis of phaeochromocytoma"
+     },
+     {
+      "id": "rx2",
+      "label": "Initiate phenoxybenzamine (alpha-block)"
+     },
+     {
+      "id": "rx3",
+      "label": "Volume expansion & blood pressure control"
+     },
+     {
+      "id": "rx4",
+      "label": "Add beta-blocker for reflex tachycardia"
+     },
+     {
+      "id": "rx5",
+      "label": "Safe laparoscopic adrenalectomy"
+     }
+    ],
+    "edges": [
+     [
+      "rx1",
+      "rx2"
+     ],
+     [
+      "rx2",
+      "rx3"
+     ],
+     [
+      "rx3",
+      "rx4"
+     ],
+     [
+      "rx4",
+      "rx5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "ee231432-4000-8000-ee23-143212345678",
+  "4d4f7fb0-4000-8000-4d4f-7fb012345678",
+  "a46db39d-4000-8000-a46d-b39d12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

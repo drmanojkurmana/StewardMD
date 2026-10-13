@@ -1,0 +1,192 @@
+{
+ "module": "bio-coagulation-cascade",
+ "subject": "biochemistry",
+ "title": "Hemostasis: tissue factor pathway, contact activation, and natural anticoagulants",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Hemostasis seals vascular injury through coordinated primary and secondary cascades. Primary hemostasis forms a platelet plug: subendothelial collagen binds von Willebrand factor, which anchors platelet GPIb receptors, triggering platelet activation, ADP release, and **GPIIb/IIIa** cross-linking by fibrinogen. Secondary hemostasis stabilizes the plug through the coagulation cascade, assembling calcium-dependent serine proteases on phosphatidylserine surfaces of activated platelets to generate **thrombin**.",
+   "say": "Hemostasis couples platelet plug formation with the coagulation cascade. Platelets adhere via von Willebrand factor and GPIb, aggregating through GPIIb/IIIa and fibrinogen. Secondary hemostasis cleaves prothrombin into thrombin on platelet surfaces to form a fibrin clot.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hemostatic phase",
+     "Key molecular factors",
+     "Clinical manifestation when deficient"
+    ],
+    "rows": [
+     [
+      "Primary hemostasis",
+      "vWF, Platelet GPIb, GPIIb/IIIa, ADP",
+      "Mucocutaneous bleeding, petechiae, epistaxis"
+     ],
+     [
+      "Extrinsic cascade",
+      "Tissue Factor + Factor VIIa -> Factor X",
+      "Prolonged Prothrombin Time (PT / INR)"
+     ],
+     [
+      "Intrinsic cascade",
+      "Factors XII, XI, IX, VIII -> Factor X",
+      "Prolonged Activated Partial Thromboplastin Time (aPTT)"
+     ],
+     [
+      "Common pathway",
+      "Factor Xa + Va (prothrombinase) -> Thrombin",
+      "Hemarthroses, deep muscle hematomas (Hemophilia)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In vivo coagulation is initiated primarily by the **extrinsic** tissue factor pathway. Vascular injury exposes subendothelial tissue factor to circulating Factor VII. The Tissue Factor-VIIa complex activates Factor X directly and Factor IX of the intrinsic pathway. Factor Xa associates with cofactor Va, calcium, and phospholipids to form the **prothrombinase** complex, which cleaves prothrombin (Factor II) into thrombin (Factor IIa). Thrombin then cleaves soluble fibrinogen into insoluble fibrin monomers.",
+   "say": "Vascular injury exposes tissue factor to Factor VII, triggering Factor X and Factor IX activation. Factor Xa joins Factor Va to form the prothrombinase complex, converting prothrombin into thrombin, which cleaves fibrinogen into fibrin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Vascular endothelial injury exposes Tissue Factor"
+     },
+     {
+      "id": "e2",
+      "label": "TF-VIIa complex activates Factor X and Factor IX"
+     },
+     {
+      "id": "e3",
+      "label": "Factor Xa + Va + Ca2+ form Prothrombinase"
+     },
+     {
+      "id": "e4",
+      "label": "Thrombin (IIa) cleaves Fibrinogen to Fibrin"
+     },
+     {
+      "id": "e5",
+      "label": "Factor XIIIa cross-links fibrin into stable mesh"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ],
+     [
+      "e4",
+      "e5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Excessive thrombosis is restrained by natural anticoagulant systems. **Antithrombin** III is a circulating serpin that directly neutralizes thrombin, Factor Xa, and IXa; its inhibitory rate is accelerated over 1,000-fold by endothelial heparin-like glycosaminoglycans. The **protein C** pathway is activated when excess thrombin binds endothelial thrombomodulin. The thrombin-thrombomodulin complex activates protein C, which, alongside cofactor protein S, proteolytically degrades activated cofactors Va and VIIIa.",
+   "say": "Natural anticoagulants prevent pathological thrombosis. Antithrombin III neutralizes thrombin and Factor Xa, boosted a thousand-fold by heparin. Thrombin binding to thrombomodulin activates Protein C, which destroys cofactors Va and VIIIa.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anticoagulant mechanism",
+     "Primary target inactivated",
+     "Hypercoagulable defect"
+    ],
+    "rows": [
+     [
+      "Antithrombin III",
+      "Thrombin (IIa), Factor Xa, Factor IXa",
+      "Antithrombin deficiency (heparin resistance)"
+     ],
+     [
+      "Activated Protein C",
+      "Factor Va and Factor VIIIa",
+      "Protein C deficiency (warfarin skin necrosis)"
+     ],
+     [
+      "Protein S cofactor",
+      "Assists activated protein C cleavage",
+      "Protein S deficiency (venous thromboembolism)"
+     ],
+     [
+      "Factor V Leiden",
+      "Factor V with Arg506Gln mutation",
+      "Resistant to cleavage by activated Protein C (most common VTE)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fibrinolysis dissolves established clots once vascular integrity is restored. Endothelial tissue plasminogen activator (tPA) cleaves plasminogen into **plasmin**, a serine protease that cleaves cross-linked fibrin into fibrin degradation products, including **D-dimer**. Recombinant tPA (alteplase) is administered in acute ischemic stroke and massive pulmonary embolism. Vitamin K epoxide reductase (VKORC1), required for gamma-carboxylation of Factors II, VII, IX, X, Protein C, and Protein S, is competitively inhibited by warfarin.",
+   "say": "Fibrinolysis removes clots via plasmin, which cleaves cross-linked fibrin to release D-dimers. Recombinant tPA activates plasminogen for acute stroke thrombolysis. Warfarin inhibits vitamin K epoxide reductase, preventing gamma-carboxylation of clotting factors.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Endothelial release of tPA"
+     },
+     {
+      "id": "f2",
+      "label": "Plasminogen cleaved to active Plasmin"
+     },
+     {
+      "id": "f3",
+      "label": "Plasmin digests cross-linked fibrin mesh"
+     },
+     {
+      "id": "f4",
+      "label": "Release of specific D-dimer fragments"
+     },
+     {
+      "id": "f5",
+      "label": "Clot resolution & lumen restoration"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ],
+     [
+      "f4",
+      "f5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "4f8f9d9b-4000-8000-4f8f-9d9b12345678",
+  "4bbb60bb-4000-8000-4bbb-60bb12345678",
+  "46a2ca2a-4000-8000-46a2-ca2a12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

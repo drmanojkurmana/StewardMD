@@ -1,0 +1,192 @@
+{
+ "module": "bio-calcium-bone",
+ "subject": "biochemistry",
+ "title": "Calcium homeostasis: parathyroid hormone, vitamin D activation, and metabolic bone disease",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Extracellular ionized **calcium** is regulated by parathyroid hormone (PTH), 1,25-dihydroxyvitamin D (calcitriol), and calcitonin. Calcium-sensing receptors on parathyroid chief cells detect hypocalcemia, triggering rapid PTH release. Parathyroid hormone increases renal distal tubular calcium reabsorption, promotes renal proximal tubular phosphate excretion to prevent calcium-phosphate precipitation, stimulates 1-alpha-hydroxylase to synthesize calcitriol, and stimulates osteocytic osteolysis.",
+   "say": "Calcium homeostasis is defended by parathyroid hormone, calcitriol, and calcitonin. Parathyroid hormone responds to hypocalcemia by reabsorbing renal calcium, wasting phosphate, activating vitamin D, and mobilizing bone calcium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endocrine regulator",
+     "Target organ actions",
+     "Net biochemical effect"
+    ],
+    "rows": [
+     [
+      "Parathyroid hormone (PTH)",
+      "Kidney: raises Ca2+, lowers PO4; Bone: resorption",
+      "Raises serum Ca2+, lowers serum PO4"
+     ],
+     [
+      "Calcitriol (1,25-(OH)2-D3)",
+      "Intestine: absorbs Ca2+ & PO4; Bone: mineralization",
+      "Raises both serum Ca2+ and PO4"
+     ],
+     [
+      "Calcitonin",
+      "Bone: inhibits osteoclasts; Kidney: wastes Ca2+",
+      "Lowers serum Ca2+ (physiologically minor)"
+     ],
+     [
+      "FGF-23",
+      "Kidney: downregulates 1-alpha-hydroxylase, wastes PO4",
+      "Lowers serum PO4, suppresses calcitriol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vitamin D activation is a multi-organ **photochemical** and enzymatic cascade. Ultraviolet B radiation converts 7-dehydrocholesterol in the epidermis into cholecalciferol (vitamin D3). Hepatic 25-hydroxylase (CYP2R1) converts vitamin D into circulating 25-hydroxyvitamin D (calcidiol), the primary storage form. In renal proximal tubules, PTH-stimulated **1-alpha-hydroxylase** (CYP27B1) adds a second hydroxyl group to form active 1,25-dihydroxyvitamin D (calcitriol), which stimulates intestinal calbindin-mediated calcium absorption.",
+   "say": "Vitamin D synthesis starts in skin where ultraviolet B creates cholecalciferol. Hepatic 25-hydroxylase produces storage calcidiol. In kidneys, PTH stimulates 1-alpha-hydroxylase to generate active calcitriol, driving intestinal calcium absorption.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "7-Dehydrocholesterol (skin UVB exposure)"
+     },
+     {
+      "id": "v2",
+      "label": "Cholecalciferol (Vitamin D3)"
+     },
+     {
+      "id": "v3",
+      "label": "Hepatic 25-hydroxylase forms 25-OH-D"
+     },
+     {
+      "id": "v4",
+      "label": "Renal 1-alpha-hydroxylase forms 1,25-(OH)2-D"
+     },
+     {
+      "id": "v5",
+      "label": "Intestinal calbindin drives Ca2+ and PO4 absorption"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v3",
+      "v4"
+     ],
+     [
+      "v4",
+      "v5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bone remodeling requires cross-talk between osteoblasts and osteoclasts via the **RANKL-RANK** signaling axis. Osteoblasts express receptor activator of nuclear factor-kB ligand (RANKL), which binds RANK on osteoclast precursors, driving osteoclastogenesis and bone resorption. Osteoprotegerin (OPG), a soluble decoy receptor secreted by osteoblasts, binds RANKL and prevents RANK engagement. Denosumab, a human monoclonal antibody against RANKL, mimics osteoprotegerin to treat postmenopausal osteoporosis and giant cell tumor of bone.",
+   "say": "Bone remodeling centers on osteoblast-osteoclast communication. Osteoblast RANKL binds osteoclast RANK to stimulate bone resorption. Osteoprotegerin acts as a decoy to block RANKL. Denosumab mimics osteoprotegerin to suppress osteoclastic resorption.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway component",
+     "Cellular source",
+     "Biological effect on bone"
+    ],
+    "rows": [
+     [
+      "RANKL",
+      "Osteoblasts, osteocytes, T-cells",
+      "Stimulates osteoclast differentiation and bone resorption"
+     ],
+     [
+      "RANK receptor",
+      "Osteoclast precursors and mature osteoclasts",
+      "Mediates osteoclast survival and bone erosion"
+     ],
+     [
+      "Osteoprotegerin (OPG)",
+      "Osteoblasts and marrow stromal cells",
+      "Decoy receptor blocking RANKL, preserving bone mass"
+     ],
+     [
+      "Denosumab",
+      "Monoclonal anti-RANKL antibody",
+      "Blocks RANKL, markedly increasing bone mineral density"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disorders of bone mineralization present with distinctive biochemical patterns. **Rickets** in children and osteomalacia in adults stem from vitamin D deficiency or defective phosphate reabsorption, causing failure of osteoid matrix calcification, rachitic rosary, and craniotabes. In Paget disease of bone (osteitis deformans), dysregulated osteoclastic resorption followed by chaotic osteoblastic bone formation causes elevated serum **alkaline phosphatase** with completely normal serum calcium and phosphate.",
+   "say": "Rickets and osteomalacia reflect defective osteoid mineralization due to vitamin D or phosphate deficiency, exhibiting low calcium and high PTH. Paget disease shows marked alkaline phosphatase elevation with normal calcium and phosphate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Vitamin D deficiency"
+     },
+     {
+      "id": "b2",
+      "label": "Impaired intestinal calcium and phosphate uptake"
+     },
+     {
+      "id": "b3",
+      "label": "Secondary hyperparathyroidism (high PTH)"
+     },
+     {
+      "id": "b4",
+      "label": "Renal phosphate wasting & uncalcified osteoid"
+     },
+     {
+      "id": "b5",
+      "label": "Rickets (children) or Osteomalacia (adults)"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ],
+     [
+      "b4",
+      "b5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "74f1949e-4000-8000-74f1-949e12345678",
+  "ef71e21c-4000-8000-ef71-e21c12345678",
+  "1b3364ab-4000-8000-1b33-64ab12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

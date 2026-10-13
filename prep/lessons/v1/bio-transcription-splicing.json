@@ -1,0 +1,192 @@
+{
+ "module": "bio-transcription-splicing",
+ "subject": "biochemistry",
+ "title": "RNA transcription, post-transcriptional processing, and spliceosome defects",
+ "minutes": 6,
+ "refs": [
+  "Medical Biochemistry 5th ed",
+  "Harper's Illustrated Biochemistry 32nd ed"
+ ],
+ "steps": [
+  {
+   "tx": "Eukaryotic **transcription** is orchestrated by three distinct nuclear RNA polymerases. RNA polymerase I synthesizes 28S, 18S, and 5.8S ribosomal RNAs. RNA polymerase II transcribes messenger RNAs and microRNAs, but is selectively inhibited by alpha-amanitin from death cap mushrooms. RNA polymerase III produces transfer RNAs and 5S ribosomal RNA. Initiation requires TATA-binding protein and general transcription factors assembling at core promoter elements.",
+   "say": "Eukaryotic transcription utilizes three nuclear RNA polymerases. RNA polymerase one synthesizes ribosomal RNAs, RNA polymerase two generates messenger RNAs and is poisoned by alpha-amanitin, while RNA polymerase three produces transfer RNAs. Promoter assembly requires TATA-binding protein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Polymerase",
+     "Primary RNA transcripts",
+     "Alpha-amanitin sensitivity"
+    ],
+    "rows": [
+     [
+      "RNA Pol I",
+      "28S, 18S, 5.8S ribosomal RNA",
+      "Insensitive / resistant"
+     ],
+     [
+      "RNA Pol II",
+      "Pre-mRNA, microRNAs, snRNAs",
+      "Extremely sensitive (lethal toxicity)"
+     ],
+     [
+      "RNA Pol III",
+      "5S rRNA, transfer RNAs (tRNAs)",
+      "Sensitive only at high concentrations"
+     ],
+     [
+      "Mitochondrial Pol",
+      "Mitochondrial rRNAs, tRNAs, mRNAs",
+      "Rifampin and amanitin resistant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary mRNA transcripts undergo essential **post-transcriptional** modifications within the nucleus prior to export. A 7-methylguanosine cap is added to the 5-prime end to ensure ribonuclease protection and ribosome recognition. Polyadenylate polymerase attaches a 200-nucleotide poly-A tail to the 3-prime terminus. The **spliceosome**, composed of small nuclear ribonucleoproteins, precisely excises non-coding introns at invariant GU-5-prime and AG-3-prime donor-acceptor splice junctions.",
+   "say": "Primary transcripts require three nuclear processing steps: addition of a 5-prime 7-methylguanosine cap, 3-prime polyadenylation by poly-A polymerase, and spliceosomal removal of non-coding introns at GU and AG consensus junctions by small nuclear ribonucleoproteins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Pre-mRNA synthesis"
+     },
+     {
+      "id": "p2",
+      "label": "5-prime 7-methylguanosine cap"
+     },
+     {
+      "id": "p3",
+      "label": "3-prime cleavage & poly-A tail"
+     },
+     {
+      "id": "p4",
+      "label": "Spliceosome intron excision"
+     },
+     {
+      "id": "p5",
+      "label": "Mature mRNA nuclear export"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mutations altering consensus splice sites cause severe human **pathology**. Splicing mutations in the beta-globin gene disrupt normal exon assembly, generating aberrant transcripts and severe beta-thalassemia major. In systemic lupus erythematosus, autoantibodies target **snRNPs** (anti-Smith antibodies), directly impeding spliceosome assembly. Alternative splicing enables a single pre-mRNA to yield distinct tissue-specific protein isoforms, including membrane-bound versus secreted immunoglobulins.",
+   "say": "Splice site mutations cause aberrant exon inclusion, underlying beta-thalassemia. Anti-Smith antibodies in lupus specifically target snRNPs, impairing spliceosomal machinery. Alternative splicing allows a single gene to encode diverse tissue-specific isoforms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder / Condition",
+     "Molecular splicing defect",
+     "Clinical consequence"
+    ],
+    "rows": [
+     [
+      "Beta-thalassemia",
+      "Splice junction GU to AU or AG mutation",
+      "Absent or deficient beta-globin synthesis"
+     ],
+     [
+      "Systemic lupus erythematosus",
+      "Autoantibodies against Smith (Sm) snRNPs",
+      "Spliceosomal auto-inflammation and nephritis"
+     ],
+     [
+      "Spinal muscular atrophy",
+      "SMN2 exon 7 alternative skipping",
+      "Motor neuron degeneration in anterior horn"
+     ],
+     [
+      "Tropomyosin diversity",
+      "Alternative exon selection across tissues",
+      "Striated vs smooth muscle isoform specialization"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Therapeutic modulation of RNA splicing represents a major **pharmacological** breakthrough. Nusinersen, an antisense oligonucleotide, binds pre-mRNA of the SMN2 gene, forcing exon 7 inclusion to restore functional motor protein in spinal muscular atrophy. Duchenne muscular dystrophy is treated by antisense morpholinos that induce exon-skipping to restore an in-frame dystrophin reading frame, converting fatal muscular dystrophy into a milder Becker phenotype.",
+   "say": "Therapeutic splice modulation uses antisense oligonucleotides like nusinersen to promote exon inclusion in spinal muscular atrophy, or exon-skipping morpholinos to restore in-frame dystrophin reading frames in Duchenne muscular dystrophy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Antisense oligonucleotide"
+     },
+     {
+      "id": "t2",
+      "label": "Hybridizes pre-mRNA exon junction"
+     },
+     {
+      "id": "t3",
+      "label": "Steric block of splicing silencer"
+     },
+     {
+      "id": "t4",
+      "label": "Exon inclusion / frame restored"
+     },
+     {
+      "id": "t5",
+      "label": "Functional protein expression"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ],
+     [
+      "t4",
+      "t5"
+     ]
+    ]
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave3",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "a64b1cc8-4000-8000-a64b-1cc812345678",
+  "aab71aa1-4000-8000-aab7-1aa112345678",
+  "d68cc1ac-4000-8000-d68c-c1ac12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
