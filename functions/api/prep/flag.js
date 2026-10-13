@@ -18,7 +18,7 @@ import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { bump } from "../../_counters.js";
 
-export const REASONS = ["wrong-key", "unclear", "outdated", "typo", "other"];
+export const REASONS = ["wrong-key", "unclear", "outdated", "typo", "other", "wrong-fact", "wrong-answer", "image-problem", "offensive"];
 const ID_RE = /^[a-z0-9-]{4,80}$/i;
 const SLUG_RE = /^[a-z0-9-]{2,80}$/;
 const DAILY_CAP = 60;

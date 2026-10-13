@@ -967,7 +967,15 @@
     if (!host || !L.les) return;
     var a = e.detail && e.detail.action, s = store();
     if (a === "bookmark") { if (!s.lpbm) s.lpbm = {}; if (s.lpbm[L.key]) delete s.lpbm[L.key]; else s.lpbm[L.key] = 1; host.save(); host.toast(s.lpbm[L.key] ? "Pearl bookmarked." : "Bookmark removed."); }
-    if (a === "report") { if (!s.lprep) s.lprep = {}; s.lprep[L.key] = Date.now(); host.save(); host.toast("Thank you. This Pearl has been reported."); }
+    if (a === "report") {
+      var A = G.PREP_ACTION;
+      if (A && A.openSheet) {
+        A.openSheet(G.document, { itemId: L.key, itemType: "lesson", subject: L.les.subject || L.sid || "", module: L.les.module || L.key }, function (payload) {
+          if (!s.lprep) s.lprep = {}; s.lprep[L.key] = Date.now(); host.save();
+          host.toast(payload ? "Thank you. Report received." : "Thank you. This Pearl has been reported.");
+        });
+      } else { if (!s.lprep) s.lprep = {}; s.lprep[L.key] = Date.now(); host.save(); host.toast("Thank you. This Pearl has been reported."); }
+    }
     if (a === "share") { var P = G.PREP_PEARL, id = P ? P.pearlId(L.les.module, G.PREP_IDS ? G.PREP_IDS.ofLesson(L.key) : null) : ""; host.toast(id ? "Pearl ID " + id + ". Use Share in the bar to send the lesson link." : "Use Share in the bar to send this lesson."); }
   });
 
