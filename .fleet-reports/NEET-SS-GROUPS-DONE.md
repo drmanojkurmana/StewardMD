@@ -110,3 +110,8 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 
 - 399 hand-written MCQs ($0 API), blind-verified 399/400 (dropped maikss49[6]), keys rotated, R2 live: gastroenterology 20->120 (maikss43/44), hepatology 20->120 (maikss45/46), oncology 20->120 (maikss47/48), neonatology 30->129 (maikss49 49, maikss50 50). All 8 Paediatric subjects now >=115. Paediatric group total ~941.
 - Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`. Remainder ~7,460.
+
+## VOLUME phase batch 5 (2026-10-13): Pharmacology + Psychiatry +100/subject
+
+- 296 hand-written MCQs ($0 API), blind-verified 296/300 (dropped maikss51[7], maikss56[16,28,48]), keys rotated, R2 live: ss-clinical-pharmacology 40->139 (maikss51 49, maikss52 50), ss-geriatric-mental-health 30->130 (maikss53/54), ss-child-adolescent-psychiatry 30->127 (maikss55 50, maikss56 47). Pharmacology group 139, Psychiatry group 257.
+- Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`. Remainder ~7,170.
